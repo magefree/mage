@@ -49,7 +49,7 @@ public final class RotfeasterMaggot extends CardImpl {
 
 class RotfeasterMaggotExileEffect extends OneShotEffect {
 
-    public RotfeasterMaggotExileEffect() {
+    RotfeasterMaggotExileEffect() {
         super(Outcome.GainLife);
         this.staticText = "exile target creature card from a graveyard. You gain life equal to that card's toughness";
     }

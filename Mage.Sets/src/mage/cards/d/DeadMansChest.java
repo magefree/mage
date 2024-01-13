@@ -59,7 +59,7 @@ public final class DeadMansChest extends CardImpl {
 
 class DeadMansChestEffect extends OneShotEffect {
 
-    public DeadMansChestEffect() {
+    DeadMansChestEffect() {
         super(Outcome.Benefit);
         this.staticText = "exile cards equal to its power from the top of its owner's library. "
                 + "You may cast spells from among those cards for as long as they remain exiled, "

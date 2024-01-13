@@ -59,7 +59,7 @@ public final class NettlevineBlight extends CardImpl {
 
 class NettlevineBlightEffect extends OneShotEffect {
 
-    public NettlevineBlightEffect() {
+    NettlevineBlightEffect() {
         super(Outcome.Detriment);
         this.staticText = "sacrifice this permanent and attach {this} to a creature or land you control";
     }

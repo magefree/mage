@@ -40,7 +40,7 @@ public final class BurnTheImpure extends CardImpl {
 
 class BurnTheImpureEffect extends OneShotEffect {
 
-    public BurnTheImpureEffect() {
+    BurnTheImpureEffect() {
         super(Outcome.Damage);
         staticText = "{this} deals 3 damage to target creature. If that creature has infect, {this} deals 3 damage to that creature's controller.";
     }

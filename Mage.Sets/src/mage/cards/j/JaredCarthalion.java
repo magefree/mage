@@ -70,7 +70,7 @@ public final class JaredCarthalion extends CardImpl {
 
 class JaredCarthalionBoostEffect extends OneShotEffect {
 
-    public JaredCarthalionBoostEffect() {
+    JaredCarthalionBoostEffect() {
         super(Outcome.BoostCreature);
         this.staticText = "Choose up to two target creatures. For each of them, put " +
                 "a number of +1/+1 counters on it equal to the number of colors it is.";
@@ -100,7 +100,7 @@ class JaredCarthalionBoostEffect extends OneShotEffect {
 
 class JaredCarthalionUltimateEffect extends OneShotEffect {
 
-    public JaredCarthalionUltimateEffect() {
+    JaredCarthalionUltimateEffect() {
         super(Outcome.Benefit);
         this.staticText = "Return target multicolored card from your graveyard to your hand. " +
                 "If that card was all colors, draw a card and create two Treasure tokens.";

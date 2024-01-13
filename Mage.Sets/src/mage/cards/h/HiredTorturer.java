@@ -62,7 +62,7 @@ public final class HiredTorturer extends CardImpl {
 
 class HiredTorturerEffect extends OneShotEffect {
 
-    public HiredTorturerEffect() {
+    HiredTorturerEffect() {
         super(Outcome.Detriment);
         staticText = ", then reveals a card at random from their hand";
     }

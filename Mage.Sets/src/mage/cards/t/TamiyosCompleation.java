@@ -67,7 +67,7 @@ public final class TamiyosCompleation extends CardImpl {
 
 class TamiyosCompleationTapEffect extends OneShotEffect {
 
-    public TamiyosCompleationTapEffect() {
+    TamiyosCompleationTapEffect() {
         super(Outcome.Tap);
         this.staticText = "tap enchanted permanent. If it's an Equipment, unattach it";
     }

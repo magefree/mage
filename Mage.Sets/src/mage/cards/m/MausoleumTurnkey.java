@@ -52,7 +52,7 @@ public final class MausoleumTurnkey extends CardImpl {
 
 class MausoleumTurnkeyEffect extends OneShotEffect {
 
-    public MausoleumTurnkeyEffect() {
+    MausoleumTurnkeyEffect() {
         super(Outcome.Benefit);
         this.staticText = "return target creature card of an opponent's choice from your graveyard to your hand";
     }

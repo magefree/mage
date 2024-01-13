@@ -56,7 +56,7 @@ public final class KnowledgePool extends CardImpl {
 
 class KnowledgePoolExileThreeCardsEffect extends OneShotEffect {
 
-    public KnowledgePoolExileThreeCardsEffect() {
+    KnowledgePoolExileThreeCardsEffect() {
         super(Outcome.Neutral);
         staticText = "each player exiles the top three cards of their library";
     }
@@ -139,7 +139,7 @@ class KnowledgePoolWhenCastFromHandAbility extends TriggeredAbilityImpl {
 
 class KnowledgePoolExileAndPlayEffect extends OneShotEffect {
 
-    public KnowledgePoolExileAndPlayEffect() {
+    KnowledgePoolExileAndPlayEffect() {
         super(Outcome.Neutral);
         staticText = "Whenever a player casts a spell from their hand, that player exiles it. If the player does, they may cast another nonland card exiled with {this} without paying that card's mana cost";
     }

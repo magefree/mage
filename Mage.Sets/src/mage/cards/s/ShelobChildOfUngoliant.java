@@ -189,7 +189,7 @@ class ShelobChildOfUngoliantTriggeredAbility extends TriggeredAbilityImpl {
 
 class ShelobChildOfUngoliantEffect extends OneShotEffect {
 
-    public ShelobChildOfUngoliantEffect() {
+    ShelobChildOfUngoliantEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "create a token that's a copy of that creature, except it's a Food artifact with " +
             "\"{2}, {T}, Sacrifice this artifact: You gain 3 life,\" and it loses all other card types.";

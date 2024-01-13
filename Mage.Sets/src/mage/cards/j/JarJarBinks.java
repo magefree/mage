@@ -59,7 +59,7 @@ public final class JarJarBinks extends CardImpl {
 
 class JarJarBinksEffect extends OneShotEffect {
 
-    public JarJarBinksEffect() {
+    JarJarBinksEffect() {
         super(Outcome.GainControl);
         this.staticText = "target opponent gains control of it";
     }
@@ -120,7 +120,7 @@ class JarJarBinksGainControlSourceEffect extends ContinuousEffectImpl {
 
 class JarJarBinksTapEffect extends OneShotEffect {
 
-    public JarJarBinksTapEffect() {
+    JarJarBinksTapEffect() {
         super(Outcome.Tap);
         this.staticText = "tap the creature you control with the highest power. If two or more creatures are tied for the greatest power, you choose one of them";
     }

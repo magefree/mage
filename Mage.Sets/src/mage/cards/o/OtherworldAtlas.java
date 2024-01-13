@@ -44,7 +44,7 @@ public final class OtherworldAtlas extends CardImpl {
 
 class OtherworldAtlasDrawEffect extends OneShotEffect {
 
-    public OtherworldAtlasDrawEffect() {
+    OtherworldAtlasDrawEffect() {
         super(Outcome.DrawCard);
         staticText = "Each player draws a card for each charge counter on {this}";
     }

@@ -45,7 +45,7 @@ public final class ApproachOfTheSecondSun extends CardImpl {
 
 class ApproachOfTheSecondSunEffect extends OneShotEffect {
 
-    public ApproachOfTheSecondSunEffect() {
+    ApproachOfTheSecondSunEffect() {
         super(Outcome.Win);
         this.staticText
                 = "If this spell was cast from your hand and you've cast another spell named {this} this game, you win the game. "

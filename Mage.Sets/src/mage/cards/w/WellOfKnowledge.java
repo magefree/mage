@@ -83,7 +83,7 @@ class WellOfKnowledgeConditionalActivatedAbility extends ActivatedAbilityImpl {
 
 class WellOfKnowledgeEffect extends OneShotEffect {
 
-    public WellOfKnowledgeEffect() {
+    WellOfKnowledgeEffect() {
         super(Outcome.DrawCard);
     }
 

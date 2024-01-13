@@ -55,7 +55,7 @@ public final class HitRun extends SplitCard {
 
 class HitEffect extends OneShotEffect {
 
-    public HitEffect() {
+    HitEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "Target player sacrifices an artifact or creature. Hit deals damage to that player equal to that permanent's mana value";
     }
@@ -93,7 +93,7 @@ class HitEffect extends OneShotEffect {
 
 class RunEffect extends OneShotEffect {
 
-    public RunEffect() {
+    RunEffect() {
         super(Outcome.BoostCreature);
         this.staticText = "Attacking creatures you control get +1/+0 until end of turn for each other attacking creature";
     }

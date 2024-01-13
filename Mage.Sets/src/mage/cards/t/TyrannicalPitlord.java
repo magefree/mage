@@ -125,7 +125,7 @@ class TyrannicalPitlordGainFlyingEffect extends ContinuousEffectImpl {
 
 class TyrannicalPitlordSacrificeEffect extends OneShotEffect {
 
-    public TyrannicalPitlordSacrificeEffect() {
+    TyrannicalPitlordSacrificeEffect() {
         super(Outcome.Sacrifice);
         this.staticText = "sacrifice the chosen creature";
     }

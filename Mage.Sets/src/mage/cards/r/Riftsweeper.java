@@ -56,7 +56,7 @@ public final class Riftsweeper extends CardImpl {
 
 class RiftsweeperEffect extends OneShotEffect {
 
-    public RiftsweeperEffect() {
+    RiftsweeperEffect() {
         super(Outcome.Benefit);
         this.staticText = "choose target face-up exiled card. Its owner shuffles it into their library";
     }

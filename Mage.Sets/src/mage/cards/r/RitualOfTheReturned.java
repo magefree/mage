@@ -42,7 +42,7 @@ public final class RitualOfTheReturned extends CardImpl {
 
 class RitualOfTheReturnedExileEffect extends OneShotEffect {
 
-    public RitualOfTheReturnedExileEffect() {
+    RitualOfTheReturnedExileEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Exile target creature card from your graveyard. Create a black Zombie creature token. Its power is equal to that card's power and its toughness is equal to that card's toughness.";
     }

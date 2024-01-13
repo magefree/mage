@@ -72,7 +72,7 @@ public final class LonisCryptozoologist extends CardImpl {
 
 class LonisCryptozoologistEffect extends OneShotEffect {
 
-    public LonisCryptozoologistEffect() {
+    LonisCryptozoologistEffect() {
         super(Outcome.PutCardInPlay);
         this.staticText = "Target opponent reveals the top X cards of their library."
                 + " You may put a nonland permanent card with mana value X or less from among them onto the battlefield under your control."

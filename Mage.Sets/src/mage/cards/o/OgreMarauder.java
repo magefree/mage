@@ -53,7 +53,7 @@ public final class OgreMarauder extends CardImpl {
 
 class OgreMarauderEffect extends OneShotEffect {
 
-    public OgreMarauderEffect() {
+    OgreMarauderEffect() {
         super(Outcome.Benefit);
         this.staticText = "it gains \"{this} can't be blocked\" until end of turn unless defending player sacrifices a creature";
     }

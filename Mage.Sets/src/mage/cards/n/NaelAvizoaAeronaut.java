@@ -56,7 +56,7 @@ public final class NaelAvizoaAeronaut extends CardImpl {
 
 class NaelAvizoaAeronautEffect extends OneShotEffect {
 
-    public NaelAvizoaAeronautEffect() {
+    NaelAvizoaAeronautEffect() {
         super(Outcome.DrawCard);
         this.staticText = "Then if there are five basic land types among lands you control, draw a card.";
     }

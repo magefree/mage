@@ -49,7 +49,7 @@ public final class GuildFeud extends CardImpl {
 
 class GuildFeudEffect extends OneShotEffect {
 
-    public GuildFeudEffect() {
+    GuildFeudEffect() {
         super(Outcome.PutCreatureInPlay);
         staticText = "target opponent reveals the top three cards of their library, may put a creature card from among them onto the battlefield, then puts the rest into their graveyard. You do the same with the top three cards of your library. If two creatures are put onto the battlefield this way, those creatures fight each other";
     }

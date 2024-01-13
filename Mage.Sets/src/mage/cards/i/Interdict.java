@@ -76,7 +76,7 @@ class InterdictPredicate implements Predicate<StackObject> {
 
 class InterdictCounterEffect extends OneShotEffect {
 
-    public InterdictCounterEffect() {
+    InterdictCounterEffect() {
         super(Outcome.Detriment);
         staticText = "Counter target activated ability from an artifact, creature, enchantment, or land. That permanent's activated abilities can't be activated this turn.";
     }

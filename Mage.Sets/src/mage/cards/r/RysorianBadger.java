@@ -53,7 +53,7 @@ public final class RysorianBadger extends CardImpl {
 
 class RysorianBadgerEffect extends OneShotEffect {
 
-    public RysorianBadgerEffect() {
+    RysorianBadgerEffect() {
         super(Outcome.Benefit);
         this.staticText = "you may exile up to two target creature cards "
                 + "from defending player's graveyard. If you do, "

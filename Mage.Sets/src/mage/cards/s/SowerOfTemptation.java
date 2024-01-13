@@ -62,7 +62,7 @@ public final class SowerOfTemptation extends CardImpl {
 
 class SowerOfTemptationGainControlEffect extends OneShotEffect {
 
-    public SowerOfTemptationGainControlEffect() {
+    SowerOfTemptationGainControlEffect() {
         super(Outcome.GainControl);
         this.staticText = "gain control of target creature for as long as {this} remains on the battlefield";
     }

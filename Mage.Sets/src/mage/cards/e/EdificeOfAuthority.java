@@ -60,7 +60,7 @@ public final class EdificeOfAuthority extends CardImpl {
 
 class EdificeOfAuthorityEffect extends OneShotEffect {
 
-    public EdificeOfAuthorityEffect() {
+    EdificeOfAuthorityEffect() {
         super(Outcome.LoseAbility);
     }
 

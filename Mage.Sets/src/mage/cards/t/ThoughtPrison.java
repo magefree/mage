@@ -174,7 +174,7 @@ class ThoughtPrisonTriggeredAbility extends TriggeredAbilityImpl {
 
 class ThoughtPrisonDamageEffect extends OneShotEffect {
 
-    public ThoughtPrisonDamageEffect() {
+    ThoughtPrisonDamageEffect() {
         super(Outcome.Damage);
         staticText = "{this} deals 2 damage to that player";
     }

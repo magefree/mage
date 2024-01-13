@@ -57,7 +57,7 @@ public final class MarkOfEviction extends CardImpl {
 
 class MarkOfEvictionEffect extends OneShotEffect {
 
-    public MarkOfEvictionEffect() {
+    MarkOfEvictionEffect() {
         super(Outcome.Benefit);
         this.staticText = "return enchanted creature and all Auras attached to that creature to their owners' hands";
     }

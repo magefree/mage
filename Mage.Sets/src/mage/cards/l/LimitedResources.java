@@ -57,7 +57,7 @@ public final class LimitedResources extends CardImpl {
 
 class LimitedResourcesEffect extends OneShotEffect {
 
-    public LimitedResourcesEffect() {
+    LimitedResourcesEffect() {
         super(Outcome.Benefit);
         this.staticText = "each player chooses five lands they control and sacrifices the rest";
     }

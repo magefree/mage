@@ -93,7 +93,7 @@ public final class InallaArchmageRitualist extends CardImpl {
 
 class InallaArchmageRitualistEffect extends OneShotEffect {
 
-    public InallaArchmageRitualistEffect() {
+    InallaArchmageRitualistEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "create a token that's a copy of that Wizard. That token gains haste. Exile it at the beginning of the next end step";
     }

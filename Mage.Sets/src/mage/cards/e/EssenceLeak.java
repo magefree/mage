@@ -63,7 +63,7 @@ public final class EssenceLeak extends CardImpl {
 
 class EssenceLeakEffect extends OneShotEffect {
 
-    public EssenceLeakEffect() {
+    EssenceLeakEffect() {
         super(Outcome.Sacrifice);
         staticText =  "sacrifice this permanent unless you pay its mana cost";
     }

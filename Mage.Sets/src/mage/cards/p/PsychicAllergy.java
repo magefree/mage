@@ -62,7 +62,7 @@ public final class PsychicAllergy extends CardImpl {
 
 class PsychicAllergyEffect extends OneShotEffect {
 
-    public PsychicAllergyEffect() {
+    PsychicAllergyEffect() {
         super(Outcome.Damage);
         this.staticText = "{this} deals X damage to that player, where X is the number of nontoken permanents of the chosen color they control";
     }

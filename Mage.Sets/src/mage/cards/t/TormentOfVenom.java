@@ -48,7 +48,7 @@ public final class TormentOfVenom extends CardImpl {
 
 class TormentOfVenomEffect extends OneShotEffect {
 
-    public TormentOfVenomEffect() {
+    TormentOfVenomEffect() {
         super(Outcome.LoseLife);
         this.staticText = "Put three -1/-1 counters on target creature. Its controller loses 3 life unless they sacrifice another nonland permanent or discards a card";
     }

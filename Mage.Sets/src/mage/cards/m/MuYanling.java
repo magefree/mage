@@ -57,7 +57,7 @@ public final class MuYanling extends CardImpl {
 
 class MuYanlingEffect extends OneShotEffect {
 
-    public MuYanlingEffect() {
+    MuYanlingEffect() {
         super(Outcome.Tap);
         staticText = "tap all creatures your opponents control. You take an extra turn after this one.";
     }

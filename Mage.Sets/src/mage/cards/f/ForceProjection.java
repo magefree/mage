@@ -48,7 +48,7 @@ public final class ForceProjection extends CardImpl {
 
 class ForceProjectionEffect extends OneShotEffect {
 
-    public ForceProjectionEffect() {
+    ForceProjectionEffect() {
         super(Outcome.Copy);
         this.staticText = "Create a token that is a copy of target creature you control except that it is an Illusion "
                 + "in addition to its other types and gains \"When this creature becomes the target of a spell, sacrifice it.\"";

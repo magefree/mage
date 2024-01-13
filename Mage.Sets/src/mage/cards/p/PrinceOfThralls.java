@@ -89,7 +89,7 @@ class PrinceOfThrallsTriggeredAbility extends TriggeredAbilityImpl {
 
 class PrinceOfThrallsEffect extends OneShotEffect {
 
-    public PrinceOfThrallsEffect() {
+    PrinceOfThrallsEffect() {
         super(Outcome.Neutral);
         this.staticText = "put that card onto the battlefield under your control unless that opponent pays 3 life";
     }

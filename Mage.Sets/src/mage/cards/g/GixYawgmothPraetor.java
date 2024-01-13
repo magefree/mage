@@ -120,7 +120,7 @@ class GixYawgmothPraetorDrawEffect extends DoIfCostPaid {
 
 class GixYawgmothPraetorExileEffect extends OneShotEffect {
 
-    public GixYawgmothPraetorExileEffect() {
+    GixYawgmothPraetorExileEffect() {
         super(Outcome.PlayForFree);
         this.staticText = "Exile the top X cards of target opponent's library. You may play land cards and cast spells from among cards exiled this way without paying their mana costs.";
     }

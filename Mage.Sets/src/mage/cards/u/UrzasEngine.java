@@ -56,7 +56,7 @@ public final class UrzasEngine extends CardImpl {
 
 class UrzasEngineEffect extends OneShotEffect {
 
-    public UrzasEngineEffect() {
+    UrzasEngineEffect() {
         super(Outcome.AddAbility);
         this.staticText = "Attacking creatures banded with {this} gain trample until end of turn";
     }

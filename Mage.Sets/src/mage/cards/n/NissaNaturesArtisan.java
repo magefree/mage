@@ -60,7 +60,7 @@ public final class NissaNaturesArtisan extends CardImpl {
 
 class NissaNaturesArtisanEffect extends OneShotEffect {
 
-    public NissaNaturesArtisanEffect() {
+    NissaNaturesArtisanEffect() {
         super(Outcome.PutCardInPlay);
         staticText = "Reveal the top two cards of your library. Put all land cards "
                 + "from among them onto the battlefield and the rest into your hand";

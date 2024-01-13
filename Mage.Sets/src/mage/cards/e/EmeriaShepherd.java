@@ -60,7 +60,7 @@ public final class EmeriaShepherd extends CardImpl {
 
 class EmeriaShepherdReturnToHandTargetEffect extends OneShotEffect {
 
-    public EmeriaShepherdReturnToHandTargetEffect() {
+    EmeriaShepherdReturnToHandTargetEffect() {
         super(Outcome.ReturnToHand);
         staticText = "you may return target nonland permanent card from your graveyard to your hand. If that land is a Plains, you may return that nonland permanent card to the battlefield instead";
     }

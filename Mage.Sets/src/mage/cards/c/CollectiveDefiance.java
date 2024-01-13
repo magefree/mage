@@ -70,7 +70,7 @@ public final class CollectiveDefiance extends CardImpl {
 
 class CollectiveDefianceEffect extends OneShotEffect {
 
-    public CollectiveDefianceEffect() {
+    CollectiveDefianceEffect() {
         super(Outcome.Discard);
         this.staticText = "Target player discards all the cards in their hand, then draws that many cards";
     }

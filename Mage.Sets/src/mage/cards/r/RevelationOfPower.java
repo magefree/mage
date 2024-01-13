@@ -44,7 +44,7 @@ public final class RevelationOfPower extends CardImpl {
 
 class RevelationOfPowerEffect extends OneShotEffect {
 
-    public RevelationOfPowerEffect() {
+    RevelationOfPowerEffect() {
         super(Outcome.BoostCreature);
         this.staticText = "If it has a counter on it, it also gains flying and lifelink until end of turn";
     }

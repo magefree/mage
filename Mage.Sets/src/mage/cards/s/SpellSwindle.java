@@ -38,7 +38,7 @@ public final class SpellSwindle extends CardImpl {
 
 class SpellSwindleEffect extends OneShotEffect {
 
-    public SpellSwindleEffect() {
+    SpellSwindleEffect() {
         super(Outcome.Detriment);
         staticText = "Counter target spell. Create X Treasure tokens, where X is that spell's mana value.";
     }

@@ -99,7 +99,7 @@ class NissaSageAnimistPlusOneEffect extends OneShotEffect {
 
 class NissaSageAnimistMinusAnimateEffect extends OneShotEffect {
 
-    public NissaSageAnimistMinusAnimateEffect() {
+    NissaSageAnimistMinusAnimateEffect() {
         super(Outcome.BecomeCreature);
         this.staticText = "They become 6/6 Elemental creatures. They're still lands";
     }

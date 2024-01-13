@@ -61,7 +61,7 @@ public final class KitesailFreebooter extends CardImpl {
 
 class KitesailFreebooterExileEffect extends OneShotEffect {
 
-    public KitesailFreebooterExileEffect() {
+    KitesailFreebooterExileEffect() {
         super(Outcome.Benefit);
         this.staticText = "target opponent reveals their hand. You choose a noncreature, nonland card from it. Exile that card until {this} leaves the battlefield";
     }

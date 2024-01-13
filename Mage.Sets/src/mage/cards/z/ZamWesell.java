@@ -51,7 +51,7 @@ public final class ZamWesell extends CardImpl {
 
 class ZamWesselEffect extends OneShotEffect {
 
-    public ZamWesselEffect() {
+    ZamWesselEffect() {
         super(Outcome.Benefit);
         this.staticText = "";
     }

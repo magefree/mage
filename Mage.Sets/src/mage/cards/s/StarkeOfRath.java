@@ -61,7 +61,7 @@ public final class StarkeOfRath extends CardImpl {
 
 class StarkeOfRathEffect extends OneShotEffect {
 
-    public StarkeOfRathEffect() {
+    StarkeOfRathEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "Destroy target artifact or creature. That permanent's controller gains control of {this}";
     }

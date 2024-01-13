@@ -40,7 +40,7 @@ public final class LimDulsHex extends CardImpl {
 
 class LimDulsHexEffect extends OneShotEffect {
 
-    public LimDulsHexEffect() {
+    LimDulsHexEffect() {
         super(Outcome.Damage);
         this.staticText = "for each player, {this} deals 1 damage to that player unless they pay {B} or {3}";
     }

@@ -44,7 +44,7 @@ public final class Sleep extends CardImpl {
 
 class SleepEffect extends OneShotEffect {
 
-    public SleepEffect() {
+    SleepEffect() {
         super(Outcome.Tap);
         staticText = "Tap all creatures target player controls. Those creatures don't untap during that player's next untap step";
     }

@@ -76,7 +76,7 @@ public final class ObsidianFireheart extends CardImpl {
 
 class ObsidianFireheartOneShotEffect extends OneShotEffect {
 
-    public ObsidianFireheartOneShotEffect() {
+    ObsidianFireheartOneShotEffect() {
         super(Outcome.Detriment);
     }
 

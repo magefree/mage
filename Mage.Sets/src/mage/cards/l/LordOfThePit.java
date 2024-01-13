@@ -52,7 +52,7 @@ public final class LordOfThePit extends CardImpl {
 
 class LordOfThePitEffect extends OneShotEffect {
 
-    public LordOfThePitEffect() {
+    LordOfThePitEffect() {
         super(Outcome.Damage);
         this.staticText = "sacrifice a creature other than {this}. If you can't, {this} deals 7 damage to you.";
     }

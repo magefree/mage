@@ -44,7 +44,7 @@ public final class DoOrDie extends CardImpl {
 
 class DoOrDieEffect extends OneShotEffect {
 
-    public DoOrDieEffect() {
+    DoOrDieEffect() {
         super(Outcome.Sacrifice);
         this.staticText = "Separate all creatures target player controls into two piles. Destroy all creatures in the pile of that player's choice. They can't be regenerated";
     }

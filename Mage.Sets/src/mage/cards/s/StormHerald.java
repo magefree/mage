@@ -69,7 +69,7 @@ public final class StormHerald extends CardImpl {
 
 class StormHeraldEffect extends OneShotEffect {
 
-    public StormHeraldEffect() {
+    StormHeraldEffect() {
         super(Outcome.Benefit);
         this.staticText = "return any number of Aura cards from your graveyard to the battlefield attached to creatures you control. "
                 + "Exile those Auras at the beginning of your next end step. "

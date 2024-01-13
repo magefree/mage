@@ -56,7 +56,7 @@ enum KaerveksPurgeAdjuster implements TargetAdjuster {
 
 class KaerveksPurgeEffect extends OneShotEffect {
 
-    public KaerveksPurgeEffect() {
+    KaerveksPurgeEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "Destroy target creature with mana value X. " +
                 "If that creature dies this way, " +

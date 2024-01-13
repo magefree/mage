@@ -46,7 +46,7 @@ public final class TreeOfRedemption extends CardImpl {
 
 class TreeOfRedemptionEffect extends OneShotEffect {
 
-    public TreeOfRedemptionEffect() {
+    TreeOfRedemptionEffect() {
         super(Outcome.GainLife);
         staticText = "Exchange your life total with {this}'s toughness";
     }

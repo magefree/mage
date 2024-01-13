@@ -54,7 +54,7 @@ public final class Shapeshifter extends CardImpl {
 
 class ShapeshifterEffect extends OneShotEffect {
 
-    public ShapeshifterEffect() {
+    ShapeshifterEffect() {
         super(Outcome.Benefit);
         this.staticText = "Choose a number between 0 and 7.";
     }

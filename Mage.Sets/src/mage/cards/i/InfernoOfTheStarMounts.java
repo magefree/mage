@@ -60,7 +60,7 @@ public final class InfernoOfTheStarMounts extends CardImpl {
 
 class InfernoOfTheStarMountsEffect extends OneShotEffect {
 
-    public InfernoOfTheStarMountsEffect() {
+    InfernoOfTheStarMountsEffect() {
         super(Outcome.Damage);
         this.staticText = "When its power becomes 20 this way, it deals 20 damage to any target";
     }

@@ -47,7 +47,7 @@ public final class WorldAtWar extends CardImpl {
 
 class WorldAtWarEffect extends OneShotEffect {
 
-    public WorldAtWarEffect() {
+    WorldAtWarEffect() {
         super(Outcome.Benefit);
         staticText = "After the first postcombat main phase this turn, there's an additional combat phase followed by an additional main phase. At the beginning of that combat, untap all creatures that attacked this turn";
     }
@@ -126,7 +126,7 @@ class UntapDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
 class UntapAttackingThisTurnEffect extends OneShotEffect {
 
-    public UntapAttackingThisTurnEffect() {
+    UntapAttackingThisTurnEffect() {
         super(Outcome.Benefit);
     }
 

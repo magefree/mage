@@ -56,7 +56,7 @@ public final class CemeteryProwler extends CardImpl {
 
 class CemeteryProwlerExileEffect extends OneShotEffect {
 
-    public CemeteryProwlerExileEffect() {
+    CemeteryProwlerExileEffect() {
         super(Outcome.Exile);
         staticText = "exile a card from a graveyard";
     }

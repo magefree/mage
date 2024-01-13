@@ -50,7 +50,7 @@ public final class Reincarnation extends CardImpl {
 
 class ReincarnationEffect extends OneShotEffect {
 
-    public ReincarnationEffect() {
+    ReincarnationEffect() {
         super(Outcome.Detriment);
         staticText = "return a creature card from its owner's graveyard to the battlefield under the control of that creature's owner";
     }

@@ -41,7 +41,7 @@ public final class ArchangelsLight extends CardImpl {
 
 class ArchangelsLightEffect extends OneShotEffect {
 
-    public ArchangelsLightEffect() {
+    ArchangelsLightEffect() {
         super(Outcome.GainLife);
         staticText = "You gain 2 life for each card in your graveyard, then shuffle your graveyard into your library";
     }

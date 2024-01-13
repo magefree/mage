@@ -45,7 +45,7 @@ public final class TooGreedilyTooDeep extends CardImpl {
 
 class TooGreedilyTooDeepEffect extends OneShotEffect {
 
-    public TooGreedilyTooDeepEffect() {
+    TooGreedilyTooDeepEffect() {
         super(Outcome.Benefit);
         this.staticText = "put target creature card from a graveyard onto the battlefield under your control. That creature deals damage equal to its power to each other creature";
     }

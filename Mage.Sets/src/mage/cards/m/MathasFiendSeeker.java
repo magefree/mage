@@ -93,7 +93,7 @@ class MathasFiendSeekerGainAbilityEffect extends GainAbilityTargetEffect {
 
 class OpponentsGainLifeEffect extends OneShotEffect {
 
-    public OpponentsGainLifeEffect() {
+    OpponentsGainLifeEffect() {
         super(Outcome.GainLife);
         staticText = "and gains 2 life.";
     }

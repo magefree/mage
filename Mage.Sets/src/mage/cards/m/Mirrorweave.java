@@ -52,7 +52,7 @@ public final class Mirrorweave extends CardImpl {
 
 class MirrorWeaveEffect extends OneShotEffect {
 
-    public MirrorWeaveEffect() {
+    MirrorWeaveEffect() {
         super(Outcome.Copy);
         this.staticText = "Each other creature becomes a copy of target nonlegendary creature until end of turn";
     }

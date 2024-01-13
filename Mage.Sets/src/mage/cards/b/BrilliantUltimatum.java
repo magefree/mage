@@ -43,7 +43,7 @@ public final class BrilliantUltimatum extends CardImpl {
 
 class BrilliantUltimatumEffect extends OneShotEffect {
 
-    public BrilliantUltimatumEffect() {
+    BrilliantUltimatumEffect() {
         super(Outcome.PlayForFree);
         this.staticText = "Exile the top five cards of your library. "
                 + "An opponent separates those cards into two piles. "

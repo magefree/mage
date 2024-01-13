@@ -56,7 +56,7 @@ public final class TobiasBeckett extends CardImpl {
 // Based on GrenzoHavocRaiserEffect
 class TobiasBeckettEffect extends OneShotEffect {
 
-    public TobiasBeckettEffect() {
+    TobiasBeckettEffect() {
         super(Outcome.Exile);
         staticText = "exile the top card of that player's library. You may cast cards exiled this way and spend mana as though it were mana of any type to cast that spell";
     }

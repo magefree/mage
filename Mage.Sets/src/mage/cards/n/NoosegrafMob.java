@@ -52,7 +52,7 @@ public final class NoosegrafMob extends CardImpl {
 
 class NoosegrafMobEffect extends OneShotEffect {
 
-    public NoosegrafMobEffect() {
+    NoosegrafMobEffect() {
         super(Outcome.Benefit);
         staticText = "remove a +1/+1 counter from Noosegraf Mob. If you do, create a 2/2 black Zombie creature token";
     }

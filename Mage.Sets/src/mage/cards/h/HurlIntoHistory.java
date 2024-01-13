@@ -53,7 +53,7 @@ public final class HurlIntoHistory extends CardImpl {
  */
 class HurlIntoHistoryEffect extends OneShotEffect {
 
-    public HurlIntoHistoryEffect() {
+    HurlIntoHistoryEffect() {
         super(Outcome.Detriment);
         staticText = "Counter target artifact or creature spell. Discover X, where X is that spell's mana value.";
     }

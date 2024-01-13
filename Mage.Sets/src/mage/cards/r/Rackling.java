@@ -41,7 +41,7 @@ public final class Rackling extends CardImpl {
 
 class RacklingEffect extends OneShotEffect {
 
-    public RacklingEffect() {
+    RacklingEffect() {
         super(Outcome.Benefit);
         this.staticText = "{this} deals X damage to that player, where X is 3 minus the number of cards in their hand";
     }

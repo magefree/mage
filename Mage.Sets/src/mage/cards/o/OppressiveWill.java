@@ -42,7 +42,7 @@ public final class OppressiveWill extends CardImpl {
 
 class SpellSyphonEffect extends OneShotEffect {
 
-    public SpellSyphonEffect() {
+    SpellSyphonEffect() {
         super(Outcome.Benefit);
         this.staticText = "Counter target spell unless its controller pays {1} for each card in your hand";
     }

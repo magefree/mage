@@ -48,7 +48,7 @@ public final class QuarryColossus extends CardImpl {
 
 class QuarryColossusReturnLibraryEffect extends OneShotEffect {
 
-    public QuarryColossusReturnLibraryEffect() {
+    QuarryColossusReturnLibraryEffect() {
         super(Outcome.Detriment);
         this.staticText = "put target creature into its owner's library just beneath the "
                 + "top X cards of that library, where X is the number of Plains you control";

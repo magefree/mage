@@ -87,7 +87,7 @@ class EssenceSliverTriggeredAbility extends TriggeredAbilityImpl {
 
 class EssenceSliverEffect extends OneShotEffect {
 
-    public EssenceSliverEffect() {
+    EssenceSliverEffect() {
         super(Outcome.GainLife);
         this.staticText = "its controller gains that much life";
     }

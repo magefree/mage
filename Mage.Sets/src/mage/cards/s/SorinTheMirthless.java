@@ -53,7 +53,7 @@ public final class SorinTheMirthless extends CardImpl {
 
 class SorinTheMirthlessEffect extends OneShotEffect {
 
-    public SorinTheMirthlessEffect() {
+    SorinTheMirthlessEffect() {
         super(Outcome.DrawCard);
         staticText = "Look at the top card of your library. You may reveal that card and put it into your hand. If you do, you lose life equal to its mana value";
     }

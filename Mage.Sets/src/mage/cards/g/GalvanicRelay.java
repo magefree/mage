@@ -44,7 +44,7 @@ public final class GalvanicRelay extends CardImpl {
 
 class GalvanicRelayEffect extends OneShotEffect {
 
-    public GalvanicRelayEffect() {
+    GalvanicRelayEffect() {
         super(Outcome.Benefit);
         this.staticText = "Exile the top card of your library. During your next turn, you may play that card";
     }

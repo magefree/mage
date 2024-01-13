@@ -86,7 +86,7 @@ class DarienKingOfKjeldorTriggeredAbility extends TriggeredAbilityImpl {
 
 class DarienKingOfKjeldorEffect extends OneShotEffect {
 
-    public DarienKingOfKjeldorEffect() {
+    DarienKingOfKjeldorEffect() {
         super(Outcome.Benefit);
     }
 

@@ -62,7 +62,7 @@ public final class PactWeapon extends CardImpl {
 
 class PactWeaponEffect extends OneShotEffect {
 
-    public PactWeaponEffect() {
+    PactWeaponEffect() {
         super(Outcome.Benefit);
         this.staticText = "draw a card and reveal it. The creature gets +X/+X until end of turn and you lose X life, where X is that card's mana value.";
     }

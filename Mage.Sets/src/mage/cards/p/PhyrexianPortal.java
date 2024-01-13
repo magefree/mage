@@ -49,7 +49,7 @@ public final class PhyrexianPortal extends CardImpl {
 
 class PhyrexianPortalEffect extends OneShotEffect {
 
-    public PhyrexianPortalEffect() {
+    PhyrexianPortalEffect() {
         super(Outcome.Benefit);
         this.staticText = "If your library has ten or more cards in it, target opponent looks at the top ten cards of your library and separates them into two face-down piles. Exile one of those piles. Search the other pile for a card, put it into your hand, then shuffle the rest of that pile into your library";
     }

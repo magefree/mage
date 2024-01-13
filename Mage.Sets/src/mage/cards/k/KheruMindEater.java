@@ -63,7 +63,7 @@ public final class KheruMindEater extends CardImpl {
 
 class KheruMindEaterExileEffect extends OneShotEffect {
 
-    public KheruMindEaterExileEffect() {
+    KheruMindEaterExileEffect() {
         super(Outcome.Discard);
         staticText = "that player exiles a card of their hand face down";
     }

@@ -48,7 +48,7 @@ public final class WarsToll extends CardImpl {
 
 class WarsTollTapEffect extends OneShotEffect {
 
-    public WarsTollTapEffect() {
+    WarsTollTapEffect() {
         super(Outcome.Tap);
         staticText = "tap all lands that player controls";
     }

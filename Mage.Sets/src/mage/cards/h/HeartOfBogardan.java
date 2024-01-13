@@ -83,7 +83,7 @@ class HeartOfBogardanTriggeredAbility extends TriggeredAbilityImpl {
 
 class HeartOfBogardanEffect extends OneShotEffect {
 
-    public HeartOfBogardanEffect() {
+    HeartOfBogardanEffect() {
         super(Outcome.Damage);
         staticText = "{this} deals X damage to target player or planeswalker "
                 + "and each creature that player or that planeswalker's controller controls, "

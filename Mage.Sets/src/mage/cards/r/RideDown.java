@@ -53,7 +53,7 @@ public final class RideDown extends CardImpl {
 
 class RideDownEffect extends OneShotEffect {
 
-    public RideDownEffect() {
+    RideDownEffect() {
         super(Outcome.Benefit);
         this.staticText = "Destroy target blocking creature. Creatures that were blocked by that creature this combat gain trample until end of turn";
     }

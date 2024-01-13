@@ -46,7 +46,7 @@ public final class MonkeyCage extends CardImpl {
 
 class MonkeyCageEffect extends OneShotEffect {
 
-    public MonkeyCageEffect() {
+    MonkeyCageEffect() {
         super(Outcome.Benefit);
         staticText = "and create X 2/2 green Monkey creature tokens, where X is that creature's mana value";
     }

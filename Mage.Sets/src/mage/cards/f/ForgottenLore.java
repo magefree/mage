@@ -44,7 +44,7 @@ public final class ForgottenLore extends CardImpl {
 
 class ForgottenLoreEffect extends OneShotEffect {
 
-    public ForgottenLoreEffect() {
+    ForgottenLoreEffect() {
         super(Outcome.Benefit);
         staticText = "Target opponent chooses a card in your graveyard. You may pay {G}. If you do, repeat this process except that opponent can't choose a card already chosen for {this}. Then put the last chosen card into your hand.";
     }

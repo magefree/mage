@@ -42,7 +42,7 @@ public final class PlasmCapture extends CardImpl {
 
 class PlasmCaptureCounterEffect extends OneShotEffect {
 
-    public PlasmCaptureCounterEffect() {
+    PlasmCaptureCounterEffect() {
         super(Outcome.Benefit);
         this.staticText = "Counter target spell. At the beginning of your next precombat main phase, add X mana in any combination of colors, where X is that spell's mana value";
     }

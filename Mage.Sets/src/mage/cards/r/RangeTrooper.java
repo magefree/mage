@@ -59,7 +59,7 @@ public final class RangeTrooper extends CardImpl {
 
 class RangeTrooperEffect extends OneShotEffect {
 
-    public RangeTrooperEffect() {
+    RangeTrooperEffect() {
         super(Outcome.Detriment);
         staticText = "exile target creature. Return that creature to the battlefield at the beginning of the next end step";
     }

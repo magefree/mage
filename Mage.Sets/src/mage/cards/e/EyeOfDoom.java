@@ -60,7 +60,7 @@ public final class EyeOfDoom extends CardImpl {
 
 class EyeOfDoomEffect extends OneShotEffect {
 
-    public EyeOfDoomEffect() {
+    EyeOfDoomEffect() {
         super(Outcome.Detriment);
         this.staticText = "each player chooses a nonland permanent and puts a doom counter on it";
     }

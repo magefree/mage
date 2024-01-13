@@ -41,7 +41,7 @@ public final class FiligreeFracture extends CardImpl {
 
 class FiligreeFractureEffect extends OneShotEffect {
 
-    public FiligreeFractureEffect() {
+    FiligreeFractureEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "Destroy target artifact or enchantment. If that permanent was blue or black, draw a card";
     }

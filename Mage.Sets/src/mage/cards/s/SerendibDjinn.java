@@ -56,7 +56,7 @@ public final class SerendibDjinn extends CardImpl {
 
 class SerendibDjinnEffect extends OneShotEffect {
 
-    public SerendibDjinnEffect() {
+    SerendibDjinnEffect() {
         super(Outcome.Damage);
         this.staticText = "sacrifice a land. If you sacrifice an Island this way, {this} deals 3 damage to you";
     }

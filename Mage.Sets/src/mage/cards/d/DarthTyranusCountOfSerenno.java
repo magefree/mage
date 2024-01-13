@@ -70,7 +70,7 @@ public final class DarthTyranusCountOfSerenno extends CardImpl {
 
 class DarthTyranusEffect extends OneShotEffect {
 
-    public DarthTyranusEffect() {
+    DarthTyranusEffect() {
         super(Outcome.Benefit);
         staticText = "Target player's life total becomes 5. Another target players's life total becomes 30";
     }

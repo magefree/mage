@@ -61,7 +61,7 @@ public final class BiolumeEgg extends CardImpl {
 
 class BiolumeEggEffect extends OneShotEffect {
 
-    public BiolumeEggEffect() {
+    BiolumeEggEffect() {
         super(Outcome.PutCardInPlay);
         this.staticText = "return it to the battlefield transformed under your control";
     }

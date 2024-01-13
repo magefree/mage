@@ -58,7 +58,7 @@ public final class ManaVortex extends CardImpl {
 
 class CounterSourceEffect extends OneShotEffect {
 
-    public CounterSourceEffect() {
+    CounterSourceEffect() {
         super(Outcome.Detriment);
         this.staticText = "counter it unless you sacrifice a land";
     }

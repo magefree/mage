@@ -54,7 +54,7 @@ public final class PuresightMerrow extends CardImpl {
 
 class PuresightMerrowEffect extends OneShotEffect {
 
-    public PuresightMerrowEffect() {
+    PuresightMerrowEffect() {
         super(Outcome.Detriment);
         staticText = "Look at the top card of your library. You may exile that card";
     }

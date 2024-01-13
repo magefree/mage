@@ -120,7 +120,7 @@ class GontisMachinationsFirstLostLifeThisTurnWatcher extends Watcher {
 
 class GontisMachinationsEffect extends OneShotEffect {
 
-    public GontisMachinationsEffect() {
+    GontisMachinationsEffect() {
         super(Outcome.GainLife);
         staticText = "Each opponent loses 3 life. You gain life equal to the life lost this way";
     }

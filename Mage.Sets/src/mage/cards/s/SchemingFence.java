@@ -60,7 +60,7 @@ public final class SchemingFence extends CardImpl {
 
 class SchemingFenceChooseEffect extends OneShotEffect {
 
-    public SchemingFenceChooseEffect() {
+    SchemingFenceChooseEffect() {
         super(Outcome.UnboostCreature);
         this.staticText = "you may choose a nonland permanent";
     }

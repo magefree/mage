@@ -57,7 +57,7 @@ public final class FalkenrathAristocrat extends CardImpl {
 
 class FalkenrathAristocratEffect extends OneShotEffect {
 
-    public FalkenrathAristocratEffect() {
+    FalkenrathAristocratEffect() {
         super(Outcome.BoostCreature);
         this.staticText = "If the sacrificed creature was a Human, put a +1/+1 counter on {this}";
     }

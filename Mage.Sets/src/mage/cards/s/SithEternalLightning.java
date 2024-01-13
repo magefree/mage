@@ -47,7 +47,7 @@ public class SithEternalLightning extends CardImpl {
 
 class SithEternalLightningEffect extends OneShotEffect {
 
-    public SithEternalLightningEffect() {
+    SithEternalLightningEffect() {
         super(Outcome.Benefit);
         this.staticText = "Tap all creatures your opponents control. Those creatures don't untap during their controller's next untap step.";
     }

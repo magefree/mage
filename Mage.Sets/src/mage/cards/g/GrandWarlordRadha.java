@@ -120,7 +120,7 @@ class GrandWarlordRadhaTriggeredAbility extends TriggeredAbilityImpl {
 
 class GrandWarlordRadhaEffect extends OneShotEffect {
 
-    public GrandWarlordRadhaEffect() {
+    GrandWarlordRadhaEffect() {
         super(Outcome.Benefit);
         this.staticText = "add that much mana in any combination of {R} and/or {G}. Until end of turn, you don't lose this mana as steps and phases end";
     }

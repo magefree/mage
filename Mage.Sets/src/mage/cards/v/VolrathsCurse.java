@@ -162,7 +162,7 @@ class VolrathsCurseSpecialAction extends SpecialAction {
 
 class VolrathsCurseIgnoreEffect extends OneShotEffect {
 
-    public VolrathsCurseIgnoreEffect(final String keyString) {
+    VolrathsCurseIgnoreEffect(final String keyString) {
         super(Outcome.Benefit);
         this.staticText = "That creature's controller may sacrifice a permanent for that player to ignore this effect until end of turn";
     }

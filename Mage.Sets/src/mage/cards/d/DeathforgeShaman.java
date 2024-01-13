@@ -51,7 +51,7 @@ public final class DeathforgeShaman extends CardImpl {
 
 class DeathforgeShamanEffect extends OneShotEffect {
 
-    public DeathforgeShamanEffect() {
+    DeathforgeShamanEffect() {
         super(Outcome.Damage);
         staticText = "it deals damage to target player or planeswalker equal to twice the number of times it was kicked";
     }

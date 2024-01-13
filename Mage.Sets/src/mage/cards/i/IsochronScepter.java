@@ -110,7 +110,7 @@ class IsochronScepterImprintEffect extends OneShotEffect {
 
 class IsochronScepterCopyEffect extends OneShotEffect {
 
-    public IsochronScepterCopyEffect() {
+    IsochronScepterCopyEffect() {
         super(Outcome.Copy);
         this.staticText = "You may copy the exiled card. If you do, "
                 + "you may cast the copy without paying its mana cost";

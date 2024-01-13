@@ -42,7 +42,7 @@ public final class RhysticStudy extends CardImpl {
 
 class RhysticStudyDrawEffect extends OneShotEffect {
 
-    public RhysticStudyDrawEffect() {
+    RhysticStudyDrawEffect() {
         super(Outcome.DrawCard);
         this.staticText = "you may draw a card unless that player pays {1}";
     }

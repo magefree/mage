@@ -49,7 +49,7 @@ public final class ThrasiosTritonHero extends CardImpl {
 
 class ThrasiosTritonHeroEffect extends OneShotEffect {
 
-    public ThrasiosTritonHeroEffect() {
+    ThrasiosTritonHeroEffect() {
         super(Outcome.DrawCard);
         this.staticText = "scry 1, then reveal the top card of your library. " +
                 "If it's a land card, put it onto the battlefield tapped. Otherwise, draw a card";

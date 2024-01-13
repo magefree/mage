@@ -42,7 +42,7 @@ public final class Eureka extends CardImpl {
 
 class EurekaEffect extends OneShotEffect {
 
-    public EurekaEffect() {
+    EurekaEffect() {
         super(Outcome.PutCardInPlay);
         this.staticText = "Starting with you, each player may put a permanent card from their hand onto the battlefield. Repeat this process until no one puts a card onto the battlefield";
     }

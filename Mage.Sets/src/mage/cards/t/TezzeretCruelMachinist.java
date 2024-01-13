@@ -66,7 +66,7 @@ public final class TezzeretCruelMachinist extends CardImpl {
 
 class TezzeretCruelMachinistEffect extends OneShotEffect {
 
-    public TezzeretCruelMachinistEffect() {
+    TezzeretCruelMachinistEffect() {
         super(Outcome.Benefit);
         this.staticText = "put any number of cards from your hand onto the battlefield face down. They're 5/5 artifact creatures";
     }

@@ -50,7 +50,7 @@ public final class GreaterWerewolf extends CardImpl {
 
 class GreaterWerewolfEffect extends OneShotEffect {
 
-    public GreaterWerewolfEffect() {
+    GreaterWerewolfEffect() {
         super(Outcome.Detriment);
         this.staticText = "put a -0/-2 counter on each creature blocking or blocked by {this}";
     }

@@ -95,7 +95,7 @@ enum LongRestAdjuster implements TargetAdjuster {
 
 class LongRestEffect extends OneShotEffect {
 
-    public LongRestEffect() {
+    LongRestEffect() {
         super(Outcome.Benefit);
         this.staticText = "Return X target cards with different mana values from your graveyard to your hand. "
                 + "If eight or more cards were returned to your hand this way, your life total becomes equal to your starting life total";

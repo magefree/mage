@@ -206,7 +206,7 @@ class MariTheKillingQuillCreatureDiesAbility extends TriggeredAbilityImpl {
 
 class MariTheKillingQuillExileCreatureEffect extends OneShotEffect {
 
-    public MariTheKillingQuillExileCreatureEffect() {
+    MariTheKillingQuillExileCreatureEffect() {
         super(Outcome.Benefit);
         this.staticText = "exile it with a hit counter on it";
     }

@@ -58,7 +58,7 @@ public final class NayaSoulbeast extends CardImpl {
 
 class NayaSoulbeastCastEffect extends OneShotEffect {
 
-    public NayaSoulbeastCastEffect() {
+    NayaSoulbeastCastEffect() {
         super(Outcome.Benefit);
         this.staticText = "each player reveals the top card of their library";
     }

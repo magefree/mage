@@ -54,7 +54,7 @@ public final class MissDemeanor extends CardImpl {
 
 class MissDemeanorEffect extends OneShotEffect {
 
-    public MissDemeanorEffect() {
+    MissDemeanorEffect() {
         super(Outcome.Sacrifice);
         this.staticText = "you may compliment that player on their game play. If you don't, sacrifice {this}";
     }

@@ -39,7 +39,7 @@ public final class Browbeat extends CardImpl {
 
 class BrowbeatDrawEffect extends OneShotEffect {
 
-    public BrowbeatDrawEffect() {
+    BrowbeatDrawEffect() {
         super(Outcome.DrawCard);
         staticText = "Any player may have {this} deal 5 damage to them. If no one does, target player draws three cards.";
     }

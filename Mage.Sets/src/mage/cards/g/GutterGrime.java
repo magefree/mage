@@ -87,7 +87,7 @@ class GutterGrimeTriggeredAbility extends TriggeredAbilityImpl {
 
 class GutterGrimeEffect extends OneShotEffect {
 
-    public GutterGrimeEffect() {
+    GutterGrimeEffect() {
         super(Outcome.PutCreatureInPlay);
     }
 

@@ -71,7 +71,7 @@ public final class IbHalfheartGoblinTactician extends CardImpl {
 
 class IbHalfheartGoblinTacticianEffect extends OneShotEffect {
 
-    public IbHalfheartGoblinTacticianEffect() {
+    IbHalfheartGoblinTacticianEffect() {
         super(Outcome.Damage);
         this.staticText = "sacrifice it. If you do, it deals 4 damage to each creature blocking it";
     }

@@ -93,7 +93,7 @@ class FlayerTriggeredAbility extends TriggeredAbilityImpl {
 
 class FlayerEffect extends OneShotEffect {
 
-    public FlayerEffect() {
+    FlayerEffect() {
         super(Outcome.Damage);
         staticText = "that creature deals damage equal to its power to any target";
     }

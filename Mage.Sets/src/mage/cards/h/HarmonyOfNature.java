@@ -49,7 +49,7 @@ public final class HarmonyOfNature extends CardImpl {
 
 class HarmonyOfNatureEffect extends OneShotEffect {
 
-    public HarmonyOfNatureEffect() {
+    HarmonyOfNatureEffect() {
         super(Outcome.AIDontUseIt);
         staticText = "Tap any number of untapped creatures you control. You gain 4 life for each creature tapped this way";
     }

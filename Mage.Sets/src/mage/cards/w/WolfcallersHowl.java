@@ -42,7 +42,7 @@ public final class WolfcallersHowl extends CardImpl {
 
 class WolfcallersHowlEffect extends OneShotEffect {
 
-    public WolfcallersHowlEffect() {
+    WolfcallersHowlEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "create X 2/2 green Wolf creature tokens, where X is the number of your opponents with four or more cards in hand";
     }

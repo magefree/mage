@@ -84,7 +84,7 @@ class EnhancedSurveillanceReplacementEffect extends ReplacementEffectImpl {
 
 class EnhancedSurveillanceShuffleEffect extends OneShotEffect {
 
-    public EnhancedSurveillanceShuffleEffect() {
+    EnhancedSurveillanceShuffleEffect() {
         super(Outcome.Neutral);
         this.staticText = "Shuffle your graveyard into your library";
     }

@@ -45,9 +45,9 @@ public final class TragicArrogance extends CardImpl {
     }
 }
 
-class TragicArroganceffect extends OneShotEffect {
+class TragicArrogancEffect extends OneShotEffect {
 
-    public TragicArroganceffect() {
+    TragicArrogancEffect() {
         super(Outcome.Benefit);
         this.staticText = "For each player, you choose from among the permanents that player controls an artifact, a creature, an enchantment, and a planeswalker. Then each player sacrifices all other nonland permanents they control";
     }

@@ -48,7 +48,7 @@ public final class CrypticGateway extends CardImpl {
 
 class CrypticGatewayEffect extends OneShotEffect {
 
-    public CrypticGatewayEffect() {
+    CrypticGatewayEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "you may put a creature card from your hand that shares a creature type with each creature tapped this way onto the battlefield";
     }

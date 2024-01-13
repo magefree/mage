@@ -45,7 +45,7 @@ public final class MurderOfCrows extends CardImpl {
 
 class MurderOfCrowsEffect extends OneShotEffect {
 
-    public MurderOfCrowsEffect() {
+    MurderOfCrowsEffect() {
         super(Outcome.DrawCard);
         this.staticText = "you may draw a card. If you do, discard a card";
     }

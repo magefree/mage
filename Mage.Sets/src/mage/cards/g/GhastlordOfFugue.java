@@ -57,7 +57,7 @@ public final class GhastlordOfFugue extends CardImpl {
 
 class GhastlordOfFugueEffect extends OneShotEffect {
 
-    public GhastlordOfFugueEffect() {
+    GhastlordOfFugueEffect() {
         super(Outcome.Benefit);
         staticText = "that player reveals their hand. You choose a card from it. That player exiles that card";
     }

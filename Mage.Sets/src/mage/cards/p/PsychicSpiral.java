@@ -37,7 +37,7 @@ public final class PsychicSpiral extends CardImpl {
 
 class PsychicSpiralEffect extends OneShotEffect {
 
-    public PsychicSpiralEffect() {
+    PsychicSpiralEffect() {
         super(Outcome.GainLife);
         staticText = "Shuffle all cards from your graveyard into your library. Target player mills that many cards";
     }

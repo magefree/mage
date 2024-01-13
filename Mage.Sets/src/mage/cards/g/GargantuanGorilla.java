@@ -108,7 +108,7 @@ class GargantuanGorillaSacrificeEffect extends OneShotEffect {
 
 class GargantuanGorillaFightEffect extends OneShotEffect {
 
-    public GargantuanGorillaFightEffect() {
+    GargantuanGorillaFightEffect() {
         super(Outcome.Damage);
         this.staticText = "{this} deals damage equal to its power to another target creature. That creature deals damage equal to its power to {this}";
     }

@@ -42,7 +42,7 @@ public final class Giantbaiting extends CardImpl {
 
 class GiantbaitingEffect extends OneShotEffect {
 
-    public GiantbaitingEffect() {
+    GiantbaitingEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Create a 4/4 red and green Giant Warrior creature token with haste. Exile it at the beginning of the next end step";
     }

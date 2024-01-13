@@ -41,7 +41,7 @@ public final class DeathByDragons extends CardImpl {
 
 class DeathByDragonsEffect extends OneShotEffect {
 
-    public DeathByDragonsEffect() {
+    DeathByDragonsEffect() {
         super(Outcome.Detriment);
         this.staticText = "Each player other than target player creates a 5/5 red Dragon creature token with flying";
     }

@@ -43,7 +43,7 @@ public final class ThroneOfEmpires extends CardImpl {
 
 class ThroneOfEmpiresEffect extends OneShotEffect {
 
-    public ThroneOfEmpiresEffect() {
+    ThroneOfEmpiresEffect() {
         super(Outcome.PutCreatureInPlay);
         staticText = "Create a 1/1 white Soldier creature token. Create five of those tokens instead if you control artifacts named Crown of Empires and Scepter of Empires";
     }

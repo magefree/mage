@@ -53,7 +53,7 @@ public final class GougedZealot extends CardImpl {
 
 class GougedZealotEffect extends OneShotEffect {
 
-    public GougedZealotEffect() {
+    GougedZealotEffect() {
         super(Outcome.Damage);
         this.staticText = "{this} deals 1 damage to each creature defending player controls";
     }

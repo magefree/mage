@@ -59,7 +59,7 @@ public final class JeweledSpirit extends CardImpl {
 
 class JeweledSpiritEffect extends OneShotEffect {
 
-    public JeweledSpiritEffect() {
+    JeweledSpiritEffect() {
         super(Outcome.AddAbility);
         this.staticText = "{this} gains protection from artifacts or from the color of your choice until end of turn";
     }

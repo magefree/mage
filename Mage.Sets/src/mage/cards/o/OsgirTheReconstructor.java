@@ -106,7 +106,7 @@ enum OsgirTheReconstructorCostAdjuster implements CostAdjuster {
 
 class OsgirTheReconstructorCreateArtifactTokensEffect extends OneShotEffect {
 
-    public OsgirTheReconstructorCreateArtifactTokensEffect() {
+    OsgirTheReconstructorCreateArtifactTokensEffect() {
         super(Outcome.Benefit);
         this.staticText = "Create two tokens that are copies of the exiled card.";
     }

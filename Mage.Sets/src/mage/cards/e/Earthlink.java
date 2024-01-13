@@ -50,7 +50,7 @@ public final class Earthlink extends CardImpl {
 
 class EarthlinkEffect extends OneShotEffect {
 
-    public EarthlinkEffect() {
+    EarthlinkEffect() {
         super(Outcome.DrawCard);
         this.staticText = "that creature's controller sacrifices a land";
     }

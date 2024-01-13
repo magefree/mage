@@ -56,7 +56,7 @@ public final class Halfdane extends CardImpl {
 
 class HalfdaneUpkeepEffect extends OneShotEffect {
 
-    public HalfdaneUpkeepEffect() {
+    HalfdaneUpkeepEffect() {
         super(Outcome.Detriment);
         this.staticText = "change {this}'s base power and toughness to the power and toughness of target creature other than Halfdane until the end of your next upkeep";
     }

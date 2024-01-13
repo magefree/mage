@@ -49,7 +49,7 @@ public final class ActOfAuthority extends CardImpl {
 
 class ActOfAuthorityEffect extends OneShotEffect {
 
-    public ActOfAuthorityEffect() {
+    ActOfAuthorityEffect() {
         super(Outcome.Exile);
         this.staticText = "you may exile target artifact or enchantment. If you do, its controller gains control of {this}";
     }

@@ -60,7 +60,7 @@ public final class Duplicant extends CardImpl {
 
 class DuplicantExileTargetEffect extends OneShotEffect {
 
-    public DuplicantExileTargetEffect() {
+    DuplicantExileTargetEffect() {
         super(Outcome.Exile);
         this.staticText = "you may exile target nontoken creature";
     }

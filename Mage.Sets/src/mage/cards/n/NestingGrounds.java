@@ -69,7 +69,7 @@ public final class NestingGrounds extends CardImpl {
 
 class NestingGroundsEffect extends OneShotEffect {
 
-    public NestingGroundsEffect() {
+    NestingGroundsEffect() {
         super(Outcome.AIDontUseIt);
         this.staticText = "Move a counter from target permanent you control onto another target permanent";
     }

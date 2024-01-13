@@ -45,7 +45,7 @@ public final class Metamorphosis extends CardImpl {
 
 class MetamorphosisEffect extends OneShotEffect {
 
-    public MetamorphosisEffect() {
+    MetamorphosisEffect() {
         super(Outcome.PutManaInPool);
         staticText = "Add X mana of any one color, where X is 1 plus the sacrificed creature's mana value. Spend this mana only to cast creature spells.";
     }

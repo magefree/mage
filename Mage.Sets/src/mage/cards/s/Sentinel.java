@@ -56,7 +56,7 @@ public final class Sentinel extends CardImpl {
 
 class SentinelEffect extends OneShotEffect {
 
-    public SentinelEffect() {
+    SentinelEffect() {
         super(Outcome.Detriment);
         this.staticText = "Change {this}'s base toughness to 1 plus the power of target creature blocking or blocked by {this}. <i>(This effect lasts indefinitely.)</i>";
     }

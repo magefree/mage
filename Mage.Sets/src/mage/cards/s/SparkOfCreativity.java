@@ -46,7 +46,7 @@ public final class SparkOfCreativity extends CardImpl {
 
 class SparkOfCreativityEffect extends OneShotEffect {
 
-    public SparkOfCreativityEffect() {
+    SparkOfCreativityEffect() {
         super(Outcome.Benefit);
         this.staticText = "Choose target creature. Exile the top card of your library. You may have {this} deal damage to that creature equal to the exiled card's mana value. If you don't, you may play that card until end of turn";
     }

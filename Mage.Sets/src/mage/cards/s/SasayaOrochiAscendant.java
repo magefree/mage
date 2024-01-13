@@ -66,7 +66,7 @@ public final class SasayaOrochiAscendant extends CardImpl {
 
 class SasayaOrochiAscendantFlipEffect extends OneShotEffect {
 
-    public SasayaOrochiAscendantFlipEffect() {
+    SasayaOrochiAscendantFlipEffect() {
         super(Outcome.Benefit);
         this.staticText = "If you have seven or more land cards in your hand, flip {this}";
     }

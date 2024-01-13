@@ -52,7 +52,7 @@ public final class KamahlsDruidicVow extends CardImpl {
 
 class KamahlsDruidicVowEffect extends OneShotEffect {
 
-    public KamahlsDruidicVowEffect() {
+    KamahlsDruidicVowEffect() {
         super(Outcome.PutCardInPlay);
         this.staticText = "Look at the top X cards of your library. You may put any number of land and/or legendary permanent cards with mana value X or less from among them onto the battlefield. Put the rest into your graveyard";
     }

@@ -50,7 +50,7 @@ public final class HatcherySpider extends CardImpl {
 
 class HatcherySpiderEffect extends OneShotEffect {
 
-    public HatcherySpiderEffect() {
+    HatcherySpiderEffect() {
         super(Outcome.PutCardInPlay);
         this.staticText = "reveal the top X cards of your library, "
                 + "where X is the number of creature cards in your graveyard. "

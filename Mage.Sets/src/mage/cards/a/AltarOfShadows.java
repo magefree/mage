@@ -56,7 +56,7 @@ public final class AltarOfShadows extends CardImpl {
 
 class AltarOfShadowsEffect extends OneShotEffect {
 
-    public AltarOfShadowsEffect() {
+    AltarOfShadowsEffect() {
         super(Outcome.PutManaInPool);
         this.staticText = "add {B} for each charge counter on Altar of Shadows";
     }

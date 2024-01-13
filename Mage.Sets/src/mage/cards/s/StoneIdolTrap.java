@@ -86,7 +86,7 @@ class StoneIdolTrapCostReductionEffect extends CostModificationEffectImpl {
 
 class StoneIdolTrapEffect extends OneShotEffect {
 
-    public StoneIdolTrapEffect() {
+    StoneIdolTrapEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Create a 6/12 colorless Construct artifact creature token with trample. Exile it at the beginning of your next end step";
     }

@@ -48,7 +48,7 @@ public final class Wish extends CardImpl {
 
 class WishEffect extends OneShotEffect {
 
-    public WishEffect() {
+    WishEffect() {
         super(Outcome.Benefit);
         this.staticText = "You may play a card you own from outside the game this turn";
     }

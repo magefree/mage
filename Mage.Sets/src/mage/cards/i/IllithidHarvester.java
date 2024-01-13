@@ -87,7 +87,7 @@ enum IllithidHarvesterAdjuster implements TargetAdjuster {
 
 class IllithidHarvesterEffect extends OneShotEffect {
 
-    public IllithidHarvesterEffect() {
+    IllithidHarvesterEffect() {
         super(Outcome.Detriment);
         this.staticText = "turn any number of target tapped nontoken creatures face down. They're 2/2 Horror creatures";
     }

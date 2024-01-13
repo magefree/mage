@@ -79,7 +79,7 @@ class HoldForRansomGainEffect extends GainAbilityAttachedEffect {
 
 class HoldForRansomSacrificeEffect extends OneShotEffect {
 
-    public HoldForRansomSacrificeEffect() {
+    HoldForRansomSacrificeEffect() {
         super(Outcome.Sacrifice);
         this.staticText = "Hold for Ransom's controller sacrifices it and draws a card";
     }

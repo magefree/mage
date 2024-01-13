@@ -91,7 +91,7 @@ class OccupationTapEffect extends ReplacementEffectImpl {
 
 class OccupationOneShotEffect extends OneShotEffect {
 
-    public OccupationOneShotEffect() {
+    OccupationOneShotEffect() {
         super(Outcome.LoseAbility);
     }
 

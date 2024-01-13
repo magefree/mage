@@ -49,7 +49,7 @@ public final class MerfolkSpy extends CardImpl {
 
 class MerfolkSpyEffect extends OneShotEffect {
 
-    public MerfolkSpyEffect() {
+    MerfolkSpyEffect() {
         super(Outcome.Detriment);
         staticText = "that player reveals a card at random from their hand";
     }

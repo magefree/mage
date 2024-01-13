@@ -100,7 +100,7 @@ class MasterOfCrueltiesTriggeredAbility extends TriggeredAbilityImpl {
 
 class MasterOfCrueltiesEffect extends OneShotEffect {
 
-    public MasterOfCrueltiesEffect() {
+    MasterOfCrueltiesEffect() {
         super(Outcome.Benefit);
         this.staticText = "that player's life total becomes 1";
     }

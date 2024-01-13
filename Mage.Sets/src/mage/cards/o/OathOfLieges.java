@@ -69,7 +69,7 @@ enum OathOfLiegesAdjuster implements TargetAdjuster {
 
 class OathOfLiegesEffect extends OneShotEffect {
 
-    public OathOfLiegesEffect() {
+    OathOfLiegesEffect() {
         super(Outcome.Benefit);
         this.staticText = "that player chooses target player who controls more lands than they do and is their opponent. "
                 + "The first player may search their library for a basic land card, put that card onto the battlefield, then shuffle";

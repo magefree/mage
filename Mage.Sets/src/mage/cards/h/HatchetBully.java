@@ -92,7 +92,7 @@ class HatchetBullyCost extends CostImpl {
 
 class HatchetBullyEffect extends OneShotEffect {
 
-    public HatchetBullyEffect() {
+    HatchetBullyEffect() {
         super(Outcome.Damage);
         staticText = "{this} deals 2 damage to any target";
     }

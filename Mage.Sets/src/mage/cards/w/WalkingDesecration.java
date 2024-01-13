@@ -50,7 +50,7 @@ public final class WalkingDesecration extends CardImpl {
 
 class WalkingDesecrationEffect extends OneShotEffect {
 
-    public WalkingDesecrationEffect() {
+    WalkingDesecrationEffect() {
         super(Outcome.UnboostCreature);
         staticText = "Creatures of the creature type of your choice attack this turn if able";
     }

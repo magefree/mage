@@ -56,7 +56,7 @@ public final class ScroungingBandar extends CardImpl {
 
 class ScroungingBandarEffect extends OneShotEffect {
 
-    public ScroungingBandarEffect() {
+    ScroungingBandarEffect() {
         super(Outcome.Benefit);
         this.staticText = "you may move any number of +1/+1 counters from {this} onto another target creature";
     }

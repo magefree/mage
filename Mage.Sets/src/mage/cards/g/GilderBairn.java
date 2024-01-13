@@ -52,7 +52,7 @@ public final class GilderBairn extends CardImpl {
 
 class GilderBairnEffect extends OneShotEffect {
 
-    public GilderBairnEffect() {
+    GilderBairnEffect() {
         super(Outcome.Benefit);
         this.staticText = "Double the number of each kind of counter on target permanent";
     }

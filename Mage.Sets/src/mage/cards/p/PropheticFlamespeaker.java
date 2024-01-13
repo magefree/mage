@@ -57,7 +57,7 @@ public final class PropheticFlamespeaker extends CardImpl {
 
 class PropheticFlamespeakerExileEffect extends OneShotEffect {
 
-    public PropheticFlamespeakerExileEffect() {
+    PropheticFlamespeakerExileEffect() {
         super(Outcome.Detriment);
         this.staticText = "exile the top card of your library. You may play it this turn";
     }

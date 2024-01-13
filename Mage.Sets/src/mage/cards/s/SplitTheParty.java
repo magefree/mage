@@ -46,7 +46,7 @@ public final class SplitTheParty extends CardImpl {
 
 class SplitThePartyEffect extends OneShotEffect {
 
-    public SplitThePartyEffect() {
+    SplitThePartyEffect() {
         super(Outcome.ReturnToHand);
         this.staticText = "Choose target player. Return half the creatures they control to their owner's hand, rounded up";
     }

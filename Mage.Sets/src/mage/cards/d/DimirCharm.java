@@ -67,7 +67,7 @@ public final class DimirCharm extends CardImpl {
 
 class DimirCharmEffect extends OneShotEffect {
 
-    public DimirCharmEffect() {
+    DimirCharmEffect() {
         super(Outcome.Benefit);
         this.staticText = "look at the top three cards of target player's library, then put one back and the rest into that player's graveyard";
     }

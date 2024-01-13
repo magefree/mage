@@ -52,7 +52,7 @@ public final class LethalScheme extends CardImpl {
 // Based loosely on "Venerated Loxodon" and "Change of Plans"
 class LethalSchemeEffect extends OneShotEffect {
 
-    public LethalSchemeEffect() {
+    LethalSchemeEffect() {
         super(Outcome.Benefit);
         this.staticText = "Each creature that convoked {this} connives.";
     }

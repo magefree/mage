@@ -63,7 +63,7 @@ public final class IconOfAncestry extends CardImpl {
 
 class IconOfAncestryEffect extends OneShotEffect {
 
-    public IconOfAncestryEffect() {
+    IconOfAncestryEffect() {
         super(Outcome.AIDontUseIt);
         staticText = "look at the top three cards of your library. " +
                 "You may reveal a creature card of the chosen type from among them and put it into your hand. " +

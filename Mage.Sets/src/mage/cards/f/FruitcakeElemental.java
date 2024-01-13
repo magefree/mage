@@ -64,7 +64,7 @@ public final class FruitcakeElemental extends CardImpl {
 
 class FruitcakeElementalEffect extends OneShotEffect {
 
-    public FruitcakeElementalEffect() {
+    FruitcakeElementalEffect() {
         super(Outcome.Discard);
         this.staticText = "Target player gains control of {this}.";
     }

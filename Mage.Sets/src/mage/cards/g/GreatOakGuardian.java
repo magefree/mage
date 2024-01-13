@@ -100,7 +100,7 @@ class GreatOakGuardianEffect extends ContinuousEffectImpl {
 
 class GreatOakGuardianUntapEffect extends OneShotEffect {
 
-    public GreatOakGuardianUntapEffect() {
+    GreatOakGuardianUntapEffect() {
         super(Outcome.Benefit);
         this.staticText = "untap them";
     }

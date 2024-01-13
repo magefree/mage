@@ -104,7 +104,7 @@ class NullhideFeroxCantCastEffect extends ContinuousRuleModifyingEffectImpl {
 
 class NullhideFeroxLoseAbilitiesEffect extends OneShotEffect {
 
-    public NullhideFeroxLoseAbilitiesEffect() {
+    NullhideFeroxLoseAbilitiesEffect() {
         super(Outcome.Benefit);
         this.staticText = "{this} loses all abilities until end of turn. Any player may activate this ability";
     }

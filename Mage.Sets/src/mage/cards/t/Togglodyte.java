@@ -58,7 +58,7 @@ public final class Togglodyte extends CardImpl {
 
 class TogglodyteEntersEffect extends OneShotEffect {
 
-    public TogglodyteEntersEffect() {
+    TogglodyteEntersEffect() {
         super(Outcome.Neutral);
         staticText = "turned on";
     }
@@ -92,7 +92,7 @@ class TogglodyteEntersEffect extends OneShotEffect {
 
 class TogglodyteToggleEffect extends OneShotEffect {
 
-    public TogglodyteToggleEffect() {
+    TogglodyteToggleEffect() {
         super(Outcome.Neutral);
         staticText = "toggle {this}'s ON/OFF switch";
     }

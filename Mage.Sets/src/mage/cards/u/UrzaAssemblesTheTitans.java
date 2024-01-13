@@ -61,7 +61,7 @@ public final class UrzaAssemblesTheTitans extends CardImpl {
 
 class UrzaAssemblesTheTitansScryEffect extends OneShotEffect {
 
-    public UrzaAssemblesTheTitansScryEffect() {
+    UrzaAssemblesTheTitansScryEffect() {
         super(Outcome.Benefit);
         this.staticText = "Scry 4, then you may reveal the top card of your library. If a planeswalker card is revealed this way, put it into your hand.";
     }

@@ -52,7 +52,7 @@ public final class SarpadianEmpiresVolVII extends CardImpl {
 
 class SarpadianEmpiresChooseTokenEffect extends OneShotEffect {
 
-    public SarpadianEmpiresChooseTokenEffect() {
+    SarpadianEmpiresChooseTokenEffect() {
         super(Outcome.Neutral);
         this.staticText = "choose white Citizen, blue Camarid, black Thrull, red Goblin, or green Saproling";
     }
@@ -90,7 +90,7 @@ class SarpadianEmpiresChooseTokenEffect extends OneShotEffect {
 
 class SarpadianEmpiresCreateSelectedTokenEffect extends OneShotEffect {
 
-    public SarpadianEmpiresCreateSelectedTokenEffect() {
+    SarpadianEmpiresCreateSelectedTokenEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "create a 1/1 creature token of the chosen color and type";
     }

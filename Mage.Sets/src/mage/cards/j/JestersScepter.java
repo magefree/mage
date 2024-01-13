@@ -63,7 +63,7 @@ public final class JestersScepter extends CardImpl {
 
 class JestersScepterEffect extends OneShotEffect {
 
-    public JestersScepterEffect() {
+    JestersScepterEffect() {
         super(Outcome.DrawCard);
         staticText = "exile the top five cards of target player's library face down";
     }

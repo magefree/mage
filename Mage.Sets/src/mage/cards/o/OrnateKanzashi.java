@@ -55,7 +55,7 @@ public final class OrnateKanzashi extends CardImpl {
 
 class OrnateKanzashiEffect extends OneShotEffect {
 
-    public OrnateKanzashiEffect() {
+    OrnateKanzashiEffect() {
         super(Outcome.Detriment);
         this.staticText = "Target opponent exiles the top card of their library. You may play that card this turn";
     }

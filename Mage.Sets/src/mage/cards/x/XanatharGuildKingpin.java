@@ -104,7 +104,7 @@ class XanatharGuildKingpinRuleModifyingEffect extends ContinuousRuleModifyingEff
 
 class XanatharGuildKingpinSpendManaAsAnyColorOneShotEffect extends OneShotEffect {
 
-    public XanatharGuildKingpinSpendManaAsAnyColorOneShotEffect() {
+    XanatharGuildKingpinSpendManaAsAnyColorOneShotEffect() {
         super(Outcome.Benefit);
     }
 

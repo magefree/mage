@@ -81,7 +81,7 @@ class LightmineFieldTriggeredAbility extends TriggeredAbilityImpl {
 
 class LightmineFieldEffect extends OneShotEffect {
 
-    public LightmineFieldEffect() {
+    LightmineFieldEffect() {
         super(Outcome.Damage);
         this.staticText = "{this} deals damage to each of those creatures equal to the number of attacking creatures";
     }

@@ -95,7 +95,7 @@ class BreathOfFuryAbility extends TriggeredAbilityImpl {
 
 class BreathOfFuryEffect extends OneShotEffect {
 
-    public BreathOfFuryEffect() {
+    BreathOfFuryEffect() {
         super(Outcome.Benefit);
         staticText = "sacrifice it and attach {this} to a creature you control. If you do, untap all creatures you control and after this phase, there is an additional combat phase";
     }

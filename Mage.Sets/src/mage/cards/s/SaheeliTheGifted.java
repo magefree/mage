@@ -124,7 +124,7 @@ class SaheeliTheGiftedCostReductionEffect extends CostModificationEffectImpl {
 
 class SaheeliTheGiftedTokenEffect extends OneShotEffect {
 
-    public SaheeliTheGiftedTokenEffect() {
+    SaheeliTheGiftedTokenEffect() {
         super(Outcome.Benefit);
         this.staticText = "for each artifact you control, "
                 + "create a token that's a copy of it. "

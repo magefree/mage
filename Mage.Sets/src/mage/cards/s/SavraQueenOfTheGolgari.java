@@ -89,7 +89,7 @@ class SavraSacrificeBlackCreatureAbility extends TriggeredAbilityImpl {
 
 class SavraSacrificeEffect extends OneShotEffect {
 
-    public SavraSacrificeEffect() {
+    SavraSacrificeEffect() {
         super(Outcome.Sacrifice);
         this.staticText = "each other player sacrifices a creature";
     }

@@ -53,7 +53,7 @@ public final class ChimneyImp extends CardImpl {
 
 class ChimneyImpEffect extends OneShotEffect {
 
-    public ChimneyImpEffect() {
+    ChimneyImpEffect() {
         super(Outcome.Detriment);
         this.staticText = "target opponent puts a card from their hand on top of their library.";
     }

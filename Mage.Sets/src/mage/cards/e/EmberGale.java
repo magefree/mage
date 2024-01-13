@@ -50,7 +50,7 @@ public final class EmberGale extends CardImpl {
 
 class EmberGaleEffect extends OneShotEffect {
 
-    public EmberGaleEffect() {
+    EmberGaleEffect() {
         super(Outcome.Detriment);
         staticText = "Creatures target player controls can't block this turn. {this} deals 1 damage to each white and/or blue creature that player controls";
     }

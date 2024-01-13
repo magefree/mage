@@ -43,7 +43,7 @@ public final class BarrinsUnmaking extends CardImpl {
 
 class BarrinsUnmakingEffect extends OneShotEffect {
 
-    public BarrinsUnmakingEffect() {
+    BarrinsUnmakingEffect() {
         super(Outcome.Detriment);
         this.staticText = "Return target permanent to its owner's hand if that permanent shares a color with the most common color among all permanents or a color tied for most common.";
     }

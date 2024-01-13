@@ -53,7 +53,7 @@ public final class BorosBattleshaper extends CardImpl {
 
 class BorosBattleshaperEffect extends OneShotEffect {
 
-    public BorosBattleshaperEffect() {
+    BorosBattleshaperEffect() {
         super(Outcome.Benefit);
         this.staticText = "up to one target creature attacks or blocks this combat if able and up to one target creature can't attack or block this combat";
     }

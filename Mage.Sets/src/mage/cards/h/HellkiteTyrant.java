@@ -78,7 +78,7 @@ public final class HellkiteTyrant extends CardImpl {
 
 class HellkiteTyrantEffect extends OneShotEffect {
 
-    public HellkiteTyrantEffect() {
+    HellkiteTyrantEffect() {
         super(Outcome.GainControl);
         this.staticText = "gain control of all artifacts that player controls";
     }

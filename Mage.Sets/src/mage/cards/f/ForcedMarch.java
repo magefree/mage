@@ -35,7 +35,7 @@ public final class ForcedMarch extends CardImpl {
 
 class ForcedMarchEffect extends OneShotEffect {
 
-    public ForcedMarchEffect() {
+    ForcedMarchEffect() {
         super(Outcome.DestroyPermanent);
         staticText = "Destroy all creatures with mana value X or less";
     }

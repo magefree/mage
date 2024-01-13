@@ -49,7 +49,7 @@ public final class CarrionWurm extends CardImpl {
 
 class CarrionWurmEffect extends OneShotEffect {
 
-    public CarrionWurmEffect() {
+    CarrionWurmEffect() {
         super(Outcome.Neutral);
         this.staticText = "any player may exile three cards from their graveyard. If a player does, {this} assigns no combat damage this turn";
     }

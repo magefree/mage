@@ -48,7 +48,7 @@ public final class PolymorphousRush extends CardImpl {
 
 class PolymorphousRushCopyEffect extends OneShotEffect {
 
-    public PolymorphousRushCopyEffect() {
+    PolymorphousRushCopyEffect() {
         super(Outcome.Copy);
         this.staticText = "Choose a creature on the battlefield. Any number of target creatures you control each become a copy of that creature until end of turn";
     }

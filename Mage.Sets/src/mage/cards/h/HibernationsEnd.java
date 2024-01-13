@@ -77,7 +77,7 @@ class HibernationsEndAbility extends TriggeredAbilityImpl {
 
 class HibernationsEndEffect extends OneShotEffect {
 
-    public HibernationsEndEffect() {
+    HibernationsEndEffect() {
         super(Outcome.Benefit);
         this.staticText = "search your library for a creature card with mana value equal to the number of age counters on {this}, put it onto the battlefield, then shuffle.";
     }

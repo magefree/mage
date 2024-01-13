@@ -99,7 +99,7 @@ class CurseOfBountyEffect extends OneShotEffect {
 
 class UntapAllNonlandsTargetEffect extends OneShotEffect {
 
-    public UntapAllNonlandsTargetEffect() {
+    UntapAllNonlandsTargetEffect() {
         super(Outcome.Untap);
     }
 

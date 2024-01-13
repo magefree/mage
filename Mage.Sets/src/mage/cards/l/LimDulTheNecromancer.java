@@ -66,7 +66,7 @@ public final class LimDulTheNecromancer extends CardImpl {
 
 class LimDulTheNecromancerEffect extends OneShotEffect {
 
-    public LimDulTheNecromancerEffect() {
+    LimDulTheNecromancerEffect() {
         super(Outcome.PutCreatureInPlay);
         staticText = "return that card to the battlefield under your control. If it's a creature, it's a Zombie in addition to its other creature types";
     }

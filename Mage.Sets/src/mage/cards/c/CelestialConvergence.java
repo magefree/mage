@@ -51,7 +51,7 @@ public final class CelestialConvergence extends CardImpl {
 
 class CelestialConvergenceEffect extends OneShotEffect {
 
-    public CelestialConvergenceEffect() {
+    CelestialConvergenceEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "If there are no omen counters on {this}, the player with the highest life total wins the game. If two or more players are tied for highest life total, the game is a draw";
     }

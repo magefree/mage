@@ -58,7 +58,7 @@ public final class BlizzardSpecter extends CardImpl {
 
 class ReturnToHandEffect extends OneShotEffect {
 
-    public ReturnToHandEffect() {
+    ReturnToHandEffect() {
         super(Outcome.ReturnToHand);
         staticText = "That player returns a permanent they control to its owner's hand";
     }

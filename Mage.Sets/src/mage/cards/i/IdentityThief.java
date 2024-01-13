@@ -89,7 +89,7 @@ class IdentityThiefAbility extends TriggeredAbilityImpl {
 
 class IdentityThiefEffect extends OneShotEffect {
 
-    public IdentityThiefEffect() {
+    IdentityThiefEffect() {
         super(Outcome.Detriment);
         staticText = "you may exile another target nontoken creature. If you do, {this} becomes a copy of that creature until end of turn. "
                 + "Return the exiled card to the battlefield under its owner's control at the beginning of the next end step";

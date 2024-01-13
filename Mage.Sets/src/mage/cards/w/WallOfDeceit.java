@@ -52,7 +52,7 @@ public final class WallOfDeceit extends CardImpl {
 
 class WallOfDeceitEffect extends OneShotEffect {
 
-    public WallOfDeceitEffect() {
+    WallOfDeceitEffect() {
         super(Outcome.Detriment);
         this.staticText = "Turn {this} face down";
     }

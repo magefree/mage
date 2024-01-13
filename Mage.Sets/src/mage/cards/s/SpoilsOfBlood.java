@@ -45,7 +45,7 @@ public final class SpoilsOfBlood extends CardImpl {
 
 class SpoilsOfBloodEffect extends OneShotEffect {
 
-    public SpoilsOfBloodEffect() {
+    SpoilsOfBloodEffect() {
         super(Outcome.DestroyPermanent);
         staticText = "Create an X/X black Horror creature token, where X is the number of creatures that died this turn";
     }

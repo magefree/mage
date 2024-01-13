@@ -101,7 +101,7 @@ class LichsMasteryCantLoseEffect extends ContinuousRuleModifyingEffectImpl {
 
 class LichsMasteryDrawCardsEffect extends OneShotEffect {
 
-    public LichsMasteryDrawCardsEffect() {
+    LichsMasteryDrawCardsEffect() {
         super(Outcome.Benefit);
         this.staticText = "draw that many cards";
     }

@@ -42,7 +42,7 @@ public final class ElixirOfImmortality extends CardImpl {
 
 class ElixerOfImmortalityEffect extends OneShotEffect {
 
-    public ElixerOfImmortalityEffect() {
+    ElixerOfImmortalityEffect() {
         super(Outcome.GainLife);
         staticText = "You gain 5 life. Shuffle {this} and your graveyard into their owner's library";
     }

@@ -41,7 +41,7 @@ public final class NewFrontiers extends CardImpl {
 
 class NewFrontiersEffect extends OneShotEffect {
 
-    public NewFrontiersEffect() {
+    NewFrontiersEffect() {
         super(Outcome.Detriment);
         this.staticText = "Each player may search their library for up to X basic land cards and put them onto the battlefield tapped. Then each player who searched their library this way shuffles";
     }

@@ -60,7 +60,7 @@ public final class MuseVessel extends CardImpl {
 
 class MuseVesselExileEffect extends OneShotEffect {
 
-    public MuseVesselExileEffect() {
+    MuseVesselExileEffect() {
         super(Outcome.Exile);
         staticText = "target player exiles a card from their hand";
     }

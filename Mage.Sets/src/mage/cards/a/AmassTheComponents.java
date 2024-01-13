@@ -42,7 +42,7 @@ public final class AmassTheComponents extends CardImpl {
 
 class AmassTheComponentsEffect extends OneShotEffect {
 
-    public AmassTheComponentsEffect() {
+    AmassTheComponentsEffect() {
         super(Outcome.DrawCard);
         this.staticText = "Draw three cards, then put a card from your hand on the bottom of your library";
     }

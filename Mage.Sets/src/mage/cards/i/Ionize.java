@@ -38,7 +38,7 @@ public final class Ionize extends CardImpl {
 
 class IonizeEffect extends OneShotEffect {
 
-    public IonizeEffect() {
+    IonizeEffect() {
         super(Outcome.Benefit);
         this.staticText = "Counter target spell. "
                 + "{this} deals 2 damage to that spell's controller.";

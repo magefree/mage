@@ -48,7 +48,7 @@ public final class WarrenPilferers extends CardImpl {
 
 class WarrenPilferersReturnEffect extends OneShotEffect {
 
-    public WarrenPilferersReturnEffect() {
+    WarrenPilferersReturnEffect() {
         super(Outcome.ReturnToHand);
         staticText = "return target creature card from your graveyard to your hand. If that card is a Goblin card, Warren Pilferers gains haste until end of turn";
     }

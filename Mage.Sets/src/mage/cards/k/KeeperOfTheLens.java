@@ -75,7 +75,7 @@ class KeeperOfTheLensLookFaceDownAbility extends ActivatedAbilityImpl {
 
 class KeeperOfTheLensLookFaceDownEffect extends OneShotEffect {
 
-    public KeeperOfTheLensLookFaceDownEffect() {
+    KeeperOfTheLensLookFaceDownEffect() {
         super(Outcome.Benefit);
         this.staticText = "You may look at face-down creatures you don't control any time";
     }

@@ -42,7 +42,7 @@ public final class Doomsday extends CardImpl {
 
 class DoomsdayEffect extends OneShotEffect {
 
-    public DoomsdayEffect() {
+    DoomsdayEffect() {
         super(Outcome.LoseLife);
         staticText = "Search your library and graveyard for five cards and exile the rest. Put the chosen cards on top of your library in any order";
     }

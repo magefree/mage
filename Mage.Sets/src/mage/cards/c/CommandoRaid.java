@@ -102,7 +102,7 @@ class CommandoRaidTriggeredAbility extends TriggeredAbilityImpl {
 
 class CommandoRaidEffect extends OneShotEffect {
 
-    public CommandoRaidEffect() {
+    CommandoRaidEffect() {
         super(Outcome.Damage);
         staticText = "it deals that much damage to target creature that player controls";
     }

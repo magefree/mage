@@ -55,7 +55,7 @@ public final class BarbedWire extends CardImpl {
 
 class BarbwireDamageEffect extends OneShotEffect {
 
-    public BarbwireDamageEffect() {
+    BarbwireDamageEffect() {
         super(Outcome.Damage);
         this.staticText = "";
     }

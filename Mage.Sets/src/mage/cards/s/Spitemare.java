@@ -81,7 +81,7 @@ class SpitemareTriggeredAbility extends TriggeredAbilityImpl {
 
 class SpitemareEffect extends OneShotEffect {
 
-    public SpitemareEffect() {
+    SpitemareEffect() {
         super(Outcome.Damage);
         staticText = "it deals that much damage to any target";
     }

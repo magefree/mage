@@ -48,7 +48,7 @@ public final class DeepglowSkate extends CardImpl {
 
 class DeepglowSkateEffect extends OneShotEffect {
 
-    public DeepglowSkateEffect() {
+    DeepglowSkateEffect() {
         super(Outcome.Benefit);
         this.staticText = "double the number of each kind of counter on any number of target permanents";
     }

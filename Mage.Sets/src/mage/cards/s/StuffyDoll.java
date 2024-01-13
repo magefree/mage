@@ -87,7 +87,7 @@ class StuffyDollTriggeredAbility extends TriggeredAbilityImpl {
 
 class StuffyDollGainLifeEffect extends OneShotEffect {
 
-    public StuffyDollGainLifeEffect() {
+    StuffyDollGainLifeEffect() {
         super(Outcome.GainLife);
         staticText = "it deals that much damage to the chosen player";
     }

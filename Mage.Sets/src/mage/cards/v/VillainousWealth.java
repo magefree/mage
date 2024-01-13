@@ -45,7 +45,7 @@ public final class VillainousWealth extends CardImpl {
 
 class VillainousWealthEffect extends OneShotEffect {
 
-    public VillainousWealthEffect() {
+    VillainousWealthEffect() {
         super(Outcome.PlayForFree);
         this.staticText = "Target opponent exiles the top X cards of their library. "
                 + "You may cast any number of spells with mana value X "

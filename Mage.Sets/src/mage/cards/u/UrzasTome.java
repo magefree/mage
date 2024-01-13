@@ -46,7 +46,7 @@ public final class UrzasTome extends CardImpl {
 
 class UrzasTomeEffect extends OneShotEffect {
 
-    public UrzasTomeEffect() {
+    UrzasTomeEffect() {
         super(Outcome.Discard);
         staticText = "Draw a card. Then discard a card unless you exile a historic card from your graveyard";
     }

@@ -60,7 +60,7 @@ public final class PrecognitionField extends CardImpl {
 
 class PrecognitionFieldExileEffect extends OneShotEffect {
 
-    public PrecognitionFieldExileEffect() {
+    PrecognitionFieldExileEffect() {
         super(Outcome.Benefit);
         staticText = "exile the top card of your library";
     }

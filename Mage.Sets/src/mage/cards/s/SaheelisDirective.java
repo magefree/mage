@@ -47,7 +47,7 @@ public final class SaheelisDirective extends CardImpl {
 }
 class SaheelisDirectiveEffect extends OneShotEffect {
 
-    public SaheelisDirectiveEffect() {
+    SaheelisDirectiveEffect() {
         super(Outcome.PutCardInPlay);
         staticText = "Reveal the top X cards of your library. "
                 + "You may put any number of artifact cards with "

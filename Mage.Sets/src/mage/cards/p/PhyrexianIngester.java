@@ -60,7 +60,7 @@ public final class PhyrexianIngester extends CardImpl {
 
 class PhyrexianIngesterImprintEffect extends OneShotEffect {
 
-    public PhyrexianIngesterImprintEffect() {
+    PhyrexianIngesterImprintEffect() {
         super(Outcome.Exile);
         this.staticText = "exile target nontoken creature";
     }

@@ -48,7 +48,7 @@ public final class InciteHysteria extends CardImpl {
 
 class InciteHysteriaEffect extends OneShotEffect {
 
-    public InciteHysteriaEffect() {
+    InciteHysteriaEffect() {
         super(Outcome.AddAbility);
         this.staticText = "Until end of turn, target creature and each other creature that shares a color with it gain \"This creature can't block.\"";
     }

@@ -104,7 +104,7 @@ class OpenSeasonRestrictionEffect extends RestrictionEffect {
 
 class OpenSeasonEffect extends OneShotEffect {
 
-    public OpenSeasonEffect() {
+    OpenSeasonEffect() {
         super(Outcome.LoseLife);
         staticText = "that creature's controller loses 2 life. Each other player gains 2 life";
     }

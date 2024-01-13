@@ -45,7 +45,7 @@ public final class DeceiverOfForm extends CardImpl {
 
 class DeceiverOfFormEffect extends OneShotEffect {
 
-    public DeceiverOfFormEffect() {
+    DeceiverOfFormEffect() {
         super(Outcome.Copy);
         this.staticText = "reveal the top card of your library. If a creature card is revealed this way, you may have creatures you control other than Deceiver of Form becomes copies of that card until end of turn. You may put that card on the bottom of your library";
     }

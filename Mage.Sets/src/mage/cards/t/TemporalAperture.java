@@ -49,7 +49,7 @@ public final class TemporalAperture extends CardImpl {
 
 class TemporalApertureEffect extends OneShotEffect {
 
-    public TemporalApertureEffect() {
+    TemporalApertureEffect() {
         super(Outcome.Neutral);
         staticText = "Shuffle your library, then reveal the top card. "
                 + "Until end of turn, for as long as that card remains on "

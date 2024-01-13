@@ -84,7 +84,7 @@ enum GuffRewritesHistoryAdjuster implements TargetAdjuster {
 
 class GuffRewritesHistoryEffect extends OneShotEffect {
 
-    public GuffRewritesHistoryEffect() {
+    GuffRewritesHistoryEffect() {
         super(Outcome.Neutral);
     }
 

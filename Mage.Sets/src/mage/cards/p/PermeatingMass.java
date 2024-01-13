@@ -43,7 +43,7 @@ public final class PermeatingMass extends CardImpl {
 
 class PermeatingMassEffect extends OneShotEffect {
 
-    public PermeatingMassEffect() {
+    PermeatingMassEffect() {
         super(Outcome.Copy);
         this.staticText = "that creature becomes a copy of {this}.";
     }

@@ -77,7 +77,7 @@ class PsychicSurgeryTriggeredAbility extends TriggeredAbilityImpl {
 
 class PsychicSurgeryEffect extends OneShotEffect {
 
-    public PsychicSurgeryEffect() {
+    PsychicSurgeryEffect() {
         super(Outcome.Exile);
         this.staticText = "you may look at the top two cards of that library. You may exile one of those cards. Then put the rest on top of that library in any order";
     }

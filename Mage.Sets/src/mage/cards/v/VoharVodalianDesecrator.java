@@ -59,7 +59,7 @@ public final class VoharVodalianDesecrator extends CardImpl {
 
 class VoharVodalianDesecratorEffect extends OneShotEffect {
 
-    public VoharVodalianDesecratorEffect() {
+    VoharVodalianDesecratorEffect() {
         super(Outcome.DrawCard);
         this.staticText = "Draw a card, then discard a card. If you discarded an instant or sorcery card this way, each opponent loses 1 life and you gain 1 life.";
     }

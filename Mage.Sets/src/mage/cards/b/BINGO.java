@@ -67,7 +67,7 @@ public final class BINGO extends CardImpl {
 
 class BingoEffect extends OneShotEffect {
 
-    public BingoEffect() {
+    BingoEffect() {
         super(Outcome.Neutral);
         staticText = "put a chip counter on its mana value";
     }

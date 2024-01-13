@@ -51,7 +51,7 @@ public final class Reconnaissance extends CardImpl {
 
 class ReconnaissanceRemoveFromCombatEffect extends OneShotEffect {
 
-    public ReconnaissanceRemoveFromCombatEffect() {
+    ReconnaissanceRemoveFromCombatEffect() {
         super(Outcome.Benefit);
         this.staticText = "Remove target attacking creature you control from combat and untap it";
     }

@@ -49,7 +49,7 @@ public final class GoblinFestival extends CardImpl {
 
 class GoblinFestivalChangeControlEffect extends OneShotEffect {
 
-    public GoblinFestivalChangeControlEffect() {
+    GoblinFestivalChangeControlEffect() {
         super(Outcome.Benefit);
         this.staticText = "Flip a coin. If you lose the flip, choose one of your opponents. That player gains control of {this}";
     }

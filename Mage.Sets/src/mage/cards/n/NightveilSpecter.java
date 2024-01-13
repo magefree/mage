@@ -68,7 +68,7 @@ public final class NightveilSpecter extends CardImpl {
 
 class NightveilSpecterExileEffect extends OneShotEffect {
 
-    public NightveilSpecterExileEffect() {
+    NightveilSpecterExileEffect() {
         super(Outcome.Discard);
         staticText = "that player exiles the top card of their library";
     }

@@ -60,7 +60,7 @@ public final class FallOfTheImpostor extends CardImpl {
 
 class FallOfTheImpostorEffect extends OneShotEffect {
 
-    public FallOfTheImpostorEffect() {
+    FallOfTheImpostorEffect() {
         super(Outcome.Exile);
         staticText = "Exile a creature with the greatest power among creatures target opponent controls";
     }

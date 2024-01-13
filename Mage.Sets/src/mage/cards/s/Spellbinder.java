@@ -149,7 +149,7 @@ class SpellbinderImprintEffect extends OneShotEffect {
 
 class SpellbinderCopyEffect extends OneShotEffect {
 
-    public SpellbinderCopyEffect() {
+    SpellbinderCopyEffect() {
         super(Outcome.Copy);
         this.staticText = "You may copy the exiled card. If you do, "
                 + "you may cast the copy without paying its mana cost";

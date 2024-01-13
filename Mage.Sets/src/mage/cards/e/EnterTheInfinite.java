@@ -79,7 +79,7 @@ class CardsInControllerLibraryCount implements DynamicValue {
 
 class PutCardOnLibraryEffect extends OneShotEffect {
 
-    public PutCardOnLibraryEffect() {
+    PutCardOnLibraryEffect() {
         super(Outcome.DrawCard);
         staticText = "Then put a card from your hand on top of your library";
     }

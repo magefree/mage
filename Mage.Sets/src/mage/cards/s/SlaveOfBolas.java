@@ -50,7 +50,7 @@ public final class SlaveOfBolas extends CardImpl {
 
 class SlaveOfBolasEffect extends OneShotEffect {
 
-    public SlaveOfBolasEffect() {
+    SlaveOfBolasEffect() {
         super(Outcome.Sacrifice);
         staticText = "Sacrifice it at the beginning of the next end step";
     }

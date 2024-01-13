@@ -43,7 +43,7 @@ public final class DazzlingReflection extends CardImpl {
 
 class DazzlingReflectionEffect extends OneShotEffect {
 
-    public DazzlingReflectionEffect() {
+    DazzlingReflectionEffect() {
         super(Outcome.Benefit);
         this.staticText = "You gain life equal to target creature's power. The next time that creature would deal damage this turn, prevent that damage";
     }

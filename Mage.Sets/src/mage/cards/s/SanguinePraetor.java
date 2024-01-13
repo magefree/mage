@@ -53,7 +53,7 @@ public final class SanguinePraetor extends CardImpl {
 
 class SanguinePraetorEffect extends OneShotEffect {
 
-    public SanguinePraetorEffect() {
+    SanguinePraetorEffect() {
         super(Outcome.Damage);
         staticText = "Destroy each creature with the same mana value as the sacrificed creature";
     }

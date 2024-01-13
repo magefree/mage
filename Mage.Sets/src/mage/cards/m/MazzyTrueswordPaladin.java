@@ -112,7 +112,7 @@ class MazzyAttackTriggeredAbility extends AttacksAllTriggeredAbility {
 
 class MazzyExileEffect extends OneShotEffect {
 
-    public MazzyExileEffect() {
+    MazzyExileEffect() {
         super(Outcome.Benefit);
         staticText = "exile it. Until the end of your next turn, you may cast that card.";
     }

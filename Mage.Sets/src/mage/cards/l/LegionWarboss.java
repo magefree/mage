@@ -60,7 +60,7 @@ public final class LegionWarboss extends CardImpl {
 
 class LegionWarbossEffect extends OneShotEffect {
 
-    public LegionWarbossEffect() {
+    LegionWarbossEffect() {
         super(Outcome.Benefit);
         staticText = "create a 1/1 red Goblin creature token. "
                 + "That token gains haste until end of turn "

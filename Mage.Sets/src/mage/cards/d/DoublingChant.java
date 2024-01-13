@@ -45,7 +45,7 @@ public final class DoublingChant extends CardImpl {
 
 class DoublingChantEffect extends OneShotEffect {
 
-    public DoublingChantEffect() {
+    DoublingChantEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "For each creature you control, " +
                 "you may search your library for a creature card with the same name as that creature. " +

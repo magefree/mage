@@ -54,7 +54,7 @@ public final class GraveBirthing extends CardImpl {
 
 class GraveBirthingEffect extends OneShotEffect {
 
-    public GraveBirthingEffect() {
+    GraveBirthingEffect() {
         super(Outcome.Benefit);
         this.staticText = "Target opponent exiles a card from their graveyard";
     }

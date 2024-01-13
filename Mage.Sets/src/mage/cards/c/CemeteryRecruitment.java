@@ -42,7 +42,7 @@ public final class CemeteryRecruitment extends CardImpl {
 
 class CemeteryRecruitmentEffect extends OneShotEffect {
 
-    public CemeteryRecruitmentEffect() {
+    CemeteryRecruitmentEffect() {
         super(Outcome.Benefit);
         staticText = "Return target creature card from your graveyard to your hand. If it's a Zombie card, draw a card";
     }

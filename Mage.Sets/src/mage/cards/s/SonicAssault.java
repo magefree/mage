@@ -42,7 +42,7 @@ public final class SonicAssault extends CardImpl {
 
 class SonicAssaultEffect extends OneShotEffect {
 
-    public SonicAssaultEffect() {
+    SonicAssaultEffect() {
         super(Outcome.Benefit);
         this.staticText = "Tap target creature. "
                 + "{this} deals 2 damage to that creature's controller.";

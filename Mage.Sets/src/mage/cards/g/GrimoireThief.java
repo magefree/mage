@@ -70,7 +70,7 @@ public final class GrimoireThief extends CardImpl {
 
 class GrimoireThiefExileEffect extends OneShotEffect {
 
-    public GrimoireThiefExileEffect() {
+    GrimoireThiefExileEffect() {
         super(Outcome.Discard);
         staticText = "exile the top three cards of target opponent's library face down";
     }
@@ -169,7 +169,7 @@ class GrimoireThiefLookEffect extends AsThoughEffectImpl {
 
 class GrimoireThiefCounterspellEffect extends OneShotEffect {
 
-    public GrimoireThiefCounterspellEffect() {
+    GrimoireThiefCounterspellEffect() {
         super(Outcome.Discard);
         staticText = "Turn all cards exiled with {this} face up. "
                 + "Counter all spells with those names";

@@ -134,7 +134,7 @@ class GodsendTriggeredAbility extends TriggeredAbilityImpl {
 
 class GodsendExileEffect extends OneShotEffect {
 
-    public GodsendExileEffect() {
+    GodsendExileEffect() {
         super(Outcome.Exile);
         this.staticText = "you may exile one of those creatures";
     }

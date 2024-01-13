@@ -58,7 +58,7 @@ public final class HarshDeceiver extends CardImpl {
 
 class HarshDeceiverEffect extends OneShotEffect {
 
-    public HarshDeceiverEffect() {
+    HarshDeceiverEffect() {
         super(Outcome.BoostCreature);
         this.staticText = "Reveal the top card of your library. If it's a land card, untap {this} and it gets +1/+1 until end of turn";
     }

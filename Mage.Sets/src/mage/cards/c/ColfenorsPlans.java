@@ -57,7 +57,7 @@ public final class ColfenorsPlans extends CardImpl {
 
 class ColfenorsPlansExileEffect extends OneShotEffect {
 
-    public ColfenorsPlansExileEffect() {
+    ColfenorsPlansExileEffect() {
         super(Outcome.DrawCard);
         staticText = "exile the top seven cards of your library face down";
     }

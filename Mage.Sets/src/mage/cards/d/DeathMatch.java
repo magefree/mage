@@ -58,7 +58,7 @@ enum DeathMatchAdjuster implements TargetAdjuster {
 
 class DeathMatchEffect extends OneShotEffect {
 
-    public DeathMatchEffect() {
+    DeathMatchEffect() {
         super(Outcome.UnboostCreature);
         staticText = "that creature's controller may have target creature of their choice get -3/-3 until end of turn.";
     }

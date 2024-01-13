@@ -144,7 +144,7 @@ class JinxedChokerDynamicValue implements DynamicValue {
 
 class JinxedChokerCounterEffect extends OneShotEffect {
 
-    public JinxedChokerCounterEffect() {
+    JinxedChokerCounterEffect() {
         super(Outcome.Detriment);
         this.staticText = "Put a charge counter on {this} or remove one from it";
     }

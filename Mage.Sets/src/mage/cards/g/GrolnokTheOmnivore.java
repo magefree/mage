@@ -94,7 +94,7 @@ class GrolnokTheOmnivoreTriggeredAbility extends TriggeredAbilityImpl {
 
 class GrolnokTheOmnivoreExileEffect extends OneShotEffect {
 
-    public GrolnokTheOmnivoreExileEffect() {
+    GrolnokTheOmnivoreExileEffect() {
         super(Outcome.Exile);
         staticText = "exile it with a croak counter on it";
     }

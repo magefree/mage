@@ -79,7 +79,7 @@ class OrimsChantCantCastEffect extends ContinuousRuleModifyingEffectImpl {
 
 class OrimsChantEffect extends OneShotEffect {
 
-    public OrimsChantEffect() {
+    OrimsChantEffect() {
         super(Outcome.Detriment);
         this.staticText = "if this spell was kicked, creatures can't attack this turn";
     }

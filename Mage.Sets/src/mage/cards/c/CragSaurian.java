@@ -45,7 +45,7 @@ public final class CragSaurian extends CardImpl {
 
 class CragSaurianEffect extends OneShotEffect {
 
-    public CragSaurianEffect() {
+    CragSaurianEffect() {
         super(Outcome.GainControl);
         this.staticText = "that source's controller gains control of {this}";
     }

@@ -51,7 +51,7 @@ public final class CoalitionRelic extends CardImpl {
 
 class CoalitionRelicEffect extends OneShotEffect {
 
-    public CoalitionRelicEffect() {
+    CoalitionRelicEffect() {
         super(Outcome.PutManaInPool);
         this.staticText = "remove all charge counters from Coalition Relic. Add one mana of any color for each charge counter removed this way";
     }

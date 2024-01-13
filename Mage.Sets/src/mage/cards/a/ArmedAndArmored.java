@@ -78,7 +78,7 @@ class ArmedAndArmoredEffect extends ContinuousEffectImpl {
 
 class ArmedAndArmoredEquipEffect extends OneShotEffect {
 
-    public ArmedAndArmoredEquipEffect() {
+    ArmedAndArmoredEquipEffect() {
         super(Outcome.Benefit);
         staticText = "Choose a Dwarf you control. Attach any number of Equipment you control to it.";
     }

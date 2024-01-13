@@ -49,7 +49,7 @@ public final class LockjawSnapper extends CardImpl {
 
 class LockjawSnapperEffect extends OneShotEffect {
 
-    public LockjawSnapperEffect() {
+    LockjawSnapperEffect() {
         super(Outcome.Neutral);
         this.staticText = "put a -1/-1 counter on each creature with a -1/-1 counter on it";
     }

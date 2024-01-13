@@ -58,7 +58,7 @@ public final class CaptivatingGlance extends CardImpl {
 
 class CaptivatingGlanceEffect extends OneShotEffect {
 
-    public CaptivatingGlanceEffect() {
+    CaptivatingGlanceEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "clash with an opponent. If you win, gain control of enchanted creature. Otherwise, that player gains control of enchanted creature";
     }

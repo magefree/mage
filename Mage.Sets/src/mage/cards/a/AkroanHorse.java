@@ -60,7 +60,7 @@ public final class AkroanHorse extends CardImpl {
 
 class AkroanHorseChangeControlEffect extends OneShotEffect {
 
-    public AkroanHorseChangeControlEffect() {
+    AkroanHorseChangeControlEffect() {
         super(Outcome.Benefit);
         this.staticText = "an opponent gains control of it";
     }

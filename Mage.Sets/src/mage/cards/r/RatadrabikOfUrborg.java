@@ -76,7 +76,7 @@ public final class RatadrabikOfUrborg extends CardImpl {
 
 class RatadrabikOfUrborgEffect extends OneShotEffect {
 
-    public RatadrabikOfUrborgEffect() {
+    RatadrabikOfUrborgEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "create a token that's a copy of that creature, " +
                 "except it's not legendary and it's a 2/2 black Zombie in addition to its other colors and types.";

@@ -52,7 +52,7 @@ public final class GoblinArchaeologist extends CardImpl {
 
 class GoblinArchaeologistEffect extends OneShotEffect {
 
-    public GoblinArchaeologistEffect() {
+    GoblinArchaeologistEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "Flip a coin. If you win the flip, destroy target artifact and untap {this}. If you lose the flip, sacrifice {this}";
     }

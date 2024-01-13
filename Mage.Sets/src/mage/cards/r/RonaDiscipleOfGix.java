@@ -114,7 +114,7 @@ class RonaDiscipleOfGixPlayNonLandEffect extends AsThoughEffectImpl {
 
 class RonaDiscipleOfGixExileEffect extends OneShotEffect {
 
-    public RonaDiscipleOfGixExileEffect() {
+    RonaDiscipleOfGixExileEffect() {
         super(Outcome.Exile);
         this.staticText = "Exile the top card of your library";
     }

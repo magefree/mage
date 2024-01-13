@@ -59,7 +59,7 @@ public final class CrownOfTheAges extends CardImpl {
 
 class CrownOfTheAgesEffect extends OneShotEffect {
 
-    public CrownOfTheAgesEffect() {
+    CrownOfTheAgesEffect() {
         super(Outcome.BoostCreature);
         this.staticText = "Attach target Aura attached to a creature to another creature";
     }

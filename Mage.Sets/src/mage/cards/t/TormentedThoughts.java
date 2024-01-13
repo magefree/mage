@@ -46,7 +46,7 @@ public final class TormentedThoughts extends CardImpl {
 
 class TormentedThoughtsDiscardEffect extends OneShotEffect {
 
-    public TormentedThoughtsDiscardEffect() {
+    TormentedThoughtsDiscardEffect() {
         super(Outcome.Discard);
         this.staticText = "Target player discards a number of cards equal to the sacrificed creature's power";
     }

@@ -43,7 +43,7 @@ public final class HereticsPunishment extends CardImpl {
 
 class HereticsPunishmentEffect extends OneShotEffect {
 
-    public HereticsPunishmentEffect() {
+    HereticsPunishmentEffect() {
         super(Outcome.Damage);
         staticText = "Choose any target, then mill three cards. {this} deals damage to that permanent or player equal to the highest mana value among the milled cards";
     }

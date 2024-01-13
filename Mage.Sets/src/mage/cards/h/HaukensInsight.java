@@ -60,7 +60,7 @@ public final class HaukensInsight extends CardImpl {
 
 class HaukensInsightExileEffect extends OneShotEffect {
 
-    public HaukensInsightExileEffect() {
+    HaukensInsightExileEffect() {
         super(Outcome.Benefit);
         staticText = "exile the top card of your library face down. You may look at that card for as long as it remains exiled";
     }

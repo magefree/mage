@@ -111,7 +111,7 @@ class WormsOfTheEarthEnterEffect extends ContinuousRuleModifyingEffectImpl {
 
 class WormsOfTheEarthDestroyEffect extends OneShotEffect {
 
-    public WormsOfTheEarthDestroyEffect() {
+    WormsOfTheEarthDestroyEffect() {
         super(Outcome.Benefit);
         this.staticText = "any player may sacrifice two lands or have {this} deal 5 damage to that player. If a player does either, destroy {this}";
     }

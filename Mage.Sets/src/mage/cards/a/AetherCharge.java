@@ -88,7 +88,7 @@ class AetherChargeTriggeredAbility extends TriggeredAbilityImpl {
 
 class AetherChargeEffect extends OneShotEffect {
 
-    public AetherChargeEffect() {
+    AetherChargeEffect() {
         super(Outcome.Damage);
         staticText = "you may have it deal 4 damage to target opponent or planeswalker";
     }

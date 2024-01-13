@@ -39,7 +39,7 @@ public final class BalanceOfPower extends CardImpl {
 
 class BalanceOfPowerEffect extends OneShotEffect {
 
-    public BalanceOfPowerEffect() {
+    BalanceOfPowerEffect() {
         super(Outcome.DrawCard);
         this.staticText = "If target opponent has more cards in hand than you, draw cards equal to the difference";
     }

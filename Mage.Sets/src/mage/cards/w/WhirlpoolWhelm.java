@@ -41,7 +41,7 @@ public final class WhirlpoolWhelm extends CardImpl {
 
 class WhirlpoolWhelmEffect extends OneShotEffect {
 
-    public WhirlpoolWhelmEffect() {
+    WhirlpoolWhelmEffect() {
         super(Outcome.ReturnToHand);
         this.staticText = "Clash with an opponent, then return target creature to its owner's hand. If you win, you may put that creature on top of its owner's library instead";
     }

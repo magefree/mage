@@ -49,7 +49,7 @@ public final class SanctumPrelate extends CardImpl {
 
 class ChooseNumberEffect extends OneShotEffect {
 
-    public ChooseNumberEffect() {
+    ChooseNumberEffect() {
         super(Outcome.Detriment);
         staticText = "choose a number";
     }

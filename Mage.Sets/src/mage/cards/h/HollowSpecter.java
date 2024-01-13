@@ -48,7 +48,7 @@ public final class HollowSpecter extends CardImpl {
 
 class HollowSpecterEffect extends OneShotEffect {
 
-    public HollowSpecterEffect() {
+    HollowSpecterEffect() {
         super(Outcome.Discard);
         staticText = "you may pay {X}. If you do, that player reveals X cards from their hand and you choose one of them. That player discards that card";
     }

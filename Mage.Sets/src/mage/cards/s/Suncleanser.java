@@ -63,7 +63,7 @@ public final class Suncleanser extends CardImpl {
 
 class SuncleanserRemoveCountersEffect extends OneShotEffect {
 
-    public SuncleanserRemoveCountersEffect(boolean player) {
+    SuncleanserRemoveCountersEffect(boolean player) {
         super(Outcome.Benefit);
         if (player) {
             staticText = "Target opponent loses all counters";

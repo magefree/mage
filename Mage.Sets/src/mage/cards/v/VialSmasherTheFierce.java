@@ -100,7 +100,7 @@ class VialSmasherTheFierceTriggeredAbility extends SpellCastControllerTriggeredA
 
 class VialSmasherTheFierceEffect extends OneShotEffect {
 
-    public VialSmasherTheFierceEffect() {
+    VialSmasherTheFierceEffect() {
         super(Outcome.Damage);
         this.staticText = "{this} choose an opponent at random. {this} deals damage equal to that spell's mana value to that player or a planeswalker that player controls";
     }

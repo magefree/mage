@@ -62,7 +62,7 @@ public final class SwordOfTheAges extends CardImpl {
 
 class SwordOfTheAgesEffect extends OneShotEffect {
 
-    public SwordOfTheAgesEffect() {
+    SwordOfTheAgesEffect() {
         super(Outcome.Damage);
         this.staticText = "{this} deals X damage to any target, where X is the total power of the creatures sacrificed this way, then exile {this} and those creature cards";
     }

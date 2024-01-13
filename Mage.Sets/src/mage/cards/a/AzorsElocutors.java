@@ -77,7 +77,7 @@ class AzorsElocutorsTriggeredAbility extends TriggeredAbilityImpl {
 
 class AzorsElocutorsEffect extends OneShotEffect {
 
-    public AzorsElocutorsEffect() {
+    AzorsElocutorsEffect() {
         super(Outcome.Benefit);
         staticText = "put a filibuster counter on Azor's Elocutors. Then if Azor's Elocutors has five or more filibuster counters on it, you win the game";
     }

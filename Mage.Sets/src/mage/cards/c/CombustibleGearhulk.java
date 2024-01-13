@@ -52,7 +52,7 @@ public final class CombustibleGearhulk extends CardImpl {
 
 class CombustibleGearhulkEffect extends OneShotEffect {
 
-    public CombustibleGearhulkEffect() {
+    CombustibleGearhulkEffect() {
         super(Outcome.AIDontUseIt);
         staticText = "target opponent may have you draw three cards. If the player doesn't, you mill three cards, then {this} deals damage to that player equal to the total mana value of those cards";
     }
@@ -93,7 +93,7 @@ class CombustibleGearhulkEffect extends OneShotEffect {
 
 class CombustibleGearhulkMillAndDamageEffect extends OneShotEffect {
 
-    public CombustibleGearhulkMillAndDamageEffect() {
+    CombustibleGearhulkMillAndDamageEffect() {
         super(Outcome.Damage);
     }
 

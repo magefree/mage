@@ -54,7 +54,7 @@ public final class ElderscaleWurm extends CardImpl {
 
 class ElderscaleWurmSetLifeEffect extends OneShotEffect {
 
-    public ElderscaleWurmSetLifeEffect() {
+    ElderscaleWurmSetLifeEffect() {
         super(Outcome.Benefit);
         this.staticText = "if your life total is less than 7, your life total becomes 7";
     }

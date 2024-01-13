@@ -128,7 +128,7 @@ class VengefulPharaohTriggeredAbility extends TriggeredAbilityImpl {
 
 class VengefulPharaohEffect extends OneShotEffect {
 
-    public VengefulPharaohEffect() {
+    VengefulPharaohEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "destroy target attacking creature, then put {this} on top of your library";
     }

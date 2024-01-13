@@ -39,7 +39,7 @@ public final class ChandrasIgnition extends CardImpl {
 
 class ChandrasIgnitionEffect extends OneShotEffect {
 
-    public ChandrasIgnitionEffect() {
+    ChandrasIgnitionEffect() {
         super(Outcome.Benefit);
         this.staticText = "Target creature you control deals damage equal to its power to each other creature and each opponent";
     }

@@ -39,7 +39,7 @@ public final class MercyKilling extends CardImpl {
 
 class MercyKillingTokenEffect extends OneShotEffect {
 
-    public MercyKillingTokenEffect() {
+    MercyKillingTokenEffect() {
         super(Outcome.PutCreatureInPlay);
         staticText = ", then creates X 1/1 green and white Elf Warrior creature tokens, where X is that creature's power";
     }

@@ -61,7 +61,7 @@ public final class IntetTheDreamer extends CardImpl {
 
 class IntetTheDreamerExileEffect extends OneShotEffect {
 
-    public IntetTheDreamerExileEffect() {
+    IntetTheDreamerExileEffect() {
         super(Outcome.Benefit);
         staticText = "exile the top card of your library face down. You may play that card without paying its mana cost for as long as Intet remains on the battlefield";
     }

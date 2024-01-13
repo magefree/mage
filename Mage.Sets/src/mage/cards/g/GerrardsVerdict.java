@@ -41,7 +41,7 @@ public final class GerrardsVerdict extends CardImpl {
 
 class GerrardsVerdictEffect extends OneShotEffect {
 
-    public GerrardsVerdictEffect() {
+    GerrardsVerdictEffect() {
         super(Outcome.Benefit);
         this.staticText = "Target player discards two cards. You gain 3 life for each land card discarded this way";
     }

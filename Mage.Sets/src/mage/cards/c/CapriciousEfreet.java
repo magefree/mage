@@ -61,7 +61,7 @@ public final class CapriciousEfreet extends CardImpl {
 
 class CapriciousEfreetEffect extends OneShotEffect {
 
-    public CapriciousEfreetEffect() {
+    CapriciousEfreetEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "choose target nonland permanent you control and up to two target nonland permanents you don't control. Destroy one of them at random";
     }

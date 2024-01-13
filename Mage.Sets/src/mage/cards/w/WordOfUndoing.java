@@ -45,7 +45,7 @@ public final class WordOfUndoing extends CardImpl {
 
 class WordOfUndoingReturnToHandEffect extends OneShotEffect {
 
-    public WordOfUndoingReturnToHandEffect() {
+    WordOfUndoingReturnToHandEffect() {
         super(Outcome.ReturnToHand);
         this.staticText = "Return target creature and all white Auras you own attached to it to their owners' hands.";
     }
@@ -79,4 +79,3 @@ class WordOfUndoingReturnToHandEffect extends OneShotEffect {
         return false;
     }
 }
-

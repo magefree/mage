@@ -62,7 +62,7 @@ public final class BoundDetermined extends SplitCard {
 
 class BoundEffect extends OneShotEffect {
 
-    public BoundEffect() {
+    BoundEffect() {
         super(Outcome.ReturnToHand);
         this.staticText = "Sacrifice a creature. Return up to X cards from your graveyard to your hand, where X is the number of colors that creature was";
     }

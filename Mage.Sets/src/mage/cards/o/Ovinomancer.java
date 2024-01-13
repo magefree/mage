@@ -68,7 +68,7 @@ public final class Ovinomancer extends CardImpl {
 
 class OvinomancerEffect extends OneShotEffect {
 
-    public OvinomancerEffect() {
+    OvinomancerEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "That creature's controller creates a 0/1 green Sheep creature token";
     }

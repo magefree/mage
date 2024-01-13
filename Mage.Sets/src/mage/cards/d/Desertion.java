@@ -39,7 +39,7 @@ public final class Desertion extends CardImpl {
 
 class DesertionEffect extends OneShotEffect {
 
-    public DesertionEffect() {
+    DesertionEffect() {
         super(Outcome.Detriment);
         staticText = "counter target spell. If an artifact or creature spell is countered this way, put that card onto the battlefield under your control instead of into its owner's graveyard";
     }

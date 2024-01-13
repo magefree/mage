@@ -39,7 +39,7 @@ public final class CertainDeath extends CardImpl {
 
 class CertainDeathEffect extends OneShotEffect {
 
-    public CertainDeathEffect() {
+    CertainDeathEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "Destroy target creature. Its controller loses 2 life and you gain 2 life";
     }

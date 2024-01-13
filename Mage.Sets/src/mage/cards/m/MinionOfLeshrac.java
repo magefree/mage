@@ -59,7 +59,7 @@ public final class MinionOfLeshrac extends CardImpl {
 
 class MinionLeshracEffect extends OneShotEffect {
 
-    public MinionLeshracEffect() {
+    MinionLeshracEffect() {
         super(Outcome.Sacrifice);
         staticText = "{this} deals 5 damage to you unless you sacrifice a creature other than {this}. If {this} deals damage to you this way, tap it";
     }

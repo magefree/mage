@@ -75,7 +75,7 @@ class GrimFeastTriggeredAbility extends PutIntoGraveFromBattlefieldAllTriggeredA
 
 class GrimFeastEffect extends OneShotEffect {
 
-    public GrimFeastEffect() {
+    GrimFeastEffect() {
         super(Outcome.GainLife);
     }
 

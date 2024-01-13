@@ -70,7 +70,7 @@ public final class CircuDimirLobotomist extends CardImpl {
 
 class CircuDimirLobotomistEffect extends OneShotEffect {
 
-    public CircuDimirLobotomistEffect() {
+    CircuDimirLobotomistEffect() {
         super(Outcome.Detriment);
         this.staticText = "exile the top card of target player's library";
     }

@@ -58,7 +58,7 @@ public final class VortexElemental extends CardImpl {
 
 class VortexElementalEffect extends OneShotEffect {
 
-    public VortexElementalEffect() {
+    VortexElementalEffect() {
         super(Outcome.Benefit);
         this.staticText = "Put {this} and each creature blocking or blocked by it on top of their owners' libraries, then those players shuffle";
     }

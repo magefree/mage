@@ -45,7 +45,7 @@ public final class ReversalOfFortune extends CardImpl {
 
 class ReversalOfFortuneEffect extends OneShotEffect {
 
-    public ReversalOfFortuneEffect() {
+    ReversalOfFortuneEffect() {
         super(Outcome.Copy);
         this.staticText = "Target opponent reveals their hand. You may copy an "
                 + "instant or sorcery card in it. If you do, you may cast the "

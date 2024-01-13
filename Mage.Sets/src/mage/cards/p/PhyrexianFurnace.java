@@ -55,7 +55,7 @@ public final class PhyrexianFurnace extends CardImpl {
 
 class PhyrexianFurnaceEffect extends OneShotEffect {
 
-    public PhyrexianFurnaceEffect() {
+    PhyrexianFurnaceEffect() {
         super(Outcome.Benefit);
         this.staticText = "exile the bottom card of target player's graveyard";
     }

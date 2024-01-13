@@ -56,7 +56,7 @@ public final class FallOfTheThran extends CardImpl {
 
 class FallOfTheThranReturnEffect extends OneShotEffect {
 
-    public FallOfTheThranReturnEffect() {
+    FallOfTheThranReturnEffect() {
         super(Outcome.PutLandInPlay);
         this.staticText = "each player returns two land cards from their graveyard to the battlefield";
     }

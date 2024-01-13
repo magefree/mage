@@ -64,7 +64,7 @@ public final class SkinInvasion extends CardImpl {
 
 class SkinInvasionEffect extends OneShotEffect {
 
-    public SkinInvasionEffect() {
+    SkinInvasionEffect() {
         super(Outcome.PutCardInPlay);
         this.staticText = "return {this} to the battlefield transformed under your control";
     }

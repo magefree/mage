@@ -81,7 +81,7 @@ enum DiluvianPrimordialAdjuster implements TargetAdjuster {
 
 class DiluvianPrimordialEffect extends OneShotEffect {
 
-    public DiluvianPrimordialEffect() {
+    DiluvianPrimordialEffect() {
         super(Outcome.PlayForFree);
         this.staticText = "for each opponent, you may cast up to one target "
                 + "instant or sorcery card from that player's graveyard without "

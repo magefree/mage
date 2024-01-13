@@ -44,7 +44,7 @@ public final class Besmirch extends CardImpl {
 
 class BesmirchEffect extends OneShotEffect {
 
-    public BesmirchEffect() {
+    BesmirchEffect() {
         super(Outcome.GainControl);
         staticText = "Until end of turn, gain control of target creature and it gains haste. Untap and goad that creature";
     }

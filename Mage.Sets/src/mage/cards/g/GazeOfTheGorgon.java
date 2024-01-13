@@ -48,7 +48,7 @@ public final class GazeOfTheGorgon extends CardImpl {
 
 class GazeOfTheGorgonCreateDelayedTriggeredAbilityEffect extends OneShotEffect {
 
-    public GazeOfTheGorgonCreateDelayedTriggeredAbilityEffect() {
+    GazeOfTheGorgonCreateDelayedTriggeredAbilityEffect() {
         super(Outcome.Benefit);
         this.staticText = "At this turn's next end of combat, destroy all creatures that blocked or were blocked by it this turn";
     }

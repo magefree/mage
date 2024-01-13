@@ -50,7 +50,7 @@ public final class CabalTherapy extends CardImpl {
 
 class CabalTherapyEffect extends OneShotEffect {
 
-    public CabalTherapyEffect() {
+    CabalTherapyEffect() {
         super(Outcome.Discard);
         staticText = "Target player reveals their hand and discards all cards with that name";
     }

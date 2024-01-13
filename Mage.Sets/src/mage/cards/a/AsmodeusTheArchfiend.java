@@ -130,7 +130,7 @@ class AsmodeusTheArchfiendReturnAbility extends ActivatedAbilityImpl {
 
 class AsmodeusTheArchfiendReturnEffect extends OneShotEffect {
 
-    public AsmodeusTheArchfiendReturnEffect() {
+    AsmodeusTheArchfiendReturnEffect() {
         super(Outcome.DrawCard);
         this.staticText = "Return all cards exiled with {this} to their owner's hand and you lose that much life";
     }

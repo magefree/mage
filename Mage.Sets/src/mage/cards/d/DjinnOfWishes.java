@@ -58,7 +58,7 @@ public final class DjinnOfWishes extends CardImpl {
 
 class DjinnOfWishesEffect extends OneShotEffect {
 
-    public DjinnOfWishesEffect() {
+    DjinnOfWishesEffect() {
         super(Outcome.PlayForFree);
         staticText = "Reveal the top card of your library. You may play that card without paying its mana cost. If you don't, exile it";
     }

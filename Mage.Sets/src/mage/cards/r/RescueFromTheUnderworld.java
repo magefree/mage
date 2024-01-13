@@ -79,7 +79,7 @@ public final class RescueFromTheUnderworld extends CardImpl {
 
 class RescueFromTheUnderworldTextEffect extends OneShotEffect {
 
-    public RescueFromTheUnderworldTextEffect() {
+    RescueFromTheUnderworldTextEffect() {
         super(Outcome.Benefit);
         this.staticText = "Choose target creature card in your graveyard";
     }
@@ -180,7 +180,7 @@ class RescueFromTheUnderworldDelayedTriggeredAbility extends DelayedTriggeredAbi
 
 class RescueFromTheUnderworldReturnEffect extends OneShotEffect {
 
-    public RescueFromTheUnderworldReturnEffect() {
+    RescueFromTheUnderworldReturnEffect() {
         super(Outcome.PutCreatureInPlay);
     }
 

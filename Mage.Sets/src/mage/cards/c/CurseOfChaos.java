@@ -90,7 +90,7 @@ class CurseOfChaosTriggeredAbility extends TriggeredAbilityImpl {
 
 class CurseOfChaosEffect extends OneShotEffect {
 
-    public CurseOfChaosEffect() {
+    CurseOfChaosEffect() {
         super(Outcome.Benefit);
         this.staticText = "that attacking player may discard a card. If the player does, they draw a card";
     }

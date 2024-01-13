@@ -62,7 +62,7 @@ public final class VastwoodHydra extends CardImpl {
 
 class VastwoodHydraDistributeEffect extends OneShotEffect {
 
-    public VastwoodHydraDistributeEffect() {
+    VastwoodHydraDistributeEffect() {
         super(Outcome.BoostCreature);
         this.staticText = "distribute a number of +1/+1 counters equal to the number of +1/+1 counters on {this} among any number of creatures you control";
     }

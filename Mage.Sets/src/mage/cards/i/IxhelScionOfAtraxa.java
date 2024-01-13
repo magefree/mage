@@ -65,7 +65,7 @@ public final class IxhelScionOfAtraxa extends CardImpl {
 
 class IxhelScionOfAtraxaEffect extends OneShotEffect {
 
-    public IxhelScionOfAtraxaEffect() {
+    IxhelScionOfAtraxaEffect() {
         super(Outcome.Benefit);
         this.staticText = "each opponent who has three or more poison counters exiles the top card of their " +
                 "library face down. You may look at and play those cards for as long as they remain exiled, " +

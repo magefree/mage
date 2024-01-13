@@ -49,7 +49,7 @@ public class AminatousAugury extends CardImpl {
 
 class AminatousAuguryEffect extends OneShotEffect {
 
-    public AminatousAuguryEffect() {
+    AminatousAuguryEffect() {
         super(Outcome.PlayForFree);
         staticText = "Exile the top eight cards of your library. "
                 + "You may put a land card from among them onto the battlefield. "

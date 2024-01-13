@@ -51,7 +51,7 @@ public final class StormscaleAnarch extends CardImpl {
 
 class StormscaleAnarchEffect extends OneShotEffect {
 
-    public StormscaleAnarchEffect() {
+    StormscaleAnarchEffect() {
         super(Outcome.Benefit);
         this.staticText = "{this} deals 2 damage to any target. "
                 + "If the discarded card was multicolored, "

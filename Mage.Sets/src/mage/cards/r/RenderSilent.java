@@ -45,7 +45,7 @@ public final class RenderSilent extends CardImpl {
 
 class RenderSilentCounterEffect extends OneShotEffect {
 
-    public RenderSilentCounterEffect() {
+    RenderSilentCounterEffect() {
         super(Outcome.Detriment);
     }
 

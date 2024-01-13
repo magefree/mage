@@ -57,7 +57,7 @@ public final class WingedTempleOfOrazca extends CardImpl {
 
 class WingedTempleOfOrazcaEffect extends OneShotEffect {
 
-    public WingedTempleOfOrazcaEffect() {
+    WingedTempleOfOrazcaEffect() {
         super(Outcome.Benefit);
         this.staticText = "target creature you control gains flying and gets +X/+X until end of turn, where X is its power";
     }

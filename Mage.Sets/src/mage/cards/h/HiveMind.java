@@ -80,7 +80,7 @@ class HiveMindTriggeredAbility extends TriggeredAbilityImpl {
 
 class HiveMindEffect extends OneShotEffect {
 
-    public HiveMindEffect() {
+    HiveMindEffect() {
         super(Outcome.Benefit);
         this.staticText = "each other player copies that spell. Each of those players may choose new targets for their copy";
     }

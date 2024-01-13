@@ -40,7 +40,7 @@ public final class HallowedBurial extends CardImpl {
 
 class HallowedBurialEffect extends OneShotEffect {
 
-    public HallowedBurialEffect() {
+    HallowedBurialEffect() {
         super(Outcome.Neutral);
         this.staticText = "Put all creatures on the bottom of their owners' libraries";
     }

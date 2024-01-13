@@ -53,7 +53,7 @@ public final class SequesteredStash extends CardImpl {
 
 class SequesteredStashEffect extends OneShotEffect {
 
-    public SequesteredStashEffect() {
+    SequesteredStashEffect() {
         super(Outcome.Benefit);
         this.staticText = "Then you may put an artifact card from your graveyard on top of your library";
     }

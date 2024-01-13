@@ -96,7 +96,7 @@ class CloneShellEffect extends OneShotEffect {
 
 class CloneShellDiesEffect extends OneShotEffect {
 
-    public CloneShellDiesEffect() {
+    CloneShellDiesEffect() {
         super(Outcome.Benefit);
         staticText = "turn the exiled card face up. If it's a creature card, put it onto the battlefield under your control";
     }

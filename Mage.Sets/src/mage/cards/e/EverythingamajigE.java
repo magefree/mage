@@ -69,7 +69,7 @@ public final class EverythingamajigE extends CardImpl {
 
 class UrzasHotTubEffect extends OneShotEffect {
 
-    public UrzasHotTubEffect() {
+    UrzasHotTubEffect() {
         super(Outcome.ReturnToHand);
         this.staticText = "Search your library for a card that shares a complete word in its name with the discarded card, reveal it, put it into your hand, then shuffle";
     }

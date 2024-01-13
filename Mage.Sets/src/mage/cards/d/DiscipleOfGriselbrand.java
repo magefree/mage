@@ -52,7 +52,7 @@ public final class DiscipleOfGriselbrand extends CardImpl {
 
 class DiscipleOfGriselbrandEffect extends OneShotEffect {
 
-    public DiscipleOfGriselbrandEffect() {
+    DiscipleOfGriselbrandEffect() {
         super(Outcome.GainLife);
         this.staticText = "You gain life equal to the sacrificed creature's toughness";
     }

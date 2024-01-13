@@ -40,7 +40,7 @@ public final class GazeOfAdamaro extends CardImpl {
 
 class GazeOfAdamaroEffect extends OneShotEffect {
 
-    public GazeOfAdamaroEffect() {
+    GazeOfAdamaroEffect() {
         super(Outcome.Damage);
         this.staticText = "{this} deals damage to target player equal to the number of cards in that player's hand";
     }

@@ -57,7 +57,7 @@ public final class SigardasAid extends CardImpl {
 
 class SigardasAidEffect extends OneShotEffect {
 
-    public SigardasAidEffect() {
+    SigardasAidEffect() {
         super(Outcome.Benefit);
         this.staticText = "you may attach it to target creature you control";
     }

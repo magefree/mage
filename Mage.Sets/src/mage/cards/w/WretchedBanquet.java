@@ -40,7 +40,7 @@ public final class WretchedBanquet extends CardImpl {
 
 class WretchedBanquetEffect extends OneShotEffect {
 
-    public WretchedBanquetEffect() {
+    WretchedBanquetEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "Destroy target creature if it has the least power or is tied for least power among creatures on the battlefield";
     }

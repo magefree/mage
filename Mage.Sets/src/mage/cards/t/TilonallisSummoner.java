@@ -58,7 +58,7 @@ public final class TilonallisSummoner extends CardImpl {
 
 class TilonallisSummonerEffect extends OneShotEffect {
 
-    public TilonallisSummonerEffect() {
+    TilonallisSummonerEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "you may pay {X}{R}. If you do, create X 1/1 red Elemental creature tokens that are tapped and attacking. At the beginning of the next end step, exile those tokens unless you have the city's blessing";
     }

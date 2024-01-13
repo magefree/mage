@@ -42,7 +42,7 @@ public final class SereneRemembrance extends CardImpl {
 
 class SereneRemembranceEffect extends OneShotEffect {
 
-    public SereneRemembranceEffect() {
+    SereneRemembranceEffect() {
         super(Outcome.Benefit);
         this.staticText = "Shuffle {this} and up to three target cards from a single graveyard into their owners' libraries";
     }

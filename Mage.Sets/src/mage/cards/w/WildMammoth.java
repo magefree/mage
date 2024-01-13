@@ -49,7 +49,7 @@ public final class WildMammoth extends CardImpl {
 
 class WildMammothEffect extends OneShotEffect {
 
-    public WildMammothEffect() {
+    WildMammothEffect() {
         super(Outcome.GainControl);
         this.staticText = "if a player controls more creatures than each other player, the player who controls the most creatures gains control of {this}";
     }

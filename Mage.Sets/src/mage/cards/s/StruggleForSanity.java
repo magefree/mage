@@ -45,7 +45,7 @@ public final class StruggleForSanity extends CardImpl {
 
 class StruggleForSanityEffect extends OneShotEffect {
 
-    public StruggleForSanityEffect() {
+    StruggleForSanityEffect() {
         super(Outcome.Discard); // kind of
         this.staticText = "Target opponent reveals their hand. That player exiles a card from it, then you exile a card from it. Repeat this process until all cards in that hand have been exiled. That player returns the cards they exiled this way to their hand and puts the rest into their graveyard";
     }

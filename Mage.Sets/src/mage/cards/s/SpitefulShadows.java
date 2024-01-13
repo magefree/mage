@@ -49,7 +49,7 @@ public final class SpitefulShadows extends CardImpl {
 
 class SpitefulShadowsEffect extends OneShotEffect {
 
-    public SpitefulShadowsEffect() {
+    SpitefulShadowsEffect() {
         super(Outcome.Damage);
         this.staticText = "it deals that much damage to its controller";
     }

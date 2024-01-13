@@ -63,7 +63,7 @@ public final class KnacksawClique extends CardImpl {
 
 class KnacksawCliqueEffect extends OneShotEffect {
 
-    public KnacksawCliqueEffect() {
+    KnacksawCliqueEffect() {
         super(Outcome.Benefit);
         this.staticText = "Target opponent exiles the top card of their library. Until end of turn, you may play that card";
     }

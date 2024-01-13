@@ -47,7 +47,7 @@ public final class ScrollRack extends CardImpl {
 
 class ScrollRackEffect extends OneShotEffect {
 
-    public ScrollRackEffect() {
+    ScrollRackEffect() {
         super(Outcome.Neutral);
         staticText = "Exile any number of cards from your hand face down. Put that many cards from the top of your library into your hand. Then look at the exiled cards and put them on top of your library in any order";
     }

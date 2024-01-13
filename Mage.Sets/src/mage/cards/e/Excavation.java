@@ -49,7 +49,7 @@ public final class Excavation extends CardImpl {
 
 class ExcavationEffect extends OneShotEffect {
 
-    public ExcavationEffect() {
+    ExcavationEffect() {
         super(Outcome.DrawCard);
         this.staticText = "Draw a card. Any player may activate this ability";
     }

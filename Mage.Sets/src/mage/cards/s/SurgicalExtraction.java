@@ -55,7 +55,7 @@ public final class SurgicalExtraction extends CardImpl {
 
 class SurgicalExtractionEffect extends OneShotEffect {
 
-    public SurgicalExtractionEffect() {
+    SurgicalExtractionEffect() {
         super(Outcome.Detriment);
         this.staticText = "Choose target card in a graveyard other than a basic land card. "
                 + "Search its owner's graveyard, hand, and library for any number of cards "

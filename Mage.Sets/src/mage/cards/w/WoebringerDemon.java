@@ -55,7 +55,7 @@ public final class WoebringerDemon extends CardImpl {
 
 class WoebringerDemonEffect extends OneShotEffect {
 
-    public WoebringerDemonEffect() {
+    WoebringerDemonEffect() {
         super(Outcome.Detriment);
         this.staticText = "that player sacrifices a creature. If the player can't, sacrifice {this}";
     }

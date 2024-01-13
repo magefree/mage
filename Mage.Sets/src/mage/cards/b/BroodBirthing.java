@@ -38,7 +38,7 @@ public final class BroodBirthing extends CardImpl {
 
 class BroodBirthingEffect extends OneShotEffect {
 
-    public BroodBirthingEffect() {
+    BroodBirthingEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "If you control an Eldrazi Spawn, create three 0/1 colorless Eldrazi Spawn creature tokens. They have \"Sacrifice this creature: Add {C}.\" Otherwise, create one of those tokens";
     }

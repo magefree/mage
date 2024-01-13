@@ -102,7 +102,7 @@ class HavengulLichPlayEffect extends AsThoughEffectImpl {
 //create delayed triggered ability to watch for card being played
 class HavengulLichPlayedEffect extends OneShotEffect {
 
-    public HavengulLichPlayedEffect() {
+    HavengulLichPlayedEffect() {
         super(Outcome.PutCreatureInPlay);
     }
 

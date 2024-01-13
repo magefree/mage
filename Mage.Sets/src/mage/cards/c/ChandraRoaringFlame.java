@@ -62,7 +62,7 @@ public final class ChandraRoaringFlame extends CardImpl {
 
 class ChandraRoaringFlameEmblemEffect extends OneShotEffect {
 
-    public ChandraRoaringFlameEmblemEffect() {
+    ChandraRoaringFlameEmblemEffect() {
         super(Outcome.Damage);
         this.staticText = "{this} deals 6 damage to each opponent. Each player dealt damage this way gets an emblem with \"At the beginning of your upkeep, this emblem deals 3 damage to you.\"";
     }

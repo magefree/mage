@@ -84,7 +84,7 @@ class PersonalIncarnationRedirectEffect extends RedirectionEffect {
 
 class PersonalIncarnationLoseHalfLifeEffect extends OneShotEffect {
 
-    public PersonalIncarnationLoseHalfLifeEffect() {
+    PersonalIncarnationLoseHalfLifeEffect() {
         super(Outcome.LoseLife);
         staticText = "its owner lose half their life, rounded up";
     }

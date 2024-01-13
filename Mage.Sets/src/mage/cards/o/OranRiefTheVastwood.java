@@ -47,7 +47,7 @@ public final class OranRiefTheVastwood extends CardImpl {
 
 class OranRiefTheVastwoodEffect extends OneShotEffect {
 
-    public OranRiefTheVastwoodEffect() {
+    OranRiefTheVastwoodEffect() {
         super(Outcome.BoostCreature);
         staticText = "Put a +1/+1 counter on each green creature that entered the battlefield this turn";
     }

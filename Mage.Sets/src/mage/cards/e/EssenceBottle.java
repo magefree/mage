@@ -51,7 +51,7 @@ public final class EssenceBottle extends CardImpl {
 
 class EssenceBottleEffect extends OneShotEffect {
 
-    public EssenceBottleEffect() {
+    EssenceBottleEffect() {
         super(Outcome.GainLife);
         this.staticText = "You gain 2 life for each elixir counter removed this way";
     }

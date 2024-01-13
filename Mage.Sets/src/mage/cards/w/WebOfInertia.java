@@ -42,7 +42,7 @@ public final class WebOfInertia extends CardImpl {
 
 class WebOfInertiaEffect extends OneShotEffect {
 
-    public WebOfInertiaEffect() {
+    WebOfInertiaEffect() {
         super(Outcome.Detriment);
         this.staticText = "that player may exile a card from their graveyard. If the player doesn't, creatures they control can't attack you this turn";
     }

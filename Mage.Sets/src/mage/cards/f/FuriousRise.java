@@ -48,7 +48,7 @@ public final class FuriousRise extends CardImpl {
 
 class FuriousRiseEffect extends OneShotEffect {
 
-    public FuriousRiseEffect() {
+    FuriousRiseEffect() {
         super(Outcome.Benefit);
         this.staticText = "exile the top card of your library. You may play that card until you exile another card with Furious Rise";
     }

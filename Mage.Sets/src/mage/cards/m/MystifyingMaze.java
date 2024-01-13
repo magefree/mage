@@ -60,7 +60,7 @@ public final class MystifyingMaze extends CardImpl {
 
 class MystifyingMazeEffect extends OneShotEffect {
 
-    public MystifyingMazeEffect() {
+    MystifyingMazeEffect() {
         super(Outcome.Detriment);
         staticText = "Exile target attacking creature an opponent controls. At the beginning of the next end step, return it to the battlefield tapped under its owner's control";
     }

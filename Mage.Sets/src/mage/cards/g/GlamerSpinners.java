@@ -63,7 +63,7 @@ public final class GlamerSpinners extends CardImpl {
 
 class GlamerSpinnersEffect extends OneShotEffect {
 
-    public GlamerSpinnersEffect() {
+    GlamerSpinnersEffect() {
         super(Outcome.AIDontUseIt);
         staticText = "attach all Auras enchanting target permanent to another permanent with the same controller";
     }

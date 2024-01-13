@@ -48,7 +48,7 @@ public final class KindredSummons extends CardImpl {
 
 class KindredSummonsEffect extends OneShotEffect {
 
-    public KindredSummonsEffect() {
+    KindredSummonsEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Reveal cards from the top of your library until you reveal X creature cards of the chosen type, "
                 + "where X is the number of creatures you control of that type. Put those cards onto the battlefield, "

@@ -81,7 +81,7 @@ class BloodletterStateTriggeredAbility extends StateTriggeredAbility {
 
 class BloodletterEffect extends OneShotEffect {
 
-    public BloodletterEffect() {
+    BloodletterEffect() {
         super(Outcome.Sacrifice);
         staticText = "sacrifice {this}. If you do, it deals 2 damage to each creature and each player";
     }

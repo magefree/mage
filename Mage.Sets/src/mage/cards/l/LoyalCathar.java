@@ -87,7 +87,7 @@ class LoyalCatharEffect extends OneShotEffect {
 
 class ReturnLoyalCatharEffect extends OneShotEffect {
 
-    public ReturnLoyalCatharEffect() {
+    ReturnLoyalCatharEffect() {
         super(Outcome.PutCardInPlay);
         this.staticText = "return it to the battlefield transformed under your control";
     }

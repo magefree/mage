@@ -61,7 +61,7 @@ public final class AzorTheLawbringer extends CardImpl {
 
 class AzorTheLawbringerEntersBattlefieldEffect extends OneShotEffect {
 
-    public AzorTheLawbringerEntersBattlefieldEffect() {
+    AzorTheLawbringerEntersBattlefieldEffect() {
         super(Outcome.Benefit);
         this.staticText = "each opponent can't cast instant or sorcery spells during that player's next turn";
     }
