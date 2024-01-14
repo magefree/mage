@@ -33,7 +33,7 @@ public final class CuriousCadaver extends CardImpl {
         // When you sacrifice a Clue, return Curious Cadaver from your graveyard to your hand.
         this.addAbility(new SacrificePermanentTriggeredAbility(
                 Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), filter,
-                SetTargetPointer.NONE, TargetController.YOU, false
+                TargetController.YOU, SetTargetPointer.NONE, false
         ));
     }
 

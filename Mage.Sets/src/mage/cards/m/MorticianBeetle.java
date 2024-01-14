@@ -27,7 +27,7 @@ public final class MorticianBeetle extends CardImpl {
         // Whenever a player sacrifices a creature, you may put a +1/+1 counter on Mortician Beetle.
         this.addAbility(new SacrificePermanentTriggeredAbility(Zone.BATTLEFIELD,
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance()), StaticFilters.FILTER_PERMANENT_CREATURE,
-                SetTargetPointer.NONE, TargetController.ANY, true));
+                TargetController.ANY, SetTargetPointer.NONE, true));
     }
 
     private MorticianBeetle(final MorticianBeetle card) {

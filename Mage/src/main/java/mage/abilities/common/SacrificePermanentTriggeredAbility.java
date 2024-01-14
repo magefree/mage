@@ -14,7 +14,7 @@ import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
 /**
- * @author TheElk801
+ * @author TheElk801, xenohedron
  */
 public class SacrificePermanentTriggeredAbility extends TriggeredAbilityImpl {
 
@@ -23,12 +23,17 @@ public class SacrificePermanentTriggeredAbility extends TriggeredAbilityImpl {
 
     private final TargetController sacrificingPlayer;
 
+    /**
+     * Whenever you sacrifice a "[filter]", "[effect]".
+     * zone = battlefield, setTargetPointer = NONE, optional = false
+     */
     public SacrificePermanentTriggeredAbility(Effect effect, FilterPermanent filter) {
-        this(Zone.BATTLEFIELD, effect, filter, SetTargetPointer.NONE, TargetController.YOU, false);
+        this(Zone.BATTLEFIELD, effect, filter, TargetController.YOU, SetTargetPointer.NONE, false);
     }
 
-    public SacrificePermanentTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter, SetTargetPointer setTargetPointer,
-                                              TargetController sacrificingPlayer, boolean optional) {
+    public SacrificePermanentTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter,
+                                              TargetController sacrificingPlayer,
+                                              SetTargetPointer setTargetPointer, boolean optional) {
         super(zone, effect, optional);
         if (Zone.BATTLEFIELD.match(zone)) {
             setLeavesTheBattlefieldTrigger(true);

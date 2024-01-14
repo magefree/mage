@@ -46,7 +46,7 @@ public final class CarmenCruelSkymarcher extends CardImpl {
         // Whenever a player sacrifices a permanent, put a +1/+1 counter on Carmen, Cruel Skymarcher and you gain 1 life.
         Ability sacTrigger = new SacrificePermanentTriggeredAbility(Zone.BATTLEFIELD,
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
-                StaticFilters.FILTER_PERMANENT, SetTargetPointer.NONE, TargetController.ANY, false);
+                StaticFilters.FILTER_PERMANENT, TargetController.ANY, SetTargetPointer.NONE, false);
         sacTrigger.addEffect(new GainLifeEffect(1).concatBy("and"));
         this.addAbility(sacTrigger);
 

@@ -33,7 +33,7 @@ public final class ProwlingGeistcatcher extends CardImpl {
         // Whenever you sacrifice another creature, exile it. If that creature was a token, put a +1/+1 counter on Prowling Geistcatcher.
         this.addAbility(new SacrificePermanentTriggeredAbility(Zone.BATTLEFIELD,
                 new ProwlingGeistcatcherExileEffect(),
-                StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, SetTargetPointer.PERMANENT, TargetController.YOU, false
+                StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, TargetController.YOU, SetTargetPointer.PERMANENT, false
         ));
 
         // When Prowling Geistcatcher leaves the battlefield, return each card exiled with it to the battlefield under your control.

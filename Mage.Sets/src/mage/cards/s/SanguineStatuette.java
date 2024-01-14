@@ -41,7 +41,7 @@ public final class SanguineStatuette extends CardImpl {
                         .withAbility(HasteAbility.getInstance()),
                 CardType.ARTIFACT, Duration.EndOfTurn
         ).setText("have {this} become a 3/3 Vampire artifact creature with haste until end of turn"),
-                filter, SetTargetPointer.NONE, TargetController.YOU, true));
+                filter, TargetController.YOU, SetTargetPointer.NONE, true));
     }
 
     private SanguineStatuette(final SanguineStatuette card) {

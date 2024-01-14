@@ -27,7 +27,7 @@ public final class MayhemDevil extends CardImpl {
         // Whenever a player sacrifices a permanent, Mayhem Devil deals 1 damage to any target.
         Ability ability = new SacrificePermanentTriggeredAbility(Zone.BATTLEFIELD,
                 new DamageTargetEffect(1), StaticFilters.FILTER_PERMANENT,
-                SetTargetPointer.NONE, TargetController.ANY, false);
+                TargetController.ANY, SetTargetPointer.NONE, false);
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }
