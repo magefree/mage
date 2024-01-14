@@ -1,11 +1,12 @@
 package mage.cards.r;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.ProliferateEffect;
@@ -57,7 +58,7 @@ class RipplesOfPotentialEffect extends OneShotEffect {
 
     public RipplesOfPotentialEffect() {
         super(Outcome.Benefit);
-        staticText = "Proliferate, then choose any number of permanents you control that had a counter put on them this way. Those permanents phase out.";
+        staticText = ", then choose any number of permanents you control that had a counter put on them this way. Those permanents phase out.";
     }
 
     private RipplesOfPotentialEffect(final RipplesOfPotentialEffect effect) {
@@ -77,35 +78,38 @@ class RipplesOfPotentialEffect extends OneShotEffect {
         }
 
         RipplesOfPotentialWatcher watcher = game.getState().getWatcher(RipplesOfPotentialWatcher.class, source.getSourceId());
-        if (watcher != null) {
-            FilterPermanent filter = new FilterPermanent("permanents");
-            filter.add(Predicates.or(
-                    watcher
-                            .getProliferatedPermanents()
-                            .stream()
-                            .map(game::getPermanent)
-                            .filter(Objects::nonNull)
-                            .filter(permanent -> permanent.isControlledBy(source.getControllerId()))
-                            .map(Permanent::getId)
-                            .map(PermanentIdPredicate::new)
-                            .collect(Collectors.toSet())
-            ));
-            TargetPermanent target = new TargetPermanent(0, Integer.MAX_VALUE, filter, true);
-            controller.choose(outcome, target.withChooseHint("to phase out"), source, game);
-            for (UUID targetId : target.getTargets()) {
-                Permanent permanent = game.getPermanent(targetId);
-                if (permanent != null) {
-                    permanent.phaseOut(game);
-                }
+        if (watcher == null) {
+            return false;
+        }
+
+        FilterPermanent filter = new FilterPermanent("permanents");
+        filter.add(Predicates.or(
+                watcher
+                        .getProliferatedPermanents()
+                        .stream()
+                        .map(mor -> mor.getPermanentOrLKIBattlefield(game))
+                        .filter(Objects::nonNull)
+                        .filter(permanent -> permanent.isControlledBy(source.getControllerId()))
+                        .map(Permanent::getId)
+                        .map(PermanentIdPredicate::new)
+                        .collect(Collectors.toSet())
+        ));
+        TargetPermanent target = new TargetPermanent(0, Integer.MAX_VALUE, filter, true);
+        controller.choose(outcome, target.withChooseHint("to phase out"), source, game);
+        for (UUID targetId : target.getTargets()) {
+            Permanent permanent = game.getPermanent(targetId);
+            if (permanent != null) {
+                permanent.phaseOut(game);
             }
         }
+        watcher.reset();
         return true;
     }
 }
 
 class RipplesOfPotentialWatcher extends Watcher {
 
-    private final List<UUID> proliferatedPermanents = new ArrayList<>();
+    private final Set<MageObjectReference> proliferatedPermanents = new HashSet<>();
 
     RipplesOfPotentialWatcher() {
         super(WatcherScope.CARD);
@@ -114,9 +118,10 @@ class RipplesOfPotentialWatcher extends Watcher {
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.COUNTER_ADDED) {
+            MageObjectReference mor = new MageObjectReference(event.getTargetId(), game);
             Permanent permanent = game.getPermanent(event.getTargetId());
             if (sourceId.equals(event.getSourceId()) && permanent != null) {
-                proliferatedPermanents.add(event.getTargetId());
+                proliferatedPermanents.add(mor);
             }
         }
     }
@@ -127,7 +132,7 @@ class RipplesOfPotentialWatcher extends Watcher {
         proliferatedPermanents.clear();
     }
 
-    List<UUID> getProliferatedPermanents() {
+    Set<MageObjectReference> getProliferatedPermanents() {
         return proliferatedPermanents;
     }
 }

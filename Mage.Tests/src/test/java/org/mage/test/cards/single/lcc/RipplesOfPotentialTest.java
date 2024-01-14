@@ -2,6 +2,7 @@ package org.mage.test.cards.single.lcc;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.counters.CounterType;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -13,6 +14,7 @@ public class RipplesOfPotentialTest extends CardTestPlayerBase {
     /**
      * Ripples of Potential
      * {1}{U}
+     * Instant
      * Proliferate, then choose any number of permanents you control that had a counter put on them this way. Those permanents phase out.
      */
     @Test
@@ -40,5 +42,6 @@ public class RipplesOfPotentialTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Arcbound Javelineer", 0);
         assertPermanentCount(playerA, "Chandra, Pyromaster", 0);
         assertPermanentCount(playerA, "Atraxa's Skitterfang", 1);
+        assertCounterCount("Atraxa's Skitterfang", CounterType.OIL, 4);
     }
 }
