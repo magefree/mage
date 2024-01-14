@@ -46,9 +46,11 @@ public class ClavilenoFirstOfTheBlessed extends CardImpl {
         // Whenever you attack, target attacking Vampire that isn't a Demon becomes a Demon in addition to its other types. It gains “When this creature dies, draw a card and create a tapped 4/3 white and black Vampire Demon creature token with flying.”
         Ability ability = new AttacksWithCreaturesTriggeredAbility(
                 new AddCardSubTypeTargetEffect(SubType.DEMON, Duration.Custom), 1);
-        Ability gainedAbility = new DiesSourceTriggeredAbility(new DrawCardSourceControllerEffect(1), false);
-        gainedAbility.addEffect(new CreateTokenEffect(new VampireDemonToken(), 1, true));
-        ability.addEffect(new GainAbilityTargetEffect(gainedAbility, Duration.Custom));
+        Ability gainedAbility = new DiesSourceTriggeredAbility(new DrawCardSourceControllerEffect(1), false)
+                .setTriggerPhrase("When this creature dies, ");
+        gainedAbility.addEffect(new CreateTokenEffect(new VampireDemonToken(), 1, true).concatBy("and"));
+        ability.addEffect(new GainAbilityTargetEffect(gainedAbility, Duration.Custom)
+                .setText("It gains \"When this creature dies, draw a card and create a tapped 4/3 white and black Vampire Demon creature token with flying.\""));
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
