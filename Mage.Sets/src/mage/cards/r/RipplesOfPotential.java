@@ -1,33 +1,27 @@
 package mage.cards.r;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.ProliferateEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.WatcherScope;
-import mage.constants.Zone;
-import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.PermanentIdPredicate;
-import mage.filter.predicate.permanent.PermanentInListPredicate;
-import mage.filter.predicate.permanent.PermanentReferenceInCollectionPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.TargetCard;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetControlledPermanent;
 import mage.watchers.Watcher;
 
 /**
@@ -43,6 +37,8 @@ public class RipplesOfPotential extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");
 
         // Proliferate, then choose any number of permanents you control that had a counter put on them this way. Those permanents phase out.
+        // A watcher is required as another effect may prevent counters from being put on permanents (e.g. Solemnity)
+        this.getSpellAbility().addEffect(new ProliferateEffect());
         this.getSpellAbility().addEffect(new RipplesOfPotentialEffect());
         this.getSpellAbility().addWatcher(new RipplesOfPotentialWatcher());
     }
@@ -75,19 +71,27 @@ class RipplesOfPotentialEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        ProliferateEffect proliferate = new ProliferateEffect();
-        proliferate.apply(game, source);
-
         Player controller = game.getPlayer(source.getControllerId());
         if (controller == null) {
             return false;
         }
+
         RipplesOfPotentialWatcher watcher = game.getState().getWatcher(RipplesOfPotentialWatcher.class, source.getSourceId());
         if (watcher != null) {
-            FilterPermanent filter = new FilterControlledPermanent();
-            TargetCard target = new TargetCard(0, Integer.MAX_VALUE, Zone.BATTLEFIELD, new FilterCard("permanents to phase out"));
-            target.withNotTarget(true);
-            controller.choose(outcome, watcher.getProliferatedPermanents(), target, source, game);
+            FilterPermanent filter = new FilterPermanent("permanents");
+            filter.add(Predicates.or(
+                    watcher
+                            .getProliferatedPermanents()
+                            .stream()
+                            .map(game::getPermanent)
+                            .filter(Objects::nonNull)
+                            .filter(permanent -> permanent.isControlledBy(source.getControllerId()))
+                            .map(Permanent::getId)
+                            .map(PermanentIdPredicate::new)
+                            .collect(Collectors.toSet())
+            ));
+            TargetPermanent target = new TargetPermanent(0, Integer.MAX_VALUE, filter, true);
+            controller.choose(outcome, target.withChooseHint("to phase out"), source, game);
             for (UUID targetId : target.getTargets()) {
                 Permanent permanent = game.getPermanent(targetId);
                 if (permanent != null) {
@@ -101,7 +105,7 @@ class RipplesOfPotentialEffect extends OneShotEffect {
 
 class RipplesOfPotentialWatcher extends Watcher {
 
-    private final Cards proliferatedPermanents = new CardsImpl();
+    private final List<UUID> proliferatedPermanents = new ArrayList<>();
 
     RipplesOfPotentialWatcher() {
         super(WatcherScope.CARD);
@@ -123,7 +127,7 @@ class RipplesOfPotentialWatcher extends Watcher {
         proliferatedPermanents.clear();
     }
 
-    Cards getProliferatedPermanents() {
-        return  proliferatedPermanents;
+    List<UUID> getProliferatedPermanents() {
+        return proliferatedPermanents;
     }
 }
