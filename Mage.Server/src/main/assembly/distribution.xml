@@ -23,7 +23,6 @@
                 <include>org.mage:mage-game-commanderduel</include>
                 <include>org.mage:mage-game-freeforall</include>
                 <include>org.mage:mage-game-twoplayerduel</include>
-                <include>org.mage:mage-player-aiminimax</include>
                 <include>org.mage:mage-player-ai-ma</include>
                 <include>org.mage:mage-player-human</include>
                 <include>org.mage:mage-tournament-boosterdraft</include>
@@ -40,7 +39,6 @@
                 <exclude>org.mage:mage-game-commanderduel</exclude>
                 <exclude>org.mage:mage-game-freeforall</exclude>
                 <exclude>org.mage:mage-game-twoplayerduel</exclude>
-                <exclude>org.mage:mage-player-aiminimax</exclude>
                 <exclude>org.mage:mage-player-ai-ma</exclude>
                 <exclude>org.mage:mage-player-human</exclude>
                 <exclude>org.mage:mage-tournament-boosterdraft</exclude>

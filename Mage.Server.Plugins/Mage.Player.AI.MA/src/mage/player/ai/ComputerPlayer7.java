@@ -9,6 +9,8 @@ import java.util.Date;
 import java.util.LinkedList;
 
 /**
+ * AI: server side bot with game simulations (mad bot, the latest version)
+ *
  * @author ayratn
  */
 public class ComputerPlayer7 extends ComputerPlayer6 {

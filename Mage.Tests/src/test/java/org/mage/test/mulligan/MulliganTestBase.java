@@ -38,7 +38,7 @@ public class MulliganTestBase {
         private final int freeMulligans;
         private final List<Step> steps = new ArrayList<>();
 
-        private PlayerProxy player1;
+        private MulliganStubPlayer player1;
 
         public MulliganScenarioTest(MulliganType mulliganType, int freeMulligans) {
             this.mulliganType = mulliganType;
@@ -73,13 +73,13 @@ public class MulliganTestBase {
             options.skipInitShuffling = true;
             game.setGameOptions(options);
 
-            this.player1 = new PlayerProxy("p1", ONE);
+            this.player1 = new MulliganStubPlayer("p1", ONE);
             player1.setSteps(steps);
             Deck deck1 = generateDeck(player1.getId(), 40);
             game.loadCards(deck1.getCards(), player1.getId());
             game.addPlayer(player1, deck1);
 
-            PlayerProxy player2 = new PlayerProxy("p2", ONE);
+            MulliganStubPlayer player2 = new MulliganStubPlayer("p2", ONE);
             Deck deck2 = generateDeck(player2.getId(), 40);
             game.loadCards(deck2.getCards(), player2.getId());
             game.addPlayer(player2, deck2);
@@ -164,12 +164,12 @@ public class MulliganTestBase {
         List<UUID> discardBottom(int count);
     }
 
-    static class PlayerProxy extends StubPlayer {
+    static class MulliganStubPlayer extends StubPlayer {
 
         private List<Step> steps = null;
         private int current = 0;
 
-        public PlayerProxy(String name, RangeOfInfluence range) {
+        public MulliganStubPlayer(String name, RangeOfInfluence range) {
             super(name, range);
         }
 

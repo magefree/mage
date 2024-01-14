@@ -63,6 +63,8 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 /**
+ * Basic implementation of testable player
+ *
  * @author BetaSteward_at_googlemail.com
  * @author Simown
  * @author JayDi85
