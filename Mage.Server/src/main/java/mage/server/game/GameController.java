@@ -102,13 +102,14 @@ public class GameController implements GameCallback {
 
     public void cleanUp() {
         cancelTimeout();
-        for (GameSessionPlayer gameSessionPlayer : getGameSessions()) {
-            gameSessionPlayer.cleanUp();
-        }
-        managerFactory.chatManager().destroyChatSession(chatId);
         for (PriorityTimer priorityTimer : timers.values()) {
             priorityTimer.cancel();
         }
+
+        getGameSessions().forEach(GameSessionPlayer::cleanUp);
+        getGameSessionWatchers().forEach(GameSessionWatcher::cleanUp);
+
+        managerFactory.chatManager().destroyChatSession(chatId);
     }
 
     private void init() {

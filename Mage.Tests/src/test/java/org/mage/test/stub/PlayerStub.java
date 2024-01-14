@@ -526,11 +526,6 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public void init(Game game, boolean testMode) {
-
-    }
-
-    @Override
     public void useDeck(Deck deck, Game game) {
 
     }

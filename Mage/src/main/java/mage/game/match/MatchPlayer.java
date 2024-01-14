@@ -150,11 +150,6 @@ public class MatchPlayer implements Serializable {
         // this.player = null;
     }
 
-    public void cleanUp() {
-        // Free resources that are not needed after match end
-        this.player = null;
-    }
-
     public String getName() {
         return name;
     }

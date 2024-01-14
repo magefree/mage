@@ -2963,12 +2963,6 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public void init(Game game, boolean testMode) {
-        initialTurns = 0;
-        computerPlayer.init(game, testMode);
-    }
-
-    @Override
     public void reset() {
         computerPlayer.reset();
     }
