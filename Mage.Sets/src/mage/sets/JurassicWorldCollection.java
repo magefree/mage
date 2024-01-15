@@ -36,6 +36,7 @@ public final class JurassicWorldCollection extends ExpansionSet {
         cards.add(new SetCardInfo("Plains", "21b", Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 23, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Swamp", "23b", Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Swooping Pteranodon", 19, Rarity.RARE, mage.cards.s.SwoopingPteranodon.class));
         cards.add(new SetCardInfo("Welcome to . . .", 7, Rarity.RARE, mage.cards.w.WelcomeTo.class));
     }
 }
