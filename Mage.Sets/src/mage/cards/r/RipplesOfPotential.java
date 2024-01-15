@@ -39,7 +39,7 @@ public class RipplesOfPotential extends CardImpl {
 
         // Proliferate, then choose any number of permanents you control that had a counter put on them this way. Those permanents phase out.
         // A watcher is required as another effect may prevent counters from being put on permanents (e.g. Solemnity)
-        this.getSpellAbility().addEffect(new ProliferateEffect());
+        this.getSpellAbility().addEffect(new ProliferateEffect(false));
         this.getSpellAbility().addEffect(new RipplesOfPotentialEffect());
         this.getSpellAbility().addWatcher(new RipplesOfPotentialWatcher());
     }
@@ -56,9 +56,11 @@ public class RipplesOfPotential extends CardImpl {
 
 class RipplesOfPotentialEffect extends OneShotEffect {
 
-    public RipplesOfPotentialEffect() {
+    RipplesOfPotentialEffect() {
         super(Outcome.Benefit);
-        staticText = ", then choose any number of permanents you control that had a counter put on them this way. Those permanents phase out.";
+        staticText = ", then choose any number of permanents you control that had a counter put on them this way. Those permanents phase out" +
+                ". <i>(To proliferate, choose any number of permanents and/or players, then give each another counter of each kind already there. " +
+                "Treat phased-out permanents and anything attached to them as though they don’t exist until their controller's next turn.)</i>";
     }
 
     private RipplesOfPotentialEffect(final RipplesOfPotentialEffect effect) {
