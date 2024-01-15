@@ -69,7 +69,7 @@ class EllieAndAlanDiscoverEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card card = game.getCard(source.getFirstTarget());
+        Card card = game.getCard(getTargetPointer().getFirst(game, source));
         Player player = game.getPlayer(source.getControllerId());
         if (player == null || card == null) {
             return false;
