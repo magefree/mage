@@ -65,9 +65,7 @@ import java.util.stream.Collectors;
 /**
  * Basic implementation of testable player
  *
- * @author BetaSteward_at_googlemail.com
- * @author Simown
- * @author JayDi85
+ * @author BetaSteward_at_googlemail.com, Simown, JayDi85
  */
 @Ignore
 public class TestPlayer implements Player {
@@ -635,7 +633,7 @@ public class TestPlayer implements Player {
 
                     for (MageObject mageObject : manaObjects) {
                         if (mageObject instanceof Permanent) {
-                            for (Ability manaAbility : ((Permanent) mageObject).getAbilities(game).getAvailableActivatedManaAbilities(Zone.BATTLEFIELD, getId(), game)) {
+                            for (Ability manaAbility : ((Permanent) mageObject).getAbilities(game).getAvailableActivatedManaAbilities(Zone.BATTLEFIELD, this.getId(), game)) {
                                 if (hasAbilityTargetNameOrAlias(game, manaAbility, groups[0])) {
                                     Ability newManaAbility = manaAbility.copy();
                                     computerPlayer.activateAbility((ActivatedAbility) newManaAbility, game);
@@ -644,7 +642,7 @@ public class TestPlayer implements Player {
                                 }
                             }
                         } else if (mageObject instanceof Card) {
-                            for (Ability manaAbility : ((Card) mageObject).getAbilities(game).getAvailableActivatedManaAbilities(game.getState().getZone(mageObject.getId()), getId(), game)) {
+                            for (Ability manaAbility : ((Card) mageObject).getAbilities(game).getAvailableActivatedManaAbilities(game.getState().getZone(mageObject.getId()), this.getId(), game)) {
                                 if (hasAbilityTargetNameOrAlias(game, manaAbility, groups[0])) {
                                     Ability newManaAbility = manaAbility.copy();
                                     computerPlayer.activateAbility((ActivatedAbility) newManaAbility, game);
@@ -653,7 +651,7 @@ public class TestPlayer implements Player {
                                 }
                             }
                         } else {
-                            for (Ability manaAbility : mageObject.getAbilities().getAvailableActivatedManaAbilities(game.getState().getZone(mageObject.getId()), getId(), game)) {
+                            for (Ability manaAbility : mageObject.getAbilities().getAvailableActivatedManaAbilities(game.getState().getZone(mageObject.getId()), this.getId(), game)) {
                                 if (hasAbilityTargetNameOrAlias(game, manaAbility, groups[0])) {
                                     Ability newManaAbility = manaAbility.copy();
                                     computerPlayer.activateAbility((ActivatedAbility) newManaAbility, game);
@@ -665,9 +663,9 @@ public class TestPlayer implements Player {
                     }
                     List<Permanent> manaPermsWithCost = computerPlayer.getAvailableManaProducersWithCost(game);
                     for (Permanent perm : manaPermsWithCost) {
-                        for (ActivatedManaAbilityImpl manaAbility : perm.getAbilities().getAvailableActivatedManaAbilities(Zone.BATTLEFIELD, getId(), game)) {
+                        for (ActivatedManaAbilityImpl manaAbility : perm.getAbilities().getAvailableActivatedManaAbilities(Zone.BATTLEFIELD, this.getId(), game)) {
                             if (hasAbilityTargetNameOrAlias(game, manaAbility, groups[0])
-                                    && manaAbility.canActivate(computerPlayer.getId(), game).canActivate()) {
+                                    && manaAbility.canActivate(this.getId(), game).canActivate()) {
                                 Ability newManaAbility = manaAbility.copy();
                                 computerPlayer.activateAbility((ActivatedAbility) newManaAbility, game);
                                 actions.remove(action);
@@ -729,7 +727,7 @@ public class TestPlayer implements Player {
                             }
                         }
                         if (groups[0].equals("Concede")) {
-                            game.concede(getId());
+                            game.concede(this.getId());
                             ((GameImpl) game).checkConcede();
                             actions.remove(action);
                             return true;
@@ -1002,7 +1000,7 @@ public class TestPlayer implements Player {
                         // show battlefield
                         if (params[0].equals(SHOW_COMMAND_BATTLEFIELD) && params.length == 1) {
                             printStart(game, action.getActionName());
-                            printPermanents(game, game.getBattlefield().getAllActivePermanents(computerPlayer.getId()), this);
+                            printPermanents(game, game.getBattlefield().getAllActivePermanents(this.getId()), this);
                             printEnd();
                             actions.remove(action);
                             wasProccessed = true;
@@ -1021,7 +1019,7 @@ public class TestPlayer implements Player {
                         if (params[0].equals(SHOW_COMMAND_EXILE) && params.length == 1) {
                             printStart(game, action.getActionName());
                             printCards(game.getExile().getAllCards(game).stream()
-                                    .filter(card -> card.isOwnedBy(computerPlayer.getId()))
+                                    .filter(card -> card.isOwnedBy(this.getId()))
                                     .collect(Collectors.toList()), true);
                             printEnd();
                             actions.remove(action);
@@ -1756,7 +1754,7 @@ public class TestPlayer implements Player {
                 // Check each player trying to attack or block on this turn
                 for (PlayerAction playerAction : ((TestPlayer) player).getActions()) {
                     String action = playerAction.getAction();
-                    boolean currentPlayersTurn = playerID.equals(getId());
+                    boolean currentPlayersTurn = playerID.equals(this.getId());
                     String playerName = player.getName();
                     int actionTurnNum = playerAction.getTurnNum();
                     // If the action is performed on this turn...
@@ -1836,13 +1834,13 @@ public class TestPlayer implements Player {
                 }
                 // First check to see if this controller actually owns the creature
                 FilterControlledPermanent firstFilter = new FilterControlledPermanent();
-                findPermanent(firstFilter, groups[0], computerPlayer.getId(), game);
+                findPermanent(firstFilter, groups[0], this.getId(), game);
                 // Second check to filter creature for combat - less strict to workaround issue in #3038
                 FilterCreatureForCombat secondFilter = new FilterCreatureForCombat();
                 // secondFilter.add(Predicates.not(AttackingPredicate.instance));
                 secondFilter.add(Predicates.not(SummoningSicknessPredicate.instance));
                 // TODO: Cannot enforce legal attackers multiple times per combat. See issue #3038
-                Permanent attacker = findPermanent(secondFilter, groups[0], computerPlayer.getId(), game, false);
+                Permanent attacker = findPermanent(secondFilter, groups[0], this.getId(), game, false);
                 if (attacker != null && attacker.canAttack(defenderId, game)) {
                     computerPlayer.declareAttacker(attacker.getId(), defenderId, game, false);
                     it.remove();
@@ -1870,7 +1868,6 @@ public class TestPlayer implements Player {
     public void selectBlockers(Ability source, Game game, UUID defendingPlayerId) {
         List<PlayerAction> tempActions = new ArrayList<>(actions);
 
-        UUID opponentId = game.getOpponents(computerPlayer.getId()).iterator().next();
         Map<MageObjectReference, List<MageObjectReference>> blockedCreaturesList = getBlockedCreaturesByCreatureList(game);
 
         boolean mustBlockByAction = false;
@@ -1898,8 +1895,8 @@ public class TestPlayer implements Player {
                 String[] groups = command.split("\\$");
                 String blockerName = groups[0];
                 String attackerName = groups[1];
-                Permanent attacker = findPermanent(new FilterAttackingCreature(), attackerName, opponentId, game);
-                Permanent blocker = findPermanent(new FilterControlledPermanent(), blockerName, computerPlayer.getId(), game);
+                Permanent attacker = findPermanent(new FilterAttackingCreature(), attackerName, game.getCombat().getAttackingPlayerId(), game);
+                Permanent blocker = findPermanent(new FilterControlledPermanent(), blockerName, this.getId(), game);
 
                 if (canBlockAnother(game, blocker, attacker, blockedCreaturesList)) {
                     computerPlayer.declareBlocker(defendingPlayerId, blocker.getId(), attacker.getId(), game);
@@ -2171,7 +2168,7 @@ public class TestPlayer implements Player {
 
     @Override
     public boolean choose(Outcome outcome, Target target, Ability source, Game game, Map<String, Serializable> options) {
-        UUID abilityControllerId = computerPlayer.getId();
+        UUID abilityControllerId = this.getId();
         if (target.getTargetController() != null && target.getAbilityController() != null) {
             abilityControllerId = target.getAbilityController();
         }
@@ -2407,7 +2404,7 @@ public class TestPlayer implements Player {
 
     @Override
     public boolean chooseTarget(Outcome outcome, Target target, Ability source, Game game) {
-        UUID abilityControllerId = computerPlayer.getId();
+        UUID abilityControllerId = this.getId();
         if (target.getTargetController() != null && target.getAbilityController() != null) {
             abilityControllerId = target.getAbilityController();
         }
@@ -2605,20 +2602,20 @@ public class TestPlayer implements Player {
                 targetCardZonesChecked.add(Zone.GRAVEYARD);
                 TargetCard targetFull = (TargetCard) target.getOriginalTarget();
 
-                List<UUID> needPlayers = game.getState().getPlayersInRange(getId(), game).toList();
+                List<UUID> needPlayers = game.getState().getPlayersInRange(this.getId(), game).toList();
                 // fix for opponent graveyard
                 if (target.getOriginalTarget() instanceof TargetCardInOpponentsGraveyard) {
                     // current player remove
-                    Assert.assertTrue(needPlayers.contains(getId()));
-                    needPlayers.remove(getId());
-                    Assert.assertFalse(needPlayers.contains(getId()));
+                    Assert.assertTrue(needPlayers.contains(this.getId()));
+                    needPlayers.remove(this.getId());
+                    Assert.assertFalse(needPlayers.contains(this.getId()));
                 }
                 // fix for your graveyard
                 if (target.getOriginalTarget() instanceof TargetCardInYourGraveyard) {
                     // only current player
-                    Assert.assertTrue(needPlayers.contains(getId()));
+                    Assert.assertTrue(needPlayers.contains(this.getId()));
                     needPlayers.clear();
-                    needPlayers.add(getId());
+                    needPlayers.add(this.getId());
                     Assert.assertEquals(1, needPlayers.size());
                 }
 
@@ -2718,7 +2715,7 @@ public class TestPlayer implements Player {
 
     @Override
     public boolean chooseTarget(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game) {
-        UUID abilityControllerId = computerPlayer.getId();
+        UUID abilityControllerId = this.getId();
         if (target.getTargetController() != null && target.getAbilityController() != null) {
             abilityControllerId = target.getAbilityController();
         }
