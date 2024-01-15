@@ -60,7 +60,7 @@ class RipplesOfPotentialEffect extends OneShotEffect {
         super(Outcome.Benefit);
         staticText = ", then choose any number of permanents you control that had a counter put on them this way. Those permanents phase out" +
                 ". <i>(To proliferate, choose any number of permanents and/or players, then give each another counter of each kind already there. " +
-                "Treat phased-out permanents and anything attached to them as though they don’t exist until their controller's next turn.)</i>";
+                "Treat phased-out permanents and anything attached to them as though they don't exist until their controller's next turn.)</i>";
     }
 
     private RipplesOfPotentialEffect(final RipplesOfPotentialEffect effect) {
