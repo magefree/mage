@@ -208,6 +208,7 @@ public final class LostCavernsOfIxalanCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Prime Speaker Zegana", 278, Rarity.MYTHIC, mage.cards.p.PrimeSpeakerZegana.class));
         cards.add(new SetCardInfo("Prismari Command", 279, Rarity.RARE, mage.cards.p.PrismariCommand.class));
         cards.add(new SetCardInfo("Progenitor's Icon", 100, Rarity.RARE, mage.cards.p.ProgenitorsIcon.class));
+        cards.add(new SetCardInfo("Promise of Aclazotz", 84, Rarity.RARE, mage.cards.p.PromiseOfAclazotz.class));
         cards.add(new SetCardInfo("Quandrix Command", 280, Rarity.RARE, mage.cards.q.QuandrixCommand.class));
         cards.add(new SetCardInfo("Quartzwood Crasher", 281, Rarity.RARE, mage.cards.q.QuartzwoodCrasher.class));
         cards.add(new SetCardInfo("Radiant Destiny", 135, Rarity.RARE, mage.cards.r.RadiantDestiny.class));
