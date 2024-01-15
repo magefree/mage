@@ -1,10 +1,8 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.common.SacrificePermanentTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.SacrificeControllerEffect;
 import mage.abilities.keyword.DevoidAbility;
@@ -14,10 +12,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.filter.StaticFilters;
-import mage.game.Game;
-import mage.game.events.GameEvent;
+
+import java.util.UUID;
 
 /**
  *
@@ -42,7 +39,9 @@ public final class SmotheringAbomination extends CardImpl {
                 StaticFilters.FILTER_PERMANENT_CREATURE, 1, null), TargetController.YOU, false));
 
         // Whenever you sacrifice a creature, draw a card.
-        this.addAbility(new SmotheringAbominationTriggeredAbility());
+        this.addAbility(new SacrificePermanentTriggeredAbility(
+                new DrawCardSourceControllerEffect(1), StaticFilters.FILTER_PERMANENT_CREATURE
+        ));
     }
 
     private SmotheringAbomination(final SmotheringAbomination card) {
@@ -52,34 +51,5 @@ public final class SmotheringAbomination extends CardImpl {
     @Override
     public SmotheringAbomination copy() {
         return new SmotheringAbomination(this);
-    }
-}
-
-class SmotheringAbominationTriggeredAbility extends TriggeredAbilityImpl {
-
-    public SmotheringAbominationTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1));
-        setLeavesTheBattlefieldTrigger(true);
-        setTriggerPhrase("Whenever you sacrifice a creature, ");
-    }
-
-    private SmotheringAbominationTriggeredAbility(final SmotheringAbominationTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public SmotheringAbominationTriggeredAbility copy() {
-        return new SmotheringAbominationTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.SACRIFICED_PERMANENT;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getPlayerId().equals(this.getControllerId())
-                && game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD).isCreature(game);
     }
 }

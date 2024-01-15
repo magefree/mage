@@ -2,7 +2,7 @@ package mage.cards.s;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.SacrificePermanentTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -14,13 +14,10 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AnotherPredicate;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 
@@ -49,7 +46,9 @@ public final class SlaughterPriestOfMogis extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever you sacrifice a permanent, Slaughter-Priest of Mogis gets +2/+0 until end of turn.
-        this.addAbility(new SlaughterPriestOfMogisAbility());
+        this.addAbility(new SacrificePermanentTriggeredAbility(
+                new BoostSourceEffect(2, 0, Duration.EndOfTurn), StaticFilters.FILTER_PERMANENT
+        ));
 
         // {2}, Sacrifice another creature or enchantment: Slaughter-Priest of Mogis gains first strike until end of turn.
         Ability ability = new SimpleActivatedAbility(
@@ -66,36 +65,5 @@ public final class SlaughterPriestOfMogis extends CardImpl {
     @Override
     public SlaughterPriestOfMogis copy() {
         return new SlaughterPriestOfMogis(this);
-    }
-}
-
-class SlaughterPriestOfMogisAbility extends TriggeredAbilityImpl {
-
-    SlaughterPriestOfMogisAbility() {
-        super(Zone.BATTLEFIELD, new BoostSourceEffect(2, 0, Duration.EndOfTurn));
-    }
-
-    private SlaughterPriestOfMogisAbility(final SlaughterPriestOfMogisAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public SlaughterPriestOfMogisAbility copy() {
-        return new SlaughterPriestOfMogisAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.SACRIFICED_PERMANENT;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getPlayerId().equals(this.getControllerId());
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever you sacrifice a permanent, {this} gets +2/+0 until end of turn.";
     }
 }

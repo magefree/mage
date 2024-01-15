@@ -2,24 +2,20 @@ package mage.cards.c;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.AttacksTriggeredAbility;
+import mage.abilities.common.SacrificePermanentTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.card.ManaValueLessThanOrEqualToSourcePowerPredicate;
-import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.target.common.TargetCardInYourGraveyard;
 
 import java.util.UUID;
@@ -48,7 +44,11 @@ public final class CarmenCruelSkymarcher extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever a player sacrifices a permanent, put a +1/+1 counter on Carmen, Cruel Skymarcher and you gain 1 life.
-        this.addAbility(new CarmenTriggeredAbility());
+        Ability sacTrigger = new SacrificePermanentTriggeredAbility(Zone.BATTLEFIELD,
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
+                StaticFilters.FILTER_PERMANENT, TargetController.ANY, SetTargetPointer.NONE, false);
+        sacTrigger.addEffect(new GainLifeEffect(1).concatBy("and"));
+        this.addAbility(sacTrigger);
 
         // Whenever Carmen attacks, return up to one target permanent card with mana value less than or equal to Carmen's power from your graveyard to the battlefield.
         Ability ability = new AttacksTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect());
@@ -63,37 +63,5 @@ public final class CarmenCruelSkymarcher extends CardImpl {
     @Override
     public CarmenCruelSkymarcher copy() {
         return new CarmenCruelSkymarcher(this);
-    }
-}
-
-class CarmenTriggeredAbility extends TriggeredAbilityImpl {
-
-    CarmenTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
-        this.addEffect(new GainLifeEffect(1));
-    }
-
-    private CarmenTriggeredAbility(final CarmenTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.SACRIFICED_PERMANENT;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return true;
-    }
-
-    @Override
-    public CarmenTriggeredAbility copy() {
-        return new CarmenTriggeredAbility(this);
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever a player sacrifices a permanent, put a +1/+1 counter on {this} and you gain 1 life.";
     }
 }

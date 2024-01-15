@@ -1,20 +1,15 @@
-
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.MageObject;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.Effect;
+import mage.abilities.common.SacrificePermanentTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
-import mage.game.Game;
-import mage.game.events.GameEvent;
+import mage.filter.StaticFilters;
+
+import java.util.UUID;
 
 /**
  *
@@ -30,7 +25,9 @@ public final class MorticianBeetle extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever a player sacrifices a creature, you may put a +1/+1 counter on Mortician Beetle.
-        this.addAbility(new PlayerSacrificesCreatureTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), true));
+        this.addAbility(new SacrificePermanentTriggeredAbility(Zone.BATTLEFIELD,
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance()), StaticFilters.FILTER_PERMANENT_CREATURE,
+                TargetController.ANY, SetTargetPointer.NONE, true));
     }
 
     private MorticianBeetle(final MorticianBeetle card) {
@@ -40,36 +37,5 @@ public final class MorticianBeetle extends CardImpl {
     @Override
     public MorticianBeetle copy() {
         return new MorticianBeetle(this);
-    }
-}
-
-class PlayerSacrificesCreatureTriggeredAbility extends TriggeredAbilityImpl {
-
-    public PlayerSacrificesCreatureTriggeredAbility(Effect effect, boolean optional) {
-        super(Zone.BATTLEFIELD, effect, optional);
-        setTriggerPhrase("Whenever a player sacrifices a creature, ");
-    }
-
-    private PlayerSacrificesCreatureTriggeredAbility(final PlayerSacrificesCreatureTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.SACRIFICED_PERMANENT;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        MageObject mageObject = game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-        if (mageObject != null && mageObject.isCreature(game)) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public PlayerSacrificesCreatureTriggeredAbility copy() {
-        return new PlayerSacrificesCreatureTriggeredAbility(this);
     }
 }

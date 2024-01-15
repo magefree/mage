@@ -3,7 +3,7 @@ package mage.cards.m;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.SacrificeAllTriggeredAbility;
+import mage.abilities.common.SacrificePermanentTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
@@ -20,7 +20,10 @@ import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetOpponent;
 
-import java.util.*;
+import java.util.LinkedHashSet;
+import java.util.Objects;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -42,10 +45,10 @@ public final class MalikGrimManipulator extends CardImpl {
         this.addAbility(ability);
 
         // Whenever an opponent sacrifices a creature, you create a Treasure token.
-        this.addAbility(new SacrificeAllTriggeredAbility(
+        this.addAbility(new SacrificePermanentTriggeredAbility(Zone.BATTLEFIELD,
                 new CreateTokenEffect(new TreasureToken()).setText("you create a Treasure token"),
                 StaticFilters.FILTER_PERMANENT_A_CREATURE,
-                TargetController.OPPONENT, false
+                TargetController.OPPONENT, SetTargetPointer.NONE, false
         ));
     }
 
