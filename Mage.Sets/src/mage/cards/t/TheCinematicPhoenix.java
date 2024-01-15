@@ -20,6 +20,7 @@ import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetControlledPermanent;
 
@@ -97,11 +98,12 @@ class TheCinematicPhoenixEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         List<Permanent> tapped = (List<Permanent>) getValue("tappedPermanents");
-        if (tapped == null || tapped.isEmpty()) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (tapped == null || tapped.isEmpty() || controller == null) {
             return false;
         }
         if (tapped.stream().allMatch(permanent -> permanent.isLegendary(game))) {
-            game.getPlayer(source.getControllerId()).won(game);
+            controller.won(game);
             return true;
         }
         return false;
