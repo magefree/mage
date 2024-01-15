@@ -64,7 +64,7 @@ public final class TheCinematicPhoenix extends CardImpl {
         ability = new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(),
                 new TapTargetCost(new TargetControlledPermanent(6, StaticFilters.FILTER_CONTROLLED_UNTAPPED_CREATURES))
         );
-        ability.addEffect(new TheCinematicPhoenxEffect());
+        ability.addEffect(new TheCinematicPhoenixEffect());
         this.addAbility(ability);
     }
 
@@ -78,20 +78,20 @@ public final class TheCinematicPhoenix extends CardImpl {
     }
 }
 
-class TheCinematicPhoenxEffect extends OneShotEffect {
+class TheCinematicPhoenixEffect extends OneShotEffect {
 
-    TheCinematicPhoenxEffect() {
+    TheCinematicPhoenixEffect() {
         super(Outcome.Win);
         this.staticText = "If you tapped six legendary creatures this way, you win the game";
     }
 
-    private TheCinematicPhoenxEffect(final TheCinematicPhoenxEffect effect) {
+    private TheCinematicPhoenixEffect(final TheCinematicPhoenixEffect effect) {
         super(effect);
     }
 
     @Override
-    public TheCinematicPhoenxEffect copy() {
-        return new TheCinematicPhoenxEffect(this);
+    public TheCinematicPhoenixEffect copy() {
+        return new TheCinematicPhoenixEffect(this);
     }
 
     @Override
