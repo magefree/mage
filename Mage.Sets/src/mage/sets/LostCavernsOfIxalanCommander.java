@@ -231,6 +231,7 @@ public final class LostCavernsOfIxalanCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Return to Dust", 136, Rarity.UNCOMMON, mage.cards.r.ReturnToDust.class));
         cards.add(new SetCardInfo("Rhythm of the Wild", 287, Rarity.UNCOMMON, mage.cards.r.RhythmOfTheWild.class));
         cards.add(new SetCardInfo("Ripjaw Raptor", 253, Rarity.RARE, mage.cards.r.RipjawRaptor.class));
+        cards.add(new SetCardInfo("Ripples of Potential", 77, Rarity.RARE, mage.cards.r.RipplesOfPotential.class));
         cards.add(new SetCardInfo("Rishkar's Expertise", 254, Rarity.RARE, mage.cards.r.RishkarsExpertise.class));
         cards.add(new SetCardInfo("Rogue's Passage", 349, Rarity.UNCOMMON, mage.cards.r.RoguesPassage.class));
         cards.add(new SetCardInfo("Ruinous Intrusion", 255, Rarity.RARE, mage.cards.r.RuinousIntrusion.class));
