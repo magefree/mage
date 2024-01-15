@@ -11,7 +11,6 @@ import mage.constants.*;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.GameImpl;
-import mage.game.command.Commander;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentImpl;
@@ -79,14 +78,14 @@ class KarnLiberatedEffect extends OneShotEffect {
         if (sourceObject == null) {
             return false;
         }
-        List<Card> exiledCards = new ArrayList<>();
+        List<Card> keepExiled = new ArrayList<>();
         for (ExileZone zone : game.getExile().getExileZones()) {
             exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
             if (zone.getId().equals(exileId)) {
                 for (Card card : zone.getCards(game)) {
                     if (!card.hasSubtype(SubType.AURA, game)
                             && card.isPermanent(game)) {
-                        exiledCards.add(card);
+                        keepExiled.add(card);
                     }
                 }
             }
@@ -106,32 +105,30 @@ class KarnLiberatedEffect extends OneShotEffect {
         // TODO: miss copied cards?
 
         for (Player player : game.getPlayers().values()) {
+            // TODO: why it keep old players with old data (need reset and lose call for it???)
             if (player.canRespond()) { // only players alive are in the restarted game
-                player.getGraveyard().clear();
-                player.getHand().clear();
-                player.getLibrary().clear();
-                for (Card card : game.getCards()) {
-                    if (card.isOwnedBy(player.getId()) && !card.isCopy() // no copies
-                            && !player.getSideboard().contains(card.getId())
-                            && !exiledCards.contains(card)) {
-                        if (game.getCommandersIds(player, CommanderCardType.ANY, false).contains(card.getId())) {
-                            game.addCommander(new Commander(card)); // TODO: check restart and init
-                            // no needs in initCommander call -- it's used on game startup (init)
-                            game.setZone(card.getId(), Zone.COMMAND);
-                        } else {
-                            player.getLibrary().putOnTop(card, game);
-                        }
-                    }
-                }
-                ((GameImpl) game).initPlayerDefaultWatchers(player.getId());
+                // reset all player cards
+                // P.S. Time limits store in match player, so it will be kept for restarted game
                 player.init(game);
+
+                // simulate GameState::addPlayer
+                player.useDeck(player.getMatchPlayer().getDeck(), game);
+                ((GameImpl) game).initPlayerDefaultWatchers(player.getId());
+
+                // warning, xmage uses a deck's sideboard for commander init
+                // if you add commander in cheat/test mode then it will be a normal card after restart (it's not a bug)
+                // must use real commander decks for testing
             }
         }
-        for (Card card : exiledCards) {
+
+        // prepare exiled cards for moving to battlefield on new game
+        for (Card card : keepExiled) {
             game.getState().setZone(card.getId(), Zone.EXILED);
             game.getExile().add(exileId, sourceObject.getIdName(), card);
         }
         game.addDelayedTriggeredAbility(new KarnLiberatedDelayedTriggeredAbility(exileId), source);
+
+        // start new game
         game.setStartingPlayerId(source.getControllerId());
         game.start(null);
         return true;
