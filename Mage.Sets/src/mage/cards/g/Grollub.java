@@ -43,7 +43,7 @@ public final class Grollub extends CardImpl {
 
 class EachOpponentGainsLifeEffect extends OneShotEffect {
 
-    public EachOpponentGainsLifeEffect() {
+    EachOpponentGainsLifeEffect() {
         super(Outcome.Neutral);
         this.staticText = "each opponent gains that much life";
     }

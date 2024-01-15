@@ -107,7 +107,7 @@ class GlyphOfDelusionSecondTarget extends TargetPermanent {
 
 class GlyphOfDelusionEffect extends OneShotEffect {
 
-    public GlyphOfDelusionEffect() {
+    GlyphOfDelusionEffect() {
         super(Outcome.Detriment);
         this.staticText = "Put X glyph counters on target creature that target Wall blocked this turn, where X is the power of that blocked creature. The creature gains \"This creature doesn't untap during your untap step if it has a glyph counter on it\" and \"At the beginning of your upkeep, remove a glyph counter from this creature.\"";
     }

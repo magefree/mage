@@ -45,7 +45,7 @@ public final class ElkinBottle extends CardImpl {
 
 class ElkinBottleExileEffect extends OneShotEffect {
 
-    public ElkinBottleExileEffect() {
+    ElkinBottleExileEffect() {
         super(Outcome.Detriment);
         this.staticText = "Exile the top card of your library. Until the beginning of your next upkeep, you may play that card";
     }

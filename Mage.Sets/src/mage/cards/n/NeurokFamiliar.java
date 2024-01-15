@@ -51,7 +51,7 @@ public final class NeurokFamiliar extends CardImpl {
 
 class NeurokFamiliarEffect extends OneShotEffect {
 
-    public NeurokFamiliarEffect() {
+    NeurokFamiliarEffect() {
         super(Outcome.DrawCard);
         this.staticText = "reveal the top card of your library. If it's an artifact card, put it into your hand. Otherwise, put it into your graveyard.";
     }

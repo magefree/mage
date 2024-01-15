@@ -63,7 +63,7 @@ public final class DetentionSphere extends CardImpl {
 
 class DetentionSphereEntersEffect extends OneShotEffect {
 
-    public DetentionSphereEntersEffect() {
+    DetentionSphereEntersEffect() {
         super(Outcome.Exile);
         staticText = "you may exile target nonland permanent not named Detention Sphere and all other permanents with the same name as that permanent";
     }
@@ -103,7 +103,7 @@ class DetentionSphereEntersEffect extends OneShotEffect {
 
 class DetentionSphereLeavesEffect extends OneShotEffect {
 
-    public DetentionSphereLeavesEffect() {
+    DetentionSphereLeavesEffect() {
         super(Outcome.Neutral);
         staticText = "return the exiled cards to the battlefield under their owner's control";
     }

@@ -59,7 +59,7 @@ public final class AetherWeb extends CardImpl {
 
 class AetherWebEffect extends AsThoughEffectImpl {
 
-    public AetherWebEffect() {
+    AetherWebEffect() {
         super(AsThoughEffectType.BLOCK_SHADOW, Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = ", and can block creatures with shadow as though they didn't have shadow";
     }

@@ -45,7 +45,7 @@ public final class ShedWeakness extends CardImpl {
 
 class MayRemoveM1M1CouterTargetEffect extends OneShotEffect {
 
-    public MayRemoveM1M1CouterTargetEffect() {
+    MayRemoveM1M1CouterTargetEffect() {
         super(Outcome.BoostCreature);
         this.staticText = "You may remove a -1/-1 counter from it.";
     }

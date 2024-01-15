@@ -56,7 +56,7 @@ enum LeyLineAdjuster implements TargetAdjuster {
 
 class LeyLineEffect extends OneShotEffect {
 
-    public LeyLineEffect() {
+    LeyLineEffect() {
         super(Outcome.BoostCreature);
         staticText = "that player may put a +1/+1 counter on target creature of their choice";
     }

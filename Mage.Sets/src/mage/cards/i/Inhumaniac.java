@@ -45,7 +45,7 @@ public final class Inhumaniac extends CardImpl {
 
 class InhumaniacEffect extends OneShotEffect {
 
-    public InhumaniacEffect() {
+    InhumaniacEffect() {
         super(Outcome.Benefit);
         this.staticText = "roll a six-sided die. On a 3 or 4, put a +1/+1 counter on {this}. On a 5 or higher, put two +1/+1 counters on it. On a 1, remove all +1/+1 counters from {this}";
     }

@@ -20,7 +20,7 @@ public final class ZombieDecayedToken extends TokenImpl {
         this.addAbility(new DecayedAbility());
     }
 
-    protected ZombieDecayedToken(final ZombieDecayedToken token) {
+    private ZombieDecayedToken(final ZombieDecayedToken token) {
         super(token);
     }
 

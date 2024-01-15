@@ -42,7 +42,7 @@ public final class PromiseOfBunrei extends CardImpl {
 
 class PromiseOfBunreiEffect extends OneShotEffect {
 
-    public PromiseOfBunreiEffect() {
+    PromiseOfBunreiEffect() {
         super(Outcome.Benefit);
         this.staticText = "sacrifice {this}. If you do, create four 1/1 colorless Spirit creature tokens";
     }

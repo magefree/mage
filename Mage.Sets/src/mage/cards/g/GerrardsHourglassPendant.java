@@ -56,7 +56,7 @@ public final class GerrardsHourglassPendant extends CardImpl {
 
 class GerrardsHourglassPendantSkipExtraTurnsEffect extends ReplacementEffectImpl {
 
-    public GerrardsHourglassPendantSkipExtraTurnsEffect() {
+    GerrardsHourglassPendantSkipExtraTurnsEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "If a player would begin an extra turn, that player skips that turn instead";
     }

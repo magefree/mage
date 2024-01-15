@@ -49,7 +49,7 @@ public final class ConcussiveBolt extends CardImpl {
 
 class ConcussiveBoltEffect extends OneShotEffect {
 
-    public ConcussiveBoltEffect() {
+    ConcussiveBoltEffect() {
         super(Outcome.Benefit);
         this.staticText = "<br><i>Metalcraft</i> &mdash; If you control three or more artifacts, creatures controlled by that player or by that planeswalker's controller can't block this turn.";
     }
@@ -72,7 +72,7 @@ class ConcussiveBoltEffect extends OneShotEffect {
 
 class ConcussiveBoltRestrictionEffect extends RestrictionEffect {
 
-    public ConcussiveBoltRestrictionEffect() {
+    ConcussiveBoltRestrictionEffect() {
         super(Duration.EndOfTurn);
     }
 

@@ -48,7 +48,7 @@ public final class GoblinMachinist extends CardImpl {
 
 class GoblinMachinistEffect extends OneShotEffect {
 
-    public GoblinMachinistEffect() {
+    GoblinMachinistEffect() {
         super(Outcome.DrawCard);
         this.staticText = "Reveal cards from the top of your library until you reveal a nonland card. {this} gets +X/+0 until end of turn, where X is that card's mana value. Put the revealed cards on the bottom of your library in any order";
     }

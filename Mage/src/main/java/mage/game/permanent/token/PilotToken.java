@@ -19,7 +19,7 @@ public final class PilotToken extends TokenImpl {
         addAbility(new CrewIncreasedPowerAbility("this creature"));
     }
 
-    protected PilotToken(final PilotToken token) {
+    private PilotToken(final PilotToken token) {
         super(token);
     }
 

@@ -100,7 +100,7 @@ class EsperSentinelTriggeredAbility extends TriggeredAbilityImpl {
 
 class EsperSentinelEffect extends OneShotEffect {
 
-    public EsperSentinelEffect() {
+    EsperSentinelEffect() {
         super(Outcome.DrawCard);
     }
 

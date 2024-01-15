@@ -55,7 +55,7 @@ public final class BrutalDeceiver extends CardImpl {
 
 class BrutalDeceiverEffect extends OneShotEffect {
 
-    public BrutalDeceiverEffect() {
+    BrutalDeceiverEffect() {
         super(Outcome.BoostCreature);
         this.staticText = "Reveal the top card of your library. If it's a land card, {this} gets +1/+0 and gains first strike until end of turn";
     }

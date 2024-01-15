@@ -44,7 +44,7 @@ public final class UndyingBeast extends CardImpl {
 
 class UndyingBeastEffect extends OneShotEffect {
 
-    public UndyingBeastEffect() {
+    UndyingBeastEffect() {
         super(Outcome.ReturnToHand);
         staticText = "put it on top of its owner's library";
     }

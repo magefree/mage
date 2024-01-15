@@ -56,7 +56,7 @@ public final class WitchHunt extends CardImpl {
 
 class WitchHuntEffect extends ContinuousEffectImpl {
 
-    public WitchHuntEffect() {
+    WitchHuntEffect() {
         super(Duration.Custom, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
         staticText = "target opponent chosen at random gains control of {this}";
     }

@@ -50,7 +50,7 @@ public final class SwanSong extends CardImpl {
 
 class SwanSongEffect extends OneShotEffect {
 
-    public SwanSongEffect() {
+    SwanSongEffect() {
         super(Outcome.Benefit);
         this.staticText = "Counter target enchantment, instant, or sorcery spell. Its controller creates a 2/2 blue Bird creature token with flying";
     }

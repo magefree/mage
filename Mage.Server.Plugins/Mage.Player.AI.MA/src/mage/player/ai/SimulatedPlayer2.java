@@ -27,11 +27,11 @@ import java.util.*;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
- * AI: mock player in simulated games (each player replaced by simulated)
+ * AI: helper class to simulate games with computer bot (each player replaced by simulated)
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SimulatedPlayer2 extends ComputerPlayer {
+public final class SimulatedPlayer2 extends ComputerPlayer {
 
     private static final Logger logger = Logger.getLogger(SimulatedPlayer2.class);
 

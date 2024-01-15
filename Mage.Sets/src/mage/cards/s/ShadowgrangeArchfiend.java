@@ -55,7 +55,7 @@ public final class ShadowgrangeArchfiend extends CardImpl {
 
 class ShadowgrangeArchfiendEffect extends OneShotEffect {
 
-    public ShadowgrangeArchfiendEffect() {
+    ShadowgrangeArchfiendEffect() {
         super(Outcome.Benefit);
         this.staticText = "each opponent sacrifices a creature with the greatest power among creatures they control. " +
                 "You gain life equal to the greatest power among creatures sacrificed this way";

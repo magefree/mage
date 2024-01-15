@@ -40,7 +40,7 @@ public final class PeaceTalks extends CardImpl {
 
 class PeaceTalksEffect extends OneShotEffect {
 
-    public PeaceTalksEffect() {
+    PeaceTalksEffect() {
         super(Outcome.Neutral);
         this.staticText = "This turn and next turn, creatures can't attack,"
                 + "and players and permanents can't be the targets of spells "

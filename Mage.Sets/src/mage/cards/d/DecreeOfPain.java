@@ -47,7 +47,7 @@ public final class DecreeOfPain extends CardImpl {
 
 class DecreeOfPainEffect extends OneShotEffect {
 
-    public DecreeOfPainEffect() {
+    DecreeOfPainEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "Destroy all creatures. They can't be regenerated. Draw a card for each creature destroyed this way";
     }

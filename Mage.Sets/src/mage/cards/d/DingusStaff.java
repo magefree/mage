@@ -38,7 +38,7 @@ public final class DingusStaff extends CardImpl {
 
 class DingusStaffEffect extends OneShotEffect {
 
-    public DingusStaffEffect() {
+    DingusStaffEffect() {
         super(Outcome.Damage);
         this.staticText = "{this} deals 2 damage to that creature's controller";
     }

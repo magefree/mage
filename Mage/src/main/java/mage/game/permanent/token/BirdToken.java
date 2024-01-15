@@ -21,7 +21,7 @@ public final class BirdToken extends TokenImpl {
         addAbility(FlyingAbility.getInstance());
     }
 
-    protected BirdToken(final BirdToken token) {
+    private BirdToken(final BirdToken token) {
         super(token);
     }
 

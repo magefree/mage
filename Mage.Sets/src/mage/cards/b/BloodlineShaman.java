@@ -49,7 +49,7 @@ public final class BloodlineShaman extends CardImpl {
 
 class BloodlineShamanEffect extends OneShotEffect {
 
-    public BloodlineShamanEffect() {
+    BloodlineShamanEffect() {
         super(Outcome.Benefit);
         this.staticText = "Choose a creature type. Reveal the top card of your library. If that card is a creature card of the chosen type, put it into your hand. "
                 + "Otherwise, put it into your graveyard";

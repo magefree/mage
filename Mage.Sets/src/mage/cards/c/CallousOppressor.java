@@ -99,7 +99,7 @@ class CallousOppressorFilter extends FilterCreaturePermanent {
 
 class CallousOppressorChooseCreatureTypeEffect extends OneShotEffect {
 
-    public CallousOppressorChooseCreatureTypeEffect() {
+    CallousOppressorChooseCreatureTypeEffect() {
         super(Outcome.Benefit);
         staticText = "an opponent chooses a creature type";
     }

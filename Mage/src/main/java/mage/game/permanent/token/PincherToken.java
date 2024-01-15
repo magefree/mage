@@ -18,7 +18,7 @@ public final class PincherToken extends TokenImpl {
 
     }
 
-    protected PincherToken(final PincherToken token) {
+    private PincherToken(final PincherToken token) {
         super(token);
     }
 

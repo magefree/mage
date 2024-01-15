@@ -35,7 +35,7 @@ public final class MnemonicNexus extends CardImpl {
 
 class MnemonicNexusEffect extends OneShotEffect {
 
-    public MnemonicNexusEffect() {
+    MnemonicNexusEffect() {
         super(Outcome.Neutral);
         staticText = "Each player shuffles their graveyard into their library";
     }

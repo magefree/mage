@@ -53,7 +53,7 @@ public final class SoulTithe extends CardImpl {
 
 class SoulTitheEffect extends OneShotEffect {
 
-    public SoulTitheEffect() {
+    SoulTitheEffect() {
         super(Outcome.Sacrifice);
         staticText = "that player sacrifices it unless they pay {X}, where X is its mana value";
     }

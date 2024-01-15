@@ -57,7 +57,7 @@ public final class MizzixsMastery extends CardImpl {
 
 class MizzixsMasteryOverloadEffect extends OneShotEffect {
 
-    public MizzixsMasteryOverloadEffect() {
+    MizzixsMasteryOverloadEffect() {
         super(Outcome.PlayForFree);
         this.staticText = "Exile each card that's an instant or sorcery from "
                 + "your graveyard. For each card exiled this way, copy it, "

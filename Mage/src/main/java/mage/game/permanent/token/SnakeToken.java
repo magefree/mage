@@ -18,7 +18,7 @@ public final class SnakeToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    protected SnakeToken(final SnakeToken token) {
+    private SnakeToken(final SnakeToken token) {
         super(token);
     }
 

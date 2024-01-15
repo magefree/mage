@@ -43,7 +43,7 @@ public final class RaziasPurification extends CardImpl {
 
 class RaziasPurificationEffect extends OneShotEffect {
 
-    public RaziasPurificationEffect() {
+    RaziasPurificationEffect() {
         super(Outcome.DestroyPermanent);
         staticText = "Each player chooses three permanents they control, then sacrifices the rest";
     }

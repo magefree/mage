@@ -56,7 +56,7 @@ public final class OozeGarden extends CardImpl {
 
 class OozeGardenCreateTokenEffect extends OneShotEffect {
 
-    public OozeGardenCreateTokenEffect() {
+    OozeGardenCreateTokenEffect() {
         super(Outcome.PutCreatureInPlay);
         staticText = "Create an X/X green Ooze creature token, where X is the sacrificed creature's power";
     }

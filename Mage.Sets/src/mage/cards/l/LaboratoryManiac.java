@@ -49,7 +49,7 @@ public final class LaboratoryManiac extends CardImpl {
 
 class LaboratoryManiacEffect extends ReplacementEffectImpl {
 
-    public LaboratoryManiacEffect() {
+    LaboratoryManiacEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "If you would draw a card while your library has no cards in it, you win the game instead";
     }

@@ -54,7 +54,7 @@ public final class IsolatedWatchtower extends CardImpl {
 
 class IsolatedWatchtowerEffect extends OneShotEffect {
 
-    public IsolatedWatchtowerEffect() {
+    IsolatedWatchtowerEffect() {
         super(Outcome.Benefit);
         this.staticText = "scry 1, then you may reveal the top card "
                 + "of your library. If a basic land card is revealed this way, "

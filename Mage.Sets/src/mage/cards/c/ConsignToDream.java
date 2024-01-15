@@ -43,7 +43,7 @@ public final class ConsignToDream extends CardImpl {
 
 class ConsignToDreamEffect extends OneShotEffect {
 
-    public ConsignToDreamEffect() {
+    ConsignToDreamEffect() {
         super(Outcome.ReturnToHand);
         this.staticText = "Return target permanent to its owner's hand. If that permanent is red or green, put it on top of its owner's library instead";
     }

@@ -73,7 +73,7 @@ class ChargingCinderhornCondition implements Condition {
 
 class ChargingCinderhornDamageTargetEffect extends OneShotEffect {
 
-    public ChargingCinderhornDamageTargetEffect() {
+    ChargingCinderhornDamageTargetEffect() {
         super(Outcome.Damage);
     }
 

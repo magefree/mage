@@ -14,6 +14,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.counters.CounterType;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetAnyTarget;
@@ -36,7 +37,7 @@ public final class JuriMasterOfTheRevue extends CardImpl {
 
         // Whenever you sacrifice a permanent, put a +1/+1 counter on Juri, Master of the Revue.
         this.addAbility(new SacrificePermanentTriggeredAbility(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance())
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance()), StaticFilters.FILTER_PERMANENT_A
         ));
 
         // When Juri dies, it deals damage equal its power to any target.

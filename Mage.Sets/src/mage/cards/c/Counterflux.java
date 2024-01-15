@@ -68,7 +68,7 @@ public final class Counterflux extends CardImpl {
 
 class CounterfluxEffect extends OneShotEffect {
 
-    public CounterfluxEffect() {
+    CounterfluxEffect() {
         super(Outcome.Detriment);
         staticText = "Counter each spell you don't control.";
 

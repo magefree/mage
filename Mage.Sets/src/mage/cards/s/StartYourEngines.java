@@ -41,7 +41,7 @@ public final class StartYourEngines extends CardImpl {
 
 class StartYourEnginesEffect extends ContinuousEffectImpl {
 
-    public StartYourEnginesEffect() {
+    StartYourEnginesEffect() {
         super(Duration.EndOfTurn, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.BecomeCreature);
         staticText = "Vehicles you control become artifact creatures until end of turn";
     }

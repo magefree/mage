@@ -20,7 +20,7 @@ public final class StoneIdolToken extends TokenImpl {
         addAbility(TrampleAbility.getInstance());
     }
 
-    protected StoneIdolToken(final StoneIdolToken token) {
+    private StoneIdolToken(final StoneIdolToken token) {
         super(token);
     }
 

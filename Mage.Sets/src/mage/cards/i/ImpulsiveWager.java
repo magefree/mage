@@ -47,7 +47,7 @@ public final class ImpulsiveWager extends CardImpl {
 
 class ImpulsiveWagerEffect extends OneShotEffect {
 
-    public ImpulsiveWagerEffect() {
+    ImpulsiveWagerEffect() {
         super(Outcome.Benefit);
         staticText = "If the discarded card was a nonland card, draw two cards. Otherwise, put a bounty counter on target creature";
     }

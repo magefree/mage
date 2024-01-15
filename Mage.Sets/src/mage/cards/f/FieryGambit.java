@@ -42,7 +42,7 @@ public final class FieryGambit extends CardImpl {
 
 class FieryGambitEffect extends OneShotEffect {
 
-    public FieryGambitEffect() {
+    FieryGambitEffect() {
         super(Outcome.Benefit);
         this.staticText = "Flip a coin until you lose a flip or choose to stop flipping. If you lose a flip, Fiery Gambit has no effect. If you win one or more flips, Fiery Gambit deals 3 damage to target creature. If you win two or more flips, Fiery Gambit deals 6 damage to each opponent. If you win three or more flips, draw nine cards and untap all lands you control";
     }

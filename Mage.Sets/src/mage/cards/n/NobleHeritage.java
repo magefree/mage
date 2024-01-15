@@ -104,7 +104,7 @@ class NobleHeritageTriggeredAbility extends TriggeredAbilityImpl {
 
 class NobleHeritageEffect extends OneShotEffect {
 
-    public NobleHeritageEffect() {
+    NobleHeritageEffect() {
         super(Outcome.Benefit);
         this.staticText = "each player may put two +1/+1 counters on a creature they control. "
                 + "If a player does, creatures that player controls can't attack you or planeswalkers you control until your next turn";

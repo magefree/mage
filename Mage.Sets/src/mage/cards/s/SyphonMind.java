@@ -38,7 +38,7 @@ public final class SyphonMind extends CardImpl {
 
 class SyphonMindEffect extends OneShotEffect {
 
-    public SyphonMindEffect() {
+    SyphonMindEffect() {
         super(Outcome.Discard);
         this.staticText = "Each other player discards a card. You draw a card for each card discarded this way";
     }

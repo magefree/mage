@@ -65,7 +65,7 @@ public final class CurseOfSilence extends CardImpl {
 
 class CurseOfSilenceCostEffect extends CostModificationEffectImpl {
 
-    public CurseOfSilenceCostEffect() {
+    CurseOfSilenceCostEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment, CostModificationType.INCREASE_COST);
         staticText = "Spells with the chosen name enchanted player casts cost {2} more to cast";
     }

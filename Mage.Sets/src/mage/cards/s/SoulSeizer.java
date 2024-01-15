@@ -99,7 +99,7 @@ class SoulSeizerTriggeredAbility extends TriggeredAbilityImpl {
 
 class SoulSeizerEffect extends OneShotEffect {
 
-    public SoulSeizerEffect() {
+    SoulSeizerEffect() {
         super(Outcome.GainControl);
     }
 

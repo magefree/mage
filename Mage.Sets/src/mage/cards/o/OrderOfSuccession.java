@@ -49,7 +49,7 @@ public final class OrderOfSuccession extends CardImpl {
 
 class OrderOfSuccessionEffect extends OneShotEffect {
 
-    public OrderOfSuccessionEffect() {
+    OrderOfSuccessionEffect() {
         super(Outcome.Benefit);
         this.staticText = "Starting with you and proceeding in the chosen direction, each player chooses a creature controlled by the next player in that direction. Each player gains control of the creature they chose";
     }

@@ -26,7 +26,7 @@ public final class RatCantBlockToken extends TokenImpl {
         ));
     }
 
-    protected RatCantBlockToken(final RatCantBlockToken token) {
+    private RatCantBlockToken(final RatCantBlockToken token) {
         super(token);
     }
 

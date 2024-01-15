@@ -41,7 +41,7 @@ public final class RainOfDaggers extends CardImpl {
 
 class RainOfDaggersEffect extends OneShotEffect {
 
-    public RainOfDaggersEffect() {
+    RainOfDaggersEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "Destroy all creatures target opponent controls. You lose 2 life for each creature destroyed this way";
     }

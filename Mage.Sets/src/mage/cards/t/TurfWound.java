@@ -44,7 +44,7 @@ public final class TurfWound extends CardImpl {
 
 class TurfWoundEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public TurfWoundEffect() {
+    TurfWoundEffect() {
         super(Duration.EndOfTurn, Outcome.Detriment);
         staticText = "Target player can't play land cards this turn";
     }

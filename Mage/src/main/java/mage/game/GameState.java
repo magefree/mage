@@ -1065,8 +1065,7 @@ public class GameState implements Serializable, Copyable<GameState> {
             addTrigger((TriggeredAbility) ability, sourceId, attachedTo);
         }
 
-        List<Watcher> watcherList = new ArrayList<>(ability.getWatchers()); // Workaround to prevent ConcurrentModificationException, not clear to me why this is happening now
-        for (Watcher watcher : watcherList) {
+        for (Watcher watcher : ability.getWatchers()) {
             // TODO: Check that watcher for commanderAbility (where attachedTo = null) also work correctly
             UUID controllerId = ability.getControllerId();
             if (attachedTo instanceof Card) {
@@ -1074,9 +1073,11 @@ public class GameState implements Serializable, Copyable<GameState> {
             } else if (attachedTo instanceof Controllable) {
                 controllerId = ((Controllable) attachedTo).getControllerId();
             }
-            watcher.setControllerId(controllerId);
-            watcher.setSourceId(attachedTo == null ? ability.getSourceId() : attachedTo.getId());
-            watchers.add(watcher);
+
+            Watcher newWatcher = watcher.copy();
+            newWatcher.setControllerId(controllerId);
+            newWatcher.setSourceId(attachedTo == null ? ability.getSourceId() : attachedTo.getId());
+            watchers.add(newWatcher);
         }
 
         for (Ability sub : ability.getSubAbilities()) {
@@ -1136,9 +1137,10 @@ public class GameState implements Serializable, Copyable<GameState> {
 
         List<Watcher> watcherList = new ArrayList<>(ability.getWatchers()); // Workaround to prevent ConcurrentModificationException, not clear to me why this is happening now
         for (Watcher watcher : watcherList) {
-            watcher.setControllerId(ability.getControllerId());
-            watcher.setSourceId(ability.getSourceId());
-            this.watchers.add(watcher);
+            Watcher newWatcher = watcher.copy();
+            newWatcher.setControllerId(ability.getControllerId());
+            newWatcher.setSourceId(ability.getSourceId());
+            this.watchers.add(newWatcher);
         }
     }
 
@@ -1378,8 +1380,11 @@ public class GameState implements Serializable, Copyable<GameState> {
         ); // The stored MOR is the stack-moment MOR so need to subtract one from the permanent's ZCC for the check
     }
 
-    public void addWatcher(Watcher watcher) {
-        this.watchers.add(watcher);
+    /**
+     * Must add copy of the original watcher, e.g. from an ability
+     */
+    public void addWatcher(Watcher newWatcher) {
+        this.watchers.add(newWatcher);
     }
 
     public void resetWatchers() {

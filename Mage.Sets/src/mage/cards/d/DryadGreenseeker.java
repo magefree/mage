@@ -49,7 +49,7 @@ public final class DryadGreenseeker extends CardImpl {
 
 class DryadGreenseekerEffect extends OneShotEffect {
 
-    public DryadGreenseekerEffect() {
+    DryadGreenseekerEffect() {
         super(Outcome.DrawCard);
         this.staticText = "Look at the top card of your library. "
                 + "If it's a land card, you may reveal it and put it into your hand.";

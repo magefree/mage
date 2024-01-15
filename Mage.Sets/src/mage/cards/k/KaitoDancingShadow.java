@@ -114,7 +114,7 @@ class KaitoDancingShadowEffect extends OneShotEffect {
 
 class KaitoDancingShadowIncreaseLoyaltyUseEffect extends ContinuousEffectImpl {
 
-    public KaitoDancingShadowIncreaseLoyaltyUseEffect() {
+    KaitoDancingShadowIncreaseLoyaltyUseEffect() {
         super(Duration.EndOfTurn, Layer.RulesEffects, SubLayer.NA, Outcome.Benefit);
     }
 
@@ -143,4 +143,3 @@ class KaitoDancingShadowIncreaseLoyaltyUseEffect extends ContinuousEffectImpl {
         return layer == Layer.RulesEffects;
     }
 }
-

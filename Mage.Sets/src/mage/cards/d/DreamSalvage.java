@@ -73,7 +73,7 @@ class CardsDiscardedThisTurnWatcher extends Watcher {
 
 class DreamSalvageEffect extends OneShotEffect {
 
-    public DreamSalvageEffect() {
+    DreamSalvageEffect() {
         super(Outcome.DrawCard);
         staticText = "Draw cards equal to the number of cards target opponent discarded this turn";
     }

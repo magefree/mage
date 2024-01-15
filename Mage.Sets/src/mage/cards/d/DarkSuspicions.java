@@ -38,7 +38,7 @@ public final class DarkSuspicions extends CardImpl {
 
 class DarkSuspicionsEffect extends OneShotEffect {
 
-    public DarkSuspicionsEffect() {
+    DarkSuspicionsEffect() {
         super(Outcome.LoseLife);
         staticText = "that player loses X life, where X is the number of cards in that player's hand minus the number of cards in your hand";
     }

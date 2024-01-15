@@ -95,7 +95,7 @@ class EmberwildeCaliphTriggeredAbility extends TriggeredAbilityImpl {
 
 class EmberwildeCaliphEffect extends OneShotEffect {
 
-    public EmberwildeCaliphEffect() {
+    EmberwildeCaliphEffect() {
         super(Outcome.LoseLife);
     }
 

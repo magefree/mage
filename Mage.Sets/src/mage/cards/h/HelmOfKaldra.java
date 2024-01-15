@@ -93,7 +93,7 @@ class HelmOfKaldraCondition implements Condition {
 
 class HelmOfKaldraEffect extends OneShotEffect {
 
-    public HelmOfKaldraEffect() {
+    HelmOfKaldraEffect() {
         super(Outcome.Benefit);
         this.staticText = "if you control Equipment named Helm of Kaldra, Sword of Kaldra, and Shield of Kaldra, create Kaldra, a legendary 4/4 colorless Avatar creature token. Attach those Equipment to it";
     }

@@ -58,7 +58,7 @@ public final class MangarasEquity extends CardImpl {
 
 class MangarasEquityColorChoiceEffect extends OneShotEffect {
 
-    public MangarasEquityColorChoiceEffect() {
+    MangarasEquityColorChoiceEffect() {
         super(Outcome.Neutral);
         staticText = "choose black or red";
     }

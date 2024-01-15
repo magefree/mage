@@ -59,7 +59,7 @@ public final class StarlitSanctum extends CardImpl {
 
 class StarlitSanctumWhiteEffect extends OneShotEffect {
 
-    public StarlitSanctumWhiteEffect() {
+    StarlitSanctumWhiteEffect() {
         super(Outcome.GainLife);
         staticText = "You gain life equal to the sacrificed creature's toughness";
     }
@@ -95,7 +95,7 @@ class StarlitSanctumWhiteEffect extends OneShotEffect {
 
 class StarlitSanctumBlackEffect extends OneShotEffect {
 
-    public StarlitSanctumBlackEffect() {
+    StarlitSanctumBlackEffect() {
         super(Outcome.Damage);
         staticText = "Target player loses life equal to the sacrificed creature's power";
     }

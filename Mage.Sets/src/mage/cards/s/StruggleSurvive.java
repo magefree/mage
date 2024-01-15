@@ -53,7 +53,7 @@ public final class StruggleSurvive extends SplitCard {
 
 class SurviveEffect extends OneShotEffect {
 
-    public SurviveEffect() {
+    SurviveEffect() {
         super(Outcome.Neutral);
         staticText = "Each player shuffles their graveyard into their library";
     }

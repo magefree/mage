@@ -10,7 +10,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 /**
  * @author LevelX2
  */
-public class VorinclexVoiceOfHungerTest extends CardTestPlayerBase {
+public class AddManaOfAnyTypeProducedTest extends CardTestPlayerBase {
 
     /**
      * Vorinclex, Voice of Hunger is not mana doubling River of Tears.
@@ -114,4 +114,59 @@ public class VorinclexVoiceOfHungerTest extends CardTestPlayerBase {
         assertTapped("Gemstone Caverns", true);
 
     }
+
+    private static final String kinnan = "Kinnan, Bonder Prodigy";
+    private static final String signet = "Gruul Signet";
+    private static final String addRG = "{1}, {T}: Add {R}{G}";
+
+    @Test
+    public void testChooseColorRed() {
+        addCard(Zone.BATTLEFIELD, playerA, kinnan); // Whenever you tap a nonland permanent for mana, add one mana of any type that permanent produced.
+        addCard(Zone.BATTLEFIELD, playerA, "Wastes");
+        addCard(Zone.BATTLEFIELD, playerA, signet);
+        String raid = "Massive Raid"; // Massive Raid deals damage to any target equal to the number of creatures you control.
+        addCard(Zone.HAND, playerA, raid); // 1RR
+
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, addRG);
+        setChoice(playerA, "Red");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, raid, playerB);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertTapped(signet, true);
+        assertTapped("Wastes", true);
+        assertDamageReceived(playerA, kinnan, 0);
+        assertLife(playerA, 20);
+        assertLife(playerB, 19);
+
+    }
+
+    @Test
+    public void testChooseColorGreen() {
+        addCard(Zone.BATTLEFIELD, playerA, kinnan); // Whenever you tap a nonland permanent for mana, add one mana of any type that permanent produced.
+        addCard(Zone.BATTLEFIELD, playerA, "Wastes");
+        addCard(Zone.BATTLEFIELD, playerA, signet);
+        String hailstorm = "Hail Storm"; // Hail Storm deals 2 damage to each attacking creature and 1 damage to you and each creature you control.
+        addCard(Zone.HAND, playerA, hailstorm); // 1GG
+
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, addRG);
+        setChoice(playerA, "Green");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, hailstorm);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertTapped(signet, true);
+        assertTapped("Wastes", true);
+        assertDamageReceived(playerA, kinnan, 1);
+        assertLife(playerA, 19);
+        assertLife(playerB, 20);
+
+    }
+
 }

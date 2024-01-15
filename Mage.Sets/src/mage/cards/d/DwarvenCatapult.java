@@ -41,7 +41,7 @@ public final class DwarvenCatapult extends CardImpl {
 
 class DwarvenCatapultEffect extends OneShotEffect {
 
-    public DwarvenCatapultEffect() {
+    DwarvenCatapultEffect() {
         super(Outcome.Damage);
         staticText = "{this} deals X damage divided evenly, rounded down, among all creatures target opponent controls.";
     }

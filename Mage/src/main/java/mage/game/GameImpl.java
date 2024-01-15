@@ -1378,7 +1378,6 @@ public abstract class GameImpl implements Game {
     public void initPlayerDefaultWatchers(UUID playerId) {
         PlayerDamagedBySourceWatcher playerDamagedBySourceWatcher = new PlayerDamagedBySourceWatcher();
         playerDamagedBySourceWatcher.setControllerId(playerId);
-
         getState().addWatcher(playerDamagedBySourceWatcher);
 
         BloodthirstWatcher bloodthirstWatcher = new BloodthirstWatcher();

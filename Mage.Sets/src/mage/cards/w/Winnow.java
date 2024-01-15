@@ -43,7 +43,7 @@ public final class Winnow extends CardImpl {
 
 class WinnowEffect extends DestroyTargetEffect {
 
-    public WinnowEffect() {
+    WinnowEffect() {
         super();
         staticText = "Destroy target nonland permanent if another permanent with the same name is on the battlefield";
     }

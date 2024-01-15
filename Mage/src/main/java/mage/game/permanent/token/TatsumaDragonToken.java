@@ -23,7 +23,7 @@ public final class TatsumaDragonToken extends TokenImpl {
         addAbility(FlyingAbility.getInstance());
     }
 
-    protected TatsumaDragonToken(final TatsumaDragonToken token) {
+    private TatsumaDragonToken(final TatsumaDragonToken token) {
         super(token);
     }
 

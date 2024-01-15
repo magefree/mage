@@ -54,7 +54,7 @@ public final class StitcherGeralf extends CardImpl {
 
 class StitcherGeralfEffect extends OneShotEffect {
 
-    public StitcherGeralfEffect() {
+    StitcherGeralfEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Each player mills three cards. Exile up to two creature cards put into graveyards this way. Create an X/X blue Zombie creature token, where X is the total power of the cards exiled this way";
     }

@@ -7,9 +7,7 @@ import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SubType;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.TokenPredicate;
@@ -36,13 +34,14 @@ public final class SanguineStatuette extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new BloodToken())));
 
         // Whenever you sacrifice a Blood token, you may have Sanguine Statuette become a 3/3 Vampire artifact creature with haste until end of turn.
-        this.addAbility(new SacrificePermanentTriggeredAbility(new BecomesCreatureSourceEffect(
+        this.addAbility(new SacrificePermanentTriggeredAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(
                 new CreatureToken(3, 3, "3/3 Vampire artifact creature with haste")
                         .withType(CardType.ARTIFACT)
                         .withSubType(SubType.VAMPIRE)
                         .withAbility(HasteAbility.getInstance()),
                 CardType.ARTIFACT, Duration.EndOfTurn
-        ).setText("have {this} become a 3/3 Vampire artifact creature with haste until end of turn"), filter, false, true));
+        ).setText("have {this} become a 3/3 Vampire artifact creature with haste until end of turn"),
+                filter, TargetController.YOU, SetTargetPointer.NONE, true));
     }
 
     private SanguineStatuette(final SanguineStatuette card) {

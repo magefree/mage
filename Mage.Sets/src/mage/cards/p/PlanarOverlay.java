@@ -40,7 +40,7 @@ public final class PlanarOverlay extends CardImpl {
 
 class PlanarOverlayEffect extends OneShotEffect {
 
-    public PlanarOverlayEffect() {
+    PlanarOverlayEffect() {
         super(Outcome.ReturnToHand);
         this.staticText = "Each player chooses a land they control of each basic land type. Return those lands to their owners' hands";
     }

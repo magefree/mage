@@ -52,7 +52,7 @@ public final class LlanowarEmpath extends CardImpl {
 
 class LlanowarEmpathEffect extends OneShotEffect {
 
-    public LlanowarEmpathEffect() {
+    LlanowarEmpathEffect() {
         super(Outcome.Benefit);
         this.staticText = ", then reveal the top card of your library. If it's a creature card, put it into your hand.";
     }

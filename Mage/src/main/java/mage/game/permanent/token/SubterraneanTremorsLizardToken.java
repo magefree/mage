@@ -19,7 +19,7 @@ public final class SubterraneanTremorsLizardToken extends TokenImpl {
         toughness = new MageInt(8);
     }
 
-    protected SubterraneanTremorsLizardToken(final SubterraneanTremorsLizardToken token) {
+    private SubterraneanTremorsLizardToken(final SubterraneanTremorsLizardToken token) {
         super(token);
     }
 

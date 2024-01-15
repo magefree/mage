@@ -58,7 +58,7 @@ public final class Rey extends CardImpl {
 
 class ReyEffect extends OneShotEffect {
 
-    public ReyEffect() {
+    ReyEffect() {
         super(Outcome.Detriment);
         staticText = "reveal the top card of target player's library. You gain life equal to that card's mana value";
     }

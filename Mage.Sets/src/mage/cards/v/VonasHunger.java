@@ -61,7 +61,7 @@ public final class VonasHunger extends CardImpl {
 
 class VonasHungerEffect extends OneShotEffect {
 
-    public VonasHungerEffect() {
+    VonasHungerEffect() {
         super(Outcome.Sacrifice);
     }
 

@@ -18,7 +18,7 @@ public final class RebelRedToken extends TokenImpl {
         subtype.add(SubType.REBEL);
     }
 
-    protected RebelRedToken(final RebelRedToken token) {
+    private RebelRedToken(final RebelRedToken token) {
         super(token);
     }
 

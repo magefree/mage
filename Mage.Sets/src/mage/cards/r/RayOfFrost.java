@@ -87,7 +87,7 @@ enum RayOfFrostCondition implements Condition {
 
 class RayOfFrostLoseAbilitiesEffect extends ContinuousEffectImpl {
 
-    public RayOfFrostLoseAbilitiesEffect() {
+    RayOfFrostLoseAbilitiesEffect() {
         super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.LoseAbility);
         this.staticText = "As long as enchanted creature is red, it loses all abilities";
     }

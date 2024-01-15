@@ -87,7 +87,7 @@ class SpiritualFocusTriggeredAbility extends TriggeredAbilityImpl {
 
 class SpiritualFocusDrawCardEffect extends OneShotEffect {
 
-    public SpiritualFocusDrawCardEffect() {
+    SpiritualFocusDrawCardEffect() {
         super(Outcome.DrawCard);
     }
 

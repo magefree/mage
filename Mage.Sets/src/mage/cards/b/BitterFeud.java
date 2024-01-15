@@ -51,7 +51,7 @@ public final class BitterFeud extends CardImpl {
 
 class BitterFeudEntersBattlefieldEffect extends OneShotEffect {
 
-    public BitterFeudEntersBattlefieldEffect() {
+    BitterFeudEntersBattlefieldEffect() {
         super(Outcome.Damage);
         staticText = "choose two players";
     }

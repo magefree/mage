@@ -48,7 +48,7 @@ public final class AkoumStonewaker extends CardImpl {
 
 class AkoumStonewakerEffect extends OneShotEffect {
 
-    public AkoumStonewakerEffect() {
+    AkoumStonewakerEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "create a 3/1 red Elemental creature token with trample and haste. Exile that token at the beginning of the next end step";
     }

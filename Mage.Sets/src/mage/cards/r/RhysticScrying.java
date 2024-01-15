@@ -40,7 +40,7 @@ public final class RhysticScrying extends CardImpl {
 
 class RhysticScryingEffect extends OneShotEffect {
 
-    public RhysticScryingEffect() {
+    RhysticScryingEffect() {
         super(Outcome.Benefit);
         this.staticText = "Then if any player pays {2}, discard three cards";
     }

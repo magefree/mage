@@ -56,7 +56,7 @@ public final class AwesomePresence extends CardImpl {
 
 class AwesomePresenceRestrictionEffect extends PayCostToAttackBlockEffectImpl {
 
-    public AwesomePresenceRestrictionEffect(ManaCosts manaCosts) {
+    AwesomePresenceRestrictionEffect(ManaCosts manaCosts) {
         super(Duration.WhileOnBattlefield, Outcome.Neutral, RestrictType.BLOCK, manaCosts);
         staticText = "Enchanted creature"
                 + " can't be blocked "

@@ -18,7 +18,7 @@ public final class ReflectionToken extends TokenImpl {
         toughness = new MageInt(2);
     }
 
-    protected ReflectionToken(final ReflectionToken token) {
+    private ReflectionToken(final ReflectionToken token) {
         super(token);
     }
 

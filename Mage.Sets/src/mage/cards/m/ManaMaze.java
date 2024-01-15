@@ -1,7 +1,7 @@
-
 package mage.cards.m;
 
 import mage.MageObject;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -18,7 +18,6 @@ import mage.watchers.Watcher;
 import java.util.UUID;
 
 /**
- *
  * @author jeffwadsworth
  */
 public final class ManaMaze extends CardImpl {
@@ -65,8 +64,8 @@ class ManaMazeEffect extends ContinuousRuleModifyingEffectImpl {
         Card card = spellAbility.getCharacteristics(game);
         if (card != null) {
             LastSpellCastWatcher watcher = game.getState().getWatcher(LastSpellCastWatcher.class);
-            if (watcher != null && watcher.getLastSpellCast() != null) {
-                return !card.getColor(game).intersection(watcher.getLastSpellCast().getColor(game)).isColorless();
+            if (watcher != null && watcher.getLastSpellColor() != null) {
+                return !card.getColor(game).intersection(watcher.getLastSpellColor()).isColorless();
             }
         }
         return false;
@@ -80,7 +79,7 @@ class ManaMazeEffect extends ContinuousRuleModifyingEffectImpl {
 
 class LastSpellCastWatcher extends Watcher {
 
-    private Spell lastSpellCast = null;
+    private ObjectColor lastSpellColor = null;
 
     public LastSpellCastWatcher() {
         super(WatcherScope.GAME);
@@ -97,7 +96,7 @@ class LastSpellCastWatcher extends Watcher {
                 }
             }
             if (spell != null) {
-                lastSpellCast = spell;
+                this.lastSpellColor = spell.getColor(game);
             }
         }
     }
@@ -105,10 +104,10 @@ class LastSpellCastWatcher extends Watcher {
     @Override
     public void reset() {
         super.reset();
-        lastSpellCast = null;
+        this.lastSpellColor = null;
     }
 
-    public Spell getLastSpellCast() {
-        return lastSpellCast;
+    public ObjectColor getLastSpellColor() {
+        return this.lastSpellColor;
     }
 }

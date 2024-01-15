@@ -54,7 +54,7 @@ public final class Shapeshifter extends CardImpl {
 
 class ShapeshifterEffect extends OneShotEffect {
 
-    public ShapeshifterEffect() {
+    ShapeshifterEffect() {
         super(Outcome.Benefit);
         this.staticText = "Choose a number between 0 and 7.";
     }
@@ -98,7 +98,7 @@ class ShapeshifterEffect extends OneShotEffect {
 
 class ShapeshifterContinuousEffect extends ContinuousEffectImpl {
 
-    public ShapeshifterContinuousEffect() {
+    ShapeshifterContinuousEffect() {
         super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.CharacteristicDefining_7a, Outcome.BoostCreature);
         staticText = "{this}'s power is equal to the last chosen number and its toughness is equal to 7 minus that number.";
     }

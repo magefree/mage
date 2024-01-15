@@ -58,7 +58,7 @@ public final class Earthbind extends CardImpl {
 
 class EarthbindEffect extends OneShotEffect {
 
-    public EarthbindEffect() {
+    EarthbindEffect() {
         super(Outcome.Damage);
         staticText = "if enchanted creature has flying, {this} deals 2 damage to that creature and Earthbind gains \"Enchanted creature loses flying.\"";
     }
@@ -88,5 +88,3 @@ class EarthbindEffect extends OneShotEffect {
         return false;
     }
 }
-
-

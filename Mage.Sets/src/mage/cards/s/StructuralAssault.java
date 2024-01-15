@@ -74,7 +74,7 @@ class StructuralAssaultWatcher extends Watcher {
 
 class StructuralAssaultEffect extends OneShotEffect {
 
-    public StructuralAssaultEffect() {
+    StructuralAssaultEffect() {
         super(Outcome.Damage);
         this.staticText = ", then {this} deals damage to each creature equal to the number of artifacts that were put into graveyards from the battlefield this turn";
     }

@@ -52,7 +52,7 @@ public final class ChokingSands extends CardImpl {
 
 class ChokingSandsEffect extends OneShotEffect {
 
-    public ChokingSandsEffect() {
+    ChokingSandsEffect() {
         super(Outcome.Damage);
         this.staticText = "If that land was nonbasic, Choking Sands deals 2 damage to the land's controller";
     }

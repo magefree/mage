@@ -52,7 +52,7 @@ public final class PursuitOfKnowledge extends CardImpl {
 
 class PursuitOfKnowledgeEffect extends ReplacementEffectImpl {
 
-    public PursuitOfKnowledgeEffect() {
+    PursuitOfKnowledgeEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "If you would draw a card, you may put a study counter on {this} instead";
     }

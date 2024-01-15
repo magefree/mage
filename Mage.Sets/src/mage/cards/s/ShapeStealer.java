@@ -51,7 +51,7 @@ public final class ShapeStealer extends CardImpl {
 
 class ShapeStealerEffect extends OneShotEffect {
 
-    public ShapeStealerEffect() {
+    ShapeStealerEffect() {
         super(Outcome.Detriment);
         this.staticText = "change {this}'s base power and toughness to that creature's power and toughness until end of turn";
     }

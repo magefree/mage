@@ -43,7 +43,7 @@ public final class MoltenRain extends CardImpl {
 
 class MoltenRainEffect extends OneShotEffect {
 
-    public MoltenRainEffect() {
+    MoltenRainEffect() {
         super(Outcome.Damage);
         this.staticText = "If that land was nonbasic, Molten Rain deals 2 damage to the land's controller";
     }

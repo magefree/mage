@@ -139,7 +139,7 @@ class TergridGodOfFrightTriggeredAbility extends TriggeredAbilityImpl {
 
 class TergridGodOfFrightEffect extends OneShotEffect {
 
-    public TergridGodOfFrightEffect() {
+    TergridGodOfFrightEffect() {
         super(Outcome.Neutral);
     }
 

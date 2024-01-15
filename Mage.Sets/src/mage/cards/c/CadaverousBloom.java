@@ -47,7 +47,7 @@ public final class CadaverousBloom extends CardImpl {
 
 class CadaverousBloomManaEffect extends BasicManaEffect {
 
-    public CadaverousBloomManaEffect(Mana mana) {
+    CadaverousBloomManaEffect(Mana mana) {
         super(mana);
     }
 

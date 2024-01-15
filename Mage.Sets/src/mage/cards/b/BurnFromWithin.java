@@ -46,7 +46,7 @@ public final class BurnFromWithin extends CardImpl {
 
 class BurnFromWithinEffect extends OneShotEffect {
 
-    public BurnFromWithinEffect() {
+    BurnFromWithinEffect() {
         super(Outcome.Benefit);
         this.staticText = "{this} deals X damage to any target. " +
                 "If a creature is dealt damage this way, it loses indestructible until end of turn. " +

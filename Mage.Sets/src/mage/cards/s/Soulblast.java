@@ -44,7 +44,7 @@ public final class Soulblast extends CardImpl {
 
 class SoulblastEffect extends OneShotEffect {
 
-    public SoulblastEffect() {
+    SoulblastEffect() {
         super(Outcome.Benefit);
         this.staticText = "Soulblast deals damage to any target equal to the total power of the sacrificed creatures";
     }

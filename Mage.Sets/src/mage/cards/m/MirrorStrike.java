@@ -51,7 +51,7 @@ public final class MirrorStrike extends CardImpl {
 
 class MirrorStrikeEffect extends ReplacementEffectImpl {
 
-    public MirrorStrikeEffect() {
+    MirrorStrikeEffect() {
         super(Duration.EndOfTurn, Outcome.RedirectDamage);
         staticText = "All combat damage that would be dealt to you this turn by target unblocked creature is dealt to its controller instead";
     }

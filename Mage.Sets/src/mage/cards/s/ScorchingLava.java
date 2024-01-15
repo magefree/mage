@@ -59,7 +59,7 @@ public final class ScorchingLava extends CardImpl {
 
 class ScorchingLavaEffect extends OneShotEffect {
 
-    public ScorchingLavaEffect() {
+    ScorchingLavaEffect() {
         super(Outcome.Exile);
     }
 

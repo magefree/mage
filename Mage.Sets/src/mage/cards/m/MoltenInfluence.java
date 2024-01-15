@@ -40,7 +40,7 @@ public final class MoltenInfluence extends CardImpl {
 
 class MoltenInfluenceEffect extends OneShotEffect {
 
-    public MoltenInfluenceEffect() {
+    MoltenInfluenceEffect() {
         super(Outcome.Detriment);
         this.staticText = "Counter target instant or sorcery spell unless its controller has {this} deal 4 damage to them";
     }

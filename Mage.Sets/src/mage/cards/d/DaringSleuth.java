@@ -1,17 +1,14 @@
-
 package mage.cards.d;
 
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.SacrificePermanentTriggeredAbility;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
+import mage.filter.FilterPermanent;
 
 import java.util.UUID;
 
@@ -19,6 +16,8 @@ import java.util.UUID;
  * @author fireshoes
  */
 public final class DaringSleuth extends CardImpl {
+
+    private static final FilterPermanent filter = new FilterPermanent(SubType.CLUE, "a Clue");
 
     public DaringSleuth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
@@ -31,7 +30,8 @@ public final class DaringSleuth extends CardImpl {
 
         // When you sacrifice a Clue, transform Daring Sleuth.
         this.addAbility(new TransformAbility());
-        this.addAbility(new DaringSleuthTriggeredAbility());
+        this.addAbility(new SacrificePermanentTriggeredAbility(new TransformSourceEffect(), filter)
+                .setTriggerPhrase("When you sacrifice a Clue, "));
     }
 
     private DaringSleuth(final DaringSleuth card) {
@@ -41,33 +41,5 @@ public final class DaringSleuth extends CardImpl {
     @Override
     public DaringSleuth copy() {
         return new DaringSleuth(this);
-    }
-}
-
-class DaringSleuthTriggeredAbility extends TriggeredAbilityImpl {
-
-    public DaringSleuthTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new TransformSourceEffect());
-        setTriggerPhrase("When you sacrifice a Clue, ");
-    }
-
-    private DaringSleuthTriggeredAbility(final DaringSleuthTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public DaringSleuthTriggeredAbility copy() {
-        return new DaringSleuthTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.SACRIFICED_PERMANENT;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getPlayerId().equals(this.getControllerId())
-                && game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD).hasSubtype(SubType.CLUE, game);
     }
 }

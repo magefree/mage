@@ -19,7 +19,7 @@ public final class SalamnderWarriorToken extends TokenImpl {
         toughness = new MageInt(3);
     }
 
-    protected SalamnderWarriorToken(final SalamnderWarriorToken token) {
+    private SalamnderWarriorToken(final SalamnderWarriorToken token) {
         super(token);
     }
 

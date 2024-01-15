@@ -37,7 +37,7 @@ public final class Worship extends CardImpl {
 
 class WorshipReplacementEffect extends ReplacementEffectImpl {
 
-    public WorshipReplacementEffect() {
+    WorshipReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "If you control a creature, damage that would reduce your life total to less than 1 reduces it to 1 instead";
     }

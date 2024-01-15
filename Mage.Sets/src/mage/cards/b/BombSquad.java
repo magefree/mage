@@ -104,7 +104,7 @@ class BombSquadTriggeredAbility extends TriggeredAbilityImpl {
 
 class BombSquadDamgeEffect extends OneShotEffect {
 
-    public BombSquadDamgeEffect() {
+    BombSquadDamgeEffect() {
         super(Outcome.Benefit);
         this.staticText = "remove all fuse counters from it and destroy it. That creature deals 4 damage to its controller";
     }

@@ -70,7 +70,7 @@ public final class AngrathMinotaurPirate extends CardImpl {
 
 class AngrathMinotaurPirateThirdAbilityEffect extends OneShotEffect {
 
-    public AngrathMinotaurPirateThirdAbilityEffect() {
+    AngrathMinotaurPirateThirdAbilityEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "Destroy all creature target opponent controls. {this} deals damage to that player equal to their total power";
     }

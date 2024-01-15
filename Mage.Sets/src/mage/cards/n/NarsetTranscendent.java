@@ -143,7 +143,7 @@ class NarsetTranscendentTriggeredAbility extends DelayedTriggeredAbility {
 
 class NarsetTranscendentGainReboundEffect extends ContinuousEffectImpl {
 
-    public NarsetTranscendentGainReboundEffect() {
+    NarsetTranscendentGainReboundEffect() {
         super(Duration.Custom, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         staticText = "it gains rebound";
     }

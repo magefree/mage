@@ -64,7 +64,7 @@ enum LivingInfernoAdjuster implements TargetAdjuster {
 
 class LivingInfernoEffect extends OneShotEffect {
 
-    public LivingInfernoEffect() {
+    LivingInfernoEffect() {
         super(Outcome.Benefit);
         this.staticText = "{this} deals damage equal to its power " +
                 "divided as you choose among any number of target creatures. " +

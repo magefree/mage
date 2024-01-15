@@ -67,7 +67,7 @@ public final class MineLayer extends CardImpl {
 
 class RemoveAllMineCountersEffect extends OneShotEffect {
 
-    public RemoveAllMineCountersEffect() {
+    RemoveAllMineCountersEffect() {
         super(Outcome.Neutral);
         this.staticText = "remove all mine counters from all lands";
     }

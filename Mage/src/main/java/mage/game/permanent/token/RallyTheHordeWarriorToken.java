@@ -19,7 +19,7 @@ public final class RallyTheHordeWarriorToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    protected RallyTheHordeWarriorToken(final RallyTheHordeWarriorToken token) {
+    private RallyTheHordeWarriorToken(final RallyTheHordeWarriorToken token) {
         super(token);
     }
 

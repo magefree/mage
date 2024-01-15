@@ -59,7 +59,7 @@ public final class VancesBlastingCannons extends CardImpl {
 
 class VancesBlastingCannonsExileEffect extends OneShotEffect {
 
-    public VancesBlastingCannonsExileEffect() {
+    VancesBlastingCannonsExileEffect() {
         super(Outcome.Benefit);
         this.staticText = "exile the top card of your library. If it's a nonland card, you may cast that card this turn";
     }
@@ -96,7 +96,7 @@ class VancesBlastingCannonsExileEffect extends OneShotEffect {
 
 class CastFromNonHandZoneTargetEffect extends AsThoughEffectImpl {
 
-    public CastFromNonHandZoneTargetEffect(Duration duration) {
+    CastFromNonHandZoneTargetEffect(Duration duration) {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, duration, Outcome.Benefit);
         staticText = "If it's a nonland card, you may cast that card this turn";
     }

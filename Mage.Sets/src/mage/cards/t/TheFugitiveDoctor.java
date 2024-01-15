@@ -61,7 +61,7 @@ public final class TheFugitiveDoctor extends CardImpl {
 
 class TheFugitiveDoctorEffect extends ContinuousEffectImpl {
 
-    public TheFugitiveDoctorEffect() {
+    TheFugitiveDoctorEffect() {
         super(Duration.EndOfTurn, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         this.staticText = "target instant or sorcery card in your graveyard gains flashback {2}{R}{G} until end of turn";
     }

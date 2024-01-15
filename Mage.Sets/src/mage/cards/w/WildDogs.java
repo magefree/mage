@@ -53,7 +53,7 @@ public final class WildDogs extends CardImpl {
 
 class WildDogsEffect extends OneShotEffect {
 
-    public WildDogsEffect() {
+    WildDogsEffect() {
         super(Outcome.GainControl);
         this.staticText = "the player with the most life gains control of {this}";
     }

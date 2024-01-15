@@ -47,7 +47,7 @@ public final class GravebladeMarauder extends CardImpl {
 
 class GravebladeMarauderEffect extends OneShotEffect {
 
-    public GravebladeMarauderEffect() {
+    GravebladeMarauderEffect() {
         super(Outcome.LoseLife);
         this.staticText = "that player loses life equal to the number of creature cards in your graveyard";
     }

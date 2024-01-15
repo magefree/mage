@@ -49,7 +49,7 @@ public final class ThickSkinnedGoblin extends CardImpl {
 
 class ThickSkinnedGoblinCostModificationEffect extends AsThoughEffectImpl {
 
-    public ThickSkinnedGoblinCostModificationEffect(){
+    ThickSkinnedGoblinCostModificationEffect(){
         super(AsThoughEffectType.PAY_0_ECHO, Duration.WhileOnBattlefield, Outcome.Benefit);
         this.staticText = "You may pay {0} rather than pay the echo cost for permanents you control.";
     }

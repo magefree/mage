@@ -59,7 +59,7 @@ public final class WojekApothecary extends CardImpl {
 
 class WojekApothecaryEffect extends OneShotEffect {
 
-    public WojekApothecaryEffect() {
+    WojekApothecaryEffect() {
         super(Outcome.Benefit);
         this.staticText = "Prevent the next 1 damage that would be dealt to target creature and each other creature that shares a color with it this turn";
     }

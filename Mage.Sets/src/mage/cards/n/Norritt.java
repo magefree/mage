@@ -85,7 +85,7 @@ public final class Norritt extends CardImpl {
 
 class NorrittDelayedDestroyEffect extends OneShotEffect {
 
-    public NorrittDelayedDestroyEffect() {
+    NorrittDelayedDestroyEffect() {
         super(Outcome.Detriment);
         this.staticText = "If it doesn't, destroy it at the beginning of the next end step";
     }

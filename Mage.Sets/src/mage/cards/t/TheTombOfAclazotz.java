@@ -217,7 +217,6 @@ class AddSubtypeEnteringCreatureEffect extends ReplacementEffectImpl {
             AddCardSubTypeEnteringTargetEffect effect = new AddCardSubTypeEnteringTargetEffect(mor, subType, Duration.WhileOnBattlefield);
             effect.setTargetPointer(new FixedTarget(target, game));
             game.addEffect(effect, source);
-
         }
         return false;
     }
@@ -232,6 +231,7 @@ class AddCardSubTypeEnteringTargetEffect extends ContinuousEffectImpl {
 
     private final SubType addedSubType;
     private final MageObjectReference mor;
+    private Card card;
 
     AddCardSubTypeEnteringTargetEffect(MageObjectReference mor, SubType addedSubType, Duration duration) {
         super(duration, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
@@ -239,22 +239,25 @@ class AddCardSubTypeEnteringTargetEffect extends ContinuousEffectImpl {
         this.mor = mor;
     }
 
-    private AddCardSubTypeEnteringTargetEffect(final AddCardSubTypeEnteringTargetEffect effect) {
+    protected AddCardSubTypeEnteringTargetEffect(final AddCardSubTypeEnteringTargetEffect effect) {
         super(effect);
         this.addedSubType = effect.addedSubType;
         this.mor = effect.mor;
+        this.card = effect.card;
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Spell spell = game.getSpell(targetPointer.getFixedTarget(game, source).getTarget());
         MageObject target = game.getObject(targetPointer.getFixedTarget(game, source).getTarget());
-        if (spell == null) {
-            return false;
+        if (spell != null) {
+            card = spell.getCard();
         }
-        Card card = spell.getCard();
         for (StackObject stackObject : game.getStack()) {
-            if (stackObject instanceof Spell && stackObject.equals(target) && mor.refersTo(target, game)) {
+            if (stackObject instanceof Spell
+                    && target != null
+                    && target.equals(stackObject)
+                    && mor.refersTo(target, game)) {
                 setCreatureSubtype(stackObject, addedSubType, game);
                 setCreatureSubtype(((Spell) stackObject).getCard(), addedSubType, game);
             }

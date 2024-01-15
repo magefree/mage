@@ -45,7 +45,7 @@ public final class RiteOfConsumption extends CardImpl {
 
 class RiteOfConsumptionEffect extends OneShotEffect {
 
-    public RiteOfConsumptionEffect() {
+    RiteOfConsumptionEffect() {
         super(Outcome.Benefit);
         this.staticText = "{this} deals damage equal to the sacrificed creature's power to target player or planeswalker. You gain life equal to the damage dealt this way";
     }

@@ -76,7 +76,7 @@ public final class CustodyBattle extends CardImpl {
 
 class GiveControlEffect extends ContinuousEffectImpl {
 
-    public GiveControlEffect() {
+    GiveControlEffect() {
         super(Duration.Custom, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
         staticText = "Target opponent gains control of {this}";
     }

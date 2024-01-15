@@ -69,7 +69,7 @@ public final class TheMycosynthGardens extends CardImpl {
 
 class TheMycosynthGardensCopyEffect extends OneShotEffect {
 
-    public TheMycosynthGardensCopyEffect() {
+    TheMycosynthGardensCopyEffect() {
         super(Outcome.Copy);
         this.staticText = "{this} becomes a copy of target nontoken artifact you control with mana value X.";
     }

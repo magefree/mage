@@ -19,7 +19,7 @@ public final class KnightAllyToken extends TokenImpl {
         toughness = new MageInt(2);
     }
 
-    protected KnightAllyToken(final KnightAllyToken token) {
+    private KnightAllyToken(final KnightAllyToken token) {
         super(token);
     }
 

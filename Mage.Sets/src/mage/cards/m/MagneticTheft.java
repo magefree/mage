@@ -49,7 +49,7 @@ public final class MagneticTheft extends CardImpl {
 
 class EquipEffect extends OneShotEffect {
 
-    public EquipEffect() {
+    EquipEffect() {
         super(Outcome.BoostCreature);
         staticText = "Attach target Equipment to target creature";
     }

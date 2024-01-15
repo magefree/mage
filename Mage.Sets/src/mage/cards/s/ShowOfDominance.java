@@ -51,7 +51,7 @@ public final class ShowOfDominance extends CardImpl {
 
 class ShowOfDominanceEffect extends OneShotEffect {
 
-    public ShowOfDominanceEffect() {
+    ShowOfDominanceEffect() {
         super(Outcome.BoostCreature);
         this.staticText = "Put four +1/+1 counters on the creature with the highest power. If two or more creatures are tied for the greatest power, you choose one of them. That creature gains trample until end of turn";
     }

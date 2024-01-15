@@ -57,7 +57,7 @@ public final class WakeToSlaughter extends CardImpl {
 
 class WakeToSlaughterEffect extends OneShotEffect {
 
-    public WakeToSlaughterEffect() {
+    WakeToSlaughterEffect() {
         super(Outcome.Benefit);
         this.staticText = "Choose up to two target creature cards in your graveyard. " +
                 "An opponent chooses one of them. " +

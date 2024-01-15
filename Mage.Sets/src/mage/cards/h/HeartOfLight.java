@@ -52,7 +52,7 @@ public final class HeartOfLight extends CardImpl {
 
 class HeartOfLightEffect extends PreventionEffectImpl {
 
-    public HeartOfLightEffect() {
+    HeartOfLightEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "Prevent all damage that would be dealt to and dealt by enchanted creature";
     }

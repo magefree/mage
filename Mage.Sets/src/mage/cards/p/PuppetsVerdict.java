@@ -40,7 +40,7 @@ public final class PuppetsVerdict extends CardImpl {
 
 class PuppetsVerdictEffect extends OneShotEffect {
 
-    public PuppetsVerdictEffect() {
+    PuppetsVerdictEffect() {
         super(Outcome.Damage);
         staticText = "Flip a coin. If you win the flip, destroy all creatures with power 2 or less. If you lose the flip, destroy all creatures with power 3 or greater";
     }

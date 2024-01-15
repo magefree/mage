@@ -37,7 +37,7 @@ public final class VisionsOfBeyond extends CardImpl {
 
 class VisionsOfBeyondEffect extends OneShotEffect {
 
-    public VisionsOfBeyondEffect() {
+    VisionsOfBeyondEffect() {
         super(Outcome.DrawCard);
         staticText = "Draw a card. If a graveyard has twenty or more cards in it, draw three cards instead";
     }

@@ -48,7 +48,7 @@ public final class SecretSalvage extends CardImpl {
 
 class SecretSalvageEffect extends OneShotEffect {
 
-    public SecretSalvageEffect() {
+    SecretSalvageEffect() {
         super(Outcome.DrawCard);
         staticText = "Exile target nonland card from your graveyard. " +
                 "Search your library for any number of cards with the same name as that card, " +

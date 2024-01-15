@@ -53,7 +53,7 @@ public final class ChaoticGoo extends CardImpl {
 
 class ChaoticGooEffect extends OneShotEffect {
 
-    public ChaoticGooEffect() {
+    ChaoticGooEffect() {
         super(Outcome.Damage);
         staticText = "flip a coin. If you win the flip, put a +1/+1 counter on {this}. If you lose the flip, remove a +1/+1 counter from {this}";
     }

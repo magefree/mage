@@ -41,7 +41,7 @@ public final class NaturalSelection extends CardImpl {
 
 class NaturalSelectionEffect extends OneShotEffect {
 
-    public NaturalSelectionEffect() {
+    NaturalSelectionEffect() {
         super(Outcome.DrawCard);
         this.staticText = "look at the top three cards of target player's library, then put them back in any order. You may have that player shuffle";
     }

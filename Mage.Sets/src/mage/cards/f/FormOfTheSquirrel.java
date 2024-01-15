@@ -59,7 +59,7 @@ public final class FormOfTheSquirrel extends CardImpl {
 
 class FormOfTheSquirrelCreateTokenEffect extends OneShotEffect {
 
-    public FormOfTheSquirrelCreateTokenEffect() {
+    FormOfTheSquirrelCreateTokenEffect() {
         super(Outcome.PutCreatureInPlay);
         staticText = "create a 1/1 green Squirrel creature token. You lose the game when that creature leaves the battlefield";
     }

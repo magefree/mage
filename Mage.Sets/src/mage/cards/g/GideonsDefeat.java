@@ -51,7 +51,7 @@ public final class GideonsDefeat extends CardImpl {
 
 class GideonsDefeatEffect extends OneShotEffect {
 
-    public GideonsDefeatEffect() {
+    GideonsDefeatEffect() {
         super(Outcome.Exile);
         staticText = "Exile target white creature that's attacking or blocking. If it was a Gideon planeswalker, you gain 5 life";
     }

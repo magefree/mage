@@ -77,7 +77,7 @@ class RumblingAftershocksTriggeredAbility extends TriggeredAbilityImpl {
 
 class RumblingAftershocksDealDamageEffect extends OneShotEffect {
 
-    public RumblingAftershocksDealDamageEffect() {
+    RumblingAftershocksDealDamageEffect() {
         super(Outcome.Damage);
         this.staticText = "you may have {this} deal damage to any target equal to the number of times that spell was kicked";
     }

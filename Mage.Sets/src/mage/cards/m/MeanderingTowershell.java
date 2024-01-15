@@ -70,7 +70,7 @@ public final class MeanderingTowershell extends CardImpl {
 
 class MeanderingTowershellEffect extends OneShotEffect {
 
-    public MeanderingTowershellEffect() {
+    MeanderingTowershellEffect() {
         super(Outcome.Detriment);
         this.staticText = "exile it. Return it to the battlefield under your control tapped and attacking at the beginning of the declare attackers step on your next turn";
     }
@@ -144,7 +144,7 @@ class AtBeginningNextDeclareAttackersStepNextTurnDelayedTriggeredAbility extends
 
 class MeanderingTowershellReturnEffect extends OneShotEffect {
 
-    public MeanderingTowershellReturnEffect() {
+    MeanderingTowershellReturnEffect() {
         super(Outcome.PutCreatureInPlay);
     }
 

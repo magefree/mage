@@ -23,7 +23,7 @@ public final class ElementalCatToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    protected ElementalCatToken(final ElementalCatToken token) {
+    private ElementalCatToken(final ElementalCatToken token) {
         super(token);
     }
 

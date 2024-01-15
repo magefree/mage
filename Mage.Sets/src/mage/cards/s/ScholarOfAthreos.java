@@ -45,7 +45,7 @@ public final class ScholarOfAthreos extends CardImpl {
 
 class ScholarOfAthreosEffect extends OneShotEffect {
 
-    public ScholarOfAthreosEffect() {
+    ScholarOfAthreosEffect() {
         super(Outcome.Damage);
         staticText = "Each opponent loses 1 life. You gain life equal to the life lost this way";
     }

@@ -47,7 +47,7 @@ public final class ZarOjanenScionOfEfrava extends CardImpl {
 
 class ZarOjanenScionOfEfravaEffect extends OneShotEffect {
 
-    public ZarOjanenScionOfEfravaEffect() {
+    ZarOjanenScionOfEfravaEffect() {
         super(Outcome.Benefit);
         this.staticText = "put a +1/+1 counter on each creature you control with toughness less than the number of basic land types among lands you control";
     }

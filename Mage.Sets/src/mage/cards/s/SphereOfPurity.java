@@ -39,7 +39,7 @@ public final class SphereOfPurity extends CardImpl {
 
 class SphereOfPurityEffect extends PreventionEffectImpl {
 
-    public SphereOfPurityEffect() {
+    SphereOfPurityEffect() {
         super(Duration.WhileOnBattlefield, 1, false, false);
         this.staticText = "If an artifact would deal damage to you, prevent 1 of that damage";
     }

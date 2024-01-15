@@ -56,7 +56,7 @@ public final class LiegeOfThePit extends CardImpl {
 
 class LiegeOfThePitEffect extends OneShotEffect {
 
-    public LiegeOfThePitEffect() {
+    LiegeOfThePitEffect() {
         super(Outcome.Damage);
         this.staticText = "sacrifice a creature other than {this}. If you can't, {this} deals 7 damage to you.";
     }

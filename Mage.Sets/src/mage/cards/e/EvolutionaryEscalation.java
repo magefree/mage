@@ -48,7 +48,7 @@ public final class EvolutionaryEscalation extends CardImpl {
 
 class EvolutionaryEscalationEffect extends OneShotEffect {
 
-    public EvolutionaryEscalationEffect() {
+    EvolutionaryEscalationEffect() {
         super(Outcome.BoostCreature);
         staticText = "put three +1/+1 counters on target creature you control and three +1/+1 counters on target creature an opponent controls";
     }

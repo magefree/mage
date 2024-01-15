@@ -49,7 +49,7 @@ public final class SwathcutterGiant extends CardImpl {
 
 class SwathcutterGiantEffect extends OneShotEffect {
 
-    public SwathcutterGiantEffect() {
+    SwathcutterGiantEffect() {
         super(Outcome.Benefit);
         this.staticText = "it deals 1 damage to each creature "
                 + "defending player controls.";

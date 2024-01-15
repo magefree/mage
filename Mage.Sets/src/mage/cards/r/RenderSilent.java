@@ -45,7 +45,7 @@ public final class RenderSilent extends CardImpl {
 
 class RenderSilentCounterEffect extends OneShotEffect {
 
-    public RenderSilentCounterEffect() {
+    RenderSilentCounterEffect() {
         super(Outcome.Detriment);
     }
 
@@ -77,7 +77,7 @@ class RenderSilentCounterEffect extends OneShotEffect {
 
 class RenderSilentEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public RenderSilentEffect() {
+    RenderSilentEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit);
         staticText = "Its controller can't cast spells this turn";
     }

@@ -101,7 +101,7 @@ class OranRiefHydraTriggeredAbility extends TriggeredAbilityImpl {
 
 class OranRiefHydraEffect extends OneShotEffect {
 
-    public OranRiefHydraEffect() {
+    OranRiefHydraEffect() {
         super(Outcome.BoostCreature);
     }
 

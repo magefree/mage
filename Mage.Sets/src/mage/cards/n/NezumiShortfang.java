@@ -84,7 +84,7 @@ class StabwhiskerTheOdious extends TokenImpl {
 
 class StabwhiskerLoseLifeEffect extends OneShotEffect {
 
-    public StabwhiskerLoseLifeEffect() {
+    StabwhiskerLoseLifeEffect() {
         super(Outcome.LoseLife);
         this.staticText = "that player loses 1 life for each card fewer than three in their hand";
     }

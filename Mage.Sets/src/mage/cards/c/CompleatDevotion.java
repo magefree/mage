@@ -39,7 +39,7 @@ public class CompleatDevotion extends CardImpl {
 
 class CompleatDevotionEffect extends OneShotEffect {
 
-    public CompleatDevotionEffect() {
+    CompleatDevotionEffect() {
         super(Outcome.Benefit);
         staticText = "";
     }

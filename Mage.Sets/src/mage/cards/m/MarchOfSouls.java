@@ -40,7 +40,7 @@ public final class MarchOfSouls extends CardImpl {
 
 class MarchOfSoulsEffect extends OneShotEffect {
 
-    public MarchOfSoulsEffect() {
+    MarchOfSoulsEffect() {
         super(Outcome.Benefit);
         staticText = "Destroy all creatures. They can't be regenerated. For each creature destroyed this way, its controller creates a 1/1 white Spirit creature token with flying.";
     }

@@ -51,7 +51,7 @@ public final class CorpseDance extends CardImpl {
 
 class CorpseDanceEffect extends OneShotEffect {
 
-    public CorpseDanceEffect() {
+    CorpseDanceEffect() {
         super(Outcome.Benefit);
         this.staticText = "Return the top creature card of your graveyard to the battlefield. That creature gains haste until end of turn. Exile it at the beginning of the next end step";
     }

@@ -20,7 +20,7 @@ public final class OxToken extends TokenImpl {
 
     }
 
-    protected OxToken(final OxToken token) {
+    private OxToken(final OxToken token) {
         super(token);
     }
 

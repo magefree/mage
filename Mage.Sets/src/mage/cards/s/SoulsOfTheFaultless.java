@@ -91,7 +91,7 @@ class SoulsOfTheFaultlessTriggeredAbility extends TriggeredAbilityImpl {
 
 class SoulsOfTheFaultlessEffect extends OneShotEffect {
 
-    public SoulsOfTheFaultlessEffect() {
+    SoulsOfTheFaultlessEffect() {
         super(Outcome.GainLife);
         staticText = "you gain that much life and attacking player loses that much life";
     }

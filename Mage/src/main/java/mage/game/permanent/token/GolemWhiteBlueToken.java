@@ -20,7 +20,7 @@ public final class GolemWhiteBlueToken extends TokenImpl {
         toughness = new MageInt(4);
     }
 
-    protected GolemWhiteBlueToken(final GolemWhiteBlueToken token) {
+    private GolemWhiteBlueToken(final GolemWhiteBlueToken token) {
         super(token);
     }
 

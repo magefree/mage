@@ -47,7 +47,7 @@ public final class Precognition extends CardImpl {
 
 class PrecognitionEffect extends OneShotEffect {
 
-    public PrecognitionEffect() {
+    PrecognitionEffect() {
         super(Outcome.Detriment);
         staticText = "";
     }

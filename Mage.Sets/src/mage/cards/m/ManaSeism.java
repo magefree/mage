@@ -44,7 +44,7 @@ public final class ManaSeism extends CardImpl {
 
 class ManaSeismEffect extends OneShotEffect {
 
-    public ManaSeismEffect() {
+    ManaSeismEffect() {
         super(Outcome.Neutral);
         staticText  = "Sacrifice any number of lands, then add that much {C}";
     }

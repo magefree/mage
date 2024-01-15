@@ -58,7 +58,7 @@ public final class ReinsOfTheVinesteed extends CardImpl {
 
 class ReinsOfTheVinesteedEffect extends OneShotEffect {
 
-    public ReinsOfTheVinesteedEffect() {
+    ReinsOfTheVinesteedEffect() {
         super(Outcome.PutCardInPlay);
         staticText = "you may return {this} from your graveyard to the battlefield attached to a creature that shares a creature type with that creature";
     }

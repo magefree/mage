@@ -63,7 +63,7 @@ public final class DevouringTendrils extends CardImpl {
 
 class DevouringTendrilsEffect extends OneShotEffect {
 
-    public DevouringTendrilsEffect() {
+    DevouringTendrilsEffect() {
         super(Outcome.Benefit);
         this.staticText = "when the permanent you don't control dies this turn, you gain 2 life";
     }

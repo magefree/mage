@@ -45,7 +45,7 @@ public final class Counterbalance extends CardImpl {
 
 class CounterbalanceEffect extends OneShotEffect {
 
-    public CounterbalanceEffect() {
+    CounterbalanceEffect() {
         super(Outcome.Neutral);
         this.staticText = "you may reveal the top card of your library. If you do, counter that spell if it has the same mana value as the revealed card";
     }

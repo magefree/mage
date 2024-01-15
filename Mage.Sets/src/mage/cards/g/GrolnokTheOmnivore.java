@@ -94,7 +94,7 @@ class GrolnokTheOmnivoreTriggeredAbility extends TriggeredAbilityImpl {
 
 class GrolnokTheOmnivoreExileEffect extends OneShotEffect {
 
-    public GrolnokTheOmnivoreExileEffect() {
+    GrolnokTheOmnivoreExileEffect() {
         super(Outcome.Exile);
         staticText = "exile it with a croak counter on it";
     }
@@ -121,7 +121,7 @@ class GrolnokTheOmnivoreExileEffect extends OneShotEffect {
 
 class GrolnokTheOmnivorePlayEffect extends AsThoughEffectImpl {
 
-    public GrolnokTheOmnivorePlayEffect() {
+    GrolnokTheOmnivorePlayEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "You may play lands and cast spells from among cards you own in exile with croak counters on them";
     }

@@ -92,7 +92,7 @@ class MartyrsBondTriggeredAbility extends TriggeredAbilityImpl {
 
 class MartyrsBondEffect extends OneShotEffect {
 
-    public MartyrsBondEffect() {
+    MartyrsBondEffect() {
         super(Outcome.Sacrifice);
         this.staticText = "each opponent sacrifices a permanent that shares a card type with it";
     }

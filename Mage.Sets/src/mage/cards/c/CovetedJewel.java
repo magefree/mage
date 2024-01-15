@@ -106,7 +106,7 @@ class CovetedJewelTriggeredAbility extends TriggeredAbilityImpl {
 
 class CovetedJewelControlEffect extends ContinuousEffectImpl {
 
-    public CovetedJewelControlEffect() {
+    CovetedJewelControlEffect() {
         super(Duration.Custom, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
     }
 

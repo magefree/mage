@@ -101,7 +101,7 @@ class ZenithChroniclerTriggeredAbility extends TriggeredAbilityImpl {
 
 class ZenithChroniclerEffect extends OneShotEffect {
 
-    public ZenithChroniclerEffect() {
+    ZenithChroniclerEffect() {
         super(Outcome.DrawCard);
     }
 

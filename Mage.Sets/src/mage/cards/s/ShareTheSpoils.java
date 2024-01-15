@@ -99,7 +99,7 @@ class ShareTheSpoilsExileETBAndPlayerLossAbility extends TriggeredAbilityImpl {
 
 class ShareTheSpoilsExileCardFromEveryoneEffect extends OneShotEffect {
 
-    public ShareTheSpoilsExileCardFromEveryoneEffect() {
+    ShareTheSpoilsExileCardFromEveryoneEffect() {
         super(Outcome.Exile);
     }
 

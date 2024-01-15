@@ -41,7 +41,7 @@ public final class DeadlyTempest extends CardImpl {
 
 class DeadlyTempestEffect extends OneShotEffect {
 
-    public DeadlyTempestEffect() {
+    DeadlyTempestEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "Destroy all creatures. Each player loses life equal to the number of creatures they controlled that were destroyed this way";
     }

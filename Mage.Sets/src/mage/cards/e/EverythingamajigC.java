@@ -93,7 +93,7 @@ class ManaScrewAbility extends ActivatedManaAbilityImpl {
 
 class ManaScrewEffect extends ManaEffect {
 
-    public ManaScrewEffect() {
+    ManaScrewEffect() {
         super();
         this.staticText = "Flip a coin. If you win the flip, add {C}{C}";
     }
@@ -126,7 +126,7 @@ class ManaScrewEffect extends ManaEffect {
 
 class ChimericStaffEffect extends ContinuousEffectImpl {
 
-    public ChimericStaffEffect() {
+    ChimericStaffEffect() {
         super(Duration.EndOfTurn, Outcome.BecomeCreature);
         staticText = "{this} becomes an X/X Construct artifact creature until end of turn";
     }

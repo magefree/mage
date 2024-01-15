@@ -49,7 +49,7 @@ public final class Megatherium extends CardImpl {
 
 class MegatheriumEffect extends OneShotEffect {
 
-    public MegatheriumEffect() {
+    MegatheriumEffect() {
         super(Outcome.Sacrifice);
         this.staticText = "sacrifice it unless you pay {1} for each card in your hand";
     }

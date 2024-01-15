@@ -45,7 +45,7 @@ public final class EntrapmentManeuver extends CardImpl {
 
 class EntrapmentManeuverSacrificeEffect extends OneShotEffect {
 
-    public EntrapmentManeuverSacrificeEffect() {
+    EntrapmentManeuverSacrificeEffect() {
         super(Outcome.Sacrifice);
         this.staticText = "Target player sacrifices an attacking creature. You create X 1/1 white Soldier creature tokens, where X is that creature's toughness";
     }

@@ -46,7 +46,7 @@ public final class CorpseLunge extends CardImpl {
 
 class CorpseLungeEffect extends OneShotEffect {
 
-    public CorpseLungeEffect() {
+    CorpseLungeEffect() {
         super(Outcome.DrawCard);
         this.staticText = "{this} deals damage equal to the exiled card's power to target creature";
     }

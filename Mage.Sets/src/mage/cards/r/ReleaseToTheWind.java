@@ -41,7 +41,7 @@ public final class ReleaseToTheWind extends CardImpl {
 
 class ReleaseToTheWindEffect extends OneShotEffect {
 
-    public ReleaseToTheWindEffect() {
+    ReleaseToTheWindEffect() {
         super(Outcome.Benefit);
         this.staticText = "Exile target nonland permanent. For as long as that card remains exiled, its owner may cast it without paying its mana cost";
     }

@@ -51,7 +51,7 @@ public final class CankerAbomination extends CardImpl {
 
 class CankerAbominationEffect extends OneShotEffect {
 
-    public CankerAbominationEffect() {
+    CankerAbominationEffect() {
         super(Outcome.Neutral);
         this.staticText = "choose an opponent. {this} enters the battlefield with a -1/-1 counter on it for each creature that player controls";
     }

@@ -60,7 +60,7 @@ public final class ShorecrasherElemental extends CardImpl {
 
 class ShorecrasherElementalEffect extends OneShotEffect {
 
-    public ShorecrasherElementalEffect() {
+    ShorecrasherElementalEffect() {
         super(Outcome.Neutral);
         this.staticText = "Exile {this}, then return it to the battlefield face down under its owner's control";
     }

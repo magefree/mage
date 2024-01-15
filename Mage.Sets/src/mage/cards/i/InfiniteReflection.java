@@ -101,7 +101,7 @@ class InfiniteReflectionTriggeredEffect extends OneShotEffect {
 
 class InfiniteReflectionEntersBattlefieldEffect extends ReplacementEffectImpl {
 
-    public InfiniteReflectionEntersBattlefieldEffect() {
+    InfiniteReflectionEntersBattlefieldEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         this.staticText = "Nontoken creatures you control enter the battlefield as a copy of enchanted creature";
     }

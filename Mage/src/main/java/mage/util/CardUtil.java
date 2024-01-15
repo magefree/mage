@@ -1758,6 +1758,15 @@ public final class CardUtil {
                 || o instanceof Enum;
     }
 
+    /**
+     * Make deep copy of any object (supported by xmage)
+     * <p>
+     * Warning, don't use self reference objects because it will raise StackOverflowError
+     *
+     * @param value
+     * @return
+     * @param <T>
+     */
     public static <T> T deepCopyObject(T value) {
         if (isImmutableObject(value)) {
             return value;
@@ -1789,6 +1798,7 @@ public final class CardUtil {
             AbstractMap.SimpleImmutableEntry entryValue = (AbstractMap.SimpleImmutableEntry) value;
             return (T) new AbstractMap.SimpleImmutableEntry(deepCopyObject(entryValue.getKey()), deepCopyObject(entryValue.getValue()));
         } else {
+            // warning, do not add unnecessarily new data types and structures to game engine, try to use only standard types (see above)
             throw new IllegalStateException("Unhandled object " + value.getClass().getSimpleName() + " during deep copy, must add explicit handling of all Object types");
         }
     }

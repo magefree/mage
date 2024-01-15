@@ -52,7 +52,7 @@ public final class MycosynthLattice extends CardImpl {
 
 class PermanentsAreArtifactsEffect extends ContinuousEffectImpl {
 
-    public PermanentsAreArtifactsEffect() {
+    PermanentsAreArtifactsEffect() {
         super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Neutral);
         staticText = "All permanents are artifacts in addition to their other types";
         this.dependencyTypes.add(DependencyType.ArtifactAddingRemoving); // March of the Machines
@@ -78,7 +78,7 @@ class PermanentsAreArtifactsEffect extends ContinuousEffectImpl {
 
 class EverythingIsColorlessEffect extends ContinuousEffectImpl {
 
-    public EverythingIsColorlessEffect() {
+    EverythingIsColorlessEffect() {
         super(Duration.WhileOnBattlefield, Layer.ColorChangingEffects_5, SubLayer.NA, Outcome.Neutral);
         staticText = "All cards that aren't on the battlefield, spells, and permanents are colorless";
     }

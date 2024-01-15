@@ -21,7 +21,7 @@ public final class GodSireBeastToken extends TokenImpl {
         toughness = new MageInt(8);
     }
 
-    protected GodSireBeastToken(final GodSireBeastToken token) {
+    private GodSireBeastToken(final GodSireBeastToken token) {
         super(token);
     }
 

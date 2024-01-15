@@ -41,7 +41,7 @@ public final class TaintedRemedy extends CardImpl {
 
 class TaintedRemedyReplacementEffect extends ReplacementEffectImpl {
 
-    public TaintedRemedyReplacementEffect() {
+    TaintedRemedyReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "If an opponent would gain life, that player loses that much life instead";
     }

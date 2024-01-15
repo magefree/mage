@@ -46,7 +46,7 @@ public final class DashHopes extends CardImpl {
 
 class DashHopesCounterSourceEffect extends OneShotEffect {
 
-    public DashHopesCounterSourceEffect() {
+    DashHopesCounterSourceEffect() {
         super(Outcome.AIDontUseIt);
         staticText = "any player may pay 5 life. If a player does, counter {this}";
     }

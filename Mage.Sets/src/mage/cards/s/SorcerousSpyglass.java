@@ -42,7 +42,7 @@ public final class SorcerousSpyglass extends CardImpl {
 
 class SorcerousSpyglassActivationEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public SorcerousSpyglassActivationEffect() {
+    SorcerousSpyglassActivationEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "Activated abilities of sources with the chosen name can't be activated unless they're mana abilities";
     }

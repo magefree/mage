@@ -59,7 +59,7 @@ public final class FindFinality extends SplitCard {
 
 class FinalityEffect extends OneShotEffect {
 
-    public FinalityEffect() {
+    FinalityEffect() {
         super(Outcome.Benefit);
         this.staticText = "You may put two +1/+1 counters "
                 + "on a creature you control. "

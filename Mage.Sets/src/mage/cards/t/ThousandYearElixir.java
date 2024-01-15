@@ -52,7 +52,7 @@ public final class ThousandYearElixir extends CardImpl {
 
 class ThousandYearElixirEffect extends AsThoughEffectImpl {
 
-    public ThousandYearElixirEffect() {
+    ThousandYearElixirEffect() {
         super(AsThoughEffectType.ACTIVATE_HASTE, Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "You may activate abilities of creatures you control as though those creatures had haste";
     }

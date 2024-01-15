@@ -51,7 +51,7 @@ public final class SquanderedResources extends CardImpl {
 
 class SquanderedResourcesEffect extends ManaEffect {
 
-    public SquanderedResourcesEffect() {
+    SquanderedResourcesEffect() {
         super();
         staticText = "Add one mana of any type the sacrificed land could produce";
     }

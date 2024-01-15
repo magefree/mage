@@ -48,7 +48,7 @@ public final class WildEvocation extends CardImpl {
 
 class WildEvocationEffect extends OneShotEffect {
 
-    public WildEvocationEffect() {
+    WildEvocationEffect() {
         super(Outcome.PutCardInPlay);
         staticText = "that player reveals a card at random from their hand. "
                 + "If it's a land card, the player puts it onto the battlefield. "

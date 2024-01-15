@@ -45,7 +45,7 @@ public final class Aggravate extends CardImpl {
 
 class AggravateRequirementEffect extends RequirementEffect {
 
-    public AggravateRequirementEffect() {
+    AggravateRequirementEffect() {
         super(Duration.EndOfTurn);
         this.staticText = "Each creature dealt damage this way attacks this turn if able";
     }

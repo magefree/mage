@@ -53,7 +53,7 @@ public final class AngelicArbiter extends CardImpl {
 
 class AngelicArbiterCantAttackTargetEffect extends RestrictionEffect {
 
-    public AngelicArbiterCantAttackTargetEffect(Duration duration) {
+    AngelicArbiterCantAttackTargetEffect(Duration duration) {
         super(duration);
         staticText = "Each opponent who cast a spell this turn can't attack with creatures";
     }

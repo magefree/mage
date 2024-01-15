@@ -38,7 +38,7 @@ public final class WinterSky extends CardImpl {
 
 class WinterSkyEffect extends OneShotEffect {
 
-    public WinterSkyEffect() {
+    WinterSkyEffect() {
         super(Outcome.Damage);
         staticText = "Flip a coin. If you win the flip, {this} deals 1 damage to each creature and each player. If you lose the flip, each player draws a card";
     }

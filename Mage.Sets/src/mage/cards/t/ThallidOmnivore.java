@@ -59,7 +59,7 @@ public final class ThallidOmnivore extends CardImpl {
 
 class ThallidOmnivoreEffect extends OneShotEffect {
 
-    public ThallidOmnivoreEffect() {
+    ThallidOmnivoreEffect() {
         super(Outcome.GainLife);
         this.staticText = "If a Saproling was sacrificed this way, you gain 2 life";
     }

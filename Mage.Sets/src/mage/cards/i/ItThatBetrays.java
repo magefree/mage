@@ -1,13 +1,12 @@
 package mage.cards.i;
 
 import mage.MageInt;
-import mage.abilities.common.OpponentSacrificesNonTokenPermanentTriggeredAbility;
+import mage.abilities.common.SacrificePermanentTriggeredAbility;
 import mage.abilities.effects.common.ReturnToBattlefieldUnderYourControlTargetEffect;
 import mage.abilities.keyword.AnnihilatorAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.permanent.TokenPredicate;
 
@@ -18,10 +17,10 @@ import java.util.UUID;
  */
 public final class ItThatBetrays extends CardImpl {
 
-    private static final FilterPermanent FILTER = new FilterPermanent("nontoken permanent");
+    private static final FilterPermanent filter = new FilterPermanent("nontoken permanent");
 
     static {
-        FILTER.add(TokenPredicate.FALSE);
+        filter.add(TokenPredicate.FALSE);
     }
 
     public ItThatBetrays(UUID ownerId, CardSetInfo setInfo) {
@@ -35,9 +34,10 @@ public final class ItThatBetrays extends CardImpl {
         this.addAbility(new AnnihilatorAbility(2));
 
         // Whenever an opponent sacrifices a nontoken permanent, put that card onto the battlefield under your control.
-        this.addAbility(new OpponentSacrificesNonTokenPermanentTriggeredAbility(
+        this.addAbility(new SacrificePermanentTriggeredAbility(Zone.BATTLEFIELD,
                 new ReturnToBattlefieldUnderYourControlTargetEffect()
-                        .setText("put that card onto the battlefield under your control")
+                        .setText("put that card onto the battlefield under your control"),
+                filter, TargetController.OPPONENT, SetTargetPointer.PERMANENT, false
         ));
     }
 

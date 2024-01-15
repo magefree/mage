@@ -57,7 +57,7 @@ public final class EndlessWhispers extends CardImpl {
 
 class ReturnSourceToBattlefieldEffect extends OneShotEffect {
 
-    public ReturnSourceToBattlefieldEffect() {
+    ReturnSourceToBattlefieldEffect() {
         super(Outcome.PutCreatureInPlay);
         staticText = "That player puts this card from its owner's graveyard onto the battlefield under their control";
     }

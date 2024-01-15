@@ -20,7 +20,7 @@ public final class SwanSongBirdToken extends TokenImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    protected SwanSongBirdToken(final SwanSongBirdToken token) {
+    private SwanSongBirdToken(final SwanSongBirdToken token) {
         super(token);
     }
 

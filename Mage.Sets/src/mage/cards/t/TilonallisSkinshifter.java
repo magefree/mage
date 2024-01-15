@@ -66,7 +66,7 @@ public final class TilonallisSkinshifter extends CardImpl {
 
 class TilonallisSkinshifterCopyEffect extends OneShotEffect {
 
-    public TilonallisSkinshifterCopyEffect() {
+    TilonallisSkinshifterCopyEffect() {
         super(Outcome.Copy);
         this.staticText = "it becomes a copy of another target nonlegendary attacking creature until end of turn";
     }

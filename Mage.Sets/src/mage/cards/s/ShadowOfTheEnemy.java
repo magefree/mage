@@ -100,7 +100,7 @@ class ShadowOfTheEnemyEffect extends OneShotEffect {
 
 class ShadowOfTheEnemyCastFromExileEffect extends AsThoughEffectImpl {
 
-    public ShadowOfTheEnemyCastFromExileEffect() {
+    ShadowOfTheEnemyCastFromExileEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
         staticText = "You may cast spells from among them as long as they remain exiled";
     }

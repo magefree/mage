@@ -44,7 +44,7 @@ public final class FloweringLumberknot extends CardImpl {
 
 class FloweringLumberknotEffect extends RestrictionEffect {
 
-    public FloweringLumberknotEffect() {
+    FloweringLumberknotEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "{this} can't attack or block unless it's paired with a creature with soulbond";
     }

@@ -21,7 +21,7 @@ public final class HomunculusToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    protected HomunculusToken(final HomunculusToken token) {
+    private HomunculusToken(final HomunculusToken token) {
         super(token);
     }
 

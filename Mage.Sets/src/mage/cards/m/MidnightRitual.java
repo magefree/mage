@@ -56,7 +56,7 @@ enum MidnightRitualAdjuster implements TargetAdjuster {
 
 class MidnightRitualEffect extends OneShotEffect {
 
-    public MidnightRitualEffect() {
+    MidnightRitualEffect() {
         super(Outcome.Neutral);
         this.staticText = "Exile X target creature cards from your graveyard. For each creature card exiled this way, create a 2/2 black Zombie creature token";
     }

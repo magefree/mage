@@ -21,7 +21,7 @@ public final class StormCrowToken extends TokenImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    protected StormCrowToken(final StormCrowToken token) {
+    private StormCrowToken(final StormCrowToken token) {
         super(token);
     }
 

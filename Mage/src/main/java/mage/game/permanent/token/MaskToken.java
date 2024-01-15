@@ -34,7 +34,7 @@ public final class MaskToken extends TokenImpl {
         this.addAbility(new TotemArmorAbility());
     }
 
-    protected MaskToken(final MaskToken token) {
+    private MaskToken(final MaskToken token) {
         super(token);
     }
 

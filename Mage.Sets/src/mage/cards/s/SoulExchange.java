@@ -47,7 +47,7 @@ public final class SoulExchange extends CardImpl {
 
 class SoulExchangeEffect extends OneShotEffect {
 
-    public SoulExchangeEffect() {
+    SoulExchangeEffect() {
         super(Outcome.Benefit);
         this.setText("Return target creature card from your graveyard to the battlefield. Put a +2/+2 counter on that creature if the exiled creature was a Thrull.");
     }

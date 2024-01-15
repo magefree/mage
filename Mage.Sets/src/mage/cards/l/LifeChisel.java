@@ -49,7 +49,7 @@ public final class LifeChisel extends CardImpl {
 
 class LifeChiselEffect extends OneShotEffect {
 
-    public LifeChiselEffect() {
+    LifeChiselEffect() {
         super(Outcome.GainLife);
         this.staticText = "You gain life equal to the sacrificed creature's toughness";
     }

@@ -40,7 +40,7 @@ public final class FatefulAbsence extends CardImpl {
 
 class FatefulAbsenceEffect extends OneShotEffect {
 
-    public FatefulAbsenceEffect() {
+    FatefulAbsenceEffect() {
         super(Outcome.DestroyPermanent);
         staticText = "Destroy target creature or planeswalker. Its controller investigates";
     }

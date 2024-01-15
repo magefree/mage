@@ -47,7 +47,7 @@ public final class VenomousBreath extends CardImpl {
 
 class VenomousBreathCreateDelayedTriggeredAbilityEffect extends OneShotEffect {
 
-    public VenomousBreathCreateDelayedTriggeredAbilityEffect() {
+    VenomousBreathCreateDelayedTriggeredAbilityEffect() {
         super(Outcome.Benefit);
         this.staticText = "At this turn's next end of combat, destroy all creatures that blocked or were blocked by it this turn";
     }

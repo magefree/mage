@@ -45,7 +45,7 @@ public final class PerilousPredicament extends CardImpl {
 
 class PerilousPredicamentSacrificeOpponentsEffect extends OneShotEffect {
 
-    public PerilousPredicamentSacrificeOpponentsEffect() {
+    PerilousPredicamentSacrificeOpponentsEffect() {
         super(Outcome.Sacrifice);
         staticText = "Each opponent sacrifices an artifact creature and a nonartifact creature";
     }

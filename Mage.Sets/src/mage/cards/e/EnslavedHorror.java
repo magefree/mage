@@ -49,7 +49,7 @@ public final class EnslavedHorror extends CardImpl {
 
 class EnslavedHorrorEffect extends OneShotEffect {
 
-    public EnslavedHorrorEffect() {
+    EnslavedHorrorEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "each other player may put a creature card from their graveyard onto the battlefield";
     }

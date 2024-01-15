@@ -47,7 +47,7 @@ public final class ForethoughtAmulet extends CardImpl {
 
 class ForethoughtAmuletEffect extends ReplacementEffectImpl {
 
-    public ForethoughtAmuletEffect() {
+    ForethoughtAmuletEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Neutral);
         staticText = "If an instant or sorcery source would deal 3 or more damage to you, it deals 2 damage to you instead";
     }

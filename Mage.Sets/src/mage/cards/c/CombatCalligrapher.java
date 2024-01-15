@@ -107,7 +107,7 @@ class CombatCalligrapherTriggeredAbility extends TriggeredAbilityImpl {
 
 class CombatCalligrapherEffect extends RestrictionEffect {
 
-    public CombatCalligrapherEffect() {
+    CombatCalligrapherEffect() {
         super(Duration.WhileOnBattlefield);
         this.staticText = "Inklings can't attack you or planeswalkers you control";
     }

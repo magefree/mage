@@ -18,7 +18,7 @@ public final class EyesOfTheWisentElementalToken extends TokenImpl {
         toughness = new MageInt(4);
     }
 
-    protected EyesOfTheWisentElementalToken(final EyesOfTheWisentElementalToken token) {
+    private EyesOfTheWisentElementalToken(final EyesOfTheWisentElementalToken token) {
         super(token);
     }
 

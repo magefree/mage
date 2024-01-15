@@ -38,7 +38,7 @@ public final class BoxOfFreerangeGoblins extends CardImpl {
 
 class BoxOfFreerangeGoblinsEffect extends OneShotEffect {
 
-    public BoxOfFreerangeGoblinsEffect() {
+    BoxOfFreerangeGoblinsEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Roll a six-sided die. Create a number of 1/1 red Goblin creature tokens equal to the result";
     }

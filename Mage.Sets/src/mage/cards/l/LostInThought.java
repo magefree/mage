@@ -65,7 +65,7 @@ public final class LostInThought extends CardImpl {
 
 class LostInThoughtRestrictionEffect extends RestrictionEffect {
 
-    public LostInThoughtRestrictionEffect() {
+    LostInThoughtRestrictionEffect() {
         super(Duration.WhileOnBattlefield);
         this.staticText = "Enchanted creature can't attack or block";
     }
@@ -103,7 +103,7 @@ class LostInThoughtRestrictionEffect extends RestrictionEffect {
 
 class LostInThoughtCantActivateAbilitiesEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public LostInThoughtCantActivateAbilitiesEffect() {
+    LostInThoughtCantActivateAbilitiesEffect() {
         super(Duration.WhileOnBattlefield, Outcome.UnboostCreature);
         staticText = ", and its activated abilities can't be activated";
     }

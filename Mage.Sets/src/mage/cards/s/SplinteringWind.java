@@ -53,7 +53,7 @@ public final class SplinteringWind extends CardImpl {
 
 class SplinteringWindCreateTokenEffect extends OneShotEffect {
 
-    public SplinteringWindCreateTokenEffect() {
+    SplinteringWindCreateTokenEffect() {
         super(Outcome.PutCreatureInPlay);
         staticText = "create a 1/1 green Splinter creature token. It has flying and \"Cumulative upkeep {G}.\" When it leaves the battlefield, it deals 1 damage to you and each creature you control";
     }

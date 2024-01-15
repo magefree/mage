@@ -61,7 +61,7 @@ public final class StarkeOfRath extends CardImpl {
 
 class StarkeOfRathEffect extends OneShotEffect {
 
-    public StarkeOfRathEffect() {
+    StarkeOfRathEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "Destroy target artifact or creature. That permanent's controller gains control of {this}";
     }
@@ -94,7 +94,7 @@ class StarkeOfRathEffect extends OneShotEffect {
 
 class StarkeOfRathControlEffect extends ContinuousEffectImpl {
 
-    public StarkeOfRathControlEffect() {
+    StarkeOfRathControlEffect() {
         super(Duration.Custom, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
         staticText = "That permanent's controller gains control of {this}";
     }

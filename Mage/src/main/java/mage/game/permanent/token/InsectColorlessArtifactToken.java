@@ -21,7 +21,7 @@ public final class InsectColorlessArtifactToken extends TokenImpl {
         addAbility(FlyingAbility.getInstance());
     }
 
-    protected InsectColorlessArtifactToken(final InsectColorlessArtifactToken token) {
+    private InsectColorlessArtifactToken(final InsectColorlessArtifactToken token) {
         super(token);
     }
 

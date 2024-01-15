@@ -51,7 +51,7 @@ public final class AssemblyHall extends CardImpl {
 
 class AssemblyHallEffect extends OneShotEffect {
 
-    public AssemblyHallEffect() {
+    AssemblyHallEffect() {
         super(Outcome.Benefit);
         this.staticText = "reveal a creature card from your hand. "
                 + "Search your library for a card with the same name as that card, "

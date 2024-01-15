@@ -52,7 +52,7 @@ public final class AwakenerDruid extends CardImpl {
 
 class AwakenerDruidBecomesCreatureEffect extends BecomesCreatureTargetEffect {
 
-    public AwakenerDruidBecomesCreatureEffect() {
+    AwakenerDruidBecomesCreatureEffect() {
         super(new AwakenerDruidToken(), false, true, Duration.WhileOnBattlefield);
         this.staticText = "target Forest becomes a 4/5 green Treefolk creature for as long as {this} remains on the battlefield. It's still a land";
     }

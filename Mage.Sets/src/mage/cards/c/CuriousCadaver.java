@@ -6,9 +6,7 @@ import mage.abilities.effects.common.ReturnSourceFromGraveyardToHandEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 
@@ -34,7 +32,8 @@ public final class CuriousCadaver extends CardImpl {
 
         // When you sacrifice a Clue, return Curious Cadaver from your graveyard to your hand.
         this.addAbility(new SacrificePermanentTriggeredAbility(
-                Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), filter, false, false
+                Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), filter,
+                TargetController.YOU, SetTargetPointer.NONE, false
         ));
     }
 

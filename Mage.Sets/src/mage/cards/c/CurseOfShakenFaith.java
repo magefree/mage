@@ -98,7 +98,7 @@ class CurseOfShakenFaithTriggeredAbility extends TriggeredAbilityImpl {
 
 class CurseOfShakenFaithEffect extends OneShotEffect {
 
-    public CurseOfShakenFaithEffect() {
+    CurseOfShakenFaithEffect() {
         super(Outcome.Damage);
         staticText = "{this} deals 2 damage to them";
     }

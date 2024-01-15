@@ -66,7 +66,7 @@ public final class SasayaOrochiAscendant extends CardImpl {
 
 class SasayaOrochiAscendantFlipEffect extends OneShotEffect {
 
-    public SasayaOrochiAscendantFlipEffect() {
+    SasayaOrochiAscendantFlipEffect() {
         super(Outcome.Benefit);
         this.staticText = "If you have seven or more land cards in your hand, flip {this}";
     }
@@ -120,7 +120,7 @@ class SasayasEssence extends TokenImpl {
 
 class SasayasEssenceManaEffect extends ManaEffect {
 
-    public SasayasEssenceManaEffect() {
+    SasayasEssenceManaEffect() {
         super();
         this.staticText = "for each other land you control with the same name, add one mana of any type that land produced";
     }

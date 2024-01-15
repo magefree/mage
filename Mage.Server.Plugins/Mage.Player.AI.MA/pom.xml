@@ -12,7 +12,7 @@
 
     <artifactId>mage-player-ai-ma</artifactId>
     <packaging>jar</packaging>
-    <name>Mage Player AI.MA</name>
+    <name>Mage Player AI (mad bot)</name>
 
     <dependencies>
         <dependency>

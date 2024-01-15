@@ -59,7 +59,7 @@ public final class MoltenEchoes extends CardImpl {
 
 class MoltenEchoesEffect extends OneShotEffect {
 
-    public MoltenEchoesEffect() {
+    MoltenEchoesEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "create a token that's a copy of that creature. That token gains haste. Exile it at the beginning of the next end step";
     }

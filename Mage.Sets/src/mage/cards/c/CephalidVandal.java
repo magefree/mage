@@ -51,7 +51,7 @@ public final class CephalidVandal extends CardImpl {
 
 class CephalidVandalEffect extends OneShotEffect {
 
-    public CephalidVandalEffect() {
+    CephalidVandalEffect() {
         super(Outcome.Neutral);
         staticText = "Then mill a card for each shred counter on {this}";
     }

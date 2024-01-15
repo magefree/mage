@@ -50,7 +50,7 @@ public final class InitiatesOfTheEbonHand extends CardImpl {
 
 class InitiatesOfTheEbonHandEffect extends OneShotEffect {
 
-    public InitiatesOfTheEbonHandEffect() {
+    InitiatesOfTheEbonHandEffect() {
         super(Outcome.Damage);
         this.staticText = "If this ability has been activated four or more times this turn, sacrifice {this} at the beginning of the next end step";
     }

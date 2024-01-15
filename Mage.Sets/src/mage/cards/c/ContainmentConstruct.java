@@ -82,7 +82,7 @@ class ContainmentConstructTriggeredAbility extends TriggeredAbilityImpl {
 
 class ContainmentConstructEffect extends OneShotEffect {
 
-    public ContainmentConstructEffect() {
+    ContainmentConstructEffect() {
         super(Outcome.Benefit);
         this.staticText = "you may exile that card from your graveyard. If you do, you may play that card this turn";
     }

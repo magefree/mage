@@ -54,7 +54,7 @@ public final class KeldonFirebombers extends CardImpl {
 
 class KeldonFirebombersEffect extends OneShotEffect {
 
-    public KeldonFirebombersEffect() {
+    KeldonFirebombersEffect() {
         super(Outcome.AIDontUseIt);
         this.staticText = "each player sacrifices all lands they control except for three";
     }

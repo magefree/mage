@@ -53,7 +53,7 @@ public final class SylvanLibrary extends CardImpl {
 
 class SylvanLibraryEffect extends OneShotEffect {
 
-    public SylvanLibraryEffect() {
+    SylvanLibraryEffect() {
         super(Outcome.LoseLife);
         this.staticText = "you may draw two additional cards. If you do, choose two cards in your hand drawn this turn. For each of those cards, pay 4 life or put the card on top of your library";
     }

@@ -52,7 +52,7 @@ public final class CyclopsGladiator extends CardImpl {
 
 class CyclopsGladiatorEffect extends OneShotEffect {
 
-    public CyclopsGladiatorEffect() {
+    CyclopsGladiatorEffect() {
         super(Outcome.Damage);
         staticText = "you may have it deal damage equal to its power to target creature defending player controls. If you do, that creature deals damage equal to its power to {this}";
     }

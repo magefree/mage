@@ -22,12 +22,14 @@ public final class JurassicWorldCollection extends ExpansionSet {
 
         cards.add(new SetCardInfo("Command Tower", 26, Rarity.COMMON, mage.cards.c.CommandTower.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Command Tower", "26b", Rarity.COMMON, mage.cards.c.CommandTower.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Don't Move", 1, Rarity.RARE, mage.cards.d.DontMove.class));
         cards.add(new SetCardInfo("Ellie and Alan, Paleontologists", 10, Rarity.RARE, mage.cards.e.EllieAndAlanPaleontologists.class));
         cards.add(new SetCardInfo("Forest", 25, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Forest", "25b", Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Hunting Velociraptor", 4, Rarity.RARE, mage.cards.h.HuntingVelociraptor.class));
         cards.add(new SetCardInfo("Island", 22, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Island", "22b", Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Jurassic Park", 7, Rarity.RARE, mage.cards.j.JurassicPark.class));
         cards.add(new SetCardInfo("Life Finds a Way", 5, Rarity.RARE, mage.cards.l.LifeFindsAWay.class));
         cards.add(new SetCardInfo("Mountain", 24, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Mountain", "24b", Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
@@ -39,5 +41,6 @@ public final class JurassicWorldCollection extends ExpansionSet {
         cards.add(new SetCardInfo("Spitting Dilophosaurus", 3, Rarity.RARE, mage.cards.s.SpittingDilophosaurus.class));
         cards.add(new SetCardInfo("Swamp", 23, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Swamp", "23b", Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Welcome to . . .", 7, Rarity.RARE, mage.cards.w.WelcomeTo.class));
     }
 }

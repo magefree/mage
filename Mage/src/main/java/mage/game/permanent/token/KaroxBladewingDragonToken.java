@@ -24,7 +24,7 @@ public final class KaroxBladewingDragonToken extends TokenImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    protected KaroxBladewingDragonToken(final KaroxBladewingDragonToken token) {
+    private KaroxBladewingDragonToken(final KaroxBladewingDragonToken token) {
         super(token);
     }
 

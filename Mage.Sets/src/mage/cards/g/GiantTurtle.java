@@ -46,7 +46,7 @@ public final class GiantTurtle extends CardImpl {
 
 class CantAttackIfAttackedLastTurnEffect extends RestrictionEffect {
 
-    public CantAttackIfAttackedLastTurnEffect() {
+    CantAttackIfAttackedLastTurnEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "{this} can't attack if it attacked during your last turn";
     }

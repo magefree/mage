@@ -38,7 +38,7 @@ public final class FossilFind extends CardImpl {
 
 class FossilFindEffect extends OneShotEffect {
 
-    public FossilFindEffect() {
+    FossilFindEffect() {
         super(Outcome.ReturnToHand);
         this.staticText = "Return a card at random from your graveyard to your hand, then reorder your graveyard as you choose";
     }

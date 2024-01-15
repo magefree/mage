@@ -22,7 +22,7 @@ public final class ErrandOfDutyKnightToken extends TokenImpl {
         this.addAbility(BandingAbility.getInstance());
     }
 
-    protected ErrandOfDutyKnightToken(final ErrandOfDutyKnightToken token) {
+    private ErrandOfDutyKnightToken(final ErrandOfDutyKnightToken token) {
         super(token);
     }
 

@@ -58,7 +58,7 @@ public final class WormfangCrab extends CardImpl {
 
 class WormfangCrabExileEffect extends OneShotEffect {
 
-    public WormfangCrabExileEffect() {
+    WormfangCrabExileEffect() {
         super(Outcome.Exile);
         this.staticText = "an opponent chooses a permanent you control other than {this} and exiles it";
     }

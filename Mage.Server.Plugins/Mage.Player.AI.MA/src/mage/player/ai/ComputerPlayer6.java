@@ -41,11 +41,17 @@ import java.util.concurrent.*;
 import java.util.stream.Collectors;
 
 /**
+ * AI: server side bot with game simulations (mad bot, part of implementation)
+ *
  * @author nantuko
  */
-public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
+public class ComputerPlayer6 extends ComputerPlayer {
 
     private static final Logger logger = Logger.getLogger(ComputerPlayer6.class);
+
+    // TODO: add and research maxNodes logs, is it good to increase to 50000 for better results?
+    // TODO: increase maxNodes due AI skill level?
+    private static final int MAX_SIMULATED_NODES_PER_CALC = 5000;
 
     // same params as Executors.newFixedThreadPool
     // no needs erorrs check in afterExecute here cause that pool used for FutureTask with result check already
@@ -97,7 +103,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
             maxDepth = skill;
         }
         maxThink = skill * 3;
-        maxNodes = Config2.maxNodes;
+        maxNodes = MAX_SIMULATED_NODES_PER_CALC;
         getSuggestedActions();
         this.actionCache = new HashSet<>();
     }

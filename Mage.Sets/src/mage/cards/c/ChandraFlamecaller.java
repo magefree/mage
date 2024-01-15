@@ -55,7 +55,7 @@ public final class ChandraFlamecaller extends CardImpl {
 
 class ChandraElementalEffect extends OneShotEffect {
 
-    public ChandraElementalEffect() {
+    ChandraElementalEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Create two 3/1 red Elemental creature tokens with haste. Exile them at the beginning of the next end step";
     }

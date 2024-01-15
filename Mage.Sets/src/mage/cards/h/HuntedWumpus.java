@@ -48,7 +48,7 @@ public final class HuntedWumpus extends CardImpl {
 
 class HuntedWumpusEffect extends OneShotEffect {
 
-    public HuntedWumpusEffect() {
+    HuntedWumpusEffect() {
         super(Outcome.Detriment);
         this.staticText = "each other player may put a creature card from their hand onto the battlefield";
     }

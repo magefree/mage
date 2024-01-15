@@ -37,7 +37,7 @@ public final class GoblinGame extends CardImpl {
 
 class GoblinGameEffect extends OneShotEffect {
 
-    public GoblinGameEffect() {
+    GoblinGameEffect() {
         super(Outcome.Detriment);
         this.staticText = "Each player hides at least one item, then all players reveal them simultaneously. " +
                 "Each player loses life equal to the number of items they revealed. " +

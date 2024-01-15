@@ -70,7 +70,7 @@ public final class RimehornAurochs extends CardImpl {
 
 class RimehornAurochsEffect extends RequirementEffect {
 
-    public RimehornAurochsEffect() {
+    RimehornAurochsEffect() {
         this(Duration.EndOfTurn);
     }
 

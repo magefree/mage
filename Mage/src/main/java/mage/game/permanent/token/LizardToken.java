@@ -19,7 +19,7 @@ public final class LizardToken extends TokenImpl {
         toughness = new MageInt(2);
     }
 
-    protected LizardToken(final LizardToken token) {
+    private LizardToken(final LizardToken token) {
         super(token);
     }
 

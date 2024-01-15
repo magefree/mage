@@ -88,7 +88,7 @@ enum MoggAssassinAdjuster implements TargetAdjuster {
 
 class MoggAssassinEffect extends OneShotEffect {
 
-    public MoggAssassinEffect() {
+    MoggAssassinEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "You choose target creature an opponent controls, and that opponent chooses target creature. Flip a coin. If you win the flip, destroy the creature you chose. If you lose the flip, destroy the creature your opponent chose";
     }

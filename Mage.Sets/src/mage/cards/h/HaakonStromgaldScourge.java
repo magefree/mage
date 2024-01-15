@@ -58,7 +58,7 @@ public final class HaakonStromgaldScourge extends CardImpl {
 
 class HaakonStromgaldScourgePlayEffect extends AsThoughEffectImpl {
 
-    public HaakonStromgaldScourgePlayEffect() {
+    HaakonStromgaldScourgePlayEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
         staticText = "You may cast {this} from your graveyard";
     }

@@ -55,7 +55,7 @@ public final class MeliraSylvokOutcast extends CardImpl {
 
 class MeliraSylvokOutcastEffect extends ReplacementEffectImpl {
 
-    public MeliraSylvokOutcastEffect() {
+    MeliraSylvokOutcastEffect() {
         super(Duration.WhileOnBattlefield, Outcome.PreventDamage);
         staticText = "You can't get poison counters";
     }

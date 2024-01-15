@@ -52,7 +52,7 @@ public final class WormsOfTheEarth extends CardImpl {
 
 class WormsOfTheEarthPlayEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public WormsOfTheEarthPlayEffect() {
+    WormsOfTheEarthPlayEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Neutral);
         this.staticText = "Players can't play lands";
     }
@@ -79,7 +79,7 @@ class WormsOfTheEarthPlayEffect extends ContinuousRuleModifyingEffectImpl {
 
 class WormsOfTheEarthEnterEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public WormsOfTheEarthEnterEffect() {
+    WormsOfTheEarthEnterEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Lands can't enter the battlefield";
     }
@@ -111,7 +111,7 @@ class WormsOfTheEarthEnterEffect extends ContinuousRuleModifyingEffectImpl {
 
 class WormsOfTheEarthDestroyEffect extends OneShotEffect {
 
-    public WormsOfTheEarthDestroyEffect() {
+    WormsOfTheEarthDestroyEffect() {
         super(Outcome.Benefit);
         this.staticText = "any player may sacrifice two lands or have {this} deal 5 damage to that player. If a player does either, destroy {this}";
     }

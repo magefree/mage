@@ -39,7 +39,7 @@ public final class MisfortunesGain extends CardImpl {
 
 class MisfortunesGainEffect extends OneShotEffect {
 
-    public MisfortunesGainEffect() {
+    MisfortunesGainEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "Destroy target creature. Its owner gains 4 life";
     }

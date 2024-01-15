@@ -1,8 +1,9 @@
 package mage.cards.k;
 
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldOrAttacksSourceTriggeredAbility;
+import mage.abilities.common.SacrificePermanentTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.SacrificeControllerEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -12,12 +13,10 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.predicate.mageobject.AnotherPredicate;
-import mage.game.Game;
-import mage.game.events.GameEvent;
 
 import java.util.UUID;
 
@@ -50,7 +49,11 @@ public final class KorvoldFaeCursedKing extends CardImpl {
         ));
 
         // Whenever you sacrifice a permanent, put a +1/+1 counter on Korvold and draw a card.
-        this.addAbility(new KorvoldFaeCursedKingAbility());
+        Ability ability = new SacrificePermanentTriggeredAbility(
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
+                StaticFilters.FILTER_PERMANENT);
+        ability.addEffect(new DrawCardSourceControllerEffect(1).concatBy("and"));
+        this.addAbility(ability);
     }
 
     private KorvoldFaeCursedKing(final KorvoldFaeCursedKing card) {
@@ -60,37 +63,5 @@ public final class KorvoldFaeCursedKing extends CardImpl {
     @Override
     public KorvoldFaeCursedKing copy() {
         return new KorvoldFaeCursedKing(this);
-    }
-}
-
-class KorvoldFaeCursedKingAbility extends TriggeredAbilityImpl {
-
-    KorvoldFaeCursedKingAbility() {
-        super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
-        this.addEffect(new DrawCardSourceControllerEffect(1));
-    }
-
-    private KorvoldFaeCursedKingAbility(final KorvoldFaeCursedKingAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public KorvoldFaeCursedKingAbility copy() {
-        return new KorvoldFaeCursedKingAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.SACRIFICED_PERMANENT;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return this.isControlledBy(event.getPlayerId());
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever you sacrifice a permanent, put a +1/+1 counter on {this} and draw a card.";
     }
 }

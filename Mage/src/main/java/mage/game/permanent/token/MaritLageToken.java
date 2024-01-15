@@ -26,7 +26,7 @@ public final class MaritLageToken extends TokenImpl {
         this.addAbility(IndestructibleAbility.getInstance());
     }
 
-    protected MaritLageToken(final MaritLageToken token) {
+    private MaritLageToken(final MaritLageToken token) {
         super(token);
     }
 

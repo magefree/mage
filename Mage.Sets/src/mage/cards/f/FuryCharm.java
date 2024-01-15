@@ -74,7 +74,7 @@ public final class FuryCharm extends CardImpl {
 
 class FuryCharmRemoveCounterEffect extends OneShotEffect {
 
-    public FuryCharmRemoveCounterEffect() {
+    FuryCharmRemoveCounterEffect() {
         super(Outcome.Benefit);
         this.staticText = "remove two time counters from target permanent or suspended card";
     }

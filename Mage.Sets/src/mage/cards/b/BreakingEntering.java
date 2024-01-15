@@ -51,7 +51,7 @@ public final class BreakingEntering extends SplitCard {
 
 class EnteringReturnFromGraveyardToBattlefieldEffect extends OneShotEffect {
 
-    public EnteringReturnFromGraveyardToBattlefieldEffect() {
+    EnteringReturnFromGraveyardToBattlefieldEffect() {
         super(Outcome.PutCreatureInPlay);
         staticText = "Put a creature card from a graveyard onto the battlefield under your control. It gains haste until end of turn.";
     }

@@ -55,7 +55,7 @@ public final class Outbreak extends CardImpl {
 
 class OutbreakEffect extends OneShotEffect {
 
-    public OutbreakEffect() {
+    OutbreakEffect() {
         super(Outcome.UnboostCreature);
         staticText = "Choose a creature type. All creatures of that type get -1/-1 until end of turn";
     }

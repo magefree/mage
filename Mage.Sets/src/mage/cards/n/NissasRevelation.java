@@ -43,7 +43,7 @@ public final class NissasRevelation extends CardImpl {
 
 class NissasRevelationEffect extends OneShotEffect {
 
-    public NissasRevelationEffect() {
+    NissasRevelationEffect() {
         super(Outcome.DrawCard);
         this.staticText = ", then reveal the top card of your library. If it's a creature card, you draw cards equal to its power and you gain life equal to its toughness";
     }

@@ -12,7 +12,7 @@
 
     <artifactId>mage-player-ai-draftbot</artifactId>
     <packaging>jar</packaging>
-    <name>Mage Player AI.DraftBot</name>
+    <name>Mage Player AI (draft bot)</name>
 
     <dependencies>
         <dependency>

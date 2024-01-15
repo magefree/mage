@@ -38,7 +38,7 @@ public final class AdNauseam extends CardImpl {
 
 class AdNauseamEffect extends OneShotEffect {
 
-    public AdNauseamEffect() {
+    AdNauseamEffect() {
         super(Outcome.DrawCard);
         this.staticText = "Reveal the top card of your library and put that card into your hand. You lose life equal to its mana value. You may repeat this process any number of times";
     }

@@ -54,7 +54,7 @@ public final class HokoriDustDrinker extends CardImpl {
 
 class HokoriDustDrinkerUntapEffect extends OneShotEffect {
 
-    public HokoriDustDrinkerUntapEffect() {
+    HokoriDustDrinkerUntapEffect() {
         super(Outcome.Untap);
         this.staticText = "that player untaps a land they control";
     }

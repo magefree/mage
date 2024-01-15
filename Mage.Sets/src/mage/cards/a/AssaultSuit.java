@@ -89,7 +89,7 @@ class AssaultSuitCantBeSacrificed extends ContinuousEffectImpl {
 
 class AssaultSuitGainControlEffect extends OneShotEffect {
 
-    public AssaultSuitGainControlEffect() {
+    AssaultSuitGainControlEffect() {
         super(Outcome.Benefit);
         this.staticText = "you may have that player gain control of equipped creature until end of turn. If you do, untap it";
     }

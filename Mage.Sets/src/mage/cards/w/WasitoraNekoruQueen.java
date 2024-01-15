@@ -61,7 +61,7 @@ public final class WasitoraNekoruQueen extends CardImpl {
 
 class WasitoraNekoruQueenEffect extends OneShotEffect {
 
-    public WasitoraNekoruQueenEffect() {
+    WasitoraNekoruQueenEffect() {
         super(Outcome.Benefit);
         staticText = "that player sacrifices a creature. If the player can't, you create a 3/3 black, red, and green Cat Dragon creature token with flying";
     }

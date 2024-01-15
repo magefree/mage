@@ -52,7 +52,7 @@ public final class KnollspineDragon extends CardImpl {
 
 class KnollspineDragonEffect extends OneShotEffect {
 
-    public KnollspineDragonEffect() {
+    KnollspineDragonEffect() {
         super(Outcome.Neutral);
         staticText = "you may discard your hand and draw cards equal to the damage dealt to target opponent this turn";
     }

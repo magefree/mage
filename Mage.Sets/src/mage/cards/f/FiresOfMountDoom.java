@@ -66,7 +66,7 @@ public final class FiresOfMountDoom extends CardImpl {
 
 class FiresOfMountDoomEffect extends OneShotEffect {
 
-    public FiresOfMountDoomEffect() {
+    FiresOfMountDoomEffect() {
         super(Outcome.Benefit);
         this.staticText = "exile the top card of your library. You may play that card this turn. " +
             "When you play a card this way, Fires of Mount Doom deals 2 damage to each player";

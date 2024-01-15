@@ -468,7 +468,7 @@ class UrzaAcademyHeadmasterRandomEffect extends OneShotEffect {
 
 class UrzaAcademyHeadmasterManaEffect extends OneShotEffect {
 
-    public UrzaAcademyHeadmasterManaEffect() {
+    UrzaAcademyHeadmasterManaEffect() {
         super(Outcome.PutManaInPool);
     }
 
@@ -531,7 +531,7 @@ class UrzaAcademyHeadmasterManaEffect extends OneShotEffect {
 
 class UrzaAcademyHeadmasterBrainstormEffect extends OneShotEffect {
 
-    public UrzaAcademyHeadmasterBrainstormEffect() {
+    UrzaAcademyHeadmasterBrainstormEffect() {
         super(Outcome.DrawCard);
         staticText = "draw three cards, then put a card from your hand on top of your library";
     }

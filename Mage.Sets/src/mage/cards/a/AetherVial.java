@@ -51,7 +51,7 @@ public final class AetherVial extends CardImpl {
 
 class AetherVialEffect extends OneShotEffect {
 
-    public AetherVialEffect() {
+    AetherVialEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "You may put a creature card with mana value equal to the number of charge counters on {this} from your hand onto the battlefield";
     }

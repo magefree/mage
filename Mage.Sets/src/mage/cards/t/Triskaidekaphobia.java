@@ -44,7 +44,7 @@ public final class Triskaidekaphobia extends CardImpl {
 
 class TriskaidekaphobiaGainLifeEffect extends OneShotEffect {
 
-    public TriskaidekaphobiaGainLifeEffect() {
+    TriskaidekaphobiaGainLifeEffect() {
         super(Outcome.Neutral);
         this.staticText = "Each player with exactly 13 life loses the game, then each player gains 1 life";
     }
@@ -83,7 +83,7 @@ class TriskaidekaphobiaGainLifeEffect extends OneShotEffect {
 
 class TriskaidekaphobiaLoseLifeEffect extends OneShotEffect {
 
-    public TriskaidekaphobiaLoseLifeEffect() {
+    TriskaidekaphobiaLoseLifeEffect() {
         super(Outcome.Neutral);
         this.staticText = "Each player with exactly 13 life loses the game, then each player loses 1 life";
     }

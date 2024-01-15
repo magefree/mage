@@ -142,7 +142,7 @@ class AwakenElementalToken extends TokenImpl {
         this.addAbility(HasteAbility.getInstance());
     }
 
-    protected AwakenElementalToken(final AwakenElementalToken token) {
+    private AwakenElementalToken(final AwakenElementalToken token) {
         super(token);
     }
 

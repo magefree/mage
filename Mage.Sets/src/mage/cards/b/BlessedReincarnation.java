@@ -47,7 +47,7 @@ public final class BlessedReincarnation extends CardImpl {
 
 class BlessedReincarnationEffect extends OneShotEffect {
 
-    public BlessedReincarnationEffect() {
+    BlessedReincarnationEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Exile target creature an opponent controls. That player reveals cards from the top of their library until a creature card is revealed. The player puts that card onto the battlefield, then shuffles the rest into their library";
     }

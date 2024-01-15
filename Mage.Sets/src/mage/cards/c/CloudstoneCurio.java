@@ -48,7 +48,7 @@ public final class CloudstoneCurio extends CardImpl {
 
 class CloudstoneCurioEffect extends OneShotEffect {
 
-    public CloudstoneCurioEffect() {
+    CloudstoneCurioEffect() {
         super(Outcome.ReturnToHand);
         this.staticText = "you may return another permanent you control that shares a permanent type with it to its owner's hand";
     }

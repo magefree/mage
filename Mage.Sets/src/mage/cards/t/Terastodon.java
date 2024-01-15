@@ -60,7 +60,7 @@ public final class Terastodon extends CardImpl {
 
 class TerastodonEffect extends OneShotEffect {
 
-    public TerastodonEffect() {
+    TerastodonEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "you may destroy up to three target noncreature permanents. For each permanent put into a graveyard this way, its controller creates a 3/3 green Elephant creature token";
     }

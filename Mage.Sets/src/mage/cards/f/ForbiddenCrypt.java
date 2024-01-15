@@ -47,7 +47,7 @@ public final class ForbiddenCrypt extends CardImpl {
 
 class ForbiddenCryptDrawCardReplacementEffect extends ReplacementEffectImpl {
 
-    public ForbiddenCryptDrawCardReplacementEffect() {
+    ForbiddenCryptDrawCardReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Neutral);
         this.staticText = "If you would draw a card, return a card from your graveyard to your hand instead. If you can't, you lose the game";
     }
@@ -100,7 +100,7 @@ class ForbiddenCryptDrawCardReplacementEffect extends ReplacementEffectImpl {
 
 class ForbiddenCryptPutIntoYourGraveyardReplacementEffect extends ReplacementEffectImpl {
 
-    public ForbiddenCryptPutIntoYourGraveyardReplacementEffect() {
+    ForbiddenCryptPutIntoYourGraveyardReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         this.staticText = "If a card would be put into your graveyard from anywhere, exile that card instead";
     }

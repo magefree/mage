@@ -51,7 +51,7 @@ public final class LandsEdge extends CardImpl {
 
 class LandsEdgeEffect extends OneShotEffect {
 
-    public LandsEdgeEffect() {
+    LandsEdgeEffect() {
         super(Outcome.Neutral);
         staticText = "If the discarded card was a land card, {this} deals 2 damage to target player or planeswalker";
     }

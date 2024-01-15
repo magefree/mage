@@ -41,7 +41,7 @@ public final class DeathPitOffering extends CardImpl {
 
 class DeathPitOfferingEffect extends OneShotEffect {
 
-    public DeathPitOfferingEffect() {
+    DeathPitOfferingEffect() {
         super(Outcome.Sacrifice);
         this.staticText = "sacrifice all creatures you control";
     }

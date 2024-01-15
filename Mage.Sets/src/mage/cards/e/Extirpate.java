@@ -59,7 +59,7 @@ public final class Extirpate extends CardImpl {
 
 class ExtirpateEffect extends OneShotEffect {
 
-    public ExtirpateEffect() {
+    ExtirpateEffect() {
         super(Outcome.Exile);
         this.staticText = "Choose target card in a graveyard other than "
                 + "a basic land card. Search its owner's graveyard, hand, "

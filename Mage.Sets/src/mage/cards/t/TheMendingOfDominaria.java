@@ -54,7 +54,7 @@ public final class TheMendingOfDominaria extends CardImpl {
 
 class TheMendingOfDominariaFirstEffect extends OneShotEffect {
 
-    public TheMendingOfDominariaFirstEffect() {
+    TheMendingOfDominariaFirstEffect() {
         super(Outcome.ReturnToHand);
         this.staticText = "Mill two cards, then you may return a creature card from your graveyard to your hand";
     }

@@ -46,7 +46,7 @@ public final class BringTheEnding extends CardImpl {
 
 class BringTheEndingCounterEffect extends OneShotEffect {
 
-    public BringTheEndingCounterEffect() {
+    BringTheEndingCounterEffect() {
         super(Outcome.Benefit);
         staticText = "Counter target spell unless its controller pays {2}.<br>" + AbilityWord.CORRUPTED.formatWord() + "Counter that spell instead if its controller has three or more poison counters.";
     }

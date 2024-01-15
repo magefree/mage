@@ -19,7 +19,7 @@ public final class ElfWarriorToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    protected ElfWarriorToken(final ElfWarriorToken token) {
+    private ElfWarriorToken(final ElfWarriorToken token) {
         super(token);
     }
 

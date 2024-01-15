@@ -42,7 +42,7 @@ public final class DesperateResearch extends CardImpl {
 
 class DesperateResearchEffect extends OneShotEffect {
 
-    public DesperateResearchEffect() {
+    DesperateResearchEffect() {
         super(Outcome.Benefit);
         this.staticText = "Reveal the top seven cards of your library and put all of them with that name into your hand. Exile the rest";
     }

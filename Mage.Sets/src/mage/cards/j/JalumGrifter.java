@@ -64,7 +64,7 @@ public final class JalumGrifter extends CardImpl {
 
 class JalumGrifterEffect extends OneShotEffect {
 
-    public JalumGrifterEffect() {
+    JalumGrifterEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "Shuffle {this} and two lands you control face down. Target opponent chooses one of those cards. Turn the cards face up. If they chose {this}, sacrifice it. Otherwise, destroy target permanent";
     }

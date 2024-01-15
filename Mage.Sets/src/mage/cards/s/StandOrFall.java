@@ -50,7 +50,7 @@ public final class StandOrFall extends CardImpl {
 
 class StandOrFallEffect extends OneShotEffect {
 
-    public StandOrFallEffect() {
+    StandOrFallEffect() {
         super(Outcome.Detriment);
         this.staticText = "separate all creatures that player controls into two piles and that player chooses one. Only creatures in the chosen piles can block this turn";
     }

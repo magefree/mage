@@ -53,7 +53,7 @@ public final class BlazeOfGlory extends CardImpl {
 
 class BlazeOfGloryRequirementEffect extends RequirementEffect {
 
-    public BlazeOfGloryRequirementEffect() {
+    BlazeOfGloryRequirementEffect() {
         super(Duration.EndOfTurn);
         this.staticText = "It blocks each attacking creature this turn if able";
     }

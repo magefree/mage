@@ -63,7 +63,7 @@ public final class RevokePrivileges extends CardImpl {
 
 class RevokePrivilegeCantCrewEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public RevokePrivilegeCantCrewEffect() {
+    RevokePrivilegeCantCrewEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = ", or crew Vehicles";
     }

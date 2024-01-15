@@ -38,7 +38,7 @@ public final class Fecundity extends CardImpl {
 
 class FecundityEffect extends OneShotEffect {
 
-    public FecundityEffect() {
+    FecundityEffect() {
         super(Outcome.DrawCard);
         this.staticText = "that creature's controller may draw a card";
     }

@@ -72,7 +72,7 @@ class ManaScrewAbility extends ActivatedManaAbilityImpl {
 
 class ManaScrewEffect extends ManaEffect {
 
-    public ManaScrewEffect() {
+    ManaScrewEffect() {
         super();
         this.staticText = "Flip a coin. If you win the flip, add {C}{C}";
     }

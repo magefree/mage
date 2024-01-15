@@ -48,7 +48,7 @@ public final class ExpelFromOrazca extends CardImpl {
 
 class ExpelFromOrazcaEffect extends OneShotEffect {
 
-    public ExpelFromOrazcaEffect() {
+    ExpelFromOrazcaEffect() {
         super(Outcome.ReturnToHand);
         this.staticText = "Return target nonland permanent to its owner's hand. If you have the city's blessing, you may put that permanent on top of its owner's library instead";
     }

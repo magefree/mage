@@ -60,7 +60,7 @@ public final class PossessedSkaab extends CardImpl {
 
 class PossessedSkaabDiesEffect extends ReplacementEffectImpl {
 
-    public PossessedSkaabDiesEffect() {
+    PossessedSkaabDiesEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Exile);
         staticText = "If {this} would die, exile it instead";
     }

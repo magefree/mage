@@ -40,7 +40,7 @@ public final class PhosphorescentFeast extends CardImpl {
 
 class PhosphorescentFeastEffect extends OneShotEffect {
 
-    public PhosphorescentFeastEffect() {
+    PhosphorescentFeastEffect() {
         super(Outcome.GainLife);
     }
 

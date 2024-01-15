@@ -43,7 +43,7 @@ public final class AgonizingMemories extends CardImpl {
 
 class AgonizingMemoriesEffect extends OneShotEffect {
 
-    public AgonizingMemoriesEffect() {
+    AgonizingMemoriesEffect() {
         super(Outcome.Discard);
         this.staticText = "Look at target player's hand and choose two cards from it. Put them on top of that player's library in any order.";
     }

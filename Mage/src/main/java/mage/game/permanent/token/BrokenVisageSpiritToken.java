@@ -23,7 +23,7 @@ public final class BrokenVisageSpiritToken extends TokenImpl {
         toughness = new MageInt(tokenToughness);
     }
 
-    protected BrokenVisageSpiritToken(final BrokenVisageSpiritToken token) {
+    private BrokenVisageSpiritToken(final BrokenVisageSpiritToken token) {
         super(token);
     }
 

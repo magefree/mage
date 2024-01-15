@@ -60,7 +60,7 @@ public final class Mindsparker extends CardImpl {
 
 class MindsparkerEffect extends OneShotEffect {
 
-    public MindsparkerEffect() {
+    MindsparkerEffect() {
         super(Outcome.Damage);
         staticText = "{this} deals 2 damage to that player";
     }

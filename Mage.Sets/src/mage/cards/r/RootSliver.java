@@ -51,7 +51,7 @@ public final class RootSliver extends CardImpl {
 
 class RootSliverEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public RootSliverEffect() {
+    RootSliverEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Sliver spells can't be countered";
     }

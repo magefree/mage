@@ -21,7 +21,7 @@ public final class InsectInfectToken extends TokenImpl {
         addAbility(InfectAbility.getInstance());
     }
 
-    protected InsectInfectToken(final InsectInfectToken token) {
+    private InsectInfectToken(final InsectInfectToken token) {
         super(token);
     }
 

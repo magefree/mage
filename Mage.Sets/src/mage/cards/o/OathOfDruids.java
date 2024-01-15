@@ -95,7 +95,7 @@ class OathOfDruidsPredicate implements ObjectSourcePlayerPredicate<Player> {
 
 class OathOfDruidsEffect extends OneShotEffect {
 
-    public OathOfDruidsEffect() {
+    OathOfDruidsEffect() {
         super(Outcome.PutCardInPlay);
         staticText = "that player chooses target player who controls more creatures than they do and is their opponent. "
                 + "The first player may reveal cards from the top of their library until they reveal a creature card. "

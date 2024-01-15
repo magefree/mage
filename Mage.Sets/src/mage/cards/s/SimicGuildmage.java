@@ -85,7 +85,7 @@ public final class SimicGuildmage extends CardImpl {
 
 class MoveCounterFromTargetToTargetEffect extends OneShotEffect {
 
-    public MoveCounterFromTargetToTargetEffect() {
+    MoveCounterFromTargetToTargetEffect() {
         super(Outcome.Detriment);
         this.staticText = "Move a +1/+1 counter from target creature onto another target creature with the same controller";
     }
@@ -149,7 +149,7 @@ class SameControllerPredicate implements ObjectSourcePlayerPredicate<MageItem> {
 
 class MoveAuraEffect extends OneShotEffect {
 
-    public MoveAuraEffect() {
+    MoveAuraEffect() {
         super(Outcome.AIDontUseIt);
         staticText = "Attach target Aura attached to a permanent to another permanent with the same controller.";
     }

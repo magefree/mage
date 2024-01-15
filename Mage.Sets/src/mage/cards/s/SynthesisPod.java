@@ -58,7 +58,7 @@ class SynthesisPodCost extends CostImpl {
         filter.add(TargetController.YOU.getControllerPredicate());
     }
 
-    private Spell exiledSpell = null;
+    private Integer exiledSpellManaValue = null;
 
     SynthesisPodCost() {
         super();
@@ -84,11 +84,11 @@ class SynthesisPodCost extends CostImpl {
             return false;
         }
         String spellName = spell.getName();
-        exiledSpell = spell;
+        this.exiledSpellManaValue = spell.getManaValue();
         player.moveCards(spell.getCard(), Zone.EXILED, source, game);
-        paid = true;
+        this.paid = true;
         game.informPlayers(player.getLogName() + " exiles " + spellName + " (as costs)");
-        return paid;
+        return this.paid;
     }
 
     @Override
@@ -101,8 +101,8 @@ class SynthesisPodCost extends CostImpl {
         return new SynthesisPodCost(this);
     }
 
-    Spell getExiledSpell() {
-        return exiledSpell;
+    public Integer getExiledSpellManaValue() {
+        return this.exiledSpellManaValue;
     }
 }
 
@@ -128,17 +128,16 @@ class SynthesisPodEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
-        Spell spell = CardUtil
+        Integer exiledSpellManaValue = CardUtil
                 .castStream(source.getCosts(), SynthesisPodCost.class)
-                .map(SynthesisPodCost::getExiledSpell)
+                .map(SynthesisPodCost::getExiledSpellManaValue)
                 .findFirst()
                 .orElse(null);
-        if (controller == null || opponent == null || spell == null) {
+        if (controller == null || opponent == null || exiledSpellManaValue == null) {
             return false;
         }
-        int mv = spell.getManaValue();
         Cards cards = new CardsImpl();
-        Card card = getCard(mv, opponent, cards, game);
+        Card card = getCard(exiledSpellManaValue, opponent, cards, game);
         opponent.revealCards(source, cards, game);
         if (card != null) {
             controller.moveCards(card, Zone.EXILED, source, game);
@@ -150,10 +149,10 @@ class SynthesisPodEffect extends OneShotEffect {
         return true;
     }
 
-    private static Card getCard(int mv, Player opponent, Cards cards, Game game) {
+    private static Card getCard(int exiledSpellManaValue, Player opponent, Cards cards, Game game) {
         for (Card card : opponent.getLibrary().getCards(game)) {
             cards.add(card);
-            if (card.getManaValue() == mv + 1) {
+            if (card.getManaValue() == exiledSpellManaValue + 1) {
                 return card;
             }
         }

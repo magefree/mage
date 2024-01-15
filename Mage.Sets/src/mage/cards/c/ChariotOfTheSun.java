@@ -55,7 +55,7 @@ public final class ChariotOfTheSun extends CardImpl {
 
 class ChariotOfTheSunEffect extends ContinuousEffectImpl {
 
-    public ChariotOfTheSunEffect() {
+    ChariotOfTheSunEffect() {
         super(Duration.EndOfTurn, Layer.PTChangingEffects_7, SubLayer.SetPT_7b, Outcome.UnboostCreature);
         staticText = "and has base toughness 1";
     }

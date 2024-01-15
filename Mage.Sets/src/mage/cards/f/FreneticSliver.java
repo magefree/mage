@@ -58,7 +58,7 @@ public final class FreneticSliver extends CardImpl {
 
 class FreneticSliverEffect extends OneShotEffect {
 
-    public FreneticSliverEffect() {
+    FreneticSliverEffect() {
         super(Outcome.Neutral);
         staticText = "if this permanent is on the battlefield, flip a coin. If you win the flip, "
                 + "exile this permanent and return it to the battlefield under its owner's control "

@@ -22,7 +22,7 @@ public final class HydraBroodmasterToken extends TokenImpl {
         this.toughness = new MageInt(toughness);
     }
 
-    protected HydraBroodmasterToken(final HydraBroodmasterToken token) {
+    private HydraBroodmasterToken(final HydraBroodmasterToken token) {
         super(token);
     }
 
@@ -30,4 +30,3 @@ public final class HydraBroodmasterToken extends TokenImpl {
         return new HydraBroodmasterToken(this);
     }
 }
-

@@ -49,7 +49,7 @@ public final class ChainOfSilence extends CardImpl {
 
 class ChainOfSilenceEffect extends OneShotEffect {
 
-    public ChainOfSilenceEffect() {
+    ChainOfSilenceEffect() {
         super(Outcome.PreventDamage);
         this.staticText = "Prevent all damage target creature would deal this turn. That creature's controller may sacrifice a land. If the player does, they may copy this spell and may choose a new target for that copy";
     }

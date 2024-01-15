@@ -60,7 +60,7 @@ enum ChecksAndBalancesCondition implements Condition {
 
 class ChecksAndBalancesEffect extends OneShotEffect {
 
-    public ChecksAndBalancesEffect() {
+    ChecksAndBalancesEffect() {
         super(Outcome.Detriment);
         staticText = "each of that player's opponents may discard a card. If they do, counter that spell";
     }

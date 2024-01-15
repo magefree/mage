@@ -71,7 +71,7 @@ public final class SwordOfTheParuns extends CardImpl {
 
 class MayTapOrUntapAttachedEffect extends OneShotEffect {
 
-    public MayTapOrUntapAttachedEffect() {
+    MayTapOrUntapAttachedEffect() {
         super(Outcome.Benefit);
         this.staticText = "You may tap or untap equipped creature.";
     }

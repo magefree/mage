@@ -136,7 +136,7 @@ class DereviEmpyrialTacticianAbility extends ActivatedAbilityImpl {
 
 class PutCommanderOnBattlefieldEffect extends OneShotEffect {
 
-    public PutCommanderOnBattlefieldEffect() {
+    PutCommanderOnBattlefieldEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Put Derevi onto the battlefield from the command zone";
     }

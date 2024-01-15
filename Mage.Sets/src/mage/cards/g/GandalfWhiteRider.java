@@ -64,7 +64,7 @@ public final class GandalfWhiteRider extends CardImpl {
 
 class GandalfWhiteRiderDyingEffect extends OneShotEffect {
 
-    public GandalfWhiteRiderDyingEffect() {
+    GandalfWhiteRiderDyingEffect() {
         super(Outcome.ReturnToHand);
         staticText = "put it into its owner's library fifth from the top";
     }

@@ -57,7 +57,7 @@ public final class JaceMemoryAdept extends CardImpl {
 
 class JaceMemoryAdeptEffect extends DrawCardTargetEffect {
 
-    public JaceMemoryAdeptEffect(int amount) {
+    JaceMemoryAdeptEffect(int amount) {
         super(amount);
         staticText = "Any number of target players each draw twenty cards";
     }

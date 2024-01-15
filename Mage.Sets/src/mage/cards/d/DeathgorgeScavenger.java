@@ -50,7 +50,7 @@ public final class DeathgorgeScavenger extends CardImpl {
 
 class DeathgorgeScavengerEffect extends OneShotEffect {
 
-    public DeathgorgeScavengerEffect() {
+    DeathgorgeScavengerEffect() {
         super(Outcome.Benefit);
         this.staticText = "exile target card from a graveyard. If a creature card is exiled this way, you gain 2 life. If a noncreature card is exiled this way, {this} gets +1/+1 until end of turn";
     }

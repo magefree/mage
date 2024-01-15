@@ -86,7 +86,7 @@ class PsychicBattleTriggeredAbility extends TriggeredAbilityImpl {
 
 class PsychicBattleEffect extends OneShotEffect {
 
-    public PsychicBattleEffect() {
+    PsychicBattleEffect() {
         super(Outcome.Benefit);
     }
 

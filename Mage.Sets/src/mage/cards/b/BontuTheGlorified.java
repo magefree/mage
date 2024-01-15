@@ -75,7 +75,7 @@ public final class BontuTheGlorified extends CardImpl {
 
 class BontuTheGlorifiedRestrictionEffect extends RestrictionEffect {
 
-    public BontuTheGlorifiedRestrictionEffect() {
+    BontuTheGlorifiedRestrictionEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "{this} can't attack or block unless a creature died under your control this turn";
     }

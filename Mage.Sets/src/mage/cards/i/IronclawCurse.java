@@ -51,7 +51,7 @@ public final class IronclawCurse extends CardImpl {
 
 class IronclawCurseEffect extends CantBlockAttachedEffect {
 
-    public IronclawCurseEffect() {
+    IronclawCurseEffect() {
         super(AttachmentType.AURA);
         this.staticText = "Enchanted creature can't block creatures with power equal to or greater than the enchanted creature's toughness";
     }

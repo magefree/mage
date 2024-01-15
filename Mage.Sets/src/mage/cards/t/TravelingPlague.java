@@ -112,7 +112,7 @@ class TravelingPlagueTriggeredAbility extends TriggeredAbilityImpl {
 
 class TravelingPlagueEffect extends OneShotEffect {
 
-    public TravelingPlagueEffect() {
+    TravelingPlagueEffect() {
         super(Outcome.Detriment);
         staticText = "that creature's controller returns {this} from its owner's graveyard to the battlefield";
     }

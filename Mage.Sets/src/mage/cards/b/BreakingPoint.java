@@ -39,7 +39,7 @@ public final class BreakingPoint extends CardImpl {
 
 class BreakingPointDestroyEffect extends OneShotEffect {
 
-    public BreakingPointDestroyEffect() {
+    BreakingPointDestroyEffect() {
         super(Outcome.Benefit);
         this.staticText = "Any player may have {this} deal 6 damage to them. If no one does, destroy all creatures. Creatures destroyed this way can't be regenerated.";
     }

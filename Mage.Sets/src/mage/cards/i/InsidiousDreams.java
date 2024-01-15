@@ -44,7 +44,7 @@ public final class InsidiousDreams extends CardImpl {
 
 class InsidiousDreamsEffect extends OneShotEffect {
 
-    public InsidiousDreamsEffect() {
+    InsidiousDreamsEffect() {
         super(Outcome.Benefit);
         this.staticText = "Search your library for up to X cards. Then shuffle and put those cards on top of it in any order";
     }

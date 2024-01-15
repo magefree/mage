@@ -48,7 +48,7 @@ public final class Polymorph extends CardImpl {
 
 class PolymorphEffect extends OneShotEffect {
 
-    public PolymorphEffect() {
+    PolymorphEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Its controller reveals cards from the top of their library until they reveal a creature card. The player puts that card onto the battlefield, then shuffles all other cards revealed this way into their library";
     }

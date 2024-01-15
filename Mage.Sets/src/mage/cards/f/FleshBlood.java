@@ -53,7 +53,7 @@ public final class FleshBlood extends SplitCard {
 
 class FleshEffect extends OneShotEffect {
 
-    public FleshEffect() {
+    FleshEffect() {
         super(Outcome.BoostCreature);
         staticText = "Exile target creature card from a graveyard. Put X +1/+1 counters on target creature, where X is the power of the card you exiled";
     }

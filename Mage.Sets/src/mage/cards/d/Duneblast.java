@@ -44,7 +44,7 @@ public final class Duneblast extends CardImpl {
 
 class DuneblastEffect extends OneShotEffect {
 
-    public DuneblastEffect() {
+    DuneblastEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "Choose up to one creature. Destroy the rest";
     }

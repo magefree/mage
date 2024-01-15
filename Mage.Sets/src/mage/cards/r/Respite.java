@@ -23,7 +23,7 @@ public final class Respite extends CardImpl {
         this.getSpellAbility().addEffect(new PreventAllDamageByAllPermanentsEffect(Duration.EndOfTurn, true));
         
         // You gain 1 life for each attacking creature.
-        this.getSpellAbility().addEffect(new GainLifeEffect(new AttackingCreatureCount()));
+        this.getSpellAbility().addEffect(new GainLifeEffect(new AttackingCreatureCount()).setText("You gain 1 life for each attacking creature"));
     }
 
     private Respite(final Respite card) {

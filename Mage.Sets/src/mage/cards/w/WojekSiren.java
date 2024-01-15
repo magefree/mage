@@ -41,7 +41,7 @@ public final class WojekSiren extends CardImpl {
 
 class WojekSirenBoostEffect extends ContinuousEffectImpl {
 
-    public WojekSirenBoostEffect() {
+    WojekSirenBoostEffect() {
         super(Duration.EndOfTurn, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
         staticText = "Target creature and each other creature that shares a color with it get +1/+1 until end of turn";
     }

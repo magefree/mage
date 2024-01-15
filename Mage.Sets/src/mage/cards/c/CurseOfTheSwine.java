@@ -60,7 +60,7 @@ enum CurseOfTheSwineAdjuster implements TargetAdjuster {
 
 class CurseOfTheSwineEffect extends OneShotEffect {
 
-    public CurseOfTheSwineEffect() {
+    CurseOfTheSwineEffect() {
         super(Outcome.Exile);
         this.staticText = "Exile X target creatures. For each creature exiled this way, "
                 + "its controller creates a 2/2 green Boar creature token";

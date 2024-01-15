@@ -50,7 +50,7 @@ public final class WelcomeToTheFold extends CardImpl {
 
 class WelcomeToTheFoldEffect extends GainControlTargetEffect {
 
-    public WelcomeToTheFoldEffect(Duration duration, boolean fixedControl) {
+    WelcomeToTheFoldEffect(Duration duration, boolean fixedControl) {
         super(duration, fixedControl);
         staticText = "Gain control of target creature if its toughness is 2 or less. If this spell's madness cost was paid, instead gain control of that creature if its toughness is X or less";
     }

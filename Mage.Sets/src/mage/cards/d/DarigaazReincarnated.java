@@ -68,7 +68,7 @@ public final class DarigaazReincarnated extends CardImpl {
 
 class DarigaazReincarnatedDiesEffect extends ReplacementEffectImpl {
 
-    public DarigaazReincarnatedDiesEffect() {
+    DarigaazReincarnatedDiesEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Exile);
         staticText = "If {this} would die, instead exile it with three egg counters on it";
     }

@@ -52,7 +52,7 @@ public final class JhoiraAgelessInnovator extends CardImpl {
 
 class JhoiraAgelessInnovatorEffect extends OneShotEffect {
 
-    public JhoiraAgelessInnovatorEffect() {
+    JhoiraAgelessInnovatorEffect() {
         super(Outcome.PutCardInPlay);
         this.staticText = ", then you may put an artifact card with mana value X or less from your hand onto the battlefield, where X is the number of ingenuity counters on Jhoira.";
     }

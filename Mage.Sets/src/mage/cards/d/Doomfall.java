@@ -54,7 +54,7 @@ public final class Doomfall extends CardImpl {
 
 class DoomfallEffect extends OneShotEffect {
 
-    public DoomfallEffect() {
+    DoomfallEffect() {
         super(Outcome.Exile);
         this.staticText = "target opponent exiles a creature they control";
     }

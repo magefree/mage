@@ -43,7 +43,7 @@ public final class KeeningStone extends CardImpl {
 
 class KeeningStoneEffect extends OneShotEffect {
 
-    public KeeningStoneEffect() {
+    KeeningStoneEffect() {
         super(Outcome.Neutral);
         this.staticText = "Target player mills X cards, where X is the number of cards in that player's graveyard";
     }

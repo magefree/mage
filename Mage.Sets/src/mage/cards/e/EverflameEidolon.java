@@ -51,7 +51,7 @@ public final class EverflameEidolon extends CardImpl {
 
 class EverflameEidolonEffect extends OneShotEffect {
 
-    public EverflameEidolonEffect() {
+    EverflameEidolonEffect() {
         super(Outcome.BoostCreature);
         this.staticText = "{this} gets +1/+0 until end of turn. If it's an Aura, enchanted creature gets +1/+0 until end of turn instead";
     }

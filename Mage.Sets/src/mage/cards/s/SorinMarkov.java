@@ -62,7 +62,7 @@ public final class SorinMarkov extends CardImpl {
 
 class SorinMarkovEffect extends OneShotEffect {
 
-    public SorinMarkovEffect() {
+    SorinMarkovEffect() {
         super(Outcome.Benefit);
         staticText = "Target opponent's life total becomes 10";
     }

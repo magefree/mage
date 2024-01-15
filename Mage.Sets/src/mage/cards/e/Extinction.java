@@ -41,7 +41,7 @@ public final class Extinction extends CardImpl {
 
 class ExtinctionEffect extends OneShotEffect {
 
-    public ExtinctionEffect() {
+    ExtinctionEffect() {
         super(Outcome.DestroyPermanent);
         staticText = "Destroy all creatures of the creature type of your choice";
     }

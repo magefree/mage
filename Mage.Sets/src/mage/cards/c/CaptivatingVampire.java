@@ -64,7 +64,7 @@ public final class CaptivatingVampire extends CardImpl {
 
 class CaptivatingVampireEffect extends ContinuousEffectImpl {
 
-    public CaptivatingVampireEffect() {
+    CaptivatingVampireEffect() {
         super(Duration.Custom, Outcome.Detriment);
         staticText = "Gain control of target creature. It becomes a Vampire in addition to its other types";
     }

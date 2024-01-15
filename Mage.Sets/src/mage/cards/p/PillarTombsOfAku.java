@@ -49,7 +49,7 @@ public final class PillarTombsOfAku extends CardImpl {
 
 class PillarTombsOfAkuEffect extends OneShotEffect {
 
-    public PillarTombsOfAkuEffect() {
+    PillarTombsOfAkuEffect() {
         super(Outcome.Benefit);
         this.staticText = "that player may sacrifice a creature. If that "
                 + "player doesn't, they lose 5 life and you sacrifice {this}";

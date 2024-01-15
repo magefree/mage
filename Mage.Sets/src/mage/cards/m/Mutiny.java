@@ -46,7 +46,7 @@ public final class Mutiny extends CardImpl {
 
 class MutinyEffect extends OneShotEffect {
 
-    public MutinyEffect() {
+    MutinyEffect() {
         super(Outcome.Damage);
         this.staticText = "Target creature an opponent controls deals damage equal to its power to another target creature that player controls";
     }

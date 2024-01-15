@@ -40,7 +40,7 @@ public final class LashOut extends CardImpl {
 
 class LashOutEffect extends OneShotEffect {
 
-    public LashOutEffect() {
+    LashOutEffect() {
         super(Outcome.Damage);
         this.staticText = "Lash Out deals 3 damage to target creature. Clash with an opponent. If you win, Lash Out deals 3 damage to that creature's controller";
     }

@@ -65,7 +65,7 @@ public final class GoldenGuardian extends CardImpl {
 
 class GoldenGuardianEffect extends OneShotEffect {
 
-    public GoldenGuardianEffect() {
+    GoldenGuardianEffect() {
         super(Outcome.Damage);
         this.staticText = "{this} fights another target creature you control";
     }
@@ -122,7 +122,7 @@ class GoldenGuardianDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
 class GoldenGuardianReturnTransformedEffect extends OneShotEffect {
 
-    public GoldenGuardianReturnTransformedEffect() {
+    GoldenGuardianReturnTransformedEffect() {
         super(Outcome.PutCardInPlay);
         this.staticText = "return it to the battlefield transformed under your control";
     }

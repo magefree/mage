@@ -86,7 +86,7 @@ enum GoblinResearcherCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return false;
+        return GoblinResearcherWatcher.checkPlayer(source, game);
     }
 }
 

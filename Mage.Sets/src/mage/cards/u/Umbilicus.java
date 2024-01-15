@@ -42,7 +42,7 @@ public final class Umbilicus extends CardImpl {
 
 class BloodClockEffect extends OneShotEffect {
 
-    public BloodClockEffect() {
+    BloodClockEffect() {
         super(Outcome.ReturnToHand);
         this.staticText = "that player returns a permanent they control to its owner's hand unless they pay 2 life";
     }

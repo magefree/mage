@@ -46,7 +46,7 @@ public final class ScoriaWurm extends CardImpl {
 
 class ScoriaWurmEffect extends OneShotEffect {
 
-    public ScoriaWurmEffect() {
+    ScoriaWurmEffect() {
         super(Outcome.Damage);
         staticText = "flip a coin. If you lose the flip, return {this} to its owner's hand";
     }

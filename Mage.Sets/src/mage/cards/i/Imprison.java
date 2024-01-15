@@ -106,7 +106,7 @@ class ImprisonTriggeredAbility extends TriggeredAbilityImpl {
 
 class ImprisonUnblockEffect extends OneShotEffect {
 
-    public ImprisonUnblockEffect() {
+    ImprisonUnblockEffect() {
         super(Outcome.Benefit);
         this.staticText = "tap the creature, remove it from combat, and creatures it was blocking that had become blocked by only that creature this combat become unblocked";
     }

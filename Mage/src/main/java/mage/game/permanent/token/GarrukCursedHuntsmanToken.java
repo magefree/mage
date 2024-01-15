@@ -29,7 +29,7 @@ public final class GarrukCursedHuntsmanToken extends TokenImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new AddCountersAllEffect(CounterType.LOYALTY.createInstance(), filter)));
     }
 
-    protected GarrukCursedHuntsmanToken(final GarrukCursedHuntsmanToken token) {
+    private GarrukCursedHuntsmanToken(final GarrukCursedHuntsmanToken token) {
         super(token);
     }
 

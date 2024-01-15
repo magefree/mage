@@ -59,7 +59,7 @@ public final class UnnaturalHunger extends CardImpl {
 
 class UnnaturalHungerEffect extends OneShotEffect {
 
-    public UnnaturalHungerEffect() {
+    UnnaturalHungerEffect() {
         super(Outcome.Detriment);
         this.staticText = "{this} deals damage to that player equal to that creature's power unless they sacrifice another creature";
     }

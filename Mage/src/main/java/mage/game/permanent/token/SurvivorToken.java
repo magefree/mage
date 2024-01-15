@@ -19,7 +19,7 @@ public final class SurvivorToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    protected SurvivorToken(final SurvivorToken token) {
+    private SurvivorToken(final SurvivorToken token) {
         super(token);
     }
 

@@ -84,7 +84,7 @@ class StormOfSoulsReturnEffect extends OneShotEffect {
 
 class StormOfSoulsChangeCreatureEffect extends ContinuousEffectImpl {
 
-    public StormOfSoulsChangeCreatureEffect() {
+    StormOfSoulsChangeCreatureEffect() {
         super(Duration.Custom, Outcome.Benefit);
     }
 

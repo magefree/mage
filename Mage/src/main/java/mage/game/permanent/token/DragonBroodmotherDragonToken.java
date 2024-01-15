@@ -23,7 +23,7 @@ public final class DragonBroodmotherDragonToken extends TokenImpl {
         addAbility(new DevourAbility(2));
     }
 
-    protected DragonBroodmotherDragonToken(final DragonBroodmotherDragonToken token) {
+    private DragonBroodmotherDragonToken(final DragonBroodmotherDragonToken token) {
         super(token);
     }
 

@@ -43,7 +43,7 @@ public final class CallToHeel extends CardImpl {
 
 class CallToHeelEffect extends OneShotEffect {
 
-    public CallToHeelEffect() {
+    CallToHeelEffect() {
         super(Outcome.Neutral);
         this.staticText = "Its controller draws a card";
     }

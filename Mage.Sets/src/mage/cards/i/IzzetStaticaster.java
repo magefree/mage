@@ -60,7 +60,7 @@ public final class IzzetStaticaster extends CardImpl {
 
 class IzzetStaticasterDamageEffect extends OneShotEffect {
 
-    public IzzetStaticasterDamageEffect() {
+    IzzetStaticasterDamageEffect() {
         super(Outcome.Exile);
         this.staticText = "{this} deals 1 damage to target creature and each other creature with the same name as that creature";
     }

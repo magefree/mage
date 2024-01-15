@@ -43,7 +43,7 @@ public final class WeirdHarvest extends CardImpl {
 
 class WeirdHarvestEffect extends OneShotEffect {
 
-    public WeirdHarvestEffect() {
+    WeirdHarvestEffect() {
         super(Outcome.Detriment);
         this.staticText = "each player may search their library for up to X creature cards, reveal those cards, put them into their hand, then shuffle";
     }

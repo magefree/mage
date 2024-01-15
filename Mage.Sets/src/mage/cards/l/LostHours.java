@@ -43,7 +43,7 @@ public final class LostHours extends CardImpl {
 
 class LostHoursEffect extends OneShotEffect {
 
-    public LostHoursEffect() {
+    LostHoursEffect() {
         super(Outcome.Discard);
         this.staticText = "Target player reveals their hand. You choose a nonland card from it. That player puts that card into their library third from the top";
     }

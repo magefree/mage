@@ -43,7 +43,7 @@ public final class KinTreeInvocation extends CardImpl {
 
 class KinTreeInvocationCreateTokenEffect extends OneShotEffect {
 
-    public KinTreeInvocationCreateTokenEffect() {
+    KinTreeInvocationCreateTokenEffect() {
         super(Outcome.PutCreatureInPlay);
         staticText = "Create an X/X black and green Spirit Warrior creature token, where X is the greatest toughness among creatures you control";
     }

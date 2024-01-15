@@ -41,7 +41,7 @@ public final class CursedRack extends CardImpl {
 
 class CursedRackHandSizeEffect extends ContinuousEffectImpl {
 
-    public CursedRackHandSizeEffect() {
+    CursedRackHandSizeEffect() {
         super(Duration.WhileOnBattlefield, Layer.PlayerEffects, SubLayer.NA, Outcome.Benefit);
         staticText = "The chosen player's maximum hand size is four";
     }

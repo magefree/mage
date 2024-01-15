@@ -57,7 +57,7 @@ public final class MerchantsDockhand extends CardImpl {
 
 class MerchantsDockhandEffect extends OneShotEffect {
 
-    public MerchantsDockhandEffect() {
+    MerchantsDockhandEffect() {
         super(Outcome.DrawCard);
         this.staticText = "Look at the top X cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order";
     }

@@ -82,7 +82,7 @@ class PresenceOfTheMasterTriggeredAbility extends TriggeredAbilityImpl {
 
 class CounterEffect extends OneShotEffect {
 
-    public CounterEffect() {
+    CounterEffect() {
         super(Outcome.Detriment);
     }
 

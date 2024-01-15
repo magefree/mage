@@ -41,7 +41,7 @@ public final class PersonalSanctuary extends CardImpl {
 
 class PersonalSanctuaryEffect extends PreventionEffectImpl {
 
-    public PersonalSanctuaryEffect() {
+    PersonalSanctuaryEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "During your turn, prevent all damage that would be dealt to you";
     }

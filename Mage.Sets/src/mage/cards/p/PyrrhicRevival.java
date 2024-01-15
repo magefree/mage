@@ -45,7 +45,7 @@ public final class PyrrhicRevival extends CardImpl {
 
 class PyrrhicRevivalEffect extends OneShotEffect {
 
-    public PyrrhicRevivalEffect() {
+    PyrrhicRevivalEffect() {
         super(Outcome.PutCreatureInPlay);
         staticText = "Each player returns each creature card from their graveyard to the battlefield with an additional -1/-1 counter on it";
     }

@@ -24,7 +24,7 @@ public final class SplinterToken extends TokenImpl {
         this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{G}")));
     }
 
-    protected SplinterToken(final SplinterToken token) {
+    private SplinterToken(final SplinterToken token) {
         super(token);
     }
 

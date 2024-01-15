@@ -50,7 +50,7 @@ public final class FlameshadowConjuring extends CardImpl {
 
 class FlameshadowConjuringEffect extends OneShotEffect {
 
-    public FlameshadowConjuringEffect() {
+    FlameshadowConjuringEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "create a token that's a copy of that creature. That token gains haste. Exile it at the beginning of the next end step";
     }

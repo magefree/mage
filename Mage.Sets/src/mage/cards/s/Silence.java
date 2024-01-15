@@ -39,7 +39,7 @@ public final class Silence extends CardImpl {
 
 class SilenceEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public SilenceEffect() {
+    SilenceEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit);
         staticText = "Your opponents can't cast spells this turn. <i>(Spells cast before this resolves are unaffected.)</i>";
     }

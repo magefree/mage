@@ -42,7 +42,7 @@ public final class SteelGolem extends CardImpl {
 
 class SteelGolemEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public SteelGolemEffect() {
+    SteelGolemEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "You can't cast creature spells";
     }

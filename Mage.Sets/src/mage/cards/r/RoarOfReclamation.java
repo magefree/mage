@@ -38,7 +38,7 @@ public final class RoarOfReclamation extends CardImpl {
 
 class RoarOfReclamationEffect extends OneShotEffect {
 
-    public RoarOfReclamationEffect() {
+    RoarOfReclamationEffect() {
         super(Outcome.PutCardInPlay);
         staticText = "Each player returns all artifact cards from their graveyard to the battlefield";
     }

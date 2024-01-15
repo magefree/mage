@@ -44,7 +44,7 @@ public final class OrbsOfWarding extends CardImpl {
 
 class OrbsOfWardingEffect extends PreventionEffectImpl {
 
-    public OrbsOfWardingEffect() {
+    OrbsOfWardingEffect() {
         super(Duration.WhileOnBattlefield, 1, false, false);
         this.staticText = "If a creature would deal damage to you, prevent 1 of that damage";
     }

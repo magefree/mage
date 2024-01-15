@@ -62,7 +62,7 @@ public final class TwilightProphet extends CardImpl {
 
 class TwilightProphetEffect extends OneShotEffect {
 
-    public TwilightProphetEffect() {
+    TwilightProphetEffect() {
         super(Outcome.Benefit);
         this.staticText = "if you have the city's blessing, reveal the top card of your library and put it into your hand. "
                 + "Each opponent loses X life and you gain X life, where X is that card's mana value.";

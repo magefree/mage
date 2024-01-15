@@ -42,7 +42,7 @@ public final class PryingQuestions extends CardImpl {
 
 class PryingQuestionsEffect extends OneShotEffect {
 
-    public PryingQuestionsEffect() {
+    PryingQuestionsEffect() {
         super(Outcome.Detriment);
         this.staticText = "puts a card from their hand on top of their library";
     }

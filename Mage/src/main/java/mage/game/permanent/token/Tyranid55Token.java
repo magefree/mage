@@ -18,7 +18,7 @@ public final class Tyranid55Token extends TokenImpl {
         toughness = new MageInt(5);
     }
 
-    protected Tyranid55Token(final Tyranid55Token token) {
+    private Tyranid55Token(final Tyranid55Token token) {
         super(token);
     }
 

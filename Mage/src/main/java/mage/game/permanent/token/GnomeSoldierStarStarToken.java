@@ -39,7 +39,7 @@ public final class GnomeSoldierStarStarToken extends TokenImpl {
         ).setText("this creature's power and toughness are each equal to the number of artifacts and/or creatures you control")));
     }
 
-    protected GnomeSoldierStarStarToken(final GnomeSoldierStarStarToken token) {
+    private GnomeSoldierStarStarToken(final GnomeSoldierStarStarToken token) {
         super(token);
     }
 

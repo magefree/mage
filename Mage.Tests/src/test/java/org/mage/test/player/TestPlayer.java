@@ -63,6 +63,8 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 /**
+ * Basic implementation of testable player
+ *
  * @author BetaSteward_at_googlemail.com
  * @author Simown
  * @author JayDi85
@@ -2960,12 +2962,6 @@ public class TestPlayer implements Player {
     public void init(Game game) {
         initialTurns = 0;
         computerPlayer.init(game);
-    }
-
-    @Override
-    public void init(Game game, boolean testMode) {
-        initialTurns = 0;
-        computerPlayer.init(game, testMode);
     }
 
     @Override

@@ -43,7 +43,7 @@ public final class SolidarityOfHeroes extends CardImpl {
 
 class SolidarityOfHeroesEffect extends OneShotEffect {
 
-    public SolidarityOfHeroesEffect() {
+    SolidarityOfHeroesEffect() {
         super(Outcome.Benefit);
         this.staticText = "Choose any number of target creatures. Double the number of +1/+1 counters on each of them";
     }

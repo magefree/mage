@@ -52,7 +52,7 @@ public final class HolisticWisdom extends CardImpl {
 
 class HolisticWisdomEffect extends OneShotEffect {
 
-    public HolisticWisdomEffect() {
+    HolisticWisdomEffect() {
         super(Outcome.ReturnToHand);
         this.staticText = "Return target card from your graveyard to your hand if it shares a card type with the card exiled this way";
     }

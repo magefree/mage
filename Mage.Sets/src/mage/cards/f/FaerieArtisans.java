@@ -54,7 +54,7 @@ public final class FaerieArtisans extends CardImpl {
 
 class FaerieArtisansEffect extends OneShotEffect {
 
-    public FaerieArtisansEffect() {
+    FaerieArtisansEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "create a token that's a copy of that creature except it's an artifact in addition to its other types. "
                 + "Then exile all other tokens created with {this}";

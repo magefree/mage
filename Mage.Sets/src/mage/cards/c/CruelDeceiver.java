@@ -55,7 +55,7 @@ public final class CruelDeceiver extends CardImpl {
 
 class CruelDeceiverEffect extends OneShotEffect {
 
-    public CruelDeceiverEffect() {
+    CruelDeceiverEffect() {
         super(Outcome.AddAbility);
         this.staticText = "Reveal the top card of your library. If it's a land card, {this} gains \"Whenever Cruel Deceiver deals damage to a creature, destroy that creature\" until end of turn";
     }

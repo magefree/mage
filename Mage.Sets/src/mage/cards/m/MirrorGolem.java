@@ -89,7 +89,7 @@ class MirrorGolemImprintEffect extends OneShotEffect {
 
 class MirrorGolemEffect extends ContinuousEffectImpl {
 
-    public MirrorGolemEffect() {
+    MirrorGolemEffect() {
         super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         this.addDependedToType(DependencyType.AddingAbility);
         staticText = "{this} has protection from each of the exiled card's card types.";

@@ -50,7 +50,7 @@ public final class FickleEfreet extends CardImpl {
 
 class FickleEfreetChangeControlEffect extends OneShotEffect {
 
-    public FickleEfreetChangeControlEffect() {
+    FickleEfreetChangeControlEffect() {
         super(Outcome.Benefit);
         this.staticText = "flip a coin at end of combat. If you lose the flip, choose one of your opponents. That player gains control of {this}";
     }

@@ -59,6 +59,8 @@ import static mage.constants.PlayerAction.REQUEST_AUTO_ANSWER_RESET_ALL;
 import static mage.constants.PlayerAction.TRIGGER_AUTO_ORDER_RESET_ALL;
 
 /**
+ * Human: server side logic to exchange game data between server app and another player's app
+ *
  * @author BetaSteward_at_googlemail.com, JayDi85
  */
 public class HumanPlayer extends PlayerImpl {

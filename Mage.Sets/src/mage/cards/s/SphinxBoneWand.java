@@ -51,7 +51,7 @@ public final class SphinxBoneWand extends CardImpl {
 
 class SphinxBoneWandEffect extends OneShotEffect {
 
-    public SphinxBoneWandEffect() {
+    SphinxBoneWandEffect() {
         super(Outcome.Damage);
         this.staticText = "put a charge counter on Sphinx-Bone Wand. If you do, Sphinx-Bone Wand deals damage equal to the number of charge counters on it to any target";
     }

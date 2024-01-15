@@ -56,7 +56,7 @@ public final class Skullwinder extends CardImpl {
 
 class SkullwinderEffect extends OneShotEffect {
 
-    public SkullwinderEffect() {
+    SkullwinderEffect() {
         super(Outcome.Benefit);
         this.staticText = ", then choose an opponent. That player returns a card from their graveyard to their hand";
     }

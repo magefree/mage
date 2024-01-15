@@ -40,7 +40,7 @@ public final class SoundTheCallToken extends TokenImpl {
         ));
     }
 
-    protected SoundTheCallToken(final SoundTheCallToken token) {
+    private SoundTheCallToken(final SoundTheCallToken token) {
         super(token);
     }
 

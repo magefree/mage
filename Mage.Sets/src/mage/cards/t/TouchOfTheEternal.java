@@ -38,7 +38,7 @@ public final class TouchOfTheEternal extends CardImpl {
 
 class TouchOfTheEternalEffect extends OneShotEffect {
 
-    public TouchOfTheEternalEffect() {
+    TouchOfTheEternalEffect() {
         super(Outcome.Neutral);
         this.staticText = "count the number of permanents you control. Your life total becomes that number";
     }

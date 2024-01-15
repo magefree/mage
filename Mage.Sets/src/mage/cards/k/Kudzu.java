@@ -56,7 +56,7 @@ public final class Kudzu extends CardImpl {
 
 class KudzuEffect extends OneShotEffect {
 
-    public KudzuEffect() {
+    KudzuEffect() {
         super(Outcome.Detriment);
         staticText = "destroy it. That land's controller may attach {this} to a land of their choice";
     }

@@ -56,7 +56,7 @@ public final class DevouringGreed extends CardImpl {
 
 class DevouringGreedEffect extends OneShotEffect {
 
-    public DevouringGreedEffect() {
+    DevouringGreedEffect() {
         super(Outcome.LoseLife);
         this.staticText = "Target player loses 2 life plus 2 life for each Spirit sacrificed this way. You gain that much life";
     }

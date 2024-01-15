@@ -42,7 +42,7 @@ public final class GrimContest extends CardImpl {
 
 class GrimContestEffect extends OneShotEffect {
 
-    public GrimContestEffect() {
+    GrimContestEffect() {
         super(Outcome.Damage);
         this.staticText = "Choose target creature you control and target creature an opponent controls. Each of those creatures deals damage equal to its toughness to the other";
     }

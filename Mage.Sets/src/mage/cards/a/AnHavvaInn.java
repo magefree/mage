@@ -39,7 +39,7 @@ public final class AnHavvaInn extends CardImpl {
 
 class AnHavvaInnEffect extends OneShotEffect {
 
-    public AnHavvaInnEffect() {
+    AnHavvaInnEffect() {
         super(Outcome.GainLife);
         staticText = "You gain X plus 1 life, where X is the number of green creatures on the battlefield";
     }

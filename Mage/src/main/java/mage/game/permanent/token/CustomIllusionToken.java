@@ -22,7 +22,7 @@ public final class CustomIllusionToken extends TokenImpl {
         toughness = new MageInt(xValue);
     }
 
-    protected CustomIllusionToken(final CustomIllusionToken token) {
+    private CustomIllusionToken(final CustomIllusionToken token) {
         super(token);
     }
 

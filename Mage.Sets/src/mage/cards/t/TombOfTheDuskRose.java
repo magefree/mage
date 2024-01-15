@@ -58,7 +58,7 @@ public final class TombOfTheDuskRose extends CardImpl {
 
 class TombOfTheDuskRoseEffect extends OneShotEffect {
 
-    public TombOfTheDuskRoseEffect() {
+    TombOfTheDuskRoseEffect() {
         super(Outcome.PutCardInPlay);
         this.staticText = "Put a creature card exiled with this permanent onto the battlefield under your control";
     }

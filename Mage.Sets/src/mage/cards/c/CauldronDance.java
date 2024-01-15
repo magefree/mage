@@ -54,7 +54,7 @@ public final class CauldronDance extends CardImpl {
 
 class CauldronDanceReturnFromGraveyardToBattlefieldTargetEffect extends OneShotEffect {
 
-    public CauldronDanceReturnFromGraveyardToBattlefieldTargetEffect() {
+    CauldronDanceReturnFromGraveyardToBattlefieldTargetEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Return target creature card from your graveyard to the battlefield. That creature gains haste. Return it to your hand at the beginning of the next end step";
     }

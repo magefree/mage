@@ -59,7 +59,7 @@ public final class GideonsIntervention extends CardImpl {
 
 class GideonsInterventionCantCastEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public GideonsInterventionCantCastEffect() {
+    GideonsInterventionCantCastEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Your opponents can't cast spells with the chosen name";
     }
@@ -105,7 +105,7 @@ class GideonsInterventionCantCastEffect extends ContinuousRuleModifyingEffectImp
 
 class GideonsInterventionPreventAllDamageEffect extends PreventionEffectImpl {
 
-    public GideonsInterventionPreventAllDamageEffect() {
+    GideonsInterventionPreventAllDamageEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "Prevent all damage that would be dealt to you and permanents you control by sources with the chosen name.";
     }

@@ -52,7 +52,7 @@ public final class ZameckGuildmage extends CardImpl {
 
 class ZameckGuildmageEntersBattlefieldEffect extends ReplacementEffectImpl {
 
-    public ZameckGuildmageEntersBattlefieldEffect() {
+    ZameckGuildmageEntersBattlefieldEffect() {
         super(Duration.EndOfTurn, Outcome.BoostCreature);
         this.staticText = "This turn, each creature you control enters the battlefield with an additional +1/+1 counter on it";
     }

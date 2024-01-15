@@ -40,7 +40,7 @@ public final class StainTheMind extends CardImpl {
 
 class StainTheMindEffect extends SearchTargetGraveyardHandLibraryForCardNameAndExileEffect {
 
-    public StainTheMindEffect() {
+    StainTheMindEffect() {
         super(true, "target player's", "any number of cards with that name");
     }
 

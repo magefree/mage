@@ -56,7 +56,7 @@ public final class XathridDemon extends CardImpl {
 
 class XathridDemonEffect extends OneShotEffect {
 
-    public XathridDemonEffect() {
+    XathridDemonEffect() {
         super(Outcome.Damage);
         this.staticText = "sacrifice a creature other than {this}, then each opponent loses life equal to the sacrificed creature's power. If you can't sacrifice a creature, tap {this} and you lose 7 life";
     }

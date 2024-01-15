@@ -83,7 +83,7 @@ enum JohannApprenticeSorcererHint implements Hint {
 
 class JohannApprenticeSorcererPlayTopEffect extends AsThoughEffectImpl {
 
-    public JohannApprenticeSorcererPlayTopEffect() {
+    JohannApprenticeSorcererPlayTopEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Once each turn, you may cast an instant or sorcery spell from the top of your library";
     }

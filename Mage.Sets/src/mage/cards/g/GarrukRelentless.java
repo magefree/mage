@@ -87,7 +87,7 @@ class GarrukRelentlessStateTrigger extends StateTriggeredAbility {
 
 class GarrukRelentlessDamageEffect extends OneShotEffect {
 
-    public GarrukRelentlessDamageEffect() {
+    GarrukRelentlessDamageEffect() {
         super(Outcome.Damage);
         staticText = "{this} deals 3 damage to target creature. That creature deals damage equal to its power to him";
     }

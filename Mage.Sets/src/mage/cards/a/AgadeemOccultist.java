@@ -53,7 +53,7 @@ public final class AgadeemOccultist extends CardImpl {
 
 class AgadeemOccultistEffect extends OneShotEffect {
 
-    public AgadeemOccultistEffect() {
+    AgadeemOccultistEffect() {
         super(Outcome.GainControl);
         this.staticText = "Put target creature card from an opponent's graveyard onto the battlefield under your control if its mana value is less than or equal to the number of Allies you control";
     }

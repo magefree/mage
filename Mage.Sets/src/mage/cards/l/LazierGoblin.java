@@ -123,7 +123,7 @@ class LazierGoblinMotivateEffect extends OneShotEffect {
 
 class LazierGoblinRestrictionEffect extends RestrictionEffect {
 
-    public LazierGoblinRestrictionEffect() {
+    LazierGoblinRestrictionEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = ""; // no text.
     }

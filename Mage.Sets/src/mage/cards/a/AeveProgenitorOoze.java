@@ -64,7 +64,7 @@ public final class AeveProgenitorOoze extends CardImpl {
 
 class AeveProgenitorOozeNonLegendaryEffect extends ContinuousEffectImpl {
 
-    public AeveProgenitorOozeNonLegendaryEffect() {
+    AeveProgenitorOozeNonLegendaryEffect() {
         super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
         this.staticText = "{this} isn't legendary if it's a token";
     }

@@ -59,7 +59,7 @@ public final class BubblingCauldron extends CardImpl {
 
 class BubblingCauldronEffect extends OneShotEffect {
 
-    public BubblingCauldronEffect() {
+    BubblingCauldronEffect() {
         super(Outcome.GainLife);
         staticText = "Each opponent loses 4 life. You gain life equal to the life lost this way";
     }

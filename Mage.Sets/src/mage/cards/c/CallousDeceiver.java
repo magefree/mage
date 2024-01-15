@@ -55,7 +55,7 @@ public final class CallousDeceiver extends CardImpl {
 
 class CallousDeceiverEffect extends OneShotEffect {
 
-    public CallousDeceiverEffect() {
+    CallousDeceiverEffect() {
         super(Outcome.BoostCreature);
         this.staticText = "Reveal the top card of your library. If it's a land card, {this} gets +1/+0 and gains flying until end of turn";
     }

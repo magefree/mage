@@ -45,7 +45,7 @@ public final class LoafingGiant extends CardImpl {
 
 class LoafingGiantEffect extends OneShotEffect {
 
-    public LoafingGiantEffect() {
+    LoafingGiantEffect() {
         super(Outcome.UnboostCreature);
         this.staticText = "Mill a card. If a land card was milled this way, prevent all combat damage {this} would deal this turn.";
     }

@@ -56,7 +56,7 @@ public final class InfernalTutor extends CardImpl {
 
 class InfernalTutorEffect extends OneShotEffect {
 
-    public InfernalTutorEffect() {
+    InfernalTutorEffect() {
         super(Outcome.Benefit);
         this.staticText = "Reveal a card from your hand. Search your library for a card with the same name as that card, reveal it, put it into your hand, then shuffle";
     }

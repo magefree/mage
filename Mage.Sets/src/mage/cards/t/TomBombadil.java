@@ -66,7 +66,7 @@ public final class TomBombadil extends CardImpl {
 // From PrismaticBridgeEffect
 class TomBombadilEffect extends OneShotEffect {
 
-    public TomBombadilEffect() {
+    TomBombadilEffect() {
         super(Outcome.PutCardInPlay);
         this.staticText = "reveal cards from the top of your library until you reveal a Saga card. Put that card onto the battlefield and the rest on the bottom of your library in a random order";
     }

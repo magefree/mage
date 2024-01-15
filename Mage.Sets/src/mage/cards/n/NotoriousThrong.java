@@ -56,7 +56,7 @@ public final class NotoriousThrong extends CardImpl {
 
 class NotoriousThrongEffect extends OneShotEffect {
 
-    public NotoriousThrongEffect() {
+    NotoriousThrongEffect() {
         super(Outcome.PutCreatureInPlay);
         staticText = "create X 1/1 black Faerie Rogue creature tokens with flying, where X is the damage dealt to your opponents this turn";
     }

@@ -43,7 +43,7 @@ public final class PlatinumAngel extends CardImpl {
 
 class PlatinumAngelEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public PlatinumAngelEffect() {
+    PlatinumAngelEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, false, false);
         staticText = "You can't lose the game and your opponents can't win the game";
     }

@@ -43,7 +43,7 @@ public final class MomentousFall extends CardImpl {
 
 class MomentousFallEffect extends OneShotEffect {
 
-    public MomentousFallEffect() {
+    MomentousFallEffect() {
         super(Outcome.GainLife);
         staticText = "You draw cards equal to the sacrificed creature's power, then you gain life equal to its toughness";
     }

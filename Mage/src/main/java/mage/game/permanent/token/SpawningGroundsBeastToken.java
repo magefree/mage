@@ -21,7 +21,7 @@ public final class SpawningGroundsBeastToken extends TokenImpl {
         this.addAbility(TrampleAbility.getInstance());
     }
 
-    protected SpawningGroundsBeastToken(final SpawningGroundsBeastToken token) {
+    private SpawningGroundsBeastToken(final SpawningGroundsBeastToken token) {
         super(token);
     }
 

@@ -59,7 +59,7 @@ public final class ChancellorOfTheAnnex extends CardImpl {
 
 class ChancellorOfTheAnnexEffect extends OneShotEffect {
 
-    public ChancellorOfTheAnnexEffect() {
+    ChancellorOfTheAnnexEffect() {
         super(Outcome.Benefit);
         staticText = "when each opponent casts their first spell of the game, counter that spell unless that player pays {1}";
     }

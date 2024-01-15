@@ -49,7 +49,7 @@ public final class SparkFiend extends CardImpl {
 
 class SparkFiendEffect extends OneShotEffect {
 
-    public SparkFiendEffect() {
+    SparkFiendEffect() {
         super(Outcome.Sacrifice);
         this.staticText = "roll two six-sided dice. If you rolled 2, 3, or 12, sacrifice Spark Fiend. If you rolled 7 or 11, don't roll dice for Spark Fiend during any of your following upkeeps. If you rolled any other total, note that total";
     }
@@ -92,7 +92,7 @@ class SparkFiendEffect extends OneShotEffect {
 
 class SparkFiendUpkeepEffect extends OneShotEffect {
 
-    public SparkFiendUpkeepEffect() {
+    SparkFiendUpkeepEffect() {
         super(Outcome.Sacrifice);
         this.staticText = "roll two six-sided dice. If you rolled 7, sacrifice Spark Fiend. If you roll the noted total, don't roll dice for Spark Fiend during any of your following upkeeps. Otherwise, do nothing";
     }

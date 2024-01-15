@@ -38,7 +38,7 @@ public final class PrimalSurge extends CardImpl {
 
 class PrimalSurgeEffect extends OneShotEffect {
 
-    public PrimalSurgeEffect() {
+    PrimalSurgeEffect() {
         super(Outcome.PutCardInPlay);
         this.staticText = "Exile the top card of your library. If it's a permanent card, you may put it onto the battlefield. If you do, repeat this process";
     }

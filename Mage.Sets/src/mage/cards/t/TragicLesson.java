@@ -42,7 +42,7 @@ public final class TragicLesson extends CardImpl {
 
 class TragicLessonEffect extends OneShotEffect {
 
-    public TragicLessonEffect() {
+    TragicLessonEffect() {
         super(Outcome.Discard);
         staticText = "Then discard a card unless you return a land you control to its owner's hand.";
     }

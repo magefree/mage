@@ -96,7 +96,7 @@ class LightningStormCountCondition implements DynamicValue {
 
 class LightningStormAddCounterEffect extends OneShotEffect {
 
-    public LightningStormAddCounterEffect() {
+    LightningStormAddCounterEffect() {
         super(Outcome.Benefit);
         this.staticText = "Put two charge counters on {this}. You may choose a new target for it.";
     }

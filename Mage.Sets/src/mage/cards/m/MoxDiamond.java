@@ -48,7 +48,7 @@ public final class MoxDiamond extends CardImpl {
 
 class MoxDiamondReplacementEffect extends ReplacementEffectImpl {
 
-    public MoxDiamondReplacementEffect() {
+    MoxDiamondReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Exile);
         staticText = "If {this} would enter the battlefield, you may discard a land card instead. If you do, put {this} onto the battlefield. If you don't, put it into its owner's graveyard";
     }

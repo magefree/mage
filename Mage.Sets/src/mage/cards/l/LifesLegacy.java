@@ -43,7 +43,7 @@ public final class LifesLegacy extends CardImpl {
 
 class LifesLegacyEffect extends OneShotEffect {
 
-    public LifesLegacyEffect() {
+    LifesLegacyEffect() {
         super(Outcome.DrawCard);
         staticText = "Draw cards equal to the sacrificed creature's power";
     }

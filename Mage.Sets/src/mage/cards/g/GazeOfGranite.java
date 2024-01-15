@@ -45,7 +45,7 @@ public final class GazeOfGranite extends CardImpl {
 
 class GazeOfGraniteEffect extends OneShotEffect {
 
-    public GazeOfGraniteEffect() {
+    GazeOfGraniteEffect() {
         super(Outcome.DestroyPermanent);
         staticText = "Destroy each nonland permanent with mana value X or less";
     }

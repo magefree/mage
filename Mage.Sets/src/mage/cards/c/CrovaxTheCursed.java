@@ -59,7 +59,7 @@ public final class CrovaxTheCursed extends CardImpl {
 
 class CrovaxTheCursedEffect extends OneShotEffect {
 
-    public CrovaxTheCursedEffect() {
+    CrovaxTheCursedEffect() {
         super(Outcome.Detriment);
         this.staticText = "you may sacrifice a creature. If you do, put a +1/+1 counter on {this}. If you don't, remove a +1/+1 counter from {this}";
     }

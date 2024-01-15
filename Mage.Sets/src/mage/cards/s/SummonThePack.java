@@ -49,7 +49,7 @@ public final class SummonThePack extends CardImpl {
 
 class SummonThePackEffect extends OneShotEffect {
 
-    public SummonThePackEffect() {
+    SummonThePackEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "Open a sealed Magic booster pack, reveal the cards, and put all creature cards revealed this way onto the battlefield under your control. They're Zombies in addition to their other types";
     }

@@ -46,7 +46,7 @@ public final class Stranglehold extends CardImpl {
 
 class OpponentsCantSearchLibarariesEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public OpponentsCantSearchLibarariesEffect() {
+    OpponentsCantSearchLibarariesEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, true, false);
         staticText = "Your opponents can't search libraries";
     }
@@ -83,7 +83,7 @@ class OpponentsCantSearchLibarariesEffect extends ContinuousRuleModifyingEffectI
 
 class StrangleholdSkipExtraTurnsEffect extends ReplacementEffectImpl {
 
-    public StrangleholdSkipExtraTurnsEffect() {
+    StrangleholdSkipExtraTurnsEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "If an opponent would begin an extra turn, that player skips that turn instead";
     }

@@ -73,7 +73,7 @@ public final class SistersOfStoneDeath extends CardImpl {
 
 class SistersOfStoneDeathEffect extends OneShotEffect {
 
-    public SistersOfStoneDeathEffect() {
+    SistersOfStoneDeathEffect() {
         super(Outcome.PutCreatureInPlay);
         staticText = "Put a creature card exiled with {this} onto the battlefield under your control";
     }

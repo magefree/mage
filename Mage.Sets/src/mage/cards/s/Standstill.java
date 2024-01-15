@@ -75,7 +75,7 @@ class SpellCastTriggeredAbility extends TriggeredAbilityImpl {
 
 class StandstillEffect extends OneShotEffect {
 
-    public StandstillEffect() {
+    StandstillEffect() {
         super(Outcome.Sacrifice);
         staticText = "sacrifice {this}. If you do, each of that player's opponents draws three cards";
     }

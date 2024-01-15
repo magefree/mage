@@ -44,7 +44,7 @@ public final class EternityVessel extends CardImpl {
 
 class EternityVesselEffect extends OneShotEffect {
 
-    public EternityVesselEffect() {
+    EternityVesselEffect() {
         super(Outcome.Benefit);
         staticText = "with X charge counters on it, where X is your life total";
     }

@@ -40,7 +40,7 @@ public final class InnerStruggle extends CardImpl {
 
 class InnerStruggleEffect extends OneShotEffect {
 
-    public InnerStruggleEffect() {
+    InnerStruggleEffect() {
         super(Outcome.Damage);
         this.staticText = "Target creature deals damage to itself equal to its power";
     }

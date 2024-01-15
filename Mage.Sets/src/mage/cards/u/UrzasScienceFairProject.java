@@ -50,7 +50,7 @@ public final class UrzasScienceFairProject extends CardImpl {
 
 class UrzasScienceFairProjectEffect extends OneShotEffect {
 
-    public UrzasScienceFairProjectEffect() {
+    UrzasScienceFairProjectEffect() {
         super(Outcome.Benefit);
         this.staticText = "Roll a six-sided die. {this} gets the indicated result." +
                 "<br>1 - It gets -2/-2 until end of turn." +

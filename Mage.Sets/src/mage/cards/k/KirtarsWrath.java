@@ -45,7 +45,7 @@ public final class KirtarsWrath extends CardImpl {
 
 class KirtarsWrathEffect extends OneShotEffect {
 
-    public KirtarsWrathEffect() {
+    KirtarsWrathEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "destroy all creatures, then create two 1/1 white Spirit creature tokens with flying. Creatures destroyed this way can't be regenerated";
     }

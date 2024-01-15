@@ -42,7 +42,7 @@ public final class LurkingPredators extends CardImpl {
 
 class LurkingPredatorsEffect extends OneShotEffect {
 
-    public LurkingPredatorsEffect() {
+    LurkingPredatorsEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "reveal the top card of your library. If it's a creature card, put it onto the battlefield. Otherwise, you may put that card on the bottom of your library";
     }
