@@ -72,6 +72,8 @@ public class TestPlayer implements Player {
 
     private static final Logger LOGGER = Logger.getLogger(TestPlayer.class);
 
+    private static final int takeMaxTargetsPerChoose = Integer.MAX_VALUE; // TODO: set 1, fix broken tests and replace all "for (String targetDefinition" by targets.get(0)
+
     public static final String TARGET_SKIP = "[target_skip]"; // stop/skip targeting
     public static final String CHOICE_SKIP = "[choice_skip]"; // stop/skip choice
     public static final String MANA_CANCEL = "[mana_cancel]"; // cancel payment
@@ -2429,7 +2431,7 @@ public class TestPlayer implements Player {
                     || target.getOriginalTarget() instanceof TargetAnyTarget
                     || target.getOriginalTarget() instanceof TargetCreatureOrPlayer
                     || target.getOriginalTarget() instanceof TargetPermanentOrPlayer) {
-                for (String targetDefinition : targets) {
+                for (String targetDefinition : targets.stream().limit(takeMaxTargetsPerChoose).collect(Collectors.toList())) {
                     if (!targetDefinition.startsWith("targetPlayer=")) {
                         continue;
                     }
@@ -2452,7 +2454,7 @@ public class TestPlayer implements Player {
                     || (target.getOriginalTarget() instanceof TargetAnyTarget)
                     || (target.getOriginalTarget() instanceof TargetCreatureOrPlayer)
                     || (target.getOriginalTarget() instanceof TargetPermanentOrSuspendedCard)) {
-                for (String targetDefinition : targets) {
+                for (String targetDefinition : targets.stream().limit(takeMaxTargetsPerChoose).collect(Collectors.toList())) {
                     if (targetDefinition.startsWith("targetPlayer=")) {
                         continue;
                     }
@@ -2508,7 +2510,7 @@ public class TestPlayer implements Player {
                     || target.getOriginalTarget() instanceof TargetDiscard
                     || (target.getOriginalTarget() instanceof TargetCard && target.getOriginalTarget().getZone() == Zone.HAND)) {
                 targetCardZonesChecked.add(Zone.HAND);
-                for (String targetDefinition : targets) {
+                for (String targetDefinition : targets.stream().limit(takeMaxTargetsPerChoose).collect(Collectors.toList())) {
                     checkTargetDefinitionMarksSupport(target, targetDefinition, "^");
                     String[] targetList = targetDefinition.split("\\^");
                     boolean targetFound = false;
@@ -2546,7 +2548,7 @@ public class TestPlayer implements Player {
                             + target.getOriginalTarget().getClass().getCanonicalName());
                 }
 
-                for (String targetDefinition : targets) {
+                for (String targetDefinition : targets.stream().limit(takeMaxTargetsPerChoose).collect(Collectors.toList())) {
                     checkTargetDefinitionMarksSupport(target, targetDefinition, "^");
                     String[] targetList = targetDefinition.split("\\^");
                     boolean targetFound = false;
@@ -2571,7 +2573,7 @@ public class TestPlayer implements Player {
             // card in battlefield
             if (target instanceof TargetCardInGraveyardBattlefieldOrStack) {
                 TargetCard targetFull = (TargetCard) target;
-                for (String targetDefinition : targets) {
+                for (String targetDefinition : targets.stream().limit(takeMaxTargetsPerChoose).collect(Collectors.toList())) {
                     checkTargetDefinitionMarksSupport(target, targetDefinition, "^");
                     String[] targetList = targetDefinition.split("\\^");
                     boolean targetFound = false;
@@ -2619,7 +2621,7 @@ public class TestPlayer implements Player {
                     Assert.assertEquals(1, needPlayers.size());
                 }
 
-                for (String targetDefinition : targets) {
+                for (String targetDefinition : targets.stream().limit(takeMaxTargetsPerChoose).collect(Collectors.toList())) {
                     checkTargetDefinitionMarksSupport(target, targetDefinition, "^");
 
                     String[] targetList = targetDefinition.split("\\^");
@@ -2650,7 +2652,7 @@ public class TestPlayer implements Player {
 
             // stack
             if (target.getOriginalTarget() instanceof TargetSpell) {
-                for (String targetDefinition : targets) {
+                for (String targetDefinition : targets.stream().limit(takeMaxTargetsPerChoose).collect(Collectors.toList())) {
                     checkTargetDefinitionMarksSupport(target, targetDefinition, "^");
                     String[] targetList = targetDefinition.split("\\^");
                     boolean targetFound = false;
@@ -2730,7 +2732,7 @@ public class TestPlayer implements Player {
                 targets.remove(0);
                 return true;
             }
-            for (String targetDefinition : targets) {
+            for (String targetDefinition : targets.stream().limit(takeMaxTargetsPerChoose).collect(Collectors.toList())) {
                 String[] targetList = targetDefinition.split("\\^");
                 boolean targetFound = false;
                 for (String targetName : targetList) {
