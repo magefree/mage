@@ -69,6 +69,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     protected boolean transformed;
     protected boolean monstrous;
     protected boolean renowned;
+    protected boolean suspected;
     protected boolean manifested = false;
     protected boolean morphed = false;
     protected boolean ringBearerFlag = false;
@@ -162,6 +163,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.transformed = permanent.transformed;
         this.monstrous = permanent.monstrous;
         this.renowned = permanent.renowned;
+        this.suspected = permanent.suspected;
         this.ringBearerFlag = permanent.ringBearerFlag;
         this.classLevel = permanent.classLevel;
         this.goadingPlayers.addAll(permanent.goadingPlayers);
@@ -1669,6 +1671,16 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     @Override
     public void setRenowned(boolean value) {
         this.renowned = value;
+    }
+
+    @Override
+    public boolean isSuspected() {
+        return suspected;
+    }
+
+    @Override
+    public void setSuspected(boolean value, Game game) {
+        this.suspected = value;
     }
 
     // Used as key for the ring bearer info.

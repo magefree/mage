@@ -75,6 +75,10 @@ public interface Permanent extends Card, Controllable {
 
     void setRenowned(boolean value);
 
+    boolean isSuspected();
+
+    void setSuspected(boolean value, Game game);
+
     boolean isPrototyped();
 
     void setPrototyped(boolean value);
