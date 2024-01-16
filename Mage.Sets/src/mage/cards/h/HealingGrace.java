@@ -63,6 +63,10 @@ class HealingGraceEffect extends PreventionEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         this.targetSource.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), source, game);
+        // be sure to note the target source's zcc, etc, if able.
+        if (targetSource.getFirstTarget() != null) {
+            this.targetSource.updateTarget(targetSource.getFirstTarget(), game);
+        }
     }
 
     @Override
@@ -74,7 +78,9 @@ class HealingGraceEffect extends PreventionEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (super.applies(event, source, game)) {
-            if (event.getTargetId().equals(source.getFirstTarget()) && event.getSourceId().equals(targetSource.getFirstTarget())) {
+            if (event.getTargetId().equals(source.getFirstTarget()) 
+                    && event.getSourceId().equals(targetSource.getFirstTarget())
+                    && targetSource.isLegal(source, game)) {  // source is blinked, becomes a new object, etc.) {
                 return true;
             }
         }

@@ -112,7 +112,7 @@ class ArcbondDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
 class ArcbondEffect extends OneShotEffect {
 
-    public ArcbondEffect() {
+    ArcbondEffect() {
         super(Outcome.Benefit);
     }
 

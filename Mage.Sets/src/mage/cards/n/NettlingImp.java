@@ -84,7 +84,7 @@ class NettlingImpTurnCondition implements Condition {
 
 class NettlingImpDelayedDestroyEffect extends OneShotEffect {
 
-    public NettlingImpDelayedDestroyEffect() {
+    NettlingImpDelayedDestroyEffect() {
         super(Outcome.Detriment);
         this.staticText = "If it doesn't, destroy it at the beginning of the next end step";
     }

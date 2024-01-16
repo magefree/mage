@@ -78,7 +78,7 @@ public final class TriadOfFates extends CardImpl {
 
 class DrawCardControllerTargetEffect extends OneShotEffect {
 
-    public DrawCardControllerTargetEffect() {
+    DrawCardControllerTargetEffect() {
         super(Outcome.Benefit);
         this.staticText = "Its controller draws two cards";
     }

@@ -41,7 +41,7 @@ public final class MysticGenesis extends CardImpl {
 
 class MysticGenesisEffect extends OneShotEffect {
 
-    public MysticGenesisEffect() {
+    MysticGenesisEffect() {
         super(Outcome.Detriment);
         staticText = "Counter target spell. Create an X/X green Ooze creature token, where X is that spell's mana value";
     }

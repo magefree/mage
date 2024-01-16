@@ -46,7 +46,7 @@ public final class UginsNexus extends CardImpl {
 
 class UginsNexusSkipExtraTurnsEffect extends ReplacementEffectImpl {
 
-    public UginsNexusSkipExtraTurnsEffect() {
+    UginsNexusSkipExtraTurnsEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "If a player would begin an extra turn, that player skips that turn instead";
     }
@@ -84,7 +84,7 @@ class UginsNexusSkipExtraTurnsEffect extends ReplacementEffectImpl {
 
 class UginsNexusExileEffect extends ReplacementEffectImpl {
 
-    public UginsNexusExileEffect() {
+    UginsNexusExileEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Exile);
         staticText = "If {this} would be put into a graveyard from the battlefield, instead exile it and take an extra turn after this one";
     }

@@ -55,7 +55,7 @@ public final class LifeDeath extends SplitCard {
 
 class DeathEffect extends OneShotEffect {
 
-    public DeathEffect() {
+    DeathEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "return target creature card from your graveyard to the battlefield. You lose life equal to its mana value";
     }

@@ -41,7 +41,7 @@ public final class OverwhelmingForces extends CardImpl {
 
 class OverwhelmingForcesEffect extends OneShotEffect {
 
-    public OverwhelmingForcesEffect() {
+    OverwhelmingForcesEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "Destroy all creatures target opponent controls. Draw a card for each creature destroyed this way";
     }

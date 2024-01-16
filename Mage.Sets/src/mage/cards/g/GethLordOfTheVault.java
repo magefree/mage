@@ -65,7 +65,7 @@ public final class GethLordOfTheVault extends CardImpl {
 
 class GethLordOfTheVaultEffect extends OneShotEffect {
 
-    public GethLordOfTheVaultEffect() {
+    GethLordOfTheVaultEffect() {
         super(Outcome.Benefit);
         staticText = "Put target artifact or creature card with mana value X from an opponent's graveyard onto the battlefield under your control tapped. Then that player mills X cards";
     }

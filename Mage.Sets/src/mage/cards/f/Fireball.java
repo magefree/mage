@@ -54,7 +54,7 @@ enum FireballAdjuster implements CostAdjuster {
 
 class FireballEffect extends OneShotEffect {
 
-    public FireballEffect() {
+    FireballEffect() {
         super(Outcome.Damage);
         staticText = "this spell costs {1} more to cast for each target beyond the first.<br> {this} deals " +
                 "X damage divided evenly, rounded down, among any number of targets";

@@ -44,7 +44,7 @@ public final class DevourInShadow extends CardImpl {
 
 class DevourInShadowEffect extends OneShotEffect {
 
-    public DevourInShadowEffect() {
+    DevourInShadowEffect() {
         super(Outcome.Damage);
         staticText = "You lose life equal to that creature's toughness";
     }

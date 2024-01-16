@@ -46,7 +46,7 @@ public final class ExertInfluence extends CardImpl {
 
 class ExertInfluenceEffect extends OneShotEffect {
 
-    public ExertInfluenceEffect() {
+    ExertInfluenceEffect() {
         super(Outcome.GainControl);
         this.staticText = "Gain control of target creature if its power is less than or equal to the number of colors of mana spent to cast this spell";
     }

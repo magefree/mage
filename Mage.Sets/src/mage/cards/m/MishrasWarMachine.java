@@ -50,7 +50,7 @@ public final class MishrasWarMachine extends CardImpl {
 
 class MishrasWarMachineEffect extends OneShotEffect {
 
-    public MishrasWarMachineEffect() {
+    MishrasWarMachineEffect() {
         super(Outcome.Sacrifice);
         staticText = "{this} deals 3 damage to you unless you discard a card. If Mishra's War Machine deals damage to you this way, tap it";
     }

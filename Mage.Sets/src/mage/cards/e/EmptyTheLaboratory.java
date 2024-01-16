@@ -15,6 +15,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
+import mage.target.common.TargetSacrifice;
 
 import java.util.UUID;
 
@@ -80,8 +81,7 @@ class EmptyTheLaboratoryEffect extends OneShotEffect {
         if (toSacrifice < 1) {
             return false;
         }
-        TargetPermanent target = new TargetPermanent(toSacrifice, filter);
-        target.withNotTarget(true);
+        TargetSacrifice target = new TargetSacrifice(toSacrifice, filter);
         player.choose(Outcome.Sacrifice, target, source, game);
         int sacrificed = 0;
         for (UUID permanentId : target.getTargets()) {

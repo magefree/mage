@@ -39,7 +39,7 @@ public final class FriendlyFire extends CardImpl {
 
 class FriendlyFireEffect extends OneShotEffect {
 
-    public FriendlyFireEffect() {
+    FriendlyFireEffect() {
         super(Outcome.Discard);
         this.staticText = "Target creature's controller reveals a card at random from their hand. {this} deals damage to that creature and that player equal to the revealed card's mana value";
     }

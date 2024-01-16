@@ -45,7 +45,7 @@ public final class TempleAltisaur extends CardImpl {
 
 class TempleAltisaurPreventEffect extends PreventionEffectImpl {
 
-    public TempleAltisaurPreventEffect() {
+    TempleAltisaurPreventEffect() {
         super(Duration.WhileOnBattlefield);
         this.staticText = "If a source would deal damage to another Dinosaur you control, prevent all but 1 of that damage";
         consumable = false;

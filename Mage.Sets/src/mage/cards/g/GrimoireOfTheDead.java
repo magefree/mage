@@ -65,7 +65,7 @@ public final class GrimoireOfTheDead extends CardImpl {
 
 class GrimoireOfTheDeadEffect extends OneShotEffect {
 
-    public GrimoireOfTheDeadEffect() {
+    GrimoireOfTheDeadEffect() {
         super(Outcome.PutCreatureInPlay);
         staticText = "Put all creature cards in all graveyards onto the battlefield under your control. " +
                 "They're black Zombies in addition to their other colors and types";

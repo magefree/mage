@@ -199,7 +199,7 @@ public class LiberatedLivestockTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, MURDER, LIBERATEDLIVESTOCK);
         addTarget(playerA, KEENSENSE);
         addTarget(playerA, ARACHNOFORM);
-        addTarget(playerA, TestPlayer.TARGET_SKIP);
+        // no possible targets thus no need to target skip
 
         waitStackResolved(1, PhaseStep.END_TURN);
         execute();

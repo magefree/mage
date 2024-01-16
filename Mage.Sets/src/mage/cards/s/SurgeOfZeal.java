@@ -48,7 +48,7 @@ public final class SurgeOfZeal extends CardImpl {
 
 class SurgeOfZealEffect extends OneShotEffect {
 
-    public SurgeOfZealEffect() {
+    SurgeOfZealEffect() {
         super(Outcome.AddAbility);
         this.staticText = "Target creature and each other creature that shares a color with it gain haste until end of turn";
     }

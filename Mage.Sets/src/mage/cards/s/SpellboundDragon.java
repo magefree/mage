@@ -52,7 +52,7 @@ public final class SpellboundDragon extends CardImpl {
 
 class SpellboundDragonEffect extends OneShotEffect {
 
-    public SpellboundDragonEffect() {
+    SpellboundDragonEffect() {
         super(Outcome.BoostCreature);
         staticText = "draw a card, then discard a card. Spellbound Dragon gets +X/+0 until end of turn, where X is the discarded card's mana value";
     }

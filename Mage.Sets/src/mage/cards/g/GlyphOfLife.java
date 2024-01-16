@@ -89,7 +89,7 @@ class GlyphOfLifeTriggeredAbility extends DelayedTriggeredAbility {
 
 class GlyphOfLifeGainLifeEffect extends OneShotEffect {
 
-    public GlyphOfLifeGainLifeEffect() {
+    GlyphOfLifeGainLifeEffect() {
         super(Outcome.GainLife);
         staticText = "you gain that much life";
     }

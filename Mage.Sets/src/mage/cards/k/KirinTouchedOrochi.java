@@ -68,7 +68,7 @@ public final class KirinTouchedOrochi extends CardImpl {
 
 class KirinTouchedOrochiTokenEffect extends OneShotEffect {
 
-    public KirinTouchedOrochiTokenEffect() {
+    KirinTouchedOrochiTokenEffect() {
         super(Outcome.Exile);
         this.staticText = "Exile target creature card from a graveyard. When you do, create a 1/1 colorless Spirit creature token";
     }
@@ -101,7 +101,7 @@ class KirinTouchedOrochiTokenEffect extends OneShotEffect {
 
 class KirinTouchedOrochiCounterEffect extends OneShotEffect {
 
-    public KirinTouchedOrochiCounterEffect() {
+    KirinTouchedOrochiCounterEffect() {
         super(Outcome.Exile);
         this.staticText = "Exile target noncreature card from a graveyard. When you do, put a +1/+1 counter on target creature you control";
     }

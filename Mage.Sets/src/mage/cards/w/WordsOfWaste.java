@@ -43,7 +43,7 @@ public final class WordsOfWaste extends CardImpl {
 
 class WordsOfWasteEffect extends ReplacementEffectImpl {
 
-    public WordsOfWasteEffect() {
+    WordsOfWasteEffect() {
         super(Duration.EndOfTurn, Outcome.Discard);
         staticText = "The next time you would draw a card this turn, each opponent discards a card instead";
     }

@@ -44,7 +44,7 @@ public final class VenarianGlimmer extends CardImpl {
 
 class VenarianGlimmerEffect extends OneShotEffect {
 
-    public VenarianGlimmerEffect() {
+    VenarianGlimmerEffect() {
         super(Outcome.Discard);
         this.staticText = "Target player reveals their hand. You choose a nonland card with mana value X or less from it. That player discards that card";
     }

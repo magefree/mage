@@ -15,7 +15,7 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetSacrifice;
 
 /**
  * @author TheElk801, Alex-Vasile
@@ -28,12 +28,12 @@ public class CasualtyAbility extends StaticAbility implements OptionalAdditional
 
     protected OptionalAdditionalCost additionalCost;
 
-    private static TargetControlledPermanent makeFilter(int number) {
+    private static TargetSacrifice makeFilter(int number) {
         FilterControlledPermanent filter = new FilterControlledCreaturePermanent(
                 "creature with power " + number + " or greater"
         );
         filter.add(new PowerPredicate(ComparisonType.MORE_THAN, number - 1));
-        return new TargetControlledPermanent(1, 1, filter, true);
+        return new TargetSacrifice(1, filter);
     }
 
     public CasualtyAbility(int number) {

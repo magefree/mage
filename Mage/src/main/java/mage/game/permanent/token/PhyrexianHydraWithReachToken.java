@@ -23,7 +23,7 @@ public final class PhyrexianHydraWithReachToken extends TokenImpl {
         this.addAbility(ReachAbility.getInstance());
     }
 
-    protected PhyrexianHydraWithReachToken(final PhyrexianHydraWithReachToken token) {
+    private PhyrexianHydraWithReachToken(final PhyrexianHydraWithReachToken token) {
         super(token);
     }
 

@@ -9,6 +9,8 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
  * @author xenohedron
  */
@@ -59,9 +61,13 @@ public class SourceDealsDamageToYouTriggeredAbility extends TriggeredAbilityImpl
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
+        UUID sourceControllerId = game.getControllerId(event.getSourceId());
+        if (sourceControllerId == null || !game.getOpponents(getControllerId()).contains(sourceControllerId)) {
+            return false;
+        }
         switch (event.getType()) {
             case DAMAGED_PLAYER:
-                if (!this.isControlledBy(event.getTargetId())) {
+                if (!event.getTargetId().equals(this.getControllerId())) {
                     return false;
                 }
                 break;
@@ -85,7 +91,7 @@ public class SourceDealsDamageToYouTriggeredAbility extends TriggeredAbilityImpl
             return false;
         }
         this.getAllEffects().setValue("damage", damageAmount);
-        this.getAllEffects().setTargetPointer(new FixedTarget(game.getControllerId(event.getSourceId())));
+        this.getAllEffects().setTargetPointer(new FixedTarget(sourceControllerId));
         return true;
     }
 }

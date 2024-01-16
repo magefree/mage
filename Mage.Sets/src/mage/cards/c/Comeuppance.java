@@ -45,7 +45,7 @@ public final class Comeuppance extends CardImpl {
 
 class ComeuppanceEffect extends PreventionEffectImpl {
 
-    public ComeuppanceEffect() {
+    ComeuppanceEffect() {
         super(Duration.EndOfTurn, Integer.MAX_VALUE, false, false);
         staticText = "Prevent all damage that would be dealt to you and planeswalkers you control this turn by sources you don't control. If damage from a creature source is prevented this way, {this} deals that much damage to that creature. If damage from a noncreature source is prevented this way, {this} deals that much damage to the source's controller";
     }

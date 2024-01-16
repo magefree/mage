@@ -20,7 +20,7 @@ public final class BrainiacToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    protected BrainiacToken(final BrainiacToken token) {
+    private BrainiacToken(final BrainiacToken token) {
         super(token);
     }
 

@@ -46,7 +46,7 @@ public final class ChaosWand extends CardImpl {
 
 class ChaosWandEffect extends OneShotEffect {
 
-    public ChaosWandEffect() {
+    ChaosWandEffect() {
         super(Outcome.PlayForFree);
         this.staticText = "Target opponent exiles cards from the top of their library "
                 + "until they exile an instant or sorcery card. "

@@ -18,7 +18,7 @@ public final class SerfToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    protected SerfToken(final SerfToken token) {
+    private SerfToken(final SerfToken token) {
         super(token);
     }
 

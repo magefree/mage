@@ -69,7 +69,7 @@ public final class LairOfTheHydra extends CardImpl {
 
 class LairOfTheHydraEffect extends OneShotEffect {
 
-    public LairOfTheHydraEffect() {
+    LairOfTheHydraEffect() {
         super(Outcome.BecomeCreature);
         this.staticText = "Until end of turn, {this} becomes an X/X green Hydra creature. It's still a land. X can't be 0";
     }

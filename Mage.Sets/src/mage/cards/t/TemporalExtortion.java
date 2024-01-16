@@ -43,7 +43,7 @@ public final class TemporalExtortion extends CardImpl {
 
 class TemporalExtortionCounterSourceEffect extends OneShotEffect {
 
-    public TemporalExtortionCounterSourceEffect() {
+    TemporalExtortionCounterSourceEffect() {
         super(Outcome.AIDontUseIt);
         staticText = "any player may pay half their life, rounded up. If a player does, counter {this}";
     }

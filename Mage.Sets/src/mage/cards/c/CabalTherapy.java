@@ -35,9 +35,7 @@ public final class CabalTherapy extends CardImpl {
         this.getSpellAbility().addEffect(new CabalTherapyEffect());
 
         // Flashback-Sacrifice a creature.
-        this.addAbility(new FlashbackAbility(this, new SacrificeTargetCost(
-                new TargetControlledCreaturePermanent(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT)
-        )));
+        this.addAbility(new FlashbackAbility(this, new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
     }
 
     private CabalTherapy(final CabalTherapy card) {
@@ -52,7 +50,7 @@ public final class CabalTherapy extends CardImpl {
 
 class CabalTherapyEffect extends OneShotEffect {
 
-    public CabalTherapyEffect() {
+    CabalTherapyEffect() {
         super(Outcome.Discard);
         staticText = "Target player reveals their hand and discards all cards with that name";
     }

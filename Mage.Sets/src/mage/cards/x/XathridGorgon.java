@@ -70,7 +70,7 @@ public final class XathridGorgon extends CardImpl {
 
 class XathridGorgonCantActivateEffect extends RestrictionEffect {
 
-    public XathridGorgonCantActivateEffect() {
+    XathridGorgonCantActivateEffect() {
         super(Duration.Custom);
         staticText = "Its activated abilities can't be activated";
     }

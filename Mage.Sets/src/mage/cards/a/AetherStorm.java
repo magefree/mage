@@ -48,7 +48,7 @@ public final class AetherStorm extends CardImpl {
 
 class AetherStormReplacementEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public AetherStormReplacementEffect() {
+    AetherStormReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "Creature spells can't be cast";
     }

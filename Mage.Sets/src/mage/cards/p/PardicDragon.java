@@ -63,7 +63,7 @@ public final class PardicDragon extends CardImpl {
 
 class PardicDragonEffect extends OneShotEffect {
 
-    public PardicDragonEffect() {
+    PardicDragonEffect() {
         super(Outcome.Benefit);
         this.staticText = "that player may put a time counter on Pardic Dragon";
     }

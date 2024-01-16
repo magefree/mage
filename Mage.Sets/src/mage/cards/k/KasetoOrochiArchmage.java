@@ -48,7 +48,7 @@ public final class KasetoOrochiArchmage extends CardImpl {
 
 class KasetoEffect extends OneShotEffect {
 
-    public KasetoEffect() {
+    KasetoEffect() {
         super(Outcome.BoostCreature);
         staticText = "Target creature can't be blocked this turn. If that creature is a Snake, it gets +2/+2 until end of turn";
     }

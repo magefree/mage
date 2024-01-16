@@ -40,7 +40,7 @@ public final class PrimalInstinct extends CardImpl {
 
 class PrimalInstictEffect extends OneShotEffect {
 
-    public PrimalInstictEffect() {
+    PrimalInstictEffect() {
         super(Outcome.BoostCreature);
         staticText = "Put a +1/+1 counter on target creature, then double the number of +1/+1 counters on that creature.";
     }

@@ -18,7 +18,7 @@ public final class BelzenlokClericToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    protected BelzenlokClericToken(final BelzenlokClericToken token) {
+    private BelzenlokClericToken(final BelzenlokClericToken token) {
         super(token);
     }
 

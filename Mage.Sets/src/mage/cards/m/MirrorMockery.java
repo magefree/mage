@@ -54,7 +54,7 @@ public final class MirrorMockery extends CardImpl {
 
 class MirrorMockeryEffect extends OneShotEffect {
 
-    public MirrorMockeryEffect() {
+    MirrorMockeryEffect() {
         super(Outcome.Benefit);
         this.staticText = "you may create a token that's a copy of that creature. Exile that token at end of combat";
     }

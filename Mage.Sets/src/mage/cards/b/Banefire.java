@@ -72,7 +72,7 @@ class testCondition implements Condition {
 
 class BaneFireEffect extends OneShotEffect {
 
-    public BaneFireEffect() {
+    BaneFireEffect() {
         super(Outcome.Damage);
         staticText = "{this} deals X damage to any target";
     }

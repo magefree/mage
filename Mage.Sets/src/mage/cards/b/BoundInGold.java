@@ -55,7 +55,7 @@ public final class BoundInGold extends CardImpl {
 
 class BoundInGoldEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public BoundInGoldEffect() {
+    BoundInGoldEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = ", or crew Vehicles, and its activated abilities can't be activated unless they're mana abilities";
     }

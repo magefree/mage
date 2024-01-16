@@ -71,7 +71,7 @@ public final class DemonicEmbrace extends CardImpl {
 
 class DemonicEmbracePlayEffect extends AsThoughEffectImpl {
 
-    public DemonicEmbracePlayEffect() {
+    DemonicEmbracePlayEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
         staticText = "You may cast {this} from your graveyard by paying 3 life and discarding a card in addition to paying its other costs";
     }

@@ -38,7 +38,7 @@ public final class Mindmoil extends CardImpl {
 
 class MindmoilEffect extends OneShotEffect {
 
-    public MindmoilEffect() {
+    MindmoilEffect() {
         super(Outcome.Neutral);
         staticText = "put the cards in your hand on the bottom of your library in any order, then draw that many cards";
     }

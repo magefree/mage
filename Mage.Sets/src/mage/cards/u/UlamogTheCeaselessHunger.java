@@ -127,7 +127,7 @@ class UlamogAttackTriggeredAbility extends TriggeredAbilityImpl {
 
 class UlamogExileLibraryEffect extends OneShotEffect {
 
-    public UlamogExileLibraryEffect() {
+    UlamogExileLibraryEffect() {
         super(Outcome.Exile);
         this.staticText = "defending player exiles the top twenty cards of their library";
     }

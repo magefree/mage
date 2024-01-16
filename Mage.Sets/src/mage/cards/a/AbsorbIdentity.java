@@ -48,7 +48,7 @@ public final class AbsorbIdentity extends CardImpl {
 
 class AbsorbIdentityEffect extends OneShotEffect {
 
-    public AbsorbIdentityEffect() {
+    AbsorbIdentityEffect() {
         super(Outcome.Copy);
         this.staticText = "You may have Shapeshifters you control become copies of that creature until end of turn.";
     }

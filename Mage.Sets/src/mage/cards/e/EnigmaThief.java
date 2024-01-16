@@ -35,7 +35,7 @@ public final class EnigmaThief extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Prowl {3}{U}
-        this.addAbility(new ProwlAbility(this, "{3}{U}"));
+        this.addAbility(new ProwlAbility("{3}{U}"));
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());

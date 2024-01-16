@@ -59,7 +59,7 @@ public final class NewBlood extends CardImpl {
 
 class NewBloodEffect extends OneShotEffect {
 
-    public NewBloodEffect() {
+    NewBloodEffect() {
         super(Outcome.Benefit);
         this.staticText = "Gain control of target creature. Change the text of that creature by replacing all instances of one creature type with Vampire";
     }

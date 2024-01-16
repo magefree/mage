@@ -104,7 +104,7 @@ class BloodthirstyAdversaryEffect extends OneShotEffect {
 
 class BloodthirstyAdversaryCopyEffect extends OneShotEffect {
 
-    public BloodthirstyAdversaryCopyEffect() {
+    BloodthirstyAdversaryCopyEffect() {
         super(Outcome.PlayForFree);
     }
 

@@ -40,7 +40,7 @@ public final class SelectiveMemory extends CardImpl {
 
 class SelectiveMemoryEffect extends OneShotEffect {
 
-    public SelectiveMemoryEffect() {
+    SelectiveMemoryEffect() {
         super(Outcome.Exile);
         this.staticText = "Search your library for any number of nonland cards, exile them, then shuffle";
     }

@@ -18,7 +18,7 @@ public final class GreenCatToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    protected GreenCatToken(final GreenCatToken token) {
+    private GreenCatToken(final GreenCatToken token) {
         super(token);
     }
 

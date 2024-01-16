@@ -13,6 +13,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetLandPermanent;
@@ -32,7 +33,7 @@ public final class KeldonArsonist extends CardImpl {
 
         // {1}, Sacrifice two lands: Destroy target land.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new GenericManaCost(1));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(2, 2, new FilterControlledLandPermanent("lands"), true)));
+        ability.addCost(new SacrificeTargetCost(2, StaticFilters.FILTER_LANDS));
         TargetLandPermanent target = new TargetLandPermanent();
         target.setTargetName("land (to destroy)");
         ability.addTarget(target);

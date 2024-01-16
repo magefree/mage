@@ -61,7 +61,7 @@ public final class InfectiousRage extends CardImpl {
 
 class InfectiousRageReattachEffect extends OneShotEffect {
 
-    public InfectiousRageReattachEffect() {
+    InfectiousRageReattachEffect() {
         super(Outcome.PutCardInPlay);
         this.staticText = "choose a creature at random {this} can enchant. Return {this} to the battlefield attached to that creature.";
     }

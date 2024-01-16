@@ -49,7 +49,7 @@ public final class RingOfMaruf extends CardImpl {
 
 class RingOfMarufEffect extends ReplacementEffectImpl {
 
-    public RingOfMarufEffect() {
+    RingOfMarufEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit);
         staticText = "The next time you would draw a card this turn, instead choose a card you own from outside the game and put it into your hand.";
     }

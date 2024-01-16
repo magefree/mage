@@ -50,7 +50,7 @@ public final class ChitteringRats extends CardImpl {
 
 class ChitteringRatsEffect extends OneShotEffect {
 
-    public ChitteringRatsEffect() {
+    ChitteringRatsEffect() {
         super(Outcome.Detriment);
         this.staticText = "target opponent puts a card from their hand on top of their library";
     }

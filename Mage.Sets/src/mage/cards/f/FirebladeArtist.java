@@ -41,8 +41,7 @@ public final class FirebladeArtist extends CardImpl {
         );
         ability.addTarget(new TargetOpponentOrPlaneswalker());
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new DoWhenCostPaid(ability, new SacrificeTargetCost(
-                        new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT)
+                new DoWhenCostPaid(ability, new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT
                 ), "Sacrifice a creature?"), TargetController.YOU, false
         ));
     }

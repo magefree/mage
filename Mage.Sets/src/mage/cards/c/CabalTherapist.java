@@ -51,8 +51,7 @@ public final class CabalTherapist extends CardImpl {
         ability.addEffect(new CabalTherapistDiscardEffect());
         ability.addTarget(new TargetPlayer());
         this.addAbility(new BeginningOfPreCombatMainTriggeredAbility(
-                new DoWhenCostPaid(ability, new SacrificeTargetCost(
-                        new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT)
+                new DoWhenCostPaid(ability, new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT
                 ), "Sacrifice a creature?"), TargetController.YOU, false
         ));
     }

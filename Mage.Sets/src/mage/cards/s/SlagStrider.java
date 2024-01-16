@@ -34,9 +34,7 @@ public final class SlagStrider extends CardImpl {
 
         // {1}, Sacrifice an artifact: Slag Strider deals 1 damage to any target.
         Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(1), new GenericManaCost(1));
-        ability.addCost(new SacrificeTargetCost(
-                new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_AN)
-        ));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_AN));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }

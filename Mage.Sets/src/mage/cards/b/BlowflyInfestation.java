@@ -72,7 +72,7 @@ class BlowflyInfestationCondition implements Condition {
 
 class BlowflyInfestationEffect extends OneShotEffect {
 
-    public BlowflyInfestationEffect() {
+    BlowflyInfestationEffect() {
         super(Outcome.Detriment);
     }
 

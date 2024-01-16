@@ -84,7 +84,7 @@ class PutridWarriorDealsDamageTriggeredAbility extends TriggeredAbilityImpl {
 
 class PutridWarriorGainLifeEffect extends OneShotEffect {
 
-    public PutridWarriorGainLifeEffect() {
+    PutridWarriorGainLifeEffect() {
         super(Outcome.GainLife);
         staticText = "Each player gains 1 life.";
     }

@@ -8,6 +8,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -15,6 +16,7 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetOpponent;
+import mage.target.common.TargetSacrifice;
 
 import java.util.UUID;
 
@@ -44,7 +46,7 @@ public final class ChoiceOfDamnations extends CardImpl {
 
 class ChoiceOfDamnationsEffect extends OneShotEffect {
 
-    public ChoiceOfDamnationsEffect() {
+    ChoiceOfDamnationsEffect() {
         super(Outcome.Benefit);
         this.staticText = "Target opponent chooses a number. You may have that player lose that much life. If you don't, that player sacrifices all but that many permanents";
     }
@@ -98,8 +100,8 @@ class ChoiceOfDamnationsEffect extends OneShotEffect {
                     // (2005-06-01)
                     if (numberPermanents > amount) {
                         int numberToSacrifice = numberPermanents - amount;
-                        Target target = new TargetControlledPermanent(numberToSacrifice, numberToSacrifice, new FilterControlledPermanent("permanent you control to sacrifice"), false);
-                        targetPlayer.chooseTarget(Outcome.Sacrifice, target, source, game);
+                        Target target = new TargetSacrifice(numberToSacrifice, numberToSacrifice == 1 ? StaticFilters.FILTER_PERMANENT : StaticFilters.FILTER_PERMANENTS);
+                        targetPlayer.choose(Outcome.Sacrifice, target, source, game);
                         for (UUID uuid : target.getTargets()) {
                             Permanent permanent = game.getPermanent(uuid);
                             if (permanent != null) {

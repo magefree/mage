@@ -43,7 +43,7 @@ public final class LatNamsLegacy extends CardImpl {
 
 class LatNamsLegacyEffect extends OneShotEffect {
 
-    public LatNamsLegacyEffect() {
+    LatNamsLegacyEffect() {
         super(Outcome.DrawCard);
         staticText = "Shuffle a card from your hand into your library. If you do, draw two cards at the beginning of the next turn's upkeep";
     }

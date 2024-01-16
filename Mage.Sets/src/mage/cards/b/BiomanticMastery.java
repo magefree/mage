@@ -40,7 +40,7 @@ public final class BiomanticMastery extends CardImpl {
 
 class BiomanticMasteryEffect extends OneShotEffect {
 
-    public BiomanticMasteryEffect() {
+    BiomanticMasteryEffect() {
         super(Outcome.DrawCard);
         this.staticText = "Draw a card for each creature target player controls, then draw a card for each creature another target player controls";
     }

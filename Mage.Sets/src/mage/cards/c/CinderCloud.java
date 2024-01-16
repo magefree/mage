@@ -40,7 +40,7 @@ public final class CinderCloud extends CardImpl {
 
 class CinderCloudEffect extends OneShotEffect {
 
-    public CinderCloudEffect() {
+    CinderCloudEffect() {
         super(Outcome.Benefit);
         this.staticText = "Destroy target creature. If a white creature dies this way, " +
                 "{this} deals damage to that creature's controller equal to the creature's power";

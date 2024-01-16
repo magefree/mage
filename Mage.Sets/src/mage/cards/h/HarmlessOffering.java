@@ -44,7 +44,7 @@ public final class HarmlessOffering extends CardImpl {
 
 class HarmlessOfferingEffect extends ContinuousEffectImpl {
 
-    public HarmlessOfferingEffect() {
+    HarmlessOfferingEffect() {
         super(Duration.EndOfGame, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.Benefit);
         this.staticText = "Target opponent gains control of target permanent you control";
     }

@@ -62,7 +62,7 @@ public final class JangoFett extends CardImpl {
 
 class JangoFettEffect extends OneShotEffect {
 
-    public JangoFettEffect() {
+    JangoFettEffect() {
         super(Outcome.BoostCreature);
         this.staticText = "it gets +X/+0, where X is the number of creatures defending player controls with a bounty counter on them";
     }

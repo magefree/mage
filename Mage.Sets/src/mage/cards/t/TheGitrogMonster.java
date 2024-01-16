@@ -14,6 +14,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -38,7 +39,7 @@ public final class TheGitrogMonster extends CardImpl {
         this.addAbility(DeathtouchAbility.getInstance());
         // At the beginning of your upkeep, sacrifice The Gitrog Monster unless you sacrifice a land.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(
-                new SacrificeTargetCost(new TargetControlledPermanent(1, 1, new FilterControlledLandPermanent("a land"), true))), TargetController.YOU, false));
+                new SacrificeTargetCost(StaticFilters.FILTER_LAND)), TargetController.YOU, false));
 
         // You may play an additional land on each of your turns.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayAdditionalLandsControllerEffect(1, Duration.WhileOnBattlefield)));

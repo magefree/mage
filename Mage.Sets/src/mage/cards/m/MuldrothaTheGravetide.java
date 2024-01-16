@@ -65,7 +65,7 @@ public final class MuldrothaTheGravetide extends CardImpl {
 
 class MuldrothaTheGravetideCastFromGraveyardEffect extends AsThoughEffectImpl {
 
-    public MuldrothaTheGravetideCastFromGraveyardEffect() {
+    MuldrothaTheGravetideCastFromGraveyardEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "During each of your turns, you may play a land and cast a permanent spell of each permanent type from your graveyard. "
                 + "<i>(If a card has multiple permanent types, choose one as you play it.)</i>";

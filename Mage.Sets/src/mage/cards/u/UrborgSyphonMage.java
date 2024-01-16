@@ -51,7 +51,7 @@ public final class UrborgSyphonMage extends CardImpl {
 
 class UrborgSyphonMageEffect extends OneShotEffect {
 
-    public UrborgSyphonMageEffect() {
+    UrborgSyphonMageEffect() {
         super(Outcome.Damage);
         staticText = "Each other player loses 2 life. You gain life equal to the life lost this way";
     }

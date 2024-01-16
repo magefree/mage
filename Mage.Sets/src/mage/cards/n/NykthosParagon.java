@@ -47,7 +47,7 @@ public final class NykthosParagon extends CardImpl {
 
 class NykthosParagonEffect extends OneShotEffect {
 
-    public NykthosParagonEffect() {
+    NykthosParagonEffect() {
         super(Outcome.BoostCreature);
         staticText = "put that many +1/+1 counters on each creature you control";
     }

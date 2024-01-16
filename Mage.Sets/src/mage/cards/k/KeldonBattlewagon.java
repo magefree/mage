@@ -115,7 +115,7 @@ class KeldonBattlewagonCost extends CostImpl {
 
 class KeldonBattlewagonBoostEffect extends OneShotEffect {
 
-    public KeldonBattlewagonBoostEffect() {
+    KeldonBattlewagonBoostEffect() {
         super(Outcome.BoostCreature);
         staticText = "{this} gets +X/+0 until end of turn, where X is the power of the creature tapped this way";
     }

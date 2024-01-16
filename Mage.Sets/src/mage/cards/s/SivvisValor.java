@@ -64,7 +64,7 @@ public final class SivvisValor extends CardImpl {
 
 class SivvisValorEffect extends ReplacementEffectImpl {
 
-    public SivvisValorEffect() {
+    SivvisValorEffect() {
         super(Duration.EndOfTurn, Outcome.RedirectDamage);
         staticText = "All damage that would be dealt to target creature this turn is dealt to you instead";
     }

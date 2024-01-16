@@ -38,7 +38,7 @@ public final class HoardersGreed extends CardImpl {
 
 class HoardersGreedEffect extends OneShotEffect {
 
-    public HoardersGreedEffect() {
+    HoardersGreedEffect() {
         super(Outcome.Benefit);
         this.staticText = "You lose 2 life and draw two cards, then clash with an opponent. If you win, repeat this process";
     }

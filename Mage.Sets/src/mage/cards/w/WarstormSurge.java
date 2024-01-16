@@ -82,7 +82,7 @@ class WarstormSurgeTriggeredAbility extends TriggeredAbilityImpl {
 
 class WarstormSurgeEffect extends OneShotEffect {
 
-    public WarstormSurgeEffect() {
+    WarstormSurgeEffect() {
         super(Outcome.Damage);
         staticText = "it deals damage equal to its power to any target";
     }

@@ -66,7 +66,7 @@ public final class SawtoothLoon extends CardImpl {
 
 class SawtoothLoonEffect extends OneShotEffect {
 
-    public SawtoothLoonEffect() {
+    SawtoothLoonEffect() {
         super(Outcome.DrawCard);
         this.staticText = "draw two cards, then put two cards from your hand on the bottom of your library";
     }

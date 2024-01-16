@@ -54,7 +54,7 @@ public final class GrinningTotem extends CardImpl {
 
 class GrinningTotemSearchAndExileEffect extends OneShotEffect {
 
-    public GrinningTotemSearchAndExileEffect() {
+    GrinningTotemSearchAndExileEffect() {
         super(Outcome.Benefit);
         this.staticText = "Search target opponent's library for a card and exile it. Then that player shuffles. " +
                 "Until the beginning of your next upkeep, you may play that card. " +

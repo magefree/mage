@@ -95,7 +95,7 @@ class ImminentDoomTriggeredAbility extends TriggeredAbilityImpl {
 
 class ImminentDoomEffect extends OneShotEffect {
 
-    public ImminentDoomEffect() {
+    ImminentDoomEffect() {
         super(Outcome.Detriment);
     }
 

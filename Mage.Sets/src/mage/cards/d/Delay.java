@@ -47,7 +47,7 @@ public final class Delay extends CardImpl {
 
 class DelayEffect extends OneShotEffect {
 
-    public DelayEffect() {
+    DelayEffect() {
         super(Outcome.Benefit);
         this.staticText = "Counter target spell. If the spell is countered this way, exile it with three time counters on it instead of putting it into its owner's graveyard. If it doesn't have suspend, it gains suspend";
     }

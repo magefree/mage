@@ -51,7 +51,7 @@ public final class HellholeRats extends CardImpl {
 
 class HellholeRatsEffect extends OneShotEffect {
 
-    public HellholeRatsEffect() {
+    HellholeRatsEffect() {
         super(Outcome.Damage);
         this.staticText = "target player discards a card. {this} deals damage to that player equal to that card's mana value";
     }

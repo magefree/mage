@@ -43,7 +43,7 @@ public final class MausoleumSecrets extends CardImpl {
 
 class MausoleumSecretsEffect extends OneShotEffect {
 
-    public MausoleumSecretsEffect() {
+    MausoleumSecretsEffect() {
         super(Outcome.Benefit);
         this.staticText = "<i>Undergrowth</i> &mdash; Search your library "
                 + "for a black card with mana value less than "

@@ -21,6 +21,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetSacrifice;
 
 /**
  *
@@ -82,8 +83,8 @@ class FatalGrudgeEffect extends OneShotEffect {
         for (UUID opponentId : game.getOpponents(source.getControllerId())) {
             Player opponent = game.getPlayer(opponentId);
             if (opponent != null) {
-                TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, true);
-                opponent.chooseTarget(Outcome.Sacrifice, target, source, game);
+                TargetSacrifice target = new TargetSacrifice(filter);
+                opponent.choose(Outcome.Sacrifice, target, source, game);
                 Permanent permanent = game.getPermanent(target.getFirstTarget());
                 if (permanent != null) {
                     permanent.sacrifice(source, game);

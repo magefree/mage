@@ -79,7 +79,7 @@ public final class Tetravus extends CardImpl {
 
 class TetravusCreateTokensEffect extends OneShotEffect {
 
-    public TetravusCreateTokensEffect() {
+    TetravusCreateTokensEffect() {
         super(Outcome.Benefit);
         this.staticText = "remove any number of +1/+1 counters from {this}. "
                 + "If you do, create that many 1/1 colorless Tetravite artifact creature tokens. "
@@ -131,7 +131,7 @@ class TetravusCreateTokensEffect extends OneShotEffect {
 
 class TetravusAddCountersEffect extends OneShotEffect {
 
-    public TetravusAddCountersEffect() {
+    TetravusAddCountersEffect() {
         super(Outcome.Benefit);
         this.staticText = "exile any number of tokens created with {this}. "
                 + "If you do, put that many +1/+1 counters on {this}";

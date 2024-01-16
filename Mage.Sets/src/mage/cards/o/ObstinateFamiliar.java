@@ -47,7 +47,7 @@ public final class ObstinateFamiliar extends CardImpl {
 
 class ObstinateFamiliarReplacementEffect extends ReplacementEffectImpl {
 
-    public ObstinateFamiliarReplacementEffect() {
+    ObstinateFamiliarReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "If you would draw a card, you may skip that draw instead";
     }

@@ -48,7 +48,7 @@ public final class OmenMachine extends CardImpl {
 
 class OmenMachineEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public OmenMachineEffect() {
+    OmenMachineEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Neutral, false, false);
         staticText = "Players can't draw cards";
     }

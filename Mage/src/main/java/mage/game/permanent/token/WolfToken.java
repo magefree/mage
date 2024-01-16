@@ -19,7 +19,7 @@ public final class WolfToken extends TokenImpl {
         toughness = new MageInt(2);
     }
 
-    protected WolfToken(final WolfToken token) {
+    private WolfToken(final WolfToken token) {
         super(token);
     }
 

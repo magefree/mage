@@ -59,7 +59,7 @@ public final class MechanizedProduction extends CardImpl {
 
 class MechanizedProductionEffect extends OneShotEffect {
 
-    public MechanizedProductionEffect() {
+    MechanizedProductionEffect() {
         super(Outcome.Benefit);
         this.staticText = "create a token that's a copy of enchanted artifact. Then if you control eight or more artifacts with the same name as one another, you win the game";
     }

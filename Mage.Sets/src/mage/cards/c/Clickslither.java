@@ -45,7 +45,7 @@ public final class Clickslither extends CardImpl {
         Effect effect = new BoostSourceEffect(2,2,Duration.EndOfTurn);
         effect.setText("{this} gets +2/+2");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, 
-                new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1,filter,true)));
+                new SacrificeTargetCost(filter));
         effect = new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("and gains trample until end of turn");
         ability.addEffect(effect);

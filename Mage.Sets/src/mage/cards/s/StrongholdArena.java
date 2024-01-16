@@ -53,7 +53,7 @@ public final class StrongholdArena extends CardImpl {
 
 class StrongholdArenaGainLifeEffect extends OneShotEffect {
 
-    public StrongholdArenaGainLifeEffect() {
+    StrongholdArenaGainLifeEffect() {
         super(Outcome.GainLife);
         this.staticText = "you gain 3 life for each time it was kicked";
     }
@@ -80,7 +80,7 @@ class StrongholdArenaGainLifeEffect extends OneShotEffect {
 
 class StrongholdArenaDrawEffect extends OneShotEffect {
 
-    public StrongholdArenaDrawEffect() {
+    StrongholdArenaDrawEffect() {
         super(Outcome.DrawCard);
         this.staticText = "reveal the top card of your library and put it into your hand. If you do, you lose life equal to its mana value.";
     }

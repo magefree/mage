@@ -49,7 +49,7 @@ public final class ServantOfTymaret extends CardImpl {
 
 class ServantOfTymaretEffect extends OneShotEffect {
 
-    public ServantOfTymaretEffect() {
+    ServantOfTymaretEffect() {
         super(Outcome.Damage);
         staticText = "each opponent loses 1 life. You gain life equal to the life lost this way";
     }

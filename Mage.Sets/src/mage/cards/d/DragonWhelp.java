@@ -58,7 +58,7 @@ public final class DragonWhelp extends CardImpl {
 
 class DragonWhelpEffect extends OneShotEffect {
 
-    public DragonWhelpEffect() {
+    DragonWhelpEffect() {
         super(Outcome.Damage);
         this.staticText = "If this ability has been activated four or more times this turn, sacrifice {this} at the beginning of the next end step";
     }

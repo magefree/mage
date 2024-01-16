@@ -42,7 +42,7 @@ public final class TheFallen extends CardImpl {
 
 class TheFallenEffect extends OneShotEffect {
 
-    public TheFallenEffect() {
+    TheFallenEffect() {
         super(Outcome.Damage);
         this.staticText = "{this} deals 1 damage to each opponent or planeswalker it has dealt damage to this game";
     }

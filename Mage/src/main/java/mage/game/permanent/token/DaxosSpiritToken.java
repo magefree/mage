@@ -28,7 +28,7 @@ public final class DaxosSpiritToken extends TokenImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DaxosSpiritSetPTEffect()));
     }
 
-    protected DaxosSpiritToken(final DaxosSpiritToken token) {
+    private DaxosSpiritToken(final DaxosSpiritToken token) {
         super(token);
     }
 

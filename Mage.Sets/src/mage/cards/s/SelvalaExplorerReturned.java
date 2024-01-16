@@ -58,7 +58,7 @@ public final class SelvalaExplorerReturned extends CardImpl {
 
 class SelvalaExplorerReturnedEffect extends ManaEffect {
 
-    public SelvalaExplorerReturnedEffect() {
+    SelvalaExplorerReturnedEffect() {
         this.staticText = "Each player reveals the top card of their library. For each nonland card revealed this way, add {G} and you gain 1 life";
     }
 

@@ -39,7 +39,7 @@ public final class SearingRays extends CardImpl {
 
 class SearingRaysEffect extends OneShotEffect {
 
-    public SearingRaysEffect() {
+    SearingRaysEffect() {
         super(Outcome.Damage);
         this.staticText = "Choose a color. {this} deals damage to each player equal to the number of creatures of that color that player controls";
     }

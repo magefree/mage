@@ -40,7 +40,7 @@ public final class SoulNova extends CardImpl {
 
 class SoulNovaEffect extends OneShotEffect {
 
-    public SoulNovaEffect() {
+    SoulNovaEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "Exile target attacking creature and all Equipment attached to it.";
     }

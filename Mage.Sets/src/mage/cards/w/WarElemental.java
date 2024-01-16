@@ -90,7 +90,7 @@ class WarElementalTriggeredAbility extends TriggeredAbilityImpl {
 
 class WarElementalEffect extends OneShotEffect {
 
-    public WarElementalEffect() {
+    WarElementalEffect() {
         super(Outcome.Benefit);
     }
 

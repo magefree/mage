@@ -80,7 +80,7 @@ class CephalidShrineTriggeredAbility extends TriggeredAbilityImpl {
 
 class CephalidShrineEffect extends OneShotEffect {
 
-    public CephalidShrineEffect() {
+    CephalidShrineEffect() {
         super(Outcome.Detriment);
         staticText = "Whenever a player casts a spell, counter that "
                 + "spell unless that player pays {X}, where X is the "

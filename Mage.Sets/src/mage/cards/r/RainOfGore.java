@@ -44,7 +44,7 @@ public final class RainOfGore extends CardImpl {
 
 class RainOfGoreEffect extends ReplacementEffectImpl {
 
-    public RainOfGoreEffect() {
+    RainOfGoreEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "If a spell or ability would cause its controller to gain life, that player loses that much life instead";
     }

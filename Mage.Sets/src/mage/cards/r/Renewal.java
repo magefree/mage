@@ -26,7 +26,7 @@ public final class Renewal extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}");
 
         // As an additional cost to cast Renewal, sacrifice a land.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledLandPermanent("a land"))));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_LAND));
         
         // Search your library for a basic land card and put that card onto the battlefield. Then shuffle your library.
         this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), false, true));

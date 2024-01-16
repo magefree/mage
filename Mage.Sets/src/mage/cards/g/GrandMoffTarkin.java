@@ -86,7 +86,7 @@ class GrandMoffTarkinTriggeredAbility extends TriggeredAbilityImpl {
 
 class GrandMoffTarkinEffect extends OneShotEffect {
 
-    public GrandMoffTarkinEffect() {
+    GrandMoffTarkinEffect() {
         super(Outcome.ReturnToHand);
         this.staticText = "destroy target creature that that player controls unless that player pays 2 life. If a player pays life this way, draw a card";
     }

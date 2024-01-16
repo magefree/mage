@@ -45,7 +45,7 @@ public final class BladeOfTheBloodchief extends CardImpl {
 
 class BladeOfTheBloodchiefEffect extends OneShotEffect {
 
-    public BladeOfTheBloodchiefEffect() {
+    BladeOfTheBloodchiefEffect() {
         super(Outcome.BoostCreature);
         staticText = "put a +1/+1 counter on equipped creature. "
                 + "If equipped creature is a Vampire, "

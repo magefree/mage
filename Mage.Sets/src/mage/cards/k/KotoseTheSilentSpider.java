@@ -67,7 +67,7 @@ public final class KotoseTheSilentSpider extends CardImpl {
 
 class KotoseTheSilentSpiderEffect extends OneShotEffect {
 
-    public KotoseTheSilentSpiderEffect() {
+    KotoseTheSilentSpiderEffect() {
         super(Outcome.Exile);
         this.staticText = "exile target card other than a basic land card from an opponent's graveyard. " +
                 "Search that player's graveyard, hand, and library for any number of cards with the same name " +

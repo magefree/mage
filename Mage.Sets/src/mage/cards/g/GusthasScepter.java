@@ -53,7 +53,7 @@ public final class GusthasScepter extends CardImpl {
 
 class GusthasScepterExileEffect extends OneShotEffect {
 
-    public GusthasScepterExileEffect() {
+    GusthasScepterExileEffect() {
         super(Outcome.DrawCard);
         staticText = "exile a card from your hand face down. You may look at it for as long as it remains exiled";
     }
@@ -193,7 +193,7 @@ class GusthasScepterTriggeredAbility extends TriggeredAbilityImpl {
 
 class GusthasScepterPutExiledCardsInOwnersGraveyardEffect extends OneShotEffect {
 
-    public GusthasScepterPutExiledCardsInOwnersGraveyardEffect() {
+    GusthasScepterPutExiledCardsInOwnersGraveyardEffect() {
         super(Outcome.Neutral);
         this.staticText = "put all cards exiled with {this} into their owner's graveyard";
     }

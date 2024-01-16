@@ -43,7 +43,7 @@ public final class AlphaBrawl extends CardImpl {
 
 class AlphaBrawlEffect extends OneShotEffect {
 
-    public AlphaBrawlEffect() {
+    AlphaBrawlEffect() {
         super(Outcome.Damage);
         staticText = "Target creature an opponent controls deals damage equal to its power to each other creature that player controls, then each of those creatures deals damage equal to its power to that creature";
     }

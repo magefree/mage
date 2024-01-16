@@ -39,7 +39,7 @@ public final class Convalescence extends CardImpl {
 
 class ConvalescenceEffect extends OneShotEffect {
 
-    public ConvalescenceEffect() {
+    ConvalescenceEffect() {
         super(Outcome.Neutral);
         staticText = "if you have 10 or less life, you gain 1 life";
     }

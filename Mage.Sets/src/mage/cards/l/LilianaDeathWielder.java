@@ -66,7 +66,7 @@ public final class LilianaDeathWielder extends CardImpl {
 
 class LilianaDeathWielderEffect extends OneShotEffect {
 
-    public LilianaDeathWielderEffect() {
+    LilianaDeathWielderEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Return all creature cards from your graveyard to the battlefield";
     }

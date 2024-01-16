@@ -56,7 +56,7 @@ public final class DisruptionAura extends CardImpl {
 
 class DisruptionAuraEffect extends OneShotEffect {
 
-    public DisruptionAuraEffect() {
+    DisruptionAuraEffect() {
         super(Outcome.Sacrifice);
         staticText =  "sacrifice this artifact unless you pay its mana cost";
      }

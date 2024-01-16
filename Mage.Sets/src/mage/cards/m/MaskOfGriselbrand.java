@@ -57,7 +57,7 @@ public final class MaskOfGriselbrand extends CardImpl {
 
 class MaskOfGriselbrandEffect extends OneShotEffect {
 
-    public MaskOfGriselbrandEffect() {
+    MaskOfGriselbrandEffect() {
         super(Outcome.DrawCard);
         staticText = "you may pay X life, where X is its power. If you do, draw X cards";
     }

@@ -60,7 +60,7 @@ public final class Epochrasite extends CardImpl {
 
 class EpochrasiteEffect extends OneShotEffect {
 
-    public EpochrasiteEffect() {
+    EpochrasiteEffect() {
         super(Outcome.Benefit);
         this.staticText = "exile it with three time counters on it and it gains suspend";
     }

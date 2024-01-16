@@ -78,7 +78,7 @@ enum GethsSummonsAdjuster implements TargetAdjuster {
 
 class GethsSummonsEffect extends OneShotEffect {
 
-    public GethsSummonsEffect() {
+    GethsSummonsEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Return up to one target creature card from your graveyard to the battlefield.<br>" +
                 AbilityWord.CORRUPTED.formatWord() + "For each opponent who has three or more poison counters " +

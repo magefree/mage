@@ -49,7 +49,7 @@ public final class ElsewhereFlask extends CardImpl {
 
 class ElsewhereFlaskEffect extends OneShotEffect {
 
-    public ElsewhereFlaskEffect() {
+    ElsewhereFlaskEffect() {
         super(Outcome.Neutral);
         this.staticText = "Choose a basic land type. Each land you control becomes that type until end of turn";
     }

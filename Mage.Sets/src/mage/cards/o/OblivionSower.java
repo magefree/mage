@@ -56,7 +56,7 @@ public final class OblivionSower extends CardImpl {
 
 class OblivionSowerEffect extends OneShotEffect {
 
-    public OblivionSowerEffect() {
+    OblivionSowerEffect() {
         super(Outcome.PutLandInPlay);
         this.staticText = ", then you may put any number of land cards that player owns from exile onto the battlefield under your control";
     }

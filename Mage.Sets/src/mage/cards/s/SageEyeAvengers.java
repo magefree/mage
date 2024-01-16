@@ -53,7 +53,7 @@ public final class SageEyeAvengers extends CardImpl {
 
 class SageEyeAvengersEffect extends OneShotEffect {
 
-    public SageEyeAvengersEffect() {
+    SageEyeAvengersEffect() {
         super(Outcome.ReturnToHand);
         this.staticText = "you may return target creature to its owner's hand if its power is less than {this}'s power";
     }

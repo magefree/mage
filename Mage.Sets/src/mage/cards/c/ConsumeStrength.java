@@ -52,7 +52,7 @@ public final class ConsumeStrength extends CardImpl {
 
 class ConsumeStrengthEffect extends OneShotEffect {
 
-    public ConsumeStrengthEffect() {
+    ConsumeStrengthEffect() {
         super(Outcome.BoostCreature);
         this.staticText = "Target creature gets +2/+2 until end of turn. Another target creature gets -2/-2 until end of turn";
     }

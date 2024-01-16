@@ -60,7 +60,7 @@ public final class Leviathan extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 Zone.BATTLEFIELD,
                 new DoIfCostPaid(new UntapSourceEffect(), 
-                new SacrificeTargetCost(new TargetControlledPermanent(2, 2, filter, false))),
+                new SacrificeTargetCost(2, filter)),
                 TargetController.YOU,
                 false));
 
@@ -89,7 +89,7 @@ class LeviathanCostToAttackBlockEffect extends PayCostToAttackBlockEffectImpl {
 
     LeviathanCostToAttackBlockEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment, RestrictType.ATTACK,
-                new SacrificeTargetCost(new TargetControlledPermanent(2, 2, filter, false)));
+                new SacrificeTargetCost(2, filter));
         staticText = "{this} can't attack unless you sacrifice two Islands. <i>(This cost is paid as attackers are declared.)</i>";
     }
 

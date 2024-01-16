@@ -77,7 +77,7 @@ class AngelicChorusTriggeredAbility extends TriggeredAbilityImpl {
 
 class AngelicChorusEffect extends OneShotEffect {
 
-    public AngelicChorusEffect() {
+    AngelicChorusEffect() {
         super(Outcome.GainLife);
         staticText = "you gain life equal to its toughness";
     }

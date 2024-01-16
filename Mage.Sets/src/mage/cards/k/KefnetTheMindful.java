@@ -61,7 +61,7 @@ public final class KefnetTheMindful extends CardImpl {
 
 class KefnetTheMindfulRestrictionEffect extends RestrictionEffect {
 
-    public KefnetTheMindfulRestrictionEffect() {
+    KefnetTheMindfulRestrictionEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "{this} can't attack or block unless you have seven or more cards in your hand";
     }

@@ -69,7 +69,7 @@ public final class GiantOyster extends CardImpl {
 
 class GiantOysterDontUntapAsLongAsSourceTappedEffect extends DontUntapAsLongAsSourceTappedEffect {
 
-    public GiantOysterDontUntapAsLongAsSourceTappedEffect() {
+    GiantOysterDontUntapAsLongAsSourceTappedEffect() {
         super();
         staticText = "For as long as {this} remains tapped, target tapped creature doesn't untap during its controller's untap step";
     }

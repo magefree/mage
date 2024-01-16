@@ -70,7 +70,7 @@ class TheRackTriggeredAbility extends TriggeredAbilityImpl {
 
 class TheRackEffect extends OneShotEffect {
 
-    public TheRackEffect() {
+    TheRackEffect() {
         super(Outcome.Benefit);
         this.staticText = "{this} deals X damage to that player, where X is 3 minus the number of cards in their hand";
     }

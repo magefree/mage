@@ -160,7 +160,7 @@ class IntellectDevourerReturnCardsAbility extends DelayedTriggeredAbility {
 
 class IntellectDevourerReturnExiledCardEffect extends OneShotEffect {
 
-    public IntellectDevourerReturnExiledCardEffect() {
+    IntellectDevourerReturnExiledCardEffect() {
         super(Outcome.Benefit);
         this.staticText = "Return exiled cards to their owners' hands";
     }

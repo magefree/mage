@@ -63,7 +63,7 @@ public final class CemeteryGatekeeper extends CardImpl {
 
 class CemeteryGatekeeperEffect extends OneShotEffect {
 
-    public CemeteryGatekeeperEffect() {
+    CemeteryGatekeeperEffect() {
         super(Outcome.Exile);
         staticText = "exile a card from a graveyard";
     }

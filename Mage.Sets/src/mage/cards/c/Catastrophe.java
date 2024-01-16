@@ -39,7 +39,7 @@ public final class Catastrophe extends CardImpl {
 
 class CatastropheEffect extends OneShotEffect {
 
-    public CatastropheEffect() {
+    CatastropheEffect() {
         super(Outcome.Detriment);
         this.staticText = "Destroy all lands or all creatures. Creatures destroyed this way can't be regenerated";
     }

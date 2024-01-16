@@ -9,11 +9,13 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetSacrifice;
 
 /**
  *
@@ -78,8 +80,8 @@ class FadeAwayEffect extends OneShotEffect {
                     if (sacrificeNumber > 0) {
                         int permanentsNumber = game.getBattlefield().getAllActivePermanents(playerId).size();
                         int targetsNumber = Math.min(sacrificeNumber, permanentsNumber);
-                        TargetControlledPermanent target = new TargetControlledPermanent(targetsNumber);
-                        player.chooseTarget(Outcome.Sacrifice, target, source, game);
+                        TargetSacrifice target = new TargetSacrifice(targetsNumber, targetsNumber == 1 ? StaticFilters.FILTER_PERMANENT : StaticFilters.FILTER_PERMANENTS);
+                        player.choose(Outcome.Sacrifice, target, source, game);
                         for (UUID permanentId : target.getTargets()) {
                             Permanent permanent = game.getPermanent(permanentId);
                             if (permanent != null) {

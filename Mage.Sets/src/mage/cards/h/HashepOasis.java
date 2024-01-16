@@ -49,7 +49,7 @@ public final class HashepOasis extends CardImpl {
         ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(3,3,Duration.EndOfTurn), new ManaCostsImpl<>("{1}{G}{G}"));
         ability.addTarget(new TargetCreaturePermanent());
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        ability.addCost(new SacrificeTargetCost(filter));
         addAbility(ability);
     }
 

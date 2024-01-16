@@ -11,6 +11,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
@@ -18,6 +19,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetOpponent;
+import mage.target.common.TargetSacrifice;
 
 /**
  *
@@ -46,6 +48,15 @@ public final class SelfInflictedWound extends CardImpl {
 
 class SelfInflictedWoundEffect extends OneShotEffect {
 
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a green or white creature");
+
+    static {
+        filter.add(Predicates.or(
+                new ColorPredicate(ObjectColor.GREEN),
+                new ColorPredicate(ObjectColor.WHITE)
+        ));
+    }
+
     SelfInflictedWoundEffect() {
         super(Outcome.Sacrifice);
         staticText = "Target opponent sacrifices a green or white creature. If that player does, they lose 2 life";
@@ -67,14 +78,9 @@ class SelfInflictedWoundEffect extends OneShotEffect {
         if (targetOpponent == null || controller == null) {
             return false;
         }
-        FilterControlledPermanent filter = new FilterControlledPermanent("a green or white creature");
-        filter.add(CardType.CREATURE.getPredicate());
-        filter.add(TargetController.YOU.getControllerPredicate());
-        filter.add(Predicates.or(new ColorPredicate(ObjectColor.GREEN), new ColorPredicate(ObjectColor.WHITE)));
-        TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, true);
-
+        TargetSacrifice target = new TargetSacrifice(filter);
         if (target.canChoose(targetOpponent.getId(), source, game)) {
-            targetOpponent.chooseTarget(Outcome.Sacrifice, target, source, game);
+            targetOpponent.choose(Outcome.Sacrifice, target, source, game);
             Permanent permanent = game.getPermanent(target.getFirstTarget());
             if (permanent != null) {
                 if (permanent.sacrifice(source, game)) {

@@ -53,7 +53,7 @@ public final class TearsOfRage extends CardImpl {
 
 class TearsOfRageEffect extends OneShotEffect {
 
-    public TearsOfRageEffect() {
+    TearsOfRageEffect() {
         super(Outcome.Sacrifice);
         this.staticText = "Sacrifice those creatures at the beginning of the next end step";
     }

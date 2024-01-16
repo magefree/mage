@@ -78,7 +78,7 @@ enum MoltenPrimordialAdjuster implements TargetAdjuster {
 
 class MoltenPrimordialEffect extends OneShotEffect {
 
-    public MoltenPrimordialEffect() {
+    MoltenPrimordialEffect() {
         super(Outcome.GainControl);
         this.staticText = "for each opponent, take control of up to one target creature that player controls until end of turn. Untap those creatures. They have haste until end of turn";
     }
@@ -115,4 +115,3 @@ class MoltenPrimordialEffect extends OneShotEffect {
         return result;
     }
 }
-

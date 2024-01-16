@@ -42,7 +42,7 @@ public final class Denied extends CardImpl {
 
 class DeniedEffect extends OneShotEffect {
 
-    public DeniedEffect() {
+    DeniedEffect() {
         super(Outcome.Detriment);
         staticText = "Choose a card name, then target spell's controller reveals their hand. If a card with the chosen name is revealed this way, counter that spell";
     }

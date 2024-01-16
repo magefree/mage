@@ -18,6 +18,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetSacrifice;
 import mage.target.targetpointer.TargetPointer;
 import mage.watchers.common.DamagedPlayerThisCombatWatcher;
 
@@ -88,7 +89,7 @@ class DescendantsFurySacrificeCost extends CostImpl implements SacrificeCost {
         filter.add(new PermanentReferenceInCollectionPredicate(
                 watcher.getPermanents(controller.getId(), damagedPlayer.getId())));
 
-        TargetControlledPermanent target = new TargetControlledPermanent(0, 1, filter, true);
+        TargetSacrifice target = new TargetSacrifice(0, 1, filter);
 
         if (!controller.choose(Outcome.Sacrifice, target, source, game)) {
             return false;

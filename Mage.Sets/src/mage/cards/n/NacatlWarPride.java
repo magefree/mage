@@ -65,7 +65,7 @@ public final class NacatlWarPride extends CardImpl {
 
 class NacatlWarPrideEffect extends OneShotEffect {
 
-    public NacatlWarPrideEffect() {
+    NacatlWarPrideEffect() {
         super(Outcome.Benefit);
         this.staticText = "create X tokens that are copies of {this} tapped and attacking, where X is the number of creatures defending player controls. Exile the tokens at the beginning of the next end step";
     }

@@ -60,7 +60,7 @@ public final class HeliodsPunishment extends CardImpl {
 
 class HeliodsPunishmentLoseAllAbilitiesEnchantedEffect extends ContinuousEffectImpl {
 
-    public HeliodsPunishmentLoseAllAbilitiesEnchantedEffect() {
+    HeliodsPunishmentLoseAllAbilitiesEnchantedEffect() {
         super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.LoseAbility);
         staticText = "It loses all abilities and has \"{T}: Remove a task counter from {this}. Then if it has no task counters on it, destroy {this}.\"";
     }

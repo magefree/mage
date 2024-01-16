@@ -100,7 +100,7 @@ class LivingArtifactTriggeredAbility extends TriggeredAbilityImpl {
 
 class LivingArtifactEffect extends OneShotEffect {
 
-    public LivingArtifactEffect() {
+    LivingArtifactEffect() {
         super(Outcome.Benefit);
     }
 

@@ -49,7 +49,7 @@ public final class SanctumPrelate extends CardImpl {
 
 class ChooseNumberEffect extends OneShotEffect {
 
-    public ChooseNumberEffect() {
+    ChooseNumberEffect() {
         super(Outcome.Detriment);
         staticText = "choose a number";
     }
@@ -83,7 +83,7 @@ class ChooseNumberEffect extends OneShotEffect {
 
 class SanctumPrelateReplacementEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public SanctumPrelateReplacementEffect() {
+    SanctumPrelateReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "Noncreature spells with mana value equal to the chosen number can't be cast";
     }

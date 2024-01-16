@@ -62,7 +62,7 @@ public final class BaronVonCount extends CardImpl {
 
 class BaronVonCountPutCounterEffect extends OneShotEffect {
 
-    public BaronVonCountPutCounterEffect() {
+    BaronVonCountPutCounterEffect() {
         super(Outcome.Benefit);
         staticText = "with a doom counter on \"5.\"";
     }
@@ -155,7 +155,7 @@ class BaronVonCountTriggeredAbility extends TriggeredAbilityImpl {
 
 class BaronVonCountMoveDoomCounterEffect extends OneShotEffect {
 
-    public BaronVonCountMoveDoomCounterEffect() {
+    BaronVonCountMoveDoomCounterEffect() {
         super(Outcome.Neutral);
         staticText = "move the doom counter one numeral to the left";
     }
@@ -224,7 +224,7 @@ class BaronVonCountSecondTriggeredAbility extends TriggeredAbilityImpl {
 
 class BaronVonCountDestroyPlayerEffect extends OneShotEffect {
 
-    public BaronVonCountDestroyPlayerEffect() {
+    BaronVonCountDestroyPlayerEffect() {
         super(Outcome.Neutral);
         staticText = "destroy target player and put that doom counter on \"5.\"";
     }

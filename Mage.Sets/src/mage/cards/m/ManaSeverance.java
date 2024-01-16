@@ -42,7 +42,7 @@ public final class ManaSeverance extends CardImpl {
 
 class ManaSeveranceEffect extends OneShotEffect {
 
-    public ManaSeveranceEffect() {
+    ManaSeveranceEffect() {
         super(Outcome.Benefit);
         this.staticText = "search your library for any number of land cards, exile them, then shuffle";
     }

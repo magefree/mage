@@ -67,7 +67,7 @@ public final class LilianaTheLastHope extends CardImpl {
 
 class LilianaTheLastHopeEffect extends OneShotEffect {
 
-    public LilianaTheLastHopeEffect() {
+    LilianaTheLastHopeEffect() {
         super(Outcome.ReturnToHand);
         this.staticText = ", then you may return a creature card from your graveyard to your hand";
     }

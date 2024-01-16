@@ -19,7 +19,7 @@ public final class PhyrexianGolemToken extends TokenImpl {
         toughness = new MageInt(3);
     }
 
-    protected PhyrexianGolemToken(final PhyrexianGolemToken token) {
+    private PhyrexianGolemToken(final PhyrexianGolemToken token) {
         super(token);
     }
 

@@ -98,7 +98,7 @@ class TheBigIdeaReplacementEffect extends ReplacementEffectImpl {
 
 class TheBigIdeaEffect extends OneShotEffect {
 
-    public TheBigIdeaEffect() {
+    TheBigIdeaEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Roll a six-sided die. Create a number of 1/1 red Brainiac creature tokens equal to the result";
     }

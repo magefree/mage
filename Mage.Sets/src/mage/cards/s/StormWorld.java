@@ -38,7 +38,7 @@ public final class StormWorld extends CardImpl {
 
 class StormWorldEffect extends OneShotEffect {
 
-    public StormWorldEffect() {
+    StormWorldEffect() {
         super(Outcome.Benefit);
         this.staticText = "{this} deals X damage to that player, where X is 4 minus the number of cards in their hand";
     }

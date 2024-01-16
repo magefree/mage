@@ -45,7 +45,7 @@ public final class SilburlindSnapper extends CardImpl {
 
 class SilburlindSnapperEffect extends RestrictionEffect {
 
-    public SilburlindSnapperEffect() {
+    SilburlindSnapperEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "{this} can't attack unless you've cast a noncreature spell this turn";
     }

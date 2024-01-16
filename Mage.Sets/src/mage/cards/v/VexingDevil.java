@@ -43,7 +43,7 @@ public final class VexingDevil extends CardImpl {
 
 class VexingDevilEffect extends OneShotEffect {
 
-    public VexingDevilEffect() {
+    VexingDevilEffect() {
         super(Outcome.Neutral);
         staticText = "any opponent may have it deal 4 damage to them. If a player does, sacrifice {this}";
     }

@@ -63,7 +63,7 @@ public final class HammerOfNazahn extends CardImpl {
 
 class HammerOfNazahnEffect extends OneShotEffect {
 
-    public HammerOfNazahnEffect() {
+    HammerOfNazahnEffect() {
         super(Outcome.Benefit);
         this.staticText = "you may attach that Equipment to target creature you control";
     }

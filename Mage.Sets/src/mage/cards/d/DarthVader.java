@@ -58,7 +58,7 @@ public final class DarthVader extends CardImpl {
 
 class UnboostCreaturesDefendingPlayerEffect extends ContinuousEffectImpl {
 
-    public UnboostCreaturesDefendingPlayerEffect() {
+    UnboostCreaturesDefendingPlayerEffect() {
         super(Duration.EndOfTurn, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.UnboostCreature);
         staticText = "creatures defending player controls get -1/-1 until end of turn for each +1/+1 counter on Darth Vader";
     }

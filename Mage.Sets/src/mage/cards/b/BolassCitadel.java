@@ -49,9 +49,7 @@ public final class BolassCitadel extends CardImpl {
 
         // {T}, Sacrifice ten nonland permanents: Each opponent loses 10 life.
         Ability ability = new SimpleActivatedAbility(new LoseLifeOpponentsEffect(10), new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(
-                10, 10, filter, true
-        )));
+        ability.addCost(new SacrificeTargetCost(10, filter));
         this.addAbility(ability);
     }
 

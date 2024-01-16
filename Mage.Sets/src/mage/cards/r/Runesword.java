@@ -68,7 +68,7 @@ public final class Runesword extends CardImpl {
 
 class RuneswordCreateTriggeredAbilityEffect extends OneShotEffect {
 
-    public RuneswordCreateTriggeredAbilityEffect() {
+    RuneswordCreateTriggeredAbilityEffect() {
         super(Outcome.PutCreatureInPlay);
         staticText = "When that creature leaves the battlefield this turn, sacrifice {this}";
     }

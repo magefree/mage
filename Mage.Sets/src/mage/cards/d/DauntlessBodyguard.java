@@ -56,7 +56,7 @@ public final class DauntlessBodyguard extends CardImpl {
 
 class DauntlessBodyguardGainAbilityEffect extends OneShotEffect {
 
-    public DauntlessBodyguardGainAbilityEffect() {
+    DauntlessBodyguardGainAbilityEffect() {
         super(Outcome.AddAbility);
         this.staticText = "The chosen creature gains indestructible until end of turn";
     }

@@ -39,7 +39,7 @@ public final class GreatWall extends CardImpl {
 
 class GreatWallEffect extends AsThoughEffectImpl {
 
-    public GreatWallEffect() {
+    GreatWallEffect() {
         super(AsThoughEffectType.BLOCK_PLAINSWALK, Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Creatures with plainswalk can be blocked as though they didn't have plainswalk";
     }

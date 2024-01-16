@@ -49,7 +49,7 @@ public final class AjanisChosen extends CardImpl {
 
 class AjanisChosenEffect extends OneShotEffect {
 
-    public AjanisChosenEffect() {
+    AjanisChosenEffect() {
         super(Outcome.PutCreatureInPlay);
         staticText = "create a 2/2 white Cat creature token. If that enchantment is an Aura, you may attach it to the token";
     }

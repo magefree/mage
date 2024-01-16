@@ -164,6 +164,7 @@ public final class TalesOfMiddleEarthCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Herald's Horn", 280, Rarity.UNCOMMON, mage.cards.h.HeraldsHorn.class));
         cards.add(new SetCardInfo("Heroic Intervention", 249, Rarity.RARE, mage.cards.h.HeroicIntervention.class));
         cards.add(new SetCardInfo("Hinterland Harbor", 317, Rarity.RARE, mage.cards.h.HinterlandHarbor.class));
+        cards.add(new SetCardInfo("Hithlain Rope", 76, Rarity.RARE, mage.cards.h.HithlainRope.class));
         cards.add(new SetCardInfo("Homeward Path", 365, Rarity.MYTHIC, mage.cards.h.HomewardPath.class));
         cards.add(new SetCardInfo("Horizon Canopy", 366, Rarity.MYTHIC, mage.cards.h.HorizonCanopy.class));
         cards.add(new SetCardInfo("Hornet Queen", 250, Rarity.RARE, mage.cards.h.HornetQueen.class));
@@ -177,7 +178,7 @@ public final class TalesOfMiddleEarthCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Ishkanah, Grafwidow", 516, Rarity.MYTHIC, mage.cards.i.IshkanahGrafwidow.class));
         cards.add(new SetCardInfo("Isolated Chapel", 318, Rarity.RARE, mage.cards.i.IsolatedChapel.class));
         cards.add(new SetCardInfo("Karakas", 367, Rarity.MYTHIC, mage.cards.k.Karakas.class));
-        cards.add(new SetCardInfo("Kenrith, the Returned King", 515, Rarity.RARE, mage.cards.k.KenrithTheReturnedKing.class));
+        cards.add(new SetCardInfo("Kenrith, the Returned King", 515, Rarity.MYTHIC, mage.cards.k.KenrithTheReturnedKing.class));
         cards.add(new SetCardInfo("Knollspine Dragon", 224, Rarity.RARE, mage.cards.k.KnollspineDragon.class));
         cards.add(new SetCardInfo("Kor Haven", 368, Rarity.MYTHIC, mage.cards.k.KorHaven.class));
         cards.add(new SetCardInfo("Languish", 202, Rarity.RARE, mage.cards.l.Languish.class));

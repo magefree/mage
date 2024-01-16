@@ -130,7 +130,7 @@ class PerplexingChimeraTriggeredAbility extends TriggeredAbilityImpl {
 
 class PerplexingChimeraControlExchangeEffect extends OneShotEffect {
 
-    public PerplexingChimeraControlExchangeEffect() {
+    PerplexingChimeraControlExchangeEffect() {
         super(Outcome.Benefit);
         this.staticText = "exchange control of {this} and that spell. If you do, you may choose new targets for the spell";
     }
@@ -169,7 +169,7 @@ class PerplexingChimeraControlExchangeEffect extends OneShotEffect {
 
 class PerplexingChimeraControlEffect extends ContinuousEffectImpl {
 
-    public PerplexingChimeraControlEffect() {
+    PerplexingChimeraControlEffect() {
         super(Duration.Custom, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
         staticText = "PerplexingChimeraControlEffect";
     }

@@ -43,7 +43,7 @@ public final class TreacherousTerrain extends CardImpl {
 
 class TreacherousTerrainEffect extends OneShotEffect {
 
-    public TreacherousTerrainEffect() {
+    TreacherousTerrainEffect() {
         super(Outcome.Damage);
         staticText = "{this} deals damage to each opponent equal to the number of lands that player controls";
     }

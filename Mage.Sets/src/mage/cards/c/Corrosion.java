@@ -95,7 +95,7 @@ class CorrosionUpkeepEffect extends OneShotEffect {
 
 class CorrosionRemoveCountersEffect extends OneShotEffect {
 
-    public CorrosionRemoveCountersEffect() {
+    CorrosionRemoveCountersEffect() {
         super(Outcome.Neutral);
         staticText = "remove all rust counters from all permanents";
     }

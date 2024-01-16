@@ -44,7 +44,7 @@ public final class DreadSlaver extends CardImpl {
 
 class DreadSlaverEffect extends OneShotEffect {
 
-    public DreadSlaverEffect() {
+    DreadSlaverEffect() {
         super(Outcome.Benefit);
         staticText = "return it to the battlefield under your control. That creature is a black Zombie in addition to its other colors and types";
     }

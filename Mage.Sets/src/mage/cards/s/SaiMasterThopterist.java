@@ -46,9 +46,7 @@ public final class SaiMasterThopterist extends CardImpl {
                 new DrawCardSourceControllerEffect(1),
                 new ManaCostsImpl<>("{1}{U}")
         );
-        ability.addCost(new SacrificeTargetCost(
-                new TargetControlledPermanent(2, 2, filter2, false)
-        ));
+        ability.addCost(new SacrificeTargetCost(2, filter2));
         this.addAbility(ability);
     }
 

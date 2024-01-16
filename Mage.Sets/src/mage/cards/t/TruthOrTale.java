@@ -42,7 +42,7 @@ public final class TruthOrTale extends CardImpl {
 
 class TruthOrTaleEffect extends OneShotEffect {
 
-    public TruthOrTaleEffect() {
+    TruthOrTaleEffect() {
         super(Outcome.DrawCard);
         this.staticText = "Reveal the top five cards of your library and separate them into two piles. An opponent chooses one of those piles. Put a card from the chosen pile into your hand, then put all other cards revealed this way on the bottom of your library in any order";
     }

@@ -38,7 +38,7 @@ public final class PriestOfYawgmoth extends CardImpl {
                 false,
                 new HighestCMCOfPermanentValue(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT, true)
         );
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT)));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT));
         this.addAbility(ability);
     }
 

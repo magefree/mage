@@ -39,7 +39,7 @@ public final class RoilingTerrain extends CardImpl {
 
 class RoilingTerrainEffect extends OneShotEffect {
 
-    public RoilingTerrainEffect() {
+    RoilingTerrainEffect() {
         super(Outcome.Sacrifice);
         this.staticText = "Destroy target land, then {this} deals damage to that land's controller equal to the number of land cards in that player's graveyard";
     }

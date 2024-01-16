@@ -42,7 +42,7 @@ public final class StunningReversal extends CardImpl {
 
 class StunningReversalEffect extends ReplacementEffectImpl {
 
-    public StunningReversalEffect() {
+    StunningReversalEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit);
         staticText = "The next time you would lose the game this turn, instead draw seven cards and your life total becomes 1";
     }

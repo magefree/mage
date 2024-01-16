@@ -40,7 +40,7 @@ public final class DreamCache extends CardImpl {
 
 class DreamCacheEffect extends OneShotEffect {
 
-    public DreamCacheEffect() {
+    DreamCacheEffect() {
         super(Outcome.DrawCard);
         this.staticText = "Draw three cards, then put two cards from your hand both on top of your library or both on the bottom of your library.";
     }

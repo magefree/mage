@@ -58,7 +58,7 @@ public final class QueenAllenalOfRuadach extends CardImpl {
 
 class QueenAllenalOfRuadachEffect extends ReplacementEffectImpl {
 
-    public QueenAllenalOfRuadachEffect() {
+    QueenAllenalOfRuadachEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         this.staticText = "If one or more creature tokens would be created under your control, those tokens plus a 1/1 white Soldier creature token are created instead.";
     }

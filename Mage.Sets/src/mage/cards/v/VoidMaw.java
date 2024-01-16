@@ -59,7 +59,7 @@ public final class VoidMaw extends CardImpl {
 
 class VoidMawEffect extends ReplacementEffectImpl {
 
-    public VoidMawEffect() {
+    VoidMawEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "If another creature would die, exile it instead";
     }

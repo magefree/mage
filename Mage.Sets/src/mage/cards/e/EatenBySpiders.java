@@ -50,7 +50,7 @@ public final class EatenBySpiders extends CardImpl {
 
 class EatenBySpidersEffect extends OneShotEffect {
 
-    public EatenBySpidersEffect() {
+    EatenBySpidersEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "Destroy target creature with flying and all Equipment attached to that creature";
     }

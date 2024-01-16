@@ -38,7 +38,7 @@ public final class DistantMemories extends CardImpl {
 
 class DistantMemoriesEffect extends OneShotEffect {
 
-    public DistantMemoriesEffect() {
+    DistantMemoriesEffect() {
         super(Outcome.DrawCard);
         this.staticText = "Search your library for a card, exile it, then shuffle. "
                 + "Any opponent may have you put that card into "

@@ -53,7 +53,7 @@ public final class JandorsRing extends CardImpl {
 
 class JandorsRingEffect extends OneShotEffect {
 
-    public JandorsRingEffect() {
+    JandorsRingEffect() {
         super(Outcome.Discard);
         staticText = "Draw a card";
     }

@@ -34,7 +34,7 @@ public final class ArcaneSpyglass extends CardImpl {
         // {2}, {T} , Sacrifice a land: Draw a card and put a charge counter on Arcane Spyglass.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        ability.addCost(new SacrificeTargetCost(filter));
         ability.addEffect(new AddCountersSourceEffect(CounterType.CHARGE.createInstance()).concatBy("and"));
         this.addAbility(ability);
 

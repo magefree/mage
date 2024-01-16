@@ -23,6 +23,7 @@ import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInYourGraveyard;
+import mage.target.common.TargetSacrifice;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.ArrayList;
@@ -99,13 +100,12 @@ class DarkIntimationsEffect extends OneShotEffect {
             return false;
         }
         List<UUID> perms = new ArrayList<>();
-        filter.add(TargetController.YOU.getControllerPredicate());
         for (UUID playerId : game.getOpponents(source.getControllerId())) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
-                TargetPermanent target = new TargetPermanent(1, 1, filter, true);
+                TargetSacrifice target = new TargetSacrifice(filter);
                 if (target.canChoose(player.getId(), source, game)) {
-                    player.chooseTarget(Outcome.Sacrifice, target, source, game);
+                    player.choose(Outcome.Sacrifice, target, source, game);
                     perms.addAll(target.getTargets());
                 }
             }
@@ -138,7 +138,7 @@ class DarkIntimationsEffect extends OneShotEffect {
 
 class DarkIntimationsGraveyardEffect extends OneShotEffect {
 
-    public DarkIntimationsGraveyardEffect() {
+    DarkIntimationsGraveyardEffect() {
         super(Outcome.Benefit);
         this.staticText = "exile {this} from your graveyard. That planeswalker enters the battlefield with an additional loyalty counter on it";
     }

@@ -45,7 +45,7 @@ public final class SeasonsPast extends CardImpl {
 
 class SeasonsPastEffect extends OneShotEffect {
 
-    public SeasonsPastEffect() {
+    SeasonsPastEffect() {
         super(Outcome.ReturnToHand);
         this.staticText = "Return any number of cards with different mana values from your graveyard to your hand";
     }

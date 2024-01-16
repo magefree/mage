@@ -48,7 +48,7 @@ public final class Reverberation extends CardImpl {
 
 class ReverberationEffect extends ReplacementEffectImpl {
 
-    public ReverberationEffect() {
+    ReverberationEffect() {
         super(Duration.EndOfTurn, Outcome.RedirectDamage);
         staticText = "All damage that would be dealt this turn by target sorcery spell is dealt to that spell's controller instead";
     }

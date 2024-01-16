@@ -39,7 +39,7 @@ public final class HandToHand extends CardImpl {
 
 class HandToHandEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public HandToHandEffect() {
+    HandToHandEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "During combat, players can't cast instant spells or activate abilities that aren't mana abilities";
     }

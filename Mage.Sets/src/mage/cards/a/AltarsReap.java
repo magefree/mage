@@ -21,7 +21,7 @@ public final class AltarsReap extends CardImpl {
 
 
         // As an additional cost to cast Altar's Reap, sacrifice a creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1, StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT, true)));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
         // Draw two cards.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));
     }

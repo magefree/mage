@@ -52,7 +52,7 @@ public final class LaccolithRig extends CardImpl {
 
 class LaccolithRigEffect extends OneShotEffect {
 
-    public LaccolithRigEffect() {
+    LaccolithRigEffect() {
         super(Outcome.Damage);
         this.staticText = "it deal damage equal to its power to target creature";
     }

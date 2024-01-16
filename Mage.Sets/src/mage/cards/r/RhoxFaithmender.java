@@ -52,7 +52,7 @@ public final class RhoxFaithmender extends CardImpl {
 
 class RhoxFaithmenderEffect extends ReplacementEffectImpl {
 
-    public RhoxFaithmenderEffect() {
+    RhoxFaithmenderEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "If you would gain life, you gain twice that much life instead";
     }

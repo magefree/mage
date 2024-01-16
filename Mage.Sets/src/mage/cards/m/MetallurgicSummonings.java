@@ -64,7 +64,7 @@ public final class MetallurgicSummonings extends CardImpl {
 
 class MetallurgicSummoningsTokenEffect extends OneShotEffect {
 
-    public MetallurgicSummoningsTokenEffect() {
+    MetallurgicSummoningsTokenEffect() {
         super(Outcome.PutCreatureInPlay);
         staticText = "create an X/X colorless Construct artifact creature token, where X is that spell's mana value";
     }

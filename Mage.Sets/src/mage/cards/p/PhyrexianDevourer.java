@@ -85,7 +85,7 @@ class PhyrexianDevourerStateTriggeredAbility extends StateTriggeredAbility {
 
 class PhyrexianDevourerEffect extends OneShotEffect {
 
-    public PhyrexianDevourerEffect() {
+    PhyrexianDevourerEffect() {
         super(Outcome.BoostCreature);
         this.staticText = "Put X +1/+1 counters on {this}, where X is the exiled card's mana value";
     }

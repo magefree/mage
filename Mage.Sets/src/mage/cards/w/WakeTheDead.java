@@ -67,7 +67,7 @@ enum WakeTheDeadAdjuster implements TargetAdjuster {
 
 class WakeTheDeadReturnFromGraveyardToBattlefieldTargetEffect extends OneShotEffect {
 
-    public WakeTheDeadReturnFromGraveyardToBattlefieldTargetEffect() {
+    WakeTheDeadReturnFromGraveyardToBattlefieldTargetEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Return X target creature cards from your graveyard to the battlefield. Sacrifice those creatures at the beginning of the next end step";
     }

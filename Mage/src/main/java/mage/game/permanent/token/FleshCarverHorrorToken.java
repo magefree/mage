@@ -22,7 +22,7 @@ public final class FleshCarverHorrorToken extends TokenImpl {
         toughness = new MageInt(xValue);
     }
 
-    protected FleshCarverHorrorToken(final FleshCarverHorrorToken token) {
+    private FleshCarverHorrorToken(final FleshCarverHorrorToken token) {
         super(token);
     }
 

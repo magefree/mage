@@ -54,7 +54,7 @@ public final class Recommission extends CardImpl {
 
 class RecommissionEffect extends OneShotEffect {
 
-    public RecommissionEffect() {
+    RecommissionEffect() {
         super(Outcome.PutCardInPlay);
         this.staticText = "Return target artifact or creature card with mana value 3 or less from your graveyard to the battlefield. If a creature enters the battlefield this way, it enters with an additional +1/+1 counter on it.";
     }
@@ -83,7 +83,7 @@ class RecommissionEffect extends OneShotEffect {
 
 class RecommissionCounterEffect extends ReplacementEffectImpl {
 
-    public RecommissionCounterEffect() {
+    RecommissionCounterEffect() {
         super(Duration.EndOfStep, Outcome.BoostCreature);
     }
 

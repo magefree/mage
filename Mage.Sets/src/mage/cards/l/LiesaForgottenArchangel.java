@@ -74,7 +74,7 @@ public final class LiesaForgottenArchangel extends CardImpl {
 
 class LiesaForgottenArchangelReturnToHandEffect extends OneShotEffect {
 
-    public LiesaForgottenArchangelReturnToHandEffect() {
+    LiesaForgottenArchangelReturnToHandEffect() {
         super(Outcome.ReturnToHand);
         staticText = "return that card to its owner's hand at the beginning of the next end step";
     }

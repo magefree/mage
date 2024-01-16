@@ -52,7 +52,7 @@ public final class LightUpTheNight extends CardImpl {
 
 class LightUpTheNightEffect extends OneShotEffect {
 
-    public LightUpTheNightEffect() {
+    LightUpTheNightEffect() {
         super(Outcome.Damage);
         staticText = "{this} deals X damage to any target. It deals X plus 1 damage instead if that target is a creature or planeswalker";
     }

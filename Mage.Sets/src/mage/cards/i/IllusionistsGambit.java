@@ -46,7 +46,7 @@ public final class IllusionistsGambit extends CardImpl {
 
 class IllusionistsGambitRemoveFromCombatEffect extends OneShotEffect {
 
-    public IllusionistsGambitRemoveFromCombatEffect() {
+    IllusionistsGambitRemoveFromCombatEffect() {
         super(Outcome.Benefit);
         this.staticText = "Remove all attacking creatures from combat and untap them. After this phase, there is an additional combat phase. Each of those creatures attacks that combat if able. They can't attack you or planeswalkers you control that combat";
     }

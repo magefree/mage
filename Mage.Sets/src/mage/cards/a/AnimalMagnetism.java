@@ -40,7 +40,7 @@ public final class AnimalMagnetism extends CardImpl {
 
 class AnimalMagnetismEffect extends OneShotEffect {
 
-    public AnimalMagnetismEffect() {
+    AnimalMagnetismEffect() {
         super(Outcome.Benefit);
         this.staticText = "Reveal the top five cards of your library. An opponent chooses a creature card from among them. Put that card onto the battlefield and the rest into your graveyard";
     }

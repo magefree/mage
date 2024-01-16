@@ -49,7 +49,7 @@ public final class BenevolentUnicorn extends CardImpl {
 
 class BenevolentUnicornEffect extends ReplacementEffectImpl {
 
-    public BenevolentUnicornEffect() {
+    BenevolentUnicornEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "If a spell would deal damage to a permanent or player, it deals that much damage minus 1 to that permanent or player instead.";
     }

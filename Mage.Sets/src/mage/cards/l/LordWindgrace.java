@@ -79,7 +79,7 @@ public final class LordWindgrace extends CardImpl {
 
 class LordWindgraceEffect extends OneShotEffect {
 
-    public LordWindgraceEffect() {
+    LordWindgraceEffect() {
         super(Outcome.Benefit);
         this.staticText = "discard a card, then draw a card. "
                 + "If a land card is discarded this way, draw an additional card";

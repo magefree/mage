@@ -44,9 +44,8 @@ public final class EldraziMonument extends CardImpl {
 
         // At the beginning of your upkeep, sacrifice a creature. If you can't, sacrifice Eldrazi Monument.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new SacrificeSourceUnlessPaysEffect(new SacrificeTargetCost(
-                        new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT)
-                )).setText("sacrifice a creature. If you can't, sacrifice {this}"), TargetController.YOU, false
+                new SacrificeSourceUnlessPaysEffect(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT)
+                ).setText("sacrifice a creature. If you can't, sacrifice {this}"), TargetController.YOU, false
         ));
     }
 

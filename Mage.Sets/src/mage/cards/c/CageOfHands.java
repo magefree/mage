@@ -54,7 +54,7 @@ public final class CageOfHands extends CardImpl {
 
 class CageOfHandsEffect extends RestrictionEffect {
 
-    public CageOfHandsEffect() {
+    CageOfHandsEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "Enchanted creature can't attack or block";
     }

@@ -59,7 +59,7 @@ public final class AzorsGateway extends CardImpl {
 
 class AzorsGatewayEffect extends OneShotEffect {
 
-    public AzorsGatewayEffect() {
+    AzorsGatewayEffect() {
         super(Outcome.Benefit);
         this.staticText = "Draw a card, then exile a card from your hand. " +
                 "If cards with five or more different mana values are exiled with {this}, " +

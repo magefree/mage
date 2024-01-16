@@ -52,7 +52,7 @@ public final class StupefyingTouch extends CardImpl {
 
 class CantActivateAbilitiesAttachedEffect extends RestrictionEffect {
 
-    public CantActivateAbilitiesAttachedEffect() {
+    CantActivateAbilitiesAttachedEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "Enchanted creature's activated abilities can't be activated";
     }

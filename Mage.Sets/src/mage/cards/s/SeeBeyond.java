@@ -40,7 +40,7 @@ public final class SeeBeyond extends CardImpl {
 
 class SeeBeyondEffect extends OneShotEffect {
 
-    public SeeBeyondEffect() {
+    SeeBeyondEffect() {
         super(Outcome.DrawCard);
         staticText = "Draw two cards, then shuffle a card from your hand into your library";
     }

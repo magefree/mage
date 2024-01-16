@@ -19,7 +19,7 @@ public final class Knight31RedToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    protected Knight31RedToken(final Knight31RedToken token) {
+    private Knight31RedToken(final Knight31RedToken token) {
         super(token);
     }
 

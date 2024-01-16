@@ -78,8 +78,11 @@ class LiberatedLivestockEffect extends OneShotEffect {
                 filter.add(SubType.AURA.getPredicate());
                 filter.add(new AuraCardCanAttachToPermanentId(tokenPermanent.getId()));
                 Cards auraCards = new CardsImpl();
-                auraCards.addAllCards(controller.getHand().getCards(filter, game));
-                auraCards.addAllCards(controller.getGraveyard().getCards(filter, game));
+                auraCards.addAllCards(controller.getHand().getCards(filter, source.getControllerId(), source, game));
+                auraCards.addAllCards(controller.getGraveyard().getCards(filter, source.getControllerId(), source, game));
+                if (auraCards.isEmpty()) {
+                    continue;
+                }
                 TargetCard target = new TargetCard(0, 1, Zone.ALL, filter);
                 target.withNotTarget(true);
                 controller.chooseTarget(outcome, auraCards, target, source, game);

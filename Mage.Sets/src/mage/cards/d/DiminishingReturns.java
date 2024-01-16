@@ -39,7 +39,7 @@ public final class DiminishingReturns extends CardImpl {
 
 class DiminishingReturnsEffect extends OneShotEffect {
 
-    public DiminishingReturnsEffect() {
+    DiminishingReturnsEffect() {
         super(Outcome.Neutral);
         staticText = "You exile the top ten cards of your library. Then each player draws up to seven cards.";
     }

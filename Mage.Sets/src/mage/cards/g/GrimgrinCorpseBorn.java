@@ -53,7 +53,7 @@ public final class GrimgrinCorpseBorn extends CardImpl {
 
         // Sacrifice another creature: Untap Grimgrin and put a +1/+1 counter on it.
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapSourceEffect(),
-                new SacrificeTargetCost(new TargetControlledCreaturePermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE)));
+                new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE));
         ability.addEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance()).setText("and put a +1/+1 counter on it"));
         this.addAbility(ability);
 

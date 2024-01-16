@@ -70,7 +70,7 @@ public final class GyrusWakerOfCorpses extends CardImpl {
 
 class GyrusWakerOfCorpsesEffect extends OneShotEffect {
 
-    public GyrusWakerOfCorpsesEffect() {
+    GyrusWakerOfCorpsesEffect() {
         super(Outcome.Copy);
         this.staticText = "exile target creature card with lesser power from your graveyard. If you do, create a token that's a copy of that card and that's tapped and attacking. Exile the token at the end of combat.";
     }

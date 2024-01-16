@@ -33,7 +33,7 @@ public final class LotusVale extends CardImpl {
 
         // If Lotus Vale would enter the battlefield, sacrifice two untapped lands instead. If you do, put Lotus Vale onto the battlefield. If you don't, put it into its owner's graveyard.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new EnterBattlefieldPayCostOrPutGraveyardEffect(
-                new SacrificeTargetCost(new TargetControlledPermanent(2, 2, filter, false)))));
+                new SacrificeTargetCost(2, filter))));
 
         // {tap}: Add three mana of any one color.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(3), new TapSourceCost()));

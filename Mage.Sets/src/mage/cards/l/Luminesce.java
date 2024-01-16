@@ -38,7 +38,7 @@ public final class Luminesce extends CardImpl {
 
 class LuminescePreventionEffect extends PreventionEffectImpl {
 
-    public LuminescePreventionEffect() {
+    LuminescePreventionEffect() {
         super(Duration.EndOfTurn, Integer.MAX_VALUE, false, false);
         staticText = "Prevent all damage that black sources and red sources would deal this turn";
     }

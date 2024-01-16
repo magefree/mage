@@ -119,7 +119,7 @@ class PrimordialMistCost extends CostImpl {
 
 class PrimordialMistCastFromExileEffect extends AsThoughEffectImpl {
 
-    public PrimordialMistCastFromExileEffect() {
+    PrimordialMistCastFromExileEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
         staticText = "Exile a face-down permanent you control face up: You may play that card this turn.";
     }

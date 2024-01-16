@@ -45,7 +45,7 @@ public final class BloomTender extends CardImpl {
 
 class BloomTenderEffect extends ManaEffect {
 
-    public BloomTenderEffect() {
+    BloomTenderEffect() {
         super();
         staticText = "For each color among permanents you control, add one mana of that color";
     }

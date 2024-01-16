@@ -59,11 +59,11 @@ import java.util.*;
 import java.util.Map.Entry;
 
 /**
- * suitable for two player games and some multiplayer games
+ * AI: basic server side bot with simple actions support (game, draft, construction/sideboarding)
  *
  * @author BetaSteward_at_googlemail.com, JayDi85
  */
-public class ComputerPlayer extends PlayerImpl implements Player {
+public class ComputerPlayer extends PlayerImpl {
 
     private static final Logger log = Logger.getLogger(ComputerPlayer.class);
     private long lastThinkTime = 0; // msecs for last AI actions calc
@@ -192,9 +192,10 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             return false;
         }
 
-        if (target.getOriginalTarget() instanceof TargetControlledPermanent) {
+        if (target.getOriginalTarget() instanceof TargetControlledPermanent
+                || target.getOriginalTarget() instanceof TargetSacrifice) {
             List<Permanent> targets;
-            TargetControlledPermanent origTarget = (TargetControlledPermanent) target.getOriginalTarget();
+            TargetPermanent origTarget = (TargetPermanent) target.getOriginalTarget();
             targets = threats(abilityControllerId, source, origTarget.getFilter(), game, target.getTargets());
             if (!outcome.isGood()) {
                 Collections.reverse(targets);
@@ -689,8 +690,9 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             return false;
         }
 
-        if (target.getOriginalTarget() instanceof TargetControlledPermanent) {
-            TargetControlledPermanent origTarget = (TargetControlledPermanent) target.getOriginalTarget();
+        if (target.getOriginalTarget() instanceof TargetControlledPermanent
+                || target.getOriginalTarget() instanceof TargetSacrifice) {
+            TargetPermanent origTarget = (TargetPermanent) target.getOriginalTarget();
             List<Permanent> targets;
             targets = threats(abilityControllerId, source, origTarget.getFilter(), game, target.getTargets());
             if (!outcome.isGood()) {

@@ -47,7 +47,7 @@ public final class ShadowbornApostle extends CardImpl {
         // {B}, Sacrifice six creatures named Shadowborn Apostle: Search your library for a Demon creature and put it onto the battlefield. Then shuffle your library.
         Effect effect = new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), false);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{B}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(6,6,filterApostle, false)));
+        ability.addCost(new SacrificeTargetCost(6, filterApostle));
         this.addAbility(ability);
     }
 

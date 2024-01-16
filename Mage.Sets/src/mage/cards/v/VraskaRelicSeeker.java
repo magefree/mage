@@ -61,7 +61,7 @@ public final class VraskaRelicSeeker extends CardImpl {
 
 class VraskaRelicSeekerLifeTotalEffect extends OneShotEffect {
 
-    public VraskaRelicSeekerLifeTotalEffect() {
+    VraskaRelicSeekerLifeTotalEffect() {
         super(Outcome.Benefit);
         staticText = "Target player's life total becomes 1";
     }

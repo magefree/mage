@@ -96,7 +96,7 @@ class YedoraGraveGardenerEffect extends OneShotEffect {
 
 class YedoraGraveGardenerContinuousEffect extends ContinuousEffectImpl {
 
-    public YedoraGraveGardenerContinuousEffect() {
+    YedoraGraveGardenerContinuousEffect() {
         super(Duration.Custom, Layer.CopyEffects_1, SubLayer.FaceDownEffects_1b, Outcome.Neutral);
     }
 

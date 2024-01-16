@@ -50,7 +50,7 @@ public final class YawgmothDemon extends CardImpl {
 
 class YawgmothDemonEffect extends OneShotEffect {
 
-    public YawgmothDemonEffect() {
+    YawgmothDemonEffect() {
         super(Outcome.Detriment);
         this.staticText = "you may sacrifice an artifact. If you don't, tap {this} and it deals 2 damage to you";
     }

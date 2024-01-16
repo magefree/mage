@@ -60,7 +60,7 @@ public final class ScrapWelder extends CardImpl {
 
 class ScrapWelderEffect extends OneShotEffect {
 
-    public ScrapWelderEffect() {
+    ScrapWelderEffect() {
         super(Outcome.PutCardInPlay);
         this.staticText = "Return target artifact card with mana value less than X from your graveyard to the battlefield. It gains haste until end of turn";
     }

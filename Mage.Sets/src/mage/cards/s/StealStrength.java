@@ -53,7 +53,7 @@ public final class StealStrength extends CardImpl {
 
 class StealStrengthEffect extends ContinuousEffectImpl {
 
-    public StealStrengthEffect() {
+    StealStrengthEffect() {
         super(Duration.EndOfTurn, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
         this.staticText = "Target creature gets +1/+1 until end of turn. Another target creature gets -1/-1 until end of turn";
     }

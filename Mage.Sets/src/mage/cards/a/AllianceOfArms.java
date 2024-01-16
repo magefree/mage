@@ -42,7 +42,7 @@ public final class AllianceOfArms extends CardImpl {
 
 class AllianceOfArmsEffect extends OneShotEffect {
 
-    public AllianceOfArmsEffect() {
+    AllianceOfArmsEffect() {
         super(Outcome.Detriment);
         this.staticText = "<i>Join forces</i> &mdash; Starting with you, each player may pay any amount of mana. Each player " +
                 "creates X 1/1 white Soldier creature tokens, where X is the total amount of mana paid this way";

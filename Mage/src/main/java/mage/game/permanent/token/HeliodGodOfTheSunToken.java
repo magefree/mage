@@ -22,7 +22,7 @@ public final class HeliodGodOfTheSunToken extends TokenImpl {
         this.toughness = new MageInt(1);
     }
 
-    protected HeliodGodOfTheSunToken(final HeliodGodOfTheSunToken token) {
+    private HeliodGodOfTheSunToken(final HeliodGodOfTheSunToken token) {
         super(token);
     }
 

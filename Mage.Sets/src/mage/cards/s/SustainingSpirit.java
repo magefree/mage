@@ -49,7 +49,7 @@ public final class SustainingSpirit extends CardImpl {
 
 class SustainingSpiritReplacementEffect extends ReplacementEffectImpl {
 
-    public SustainingSpiritReplacementEffect() {
+    SustainingSpiritReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Damage that would reduce your life total to less than 1 reduces it to 1 instead";
     }

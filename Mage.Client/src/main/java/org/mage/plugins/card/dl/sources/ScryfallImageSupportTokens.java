@@ -2160,6 +2160,7 @@ public class ScryfallImageSupportTokens {
             put("WOC/Monster", "https://api.scryfall.com/cards/twoc/1/en?format=image");
             put("WOC/Ox", "https://api.scryfall.com/cards/twoc/8/en?format=image");
             put("WOC/Pegasus", "https://api.scryfall.com/cards/twoc/9/en?format=image");
+            put("WOC/Pirate", "https://api.scryfall.com/cards/twoc/12/en?format=image");
             put("WOC/Royal", "https://api.scryfall.com/cards/twoc/2/en?format=image");
             put("WOC/Saproling", "https://api.scryfall.com/cards/twoc/15/en?format=image");
             put("WOC/Sorcerer", "https://api.scryfall.com/cards/twoc/3/en?format=image");
@@ -2168,6 +2169,25 @@ public class ScryfallImageSupportTokens {
 
             // 8ED
             put("8ED/Rukh", "https://api.scryfall.com/cards/p03/7/en?format=image");
+
+            // LCI
+            put("LCI/Angel", "https://api.scryfall.com/cards/tlci/2/en?format=image");
+            put("LCI/Bat", "https://api.scryfall.com/cards/tlci/6/en?format=image");
+            put("LCI/Dinosaur/1", "https://api.scryfall.com/cards/tlci/10/en?format=image");
+            put("LCI/Dinosaur/2", "https://api.scryfall.com/cards/tlci/9/en?format=image");
+            put("LCI/Dinosaur Egg", "https://api.scryfall.com/cards/tlci/11/en?format=image");
+            put("LCI/Fungus", "https://api.scryfall.com/cards/tlci/7/en?format=image");
+            put("LCI/Fungus Dinosaur", "https://api.scryfall.com/cards/tlci/12/en?format=image");
+            put("LCI/Gnome", "https://api.scryfall.com/cards/tlci/16/en?format=image");
+            put("LCI/Gnome Soldier", "https://api.scryfall.com/cards/tlci/3/en?format=image");
+            put("LCI/Golem", "https://api.scryfall.com/cards/tlci/13/en?format=image");
+            put("LCI/Map", "https://api.scryfall.com/cards/tlci/17/en?format=image");
+            put("LCI/Merfolk", "https://api.scryfall.com/cards/tlci/5/en?format=image");
+            put("LCI/Skeleton Pirate", "https://api.scryfall.com/cards/tlci/8/en?format=image");
+            put("LCI/Spirit", "https://api.scryfall.com/cards/tlci/14/en?format=image");
+            put("LCI/Treasure", "https://api.scryfall.com/cards/tlci/18/en?format=image");
+            put("LCI/Vampire", "https://api.scryfall.com/cards/tlci/4/en?format=image");
+            put("LCI/Vampire Demon", "https://api.scryfall.com/cards/tlci/15/en?format=image");
 
             // generate supported sets
             supportedSets.clear();

@@ -40,7 +40,7 @@ public final class RallyTheHorde extends CardImpl {
 
 class RallyTheHordeEffect extends OneShotEffect {
 
-    public RallyTheHordeEffect() {
+    RallyTheHordeEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Exile the top card of your library. Exile the top card of your library. Exile the top card of your library. If the last card exiled isn't a land card, repeat this process. Create a 1/1 red Warrior creature token for each nonland card exiled this way.";
     }

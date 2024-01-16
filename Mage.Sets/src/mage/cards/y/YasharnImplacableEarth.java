@@ -114,7 +114,7 @@ class YasharnImplacableEarthTarget extends TargetCardInLibrary {
 
 class YasharnImplacableEarthEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public YasharnImplacableEarthEffect() {
+    YasharnImplacableEarthEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Neutral);
         staticText = "Players can't pay life or sacrifice nonland permanents to cast spells or activate abilities";
     }

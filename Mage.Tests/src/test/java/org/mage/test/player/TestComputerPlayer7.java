@@ -11,12 +11,14 @@ import mage.target.Target;
 import mage.target.TargetCard;
 
 /**
+ * AI: helper class for tests
+ * <p>
  * Copied-pasted methods from TestComputerPlayer, see docs in there
  *
  * @author JayDi85
  */
 
-public class TestComputerPlayer7 extends ComputerPlayer7 {
+public final class TestComputerPlayer7 extends ComputerPlayer7 {
 
     private TestPlayer testPlayerLink;
 

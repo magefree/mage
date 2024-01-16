@@ -1,4 +1,3 @@
-
 package mage.game.match;
 
 import mage.cards.decks.DeckCardInfo;
@@ -20,8 +19,8 @@ import java.util.*;
 public class MatchOptions implements Serializable {
 
     protected String name;
-    protected MultiplayerAttackOption attackOption;
-    protected RangeOfInfluence range;
+    protected MultiplayerAttackOption attackOption = MultiplayerAttackOption.LEFT;
+    protected RangeOfInfluence range = RangeOfInfluence.ALL;
     protected int winsNeeded;
     protected int freeMulligans;
     protected boolean customStartLifeEnabled;
@@ -35,7 +34,7 @@ public class MatchOptions implements Serializable {
     protected boolean multiPlayer;
     protected int numSeats;
     protected String password;
-    protected SkillLevel skillLevel;
+    protected SkillLevel skillLevel = SkillLevel.CASUAL;
     protected boolean rollbackTurnsAllowed;
     protected boolean spectatorsAllowed;
     protected boolean planeChase;
@@ -49,8 +48,8 @@ public class MatchOptions implements Serializable {
     protected MatchBufferTime matchBufferTime = MatchBufferTime.NONE; // additional/buffer time limit for each priority before real time ticking starts
     protected MulliganType mulliganType = MulliganType.GAME_DEFAULT;
 
-    protected Collection<DeckCardInfo> perPlayerEmblemCards;
-    protected Collection<DeckCardInfo> globalEmblemCards;
+    protected Collection<DeckCardInfo> perPlayerEmblemCards = Collections.emptySet();
+    protected Collection<DeckCardInfo> globalEmblemCards = Collections.emptySet();
 
     public MatchOptions(String name, String gameType, boolean multiPlayer, int numSeats) {
         this.name = name;
@@ -58,8 +57,6 @@ public class MatchOptions implements Serializable {
         this.password = "";
         this.multiPlayer = multiPlayer;
         this.numSeats = numSeats;
-        this.perPlayerEmblemCards = Collections.emptySet();
-        this.globalEmblemCards = Collections.emptySet();
     }
 
     public void setNumSeats(int numSeats) {

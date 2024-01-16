@@ -50,7 +50,7 @@ public final class SkittishValesk extends CardImpl {
 
 class SkittishValeskEffect extends OneShotEffect {
 
-    public SkittishValeskEffect() {
+    SkittishValeskEffect() {
         super(Outcome.Neutral);
         staticText = "flip a coin. If you lose the flip, turn {this} face down";
     }

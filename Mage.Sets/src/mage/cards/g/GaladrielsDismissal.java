@@ -58,7 +58,7 @@ public final class GaladrielsDismissal extends CardImpl {
 
 class GaladrielsDismissalPhaseOutTargetPlayerEffect extends OneShotEffect {
 
-    public GaladrielsDismissalPhaseOutTargetPlayerEffect() {
+    GaladrielsDismissalPhaseOutTargetPlayerEffect() {
         super(Outcome.Benefit);
         this.staticText = "each creature target player controls phases out. <i>(Treat phased-out creatures and anything attached to them as though they don't exist until their controller's next turn.)</i>";
     }

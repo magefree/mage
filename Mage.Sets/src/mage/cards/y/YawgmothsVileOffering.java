@@ -63,7 +63,7 @@ public final class YawgmothsVileOffering extends CardImpl {
 
 class YawgmothsVileOfferingEffect extends OneShotEffect {
 
-    public YawgmothsVileOfferingEffect() {
+    YawgmothsVileOfferingEffect() {
         super(Outcome.Benefit);
         this.staticText = "Put up to one target creature or planeswalker card from a graveyard onto the battlefield under your control. Destroy up to one target creature or planeswalker";
     }

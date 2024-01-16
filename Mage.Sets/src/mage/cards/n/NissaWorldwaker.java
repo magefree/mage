@@ -66,7 +66,7 @@ public final class NissaWorldwaker extends CardImpl {
 
 class NissaWorldwakerSearchEffect extends OneShotEffect {
 
-    public NissaWorldwakerSearchEffect() {
+    NissaWorldwakerSearchEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Search your library for any number of basic land cards, put them onto the battlefield, then shuffle. Those lands become 4/4 Elemental creatures with trample. They're still lands";
     }

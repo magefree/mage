@@ -56,7 +56,7 @@ public final class BatwingBrume extends CardImpl {
 
 class BatwingBrumeEffect extends OneShotEffect {
 
-    public BatwingBrumeEffect() {
+    BatwingBrumeEffect() {
         super(Outcome.LoseLife);
     }
 

@@ -55,7 +55,7 @@ public final class OviyaPashiriSageLifecrafter extends CardImpl {
 
 class OviyaPashiriSageLifecrafterEffect extends OneShotEffect {
 
-    public OviyaPashiriSageLifecrafterEffect() {
+    OviyaPashiriSageLifecrafterEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Create an X/X colorless Construct artifact creature token, where X is the number of creatures you control";
     }

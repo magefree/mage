@@ -44,7 +44,7 @@ public final class ShroudedLore extends CardImpl {
 
 class ShroudedLoreEffect extends OneShotEffect {
 
-    public ShroudedLoreEffect() {
+    ShroudedLoreEffect() {
         super(Outcome.Benefit);
         staticText = "Target opponent chooses a card in your graveyard. You may pay {B}. If you do, repeat this process except that opponent can't choose a card already chosen for {this}. Then put the last chosen card into your hand.";
     }

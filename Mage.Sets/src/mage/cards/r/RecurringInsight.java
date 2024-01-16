@@ -42,7 +42,7 @@ public final class RecurringInsight extends CardImpl {
 
 class RecurringInsightEffect extends OneShotEffect {
 
-    public RecurringInsightEffect() {
+    RecurringInsightEffect() {
         super(Outcome.DrawCard);
         staticText = "Draw cards equal to the number of cards in target opponent's hand";
     }

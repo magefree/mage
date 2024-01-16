@@ -58,7 +58,7 @@ public final class WheelOfSunAndMoon extends CardImpl {
 
 class WheelOfSunAndMoonEffect extends ReplacementEffectImpl {
 
-    public WheelOfSunAndMoonEffect() {
+    WheelOfSunAndMoonEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "If a card would be put into enchanted player's graveyard from anywhere, instead that card is revealed and put on the bottom of that player's library";
     }

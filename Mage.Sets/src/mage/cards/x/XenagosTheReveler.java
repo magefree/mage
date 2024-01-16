@@ -57,7 +57,7 @@ public final class XenagosTheReveler extends CardImpl {
 
 class XenagosManaEffect extends OneShotEffect {
 
-    public XenagosManaEffect() {
+    XenagosManaEffect() {
         super(Outcome.PutManaInPool);
         this.staticText = "Add X mana in any combination of {R} and/or {G}, where X is the number of creatures you control";
     }
@@ -96,7 +96,7 @@ class XenagosManaEffect extends OneShotEffect {
 
 class XenagosExileEffect extends OneShotEffect {
 
-    public XenagosExileEffect() {
+    XenagosExileEffect() {
         super(Outcome.PutCardInPlay);
         this.staticText = "Exile the top seven cards of your library. You may put any number of creature and/or land cards from among them onto the battlefield";
     }

@@ -63,7 +63,7 @@ public final class CoffinQueen extends CardImpl {
 
 class CoffinQueenCreateDelayedTriggerEffect extends OneShotEffect {
 
-    public CoffinQueenCreateDelayedTriggerEffect() {
+    CoffinQueenCreateDelayedTriggerEffect() {
         super(Outcome.Detriment);
         this.staticText = "When {this} becomes untapped or you lose control of {this}, exile that creature.";
     }

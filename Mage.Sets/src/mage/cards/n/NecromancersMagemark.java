@@ -70,7 +70,7 @@ public final class NecromancersMagemark extends CardImpl {
 
 class NecromancersMagemarkEffect extends ReplacementEffectImpl {
 
-    public NecromancersMagemarkEffect() {
+    NecromancersMagemarkEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "If a creature you control that's enchanted would die, return it to its owner's hand instead";
     }

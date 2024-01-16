@@ -81,7 +81,7 @@ class PlanarChaosUpkeepEffect extends OneShotEffect {
 
 class PlanarChaosCastAllEffect extends OneShotEffect {
 
-    public PlanarChaosCastAllEffect() {
+    PlanarChaosCastAllEffect() {
         super(Outcome.Benefit);
         this.staticText = "that player flips a coin. If they lose the flip, counter that spell";
     }

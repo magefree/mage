@@ -46,7 +46,7 @@ public final class SinProdder extends CardImpl {
 
 class SinProdderEffect extends OneShotEffect {
 
-    public SinProdderEffect() {
+    SinProdderEffect() {
         super(Outcome.DrawCard);
         this.staticText = "reveal the top card of your library. Any opponent may have you put that card into your graveyard. If a player does, "
                 + "{this} deals damage to that player equal to that card's mana value. Otherwise, put that card into your hand";

@@ -137,7 +137,7 @@ class TheGreatWorkCastFromGraveyardEffect extends AsThoughEffectImpl {
 
 class TheGreatWorkReplacementEffect extends ReplacementEffectImpl {
 
-    public TheGreatWorkReplacementEffect() {
+    TheGreatWorkReplacementEffect() {
         super(Duration.EndOfTurn, Outcome.Exile);
         staticText = "if a spell cast this way would be put into a graveyard, exile it instead";
     }

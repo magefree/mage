@@ -64,7 +64,7 @@ public final class PalaceJailer extends CardImpl {
 
 class PalaceJailerExileEffect extends OneShotEffect {
 
-    public PalaceJailerExileEffect() {
+    PalaceJailerExileEffect() {
         super(Outcome.Benefit);
         this.staticText = "exile target creature an opponent controls until an opponent becomes the monarch. <i>(That creature returns under its owner's control.)</i>";
     }
@@ -118,7 +118,7 @@ class OnOpponentBecomesMonarchReturnExiledToBattlefieldAbility extends DelayedTr
 
 class PalaceJailerReturnExiledPermanentsEffect extends OneShotEffect {
 
-    public PalaceJailerReturnExiledPermanentsEffect() {
+    PalaceJailerReturnExiledPermanentsEffect() {
         super(Outcome.Benefit);
         this.staticText = "Return exiled creature";
     }

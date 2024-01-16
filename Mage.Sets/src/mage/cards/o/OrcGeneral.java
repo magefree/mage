@@ -44,7 +44,7 @@ public final class OrcGeneral extends CardImpl {
 
         // {tap}, Sacrifice another Orc or Goblin: Other Orc creatures get +1/+1 until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.EndOfTurn, filterOrc, true), new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filterOrcOrGoblin)));
+        ability.addCost(new SacrificeTargetCost(filterOrcOrGoblin));
         this.addAbility(ability);
     }
 

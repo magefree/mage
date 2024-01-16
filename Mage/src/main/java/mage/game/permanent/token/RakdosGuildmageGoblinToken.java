@@ -20,7 +20,7 @@ public final class RakdosGuildmageGoblinToken extends TokenImpl {
         this.addAbility(HasteAbility.getInstance());
     }
 
-    protected RakdosGuildmageGoblinToken(final RakdosGuildmageGoblinToken token) {
+    private RakdosGuildmageGoblinToken(final RakdosGuildmageGoblinToken token) {
         super(token);
     }
 

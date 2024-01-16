@@ -366,6 +366,11 @@ public interface Ability extends Controllable, Serializable {
 
     List<Watcher> getWatchers();
 
+    /**
+     * Add watcher blueprint (real watcher will be created on card/ability init)
+     *
+     * @param watcher
+     */
     void addWatcher(Watcher watcher);
 
     /**

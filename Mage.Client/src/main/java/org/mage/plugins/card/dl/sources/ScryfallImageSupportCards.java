@@ -469,6 +469,7 @@ public class ScryfallImageSupportCards {
             add("C20"); // Commander 2020 Edition
             add("M21"); // Core Set 2021
             add("JMP"); // Jumpstart
+            add("PH19"); // 2019 Heroes of the Realm
             add("2XM"); // Double Masters
             add("AKR"); // Amonkhet Remastered
             add("ZNR"); // Zendikar Rising

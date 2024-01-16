@@ -49,7 +49,7 @@ public final class Equipoise extends CardImpl {
 
 class EquipoiseEffect extends OneShotEffect {
 
-    public EquipoiseEffect() {
+    EquipoiseEffect() {
         super(Outcome.Benefit);
         this.staticText = "for each land target player controls in excess of the number you control, choose a land they control, then the chosen permanents phase out. Repeat this process for artifacts and creatures";
     }

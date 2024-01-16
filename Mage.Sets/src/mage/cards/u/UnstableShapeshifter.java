@@ -56,7 +56,7 @@ public final class UnstableShapeshifter extends CardImpl {
 
 class UnstableShapeshifterEffect extends OneShotEffect {
 
-    public UnstableShapeshifterEffect() {
+    UnstableShapeshifterEffect() {
         super(Outcome.Copy);
         this.staticText = "{this} becomes a copy of that creature, except it has this ability";
     }

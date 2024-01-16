@@ -65,7 +65,7 @@ public final class HavengulLich extends CardImpl {
 //allow card in graveyard to be played
 class HavengulLichPlayEffect extends AsThoughEffectImpl {
 
-    public HavengulLichPlayEffect() {
+    HavengulLichPlayEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
         staticText = "You may cast target creature card in a graveyard this turn";
     }
@@ -102,7 +102,7 @@ class HavengulLichPlayEffect extends AsThoughEffectImpl {
 //create delayed triggered ability to watch for card being played
 class HavengulLichPlayedEffect extends OneShotEffect {
 
-    public HavengulLichPlayedEffect() {
+    HavengulLichPlayedEffect() {
         super(Outcome.PutCreatureInPlay);
     }
 

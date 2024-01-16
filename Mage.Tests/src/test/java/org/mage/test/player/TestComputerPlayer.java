@@ -11,10 +11,8 @@ import mage.target.Target;
 import mage.target.TargetCard;
 
 /**
- * @author JayDi85
- */
-
-/**
+ * AI: helper class for tests
+ * <p>
  * Mock class to inject test player support in the inner choice calls, e.g. in PlayerImpl. If you
  * want to set up inner choices then override it here.
  * <p>
@@ -29,9 +27,11 @@ import mage.target.TargetCard;
  * <p>
  * If you implement set up of random results for tests (die roll, flip coin, etc) and want to support AI tests
  * (same random results in simulated games) then override same methods in SimulatedPlayer2 too
+ *
+ * @author JayDi85
  */
 
-public class TestComputerPlayer extends ComputerPlayer {
+public final class TestComputerPlayer extends ComputerPlayer {
 
     private TestPlayer testPlayerLink;
 

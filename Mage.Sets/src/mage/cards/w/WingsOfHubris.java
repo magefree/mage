@@ -61,7 +61,7 @@ public final class WingsOfHubris extends CardImpl {
 
 class WingsOfHubrisEffect extends OneShotEffect {
 
-    public WingsOfHubrisEffect() {
+    WingsOfHubrisEffect() {
         super(Outcome.Detriment);
         this.staticText = "Equipped creature can't be blocked this turn. Sacrifice it at the beginning of the next end step";
     }

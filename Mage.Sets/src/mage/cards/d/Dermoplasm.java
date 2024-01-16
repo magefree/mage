@@ -57,7 +57,7 @@ public final class Dermoplasm extends CardImpl {
 
 class DermoplasmEffect extends OneShotEffect {
 
-    public DermoplasmEffect() {
+    DermoplasmEffect() {
         super(Outcome.Benefit);
         staticText = "you may put a creature card with a morph ability from your hand onto the battlefield face up. If you do, return {this} to its owner's hand";
     }

@@ -47,7 +47,7 @@ public final class BloodBaronOfVizkopa extends CardImpl {
 
 class BloodBaronOfVizkopaEffect extends ContinuousEffectImpl {
 
-    public BloodBaronOfVizkopaEffect() {
+    BloodBaronOfVizkopaEffect() {
         super(Duration.WhileOnBattlefield, Outcome.BoostCreature);
         staticText = "As long as you have 30 or more life and an opponent has 10 or less life, {this} gets +6/+6 and has flying";
     }

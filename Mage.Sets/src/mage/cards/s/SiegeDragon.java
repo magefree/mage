@@ -106,7 +106,7 @@ class SiegeDragonAttacksTriggeredAbility extends TriggeredAbilityImpl {
 
 class SiegeDragonDamageEffect extends OneShotEffect {
 
-    public SiegeDragonDamageEffect() {
+    SiegeDragonDamageEffect() {
         super(Outcome.Damage);
     }
     

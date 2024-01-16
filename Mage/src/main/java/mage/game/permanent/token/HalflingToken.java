@@ -18,7 +18,7 @@ public final class HalflingToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    protected HalflingToken(final HalflingToken token) {
+    private HalflingToken(final HalflingToken token) {
         super(token);
     }
 

@@ -41,7 +41,7 @@ public final class ChimericCoils extends CardImpl {
 
 class ChimericCoilsEffect extends ContinuousEffectImpl {
 
-    public ChimericCoilsEffect() {
+    ChimericCoilsEffect() {
         super(Duration.Custom, Outcome.BecomeCreature);
         staticText = "{this} becomes an X/X Construct artifact creature";
     }

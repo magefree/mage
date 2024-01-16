@@ -55,7 +55,7 @@ public final class GoldnightCastigator extends CardImpl {
 
 class GoldnightCastigatorDoubleDamageEffect extends ReplacementEffectImpl {
 
-    public GoldnightCastigatorDoubleDamageEffect() {
+    GoldnightCastigatorDoubleDamageEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Damage);
         staticText = "If a source would deal damage to you, it deals double that damage to you instead."
             + "<br>If a source would deal damage to {this}, it deals double that damage to {this} instead.";

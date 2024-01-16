@@ -53,7 +53,7 @@ public final class GOTOJAIL extends CardImpl {
 
 class GoToJailExileEffect extends OneShotEffect {
 
-    public GoToJailExileEffect() {
+    GoToJailExileEffect() {
         super(Outcome.Benefit);
         this.staticText = "exile target creature an opponent controls until {this} leaves the battlefield.";
     }
@@ -118,7 +118,7 @@ class GoToJailTriggeredAbility extends TriggeredAbilityImpl {
 
 class GoToJailUpkeepEffect extends OneShotEffect {
 
-    public GoToJailUpkeepEffect() {
+    GoToJailUpkeepEffect() {
         super(Outcome.Sacrifice);
         this.staticText = "that player rolls two six-sided dice. If they roll doubles, sacrifice {this}";
     }

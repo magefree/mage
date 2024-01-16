@@ -54,7 +54,7 @@ public final class Oakenform extends CardImpl {
 
 class OakenformEffect extends ContinuousEffectImpl {
 
-    public OakenformEffect() {
+    OakenformEffect() {
         super(Duration.WhileOnBattlefield, Outcome.BoostCreature);
         staticText = "Enchanted creature gets +3/+3";
     }

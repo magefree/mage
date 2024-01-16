@@ -98,7 +98,7 @@ class DeadIronSledgeTriggeredAbility extends TriggeredAbilityImpl {
 
 class DeadIronSledgeDestroyEffect extends OneShotEffect {
 
-    public DeadIronSledgeDestroyEffect() {
+    DeadIronSledgeDestroyEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "destroy both creatures";
     }

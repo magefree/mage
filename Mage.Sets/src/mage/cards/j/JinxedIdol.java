@@ -50,7 +50,7 @@ public final class JinxedIdol extends CardImpl {
 
 class JinxedIdolEffect extends ContinuousEffectImpl {
 
-    public JinxedIdolEffect() {
+    JinxedIdolEffect() {
         super(Duration.Custom, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
         staticText = "Target opponent gains control of {this}";
     }

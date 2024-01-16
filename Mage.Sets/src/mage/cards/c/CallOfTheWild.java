@@ -39,7 +39,7 @@ public final class CallOfTheWild extends CardImpl {
 
 class CallOfTheWildEffect extends OneShotEffect {
 
-    public CallOfTheWildEffect() {
+    CallOfTheWildEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Reveal the top card of your library. If it's a creature card, put it onto the battlefield. Otherwise, put it into your graveyard";
     }

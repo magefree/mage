@@ -111,7 +111,7 @@ class TaigamOjutaiMasterTriggeredAbility extends DelayedTriggeredAbility {
 
 class TaigamOjutaiMasterGainReboundEffect extends ContinuousEffectImpl {
 
-    public TaigamOjutaiMasterGainReboundEffect() {
+    TaigamOjutaiMasterGainReboundEffect() {
         super(Duration.Custom, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         staticText = "that spell gains rebound";
     }

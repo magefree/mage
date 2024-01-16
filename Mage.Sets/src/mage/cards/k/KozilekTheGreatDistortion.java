@@ -73,7 +73,7 @@ public final class KozilekTheGreatDistortion extends CardImpl {
 
 class KozilekDrawEffect extends OneShotEffect {
 
-    public KozilekDrawEffect() {
+    KozilekDrawEffect() {
         super(Outcome.DrawCard);
         this.staticText = "if you have fewer than seven cards in hand, draw cards equal to the difference";
     }

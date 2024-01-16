@@ -44,7 +44,7 @@ public final class PraetorsCounsel extends CardImpl {
 
 class PraetorsCounselEffect extends OneShotEffect {
 
-    public PraetorsCounselEffect() {
+    PraetorsCounselEffect() {
         super(Outcome.DrawCard);
         this.staticText = "Return all cards from your graveyard to your hand";
     }

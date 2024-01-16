@@ -56,7 +56,7 @@ public final class GoblinGoliath extends CardImpl {
 
 class GoblinGoliathDamageEffect extends ReplacementEffectImpl {
 
-    public GoblinGoliathDamageEffect() {
+    GoblinGoliathDamageEffect() {
         super(Duration.EndOfTurn, Outcome.Damage);
         staticText = "If a source you control would deal damage to an opponent this turn, it deals double that damage to that player instead.";
     }

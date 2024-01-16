@@ -25,8 +25,11 @@ public class Watchers extends HashMap<String, Watcher> {
         return new Watchers(this);
     }
 
-    public void add(Watcher watcher) {
-        putIfAbsent(watcher.getKey(), watcher);
+    /**
+     * Must add copy of the original watcher, e.g. from an ability
+     */
+    public void add(Watcher newWatcher) {
+        putIfAbsent(newWatcher.getKey(), newWatcher);
     }
 
     public void watch(GameEvent event, Game game) {

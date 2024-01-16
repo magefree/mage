@@ -51,7 +51,7 @@ public final class HeroOfLeinaTower extends CardImpl {
 
 class HeroOfLeinaTowerEffect extends OneShotEffect {
 
-    public HeroOfLeinaTowerEffect() {
+    HeroOfLeinaTowerEffect() {
         super(Outcome.BoostCreature);
         staticText = "you may pay {X}. If you do, put X +1/+1 counters on {this}";
     }

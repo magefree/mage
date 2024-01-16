@@ -59,7 +59,7 @@ enum FirestormAdjuster implements TargetAdjuster {
 
 class FirestormEffect extends OneShotEffect {
 
-    public FirestormEffect() {
+    FirestormEffect() {
         super(Outcome.Benefit);
         staticText = "{this} deals X damage to each of X targets";
     }

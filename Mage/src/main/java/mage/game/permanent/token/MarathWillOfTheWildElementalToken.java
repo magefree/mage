@@ -20,7 +20,7 @@ public final class MarathWillOfTheWildElementalToken extends TokenImpl {
         toughness = new MageInt(0);
     }
 
-    protected MarathWillOfTheWildElementalToken(final MarathWillOfTheWildElementalToken token) {
+    private MarathWillOfTheWildElementalToken(final MarathWillOfTheWildElementalToken token) {
         super(token);
     }
 

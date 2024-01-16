@@ -54,7 +54,7 @@ public final class MeletisCharlatan extends CardImpl {
 
 class MeletisCharlatanCopyTargetSpellEffect extends OneShotEffect {
 
-    public MeletisCharlatanCopyTargetSpellEffect() {
+    MeletisCharlatanCopyTargetSpellEffect() {
         super(Outcome.Copy);
         staticText = "The controller of target instant or sorcery spell copies it. That player may choose new targets for the copy";
     }

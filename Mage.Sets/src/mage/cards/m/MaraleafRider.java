@@ -30,7 +30,7 @@ public final class MaraleafRider extends CardImpl {
 
         // Sacrifice a Food: Target creature blocks Maraleaf Rider this turn if able.
         Ability ability = new SimpleActivatedAbility(
-                new MustBeBlockedByTargetSourceEffect(), new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_FOOD))
+                new MustBeBlockedByTargetSourceEffect(), new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_FOOD)
         );
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

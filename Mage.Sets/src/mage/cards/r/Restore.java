@@ -45,7 +45,7 @@ public final class Restore extends CardImpl {
 
 class RestoreEffect extends OneShotEffect {
 
-    public RestoreEffect() {
+    RestoreEffect() {
         super(Outcome.PutLandInPlay);
         this.staticText = "Put target land card from a graveyard onto the battlefield under your control";
     }

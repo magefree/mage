@@ -46,7 +46,7 @@ public final class PurgingScythe extends CardImpl {
 
 class PurgingScytheEffect extends OneShotEffect {
 
-    public PurgingScytheEffect() {
+    PurgingScytheEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "{this} deals 2 damage to the creature with the least toughness. "
                 + "If two or more creatures are tied for least toughness, you choose one of them";

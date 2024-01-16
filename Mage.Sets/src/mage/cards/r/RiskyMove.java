@@ -51,7 +51,7 @@ public final class RiskyMove extends CardImpl {
 
 class RiskyMoveGetControlEffect extends OneShotEffect {
 
-    public RiskyMoveGetControlEffect() {
+    RiskyMoveGetControlEffect() {
         super(Outcome.GainControl);
         this.staticText = "that player gains control of {this}";
     }
@@ -127,7 +127,7 @@ class RiskyMoveTriggeredAbility extends TriggeredAbilityImpl {
 
 class RiskyMoveFlipCoinEffect extends OneShotEffect {
 
-    public RiskyMoveFlipCoinEffect() {
+    RiskyMoveFlipCoinEffect() {
         super(Outcome.Detriment);
         this.staticText = "choose a creature you control and an opponent. Flip a coin. If you lose the flip, that opponent gains control of that creature";
     }

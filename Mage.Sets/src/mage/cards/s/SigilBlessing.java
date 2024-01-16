@@ -44,7 +44,7 @@ public final class SigilBlessing extends CardImpl {
 
 class SigilBlessingBoostControlledEffect extends ContinuousEffectImpl {
 
-    public SigilBlessingBoostControlledEffect() {
+    SigilBlessingBoostControlledEffect() {
         super(Duration.EndOfTurn, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
         staticText = "Until end of turn, target creature you control gets +3/+3 and other creatures you control get +1/+1";
     }

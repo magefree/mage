@@ -46,7 +46,7 @@ public final class MaliciousEclipse extends CardImpl {
  */
 class MaliciousEclipseReplacementEffect extends ReplacementEffectImpl {
 
-    public MaliciousEclipseReplacementEffect() {
+    MaliciousEclipseReplacementEffect() {
         super(Duration.EndOfTurn, Outcome.Exile);
         this.staticText = "If a creature an opponent controls would die this turn, exile it instead";
     }

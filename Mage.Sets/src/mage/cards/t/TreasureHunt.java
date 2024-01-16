@@ -39,7 +39,7 @@ public final class TreasureHunt extends CardImpl {
 
 class TreasureHuntEffect extends OneShotEffect {
 
-    public TreasureHuntEffect() {
+    TreasureHuntEffect() {
         super(Outcome.DrawCard);
         this.staticText = "Reveal cards from the top of your library until you reveal a nonland card, then put all cards revealed this way into your hand";
     }

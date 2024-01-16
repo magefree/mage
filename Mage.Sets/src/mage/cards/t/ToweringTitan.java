@@ -58,7 +58,7 @@ public final class ToweringTitan extends CardImpl {
                         TrampleAbility.getInstance(), Duration.EndOfTurn,
                         StaticFilters.FILTER_PERMANENT_CREATURE
                 ).setText("All creatures gain trample until end of turn"),
-                new SacrificeTargetCost(new TargetControlledPermanent(filter))
+                new SacrificeTargetCost(filter)
         ));
     }
 

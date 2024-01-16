@@ -12,12 +12,14 @@ import mage.cards.Card;
 import mage.constants.Outcome;
 import mage.constants.SpellAbilityType;
 import mage.constants.Zone;
+import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.permanent.CanBeSacrificedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetSacrifice;
 import mage.util.CardUtil;
 
 import java.util.UUID;
@@ -29,6 +31,11 @@ public class EmergeAbility extends SpellAbility {
 
     private final ManaCosts<ManaCost> emergeCost;
     public static final String EMERGE_ACTIVATION_CREATURE_REFERENCE = "emergeActivationMOR";
+
+    private static final FilterPermanent SAC_FILTER = new FilterControlledCreaturePermanent();
+    static {
+        SAC_FILTER.add(CanBeSacrificedPredicate.instance);
+    }
 
     public EmergeAbility(Card card, String emergeString) {
         super(card.getSpellAbility());
@@ -56,7 +63,7 @@ public class EmergeAbility extends SpellAbility {
             Player controller = game.getPlayer(this.getControllerId());
             if (controller != null) {
                 for (Permanent creature : game.getBattlefield().getActivePermanents(
-                        new FilterControlledCreaturePermanent(), this.getControllerId(), this, game)) {
+                        SAC_FILTER, this.getControllerId(), this, game)) {
                     ManaCost costToPay = CardUtil.reduceCost(emergeCost.copy(), creature.getManaValue());
                     if (costToPay.canPay(this, this, this.getControllerId(), game)) {
                         return new ActivationStatus(new ApprovingObject(this, game));
@@ -91,7 +98,8 @@ public class EmergeAbility extends SpellAbility {
     public boolean activate(Game game, boolean noMana) {
         Player controller = game.getPlayer(this.getControllerId());
         if (controller != null) {
-            TargetPermanent target = new TargetControlledCreaturePermanent(new FilterControlledCreaturePermanent("creature to sacrifice for emerge"));
+            TargetSacrifice target = new TargetSacrifice(StaticFilters.FILTER_PERMANENT_A_CREATURE);
+            target.withChooseHint("to sacrifice for emerge");
             if (controller.choose(Outcome.Sacrifice, target, this, game)) {
                 Permanent creature = game.getPermanent(target.getFirstTarget());
                 if (creature != null) {

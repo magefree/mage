@@ -126,7 +126,7 @@ enum CallerOfTheHuntAdjuster implements CostAdjuster {
 
 class ChooseCreatureTypeEffect extends OneShotEffect {
 
-    public ChooseCreatureTypeEffect(Outcome outcome) {
+    ChooseCreatureTypeEffect(Outcome outcome) {
         super(outcome);
         staticText = "choose a creature type";
     }

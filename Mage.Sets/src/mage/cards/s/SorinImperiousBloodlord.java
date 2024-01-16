@@ -62,7 +62,7 @@ public final class SorinImperiousBloodlord extends CardImpl {
         triggeredAbility.addTarget(new TargetAnyTarget());
         this.addAbility(new LoyaltyAbility(new DoWhenCostPaid(
                 triggeredAbility,
-                new SacrificeTargetCost(new TargetControlledPermanent(filter)),
+                new SacrificeTargetCost(filter),
                 "Sacrifice a Vampire?"
         ), 1));
 

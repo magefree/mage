@@ -48,7 +48,7 @@ public final class Wish extends CardImpl {
 
 class WishEffect extends OneShotEffect {
 
-    public WishEffect() {
+    WishEffect() {
         super(Outcome.Benefit);
         this.staticText = "You may play a card you own from outside the game this turn";
     }
@@ -76,7 +76,7 @@ class WishEffect extends OneShotEffect {
 
 class WishPlayFromSideboardEffect extends AsThoughEffectImpl {
 
-    public WishPlayFromSideboardEffect() {
+    WishPlayFromSideboardEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
     }
 

@@ -59,7 +59,7 @@ public final class InameLifeAspect extends CardImpl {
 
 class InameLifeAspectEffect extends OneShotEffect {
 
-    public InameLifeAspectEffect() {
+    InameLifeAspectEffect() {
         super(Outcome.Benefit);
         this.staticText = "you may exile it. If you do, return any number of target Spirit cards from your graveyard to your hand";
     }

@@ -68,7 +68,7 @@ public final class ChatterfangSquirrelGeneral extends CardImpl {
 
 class ChatterfangSquirrelGeneralReplacementEffect extends ReplacementEffectImpl {
 
-    public ChatterfangSquirrelGeneralReplacementEffect() {
+    ChatterfangSquirrelGeneralReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         this.staticText = "If one or more tokens would be created under your control, those tokens plus that many 1/1 green Squirrel creature tokens are created instead";
     }

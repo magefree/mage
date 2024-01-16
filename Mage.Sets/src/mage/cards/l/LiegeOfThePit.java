@@ -18,6 +18,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetSacrifice;
 
 import java.util.UUID;
 
@@ -55,7 +56,7 @@ public final class LiegeOfThePit extends CardImpl {
 
 class LiegeOfThePitEffect extends OneShotEffect {
 
-    public LiegeOfThePitEffect() {
+    LiegeOfThePitEffect() {
         super(Outcome.Damage);
         this.staticText = "sacrifice a creature other than {this}. If you can't, {this} deals 7 damage to you.";
     }
@@ -83,7 +84,7 @@ class LiegeOfThePitEffect extends OneShotEffect {
         FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creature other than " + sourcePermanent.getName());
         filter.add(AnotherPredicate.instance);
 
-        Target target = new TargetControlledCreaturePermanent(1, 1, filter, true);
+        Target target = new TargetSacrifice(filter);
         if (target.canChoose(player.getId(), source, game)) {
             player.choose(Outcome.Sacrifice, target, source, game);
             Permanent permanent = game.getPermanent(target.getFirstTarget());

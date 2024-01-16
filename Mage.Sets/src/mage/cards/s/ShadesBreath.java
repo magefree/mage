@@ -50,7 +50,7 @@ public final class ShadesBreath extends CardImpl {
 
 class ShadesBreathSetColorEffect extends ContinuousEffectImpl {
 
-    public ShadesBreathSetColorEffect() {
+    ShadesBreathSetColorEffect() {
         super(Duration.EndOfTurn, Layer.ColorChangingEffects_5, SubLayer.NA, Outcome.Benefit);
         staticText = "Until end of turn, each creature you control becomes a black";
     }

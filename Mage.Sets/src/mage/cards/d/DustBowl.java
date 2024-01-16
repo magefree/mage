@@ -11,6 +11,7 @@ import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetNonBasicLandPermanent;
@@ -29,7 +30,7 @@ public final class DustBowl extends CardImpl {
         // {3}, {tap}, Sacrifice a land: Destroy target nonbasic land.
         Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect(), new GenericManaCost(3));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledLandPermanent("a land"))));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_LAND));
         ability.addTarget(new TargetNonBasicLandPermanent().withChooseHint("to destroy"));
         this.addAbility(ability);
     }

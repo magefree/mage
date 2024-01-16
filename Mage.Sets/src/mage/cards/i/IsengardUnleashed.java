@@ -46,7 +46,7 @@ public final class IsengardUnleashed extends CardImpl {
 }
 class IsengardUnleashedTripleDamageEffect extends ReplacementEffectImpl {
 
-    public IsengardUnleashedTripleDamageEffect() {
+    IsengardUnleashedTripleDamageEffect() {
         super(Duration.EndOfTurn, Outcome.Damage);
         staticText = "If a source you control would deal damage this turn to an opponent or a permanent an opponent controls, it deals triple that damage instead.";
     }

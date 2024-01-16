@@ -38,7 +38,7 @@ public final class Vex extends CardImpl {
 
 class VexEffect extends OneShotEffect {
 
-    public VexEffect() {
+    VexEffect() {
         super(Outcome.Neutral);
         this.staticText = "Counter target spell. That spell's controller may draw a card";
     }

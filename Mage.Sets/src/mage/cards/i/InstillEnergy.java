@@ -58,7 +58,7 @@ public final class InstillEnergy extends CardImpl {
 
 class CanAttackAsThoughItHadHasteEnchantedEffect extends AsThoughEffectImpl {
 
-    public CanAttackAsThoughItHadHasteEnchantedEffect(Duration duration) {
+    CanAttackAsThoughItHadHasteEnchantedEffect(Duration duration) {
         super(AsThoughEffectType.ATTACK_AS_HASTE, duration, Outcome.Benefit);
         staticText = "Enchanted creature can attack as though it had haste";
     }

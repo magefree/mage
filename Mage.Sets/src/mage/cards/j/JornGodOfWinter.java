@@ -77,7 +77,7 @@ public final class JornGodOfWinter extends ModalDoubleFacedCard {
 
 class KaldringTheRimestaffEffect extends OneShotEffect {
 
-    public KaldringTheRimestaffEffect() {
+    KaldringTheRimestaffEffect() {
         super(Outcome.Benefit);
         staticText = "You may play target snow permanent card from your graveyard this turn. If you do, it enters the battlefield tapped";
     }
@@ -108,7 +108,7 @@ class KaldringTheRimestaffEffect extends OneShotEffect {
 
 class KaldringTheRimestaffGraveyardEffect extends AsThoughEffectImpl {
 
-    public KaldringTheRimestaffGraveyardEffect() {
+    KaldringTheRimestaffGraveyardEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
     }
 

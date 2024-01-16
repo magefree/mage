@@ -43,9 +43,7 @@ public final class OswaldFiddlebender extends CardImpl {
                 new OswaldFiddlebenderEffect(), new ManaCostsImpl<>("{W}")
         );
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(
-                StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_AN
-        )));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_AN));
         this.addAbility(ability.withFlavorWord("Magical Tinkering"));
     }
 

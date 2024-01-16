@@ -60,7 +60,7 @@ public final class CreepingInn extends CardImpl {
 
 class CreepingInnEffect extends OneShotEffect {
 
-    public CreepingInnEffect() {
+    CreepingInnEffect() {
         super(Outcome.Exile);
         this.staticText = "you may exile a creature card from your graveyard. " +
                 "If you do, each opponent loses X life and you gain X life, " +

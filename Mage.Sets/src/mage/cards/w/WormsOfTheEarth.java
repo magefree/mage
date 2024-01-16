@@ -11,6 +11,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -51,7 +52,7 @@ public final class WormsOfTheEarth extends CardImpl {
 
 class WormsOfTheEarthPlayEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public WormsOfTheEarthPlayEffect() {
+    WormsOfTheEarthPlayEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Neutral);
         this.staticText = "Players can't play lands";
     }
@@ -78,7 +79,7 @@ class WormsOfTheEarthPlayEffect extends ContinuousRuleModifyingEffectImpl {
 
 class WormsOfTheEarthEnterEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public WormsOfTheEarthEnterEffect() {
+    WormsOfTheEarthEnterEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Lands can't enter the battlefield";
     }
@@ -110,7 +111,7 @@ class WormsOfTheEarthEnterEffect extends ContinuousRuleModifyingEffectImpl {
 
 class WormsOfTheEarthDestroyEffect extends OneShotEffect {
 
-    public WormsOfTheEarthDestroyEffect() {
+    WormsOfTheEarthDestroyEffect() {
         super(Outcome.Benefit);
         this.staticText = "any player may sacrifice two lands or have {this} deal 5 damage to that player. If a player does either, destroy {this}";
     }
@@ -124,7 +125,7 @@ class WormsOfTheEarthDestroyEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (controller != null && sourcePermanent != null) {
-            Cost cost = new SacrificeTargetCost(new TargetControlledPermanent(2, 2, new FilterControlledLandPermanent("lands"), false));
+            Cost cost = new SacrificeTargetCost(2, StaticFilters.FILTER_LANDS);
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {

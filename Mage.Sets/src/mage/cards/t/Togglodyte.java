@@ -58,7 +58,7 @@ public final class Togglodyte extends CardImpl {
 
 class TogglodyteEntersEffect extends OneShotEffect {
 
-    public TogglodyteEntersEffect() {
+    TogglodyteEntersEffect() {
         super(Outcome.Neutral);
         staticText = "turned on";
     }
@@ -92,7 +92,7 @@ class TogglodyteEntersEffect extends OneShotEffect {
 
 class TogglodyteToggleEffect extends OneShotEffect {
 
-    public TogglodyteToggleEffect() {
+    TogglodyteToggleEffect() {
         super(Outcome.Neutral);
         staticText = "toggle {this}'s ON/OFF switch";
     }
@@ -124,7 +124,7 @@ class TogglodyteToggleEffect extends OneShotEffect {
 
 class TogglodyteRestrictionEffect extends RestrictionEffect {
 
-    public TogglodyteRestrictionEffect() {
+    TogglodyteRestrictionEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "";
     }
@@ -156,7 +156,7 @@ class TogglodyteRestrictionEffect extends RestrictionEffect {
 
 class TogglodytePreventionEffect extends PreventionEffectImpl {
 
-    public TogglodytePreventionEffect() {
+    TogglodytePreventionEffect() {
         super(Duration.WhileOnBattlefield, Integer.MAX_VALUE, false);
         staticText = "As long as {this} is turned off, it can't attack or block, and prevent all damage it would deal";
     }

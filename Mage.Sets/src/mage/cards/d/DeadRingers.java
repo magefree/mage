@@ -38,7 +38,7 @@ public final class DeadRingers extends CardImpl {
 
 class DeadRingersEffect extends DestroyTargetEffect {
 
-    public DeadRingersEffect() {
+    DeadRingersEffect() {
         super(true);
         staticText = "Destroy two target nonblack creatures unless either one is a color the other isn't. They can't be regenerated.";
     }

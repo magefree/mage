@@ -44,7 +44,7 @@ public final class SuicidalCharge extends CardImpl {
 
 class SuicidalChargeEffect extends RequirementEffect {
 
-    public SuicidalChargeEffect() {
+    SuicidalChargeEffect() {
         super(Duration.EndOfTurn);
         staticText = "Those creatures attack this turn if able";
     }

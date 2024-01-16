@@ -2,53 +2,53 @@ package mage.abilities.common;
 
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.constants.SetTargetPointer;
+import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
 /**
- * @author TheElk801
+ * @author TheElk801, xenohedron
  */
 public class SacrificePermanentTriggeredAbility extends TriggeredAbilityImpl {
 
     private final FilterPermanent filter;
-    private final boolean setTargetPointer;
+    private final SetTargetPointer setTargetPointer;
 
-    public SacrificePermanentTriggeredAbility(Effect effect) {
-        this(effect, StaticFilters.FILTER_PERMANENT_A);
-    }
+    private final TargetController sacrificingPlayer;
 
+    /**
+     * Whenever you sacrifice a "[filter]", "[effect]".
+     * zone = battlefield, setTargetPointer = NONE, optional = false
+     */
     public SacrificePermanentTriggeredAbility(Effect effect, FilterPermanent filter) {
-        this(effect, filter, false);
+        this(Zone.BATTLEFIELD, effect, filter, TargetController.YOU, SetTargetPointer.NONE, false);
     }
 
-    public SacrificePermanentTriggeredAbility(Effect effect, FilterPermanent filter, boolean setTargetPointer) {
-        this(effect, filter, setTargetPointer, false);
-    }
-
-    public SacrificePermanentTriggeredAbility(Effect effect, FilterPermanent filter, boolean setTargetPointer, boolean optional) {
-        this(Zone.BATTLEFIELD, effect, filter, setTargetPointer, optional);
-    }
-
-    public SacrificePermanentTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter, boolean setTargetPointer, boolean optional) {
+    public SacrificePermanentTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter,
+                                              TargetController sacrificingPlayer,
+                                              SetTargetPointer setTargetPointer, boolean optional) {
         super(zone, effect, optional);
         if (Zone.BATTLEFIELD.match(zone)) {
             setLeavesTheBattlefieldTrigger(true);
         }
         this.filter = filter;
         this.setTargetPointer = setTargetPointer;
-        setTriggerPhrase("Whenever you sacrifice " + CardUtil.addArticle(filter.getMessage()) + ", ");
+        this.sacrificingPlayer = sacrificingPlayer;
+        setTriggerPhrase(generateTriggerPhrase());
     }
 
     protected SacrificePermanentTriggeredAbility(final SacrificePermanentTriggeredAbility ability) {
         super(ability);
         this.filter = ability.filter;
         this.setTargetPointer = ability.setTargetPointer;
+        this.sacrificingPlayer = ability.sacrificingPlayer;
     }
 
     @Override
@@ -63,15 +63,59 @@ public class SacrificePermanentTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
+        switch (sacrificingPlayer) {
+            case YOU:
+                if (!event.getPlayerId().equals(getControllerId())) {
+                    return false;
+                }
+                break;
+            case OPPONENT:
+                Player controller = game.getPlayer(getControllerId());
+                if (controller == null || !controller.hasOpponent(event.getPlayerId(), game)) {
+                    return false;
+                }
+                break;
+            case ANY:
+                break;
+            default:
+                throw new IllegalArgumentException("Unsupported TargetController in SacrificePermanentTriggeredAbility: " + sacrificingPlayer);
+        }
         Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
-        if (!isControlledBy(event.getPlayerId()) || permanent == null
-                || !filter.match(permanent, getControllerId(), this, game)) {
+        if (permanent == null || !filter.match(permanent, getControllerId(), this, game)) {
             return false;
         }
         this.getEffects().setValue("sacrificedPermanent", permanent);
-        if (setTargetPointer) {
-            this.getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
+        switch (setTargetPointer) {
+            case PERMANENT:
+                this.getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
+                break;
+            case PLAYER:
+                this.getEffects().setTargetPointer(new FixedTarget(event.getPlayerId(), game));
+                break;
+            case NONE:
+                break;
+            default:
+                throw new IllegalArgumentException("Unsupported SetTargetPointer in SacrificePermanentTriggeredAbility: " + setTargetPointer);
         }
         return true;
     }
+
+    private String generateTriggerPhrase() {
+        String targetControllerText;
+        switch (sacrificingPlayer) {
+            case YOU:
+                targetControllerText = "you sacrifice ";
+                break;
+            case OPPONENT:
+                targetControllerText = "an opponent sacrifices ";
+                break;
+            case ANY:
+                targetControllerText = "a player sacrifices ";
+                break;
+            default:
+                throw new IllegalArgumentException("Unsupported TargetController in SacrificePermanentTriggeredAbility: " + sacrificingPlayer);
+        }
+        return getWhen() + targetControllerText +  CardUtil.addArticle(filter.getMessage()) + ", ";
+    }
+
 }

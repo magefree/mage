@@ -88,8 +88,7 @@ class SacrificeXManaValueCost extends VariableCostImpl implements SacrificeCost 
         FilterControlledPermanent manavaluefilter = new FilterControlledPermanent(filter.getMessage() + " with mana value "+xValue);
         manavaluefilter.add(filter.getPredicates().get(0));
         manavaluefilter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, xValue));
-        TargetControlledPermanent target = new TargetControlledPermanent(manavaluefilter);
-        return new SacrificeTargetCost(target);
+        return new SacrificeTargetCost(manavaluefilter);
     }
 
 }

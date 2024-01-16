@@ -61,7 +61,7 @@ public final class MonkeyMonkeyMonkey extends CardImpl {
 
 class ChooseLetterEffect extends OneShotEffect {
 
-    public ChooseLetterEffect() {
+    ChooseLetterEffect() {
         super(Outcome.Benefit);
         staticText = "choose a letter";
     }

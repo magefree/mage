@@ -49,7 +49,7 @@ public final class RuthlessKnave extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
                 new DrawCardSourceControllerEffect(1),
-                new SacrificeTargetCost(new TargetControlledPermanent(3, 3, filter, false))
+                new SacrificeTargetCost(3, filter)
         ));
     }
 

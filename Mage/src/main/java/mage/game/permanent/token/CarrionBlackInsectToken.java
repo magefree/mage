@@ -20,7 +20,7 @@ public final class CarrionBlackInsectToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    protected CarrionBlackInsectToken(final CarrionBlackInsectToken token) {
+    private CarrionBlackInsectToken(final CarrionBlackInsectToken token) {
         super(token);
     }
 

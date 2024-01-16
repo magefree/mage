@@ -18,7 +18,7 @@ public final class ClueArtifactToken extends TokenImpl {
         this.addAbility(new ClueAbility(false));
     }
 
-    protected ClueArtifactToken(final ClueArtifactToken token) {
+    private ClueArtifactToken(final ClueArtifactToken token) {
         super(token);
     }
 

@@ -35,9 +35,7 @@ public final class DemandingDragon extends CardImpl {
         // When Demanding Dragon enters the battlefield, it deals 5 damage to target opponent unless that player sacrifices a creature.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DoUnlessTargetPlayerOrTargetsControllerPaysEffect(
                 new DamageTargetEffect(5),
-                new SacrificeTargetCost(new TargetControlledCreaturePermanent(
-                        StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT
-                ))
+                new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT)
         ).setText("it deals 5 damage to target opponent unless that player sacrifices a creature"));
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);

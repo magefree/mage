@@ -52,7 +52,7 @@ public final class FesteringWound extends CardImpl {
 
 class FesteringWoundEffect extends OneShotEffect {
 
-    public FesteringWoundEffect() {
+    FesteringWoundEffect() {
         super(Outcome.Detriment);
         this.staticText = "{this} deals X damage to that player, where X is the number of infection counters on {this}";
     }

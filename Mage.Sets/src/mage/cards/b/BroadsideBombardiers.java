@@ -41,8 +41,7 @@ public final class BroadsideBombardiers extends CardImpl {
         Ability ability = new BoastAbility(new DamageTargetEffect(
                 new IntPlusDynamicValue(2, SacrificeCostManaValue.PERMANENT))
                 .setText("{this} deals damage equal to 2 plus the sacrificed permanent's mana value to any target."),
-                new SacrificeTargetCost(new TargetControlledPermanent(
-                    StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE_OR_ARTIFACT_SHORT_TEXT))
+                new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE_OR_ARTIFACT_SHORT_TEXT)
         );
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);

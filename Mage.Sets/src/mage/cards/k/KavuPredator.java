@@ -81,7 +81,7 @@ class KavuPredatorTriggeredAbility extends TriggeredAbilityImpl {
 
 class KavuPredatorEffect extends OneShotEffect {
 
-    public KavuPredatorEffect() {
+    KavuPredatorEffect() {
         super(Outcome.BoostCreature);
         this.staticText = "put that many +1/+1 counters on {this}";
     }

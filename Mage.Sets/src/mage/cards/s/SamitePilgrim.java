@@ -48,7 +48,7 @@ public final class SamitePilgrim extends CardImpl {
 
 class SamitePilgrimPreventDamageToTargetEffect extends PreventionEffectImpl {
 
-    public SamitePilgrimPreventDamageToTargetEffect() {
+    SamitePilgrimPreventDamageToTargetEffect() {
         super(Duration.EndOfTurn, Integer.MAX_VALUE, false, true);
         staticText = "Prevent the next X damage that would be dealt to target creature this turn, where X is the number of basic land types among lands you control.";
     }

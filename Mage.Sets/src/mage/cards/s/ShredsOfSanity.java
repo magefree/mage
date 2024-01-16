@@ -53,7 +53,7 @@ public final class ShredsOfSanity extends CardImpl {
 
 class ShredsOfSanityEffect extends OneShotEffect {
 
-    public ShredsOfSanityEffect() {
+    ShredsOfSanityEffect() {
         super(Outcome.Benefit);
         this.staticText = "return up to one target instant card and up to one target sorcery card from your graveyard to your hand, then discard a card";
     }

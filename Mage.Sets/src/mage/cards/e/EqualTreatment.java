@@ -41,7 +41,7 @@ public final class EqualTreatment extends CardImpl {
 
 class EqualTreatmentEffect extends ReplacementEffectImpl {
 
-    public EqualTreatmentEffect() {
+    EqualTreatmentEffect() {
         super(Duration.EndOfTurn, Outcome.PreventDamage);
         staticText = "If any source would deal 1 or more damage to a permanent or player this turn, it deals 2 damage to that permanent or player instead";
     }

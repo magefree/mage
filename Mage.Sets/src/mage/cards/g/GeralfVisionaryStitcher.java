@@ -69,7 +69,7 @@ public final class GeralfVisionaryStitcher extends CardImpl {
 
 class GeralfVisionaryStitcherEffect extends OneShotEffect {
 
-    public GeralfVisionaryStitcherEffect() {
+    GeralfVisionaryStitcherEffect() {
         super(Outcome.PutCreatureInPlay);
         staticText = "Create an X/X blue Zombie creature token, where X is the sacrificed creature's toughness";
     }

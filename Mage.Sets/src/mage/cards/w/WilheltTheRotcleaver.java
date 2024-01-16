@@ -58,7 +58,7 @@ public final class WilheltTheRotcleaver extends CardImpl {
         // At the beginning of your end step, you may sacrifice a Zombie. If you do, draw a card.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new DoIfCostPaid(
                 new DrawCardSourceControllerEffect(1),
-                new SacrificeTargetCost(new TargetControlledPermanent(filter2))
+                new SacrificeTargetCost(filter2)
         ), TargetController.YOU, false));
     }
 

@@ -141,7 +141,7 @@ enum SunbirdEffigyHint implements Hint {
 
 class SunbirdEffigyEffect extends ManaEffect {
 
-    public SunbirdEffigyEffect() {
+    SunbirdEffigyEffect() {
         super();
         staticText = "for each color among the exiled cards used to craft {this}, add one mana of that color";
     }

@@ -58,7 +58,7 @@ public final class YavimayaDryad extends CardImpl {
 
 class YavimayaDryadEffect extends SearchEffect {
 
-    public YavimayaDryadEffect(TargetCardInLibrary target) {
+    YavimayaDryadEffect(TargetCardInLibrary target) {
         super(target, Outcome.PutLandInPlay);
         staticText = "you may search your library for a Forest card, put it onto the battlefield tapped under target player's control, then shuffle";
     }

@@ -14,7 +14,6 @@ import mage.game.permanent.PermanentCard;
 import mage.game.permanent.PermanentToken;
 import mage.util.CardUtil;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
@@ -193,7 +192,7 @@ public class CopySpellTest extends CardTestPlayerBase {
      * Reported bug: "Silverfur Partisan and fellow wolves did not trigger off
      * of copies of Strength of Arms made by Zada, Hedron Grinder. Not sure
      * about other spells, but I imagine similar results."
-    
+
     // Perhaps someone knows the correct implementation for this test.
     // Just target the Silverfur Partisan and hit done
     // This test works fine in game.  The @Ignore would not work for me either.
@@ -776,6 +775,101 @@ public class CopySpellTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Expedition Map", 1);
         assertPermanentCount(playerB, "Sol Ring", 0);
         assertPermanentCount(playerB, "Expedition Map", 0);
+    }
+
+    /**
+     * Reported bug: https://github.com/magefree/mage/issues/11581
+     * Neverwinter Hydra is copied by Magus Lucea Kane's ability, but the copied version does not enter with +1/+1 counters.
+     */
+    @Test
+    public void test_CopyNeverwinterHydra() {
+        addCard(Zone.BATTLEFIELD, playerA, "Tropical Island", 4 + 2);
+        // <i>Psychic Stimulus</i> &mdash; {T}: Add {C}{C}. When you next cast a spell with {X} in its mana cost
+        // or activate an ability with {X} in its activation cost this turn, copy that spell or ability.
+        // You may choose new targets for the copy.
+        addCard(Zone.BATTLEFIELD, playerA, "Magus Lucea Kane");
+        addCard(Zone.HAND, playerA, "Neverwinter Hydra");
+        // Copy target creature spell you control, except it isn’t legendary if the spell is legendary.
+        addCard(Zone.HAND, playerA, "Double Major");
+
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "<i>Psychic");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Neverwinter Hydra");
+        setChoice(playerA, "X=2");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Double Major", "Neverwinter Hydra");
+
+        // Although the value of X should be the same, the actual dice rolls can be different
+        setDieRollResult(playerA, 3);
+        setDieRollResult(playerA, 4);
+
+        setDieRollResult(playerA, 6);
+        setDieRollResult(playerA, 6);
+
+        setDieRollResult(playerA, 1);
+        setDieRollResult(playerA, 1);
+
+        setStrictChooseMode(true);
+        // Target for Lucea Kane's Spiritual Leader ability
+        addTarget(playerA, "Magus Lucea Kane");
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Neverwinter Hydra", 3);
+    }
+
+    /**
+     * Reported bug: https://github.com/magefree/mage/issues/11581
+     * Neverwinter Hydra is copied by Magus Lucea Kane's ability, but the copied version does not enter with +1/+1 counters.
+     */
+    @Test
+    public void test_CopyHydradoodle() {
+        String hydradoodle = "Hydradoodle";
+
+        addCard(Zone.BATTLEFIELD, playerA, "Tropical Island", 4 + 2);
+        addCard(Zone.HAND, playerA, hydradoodle);
+        // Copy target creature spell you control, except it isn’t legendary if the spell is legendary.
+        addCard(Zone.HAND, playerA, "Double Major");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, hydradoodle);
+        setChoice(playerA, "X=1");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Double Major", hydradoodle);
+
+        setDieRollResult(playerA, 5);
+
+        setDieRollResult(playerA, 1);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, hydradoodle, 2);
+    }
+
+    /**
+     * Reported bug: https://github.com/magefree/mage/issues/11581
+     * Neverwinter Hydra is copied by Magus Lucea Kane's ability, but the copied version does not enter with +1/+1 counters.
+     */
+    @Test
+    public void test_CopyApocalypseHydra() {
+        String apocalypseHydra = "Apocalypse Hydra";
+
+        addCard(Zone.BATTLEFIELD, playerA, "Taiga", 10);
+        addCard(Zone.BATTLEFIELD, playerA, "Magus Lucea Kane");
+
+        addCard(Zone.HAND, playerA, apocalypseHydra);
+
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "<i>Psychic");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, apocalypseHydra);
+        setChoice(playerA, "X=5");
+
+        setStrictChooseMode(true);
+        // Target for Lucea Kane's Spiritual Leader ability
+        addTarget(playerA, "Magus Lucea Kane");
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, apocalypseHydra, 2);
     }
 
     private void abilitySourceMustBeSame(Card card, String infoPrefix) {

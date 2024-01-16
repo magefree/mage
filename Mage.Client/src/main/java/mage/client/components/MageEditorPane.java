@@ -59,7 +59,7 @@ public class MageEditorPane extends JEditorPane {
     }
 
     public void cleanUp() {
-        resetCursor();
+        setCursorToDefault();
     }
 
     private void addHyperlinkHandlers() {
@@ -171,17 +171,23 @@ public class MageEditorPane extends JEditorPane {
             @Override
             public void mouseExited(MouseEvent e) {
                 cardInfo.onMouseExited();
-                resetCursor();
+                setCursorToDefault();
             }
         });
     }
 
-    private void resetCursor() {
-        SwingUtilities.windowForComponent(this).setCursor(Cursor.getDefaultCursor());
+    private void setCursorToDefault() {
+        Window parent = SwingUtilities.windowForComponent(this);
+        if (parent != null) {
+            parent.setCursor(Cursor.getDefaultCursor());
+        }
     }
 
     private void setCursorToHand() {
-        SwingUtilities.windowForComponent(this).setCursor(new Cursor(Cursor.HAND_CURSOR));
+        Window parent = SwingUtilities.windowForComponent(this);
+        if (parent != null) {
+            parent.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        }
     }
 
     private void urlHighlightEnable(Element hyperlinkElement) {
@@ -197,7 +203,7 @@ public class MageEditorPane extends JEditorPane {
             changeUrlTextDecoration(lastUrlElementEntered, "none");
             lastUrlElementEntered = null;
         }
-        resetCursor();
+        setCursorToDefault();
     }
 
     private void changeUrlTextDecoration(Element el, String decoration) {

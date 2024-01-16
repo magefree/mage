@@ -89,7 +89,7 @@ class PossibilityStormTriggeredAbility extends TriggeredAbilityImpl {
 
 class PossibilityStormEffect extends OneShotEffect {
 
-    public PossibilityStormEffect() {
+    PossibilityStormEffect() {
         super(Outcome.Neutral);
         staticText = "that player exiles it, then exiles cards from the top of their library until they exile a card that shares a card type with it. That player may cast that card without paying its mana cost. Then they put all cards exiled with {this} on the bottom of their library in a random order";
     }

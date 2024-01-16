@@ -83,7 +83,7 @@ class FleshAllergyWatcher extends Watcher {
 
 class FleshAllergyEffect extends OneShotEffect {
 
-    public FleshAllergyEffect() {
+    FleshAllergyEffect() {
         super(Outcome.DestroyPermanent);
         staticText = "Its controller loses life equal to the number of creatures that died this turn";
     }

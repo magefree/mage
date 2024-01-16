@@ -47,7 +47,7 @@ public final class FreeRangeChicken extends CardImpl {
 
 class FreeRangeChickenEffect extends OneShotEffect {
 
-    public FreeRangeChickenEffect() {
+    FreeRangeChickenEffect() {
         super(Outcome.BoostCreature);
         this.staticText = "Roll two six-sided dice. If both results are the same, Free-Range Chicken gets +X/+X until end of turn, where X is that result. If the total of those results is equal to any other total you have rolled this turn for Free-Range Chicken, sacrifice it";
     }

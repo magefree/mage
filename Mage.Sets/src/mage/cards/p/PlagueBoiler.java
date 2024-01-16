@@ -55,7 +55,7 @@ public final class PlagueBoiler extends CardImpl {
 
 class PlagueBoilerEffect extends OneShotEffect {
 
-    public PlagueBoilerEffect() {
+    PlagueBoilerEffect() {
         super(Outcome.Detriment);
         this.staticText = "Put a plague counter on {this} or remove a plague counter from it";
     }
@@ -119,7 +119,7 @@ class PlagueBoilerTriggeredAbility extends TriggeredAbilityImpl {
 
 class PlagueBoilerSacrificeDestroyEffect extends OneShotEffect {
 
-    public PlagueBoilerSacrificeDestroyEffect() {
+    PlagueBoilerSacrificeDestroyEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "sacrifice it. If you do, destroy all nonland permanents";
     }

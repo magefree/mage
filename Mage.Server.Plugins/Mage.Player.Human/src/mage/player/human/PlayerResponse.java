@@ -1,6 +1,7 @@
 package mage.player.human;
 
 import mage.constants.ManaType;
+import mage.game.Game;
 import mage.util.Copyable;
 
 import java.io.Serializable;
@@ -20,7 +21,8 @@ import java.util.UUID;
  */
 public class PlayerResponse implements Serializable, Copyable<PlayerResponse> {
 
-    private String activeAction; // for debug information
+    private String activeAction; // for logs/debug information
+    private String activeGameInfo; // for logs/debug info
 
     private String responseString;
     private UUID responseUUID;
@@ -64,6 +66,7 @@ public class PlayerResponse implements Serializable, Copyable<PlayerResponse> {
 
     public void copyFrom(final PlayerResponse response) {
         this.activeAction = response.activeAction;
+        this.activeGameInfo = response.activeGameInfo;
         this.responseString = response.responseString;
         this.responseUUID = response.responseUUID;
         this.responseBoolean = response.responseBoolean;
@@ -76,6 +79,7 @@ public class PlayerResponse implements Serializable, Copyable<PlayerResponse> {
 
     public void clear() {
         this.activeAction = null;
+        this.activeGameInfo = null;
         this.responseString = null;
         this.responseUUID = null;
         this.responseBoolean = null;
@@ -90,8 +94,13 @@ public class PlayerResponse implements Serializable, Copyable<PlayerResponse> {
         return this.activeAction;
     }
 
-    public void setActiveAction(String activeAction) {
+    public String getActiveGameInfo() {
+        return this.activeGameInfo;
+    }
+
+    public void setActiveAction(Game game, String activeAction) {
         this.activeAction = activeAction;
+        this.activeGameInfo = game.getId() + ", " + game;
     }
 
     public String getString() {

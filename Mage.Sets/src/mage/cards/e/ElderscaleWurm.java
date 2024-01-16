@@ -54,7 +54,7 @@ public final class ElderscaleWurm extends CardImpl {
 
 class ElderscaleWurmSetLifeEffect extends OneShotEffect {
 
-    public ElderscaleWurmSetLifeEffect() {
+    ElderscaleWurmSetLifeEffect() {
         super(Outcome.Benefit);
         this.staticText = "if your life total is less than 7, your life total becomes 7";
     }
@@ -83,7 +83,7 @@ class ElderscaleWurmSetLifeEffect extends OneShotEffect {
 
 class ElderscaleWurmReplacementEffect extends ReplacementEffectImpl {
 
-    public ElderscaleWurmReplacementEffect() {
+    ElderscaleWurmReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "As long as you have 7 or more life, damage that would reduce your life total to less than 7 reduces it to 7 instead";
     }

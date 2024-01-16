@@ -51,7 +51,7 @@ public final class GeodeGolem extends CardImpl {
 
 class GeodeGolemEffect extends OneShotEffect {
 
-    public GeodeGolemEffect() {
+    GeodeGolemEffect() {
         super(Outcome.PlayForFree);
         staticText = "you may cast your commander from the command zone "
                 + "without paying its mana cost";

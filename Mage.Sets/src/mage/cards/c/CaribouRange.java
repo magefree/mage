@@ -55,7 +55,7 @@ public final class CaribouRange extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
         // Sacrifice a Caribou token: You gain 1 life.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(1),
-                new SacrificeTargetCost(new TargetControlledCreaturePermanent(filter))));
+                new SacrificeTargetCost(filter)));
     }
 
     private CaribouRange(final CaribouRange card) {

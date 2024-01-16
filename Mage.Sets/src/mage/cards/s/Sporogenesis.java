@@ -135,7 +135,7 @@ class SporogenesisCount implements DynamicValue {
 
 class SporogenesisRemoveCountersEffect extends OneShotEffect {
 
-    public SporogenesisRemoveCountersEffect() {
+    SporogenesisRemoveCountersEffect() {
         super(Outcome.Neutral);
         staticText = "remove all fungus counters from all creatures";
     }

@@ -49,7 +49,7 @@ public final class RavenousSlime extends CardImpl {
 
 class RavenousSlimeEffect extends ReplacementEffectImpl {
 
-    public RavenousSlimeEffect() {
+    RavenousSlimeEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "If a creature an opponent controls would die, "
                 + "instead exile it and put a number of +1/+1 counters "

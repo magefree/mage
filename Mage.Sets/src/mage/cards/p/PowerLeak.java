@@ -53,7 +53,7 @@ public final class PowerLeak extends CardImpl {
 
 class PowerLeakEffect extends OneShotEffect {
 
-    public PowerLeakEffect() {
+    PowerLeakEffect() {
         super(Outcome.Detriment);
         this.staticText = "that player may pay any amount of mana. {this} deals 2 damage to that player. Prevent X of that damage, where X is the amount of mana that player paid this way";
     }

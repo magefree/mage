@@ -1,17 +1,18 @@
-
 package mage.cards.d;
 
-import java.util.UUID;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.SacrificePermanentTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.SkipDrawStepEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SetTargetPointer;
+import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
+import mage.filter.StaticFilters;
+
+import java.util.UUID;
 
 /**
  *
@@ -26,7 +27,9 @@ public final class DragonAppeasement extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SkipDrawStepEffect()));
 
         // Whenever you sacrifice a creature, you may draw a card.
-        this.addAbility(new DragonAppeasementTriggeredAbility());
+        this.addAbility(new SacrificePermanentTriggeredAbility(Zone.BATTLEFIELD,
+                new DrawCardSourceControllerEffect(1), StaticFilters.FILTER_PERMANENT_CREATURE,
+                TargetController.YOU, SetTargetPointer.NONE, true));
 
     }
 
@@ -37,34 +40,5 @@ public final class DragonAppeasement extends CardImpl {
     @Override
     public DragonAppeasement copy() {
         return new DragonAppeasement(this);
-    }
-}
-
-class DragonAppeasementTriggeredAbility extends TriggeredAbilityImpl {
-
-    public DragonAppeasementTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), true);
-        setLeavesTheBattlefieldTrigger(true);
-        setTriggerPhrase("Whenever you sacrifice a creature, ");
-    }
-
-    private DragonAppeasementTriggeredAbility(final DragonAppeasementTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public DragonAppeasementTriggeredAbility copy() {
-        return new DragonAppeasementTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.SACRIFICED_PERMANENT;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getPlayerId().equals(this.getControllerId())
-                && game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD).isCreature(game);
     }
 }

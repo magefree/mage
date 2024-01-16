@@ -47,7 +47,7 @@ public final class FiligreeAngel extends CardImpl {
 
 class FiligreeAngelEffect extends OneShotEffect {
 
-    public FiligreeAngelEffect() {
+    FiligreeAngelEffect() {
         super(Outcome.GainLife);
         staticText = "you gain 3 life for each artifact you control";
     }

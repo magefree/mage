@@ -75,7 +75,7 @@ public final class KaylasCommand extends CardImpl {
 
 class KaylasCommandCounterEffect extends OneShotEffect {
 
-    public KaylasCommandCounterEffect() {
+    KaylasCommandCounterEffect() {
         super(Outcome.BoostCreature);
         this.staticText = "Put a +1/+1 counter on a creature you control. It gains double strike until end of turn.";
     }

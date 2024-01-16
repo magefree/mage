@@ -56,7 +56,7 @@ public final class AuraFinesse extends CardImpl {
 
 class AuraFinesseEffect extends OneShotEffect {
 
-    public AuraFinesseEffect() {
+    AuraFinesseEffect() {
         super(Outcome.BoostCreature);
         this.staticText = "Attach target Aura you control to target creature";
     }

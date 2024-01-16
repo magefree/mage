@@ -58,7 +58,7 @@ public final class SpiritSistersCall extends CardImpl {
 
 class SpiritSistersCallDoIfEffect extends OneShotEffect {
 
-    public SpiritSistersCallDoIfEffect() {
+    SpiritSistersCallDoIfEffect() {
         super(Outcome.PutCardInPlay);
         this.staticText = "choose target permanent card in your graveyard. " +
                 "You may sacrifice a permanent that shares a card type with the chosen card. " +

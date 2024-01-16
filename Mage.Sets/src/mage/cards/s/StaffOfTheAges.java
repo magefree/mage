@@ -39,7 +39,7 @@ public final class StaffOfTheAges extends CardImpl {
 
 class StaffOfTheAgesEffect extends AsThoughEffectImpl {
 
-    public StaffOfTheAgesEffect() {
+    StaffOfTheAgesEffect() {
         super(AsThoughEffectType.BLOCK_LANDWALK, Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Creatures with landwalk abilities can be blocked as though they didn't have those abilities";
     }

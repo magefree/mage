@@ -131,7 +131,7 @@ class ShrivelingRotLoseLifeTriggeredAbility extends DelayedTriggeredAbility {
 
 class ShrivelingRotEffect extends OneShotEffect {
 
-    public ShrivelingRotEffect() {
+    ShrivelingRotEffect() {
         super(Outcome.LoseLife);
         staticText = "that creature's controller loses life equal to its toughness";
     }

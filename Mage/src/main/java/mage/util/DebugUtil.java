@@ -11,6 +11,8 @@ import java.lang.reflect.Method;
  */
 public class DebugUtil {
 
+    public static boolean NETWORK_SHOW_CLIENT_CALLBACK_MESSAGES_LOG = false; // show all callback messages (server commands)
+
     // cards basic (card panels)
     public static boolean GUI_CARD_DRAW_OUTER_BORDER = false;
     public static boolean GUI_CARD_DRAW_INNER_BORDER = false;

@@ -69,7 +69,7 @@ public final class ShrineOfPiercingVision extends CardImpl {
 
 class ShrineOfPiercingVisionEffect extends OneShotEffect {
 
-    public ShrineOfPiercingVisionEffect() {
+    ShrineOfPiercingVisionEffect() {
         super(Outcome.DrawCard);
         this.staticText = "Look at the top X cards of your library, where X is the number of charge counters on {this}. Put one of those cards into your hand and the rest on the bottom of your library in any order";
     }

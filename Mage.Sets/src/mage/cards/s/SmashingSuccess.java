@@ -48,7 +48,7 @@ public final class SmashingSuccess extends CardImpl {
 
 class SmashingSuccessEffect extends OneShotEffect {
 
-    public SmashingSuccessEffect() {
+    SmashingSuccessEffect() {
         super(Outcome.DestroyPermanent);
         staticText = "Destroy target artifact or land. If an artifact is destroyed this way, create a Treasure token.";
     }

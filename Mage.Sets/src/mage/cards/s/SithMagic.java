@@ -65,7 +65,7 @@ public final class SithMagic extends CardImpl {
 
 class SithMagicEffect extends OneShotEffect {
 
-    public SithMagicEffect() {
+    SithMagicEffect() {
         super(Outcome.PutCreatureInPlay);
         staticText = "return target card from a graveyard to the battlefield under your control. It gains lifelink and haste. Exile it at the beginning of the next end step or if it would leave the battlefield";
     }

@@ -42,7 +42,7 @@ public final class CorpseChurn extends CardImpl {
 
 class CorpseChurnEffect extends OneShotEffect {
 
-    public CorpseChurnEffect() {
+    CorpseChurnEffect() {
         super(Outcome.ReturnToHand);
         this.staticText = ", then you may return a creature card from your graveyard to your hand";
     }

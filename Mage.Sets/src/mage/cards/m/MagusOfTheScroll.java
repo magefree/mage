@@ -53,7 +53,7 @@ public final class MagusOfTheScroll extends CardImpl {
 
 class MagusOfTheScrollEffect extends OneShotEffect {
 
-    public MagusOfTheScrollEffect() {
+    MagusOfTheScrollEffect() {
         super(Outcome.Neutral);
         staticText = ", then reveal a card at random from your hand. If that card has the chosen name, {this} deals 2 damage to any target";
     }

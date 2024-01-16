@@ -101,7 +101,7 @@ class CurseOfShallowTriggeredAbility extends TriggeredAbilityImpl {
 
 class CurseOfShallowEffect extends OneShotEffect {
 
-    public CurseOfShallowEffect() {
+    CurseOfShallowEffect() {
         super(Outcome.Benefit);
         this.staticText = "that attacking player may create a tapped 2/2 black Zombie creature token";
     }

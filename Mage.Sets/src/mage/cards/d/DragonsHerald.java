@@ -14,7 +14,7 @@ import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.target.common.TargetCardInLibrary;
-import mage.target.common.TargetControlledCreatureEachColor;
+import mage.target.common.TargetSacrificeCreatureEachColor;
 
 import java.util.UUID;
 
@@ -43,7 +43,7 @@ public final class DragonsHerald extends CardImpl {
                 new TargetCardInLibrary(filter)), new ManaCostsImpl<>("{2}{R}")
         );
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreatureEachColor("BRG")));
+        ability.addCost(new SacrificeTargetCost(new TargetSacrificeCreatureEachColor("BRG")));
         this.addAbility(ability);
     }
 

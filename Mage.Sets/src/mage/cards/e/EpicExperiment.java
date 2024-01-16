@@ -46,7 +46,7 @@ public final class EpicExperiment extends CardImpl {
 
 class EpicExperimentEffect extends OneShotEffect {
 
-    public EpicExperimentEffect() {
+    EpicExperimentEffect() {
         super(Outcome.PlayForFree);
         staticText = "Exile the top X cards of your library. For each instant and "
                 + "sorcery card with mana value X or less among them, "

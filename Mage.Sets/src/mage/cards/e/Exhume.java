@@ -42,7 +42,7 @@ public final class Exhume extends CardImpl {
 
 class ExhumeEffect extends OneShotEffect {
 
-    public ExhumeEffect() {
+    ExhumeEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Each player puts a creature card from their graveyard onto the battlefield";
     }

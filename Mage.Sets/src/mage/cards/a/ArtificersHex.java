@@ -55,7 +55,7 @@ public final class ArtificersHex extends CardImpl {
 
 class ArtificersHexEffect extends OneShotEffect {
 
-    public ArtificersHexEffect() {
+    ArtificersHexEffect() {
         super(Outcome.Benefit);
         this.staticText = "if enchanted Equipment is attached to a creature, destroy that creature";
     }

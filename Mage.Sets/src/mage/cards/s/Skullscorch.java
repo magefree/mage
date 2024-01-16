@@ -39,7 +39,7 @@ public final class Skullscorch extends CardImpl {
 
 class SkullscorchDiscardEffect extends OneShotEffect {
 
-    public SkullscorchDiscardEffect() {
+    SkullscorchDiscardEffect() {
         super(Outcome.DrawCard);
         staticText = "Target player discards two cards at random unless that player has {this} deal 4 damage to them";
     }

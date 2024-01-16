@@ -49,7 +49,7 @@ public final class MizziumTransreliquat extends CardImpl {
 
 class MizziumTransreliquatCopyEffect extends OneShotEffect {
 
-    public MizziumTransreliquatCopyEffect() {
+    MizziumTransreliquatCopyEffect() {
         super(Outcome.Copy);
         this.staticText = "{this} becomes a copy of target artifact until end of turn";
     }
@@ -77,7 +77,7 @@ class MizziumTransreliquatCopyEffect extends OneShotEffect {
 
 class MizziumTransreliquatCopyAndGainAbilityEffect extends OneShotEffect {
 
-    public MizziumTransreliquatCopyAndGainAbilityEffect() {
+    MizziumTransreliquatCopyAndGainAbilityEffect() {
         super(Outcome.Benefit);
         this.staticText = "{this} becomes a copy of target artifact, except it has this ability";
     }

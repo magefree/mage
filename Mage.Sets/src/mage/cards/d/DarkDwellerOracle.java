@@ -34,9 +34,7 @@ public final class DarkDwellerOracle extends CardImpl {
                         .setText("exile the top card of your library. You may play that card this turn"),
                 new GenericManaCost(1)
         );
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(
-                StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT
-        )));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
         this.addAbility(ability);
     }
 

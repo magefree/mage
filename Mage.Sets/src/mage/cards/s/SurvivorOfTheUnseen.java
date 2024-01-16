@@ -53,7 +53,7 @@ public final class SurvivorOfTheUnseen extends CardImpl {
 
 class SurvivorOfTheUnseenEffect extends OneShotEffect {
 
-    public SurvivorOfTheUnseenEffect() {
+    SurvivorOfTheUnseenEffect() {
         super(Outcome.DrawCard);
         staticText = "Draw two cards, then put a card from your hand on top of your library";
     }

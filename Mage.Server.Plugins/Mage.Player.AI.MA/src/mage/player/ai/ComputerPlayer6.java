@@ -41,11 +41,17 @@ import java.util.concurrent.*;
 import java.util.stream.Collectors;
 
 /**
+ * AI: server side bot with game simulations (mad bot, part of implementation)
+ *
  * @author nantuko
  */
-public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
+public class ComputerPlayer6 extends ComputerPlayer {
 
     private static final Logger logger = Logger.getLogger(ComputerPlayer6.class);
+
+    // TODO: add and research maxNodes logs, is it good to increase to 50000 for better results?
+    // TODO: increase maxNodes due AI skill level?
+    private static final int MAX_SIMULATED_NODES_PER_CALC = 5000;
 
     // same params as Executors.newFixedThreadPool
     // no needs erorrs check in afterExecute here cause that pool used for FutureTask with result check already
@@ -97,7 +103,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
             maxDepth = skill;
         }
         maxThink = skill * 3;
-        maxNodes = Config2.maxNodes;
+        maxNodes = MAX_SIMULATED_NODES_PER_CALC;
         getSuggestedActions();
         this.actionCache = new HashSet<>();
     }
@@ -450,23 +456,22 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
             if (res != null) {
                 return res;
             }
-        } catch (TimeoutException e) {
-            logger.info("simulating - timed out");
+        } catch (TimeoutException | InterruptedException e) {
+            // AI thinks too long
+            logger.info("ai simulating - timed out");
             task.cancel(true);
         } catch (ExecutionException e) {
-            // exception error in simulated game
+            // game error
+            logger.error("AI simulation catch game error: " + e, e);
             task.cancel(true);
             // real games: must catch and log
-            // unit tests: must raise again for test fail
-            logger.error("AI simulation game catch error: " + e.getCause(), e);
+            // unit tests: must raise again for fast fail
             if (this.isTestsMode()) {
-                throw new IllegalStateException("One of the simulated games raise the error: " + e.getCause());
+                throw new IllegalStateException("One of the simulated games raise the error: " + e, e);
             }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-            task.cancel(true);
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Throwable e) {
+            // ?
+            logger.error("AI simulation catch unknown error: " + e, e);
             task.cancel(true);
         }
         //TODO: timeout handling

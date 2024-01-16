@@ -63,7 +63,7 @@ public final class TyvarJubilantBrawler extends CardImpl {
 
 class TyvarJubilantBrawlerHasteEffect extends AsThoughEffectImpl {
 
-    public TyvarJubilantBrawlerHasteEffect() {
+    TyvarJubilantBrawlerHasteEffect() {
         super(AsThoughEffectType.ACTIVATE_HASTE, Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "you may activate abilities of creatures you control as though those creatures had haste";
     }

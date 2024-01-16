@@ -48,7 +48,7 @@ public final class GriffinCanyon extends CardImpl {
 
 class GriffinCanyonEffect extends OneShotEffect {
 
-    public GriffinCanyonEffect() {
+    GriffinCanyonEffect() {
         super(Outcome.Benefit);
         this.staticText = "Untap target Griffin. If it's a creature, it gets +1/+1 until end of turn";
     }

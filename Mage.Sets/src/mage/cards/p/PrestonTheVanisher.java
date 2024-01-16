@@ -62,7 +62,7 @@ public final class PrestonTheVanisher extends CardImpl {
         // {1}{W}, Sacrifice five Illusions: Exile target nonland permanent.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(),
                 new ManaCostsImpl<>("{1}{W}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(5, activeCostFilter)));
+        ability.addCost(new SacrificeTargetCost(5, activeCostFilter));
         ability.addTarget(new TargetNonlandPermanent());
         this.addAbility(ability);
     }

@@ -62,7 +62,7 @@ public final class BrainInAJar extends CardImpl {
 
 class BrainInAJarCastEffect extends OneShotEffect {
 
-    public BrainInAJarCastEffect() {
+    BrainInAJarCastEffect() {
         super(Outcome.PlayForFree);
         this.staticText = ", then you may cast an instant or sorcery spell "
                 + "with mana value equal to the number of charge "
@@ -94,7 +94,7 @@ class BrainInAJarCastEffect extends OneShotEffect {
 
 class BrainInAJarScryEffect extends OneShotEffect {
 
-    public BrainInAJarScryEffect() {
+    BrainInAJarScryEffect() {
         super(Outcome.Benefit);
         this.staticText = "Scry X";
     }

@@ -52,7 +52,7 @@ public final class RiptideChronologist extends CardImpl {
 
 class RiptideChronologistEffect extends OneShotEffect {
 
-    public RiptideChronologistEffect() {
+    RiptideChronologistEffect() {
         super(Outcome.UnboostCreature);
         staticText = "Untap all creatures of the creature type of your choice";
     }

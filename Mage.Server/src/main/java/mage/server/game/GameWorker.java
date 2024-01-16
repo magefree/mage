@@ -1,18 +1,18 @@
-
 package mage.server.game;
-
-import java.util.UUID;
-import java.util.concurrent.Callable;
 
 import mage.MageException;
 import mage.game.Game;
 import org.apache.log4j.Logger;
 
+import java.util.UUID;
+import java.util.concurrent.Callable;
+
 /**
- * @param <T>
- * @author BetaSteward_at_googlemail.com
+ * Game: main thread to process full game (one thread per game)
+ *
+ * @author BetaSteward_at_googlemail.com, JayDi85
  */
-public class GameWorker<T> implements Callable {
+public class GameWorker implements Callable<Boolean> {
 
     private static final Logger LOGGER = Logger.getLogger(GameWorker.class);
 
@@ -27,25 +27,23 @@ public class GameWorker<T> implements Callable {
     }
 
     @Override
-    public Object call() {
+    public Boolean call() {
         try {
-            LOGGER.debug("GAME WORKER started gameId " + game.getId());
+            // play game
             Thread.currentThread().setName("GAME " + game.getId());
             game.start(choosingPlayerId);
-            game.fireUpdatePlayersEvent();
-            gameController.gameResult(game.getWinner());
-            game.cleanUp();
-        } catch (MageException ex) {
-            LOGGER.fatal("GameWorker mage error [" + game.getId() + "] " + ex, ex);
-        } catch (Exception e) {
-            LOGGER.fatal("GameWorker general exception [" + game.getId() + "] " + e.getMessage(), e);
-            if (e instanceof NullPointerException) {
-                LOGGER.info(e.getStackTrace());
-            }
-        } catch (Error err) {
-            LOGGER.fatal("GameWorker general error [" + game.getId() + "] " + err, err);
+
+            // save result and start next game or close finished table
+            game.fireUpdatePlayersEvent(); // TODO: no needs in update event (gameController.endGameWithResult already send game end dialog)?
+            gameController.endGameWithResult(game.getWinner());
+
+            // clear resources
+            game.cleanUp();// TODO: no needs in cleanup code (cards list are useless for memory optimization, game states are more important)?
+        } catch (MageException e) {
+            LOGGER.fatal("GameWorker mage error [" + game.getId() + " - " + game + "]: " + e, e);
+        } catch (Throwable e) {
+            LOGGER.fatal("GameWorker system error [" + game.getId() + " - " + game + "]: " + e, e);
         }
         return null;
     }
-
 }

@@ -41,7 +41,7 @@ public final class Scrounge extends CardImpl {
 
 class ScroungeEffect extends OneShotEffect {
 
-    public ScroungeEffect() {
+    ScroungeEffect() {
         super(Outcome.Benefit);
         staticText = "Target opponent chooses an artifact card in their graveyard. Put that card onto the battlefield under your control";
     }

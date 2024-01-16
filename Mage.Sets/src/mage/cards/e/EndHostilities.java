@@ -41,7 +41,7 @@ public final class EndHostilities extends CardImpl {
 
 class EndHostilitiesEffect extends OneShotEffect {
 
-    public EndHostilitiesEffect() {
+    EndHostilitiesEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "Destroy all creatures and all permanents attached to creatures.";
     }

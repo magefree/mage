@@ -57,7 +57,7 @@ public final class ZirilanOfTheClaw extends CardImpl {
 
 class ZirilanOfTheClawEffect extends OneShotEffect {
 
-    public ZirilanOfTheClawEffect() {
+    ZirilanOfTheClawEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Search your library for a Dragon permanent card, put that card onto the battlefield, then shuffle."
                 + " That Dragon gains haste until end of turn. Exile it at the beginning of the next end step";

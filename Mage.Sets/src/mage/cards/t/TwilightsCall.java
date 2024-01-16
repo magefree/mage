@@ -49,7 +49,7 @@ public final class TwilightsCall extends CardImpl {
 
 class TwilightsCallEffect extends OneShotEffect {
 
-    public TwilightsCallEffect() {
+    TwilightsCallEffect() {
         super(Outcome.Neutral);
         staticText = "Each player returns all creature cards from their graveyard to the battlefield";
     }

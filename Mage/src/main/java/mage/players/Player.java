@@ -370,9 +370,10 @@ public interface Player extends MageItem, Copyable<Player> {
 
     void setAllowBadMoves(boolean allowBadMoves);
 
+    /**
+     * Reset values before new game, e.g. for next game
+     */
     void init(Game game);
-
-    void init(Game game, boolean testMode);
 
     void useDeck(Deck deck, Game game);
 

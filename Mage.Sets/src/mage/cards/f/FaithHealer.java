@@ -11,6 +11,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledEnchantmentPermanent;
 import mage.target.common.TargetControlledPermanent;
 
@@ -30,7 +31,7 @@ public final class FaithHealer extends CardImpl {
 
         // Sacrifice an enchantment: You gain life equal to the sacrificed enchantment's converted mana cost.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(SacrificeCostManaValue.ENCHANTMENT),
-                new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledEnchantmentPermanent()))));
+                new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_ENCHANTMENT)));
     }
 
     private FaithHealer(final FaithHealer card) {

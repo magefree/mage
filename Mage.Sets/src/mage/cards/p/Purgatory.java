@@ -109,7 +109,7 @@ class PurgatoryTriggeredAbility extends TriggeredAbilityImpl {
 
 class PurgatoryExileEffect extends OneShotEffect {
 
-    public PurgatoryExileEffect() {
+    PurgatoryExileEffect() {
         super(Outcome.Benefit);
         staticText = "exile that card";
     }
@@ -143,7 +143,7 @@ class PurgatoryExileEffect extends OneShotEffect {
 
 class PurgatoryReturnEffect extends OneShotEffect {
 
-    public PurgatoryReturnEffect() {
+    PurgatoryReturnEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "return a card exiled with {this} to the battlefield";
     }

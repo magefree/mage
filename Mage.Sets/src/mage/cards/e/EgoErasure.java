@@ -44,7 +44,7 @@ public final class EgoErasure extends CardImpl {
 
 class EgoErasureEffect extends ContinuousEffectImpl {
 
-    public EgoErasureEffect() {
+    EgoErasureEffect() {
         super(Duration.EndOfTurn, Outcome.Neutral);
         staticText = "creatures target player controls get -2/-0 and lose all creature types until end of turn";
     }

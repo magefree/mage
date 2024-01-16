@@ -52,7 +52,7 @@ public final class SpyNetwork extends CardImpl {
 
 class SpyNetworkLookAtTargetPlayerHandEffect extends OneShotEffect {
 
-    public SpyNetworkLookAtTargetPlayerHandEffect() {
+    SpyNetworkLookAtTargetPlayerHandEffect() {
         super(Outcome.Benefit);
         this.staticText = "Look at target player's hand,";
     }
@@ -82,7 +82,7 @@ class SpyNetworkLookAtTargetPlayerHandEffect extends OneShotEffect {
 
 class SpyNetworkFaceDownEffect extends OneShotEffect {
 
-    public SpyNetworkFaceDownEffect() {
+    SpyNetworkFaceDownEffect() {
         super(Outcome.Benefit);
         this.staticText = "and any face-down creatures they control";
     }

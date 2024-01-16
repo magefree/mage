@@ -54,7 +54,7 @@ public final class MasterOfPredicaments extends CardImpl {
 
 class MasterOfPredicamentsEffect extends OneShotEffect {
 
-    public MasterOfPredicamentsEffect() {
+    MasterOfPredicamentsEffect() {
         super(Outcome.PlayForFree);
         this.staticText = "choose a card in your hand. That player guesses whether "
                 + "the card's mana value is greater than 4. If the player "

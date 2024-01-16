@@ -47,7 +47,7 @@ public final class MayaelsAria extends CardImpl {
 
 class MayaelsAriaEffect extends OneShotEffect {
 
-    public MayaelsAriaEffect() {
+    MayaelsAriaEffect() {
         super(Outcome.Benefit);
         this.staticText = "put a +1/+1 counter on each creature you control if you control a creature with power 5 or greater. Then you gain 10 life if you control a creature with power 10 or greater. Then you win the game if you control a creature with power 20 or greater";
     }

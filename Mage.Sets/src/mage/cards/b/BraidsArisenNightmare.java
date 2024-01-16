@@ -18,6 +18,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetSacrifice;
 import mage.util.CardUtil;
 
 /**
@@ -86,11 +87,11 @@ class BraidsArisenNightmareEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, true);
+        TargetSacrifice target = new TargetSacrifice(filter);
         if (!target.canChoose(controller.getId(), source, game)) {
             return false;
         }
-        controller.chooseTarget(Outcome.Sacrifice, target, source, game);
+        controller.choose(Outcome.Sacrifice, target, source, game);
         Permanent permanent = game.getPermanent(target.getFirstTarget());
         if (permanent == null) {
             return false;
@@ -115,14 +116,14 @@ class BraidsArisenNightmareEffect extends OneShotEffect {
     }
 
     private boolean braidsSacrifice(Player opponent, FilterControlledPermanent opponentFilter, Game game, Ability source) {
-        TargetControlledPermanent target = new TargetControlledPermanent(1, 1, opponentFilter, true);
+        TargetSacrifice target = new TargetSacrifice(opponentFilter);
         if (!target.canChoose(opponent.getId(), source, game)) {
             return false;
         }
         if (!opponent.chooseUse(Outcome.Sacrifice, "Sacrifice " + CardUtil.addArticle(opponentFilter.getMessage()) + '?', source, game)) {
             return false;
         }
-        opponent.chooseTarget(Outcome.Sacrifice, target, source, game);
+        opponent.choose(Outcome.Sacrifice, target, source, game);
         Permanent permanent = game.getPermanent(target.getFirstTarget());
         return permanent != null && permanent.sacrifice(source, game);
     }

@@ -28,7 +28,7 @@ public final class GameLog {
     static final String LOG_TT_COLOR_BLUE = "Blue";
     static final String LOG_TT_COLOR_BLACK = "Black";
     static final String LOG_TT_COLOR_WHITE = "#FDFFE6";
-    static final String LOG_TT_COLOR_MULTI = "#FFAC40";
+    static final String LOG_TT_COLOR_MULTI = "#A97A00";
     static final String LOG_TT_COLOR_COLORLESS = "#94A4BA";
     static final String LOG_COLOR_NEUTRAL = "#F0F8FF"; // AliceBlue
 

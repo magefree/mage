@@ -65,7 +65,7 @@ public final class JelevaNephaliasScourge extends CardImpl {
 
 class JelevaNephaliasScourgeEffect extends OneShotEffect {
 
-    public JelevaNephaliasScourgeEffect() {
+    JelevaNephaliasScourgeEffect() {
         super(Outcome.Benefit);
         this.staticText = "each player exiles the top X cards of their library, "
                 + "where X is the amount of mana spent to cast this spell";
@@ -108,7 +108,7 @@ class JelevaNephaliasScourgeEffect extends OneShotEffect {
 
 class JelevaNephaliasCastEffect extends OneShotEffect {
 
-    public JelevaNephaliasCastEffect() {
+    JelevaNephaliasCastEffect() {
         super(Outcome.PlayForFree);
         this.staticText = "you may cast an instant or sorcery spell " +
                 "from among cards exiled with {this} without paying its mana cost";

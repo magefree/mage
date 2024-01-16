@@ -58,7 +58,7 @@ public final class MalakirBloodwitch extends CardImpl {
 
 class MalakirBloodwitchEffect extends OneShotEffect {
 
-    public MalakirBloodwitchEffect() {
+    MalakirBloodwitchEffect() {
         super(Outcome.Benefit);
         this.staticText = "each opponent loses life equal to the number of Vampires you control. You gain life equal to the life lost this way";
     }

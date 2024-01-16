@@ -1,7 +1,6 @@
 
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BecomesMonstrousSourceTriggeredAbility;
@@ -11,16 +10,15 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.MonstrosityAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import static mage.cards.r.RavenousWampa.RAVENOUS_WAMPA_STATE_VALUE_KEY_PREFIX;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetControlledPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -38,7 +36,7 @@ public final class RavenousWampa extends CardImpl {
 
         // {2}{G}, Sacrifice another creature: Monstrosity 2.
         Ability ability = new MonstrosityAbility("{2}{G}", 2);
-        ability.addCost(new RavenousWampaSacrificeTargetCost(new TargetControlledCreaturePermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE)));
+        ability.addCost(new RavenousWampaSacrificeTargetCost());
         this.addAbility(ability);
 
         // When Ravenous Wampa becomes monstrous, you gain life equal to the sacrificied creature's toughness.
@@ -57,9 +55,9 @@ public final class RavenousWampa extends CardImpl {
 
 class RavenousWampaEffect extends OneShotEffect {
 
-    public RavenousWampaEffect() {
+    RavenousWampaEffect() {
         super(Outcome.GainLife);
-        this.staticText = "you gain life equal to the sacrificied creature's toughness";
+        this.staticText = "you gain life equal to the sacrificed creature's toughness";
     }
 
     private RavenousWampaEffect(final RavenousWampaEffect effect) {
@@ -76,7 +74,7 @@ class RavenousWampaEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent sourceObject = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (controller != null && sourceObject != null) {
-            Integer toughness = (Integer) game.getState().getValue(RAVENOUS_WAMPA_STATE_VALUE_KEY_PREFIX + source.getSourceId() + sourceObject.getZoneChangeCounter(game));
+            Integer toughness = (Integer) game.getState().getValue(RavenousWampa.RAVENOUS_WAMPA_STATE_VALUE_KEY_PREFIX + source.getSourceId() + sourceObject.getZoneChangeCounter(game));
             if (toughness != null) {
                 controller.gainLife(toughness, game, source);
             }
@@ -88,8 +86,8 @@ class RavenousWampaEffect extends OneShotEffect {
 
 class RavenousWampaSacrificeTargetCost extends SacrificeTargetCost {
 
-    public RavenousWampaSacrificeTargetCost(TargetControlledPermanent target) {
-        super(target);
+    RavenousWampaSacrificeTargetCost() {
+        super(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE);
     }
 
     private RavenousWampaSacrificeTargetCost(final RavenousWampaSacrificeTargetCost cost) {
@@ -103,7 +101,7 @@ class RavenousWampaSacrificeTargetCost extends SacrificeTargetCost {
             Permanent sacrificedPermanen = getPermanents().get(0);
             Permanent sourcePermanent = game.getPermanent(source.getSourceId());
             if (sourcePermanent != null && sacrificedPermanen != null) {
-                game.getState().setValue(RAVENOUS_WAMPA_STATE_VALUE_KEY_PREFIX + source.getSourceId() + sourcePermanent.getZoneChangeCounter(game), sacrificedPermanen.getToughness().getValue());
+                game.getState().setValue(RavenousWampa.RAVENOUS_WAMPA_STATE_VALUE_KEY_PREFIX + source.getSourceId() + sourcePermanent.getZoneChangeCounter(game), sacrificedPermanen.getToughness().getValue());
             }
         }
         return result;

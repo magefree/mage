@@ -37,7 +37,7 @@ public final class AuntiesSnitch extends CardImpl {
         // Auntie's Snitch can't block.
         this.addAbility(new CantBlockAbility());
         // Prowl {1}{B}
-        this.addAbility(new ProwlAbility(this, "{1}{B}"));
+        this.addAbility(new ProwlAbility("{1}{B}"));
         // Whenever a Goblin or Rogue you control deals combat damage to a player, if Auntie's Snitch is in your graveyard, you may return Auntie's Snitch to your hand.
         this.addAbility(new AuntiesSnitchTriggeredAbility());
     }

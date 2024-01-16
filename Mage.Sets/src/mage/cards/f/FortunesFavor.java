@@ -44,7 +44,7 @@ public final class FortunesFavor extends CardImpl {
 
 class FortunesFavorEffect extends OneShotEffect {
 
-    public FortunesFavorEffect() {
+    FortunesFavorEffect() {
         super(Outcome.Benefit);
         this.staticText = "Target opponent looks at the top four cards of your library and separates them into a face-down pile and a face-up pile. Put one pile into your hand and the other into your graveyard";
     }

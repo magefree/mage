@@ -58,7 +58,7 @@ public final class BrimazKingOfOreskos extends CardImpl {
 
 class BrimazKingOfOreskosEffect extends OneShotEffect {
 
-    public BrimazKingOfOreskosEffect() {
+    BrimazKingOfOreskosEffect() {
         super(Outcome.Benefit);
         this.staticText = "create a 1/1 white Cat Soldier creature token with vigilance blocking that creature";
     }

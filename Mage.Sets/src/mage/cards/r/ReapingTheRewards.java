@@ -8,6 +8,7 @@ import mage.abilities.keyword.BuybackAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.target.common.TargetControlledPermanent;
 
@@ -21,7 +22,7 @@ public final class ReapingTheRewards extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{W}");
 
         // Buyback-Sacrifice a land.
-        this.addAbility(new BuybackAbility(new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledLandPermanent("a land")))));
+        this.addAbility(new BuybackAbility(new SacrificeTargetCost(StaticFilters.FILTER_LAND)));
 
         // You gain 2 life.
         this.getSpellAbility().addEffect(new GainLifeEffect(2));

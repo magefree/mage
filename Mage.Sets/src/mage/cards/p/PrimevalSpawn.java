@@ -61,7 +61,7 @@ public final class PrimevalSpawn extends CardImpl {
 
 class PrimevalSpawnReplacementEffect extends ReplacementEffectImpl {
 
-    public PrimevalSpawnReplacementEffect() {
+    PrimevalSpawnReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Exile);
         staticText = "if {this} would enter the battlefield and " +
                 "it wasn't cast or no mana was spent to cast it, exile it instead";

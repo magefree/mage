@@ -43,7 +43,7 @@ public final class Counterlash extends CardImpl {
 
 class CounterlashEffect extends OneShotEffect {
 
-    public CounterlashEffect() {
+    CounterlashEffect() {
         super(Outcome.Detriment);
         this.staticText = "Counter target spell. You may cast a spell "
                 + "that shares a card type with it from your hand "

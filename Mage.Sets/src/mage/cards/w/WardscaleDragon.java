@@ -50,7 +50,7 @@ public final class WardscaleDragon extends CardImpl {
 
 class WardscaleDragonRuleEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public WardscaleDragonRuleEffect() {
+    WardscaleDragonRuleEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, true, false);
         staticText = "As long as {this} is attacking, defending player can't cast spells";
     }

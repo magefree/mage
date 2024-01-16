@@ -45,7 +45,7 @@ public final class ExplorersScope extends CardImpl {
 
 class ExplorersScopeEffect extends OneShotEffect {
 
-    public ExplorersScopeEffect() {
+    ExplorersScopeEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "look at the top card of your library. If it's a land card, you may put it onto the battlefield tapped";
     }

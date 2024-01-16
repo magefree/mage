@@ -96,7 +96,7 @@ class MysticRemoraTriggeredAbility extends TriggeredAbilityImpl {
 
 class MysticRemoraEffect extends OneShotEffect {
 
-    public MysticRemoraEffect() {
+    MysticRemoraEffect() {
         super(Outcome.DrawCard);
         this.staticText = "you may draw a card unless that player pays {4}";
     }
@@ -130,7 +130,3 @@ class MysticRemoraEffect extends OneShotEffect {
     }
 
 }
-
-    
-
-    

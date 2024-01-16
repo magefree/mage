@@ -20,7 +20,7 @@ public final class SpiritBlueToken extends TokenImpl {
         addAbility(FlyingAbility.getInstance());
     }
 
-    protected SpiritBlueToken(final SpiritBlueToken token) {
+    private SpiritBlueToken(final SpiritBlueToken token) {
         super(token);
     }
 

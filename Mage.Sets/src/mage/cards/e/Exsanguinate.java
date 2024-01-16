@@ -34,7 +34,7 @@ public final class Exsanguinate extends CardImpl {
 
 class ExsanguinateEffect extends OneShotEffect {
 
-    public ExsanguinateEffect() {
+    ExsanguinateEffect() {
         super(Outcome.GainLife);
         staticText = "Each opponent loses X life. You gain life equal to the life lost this way";
     }

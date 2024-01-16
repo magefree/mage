@@ -18,7 +18,7 @@ public final class FishNoAbilityToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    protected FishNoAbilityToken(final FishNoAbilityToken token) {
+    private FishNoAbilityToken(final FishNoAbilityToken token) {
         super(token);
     }
 

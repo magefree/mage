@@ -60,7 +60,7 @@ public final class ForgeOfHeroes extends CardImpl {
 
 class ForgeOfHeroesEffect extends OneShotEffect {
 
-    public ForgeOfHeroesEffect() {
+    ForgeOfHeroesEffect() {
         super(Outcome.Benefit);
         this.staticText = "choose target commander that entered the battlefield this turn. "
                 + "Put a +1/+1 counter on it if it's a creature "

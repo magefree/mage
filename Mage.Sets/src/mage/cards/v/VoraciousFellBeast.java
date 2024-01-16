@@ -10,13 +10,16 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.FoodToken;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetSacrifice;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -86,8 +89,7 @@ class VoraciousFellBeastEffect extends OneShotEffect {
                 continue;
             }
 
-            TargetControlledCreaturePermanent target =
-                new TargetControlledCreaturePermanent(1, 1, new FilterControlledCreaturePermanent(), true);
+            TargetSacrifice target = new TargetSacrifice(StaticFilters.FILTER_PERMANENT_CREATURE);
             if (target.canChoose(player.getId(), source, game)) {
                 while (!target.isChosen() && player.canRespond()) {
                     player.choose(Outcome.Sacrifice, target, source, game);

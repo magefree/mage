@@ -17,7 +17,7 @@ public final class BrudicladTelchorMyrToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    protected BrudicladTelchorMyrToken(final BrudicladTelchorMyrToken token) {
+    private BrudicladTelchorMyrToken(final BrudicladTelchorMyrToken token) {
         super(token);
     }
 

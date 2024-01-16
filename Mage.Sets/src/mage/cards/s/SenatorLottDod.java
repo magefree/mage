@@ -49,7 +49,7 @@ public final class SenatorLottDod extends CardImpl {
 
 class SenatorLottDodSpellsTargetingCreatureCostModificationEffect extends CostModificationEffectImpl {
 
-    public SenatorLottDodSpellsTargetingCreatureCostModificationEffect() {
+    SenatorLottDodSpellsTargetingCreatureCostModificationEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.INCREASE_COST);
         this.staticText = "Spell your opponents cast that target a creature you control cost {1} more to cast";
     }
@@ -111,7 +111,7 @@ class SenatorLottDodSpellsTargetingCreatureCostModificationEffect extends CostMo
 
 class SenatorLottDodSpellsTargetingYouCostModificationEffect extends CostModificationEffectImpl {
 
-    public SenatorLottDodSpellsTargetingYouCostModificationEffect() {
+    SenatorLottDodSpellsTargetingYouCostModificationEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.INCREASE_COST);
         this.staticText = "Spells your opponents cast that target you cost {2} more to cast";
     }

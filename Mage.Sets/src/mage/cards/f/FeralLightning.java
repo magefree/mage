@@ -38,7 +38,7 @@ public final class FeralLightning extends CardImpl {
 
 class FeralLightningEffect extends OneShotEffect {
 
-    public FeralLightningEffect() {
+    FeralLightningEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Create three 3/1 red Elemental creature tokens with haste. Exile them at the beginning of the next end step";
     }

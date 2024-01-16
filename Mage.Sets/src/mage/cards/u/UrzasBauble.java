@@ -51,7 +51,7 @@ public final class UrzasBauble extends CardImpl {
 
 class LookAtRandomCardEffect extends OneShotEffect {
 
-    public LookAtRandomCardEffect() {
+    LookAtRandomCardEffect() {
         super(Outcome.Benefit);
         this.staticText = "Look at a card at random in target player's hand";
     }

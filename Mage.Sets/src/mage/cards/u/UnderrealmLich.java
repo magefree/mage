@@ -62,7 +62,7 @@ public final class UnderrealmLich extends CardImpl {
 
 class UnderrealmLichReplacementEffect extends ReplacementEffectImpl {
 
-    public UnderrealmLichReplacementEffect() {
+    UnderrealmLichReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "If you would draw a card, instead look at the top "
                 + "three cards of your library, then put one into your hand "
