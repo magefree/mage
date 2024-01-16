@@ -9,7 +9,6 @@ import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.effects.common.PreventDamageToSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -60,8 +59,9 @@ public final class TorrentOfLava extends CardImpl {
 class TorrentOfLavaGainAbilityEffect extends GainAbilityAllEffect {
 
     TorrentOfLavaGainAbilityEffect() {
-        super(new SimpleActivatedAbility(new TorrentOfLavaPreventionEffect(null, null), new TapSourceCost()),
-                Duration.WhileOnBattlefield,
+        super(new SimpleActivatedAbility(
+                        new TorrentOfLavaPreventionEffect(null, 0, null), new TapSourceCost()),
+                Duration.Custom,
                 StaticFilters.FILTER_PERMANENT_CREATURES);
         this.staticText = "As long as {this} is on the stack, " +
                 "each creature has \"{T}: Prevent the next 1 damage that would be dealt to this creature by {this} this turn.\"";
@@ -77,12 +77,9 @@ class TorrentOfLavaGainAbilityEffect extends GainAbilityAllEffect {
         if (spell == null) {
             return false;
         }
-        Card card = spell.getCard();
-        if (card == null) {
-            return false;
-        }
 
-        ability = new SimpleActivatedAbility(new TorrentOfLavaPreventionEffect(card.getId(), card.getName()), new TapSourceCost());
+        ability = new SimpleActivatedAbility(
+                new TorrentOfLavaPreventionEffect(spell.getId(), spell.getZoneChangeCounter(game), spell.getName()), new TapSourceCost());
         return super.apply(game, source);
     }
 
@@ -95,25 +92,33 @@ class TorrentOfLavaGainAbilityEffect extends GainAbilityAllEffect {
 class TorrentOfLavaPreventionEffect extends PreventDamageToSourceEffect {
 
     private final UUID preventDamageFromId;
+    private final int zoneChangeCounter;
 
-    TorrentOfLavaPreventionEffect(UUID preventDamageFromId, String preventDamageFromName) {
+    TorrentOfLavaPreventionEffect(UUID preventDamageFromId, int zoneChangeCounter, String preventDamageFromName) {
         super(Duration.EndOfTurn, 1);
         this.preventDamageFromId = preventDamageFromId;
+        this.zoneChangeCounter = zoneChangeCounter;
         this.staticText = "Prevent the next 1 damage that would be dealt to {this} by " + preventDamageFromName + " this turn";
     }
 
     private TorrentOfLavaPreventionEffect(final TorrentOfLavaPreventionEffect effect) {
         super(effect);
         this.preventDamageFromId = effect.preventDamageFromId;
+        this.zoneChangeCounter = effect.zoneChangeCounter;
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (preventDamageFromId == null) {
+        if (!super.applies(event, source, game) || preventDamageFromId == null) {
             return false;
         }
 
-        return super.applies(event, source, game) && event.getSourceId().equals(preventDamageFromId);
+        Spell spell = game.getStack().getSpell(event.getSourceId());
+        if (spell == null) {
+            return false;
+        }
+
+        return spell.getId().equals(preventDamageFromId) && spell.getZoneChangeCounter(game) == zoneChangeCounter;
     }
 
     @Override
