@@ -35,7 +35,7 @@ public final class AlistairTheBrigadier extends CardImpl {
     private static final FilterPermanent filter2 = new FilterControlledPermanent("historic permanents you control");
 
     static {
-        filter.add(HistoricPredicate.instance);
+        filter2.add(HistoricPredicate.instance);
     }
 
     private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter2, null);
