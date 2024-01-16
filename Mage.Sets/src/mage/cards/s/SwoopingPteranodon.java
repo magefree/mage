@@ -3,12 +3,11 @@ package mage.cards.s;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
+import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldThisOrAnotherTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DamageFromOneToAnotherTargetEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
@@ -22,9 +21,9 @@ import mage.filter.StaticFilters;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -60,20 +59,11 @@ public final class SwoopingPteranodon extends CardImpl {
         ability.addEffect(new UntapTargetEffect().setText("Untap that creature"));
         ability.addEffect(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn).setText("It gains flying "));
         ability.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn).setText("and haste until end of turn."));
+        ability.addEffect(new SwoopingPteranodonCreateDelayedTriggerEffect());
 
-        TargetPermanent stolenCreatureTarget = new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE);
-        ability.addTarget(stolenCreatureTarget);
+        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
 
         this.addAbility(ability);
-
-        Effect damageEffect = new DamageFromOneToAnotherTargetEffect(3);
-        damageEffect.setText("target land deals 3 damage to that creature.");
-
-        Ability ability2 = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(damageEffect);
-        ability2.addTarget(new TargetPermanent(StaticFilters.FILTER_LAND));
-        ability2.addTarget(stolenCreatureTarget);
-
-        this.addAbility(ability2);
 
         // Swooping Pteranodon's triggered ability targets only the creature an opponent controls. You choose the
         // target land (where the poor creature is going to drop) as the delayed triggered ability triggers at the
@@ -92,4 +82,71 @@ public final class SwoopingPteranodon extends CardImpl {
     public SwoopingPteranodon copy() {
         return new SwoopingPteranodon(this);
     }
+}
+
+// Based on Angrath the Flame Chained
+class SwoopingPteranodonCreateDelayedTriggerEffect extends OneShotEffect {
+
+    SwoopingPteranodonCreateDelayedTriggerEffect() {
+        super(Outcome.Sacrifice);
+        staticText = "At the beginning of the next end step, target land deals 3 damage to that creature.";
+    }
+
+    private SwoopingPteranodonCreateDelayedTriggerEffect(final SwoopingPteranodonCreateDelayedTriggerEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public SwoopingPteranodonCreateDelayedTriggerEffect copy() {
+        return new SwoopingPteranodonCreateDelayedTriggerEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
+        if (permanent == null) {
+            return false;
+        }
+        Effect damageEffect = new SwoopingPteranodonDamageEffect(3);
+        damageEffect.setTargetPointer(new FixedTarget(permanent, game));
+        damageEffect.setText("target land deals 3 damage to that creature.");
+
+        DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(damageEffect);
+        delayedAbility.addTarget(new TargetPermanent(StaticFilters.FILTER_LAND));
+        game.addDelayedTriggeredAbility(delayedAbility, source);
+
+        return true;
+    }
+}
+
+class SwoopingPteranodonDamageEffect extends OneShotEffect {
+
+    private final int damage;
+
+    public SwoopingPteranodonDamageEffect(int damage) {
+        super(Outcome.Damage);
+        this.damage = damage;
+    }
+
+    protected SwoopingPteranodonDamageEffect(final SwoopingPteranodonDamageEffect effect) {
+        super(effect);
+        this.damage = effect.damage;
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent damagedPermanent = game.getPermanent(getTargetPointer().getFirst(game, source));
+        Permanent damagingPermanent = game.getPermanent(source.getTargets().get(0).getFirstTarget());
+        if (damagedPermanent == null || damagingPermanent == null) {
+            return false;
+        }
+        damagedPermanent.damage(damage, damagingPermanent.getId(), source, game, false, true);
+        return true;
+    }
+
+    @Override
+    public SwoopingPteranodonDamageEffect copy() {
+        return new SwoopingPteranodonDamageEffect(this);
+    }
+
 }
