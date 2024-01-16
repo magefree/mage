@@ -55,7 +55,7 @@ class NoMoreThanOneCreatureCanAttackEachTurnEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return true;
+        return permanent != null && permanent.isCreature(game);
     }
 
     @Override
@@ -83,7 +83,7 @@ class NoMoreThanOneCreatureCanBlockEachTurnEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return true;
+        return permanent != null && permanent.isCreature(game);
     }
 
     @Override
