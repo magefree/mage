@@ -58,8 +58,8 @@ public final class SwoopingPteranodon extends CardImpl {
         Ability ability = new EntersBattlefieldThisOrAnotherTriggeredAbility(
                 new GainControlTargetEffect(Duration.EndOfTurn), filter, true, true);
         ability.addEffect(new UntapTargetEffect().setText("Untap that creature"));
-        ability.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn).setText("It gains haste until end of turn."));
-        ability.addEffect(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn).setText("It gains flying until end of turn."));
+        ability.addEffect(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn).setText("It gains flying "));
+        ability.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn).setText("and haste until end of turn."));
 
         TargetPermanent stolenCreatureTarget = new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE);
         ability.addTarget(stolenCreatureTarget);
