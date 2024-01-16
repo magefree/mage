@@ -185,6 +185,7 @@ Magic Player Rewards|MPRP|
 Masterpiece Series|MPS|
 Mirrodin|MRD|
 Murders at Karlov Manor|MKM|
+Murders at Karlov Manor Commander|MKC|
 Ravnica: Clue Edition|CLU|
 Nemesis|NEM|
 New Phyrexia|NPH|

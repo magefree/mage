@@ -541,6 +541,7 @@ public class ScryfallImageSupportCards {
             add("RVR"); // Ravnica Remastered
             add("PIP"); // Fallout
             add("MKM"); // Murders at Karlov Manor
+            add("MKC"); // Murders at Karlov Manor Commander
             add("CLU"); // Ravnica: Clue Edition
 
             // Custom sets using Scryfall images - must provide a direct link for each card in directDownloadLinks

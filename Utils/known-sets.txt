@@ -182,6 +182,7 @@ Modern Masters 2015|ModernMasters2015|
 Modern Masters 2017|ModernMasters2017|
 Morningtide|Morningtide|
 Murders at Karlov Manor|MurdersAtKarlovManor|
+Murders at Karlov Manor Commander|MurdersAtKarlovManorCommander|
 Ravnica: Clue Edition|RavnicaClueEdition|
 Nemesis|Nemesis|
 New Phyrexia|NewPhyrexia|
