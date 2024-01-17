@@ -4,10 +4,15 @@ import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * @author TheElk801
  */
 public final class MurdersAtKarlovManor extends ExpansionSet {
+
+    private static final List<String> unfinished = Arrays.asList("Aurelia's Vindicator", "Branch of Vitu-Ghazi", "Defenestrated Phantom", "Dog Walker", "Expose the Culprit", "Gadget Technician", "Nightdrinker Moroii", "Pyrotechnic Performer");
 
     private static final MurdersAtKarlovManor instance = new MurdersAtKarlovManor();
 
@@ -71,5 +76,7 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Underground Mortuary", 271, Rarity.RARE, mage.cards.u.UndergroundMortuary.class));
         cards.add(new SetCardInfo("Warleader's Call", 242, Rarity.RARE, mage.cards.w.WarleadersCall.class));
         cards.add(new SetCardInfo("Wojek Investigator", 36, Rarity.RARE, mage.cards.w.WojekInvestigator.class));
+
+        cards.removeIf(setCardInfo -> unfinished.contains(setCardInfo.getName())); // remove when mechanic is implemented
     }
 }
