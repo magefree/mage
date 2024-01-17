@@ -5,7 +5,6 @@ import mage.abilities.effects.Effect;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 
 import java.util.Objects;
 import java.util.Optional;
@@ -49,11 +48,10 @@ public class EntersBattlefieldOrTurnedFaceUpTriggeredAbility extends TriggeredAb
             case TURNEDFACEUP:
                 return true;
             case ENTERS_THE_BATTLEFIELD:
-                Permanent sourcePermanent = getSourcePermanentIfItStillExists(game);
                 return Optional
                         .ofNullable(getSourcePermanentIfItStillExists(game))
                         .filter(Objects::nonNull)
-                        .map(permanent -> permanent.isFaceDown(game))
+                        .map(permanent -> !permanent.isFaceDown(game))
                         .orElse(false);
         }
         return false;
