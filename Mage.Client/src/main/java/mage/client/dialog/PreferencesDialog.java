@@ -10,6 +10,7 @@ import mage.client.util.CardLanguage;
 import mage.client.util.ClientDefaultSettings;
 import mage.client.util.GUISizeHelper;
 import mage.client.util.ImageHelper;
+import mage.client.util.audio.MusicPlayer;
 import mage.client.util.gui.BufferedImageBuilder;
 import static mage.constants.Constants.*;
 import mage.players.net.UserData;
@@ -101,6 +102,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_SOUNDS_SKIP_BUTTONS_ON = "soundsSkipButtonsOn";
     public static final String KEY_SOUNDS_OTHER_ON = "soundsOtherOn";
     public static final String KEY_SOUNDS_MATCH_MUSIC_ON = "soundsMatchMusicOn";
+    public static final String SOUNDS_MATCH_MUSIC_ENABLE_BY_DEFAULT = "true";
     public static final String KEY_SOUNDS_MATCH_MUSIC_PATH = "soundsMatchMusicPath";
 
     public static final String KEY_BIG_CARD_TOGGLED = "bigCardToggled";
@@ -2852,6 +2854,13 @@ public class PreferencesDialog extends javax.swing.JDialog {
         save(prefs, dialog.cbEnableOtherSounds, KEY_SOUNDS_OTHER_ON, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.cbEnableBattlefieldBGM, KEY_SOUNDS_MATCH_MUSIC_ON, "true", "false", UPDATE_CACHE_POLICY);
         saveSoundPath(prefs);
+        if (prefs.get(KEY_SOUNDS_MATCH_MUSIC_ON, SOUNDS_MATCH_MUSIC_ENABLE_BY_DEFAULT).equals("true")) {
+            if (MageFrame.isGameActive()) {
+                MusicPlayer.playBGM();
+            }
+        } else {
+            MusicPlayer.stopBGM();
+        }
 
         // connection
         save(prefs, dialog.cbProxyType, KEY_PROXY_TYPE);
@@ -3354,7 +3363,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         dialog.cbEnableOtherSounds.setSelected(prefs.get(KEY_SOUNDS_OTHER_ON, "true").equals("true"));
 
         // Match music
-        dialog.cbEnableBattlefieldBGM.setSelected(prefs.get(KEY_SOUNDS_MATCH_MUSIC_ON, "true").equals("true"));
+        dialog.cbEnableBattlefieldBGM.setSelected(prefs.get(KEY_SOUNDS_MATCH_MUSIC_ON, SOUNDS_MATCH_MUSIC_ENABLE_BY_DEFAULT).equals("true"));
         dialog.txtBattlefieldIBGMPath.setEnabled(dialog.cbEnableBattlefieldBGM.isSelected());
         dialog.btnBattlefieldBGMBrowse.setEnabled(dialog.cbEnableBattlefieldBGM.isSelected());
         // load and save the path always, so you can reactivate music without selecting path again
