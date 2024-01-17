@@ -35,7 +35,7 @@ public class EntersBattlefieldOrTurnedFaceUpTriggeredAbility extends TriggeredAb
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.TURNEDFACEUP
+        return event.getType() == GameEvent.EventType.TURNED_FACE_UP
                 || event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
     }
 
@@ -45,7 +45,7 @@ public class EntersBattlefieldOrTurnedFaceUpTriggeredAbility extends TriggeredAb
             return false;
         }
         switch (event.getType()) {
-            case TURNEDFACEUP:
+            case TURNED_FACE_UP:
                 return true;
             case ENTERS_THE_BATTLEFIELD:
                 return Optional

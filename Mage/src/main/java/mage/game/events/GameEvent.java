@@ -430,8 +430,8 @@ public class GameEvent implements Serializable {
         MEDITATED,
         PHASE_OUT, PHASED_OUT,
         PHASE_IN, PHASED_IN,
-        TURNFACEUP, TURNEDFACEUP,
-        TURNFACEDOWN, TURNEDFACEDOWN,
+        TURN_FACE_UP, TURNED_FACE_UP,
+        TURN_FACE_DOWN, TURNED_FACE_DOWN,
         /* OPTION_USED
          targetId    originalId of the ability that triggered the event
          sourceId    sourceId of the ability that triggered the event
