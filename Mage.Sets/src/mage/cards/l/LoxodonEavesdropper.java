@@ -34,7 +34,7 @@ public final class LoxodonEavesdropper extends CardImpl {
 
         // Whenever you draw your second card each turn, Loxodon Eavesdropper gets +1/+1 and gains vigilance until end of turn.
         Ability ability = new DrawNthCardTriggeredAbility(
-                new BoostSourceEffect(1, 1, Duration.EndOfGame)
+                new BoostSourceEffect(1, 1, Duration.EndOfTurn)
                         .setText("{this} gets +1/+1"),
                 false, 2
         );
