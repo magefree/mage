@@ -7,10 +7,10 @@ import mage.abilities.costs.CostImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.util.CardUtil;
 
 import java.util.Objects;
 import java.util.UUID;
@@ -25,7 +25,7 @@ public class CollectEvidenceCost extends CostImpl {
     public CollectEvidenceCost(int amount) {
         super();
         this.amount = amount;
-        this.text = "collect evidence " + CardUtil.numberToText(amount);
+        this.text = "collect evidence " + amount;
         this.addTarget(new TargetCardInYourGraveyard(1, Integer.MAX_VALUE).withNotTarget(true));
     }
 
@@ -61,6 +61,9 @@ public class CollectEvidenceCost extends CostImpl {
                 .filter(Objects::nonNull)
                 .mapToInt(MageObject::getManaValue)
                 .sum() >= amount;
+        if (paid) {
+            player.moveCards(cards, Zone.EXILED, source, game);
+        }
         return paid;
     }
 
