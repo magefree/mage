@@ -652,6 +652,10 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         menu.show(component, 0, component.getHeight());
     }
 
+    public static boolean isGameActive() {
+        return activeFrame instanceof GamePane;
+    }
+
     public static void setActive(MagePane frame) {
         // Always hide not hidden popup window or enlarged card view if a frame is set to active
         try {
