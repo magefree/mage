@@ -1,5 +1,6 @@
 package mage.abilities.common;
 
+import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.Cost;
@@ -12,11 +13,15 @@ import mage.abilities.effects.Effect;
 public class SimpleActivatedAbility extends ActivatedAbilityImpl {
 
     public SimpleActivatedAbility(Effect effect, Cost cost) {
-        this(Zone.BATTLEFIELD, effect, cost);
+        this(null, Zone.BATTLEFIELD, effect, cost);
     }
 
     public SimpleActivatedAbility(Zone zone, Effect effect, Cost cost) {
-        super(zone, effect, cost);
+        this(null, zone, effect, cost);
+    }
+
+    public SimpleActivatedAbility(Outcome outcome, Zone zone, Effect effect, Cost cost) {
+        super(outcome, zone, effect, cost);
     }
 
     protected SimpleActivatedAbility(final SimpleActivatedAbility ability) {

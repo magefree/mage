@@ -43,7 +43,7 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
     protected UUID activatorId;
 
     protected ActivatedAbilityImpl(AbilityType abilityType, Zone zone) {
-        super(abilityType, zone);
+        super(null, abilityType, zone);
     }
 
     protected ActivatedAbilityImpl(final ActivatedAbilityImpl ability) {
@@ -57,7 +57,11 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
     }
 
     protected ActivatedAbilityImpl(Zone zone, Effect effect, Cost cost) {
-        super(AbilityType.ACTIVATED, zone);
+        this(null, zone, effect, cost);
+    }
+
+    protected ActivatedAbilityImpl(Outcome outcome, Zone zone, Effect effect, Cost cost) {
+        super(outcome, AbilityType.ACTIVATED, zone);
         this.addEffect(effect);
         this.addCost(cost);
     }

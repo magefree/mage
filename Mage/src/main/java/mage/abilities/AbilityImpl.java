@@ -86,6 +86,10 @@ public abstract class AbilityImpl implements Ability {
     private Map<String, Object> costsTagMap = null;
 
     protected AbilityImpl(AbilityType abilityType, Zone zone) {
+        this(null, abilityType, zone);
+    }
+
+    protected AbilityImpl(Outcome outcome, AbilityType abilityType, Zone zone) {
         this.id = UUID.randomUUID();
         this.originalId = id;
         this.abilityType = abilityType;
@@ -94,6 +98,7 @@ public abstract class AbilityImpl implements Ability {
         this.manaCostsToPay = new ManaCostsImpl<>();
         this.costs = new CostsImpl<>();
         this.modes = new Modes();
+        this.customOutcome = outcome;
     }
 
     protected AbilityImpl(final AbilityImpl ability) {
