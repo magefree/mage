@@ -40,6 +40,7 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Hotshot Investigators", 60, Rarity.COMMON, mage.cards.h.HotshotInvestigators.class));
         cards.add(new SetCardInfo("Island", 273, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Knife", 134, Rarity.UNCOMMON, mage.cards.k.Knife.class));
+        cards.add(new SetCardInfo("Kraul Whipcracker", 213, Rarity.UNCOMMON, mage.cards.k.KraulWhipcracker.class));
         cards.add(new SetCardInfo("Lead Pipe", 90, Rarity.UNCOMMON, mage.cards.l.LeadPipe.class));
         cards.add(new SetCardInfo("Lightning Helix", 218, Rarity.UNCOMMON, mage.cards.l.LightningHelix.class));
         cards.add(new SetCardInfo("Lush Portico", 263, Rarity.RARE, mage.cards.l.LushPortico.class));
