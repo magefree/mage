@@ -7,8 +7,6 @@ import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.permanent.token.ClueArtifactToken;
 import mage.players.Player;
 
 /**
@@ -43,14 +41,11 @@ public class InvestigateTargetEffect extends OneShotEffect {
             return false;
         }
         int value = this.amount.calculate(game, source, this);
-        if (value < 1) {
-            return false;
+        if (value > 0) {
+            InvestigateEffect.doInvestigate(targetPlayer.getId(), value, game, source);
+            return true;
         }
-        new ClueArtifactToken().putOntoBattlefield(value, game, source, targetPlayer.getId());
-        for (int i = 0; i < value; i++) {
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.INVESTIGATED, source.getSourceId(), source, targetPlayer.getId()));
-        }
-        return true;
+        return false;
     }
 
     @Override

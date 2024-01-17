@@ -65,6 +65,7 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Mountain", 275, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Nightdrinker Moroii", 96, Rarity.UNCOMMON, mage.cards.n.NightdrinkerMoroii.class));
         cards.add(new SetCardInfo("No More Lies", 221, Rarity.UNCOMMON, mage.cards.n.NoMoreLies.class));
+        cards.add(new SetCardInfo("No Witnesses", 27, Rarity.RARE, mage.cards.n.NoWitnesses.class));
         cards.add(new SetCardInfo("Not on My Watch", 28, Rarity.UNCOMMON, mage.cards.n.NotOnMyWatch.class));
         cards.add(new SetCardInfo("Novice Inspector", 29, Rarity.COMMON, mage.cards.n.NoviceInspector.class));
         cards.add(new SetCardInfo("Out Cold", 66, Rarity.COMMON, mage.cards.o.OutCold.class));
