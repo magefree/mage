@@ -944,6 +944,11 @@ public class ContinuousEffects implements Serializable {
         removeInactiveEffects(game);
         List<ContinuousEffect> activeLayerEffects = getLayeredEffects(game); // main call
 
+        // Pseudo-layer 0 added for [[Paleontologist's Pick-Axe // Dinosaur Headdress]]
+        // See issue #11677
+
+        // First process any transform effects, which may add more layered effects
+        // that will be processed later.
         List<ContinuousEffect> layer = filterLayeredEffects(activeLayerEffects, Layer.TransformEffects_0);
         for (ContinuousEffect effect : layer) {
             Set<Ability> abilities = layeredEffects.getAbility(effect.getId());

@@ -4,7 +4,7 @@ import java.util.UUID;
 
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.common.AsAttachesToCreatureAbility;
+import mage.abilities.common.AsBecomesAttachedToCreatureSourceAbility;
 import mage.abilities.common.EntersBattlefieldAttachToTarget;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -49,7 +49,7 @@ public class DinosaurHeaddress extends CardImpl {
         this.addAbility(new EntersBattlefieldAttachToTarget());
 
         // As Dinosaur Headdress becomes attached to a creature, choose an exiled creature card used to craft Dinosaur Headdress.
-        this.addAbility(new AsAttachesToCreatureAbility(new ChooseAnExiledCreatureCard()));
+        this.addAbility(new AsBecomesAttachedToCreatureSourceAbility(new ChooseAnExiledCreatureCard()));
 
         // Equipped creature is a copy of the last chosen card.
         this.addAbility(new SimpleStaticAbility(new DinosaurHeaddressEffect()));
@@ -74,7 +74,7 @@ class ChooseAnExiledCreatureCard extends OneShotEffect {
 
     public ChooseAnExiledCreatureCard() {
         super(Outcome.Copy);
-        staticText = "choose an exiled creature card";
+        staticText = "choose an exiled creature card used to craft {this}.";
     }
 
     protected ChooseAnExiledCreatureCard(final ChooseAnExiledCreatureCard effect) {

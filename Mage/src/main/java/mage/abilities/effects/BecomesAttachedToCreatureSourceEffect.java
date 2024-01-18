@@ -11,7 +11,16 @@ import mage.game.events.GameEvent;
 import mage.game.stack.StackObject;
 import mage.players.Player;
 
-public class AttachesToEffect extends ReplacementEffectImpl {
+/**
+ * Based on {@link EntersBattlefieldEffect}.
+ * This allows rule wording such as "as {this} becomes attached to a creature...".
+ * See [[Dinosaur Headdress]].
+ * For this, we do not want a trigger, so a replacement effect is used to add
+ * one or more effects to the attach effect.
+ *
+ * @author DominionSpy
+ */
+public class BecomesAttachedToCreatureSourceEffect extends ReplacementEffectImpl {
 
     protected Effects baseEffects = new Effects();
     protected String text;
@@ -20,19 +29,19 @@ public class AttachesToEffect extends ReplacementEffectImpl {
 
     public static final String SOURCE_OBJECT_STACK_ABILITY = "sourceObjectStackAbility";
 
-    public AttachesToEffect(Effect baseEffect) {
+    public BecomesAttachedToCreatureSourceEffect(Effect baseEffect) {
         this(baseEffect, "");
     }
 
-    public AttachesToEffect(Effect baseEffect, String text) {
+    public BecomesAttachedToCreatureSourceEffect(Effect baseEffect, String text) {
         this(baseEffect, text, false);
     }
 
-    public AttachesToEffect(Effect baseEffect, String text, boolean optional) {
+    public BecomesAttachedToCreatureSourceEffect(Effect baseEffect, String text, boolean optional) {
         this(baseEffect, null, text, optional);
     }
 
-    public AttachesToEffect(Effect baseEffect, Condition condition, String text, boolean optional) {
+    public BecomesAttachedToCreatureSourceEffect(Effect baseEffect, Condition condition, String text, boolean optional) {
         super(Duration.WhileOnBattlefield, baseEffect.getOutcome(), false);
         this.baseEffects.add(baseEffect);
         this.text = text;
@@ -40,7 +49,7 @@ public class AttachesToEffect extends ReplacementEffectImpl {
         this.optional = optional;
     }
 
-    protected AttachesToEffect(final AttachesToEffect effect) {
+    protected BecomesAttachedToCreatureSourceEffect(final BecomesAttachedToCreatureSourceEffect effect) {
         super(effect);
         this.baseEffects = effect.baseEffects.copy();
         this.text = effect.text;
@@ -49,8 +58,8 @@ public class AttachesToEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public AttachesToEffect copy() {
-        return new AttachesToEffect(this);
+    public BecomesAttachedToCreatureSourceEffect copy() {
+        return new BecomesAttachedToCreatureSourceEffect(this);
     }
 
     public void addEffect(Effect effect) {
