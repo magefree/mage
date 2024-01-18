@@ -41,7 +41,7 @@ public final class GearbaneOrangutan extends CardImpl {
 
         // * Sacrifice an artifact. If you do, put two +1/+1 counters on Gearbane Orangutan.
         ability.addMode(new Mode(new DoIfCostPaid(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)),
                 new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_AN),
                 null, false
         )));
