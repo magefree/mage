@@ -35,7 +35,7 @@ public final class FaerieSnoop extends CardImpl {
 
         // When Faerie Snoop is turned face up, look at the top two cards of your library. Put one into your hand and the other into your graveyard.
         this.addAbility(new TurnedFaceUpSourceTriggeredAbility(new LookLibraryAndPickControllerEffect(
-                2, 1, PutCards.HAND, PutCards.BOTTOM_ANY
+                2, 1, PutCards.HAND, PutCards.GRAVEYARD
         )));
     }
 
