@@ -9,7 +9,6 @@ import mage.abilities.keyword.NightboundAbility;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.Card;
 import mage.cards.LevelerCard;
-import mage.cards.ModalDoubleFacedCard;
 import mage.cards.SplitCard;
 import mage.constants.SpellAbilityType;
 import mage.game.Game;
@@ -40,17 +39,11 @@ public class PermanentCard extends PermanentImpl {
         // usage check: you must put to play only real card's part
         // if you use it in test code then call CardUtil.getDefaultCardSideForBattlefield for default side
         // it's a basic check and still allows to create permanent from instant or sorcery
-        boolean goodForBattlefield = true;
-        if (card instanceof ModalDoubleFacedCard) {
-            goodForBattlefield = false;
-        } else if (card instanceof SplitCard) {
-            // fused spells allowed (it uses main card)
-            if (card.getSpellAbility() != null && !card.getSpellAbility().getSpellAbilityType().equals(SpellAbilityType.SPLIT_FUSED)) {
-                goodForBattlefield = false;
-            }
-        }
-        if (!goodForBattlefield) {
-            throw new IllegalArgumentException("Wrong code usage: can't create permanent card from split or mdf: " + card.getName());
+        // fused spells allowed (it uses main card)
+        if (card instanceof SplitCard && card.getSpellAbility() != null
+                && !card.getSpellAbility().getSpellAbilityType().equals(SpellAbilityType.SPLIT_FUSED)) {
+            throw new IllegalArgumentException("Wrong code usage: can't create permanent card from split or mdf: "
+                    + card.getName());
         }
 
         this.card = card;
