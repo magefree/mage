@@ -1,7 +1,6 @@
 package mage.abilities.effects;
 
 import mage.ApprovingObject;
-import mage.MageIdentifier;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.MageSingleton;
@@ -9,8 +8,6 @@ import mage.abilities.StaticAbility;
 import mage.abilities.effects.common.continuous.BecomesFaceDownCreatureEffect;
 import mage.abilities.effects.common.continuous.CommanderReplacementEffect;
 import mage.cards.*;
-import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicate;
@@ -947,7 +944,19 @@ public class ContinuousEffects implements Serializable {
         removeInactiveEffects(game);
         List<ContinuousEffect> activeLayerEffects = getLayeredEffects(game); // main call
 
-        List<ContinuousEffect> layer = filterLayeredEffects(activeLayerEffects, Layer.CopyEffects_1);
+        List<ContinuousEffect> layer = filterLayeredEffects(activeLayerEffects, Layer.TransformEffects_0);
+        for (ContinuousEffect effect : layer) {
+            Set<Ability> abilities = layeredEffects.getAbility(effect.getId());
+            for (Ability ability : abilities) {
+                effect.apply(Layer.TransformEffects_0, SubLayer.NA, ability, game);
+            }
+        }
+        //Reload layerEffect if transform effects were applied
+        if (!layer.isEmpty()) {
+            activeLayerEffects = getLayeredEffects(game);
+        }
+
+        layer = filterLayeredEffects(activeLayerEffects, Layer.CopyEffects_1);
         for (ContinuousEffect effect : layer) {
             Set<Ability> abilities = layeredEffects.getAbility(effect.getId());
             for (Ability ability : abilities) {

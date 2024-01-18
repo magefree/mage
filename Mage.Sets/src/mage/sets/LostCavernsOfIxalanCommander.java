@@ -99,6 +99,7 @@ public final class LostCavernsOfIxalanCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Desolate Lighthouse", 327, Rarity.RARE, mage.cards.d.DesolateLighthouse.class));
         cards.add(new SetCardInfo("Dimir Signet", 302, Rarity.UNCOMMON, mage.cards.d.DimirSignet.class));
         cards.add(new SetCardInfo("Dinosaur Egg", 92, Rarity.RARE, mage.cards.d.DinosaurEgg.class));
+        cards.add(new SetCardInfo("Dinosaur Headdress", 16, Rarity.MYTHIC, mage.cards.d.DinosaurHeaddress.class));
         cards.add(new SetCardInfo("Dire Fleet Daredevil", 223, Rarity.RARE, mage.cards.d.DireFleetDaredevil.class));
         cards.add(new SetCardInfo("Dire Fleet Ravager", 192, Rarity.MYTHIC, mage.cards.d.DireFleetRavager.class));
         cards.add(new SetCardInfo("Distant Melody", 154, Rarity.COMMON, mage.cards.d.DistantMelody.class));
@@ -198,6 +199,7 @@ public final class LostCavernsOfIxalanCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Orzhov Signet", 310, Rarity.UNCOMMON, mage.cards.o.OrzhovSignet.class));
         cards.add(new SetCardInfo("Otepec Huntmaster", 229, Rarity.UNCOMMON, mage.cards.o.OtepecHuntmaster.class));
         cards.add(new SetCardInfo("Pact of the Serpent", 206, Rarity.RARE, mage.cards.p.PactOfTheSerpent.class));
+        cards.add(new SetCardInfo("Paleontologist's Pick-Axe", 16, Rarity.MYTHIC, mage.cards.p.PaleontologistsPickAxe.class));
         cards.add(new SetCardInfo("Pantlaza, Sun-Favored", 4, Rarity.MYTHIC, mage.cards.p.PantlazaSunFavored.class));
         cards.add(new SetCardInfo("Path of Ancestry", 346, Rarity.COMMON, mage.cards.p.PathOfAncestry.class));
         cards.add(new SetCardInfo("Path to Exile", 134, Rarity.UNCOMMON, mage.cards.p.PathToExile.class));
