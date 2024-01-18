@@ -32,8 +32,8 @@ public final class ShadyInformant extends CardImpl {
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
 
-        // Disguise {2}
-        this.addAbility(new DisguiseAbility(this, new ManaCostsImpl<>("{2}")));
+        // Disguise {2}{B/R}{B/R}
+        this.addAbility(new DisguiseAbility(this, new ManaCostsImpl<>("{2}{B/R}{B/R}")));
     }
 
     private ShadyInformant(final ShadyInformant card) {
