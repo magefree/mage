@@ -111,7 +111,11 @@ public final class GameLog {
     }
 
     public static String getColoredObjectIdNameForTooltip(MageObject mageObject) {
-        return "<font color='" + getTooltipColorName(mageObject.getColor(null)) + "'>" + mageObject.getIdName() + "</font>";
+        return getColoredObjectIdNameForTooltip(mageObject.getColor(null), mageObject.getIdName());
+    }
+
+    public static String getColoredObjectIdNameForTooltip(ObjectColor color, String idName) {
+        return "<font color='" + getTooltipColorName(color) + "'>" + idName + "</font>";
     }
 
     public static String getNeutralColoredText(String text) {
