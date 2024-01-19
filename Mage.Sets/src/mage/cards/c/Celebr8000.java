@@ -73,11 +73,11 @@ class Celebr8000Effect extends OneShotEffect {
         setText("roll two six-sided dice. For each result of 1, {this} gets +1/+1 until end of turn. " +
                 "For each other result, it gains the indicated ability until end of turn. " +
                 "If you rolled doubles, it also gains double strike until end of turn.<br>" +
-                "• 2 — menace<br>" +
-                "• 3 — vigilance<br>" +
-                "• 4 — lifelink<br>" +
-                "• 5 — flying<br>" +
-                "• 6 — indestructible");
+                "&bull; 2 — menace<br>" +
+                "&bull; 3 — vigilance<br>" +
+                "&bull; 4 — lifelink<br>" +
+                "&bull; 5 — flying<br>" +
+                "&bull; 6 — indestructible");
     }
 
     private Celebr8000Effect(final Celebr8000Effect effect) {
