@@ -2710,6 +2710,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public void declareAttacker(UUID attackerId, UUID defenderId, Game game, boolean allowUndo) {
         if (allowUndo) {
+            // TODO: allowUndo is smells bad, must be researched (what will be restored on allowUndo = false and why there are so diff usage), 2024-01-16
             setStoredBookmark(game.bookmarkState()); // makes it possible to UNDO a declared attacker with costs from e.g. Propaganda
         }
         Permanent attacker = game.getPermanent(attackerId);

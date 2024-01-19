@@ -786,6 +786,7 @@ public interface Player extends MageItem, Copyable<Player> {
 
     void pickCard(List<Card> cards, Deck deck, Draft draft);
 
+    // TODO: add result, process it in AI code (if something put creature to attack then it can broke current AI logic)
     void declareAttacker(UUID attackerId, UUID defenderId, Game game, boolean allowUndo);
 
     void declareBlocker(UUID defenderId, UUID blockerId, UUID attackerId, Game game);

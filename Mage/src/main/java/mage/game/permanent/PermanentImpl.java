@@ -1435,12 +1435,12 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
-    public boolean canBeAttacked(UUID attackerId, UUID playerToAttack, Game game) {
+    public boolean canBeAttacked(UUID attackerId, UUID defendingPlayerId, Game game) {
         if (isPlaneswalker(game)) {
-            return isControlledBy(playerToAttack);
+            return isControlledBy(defendingPlayerId);
         }
         if (isBattle(game)) {
-            return isProtectedBy(playerToAttack);
+            return isProtectedBy(defendingPlayerId);
         }
         return false;
     }

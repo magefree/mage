@@ -31,12 +31,12 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
     protected List<UUID> attackerOrder = new ArrayList<>();
     protected Map<UUID, UUID> players = new HashMap<>();
     protected boolean blocked;
-    protected UUID defenderId; // planeswalker or player, can be null after remove from combat (e.g. due damage)
+    protected UUID defenderId; // planeswalker, player, or battle id, can be null after remove from combat (e.g. due damage)
     protected UUID defendingPlayerId;
     protected boolean defenderIsPermanent;
 
     /**
-     * @param defenderId          the player that controls the defending permanents
+     * @param defenderId          player, planeswalker or battle that defending
      * @param defenderIsPermanent is the defender a permanent
      * @param defendingPlayerId   regular controller of the defending permanents
      */
