@@ -70,7 +70,7 @@ class Celebr8000Effect extends OneShotEffect {
 
     Celebr8000Effect() {
         super(Outcome.Benefit);
-        setText("roll two six-sided dice. For each result of 1, Celebr-8000 gets +1/+1 until end of turn. " +
+        setText("roll two six-sided dice. For each result of 1, {this} gets +1/+1 until end of turn. " +
                 "For each other result, it gains the indicated ability until end of turn. " +
                 "If you rolled doubles, it also gains double strike until end of turn.<br>" +
                 "• 2 — menace<br>" +
