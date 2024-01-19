@@ -44,6 +44,7 @@ public class DinosaurHeaddress extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "");
 
         this.subtype.add(SubType.EQUIPMENT);
+        this.nightCard = true;
 
         // When Dinosaur Headdress enters the battlefield, attach it to target creature you control.
         this.addAbility(new EntersBattlefieldAttachToTarget());
