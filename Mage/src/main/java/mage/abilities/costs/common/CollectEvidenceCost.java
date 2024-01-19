@@ -55,10 +55,11 @@ public class CollectEvidenceCost extends CostImpl {
             paid = false;
             return paid;
         }
+        // TODO: require target to have minimum selected total mana value (requires refactor)
         Target target = new TargetCardInYourGraveyard(1, Integer.MAX_VALUE) {
             @Override
             public String getMessage() {
-                // shows selected power
+                // shows selected mana value
                 int totalMV = this
                         .getTargets()
                         .stream()
