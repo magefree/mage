@@ -60,9 +60,9 @@ public class AddCountersAllEffect extends OneShotEffect {
                     }
 
                     permanent.addCounters(newCounter, source.getControllerId(), source, game);
-                    if (!game.isSimulation()) {
+                    if (!game.isSimulation() && newCounter.getCount() > 0) {
                         game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " puts " + newCounter.getCount() + ' ' + newCounter.getName()
-                                + " counter on " + permanent.getLogName());
+                                + (newCounter.getCount() == 1 ? " counter" : " counters") + " on " + permanent.getLogName());
                     }
                 }
             }
