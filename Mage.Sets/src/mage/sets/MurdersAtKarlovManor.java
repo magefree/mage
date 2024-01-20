@@ -90,6 +90,7 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Private Eye", 223, Rarity.UNCOMMON, mage.cards.p.PrivateEye.class));
         cards.add(new SetCardInfo("Public Thoroughfare", 265, Rarity.COMMON, mage.cards.p.PublicThoroughfare.class));
         cards.add(new SetCardInfo("Raucous Theater", 266, Rarity.RARE, mage.cards.r.RaucousTheater.class));
+        cards.add(new SetCardInfo("Red Herring", 142, Rarity.COMMON, mage.cards.r.RedHerring.class));
         cards.add(new SetCardInfo("Sanitation Automaton", 256, Rarity.COMMON, mage.cards.s.SanitationAutomaton.class));
         cards.add(new SetCardInfo("Scene of the Crime", 267, Rarity.UNCOMMON, mage.cards.s.SceneOfTheCrime.class));
         cards.add(new SetCardInfo("Shadowy Backstreet", 268, Rarity.RARE, mage.cards.s.ShadowyBackstreet.class));
