@@ -38,7 +38,7 @@ public class OreRichStalactite extends CardImpl {
                 Predicates.or(CardType.INSTANT.getPredicate(), CardType.SORCERY.getPredicate())));
     }
 
-    protected OreRichStalactite(final OreRichStalactite card) {
+    private OreRichStalactite(final OreRichStalactite card) {
         super(card);
     }
 

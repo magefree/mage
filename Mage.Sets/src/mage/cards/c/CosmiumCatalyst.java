@@ -13,7 +13,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.Target;
@@ -41,7 +41,7 @@ public class CosmiumCatalyst extends CardImpl {
         this.addAbility(ability);
     }
 
-    protected CosmiumCatalyst(CosmiumCatalyst card) {
+    private CosmiumCatalyst(CosmiumCatalyst card) {
         super(card);
     }
 
@@ -53,13 +53,13 @@ public class CosmiumCatalyst extends CardImpl {
 
 class CosmiumCatalystEffect extends OneShotEffect {
 
-    public CosmiumCatalystEffect() {
-        super(Outcome.Benefit);
+    CosmiumCatalystEffect() {
+        super(Outcome.PlayForFree);
         this.staticText = "Choose an exiled card used to craft {this} at random." +
                 " You may cast that card without paying its mana cost.";
     }
 
-    protected CosmiumCatalystEffect(CosmiumCatalystEffect effect) {
+    private CosmiumCatalystEffect(CosmiumCatalystEffect effect) {
         super(effect);
     }
 
@@ -79,7 +79,7 @@ class CosmiumCatalystEffect extends OneShotEffect {
             return false;
         }
 
-        Target target = new TargetCardInExile(new FilterCard(),
+        Target target = new TargetCardInExile(StaticFilters.FILTER_CARD,
                 CardUtil.getExileZoneId(game, source.getSourceId(),
                         game.getState().getZoneChangeCounter(source.getSourceId()) - 2
                 ));
@@ -88,7 +88,7 @@ class CosmiumCatalystEffect extends OneShotEffect {
         if (!target.canChoose(controller.getId(), source, game)) {
             return true;
         }
-        controller.chooseTarget(Outcome.Benefit, target, source, game);
+        controller.chooseTarget(outcome, target, source, game);
         Card chosenCard = game.getCard(target.getFirstTarget());
         if (chosenCard != null) {
             CardUtil.castSpellWithAttributesForFree(controller, source, game, chosenCard);
