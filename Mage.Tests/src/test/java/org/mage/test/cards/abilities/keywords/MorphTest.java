@@ -1142,4 +1142,35 @@ public class MorphTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 2, 3);
     }
 
+    @Test
+    public void testBecomeTreasure() {
+        addCard(Zone.HAND, playerA, "Sage-Eye Harrier"); // 1/5 Flying, Morph 3W
+        addCard(Zone.HAND, playerA, "Minimus Containment"); // 2W Aura
+        // Enchant nonland permanent
+        // Enchanted permanent is a Treasure artifact with “{T},Sacrifice this artifact: Add one mana of any color,”
+        // and it loses all other abilities. (If it was a creature, it’s no longer a creature.)
+
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 7);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sage-Eye Harrier using Morph");
+
+        checkPT("face down", 1, PhaseStep.BEGIN_COMBAT, playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 2, 2);
+        checkPlayableAbility("unmorph", 1, PhaseStep.BEGIN_COMBAT, playerA, "{3}{W}: Turn this", true);
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Minimus Containment", EmptyNames.FACE_DOWN_CREATURE.toString());
+
+        checkPlayableAbility("unmorph", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{3}{W}: Turn this", false);
+
+        checkPlayableAbility("treasure", 1, PhaseStep.END_TURN, playerA, "{T}, Sacrifice ", true);
+
+        setStrictChooseMode(true);
+        setStopAt(2, PhaseStep.UPKEEP);
+        execute();
+
+        assertSubtype(EmptyNames.FACE_DOWN_CREATURE.toString(), SubType.TREASURE);
+        assertType(EmptyNames.FACE_DOWN_CREATURE.toString(), CardType.ARTIFACT, true);
+        assertType(EmptyNames.FACE_DOWN_CREATURE.toString(), CardType.CREATURE, false);
+        assertAttachedTo(playerA, "Minimus Containment", EmptyNames.FACE_DOWN_CREATURE.toString(), true);
+    }
+
 }
