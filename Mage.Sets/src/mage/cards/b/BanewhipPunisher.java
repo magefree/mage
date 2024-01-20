@@ -21,7 +21,7 @@ import mage.target.common.TargetCreaturePermanent;
 
 public final class BanewhipPunisher extends CardImpl {
     
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with a -1/-1 counter on it");    
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature that has a -1/-1 counter on it");
     
     static {
         filter.add(CounterType.M1M1.getPredicate());

@@ -1,4 +1,3 @@
-
 package mage.cards.a;
 
 import java.util.UUID;
@@ -13,7 +12,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.StaticFilters;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *
@@ -29,7 +27,7 @@ public final class ApocalypseDemon extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Apocalypse Demon's power and toughness are each equal to the number of cards in your graveyard.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(new CardsInControllerGraveyardCount())));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(new CardsInControllerGraveyardCount(StaticFilters.FILTER_CARD_CARDS))));
 
         // At the beginning of your upkeep, tap Apocalypse Demon unless you sacrifice another creature.
         TapSourceUnlessPaysEffect tapEffect = new TapSourceUnlessPaysEffect(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE));
