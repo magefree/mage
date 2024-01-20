@@ -4,9 +4,12 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
+import mage.abilities.hint.Hint;
+import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.abilities.keyword.WardAbility;
@@ -29,6 +32,11 @@ public final class VojaJawsOfTheConclave extends CardImpl {
     private static final FilterControlledPermanent filterElves = new FilterControlledPermanent(SubType.ELF);
     private static final FilterControlledPermanent filterWolves = new FilterControlledPermanent(SubType.WOLF);
 
+    private static final DynamicValue xValueElves = new PermanentsOnBattlefieldCount(filterElves);
+    private static final Hint hintElves = new ValueHint("Elves you control", xValueElves);
+    private static final DynamicValue xValueWolves = new PermanentsOnBattlefieldCount(filterWolves);
+    private static final Hint hintWolves = new ValueHint("Wolves you control", xValueWolves);
+
     public VojaJawsOfTheConclave(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{G}{W}");
 
@@ -50,13 +58,14 @@ public final class VojaJawsOfTheConclave extends CardImpl {
         // where X is the number of Elves you control. Draw a card for each Wolf you control.
         Ability ability = new AttacksTriggeredAbility(
                 new AddCountersAllEffect(
-                        CounterType.P1P1.createInstance(0), // Set amount to 0, otherwise AddCountersAllEffect.apply() will default to amount = 1
-                        new PermanentsOnBattlefieldCount(filterElves),
+                        // Set amount to 0, otherwise AddCountersAllEffect.apply() will default to amount = 1 if xValueElves = 0
+                        CounterType.P1P1.createInstance(0),
+                        xValueElves,
                         StaticFilters.FILTER_CONTROLLED_CREATURE
                 ).setText("put X +1/+1 counters on each creature you control, where X is the number of Elves you control"));
-        ability.addEffect(new DrawCardSourceControllerEffect(new PermanentsOnBattlefieldCount(filterWolves)));
+        ability.addEffect(new DrawCardSourceControllerEffect(xValueWolves));
 
-        this.addAbility(ability);
+        this.addAbility(ability.addHint(hintElves).addHint(hintWolves));
     }
 
     private VojaJawsOfTheConclave(final VojaJawsOfTheConclave card) {
