@@ -1173,4 +1173,52 @@ public class MorphTest extends CardTestPlayerBase {
         assertAttachedTo(playerA, "Minimus Containment", EmptyNames.FACE_DOWN_CREATURE.toString(), true);
     }
 
+    @Test
+    public void testMycosynthAfter() {
+        addCard(Zone.HAND, playerA, "Monastery Flock");
+        addCard(Zone.HAND, playerA, "Mycosynth Lattice");
+        addCard(Zone.BATTLEFIELD, playerA, "Secret Plans"); // face-down creatures get +0/+1
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 10);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Monastery Flock using Morph");
+
+        checkPT("face down", 1, PhaseStep.BEGIN_COMBAT, playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 2, 3);
+        checkPlayableAbility("unmorph", 1, PhaseStep.BEGIN_COMBAT, playerA, "{U}: Turn this", true);
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Mycosynth Lattice");
+
+        checkPlayableAbility("unmorph", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{U}: Turn this", true);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertType(EmptyNames.FACE_DOWN_CREATURE.toString(), CardType.ARTIFACT, true);
+        assertType(EmptyNames.FACE_DOWN_CREATURE.toString(), CardType.CREATURE, true);
+        assertNotSubtype(EmptyNames.FACE_DOWN_CREATURE.toString(), SubType.BIRD);
+        assertPowerToughness(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 2, 3);
+    }
+
+    @Test
+    public void testMycosynthBefore() {
+        addCard(Zone.HAND, playerA, "Monastery Flock");
+        addCard(Zone.BATTLEFIELD, playerA, "Mycosynth Lattice");
+        addCard(Zone.BATTLEFIELD, playerA, "Secret Plans"); // face-down creatures get +0/+1
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Monastery Flock using Morph");
+
+        checkPT("face down", 1, PhaseStep.BEGIN_COMBAT, playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 2, 3);
+        checkPlayableAbility("unmorph", 1, PhaseStep.BEGIN_COMBAT, playerA, "{U}: Turn this", true);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertType(EmptyNames.FACE_DOWN_CREATURE.toString(), CardType.ARTIFACT, true);
+        assertType(EmptyNames.FACE_DOWN_CREATURE.toString(), CardType.CREATURE, true);
+        assertNotSubtype(EmptyNames.FACE_DOWN_CREATURE.toString(), SubType.BIRD);
+        assertPowerToughness(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 2, 3);
+    }
+
 }
