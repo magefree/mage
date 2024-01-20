@@ -12,7 +12,7 @@ import java.util.List;
  */
 public final class MurdersAtKarlovManor extends ExpansionSet {
 
-    private static final List<String> unfinished = Arrays.asList("Aurelia's Vindicator", "Branch of Vitu-Ghazi", "Culvert Ambusher", "Defenestrated Phantom", "Dog Walker", "Essence of Antiquity", "Expose the Culprit", "Faerie Snoop", "Fugitive Codebreaker", "Gadget Technician", "Granite Witness", "Museum Nightwatch", "Nervous Gardener", "Nightdrinker Moroii", "Pyrotechnic Performer", "Shady Informant", "Undercover Crocodelf", "Unyielding Gatekeeper");
+    private static final List<String> unfinished = Arrays.asList("Aurelia's Vindicator", "Bolrac-Clan Basher", "Branch of Vitu-Ghazi", "Concealed Weapon", "Culvert Ambusher", "Defenestrated Phantom", "Dog Walker", "Essence of Antiquity", "Expose the Culprit", "Faerie Snoop", "Fugitive Codebreaker", "Gadget Technician", "Granite Witness", "Mistway Spy", "Museum Nightwatch", "Nervous Gardener", "Nightdrinker Moroii", "Pyrotechnic Performer", "Rakish Scoundrel", "Shady Informant", "Undercover Crocodelf", "Unyielding Gatekeeper");
 
     private static final MurdersAtKarlovManor instance = new MurdersAtKarlovManor();
 
