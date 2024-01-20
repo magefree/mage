@@ -17,7 +17,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 public class AsBecomesAttachedTest extends CardTestPlayerBase {
 
     /**
-     * Sanctuary Blade     2
+     * Sanctuary Blade {2}
      * Artifact - Equipment
      * As Sanctuary Blade becomes attached to a creature, choose a color.
      * Equipped creature gets +2/+0 and has protection from the last chosen color.
@@ -37,18 +37,13 @@ public class AsBecomesAttachedTest extends CardTestPlayerBase {
 
         // Check that there is no trigger on the stack after the equip ability has resolved
         checkStackSize("stack is empty", 1, PhaseStep.PRECOMBAT_MAIN, playerA, 0);
-
-        setStrictChooseMode(true);
-        setStopAt(1, PhaseStep.BEGIN_COMBAT);
-        execute();
-
-        // Do the same check for switching from one creature to another
-        assertAbility(playerA, "Llanowar Elves", ProtectionAbility.from(ObjectColor.WHITE), true);
+        checkAbility("llanowar elves must have protection", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Llanowar Elves", ProtectionAbility.class, true);
 
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Equip", "Elvish Mystic");
         setChoice(playerA, "Blue");
         waitStackResolved(1, PhaseStep.POSTCOMBAT_MAIN, 1);
 
+        // Do the same check for switching from one creature to another
         checkStackSize("stack is empty", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, 0);
 
         setStopAt(1, PhaseStep.END_TURN);

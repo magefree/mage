@@ -21,7 +21,7 @@ public class AsBecomesAttachedToCreatureSourceAbility extends StaticAbility {
     }
 
     public AsBecomesAttachedToCreatureSourceAbility(Effect effect, String text) {
-        super(Zone.BATTLEFIELD, new BecomesAttachedToCreatureSourceEffect(effect, null, text, false));
+        super(Zone.BATTLEFIELD, new BecomesAttachedToCreatureSourceEffect(effect, null, text));
     }
 
     protected AsBecomesAttachedToCreatureSourceAbility(final AsBecomesAttachedToCreatureSourceAbility ability) {

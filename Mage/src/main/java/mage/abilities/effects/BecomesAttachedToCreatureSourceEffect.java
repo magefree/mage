@@ -1,15 +1,11 @@
 package mage.abilities.effects;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.condition.Condition;
 import mage.constants.Duration;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.stack.StackObject;
-import mage.players.Player;
 
 /**
  * Based on {@link EntersBattlefieldEffect}.
@@ -25,28 +21,20 @@ public class BecomesAttachedToCreatureSourceEffect extends ReplacementEffectImpl
     protected Effects baseEffects = new Effects();
     protected String text;
     protected Condition condition;
-    protected boolean optional;
-
-    public static final String SOURCE_OBJECT_STACK_ABILITY = "sourceObjectStackAbility";
 
     public BecomesAttachedToCreatureSourceEffect(Effect baseEffect) {
         this(baseEffect, "");
     }
 
     public BecomesAttachedToCreatureSourceEffect(Effect baseEffect, String text) {
-        this(baseEffect, text, false);
+        this(baseEffect, null, text);
     }
 
-    public BecomesAttachedToCreatureSourceEffect(Effect baseEffect, String text, boolean optional) {
-        this(baseEffect, null, text, optional);
-    }
-
-    public BecomesAttachedToCreatureSourceEffect(Effect baseEffect, Condition condition, String text, boolean optional) {
+    public BecomesAttachedToCreatureSourceEffect(Effect baseEffect, Condition condition, String text) {
         super(Duration.WhileOnBattlefield, baseEffect.getOutcome(), false);
         this.baseEffects.add(baseEffect);
         this.text = text;
         this.condition = condition;
-        this.optional = optional;
     }
 
     protected BecomesAttachedToCreatureSourceEffect(final BecomesAttachedToCreatureSourceEffect effect) {
@@ -54,7 +42,6 @@ public class BecomesAttachedToCreatureSourceEffect extends ReplacementEffectImpl
         this.baseEffects = effect.baseEffects.copy();
         this.text = effect.text;
         this.condition = effect.condition;
-        this.optional = effect.optional;
     }
 
     @Override
@@ -81,30 +68,10 @@ public class BecomesAttachedToCreatureSourceEffect extends ReplacementEffectImpl
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        if (optional) {
-            Player controller = game.getPlayer(source.getControllerId());
-            MageObject object = game.getPermanentEntering(source.getSourceId());
-            if (object == null) {
-                object = game.getObject(source);
-            }
-            if (controller == null || object == null) {
-                return false;
-            }
-            if (!controller.chooseUse(outcome, "Use effect of " + object.getLogName() + '?', source, game)) {
-                return false;
-            }
-        }
-        StackObject attachesByObject = game.getStack().getStackObject(event.getSourceId());
-        if (attachesByObject == null) {
-            attachesByObject = (StackObject) game.getLastKnownInformation(event.getSourceId(), Zone.STACK);
-        }
         for (Effect effect : baseEffects) {
             if (effect instanceof ContinuousEffect) {
                 game.addEffect((ContinuousEffect) effect, source);
             } else {
-                if (attachesByObject != null) {
-                    effect.setValue(SOURCE_OBJECT_STACK_ABILITY, attachesByObject.getStackAbility());
-                }
                 effect.setValue("appliedEffects", event.getAppliedEffects());
                 effect.apply(game, source);
             }
