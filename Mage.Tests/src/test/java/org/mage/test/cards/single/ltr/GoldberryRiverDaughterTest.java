@@ -54,6 +54,7 @@ public class GoldberryRiverDaughterTest extends CardTestPlayerBase {
     @Test
     // Author: alexander-novo
     // Unhappy path - Try to remove some counters from something when some of those counters are already on Goldberry
+    // (but now with different counts, to cover that edge case.)
     public void testCounterAlreadyOnGoldberry() {
         CounterType counter = CounterType.ACORN;
         String island = "Island";
@@ -61,7 +62,7 @@ public class GoldberryRiverDaughterTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, goldberry, 1);
         addCard(Zone.BATTLEFIELD, playerA, island, 1);
 
-        addCounters(1, PhaseStep.PRECOMBAT_MAIN, playerA, island, counter, 1);
+        addCounters(1, PhaseStep.PRECOMBAT_MAIN, playerA, island, counter, 2);
         addCounters(1, PhaseStep.PRECOMBAT_MAIN, playerA, goldberry, counter, 1);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, ability1, island);
