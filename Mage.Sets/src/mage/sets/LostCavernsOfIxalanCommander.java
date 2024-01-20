@@ -26,6 +26,7 @@ public final class LostCavernsOfIxalanCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Aetherize", 142, Rarity.UNCOMMON, mage.cards.a.Aetherize.class));
         cards.add(new SetCardInfo("Akroma's Will", 125, Rarity.RARE, mage.cards.a.AkromasWill.class));
         cards.add(new SetCardInfo("Alchemist's Refuge", 318, Rarity.RARE, mage.cards.a.AlchemistsRefuge.class));
+        cards.add(new SetCardInfo("Altar of the Wretched", 10, Rarity.RARE, mage.cards.a.AltarOfTheWretched.class));
         cards.add(new SetCardInfo("Amphin Mutineer", 143, Rarity.RARE, mage.cards.a.AmphinMutineer.class));
         cards.add(new SetCardInfo("Amulet of Vigor", 103, Rarity.RARE, mage.cards.a.AmuletOfVigor.class));
         cards.add(new SetCardInfo("Angrath's Marauders", 215, Rarity.RARE, mage.cards.a.AngrathsMarauders.class));
@@ -319,6 +320,7 @@ public final class LostCavernsOfIxalanCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Windfall", 180, Rarity.UNCOMMON, mage.cards.w.Windfall.class));
         cards.add(new SetCardInfo("Worn Powerstone", 120, Rarity.UNCOMMON, mage.cards.w.WornPowerstone.class));
         cards.add(new SetCardInfo("Wrathful Raptors", 88, Rarity.RARE, mage.cards.w.WrathfulRaptors.class));
+        cards.add(new SetCardInfo("Wretched Bonemass", 10, Rarity.RARE, mage.cards.w.WretchedBonemass.class));
         cards.add(new SetCardInfo("Xavier Sal, Infested Captain", 14, Rarity.RARE, mage.cards.x.XavierSalInfestedCaptain.class));
         cards.add(new SetCardInfo("Xenagos, God of Revels", 295, Rarity.MYTHIC, mage.cards.x.XenagosGodOfRevels.class));
         cards.add(new SetCardInfo("Xolatoyac, the Smiling Flood", 8, Rarity.MYTHIC, mage.cards.x.XolatoyacTheSmilingFlood.class));
