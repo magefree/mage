@@ -38,7 +38,7 @@ public final class AltarOfTheWretched extends CardImpl {
         ));
 
         // {2}{B}: Return Altar of the Wretched from your graveyard to your hand.
-        this.addAbility(new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), new ManaCostsImpl("{2}{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), new ManaCostsImpl<>("{2}{B}")));
 
     }
 
@@ -56,7 +56,7 @@ class AltarOfTheWretchedEffect extends OneShotEffect {
 
     AltarOfTheWretchedEffect() {
         super(Outcome.Benefit);
-        staticText = "you may sacrifice a nontoken creature.  If you do, draw X cards, then mill X cards, where X is that creature’s power.";
+        staticText = "you may sacrifice a nontoken creature. If you do, draw X cards, then mill X cards, where X is that creature's power.";
     }
 
     private AltarOfTheWretchedEffect(final AltarOfTheWretchedEffect effect) {

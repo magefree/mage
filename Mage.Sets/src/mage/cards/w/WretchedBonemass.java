@@ -1,7 +1,5 @@
 package mage.cards.w;
 
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -9,32 +7,18 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
-import mage.abilities.keyword.DeathtouchAbility;
-import mage.abilities.keyword.DoubleStrikeAbility;
-import mage.abilities.keyword.FirstStrikeAbility;
-import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.HasteAbility;
-import mage.abilities.keyword.HexproofAbility;
-import mage.abilities.keyword.IndestructibleAbility;
-import mage.abilities.keyword.LifelinkAbility;
-import mage.abilities.keyword.MenaceAbility;
-import mage.abilities.keyword.ProtectionAbility;
-import mage.abilities.keyword.ReachAbility;
-import mage.abilities.keyword.TrampleAbility;
-import mage.abilities.keyword.VigilanceAbility;
+import mage.abilities.keyword.*;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.SubType;
+import mage.constants.*;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
+
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -45,6 +29,7 @@ public final class WretchedBonemass extends CardImpl {
     public WretchedBonemass(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, null);
         this.nightCard = true;
+        this.color.setBlack(true);
 
         this.subtype.add(SubType.SKELETON);
         this.subtype.add(SubType.HORROR);
@@ -52,7 +37,7 @@ public final class WretchedBonemass extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Wretched Bonemass’s power and toughness are each equal to the total power of the exiled cards used to craft it.
-        this.addAbility(new SimpleStaticAbility(new SetBasePowerToughnessSourceEffect(WretchedBonemassDynamicValue.instance).setText("{this}’s power and toughness are each equal to the total power of the exiled cards used to craft it.")));
+        this.addAbility(new SimpleStaticAbility(new SetBasePowerToughnessSourceEffect(WretchedBonemassDynamicValue.instance).setText("{this}'s power and toughness are each equal to the total power of the exiled cards used to craft it.")));
 
         // Wretched Bonemass has flying as long as an exiled card used to craft it has flying. The same is true for first strike, double strike, deathtouch, haste, hexproof, indestructible, lifelink, menace, protection, reach, trample, and vigilance.
         this.addAbility(new SimpleStaticAbility(new WretchedBonemassGainAbilityEffect()));
@@ -113,7 +98,7 @@ class WretchedBonemassGainAbilityEffect extends ContinuousEffectImpl {
 
     WretchedBonemassGainAbilityEffect() {
         super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
-        staticText = "Wretched Bonemass has flying as long as an exiled card used to craft it has flying. The same is true for first strike, double strike, deathtouch, haste, hexproof, indestructible, lifelink, menace, protection, reach, trample, and vigilance.";
+        staticText = "{this} has flying as long as an exiled card used to craft it has flying. The same is true for first strike, double strike, deathtouch, haste, hexproof, indestructible, lifelink, menace, protection, reach, trample, and vigilance.";
     }
 
     private WretchedBonemassGainAbilityEffect(final WretchedBonemassGainAbilityEffect effect) {
