@@ -310,7 +310,15 @@ public interface Permanent extends Card, Controllable {
 
     boolean canBlockAny(Game game);
 
-    boolean canBeAttacked(UUID attackerId, UUID playerToAttack, Game game);
+    /**
+     * Fast check for attacking possibilities (is it possible to attack permanent/planeswalker/battle)
+     *
+     * @param attackerId creature to attack, can be null
+     * @param defendingPlayerId defending player
+     * @param game
+     * @return
+     */
+    boolean canBeAttacked(UUID attackerId, UUID defendingPlayerId, Game game);
 
     /**
      * Checks by restriction effects if the permanent can use activated

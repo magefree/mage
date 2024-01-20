@@ -44,7 +44,7 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
     private boolean priorityPlay(Game game) {
         if (lastLoggedTurn != game.getTurnNum()) {
             lastLoggedTurn = game.getTurnNum();
-            logger.info("======================= Turn: " + game.getTurnNum() + " [" + game.getPlayer(game.getActivePlayerId()).getName() + "] =========================================");
+            logger.info("======================= Turn: " + game.getState().toString() + " [" + game.getPlayer(game.getActivePlayerId()).getName() + "] =========================================");
         }
         logState(game);
         logger.debug("Priority -- Step: " + (game.getTurnStepType() + "                       ").substring(0, 25) + " ActivePlayer-" + game.getPlayer(game.getActivePlayerId()).getName() + " PriorityPlayer-" + name);
