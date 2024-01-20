@@ -65,6 +65,7 @@ public class GoldberryRiverDaughterTest extends CardTestPlayerBase {
         addCounters(1, PhaseStep.PRECOMBAT_MAIN, playerA, island, counter, 2);
         addCounters(1, PhaseStep.PRECOMBAT_MAIN, playerA, goldberry, counter, 1);
 
+        // nothing to move (goldberry already has that counter type)
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, ability1, island);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, 1);
 
@@ -72,7 +73,7 @@ public class GoldberryRiverDaughterTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();
 
-        assertCounterCount(island, counter, 1);
+        assertCounterCount(island, counter, 2);
         assertCounterCount(goldberry, counter, 1);
     }
 
