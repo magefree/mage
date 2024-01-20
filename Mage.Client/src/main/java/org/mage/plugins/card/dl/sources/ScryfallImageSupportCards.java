@@ -1022,6 +1022,9 @@ public class ScryfallImageSupportCards {
             // CALC - custom alchemy version of cards.
             put("CALC/C-Pillar of the Paruns", "https://api.scryfall.com/cards/dis/176/");
 
+            // LTR - 0 number for tokens only
+            put("LTR/The One Ring/001", "https://api.scryfall.com/cards/ltr/0/");
+
             // REX - double faced lands (xmage uses two diff lands for it)
             put("REX/Command Tower/26", "https://api.scryfall.com/cards/rex/26/en?format=image");
             put("REX/Command Tower/26b", "https://api.scryfall.com/cards/rex/26/en?format=image&face=back");
