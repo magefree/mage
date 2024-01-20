@@ -46,6 +46,7 @@ public class AsBecomesAttachedTest extends CardTestPlayerBase {
         // Do the same check for switching from one creature to another
         checkStackSize("stack is empty", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, 0);
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
