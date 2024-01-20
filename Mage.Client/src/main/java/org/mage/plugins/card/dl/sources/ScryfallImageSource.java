@@ -81,7 +81,7 @@ public enum ScryfallImageSource implements CardImageSource {
             String link = ScryfallImageSupportCards.findDirectDownloadLink(card.getSet(), card.getName(), card.getCollectorId());
             if (link != null) {
                 if (ScryfallImageSupportCards.isApiLink(link)) {
-                    // api
+                    // api link - must prepare direct link
                     baseUrl = link + localizedCode + "?format=image";
                     alternativeUrl = link + defaultCode + "?format=image";
                     // workaround to use cards without english images (some promos or special cards)
@@ -89,7 +89,7 @@ public enum ScryfallImageSource implements CardImageSource {
                         alternativeUrl = alternativeUrl.replace("/en?format=image", "?format=image");
                     }
                 } else {
-                    // image
+                    // direct link to image
                     baseUrl = link;
                 }
             }

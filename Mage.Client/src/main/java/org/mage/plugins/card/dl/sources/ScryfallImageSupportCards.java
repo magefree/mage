@@ -556,6 +556,7 @@ public class ScryfallImageSupportCards {
             //
             // example:
             //   api link: https://api.scryfall.com/cards/trix/6/
+            //   api direct link: https://api.scryfall.com/cards/rex/26/en?format=image&face=back
             //   image link: https://c1.scryfall.com/file/scryfall-cards/large/back/d/5/d5dfd236-b1da-4552-b94f-ebf6bb9dafdf.jpg
             //
             // key for one card:
@@ -564,6 +565,11 @@ public class ScryfallImageSupportCards {
             // key for same name cards (alternative images):
             //   set/card_name/card_number_1
             //   set/card_name/card_number_2
+            //
+            // double faced cards:
+            //  front face image: format=image&face=front
+            //  back face image: format=image&face=back
+            //  example: https://api.scryfall.com/cards/rex/26/en?format=image&face=back
             //
             // Cards with non-ASCII collector numbers must use direct download (cause xmage uses different card number)
             // Verify checks must check and show missing data from that list,
@@ -1013,8 +1019,22 @@ public class ScryfallImageSupportCards {
             // PRES
             put("PRES/Lathliss, Dragon Queen/149*", "https://api.scryfall.com/cards/pres/149★/");
 
-            // CALC -- custom alchemy version of cards.
+            // CALC - custom alchemy version of cards.
             put("CALC/C-Pillar of the Paruns", "https://api.scryfall.com/cards/dis/176/");
+
+            // REX - double faced lands (xmage uses two diff lands for it)
+            put("REX/Command Tower/26", "https://api.scryfall.com/cards/rex/26/en?format=image");
+            put("REX/Command Tower/26b", "https://api.scryfall.com/cards/rex/26/en?format=image&face=back");
+            put("REX/Forest/25", "https://api.scryfall.com/cards/rex/25/en?format=image");
+            put("REX/Forest/25b", "https://api.scryfall.com/cards/rex/25/en?format=image&face=back");
+            put("REX/Island/22", "https://api.scryfall.com/cards/rex/22/en?format=image");
+            put("REX/Island/22b", "https://api.scryfall.com/cards/rex/22/en?format=image&face=back");
+            put("REX/Mountain/24", "https://api.scryfall.com/cards/rex/24/en?format=image");
+            put("REX/Mountain/24b", "https://api.scryfall.com/cards/rex/24/en?format=image&face=back");
+            put("REX/Plains/21", "https://api.scryfall.com/cards/rex/21/en?format=image");
+            put("REX/Plains/21b", "https://api.scryfall.com/cards/rex/21/en?format=image&face=back");
+            put("REX/Swamp/23", "https://api.scryfall.com/cards/rex/23/en?format=image");
+            put("REX/Swamp/23b", "https://api.scryfall.com/cards/rex/23/en?format=image&face=back");
         }
     };
 
@@ -1069,7 +1089,7 @@ public class ScryfallImageSupportCards {
     }
 
     public static boolean isApiLink(String link) {
-        return !link.endsWith(".jpg") && !link.endsWith(".png");
+        return !link.endsWith(".jpg") && !link.endsWith(".png") && !link.contains("format=image");
     }
 
     public static Map<String, String> getDirectDownloadLinks() {

@@ -51,6 +51,8 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
 
     private static final int MAX_ERRORS_COUNT_BEFORE_CANCEL = 50;
 
+    private static final int MIN_FILE_SIZE_OF_GOOD_IMAGE = 1024 * 10; // protect from wrong data save
+
     private final DownloadImagesDialog uiDialog;
     private boolean needCancel;
     private int errorCount;
@@ -431,7 +433,9 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
         List<CardDownloadData> allCardsUrls = Collections.synchronizedList(new ArrayList<>());
         try {
             allCards.parallelStream().forEach(card -> {
-                if (!card.getCardNumber().isEmpty() && !"0".equals(card.getCardNumber()) && !card.getSetCode().isEmpty()) {
+                if (!card.getCardNumber().isEmpty()
+                        && !"0".equals(card.getCardNumber())
+                        && !card.getSetCode().isEmpty()) {
                     String cardName = card.getName();
                     CardDownloadData url = new CardDownloadData(cardName, card.getSetCode(), card.getCardNumber(), card.usesVariousArt(), 0, false, card.isDoubleFaced(), card.isNightCard());
 
@@ -545,8 +549,13 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                 cardsToDownload.add(card);
             } else {
                 // need missing cards
-                File file = new TFile(CardImageUtils.buildImagePathToCardOrToken(card));
+                String imagePath = CardImageUtils.buildImagePathToCardOrToken(card);
+                File file = new TFile(imagePath);
                 if (!file.exists()) {
+                    cardsToDownload.add(card);
+                } else if (file.length() < MIN_FILE_SIZE_OF_GOOD_IMAGE) {
+                    // how-to fix: if it really downloads image data then set lower file size
+                    logger.error("Found broken file: " + imagePath);
                     cardsToDownload.add(card);
                 }
             }
@@ -744,17 +753,6 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                     destFile = new TFile(CardImageUtils.buildImagePathToCardOrToken(card));
                 }
 
-                // FILE already exists (in zip or in dir)
-                // don't use, images can be re-downloaded
-                /*
-                if (destFile.exists()) {
-                    synchronized (sync) {
-                        update(cardIndex + 1, count);
-                    }
-                    return;
-                }
-                */
-
                 // check zip access
                 TFile testArchive = destFile.getTopLevelArchive();
                 if (testArchive != null && testArchive.exists()) {
@@ -916,7 +914,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
             List<CardDownloadData> downloadedCards = Collections.synchronizedList(new ArrayList<>());
             DownloadPicturesService.this.cardsMissing.parallelStream().forEach(cardDownloadData -> {
                 TFile file = new TFile(CardImageUtils.buildImagePathToCardOrToken(cardDownloadData));
-                if (file.exists()) {
+                if (file.exists() && file.length() > MIN_FILE_SIZE_OF_GOOD_IMAGE) {
                     downloadedCards.add(cardDownloadData);
                 }
             });
