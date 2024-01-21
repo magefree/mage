@@ -46,9 +46,7 @@ public final class IncandescentSoulstoke extends CardImpl {
 
         // {1}{R}, {T}: You may put an Elemental creature card from your hand onto the battlefield. That creature gains haste until end of turn. Sacrifice it at the beginning of the next end step.
         Ability ability = new SimpleActivatedAbility(
-                new PutCardIntoPlayWithHasteAndSacrificeEffect(filter2, Duration.EndOfTurn)
-                        .setText("You may put an Elemental creature card from your hand onto the battlefield. " +
-                                "That creature gains haste until end of turn. Sacrifice it at the beginning of the next end step."),
+                new PutCardIntoPlayWithHasteAndSacrificeEffect(filter2, Duration.EndOfTurn, "That creature", "it"),
                 new ManaCostsImpl<>("{1}{R}")
         );
         ability.addCost(new TapSourceCost());
