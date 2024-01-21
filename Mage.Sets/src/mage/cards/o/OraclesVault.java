@@ -8,7 +8,7 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ExileTopXMayPlayUntilEndOfTurnEffect;
+import mage.abilities.effects.common.ExileTopXMayPlayUntilEffect;
 import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
@@ -29,7 +29,8 @@ public final class OraclesVault extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
         // {2}, {T}: Exile the top card of your library. Until end of turn, you may play that card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTopXMayPlayUntilEndOfTurnEffect(1), new GenericManaCost(2));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTopXMayPlayUntilEffect(1, Duration.EndOfTurn)
+                .withTextOptions("that card", false), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
 
         // Put a brick counter on Oracle's Vault.

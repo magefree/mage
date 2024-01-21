@@ -6,7 +6,7 @@ import mage.abilities.common.AttacksWithCreaturesTriggeredAbility;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.effects.common.DoWhenCostPaid;
-import mage.abilities.effects.common.ExileTopXMayPlayUntilEndOfTurnEffect;
+import mage.abilities.effects.common.ExileTopXMayPlayUntilEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.TrampleAbility;
@@ -45,7 +45,7 @@ public final class IntiSeneschalOfTheSun extends CardImpl {
                 ability, new DiscardCardCost(), "Discard a card?"
         ), 1));
 
-        // Whenever you discard one or more cards, exile the top card of your library. You may play it until your next end step.
+        // Whenever you discard one or more cards, exile the top card of your library. You may play that card until your next end step.
         this.addAbility(new IntiSeneschalOfTheSunTriggeredAbility());
     }
 
@@ -62,7 +62,7 @@ public final class IntiSeneschalOfTheSun extends CardImpl {
 class IntiSeneschalOfTheSunTriggeredAbility extends TriggeredAbilityImpl {
 
     IntiSeneschalOfTheSunTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new ExileTopXMayPlayUntilEndOfTurnEffect(1, false, Duration.UntilYourNextEndStep));
+        super(Zone.BATTLEFIELD, new ExileTopXMayPlayUntilEffect(1, Duration.UntilYourNextEndStep));
         this.setTriggerPhrase("Whenever you discard one or more cards, ");
     }
 

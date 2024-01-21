@@ -6,11 +6,12 @@ import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
 import mage.abilities.effects.common.DoIfCostPaid;
-import mage.abilities.effects.common.ExileTopXMayPlayUntilEndOfTurnEffect;
+import mage.abilities.effects.common.ExileTopXMayPlayUntilEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
@@ -38,8 +39,7 @@ public final class ArdentDustspeaker extends CardImpl {
         // If you do, exile the top two cards of your library. You may play those cards this turn.
         this.addAbility(new AttacksTriggeredAbility(
                 new DoIfCostPaid(
-                        new ExileTopXMayPlayUntilEndOfTurnEffect(2)
-                                .setText("exile the top two cards of your library. You may play those cards this turn"),
+                        new ExileTopXMayPlayUntilEffect(2, Duration.EndOfTurn),
                         new ArdentDustspeakerCost()
                 ),
                 false
@@ -61,7 +61,7 @@ class ArdentDustspeakerCost extends CostImpl {
     private static final FilterCard filter
             = new FilterInstantOrSorceryCard("instant or sorcery card from your graveyard");
 
-    public ArdentDustspeakerCost() {
+    ArdentDustspeakerCost() {
         TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(filter);
         target.withNotTarget(true);
         this.addTarget(target);
@@ -85,13 +85,11 @@ class ArdentDustspeakerCost extends CostImpl {
     @Override
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         Player controller = game.getPlayer(controllerId);
-        if (controller != null) {
-            if (controller.chooseTarget(Outcome.Benefit, this.getTargets().get(0), source, game)) {
-                Card card = game.getCard(this.getTargets().get(0).getFirstTarget());
-                if (card != null) {
-                    controller.putCardsOnBottomOfLibrary(card, game, source, true);
-                    paid = true;
-                }
+        if (controller != null && (controller.chooseTarget(Outcome.Benefit, this.getTargets().get(0), source, game))) {
+            Card card = game.getCard(this.getTargets().get(0).getFirstTarget());
+            if (card != null) {
+                controller.putCardsOnBottomOfLibrary(card, game, source, true);
+                paid = true;
             }
         }
         return paid;

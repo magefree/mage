@@ -7,17 +7,17 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.ExileTopXMayPlayUntilEndOfTurnEffect;
+import mage.abilities.effects.common.ExileTopXMayPlayUntilEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.TreasureToken;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 
@@ -50,7 +50,7 @@ public final class ScionOfOpulence extends CardImpl {
 
         // {R}, Sacrifice two artifacts: Exile the top card of your library. You may play that card this turn.
         Ability ability = new SimpleActivatedAbility(
-                new ExileTopXMayPlayUntilEndOfTurnEffect(1), new ManaCostsImpl<>("{R}")
+                new ExileTopXMayPlayUntilEffect(1, Duration.EndOfTurn), new ManaCostsImpl<>("{R}")
         );
         ability.addCost(new SacrificeTargetCost(2, filter2));
         this.addAbility(ability);

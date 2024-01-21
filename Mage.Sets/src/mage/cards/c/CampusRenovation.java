@@ -1,6 +1,6 @@
 package mage.cards.c;
 
-import mage.abilities.effects.common.ExileTopXMayPlayUntilEndOfTurnEffect;
+import mage.abilities.effects.common.ExileTopXMayPlayUntilEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -26,7 +26,7 @@ public final class CampusRenovation extends CardImpl {
         // Return up to one target artifact or enchantment card from your graveyard to the battlefield. Exile the top two cards of your library. Until the end of your next turn, you may play those cards.
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(0, 1, filter));
-        this.getSpellAbility().addEffect(new ExileTopXMayPlayUntilEndOfTurnEffect(2, false, Duration.UntilEndOfYourNextTurn));
+        this.getSpellAbility().addEffect(new ExileTopXMayPlayUntilEffect(2, Duration.UntilEndOfYourNextTurn));
     }
 
     private CampusRenovation(final CampusRenovation card) {

@@ -7,12 +7,13 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.effects.common.DoIfCostPaid;
-import mage.abilities.effects.common.ExileTopXMayPlayUntilEndOfTurnEffect;
+import mage.abilities.effects.common.ExileTopXMayPlayUntilEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.counters.CounterType;
 
@@ -41,7 +42,7 @@ public final class RotisserieElemental extends CardImpl {
                 false
         ).withRuleTextReplacement(false);
         ability.addEffect(new DoIfCostPaid(
-                new ExileTopXMayPlayUntilEndOfTurnEffect(xValue)
+                new ExileTopXMayPlayUntilEffect(xValue, Duration.EndOfTurn)
                         .setText("exile the top X cards of your library, where X is the number of skewer counters "
                                 + "on {this}. You may play those cards this turn"),
                 new SacrificeSourceCost().setText("sacrifice it")

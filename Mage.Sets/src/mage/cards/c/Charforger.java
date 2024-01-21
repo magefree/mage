@@ -4,19 +4,17 @@ import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.PutIntoGraveFromBattlefieldAllTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.RemoveCounterCost;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.ExileTopXMayPlayUntilEndOfTurnEffect;
+import mage.abilities.effects.common.ExileTopXMayPlayUntilEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
-import mage.game.permanent.token.PhyrexianBeastToxicToken;
 import mage.game.permanent.token.PhyrexianGoblinToken;
 
 import java.util.UUID;
@@ -41,8 +39,7 @@ public class Charforger extends CardImpl {
         ));
 
         //Remove three oil counters from Charforger: Exile the top card of your library. You may play that card this turn.
-        this.addAbility(new SimpleActivatedAbility(new ExileTopXMayPlayUntilEndOfTurnEffect(1)
-                .setText("Exile the top card of your library. You may play that card this turn"),
+        this.addAbility(new SimpleActivatedAbility(new ExileTopXMayPlayUntilEffect(1, Duration.EndOfTurn),
                 new RemoveCountersSourceCost(CounterType.OIL.createInstance(3))
         ));
     }
