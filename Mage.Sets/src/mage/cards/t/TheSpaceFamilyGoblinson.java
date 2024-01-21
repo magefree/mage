@@ -127,6 +127,7 @@ class TheSpaceFamilyGoblinsonTriggeredAbility extends TriggeredAbilityImpl {
 
     TheSpaceFamilyGoblinsonTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
+        setTriggerPhrase("Whenever you roll a die, ");
     }
 
     private TheSpaceFamilyGoblinsonTriggeredAbility(final TheSpaceFamilyGoblinsonTriggeredAbility ability) {
@@ -148,8 +149,4 @@ class TheSpaceFamilyGoblinsonTriggeredAbility extends TriggeredAbilityImpl {
         return isControlledBy(event.getPlayerId());
     }
 
-    @Override
-    public String getRule() {
-        return "Whenever you roll a die, put a +1/+1 counter on {this}";
-    }
 }

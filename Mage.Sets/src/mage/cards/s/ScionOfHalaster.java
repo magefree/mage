@@ -31,7 +31,7 @@ public final class ScionOfHalaster extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(
                 new SimpleStaticAbility(new ScionOfHalasterReplacementEffect()),
                 Duration.WhileOnBattlefield, StaticFilters.FILTER_CREATURES_OWNED_COMMANDER
-        )));
+        ).withForceQuotes()));
     }
 
     private ScionOfHalaster(final ScionOfHalaster card) {

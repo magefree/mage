@@ -43,6 +43,9 @@ public class AddContinuousEffectToGame extends OneShotEffect {
 
     @Override
     public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
         return effects.getText(mode);
     }
 }

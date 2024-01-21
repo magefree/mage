@@ -18,9 +18,9 @@ import mage.game.events.GameEvent;
  */
 public class BecomesAttachedToCreatureSourceEffect extends ReplacementEffectImpl {
 
-    protected Effects baseEffects = new Effects();
-    protected String text;
-    protected Condition condition;
+    private final Effects baseEffects;
+    private final String text;
+    private final Condition condition;
 
     public BecomesAttachedToCreatureSourceEffect(Effect baseEffect) {
         this(baseEffect, "");
@@ -32,6 +32,7 @@ public class BecomesAttachedToCreatureSourceEffect extends ReplacementEffectImpl
 
     public BecomesAttachedToCreatureSourceEffect(Effect baseEffect, Condition condition, String text) {
         super(Duration.WhileOnBattlefield, baseEffect.getOutcome(), false);
+        this.baseEffects = new Effects();
         this.baseEffects.add(baseEffect);
         this.text = text;
         this.condition = condition;

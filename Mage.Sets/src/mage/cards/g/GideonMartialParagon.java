@@ -1,4 +1,3 @@
-
 package mage.cards.g;
 
 import java.util.UUID;
@@ -17,7 +16,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.SuperType;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterOpponentsCreaturePermanent;
 import mage.game.permanent.token.TokenImpl;
 
@@ -36,7 +35,7 @@ public final class GideonMartialParagon extends CardImpl {
         this.setStartingLoyalty(5);
 
         // +2: Untap all creatures you control. Those creatures get +1/+1 until end of turn.
-        LoyaltyAbility ability = new LoyaltyAbility(new UntapAllEffect(new FilterControlledCreaturePermanent()), 2);
+        LoyaltyAbility ability = new LoyaltyAbility(new UntapAllEffect(StaticFilters.FILTER_CONTROLLED_CREATURES), 2);
         Effect effect = new BoostControlledEffect(1, 1, Duration.EndOfTurn);
         effect.setText("Those creatures get +1/+1 until end of turn");
         ability.addEffect(effect);

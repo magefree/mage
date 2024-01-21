@@ -55,9 +55,9 @@ public final class SwoopingPteranodon extends CardImpl {
         // It gains flying and haste until end of turn.
         // At the beginning of the next end step, target land deals 3 damage to that creature.
         Ability ability = new EntersBattlefieldThisOrAnotherTriggeredAbility(
-                new GainControlTargetEffect(Duration.EndOfTurn), filter, true, true);
+                new GainControlTargetEffect(Duration.EndOfTurn), filter, false, true);
         ability.addEffect(new UntapTargetEffect().setText("Untap that creature"));
-        ability.addEffect(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn).setText("It gains flying "));
+        ability.addEffect(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn).setText("It gains flying"));
         ability.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn).setText("and haste until end of turn."));
         ability.addEffect(new SwoopingPteranodonCreateDelayedTriggerEffect());
 

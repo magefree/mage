@@ -53,7 +53,10 @@ class NeeraWildMageEffect extends OneShotEffect {
 
     NeeraWildMageEffect() {
         super(Outcome.Neutral);
-        staticText = "you may put it on the bottom of its owner's library. If you do, reveal cards from the top of your library until you reveal a nonland card. You may cast that card without paying its mana cost. Then put the rest on the bottom of your library in a random order. This ability triggers only once each turn.";
+        staticText = "you may put it on the bottom of its owner's library. " +
+                "If you do, reveal cards from the top of your library until you reveal a nonland card. " +
+                "You may cast that card without paying its mana cost. " +
+                "Then put all revealed cards not cast this way on the bottom of your library in a random order";
     }
 
     private NeeraWildMageEffect(final NeeraWildMageEffect effect) {

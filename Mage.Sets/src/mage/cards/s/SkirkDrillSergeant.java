@@ -29,7 +29,7 @@ import java.util.UUID;
  */
 public final class SkirkDrillSergeant extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("or another Goblin");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Goblin");
 
     static {
         filter.add(SubType.GOBLIN.getPredicate());
