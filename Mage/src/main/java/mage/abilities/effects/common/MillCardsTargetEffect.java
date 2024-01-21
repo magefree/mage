@@ -51,13 +51,7 @@ public class MillCardsTargetEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        StringBuilder sb = new StringBuilder();
-        if (!mode.getTargets().isEmpty()) {
-            sb.append("target ");
-            sb.append(mode.getTargets().get(0).getTargetName());
-        } else {
-            sb.append("that player");
-        }
+        StringBuilder sb = new StringBuilder(getTargetPointer().describeTargets(mode.getTargets(), "that player"));
         sb.append(" mills ");
         String message = numberCards.getMessage();
         if (message.isEmpty()) {

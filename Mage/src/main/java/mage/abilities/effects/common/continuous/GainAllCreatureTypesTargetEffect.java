@@ -48,6 +48,6 @@ public class GainAllCreatureTypesTargetEffect extends ContinuousEffectImpl {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        return "target " + mode.getTargets().get(0).getTargetName() + " gains all creature types " + duration.toString();
+        return getTargetPointer().describeTargets(mode.getTargets(), "it") + " gains all creature types " + duration.toString();
     }
 }
