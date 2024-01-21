@@ -65,6 +65,7 @@ public final class LostCavernsOfIxalanCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Champion of Dusk", 188, Rarity.RARE, mage.cards.c.ChampionOfDusk.class));
         cards.add(new SetCardInfo("Chandra's Ignition", 220, Rarity.RARE, mage.cards.c.ChandrasIgnition.class));
         cards.add(new SetCardInfo("Chaos Warp", 221, Rarity.RARE, mage.cards.c.ChaosWarp.class));
+        cards.add(new SetCardInfo("Charismatic Conqueror", 70, Rarity.RARE, mage.cards.c.CharismaticConqueror.class));
         cards.add(new SetCardInfo("Chimil, the Inner Sun", 106, Rarity.MYTHIC, mage.cards.c.ChimilTheInnerSun.class));
         cards.add(new SetCardInfo("Choked Estuary", 322, Rarity.RARE, mage.cards.c.ChokedEstuary.class));
         cards.add(new SetCardInfo("Chromatic Orrery", 107, Rarity.MYTHIC, mage.cards.c.ChromaticOrrery.class));
