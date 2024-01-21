@@ -29,7 +29,7 @@ import java.util.UUID;
 public final class HistoriansBoon extends CardImpl {
 
     private static final FilterPermanent filter
-            = new FilterControlledEnchantmentPermanent("another nontoken enchantment");
+            = new FilterControlledEnchantmentPermanent("nontoken enchantment");
 
     static {
         filter.add(TokenPredicate.FALSE);

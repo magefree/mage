@@ -30,7 +30,7 @@ public final class WindingCanyons extends CardImpl {
 
         // {2}, {tap}: Until end of turn, you may cast creature spells as though they had flash.
         Effect effect = new AddContinuousEffectToGame(new CastAsThoughItHadFlashAllEffect(Duration.EndOfTurn, StaticFilters.FILTER_CARD_CREATURE));
-        effect.setText("Until end of turn, you may cast creature spells as though they had flash.");
+        effect.setText("you may cast creature spells this turn as though they had flash");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

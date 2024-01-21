@@ -35,7 +35,7 @@ public final class FirbolgFlutist extends CardImpl {
         Ability ability = new EntersBattlefieldTriggeredAbility(
                 new GainControlTargetEffect(Duration.EndOfTurn), false
         );
-        ability.addEffect(new UntapTargetEffect().setText("Untap that creature"));
+        ability.addEffect(new UntapTargetEffect().setText("Untap it"));
         ability.addEffect(new GainAbilityTargetEffect(
                 HasteAbility.getInstance(), Duration.EndOfTurn
         ).setText("It gains haste"));

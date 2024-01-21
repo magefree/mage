@@ -41,7 +41,7 @@ public final class LegionLoyalist extends CardImpl {
         Ability ability = new BattalionAbility(new GainAbilityAllEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_CONTROLLED_CREATURES)
                 .setText("creatures you control gain first strike"));
         ability.addEffect(new GainAbilityAllEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_CONTROLLED_CREATURES)
-                .setText("and trample"));
+                .setText("and trample until end of turn"));
         ability.addEffect(new LegionLoyalistCantBeBlockedByTokensEffect());
         this.addAbility(ability);
     }
@@ -60,7 +60,7 @@ class LegionLoyalistCantBeBlockedByTokensEffect extends RestrictionEffect {
 
     LegionLoyalistCantBeBlockedByTokensEffect() {
         super(Duration.EndOfTurn);
-        staticText = "and can't be blocked by tokens this turn";
+        staticText = "and can't be blocked by creature tokens this turn";
     }
 
     private LegionLoyalistCantBeBlockedByTokensEffect(final LegionLoyalistCantBeBlockedByTokensEffect effect) {
