@@ -59,12 +59,7 @@ public class PreventDamageToTargetEffect extends PreventionEffectImpl {
         } else {
             sb.append("prevent the next ").append(amountToPrevent).append(" damage that would be dealt to ");
         }
-        String targetName = mode.getTargets().get(0).getTargetName();
-        if (targetName.contains("any")) {
-            sb.append(targetName);
-        } else {
-            sb.append("target ").append(targetName);
-        }
+        sb.append(getTargetPointer().describeTargets(mode.getTargets(), "it"));
         if (!duration.toString().isEmpty()) {
             sb.append(' ');
             if (duration == Duration.EndOfTurn) {

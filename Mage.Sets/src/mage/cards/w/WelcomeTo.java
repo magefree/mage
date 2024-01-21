@@ -16,7 +16,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterNoncreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
@@ -102,9 +101,11 @@ enum WelcomeToAdjuster implements TargetAdjuster {
             if (opponent == null) {
                 continue;
             }
-            FilterPermanent filter = new FilterNoncreaturePermanent(
+            FilterPermanent filter = new FilterPermanent(
                     "noncreature artifact controlled by " + opponent.getLogName());
-            filter.add(Predicates.and(CardType.ARTIFACT.getPredicate(), new ControllerIdPredicate(opponentId)));
+            filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
+            filter.add(CardType.ARTIFACT.getPredicate());
+            filter.add(new ControllerIdPredicate(opponentId));
             ability.addTarget(new TargetPermanent(0, 1, filter, false));
         }
     }
