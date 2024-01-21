@@ -61,6 +61,7 @@ class HistoriansBoonTriggeredAbility extends TriggeredAbilityImpl {
 
     HistoriansBoonTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new AngelVigilanceToken()));
+        setTriggerPhrase("Whenever the final chapter ability of a Saga you control triggers, ");
     }
 
     private HistoriansBoonTriggeredAbility(final HistoriansBoonTriggeredAbility ability) {
@@ -95,9 +96,4 @@ class HistoriansBoonTriggeredAbility extends TriggeredAbilityImpl {
         return SagaAbility.isFinalAbility(stackObject.getStackAbility(), maxChapter);
     }
 
-    @Override
-    public String getRule() {
-        return "Whenever the final chapter of a Saga you control triggers, " +
-                "create a 4/4 white Angel creature token with flying and vigilance.";
-    }
 }

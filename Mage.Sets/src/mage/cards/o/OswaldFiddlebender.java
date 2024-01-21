@@ -19,7 +19,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.Collection;
 import java.util.UUID;
@@ -62,7 +61,7 @@ class OswaldFiddlebenderEffect extends OneShotEffect {
     OswaldFiddlebenderEffect() {
         super(Outcome.Benefit);
         staticText = "search your library for an artifact card with mana value equal to 1 plus the " +
-                "sacrificed artifact's mana value. Put that card onto the battlefield, then shuffle";
+                "sacrificed artifact's mana value, put it onto the battlefield, then shuffle";
     }
 
     private OswaldFiddlebenderEffect(final OswaldFiddlebenderEffect effect) {

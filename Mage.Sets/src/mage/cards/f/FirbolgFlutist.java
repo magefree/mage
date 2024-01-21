@@ -43,7 +43,7 @@ public final class FirbolgFlutist extends CardImpl {
                 new MyriadAbility(), Duration.EndOfTurn
         ).setText("and myriad until end of turn"));
         ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
-        this.addAbility(ability.withFlavorWord("Captivating Performance"));
+        this.addAbility(ability.withFlavorWord("Enthralling Performance"));
     }
 
     private FirbolgFlutist(final FirbolgFlutist card) {

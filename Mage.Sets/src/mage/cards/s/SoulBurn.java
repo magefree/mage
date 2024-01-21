@@ -37,7 +37,7 @@ public final class SoulBurn extends CardImpl {
 
         // Spend only black or red mana on X.
         this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new InfoEffect("Spend only black or red mana on X")).setRuleAtTheTop(true)
+                Zone.ALL, new InfoEffect("Spend only black and/or red mana on X")).setRuleAtTheTop(true)
         );
 
         // Soul Burn deals X damage to any target. You gain life equal to the damage dealt for each black mana spent on X; not more life than the player's life total before Soul Burn dealt damage, or the creature's toughness.

@@ -72,7 +72,7 @@ class AngrathMinotaurPirateThirdAbilityEffect extends OneShotEffect {
 
     AngrathMinotaurPirateThirdAbilityEffect() {
         super(Outcome.DestroyPermanent);
-        this.staticText = "Destroy all creature target opponent controls. {this} deals damage to that player equal to their total power";
+        this.staticText = "Destroy all creatures target opponent controls. {this} deals damage to that player equal to their total power";
     }
 
     private AngrathMinotaurPirateThirdAbilityEffect(final AngrathMinotaurPirateThirdAbilityEffect effect) {

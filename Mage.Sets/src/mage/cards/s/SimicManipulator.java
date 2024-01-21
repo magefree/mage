@@ -38,7 +38,7 @@ import mage.target.targetadjustment.TargetAdjuster;
  */
 public final class SimicManipulator extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("with power less than or equal to the number of +1/+1 counters removed this way");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power less than or equal to the number of +1/+1 counters removed this way");
 
     public SimicManipulator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");

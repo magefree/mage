@@ -60,8 +60,9 @@ public final class VaevictisAsmadiTheDire extends CardImpl {
 
 class VaevictisAsmadiTheDireTriggeredAbility extends TriggeredAbilityImpl {
 
-    public VaevictisAsmadiTheDireTriggeredAbility() {
+    VaevictisAsmadiTheDireTriggeredAbility() {
         super(Zone.BATTLEFIELD, new VaevictisAsmadiTheDireEffect(), false);
+        setTriggerPhrase("Whenever {this} attacks, ");
     }
 
     private VaevictisAsmadiTheDireTriggeredAbility(final VaevictisAsmadiTheDireTriggeredAbility ability) {
@@ -97,14 +98,6 @@ class VaevictisAsmadiTheDireTriggeredAbility extends TriggeredAbilityImpl {
         return true;
     }
 
-    @Override
-    public String getRule() {
-        return "Whenever {this} attacks, for each player, "
-                + "choose target permanent that player controls. "
-                + "Those players sacrifice those permanents. "
-                + "Each player who sacrificed a permanent this way reveals the top card of their library, "
-                + "then puts it onto the battlefield if it's a permanent card";
-    }
 }
 
 class VaevictisAsmadiTheDireEffect extends OneShotEffect {
