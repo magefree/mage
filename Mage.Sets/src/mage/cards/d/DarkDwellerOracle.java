@@ -5,13 +5,13 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.ExileTopXMayPlayUntilEndOfTurnEffect;
+import mage.abilities.effects.common.ExileTopXMayPlayUntilEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 
@@ -30,8 +30,7 @@ public final class DarkDwellerOracle extends CardImpl {
 
         // {1}, Sacrifice a creature: Exile the top card of your library. You may play that card this turn.
         Ability ability = new SimpleActivatedAbility(
-                new ExileTopXMayPlayUntilEndOfTurnEffect(1, true)
-                        .setText("exile the top card of your library. You may play that card this turn"),
+                new ExileTopXMayPlayUntilEffect(1, Duration.EndOfTurn).withTextOptions("that card", true),
                 new GenericManaCost(1)
         );
         ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));

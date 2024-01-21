@@ -3,7 +3,7 @@ package mage.cards.q;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
-import mage.abilities.effects.common.ExileTopXMayPlayUntilEndOfTurnEffect;
+import mage.abilities.effects.common.ExileTopXMayPlayUntilEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.AdventureCard;
 import mage.cards.CardSetInfo;
@@ -49,7 +49,7 @@ public final class QuestingDruid extends AdventureCard {
         // Seek the Beast
         // Exile the top two cards of your library. Until your next end step, you may play those cards.
         this.getSpellCard().getSpellAbility().addEffect(
-                new ExileTopXMayPlayUntilEndOfTurnEffect(2, false, Duration.UntilYourNextEndStep)
+                new ExileTopXMayPlayUntilEffect(2, Duration.UntilYourNextEndStep)
         );
 
         this.finalizeAdventure();

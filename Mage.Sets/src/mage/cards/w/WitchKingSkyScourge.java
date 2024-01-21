@@ -5,9 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.AttacksWithCreaturesTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.ExileTopXMayPlayUntilEndOfTurnEffect;
-import mage.abilities.hint.Hint;
-import mage.abilities.hint.ValueHint;
+import mage.abilities.effects.common.ExileTopXMayPlayUntilEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.UndyingAbility;
 import mage.cards.CardImpl;
@@ -15,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.*;
-import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -48,7 +45,7 @@ public final class WitchKingSkyScourge extends CardImpl {
 
         // Whenever you attack with one or more Wraiths, exile the top X cards of your library, where X is their total power. You may play those cards this turn.
         this.addAbility(new AttacksWithCreaturesTriggeredAbility(Zone.BATTLEFIELD,
-                new ExileTopXMayPlayUntilEndOfTurnEffect(TotalTargetsPowerValue.instance)
+                new ExileTopXMayPlayUntilEffect(TotalTargetsPowerValue.instance, Duration.EndOfTurn)
                         .setText("exile the top X cards of your library, where X is their total power. You may play those cards this turn.")
                 , 1, filter, true));
 

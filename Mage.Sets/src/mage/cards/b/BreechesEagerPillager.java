@@ -5,7 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.AttacksCreatureYouControlTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.ExileTopXMayPlayUntilEndOfTurnEffect;
+import mage.abilities.effects.common.ExileTopXMayPlayUntilEffect;
 import mage.abilities.effects.common.combat.CantBlockTargetEffect;
 import mage.abilities.hint.common.ModesAlreadyUsedHint;
 import mage.abilities.keyword.FirstStrikeAbility;
@@ -56,8 +56,8 @@ public final class BreechesEagerPillager extends CardImpl {
 
         // * Exile the top card of your library. You may play it this turn.
         ability.addMode(new Mode(
-                new ExileTopXMayPlayUntilEndOfTurnEffect(1)
-                        .setText("exile the top card of your library. You may play it this turn")
+                new ExileTopXMayPlayUntilEffect(1, Duration.EndOfTurn)
+                        .withTextOptions("it", true)
         ).setModeTag("exile top card"));
 
         ability.addHint(ModesAlreadyUsedHint.instance);

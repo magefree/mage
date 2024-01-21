@@ -2,11 +2,12 @@ package mage.cards.m;
 
 import mage.MageInt;
 import mage.abilities.common.DealsDamageToAPlayerAllTriggeredAbility;
-import mage.abilities.effects.common.ExileTopXMayPlayUntilEndOfTurnEffect;
+import mage.abilities.effects.common.ExileTopXMayPlayUntilEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
@@ -42,7 +43,7 @@ public final class MoriaMarauder extends CardImpl {
 
         // Whenever a Goblin or Orc you control deals combat damage to a player, exile the top card of your library. You may play that card this turn.
         this.addAbility(new DealsDamageToAPlayerAllTriggeredAbility(
-                new ExileTopXMayPlayUntilEndOfTurnEffect(1), filter,
+                new ExileTopXMayPlayUntilEffect(1, Duration.EndOfTurn), filter,
                 false, SetTargetPointer.NONE, true
         ));
     }
