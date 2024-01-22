@@ -15,6 +15,9 @@ import mage.target.TargetSpell;
  */
 public class PreventDamageByTargetEffect extends PreventionEffectImpl {
 
+    private boolean passiveVoice = true;
+    private boolean durationRuleAtEnd = true;
+
     public PreventDamageByTargetEffect(Duration duration, boolean onlyCombat) {
         this(duration, Integer.MAX_VALUE, onlyCombat);
     }
@@ -25,6 +28,8 @@ public class PreventDamageByTargetEffect extends PreventionEffectImpl {
 
     protected PreventDamageByTargetEffect(final PreventDamageByTargetEffect effect) {
         super(effect);
+        this.passiveVoice = effect.passiveVoice;
+        this.durationRuleAtEnd = effect.durationRuleAtEnd;
     }
 
     @Override
@@ -51,33 +56,28 @@ public class PreventDamageByTargetEffect extends PreventionEffectImpl {
         return false;
     }
 
+    public PreventDamageByTargetEffect withTextOptions(boolean passiveVoice, boolean durationRuleAtEnd) {
+        this.passiveVoice = passiveVoice;
+        this.durationRuleAtEnd = durationRuleAtEnd;
+        return this;
+    }
+
     @Override
     public String getText(Mode mode) {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        StringBuilder sb = new StringBuilder();
-        if (amountToPrevent == Integer.MAX_VALUE) {
-            sb.append("Prevent all");
-            if (onlyCombat) {
-                sb.append(" combat");
-            }
-            sb.append(" damage target ");
+        String durationText = duration == Duration.EndOfTurn ? " this turn" : ' ' + duration.toString();
+        String targetText = getTargetPointer().describeTargets(mode.getTargets(), "it");
+        String preventText = (amountToPrevent == Integer.MAX_VALUE ? "Prevent all" : "Prevent the next" + amountToPrevent)
+                + (onlyCombat ? " combat damage " : " damage ");
+        if (passiveVoice) {
+            preventText += "that would be dealt" + (durationRuleAtEnd ?
+                    " by " + targetText + durationText :
+                    durationText + " by " + targetText);
         } else {
-            sb.append("Prevent the next ");
-            sb.append(amountToPrevent);
-            if (onlyCombat) {
-                sb.append(" combat");
-            }
-            sb.append(" damage that ");
+            preventText += targetText + " would deal" + durationText;
         }
-        sb.append(mode.getTargets().get(0).getTargetName());
-        sb.append(" would deal ");
-        if (duration == Duration.EndOfTurn) {
-            sb.append("this turn");
-        } else {
-            sb.append(duration);
-        }
-        return sb.toString();
+        return preventText;
     }
 }

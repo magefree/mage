@@ -47,12 +47,16 @@ public final class ShieldmageElder extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Tap two untapped Clerics you control: Prevent all damage target creature would deal this turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageByTargetEffect(Duration.EndOfTurn, false), new TapTargetCost(new TargetControlledPermanent(2, 2, filter1, false)));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new PreventDamageByTargetEffect(Duration.EndOfTurn, false).withTextOptions(false, true),
+                new TapTargetCost(new TargetControlledPermanent(2, 2, filter1, false)));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 
         // Tap two untapped Wizards you control: Prevent all damage target spell would deal this turn.
-        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageByTargetEffect(Duration.EndOfTurn, false), new TapTargetCost(new TargetControlledPermanent(2, 2, filter2, false)));
+        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new PreventDamageByTargetEffect(Duration.EndOfTurn, false).withTextOptions(false, true),
+                new TapTargetCost(new TargetControlledPermanent(2, 2, filter2, false)));
         ability2.addTarget(new TargetSpell());
         this.addAbility(ability2);
     }
