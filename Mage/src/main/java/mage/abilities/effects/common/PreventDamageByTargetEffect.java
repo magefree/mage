@@ -15,14 +15,6 @@ import mage.target.TargetSpell;
  */
 public class PreventDamageByTargetEffect extends PreventionEffectImpl {
 
-    public PreventDamageByTargetEffect(Duration duration) {
-        this(duration, false);
-    }
-
-    public PreventDamageByTargetEffect(Duration duration, int amount) {
-        this(duration, amount, false);
-    }
-
     public PreventDamageByTargetEffect(Duration duration, boolean onlyCombat) {
         this(duration, Integer.MAX_VALUE, onlyCombat);
     }

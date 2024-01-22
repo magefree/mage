@@ -1,4 +1,3 @@
-
 package mage.cards.h;
 
 import mage.ObjectColor;
@@ -22,7 +21,6 @@ import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.ArrayList;
@@ -106,7 +104,7 @@ class HeroismEffect extends OneShotEffect {
             }
 
             for (Permanent permanent : permanentsToPrevent) {
-                ContinuousEffect effect = new PreventDamageByTargetEffect(Duration.EndOfTurn, Integer.MAX_VALUE, true);
+                ContinuousEffect effect = new PreventDamageByTargetEffect(Duration.EndOfTurn, true);
                 effect.setTargetPointer(new FixedTarget(permanent, game));
                 game.addEffect(effect, source);
             }

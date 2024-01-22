@@ -24,7 +24,7 @@ public final class SoulParry extends CardImpl {
         // Prevent all damage one or two target creatures would deal this turn
         Target target = new TargetCreaturePermanent(1,2);
         target.setTargetName("one or two creatures");
-        this.getSpellAbility().addEffect(new PreventDamageByTargetEffect(Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new PreventDamageByTargetEffect(Duration.EndOfTurn, false));
         this.getSpellAbility().addTarget(target);
     }
 
