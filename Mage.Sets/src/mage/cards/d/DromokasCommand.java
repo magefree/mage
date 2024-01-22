@@ -38,7 +38,8 @@ public final class DromokasCommand extends CardImpl {
         this.getSpellAbility().getModes().setMaxModes(2);
 
         // Prevent all damage target instant or sorcery spell would deal this turn;
-        this.getSpellAbility().getEffects().add(new PreventDamageByTargetEffect(Duration.EndOfTurn, false));
+        this.getSpellAbility().getEffects().add(new PreventDamageByTargetEffect(Duration.EndOfTurn, false)
+                .withTextOptions(false, true));
         this.getSpellAbility().getTargets().add(new TargetSpell(new FilterInstantOrSorcerySpell()));
 
         // or Target player sacrifices an enchantment;
