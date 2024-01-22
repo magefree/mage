@@ -41,7 +41,7 @@ public final class MoonsnarePrototype extends CardImpl {
         this.addAbility(ability);
 
         // Channel — {4}{U}, Discard Moonsnare Prototype: The owner of target nonland permanent puts it on the top or bottom of their library.
-        ability = new ChannelAbility("{4}{U}", new PutOnTopOrBottomLibraryTargetEffect());
+        ability = new ChannelAbility("{4}{U}", new PutOnTopOrBottomLibraryTargetEffect(true));
         ability.addTarget(new TargetNonlandPermanent());
         this.addAbility(ability);
     }

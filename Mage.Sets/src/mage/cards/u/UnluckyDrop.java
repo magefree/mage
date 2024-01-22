@@ -18,9 +18,7 @@ public final class UnluckyDrop extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{U}");
 
         // Target artifact or creature's owner puts it on the top or bottom of their library.
-        this.getSpellAbility().addEffect(new PutOnTopOrBottomLibraryTargetEffect(
-                "target artifact or creature's owner puts it on the top or bottom of their library"
-        ));
+        this.getSpellAbility().addEffect(new PutOnTopOrBottomLibraryTargetEffect(false));
         this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_CREATURE));
 
     }
