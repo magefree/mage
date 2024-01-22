@@ -27,6 +27,7 @@ public final class RavnicaClueEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Lavinia, Foil to Conspiracy", 36, Rarity.RARE, mage.cards.l.LaviniaFoilToConspiracy.class));
         cards.add(new SetCardInfo("Lead Pipe", 9, Rarity.UNCOMMON, mage.cards.l.LeadPipe.class));
         cards.add(new SetCardInfo("Library", 18, Rarity.UNCOMMON, mage.cards.l.Library.class));
+        cards.add(new SetCardInfo("Mastermind Plum", 3, Rarity.RARE, mage.cards.m.MastermindPlum.class));
         cards.add(new SetCardInfo("Senator Peacock", 2, Rarity.RARE, mage.cards.s.SenatorPeacock.class));
         cards.add(new SetCardInfo("Steam Vents", 280, Rarity.RARE, mage.cards.s.SteamVents.class));
     }
