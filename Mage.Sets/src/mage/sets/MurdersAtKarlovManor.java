@@ -48,6 +48,7 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Elegant Parlor", 260, Rarity.RARE, mage.cards.e.ElegantParlor.class));
         cards.add(new SetCardInfo("Escape Tunnel", 261, Rarity.COMMON, mage.cards.e.EscapeTunnel.class));
         cards.add(new SetCardInfo("Essence of Antiquity", 15, Rarity.UNCOMMON, mage.cards.e.EssenceOfAntiquity.class));
+        cards.add(new SetCardInfo("Ezrim, Agency Chief", 202, Rarity.RARE, mage.cards.e.EzrimAgencyChief.class));
         cards.add(new SetCardInfo("Faerie Snoop", 203, Rarity.COMMON, mage.cards.f.FaerieSnoop.class));
         cards.add(new SetCardInfo("Fanatical Strength", 159, Rarity.COMMON, mage.cards.f.FanaticalStrength.class));
         cards.add(new SetCardInfo("Festerleech", 85, Rarity.UNCOMMON, mage.cards.f.Festerleech.class));
