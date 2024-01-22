@@ -52,7 +52,7 @@ public final class HornedLochWhale extends AdventureCard {
 
         // Lagoon Breach
         // The owner of target attacking creature you don't control puts it on the top or bottom of their library.
-        this.getSpellCard().getSpellAbility().addEffect(new PutOnTopOrBottomLibraryTargetEffect());
+        this.getSpellCard().getSpellAbility().addEffect(new PutOnTopOrBottomLibraryTargetEffect(true));
         this.getSpellCard().getSpellAbility().addTarget(new TargetPermanent(filter));
 
         this.finalizeAdventure();

@@ -31,7 +31,7 @@ public final class PowerOfPersuasion extends CardImpl {
         effect.addTableEntry(1, 9, new ReturnToHandTargetEffect().setText("return it to its owner's hand"));
 
         // 10-19 | Its owner puts it on the top of bottom of their library.
-        effect.addTableEntry(10, 19, new PutOnTopOrBottomLibraryTargetEffect(
+        effect.addTableEntry(10, 19, new PutOnTopOrBottomLibraryTargetEffect(false).setText(
                 "its owner puts it on the top or bottom of their library"
         ));
 
