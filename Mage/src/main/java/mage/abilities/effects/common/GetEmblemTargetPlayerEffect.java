@@ -53,6 +53,7 @@ public class GetEmblemTargetPlayerEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        return "target " + mode.getTargets().get(0).getTargetName() + " gets an emblem with \"" + emblem.getAbilities().getRules(null).stream().collect(Collectors.joining("; ")) + "\"";
+        return getTargetPointer().describeTargets(mode.getTargets(), "that player")
+                + " gets an emblem with \"" + String.join("; ", emblem.getAbilities().getRules(null)) + "\"";
     }
 }
