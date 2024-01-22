@@ -114,6 +114,7 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Undercity Sewers", 270, Rarity.RARE, mage.cards.u.UndercitySewers.class));
         cards.add(new SetCardInfo("Undercover Crocodelf", 239, Rarity.COMMON, mage.cards.u.UndercoverCrocodelf.class));
         cards.add(new SetCardInfo("Underground Mortuary", 271, Rarity.RARE, mage.cards.u.UndergroundMortuary.class));
+        cards.add(new SetCardInfo("Undergrowth Recon", 181, Rarity.MYTHIC, mage.cards.u.UndergrowthRecon.class));
         cards.add(new SetCardInfo("Vein Ripper", 110, Rarity.MYTHIC, mage.cards.v.VeinRipper.class));
         cards.add(new SetCardInfo("Voja, Jaws of the Conclave", 432, Rarity.MYTHIC, mage.cards.v.VojaJawsOfTheConclave.class));
         cards.add(new SetCardInfo("Warleader's Call", 242, Rarity.RARE, mage.cards.w.WarleadersCall.class));
