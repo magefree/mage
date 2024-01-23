@@ -21,6 +21,7 @@ public final class RavnicaClueEdition extends ExpansionSet {
         this.hasBoosters = false;
 
         cards.add(new SetCardInfo("Afterlife Insurance", 23, Rarity.UNCOMMON, mage.cards.a.AfterlifeInsurance.class));
+        cards.add(new SetCardInfo("Billiard Room", 13, Rarity.UNCOMMON, mage.cards.b.BilliardRoom.class));
         cards.add(new SetCardInfo("Blood Crypt", 274, Rarity.RARE, mage.cards.b.BloodCrypt.class));
         cards.add(new SetCardInfo("Breeding Pool", 275, Rarity.RARE, mage.cards.b.BreedingPool.class));
         cards.add(new SetCardInfo("Commander Mustard", 6, Rarity.RARE, mage.cards.c.CommanderMustard.class));
