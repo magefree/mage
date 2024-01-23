@@ -3,7 +3,7 @@ package mage.cards.y;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.ExileTopXMayPlayUntilEndOfTurnEffect;
+import mage.abilities.effects.common.ExileTopXMayPlayUntilEffect;
 import mage.abilities.keyword.DoctorsCompanionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -29,8 +29,8 @@ public final class YasminKhan extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {T}: Exile the top card of your library. Until your next end step, you may play it.
-        this.addAbility(new SimpleActivatedAbility(new ExileTopXMayPlayUntilEndOfTurnEffect(
-                1, false, Duration.UntilYourNextEndStep
+        this.addAbility(new SimpleActivatedAbility(new ExileTopXMayPlayUntilEffect(
+                1, Duration.UntilYourNextEndStep
         ), new TapSourceCost()));
 
         // Doctor's companion

@@ -40,13 +40,8 @@ public class CopyTargetStackAbilityEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        StringBuilder sb = new StringBuilder();
-        sb.append("copy ");
-        if (!mode.getTargets().isEmpty()) {
-            sb.append("target ").append(mode.getTargets().get(0).getTargetName());
-        }
-        sb.append(". You may choose new targets for the copy");
-        return sb.toString();
+        return "copy " + getTargetPointer().describeTargets(mode.getTargets(), "that spell")
+                + ". You may choose new targets for the copy";
     }
 
 }

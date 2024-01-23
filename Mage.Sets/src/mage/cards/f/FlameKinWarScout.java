@@ -34,7 +34,7 @@ public final class FlameKinWarScout extends CardImpl {
             Zone.BATTLEFIELD, new FlameKinWarScourEffect(),
             StaticFilters.FILTER_ANOTHER_CREATURE, false,
             SetTargetPointer.PERMANENT
-        ));
+        ).setTriggerPhrase("When another creature enters the battlefield, "));
 
     }
 

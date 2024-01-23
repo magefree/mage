@@ -10,6 +10,8 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.token.ClueArtifactToken;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
  * @author LevelX2
  */
@@ -39,14 +41,21 @@ public class InvestigateEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         int value = this.amount.calculate(game, source, this);
-        if (value < 1) {
-            return false;
+        if (value > 0) {
+            doInvestigate(source.getControllerId(), value, game, source);
+            return true;
         }
-        new ClueArtifactToken().putOntoBattlefield(value, game, source, source.getControllerId());
+        return false;
+    }
+
+    public static void doInvestigate(UUID playerId, int value, Game game, Ability source) {
+        new ClueArtifactToken().putOntoBattlefield(value, game, source, playerId);
         for (int i = 0; i < value; i++) {
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.INVESTIGATED, source.getSourceId(), source, source.getControllerId()));
+            game.fireEvent(GameEvent.getEvent(
+                    GameEvent.EventType.INVESTIGATED,
+                    source.getSourceId(), source, playerId
+            ));
         }
-        return true;
     }
 
     @Override

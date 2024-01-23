@@ -30,7 +30,7 @@ public final class CelestialConvergence extends CardImpl {
 
         // Celestial Convergence enters the battlefield with seven omen counters on it.
         Effect effect = new AddCountersSourceEffect(CounterType.OMEN.createInstance(7));
-        this.addAbility(new EntersBattlefieldAbility(effect, "with seven omen counters"));
+        this.addAbility(new EntersBattlefieldAbility(effect, "with seven omen counters on it"));
 
         // At the beginning of your upkeep, remove an omen counter from Celestial Convergence. If there are no omen counters on Celestial Convergence, the player with the highest life total wins the game. If two or more players are tied for highest life total, the game is a draw.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(

@@ -10,7 +10,7 @@ import mage.constants.Outcome;
 import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.Target;
+import mage.util.CardUtil;
 
 /**
  * @author jeffwadsworth
@@ -52,20 +52,8 @@ public class LoseAbilityTargetEffect extends ContinuousEffectImpl {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        StringBuilder sb = new StringBuilder();
-        Target target = mode.getTargets().get(0);
-        if (target.getNumberOfTargets() > 1) {
-            if (target.getNumberOfTargets() < target.getMaxNumberOfTargets()) {
-                sb.append("Up to");
-            }
-            sb.append(target.getMaxNumberOfTargets()).append(" target ").append(target.getTargetName()).append(" loses ");
-        } else {
-            sb.append("Target ").append(target.getTargetName()).append(" loses ");
-        }
-        sb.append(ability.getRule());
-        if (!duration.toString().isEmpty()) {
-            sb.append(' ').append(duration.toString());
-        }
-        return sb.toString();
+        return getTargetPointer().describeTargets(mode.getTargets(), "it")
+                + " loses " + CardUtil.stripReminderText(ability.getRule())
+                + (duration.toString().isEmpty() ? "" : ' ' + duration.toString());
     }
 }

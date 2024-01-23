@@ -18,9 +18,7 @@ public final class Desynchronize extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{4}{U}");
 
         // Target nonland permanent's owner puts it on the top or bottom of their library. Scry 2.
-        this.getSpellAbility().addEffect(new PutOnTopOrBottomLibraryTargetEffect(
-                "target nonland permanent's owner puts it on the top or bottom of their library"
-        ));
+        this.getSpellAbility().addEffect(new PutOnTopOrBottomLibraryTargetEffect(false));
         this.getSpellAbility().addEffect(new ScryEffect(2, false));
         this.getSpellAbility().addTarget(new TargetNonlandPermanent());
     }

@@ -39,7 +39,8 @@ public final class Draco extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new DracoCostReductionEffect()).addHint(DomainHint.instance));
 
         // Domain - At the beginning of your upkeep, sacrifice Draco unless you pay {10}. This cost is reduced by {2} for each basic land type among lands you control.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DracoSacrificeUnlessPaysEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DracoSacrificeUnlessPaysEffect(), TargetController.YOU, false)
+                .setAbilityWord(AbilityWord.DOMAIN));
     }
 
     private Draco(final Draco card) {

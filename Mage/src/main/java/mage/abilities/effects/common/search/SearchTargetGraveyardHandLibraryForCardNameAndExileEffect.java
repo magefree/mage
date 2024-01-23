@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common.search;
 
 import mage.abilities.Ability;
@@ -32,7 +31,7 @@ public abstract class SearchTargetGraveyardHandLibraryForCardNameAndExileEffect 
      */
     protected boolean graveyardExileOptional;
 
-    public SearchTargetGraveyardHandLibraryForCardNameAndExileEffect(boolean graveyardExileOptional, String searchWhatText, String searchForText) {
+    protected SearchTargetGraveyardHandLibraryForCardNameAndExileEffect(boolean graveyardExileOptional, String searchWhatText, String searchForText) {
         super(Outcome.Exile);
         this.searchWhatText = searchWhatText;
         this.searchForText = searchForText;
@@ -55,7 +54,7 @@ public abstract class SearchTargetGraveyardHandLibraryForCardNameAndExileEffect 
      *                       or her zones
      * @return
      */
-    public boolean applySearchAndExile(Game game, Ability source, String cardName, UUID targetPlayerId) {
+    protected boolean applySearchAndExile(Game game, Ability source, String cardName, UUID targetPlayerId) {
         Player controller = game.getPlayer(source.getControllerId());
         if (cardName != null && controller != null) {
             Player targetPlayer = game.getPlayer(targetPlayerId);

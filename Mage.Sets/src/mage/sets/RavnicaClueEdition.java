@@ -29,5 +29,6 @@ public final class RavnicaClueEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Library", 18, Rarity.UNCOMMON, mage.cards.l.Library.class));
         cards.add(new SetCardInfo("Senator Peacock", 2, Rarity.RARE, mage.cards.s.SenatorPeacock.class));
         cards.add(new SetCardInfo("Steam Vents", 280, Rarity.RARE, mage.cards.s.SteamVents.class));
+        cards.add(new SetCardInfo("Undercover Butler", 49, Rarity.UNCOMMON, mage.cards.u.UndercoverButler.class));
     }
 }

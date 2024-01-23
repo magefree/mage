@@ -8,11 +8,12 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.ExileTopXMayPlayUntilEndOfTurnEffect;
+import mage.abilities.effects.common.ExileTopXMayPlayUntilEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetAnyTarget;
@@ -45,8 +46,7 @@ public final class GeistflameReservoir extends CardImpl {
 
         // {1}{R}, {T}: Exile the top card of your library. You may play that card this turn.
         ability = new SimpleActivatedAbility(
-                new ExileTopXMayPlayUntilEndOfTurnEffect(1)
-                        .setText("exile the top card of your library. You may play that card this turn"),
+                new ExileTopXMayPlayUntilEffect(1, Duration.EndOfTurn),
                 new ManaCostsImpl<>("{1}{R}")
         );
         ability.addCost(new TapSourceCost());

@@ -9,10 +9,11 @@ import mage.abilities.condition.common.ModeChoiceSourceCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.ChooseModeEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.ExileTopXMayPlayUntilEndOfTurnEffect;
+import mage.abilities.effects.common.ExileTopXMayPlayUntilEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -36,7 +37,7 @@ public final class OutpostSiege extends CardImpl {
 
         // * Khans - At the beginning of your upkeep, exile the top card of your library. Until end of turn, you may play that card.
         this.addAbility(new ConditionalTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(new ExileTopXMayPlayUntilEndOfTurnEffect(1), TargetController.YOU, false),
+                new BeginningOfUpkeepTriggeredAbility(new ExileTopXMayPlayUntilEffect(1, Duration.EndOfTurn), TargetController.YOU, false),
                 new ModeChoiceSourceCondition("Khans"),
                 ruleTrigger1));
 

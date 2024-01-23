@@ -17,9 +17,7 @@ public final class MisleadingMotes extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{U}");
 
         // Target creature's owner puts it on the top or bottom of their library.
-        this.getSpellAbility().addEffect(new PutOnTopOrBottomLibraryTargetEffect(
-                "target creature's owner puts it on the top or bottom of their library"
-        ));
+        this.getSpellAbility().addEffect(new PutOnTopOrBottomLibraryTargetEffect(false));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 

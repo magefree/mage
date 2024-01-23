@@ -26,7 +26,7 @@ public final class Aggravate extends CardImpl {
 
 
         // Aggravate deals 1 damage to each creature target player controls.
-        this.getSpellAbility().addEffect(new DamageAllControlledTargetEffect(1, new FilterCreaturePermanent()));
+        this.getSpellAbility().addEffect(new DamageAllControlledTargetEffect(1));
         this.getSpellAbility().addTarget(new TargetPlayer());
         // Each creature dealt damage this way attacks this turn if able.
         this.getSpellAbility().addEffect(new AggravateRequirementEffect());

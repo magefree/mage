@@ -26,6 +26,7 @@ public final class LostCavernsOfIxalanCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Aetherize", 142, Rarity.UNCOMMON, mage.cards.a.Aetherize.class));
         cards.add(new SetCardInfo("Akroma's Will", 125, Rarity.RARE, mage.cards.a.AkromasWill.class));
         cards.add(new SetCardInfo("Alchemist's Refuge", 318, Rarity.RARE, mage.cards.a.AlchemistsRefuge.class));
+        cards.add(new SetCardInfo("Altar of the Wretched", 10, Rarity.RARE, mage.cards.a.AltarOfTheWretched.class));
         cards.add(new SetCardInfo("Amphin Mutineer", 143, Rarity.RARE, mage.cards.a.AmphinMutineer.class));
         cards.add(new SetCardInfo("Amulet of Vigor", 103, Rarity.RARE, mage.cards.a.AmuletOfVigor.class));
         cards.add(new SetCardInfo("Angrath's Marauders", 215, Rarity.RARE, mage.cards.a.AngrathsMarauders.class));
@@ -64,6 +65,7 @@ public final class LostCavernsOfIxalanCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Champion of Dusk", 188, Rarity.RARE, mage.cards.c.ChampionOfDusk.class));
         cards.add(new SetCardInfo("Chandra's Ignition", 220, Rarity.RARE, mage.cards.c.ChandrasIgnition.class));
         cards.add(new SetCardInfo("Chaos Warp", 221, Rarity.RARE, mage.cards.c.ChaosWarp.class));
+        cards.add(new SetCardInfo("Charismatic Conqueror", 70, Rarity.RARE, mage.cards.c.CharismaticConqueror.class));
         cards.add(new SetCardInfo("Chimil, the Inner Sun", 106, Rarity.MYTHIC, mage.cards.c.ChimilTheInnerSun.class));
         cards.add(new SetCardInfo("Choked Estuary", 322, Rarity.RARE, mage.cards.c.ChokedEstuary.class));
         cards.add(new SetCardInfo("Chromatic Orrery", 107, Rarity.MYTHIC, mage.cards.c.ChromaticOrrery.class));
@@ -82,6 +84,7 @@ public final class LostCavernsOfIxalanCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Coralhelm Commander", 148, Rarity.RARE, mage.cards.c.CoralhelmCommander.class));
         cards.add(new SetCardInfo("Cordial Vampire", 189, Rarity.RARE, mage.cards.c.CordialVampire.class));
         cards.add(new SetCardInfo("Corsair Captain", 149, Rarity.RARE, mage.cards.c.CorsairCaptain.class));
+        cards.add(new SetCardInfo("Cosmium Catalyst", 11, Rarity.RARE, mage.cards.c.CosmiumCatalyst.class));
         cards.add(new SetCardInfo("Crossway Troublemakers", 190, Rarity.RARE, mage.cards.c.CrosswayTroublemakers.class));
         cards.add(new SetCardInfo("Cruel Celebrant", 267, Rarity.UNCOMMON, mage.cards.c.CruelCelebrant.class));
         cards.add(new SetCardInfo("Crumbling Necropolis", 326, Rarity.UNCOMMON, mage.cards.c.CrumblingNecropolis.class));
@@ -102,6 +105,7 @@ public final class LostCavernsOfIxalanCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Dire Fleet Daredevil", 223, Rarity.RARE, mage.cards.d.DireFleetDaredevil.class));
         cards.add(new SetCardInfo("Dire Fleet Ravager", 192, Rarity.MYTHIC, mage.cards.d.DireFleetRavager.class));
         cards.add(new SetCardInfo("Distant Melody", 154, Rarity.COMMON, mage.cards.d.DistantMelody.class));
+        cards.add(new SetCardInfo("Don Andres, the Renegade", 6, Rarity.MYTHIC, mage.cards.d.DonAndresTheRenegade.class));
         cards.add(new SetCardInfo("Drana, Liberator of Malakir", 193, Rarity.MYTHIC, mage.cards.d.DranaLiberatorOfMalakir.class));
         cards.add(new SetCardInfo("Drover of the Mighty", 239, Rarity.UNCOMMON, mage.cards.d.DroverOfTheMighty.class));
         cards.add(new SetCardInfo("Dusk Legion Sergeant", 80, Rarity.RARE, mage.cards.d.DuskLegionSergeant.class));
@@ -134,6 +138,7 @@ public final class LostCavernsOfIxalanCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Furycalm Snarl", 333, Rarity.RARE, mage.cards.f.FurycalmSnarl.class));
         cards.add(new SetCardInfo("Game Trail", 334, Rarity.RARE, mage.cards.g.GameTrail.class));
         cards.add(new SetCardInfo("Geier Reach Sanitarium", 335, Rarity.RARE, mage.cards.g.GeierReachSanitarium.class));
+        cards.add(new SetCardInfo("Gemcutter Buccaneer", 55, Rarity.RARE, mage.cards.g.GemcutterBuccaneer.class));
         cards.add(new SetCardInfo("Generous Gift", 128, Rarity.UNCOMMON, mage.cards.g.GenerousGift.class));
         cards.add(new SetCardInfo("Ghost of Ramirez DePietro", 157, Rarity.UNCOMMON, mage.cards.g.GhostOfRamirezDePietro.class));
         cards.add(new SetCardInfo("Glass-Cast Heart", 199, Rarity.RARE, mage.cards.g.GlassCastHeart.class));
@@ -193,6 +198,7 @@ public final class LostCavernsOfIxalanCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Nighthawk Scavenger", 203, Rarity.RARE, mage.cards.n.NighthawkScavenger.class));
         cards.add(new SetCardInfo("Oathsworn Vampire", 204, Rarity.UNCOMMON, mage.cards.o.OathswornVampire.class));
         cards.add(new SetCardInfo("Olivia's Wrath", 205, Rarity.RARE, mage.cards.o.OliviasWrath.class));
+        cards.add(new SetCardInfo("Ore-Rich Stalactite", 11, Rarity.RARE, mage.cards.o.OreRichStalactite.class));
         cards.add(new SetCardInfo("Order of Sacred Dusk", 97, Rarity.RARE, mage.cards.o.OrderOfSacredDusk.class));
         cards.add(new SetCardInfo("Orzhov Basilica", 345, Rarity.COMMON, mage.cards.o.OrzhovBasilica.class));
         cards.add(new SetCardInfo("Orzhov Signet", 310, Rarity.UNCOMMON, mage.cards.o.OrzhovSignet.class));
@@ -275,7 +281,9 @@ public final class LostCavernsOfIxalanCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Temple of Silence", 358, Rarity.RARE, mage.cards.t.TempleOfSilence.class));
         cards.add(new SetCardInfo("Temple of the False God", 359, Rarity.UNCOMMON, mage.cards.t.TempleOfTheFalseGod.class));
         cards.add(new SetCardInfo("Terramorphic Expanse", 360, Rarity.COMMON, mage.cards.t.TerramorphicExpanse.class));
+        cards.add(new SetCardInfo("Tetzin, Gnome Champion", 13, Rarity.RARE, mage.cards.t.TetzinGnomeChampion.class));
         cards.add(new SetCardInfo("Thassa, God of the Sea", 176, Rarity.MYTHIC, mage.cards.t.ThassaGodOfTheSea.class));
+        cards.add(new SetCardInfo("The Golden-Gear Colossus", 13, Rarity.RARE, mage.cards.t.TheGoldenGearColossus.class));
         cards.add(new SetCardInfo("The Indomitable", 43, Rarity.RARE, mage.cards.t.TheIndomitable.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Indomitable", 75, Rarity.RARE, mage.cards.t.TheIndomitable.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Grim Captain's Locker", 82, Rarity.RARE, mage.cards.t.TheGrimCaptainsLocker.class));
@@ -319,6 +327,7 @@ public final class LostCavernsOfIxalanCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Windfall", 180, Rarity.UNCOMMON, mage.cards.w.Windfall.class));
         cards.add(new SetCardInfo("Worn Powerstone", 120, Rarity.UNCOMMON, mage.cards.w.WornPowerstone.class));
         cards.add(new SetCardInfo("Wrathful Raptors", 88, Rarity.RARE, mage.cards.w.WrathfulRaptors.class));
+        cards.add(new SetCardInfo("Wretched Bonemass", 10, Rarity.RARE, mage.cards.w.WretchedBonemass.class));
         cards.add(new SetCardInfo("Xavier Sal, Infested Captain", 14, Rarity.RARE, mage.cards.x.XavierSalInfestedCaptain.class));
         cards.add(new SetCardInfo("Xenagos, God of Revels", 295, Rarity.MYTHIC, mage.cards.x.XenagosGodOfRevels.class));
         cards.add(new SetCardInfo("Xolatoyac, the Smiling Flood", 8, Rarity.MYTHIC, mage.cards.x.XolatoyacTheSmilingFlood.class));

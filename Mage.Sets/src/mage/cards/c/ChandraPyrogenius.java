@@ -40,7 +40,7 @@ public final class ChandraPyrogenius extends CardImpl {
 
         // -10: Chandra, Pyrogenius deals 6 damage to target player and each creature they control.
         ability = new LoyaltyAbility(new DamageTargetEffect(6), -10);
-        ability.addEffect(new DamageAllControlledTargetEffect(6, new FilterCreaturePermanent())
+        ability.addEffect(new DamageAllControlledTargetEffect(6)
                 .setText("and each creature that player or that planeswalker's controller controls"));
         ability.addTarget(new TargetPlayerOrPlaneswalker());
         this.addAbility(ability);

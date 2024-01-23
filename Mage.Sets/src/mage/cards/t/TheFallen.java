@@ -44,7 +44,7 @@ class TheFallenEffect extends OneShotEffect {
 
     TheFallenEffect() {
         super(Outcome.Damage);
-        this.staticText = "{this} deals 1 damage to each opponent or planeswalker it has dealt damage to this game";
+        this.staticText = "{this} deals 1 damage to each opponent and planeswalker it has dealt damage to this game";
     }
 
     private TheFallenEffect(final TheFallenEffect effect) {
@@ -73,7 +73,7 @@ class TheFallenEffect extends OneShotEffect {
 
 class TheFallenWatcher extends Watcher {
 
-    private Map<UUID, Set<UUID>> playersAndWalkersDealtDamageThisGame = new HashMap<>(); // Map<creatureId, Set<playerId>>
+    private final Map<UUID, Set<UUID>> playersAndWalkersDealtDamageThisGame = new HashMap<>(); // Map<creatureId, Set<playerId>>
 
     public TheFallenWatcher() {
         super(WatcherScope.GAME);

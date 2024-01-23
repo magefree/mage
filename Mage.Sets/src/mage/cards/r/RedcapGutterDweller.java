@@ -6,18 +6,18 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
-import mage.abilities.effects.common.ExileTopXMayPlayUntilEndOfTurnEffect;
+import mage.abilities.effects.common.ExileTopXMayPlayUntilEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.permanent.token.RatCantBlockToken;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 
@@ -47,7 +47,7 @@ public final class RedcapGutterDweller extends CardImpl {
                         new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE),
                         "Sacrifice another creature? If you do, put a +1/+1 counter on {this} "
                                 + "and exile the top card of your library. You may play that card this turn."
-                ).addEffect(new ExileTopXMayPlayUntilEndOfTurnEffect(1, false)
+                ).addEffect(new ExileTopXMayPlayUntilEffect(1, Duration.EndOfTurn)
                         .setText("and exile the top card of your library. You may play that card this turn")),
                 TargetController.YOU,
                 false

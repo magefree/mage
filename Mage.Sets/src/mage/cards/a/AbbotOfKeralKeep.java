@@ -3,7 +3,7 @@ package mage.cards.a;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.ExileTopXMayPlayUntilEndOfTurnEffect;
+import mage.abilities.effects.common.ExileTopXMayPlayUntilEffect;
 import mage.abilities.keyword.ProwessAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -26,7 +26,8 @@ public final class AbbotOfKeralKeep extends CardImpl {
         this.addAbility(new ProwessAbility());
 
         // When Abbot of Keral Keep enters the battlefield, exile the top card of your library. Until end of turn, you may play that card.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new ExileTopXMayPlayUntilEndOfTurnEffect(1)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new ExileTopXMayPlayUntilEffect(1, Duration.EndOfTurn)
+                .withTextOptions("that card", false)));
     }
 
     private AbbotOfKeralKeep(final AbbotOfKeralKeep card) {

@@ -43,7 +43,7 @@ public final class UbulSarGatekeepers extends CardImpl {
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new BoostTargetEffect(-2, -2, Duration.EndOfTurn)),
                 gatesCondition,
-                "Whenever {this} enters the battlefield, if you control two or more Gates, target creature an opponent controls gets -2/-2 until end of turn.");
+                "When {this} enters the battlefield, if you control two or more Gates, target creature an opponent controls gets -2/-2 until end of turn.");
         Target target = new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE);
         ability.addTarget(target);
         ability.addHint(new ConditionHint(gatesCondition, "You control two or more Gates"));

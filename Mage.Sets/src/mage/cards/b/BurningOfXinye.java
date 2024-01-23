@@ -1,4 +1,3 @@
-
 package mage.cards.b;
 
 import java.util.UUID;
@@ -9,15 +8,14 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledLandPermanent;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetOpponent;
-import mage.target.common.TargetSacrifice;
 
 /**
  *
@@ -32,7 +30,7 @@ public final class BurningOfXinye extends CardImpl {
         // You destroy four lands you control, then target opponent destroys four lands they control. Then Burning of Xinye deals 4 damage to each creature.
         this.getSpellAbility().addTarget(new TargetOpponent());
         this.getSpellAbility().addEffect(new BurningOfXinyeEffect());
-        this.getSpellAbility().addEffect(new DamageAllEffect(4, new FilterCreaturePermanent()));
+        this.getSpellAbility().addEffect(new DamageAllEffect(4, StaticFilters.FILTER_PERMANENT_CREATURE).concatBy("Then"));
     }
 
     private BurningOfXinye(final BurningOfXinye card) {
@@ -50,7 +48,7 @@ class BurningOfXinyeEffect extends OneShotEffect{
 
     private static final FilterControlledLandPermanent filter =  new FilterControlledLandPermanent();
     
-    public BurningOfXinyeEffect() {
+    BurningOfXinyeEffect() {
         super(Outcome.DestroyPermanent);
         staticText = "You destroy four lands you control, then target opponent destroys four lands they control";
     }
@@ -82,10 +80,10 @@ class BurningOfXinyeEffect extends OneShotEffect{
         int realCount = game.getBattlefield().countAll(filter, player.getId(), game);
         int amount = Math.min(4, realCount);
 
-        Target target = new TargetSacrifice(amount, filter);
+        Target target = new TargetControlledPermanent(amount, amount, filter, true);
         if (amount > 0 && target.canChoose(player.getId(), source, game)) {
             while (!target.isChosen() && target.canChoose(player.getId(), source, game) && player.canRespond()) {
-                player.choose(Outcome.Sacrifice, target, source, game);
+                player.choose(Outcome.DestroyPermanent, target, source, game);
             }
 
             for (UUID targetId : target.getTargets()) {

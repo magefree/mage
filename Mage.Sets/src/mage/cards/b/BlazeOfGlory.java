@@ -37,7 +37,8 @@ public final class BlazeOfGlory extends CardImpl {
 
         // Target creature defending player controls can block any number of creatures this turn. It blocks each attacking creature this turn if able.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
-        this.getSpellAbility().addEffect(new CanBlockAdditionalCreatureTargetEffect(Duration.EndOfTurn, 0));
+        this.getSpellAbility().addEffect(new CanBlockAdditionalCreatureTargetEffect(Duration.EndOfTurn, 0)
+                .setText("target creature defending player controls can block any number of creatures this turn"));
         this.getSpellAbility().addEffect(new BlazeOfGloryRequirementEffect());
     }
 

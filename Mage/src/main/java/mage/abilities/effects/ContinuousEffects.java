@@ -247,10 +247,10 @@ public class ContinuousEffects implements Serializable {
                 .collect(Collectors.toList());
     }
 
-    public Map<RequirementEffect, Set<Ability>> getApplicableRequirementEffects(Permanent permanent, boolean playerRealted, Game game) {
+    public Map<RequirementEffect, Set<Ability>> getApplicableRequirementEffects(Permanent permanent, boolean playerRelated, Game game) {
         Map<RequirementEffect, Set<Ability>> effects = new HashMap<>();
         for (RequirementEffect effect : requirementEffects) {
-            if (playerRealted == effect.isPlayerRelated()) {
+            if (playerRelated == effect.isPlayerRelated()) {
                 Set<Ability> abilities = requirementEffects.getAbility(effect.getId());
                 Set<Ability> applicableAbilities = new HashSet<>();
                 for (Ability ability : abilities) {

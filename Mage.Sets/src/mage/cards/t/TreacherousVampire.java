@@ -43,7 +43,7 @@ public final class TreacherousVampire extends CardImpl {
                 new DoUnlessControllerPaysEffect(
                         new SacrificeSourceEffect(),
                         new ExileFromGraveCost(new TargetCardInYourGraveyard())
-                ), false
+                ).setText("sacrifice it unless you exile a card from your graveyard"), false
         ));
 
         // Threshold - As long as seven or more cards are in your graveyard, Treacherous Vampire gets +2/+2 and has "When Treacherous Vampire dies, you lose 6 life."

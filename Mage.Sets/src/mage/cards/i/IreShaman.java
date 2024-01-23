@@ -5,12 +5,13 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.ExileTopXMayPlayUntilEndOfTurnEffect;
+import mage.abilities.effects.common.ExileTopXMayPlayUntilEffect;
 import mage.abilities.keyword.MenaceAbility;
 import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.SubType;
 
 /**
@@ -33,7 +34,8 @@ public final class IreShaman extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl<>("{R}"), true));
 
         // When Ire Shaman is turned face up, exile the top card of your library. Until end of turn, you may play that card.
-        this.addAbility(new TurnedFaceUpSourceTriggeredAbility(new ExileTopXMayPlayUntilEndOfTurnEffect(1), false));
+        this.addAbility(new TurnedFaceUpSourceTriggeredAbility(new ExileTopXMayPlayUntilEffect(1, Duration.EndOfTurn)
+                .withTextOptions("that card", false), false));
     }
 
     private IreShaman(final IreShaman card) {

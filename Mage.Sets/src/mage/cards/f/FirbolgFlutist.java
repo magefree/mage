@@ -35,7 +35,7 @@ public final class FirbolgFlutist extends CardImpl {
         Ability ability = new EntersBattlefieldTriggeredAbility(
                 new GainControlTargetEffect(Duration.EndOfTurn), false
         );
-        ability.addEffect(new UntapTargetEffect().setText("Untap that creature"));
+        ability.addEffect(new UntapTargetEffect().setText("Untap it"));
         ability.addEffect(new GainAbilityTargetEffect(
                 HasteAbility.getInstance(), Duration.EndOfTurn
         ).setText("It gains haste"));
@@ -43,7 +43,7 @@ public final class FirbolgFlutist extends CardImpl {
                 new MyriadAbility(), Duration.EndOfTurn
         ).setText("and myriad until end of turn"));
         ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
-        this.addAbility(ability.withFlavorWord("Captivating Performance"));
+        this.addAbility(ability.withFlavorWord("Enthralling Performance"));
     }
 
     private FirbolgFlutist(final FirbolgFlutist card) {
