@@ -75,7 +75,7 @@ class AgrusKosSpiritOfJusticeEffect extends OneShotEffect {
             return false;
         }
         if (!permanent.isSuspected()) {
-            permanent.setSuspected(true, game);
+            permanent.setSuspected(true, game, source);
             return true;
         }
         Player player = game.getPlayer(source.getControllerId());

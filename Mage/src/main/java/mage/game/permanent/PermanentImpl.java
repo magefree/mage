@@ -394,8 +394,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     /**
      * Add an ability to the permanent. When copying from an existing source
      * you should use the fromExistingObject variant of this function to prevent double-copying subabilities
-     * @param ability The ability to be added
-     * @param sourceId   id of the source doing the added (for the effect created to add it)
+     *
+     * @param ability  The ability to be added
+     * @param sourceId id of the source doing the added (for the effect created to add it)
      * @param game
      * @return The newly added ability copy
      */
@@ -405,11 +406,11 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     /**
-     * @param ability The ability to be added
-     * @param sourceId   id of the source doing the added (for the effect created to add it)
+     * @param ability            The ability to be added
+     * @param sourceId           id of the source doing the added (for the effect created to add it)
      * @param game
      * @param fromExistingObject if copying abilities from an existing source then must ignore sub-abilities because they're already on the source object
-     *                         Otherwise sub-abilities will be added twice to the resulting object
+     *                           Otherwise sub-abilities will be added twice to the resulting object
      * @return The newly added ability copy
      */
     @Override
@@ -1679,8 +1680,12 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
-    public void setSuspected(boolean value, Game game) {
-        this.suspected = value;
+    public void setSuspected(boolean value, Game game, Ability source) {
+        if (!value || !game.replaceEvent(GameEvent.getEvent(
+                EventType.BECOME_SUSPECTED, getId(), source, source.getControllerId()
+        ))) {
+            this.suspected = value;
+        }
     }
 
     // Used as key for the ring bearer info.

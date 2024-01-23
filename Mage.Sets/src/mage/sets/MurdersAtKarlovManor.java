@@ -28,6 +28,7 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
 
         cards.add(new SetCardInfo("Agrus Kos, Spirit of Justice", 184, Rarity.MYTHIC, mage.cards.a.AgrusKosSpiritOfJustice.class));
         cards.add(new SetCardInfo("Aftermath Analyst", 148, Rarity.UNCOMMON, mage.cards.a.AftermathAnalyst.class));
+        cards.add(new SetCardInfo("Airtight Alibi", 149, Rarity.COMMON, mage.cards.a.AirtightAlibi.class));
         cards.add(new SetCardInfo("Alley Assailant", 76, Rarity.COMMON, mage.cards.a.AlleyAssailant.class));
         cards.add(new SetCardInfo("Alquist Proft, Master Sleuth", 185, Rarity.MYTHIC, mage.cards.a.AlquistProftMasterSleuth.class));
         cards.add(new SetCardInfo("Assassin's Trophy", 187, Rarity.RARE, mage.cards.a.AssassinsTrophy.class));
