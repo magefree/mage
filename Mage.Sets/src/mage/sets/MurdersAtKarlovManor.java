@@ -26,6 +26,7 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         this.hasBasicLands = true;
         this.hasBoosters = false; // temporary
 
+        cards.add(new SetCardInfo("A Killer Among Us", 167, Rarity.UNCOMMON, mage.cards.a.AKillerAmongUs.class));
         cards.add(new SetCardInfo("Aftermath Analyst", 148, Rarity.UNCOMMON, mage.cards.a.AftermathAnalyst.class));
         cards.add(new SetCardInfo("Alquist Proft, Master Sleuth", 185, Rarity.MYTHIC, mage.cards.a.AlquistProftMasterSleuth.class));
         cards.add(new SetCardInfo("Assassin's Trophy", 187, Rarity.RARE, mage.cards.a.AssassinsTrophy.class));
