@@ -61,7 +61,7 @@ enum TreacherousGreedPredicate implements Predicate<Permanent> {
 
     @Override
     public boolean apply(Permanent input, Game game) {
-        return false;
+        return TreacherousGreedWatcher.checkCreature(input, game);
     }
 }
 

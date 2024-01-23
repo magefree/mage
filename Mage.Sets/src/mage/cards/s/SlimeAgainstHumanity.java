@@ -14,7 +14,7 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.OozeToken;
+import mage.game.permanent.token.OozeTrampleToken;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
 
@@ -76,7 +76,7 @@ class SlimeAgainstHumanityEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Token token = new OozeToken(0, 0);
+        Token token = new OozeTrampleToken();
         token.putOntoBattlefield(1, game, source);
         int graveCount = Optional
                 .ofNullable(game.getPlayer(source.getControllerId()))
