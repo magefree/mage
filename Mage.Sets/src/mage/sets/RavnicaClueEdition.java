@@ -25,6 +25,7 @@ public final class RavnicaClueEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Billiard Room", 13, Rarity.UNCOMMON, mage.cards.b.BilliardRoom.class));
         cards.add(new SetCardInfo("Blood Crypt", 274, Rarity.RARE, mage.cards.b.BloodCrypt.class));
         cards.add(new SetCardInfo("Breeding Pool", 275, Rarity.RARE, mage.cards.b.BreedingPool.class));
+        cards.add(new SetCardInfo("Carnage Interpreter", 26, Rarity.RARE, mage.cards.c.CarnageInterpreter.class));
         cards.add(new SetCardInfo("Commander Mustard", 6, Rarity.RARE, mage.cards.c.CommanderMustard.class));
         cards.add(new SetCardInfo("Conclave Evangelist", 27, Rarity.RARE, mage.cards.c.ConclaveEvangelist.class));
         cards.add(new SetCardInfo("Conservatory", 14, Rarity.UNCOMMON, mage.cards.c.Conservatory.class));
