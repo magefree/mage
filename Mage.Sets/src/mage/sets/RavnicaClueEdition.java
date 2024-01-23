@@ -47,6 +47,7 @@ public final class RavnicaClueEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Steam Vents", 280, Rarity.RARE, mage.cards.s.SteamVents.class));
         cards.add(new SetCardInfo("Stomping Ground", 281, Rarity.RARE, mage.cards.s.StompingGround.class));
         cards.add(new SetCardInfo("Study", 21, Rarity.UNCOMMON, mage.cards.s.Study.class));
+        cards.add(new SetCardInfo("Syndicate Heavy", 47, Rarity.RARE, mage.cards.s.SyndicateHeavy.class));
         cards.add(new SetCardInfo("Temple Garden", 282, Rarity.RARE, mage.cards.t.TempleGarden.class));
         cards.add(new SetCardInfo("Undercover Butler", 49, Rarity.UNCOMMON, mage.cards.u.UndercoverButler.class));
         cards.add(new SetCardInfo("Vernal Sovereign", 51, Rarity.RARE, mage.cards.v.VernalSovereign.class));
