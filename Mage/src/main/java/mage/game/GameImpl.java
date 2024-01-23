@@ -15,8 +15,6 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.PreventionEffectData;
 import mage.abilities.effects.common.CopyEffect;
 import mage.abilities.effects.common.InfoEffect;
-import mage.abilities.effects.common.combat.CantBlockAllEffect;
-import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.effects.keyword.FinalityCounterEffect;
 import mage.abilities.effects.keyword.ShieldCounterEffect;
 import mage.abilities.effects.keyword.StunCounterEffect;
@@ -42,7 +40,6 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.filter.predicate.permanent.LegendRuleAppliesPredicate;
-import mage.filter.predicate.permanent.SuspectedPredicate;
 import mage.game.combat.Combat;
 import mage.game.combat.CombatGroup;
 import mage.game.command.*;
@@ -1182,17 +1179,6 @@ public abstract class GameImpl implements Game {
 
         // Apply finality counter mechanic
         state.addAbility(new SimpleStaticAbility(Zone.ALL, new FinalityCounterEffect()), null);
-
-        // Apply suspected mechanic effect
-        FilterCreaturePermanent filterSuspectedCreature = new FilterCreaturePermanent();
-        filterSuspectedCreature.add(SuspectedPredicate.instance);
-        Ability suspectAbility = new SimpleStaticAbility(new CantBlockAllEffect(filterSuspectedCreature, Duration.Custom));
-        FilterPermanent filterSuspectedPermanent = new FilterPermanent();
-        filterSuspectedPermanent.add(SuspectedPredicate.instance);
-        suspectAbility.addEffect(new GainAbilityAllEffect(
-                new MenaceAbility(false), Duration.Custom, filterSuspectedPermanent
-        ));
-        state.addAbility(suspectAbility, null);
 
         // Handle companions
         Map<Player, Card> playerCompanionMap = new HashMap<>();
