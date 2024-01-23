@@ -31,6 +31,7 @@ public final class RavnicaClueEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Dining Room", 15, Rarity.UNCOMMON, mage.cards.d.DiningRoom.class));
         cards.add(new SetCardInfo("Ecstatic Electromancer", 31, Rarity.UNCOMMON, mage.cards.e.EcstaticElectromancer.class));
         cards.add(new SetCardInfo("Godless Shrine", 276, Rarity.RARE, mage.cards.g.GodlessShrine.class));
+        cards.add(new SetCardInfo("Hall", 16, Rarity.UNCOMMON, mage.cards.h.Hall.class));
         cards.add(new SetCardInfo("Hallowed Fountain", 277, Rarity.RARE, mage.cards.h.HallowedFountain.class));
         cards.add(new SetCardInfo("Knife", 10, Rarity.UNCOMMON, mage.cards.k.Knife.class));
         cards.add(new SetCardInfo("Lavinia, Foil to Conspiracy", 36, Rarity.RARE, mage.cards.l.LaviniaFoilToConspiracy.class));
