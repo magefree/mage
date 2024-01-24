@@ -127,7 +127,8 @@ class AirtightAlibiReplacementEffect extends ReplacementEffectImpl {
                 .ofNullable(source.getSourcePermanentIfItStillExists(game))
                 .filter(Objects::nonNull)
                 .map(Permanent::getAttachedTo)
-                .equals(event.getTargetId());
+                .map(event.getTargetId()::equals)
+                .orElse(false);
     }
 
     @Override
