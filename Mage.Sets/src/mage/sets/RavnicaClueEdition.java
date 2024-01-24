@@ -17,7 +17,7 @@ public final class RavnicaClueEdition extends ExpansionSet {
 
     private RavnicaClueEdition() {
         super("Ravnica: Clue Edition", "CLU", ExpansionSet.buildDate(2024, 2, 9), SetType.EXPANSION);
-        this.hasBasicLands = false;
+        this.hasBasicLands = true;
         this.hasBoosters = false;
 
         cards.add(new SetCardInfo("Affectionate Indrik", 155, Rarity.UNCOMMON, mage.cards.a.AffectionateIndrik.class));
