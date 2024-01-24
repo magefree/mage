@@ -1679,12 +1679,20 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         return suspected;
     }
 
+    private static final String suspectedInfoKey = "IS_SUSPECTED";
+
     @Override
     public void setSuspected(boolean value, Game game, Ability source) {
         if (!value || !game.replaceEvent(GameEvent.getEvent(
-                EventType.BECOME_SUSPECTED, getId(), source, source.getControllerId()
+                EventType.BECOME_SUSPECTED, getId(),
+                source, source.getControllerId()
         ))) {
             this.suspected = value;
+        }
+        if (this.suspected) {
+            addInfo(suspectedInfoKey, CardUtil.addToolTipMarkTags("Suspected (has menace and can't block)"), game);
+        } else {
+            addInfo(suspectedInfoKey, null, game);
         }
     }
 
