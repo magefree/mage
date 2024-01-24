@@ -41,6 +41,7 @@ public final class RavnicaClueEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Library", 18, Rarity.UNCOMMON, mage.cards.l.Library.class));
         cards.add(new SetCardInfo("Lounge", 19, Rarity.UNCOMMON, mage.cards.l.Lounge.class));
         cards.add(new SetCardInfo("Overgrown Tomb", 278, Rarity.RARE, mage.cards.o.OvergrownTomb.class));
+        cards.add(new SetCardInfo("Rope", 11, Rarity.UNCOMMON, mage.cards.r.Rope.class));
         cards.add(new SetCardInfo("Sacred Foundry", 279, Rarity.RARE, mage.cards.s.SacredFoundry.class));
         cards.add(new SetCardInfo("Secret Passage", 20, Rarity.UNCOMMON, mage.cards.s.SecretPassage.class));
         cards.add(new SetCardInfo("Senator Peacock", 2, Rarity.RARE, mage.cards.s.SenatorPeacock.class));
