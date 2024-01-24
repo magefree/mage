@@ -110,6 +110,7 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Shady Informant", 231, Rarity.COMMON, mage.cards.s.ShadyInformant.class));
         cards.add(new SetCardInfo("Shock", 144, Rarity.COMMON, mage.cards.s.Shock.class));
         cards.add(new SetCardInfo("Slime Against Humanity", 177, Rarity.COMMON, mage.cards.s.SlimeAgainstHumanity.class));
+        cards.add(new SetCardInfo("Snarling Gorehound", 105, Rarity.COMMON, mage.cards.s.SnarlingGorehound.class));
         cards.add(new SetCardInfo("Steamcore Scholar", 71, Rarity.RARE, mage.cards.s.SteamcoreScholar.class));
         cards.add(new SetCardInfo("Sumala Sentry", 233, Rarity.UNCOMMON, mage.cards.s.SumalaSentry.class));
         cards.add(new SetCardInfo("Swamp", 274, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
