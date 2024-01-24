@@ -12,7 +12,7 @@ import java.util.List;
  */
 public final class MurdersAtKarlovManor extends ExpansionSet {
 
-    private static final List<String> unfinished = Arrays.asList("Alley Assailant", "Aurelia's Vindicator", "Bolrac-Clan Basher", "Branch of Vitu-Ghazi", "Concealed Weapon", "Culvert Ambusher", "Defenestrated Phantom", "Dog Walker", "Essence of Antiquity", "Exit Specialist", "Expose the Culprit", "Faerie Snoop", "Flourishing Bloom-Kin", "Fugitive Codebreaker", "Gadget Technician", "Granite Witness", "Greenbelt Radical", "Hunted Bonebrute", "Lumbering Laundry", "Mistway Spy", "Museum Nightwatch", "Nervous Gardener", "Nightdrinker Moroii", "Offender at Large", "Pyrotechnic Performer", "Rakish Scoundrel", "Riftburst Hellion", "Shady Informant", "Undercover Crocodelf", "Unyielding Gatekeeper");
+    private static final List<String> unfinished = Arrays.asList("Alley Assailant", "Aurelia's Vindicator", "Basilica Stalker", "Bolrac-Clan Basher", "Branch of Vitu-Ghazi", "Bubble Smuggler", "Concealed Weapon", "Coveted Falcon", "Culvert Ambusher", "Defenestrated Phantom", "Dog Walker", "Essence of Antiquity", "Exit Specialist", "Expose the Culprit", "Faerie Snoop", "Flourishing Bloom-Kin", "Fugitive Codebreaker", "Gadget Technician", "Granite Witness", "Greenbelt Radical", "Hunted Bonebrute", "Lumbering Laundry", "Mistway Spy", "Museum Nightwatch", "Nervous Gardener", "Nightdrinker Moroii", "Offender at Large", "Pyrotechnic Performer", "Rakish Scoundrel", "Riftburst Hellion", "Sanguine Savior", "Shady Informant", "Undercover Crocodelf", "Unyielding Gatekeeper", "Vengeful Creeper");
 
     private static final MurdersAtKarlovManor instance = new MurdersAtKarlovManor();
 
