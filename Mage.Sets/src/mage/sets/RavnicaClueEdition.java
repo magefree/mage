@@ -53,5 +53,6 @@ public final class RavnicaClueEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Undercover Butler", 49, Rarity.UNCOMMON, mage.cards.u.UndercoverButler.class));
         cards.add(new SetCardInfo("Vernal Sovereign", 51, Rarity.RARE, mage.cards.v.VernalSovereign.class));
         cards.add(new SetCardInfo("Watery Grave", 283, Rarity.RARE, mage.cards.w.WateryGrave.class));
+        cards.add(new SetCardInfo("Wrench", 7, Rarity.UNCOMMON, mage.cards.w.Wrench.class));
     }
 }
