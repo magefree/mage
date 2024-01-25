@@ -12,7 +12,7 @@ import java.util.List;
  */
 public final class MurdersAtKarlovManor extends ExpansionSet {
 
-    private static final List<String> unfinished = Arrays.asList("Alley Assailant", "Aurelia's Vindicator", "Basilica Stalker", "Bolrac-Clan Basher", "Branch of Vitu-Ghazi", "Bubble Smuggler", "Concealed Weapon", "Coveted Falcon", "Culvert Ambusher", "Defenestrated Phantom", "Dog Walker", "Essence of Antiquity", "Exit Specialist", "Expose the Culprit", "Faerie Snoop", "Flourishing Bloom-Kin", "Fugitive Codebreaker", "Gadget Technician", "Granite Witness", "Greenbelt Radical", "Hunted Bonebrute", "Lumbering Laundry", "Mistway Spy", "Museum Nightwatch", "Nervous Gardener", "Nightdrinker Moroii", "Offender at Large", "Pyrotechnic Performer", "Rakish Scoundrel", "Riftburst Hellion", "Sanguine Savior", "Shady Informant", "Undercover Crocodelf", "Unyielding Gatekeeper", "Vengeful Creeper");
+    private static final List<String> unfinished = Arrays.asList("Alley Assailant", "Aurelia's Vindicator", "Basilica Stalker", "Bolrac-Clan Basher", "Branch of Vitu-Ghazi", "Bubble Smuggler", "Concealed Weapon", "Coveted Falcon", "Crowd-Control Warden", "Culvert Ambusher", "Defenestrated Phantom", "Dog Walker", "Essence of Antiquity", "Exit Specialist", "Expose the Culprit", "Faerie Snoop", "Flourishing Bloom-Kin", "Fugitive Codebreaker", "Gadget Technician", "Granite Witness", "Greenbelt Radical", "Hunted Bonebrute", "Lumbering Laundry", "Mistway Spy", "Museum Nightwatch", "Nervous Gardener", "Nightdrinker Moroii", "Offender at Large", "Pyrotechnic Performer", "Rakish Scoundrel", "Riftburst Hellion", "Sanguine Savior", "Shady Informant", "Undercover Crocodelf", "Unyielding Gatekeeper", "Vengeful Creeper");
 
     private static final MurdersAtKarlovManor instance = new MurdersAtKarlovManor();
 
@@ -87,6 +87,7 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Meddling Youths", 219, Rarity.UNCOMMON, mage.cards.m.MeddlingYouths.class));
         cards.add(new SetCardInfo("Meticulous Archive", 264, Rarity.RARE, mage.cards.m.MeticulousArchive.class));
         cards.add(new SetCardInfo("Mountain", 275, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Murder", 95, Rarity.COMMON, mage.cards.m.Murder.class));
         cards.add(new SetCardInfo("Museum Nightwatch", 25, Rarity.COMMON, mage.cards.m.MuseumNightwatch.class));
         cards.add(new SetCardInfo("Nervous Gardener", 169, Rarity.COMMON, mage.cards.n.NervousGardener.class));
         cards.add(new SetCardInfo("Nightdrinker Moroii", 96, Rarity.UNCOMMON, mage.cards.n.NightdrinkerMoroii.class));
