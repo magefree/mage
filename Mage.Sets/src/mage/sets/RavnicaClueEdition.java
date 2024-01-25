@@ -259,6 +259,7 @@ public final class RavnicaClueEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Wildsize", 179, Rarity.COMMON, mage.cards.w.Wildsize.class));
         cards.add(new SetCardInfo("Wildwood Patrol", 180, Rarity.COMMON, mage.cards.w.WildwoodPatrol.class));
         cards.add(new SetCardInfo("Wojek Bodyguard", 154, Rarity.COMMON, mage.cards.w.WojekBodyguard.class));
+        cards.add(new SetCardInfo("Wrench", 7, Rarity.UNCOMMON, mage.cards.w.Wrench.class));
         cards.add(new SetCardInfo("Yeva's Forcemage", 181, Rarity.COMMON, mage.cards.y.YevasForcemage.class));
     }
 }
