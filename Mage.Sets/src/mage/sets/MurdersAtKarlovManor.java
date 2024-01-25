@@ -30,6 +30,7 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Alley Assailant", 76, Rarity.COMMON, mage.cards.a.AlleyAssailant.class));
         cards.add(new SetCardInfo("Alquist Proft, Master Sleuth", 185, Rarity.MYTHIC, mage.cards.a.AlquistProftMasterSleuth.class));
         cards.add(new SetCardInfo("Assassin's Trophy", 187, Rarity.RARE, mage.cards.a.AssassinsTrophy.class));
+        cards.add(new SetCardInfo("Audience with Trostani", 152, Rarity.RARE, mage.cards.a.AudienceWithTrostani.class));
         cards.add(new SetCardInfo("Aurelia, the Law Above", 188, Rarity.RARE, mage.cards.a.AureliaTheLawAbove.class));
         cards.add(new SetCardInfo("Auspicious Arrival", 5, Rarity.COMMON, mage.cards.a.AuspiciousArrival.class));
         cards.add(new SetCardInfo("Basilica Stalker", 78, Rarity.COMMON, mage.cards.b.BasilicaStalker.class));
