@@ -2,15 +2,13 @@ package mage.cards.c;
 
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.effects.keyword.SurveilEffect;
 import mage.abilities.keyword.EquipAbility;
+import mage.abilities.token.ClueAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
@@ -42,9 +40,7 @@ public final class Candlestick extends CardImpl {
         this.addAbility(boostAbility);
 
         // {2}, Sacrifice Candlestick: Draw a card.
-        Ability drawAbility = new SimpleActivatedAbility(new DrawCardSourceControllerEffect(1), new GenericManaCost(2));
-        drawAbility.addCost(new SacrificeSourceCost());
-        this.addAbility(drawAbility);
+        this.addAbility(new ClueAbility(true));
 
         // Equip {2}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2), false));
