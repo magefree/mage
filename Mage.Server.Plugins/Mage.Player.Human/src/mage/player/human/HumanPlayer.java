@@ -11,6 +11,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effects;
 import mage.abilities.effects.RequirementEffect;
 import mage.abilities.hint.HintUtils;
+import mage.abilities.keyword.ShadowAbility;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.abilities.mana.ManaAbility;
 import mage.cards.*;
@@ -296,7 +297,6 @@ public class HumanPlayer extends PlayerImpl {
      */
     protected void waitForResponse(Game game) {
         ThreadUtils.ensureRunInGameThread();
-        ;
 
         if (isExecutingMacro()) {
             pullResponseFromQueue(game);
@@ -1177,7 +1177,7 @@ public class HumanPlayer extends PlayerImpl {
                     int possibleBlockersCount = game.getBattlefield().count(filter, playerId, null, game);
                     boolean canStopOnAny = possibleBlockersCount != 0 && getControllingPlayersUserData(game).getUserSkipPrioritySteps().isStopOnDeclareBlockersWithAnyPermanents();
                     boolean canStopOnZero = possibleBlockersCount == 0 && getControllingPlayersUserData(game).getUserSkipPrioritySteps().isStopOnDeclareBlockersWithZeroPermanents();
-                    quickStop = canStopOnAny || canStopOnZero;
+                    quickStop = canStopOnAny || canStopOnZero || quickStopForCombatInterference(game);
                 }
             }
 
@@ -1395,6 +1395,43 @@ public class HumanPlayer extends PlayerImpl {
             return true;
         }
 
+        return false;
+    }
+
+    private boolean skipButtonActivated() {
+        return passedAllTurns || passedUntilEndStepBeforeMyTurn || passedTurn || passedUntilEndOfTurn
+                || passedUntilNextMain;
+    }
+
+    private boolean quickStopForCombatInterference(Game game) {
+        if (skipButtonActivated()) {
+            // We want this to target own activated abilities that remove a creature from combat or prevent it from doing
+            // damage. Exclude permanents that only target own permanents.
+            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(playerId)) {
+                if (permanent.canUseActivatedAbilities(game)) {
+                    String name = permanent.getName();
+                    if (name.equals("Ith, High Arcanist") || name.equals("Maze of Ith")
+                            || name.equals("Mystifying Maze") || name.equals("Spires of Orazca")) {
+                        // Find valid targets
+                        for (UUID attackerID : game.getCombat().getAttackers()) {
+                            if (game.getPermanent(attackerID).canBeTargetedBy(permanent, playerId, game)) {
+                                return true;
+                            }
+                        }
+                    } else if (name.equals("Maze of Shadows")) {
+                        // Find valid targets
+                        for (UUID attackerID : game.getCombat().getAttackers()) {
+                            Permanent attacker = game.getPermanent(attackerID);
+                            if (attacker.hasAbility(ShadowAbility.getInstance(), game)
+                                    && attacker.canBeTargetedBy(permanent, playerId, game)) {
+                                return true;
+                            }
+                        }
+                    }
+                    // TODO: Add untapped Manlands (via detection of BecomesCreatureSourceEffect usage?)
+                }
+            }
+        }
         return false;
     }
 
@@ -2019,12 +2056,7 @@ public class HumanPlayer extends PlayerImpl {
 
         // skip declare blocker step
         // as opposed to declare attacker - it can be skipped by ANY skip button TODO: make same for declare attackers and rework skip buttons (normal and forced)
-        boolean skipButtonActivated = passedAllTurns
-                || passedUntilEndStepBeforeMyTurn
-                || passedTurn
-                || passedUntilEndOfTurn
-                || passedUntilNextMain;
-        if (skipButtonActivated && !canStopOnAny && !canStopOnZero) {
+        if (skipButtonActivated() && !canStopOnAny && !canStopOnZero) {
             return;
         }
 
