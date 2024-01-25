@@ -12,7 +12,7 @@ import java.util.List;
  */
 public final class MurdersAtKarlovManor extends ExpansionSet {
 
-    private static final List<String> unfinished = Arrays.asList("Alley Assailant", "Aurelia's Vindicator", "Basilica Stalker", "Bolrac-Clan Basher", "Branch of Vitu-Ghazi", "Bubble Smuggler", "Concealed Weapon", "Coveted Falcon", "Crowd-Control Warden", "Culvert Ambusher", "Defenestrated Phantom", "Dog Walker", "Essence of Antiquity", "Exit Specialist", "Expose the Culprit", "Faerie Snoop", "Flourishing Bloom-Kin", "Fugitive Codebreaker", "Gadget Technician", "Granite Witness", "Greenbelt Radical", "Hunted Bonebrute", "Lumbering Laundry", "Mistway Spy", "Museum Nightwatch", "Nervous Gardener", "Nightdrinker Moroii", "Offender at Large", "Pyrotechnic Performer", "Rakish Scoundrel", "Riftburst Hellion", "Sanguine Savior", "Shady Informant", "Undercover Crocodelf", "Unyielding Gatekeeper", "Vengeful Creeper");
+    private static final List<String> unfinished = Arrays.asList("Alley Assailant", "Aurelia's Vindicator", "Basilica Stalker", "Bolrac-Clan Basher", "Branch of Vitu-Ghazi", "Bubble Smuggler", "Concealed Weapon", "Coveted Falcon", "Crowd-Control Warden", "Culvert Ambusher", "Defenestrated Phantom", "Dog Walker", "Essence of Antiquity", "Exit Specialist", "Expose the Culprit", "Faerie Snoop", "Flourishing Bloom-Kin", "Forum Familiar", "Fugitive Codebreaker", "Gadget Technician", "Granite Witness", "Greenbelt Radical", "Hunted Bonebrute", "Lumbering Laundry", "Mistway Spy", "Museum Nightwatch", "Nervous Gardener", "Nightdrinker Moroii", "Offender at Large", "Pyrotechnic Performer", "Rakish Scoundrel", "Riftburst Hellion", "Sanguine Savior", "Shady Informant", "Undercover Crocodelf", "Unyielding Gatekeeper", "Vengeful Creeper");
 
     private static final MurdersAtKarlovManor instance = new MurdersAtKarlovManor();
 
@@ -152,6 +152,7 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Voja, Jaws of the Conclave", 432, Rarity.MYTHIC, mage.cards.v.VojaJawsOfTheConclave.class));
         cards.add(new SetCardInfo("Warleader's Call", 242, Rarity.RARE, mage.cards.w.WarleadersCall.class));
         cards.add(new SetCardInfo("Wojek Investigator", 36, Rarity.RARE, mage.cards.w.WojekInvestigator.class));
+        cards.add(new SetCardInfo("Wrench", 37, Rarity.UNCOMMON, mage.cards.w.Wrench.class));
 
         cards.removeIf(setCardInfo -> unfinished.contains(setCardInfo.getName())); // remove when mechanic is implemented
     }
