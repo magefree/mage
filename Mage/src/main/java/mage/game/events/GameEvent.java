@@ -567,6 +567,12 @@ public class GameEvent implements Serializable {
          playerId   the player crafting
          */
         EXILED_WHILE_CRAFTING,
+        /* Become solved
+         targetId   the permanent being solved
+         sourceId   of the ability solving
+         playerId   the player solving
+         */
+        BECOME_SOLVED,
         //custom events
         CUSTOM_EVENT
     }

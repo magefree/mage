@@ -441,6 +441,10 @@ public interface Permanent extends Card, Controllable {
 
     void setRingBearer(Game game, boolean value);
 
+    boolean isSolved();
+
+    void setSolved(boolean value, Game game, Ability source);
+
     @Override
     Permanent copy();
 

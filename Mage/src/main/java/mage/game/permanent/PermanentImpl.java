@@ -94,6 +94,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     // maximal number of creatures the creature can be blocked by  0 = no restriction
     protected int maxBlockedBy = 0;
     protected boolean deathtouched;
+    protected boolean solved = false;
 
     protected Map<String, List<UUID>> connectedCards = new HashMap<>();
     protected Set<MageObjectReference> dealtDamageByThisTurn;
@@ -144,6 +145,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.blocking = permanent.blocking;
         this.maxBlocks = permanent.maxBlocks;
         this.deathtouched = permanent.deathtouched;
+        this.solved = permanent.solved;
         this.markedLifelink = permanent.markedLifelink;
         this.connectedCards = CardUtil.deepCopyObject(permanent.connectedCards);
         this.dealtDamageByThisTurn = CardUtil.deepCopyObject(permanent.dealtDamageByThisTurn);
@@ -1886,6 +1888,28 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     @Override
     public boolean isRingBearer() {
         return ringBearerFlag;
+    }
+
+    @Override
+    public boolean isSolved() {
+        return solved;
+    }
+
+    private static final String solvedInfoKey = "IS_SOLVED";
+
+    @Override
+    public void setSolved(boolean value, Game game, Ability source) {
+        if (!value || !game.replaceEvent(GameEvent.getEvent(
+                EventType.BECOME_SOLVED, getId(),
+                source, source.getControllerId()
+        ))) {
+            this.solved = value;
+        }
+        if (this.solved) {
+            addInfo(solvedInfoKey, CardUtil.addToolTipMarkTags("Solved"), game);
+        } else {
+            addInfo(solvedInfoKey, null, game);
+        }
     }
 
     @Override
