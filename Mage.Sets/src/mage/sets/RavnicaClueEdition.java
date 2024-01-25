@@ -41,6 +41,7 @@ public final class RavnicaClueEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Boros Guildgate", 232, Rarity.COMMON, mage.cards.b.BorosGuildgate.class));
         cards.add(new SetCardInfo("Boros Signet", 220, Rarity.COMMON, mage.cards.b.BorosSignet.class));
         cards.add(new SetCardInfo("Breeding Pool", 275, Rarity.RARE, mage.cards.b.BreedingPool.class));
+        cards.add(new SetCardInfo("Candlestick", 8, Rarity.UNCOMMON, mage.cards.c.Candlestick.class));
         cards.add(new SetCardInfo("Carnage Interpreter", 26, Rarity.RARE, mage.cards.c.CarnageInterpreter.class));
         cards.add(new SetCardInfo("Chainwhip Cyclops", 127, Rarity.COMMON, mage.cards.c.ChainwhipCyclops.class));
         cards.add(new SetCardInfo("Challenger Troll", 159, Rarity.UNCOMMON, mage.cards.c.ChallengerTroll.class));

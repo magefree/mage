@@ -37,6 +37,7 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Bolrac-Clan Basher", 112, Rarity.UNCOMMON, mage.cards.b.BolracClanBasher.class));
         cards.add(new SetCardInfo("Branch of Vitu-Ghazi", 258, Rarity.UNCOMMON, mage.cards.b.BranchOfVituGhazi.class));
         cards.add(new SetCardInfo("Burden of Proof", 42, Rarity.UNCOMMON, mage.cards.b.BurdenOfProof.class));
+        cards.add(new SetCardInfo("Candlestick", 43, Rarity.UNCOMMON, mage.cards.c.Candlestick.class));
         cards.add(new SetCardInfo("Cerebral Confiscation", 81, Rarity.COMMON, mage.cards.c.CerebralConfiscation.class));
         cards.add(new SetCardInfo("Chalk Outline", 157, Rarity.UNCOMMON, mage.cards.c.ChalkOutline.class));
         cards.add(new SetCardInfo("Cold Case Cracker", 46, Rarity.COMMON, mage.cards.c.ColdCaseCracker.class));
