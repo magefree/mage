@@ -124,6 +124,7 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Raucous Theater", 266, Rarity.RARE, mage.cards.r.RaucousTheater.class));
         cards.add(new SetCardInfo("Red Herring", 142, Rarity.COMMON, mage.cards.r.RedHerring.class));
         cards.add(new SetCardInfo("Riftburst Hellion", 228, Rarity.COMMON, mage.cards.r.RiftburstHellion.class));
+        cards.add(new SetCardInfo("Rot Farm Mortipede", 102, Rarity.COMMON, mage.cards.r.RotFarmMortipede.class));
         cards.add(new SetCardInfo("Rubblebelt Maverick", 174, Rarity.COMMON, mage.cards.r.RubblebeltMaverick.class));
         cards.add(new SetCardInfo("Sanguine Savior", 230, Rarity.COMMON, mage.cards.s.SanguineSavior.class));
         cards.add(new SetCardInfo("Sanitation Automaton", 256, Rarity.COMMON, mage.cards.s.SanitationAutomaton.class));
