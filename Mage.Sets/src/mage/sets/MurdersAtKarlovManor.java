@@ -61,6 +61,7 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Gadget Technician", 204, Rarity.COMMON, mage.cards.g.GadgetTechnician.class));
         cards.add(new SetCardInfo("Galvanize", 128, Rarity.COMMON, mage.cards.g.Galvanize.class));
         cards.add(new SetCardInfo("Gearbane Orangutan", 129, Rarity.COMMON, mage.cards.g.GearbaneOrangutan.class));
+        cards.add(new SetCardInfo("Get a Leg Up", 161, Rarity.UNCOMMON, mage.cards.g.GetALegUp.class));
         cards.add(new SetCardInfo("Gleaming Geardrake", 205, Rarity.UNCOMMON, mage.cards.g.GleamingGeardrake.class));
         cards.add(new SetCardInfo("Granite Witness", 206, Rarity.COMMON, mage.cards.g.GraniteWitness.class));
         cards.add(new SetCardInfo("Griffnaut Tracker", 17, Rarity.COMMON, mage.cards.g.GriffnautTracker.class));
