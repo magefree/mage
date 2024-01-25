@@ -41,7 +41,7 @@ public final class HaazdaVigilante extends CardImpl {
         Ability ability = new EntersBattlefieldOrAttacksSourceTriggeredAbility(
                 new AddCountersTargetEffect(CounterType.P1P1.createInstance())
         );
-        ability.addTarget(new TargetPermanent());
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 
