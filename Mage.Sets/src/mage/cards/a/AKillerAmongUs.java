@@ -132,28 +132,42 @@ class ChooseHumanMerfolkOrGoblinEffect extends OneShotEffect {
     }
 
     public static void setSecretCreatureType(SubType type, Ability source, Game game) {
-        game.getState().setValue(getThing(source, game) + SECRET_CREATURE_TYPE, type);
+        String uniqueRef = getUniqueReference(source, game);
+        if (uniqueRef != null) {
+            game.getState().setValue(uniqueRef + SECRET_CREATURE_TYPE, type);
+        }
     }
 
     public static SubType getSecretCreatureType(Ability source, Game game) {
-        return (SubType) game.getState().getValue(getThing(source, game) +
-                ChooseHumanMerfolkOrGoblinEffect.SECRET_CREATURE_TYPE);
+        String uniqueRef = getUniqueReference(source, game);
+        if (uniqueRef != null) {
+            return (SubType) game.getState().getValue(uniqueRef +
+                    ChooseHumanMerfolkOrGoblinEffect.SECRET_CREATURE_TYPE);
+        }
+        return null;
     }
 
     public static void setSecretOwner(UUID owner, Ability source, Game game) {
-        game.getState().setValue(getThing(source, game) + SECRET_OWNER, owner);
+        String uniqueRef = getUniqueReference(source, game);
+        if (uniqueRef != null) {
+            game.getState().setValue(getUniqueReference(source, game) + SECRET_OWNER, owner);
+        }
     }
 
     public static UUID getSecretOwner(Ability source, Game game) {
-        return (UUID) game.getState().getValue(getThing(source, game) +
-                ChooseHumanMerfolkOrGoblinEffect.SECRET_OWNER);
+        String uniqueRef = getUniqueReference(source, game);
+        if (uniqueRef != null) {
+            return (UUID) game.getState().getValue(getUniqueReference(source, game) +
+                    ChooseHumanMerfolkOrGoblinEffect.SECRET_OWNER);
+        }
+        return null;
     }
 
-    private static String getThing(Ability source, Game game) {
+    private static String getUniqueReference(Ability source, Game game) {
         if (game.getPermanentOrLKIBattlefield(source.getSourceId()) != null) {
-            return "" + source.getSourceId() + "_" + (game.getPermanentOrLKIBattlefield(source.getSourceId()).getZoneChangeCounter(game));
+            return source.getSourceId() + "_" + (game.getPermanentOrLKIBattlefield(source.getSourceId()).getZoneChangeCounter(game));
         }
-        return "Does not exist";
+        return null;
     }
 }
 
@@ -181,7 +195,7 @@ class AKillerAmongUsEffect extends OneShotEffect {
             return false;
         }
         SubType creatureType = ChooseHumanMerfolkOrGoblinEffect.getSecretCreatureType(source, game);
-        if (creature.getSubtype().contains(creatureType)) {
+        if (creature.getSubtype() != null && creature.getSubtype().contains(creatureType)) {
             creature.addCounters(CounterType.P1P1.createInstance(3), source, game);
             game.addEffect(new GainAbilityTargetEffect(
                     DeathtouchAbility.getInstance(), Duration.EndOfTurn
