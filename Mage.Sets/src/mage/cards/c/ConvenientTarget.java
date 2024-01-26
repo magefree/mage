@@ -21,7 +21,6 @@ import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
-import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -83,10 +82,8 @@ class ConvenientTargetEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Optional
                 .ofNullable(source.getSourcePermanentOrLKI(game))
-                .filter(Objects::nonNull)
                 .map(Permanent::getAttachedTo)
                 .map(game::getPermanent)
-                .filter(Objects::nonNull)
                 .ifPresent(permanent -> permanent.setSuspected(true, game, source));
         return true;
     }

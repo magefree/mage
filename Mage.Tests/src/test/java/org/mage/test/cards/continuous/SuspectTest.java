@@ -30,10 +30,10 @@ public class SuspectTest extends CardTestPlayerBase {
     public void testNoSuspect() {
         addCard(Zone.BATTLEFIELD, playerA, offender);
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        setStrictChooseMode(true);
         assertSuspected(offender, false);
     }
 
@@ -119,5 +119,6 @@ public class SuspectTest extends CardTestPlayerBase {
         execute();
 
         assertSuspected(offender, false);
+        assertCounterCount(offender, CounterType.P1P1, 0);
     }
 }
