@@ -26,7 +26,7 @@ public final class MakeYourMove extends CardImpl {
                 CardType.ENCHANTMENT.getPredicate(),
                 Predicates.and(
                         CardType.CREATURE.getPredicate(),
-                        new PowerPredicate(ComparisonType.MORE_THAN, 4)
+                        new PowerPredicate(ComparisonType.MORE_THAN, 3)
                 )
         ));
     }
