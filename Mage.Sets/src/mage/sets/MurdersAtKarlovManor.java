@@ -103,6 +103,7 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Leering Onlooker", 91, Rarity.UNCOMMON, mage.cards.l.LeeringOnlooker.class));
         cards.add(new SetCardInfo("Leyline of the Guildpact", 217, Rarity.RARE, mage.cards.l.LeylineOfTheGuildpact.class));
         cards.add(new SetCardInfo("Lightning Helix", 218, Rarity.UNCOMMON, mage.cards.l.LightningHelix.class));
+        cards.add(new SetCardInfo("Living Conundrum", 63, Rarity.UNCOMMON, mage.cards.l.LivingConundrum.class));
         cards.add(new SetCardInfo("Long Goodbye", 92, Rarity.UNCOMMON, mage.cards.l.LongGoodbye.class));
         cards.add(new SetCardInfo("Loxodon Eavesdropper", 168, Rarity.COMMON, mage.cards.l.LoxodonEavesdropper.class));
         cards.add(new SetCardInfo("Lush Portico", 263, Rarity.RARE, mage.cards.l.LushPortico.class));
