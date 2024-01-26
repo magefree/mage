@@ -178,6 +178,7 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Undergrowth Recon", 181, Rarity.MYTHIC, mage.cards.u.UndergrowthRecon.class));
         cards.add(new SetCardInfo("Vein Ripper", 110, Rarity.MYTHIC, mage.cards.v.VeinRipper.class));
         cards.add(new SetCardInfo("Vengeful Creeper", 182, Rarity.COMMON, mage.cards.v.VengefulCreeper.class));
+        cards.add(new SetCardInfo("Vengeful Tracker", 147, Rarity.UNCOMMON, mage.cards.v.VengefulTracker.class));
         cards.add(new SetCardInfo("Voja, Jaws of the Conclave", 432, Rarity.MYTHIC, mage.cards.v.VojaJawsOfTheConclave.class));
         cards.add(new SetCardInfo("Warleader's Call", 242, Rarity.RARE, mage.cards.w.WarleadersCall.class));
         cards.add(new SetCardInfo("Wojek Investigator", 36, Rarity.RARE, mage.cards.w.WojekInvestigator.class));
