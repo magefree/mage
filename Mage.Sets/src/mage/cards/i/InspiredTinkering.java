@@ -1,7 +1,7 @@
 package mage.cards.i;
 
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.ExileTopXMayPlayUntilEndOfTurnEffect;
+import mage.abilities.effects.common.ExileTopXMayPlayUntilEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -19,8 +19,8 @@ public final class InspiredTinkering extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{R}");
 
         // Exile the top three cards of your library. Until the end of your next turn, you may play those cards.
-        this.getSpellAbility().addEffect(new ExileTopXMayPlayUntilEndOfTurnEffect(
-                3, false, Duration.UntilEndOfYourNextTurn
+        this.getSpellAbility().addEffect(new ExileTopXMayPlayUntilEffect(
+                3, Duration.UntilEndOfYourNextTurn
         ));
 
         // Create three Treasure tokens.

@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.abilities.effects.common.ExileTopXMayPlayUntilEndOfTurnEffect;
+import mage.abilities.effects.common.ExileTopXMayPlayUntilEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -36,7 +36,7 @@ public final class UrabraskHereticPraetor extends CardImpl {
 
         // At the beginning of your upkeep, exile the top card of your library. You may play it this turn.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new ExileTopXMayPlayUntilEndOfTurnEffect(1, false),
+                new ExileTopXMayPlayUntilEffect(1, Duration.EndOfTurn).withTextOptions("it", true),
                 TargetController.YOU, false
         ));
 

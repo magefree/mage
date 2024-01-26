@@ -50,7 +50,7 @@ class StickTogetherEffect extends OneShotEffect {
 
     StickTogetherEffect() {
         super(Outcome.Benefit);
-        staticText = "each player choose a party from among creatures they control, then sacrifices the rest";
+        staticText = "each player chooses a party from among creatures they control, then sacrifices the rest";
     }
 
     private StickTogetherEffect(final StickTogetherEffect effect) {
@@ -66,7 +66,7 @@ class StickTogetherEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Set<UUID> toKeep = new HashSet<>();
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
-            Player player = game.getPlayer(source.getControllerId());
+            Player player = game.getPlayer(playerId);
             if (player == null) {
                 continue;
             }
@@ -94,10 +94,10 @@ class StickTogetherTarget extends TargetPermanent {
             SubType.WARRIOR,
             SubType.WIZARD
     );
-    private static final FilterPermanent filter = new FilterControlledPermanent("a party");
+    private static final FilterPermanent filterParty = new FilterControlledPermanent("a party");
 
     static {
-        filter.add(Predicates.or(
+        filterParty.add(Predicates.or(
                 SubType.CLERIC.getPredicate(),
                 SubType.ROGUE.getPredicate(),
                 SubType.WARRIOR.getPredicate(),
@@ -106,7 +106,7 @@ class StickTogetherTarget extends TargetPermanent {
     }
 
     StickTogetherTarget() {
-        super(0, 4, filter, true);
+        super(0, 4, filterParty, true);
     }
 
     private StickTogetherTarget(final StickTogetherTarget target) {
@@ -146,7 +146,7 @@ class StickTogetherTarget extends TargetPermanent {
     static int checkTargetCount(Ability source, Game game) {
         List<Permanent> permanents = game
                 .getBattlefield()
-                .getActivePermanents(filter, source.getControllerId(), source, game);
+                .getActivePermanents(filterParty, source.getControllerId(), source, game);
         return subTypeAssigner.getRoleCount(new CardsImpl(permanents), game);
     }
 }

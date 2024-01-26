@@ -2,11 +2,12 @@ package mage.cards.c;
 
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.effects.common.ExileTopXMayPlayUntilEndOfTurnEffect;
+import mage.abilities.effects.common.ExileTopXMayPlayUntilEffect;
 import mage.abilities.effects.common.RollDieWithResultTableEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.SubType;
 
 import java.util.UUID;
@@ -29,16 +30,16 @@ public final class ChaosChanneler extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(effect).withFlavorWord("Wild Magic Surge"));
 
         // 1-9 | Exile the top card of your library. You may play it this turn.
-        effect.addTableEntry(1, 9, new ExileTopXMayPlayUntilEndOfTurnEffect(1)
-                .setText("exile the top card of your library. You may play it this turn"));
+        effect.addTableEntry(1, 9, new ExileTopXMayPlayUntilEffect(1, Duration.EndOfTurn)
+                .withTextOptions("it", true));
 
         // 10-19 | Exile the top two cards of your library. You may play them this turn.
-        effect.addTableEntry(10, 19, new ExileTopXMayPlayUntilEndOfTurnEffect(2)
-                .setText("exile the top two cards of your library. You may play them this turn"));
+        effect.addTableEntry(10, 19, new ExileTopXMayPlayUntilEffect(2, Duration.EndOfTurn)
+                .withTextOptions("them", true));
 
         // 20 | Exile the top three cards of your library. You may play them this turn.
-        effect.addTableEntry(20, 20, new ExileTopXMayPlayUntilEndOfTurnEffect(3)
-                .setText("exile the top three cards of your library. You may play them this turn"));
+        effect.addTableEntry(20, 20, new ExileTopXMayPlayUntilEffect(3, Duration.EndOfTurn)
+                .withTextOptions("them", true));
     }
 
     private ChaosChanneler(final ChaosChanneler card) {

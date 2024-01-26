@@ -240,4 +240,39 @@ public class CraftTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
     }
+
+    /**
+     * Ore-Rich Stalactite {1}{R}
+     * Artifact
+     * {T}: Add {R}. Spend this mana only to cast an instant or sorcery spell.
+     * Craft with four or more red instant and/or sorcery cards {3}{R}{R}.
+     */
+    @Test
+    public void test_OreRichStalactite() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1 + 5);
+        addCard(Zone.BATTLEFIELD, playerA, "Ore-Rich Stalactite");
+        addCard(Zone.GRAVEYARD, playerA, "Ancestral Recall");
+        addCard(Zone.GRAVEYARD, playerA, "Arc Lightning");
+        addCard(Zone.GRAVEYARD, playerA, "Lightning Helix");
+        addCard(Zone.GRAVEYARD, playerA, "Lightning Strike");
+        addCard(Zone.HAND, playerA, "Lightning Bolt");
+
+        // Test that craft cannot be activated yet
+        checkPlayableAbility("craft not available", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Craft", false);
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+        waitStackResolved(1, PhaseStep.POSTCOMBAT_MAIN, 1);
+
+        // Test that craft can now be activated
+        checkPlayableAbility("craft available", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Craft", true);
+
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Craft");
+        addTarget(playerA, "Lightning Bolt^Lightning Helix^Lightning Strike^Arc Lightning");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, "Cosmium Catalyst", 1);
+    }
 }

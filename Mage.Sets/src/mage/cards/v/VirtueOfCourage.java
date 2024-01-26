@@ -2,10 +2,11 @@ package mage.cards.v;
 
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.ExileTopXMayPlayUntilEndOfTurnEffect;
+import mage.abilities.effects.common.ExileTopXMayPlayUntilEffect;
 import mage.cards.AdventureCard;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
@@ -67,7 +68,7 @@ class VirtueOfCourageTriggeredAbility extends TriggeredAbilityImpl {
             return false;
         }
         this.getEffects().clear();
-        this.addEffect(new ExileTopXMayPlayUntilEndOfTurnEffect(event.getAmount()));
+        this.addEffect(new ExileTopXMayPlayUntilEffect(event.getAmount(), Duration.EndOfTurn));
         return true;
     }
 

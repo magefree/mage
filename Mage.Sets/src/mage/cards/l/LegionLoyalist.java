@@ -14,7 +14,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
@@ -38,9 +38,11 @@ public final class LegionLoyalist extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
         //Battalion - Whenever Legion Loyalist and at least two other creatures attack,
         //creatures you control gain first strike and trample until end of turn and can't be blocked by tokens this turn.
-        Ability ability = new BattalionAbility(new GainAbilityAllEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent()));
-        ability.addEffect(new GainAbilityAllEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent()));
-        ability.addEffect(new CantBeBlockedByTokenEffect());
+        Ability ability = new BattalionAbility(new GainAbilityAllEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_CONTROLLED_CREATURES)
+                .setText("creatures you control gain first strike"));
+        ability.addEffect(new GainAbilityAllEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_CONTROLLED_CREATURES)
+                .setText("and trample until end of turn"));
+        ability.addEffect(new LegionLoyalistCantBeBlockedByTokensEffect());
         this.addAbility(ability);
     }
 
@@ -54,21 +56,21 @@ public final class LegionLoyalist extends CardImpl {
     }
 }
 
-class CantBeBlockedByTokenEffect extends RestrictionEffect {
+class LegionLoyalistCantBeBlockedByTokensEffect extends RestrictionEffect {
 
-    CantBeBlockedByTokenEffect() {
+    LegionLoyalistCantBeBlockedByTokensEffect() {
         super(Duration.EndOfTurn);
-        staticText = "Creatures you control can't be blocked by tokens this turn";
+        staticText = "and can't be blocked by creature tokens this turn";
     }
 
-    private CantBeBlockedByTokenEffect(final CantBeBlockedByTokenEffect effect) {
+    private LegionLoyalistCantBeBlockedByTokensEffect(final LegionLoyalistCantBeBlockedByTokensEffect effect) {
         super(effect);
     }
 
     @Override
     public void init(Ability source, Game game) {
         affectedObjectsSet = true;
-        for (Permanent perm : game.getBattlefield().getActivePermanents(new FilterControlledCreaturePermanent(), source.getControllerId(), source, game)) {
+        for (Permanent perm : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_CONTROLLED_CREATURES, source.getControllerId(), source, game)) {
             affectedObjectList.add(new MageObjectReference(perm, game));
         }
     }
@@ -84,7 +86,7 @@ class CantBeBlockedByTokenEffect extends RestrictionEffect {
     }
 
     @Override
-    public CantBeBlockedByTokenEffect copy() {
-        return new CantBeBlockedByTokenEffect(this);
+    public LegionLoyalistCantBeBlockedByTokensEffect copy() {
+        return new LegionLoyalistCantBeBlockedByTokensEffect(this);
     }
 }

@@ -1681,6 +1681,8 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * AI play STEP to the end with multi game simulations (calcs and play best
      * actions until step ends, can be called in the middle of the step) All
      * choices must be made by AI (e.g. strict mode possible)
+     * <p>
+     * Can be used for AI's declare of attackers/blockers
      */
     public void aiPlayStep(int turnNum, PhaseStep step, TestPlayer player) {
         assertAiPlayAndGameCompatible(player);

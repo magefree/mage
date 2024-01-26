@@ -7,7 +7,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ExileTopXMayPlayUntilEndOfTurnEffect;
+import mage.abilities.effects.common.ExileTopXMayPlayUntilEffect;
 import mage.abilities.keyword.BoastAbility;
 import mage.cards.CardSetInfo;
 import mage.cards.ModalDoubleFacedCard;
@@ -48,7 +48,7 @@ public final class BirgiGodOfStorytelling extends ModalDoubleFacedCard {
         // Legendary Artifact
         // Discard a card: Exile the top two cards of your library. You may play those cards this turn.
         this.getRightHalfCard().addAbility(new SimpleActivatedAbility(
-                new ExileTopXMayPlayUntilEndOfTurnEffect(2), new DiscardCardCost()
+                new ExileTopXMayPlayUntilEffect(2, Duration.EndOfTurn).withTextOptions("those cards", true), new DiscardCardCost()
         ));
     }
 

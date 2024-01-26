@@ -39,7 +39,7 @@ public final class ChandraNalaar extends CardImpl {
 
         // -8: Chandra Nalaar deals 10 damage to target player or planeswalker and each creature that player or that planeswalker’s controller controls.
         LoyaltyAbility ability3 = new LoyaltyAbility(new DamageTargetEffect(10), -8);
-        ability3.addEffect(new DamageAllControlledTargetEffect(10, new FilterCreaturePermanent())
+        ability3.addEffect(new DamageAllControlledTargetEffect(10)
                 .setText("and each creature that player or that planeswalker's controller controls")
         );
         ability3.addTarget(new TargetPlayerOrPlaneswalker());

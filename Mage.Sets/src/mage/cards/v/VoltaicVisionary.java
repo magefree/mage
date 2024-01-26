@@ -7,16 +7,13 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.DamageControllerEffect;
-import mage.abilities.effects.common.ExileTopXMayPlayUntilEndOfTurnEffect;
+import mage.abilities.effects.common.ExileTopXMayPlayUntilEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.WatcherScope;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -44,7 +41,7 @@ public final class VoltaicVisionary extends CardImpl {
         Ability ability = new ActivateAsSorceryActivatedAbility(
                 new DamageControllerEffect(2), new TapSourceCost()
         );
-        ability.addEffect(new ExileTopXMayPlayUntilEndOfTurnEffect(1));
+        ability.addEffect(new ExileTopXMayPlayUntilEffect(1, Duration.EndOfTurn));
         this.addAbility(ability);
 
         // When you play a card exiled with Voltaic Visionary, transform Voltaic Visionary.

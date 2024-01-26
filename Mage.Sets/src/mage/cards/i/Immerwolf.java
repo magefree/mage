@@ -24,7 +24,7 @@ import mage.game.permanent.Permanent;
  */
 public final class Immerwolf extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Wolf and Werewolf creatures");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Each other creature you control that's a Wolf or a Werewolf");
 
     static {
         filter.add(Predicates.or(SubType.WOLF.getPredicate(), SubType.WEREWOLF.getPredicate()));

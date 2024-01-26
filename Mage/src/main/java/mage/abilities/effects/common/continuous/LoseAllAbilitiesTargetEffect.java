@@ -2,13 +2,13 @@
 
 package mage.abilities.effects.common.continuous;
 
+import mage.abilities.Ability;
+import mage.abilities.Mode;
+import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
-import mage.abilities.Ability;
-import mage.abilities.Mode;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -50,9 +50,8 @@ public class LoseAllAbilitiesTargetEffect extends ContinuousEffectImpl {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        StringBuilder sb = new StringBuilder();
-        sb.append("Target ").append(mode.getTargets().get(0).getTargetName()).append(" loses all abilities ").append(duration.toString());
-        return sb.toString();
+        return getTargetPointer().describeTargets(mode.getTargets(), "it")
+                + " loses all abilities " + (duration.toString().isEmpty() ? "" : ' ' + duration.toString());
     }
 
 }

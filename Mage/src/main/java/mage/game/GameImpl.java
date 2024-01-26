@@ -1993,7 +1993,7 @@ public abstract class GameImpl implements Game {
             }
             newBluePrint.assignNewId();
             if (copyFromPermanent.isTransformed()) {
-                TransformAbility.transformPermanent(newBluePrint,this, source);
+                TransformAbility.transformPermanent(newBluePrint, this, source);
             }
             if (copyFromPermanent.isPrototyped()) {
                 Abilities<Ability> abilities = copyFromPermanent.getAbilities();
@@ -3552,8 +3552,9 @@ public abstract class GameImpl implements Game {
     public Map<MageObjectReference, Map<String, Object>> getPermanentCostsTags() {
         return state.getPermanentCostsTags();
     }
+
     @Override
-    public void storePermanentCostsTags(MageObjectReference permanentMOR, Ability source){
+    public void storePermanentCostsTags(MageObjectReference permanentMOR, Ability source) {
         state.storePermanentCostsTags(permanentMOR, source);
     }
 

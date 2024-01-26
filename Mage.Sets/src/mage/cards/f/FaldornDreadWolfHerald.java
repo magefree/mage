@@ -8,13 +8,10 @@ import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.ExileTopXMayPlayUntilEndOfTurnEffect;
+import mage.abilities.effects.common.ExileTopXMayPlayUntilEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
@@ -42,8 +39,8 @@ public final class FaldornDreadWolfHerald extends CardImpl {
         this.addAbility(new FaldornDreadWolfHeraldTriggeredAbility());
 
         // {1}, {T}, Discard a card: Exile the top card of your library. You may play it this turn.
-        Ability ability = new SimpleActivatedAbility(
-                new ExileTopXMayPlayUntilEndOfTurnEffect(1), new GenericManaCost(1)
+        Ability ability = new SimpleActivatedAbility(new ExileTopXMayPlayUntilEffect(1, Duration.EndOfTurn)
+                .withTextOptions("it", true), new GenericManaCost(1)
         );
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardCardCost());

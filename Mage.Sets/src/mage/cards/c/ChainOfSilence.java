@@ -3,7 +3,6 @@ package mage.cards.c;
 
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.PreventDamageByTargetEffect;
@@ -17,7 +16,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetSacrifice;
 
@@ -72,7 +70,7 @@ class ChainOfSilenceEffect extends OneShotEffect {
         }
         Permanent permanent = game.getPermanent(source.getFirstTarget());
         if (permanent != null) {
-            ContinuousEffect effect = new PreventDamageByTargetEffect(Duration.EndOfTurn);
+            ContinuousEffect effect = new PreventDamageByTargetEffect(Duration.EndOfTurn, false);
             game.addEffect(effect, source);
             Player player = game.getPlayer(permanent.getControllerId());
             TargetSacrifice target = new TargetSacrifice(0, 1, new FilterControlledLandPermanent("a land to sacrifice (to be able to copy " + sourceObject.getName() + ')'));

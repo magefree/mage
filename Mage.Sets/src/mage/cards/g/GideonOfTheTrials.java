@@ -35,7 +35,7 @@ public final class GideonOfTheTrials extends CardImpl {
         this.setStartingLoyalty(3);
 
         // +1: Until your next turn, prevent all damage target permanent would deal.
-        Effect effect = new PreventDamageByTargetEffect(Duration.UntilYourNextTurn);
+        Effect effect = new PreventDamageByTargetEffect(Duration.UntilYourNextTurn, false);
         effect.setText("Until your next turn, prevent all damage target permanent would deal");
         LoyaltyAbility ability = new LoyaltyAbility(effect, 1);
         ability.addTarget(new TargetPermanent());

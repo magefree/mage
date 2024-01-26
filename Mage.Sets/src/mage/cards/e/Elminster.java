@@ -68,7 +68,7 @@ class ElminsterReductionEffect extends CostModificationEffectImpl {
 
     ElminsterReductionEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit, CostModificationType.REDUCE_COST);
-        staticText = " the next instant or sorcery spell you cast this turn costs {X} less to cast, " +
+        staticText = "the next instant or sorcery spell you cast this turn costs {X} less to cast, " +
                 "where X is the number of cards looked at while scrying this way";
     }
 

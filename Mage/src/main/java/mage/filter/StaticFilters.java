@@ -548,12 +548,6 @@ public final class StaticFilters {
         FILTER_OPPONENTS_PERMANENT_NON_LAND.setLockedFilter(true);
     }
 
-    public static final FilterNoncreaturePermanent FILTER_PERMANENT_NON_CREATURE = new FilterNoncreaturePermanent();
-
-    static {
-        FILTER_PERMANENT_NON_CREATURE.setLockedFilter(true);
-    }
-
     public static final FilterCreaturePermanent FILTER_OPPONENTS_PERMANENT_CREATURE = new FilterOpponentsCreaturePermanent();
 
     static {
