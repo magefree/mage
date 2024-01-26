@@ -117,6 +117,7 @@ public final class RavnicaClueEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Helium Squirter", 87, Rarity.COMMON, mage.cards.h.HeliumSquirter.class));
         cards.add(new SetCardInfo("Hydroid Krasis", 195, Rarity.MYTHIC, mage.cards.h.HydroidKrasis.class));
         cards.add(new SetCardInfo("Hypersonic Dragon", 196, Rarity.RARE, mage.cards.h.HypersonicDragon.class));
+        cards.add(new SetCardInfo("Incriminating Impetus", 35, Rarity.UNCOMMON, mage.cards.i.IncriminatingImpetus.class));
         cards.add(new SetCardInfo("Incubation // Incongruity", 197, Rarity.UNCOMMON, mage.cards.i.IncubationIncongruity.class));
         cards.add(new SetCardInfo("Infest", 114, Rarity.UNCOMMON, mage.cards.i.Infest.class));
         cards.add(new SetCardInfo("Integrity // Intervention", 198, Rarity.UNCOMMON, mage.cards.i.IntegrityIntervention.class));
