@@ -93,6 +93,7 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Knife", 134, Rarity.UNCOMMON, mage.cards.k.Knife.class));
         cards.add(new SetCardInfo("Kraul Whipcracker", 213, Rarity.UNCOMMON, mage.cards.k.KraulWhipcracker.class));
         cards.add(new SetCardInfo("Krenko, Baron of Tin Street", 135, Rarity.RARE, mage.cards.k.KrenkoBaronOfTinStreet.class));
+        cards.add(new SetCardInfo("Krovod Haunch", 21, Rarity.UNCOMMON, mage.cards.k.KrovodHaunch.class));
         cards.add(new SetCardInfo("Kylox, Visionary Inventor", 214, Rarity.RARE, mage.cards.k.KyloxVisionaryInventor.class));
         cards.add(new SetCardInfo("Lead Pipe", 90, Rarity.UNCOMMON, mage.cards.l.LeadPipe.class));
         cards.add(new SetCardInfo("Leering Onlooker", 91, Rarity.UNCOMMON, mage.cards.l.LeeringOnlooker.class));
