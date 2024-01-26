@@ -26,6 +26,7 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         this.hasBasicLands = true;
         this.hasBoosters = false; // temporary
 
+        cards.add(new SetCardInfo("Absolving Lammasu", 2, Rarity.UNCOMMON, mage.cards.a.AbsolvingLammasu.class));
         cards.add(new SetCardInfo("Agrus Kos, Spirit of Justice", 184, Rarity.MYTHIC, mage.cards.a.AgrusKosSpiritOfJustice.class));
         cards.add(new SetCardInfo("Aftermath Analyst", 148, Rarity.UNCOMMON, mage.cards.a.AftermathAnalyst.class));
         cards.add(new SetCardInfo("Airtight Alibi", 149, Rarity.COMMON, mage.cards.a.AirtightAlibi.class));
