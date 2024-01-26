@@ -33,6 +33,7 @@ public class EmblemOfCardTest extends CardTestPlayerBase {
         assertLife(playerA, 13);
         assertEmblemCount(playerA, 1);
     }
+
     @Test
     public void testEmblemOfYurlok() {
         // Vigilance
@@ -79,6 +80,7 @@ public class EmblemOfCardTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Colossal Dreadmaw", 1);
         assertEmblemCount(playerA, 1);
     }
+
     @Test
     public void testEmblemOfParadoxEngine() {
         // Whenever you cast a spell, untap all nonland permanents you control.
@@ -126,6 +128,7 @@ public class EmblemOfCardTest extends CardTestPlayerBase {
         assertLife(playerA, 14);
         assertEmblemCount(playerA, 1);
     }
+
     @Test
     public void testEmblemOfDoublingSeason() {
         // If an effect would create one or more tokens under your control, it
@@ -181,4 +184,34 @@ public class EmblemOfCardTest extends CardTestPlayerBase {
         execute();
         assertEmblemCount(playerA, 1);
     }
+
+    @Test
+    public void testEmblemOfMaelstromNexus() {
+        setStrictChooseMode(true);
+
+        // The first spell you cast each turn has cascade.
+        addEmblem(playerA, new EmblemOfCard(
+                CardRepository.instance.findCard("Maelstrom Nexus", true).getMockCard()
+        ));
+
+        // Grizzly Bears {1}{G}
+        addCard(Zone.HAND, playerA, "Grizzly Bears");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+
+        skipInitShuffling();
+        // Elite Vanguard {W}
+        addCard(Zone.LIBRARY, playerA, "Elite Vanguard");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Grizzly Bears");
+        setChoice(playerA, true); // yes to cascade
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerA, "Elite Vanguard", 1);
+        assertPermanentCount(playerA, "Grizzly Bears", 1);
+        assertEmblemCount(playerA, 1);
+    }
+
 }
