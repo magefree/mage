@@ -195,7 +195,7 @@ class AKillerAmongUsEffect extends OneShotEffect {
             return false;
         }
         SubType creatureType = ChooseHumanMerfolkOrGoblinEffect.getSecretCreatureType(source, game);
-        if (creature.getSubtype() != null && creature.getSubtype().contains(creatureType)) {
+        if (creatureType != null && creature.getSubtype().contains(creatureType)) {
             creature.addCounters(CounterType.P1P1.createInstance(3), source, game);
             game.addEffect(new GainAbilityTargetEffect(
                     DeathtouchAbility.getInstance(), Duration.EndOfTurn
