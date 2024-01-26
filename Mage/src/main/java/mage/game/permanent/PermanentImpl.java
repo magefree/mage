@@ -69,6 +69,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     protected boolean transformed;
     protected boolean monstrous;
     protected boolean renowned;
+    protected boolean suspected;
     protected boolean manifested = false;
     protected boolean morphed = false;
     protected boolean ringBearerFlag = false;
@@ -162,6 +163,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.transformed = permanent.transformed;
         this.monstrous = permanent.monstrous;
         this.renowned = permanent.renowned;
+        this.suspected = permanent.suspected;
         this.ringBearerFlag = permanent.ringBearerFlag;
         this.classLevel = permanent.classLevel;
         this.goadingPlayers.addAll(permanent.goadingPlayers);
@@ -392,8 +394,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     /**
      * Add an ability to the permanent. When copying from an existing source
      * you should use the fromExistingObject variant of this function to prevent double-copying subabilities
-     * @param ability The ability to be added
-     * @param sourceId   id of the source doing the added (for the effect created to add it)
+     *
+     * @param ability  The ability to be added
+     * @param sourceId id of the source doing the added (for the effect created to add it)
      * @param game
      * @return The newly added ability copy
      */
@@ -403,11 +406,11 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     /**
-     * @param ability The ability to be added
-     * @param sourceId   id of the source doing the added (for the effect created to add it)
+     * @param ability            The ability to be added
+     * @param sourceId           id of the source doing the added (for the effect created to add it)
      * @param game
      * @param fromExistingObject if copying abilities from an existing source then must ignore sub-abilities because they're already on the source object
-     *                         Otherwise sub-abilities will be added twice to the resulting object
+     *                           Otherwise sub-abilities will be added twice to the resulting object
      * @return The newly added ability copy
      */
     @Override
@@ -1490,7 +1493,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public boolean canBlock(UUID attackerId, Game game) {
-        if (tapped && game.getState().getContinuousEffects().asThough(this.getId(), AsThoughEffectType.BLOCK_TAPPED, null, this.getControllerId(), game).isEmpty() || isBattle(game)) {
+        if (tapped && game.getState().getContinuousEffects().asThough(this.getId(), AsThoughEffectType.BLOCK_TAPPED, null, this.getControllerId(), game).isEmpty() || isBattle(game) || isSuspected()) {
             return false;
         }
         Permanent attacker = game.getPermanent(attackerId);
@@ -1669,6 +1672,28 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     @Override
     public void setRenowned(boolean value) {
         this.renowned = value;
+    }
+
+    @Override
+    public boolean isSuspected() {
+        return suspected;
+    }
+
+    private static final String suspectedInfoKey = "IS_SUSPECTED";
+
+    @Override
+    public void setSuspected(boolean value, Game game, Ability source) {
+        if (!value || !game.replaceEvent(GameEvent.getEvent(
+                EventType.BECOME_SUSPECTED, getId(),
+                source, source.getControllerId()
+        ))) {
+            this.suspected = value;
+        }
+        if (this.suspected) {
+            addInfo(suspectedInfoKey, CardUtil.addToolTipMarkTags("Suspected (has menace and can't block)"), game);
+        } else {
+            addInfo(suspectedInfoKey, null, game);
+        }
     }
 
     // Used as key for the ring bearer info.

@@ -26,7 +26,9 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         this.hasBasicLands = true;
         this.hasBoosters = false; // temporary
 
+        cards.add(new SetCardInfo("Agrus Kos, Spirit of Justice", 184, Rarity.MYTHIC, mage.cards.a.AgrusKosSpiritOfJustice.class));
         cards.add(new SetCardInfo("Aftermath Analyst", 148, Rarity.UNCOMMON, mage.cards.a.AftermathAnalyst.class));
+        cards.add(new SetCardInfo("Airtight Alibi", 149, Rarity.COMMON, mage.cards.a.AirtightAlibi.class));
         cards.add(new SetCardInfo("Alley Assailant", 76, Rarity.COMMON, mage.cards.a.AlleyAssailant.class));
         cards.add(new SetCardInfo("Alquist Proft, Master Sleuth", 185, Rarity.MYTHIC, mage.cards.a.AlquistProftMasterSleuth.class));
         cards.add(new SetCardInfo("Anzrag, the Quake-Mole", 186, Rarity.MYTHIC, mage.cards.a.AnzragTheQuakeMole.class));
@@ -45,6 +47,7 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Cold Case Cracker", 46, Rarity.COMMON, mage.cards.c.ColdCaseCracker.class));
         cards.add(new SetCardInfo("Commercial District", 259, Rarity.RARE, mage.cards.c.CommercialDistrict.class));
         cards.add(new SetCardInfo("Concealed Weapon", 117, Rarity.UNCOMMON, mage.cards.c.ConcealedWeapon.class));
+        cards.add(new SetCardInfo("Convenient Target", 119, Rarity.UNCOMMON, mage.cards.c.ConvenientTarget.class));
         cards.add(new SetCardInfo("Crime Novelist", 121, Rarity.UNCOMMON, mage.cards.c.CrimeNovelist.class));
         cards.add(new SetCardInfo("Culvert Ambusher", 158, Rarity.UNCOMMON, mage.cards.c.CulvertAmbusher.class));
         cards.add(new SetCardInfo("Curious Cadaver", 194, Rarity.UNCOMMON, mage.cards.c.CuriousCadaver.class));
@@ -124,6 +127,7 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Rakish Scoundrel", 225, Rarity.COMMON, mage.cards.r.RakishScoundrel.class));
         cards.add(new SetCardInfo("Raucous Theater", 266, Rarity.RARE, mage.cards.r.RaucousTheater.class));
         cards.add(new SetCardInfo("Red Herring", 142, Rarity.COMMON, mage.cards.r.RedHerring.class));
+        cards.add(new SetCardInfo("Repeat Offender", 101, Rarity.COMMON, mage.cards.r.RepeatOffender.class));
         cards.add(new SetCardInfo("Riftburst Hellion", 228, Rarity.COMMON, mage.cards.r.RiftburstHellion.class));
         cards.add(new SetCardInfo("Rot Farm Mortipede", 102, Rarity.COMMON, mage.cards.r.RotFarmMortipede.class));
         cards.add(new SetCardInfo("Rubblebelt Maverick", 174, Rarity.COMMON, mage.cards.r.RubblebeltMaverick.class));
