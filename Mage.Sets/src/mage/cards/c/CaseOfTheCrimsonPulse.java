@@ -43,8 +43,7 @@ public final class CaseOfTheCrimsonPulse extends CardImpl {
                 new DiscardHandControllerEffect(), TargetController.YOU, false);
         solvedAbility.addEffect(new DrawCardSourceControllerEffect(2).setText(", then draw two cards."));
 
-        CaseAbility caseAbility = new CaseAbility(initialAbility, toSolveCondition, solvedAbility);
-        this.addAbility(caseAbility);
+        this.addAbility(new CaseAbility(initialAbility, toSolveCondition, solvedAbility));
     }
 
     private CaseOfTheCrimsonPulse(final CaseOfTheCrimsonPulse card) {

@@ -59,8 +59,7 @@ public final class CaseOfTheBurningMasks extends CardImpl {
         Ability solvedAbility = new SimpleActivatedAbility(new CaseOfTheBurningMasksEffect(),
                 new SacrificeSourceCost());
 
-        CaseAbility ability = new CaseAbility(initialAbility, toSolveCondition, solvedAbility);
-        this.addAbility(ability, new CaseOfTheBurningMasksWatcher());
+        this.addAbility(new CaseAbility(initialAbility, toSolveCondition, solvedAbility), new CaseOfTheBurningMasksWatcher());
     }
 
     private CaseOfTheBurningMasks(final CaseOfTheBurningMasks card) {

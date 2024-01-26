@@ -39,6 +39,7 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Burden of Proof", 42, Rarity.UNCOMMON, mage.cards.b.BurdenOfProof.class));
         cards.add(new SetCardInfo("Case of the Burning Masks", 113, Rarity.UNCOMMON, mage.cards.c.CaseOfTheBurningMasks.class));
         cards.add(new SetCardInfo("Case of the Crimson Pulse", 114, Rarity.RARE, mage.cards.c.CaseOfTheCrimsonPulse.class));
+        cards.add(new SetCardInfo("Case of the Filched Falcon", 44, Rarity.UNCOMMON, mage.cards.c.CaseOfTheFilchedFalcon.class));
         cards.add(new SetCardInfo("Case of the Locked Hothouse", 155, Rarity.RARE, mage.cards.c.CaseOfTheLockedHothouse.class));
         cards.add(new SetCardInfo("Cold Case Cracker", 46, Rarity.COMMON, mage.cards.c.ColdCaseCracker.class));
         cards.add(new SetCardInfo("Commercial District", 259, Rarity.RARE, mage.cards.c.CommercialDistrict.class));

@@ -58,8 +58,7 @@ public final class CaseOfTheLockedHothouse extends CardImpl {
         solvedAbility.addEffect(new PlayTheTopCardEffect(TargetController.YOU, filter, false)
                 .setText(", and you may play lands and cast creature and enchantment spells from the top of your library."));
 
-        CaseAbility caseAbility = new CaseAbility(initialAbility, toSolveCondition, solvedAbility);
-        this.addAbility(caseAbility);
+        this.addAbility(new CaseAbility(initialAbility, toSolveCondition, solvedAbility));
     }
 
     private CaseOfTheLockedHothouse(final CaseOfTheLockedHothouse card) {

@@ -1,7 +1,12 @@
 package mage.abilities.common;
 
+import java.util.List;
+
 import mage.abilities.Ability;
+import mage.abilities.AbilityImpl;
 import mage.abilities.ActivatedAbility;
+import mage.abilities.ActivatedAbilityImpl;
+import mage.abilities.Modes;
 import mage.abilities.StaticAbility;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.condition.CompoundCondition;
@@ -15,13 +20,16 @@ import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.AsThoughEffect;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
+import mage.abilities.effects.Effects;
 import mage.abilities.effects.OneShotEffect;
+import mage.constants.EffectType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
+import mage.watchers.Watcher;
 
 /**
  * The Case mechanic was added in Murders at Karlov Manor [MKM].
@@ -139,40 +147,77 @@ class CaseActivatedAbility extends ConditionalActivatedAbility {
     }
 }
 
-class CaseStaticAbility extends StaticAbility {
+class CaseActivatedAbility2 extends ActivatedAbilityImpl {
 
-    CaseStaticAbility(StaticAbility ability) {
+    private ActivatedAbility ability;
+    private Condition condition;
+
+    CaseActivatedAbility2(ActivatedAbility ability) {
         this(ability, false);
     }
 
-    CaseStaticAbility(StaticAbility ability, boolean solved) {
-        super(ability.getZone(), null);
+    CaseActivatedAbility2(ActivatedAbility ability, boolean solved) {
+        super(ability.getAbilityType(), ability.getZone());
+        this.ability = ability;
+        this.condition = solved ? SolvedSourceCondition.instance : TrueCondition.instance;
+    }
 
-        boolean first = true;
-        for (Effect effect : ability.getEffects()) {
-            String text;
-            if (first) {
-                first = false;
-                text = (solved ? "Solved &mdash; " : "") +
-                        CardUtil.getTextWithFirstCharUpperCase(effect.getText(null));
-            } else {
-                text = effect.getText(null);
-            }
+    private CaseActivatedAbility2(final CaseActivatedAbility2 ability) {
+        super(ability);
+    }
 
-            if (effect instanceof AsThoughEffect) {
-                addEffect(new ConditionalAsThoughEffect((AsThoughEffect) effect,
-                        solved ? SolvedSourceCondition.instance : TrueCondition.instance)
-                        .setText(text));
-            } else if (effect instanceof ContinuousEffect) {
-                addEffect(new ConditionalContinuousEffect((ContinuousEffect) effect,
-                        solved ? SolvedSourceCondition.instance : TrueCondition.instance,
-                        text));
-            }
-        }
+    @Override
+    public CaseActivatedAbility2 copy() {
+        return new CaseActivatedAbility2(this);
+    }
+
+    @Override
+    public Effects getEffects() {
+        return ability.getEffects();
+    }
+
+    @Override
+    public void addEffect(Effect effect) {
+        ability.addEffect(effect);
+    }
+
+    @Override
+    public Modes getModes() {
+        return ability.getModes();
+    }
+
+    @Override
+    public List<Watcher> getWatchers() {
+        return ability.getWatchers();
+    }
+
+    @Override
+    public void addWatcher(Watcher watcher) {
+        ability.addWatcher(watcher);
+    }
+
+    @Override
+    public Effects getEffects(Game game, EffectType effectType) {
+        return ability.getEffects(game, effectType);
+    }
+}
+
+class CaseStaticAbility extends AbilityImpl {
+
+    private final Ability ability;
+
+    CaseStaticAbility(Ability ability) {
+        this(ability, false);
+    }
+
+    CaseStaticAbility(Ability ability, boolean solved) {
+        super(ability.getAbilityType(), ability.getZone());
+        this.ability = ability;
     }
 
     private CaseStaticAbility(final CaseStaticAbility ability) {
         super(ability);
+        this.ability = ability.ability.copy();
     }
 
     @Override
@@ -183,6 +228,36 @@ class CaseStaticAbility extends StaticAbility {
     @Override
     public String getRule(String source) {
         return super.getRule("this Case");
+    }
+
+    @Override
+    public Effects getEffects() {
+        return ability.getEffects();
+    }
+
+    @Override
+    public void addEffect(Effect effect) {
+        ability.addEffect(effect);
+    }
+
+    @Override
+    public Modes getModes() {
+        return ability.getModes();
+    }
+
+    @Override
+    public List<Watcher> getWatchers() {
+        return ability.getWatchers();
+    }
+
+    @Override
+    public void addWatcher(Watcher watcher) {
+        ability.addWatcher(watcher);
+    }
+
+    @Override
+    public Effects getEffects(Game game, EffectType effectType) {
+        return ability.getEffects(game, effectType);
     }
 }
 
