@@ -151,6 +151,7 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Slimy Dualleech", 104, Rarity.UNCOMMON, mage.cards.s.SlimyDualleech.class));
         cards.add(new SetCardInfo("Snarling Gorehound", 105, Rarity.COMMON, mage.cards.s.SnarlingGorehound.class));
         cards.add(new SetCardInfo("Soul Enervation", 106, Rarity.UNCOMMON, mage.cards.s.SoulEnervation.class));
+        cards.add(new SetCardInfo("Soul Search", 232, Rarity.UNCOMMON, mage.cards.s.SoulSearch.class));
         cards.add(new SetCardInfo("Steamcore Scholar", 71, Rarity.RARE, mage.cards.s.SteamcoreScholar.class));
         cards.add(new SetCardInfo("Sudden Setback", 72, Rarity.UNCOMMON, mage.cards.s.SuddenSetback.class));
         cards.add(new SetCardInfo("Sumala Sentry", 233, Rarity.UNCOMMON, mage.cards.s.SumalaSentry.class));
