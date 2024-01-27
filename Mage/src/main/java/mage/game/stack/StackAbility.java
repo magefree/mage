@@ -510,6 +510,11 @@ public class StackAbility extends StackObjectImpl implements Ability {
     }
 
     @Override
+    public Ability withNameReplacement(String nameReplacement) {
+        throw new UnsupportedOperationException("Not supported.");
+    }
+
+    @Override
     public Ability setAbilityWord(AbilityWord abilityWord) {
         throw new UnsupportedOperationException("Not supported.");
     }

@@ -236,7 +236,11 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
                 sb.append(" Do this only once each turn.");
             }
         }
-        return sb.toString();
+        String rule = sb.toString();
+        if (nameReplacement != null) {
+            rule = rule.replace("{this}", nameReplacement);
+        }
+        return rule;
     }
 
     private static boolean startsWithVerb(String ruleLow) {
