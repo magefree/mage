@@ -29,8 +29,12 @@ public class CardsLeftGraveyardWatcher extends Watcher {
                 || ((ZoneChangeEvent) event).getFromZone() != Zone.GRAVEYARD) {
             return;
         }
-        UUID playerId = event.getPlayerId();
-        if (playerId == null || game.getCard(event.getTargetId()) == null) {
+        Card card = game.getCard(event.getTargetId());
+        if (card == null) {
+            return;
+        }
+        UUID playerId = card.getOwnerId();
+        if (playerId == null) {
             return;
         }
         cardsLeftGraveyardThisTurn.computeIfAbsent(playerId, k -> new HashSet<>())
