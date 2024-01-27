@@ -164,6 +164,7 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Steamcore Scholar", 71, Rarity.RARE, mage.cards.s.SteamcoreScholar.class));
         cards.add(new SetCardInfo("Sudden Setback", 72, Rarity.UNCOMMON, mage.cards.s.SuddenSetback.class));
         cards.add(new SetCardInfo("Sumala Sentry", 233, Rarity.UNCOMMON, mage.cards.s.SumalaSentry.class));
+        cards.add(new SetCardInfo("Suspicious Detonation", 145, Rarity.COMMON, mage.cards.s.SuspiciousDetonation.class));
         cards.add(new SetCardInfo("Swamp", 274, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("The Chase Is On", 116, Rarity.COMMON, mage.cards.t.TheChaseIsOn.class));
         cards.add(new SetCardInfo("They Went This Way", 178, Rarity.COMMON, mage.cards.t.TheyWentThisWay.class));
