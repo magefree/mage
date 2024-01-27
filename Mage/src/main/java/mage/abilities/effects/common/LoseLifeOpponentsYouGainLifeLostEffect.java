@@ -49,7 +49,7 @@ public class LoseLifeOpponentsYouGainLifeLostEffect extends OneShotEffect {
                 .filter(Objects::nonNull)
                 .mapToInt(opponent -> opponent.loseLife(lifeToLose, game, source, false))
                 .sum();
-        if (totalLifeLost > 1) {
+        if (totalLifeLost > 0) {
             controller.gainLife(totalLifeLost, game, source);
         }
         return true;
