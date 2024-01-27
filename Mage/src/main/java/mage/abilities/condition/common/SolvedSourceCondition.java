@@ -11,20 +11,22 @@ import mage.game.permanent.Permanent;
  * @author DominionSpy
  */
 public enum SolvedSourceCondition implements Condition {
-    instance;
+    SOLVED(true),
+    UNSOLVED(false);
+    private final boolean solved;
+
+    SolvedSourceCondition(boolean solved) {
+        this.solved = solved;
+    }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent == null) {
-            return false;
-        }
-
-        return permanent.isSolved();
+        return permanent != null && permanent.isSolved() == solved;
     }
 
     @Override
     public String toString() {
-        return "it's solved";
+        return "{this} is " + (solved ? "solved" : "unsolved");
     }
 }

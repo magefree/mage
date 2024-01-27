@@ -18,9 +18,15 @@ public class ConditionalActivatedAbility extends ActivatedAbilityImpl {
     private static final Effects emptyEffects = new Effects();
 
     private String ruleText = null;
+    private boolean showCondition = true;
 
     public ConditionalActivatedAbility(Effect effect, Cost cost, Condition condition) {
         this(Zone.BATTLEFIELD, effect, cost, condition);
+    }
+
+    public ConditionalActivatedAbility(Effect effect, Cost cost, Condition condition, boolean showCondition) {
+        this(Zone.BATTLEFIELD, effect, cost, condition);
+        this.showCondition = showCondition;
     }
 
     public ConditionalActivatedAbility(Zone zone, Effect effect, Cost cost, Condition condition) {
@@ -29,13 +35,19 @@ public class ConditionalActivatedAbility extends ActivatedAbilityImpl {
     }
 
     public ConditionalActivatedAbility(Zone zone, Effect effect, Cost cost, Condition condition, String rule) {
+        this(zone, effect, cost, condition, rule, true);
+    }
+
+    public ConditionalActivatedAbility(Zone zone, Effect effect, Cost cost, Condition condition, String rule, boolean showCondition) {
         this(zone, effect, cost, condition);
         this.ruleText = rule;
+        this.showCondition = showCondition;
     }
 
     protected ConditionalActivatedAbility(final ConditionalActivatedAbility ability) {
         super(ability);
         this.ruleText = ability.ruleText;
+        this.showCondition = ability.showCondition;
     }
 
     @Override
@@ -57,16 +69,18 @@ public class ConditionalActivatedAbility extends ActivatedAbilityImpl {
             return ruleText;
         }
         StringBuilder sb = new StringBuilder(super.getRule());
-        sb.append(" Activate only ");
-        if (timing == TimingRule.SORCERY) {
-            sb.append("as a sorcery and only ");
+        if (showCondition) {
+            sb.append(" Activate only ");
+            if (timing == TimingRule.SORCERY) {
+                sb.append("as a sorcery and only ");
+            }
+            String conditionText = condition.toString();
+            if (!conditionText.startsWith("during") && !conditionText.startsWith("before") && !conditionText.startsWith("if")) {
+                sb.append("if ");
+            }
+            sb.append(conditionText);
+            sb.append('.');
         }
-        String conditionText = condition.toString();
-        if (!conditionText.startsWith("during") && !conditionText.startsWith("before") && !conditionText.startsWith("if")) {
-            sb.append("if ");
-        }
-        sb.append(conditionText);
-        sb.append('.');
         return sb.toString();
     }
 }

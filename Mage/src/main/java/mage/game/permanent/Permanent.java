@@ -443,7 +443,7 @@ public interface Permanent extends Card, Controllable {
 
     boolean isSolved();
 
-    void setSolved(boolean value, Game game, Ability source);
+    boolean solve(Game game, Ability source);
 
     @Override
     Permanent copy();

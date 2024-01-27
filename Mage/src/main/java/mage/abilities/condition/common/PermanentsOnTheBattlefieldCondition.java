@@ -6,6 +6,7 @@ import mage.constants.ComparisonType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
+import mage.util.CardUtil;
 
 /**
  * Battlefield checking condition. This condition can decorate other conditions
@@ -74,6 +75,36 @@ public class PermanentsOnTheBattlefieldCondition implements Condition {
 
     @Override
     public String toString() {
-        return filter.getMessage();
+        StringBuilder sb = new StringBuilder("if");
+        if (onlyControlled) {
+            sb.append(" you control ");
+        } else {
+            sb.append(" there are ");
+        }
+        switch (this.type) {
+            case FEWER_THAN:
+                sb.append(CardUtil.numberToText(count - 1));
+                sb.append(" or fewer ");
+                break;
+            case MORE_THAN:
+                sb.append(CardUtil.numberToText(count + 1));
+                sb.append(" or more ");
+                break;
+            case EQUAL_TO:
+                if (count > 0) {
+                    sb.append("exactly ");
+                    sb.append(CardUtil.numberToText(count));
+                    sb.append(" ");
+                } else {
+                    sb.append("no ");
+                }
+                break;
+        }
+        sb.append(filter.getMessage());
+        if (this.type != ComparisonType.EQUAL_TO || count != 1) sb.append("s");
+        if (!onlyControlled) {
+            sb.append(" on the battlefield");
+        }
+        return sb.toString();
     }
 }

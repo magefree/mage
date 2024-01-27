@@ -1895,21 +1895,24 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         return solved;
     }
 
-    private static final String solvedInfoKey = "IS_SOLVED";
-
     @Override
-    public void setSolved(boolean value, Game game, Ability source) {
-        if (!value || !game.replaceEvent(GameEvent.getEvent(
-                EventType.BECOME_SOLVED, getId(),
-                source, source.getControllerId()
-        ))) {
-            this.solved = value;
+    public boolean solve(Game game, Ability source) {
+        GameEvent event = new GameEvent(GameEvent.EventType.SOLVE_CASE, getId(),
+                source, source.getControllerId());
+        if (game.replaceEvent(event)) {
+            return false;
         }
-        if (this.solved) {
-            addInfo(solvedInfoKey, CardUtil.addToolTipMarkTags("Solved"), game);
-        } else {
-            addInfo(solvedInfoKey, null, game);
+        Player controller = game.getPlayer(source.getControllerId());
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (controller == null || permanent == null) {
+            return false;
         }
+        game.informPlayers(controller.getLogName() + " solves " + permanent.getLogName());
+
+        this.solved = true;
+        game.fireEvent(new GameEvent(EventType.CASE_SOLVED, getId(), source,
+                source.getControllerId()));
+        return true;
     }
 
     @Override

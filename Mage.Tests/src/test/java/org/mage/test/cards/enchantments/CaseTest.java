@@ -8,6 +8,50 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 public class CaseTest extends CardTestPlayerBase {
 
     @Test
+    public void test_CaseOfTheBurningMasks() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 6);
+        addCard(Zone.BATTLEFIELD, playerA, "Aminatou, the Fateshifter");
+        addCard(Zone.HAND, playerA, "Case of the Burning Masks");
+        addCard(Zone.HAND, playerA, "Lightning Bolt", 3);
+        addCard(Zone.HAND, playerA, "Impact Tremors");
+        addCard(Zone.HAND, playerA, "Goblin Chainwhirler");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Case of the Burning Masks");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
+
+        checkPermanentCount("llanowar elves destroyed", 1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Llanowar Elves", 0);
+        checkStackSize("case is not solved", 1, PhaseStep.END_TURN, playerA, 0);
+
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+        waitStackResolved(3, PhaseStep.PRECOMBAT_MAIN, playerA);
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Impact Tremors");
+        waitStackResolved(3, PhaseStep.PRECOMBAT_MAIN, playerA);
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Goblin Chainwhirler");
+        setChoice(playerA, "Whenever");
+
+        checkStackObject("case is solved", 3, PhaseStep.END_TURN, playerA, "<i>To solve", 1);
+
+        // Activate Aminatou, the Fateshifter ability to put Lightning Bolt on top of library
+        activateAbility(5, PhaseStep.PRECOMBAT_MAIN, playerA, "+1");
+        addTarget(playerA, "Lightning Bolt");
+        waitStackResolved(5, PhaseStep.PRECOMBAT_MAIN, playerA);
+        // Activate Case of the Burning Masks "Solved" ability
+        activateAbility(5, PhaseStep.PRECOMBAT_MAIN, playerA, "<i>Solved");
+        setChoice(playerA, "Lightning Bolt");
+        waitStackResolved(5, PhaseStep.PRECOMBAT_MAIN, playerA);
+
+        castSpell(5, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+
+        setStrictChooseMode(true);
+        setStopAt(5, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, "Case of the Burning Masks", 0);
+    }
+
+    @Test
     public void test_CaseOfTheCrimsonPulse() {
         addCard(Zone.BATTLEFIELD, playerA, "Badlands", 3 + 7);
         addCard(Zone.HAND, playerA, "Mountain");
@@ -23,7 +67,7 @@ public class CaseTest extends CardTestPlayerBase {
 
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Wit's End", playerA);
 
-        checkStackObject("case is solved", 3, PhaseStep.END_TURN, playerA, "To solve", 1);
+        checkStackObject("case is solved", 3, PhaseStep.END_TURN, playerA, "<i>To solve", 1);
 
         setStrictChooseMode(true);
         setStopAt(5, PhaseStep.UPKEEP);
@@ -46,7 +90,7 @@ public class CaseTest extends CardTestPlayerBase {
         playLand(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Plains");
         playLand(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Island");
 
-        checkStackObject("case is solved", 3, PhaseStep.END_TURN, playerA, "To solve", 1);
+        checkStackObject("case is solved", 3, PhaseStep.END_TURN, playerA, "<i>To solve", 1);
 
         castSpell(5, PhaseStep.PRECOMBAT_MAIN, playerA, "Griptide", "Llanowar Elves");
         waitStackResolved(5, PhaseStep.PRECOMBAT_MAIN);

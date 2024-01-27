@@ -1,6 +1,9 @@
 package mage.cards.c;
 
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
@@ -8,11 +11,13 @@ import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.CaseAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.SolvedSourceCondition;
 import mage.abilities.costs.common.SacrificeSourceCost;
+import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.hint.Hint;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
@@ -27,6 +32,7 @@ import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInExile;
@@ -39,6 +45,7 @@ import mage.watchers.Watcher;
  * Enchantment - Case
  * When this Case enters the battlefield, it deals 3 damage to target creature an opponent controls.
  * To solve -- Three or more sources you controlled dealt damage this turn.
+ * Solved -- Sacrifice this Case: Exile the top three cards of your library. Choose one of them. You may play that card this turn.
  *
  * @author DominionSpy
  */
@@ -53,13 +60,16 @@ public final class CaseOfTheBurningMasks extends CardImpl {
         Ability initialAbility = new EntersBattlefieldTriggeredAbility(
                 new DamageTargetEffect(3, "it"));
         initialAbility.addTarget(new TargetOpponentsCreaturePermanent());
+        initialAbility.addTarget(new TargetOpponentsCreaturePermanent());
         // To solve -- Three or more sources you controlled dealt damage this turn.
         Condition toSolveCondition = new CaseOfTheBurningMasksCondition();
         // Solved -- Sacrifice this Case: Exile the top three cards of your library. Choose one of them. You may play that card this turn.
-        Ability solvedAbility = new SimpleActivatedAbility(new CaseOfTheBurningMasksEffect(),
-                new SacrificeSourceCost());
+        Ability solvedAbility = new ConditionalActivatedAbility(new CaseOfTheBurningMasksEffect(),
+                new SacrificeSourceCost(), SolvedSourceCondition.SOLVED, false);
 
-        this.addAbility(new CaseAbility(initialAbility, toSolveCondition, solvedAbility), new CaseOfTheBurningMasksWatcher());
+        this.addAbility(new CaseAbility(initialAbility, toSolveCondition, solvedAbility)
+                .addHint(CaseOfTheBurningMasksHint.instance),
+                new CaseOfTheBurningMasksWatcher());
     }
 
     private CaseOfTheBurningMasks(final CaseOfTheBurningMasks card) {
@@ -77,7 +87,7 @@ class CaseOfTheBurningMasksCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         CaseOfTheBurningMasksWatcher watcher = game.getState().getWatcher(CaseOfTheBurningMasksWatcher.class);
-        return watcher != null && watcher.damagingCount() >= 3;
+        return watcher != null && watcher.damagingCountByController(source.getControllerId()) >= 3;
     }
 
     @Override
@@ -86,13 +96,43 @@ class CaseOfTheBurningMasksCondition implements Condition {
     }
 }
 
+enum CaseOfTheBurningMasksHint implements Hint {
+    instance;
+
+    @Override
+    public CaseOfTheBurningMasksHint copy() {
+        return this;
+    }
+
+    @Override
+    public String getText(Game game, Ability ability) {
+        Permanent permanent = game.getPermanent(ability.getSourceId());
+        if (permanent == null) {
+            return "";
+        }
+        if (permanent.isSolved()) {
+            return "Case is solved";
+        }
+        int sources = game.getState()
+                .getWatcher(CaseOfTheBurningMasksWatcher.class)
+                .damagingCountByController(ability.getControllerId());
+        StringBuilder sb = new StringBuilder("Case is unsolved. Sources that dealt damage this turn: ");
+        sb.append(sources);
+        sb.append(" (need 3).");
+        if (sources > 2 && game.isActivePlayer(ability.getControllerId())) {
+            sb.append(" Case will be solved at the end step.");
+        }
+        return sb.toString();
+    }
+}
+
 class CaseOfTheBurningMasksWatcher extends Watcher {
 
-    private final Set<MageObjectReference> damagingObjects;
+    private final Map<UUID, Set<MageObjectReference>> damagingObjects;
 
     CaseOfTheBurningMasksWatcher() {
         super(WatcherScope.GAME);
-        this.damagingObjects = new HashSet<>();
+        this.damagingObjects = new HashMap<>(0);
     }
 
     @Override
@@ -101,9 +141,9 @@ class CaseOfTheBurningMasksWatcher extends Watcher {
             case DAMAGED_PERMANENT:
             case DAMAGED_PLAYER: {
                 MageObjectReference damageSourceRef = new MageObjectReference(event.getSourceId(), game);
-                if (controllerId != null && controllerId.equals(game.getControllerId(event.getSourceId()))) {
-                    damagingObjects.add(damageSourceRef);
-                }
+                Set<MageObjectReference> mors = damagingObjects.getOrDefault(game.getControllerId(event.getSourceId()), new HashSet<>());
+                mors.add(damageSourceRef);
+                damagingObjects.put(game.getControllerId(event.getSourceId()), mors);
             }
         }
     }
@@ -114,8 +154,8 @@ class CaseOfTheBurningMasksWatcher extends Watcher {
         damagingObjects.clear();
     }
 
-    public int damagingCount() {
-        return damagingObjects.size();
+    public int damagingCountByController(UUID controllerId) {
+        return damagingObjects.getOrDefault(controllerId, Collections.emptySet()).size();
     }
 }
 

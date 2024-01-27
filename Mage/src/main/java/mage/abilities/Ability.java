@@ -503,6 +503,13 @@ public interface Ability extends Controllable, Serializable {
     UUID getOriginalId();
 
     /**
+     * Sets a replacement for the name before substituting {this} in rule text.
+     *
+     * @param nameReplacement
+     */
+    Ability withNameReplacement(String nameReplacement);
+
+    /**
      * Sets the ability word for the given ability. An ability word is a word
      * that, in essence, groups, and reminds players of, cards that have a
      * common functionality and does not imply any particular rules.

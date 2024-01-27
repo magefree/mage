@@ -7,9 +7,13 @@ import mage.abilities.common.CaseAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
+import mage.abilities.condition.common.SolvedSourceCondition;
+import mage.abilities.decorator.ConditionalAsThoughEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.LookAtTopCardOfLibraryAnyTimeEffect;
 import mage.abilities.effects.common.continuous.PlayAdditionalLandsControllerEffect;
 import mage.abilities.effects.common.continuous.PlayTheTopCardEffect;
+import mage.abilities.hint.Hint;
 import mage.constants.ComparisonType;
 import mage.constants.Duration;
 import mage.constants.SubType;
@@ -18,8 +22,10 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterLandPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 
 /**
  * Case of the Locked Hothouse {3}{G}
@@ -51,14 +57,18 @@ public final class CaseOfTheLockedHothouse extends CardImpl {
         Ability initialAbility = new SimpleStaticAbility(new PlayAdditionalLandsControllerEffect(1, Duration.WhileOnBattlefield));
         // To solve -- You control seven or more lands.
         Condition toSolveCondition = new PermanentsOnTheBattlefieldCondition(
-                new FilterLandPermanent("You control seven or more lands"),
-                ComparisonType.OR_GREATER, 7, true);
+                StaticFilters.FILTER_LAND,
+                ComparisonType.MORE_THAN, 6, true);
         // Solved -- You may look at the top card of your library any time, and you may play lands and cast creature and enchantment spells from the top of your library.
-        Ability solvedAbility = new SimpleStaticAbility(new LookAtTopCardOfLibraryAnyTimeEffect());
-        solvedAbility.addEffect(new PlayTheTopCardEffect(TargetController.YOU, filter, false)
+        Ability solvedAbility = new SimpleStaticAbility(new ConditionalContinuousEffect(
+                new LookAtTopCardOfLibraryAnyTimeEffect(), SolvedSourceCondition.SOLVED, ""));
+        solvedAbility.addEffect(new ConditionalAsThoughEffect(
+                new PlayTheTopCardEffect(TargetController.YOU, filter, false),
+                SolvedSourceCondition.SOLVED)
                 .setText(", and you may play lands and cast creature and enchantment spells from the top of your library."));
 
-        this.addAbility(new CaseAbility(initialAbility, toSolveCondition, solvedAbility));
+        this.addAbility(new CaseAbility(initialAbility, toSolveCondition, solvedAbility)
+                .addHint(CaseOfTheLockedHothouseHint.instance));
     }
 
     private CaseOfTheLockedHothouse(final CaseOfTheLockedHothouse card) {
@@ -68,5 +78,35 @@ public final class CaseOfTheLockedHothouse extends CardImpl {
     @Override
     public CaseOfTheLockedHothouse copy() {
         return new CaseOfTheLockedHothouse(this);
+    }
+}
+
+enum CaseOfTheLockedHothouseHint implements Hint {
+    instance;
+
+    @Override
+    public CaseOfTheLockedHothouseHint copy() {
+        return this;
+    }
+
+    @Override
+    public String getText(Game game, Ability ability) {
+        Permanent permanent = game.getPermanent(ability.getSourceId());
+        if (permanent == null) {
+            return "";
+        }
+        if (permanent.isSolved()) {
+            return "Case is solved";
+        }
+        int lands = game.getBattlefield()
+                .count(StaticFilters.FILTER_LAND, ability.getControllerId(),
+                        ability, game);
+        StringBuilder sb = new StringBuilder("Case is unsolved. Lands: ");
+        sb.append(lands);
+        sb.append(" (need 7).");
+        if (lands > 6 && game.isActivePlayer(ability.getControllerId())) {
+            sb.append(" Case will be solved at the end step.");
+        }
+        return sb.toString();
     }
 }
