@@ -186,6 +186,7 @@ public final class RavnicaClueEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Roc Charger", 70, Rarity.UNCOMMON, mage.cards.r.RocCharger.class));
         cards.add(new SetCardInfo("Roofstalker Wight", 121, Rarity.COMMON, mage.cards.r.RoofstalkerWight.class));
         cards.add(new SetCardInfo("Rootborn Defenses", 71, Rarity.COMMON, mage.cards.r.RootbornDefenses.class));
+        cards.add(new SetCardInfo("Rope", 11, Rarity.UNCOMMON, mage.cards.r.Rope.class));
         cards.add(new SetCardInfo("Sacred Foundry", 279, Rarity.RARE, mage.cards.s.SacredFoundry.class));
         cards.add(new SetCardInfo("Sage's Row Savant", 97, Rarity.COMMON, mage.cards.s.SagesRowSavant.class));
         cards.add(new SetCardInfo("Sauroform Hybrid", 173, Rarity.COMMON, mage.cards.s.SauroformHybrid.class));
