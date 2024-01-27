@@ -721,6 +721,9 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         }
 
         currentGame.getState().addCommandObject(newEmblem);
+        for (Ability ability : newEmblem.getAbilities()) {
+            currentGame.getState().addAbility(ability, null, newEmblem);
+        }
     }
 
     /**
