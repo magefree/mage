@@ -65,6 +65,7 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Dog Walker", 197, Rarity.COMMON, mage.cards.d.DogWalker.class));
         cards.add(new SetCardInfo("Doppelgang", 198, Rarity.RARE, mage.cards.d.Doppelgang.class));
         cards.add(new SetCardInfo("Drag the Canal", 199, Rarity.RARE, mage.cards.d.DragTheCanal.class));
+        cards.add(new SetCardInfo("Dramatic Accusation", 53, Rarity.COMMON, mage.cards.d.DramaticAccusation.class));
         cards.add(new SetCardInfo("Elegant Parlor", 260, Rarity.RARE, mage.cards.e.ElegantParlor.class));
         cards.add(new SetCardInfo("Eliminate the Impossible", 54, Rarity.UNCOMMON, mage.cards.e.EliminateTheImpossible.class));
         cards.add(new SetCardInfo("Escape Tunnel", 261, Rarity.COMMON, mage.cards.e.EscapeTunnel.class));
