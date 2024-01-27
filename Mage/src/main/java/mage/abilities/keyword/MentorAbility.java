@@ -2,7 +2,7 @@ package mage.abilities.keyword;
 
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.Card;
 import mage.constants.Outcome;
 import mage.counters.CounterType;
@@ -58,11 +58,10 @@ enum MentorAbilityPredicate implements ObjectSourcePlayerPredicate<Card> {
     }
 }
 
-// Based on TrainingAbilityEffect
-class MentorAbilityEffect extends OneShotEffect {
+class MentorAbilityEffect extends AddCountersTargetEffect {
 
     MentorAbilityEffect() {
-        super(Outcome.BoostCreature);
+        super(CounterType.P1P1.createInstance(), Outcome.BoostCreature);
     }
 
     private MentorAbilityEffect(final MentorAbilityEffect effect) {
@@ -76,15 +75,17 @@ class MentorAbilityEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        if (!super.apply(game, source)) {
+            return false;
+        }
+
         Permanent mentoredPermanent = game.getPermanent(targetPointer.getFirst(game, source));
         if (mentoredPermanent == null) {
             return false;
         }
-        mentoredPermanent.addCounters(CounterType.P1P1.createInstance(), source, game);
-
         game.fireEvent(GameEvent.getEvent(
                 GameEvent.EventType.MENTORED_CREATURE,
-                targetPointer.getFirst(game, source),
+                mentoredPermanent.getId(),
                 source,
                 source.getControllerId()));
         return true;
