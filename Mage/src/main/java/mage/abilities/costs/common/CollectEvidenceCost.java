@@ -10,6 +10,7 @@ import mage.cards.CardsImpl;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -83,6 +84,10 @@ public class CollectEvidenceCost extends CostImpl {
                 .sum() >= amount;
         if (paid) {
             player.moveCards(cards, Zone.EXILED, source, game);
+            game.fireEvent(GameEvent.getEvent(
+                    GameEvent.EventType.EVIDENCE_COLLECTED,
+                    source.getSourceId(), source, source.getControllerId(), amount
+            ));
         }
         return paid;
     }
