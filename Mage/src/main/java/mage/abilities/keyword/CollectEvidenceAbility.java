@@ -58,7 +58,7 @@ public class CollectEvidenceAbility extends StaticAbility implements OptionalAdd
         return new CollectEvidenceAbility(this);
     }
 
-    public void resetBargain() {
+    public void resetCost() {
         if (additionalCost != null) {
             additionalCost.reset();
         }
@@ -75,9 +75,9 @@ public class CollectEvidenceAbility extends StaticAbility implements OptionalAdd
             return;
         }
 
-        this.resetBargain();
+        this.resetCost();
         boolean canPay = additionalCost.canPay(ability, this, ability.getControllerId(), game);
-        if (!canPay || !player.chooseUse(Outcome.Sacrifice, promptString, ability, game)) {
+        if (!canPay || !player.chooseUse(Outcome.Exile, promptString, ability, game)) {
             return;
         }
 
