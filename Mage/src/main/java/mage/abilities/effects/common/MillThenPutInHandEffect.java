@@ -21,36 +21,53 @@ import mage.util.CardUtil;
 public class MillThenPutInHandEffect extends OneShotEffect {
 
     private final int amount;
-    private final boolean mandatory; // If true, putting a card in hand is mandatory if possible.
+    private final boolean optional;
     private final FilterCard filter;
     private final Effect otherwiseEffect;
+    private String textFromAmong = "the milled cards"; // for text gen
 
+    /**
+     * @param amount number of cards to mill
+     * @param filter optionally select a card matching this filter from among the milled cards to put in hand
+     */
     public MillThenPutInHandEffect(int amount, FilterCard filter) {
-        this(amount, filter, null);
+        this(amount, filter, true);
     }
 
-    public MillThenPutInHandEffect(int amount, FilterCard filter, boolean mandatory) {
-        this(amount, filter, null, mandatory);
+    /**
+     * @param amount number of cards to mill
+     * @param filter select a card matching this filter from among the milled cards to put in hand
+     * @param optional whether the selection is optional (true) or mandatory (false)
+     */
+    public MillThenPutInHandEffect(int amount, FilterCard filter, boolean optional) {
+        this(amount, filter, null, optional);
     }
 
+    /**
+     * @param amount number of cards to mill
+     * @param filter optionally select a card matching this filter from among the milled cards to put in hand
+     * @param otherwiseEffect applied if no card put into hand
+     */
     public MillThenPutInHandEffect(int amount, FilterCard filter, Effect otherwiseEffect) {
-        this(amount, filter, otherwiseEffect, false);
+        this(amount, filter, otherwiseEffect, true);
+        this.textFromAmong = "the cards milled this way";
     }
 
-    public MillThenPutInHandEffect(int amount, FilterCard filter, Effect otherwiseEffect, boolean mandatory) {
+    protected MillThenPutInHandEffect(int amount, FilterCard filter, Effect otherwiseEffect, boolean optional) {
         super(Outcome.Benefit);
         this.amount = amount;
         this.filter = filter;
-        this.mandatory = mandatory;
+        this.optional = optional;
         this.otherwiseEffect = otherwiseEffect;
     }
 
     private MillThenPutInHandEffect(final MillThenPutInHandEffect effect) {
         super(effect);
         this.amount = effect.amount;
-        this.mandatory = effect.mandatory;
+        this.optional = effect.optional;
         this.filter = effect.filter;
         this.otherwiseEffect = effect.otherwiseEffect;
+        this.textFromAmong = effect.textFromAmong;
     }
 
     @Override
@@ -68,7 +85,7 @@ public class MillThenPutInHandEffect extends OneShotEffect {
         if (cards.isEmpty()) {
             return applyOtherwiseEffect(game, source);
         }
-        TargetCard target = new TargetCard(this.mandatory ? 1 : 0, 1, Zone.ALL, filter);
+        TargetCard target = new TargetCard(optional ? 0 : 1, 1, Zone.ALL, filter);
         player.choose(Outcome.DrawCard, cards, target, source, game);
         Card card = game.getCard(target.getFirstTarget());
         if (card == null) {
@@ -88,14 +105,19 @@ public class MillThenPutInHandEffect extends OneShotEffect {
         }
     }
 
+    public MillThenPutInHandEffect withTextOptions(String fromAmong) {
+        this.textFromAmong = fromAmong;
+        return this;
+    }
+
     @Override
     public String getText(Mode mode) {
-        if (staticText == null && !staticText.isEmpty()) {
+        if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
         String text = "mill " + CardUtil.numberToText(amount) + " cards. ";
-        text += this.mandatory ? "Then " : "You may ";
-        text += "put " + filter.getMessage() + " from among the milled cards into your hand";
+        text += optional ? "You may " : "Then ";
+        text += "put " + filter.getMessage() + " from among " + textFromAmong + " into your hand";
         if (otherwiseEffect != null) {
             text += ". If you don't, " + otherwiseEffect.getText(mode);
         }

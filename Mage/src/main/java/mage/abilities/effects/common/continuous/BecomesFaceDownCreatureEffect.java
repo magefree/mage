@@ -29,7 +29,9 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl {
         MANIFESTED,
         MANUAL,
         MEGAMORPHED,
-        MORPHED
+        MORPHED,
+        DISGUISED,
+        CLOAKED
     }
 
     protected int zoneChangeCounter;
@@ -55,7 +57,7 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl {
     }
 
     public BecomesFaceDownCreatureEffect(Costs<Cost> turnFaceUpCosts, MageObjectReference objectReference, Duration duration, FaceDownType faceDownType) {
-        super(duration, Outcome.BecomeCreature);
+        super(duration, Layer.CopyEffects_1, SubLayer.FaceDownEffects_1b, Outcome.BecomeCreature);
         this.objectReference = objectReference;
         this.zoneChangeCounter = Integer.MIN_VALUE;
         if (turnFaceUpCosts != null) {
@@ -77,18 +79,18 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl {
         this.faceDownType = effect.faceDownType;
     }
 
-    @Override
-    public BecomesFaceDownCreatureEffect copy() {
-        return new BecomesFaceDownCreatureEffect(this);
-    }
-
     private static Costs<Cost> createCosts(Cost cost) {
         if (cost == null) {
-            return null;
+            return null; // ignore warning, null is used specifically
         }
         Costs<Cost> costs = new CostsImpl<>();
         costs.add(cost);
         return costs;
+    }
+
+    @Override
+    public BecomesFaceDownCreatureEffect copy() {
+        return new BecomesFaceDownCreatureEffect(this);
     }
 
     @Override
@@ -108,7 +110,7 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+    public boolean apply(Game game, Ability source) {
         Permanent permanent;
         if (objectReference != null) {
             permanent = objectReference.getPermanent(game);
@@ -128,72 +130,55 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl {
                     case MEGAMORPHED:
                         permanent.setMorphed(true);
                         break;
+                    default:
+                        throw new UnsupportedOperationException("FaceDownType not yet supported: " + faceDownType);
                 }
             }
-            switch (layer) {
-                case TypeChangingEffects_4:
-                    permanent.setName("");
-                    permanent.removeAllSuperTypes(game);
-                    permanent.removeAllCardTypes(game);
-                    permanent.addCardType(game, CardType.CREATURE);
-                    permanent.removeAllSubTypes(game);
-                    break;
-                case ColorChangingEffects_5:
-                    permanent.getColor(game).setColor(new ObjectColor());
-                    break;
-                case AbilityAddingRemovingEffects_6:
-                    Card card = game.getCard(permanent.getId()); //
-                    List<Ability> abilitiesToRemove = new ArrayList<>();
-                    for (Ability ability : permanent.getAbilities()) {
 
-                        // keep gained abilities from other sources, removes only own (card text)
-                        if (card != null && !card.getAbilities().contains(ability)) {
-                            continue;
-                        }
+            permanent.setName(EmptyNames.FACE_DOWN_CREATURE.toString());
+            permanent.removeAllSuperTypes(game);
+            permanent.removeAllCardTypes(game);
+            permanent.addCardType(game, CardType.CREATURE);
+            permanent.removeAllSubTypes(game);
+            permanent.getColor(game).setColor(ObjectColor.COLORLESS);
+            Card card = game.getCard(permanent.getId());
 
-                        // 701.33c
-                        // If a card with morph is manifested, its controller may turn that card face up using
-                        // either the procedure described in rule 702.36e to turn a face-down permanent with morph face up
-                        // or the procedure described above to turn a manifested permanent face up.
-                        //
-                        // so keep all tune face up abilities and other face down compatible
-                        if (ability.getWorksFaceDown()) {
-                            ability.setRuleVisible(false);
-                            continue;
-                        }
+            List<Ability> abilitiesToRemove = new ArrayList<>();
+            for (Ability ability : permanent.getAbilities()) {
 
-                        if (!ability.getRuleVisible() && !ability.getEffects().isEmpty()) {
-                            if (ability.getEffects().get(0) instanceof BecomesFaceDownCreatureEffect) {
-                                continue;
-                            }
-                        }
-                        abilitiesToRemove.add(ability);
+                // keep gained abilities from other sources, removes only own (card text)
+                if (card != null && !card.getAbilities().contains(ability)) {
+                    continue;
+                }
+
+                // 701.33c
+                // If a card with morph is manifested, its controller may turn that card face up using
+                // either the procedure described in rule 702.36e to turn a face-down permanent with morph face up
+                // or the procedure described above to turn a manifested permanent face up.
+                //
+                // so keep all tune face up abilities and other face down compatible
+                if (ability.getWorksFaceDown()) {
+                    ability.setRuleVisible(false);
+                    continue;
+                }
+
+                if (!ability.getRuleVisible() && !ability.getEffects().isEmpty()) {
+                    if (ability.getEffects().get(0) instanceof BecomesFaceDownCreatureEffect) {
+                        continue;
                     }
-                    permanent.removeAbilities(abilitiesToRemove, source.getSourceId(), game);
-                    if (turnFaceUpAbility != null) {
-                        permanent.addAbility(turnFaceUpAbility, source.getSourceId(), game);
-                    }
-                    break;
-                case PTChangingEffects_7:
-                    if (sublayer == SubLayer.SetPT_7b) {
-                        permanent.getPower().setModifiedBaseValue(2);
-                        permanent.getToughness().setModifiedBaseValue(2);
-                    }
+                }
+                abilitiesToRemove.add(ability);
             }
-        } else if (duration == Duration.Custom && foundPermanent == true) {
+            permanent.removeAbilities(abilitiesToRemove, source.getSourceId(), game);
+            if (turnFaceUpAbility != null) { // TODO: shouldn't be added by this effect, but separately
+                permanent.addAbility(turnFaceUpAbility, source.getSourceId(), game);
+            }
+            permanent.getPower().setModifiedBaseValue(2);
+            permanent.getToughness().setModifiedBaseValue(2);
+        } else if (duration == Duration.Custom && foundPermanent) {
             discard();
         }
         return true;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public boolean hasLayer(Layer layer) {
-        return layer == Layer.PTChangingEffects_7 || layer == Layer.AbilityAddingRemovingEffects_6 || layer == Layer.ColorChangingEffects_5 || layer == Layer.TypeChangingEffects_4;
     }
 
 }
