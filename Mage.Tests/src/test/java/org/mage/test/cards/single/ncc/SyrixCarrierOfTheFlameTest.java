@@ -45,6 +45,35 @@ public class SyrixCarrierOfTheFlameTest extends CardTestPlayerBase {
 
     }
 
+    @Test
+    public void testDamageTriggerOpponentSource() {
+        String cremate = "Cremate"; // {B} Exile target card from a graveyard. Draw a card.
+        addCard(Zone.BATTLEFIELD, playerA, syrix);
+        addCard(Zone.BATTLEFIELD, playerA, phoenix);
+        addCard(Zone.GRAVEYARD, playerA, historian);
+        addCard(Zone.BATTLEFIELD, playerB, "Swamp");
+        addCard(Zone.HAND, playerB, cremate);
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, cremate, historian);
+
+        checkExileCount("exiled", 2, PhaseStep.POSTCOMBAT_MAIN, playerA, historian, 1);
+        checkLife("before trigger", 2, PhaseStep.POSTCOMBAT_MAIN, playerA, 20);
+        checkLife("before trigger", 2, PhaseStep.POSTCOMBAT_MAIN, playerB, 20);
+
+        addTarget(playerA, phoenix); // target Phoenix
+        addTarget(playerA, playerB); // deals damage
+
+        setStrictChooseMode(true);
+        setStopAt(3, PhaseStep.UPKEEP);
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 16);
+        assertPowerToughness(playerA, syrix, 3, 3);
+        assertPowerToughness(playerA, phoenix, 4, 2);
+
+    }
+
     @Ignore("Usable zone issue, see #10550")
     @Test
     public void testCast() {

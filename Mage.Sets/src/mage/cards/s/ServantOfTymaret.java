@@ -1,21 +1,18 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.LoseLifeOpponentsYouGainLifeLostEffect;
 import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.abilities.keyword.InspiredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.game.Game;
+
+import java.util.UUID;
 
 /**
  *
@@ -31,7 +28,7 @@ public final class ServantOfTymaret extends CardImpl {
         this.toughness = new MageInt(3);
 
         // <i>Inspired</i> &mdash; Whenever Servant of Tymaret becomes untapped, each opponent loses 1 life. You gain life equal to the life lost this way.
-        this.addAbility(new InspiredAbility(new ServantOfTymaretEffect()));
+        this.addAbility(new InspiredAbility(new LoseLifeOpponentsYouGainLifeLostEffect(1)));
 
         // {2}{B}: Regenerate Servant of Tymaret.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{2}{B}")));
@@ -45,32 +42,4 @@ public final class ServantOfTymaret extends CardImpl {
     public ServantOfTymaret copy() {
         return new ServantOfTymaret(this);
     }
-}
-
-class ServantOfTymaretEffect extends OneShotEffect {
-
-    ServantOfTymaretEffect() {
-        super(Outcome.Damage);
-        staticText = "each opponent loses 1 life. You gain life equal to the life lost this way";
-    }
-
-    private ServantOfTymaretEffect(final ServantOfTymaretEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        int lostAmount = 0;
-        for (UUID opponentId: game.getOpponents(source.getControllerId())) {
-            lostAmount += game.getPlayer(opponentId).loseLife(1, game, source, false);
-        }
-        game.getPlayer(source.getControllerId()).gainLife(lostAmount, game, source);
-        return true;
-    }
-
-    @Override
-    public ServantOfTymaretEffect copy() {
-        return new ServantOfTymaretEffect(this);
-    }
-
 }
