@@ -27,4 +27,9 @@ public enum SacrificedArtifactThisTurnCondition implements Condition {
                 .stream()
                 .anyMatch(permanent -> permanent.isArtifact(game));
     }
+
+    @Override
+    public String toString() {
+        return "you've sacrificed an artifact this turn";
+    }
 }

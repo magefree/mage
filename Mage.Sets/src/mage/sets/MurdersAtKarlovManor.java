@@ -60,6 +60,7 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Deduce", 52, Rarity.COMMON, mage.cards.d.Deduce.class));
         cards.add(new SetCardInfo("Defenestrated Phantom", 11, Rarity.COMMON, mage.cards.d.DefenestratedPhantom.class));
         cards.add(new SetCardInfo("Demand Answers", 122, Rarity.COMMON, mage.cards.d.DemandAnswers.class));
+        cards.add(new SetCardInfo("Detective's Satchel", 196, Rarity.UNCOMMON, mage.cards.d.DetectivesSatchel.class));
         cards.add(new SetCardInfo("Dog Walker", 197, Rarity.COMMON, mage.cards.d.DogWalker.class));
         cards.add(new SetCardInfo("Doppelgang", 198, Rarity.RARE, mage.cards.d.Doppelgang.class));
         cards.add(new SetCardInfo("Drag the Canal", 199, Rarity.RARE, mage.cards.d.DragTheCanal.class));
