@@ -115,6 +115,7 @@ enum LivingConundrumCondition implements Condition {
                 .ofNullable(game.getPlayer(source.getControllerId()))
                 .map(Player::getLibrary)
                 .map(Library::size)
-                .equals(0);
+                .map(i -> i == 0)
+                .orElse(false);
     }
 }
