@@ -573,6 +573,12 @@ public class GameEvent implements Serializable {
          playerId   the player suspecting
          */
         BECOME_SUSPECTED,
+        /* Mentored Creature
+         targetId   creature that was mentored
+         sourceId   of the mentor ability
+         playerId   controller of the creature mentoring
+         */
+        MENTORED_CREATURE,
         //custom events
         CUSTOM_EVENT
     }
