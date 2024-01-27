@@ -1,7 +1,6 @@
 package mage.abilities.effects;
 
 import mage.ApprovingObject;
-import mage.MageIdentifier;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.MageSingleton;
@@ -9,8 +8,6 @@ import mage.abilities.StaticAbility;
 import mage.abilities.effects.common.continuous.BecomesFaceDownCreatureEffect;
 import mage.abilities.effects.common.continuous.CommanderReplacementEffect;
 import mage.cards.*;
-import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicate;
@@ -55,19 +52,19 @@ public class ContinuousEffects implements Serializable {
 
     private final Map<AsThoughEffectType, ContinuousEffectsList<AsThoughEffect>> asThoughEffectsMap = new EnumMap<>(AsThoughEffectType.class);
     public final List<ContinuousEffectsList<?>> allEffectsLists = new ArrayList<>(); // contains refs to real effect's list
-    private final ApplyCountersEffect applyCounters;
+    private final ApplyStatusEffect applyStatus;
     private final AuraReplacementEffect auraReplacementEffect;
 
     private final Map<String, ContinuousEffectsList<ContinuousEffect>> lastEffectsListOnLayer = new HashMap<>(); // helps to find out new effect timestamps on layers
 
     public ContinuousEffects() {
-        applyCounters = new ApplyCountersEffect();
+        applyStatus = new ApplyStatusEffect();
         auraReplacementEffect = new AuraReplacementEffect();
         collectAllEffects();
     }
 
     protected ContinuousEffects(final ContinuousEffects effect) {
-        applyCounters = effect.applyCounters.copy();
+        applyStatus = effect.applyStatus.copy();
         auraReplacementEffect = effect.auraReplacementEffect.copy();
         layeredEffects = effect.layeredEffects.copy();
         continuousRuleModifyingEffects = effect.continuousRuleModifyingEffects.copy();
@@ -995,7 +992,7 @@ public class ContinuousEffects implements Serializable {
         boolean done = false;
         Map<ContinuousEffect, Set<UUID>> waitingEffects = new LinkedHashMap<>();
         Set<UUID> appliedEffects = new HashSet<>();
-        applyCounters.apply(Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, null, game);
+        applyStatus.apply(Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, null, game);
         activeLayerEffects = getLayeredEffects(game, "layer_6");
 
         while (!done) { // loop needed if a added effect adds again an effect (e.g. Level 5- of Joraga Treespeaker)
@@ -1108,7 +1105,7 @@ public class ContinuousEffects implements Serializable {
             }
         }
 
-        applyCounters.apply(Layer.PTChangingEffects_7, SubLayer.Counters_7d, null, game);
+        applyStatus.apply(Layer.PTChangingEffects_7, SubLayer.Counters_7d, null, game);
 
         for (ContinuousEffect effect : layer) {
             Set<Ability> abilities = layeredEffects.getAbility(effect.getId());
@@ -1410,7 +1407,7 @@ public class ContinuousEffects implements Serializable {
         for (Map.Entry<AsThoughEffectType, ContinuousEffectsList<AsThoughEffect>> entry : asThoughEffectsMap.entrySet()) {
             logger.info("... " + entry.getKey().toString() + ": " + entry.getValue().size());
         }
-        logger.info("applyCounters ....................: " + (applyCounters != null ? "exists" : "null"));
+        logger.info("applyStatus ....................: " + (applyStatus != null ? "exists" : "null"));
         logger.info("auraReplacementEffect ............: " + (continuousRuleModifyingEffects != null ? "exists" : "null"));
         Map<String, TraceInfo> orderedEffects = new TreeMap<>();
         traceAddContinuousEffects(orderedEffects, layeredEffects, game, "layeredEffects................");

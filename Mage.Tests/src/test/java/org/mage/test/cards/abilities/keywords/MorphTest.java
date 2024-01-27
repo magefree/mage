@@ -418,7 +418,7 @@ public class MorphTest extends CardTestPlayerBase {
 
         for (Card card : currentGame.getExile().getAllCards(currentGame)) {
             if (card.getName().equals("Birchlore Rangers")) {
-                Assert.assertEquals("Birchlore Rangers has to be face up in exile", false, card.isFaceDown(currentGame));
+                Assert.assertFalse("Birchlore Rangers has to be face up in exile", card.isFaceDown(currentGame));
                 break;
             }
         }
@@ -457,7 +457,7 @@ public class MorphTest extends CardTestPlayerBase {
 
         for (Card card : playerA.getGraveyard().getCards(currentGame)) {
             if (card.getName().equals("Ashcloud Phoenix")) {
-                Assert.assertEquals("Ashcloud Phoenix has to be face up in graveyard", false, card.isFaceDown(currentGame));
+                Assert.assertFalse("Ashcloud Phoenix has to be face up in graveyard", card.isFaceDown(currentGame));
                 break;
             }
         }
@@ -493,7 +493,7 @@ public class MorphTest extends CardTestPlayerBase {
 
         for (Card card : playerA.getGraveyard().getCards(currentGame)) {
             if (card.getName().equals("Ashcloud Phoenix")) {
-                Assert.assertEquals("Ashcloud Phoenix has to be face up in graveyard", false, card.isFaceDown(currentGame));
+                Assert.assertFalse("Ashcloud Phoenix has to be face up in graveyard", card.isFaceDown(currentGame));
                 break;
             }
         }
@@ -772,7 +772,7 @@ public class MorphTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Brine Elemental", 1);
         assertPermanentCount(playerB, "Brine Elemental", 1);
-        Assert.assertTrue("Skip next turn has to be added to TurnMods", currentGame.getState().getTurnMods().size() == 1);
+        Assert.assertEquals("Skip next turn has to be added to TurnMods", 1, currentGame.getState().getTurnMods().size());
     }
 
     /**
@@ -963,7 +963,6 @@ public class MorphTest extends CardTestPlayerBase {
 
     @Test
     public void test_LandWithMorph_MorphAfterLand() {
-        removeAllCardsFromHand(playerA);
 
         // Morph {2}
         addCard(Zone.HAND, playerA, "Zoetic Cavern");
@@ -1116,6 +1115,110 @@ public class MorphTest extends CardTestPlayerBase {
         execute();
 
         assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 2);
+    }
+
+    @Test
+    public void testLoseAbilities() {
+        addCard(Zone.HAND, playerA, "Monastery Flock");
+        addCard(Zone.HAND, playerA, "Tamiyo's Compleation");
+        addCard(Zone.BATTLEFIELD, playerA, "Secret Plans"); // face-down creatures get +0/+1
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 7);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Monastery Flock using Morph");
+
+        checkPT("face down", 1, PhaseStep.BEGIN_COMBAT, playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 2, 3);
+        checkPlayableAbility("unmorph", 1, PhaseStep.BEGIN_COMBAT, playerA, "{U}: Turn this", true);
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Tamiyo's Compleation", EmptyNames.FACE_DOWN_CREATURE.toString());
+
+        checkPlayableAbility("unmorph", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{U}: Turn this", false);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertTapped(EmptyNames.FACE_DOWN_CREATURE.toString(), true);
+        assertAttachedTo(playerA, "Tamiyo's Compleation", EmptyNames.FACE_DOWN_CREATURE.toString(), true);
+        assertPowerToughness(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 2, 3);
+    }
+
+    @Test
+    public void testBecomeTreasure() {
+        addCard(Zone.HAND, playerA, "Sage-Eye Harrier"); // 1/5 Flying, Morph 3W
+        addCard(Zone.HAND, playerA, "Minimus Containment"); // 2W Aura
+        // Enchant nonland permanent
+        // Enchanted permanent is a Treasure artifact with “{T},Sacrifice this artifact: Add one mana of any color,”
+        // and it loses all other abilities. (If it was a creature, it’s no longer a creature.)
+
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 7);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sage-Eye Harrier using Morph");
+
+        checkPT("face down", 1, PhaseStep.BEGIN_COMBAT, playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 2, 2);
+        checkPlayableAbility("unmorph", 1, PhaseStep.BEGIN_COMBAT, playerA, "{3}{W}: Turn this", true);
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Minimus Containment", EmptyNames.FACE_DOWN_CREATURE.toString());
+
+        checkPlayableAbility("unmorph", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{3}{W}: Turn this", false);
+
+        checkPlayableAbility("treasure", 1, PhaseStep.END_TURN, playerA, "{T}, Sacrifice ", true);
+
+        setStrictChooseMode(true);
+        setStopAt(2, PhaseStep.UPKEEP);
+        execute();
+
+        assertSubtype(EmptyNames.FACE_DOWN_CREATURE.toString(), SubType.TREASURE);
+        assertType(EmptyNames.FACE_DOWN_CREATURE.toString(), CardType.ARTIFACT, true);
+        assertType(EmptyNames.FACE_DOWN_CREATURE.toString(), CardType.CREATURE, false);
+        assertAttachedTo(playerA, "Minimus Containment", EmptyNames.FACE_DOWN_CREATURE.toString(), true);
+    }
+
+    @Test
+    public void testMycosynthAfter() {
+        addCard(Zone.HAND, playerA, "Monastery Flock");
+        addCard(Zone.HAND, playerA, "Mycosynth Lattice");
+        addCard(Zone.BATTLEFIELD, playerA, "Secret Plans"); // face-down creatures get +0/+1
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 10);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Monastery Flock using Morph");
+
+        checkPT("face down", 1, PhaseStep.BEGIN_COMBAT, playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 2, 3);
+        checkPlayableAbility("unmorph", 1, PhaseStep.BEGIN_COMBAT, playerA, "{U}: Turn this", true);
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Mycosynth Lattice");
+
+        checkPlayableAbility("unmorph", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{U}: Turn this", true);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertType(EmptyNames.FACE_DOWN_CREATURE.toString(), CardType.ARTIFACT, true);
+        assertType(EmptyNames.FACE_DOWN_CREATURE.toString(), CardType.CREATURE, true);
+        assertNotSubtype(EmptyNames.FACE_DOWN_CREATURE.toString(), SubType.BIRD);
+        assertPowerToughness(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 2, 3);
+    }
+
+    @Test
+    public void testMycosynthBefore() {
+        addCard(Zone.HAND, playerA, "Monastery Flock");
+        addCard(Zone.BATTLEFIELD, playerA, "Mycosynth Lattice");
+        addCard(Zone.BATTLEFIELD, playerA, "Secret Plans"); // face-down creatures get +0/+1
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Monastery Flock using Morph");
+
+        checkPT("face down", 1, PhaseStep.BEGIN_COMBAT, playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 2, 3);
+        checkPlayableAbility("unmorph", 1, PhaseStep.BEGIN_COMBAT, playerA, "{U}: Turn this", true);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertType(EmptyNames.FACE_DOWN_CREATURE.toString(), CardType.ARTIFACT, true);
+        assertType(EmptyNames.FACE_DOWN_CREATURE.toString(), CardType.CREATURE, true);
+        assertNotSubtype(EmptyNames.FACE_DOWN_CREATURE.toString(), SubType.BIRD);
+        assertPowerToughness(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 2, 3);
     }
 
 }

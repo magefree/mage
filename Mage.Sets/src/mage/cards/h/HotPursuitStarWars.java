@@ -20,7 +20,7 @@ import mage.target.common.TargetOpponentsCreaturePermanent;
  *
  * @author Styxo
  */
-public final class HotPursuit extends CardImpl {
+public final class HotPursuitStarWars extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Each creature with a bounty counter on it");
 
@@ -28,7 +28,7 @@ public final class HotPursuit extends CardImpl {
         filter.add(CounterType.BOUNTY.getPredicate());
     }
 
-    public HotPursuit(UUID ownerId, CardSetInfo setInfo) {
+    public HotPursuitStarWars(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{B}{R}{G}");
 
         // Each creature your opponent's control with a bounty counter on it gets -1/-1.
@@ -40,12 +40,12 @@ public final class HotPursuit extends CardImpl {
         this.addAbility(ability);
     }
 
-    private HotPursuit(final HotPursuit card) {
+    private HotPursuitStarWars(final HotPursuitStarWars card) {
         super(card);
     }
 
     @Override
-    public HotPursuit copy() {
-        return new HotPursuit(this);
+    public HotPursuitStarWars copy() {
+        return new HotPursuitStarWars(this);
     }
 }

@@ -105,6 +105,7 @@ public final class LostCavernsOfIxalanCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Dire Fleet Daredevil", 223, Rarity.RARE, mage.cards.d.DireFleetDaredevil.class));
         cards.add(new SetCardInfo("Dire Fleet Ravager", 192, Rarity.MYTHIC, mage.cards.d.DireFleetRavager.class));
         cards.add(new SetCardInfo("Distant Melody", 154, Rarity.COMMON, mage.cards.d.DistantMelody.class));
+        cards.add(new SetCardInfo("Don Andres, the Renegade", 6, Rarity.MYTHIC, mage.cards.d.DonAndresTheRenegade.class));
         cards.add(new SetCardInfo("Drana, Liberator of Malakir", 193, Rarity.MYTHIC, mage.cards.d.DranaLiberatorOfMalakir.class));
         cards.add(new SetCardInfo("Drover of the Mighty", 239, Rarity.UNCOMMON, mage.cards.d.DroverOfTheMighty.class));
         cards.add(new SetCardInfo("Dusk Legion Sergeant", 80, Rarity.RARE, mage.cards.d.DuskLegionSergeant.class));
@@ -137,6 +138,7 @@ public final class LostCavernsOfIxalanCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Furycalm Snarl", 333, Rarity.RARE, mage.cards.f.FurycalmSnarl.class));
         cards.add(new SetCardInfo("Game Trail", 334, Rarity.RARE, mage.cards.g.GameTrail.class));
         cards.add(new SetCardInfo("Geier Reach Sanitarium", 335, Rarity.RARE, mage.cards.g.GeierReachSanitarium.class));
+        cards.add(new SetCardInfo("Gemcutter Buccaneer", 55, Rarity.RARE, mage.cards.g.GemcutterBuccaneer.class));
         cards.add(new SetCardInfo("Generous Gift", 128, Rarity.UNCOMMON, mage.cards.g.GenerousGift.class));
         cards.add(new SetCardInfo("Ghost of Ramirez DePietro", 157, Rarity.UNCOMMON, mage.cards.g.GhostOfRamirezDePietro.class));
         cards.add(new SetCardInfo("Glass-Cast Heart", 199, Rarity.RARE, mage.cards.g.GlassCastHeart.class));
@@ -279,7 +281,9 @@ public final class LostCavernsOfIxalanCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Temple of Silence", 358, Rarity.RARE, mage.cards.t.TempleOfSilence.class));
         cards.add(new SetCardInfo("Temple of the False God", 359, Rarity.UNCOMMON, mage.cards.t.TempleOfTheFalseGod.class));
         cards.add(new SetCardInfo("Terramorphic Expanse", 360, Rarity.COMMON, mage.cards.t.TerramorphicExpanse.class));
+        cards.add(new SetCardInfo("Tetzin, Gnome Champion", 13, Rarity.RARE, mage.cards.t.TetzinGnomeChampion.class));
         cards.add(new SetCardInfo("Thassa, God of the Sea", 176, Rarity.MYTHIC, mage.cards.t.ThassaGodOfTheSea.class));
+        cards.add(new SetCardInfo("The Golden-Gear Colossus", 13, Rarity.RARE, mage.cards.t.TheGoldenGearColossus.class));
         cards.add(new SetCardInfo("The Indomitable", 43, Rarity.RARE, mage.cards.t.TheIndomitable.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Indomitable", 75, Rarity.RARE, mage.cards.t.TheIndomitable.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Grim Captain's Locker", 82, Rarity.RARE, mage.cards.t.TheGrimCaptainsLocker.class));

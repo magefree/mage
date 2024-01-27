@@ -1,6 +1,7 @@
 package mage.abilities.effects;
 
 import mage.abilities.Ability;
+import mage.abilities.keyword.MenaceAbility;
 import mage.constants.*;
 import mage.counters.AbilityCounter;
 import mage.counters.BoostCounter;
@@ -9,14 +10,16 @@ import mage.game.permanent.Permanent;
 
 /**
  * @author BetaSteward_at_googlemail.com
+ * <p>
+ * Applies boost from from boost counters and also adds abilities from ability counters and suspected mechanic
  */
-public class ApplyCountersEffect extends ContinuousEffectImpl {
+public class ApplyStatusEffect extends ContinuousEffectImpl {
 
-    ApplyCountersEffect() {
+    ApplyStatusEffect() {
         super(Duration.EndOfGame, Outcome.BoostCreature);
     }
 
-    private ApplyCountersEffect(ApplyCountersEffect effect) {
+    private ApplyStatusEffect(ApplyStatusEffect effect) {
         super(effect);
     }
 
@@ -31,6 +34,9 @@ public class ApplyCountersEffect extends ContinuousEffectImpl {
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents()) {
                 for (AbilityCounter counter : permanent.getCounters(game).getAbilityCounters()) {
                     permanent.addAbility(counter.getAbility(), source == null ? permanent.getId() : source.getSourceId(), game);
+                }
+                if (permanent.isSuspected()) {
+                    permanent.addAbility(new MenaceAbility(false), source == null ? permanent.getId() : source.getSourceId(), game);
                 }
             }
         }
@@ -51,7 +57,7 @@ public class ApplyCountersEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public ApplyCountersEffect copy() {
-        return new ApplyCountersEffect(this);
+    public ApplyStatusEffect copy() {
+        return new ApplyStatusEffect(this);
     }
 }

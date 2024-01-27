@@ -15,10 +15,6 @@ public class DamageWithPowerFromSourceToAnotherTargetEffect extends OneShotEffec
 
     String sourceTargetName;
 
-    public DamageWithPowerFromSourceToAnotherTargetEffect() {
-        this("It");
-    }
-
     public DamageWithPowerFromSourceToAnotherTargetEffect(String sourceTargetName) {
         super(Outcome.Damage);
         this.sourceTargetName = sourceTargetName;
@@ -36,8 +32,8 @@ public class DamageWithPowerFromSourceToAnotherTargetEffect extends OneShotEffec
         }
 
         Permanent myPermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        Permanent anotherPermanent = game.getPermanent(source.getTargets().get(0).getFirstTarget());
-        Player anotherPlayer = game.getPlayer(source.getTargets().get(0).getFirstTarget());
+        Permanent anotherPermanent = game.getPermanent(source.getFirstTarget());
+        Player anotherPlayer = game.getPlayer(source.getFirstTarget());
 
         if (myPermanent != null && anotherPermanent != null) {
             anotherPermanent.damage(myPermanent.getPower().getValue(), myPermanent.getId(), source, game, false, true);
@@ -65,6 +61,7 @@ public class DamageWithPowerFromSourceToAnotherTargetEffect extends OneShotEffec
         }
 
         // It deals damage equal to its power to target creature you don't control
-        return this.sourceTargetName + " deals damage equal to its power to target " + mode.getTargets().get(0).getTargetName();
+        return sourceTargetName + " deals damage equal to its power to "
+                + getTargetPointer().describeTargets(mode.getTargets(), "that creature");
     }
 }

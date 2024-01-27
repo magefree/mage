@@ -39,7 +39,7 @@ public final class AngrathMinotaurPirate extends CardImpl {
 
         // +2: Angrath, Minotaur Pirate deals 1 damage to target opponent and each creature that player controls.
         LoyaltyAbility ability1 = new LoyaltyAbility(new DamageTargetEffect(1), +2);
-        ability1.addEffect(new DamageAllControlledTargetEffect(1, new FilterCreaturePermanent())
+        ability1.addEffect(new DamageAllControlledTargetEffect(1)
                 .setText("and each creature that player or that planeswalker's controller controls"));
         ability1.addTarget(new TargetOpponentOrPlaneswalker());
         this.addAbility(ability1);
