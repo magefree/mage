@@ -24,24 +24,14 @@ public class ConditionalActivatedAbility extends ActivatedAbilityImpl {
         this(Zone.BATTLEFIELD, effect, cost, condition);
     }
 
-    public ConditionalActivatedAbility(Effect effect, Cost cost, Condition condition, boolean showCondition) {
-        this(Zone.BATTLEFIELD, effect, cost, condition);
-        this.showCondition = showCondition;
-    }
-
     public ConditionalActivatedAbility(Zone zone, Effect effect, Cost cost, Condition condition) {
         super(zone, effect, cost);
         this.condition = condition;
     }
 
     public ConditionalActivatedAbility(Zone zone, Effect effect, Cost cost, Condition condition, String rule) {
-        this(zone, effect, cost, condition, rule, true);
-    }
-
-    public ConditionalActivatedAbility(Zone zone, Effect effect, Cost cost, Condition condition, String rule, boolean showCondition) {
         this(zone, effect, cost, condition);
         this.ruleText = rule;
-        this.showCondition = showCondition;
     }
 
     protected ConditionalActivatedAbility(final ConditionalActivatedAbility ability) {
@@ -61,6 +51,11 @@ public class ConditionalActivatedAbility extends ActivatedAbilityImpl {
     @Override
     public ConditionalActivatedAbility copy() {
         return new ConditionalActivatedAbility(this);
+    }
+
+    public ConditionalActivatedAbility hideCondition() {
+        this.showCondition = false;
+        return this;
     }
 
     @Override

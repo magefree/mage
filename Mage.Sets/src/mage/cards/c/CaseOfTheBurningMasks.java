@@ -65,7 +65,7 @@ public final class CaseOfTheBurningMasks extends CardImpl {
         Condition toSolveCondition = new CaseOfTheBurningMasksCondition();
         // Solved -- Sacrifice this Case: Exile the top three cards of your library. Choose one of them. You may play that card this turn.
         Ability solvedAbility = new ConditionalActivatedAbility(new CaseOfTheBurningMasksEffect(),
-                new SacrificeSourceCost(), SolvedSourceCondition.SOLVED, false);
+                new SacrificeSourceCost(), SolvedSourceCondition.SOLVED).hideCondition();
 
         this.addAbility(new CaseAbility(initialAbility, toSolveCondition, solvedAbility)
                 .addHint(CaseOfTheBurningMasksHint.instance),

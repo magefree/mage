@@ -22,7 +22,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.filter.FilterCard;
+import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
+import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -38,10 +40,11 @@ import mage.game.permanent.Permanent;
  */
 public final class CaseOfTheLockedHothouse extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("play lands and cast creature and enchantment spells");
+    private static final FilterPermanent filter = new FilterLandPermanent("You control seven or more lands");
+    private static final FilterCard filter2 = new FilterCard("play lands and cast creature and enchantment spells");
 
     static {
-        filter.add(Predicates.or(
+        filter2.add(Predicates.or(
                 CardType.LAND.getPredicate(),
                 CardType.CREATURE.getPredicate(),
                 CardType.ENCHANTMENT.getPredicate()
@@ -57,13 +60,12 @@ public final class CaseOfTheLockedHothouse extends CardImpl {
         Ability initialAbility = new SimpleStaticAbility(new PlayAdditionalLandsControllerEffect(1, Duration.WhileOnBattlefield));
         // To solve -- You control seven or more lands.
         Condition toSolveCondition = new PermanentsOnTheBattlefieldCondition(
-                StaticFilters.FILTER_LAND,
-                ComparisonType.MORE_THAN, 6, true);
+                filter, ComparisonType.MORE_THAN, 6, true);
         // Solved -- You may look at the top card of your library any time, and you may play lands and cast creature and enchantment spells from the top of your library.
         Ability solvedAbility = new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new LookAtTopCardOfLibraryAnyTimeEffect(), SolvedSourceCondition.SOLVED, ""));
         solvedAbility.addEffect(new ConditionalAsThoughEffect(
-                new PlayTheTopCardEffect(TargetController.YOU, filter, false),
+                new PlayTheTopCardEffect(TargetController.YOU, filter2, false),
                 SolvedSourceCondition.SOLVED)
                 .setText(", and you may play lands and cast creature and enchantment spells from the top of your library."));
 

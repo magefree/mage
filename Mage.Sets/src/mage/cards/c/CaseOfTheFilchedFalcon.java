@@ -24,7 +24,9 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.counters.CounterType;
+import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
+import mage.filter.common.FilterArtifactPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.TokenImpl;
@@ -36,6 +38,8 @@ import mage.target.TargetPermanent;
  */
 public final class CaseOfTheFilchedFalcon extends CardImpl {
 
+    private static final FilterPermanent filter = new FilterArtifactPermanent("You control three or more artifacts");
+
     public CaseOfTheFilchedFalcon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{U}");
 
@@ -45,11 +49,11 @@ public final class CaseOfTheFilchedFalcon extends CardImpl {
         Ability initialAbility = new EntersBattlefieldTriggeredAbility(new InvestigateEffect());
         // To solve -- You control three or more artifacts.
         Condition toSolveCondition = new PermanentsOnTheBattlefieldCondition(
-                StaticFilters.FILTER_PERMANENT_ARTIFACT, ComparisonType.MORE_THAN, 2, true);
+                filter, ComparisonType.MORE_THAN, 2, true);
         // Solved -- {2}{U}, Sacrifice this Case: Put four +1/+1 counters on target noncreature artifact. It becomes a 0/0 Bird creature with flying in addition to its other types.
         Ability solvedAbility = new ConditionalActivatedAbility(
                 new AddCountersTargetEffect(CounterType.P1P1.createInstance(4)),
-                new ManaCostsImpl<>("{2}{U}"), SolvedSourceCondition.SOLVED, false);
+                new ManaCostsImpl<>("{2}{U}"), SolvedSourceCondition.SOLVED).hideCondition();
         solvedAbility.addEffect(new BecomesCreatureTargetEffect(new CaseOfTheFilchedFalconToken(),
                 false, false, Duration.WhileOnBattlefield)
                 .setText("It becomes a 0/0 Bird creature with flying in addition to its other types"));
