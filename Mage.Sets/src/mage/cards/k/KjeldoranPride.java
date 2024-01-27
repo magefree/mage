@@ -28,7 +28,7 @@ public final class KjeldoranPride extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature other than enchanted creature");
 
     static {
-        filter.add(new AnotherEnchantedPredicate());
+        filter.add(AnotherEnchantedPredicate.instance);
     }
 
     public KjeldoranPride(UUID ownerId, CardSetInfo setInfo) {
