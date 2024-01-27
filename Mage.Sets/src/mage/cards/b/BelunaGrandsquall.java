@@ -13,7 +13,6 @@ import mage.cards.Cards;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterPermanentCard;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AdventurePredicate;
 import mage.game.Game;
 import mage.players.Player;
@@ -65,16 +64,6 @@ public final class BelunaGrandsquall extends AdventureCard {
 
 
 class SeekThrillsEffect extends OneShotEffect {
-
-    private static final FilterCard filter = new FilterCard("creature, enchantment, or land card");
-
-    static {
-        filter.add(Predicates.or(
-                CardType.CREATURE.getPredicate(),
-                CardType.ENCHANTMENT.getPredicate(),
-                CardType.LAND.getPredicate()
-        ));
-    }
 
     SeekThrillsEffect() {
         super(Outcome.Benefit);
