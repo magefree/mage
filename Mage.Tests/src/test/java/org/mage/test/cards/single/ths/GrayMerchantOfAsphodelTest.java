@@ -18,14 +18,14 @@ public class GrayMerchantOfAsphodelTest extends CardTestMultiPlayerBase {
         addCard(Zone.HAND, playerA, gary, 2);
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 10);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, gary); // 2 life lost, total 8 gained
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, gary); // 2 life lost, 4 gained
 
         checkLife("", 1, PhaseStep.BEGIN_COMBAT, playerB, 18);
         checkLife("", 1, PhaseStep.BEGIN_COMBAT, playerC, 20); // not in range
         checkLife("", 1, PhaseStep.BEGIN_COMBAT, playerD, 18);
         checkLife("", 1, PhaseStep.BEGIN_COMBAT, playerA, 24);
 
-        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, gary); // 4 life lost, total 8 gained
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, gary); // 4 life lost, 8 gained
 
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.UPKEEP);
