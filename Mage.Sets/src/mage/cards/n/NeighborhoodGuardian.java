@@ -11,6 +11,7 @@ import mage.constants.ComparisonType;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -24,6 +25,7 @@ public final class NeighborhoodGuardian extends CardImpl {
     private static final FilterPermanent filter = new FilterCreaturePermanent("another creature with power 2 or less");
 
     static {
+        filter.add(AnotherPredicate.instance);
         filter.add(new PowerPredicate(ComparisonType.FEWER_THAN, 3));
     }
 

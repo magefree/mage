@@ -45,7 +45,7 @@ public final class BarbedServitor extends CardImpl {
         this.addAbility(ability);
 
         // Whenever Barbed Servitor is dealt damage, target opponent loses that much life.
-        ability = new DealtDamageToSourceTriggeredAbility(new LoseLifeTargetEffect(SavedDamageValue.MUCH), true);
+        ability = new DealtDamageToSourceTriggeredAbility(new LoseLifeTargetEffect(SavedDamageValue.MUCH), false);
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }
