@@ -193,6 +193,7 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Thinking Cap", 257, Rarity.COMMON, mage.cards.t.ThinkingCap.class));
         cards.add(new SetCardInfo("Thundering Falls", 269, Rarity.RARE, mage.cards.t.ThunderingFalls.class));
         cards.add(new SetCardInfo("Topiary Panther", 179, Rarity.COMMON, mage.cards.t.TopiaryPanther.class));
+        cards.add(new SetCardInfo("Torch the Witness", 146, Rarity.UNCOMMON, mage.cards.t.TorchTheWitness.class));
         cards.add(new SetCardInfo("Toxin Analysis", 107, Rarity.COMMON, mage.cards.t.ToxinAnalysis.class));
         cards.add(new SetCardInfo("Treacherous Greed", 237, Rarity.RARE, mage.cards.t.TreacherousGreed.class));
         cards.add(new SetCardInfo("Trostani, Three Whispers", 238, Rarity.MYTHIC, mage.cards.t.TrostaniThreeWhispers.class));
