@@ -48,6 +48,7 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Burden of Proof", 42, Rarity.UNCOMMON, mage.cards.b.BurdenOfProof.class));
         cards.add(new SetCardInfo("Candlestick", 43, Rarity.UNCOMMON, mage.cards.c.Candlestick.class));
         cards.add(new SetCardInfo("Caught Red-Handed", 115, Rarity.UNCOMMON, mage.cards.c.CaughtRedHanded.class));
+        cards.add(new SetCardInfo("Cease // Desist", 246, Rarity.UNCOMMON, mage.cards.c.CeaseDesist.class));
         cards.add(new SetCardInfo("Cerebral Confiscation", 81, Rarity.COMMON, mage.cards.c.CerebralConfiscation.class));
         cards.add(new SetCardInfo("Chalk Outline", 157, Rarity.UNCOMMON, mage.cards.c.ChalkOutline.class));
         cards.add(new SetCardInfo("Clandestine Meddler", 82, Rarity.UNCOMMON, mage.cards.c.ClandestineMeddler.class));
