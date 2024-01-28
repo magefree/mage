@@ -18,10 +18,11 @@ import mage.players.Player;
  */
 public class CollectEvidenceAbility extends StaticAbility implements OptionalAdditionalSourceCosts {
 
-    private static final String promptString = "Collect evidence";
+    private static final String promptString = "Collect evidence ";
     private static final String keywordText = "As an additional cost to cast this spell, you may collect evidence ";
     private static final String reminderText = "Exile cards with total mana value $$$ or greater from your graveyard";
     private final String rule;
+    private final int amount;
 
     public static final String COLLECT_EVIDENCE_ACTIVATION_VALUE_KEY = "collectEvidenceActivation";
 
@@ -45,12 +46,14 @@ public class CollectEvidenceAbility extends StaticAbility implements OptionalAdd
         this.rule = additionalCost.getName() + ' ' + additionalCost.getReminderText();
         this.setRuleAtTheTop(true);
         this.addHint(hint);
+        this.amount = amount;
     }
 
     private CollectEvidenceAbility(final CollectEvidenceAbility ability) {
         super(ability);
         this.rule = ability.rule;
         this.additionalCost = ability.additionalCost.copy();
+        this.amount = ability.amount;
     }
 
     @Override
@@ -77,7 +80,7 @@ public class CollectEvidenceAbility extends StaticAbility implements OptionalAdd
 
         this.resetCost();
         boolean canPay = additionalCost.canPay(ability, this, ability.getControllerId(), game);
-        if (!canPay || !player.chooseUse(Outcome.Exile, promptString, ability, game)) {
+        if (!canPay || !player.chooseUse(Outcome.Exile, promptString + amount + '?', ability, game)) {
             return;
         }
 
