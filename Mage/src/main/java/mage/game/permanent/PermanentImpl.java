@@ -1922,17 +1922,18 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public boolean solve(Game game, Ability source) {
+        if (this.solved) {
+            return false;
+        }
         GameEvent event = new GameEvent(GameEvent.EventType.SOLVE_CASE, getId(),
                 source, source.getControllerId());
         if (game.replaceEvent(event)) {
             return false;
         }
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (controller == null || permanent == null) {
-            return false;
+        if (controller != null) {
+            game.informPlayers(controller.getLogName() + " solves " + this.getLogName());
         }
-        game.informPlayers(controller.getLogName() + " solves " + permanent.getLogName());
 
         this.solved = true;
         game.fireEvent(new GameEvent(EventType.CASE_SOLVED, getId(), source,

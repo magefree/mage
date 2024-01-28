@@ -17,7 +17,7 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.hint.Hint;
+import mage.abilities.hint.common.CaseSolvedHint;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
@@ -60,15 +60,14 @@ public final class CaseOfTheBurningMasks extends CardImpl {
         Ability initialAbility = new EntersBattlefieldTriggeredAbility(
                 new DamageTargetEffect(3, "it"));
         initialAbility.addTarget(new TargetOpponentsCreaturePermanent());
-        initialAbility.addTarget(new TargetOpponentsCreaturePermanent());
         // To solve -- Three or more sources you controlled dealt damage this turn.
         Condition toSolveCondition = new CaseOfTheBurningMasksCondition();
         // Solved -- Sacrifice this Case: Exile the top three cards of your library. Choose one of them. You may play that card this turn.
         Ability solvedAbility = new ConditionalActivatedAbility(new CaseOfTheBurningMasksEffect(),
-                new SacrificeSourceCost(), SolvedSourceCondition.SOLVED).hideCondition();
+                new SacrificeSourceCost(), SolvedSourceCondition.SOLVED);
 
         this.addAbility(new CaseAbility(initialAbility, toSolveCondition, solvedAbility)
-                .addHint(CaseOfTheBurningMasksHint.instance),
+                .addHint(new CaseOfTheBurningMasksHint(toSolveCondition)),
                 new CaseOfTheBurningMasksWatcher());
     }
 
@@ -96,8 +95,15 @@ class CaseOfTheBurningMasksCondition implements Condition {
     }
 }
 
-enum CaseOfTheBurningMasksHint implements Hint {
-    instance;
+class CaseOfTheBurningMasksHint extends CaseSolvedHint {
+
+    CaseOfTheBurningMasksHint(Condition condition) {
+        super(condition);
+    }
+
+    private CaseOfTheBurningMasksHint(final CaseOfTheBurningMasksHint hint) {
+        super(hint);
+    }
 
     @Override
     public CaseOfTheBurningMasksHint copy() {
@@ -105,24 +111,11 @@ enum CaseOfTheBurningMasksHint implements Hint {
     }
 
     @Override
-    public String getText(Game game, Ability ability) {
-        Permanent permanent = game.getPermanent(ability.getSourceId());
-        if (permanent == null) {
-            return "";
-        }
-        if (permanent.isSolved()) {
-            return "Case is solved";
-        }
+    public String getConditionText(Game game, Ability ability, Permanent permanent) {
         int sources = game.getState()
                 .getWatcher(CaseOfTheBurningMasksWatcher.class)
                 .damagingCountByController(ability.getControllerId());
-        StringBuilder sb = new StringBuilder("Case is unsolved. Sources that dealt damage this turn: ");
-        sb.append(sources);
-        sb.append(" (need 3).");
-        if (sources > 2 && game.isActivePlayer(ability.getControllerId())) {
-            sb.append(" Case will be solved at the end step.");
-        }
-        return sb.toString();
+        return "Sources that dealt damage: " + sources + " (need 3).";
     }
 }
 
@@ -132,7 +125,7 @@ class CaseOfTheBurningMasksWatcher extends Watcher {
 
     CaseOfTheBurningMasksWatcher() {
         super(WatcherScope.GAME);
-        this.damagingObjects = new HashMap<>(0);
+        this.damagingObjects = new HashMap<>();
     }
 
     @Override
@@ -141,9 +134,8 @@ class CaseOfTheBurningMasksWatcher extends Watcher {
             case DAMAGED_PERMANENT:
             case DAMAGED_PLAYER: {
                 MageObjectReference damageSourceRef = new MageObjectReference(event.getSourceId(), game);
-                Set<MageObjectReference> mors = damagingObjects.getOrDefault(game.getControllerId(event.getSourceId()), new HashSet<>());
+                Set<MageObjectReference> mors = damagingObjects.computeIfAbsent(game.getControllerId(event.getSourceId()), k -> new HashSet<>());
                 mors.add(damageSourceRef);
-                damagingObjects.put(game.getControllerId(event.getSourceId()), mors);
             }
         }
     }

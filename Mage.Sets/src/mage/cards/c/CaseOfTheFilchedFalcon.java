@@ -15,7 +15,7 @@ import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.common.continuous.BecomesCreatureTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.effects.keyword.InvestigateEffect;
-import mage.abilities.hint.Hint;
+import mage.abilities.hint.common.CaseSolvedHint;
 import mage.abilities.keyword.FlyingAbility;
 import mage.constants.ComparisonType;
 import mage.constants.Duration;
@@ -53,7 +53,7 @@ public final class CaseOfTheFilchedFalcon extends CardImpl {
         // Solved -- {2}{U}, Sacrifice this Case: Put four +1/+1 counters on target noncreature artifact. It becomes a 0/0 Bird creature with flying in addition to its other types.
         Ability solvedAbility = new ConditionalActivatedAbility(
                 new AddCountersTargetEffect(CounterType.P1P1.createInstance(4)),
-                new ManaCostsImpl<>("{2}{U}"), SolvedSourceCondition.SOLVED).hideCondition();
+                new ManaCostsImpl<>("{2}{U}"), SolvedSourceCondition.SOLVED);
         solvedAbility.addEffect(new BecomesCreatureTargetEffect(new CaseOfTheFilchedFalconToken(),
                 false, false, Duration.WhileOnBattlefield)
                 .setText("It becomes a 0/0 Bird creature with flying in addition to its other types"));
@@ -61,7 +61,7 @@ public final class CaseOfTheFilchedFalcon extends CardImpl {
         solvedAbility.addTarget(new TargetPermanent(StaticFilters.FILTER_ARTIFACT_NON_CREATURE));
 
         this.addAbility(new CaseAbility(initialAbility, toSolveCondition, solvedAbility)
-                .addHint(CaseOfTheFilchedFalconHint.instance));
+                .addHint(new CaseOfTheFilchedFalconHint(toSolveCondition)));
     }
 
     private CaseOfTheFilchedFalcon(final CaseOfTheFilchedFalcon card) {
@@ -74,33 +74,27 @@ public final class CaseOfTheFilchedFalcon extends CardImpl {
     }
 }
 
-enum CaseOfTheFilchedFalconHint implements Hint {
-    instance;
+class CaseOfTheFilchedFalconHint extends CaseSolvedHint {
 
-    @Override
-    public CaseOfTheFilchedFalconHint copy() {
-        return this;
+    CaseOfTheFilchedFalconHint(Condition condition) {
+        super(condition);
+    }
+
+    private CaseOfTheFilchedFalconHint(final CaseOfTheFilchedFalconHint hint) {
+        super(hint);
     }
 
     @Override
-    public String getText(Game game, Ability ability) {
-        Permanent permanent = game.getPermanent(ability.getSourceId());
-        if (permanent == null) {
-            return "";
-        }
-        if (permanent.isSolved()) {
-            return "Case is solved";
-        }
+    public CaseOfTheFilchedFalconHint copy() {
+        return new CaseOfTheFilchedFalconHint(this);
+    }
+
+    @Override
+    public String getConditionText(Game game, Ability ability, Permanent permanent) {
         int artifacts = game.getBattlefield()
-                .count(StaticFilters.FILTER_PERMANENT_ARTIFACT, ability.getControllerId(),
+                .count(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT, ability.getControllerId(),
                         ability, game);
-        StringBuilder sb = new StringBuilder("Case is unsolved. Artifacts: ");
-        sb.append(artifacts);
-        sb.append(" (need 3).");
-        if (artifacts > 2 && game.isActivePlayer(ability.getControllerId())) {
-            sb.append(" Case will be solved at the end step.");
-        }
-        return sb.toString();
+        return "Artifacts: " + artifacts + " (need 3).";
     }
 }
 

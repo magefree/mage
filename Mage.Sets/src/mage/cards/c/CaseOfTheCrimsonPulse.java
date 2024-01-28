@@ -13,7 +13,7 @@ import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.discard.DiscardControllerEffect;
 import mage.abilities.effects.common.discard.DiscardHandControllerEffect;
-import mage.abilities.hint.Hint;
+import mage.abilities.hint.common.CaseSolvedHint;
 import mage.constants.ComparisonType;
 import mage.constants.SubType;
 import mage.cards.CardImpl;
@@ -49,10 +49,10 @@ public final class CaseOfTheCrimsonPulse extends CardImpl {
         Ability solvedAbility = new ConditionalTriggeredAbility(new BeginningOfUpkeepTriggeredAbility(
                 new DiscardHandControllerEffect(), TargetController.YOU, false),
                 SolvedSourceCondition.SOLVED, null);
-        solvedAbility.addEffect(new DrawCardSourceControllerEffect(2).setText(", then draw two cards."));
+        solvedAbility.addEffect(new DrawCardSourceControllerEffect(2).concatBy(", then"));
 
         this.addAbility(new CaseAbility(initialAbility, toSolveCondition, solvedAbility)
-                .addHint(CaseOfTheCrimsonPulseHint.instance));
+                .addHint(new CaseOfTheCrimsonPulseHint(toSolveCondition)));
     }
 
     private CaseOfTheCrimsonPulse(final CaseOfTheCrimsonPulse card) {
@@ -65,8 +65,15 @@ public final class CaseOfTheCrimsonPulse extends CardImpl {
     }
 }
 
-enum CaseOfTheCrimsonPulseHint implements Hint {
-    instance;
+class CaseOfTheCrimsonPulseHint extends CaseSolvedHint {
+
+    CaseOfTheCrimsonPulseHint(Condition condition) {
+        super(condition);
+    }
+
+    private CaseOfTheCrimsonPulseHint(final CaseOfTheCrimsonPulseHint hint) {
+        super(hint);
+    }
 
     @Override
     public CaseOfTheCrimsonPulseHint copy() {
@@ -74,23 +81,12 @@ enum CaseOfTheCrimsonPulseHint implements Hint {
     }
 
     @Override
-    public String getText(Game game, Ability ability) {
-        Permanent permanent = game.getPermanent(ability.getSourceId());
-        Player controller = game.getPlayer(ability.getControllerId());
-        if (permanent == null || controller == null) {
+    public String getConditionText(Game game, Ability ability, Permanent permanent) {
+        Player controller = game.getPlayer(permanent.getControllerId());
+        if (controller == null) {
             return "";
         }
-
-        if (permanent.isSolved()) {
-            return "Case is solved";
-        }
         int handSize = controller.getHand().size();
-        StringBuilder sb = new StringBuilder("Case is unsolved. Cards in hand: ");
-        sb.append(handSize);
-        sb.append(" (need 0).");
-        if (handSize == 0 && game.isActivePlayer(ability.getControllerId())) {
-            sb.append(" Case will be solved at the end step.");
-        }
-        return sb.toString();
+        return "Cards in hand: " + handSize + " (need 0).";
     }
 }

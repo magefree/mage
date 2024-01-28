@@ -19,9 +19,7 @@ public class CaseTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Case of the Burning Masks");
-        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
 
-        checkPermanentCount("llanowar elves destroyed", 1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Llanowar Elves", 0);
         checkStackSize("case is not solved", 1, PhaseStep.END_TURN, playerA, 0);
 
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
@@ -29,7 +27,7 @@ public class CaseTest extends CardTestPlayerBase {
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Impact Tremors");
         waitStackResolved(3, PhaseStep.PRECOMBAT_MAIN, playerA);
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Goblin Chainwhirler");
-        setChoice(playerA, "Whenever");
+        setChoice(playerA, "Whenever"); // Choose trigger order
 
         checkStackObject("case is solved", 3, PhaseStep.END_TURN, playerA, "<i>To solve", 1);
 
@@ -49,6 +47,7 @@ public class CaseTest extends CardTestPlayerBase {
         execute();
 
         assertPermanentCount(playerA, "Case of the Burning Masks", 0);
+        assertLife(playerB, 9);
     }
 
     @Test

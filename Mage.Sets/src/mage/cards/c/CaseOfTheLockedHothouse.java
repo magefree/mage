@@ -13,7 +13,7 @@ import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.LookAtTopCardOfLibraryAnyTimeEffect;
 import mage.abilities.effects.common.continuous.PlayAdditionalLandsControllerEffect;
 import mage.abilities.effects.common.continuous.PlayTheTopCardEffect;
-import mage.abilities.hint.Hint;
+import mage.abilities.hint.common.CaseSolvedHint;
 import mage.constants.ComparisonType;
 import mage.constants.Duration;
 import mage.constants.SubType;
@@ -70,7 +70,7 @@ public final class CaseOfTheLockedHothouse extends CardImpl {
                 .setText(", and you may play lands and cast creature and enchantment spells from the top of your library."));
 
         this.addAbility(new CaseAbility(initialAbility, toSolveCondition, solvedAbility)
-                .addHint(CaseOfTheLockedHothouseHint.instance));
+                .addHint(new CaseOfTheLockedHothouseHint(toSolveCondition)));
     }
 
     private CaseOfTheLockedHothouse(final CaseOfTheLockedHothouse card) {
@@ -83,32 +83,26 @@ public final class CaseOfTheLockedHothouse extends CardImpl {
     }
 }
 
-enum CaseOfTheLockedHothouseHint implements Hint {
-    instance;
+class CaseOfTheLockedHothouseHint extends CaseSolvedHint {
 
-    @Override
-    public CaseOfTheLockedHothouseHint copy() {
-        return this;
+    CaseOfTheLockedHothouseHint(Condition condition) {
+        super(condition);
+    }
+
+    private CaseOfTheLockedHothouseHint(final CaseOfTheLockedHothouseHint hint) {
+        super(hint);
     }
 
     @Override
-    public String getText(Game game, Ability ability) {
-        Permanent permanent = game.getPermanent(ability.getSourceId());
-        if (permanent == null) {
-            return "";
-        }
-        if (permanent.isSolved()) {
-            return "Case is solved";
-        }
+    public CaseOfTheLockedHothouseHint copy() {
+        return new CaseOfTheLockedHothouseHint(this);
+    }
+
+    @Override
+    public String getConditionText(Game game, Ability ability, Permanent permanent) {
         int lands = game.getBattlefield()
-                .count(StaticFilters.FILTER_LAND, ability.getControllerId(),
+                .count(StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND, ability.getControllerId(),
                         ability, game);
-        StringBuilder sb = new StringBuilder("Case is unsolved. Lands: ");
-        sb.append(lands);
-        sb.append(" (need 7).");
-        if (lands > 6 && game.isActivePlayer(ability.getControllerId())) {
-            sb.append(" Case will be solved at the end step.");
-        }
-        return sb.toString();
+        return "Lands: " + lands + " (need 7).";
     }
 }

@@ -4,6 +4,11 @@ import mage.abilities.Ability;
 import mage.abilities.condition.CompoundCondition;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.SolvedSourceCondition;
+import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.decorator.ConditionalAsThoughEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
@@ -45,6 +50,25 @@ import mage.util.CardUtil;
  */
 public class CaseAbility extends SimpleStaticAbility {
 
+    /**
+     * Constructs a Case with three abilities:
+     * <ul>
+     *     <li>A initial ability the Case has at all times</li>
+     *     <li>A "To solve" ability that will conditionally solve the Case
+     *     at the beginning of the controller's end step</li>
+     *     <li>A "Solved" ability the Case has when solved</li>
+     * </ul>
+     * The "Solved" ability must be one of the following:
+     * <ul>
+     *     <li>{@link ConditionalActivatedAbility} using the condition {@link SolvedSourceCondition}.SOLVED</li>
+     *     <li>{@link ConditionalTriggeredAbility} using the condition {@link SolvedSourceCondition}.SOLVED</li>
+     *     <li>{@link SimpleStaticAbility} with only {@link ConditionalAsThoughEffect} or {@link ConditionalContinuousEffect} effects</li>
+     * </ul>
+     *
+     * @param initialAbility The ability that a Case has at all times
+     * @param toSolveCondition The condition to be checked when solving
+     * @param solvedAbility The ability that a solved Case has
+     */
     public CaseAbility(Ability initialAbility, Condition toSolveCondition, Ability solvedAbility) {
         super(Zone.ALL, null);
 
@@ -52,6 +76,22 @@ public class CaseAbility extends SimpleStaticAbility {
 
         addSubAbility(new CaseSolveAbility(toSolveCondition));
 
+        if (solvedAbility instanceof ConditionalActivatedAbility) {
+            ((ConditionalActivatedAbility) solvedAbility).hideCondition();
+        } else if (!(solvedAbility instanceof ConditionalTriggeredAbility)) {
+            if (solvedAbility instanceof SimpleStaticAbility) {
+                for (Effect effect : solvedAbility.getEffects()) {
+                    if (!(effect instanceof ConditionalContinuousEffect ||
+                            effect instanceof ConditionalAsThoughEffect)) {
+                        throw new IllegalArgumentException("solvedAbility must be one of ConditionalActivatedAbility, " +
+                                "ConditionalTriggeredAbility, or StaticAbility with conditional effects.");
+                    }
+                }
+            } else {
+                throw new IllegalArgumentException("solvedAbility must be one of ConditionalActivatedAbility, " +
+                        "ConditionalTriggeredAbility, or StaticAbility with conditional effects.");
+            }
+        }
         addSubAbility(solvedAbility.withNameReplacement("this Case")
                 .withFlavorWord("Solved"));
     }
@@ -76,7 +116,7 @@ class CaseSolveAbility extends BeginningOfEndStepTriggeredAbility {
     CaseSolveAbility(Condition condition) {
         super(new SolveEffect(), TargetController.YOU,
                 new CompoundCondition(condition, SolvedSourceCondition.UNSOLVED), false);
-        withFlavorWord("To solve &mdash; ");
+        withFlavorWord("To solve");
         setTriggerPhrase(CardUtil.getTextWithFirstCharUpperCase(removeIf(condition.toString())));
     }
 
