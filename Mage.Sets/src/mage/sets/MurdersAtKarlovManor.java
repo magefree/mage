@@ -83,6 +83,7 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Fae Flight", 56, Rarity.UNCOMMON, mage.cards.f.FaeFlight.class));
         cards.add(new SetCardInfo("Faerie Snoop", 203, Rarity.COMMON, mage.cards.f.FaerieSnoop.class));
         cards.add(new SetCardInfo("Fanatical Strength", 159, Rarity.COMMON, mage.cards.f.FanaticalStrength.class));
+        cards.add(new SetCardInfo("Felonious Rage", 125, Rarity.COMMON, mage.cards.f.FeloniousRage.class));
         cards.add(new SetCardInfo("Festerleech", 85, Rarity.UNCOMMON, mage.cards.f.Festerleech.class));
         cards.add(new SetCardInfo("Forensic Researcher", 58, Rarity.UNCOMMON, mage.cards.f.ForensicResearcher.class));
         cards.add(new SetCardInfo("Forest", 276, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
