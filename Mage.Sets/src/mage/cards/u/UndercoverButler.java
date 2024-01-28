@@ -51,7 +51,7 @@ class UndercoverButlerAbility extends TriggeredAbilityImpl {
 
     UndercoverButlerAbility() {
         super(Zone.BATTLEFIELD, new CantBeBlockedSourceEffect(Duration.EndOfTurn), false);
-        setTriggerPhrase("Whenever {this} attacks the player with the most life or tied for the most life, ");
+        setTriggerPhrase("Whenever {this} attacks the player with the most life or tied for most life, ");
     }
 
     private UndercoverButlerAbility(final UndercoverButlerAbility ability) {

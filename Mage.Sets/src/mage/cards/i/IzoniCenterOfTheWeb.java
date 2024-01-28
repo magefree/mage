@@ -17,7 +17,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.filter.StaticFilters;
+import mage.filter.FilterPermanent;
+import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.IzoniSpiderToken;
 
 import java.util.UUID;
@@ -26,6 +27,11 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class IzoniCenterOfTheWeb extends CardImpl {
+
+    private static final FilterPermanent filter = new FilterPermanent("tokens");
+    static {
+        filter.add(TokenPredicate.TRUE);
+    }
 
     public IzoniCenterOfTheWeb(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{G}");
@@ -48,7 +54,7 @@ public final class IzoniCenterOfTheWeb extends CardImpl {
         // Sacrifice four tokens: Surveil 2, then draw two cards. You gain 2 life.
         Ability ability = new SimpleActivatedAbility(
                 new SurveilEffect(2, false),
-                new SacrificeTargetCost(4, StaticFilters.FILTER_PERMANENT_TOKEN)
+                new SacrificeTargetCost(4, filter)
         );
         ability.addEffect(new DrawCardSourceControllerEffect(2).concatBy(", then"));
         ability.addEffect(new GainLifeEffect(2));

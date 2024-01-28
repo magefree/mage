@@ -30,7 +30,7 @@ public final class Festerleech extends CardImpl {
 
         // Whenever Festerleech deals combat damage to a player, you mill two cards.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
-                new MillCardsControllerEffect(2), false
+                new MillCardsControllerEffect(2).setText("you mill two cards"), false
         ));
 
         // {1}{B}: Festerleech gets +2/+2 until end of turn. Activate only once each turn.

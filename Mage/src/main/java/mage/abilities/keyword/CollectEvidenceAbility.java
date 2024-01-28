@@ -43,7 +43,7 @@ public class CollectEvidenceAbility extends StaticAbility implements OptionalAdd
     public CollectEvidenceAbility(int amount) {
         super(Zone.STACK, null);
         this.additionalCost = makeCost(amount);
-        this.rule = additionalCost.getName() + ' ' + additionalCost.getReminderText();
+        this.rule = additionalCost.getName() + ". " + additionalCost.getReminderText();
         this.setRuleAtTheTop(true);
         this.addHint(hint);
         this.amount = amount;
