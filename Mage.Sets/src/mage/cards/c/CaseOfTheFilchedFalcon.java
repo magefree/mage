@@ -46,7 +46,8 @@ public final class CaseOfTheFilchedFalcon extends CardImpl {
         this.subtype.add(SubType.CASE);
 
         // When this Case enters the battlefield, investigate.
-        Ability initialAbility = new EntersBattlefieldTriggeredAbility(new InvestigateEffect());
+        Ability initialAbility = new EntersBattlefieldTriggeredAbility(new InvestigateEffect())
+                .setTriggerPhrase("When this Case enters the battlefield, ");
         // To solve -- You control three or more artifacts.
         Condition toSolveCondition = new PermanentsOnTheBattlefieldCondition(
                 filter, ComparisonType.MORE_THAN, 2, true);
@@ -57,7 +58,7 @@ public final class CaseOfTheFilchedFalcon extends CardImpl {
         solvedAbility.addEffect(new BecomesCreatureTargetEffect(new CaseOfTheFilchedFalconToken(),
                 false, false, Duration.WhileOnBattlefield)
                 .setText("It becomes a 0/0 Bird creature with flying in addition to its other types"));
-        solvedAbility.addCost(new SacrificeSourceCost());
+        solvedAbility.addCost(new SacrificeSourceCost().setText("sacrifice this Case"));
         solvedAbility.addTarget(new TargetPermanent(StaticFilters.FILTER_ARTIFACT_NON_CREATURE));
 
         this.addAbility(new CaseAbility(initialAbility, toSolveCondition, solvedAbility)

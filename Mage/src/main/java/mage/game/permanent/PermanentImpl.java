@@ -1932,7 +1932,8 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         }
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            game.informPlayers(controller.getLogName() + " solves " + this.getLogName());
+            game.informPlayers(controller.getLogName() + " solved " + this.getLogName() +
+                    CardUtil.getSourceLogName(game, source));
         }
 
         this.solved = true;

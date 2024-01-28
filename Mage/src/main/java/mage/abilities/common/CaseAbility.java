@@ -72,7 +72,7 @@ public class CaseAbility extends SimpleStaticAbility {
     public CaseAbility(Ability initialAbility, Condition toSolveCondition, Ability solvedAbility) {
         super(Zone.ALL, null);
 
-        addSubAbility(initialAbility.withNameReplacement("this Case"));
+        addSubAbility(initialAbility);
 
         addSubAbility(new CaseSolveAbility(toSolveCondition));
 
@@ -92,8 +92,7 @@ public class CaseAbility extends SimpleStaticAbility {
                         "ConditionalTriggeredAbility, or StaticAbility with conditional effects.");
             }
         }
-        addSubAbility(solvedAbility.withNameReplacement("this Case")
-                .withFlavorWord("Solved"));
+        addSubAbility(solvedAbility.withFlavorWord("Solved"));
     }
 
     protected CaseAbility(final CaseAbility ability) {

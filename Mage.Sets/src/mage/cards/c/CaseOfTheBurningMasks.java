@@ -58,13 +58,14 @@ public final class CaseOfTheBurningMasks extends CardImpl {
 
         // When this Case enters the battlefield, it deals 3 damage to target creature an opponent controls.
         Ability initialAbility = new EntersBattlefieldTriggeredAbility(
-                new DamageTargetEffect(3, "it"));
+                new DamageTargetEffect(3, "it"))
+                .setTriggerPhrase("When this Case enters the battlefield, ");
         initialAbility.addTarget(new TargetOpponentsCreaturePermanent());
         // To solve -- Three or more sources you controlled dealt damage this turn.
         Condition toSolveCondition = new CaseOfTheBurningMasksCondition();
         // Solved -- Sacrifice this Case: Exile the top three cards of your library. Choose one of them. You may play that card this turn.
         Ability solvedAbility = new ConditionalActivatedAbility(new CaseOfTheBurningMasksEffect(),
-                new SacrificeSourceCost(), SolvedSourceCondition.SOLVED);
+                new SacrificeSourceCost().setText("sacrifice this Case"), SolvedSourceCondition.SOLVED);
 
         this.addAbility(new CaseAbility(initialAbility, toSolveCondition, solvedAbility)
                 .addHint(new CaseOfTheBurningMasksHint(toSolveCondition)),
