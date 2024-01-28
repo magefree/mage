@@ -108,7 +108,7 @@ class CaseOfTheBurningMasksHint extends CaseSolvedHint {
 
     @Override
     public CaseOfTheBurningMasksHint copy() {
-        return this;
+        return new CaseOfTheBurningMasksHint(this);
     }
 
     @Override
