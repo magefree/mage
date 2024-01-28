@@ -38,7 +38,7 @@ public final class MassacreGirlKnownKiller extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Creatures you control have wither.
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
