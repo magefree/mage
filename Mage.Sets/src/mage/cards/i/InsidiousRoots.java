@@ -37,7 +37,7 @@ public final class InsidiousRoots extends CardImpl {
 
         // Whenever one or more creature cards leave your graveyard, create a 0/1 green Plant creature token, then put a +1/+1 counter on each Plant you control.
         Ability ability = new CardsLeaveGraveyardTriggeredAbility(
-                new CreateTokenEffect(new PlantToken()), StaticFilters.FILTER_CARD_CREATURE
+                new CreateTokenEffect(new PlantToken()), StaticFilters.FILTER_CARD_CREATURES
         );
         ability.addEffect(new AddCountersAllEffect(
                 CounterType.P1P1.createInstance(), filter

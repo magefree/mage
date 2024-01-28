@@ -23,7 +23,7 @@ import java.util.UUID;
 public final class PrivateEye extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.DETECTIVE, "Detectives");
-    private static final FilterPermanent filter2 = new FilterPermanent(SubType.DETECTIVE, "Deteective");
+    private static final FilterPermanent filter2 = new FilterPermanent(SubType.DETECTIVE, "Detective");
 
     public PrivateEye(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{U}");
