@@ -62,7 +62,6 @@ public abstract class AbilityImpl implements Ability {
     protected Modes modes; // access to it by GetModes only (it can be overridden by some abilities)
     protected Zone zone;
     protected String name;
-    protected String nameReplacement;
     protected AbilityWord abilityWord;
     protected String flavorWord;
     protected boolean usesStack = true;
@@ -105,7 +104,6 @@ public abstract class AbilityImpl implements Ability {
         this.sourceId = ability.sourceId;
         this.zone = ability.zone;
         this.name = ability.name;
-        this.nameReplacement = ability.nameReplacement;
         this.usesStack = ability.usesStack;
         this.manaCosts = ability.manaCosts.copy();
         this.manaCostsToPay = ability.manaCostsToPay.copy();
@@ -847,9 +845,6 @@ public abstract class AbilityImpl implements Ability {
         if (appendToRule != null) {
             rule = rule.concat(appendToRule);
         }
-        if (nameReplacement != null) {
-            rule = rule.replace("{this}", nameReplacement);
-        }
         return rule;
     }
 
@@ -1118,12 +1113,6 @@ public abstract class AbilityImpl implements Ability {
     @Override
     public UUID getOriginalId() {
         return this.originalId;
-    }
-
-    @Override
-    public Ability withNameReplacement(String nameReplacement) {
-        this.nameReplacement = nameReplacement;
-        return this;
     }
 
     @Override
