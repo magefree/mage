@@ -32,7 +32,6 @@ import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInExile;
@@ -110,7 +109,7 @@ class CaseOfTheBurningMasksHint extends CaseSolvedHint {
     }
 
     @Override
-    public String getConditionText(Game game, Ability ability, Permanent permanent) {
+    public String getConditionText(Game game, Ability ability) {
         int sources = game.getState()
                 .getWatcher(CaseOfTheBurningMasksWatcher.class)
                 .damagingCountByController(ability.getControllerId());

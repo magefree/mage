@@ -27,7 +27,6 @@ import mage.filter.StaticFilters;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 
 /**
  * Case of the Locked Hothouse {3}{G}
@@ -99,7 +98,7 @@ class CaseOfTheLockedHothouseHint extends CaseSolvedHint {
     }
 
     @Override
-    public String getConditionText(Game game, Ability ability, Permanent permanent) {
+    public String getConditionText(Game game, Ability ability) {
         int lands = game.getBattlefield()
                 .count(StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND, ability.getControllerId(),
                         ability, game);

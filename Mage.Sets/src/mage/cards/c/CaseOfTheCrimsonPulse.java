@@ -6,22 +6,19 @@ import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.CaseAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.condition.Condition;
-import mage.abilities.condition.common.CardsInHandCondition;
+import mage.abilities.condition.common.HellbentCondition;
 import mage.abilities.condition.common.SolvedSourceCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.discard.DiscardControllerEffect;
 import mage.abilities.effects.common.discard.DiscardHandControllerEffect;
 import mage.abilities.hint.common.CaseSolvedHint;
-import mage.constants.ComparisonType;
 import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
@@ -44,15 +41,14 @@ public final class CaseOfTheCrimsonPulse extends CardImpl {
         Ability initialAbility = new EntersBattlefieldTriggeredAbility(new DiscardControllerEffect(1));
         initialAbility.addEffect(new DrawCardSourceControllerEffect(2).setText(", then draw two cards."));
         // To solve -- You have no cards in hand.
-        Condition toSolveCondition = new CardsInHandCondition(ComparisonType.EQUAL_TO, 0);
         // Solved -- At the beginning of your upkeep, discard your hand, then draw two cards.
         Ability solvedAbility = new ConditionalTriggeredAbility(new BeginningOfUpkeepTriggeredAbility(
                 new DiscardHandControllerEffect(), TargetController.YOU, false),
                 SolvedSourceCondition.SOLVED, null);
         solvedAbility.addEffect(new DrawCardSourceControllerEffect(2).concatBy(", then"));
 
-        this.addAbility(new CaseAbility(initialAbility, toSolveCondition, solvedAbility)
-                .addHint(new CaseOfTheCrimsonPulseHint(toSolveCondition)));
+        this.addAbility(new CaseAbility(initialAbility, HellbentCondition.instance, solvedAbility)
+                .addHint(new CaseOfTheCrimsonPulseHint()));
     }
 
     private CaseOfTheCrimsonPulse(final CaseOfTheCrimsonPulse card) {
@@ -67,8 +63,8 @@ public final class CaseOfTheCrimsonPulse extends CardImpl {
 
 class CaseOfTheCrimsonPulseHint extends CaseSolvedHint {
 
-    CaseOfTheCrimsonPulseHint(Condition condition) {
-        super(condition);
+    CaseOfTheCrimsonPulseHint() {
+        super(HellbentCondition.instance);
     }
 
     private CaseOfTheCrimsonPulseHint(final CaseOfTheCrimsonPulseHint hint) {
@@ -81,8 +77,8 @@ class CaseOfTheCrimsonPulseHint extends CaseSolvedHint {
     }
 
     @Override
-    public String getConditionText(Game game, Ability ability, Permanent permanent) {
-        Player controller = game.getPlayer(permanent.getControllerId());
+    public String getConditionText(Game game, Ability ability) {
+        Player controller = game.getPlayer(ability.getControllerId());
         if (controller == null) {
             return "";
         }

@@ -115,7 +115,7 @@ class CaseSolveAbility extends BeginningOfEndStepTriggeredAbility {
         super(new SolveEffect(), TargetController.YOU,
                 new CompoundCondition(condition, SolvedSourceCondition.UNSOLVED), false);
         withFlavorWord("To solve"); // TODO: technically this shouldn't be italicized
-        setTriggerPhrase(CardUtil.getTextWithFirstCharUpperCase(removeIf(condition.toString())));
+        setTriggerPhrase(CardUtil.getTextWithFirstCharUpperCase(trimIf(condition.toString())));
     }
 
     private CaseSolveAbility(final CaseSolveAbility ability) {
@@ -132,7 +132,7 @@ class CaseSolveAbility extends BeginningOfEndStepTriggeredAbility {
         return super.getRule() + ". <i>(If unsolved, solve at the beginning of your end step.)</i>";
     }
 
-    private static String removeIf(String text) {
+    private static String trimIf(String text) {
         if (text.startsWith("if ")) {
             return text.substring(3);
         }
