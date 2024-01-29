@@ -52,7 +52,8 @@ public final class TeysaOpulentOligarch extends CardImpl {
         // At the beginning of your end step, investigate for each opponent who lost life this turn.
         this.addAbility(
                 new BeginningOfEndStepTriggeredAbility(
-                        new InvestigateEffect(TeysaOpulentOligarchDynamicValue.instance),
+                        new InvestigateEffect(TeysaOpulentOligarchDynamicValue.instance)
+                                .setText("investigate for each opponent who lost life this turn"),
                         TargetController.YOU,
                         false
                 ).addHint(hint)
