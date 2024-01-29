@@ -74,7 +74,7 @@ public final class CardUtil {
     public static final SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss.SSS");
 
     private static final List<String> costWords = Arrays.asList(
-            "put", "return", "exile", "discard", "sacrifice", "remove", "tap", "reveal", "pay"
+            "put", "return", "exile", "discard", "sacrifice", "remove", "tap", "reveal", "pay", "collect"
     );
 
     public static final int TESTS_SET_CODE_LOOKUP_LENGTH = 6; // search set code in commands like "set_code-card_name"
@@ -1764,8 +1764,8 @@ public final class CardUtil {
      * Warning, don't use self reference objects because it will raise StackOverflowError
      *
      * @param value
-     * @return
      * @param <T>
+     * @return
      */
     public static <T> T deepCopyObject(T value) {
         if (isImmutableObject(value)) {

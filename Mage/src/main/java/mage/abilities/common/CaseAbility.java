@@ -72,6 +72,9 @@ public class CaseAbility extends SimpleStaticAbility {
     public CaseAbility(Ability initialAbility, Condition toSolveCondition, Ability solvedAbility) {
         super(Zone.ALL, null);
 
+        if (initialAbility instanceof EntersBattlefieldTriggeredAbility) {
+            ((EntersBattlefieldTriggeredAbility) initialAbility).setTriggerPhrase("When this Case enters the battlefield, ");
+        }
         addSubAbility(initialAbility);
 
         addSubAbility(new CaseSolveAbility(toSolveCondition));
@@ -92,7 +95,7 @@ public class CaseAbility extends SimpleStaticAbility {
                         "ConditionalTriggeredAbility, or StaticAbility with conditional effects.");
             }
         }
-        addSubAbility(solvedAbility.withFlavorWord("Solved"));
+        addSubAbility(solvedAbility.withFlavorWord("Solved")); // TODO: Technically this shouldn't be italicized
     }
 
     protected CaseAbility(final CaseAbility ability) {
@@ -104,10 +107,6 @@ public class CaseAbility extends SimpleStaticAbility {
         return new CaseAbility(this);
     }
 
-    @Override
-    public String getRule() {
-        return super.getRule().replace("{this}", "this Case");
-    }
 }
 
 class CaseSolveAbility extends BeginningOfEndStepTriggeredAbility {
@@ -115,8 +114,8 @@ class CaseSolveAbility extends BeginningOfEndStepTriggeredAbility {
     CaseSolveAbility(Condition condition) {
         super(new SolveEffect(), TargetController.YOU,
                 new CompoundCondition(condition, SolvedSourceCondition.UNSOLVED), false);
-        withFlavorWord("To solve");
-        setTriggerPhrase(CardUtil.getTextWithFirstCharUpperCase(removeIf(condition.toString())));
+        withFlavorWord("To solve"); // TODO: technically this shouldn't be italicized
+        setTriggerPhrase(CardUtil.getTextWithFirstCharUpperCase(trimIf(condition.toString())));
     }
 
     private CaseSolveAbility(final CaseSolveAbility ability) {
@@ -133,7 +132,7 @@ class CaseSolveAbility extends BeginningOfEndStepTriggeredAbility {
         return super.getRule() + ". <i>(If unsolved, solve at the beginning of your end step.)</i>";
     }
 
-    private static String removeIf(String text) {
+    private static String trimIf(String text) {
         if (text.startsWith("if ")) {
             return text.substring(3);
         }

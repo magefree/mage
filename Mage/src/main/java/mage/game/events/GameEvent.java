@@ -579,6 +579,12 @@ public class GameEvent implements Serializable {
          playerId   the player suspecting
          */
         BECOME_SUSPECTED,
+        /* Evidence collected
+         targetId   same as sourceId
+         sourceId   of the ability for the cost
+         playerId   the player paying the cost
+         */
+        EVIDENCE_COLLECTED,
         //custom events
         CUSTOM_EVENT
     }

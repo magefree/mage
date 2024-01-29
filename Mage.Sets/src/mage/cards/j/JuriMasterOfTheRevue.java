@@ -42,7 +42,7 @@ public final class JuriMasterOfTheRevue extends CardImpl {
 
         // When Juri dies, it deals damage equal its power to any target.
         Ability ability = new DiesSourceTriggeredAbility(new DamageTargetEffect(JuriMasterOfTheRevueValue.instance)
-                .setText("it deals damage equal its power to any target"));
+                .setText("it deals damage equal to its power to any target"));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }

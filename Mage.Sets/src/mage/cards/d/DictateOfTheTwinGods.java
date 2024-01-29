@@ -49,7 +49,7 @@ class DictateOfTheTwinGodsEffect extends ReplacementEffectImpl {
 
     DictateOfTheTwinGodsEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Damage);
-        staticText = "If a source would deal damage to a permanent or player, that source deals double that damage to that permanent or player instead";
+        staticText = "If a source would deal damage to a permanent or player, it deals double that damage to that permanent or player instead";
     }
 
     private DictateOfTheTwinGodsEffect(final DictateOfTheTwinGodsEffect effect) {

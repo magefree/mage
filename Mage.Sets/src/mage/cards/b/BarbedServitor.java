@@ -39,13 +39,13 @@ public final class BarbedServitor extends CardImpl {
 
         // Whenever Barbed Servitor deals combat damage to a player, you draw a card and you lose 1 life.
         Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(
-                new DrawCardSourceControllerEffect(1, "you"), true
+                new DrawCardSourceControllerEffect(1, "you"), false
         );
         ability.addEffect(new LoseLifeSourceControllerEffect(1).concatBy("and"));
         this.addAbility(ability);
 
         // Whenever Barbed Servitor is dealt damage, target opponent loses that much life.
-        ability = new DealtDamageToSourceTriggeredAbility(new LoseLifeTargetEffect(SavedDamageValue.MUCH), true);
+        ability = new DealtDamageToSourceTriggeredAbility(new LoseLifeTargetEffect(SavedDamageValue.MUCH), false);
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }

@@ -39,7 +39,7 @@ public final class CauldronDance extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
 
         // You may put a creature card from your hand onto the battlefield. That creature gains haste. Its controller sacrifices it at the beginning of the next end step.
-        this.getSpellAbility().addEffect(new CauldronDancePutCreatureFromHandOntoBattlefieldEffect());
+        this.getSpellAbility().addEffect(new CauldronDancePutCreatureFromHandOntoBattlefieldEffect().concatBy("<br>"));
     }
 
     private CauldronDance(final CauldronDance card) {

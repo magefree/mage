@@ -43,7 +43,8 @@ public final class ChancellorOfTheAnnex extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever an opponent casts a spell, counter it unless that player pays {1}.
-        this.addAbility(new SpellCastOpponentTriggeredAbility(Zone.BATTLEFIELD, new CounterUnlessPaysEffect(new GenericManaCost(1)), StaticFilters.FILTER_SPELL_A, false, SetTargetPointer.SPELL));
+        this.addAbility(new SpellCastOpponentTriggeredAbility(Zone.BATTLEFIELD, new CounterUnlessPaysEffect(new GenericManaCost(1))
+                .setText("counter it unless that player pays {1}"), StaticFilters.FILTER_SPELL_A, false, SetTargetPointer.SPELL));
     }
 
     private ChancellorOfTheAnnex(final ChancellorOfTheAnnex card) {

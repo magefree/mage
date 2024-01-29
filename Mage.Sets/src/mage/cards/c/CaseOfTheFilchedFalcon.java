@@ -28,7 +28,6 @@ import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.game.permanent.token.TokenImpl;
 import mage.target.TargetPermanent;
 
@@ -46,8 +45,7 @@ public final class CaseOfTheFilchedFalcon extends CardImpl {
         this.subtype.add(SubType.CASE);
 
         // When this Case enters the battlefield, investigate.
-        Ability initialAbility = new EntersBattlefieldTriggeredAbility(new InvestigateEffect())
-                .setTriggerPhrase("When this Case enters the battlefield, ");
+        Ability initialAbility = new EntersBattlefieldTriggeredAbility(new InvestigateEffect());
         // To solve -- You control three or more artifacts.
         Condition toSolveCondition = new PermanentsOnTheBattlefieldCondition(
                 filter, ComparisonType.MORE_THAN, 2, true);
@@ -91,7 +89,7 @@ class CaseOfTheFilchedFalconHint extends CaseSolvedHint {
     }
 
     @Override
-    public String getConditionText(Game game, Ability ability, Permanent permanent) {
+    public String getConditionText(Game game, Ability ability) {
         int artifacts = game.getBattlefield()
                 .count(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT, ability.getControllerId(),
                         ability, game);

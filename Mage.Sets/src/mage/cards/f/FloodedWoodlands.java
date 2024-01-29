@@ -1,4 +1,3 @@
-
 package mage.cards.f;
 
 import java.util.UUID;
@@ -13,11 +12,9 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *
@@ -27,7 +24,6 @@ public final class FloodedWoodlands extends CardImpl {
 
     public FloodedWoodlands(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{B}");
-        
 
         // Green creatures can't attack unless their controller sacrifices a land for each green creature they control that's attacking.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new FloodedWoodlandsCostToAttackBlockEffect()));
@@ -49,7 +45,8 @@ class FloodedWoodlandsCostToAttackBlockEffect extends PayCostToAttackBlockEffect
     FloodedWoodlandsCostToAttackBlockEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment, RestrictType.ATTACK,
                 new SacrificeTargetCost(StaticFilters.FILTER_LAND));
-        staticText = "Green creatures can't attack unless their controller sacrifices a land <i>(This cost is paid as attackers are declared.)</i>";
+        staticText = "Green creatures can't attack unless their controller sacrifices a land for each " +
+                "green creature they control that's attacking. <i>(This cost is paid as attackers are declared.)</i>";
     }
 
     private FloodedWoodlandsCostToAttackBlockEffect(final FloodedWoodlandsCostToAttackBlockEffect effect) {
