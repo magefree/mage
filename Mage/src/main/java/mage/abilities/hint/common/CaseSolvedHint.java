@@ -11,7 +11,7 @@ public abstract class CaseSolvedHint extends ConditionHint {
 
     private final Condition condition;
 
-    public CaseSolvedHint(Condition condition) {
+    protected CaseSolvedHint(Condition condition) {
         super(SolvedSourceCondition.SOLVED, "Case is solved.", null, "Case is unsolved.", null, true);
         this.condition = condition;
     }

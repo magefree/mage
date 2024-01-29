@@ -41,8 +41,7 @@ public final class CaseOfTheCrimsonPulse extends CardImpl {
         this.subtype.add(SubType.CASE);
 
         // When this Case enters the battlefield, discard a card, then draw two cards.
-        Ability initialAbility = new EntersBattlefieldTriggeredAbility(new DiscardControllerEffect(1))
-                .setTriggerPhrase("When this Case enters the battlefield, ");
+        Ability initialAbility = new EntersBattlefieldTriggeredAbility(new DiscardControllerEffect(1));
         initialAbility.addEffect(new DrawCardSourceControllerEffect(2).setText(", then draw two cards."));
         // To solve -- You have no cards in hand.
         Condition toSolveCondition = new CardsInHandCondition(ComparisonType.EQUAL_TO, 0);

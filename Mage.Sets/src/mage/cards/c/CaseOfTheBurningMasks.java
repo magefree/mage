@@ -57,18 +57,15 @@ public final class CaseOfTheBurningMasks extends CardImpl {
         this.subtype.add(SubType.CASE);
 
         // When this Case enters the battlefield, it deals 3 damage to target creature an opponent controls.
-        Ability initialAbility = new EntersBattlefieldTriggeredAbility(
-                new DamageTargetEffect(3, "it"))
-                .setTriggerPhrase("When this Case enters the battlefield, ");
+        Ability initialAbility = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(3));
         initialAbility.addTarget(new TargetOpponentsCreaturePermanent());
         // To solve -- Three or more sources you controlled dealt damage this turn.
-        Condition toSolveCondition = new CaseOfTheBurningMasksCondition();
         // Solved -- Sacrifice this Case: Exile the top three cards of your library. Choose one of them. You may play that card this turn.
         Ability solvedAbility = new ConditionalActivatedAbility(new CaseOfTheBurningMasksEffect(),
                 new SacrificeSourceCost().setText("sacrifice this Case"), SolvedSourceCondition.SOLVED);
 
-        this.addAbility(new CaseAbility(initialAbility, toSolveCondition, solvedAbility)
-                .addHint(new CaseOfTheBurningMasksHint(toSolveCondition)),
+        this.addAbility(new CaseAbility(initialAbility, CaseOfTheBurningMasksCondition.instance, solvedAbility)
+                .addHint(new CaseOfTheBurningMasksHint()),
                 new CaseOfTheBurningMasksWatcher());
     }
 
@@ -82,7 +79,8 @@ public final class CaseOfTheBurningMasks extends CardImpl {
     }
 }
 
-class CaseOfTheBurningMasksCondition implements Condition {
+enum CaseOfTheBurningMasksCondition implements Condition {
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {
@@ -98,8 +96,8 @@ class CaseOfTheBurningMasksCondition implements Condition {
 
 class CaseOfTheBurningMasksHint extends CaseSolvedHint {
 
-    CaseOfTheBurningMasksHint(Condition condition) {
-        super(condition);
+    CaseOfTheBurningMasksHint() {
+        super(CaseOfTheBurningMasksCondition.instance);
     }
 
     private CaseOfTheBurningMasksHint(final CaseOfTheBurningMasksHint hint) {
@@ -134,9 +132,9 @@ class CaseOfTheBurningMasksWatcher extends Watcher {
         switch (event.getType()) {
             case DAMAGED_PERMANENT:
             case DAMAGED_PLAYER: {
-                MageObjectReference damageSourceRef = new MageObjectReference(event.getSourceId(), game);
-                Set<MageObjectReference> mors = damagingObjects.computeIfAbsent(game.getControllerId(event.getSourceId()), k -> new HashSet<>());
-                mors.add(damageSourceRef);
+                damagingObjects
+                        .computeIfAbsent(game.getControllerId(event.getSourceId()), k -> new HashSet<>())
+                        .add(new MageObjectReference(event.getSourceId(), game));
             }
         }
     }
