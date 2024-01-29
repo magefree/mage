@@ -9,12 +9,8 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.SolvedSourceCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.dynamicvalue.common.CreaturesThatAttackedThisTurnCount;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DamageAllControlledTargetEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
-import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
-import mage.abilities.effects.common.continuous.SetBasePowerToughnessAllEffect;
 import mage.abilities.hint.common.CaseSolvedHint;
 import mage.constants.Duration;
 import mage.constants.Outcome;
@@ -23,14 +19,11 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
-import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
-import mage.target.common.TargetOpponentsCreaturePermanent;
 import mage.watchers.common.AttackedThisTurnWatcher;
 
 /**
@@ -57,8 +50,7 @@ public final class CaseOfTheGatewayExpress extends CardImpl {
 
         // When this case enters the battlefield, choose target creature you don't control. Each creature you control deals 1 damage to that creature.
         Ability initialAbility = new EntersBattlefieldTriggeredAbility(
-                new CaseOfTheGatewayExpressEffect())
-                .setTriggerPhrase("When this case enters the battlefield, ");
+                new CaseOfTheGatewayExpressEffect());
         initialAbility.addTarget(new TargetPermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
         // To solve -- Three or more creatures attacked this turn.
         Condition toSolveCondition = new CaseOfTheGatewayExpressCondition();
@@ -147,10 +139,10 @@ class CaseOfTheGatewayExpressHint extends CaseSolvedHint {
     }
 
     @Override
-    public String getConditionText(Game game, Ability ability, Permanent permanent) {
+    public String getConditionText(Game game, Ability ability) {
         int attacked = game.getState()
                 .getWatcher(AttackedThisTurnWatcher.class)
                 .getAttackedThisTurnCreatures().size();
-        return "Cretures that attacked: " + attacked + " (need 3).";
+        return "Creatures that attacked: " + attacked + " (need 3).";
     }
 }
