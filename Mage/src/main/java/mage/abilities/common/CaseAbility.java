@@ -7,6 +7,7 @@ import mage.abilities.condition.common.SolvedSourceCondition;
 import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.decorator.ConditionalAsThoughEffect;
 import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.decorator.ConditionalReplacementEffect;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -85,7 +86,8 @@ public class CaseAbility extends SimpleStaticAbility {
             if (solvedAbility instanceof SimpleStaticAbility) {
                 for (Effect effect : solvedAbility.getEffects()) {
                     if (!(effect instanceof ConditionalContinuousEffect ||
-                            effect instanceof ConditionalAsThoughEffect)) {
+                            effect instanceof ConditionalAsThoughEffect ||
+                            effect instanceof ConditionalReplacementEffect)) {
                         throw new IllegalArgumentException("solvedAbility must be one of ConditionalActivatedAbility, " +
                                 "ConditionalTriggeredAbility, or StaticAbility with conditional effects.");
                     }
