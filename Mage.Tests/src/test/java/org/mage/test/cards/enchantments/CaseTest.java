@@ -1,6 +1,8 @@
 package org.mage.test.cards.enchantments;
 
+import mage.constants.CardType;
 import mage.constants.PhaseStep;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
@@ -73,6 +75,45 @@ public class CaseTest extends CardTestPlayerBase {
         execute();
 
         assertHandCount(playerA, 2);
+    }
+
+    // CardsPutIntoGraveyardWatcher was updated to work correctly with cards
+    // going to the graveyard from other zones than the battlefield. This test
+    // checks this by cycling a card from the hand.
+    @Test
+    public void test_CaseOfTheGorgonsKiss() {
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2 + 1 + 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears");
+        addCard(Zone.HAND, playerA, "Walking Ballista");
+        addCard(Zone.HAND, playerA, "Case of the Gorgon's Kiss");
+        addCard(Zone.HAND, playerA, "Angel of the God-Pharaoh");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Walking Ballista");
+        setChoice(playerA, "X=1");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
+
+        // Walking Ballista goes to the graveyard from the battlefield
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Remove", "Grizzly Bears");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Case of the Gorgon's Kiss");
+        // Grizzly Bears goes to the graveyard from the battlefield
+        addTarget(playerA, "Grizzly Bears"); // Case of the Gorgon's Kiss ETB target
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
+
+        // Angel of the God-Pharaoh goes to the graveyard from playerA's hand
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cycling");
+
+        checkStackObject("case is solved", 1, PhaseStep.END_TURN, playerA, "<i>To solve", 1);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, "Case of the Gorgon's Kiss", 1);
+        assertType("Case of the Gorgon's Kiss", CardType.CREATURE, true);
+        assertSubtype("Case of the Gorgon's Kiss", SubType.GORGON);
+        assertBasePowerToughness(playerA, "Case of the Gorgon's Kiss", 4, 4);
     }
 
     @Test
