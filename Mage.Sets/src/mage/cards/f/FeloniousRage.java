@@ -10,7 +10,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.game.permanent.token.DetectiveToken;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
 
@@ -23,7 +23,8 @@ public final class FeloniousRage extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{R}");
 
         // Target creature you control gets +2/+0 and gains haste until end of turn. When that creature dies this turn, create a 2/2 white and blue Detective creature token.
-        this.getSpellAbility().addEffect(new BoostTargetEffect(2, 0));
+        this.getSpellAbility().addEffect(new BoostTargetEffect(2, 0)
+                .setText("target creature you control gets +2/+0"));
         this.getSpellAbility().addEffect(
                 new GainAbilityTargetEffect(HasteAbility.getInstance())
                         .setText("and gains haste until end of turn")
@@ -31,7 +32,7 @@ public final class FeloniousRage extends CardImpl {
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(
                 new WhenTargetDiesDelayedTriggeredAbility(new CreateTokenEffect(new DetectiveToken()))
         ));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
     }
 
     private FeloniousRage(final FeloniousRage card) {
