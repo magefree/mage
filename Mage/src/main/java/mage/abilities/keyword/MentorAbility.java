@@ -5,6 +5,7 @@ import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.Card;
 import mage.constants.Outcome;
+import mage.constants.WatcherScope;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.ObjectSourcePlayer;
@@ -13,7 +14,9 @@ import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.game.stack.StackAbility;
 import mage.target.common.TargetCreaturePermanent;
+import mage.watchers.Watcher;
 
 /**
  * @author TheElk801
@@ -28,7 +31,8 @@ public class MentorAbility extends AttacksTriggeredAbility {
     }
 
     public MentorAbility() {
-        super(new MentorAbilityEffect(), false);
+        super(new AddCountersTargetEffect(CounterType.P1P1.createInstance(), Outcome.BoostCreature), false);
+        addWatcher(new MentoredWatcher());
         this.addTarget(new TargetCreaturePermanent(filter));
     }
 
@@ -58,36 +62,29 @@ enum MentorAbilityPredicate implements ObjectSourcePlayerPredicate<Card> {
     }
 }
 
-class MentorAbilityEffect extends AddCountersTargetEffect {
+class MentoredWatcher extends Watcher {
 
-    MentorAbilityEffect() {
-        super(CounterType.P1P1.createInstance(), Outcome.BoostCreature);
-    }
-
-    private MentorAbilityEffect(final MentorAbilityEffect effect) {
-        super(effect);
+    public MentoredWatcher() {
+        super(WatcherScope.GAME);
     }
 
     @Override
-    public MentorAbilityEffect copy() {
-        return new MentorAbilityEffect(this);
-    }
+    public void watch(GameEvent event, Game game) {
+        // TODO Make sure this is correct after the comprehensive rules update for CLU/MKM, add citation
+        if (event.getType() == GameEvent.EventType.COUNTER_ADDED && event.getData().equals(CounterType.P1P1.getName())) {
+            StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
+            if (stackAbility == null) {
+                return;
+            }
 
-    @Override
-    public boolean apply(Game game, Ability source) {
-        if (!super.apply(game, source)) {
-            return false;
+            Ability ability = stackAbility.getStackAbility();
+            if (ability instanceof MentorAbility) {
+                game.fireEvent(GameEvent.getEvent(
+                        GameEvent.EventType.MENTORED_CREATURE,
+                        event.getTargetId(),
+                        ability,
+                        event.getPlayerId()));
+            }
         }
-
-        Permanent mentoredPermanent = game.getPermanent(targetPointer.getFirst(game, source));
-        if (mentoredPermanent == null) {
-            return false;
-        }
-        game.fireEvent(GameEvent.getEvent(
-                GameEvent.EventType.MENTORED_CREATURE,
-                mentoredPermanent.getId(),
-                source,
-                source.getControllerId()));
-        return true;
     }
 }
