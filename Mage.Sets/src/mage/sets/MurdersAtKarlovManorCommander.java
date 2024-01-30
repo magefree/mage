@@ -99,13 +99,13 @@ public final class MurdersAtKarlovManorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Fiendish Duo", 153, Rarity.MYTHIC, mage.cards.f.FiendishDuo.class));
         cards.add(new SetCardInfo("Finale of Revelation", 106, Rarity.MYTHIC, mage.cards.f.FinaleOfRevelation.class));
         cards.add(new SetCardInfo("Fortified Village", 262, Rarity.RARE, mage.cards.f.FortifiedVillage.class));
-        cards.add(new SetCardInfo("Frontier Warmonger", 154, Rarity.UNCOMMON, mage.cards.f.FrontierWarmonger.class));
+        cards.add(new SetCardInfo("Frontier Warmonger", 154, Rarity.RARE, mage.cards.f.FrontierWarmonger.class));
         cards.add(new SetCardInfo("Fumigate", 66, Rarity.RARE, mage.cards.f.Fumigate.class));
         cards.add(new SetCardInfo("Furycalm Snarl", 263, Rarity.RARE, mage.cards.f.FurycalmSnarl.class));
         cards.add(new SetCardInfo("Game Trail", 264, Rarity.RARE, mage.cards.g.GameTrail.class));
         cards.add(new SetCardInfo("Ghostly Prison", 67, Rarity.UNCOMMON, mage.cards.g.GhostlyPrison.class));
         cards.add(new SetCardInfo("Gideon's Sacrifice", 68, Rarity.COMMON, mage.cards.g.GideonsSacrifice.class));
-        cards.add(new SetCardInfo("Gisela, Blade of Goldnight", 211, Rarity.RARE, mage.cards.g.GiselaBladeOfGoldnight.class));
+        cards.add(new SetCardInfo("Gisela, Blade of Goldnight", 211, Rarity.MYTHIC, mage.cards.g.GiselaBladeOfGoldnight.class));
         cards.add(new SetCardInfo("Graf Mole", 170, Rarity.UNCOMMON, mage.cards.g.GrafMole.class));
         cards.add(new SetCardInfo("Grave Titan", 129, Rarity.MYTHIC, mage.cards.g.GraveTitan.class));
         cards.add(new SetCardInfo("Gruul Turf", 265, Rarity.UNCOMMON, mage.cards.g.GruulTurf.class));
@@ -155,7 +155,7 @@ public final class MurdersAtKarlovManorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Mystic Sanctuary", 277, Rarity.COMMON, mage.cards.m.MysticSanctuary.class));
         cards.add(new SetCardInfo("Nadir Kraken", 112, Rarity.RARE, mage.cards.n.NadirKraken.class));
         cards.add(new SetCardInfo("Nantuko Vigilante", 177, Rarity.COMMON, mage.cards.n.NantukoVigilante.class));
-        cards.add(new SetCardInfo("Nature's Lore", 178, Rarity.COMMON, mage.cards.n.NaturesLore.class));
+        cards.add(new SetCardInfo("Nature's Lore", 178, Rarity.UNCOMMON, mage.cards.n.NaturesLore.class));
         cards.add(new SetCardInfo("Necromancy", 131, Rarity.UNCOMMON, mage.cards.n.Necromancy.class));
         cards.add(new SetCardInfo("Needle Spires", 278, Rarity.RARE, mage.cards.n.NeedleSpires.class));
         cards.add(new SetCardInfo("Neheb, the Eternal", 158, Rarity.MYTHIC, mage.cards.n.NehebTheEternal.class));
