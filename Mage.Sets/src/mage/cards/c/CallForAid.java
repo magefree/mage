@@ -2,7 +2,6 @@ package mage.cards.c;
 
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.UntapAllEffect;
@@ -16,9 +15,12 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.PermanentInListPredicate;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.permanent.ControllerIdPredicate;
+import mage.filter.predicate.permanent.PermanentReferenceInCollectionPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.common.TargetOpponent;
 
 import java.util.List;
@@ -61,54 +63,65 @@ class CallForAidEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        UUID targetOpponent = getTargetPointer().getFirst(game, source);
-        if (targetOpponent != null) {
-            // First we get all creatures of target player...
-            FilterCreaturePermanent filter = new FilterCreaturePermanent();
-            List<Permanent> opponentCreatures = game.getBattlefield().getActivePermanents(filter, targetOpponent, game);
-            filter.add(new PermanentInListPredicate(opponentCreatures));
-            //... gain control of them till end of turn...
-            GainControlAllEffect gainControl = new GainControlAllEffect(Duration.EndOfTurn, filter);
-            gainControl.apply(game, source);
-            //...untap all stolen creatures...
-            new UntapAllEffect(filter).apply(game,source);
-            //...give them haste...
-            GainAbilityAllEffect gainHaste = new GainAbilityAllEffect(HasteAbility.getInstance(), Duration.EndOfTurn, filter);
-            game.addEffect(gainHaste, source);
-            //...make sure they can't attack their owner...
-            GainAbilityAllEffect cantAttackOwnerEffect = new GainAbilityAllEffect(new SimpleStaticAbility(new CantAttackOwnerEffect()), Duration.EndOfTurn, filter);
-            game.addEffect(cantAttackOwnerEffect, source);
-            //...and finally prevent them from being sacrificed.
-            GainAbilityAllEffect cantBeSacrificed = new GainAbilityAllEffect(new SimpleStaticAbility(new CantBeSacrificedSourceEffect()), Duration.EndOfTurn, filter);
-            game.addEffect(cantBeSacrificed, source);
-
-            return true;
+        Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
+        if (opponent == null) {
+            return false;
         }
 
-        return false;
+        FilterCreaturePermanent filter = new FilterCreaturePermanent();
+        filter.add(new ControllerIdPredicate(opponent.getId()));
+        List<Permanent> opponentCreatures = game.getBattlefield().getActivePermanents(filter, opponent.getId(), game);
+
+        filter = new FilterCreaturePermanent();
+        PermanentReferenceInCollectionPredicate stolenPermanentsPredicate = new PermanentReferenceInCollectionPredicate(opponentCreatures, game);
+        filter.add(stolenPermanentsPredicate);
+        //... gain control of them till end of turn...
+        GainControlAllEffect gainControl = new GainControlAllEffect(Duration.EndOfTurn, filter);
+        gainControl.apply(game, source);
+        //...untap all stolen creatures...
+        new UntapAllEffect(filter).apply(game, source);
+        //...give them haste...
+        GainAbilityAllEffect gainHaste = new GainAbilityAllEffect(HasteAbility.getInstance(), Duration.EndOfTurn, filter);
+        game.addEffect(gainHaste, source);
+        //...make sure the caster cant attack targeted opponent...
+        FilterCreaturePermanent currentCreaturesFilter = new FilterCreaturePermanent();
+        // At the time this filter it built we do not yet control the creatures of target opponent. So we have to combine the predicates.
+        currentCreaturesFilter.add(Predicates.or(new ControllerIdPredicate(source.getControllerId()), stolenPermanentsPredicate));
+
+        GainAbilityAllEffect cantAttackOwnerEffect = new GainAbilityAllEffect(new SimpleStaticAbility(new CantAttackCertainOpponentEffect(opponent)), Duration.EndOfTurn, currentCreaturesFilter);
+        game.addEffect(cantAttackOwnerEffect, source);
+        //...and finally prevent them from being sacrificed.
+        GainAbilityAllEffect cantBeSacrificed = new GainAbilityAllEffect(new SimpleStaticAbility(new CantBeSacrificedSourceEffect()), Duration.EndOfTurn, filter);
+        game.addEffect(cantBeSacrificed, source);
+
+        return true;
     }
 
     @Override
-    public Effect copy() {
+    public CallForAidEffect copy() {
         return new CallForAidEffect(this);
     }
 }
 
-// Almost identical to ElrondOfTheWhiteCouncil#CantAttackItsOwnerEffect. Maybe these should be consolidated? (2024-01-29)
-class CantAttackOwnerEffect extends RestrictionEffect {
+class CantAttackCertainOpponentEffect extends RestrictionEffect {
 
-    CantAttackOwnerEffect() {
+    private final Player opponent;
+
+    // The target is chosen during the resolution of the spell itself.
+    // However, the effect "lingers" until end of turn, so we need to remember which player was chosen as the target.
+    CantAttackCertainOpponentEffect(Player opponent) {
         super(Duration.EndOfTurn, Outcome.Detriment);
-        staticText = "{this} can't attack its owner";
+        this.opponent = opponent;
     }
 
-    private CantAttackOwnerEffect(final CantAttackOwnerEffect effect) {
+    private CantAttackCertainOpponentEffect(final CantAttackCertainOpponentEffect effect) {
         super(effect);
+        this.opponent = effect.opponent;
     }
 
     @Override
-    public CantAttackOwnerEffect copy() {
-        return new CantAttackOwnerEffect(this);
+    public CantAttackCertainOpponentEffect copy() {
+        return new CantAttackCertainOpponentEffect(this);
     }
 
     @Override
@@ -121,7 +134,7 @@ class CantAttackOwnerEffect extends RestrictionEffect {
         if (defenderId == null || attacker == null) {
             return true;
         }
-        return !defenderId.equals(attacker.getOwnerId());
+        return !defenderId.equals(opponent.getId());
     }
 
 }
