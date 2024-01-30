@@ -11,7 +11,6 @@ import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.condition.common.SolvedSourceCondition;
 import mage.abilities.decorator.ConditionalReplacementEffect;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.hint.common.CaseSolvedHint;
@@ -97,17 +96,12 @@ class CaseOfThePilferedProofTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD ||
-                event.getType() == GameEvent.EventType.TURNED_FACE_UP) {
-            Permanent permanent = game.getPermanent(event.getSourceId());
-            if (permanent != null
-                    && permanent.hasSubtype(SubType.DETECTIVE, game)
-                    && permanent.isControlledBy(this.getControllerId())) {
-                for (Effect effect : getEffects()) {
-                    effect.setTargetPointer(new FixedTarget(event.getTargetId(), game));
-                }
-                return true;
-            }
+        Permanent permanent = game.getPermanent(event.getTargetId());
+        if (permanent != null
+                && permanent.hasSubtype(SubType.DETECTIVE, game)
+                && permanent.isControlledBy(this.getControllerId())) {
+            getEffects().setTargetPointer(new FixedTarget(permanent, game));
+            return true;
         }
         return false;
     }
