@@ -2,7 +2,6 @@ package mage.cards.c;
 
 import java.util.UUID;
 
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.CaseAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -26,7 +25,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.SuspectedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.SkeletonToken2;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -78,7 +77,7 @@ public final class CaseOfTheStashedSkeleton extends CardImpl {
 class CaseOfTheStashedSkeletonEffect extends CreateTokenEffect {
 
     CaseOfTheStashedSkeletonEffect() {
-        super(new CaseOfTheStashedSkeletonToken());
+        super(new SkeletonToken2());
         staticText = "create a 2/1 black Skeleton creature token and suspect it";
     }
 
@@ -100,27 +99,6 @@ class CaseOfTheStashedSkeletonEffect extends CreateTokenEffect {
             return true;
         }
         return false;
-    }
-}
-
-class CaseOfTheStashedSkeletonToken extends TokenImpl {
-
-    CaseOfTheStashedSkeletonToken() {
-        super("Skeleton Token", "2/1 black Skeleton creature token");
-        cardType.add(CardType.CREATURE);
-        this.subtype.add(SubType.SKELETON);
-        color.setBlack(true);
-        power = new MageInt(2);
-        toughness = new MageInt(1);
-    }
-
-    private CaseOfTheStashedSkeletonToken(final CaseOfTheStashedSkeletonToken token) {
-        super(token);
-    }
-
-    @Override
-    public CaseOfTheStashedSkeletonToken copy() {
-        return new CaseOfTheStashedSkeletonToken(this);
     }
 }
 
