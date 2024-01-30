@@ -38,6 +38,7 @@ import mage.game.draft.DraftCube;
 import mage.game.permanent.token.Token;
 import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.custom.CreatureToken;
+import mage.game.permanent.token.custom.XmageToken;
 import mage.sets.TherosBeyondDeath;
 import mage.target.targetpointer.TargetPointer;
 import mage.util.CardUtil;
@@ -1315,7 +1316,7 @@ public class VerifyCardDataTest {
                 // - fix error in token's constructor
                 errorsList.add("Error: token must have default constructor with zero params: " + tokenClass.getName());
             } else if (tokDataNamesIndex.getOrDefault(token.getName().replace(" Token", ""), "").isEmpty()) {
-                if (token instanceof CreatureToken) {
+                if (token instanceof CreatureToken || token instanceof XmageToken) {
                     // ignore custom token builders
                     continue;
                 }
@@ -1340,7 +1341,8 @@ public class VerifyCardDataTest {
             // CHECK: tokens must have Token word in the name
             if (token.getDescription().startsWith(token.getName() + ", ")
                     || token.getDescription().contains("named " + token.getName())
-                    || (token instanceof CreatureToken)) {
+                    || (token instanceof CreatureToken)
+                    || (token instanceof XmageToken)) {
                 // ignore some names:
                 // - Boo, a legendary 1/1 red Hamster creature token with trample and haste
                 // - 1/1 green Insect creature token with flying named Butterfly
