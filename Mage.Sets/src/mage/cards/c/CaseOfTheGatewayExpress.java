@@ -18,9 +18,7 @@ import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
@@ -36,12 +34,6 @@ import mage.watchers.common.AttackedThisTurnWatcher;
  * @author DominionSpy
  */
 public final class CaseOfTheGatewayExpress extends CardImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("choose target creature you don't control.");
-
-    static {
-        filter.add(TargetController.NOT_YOU.getControllerPredicate());
-    }
 
     public CaseOfTheGatewayExpress(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
@@ -60,8 +52,7 @@ public final class CaseOfTheGatewayExpress extends CardImpl {
                 SolvedSourceCondition.SOLVED, ""));
 
         this.addAbility(new CaseAbility(initialAbility, toSolveCondition, solvedAbility)
-                .addHint(new CaseOfTheGatewayExpressHint(toSolveCondition)),
-                new AttackedThisTurnWatcher());
+                .addHint(new CaseOfTheGatewayExpressHint(toSolveCondition)));
     }
 
     private CaseOfTheGatewayExpress(final CaseOfTheGatewayExpress card) {
@@ -100,7 +91,7 @@ class CaseOfTheGatewayExpressEffect extends OneShotEffect {
         for (Permanent creature : game.getBattlefield().getActivePermanents(
                 StaticFilters.FILTER_CONTROLLED_CREATURE,
                 source.getControllerId(), source, game)) {
-            if (creature == null || creature.getPower().getValue() < 1) {
+            if (creature == null) {
                 continue;
             }
             permanent.damage(1, creature.getId(), source, game);
