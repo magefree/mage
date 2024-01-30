@@ -49,7 +49,7 @@ public class CardsPutIntoGraveyardWatcher extends Watcher {
         if (((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD) {
             cardsPutIntoGraveyardFromBattlefield.add(new MageObjectReference(((ZoneChangeEvent) event).getTarget(), game, 1));
         } else {
-            cardsPutIntoGraveyardFromEverywhereElse.add(new MageObjectReference(((ZoneChangeEvent) event).getTarget(), game, 1));
+            cardsPutIntoGraveyardFromEverywhereElse.add(new MageObjectReference(game.getCard(event.getTargetId()), game, 0));
         }
     }
 
