@@ -52,6 +52,7 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Case of the Filched Falcon", 44, Rarity.UNCOMMON, mage.cards.c.CaseOfTheFilchedFalcon.class));
         cards.add(new SetCardInfo("Case of the Gorgon's Kiss", 79, Rarity.UNCOMMON, mage.cards.c.CaseOfTheGorgonsKiss.class));
         cards.add(new SetCardInfo("Case of the Locked Hothouse", 155, Rarity.RARE, mage.cards.c.CaseOfTheLockedHothouse.class));
+        cards.add(new SetCardInfo("Case of the Ransacked Lab", 45, Rarity.RARE, mage.cards.c.CaseOfTheRansackedLab.class));
         cards.add(new SetCardInfo("Caught Red-Handed", 115, Rarity.UNCOMMON, mage.cards.c.CaughtRedHanded.class));
         cards.add(new SetCardInfo("Cease // Desist", 246, Rarity.UNCOMMON, mage.cards.c.CeaseDesist.class));
         cards.add(new SetCardInfo("Cerebral Confiscation", 81, Rarity.COMMON, mage.cards.c.CerebralConfiscation.class));
