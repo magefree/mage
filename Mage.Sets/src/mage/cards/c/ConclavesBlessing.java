@@ -1,7 +1,5 @@
-
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.dynamicvalue.common.StaticValue;
@@ -11,18 +9,15 @@ import mage.abilities.keyword.ConvokeAbility;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherEnchantedPredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author Galatolol
  */
 public final class ConclavesBlessing extends CardImpl {
@@ -30,7 +25,7 @@ public final class ConclavesBlessing extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("other creature you control");
 
     static {
-        filter.add(new AnotherEnchantedPredicate());
+        filter.add(AnotherEnchantedPredicate.instance);
     }
 
     public ConclavesBlessing(UUID ownerId, CardSetInfo setInfo) {

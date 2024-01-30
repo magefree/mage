@@ -44,7 +44,7 @@ public final class SivvisValor extends CardImpl {
 
         // If you control a Plains, you may tap an untapped creature you control rather than pay Sivvi's Valor's mana cost.
         Cost cost = new TapTargetCost(new TargetControlledPermanent(1,1,filterCreature,false));
-        cost.setText(" tap an untapped creature you control");
+        cost.setText("tap an untapped creature you control");
         this.addAbility(new AlternativeCostSourceAbility(cost, new PermanentsOnTheBattlefieldCondition(filter)));
 
         // All damage that would be dealt to target creature this turn is dealt to you instead.

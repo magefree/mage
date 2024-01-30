@@ -129,7 +129,7 @@ public final class MurdersAtKarlovManorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Kher Keep", 270, Rarity.RARE, mage.cards.k.KherKeep.class));
         cards.add(new SetCardInfo("Killer Service", 174, Rarity.RARE, mage.cards.k.KillerService.class));
         cards.add(new SetCardInfo("Koma, Cosmos Serpent", 213, Rarity.MYTHIC, mage.cards.k.KomaCosmosSerpent.class));
-        cards.add(new SetCardInfo("Krosan Cloudscraper", 175, Rarity.SPECIAL, mage.cards.k.KrosanCloudscraper.class));
+        cards.add(new SetCardInfo("Krosan Cloudscraper", 175, Rarity.RARE, mage.cards.k.KrosanCloudscraper.class));
         cards.add(new SetCardInfo("Krosan Colossus", 176, Rarity.UNCOMMON, mage.cards.k.KrosanColossus.class));
         cards.add(new SetCardInfo("Krosan Verge", 271, Rarity.UNCOMMON, mage.cards.k.KrosanVerge.class));
         cards.add(new SetCardInfo("Labyrinth of Skophos", 272, Rarity.RARE, mage.cards.l.LabyrinthOfSkophos.class));

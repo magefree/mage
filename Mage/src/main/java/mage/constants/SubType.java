@@ -39,6 +39,7 @@ public enum SubType {
     AURA("Aura", SubTypeSet.EnchantmentType),
     BACKGROUND("Background", SubTypeSet.EnchantmentType),
     CARTOUCHE("Cartouche", SubTypeSet.EnchantmentType),
+    CASE("Case", SubTypeSet.EnchantmentType),
     CLASS("Class", SubTypeSet.EnchantmentType),
     CURSE("Curse", SubTypeSet.EnchantmentType),
     ROLE("Role", SubTypeSet.EnchantmentType),
