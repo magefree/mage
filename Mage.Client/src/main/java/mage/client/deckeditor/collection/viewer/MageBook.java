@@ -337,9 +337,8 @@ public class MageBook extends JComponent {
                 addItem(needItems.get(i), rectangle);
                 rectangle = CardPosition.translatePosition(i - conf.CARDS_PER_PAGE / 2, rectangle, conf);
             }
-
-            jLayeredPane.repaint();
         }
+        jLayeredPane.repaint();
     }
 
     private void addItem(Object item, Rectangle position) {
