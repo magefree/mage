@@ -186,6 +186,7 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Seasoned Consultant", 33, Rarity.COMMON, mage.cards.s.SeasonedConsultant.class));
         cards.add(new SetCardInfo("Shadowy Backstreet", 268, Rarity.RARE, mage.cards.s.ShadowyBackstreet.class));
         cards.add(new SetCardInfo("Shady Informant", 231, Rarity.COMMON, mage.cards.s.ShadyInformant.class));
+        cards.add(new SetCardInfo("Sharp-Eyed Rookie", 176, Rarity.RARE, mage.cards.s.SharpEyedRookie.class));
         cards.add(new SetCardInfo("Shock", 144, Rarity.COMMON, mage.cards.s.Shock.class));
         cards.add(new SetCardInfo("Slice from the Shadows", 103, Rarity.COMMON, mage.cards.s.SliceFromTheShadows.class));
         cards.add(new SetCardInfo("Slime Against Humanity", 177, Rarity.COMMON, mage.cards.s.SlimeAgainstHumanity.class));
