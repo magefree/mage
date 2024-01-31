@@ -3,17 +3,26 @@ package mage.cards.a;
 import java.util.UUID;
 
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.effects.SearchEffect;
+import mage.abilities.effects.common.DamageWithPowerFromOneToAnotherTargetEffect;
+import mage.abilities.effects.common.ExileTargetEffect;
+import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
+import mage.counters.CounterType;
 import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterLandCard;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.players.Player;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInLibrary;
+import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetCreaturePermanent;
 import mage.util.CardUtil;
 
 /**
@@ -22,11 +31,10 @@ import mage.util.CardUtil;
  */
 public final class ArchdruidsCharm extends CardImpl {
 
-    // Based on Aerial Surveyor and SearchLibraryPutInHandOrOnBattlefieldEffect
-    private static final FilterCard filter = new FilterCard("creature or land");
+    private static final FilterCard creatureOrLandFilter = new FilterCard("creature or land");
 
     static {
-        filter.add(Predicates.or(CardType.CREATURE.getPredicate(), CardType.LAND.getPredicate()));
+        creatureOrLandFilter.add(Predicates.or(CardType.CREATURE.getPredicate(), CardType.LAND.getPredicate()));
     }
 
     public ArchdruidsCharm(UUID ownerId, CardSetInfo setInfo) {
@@ -35,9 +43,21 @@ public final class ArchdruidsCharm extends CardImpl {
 
         // Choose one --
         // * Search your library for a creature or land card and reveal it. Put it onto the battlefield tapped if it's a land card. Otherwise, put it into your hand. Then shuffle.
+        this.getSpellAbility().addEffect(new ArchdruidsCharmMode1Effect(new TargetCardInLibrary(creatureOrLandFilter), true, new FilterLandCard()));
+
         // * Put a +1/+1 counter on target creature you control. It deals damage equal to its power to target creature you don't control.
+        // Based on Aggressive Instinct
+        Mode mode2 = new Mode(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
+        mode2.addTarget(new TargetControlledCreaturePermanent());
+        mode2.addEffect(new DamageWithPowerFromOneToAnotherTargetEffect());
+        mode2.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
+        this.getSpellAbility().addMode(mode2);
+
         // * Exile target artifact or enchantment.
-        this.getSpellAbility().addEffect(new ArchdruidsCharmMode1Effect(new TargetCardInLibrary(filter), true, new FilterLandCard()));
+        // Based on Altar's Light
+        Mode mode3 = new Mode(new ExileTargetEffect());
+        mode3.addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT));
+        this.getSpellAbility().addMode(mode3);
     }
 
     private ArchdruidsCharm(final ArchdruidsCharm card) {
@@ -50,6 +70,7 @@ public final class ArchdruidsCharm extends CardImpl {
     }
 }
 
+// Based on SearchLibraryPutInHandOrOnBattlefieldEffect
 class ArchdruidsCharmMode1Effect extends SearchEffect {
 
     private final boolean revealCards;
