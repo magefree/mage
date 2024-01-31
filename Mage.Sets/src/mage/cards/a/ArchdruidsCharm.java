@@ -31,7 +31,7 @@ import mage.util.CardUtil;
  */
 public final class ArchdruidsCharm extends CardImpl {
 
-    private static final FilterCard creatureOrLandFilter = new FilterCard("creature or land");
+    private static final FilterCard creatureOrLandFilter = new FilterCard("creature or land card");
 
     static {
         creatureOrLandFilter.add(Predicates.or(CardType.CREATURE.getPredicate(), CardType.LAND.getPredicate()));
@@ -49,7 +49,7 @@ public final class ArchdruidsCharm extends CardImpl {
         // Based on Aggressive Instinct
         Mode mode2 = new Mode(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
         mode2.addTarget(new TargetControlledCreaturePermanent());
-        mode2.addEffect(new DamageWithPowerFromOneToAnotherTargetEffect());
+        mode2.addEffect(new DamageWithPowerFromOneToAnotherTargetEffect("it"));
         mode2.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
         this.getSpellAbility().addMode(mode2);
 
@@ -153,4 +153,3 @@ class ArchdruidsCharmMode1Effect extends SearchEffect {
     }
 
 }
-

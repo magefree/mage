@@ -53,7 +53,7 @@ public final class CaseOfTheRansackedLab extends CardImpl {
         // Solved -- Whenever you cast an instant or sorcery spell, draw a card.
         Ability solvedAbility = new ConditionalTriggeredAbility(
                 new SpellCastControllerTriggeredAbility(new DrawCardSourceControllerEffect(1),
-                        StaticFilters.FILTER_SPELL_INSTANT_OR_SORCERY, false),
+                        StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY, false),
                 SolvedSourceCondition.SOLVED, "");
 
         this.addAbility(new CaseAbility(initialAbility, CaseOfTheRansackedLabCondition.instance, solvedAbility)
