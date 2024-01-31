@@ -1,5 +1,6 @@
 package mage.cards.c;
 
+import java.util.Objects;
 import java.util.UUID;
 
 import mage.MageObjectReference;
@@ -97,6 +98,7 @@ class CaseOfTheUneatenFeastEffect extends ContinuousEffectImpl {
         player.getGraveyard()
                 .stream()
                 .map(game::getCard)
+                .filter(Objects::nonNull)
                 .filter(card -> card.isCreature(game))
                 .forEach(card -> affectedObjectList.add(new MageObjectReference(card, game)));
     }
