@@ -92,4 +92,26 @@ public class AddCardApiTest extends CardTestPlayerBase {
     public void test_CardNameWithSetCode_RaiseErrorOnUnknownSet() {
         addCard(Zone.BATTLEFIELD, playerA, "SS4-Plains", 1);
     }
+
+    // Add card to exile added for #11738
+    @Test
+    public void test_AddCardExiled() {
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 4);
+        addCard(Zone.HAND, playerA, "Mind Raker");
+
+        addCard(Zone.EXILED, playerB, "Llanowar Elves");
+
+        checkExileCount("llanowar elves in exile", 1, PhaseStep.PRECOMBAT_MAIN, playerB, "Llanowar Elves", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mind Raker");
+        setChoice(playerA, true);
+        addTarget(playerA, "Llanowar Elves");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertExileCount(playerB, "Llanowar Elves", 0);
+        assertGraveyardCount(playerB, "Llanowar Elves", 1);
+    }
 }
