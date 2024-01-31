@@ -268,7 +268,9 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
                 TestPlayer testPlayer = (TestPlayer) player;
                 currentGame.cheat(testPlayer.getId(), getCommands(testPlayer));
                 currentGame.cheat(testPlayer.getId(), getLibraryCards(testPlayer), getHandCards(testPlayer),
-                        getBattlefieldCards(testPlayer), getGraveCards(testPlayer), getCommandCards(testPlayer));
+                        getBattlefieldCards(testPlayer), getGraveCards(testPlayer), getCommandCards(testPlayer),
+                        getExiledCards(testPlayer));
+
             }
         }
 
