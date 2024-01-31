@@ -35,6 +35,7 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Alquist Proft, Master Sleuth", 185, Rarity.MYTHIC, mage.cards.a.AlquistProftMasterSleuth.class));
         cards.add(new SetCardInfo("Analyze the Pollen", 150, Rarity.RARE, mage.cards.a.AnalyzeThePollen.class));
         cards.add(new SetCardInfo("Anzrag, the Quake-Mole", 186, Rarity.MYTHIC, mage.cards.a.AnzragTheQuakeMole.class));
+        cards.add(new SetCardInfo("Archdruid's Charm", 151, Rarity.RARE, mage.cards.a.ArchdruidsCharm.class));
         cards.add(new SetCardInfo("Assassin's Trophy", 187, Rarity.RARE, mage.cards.a.AssassinsTrophy.class));
         cards.add(new SetCardInfo("Audience with Trostani", 152, Rarity.RARE, mage.cards.a.AudienceWithTrostani.class));
         cards.add(new SetCardInfo("Aurelia, the Law Above", 188, Rarity.RARE, mage.cards.a.AureliaTheLawAbove.class));
