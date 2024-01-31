@@ -50,8 +50,14 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Case of the Burning Masks", 113, Rarity.UNCOMMON, mage.cards.c.CaseOfTheBurningMasks.class));
         cards.add(new SetCardInfo("Case of the Crimson Pulse", 114, Rarity.RARE, mage.cards.c.CaseOfTheCrimsonPulse.class));
         cards.add(new SetCardInfo("Case of the Filched Falcon", 44, Rarity.UNCOMMON, mage.cards.c.CaseOfTheFilchedFalcon.class));
+        cards.add(new SetCardInfo("Case of the Gateway Express", 8, Rarity.UNCOMMON, mage.cards.c.CaseOfTheGatewayExpress.class));
+        cards.add(new SetCardInfo("Case of the Gorgon's Kiss", 79, Rarity.UNCOMMON, mage.cards.c.CaseOfTheGorgonsKiss.class));
         cards.add(new SetCardInfo("Case of the Locked Hothouse", 155, Rarity.RARE, mage.cards.c.CaseOfTheLockedHothouse.class));
         cards.add(new SetCardInfo("Case of the Stashed Skeleton", 80, Rarity.RARE, mage.cards.c.CaseOfTheStashedSkeleton.class));
+        cards.add(new SetCardInfo("Case of the Ransacked Lab", 45, Rarity.RARE, mage.cards.c.CaseOfTheRansackedLab.class));
+        cards.add(new SetCardInfo("Case of the Shattered Pact", 1, Rarity.UNCOMMON, mage.cards.c.CaseOfTheShatteredPact.class));
+        cards.add(new SetCardInfo("Case of the Stashed Skeleton", 80, Rarity.RARE, mage.cards.c.CaseOfTheStashedSkeleton.class));
+        cards.add(new SetCardInfo("Case of the Trampled Garden", 156, Rarity.UNCOMMON, mage.cards.c.CaseOfTheTrampledGarden.class));
         cards.add(new SetCardInfo("Caught Red-Handed", 115, Rarity.UNCOMMON, mage.cards.c.CaughtRedHanded.class));
         cards.add(new SetCardInfo("Cease // Desist", 246, Rarity.UNCOMMON, mage.cards.c.CeaseDesist.class));
         cards.add(new SetCardInfo("Cerebral Confiscation", 81, Rarity.COMMON, mage.cards.c.CerebralConfiscation.class));
@@ -117,6 +123,7 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Inside Source", 19, Rarity.COMMON, mage.cards.i.InsideSource.class));
         cards.add(new SetCardInfo("Insidious Roots", 208, Rarity.UNCOMMON, mage.cards.i.InsidiousRoots.class));
         cards.add(new SetCardInfo("Island", 273, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("It Doesn't Add Up", 89, Rarity.UNCOMMON, mage.cards.i.ItDoesntAddUp.class));
         cards.add(new SetCardInfo("Izoni, Center of the Web", 209, Rarity.RARE, mage.cards.i.IzoniCenterOfTheWeb.class));
         cards.add(new SetCardInfo("Jaded Analyst", 62, Rarity.COMMON, mage.cards.j.JadedAnalyst.class));
         cards.add(new SetCardInfo("Knife", 134, Rarity.UNCOMMON, mage.cards.k.Knife.class));
@@ -182,6 +189,7 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Seasoned Consultant", 33, Rarity.COMMON, mage.cards.s.SeasonedConsultant.class));
         cards.add(new SetCardInfo("Shadowy Backstreet", 268, Rarity.RARE, mage.cards.s.ShadowyBackstreet.class));
         cards.add(new SetCardInfo("Shady Informant", 231, Rarity.COMMON, mage.cards.s.ShadyInformant.class));
+        cards.add(new SetCardInfo("Sharp-Eyed Rookie", 176, Rarity.RARE, mage.cards.s.SharpEyedRookie.class));
         cards.add(new SetCardInfo("Shock", 144, Rarity.COMMON, mage.cards.s.Shock.class));
         cards.add(new SetCardInfo("Slice from the Shadows", 103, Rarity.COMMON, mage.cards.s.SliceFromTheShadows.class));
         cards.add(new SetCardInfo("Slime Against Humanity", 177, Rarity.COMMON, mage.cards.s.SlimeAgainstHumanity.class));
@@ -195,6 +203,7 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Surveillance Monitor", 73, Rarity.UNCOMMON, mage.cards.s.SurveillanceMonitor.class));
         cards.add(new SetCardInfo("Suspicious Detonation", 145, Rarity.COMMON, mage.cards.s.SuspiciousDetonation.class));
         cards.add(new SetCardInfo("Swamp", 274, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Tenth District Hero", 34, Rarity.RARE, mage.cards.t.TenthDistrictHero.class));
         cards.add(new SetCardInfo("Teysa, Opulent Oligarch", 234, Rarity.RARE, mage.cards.t.TeysaOpulentOligarch.class));
         cards.add(new SetCardInfo("The Chase Is On", 116, Rarity.COMMON, mage.cards.t.TheChaseIsOn.class));
         cards.add(new SetCardInfo("They Went This Way", 178, Rarity.COMMON, mage.cards.t.TheyWentThisWay.class));

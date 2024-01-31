@@ -76,7 +76,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         // prepare search dialog with checkboxes
         listCodeSelected = new CheckBoxList();
         List<String> checkboxes = new ArrayList<>();
-        for (String item : ConstructedFormats.getTypes()) {
+        for (String item : ConstructedFormats.getTypes(false)) {
             if (!item.equals(ConstructedFormats.ALL_SETS)) {
                 checkboxes.add(item);
             }
@@ -540,7 +540,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
     }
 
     private void reloadSetsCombobox() {
-        DefaultComboBoxModel model = new DefaultComboBoxModel<>(ConstructedFormats.getTypes());
+        DefaultComboBoxModel model = new DefaultComboBoxModel<>(ConstructedFormats.getTypes(false).toArray());
         cbExpansionSet.setModel(model);
     }
 
