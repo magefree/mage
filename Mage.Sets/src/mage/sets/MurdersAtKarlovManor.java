@@ -54,7 +54,6 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Case of the Gateway Express", 8, Rarity.UNCOMMON, mage.cards.c.CaseOfTheGatewayExpress.class));
         cards.add(new SetCardInfo("Case of the Gorgon's Kiss", 79, Rarity.UNCOMMON, mage.cards.c.CaseOfTheGorgonsKiss.class));
         cards.add(new SetCardInfo("Case of the Locked Hothouse", 155, Rarity.RARE, mage.cards.c.CaseOfTheLockedHothouse.class));
-        cards.add(new SetCardInfo("Case of the Stashed Skeleton", 80, Rarity.RARE, mage.cards.c.CaseOfTheStashedSkeleton.class));
         cards.add(new SetCardInfo("Case of the Ransacked Lab", 45, Rarity.RARE, mage.cards.c.CaseOfTheRansackedLab.class));
         cards.add(new SetCardInfo("Case of the Shattered Pact", 1, Rarity.UNCOMMON, mage.cards.c.CaseOfTheShatteredPact.class));
         cards.add(new SetCardInfo("Case of the Stashed Skeleton", 80, Rarity.RARE, mage.cards.c.CaseOfTheStashedSkeleton.class));
