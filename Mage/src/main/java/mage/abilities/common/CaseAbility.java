@@ -88,12 +88,12 @@ public class CaseAbility extends SimpleStaticAbility {
                     if (!(effect instanceof ConditionalContinuousEffect ||
                             effect instanceof ConditionalAsThoughEffect ||
                             effect instanceof ConditionalReplacementEffect)) {
-                        throw new IllegalArgumentException("solvedAbility must be one of ConditionalActivatedAbility, " +
+                        throw new IllegalArgumentException("Wrong code usage: solvedAbility must be one of ConditionalActivatedAbility, " +
                                 "ConditionalTriggeredAbility, or StaticAbility with conditional effects.");
                     }
                 }
             } else {
-                throw new IllegalArgumentException("solvedAbility must be one of ConditionalActivatedAbility, " +
+                throw new IllegalArgumentException("Wrong code usage: solvedAbility must be one of ConditionalActivatedAbility, " +
                         "ConditionalTriggeredAbility, or StaticAbility with conditional effects.");
             }
         }

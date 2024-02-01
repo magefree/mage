@@ -137,8 +137,17 @@ class CaseOfThePilferedProofReplacementEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         if (event instanceof CreateTokenEvent) {
             CreateTokenEvent tokenEvent = (CreateTokenEvent) event;
+            ClueArtifactToken clueToken = null;
             Map<Token, Integer> tokens = tokenEvent.getTokens();
-            tokens.put(new ClueArtifactToken(), 1);
+            for (Map.Entry<Token, Integer> entry : tokens.entrySet()) {
+                if (entry.getKey() instanceof ClueArtifactToken) {
+                    clueToken = (ClueArtifactToken) entry.getKey();
+                }
+            }
+            if (clueToken == null) {
+                clueToken = new ClueArtifactToken();
+            }
+            tokens.put(clueToken, tokens.getOrDefault(clueToken, 0) + 1);
         }
         return false;
     }
