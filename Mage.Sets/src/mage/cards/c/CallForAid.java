@@ -15,7 +15,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.filter.predicate.permanent.PermanentReferenceInCollectionPredicate;
 import mage.game.Game;
@@ -71,26 +70,24 @@ class CallForAidEffect extends OneShotEffect {
         FilterCreaturePermanent filter = new FilterCreaturePermanent();
         filter.add(new ControllerIdPredicate(opponent.getId()));
         List<Permanent> opponentCreatures = game.getBattlefield().getActivePermanents(filter, opponent.getId(), game);
-
         filter = new FilterCreaturePermanent();
-        PermanentReferenceInCollectionPredicate stolenPermanentsPredicate = new PermanentReferenceInCollectionPredicate(opponentCreatures, game);
-        filter.add(stolenPermanentsPredicate);
-        //... gain control of them till end of turn...
+        filter.add(new PermanentReferenceInCollectionPredicate(opponentCreatures, game));
+
+        //"Gain control of all creatures target opponent controls until end of turn"
         GainControlAllEffect gainControl = new GainControlAllEffect(Duration.EndOfTurn, filter);
         gainControl.apply(game, source);
-        //...untap all stolen creatures...
+
+        //"Untap those creatures".
         new UntapAllEffect(filter).apply(game, source);
-        //...give them haste...
+
+        //"They gain haste until end of turn"
         GainAbilityAllEffect gainHaste = new GainAbilityAllEffect(HasteAbility.getInstance(), Duration.EndOfTurn, filter);
         game.addEffect(gainHaste, source);
-        //...make sure the caster cant attack targeted opponent...
-        FilterCreaturePermanent currentCreaturesFilter = new FilterCreaturePermanent();
-        // At the time this filter it built we do not yet control the creatures of target opponent. So we have to combine the predicates.
-        currentCreaturesFilter.add(Predicates.or(new ControllerIdPredicate(source.getControllerId()), stolenPermanentsPredicate));
 
-        GainAbilityAllEffect cantAttackOwnerEffect = new GainAbilityAllEffect(new SimpleStaticAbility(new CantAttackCertainOpponentEffect(opponent)), Duration.EndOfTurn, currentCreaturesFilter);
-        game.addEffect(cantAttackOwnerEffect, source);
-        //...and finally prevent them from being sacrificed.
+        //"You can't attack that player this turn"
+        game.addEffect(new CantAttackTargetOpponentEffect(Duration.EndOfTurn).setTargetPointer(targetPointer), source);
+
+        //"You can't sacrifice those creatures this turn"
         GainAbilityAllEffect cantBeSacrificed = new GainAbilityAllEffect(new SimpleStaticAbility(new CantBeSacrificedSourceEffect()), Duration.EndOfTurn, filter);
         game.addEffect(cantBeSacrificed, source);
 
@@ -103,30 +100,24 @@ class CallForAidEffect extends OneShotEffect {
     }
 }
 
-class CantAttackCertainOpponentEffect extends RestrictionEffect {
-
-    private final Player opponent;
-
-    // The target is chosen during the resolution of the spell itself.
-    // However, the effect "lingers" until end of turn, so we need to remember which player was chosen as the target.
-    CantAttackCertainOpponentEffect(Player opponent) {
-        super(Duration.EndOfTurn, Outcome.Detriment);
-        this.opponent = opponent;
+class CantAttackTargetOpponentEffect extends RestrictionEffect {
+    CantAttackTargetOpponentEffect(Duration duration) {
+        super(duration, Outcome.Detriment);
     }
 
-    private CantAttackCertainOpponentEffect(final CantAttackCertainOpponentEffect effect) {
+    private CantAttackTargetOpponentEffect(final CantAttackTargetOpponentEffect effect) {
         super(effect);
-        this.opponent = effect.opponent;
     }
 
     @Override
-    public CantAttackCertainOpponentEffect copy() {
-        return new CantAttackCertainOpponentEffect(this);
+    public CantAttackTargetOpponentEffect copy() {
+        return new CantAttackTargetOpponentEffect(this);
     }
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return permanent.getId().equals(source.getSourceId());
+        // Effect applies to all permanents (most likely creatures) controlled by the caster of "Call for Aid"
+        return source.getControllerId().equals(permanent.getControllerId());
     }
 
     @Override
@@ -134,7 +125,8 @@ class CantAttackCertainOpponentEffect extends RestrictionEffect {
         if (defenderId == null || attacker == null) {
             return true;
         }
-        return !defenderId.equals(opponent.getId());
+        // Should be only a single target in case of "Call for Aid"
+        return !this.getTargetPointer().getTargets(game,source).contains(defenderId);
     }
 
 }
