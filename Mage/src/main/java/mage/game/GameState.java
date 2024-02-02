@@ -801,6 +801,7 @@ public class GameState implements Serializable, Copyable<GameState> {
             for (GameEvent event : eventsToHandle) {
                 this.handleEvent(event, game);
             }
+
         }
     }
 

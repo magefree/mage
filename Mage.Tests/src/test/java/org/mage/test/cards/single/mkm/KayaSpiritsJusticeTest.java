@@ -65,4 +65,27 @@ public class KayaSpiritsJusticeTest extends CardTestPlayerBase {
 
         assertCounterCount(playerA, "Laelia, the Blade Reforged", CounterType.P1P1, 1);
     }
+
+    @Test
+    public void test_MagmaticGalleon() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Magmatic Galleon");
+        addCard(Zone.HAND, playerA, "Fiery Confluence");
+
+        addCard(Zone.BATTLEFIELD, playerB, "Llanowar Elves");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Fiery Confluence");
+        setModeChoice(playerA, "1");
+        setModeChoice(playerA, "1");
+        setModeChoice(playerA, "1");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, 1);
+
+        checkStackSize("only one trigger", 1, PhaseStep.PRECOMBAT_MAIN, playerA, 1);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, "Treasure Token", 1);
+    }
 }

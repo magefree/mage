@@ -1,20 +1,15 @@
 package mage.cards.k;
 
-import java.util.List;
-import java.util.Map;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
 import mage.MageObject;
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.AttacksWithCreaturesTriggeredAbility;
-import mage.abilities.common.ZoneChangeAllTriggeredAbility;
-import mage.abilities.common.ZoneChangeTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CopyEffect;
@@ -40,6 +35,8 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.ZoneChangeBatchEvent;
+import mage.game.events.ZoneChangeEvent;
 import mage.game.events.ZoneChangeGroupEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.WhiteBlackSpiritToken;
@@ -53,7 +50,6 @@ import mage.target.targetpointer.EachTargetPointer;
 import mage.target.targetpointer.FixedTargets;
 import mage.target.targetpointer.TargetPointer;
 import mage.util.CardUtil;
-import mage.watchers.Watcher;
 
 /**
  *
@@ -123,55 +119,51 @@ class KayaSpiritsJusticeTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE_GROUP;
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE_BATCH;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        ZoneChangeGroupEvent zEvent = (ZoneChangeGroupEvent) event;
-        if (zEvent == null || zEvent.getCards() == null || zEvent.getToZone() != Zone.EXILED) {
+        ZoneChangeBatchEvent zEvent = (ZoneChangeBatchEvent) event;
+        if (zEvent == null) {
             return false;
         }
-        if (zEvent.getFromZone() == Zone.BATTLEFIELD) {
-            Set<Card> cards = zEvent.getCards()
-                    .stream()
-                    .filter(Objects::nonNull)
-                    .filter(card -> {
-                       Permanent permanent = game.getPermanentOrLKIBattlefield(card.getId());
-                       return StaticFilters.FILTER_PERMANENT_CREATURE
-                               .match(permanent, getControllerId(), this, game);
-                    })
-                    .collect(Collectors.toSet());
-            return setTargetPointer(cards, game);
-        } else if (zEvent.getFromZone() == Zone.GRAVEYARD) {
-            Set<Card> cards = zEvent.getCards()
-                    .stream()
-                    .filter(Objects::nonNull)
-                    .filter(card -> StaticFilters.FILTER_CARD_CREATURE
-                            .match(card, getControllerId(), this, game))
-                    .collect(Collectors.toSet());
-            return setTargetPointer(cards, game);
-        }
-        return false;
-    }
 
-    private boolean setTargetPointer(Set<Card> cards, Game game) {
+        Set<Card> battlefieldCards = zEvent.getEvents()
+                .stream()
+                .filter(e -> e.getFromZone() == Zone.BATTLEFIELD)
+                .filter(e -> e.getToZone() == Zone.EXILED)
+                .map(ZoneChangeEvent::getTargetId)
+                .filter(Objects::nonNull)
+                .map(game::getCard)
+                .filter(Objects::nonNull)
+                .filter(card -> {
+                    Permanent permanent = game.getPermanentOrLKIBattlefield(card.getId());
+                    return StaticFilters.FILTER_PERMANENT_CREATURE
+                            .match(permanent, getControllerId(), this, game);
+                })
+                .collect(Collectors.toSet());
+
+        Set<Card> graveyardCards = zEvent.getEvents()
+                .stream()
+                .filter(e -> e.getFromZone() == Zone.GRAVEYARD)
+                .filter(e -> e.getToZone() == Zone.EXILED)
+                .map(ZoneChangeEvent::getTargetId)
+                .filter(Objects::nonNull)
+                .map(game::getCard)
+                .filter(Objects::nonNull)
+                .filter(card -> StaticFilters.FILTER_CARD_CREATURE
+                        .match(card, getControllerId(), this, game))
+                .collect(Collectors.toSet());
+
+        Set<Card> cards = new HashSet<>(battlefieldCards);
+        cards.addAll(graveyardCards);
         if (cards.isEmpty()) {
             return false;
         }
-        boolean fireTrigger = true;
-        for (Effect effect : getEffects()) {
-            TargetPointer pointer = effect.getTargetPointer();
-            if (pointer instanceof FixedTargets) {
-                fireTrigger = false;
-                FixedTargets fixedTargets = (FixedTargets) pointer;
-                fixedTargets.addTargets(cards, game);
-            } else {
-                pointer = new FixedTargets(cards, game);
-            }
-            effect.setTargetPointer(pointer);
-        }
-        return fireTrigger;
+
+        getEffects().setTargetPointer(new FixedTargets(new CardsImpl(cards), game));
+        return true;
     }
 }
 
