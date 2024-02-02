@@ -4,13 +4,16 @@ import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.OneShotEffect;
-import mage.constants.Outcome;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.game.stack.StackAbility;
+import mage.game.stack.StackObject;
+import mage.watchers.Watcher;
 
 import java.util.Objects;
 
@@ -20,7 +23,8 @@ import java.util.Objects;
 public class TrainingAbility extends TriggeredAbilityImpl {
 
     public TrainingAbility() {
-        super(Zone.BATTLEFIELD, new TrainingAbilityEffect());
+        super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
+        addWatcher(new TrainingWatcher());
     }
 
     private TrainingAbility(final TrainingAbility ability) {
@@ -61,32 +65,32 @@ public class TrainingAbility extends TriggeredAbilityImpl {
     }
 }
 
-class TrainingAbilityEffect extends OneShotEffect {
+class TrainingWatcher extends Watcher {
 
-    TrainingAbilityEffect() {
-        super(Outcome.Neutral);
-    }
-
-    private TrainingAbilityEffect(final TrainingAbilityEffect effect) {
-        super(effect);
+    public TrainingWatcher() {
+        super(WatcherScope.GAME);
     }
 
     @Override
-    public TrainingAbilityEffect copy() {
-        return new TrainingAbilityEffect(this);
-    }
+    public void watch(GameEvent event, Game game) {
+        // 20240202 - 702.149c
+        // Some creatures with training have abilities that trigger when they train.
+        // "When this creature trains" means "When a resolving training ability puts a +1/+1 counter on this creature."
+        if (event.getType() == GameEvent.EventType.COUNTER_ADDED && event.getData().equals(CounterType.P1P1.getName())) {
+            StackObject stackObject = game.getStack().getStackObject(event.getSourceId());
+            if (!(stackObject instanceof StackAbility)) {
+                return;
+            }
 
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
-        if (permanent == null) {
-            return false;
+            Ability ability = stackObject.getStackAbility();
+            if (ability instanceof TrainingAbility) {
+                game.fireEvent(GameEvent.getEvent(
+                        GameEvent.EventType.TRAINED_CREATURE,
+                        event.getTargetId(),
+                        ability,
+                        event.getPlayerId()
+                ));
+            }
         }
-        permanent.addCounters(CounterType.P1P1.createInstance(), source, game);
-        game.fireEvent(GameEvent.getEvent(
-                GameEvent.EventType.TRAINED_CREATURE,
-                source.getSourceId(), source, source.getControllerId()
-        ));
-        return true;
     }
 }
