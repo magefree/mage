@@ -15,6 +15,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackAbility;
+import mage.game.stack.StackObject;
 import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.Watcher;
 
@@ -72,12 +73,12 @@ class MentoredWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         // TODO Make sure this is correct after the comprehensive rules update for CLU/MKM, add citation
         if (event.getType() == GameEvent.EventType.COUNTER_ADDED && event.getData().equals(CounterType.P1P1.getName())) {
-            StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
-            if (stackAbility == null) {
+            StackObject stackObject = game.getStack().getStackObject(event.getSourceId());
+            if (!(stackObject instanceof StackAbility)) {
                 return;
             }
 
-            Ability ability = stackAbility.getStackAbility();
+            Ability ability = stackObject.getStackAbility();
             if (ability instanceof MentorAbility) {
                 game.fireEvent(GameEvent.getEvent(
                         GameEvent.EventType.MENTORED_CREATURE,
