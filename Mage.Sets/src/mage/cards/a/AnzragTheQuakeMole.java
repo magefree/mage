@@ -14,7 +14,8 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.filter.StaticFilters;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
 
 import java.util.UUID;
 
@@ -22,6 +23,9 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class AnzragTheQuakeMole extends CardImpl {
+
+    private static final FilterPermanent filter
+            = new FilterControlledCreaturePermanent("each creature you control");
 
     public AnzragTheQuakeMole(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{G}");
@@ -34,7 +38,7 @@ public final class AnzragTheQuakeMole extends CardImpl {
 
         // Whenever Anzrag, the Quake-Mole becomes blocked, untap each creature you control. After this combat phase, there is an additional combat phase.
         Ability ability = new BecomesBlockedSourceTriggeredAbility(
-                new UntapAllEffect(StaticFilters.FILTER_CONTROLLED_CREATURE), false
+                new UntapAllEffect(filter), false
         );
         ability.addEffect(new AdditionalCombatPhaseEffect()
                 .setText("After this combat phase, there is an additional combat phase"));

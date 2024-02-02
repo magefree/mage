@@ -9,7 +9,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInASingleGraveyard;
 
 import java.util.UUID;
@@ -18,8 +18,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class GriffnautTracker extends CardImpl {
-
-    private static final FilterCard filter = new FilterCard("cards from a single graveyard");
 
     public GriffnautTracker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
@@ -34,7 +32,7 @@ public final class GriffnautTracker extends CardImpl {
 
         // When Griffnaut Tracker enters the battlefield, exile up to two target cards from a single graveyard.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ExileTargetEffect());
-        ability.addTarget(new TargetCardInASingleGraveyard(0, 2, filter));
+        ability.addTarget(new TargetCardInASingleGraveyard(0, 2, StaticFilters.FILTER_CARD_CARDS));
         this.addAbility(ability);
     }
 

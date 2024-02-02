@@ -11,8 +11,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
-import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.permanent.SuspectedPredicate;
 import mage.target.TargetPermanent;
 
@@ -24,9 +24,11 @@ import java.util.UUID;
 public final class ClandestineMeddler extends CardImpl {
 
     private static final FilterPermanent filter = new FilterControlledCreaturePermanent();
+    private static final FilterPermanent filterOther = new FilterControlledCreaturePermanent("other target creature you control");
 
     static {
         filter.add(SuspectedPredicate.instance);
+        filterOther.add(AnotherPredicate.instance);
     }
 
     public ClandestineMeddler(UUID ownerId, CardSetInfo setInfo) {
@@ -40,7 +42,7 @@ public final class ClandestineMeddler extends CardImpl {
         // When Clandestine Meddler enters the battlefield, suspect up to one other target creature you control.
         Ability ability = new EntersBattlefieldTriggeredAbility(new SuspectTargetEffect());
         ability.addTarget(new TargetPermanent(
-                0, 1, StaticFilters.FILTER_ANOTHER_TARGET_CREATURE_YOU_CONTROL
+                0, 1, filterOther
         ));
         this.addAbility(ability);
 

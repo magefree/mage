@@ -43,7 +43,7 @@ public final class SzarekhTheSilentKing extends CardImpl {
 
         // My Will Be Done -- Whenever Szarekh, the Silent King attacks, mill three cards. You may put an artifact creature card or Vehicle card from among the cards milled this way into your hand.
         this.addAbility(new AttacksTriggeredAbility(
-                new MillThenPutInHandEffect(3, filter)
+                new MillThenPutInHandEffect(3, filter).withTextOptions("the cards milled this way")
         ).withFlavorWord("My Will Be Done"));
     }
 

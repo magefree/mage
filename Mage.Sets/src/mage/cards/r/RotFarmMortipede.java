@@ -31,7 +31,7 @@ public final class RotFarmMortipede extends CardImpl {
         // Whenever one or more creature cards leave your graveyard, Rot Farm Mortipede gets +1/+0 and gains menace and lifelink until end of turn.
         Ability ability = new CardsLeaveGraveyardTriggeredAbility(new BoostSourceEffect(
                 1, 0, Duration.EndOfTurn
-        ).setText("{this} gets +1/+0"), StaticFilters.FILTER_CARD_CREATURE);
+        ).setText("{this} gets +1/+0"), StaticFilters.FILTER_CARD_CREATURES);
         ability.addEffect(new GainAbilitySourceEffect(
                 new MenaceAbility(false), Duration.EndOfTurn
         ).setText("and gains menace"));

@@ -95,6 +95,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     // maximal number of creatures the creature can be blocked by  0 = no restriction
     protected int maxBlockedBy = 0;
     protected boolean deathtouched;
+    protected boolean solved = false;
 
     protected Map<String, List<UUID>> connectedCards = new HashMap<>();
     protected Set<MageObjectReference> dealtDamageByThisTurn;
@@ -145,6 +146,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.blocking = permanent.blocking;
         this.maxBlocks = permanent.maxBlocks;
         this.deathtouched = permanent.deathtouched;
+        this.solved = permanent.solved;
         this.markedLifelink = permanent.markedLifelink;
         this.connectedCards = CardUtil.deepCopyObject(permanent.connectedCards);
         this.dealtDamageByThisTurn = CardUtil.deepCopyObject(permanent.dealtDamageByThisTurn);
@@ -1911,6 +1913,33 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     @Override
     public boolean isRingBearer() {
         return ringBearerFlag;
+    }
+
+    @Override
+    public boolean isSolved() {
+        return solved;
+    }
+
+    @Override
+    public boolean solve(Game game, Ability source) {
+        if (this.solved) {
+            return false;
+        }
+        GameEvent event = new GameEvent(GameEvent.EventType.SOLVE_CASE, getId(),
+                source, source.getControllerId());
+        if (game.replaceEvent(event)) {
+            return false;
+        }
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            game.informPlayers(controller.getLogName() + " solved " + this.getLogName() +
+                    CardUtil.getSourceLogName(game, source));
+        }
+
+        this.solved = true;
+        game.fireEvent(new GameEvent(EventType.CASE_SOLVED, getId(), source,
+                source.getControllerId()));
+        return true;
     }
 
     @Override

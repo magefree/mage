@@ -37,7 +37,7 @@ public final class SnarlingGorehound extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Whenever another creature with power 2 or less enters the battlefield under your control, surveil 1.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new SurveilEffect(1), filter));

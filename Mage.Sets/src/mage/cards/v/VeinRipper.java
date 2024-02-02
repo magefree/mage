@@ -34,7 +34,7 @@ public final class VeinRipper extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Ward--Sacrifice a creature.
-        this.addAbility(new WardAbility(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
+        this.addAbility(new WardAbility(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT), false));
 
         // Whenever a creature dies, target opponent loses 2 life and you gain 2 life.
         Ability ability = new DiesCreatureTriggeredAbility(new LoseLifeTargetEffect(2), false);

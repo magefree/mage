@@ -24,7 +24,7 @@ public final class EliminateTheImpossible extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");
 
         // Investigate. Creatures your opponents control get -2/-0 until end of turn. If any of them are suspected, they're no longer suspected.
-        this.getSpellAbility().addEffect(new InvestigateEffect());
+        this.getSpellAbility().addEffect(new InvestigateEffect().setText("investigate"));
         this.getSpellAbility().addEffect(new BoostAllEffect(
                 -2, 0, Duration.EndOfTurn,
                 StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURES, false

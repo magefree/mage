@@ -38,7 +38,7 @@ public final class ArmMountedAnchor extends CardImpl {
         Ability firstAbility = new SimpleStaticAbility(new BoostEquippedEffect(2, 2));
         firstAbility.addEffect(new GainAbilityAttachedEffect(
                 new MenaceAbility(), AttachmentType.EQUIPMENT
-        ).setText("and has menace. <i>(It can't be blocked except by two or more creatures.)</i>"));
+        ).setText("and has menace"));
         this.addAbility(firstAbility);
 
         // Whenever equipped creature deals combat damage to a player, draw two cards. Then discard two cards unless you discard a Pirate card.

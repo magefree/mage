@@ -34,7 +34,7 @@ public final class CuriousCadaver extends CardImpl {
         this.addAbility(new SacrificePermanentTriggeredAbility(
                 Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), filter,
                 TargetController.YOU, SetTargetPointer.NONE, false
-        ));
+        ).setTriggerPhrase("When you sacrifice a Clue, "));
     }
 
     private CuriousCadaver(final CuriousCadaver card) {
