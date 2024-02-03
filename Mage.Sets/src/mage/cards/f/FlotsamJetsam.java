@@ -43,7 +43,7 @@ public final class FlotsamJetsam extends SplitCard {
         // Jetsam
         // Each opponent mills three cards, then you may cast a spell from each opponent's graveyard without paying its mana cost. If a spell cast this way would be put into a graveyard, exile it instead.
         getRightHalfCard().getSpellAbility().addEffect(new MillCardsEachPlayerEffect(3, TargetController.OPPONENT));
-        getRightHalfCard().getSpellAbility().addEffect(new JetsamEffect().concatBy(", then "));
+        getRightHalfCard().getSpellAbility().addEffect(new JetsamEffect().concatBy(", then"));
 
     }
 
