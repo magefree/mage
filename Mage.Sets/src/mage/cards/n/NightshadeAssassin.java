@@ -96,7 +96,7 @@ class NightshadeAssassinEffect extends OneShotEffect {
                 controller.revealCards(sourceObject.getIdName(), new CardsImpl(target.getTargets()), game);
                 int unboost = target.getTargets().size() * -1;
                 ContinuousEffect effect = new BoostTargetEffect(unboost, unboost, Duration.EndOfTurn);
-                effect.setTargetPointer(getTargetPointer());
+                effect.setTargetPointer(this.getTargetPointer().copy());
                 game.addEffect(effect, source);
             }
         }
