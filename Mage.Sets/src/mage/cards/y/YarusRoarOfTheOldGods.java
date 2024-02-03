@@ -15,7 +15,6 @@ import mage.abilities.keyword.HasteAbility;
 import mage.cards.Card;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.cards.CardImpl;
@@ -59,8 +58,7 @@ public final class YarusRoarOfTheOldGods extends CardImpl {
                 StaticFilters.FILTER_PERMANENT_CREATURES, true)));
         // Whenever one or more face-down creatures you control deal combat damage to a player, draw a card.
         this.addAbility(new DealCombatDamageControlledTriggeredAbility(
-                Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1),
-                filter, SetTargetPointer.PLAYER, false)
+                new DrawCardSourceControllerEffect(1), filter)
                 .setTriggerPhrase("Whenever one or more face-down creatures you control deal combat damage to a player, "));
         // Whenever a face-down creature you control dies, return it to the battlefield face down under its owner's control if it's a permanent card, then turn it face up.
         this.addAbility(new DiesCreatureTriggeredAbility(
@@ -105,7 +103,7 @@ class YarusRoarOfTheOldGodsEffect extends OneShotEffect {
         Ability newSource = source.copy();
         newSource.setWorksFaceDown(true);
         MageObjectReference mor = new MageObjectReference(card.getId(),
-                card.getZoneChangeCounter(game), game);
+                card.getZoneChangeCounter(game) + 1, game);
         game.addEffect(new BecomesFaceDownCreatureEffect(
                 null, mor, Duration.Custom,
                 BecomesFaceDownCreatureEffect.FaceDownType.MANUAL), newSource);
