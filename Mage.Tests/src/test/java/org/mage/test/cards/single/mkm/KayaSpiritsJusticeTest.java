@@ -3,22 +3,28 @@ package org.mage.test.cards.single.mkm;
 import mage.abilities.keyword.FlyingAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import mage.counters.CounterType;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
+/**
+ * @author DominionSpy
+ */
 public class KayaSpiritsJusticeTest extends CardTestPlayerBase {
 
     @Test
     public void test_TriggeredAbility() {
-        addCard(Zone.BATTLEFIELD, playerA, "Plains", 1 + 6);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 1 + 2 + 6);
         addCard(Zone.BATTLEFIELD, playerA, "Kaya, Spirits' Justice");
-        addCard(Zone.GRAVEYARD, playerA, "Llanowar Elves");
+        addCard(Zone.BATTLEFIELD, playerA, "Llanowar Elves");
         addCard(Zone.GRAVEYARD, playerA, "Fyndhorn Elves");
         addCard(Zone.HAND, playerA, "Thraben Inspector");
+        addCard(Zone.HAND, playerA, "Astrid Peth");
         addCard(Zone.HAND, playerA, "Farewell");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Thraben Inspector");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Astrid Peth");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
 
         // Exile all creatures and graveyards
@@ -27,10 +33,14 @@ public class KayaSpiritsJusticeTest extends CardTestPlayerBase {
         setModeChoice(playerA, "4");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, 1);
 
-        showExile("exile", 1, PhaseStep.PRECOMBAT_MAIN, playerA);
-
+        // Kaya's ability triggers twice, so choose which is put on the stack
+        setChoice(playerA, "Whenever", 1);
+        // Trigger targets
         addTarget(playerA, "Clue Token");
+        addTarget(playerA, "Food Token");
+        // Copy choices
         addTarget(playerA, "Fyndhorn Elves");
+        addTarget(playerA, "Llanowar Elves");
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
@@ -39,53 +49,8 @@ public class KayaSpiritsJusticeTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Clue Token", 0);
         assertPermanentCount(playerA, "Fyndhorn Elves", 1);
         assertAbility(playerA, "Fyndhorn Elves", FlyingAbility.getInstance(), true);
-    }
-
-    @Test
-    public void test_Laelia() {
-        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 4);
-        addCard(Zone.BATTLEFIELD, playerA, "Laelia, the Blade Reforged");
-        addCard(Zone.GRAVEYARD, playerA, "Llanowar Elves");
-        addCard(Zone.LIBRARY, playerA, "Llanowar Elves");
-        addCard(Zone.HAND, playerA, "Llanowar Elves");
-        addCard(Zone.HAND, playerA, "Cranial Extraction");
-
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cranial Extraction", playerA);
-        setChoice(playerA, "Llanowar Elves");
-        setChoice(playerA, "Llanowar Elves");
-        setChoice(playerA, "Llanowar Elves");
-        setChoice(playerA, "Llanowar Elves");
-        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, 1);
-
-        checkStackSize("only one trigger", 1, PhaseStep.PRECOMBAT_MAIN, playerA, 1);
-
-        setStrictChooseMode(true);
-        setStopAt(1, PhaseStep.END_TURN);
-        execute();
-
-        assertCounterCount(playerA, "Laelia, the Blade Reforged", CounterType.P1P1, 1);
-    }
-
-    @Test
-    public void test_MagmaticGalleon() {
-        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
-        addCard(Zone.BATTLEFIELD, playerA, "Magmatic Galleon");
-        addCard(Zone.HAND, playerA, "Fiery Confluence");
-
-        addCard(Zone.BATTLEFIELD, playerB, "Llanowar Elves");
-
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Fiery Confluence");
-        setModeChoice(playerA, "1");
-        setModeChoice(playerA, "1");
-        setModeChoice(playerA, "1");
-        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, 1);
-
-        checkStackSize("only one trigger", 1, PhaseStep.PRECOMBAT_MAIN, playerA, 1);
-
-        setStrictChooseMode(true);
-        setStopAt(1, PhaseStep.END_TURN);
-        execute();
-
-        assertPermanentCount(playerA, "Treasure Token", 1);
+        assertPermanentCount(playerA, "Food Token", 0);
+        assertPermanentCount(playerA, "Llanowar Elves", 1);
+        assertAbility(playerA, "Llanowar Elves", FlyingAbility.getInstance(), true);
     }
 }

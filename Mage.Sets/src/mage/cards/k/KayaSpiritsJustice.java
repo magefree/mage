@@ -10,7 +10,6 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CopyEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -37,7 +36,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeBatchEvent;
 import mage.game.events.ZoneChangeEvent;
-import mage.game.events.ZoneChangeGroupEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.WhiteBlackSpiritToken;
 import mage.players.Player;
@@ -48,7 +46,6 @@ import mage.target.common.TargetCardInGraveyard;
 import mage.target.targetadjustment.TargetAdjuster;
 import mage.target.targetpointer.EachTargetPointer;
 import mage.target.targetpointer.FixedTargets;
-import mage.target.targetpointer.TargetPointer;
 import mage.util.CardUtil;
 
 /**
@@ -64,18 +61,15 @@ public final class KayaSpiritsJustice extends CardImpl {
         this.subtype.add(SubType.KAYA);
         this.setStartingLoyalty(3);
 
-        // Whenever one or more creatures you control and/or
-        // creature cards in your graveyard are put into exile,
-        // you may choose a creature card from among them.
-        // Until end of turn, target token you control becomes a copy of it,
-        // except it has flying.
+        // Whenever one or more creatures you control and/or creature cards in your graveyard are put into exile, you may choose a creature card from among them.
+        // Until end of turn, target token you control becomes a copy of it, except it has flying.
         Ability ability = new KayaSpiritsJusticeTriggeredAbility();
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_TOKEN));
         this.addAbility(ability);
 
         // +2: Surveil 2, then exile a card from a graveyard.
         ability = new LoyaltyAbility(new SurveilEffect(2, false), 2);
-        ability.addEffect(new KayaSpiritsJusticeExileEffect());
+        ability.addEffect(new KayaSpiritsJusticeExileEffect().concatBy(", then"));
         this.addAbility(ability);
         // +1: Create a 1/1 white and black Spirit creature token with flying.
         ability = new LoyaltyAbility(new CreateTokenEffect(new WhiteBlackSpiritToken()), 1);
