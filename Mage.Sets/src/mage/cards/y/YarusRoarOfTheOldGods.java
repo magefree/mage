@@ -109,10 +109,10 @@ class YarusRoarOfTheOldGodsEffect extends OneShotEffect {
                 BecomesFaceDownCreatureEffect.FaceDownType.MANUAL), newSource);
         controller.moveCards(card, Zone.BATTLEFIELD, source, game, false, true, true, null);
 
-        // Need to process the move so that any ETB triggers on the card don't fire
-        game.getState().processAction(game);
-
         Permanent permanent = game.getPermanent(card.getId());
-        return permanent != null && permanent.turnFaceUp(source, game, source.getControllerId());
+        if (permanent != null) {
+            permanent.turnFaceUp(source, game, source.getControllerId());
+        }
+        return true;
     }
 }
