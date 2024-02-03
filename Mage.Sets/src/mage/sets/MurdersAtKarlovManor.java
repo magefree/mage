@@ -232,6 +232,7 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Warleader's Call", 242, Rarity.RARE, mage.cards.w.WarleadersCall.class));
         cards.add(new SetCardInfo("Wispdrinker Vampire", 243, Rarity.UNCOMMON, mage.cards.w.WispdrinkerVampire.class));
         cards.add(new SetCardInfo("Wojek Investigator", 36, Rarity.RARE, mage.cards.w.WojekInvestigator.class));
+        cards.add(new SetCardInfo("Worldsoul's Rage", 244, Rarity.RARE, mage.cards.w.WorldsoulsRage.class));
         cards.add(new SetCardInfo("Wrench", 37, Rarity.UNCOMMON, mage.cards.w.Wrench.class));
 
         cards.removeIf(setCardInfo -> unfinished.contains(setCardInfo.getName())); // remove when mechanic is implemented
