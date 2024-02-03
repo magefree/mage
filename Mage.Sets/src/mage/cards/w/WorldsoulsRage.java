@@ -82,6 +82,10 @@ class WorldsoulsRageEffect extends OneShotEffect {
         }
 
         int maxTargets = source.getManaCostsToPay().getX();
+        if (maxTargets == 0) {
+            return false;
+        }
+
         TargetCard target = new TargetCard(0, maxTargets, Zone.ALL, filter);
         target.withNotTarget(true);
         controller.chooseTarget(outcome, landCards, target, source, game);
