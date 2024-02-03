@@ -14,7 +14,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CopyEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
-import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.keyword.SurveilEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
@@ -37,6 +36,7 @@ import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeBatchEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.PermanentCard;
 import mage.game.permanent.token.WhiteBlackSpiritToken;
 import mage.players.Player;
 import mage.target.TargetCard;
@@ -47,6 +47,7 @@ import mage.target.targetadjustment.TargetAdjuster;
 import mage.target.targetpointer.EachTargetPointer;
 import mage.target.targetpointer.FixedTargets;
 import mage.util.CardUtil;
+import mage.util.functions.CopyApplier;
 
 /**
  *
@@ -186,9 +187,6 @@ class KayaSpiritsJusticeCopyEffect extends OneShotEffect {
         }
 
         TargetCard target = new TargetCardInExile(0, 1, StaticFilters.FILTER_CARD_CREATURE, null);
-        if (!target.canChoose(source.getControllerId(), source, game)) {
-            return false;
-        }
         if (!controller.chooseTarget(outcome, exiledCards, target, source, game)) {
             return false;
         }
@@ -198,9 +196,26 @@ class KayaSpiritsJusticeCopyEffect extends OneShotEffect {
             return false;
         }
 
-        game.addEffect(new CopyEffect(Duration.EndOfTurn, copyFromCard, copyToPermanent.getId()), source);
-        game.addEffect(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), source);
+        Permanent newBlueprint = new PermanentCard(copyFromCard, source.getControllerId(), game);
+        newBlueprint.assignNewId();
+        CopyApplier applier = new KayaSpiritsJusticeCopyApplier();
+        applier.apply(game, newBlueprint, source, copyToPermanent.getId());
+        CopyEffect copyEffect = new CopyEffect(Duration.EndOfTurn, newBlueprint, copyToPermanent.getId());
+        copyEffect.newId();
+        copyEffect.setApplier(applier);
+        Ability newAbility = source.copy();
+        copyEffect.init(newAbility, game);
+        game.addEffect(copyEffect, source);
 
+        return true;
+    }
+}
+
+class KayaSpiritsJusticeCopyApplier extends CopyApplier {
+
+    @Override
+    public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
+        blueprint.getAbilities().add(FlyingAbility.getInstance());
         return true;
     }
 }
@@ -260,7 +275,8 @@ enum KayaSpiritsJusticeAdjuster implements TargetAdjuster {
             }
             FilterPermanent filter = new FilterCreaturePermanent("creature that player controls");
             filter.add(new ControllerIdPredicate(playerId));
-            ability.addTarget(new TargetPermanent(0, 1, filter));
+            ability.addTarget(new TargetPermanent(0, 1, filter)
+                    .withChooseHint("from " + player.getLogName()));
         }
     }
 }

@@ -7,10 +7,12 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
+ * {@link mage.cards.k.KayaSpiritsJustice}
  * @author DominionSpy
  */
 public class KayaSpiritsJusticeTest extends CardTestPlayerBase {
 
+    // Test first ability of Kaya
     @Test
     public void test_TriggeredAbility() {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 1 + 2 + 6);
@@ -21,9 +23,11 @@ public class KayaSpiritsJusticeTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Astrid Peth");
         addCard(Zone.HAND, playerA, "Farewell");
 
+        // Creates a Clue token
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Thraben Inspector");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
 
+        // Creates a Food token
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Astrid Peth");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
 
@@ -33,7 +37,10 @@ public class KayaSpiritsJusticeTest extends CardTestPlayerBase {
         setModeChoice(playerA, "4");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, 1);
 
-        // Kaya's ability triggers twice, so choose which is put on the stack
+        // Kaya's first ability triggers twice, so choose which is put on the stack:
+        // Whenever one or more creatures you control and/or creature cards in your graveyard are put into exile,
+        // you may choose a creature card from among them. Until end of turn, target token you control becomes a copy of it,
+        // except it has flying.
         setChoice(playerA, "Whenever", 1);
         // Trigger targets
         addTarget(playerA, "Clue Token");
