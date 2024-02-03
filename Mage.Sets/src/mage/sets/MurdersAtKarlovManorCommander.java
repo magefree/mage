@@ -123,14 +123,14 @@ public final class MurdersAtKarlovManorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Jungle Shrine", 268, Rarity.UNCOMMON, mage.cards.j.JungleShrine.class));
         cards.add(new SetCardInfo("Junk Winder", 107, Rarity.UNCOMMON, mage.cards.j.JunkWinder.class));
         cards.add(new SetCardInfo("Kappa Cannoneer", 108, Rarity.RARE, mage.cards.k.KappaCannoneer.class));
-        cards.add(new SetCardInfo("Kazuul, Tyrant of the Cliffs", 157, Rarity.UNCOMMON, mage.cards.k.KazuulTyrantOfTheCliffs.class));
+        cards.add(new SetCardInfo("Kazuul, Tyrant of the Cliffs", 157, Rarity.RARE, mage.cards.k.KazuulTyrantOfTheCliffs.class));
         cards.add(new SetCardInfo("Keeper of the Accord", 70, Rarity.RARE, mage.cards.k.KeeperOfTheAccord.class));
         cards.add(new SetCardInfo("Kessig Wolf Run", 269, Rarity.RARE, mage.cards.k.KessigWolfRun.class));
         cards.add(new SetCardInfo("Kher Keep", 270, Rarity.RARE, mage.cards.k.KherKeep.class));
         cards.add(new SetCardInfo("Killer Service", 174, Rarity.RARE, mage.cards.k.KillerService.class));
         cards.add(new SetCardInfo("Koma, Cosmos Serpent", 213, Rarity.MYTHIC, mage.cards.k.KomaCosmosSerpent.class));
         cards.add(new SetCardInfo("Krosan Cloudscraper", 175, Rarity.RARE, mage.cards.k.KrosanCloudscraper.class));
-        cards.add(new SetCardInfo("Krosan Colossus", 176, Rarity.UNCOMMON, mage.cards.k.KrosanColossus.class));
+        cards.add(new SetCardInfo("Krosan Colossus", 176, Rarity.RARE, mage.cards.k.KrosanColossus.class));
         cards.add(new SetCardInfo("Krosan Verge", 271, Rarity.UNCOMMON, mage.cards.k.KrosanVerge.class));
         cards.add(new SetCardInfo("Labyrinth of Skophos", 272, Rarity.RARE, mage.cards.l.LabyrinthOfSkophos.class));
         cards.add(new SetCardInfo("Lazav, the Multifarious", 214, Rarity.RARE, mage.cards.l.LazavTheMultifarious.class));
@@ -277,7 +277,7 @@ public final class MurdersAtKarlovManorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Wilderness Reclamation", 196, Rarity.UNCOMMON, mage.cards.w.WildernessReclamation.class));
         cards.add(new SetCardInfo("Windborn Muse", 92, Rarity.RARE, mage.cards.w.WindbornMuse.class));
         cards.add(new SetCardInfo("Winds of Rath", 93, Rarity.RARE, mage.cards.w.WindsOfRath.class));
-        cards.add(new SetCardInfo("Yedora, Grave Gardener", 197, Rarity.UNCOMMON, mage.cards.y.YedoraGraveGardener.class));
+        cards.add(new SetCardInfo("Yedora, Grave Gardener", 197, Rarity.RARE, mage.cards.y.YedoraGraveGardener.class));
         cards.add(new SetCardInfo("Zoetic Cavern", 311, Rarity.UNCOMMON, mage.cards.z.ZoeticCavern.class));
     }
 }
