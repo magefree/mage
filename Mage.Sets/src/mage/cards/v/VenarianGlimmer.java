@@ -65,7 +65,7 @@ class VenarianGlimmerEffect extends OneShotEffect {
             FilterCard filter = new FilterNonlandCard();
             filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, source.getManaCostsToPay().getX() + 1));
             Effect effect = new DiscardCardYouChooseTargetEffect(filter);
-            effect.setTargetPointer(targetPointer);
+            effect.setTargetPointer(this.getTargetPointer().copy());
             effect.apply(game, source);
             return true;
         }

@@ -58,7 +58,7 @@ class DebtOfLoyaltyEffect extends RegenerateTargetEffect {
         Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
         if (super.replaceEvent(event, source, game) && permanent != null) {
             GainControlTargetEffect effect = new GainControlTargetEffect(Duration.EndOfGame);
-            effect.setTargetPointer(targetPointer);
+            effect.setTargetPointer(this.getTargetPointer().copy());
             game.addEffect(effect, source);
             return true;
         }

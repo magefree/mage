@@ -56,8 +56,8 @@ public class ExileUntilSourceLeavesEffect extends OneShotEffect {
         }
 
         ExileTargetEffect effect = new ExileTargetEffect(CardUtil.getCardExileZoneId(game, source), permanent.getIdName());
-        if (targetPointer != null) {  // Grasping Giant
-            effect.setTargetPointer(targetPointer);
+        if (this.getTargetPointer() != null) {  // Grasping Giant
+            effect.setTargetPointer(this.getTargetPointer().copy());
         }
         if (effect.apply(game, source)) {
             game.addDelayedTriggeredAbility(new OnLeaveReturnExiledAbility(returnToZone), source);

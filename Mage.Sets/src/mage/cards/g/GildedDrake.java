@@ -87,7 +87,7 @@ class GildedDrakeEffect extends OneShotEffect {
         }
 
         ContinuousEffect effect = new ExchangeControlTargetEffect(Duration.EndOfGame, "", true);
-        effect.setTargetPointer(targetPointer);
+        effect.setTargetPointer(this.getTargetPointer().copy());
         game.addEffect(effect, source);
         return true;
     }
