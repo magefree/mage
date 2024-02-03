@@ -136,7 +136,7 @@ class CallForAidYouCantSacrificeEffect extends ContinuousEffectImpl {
     private final FilterPermanent filter; // filter containing permanents that can't be sacrificed
 
     CallForAidYouCantSacrificeEffect(UUID playerId, FilterPermanent filter) {
-        super(Duration.WhileOnBattlefield, Layer.RulesEffects, SubLayer.NA, Outcome.Benefit);
+        super(Duration.EndOfTurn, Layer.RulesEffects, SubLayer.NA, Outcome.Benefit);
         this.playerId = playerId;
         this.filter = filter;
     }
