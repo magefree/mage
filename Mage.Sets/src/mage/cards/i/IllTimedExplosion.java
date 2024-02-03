@@ -47,7 +47,7 @@ class IllTimedExplosionEffect extends OneShotEffect {
     IllTimedExplosionEffect() {
         super(Outcome.Benefit);
         staticText = "Then you may discard two cards. When you do, {this} deals X damage to each creature, " +
-                "where X is the highest mana value among the discarded cards";
+                "where X is the greatest mana value among cards discarded this way";
     }
 
     private IllTimedExplosionEffect(final IllTimedExplosionEffect effect) {

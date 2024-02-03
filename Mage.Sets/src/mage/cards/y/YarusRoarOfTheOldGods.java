@@ -36,7 +36,7 @@ import mage.players.Player;
 public final class YarusRoarOfTheOldGods extends CardImpl {
 
     private static final FilterCreaturePermanent filter =
-            new FilterCreaturePermanent("face-down creature");
+            new FilterCreaturePermanent("a face-down creature you control");
 
     static {
         filter.add(TargetController.YOU.getControllerPredicate());
