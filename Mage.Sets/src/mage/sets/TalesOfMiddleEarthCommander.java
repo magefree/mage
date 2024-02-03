@@ -50,6 +50,7 @@ public final class TalesOfMiddleEarthCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Brushland", 297, Rarity.RARE, mage.cards.b.Brushland.class));
         cards.add(new SetCardInfo("Cabal Coffers", 360, Rarity.MYTHIC, mage.cards.c.CabalCoffers.class));
         cards.add(new SetCardInfo("Call Forth the Tempest", 509, Rarity.RARE, mage.cards.c.CallForthTheTempest.class));
+        cards.add(new SetCardInfo("Call for Aid", 30, Rarity.RARE, mage.cards.c.CallForAid.class));
         cards.add(new SetCardInfo("Call for Unity", 163, Rarity.RARE, mage.cards.c.CallForUnity.class));
         cards.add(new SetCardInfo("Canopy Vista", 298, Rarity.RARE, mage.cards.c.CanopyVista.class));
         cards.add(new SetCardInfo("Castle Ardenvale", 361, Rarity.MYTHIC, mage.cards.c.CastleArdenvale.class));
