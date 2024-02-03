@@ -122,6 +122,7 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Hunted Bonebrute", 87, Rarity.RARE, mage.cards.h.HuntedBonebrute.class));
         cards.add(new SetCardInfo("Hustle // Bustle", 249, Rarity.UNCOMMON, mage.cards.h.HustleBustle.class));
         cards.add(new SetCardInfo("Ill-Timed Explosion", 207, Rarity.RARE, mage.cards.i.IllTimedExplosion.class));
+        cards.add(new SetCardInfo("Innocent Bystander", 133, Rarity.COMMON, mage.cards.i.InnocentBystander.class));
         cards.add(new SetCardInfo("Inside Source", 19, Rarity.COMMON, mage.cards.i.InsideSource.class));
         cards.add(new SetCardInfo("Insidious Roots", 208, Rarity.UNCOMMON, mage.cards.i.InsidiousRoots.class));
         cards.add(new SetCardInfo("Island", 273, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
