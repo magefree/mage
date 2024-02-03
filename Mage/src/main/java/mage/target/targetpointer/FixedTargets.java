@@ -164,11 +164,4 @@ public class FixedTargets extends TargetPointerImpl {
         }
         return null;
     }
-    
-    public void addTargets(Set<Card> cards, Game game) {
-        for (Card card : cards) {
-            MageObjectReference mor = new MageObjectReference(card.getId(), card.getZoneChangeCounter(game), game);
-            targets.add(mor);
-        }
-    }
 }
