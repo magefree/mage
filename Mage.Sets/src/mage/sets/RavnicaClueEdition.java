@@ -193,6 +193,7 @@ public final class RavnicaClueEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Sage's Row Savant", 97, Rarity.COMMON, mage.cards.s.SagesRowSavant.class));
         cards.add(new SetCardInfo("Sauroform Hybrid", 173, Rarity.COMMON, mage.cards.s.SauroformHybrid.class));
         cards.add(new SetCardInfo("Scuttlegator", 206, Rarity.COMMON, mage.cards.s.Scuttlegator.class));
+        cards.add(new SetCardInfo("Scuttling Sentinel", 42, Rarity.UNCOMMON, mage.cards.s.ScuttlingSentinel.class));
         cards.add(new SetCardInfo("Secret Passage", 20, Rarity.UNCOMMON, mage.cards.s.SecretPassage.class));
         cards.add(new SetCardInfo("Selesnya Guildgate", 245, Rarity.COMMON, mage.cards.s.SelesnyaGuildgate.class));
         cards.add(new SetCardInfo("Selesnya Guildmage", 207, Rarity.UNCOMMON, mage.cards.s.SelesnyaGuildmage.class));
