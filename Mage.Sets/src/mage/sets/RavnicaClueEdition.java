@@ -142,6 +142,7 @@ public final class RavnicaClueEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Light Up the Stage", 140, Rarity.UNCOMMON, mage.cards.l.LightUpTheStage.class));
         cards.add(new SetCardInfo("Lightning Bolt", 141, Rarity.UNCOMMON, mage.cards.l.LightningBolt.class));
         cards.add(new SetCardInfo("Living Lightning", 142, Rarity.UNCOMMON, mage.cards.l.LivingLightning.class));
+        cards.add(new SetCardInfo("Lonis, Genetics Expert", 37, Rarity.RARE, mage.cards.l.LonisGeneticsExpert.class));
         cards.add(new SetCardInfo("Lounge", 19, Rarity.UNCOMMON, mage.cards.l.Lounge.class));
         cards.add(new SetCardInfo("Martial Impetus", 65, Rarity.UNCOMMON, mage.cards.m.MartialImpetus.class));
         cards.add(new SetCardInfo("Masked Blackguard", 115, Rarity.COMMON, mage.cards.m.MaskedBlackguard.class));
