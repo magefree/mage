@@ -1230,4 +1230,10 @@ public final class StaticFilters {
         FILTER_CONTROLLED_FOOD.setLockedFilter(true);
     }
 
+    public static final FilterControlledPermanent FILTER_CONTROLLED_CLUE = new FilterControlledPermanent(SubType.CLUE, "a Clue");
+
+    static {
+        FILTER_CONTROLLED_CLUE.setLockedFilter(true);
+    }
+
 }

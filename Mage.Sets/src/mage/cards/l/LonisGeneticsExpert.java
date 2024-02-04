@@ -15,7 +15,6 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.target.TargetPermanent;
@@ -26,11 +25,6 @@ import java.util.UUID;
  * @author xenohedron
  */
 public final class LonisGeneticsExpert extends CardImpl {
-
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Clue");
-    static {
-        filter.add(SubType.CLUE.getPredicate());
-    }
 
     public LonisGeneticsExpert(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G/U}{G/U}");
@@ -49,7 +43,10 @@ public final class LonisGeneticsExpert extends CardImpl {
         this.addAbility(new LonisGeneticsExpertTriggeredAbility());
 
         // Whenever you sacrifice a Clue, put a +1/+1 counter on another target creature you control.
-        Ability ability = new SacrificePermanentTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()), filter);
+        Ability ability = new SacrificePermanentTriggeredAbility(
+                new AddCountersTargetEffect(CounterType.P1P1.createInstance()),
+                StaticFilters.FILTER_CONTROLLED_CLUE
+        );
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE_YOU_CONTROL));
         this.addAbility(ability);
     }

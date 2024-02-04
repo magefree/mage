@@ -7,8 +7,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledPermanent;
+import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -16,8 +15,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class CuriousCadaver extends CardImpl {
-
-    private static final FilterPermanent filter = new FilterControlledPermanent(SubType.CLUE, "a Clue");
 
     public CuriousCadaver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{B}");
@@ -32,7 +29,7 @@ public final class CuriousCadaver extends CardImpl {
 
         // When you sacrifice a Clue, return Curious Cadaver from your graveyard to your hand.
         this.addAbility(new SacrificePermanentTriggeredAbility(
-                Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), filter,
+                Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), StaticFilters.FILTER_CONTROLLED_CLUE,
                 TargetController.YOU, SetTargetPointer.NONE, false
         ).setTriggerPhrase("When you sacrifice a Clue, "));
     }
