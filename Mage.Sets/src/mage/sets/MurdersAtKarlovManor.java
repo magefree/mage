@@ -226,6 +226,7 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Toxin Analysis", 107, Rarity.COMMON, mage.cards.t.ToxinAnalysis.class));
         cards.add(new SetCardInfo("Treacherous Greed", 237, Rarity.RARE, mage.cards.t.TreacherousGreed.class));
         cards.add(new SetCardInfo("Trostani, Three Whispers", 238, Rarity.MYTHIC, mage.cards.t.TrostaniThreeWhispers.class));
+        cards.add(new SetCardInfo("Tunnel Tipster", 180, Rarity.COMMON, mage.cards.t.TunnelTipster.class));
         cards.add(new SetCardInfo("Unauthorized Exit", 74, Rarity.COMMON, mage.cards.u.UnauthorizedExit.class));
         cards.add(new SetCardInfo("Undercity Eliminator", 108, Rarity.UNCOMMON, mage.cards.u.UndercityEliminator.class));
         cards.add(new SetCardInfo("Undercity Sewers", 270, Rarity.RARE, mage.cards.u.UndercitySewers.class));
