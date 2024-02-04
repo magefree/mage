@@ -8,6 +8,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.hint.ConditionHint;
 import mage.abilities.mana.GreenManaAbility;
 import mage.constants.SubType;
 import mage.cards.CardImpl;
@@ -37,10 +38,12 @@ public final class TunnelTipster extends CardImpl {
         this.toughness = new MageInt(1);
 
         // At the beginning of your end step, if a face-down creature entered the battlefield under your control this turn, put a +1/+1 counter on Tunnel Tipster.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(
+        Ability ability = new BeginningOfEndStepTriggeredAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance()), TargetController.YOU,
-                TunnelTipsterCondition.instance, false),
-                new TunnelTipsterWatcher());
+                TunnelTipsterCondition.instance, false);
+        ability.addHint(new ConditionHint(TunnelTipsterCondition.instance,
+                "a face-down creature entered the battlefield under your control"));
+        this.addAbility(ability, new TunnelTipsterWatcher());
         // {T}: Add {G}.
         this.addAbility(new GreenManaAbility());
     }
@@ -77,6 +80,7 @@ class TunnelTipsterWatcher extends Watcher {
 
     @Override
     public void reset() {
+        super.reset();
         players.clear();
     }
 
