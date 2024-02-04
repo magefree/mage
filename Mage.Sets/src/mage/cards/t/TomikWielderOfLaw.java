@@ -92,18 +92,22 @@ class TomikWielderOfLawTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         Player player = game.getPlayer(getControllerId());
         if (player != null
-                && player.hasOpponent(game.getActivePlayerId(), game)
-                && game
+                && player.hasOpponent(game.getActivePlayerId(), game)) {
+            getEffects().setTargetPointer(new FixedTarget(game.getCombat().getAttackingPlayerId()));
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean checkInterveningIfClause(Game game) {
+        return game
                 .getCombat()
                 .getAttackers()
                 .stream()
                 .map(uuid -> game.getCombat().getDefendingPlayerId(uuid, game))
                 .filter(getControllerId()::equals)
-                .count() >= 2) {
-            getEffects().setTargetPointer(new FixedTarget(game.getCombat().getAttackingPlayerId()));
-            return true;
-        }
-        return false;
+                .count() >= 2;
     }
 
     @Override
