@@ -221,6 +221,7 @@ public final class RavnicaClueEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Street Spasm", 150, Rarity.UNCOMMON, mage.cards.s.StreetSpasm.class));
         cards.add(new SetCardInfo("Study", 21, Rarity.UNCOMMON, mage.cards.s.Study.class));
         cards.add(new SetCardInfo("Stunt Double", 101, Rarity.RARE, mage.cards.s.StuntDouble.class));
+        cards.add(new SetCardInfo("Sumala Rumblers", 45, Rarity.UNCOMMON, mage.cards.s.SumalaRumblers.class));
         cards.add(new SetCardInfo("Sunhome Stalwart", 73, Rarity.UNCOMMON, mage.cards.s.SunhomeStalwart.class));
         cards.add(new SetCardInfo("Supreme Verdict", 211, Rarity.RARE, mage.cards.s.SupremeVerdict.class));
         cards.add(new SetCardInfo("Swamp", 262, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
