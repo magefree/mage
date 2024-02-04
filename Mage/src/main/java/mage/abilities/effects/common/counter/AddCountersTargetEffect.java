@@ -97,7 +97,7 @@ public class AddCountersTargetEffect extends OneShotEffect {
 
     @Override
     public String getText(Mode mode) {
-        if (!staticText.isEmpty()) {
+        if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
         return CardUtil.getAddRemoveCountersText(amount, counter, getTargetPointer().describeTargets(mode.getTargets(), "that creature"), true);
