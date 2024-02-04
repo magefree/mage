@@ -139,6 +139,12 @@ public final class StaticFilters {
         FILTER_CARD_ARTIFACT_FROM_YOUR_GRAVEYARD.setLockedFilter(true);
     }
 
+    public static final FilterCreatureCard FILTER_CARD_CREATURE_A_GRAVEYARD = new FilterCreatureCard("creature card from a graveyard");
+
+    static {
+        FILTER_CARD_CREATURE_A_GRAVEYARD.setLockedFilter(true);
+    }
+
     public static final FilterNoncreatureCard FILTER_CARD_NON_CREATURE = new FilterNoncreatureCard();
 
     static {

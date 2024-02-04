@@ -21,6 +21,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -56,7 +57,7 @@ public final class ChainerDementiaMaster extends CardImpl {
         // {B}{B}{B}, Pay 3 life: Put target creature card from a graveyard onto the battlefield under your control. That creature is black and is a Nightmare in addition to its other creature types.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ChainerDementiaMasterEffect(), new ManaCostsImpl<>("{B}{B}{B}"));
         ability.addCost(new PayLifeCost(3));
-        ability.addTarget(new TargetCardInGraveyard(new FilterCreatureCard("creature card from a graveyard")));
+        ability.addTarget(new TargetCardInGraveyard(StaticFilters.FILTER_CARD_CREATURE_A_GRAVEYARD));
         this.addAbility(ability);
         
         // When Chainer, Dementia Master leaves the battlefield, exile all Nightmares.
