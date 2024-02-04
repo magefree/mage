@@ -206,6 +206,7 @@ public enum CounterType {
     TRAP("trap"),
     TREASURE("treasure"),
     UNITY("unity", "a"),
+    UNLOCK("unlock"),
     VALOR("valor"),
     VELOCITY("velocity"),
     VERSE("verse"),
