@@ -1,7 +1,6 @@
-package mage.cards.j;
+package mage.cards.a;
 
 import mage.MageIdentifier;
-import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -21,47 +20,43 @@ import mage.watchers.Watcher;
 import java.util.*;
 
 /**
- * @author Susucr
+ * @author xenohedron
  */
-public final class JohannApprenticeSorcerer extends CardImpl {
+public final class AssembleThePlayers extends CardImpl {
 
-    public JohannApprenticeSorcerer(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{R}");
-
-        this.supertype.add(SuperType.LEGENDARY);
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.WIZARD);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(5);
+    public AssembleThePlayers(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
 
         // You may look at the top card of your library any time.
         this.addAbility(new SimpleStaticAbility(new LookAtTopCardOfLibraryAnyTimeEffect()));
 
-        // Once each turn, you may cast an instant or sorcery spell from the top of your library.
+        // Once each turn, you may cast a creature spell with power 2 or less from the top of your library.
         this.addAbility(
-                new SimpleStaticAbility(new JohannApprenticeSorcererPlayTopEffect())
-                        .setIdentifier(MageIdentifier.JohannApprenticeSorcererWatcher)
-                        .addHint(JohannApprenticeSorcererHint.instance),
-                new JohannApprenticeSorcererWatcher()
+                new SimpleStaticAbility(new AssembleThePlayersPlayTopEffect())
+                        .setIdentifier(MageIdentifier.AssembleThePlayersWatcher)
+                        .addHint(AssembleThePlayersHint.instance),
+                new AssembleThePlayersWatcher()
+                // all based on Johann, Apprentice Sorcerer
         );
+
     }
 
-    private JohannApprenticeSorcerer(final JohannApprenticeSorcerer card) {
+    private AssembleThePlayers(final AssembleThePlayers card) {
         super(card);
     }
 
     @Override
-    public JohannApprenticeSorcerer copy() {
-        return new JohannApprenticeSorcerer(this);
+    public AssembleThePlayers copy() {
+        return new AssembleThePlayers(this);
     }
 }
 
-enum JohannApprenticeSorcererHint implements Hint {
+enum AssembleThePlayersHint implements Hint {
     instance;
 
     @Override
     public String getText(Game game, Ability ability) {
-        JohannApprenticeSorcererWatcher watcher = game.getState().getWatcher(JohannApprenticeSorcererWatcher.class);
+        AssembleThePlayersWatcher watcher = game.getState().getWatcher(AssembleThePlayersWatcher.class);
         if (watcher != null) {
             boolean used = watcher.isAbilityUsed(ability.getControllerId(), new MageObjectReference(ability.getSourceId(), game));
             if (used) {
@@ -71,30 +66,29 @@ enum JohannApprenticeSorcererHint implements Hint {
                 }
             }
         }
-
         return "";
     }
 
     @Override
-    public JohannApprenticeSorcererHint copy() {
+    public AssembleThePlayersHint copy() {
         return this;
     }
 }
 
-class JohannApprenticeSorcererPlayTopEffect extends AsThoughEffectImpl {
+class AssembleThePlayersPlayTopEffect extends AsThoughEffectImpl {
 
-    JohannApprenticeSorcererPlayTopEffect() {
+    AssembleThePlayersPlayTopEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "Once each turn, you may cast an instant or sorcery spell from the top of your library";
+        staticText = "Once each turn, you may cast a creature spell with power 2 or less from the top of your library";
     }
 
-    private JohannApprenticeSorcererPlayTopEffect(final JohannApprenticeSorcererPlayTopEffect effect) {
+    private AssembleThePlayersPlayTopEffect(final AssembleThePlayersPlayTopEffect effect) {
         super(effect);
     }
 
     @Override
-    public JohannApprenticeSorcererPlayTopEffect copy() {
-        return new JohannApprenticeSorcererPlayTopEffect(this);
+    public AssembleThePlayersPlayTopEffect copy() {
+        return new AssembleThePlayersPlayTopEffect(this);
     }
 
     @Override
@@ -110,7 +104,7 @@ class JohannApprenticeSorcererPlayTopEffect extends AsThoughEffectImpl {
         }
 
         Player controller = game.getPlayer(source.getControllerId());
-        JohannApprenticeSorcererWatcher watcher = game.getState().getWatcher(JohannApprenticeSorcererWatcher.class);
+        AssembleThePlayersWatcher watcher = game.getState().getWatcher(AssembleThePlayersWatcher.class);
         Permanent sourceObject = game.getPermanent(source.getSourceId());
         if (controller == null || watcher == null || sourceObject == null) {
             return false;
@@ -128,17 +122,17 @@ class JohannApprenticeSorcererPlayTopEffect extends AsThoughEffectImpl {
             return false;
         }
 
-        // Only works for instant & sorcery.
-        return card.isInstantOrSorcery(game);
+        // Only works for creatures with power 2 or less
+        return card.isCreature(game) && card.getPower().getValue() <=2;
     }
 }
 
-class JohannApprenticeSorcererWatcher extends Watcher {
+class AssembleThePlayersWatcher extends Watcher {
 
     // player -> set of all permanent's mor that already used their once per turn Approval.
     private final Map<UUID, Set<MageObjectReference>> usedFrom = new HashMap<>();
 
-    public JohannApprenticeSorcererWatcher() {
+    public AssembleThePlayersWatcher() {
         super(WatcherScope.GAME);
     }
 
@@ -146,7 +140,7 @@ class JohannApprenticeSorcererWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         UUID playerId = event.getPlayerId();
         if (event.getType() == GameEvent.EventType.SPELL_CAST
-                && event.hasApprovingIdentifier(MageIdentifier.JohannApprenticeSorcererWatcher)
+                && event.hasApprovingIdentifier(MageIdentifier.AssembleThePlayersWatcher)
                 && playerId != null) {
             usedFrom.computeIfAbsent(playerId, k -> new HashSet<>())
                     .add(event.getAdditionalReference().getApprovingMageObjectReference());

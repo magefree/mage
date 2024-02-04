@@ -34,6 +34,7 @@ public enum MageIdentifier {
     SerraParagonWatcher,
     OneWithTheMultiverseWatcher("Without paying manacost"),
     JohannApprenticeSorcererWatcher,
+    AssembleThePlayersWatcher,
     KaghaShadowArchdruidWatcher,
     CourtOfLocthwainWatcher("Without paying manacost"),
 
