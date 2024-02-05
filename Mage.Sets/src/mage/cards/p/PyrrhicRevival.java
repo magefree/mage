@@ -1,19 +1,17 @@
-
 package mage.cards.p;
 
 import mage.abilities.Ability;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldWithCounterTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.counters.CounterType;
+import mage.counters.Counters;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.targetpointer.FixedTargets;
 
 import java.util.Objects;
 import java.util.Set;
@@ -65,7 +63,6 @@ class PyrrhicRevivalEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-
         Set<Card> toBattlefield =
             game.getState().getPlayersInRange(source.getControllerId(), game)
                 .stream()
@@ -74,16 +71,12 @@ class PyrrhicRevivalEffect extends OneShotEffect {
                 .flatMap(p -> p.getGraveyard().getCards(game).stream())
                 .filter(c -> c != null && c.isCreature(game))
                 .collect(Collectors.toSet());
-
-        Effect returnEffect =
-            new ReturnFromGraveyardToBattlefieldWithCounterTargetEffect(
-                CounterType.M1M1.createInstance(),
-                true,
-                true);
-
-        returnEffect.setTargetPointer(new FixedTargets(toBattlefield, game));
-        returnEffect.apply(game, source);
-
+        Counters counters = new Counters();
+        counters.addCounter(CounterType.M1M1.createInstance());
+        for (Card card : toBattlefield) {
+            game.setEnterWithCounters(card.getId(), counters.copy());
+        }
+        controller.moveCards(toBattlefield, Zone.BATTLEFIELD, source, game, false, false, true, null);
         return true;
     }
 }

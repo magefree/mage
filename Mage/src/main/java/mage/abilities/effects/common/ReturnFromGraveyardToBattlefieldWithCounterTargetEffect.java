@@ -27,11 +27,7 @@ public class ReturnFromGraveyardToBattlefieldWithCounterTargetEffect extends Ret
     }
 
     public ReturnFromGraveyardToBattlefieldWithCounterTargetEffect(Counter counter, boolean additional) {
-        this(counter, additional, false);
-    }
-
-    public ReturnFromGraveyardToBattlefieldWithCounterTargetEffect(Counter counter, boolean additional, boolean underOwnerControl) {
-        super(false, false, underOwnerControl);
+        super(false);
         this.counter = counter;
         this.additional = additional;
     }
