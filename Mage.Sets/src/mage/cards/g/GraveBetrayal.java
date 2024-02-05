@@ -1,7 +1,8 @@
-
 package mage.cards.g;
 
 import java.util.UUID;
+
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
@@ -10,7 +11,8 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.abilities.effects.common.continuous.AddCreatureTypeAdditionEffect;
+import mage.abilities.effects.common.continuous.AddCardSubTypeTargetEffect;
+import mage.abilities.effects.common.continuous.BecomesColorTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -153,10 +155,11 @@ class GraveBetrayalReplacementEffect extends ReplacementEffectImpl {
         Permanent creature = ((EntersTheBattlefieldEvent) event).getTarget();
         if (creature != null) {
             creature.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game, event.getAppliedEffects());
-            ContinuousEffect effect = new AddCreatureTypeAdditionEffect(SubType.ZOMBIE, true);
-            effect.setTargetPointer(new FixedTarget(creature.getId(), creature.getZoneChangeCounter(game) + 1));
-            game.addEffect(effect, source);
-            //discard(); why?
+            FixedTarget fixedTarget = new FixedTarget(creature.getId(), creature.getZoneChangeCounter(game) + 1);
+            game.addEffect(new BecomesColorTargetEffect(ObjectColor.BLACK, true, Duration.Custom)
+                    .setTargetPointer(fixedTarget.copy()), source);
+            game.addEffect(new AddCardSubTypeTargetEffect(SubType.ZOMBIE, Duration.Custom)
+                    .setTargetPointer(fixedTarget.copy()), source);
         }
         return false;
     }
