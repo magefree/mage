@@ -23,29 +23,29 @@ import mage.players.Player;
 public class BecomesColorTargetEffect extends ContinuousEffectImpl {
 
     private ObjectColor setColor;
+    private final boolean retainColor;
 
     /**
      * Set the color of a spell or permanent
-     *
-     * @param duration
      */
     public BecomesColorTargetEffect(Duration duration) {
-        this(null, duration, null);
+        this(null, duration);
     }
 
     public BecomesColorTargetEffect(ObjectColor setColor, Duration duration) {
-        this(setColor, duration, null);
+        this(setColor, false, duration);
     }
 
-    public BecomesColorTargetEffect(ObjectColor setColor, Duration duration, String text) {
+    public BecomesColorTargetEffect(ObjectColor setColor, boolean retainColor, Duration duration) {
         super(duration, Layer.ColorChangingEffects_5, SubLayer.NA, Outcome.Benefit);
         this.setColor = setColor;
-        staticText = text;
+        this.retainColor = retainColor;
     }
 
     protected BecomesColorTargetEffect(final BecomesColorTargetEffect effect) {
         super(effect);
         this.setColor = effect.setColor;
+        this.retainColor = effect.retainColor;
     }
 
     @Override
@@ -82,7 +82,11 @@ public class BecomesColorTargetEffect extends ContinuousEffectImpl {
                 if (targetObject != null) {
                     if (targetObject instanceof Spell || targetObject instanceof Permanent) {
                         objectFound = true;
-                        targetObject.getColor(game).setColor(setColor);
+                        if (retainColor) {
+                            targetObject.getColor(game).addColor(setColor);
+                        } else {
+                            targetObject.getColor(game).setColor(setColor);
+                        }
                     } else {
                         objectFound = false;
                     }
@@ -113,6 +117,9 @@ public class BecomesColorTargetEffect extends ContinuousEffectImpl {
             sb.append("the color of your choice");
         } else {
             sb.append(setColor.getDescription());
+        }
+        if (retainColor) {
+            sb.append(" in addition to its other colors");
         }
         if (!duration.toString().isEmpty()) {
             sb.append(' ').append(duration.toString());
