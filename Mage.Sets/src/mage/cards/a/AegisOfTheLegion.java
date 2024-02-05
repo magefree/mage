@@ -18,6 +18,8 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.game.stack.StackAbility;
+import mage.game.stack.StackObject;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
@@ -68,11 +70,25 @@ class AegisOfTheLegionTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.MENTORED_CREATURE;
+        return event.getType() == GameEvent.EventType.COUNTER_ADDED;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
+        // TODO Make sure this is correct after the comprehensive rules update for CLU/MKM, add citation
+        if (!event.getData().equals(CounterType.P1P1.getName())) {
+            return false;
+        }
+
+        StackObject stackObject = game.getStack().getStackObject(event.getSourceId());
+        if (!(stackObject instanceof StackAbility)) {
+            return false;
+        }
+        Ability ability = stackObject.getStackAbility();
+        if (!(ability instanceof MentorAbility)) {
+            return false;
+        }
+
         Permanent attachment = getSourcePermanentOrLKI(game);
         Permanent mentoredCreature = game.getPermanent(event.getTargetId());
         if (attachment == null || mentoredCreature == null || !event.getSourceId().equals(attachment.getAttachedTo())) {
