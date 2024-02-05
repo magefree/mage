@@ -43,6 +43,9 @@ public class PutOntoBattlefieldTargetEffect extends OneShotEffect {
         return new PutOntoBattlefieldTargetEffect(this);
     }
 
+    /**
+     * These effects are applied as the permanent enters the battlefield. Use Duration.Custom
+     */
     public PutOntoBattlefieldTargetEffect withContinuousEffects(String description, ContinuousEffect... effects) {
         this.description = description;
         this.effects.addAll(Arrays.asList(effects));
