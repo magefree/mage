@@ -15,14 +15,10 @@ import org.apache.log4j.Logger;
 import static org.mage.card.arcane.ManaSymbols.getSizedManaSymbol;
 import static org.mage.card.arcane.ModernCardResourceLoader.*;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.font.*;
 import java.awt.geom.*;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
 import java.text.AttributedCharacterIterator;
 import java.text.AttributedString;
 import java.text.CharacterIterator;
@@ -147,6 +143,8 @@ public class ModernCardRenderer extends CardRenderer {
 
     public static final Color ERROR_COLOR = new Color(255, 0, 255);
 
+    static String SUB_TYPE_ADVENTURE = "Adventure";
+
     ///////////////////////////////////////////////////////////////////////////
     // Layout metrics for modern border cards
     // How far the main box, art, and name / type line are inset from the
@@ -189,7 +187,10 @@ public class ModernCardRenderer extends CardRenderer {
     protected Font ptTextFont;
 
     // Processed mana cost string
-    protected final String manaCostString;
+    protected String manaCostString;
+
+    // Is an adventure
+    protected boolean isAdventure = false;
 
     public ModernCardRenderer(CardView card) {
         // Pass off to parent
@@ -197,6 +198,14 @@ public class ModernCardRenderer extends CardRenderer {
 
         // Mana cost string
         manaCostString = ManaSymbols.getClearManaCost(cardView.getManaCostStr());
+
+        if (cardView.isSplitCard()) {
+            isAdventure = cardView.getRightSplitTypeLine().contains(SUB_TYPE_ADVENTURE);
+        }
+    }
+
+    protected boolean isAdventure() {
+        return isAdventure;
     }
 
     @Override
@@ -406,19 +415,7 @@ public class ModernCardRenderer extends CardRenderer {
             if (cardView.getMageObjectType() == MageObjectType.SPELL) {
                 useFaceArt = false;
                 ArtRect rect = cardView.getArtRect();
-                if (rect == ArtRect.SPLIT_FUSED) {
-                    // Special handling for fused, draw the art from both halves stacked on top of one and other
-                    // each filling half of the art rect
-                    drawArtIntoRect(g,
-                            totalContentInset + 1, totalContentInset + boxHeight,
-                            contentWidth - 2, (typeLineY - totalContentInset - boxHeight) / 2,
-                            ArtRect.SPLIT_LEFT.rect, useInventionFrame());
-                    drawArtIntoRect(g,
-                            totalContentInset + 1, totalContentInset + boxHeight + (typeLineY - totalContentInset - boxHeight) / 2,
-                            contentWidth - 2, (typeLineY - totalContentInset - boxHeight) / 2,
-                            ArtRect.SPLIT_RIGHT.rect, useInventionFrame());
-                    return;
-                } else if (rect != ArtRect.NORMAL) {
+                if (rect != ArtRect.NORMAL) {
                     sourceRect = rect.rect;
                     shouldPreserveAspect = false;
                 }
@@ -701,6 +698,10 @@ public class ModernCardRenderer extends CardRenderer {
             drawRulesText(g, textboxKeywords, textboxRules,
                     contentWidth / 2 + totalContentInset + 4, totalContentInset + boxHeight + 2,
                     contentWidth / 2 - 8, typeLineY - totalContentInset - boxHeight - 6, false);
+        } else if (isAdventure) {
+            drawRulesText(g, textboxKeywords, textboxRules,
+                    contentWidth / 2 + totalContentInset + 4, typeLineY + boxHeight + 2,
+                    contentWidth / 2 - 8, cardHeight - typeLineY - boxHeight - 4 - borderWidth * 3, false);
         } else if (!isZenUst) {
             drawRulesText(g, textboxKeywords, textboxRules,
                     totalContentInset + 2, typeLineY + boxHeight + 2,
