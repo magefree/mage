@@ -20,6 +20,7 @@ public final class RavnicaClueEdition extends ExpansionSet {
         this.hasBasicLands = true;
         this.hasBoosters = false;
 
+        cards.add(new SetCardInfo("Aegis of the Legion", 22, Rarity.RARE, mage.cards.a.AegisOfTheLegion.class));
         cards.add(new SetCardInfo("Affectionate Indrik", 155, Rarity.UNCOMMON, mage.cards.a.AffectionateIndrik.class));
         cards.add(new SetCardInfo("Afterlife Insurance", 23, Rarity.UNCOMMON, mage.cards.a.AfterlifeInsurance.class));
         cards.add(new SetCardInfo("Ajani's Pridemate", 52, Rarity.UNCOMMON, mage.cards.a.AjanisPridemate.class));
