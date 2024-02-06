@@ -527,6 +527,7 @@ public class CardView extends SimpleCardView {
             // Determine what part of the art to slice out for spells on the stack which originate
             // from a split, fuse, or aftermath split card.
             // Modal double faces cards draws as normal cards
+            // Sagas and cases have completely different layouts
             SpellAbilityType ty = spell.getSpellAbility().getSpellAbilityType();
             if (ty == SpellAbilityType.SPLIT_RIGHT || ty == SpellAbilityType.SPLIT_LEFT || ty == SpellAbilityType.SPLIT_FUSED) {
                 // Needs a special art rect
@@ -547,6 +548,10 @@ public class CardView extends SimpleCardView {
                         artRect = ArtRect.SPLIT_LEFT;
                     }
                 }
+            } else if (spell.getSubtype().contains(SubType.SAGA)) {
+                artRect = ArtRect.SAGA;
+            } else if (spell.getSubtype().contains(SubType.CASE)) {
+                artRect = ArtRect.CASE;
             }
 
             // show for modal spell, which mode was chosen
