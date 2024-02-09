@@ -163,6 +163,10 @@ class AdventureCardSpellAbility extends SpellAbility {
     @Override
     public String getRule() {
         StringBuilder sbRule = new StringBuilder();
+        sbRule.append(this.nameFull);
+        sbRule.append(" ");
+        sbRule.append(getManaCosts().getText());
+        sbRule.append(" &mdash; ");
         Modes modes = this.getModes();
         if (modes.size() <= 1) {
             sbRule.append(modes.getMode().getEffects().getTextStartingUpperCase(modes.getMode()));

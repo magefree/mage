@@ -55,6 +55,13 @@ public class ModernSplitCardRenderer extends ModernCardRenderer {
     private boolean isFuse = false;
     private boolean isAftermath = false;
 
+    private static String trimAdventure(String rule) {
+        if (rule.startsWith("Adventure")) {
+            return rule.substring(rule.lastIndexOf("&mdash;") + 8);
+        }
+        return rule;
+    }
+
     public ModernSplitCardRenderer(CardView view) {
         super(view);
 
@@ -64,7 +71,15 @@ public class ModernSplitCardRenderer extends ModernCardRenderer {
         rightHalf.color = new ObjectColor(cardView.getRightSplitCostsStr());
         leftHalf.color = new ObjectColor(cardView.getLeftSplitCostsStr());
 
-        parseRules(view.getRightSplitRules(), rightHalf.keywords, rightHalf.rules);
+        if (isAdventure()) {
+            List<String> trimmedRules = new ArrayList<>();
+            for (String rule : view.getRightSplitRules()) {
+                trimmedRules.add(trimAdventure(rule));
+            }
+            parseRules(trimmedRules, rightHalf.keywords, rightHalf.rules);
+        } else {
+            parseRules(view.getRightSplitRules(), rightHalf.keywords, rightHalf.rules);
+        }
         parseRules(view.getLeftSplitRules(), leftHalf.keywords, leftHalf.rules);
 
         rightHalf.typeLineString = cardView.getRightSplitTypeLine();
