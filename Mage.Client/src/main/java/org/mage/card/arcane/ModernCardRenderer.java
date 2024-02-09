@@ -337,12 +337,11 @@ public class ModernCardRenderer extends CardRenderer {
             rect = new Rectangle2D.Float(.079f, .11f, .84f, .84f);
         } else if (isUnstableFullArtLand()) {
             rect = new Rectangle2D.Float(.0f, .0f, 1.0f, 1.0f);
+        } else if (cardView.getArtRect() == ArtRect.FULL_LENGTH_LEFT ||
+                cardView.getArtRect() == ArtRect.FULL_LENGTH_RIGHT) {
+            rect = cardView.getArtRect().rect;
         } else if (cardView.getFrameStyle().isFullArt() || (cardView.isToken())) {
             rect = new Rectangle2D.Float(.079f, .11f, .84f, .63f);
-        } else if (cardView.getSubTypes().contains(SubType.SAGA)) {
-            rect = ArtRect.SAGA.rect;
-        } else if (cardView.getSubTypes().contains(SubType.CASE)) {
-            rect = ArtRect.CASE.rect;
         } else {
             rect = ArtRect.NORMAL.rect;
         }
@@ -354,8 +353,8 @@ public class ModernCardRenderer extends CardRenderer {
             return TYPE_LINE_Y_FRAC_TOKEN;
         } else if (cardView.getFrameStyle().isFullArt()) {
             return TYPE_LINE_Y_FRAC_FULL_ART;
-        } else if (cardView.getSubTypes().contains(SubType.SAGA) ||
-                cardView.getSubTypes().contains(SubType.CASE)) {
+        } else if (cardView.getArtRect() == ArtRect.FULL_LENGTH_LEFT ||
+                cardView.getArtRect() == ArtRect.FULL_LENGTH_RIGHT) {
             return TYPE_LINE_Y_FRAC_BOTTOM;
         } else {
             return TYPE_LINE_Y_FRAC;
@@ -429,12 +428,12 @@ public class ModernCardRenderer extends CardRenderer {
                         contentWidth - 2, typeLineY - totalContentInset - boxHeight,
                         alternate_height,
                         sourceRect, shouldPreserveAspect);
-            } else if (cardView.getSubTypes().contains(SubType.SAGA)) {
+            } else if (cardView.getArtRect() == ArtRect.FULL_LENGTH_RIGHT) {
                 drawArtIntoRect(g,
                         contentWidth / 2 + totalContentInset + 1, totalContentInset + boxHeight,
                         contentWidth / 2 - 1, typeLineY - totalContentInset - boxHeight,
                         sourceRect, false);
-            } else if (cardView.getSubTypes().contains(SubType.CASE)) {
+            } else if (cardView.getArtRect() == ArtRect.FULL_LENGTH_LEFT) {
                 drawArtIntoRect(g,
                         totalContentInset + 1, totalContentInset + boxHeight,
                         contentWidth / 2 - 1, typeLineY - totalContentInset - boxHeight,
@@ -489,10 +488,10 @@ public class ModernCardRenderer extends CardRenderer {
             g.setPaint(textboxPaint);
         }
 
-        if (cardView.getSubTypes().contains(SubType.SAGA)) {
+        if (cardView.getArtRect() == ArtRect.FULL_LENGTH_RIGHT) {
             g.fillRect(totalContentInset + 2, totalContentInset + boxHeight,
                     contentWidth / 2 - 2, typeLineY - totalContentInset - boxHeight + 2);
-        } else if (cardView.getSubTypes().contains(SubType.CASE)) {
+        } else if (cardView.getArtRect() == ArtRect.FULL_LENGTH_LEFT) {
             g.fillRect(contentWidth / 2 + totalContentInset + 1, totalContentInset + boxHeight,
                     contentWidth / 2 - 2, typeLineY - totalContentInset - boxHeight + 2);
         } else if (!isZenUst) {
@@ -690,11 +689,11 @@ public class ModernCardRenderer extends CardRenderer {
             drawUSTCurves(g, image, x, y, w, h,
                     0, 0,
                     additionalBoxColor, borderPaint);
-        } else if (cardView.getSubTypes().contains(SubType.SAGA)) {
+        } else if (cardView.getArtRect() == ArtRect.FULL_LENGTH_RIGHT) {
             drawRulesText(g, textboxKeywords, textboxRules,
                     totalContentInset + 4, totalContentInset + boxHeight + 2,
                     contentWidth / 2 - 8, typeLineY - totalContentInset - boxHeight - 6, false);
-        } else if (cardView.getSubTypes().contains(SubType.CASE)) {
+        } else if (cardView.getArtRect() == ArtRect.FULL_LENGTH_LEFT) {
             drawRulesText(g, textboxKeywords, textboxRules,
                     contentWidth / 2 + totalContentInset + 4, totalContentInset + boxHeight + 2,
                     contentWidth / 2 - 8, typeLineY - totalContentInset - boxHeight - 6, false);

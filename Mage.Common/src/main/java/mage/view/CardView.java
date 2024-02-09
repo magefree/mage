@@ -536,7 +536,6 @@ public class CardView extends SimpleCardView {
             // Determine what part of the art to slice out for spells on the stack which originate
             // from a split, fuse, or aftermath split card.
             // Modal double faces cards draws as normal cards
-            // Sagas and cases have completely different layouts
             SpellAbilityType ty = spell.getSpellAbility().getSpellAbilityType();
             if (ty == SpellAbilityType.SPLIT_RIGHT || ty == SpellAbilityType.SPLIT_LEFT || ty == SpellAbilityType.SPLIT_FUSED) {
                 // Needs a special art rect
@@ -557,10 +556,6 @@ public class CardView extends SimpleCardView {
                         artRect = ArtRect.SPLIT_LEFT;
                     }
                 }
-            } else if (spell.getSubtype().contains(SubType.SAGA)) {
-                artRect = ArtRect.SAGA;
-            } else if (spell.getSubtype().contains(SubType.CASE)) {
-                artRect = ArtRect.CASE;
             }
 
             // show for modal spell, which mode was chosen
@@ -587,6 +582,14 @@ public class CardView extends SimpleCardView {
                 }
 
             }
+        }
+
+        // Cases, classes and sagas have portrait art
+        if (card.getSubtype().contains(SubType.CASE) ||
+                card.getSubtype().contains(SubType.CLASS)) {
+            artRect = ArtRect.FULL_LENGTH_LEFT;
+        } else if (card.getSubtype().contains(SubType.SAGA)) {
+            artRect = ArtRect.FULL_LENGTH_RIGHT;
         }
 
         // Frame color
@@ -800,6 +803,12 @@ public class CardView extends SimpleCardView {
             this.rarity = Rarity.SPECIAL;
             this.rules = new ArrayList<>();
             this.rules.add(stackAbility.getRule());
+        }
+        if (object.getSubtype().contains(SubType.CASE) ||
+                object.getSubtype().contains(SubType.CLASS)) {
+            artRect = ArtRect.FULL_LENGTH_LEFT;
+        } else if (object.getSubtype().contains(SubType.SAGA)) {
+            artRect = ArtRect.FULL_LENGTH_RIGHT;
         }
         // Frame color
         this.frameColor = object.getFrameColor(game).copy();
