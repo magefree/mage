@@ -408,9 +408,26 @@ public class TestCardRenderDialog extends MageDialog {
 
         /* test split, transform and mdf in hands
         cardViews.add(createHandCard(game, playerYou.getId(), "SOI", "97")); // Accursed Witch
-        cardViews.add(createHandCard(game, playerYou.getId(), "UMA", "225")); // Fire // Ice
-        cardViews.add(createHandCard(game, playerYou.getId(), "ELD", "14")); // Giant Killer
         cardViews.add(createHandCard(game, playerYou.getId(), "ZNR", "134")); // Akoum Warrior
+        cardViews.add(createHandCard(game, playerYou.getId(), "UMA", "225")); // Fire // Ice
+        cardViews.add(createHandCard(game, playerYou.getId(), "DGM", "123")); // Beck // Call
+        cardViews.add(createHandCard(game, playerYou.getId(), "AKH", "210")); // Dusk // Dawn
+        //*/
+
+        //* test adventure cards in hands
+        cardViews.add(createHandCard(game, playerYou.getId(), "ELD", "14")); // Giant Killer
+        cardViews.add(createHandCard(game, playerYou.getId(), "WOE", "222")); // Cruel Somnophage
+        cardViews.add(createHandCard(game, playerYou.getId(), "WOE", "227")); // Gingerbread Hunter
+        cardViews.add(createHandCard(game, playerYou.getId(), "WOE", "221")); // Callous Sell-Sword
+        cardViews.add(createHandCard(game, playerYou.getId(), "ELD", "149")); // Beanstalk Giant
+        cardViews.add(createHandCard(game, playerYou.getId(), "WOE", "220")); // Beluna Grandsquall
+        //*/
+
+        /* test saga and case cards in hands
+        cardViews.add(createHandCard(game, playerYou.getId(), "DOM", "90")); // The Eldest Reborn
+        cardViews.add(createHandCard(game, playerYou.getId(), "MH2", "259")); // Urza's Saga
+        cardViews.add(createHandCard(game, playerYou.getId(), "MKM", "113")); // Case of the Burning Masks
+        cardViews.add(createHandCard(game, playerYou.getId(), "MKM", "155")); // Case of the Locked Hothouse
         //*/
 
         /* test meld cards in hands and battlefield
@@ -441,7 +458,7 @@ public class TestCardRenderDialog extends MageDialog {
         //cardViews.add(createPermanentCard(game, playerYou.getId(), "KHM", "50", 1, 1, 0, true, false, additionalIcons)); // Cosima, God of the Voyage
         //*/
 
-        //* test tokens
+        /* test tokens
         // normal
         cardViews.add(createToken(game, playerYou.getId(), new ZombieToken(), "10E", 0, false, false));
         cardViews.add(createToken(game, playerYou.getId(), new ZombieToken(), "XXX", 1, false, false));
@@ -826,7 +843,7 @@ public class TestCardRenderDialog extends MageDialog {
     }//GEN-LAST:event_comboRenderModeItemStateChanged
 
     private void sliderSizeStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sliderSizeStateChanged
-        // from DragCardGrid         
+        // from DragCardGrid
         // Fraction in [-1, 1]
         float sliderFrac = ((float) (sliderSize.getValue() - 50)) / 50;
         // Convert to frac in [0.5, 2.0] exponentially

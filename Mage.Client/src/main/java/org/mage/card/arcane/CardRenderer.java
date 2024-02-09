@@ -106,8 +106,8 @@ public abstract class CardRenderer {
     protected int borderWidth;
 
     // The parsed text of the card
-    protected final ArrayList<TextboxRule> textboxRules = new ArrayList<>();
-    protected final ArrayList<TextboxRule> textboxKeywords = new ArrayList<>();
+    protected ArrayList<TextboxRule> textboxRules = new ArrayList<>();
+    protected ArrayList<TextboxRule> textboxKeywords = new ArrayList<>();
 
     // The Construtor
     // The constructor should prepare all of the things that it can
