@@ -187,7 +187,9 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Reckless Detective", 141, Rarity.UNCOMMON, mage.cards.r.RecklessDetective.class));
         cards.add(new SetCardInfo("Red Herring", 142, Rarity.COMMON, mage.cards.r.RedHerring.class));
         cards.add(new SetCardInfo("Reenact the Crime", 70, Rarity.RARE, mage.cards.r.ReenactTheCrime.class));
+        cards.add(new SetCardInfo("Relive the Past", 226, Rarity.RARE, mage.cards.r.ReliveThePast.class));
         cards.add(new SetCardInfo("Repeat Offender", 101, Rarity.COMMON, mage.cards.r.RepeatOffender.class));
+        cards.add(new SetCardInfo("Repulsive Mutation", 227, Rarity.UNCOMMON, mage.cards.r.RepulsiveMutation.class));
         cards.add(new SetCardInfo("Riftburst Hellion", 228, Rarity.COMMON, mage.cards.r.RiftburstHellion.class));
         cards.add(new SetCardInfo("Rope", 173, Rarity.UNCOMMON, mage.cards.r.Rope.class));
         cards.add(new SetCardInfo("Rot Farm Mortipede", 102, Rarity.COMMON, mage.cards.r.RotFarmMortipede.class));
@@ -219,9 +221,12 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Tenth District Hero", 34, Rarity.RARE, mage.cards.t.TenthDistrictHero.class));
         cards.add(new SetCardInfo("Teysa, Opulent Oligarch", 234, Rarity.RARE, mage.cards.t.TeysaOpulentOligarch.class));
         cards.add(new SetCardInfo("The Chase Is On", 116, Rarity.COMMON, mage.cards.t.TheChaseIsOn.class));
+        cards.add(new SetCardInfo("The Pride of Hull Clade", 172, Rarity.MYTHIC, mage.cards.t.ThePrideOfHullClade.class));
         cards.add(new SetCardInfo("They Went This Way", 178, Rarity.COMMON, mage.cards.t.TheyWentThisWay.class));
         cards.add(new SetCardInfo("Thinking Cap", 257, Rarity.COMMON, mage.cards.t.ThinkingCap.class));
         cards.add(new SetCardInfo("Thundering Falls", 269, Rarity.RARE, mage.cards.t.ThunderingFalls.class));
+        cards.add(new SetCardInfo("Tin Street Gossip", 235, Rarity.UNCOMMON, mage.cards.t.TinStreetGossip.class));
+        cards.add(new SetCardInfo("Tolsimir, Midnight's Light", 236, Rarity.RARE, mage.cards.t.TolsimirMidnightsLight.class));
         cards.add(new SetCardInfo("Tomik, Wielder of Law", 431, Rarity.MYTHIC, mage.cards.t.TomikWielderOfLaw.class));
         cards.add(new SetCardInfo("Topiary Panther", 179, Rarity.COMMON, mage.cards.t.TopiaryPanther.class));
         cards.add(new SetCardInfo("Torch the Witness", 146, Rarity.UNCOMMON, mage.cards.t.TorchTheWitness.class));

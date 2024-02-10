@@ -986,6 +986,7 @@ public final class CardUtil {
                 || text.startsWith("an ")
                 || text.startsWith("another ")
                 || text.startsWith("any ")
+                || text.startsWith("{this} ")
                 || text.startsWith("one ")) {
             return text;
         }
