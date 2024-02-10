@@ -404,7 +404,7 @@ public class ScryfallImageSupportCards {
             add("XANA"); // Arena New Player Experience Extras
             add("OANA"); // Arena New Player Experience Cards
             add("PS18"); // San Diego Comic-Con 2018
-            //add("HTR17"); // Heroes of the Realm 2017
+            add("PH17"); // Heroes of the Realm 2017
             add("C18"); // Commander 2018
             add("PGRN"); // Guilds of Ravnica Promos
             add("PRWK"); // GRN Ravnica Weekend

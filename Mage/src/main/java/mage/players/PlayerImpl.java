@@ -975,8 +975,11 @@ public abstract class PlayerImpl implements Player, Serializable {
                 }
             } else {
                 // user defined order
+                UUID cardOwner = cards.getRandom(game).getOwnerId();
                 TargetCard target = new TargetCard(Zone.ALL,
-                        new FilterCard("card ORDER to put on the BOTTOM of your library (last one chosen will be bottommost)"));
+                        new FilterCard("card ORDER to put on the BOTTOM of " +
+                                (cardOwner == playerId ? "your" : game.getPlayer(cardOwner).getName() + "'s") +
+                                " library (last one chosen will be bottommost)"));
                 target.setRequired(true);
                 while (cards.size() > 1 && this.canRespond()
                         && this.choose(Outcome.Neutral, cards, target, source, game)) {
@@ -1068,8 +1071,11 @@ public abstract class PlayerImpl implements Player, Serializable {
                 }
             } else {
                 // user defined order
+                UUID cardOwner = cards.getRandom(game).getOwnerId();
                 TargetCard target = new TargetCard(Zone.ALL,
-                        new FilterCard("card ORDER to put on the TOP of your library (last one chosen will be topmost)"));
+                        new FilterCard("card ORDER to put on the TOP of " +
+                                (cardOwner == playerId ? "your" : game.getPlayer(cardOwner).getName() + "'s") +
+                                " library (last one chosen will be topmost)"));
                 target.setRequired(true);
                 while (cards.size() > 1
                         && this.canRespond()
