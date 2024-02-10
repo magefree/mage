@@ -1,4 +1,3 @@
-
 package mage.cards.w;
 
 import java.util.UUID;
@@ -29,7 +28,7 @@ import mage.target.TargetPermanent;
  */
 public final class WillowPriestess extends CardImpl {
     
-    private static final FilterPermanentCard filter = new FilterPermanentCard("Faerie");
+    private static final FilterPermanentCard filter = new FilterPermanentCard("a Faerie permanent card");
     private static final FilterCreaturePermanent greenCreature = new FilterCreaturePermanent("green creature");
 
     static {
