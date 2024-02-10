@@ -3,14 +3,12 @@ package mage.cards.r;
 import java.util.UUID;
 
 import mage.abilities.effects.common.ExileTargetCardCopyAndCastEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.common.FilterNonlandCard;
-import mage.filter.predicate.Predicate;
-import mage.game.Game;
-import mage.target.common.TargetCardInASingleGraveyard;
+import mage.filter.predicate.card.PutIntoGraveFromAnywhereThisTurnPredicate;
+import mage.target.common.TargetCardInGraveyard;
 import mage.watchers.common.CardsPutIntoGraveyardWatcher;
 
 /**
@@ -22,7 +20,7 @@ public final class ReenactTheCrime extends CardImpl {
     private static final FilterNonlandCard filter = new FilterNonlandCard();
 
     static {
-        filter.add(ReenactTheCrimePredicate.instance);
+        filter.add(PutIntoGraveFromAnywhereThisTurnPredicate.instance);
     }
 
     public ReenactTheCrime(UUID ownerId, CardSetInfo setInfo) {
@@ -33,8 +31,7 @@ public final class ReenactTheCrime extends CardImpl {
         getSpellAbility().addEffect(new ExileTargetCardCopyAndCastEffect(true)
                 .setText("Exile target nonland card in a graveyard that was put there from anywhere this turn. " +
                         "Copy it. You may cast the copy without paying its mana cost."));
-        getSpellAbility().addTarget(new TargetCardInASingleGraveyard(
-                1, 1, filter));
+        getSpellAbility().addTarget(new TargetCardInGraveyard(filter));
         getSpellAbility().addWatcher(new CardsPutIntoGraveyardWatcher());
 
     }
@@ -46,15 +43,5 @@ public final class ReenactTheCrime extends CardImpl {
     @Override
     public ReenactTheCrime copy() {
         return new ReenactTheCrime(this);
-    }
-}
-
-enum ReenactTheCrimePredicate implements Predicate<Card> {
-    instance;
-
-    @Override
-    public boolean apply(Card input, Game game) {
-        CardsPutIntoGraveyardWatcher watcher = game.getState().getWatcher(CardsPutIntoGraveyardWatcher.class);
-        return watcher.checkCardFromAnywhere(input, game);
     }
 }
