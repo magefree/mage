@@ -31,7 +31,7 @@ public final class InzervaMasterOfInsights extends CardImpl {
         this.addAbility(new LoyaltyAbility(new DrawDiscardControllerEffect(2, 1), 2));
 
         // −2: Look at the top two cards of each other player's library, then put any number of them on the bottom of that library and the rest on top in any order. Scry 2.
-        LoyaltyAbility ability = new LoyaltyAbility(new InzervaMasterOfInsightsEffects(), -2);
+        LoyaltyAbility ability = new LoyaltyAbility(new InzervaMasterOfInsightsEffect(), -2);
         ability.addEffect(new ScryEffect(2, false));
         this.addAbility(ability);
 
@@ -49,20 +49,20 @@ public final class InzervaMasterOfInsights extends CardImpl {
     }
 }
 
-class InzervaMasterOfInsightsEffects extends OneShotEffect {
+class InzervaMasterOfInsightsEffect extends OneShotEffect {
 
-    InzervaMasterOfInsightsEffects() {
+    InzervaMasterOfInsightsEffect() {
         super(Outcome.Benefit);
         staticText = "Look at the top two cards of each other player's library, then put any number of them on the bottom of that library and the rest on top in any order";
     }
 
-    private InzervaMasterOfInsightsEffects(final InzervaMasterOfInsightsEffects effect) {
+    private InzervaMasterOfInsightsEffect(final InzervaMasterOfInsightsEffect effect) {
         super(effect);
     }
 
     @Override
-    public InzervaMasterOfInsightsEffects copy() {
-        return new InzervaMasterOfInsightsEffects(this);
+    public InzervaMasterOfInsightsEffect copy() {
+        return new InzervaMasterOfInsightsEffect(this);
     }
 
     @Override
@@ -82,7 +82,7 @@ class InzervaMasterOfInsightsEffects extends OneShotEffect {
                 Cards cards = new CardsImpl();
                 int count = Math.min(2, opponent.getLibrary().size());
                 if (count == 0) {
-                    return true;
+                    continue;
                 }
                 for (int i = 0; i < count; i++) {
                     Card card = opponent.getLibrary().removeFromTop(game);
