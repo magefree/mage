@@ -219,6 +219,7 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Tenth District Hero", 34, Rarity.RARE, mage.cards.t.TenthDistrictHero.class));
         cards.add(new SetCardInfo("Teysa, Opulent Oligarch", 234, Rarity.RARE, mage.cards.t.TeysaOpulentOligarch.class));
         cards.add(new SetCardInfo("The Chase Is On", 116, Rarity.COMMON, mage.cards.t.TheChaseIsOn.class));
+        cards.add(new SetCardInfo("The Pride of Hull Clade", 172, Rarity.MYTHIC, mage.cards.t.ThePrideOfHullClade.class));
         cards.add(new SetCardInfo("They Went This Way", 178, Rarity.COMMON, mage.cards.t.TheyWentThisWay.class));
         cards.add(new SetCardInfo("Thinking Cap", 257, Rarity.COMMON, mage.cards.t.ThinkingCap.class));
         cards.add(new SetCardInfo("Thundering Falls", 269, Rarity.RARE, mage.cards.t.ThunderingFalls.class));
