@@ -186,6 +186,7 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Reasonable Doubt", 69, Rarity.COMMON, mage.cards.r.ReasonableDoubt.class));
         cards.add(new SetCardInfo("Reckless Detective", 141, Rarity.UNCOMMON, mage.cards.r.RecklessDetective.class));
         cards.add(new SetCardInfo("Red Herring", 142, Rarity.COMMON, mage.cards.r.RedHerring.class));
+        cards.add(new SetCardInfo("Relive the Past", 226, Rarity.RARE, mage.cards.r.ReliveThePast.class));
         cards.add(new SetCardInfo("Repeat Offender", 101, Rarity.COMMON, mage.cards.r.RepeatOffender.class));
         cards.add(new SetCardInfo("Repulsive Mutation", 227, Rarity.UNCOMMON, mage.cards.r.RepulsiveMutation.class));
         cards.add(new SetCardInfo("Riftburst Hellion", 228, Rarity.COMMON, mage.cards.r.RiftburstHellion.class));
