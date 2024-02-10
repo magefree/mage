@@ -2,7 +2,6 @@ package mage.cards.r;
 
 import java.util.UUID;
 
-import mage.MageInt;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureTargetEffect;
 import mage.cards.CardImpl;
@@ -13,7 +12,7 @@ import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterEnchantmentCard;
 import mage.filter.predicate.Predicates;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetpointer.EachTargetPointer;
 
@@ -42,7 +41,8 @@ public final class ReliveThePast extends CardImpl {
 
         // They are 5/5 Elemental creatures in addition to their other types.
         getSpellAbility().addEffect(new BecomesCreatureTargetEffect(
-                new ReliveThePastToken(), false, false, Duration.WhileOnBattlefield)
+                new CreatureToken(5, 5, "5/5 Elemental creatures", SubType.ELEMENTAL),
+                false, false, Duration.Custom)
                 .setTargetPointer(new EachTargetPointer())
                 .setText("They are 5/5 Elemental creatures in addition to their other types."));
     }
@@ -54,25 +54,5 @@ public final class ReliveThePast extends CardImpl {
     @Override
     public ReliveThePast copy() {
         return new ReliveThePast(this);
-    }
-}
-
-class ReliveThePastToken extends TokenImpl {
-
-    ReliveThePastToken() {
-        super("", "5/5 Elemental creatures");
-        power = new MageInt(5);
-        toughness = new MageInt(5);
-        subtype.add(SubType.ELEMENTAL);
-        cardType.add(CardType.CREATURE);
-    }
-
-    private ReliveThePastToken(final ReliveThePastToken token) {
-        super(token);
-    }
-
-    @Override
-    public ReliveThePastToken copy() {
-        return new ReliveThePastToken(this);
     }
 }
