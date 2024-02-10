@@ -179,6 +179,7 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Pompous Gadabout", 171, Rarity.UNCOMMON, mage.cards.p.PompousGadabout.class));
         cards.add(new SetCardInfo("Presumed Dead", 100, Rarity.UNCOMMON, mage.cards.p.PresumedDead.class));
         cards.add(new SetCardInfo("Private Eye", 223, Rarity.UNCOMMON, mage.cards.p.PrivateEye.class));
+        cards.add(new SetCardInfo("Proft's Eidetic Memory", 67, Rarity.RARE, mage.cards.p.ProftsEideticMemory.class));
         cards.add(new SetCardInfo("Public Thoroughfare", 265, Rarity.COMMON, mage.cards.p.PublicThoroughfare.class));
         cards.add(new SetCardInfo("Push // Pull", 250, Rarity.UNCOMMON, mage.cards.p.PushPull.class));
         cards.add(new SetCardInfo("Rakdos, Patron of Chaos", 224, Rarity.MYTHIC, mage.cards.r.RakdosPatronOfChaos.class));
