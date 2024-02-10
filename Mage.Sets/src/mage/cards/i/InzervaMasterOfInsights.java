@@ -70,12 +70,9 @@ class InzervaMasterOfInsightsEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-                if (playerId.equals(controller.getId())) {
-                    continue;
-                }
                 Player opponent = game.getPlayer(playerId);
-                if (opponent == null) {
-                    return false;
+                if (playerId.equals(controller.getId()) || opponent == null) {
+                    continue;
                 }
                 boolean revealed = opponent.isTopCardRevealed(); // temporarily unreveal top card until process finished
                 opponent.setTopCardRevealed(false);
@@ -91,7 +88,7 @@ class InzervaMasterOfInsightsEffect extends OneShotEffect {
                 TargetCard targets = new TargetCard(0, cards.size(), Zone.LIBRARY, new FilterCard("cards to PUT on the BOTTOM of " + opponent.getName() + "'s library"));
                 controller.chooseTarget(Outcome.Neutral, cards, targets, source, game);
                 if (!controller.canRespond() || !opponent.canRespond()) {
-                    return false;
+                    continue;
                 }
                 controller.putCardsOnBottomOfLibrary(new CardsImpl(targets.getTargets()), game, source, true);
                 cards.removeIf(targets.getTargets()::contains);
