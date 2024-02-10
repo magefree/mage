@@ -3,19 +3,19 @@ package mage.cards.t;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.SourcePermanentToughnessValue;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.combat.CanAttackAsThoughItDidntHaveDefenderTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
-import mage.abilities.effects.common.cost.CostModificationEffectImpl;
-import mage.constants.CostModificationType;
+import mage.abilities.effects.common.cost.SpellCostReductionSourceEffect;
 import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.abilities.keyword.DefenderAbility;
@@ -26,9 +26,7 @@ import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.util.CardUtil;
 
 /**
  *
@@ -47,7 +45,8 @@ public final class ThePrideOfHullClade extends CardImpl {
         this.toughness = new MageInt(15);
 
         // This spell costs {X} less to cast, where X is the total toughness of creatures you control.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new ThePrideOfHullCladeCostReductionEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL,
+                new SpellCostReductionSourceEffect(TotalToughnessOfControlledCreaturesValue.instance)));
 
         // Defender
         this.addAbility(DefenderAbility.getInstance());
@@ -61,7 +60,8 @@ public final class ThePrideOfHullClade extends CardImpl {
         ability.addEffect(
                 new GainAbilityTargetEffect(
                         new DealsCombatDamageToAPlayerTriggeredAbility(
-                                new ThePrideOfHullCladeEffect(), false))
+                                new DrawCardSourceControllerEffect
+                                        (SourcePermanentToughnessValue.getInstance()), false))
                         .setText(", gains \"Whenever this creature deals combat damage to a player, draw cards equal to its toughness,\""));
         ability.addEffect(
                 new CanAttackAsThoughItDidntHaveDefenderTargetEffect(Duration.EndOfTurn)
@@ -80,72 +80,34 @@ public final class ThePrideOfHullClade extends CardImpl {
     }
 }
 
-class ThePrideOfHullCladeCostReductionEffect extends CostModificationEffectImpl {
+enum TotalToughnessOfControlledCreaturesValue implements DynamicValue {
+    instance;
 
-    ThePrideOfHullCladeCostReductionEffect() {
-        super(Duration.WhileOnStack, Outcome.Benefit, CostModificationType.REDUCE_COST);
-        staticText = "This spell costs {X} less to cast, where X is the total toughness of creatures you control";
-    }
-
-    private ThePrideOfHullCladeCostReductionEffect(final ThePrideOfHullCladeCostReductionEffect effect) {
-        super(effect);
+    @Override
+    public TotalToughnessOfControlledCreaturesValue copy() {
+        return TotalToughnessOfControlledCreaturesValue.instance;
     }
 
     @Override
-    public ThePrideOfHullCladeCostReductionEffect copy() {
-        return new ThePrideOfHullCladeCostReductionEffect(this);
-    }
-
-    @Override
-    public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        return abilityToModify instanceof SpellAbility
-                && abilityToModify.getSourceId().equals(source.getSourceId())
-                && game.getCard(abilityToModify.getSourceId()) != null;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        int reductionAmount = game.getBattlefield()
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
+        return game
+                .getBattlefield()
                 .getAllActivePermanents(
-                        StaticFilters.FILTER_PERMANENT_CREATURE, abilityToModify.getControllerId(), game)
+                        StaticFilters.FILTER_PERMANENT_CREATURE,
+                        sourceAbility.getControllerId(), game)
                 .stream()
                 .map(Permanent::getToughness)
                 .mapToInt(MageInt::getValue)
                 .sum();
-        CardUtil.reduceCost(abilityToModify, Math.max(0, reductionAmount));
-        return true;
-    }
-}
-
-class ThePrideOfHullCladeEffect extends OneShotEffect {
-
-    ThePrideOfHullCladeEffect() {
-        super(Outcome.DrawCard);
-        staticText = "draw cards equal to its toughness";
-    }
-
-    private ThePrideOfHullCladeEffect(final ThePrideOfHullCladeEffect effect) {
-        super(effect);
     }
 
     @Override
-    public ThePrideOfHullCladeEffect copy() {
-        return new ThePrideOfHullCladeEffect(this);
+    public String getMessage() {
+        return "the total toughness of creatures you control";
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        if (controller == null || permanent == null) {
-            return false;
-        }
-
-        int toughness = permanent.getToughness().getValue();
-        if (toughness > 0) {
-            controller.drawCards(toughness, source, game);
-            return true;
-        }
-        return false;
+    public String toString() {
+        return "X";
     }
 }
