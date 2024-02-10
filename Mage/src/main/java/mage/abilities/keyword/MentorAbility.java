@@ -1,14 +1,17 @@
 package mage.abilities.keyword;
 
+import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.Card;
+import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.game.Game;
+import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -25,7 +28,7 @@ public class MentorAbility extends AttacksTriggeredAbility {
     }
 
     public MentorAbility() {
-        super(new AddCountersTargetEffect(CounterType.P1P1.createInstance()), false);
+        super(new MentorEffect(), false);
         this.addTarget(new TargetCreaturePermanent(filter));
     }
 
@@ -52,5 +55,39 @@ enum MentorAbilityPredicate implements ObjectSourcePlayerPredicate<Card> {
     public boolean apply(ObjectSourcePlayer<Card> input, Game game) {
         Permanent sourcePermanent = input.getSource().getSourcePermanentOrLKI(game);
         return sourcePermanent != null && input.getObject().getPower().getValue() < sourcePermanent.getPower().getValue();
+    }
+}
+
+class MentorEffect extends AddCountersTargetEffect {
+
+    MentorEffect() {
+        super(CounterType.P1P1.createInstance(), Outcome.BoostCreature);
+    }
+
+    private MentorEffect(final MentorEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public MentorEffect copy() {
+        return new MentorEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        if (!super.apply(game, source)) {
+            return false;
+        }
+
+        Permanent mentoredPermanent = game.getPermanent(targetPointer.getFirst(game, source));
+        if (mentoredPermanent == null) {
+            return false;
+        }
+        game.fireEvent(GameEvent.getEvent(
+                GameEvent.EventType.MENTORED_CREATURE,
+                mentoredPermanent.getId(),
+                source,
+                source.getControllerId()));
+        return true;
     }
 }
