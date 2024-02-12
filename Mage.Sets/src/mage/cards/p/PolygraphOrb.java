@@ -1,7 +1,7 @@
 package mage.cards.p;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 import mage.abilities.Ability;
@@ -13,17 +13,18 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.PutCards;
+import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.common.TargetDiscard;
 import mage.target.common.TargetSacrifice;
 
 /**
@@ -62,10 +63,6 @@ public final class PolygraphOrb extends CardImpl {
 
 class PolygraphOrbEffect extends OneShotEffect {
 
-    private static final String DISCARD_CHOICE = "Discard a card";
-    private static final String SACRIFICE_CHOICE = "Sacrifice a creature";
-    private static final String LIFE_LOSS_CHOICE = "Lose 3 life";
-
     PolygraphOrbEffect() {
         super(Outcome.Detriment);
         staticText = "Each opponent loses 3 life unless they discard a card or sacrifice a creature";
@@ -87,51 +84,47 @@ class PolygraphOrbEffect extends OneShotEffect {
             return false;
         }
 
+        Map<UUID, Card> chosenCards = new HashMap<>();
         for (UUID opponentId : game.getOpponents(controller.getId())) {
             Player opponent = game.getPlayer(opponentId);
             if (opponent == null) {
                 continue;
             }
 
-            Set<String> choiceSet = new HashSet<>();
-            if (opponent.getHand().size() > 0) {
-                choiceSet.add(DISCARD_CHOICE);
-            }
-            if (game.getBattlefield().count(StaticFilters.FILTER_CONTROLLED_CREATURE, opponentId, source, game) > 0) {
-                choiceSet.add(SACRIFICE_CHOICE);
-            }
-            choiceSet.add(LIFE_LOSS_CHOICE);
-
-            String chosen;
-            if (choiceSet.size() > 1) {
-                Choice choice = new ChoiceImpl(true);
-                choice.setChoices(choiceSet);
-                opponent.choose(outcome, choice, game);
-                chosen = choice.getChoice();
-                if (chosen == null) {
-                    chosen = LIFE_LOSS_CHOICE;
-                }
-            } else {
-                chosen = LIFE_LOSS_CHOICE;
+            TargetDiscard targetDiscard = new TargetDiscard(0, 1, StaticFilters.FILTER_CARD_A, opponentId);
+            if (opponent.choose(Outcome.PreventDamage, targetDiscard, source, game)) {
+                chosenCards.put(opponentId, game.getCard(targetDiscard.getFirstTarget()));
+                continue;
             }
 
-            switch (chosen) {
-                case DISCARD_CHOICE:
-                    opponent.discard(1, false, false, source, game);
-                    break;
-                case SACRIFICE_CHOICE:
-                    TargetSacrifice target = new TargetSacrifice(StaticFilters.FILTER_CONTROLLED_CREATURE);
-                    Permanent permanent = null;
-                    while (permanent == null) {
-                        opponent.choose(Outcome.Sacrifice, target, source, game);
-                        permanent = game.getPermanent(target.getFirstTarget());
+            TargetSacrifice targetSacrifice = new TargetSacrifice(0, 1, StaticFilters.FILTER_CONTROLLED_CREATURE);
+            if (opponent.choose(Outcome.PreventDamage, targetSacrifice, source, game)) {
+                chosenCards.put(opponentId, game.getCard(targetSacrifice.getFirstTarget()));
+                continue;
+            }
+
+            chosenCards.put(opponentId, null);
+        }
+        for (Map.Entry<UUID, Card> entry : chosenCards.entrySet()) {
+            Player opponent = game.getPlayer(entry.getKey());
+            if (opponent == null) {
+                continue;
+            }
+            if (entry.getValue() != null) {
+                Card card = entry.getValue();
+                Zone zone = game.getState().getZone(card.getId());
+                if (Zone.HAND.match(zone)) {
+                    opponent.discard(card, false, source, game);
+                    continue;
+                } else if (Zone.BATTLEFIELD.match(zone)) {
+                    Permanent permanent = game.getPermanent(card.getId());
+                    if (permanent != null) {
+                        permanent.sacrifice(source, game);
+                        continue;
                     }
-                    permanent.sacrifice(source, game);
-                    break;
-                case LIFE_LOSS_CHOICE:
-                    opponent.loseLife(3, game, source, false);
-                    break;
+                }
             }
+            opponent.loseLife(3, game, source, false);
         }
         return true;
     }
