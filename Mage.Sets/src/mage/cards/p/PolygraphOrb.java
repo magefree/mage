@@ -64,7 +64,7 @@ public final class PolygraphOrb extends CardImpl {
 class PolygraphOrbEffect extends OneShotEffect {
 
     PolygraphOrbEffect() {
-        super(Outcome.Detriment);
+        super(Outcome.Benefit);
         staticText = "Each opponent loses 3 life unless they discard a card or sacrifice a creature";
     }
 
