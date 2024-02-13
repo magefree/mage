@@ -118,6 +118,6 @@ enum OfficiousInterrogationCount implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "creature those player control";
+        return "the total number of creatures those players control";
     }
 }
