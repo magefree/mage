@@ -38,6 +38,8 @@ public final class DinoDNA extends CardImpl {
         imprintAbility.addCost(new TapSourceCost());
         imprintAbility.addTarget(new TargetCardInGraveyard(new FilterCreatureCard("creature card in a graveyard")));
 
+        this.addAbility(imprintAbility);
+
         // {6}: Create a token that's a copy of target creature card exiled with Dino DNA, except it's a 6/6 green Dinosaur creature with trample. Activate only as a sorcery.
         // Based on Croaking Counterpart and Bronzebeak Foragers
         CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(
@@ -51,7 +53,6 @@ public final class DinoDNA extends CardImpl {
         Ability copyAbility = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{6}"));
         copyAbility.setTargetAdjuster(DinoDNACopyAdjuster.instance);
 
-        this.addAbility(imprintAbility);
         this.addAbility(copyAbility);
     }
 
