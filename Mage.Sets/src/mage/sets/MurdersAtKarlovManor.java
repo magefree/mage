@@ -151,6 +151,7 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Loxodon Eavesdropper", 168, Rarity.COMMON, mage.cards.l.LoxodonEavesdropper.class));
         cards.add(new SetCardInfo("Lush Portico", 263, Rarity.RARE, mage.cards.l.LushPortico.class));
         cards.add(new SetCardInfo("Macabre Reconstruction", 93, Rarity.COMMON, mage.cards.m.MacabreReconstruction.class));
+        cards.add(new SetCardInfo("Magnetic Snuffler", 254, Rarity.UNCOMMON, mage.cards.m.MagneticSnuffler.class));
         cards.add(new SetCardInfo("Magnifying Glass", 255, Rarity.COMMON, mage.cards.m.MagnifyingGlass.class));
         cards.add(new SetCardInfo("Make Your Move", 22, Rarity.COMMON, mage.cards.m.MakeYourMove.class));
         cards.add(new SetCardInfo("Makeshift Binding", 23, Rarity.COMMON, mage.cards.m.MakeshiftBinding.class));
