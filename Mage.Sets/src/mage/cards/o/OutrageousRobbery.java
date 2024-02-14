@@ -1,6 +1,5 @@
 package mage.cards.o;
 
-import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 
@@ -80,10 +79,7 @@ class OutrageousRobberyEffect extends OneShotEffect {
         }
 
         Set<Card> cards = opponent.getLibrary().getTopCards(game, xValue);
-        cards
-                .stream()
-                .filter(Objects::nonNull)
-                .forEach(card -> card.setFaceDown(true, game));
+        cards.forEach(card -> card.setFaceDown(true, game));
         UUID exileZoneId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
         if (cards.size() > 0 && opponent.moveCardsToExile(cards, source, game, false, exileZoneId,
                 sourceObject.getIdName() + " (" + controller.getName() + ")")) {
