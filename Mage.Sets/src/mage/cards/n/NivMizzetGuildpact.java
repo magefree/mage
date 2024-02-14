@@ -1,8 +1,11 @@
 package mage.cards.n;
 
-import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
+
 import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -10,6 +13,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.hint.Hint;
 import mage.abilities.keyword.HexproofFromMulticoloredAbility;
 import mage.constants.SubType;
 import mage.constants.SuperType;
@@ -20,6 +24,7 @@ import mage.constants.CardType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetAnyTarget;
 import mage.target.targetpointer.SecondTargetPointer;
@@ -59,7 +64,7 @@ public final class NivMizzetGuildpact extends CardImpl {
         ability.addEffect(new GainLifeEffect(NivMizzetGuildpactCount.instance)
                 .setText(", and you gain X life, where X is the number of different color pairs " +
                         "among permanents you control that are exactly two colors."));
-
+        ability.addHint(NivMizzetGuildpactHint.instance);
         this.addAbility(ability);
     }
 
@@ -88,7 +93,6 @@ enum NivMizzetGuildpactCount implements DynamicValue {
                         StaticFilters.FILTER_CONTROLLED_PERMANENT,
                         sourceAbility.getControllerId(), game)
                 .stream()
-                .filter(Objects::nonNull)
                 .map(Permanent::getColor)
                 .filter(color -> color.getColorCount() == 2)
                 .distinct()
@@ -103,5 +107,47 @@ enum NivMizzetGuildpactCount implements DynamicValue {
     @Override
     public String getMessage() {
         return "the number of different color pairs among permanents you control that are exactly two colors";
+    }
+}
+
+enum NivMizzetGuildpactHint implements Hint {
+    instance;
+
+    @Override
+    public NivMizzetGuildpactHint copy() {
+        return instance;
+    }
+
+    @Override
+    public String getText(Game game, Ability ability) {
+        Player controller = game.getPlayer(ability.getControllerId());
+        if (controller == null) {
+            return null;
+        }
+
+        String hintText = "Color pairs you control: ";
+
+        Set<ObjectColor> pairs = game.getBattlefield()
+                .getAllActivePermanents(
+                        StaticFilters.FILTER_CONTROLLED_PERMANENT,
+                        ability.getControllerId(), game)
+                .stream()
+                .map(Permanent::getColor)
+                .filter(color -> color.getColorCount() == 2)
+                .collect(Collectors.toSet());
+
+        if (pairs.size() == 0) {
+            hintText += "0 (None)";
+        } else {
+            hintText += pairs.size() + " (" +
+                    pairs
+                            .stream()
+                            .map(Object::toString)
+                            .sorted()
+                            .map(string -> "{" + string.charAt(0) + "}{" + string.charAt(1) + "}")
+                            .collect(Collectors.joining(", ")) + ")";
+        }
+
+        return hintText;
     }
 }
