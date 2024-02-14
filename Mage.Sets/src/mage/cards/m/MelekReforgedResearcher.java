@@ -6,6 +6,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
 import mage.cards.Card;
@@ -55,9 +56,9 @@ public final class MelekReforgedResearcher extends CardImpl {
                 .setText("{this}'s power and toughness are each equal to twice the number of instant and sorcery cards in your graveyard")));
 
         // The first instant or sorcery spell you cast each turn costs {3} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
-                new SpellsCostReductionControllerEffect(filter, 3)
-                        .setText("The first instant or sorcery spell you cast each turn costs {3} less to cast")),
+        Effect effect = new SpellsCostReductionControllerEffect(filter, 3);
+        effect.setText("The first instant or sorcery spell you cast each turn costs {3} less to cast");
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect),
                 new MelekReforgedResearcherWatcher());
     }
 
@@ -100,11 +101,11 @@ class MelekReforgedResearcherWatcher extends Watcher {
 
     @Override
     public void watch (GameEvent event, Game game) {
-        if (event.getType() != GameEvent.EventType.CAST_SPELL) {
+        if (event.getType() != GameEvent.EventType.SPELL_CAST) {
             return;
         }
 
-        Spell spell = game.getSpell(event.getSourceId());
+        Spell spell = game.getSpell(event.getTargetId());
         if (spell == null || !spell.isInstantOrSorcery(game)) {
             return;
         }
