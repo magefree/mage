@@ -158,6 +158,7 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Marketwatch Phantom", 24, Rarity.COMMON, mage.cards.m.MarketwatchPhantom.class));
         cards.add(new SetCardInfo("Massacre Girl, Known Killer", 94, Rarity.MYTHIC, mage.cards.m.MassacreGirlKnownKiller.class));
         cards.add(new SetCardInfo("Meddling Youths", 219, Rarity.UNCOMMON, mage.cards.m.MeddlingYouths.class));
+        cards.add(new SetCardInfo("Melek, Reforged Researcher", 430, Rarity.MYTHIC, mage.cards.m.MelekReforgedResearcher.class));
         cards.add(new SetCardInfo("Meticulous Archive", 264, Rarity.RARE, mage.cards.m.MeticulousArchive.class));
         cards.add(new SetCardInfo("Mistway Spy", 65, Rarity.UNCOMMON, mage.cards.m.MistwaySpy.class));
         cards.add(new SetCardInfo("Mountain", 275, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
