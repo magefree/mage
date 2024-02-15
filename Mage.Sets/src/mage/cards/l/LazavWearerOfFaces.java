@@ -22,6 +22,7 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
+import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -69,7 +70,7 @@ class LazavWearerOfFacesEffect extends OneShotEffect {
 
     LazavWearerOfFacesEffect() {
         super(Outcome.Copy);
-        staticText = "you may have Lazav become a copy of a creature card exiled with it until end of turn";
+        staticText = "you may have {this} become a copy of a creature card exiled with it until end of turn";
     }
 
     private LazavWearerOfFacesEffect(final LazavWearerOfFacesEffect effect) {
@@ -94,7 +95,11 @@ class LazavWearerOfFacesEffect extends OneShotEffect {
         }
 
         UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
-        Cards cards = new CardsImpl(game.getExile().getExileZone(exileId).getCards(StaticFilters.FILTER_CARD_CREATURE, game));
+        ExileZone exile = game.getExile().getExileZone(exileId);
+        if (exile == null) {
+            return false;
+        }
+        Cards cards = new CardsImpl(exile.getCards(StaticFilters.FILTER_CARD_CREATURE, game));
         TargetCard target = new TargetCard(Zone.EXILED, new FilterCard("creature card to copy"));
         target.withNotTarget(true);
         controller.chooseTarget(outcome, cards, target, source, game);
