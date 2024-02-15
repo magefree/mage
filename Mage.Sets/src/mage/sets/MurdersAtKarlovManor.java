@@ -176,6 +176,7 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Officious Interrogation", 222, Rarity.RARE, mage.cards.o.OfficiousInterrogation.class));
         cards.add(new SetCardInfo("On the Job", 30, Rarity.COMMON, mage.cards.o.OnTheJob.class));
         cards.add(new SetCardInfo("Out Cold", 66, Rarity.COMMON, mage.cards.o.OutCold.class));
+        cards.add(new SetCardInfo("Outrageous Robbery", 97, Rarity.RARE, mage.cards.o.OutrageousRobbery.class));
         cards.add(new SetCardInfo("Person of Interest", 139, Rarity.COMMON, mage.cards.p.PersonOfInterest.class));
         cards.add(new SetCardInfo("Persuasive Interrogators", 98, Rarity.UNCOMMON, mage.cards.p.PersuasiveInterrogators.class));
         cards.add(new SetCardInfo("Pick Your Poison", 170, Rarity.COMMON, mage.cards.p.PickYourPoison.class));
