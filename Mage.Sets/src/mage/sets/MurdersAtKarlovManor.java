@@ -167,6 +167,7 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Neighborhood Guardian", 26, Rarity.UNCOMMON, mage.cards.n.NeighborhoodGuardian.class));
         cards.add(new SetCardInfo("Nervous Gardener", 169, Rarity.COMMON, mage.cards.n.NervousGardener.class));
         cards.add(new SetCardInfo("Nightdrinker Moroii", 96, Rarity.UNCOMMON, mage.cards.n.NightdrinkerMoroii.class));
+        cards.add(new SetCardInfo("Niv-Mizzet, Guildpact", 220, Rarity.RARE, mage.cards.n.NivMizzetGuildpact.class));
         cards.add(new SetCardInfo("No More Lies", 221, Rarity.UNCOMMON, mage.cards.n.NoMoreLies.class));
         cards.add(new SetCardInfo("No Witnesses", 27, Rarity.RARE, mage.cards.n.NoWitnesses.class));
         cards.add(new SetCardInfo("Not on My Watch", 28, Rarity.UNCOMMON, mage.cards.n.NotOnMyWatch.class));
