@@ -181,6 +181,7 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Persuasive Interrogators", 98, Rarity.UNCOMMON, mage.cards.p.PersuasiveInterrogators.class));
         cards.add(new SetCardInfo("Pick Your Poison", 170, Rarity.COMMON, mage.cards.p.PickYourPoison.class));
         cards.add(new SetCardInfo("Plains", 272, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Polygraph Orb", 99, Rarity.UNCOMMON, mage.cards.p.PolygraphOrb.class));
         cards.add(new SetCardInfo("Pompous Gadabout", 171, Rarity.UNCOMMON, mage.cards.p.PompousGadabout.class));
         cards.add(new SetCardInfo("Presumed Dead", 100, Rarity.UNCOMMON, mage.cards.p.PresumedDead.class));
         cards.add(new SetCardInfo("Private Eye", 223, Rarity.UNCOMMON, mage.cards.p.PrivateEye.class));
