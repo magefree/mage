@@ -1294,6 +1294,12 @@ public final class CardUtil {
             game.addEffect(new YouMaySpendManaAsAnyColorToCastTargetEffect(duration, playerId, condition).setTargetPointer(new FixedTarget(objectId, zcc)), source);
         }
     }
+    //same as makeCardPlayable, except the card's owner is used to determine duration instead of the effect's controller
+    public static void makeCardPlayableWithOwnerDuration(Game game, Ability source, Card card, Duration duration, UUID playerId) {
+        UUID objectId = card.getMainCard().getId();
+        int zcc = game.getState().getZoneChangeCounter(objectId);
+        game.addEffect(new CanPlayCardControllerEffect(game, objectId, zcc, duration, playerId, null, playerId), source);
+    }
 
     public interface SpellCastTracker {
 
