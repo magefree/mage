@@ -7,16 +7,15 @@ import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
+import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.*;
 import mage.constants.*;
 import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureCard;
-import mage.game.ExileZone;
 import mage.game.Game;
-import mage.players.Player;
 import mage.target.common.TargetCardInExile;
 import mage.target.common.TargetCardInGraveyard;
 import mage.target.targetadjustment.TargetAdjuster;
@@ -34,9 +33,9 @@ public final class DinoDNA extends CardImpl {
 
         // Imprint -- {1}, {T}: Exile target creature card from a graveyard. Activate only as a sorcery.
         // Based on Dimir Doppleganger
-        Ability imprintAbility = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new DinoDNAImprintEffect(), new ManaCostsImpl<>("{1}"));
+        Ability imprintAbility = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect().setToSourceExileZone(true), new ManaCostsImpl<>("{1}"));
         imprintAbility.addCost(new TapSourceCost());
-        imprintAbility.addTarget(new TargetCardInGraveyard(new FilterCreatureCard("creature card in a graveyard")));
+        imprintAbility.addTarget(new TargetCardInGraveyard(StaticFilters.FILTER_CARD_CREATURE_A_GRAVEYARD));
 
         this.addAbility(imprintAbility);
 
@@ -48,8 +47,9 @@ public final class DinoDNA extends CardImpl {
         );
         effect.setOnlyColor(ObjectColor.GREEN);
         effect.setOnlySubType(SubType.DINOSAUR);
+
         effect.addAdditionalAbilities(TrampleAbility.getInstance());
-        effect.setText("Create a token that's a copy of target creature card exiled with Dino DNA, except it's a 6/6 green Dinosaur creature with trample.");
+        effect.setText("Create a token that's a copy of target creature card exiled with {this}, except it's a 6/6 green Dinosaur creature with trample.");
         Ability copyAbility = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{6}"));
         copyAbility.setTargetAdjuster(DinoDNACopyAdjuster.instance);
 
@@ -63,43 +63,6 @@ public final class DinoDNA extends CardImpl {
     @Override
     public DinoDNA copy() {
         return new DinoDNA(this);
-    }
-}
-class DinoDNAImprintEffect extends OneShotEffect {
-
-    DinoDNAImprintEffect() {
-        super(Outcome.Benefit);
-        staticText = "Exile target creature card from a graveyard.";
-    }
-
-    private DinoDNAImprintEffect(final DinoDNAImprintEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public DinoDNAImprintEffect copy() {
-        return new DinoDNAImprintEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
-            return false;
-        }
-
-        Card toExile = game.getCard(source.getFirstTarget());
-        if (toExile == null) {
-            return false;
-        }
-
-        UUID exileId = CardUtil.getExileZoneId(game, source);
-        player.moveCardsToExile(
-                toExile, source, game, true,
-                exileId, CardUtil.getSourceName(game, source)
-        );
-        ExileZone exileZone = game.getExile().getExileZone(exileId);
-        return exileZone != null && !exileZone.isEmpty();
     }
 }
 
