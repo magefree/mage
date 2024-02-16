@@ -106,7 +106,7 @@
 
                 <configuration>
                   <jacocoReports>
-                    <jacocoReport>${project.basedir}/../Mage.Verify/target/site/jacoco-aggregate/jacoco.xml</jacocoReport>
+                    <jacocoReport>${root.dir}/Mage.Reports/target/site/jacoco-aggregate/jacoco.xml</jacocoReport>
                   </jacocoReports>
                 </configuration>
             </plugin>
