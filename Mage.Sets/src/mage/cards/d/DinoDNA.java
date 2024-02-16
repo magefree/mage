@@ -37,7 +37,7 @@ public final class DinoDNA extends CardImpl {
         imprintAbility.addCost(new TapSourceCost());
         imprintAbility.addTarget(new TargetCardInGraveyard(StaticFilters.FILTER_CARD_CREATURE_A_GRAVEYARD));
 
-        this.addAbility(imprintAbility);
+        this.addAbility(imprintAbility.setAbilityWord(AbilityWord.IMPRINT));
 
         // {6}: Create a token that's a copy of target creature card exiled with Dino DNA, except it's a 6/6 green Dinosaur creature with trample. Activate only as a sorcery.
         // Based on Croaking Counterpart and Bronzebeak Foragers
