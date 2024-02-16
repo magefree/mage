@@ -67,12 +67,12 @@ public final class DescentIntoMadness extends CardImpl {
 
 class DescentIntoMadnessEffect extends OneShotEffect {
 
-    public DescentIntoMadnessEffect() {
+    DescentIntoMadnessEffect() {
         super(Outcome.Sacrifice);
         this.staticText = "put a despair counter on {this}, then each player exiles X permanents they control and/or cards from their hand, where X is the number of despair counters on {this}";
     }
 
-    public DescentIntoMadnessEffect(final DescentIntoMadnessEffect effect) {
+    private DescentIntoMadnessEffect(final DescentIntoMadnessEffect effect) {
         super(effect);
     }
 
@@ -149,8 +149,8 @@ class DescentIntoMadnessEffect extends OneShotEffect {
                 filter.add(Predicates.not(Predicates.or(uuidPredicates)));
 
                 target = new TargetControlledPermanent(0, 1, filter, true);
-                if (target.canChoose(source.getSourceId(), player.getId(), game)
-                        && player.choose(Outcome.Exile, target, source.getSourceId(), game)) {
+                if (target.canChoose(player.getId(), source, game)
+                        && player.choose(Outcome.Exile, target, source, game)) {
                     for (UUID targetId : target.getTargets()) {
                         if (!selectedObjects.contains(targetId)) {
                             Permanent chosen = game.getPermanent(targetId);
@@ -174,8 +174,8 @@ class DescentIntoMadnessEffect extends OneShotEffect {
                         uuidPredicates.add(new CardIdPredicate(uuid));
                     }
                     filterInHand.add(Predicates.not(Predicates.or(uuidPredicates)));
-                    if (targetInHand.canChoose(source.getSourceId(), player.getId(), game) &&
-                            player.choose(Outcome.Exile, player.getHand(), targetInHand, game)) {
+                    if (targetInHand.canChoose(player.getId(), source, game) &&
+                            player.choose(Outcome.Exile, player.getHand(), targetInHand, source, game)) {
 
                         Card card = player.getHand().get(targetInHand.getFirstTarget(), game);
                         if (card != null) {

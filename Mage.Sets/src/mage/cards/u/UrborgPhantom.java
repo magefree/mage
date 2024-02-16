@@ -35,7 +35,7 @@ public final class UrborgPhantom extends CardImpl {
         // {U}: Prevent all combat damage that would be dealt to and dealt by Urborg Phantom this turn.
         Effect effect = new PreventCombatDamageToSourceEffect(Duration.EndOfTurn);
         effect.setText("Prevent all combat damage that would be dealt to");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{U}"));
         effect = new PreventCombatDamageBySourceEffect(Duration.EndOfTurn);
         effect.setText("and dealt by {this} this turn");
         ability.addEffect(effect);

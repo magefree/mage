@@ -27,7 +27,7 @@ public final class SluicewayScorpion extends CardImpl {
         // Deathtouch
         this.addAbility(DeathtouchAbility.getInstance());
         // Scavenge {1}{B}{G}
-        this.addAbility(new ScavengeAbility(new ManaCostsImpl("{1}{B}{G}")));
+        this.addAbility(new ScavengeAbility(new ManaCostsImpl<>("{1}{B}{G}")));
     }
 
     private SluicewayScorpion(final SluicewayScorpion card) {

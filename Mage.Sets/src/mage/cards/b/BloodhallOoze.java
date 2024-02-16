@@ -59,7 +59,7 @@ class BloodhallOozeTriggeredAbility1 extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), true);
     }
 
-    public BloodhallOozeTriggeredAbility1(final BloodhallOozeTriggeredAbility1 ability) {
+    private BloodhallOozeTriggeredAbility1(final BloodhallOozeTriggeredAbility1 ability) {
         super(ability);
     }
 
@@ -104,7 +104,7 @@ class BloodhallOozeTriggeredAbility2 extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), true);
     }
 
-    public BloodhallOozeTriggeredAbility2(final BloodhallOozeTriggeredAbility2 ability) {
+    private BloodhallOozeTriggeredAbility2(final BloodhallOozeTriggeredAbility2 ability) {
         super(ability);
     }
 

@@ -23,7 +23,7 @@ public final class FlameJet extends CardImpl {
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
         this.getSpellAbility().addTarget(new TargetPlayerOrPlaneswalker());
         // Cycling {2}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
     private FlameJet(final FlameJet card) {

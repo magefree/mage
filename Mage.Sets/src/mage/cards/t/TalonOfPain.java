@@ -42,7 +42,7 @@ public final class TalonOfPain extends CardImpl {
         this.addAbility(new TalonOfPainTriggeredAbility());
 
         // {X}, {T}, Remove X charge counters from Talon of Pain: Talon of Pain deals X damage to any target.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(ManacostVariableValue.REGULAR), new ManaCostsImpl("{X}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(ManacostVariableValue.REGULAR, "it"), new ManaCostsImpl<>("{X}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new TalonOfPainRemoveVariableCountersSourceCost(CounterType.CHARGE.createInstance()));
         ability.addTarget(new TargetAnyTarget());
@@ -58,49 +58,45 @@ public final class TalonOfPain extends CardImpl {
     public TalonOfPain copy() {
         return new TalonOfPain(this);
     }
+}
 
-    private class TalonOfPainTriggeredAbility extends TriggeredAbilityImpl {
+class TalonOfPainTriggeredAbility extends TriggeredAbilityImpl {
 
-        public TalonOfPainTriggeredAbility() {
-            super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance()));
-        }
+    public TalonOfPainTriggeredAbility() {
+        super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance()));
+        setTriggerPhrase("Whenever a source you control other than {this} deals damage to an opponent, ");
+    }
 
-        public TalonOfPainTriggeredAbility(final TalonOfPainTriggeredAbility ability) {
-            super(ability);
-        }
+    private TalonOfPainTriggeredAbility(final TalonOfPainTriggeredAbility ability) {
+        super(ability);
+    }
 
-        @Override
-        public TalonOfPainTriggeredAbility copy() {
-            return new TalonOfPainTriggeredAbility(this);
-        }
+    @Override
+    public TalonOfPainTriggeredAbility copy() {
+        return new TalonOfPainTriggeredAbility(this);
+    }
 
-        @Override
-        public boolean checkEventType(GameEvent event, Game game) {
-            return event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
-        }
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
+    }
 
-        @Override
-        public boolean checkTrigger(GameEvent event, Game game) {
-            // to another player
-            Player controller = game.getPlayer(this.getControllerId());
-            if (controller == null) {
-                return false;
-            }
-            if (controller.hasOpponent(event.getTargetId(), game)) {
-                // a source you control other than Talon of Pain
-                UUID sourceControllerId = game.getControllerId(event.getSourceId());
-                // return true so the effect will fire and a charge counter will be added
-                return sourceControllerId != null
-                        && sourceControllerId.equals(this.getControllerId())
-                        && !this.getSourceId().equals(event.getSourceId());
-            }
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        // to another player
+        Player controller = game.getPlayer(this.getControllerId());
+        if (controller == null) {
             return false;
         }
-
-        @Override
-        public String getTriggerPhrase() {
-            return "Whenever a source you control other than {this} deals damage to an opponent, ";
+        if (controller.hasOpponent(event.getTargetId(), game)) {
+            // a source you control other than Talon of Pain
+            UUID sourceControllerId = game.getControllerId(event.getSourceId());
+            // return true so the effect will fire and a charge counter will be added
+            return sourceControllerId != null
+                    && sourceControllerId.equals(this.getControllerId())
+                    && !this.getSourceId().equals(event.getSourceId());
         }
+        return false;
     }
 }
 
@@ -132,7 +128,7 @@ class TalonOfPainRemoveVariableCountersSourceCost extends VariableCostImpl {
         }
     }
 
-    public TalonOfPainRemoveVariableCountersSourceCost(final TalonOfPainRemoveVariableCountersSourceCost cost) {
+    private TalonOfPainRemoveVariableCountersSourceCost(final TalonOfPainRemoveVariableCountersSourceCost cost) {
         super(cost);
         this.minimalCountersToPay = cost.minimalCountersToPay;
         this.counterName = cost.counterName;

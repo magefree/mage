@@ -49,7 +49,7 @@ class StompingSlabsEffect extends OneShotEffect {
         this.staticText = "Reveal the top seven cards of your library, then put those cards on the bottom of your library in any order. If a card named Stomping Slabs was revealed this way, {this} deals 7 damage to any target";
     }
     
-    StompingSlabsEffect(final StompingSlabsEffect effect) {
+    private StompingSlabsEffect(final StompingSlabsEffect effect) {
         super(effect);
     }
     

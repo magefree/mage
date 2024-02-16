@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 public final class AshiokNightmareMuseToken extends TokenImpl {
 
     public AshiokNightmareMuseToken() {
-        super("Nightmare", "2/3 blue and black Nightmare creature token with " +
+        super("Nightmare Token", "2/3 blue and black Nightmare creature token with " +
                 "\"Whenever this creature attacks or blocks, each opponent exiles the top two cards of their library.\"");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);

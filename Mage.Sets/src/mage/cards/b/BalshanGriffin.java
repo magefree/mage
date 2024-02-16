@@ -32,7 +32,7 @@ public final class BalshanGriffin extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // {1}{U}, Discard a card: Return Balshan Griffin to its owner's hand.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new ManaCostsImpl("{1}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new ManaCostsImpl<>("{1}{U}"));
         ability.addCost(new DiscardTargetCost(new TargetCardInHand()));
         this.addAbility(ability);
     }

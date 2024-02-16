@@ -25,7 +25,7 @@ public final class RiftBolt extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
 
         // Suspend 1-{R}
-        this.addAbility(new SuspendAbility(1, new ManaCostsImpl("{R}"), this));
+        this.addAbility(new SuspendAbility(1, new ManaCostsImpl<>("{R}"), this));
 
 
     }

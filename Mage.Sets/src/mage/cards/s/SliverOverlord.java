@@ -31,7 +31,7 @@ public final class SliverOverlord extends CardImpl {
 
     public SliverOverlord(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{U}{B}{R}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SLIVER);
         this.subtype.add(SubType.MUTANT);
 
@@ -39,10 +39,10 @@ public final class SliverOverlord extends CardImpl {
         this.toughness = new MageInt(7);
 
         // {3}: Search your library for a Sliver card, reveal that card, and put it into your hand. Then shuffle your library.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true, true), new ManaCostsImpl("{3}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true, true), new ManaCostsImpl<>("{3}")));
         
         // {3}: Gain control of target Sliver.
-        Ability ability = (new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainControlTargetEffect(Duration.Custom), new ManaCostsImpl("{3}")));
+        Ability ability = (new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainControlTargetEffect(Duration.Custom), new ManaCostsImpl<>("{3}")));
         Target target = new TargetPermanent(new FilterCreaturePermanent(SubType.SLIVER,"Sliver"));
         ability.addTarget(target);
         this.addAbility(ability);

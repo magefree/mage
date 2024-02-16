@@ -23,14 +23,12 @@ public final class Hydroblast extends CardImpl {
     public Hydroblast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");
 
-
         // Choose one - Counter target spell if it's red;
         this.getSpellAbility().addEffect(new HydroblastCounterEffect());
         this.getSpellAbility().addTarget(new TargetSpell());
-        
+
         // or destroy target permanent if it's red.
-        Mode mode = new Mode();
-        mode.addEffect(new HydroblastDestroyEffect());
+        Mode mode = new Mode(new HydroblastDestroyEffect());
         mode.addTarget(new TargetPermanent());
         this.getSpellAbility().addMode(mode);
     }
@@ -49,9 +47,10 @@ class HydroblastCounterEffect extends OneShotEffect {
 
     HydroblastCounterEffect() {
         super(Outcome.Detriment);
+        this.staticText = "Counter target spell if it's red";
     }
 
-    HydroblastCounterEffect(final HydroblastCounterEffect effect) {
+    private HydroblastCounterEffect(final HydroblastCounterEffect effect) {
         super(effect);
     }
 
@@ -67,20 +66,16 @@ class HydroblastCounterEffect extends OneShotEffect {
         }
         return true;
     }
-
-    @Override
-    public String getText(Mode mode) {
-        return "Counter target spell if it's red";
-    }
 }
 
 class HydroblastDestroyEffect extends OneShotEffect {
 
     HydroblastDestroyEffect() {
         super(Outcome.DestroyPermanent);
+        this.staticText = "destroy target permanent if it's red";
     }
 
-    HydroblastDestroyEffect(final HydroblastDestroyEffect effect) {
+    private HydroblastDestroyEffect(final HydroblastDestroyEffect effect) {
         super(effect);
     }
 
@@ -96,10 +91,5 @@ class HydroblastDestroyEffect extends OneShotEffect {
             permanent.destroy(source, game, false);
         }
         return true;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return "destroy target permanent if it's red";
     }
 }

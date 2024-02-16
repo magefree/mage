@@ -35,7 +35,6 @@ public class RiotTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
 
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Rampaging Rendhorn", 1);
         assertPowerToughness(playerA, "Rampaging Rendhorn", 5, 5);
@@ -56,7 +55,6 @@ public class RiotTest extends CardTestPlayerBase {
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
 
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Rampaging Rendhorn", 1);
         assertPowerToughness(playerA, "Rampaging Rendhorn", 4, 4);
@@ -81,7 +79,6 @@ public class RiotTest extends CardTestPlayerBase {
 
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Silvercoat Lion", 1);
         assertPowerToughness(playerA, "Silvercoat Lion", 3, 3);
@@ -109,7 +106,6 @@ public class RiotTest extends CardTestPlayerBase {
 
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Silvercoat Lion", 1);
         assertPowerToughness(playerA, "Silvercoat Lion", 2 + 2, 2 + 2);
@@ -135,7 +131,6 @@ public class RiotTest extends CardTestPlayerBase {
 
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Silvercoat Lion", 1);
         assertPowerToughness(playerA, "Silvercoat Lion", 2, 2);
@@ -161,7 +156,6 @@ public class RiotTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
 
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Silvercoat Lion", 1);
         assertPowerToughness(playerA, "Silvercoat Lion", 3, 3);
@@ -187,7 +181,6 @@ public class RiotTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
 
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Silvercoat Lion", 1);
         assertPowerToughness(playerA, "Silvercoat Lion", 2, 2);

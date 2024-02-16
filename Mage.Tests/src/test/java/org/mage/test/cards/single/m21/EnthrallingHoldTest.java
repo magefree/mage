@@ -34,7 +34,6 @@ public class EnthrallingHoldTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerB, "Traxos, Scourge of Kroog", 0);
         assertPermanentCount(playerA, "Traxos, Scourge of Kroog", 1);
@@ -67,7 +66,6 @@ public class EnthrallingHoldTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerB, "Traxos, Scourge of Kroog", 0);
         assertPermanentCount(playerA, "Traxos, Scourge of Kroog", 0);

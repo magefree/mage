@@ -34,7 +34,7 @@ public final class CloakOfConfusion extends CardImpl {
         TargetPermanent auraTarget = new TargetControlledCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Whenever enchanted creature attacks and isn't blocked, you may have it assign no combat damage this turn. 
@@ -104,11 +104,6 @@ class CloakOfConfusionEffect extends ReplacementEffectImpl {
     @Override
     public CloakOfConfusionEffect copy() {
         return new CloakOfConfusionEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

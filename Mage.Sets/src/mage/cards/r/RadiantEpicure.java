@@ -8,12 +8,10 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.TargetController;
+import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
+import mage.util.CardUtil;
 import mage.watchers.common.ManaSpentToCastWatcher;
 
 import java.util.UUID;
@@ -34,7 +32,7 @@ public final class RadiantEpicure extends CardImpl {
         // Converge — When Radiant Epicure enters the battlefield, each opponent loses X life and you gain X life, where X is the number of colors of mana spent to cast this spell.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
                 new RadiantEpicureEffect(), false)
-                .withFlavorWord("Converge")
+                .setAbilityWord(AbilityWord.CONVERGE)
         );
     }
 
@@ -72,7 +70,7 @@ class RadiantEpicureEffect extends OneShotEffect {
         if (player == null || watcher == null) {
             return false;
         }
-        Mana payment = watcher.getLastManaPayment(source.getSourceId());
+        Mana payment = watcher.getManaPayment(CardUtil.getSourceStackMomentReference(game, source));
         if (payment == null) {
             return false;
         }

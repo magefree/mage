@@ -23,7 +23,7 @@ public final class KrarksThumb extends CardImpl {
 
     public KrarksThumb(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // If you would flip a coin, instead flip two coins and ignore one.
         this.addAbility(new SimpleStaticAbility(new KrarksThumbEffect()));
@@ -70,10 +70,5 @@ class KrarksThumbEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         return source.isControlledBy(event.getPlayerId());
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
     }
 }

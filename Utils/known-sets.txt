@@ -33,9 +33,11 @@ Commander 2019|Commander2019Edition|
 Commander 2020|Commander2020Edition|
 Commander 2021|Commander2021Edition|
 Commander Legends|CommanderLegends|
+Commander Legends: Battle for Baldur's Gate|CommanderLegendsBattleForBaldursGate|
 Commander Anthology|CommanderAnthology|
 Commander Anthology 2018|CommanderAnthology2018|
 Commander's Arsenal|CommandersArsenal|
+Commander Masters|CommanderMasters|
 Conflux|Conflux|
 Conspiracy: Take the Crown|ConspiracyTakeTheCrown|
 Core Set 2019|CoreSet2019|
@@ -44,7 +46,10 @@ Core Set 2021|CoreSet2021|
 Dark Ascension|DarkAscension|
 Darksteel|Darksteel|
 Dissension|Dissension|
+Doctor Who|DoctorWho|
 Dominaria|Dominaria|
+Dominaria United|DominariaUnited|
+Dominaria United Commander|DominariaUnitedCommander|
 Dragon's Maze|DragonsMaze|
 Dragons of Tarkir|DragonsOfTarkir|
 Duel Decks: Ajani vs. Nicol Bolas|DuelDecksAjaniVsNicolBolas|
@@ -79,6 +84,7 @@ European Land Program|EuropeanLandProgram|
 Eventide|Eventide|
 Exodus|Exodus|
 Explorers of Ixalan|ExplorersOfIxalan|
+Fallout|Fallout|
 Fallen Empires|FallenEmpires|
 Fate Reforged|FateReforged|
 Fifth Dawn|FifthDawn|
@@ -99,6 +105,7 @@ Future Sight|FutureSight|
 Game Day|GameDay|
 Game Night|GameNight|
 Game Night 2019|GameNight2019|
+Game Night: Free-for-All|GameNightFreeforAll|
 Gatecrash|Gatecrash|
 Global Series: Jiang Yanggu & Mu Yanling|GlobalSeriesJiangYangguAndMuYanling|
 Grand Prix|GrandPrixPromos|
@@ -125,6 +132,8 @@ Judge Promo|JudgePromo|
 Judgment|Judgment|
 Jumpstart|Jumpstart|
 Jumpstart: Historic Horizons|JumpstartHistoricHorizons|
+Jumpstart 2022|Jumpstart2022|
+Jurassic World Collection|JurassicWorldCollection|
 Kaladesh|Kaladesh|
 Kaldheim|Kaldheim|
 Kaldheim Commander|KaldheimCommander|
@@ -136,7 +145,11 @@ Legends|Legends|
 Legions|Legions|
 Limited Edition Alpha|LimitedEditionAlpha|
 Limited Edition Beta|LimitedEditionBeta|
+The Lord of the Rings: Tales of Middle-earth|TheLordOfTheRingsTalesOfMiddleEarth|
+Tales of Middle-earth Commander|TalesOfMiddleEarthCommander|
 Lorwyn|Lorwyn|
+The Lost Caverns of Ixalan|TheLostCavernsOfIxalan|
+Lost Caverns of Ixalan Commander|LostCavernsOfIxalanCommander|
 Magic 2010|Magic2010|
 Magic 2011|Magic2011|
 Magic 2012|Magic2012|
@@ -155,6 +168,9 @@ Masters Edition III|MastersEditionIII|
 Masters Edition IV|MastersEditionIV|
 Masters 25|Masters25|
 Media Inserts|MediaInserts|
+March of the Machine|MarchOfTheMachine|
+March of the Machine Commander|MarchOfTheMachineCommander|
+March of the Machine: The Aftermath|MarchOfTheMachineTheAftermath|
 Mercadian Masques|MercadianMasques|
 Mirage|Mirage|
 Mirrodin|Mirrodin|
@@ -165,12 +181,17 @@ Modern Masters|ModernMasters|
 Modern Masters 2015|ModernMasters2015|
 Modern Masters 2017|ModernMasters2017|
 Morningtide|Morningtide|
+Murders at Karlov Manor|MurdersAtKarlovManor|
+Murders at Karlov Manor Commander|MurdersAtKarlovManorCommander|
+Ravnica: Clue Edition|RavnicaClueEdition|
 Nemesis|Nemesis|
 New Phyrexia|NewPhyrexia|
 Ninth Edition|NinthEdition|
 Oath of the Gatewatch|OathOfTheGatewatch|
 Odyssey|Odyssey|
 Onslaught|Onslaught|
+Phyrexia: All Will Be One|PhyrexiaAllWillBeOne|
+Phyrexia: All Will Be One Commander|PhyrexiaAllWillBeOneCommander|
 Planar Chaos|PlanarChaos|
 Planechase|Planechase|
 Planechase 2012 Edition|Planechase2012Edition|
@@ -198,16 +219,20 @@ Seventh Edition|SeventhEdition|
 Shadowmoor|Shadowmoor|
 Shadows over Innistrad|ShadowsOverInnistrad|
 Shards of Alara|ShardsOfAlara|
+Special Guests|SpecialGuests|
 Starter 1999|Starter1999|
 Starter 2000|Starter2000|
 Star Wars|StarWars|
 Streets of New Capenna|StreetsOfNewCapenna|
+New Capenna Commander|NewCapennaCommander|
 Strixhaven: School of Mages|StrixhavenSchoolOfMages|
 Stronghold|Stronghold|
 Super Series|SuperSeries|
 Tempest|Tempest|
 Tempest Remastered|TempestRemastered|
 Tenth Edition|TenthEdition|
+The Brothers' War|TheBrothersWar|
+The Brothers' War Commander|TheBrothersWarCommander|
 The Dark|TheDark|
 Theros|Theros|
 Theros Beyond Death|TherosBeyondDeath|
@@ -215,6 +240,7 @@ Throne of Eldraine|ThroneOfEldraine|
 Time Spiral|TimeSpiral|
 Time Spiral "Timeshifted"|TimeSpiralTimeshifted|
 Torment|Torment|
+Transformers|Transformers|
 Ugin's Fate|UginsFate|
 Unglued|Unglued|
 Unhinged|Unhinged|
@@ -226,10 +252,13 @@ Urza's Legacy|UrzasLegacy|
 Urza's Saga|UrzasSaga|
 Vintage Masters|VintageMasters|
 Visions|Visions|
+Warhammer 40,000|Warhammer40000|
 War of the Spark|WarOfTheSpark|
 Weatherlight|Weatherlight|
 Welcome Deck 2016|WelcomeDeck2016|
 Welcome Deck 2017|WelcomeDeck2017|
+Wilds of Eldraine|WildsOfEldraine|
+Wilds of Eldraine Commander|WildsOfEldraineCommander|
 World Magic Cup Qualifier|WorldMagicCupQualifier|
 Worldwake|Worldwake|
 WPN Gateway|WPNAndGatewayPromos|

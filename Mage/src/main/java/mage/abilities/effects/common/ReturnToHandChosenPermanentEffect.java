@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
@@ -13,7 +12,6 @@ import mage.target.common.TargetControlledPermanent;
 import mage.util.CardUtil;
 
 /**
- *
  * @author Plopmans
  */
 public class ReturnToHandChosenPermanentEffect extends OneShotEffect {
@@ -32,7 +30,7 @@ public class ReturnToHandChosenPermanentEffect extends OneShotEffect {
         this.staticText = getText();
     }
 
-    public ReturnToHandChosenPermanentEffect(final ReturnToHandChosenPermanentEffect effect) {
+    protected ReturnToHandChosenPermanentEffect(final ReturnToHandChosenPermanentEffect effect) {
         super(effect);
         this.filter = effect.filter;
         this.number = effect.number;
@@ -47,7 +45,7 @@ public class ReturnToHandChosenPermanentEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(this.getTargetPointer().getFirst(game, source));
         if (player != null) {
-            int available = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game);
+            int available = game.getBattlefield().count(filter, source.getControllerId(), source, game);
             if (available > 0) {
                 TargetControlledPermanent target = new TargetControlledPermanent(Math.min(number, available), number, filter, true);
                 if (player.chooseTarget(this.outcome, target, source, game)) {
@@ -61,10 +59,10 @@ public class ReturnToHandChosenPermanentEffect extends OneShotEffect {
 
     protected String getText() {
         StringBuilder sb = new StringBuilder("that player returns ");
-        if (!filter.getMessage().startsWith("another")) {
-            sb.append(CardUtil.numberToText(number, "a"));
+        if (!filter.getMessage().startsWith("another") && !filter.getMessage().startsWith("a ")) {
+            sb.append(CardUtil.numberToText(number, "a")).append(' ');
         }
-        sb.append(' ').append(filter.getMessage());
+        sb.append(filter.getMessage());
         sb.append(" they control");
         if (number > 1) {
             sb.append(" to their owner's hand");

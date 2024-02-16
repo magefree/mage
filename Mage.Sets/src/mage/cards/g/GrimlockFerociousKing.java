@@ -23,7 +23,7 @@ public final class GrimlockFerociousKing extends CardImpl{
     
    public GrimlockFerociousKing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DINOSAUR);
         this.power = new MageInt(8);
         this.toughness = new MageInt(8);
@@ -38,7 +38,7 @@ public final class GrimlockFerociousKing extends CardImpl{
         
         // {2}: Grimlock, Ferocious King becomes Grimlock, Dinobot Leader.
         this.addAbility(new TransformAbility());
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new TransformSourceEffect(), new ManaCostsImpl("{2}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new TransformSourceEffect(), new ManaCostsImpl<>("{2}")));
     }
 
     private GrimlockFerociousKing(final GrimlockFerociousKing card) {

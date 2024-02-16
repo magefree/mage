@@ -26,7 +26,7 @@ public final class ThassaGodOfTheSea extends CardImpl {
 
     public ThassaGodOfTheSea(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{2}{U}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GOD);
 
         this.power = new MageInt(5);
@@ -46,7 +46,7 @@ public final class ThassaGodOfTheSea extends CardImpl {
 
         // {1}{U}: Target creature you control can't be blocked this turn.
         Ability ability = new SimpleActivatedAbility(
-                new CantBeBlockedTargetEffect(Duration.EndOfTurn), new ManaCostsImpl("{1}{U}")
+                new CantBeBlockedTargetEffect(Duration.EndOfTurn), new ManaCostsImpl<>("{1}{U}")
         );
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);

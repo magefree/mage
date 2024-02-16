@@ -28,7 +28,7 @@ public final class EmryLurkerOfTheLoch extends CardImpl {
     public EmryLurkerOfTheLoch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.MERFOLK);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(1);

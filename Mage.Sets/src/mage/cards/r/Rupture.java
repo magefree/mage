@@ -10,6 +10,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -18,6 +19,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetSacrifice;
 
 /**
  *
@@ -55,7 +57,7 @@ class RuptureEffect extends OneShotEffect {
         staticText = "Sacrifice a creature. Rupture deals damage equal to that creature's power to each creature without flying and each player";
     }
 
-    public RuptureEffect(final RuptureEffect effect) {
+    private RuptureEffect(final RuptureEffect effect) {
         super(effect);
     }
 
@@ -64,10 +66,10 @@ class RuptureEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             int power = 0;
-            TargetControlledCreaturePermanent target = new TargetControlledCreaturePermanent(1, 1, new FilterControlledCreaturePermanent("creature to sacrifice"), true);
-            if (target.canChoose(source.getSourceId(), player.getId(), game)) {
-                while (!target.isChosen() && target.canChoose(source.getSourceId(), player.getId(), game) && player.canRespond()) {
-                    player.chooseTarget(Outcome.Sacrifice, target, source, game);
+            TargetSacrifice target = new TargetSacrifice(StaticFilters.FILTER_PERMANENT_CREATURE);
+            if (target.canChoose(player.getId(), source, game)) {
+                while (!target.isChosen() && target.canChoose(player.getId(), source, game) && player.canRespond()) {
+                    player.choose(Outcome.Sacrifice, target, source, game);
                 }
                 Permanent permanent = game.getPermanent(target.getFirstTarget());
                 if (permanent != null) {

@@ -28,7 +28,7 @@ public final class PrismaticGeoscope extends CardImpl {
 
         // <i>Domain</i> &mdash; {T}: Add X mana in any combination of colors, where X is the number of basic land types among lands you control.
         Ability ability = new DynamicManaAbility(
-                new Mana(0, 0, 0, 0, 0, 0, 1, 0), new DomainValue(), new TapSourceCost(),
+                new Mana(0, 0, 0, 0, 0, 0, 1, 0), DomainValue.REGULAR, new TapSourceCost(),
                 "Add X mana in any combination of colors,"
                 + " where X is the number of basic land types among lands you control."
         );

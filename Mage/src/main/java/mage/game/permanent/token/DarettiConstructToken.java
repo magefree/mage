@@ -1,24 +1,17 @@
-
-
 package mage.game.permanent.token;
-import mage.constants.CardType;
-import mage.constants.SubType;
+
 import mage.MageInt;
 import mage.abilities.keyword.DefenderAbility;
+import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
- *
  * @author spjspj
  */
 public final class DarettiConstructToken extends TokenImpl {
 
     public DarettiConstructToken() {
-        this("CNS");
-    }
-
-    public DarettiConstructToken(String setCode) {
-        super("Construct", "1/1 colorless Construct artifact creature token with defender");
-        this.setOriginalExpansionSetCode(setCode);
+        super("Construct Token", "1/1 colorless Construct artifact creature token with defender");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.CONSTRUCT);
@@ -28,7 +21,7 @@ public final class DarettiConstructToken extends TokenImpl {
         addAbility(DefenderAbility.getInstance());
     }
 
-    public DarettiConstructToken(final DarettiConstructToken token) {
+    private DarettiConstructToken(final DarettiConstructToken token) {
         super(token);
     }
 

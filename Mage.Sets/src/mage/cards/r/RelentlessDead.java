@@ -13,7 +13,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.AnotherCardPredicate;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.players.Player;
@@ -37,7 +37,7 @@ public final class RelentlessDead extends CardImpl {
         this.addAbility(new MenaceAbility());
 
         // When Relentless Dead dies, you may pay {B}. If you do, return it to its owner's hand.
-        this.addAbility(new DiesSourceTriggeredAbility(new DoIfCostPaid(new ReturnToHandSourceEffect().setText("return it to its owner's hand"), new ManaCostsImpl("{B}"))));
+        this.addAbility(new DiesSourceTriggeredAbility(new DoIfCostPaid(new ReturnToHandSourceEffect().setText("return it to its owner's hand"), new ManaCostsImpl<>("{B}"))));
 
         // When Relentless Dead dies, you may pay {X}. If you do, return another target Zombie creature card with converted mana cost X from your graveyard to the battlefield.
         this.addAbility(new DiesSourceTriggeredAbility(new RelentlessDeadEffect()));
@@ -55,12 +55,12 @@ public final class RelentlessDead extends CardImpl {
 
 class RelentlessDeadEffect extends OneShotEffect {
 
-    public RelentlessDeadEffect() {
+    RelentlessDeadEffect() {
         super(Outcome.PutCardInPlay);
         this.staticText = "you may pay {X}. If you do, return another target Zombie creature card with mana value X from your graveyard to the battlefield";
     }
 
-    public RelentlessDeadEffect(final RelentlessDeadEffect effect) {
+    private RelentlessDeadEffect(final RelentlessDeadEffect effect) {
         super(effect);
     }
 
@@ -79,7 +79,7 @@ class RelentlessDeadEffect extends OneShotEffect {
                 FilterCard filter = new FilterCard("Another target Zombie card with mana value {" + payCount + "}");
                 filter.add(SubType.ZOMBIE.getPredicate());
                 filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, payCount));
-                filter.add(new AnotherCardPredicate());
+                filter.add(AnotherPredicate.instance);
                 TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(filter);
                 if (controller.chooseTarget(outcome, target, source, game)) {
                     Card card = game.getCard(target.getFirstTarget());

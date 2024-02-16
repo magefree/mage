@@ -15,7 +15,7 @@ public final class PurphorossInterventionToken extends TokenImpl {
         this(0);
     }
     public PurphorossInterventionToken(int power) {
-        super("Elemental", "X/1 red Elemental creature token with trample and haste");
+        super("Elemental Token", "X/1 red Elemental creature token with trample and haste");
         this.cardType.add(CardType.CREATURE);
         this.subtype.add(SubType.ELEMENTAL);
         this.color.setRed(true);

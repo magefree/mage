@@ -35,7 +35,7 @@ public final class Mutilate extends CardImpl {
         // All creatures get -1/-1 until end of turn for each Swamp you control.
         PermanentsOnBattlefieldCount count = new PermanentsOnBattlefieldCount(filter, -1);
         this.getSpellAbility().addEffect(
-                new BoostAllEffect(count, count, Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES, false, null, true)
+                new BoostAllEffect(count, count, Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES, false, null)
                         .setText(ruleText)
         );
     }

@@ -41,7 +41,7 @@ public final class PardicDragon extends CardImpl {
         // {R}: Pardic Dragon gets +1/+0 until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.R)));
         // Suspend 2-{R}{R}
-        this.addAbility(new SuspendAbility(2, new ManaCostsImpl("{R}{R}"), this, true));
+        this.addAbility(new SuspendAbility(2, new ManaCostsImpl<>("{R}{R}"), this, true));
         // Whenever an opponent casts a spell, if Pardic Dragon is suspended, that player may put a time counter on Pardic Dragon.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new SpellCastOpponentTriggeredAbility(Zone.EXILED, new PardicDragonEffect(), StaticFilters.FILTER_SPELL, false, SetTargetPointer.PLAYER),
@@ -63,12 +63,12 @@ public final class PardicDragon extends CardImpl {
 
 class PardicDragonEffect extends OneShotEffect {
 
-    public PardicDragonEffect() {
+    PardicDragonEffect() {
         super(Outcome.Benefit);
         this.staticText = "that player may put a time counter on Pardic Dragon";
     }
 
-    public PardicDragonEffect(final PardicDragonEffect effect) {
+    private PardicDragonEffect(final PardicDragonEffect effect) {
         super(effect);
     }
 

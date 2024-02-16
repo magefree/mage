@@ -90,14 +90,13 @@ public class ConspireTest extends CardTestPlayerBase {
         // cast with conspire
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
         setChoice(playerA, true); // use conspire
-        setChoice(playerA, "Goblin Warrior");
-        setChoice(playerA, "Goblin Warrior");
+        setChoice(playerA, "Goblin Warrior Token");
+        setChoice(playerA, "Goblin Warrior Token");
         setChoice(playerA, false); // keep targets
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Wort, the Raidmother", 1);
         assertGraveyardCount(playerA, "Lightning Bolt", 1);
@@ -122,8 +121,8 @@ public class ConspireTest extends CardTestPlayerBase {
         // cast with conspire
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
         setChoice(playerA, true); // use conspire
-        setChoice(playerA, "Goblin Warrior");
-        setChoice(playerA, "Goblin Warrior");
+        setChoice(playerA, "Goblin Warrior Token");
+        setChoice(playerA, "Goblin Warrior Token");
         setChoice(playerA, false); // keep targets
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Shock", playerB);
         setChoice(playerA, false); // don't use conspire
@@ -131,7 +130,6 @@ public class ConspireTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Wort, the Raidmother", 1);
         assertGraveyardCount(playerA, "Lightning Bolt", 1);
@@ -198,7 +196,7 @@ public class ConspireTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Sakashima the Impostor");
         addCard(Zone.HAND, playerA, "Lightning Bolt");
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Wort, the Raidmother"); // {4}{R/G}{R/G}
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Wort, the Raidmother", true); // {4}{R/G}{R/G}
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sakashima the Impostor"); // {2}{U}{U}
         setChoice(playerA, "Wort, the Raidmother");
 
@@ -225,7 +223,7 @@ public class ConspireTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Sakashima the Impostor");
         addCard(Zone.HAND, playerA, "Lightning Bolt");
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Wort, the Raidmother"); // {4}{R/G}{R/G}
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Wort, the Raidmother", true); // {4}{R/G}{R/G}
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sakashima the Impostor"); // {2}{U}{U}
         setChoice(playerA, "Wort, the Raidmother");
 
@@ -260,7 +258,6 @@ public class ConspireTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Burn Trail", 1);
         assertLife(playerB, 20 - 3 - 3);
@@ -285,7 +282,6 @@ public class ConspireTest extends CardTestPlayerBase {
         //setStrictChooseMode(true); - AI must choose
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Burn Trail", 1);
         assertLife(playerB, 20 - 3 - 3);
@@ -310,7 +306,6 @@ public class ConspireTest extends CardTestPlayerBase {
         //setStrictChooseMode(true); - AI must choose
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Burn Trail", 1);
         assertLife(playerB, 20 - 3); // simple cast

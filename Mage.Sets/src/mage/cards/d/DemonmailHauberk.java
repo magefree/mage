@@ -12,7 +12,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -25,11 +25,14 @@ public final class DemonmailHauberk extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
         this.subtype.add(SubType.EQUIPMENT);
 
-        // Equip - Sacrifice a creature.
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT))));
-
         // Equipped creature gets +4/+2.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(4, 2)));
+
+        // Equip - Sacrifice a creature.
+        this.addAbility(new EquipAbility(
+                Outcome.AddAbility,
+                new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT),
+                false));
     }
 
     private DemonmailHauberk(final DemonmailHauberk card) {

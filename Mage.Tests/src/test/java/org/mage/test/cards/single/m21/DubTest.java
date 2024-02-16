@@ -22,7 +22,6 @@ public class DubTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertAbility(playerA, "Scryb Sprites", FirstStrikeAbility.getInstance(), true);
         assertAbility(playerA, "Scryb Sprites", FlyingAbility.getInstance(), true);

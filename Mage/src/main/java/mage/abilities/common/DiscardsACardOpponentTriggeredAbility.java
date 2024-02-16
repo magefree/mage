@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package mage.abilities.common;
 
 import mage.abilities.TriggeredAbilityImpl;
@@ -13,7 +9,6 @@ import mage.game.events.GameEvent;
 import mage.target.targetpointer.FixedTarget;
 
 /**
- *
  * @author jeffwadsworth
  */
 public class DiscardsACardOpponentTriggeredAbility extends TriggeredAbilityImpl {
@@ -27,9 +22,10 @@ public class DiscardsACardOpponentTriggeredAbility extends TriggeredAbilityImpl 
     public DiscardsACardOpponentTriggeredAbility(Effect effect, boolean isOptional, SetTargetPointer setTargetPointer) {
         super(Zone.BATTLEFIELD, effect, isOptional);
         this.setTargetPointer = setTargetPointer;
+        setTriggerPhrase("Whenever an opponent discards a card, ");
     }
 
-    public DiscardsACardOpponentTriggeredAbility(final DiscardsACardOpponentTriggeredAbility ability) {
+    protected DiscardsACardOpponentTriggeredAbility(final DiscardsACardOpponentTriggeredAbility ability) {
         super(ability);
         this.setTargetPointer = ability.setTargetPointer;
     }
@@ -61,10 +57,5 @@ public class DiscardsACardOpponentTriggeredAbility extends TriggeredAbilityImpl 
             return true;
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever an opponent discards a card, " ;
     }
 }

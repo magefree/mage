@@ -28,7 +28,7 @@ public final class Repopulate extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new RepopulateEffect());
         // Cycling {2}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
     private Repopulate(final Repopulate card) {
@@ -48,7 +48,7 @@ class RepopulateEffect extends OneShotEffect {
         staticText = "Shuffle all creature cards from target player's graveyard into that player's library";
     }
 
-    RepopulateEffect(final RepopulateEffect effect) {
+    private RepopulateEffect(final RepopulateEffect effect) {
         super(effect);
     }
 

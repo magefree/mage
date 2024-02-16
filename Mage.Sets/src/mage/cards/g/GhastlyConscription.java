@@ -46,12 +46,12 @@ public final class GhastlyConscription extends CardImpl {
 
 class GhastlyConscriptionEffect extends OneShotEffect {
 
-    public GhastlyConscriptionEffect() {
+    GhastlyConscriptionEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Exile all creature cards from target player's graveyard in a face-down pile, shuffle that pile, then manifest those cards.<i> (To manifest a card, put it onto the battlefield face down as a 2/2 creature. Turn it face up at any time for its mana cost if it's a creature card.)</i>";
     }
 
-    public GhastlyConscriptionEffect(final GhastlyConscriptionEffect effect) {
+    private GhastlyConscriptionEffect(final GhastlyConscriptionEffect effect) {
         super(effect);
     }
 
@@ -80,9 +80,9 @@ class GhastlyConscriptionEffect extends OneShotEffect {
             for (Card card : cardsToManifest) {
                 ManaCosts manaCosts = null;
                 if (card.isCreature(game)) {
-                    manaCosts = card.getSpellAbility().getManaCosts();
+                    manaCosts = card.getSpellAbility() != null ? card.getSpellAbility().getManaCosts() : null;
                     if (manaCosts == null) {
-                        manaCosts = new ManaCostsImpl("{0}");
+                        manaCosts = new ManaCostsImpl<>("{0}");
                     }
                 }
                 MageObjectReference objectReference = new MageObjectReference(card.getId(), card.getZoneChangeCounter(game) + 1, game);

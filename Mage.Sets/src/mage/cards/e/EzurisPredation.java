@@ -46,12 +46,12 @@ public final class EzurisPredation extends CardImpl {
 
 class EzurisPredationEffect extends OneShotEffect {
 
-    public EzurisPredationEffect() {
+    EzurisPredationEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "For each creature your opponents control, create a 4/4 green Phyrexian Beast creature token. Each of those Beasts fights a different one of those creatures";
+        this.staticText = "For each creature your opponents control, create a 4/4 green Phyrexian Beast creature token. Each of those tokens fights a different one of those creatures";
     }
 
-    public EzurisPredationEffect(final EzurisPredationEffect effect) {
+    private EzurisPredationEffect(final EzurisPredationEffect effect) {
         super(effect);
     }
 
@@ -78,7 +78,7 @@ class EzurisPredationEffect extends OneShotEffect {
         if (controller != null) {
             FilterCreaturePermanent filterCreature = new FilterCreaturePermanent();
             filterCreature.add(TargetController.OPPONENT.getControllerPredicate());
-            List<Permanent> creaturesOfOpponents = game.getBattlefield().getActivePermanents(filterCreature, source.getControllerId(), source.getSourceId(), game);
+            List<Permanent> creaturesOfOpponents = game.getBattlefield().getActivePermanents(filterCreature, source.getControllerId(), source, game);
             Set<MageObjectReference> morSet = new HashSet<>();
             if (!creaturesOfOpponents.isEmpty()) {
                 CreateTokenEffect effect = new CreateTokenEffect(new PhyrexianBeastToken(), creaturesOfOpponents.size());

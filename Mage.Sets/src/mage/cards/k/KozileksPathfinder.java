@@ -29,7 +29,7 @@ public final class KozileksPathfinder extends CardImpl {
 
         // {C}: Target creature can't block Kozilek's Pathfinder this turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBeBlockedByTargetSourceEffect(Duration.EndOfTurn),
-                new ManaCostsImpl("{C}"));
+                new ManaCostsImpl<>("{C}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

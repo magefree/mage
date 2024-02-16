@@ -28,7 +28,7 @@ public final class Cinderbones extends CardImpl {
         this.toughness = new MageInt(1);
 
         this.addAbility(WitherAbility.getInstance());
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{1}{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{1}{B}")));
     }
 
     private Cinderbones(final Cinderbones card) {

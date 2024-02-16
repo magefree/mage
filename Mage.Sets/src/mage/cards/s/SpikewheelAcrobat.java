@@ -24,7 +24,7 @@ public final class SpikewheelAcrobat extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Spectacle {2}{R}
-        this.addAbility(new SpectacleAbility(this, new ManaCostsImpl("{2}{R}")));
+        this.addAbility(new SpectacleAbility(this, new ManaCostsImpl<>("{2}{R}")));
     }
 
     private SpikewheelAcrobat(final SpikewheelAcrobat card) {

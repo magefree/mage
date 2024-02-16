@@ -11,8 +11,10 @@ import mage.game.events.TableEventSource;
 import mage.game.result.ResultProtos.MatchProto;
 import mage.game.result.ResultProtos.MatchQuitStatus;
 import mage.players.Player;
+import mage.util.CardUtil;
 import mage.util.DateFormat;
 import mage.util.RandomUtil;
+import mage.util.ThreadUtils;
 import org.apache.log4j.Logger;
 
 import java.util.*;
@@ -197,11 +199,14 @@ public abstract class MatchImpl implements Match {
                 matchPlayer.getPlayer().init(game);
                 game.loadCards(matchPlayer.getDeck().getCards(), matchPlayer.getPlayer().getId());
                 game.loadCards(matchPlayer.getDeck().getSideboard(), matchPlayer.getPlayer().getId());
-                game.addPlayer(matchPlayer.getPlayer(), matchPlayer.getDeck());
-                // set the priority time left for the match
-                if (games.isEmpty()) { // first game full time
-                    matchPlayer.getPlayer().setPriorityTimeLeft(options.getPriorityTime());
+                game.addPlayer(matchPlayer.getPlayer(), matchPlayer.getDeck()); // TODO: keeps old player?!
+                // time limits
+                matchPlayer.getPlayer().setBufferTimeLeft(options.getMatchBufferTime().getBufferSecs());
+                if (games.isEmpty()) {
+                    // first game
+                    matchPlayer.getPlayer().setPriorityTimeLeft(options.getMatchTimeLimit().getPrioritySecs());
                 } else {
+                    // 2+ games must keep times
                     if (matchPlayer.getPriorityTimeLeft() > 0) {
                         matchPlayer.getPlayer().setPriorityTimeLeft(matchPlayer.getPriorityTimeLeft());
                     }
@@ -212,7 +217,8 @@ public abstract class MatchImpl implements Match {
                 }
             }
         }
-        game.setPriorityTime(options.getPriorityTime());
+        game.setPriorityTime(options.getMatchTimeLimit().getPrioritySecs());
+        game.setBufferTime(options.getMatchBufferTime().getBufferSecs());
     }
 
     protected void shufflePlayers() {
@@ -314,6 +320,8 @@ public abstract class MatchImpl implements Match {
 
     @Override
     public void sideboard() {
+        ThreadUtils.ensureRunInGameThread();
+
         for (MatchPlayer player : this.players) {
             if (!player.hasQuit()) {
                 if (player.getDeck() != null) {

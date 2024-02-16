@@ -19,7 +19,6 @@ public class ChromaticOrreryTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Sliver Overlord", 1);
     }
@@ -37,7 +36,6 @@ public class ChromaticOrreryTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerA, 5);
     }

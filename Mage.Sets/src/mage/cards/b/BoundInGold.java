@@ -32,7 +32,7 @@ public final class BoundInGold extends CardImpl {
         TargetPermanent auraTarget = new TargetPermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Removal));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Enchanted permanent can't attack, block, or crew Vehicles,
@@ -55,7 +55,7 @@ public final class BoundInGold extends CardImpl {
 
 class BoundInGoldEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public BoundInGoldEffect() {
+    BoundInGoldEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = ", or crew Vehicles, and its activated abilities can't be activated unless they're mana abilities";
     }

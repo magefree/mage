@@ -37,7 +37,7 @@ public final class OminousRoost extends CardImpl {
 class OminousRoostTriggeredAbility extends TriggeredAbilityImpl {
 
     OminousRoostTriggeredAbility() {
-        super(Zone.ALL, new CreateTokenEffect(new OminousRoostBirdToken()));
+	    super(Zone.BATTLEFIELD, new CreateTokenEffect(new OminousRoostBirdToken()));
     }
 
     private OminousRoostTriggeredAbility(final OminousRoostTriggeredAbility ability) {

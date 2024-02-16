@@ -21,7 +21,7 @@ public final class TeferisIsle extends CardImpl {
 
     public TeferisIsle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // Phasing
         this.addAbility(PhasingAbility.getInstance());

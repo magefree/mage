@@ -18,7 +18,7 @@ import java.util.UUID;
 public final class CavalcadeOfCalamity extends CardImpl {
 
     private static final FilterCreaturePermanent filter
-            = new FilterCreaturePermanent("creaure you control with power 1 or less");
+            = new FilterCreaturePermanent("creature you control with power 1 or less");
 
     static {
         filter.add(TargetController.YOU.getControllerPredicate());
@@ -63,7 +63,7 @@ class CavalcadeOfCalamityEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return game.damagePlayerOrPlaneswalker(
+        return game.damagePlayerOrPermanent(
                 game.getCombat().getDefenderId(targetPointer.getFirst(game, source)), 1,
                 source.getSourceId(), source, game, false, true
         ) > 0;

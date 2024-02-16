@@ -25,14 +25,14 @@ public final class Nebuchadnezzar extends CardImpl {
 
     public Nebuchadnezzar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
         // {X}, {T}: Choose a card name. Target opponent reveals X cards at random from their hand. Then that player discards all cards with that name revealed this way. Activate this ability only during your turn.
-        Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new ChooseACardNameEffect(ChooseACardNameEffect.TypeOfName.ALL), new ManaCostsImpl("{X}"), MyTurnCondition.instance);
+        Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new ChooseACardNameEffect(ChooseACardNameEffect.TypeOfName.ALL), new ManaCostsImpl<>("{X}"), MyTurnCondition.instance);
         ability.addCost(new TapSourceCost());
         ability.addEffect(new NebuchadnezzarEffect());
         ability.addTarget(new TargetOpponent());
@@ -52,19 +52,19 @@ public final class Nebuchadnezzar extends CardImpl {
 
 class NebuchadnezzarEffect extends OneShotEffect {
 
-    public NebuchadnezzarEffect() {
+    NebuchadnezzarEffect() {
         super(Outcome.Detriment);
         staticText = "Target opponent reveals X cards at random from their hand. Then that player discards all cards with that name revealed this way";
     }
 
-    public NebuchadnezzarEffect(final NebuchadnezzarEffect effect) {
+    private NebuchadnezzarEffect(final NebuchadnezzarEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player opponent = game.getPlayer(targetPointer.getFirst(game, source));
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         String cardName = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
         if (opponent == null || sourceObject == null || cardName.isEmpty()) {
             return false;

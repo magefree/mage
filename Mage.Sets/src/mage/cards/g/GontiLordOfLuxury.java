@@ -8,6 +8,7 @@ import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.AsThoughManaEffect;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.asthought.MayLookAtTargetCardEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.*;
 import mage.constants.*;
@@ -31,7 +32,7 @@ public final class GontiLordOfLuxury extends CardImpl {
 
     public GontiLordOfLuxury(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.AETHERBORN);
         this.subtype.add(SubType.ROGUE);
         this.power = new MageInt(2);
@@ -85,9 +86,9 @@ class GontiLordOfLuxuryEffect extends OneShotEffect {
             return false;
         }
         Cards topCards = new CardsImpl();
-        topCards.addAll(opponent.getLibrary().getTopCards(game, 4));
+        topCards.addAllCards(opponent.getLibrary().getTopCards(game, 4));
         TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card to exile"));
-        controller.choose(outcome, topCards, target, game);
+        controller.choose(outcome, topCards, target, source, game);
         Card card = game.getCard(target.getFirstTarget());
         if (card == null) {
             controller.putCardsOnBottomOfLibrary(topCards, game, source, false);
@@ -114,7 +115,7 @@ class GontiLordOfLuxuryEffect extends OneShotEffect {
             effect.setTargetPointer(new FixedTarget(card.getId(), game));
             game.addEffect(effect, source);
             // For as long as that card remains exiled, you may look at it
-            effect = new GontiLordOfLuxuryLookEffect(controller.getId());
+            effect = new MayLookAtTargetCardEffect(controller.getId());
             effect.setTargetPointer(new FixedTarget(card.getId(), game));
             game.addEffect(effect, source);
         }
@@ -126,7 +127,7 @@ class GontiLordOfLuxuryEffect extends OneShotEffect {
 
 class GontiLordOfLuxuryCastFromExileEffect extends AsThoughEffectImpl {
 
-    public GontiLordOfLuxuryCastFromExileEffect() {
+    GontiLordOfLuxuryCastFromExileEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
         staticText = "You may cast that card for as long as it remains exiled, and you may spend mana as though it were mana of any color to cast that spell";
     }
@@ -210,41 +211,5 @@ class GontiLordOfLuxurySpendAnyManaEffect extends AsThoughEffectImpl implements 
     @Override
     public ManaType getAsThoughManaType(ManaType manaType, ManaPoolItem mana, UUID affectedControllerId, Ability source, Game game) {
         return mana.getFirstAvailable();
-    }
-}
-
-class GontiLordOfLuxuryLookEffect extends AsThoughEffectImpl {
-
-    private final UUID authorizedPlayerId;
-
-    public GontiLordOfLuxuryLookEffect(UUID authorizedPlayerId) {
-        super(AsThoughEffectType.LOOK_AT_FACE_DOWN, Duration.EndOfGame, Outcome.Benefit);
-        this.authorizedPlayerId = authorizedPlayerId;
-        staticText = "You may look at the cards exiled with {this}";
-    }
-
-    private GontiLordOfLuxuryLookEffect(final GontiLordOfLuxuryLookEffect effect) {
-        super(effect);
-        this.authorizedPlayerId = effect.authorizedPlayerId;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public GontiLordOfLuxuryLookEffect copy() {
-        return new GontiLordOfLuxuryLookEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        UUID cardId = getTargetPointer().getFirst(game, source);
-        if (cardId == null) {
-            this.discard(); // card is no longer in the origin zone, effect can be discarded
-        }
-        return affectedControllerId.equals(authorizedPlayerId)
-                && objectId.equals(cardId);
     }
 }

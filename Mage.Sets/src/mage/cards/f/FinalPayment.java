@@ -31,10 +31,10 @@ public final class FinalPayment extends CardImpl {
 
         // As an additional cost to cast this spell, pay 5 life or sacrifice a creature or enchantment.
         final Cost lifeCost = new PayLifeCost(5);
-        final Cost sacrificeCost = new SacrificeTargetCost(new TargetControlledPermanent(filter));
+        final Cost sacrificeCost = new SacrificeTargetCost(filter);
 
-        this.getSpellAbility().addCost(new OrCost(lifeCost, sacrificeCost,
-                "pay 5 life or sacrifice a creature or enchantment"));
+        this.getSpellAbility().addCost(new OrCost("pay 5 life or sacrifice a creature or enchantment", lifeCost, sacrificeCost
+        ));
 
         // Destroy target creature
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

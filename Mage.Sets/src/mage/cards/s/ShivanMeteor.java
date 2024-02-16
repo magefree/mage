@@ -24,7 +24,7 @@ public final class ShivanMeteor extends CardImpl {
         this.getSpellAbility().addEffect(new DamageTargetEffect(13));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         // Suspend 2-{1}{R}{R}
-        this.addAbility(new SuspendAbility(2, new ManaCostsImpl("{1}{R}{R}"), this));
+        this.addAbility(new SuspendAbility(2, new ManaCostsImpl<>("{1}{R}{R}"), this));
     }
 
     private ShivanMeteor(final ShivanMeteor card) {

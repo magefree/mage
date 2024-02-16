@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package mage.abilities.common;
 
 import mage.abilities.TriggeredAbilityImpl;
@@ -29,9 +25,10 @@ public class BeginningOfPreCombatMainTriggeredAbility extends TriggeredAbilityIm
         super(zone, effect, isOptional);
         this.targetController = targetController;
         this.setTargetPointer = setTargetPointer;
+        setTriggerPhrase(generateTriggerPhrase());
     }
 
-    public BeginningOfPreCombatMainTriggeredAbility(final BeginningOfPreCombatMainTriggeredAbility ability) {
+    protected BeginningOfPreCombatMainTriggeredAbility(final BeginningOfPreCombatMainTriggeredAbility ability) {
         super(ability);
         this.targetController = ability.targetController;
         this.setTargetPointer = ability.setTargetPointer;
@@ -81,8 +78,7 @@ public class BeginningOfPreCombatMainTriggeredAbility extends TriggeredAbilityIm
         return false;
     }
 
-    @Override
-    public String getTriggerPhrase() {
+    private String generateTriggerPhrase() {
         switch (targetController) {
             case YOU:
                 return "At the beginning of your precombat main phase, " + generateZoneString();

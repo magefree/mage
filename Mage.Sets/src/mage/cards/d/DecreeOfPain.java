@@ -1,4 +1,3 @@
-
 package mage.cards.d;
 
 import java.util.UUID;
@@ -30,7 +29,7 @@ public final class DecreeOfPain extends CardImpl {
         // Destroy all creatures. They can't be regenerated. Draw a card for each creature destroyed this way.
         this.getSpellAbility().addEffect(new DecreeOfPainEffect());
         // Cycling {3}{B}{B}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{3}{B}{B}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{3}{B}{B}")));
         // When you cycle Decree of Pain, all creatures get -2/-2 until end of turn.
         Ability ability = new CycleTriggeredAbility(new BoostAllEffect(-2, -2, Duration.EndOfTurn));
         this.addAbility(ability);
@@ -48,12 +47,12 @@ public final class DecreeOfPain extends CardImpl {
 
 class DecreeOfPainEffect extends OneShotEffect {
 
-    public DecreeOfPainEffect() {
+    DecreeOfPainEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "Destroy all creatures. They can't be regenerated. Draw a card for each creature destroyed this way";
     }
 
-    public DecreeOfPainEffect(final DecreeOfPainEffect effect) {
+    private DecreeOfPainEffect(final DecreeOfPainEffect effect) {
         super(effect);
     }
 
@@ -73,6 +72,7 @@ class DecreeOfPainEffect extends OneShotEffect {
                 }
             }
             if (destroyedCreature > 0) {
+                game.getState().processAction(game);
                 controller.drawCards(destroyedCreature, source, game);
             }
             return true;

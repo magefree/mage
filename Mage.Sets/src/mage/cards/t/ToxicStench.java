@@ -60,7 +60,7 @@ class ToxicStenchEffect extends OneShotEffect {
         super(Outcome.UnboostCreature);
     }
 
-    ToxicStenchEffect(final ToxicStenchEffect effect) {
+    private ToxicStenchEffect(final ToxicStenchEffect effect) {
         super(effect);
     }
 

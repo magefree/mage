@@ -31,7 +31,7 @@ public final class Conversion extends CardImpl {
         // At the beginning of your upkeep, sacrifice Conversion unless you pay {W}{W}.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 new SacrificeSourceUnlessPaysEffect(
-                        new ManaCostsImpl("{W}{W}")),
+                        new ManaCostsImpl<>("{W}{W}")),
                 TargetController.YOU,
                 false));
 
@@ -56,7 +56,7 @@ public final class Conversion extends CardImpl {
             this.staticText = "All Mountains are Plains";
         }
 
-        ConversionEffect(final ConversionEffect effect) {
+        private ConversionEffect(final ConversionEffect effect) {
             super(effect);
         }
 

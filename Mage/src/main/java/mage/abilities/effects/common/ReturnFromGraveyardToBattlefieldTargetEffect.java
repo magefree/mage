@@ -24,6 +24,8 @@ public class ReturnFromGraveyardToBattlefieldTargetEffect extends OneShotEffect 
     private final boolean tapped;
     private final boolean attacking;
 
+    // Targets are returned under the control of the effect controller (e.g. "under your control")
+
     public ReturnFromGraveyardToBattlefieldTargetEffect() {
         this(false);
     }
@@ -84,13 +86,22 @@ public class ReturnFromGraveyardToBattlefieldTargetEffect extends OneShotEffect 
             sb.append("target creature");
         } else {
             Target target = mode.getTargets().get(0);
-            if (target.getMaxNumberOfTargets() > 1) {
-                if (target.getMaxNumberOfTargets() != target.getNumberOfTargets()) {
-                    sb.append("up to ");
-                }
-                sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(' ');
+            if (target.getMaxNumberOfTargets() == Integer.MAX_VALUE
+                    && target.getMinNumberOfTargets() == 0) {
+                sb.append("any number of ");
+            } else if (target.getMaxNumberOfTargets() != target.getNumberOfTargets()) {
+                sb.append("up to ");
+                sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets()));
+                sb.append(' ');
+            } else if (target.getMaxNumberOfTargets() > 1) {
+                sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets()));
+                sb.append(' ');
             }
-            sb.append("target ").append(mode.getTargets().get(0).getTargetName());
+            String targetName = mode.getTargets().get(0).getTargetName();
+            if (!targetName.contains("target ")) {
+                sb.append("target ");
+            }
+            sb.append(targetName);
         }
         sb.append(yourGrave ? " to" : " onto");
         sb.append(" the battlefield");

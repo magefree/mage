@@ -26,7 +26,7 @@ public final class PullUnder extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public PullUnder (final PullUnder card) {
+    private PullUnder(final PullUnder card) {
         super(card);
     }
 

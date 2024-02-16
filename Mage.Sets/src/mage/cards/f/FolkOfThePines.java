@@ -26,7 +26,7 @@ public final class FolkOfThePines extends CardImpl {
         this.toughness = new MageInt(5);
 
         // {1}{G}: Folk of the Pines gets +1/+0 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{1}{G}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{1}{G}")));
     }
 
     private FolkOfThePines(final FolkOfThePines card) {

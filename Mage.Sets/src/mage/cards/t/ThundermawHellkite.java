@@ -26,7 +26,7 @@ import mage.game.permanent.Permanent;
  */
 public final class ThundermawHellkite extends CardImpl {
     
-    static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures with flying your opponents control");
+    static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with flying your opponents control");
     
     static {
         filter.add(new AbilityPredicate(FlyingAbility.class));
@@ -72,7 +72,7 @@ class TapAllEffect extends OneShotEffect {
         staticText = "Tap those creatures";
     }
 
-    public TapAllEffect(final TapAllEffect effect) {
+    private TapAllEffect(final TapAllEffect effect) {
         super(effect);
         this.filter = effect.filter.copy();
     }
@@ -84,7 +84,7 @@ class TapAllEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
             permanent.tap(source, game);
         }
         return true;

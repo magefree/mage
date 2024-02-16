@@ -68,7 +68,7 @@ public final class CemeteryIlluminator extends CardImpl {
 
 class CemeteryIlluminatorExileEffect extends OneShotEffect {
 
-    public CemeteryIlluminatorExileEffect() {
+    CemeteryIlluminatorExileEffect() {
         super(Outcome.Exile);
         staticText = "exile a card from a graveyard";
     }
@@ -87,8 +87,8 @@ class CemeteryIlluminatorExileEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             TargetCardInGraveyard target = new TargetCardInGraveyard();
-            target.setNotTarget(true);
-            controller.choose(outcome, target, source.getSourceId(), game);
+            target.withNotTarget(true);
+            controller.choose(outcome, target, source, game);
             Card card = game.getCard(target.getFirstTarget());
             if (card != null) {
                 UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
@@ -103,8 +103,8 @@ class CemeteryIlluminatorExileEffect extends OneShotEffect {
 
 class CemeteryIlluminatorPlayTopEffect extends AsThoughEffectImpl {
 
-    public CemeteryIlluminatorPlayTopEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit, true);
+    CemeteryIlluminatorPlayTopEffect() {
+        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Once each turn, you may cast a spell from the top of your library if it shares a card type with a card exiled with {this}";
     }
 

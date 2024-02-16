@@ -72,18 +72,18 @@ public final class Outwit extends CardImpl {
             this.targetName = filter.getMessage();
         }
 
-        public CustomTargetSpell(final CustomTargetSpell target) {
+        private CustomTargetSpell(final CustomTargetSpell target) {
             super(target);
             this.filter = target.filter.copy();
         }
 
         @Override
-        public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
+        public boolean canChoose(UUID sourceControllerId, Ability source, Game game) {
             return canChoose(sourceControllerId, game);
         }
 
         @Override
-        public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
+        public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
             return possibleTargets(sourceControllerId, game);
         }
 

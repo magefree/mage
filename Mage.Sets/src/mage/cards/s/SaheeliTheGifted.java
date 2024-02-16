@@ -34,7 +34,7 @@ public final class SaheeliTheGifted extends CardImpl {
     public SaheeliTheGifted(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{U}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SAHEELI);
         this.setStartingLoyalty(4);
 
@@ -124,7 +124,7 @@ class SaheeliTheGiftedCostReductionEffect extends CostModificationEffectImpl {
 
 class SaheeliTheGiftedTokenEffect extends OneShotEffect {
 
-    public SaheeliTheGiftedTokenEffect() {
+    SaheeliTheGiftedTokenEffect() {
         super(Outcome.Benefit);
         this.staticText = "for each artifact you control, "
                 + "create a token that's a copy of it. "
@@ -132,7 +132,7 @@ class SaheeliTheGiftedTokenEffect extends OneShotEffect {
                 + "Exile those tokens at the beginning of the next end step.";
     }
 
-    public SaheeliTheGiftedTokenEffect(final SaheeliTheGiftedTokenEffect effect) {
+    private SaheeliTheGiftedTokenEffect(final SaheeliTheGiftedTokenEffect effect) {
         super(effect);
     }
 

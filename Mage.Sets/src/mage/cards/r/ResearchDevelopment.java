@@ -45,12 +45,12 @@ public final class ResearchDevelopment extends SplitCard {
 
 class ResearchEffect extends OneShotEffect {
 
-    public ResearchEffect() {
+    ResearchEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Choose up to four cards you own from outside the game and shuffle them into your library";
+        this.staticText = "Shuffle up to four cards you own from outside the game into your library";
     }
 
-    public ResearchEffect(final ResearchEffect effect) {
+    private ResearchEffect(final ResearchEffect effect) {
         super(effect);
     }
 
@@ -70,8 +70,8 @@ class ResearchEffect extends OneShotEffect {
                     return true;
                 }
                 TargetCard target = new TargetCard(0, 4, Zone.OUTSIDE, new FilterCard("cards you own from outside the game"));
-                target.setNotTarget(true);
-                if (controller.choose(Outcome.Benefit, controller.getSideboard(), target, game)) {
+                target.withNotTarget(true);
+                if (controller.choose(Outcome.Benefit, controller.getSideboard(), target, source, game)) {
                     controller.shuffleCardsToLibrary(new CardsImpl(target.getTargets()), game, source);
                 }
             }
@@ -84,12 +84,12 @@ class ResearchEffect extends OneShotEffect {
 
 class DevelopmentEffect extends OneShotEffect {
 
-    public DevelopmentEffect() {
+    DevelopmentEffect() {
         super(Outcome.Benefit);
         staticText = "Create a 3/1 red Elemental creature token unless any opponent has you draw a card. Repeat this process two more times.";
     }
 
-    DevelopmentEffect(final DevelopmentEffect effect) {
+    private DevelopmentEffect(final DevelopmentEffect effect) {
         super(effect);
     }
 

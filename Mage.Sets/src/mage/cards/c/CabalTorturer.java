@@ -33,13 +33,13 @@ public final class CabalTorturer extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {B}, {tap}: Target creature gets -1/-1 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(-1, -1, Duration.EndOfTurn), new ManaCostsImpl("{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(-1, -1, Duration.EndOfTurn), new ManaCostsImpl<>("{B}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
         // Threshold - {3}{B}{B}, {tap}: Target creature gets -2/-2 until end of turn. Activate this ability only if seven or more cards are in your graveyard.
         ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(-2, -2, Duration.EndOfTurn),
-            new ManaCostsImpl("{3}{B}{B}"), new CardsInControllerGraveyardCondition(7));
+            new ManaCostsImpl<>("{3}{B}{B}"), new CardsInControllerGraveyardCondition(7));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         ability.setAbilityWord(AbilityWord.THRESHOLD);

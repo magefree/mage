@@ -55,19 +55,19 @@ public final class Outbreak extends CardImpl {
 
 class OutbreakEffect extends OneShotEffect {
 
-    public OutbreakEffect() {
+    OutbreakEffect() {
         super(Outcome.UnboostCreature);
         staticText = "Choose a creature type. All creatures of that type get -1/-1 until end of turn";
     }
 
-    public OutbreakEffect(final OutbreakEffect effect) {
+    private OutbreakEffect(final OutbreakEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        Choice typeChoice = new ChoiceCreatureType(game.getObject(source.getSourceId()));
+        Choice typeChoice = new ChoiceCreatureType(game.getObject(source));
         if (player != null && player.choose(outcome, typeChoice, game)) {
             game.informPlayers(player.getLogName() + " has chosen " + typeChoice.getChoice());
             FilterCreaturePermanent filter = new FilterCreaturePermanent("All creatures of the chosen type");

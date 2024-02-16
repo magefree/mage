@@ -39,7 +39,7 @@ public final class UlashtTheHateSeed extends CardImpl {
 
     public UlashtTheHateSeed(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HELLION);
         this.subtype.add(SubType.HYDRA);
 
@@ -54,10 +54,9 @@ public final class UlashtTheHateSeed extends CardImpl {
         ability.addCost(new RemoveCountersSourceCost(CounterType.P1P1.createInstance()));
         ability.addTarget(new TargetCreaturePermanent());
         // or create a 1/1 green Saproling creature token.
-        Mode mode = new Mode();
         Effect effect = new CreateTokenEffect(new SaprolingToken());
         effect.setText("Create a 1/1 green Saproling creature token.");
-        mode.addEffect(effect);
+        Mode mode = new Mode(effect);
         ability.addMode(mode);
         this.addAbility(ability);
     }
@@ -89,7 +88,7 @@ class UlashtTheHateSeedEffect extends OneShotEffect {
         staticText = "{this} enters the battlefield with a +1/+1 counter on it for each other red creature you control and a +1/+1 counter on it for each other green creature you control.";
     }
 
-    UlashtTheHateSeedEffect(final UlashtTheHateSeedEffect effect) {
+    private UlashtTheHateSeedEffect(final UlashtTheHateSeedEffect effect) {
         super(effect);
     }
 
@@ -98,8 +97,8 @@ class UlashtTheHateSeedEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanentEntering(source.getSourceId());
         if (permanent != null && player != null) {
-            int amount = game.getBattlefield().count(filterRed, source.getSourceId(), source.getControllerId(), game);
-            amount += game.getBattlefield().count(filterGreen, source.getSourceId(), source.getControllerId(), game);
+            int amount = game.getBattlefield().count(filterRed, source.getControllerId(), source, game);
+            amount += game.getBattlefield().count(filterGreen, source.getControllerId(), source, game);
             if (amount > 0) {
                 permanent.addCounters(CounterType.P1P1.createInstance(amount), source.getControllerId(), source, game);
             }

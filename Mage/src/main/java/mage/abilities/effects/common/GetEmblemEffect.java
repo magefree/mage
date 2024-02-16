@@ -1,7 +1,6 @@
 
 package mage.abilities.effects.common;
 
-import java.util.List;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -9,8 +8,9 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.command.Emblem;
 
+import java.util.List;
+
 /**
- *
  * @author nantuko
  */
 public class GetEmblemEffect extends OneShotEffect {
@@ -23,7 +23,7 @@ public class GetEmblemEffect extends OneShotEffect {
         this.staticText = getText();
     }
 
-    public GetEmblemEffect(final GetEmblemEffect effect) {
+    protected GetEmblemEffect(final GetEmblemEffect effect) {
         super(effect);
         this.emblem = effect.emblem;
     }
@@ -35,7 +35,7 @@ public class GetEmblemEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (sourceObject == null) {
             return false;
         }
@@ -47,18 +47,12 @@ public class GetEmblemEffect extends OneShotEffect {
         StringBuilder sb = new StringBuilder();
         sb.append("you get an emblem with \"");
         List<String> rules = emblem.getAbilities().getRules(null);
-        if (rules.size() == 1) {
-            for (String s : rules) {
-                sb.append(s);
-            }
-            sb.append('"');
-        } else if (rules.size() == 2) {
-            for (String s : rules) {
-                sb.append(s);
-                sb.append("\" and \"");
-            }
-            sb.append('"');
+        sb.append(rules.get(0));
+        if (rules.size() == 2) {
+            sb.append("\" and \"");
+            sb.append(rules.get(1));
         }
+        sb.append('"');
         return sb.toString();
     }
 }

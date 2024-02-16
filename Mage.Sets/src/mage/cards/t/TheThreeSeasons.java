@@ -98,7 +98,7 @@ class TheThreeSeasonsEffect extends OneShotEffect {
                 continue;
             }
             TargetCard target = new TargetCardInGraveyard(cardCount, StaticFilters.FILTER_CARD);
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             controller.chooseTarget(outcome, player.getGraveyard(), target, source, game);
             playerCardsMap.put(player, new CardsImpl(target.getTargets()));
         }

@@ -49,14 +49,14 @@ class RooftopStormRuleEffect extends ContinuousEffectImpl {
     }
 
     private final AlternativeCostSourceAbility alternativeCastingCostAbility
-            = new AlternativeCostSourceAbility(new ManaCostsImpl("{0}"), SourceIsSpellCondition.instance, null, filter, true);
+            = new AlternativeCostSourceAbility(new ManaCostsImpl<>("{0}"), SourceIsSpellCondition.instance, null, filter, true);
 
     public RooftopStormRuleEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "You may pay {0} rather than pay the mana cost for Zombie creature spells you cast";
     }
 
-    public RooftopStormRuleEffect(final RooftopStormRuleEffect effect) {
+    private RooftopStormRuleEffect(final RooftopStormRuleEffect effect) {
         super(effect);
     }
 

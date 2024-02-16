@@ -35,7 +35,7 @@ public final class GethLordOfTheVault extends CardImpl {
 
     public GethLordOfTheVault(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.ZOMBIE);
 
@@ -46,7 +46,7 @@ public final class GethLordOfTheVault extends CardImpl {
         this.addAbility(IntimidateAbility.getInstance());
         // {X}{B}: Put target artifact or creature card with converted mana cost X from an opponent's graveyard onto the battlefield under your control tapped.
         // Then that player puts the top X cards of their library into their graveyard.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GethLordOfTheVaultEffect(), new ManaCostsImpl("{X}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GethLordOfTheVaultEffect(), new ManaCostsImpl<>("{X}{B}"));
         ability.setTargetAdjuster(XCMCGraveyardAdjuster.instance);
         ability.addTarget(new TargetCardInGraveyard(filter));
         this.addAbility(ability);
@@ -65,12 +65,12 @@ public final class GethLordOfTheVault extends CardImpl {
 
 class GethLordOfTheVaultEffect extends OneShotEffect {
 
-    public GethLordOfTheVaultEffect() {
+    GethLordOfTheVaultEffect() {
         super(Outcome.Benefit);
         staticText = "Put target artifact or creature card with mana value X from an opponent's graveyard onto the battlefield under your control tapped. Then that player mills X cards";
     }
 
-    public GethLordOfTheVaultEffect(final GethLordOfTheVaultEffect effect) {
+    private GethLordOfTheVaultEffect(final GethLordOfTheVaultEffect effect) {
         super(effect);
     }
 

@@ -19,7 +19,7 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public final class DestructiveForce extends CardImpl {
 
-    private static final FilterControlledPermanent filterLand = new FilterControlledLandPermanent();
+    private static final FilterControlledPermanent filterLand = new FilterControlledLandPermanent("lands");
     private static final FilterPermanent filterCreature = new FilterCreaturePermanent();
 
 

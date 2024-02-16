@@ -46,7 +46,7 @@ public final class VizierOfManyFaces extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(effect, true), new EmbalmedThisTurnWatcher());
 
         // Embalm {3}{U}{U}
-        this.addAbility(new EmbalmAbility(new ManaCostsImpl("{3}{U}{U}"), this));
+        this.addAbility(new EmbalmAbility(new ManaCostsImpl<>("{3}{U}{U}"), this));
     }
 
     private VizierOfManyFaces(final VizierOfManyFaces card) {

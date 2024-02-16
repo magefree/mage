@@ -26,7 +26,7 @@ public final class AureliaTheWarleader extends CardImpl {
     public AureliaTheWarleader(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{R}{W}{W}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ANGEL);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);

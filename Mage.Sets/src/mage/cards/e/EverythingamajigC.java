@@ -67,7 +67,7 @@ class ManaScrewAbility extends ActivatedManaAbilityImpl {
         super(Zone.BATTLEFIELD, new ManaScrewEffect(), new GenericManaCost(1));
     }
 
-    public ManaScrewAbility(final ManaScrewAbility ability) {
+    private ManaScrewAbility(final ManaScrewAbility ability) {
         super(ability);
     }
 
@@ -93,12 +93,12 @@ class ManaScrewAbility extends ActivatedManaAbilityImpl {
 
 class ManaScrewEffect extends ManaEffect {
 
-    public ManaScrewEffect() {
+    ManaScrewEffect() {
         super();
         this.staticText = "Flip a coin. If you win the flip, add {C}{C}";
     }
 
-    public ManaScrewEffect(final ManaScrewEffect effect) {
+    private ManaScrewEffect(final ManaScrewEffect effect) {
         super(effect);
     }
 
@@ -126,12 +126,12 @@ class ManaScrewEffect extends ManaEffect {
 
 class ChimericStaffEffect extends ContinuousEffectImpl {
 
-    public ChimericStaffEffect() {
+    ChimericStaffEffect() {
         super(Duration.EndOfTurn, Outcome.BecomeCreature);
         staticText = "{this} becomes an X/X Construct artifact creature until end of turn";
     }
 
-    public ChimericStaffEffect(final ChimericStaffEffect effect) {
+    private ChimericStaffEffect(final ChimericStaffEffect effect) {
         super(effect);
     }
 
@@ -160,8 +160,8 @@ class ChimericStaffEffect extends ContinuousEffectImpl {
             case PTChangingEffects_7:
                 if (sublayer == SubLayer.SetPT_7b) {
                     int xValue = source.getManaCostsToPay().getX();
-                    permanent.getPower().setValue(xValue);
-                    permanent.getToughness().setValue(xValue);
+                    permanent.getPower().setModifiedBaseValue(xValue);
+                    permanent.getToughness().setModifiedBaseValue(xValue);
                 }
         }
         return true;

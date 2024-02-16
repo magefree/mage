@@ -42,12 +42,12 @@ public final class SunkenHope extends CardImpl {
 
 class SunkenHopeReturnToHandEffect extends OneShotEffect {
 
-    public SunkenHopeReturnToHandEffect() {
+    SunkenHopeReturnToHandEffect() {
         super(Outcome.ReturnToHand);
         staticText = "that player returns a creature they control to its owner's hand";
     }
 
-    public SunkenHopeReturnToHandEffect(final SunkenHopeReturnToHandEffect effect) {
+    private SunkenHopeReturnToHandEffect(final SunkenHopeReturnToHandEffect effect) {
         super(effect);
     }
 
@@ -66,9 +66,9 @@ class SunkenHopeReturnToHandEffect extends OneShotEffect {
         }
 
         Target target = new TargetControlledPermanent(1, 1, new FilterControlledCreaturePermanent(), true);
-        if (target.canChoose(source.getSourceId(), player.getId(), game)) {
+        if (target.canChoose(player.getId(), source, game)) {
             while (player.canRespond() && !target.isChosen()
-                    && target.canChoose(source.getSourceId(), player.getId(), game)) {
+                    && target.canChoose(player.getId(), source, game)) {
                 player.chooseTarget(Outcome.ReturnToHand, target, source, game);
             }
 

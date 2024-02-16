@@ -20,7 +20,7 @@ my %keywords;
 sub toCamelCase {
     my $string = $_[0];
     $string =~ s/\b([\w']+)\b/ucfirst($1)/ge;
-    $string =~ s/[-,\s\':]//g;
+    $string =~ s/[-,\s\':.!]//g;
     $string;
 }
 
@@ -79,6 +79,7 @@ $cardTypes{'Land'} = 'CardType.LAND';
 $cardTypes{'Sorcery'} = 'CardType.SORCERY';
 $cardTypes{'Planeswalker'} = 'CardType.PLANESWALKER';
 $cardTypes{'Tribal'} = 'CardType.TRIBAL';
+$cardTypes{'Battle'} = 'CardType.BATTLE';
 
 my %raritiesConversion;
 $raritiesConversion{'C'} = 'COMMON';
@@ -101,7 +102,7 @@ if (!exists $cards{$cardName}) {
     my $possible;
     foreach $possible (sort keys (%cards)) {
         if ($possible =~ m/$cardName/img && $cardName =~ m/..../) {
-            print ("Did you mean $possible ?\n");
+            print ("Did you mean $possible?\n");
         }
     }
     die "Card name doesn't exist: $cardName\n";
@@ -185,6 +186,7 @@ $vars{'toughness'} = $card[7];
 
 my @types;
 $vars{'planeswalker'} = 'false';
+$vars{'battle'} = 'false';
 $vars{'subType'} = '';
 $vars{'hasSubTypes'} = 'false';
 $vars{'hasSuperTypes'} = 'false';
@@ -196,6 +198,9 @@ while ($type =~ m/([a-zA-Z]+)( )*/g) {
         if ($cardTypes{$1} eq $cardTypes{'Planeswalker'}) {
             $vars{'planeswalker'} = 'true';
             $cardAbilities = $card[7];
+        } elsif ($cardTypes{$1} eq $cardTypes{'Battle'}) {
+            $vars{'battle'} = 'true';
+            $cardAbilities = $card[7];
         }
     } else {
         if (@types) {
@@ -204,7 +209,7 @@ while ($type =~ m/([a-zA-Z]+)( )*/g) {
 			$vars{'hasSubTypes'} = 'true';
         } else {
             my $st = uc($1);
-            $vars{'subType'} .= "\n        this.addSuperType(SuperType.$st);";
+            $vars{'subType'} .= "\n        this.supertype.add(SuperType.$st);";
 			$vars{'hasSuperTypes'} = 'true';
         }
     }
@@ -254,22 +259,22 @@ foreach my $ability (@abilities) {
                         $ability =~ m/(\b\d+?\b)/g;
                         $vars{'abilities'} .= "\n        this.addAbility(new " . $kw . 'Ability(this, ' . $1 . '));';
                     } elsif ($keywords{$kw} eq 'cost') {
-                        $ability =~ m/({.*})/g;
+                        $ability =~ m/(\{.*\})/g;
                         $vars{'abilities'} .= "\n        this.addAbility(new " . $kw . 'Ability(new ManaCostsImpl<>("' . fixCost($1) . '")));';
                         $vars{'abilitiesImports'} .= "\nimport mage.abilities.costs.mana.ManaCostsImpl;";
                     } elsif ($keywords{$kw} eq 'card, manaString') {
-                        $ability =~ m/({.*})/g;
+                        $ability =~ m/(\{.*\})/g;
                         $vars{'abilities'} .= "\n        this.addAbility(new " . $kw . 'Ability(this, "' . fixCost($1) . '"));';
                     } elsif ($keywords{$kw} eq 'card, cost') {
-                        $ability =~ m/({.*})/g;
+                        $ability =~ m/(\{.*\})/g;
                         $vars{'abilities'} .= "\n        this.addAbility(new " . $kw . 'Ability(this, new ManaCostsImpl<>("' . fixCost($1) . '")));';
                         $vars{'abilitiesImports'} .= "\nimport mage.abilities.costs.mana.ManaCostsImpl;";
                     } elsif ($keywords{$kw} eq 'number, cost, card') {
-                        $ability =~ m/({.*})/g;
+                        $ability =~ m/(\{.*\})/g;
                         $vars{'abilities'} .= "\n        this.addAbility(new " . $kw . 'Ability(_, new ManaCostsImpl<>("' . fixCost($1) . '"), this));';
                         $vars{'abilitiesImports'} .= "\nimport mage.abilities.costs.mana.ManaCostsImpl;";
                     } elsif ($keywords{$kw} eq 'cost, card') {
-                        $ability =~ m/({.*})/g;
+                        $ability =~ m/(\{.*\})/g;
                         $vars{'abilities'} .= "\n        this.addAbility(new " . $kw . 'Ability(new ManaCostsImpl<>("' . fixCost($1) . '"), this));';
                         $vars{'abilitiesImports'} .= "\nimport mage.abilities.costs.mana.ManaCostsImpl;";
                     } elsif ($keywords{$kw} eq 'type') {
@@ -282,12 +287,12 @@ foreach my $ability (@abilities) {
                         }
                         $vars{'abilities'} .= "\n        this.getSpellAbility().addTarget(auraTarget);";
                         $vars{'abilities'} .= "\n        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));";
-                        $vars{'abilities'} .= "\n        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));";
+                        $vars{'abilities'} .= "\n        this.addAbility(new EnchantAbility(auraTarget));";
                         $vars{'abilitiesImports'} .= "\nimport mage.abilities.effects.common.AttachEffect;";
                         $vars{'abilitiesImports'} .= "\nimport mage.constants.Outcome;";
                         $vars{'abilitiesImports'} .= "\nimport mage.target.TargetPermanent;";
                     } elsif ($keywords{$kw} eq 'manaString') {
-                        $ability =~ m/({.*})/g;
+                        $ability =~ m/(\{.*\})/g;
                         $vars{'abilities'} .= "\n        this.addAbility(new " . $kw . 'Ability("' . fixCost($1) . '"));';
                     }
                     $vars{'abilitiesImports'} .= "\nimport mage.abilities.keyword." . $kw . "Ability;";

@@ -27,7 +27,7 @@ public final class GreaterForgeling extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {1}{R}: Greater Forgeling gets +3/-3 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(3, -3, Duration.EndOfTurn), new ManaCostsImpl("{1}{R}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(3, -3, Duration.EndOfTurn), new ManaCostsImpl<>("{1}{R}")));
     }
 
     private GreaterForgeling(final GreaterForgeling card) {

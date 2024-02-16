@@ -30,7 +30,7 @@ public class CreateTokenCopySourceEffect extends OneShotEffect {
         staticText = "create a " + (tapped ? "tapped " : "") + "token that's a copy of {this}";
     }
 
-    public CreateTokenCopySourceEffect(final CreateTokenCopySourceEffect effect) {
+    protected CreateTokenCopySourceEffect(final CreateTokenCopySourceEffect effect) {
         super(effect);
         this.number = effect.number;
         this.tapped = effect.tapped;

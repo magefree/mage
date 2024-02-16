@@ -2,16 +2,15 @@ package mage.cards.s;
 
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.costs.common.PayLifeCost;
-import mage.abilities.dynamicvalue.AdditiveDynamicValue;
 import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.IntPlusDynamicValue;
 import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.TapSourceUnlessPaysEffect;
 import mage.abilities.effects.common.continuous.MaximumHandSizeControllerEffect;
 import mage.abilities.mana.BlueManaAbility;
 import mage.cards.CardSetInfo;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
@@ -21,9 +20,9 @@ import java.util.UUID;
 /**
  * @author JayDi85
  */
-public final class SeaGateRestoration extends ModalDoubleFacesCard {
+public final class SeaGateRestoration extends ModalDoubleFacedCard {
 
-    private static final DynamicValue xValue = new AdditiveDynamicValue(CardsInControllerHandCount.instance, StaticValue.get(1));
+    private static final DynamicValue xValue = new IntPlusDynamicValue(1, CardsInControllerHandCount.instance);
 
     public SeaGateRestoration(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo,

@@ -31,7 +31,7 @@ public final class ReturnedPhalanx extends CardImpl {
         // Defender
         this.addAbility(DefenderAbility.getInstance());
         // {1}{U}: Returned Phalanx can attack this turn as though it didn't have defender.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CanAttackAsThoughItDidntHaveDefenderSourceEffect(Duration.EndOfTurn), new ManaCostsImpl("{1}{U}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CanAttackAsThoughItDidntHaveDefenderSourceEffect(Duration.EndOfTurn), new ManaCostsImpl<>("{1}{U}")));
     }
 
     private ReturnedPhalanx(final ReturnedPhalanx card) {

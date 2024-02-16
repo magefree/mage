@@ -36,7 +36,7 @@ public final class KithkinShielddare extends CardImpl {
         // {W}, {tap}: Target blocking creature gets +2/+2 until end of turn.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new BoostTargetEffect(2, 2, Duration.EndOfTurn),
-                new ManaCostsImpl("{W}"));
+                new ManaCostsImpl<>("{W}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);

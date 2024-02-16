@@ -43,12 +43,12 @@ public final class WeirdHarvest extends CardImpl {
 
 class WeirdHarvestEffect extends OneShotEffect {
 
-    public WeirdHarvestEffect() {
+    WeirdHarvestEffect() {
         super(Outcome.Detriment);
         this.staticText = "each player may search their library for up to X creature cards, reveal those cards, put them into their hand, then shuffle";
     }
 
-    public WeirdHarvestEffect(final WeirdHarvestEffect effect) {
+    private WeirdHarvestEffect(final WeirdHarvestEffect effect) {
         super(effect);
     }
 
@@ -60,7 +60,7 @@ class WeirdHarvestEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (controller != null && sourceObject != null) {
             int xValue = source.getManaCostsToPay().getX();
             if (xValue > 0) {

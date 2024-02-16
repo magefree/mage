@@ -40,7 +40,7 @@ public final class CruelDeceiver extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new LookLibraryControllerEffect(), new GenericManaCost(1)));
 
         // {2}: Reveal the top card of your library. If it's a land card, Cruel Deceiver gains "Whenever Cruel Deceiver deals damage to a creature, destroy that creature" until end of turn. Activate this ability only once each turn.
-        this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new CruelDeceiverEffect(), new ManaCostsImpl("{2}")));
+        this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new CruelDeceiverEffect(), new ManaCostsImpl<>("{2}")));
     }
 
     private CruelDeceiver(final CruelDeceiver card) {
@@ -55,12 +55,12 @@ public final class CruelDeceiver extends CardImpl {
 
 class CruelDeceiverEffect extends OneShotEffect {
 
-    public CruelDeceiverEffect() {
+    CruelDeceiverEffect() {
         super(Outcome.AddAbility);
         this.staticText = "Reveal the top card of your library. If it's a land card, {this} gains \"Whenever Cruel Deceiver deals damage to a creature, destroy that creature\" until end of turn";
     }
 
-    public CruelDeceiverEffect(final CruelDeceiverEffect effect) {
+    private CruelDeceiverEffect(final CruelDeceiverEffect effect) {
         super(effect);
     }
 

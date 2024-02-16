@@ -7,7 +7,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.combat.CantAttackYouUnlessPayManaAllEffect;
+import mage.abilities.effects.common.combat.CantAttackYouUnlessPayAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -32,7 +32,7 @@ public final class NilsDisciplineEnforcer extends CardImpl {
     public NilsDisciplineEnforcer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.CLERIC);
         this.power = new MageInt(2);
@@ -108,12 +108,12 @@ class NilsDisciplineEnforcerCountersEffect extends OneShotEffect {
     }
 }
 
-class NilsDisciplineEnforcerEffect extends CantAttackYouUnlessPayManaAllEffect {
+class NilsDisciplineEnforcerEffect extends CantAttackYouUnlessPayAllEffect {
 
     NilsDisciplineEnforcerEffect() {
-        super(null, true);
+        super(Duration.WhileOnBattlefield, new ManaCostsImpl<>("{X}"), Scope.YOU_AND_CONTROLLED_PLANESWALKERS);
         staticText = "Each creature with one or more counters on it can't attack you or planeswalkers you control "
-                + "unless its controller pays {X}, where X is the number of counters on that creature.";
+            + "unless its controller pays {X}, where X is the number of counters on that creature.";
     }
 
     private NilsDisciplineEnforcerEffect(NilsDisciplineEnforcerEffect effect) {
@@ -135,7 +135,7 @@ class NilsDisciplineEnforcerEffect extends CantAttackYouUnlessPayManaAllEffect {
         if (count < 1) {
             return null;
         }
-        return new ManaCostsImpl("{" + count + '}');
+        return new ManaCostsImpl<>("{" + count + '}');
     }
 
     @Override

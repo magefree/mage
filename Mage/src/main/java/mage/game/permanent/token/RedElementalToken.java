@@ -3,9 +3,6 @@ package mage.game.permanent.token;
 import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.util.RandomUtil;
-
-import java.util.Arrays;
 
 /**
  * @author spjspj
@@ -13,34 +10,15 @@ import java.util.Arrays;
 public final class RedElementalToken extends TokenImpl {
 
     public RedElementalToken() {
-        super("Elemental", "1/1 red Elemental creature token");
+        super("Elemental Token", "1/1 red Elemental creature token");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
         subtype.add(SubType.ELEMENTAL);
         power = new MageInt(1);
         toughness = new MageInt(1);
-
-        availableImageSetCodes = Arrays.asList("C13", "EMA", "M14", "SHM", "MH1", "M20");
     }
 
-    @Override
-    public void setExpansionSetCodeForImage(String code) {
-        super.setExpansionSetCodeForImage(code);
-
-        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("C13")) {
-            setTokenType(2);
-        }
-
-        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("M14")) {
-            setTokenType(RandomUtil.nextInt(2) + 1);
-        }
-
-        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("SHM")) {
-            setTokenType(2);
-        }
-    }
-
-    public RedElementalToken(final RedElementalToken token) {
+    private RedElementalToken(final RedElementalToken token) {
         super(token);
     }
 

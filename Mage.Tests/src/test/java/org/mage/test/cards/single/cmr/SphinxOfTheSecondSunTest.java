@@ -25,7 +25,6 @@ public class SphinxOfTheSecondSunTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         // 2x upkeep phases (1x normal + 1x from sphinx)
         assertLife(playerA, 20 + 2);
@@ -48,7 +47,6 @@ public class SphinxOfTheSecondSunTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         // 3x upkeep phases (1x normal + 2x from sphinx)
         assertLife(playerA, 20 + 3);

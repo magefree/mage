@@ -9,7 +9,7 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -35,7 +35,7 @@ public final class Malignus extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Malignus's power and toughness are each equal to half the highest life total among your opponents, rounded up.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new HighestLifeTotalAmongOpponentsCount(), Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(new HighestLifeTotalAmongOpponentsCount())));
 
         // Damage that would be dealt by Malignus can't be prevented.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MalignusEffect()));
@@ -90,12 +90,12 @@ class HighestLifeTotalAmongOpponentsCount implements DynamicValue {
 
 class MalignusEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public MalignusEffect() {
+    MalignusEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Damage that would be dealt by {this} can't be prevented";
     }
 
-    public MalignusEffect(final MalignusEffect effect) {
+    private MalignusEffect(final MalignusEffect effect) {
         super(effect);
     }
 

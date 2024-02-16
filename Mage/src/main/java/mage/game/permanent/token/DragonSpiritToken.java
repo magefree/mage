@@ -11,7 +11,7 @@ import mage.constants.SubType;
 public final class DragonSpiritToken extends TokenImpl {
 
     public DragonSpiritToken() {
-        super("Dragon Spirit token", "5/5 red Dragon Spirit creature token with flying");
+        super("Dragon Spirit Token", "5/5 red Dragon Spirit creature token with flying");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
         subtype.add(SubType.DRAGON);
@@ -21,7 +21,7 @@ public final class DragonSpiritToken extends TokenImpl {
         addAbility(FlyingAbility.getInstance());
     }
 
-    public DragonSpiritToken(final DragonSpiritToken token) {
+    private DragonSpiritToken(final DragonSpiritToken token) {
         super(token);
     }
 

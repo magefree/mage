@@ -27,7 +27,7 @@ public final class ReassemblingSkeleton extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {1}{B}: Return Reassembling Skeleton from your graveyard to the battlefield tapped.
-        this.addAbility(new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(true, false), new ManaCostsImpl("{1}{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(true, false), new ManaCostsImpl<>("{1}{B}")));
     }
 
     private ReassemblingSkeleton(final ReassemblingSkeleton card) {

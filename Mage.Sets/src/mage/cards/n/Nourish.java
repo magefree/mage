@@ -20,7 +20,7 @@ public final class Nourish extends CardImpl {
         this.getSpellAbility().addEffect(new GainLifeEffect(6));
     }
 
-    public Nourish (final Nourish card) {
+    private Nourish(final Nourish card) {
         super(card);
     }
 

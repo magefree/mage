@@ -1,4 +1,3 @@
-
 package mage.cards.i;
 
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -26,7 +25,7 @@ public final class InnerCalmOuterStrength extends CardImpl {
 
         // Target creature gets +X/+X until end of turn, where X is the number of cards in your hand.
         DynamicValue xValue= CardsInControllerHandCount.instance;
-        Effect effect = new BoostTargetEffect(xValue, xValue, Duration.EndOfTurn, true);
+        Effect effect = new BoostTargetEffect(xValue, xValue, Duration.EndOfTurn);
         effect.setText("Target creature gets +X/+X until end of turn, where X is the number of cards in your hand");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

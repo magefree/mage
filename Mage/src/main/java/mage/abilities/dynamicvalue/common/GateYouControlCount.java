@@ -22,7 +22,7 @@ public enum GateYouControlCount implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        return game.getBattlefield().count(filter, sourceAbility.getSourceId(), sourceAbility.getControllerId(), game);
+        return game.getBattlefield().count(filter, sourceAbility.getControllerId(), sourceAbility, game);
     }
 
     @Override

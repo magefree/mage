@@ -51,12 +51,12 @@ public final class HeroOfLeinaTower extends CardImpl {
 
 class HeroOfLeinaTowerEffect extends OneShotEffect {
 
-    public HeroOfLeinaTowerEffect() {
+    HeroOfLeinaTowerEffect() {
         super(Outcome.BoostCreature);
         staticText = "you may pay {X}. If you do, put X +1/+1 counters on {this}";
     }
 
-    public HeroOfLeinaTowerEffect(final HeroOfLeinaTowerEffect effect) {
+    private HeroOfLeinaTowerEffect(final HeroOfLeinaTowerEffect effect) {
         super(effect);
     }
 
@@ -68,7 +68,7 @@ class HeroOfLeinaTowerEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player you = game.getPlayer(source.getControllerId());
-        ManaCosts cost = new ManaCostsImpl("{X}");
+        ManaCosts cost = new ManaCostsImpl<>("{X}");
         if (you != null && you.chooseUse(Outcome.BoostCreature, "Do you want to to pay {X}?", source, game)) {
             int costX = you.announceXMana(0, Integer.MAX_VALUE, "Announce the value for {X}", game, source);
             cost.add(new GenericManaCost(costX));

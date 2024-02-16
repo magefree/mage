@@ -81,7 +81,7 @@ public class IncreasingCardsTest extends CardTestPlayerBase {
         assertLife(playerA, 20);
         assertLife(playerB, 20);
         assertGraveyardCount(playerA, 0);
-        assertPermanentCount(playerA, "Human", 15);
+        assertPermanentCount(playerA, "Human Token", 15);
         assertExileCount("Increasing Devotion", 1);
 
     }

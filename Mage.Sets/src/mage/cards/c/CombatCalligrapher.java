@@ -18,6 +18,8 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.InklingToken;
+import mage.players.Player;
+import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
 
@@ -78,10 +80,21 @@ class CombatCalligrapherTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (!game.getOpponents(getControllerId()).contains(event.getTargetId())) {
+        Player attacker = game.getPlayer(event.getPlayerId());
+        Player defender = game.getPlayer(event.getTargetId());
+        if (attacker == null || defender == null) {
             return false;
         }
-        getEffects().setValue("playerToAttack", event.getPlayerId());
+
+        // Do not trigger if opponent is out of range (not visible as opponent to controller, and not the controller)
+        // or if the person being attacked is not an opponent of the controller.
+        if ((!game.getOpponents(getControllerId()).contains(attacker.getId()) && attacker.getId() != getControllerId())
+                || !game.getOpponents(getControllerId()).contains(defender.getId())) {
+            return false;
+        }
+
+        getEffects().setValue("playerToAttack", defender.getId());
+        getEffects().setTargetPointer(new FixedTarget(attacker.getId()));
         return true;
     }
 
@@ -94,12 +107,12 @@ class CombatCalligrapherTriggeredAbility extends TriggeredAbilityImpl {
 
 class CombatCalligrapherEffect extends RestrictionEffect {
 
-    public CombatCalligrapherEffect() {
+    CombatCalligrapherEffect() {
         super(Duration.WhileOnBattlefield);
         this.staticText = "Inklings can't attack you or planeswalkers you control";
     }
 
-    public CombatCalligrapherEffect(final CombatCalligrapherEffect effect) {
+    private CombatCalligrapherEffect(final CombatCalligrapherEffect effect) {
         super(effect);
     }
 

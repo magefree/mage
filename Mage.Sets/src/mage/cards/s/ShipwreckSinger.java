@@ -34,11 +34,11 @@ public final class ShipwreckSinger extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // {1}{U}: Target creature an opponent controls attacks this turn if able.
-        Ability ability = new SimpleActivatedAbility(new AttacksIfAbleTargetEffect(Duration.EndOfTurn), new ManaCostsImpl("{1}{U}"));
+        Ability ability = new SimpleActivatedAbility(new AttacksIfAbleTargetEffect(Duration.EndOfTurn), new ManaCostsImpl<>("{1}{U}"));
         ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
         this.addAbility(ability);
         // {1}{B}, {T}: Attacking creatures get -1/-1 until end of turn.
-        ability = new SimpleActivatedAbility(new BoostAllEffect(-1,-1, Duration.EndOfTurn, StaticFilters.FILTER_ATTACKING_CREATURES, false), new ManaCostsImpl("{1}{B}"));
+        ability = new SimpleActivatedAbility(new BoostAllEffect(-1,-1, Duration.EndOfTurn, StaticFilters.FILTER_ATTACKING_CREATURES, false), new ManaCostsImpl<>("{1}{B}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

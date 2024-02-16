@@ -48,12 +48,12 @@ public final class TormentOfVenom extends CardImpl {
 
 class TormentOfVenomEffect extends OneShotEffect {
 
-    public TormentOfVenomEffect() {
+    TormentOfVenomEffect() {
         super(Outcome.LoseLife);
         this.staticText = "Put three -1/-1 counters on target creature. Its controller loses 3 life unless they sacrifice another nonland permanent or discards a card";
     }
 
-    public TormentOfVenomEffect(final TormentOfVenomEffect effect) {
+    private TormentOfVenomEffect(final TormentOfVenomEffect effect) {
         super(effect);
     }
 
@@ -76,7 +76,7 @@ class TormentOfVenomEffect extends OneShotEffect {
                     filter.add(Predicates.not(CardType.LAND.getPredicate()));
                     filter.add(Predicates.not(new PermanentIdPredicate(targetCreature.getId())));
                     Target target = new TargetPermanent(filter);
-                    if (controllingPlayer.choose(outcome, target, source.getSourceId(), game)) {
+                    if (controllingPlayer.choose(outcome, target, source, game)) {
                         Permanent permanent = game.getPermanent(target.getFirstTarget());
                         if (permanent != null) {
                             permanent.sacrifice(source, game);

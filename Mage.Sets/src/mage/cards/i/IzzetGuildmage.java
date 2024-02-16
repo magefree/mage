@@ -46,12 +46,12 @@ public final class IzzetGuildmage extends CardImpl {
 
         // <i>({UR} can be paid with either {U} or {R}.)</i>
         // {2}{U}: Copy target instant spell you control with converted mana cost 2 or less. You may choose new targets for the copy.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CopyTargetSpellEffect(), new ManaCostsImpl("{2}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CopyTargetSpellEffect(), new ManaCostsImpl<>("{2}{U}"));
         ability.addTarget(new TargetSpell(filterInstant));
         this.addAbility(ability);
 
         // {2}{R}: Copy target sorcery spell you control with converted mana cost 2 or less. You may choose new targets for the copy.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CopyTargetSpellEffect(), new ManaCostsImpl("{2}{R}"));
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CopyTargetSpellEffect(), new ManaCostsImpl<>("{2}{R}"));
         ability.addTarget(new TargetSpell(filterSorcery));
         this.addAbility(ability);
 

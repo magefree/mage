@@ -46,7 +46,7 @@ public final class GraftedGrowth extends CardImpl {
         TargetPermanent auraTarget = new TargetLandPermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // When Grafted Growth enters the battlefield, put a +1/+1 counter on target creature or Vehicle you control.
         Ability ability = new EntersBattlefieldTriggeredAbility(

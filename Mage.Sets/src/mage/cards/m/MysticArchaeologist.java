@@ -29,7 +29,7 @@ public final class MysticArchaeologist extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
                 new DrawCardSourceControllerEffect(2),
-                new ManaCostsImpl("{3}{U}{U}")
+                new ManaCostsImpl<>("{3}{U}{U}")
         ));
     }
 

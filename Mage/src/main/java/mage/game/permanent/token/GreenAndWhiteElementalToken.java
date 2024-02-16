@@ -5,15 +5,13 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author JayDi85
  */
 public final class GreenAndWhiteElementalToken extends TokenImpl {
 
     public GreenAndWhiteElementalToken() {
-        super("Elemental", "8/8 green and white Elemental creature token with vigilance");
+        super("Elemental Token", "8/8 green and white Elemental creature token with vigilance");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         color.setWhite(true);
@@ -21,11 +19,9 @@ public final class GreenAndWhiteElementalToken extends TokenImpl {
         power = new MageInt(8);
         toughness = new MageInt(8);
         this.addAbility(VigilanceAbility.getInstance());
-
-        availableImageSetCodes = Arrays.asList("GK1", "PTC", "RTR");
     }
 
-    public GreenAndWhiteElementalToken(final GreenAndWhiteElementalToken token) {
+    private GreenAndWhiteElementalToken(final GreenAndWhiteElementalToken token) {
         super(token);
     }
 

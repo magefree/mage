@@ -28,20 +28,20 @@ public final class GolosTirelessPilgrim extends CardImpl {
     public GolosTirelessPilgrim(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SCOUT);
         this.power = new MageInt(3);
         this.toughness = new MageInt(5);
 
         // When Golos, Tireless Pilgrim enters the battlefield, you may search your library for a land card, put that card onto the battlefield tapped, then shuffle your library.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInPlayEffect(
-                new TargetCardInLibrary(StaticFilters.FILTER_CARD_LAND_A), true
+                new TargetCardInLibrary(StaticFilters.FILTER_CARD_LAND_A), true, true
         ), true));
 
         // {2}{W}{U}{B}{R}{G}: Exile the top three cards of your library. You may play them this turn without paying their mana costs.
         this.addAbility(new SimpleActivatedAbility(
                 new GolosTirelessPilgrimEffect(),
-                new ManaCostsImpl("{2}{W}{U}{B}{R}{G}")
+                new ManaCostsImpl<>("{2}{W}{U}{B}{R}{G}")
         ));
     }
 

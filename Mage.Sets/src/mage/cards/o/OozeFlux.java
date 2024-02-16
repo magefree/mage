@@ -29,7 +29,7 @@ public final class OozeFlux extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{G}");
 
         // {1}{G}, Remove one or more +1/+1 counters from among creatures you control: Create an X/X green Ooze creature token, where X is the number of +1/+1 counters removed this way.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new OozeFluxCreateTokenEffect(new OozeToken()),new ManaCostsImpl("{1}{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new OozeFluxCreateTokenEffect(new OozeToken()),new ManaCostsImpl<>("{1}{G}"));
         ability.addCost(new RemoveVariableCountersTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURES, CounterType.P1P1, "one or more", 1));
         this.addAbility(ability);
     }
@@ -54,7 +54,7 @@ class OozeFluxCreateTokenEffect extends OneShotEffect {
         staticText = "Create an X/X green Ooze creature token, where X is the number of +1/+1 counters removed this way";
     }
 
-    public OozeFluxCreateTokenEffect(final OozeFluxCreateTokenEffect effect) {
+    private OozeFluxCreateTokenEffect(final OozeFluxCreateTokenEffect effect) {
         super(effect);
         this.token = effect.token.copy();
     }
@@ -75,8 +75,8 @@ class OozeFluxCreateTokenEffect extends OneShotEffect {
         }
         Token tokenCopy = token.copy();
         tokenCopy.getAbilities().newId();
-        tokenCopy.getPower().modifyBaseValue(xValue);
-        tokenCopy.getToughness().modifyBaseValue(xValue);
+        tokenCopy.getPower().setModifiedBaseValue(xValue);
+        tokenCopy.getToughness().setModifiedBaseValue(xValue);
         tokenCopy.putOntoBattlefield(1, game, source, source.getControllerId());
         return true;
     }

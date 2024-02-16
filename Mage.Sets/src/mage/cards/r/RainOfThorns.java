@@ -26,13 +26,11 @@ public final class RainOfThorns extends CardImpl {
         this.getSpellAbility().getModes().setMaxModes(1);
         this.getSpellAbility().getModes().setMaxModes(3);
 
-        Mode mode1 = new Mode();
-        mode1.addEffect(new DestroyTargetEffect());
+        Mode mode1 = new Mode(new DestroyTargetEffect());
         mode1.addTarget(new TargetEnchantmentPermanent().withChooseHint("destroy"));
         this.getSpellAbility().addMode(mode1);
 
-        Mode mode2 = new Mode();
-        mode2.addEffect(new DestroyTargetEffect());
+        Mode mode2 = new Mode(new DestroyTargetEffect());
         mode2.addTarget(new TargetLandPermanent().withChooseHint("destroy"));
         this.getSpellAbility().addMode(mode2);
     }

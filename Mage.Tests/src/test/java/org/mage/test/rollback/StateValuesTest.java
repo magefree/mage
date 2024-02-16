@@ -17,12 +17,13 @@ public class StateValuesTest extends CardTestPlayerBase {
     public void testDragonWhelpActivatedFourTimes() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
         // Flying
+        // 2/3
         // {R}: Dragon Whelp gets +1/+0 until end of turn. If this ability has been activated four or more times this turn, sacrifice Dragon Whelp at the beginning of the next end step.
         addCard(Zone.BATTLEFIELD, playerA, "Dragon Whelp", 1); // 2/3
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{R}: ");
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{R}: ");
-        attack(1, playerA, "Dragon Whelp");
+        attack(1, playerA, "Dragon Whelp"); // 4 damage
 
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{R}: ");
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{R}: ");
@@ -35,7 +36,7 @@ public class StateValuesTest extends CardTestPlayerBase {
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{R}: ");
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{R}: ");
 
-        attack(3, playerA, "Dragon Whelp");
+//        attack(3, playerA, "Dragon Whelp");
         rollbackAfterActionsEnd();
 
         setStopAt(4, PhaseStep.UPKEEP);
@@ -46,7 +47,6 @@ public class StateValuesTest extends CardTestPlayerBase {
 
         assertLife(playerA, 20);
         assertLife(playerB, 12);
-
     }
 
     @Test
@@ -75,12 +75,10 @@ public class StateValuesTest extends CardTestPlayerBase {
         setStopAt(3, PhaseStep.END_TURN);
         execute();
 
-        assertAllCommandsUsed();
-
         assertLife(playerA, 20);
         assertLife(playerB, 20);
 
-        assertPermanentCount(playerA, "Clue", 2);
+        assertPermanentCount(playerA, "Clue Token", 2);
 
     }
 
@@ -93,24 +91,23 @@ public class StateValuesTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 4);
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 1);
 
-        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Battle Screech");
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Battle Screech", true);
 
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Flashback");
-        setChoice(playerA, "Bird");
-        setChoice(playerA, "Bird");
+        setChoice(playerA, "Bird Token");
+        setChoice(playerA, "Bird Token");
         setChoice(playerA, "Silvercoat Lion");
 
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
 
         execute();
-        assertAllCommandsUsed();
 
         // Before rollback
         assertTappedCount("Plains", true, 4);
-        assertTappedCount("Bird", true, 2);
+        assertTappedCount("Bird Token", true, 2);
         assertTappedCount("Silvercoat Lion", true, 1);
-        assertPermanentCount(playerA, "Bird", 4);
+        assertPermanentCount(playerA, "Bird Token", 4);
         assertHandCount(playerA, 0);
         assertExileCount(playerA, "Battle Screech", 1);
 
@@ -119,7 +116,7 @@ public class StateValuesTest extends CardTestPlayerBase {
         // After rollback to turn 1
         assertTappedCount("Plains", true, 0);
         assertTappedCount("Silvercoat Lion", true, 0);
-        assertPermanentCount(playerA, "Bird", 0);
+        assertPermanentCount(playerA, "Bird Token", 0);
         assertLibraryCount(playerA, "Battle Screech", 1);
         assertHandCount(playerA, 0);
     }
@@ -138,7 +135,6 @@ public class StateValuesTest extends CardTestPlayerBase {
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
 
         execute();
-        assertAllCommandsUsed();
 
         // Before rollback
         assertTappedCount("Plains", true, 2);

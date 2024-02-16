@@ -27,7 +27,7 @@ public final class DreamFracture extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell());
 
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
 
     }
 
@@ -43,12 +43,12 @@ public final class DreamFracture extends CardImpl {
 
 class DreamFractureEffect extends OneShotEffect {
 
-    public DreamFractureEffect() {
+    DreamFractureEffect() {
         super(Outcome.Neutral);
         this.staticText = "Counter target spell. Its controller draws a card";
     }
 
-    public DreamFractureEffect(final DreamFractureEffect effect) {
+    private DreamFractureEffect(final DreamFractureEffect effect) {
         super(effect);
     }
 

@@ -30,7 +30,7 @@ public final class Lifeforce extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G}{G}");
 
         // {G}{G}: Counter target black spell.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new ManaCostsImpl("{G}{G}"));
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new ManaCostsImpl<>("{G}{G}"));
         ability.addTarget(new TargetSpell(filter));
         this.addAbility(ability);
     }

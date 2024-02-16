@@ -1,6 +1,5 @@
 package org.mage.test.multiplayer;
 
-import java.io.FileNotFoundException;
 import mage.constants.MultiplayerAttackOption;
 import mage.constants.PhaseStep;
 import mage.constants.RangeOfInfluence;
@@ -14,6 +13,8 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestMultiPlayerBase;
 
+import java.io.FileNotFoundException;
+
 /**
  * @author LevelX2
  */
@@ -22,12 +23,12 @@ public class PlayerLeftGameRangeAllTest extends CardTestMultiPlayerBase {
     @Override
     protected Game createNewGameAndPlayers() throws GameException, FileNotFoundException {
         // Start Life = 2
-        Game game = new FreeForAll(MultiplayerAttackOption.MULTIPLE, RangeOfInfluence.ALL, MulliganType.GAME_DEFAULT.getMulligan(0), 2);
+        Game game = new FreeForAll(MultiplayerAttackOption.MULTIPLE, RangeOfInfluence.ALL, MulliganType.GAME_DEFAULT.getMulligan(0), 2, 7);
         // Player order: A -> D -> C -> B
-        playerA = createPlayer(game, playerA, "PlayerA");
-        playerB = createPlayer(game, playerB, "PlayerB");
-        playerC = createPlayer(game, playerC, "PlayerC");
-        playerD = createPlayer(game, playerD, "PlayerD");
+        playerA = createPlayer(game, "PlayerA");
+        playerB = createPlayer(game, "PlayerB");
+        playerC = createPlayer(game, "PlayerC");
+        playerD = createPlayer(game, "PlayerD");
         return game;
     }
 
@@ -156,7 +157,6 @@ public class PlayerLeftGameRangeAllTest extends CardTestMultiPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Confiscate", "Jace, Unraveler of Secrets");
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "-8: You get an emblem with");
 
-        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerA, "Blind with Anger", "Rootwater Commando");
         attack(2, playerD, "Silvercoat Lion", playerC);
 
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerB, "Silvercoat Lion");
@@ -261,8 +261,9 @@ public class PlayerLeftGameRangeAllTest extends CardTestMultiPlayerBase {
         addCard(Zone.BATTLEFIELD, playerD, "Plains", 4);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Curse of Vengeance", playerD);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
-        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerD, "Silvercoat Lion");
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerD, "Silvercoat Lion", true);
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerD, "Silvercoat Lion");
 
         castSpell(2, PhaseStep.BEGIN_COMBAT, playerC, "Lightning Bolt", playerD);
@@ -419,14 +420,14 @@ public class PlayerLeftGameRangeAllTest extends CardTestMultiPlayerBase {
 
     /**
      * https://github.com/magefree/mage/issues/6997
-       Some continuous effects should stay in play even after the player that set them leaves the game. 
-       Example: 
-       * Player A: Casts Vorinclex, Voice of Hunger 
-       * Player D: Taps all lands and do stuff (lands shouldn't untap during his next untap step)     
-       * Player C: Kills Player A Player D: Lands untapped normally, though they shouldn't
-       * 
-       * This happened playing commander against 3 AIs. One of the AIs played Vorinclex, I tapped all my lands during my turn to do stuff. 
-       * Next AI killed the one that had Vorinclex. When the game got to my turn, my lands untapped normally.
+     * Some continuous effects should stay in play even after the player that set them leaves the game.
+     * Example:
+     * Player A: Casts Vorinclex, Voice of Hunger
+     * Player D: Taps all lands and do stuff (lands shouldn't untap during his next untap step)
+     * Player C: Kills Player A Player D: Lands untapped normally, though they shouldn't
+     * <p>
+     * This happened playing commander against 3 AIs. One of the AIs played Vorinclex, I tapped all my lands during my turn to do stuff.
+     * Next AI killed the one that had Vorinclex. When the game got to my turn, my lands untapped normally.
      */
     @Test
     public void TestContinuousEffectStaysAfterCreatingPlayerLeft() {
@@ -456,22 +457,20 @@ public class PlayerLeftGameRangeAllTest extends CardTestMultiPlayerBase {
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerC, "Lightning Bolt", playerA);
 
         setStopAt(5, PhaseStep.BEGIN_COMBAT);
-        
+
         execute();
 
-        assertAllCommandsUsed();
-        
         assertPermanentCount(playerD, "Silvercoat Lion", 1);
-        
+
         assertGraveyardCount(playerC, "Lightning Bolt", 1);
-        
+
         Assert.assertFalse("Player A is no longer in the game", playerA.isInGame());
 
-        Assert.assertTrue("Player D is the active player",currentGame.getActivePlayerId().equals(playerD.getId()));
-        
+        Assert.assertTrue("Player D is the active player", currentGame.getActivePlayerId().equals(playerD.getId()));
+
         assertTappedCount("Plains", true, 2); // Do not untap because of Vorinclex do not untap effect
 
     }
 
-    
+
 }

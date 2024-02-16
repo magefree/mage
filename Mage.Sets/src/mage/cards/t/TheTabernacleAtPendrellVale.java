@@ -24,7 +24,7 @@ public final class TheTabernacleAtPendrellVale extends CardImpl {
 
     public TheTabernacleAtPendrellVale(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // All creatures have "At the beginning of your upkeep, destroy this creature unless you pay {1}."
         this.addAbility(new SimpleStaticAbility(
@@ -33,7 +33,7 @@ public final class TheTabernacleAtPendrellVale extends CardImpl {
                                 new InfoEffect(""), new DestroySourceEffect(), new GenericManaCost(1)
                         ).setText("destroy this creature unless you pay {1}"),
                         TargetController.YOU, false
-                ), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURES)
+                ), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_ALL_CREATURES)
         ));
     }
 

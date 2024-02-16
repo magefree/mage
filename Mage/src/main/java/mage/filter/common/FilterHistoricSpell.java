@@ -1,25 +1,19 @@
-
 package mage.filter.common;
 
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.HistoricPredicate;
 
 /**
- *
  * @author igoudt
  */
 public class FilterHistoricSpell extends FilterSpell {
 
     public FilterHistoricSpell() {
-        this("historic spell");
-    }
-
-    public FilterHistoricSpell(String name) {
-        super(name);
+        super("a historic spell");
         this.add(HistoricPredicate.instance);
     }
 
-    public FilterHistoricSpell(final FilterHistoricSpell filter) {
+    protected FilterHistoricSpell(final FilterHistoricSpell filter) {
         super(filter);
     }
 

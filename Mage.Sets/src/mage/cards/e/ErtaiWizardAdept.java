@@ -24,7 +24,7 @@ public final class ErtaiWizardAdept extends CardImpl {
 
     public ErtaiWizardAdept(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
 
@@ -32,7 +32,7 @@ public final class ErtaiWizardAdept extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {2}{U}{U}, {tap}: Counter target spell.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new ManaCostsImpl("{2}{U}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new ManaCostsImpl<>("{2}{U}{U}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetSpell());
         this.addAbility(ability);

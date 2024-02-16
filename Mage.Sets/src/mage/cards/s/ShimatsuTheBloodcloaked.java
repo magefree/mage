@@ -27,7 +27,7 @@ public final class ShimatsuTheBloodcloaked extends CardImpl {
 
     public ShimatsuTheBloodcloaked(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DEMON);
         this.subtype.add(SubType.SPIRIT);
 
@@ -50,12 +50,12 @@ public final class ShimatsuTheBloodcloaked extends CardImpl {
 
 class ShimatsuTheBloodcloakedEffect extends ReplacementEffectImpl {
 
-    public ShimatsuTheBloodcloakedEffect() {
+    ShimatsuTheBloodcloakedEffect() {
         super(Duration.EndOfGame, Outcome.BoostCreature);
         this.staticText = "As {this} enters the battlefield, sacrifice any number of permanents. {this} enters the battlefield with that many +1/+1 counters on it";
     }
 
-    public ShimatsuTheBloodcloakedEffect(final ShimatsuTheBloodcloakedEffect effect) {
+    private ShimatsuTheBloodcloakedEffect(final ShimatsuTheBloodcloakedEffect effect) {
         super(effect);
     }
 
@@ -80,7 +80,7 @@ class ShimatsuTheBloodcloakedEffect extends ReplacementEffectImpl {
         Player controller = game.getPlayer(source.getControllerId());
         if (creature != null && controller != null) {
             Target target = new TargetControlledPermanent(0, Integer.MAX_VALUE, new FilterControlledPermanent(), true);
-            if (!target.canChoose(source.getSourceId(), source.getControllerId(), game)) {
+            if (!target.canChoose(source.getControllerId(), source, game)) {
                 return false;
             }
             controller.chooseTarget(Outcome.Detriment, target, source, game);

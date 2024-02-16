@@ -48,12 +48,12 @@ public final class InciteHysteria extends CardImpl {
 
 class InciteHysteriaEffect extends OneShotEffect {
 
-    public InciteHysteriaEffect() {
+    InciteHysteriaEffect() {
         super(Outcome.AddAbility);
         this.staticText = "Until end of turn, target creature and each other creature that shares a color with it gain \"This creature can't block.\"";
     }
 
-    public InciteHysteriaEffect(final InciteHysteriaEffect effect) {
+    private InciteHysteriaEffect(final InciteHysteriaEffect effect) {
         super(effect);
     }
 
@@ -69,7 +69,7 @@ class InciteHysteriaEffect extends OneShotEffect {
             Permanent target = game.getPermanent(getTargetPointer().getFirst(game, source));
             if (target != null) {
                 ObjectColor color = target.getColor(game);
-                for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source.getSourceId(), game)) {
+                for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source, game)) {
                     if (permanent.getColor(game).shares(color)) {
                         ContinuousEffect effect = new GainAbilityTargetEffect(new CantBlockAbility(), Duration.EndOfTurn);
                         effect.setTargetPointer(new FixedTarget(permanent, game));

@@ -39,8 +39,7 @@ public final class PromiseOfPower extends CardImpl {
         this.getSpellAbility().addEffect(effect);
 
         // - Create an X/X black Demon creature token with flying, where X is the number of cards in your hand.
-        Mode mode = new Mode();
-        mode.addEffect(new PromiseOfPowerEffect());
+        Mode mode = new Mode(new PromiseOfPowerEffect());
         this.getSpellAbility().getModes().addMode(mode);
 
         // Entwine {4}
@@ -59,12 +58,12 @@ public final class PromiseOfPower extends CardImpl {
 
 class PromiseOfPowerEffect extends OneShotEffect {
 
-    public PromiseOfPowerEffect() {
+    PromiseOfPowerEffect() {
         super(Outcome.DestroyPermanent);
         staticText = "Create an X/X black Demon creature token with flying, where X is the number of cards in your hand";
     }
 
-    public PromiseOfPowerEffect(PromiseOfPowerEffect ability) {
+    private PromiseOfPowerEffect(final PromiseOfPowerEffect ability) {
         super(ability);
     }
 

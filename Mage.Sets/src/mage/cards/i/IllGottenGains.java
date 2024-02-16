@@ -54,7 +54,7 @@ class IllGottenGainsEffect extends OneShotEffect {
         this.staticText = ", then returns up to three cards from their graveyard to their hand.";
     }
 
-    IllGottenGainsEffect(final IllGottenGainsEffect effect) {
+    private IllGottenGainsEffect(final IllGottenGainsEffect effect) {
         super(effect);
     }
 
@@ -71,7 +71,7 @@ class IllGottenGainsEffect extends OneShotEffect {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     Target target = new TargetCardInYourGraveyard(0, 3, new FilterCard());
-                    if (target.choose(Outcome.ReturnToHand, player.getId(), source.getSourceId(), game)) {
+                    if (target.choose(Outcome.ReturnToHand, player.getId(), source.getSourceId(), source, game)) {
                         player.moveCards(new CardsImpl(target.getTargets()), Zone.HAND, source, game);
                     }
                 }

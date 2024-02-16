@@ -1,4 +1,3 @@
-
 package mage.cards.e;
 
 import java.util.UUID;
@@ -36,7 +35,8 @@ public final class Enervate extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
         
         // Draw a card at the beginning of the next turn's upkeep.
-        this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1)), false));
+        this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(
+                new DrawCardSourceControllerEffect(1)), false).concatBy("<br>"));
     }
 
     private Enervate(final Enervate card) {

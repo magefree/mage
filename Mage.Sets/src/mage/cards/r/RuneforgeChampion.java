@@ -66,7 +66,7 @@ class RuneforgeChampionEffect extends ContinuousEffectImpl {
     }
 
     private final AlternativeCostSourceAbility alternativeCastingCostAbility = new AlternativeCostSourceAbility(
-            new ManaCostsImpl("{1}"), SourceIsSpellCondition.instance, null, filter, true
+            new ManaCostsImpl<>("{1}"), SourceIsSpellCondition.instance, null, filter, true
     );
 
     RuneforgeChampionEffect() {

@@ -31,7 +31,7 @@ public final class BeastWalkers extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {G}: Beast Walkers gains banding until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(BandingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{G}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(BandingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{G}")));
     }
 
     private BeastWalkers(final BeastWalkers card) {

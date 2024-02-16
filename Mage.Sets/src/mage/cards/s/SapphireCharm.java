@@ -35,14 +35,12 @@ public final class SapphireCharm extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
         
         // or target creature gains flying until end of turn;
-        Mode mode = new Mode();
-        mode.addEffect(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn));
+        Mode mode = new Mode(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn));
         mode.addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addMode(mode);
         
         // or target creature an opponent controls phases out.
-        mode = new Mode();
-        mode.addEffect(new PhaseOutTargetEffect());
+        mode = new Mode(new PhaseOutTargetEffect());
         mode.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
         this.getSpellAbility().addMode(mode);
     }

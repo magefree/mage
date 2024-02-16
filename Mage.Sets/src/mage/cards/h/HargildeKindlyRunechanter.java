@@ -27,7 +27,7 @@ public final class HargildeKindlyRunechanter extends CardImpl {
     public HargildeKindlyRunechanter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
@@ -77,7 +77,7 @@ enum HargildeKindlyRunechanterCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        MageObject object = game.getObject(source.getSourceId());
+        MageObject object = game.getObject(source);
         return object != null && object.isArtifact(game);
     }
 }

@@ -14,6 +14,7 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
+import mage.filter.predicate.card.AuraCardCanAttachToPermanentId;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -52,12 +53,13 @@ public final class BoonweaverGiant extends CardImpl {
 
 class BoonweaverGiantEffect extends OneShotEffect {
 
-    public BoonweaverGiantEffect() {
+    BoonweaverGiantEffect() {
         super(Outcome.UnboostCreature);
-        this.staticText = "you may search your graveyard, hand, and/or library for an Aura card and put it onto the battlefield attached to {this}. If you search your library this way, shuffle.";
+        this.staticText = "you may search your graveyard, hand, and/or library for an Aura card and put it onto the battlefield attached to {this}. " +
+                "If you search your library this way, shuffle.";
     }
 
-    public BoonweaverGiantEffect(final BoonweaverGiantEffect effect) {
+    private BoonweaverGiantEffect(final BoonweaverGiantEffect effect) {
         super(effect);
     }
 
@@ -73,49 +75,47 @@ class BoonweaverGiantEffect extends OneShotEffect {
             return false;
         }
 
+        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
+        UUID sourcePermanentId = sourcePermanent == null ? null : sourcePermanent.getId();
         FilterCard filter = new FilterCard("Aura card");
-        filter.add(CardType.ENCHANTMENT.getPredicate());
         filter.add(SubType.AURA.getPredicate());
+        filter.add(new AuraCardCanAttachToPermanentId(sourcePermanentId));
 
         Card card = null;
-        Zone zone = null;
+
+        // Choose card from graveyard
         if (controller.chooseUse(Outcome.Neutral, "Search your graveyard for an Aura card?", source, game)) {
             TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(filter);
-            if (controller.choose(Outcome.PutCardInPlay, controller.getGraveyard(), target, game)) {
+            if (controller.choose(Outcome.PutCardInPlay, controller.getGraveyard(), target, source, game)) {
                 card = game.getCard(target.getFirstTarget());
-                if (card != null) {
-                    zone = Zone.GRAVEYARD;
-                }
             }
         }
+
+        // Choose card from your hand
         if (card == null && controller.chooseUse(Outcome.Neutral, "Search your Hand for an Aura card?", source, game)) {
             TargetCardInHand target = new TargetCardInHand(filter);
-            if (controller.choose(Outcome.PutCardInPlay, controller.getHand(), target, game)) {
+            if (controller.choose(Outcome.PutCardInPlay, controller.getHand(), target, source, game)) {
                 card = game.getCard(target.getFirstTarget());
-                if (card != null) {
-                    zone = Zone.HAND;
-                }
             }
         }
+
+        // Choose a card from your library
         if (card == null) {
             TargetCardInLibrary target = new TargetCardInLibrary(filter);
             if (controller.searchLibrary(target, source, game)) {
                 card = game.getCard(target.getFirstTarget());
-                if (card != null) {
-                    zone = Zone.LIBRARY;
-                }
             }
             controller.shuffleLibrary(source, game);
         }
-        // aura card found - attach it
+
+        // Aura card found - attach it
         if (card != null) {
-            Permanent permanent = game.getPermanent(source.getSourceId());
-            if (permanent != null) {
-                game.getState().setValue("attachTo:" + card.getId(), permanent);
+            if (sourcePermanent != null) {
+                game.getState().setValue("attachTo:" + card.getId(), sourcePermanent);
             }
             controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-            if (permanent != null) {
-                return permanent.addAttachment(card.getId(), source, game);
+            if (sourcePermanent != null) {
+                return sourcePermanent.addAttachment(card.getId(), source, game);
             }
         }
         return true;

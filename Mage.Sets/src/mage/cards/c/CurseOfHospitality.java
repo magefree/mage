@@ -49,7 +49,7 @@ public final class CurseOfHospitality extends CardImpl {
         TargetPlayer auraTarget = new TargetPlayer();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // Creatures attacking enchanted player have trample.
         this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(
@@ -75,7 +75,7 @@ enum CurseOfHospitalityPredicate implements ObjectSourcePlayerPredicate<Permanen
 
     @Override
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
-        Permanent permanent = game.getPermanent(input.getSourceId());
+        Permanent permanent = input.getSource().getSourcePermanentIfItStillExists(game);
         UUID defenderId = game.getCombat().getDefenderId(input.getObject().getId());
         return permanent != null && defenderId != null && defenderId.equals(permanent.getAttachedTo());
     }

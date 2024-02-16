@@ -31,7 +31,7 @@ public final class MaskedBlackguard extends CardImpl {
 
         // {2}{B}: Masked Blackguard gets +1/+1 until end of turn.
         this.addAbility(new SimpleActivatedAbility(
-                new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl("{2}{B}")
+                new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl<>("{2}{B}")
         ));
     }
 

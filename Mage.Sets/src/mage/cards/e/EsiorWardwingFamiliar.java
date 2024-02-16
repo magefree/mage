@@ -28,7 +28,7 @@ public final class EsiorWardwingFamiliar extends CardImpl {
     public EsiorWardwingFamiliar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.BIRD);
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
@@ -98,7 +98,7 @@ class EsiorWardwingFamiliarEffect extends CostModificationEffectImpl {
             if (allTargets.stream()
                     .map(game::getPermanent)
                     .filter(Objects::nonNull)
-                    .anyMatch(permanent -> !filter.match(permanent, source.getSourceId(), source.getControllerId(), game))) {
+                    .anyMatch(permanent -> !filter.match(permanent, source.getControllerId(), source, game))) {
                 return false;
             }
         }
@@ -106,7 +106,7 @@ class EsiorWardwingFamiliarEffect extends CostModificationEffectImpl {
         return allTargets.stream()
                 .map(game::getPermanent)
                 .filter(Objects::nonNull)
-                .anyMatch(permanent -> filter.match(permanent, source.getSourceId(), source.getControllerId(), game));
+                .anyMatch(permanent -> filter.match(permanent, source.getControllerId(), source, game));
     }
 
     @Override

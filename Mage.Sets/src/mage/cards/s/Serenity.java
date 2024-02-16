@@ -9,8 +9,7 @@ import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
+import mage.filter.StaticFilters;
 import mage.game.events.GameEvent.EventType;
 
 /**
@@ -19,18 +18,12 @@ import mage.game.events.GameEvent.EventType;
  */
 public final class Serenity extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("artifacts and enchantments");
-
-    static {
-        filter.add(Predicates.or(CardType.ARTIFACT.getPredicate(), CardType.ENCHANTMENT.getPredicate()));
-    }
-    
     public Serenity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}");
 
 
         // At the beginning of your upkeep, destroy all artifacts and enchantments. They can't be regenerated.
-        Effect effect = new DestroyAllEffect(new FilterPermanent(filter), true);
+        Effect effect = new DestroyAllEffect(StaticFilters.FILTER_PERMANENT_ARTIFACTS_AND_ENCHANTMENTS, true);
         Ability ability = new OnEventTriggeredAbility(EventType.UPKEEP_STEP_PRE, "beginning of your upkeep", effect, false);
         this.addAbility(ability);
     }

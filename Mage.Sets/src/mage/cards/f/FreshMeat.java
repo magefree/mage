@@ -23,7 +23,6 @@ public final class FreshMeat extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{G}");
 
         // Create a 3/3 green Beast creature token for each creature put into your graveyard from the battlefield this turn.
-        this.getSpellAbility().addWatcher(new CreaturesDiedWatcher());
         this.getSpellAbility().addEffect(new CreateTokenEffect(new BeastToken(), new FreshMeatDynamicValue()));
     }
 

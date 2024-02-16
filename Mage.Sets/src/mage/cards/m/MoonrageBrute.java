@@ -30,7 +30,7 @@ public final class MoonrageBrute extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
 
         // Ward—Pay 3 life.
-        this.addAbility(new WardAbility(new PayLifeCost(3)));
+        this.addAbility(new WardAbility(new PayLifeCost(3), false));
 
         // Nightbound
         this.addAbility(new NightboundAbility());

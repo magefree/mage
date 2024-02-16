@@ -32,7 +32,7 @@ public final class TrueheartDuelist extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CanBlockAdditionalCreatureEffect(Duration.WhileOnBattlefield, 1)));
 
         // Embalm {2}{W}
-        this.addAbility(new EmbalmAbility(new ManaCostsImpl("{2}{W}"), this));
+        this.addAbility(new EmbalmAbility(new ManaCostsImpl<>("{2}{W}"), this));
     }
 
     private TrueheartDuelist(final TrueheartDuelist card) {

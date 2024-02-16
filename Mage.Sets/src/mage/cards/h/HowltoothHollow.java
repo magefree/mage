@@ -1,6 +1,7 @@
 package mage.cards.h;
 
 import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.CardsInHandCondition;
@@ -30,7 +31,8 @@ public final class HowltoothHollow extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
         // Hideaway
-        this.addAbility(new HideawayAbility());
+        this.addAbility(new HideawayAbility(4));
+        this.addAbility(new EntersBattlefieldTappedAbility());
 
         // {tap}: Add {B}.
         this.addAbility(new BlackManaAbility());
@@ -39,7 +41,7 @@ public final class HowltoothHollow extends CardImpl {
         Ability ability = new SimpleActivatedAbility(new ConditionalOneShotEffect(
                 new HideawayPlayEffect(), condition, "you may play the exiled card " +
                 "without paying its mana cost if each player has no cards in hand"
-        ), new ManaCostsImpl("{B}"));
+        ), new ManaCostsImpl<>("{B}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

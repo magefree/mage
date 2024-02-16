@@ -1,19 +1,19 @@
 
 
 package mage.game.permanent.token;
+
 import mage.MageInt;
 import mage.abilities.keyword.BandingAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
 /**
- *
  * @author L_J
  */
 public final class ErrandOfDutyKnightToken extends TokenImpl {
 
     public ErrandOfDutyKnightToken() {
-        super("Knight", "1/1 white Knight creature token with banding");
+        super("Knight Token", "1/1 white Knight creature token with banding");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.KNIGHT);
         color.setWhite(true);
@@ -22,7 +22,7 @@ public final class ErrandOfDutyKnightToken extends TokenImpl {
         this.addAbility(BandingAbility.getInstance());
     }
 
-    public ErrandOfDutyKnightToken(final ErrandOfDutyKnightToken token) {
+    private ErrandOfDutyKnightToken(final ErrandOfDutyKnightToken token) {
         super(token);
     }
 

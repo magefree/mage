@@ -36,7 +36,7 @@ public final class CorpseConnoisseur extends CardImpl {
         // When Corpse Connoisseur enters the battlefield, you may search your library for a creature card and put that card into your graveyard. If you do, shuffle your library.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInGraveyard(), true));
         // Unearth {3}{B}
-        this.addAbility(new UnearthAbility(new ManaCostsImpl("{3}{B}")));
+        this.addAbility(new UnearthAbility(new ManaCostsImpl<>("{3}{B}")));
     }
 
     private CorpseConnoisseur(final CorpseConnoisseur card) {
@@ -56,7 +56,7 @@ class SearchLibraryPutInGraveyard extends SearchEffect {
         staticText = "search your library for a creature card, put that card into your graveyard, then shuffle";
     }
 
-    public SearchLibraryPutInGraveyard(final SearchLibraryPutInGraveyard effect) {
+    private SearchLibraryPutInGraveyard(final SearchLibraryPutInGraveyard effect) {
         super(effect);
     }
 

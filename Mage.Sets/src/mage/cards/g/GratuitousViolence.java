@@ -46,7 +46,7 @@ class GratuitousViolenceReplacementEffect extends ReplacementEffectImpl {
         staticText = "If a creature you control would deal damage to a permanent or player, it deals double that damage to that permanent or player instead";
     }
 
-    GratuitousViolenceReplacementEffect(final GratuitousViolenceReplacementEffect effect) {
+    private GratuitousViolenceReplacementEffect(final GratuitousViolenceReplacementEffect effect) {
         super(effect);
     }
 
@@ -72,11 +72,6 @@ class GratuitousViolenceReplacementEffect extends ReplacementEffectImpl {
         return permanent != null
                 && permanent.isCreature(game)
                 && permanent.isControlledBy(source.getControllerId());
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

@@ -10,7 +10,7 @@ import mage.abilities.dynamicvalue.common.CreaturesYouControlCount;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.abilities.hint.common.CreaturesYouControlHint;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.TrampleAbility;
@@ -53,8 +53,8 @@ public final class VeteranWarleader extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Veteran Warleader's power and toughness are each equal to the number of creatures you control.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(
-                CreaturesYouControlCount.instance, Duration.EndOfGame))
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(
+                CreaturesYouControlCount.instance))
                 .addHint(CreaturesYouControlHint.instance));
 
         // Tap another untapped Ally you control: Veteran Warleader gains your choice of first strike, vigilance, or trample until end of turn.
@@ -79,14 +79,14 @@ class VeteranWarleaderEffect extends OneShotEffect {
         staticText = "{this} gains your choice of first strike, vigilance, or trample until end of turn";
     }
 
-    VeteranWarleaderEffect(final VeteranWarleaderEffect effect) {
+    private VeteranWarleaderEffect(final VeteranWarleaderEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (sourceObject != null && controller != null) {
             Choice abilityChoice = new ChoiceImpl();
             abilityChoice.setMessage("Choose an ability to add");

@@ -49,7 +49,7 @@ public final class MoltenTailMasticore extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new GenericManaCost(2)));
     }
 
-    public MoltenTailMasticore (final MoltenTailMasticore card) {
+    private MoltenTailMasticore(final MoltenTailMasticore card) {
         super(card);
     }
 
@@ -65,7 +65,7 @@ class MoltenTailMasticoreAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new SacrificeSourceUnlessPaysEffect(new DiscardTargetCost(new TargetCardInHand())));
     }
 
-    public MoltenTailMasticoreAbility(final MoltenTailMasticoreAbility ability) {
+    private MoltenTailMasticoreAbility(final MoltenTailMasticoreAbility ability) {
         super(ability);
     }
 

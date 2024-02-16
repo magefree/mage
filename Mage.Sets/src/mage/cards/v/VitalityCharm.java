@@ -37,18 +37,16 @@ public final class VitalityCharm extends CardImpl {
         // Choose one - Create a 1/1 green Insect creature token
         this.getSpellAbility().addEffect(new CreateTokenEffect(new InsectToken()));
         // or target creature gets +1/+1 and gains trample until end of turn
-        Mode mode = new Mode();
         Effect effect = new BoostTargetEffect(1, 1, Duration.EndOfTurn);
         effect.setText("target creature gets +1/+1");
-        mode.addEffect(effect);
+        Mode mode = new Mode(effect);
         effect = new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("and gains trample until end of turn");
         mode.addEffect(effect);
         mode.addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addMode(mode);
         // or regenerate target Beast.
-        mode = new Mode();
-        mode.addEffect(new RegenerateTargetEffect());
+        mode = new Mode(new RegenerateTargetEffect());
         mode.addTarget(new TargetPermanent(filter));
         this.getSpellAbility().addMode(mode);
     }

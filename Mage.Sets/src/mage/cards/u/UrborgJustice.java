@@ -24,7 +24,6 @@ public final class UrborgJustice extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{B}{B}");
 
         // Target opponent sacrifices a creature for each creature put into your graveyard from the battlefield this turn.
-        this.getSpellAbility().addWatcher(new CreaturesDiedWatcher());
         SacrificeEffect sacrificeEffect = new SacrificeEffect(StaticFilters.FILTER_PERMANENT_CREATURE, new UrborgJusticeDynamicValue(), "");
         sacrificeEffect.setText("Target opponent sacrifices a creature for each creature put into your graveyard from the battlefield this turn");
 

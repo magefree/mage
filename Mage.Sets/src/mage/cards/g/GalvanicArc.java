@@ -36,7 +36,7 @@ public final class GalvanicArc extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // When Galvanic Arc enters the battlefield, it deals 3 damage to any target.
         Ability triggeredAbility = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(3, "it"));

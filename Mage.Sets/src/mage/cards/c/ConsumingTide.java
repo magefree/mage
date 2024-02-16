@@ -43,7 +43,7 @@ public final class ConsumingTide extends CardImpl {
 
 class ConsumingTideEffect extends OneShotEffect {
 
-    public ConsumingTideEffect() {
+    ConsumingTideEffect() {
         super(Outcome.ReturnToHand);
         staticText = "Each player chooses a nonland permanent they control. Return all nonland permanents not chosen this way to their owners' hands. "
                 + "Then you draw a card for each opponent who has more cards in their hand than you";
@@ -69,8 +69,8 @@ class ConsumingTideEffect extends OneShotEffect {
             Player player = game.getPlayer(playerId);
             if (player != null) {
                 TargetNonlandPermanent target = new TargetNonlandPermanent();
-                target.setNotTarget(true);
-                player.choose(Outcome.Benefit, target, source.getSourceId(), game);
+                target.withNotTarget(true);
+                player.choose(Outcome.Benefit, target, source, game);
                 UUID permId = target.getFirstTarget();
                 if (permId != null) {
                     chosenPermanents.add(permId);
@@ -78,7 +78,7 @@ class ConsumingTideEffect extends OneShotEffect {
             }
         }
         HashSet<Card> permanentsToHand = new HashSet<>();
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_NON_LAND, controller.getId(), source.getSourceId(), game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_NON_LAND, controller.getId(), source, game)) {
             if (!chosenPermanents.contains(permanent.getId())) {
                 permanentsToHand.add(permanent);
             }

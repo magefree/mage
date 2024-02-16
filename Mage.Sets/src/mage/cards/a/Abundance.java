@@ -47,7 +47,7 @@ class AbundanceReplacementEffect extends ReplacementEffectImpl {
         staticText = "If you would draw a card, you may instead choose land or nonland and reveal cards from the top of your library until you reveal a card of the chosen kind. Put that card into your hand and put all other cards revealed this way on the bottom of your library in any order";
     }
 
-    AbundanceReplacementEffect(final AbundanceReplacementEffect effect) {
+    private AbundanceReplacementEffect(final AbundanceReplacementEffect effect) {
         super(effect);
     }
 
@@ -57,14 +57,9 @@ class AbundanceReplacementEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player controller = game.getPlayer(event.getPlayerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (controller != null && sourceObject != null) {
             FilterCard filter = new FilterCard();
             if (controller.chooseUse(Outcome.Detriment, "Choose card type:",
@@ -79,7 +74,7 @@ class AbundanceReplacementEffect extends ReplacementEffectImpl {
             Card selectedCard = null;
             for (Card card : controller.getLibrary().getCards(game)) {
                 toReveal.add(card);
-                if (filter.match(card, source.getSourceId(), source.getControllerId(), game)) {
+                if (filter.match(card, source.getControllerId(), source, game)) {
                     selectedCard = card;
                     break;
                 }

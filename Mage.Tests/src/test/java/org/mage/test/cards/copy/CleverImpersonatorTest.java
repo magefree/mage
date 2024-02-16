@@ -64,7 +64,7 @@ public class CleverImpersonatorTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Balduvian Bears", 1);
         addCard(Zone.HAND, playerB, "Balduvian Bears", 1);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Clever Impersonator");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Clever Impersonator", true);
         setChoice(playerA, true); // make copy
         setChoice(playerA, "Liliana, Defiant Necromancer"); // copy target
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+2: Each player discards a card");
@@ -74,7 +74,6 @@ public class CleverImpersonatorTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerA, "Clever Impersonator", 0);
         assertCounterCount(playerB, "Liliana, Defiant Necromancer", CounterType.LOYALTY, 3);  // 3
@@ -105,7 +104,7 @@ public class CleverImpersonatorTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Liliana, Defiant Necromancer", 1);
 
         attack(1, playerA, "Alesha, Who Smiles at Death");
-        addTarget(playerA, "Clever Impersonator");
+        // addTarget(playerA, "Clever Impersonator"); (Autochosen, only target)
         setChoice(playerA, "Liliana, Defiant Necromancer");
 
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "+2: Each player discards a card");
@@ -145,7 +144,7 @@ public class CleverImpersonatorTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Clever Impersonator");
         setChoice(playerA, "Jace, Vryn's Prodigy");
-        addTarget(playerA, "Jace, Vryn's Prodigy[only copy]"); // keep the copied Jace
+        setChoice(playerA, "Jace, Vryn's Prodigy[only copy]"); // keep the copied Jace
 
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Draw a card");
         setChoice(playerA, "Pillarfield Ox");
@@ -158,8 +157,9 @@ public class CleverImpersonatorTest extends CardTestPlayerBase {
 
     }
 
-    /*
-     * Reported bug: could not use Clever Impersonator to copy Dawn's Reflection
+    /**
+     * Reported bug:
+     *      Could not use Clever Impersonator to copy Dawn's Reflection
      */
     @Test
     public void dawnsReflectionCopiedByImpersonator() {
@@ -182,10 +182,10 @@ public class CleverImpersonatorTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 6);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, dReflection, "Forest"); // enchant a forest
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, impersonator);
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, impersonator);
         setChoice(playerA, dReflection); // have Impersonator enter as copy of Dawn's Reflection
 
-        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, PhaseStep.END_TURN);
         execute();
 
         assertHandCount(playerA, dReflection, 0);
@@ -197,26 +197,32 @@ public class CleverImpersonatorTest extends CardTestPlayerBase {
 
     @Test
     public void testKindredDiscovery() {
-        addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
         addCard(Zone.HAND, playerA, "Kindred Discovery");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
 
-
-        addCard(Zone.BATTLEFIELD, playerB, "Island", 5);
-        // Skip your draw step.
-        addCard(Zone.BATTLEFIELD, playerB, "Dragon Appeasement");
         addCard(Zone.HAND, playerB, "Clever Impersonator");
         addCard(Zone.HAND, playerB, "Ornithopter", 2);
         addCard(Zone.HAND, playerB, "Memnite");
+        // Skip your draw step.
+        addCard(Zone.BATTLEFIELD, playerB, "Dragon Appeasement");
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 5);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Kindred Discovery");
-        setChoice(playerA, "Construct");
+        setStrictChooseMode(true);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Kindred Discovery"); // Construct token auto-chosen
+        setChoice(playerA, "Thopter");
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Clever Impersonator");
+        setChoice(playerB, "Yes");
         setChoice(playerB, "Kindred Discovery");
         setChoice(playerB, "Thopter");
 
+        waitStackResolved(2, PhaseStep.PRECOMBAT_MAIN);
+
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Ornithopter");
+        waitStackResolved(2, PhaseStep.PRECOMBAT_MAIN);
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Ornithopter");
+        waitStackResolved(2, PhaseStep.PRECOMBAT_MAIN);
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Memnite");
 
         setStopAt(2, PhaseStep.END_COMBAT);
@@ -224,5 +230,4 @@ public class CleverImpersonatorTest extends CardTestPlayerBase {
 
         assertHandCount(playerB, 2);
     }
-
 }

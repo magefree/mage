@@ -35,10 +35,12 @@ public final class AzorsGateway extends CardImpl {
     public AzorsGateway(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.secondSideCardClazz = mage.cards.s.SanctumOfTheSun.class;
 
-        // {1}, {T}: Draw a card, then exile a card from your hand. If cards with five or more different converted mana costs are exiled with Azor's Gateway, you gain 5 life, untap Azor's Gateway, and transform it.
+        // {1}, {T}: Draw a card, then exile a card from your hand.
+        //           If cards with five or more different converted mana costs are exiled with Azor's Gateway,
+        //           you gain 5 life, untap Azor's Gateway, and transform it.
         this.addAbility(new TransformAbility());
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AzorsGatewayEffect(), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
@@ -57,12 +59,14 @@ public final class AzorsGateway extends CardImpl {
 
 class AzorsGatewayEffect extends OneShotEffect {
 
-    public AzorsGatewayEffect() {
+    AzorsGatewayEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Draw a card, then exile a card from your hand. If cards with five or more different mana values are exiled with {this}, you gain 5 life, untap Azor's Gateway, and transform it";
+        this.staticText = "Draw a card, then exile a card from your hand. " +
+                "If cards with five or more different mana values are exiled with {this}, " +
+                "you gain 5 life, untap Azor's Gateway, and transform it";
     }
 
-    public AzorsGatewayEffect(final AzorsGatewayEffect effect) {
+    private AzorsGatewayEffect(final AzorsGatewayEffect effect) {
         super(effect);
     }
 
@@ -74,30 +78,36 @@ class AzorsGatewayEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        UUID exileId = CardUtil.getCardExileZoneId(game, source);
-        MageObject sourceObject = source.getSourceObject(game);
-        if (controller != null && exileId != null && sourceObject != null) {
-            controller.drawCards(1, source, game);
-            TargetCardInHand target = new TargetCardInHand();
-            controller.choose(outcome, target, source.getSourceId(), game);
-            Card cardToExile = game.getCard(target.getFirstTarget());
-            if (cardToExile != null) {
-                controller.moveCardsToExile(cardToExile, source, game, true, exileId, sourceObject.getIdName());
-            }
-            Set<Integer> usedCMC = new HashSet<>();
-            ExileZone exileZone = game.getExile().getExileZone(exileId);
-            if (exileZone != null) {
-                for (Card card : exileZone.getCards(game)) {
-                    usedCMC.add(card.getManaValue());
-                }
-                if (usedCMC.size() > 4) {
-                    controller.gainLife(4, game, source);
-                    new UntapSourceEffect().apply(game, source);
-                    new TransformSourceEffect().apply(game, source);
-                }
-            }
-            return true;
+        if (controller == null) {
+            return false;
         }
-        return false;
+
+        MageObject sourceObject = source.getSourceObject(game);
+        if (sourceObject == null) {
+            return false;
+        }
+
+        UUID exileId = CardUtil.getCardExileZoneId(game, source);
+
+        controller.drawCards(1, source, game);
+        TargetCardInHand target = new TargetCardInHand();
+        controller.choose(outcome, target, source, game);
+        Card cardToExile = game.getCard(target.getFirstTarget());
+        if (cardToExile != null) {
+            controller.moveCardsToExile(cardToExile, source, game, true, exileId, sourceObject.getIdName());
+        }
+        Set<Integer> usedCMC = new HashSet<>();
+        ExileZone exileZone = game.getExile().getExileZone(exileId);
+        if (exileZone != null) {
+            for (Card card : exileZone.getCards(game)) {
+                usedCMC.add(card.getManaValue());
+            }
+            if (usedCMC.size() > 4) {
+                controller.gainLife(4, game, source);
+                new UntapSourceEffect().apply(game, source);
+                new TransformSourceEffect().apply(game, source);
+            }
+        }
+        return true;
     }
 }

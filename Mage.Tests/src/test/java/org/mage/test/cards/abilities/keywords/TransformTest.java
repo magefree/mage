@@ -1,5 +1,6 @@
 package org.mage.test.cards.abilities.keywords;
 
+import mage.cards.s.SpringOfEternalPeace;
 import mage.constants.CardType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
@@ -28,10 +29,11 @@ public class TransformTest extends CardTestPlayerBase {
         // {G}{G}, Sacrifice Rootrunner: Put target land on top of its owner's library.
         addCard(Zone.BATTLEFIELD, playerB, "Rootrunner"); // {2}{G}{G}
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Nissa, Vastwood Seer");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Nissa, Vastwood Seer", true);
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Forest");
 
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "{G}{G}", "Swamp");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "+1: Reveal");
 
         setStopAt(1, PhaseStep.END_TURN);
@@ -45,7 +47,6 @@ public class TransformTest extends CardTestPlayerBase {
         assertCounterCount("Nissa, Sage Animist", CounterType.LOYALTY, 4);
         assertPermanentCount(playerA, "Forest", 6);
         assertPermanentCount(playerA, "Swamp", 1);
-
     }
 
     @Test
@@ -73,8 +74,7 @@ public class TransformTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Liliana, Defiant Necromancer", 1);
         assertCounterCount("Liliana, Defiant Necromancer", CounterType.LOYALTY, 3);
 
-        assertPermanentCount(playerA, "Zombie", 1);
-
+        assertPermanentCount(playerA, "Zombie Token", 1);
     }
 
     /**
@@ -102,11 +102,10 @@ public class TransformTest extends CardTestPlayerBase {
 
         assertGraveyardCount(playerB, "Languish", 1);
         assertPermanentCount(playerA, "Liliana, Defiant Necromancer", 0);
-        assertPermanentCount(playerA, "Zombie", 0);
+        assertPermanentCount(playerA, "Zombie Token", 0);
 
         assertGraveyardCount(playerA, "Silvercoat Lion", 1);
         assertGraveyardCount(playerA, "Liliana, Heretical Healer", 1);
-
     }
 
     @Test
@@ -152,7 +151,7 @@ public class TransformTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Cult of the Waxing Moon", 1);
         assertPermanentCount(playerA, "Timber Shredder", 1); // Night-side card of Hinterland Logger, Werewolf (non-human)
-        assertPermanentCount(playerA, "Wolf", 1); // wolf token created
+        assertPermanentCount(playerA, "Wolf Token", 1); // wolf token created
     }
 
     /**
@@ -170,13 +169,13 @@ public class TransformTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 9);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Startled Awake", playerB);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{3}{U}{U}");
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerB, 13);
         assertGraveyardCount(playerA, "Startled Awake", 0);
@@ -193,6 +192,7 @@ public class TransformTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Maskwood Nexus");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Startled Awake", playerB);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{3}{U}{U}");
 
@@ -201,7 +201,6 @@ public class TransformTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerB, 13);
         assertGraveyardCount(playerA, "Startled Awake", 0);
@@ -311,7 +310,6 @@ public class TransformTest extends CardTestPlayerBase {
 
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Lightning Bolt", 1);
         assertGraveyardCount(playerA, "Silvercoat Lion", 1);
@@ -377,7 +375,7 @@ public class TransformTest extends CardTestPlayerBase {
         execute();
 
         assertLife(playerA, 24);
-        assertPermanentCount(playerA, "Wolf", 2);
+        assertPermanentCount(playerA, "Wolf Token", 2);
 
         assertPermanentCount(playerB, "Eldrazi Displacer", 1);
 
@@ -402,15 +400,15 @@ public class TransformTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Huntmaster of the Fells");
-        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Huntmaster of the Fells", true);
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion", true);
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion");
         setStopAt(4, PhaseStep.PRECOMBAT_MAIN);
         execute();
 
         assertLife(playerA, 24);
         assertLife(playerB, 18);
-        assertPermanentCount(playerA, "Wolf", 2);
+        assertPermanentCount(playerA, "Wolf Token", 2);
         assertPermanentCount(playerA, "Silvercoat Lion", 2);
         assertPermanentCount(playerA, "Ravager of the Fells", 0);
         assertPermanentCount(playerA, "Huntmaster of the Fells", 1);
@@ -433,7 +431,8 @@ public class TransformTest extends CardTestPlayerBase {
     public void testCopyTransformedThingInTheIce() {
         // Defender
         // Thing in the Ice enters the battlefield with four ice counters on it.
-        // Whenever you cast an instant or sorcery spell, remove an ice counter from Thing in the Ice. Then if it has no ice counters on it, transform it.
+        // Whenever you cast an instant or sorcery spell, remove an ice counter from Thing in the Ice.
+        // Then if it has no ice counters on it, transform it.
         addCard(Zone.HAND, playerA, "Thing in the Ice"); // Creature {1}{U}
         // Creatures you control get +1/+0 until end of turn.
         addCard(Zone.HAND, playerA, "Banners Raised", 4); // Creature {R}
@@ -453,7 +452,6 @@ public class TransformTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Banners Raised");
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Phantasmal Image");
-        addTarget(playerB, "Awoken Horror");
 
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -492,9 +490,35 @@ public class TransformTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Delver of Secrets", 1);
         assertPermanentCount(playerA, "Insectile Aberration", 0);
+    }
+
+    @Test
+    public void testMoonmistHuntmasterDressdown() {
+        addCard(Zone.BATTLEFIELD, playerA, "Tropical Island", 6);
+        addCard(Zone.BATTLEFIELD, playerA, "Huntmaster of the Fells"); //Has on-transform triggers
+        addCard(Zone.BATTLEFIELD, playerA, "Maskwood Nexus"); //Make back side human
+
+
+        addCard(Zone.HAND, playerA, "Dress Down"); //Creatures lose all abilities
+        addCard(Zone.HAND, playerA, "Moonmist", 2);
+
+        castSpell(1, PhaseStep.UPKEEP, playerA, "Dress Down");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Moonmist");
+        checkPermanentCount("Huntmaster flipped", 1, PhaseStep.BEGIN_COMBAT, playerA, "Ravager of the Fells", 1);
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Moonmist");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+        assertGraveyardCount(playerA, "Dress Down", 1);
+        assertPermanentCount(playerA, "Huntmaster of the Fells", 1);
+        assertPermanentCount(playerA, 6+1+1);
     }
 }

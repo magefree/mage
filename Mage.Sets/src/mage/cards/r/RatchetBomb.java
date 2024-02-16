@@ -36,7 +36,7 @@ public final class RatchetBomb extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RatchetBomb (final RatchetBomb card) {
+    private RatchetBomb(final RatchetBomb card) {
         super(card);
     }
 
@@ -52,7 +52,7 @@ public final class RatchetBomb extends CardImpl {
             staticText = "Destroy each nonland permanent with mana value equal to the number of charge counters on {this}";
         }
 
-        public RatchetBombEffect(final RatchetBombEffect effect) {
+        private RatchetBombEffect(final RatchetBombEffect effect) {
             super(effect);
         }
 

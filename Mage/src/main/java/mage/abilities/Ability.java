@@ -26,6 +26,7 @@ import mage.watchers.Watcher;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -61,7 +62,7 @@ public interface Ability extends Controllable, Serializable {
      * @see Game#addTriggeredAbility(TriggeredAbility, GameEvent)
      * @see mage.game.GameImpl#addDelayedTriggeredAbility(mage.abilities.DelayedTriggeredAbility)
      */
-    void newOriginalId();
+    void newOriginalId(); // TODO: delete newOriginalId???
 
     /**
      * Gets the {@link AbilityType} of this ability.
@@ -101,6 +102,18 @@ public interface Ability extends Controllable, Serializable {
      * @param sourceID {@link java.util.UUID} the source id to set.
      */
     void setSourceId(UUID sourceID);
+
+    default void clearCosts() {
+        getCosts().clear();
+    }
+
+    default void clearManaCosts() {
+        getManaCosts().clear();
+    }
+
+    default void clearManaCostsToPay() {
+        getManaCostsToPay().clear();
+    }
 
     /**
      * Gets all {@link Costs} associated with this ability.
@@ -143,13 +156,24 @@ public interface Ability extends Controllable, Serializable {
      */
     ManaCosts<ManaCost> getManaCostsToPay();
 
+    void addManaCostsToPay(ManaCost manaCost);
+
     /**
-     * Adds a {@link ManaCost} to this ability that must be paid before this
-     * ability is activated.
+     * Gets a map of the cost tags (set while casting/activating) of this ability, can be null if no tags have been set yet.
+     * Does NOT return the source permanent's tags.
+     * You should not be using this function in implementation of cards,
+     * this is a backing data structure used for internal storage.
+     * Use CardUtil {@link mage.util.CardUtil#getSourceCostsTag getSourceCostsTag} or {@link mage.util.CardUtil#checkSourceCostsTagExists checkSourceCostsTagExists} instead
      *
-     * @param cost The {@link ManaCost} to add.
+     * @return The map of tags and corresponding objects
      */
-    void addManaCost(ManaCost cost);
+    Map<String, Object> getCostsTagMap();
+
+    /**
+     * Set tag for this ability to the value, initializes this ability's tags map if needed.
+     * Should only be used from an {@link ActivatedAbility} (including {@link SpellAbility})
+     */
+    void setCostsTag(String tag, Object value);
 
     /**
      * Retrieves the effects that are put into the place by the resolution of
@@ -326,6 +350,8 @@ public interface Ability extends Controllable, Serializable {
 
     /**
      * Gets the list of sub-abilities associated with this ability.
+     * When copying, subabilities are copied separately and thus the list is desynced.
+     * Do not interact with the subabilities list during a game!
      *
      * @return
      */
@@ -340,6 +366,11 @@ public interface Ability extends Controllable, Serializable {
 
     List<Watcher> getWatchers();
 
+    /**
+     * Add watcher blueprint (real watcher will be created on card/ability init)
+     *
+     * @param watcher
+     */
     void addWatcher(Watcher watcher);
 
     /**
@@ -414,6 +445,22 @@ public interface Ability extends Controllable, Serializable {
     void setWorksFaceDown(boolean worksFaceDown);
 
     /**
+     * Returns true if this ability has to work also with phased out object.
+     *
+     * @return
+     */
+    boolean getWorksPhasedOut();
+
+    /**
+     * Sets the value for the worksPhasedOut flag
+     * <p>
+     * true = the ability works also if the object is phased out
+     *
+     * @param worksPhasedOut
+     */
+    void setWorksPhasedOut(boolean worksPhasedOut);
+
+    /**
      * Returns true if this ability's rule is visible on the card tooltip
      *
      * @return
@@ -428,7 +475,7 @@ public interface Ability extends Controllable, Serializable {
      *
      * @param ruleVisible
      */
-    void setRuleVisible(boolean ruleVisible);
+    Ability setRuleVisible(boolean ruleVisible);
 
     /**
      * Returns true if the additional costs of the abilitiy should be visible on
@@ -556,6 +603,11 @@ public interface Ability extends Controllable, Serializable {
     List<Hint> getHints();
 
     Ability addHint(Hint hint);
+
+    /**
+     * Tag the current mode to be retrieved elsewhere thanks to the tag.
+     */
+    void setModeTag(String tag);
 
     /**
      * For abilities with static icons

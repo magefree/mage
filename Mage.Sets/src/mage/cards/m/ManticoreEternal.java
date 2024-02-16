@@ -25,7 +25,7 @@ public final class ManticoreEternal extends CardImpl {
         addAbility(new AttacksEachCombatStaticAbility());
     }
 
-    public ManticoreEternal(final ManticoreEternal manticoreEternal) {
+    private ManticoreEternal(final ManticoreEternal manticoreEternal) {
         super(manticoreEternal);
     }
 

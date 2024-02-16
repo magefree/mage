@@ -20,10 +20,11 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.DamagedEvent;
-import mage.game.events.DamagedPermanentBatchEvent;
+import mage.game.events.DamagedBatchForPermanentsEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetPlayerOrPlaneswalker;
 
 /**
@@ -33,7 +34,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
 public final class Fiendlash extends CardImpl {
 
     public Fiendlash(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[] { CardType.ARTIFACT }, "{1}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}{R}");
 
         this.subtype.add(SubType.EQUIPMENT);
 
@@ -48,7 +49,7 @@ public final class Fiendlash extends CardImpl {
         this.addAbility(new FiendlashTriggeredAbility());
 
         // Equip {2}{R}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new ManaCostsImpl<>("{2}{R}")));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new ManaCostsImpl<>("{2}{R}"), new TargetControlledCreaturePermanent(), false));
     }
 
     private Fiendlash(final Fiendlash card) {
@@ -79,7 +80,7 @@ class FiendlashTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PERMANENT_BATCH;
+        return event.getType() == GameEvent.EventType.DAMAGED_BATCH_FOR_PERMANENTS;
     }
 
     @Override
@@ -91,12 +92,12 @@ class FiendlashTriggeredAbility extends TriggeredAbilityImpl {
 
         UUID attachedCreature = equipment.getAttachedTo();
         if (attachedCreature == null) {
-                return false;
+            return false;
         }
 
         game.getState().setValue("Fiendlash" + equipment.getId(), attachedCreature);
 
-        DamagedPermanentBatchEvent dEvent = (DamagedPermanentBatchEvent) event;
+        DamagedBatchForPermanentsEvent dEvent = (DamagedBatchForPermanentsEvent) event;
         for (DamagedEvent damagedEvent : dEvent.getEvents()) {
             UUID targetID = damagedEvent.getTargetId();
             if (targetID == null) {
@@ -146,11 +147,9 @@ class FiendlashEffect extends OneShotEffect {
         }
 
         Permanent permanent = game.getPermanent(source.getFirstTarget());
-        if (permanent != null) {
-            if (permanent.isPlaneswalker()) {
-                permanent.damage(damage, creature.getId(), source, game);
-                return true;
-            }
+        if (permanent != null && (permanent.isPlaneswalker(game))) {
+            permanent.damage(damage, creature.getId(), source, game);
+            return true;
         }
         Player player = game.getPlayer(source.getFirstTarget());
         if (player != null) {

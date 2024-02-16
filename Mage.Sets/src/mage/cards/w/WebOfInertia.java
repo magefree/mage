@@ -42,19 +42,19 @@ public final class WebOfInertia extends CardImpl {
 
 class WebOfInertiaEffect extends OneShotEffect {
 
-    public WebOfInertiaEffect() {
+    WebOfInertiaEffect() {
         super(Outcome.Detriment);
-        staticText = "that player may exile a card from their graveyard. If the player doesn't, creatures they control can't attack you this turn";
+        this.staticText = "that player may exile a card from their graveyard. If the player doesn't, creatures they control can't attack you this turn";
     }
 
-    public WebOfInertiaEffect(final WebOfInertiaEffect effect) {
+    private WebOfInertiaEffect(final WebOfInertiaEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (player != null && sourceObject != null) {
             Cost cost = new ExileFromGraveCost(new TargetCardInYourGraveyard());
             if (cost.canPay(source, source, player.getId(), game) && player.chooseUse(Outcome.Detriment, "Exile a card from your graveyard?", source, game)) {
@@ -73,15 +73,9 @@ class WebOfInertiaEffect extends OneShotEffect {
     }
 
     @Override
-    public String getText(Mode mode) {
-        return staticText;
-    }
-
-    @Override
     public WebOfInertiaEffect copy() {
         return new WebOfInertiaEffect(this);
     }
-
 }
 
 class WebOfInertiaRestrictionEffect extends RestrictionEffect {
@@ -93,7 +87,7 @@ class WebOfInertiaRestrictionEffect extends RestrictionEffect {
         this.attackerID = attackerID;
     }
 
-    public WebOfInertiaRestrictionEffect(final WebOfInertiaRestrictionEffect effect) {
+    private WebOfInertiaRestrictionEffect(final WebOfInertiaRestrictionEffect effect) {
         super(effect);
         this.attackerID = effect.attackerID;
     }
@@ -109,11 +103,6 @@ class WebOfInertiaRestrictionEffect extends RestrictionEffect {
             return true;
         }
         return !defenderId.equals(source.getControllerId());
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return staticText;
     }
 
     @Override

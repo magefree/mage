@@ -1,4 +1,3 @@
-
 package mage.cards.h;
 
 import java.util.UUID;
@@ -13,7 +12,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.FilterSpell;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -22,11 +21,9 @@ import mage.filter.FilterSpell;
 public final class HeraldOfThePantheon extends CardImpl {
     
     private static final FilterCard filter = new FilterCard("Enchantment spells");
-    private static final FilterSpell filter2 = new FilterSpell("an enchantment spell");
     
     static {
         filter.add(CardType.ENCHANTMENT.getPredicate());
-        filter2.add(CardType.ENCHANTMENT.getPredicate());
     }
 
     public HeraldOfThePantheon(UUID ownerId, CardSetInfo setInfo) {
@@ -40,7 +37,7 @@ public final class HeraldOfThePantheon extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));     
         
         // Whenever you cast an enchantment spell, you gain 1 life.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new GainLifeEffect(1), filter2, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new GainLifeEffect(1), StaticFilters.FILTER_SPELL_AN_ENCHANTMENT, false));
     }
 
     private HeraldOfThePantheon(final HeraldOfThePantheon card) {

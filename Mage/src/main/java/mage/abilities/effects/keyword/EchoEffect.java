@@ -3,7 +3,7 @@ package mage.abilities.effects.keyword;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.costs.Cost;
-import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.AsThoughEffectType;
@@ -32,7 +32,7 @@ public class EchoEffect extends OneShotEffect {
         this.cost = null;
     }
 
-    public EchoEffect(final EchoEffect effect) {
+    protected EchoEffect(final EchoEffect effect) {
         super(effect);
         this.cost = effect.cost == null ? null : effect.cost.copy();
         this.amount = effect.amount;
@@ -41,13 +41,13 @@ public class EchoEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         if (cost == null) {
-            cost = new ManaCostsImpl(Integer.toString(amount.calculate(game, source, this)));
+            cost = new GenericManaCost(amount.calculate(game, source, this));
         }
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null
                 && source.getSourceObjectIfItStillExists(game) != null) {
-            if (game.getContinuousEffects().asThough(source.getSourceId(), AsThoughEffectType.PAY_0_ECHO, source, source.getControllerId(), game) != null) {
-                Cost altCost = new ManaCostsImpl("{0}");
+            if (!game.getContinuousEffects().asThough(source.getSourceId(), AsThoughEffectType.PAY_0_ECHO, source, source.getControllerId(), game).isEmpty()) {
+                Cost altCost = new GenericManaCost(0);
                 if (controller.chooseUse(Outcome.Benefit, "Pay {0} instead of the echo cost?", source, game)) {
                     altCost.clearPaid();
                     if (altCost.pay(source, game, source, source.getControllerId(), false, null)) {
@@ -79,13 +79,14 @@ public class EchoEffect extends OneShotEffect {
 
     @Override
     public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
         StringBuilder sb = new StringBuilder("sacrifice {this} unless you ");
-
         if (cost == null) {
             sb.append("pay this permanent's mana cost");
             return sb.toString();
         }
-
         String costText = cost.getText();
         if (costText.toLowerCase(Locale.ENGLISH).startsWith("discard")) {
             sb.append(costText.substring(0, 1).toLowerCase(Locale.ENGLISH));
@@ -93,8 +94,6 @@ public class EchoEffect extends OneShotEffect {
         } else {
             sb.append("pay ").append(costText);
         }
-
         return sb.toString();
-
     }
 }

@@ -5,12 +5,10 @@ import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.constants.Duration;
-import static mage.constants.Duration.EndOfTurn;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
 /**
- *
  * @author Quercitron
  */
 public class PreventDamageToSourceEffect extends PreventionEffectImpl {
@@ -19,7 +17,7 @@ public class PreventDamageToSourceEffect extends PreventionEffectImpl {
         super(duration, amountToPrevent, false);
     }
 
-    public PreventDamageToSourceEffect(final PreventDamageToSourceEffect effect) {
+    protected PreventDamageToSourceEffect(final PreventDamageToSourceEffect effect) {
         super(effect);
     }
 
@@ -30,7 +28,7 @@ public class PreventDamageToSourceEffect extends PreventionEffectImpl {
 
     @Override
     public void init(Ability source, Game game) {
-        super.init(source, game); //To change body of generated methods, choose Tools | Templates.
+        super.init(source, game);
         if (duration.isOnlyValidIfNoZoneChange()) {
             // If source permanent is no longer onto battlefield discard the effect
             if (source.getSourcePermanentIfItStillExists(game) == null) {
@@ -40,12 +38,10 @@ public class PreventDamageToSourceEffect extends PreventionEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
+        if (source.getSourcePermanentIfItStillExists(game) == null) {
+            return false;
+        }
         return super.applies(event, source, game) && event.getTargetId().equals(source.getSourceId());
     }
 
@@ -61,7 +57,7 @@ public class PreventDamageToSourceEffect extends PreventionEffectImpl {
             sb.append("Prevent the next ").append(amountToPrevent).append(" damage that would be dealt to ");
         }
         sb.append("{this} ");
-        if (duration == EndOfTurn) {
+        if (duration == Duration.EndOfTurn) {
             sb.append("this turn");
         } else {
             sb.append(duration.toString());

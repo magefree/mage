@@ -46,12 +46,12 @@ public final class Worldpurge extends CardImpl {
 
 class WorldpurgeEffect extends OneShotEffect {
 
-    public WorldpurgeEffect() {
+    WorldpurgeEffect() {
         super(Outcome.Discard);
         this.staticText = "Return all permanents to their owners' hands. Each player chooses up to seven cards in their hand, then shuffles the rest into their library. Each player loses all unspent mana";
     }
 
-    public WorldpurgeEffect(final WorldpurgeEffect effect) {
+    private WorldpurgeEffect(final WorldpurgeEffect effect) {
         super(effect);
     }
 
@@ -63,10 +63,10 @@ class WorldpurgeEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (controller != null && sourceObject != null) {
             Set<Card> allPermanents = new HashSet<>();
-            allPermanents.addAll(game.getBattlefield().getActivePermanents(new FilterPermanent(), source.getControllerId(), source.getSourceId(), game));
+            allPermanents.addAll(game.getBattlefield().getActivePermanents(new FilterPermanent(), source.getControllerId(), source, game));
             controller.moveCards(allPermanents, Zone.HAND, source, game, false, false, true, null);
             game.informPlayers(sourceObject.getLogName() + " - All permanents returned to owners' hands");
 
@@ -78,7 +78,7 @@ class WorldpurgeEffect extends OneShotEffect {
                     TargetCardInHand target = new TargetCardInHand(0, numberInHand, new FilterCard("cards to keep in hand"));
                     Cards cardsToLibrary = new CardsImpl();
                     cardsToLibrary.addAll(player.getHand());
-                    if (player.choose(Outcome.Benefit, target, source.getSourceId(), game)) {
+                    if (player.choose(Outcome.Benefit, target, source, game)) {
                         cardsToLibrary.removeAll(target.getTargets());
                     }
                     player.shuffleCardsToLibrary(cardsToLibrary, game, source);

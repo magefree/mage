@@ -27,7 +27,7 @@ public final class ShimmeringBarrier extends CardImpl {
 
         this.addAbility(DefenderAbility.getInstance());
         this.addAbility(FirstStrikeAbility.getInstance());
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
     private ShimmeringBarrier(final ShimmeringBarrier card) {

@@ -14,7 +14,6 @@ import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.NamePredicate;
 
 /**
- *
  * @author TheElk801
  */
 public final class SoundTheCallToken extends TokenImpl {
@@ -26,7 +25,7 @@ public final class SoundTheCallToken extends TokenImpl {
     }
 
     public SoundTheCallToken() {
-        super("Wolf", "1/1 green Wolf creature token. It has \"This creature gets +1/+1 for each card named Sound the Call in each graveyard.\"");
+        super("Wolf Token", "1/1 green Wolf creature token. It has \"This creature gets +1/+1 for each card named Sound the Call in each graveyard.\"");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add(SubType.WOLF);
@@ -41,7 +40,7 @@ public final class SoundTheCallToken extends TokenImpl {
         ));
     }
 
-    public SoundTheCallToken(final SoundTheCallToken token) {
+    private SoundTheCallToken(final SoundTheCallToken token) {
         super(token);
     }
 

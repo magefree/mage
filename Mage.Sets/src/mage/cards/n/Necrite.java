@@ -57,7 +57,7 @@ class NecriteTriggeredAbility extends AttacksAndIsNotBlockedTriggeredAbility{
         super(effect);
     }
 
-    public NecriteTriggeredAbility(final NecriteTriggeredAbility ability) {
+    private NecriteTriggeredAbility(final NecriteTriggeredAbility ability) {
         super(ability);
     }
 

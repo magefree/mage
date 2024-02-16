@@ -9,6 +9,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -44,12 +45,12 @@ public final class CleansingMeditation extends CardImpl {
 
 class CleansingMeditationEffect extends OneShotEffect {
 
-    public CleansingMeditationEffect() {
+    CleansingMeditationEffect() {
         super(Outcome.DestroyPermanent);
-        this.staticText = "Destroy all enchantments.<br>Threshold - If seven or more cards are in your graveyard, instead destroy all enchantments, then return all cards in your graveyard destroyed this way to the battlefield.";
+        this.staticText = "Destroy all enchantments.<br>" + AbilityWord.THRESHOLD.formatWord() + "If seven or more cards are in your graveyard, instead destroy all enchantments, then return all cards in your graveyard destroyed this way to the battlefield.";
     }
 
-    public CleansingMeditationEffect(final CleansingMeditationEffect effect) {
+    private CleansingMeditationEffect(final CleansingMeditationEffect effect) {
         super(effect);
     }
 
@@ -72,7 +73,7 @@ class CleansingMeditationEffect extends OneShotEffect {
 
         Player controller = game.getPlayer(source.getControllerId());
 
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_ENCHANTMENT, source.getControllerId(), source.getSourceId(), game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_ENCHANTMENT, source.getControllerId(), source, game)) {
             if (permanent != null && permanent.destroy(source, game, false)) {
                 if (threshold && controller != null && permanent.isOwnedBy(controller.getId())) {
                     cardsToBattlefield.add(permanent);

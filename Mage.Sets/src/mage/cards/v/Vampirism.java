@@ -36,12 +36,13 @@ public final class Vampirism extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // When Vampirism enters the battlefield, draw a card at the beginning of the next turn's upkeep.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateDelayedTriggeredAbilityEffect(
-                new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1), Duration.OneUse)), false));
+                new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1), Duration.OneUse))
+                .setText("draw a card at the beginning of the next turn's upkeep"), false));
 
         // Enchanted creature gets +1/+1 for each other creature you control.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new VampirismBoostEnchantedEffect()));
@@ -63,12 +64,12 @@ public final class Vampirism extends CardImpl {
 
 class VampirismBoostEnchantedEffect extends ContinuousEffectImpl {
 
-    public VampirismBoostEnchantedEffect() {
+    VampirismBoostEnchantedEffect() {
         super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
         staticText = "Enchanted creature gets +1/+1 for each other creature you control";
     }
 
-    public VampirismBoostEnchantedEffect(final VampirismBoostEnchantedEffect effect) {
+    private VampirismBoostEnchantedEffect(final VampirismBoostEnchantedEffect effect) {
         super(effect);
     }
 
@@ -80,7 +81,7 @@ class VampirismBoostEnchantedEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
-        int count = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game) - 1;
+        int count = game.getBattlefield().count(filter, source.getControllerId(), source, game) - 1;
         if (count > 0) {
             Permanent enchantment = game.getPermanent(source.getSourceId());
             if (enchantment != null && enchantment.getAttachedTo() != null) {

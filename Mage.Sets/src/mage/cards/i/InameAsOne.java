@@ -43,7 +43,7 @@ public final class InameAsOne extends CardImpl {
 
     public InameAsOne(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{8}{B}{B}{G}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPIRIT);
         this.power = new MageInt(8);
         this.toughness = new MageInt(8);
@@ -73,12 +73,12 @@ public final class InameAsOne extends CardImpl {
 
 class InameAsOneEffect extends OneShotEffect {
 
-    public InameAsOneEffect() {
+    InameAsOneEffect() {
         super(Outcome.Benefit);
         this.staticText = "you may exile it. If you do, return target Spirit permanent card from your graveyard to the battlefield";
     }
 
-    public InameAsOneEffect(final InameAsOneEffect effect) {
+    private InameAsOneEffect(final InameAsOneEffect effect) {
         super(effect);
     }
 
@@ -90,7 +90,7 @@ class InameAsOneEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         Card targetCard = game.getCard(getTargetPointer().getFirst(game, source));
         if (controller != null && sourceObject != null && targetCard != null) {
             if (controller.chooseUse(outcome, "Exile " + sourceObject.getLogName() + " to return Spirit card?", source, game)) {

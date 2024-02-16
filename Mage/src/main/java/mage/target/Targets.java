@@ -4,32 +4,37 @@ import mage.abilities.Ability;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.players.Player;
-import mage.target.targetpointer.*;
-import org.apache.log4j.Logger;
+import mage.util.Copyable;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
  * @author BetaSteward_at_googlemail.com
  */
-public class Targets extends ArrayList<Target> {
+public class Targets extends ArrayList<Target> implements Copyable<Targets> {
 
-    private static final Logger logger = Logger.getLogger(Targets.class);
+    private boolean isReadOnly = false; // runtime protect from not working targets modification, e.g. in composite costs
 
-    public Targets(Target... targets) {
-        for (Target target : targets) {
-            this.add(target);
-        }
+    public Targets() {
+        // fast constructor
     }
 
-    public Targets(final Targets targets) {
+    public Targets(Target... targets) {
+        this.addAll(Arrays.asList(targets));
+    }
+
+    protected Targets(final Targets targets) {
+        this.ensureCapacity(targets.size());
         for (Target target : targets) {
             this.add(target.copy());
         }
+        this.isReadOnly = targets.isReadOnly;
+    }
+
+    public Targets withReadOnly() {
+        this.isReadOnly = true;
+        return this;
     }
 
     public List<Target> getUnchosen() {
@@ -46,14 +51,14 @@ public class Targets extends ArrayList<Target> {
         return stream().allMatch(Target::isChosen);
     }
 
-    public boolean choose(Outcome outcome, UUID playerId, UUID sourceId, Game game) {
+    public boolean choose(Outcome outcome, UUID playerId, UUID sourceId, Ability source, Game game) {
         if (this.size() > 0) {
-            if (!canChoose(sourceId, playerId, game)) {
+            if (!canChoose(playerId, source, game)) {
                 return false;
             }
             while (!isChosen()) {
                 Target target = this.getUnchosen().get(0);
-                if (!target.choose(outcome, playerId, sourceId, game)) {
+                if (!target.choose(outcome, playerId, sourceId, source, game)) {
                     return false;
                 }
             }
@@ -63,7 +68,7 @@ public class Targets extends ArrayList<Target> {
 
     public boolean chooseTargets(Outcome outcome, UUID playerId, Ability source, boolean noMana, Game game, boolean canCancel) {
         if (this.size() > 0) {
-            if (!canChoose(source.getSourceId(), playerId, game)) {
+            if (!canChoose(playerId, source, game)) {
                 return false;
             }
 
@@ -113,22 +118,22 @@ public class Targets extends ArrayList<Target> {
 
     /**
      * For target choose
-     *
+     * <p>
      * Checks if there are enough targets that can be chosen. Should only be
      * used for Ability targets since this checks for protection, shroud etc.
      *
-     * @param sourceId           - the target event source
      * @param sourceControllerId - controller of the target event source
+     * @param source
      * @param game
      * @return - true if enough valid targets exist
      */
-    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
-        return stream().allMatch(target -> target.canChoose(sourceId, sourceControllerId, game));
+    public boolean canChoose(UUID sourceControllerId, Ability source, Game game) {
+        return stream().allMatch(target -> target.canChoose(sourceControllerId, source, game));
     }
 
     /**
      * For non target choose (e.g. cost pay)
-     *
+     * <p>
      * Checks if there are enough objects that can be selected. Should not be
      * used for Ability targets since this does not check for protection, shroud
      * etc.
@@ -148,43 +153,44 @@ public class Targets extends ArrayList<Target> {
         return null;
     }
 
-    public Target getEffectTarget(TargetPointer targetPointer) {
-        boolean proccessed = false;
-
-        if (targetPointer instanceof FirstTargetPointer) {
-            proccessed = true;
-            if (this.size() > 0) {
-                return this.get(0);
-            }
-        }
-
-        if (targetPointer instanceof SecondTargetPointer) {
-            proccessed = true;
-            if (this.size() > 1) {
-                return this.get(1);
-            }
-        }
-
-        if (targetPointer instanceof ThirdTargetPointer) {
-            proccessed = true;
-            if (this.size() > 2) {
-                return this.get(2);
-            }
-        }
-
-        if (targetPointer instanceof FixedTarget || targetPointer instanceof FixedTargets) {
-            // fixed target = direct ID, you can't find target type and description
-            proccessed = true;
-        }
-
-        if (!proccessed) {
-            logger.error("Unknown target pointer " + (targetPointer != null ? targetPointer : "null"), new Throwable());
-        }
-
-        return null;
-    }
-
+    @Override
     public Targets copy() {
         return new Targets(this);
+    }
+
+    private void checkReadOnlyModification() {
+        if (this.isReadOnly) {
+            throw new IllegalArgumentException("Wrong code usage: you can't modify read only targets list, e.g. from composite costs");
+        }
+    }
+
+    @Override
+    public boolean add(Target target) {
+        checkReadOnlyModification();
+        return super.add(target);
+    }
+
+    @Override
+    public void add(int index, Target element) {
+        checkReadOnlyModification();
+        super.add(index, element);
+    }
+
+    @Override
+    public boolean addAll(Collection<? extends Target> c) {
+        checkReadOnlyModification();
+        return super.addAll(c);
+    }
+
+    @Override
+    public boolean addAll(int index, Collection<? extends Target> c) {
+        checkReadOnlyModification();
+        return super.addAll(index, c);
+    }
+
+    @Override
+    public void clear() {
+        checkReadOnlyModification();
+        super.clear();
     }
 }

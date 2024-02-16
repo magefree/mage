@@ -32,7 +32,7 @@ public final class InfusedArrows extends CardImpl {
         this.addAbility(new SunburstAbility(this));
         // {tap}, Remove X charge counters from Infused Arrows: Target creature gets -X/-X until end of turn.
         Ability ability = new SimpleActivatedAbility(new BoostTargetEffect(xValue, xValue, Duration.EndOfTurn), new TapSourceCost());
-        ability.addCost(new RemoveVariableCountersSourceCost(CounterType.CHARGE.createInstance()));
+        ability.addCost(new RemoveVariableCountersSourceCost(CounterType.CHARGE));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

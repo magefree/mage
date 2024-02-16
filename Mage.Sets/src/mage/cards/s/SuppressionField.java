@@ -46,7 +46,7 @@ class SuppressionFieldCostReductionEffect extends CostModificationEffectImpl {
         staticText = "Activated abilities cost {2} more to activate unless they're mana abilities";
     }
 
-    SuppressionFieldCostReductionEffect(SuppressionFieldCostReductionEffect effect) {
+    private SuppressionFieldCostReductionEffect(final SuppressionFieldCostReductionEffect effect) {
         super(effect);
     }
 

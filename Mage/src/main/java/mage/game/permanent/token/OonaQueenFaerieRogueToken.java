@@ -1,19 +1,17 @@
-
-
 package mage.game.permanent.token;
-import mage.constants.CardType;
-import mage.constants.SubType;
+
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
+import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
- *
  * @author spjspj
  */
 public final class OonaQueenFaerieRogueToken extends TokenImpl {
 
     public OonaQueenFaerieRogueToken() {
-        super("Faerie Rogue", "1/1 blue and black Faerie Rogue creature token with flying");
+        super("Faerie Rogue Token", "1/1 blue and black Faerie Rogue creature token with flying");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
         color.setBlack(true);
@@ -23,7 +21,8 @@ public final class OonaQueenFaerieRogueToken extends TokenImpl {
         toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());
     }
-    public OonaQueenFaerieRogueToken(final OonaQueenFaerieRogueToken token) {
+
+    private OonaQueenFaerieRogueToken(final OonaQueenFaerieRogueToken token) {
         super(token);
     }
 

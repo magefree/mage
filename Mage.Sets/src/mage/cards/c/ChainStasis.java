@@ -47,11 +47,12 @@ public final class ChainStasis extends CardImpl {
 
 class ChainStasisEffect extends OneShotEffect {
 
-    public ChainStasisEffect() {
+    ChainStasisEffect() {
         super(Outcome.Benefit);
+        this.staticText = "You may tap or untap target creature. Then that creature's controller may pay {2}{U}. If the player does, they may copy this spell and may choose a new target for that copy";
     }
 
-    public ChainStasisEffect(final ChainStasisEffect effect) {
+    private ChainStasisEffect(final ChainStasisEffect effect) {
         super(effect);
     }
 
@@ -76,7 +77,7 @@ class ChainStasisEffect extends OneShotEffect {
             if (player == null) {
                 return false;
             }
-            Cost cost = new ManaCostsImpl("{2}{U}");
+            Cost cost = new ManaCostsImpl<>("{2}{U}");
             if (cost.pay(source, game, source, controller.getId(), false)) {
                 if (player.chooseUse(outcome, "Copy the spell?", source, game)) {
                     Spell spell = game.getStack().getSpell(source.getSourceId());
@@ -90,11 +91,4 @@ class ChainStasisEffect extends OneShotEffect {
 
         return false;
     }
-
-    @Override
-    public String getText(Mode mode
-    ) {
-        return "You may tap or untap target creature. Then that creature's controller may pay {2}{U}. If the player does, they may copy this spell and may choose a new target for that copy";
-    }
-
 }

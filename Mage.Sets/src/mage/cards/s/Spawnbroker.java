@@ -64,16 +64,16 @@ class TargetControlledCreatureWithPowerGreaterOrLessThanOpponentPermanent extend
         setTargetName("creature you control");
     }
 
-    public TargetControlledCreatureWithPowerGreaterOrLessThanOpponentPermanent(final TargetControlledCreatureWithPowerGreaterOrLessThanOpponentPermanent target) {
+    private TargetControlledCreatureWithPowerGreaterOrLessThanOpponentPermanent(final TargetControlledCreatureWithPowerGreaterOrLessThanOpponentPermanent target) {
         super(target);
     }
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
         Set<UUID> possibleTargets = new HashSet<>();
-        MageObject targetSource = game.getObject(sourceId);
+        MageObject targetSource = game.getObject(source);
         if(targetSource != null) {
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, sourceId, game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, source, game)) {
                 if (!targets.containsKey(permanent.getId()) && permanent.canBeTargetedBy(targetSource, sourceControllerId, game)) {
                     possibleTargets.add(permanent.getId());
                 }
@@ -100,7 +100,7 @@ class SpawnbrokerSecondTarget extends TargetPermanent {
         setTargetName("creature with power less than or equal to that creature's power an opponent controls");
     }
 
-    public SpawnbrokerSecondTarget(final SpawnbrokerSecondTarget target) {
+    private SpawnbrokerSecondTarget(final SpawnbrokerSecondTarget target) {
         super(target);
         this.firstTarget = target.firstTarget;
     }
@@ -118,12 +118,12 @@ class SpawnbrokerSecondTarget extends TargetPermanent {
     }
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
         Set<UUID> possibleTargets = new HashSet<>();
         if (firstTarget != null) {
-            MageObject targetSource = game.getObject(sourceId);
+            MageObject targetSource = game.getObject(source);
             if(targetSource != null) {
-                for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, sourceId, game)) {
+                for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, source, game)) {
                     if (!targets.containsKey(permanent.getId()) && permanent.canBeTargetedBy(targetSource, sourceControllerId, game)) {
                         if (firstTarget.getPower().getValue() >= permanent.getPower().getValue()) {
                             possibleTargets.add(permanent.getId());

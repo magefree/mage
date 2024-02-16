@@ -55,24 +55,23 @@ class SigardasSummonsEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         for (Permanent permanent : game.getBattlefield().getActivePermanents(
-                StaticFilters.FILTER_CONTROLLED_CREATURE_P1P1, source.getControllerId(), source.getSourceId(), game
+                StaticFilters.FILTER_CONTROLLED_CREATURE_P1P1, source.getControllerId(), source, game
         )) {
             switch (layer) {
                 case TypeChangingEffects_4:
                     permanent.addSubType(game, SubType.ANGEL);
-                    return true;
+                    continue;
                 case AbilityAddingRemovingEffects_6:
                     permanent.addAbility(FlyingAbility.getInstance(), source.getSourceId(), game);
-                    return true;
+                    continue;
                 case PTChangingEffects_7:
                     if (sublayer == SubLayer.SetPT_7b) {
-                        permanent.getPower().setValue(4);
-                        permanent.getToughness().setValue(4);
-                        return true;
+                        permanent.getPower().setModifiedBaseValue(4);
+                        permanent.getToughness().setModifiedBaseValue(4);
                     }
             }
         }
-        return false;
+        return true;
     }
 
     @Override

@@ -25,7 +25,7 @@ public final class MelokuTheCloudedMirror extends CardImpl {
 
     public MelokuTheCloudedMirror(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.MOONFOLK);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(2);

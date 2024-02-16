@@ -36,7 +36,7 @@ public final class GodoBanditWarlord extends CardImpl {
 
     public GodoBanditWarlord(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.BARBARIAN);
 
@@ -44,7 +44,7 @@ public final class GodoBanditWarlord extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Godo, Bandit Warlord enters the battlefield, you may search your library for an Equipment card and put it onto the battlefield. If you do, shuffle your library.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), false, true), true));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), false), true));
 
         // Whenever Godo attacks for the first time each turn, untap it and all Samurai you control. After this phase, there is an additional combat phase.
         Ability ability = new AttacksFirstTimeTriggeredAbility(new UntapSourceEffect().setText("untap it"), false);

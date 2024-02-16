@@ -1,7 +1,5 @@
-
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
@@ -11,20 +9,21 @@ import mage.constants.SubType;
 import mage.filter.FilterObject;
 import mage.filter.predicate.mageobject.MulticoloredPredicate;
 
+import java.util.UUID;
+
 /**
- *
  * @author Wehk
  */
 public final class EnemyOfTheGuildpact extends CardImpl {
 
-    private static final FilterObject filter = new FilterObject("multicolored");
-    
+    private static final FilterObject<?> filter = new FilterObject<>("multicolored");
+
     static {
         filter.add(MulticoloredPredicate.instance);
     }
-    
+
     public EnemyOfTheGuildpact(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}");
         this.subtype.add(SubType.SPIRIT);
         this.power = new MageInt(4);
         this.toughness = new MageInt(2);

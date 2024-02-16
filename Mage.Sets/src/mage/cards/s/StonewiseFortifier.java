@@ -35,7 +35,7 @@ public final class StonewiseFortifier extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {4}{W}: Prevent all damage that would be dealt to Stonewise Fortifier by target creature this turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new StonewiseFortifierPreventAllDamageToEffect(), new ManaCostsImpl("{4}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new StonewiseFortifierPreventAllDamageToEffect(), new ManaCostsImpl<>("{4}{W}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
@@ -52,12 +52,12 @@ public final class StonewiseFortifier extends CardImpl {
 
 class StonewiseFortifierPreventAllDamageToEffect extends PreventionEffectImpl {
 
-    public StonewiseFortifierPreventAllDamageToEffect() {
+    StonewiseFortifierPreventAllDamageToEffect() {
         super(Duration.EndOfTurn);
         staticText = "Prevent all damage that would be dealt to {this} by target creature this turn";
     }
 
-    public StonewiseFortifierPreventAllDamageToEffect(final StonewiseFortifierPreventAllDamageToEffect effect) {
+    private StonewiseFortifierPreventAllDamageToEffect(final StonewiseFortifierPreventAllDamageToEffect effect) {
         super(effect);
     }
 
@@ -67,17 +67,12 @@ class StonewiseFortifierPreventAllDamageToEffect extends PreventionEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         GameEvent preventEvent = new PreventDamageEvent(event.getTargetId(), event.getSourceId(), source, source.getControllerId(), event.getAmount(), ((DamageEvent) event).isCombatDamage());
         if (!game.replaceEvent(preventEvent)) {
             int preventedDamage = event.getAmount();
             MageObject damageSource = game.getObject(event.getSourceId());
-            MageObject preventionSource = game.getObject(source.getSourceId());
+            MageObject preventionSource = game.getObject(source);
             if (damageSource != null && preventionSource != null) {
                 String message = " damage from " +
                         damageSource.getName() + " prevented " +

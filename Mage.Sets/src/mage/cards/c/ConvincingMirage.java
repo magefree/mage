@@ -36,7 +36,7 @@ public final class ConvincingMirage extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseBasicLandTypeEffect(Outcome.Neutral)));
 
         // Enchanted land is the chosen type.
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConvincingMirageContinousEffect()));
     }
@@ -53,12 +53,12 @@ public final class ConvincingMirage extends CardImpl {
 
 class ConvincingMirageContinousEffect extends ContinuousEffectImpl {
 
-    public ConvincingMirageContinousEffect() {
+    ConvincingMirageContinousEffect() {
         super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Neutral);
         staticText = "Enchanted land is the chosen type";
     }
 
-    public ConvincingMirageContinousEffect(final ConvincingMirageContinousEffect effect) {
+    private ConvincingMirageContinousEffect(final ConvincingMirageContinousEffect effect) {
         super(effect);
     }
 

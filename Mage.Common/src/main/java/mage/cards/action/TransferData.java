@@ -18,9 +18,15 @@ public class TransferData {
     private Point locationOnScreen; // must contain REAL card location (e.g. without outer/draw spaces), so use getCardLocationOnScreen to update it
     private int popupOffsetX;
     private int popupOffsetY;
+    private PopupAutoLocationMode popupAutoLocationMode = PopupAutoLocationMode.PUT_INSIDE_PARENT;
     private UUID gameId;
     private CardView card;
     private int tooltipDelay; // custom delay, set non-zero to overwrite preferences settings
+
+    public enum PopupAutoLocationMode {
+        PUT_INSIDE_PARENT,
+        PUT_NEAR_MOUSE_POSITION
+    }
 
     /**
      * If you use it with cards then call top layer panel like data.getComponent().getTopPanelRef()
@@ -89,5 +95,13 @@ public class TransferData {
 
     public void setTooltipDelay(int tooltipDelay) {
         this.tooltipDelay = tooltipDelay;
+    }
+
+    public void setPopupAutoLocationMode(PopupAutoLocationMode mode) {
+        this.popupAutoLocationMode = mode;
+    }
+
+    public PopupAutoLocationMode getPopupAutoLocationMode() {
+        return this.popupAutoLocationMode;
     }
 }

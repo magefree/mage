@@ -78,7 +78,7 @@ enum CrownOfDoomPredicate implements ObjectSourcePlayerPredicate<Player> {
     @Override
     public boolean apply(ObjectSourcePlayer<Player> input, Game game) {
         Player targetPlayer = input.getObject();
-        Permanent sourceObject = game.getPermanentOrLKIBattlefield(input.getSourceId());
+        Permanent sourceObject = input.getSource().getSourcePermanentOrLKI(game);
         if (targetPlayer == null || sourceObject == null) {
             return false;
         }
@@ -93,12 +93,12 @@ enum CrownOfDoomPredicate implements ObjectSourcePlayerPredicate<Player> {
 
 class CrownOfDoomEffect extends OneShotEffect {
 
-    public CrownOfDoomEffect() {
+    CrownOfDoomEffect() {
         super(Outcome.Detriment);
         this.staticText = "Target player other than {this}'s owner gains control of it";
     }
 
-    public CrownOfDoomEffect(final CrownOfDoomEffect effect) {
+    private CrownOfDoomEffect(final CrownOfDoomEffect effect) {
         super(effect);
     }
 

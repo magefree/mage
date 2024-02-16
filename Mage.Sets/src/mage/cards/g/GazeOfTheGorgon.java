@@ -34,7 +34,6 @@ public final class GazeOfTheGorgon extends CardImpl {
         this.getSpellAbility().addEffect(new RegenerateTargetEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new GazeOfTheGorgonCreateDelayedTriggeredAbilityEffect());
-        this.getSpellAbility().addWatcher(new BlockedAttackerWatcher());
     }
 
     private GazeOfTheGorgon(final GazeOfTheGorgon card) {
@@ -49,12 +48,12 @@ public final class GazeOfTheGorgon extends CardImpl {
 
 class GazeOfTheGorgonCreateDelayedTriggeredAbilityEffect extends OneShotEffect {
 
-    public GazeOfTheGorgonCreateDelayedTriggeredAbilityEffect() {
+    GazeOfTheGorgonCreateDelayedTriggeredAbilityEffect() {
         super(Outcome.Benefit);
         this.staticText = "At this turn's next end of combat, destroy all creatures that blocked or were blocked by it this turn";
     }
 
-    public GazeOfTheGorgonCreateDelayedTriggeredAbilityEffect(final GazeOfTheGorgonCreateDelayedTriggeredAbilityEffect effect) {
+    private GazeOfTheGorgonCreateDelayedTriggeredAbilityEffect(final GazeOfTheGorgonCreateDelayedTriggeredAbilityEffect effect) {
         super(effect);
     }
 
@@ -84,7 +83,7 @@ class GazeOfTheGorgonEffect extends OneShotEffect {
         this.targetCreature = targetCreature;
     }
 
-    public GazeOfTheGorgonEffect(final GazeOfTheGorgonEffect effect) {
+    private GazeOfTheGorgonEffect(final GazeOfTheGorgonEffect effect) {
         super(effect);
         targetCreature = effect.targetCreature;
     }
@@ -101,7 +100,7 @@ class GazeOfTheGorgonEffect extends OneShotEffect {
             BlockedAttackerWatcher watcher = game.getState().getWatcher(BlockedAttackerWatcher.class);
             if (watcher != null) {
                 List<Permanent> toDestroy = new ArrayList<>();
-                for (Permanent creature : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source.getSourceId(), game)) {
+                for (Permanent creature : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source, game)) {
                     if (!creature.getId().equals(targetCreature.getSourceId())) {
                         if (watcher.creatureHasBlockedAttacker(new MageObjectReference(creature, game), targetCreature, game) || watcher.creatureHasBlockedAttacker(targetCreature, new MageObjectReference(creature, game), game)) {
                             toDestroy.add(creature);

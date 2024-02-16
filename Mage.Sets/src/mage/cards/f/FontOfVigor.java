@@ -23,7 +23,7 @@ public final class FontOfVigor extends CardImpl {
 
 
         // {2}{W}, Sacrifice Font of Vigor: You gain 7 life.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(7), new ManaCostsImpl("{2}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(7), new ManaCostsImpl<>("{2}{W}"));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);        
     }

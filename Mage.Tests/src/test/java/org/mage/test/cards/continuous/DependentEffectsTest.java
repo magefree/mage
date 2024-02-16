@@ -33,12 +33,11 @@ public class DependentEffectsTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerB, "Plains", 2);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Opalescence");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Opalescence",true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Enchanted Evening");
         
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, "Enchanted Evening", 5, 5);
         assertPowerToughness(playerA, "War Horn", 3, 3);
@@ -83,7 +82,6 @@ public class DependentEffectsTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Enchanted Evening");
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Rite of Replication", 1);
         assertGraveyardCount(playerB, "Raise the Alarm", 1);
@@ -93,7 +91,7 @@ public class DependentEffectsTest extends CardTestPlayerBase {
         assertPowerToughness(playerB, "Cobblebrute", 4, 4);
         assertPowerToughness(playerA, "Cobblebrute", 4, 4);
 
-        assertPermanentCount(playerB, "Soldier", 0);
+        assertPermanentCount(playerB, "Soldier Token", 0);
         assertPermanentCount(playerA, "Island", 0);
         assertPermanentCount(playerB, "Plains", 0);
     }
@@ -139,7 +137,6 @@ public class DependentEffectsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Yixlid Jailer", 1);
 

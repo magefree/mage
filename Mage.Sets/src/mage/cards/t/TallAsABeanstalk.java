@@ -30,7 +30,7 @@ public final class TallAsABeanstalk extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Enchanted creature gets +3/+3, has reach, and is a Giant in addition to its other types.
@@ -41,7 +41,7 @@ public final class TallAsABeanstalk extends CardImpl {
                 ReachAbility.getInstance(), AttachmentType.AURA
         ).setText(", has reach"));
         ability.addEffect(new AddCardSubtypeAttachedEffect(
-                SubType.GIANT, Duration.WhileOnBattlefield, AttachmentType.AURA
+                SubType.GIANT, AttachmentType.AURA
         ).setText(", and is a Giant in addition to its other types"));
         this.addAbility(ability);
     }

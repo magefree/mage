@@ -1,6 +1,7 @@
 
 
 package mage.game.permanent.token;
+
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.MageInt;
@@ -11,13 +12,12 @@ import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
- *
  * @author spjspj
  */
 public final class FesteringGoblinToken extends TokenImpl {
 
     public FesteringGoblinToken() {
-        super("Festering Goblin", "1/1 black Zombie Goblin creature token named Festering Goblin with \"When Festering Goblin dies, target creature gets -1/-1 until end of turn.\"");
+        super("Festering Goblin", "1/1 black Zombie Goblin creature token named Festering Goblin. It has \"When Festering Goblin dies, target creature gets -1/-1 until end of turn.\"");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add(SubType.ZOMBIE);
@@ -30,7 +30,7 @@ public final class FesteringGoblinToken extends TokenImpl {
         this.addAbility(ability);
     }
 
-    public FesteringGoblinToken(final FesteringGoblinToken token) {
+    private FesteringGoblinToken(final FesteringGoblinToken token) {
         super(token);
     }
 

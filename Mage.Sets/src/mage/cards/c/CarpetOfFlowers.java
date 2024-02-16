@@ -14,7 +14,6 @@ import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
 
@@ -51,9 +50,10 @@ class CarpetOfFlowersTriggeredAbility extends TriggeredAbilityImpl {
     CarpetOfFlowersTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CarpetOfFlowersEffect(), true);
         this.addTarget(new TargetOpponent());
+        setTriggerPhrase("At the beginning of each of your main phases, if you haven't added mana with this ability this turn, ");
     }
 
-    CarpetOfFlowersTriggeredAbility(final CarpetOfFlowersTriggeredAbility ability) {
+    private CarpetOfFlowersTriggeredAbility(final CarpetOfFlowersTriggeredAbility ability) {
         super(ability);
     }
 
@@ -99,14 +99,6 @@ class CarpetOfFlowersTriggeredAbility extends TriggeredAbilityImpl {
                         + game.getState().getZoneChangeCounter(sourceId),
                 Boolean.FALSE);
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "At the beginning of each of your main phases, if "
-                + "you haven't added mana with this ability this turn, "
-                ;
-    }
-
 }
 
 class CarpetOfFlowersEffect extends ManaEffect {
@@ -123,7 +115,7 @@ class CarpetOfFlowersEffect extends ManaEffect {
         staticText = "you may add X mana of any one color, where X is the number of Islands target opponent controls";
     }
 
-    CarpetOfFlowersEffect(final CarpetOfFlowersEffect effect) {
+    private CarpetOfFlowersEffect(final CarpetOfFlowersEffect effect) {
         super(effect);
     }
 
@@ -131,7 +123,7 @@ class CarpetOfFlowersEffect extends ManaEffect {
     public List<Mana> getNetMana(Game game, Ability source) {
         List<Mana> netMana = new ArrayList<>();
         if (game != null) {
-            int count = game.getBattlefield().count(filter, source.getSourceId(), source.getTargets().getFirstTarget(), game);
+            int count = game.getBattlefield().count(filter, source.getTargets().getFirstTarget(), source, game);
             if (count > 0) {
                 netMana.add(Mana.AnyMana(count));
             }
@@ -148,7 +140,7 @@ class CarpetOfFlowersEffect extends ManaEffect {
         Player controller = game.getPlayer(source.getControllerId());
         ChoiceColor choice = new ChoiceColor();
         if (controller != null && controller.choose(Outcome.Benefit, choice, game)) {
-            int count = game.getBattlefield().count(filter, source.getSourceId(), source.getTargets().getFirstTarget(), game);
+            int count = game.getBattlefield().count(filter, source.getTargets().getFirstTarget(), source, game);
             if (count > 0) {
                 switch (choice.getChoice()) {
                     case "Black":

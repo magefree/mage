@@ -46,7 +46,7 @@ public final class TovolarDireOverlord extends CardImpl {
     public TovolarDireOverlord(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WEREWOLF);
         this.power = new MageInt(3);
@@ -111,7 +111,7 @@ class TovolarDireOverlordEffect extends OneShotEffect {
             return true;
         }
         TargetPermanent target = new TargetPermanent(0, Integer.MAX_VALUE, filter, true);
-        player.choose(outcome, target, source.getControllerId(), game);
+        player.choose(outcome, target, source, game);
         for (UUID permanentId : target.getTargets()) {
             Permanent permanent = game.getPermanent(permanentId);
             if (permanent != null) {

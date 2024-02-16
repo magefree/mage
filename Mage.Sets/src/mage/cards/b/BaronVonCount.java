@@ -34,7 +34,7 @@ public final class BaronVonCount extends CardImpl {
 
     public BaronVonCount(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.VILLAIN);
         this.power = new MageInt(3);
@@ -62,12 +62,12 @@ public final class BaronVonCount extends CardImpl {
 
 class BaronVonCountPutCounterEffect extends OneShotEffect {
 
-    public BaronVonCountPutCounterEffect() {
+    BaronVonCountPutCounterEffect() {
         super(Outcome.Benefit);
         staticText = "with a doom counter on \"5.\"";
     }
 
-    public BaronVonCountPutCounterEffect(final BaronVonCountPutCounterEffect effect) {
+    private BaronVonCountPutCounterEffect(final BaronVonCountPutCounterEffect effect) {
         super(effect);
     }
 
@@ -76,7 +76,7 @@ class BaronVonCountPutCounterEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject mageObject = game.getPermanentEntering(source.getSourceId());
         if (mageObject == null) {
-            mageObject = game.getObject(source.getSourceId());
+            mageObject = game.getObject(source);
         }
         if (controller != null && mageObject != null) {
             Integer doomNumber = 5;
@@ -104,9 +104,10 @@ class BaronVonCountTriggeredAbility extends TriggeredAbilityImpl {
 
     public BaronVonCountTriggeredAbility() {
         super(Zone.BATTLEFIELD, new BaronVonCountMoveDoomCounterEffect());
+        setTriggerPhrase("Whenever you cast a spell with the indicated numeral in its mana cost, text box, power, or toughness, ");
     }
 
-    public BaronVonCountTriggeredAbility(final BaronVonCountTriggeredAbility abiltity) {
+    private BaronVonCountTriggeredAbility(final BaronVonCountTriggeredAbility abiltity) {
         super(abiltity);
     }
 
@@ -140,7 +141,7 @@ class BaronVonCountTriggeredAbility extends TriggeredAbilityImpl {
                         || String.valueOf(spell.getToughness().getBaseValue()).contains(doomString)) {
                     return true;
                 } else {
-                    for (String string : spell.getCard().getRules()) {
+                    for (String string : spell.getCard().getRules(game)) {
                         if (string.contains(doomString)) {
                             return true;
                         }
@@ -150,21 +151,16 @@ class BaronVonCountTriggeredAbility extends TriggeredAbilityImpl {
         }
         return false;
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you cast a spell with the indicated numeral in its mana cost, text box, power, or toughness, " ;
-    }
 }
 
 class BaronVonCountMoveDoomCounterEffect extends OneShotEffect {
 
-    public BaronVonCountMoveDoomCounterEffect() {
+    BaronVonCountMoveDoomCounterEffect() {
         super(Outcome.Neutral);
         staticText = "move the doom counter one numeral to the left";
     }
 
-    public BaronVonCountMoveDoomCounterEffect(final BaronVonCountMoveDoomCounterEffect effect) {
+    private BaronVonCountMoveDoomCounterEffect(final BaronVonCountMoveDoomCounterEffect effect) {
         super(effect);
     }
 
@@ -172,7 +168,7 @@ class BaronVonCountMoveDoomCounterEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (controller != null && sourcePermanent != null && mageObject != null) {
             if (game.getState().getValue(mageObject.getId() + "_doom") == null) {
                 return false;
@@ -203,9 +199,10 @@ class BaronVonCountSecondTriggeredAbility extends TriggeredAbilityImpl {
     public BaronVonCountSecondTriggeredAbility() {
         super(Zone.BATTLEFIELD, new BaronVonCountDestroyPlayerEffect());
         this.addTarget(new TargetPlayer());
+        setTriggerPhrase("When the doom counter moves from \"1,\" ");
     }
 
-    public BaronVonCountSecondTriggeredAbility(BaronVonCountSecondTriggeredAbility ability) {
+    private BaronVonCountSecondTriggeredAbility(final BaronVonCountSecondTriggeredAbility ability) {
         super(ability);
     }
 
@@ -223,21 +220,16 @@ class BaronVonCountSecondTriggeredAbility extends TriggeredAbilityImpl {
     public BaronVonCountSecondTriggeredAbility copy() {
         return new BaronVonCountSecondTriggeredAbility(this);
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "When the doom counter moves from \"1,\" " ;
-    }
 }
 
 class BaronVonCountDestroyPlayerEffect extends OneShotEffect {
 
-    public BaronVonCountDestroyPlayerEffect() {
+    BaronVonCountDestroyPlayerEffect() {
         super(Outcome.Neutral);
         staticText = "destroy target player and put that doom counter on \"5.\"";
     }
 
-    public BaronVonCountDestroyPlayerEffect(final BaronVonCountDestroyPlayerEffect effect) {
+    private BaronVonCountDestroyPlayerEffect(final BaronVonCountDestroyPlayerEffect effect) {
         super(effect);
     }
 
@@ -249,7 +241,7 @@ class BaronVonCountDestroyPlayerEffect extends OneShotEffect {
             targetPlayer.lost(game); // double checks canLose, but seems more future-proof than lostForced
         }
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (sourcePermanent != null && mageObject != null) {
             if (game.getState().getValue(mageObject.getId() + "_doom") == null) {
                 return false;

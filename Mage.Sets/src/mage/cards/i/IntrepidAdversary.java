@@ -65,7 +65,7 @@ public final class IntrepidAdversary extends CardImpl {
 
 class IntrepidAdversaryEffect extends OneShotEffect {
 
-    public IntrepidAdversaryEffect() {
+    IntrepidAdversaryEffect() {
         super(Outcome.Benefit);
         staticText = "put that many valor counters on {this}";
     }

@@ -34,13 +34,13 @@ public final class SunscapeApprentice extends CardImpl {
 
         // {G}, {tap}: Target creature gets +1/+1 until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(1, 1, Duration.EndOfTurn),
-            new ManaCostsImpl("{G}"));
+            new ManaCostsImpl<>("{G}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
         // {U}, {tap}: Put target creature you control on top of its owner's library.
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutOnLibraryTargetEffect(true),
-            new ManaCostsImpl("{U}"));
+            new ManaCostsImpl<>("{U}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);

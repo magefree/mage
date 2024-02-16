@@ -34,7 +34,7 @@ public final class FlowOfMaggots extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Cumulative upkeep {1}
-        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{1}")));
+        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{1}")));
         // Flow of Maggots can't be blocked by non-Wall creatures.
         this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));
     }

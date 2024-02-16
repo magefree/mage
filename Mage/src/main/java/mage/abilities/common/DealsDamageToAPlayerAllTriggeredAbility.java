@@ -43,9 +43,11 @@ public class DealsDamageToAPlayerAllTriggeredAbility extends TriggeredAbilityImp
         this.onlyCombat = onlyCombat;
         this.affectsDefendingPlayer = affectsDefendingPlayer;
         this.targetController = targetController;
+        setTriggerPhrase("Whenever " + filter.getMessage() + " deals " + (onlyCombat ? "combat " : "") + "damage to "
+                + (targetController == TargetController.OPPONENT ? "an opponent" : "a player") + ", ");
     }
 
-    public DealsDamageToAPlayerAllTriggeredAbility(final DealsDamageToAPlayerAllTriggeredAbility ability) {
+    protected DealsDamageToAPlayerAllTriggeredAbility(final DealsDamageToAPlayerAllTriggeredAbility ability) {
         super(ability);
         this.setTargetPointer = ability.setTargetPointer;
         this.filter = ability.filter;
@@ -74,7 +76,7 @@ public class DealsDamageToAPlayerAllTriggeredAbility extends TriggeredAbilityImp
             return false;
         }
         Permanent permanent = game.getPermanent(event.getSourceId());
-        if (!filter.match(permanent, getSourceId(), getControllerId(), game)) {
+        if (!filter.match(permanent, getControllerId(), this, game)) {
             return false;
         }
         this.getEffects().setValue("damage", event.getAmount());
@@ -92,11 +94,5 @@ public class DealsDamageToAPlayerAllTriggeredAbility extends TriggeredAbilityImp
             }
         }
         return true;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever " + filter.getMessage() + " deals " + (onlyCombat ? "combat " : "") + "damage to "
-                + (targetController == TargetController.OPPONENT ? "an opponent" : "a player") + ", " ;
     }
 }

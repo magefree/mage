@@ -29,7 +29,7 @@ public final class PitilessHorde extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LoseLifeSourceControllerEffect(2), TargetController.YOU, false));
         
         // Dash {2}{B}{B}
-        this.addAbility(new DashAbility(this, "{2}{B}{B}"));
+        this.addAbility(new DashAbility("{2}{B}{B}"));
     }
 
     private PitilessHorde(final PitilessHorde card) {

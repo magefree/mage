@@ -44,7 +44,7 @@ public final class AyaraFirstOfLocthwain extends CardImpl {
     public AyaraFirstOfLocthwain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}{B}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.NOBLE);
         this.power = new MageInt(2);
@@ -59,7 +59,7 @@ public final class AyaraFirstOfLocthwain extends CardImpl {
 
         // {T}, Sacrifice another black creature: Draw a card.
         ability = new SimpleActivatedAbility(new DrawCardSourceControllerEffect(1), new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter2)));
+        ability.addCost(new SacrificeTargetCost(filter2));
         this.addAbility(ability);
     }
 

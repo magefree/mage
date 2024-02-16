@@ -1,4 +1,3 @@
-
 package mage.abilities.common;
 
 import mage.abilities.TriggeredAbilityImpl;
@@ -8,7 +7,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 
 /**
- *
  * @author North
  */
 public class DrawCardControllerTriggeredAbility extends TriggeredAbilityImpl {
@@ -19,9 +17,10 @@ public class DrawCardControllerTriggeredAbility extends TriggeredAbilityImpl {
 
     public DrawCardControllerTriggeredAbility(Zone zone, Effect effect, boolean optional) {
         super(zone, effect, optional);
+        setTriggerPhrase(getWhen() + "you draw a card, ");
     }
 
-    public DrawCardControllerTriggeredAbility(final DrawCardControllerTriggeredAbility ability) {
+    protected DrawCardControllerTriggeredAbility(final DrawCardControllerTriggeredAbility ability) {
         super(ability);
     }
 
@@ -33,11 +32,6 @@ public class DrawCardControllerTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         return event.getPlayerId().equals(controllerId);
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you draw a card, " ;
     }
 
     @Override

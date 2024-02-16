@@ -53,7 +53,7 @@ class PeregrinationEffect extends OneShotEffect {
         staticText = "Search your library for up to two basic land cards, reveal those cards, and put one onto the battlefield tapped and the other into your hand. Shuffle";
     }
 
-    public PeregrinationEffect(final PeregrinationEffect effect) {
+    private PeregrinationEffect(final PeregrinationEffect effect) {
         super(effect);
     }
 
@@ -65,7 +65,7 @@ class PeregrinationEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (controller == null || sourceObject == null) {
             return false;
         }
@@ -80,7 +80,7 @@ class PeregrinationEffect extends OneShotEffect {
                 controller.revealCards(sourceObject.getIdName(), revealed, game);
                 if (target.getTargets().size() == 2) {
                     TargetCard target2 = new TargetCard(Zone.LIBRARY, filter);
-                    controller.choose(Outcome.Benefit, revealed, target2, game);
+                    controller.choose(Outcome.Benefit, revealed, target2, source, game);
                     Card card = revealed.get(target2.getFirstTarget(), game);
                     controller.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, false, null);
                     revealed.remove(card);

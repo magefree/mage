@@ -50,7 +50,7 @@ public final class KeeperOfTheDead extends CardImpl {
 
         // {B}, {T}: Choose target opponent who had at least two fewer creature cards in their graveyard than you did as you activated this ability. Destroy target nonblack creature they control.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new KeeperOfTheDeadEffect(), new TapSourceCost());
-        ability.addCost(new ManaCostsImpl("{B}"));
+        ability.addCost(new ManaCostsImpl<>("{B}"));
         ability.addTarget(new TargetPlayer(1, 1, false, filter));
         ability.addTarget(new KeeperOfTheDeadCreatureTarget());
         this.addAbility(ability);
@@ -71,7 +71,7 @@ class KeeperOfDeadPredicate implements ObjectSourcePlayerPredicate<Player> {
     @Override
     public boolean apply(ObjectSourcePlayer<Player> input, Game game) {
         Player targetPlayer = input.getObject();
-        Permanent sourceObject = game.getPermanent(input.getSourceId());
+        Permanent sourceObject = input.getSource().getSourcePermanentIfItStillExists(game);
         Player controller = null;
         if (sourceObject != null) {
             controller = game.getPlayer(sourceObject.getControllerId());
@@ -99,7 +99,7 @@ class KeeperOfTheDeadCreatureTarget extends TargetPermanent {
         super(1, 1, new FilterCreaturePermanent("nonblack creature that player controls"), false);
     }
 
-    public KeeperOfTheDeadCreatureTarget(final KeeperOfTheDeadCreatureTarget target) {
+    private KeeperOfTheDeadCreatureTarget(final KeeperOfTheDeadCreatureTarget target) {
         super(target);
     }
 
@@ -114,16 +114,16 @@ class KeeperOfTheDeadCreatureTarget extends TargetPermanent {
     }
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
-        Set<UUID> availablePossibleTargets = super.possibleTargets(sourceId, sourceControllerId, game);
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
+        Set<UUID> availablePossibleTargets = super.possibleTargets(sourceControllerId, source, game);
         Set<UUID> possibleTargets = new HashSet<>();
-        MageObject object = game.getObject(sourceId);
+        MageObject object = game.getObject(source);
 
         for (StackObject item : game.getState().getStack()) {
-            if (item.getId().equals(sourceId)) {
+            if (item.getId().equals(source.getSourceId())) {
                 object = item;
             }
-            if (item.getSourceId().equals(sourceId)) {
+            if (item.getSourceId().equals(source.getSourceId())) {
                 object = item;
             }
         }
@@ -148,12 +148,12 @@ class KeeperOfTheDeadCreatureTarget extends TargetPermanent {
 
 class KeeperOfTheDeadEffect extends OneShotEffect {
 
-    public KeeperOfTheDeadEffect() {
+    KeeperOfTheDeadEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "Destroy target nonblack creature contolled by target opponent who had at least two fewer creature cards in their graveyard than you did as you activated this ability";
     }
 
-    public KeeperOfTheDeadEffect(final KeeperOfTheDeadEffect effect) {
+    private KeeperOfTheDeadEffect(final KeeperOfTheDeadEffect effect) {
         super(effect);
     }
 

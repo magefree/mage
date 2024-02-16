@@ -259,8 +259,7 @@ public class PaintersServantTest extends CardTestPlayerBase {
 
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
-        
+
         assertGraveyardCount(playerA, "Pyroblast", 1);
         assertGraveyardCount(playerB, "Altar's Light", 1);
         assertLibraryCount(playerB, "Green Sun's Zenith", 1);

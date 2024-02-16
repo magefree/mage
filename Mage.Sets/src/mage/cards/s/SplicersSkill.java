@@ -1,7 +1,7 @@
 package mage.cards.s;
 
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.keyword.SpliceOntoInstantOrSorceryAbility;
+import mage.abilities.keyword.SpliceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -21,7 +21,7 @@ public final class SplicersSkill extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new PhyrexianGolemToken()));
 
         // Splice onto instant or sorcery {3}{W}
-        this.addAbility(new SpliceOntoInstantOrSorceryAbility("{3}{W}"));
+        this.addAbility(new SpliceAbility(SpliceAbility.INSTANT_OR_SORCERY, "{3}{W}"));
     }
 
     private SplicersSkill(final SplicersSkill card) {

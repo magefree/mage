@@ -7,14 +7,11 @@ import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.Duration;
 import mage.constants.Layer;
-import mage.constants.Outcome;
 import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.Target;
 import mage.util.CardUtil;
 
-import java.util.Locale;
 import java.util.UUID;
 
 /**
@@ -24,39 +21,34 @@ public class BoostTargetEffect extends ContinuousEffectImpl {
 
     private DynamicValue power;
     private DynamicValue toughness;
-    private final boolean lockedIn;
 
     public BoostTargetEffect(int power, int toughness) {
         this(power, toughness, Duration.EndOfTurn);
     }
 
     public BoostTargetEffect(int power, int toughness, Duration duration) {
-        this(StaticValue.get(power), StaticValue.get(toughness), duration, false);
+        this(StaticValue.get(power), StaticValue.get(toughness), duration);
     }
 
-    public BoostTargetEffect(DynamicValue power, DynamicValue toughness, Duration duration) {
-        this(power, toughness, duration, false);
+    public BoostTargetEffect(DynamicValue power, DynamicValue toughness) {
+        this(power, toughness, Duration.EndOfTurn);
     }
 
     /**
      * @param power
      * @param toughness
      * @param duration
-     * @param lockedIn  if true, power and toughness will be calculated only
-     *                  once, when the ability resolves
      */
-    public BoostTargetEffect(DynamicValue power, DynamicValue toughness, Duration duration, boolean lockedIn) {
-        super(duration, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, isCanKill(toughness) ? Outcome.UnboostCreature : Outcome.BoostCreature);
+    public BoostTargetEffect(DynamicValue power, DynamicValue toughness, Duration duration) {
+        super(duration, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, CardUtil.getBoostOutcome(power, toughness));
         this.power = power;
         this.toughness = toughness;
-        this.lockedIn = lockedIn;
     }
 
-    public BoostTargetEffect(final BoostTargetEffect effect) {
+    protected BoostTargetEffect(final BoostTargetEffect effect) {
         super(effect);
         this.power = effect.power.copy();
         this.toughness = effect.toughness.copy();
-        this.lockedIn = effect.lockedIn;
     }
 
     @Override
@@ -67,7 +59,7 @@ public class BoostTargetEffect extends ContinuousEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        if (lockedIn) {
+        if (affectedObjectsSet) {
             power = StaticValue.get(power.calculate(game, source, this));
             toughness = StaticValue.get(toughness.calculate(game, source, this));
         }
@@ -92,26 +84,8 @@ public class BoostTargetEffect extends ContinuousEffectImpl {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        if (mode == null || mode.getTargets().isEmpty()) {
-            return "no target";
-        }
-        Target target = mode.getTargets().get(0);
-        StringBuilder sb = new StringBuilder();
-        if (target.getMaxNumberOfTargets() > 1) {
-            if (target.getNumberOfTargets() < target.getMaxNumberOfTargets()) {
-                sb.append("up to ");
-            }
-            sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(" target ").append(target.getTargetName()).append(" get ");
-        } else {
-            if (target.getNumberOfTargets() < target.getMaxNumberOfTargets()) {
-                sb.append("up to ").append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(' ');
-            }
-            if (!target.getTargetName().toLowerCase(Locale.ENGLISH).startsWith("another")) {
-                sb.append("target ");
-            }
-            sb.append(target.getTargetName()).append(" gets ");
-        }
-        sb.append(CardUtil.getBoostText(power, toughness, duration));
-        return sb.toString();
+        return getTargetPointer().describeTargets(mode.getTargets(), "it") +
+                (getTargetPointer().isPlural(mode.getTargets()) ? " each get " : " gets ") +
+                CardUtil.getBoostText(power, toughness, duration);
     }
 }

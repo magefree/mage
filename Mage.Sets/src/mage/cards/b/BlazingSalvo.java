@@ -38,12 +38,12 @@ public final class BlazingSalvo extends CardImpl {
 
 class BlazingSalvoEffect extends OneShotEffect {
 
-    public BlazingSalvoEffect() {
+    BlazingSalvoEffect() {
         super(Outcome.Damage);
         this.staticText = "{this} deals 3 damage to target creature unless that creature's controller has {this} deal 5 damage to them";
     }
 
-    public BlazingSalvoEffect(final BlazingSalvoEffect effect) {
+    private BlazingSalvoEffect(final BlazingSalvoEffect effect) {
         super(effect);
     }
 

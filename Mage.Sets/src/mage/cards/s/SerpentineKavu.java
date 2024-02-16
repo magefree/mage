@@ -27,7 +27,7 @@ public final class SerpentineKavu extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {R}: Serpentine Kavu gains haste until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{R}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{R}")));
     }
 
     private SerpentineKavu(final SerpentineKavu card) {

@@ -5,6 +5,7 @@
  */
 package mage.cards.s;
 
+import java.util.Objects;
 import java.util.UUID;
 import mage.ConditionalMana;
 import mage.MageObject;
@@ -64,7 +65,7 @@ class SecludedCourtyardManaBuilder extends ConditionalManaBuilder {
             creatureType = subType;
         }
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (controller != null
                 && sourceObject != null
                 && mana.getAny() == 0) {
@@ -83,11 +84,23 @@ class SecludedCourtyardManaBuilder extends ConditionalManaBuilder {
     public String getRule() {
         return "Spend this mana only to cast a creature spell of the chosen type or activate an ability of a creature or creature card of the chosen type";
     }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), this.creatureType);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!super.equals(obj)) {
+            return false;
+        }
+
+        return this.creatureType == ((SecludedCourtyardManaBuilder) obj).creatureType;
+    }
 }
 
 class SecludedCourtyardConditionalMana extends ConditionalMana {
-
-    SubType creatureType;
 
     public SecludedCourtyardConditionalMana(Mana mana, SubType creatureType) {
         super(mana);
@@ -106,7 +119,7 @@ class SecludedCourtyardManaCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        MageObject object = game.getObject(source.getSourceId());
+        MageObject object = game.getObject(source);
         // casting a creature card or using its ability
         if (creatureType != null
                 && object != null

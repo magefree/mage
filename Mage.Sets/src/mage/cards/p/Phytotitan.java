@@ -54,7 +54,7 @@ class PhytotitanEffect extends OneShotEffect {
         staticText = effectText;
     }
 
-    PhytotitanEffect(PhytotitanEffect effect) {
+    private PhytotitanEffect(final PhytotitanEffect effect) {
         super(effect);
     }
 

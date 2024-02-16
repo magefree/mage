@@ -3,6 +3,7 @@ package mage.client.themes;
 import mage.abilities.hint.HintUtils;
 import mage.abilities.icon.CardIconColor;
 import org.mage.card.arcane.SvgUtils;
+import org.mage.plugins.card.images.ImageCache;
 
 import java.awt.*;
 
@@ -66,15 +67,15 @@ public enum ThemeType {
             true,
             true,
             false,
-            new Color(246, 136, 158),
-            new Color(243, 233, 164),
-            new Color(204, 236, 201),
-            new Color(117, 174, 238),
-            new Color(106, 0, 255),
-            new Color(192, 166, 232),
-            new Color(243, 233, 164),
-            new Color(204, 236, 201),
-            new Color(106, 0, 255),
+            new Color(246, 136, 158), // nimbusBlueGrey
+            new Color(243, 233, 164), // control
+            new Color(204, 236, 201), // nimbusLightBackground
+            new Color(117, 174, 238), // info
+            new Color(106, 0, 255), // nimbusBase
+            new Color(192, 166, 232), // mageToolbar
+            new Color(243, 233, 164), // playerPanel_inactiveBackgroundColor
+            new Color(204, 236, 201), // playerPanel_activeBackgroundColor
+            new Color(106, 0, 255), // playerPanel_deadBackgroundColor
             // card icons
             new Color(246, 136, 158),
             Color.black,
@@ -95,9 +96,9 @@ public enum ThemeType {
             new Color(219, 197, 182), // info
             new Color(97, 27, 0), // nimbusBase
             new Color(219, 193, 172), // mageToolbar
-            new Color(219, 193, 172),
-            new Color(204, 236, 201),
-            new Color(99, 72, 50, 255),
+            new Color(219, 193, 172), // playerPanel_inactiveBackgroundColor
+            new Color(204, 236, 201), // playerPanel_activeBackgroundColor
+            new Color(99, 72, 50, 255), // playerPanel_deadBackgroundColor
             // card icons
             new Color(219, 193, 172),
             Color.black,
@@ -118,9 +119,9 @@ public enum ThemeType {
             new Color(182, 200, 219), // info
             new Color(0, 78, 97), // nimbusBase
             new Color(172, 195, 219), // mageToolbar
-            new Color(172, 195, 219),
-            new Color(204, 236, 201),
-            new Color(50, 68, 99, 255),
+            new Color(172, 195, 219), // playerPanel_inactiveBackgroundColor
+            new Color(204, 236, 201), // playerPanel_inactiveBackgroundColor
+            new Color(50, 68, 99, 255), // playerPanel_deadBackgroundColor
             // card icons
             new Color(172, 197, 219),
             Color.black,
@@ -135,7 +136,7 @@ public enum ThemeType {
     private final boolean hasSkipButtons;
     private final boolean hasPhaseIcons;
     private final boolean hasWinLossImages;
-    private final boolean shortcutsVisibleForSkipButtons; // Whether or not to display skip button shortcuts
+    private final boolean shortcutsVisibleForSkipButtons; // Whether to display skip button shortcuts
     private final Color nimbusBlueGrey;  // buttons, scrollbar background, disabled inputs
     private final Color control;  // window bg
     private final Color nimbusLightBackground; // inputs, table rows
@@ -347,5 +348,8 @@ public enum ThemeType {
         for (CardIconColor cardIconColor : CardIconColor.values()) {
             SvgUtils.prepareCss(this.getCardIconsCssFile(cardIconColor), this.getCardIconsCssSettings(cardIconColor), true);
         }
+
+        // reload card icons and other rendering things from cache - it can depend on current theme
+        ImageCache.clearCache();
     }
 }

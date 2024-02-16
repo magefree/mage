@@ -35,7 +35,7 @@ public final class MountainTitan extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(
                 new CreateDelayedTriggeredAbilityEffect(new MountainTitanDelayedTriggeredAbility())
                         .setText("until end of turn, whenever you cast a black spell, put a +1/+1 counter on {this}"),
-                new ManaCostsImpl("{1}{R}{R}")
+                new ManaCostsImpl<>("{1}{R}{R}")
         ));
     }
 
@@ -55,7 +55,7 @@ class MountainTitanDelayedTriggeredAbility extends DelayedTriggeredAbility {
         super(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), Duration.EndOfTurn, false, false);
     }
 
-    public MountainTitanDelayedTriggeredAbility(final MountainTitanDelayedTriggeredAbility ability) {
+    private MountainTitanDelayedTriggeredAbility(final MountainTitanDelayedTriggeredAbility ability) {
         super(ability);
     }
 

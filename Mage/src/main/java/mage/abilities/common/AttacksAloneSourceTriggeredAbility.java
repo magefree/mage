@@ -1,8 +1,5 @@
-
 package mage.abilities.common;
 
-import java.util.Objects;
-import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.Zone;
@@ -18,9 +15,11 @@ public class AttacksAloneSourceTriggeredAbility extends TriggeredAbilityImpl {
 
     public AttacksAloneSourceTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect);
+        setTriggerPhrase("Whenever {this} attacks alone, ");
+        this.replaceRuleText = true; // default true to replace "{this}" with "it"
     }
 
-    public AttacksAloneSourceTriggeredAbility(final AttacksAloneSourceTriggeredAbility ability) {
+    protected AttacksAloneSourceTriggeredAbility(final AttacksAloneSourceTriggeredAbility ability) {
         super(ability);
     }
 
@@ -31,30 +30,15 @@ public class AttacksAloneSourceTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DECLARED_ATTACKERS;
+        return event.getType() == GameEvent.EventType.ATTACKER_DECLARED;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if(game.isActivePlayer(this.controllerId) ) {
-            UUID creatureId = this.getSourceId();
-            if(creatureId != null) {
-                if(game.getCombat().attacksAlone() && Objects.equals(creatureId, game.getCombat().getAttackers().get(0))) {
-                    UUID defender = game.getCombat().getDefenderId(creatureId);
-                    if(defender != null) {
-                        for(Effect effect: getEffects()) {
-                            effect.setTargetPointer(new FixedTarget(defender));
-                        }
-                    }
-                    return true;
-                }
-            }
+        if (!getSourceId().equals(event.getSourceId()) || !game.getCombat().attacksAlone()) {
+            return false;
         }
-        return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} attacks alone, " ;
+        getEffects().setTargetPointer(new FixedTarget(game.getCombat().getDefendingPlayerId(getSourceId(), game)));
+        return true;
     }
 }

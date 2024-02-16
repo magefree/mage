@@ -66,7 +66,7 @@ class LightningRunnerEffect extends OneShotEffect {
                 + "untap all creatures you control, and after this phase, there is an additional combat phase";
     }
 
-    LightningRunnerEffect(final LightningRunnerEffect effect) {
+    private LightningRunnerEffect(final LightningRunnerEffect effect) {
         super(effect);
     }
 

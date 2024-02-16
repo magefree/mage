@@ -26,7 +26,7 @@ public final class SolarBlast extends CardImpl {
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
         // Cycling {1}{R}{R}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{1}{R}{R}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{1}{R}{R}")));
         // When you cycle Solar Blast, you may have it deal 1 damage to any target.
         Ability ability = new CycleTriggeredAbility(new DamageTargetEffect(1), true);
         ability.addTarget(new TargetAnyTarget());

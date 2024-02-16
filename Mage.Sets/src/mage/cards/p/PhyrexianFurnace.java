@@ -36,7 +36,7 @@ public final class PhyrexianFurnace extends CardImpl {
         this.addAbility(ability);
 
         // {1}, Sacrifice Phyrexian Furnace: Exile target card from a graveyard. Draw a card.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new ManaCostsImpl("{1}"));
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new ManaCostsImpl<>("{1}"));
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetCardInGraveyard());
         ability.addEffect(new DrawCardSourceControllerEffect(1));
@@ -55,12 +55,12 @@ public final class PhyrexianFurnace extends CardImpl {
 
 class PhyrexianFurnaceEffect extends OneShotEffect {
 
-    public PhyrexianFurnaceEffect() {
+    PhyrexianFurnaceEffect() {
         super(Outcome.Benefit);
         this.staticText = "exile the bottom card of target player's graveyard";
     }
 
-    public PhyrexianFurnaceEffect(final PhyrexianFurnaceEffect effect) {
+    private PhyrexianFurnaceEffect(final PhyrexianFurnaceEffect effect) {
         super(effect);
     }
 

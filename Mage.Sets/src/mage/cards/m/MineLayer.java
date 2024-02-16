@@ -44,12 +44,12 @@ public final class MineLayer extends CardImpl {
 
         // {1}{R}, {tap}: Put a mine counter on target land.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.MINE.createInstance()), new TapSourceCost());
-        ability.addCost(new ManaCostsImpl("{1}{R}"));
+        ability.addCost(new ManaCostsImpl<>("{1}{R}"));
         ability.addTarget(new TargetLandPermanent());
         this.addAbility(ability);
 
         // Whenever a land with a mine counter on it becomes tapped, destroy it.
-        this.addAbility(new BecomesTappedTriggeredAbility(new DestroyTargetEffect().setText("destroy that land"), false, filter, true));
+        this.addAbility(new BecomesTappedTriggeredAbility(new DestroyTargetEffect().setText("destroy it"), false, filter, true));
 
         // When Mine Layer leaves the battlefield, remove all mine counters from all lands.
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new RemoveAllMineCountersEffect(), false));
@@ -67,12 +67,12 @@ public final class MineLayer extends CardImpl {
 
 class RemoveAllMineCountersEffect extends OneShotEffect {
 
-    public RemoveAllMineCountersEffect() {
+    RemoveAllMineCountersEffect() {
         super(Outcome.Neutral);
         this.staticText = "remove all mine counters from all lands";
     }
 
-    public RemoveAllMineCountersEffect(final RemoveAllMineCountersEffect effect) {
+    private RemoveAllMineCountersEffect(final RemoveAllMineCountersEffect effect) {
         super(effect);
     }
 

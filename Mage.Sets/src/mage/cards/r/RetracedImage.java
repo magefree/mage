@@ -42,12 +42,12 @@ public final class RetracedImage extends CardImpl {
 
 class RetracedImageEffect extends OneShotEffect {
 
-    public RetracedImageEffect() {
+    RetracedImageEffect() {
         super(Outcome.PutCardInPlay);
         this.staticText = "Reveal a card in your hand, then put that card onto the battlefield if it has the same name as a permanent";
     }
 
-    public RetracedImageEffect(final RetracedImageEffect effect) {
+    private RetracedImageEffect(final RetracedImageEffect effect) {
         super(effect);
     }
 
@@ -61,8 +61,8 @@ class RetracedImageEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             TargetCardInHand target = new TargetCardInHand();
-            if (target.canChoose(source.getSourceId(), controller.getId(), game)
-                    && controller.choose(outcome, target, source.getSourceId(), game)) {
+            if (target.canChoose(controller.getId(), source, game)
+                    && controller.choose(outcome, target, source, game)) {
                 Card chosenCard = game.getCard(target.getFirstTarget());
                 if (chosenCard != null) {
                     Cards cards = new CardsImpl();

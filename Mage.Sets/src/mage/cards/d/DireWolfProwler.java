@@ -32,7 +32,7 @@ public final class DireWolfProwler extends CardImpl {
         Ability ability = new LimitedTimesPerTurnActivatedAbility(
                 Zone.BATTLEFIELD,
                 new BoostSourceEffect(2, 2, Duration.EndOfTurn).setText("{this} gets +2/+2"),
-                new ManaCostsImpl("{1}{G}")
+                new ManaCostsImpl<>("{1}{G}")
         );
         ability.addEffect(new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.EndOfTurn)
                 .setText("and gains haste until end of turn")

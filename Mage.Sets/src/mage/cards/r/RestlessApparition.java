@@ -28,7 +28,7 @@ public final class RestlessApparition extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {WB}{WB}{WB}: Restless Apparition gets +3/+3 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(3, 3, Duration.EndOfTurn), new ManaCostsImpl("{W/B}{W/B}{W/B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(3, 3, Duration.EndOfTurn), new ManaCostsImpl<>("{W/B}{W/B}{W/B}")));
         // Persist
         this.addAbility(new PersistAbility());
     }

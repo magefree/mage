@@ -27,7 +27,7 @@ public final class WhiptongueFrog extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {U}: Whiptongue Frog gains flying until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{U}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{U}")));
     }
 
     private WhiptongueFrog(final WhiptongueFrog card) {

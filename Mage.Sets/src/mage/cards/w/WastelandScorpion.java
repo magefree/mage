@@ -28,7 +28,7 @@ public final class WastelandScorpion extends CardImpl {
         this.addAbility(DeathtouchAbility.getInstance());
 
         // Cycling {2}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
 
     }
 

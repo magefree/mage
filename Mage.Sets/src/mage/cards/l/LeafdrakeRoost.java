@@ -37,14 +37,14 @@ public final class LeafdrakeRoost extends CardImpl {
         TargetPermanent auraTarget = new TargetLandPermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.PutCreatureInPlay));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Enchanted land has "{G}{U}, {tap}: Create a 2/2 green and blue Drake creature token with flying."
-        Ability abilityToGain = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new LeafdrakeRoostDrakeToken()), new ManaCostsImpl("{G}{U}"));
+        Ability abilityToGain = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new LeafdrakeRoostDrakeToken()), new ManaCostsImpl<>("{G}{U}"));
         abilityToGain.addCost(new TapSourceCost());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(abilityToGain, AttachmentType.AURA, Duration.WhileOnBattlefield,
-                "Enchanted land has \"{G}{U}, {t}: Create a 2/2 green and blue Drake creature token with flying.\"")));
+                "Enchanted land has \"{G}{U}, {T}: Create a 2/2 green and blue Drake creature token with flying.\"")));
 
     }
 

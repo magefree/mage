@@ -59,7 +59,7 @@ public final class Opalescence extends CardImpl {
             this.dependencyTypes.add(DependencyType.BecomeCreature);  // Conspiracy
         }
 
-        public OpalescenceEffect(final OpalescenceEffect effect) {
+        private OpalescenceEffect(final OpalescenceEffect effect) {
             super(effect);
         }
 
@@ -71,7 +71,7 @@ public final class Opalescence extends CardImpl {
         @Override
         public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
             for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, 
-                    source.getControllerId(), source.getSourceId(), game)) {
+                    source.getControllerId(), source, game)) {
                 switch (layer) {
                     case TypeChangingEffects_4:
                         if (sublayer == SubLayer.NA) {
@@ -84,8 +84,8 @@ public final class Opalescence extends CardImpl {
                     case PTChangingEffects_7:
                         if (sublayer == SubLayer.SetPT_7b) {
                             int manaCost = permanent.getManaValue();
-                            permanent.getPower().setValue(manaCost);
-                            permanent.getToughness().setValue(manaCost);
+                            permanent.getPower().setModifiedBaseValue(manaCost);
+                            permanent.getToughness().setModifiedBaseValue(manaCost);
                         }
                 }
 

@@ -51,12 +51,12 @@ public final class RiskyMove extends CardImpl {
 
 class RiskyMoveGetControlEffect extends OneShotEffect {
 
-    public RiskyMoveGetControlEffect() {
+    RiskyMoveGetControlEffect() {
         super(Outcome.GainControl);
         this.staticText = "that player gains control of {this}";
     }
 
-    public RiskyMoveGetControlEffect(final RiskyMoveGetControlEffect effect) {
+    private RiskyMoveGetControlEffect(final RiskyMoveGetControlEffect effect) {
         super(effect);
     }
 
@@ -102,9 +102,10 @@ class RiskyMoveTriggeredAbility extends TriggeredAbilityImpl {
 
     public RiskyMoveTriggeredAbility() {
         super(Zone.BATTLEFIELD, new RiskyMoveFlipCoinEffect(), false);
+        setTriggerPhrase("When you gain control of {this} from another player, ");
     }
 
-    public RiskyMoveTriggeredAbility(final RiskyMoveTriggeredAbility ability) {
+    private RiskyMoveTriggeredAbility(final RiskyMoveTriggeredAbility ability) {
         super(ability);
     }
 
@@ -122,21 +123,16 @@ class RiskyMoveTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         return event.getTargetId().equals(sourceId);
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "When you gain control of {this} from another player, ";
-    }
 }
 
 class RiskyMoveFlipCoinEffect extends OneShotEffect {
 
-    public RiskyMoveFlipCoinEffect() {
+    RiskyMoveFlipCoinEffect() {
         super(Outcome.Detriment);
         this.staticText = "choose a creature you control and an opponent. Flip a coin. If you lose the flip, that opponent gains control of that creature";
     }
 
-    public RiskyMoveFlipCoinEffect(final RiskyMoveFlipCoinEffect effect) {
+    private RiskyMoveFlipCoinEffect(final RiskyMoveFlipCoinEffect effect) {
         super(effect);
     }
 
@@ -152,16 +148,16 @@ class RiskyMoveFlipCoinEffect extends OneShotEffect {
             Target target1 = new TargetControlledCreaturePermanent(1, 1, new FilterControlledCreaturePermanent(), true);
             Target target2 = new TargetOpponent(true);
 
-            if (target1.canChoose(source.getSourceId(), controller.getId(), game)) {
+            if (target1.canChoose(controller.getId(), source, game)) {
                 while (!target1.isChosen()
-                        && target1.canChoose(source.getSourceId(), controller.getId(), game)
+                        && target1.canChoose(controller.getId(), source, game)
                         && controller.canRespond()) {
                     controller.chooseTarget(outcome, target1, source, game);
                 }
             }
-            if (target2.canChoose(source.getSourceId(), controller.getId(), game)) {
+            if (target2.canChoose(controller.getId(), source, game)) {
                 while (!target2.isChosen()
-                        && target2.canChoose(source.getSourceId(), controller.getId(), game)
+                        && target2.canChoose(controller.getId(), source, game)
                         && controller.canRespond()) {
                     controller.chooseTarget(outcome, target2, source, game);
                 }
@@ -189,9 +185,10 @@ class RiskyMoveCreatureGainControlEffect extends ContinuousEffectImpl {
     public RiskyMoveCreatureGainControlEffect(Duration duration, UUID controller) {
         super(duration, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
         this.controller = controller;
+        this.staticText = "If you lose the flip, that opponent gains control of that creature";
     }
 
-    public RiskyMoveCreatureGainControlEffect(final RiskyMoveCreatureGainControlEffect effect) {
+    private RiskyMoveCreatureGainControlEffect(final RiskyMoveCreatureGainControlEffect effect) {
         super(effect);
         this.controller = effect.controller;
     }
@@ -211,10 +208,5 @@ class RiskyMoveCreatureGainControlEffect extends ContinuousEffectImpl {
             return permanent.changeControllerId(controller, game, source);
         }
         return false;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return "If you lose the flip, that opponent gains control of that creature";
     }
 }

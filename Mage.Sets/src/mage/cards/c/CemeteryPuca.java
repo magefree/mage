@@ -37,7 +37,7 @@ public final class CemeteryPuca extends CardImpl {
 
         // Whenever a creature dies, you may pay {1}. If you do, Cemetery Puca becomes a copy of that creature, except it has this ability.
         this.addAbility(new DiesCreatureTriggeredAbility(
-                new DoIfCostPaid(new CemeteryPucaEffect(), new ManaCostsImpl("{1}")),
+                new DoIfCostPaid(new CemeteryPucaEffect(), new ManaCostsImpl<>("{1}")),
                 false,
                 StaticFilters.FILTER_PERMANENT_A_CREATURE,
                 true));
@@ -55,12 +55,12 @@ public final class CemeteryPuca extends CardImpl {
 
 class CemeteryPucaEffect extends OneShotEffect {
 
-    public CemeteryPucaEffect() {
+    CemeteryPucaEffect() {
         super(Outcome.Copy);
-        staticText = " {this} becomes a copy of that creature, except it has this ability";
+        staticText = "{this} becomes a copy of that creature, except it has this ability";
     }
 
-    public CemeteryPucaEffect(final CemeteryPucaEffect effect) {
+    private CemeteryPucaEffect(final CemeteryPucaEffect effect) {
         super(effect);
     }
 
@@ -76,7 +76,7 @@ class CemeteryPucaEffect extends OneShotEffect {
             Permanent copyFromCreature = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
             if (copyFromCreature != null) {
                 game.copyPermanent(Duration.WhileOnBattlefield, copyFromCreature, copyToCreature.getId(), source, new EmptyCopyApplier());
-                ContinuousEffect effect = new GainAbilityTargetEffect(new DiesCreatureTriggeredAbility(new DoIfCostPaid(new CemeteryPucaEffect(), new ManaCostsImpl("{1}")), false, StaticFilters.FILTER_PERMANENT_A_CREATURE, true), Duration.WhileOnBattlefield);
+                ContinuousEffect effect = new GainAbilityTargetEffect(new DiesCreatureTriggeredAbility(new DoIfCostPaid(new CemeteryPucaEffect(), new ManaCostsImpl<>("{1}")), false, StaticFilters.FILTER_PERMANENT_A_CREATURE, true), Duration.WhileOnBattlefield);
                 effect.setTargetPointer(new FixedTarget(copyToCreature.getId(), game));
                 game.addEffect(effect, source);
                 return true;

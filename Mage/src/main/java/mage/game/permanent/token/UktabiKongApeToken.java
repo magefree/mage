@@ -6,13 +6,12 @@ import mage.constants.SubType;
 import mage.MageInt;
 
 /**
- *
  * @author L_J
  */
 public final class UktabiKongApeToken extends TokenImpl {
 
     public UktabiKongApeToken() {
-        super("Ape", "1/1 green Ape creature token");
+        super("Ape Token", "1/1 green Ape creature token");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.APE);
         color.setGreen(true);
@@ -20,7 +19,7 @@ public final class UktabiKongApeToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    public UktabiKongApeToken(final UktabiKongApeToken token) {
+    private UktabiKongApeToken(final UktabiKongApeToken token) {
         super(token);
     }
 

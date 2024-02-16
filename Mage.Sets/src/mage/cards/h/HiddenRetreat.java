@@ -32,7 +32,7 @@ public class HiddenRetreat extends CardImpl {
 
     }
 
-    public HiddenRetreat(final HiddenRetreat hiddenRetreat) {
+    private HiddenRetreat(final HiddenRetreat hiddenRetreat) {
         super(hiddenRetreat);
     }
 
@@ -44,12 +44,12 @@ public class HiddenRetreat extends CardImpl {
 
 class HiddenRetreatEffect extends PreventionEffectImpl {
 
-    public HiddenRetreatEffect() {
+    HiddenRetreatEffect() {
         super(Duration.EndOfTurn, Integer.MAX_VALUE, false, false);
         this.staticText = "Prevent all damage that would be dealt by target instant or sorcery spell this turn.";
     }
 
-    public HiddenRetreatEffect(final HiddenRetreatEffect effect) {
+    private HiddenRetreatEffect(final HiddenRetreatEffect effect) {
         super(effect);
     }
 

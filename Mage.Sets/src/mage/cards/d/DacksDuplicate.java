@@ -34,7 +34,7 @@ public final class DacksDuplicate extends CardImpl {
 
         // You may have Dack's Duplicate enter the battlefield as a copy of any creature on the battlefield except it has haste and dethrone.
         Effect effect = new CopyPermanentEffect(StaticFilters.FILTER_PERMANENT_CREATURE, new DacksDuplicateCopyApplier());
-        effect.setText("as a copy of any creature on the battlefield except it has haste and dethrone");
+        effect.setText("as a copy of any creature on the battlefield, except it has haste and dethrone");
         this.addAbility(new EntersBattlefieldAbility(effect, true));
     }
 

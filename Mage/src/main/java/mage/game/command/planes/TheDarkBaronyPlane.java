@@ -39,7 +39,6 @@ public class TheDarkBaronyPlane extends Plane {
 
     public TheDarkBaronyPlane() {
         this.setPlaneType(Planes.PLANE_THE_DARK_BARONY);
-        this.setExpansionSetCodeForImage("PCA");
 
         // Whenever a nonblack card is put into a player's graveyard from anywhere, that player loses 1 life
         Ability ability = new PutCardIntoGraveFromAnywhereAllTriggeredAbility(Zone.COMMAND,
@@ -60,5 +59,14 @@ public class TheDarkBaronyPlane extends Plane {
         this.getAbilities().add(chaosAbility);
         chaosAbility.setMayActivate(TargetController.ANY);
         this.getAbilities().add(new SimpleStaticAbility(Zone.ALL, new PlanarDieRollCostIncreasingEffect(chaosAbility.getOriginalId())));
+    }
+
+    private TheDarkBaronyPlane(final TheDarkBaronyPlane plane) {
+        super(plane);
+    }
+
+    @Override
+    public TheDarkBaronyPlane copy() {
+        return new TheDarkBaronyPlane(this);
     }
 }

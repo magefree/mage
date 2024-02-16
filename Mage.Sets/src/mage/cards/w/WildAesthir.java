@@ -33,7 +33,7 @@ public final class WildAesthir extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
         // {W}{W}: Wild Aesthir gets +2/+0 until end of turn. Activate this ability only once each turn.
         this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD,
-                new BoostSourceEffect(2, 0, Duration.EndOfTurn), new ManaCostsImpl("{W}{W}")));
+                new BoostSourceEffect(2, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{W}{W}")));
     }
 
     private WildAesthir(final WildAesthir card) {

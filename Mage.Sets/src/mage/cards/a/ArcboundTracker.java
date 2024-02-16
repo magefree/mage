@@ -36,7 +36,7 @@ public final class ArcboundTracker extends CardImpl {
         this.addAbility(new ModularAbility(this, 2));
 
         // Whenever you cast a spell other than your first spell each turn, put a +1/+1 counter on Arcbound Tracker.
-        this.addAbility(new ArcboundTrackerTriggeredAbility(), new SpellsCastWatcher());
+        this.addAbility(new ArcboundTrackerTriggeredAbility());
     }
 
     private ArcboundTracker(final ArcboundTracker card) {
@@ -53,6 +53,7 @@ class ArcboundTrackerTriggeredAbility extends TriggeredAbilityImpl {
 
     public ArcboundTrackerTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
+        setTriggerPhrase("Whenever you cast a spell other than your first spell each turn, ");
     }
 
     private ArcboundTrackerTriggeredAbility(final ArcboundTrackerTriggeredAbility ability) {
@@ -76,10 +77,5 @@ class ArcboundTrackerTriggeredAbility extends TriggeredAbilityImpl {
             return watcher != null && watcher.getSpellsCastThisTurn(event.getPlayerId()).size() > 1;
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you cast a spell other than your first spell each turn, " ;
     }
 }

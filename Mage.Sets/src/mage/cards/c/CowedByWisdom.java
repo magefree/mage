@@ -38,7 +38,7 @@ public final class CowedByWisdom extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.UnboostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Enchanted creature can't attack or block unless its controller pays {1} for each card in your hand.
@@ -62,7 +62,7 @@ class CowedByWisdomayCostToAttackBlockEffect extends PayCostToAttackBlockEffectI
         staticText = "Enchanted creature can't attack or block unless its controller pays {1} for each card in your hand";
     }
 
-    CowedByWisdomayCostToAttackBlockEffect(CowedByWisdomayCostToAttackBlockEffect effect) {
+    private CowedByWisdomayCostToAttackBlockEffect(final CowedByWisdomayCostToAttackBlockEffect effect) {
         super(effect);
     }
 
@@ -70,7 +70,7 @@ class CowedByWisdomayCostToAttackBlockEffect extends PayCostToAttackBlockEffectI
     public ManaCosts getManaCostToPay(GameEvent event, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && !controller.getHand().isEmpty()) {
-            ManaCosts manaCosts = new ManaCostsImpl();
+            ManaCosts manaCosts = new ManaCostsImpl<>();
             manaCosts.add(new GenericManaCost(controller.getHand().size()));
             return manaCosts;
         }

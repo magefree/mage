@@ -38,7 +38,7 @@ public final class VenarianGold extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // When Venarian Gold enters the battlefield, tap enchanted creature and put X sleep counters on it.
         Ability ability = new EntersBattlefieldTriggeredAbility(new TapEnchantedEffect());

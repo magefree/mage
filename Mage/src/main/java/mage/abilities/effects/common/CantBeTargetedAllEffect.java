@@ -11,13 +11,11 @@ import mage.filter.FilterPermanent;
 import mage.filter.FilterSpell;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackAbility;
 import mage.game.stack.StackObject;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class CantBeTargetedAllEffect extends ContinuousRuleModifyingEffectImpl {
@@ -36,7 +34,7 @@ public class CantBeTargetedAllEffect extends ContinuousRuleModifyingEffectImpl {
         setText();
     }
 
-    public CantBeTargetedAllEffect(final CantBeTargetedAllEffect effect) {
+    protected CantBeTargetedAllEffect(final CantBeTargetedAllEffect effect) {
         super(effect);
         if (effect.filterTarget != null) {
             this.filterTarget = effect.filterTarget.copy();
@@ -52,11 +50,6 @@ public class CantBeTargetedAllEffect extends ContinuousRuleModifyingEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.TARGET;
     }
@@ -64,7 +57,7 @@ public class CantBeTargetedAllEffect extends ContinuousRuleModifyingEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
-        if (permanent != null && filterTarget.match(permanent, source.getSourceId(), source.getControllerId(), game)) {
+        if (permanent != null && filterTarget.match(permanent, source.getControllerId(), source, game)) {
             StackObject stackObject = game.getStack().getStackObject(event.getSourceId());
             MageObject sourceObject;
             if (stackObject instanceof StackAbility) {
@@ -91,7 +84,9 @@ public class CantBeTargetedAllEffect extends ContinuousRuleModifyingEffectImpl {
         } else {
             sb.append("spells");
         }
-        if (!duration.toString().isEmpty()) {
+        if (duration == Duration.EndOfTurn) {
+            sb.append(" this turn");
+        } else if (!duration.toString().isEmpty()) {
             sb.append(' ').append(duration.toString());
         }
         staticText = sb.toString();

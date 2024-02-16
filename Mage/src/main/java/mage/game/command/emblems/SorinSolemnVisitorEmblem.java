@@ -1,4 +1,3 @@
-
 package mage.game.command.emblems;
 
 import mage.abilities.Ability;
@@ -10,7 +9,6 @@ import mage.filter.StaticFilters;
 import mage.game.command.Emblem;
 
 /**
- *
  * @author spjspj
  */
 public final class SorinSolemnVisitorEmblem extends Emblem {
@@ -20,8 +18,17 @@ public final class SorinSolemnVisitorEmblem extends Emblem {
      * sacrifices a creature."
      */
     public SorinSolemnVisitorEmblem() {
-        this.setName("Emblem Sorin");
+        super("Emblem Sorin");
         Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.COMMAND, new SacrificeEffect(StaticFilters.FILTER_PERMANENT_CREATURE, 1, "that player"), TargetController.OPPONENT, false, true);
         this.getAbilities().add(ability);
+    }
+
+    private SorinSolemnVisitorEmblem(final SorinSolemnVisitorEmblem card) {
+        super(card);
+    }
+
+    @Override
+    public SorinSolemnVisitorEmblem copy() {
+        return new SorinSolemnVisitorEmblem(this);
     }
 }

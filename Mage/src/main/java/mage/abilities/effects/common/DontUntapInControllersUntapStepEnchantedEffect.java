@@ -23,13 +23,8 @@ public class DontUntapInControllersUntapStepEnchantedEffect extends ContinuousRu
         staticText = "Enchanted " + description + " doesn't untap during its controller's untap step";
     }
 
-    public DontUntapInControllersUntapStepEnchantedEffect(final DontUntapInControllersUntapStepEnchantedEffect effect) {
+    protected DontUntapInControllersUntapStepEnchantedEffect(final DontUntapInControllersUntapStepEnchantedEffect effect) {
         super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override
@@ -56,11 +51,11 @@ public class DontUntapInControllersUntapStepEnchantedEffect extends ContinuousRu
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (game.getTurn().getStepType() == PhaseStep.UNTAP) {
+        if (game.getTurnStepType() == PhaseStep.UNTAP) {
             Permanent enchantment = game.getPermanent(source.getSourceId());
             if (enchantment != null && enchantment.getAttachedTo() != null && event.getTargetId().equals(enchantment.getAttachedTo())) {
                 Permanent permanent = game.getPermanent(enchantment.getAttachedTo());
-                if (permanent != null &&  permanent.isControlledBy(game.getActivePlayerId())) {
+                if (permanent != null && permanent.isControlledBy(game.getActivePlayerId())) {
                     return true;
                 }
             }

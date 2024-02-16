@@ -10,8 +10,9 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.PermanentToken;
+import mage.game.permanent.token.Token;
 import mage.game.stack.Spell;
-import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.util.CardUtil;
 
@@ -40,7 +41,7 @@ public class ProtectionAbility extends StaticAbility {
         this.auraIdNotToBeRemoved = null;
     }
 
-    public ProtectionAbility(final ProtectionAbility ability) {
+    protected ProtectionAbility(final ProtectionAbility ability) {
         super(ability);
         this.filter = ability.filter.copy();
         this.removeAuras = ability.removeAuras;
@@ -74,7 +75,8 @@ public class ProtectionAbility extends StaticAbility {
 
     @Override
     public String getRule() {
-        return "protection from " + filter.getMessage() + (removeAuras ? "" : ". This effect doesn't remove auras.");
+        return (flavorWord == null ? "protection from " : CardUtil.italicizeWithEmDash(flavorWord) + "Protection from ")
+                + filter.getMessage() + (removeAuras ? "" : ". This effect doesn't remove Auras.");
     }
 
     public boolean canTarget(MageObject source, Game game) {
@@ -87,31 +89,24 @@ public class ProtectionAbility extends StaticAbility {
 
         if (filter instanceof FilterCard) {
             if (source instanceof Permanent) {
-                return !((FilterCard) filter).match((Card) source, getSourceId(), ((Permanent) source).getControllerId(), game);
+                return !((FilterCard) filter).match((Card) source, ((Permanent) source).getControllerId(), this, game);
             } else if (source instanceof Card) {
-                return !((FilterCard) filter).match((Card) source, getSourceId(), ((Card) source).getOwnerId(), game);
+                return !((FilterCard) filter).match((Card) source, ((Card) source).getOwnerId(), this, game);
+            } else if (source instanceof Token) {
+                // Fake a permanent with the Token info.
+                PermanentToken token = new PermanentToken((Token) source, null, game);
+                return !((FilterCard) filter).match((Card) token, game);
             }
             return true;
         }
 
         if (filter instanceof FilterSpell) {
-            if (source instanceof Spell) {
+            // Problem here is that for the check if a player can play a Spell, the source
+            // object is still a card and not a spell yet.
+            if (source instanceof Spell || game.inCheckPlayableState() && source.isInstantOrSorcery(game)) {
                 return !filter.match(source, game);
             }
-            // Problem here is that for the check if a player can play a Spell, the source
-            // object is still a card and not a spell yet. So return only if the source object can't be a spell
-            // otherwise the following FilterObject check will be applied
-            if (source instanceof StackObject
-                    || !source.isInstantOrSorcery(game)) {
-                return true;
-            }
-        }
-
-        // Emrakul, the Aeons Torn
-        if (filter instanceof FilterStackObject) {
-            if (filter.match(source, game)) {
-                return !source.isInstantOrSorcery(game);
-            }
+            return true;
         }
 
         if (filter instanceof FilterObject) {
@@ -125,13 +120,13 @@ public class ProtectionAbility extends StaticAbility {
             } else if (source instanceof Card) {
                 player = game.getPlayer(((Card) source).getOwnerId());
             }
-            return !((FilterPlayer) filter).match(player, getSourceId(), this.getControllerId(), game);
+            return !((FilterPlayer) filter).match(player, this.getControllerId(), this, game);
         }
 
         return true;
     }
 
-    private static final String getFilterText(ObjectColor color) {
+    private static String getFilterText(ObjectColor color) {
         return CardUtil.concatWithAnd(
                 color.getColors()
                         .stream()

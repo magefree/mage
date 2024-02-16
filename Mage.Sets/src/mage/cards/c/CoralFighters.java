@@ -43,12 +43,12 @@ public final class CoralFighters extends CardImpl {
 
 class CoralFightersEffect extends OneShotEffect {
 
-    public CoralFightersEffect() {
+    CoralFightersEffect() {
         super(Outcome.Detriment);
         staticText = "look at the top card of defending player's library. You may put that card on the bottom of that player's library";
     }
 
-    public CoralFightersEffect(final CoralFightersEffect effect) {
+    private CoralFightersEffect(final CoralFightersEffect effect) {
         super(effect);
     }
 

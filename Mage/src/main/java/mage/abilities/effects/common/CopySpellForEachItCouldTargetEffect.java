@@ -30,7 +30,7 @@ public abstract class CopySpellForEachItCouldTargetEffect extends OneShotEffect 
         }
 
         @Override
-        public MageObjectReferencePredicate getNextNewTargetType(int copyNumber) {
+        public MageObjectReferencePredicate getNextNewTargetType() {
             if (newTargetTypes.hasNext()) {
                 return newTargetTypes.next();
             }

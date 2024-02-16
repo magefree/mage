@@ -24,7 +24,6 @@ public class CompleatedTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertCounterCount(playerA, tamiyo, CounterType.LOYALTY, 3);
     }
@@ -40,7 +39,6 @@ public class CompleatedTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertCounterCount(playerA, tamiyo, CounterType.LOYALTY, 5);
     }

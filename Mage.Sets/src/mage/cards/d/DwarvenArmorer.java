@@ -2,6 +2,7 @@
 package mage.cards.d;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
@@ -41,7 +42,7 @@ public final class DwarvenArmorer extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {R}, {tap}, Discard a card: Put a +0/+1 counter or a +1/+0 counter on target creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DwarvenArmorerEffect(), new ManaCostsImpl("{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DwarvenArmorerEffect(), new ManaCostsImpl<>("{R}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardCardCost());
         ability.addTarget(new TargetCreaturePermanent());
@@ -60,7 +61,7 @@ public final class DwarvenArmorer extends CardImpl {
 
 class DwarvenArmorerEffect extends OneShotEffect {
 
-    private static final Set<String> choices = new HashSet<>();
+    private static final Set<String> choices = new LinkedHashSet<>();
 
     static {
         choices.add("+0/+1");
@@ -72,7 +73,7 @@ class DwarvenArmorerEffect extends OneShotEffect {
         staticText = "Put a +0/+1 counter or a +1/+0 counter on target creature.";
     }
 
-    public DwarvenArmorerEffect(final DwarvenArmorerEffect effect) {
+    private DwarvenArmorerEffect(final DwarvenArmorerEffect effect) {
         super(effect);
     }
 

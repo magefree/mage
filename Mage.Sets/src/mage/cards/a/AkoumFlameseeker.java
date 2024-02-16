@@ -59,12 +59,12 @@ public final class AkoumFlameseeker extends CardImpl {
 
 class AkoumFlameseekerEffect extends OneShotEffect {
 
-    public AkoumFlameseekerEffect() {
+    AkoumFlameseekerEffect() {
         super(Outcome.DrawCard);
         this.staticText = "Discard a card. If you do, draw a card";
     }
 
-    public AkoumFlameseekerEffect(final AkoumFlameseekerEffect effect) {
+    private AkoumFlameseekerEffect(final AkoumFlameseekerEffect effect) {
         super(effect);
     }
 

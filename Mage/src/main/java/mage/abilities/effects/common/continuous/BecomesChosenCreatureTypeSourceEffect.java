@@ -18,10 +18,6 @@ public class BecomesChosenCreatureTypeSourceEffect extends OneShotEffect {
         this(false, Duration.EndOfTurn);
     }
 
-    public BecomesChosenCreatureTypeSourceEffect(boolean nonWall) {
-        this(nonWall, Duration.EndOfTurn);
-    }
-
     public BecomesChosenCreatureTypeSourceEffect(boolean nonWall, Duration duration) {
         super(Outcome.BoostCreature);
         this.nonWall = nonWall;
@@ -29,7 +25,7 @@ public class BecomesChosenCreatureTypeSourceEffect extends OneShotEffect {
         staticText = "{this} becomes the creature type of your choice" + (duration == Duration.EndOfTurn ? " until end of turn." : "");
     }
 
-    public BecomesChosenCreatureTypeSourceEffect(final BecomesChosenCreatureTypeSourceEffect effect) {
+    protected BecomesChosenCreatureTypeSourceEffect(final BecomesChosenCreatureTypeSourceEffect effect) {
         super(effect);
         this.nonWall = effect.nonWall;
         this.duration = effect.duration;
@@ -47,7 +43,7 @@ public class BecomesChosenCreatureTypeSourceEffect extends OneShotEffect {
     }
 
     @Override
-    public Effect copy() {
+    public BecomesChosenCreatureTypeSourceEffect copy() {
         return new BecomesChosenCreatureTypeSourceEffect(this);
     }
 

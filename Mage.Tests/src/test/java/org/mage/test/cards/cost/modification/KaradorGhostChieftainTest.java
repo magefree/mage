@@ -27,7 +27,6 @@ public class KaradorGhostChieftainTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Karador, Ghost Chieftain");
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
         assertPermanentCount(playerA, "Karador, Ghost Chieftain", 1);
     }
 
@@ -55,7 +54,6 @@ public class KaradorGhostChieftainTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Karador, Ghost Chieftain");
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
         assertPermanentCount(playerA, "Karador, Ghost Chieftain", 1);
     }
 
@@ -74,18 +72,17 @@ public class KaradorGhostChieftainTest extends CardTestPlayerBase {
         // During each of your turns, you may cast one creature card from your graveyard.
         addCard(Zone.HAND, playerA, "Karador, Ghost Chieftain");// {5}{B}{G}{W}
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Karador, Ghost Chieftain");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Karador, Ghost Chieftain", true);
 
-        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion");
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion", true);
 
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Cloudshift", "Karador, Ghost Chieftain");
+        waitStackResolved(3, PhaseStep.PRECOMBAT_MAIN);
 
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion");
 
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
-
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Silvercoat Lion", 2);
         assertGraveyardCount(activePlayer, "Cloudshift", 1);
@@ -99,11 +96,12 @@ public class KaradorGhostChieftainTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 4);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
-        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 5);
         addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
         //
         // {1}{B}: Target attacking Zombie gains indestructible until end of turn.
         addCard(Zone.LIBRARY, playerA, "Accursed Horde", 1); // Creature Zombie {3}{B}
+        addCard(Zone.LIBRARY, playerA, "Carrion Screecher", 1); // Creature Zombie {3}{B}
         //
         addCard(Zone.GRAVEYARD, playerA, "Silvercoat Lion", 5); // Creature {1}{W}
         //
@@ -116,26 +114,73 @@ public class KaradorGhostChieftainTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Gisa and Geralf"); // CREATURE {2}{U}{B} (4/4)
 
         // prepare spels with same AsThough effects and puts creature to graveyard
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Karador, Ghost Chieftain");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Karador, Ghost Chieftain", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Gisa and Geralf");
 
         // you play any creatures due to two approve objects
         checkPlayableAbility("before", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Silvercoat Lion", true);
         checkPlayableAbility("before", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Accursed Horde", true);
+        checkPlayableAbility("before", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Carrion Screecher", true);
 
-        // cast zombie creature and approves by Karagar
+        // cast zombie creature and approves by Karador
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Accursed Horde");
         setChoice(playerA, "Karador, Ghost Chieftain"); // choose the permitting object
-        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        waitStackResolved(3, PhaseStep.PRECOMBAT_MAIN);
 
         // you can't cast lion due to approving object (Gisa needs zombie)
         checkPlayableAbility("after", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Silvercoat Lion", false);
         checkPlayableAbility("after", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Accursed Horde", false);
+        checkPlayableAbility("after", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Carrion Screecher", true);
 
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
     }
 
+    @Test
+    public void test_castFromGraveyardWithDifferentApproversOtherCast() {
+        skipInitShuffling();
+
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 6);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
+        //
+        // {1}{B}: Target attacking Zombie gains indestructible until end of turn.
+        addCard(Zone.LIBRARY, playerA, "Accursed Horde", 1); // Creature Zombie {3}{B}
+        addCard(Zone.LIBRARY, playerA, "Carrion Screecher", 1); // Creature Zombie {3}{B}
+        //
+        addCard(Zone.GRAVEYARD, playerA, "Silvercoat Lion", 5); // Creature {1}{W}
+        //
+        // Karador, Ghost Chieftain costs {1} less to cast for each creature card in your graveyard.
+        // During each of your turns, you may cast one creature card from your graveyard.
+        addCard(Zone.HAND, playerA, "Karador, Ghost Chieftain");// {5}{B}{G}{W}
+        //
+        // When Gisa and Geralf enters the battlefield, put the top four cards of your library into your graveyard.
+        // During each of your turns, you may cast a Zombie creature card from your graveyard.
+        addCard(Zone.HAND, playerA, "Gisa and Geralf"); // CREATURE {2}{U}{B} (4/4)
+
+        // prepare spels with same AsThough effects and puts creature to graveyard
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Karador, Ghost Chieftain", true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Gisa and Geralf");
+
+        // you play any creatures due to two approve objects
+        checkPlayableAbility("before", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Silvercoat Lion", true);
+        checkPlayableAbility("before", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Accursed Horde", true);
+        checkPlayableAbility("before", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Carrion Screecher", true);
+
+        // cast zombie creature and approves by Gisa and Geralf
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Accursed Horde");
+        setChoice(playerA, "Gisa and Geralf"); // choose the permitting object
+        waitStackResolved(3, PhaseStep.PRECOMBAT_MAIN);
+
+        // you can't cast lion due to approving object (Gisa needs zombie)
+        checkPlayableAbility("after", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Silvercoat Lion", true);
+        checkPlayableAbility("after", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Accursed Horde", false);
+        checkPlayableAbility("after", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Carrion Screecher", true);
+
+        setStrictChooseMode(true);
+        setStopAt(3, PhaseStep.BEGIN_COMBAT);
+        execute();
+    }
 }

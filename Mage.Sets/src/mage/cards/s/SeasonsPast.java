@@ -45,12 +45,12 @@ public final class SeasonsPast extends CardImpl {
 
 class SeasonsPastEffect extends OneShotEffect {
 
-    public SeasonsPastEffect() {
+    SeasonsPastEffect() {
         super(Outcome.ReturnToHand);
         this.staticText = "Return any number of cards with different mana values from your graveyard to your hand";
     }
 
-    public SeasonsPastEffect(final SeasonsPastEffect effect) {
+    private SeasonsPastEffect(final SeasonsPastEffect effect) {
         super(effect);
     }
 
@@ -64,7 +64,7 @@ class SeasonsPastEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             SeasonsPastTarget target = new SeasonsPastTarget();
-            controller.choose(outcome, target, source.getSourceId(), game);
+            controller.choose(outcome, target, source, game);
             controller.moveCards(new CardsImpl(target.getTargets()), Zone.HAND, source, game);
             return true;
         }
@@ -78,12 +78,12 @@ class SeasonsPastTarget extends TargetCardInYourGraveyard {
         super(0, Integer.MAX_VALUE, new FilterCard("cards with different mana values from your graveyard"));
     }
 
-    public SeasonsPastTarget(SeasonsPastTarget target) {
+    private SeasonsPastTarget(final SeasonsPastTarget target) {
         super(target);
     }
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
         Set<Integer> usedCMC = new HashSet<>();
         for (UUID targetId : this.getTargets()) {
             Card card = game.getCard(targetId);
@@ -91,7 +91,7 @@ class SeasonsPastTarget extends TargetCardInYourGraveyard {
                 usedCMC.add(card.getManaValue());
             }
         }
-        Set<UUID> possibleTargets = super.possibleTargets(sourceId, sourceControllerId, game);
+        Set<UUID> possibleTargets = super.possibleTargets(sourceControllerId, source, game);
         Set<UUID> leftPossibleTargets = new HashSet<>();
         for (UUID targetId : possibleTargets) {
             Card card = game.getCard(targetId);

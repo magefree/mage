@@ -10,8 +10,8 @@ import mage.abilities.effects.common.DontUntapInControllersUntapStepAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
@@ -33,7 +33,7 @@ public final class DreamTides extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{U}");
 
         // Creatures don't untap during their controllers' untap steps.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepAllEffect(Duration.WhileOnBattlefield, TargetController.ANY, new FilterCreaturePermanent("Creatures"))));
+        this.addAbility(new SimpleStaticAbility(new DontUntapInControllersUntapStepAllEffect(Duration.WhileOnBattlefield, TargetController.ANY, StaticFilters.FILTER_PERMANENT_CREATURES)));
 
         // At the beginning of each player's upkeep, that player may choose any number of tapped nongreen creatures they control and pay {2} for each creature chosen this way. If the player does, untap those creatures.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new DreamTidesEffect(), TargetController.ANY, false));
@@ -63,7 +63,7 @@ class DreamTidesEffect extends OneShotEffect {
         staticText = "that player may choose any number of tapped nongreen creatures they control and pay {2} for each creature chosen this way. If the player does, untap those creatures";
     }
 
-    DreamTidesEffect(DreamTidesEffect effect) {
+    private DreamTidesEffect(final DreamTidesEffect effect) {
         super(effect);
     }
 
@@ -81,7 +81,7 @@ class DreamTidesEffect extends OneShotEffect {
             int countBattlefield = game.getBattlefield().getAllActivePermanents(filter, game.getActivePlayerId(), game).size();
             while (player.canRespond() && countBattlefield > 0 && player.chooseUse(Outcome.AIDontUseIt, "Pay {2} and untap a tapped nongreen creature under your control?", source, game)) {
                 Target tappedCreatureTarget = new TargetControlledCreaturePermanent(1, 1, filter, true);
-                if (player.choose(Outcome.Detriment, tappedCreatureTarget, source.getSourceId(), game)) {
+                if (player.choose(Outcome.Detriment, tappedCreatureTarget, source, game)) {
                     Cost cost = ManaUtil.createManaCost(2, false);
                     Permanent tappedCreature = game.getPermanent(tappedCreatureTarget.getFirstTarget());
 

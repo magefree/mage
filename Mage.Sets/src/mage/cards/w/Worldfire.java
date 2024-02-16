@@ -46,7 +46,7 @@ class WorldfireEffect extends OneShotEffect {
         staticText = "Exile all permanents. Exile all cards from all hands and graveyards. Each player's life total becomes 1";
     }
 
-    public WorldfireEffect(final WorldfireEffect effect) {
+    private WorldfireEffect(final WorldfireEffect effect) {
         super(effect);
     }
 
@@ -57,7 +57,7 @@ class WorldfireEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
             permanent.moveToExile(null, "", source, game);
         }
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {

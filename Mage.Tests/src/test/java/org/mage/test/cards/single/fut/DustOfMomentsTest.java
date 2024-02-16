@@ -54,7 +54,7 @@ public class DustOfMomentsTest extends CardTestPlayerBase {
     addCard(Zone.HAND, playerA, "Deep-Sea Kraken");
     addCard(Zone.HAND, playerA, "Dust of Moments");
 
-    castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Chronozoa");
+    castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Chronozoa", true);
     activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Suspend"); // Casts Deep-Sea Kraken as Suspend
     castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Dust of Moments");
   }

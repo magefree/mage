@@ -29,7 +29,7 @@ public final class OketraTheTrue extends CardImpl {
     public OketraTheTrue(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GOD);
         this.power = new MageInt(3);
         this.toughness = new MageInt(6);
@@ -44,7 +44,7 @@ public final class OketraTheTrue extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new OketraTheTrueRestrictionEffect()));
 
         // {3}{W}: Create a 1/1 white Warrior creature token with vigilance.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new WarriorVigilantToken()), new ManaCostsImpl("{3}{W}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new WarriorVigilantToken()), new ManaCostsImpl<>("{3}{W}")));
     }
 
     private OketraTheTrue(final OketraTheTrue card) {
@@ -59,12 +59,12 @@ public final class OketraTheTrue extends CardImpl {
 
 class OketraTheTrueRestrictionEffect extends RestrictionEffect {
 
-    public OketraTheTrueRestrictionEffect() {
+    OketraTheTrueRestrictionEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "{this} can't attack or block unless you control at least three other creatures";
     }
 
-    public OketraTheTrueRestrictionEffect(final OketraTheTrueRestrictionEffect effect) {
+    private OketraTheTrueRestrictionEffect(final OketraTheTrueRestrictionEffect effect) {
         super(effect);
     }
 
@@ -90,7 +90,7 @@ class OketraTheTrueRestrictionEffect extends RestrictionEffect {
         if (permanent.getId().equals(source.getSourceId())) {
             Player controller = game.getPlayer(source.getControllerId());
             if (controller != null) {
-                int permanentsOnBattlefield = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game);
+                int permanentsOnBattlefield = game.getBattlefield().count(filter, source.getControllerId(), source, game);
                 return (ComparisonType.compare(permanentsOnBattlefield, ComparisonType.FEWER_THAN, 4));
             }
             return true;

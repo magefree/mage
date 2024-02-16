@@ -26,7 +26,7 @@ public final class GerrardCapashen extends CardImpl {
 
     public GerrardCapashen(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SOLDIER);
         this.power = new MageInt(3);
@@ -40,7 +40,7 @@ public final class GerrardCapashen extends CardImpl {
 
         // {3}{W}: Tap target creature. Activate this ability only if {this} is attacking.
         Ability ability2 = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(),
-                new ManaCostsImpl("{3}{W}"), SourceAttackingCondition.instance);
+                new ManaCostsImpl<>("{3}{W}"), SourceAttackingCondition.instance);
         ability2.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability2);
     }
@@ -57,12 +57,12 @@ public final class GerrardCapashen extends CardImpl {
 
 class GerrardCapashenEffect extends OneShotEffect {
 
-    public GerrardCapashenEffect() {
+    GerrardCapashenEffect() {
         super(Outcome.GainLife);
         staticText = "you gain 1 life for each card in target opponent's hand.";
     }
 
-    public GerrardCapashenEffect(final GerrardCapashenEffect effect) {
+    private GerrardCapashenEffect(final GerrardCapashenEffect effect) {
         super(effect);
     }
 

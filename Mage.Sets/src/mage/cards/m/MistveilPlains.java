@@ -45,7 +45,7 @@ public final class MistveilPlains extends CardImpl {
         Ability ability = new ActivateIfConditionActivatedAbility(
                 Zone.BATTLEFIELD,
                 new MistveilPlainsGraveyardToLibraryEffect(),
-                new ManaCostsImpl("{W}"),
+                new ManaCostsImpl<>("{W}"),
                 new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 1)
         );
         ability.addTarget(new TargetCardInYourGraveyard());
@@ -66,12 +66,12 @@ public final class MistveilPlains extends CardImpl {
 
 class MistveilPlainsGraveyardToLibraryEffect extends OneShotEffect {
 
-    public MistveilPlainsGraveyardToLibraryEffect() {
+    MistveilPlainsGraveyardToLibraryEffect() {
         super(Outcome.Benefit);
         this.staticText = "Put target card from your graveyard on the bottom of your library";
     }
 
-    public MistveilPlainsGraveyardToLibraryEffect(final MistveilPlainsGraveyardToLibraryEffect effect) {
+    private MistveilPlainsGraveyardToLibraryEffect(final MistveilPlainsGraveyardToLibraryEffect effect) {
         super(effect);
     }
 

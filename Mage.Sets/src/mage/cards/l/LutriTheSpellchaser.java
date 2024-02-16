@@ -41,7 +41,7 @@ public final class LutriTheSpellchaser extends CardImpl {
     public LutriTheSpellchaser(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U/R}{U/R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELEMENTAL);
         this.subtype.add(SubType.OTTER);
         this.power = new MageInt(3);
@@ -83,7 +83,7 @@ enum LutriTheSpellchaserCompanionCondition implements CompanionCondition {
     }
 
     @Override
-    public boolean isLegal(Set<Card> deck, int startingHandSize) {
+    public boolean isLegal(Set<Card> deck, int minimumDeckSize) {
         Map<String, Integer> cardMap = new HashMap<>();
         deck.stream()
                 .filter(card -> !card.hasCardTypeForDeckbuilding(CardType.LAND))

@@ -21,14 +21,14 @@ public final class FrostpeakYeti extends CardImpl {
     public FrostpeakYeti(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");
 
-        this.addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
         this.subtype.add(SubType.YETI);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
         // {1}{S}: Frostpeak Yeti can't be blocked this turn.
         this.addAbility(new SimpleActivatedAbility(
-                new CantBeBlockedSourceEffect(Duration.EndOfTurn), new ManaCostsImpl("{1}{S}")
+                new CantBeBlockedSourceEffect(Duration.EndOfTurn), new ManaCostsImpl<>("{1}{S}")
         ));
     }
 

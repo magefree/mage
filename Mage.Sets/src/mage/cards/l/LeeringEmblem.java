@@ -12,6 +12,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
@@ -22,8 +23,12 @@ public final class LeeringEmblem extends CardImpl {
     public LeeringEmblem(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
         this.subtype.add(SubType.EQUIPMENT);
+
+        // Whenever you cast a spell, equipped creature gets +2/+2 until end of turn.
         this.addAbility(new SpellCastControllerTriggeredAbility(new BoostEquippedEffect(2, 2, Duration.EndOfTurn), false));
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
+
+        // Equip {2}
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2), new TargetControlledCreaturePermanent(), false));
     }
 
     private LeeringEmblem(final LeeringEmblem card) {

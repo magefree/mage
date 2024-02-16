@@ -60,9 +60,10 @@ class MasterOfCrueltiesTriggeredAbility extends TriggeredAbilityImpl {
     public MasterOfCrueltiesTriggeredAbility() {
         super(Zone.BATTLEFIELD, new MasterOfCrueltiesEffect());
         this.addEffect(new MasterOfCrueltiesNoDamageEffect());
+        setTriggerPhrase("Whenever {this} attacks a player and isn't blocked, ");
     }
 
-    public MasterOfCrueltiesTriggeredAbility(final MasterOfCrueltiesTriggeredAbility ability) {
+    private MasterOfCrueltiesTriggeredAbility(final MasterOfCrueltiesTriggeredAbility ability) {
         super(ability);
     }
 
@@ -95,21 +96,16 @@ class MasterOfCrueltiesTriggeredAbility extends TriggeredAbilityImpl {
         }
         return false;
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} attacks a player and isn't blocked, ";
-    }
 }
 
 class MasterOfCrueltiesEffect extends OneShotEffect {
 
-    public MasterOfCrueltiesEffect() {
+    MasterOfCrueltiesEffect() {
         super(Outcome.Benefit);
         this.staticText = "that player's life total becomes 1";
     }
 
-    public MasterOfCrueltiesEffect(final MasterOfCrueltiesEffect effect) {
+    private MasterOfCrueltiesEffect(final MasterOfCrueltiesEffect effect) {
         super(effect);
     }
 
@@ -131,12 +127,12 @@ class MasterOfCrueltiesEffect extends OneShotEffect {
 
 class MasterOfCrueltiesNoDamageEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public MasterOfCrueltiesNoDamageEffect() {
+    MasterOfCrueltiesNoDamageEffect() {
         super(Duration.EndOfCombat, Outcome.PreventDamage);
         staticText = "{this} assigns no combat damage this combat";
     }
 
-    public MasterOfCrueltiesNoDamageEffect(final MasterOfCrueltiesNoDamageEffect effect) {
+    private MasterOfCrueltiesNoDamageEffect(final MasterOfCrueltiesNoDamageEffect effect) {
         super(effect);
     }
 

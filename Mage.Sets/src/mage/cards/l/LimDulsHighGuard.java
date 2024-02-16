@@ -28,7 +28,7 @@ public final class LimDulsHighGuard extends CardImpl {
         // First strike
         this.addAbility(FirstStrikeAbility.getInstance());
         // {1}{B}: Regenerate Lim-Dul's High Guard.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{1}{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{1}{B}")));
     }
 
     private LimDulsHighGuard(final LimDulsHighGuard card) {

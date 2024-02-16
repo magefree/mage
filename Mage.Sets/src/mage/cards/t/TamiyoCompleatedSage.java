@@ -25,6 +25,7 @@ import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetadjustment.TargetAdjuster;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -36,7 +37,7 @@ public final class TamiyoCompleatedSage extends CardImpl {
     public TamiyoCompleatedSage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{G}{G/U/P}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.TAMIYO);
         this.setStartingLoyalty(5);
 
@@ -108,7 +109,7 @@ class TamiyoCompleatedSageEffect extends OneShotEffect {
         }
         player.moveCards(card, Zone.EXILED, source, game);
         return new CreateTokenCopyTargetEffect().setSavedPermanent(
-                new PermanentCard(card, source.getControllerId(), game)
+                new PermanentCard(CardUtil.getDefaultCardSideForBattlefield(game, card), source.getControllerId(), game)
         ).apply(game, source);
     }
 }

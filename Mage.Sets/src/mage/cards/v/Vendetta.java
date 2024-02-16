@@ -41,12 +41,12 @@ public final class Vendetta extends CardImpl {
 
 class VendettaEffect extends OneShotEffect {
 
-    public VendettaEffect() {
+    VendettaEffect() {
         super(Outcome.Damage);
         staticText = "You lose life equal to that creature's toughness";
     }
 
-    public VendettaEffect(final VendettaEffect effect) {
+    private VendettaEffect(final VendettaEffect effect) {
         super(effect);
     }
 

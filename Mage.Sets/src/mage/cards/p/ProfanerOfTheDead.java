@@ -50,12 +50,12 @@ public final class ProfanerOfTheDead extends CardImpl {
 
 class ProfanerOfTheDeadReturnEffect extends OneShotEffect {
 
-    public ProfanerOfTheDeadReturnEffect() {
+    ProfanerOfTheDeadReturnEffect() {
         super(Outcome.ReturnToHand);
         staticText = "return to their owners' hands all creatures your opponents control with toughness less than the exploited creature's toughness";
     }
 
-    public ProfanerOfTheDeadReturnEffect(final ProfanerOfTheDeadReturnEffect effect) {
+    private ProfanerOfTheDeadReturnEffect(final ProfanerOfTheDeadReturnEffect effect) {
         super(effect);
     }
 
@@ -68,7 +68,7 @@ class ProfanerOfTheDeadReturnEffect extends OneShotEffect {
             filter.add(TargetController.OPPONENT.getControllerPredicate());
             filter.add(new ToughnessPredicate(ComparisonType.FEWER_THAN, exploitedCreature.getToughness().getValue()));
             Cards cardsToHand = new CardsImpl();
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
                 cardsToHand.add(permanent);
             }
             controller.moveCards(cardsToHand, Zone.HAND, source, game);

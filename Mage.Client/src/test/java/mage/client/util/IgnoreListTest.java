@@ -5,9 +5,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static junit.framework.TestCase.assertEquals;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.core.Is.is;
+import static junit.framework.TestCase.*;
 
 public class IgnoreListTest {
 
@@ -23,42 +21,69 @@ public class IgnoreListTest {
 
     @Test
     public void ignoreListEmpty() throws Exception {
-        assertThat(IgnoreList.getIgnoreListInfo("test.com.xx"), is("<font color=yellow>Current ignore list on test.com.xx (total: 0): []</font>"));
+        assertEquals(IgnoreList.getIgnoreListInfo("test.com.xx"), "<font color=yellow>Current ignore list on test.com.xx (total: 0): []</font>");
     }
 
     @Test
     public void ignoreList() throws Exception {
         final String test = IgnoreList.ignore("test.com.xx", "test");
+        assertEquals(test, "Added test to your ignore list on test.com.xx (total: 1)");
+
         final String kranken = IgnoreList.ignore("test.com.xx", "kranken");
-        assertThat(IgnoreList.getIgnoreListInfo("test.com.xx"), is("<font color=yellow>Current ignore list on test.com.xx (total: 2): [kranken, test]</font>"));
-        assertThat(test, is("Added test to your ignore list on test.com.xx (total: 1)"));
-        assertThat(kranken, is("Added kranken to your ignore list on test.com.xx (total: 2)"));
+        assertEquals(kranken, "Added kranken to your ignore list on test.com.xx (total: 2)");
+
+        assertEquals(IgnoreList.getIgnoreListInfo("test.com.xx"), "<font color=yellow>Current ignore list on test.com.xx (total: 2): [kranken, test]</font>");
     }
 
     @Test
     public void ignore() throws Exception {
-        assertThat(IgnoreList.userIsIgnored("test.com.xx", "kranken"), is(false));
-        final String r = IgnoreList.ignore("test.com.xx", "kranken");
-        assertThat(IgnoreList.userIsIgnored("test.com.xx", "kranken"), is(true));
-        assertEquals(r, "Added kranken to your ignore list on test.com.xx (total: 1)");
+        ignore_a_user("kranken");
+    }
+
+    /**
+     * Reported bug: https://github.com/magefree/mage/issues/9682
+     */
+    @Test
+    public void ignoreNameWithSpaces() {
+        ignore_a_user("test test test");
+    }
+
+    /**
+     * Reported bug: https://github.com/magefree/mage/issues/9682
+     */
+    @Test
+    public void ignoreSpaceName() {
+        ignore_a_user(" ");
+    }
+
+    private void ignore_a_user(String username) {
+        assertFalse(IgnoreList.userIsIgnored("test.com.xx", username));
+
+        final String responce = IgnoreList.ignore("test.com.xx", username);
+        assertEquals(responce, "Added " + username + " to your ignore list on test.com.xx (total: 1)");
+
+        assertTrue(IgnoreList.userIsIgnored("test.com.xx", username));
     }
 
     @Test
     public void ignoreAgain() throws Exception {
-        assertThat(IgnoreList.userIsIgnored("test.com.xx", "kranken"), is(false));
+        assertFalse(IgnoreList.userIsIgnored("test.com.xx", "kranken"));
         IgnoreList.ignore("test.com.xx", "kranken");
-        final String r = IgnoreList.ignore("test.com.xx", "kranken");
-        assertThat(IgnoreList.userIsIgnored("test.com.xx", "kranken"), is(true));
-        assertEquals(r, "kranken is already on your ignore list on test.com.xx");
+
+        final String response = IgnoreList.ignore("test.com.xx", "kranken");
+        assertEquals(response, "kranken is already on your ignore list on test.com.xx");
+
+        assertTrue(IgnoreList.userIsIgnored("test.com.xx", "kranken"));
     }
 
     @Test
     public void ignoreDefaultResponse() throws Exception {
-        final String r1 = IgnoreList.ignore("test.com.xx", "");
-        final String r2 = IgnoreList.ignore("test.com.xx", null);
-        assertThat(IgnoreList.getIgnoreListInfo("test.com.xx"), is("<font color=yellow>Current ignore list on test.com.xx (total: 0): []</font>"));
-        assertEquals(r1, r2);
-        assertEquals(r2, "<font color=yellow>Current ignore list on test.com.xx (total: 0): []</font>");
+        final String response1 = IgnoreList.ignore("test.com.xx", "");
+        final String response2 = IgnoreList.ignore("test.com.xx", null);
+        assertEquals(response1, response2);
+        assertEquals(response2, "<font color=yellow>Current ignore list on test.com.xx (total: 0): []</font>");
+
+        assertEquals(IgnoreList.getIgnoreListInfo("test.com.xx"), "<font color=yellow>Current ignore list on test.com.xx (total: 0): []</font>");
     }
 
     @Test
@@ -66,20 +91,22 @@ public class IgnoreListTest {
         for (int i = 0; i < 500; i++) {
             IgnoreList.ignore("test.com.xx", "" + i);
         }
-        final String r = IgnoreList.ignore("test.com.xx", "lul");
-        assertEquals(r, "Your ignore list is too big (max 500), remove a user to be able to add a new one.");
-        assertThat(IgnoreList.getIgnoredUsers("test.com.xx").size(), is(500));
+        final String response = IgnoreList.ignore("test.com.xx", "lul");
+        assertEquals(response, "Your ignore list is too big (max 500), remove a user to be able to add a new one.");
+
+        assertEquals(IgnoreList.getIgnoredUsers("test.com.xx").size(), 500);
     }
 
     @Test
     public void unignore() throws Exception {
-        assertThat(IgnoreList.userIsIgnored("test.com.xx", "kranken"), is(false));
+        assertFalse(IgnoreList.userIsIgnored("test.com.xx", "kranken"));
+
         IgnoreList.ignore("test.com.xx", "kranken");
-        assertThat(IgnoreList.userIsIgnored("test.com.xx", "kranken"), is(true));
-        final String r = IgnoreList.unignore("test.com.xx", "kranken");
-        assertThat(IgnoreList.userIsIgnored("test.com.xx", "kranken"), is(false));
-        assertEquals(r, "Removed kranken from your ignore list on test.com.xx (total: 0)");
+        assertTrue(IgnoreList.userIsIgnored("test.com.xx", "kranken"));
 
+        final String response = IgnoreList.unignore("test.com.xx", "kranken");
+        assertEquals(response, "Removed kranken from your ignore list on test.com.xx (total: 0)");
+
+        assertFalse(IgnoreList.userIsIgnored("test.com.xx", "kranken"));
     }
-
 }

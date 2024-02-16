@@ -34,7 +34,7 @@ public final class DereviEmpyrialTactician extends CardImpl {
 
     public DereviEmpyrialTactician(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}{W}{U}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.BIRD);
         this.subtype.add(SubType.WIZARD);
 
@@ -69,7 +69,7 @@ class DereviEmpyrialTacticianTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, effect);
     }
 
-    public DereviEmpyrialTacticianTriggeredAbility(DereviEmpyrialTacticianTriggeredAbility ability) {
+    private DereviEmpyrialTacticianTriggeredAbility(final DereviEmpyrialTacticianTriggeredAbility ability) {
         super(ability);
     }
 
@@ -111,7 +111,7 @@ class DereviEmpyrialTacticianTriggeredAbility extends TriggeredAbilityImpl {
 class DereviEmpyrialTacticianAbility extends ActivatedAbilityImpl {
 
     public DereviEmpyrialTacticianAbility() {
-        super(Zone.COMMAND, new PutCommanderOnBattlefieldEffect(), new ManaCostsImpl("{1}{G}{W}{U}"));
+        super(Zone.COMMAND, new PutCommanderOnBattlefieldEffect(), new ManaCostsImpl<>("{1}{G}{W}{U}"));
     }
 
     @Override
@@ -123,7 +123,7 @@ class DereviEmpyrialTacticianAbility extends ActivatedAbilityImpl {
         return super.canActivate(playerId, game);
     }
 
-    public DereviEmpyrialTacticianAbility(DereviEmpyrialTacticianAbility ability) {
+    private DereviEmpyrialTacticianAbility(final DereviEmpyrialTacticianAbility ability) {
         super(ability);
     }
 
@@ -136,12 +136,12 @@ class DereviEmpyrialTacticianAbility extends ActivatedAbilityImpl {
 
 class PutCommanderOnBattlefieldEffect extends OneShotEffect {
 
-    public PutCommanderOnBattlefieldEffect() {
+    PutCommanderOnBattlefieldEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Put Derevi onto the battlefield from the command zone";
     }
 
-    public PutCommanderOnBattlefieldEffect(final PutCommanderOnBattlefieldEffect effect) {
+    private PutCommanderOnBattlefieldEffect(final PutCommanderOnBattlefieldEffect effect) {
         super(effect);
     }
 

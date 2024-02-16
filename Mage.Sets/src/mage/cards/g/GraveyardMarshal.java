@@ -40,7 +40,7 @@ public final class GraveyardMarshal extends CardImpl {
                         new ZombieToken(),
                         1, true, false
                 ),
-                new ManaCostsImpl("{2}{B}")
+                new ManaCostsImpl<>("{2}{B}")
         );
         ability.addCost(new ExileFromGraveCost(
                 new TargetCardInYourGraveyard(filter)

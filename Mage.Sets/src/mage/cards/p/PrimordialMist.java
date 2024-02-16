@@ -45,7 +45,7 @@ public final class PrimordialMist extends CardImpl {
 
         // Exile a face-down permanent you control face-up: You may play that card this turn
         TargetPermanent target = new TargetPermanent(filter);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new PrimordialMistCastFromExileEffect(),
                 new PrimordialMistCost(target));
@@ -68,10 +68,10 @@ class PrimordialMistCost extends CostImpl {
 
     public PrimordialMistCost(TargetPermanent target) {
         this.target = target;
-        this.text = "Exile a face-down permanent you control face-up";
+        this.text = "Exile a face-down permanent you control face up";
     }
 
-    public PrimordialMistCost(final PrimordialMistCost cost) {
+    private PrimordialMistCost(final PrimordialMistCost cost) {
         super(cost);
         this.target = cost.target.copy();
     }
@@ -83,14 +83,14 @@ class PrimordialMistCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
-        return target.canChoose(source.getSourceId(), controllerId, game);
+        return target.canChoose(controllerId, source, game);
     }
 
     @Override
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         Player controller = game.getPlayer(controllerId);
         if (controller != null) {
-            if (target.choose(Outcome.Exile, controllerId, source.getSourceId(), game)) {
+            if (target.choose(Outcome.Exile, controllerId, source.getSourceId(), source, game)) {
                 Card card = game.getCard(source.getSourceId());
                 if (card != null) {
                     Permanent sourcePermanent = game.getPermanent(source.getSourceId());
@@ -119,12 +119,12 @@ class PrimordialMistCost extends CostImpl {
 
 class PrimordialMistCastFromExileEffect extends AsThoughEffectImpl {
 
-    public PrimordialMistCastFromExileEffect() {
+    PrimordialMistCastFromExileEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
-        staticText = "Exile a face-down permanent you control face up: You may play that card this turn.";
+        staticText = "You may play that card this turn.";
     }
 
-    public PrimordialMistCastFromExileEffect(final PrimordialMistCastFromExileEffect effect) {
+    private PrimordialMistCastFromExileEffect(final PrimordialMistCastFromExileEffect effect) {
         super(effect);
     }
 

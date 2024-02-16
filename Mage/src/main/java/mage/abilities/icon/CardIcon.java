@@ -19,6 +19,13 @@ public interface CardIcon extends Copyable<CardIcon> {
     String getHint();
 
     /**
+     * Whether or not this icon can be combined with others with the same icon type
+     */
+    default boolean canBeCombined() {
+        return getText().isEmpty();
+    }
+
+    /**
      * Combined info (text + hint)
      *
      * @return

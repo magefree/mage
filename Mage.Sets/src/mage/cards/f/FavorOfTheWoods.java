@@ -30,7 +30,7 @@ public final class FavorOfTheWoods extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Neutral));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // Whenever enchanted creature blocks, you gain 3 life.
         this.addAbility(new BlocksAttachedTriggeredAbility(new GainLifeEffect(3), "enchanted", false));

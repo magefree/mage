@@ -45,8 +45,8 @@ public class CommanderReplaceEffectTest extends CardTestCommanderDuelBase {
         assertPermanentCount(playerA, "Daxos of Meletis", 0);
         assertGraveyardCount(playerA, "Daxos of Meletis", 0);
 
-        assertPermanentCount(playerB, "Phyrexian Horror", 1);
-        assertPowerToughness(playerB, "Phyrexian Horror", 1, 1);
+        assertPermanentCount(playerB, "Phyrexian Horror Token", 1);
+        assertPowerToughness(playerB, "Phyrexian Horror Token", 1, 1);
     }
 
     @Test
@@ -64,7 +64,7 @@ public class CommanderReplaceEffectTest extends CardTestCommanderDuelBase {
 
         // Daxos of Meletis can't be blocked by creatures with power 3 or greater.
         // Whenever Daxos of Meletis deals combat damage to a player, exile the top card of that player's library. You gain life equal to that card's converted mana cost. Until end of turn, you may cast that card and you may spend mana as though it were mana of any color to cast it.
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Daxos of Meletis");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Daxos of Meletis", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Gift of Immortality", "Daxos of Meletis");
 
         // Destroy all creatures, then put an X/X colorless Horror artifact creature token onto the battlefield, where X is the number of creatures destroyed this way.
@@ -74,19 +74,24 @@ public class CommanderReplaceEffectTest extends CardTestCommanderDuelBase {
         setStopAt(3, PhaseStep.UPKEEP);
         execute();
 
-        assertPermanentCount(playerB, "Phyrexian Horror", 1);
-        assertPowerToughness(playerB, "Phyrexian Horror", 1, 1);
+        assertPermanentCount(playerB, "Phyrexian Horror Token", 1);
+        assertPowerToughness(playerB, "Phyrexian Horror Token", 1, 1);
 
         assertPermanentCount(playerA, "Daxos of Meletis", 1);
         assertPermanentCount(playerA, "Gift of Immortality", 1);
 
     }
 
-    // https://github.com/magefree/mage/issues/5905
-    /* From the rulings of Soulherder:
-        If a creature is exiled but ends up in another zone (most likely because
-        it’s a player’s commander in the Commander variant), Soulherder’s first ability triggers.
-    I exiled an opponents Commander, but Soulherder did not trigger.*/
+    /**
+     * https://github.com/magefree/mage/issues/5905
+     * I exiled an opponents Commander, but Soulherder did not trigger.
+     *
+     * From the rulings of Soulherder:
+     *      If a creature is exiled but ends up in another zone
+     *      (most likely because it’s a player’s commander in the Commander variant),
+     *      Soulherder’s first ability triggers.
+     */
+
     @Test
     public void soulherderAndExiledCommanders() {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
@@ -97,23 +102,26 @@ public class CommanderReplaceEffectTest extends CardTestCommanderDuelBase {
         // then return that card to the battlefield under its owner's control.
         addCard(Zone.HAND, playerA, "Soulherder", 1); // Creature {1}{W}{U}
 
+        setStrictChooseMode(true);
+
         // Daxos of Meletis can't be blocked by creatures with power 3 or greater.
-        // Whenever Daxos of Meletis deals combat damage to a player, exile the top card of that player's library. You gain life equal to that card's converted mana cost. Until end of turn, you may cast that card and you may spend mana as though it were mana of any color to cast it.
+        // Whenever Daxos of Meletis deals combat damage to a player, exile the top card of that player's library.
+        // You gain life equal to that card's converted mana cost.
+        // Until end of turn, you may cast that card and you may spend mana as though it were mana of any color to cast it.
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Daxos of Meletis");
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Soulherder");
 
-        setChoice(playerA, true); // Use Soulherder's triggered ability
+        // Target and choices for Soulherder during turn 3's upkeep
         addTarget(playerA, "Daxos of Meletis");
-        setChoice(playerA, true); // Move Daxos to command Zone
+        setChoice(playerA, true); // Use Soulherder's triggered ability
 
-        setStopAt(2, PhaseStep.UPKEEP);
+        setStopAt(3, PhaseStep.UPKEEP);
         execute();
 
         assertPermanentCount(playerA, "Soulherder", 1);
         assertPermanentCount(playerA, "Daxos of Meletis", 1);
         assertCommandZoneCount(playerA, "Daxos of Meletis", 0);
-        assertPowerToughness(playerA, "Soulherder", 2, 2);
-
+        assertPowerToughness(playerA, "Soulherder", 2, 2); // 1/1 + the +1/+1 for bouncing Daxos
     }
 
     @Test

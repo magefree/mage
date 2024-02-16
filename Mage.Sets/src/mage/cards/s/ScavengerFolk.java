@@ -30,7 +30,7 @@ public final class ScavengerFolk extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {G}, {T}, Sacrifice Scavenger Folk: Destroy target artifact.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{G}"));                                                                                    ability.addCost(new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl<>("{G}"));                                                                                    ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetArtifactPermanent());
         this.addAbility(ability);

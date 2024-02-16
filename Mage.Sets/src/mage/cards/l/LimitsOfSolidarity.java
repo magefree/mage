@@ -28,14 +28,14 @@ public final class LimitsOfSolidarity extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.EndOfTurn));
         Effect effect = new UntapTargetEffect();
-        effect.setText("Untap it");
+        effect.setText("Untap that creature");
         this.getSpellAbility().addEffect(effect);
         effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("It gains haste until end of turn");
         this.getSpellAbility().addEffect(effect);
 
         // Cycling {2}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
 
     }
 

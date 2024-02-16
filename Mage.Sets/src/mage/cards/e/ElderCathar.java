@@ -58,7 +58,7 @@ class ElderCatharAddCountersTargetEffect extends OneShotEffect {
         staticText = "put a +1/+1 counter on target creature you control. If that creature is a Human, put two +1/+1 counters on it instead";
     }
 
-    public ElderCatharAddCountersTargetEffect(final ElderCatharAddCountersTargetEffect effect) {
+    private ElderCatharAddCountersTargetEffect(final ElderCatharAddCountersTargetEffect effect) {
         super(effect);
         this.counter = effect.counter.copy();
         this.counter2 = effect.counter2.copy();

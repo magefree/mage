@@ -7,7 +7,6 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
-import static org.mage.test.utils.ManaOptionsTestUtils.assertDuplicatedManaOptions;
 import static org.mage.test.utils.ManaOptionsTestUtils.assertManaOptions;
 
 /**
@@ -27,7 +26,6 @@ public class HarvesterDruidTest extends CardTestPlayerBase {
         execute();
 
         ManaOptions options = playerA.getAvailableManaTest(currentGame);
-        assertDuplicatedManaOptions(options);
         Assert.assertEquals(2, options.size());
         assertManaOptions("{U}{R}{R}", options);
         assertManaOptions("{U}{U}{R}", options);
@@ -45,7 +43,6 @@ public class HarvesterDruidTest extends CardTestPlayerBase {
         execute();
 
         ManaOptions options = playerA.getAvailableManaTest(currentGame);
-        assertDuplicatedManaOptions(options);
         Assert.assertEquals(3, options.size());
         assertManaOptions("{U}{R}{R}{R}", options);
         assertManaOptions("{U}{U}{R}{R}", options);

@@ -51,7 +51,7 @@ public final class ShamanEnKor extends CardImpl {
         this.addAbility(ability);
 
         // {1}{W}: The next time a source of your choice would deal damage to target creature this turn, that damage is dealt to Shaman en-Kor instead.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ShamanEnKorRedirectFromTargetEffect(), new ManaCostsImpl("{1}{W}"));
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ShamanEnKorRedirectFromTargetEffect(), new ManaCostsImpl<>("{1}{W}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
@@ -76,7 +76,7 @@ class ShamanEnKorRedirectFromTargetEffect extends RedirectionEffect {
         staticText = "The next time a source of your choice would deal damage to target creature this turn, that damage is dealt to {this} instead";
     }
 
-    ShamanEnKorRedirectFromTargetEffect(final ShamanEnKorRedirectFromTargetEffect effect) {
+    private ShamanEnKorRedirectFromTargetEffect(final ShamanEnKorRedirectFromTargetEffect effect) {
         super(effect);
         sourceObject = effect.sourceObject;
     }
@@ -86,7 +86,7 @@ class ShamanEnKorRedirectFromTargetEffect extends RedirectionEffect {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             TargetSource target = new TargetSource();
-            target.choose(Outcome.PreventDamage, player.getId(), source.getSourceId(), game);
+            target.choose(Outcome.PreventDamage, player.getId(), source.getSourceId(), source, game);
             this.sourceObject = new MageObjectReference(target.getFirstTarget(), game);
         } else {
             discard();
@@ -102,7 +102,7 @@ class ShamanEnKorRedirectFromTargetEffect extends RedirectionEffect {
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent permanent = game.getBattlefield().getPermanent(source.getSourceId());
         if (permanent != null) {
-            if (filter.match(permanent, permanent.getId(), permanent.getControllerId(), game)) {
+            if (filter.match(permanent, permanent.getControllerId(), source, game)) {
                 if (sourceObject.equals(new MageObjectReference(event.getSourceId(), game))) {
                     redirectTarget = new TargetPermanent();
                     redirectTarget.add(source.getSourceId(), game);
@@ -111,11 +111,6 @@ class ShamanEnKorRedirectFromTargetEffect extends RedirectionEffect {
             }
         }
         return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

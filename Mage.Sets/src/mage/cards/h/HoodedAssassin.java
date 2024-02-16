@@ -40,8 +40,7 @@ public final class HoodedAssassin extends CardImpl {
         // * Put a +1/+1 counter on Hooded Assassin.        
         Ability ability = new EntersBattlefieldTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false);
         // * Destroy target creature that was dealt damage this turn.
-        Mode mode = new Mode();
-        mode.addEffect(new DestroyTargetEffect());
+        Mode mode = new Mode(new DestroyTargetEffect());
         mode.addTarget(new TargetCreaturePermanent(filter));
         ability.addMode(mode);
         this.addAbility(ability);        

@@ -74,12 +74,12 @@ enum OpenSeasonAdjuster implements TargetAdjuster {
 
 class OpenSeasonRestrictionEffect extends RestrictionEffect {
 
-    public OpenSeasonRestrictionEffect() {
+    OpenSeasonRestrictionEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "Creatures your opponent control with bounty counters on them can't activate abilities";
     }
 
-    public OpenSeasonRestrictionEffect(final OpenSeasonRestrictionEffect effect) {
+    private OpenSeasonRestrictionEffect(final OpenSeasonRestrictionEffect effect) {
         super(effect);
     }
 
@@ -104,12 +104,12 @@ class OpenSeasonRestrictionEffect extends RestrictionEffect {
 
 class OpenSeasonEffect extends OneShotEffect {
 
-    public OpenSeasonEffect() {
+    OpenSeasonEffect() {
         super(Outcome.LoseLife);
-        staticText = "that creature's controler loses 2 life. Each other player gains 2 life";
+        staticText = "that creature's controller loses 2 life. Each other player gains 2 life";
     }
 
-    public OpenSeasonEffect(final OpenSeasonEffect effect) {
+    private OpenSeasonEffect(final OpenSeasonEffect effect) {
         super(effect);
     }
 

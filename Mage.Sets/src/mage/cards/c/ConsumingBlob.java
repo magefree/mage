@@ -1,18 +1,18 @@
 package mage.cards.c;
 
 import mage.MageInt;
-import mage.MageObject;
-import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CardTypesInGraveyardCount;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.hint.common.CardTypesInGraveyardHint;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessPlusOneSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
-import mage.game.Game;
+import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.game.permanent.token.ConsumingBlobOozeToken;
 
 import java.util.UUID;
@@ -22,6 +22,8 @@ import java.util.UUID;
  */
 public final class ConsumingBlob extends CardImpl {
 
+    private static final DynamicValue powerValue = CardTypesInGraveyardCount.YOU;
+
     public ConsumingBlob(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
         
@@ -30,7 +32,7 @@ public final class ConsumingBlob extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Consuming Blob's power is equal to the number of card types among cards in your graveyard and its toughness is equal to that number plus 1.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new ConsumingBlobEffect()).addHint(CardTypesInGraveyardHint.YOU));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessPlusOneSourceEffect(powerValue)));
 
         // At the beginning of your end step, create a green Ooze creature token with "This creature's power is equal to the number of card types among cards in your graveyard and its toughness is equal to that number plus 1".
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
@@ -45,34 +47,5 @@ public final class ConsumingBlob extends CardImpl {
     @Override
     public ConsumingBlob copy() {
         return new ConsumingBlob(this);
-    }
-}
-
-class ConsumingBlobEffect extends ContinuousEffectImpl {
-
-    public ConsumingBlobEffect() {
-        super(Duration.EndOfGame, Layer.PTChangingEffects_7, SubLayer.CharacteristicDefining_7a, Outcome.BoostCreature);
-        staticText = "{this}'s power is equal to the number of card types among cards in your graveyard and its toughness is equal to that number plus 1";
-    }
-
-    public ConsumingBlobEffect(final ConsumingBlobEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public ConsumingBlobEffect copy() {
-        return new ConsumingBlobEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        MageObject target = source.getSourceObject(game);
-        if (target == null) {
-            return false;
-        }
-        int number = CardTypesInGraveyardCount.YOU.calculate(game, source, this);
-        target.getPower().setValue(number);
-        target.getToughness().setValue(number + 1);
-        return true;
     }
 }

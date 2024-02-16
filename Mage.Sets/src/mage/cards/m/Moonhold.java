@@ -34,13 +34,13 @@ public final class Moonhold extends CardImpl {
         ContinuousRuleModifyingEffect effect = new MoonholdEffect();
         ContinuousRuleModifyingEffect effect2 = new MoonholdEffect2();
         effect.setText("Target player can't play lands this turn if {R} was spent to cast this spell");
-        effect2.setText("and can't cast creature spells this turn if {W} was spent to cast it.");
+        effect2.setText("and can't cast creature spells this turn if {W} was spent to cast this spell.");
         this.getSpellAbility().addEffect(new ConditionalContinuousRuleModifyingEffect(
                 effect,
-                new LockedInCondition(new ManaWasSpentCondition(ColoredManaSymbol.R))));
+                new LockedInCondition(ManaWasSpentCondition.RED)));
         this.getSpellAbility().addEffect(new ConditionalContinuousRuleModifyingEffect(
                 effect2,
-                new LockedInCondition(new ManaWasSpentCondition(ColoredManaSymbol.W))));
+                new LockedInCondition(ManaWasSpentCondition.WHITE)));
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new InfoEffect(" <i>(Do both if {R}{W} was spent.)</i>"));
     }
@@ -57,11 +57,11 @@ public final class Moonhold extends CardImpl {
 
 class MoonholdEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public MoonholdEffect() {
+    MoonholdEffect() {
         super(Duration.EndOfTurn, Outcome.Detriment);
     }
 
-    public MoonholdEffect(final MoonholdEffect effect) {
+    private MoonholdEffect(final MoonholdEffect effect) {
         super(effect);
     }
 
@@ -71,13 +71,8 @@ class MoonholdEffect extends ContinuousRuleModifyingEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (mageObject != null) {
             return "you can't play land cards this turn (" + mageObject.getIdName() + ").";
         }
@@ -104,7 +99,7 @@ class MoonholdEffect2 extends ContinuousRuleModifyingEffectImpl {
         super(Duration.EndOfTurn, Outcome.Detriment);
     }
 
-    public MoonholdEffect2(final MoonholdEffect2 effect) {
+    private MoonholdEffect2(final MoonholdEffect2 effect) {
         super(effect);
     }
 
@@ -114,13 +109,8 @@ class MoonholdEffect2 extends ContinuousRuleModifyingEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (mageObject != null) {
             return "You can't play creature cards this turn (" + mageObject.getIdName() + ").";
         }

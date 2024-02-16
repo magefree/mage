@@ -52,9 +52,10 @@ class ContainmentConstructTriggeredAbility extends TriggeredAbilityImpl {
 
     public ContainmentConstructTriggeredAbility() {
         super(Zone.BATTLEFIELD, new ContainmentConstructEffect(), false);
+        setTriggerPhrase("Whenever you discard a card, ");
     }
 
-    public ContainmentConstructTriggeredAbility(final ContainmentConstructTriggeredAbility ability) {
+    private ContainmentConstructTriggeredAbility(final ContainmentConstructTriggeredAbility ability) {
         super(ability);
     }
 
@@ -77,21 +78,16 @@ class ContainmentConstructTriggeredAbility extends TriggeredAbilityImpl {
         }
         return false;
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you discard a card, ";
-    }
 }
 
 class ContainmentConstructEffect extends OneShotEffect {
 
-    public ContainmentConstructEffect() {
+    ContainmentConstructEffect() {
         super(Outcome.Benefit);
         this.staticText = "you may exile that card from your graveyard. If you do, you may play that card this turn";
     }
 
-    public ContainmentConstructEffect(final ContainmentConstructEffect effect) {
+    private ContainmentConstructEffect(final ContainmentConstructEffect effect) {
         super(effect);
     }
 

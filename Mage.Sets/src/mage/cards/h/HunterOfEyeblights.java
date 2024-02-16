@@ -44,7 +44,7 @@ public final class HunterOfEyeblights extends CardImpl {
         this.addAbility(ability);
 
         //{B}{2},{T}: Destroy target creature with a counter on it.
-        Ability ability2 = new SimpleActivatedAbility(new DestroyTargetEffect(), new ManaCostsImpl("{2}{B}"));
+        Ability ability2 = new SimpleActivatedAbility(new DestroyTargetEffect(), new ManaCostsImpl<>("{2}{B}"));
         ability2.addCost(new TapSourceCost());
         ability2.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability2);

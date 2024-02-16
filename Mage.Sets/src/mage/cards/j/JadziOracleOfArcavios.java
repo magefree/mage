@@ -1,6 +1,5 @@
 package mage.cards.j;
 
-import mage.ApprovingObject;
 import mage.abilities.Ability;
 import mage.abilities.common.MagecraftAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -16,24 +15,20 @@ import mage.abilities.hint.common.LandsYouControlHint;
 import mage.cards.Card;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
+import mage.util.CardUtil;
 
 import java.util.UUID;
-import mage.abilities.costs.Costs;
-import mage.cards.AdventureCard;
-import mage.cards.ModalDoubleFacesCardHalf;
-import mage.cards.SplitCard;
-import mage.cards.SplitCardHalf;
 
 /**
  * @author TheElk801
  */
-public final class JadziOracleOfArcavios extends ModalDoubleFacesCard {
+public final class JadziOracleOfArcavios extends ModalDoubleFacedCard {
 
     private static final Condition condition = new PermanentsOnTheBattlefieldCondition(
             StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND, ComparisonType.MORE_THAN, 7
@@ -42,15 +37,14 @@ public final class JadziOracleOfArcavios extends ModalDoubleFacesCard {
     public JadziOracleOfArcavios(UUID ownerId, CardSetInfo setInfo) {
         super(
                 ownerId, setInfo,
-                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.WIZARD}, "{6}{U}{U}",
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.WIZARD}, "{6}{U}{U}",
                 "Journey to the Oracle",
-                new CardType[]{CardType.SORCERY}, new SubType[]{}, "{2}{G}{G}"
+                new SuperType[]{}, new CardType[]{CardType.SORCERY}, new SubType[]{}, "{2}{G}{G}"
         );
 
         // 1.
         // Jadzi, Oracle of Arcavios
         // Legendary Creature - Human Wizard
-        this.getLeftHalfCard().addSuperType(SuperType.LEGENDARY);
         this.getLeftHalfCard().setPT(5, 5);
 
         // Discard a card: Return Jadzi, Oracle of Arcavios to its owner's hand.
@@ -120,96 +114,10 @@ class JadziOracleOfArcaviosEffect extends OneShotEffect {
         }
 
         // query player
-        if (!controller.chooseUse(outcome, "Cast " + card.getName() + " by paying {1}?", source, game)) {
+        if (!controller.chooseUse(outcome, "Cast revealed card " + card.getName() + " by paying {1}?", source, game)) {
             return false;
         }
-
-        // handle split-cards
-        if (card instanceof SplitCard) {
-            SplitCardHalf leftHalfCard = ((SplitCard) card).getLeftHalfCard();
-            SplitCardHalf rightHalfCard = ((SplitCard) card).getRightHalfCard();
-            // get additional cost if any
-            Costs additionalCostsLeft = leftHalfCard.getSpellAbility().getCosts();
-            Costs additionalCostsRight = rightHalfCard.getSpellAbility().getCosts();
-            // set alternative cost and any additional cost
-            controller.setCastSourceIdWithAlternateMana(leftHalfCard.getId(), new ManaCostsImpl<>("{1}"), additionalCostsLeft);
-            controller.setCastSourceIdWithAlternateMana(rightHalfCard.getId(), new ManaCostsImpl<>("{1}"), additionalCostsRight);
-            // allow the card to be cast
-            game.getState().setValue("PlayFromNotOwnHandZone" + leftHalfCard.getId(), Boolean.TRUE);
-            game.getState().setValue("PlayFromNotOwnHandZone" + rightHalfCard.getId(), Boolean.TRUE);
-        }
-
-        // handle MDFC
-        if (card instanceof ModalDoubleFacesCard) {
-            ModalDoubleFacesCardHalf leftHalfCard = ((ModalDoubleFacesCard) card).getLeftHalfCard();
-            ModalDoubleFacesCardHalf rightHalfCard = ((ModalDoubleFacesCard) card).getRightHalfCard();
-            // some MDFC cards are lands.  IE: sea gate restoration
-            if (!leftHalfCard.isLand(game)) {
-                // get additional cost if any
-                Costs additionalCostsMDFCLeft = leftHalfCard.getSpellAbility().getCosts();
-                // set alternative cost and any additional cost
-                controller.setCastSourceIdWithAlternateMana(leftHalfCard.getId(), new ManaCostsImpl<>("{1}"), additionalCostsMDFCLeft);
-            }
-            if (!rightHalfCard.isLand(game)) {
-                // get additional cost if any
-                Costs additionalCostsMDFCRight = rightHalfCard.getSpellAbility().getCosts();
-                // set alternative cost and any additional cost
-                controller.setCastSourceIdWithAlternateMana(rightHalfCard.getId(), new ManaCostsImpl<>("{1}"), additionalCostsMDFCRight);
-            }
-            // allow the card to be cast
-            game.getState().setValue("PlayFromNotOwnHandZone" + leftHalfCard.getId(), Boolean.TRUE);
-            game.getState().setValue("PlayFromNotOwnHandZone" + rightHalfCard.getId(), Boolean.TRUE);
-        }
-
-        // handle adventure cards
-        if (card instanceof AdventureCard) {
-            Card creatureCard = card.getMainCard();
-            Card spellCard = ((AdventureCard) card).getSpellCard();
-            // get additional cost if any
-            Costs additionalCostsCreature = creatureCard.getSpellAbility().getCosts();
-            Costs additionalCostsSpellCard = spellCard.getSpellAbility().getCosts();
-            // set alternative cost and any additional cost
-            controller.setCastSourceIdWithAlternateMana(creatureCard.getId(), new ManaCostsImpl<>("{1}"), additionalCostsCreature);
-            controller.setCastSourceIdWithAlternateMana(spellCard.getId(), new ManaCostsImpl<>("{1}"), additionalCostsSpellCard);
-            // allow the card to be cast
-            game.getState().setValue("PlayFromNotOwnHandZone" + creatureCard.getId(), Boolean.TRUE);
-            game.getState().setValue("PlayFromNotOwnHandZone" + spellCard.getId(), Boolean.TRUE);
-        }
-
-        // normal card
-        if (!(card instanceof SplitCard)
-                || !(card instanceof ModalDoubleFacesCard)
-                || !(card instanceof AdventureCard)) {
-            // get additional cost if any
-            Costs additionalCostsNormalCard = card.getSpellAbility().getCosts();
-            controller.setCastSourceIdWithAlternateMana(card.getMainCard().getId(), new ManaCostsImpl<>("{1}"), additionalCostsNormalCard);
-        }
-
-        // cast it
-        controller.cast(controller.chooseAbilityForCast(card.getMainCard(), game, false),
-                game, false, new ApprovingObject(source, game));
-
-        // turn off effect after cast on every possible card-face
-        if (card instanceof SplitCard) {
-            SplitCardHalf leftHalfCard = ((SplitCard) card).getLeftHalfCard();
-            SplitCardHalf rightHalfCard = ((SplitCard) card).getRightHalfCard();
-            game.getState().setValue("PlayFromNotOwnHandZone" + leftHalfCard.getId(), null);
-            game.getState().setValue("PlayFromNotOwnHandZone" + rightHalfCard.getId(), null);
-        }
-        if (card instanceof ModalDoubleFacesCard) {
-            ModalDoubleFacesCardHalf leftHalfCard = ((ModalDoubleFacesCard) card).getLeftHalfCard();
-            ModalDoubleFacesCardHalf rightHalfCard = ((ModalDoubleFacesCard) card).getRightHalfCard();
-            game.getState().setValue("PlayFromNotOwnHandZone" + leftHalfCard.getId(), null);
-            game.getState().setValue("PlayFromNotOwnHandZone" + rightHalfCard.getId(), null);
-        }
-        if (card instanceof AdventureCard) {
-            Card creatureCard = card.getMainCard();
-            Card spellCard = ((AdventureCard) card).getSpellCard();
-            game.getState().setValue("PlayFromNotOwnHandZone" + creatureCard.getId(), null);
-            game.getState().setValue("PlayFromNotOwnHandZone" + spellCard.getId(), null);
-        }
-        // turn off effect on a normal card
-        game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
+        CardUtil.castSingle(controller, source, game, card, new ManaCostsImpl<>("{1}"));
 
         return true;
     }
@@ -240,7 +148,7 @@ class JourneyToTheOracleEffect extends OneShotEffect {
         TargetCardInHand target = new TargetCardInHand(
                 0, Integer.MAX_VALUE, StaticFilters.FILTER_CARD_LANDS
         );
-        player.choose(Outcome.PutCardInPlay, target, source.getSourceId(), game);
+        player.choose(Outcome.PutCardInPlay, target, source, game);
         return player.moveCards(new CardsImpl(target.getTargets()), Zone.BATTLEFIELD, source, game);
     }
 }

@@ -7,13 +7,12 @@ import mage.abilities.keyword.MenaceAbility;
 import mage.constants.SubType;
 
 /**
- *
  * @author TheElk801
  */
 public final class PirateToken extends TokenImpl {
 
     public PirateToken() {
-        super("Pirate", "2/2 black Pirate creature token with menace");
+        super("Pirate Token", "2/2 black Pirate creature token with menace");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add(SubType.PIRATE);
@@ -22,7 +21,7 @@ public final class PirateToken extends TokenImpl {
         addAbility(new MenaceAbility());
     }
 
-    public PirateToken(final PirateToken token) {
+    private PirateToken(final PirateToken token) {
         super(token);
     }
 

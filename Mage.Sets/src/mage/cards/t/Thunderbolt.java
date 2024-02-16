@@ -31,8 +31,7 @@ public final class Thunderbolt extends CardImpl {
         // Choose one - Thunderbolt deals 3 damage to target player; or Thunderbolt deals 4 damage to target creature with flying.
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
         this.getSpellAbility().addTarget(new TargetPlayerOrPlaneswalker());
-        Mode mode = new Mode();
-        mode.addEffect(new DamageTargetEffect(4));
+        Mode mode = new Mode(new DamageTargetEffect(4));
         mode.addTarget(new TargetCreaturePermanent(filter));
         this.getSpellAbility().addMode(mode);
     }

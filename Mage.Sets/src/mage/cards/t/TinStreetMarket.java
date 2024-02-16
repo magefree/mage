@@ -33,14 +33,15 @@ public final class TinStreetMarket extends CardImpl {
         TargetPermanent auraTarget = new TargetLandPermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Benefit));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
 
         // Enchanted land has "{T}, Discard a card: Draw a card."
         Ability gainAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new TapSourceCost());
         gainAbility.addCost(new DiscardCardCost());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(gainAbility, AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(gainAbility, AttachmentType.AURA,
+                Duration.WhileOnBattlefield, null, "land")));
         
     }
 
@@ -53,4 +54,3 @@ public final class TinStreetMarket extends CardImpl {
         return new TinStreetMarket(this);
     }
 }
-

@@ -57,31 +57,33 @@ class BrightflameEffect extends OneShotEffect {
         staticText = "{this} deals X damage to target creature and each other creature that shares a color with it. You gain life equal to the damage dealt this way.";
     }
 
-    BrightflameEffect(final BrightflameEffect effect) {
+    private BrightflameEffect(final BrightflameEffect effect) {
         super(effect);
         this.amount = effect.amount;
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent target = game.getPermanent(targetPointer.getFirst(game, source));
         int damageDealt = 0;
-        if (target != null) {
-            ObjectColor color = target.getColor(game);
-            damageDealt += target.damage(amount.calculate(game, source, this), source.getSourceId(), source, game);
-            for (Permanent p : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
-                if (!target.getId().equals(p.getId()) && p.getColor(game).shares(color)) {
-                    damageDealt += p.damage(amount.calculate(game, source, this), source.getSourceId(), source, game, false, true);
-                }
-            }
 
-            Player you = game.getPlayer(source.getControllerId());
-            if (you != null && damageDealt > 0) {
-                you.gainLife(damageDealt, game, source);
-            }
-            return true;
+        Permanent target = game.getPermanent(targetPointer.getFirst(game, source));
+        if (target == null) {
+            return false;
         }
-        return false;
+
+        ObjectColor color = target.getColor(game);
+        damageDealt += target.damage(amount.calculate(game, source, this), source.getSourceId(), source, game);
+        for (Permanent p : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
+            if (!target.getId().equals(p.getId()) && p.getColor(game).shares(color)) {
+                damageDealt += p.damage(amount.calculate(game, source, this), source.getSourceId(), source, game, false, true);
+            }
+        }
+
+        Player you = game.getPlayer(source.getControllerId());
+        if (you != null && damageDealt > 0) {
+            you.gainLife(damageDealt, game, source);
+        }
+        return true;
     }
 
     @Override

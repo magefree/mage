@@ -34,12 +34,12 @@ public class GoadTest extends CardTestMultiPlayerBase {
 
     @Override
     protected Game createNewGameAndPlayers() throws GameException, FileNotFoundException {
-        Game game = new FreeForAll(MultiplayerAttackOption.MULTIPLE, RangeOfInfluence.ALL, MulliganType.GAME_DEFAULT.getMulligan(0), 40);
+        Game game = new FreeForAll(MultiplayerAttackOption.MULTIPLE, RangeOfInfluence.ALL, MulliganType.GAME_DEFAULT.getMulligan(0), 40, 7);
         // Player order: A -> D -> C -> B
-        playerA = createPlayer(game, playerA, "PlayerA");
-        playerB = createPlayer(game, playerB, "PlayerB");
-        playerC = createPlayer(game, playerC, "PlayerC");
-        playerD = createPlayer(game, playerD, "PlayerD");
+        playerA = createPlayer(game, "PlayerA");
+        playerB = createPlayer(game, "PlayerB");
+        playerC = createPlayer(game, "PlayerC");
+        playerD = createPlayer(game, "PlayerD");
         return game;
     }
 
@@ -62,6 +62,34 @@ public class GoadTest extends CardTestMultiPlayerBase {
         );
     }
 
+    /**
+     * Checks whether the given attacker is NOT goaded by the provided player(s).
+     *
+     * @param attacker the name of the attacker
+     * @param players  the player(s) that the attacker is supposed to be goaded by.
+     */
+    private void assertNotGoaded(String attacker, TestPlayer... players) {
+        Assert.assertTrue("At least one player should be provided", players.length > 0);
+        Permanent permanent = getPermanent(attacker);
+        Assert.assertNotEquals(
+                "Creature should be goaded by "
+                        + Arrays
+                        .stream(players)
+                        .map(Player::getName)
+                        .reduce((a, b) -> a + ", " + b).orElse(""),
+                permanent.getGoadingPlayers(),
+                Arrays.stream(players)
+                        .map(TestPlayer::getId)
+                        .collect(Collectors.toSet())
+        );
+    }
+
+    /**
+     * Checks whether the given attacker is goaded by the provided player(s).
+     *
+     * @param attacker the name of the attacker
+     * @param players  the player(s) that the attacker is supposed to be goaded by.
+     */
     private void assertGoaded(String attacker, TestPlayer... players) {
         Assert.assertTrue("At least one player should be provided", players.length > 0);
         Permanent permanent = getPermanent(attacker);
@@ -90,7 +118,6 @@ public class GoadTest extends CardTestMultiPlayerBase {
 
         setStopAt(2, PhaseStep.DECLARE_BLOCKERS);
         execute();
-        assertAllCommandsUsed();
 
         assertGoaded(lion, playerA);
         assertAttacking(lion, playerB, playerC);
@@ -109,7 +136,6 @@ public class GoadTest extends CardTestMultiPlayerBase {
 
         setStopAt(2, PhaseStep.DECLARE_BLOCKERS);
         execute();
-        assertAllCommandsUsed();
 
         assertGoaded(lion, playerA);
         assertAttacking(lion, playerC);
@@ -129,7 +155,6 @@ public class GoadTest extends CardTestMultiPlayerBase {
 
         setStopAt(2, PhaseStep.DECLARE_BLOCKERS);
         execute();
-        assertAllCommandsUsed();
 
         assertGoaded(lion, playerA);
         assertAttacking(lion, playerA);
@@ -153,7 +178,6 @@ public class GoadTest extends CardTestMultiPlayerBase {
 
         setStopAt(3, PhaseStep.DECLARE_BLOCKERS);
         execute();
-        assertAllCommandsUsed();
 
         assertGoaded(lion, playerA, playerD);
         assertAttacking(lion, playerB);
@@ -178,7 +202,6 @@ public class GoadTest extends CardTestMultiPlayerBase {
 
         setStopAt(3, PhaseStep.DECLARE_BLOCKERS);
         execute();
-        assertAllCommandsUsed();
 
         assertGoaded(lion, playerA, playerD);
         assertAttacking(lion, playerA, playerD);
@@ -190,8 +213,42 @@ public class GoadTest extends CardTestMultiPlayerBase {
 
         setStopAt(1, PhaseStep.DECLARE_BLOCKERS);
         execute();
-        assertAllCommandsUsed();
 
         assertAttacking("Berserkers of Blood Ridge", playerB, playerC, playerD);
     }
+
+    /**
+     * Reported bug: https://github.com/magefree/mage/issues/9227
+     * Geode Rager (and other goad all effects) goad creatures that enter the battlefield after the effect resolved.
+     * <p>
+     * Ruling:
+     * Creatures that enter the battlefield or come under the target player’s control after Geode Rager’s ability has resolved won’t be goaded.
+     * (2020-09-25)
+     */
+    @Test
+    public void goadAllCorrectAffect() {
+        addCard(Zone.BATTLEFIELD, playerA, "Geode Rager");
+        addCard(Zone.HAND, playerA, "Swamp");
+
+        addCard(Zone.BATTLEFIELD, playerD, "Goblin Balloon Brigade");
+        addCard(Zone.BATTLEFIELD, playerD, "Mountain");
+        addCard(Zone.HAND, playerD, "Goblin Champion");
+
+        setStrictChooseMode(true);
+
+        playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Swamp");
+        addTarget(playerA, playerD); // Goad all of playerD's creatures
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerD, "Goblin Champion");
+        addTarget(playerD, playerC); // Goblin Balloon Brigade attack player C
+        // Should not have to specify a target for Goblin Champion since they aren't goaded
+
+        setStopAt(2, PhaseStep.DECLARE_BLOCKERS);
+
+        execute();
+
+        assertGoaded("Goblin Balloon Brigade", playerA);
+        assertNotGoaded("Goblin Champion", playerA);
+    }
+
 }

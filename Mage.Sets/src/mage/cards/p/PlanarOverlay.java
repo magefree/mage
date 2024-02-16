@@ -40,12 +40,12 @@ public final class PlanarOverlay extends CardImpl {
 
 class PlanarOverlayEffect extends OneShotEffect {
 
-    public PlanarOverlayEffect() {
+    PlanarOverlayEffect() {
         super(Outcome.ReturnToHand);
         this.staticText = "Each player chooses a land they control of each basic land type. Return those lands to their owners' hands";
     }
 
-    public PlanarOverlayEffect(final PlanarOverlayEffect effect) {
+    private PlanarOverlayEffect(final PlanarOverlayEffect effect) {
         super(effect);
     }
 
@@ -67,7 +67,7 @@ class PlanarOverlayEffect extends OneShotEffect {
                         filter.add(landName.getPredicate());
                         filter.add(TargetController.YOU.getControllerPredicate());
                         Target target = new TargetLandPermanent(1, 1, filter, true);
-                        if (target.canChoose(source.getSourceId(), player.getId(), game)) {
+                        if (target.canChoose(player.getId(), source, game)) {
                             player.chooseTarget(outcome, target, source, game);
                             lands.add(game.getPermanent(target.getFirstTarget()));
                         }

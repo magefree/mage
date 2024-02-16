@@ -16,11 +16,11 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -41,8 +41,8 @@ public final class VolrathsCurse extends CardImpl {
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Enchanted creature can't attack or block, and its activated abilities can't be activated. That creature's controller may sacrifice a permanent for that player to ignore this effect until end of turn.
@@ -52,7 +52,7 @@ public final class VolrathsCurse extends CardImpl {
         this.addAbility(new VolrathsCurseSpecialAction());
 
         // {1}{U}: Return Volrath's Curse to its owner's hand.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new ManaCostsImpl("{1}{U}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new ManaCostsImpl<>("{1}{U}")));
 
     }
 
@@ -68,12 +68,12 @@ public final class VolrathsCurse extends CardImpl {
 
 class VolrathsCurseRestrictionEffect extends RestrictionEffect {
 
-    public VolrathsCurseRestrictionEffect() {
+    VolrathsCurseRestrictionEffect() {
         super(Duration.WhileOnBattlefield);
         this.staticText = "Enchanted creature can't attack or block";
     }
 
-    public VolrathsCurseRestrictionEffect(final VolrathsCurseRestrictionEffect effect) {
+    private VolrathsCurseRestrictionEffect(final VolrathsCurseRestrictionEffect effect) {
         super(effect);
     }
 
@@ -106,23 +106,18 @@ class VolrathsCurseRestrictionEffect extends RestrictionEffect {
 
 class VolrathsCurseCantActivateAbilitiesEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public VolrathsCurseCantActivateAbilitiesEffect() {
+    VolrathsCurseCantActivateAbilitiesEffect() {
         super(Duration.WhileOnBattlefield, Outcome.UnboostCreature);
         staticText = ", and its activated abilities can't be activated";
     }
 
-    public VolrathsCurseCantActivateAbilitiesEffect(final VolrathsCurseCantActivateAbilitiesEffect effect) {
+    private VolrathsCurseCantActivateAbilitiesEffect(final VolrathsCurseCantActivateAbilitiesEffect effect) {
         super(effect);
     }
 
     @Override
     public VolrathsCurseCantActivateAbilitiesEffect copy() {
         return new VolrathsCurseCantActivateAbilitiesEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override
@@ -150,12 +145,12 @@ class VolrathsCurseSpecialAction extends SpecialAction {
 
     public VolrathsCurseSpecialAction() {
         super(Zone.BATTLEFIELD);
-        this.addCost(new SacrificeTargetCost(new TargetControlledPermanent(), true));
+        this.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT));
         this.addEffect(new VolrathsCurseIgnoreEffect(keyString));
         this.setMayActivate(TargetController.CONTROLLER_ATTACHED_TO);
     }
 
-    public VolrathsCurseSpecialAction(final VolrathsCurseSpecialAction ability) {
+    private VolrathsCurseSpecialAction(final VolrathsCurseSpecialAction ability) {
         super(ability);
     }
 
@@ -167,12 +162,12 @@ class VolrathsCurseSpecialAction extends SpecialAction {
 
 class VolrathsCurseIgnoreEffect extends OneShotEffect {
 
-    public VolrathsCurseIgnoreEffect(final String keyString) {
+    VolrathsCurseIgnoreEffect(final String keyString) {
         super(Outcome.Benefit);
         this.staticText = "That creature's controller may sacrifice a permanent for that player to ignore this effect until end of turn";
     }
 
-    public VolrathsCurseIgnoreEffect(final VolrathsCurseIgnoreEffect effect) {
+    private VolrathsCurseIgnoreEffect(final VolrathsCurseIgnoreEffect effect) {
         super(effect);
     }
 

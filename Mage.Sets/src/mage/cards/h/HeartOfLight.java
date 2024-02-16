@@ -33,7 +33,7 @@ public final class HeartOfLight extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Prevent all damage that would be dealt to and dealt by enchanted creature.
@@ -52,23 +52,18 @@ public final class HeartOfLight extends CardImpl {
 
 class HeartOfLightEffect extends PreventionEffectImpl {
 
-    public HeartOfLightEffect() {
+    HeartOfLightEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "Prevent all damage that would be dealt to and dealt by enchanted creature";
     }
 
-    public HeartOfLightEffect(final HeartOfLightEffect effect) {
+    private HeartOfLightEffect(final HeartOfLightEffect effect) {
         super(effect);
     }
 
     @Override
     public HeartOfLightEffect copy() {
         return new HeartOfLightEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

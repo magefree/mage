@@ -30,7 +30,7 @@ public final class Rhox extends CardImpl {
         // You may have Rhox assign its combat damage as though it weren't blocked.
         this.addAbility(DamageAsThoughNotBlockedAbility.getInstance());
         // {2}{G}: Regenerate Rhox.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{2}{G}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{2}{G}")));
     }
 
     private Rhox(final Rhox card) {

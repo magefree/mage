@@ -1,19 +1,19 @@
 
 
 package mage.game.permanent.token;
+
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 
 /**
- *
  * @author spjspj
  */
 public final class HauntedAngelToken extends TokenImpl {
 
     public HauntedAngelToken() {
-        super("Angel", "3/3 black Angel creature token with flying");
+        super("Angel Token", "3/3 black Angel creature token with flying");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add(SubType.ANGEL);
@@ -22,7 +22,7 @@ public final class HauntedAngelToken extends TokenImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public HauntedAngelToken(final HauntedAngelToken token) {
+    private HauntedAngelToken(final HauntedAngelToken token) {
         super(token);
     }
 

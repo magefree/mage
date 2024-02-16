@@ -28,7 +28,7 @@ public final class BastionMastodon extends CardImpl {
         this.toughness = new MageInt(5);
 
         // {W}: Bastion Mastodon gets vigilance until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{W}"));
         this.addAbility(ability);
     }
 

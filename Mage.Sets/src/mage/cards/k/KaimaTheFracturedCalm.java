@@ -25,7 +25,7 @@ public final class KaimaTheFracturedCalm extends CardImpl {
     public KaimaTheFracturedCalm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPIRIT);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
@@ -68,7 +68,7 @@ class KaimaTheFracturedCalmEffect extends OneShotEffect {
         int goaded = 0;
         for (Permanent permanent : game.getBattlefield().getActivePermanents(
                 StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE,
-                source.getControllerId(), source.getSourceId(), game
+                source.getControllerId(), source, game
         )) {
             if (permanent
                     .getAttachments()

@@ -10,7 +10,6 @@ import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
 import mage.filter.common.FilterPermanentCard;
 import mage.game.Game;
 import mage.players.Player;
@@ -67,7 +66,7 @@ class EerieUltimatumEffect extends OneShotEffect {
             return false;
         }
         TargetCard target = new EerieUltimatumTarget();
-        if (!player.choose(outcome, player.getGraveyard(), target, game)) {
+        if (!player.choose(outcome, player.getGraveyard(), target, source, game)) {
             return false;
         }
         return player.moveCards(new CardsImpl(target.getTargets()), Zone.BATTLEFIELD, source, game);
@@ -106,8 +105,8 @@ class EerieUltimatumTarget extends TargetCardInYourGraveyard {
 
     
     @Override
-    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
-        Set<UUID> possibleTargets = super.possibleTargets(sourceId, sourceControllerId, game);
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
+        Set<UUID> possibleTargets = super.possibleTargets(sourceControllerId, source, game);
         Set<String> names = this.getTargets()
                 .stream()
                 .map(game::getCard)

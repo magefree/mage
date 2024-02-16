@@ -37,13 +37,13 @@ public final class StormscapeMaster extends CardImpl {
         // {W}{W}, {T}: Target creature gains protection from the color of your choice until end of turn.
         Effect effect = new GainProtectionFromColorTargetEffect(Duration.EndOfTurn);
         effect.setText("Target creature gains protection from the color of your choice until end of turn.");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{W}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{W}{W}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 
         // {B}{B}, {T}: Target player loses 2 life and you gain 2 life.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(2), new ManaCostsImpl("{B}{B}"));
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(2), new ManaCostsImpl<>("{B}{B}"));
         ability.addEffect(new GainLifeEffect(2).setText("and you gain 2 life"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPlayer());

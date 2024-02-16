@@ -29,7 +29,7 @@ import java.util.UUID;
  */
 public final class SkirkDrillSergeant extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("or another Goblin");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Goblin");
 
     static {
         filter.add(SubType.GOBLIN.getPredicate());
@@ -43,7 +43,7 @@ public final class SkirkDrillSergeant extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever Skirk Drill Sergeant or another Goblin dies, you may pay {2}{R}. If you do, reveal the top card of your library. If it's a Goblin permanent card, put it onto the battlefield. Otherwise, put it into your graveyard.
-        this.addAbility(new DiesThisOrAnotherCreatureTriggeredAbility(new DoIfCostPaid(new SkirkDrillSergeantEffect(), new ManaCostsImpl("{2}{R}")), false, filter));
+        this.addAbility(new DiesThisOrAnotherCreatureTriggeredAbility(new DoIfCostPaid(new SkirkDrillSergeantEffect(), new ManaCostsImpl<>("{2}{R}")), false, filter));
 
     }
 
@@ -70,7 +70,7 @@ class SkirkDrillSergeantEffect extends OneShotEffect {
         this.staticText = "reveal the top card of your library. If it's a Goblin permanent card, put it onto the battlefield. Otherwise, put it into your graveyard";
     }
 
-    public SkirkDrillSergeantEffect(final SkirkDrillSergeantEffect effect) {
+    private SkirkDrillSergeantEffect(final SkirkDrillSergeantEffect effect) {
         super(effect);
     }
 
@@ -82,7 +82,7 @@ class SkirkDrillSergeantEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (controller == null || sourceObject == null) {
             return false;
         }

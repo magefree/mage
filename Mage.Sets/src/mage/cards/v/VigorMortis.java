@@ -2,6 +2,7 @@ package mage.cards.v;
 
 import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.ManaWasSpentCondition;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.InfoEffect;
@@ -34,7 +35,6 @@ public final class VigorMortis extends CardImpl {
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());
         this.getSpellAbility().addEffect(new InfoEffect("If {G} was spent to cast this spell, that creature enters the battlefield with an additional +1/+1 counter on it"));
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
-
     }
 
     private VigorMortis(final VigorMortis card) {
@@ -49,11 +49,13 @@ public final class VigorMortis extends CardImpl {
 
 class VigorMortisReplacementEffect extends ReplacementEffectImpl {
 
+    private static final Condition condition = ManaWasSpentCondition.GREEN;
+
     VigorMortisReplacementEffect() {
         super(Duration.EndOfStep, Outcome.BoostCreature);
     }
 
-    VigorMortisReplacementEffect(VigorMortisReplacementEffect effect) {
+    private VigorMortisReplacementEffect(final VigorMortisReplacementEffect effect) {
         super(effect);
     }
 
@@ -65,13 +67,8 @@ class VigorMortisReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getTargetId().equals(getTargetPointer().getFirst(game, source))) {
-            return new ManaWasSpentCondition(ColoredManaSymbol.G).apply(game, source);
+            return condition.apply(game, source);
         }
-        return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
         return false;
     }
 
@@ -88,5 +85,10 @@ class VigorMortisReplacementEffect extends ReplacementEffectImpl {
     @Override
     public VigorMortisReplacementEffect copy() {
         return new VigorMortisReplacementEffect(this);
+    }
+
+    @Override
+    public Condition getCondition() {
+        return condition;
     }
 }

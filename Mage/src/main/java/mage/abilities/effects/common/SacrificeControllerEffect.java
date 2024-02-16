@@ -17,15 +17,15 @@ import mage.target.targetpointer.FixedTarget;
 public class SacrificeControllerEffect extends SacrificeEffect {
 
 
-    public SacrificeControllerEffect(FilterPermanent filter, DynamicValue count, String preText ) {
+    public SacrificeControllerEffect(FilterPermanent filter, DynamicValue count, String preText) {
         super(filter, count, preText);
     }
 
-    public SacrificeControllerEffect(FilterPermanent filter, int count, String preText ) {
+    public SacrificeControllerEffect(FilterPermanent filter, int count, String preText) {
         this(filter, StaticValue.get(count), preText);
     }
 
-    public SacrificeControllerEffect(final SacrificeControllerEffect effect ) {
+    protected SacrificeControllerEffect(final SacrificeControllerEffect effect) {
         super(effect);
     }
 

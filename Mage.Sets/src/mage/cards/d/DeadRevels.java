@@ -24,7 +24,7 @@ public final class DeadRevels extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(0, 2, StaticFilters.FILTER_CARD_CREATURES_YOUR_GRAVEYARD));
 
         // Spectacle {1}{B}
-        this.addAbility(new SpectacleAbility(this, new ManaCostsImpl("{1}{B}")));
+        this.addAbility(new SpectacleAbility(this, new ManaCostsImpl<>("{1}{B}")));
     }
 
     private DeadRevels(final DeadRevels card) {

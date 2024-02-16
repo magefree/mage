@@ -45,7 +45,7 @@ class ThroneOfBoneAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DoIfCostPaid(new GainLifeEffect(1), new GenericManaCost(1)), false);
     }
 
-    public ThroneOfBoneAbility(final ThroneOfBoneAbility ability) {
+    private ThroneOfBoneAbility(final ThroneOfBoneAbility ability) {
         super(ability);
     }
 

@@ -9,15 +9,10 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.abilities.effects.common.continuous.AddCardTypeTargetEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessTargetEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.filter.FilterCard;
+import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
@@ -30,27 +25,23 @@ import mage.target.common.TargetArtifactPermanent;
  */
 public final class TezzeretAgentOfBolas extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("an artifact card");
-
-    static {
-        filter.add(CardType.ARTIFACT.getPredicate());
-    }
-
     public TezzeretAgentOfBolas(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{U}{B}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.TEZZERET);
 
         this.setStartingLoyalty(3);
 
-        // +1: Look at the top five cards of your library. You may reveal an artifact card from among them and put it into your hand. Put the rest on the bottom of your library in any order.
-        this.addAbility(new LoyaltyAbility(new LookLibraryAndPickControllerEffect(5, 1, filter, true), 1));
+        // +1: Look at the top five cards of your library. You may reveal an artifact card from among them and put it into your hand.
+        // Put the rest on the bottom of your library in any order.
+        this.addAbility(new LoyaltyAbility(new LookLibraryAndPickControllerEffect(
+                5, 1, StaticFilters.FILTER_CARD_ARTIFACT_AN, PutCards.HAND, PutCards.BOTTOM_ANY), 1));
 
         // -1: Target artifact becomes an artifact creature with base power and toughness 5/5.
         Effect effect = new AddCardTypeTargetEffect(Duration.EndOfGame, CardType.ARTIFACT, CardType.CREATURE);
         effect.setText("Target artifact becomes an artifact creature");
         LoyaltyAbility ability1 = new LoyaltyAbility(effect, -1);
-        effect = new SetPowerToughnessTargetEffect(5, 5, Duration.EndOfGame);
+        effect = new SetBasePowerToughnessTargetEffect(5, 5, Duration.EndOfGame);
         effect.setText("with base power and toughness 5/5");
         ability1.addEffect(effect);
         ability1.addTarget(new TargetArtifactPermanent());
@@ -81,7 +72,7 @@ class TezzeretAgentOfBolasEffect2 extends OneShotEffect {
         staticText = "Target player loses X life and you gain X life, where X is twice the number of artifacts you control";
     }
 
-    public TezzeretAgentOfBolasEffect2(final TezzeretAgentOfBolasEffect2 effect) {
+    private TezzeretAgentOfBolasEffect2(final TezzeretAgentOfBolasEffect2 effect) {
         super(effect);
     }
 

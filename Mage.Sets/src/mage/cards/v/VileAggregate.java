@@ -6,7 +6,7 @@ import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continuous.SetPowerSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerSourceEffect;
 import mage.abilities.keyword.DevoidAbility;
 import mage.abilities.keyword.IngestAbility;
 import mage.abilities.keyword.TrampleAbility;
@@ -14,7 +14,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorlessPredicate;
@@ -41,7 +40,7 @@ public final class VileAggregate extends CardImpl {
         // Devoid
         this.addAbility(new DevoidAbility(this.color));
         // Vile Aggregate's power is equal to the number of colorless creatures you control.
-        Effect effect = new SetPowerSourceEffect(new PermanentsOnBattlefieldCount(filter), Duration.EndOfGame);
+        Effect effect = new SetBasePowerSourceEffect(new PermanentsOnBattlefieldCount(filter));
         this.addAbility(new SimpleStaticAbility(Zone.ALL, effect));
 
         // Trample

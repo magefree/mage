@@ -26,7 +26,7 @@ public final class SerumTank extends CardImpl {
 
         // Whenever {this} or another artifact comes into play, put a charge counter on {this}.
         this.addAbility(new EntersBattlefieldThisOrAnotherTriggeredAbility(
-                new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), StaticFilters.FILTER_PERMANENT_ARTIFACT
+                new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), StaticFilters.FILTER_PERMANENT_ARTIFACT, false, false
         ));
 
         // {3}, {tap}, Remove a charge counter from {this}: Draw a card.

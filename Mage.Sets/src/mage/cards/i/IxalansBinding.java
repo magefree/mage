@@ -1,17 +1,19 @@
 package mage.cards.i;
 
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.common.delayed.OnLeaveReturnExiledToBattlefieldAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
-import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.ExileUntilSourceLeavesEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
-import mage.filter.common.FilterNonlandPermanent;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -26,19 +28,12 @@ import java.util.UUID;
  */
 public final class IxalansBinding extends CardImpl {
 
-    private static final FilterNonlandPermanent filter = new FilterNonlandPermanent();
-
-    static {
-        filter.add(TargetController.OPPONENT.getControllerPredicate());
-    }
-
     public IxalansBinding(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
 
         // When Ixalan's Binding enters the battlefield, exile target nonland permanent an opponent controls until Ixalan's Binding leaves the battlefield.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new ExileUntilSourceLeavesEffect(filter.getMessage()));
-        ability.addTarget(new TargetPermanent(filter));
-        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledToBattlefieldAbility()));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ExileUntilSourceLeavesEffect());
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_NON_LAND));
         this.addAbility(ability);
 
         // Your opponents can't cast spells with the same name as the exiled card.
@@ -62,7 +57,7 @@ class IxalansBindingReplacementEffect extends ContinuousRuleModifyingEffectImpl 
         staticText = "Your opponents can't cast spells with the same name as the exiled card";
     }
 
-    IxalansBindingReplacementEffect(final IxalansBindingReplacementEffect effect) {
+    private IxalansBindingReplacementEffect(final IxalansBindingReplacementEffect effect) {
         super(effect);
     }
 
@@ -77,7 +72,11 @@ class IxalansBindingReplacementEffect extends ContinuousRuleModifyingEffectImpl 
         if (event.getPlayerId().equals(source.getControllerId())) {
             return false;
         }
-        Card card = game.getCard(event.getSourceId());
+        SpellAbility spellAbility = SpellAbility.getSpellAbilityFromEvent(event, game);
+        if (spellAbility == null) {
+            return false;
+        }
+        Card card = spellAbility.getCharacteristics(game);
         if (sourcePermanent != null && card != null) {
             UUID exileZone = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
             if (exileZone != null) {
@@ -98,11 +97,6 @@ class IxalansBindingReplacementEffect extends ContinuousRuleModifyingEffectImpl 
                 }
             }
         }
-        return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
         return false;
     }
 

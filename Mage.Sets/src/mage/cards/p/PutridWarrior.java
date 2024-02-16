@@ -37,8 +37,7 @@ public final class PutridWarrior extends CardImpl {
 
         // Whenever Putrid Warrior deals damage, choose one - Each player loses 1 life; or each player gains 1 life.
         Ability ability = new PutridWarriorDealsDamageTriggeredAbility(new LoseLifeAllPlayersEffect(1));
-        Mode mode = new Mode();
-        mode.addEffect(new PutridWarriorGainLifeEffect());
+        Mode mode = new Mode(new PutridWarriorGainLifeEffect());
         ability.addMode(mode);
         this.addAbility(ability);
     }
@@ -58,9 +57,10 @@ class PutridWarriorDealsDamageTriggeredAbility extends TriggeredAbilityImpl {
 
     public PutridWarriorDealsDamageTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect, false);
+        setTriggerPhrase("Whenever {this} deals damage, " );
     }
 
-    public PutridWarriorDealsDamageTriggeredAbility(final PutridWarriorDealsDamageTriggeredAbility ability) {
+    private PutridWarriorDealsDamageTriggeredAbility(final PutridWarriorDealsDamageTriggeredAbility ability) {
         super(ability);
     }
 
@@ -79,22 +79,17 @@ class PutridWarriorDealsDamageTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         return event.getSourceId().equals(this.sourceId);
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} deals damage, " ;
-    }
 }
 
 
 class PutridWarriorGainLifeEffect extends OneShotEffect {
 
-    public PutridWarriorGainLifeEffect() {
+    PutridWarriorGainLifeEffect() {
         super(Outcome.GainLife);
         staticText = "Each player gains 1 life.";
     }
 
-    public PutridWarriorGainLifeEffect(final PutridWarriorGainLifeEffect effect) {
+    private PutridWarriorGainLifeEffect(final PutridWarriorGainLifeEffect effect) {
         super(effect);
     }
 

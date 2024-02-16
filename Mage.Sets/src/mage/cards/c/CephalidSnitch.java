@@ -55,7 +55,7 @@ class CephalidSnitchEffect extends LoseAbilityTargetEffect{
         staticText = "Target creature loses protection from black until end of turn.";
     }
 
-    public CephalidSnitchEffect(final CephalidSnitchEffect effect) {
+    private CephalidSnitchEffect(final CephalidSnitchEffect effect) {
         super(effect);
     }
 

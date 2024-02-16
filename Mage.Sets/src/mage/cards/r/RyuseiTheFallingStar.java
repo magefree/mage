@@ -1,8 +1,5 @@
 package mage.cards.r;
 
-
-
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.DamageAllEffect;
@@ -16,6 +13,8 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 
+import java.util.UUID;
+
 /**
  * @author Loki
  */
@@ -28,15 +27,15 @@ public final class RyuseiTheFallingStar extends CardImpl {
     }
 
     public RyuseiTheFallingStar(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{R}");
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DRAGON);
         this.subtype.add(SubType.SPIRIT);
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
         this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new DiesSourceTriggeredAbility(new DamageAllEffect(5, filter)));
+        this.addAbility(new DiesSourceTriggeredAbility(new DamageAllEffect(5, "it", filter)));
     }
 
     private RyuseiTheFallingStar(final RyuseiTheFallingStar card) {
@@ -47,5 +46,4 @@ public final class RyuseiTheFallingStar extends CardImpl {
     public RyuseiTheFallingStar copy() {
         return new RyuseiTheFallingStar(this);
     }
-
 }

@@ -54,7 +54,7 @@ class SparkMageTriggeredAbility extends TriggeredAbilityImpl {
         this.addTarget(new TargetCreaturePermanent());
     }
 
-    public SparkMageTriggeredAbility(final SparkMageTriggeredAbility ability) {
+    private SparkMageTriggeredAbility(final SparkMageTriggeredAbility ability) {
         super(ability);
     }
 

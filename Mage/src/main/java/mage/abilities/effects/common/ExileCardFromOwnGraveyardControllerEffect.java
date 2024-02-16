@@ -46,7 +46,7 @@ public class ExileCardFromOwnGraveyardControllerEffect extends OneShotEffect {
         TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(Math.min(
                 amount, player.getGraveyard().size()
         ), StaticFilters.FILTER_CARD);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         if (!player.chooseTarget(outcome, target, source, game)) {
             return true;
         }

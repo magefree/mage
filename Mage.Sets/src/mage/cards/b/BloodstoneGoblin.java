@@ -56,11 +56,12 @@ class BloodstoneGoblinTriggeredAbility extends TriggeredAbilityImpl {
                 new GainAbilitySourceEffect(
                         new MenaceAbility(false),
                         Duration.EndOfTurn
-                ).setText("and gains menace until end of turn. " +
-                        "<i>(It can't be blocked except by two or more creatures.)</i>"));
+                ).setText("and gains menace until end of turn. "
+                        + "<i>(It can't be blocked except by two or more creatures.)</i>"));
+        setTriggerPhrase("Whenever you cast a spell, if that spell was kicked, ");
     }
 
-    BloodstoneGoblinTriggeredAbility(final BloodstoneGoblinTriggeredAbility ability) {
+    private BloodstoneGoblinTriggeredAbility(final BloodstoneGoblinTriggeredAbility ability) {
         super(ability);
     }
 
@@ -71,16 +72,12 @@ class BloodstoneGoblinTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.SPELL_CAST;
+        return event.getType() == GameEvent.EventType.SPELL_CAST
+                && event.getPlayerId() == this.controllerId;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         return KickerAbility.getSpellKickedCount(game, event.getTargetId()) > 0;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you cast a spell, if that spell was kicked, " ;
     }
 }

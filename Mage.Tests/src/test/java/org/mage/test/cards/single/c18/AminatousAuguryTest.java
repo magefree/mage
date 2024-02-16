@@ -38,24 +38,23 @@ public class AminatousAuguryTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 8); 
                 
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mountain");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Aminatou's Augury");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Aminatou's Augury", true);
         setChoice(playerA, true); // Put a land from among the exiled cards into play?
         setChoice(playerA, "Badlands"); // Select a land card
         
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Adarkar Sentinel");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Adarkar Sentinel", true);
         setChoice(playerA, "Artifact"); // Which card type do you want to consume?
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Aegis of the Gods");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Aegis of the Gods", true);
         setChoice(playerA, "Enchantment"); // Which card type do you want to consume?
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Storm Crow");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Storm Crow", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tormenting Voice");
         setChoice(playerA, "Silvercoat Lion"); // Select a card (discard cost)
         
         checkPlayableAbility("Cannot cast second creature from exile", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Pillarfield Ox", Boolean.FALSE); // Type Creature type is already consumed
         execute();
 
-        assertAllCommandsUsed();
-        
         assertGraveyardCount(playerA, "Aminatou's Augury", 1);
         assertPermanentCount(playerA, "Mountain", 1);
         assertPermanentCount(playerA, "Badlands", 1);

@@ -4,7 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SagaAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessTargetEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -25,7 +25,7 @@ import java.util.UUID;
 public final class TheBearsOfLittjara extends CardImpl {
 
     private static final FilterPermanent filter = new FilterControlledCreaturePermanent(
-            SubType.SHAPESHIFTER, "any number of target Shapeshifter creatures you control"
+            SubType.SHAPESHIFTER, "Shapeshifter creatures you control"
     );
 
     public TheBearsOfLittjara(UUID ownerId, CardSetInfo setInfo) {
@@ -45,7 +45,7 @@ public final class TheBearsOfLittjara extends CardImpl {
         // II — Any number of target Shapeshifter creatures you control have base power and toughness 4/4.
         sagaAbility.addChapterEffect(
                 this, SagaChapter.CHAPTER_II, SagaChapter.CHAPTER_II,
-                new SetPowerToughnessTargetEffect(4, 4, Duration.Custom),
+                new SetBasePowerToughnessTargetEffect(4, 4, Duration.Custom),
                 new TargetPermanent(0, Integer.MAX_VALUE, filter, false)
         );
 
@@ -93,7 +93,7 @@ class TheBearsOfLittjaraEffect extends OneShotEffect {
         }
         for (Permanent creature : game.getBattlefield().getActivePermanents(
                 StaticFilters.FILTER_CONTROLLED_CREATURE,
-                source.getControllerId(), source.getSourceId(), game
+                source.getControllerId(), source, game
         )) {
             if (creature == null) {
                 continue;

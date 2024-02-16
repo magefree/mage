@@ -14,7 +14,6 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 import mage.target.targetpointer.FixedTarget;
@@ -46,9 +45,10 @@ class WidespreadPanicTriggeredAbility extends TriggeredAbilityImpl {
 
     public WidespreadPanicTriggeredAbility() {
         super(Zone.BATTLEFIELD, new WidespreadPanicEffect(), false);
+        setTriggerPhrase("Whenever a spell or ability causes its controller to shuffle their library, ");
     }
 
-    public WidespreadPanicTriggeredAbility(final WidespreadPanicTriggeredAbility ability) {
+    private WidespreadPanicTriggeredAbility(final WidespreadPanicTriggeredAbility ability) {
         super(ability);
     }
 
@@ -73,21 +73,16 @@ class WidespreadPanicTriggeredAbility extends TriggeredAbilityImpl {
         }
         return false;
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a spell or ability causes its controller to shuffle their library, " ;
-    }
 }
 
 class WidespreadPanicEffect extends OneShotEffect {
 
-    public WidespreadPanicEffect() {
+    WidespreadPanicEffect() {
         super(Outcome.Detriment);
         this.staticText = "that player puts a card from their hand on top of their library";
     }
 
-    public WidespreadPanicEffect(final WidespreadPanicEffect effect) {
+    private WidespreadPanicEffect(final WidespreadPanicEffect effect) {
         super(effect);
     }
 
@@ -102,9 +97,9 @@ class WidespreadPanicEffect extends OneShotEffect {
         if (shuffler != null) {
             if (!shuffler.getHand().isEmpty()) {
                 TargetCardInHand target = new TargetCardInHand();
-                target.setNotTarget(true);
+                target.withNotTarget(true);
                 target.setTargetName("a card from your hand to put on top of your library");
-                shuffler.choose(Outcome.Detriment, target, source.getSourceId(), game);
+                shuffler.choose(Outcome.Detriment, target, source, game);
                 Card card = shuffler.getHand().get(target.getFirstTarget(), game);
                 if (card != null) {
                     shuffler.moveCardToLibraryWithInfo(card, source, game, Zone.HAND, true, false);

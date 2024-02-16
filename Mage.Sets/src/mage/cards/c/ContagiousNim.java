@@ -26,7 +26,7 @@ public final class ContagiousNim extends CardImpl {
         this.addAbility(InfectAbility.getInstance());
     }
 
-    public ContagiousNim (final ContagiousNim card) {
+    private ContagiousNim(final ContagiousNim card) {
         super(card);
     }
 

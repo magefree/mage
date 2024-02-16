@@ -24,7 +24,7 @@ public final class StirTheSands extends CardImpl {
         getSpellAbility().addEffect(new CreateTokenEffect(new ZombieToken(), 3));
 
         // Cycling {3}{B}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{3}{B}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{3}{B}")));
 
         // When you cycle Stir the Sands, create a 2/2 black Zombie creature token.
         this.addAbility(new CycleTriggeredAbility(new CreateTokenEffect(new ZombieToken())));

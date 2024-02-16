@@ -99,9 +99,10 @@ class PerplexingChimeraTriggeredAbility extends TriggeredAbilityImpl {
 
     public PerplexingChimeraTriggeredAbility() {
         super(Zone.BATTLEFIELD, new PerplexingChimeraControlExchangeEffect(), true);
+        setTriggerPhrase("Whenever an opponent casts a spell, ");
     }
 
-    public PerplexingChimeraTriggeredAbility(final PerplexingChimeraTriggeredAbility ability) {
+    private PerplexingChimeraTriggeredAbility(final PerplexingChimeraTriggeredAbility ability) {
         super(ability);
     }
 
@@ -122,11 +123,6 @@ class PerplexingChimeraTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever an opponent casts a spell, " ;
-    }
-
-    @Override
     public PerplexingChimeraTriggeredAbility copy() {
         return new PerplexingChimeraTriggeredAbility(this);
     }
@@ -134,12 +130,12 @@ class PerplexingChimeraTriggeredAbility extends TriggeredAbilityImpl {
 
 class PerplexingChimeraControlExchangeEffect extends OneShotEffect {
 
-    public PerplexingChimeraControlExchangeEffect() {
+    PerplexingChimeraControlExchangeEffect() {
         super(Outcome.Benefit);
         this.staticText = "exchange control of {this} and that spell. If you do, you may choose new targets for the spell";
     }
 
-    public PerplexingChimeraControlExchangeEffect(final PerplexingChimeraControlExchangeEffect effect) {
+    private PerplexingChimeraControlExchangeEffect(final PerplexingChimeraControlExchangeEffect effect) {
         super(effect);
     }
 
@@ -173,12 +169,12 @@ class PerplexingChimeraControlExchangeEffect extends OneShotEffect {
 
 class PerplexingChimeraControlEffect extends ContinuousEffectImpl {
 
-    public PerplexingChimeraControlEffect() {
+    PerplexingChimeraControlEffect() {
         super(Duration.Custom, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
         staticText = "PerplexingChimeraControlEffect";
     }
 
-    public PerplexingChimeraControlEffect(final PerplexingChimeraControlEffect effect) {
+    private PerplexingChimeraControlEffect(final PerplexingChimeraControlEffect effect) {
         super(effect);
     }
 

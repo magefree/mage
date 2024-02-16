@@ -53,7 +53,7 @@ public final class ShivanSandMage extends CardImpl {
         this.addAbility(ability);
 
         // Suspend 4-{R}
-        this.addAbility(new SuspendAbility(4, new ManaCostsImpl("{R}"), this));
+        this.addAbility(new SuspendAbility(4, new ManaCostsImpl<>("{R}"), this));
     }
 
     private ShivanSandMage(final ShivanSandMage card) {

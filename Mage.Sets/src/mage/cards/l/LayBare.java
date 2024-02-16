@@ -43,12 +43,12 @@ public final class LayBare extends CardImpl {
 
 class LayBareEffect extends OneShotEffect {
 
-    public LayBareEffect() {
+    LayBareEffect() {
         super(Outcome.Benefit);
         staticText = "Look at its controller's hand";
     }
 
-    public LayBareEffect(final LayBareEffect effect) {
+    private LayBareEffect(final LayBareEffect effect) {
         super(effect);
     }
 

@@ -11,7 +11,7 @@ import mage.util.CardUtil;
 /**
  * @author LevelX2
  */
-public class LoseCreatureTypeSourceEffect extends ContinuousEffectImpl implements SourceEffect {
+public class LoseCreatureTypeSourceEffect extends ContinuousEffectImpl {
 
     private final DynamicValue dynamicValue;
     private final int lessThan;
@@ -30,7 +30,7 @@ public class LoseCreatureTypeSourceEffect extends ContinuousEffectImpl implement
         setText();
     }
 
-    public LoseCreatureTypeSourceEffect(final LoseCreatureTypeSourceEffect effect) {
+    protected LoseCreatureTypeSourceEffect(final LoseCreatureTypeSourceEffect effect) {
         super(effect);
         this.dynamicValue = effect.dynamicValue;
         this.lessThan = effect.lessThan;
@@ -43,7 +43,7 @@ public class LoseCreatureTypeSourceEffect extends ContinuousEffectImpl implement
 
     @Override
     public void init(Ability source, Game game) {
-        super.init(source, game); //To change body of generated methods, choose Tools | Templates.
+        super.init(source, game);
         if (duration.isOnlyValidIfNoZoneChange()) {
             // If source permanent is no longer onto battlefield discard the effect
             if (source.getSourcePermanentIfItStillExists(game) == null) {

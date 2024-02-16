@@ -37,7 +37,7 @@ public final class CurseOfShakenFaith extends CardImpl {
         TargetPlayer auraTarget = new TargetPlayer();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Whenever enchanted player casts a spell other than the first spell they cast each turn or copies a spell, Curse of Shaken Faith deals 2 damage to them.
@@ -58,7 +58,7 @@ class CurseOfShakenFaithTriggeredAbility extends TriggeredAbilityImpl {
 
     public CurseOfShakenFaithTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CurseOfShakenFaithEffect());
-        this.addWatcher(new SpellsCastWatcher());
+        setTriggerPhrase("Whenever enchanted player casts a spell other than the first spell they cast each turn or copies a spell, ");
     }
 
     private CurseOfShakenFaithTriggeredAbility(final CurseOfShakenFaithTriggeredAbility ability) {
@@ -94,16 +94,11 @@ class CurseOfShakenFaithTriggeredAbility extends TriggeredAbilityImpl {
         }
         return false;
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever enchanted player casts a spell other than the first spell they cast each turn or copies a spell, ";
-    }
 }
 
 class CurseOfShakenFaithEffect extends OneShotEffect {
 
-    public CurseOfShakenFaithEffect() {
+    CurseOfShakenFaithEffect() {
         super(Outcome.Damage);
         staticText = "{this} deals 2 damage to them";
     }

@@ -19,7 +19,7 @@ import java.util.UUID;
  */
 public final class Necroduality extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledCreaturePermanent(SubType.ZOMBIE);
+    private static final FilterPermanent filter = new FilterControlledCreaturePermanent(SubType.ZOMBIE, "a nontoken Zombie");
 
     static {
         filter.add(TokenPredicate.FALSE);
@@ -29,11 +29,9 @@ public final class Necroduality extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}");
 
         // Whenever a nontoken Zombie enters the battlefield under your control, create a token that's a copy of that creature.
-        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
-                Zone.BATTLEFIELD, new CreateTokenCopyTargetEffect(true), filter, false,
-                SetTargetPointer.PERMANENT, "Whenever a nontoken Zombie enters the battlefield " +
-                "under your control, create a token that's a copy of that creature."
-        ));
+        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD,
+                new CreateTokenCopyTargetEffect(true).setText("create a token that's a copy of that creature"),
+                filter, false, SetTargetPointer.PERMANENT));
     }
 
     private Necroduality(final Necroduality card) {

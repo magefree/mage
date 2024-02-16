@@ -36,7 +36,7 @@ public final class OrcishSettlers extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {X}{X}{R}, {tap}, Sacrifice Orcish Settlers: Destroy X target lands.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new OrcishSettlersEffect(), new ManaCostsImpl("{X}{X}{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new OrcishSettlersEffect(), new ManaCostsImpl<>("{X}{X}{R}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
@@ -54,12 +54,12 @@ public final class OrcishSettlers extends CardImpl {
 
 class OrcishSettlersEffect extends OneShotEffect {
 
-    public OrcishSettlersEffect() {
+    OrcishSettlersEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "Destroy X target lands";
     }
 
-    public OrcishSettlersEffect(final OrcishSettlersEffect effect) {
+    private OrcishSettlersEffect(final OrcishSettlersEffect effect) {
         super(effect);
     }
 
@@ -77,8 +77,8 @@ class OrcishSettlersEffect extends OneShotEffect {
         TargetLandPermanent target = new TargetLandPermanent(amount);
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null
-                && target.canChoose(source.getSourceId(), controller.getId(), game)
-                && controller.choose(Outcome.DestroyPermanent, target, source.getSourceId(), game)) {
+                && target.canChoose(controller.getId(), source, game)
+                && controller.choose(Outcome.DestroyPermanent, target, source, game)) {
             List<UUID> targets = target.getTargets();
             targets.forEach((landId) -> {
                 Permanent land = game.getPermanent(landId);

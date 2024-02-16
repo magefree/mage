@@ -49,7 +49,7 @@ public final class PsychotropeThallid extends CardImpl {
         // {1}, Sacrifice a Saproling: Draw a card.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new DrawCardSourceControllerEffect(1),
-                new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1, filter, false)));
+                new SacrificeTargetCost(filter));
         ability.addCost(new GenericManaCost(1));
         this.addAbility(ability);
     }

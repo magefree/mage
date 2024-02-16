@@ -40,7 +40,7 @@ public final class ThunderingSpineback extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
 
         // {5}{G}: Create a 3/3 green Dinosaur creature token with trample.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new DinosaurToken()), new ManaCostsImpl("{5}{G}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new DinosaurToken()), new ManaCostsImpl<>("{5}{G}")));
     }
 
     private ThunderingSpineback(final ThunderingSpineback card) {

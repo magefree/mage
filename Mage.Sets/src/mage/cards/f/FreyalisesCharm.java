@@ -20,7 +20,7 @@ import java.util.UUID;
  */
 public final class FreyalisesCharm extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("black spell");
+    private static final FilterSpell filter = new FilterSpell("a black spell");
 
     static {
         filter.add(new ColorPredicate(ObjectColor.BLACK));
@@ -33,12 +33,12 @@ public final class FreyalisesCharm extends CardImpl {
         this.addAbility(new SpellCastOpponentTriggeredAbility(
                 new DoIfCostPaid(
                         new DrawCardSourceControllerEffect(1, "you"),
-                        new ManaCostsImpl("{G}{G}")
+                        new ManaCostsImpl<>("{G}{G}")
                 ), filter, false
         ));
 
         // {G}{G}: Return Freyalise's Charm to its owner's hand.
-        this.addAbility(new SimpleActivatedAbility(new ReturnToHandSourceEffect(true), new ManaCostsImpl("{G}{G}")));
+        this.addAbility(new SimpleActivatedAbility(new ReturnToHandSourceEffect(true), new ManaCostsImpl<>("{G}{G}")));
     }
 
     private FreyalisesCharm(final FreyalisesCharm card) {

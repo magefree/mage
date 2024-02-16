@@ -58,7 +58,7 @@ public class ZuberasTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.DECLARE_BLOCKERS);
         execute();
                 
-        assertPermanentCount(playerA, "Spirit", 1);
+        assertPermanentCount(playerA, "Spirit Token", 1);
         assertHandCount(playerB, 1);
         assertHandCount(playerA, 4);
         assertLife(playerB, 17);

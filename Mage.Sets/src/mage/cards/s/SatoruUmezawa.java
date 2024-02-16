@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.abilities.keyword.NinjutsuAbility;
@@ -28,13 +27,15 @@ public final class SatoruUmezawa extends CardImpl {
     public SatoruUmezawa(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.NINJA);
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
 
-        // Whenever you activate a ninjutsu ability, look at the top three cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order. This ability triggers only once each turn.
+        // Whenever you activate a ninjutsu ability, look at the top three cards of your library.
+        // Put one of them into your hand and the rest on the bottom of your library in any order.
+        // This ability triggers only once each turn.
         this.addAbility(new SatoruUmezawaTriggeredAbility());
 
         // Each creature card in your hand has ninjutsu {2}{U}{B}.
@@ -54,11 +55,9 @@ public final class SatoruUmezawa extends CardImpl {
 class SatoruUmezawaTriggeredAbility extends TriggeredAbilityImpl {
 
     SatoruUmezawaTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new LookLibraryAndPickControllerEffect(
-                StaticValue.get(3), false, StaticValue.get(1),
-                StaticFilters.FILTER_CARD, Zone.LIBRARY, false, false
-        ));
-        this.setTriggersOnce(true);
+        super(Zone.BATTLEFIELD, new LookLibraryAndPickControllerEffect(3, 1, PutCards.HAND, PutCards.BOTTOM_ANY));
+        this.setTriggersOnceEachTurn(true);
+        setTriggerPhrase("Whenever you activate a ninjutsu ability, ");
     }
 
     private SatoruUmezawaTriggeredAbility(final SatoruUmezawaTriggeredAbility ability) {
@@ -83,23 +82,16 @@ class SatoruUmezawaTriggeredAbility extends TriggeredAbilityImpl {
         StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getTargetId());
         return stackAbility.getStackAbility() instanceof NinjutsuAbility;
     }
-
-    @Override
-    public String getRule() {
-        return "Whenever you activate a ninjutsu ability, look at the top three cards of your library. " +
-                "Put one of them into your hand and the rest on the bottom of your library in any order. " +
-                "This ability triggers only once each turn.";
-    }
 }
 
 class SatoruUmezawaEffect extends ContinuousEffectImpl {
 
-    public SatoruUmezawaEffect() {
+    SatoruUmezawaEffect() {
         super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         this.staticText = "each creature card in your hand has ninjutsu {2}{U}{B}";
     }
 
-    public SatoruUmezawaEffect(final SatoruUmezawaEffect effect) {
+    private SatoruUmezawaEffect(final SatoruUmezawaEffect effect) {
         super(effect);
     }
 

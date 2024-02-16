@@ -24,7 +24,7 @@ public final class Vivify extends CardImpl {
         this.getSpellAbility().addEffect(new BecomesCreatureTargetEffect(new CreatureToken(3, 3), false, true, Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetLandPermanent());
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
     private Vivify(final Vivify card) {

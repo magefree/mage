@@ -55,7 +55,7 @@ class DelayingShieldReplacementEffect extends ReplacementEffectImpl {
         staticText = "If damage would be dealt to you, put that many delay counters on {this} instead";
     }
 
-    DelayingShieldReplacementEffect(final DelayingShieldReplacementEffect effect) {
+    private DelayingShieldReplacementEffect(final DelayingShieldReplacementEffect effect) {
         super(effect);
     }
 
@@ -89,7 +89,7 @@ class DelayingShieldUpkeepEffect extends OneShotEffect {
         this.staticText = "remove all delay counters from {this}. For each delay counter removed this way, you lose 1 life unless you pay {1}{W}";
     }
 
-    DelayingShieldUpkeepEffect(final DelayingShieldUpkeepEffect effect) {
+    private DelayingShieldUpkeepEffect(final DelayingShieldUpkeepEffect effect) {
         super(effect);
     }
 

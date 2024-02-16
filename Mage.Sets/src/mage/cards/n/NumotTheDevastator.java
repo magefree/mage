@@ -1,4 +1,3 @@
-
 package mage.cards.n;
 
 import java.util.UUID;
@@ -15,7 +14,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.filter.StaticFilters;
 import mage.target.common.TargetLandPermanent;
 
 /**
@@ -26,7 +24,7 @@ public final class NumotTheDevastator extends CardImpl {
 
     public NumotTheDevastator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{R}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DRAGON);
 
         this.power = new MageInt(6);
@@ -38,8 +36,8 @@ public final class NumotTheDevastator extends CardImpl {
         OneShotEffect effect = new DestroyTargetEffect();
         effect.setText("destroy up to two target lands");
         Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(
-                new DoIfCostPaid(effect, new ManaCostsImpl("{2}{R}")), false);
-        ability.addTarget(new TargetLandPermanent(0, 2, StaticFilters.FILTER_LANDS, false));
+                new DoIfCostPaid(effect, new ManaCostsImpl<>("{2}{R}")), false);
+        ability.addTarget(new TargetLandPermanent(0, 2));
         this.addAbility(ability);
     }
 

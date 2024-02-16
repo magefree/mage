@@ -52,7 +52,7 @@ class DisinformationCampaignTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), false);
     }
 
-    public DisinformationCampaignTriggeredAbility(final DisinformationCampaignTriggeredAbility ability) {
+    private DisinformationCampaignTriggeredAbility(final DisinformationCampaignTriggeredAbility ability) {
         super(ability);
     }
 

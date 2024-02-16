@@ -41,7 +41,6 @@ public class PlayerLeavesGameTest extends CardTestMultiPlayerBaseWithRangeAll {
         setStopAt(4, PhaseStep.CLEANUP);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -68,7 +67,6 @@ public class PlayerLeavesGameTest extends CardTestMultiPlayerBaseWithRangeAll {
         setStopAt(4, PhaseStep.CLEANUP);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
     }
 
     private void prepareAndRunLeaveGameWithLongEffectTest(Duration duration) {
@@ -105,7 +103,6 @@ public class PlayerLeavesGameTest extends CardTestMultiPlayerBaseWithRangeAll {
         setStopAt(4, PhaseStep.CLEANUP);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -152,7 +149,6 @@ public class PlayerLeavesGameTest extends CardTestMultiPlayerBaseWithRangeAll {
         setStopAt(2, PhaseStep.CLEANUP);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
     }
 
 
@@ -184,7 +180,6 @@ public class PlayerLeavesGameTest extends CardTestMultiPlayerBaseWithRangeAll {
         setStopAt(5, PhaseStep.CLEANUP);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test

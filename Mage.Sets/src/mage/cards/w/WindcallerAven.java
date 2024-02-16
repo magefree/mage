@@ -33,7 +33,7 @@ public final class WindcallerAven extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Cycling {U}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{U}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{U}")));
 
         // When you cycle Windcaller Aven, target creature gains flying until end of turn.
         Ability ability = new CycleTriggeredAbility(

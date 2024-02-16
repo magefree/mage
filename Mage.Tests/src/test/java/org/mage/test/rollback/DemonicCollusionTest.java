@@ -40,7 +40,6 @@ public class DemonicCollusionTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -73,6 +72,5 @@ public class DemonicCollusionTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(5, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 }

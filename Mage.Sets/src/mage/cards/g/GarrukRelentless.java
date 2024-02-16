@@ -27,10 +27,10 @@ public final class GarrukRelentless extends CardImpl {
 
     public GarrukRelentless(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{G}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GARRUK);
 
-        this.secondSideCardClazz = GarrukTheVeilCursed.class;
+        this.secondSideCardClazz = mage.cards.g.GarrukTheVeilCursed.class;
 
         this.setStartingLoyalty(3);
 
@@ -64,7 +64,7 @@ class GarrukRelentlessStateTrigger extends StateTriggeredAbility {
         super(Zone.BATTLEFIELD, new TransformSourceEffect());
     }
 
-    public GarrukRelentlessStateTrigger(final GarrukRelentlessStateTrigger ability) {
+    private GarrukRelentlessStateTrigger(final GarrukRelentlessStateTrigger ability) {
         super(ability);
     }
 
@@ -87,12 +87,12 @@ class GarrukRelentlessStateTrigger extends StateTriggeredAbility {
 
 class GarrukRelentlessDamageEffect extends OneShotEffect {
 
-    public GarrukRelentlessDamageEffect() {
+    GarrukRelentlessDamageEffect() {
         super(Outcome.Damage);
         staticText = "{this} deals 3 damage to target creature. That creature deals damage equal to its power to him";
     }
 
-    public GarrukRelentlessDamageEffect(GarrukRelentlessDamageEffect effect) {
+    private GarrukRelentlessDamageEffect(final GarrukRelentlessDamageEffect effect) {
         super(effect);
     }
 

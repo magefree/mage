@@ -10,12 +10,17 @@ import mage.game.Game;
  *
  * @author LevelX2
  */
-public class SweepNumber implements DynamicValue {
+public enum SweepNumber implements DynamicValue {
+    // FOREST("Forest");
+    // ISLAND("Island");
+    PLAINS("Plains"),
+    MOUNTAIN("Mountain"),
+    SWAMP("Swamp");
 
-    private final String sweepSubtype;
+    private final String message;
 
-    public SweepNumber(String sweepSubtype) {
-        this.sweepSubtype = sweepSubtype;
+    SweepNumber(String landType) {
+        this.message = landType + " returned this way";
     }
 
     @Override
@@ -27,16 +32,16 @@ public class SweepNumber implements DynamicValue {
 
     @Override
     public SweepNumber copy() {
-        return new SweepNumber(sweepSubtype);
+        return this;
     }
 
     @Override
     public String toString() {
-        return "X";
+        return "1";
     }
 
     @Override
     public String getMessage() {
-        return "the number of " + sweepSubtype + (sweepSubtype.endsWith("s") ? "" : "s") + " returned this way";
+        return message;
     }
 }

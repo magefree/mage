@@ -7,7 +7,7 @@ import mage.abilities.costs.Costs;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.Card;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.cards.SplitCard;
 import mage.constants.*;
 import mage.game.Game;
@@ -46,7 +46,7 @@ public class FlashbackAbility extends SpellAbility {
         this.timing = card.isSorcery() ? TimingRule.SORCERY : TimingRule.INSTANT;
     }
 
-    public FlashbackAbility(final FlashbackAbility ability) {
+    protected FlashbackAbility(final FlashbackAbility ability) {
         super(ability);
         this.spellAbilityType = ability.spellAbilityType;
         this.abilityName = ability.abilityName;
@@ -75,11 +75,11 @@ public class FlashbackAbility extends SpellAbility {
                     } else if (((SplitCard) card).getRightHalfCard().getName().equals(abilityName)) {
                         return ((SplitCard) card).getRightHalfCard().getSpellAbility().canActivate(playerId, game);
                     }
-                } else if (card instanceof ModalDoubleFacesCard) {
-                    if (((ModalDoubleFacesCard) card).getLeftHalfCard().getName().equals(abilityName)) {
-                        return ((ModalDoubleFacesCard) card).getLeftHalfCard().getSpellAbility().canActivate(playerId, game);
-                    } else if (((ModalDoubleFacesCard) card).getRightHalfCard().getName().equals(abilityName)) {
-                        return ((ModalDoubleFacesCard) card).getRightHalfCard().getSpellAbility().canActivate(playerId, game);
+                } else if (card instanceof ModalDoubleFacedCard) {
+                    if (((ModalDoubleFacedCard) card).getLeftHalfCard().getName().equals(abilityName)) {
+                        return ((ModalDoubleFacedCard) card).getLeftHalfCard().getSpellAbility().canActivate(playerId, game);
+                    } else if (((ModalDoubleFacedCard) card).getRightHalfCard().getName().equals(abilityName)) {
+                        return ((ModalDoubleFacedCard) card).getRightHalfCard().getSpellAbility().canActivate(playerId, game);
                     }
                 }
                 return card.getSpellAbility().canActivate(playerId, game);
@@ -100,11 +100,11 @@ public class FlashbackAbility extends SpellAbility {
                     } else if (((SplitCard) card).getRightHalfCard().getName().equals(abilityName)) {
                         spellAbilityCopy = ((SplitCard) card).getRightHalfCard().getSpellAbility().copy();
                     }
-                } else if (card instanceof ModalDoubleFacesCard) {
-                    if (((ModalDoubleFacesCard) card).getLeftHalfCard().getName().equals(abilityName)) {
-                        spellAbilityCopy = ((ModalDoubleFacesCard) card).getLeftHalfCard().getSpellAbility().copy();
-                    } else if (((ModalDoubleFacesCard) card).getRightHalfCard().getName().equals(abilityName)) {
-                        spellAbilityCopy = ((ModalDoubleFacesCard) card).getRightHalfCard().getSpellAbility().copy();
+                } else if (card instanceof ModalDoubleFacedCard) {
+                    if (((ModalDoubleFacedCard) card).getLeftHalfCard().getName().equals(abilityName)) {
+                        spellAbilityCopy = ((ModalDoubleFacedCard) card).getLeftHalfCard().getSpellAbility().copy();
+                    } else if (((ModalDoubleFacedCard) card).getRightHalfCard().getName().equals(abilityName)) {
+                        spellAbilityCopy = ((ModalDoubleFacedCard) card).getRightHalfCard().getSpellAbility().copy();
                     }
                 } else {
                     spellAbilityCopy = card.getSpellAbility().copy();
@@ -113,9 +113,9 @@ public class FlashbackAbility extends SpellAbility {
                     return null;
                 }
                 spellAbilityCopy.setId(this.getId());
-                spellAbilityCopy.getManaCosts().clear();
-                spellAbilityCopy.getManaCostsToPay().clear();
-                spellAbilityCopy.getCosts().addAll(this.getCosts().copy());
+                spellAbilityCopy.clearManaCosts();
+                spellAbilityCopy.clearManaCostsToPay();
+                spellAbilityCopy.addCost(this.getCosts().copy());
                 spellAbilityCopy.addCost(this.getManaCosts().copy());
                 spellAbilityCopy.setSpellAbilityCastMode(this.getSpellAbilityCastMode());
                 spellAbilityToResolve = spellAbilityCopy;
@@ -148,19 +148,19 @@ public class FlashbackAbility extends SpellAbility {
     @Override
     public String getRule() {
         StringBuilder sbRule = new StringBuilder("Flashback");
-        if (!costs.isEmpty()) {
+        if (!getCosts().isEmpty()) {
             sbRule.append("&mdash;");
         } else {
             sbRule.append(' ');
         }
-        if (!manaCosts.isEmpty()) {
-            sbRule.append(manaCosts.getText());
+        if (!getManaCosts().isEmpty()) {
+            sbRule.append(getManaCosts().getText());
         }
-        if (!costs.isEmpty()) {
-            if (!manaCosts.isEmpty()) {
+        if (!getCosts().isEmpty()) {
+            if (!getManaCosts().isEmpty()) {
                 sbRule.append(", ");
             }
-            sbRule.append(costs.getText());
+            sbRule.append(getCosts().getText());
             sbRule.append('.');
         }
         if (abilityName != null) {
@@ -191,18 +191,13 @@ class FlashbackReplacementEffect extends ReplacementEffectImpl {
         staticText = "(If the flashback cost was paid, exile this card instead of putting it anywhere else any time it would leave the stack)";
     }
 
-    public FlashbackReplacementEffect(final FlashbackReplacementEffect effect) {
+    protected FlashbackReplacementEffect(final FlashbackReplacementEffect effect) {
         super(effect);
     }
 
     @Override
     public FlashbackReplacementEffect copy() {
         return new FlashbackReplacementEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

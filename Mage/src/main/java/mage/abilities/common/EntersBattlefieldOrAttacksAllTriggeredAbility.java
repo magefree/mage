@@ -59,9 +59,10 @@ public class EntersBattlefieldOrAttacksAllTriggeredAbility extends TriggeredAbil
         this.rule = rule;
         this.controlledText = controlledText;
         this.setTargetPointer = setTargetPointer;
+        this.setTriggerPhrase(generateTriggerPhrase());
     }
 
-    public EntersBattlefieldOrAttacksAllTriggeredAbility(final EntersBattlefieldOrAttacksAllTriggeredAbility ability) {
+    protected EntersBattlefieldOrAttacksAllTriggeredAbility(final EntersBattlefieldOrAttacksAllTriggeredAbility ability) {
         super(ability);
         this.filter = ability.filter;
         this.rule = ability.rule;
@@ -79,7 +80,7 @@ public class EntersBattlefieldOrAttacksAllTriggeredAbility extends TriggeredAbil
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
         if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD
-                && filter.match(permanent, getSourceId(), getControllerId(), game)) {
+                && filter.match(permanent, getControllerId(), this, game)) {
             if (setTargetPointer != SetTargetPointer.NONE) {
                 for (Effect effect : this.getEffects()) {
                     switch (setTargetPointer) {
@@ -98,7 +99,7 @@ public class EntersBattlefieldOrAttacksAllTriggeredAbility extends TriggeredAbil
 
         Permanent attacker = game.getPermanent(event.getSourceId());
         if (event.getType() == GameEvent.EventType.ATTACKER_DECLARED
-                && filter.match(attacker, getSourceId(), getControllerId(), game)) {
+                && filter.match(attacker, getControllerId(), this, game)) {
             if (setTargetPointer != SetTargetPointer.NONE) {
                 for (Effect effect : this.getEffects()) {
                     switch (setTargetPointer) {
@@ -128,8 +129,7 @@ public class EntersBattlefieldOrAttacksAllTriggeredAbility extends TriggeredAbil
         return super.getRule();
     }
 
-    @Override
-    public String getTriggerPhrase() {
+    private String generateTriggerPhrase() {
         StringBuilder sb = new StringBuilder("Whenever ").append(filter.getMessage());
         sb.append(" enters the battlefield ");
         if (controlledText) {

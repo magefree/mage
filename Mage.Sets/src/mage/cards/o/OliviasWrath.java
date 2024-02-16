@@ -41,8 +41,9 @@ public final class OliviasWrath extends CardImpl {
         this.getSpellAbility().addEffect(new BoostAllEffect(
                 xValue, xValue, Duration.EndOfTurn, filter, false,
                 "each non-Vampire creature gets -X/-X until end of turn, "
-                + "where X is the number of Vampires you control", true
+                + "where X is the number of Vampires you control"
         ));
+        this.getSpellAbility().addHint(hint);
     }
 
     private OliviasWrath(final OliviasWrath card) {

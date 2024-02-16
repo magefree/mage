@@ -51,7 +51,7 @@ class HeartwoodStorytellerTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new HeartwoodStorytellerEffect(), false);
     }
 
-    HeartwoodStorytellerTriggeredAbility(final HeartwoodStorytellerTriggeredAbility ability) {
+    private HeartwoodStorytellerTriggeredAbility(final HeartwoodStorytellerTriggeredAbility ability) {
         super(ability);
     }
 
@@ -90,7 +90,7 @@ class HeartwoodStorytellerEffect extends OneShotEffect {
         this.staticText = "Each of that player's opponents may draw a card";
     }
 
-    HeartwoodStorytellerEffect(final HeartwoodStorytellerEffect effect) {
+    private HeartwoodStorytellerEffect(final HeartwoodStorytellerEffect effect) {
         super(effect);
     }
 

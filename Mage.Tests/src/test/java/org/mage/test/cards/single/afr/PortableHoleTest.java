@@ -22,7 +22,6 @@ public class PortableHoleTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
         assertExileCount(playerB, "Grizzly Bears", 1);
     }
 
@@ -40,7 +39,6 @@ public class PortableHoleTest extends CardTestPlayerBase {
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
         assertPermanentCount(playerB, "Grizzly Bears", 1);
     }
 }

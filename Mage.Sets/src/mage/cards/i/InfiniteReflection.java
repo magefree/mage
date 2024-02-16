@@ -43,7 +43,7 @@ public final class InfiniteReflection extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Copy));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // When Infinite Reflection enters the battlefield attached to a creature, each other nontoken creature you control becomes a copy of that creature.
@@ -72,7 +72,7 @@ class InfiniteReflectionTriggeredEffect extends OneShotEffect {
         this.staticText = " attached to a creature, each other nontoken creature you control becomes a copy of that creature";
     }
 
-    public InfiniteReflectionTriggeredEffect(final InfiniteReflectionTriggeredEffect effect) {
+    private InfiniteReflectionTriggeredEffect(final InfiniteReflectionTriggeredEffect effect) {
         super(effect);
     }
 
@@ -101,11 +101,12 @@ class InfiniteReflectionTriggeredEffect extends OneShotEffect {
 
 class InfiniteReflectionEntersBattlefieldEffect extends ReplacementEffectImpl {
 
-    public InfiniteReflectionEntersBattlefieldEffect() {
+    InfiniteReflectionEntersBattlefieldEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
+        this.staticText = "Nontoken creatures you control enter the battlefield as a copy of enchanted creature";
     }
 
-    public InfiniteReflectionEntersBattlefieldEffect(InfiniteReflectionEntersBattlefieldEffect effect) {
+    private InfiniteReflectionEntersBattlefieldEffect(final InfiniteReflectionEntersBattlefieldEffect effect) {
         super(effect);
     }
 
@@ -133,11 +134,6 @@ class InfiniteReflectionEntersBattlefieldEffect extends ReplacementEffectImpl {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return "Nontoken creatures you control enter the battlefield as a copy of enchanted creature";
     }
 
     @Override

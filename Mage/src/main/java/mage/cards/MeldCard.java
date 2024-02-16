@@ -25,9 +25,10 @@ public abstract class MeldCard extends CardImpl {
     public MeldCard(UUID ownerId, CardSetInfo setInfo, CardType[] cardTypes, String costs) {
         super(ownerId, setInfo, cardTypes, costs);
         halves = new CardsImpl();
+        this.nightCard = true;
     }
 
-    public MeldCard(final MeldCard card) {
+    protected MeldCard(final MeldCard card) {
         super(card);
         this.topHalfCard = card.topHalfCard;
         this.bottomHalfCard = card.bottomHalfCard;
@@ -104,6 +105,13 @@ public abstract class MeldCard extends CardImpl {
             return (this.topHalfCard != null ? this.topHalfCard.getManaValue() : 0)
                     + (this.bottomHalfCard != null ? this.bottomHalfCard.getManaValue() : 0);
         }
+    }
+
+    @Override
+    public boolean isTransformable() {
+        // there are multiple day cards for one meld card, so can't show it as second side
+        // TODO: can be fixed after mutiple sides implement, e.g. with Mutate support
+        return false;
     }
 
     @Override

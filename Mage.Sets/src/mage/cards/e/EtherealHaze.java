@@ -7,10 +7,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
+import mage.filter.StaticFilters;
 
 import java.util.UUID;
-
-import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
 
 /**
  *
@@ -23,7 +22,7 @@ public final class EtherealHaze extends CardImpl {
         this.subtype.add(SubType.ARCANE);
 
         // Prevent all damage that would be dealt by creatures this turn.
-        this.getSpellAbility().addEffect(new PreventAllDamageByAllPermanentsEffect(FILTER_PERMANENT_CREATURES, Duration.EndOfTurn, false));
+        this.getSpellAbility().addEffect(new PreventAllDamageByAllPermanentsEffect(StaticFilters.FILTER_PERMANENT_CREATURES, Duration.EndOfTurn, false));
 
     }
 

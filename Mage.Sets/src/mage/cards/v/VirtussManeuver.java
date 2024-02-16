@@ -23,6 +23,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetSacrifice;
 
 /**
  *
@@ -56,7 +57,7 @@ class VirtussManeuverEffect extends OneShotEffect {
                 + "Each foe sacrifices a creature they control";
     }
 
-    VirtussManeuverEffect(final VirtussManeuverEffect effect) {
+    private VirtussManeuverEffect(final VirtussManeuverEffect effect) {
         super(effect);
     }
 
@@ -81,7 +82,7 @@ class VirtussManeuverEffect extends OneShotEffect {
             filter.add(new OwnerIdPredicate(player.getId()));
             TargetCardInGraveyard target = new TargetCardInGraveyard(filter);
             getBackMap.put(player.getId(), null);
-            if (player.choose(Outcome.ReturnToHand, target, source.getSourceId(), game)) {
+            if (player.choose(Outcome.ReturnToHand, target, source, game)) {
                 getBackMap.put(player.getId(), game.getCard(target.getFirstTarget()));
             }
         }
@@ -100,8 +101,8 @@ class VirtussManeuverEffect extends OneShotEffect {
             if (player == null) {
                 continue;
             }
-            TargetControlledPermanent target = new TargetControlledPermanent(1, 1, StaticFilters.FILTER_CONTROLLED_A_CREATURE, true);
-            player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
+            TargetSacrifice target = new TargetSacrifice(StaticFilters.FILTER_CONTROLLED_A_CREATURE);
+            player.choose(Outcome.Sacrifice, target, source, game);
             perms.addAll(target.getTargets());
         }
         for (UUID permID : perms) {

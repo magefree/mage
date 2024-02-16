@@ -11,7 +11,7 @@ import mage.constants.SubType;
 public final class AtlaPalaniToken extends TokenImpl {
 
     public AtlaPalaniToken() {
-        super("Egg", "0/1 green Egg creature token with defender");
+        super("Egg Token", "0/1 green Egg creature token with defender");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.EGG);
         color.setGreen(true);

@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common.continuous;
 
 import mage.abilities.Ability;
@@ -10,13 +9,10 @@ import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
 
 /**
- *
  * @author LevelX2
  */
 
 public class AssignNoCombatDamageSourceEffect extends ReplacementEffectImpl {
-
-    private boolean partOfOptionalEffect;
 
     public AssignNoCombatDamageSourceEffect(Duration duration) {
         this(duration, false);
@@ -24,23 +20,16 @@ public class AssignNoCombatDamageSourceEffect extends ReplacementEffectImpl {
 
     public AssignNoCombatDamageSourceEffect(Duration duration, boolean partOfOptionalEffect) {
         super(duration, Outcome.PreventDamage);
-        this.partOfOptionalEffect = partOfOptionalEffect;
-        staticText = setText();
+        staticText = setText(partOfOptionalEffect);
     }
 
-    public AssignNoCombatDamageSourceEffect(final AssignNoCombatDamageSourceEffect effect) {
+    protected AssignNoCombatDamageSourceEffect(final AssignNoCombatDamageSourceEffect effect) {
         super(effect);
-        this.partOfOptionalEffect = effect.partOfOptionalEffect;
     }
 
     @Override
     public AssignNoCombatDamageSourceEffect copy() {
         return new AssignNoCombatDamageSourceEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override
@@ -65,13 +54,9 @@ public class AssignNoCombatDamageSourceEffect extends ReplacementEffectImpl {
         return event.getSourceId().equals(source.getSourceId()) && damageEvent.isCombatDamage();
     }
 
-    private String setText() {
-        String text = "";
-        if(partOfOptionalEffect) {
-            text = "If you do, ";
-        }
-        text += "{this} assigns no combat damage";
-        switch(duration) {
+    private String setText(boolean partOfOptionalEffect) {
+        String text = (partOfOptionalEffect ? "If you do, " : "") + "{this} assigns no combat damage";
+        switch (duration) {
             case EndOfTurn:
                 text += " this turn";
                 break;

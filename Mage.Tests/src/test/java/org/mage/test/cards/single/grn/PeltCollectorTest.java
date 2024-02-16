@@ -35,14 +35,12 @@ public class PeltCollectorTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerB, collector, 1);// Creature {G}
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, collector);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, collector, true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, lion);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
 
         execute();
-
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerB, collector, 1, 1);
 
@@ -78,17 +76,16 @@ public class PeltCollectorTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, trostani);
 
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, collector);
+        waitStackResolved(3, PhaseStep.PRECOMBAT_MAIN);
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, lion);
 
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
 
         execute();
 
-        assertAllCommandsUsed();
-
         assertPowerToughness(playerB, collector, 1, 1);
 
-        assertPowerToughness(playerA, "Soldier", 2, 2, Filter.ComparisonScope.All);
+        assertPowerToughness(playerA, "Soldier Token", 2, 2, Filter.ComparisonScope.All);
 
         assertPowerToughness(playerA, lion, 3, 3);
         assertPowerToughness(playerA, collector, 3, 3);
@@ -111,8 +108,6 @@ public class PeltCollectorTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertAllCommandsUsed();
-
         assertPowerToughness(playerA, collector, 2, 2);
         assertCounterCount(collector, CounterType.P1P1, 1);
     }
@@ -129,8 +124,6 @@ public class PeltCollectorTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, collector, 2, 2);
         assertCounterCount(collector, CounterType.P1P1, 1);
@@ -151,8 +144,6 @@ public class PeltCollectorTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertAllCommandsUsed();
-
         assertPowerToughness(playerA, collector, 2, 2);
         assertCounterCount(collector, CounterType.P1P1, 1);
     }
@@ -172,8 +163,6 @@ public class PeltCollectorTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertAllCommandsUsed();
-
         assertPowerToughness(playerA, collector, 3, 3);
         assertCounterCount(collector, CounterType.P1P1, 2);
     }
@@ -192,8 +181,6 @@ public class PeltCollectorTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, collector, 3, 3);
         assertCounterCount(collector, CounterType.P1P1, 2);
@@ -215,8 +202,6 @@ public class PeltCollectorTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertAllCommandsUsed();
-
         assertPowerToughness(playerA, collector, 4, 4);
         assertCounterCount(collector, CounterType.P1P1, 0);
     }
@@ -236,8 +221,6 @@ public class PeltCollectorTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, collector, 1, 1);
         assertCounterCount(collector, CounterType.P1P1, 0);

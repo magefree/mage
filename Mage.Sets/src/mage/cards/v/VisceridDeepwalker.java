@@ -28,9 +28,9 @@ public final class VisceridDeepwalker extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {U}: Viscerid Deepwalker gets +1/+0 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{U}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{U}")));
         // Suspend 4-{U}
-        this.addAbility(new SuspendAbility(4, new ManaCostsImpl("{U}"), this));
+        this.addAbility(new SuspendAbility(4, new ManaCostsImpl<>("{U}"), this));
     }
 
     private VisceridDeepwalker(final VisceridDeepwalker card) {

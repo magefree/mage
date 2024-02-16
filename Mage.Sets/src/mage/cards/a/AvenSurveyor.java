@@ -37,8 +37,7 @@ public final class AvenSurveyor extends CardImpl {
         Ability ability = new EntersBattlefieldTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
         
         // * Return target creature to its owner's hand
-        Mode mode = new Mode();
-        mode.addEffect(new ReturnToHandTargetEffect());
+        Mode mode = new Mode(new ReturnToHandTargetEffect());
         mode.addTarget(new TargetCreaturePermanent());
         ability.addMode(mode);
         this.addAbility(ability);  

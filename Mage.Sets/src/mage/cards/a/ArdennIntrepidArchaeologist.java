@@ -27,7 +27,7 @@ public final class ArdennIntrepidArchaeologist extends CardImpl {
     public ArdennIntrepidArchaeologist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.KOR);
         this.subtype.add(SubType.SCOUT);
         this.power = new MageInt(2);
@@ -88,7 +88,7 @@ class ArdennIntrepidArchaeologistEffect extends OneShotEffect {
             return false;
         }
         TargetPermanent target = new TargetPermanent(0, Integer.MAX_VALUE, filter, true);
-        controller.choose(outcome, target, source.getSourceId(), game);
+        controller.choose(outcome, target, source, game);
         for (UUID targetId : target.getTargets()) {
             if (player != null) {
                 player.addAttachment(targetId, source, game);

@@ -20,7 +20,6 @@ import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
@@ -37,10 +36,10 @@ public final class TombstoneStairwell extends CardImpl {
 
     public TombstoneStairwell(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}");
-        addSuperType(SuperType.WORLD);
+        this.supertype.add(SuperType.WORLD);
 
         // Cumulative upkeep-Pay {1}{B}.
-        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{1}{B}")));
+        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{1}{B}")));
 
         // At the beginning of each upkeep, if Tombstone Stairwell is on the battlefield, each player creates a 2/2 black Zombie creature token with haste named Tombspawn for each creature card in their graveyard.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new TombstoneStairwellCreateTokenEffect(), TargetController.ANY, false));
@@ -66,7 +65,7 @@ class TombstoneStairwellCreateTokenEffect extends OneShotEffect {
         this.staticText = "if {this} is on the battlefield, each player creates a 2/2 black Zombie creature token with haste named Tombspawn for each creature card in their graveyard";
     }
 
-    TombstoneStairwellCreateTokenEffect(final TombstoneStairwellCreateTokenEffect effect) {
+    private TombstoneStairwellCreateTokenEffect(final TombstoneStairwellCreateTokenEffect effect) {
         super(effect);
     }
 
@@ -92,7 +91,7 @@ class TombstoneStairwellCreateTokenEffect extends OneShotEffect {
 
             for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
                 Player player = game.getPlayer(playerId);
-                int creatureCardsInGraveyard = player.getGraveyard().count(StaticFilters.FILTER_CARD_CREATURE, source.getControllerId(), source.getSourceId(), game);
+                int creatureCardsInGraveyard = player.getGraveyard().count(StaticFilters.FILTER_CARD_CREATURE, source.getSourceId(), source, game);
                 token.putOntoBattlefield(creatureCardsInGraveyard, game, source, playerId);
                 for (UUID tokenId : token.getLastAddedTokenIds()) {
                     tokensCreated.add(tokenId);
@@ -111,7 +110,7 @@ class TombstoneStairwellTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new TombstoneStairwellDestroyEffect(), false);
     }
 
-    TombstoneStairwellTriggeredAbility(TombstoneStairwellTriggeredAbility ability) {
+    private TombstoneStairwellTriggeredAbility(final TombstoneStairwellTriggeredAbility ability) {
         super(ability);
     }
 
@@ -171,7 +170,7 @@ class TombstoneStairwellDestroyEffect extends OneShotEffect {
         super(Outcome.Benefit);
     }
 
-    TombstoneStairwellDestroyEffect(final TombstoneStairwellDestroyEffect effect) {
+    private TombstoneStairwellDestroyEffect(final TombstoneStairwellDestroyEffect effect) {
         super(effect);
         this.cardZoneString = effect.cardZoneString;
     }

@@ -48,7 +48,7 @@ public final class ArahboRoarOfTheWorld extends CardImpl {
     public ArahboRoarOfTheWorld(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{W}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.CAT, SubType.AVATAR);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
@@ -63,9 +63,9 @@ public final class ArahboRoarOfTheWorld extends CardImpl {
         this.addAbility(ability);
 
         // Whenever another Cat you control attacks, you may pay {1}{G}{W}. If you do, it gains trample and gets +X/+X until end of turn, where X is its power.
-//        Effect effect = new DoIfCostPaid(new ArahboEffect(), new ManaCostsImpl("{1}{G}{W}"));
+//        Effect effect = new DoIfCostPaid(new ArahboEffect(), new ManaCostsImpl<>("{1}{G}{W}"));
         ability = new AttacksCreatureYouControlTriggeredAbility(
-                new DoIfCostPaid(new ArahboEffect(), new ManaCostsImpl("{1}{G}{W}")), false, filter2, true);
+                new DoIfCostPaid(new ArahboEffect(), new ManaCostsImpl<>("{1}{G}{W}")), false, filter2, true);
         this.addAbility(ability);
     }
 
@@ -81,12 +81,12 @@ public final class ArahboRoarOfTheWorld extends CardImpl {
 
 class ArahboEffect extends OneShotEffect {
 
-    public ArahboEffect() {
+    ArahboEffect() {
         super(Outcome.Benefit);
         this.staticText = "it gains trample and gets +X/+X until end of turn, where X is its power";
     }
 
-    public ArahboEffect(final ArahboEffect effect) {
+    private ArahboEffect(final ArahboEffect effect) {
         super(effect);
     }
 

@@ -8,7 +8,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 
 /**
- *
  * @author LevelX2
  */
 public class BecomesMonstrousSourceTriggeredAbility extends TriggeredAbilityImpl {
@@ -17,13 +16,14 @@ public class BecomesMonstrousSourceTriggeredAbility extends TriggeredAbilityImpl
 
     public BecomesMonstrousSourceTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
+        setTriggerPhrase("When {this} becomes monstrous, ");
     }
 
     public BecomesMonstrousSourceTriggeredAbility(Effect effect) {
         this(effect, false);
     }
 
-    public BecomesMonstrousSourceTriggeredAbility(final BecomesMonstrousSourceTriggeredAbility ability) {
+    protected BecomesMonstrousSourceTriggeredAbility(final BecomesMonstrousSourceTriggeredAbility ability) {
         super(ability);
         this.monstrosityValue = ability.monstrosityValue;
     }
@@ -49,10 +49,5 @@ public class BecomesMonstrousSourceTriggeredAbility extends TriggeredAbilityImpl
 
     public int getMonstrosityValue() {
         return monstrosityValue;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "When {this} becomes monstrous, " ;
     }
 }

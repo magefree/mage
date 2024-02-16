@@ -28,7 +28,7 @@ public final class NabanDeanOfIteration extends CardImpl {
     public NabanDeanOfIteration(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(2);
@@ -55,7 +55,7 @@ class NabanDeanOfIterationEffect extends ReplacementEffectImpl {
         staticText = "If a Wizard entering the battlefield under your control causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time";
     }
 
-    NabanDeanOfIterationEffect(final NabanDeanOfIterationEffect effect) {
+    private NabanDeanOfIterationEffect(final NabanDeanOfIterationEffect effect) {
         super(effect);
     }
 

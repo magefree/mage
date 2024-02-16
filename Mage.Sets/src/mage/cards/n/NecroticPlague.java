@@ -39,7 +39,7 @@ public final class NecroticPlague extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Enchanted creature has "At the beginning of your upkeep, sacrifice this creature."
@@ -92,13 +92,13 @@ enum NecroticPlagueAdjuster implements TargetAdjuster {
 
 class NecroticPlagueEffect extends OneShotEffect {
 
-    public NecroticPlagueEffect() {
+    NecroticPlagueEffect() {
         super(Outcome.PutCardInPlay);
         staticText = "its controller chooses target creature one of their opponents controls. " +
                 "Return {this} from its owner's graveyard to the battlefield attached to that creature";
     }
 
-    public NecroticPlagueEffect(final NecroticPlagueEffect effect) {
+    private NecroticPlagueEffect(final NecroticPlagueEffect effect) {
         super(effect);
     }
 

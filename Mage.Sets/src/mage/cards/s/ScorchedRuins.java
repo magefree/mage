@@ -21,7 +21,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public final class ScorchedRuins extends CardImpl {
     
-    private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("two untapped lands");
+    private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("untapped lands");
     static {
         filter.add(TappedPredicate.UNTAPPED);
     }
@@ -32,7 +32,7 @@ public final class ScorchedRuins extends CardImpl {
         // If Scorched Ruins would enter the battlefield, sacrifice two untapped lands instead.
         // If you do, put Scorched Ruins onto the battlefield. If you don't, put it into its
         // owner's graveyard.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new EnterBattlefieldPayCostOrPutGraveyardEffect(new SacrificeTargetCost(new TargetControlledPermanent(2,2,filter,false)))));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new EnterBattlefieldPayCostOrPutGraveyardEffect(new SacrificeTargetCost(2, filter))));
         // {tap}: Add {C}{C}{C}{C}
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(4), new TapSourceCost()));
         

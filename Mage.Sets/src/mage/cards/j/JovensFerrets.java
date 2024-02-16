@@ -45,7 +45,6 @@ public final class JovensFerrets extends CardImpl {
 
         // At end of combat, tap all creatures that blocked Joven's Ferrets this turn. They don't untap during their controller's next untap step.
         Ability eocAbility = new EndOfCombatTriggeredAbility(new JovensFerretsEffect(), false);
-        eocAbility.addWatcher(new BlockedAttackerWatcher());
         this.addAbility(eocAbility);
     }
 
@@ -61,11 +60,12 @@ public final class JovensFerrets extends CardImpl {
 
 class JovensFerretsEffect extends OneShotEffect {
 
-    public JovensFerretsEffect() {
+    JovensFerretsEffect() {
         super(Outcome.Benefit);
+        this.staticText = "tap all creatures that blocked {this} this turn. They don't untap during their controller's next untap step.";
     }
 
-    public JovensFerretsEffect(final JovensFerretsEffect effect) {
+    private JovensFerretsEffect(final JovensFerretsEffect effect) {
         super(effect);
     }
 
@@ -82,7 +82,7 @@ class JovensFerretsEffect extends OneShotEffect {
             BlockedAttackerWatcher watcher = game.getState().getWatcher(BlockedAttackerWatcher.class);
             if (watcher != null) {
                 List<Permanent> toTap = new ArrayList<>();
-                for (Permanent creature : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source.getSourceId(), game)) {
+                for (Permanent creature : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source, game)) {
                     if (!creature.getId().equals(source.getSourceId())) {
                         if (watcher.creatureHasBlockedAttacker(sourcePermanent, creature, game)) {
                             toTap.add(creature);
@@ -99,10 +99,5 @@ class JovensFerretsEffect extends OneShotEffect {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return "tap all creatures that blocked {this} this turn. They don't untap during their controller's next untap step.";
     }
 }

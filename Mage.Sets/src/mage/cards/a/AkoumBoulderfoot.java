@@ -27,7 +27,7 @@ public final class AkoumBoulderfoot extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
 
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(1), false);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(1, "it"), false);
         Target target = new TargetAnyTarget();
         ability.addTarget(target);
         this.addAbility(ability);

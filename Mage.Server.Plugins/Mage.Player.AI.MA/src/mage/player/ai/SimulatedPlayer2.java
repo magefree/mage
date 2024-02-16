@@ -27,14 +27,13 @@ import java.util.*;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
- * AI: mock player in simulated games (each player replaced by simulated)
+ * AI: helper class to simulate games with computer bot (each player replaced by simulated)
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SimulatedPlayer2 extends ComputerPlayer {
+public final class SimulatedPlayer2 extends ComputerPlayer {
 
     private static final Logger logger = Logger.getLogger(SimulatedPlayer2.class);
-    private static final PassAbility pass = new PassAbility();
 
     private final boolean isSimulatedPlayer;
     private final List<String> suggested;
@@ -45,7 +44,6 @@ public class SimulatedPlayer2 extends ComputerPlayer {
     public SimulatedPlayer2(Player originalPlayer, boolean isSimulatedPlayer, List<String> suggested) {
         super(originalPlayer.getId());
         this.originalPlayer = originalPlayer.copy();
-        pass.setControllerId(playerId);
         this.isSimulatedPlayer = isSimulatedPlayer;
         this.suggested = suggested;
         this.userData = UserData.getDefaultUserDataView();
@@ -76,7 +74,7 @@ public class SimulatedPlayer2 extends ComputerPlayer {
         Collections.reverse(list);
 
         if (!forced) {
-            list.add(pass);
+            list.add(new PassAbility());
         }
 
         if (logger.isTraceEnabled()) {
@@ -124,8 +122,7 @@ public class SimulatedPlayer2 extends ComputerPlayer {
         // calculate the mana that can be used for the x part
         int numAvailable = getAvailableManaProducers(game).size() - ability.getManaCosts().manaValue();
 
-        Card card = game.getCard(ability.getSourceId());
-        if (card != null && numAvailable > 0) {
+        if (numAvailable > 0) {
             // check if variable mana costs is included and get the multiplier
             VariableManaCost variableManaCost = null;
             for (ManaCost cost : ability.getManaCostsToPay()) {
@@ -154,12 +151,12 @@ public class SimulatedPlayer2 extends ComputerPlayer {
                         if (newAbility instanceof AbilityImpl) {
                             xMultiplier = ((AbilityImpl) newAbility).handleManaXMultiplier(game, xMultiplier);
                         }
-                        newAbility.getManaCostsToPay().add(new ManaCostsImpl(new StringBuilder("{").append(xAnnounceValue).append('}').toString()));
+                        newAbility.addManaCostsToPay(new ManaCostsImpl<>(new StringBuilder("{").append(xAnnounceValue).append('}').toString()));
                         newAbility.getManaCostsToPay().setX(xAnnounceValue * xMultiplier, xAnnounceValue * xInstancesCount);
                         if (varCost != null) {
                             varCost.setPaid();
                         }
-                        card.adjustTargets(newAbility, game);
+                        newAbility.adjustTargets(game);
                         // add the different possible target option for the specific X value
                         if (!newAbility.getTargets().getUnchosen().isEmpty()) {
                             addTargetOptions(options, newAbility, targetNum, game);
@@ -349,7 +346,7 @@ public class SimulatedPlayer2 extends ComputerPlayer {
         Collections.sort(list, new Comparator<Combat>() {
             @Override
             public int compare(Combat o1, Combat o2) {
-                return Integer.valueOf(o2.getGroups().size()).compareTo(Integer.valueOf(o1.getGroups().size()));
+                return Integer.valueOf(o2.getGroups().size()).compareTo(o1.getGroups().size());
             }
         });
         return list;

@@ -38,7 +38,7 @@ public final class NevinyrralsDisk extends CardImpl {
         this.addAbility(new EntersBattlefieldTappedAbility());
         
         // {1}, {tap}: Destroy all artifacts, creatures, and enchantments.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyAllEffect(filter, false), new ManaCostsImpl("{1}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyAllEffect(filter, false), new ManaCostsImpl<>("{1}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

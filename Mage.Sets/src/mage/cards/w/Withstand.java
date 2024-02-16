@@ -21,7 +21,7 @@ public final class Withstand extends CardImpl {
 
         this.getSpellAbility().addEffect(new PreventDamageToTargetEffect(Duration.EndOfTurn, 3));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
         // Prevent the next 3 damage that would be dealt to any target this turn.
         // Draw a card.
     }

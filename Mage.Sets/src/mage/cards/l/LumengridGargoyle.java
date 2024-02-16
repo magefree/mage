@@ -24,7 +24,7 @@ public final class LumengridGargoyle extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public LumengridGargoyle (final LumengridGargoyle card) {
+    private LumengridGargoyle(final LumengridGargoyle card) {
         super(card);
     }
 

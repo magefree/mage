@@ -33,7 +33,7 @@ public final class KravTheUnredeemed extends CardImpl {
     public KravTheUnredeemed(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DEMON);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
@@ -42,9 +42,9 @@ public final class KravTheUnredeemed extends CardImpl {
         this.addAbility(new PartnerWithAbility("Regna, the Redeemer", true));
 
         // {B}, Sacrifice X creatures: Target player draws X cards and gains X life. Put X +1/+1 counters on Krav, the Unredeemed.
-        Ability ability = new SimpleActivatedAbility(new KravTheUnredeemedEffect(), new ManaCostsImpl("{B}"));
+        Ability ability = new SimpleActivatedAbility(new KravTheUnredeemedEffect(), new ManaCostsImpl<>("{B}"));
         ability.addTarget(new TargetPlayer());
-        ability.addCost(new SacrificeXTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE));
+        ability.addCost(new SacrificeXTargetCost(StaticFilters.FILTER_PERMANENT_CREATURES));
         this.addAbility(ability);
     }
 
@@ -65,7 +65,7 @@ class KravTheUnredeemedEffect extends OneShotEffect {
         this.staticText = "Target player draws X cards and gains X life. Put X +1/+1 counters on {this}";
     }
 
-    KravTheUnredeemedEffect(final KravTheUnredeemedEffect effect) {
+    private KravTheUnredeemedEffect(final KravTheUnredeemedEffect effect) {
         super(effect);
     }
 

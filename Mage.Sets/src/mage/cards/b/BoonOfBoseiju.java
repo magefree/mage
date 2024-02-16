@@ -53,8 +53,8 @@ enum BoonOfBoseijuValue implements DynamicValue {
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         return game.getBattlefield().getActivePermanents(
                 StaticFilters.FILTER_CONTROLLED_PERMANENT,
-                sourceAbility.getControllerId(), sourceAbility.getSourceId(), game
-        ).stream().mapToInt(MageObject::getManaValue).sum();
+                sourceAbility.getControllerId(), sourceAbility, game
+        ).stream().mapToInt(MageObject::getManaValue).max().orElse(0);
     }
 
     @Override

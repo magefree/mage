@@ -44,7 +44,7 @@ public final class KrosanWarchief extends CardImpl {
         // {1}{G}: Regenerate target Beast.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new RegenerateTargetEffect(),
-                new ManaCostsImpl("{1}{G}"));
+                new ManaCostsImpl<>("{1}{G}"));
         Target target = new TargetCreaturePermanent(filterTarget);
         ability.addTarget(target);
         this.addAbility(ability);

@@ -49,12 +49,12 @@ public final class MarshalingTheTroops extends CardImpl {
 
 class MarshalingTheTroopsEffect extends OneShotEffect {
 
-    public MarshalingTheTroopsEffect() {
+    MarshalingTheTroopsEffect() {
         super(Outcome.AIDontUseIt);
         staticText = "Tap any number of untapped creatures you control. You gain 4 life for each creature tapped this way";
     }
 
-    public MarshalingTheTroopsEffect(MarshalingTheTroopsEffect effect) {
+    private MarshalingTheTroopsEffect(final MarshalingTheTroopsEffect effect) {
         super(effect);
     }
 
@@ -66,7 +66,7 @@ class MarshalingTheTroopsEffect extends OneShotEffect {
         }
 
         TargetPermanent target = new TargetControlledPermanent(0, Integer.MAX_VALUE, MarshalingTheTroops.filter, true);
-        controller.choose(outcome, target, source.getSourceId(), game);
+        controller.choose(outcome, target, source, game);
         if (target.getTargets().isEmpty()) {
             return false;
         }

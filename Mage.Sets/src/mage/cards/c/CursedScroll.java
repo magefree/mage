@@ -28,7 +28,7 @@ public final class CursedScroll extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
 
         // {3}, {T}: Name a card. Reveal a card at random from your hand. If it's the named card, Cursed Scroll deals 2 damage to any target.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ChooseACardNameEffect(ChooseACardNameEffect.TypeOfName.ALL), new ManaCostsImpl("{3}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ChooseACardNameEffect(ChooseACardNameEffect.TypeOfName.ALL), new ManaCostsImpl<>("{3}"));
         ability.addEffect(new CursedScrollEffect());
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetAnyTarget());
@@ -47,19 +47,19 @@ public final class CursedScroll extends CardImpl {
 
 class CursedScrollEffect extends OneShotEffect {
 
-    public CursedScrollEffect() {
+    CursedScrollEffect() {
         super(Outcome.Neutral);
         staticText = ", then reveal a card at random from your hand. If that card has the chosen name, {this} deals 2 damage to any target";
     }
 
-    public CursedScrollEffect(final CursedScrollEffect effect) {
+    private CursedScrollEffect(final CursedScrollEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         String cardName = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
         if (sourceObject != null && controller != null && cardName != null && !cardName.isEmpty()) {
             if (!controller.getHand().isEmpty()) {

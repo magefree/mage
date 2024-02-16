@@ -83,7 +83,7 @@ class DocentOfPerfectionEffect extends OneShotEffect {
         staticText = "Then if you control three or more Wizards, transform {this}";
     }
 
-    public DocentOfPerfectionEffect(final DocentOfPerfectionEffect effect) {
+    private DocentOfPerfectionEffect(final DocentOfPerfectionEffect effect) {
         super(effect);
     }
 
@@ -96,7 +96,7 @@ class DocentOfPerfectionEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            if (game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game) >= 3) {
+            if (game.getBattlefield().count(filter, source.getControllerId(), source, game) >= 3) {
                 return new TransformSourceEffect().apply(game, source);
             }
         }

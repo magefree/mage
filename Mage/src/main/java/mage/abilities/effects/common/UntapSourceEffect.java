@@ -8,7 +8,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author Loki
  */
 public class UntapSourceEffect extends OneShotEffect {
@@ -18,7 +17,7 @@ public class UntapSourceEffect extends OneShotEffect {
         staticText = "untap {this}";
     }
 
-    public UntapSourceEffect(final UntapSourceEffect effect) {
+    protected UntapSourceEffect(final UntapSourceEffect effect) {
         super(effect);
     }
 

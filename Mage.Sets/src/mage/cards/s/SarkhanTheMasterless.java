@@ -27,7 +27,7 @@ public final class SarkhanTheMasterless extends CardImpl {
     public SarkhanTheMasterless(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{R}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SARKHAN);
         this.setStartingLoyalty(5);
 
@@ -140,8 +140,8 @@ class SarkhanTheMasterlessBecomeDragonEffect extends ContinuousEffectImpl {
                     break;
                 case PTChangingEffects_7:
                     if (sublayer == SubLayer.SetPT_7b) {
-                        permanent.getPower().setValue(4);
-                        permanent.getToughness().setValue(4);
+                        permanent.getPower().setModifiedBaseValue(4);
+                        permanent.getToughness().setModifiedBaseValue(4);
                     }
             }
         }

@@ -5,15 +5,13 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author TheElk801
  */
 public final class InklingToken extends TokenImpl {
 
     public InklingToken() {
-        super("Inkling", "2/1 white and black Inkling creature token with flying");
+        super("Inkling Token", "2/1 white and black Inkling creature token with flying");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
         color.setBlack(true);
@@ -22,8 +20,6 @@ public final class InklingToken extends TokenImpl {
         toughness = new MageInt(1);
 
         addAbility(FlyingAbility.getInstance());
-
-        availableImageSetCodes = Arrays.asList("STX");
     }
 
     private InklingToken(final InklingToken token) {

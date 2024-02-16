@@ -23,7 +23,7 @@ public final class NemaSiltlurker extends CardImpl {
         this.toughness = new MageInt(5);
     }
 
-    public NemaSiltlurker (final NemaSiltlurker card) {
+    private NemaSiltlurker(final NemaSiltlurker card) {
         super(card);
     }
 

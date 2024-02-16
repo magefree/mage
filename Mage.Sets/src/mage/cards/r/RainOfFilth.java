@@ -12,7 +12,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledLandPermanent;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -25,8 +25,9 @@ public final class RainOfFilth extends CardImpl {
 
 
         // Until end of turn, lands you control gain "Sacrifice this land: Add {B}."
-        ActivatedManaAbilityImpl ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlackMana(1), new SacrificeSourceCost());
-        this.getSpellAbility().addEffect(new GainAbilityAllEffect(ability, Duration.EndOfTurn, new FilterControlledLandPermanent()));
+        ActivatedManaAbilityImpl ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlackMana(1), new SacrificeSourceCost().setText("sacrifice this land"));
+        this.getSpellAbility().addEffect(new GainAbilityAllEffect(ability, Duration.EndOfTurn, StaticFilters.FILTER_CONTROLLED_PERMANENT_LANDS)
+                .setText("until end of turn, lands you control gain \"Sacrifice this land: Add {B}.\""));
     }
 
     private RainOfFilth(final RainOfFilth card) {

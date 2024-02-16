@@ -28,7 +28,7 @@ public final class Tracker extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {G}{G}, {tap}: Tracker deals damage equal to its power to target creature. That creature deals damage equal to its power to Tracker.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageEachOtherEffect(), new ManaCostsImpl("{G}{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageEachOtherEffect(), new ManaCostsImpl<>("{G}{G}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

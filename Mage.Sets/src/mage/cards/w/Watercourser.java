@@ -27,7 +27,7 @@ public final class Watercourser extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {U}: Watercourser gets +1/-1 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, -1, Duration.EndOfTurn), new ManaCostsImpl("{U}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, -1, Duration.EndOfTurn), new ManaCostsImpl<>("{U}")));
     }
 
     private Watercourser(final Watercourser card) {

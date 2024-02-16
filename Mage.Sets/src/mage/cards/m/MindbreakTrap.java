@@ -22,7 +22,7 @@ import java.util.UUID;
  */
 public final class MindbreakTrap extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("spell to exile");
+    private static final FilterSpell filter = new FilterSpell("spells");
 
     public MindbreakTrap(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");
@@ -33,7 +33,7 @@ public final class MindbreakTrap extends CardImpl {
 
         // Exile any number of target spells.
         this.getSpellAbility().addTarget(new TargetSpell(0, Integer.MAX_VALUE, filter));
-        this.getSpellAbility().addEffect(new ExileTargetEffect("Exile any number of target spells", true));
+        this.getSpellAbility().addEffect(new ExileTargetEffect("Exile any number of target spells"));
     }
 
     private MindbreakTrap(final MindbreakTrap card) {

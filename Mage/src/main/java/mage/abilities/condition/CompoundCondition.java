@@ -38,4 +38,9 @@ public class CompoundCondition implements Condition {
         return text;
     }
 
+    @Override
+    public boolean caresAboutManaColor() {
+        return conditions.stream().anyMatch(Condition::caresAboutManaColor);
+    }
+
 }

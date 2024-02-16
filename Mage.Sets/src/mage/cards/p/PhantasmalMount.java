@@ -78,7 +78,7 @@ class PhantasmalMountEffect extends OneShotEffect {
                 + "sacrifice that creature. When the creature leaves the battlefield this turn, sacrifice {this}";
     }
 
-    PhantasmalMountEffect(PhantasmalMountEffect effect) {
+    private PhantasmalMountEffect(final PhantasmalMountEffect effect) {
         super(effect);
     }
 
@@ -124,7 +124,7 @@ class PhantasmalMountDelayedTriggeredAbility extends DelayedTriggeredAbility {
         this.creatureId = creatureId;
     }
 
-    PhantasmalMountDelayedTriggeredAbility(PhantasmalMountDelayedTriggeredAbility ability) {
+    private PhantasmalMountDelayedTriggeredAbility(final PhantasmalMountDelayedTriggeredAbility ability) {
         super(ability);
         this.creatureId = ability.creatureId;
     }

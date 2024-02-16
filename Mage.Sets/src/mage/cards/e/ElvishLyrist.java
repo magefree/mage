@@ -30,7 +30,7 @@ public final class ElvishLyrist extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {G}, {tap}, Sacrifice Elvish Lyrist: Destroy target enchantment.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl<>("{G}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetEnchantmentPermanent());

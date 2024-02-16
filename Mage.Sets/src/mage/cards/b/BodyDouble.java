@@ -50,12 +50,12 @@ public final class BodyDouble extends CardImpl {
 
 class BodyDoubleCopyEffect extends OneShotEffect {
 
-    public BodyDoubleCopyEffect() {
+    BodyDoubleCopyEffect() {
         super(Outcome.Copy);
         this.staticText = "as a copy of any creature card in a graveyard";
     }
 
-    public BodyDoubleCopyEffect(final BodyDoubleCopyEffect effect) {
+    private BodyDoubleCopyEffect(final BodyDoubleCopyEffect effect) {
         super(effect);
     }
 
@@ -64,9 +64,9 @@ class BodyDoubleCopyEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             Target target = new TargetCardInGraveyard(new FilterCreatureCard("creature card in a graveyard"));
-            target.setNotTarget(true);
-            if (target.canChoose(source.getSourceId(), source.getControllerId(), game)) {
-                player.choose(outcome, target, source.getSourceId(), game);
+            target.withNotTarget(true);
+            if (target.canChoose(source.getControllerId(), source, game)) {
+                player.choose(outcome, target, source, game);
                 Card copyFromCard = game.getCard(target.getFirstTarget());
                 if (copyFromCard != null) {
                     CopyEffect copyEffect = new CopyEffect(Duration.Custom, copyFromCard, source.getSourceId());

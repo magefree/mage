@@ -33,7 +33,7 @@ public final class GoblinMachinist extends CardImpl {
         this.toughness = new MageInt(5);
 
         // {2}{R}: Reveal cards from the top of your library until you reveal a nonland card. Goblin Machinist gets +X/+0 until end of turn, where X is that card's converted mana cost. Put the revealed cards on the bottom of your library in any order.
-        this.addAbility(new SimpleActivatedAbility(new GoblinMachinistEffect(), new ManaCostsImpl("{2}{R}")));
+        this.addAbility(new SimpleActivatedAbility(new GoblinMachinistEffect(), new ManaCostsImpl<>("{2}{R}")));
     }
 
     private GoblinMachinist(final GoblinMachinist card) {
@@ -48,12 +48,12 @@ public final class GoblinMachinist extends CardImpl {
 
 class GoblinMachinistEffect extends OneShotEffect {
 
-    public GoblinMachinistEffect() {
+    GoblinMachinistEffect() {
         super(Outcome.DrawCard);
         this.staticText = "Reveal cards from the top of your library until you reveal a nonland card. {this} gets +X/+0 until end of turn, where X is that card's mana value. Put the revealed cards on the bottom of your library in any order";
     }
 
-    public GoblinMachinistEffect(final GoblinMachinistEffect effect) {
+    private GoblinMachinistEffect(final GoblinMachinistEffect effect) {
         super(effect);
     }
 

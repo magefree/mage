@@ -39,7 +39,7 @@ public final class GiantAlbatross extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Giant Albatross dies, you may pay {1}{U}. If you do, for each creature that dealt damage to Giant Albatross this turn, destroy that creature unless its controller pays 2 life. A creature destroyed this way can't be regenerated.
-        Ability ability = new DiesSourceTriggeredAbility(new DoIfCostPaid(new GiantAlbatrossEffect(), new ManaCostsImpl("{1}{U}")));
+        Ability ability = new DiesSourceTriggeredAbility(new DoIfCostPaid(new GiantAlbatrossEffect(), new ManaCostsImpl<>("{1}{U}")));
         this.addAbility(ability);
     }
 
@@ -55,12 +55,12 @@ public final class GiantAlbatross extends CardImpl {
 
 class GiantAlbatrossEffect extends OneShotEffect {
 
-    public GiantAlbatrossEffect() {
+    GiantAlbatrossEffect() {
         super(Outcome.Detriment);
         this.staticText = "for each creature that dealt damage to {this} this turn, destroy that creature unless its controller pays 2 life. A creature destroyed this way can't be regenerated";
     }
 
-    public GiantAlbatrossEffect(final GiantAlbatrossEffect effect) {
+    private GiantAlbatrossEffect(final GiantAlbatrossEffect effect) {
         super(effect);
     }
 

@@ -29,7 +29,7 @@ public final class KorSkyClimber extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {1}{W}: Kor Sky Climber gains flying until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{1}{W}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{1}{W}")));
     }
 
     private KorSkyClimber(final KorSkyClimber card) {

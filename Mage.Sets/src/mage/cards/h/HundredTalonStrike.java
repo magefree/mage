@@ -1,4 +1,3 @@
-
 package mage.cards.h;
 
 import mage.ObjectColor;
@@ -7,7 +6,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
-import mage.abilities.keyword.SpliceOntoArcaneAbility;
+import mage.abilities.keyword.SpliceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -45,9 +44,9 @@ public final class HundredTalonStrike extends CardImpl {
         effect = new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("and gains first strike until end of turn");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent().withChooseHint("+1/+0 and first strike"));
         // Splice onto Arcane-Tap an untapped white creature you control.
-        this.addAbility(new SpliceOntoArcaneAbility(new TapTargetCost(new TargetControlledCreaturePermanent(1,1,filter,false))));
+        this.addAbility(new SpliceAbility(SpliceAbility.ARCANE, new TapTargetCost(new TargetControlledCreaturePermanent(1,1,filter,false))));
     }
 
     private HundredTalonStrike(final HundredTalonStrike card) {

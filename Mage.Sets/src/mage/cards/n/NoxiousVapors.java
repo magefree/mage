@@ -98,7 +98,7 @@ class NoxiousVaporsEffect extends OneShotEffect {
         FilterCard filter = new FilterCard();
         filter.add(new ColorPredicate(color));
         TargetCardInHand target = new TargetCardInHand(filter);
-        if (player.choose(Outcome.Benefit, target, source.getSourceId(), game)) {
+        if (player.choose(Outcome.Benefit, target, source, game)) {
             Card card = game.getCard(target.getFirstTarget());
             if (card != null) {
                 chosenCards.add(card);

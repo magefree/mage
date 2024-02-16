@@ -46,7 +46,7 @@ public final class GeneralsEnforcer extends CardImpl {
         )));
 
         // {2}{W}{B}: Exile target card from a graveyard. If it was a creature card, create a 1/1 white Human Soldier creature token.
-        Ability ability = new SimpleActivatedAbility(new GeneralsEnforcerEffect(), new ManaCostsImpl("{2}{W}{B}"));
+        Ability ability = new SimpleActivatedAbility(new GeneralsEnforcerEffect(), new ManaCostsImpl<>("{2}{W}{B}"));
         ability.addTarget(new TargetCardInGraveyard());
         this.addAbility(ability);
     }

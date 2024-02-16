@@ -35,7 +35,7 @@ public final class ReinsOfTheVinesteed extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Enchanted creature gets +2/+2.
@@ -58,12 +58,12 @@ public final class ReinsOfTheVinesteed extends CardImpl {
 
 class ReinsOfTheVinesteedEffect extends OneShotEffect {
 
-    public ReinsOfTheVinesteedEffect() {
+    ReinsOfTheVinesteedEffect() {
         super(Outcome.PutCardInPlay);
         staticText = "you may return {this} from your graveyard to the battlefield attached to a creature that shares a creature type with that creature";
     }
 
-    public ReinsOfTheVinesteedEffect(final ReinsOfTheVinesteedEffect effect) {
+    private ReinsOfTheVinesteedEffect(final ReinsOfTheVinesteedEffect effect) {
         super(effect);
     }
 
@@ -83,9 +83,9 @@ class ReinsOfTheVinesteedEffect extends OneShotEffect {
             );
             FILTER.add(new SharesCreatureTypePredicate(lastStateCreature));
             TargetPermanent target = new TargetPermanent(FILTER);
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             if (controller != null
-                    && controller.choose(Outcome.PutCardInPlay, target, source.getSourceId(), game)) {
+                    && controller.choose(Outcome.PutCardInPlay, target, source, game)) {
                 Permanent targetPermanent = game.getPermanent(target.getFirstTarget());
                 if (!targetPermanent.cantBeAttachedBy(aura, source, game, false)) {
                     game.getState().setValue("attachTo:" + aura.getId(), targetPermanent);

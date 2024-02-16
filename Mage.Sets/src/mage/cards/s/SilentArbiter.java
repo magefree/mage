@@ -50,7 +50,7 @@ class SilentArbiterAttackRestrictionEffect extends RestrictionEffect {
         staticText = "No more than one creature can attack each combat";
     }
 
-    SilentArbiterAttackRestrictionEffect(final SilentArbiterAttackRestrictionEffect effect) {
+    private SilentArbiterAttackRestrictionEffect(final SilentArbiterAttackRestrictionEffect effect) {
         super(effect);
     }
 
@@ -77,7 +77,7 @@ class SilentArbiterBlockRestrictionEffect extends RestrictionEffect {
         staticText = "No more than one creature can block each combat";
     }
 
-    SilentArbiterBlockRestrictionEffect(final SilentArbiterBlockRestrictionEffect effect) {
+    private SilentArbiterBlockRestrictionEffect(final SilentArbiterBlockRestrictionEffect effect) {
         super(effect);
     }
 
@@ -92,7 +92,16 @@ class SilentArbiterBlockRestrictionEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
-        return game.getCombat().getBlockers().isEmpty();
+    public boolean canBlock(Permanent attacker, Permanent newBlocker, Ability source, Game game, boolean canUseChooseDialogs) {
+        if (attacker == null) {
+            return true;
+        }
+        for (UUID creatureId : game.getCombat().getBlockers()) {
+            Permanent existingBlocker = game.getPermanent(creatureId);
+            if (game.getPlayer(existingBlocker.getControllerId()).hasOpponent(attacker.getControllerId(), game) && existingBlocker.isControlledBy(newBlocker.getControllerId())) {
+                return false;
+            }
+        }
+        return true;
     }
 }

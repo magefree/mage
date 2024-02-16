@@ -13,6 +13,7 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetAnyTarget;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 import java.util.Collection;
 import java.util.UUID;
@@ -119,6 +120,7 @@ class SoulfireEruptionCastEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        objectId = CardUtil.getMainCardId(game, objectId); // for split cards
         return source.isControlledBy(affectedControllerId)
                 && objectId.equals(getTargetPointer().getFirst(game, source));
     }

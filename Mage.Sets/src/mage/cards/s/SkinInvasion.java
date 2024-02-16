@@ -34,13 +34,13 @@ public final class SkinInvasion extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{R}");
         this.subtype.add(SubType.AURA);
 
-        this.secondSideCardClazz = SkinShedder.class;
+        this.secondSideCardClazz = mage.cards.s.SkinShedder.class;
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Enchanted creature attacks each combat if able.
@@ -64,12 +64,12 @@ public final class SkinInvasion extends CardImpl {
 
 class SkinInvasionEffect extends OneShotEffect {
 
-    public SkinInvasionEffect() {
+    SkinInvasionEffect() {
         super(Outcome.PutCardInPlay);
         this.staticText = "return {this} to the battlefield transformed under your control";
     }
 
-    public SkinInvasionEffect(final SkinInvasionEffect effect) {
+    private SkinInvasionEffect(final SkinInvasionEffect effect) {
         super(effect);
     }
 

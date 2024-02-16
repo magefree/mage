@@ -10,7 +10,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.PhaseStep;
-import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -26,7 +26,7 @@ public final class Festival extends CardImpl {
                 "Cast this spell only during an opponent's upkeep"));
 
         // Creatures can't attack this turn.
-        this.getSpellAbility().addEffect(new CantAttackAnyPlayerAllEffect(Duration.EndOfTurn, FILTER_PERMANENT_CREATURES));
+        this.getSpellAbility().addEffect(new CantAttackAnyPlayerAllEffect(Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES));
 
     }
 

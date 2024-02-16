@@ -37,7 +37,7 @@ public final class SkyshroudPoacher extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {3}, {tap}: Search your library for an Elf permanent card and put it onto the battlefield. Then shuffle your library.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter)), new ManaCostsImpl("{3}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter)), new ManaCostsImpl<>("{3}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

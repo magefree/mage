@@ -61,7 +61,7 @@ public final class PhylacteryLich extends CardImpl {
             super(Zone.BATTLEFIELD, new SacrificeSourceEffect());
         }
 
-        public PhylacteryLichAbility(final PhylacteryLichAbility ability) {
+        private PhylacteryLichAbility(final PhylacteryLichAbility ability) {
             super(ability);
         }
 
@@ -73,7 +73,7 @@ public final class PhylacteryLich extends CardImpl {
         @Override
         public boolean checkTrigger(GameEvent event, Game game) {
             for (Permanent perm : game.getBattlefield().getAllActivePermanents(controllerId)) {
-                if (perm.getCounters(game).getCount("phylactery") > 0) {
+                if (perm.getCounters(game).getCount(CounterType.PHYLACTERY) > 0) {
                     return false;
                 }
             }
@@ -102,7 +102,7 @@ class PhylacteryLichEffect extends OneShotEffect {
         staticText = "put a phylactery counter on an artifact you control";
     }
 
-    public PhylacteryLichEffect(final PhylacteryLichEffect effect) {
+    private PhylacteryLichEffect(final PhylacteryLichEffect effect) {
         super(effect);
     }
 
@@ -111,8 +111,8 @@ class PhylacteryLichEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, true);
-            if (target.canChoose(source.getSourceId(), source.getControllerId(), game)) {
-                if (player.choose(Outcome.Neutral, target, source.getSourceId(), game)) {
+            if (target.canChoose(source.getControllerId(), source, game)) {
+                if (player.choose(Outcome.Neutral, target, source, game)) {
                     Permanent permanent = game.getPermanent(target.getFirstTarget());
                     if (permanent != null) {
                         permanent.addCounters(CounterType.PHYLACTERY.createInstance(), source.getControllerId(), source, game);

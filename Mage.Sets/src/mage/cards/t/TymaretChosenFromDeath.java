@@ -7,7 +7,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.DevotionCount;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.SetToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBaseToughnessSourceEffect;
 import mage.cards.*;
 import mage.constants.*;
 import mage.filter.StaticFilters;
@@ -28,20 +28,20 @@ public final class TymaretChosenFromDeath extends CardImpl {
     public TymaretChosenFromDeath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{B}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DEMIGOD);
         this.power = new MageInt(2);
         this.toughness = new MageInt(0);
 
         // Tymaret's toughness is equal to your devotion to black.
         this.addAbility(new SimpleStaticAbility(
-                        Zone.ALL, new SetToughnessSourceEffect(DevotionCount.B, Duration.EndOfGame)
+                        Zone.ALL, new SetBaseToughnessSourceEffect(DevotionCount.B)
                         .setText("{this}'s toughness is equal to your devotion to black")
                 ).addHint(DevotionCount.B.getHint())
         );
 
         // {1}{B}: Exile up to two target cards from graveyards. You gain 1 life for each creature card exiled this way.
-        Ability ability = new SimpleActivatedAbility(new TymaretChosenFromDeathEffect(), new ManaCostsImpl("{1}{B}"));
+        Ability ability = new SimpleActivatedAbility(new TymaretChosenFromDeathEffect(), new ManaCostsImpl<>("{1}{B}"));
         ability.addTarget(new TargetCardInGraveyard(0, 2, StaticFilters.FILTER_CARD));
         this.addAbility(ability);
     }
@@ -96,7 +96,10 @@ class TymaretChosenFromDeathEffect extends OneShotEffect {
                 .filter(Zone.EXILED::equals)
                 .mapToInt(x -> 1)
                 .sum();
-        player.gainLife(lifeGain, game, source);
+        if (lifeGain > 0) {
+            game.getState().processAction(game);
+            player.gainLife(lifeGain, game, source);
+        }
         return true;
     }
 }

@@ -1,18 +1,16 @@
-
-
 package mage.game.permanent.token;
+
+import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.MageInt;
 
 /**
- *
  * @author spjspj
  */
 public final class GiantWarriorToken extends TokenImpl {
 
     public GiantWarriorToken() {
-        super("Giant Warrior", "5/5 white Giant Warrior creature token");
+        super("Giant Warrior Token", "5/5 white Giant Warrior creature token");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
         subtype.add(SubType.GIANT);
@@ -21,7 +19,7 @@ public final class GiantWarriorToken extends TokenImpl {
         toughness = new MageInt(5);
     }
 
-    public GiantWarriorToken(final GiantWarriorToken token) {
+    private GiantWarriorToken(final GiantWarriorToken token) {
         super(token);
     }
 

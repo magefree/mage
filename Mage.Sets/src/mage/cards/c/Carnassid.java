@@ -29,7 +29,7 @@ public final class Carnassid extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
         // {1}{G}: Regenerate Carnassid.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{1}{G}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{1}{G}")));
     }
 
     private Carnassid(final Carnassid card) {

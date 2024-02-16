@@ -1,6 +1,5 @@
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -8,7 +7,7 @@ import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
-import mage.abilities.effects.common.counter.AddCountersControllerEffect;
+import mage.abilities.effects.common.counter.AddCountersPlayersEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -22,8 +21,9 @@ import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
  * @author emerald000
  */
 public final class MizzixOfTheIzmagnus extends CardImpl {
@@ -36,15 +36,16 @@ public final class MizzixOfTheIzmagnus extends CardImpl {
 
     public MizzixOfTheIzmagnus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GOBLIN);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
         // Whenever you cast an instant or sorcery spell with converted mana cost greater than the number of experience counters you have, you get an experience counter.
-        this.addAbility(new SpellCastControllerTriggeredAbility(
-                new AddCountersControllerEffect(CounterType.EXPERIENCE.createInstance(1), false), filter, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersPlayersEffect(
+                CounterType.EXPERIENCE.createInstance(), TargetController.YOU
+        ), filter, false));
 
         // Instant and sorcery spells you cast cost {1} less to cast for each experience counter you have.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MizzixOfTheIzmagnusCostReductionEffect()));
@@ -89,7 +90,7 @@ class MizzixOfTheIzmagnusCostReductionEffect extends CostModificationEffectImpl 
         staticText = "Instant and sorcery spells you cast cost {1} less to cast for each experience counter you have";
     }
 
-    MizzixOfTheIzmagnusCostReductionEffect(MizzixOfTheIzmagnusCostReductionEffect effect) {
+    private MizzixOfTheIzmagnusCostReductionEffect(final MizzixOfTheIzmagnusCostReductionEffect effect) {
         super(effect);
     }
 
@@ -109,11 +110,11 @@ class MizzixOfTheIzmagnusCostReductionEffect extends CostModificationEffectImpl 
         if (abilityToModify instanceof SpellAbility && abilityToModify.isControlledBy(source.getControllerId())) {
             Spell spell = (Spell) game.getStack().getStackObject(abilityToModify.getId());
             if (spell != null) {
-                return StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY.match(spell, source.getSourceId(), source.getControllerId(), game);
+                return StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY.match(spell, source.getControllerId(), source, game);
             } else if (game.inCheckPlayableState()) {
                 // Spell is not on the stack yet, but possible playable spells are determined
                 Card sourceCard = game.getCard(abilityToModify.getSourceId());
-                return sourceCard != null && StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY.match(sourceCard, source.getSourceId(), source.getControllerId(), game);
+                return sourceCard != null && StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY.match(sourceCard, source.getControllerId(), source, game);
             }
         }
         return false;

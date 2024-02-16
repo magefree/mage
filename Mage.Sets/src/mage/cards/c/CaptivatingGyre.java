@@ -17,7 +17,7 @@ public final class CaptivatingGyre extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{U}{U}");
 
         // Return up to three target creatures to their owners' hands.
-        this.getSpellAbility().addEffect(new ReturnToHandTargetEffect(true));
+        this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 3));
     }
 

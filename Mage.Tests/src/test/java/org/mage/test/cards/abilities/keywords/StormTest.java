@@ -243,13 +243,13 @@ public class StormTest extends CardTestPlayerBase {
         // Storm
         addCard(Zone.HAND, playerA, "Mind's Desire", 1);  // {4}{U}{U}
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Wheel of Fortune");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mox Emerald");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Turnabout");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Wheel of Fortune", true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mox Emerald", true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Turnabout", true);
         setChoice(playerA, "Land");
         setChoice(playerA, false);
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Yawgmoth's Will");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Palinchron");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Yawgmoth's Will", true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Palinchron", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mind's Desire");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -264,7 +264,5 @@ public class StormTest extends CardTestPlayerBase {
         assertExileCount("Mind's Desire", 1);
 
         assertExileCount(playerA, 8); // 6 from Mind's Desire and the Desire and the Yawgmoth's Will
-
     }
-
 }

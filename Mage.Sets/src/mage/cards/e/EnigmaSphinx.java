@@ -64,9 +64,10 @@ class EnigmaSphinxTriggeredAbility extends TriggeredAbilityImpl {
 
     public EnigmaSphinxTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.ALL, effect, optional);
+        setTriggerPhrase("When {this} is put into your graveyard from the battlefield, ");
     }
 
-    EnigmaSphinxTriggeredAbility(EnigmaSphinxTriggeredAbility ability) {
+    private EnigmaSphinxTriggeredAbility(final EnigmaSphinxTriggeredAbility ability) {
         super(ability);
     }
 
@@ -93,21 +94,16 @@ class EnigmaSphinxTriggeredAbility extends TriggeredAbilityImpl {
         }
         return false;
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "When {this} is put into your graveyard from the battlefield, " ;
-    }
 }
 
 class EnigmaSphinxEffect extends OneShotEffect {
 
-    public EnigmaSphinxEffect() {
+    EnigmaSphinxEffect() {
         super(Outcome.ReturnToHand);
         staticText = "put it into your library third from the top";
     }
 
-    public EnigmaSphinxEffect(final EnigmaSphinxEffect effect) {
+    private EnigmaSphinxEffect(final EnigmaSphinxEffect effect) {
         super(effect);
     }
 

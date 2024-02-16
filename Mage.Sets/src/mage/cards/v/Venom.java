@@ -36,13 +36,13 @@ public final class Venom extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Whenever enchanted creature blocks or becomes blocked by a non-Wall creature, destroy the other creature at end of combat.
         Effect effect = new CreateDelayedTriggeredAbilityEffect(
                 new AtTheEndOfCombatDelayedTriggeredAbility(new DestroyTargetEffect()), true);
-        effect.setText("destroy that creature at end of combat");
+        effect.setText("destroy the other creature at end of combat");
         this.addAbility(new VenomTriggeredAbility(effect));
     }
 
@@ -62,7 +62,7 @@ class VenomTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, effect);
     }
 
-    VenomTriggeredAbility(final VenomTriggeredAbility ability) {
+    private VenomTriggeredAbility(final VenomTriggeredAbility ability) {
         super(ability);
     }
 

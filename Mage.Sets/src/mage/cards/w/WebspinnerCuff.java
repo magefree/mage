@@ -36,6 +36,7 @@ public final class WebspinnerCuff extends CardImpl {
         ability.addEffect(new GainAbilityAttachedEffect(
                 ReachAbility.getInstance(), AttachmentType.EQUIPMENT
         ).setText("and has reach"));
+        this.addAbility(ability);
 
         // Reconfigure {4}
         this.addAbility(new ReconfigureAbility("{4}"));

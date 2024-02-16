@@ -49,7 +49,7 @@ public final class DowsingDagger extends CardImpl {
         this.addAbility(new DealsDamageToAPlayerAttachedTriggeredAbility(new TransformSourceEffect(), "equipped", true));
 
         // Equip 2
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2), false));
     }
 
     private DowsingDagger(final DowsingDagger card) {

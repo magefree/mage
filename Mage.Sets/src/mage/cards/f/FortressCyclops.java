@@ -27,9 +27,9 @@ public final class FortressCyclops extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever Fortress Cyclops attacks, it gets +3/+0 until end of turn.
-        this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(3,0, Duration.EndOfTurn), false));
+        this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(3, 0, Duration.EndOfTurn, "it")));
         // Whenever Fortress Cyclops blocks, it gets +0/+3 until end of turn.
-        this.addAbility(new BlocksSourceTriggeredAbility(new BoostSourceEffect(0,3, Duration.EndOfTurn), false));
+        this.addAbility(new BlocksSourceTriggeredAbility(new BoostSourceEffect(0, 3, Duration.EndOfTurn, "it")));
     }
 
     private FortressCyclops(final FortressCyclops card) {

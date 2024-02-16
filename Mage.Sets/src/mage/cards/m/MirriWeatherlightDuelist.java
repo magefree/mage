@@ -9,6 +9,7 @@ import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.AddContinuousEffectToGame;
+import mage.abilities.effects.common.continuous.ChangeMaxNumberThatCanAttackSourceEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -27,7 +28,7 @@ public final class MirriWeatherlightDuelist extends CardImpl {
     public MirriWeatherlightDuelist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{W}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.CAT);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(3);
@@ -41,7 +42,7 @@ public final class MirriWeatherlightDuelist extends CardImpl {
 
         // As long as Mirri, Weatherlight Duelist is tapped, no more than one creature can attack you each combat.
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
-                new MirriWeatherlightDuelistAttackRestrictionEffect(1), SourceTappedCondition.TAPPED,
+                new ChangeMaxNumberThatCanAttackSourceEffect(1), SourceTappedCondition.TAPPED,
                 "As long as {this} is tapped, no more than one creature can attack you each combat."));
         this.addAbility(ability);
     }
@@ -63,7 +64,7 @@ class MirriWeatherlightDuelistBlockRestrictionEffect extends RestrictionEffect {
         staticText = "each opponent can't block with more than one creature this combat";
     }
 
-    MirriWeatherlightDuelistBlockRestrictionEffect(final MirriWeatherlightDuelistBlockRestrictionEffect effect) {
+    private MirriWeatherlightDuelistBlockRestrictionEffect(final MirriWeatherlightDuelistBlockRestrictionEffect effect) {
         super(effect);
     }
 
@@ -78,62 +79,25 @@ class MirriWeatherlightDuelistBlockRestrictionEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
+    public boolean canBlock(Permanent attacker, Permanent newBlocker, Ability source, Game game, boolean canUseChooseDialogs) {
         if (attacker == null) {
             return true;
         }
-        for (UUID creature : game.getCombat().getBlockers()) {
-            if (game.getPlayer(game.getPermanent(creature).getOwnerId()).hasOpponent(attacker.getControllerId(), game)) {
+        Player controller = game.getPlayer(attacker.getControllerId());
+        if (controller == null) {
+            return true;  // Supposed to return false since without the controller this effect should not restrict blockers
+        }
+
+        for (UUID existingBlockerId : game.getCombat().getBlockers()) {
+            Permanent existingBlocker = game.getPermanent(existingBlockerId);
+            if (existingBlocker == null) {
+                continue;
+            }
+            if (controller.hasOpponent(existingBlocker.getControllerId(), game)
+                    && existingBlocker.isControlledBy(newBlocker.getControllerId())) {
                 return false;
             }
         }
         return true;
-    }
-}
-
-class MirriWeatherlightDuelistAttackRestrictionEffect extends ContinuousEffectImpl {
-
-    private final int maxAttackedBy;
-
-    public MirriWeatherlightDuelistAttackRestrictionEffect(int maxAttackedBy) {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        this.maxAttackedBy = maxAttackedBy;
-        staticText = "No more than one creature can attack you each combat";
-    }
-
-    public MirriWeatherlightDuelistAttackRestrictionEffect(final MirriWeatherlightDuelistAttackRestrictionEffect effect) {
-        super(effect);
-        this.maxAttackedBy = effect.maxAttackedBy;
-    }
-
-    @Override
-    public MirriWeatherlightDuelistAttackRestrictionEffect copy() {
-        return new MirriWeatherlightDuelistAttackRestrictionEffect(this);
-    }
-
-    @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        switch (layer) {
-            case RulesEffects:
-                Player controller = game.getPlayer(source.getControllerId());
-                if (controller != null) {
-                    // Change the rule
-                    if (controller.getMaxAttackedBy() > maxAttackedBy) {
-                        controller.setMaxAttackedBy(maxAttackedBy);
-                    }
-                }
-                break;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public boolean hasLayer(Layer layer) {
-        return layer == Layer.RulesEffects;
     }
 }

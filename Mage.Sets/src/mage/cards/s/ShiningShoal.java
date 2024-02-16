@@ -74,7 +74,7 @@ class ShiningShoalRedirectDamageTargetEffect extends RedirectDamageFromSourceToT
         staticText = "The next X damage that a source of your choice would deal to you and/or creatures you control this turn is dealt to any target instead";
     }
 
-    public ShiningShoalRedirectDamageTargetEffect(final ShiningShoalRedirectDamageTargetEffect effect) {
+    private ShiningShoalRedirectDamageTargetEffect(final ShiningShoalRedirectDamageTargetEffect effect) {
         super(effect);
         this.dynamicAmount = effect.dynamicAmount;
     }
@@ -87,11 +87,6 @@ class ShiningShoalRedirectDamageTargetEffect extends RedirectDamageFromSourceToT
     @Override
     public void init(Ability source, Game game) {
         amountToRedirect = dynamicAmount.calculate(game, source, this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

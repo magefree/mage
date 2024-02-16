@@ -26,7 +26,7 @@ public final class ChainersEdict extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
 
         // Flashback {5}{B}{B}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{5}{B}{B}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{5}{B}{B}")));
     }
 
     private ChainersEdict(final ChainersEdict card) {

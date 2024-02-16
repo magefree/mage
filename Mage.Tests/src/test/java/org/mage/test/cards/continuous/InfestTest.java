@@ -13,9 +13,6 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  */
 public class InfestTest extends CardTestPlayerBase {
 
-    /**
-     * Tests creatures for Flying gained from Wonder ability when all conditions were met
-     */
     @Test
     public void testMassBoostEffectLocked() {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
@@ -26,9 +23,9 @@ public class InfestTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Grizzly Bears");
         addCard(Zone.HAND, playerA, "Grizzly Bears");
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Infest");
-        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Grizzly Bears");
-        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Grizzly Bears");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Infest", true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Grizzly Bears", true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Grizzly Bears");
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
@@ -38,7 +35,4 @@ public class InfestTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Elite Vanguard", 2);
         assertPermanentCount(playerA, "Grizzly Bears", 2);
     }
-
-
-
 }

@@ -65,12 +65,12 @@ public final class ExtraplanarLens extends CardImpl {
 
 class ExtraplanarLensImprintEffect extends OneShotEffect {
 
-    public ExtraplanarLensImprintEffect() {
+    ExtraplanarLensImprintEffect() {
         super(Outcome.Neutral);
         staticText = "you may exile target land you control";
     }
 
-    public ExtraplanarLensImprintEffect(ExtraplanarLensImprintEffect effect) {
+    private ExtraplanarLensImprintEffect(final ExtraplanarLensImprintEffect effect) {
         super(effect);
     }
 
@@ -100,10 +100,11 @@ class ExtraplanarLensImprintEffect extends OneShotEffect {
 class ExtraplanarLensTriggeredAbility extends TriggeredManaAbility {
 
     public ExtraplanarLensTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new AddManaOfAnyTypeProducedEffect());
+        super(Zone.BATTLEFIELD, new AddManaOfAnyTypeProducedEffect().setText("its controller adds one mana of any type that land produced"));
+        setTriggerPhrase("Whenever a land with the same name as the exiled card is tapped for mana, ");
     }
 
-    public ExtraplanarLensTriggeredAbility(final ExtraplanarLensTriggeredAbility ability) {
+    private ExtraplanarLensTriggeredAbility(final ExtraplanarLensTriggeredAbility ability) {
         super(ability);
     }
 
@@ -135,11 +136,6 @@ class ExtraplanarLensTriggeredAbility extends TriggeredManaAbility {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a land with the same name as the exiled card is tapped for mana, " ;
     }
 
     @Override

@@ -19,7 +19,7 @@ public class LoseArtifactTypeTargetEffect extends ContinuousEffectImpl {
         setText("isn't an artifact");
     }
 
-    public LoseArtifactTypeTargetEffect(final LoseArtifactTypeTargetEffect effect) {
+    protected LoseArtifactTypeTargetEffect(final LoseArtifactTypeTargetEffect effect) {
         super(effect);
     }
 
@@ -30,7 +30,7 @@ public class LoseArtifactTypeTargetEffect extends ContinuousEffectImpl {
 
     @Override
     public void init(Ability source, Game game) {
-        super.init(source, game); //To change body of generated methods, choose Tools | Templates.
+        super.init(source, game);
         if (duration.isOnlyValidIfNoZoneChange()) {
             // If source permanent is no longer onto battlefield discard the effect
             if (source.getSourcePermanentIfItStillExists(game) == null) {

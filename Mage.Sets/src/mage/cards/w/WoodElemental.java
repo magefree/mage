@@ -8,7 +8,7 @@ import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.InfoEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -16,7 +16,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
@@ -69,7 +68,7 @@ class WoodElementalEffect extends OneShotEffect {
         staticText = "sacrifice any number of untapped Forests";
     }
 
-    public WoodElementalEffect(final WoodElementalEffect effect) {
+    private WoodElementalEffect(final WoodElementalEffect effect) {
         super(effect);
     }
 
@@ -84,7 +83,7 @@ class WoodElementalEffect extends OneShotEffect {
         Card sourceCard = game.getCard(source.getSourceId());
         if (controller != null && sourceCard != null) {
             Target target = new TargetControlledPermanent(0, Integer.MAX_VALUE, filter, true);
-            if (target.canChoose(source.getSourceId(), source.getControllerId(), game) 
+            if (target.canChoose(source.getControllerId(), source, game)
                     && controller.chooseTarget(Outcome.Detriment, target, source, game)) {
                 if (!target.getTargets().isEmpty()) {
                     int sacrificedForests = target.getTargets().size();
@@ -95,7 +94,7 @@ class WoodElementalEffect extends OneShotEffect {
                             targetPermanent.sacrifice(source, game);
                         }
                     }
-                    game.addEffect(new SetPowerToughnessSourceEffect(sacrificedForests, sacrificedForests, Duration.Custom, SubLayer.SetPT_7b), source);
+                    game.addEffect(new SetBasePowerToughnessSourceEffect(sacrificedForests, sacrificedForests, Duration.Custom), source);
                     return true;
                 }
             }

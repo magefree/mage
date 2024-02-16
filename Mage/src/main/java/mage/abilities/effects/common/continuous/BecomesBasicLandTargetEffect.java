@@ -2,6 +2,7 @@ package mage.abilities.effects.common.continuous;
 
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.mana.*;
 import mage.choices.Choice;
@@ -61,10 +62,9 @@ public class BecomesBasicLandTargetEffect extends ContinuousEffectImpl {
         }
         this.chooseLandType = chooseLandType;
         this.loseOther = loseOther;
-        this.staticText = setText();
     }
 
-    public BecomesBasicLandTargetEffect(final BecomesBasicLandTargetEffect effect) {
+    protected BecomesBasicLandTargetEffect(final BecomesBasicLandTargetEffect effect) {
         super(effect);
         this.landTypes.addAll(effect.landTypes);
         this.chooseLandType = effect.chooseLandType;
@@ -79,16 +79,19 @@ public class BecomesBasicLandTargetEffect extends ContinuousEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        // choose land type
+
         if (chooseLandType) {
-            Player controller = game.getPlayer(source.getControllerId());
-            Choice choice = new ChoiceBasicLandType();
-            if (controller != null && controller.choose(outcome, choice, game)) {
-                landTypes.add(SubType.byDescription(choice.getChoice()));
-            } else {
-                this.discard();
-                return;
-            }
+            this.chooseLandType(source, game);
+        }
+    }
+
+    protected void chooseLandType(Ability source, Game game) {
+        Player controller = game.getPlayer(source.getControllerId());
+        Choice choice = new ChoiceBasicLandType();
+        if (controller != null && controller.choose(outcome, choice, game)) {
+            landTypes.add(SubType.byDescription(choice.getChoice()));
+        } else {
+            this.discard();
         }
     }
 
@@ -147,8 +150,13 @@ public class BecomesBasicLandTargetEffect extends ContinuousEffectImpl {
         return true;
     }
 
-    private String setText() {
-        StringBuilder sb = new StringBuilder("target land becomes ");
+    @Override
+    public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
+        StringBuilder sb = new StringBuilder(getTargetPointer().describeTargets(mode.getTargets(), "target land"));
+        sb.append(" becomes ");
         if (chooseLandType) {
             sb.append("the basic land type of your choice");
         } else {
@@ -162,7 +170,7 @@ public class BecomesBasicLandTargetEffect extends ContinuousEffectImpl {
             sb.append(" in addition to its other types");
         }
         if (!duration.toString().isEmpty() && duration != Duration.EndOfGame) {
-            sb.append(' ').append(duration.toString());
+            sb.append(' ').append(duration);
         }
         return sb.toString();
     }

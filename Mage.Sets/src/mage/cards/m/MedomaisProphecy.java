@@ -18,8 +18,6 @@ import mage.players.Player;
 
 import java.util.UUID;
 
-import static mage.abilities.effects.common.ChooseACardNameEffect.TypeOfName.ALL;
-
 /**
  * @author TheElk801
  */
@@ -37,7 +35,7 @@ public final class MedomaisProphecy extends CardImpl {
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_I, new ScryEffect(2));
 
         // II — Choose a card name.
-        sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_II, new ChooseACardNameEffect(ALL));
+        sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_II, new ChooseACardNameEffect(ChooseACardNameEffect.TypeOfName.ALL));
 
         // III — When you cast a spell with the chosen card name for the first time this turn, draw two cards.
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_III, new MedomaisProphecyTriggerEffect());

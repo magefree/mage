@@ -38,15 +38,15 @@ public final class ClawsOfValakut extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
         SimpleStaticAbility ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(new PermanentsOnBattlefieldCount(filter, 1),
                 new PermanentsOnBattlefieldCount(filter, 0),
                 Duration.WhileOnBattlefield));
-        ability.addEffect(new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.AURA));
+        ability.addEffect(new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.AURA).setText("and has first strike"));
         this.addAbility(ability);
     }
 
-    public ClawsOfValakut (final ClawsOfValakut card) {
+    private ClawsOfValakut(final ClawsOfValakut card) {
         super(card);
     }
 

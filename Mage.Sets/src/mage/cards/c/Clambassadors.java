@@ -67,7 +67,7 @@ class ClambassadorsEffect extends OneShotEffect {
         this.staticText = "choose an artifact, creature, or land you control. That player gains control of that permanent";
     }
 
-    public ClambassadorsEffect(final ClambassadorsEffect effect) {
+    private ClambassadorsEffect(final ClambassadorsEffect effect) {
         super(effect);
     }
 
@@ -81,8 +81,8 @@ class ClambassadorsEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Target target = new TargetControlledPermanent(1, 1, filter, true);
-            if (target.canChoose(source.getSourceId(), controller.getId(), game)) {
-                while (!target.isChosen() && target.canChoose(source.getSourceId(), controller.getId(), game) && controller.canRespond()) {
+            if (target.canChoose(controller.getId(), source, game)) {
+                while (!target.isChosen() && target.canChoose(controller.getId(), source, game) && controller.canRespond()) {
                     controller.chooseTarget(outcome, target, source, game);
                 }
             }

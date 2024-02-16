@@ -37,12 +37,11 @@ public final class TilonallisCrown extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // When Tilonalli's Crown enters the battlefield, it deals 1 damage to enchanted creature.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new DamageAttachedEffect(1, "it")
-                .setText("it deals 1 damage to enchanted creature")));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new DamageAttachedEffect(1, "it")));
 
         // Enchanted creature gets +3/+0 and has trample.
         ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(3, 0));

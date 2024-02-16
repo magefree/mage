@@ -54,7 +54,7 @@ class OkkAttackEffect extends RestrictionEffect {
         staticText = "{this} can't attack unless a creature with greater power also attacks";
     }
 
-    public OkkAttackEffect(final OkkAttackEffect effect) {
+    private OkkAttackEffect(final OkkAttackEffect effect) {
         super(effect);
     }
 
@@ -72,7 +72,7 @@ class OkkAttackEffect extends RestrictionEffect {
     public boolean applies(Permanent permanent, Ability source, Game game) {
         if (permanent.getId().equals(source.getSourceId())) {
             // Search for an attacking creature with greater power
-            for (Permanent creature : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+            for (Permanent creature : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
                 if (creature.getPower().getValue() > permanent.getPower().getValue()) {
                     return false;
                 }
@@ -92,7 +92,7 @@ class OkkBlockEffect extends RestrictionEffect {
         staticText = "{this} can't block unless a creature with greater power also blocks.";
     }
 
-    public OkkBlockEffect(final OkkBlockEffect effect) {
+    private OkkBlockEffect(final OkkBlockEffect effect) {
         super(effect);
     }
 
@@ -110,7 +110,7 @@ class OkkBlockEffect extends RestrictionEffect {
     public boolean applies(Permanent permanent, Ability source, Game game) {
         if (permanent.getId().equals(source.getSourceId())) {
             // Search for a blocking creature with greater power
-            for (Permanent creature : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+            for (Permanent creature : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
                 if (creature.getPower().getValue() > permanent.getPower().getValue()) {
                     return false;
                 }

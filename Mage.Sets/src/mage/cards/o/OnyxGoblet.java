@@ -28,7 +28,7 @@ public final class OnyxGoblet extends CardImpl {
         this.addAbility(ability);
     }
 
-    public OnyxGoblet (final OnyxGoblet card) {
+    private OnyxGoblet(final OnyxGoblet card) {
         super(card);
     }
 

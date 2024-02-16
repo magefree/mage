@@ -23,7 +23,7 @@ public final class FadeFromMemory extends CardImpl {
         this.getSpellAbility().addEffect(new ExileTargetEffect());
         this.getSpellAbility().addTarget(new TargetCardInGraveyard());
         // Cycling {B}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{B}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{B}")));
     }
 
     private FadeFromMemory(final FadeFromMemory card) {

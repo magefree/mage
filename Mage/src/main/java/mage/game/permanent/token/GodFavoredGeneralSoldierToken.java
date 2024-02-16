@@ -1,18 +1,16 @@
-
 package mage.game.permanent.token;
 
+import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.MageInt;
 
 /**
- *
  * @author spjspj
  */
 public final class GodFavoredGeneralSoldierToken extends TokenImpl {
 
     public GodFavoredGeneralSoldierToken() {
-        super("Soldier", "1/1 white Soldier enchantment creature token");
+        super("Soldier Token", "1/1 white Soldier enchantment creature token");
         cardType.add(CardType.ENCHANTMENT);
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
@@ -20,10 +18,9 @@ public final class GodFavoredGeneralSoldierToken extends TokenImpl {
         subtype.add(SubType.SOLDIER);
         power = new MageInt(1);
         toughness = new MageInt(1);
-        this.setOriginalExpansionSetCode("BNG");
     }
 
-    public GodFavoredGeneralSoldierToken(final GodFavoredGeneralSoldierToken token) {
+    private GodFavoredGeneralSoldierToken(final GodFavoredGeneralSoldierToken token) {
         super(token);
     }
 

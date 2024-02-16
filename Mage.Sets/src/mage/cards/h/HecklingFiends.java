@@ -30,7 +30,7 @@ public final class HecklingFiends extends CardImpl {
         // {2}{R}: Target creature attacks this turn if able.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new AttacksIfAbleTargetEffect(Duration.EndOfTurn),
-                new ManaCostsImpl("{2}{R}"));
+                new ManaCostsImpl<>("{2}{R}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

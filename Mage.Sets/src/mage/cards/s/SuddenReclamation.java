@@ -46,12 +46,12 @@ public final class SuddenReclamation extends CardImpl {
 
 class SuddenReclamationEffect extends OneShotEffect {
 
-    public SuddenReclamationEffect() {
+    SuddenReclamationEffect() {
         super(Outcome.ReturnToHand);
         this.staticText = ", then return a creature card and a land card from your graveyard to your hand";
     }
 
-    public SuddenReclamationEffect(final SuddenReclamationEffect effect) {
+    private SuddenReclamationEffect(final SuddenReclamationEffect effect) {
         super(effect);
     }
 
@@ -66,8 +66,8 @@ class SuddenReclamationEffect extends OneShotEffect {
         if (controller != null) {
             Cards cardsToHand = new CardsImpl();
             Target target = new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD);
-            target.setNotTarget(true);
-            if (target.canChoose(source.getSourceId(), controller.getId(), game)
+            target.withNotTarget(true);
+            if (target.canChoose(controller.getId(), source, game)
                     && controller.chooseTarget(outcome, target, source, game)) {
                 Card card = game.getCard(target.getFirstTarget());
                 if (card != null) {
@@ -75,8 +75,8 @@ class SuddenReclamationEffect extends OneShotEffect {
                 }
             }
             target = new TargetCardInYourGraveyard(new FilterLandCard("land card from your graveyard"));
-            target.setNotTarget(true);
-            if (target.canChoose(source.getSourceId(), controller.getId(), game)
+            target.withNotTarget(true);
+            if (target.canChoose(controller.getId(), source, game)
                     && controller.chooseTarget(outcome, target, source, game)) {
                 Card card = game.getCard(target.getFirstTarget());
                 if (card != null) {

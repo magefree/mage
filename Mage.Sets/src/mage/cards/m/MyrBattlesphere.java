@@ -62,7 +62,7 @@ class MyrBattlesphereTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new MyrBattlesphereEffect(), true);
     }
 
-    public MyrBattlesphereTriggeredAbility(final MyrBattlesphereTriggeredAbility ability) {
+    private MyrBattlesphereTriggeredAbility(final MyrBattlesphereTriggeredAbility ability) {
         super(ability);
     }
 
@@ -107,7 +107,7 @@ class MyrBattlesphereEffect extends OneShotEffect {
         staticText = "you may tap X untapped Myr you control. If you do, {this} gets +X/+0 until end of turn and deals X damage to the player or planeswalker it's attacking.";
     }
 
-    public MyrBattlesphereEffect(final MyrBattlesphereEffect effect) {
+    private MyrBattlesphereEffect(final MyrBattlesphereEffect effect) {
         super(effect);
     }
 
@@ -120,10 +120,10 @@ class MyrBattlesphereEffect extends OneShotEffect {
             TargetPermanent target = new TargetPermanent(0, 1, filter, true);
             while (controller.canRespond()) {
                 target.clearChosen();
-                if (target.canChoose(source.getSourceId(), source.getControllerId(), game)) {
+                if (target.canChoose(source.getControllerId(), source, game)) {
                     Map<String, Serializable> options = new HashMap<>();
                     options.put("UI.right.btn.text", "Myr tapping complete");
-                    controller.choose(outcome, target, source.getControllerId(), game, options);
+                    controller.choose(outcome, target, source, game, options);
                     if (!target.getTargets().isEmpty()) {
                         UUID creature = target.getFirstTarget();
                         if (creature != null) {
@@ -142,7 +142,7 @@ class MyrBattlesphereEffect extends OneShotEffect {
                 // boost effect
                 game.addEffect(new BoostSourceEffect(tappedAmount, 0, Duration.EndOfTurn), source);
                 // damage to defender
-                return game.damagePlayerOrPlaneswalker(targetPointer.getFirst(game, source), tappedAmount, myr.getId(), source, game, false, true) > 0;
+                return game.damagePlayerOrPermanent(targetPointer.getFirst(game, source), tappedAmount, myr.getId(), source, game, false, true) > 0;
             }
             return true;
         }

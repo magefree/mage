@@ -1,17 +1,16 @@
-
 package mage.game.permanent.token;
+
+import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.MageInt;
 
 /**
- *
  * @author spjspj
  */
 public final class IllusionToken extends TokenImpl {
 
     public IllusionToken() {
-        super("Illusion", "2/2 blue Illusion creature token");
+        super("Illusion Token", "2/2 blue Illusion creature token");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
 
@@ -20,7 +19,7 @@ public final class IllusionToken extends TokenImpl {
         toughness = new MageInt(2);
     }
 
-    public IllusionToken(final IllusionToken token) {
+    private IllusionToken(final IllusionToken token) {
         super(token);
     }
 

@@ -49,12 +49,12 @@ public final class ExtravagantSpirit extends CardImpl {
 
 class ExtravagantSpiritEffect extends OneShotEffect {
 
-    public ExtravagantSpiritEffect() {
+    ExtravagantSpiritEffect() {
         super(Outcome.Sacrifice);
         this.staticText = "sacrifice {this} unless you pay {1} for each card in your hand";
     }
 
-    public ExtravagantSpiritEffect(final ExtravagantSpiritEffect effect) {
+    private ExtravagantSpiritEffect(final ExtravagantSpiritEffect effect) {
         super(effect);
     }
 

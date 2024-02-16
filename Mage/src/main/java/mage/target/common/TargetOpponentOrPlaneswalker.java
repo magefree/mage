@@ -23,7 +23,7 @@ public class TargetOpponentOrPlaneswalker extends TargetPermanentOrPlayer {
         super(minNumTargets, maxNumTargets, filter, notTarget);
     }
 
-    public TargetOpponentOrPlaneswalker(final TargetOpponentOrPlaneswalker target) {
+    protected TargetOpponentOrPlaneswalker(final TargetOpponentOrPlaneswalker target) {
         super(target);
     }
 

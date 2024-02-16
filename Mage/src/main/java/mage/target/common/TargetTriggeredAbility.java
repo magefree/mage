@@ -1,32 +1,36 @@
 package mage.target.common;
 
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbility;
+import mage.constants.AbilityType;
 import mage.constants.Zone;
 import mage.filter.Filter;
-import mage.filter.FilterAbility;
+import mage.filter.FilterStackObject;
 import mage.game.Game;
 import mage.game.stack.StackObject;
 import mage.target.TargetObject;
 
-import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * @author Styxo
  */
 public class TargetTriggeredAbility extends TargetObject {
 
-    public TargetTriggeredAbility() {
+    protected final FilterStackObject filter;
+
+    public TargetTriggeredAbility(FilterStackObject filter) {
         this.minNumberOfTargets = 1;
         this.maxNumberOfTargets = 1;
         this.zone = Zone.STACK;
-        this.targetName = "target triggered ability you control";
+        this.targetName = filter.getMessage();
+        this.filter = filter;
     }
 
-    public TargetTriggeredAbility(final TargetTriggeredAbility target) {
+    protected TargetTriggeredAbility(final TargetTriggeredAbility target) {
         super(target);
+        this.filter = target.filter.copy();
     }
 
     @Override
@@ -37,22 +41,16 @@ public class TargetTriggeredAbility extends TargetObject {
         }
 
         StackObject stackObject = game.getStack().getStackObject(id);
-        return stackObject != null
-                && stackObject.getStackAbility() instanceof TriggeredAbility
+        return isTriggeredAbility(stackObject)
                 && source != null
-                && stackObject.getStackAbility().isControlledBy(source.getControllerId());
+                && filter.match(stackObject, source.getControllerId(), source, game);
     }
 
     @Override
-    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
-        return canChoose(sourceControllerId, game);
-    }
-
-    @Override
-    public boolean canChoose(UUID sourceControllerId, Game game) {
+    public boolean canChoose(UUID sourceControllerId, Ability source, Game game) {
         for (StackObject stackObject : game.getStack()) {
-            if (stackObject.getStackAbility() instanceof TriggeredAbility
-                    && stackObject.getStackAbility().isControlledBy(sourceControllerId)) {
+            if (isTriggeredAbility(stackObject)
+                    && filter.match(stackObject, sourceControllerId, source, game)) {
                 return true;
             }
         }
@@ -60,20 +58,23 @@ public class TargetTriggeredAbility extends TargetObject {
     }
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
+    public boolean canChoose(UUID sourceControllerId, Game game) {
+        return game.getStack()
+                .stream()
+                .anyMatch(TargetTriggeredAbility::isTriggeredAbility);
+    }
+
+    @Override
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
         return possibleTargets(sourceControllerId, game);
     }
 
     @Override
     public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
-        Set<UUID> possibleTargets = new HashSet<>();
-        for (StackObject stackObject : game.getStack()) {
-            if (stackObject.getStackAbility() instanceof TriggeredAbility
-                    && stackObject.getStackAbility().isControlledBy(sourceControllerId)) {
-                possibleTargets.add(stackObject.getStackAbility().getId());
-            }
-        }
-        return possibleTargets;
+        return game.getStack().stream()
+                .filter(TargetTriggeredAbility::isTriggeredAbility)
+                .map(stackObject -> stackObject.getStackAbility().getId())
+                .collect(Collectors.toSet());
     }
 
     @Override
@@ -83,7 +84,18 @@ public class TargetTriggeredAbility extends TargetObject {
 
     @Override
     public Filter getFilter() {
-        return new FilterAbility();
+        return filter;
+    }
+
+    static boolean isTriggeredAbility(StackObject stackObject) {
+        if (stackObject == null) {
+            return false;
+        }
+        if (stackObject instanceof Ability) {
+            Ability ability = (Ability) stackObject;
+            return ability.getAbilityType() == AbilityType.TRIGGERED;
+        }
+        return false;
     }
 
 }

@@ -3,6 +3,7 @@ package mage.abilities.effects.common.continuous;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.Mode;
+import mage.abilities.condition.Condition;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.Duration;
 import mage.constants.Layer;
@@ -11,8 +12,6 @@ import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.Target;
-import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -24,6 +23,7 @@ public class GainControlTargetEffect extends ContinuousEffectImpl {
     protected UUID controllingPlayerId;
     private boolean fixedControl;
     private boolean firstControlChange = true;
+    private final Condition condition;
 
     public GainControlTargetEffect(Duration duration) {
         this(duration, false, null);
@@ -48,15 +48,21 @@ public class GainControlTargetEffect extends ContinuousEffectImpl {
     }
 
     public GainControlTargetEffect(Duration duration, boolean fixedControl, UUID controllingPlayerId) {
+        this(duration, fixedControl, controllingPlayerId, null);
+    }
+
+    public GainControlTargetEffect(Duration duration, boolean fixedControl, UUID controllingPlayerId, Condition condition) {
         super(duration, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
         this.controllingPlayerId = controllingPlayerId;
         this.fixedControl = fixedControl;
+        this.condition = condition;
     }
 
-    public GainControlTargetEffect(final GainControlTargetEffect effect) {
+    protected GainControlTargetEffect(final GainControlTargetEffect effect) {
         super(effect);
         this.controllingPlayerId = effect.controllingPlayerId;
         this.fixedControl = effect.fixedControl;
+        this.condition = effect.condition;
     }
 
     @Override
@@ -106,6 +112,9 @@ public class GainControlTargetEffect extends ContinuousEffectImpl {
                 // This does not handle correctly multiple targets at once
                 discard();
             }
+            if (condition != null && !condition.apply(game, source)) {
+                discard();
+            }
         }
         // no valid target exists and the controller is no longer in the game, effect can be discarded
         if (!oneTargetStillExists || !controller.isInGame()) {
@@ -117,28 +126,10 @@ public class GainControlTargetEffect extends ContinuousEffectImpl {
 
     @Override
     public String getText(Mode mode) {
-        if (!staticText.isEmpty()) {
+        if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-
-        if (mode.getTargets().isEmpty()) {
-            return "gain control of target permanent";
-        }
-
-        Target target = mode.getTargets().get(0);
-        StringBuilder sb = new StringBuilder("gain control of ");
-        if (target.getMaxNumberOfTargets() > 1) {
-            if (target.getNumberOfTargets() < target.getMaxNumberOfTargets()) {
-                sb.append("up to ");
-            }
-            sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(" target ");
-        } else if (!target.getTargetName().startsWith("another")) {
-            sb.append("target ");
-        }
-        sb.append(mode.getTargets().get(0).getTargetName());
-        if (!duration.toString().isEmpty()) {
-            sb.append(' ').append(duration.toString());
-        }
-        return sb.toString();
+        return "gain control of " + getTargetPointer().describeTargets(mode.getTargets(), "that creature")
+                + (duration.toString().isEmpty() || duration == Duration.EndOfGame ? "" : " " + duration.toString());
     }
 }

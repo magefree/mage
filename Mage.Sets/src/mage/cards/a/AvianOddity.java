@@ -32,7 +32,7 @@ public final class AvianOddity extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Cycling {2}{U}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}{U}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}{U}")));
 
         // When you cycle Avian Oddity, put a flying counter on target creature you control.
         Ability ability = new CycleTriggeredAbility(new AddCountersTargetEffect(CounterType.FLYING.createInstance()));

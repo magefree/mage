@@ -27,7 +27,7 @@ public final class BlizzardSpecter extends CardImpl {
 
     public BlizzardSpecter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{B}");
-        addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
         this.subtype.add(SubType.SPECTER);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
@@ -40,8 +40,7 @@ public final class BlizzardSpecter extends CardImpl {
         Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new ReturnToHandEffect(), false, true);
 
         // or that player discards a card.
-        Mode mode = new Mode();
-        mode.addEffect(new DiscardTargetEffect(1, false));
+        Mode mode = new Mode(new DiscardTargetEffect(1, false));
         ability.addMode(mode);
 
         this.addAbility(ability);
@@ -59,12 +58,12 @@ public final class BlizzardSpecter extends CardImpl {
 
 class ReturnToHandEffect extends OneShotEffect {
 
-    public ReturnToHandEffect() {
+    ReturnToHandEffect() {
         super(Outcome.ReturnToHand);
         staticText = "That player returns a permanent they control to its owner's hand";
     }
 
-    public ReturnToHandEffect(final ReturnToHandEffect effect) {
+    private ReturnToHandEffect(final ReturnToHandEffect effect) {
         super(effect);
     }
 
@@ -80,7 +79,7 @@ class ReturnToHandEffect extends OneShotEffect {
             return false;
         }
         Target target = new TargetControlledPermanent(1, 1, new FilterControlledPermanent(), true);
-        if (target.canChoose(source.getSourceId(), targetPlayer.getId(), game)) {
+        if (target.canChoose(targetPlayer.getId(), source, game)) {
             targetPlayer.chooseTarget(Outcome.ReturnToHand, target, source, game);
             Permanent permanent = game.getPermanent(target.getFirstTarget());
             if (permanent != null) {

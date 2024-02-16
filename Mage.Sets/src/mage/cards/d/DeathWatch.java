@@ -32,8 +32,8 @@ public final class DeathWatch extends CardImpl {
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // When enchanted creature dies, its controller loses life equal to its power and you gain life equal to its toughness.
@@ -56,7 +56,7 @@ public final class DeathWatch extends CardImpl {
             staticText = "that creature's controller loses life equal to its power and you gain life equal to its toughness.";
         }
 
-        public DeathWatchEffect(DeathWatchEffect copy) {
+        private DeathWatchEffect(final DeathWatchEffect copy) {
             super(copy);
         }
 

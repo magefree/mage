@@ -10,7 +10,7 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessTargetEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -26,7 +26,7 @@ public final class VhatiIlDal extends CardImpl {
 
     public VhatiIlDal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(3);
@@ -50,12 +50,12 @@ public final class VhatiIlDal extends CardImpl {
 
 class VhatiIlDalEffect extends OneShotEffect {
 
-    public VhatiIlDalEffect() {
+    VhatiIlDalEffect() {
         super(Outcome.BoostCreature);
         this.staticText = "Until end of turn, target creature has base power 1 or base toughness 1";
     }
 
-    public VhatiIlDalEffect(final VhatiIlDalEffect effect) {
+    private VhatiIlDalEffect(final VhatiIlDalEffect effect) {
         super(effect);
     }
 
@@ -75,7 +75,7 @@ class VhatiIlDalEffect extends OneShotEffect {
             } else {
                 toughness = StaticValue.get(1);
             }
-            ContinuousEffect effect = new SetPowerToughnessTargetEffect(power, toughness, Duration.EndOfTurn);
+            ContinuousEffect effect = new SetBasePowerToughnessTargetEffect(power, toughness, Duration.EndOfTurn);
             game.addEffect(effect, source);
             return true;
         }

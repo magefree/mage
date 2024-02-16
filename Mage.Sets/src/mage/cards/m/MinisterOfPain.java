@@ -1,4 +1,3 @@
-
 package mage.cards.m;
 
 import java.util.UUID;
@@ -11,8 +10,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.constants.TargetController;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -20,12 +18,6 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public final class MinisterOfPain extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures your opponents control");
-    
-    static {
-        filter.add(TargetController.OPPONENT.getControllerPredicate());
-    }
-    
     public MinisterOfPain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
         this.subtype.add(SubType.HUMAN);
@@ -37,7 +29,8 @@ public final class MinisterOfPain extends CardImpl {
         this.addAbility(new ExploitAbility());
         
         // When Minister of Pain explots a creature, creatures your opponents control get -1/-1 until end of turn.
-        this.addAbility(new ExploitCreatureTriggeredAbility(new BoostAllEffect(-1,-1, Duration.EndOfTurn, filter, false), false));
+        this.addAbility(new ExploitCreatureTriggeredAbility(
+                new BoostAllEffect(-1, -1, Duration.EndOfTurn, StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURES, false)));
         
     }
 

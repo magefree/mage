@@ -52,7 +52,7 @@ class ThranFoundryEffect extends OneShotEffect {
         this.staticText = "Target player shuffles their graveyard into their library";
     }
     
-    ThranFoundryEffect(final ThranFoundryEffect effect) {
+    private ThranFoundryEffect(final ThranFoundryEffect effect) {
         super(effect);
     }
     

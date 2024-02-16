@@ -1,5 +1,3 @@
-
-
 package mage.abilities.effects;
 
 import mage.abilities.Ability;

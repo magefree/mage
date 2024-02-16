@@ -1,4 +1,3 @@
-
 package mage.abilities.keyword;
 
 import mage.MageObjectReference;
@@ -10,7 +9,6 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.watchers.common.GravestormWatcher;
@@ -22,6 +20,7 @@ public class GravestormAbility extends TriggeredAbilityImpl {
 
     public GravestormAbility() {
         super(Zone.STACK, new GravestormEffect());
+        this.addWatcher(new GravestormWatcher());
     }
 
     private GravestormAbility(final GravestormAbility ability) {

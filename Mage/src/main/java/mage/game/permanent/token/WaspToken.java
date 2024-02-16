@@ -1,13 +1,11 @@
-
-
 package mage.game.permanent.token;
-import mage.constants.CardType;
-import mage.constants.SubType;
+
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
+import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
- *
  * @author spjspj
  */
 public final class WaspToken extends TokenImpl {
@@ -22,7 +20,7 @@ public final class WaspToken extends TokenImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public WaspToken(final WaspToken token) {
+    private WaspToken(final WaspToken token) {
         super(token);
     }
 

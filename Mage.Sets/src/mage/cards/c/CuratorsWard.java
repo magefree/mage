@@ -38,7 +38,7 @@ public final class CuratorsWard extends CardImpl {
         TargetPermanent auraTarget = new TargetPermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Enchanted permanent has hexproof.
@@ -66,7 +66,7 @@ class CuratorsWardTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(2), false);
     }
 
-    public CuratorsWardTriggeredAbility(CuratorsWardTriggeredAbility ability) {
+    private CuratorsWardTriggeredAbility(final CuratorsWardTriggeredAbility ability) {
         super(ability);
     }
 

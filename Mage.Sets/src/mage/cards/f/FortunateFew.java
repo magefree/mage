@@ -45,12 +45,12 @@ public final class FortunateFew extends CardImpl {
 
 class FortunateFewEffect extends OneShotEffect {
 
-    public FortunateFewEffect() {
+    FortunateFewEffect() {
         super(Outcome.DestroyPermanent);
         staticText = "Choose a nonland permanent you don't control, then each other player chooses a nonland permanent they don't control that hasn't been chosen this way. Destroy all other nonland permanents";
     }
 
-    public FortunateFewEffect(FortunateFewEffect effect) {
+    private FortunateFewEffect(final FortunateFewEffect effect) {
         super(effect);
     }
 
@@ -74,8 +74,8 @@ class FortunateFewEffect extends OneShotEffect {
                     }
 
                     Target target = new TargetNonlandPermanent(filter);
-                    target.setNotTarget(true);
-                    if (player.choose(Outcome.Exile, target, source.getSourceId(), game)) {
+                    target.withNotTarget(true);
+                    if (player.choose(Outcome.Exile, target, source, game)) {
                         Permanent permanent = game.getPermanent(target.getFirstTarget());
                         if (permanent != null) {
                             chosenCards.put(permanent, 1);
@@ -85,7 +85,7 @@ class FortunateFewEffect extends OneShotEffect {
                 }
             }
 
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterNonlandPermanent(), source.getControllerId(), source.getSourceId(), game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterNonlandPermanent(), source.getControllerId(), source, game)) {
                 if (!chosenCards.containsKey(permanent)) {
                     permanent.destroy(source, game, false);
                 }

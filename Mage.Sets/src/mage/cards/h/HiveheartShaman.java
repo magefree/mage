@@ -5,7 +5,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.DomainValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
@@ -53,7 +52,7 @@ public final class HiveheartShaman extends CardImpl {
 
         // Whenever Hiveheart Shaman attacks, you may search your library for a basic land card that doesn't share a land type with a land you control, put that card onto the battlefield, then shuffle.
         this.addAbility(new AttacksTriggeredAbility(
-                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter)), true
+                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), false, true), true
         ));
 
         // {5}{G}: Create a 1/1 green Insect creature token. Put X +1/+1 counters on it, where X is the number of basic land types among lands you control. Activate only as a sorcery.
@@ -77,13 +76,13 @@ enum HiveheartShamanPredicate implements ObjectSourcePlayerPredicate<Card> {
 
     @Override
     public boolean apply(ObjectSourcePlayer<Card> input, Game game) {
-        if (!input.getObject().isBasic() || !input.getObject().isLand(game)) {
+        if (!input.getObject().isBasic(game) || !input.getObject().isLand(game)) {
             return false;
         }
         return game.getBattlefield()
                 .getActivePermanents(
                         StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND,
-                        input.getPlayerId(), input.getSourceId(), game
+                        input.getPlayerId(), input.getSource(), game
                 )
                 .stream()
                 .map(permanent -> permanent.getSubtype(game))
@@ -94,8 +93,6 @@ enum HiveheartShamanPredicate implements ObjectSourcePlayerPredicate<Card> {
 }
 
 class HiveheartShamanEffect extends OneShotEffect {
-
-    private static final DynamicValue xValue = new DomainValue();
 
     HiveheartShamanEffect() {
         super(Outcome.Benefit);
@@ -116,7 +113,7 @@ class HiveheartShamanEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Token token = new InsectToken();
         token.putOntoBattlefield(1, game, source);
-        int domainCount = xValue.calculate(game, source, this);
+        int domainCount = DomainValue.REGULAR.calculate(game, source, this);
         if (domainCount < 1) {
             return true;
         }

@@ -1,10 +1,9 @@
-
 package mage.cards.k;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BlocksOrBecomesBlockedSourceTriggeredAbility;
+import mage.abilities.common.BlocksOrBlockedSourceTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -32,16 +31,16 @@ public final class KarnSilverGolem extends CardImpl {
     
     public KarnSilverGolem(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{5}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GOLEM);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
         // Whenever Karn, Silver Golem blocks or becomes blocked, it gets -4/+4 until end of turn.
-        this.addAbility(new BlocksOrBecomesBlockedSourceTriggeredAbility(new BoostSourceEffect(-4, +4, Duration.EndOfTurn), false));
+        this.addAbility(new BlocksOrBlockedSourceTriggeredAbility(new BoostSourceEffect(-4, +4, Duration.EndOfTurn, "it")));
         
         // {1}: Target noncreature artifact becomes an artifact creature with power and toughness each equal to its converted mana cost until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new KarnSilverGolemEffect(), new ManaCostsImpl("{1"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new KarnSilverGolemEffect(), new ManaCostsImpl<>("{1}"));
         ability.addTarget(new TargetPermanent(filterNonCreature));
         this.addAbility(ability);        
     }
@@ -58,12 +57,12 @@ public final class KarnSilverGolem extends CardImpl {
 
 class KarnSilverGolemEffect extends ContinuousEffectImpl {
 
-    public KarnSilverGolemEffect() {
+    KarnSilverGolemEffect() {
         super(Duration.EndOfTurn, Outcome.BecomeCreature);
         staticText = "Target noncreature artifact becomes an artifact creature with power and toughness each equal to its mana value until end of turn";
     }
 
-    public KarnSilverGolemEffect(final KarnSilverGolemEffect effect) {
+    private KarnSilverGolemEffect(final KarnSilverGolemEffect effect) {
         super(effect);
     }
 
@@ -90,8 +89,8 @@ class KarnSilverGolemEffect extends ContinuousEffectImpl {
             case PTChangingEffects_7:
                 if (sublayer == SubLayer.SetPT_7b) {
                     int cmc = artifact.getManaValue();
-                    artifact.getPower().setValue(cmc);
-                    artifact.getToughness().setValue(cmc);
+                    artifact.getPower().setModifiedBaseValue(cmc);
+                    artifact.getToughness().setModifiedBaseValue(cmc);
                 }
         }
         return true;

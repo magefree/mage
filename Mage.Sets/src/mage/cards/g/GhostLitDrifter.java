@@ -12,9 +12,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -26,12 +24,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class GhostLitDrifter extends CardImpl {
-
-    private static final FilterPermanent filter = new FilterCreaturePermanent("another creature");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
 
     public GhostLitDrifter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
@@ -48,7 +40,7 @@ public final class GhostLitDrifter extends CardImpl {
                 FlyingAbility.getInstance(), Duration.EndOfTurn,
                 "another target creature gains flying until end of turn"
         ), new ManaCostsImpl<>("{2}{U}"));
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE));
         this.addAbility(ability);
 
         // Channel — {X}{U}, Discard Ghost-Lit Drifter: X target creatures gain flying until end of turn.

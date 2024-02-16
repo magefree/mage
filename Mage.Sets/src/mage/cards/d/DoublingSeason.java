@@ -12,6 +12,7 @@ import mage.game.Game;
 import mage.game.events.CreateTokenEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -71,7 +72,7 @@ class DoublingSeasonTokenEffect extends ReplacementEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         if (event instanceof CreateTokenEvent) {
-            ((CreateTokenEvent) event).doubleTokens();
+            ((CreateTokenEvent) event).multiplyTokens(2);
         }
         return false;
     }
@@ -79,8 +80,6 @@ class DoublingSeasonTokenEffect extends ReplacementEffectImpl {
 }
 
 class DoublingSeasonCounterEffect extends ReplacementEffectImpl {
-
-    private boolean landPlayed = false; // a played land is not an effect
 
     DoublingSeasonCounterEffect() {
         super(Duration.WhileOnBattlefield, Outcome.BoostCreature, false);
@@ -93,7 +92,7 @@ class DoublingSeasonCounterEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        event.setAmountForCounters(event.getAmount() * 2, true);
+        event.setAmountForCounters(CardUtil.overflowMultiply(event.getAmount(), 2), true);
         return false;
     }
 
@@ -110,18 +109,13 @@ class DoublingSeasonCounterEffect extends ReplacementEffectImpl {
         }
         if (permanent == null) {
             permanent = game.getPermanentEntering(event.getTargetId());
-            landPlayed = (permanent != null
-                    && permanent.isLand(game));  // a played land is not an effect
+            if (permanent != null && permanent.isLand(game)) {
+                return false; // a played land is not an effect (e.g. Gemstone Mine)
+            }
         }
         return permanent != null
                 && permanent.isControlledBy(source.getControllerId())
-                && event.getAmount() > 0
-                && !landPlayed;  // example: gemstone mine being played as a land drop
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
+                && event.getAmount() > 0;
     }
 
     @Override

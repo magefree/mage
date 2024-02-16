@@ -44,7 +44,7 @@ public final class LilianasDevotee extends CardImpl {
         // At the beginning of your end step, if a creature died this turn, you may pay {1}{B}. If you do, create a 2/2 black Zombie creature token.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfEndStepTriggeredAbility(new DoIfCostPaid(
-                        new CreateTokenEffect(new ZombieToken()), new ManaCostsImpl("{1}{B}")
+                        new CreateTokenEffect(new ZombieToken()), new ManaCostsImpl<>("{1}{B}")
                 ), TargetController.YOU, false), MorbidCondition.instance,
                 "At the beginning of your end step, if a creature died this turn, " +
                         "you may pay {1}{B}. If you do, create a 2/2 black Zombie creature token."

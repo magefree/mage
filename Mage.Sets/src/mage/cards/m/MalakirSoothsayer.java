@@ -1,4 +1,3 @@
-
 package mage.cards.m;
 
 import java.util.UUID;
@@ -46,8 +45,7 @@ public final class MalakirSoothsayer extends CardImpl {
                 new TapSourceCost());
         ability.setAbilityWord(AbilityWord.COHORT);
         ability.addCost(new TapTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, false)));
-        Effect effect = new LoseLifeSourceControllerEffect(1);
-        effect.setText("and you lose a life");
+        Effect effect = new LoseLifeSourceControllerEffect(1).concatBy("and");
         ability.addEffect(effect);
         this.addAbility(ability);
 

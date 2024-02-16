@@ -24,7 +24,6 @@ public class RadiantScrollwielderTest extends CardTestPlayerBase {
 //        setStrictChooseMode(true); currently doesn't work as computer player doesn't allow random targeting
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 20 + 3);
         assertLife(playerB, 20 - 3);

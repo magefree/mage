@@ -55,12 +55,12 @@ public final class SamiteElder extends CardImpl {
 
 class SamiteElderEffect extends OneShotEffect {
 
-    public SamiteElderEffect() {
+    SamiteElderEffect() {
         super(Outcome.Protect);
         staticText = "Creatures you control gain protection from the colors of target permanent you control until end of turn";
     }
 
-    public SamiteElderEffect(final SamiteElderEffect effect) {
+    private SamiteElderEffect(final SamiteElderEffect effect) {
         super(effect);
     }
 

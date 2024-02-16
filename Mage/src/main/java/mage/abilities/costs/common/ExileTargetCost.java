@@ -26,12 +26,9 @@ public class ExileTargetCost extends CostImpl {
     List<Permanent> permanents = new ArrayList<>();
 
     public ExileTargetCost(TargetControlledPermanent target) {
+        target.withNotTarget(true);
         this.addTarget(target);
-        this.text = "Exile " + target.getTargetName();
-    }
-
-    public ExileTargetCost(TargetControlledPermanent target, boolean noText) {
-        this.addTarget(target);
+        this.text = "exile " + target.getDescription();
     }
 
     public ExileTargetCost(ExileTargetCost cost) {
@@ -44,11 +41,11 @@ public class ExileTargetCost extends CostImpl {
     @Override
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         Player player = game.getPlayer(ability.getControllerId());
-        if (player == null || !targets.choose(Outcome.Exile, controllerId, source.getSourceId(), game)) {
+        if (player == null || !this.getTargets().choose(Outcome.Exile, controllerId, source.getSourceId(), source, game)) {
             return paid;
         }
         Cards cards = new CardsImpl();
-        for (UUID targetId : targets.get(0).getTargets()) {
+        for (UUID targetId : this.getTargets().get(0).getTargets()) {
             Permanent permanent = game.getPermanent(targetId);
             if (permanent == null) {
                 return false;
@@ -61,7 +58,7 @@ public class ExileTargetCost extends CostImpl {
             // so return state here is not important because the user indended to exile the target anyway
         }
         player.moveCardsToExile(
-                cards.getCards(game), source, game, false,
+                cards.getCards(game), source, game, true,
                 CardUtil.getExileZoneId(game, source),
                 CardUtil.getSourceName(game, source)
         );
@@ -71,7 +68,7 @@ public class ExileTargetCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
-        return targets.canChoose(source.getSourceId(), controllerId, game);
+        return this.getTargets().canChoose(controllerId, source, game);
     }
 
     @Override

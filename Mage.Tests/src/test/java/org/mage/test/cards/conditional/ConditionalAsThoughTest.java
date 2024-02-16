@@ -65,7 +65,6 @@ public class ConditionalAsThoughTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -73,7 +72,7 @@ public class ConditionalAsThoughTest extends CardTestPlayerBase {
         Ability ability = new SimpleActivatedAbility(
                 Zone.ALL,
                 new InfoEffect("test"),
-                new ManaCostsImpl("{R}")
+                new ManaCostsImpl<>("{R}")
         );
         ability.addTarget(new TargetCardInLibrary());
     }
@@ -94,7 +93,7 @@ public class ConditionalAsThoughTest extends CardTestPlayerBase {
                                 0
                         )
                 ).setText("allow target cast"),
-                new ManaCostsImpl("{R}")
+                new ManaCostsImpl<>("{R}")
         );
         ability.addTarget(new TargetCardInOpponentsGraveyard(StaticFilters.FILTER_CARD));
         addCustomCardWithAbility("play any opponent hand", playerA, ability);
@@ -131,6 +130,5 @@ public class ConditionalAsThoughTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
     }
 }

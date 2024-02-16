@@ -36,7 +36,7 @@ public final class TheLocustGod extends CardImpl {
     public TheLocustGod(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}{R}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GOD);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
@@ -48,7 +48,7 @@ public final class TheLocustGod extends CardImpl {
         this.addAbility(new DrawCardControllerTriggeredAbility(new CreateTokenEffect(new TheLocustGodInsectToken(), 1, false, false), false));
 
         // {2}{U}{R}: Draw a card, then discard a card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawDiscardControllerEffect(1, 1, false), new ManaCostsImpl("{2}{U}{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawDiscardControllerEffect(1, 1, false), new ManaCostsImpl<>("{2}{U}{R}"));
         this.addAbility(ability);
 
         // When The Locust God dies, return it to its owner's hand at the beginning of the next end step.
@@ -74,7 +74,7 @@ class TheLocustGodEffect extends OneShotEffect {
         staticText = effectText;
     }
 
-    TheLocustGodEffect(TheLocustGodEffect effect) {
+    private TheLocustGodEffect(final TheLocustGodEffect effect) {
         super(effect);
     }
 

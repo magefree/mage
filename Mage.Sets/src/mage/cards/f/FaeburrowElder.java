@@ -41,7 +41,7 @@ public final class FaeburrowElder extends CardImpl {
 
         // Faeburrow Elder gets +1/+1 for each color among permanents you control.
         this.addAbility(new SimpleStaticAbility(new BoostSourceEffect(
-                FaeburrowElderValue.instance, FaeburrowElderValue.instance, Duration.WhileOnBattlefield, false
+                FaeburrowElderValue.instance, FaeburrowElderValue.instance, Duration.WhileOnBattlefield
         )));
 
         // {T}: For each color among permanents you control, add one mana of that color.

@@ -63,15 +63,13 @@ class BrutalSuppressionAdditionalCostEffect extends CostModificationEffectImpl {
         this.staticText = "Activated abilities of nontoken Rebels cost an additional \"Sacrifice a land\" to activate";
     }
 
-    BrutalSuppressionAdditionalCostEffect(BrutalSuppressionAdditionalCostEffect effect) {
+    private BrutalSuppressionAdditionalCostEffect(final BrutalSuppressionAdditionalCostEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, true);
-        target.setRequired(false);
-        abilityToModify.addCost(new SacrificeTargetCost(target));
+        abilityToModify.addCost(new SacrificeTargetCost(filter));
         return true;
     }
 

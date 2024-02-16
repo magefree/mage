@@ -44,12 +44,12 @@ public final class WashOut extends CardImpl {
 
 class WashOutEffect extends OneShotEffect {
 
-    public WashOutEffect() {
+    WashOutEffect() {
         super(Outcome.ReturnToHand);
         staticText = "Return all permanents of the color of your choice to their owners' hands";
     }
 
-    public WashOutEffect(final WashOutEffect effect) {
+    private WashOutEffect(final WashOutEffect effect) {
         super(effect);
     }
 
@@ -63,7 +63,7 @@ class WashOutEffect extends OneShotEffect {
             ObjectColor color = choice.getColor();
             FilterPermanent filter = new FilterPermanent();
             filter.add(new ColorPredicate(color));
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
                 cardsToReturn.add((Card) permanent);
             }
             return controller.moveCards(cardsToReturn, Zone.HAND, source, game);

@@ -43,13 +43,13 @@ public final class Galvanoth extends CardImpl {
 
 class GalvanothEffect extends OneShotEffect {
 
-    public GalvanothEffect() {
+    GalvanothEffect() {
         super(Outcome.PlayForFree);
         staticText = "look at the top card of your library. If it's an instant or "
                 + "sorcery card, you may cast it without paying its mana cost";
     }
 
-    public GalvanothEffect(final GalvanothEffect effect) {
+    private GalvanothEffect(final GalvanothEffect effect) {
         super(effect);
     }
 

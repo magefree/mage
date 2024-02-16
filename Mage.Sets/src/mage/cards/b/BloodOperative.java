@@ -62,7 +62,7 @@ class BloodOperativeTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.GRAVEYARD, new DoIfCostPaid(new ReturnSourceFromGraveyardToHandEffect(), new PayLifeCost(3)), false);
     }
 
-    public BloodOperativeTriggeredAbility(final BloodOperativeTriggeredAbility ability) {
+    private BloodOperativeTriggeredAbility(final BloodOperativeTriggeredAbility ability) {
         super(ability);
     }
 

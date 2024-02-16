@@ -60,7 +60,7 @@ class VigeanIntuitionEffect extends OneShotEffect {
         staticText = "Choose a card type, then reveal the top four cards of your library. Put all cards of the chosen type revealed this way into your hand and the rest into your graveyard";
     }
 
-    public VigeanIntuitionEffect(final VigeanIntuitionEffect effect) {
+    private VigeanIntuitionEffect(final VigeanIntuitionEffect effect) {
         super(effect);
     }
 
@@ -71,7 +71,7 @@ class VigeanIntuitionEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         Player player = game.getPlayer(source.getControllerId());
         if (sourceObject == null || player == null) {
             return false;
@@ -84,26 +84,26 @@ class VigeanIntuitionEffect extends OneShotEffect {
         Choice choiceImpl = new ChoiceImpl();
         choiceImpl.setChoices(choice);
         if (player.choose(Outcome.Neutral, choiceImpl, game)) {
-            String choosenType = choiceImpl.getChoice();
-            if (choosenType == null || choosenType.isEmpty()) {
+            String chosenType = choiceImpl.getChoice();
+            if (chosenType == null || chosenType.isEmpty()) {
                 return false;
             }
             CardType type = null;
-            if (choosenType.equals(CardType.ARTIFACT.toString())) {
+            if (chosenType.equals(CardType.ARTIFACT.toString())) {
                 type = CardType.ARTIFACT;
-            } else if (choosenType.equals(CardType.LAND.toString())) {
+            } else if (chosenType.equals(CardType.LAND.toString())) {
                 type = CardType.LAND;
-            } else if (choosenType.equals(CardType.CREATURE.toString())) {
+            } else if (chosenType.equals(CardType.CREATURE.toString())) {
                 type = CardType.CREATURE;
-            } else if (choosenType.equals(CardType.ENCHANTMENT.toString())) {
+            } else if (chosenType.equals(CardType.ENCHANTMENT.toString())) {
                 type = CardType.ENCHANTMENT;
-            } else if (choosenType.equals(CardType.INSTANT.toString())) {
+            } else if (chosenType.equals(CardType.INSTANT.toString())) {
                 type = CardType.INSTANT;
-            } else if (choosenType.equals(CardType.SORCERY.toString())) {
+            } else if (chosenType.equals(CardType.SORCERY.toString())) {
                 type = CardType.SORCERY;
-            } else if (choosenType.equals(CardType.PLANESWALKER.toString())) {
+            } else if (chosenType.equals(CardType.PLANESWALKER.toString())) {
                 type = CardType.PLANESWALKER;
-            } else if (choosenType.equals(CardType.TRIBAL.toString())) {
+            } else if (chosenType.equals(CardType.TRIBAL.toString())) {
                 type = CardType.TRIBAL;
             }
 

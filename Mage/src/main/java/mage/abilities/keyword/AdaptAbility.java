@@ -13,7 +13,7 @@ import mage.constants.Zone;
 public class AdaptAbility extends ActivatedAbilityImpl {
 
     public AdaptAbility(int adaptNumber, String manaCost) {
-        super(Zone.BATTLEFIELD, new AdaptEffect(adaptNumber), new ManaCostsImpl(manaCost));
+        super(Zone.BATTLEFIELD, new AdaptEffect(adaptNumber), new ManaCostsImpl<>(manaCost));
     }
 
     private AdaptAbility(final AdaptAbility ability) {

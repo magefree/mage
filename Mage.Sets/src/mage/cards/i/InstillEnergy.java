@@ -7,7 +7,7 @@ import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.UntapEnchantedEffect;
+import mage.abilities.effects.common.UntapAttachedEffect;
 import mage.abilities.hint.common.MyTurnHint;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
@@ -33,7 +33,7 @@ public final class InstillEnergy extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Enchanted creature can attack as though it had haste.
@@ -41,7 +41,7 @@ public final class InstillEnergy extends CardImpl {
 
         // {0}: Untap enchanted creature. Activate this ability only during your turn and only once each turn.
         this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD,
-                new UntapEnchantedEffect(),
+                new UntapAttachedEffect(),
                 new GenericManaCost(0), 1, MyTurnCondition.instance)
                 .addHint(MyTurnHint.instance));
     }
@@ -58,12 +58,12 @@ public final class InstillEnergy extends CardImpl {
 
 class CanAttackAsThoughItHadHasteEnchantedEffect extends AsThoughEffectImpl {
 
-    public CanAttackAsThoughItHadHasteEnchantedEffect(Duration duration) {
+    CanAttackAsThoughItHadHasteEnchantedEffect(Duration duration) {
         super(AsThoughEffectType.ATTACK_AS_HASTE, duration, Outcome.Benefit);
         staticText = "Enchanted creature can attack as though it had haste";
     }
 
-    public CanAttackAsThoughItHadHasteEnchantedEffect(final CanAttackAsThoughItHadHasteEnchantedEffect effect) {
+    private CanAttackAsThoughItHadHasteEnchantedEffect(final CanAttackAsThoughItHadHasteEnchantedEffect effect) {
         super(effect);
     }
 

@@ -10,9 +10,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.Predicates;
-import mage.target.common.TargetControlledPermanent;
+import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -20,15 +18,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class DocksideChef extends CardImpl {
-
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("artifact or creature");
-
-    static {
-        filter.add(Predicates.or(
-                CardType.ARTIFACT.getPredicate(),
-                CardType.CREATURE.getPredicate()
-        ));
-    }
 
     public DocksideChef(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{B}");
@@ -42,7 +31,7 @@ public final class DocksideChef extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{1}{B}")
         );
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ARTIFACT_OR_CREATURE_SHORT_TEXT));
         this.addAbility(ability);
     }
 

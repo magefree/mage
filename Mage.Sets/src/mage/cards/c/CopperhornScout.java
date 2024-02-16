@@ -16,7 +16,6 @@ import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 
 /**
@@ -52,7 +51,7 @@ class CopperhornScoutTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new CopperhornScoutUntapEffect(), false);
     }
 
-    public CopperhornScoutTriggeredAbility(final CopperhornScoutTriggeredAbility ability) {
+    private CopperhornScoutTriggeredAbility(final CopperhornScoutTriggeredAbility ability) {
         super(ability);
     }
 
@@ -91,7 +90,7 @@ class CopperhornScoutUntapEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
 
-        List<Permanent> creatures = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game);
+        List<Permanent> creatures = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game);
 
         for ( Permanent creature : creatures ) {
             if ( !creature.getId().equals(source.getSourceId()) ) {

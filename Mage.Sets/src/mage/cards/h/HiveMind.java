@@ -45,9 +45,10 @@ class HiveMindTriggeredAbility extends TriggeredAbilityImpl {
 
     public HiveMindTriggeredAbility() {
         super(Zone.BATTLEFIELD, new HiveMindEffect());
+        setTriggerPhrase("Whenever a player casts an instant or sorcery spell, ");
     }
 
-    public HiveMindTriggeredAbility(final HiveMindTriggeredAbility ability) {
+    private HiveMindTriggeredAbility(final HiveMindTriggeredAbility ability) {
         super(ability);
     }
 
@@ -75,21 +76,16 @@ class HiveMindTriggeredAbility extends TriggeredAbilityImpl {
         }
         return false;
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a player casts an instant or sorcery spell, " ;
-    }
 }
 
 class HiveMindEffect extends OneShotEffect {
 
-    public HiveMindEffect() {
+    HiveMindEffect() {
         super(Outcome.Benefit);
         this.staticText = "each other player copies that spell. Each of those players may choose new targets for their copy";
     }
 
-    public HiveMindEffect(final HiveMindEffect effect) {
+    private HiveMindEffect(final HiveMindEffect effect) {
         super(effect);
     }
 

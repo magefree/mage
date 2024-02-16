@@ -25,7 +25,7 @@ public final class SnappingDrake extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public SnappingDrake (final SnappingDrake card) {
+    private SnappingDrake(final SnappingDrake card) {
         super(card);
     }
 

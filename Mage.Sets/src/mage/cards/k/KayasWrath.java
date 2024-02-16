@@ -59,7 +59,7 @@ class KayasWrathEffect extends OneShotEffect {
         int counter = 0;
         for (Permanent permanent : game.getBattlefield().getActivePermanents(
                 StaticFilters.FILTER_PERMANENT_CREATURE,
-                source.getControllerId(), source.getSourceId(), game
+                source.getControllerId(), source, game
         )) {
             if (permanent != null) {
                 boolean isMine = permanent.isControlledBy(source.getControllerId());

@@ -13,7 +13,6 @@ import mage.constants.Duration;
 import mage.constants.Zone;
 
 /**
- *
  * @author emerald000
  */
 
@@ -23,7 +22,7 @@ public class LieutenantAbility extends SimpleStaticAbility {
         super(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield), CommanderInPlayCondition.instance, "<i>Lieutenant</i> &mdash; As long as you control your commander, {this} gets +2/+2"));
         this.addEffect(new ConditionalContinuousEffect(effect, CommanderInPlayCondition.instance, effect.getText(null)));
     }
-    
+
     public LieutenantAbility(Effects effects) {
         super(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield), CommanderInPlayCondition.instance, "<i>Lieutenant</i> &mdash; As long as you control your commander, {this} gets +2/+2"));
         for (Effect effect : effects) {
@@ -31,7 +30,7 @@ public class LieutenantAbility extends SimpleStaticAbility {
         }
     }
 
-    public LieutenantAbility(final LieutenantAbility ability) {
+    protected LieutenantAbility(final LieutenantAbility ability) {
         super(ability);
     }
 

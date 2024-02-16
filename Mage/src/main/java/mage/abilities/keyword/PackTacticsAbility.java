@@ -17,7 +17,9 @@ public class PackTacticsAbility extends TriggeredAbilityImpl {
 
     public PackTacticsAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect, false);
+        this.replaceRuleText = false;
         this.setAbilityWord(AbilityWord.PACK_TACTICS);
+        setTriggerPhrase("Whenever {this} attacks, if you attacked with creatures with total power 6 or greater this combat, ");
     }
 
     private PackTacticsAbility(final PackTacticsAbility ability) {
@@ -47,11 +49,5 @@ public class PackTacticsAbility extends TriggeredAbilityImpl {
     @Override
     public PackTacticsAbility copy() {
         return new PackTacticsAbility(this);
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} attacks, if you attacked with creatures " +
-                "with total power 6 or greater this combat, ";
     }
 }

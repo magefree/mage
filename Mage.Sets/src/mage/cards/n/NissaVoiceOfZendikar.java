@@ -34,7 +34,7 @@ public final class NissaVoiceOfZendikar extends CardImpl {
 
     public NissaVoiceOfZendikar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{1}{G}{G}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.NISSA);
 
         this.setStartingLoyalty(3);

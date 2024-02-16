@@ -33,7 +33,7 @@ public final class VarinaLichQueen extends CardImpl {
     public VarinaLichQueen(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{U}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ZOMBIE);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(4);
@@ -72,7 +72,7 @@ class VarinaLichQueenTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, null, false);
     }
 
-    public VarinaLichQueenTriggeredAbility(final VarinaLichQueenTriggeredAbility ability) {
+    private VarinaLichQueenTriggeredAbility(final VarinaLichQueenTriggeredAbility ability) {
         super(ability);
     }
 

@@ -65,7 +65,7 @@ class ImpetuousProtegeEffect extends OneShotEffect {
         this.staticText = "it gets +X/+0 until end of turn, where X is the greatest power among tapped creatures your opponents control";
     }
 
-    ImpetuousProtegeEffect(final ImpetuousProtegeEffect effect) {
+    private ImpetuousProtegeEffect(final ImpetuousProtegeEffect effect) {
         super(effect);
     }
 
@@ -77,7 +77,7 @@ class ImpetuousProtegeEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         int maxPower = 0;
-        for (Permanent creature : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+        for (Permanent creature : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
             maxPower = Math.max(maxPower, creature.getPower().getValue());
         }
         game.addEffect(new BoostSourceEffect(maxPower, 0, Duration.EndOfTurn), source);

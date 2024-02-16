@@ -19,7 +19,6 @@ import mage.target.targetpointer.FixedTarget;
 public class PutCardIntoGraveFromAnywhereAllTriggeredAbility extends TriggeredAbilityImpl {
 
     private final FilterCard filter;
-    private final String ruleText;
     private final SetTargetPointer setTargetPointer;
 
     public PutCardIntoGraveFromAnywhereAllTriggeredAbility(Effect effect, boolean optional, TargetController targetController) {
@@ -39,7 +38,7 @@ public class PutCardIntoGraveFromAnywhereAllTriggeredAbility extends TriggeredAb
         this.filter = filter.copy();
         this.setTargetPointer = setTargetPointer;
         this.filter.add(targetController.getOwnerPredicate());
-        StringBuilder sb = new StringBuilder("Whenever ");
+        StringBuilder sb = new StringBuilder(getWhen());
         sb.append(filter.getMessage());
         sb.append(filter.getMessage().startsWith("one or more") ? " are" : " is");
         sb.append(" put into ");
@@ -54,14 +53,12 @@ public class PutCardIntoGraveFromAnywhereAllTriggeredAbility extends TriggeredAb
                 sb.append('a');
         }
         sb.append(" graveyard from anywhere, ");
-        ruleText = sb.toString();
-
+        setTriggerPhrase(sb.toString());
     }
 
-    public PutCardIntoGraveFromAnywhereAllTriggeredAbility(final PutCardIntoGraveFromAnywhereAllTriggeredAbility ability) {
+    protected PutCardIntoGraveFromAnywhereAllTriggeredAbility(final PutCardIntoGraveFromAnywhereAllTriggeredAbility ability) {
         super(ability);
         this.filter = ability.filter;
-        this.ruleText = ability.ruleText;
         this.setTargetPointer = ability.setTargetPointer;
     }
 
@@ -77,11 +74,12 @@ public class PutCardIntoGraveFromAnywhereAllTriggeredAbility extends TriggeredAb
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (((ZoneChangeEvent) event).getToZone() != Zone.GRAVEYARD) {
+        if (((ZoneChangeEvent) event).getToZone() != Zone.GRAVEYARD
+                || !zone.match(game.getState().getZone(getSourceId()))) {
             return false;
         }
         Card card = game.getCard(event.getTargetId());
-        if (card == null || card.isCopy() || !filter.match(card, getSourceId(), getControllerId(), game)) {
+        if (card == null || card.isCopy() || !filter.match(card, getControllerId(), this, game)) {
             return false;
         }
         switch (setTargetPointer) {
@@ -94,10 +92,5 @@ public class PutCardIntoGraveFromAnywhereAllTriggeredAbility extends TriggeredAb
 
         }
         return true;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return ruleText;
     }
 }

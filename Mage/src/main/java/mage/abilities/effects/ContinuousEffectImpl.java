@@ -4,11 +4,6 @@ import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.CompoundAbility;
 import mage.abilities.MageSingleton;
-import mage.abilities.costs.mana.ActivationManaAbilityStep;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.DomainValue;
-import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.keyword.ChangelingAbility;
 import mage.constants.*;
 import mage.filter.Filter;
@@ -19,6 +14,7 @@ import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.targetpointer.TargetPointer;
+import mage.watchers.common.EndStepCountWatcher;
 
 import java.util.*;
 
@@ -61,6 +57,11 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
     private UUID startingControllerId; // player to check for turn duration (can't different with real controller ability)
     private boolean startingTurnWasActive; // effect started during related players turn and related players turn was already active
     private int effectStartingOnTurn = 0; // turn the effect started
+    private int effectStartingEndStep = 0;
+    private int nextTurnNumber = Integer.MAX_VALUE; // effect is waiting for a step during your next turn, we store it if found.
+    // set to the turn number on your next turn.
+    private int effectStartingStepNum = 0; // Some continuous are waiting for the next step of a kind.
+    // Avoid miscancelling if the start step is of that kind.
 
     public ContinuousEffectImpl(Duration duration, Outcome outcome) {
         super(outcome);
@@ -77,7 +78,7 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
         this.sublayer = sublayer;
     }
 
-    public ContinuousEffectImpl(final ContinuousEffectImpl effect) {
+    protected ContinuousEffectImpl(final ContinuousEffectImpl effect) {
         super(effect);
         this.duration = effect.duration;
         this.layer = effect.layer;
@@ -91,14 +92,18 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
         this.startingControllerId = effect.startingControllerId;
         this.startingTurnWasActive = effect.startingTurnWasActive;
         this.effectStartingOnTurn = effect.effectStartingOnTurn;
+        this.effectStartingEndStep = effect.effectStartingEndStep;
         this.dependencyTypes = effect.dependencyTypes;
         this.dependendToTypes = effect.dependendToTypes;
         this.characterDefining = effect.characterDefining;
+        this.nextTurnNumber = effect.nextTurnNumber;
+        this.effectStartingStepNum = effect.effectStartingStepNum;
     }
 
     @Override
-    public void setDuration(Duration duration) {
+    public ContinuousEffectImpl setDuration(Duration duration) {
         this.duration = duration;
+        return this;
     }
 
     @Override
@@ -122,13 +127,6 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
     @Override
     public void setOrder(long order) {
         this.order = order;
-    }
-
-    @Override
-    public void newId() {
-        if (!(this instanceof MageSingleton)) {
-            this.id = UUID.randomUUID();
-        }
     }
 
     @Override
@@ -211,12 +209,39 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
         this.startingTurnWasActive = activePlayerId != null
                 && activePlayerId.equals(startingController); // you can't use "game" for active player cause it's called from tests/cheat too
         this.effectStartingOnTurn = game.getTurnNum();
+        this.effectStartingEndStep = EndStepCountWatcher.getCount(startingController, game);
+        this.effectStartingStepNum = game.getState().getStepNum();
     }
 
     @Override
     public boolean isYourNextTurn(Game game) {
         return effectStartingOnTurn < game.getTurnNum()
                 && game.isActivePlayer(startingControllerId);
+    }
+
+    @Override
+    public boolean isYourNextEndStep(Game game) {
+        return EndStepCountWatcher.getCount(startingControllerId, game) > effectStartingEndStep;
+    }
+
+    public boolean isEndCombatOfYourNextTurn(Game game) {
+        int currentTurn = game.getTurnNum();
+        if (nextTurnNumber != Integer.MAX_VALUE && nextTurnNumber < currentTurn) {
+            return false; // This is a turn after your next turn.
+        }
+        if (nextTurnNumber == Integer.MAX_VALUE && isYourNextTurn(game)) {
+            nextTurnNumber = currentTurn;
+        }
+
+        return isYourNextTurn(game)
+                && game.getPhase().getType() == TurnPhase.POSTCOMBAT_MAIN;
+    }
+
+    public boolean isYourNextUpkeepStep(Game game) {
+        return (effectStartingOnTurn < game.getTurnNum() ||
+                effectStartingStepNum < game.getState().getStepNum())
+                && game.isActivePlayer(startingControllerId)
+                && game.getStep().getType() == PhaseStep.UPKEEP;
     }
 
     @Override
@@ -227,6 +252,9 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
         switch (duration) {
             case UntilYourNextTurn:
             case UntilEndOfYourNextTurn:
+            case UntilYourNextEndStep:
+            case UntilEndCombatOfYourNextTurn:
+            case UntilYourNextUpkeepStep:
                 break;
             default:
                 return false;
@@ -237,7 +265,7 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
             return false;
         }
 
-        boolean canDelete = false;
+        boolean canDelete;
         Player player = game.getPlayer(startingControllerId);
 
         // discard on start of turn for leaved player
@@ -247,19 +275,38 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
         switch (duration) {
             case UntilYourNextTurn:
             case UntilEndOfYourNextTurn:
-                canDelete = player == null
-                        || (!player.isInGame()
-                        && player.hasReachedNextTurnAfterLeaving());
+                canDelete = player == null || (!player.isInGame() && player.hasReachedNextTurnAfterLeaving());
+                break;
+            default:
+                canDelete = false;
+        }
+
+        if (canDelete) {
+            return true;
         }
 
         // discard on another conditions (start of your turn)
         switch (duration) {
             case UntilYourNextTurn:
-                if (player != null
-                        && player.isInGame()) {
-                    canDelete = canDelete
-                            || this.isYourNextTurn(game);
+                if (player != null && player.isInGame()) {
+                    return this.isYourNextTurn(game);
                 }
+                break;
+            case UntilYourNextEndStep:
+                if (player != null && player.isInGame()) {
+                    return this.isYourNextEndStep(game);
+                }
+                break;
+            case UntilEndCombatOfYourNextTurn:
+                if (player != null && player.isInGame()) {
+                    return this.isEndCombatOfYourNextTurn(game);
+                }
+                break;
+            case UntilYourNextUpkeepStep:
+                if (player != null && player.isInGame()) {
+                    return this.isYourNextUpkeepStep(game);
+                }
+                break;
         }
 
         return canDelete;
@@ -273,20 +320,6 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
     @Override
     public SubLayer getSublayer() {
         return sublayer;
-    }
-
-    protected static boolean isCanKill(DynamicValue toughness) {
-        if (toughness instanceof StaticValue) {
-            return toughness.calculate(null, null, null) < 0;
-        }
-        if (toughness instanceof SignInversionDynamicValue) {
-            // count this class as used for "-{something_positive}"
-            return true;
-        }
-        if (toughness instanceof DomainValue) {
-            return ((DomainValue) toughness).getAmount() < 0;
-        }
-        return false;
     }
 
     @Override
@@ -348,7 +381,9 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
 
     @Override
     public void addDependencyType(DependencyType dependencyType) {
-        dependencyTypes.add(dependencyType);
+        if (dependencyType != null) {
+            dependencyTypes.add(dependencyType);
+        }
     }
 
     @Override
@@ -417,8 +452,8 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
         // wait dependency
         // extraPredicates from some filters is player related, you don't need it here
         List<Predicate> list = new ArrayList<>();
-        Predicates.collectAllComponents(filter.getPredicates(), list);
-        if (list.stream().anyMatch(p -> p instanceof SubType.SubTypePredicate)) {
+        Predicates.collectAllComponents(filter.getPredicates(), filter.getExtraPredicates(), list);
+        if (list.stream().anyMatch(SubType.SubTypePredicate.class::isInstance)) {
             this.addDependedToType(DependencyType.AddingCreatureType);
         }
     }

@@ -34,7 +34,7 @@ public final class MercilessEternal extends CardImpl {
         this.addAbility(new AfflictAbility(2));
 
         // {2}{B}, Discard a card: Merciless Eternal gets +2/+2 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 2, Duration.EndOfTurn), new ManaCostsImpl("{2}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 2, Duration.EndOfTurn), new ManaCostsImpl<>("{2}{B}"));
         ability.addCost(new DiscardCardCost(false));
         this.addAbility(ability);
     }

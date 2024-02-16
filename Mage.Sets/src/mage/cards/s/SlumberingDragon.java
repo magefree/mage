@@ -51,12 +51,12 @@ public final class SlumberingDragon extends CardImpl {
 
 class SlumberingDragonEffect extends RestrictionEffect {
 
-    public SlumberingDragonEffect() {
+    SlumberingDragonEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "{this} can't attack or block unless it has five or more +1/+1 counters on it";
     }
 
-    public SlumberingDragonEffect(final SlumberingDragonEffect effect) {
+    private SlumberingDragonEffect(final SlumberingDragonEffect effect) {
         super(effect);
     }
 

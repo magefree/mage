@@ -67,7 +67,7 @@ class PulsemageAdvocateEffect extends OneShotEffect {
         this.staticText = "Return three target cards from an opponent's graveyard to their hand. Return target creature card from your graveyard to the battlefield";
     }
 
-    PulsemageAdvocateEffect(final PulsemageAdvocateEffect effect) {
+    private PulsemageAdvocateEffect(final PulsemageAdvocateEffect effect) {
         super(effect);
     }
 

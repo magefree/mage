@@ -28,7 +28,7 @@ public final class CryptRipper extends CardImpl {
         this.toughness = new MageInt(2);
 
         this.addAbility(HasteAbility.getInstance());
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl("{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl<>("{B}")));
     }
 
     private CryptRipper(final CryptRipper card) {

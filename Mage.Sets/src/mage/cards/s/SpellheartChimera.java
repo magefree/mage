@@ -5,14 +5,13 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
-import mage.abilities.effects.common.continuous.SetPowerSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterInstantOrSorceryCard;
 
@@ -34,8 +33,8 @@ public final class SpellheartChimera extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
         // Spellheart Chimera's power is equal to the number of instant and sorcery cards in your graveyard.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerSourceEffect(
-                new CardsInControllerGraveyardCount(new FilterInstantOrSorceryCard("instant and sorcery cards in your graveyard")), Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerSourceEffect(
+                new CardsInControllerGraveyardCount(new FilterInstantOrSorceryCard("instant and sorcery cards")))));
     }
 
     private SpellheartChimera(final SpellheartChimera card) {

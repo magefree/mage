@@ -27,7 +27,7 @@ public final class AncestralTribute extends CardImpl {
 	this.getSpellAbility().addEffect(new GainLifeEffect((new CardsInControllerGraveyardCount(new FilterCard(), 2))));
 
 	// Flashback {9}{W}{W}{W}
-	this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{9}{W}{W}{W}")));
+	this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{9}{W}{W}{W}")));
 
         
     }

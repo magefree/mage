@@ -40,7 +40,7 @@ public final class PathToTheWorldTree extends CardImpl {
 
         // {2}{W}{U}{B}{R}{G}, Sacrifice Path to the World Tree: You gain 2 life and draw two cards. Target opponent loses 2 life. Path to the World Tree deals 2 damage to up to one target creature. You create a 2/2 green Bear creature token.
         Ability ability = new SimpleActivatedAbility(
-                new PathToTheWorldTreeEffect(), new ManaCostsImpl("{2}{W}{U}{B}{R}{G}")
+                new PathToTheWorldTreeEffect(), new ManaCostsImpl<>("{2}{W}{U}{B}{R}{G}")
         );
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetOpponent());

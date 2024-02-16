@@ -48,12 +48,12 @@ public final class FuriousRise extends CardImpl {
 
 class FuriousRiseEffect extends OneShotEffect {
 
-    public FuriousRiseEffect() {
+    FuriousRiseEffect() {
         super(Outcome.Benefit);
         this.staticText = "exile the top card of your library. You may play that card until you exile another card with Furious Rise";
     }
 
-    public FuriousRiseEffect(final FuriousRiseEffect effect) {
+    private FuriousRiseEffect(final FuriousRiseEffect effect) {
         super(effect);
     }
 
@@ -101,11 +101,11 @@ class FuriousRiseEffect extends OneShotEffect {
 
 class FuriousRisePlayEffect extends AsThoughEffectImpl {
 
-    public FuriousRisePlayEffect() {
+    FuriousRisePlayEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
     }
 
-    public FuriousRisePlayEffect(final FuriousRisePlayEffect effect) {
+    private FuriousRisePlayEffect(final FuriousRisePlayEffect effect) {
         super(effect);
     }
 

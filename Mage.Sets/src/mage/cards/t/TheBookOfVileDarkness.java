@@ -11,7 +11,7 @@ import mage.abilities.costs.CostImpl;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.cards.Card;
+import mage.abilities.hint.ConditionHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
@@ -26,6 +26,7 @@ import mage.game.permanent.token.VecnaToken;
 import mage.game.permanent.token.ZombieToken;
 import mage.players.Player;
 import mage.target.TargetPermanent;
+import mage.target.common.TargetSacrifice;
 import mage.watchers.common.PlayerLostLifeWatcher;
 
 import java.util.Arrays;
@@ -41,13 +42,13 @@ public final class TheBookOfVileDarkness extends CardImpl {
     public TheBookOfVileDarkness(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{B}{B}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // At the beginning of your end step, if you lost 2 or more life this turn, create a 2/2 black Zombie creature token.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 Zone.BATTLEFIELD, new CreateTokenEffect(new ZombieToken()), TargetController.YOU,
                 TheBookOfVileDarknessCondition.instance, false
-        ));
+        ).addHint(new ConditionHint(TheBookOfVileDarknessCondition.instance, "You lost 2 or more life this turn")));
 
         // {T}, Exile The Book of Vile Darkness and artifacts you control named Eye of Vecna and Hand of Vecna: Create Vecna, a legendary 8/8 black Zombie God creature token with indestructible and all triggered abilities of the exiled cards.
         Ability ability = new SimpleActivatedAbility(new TheBookOfVileDarknessEffect(), new TapSourceCost());
@@ -96,7 +97,7 @@ class TheBookOfVileDarknessCost extends CostImpl {
         this.text = "exile {this} and artifacts you control named Eye of Vecna and Hand of Vecna";
     }
 
-    public TheBookOfVileDarknessCost(final TheBookOfVileDarknessCost cost) {
+    private TheBookOfVileDarknessCost(final TheBookOfVileDarknessCost cost) {
         super(cost);
     }
 
@@ -128,25 +129,24 @@ class TheBookOfVileDarknessCost extends CostImpl {
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
         return source.getSourcePermanentIfItStillExists(game) != null
-                && game.getBattlefield().count(filter1, source.getSourceId(), source.getControllerId(), game) > 0
-                && game.getBattlefield().count(filter2, source.getSourceId(), source.getControllerId(), game) > 0;
+                && game.getBattlefield().count(filter1, source.getControllerId(), source, game) > 0
+                && game.getBattlefield().count(filter2, source.getControllerId(), source, game) > 0;
     }
 
     private static Permanent getPermanent(FilterPermanent filter, Player controller, Ability source, Game game) {
-        int count = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game);
+        int count = game.getBattlefield().count(filter, source.getControllerId(), source, game);
         switch (count) {
             case 0:
                 return null;
             case 1:
                 return game.getBattlefield().getActivePermanents(
-                        filter, source.getControllerId(), source.getSourceId(), game
+                        filter, source.getControllerId(), source, game
                 ).stream().findFirst().orElse(null);
             default:
                 break;
         }
-        TargetPermanent target = new TargetPermanent(filter);
-        target.setNotTarget(true);
-        controller.choose(Outcome.Sacrifice, target, source.getControllerId(), game);
+        TargetSacrifice target = new TargetSacrifice(filter);
+        controller.choose(Outcome.Sacrifice, target, source, game);
         return game.getPermanent(target.getFirstTarget());
     }
 
@@ -191,7 +191,7 @@ class TheBookOfVileDarknessEffect extends OneShotEffect {
                     Ability copyAbility = ability.copy();
                     copyAbility.newId();
                     copyAbility.setControllerId(source.getControllerId());
-                    token.addAbility(copyAbility);
+                    token.addAbility(copyAbility, true);
                 }
             }
         }

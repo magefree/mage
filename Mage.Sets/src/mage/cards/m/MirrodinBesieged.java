@@ -92,7 +92,7 @@ class MirrodinBesiegedEffect extends OneShotEffect {
         if (player == null || opponent == null) {
             return false;
         }
-        if (player.getGraveyard().getCards(StaticFilters.FILTER_CARD_ARTIFACT, source.getSourceId(), source.getControllerId(), game).size() >= 15) {
+        if (player.getGraveyard().getCards(StaticFilters.FILTER_CARD_ARTIFACT, source.getControllerId(), source, game).size() >= 15) {
             opponent.lost(game);
         }
         return true;

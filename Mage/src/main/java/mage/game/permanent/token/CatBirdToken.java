@@ -11,7 +11,7 @@ import mage.constants.SubType;
 public final class CatBirdToken extends TokenImpl {
 
     public CatBirdToken() {
-        super("Cat Bird", "1/1 white Cat Bird creature token with flying");
+        super("Cat Bird Token", "1/1 white Cat Bird creature token with flying");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
         subtype.add(SubType.CAT);

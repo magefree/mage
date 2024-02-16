@@ -7,8 +7,7 @@ import mage.abilities.effects.keyword.VentureIntoTheDungeonEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -17,8 +16,6 @@ import java.util.UUID;
  */
 public final class ThoroughInvestigation extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent(SubType.CLUE, "a Clue");
-
     public ThoroughInvestigation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
 
@@ -26,7 +23,7 @@ public final class ThoroughInvestigation extends CardImpl {
         this.addAbility(new AttacksWithCreaturesTriggeredAbility(new InvestigateEffect(), 1));
 
         // Whenever you sacrifice a Clue, venture into the dungeon.
-        this.addAbility(new SacrificePermanentTriggeredAbility(new VentureIntoTheDungeonEffect(), filter));
+        this.addAbility(new SacrificePermanentTriggeredAbility(new VentureIntoTheDungeonEffect(), StaticFilters.FILTER_CONTROLLED_CLUE));
     }
 
     private ThoroughInvestigation(final ThoroughInvestigation card) {

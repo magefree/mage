@@ -41,7 +41,7 @@ public final class SeasonedPyromancer extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 Zone.GRAVEYARD,
                 new CreateTokenEffect(new RedElementalToken(), 2),
-                new ManaCostsImpl("{3}{R}{R}")
+                new ManaCostsImpl<>("{3}{R}{R}")
         );
         ability.addCost(new ExileSourceFromGraveCost());
         this.addAbility(ability);

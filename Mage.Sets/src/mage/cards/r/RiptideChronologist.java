@@ -35,7 +35,7 @@ public final class RiptideChronologist extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {U}, Sacrifice Riptide Chronologist: Untap all creatures of the creature type of your choice.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RiptideChronologistEffect(), new ManaCostsImpl("{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RiptideChronologistEffect(), new ManaCostsImpl<>("{U}"));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }
@@ -52,19 +52,19 @@ public final class RiptideChronologist extends CardImpl {
 
 class RiptideChronologistEffect extends OneShotEffect {
 
-    public RiptideChronologistEffect() {
+    RiptideChronologistEffect() {
         super(Outcome.UnboostCreature);
         staticText = "Untap all creatures of the creature type of your choice";
     }
 
-    public RiptideChronologistEffect(final RiptideChronologistEffect effect) {
+    private RiptideChronologistEffect(final RiptideChronologistEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (player != null && sourceObject != null) {
             Choice typeChoice = new ChoiceCreatureType(sourceObject);
             if (player.choose(outcome, typeChoice, game)) {

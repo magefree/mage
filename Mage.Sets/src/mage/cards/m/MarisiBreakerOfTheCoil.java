@@ -13,8 +13,7 @@ import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
-import mage.target.targetpointer.FixedTarget;
+import mage.target.targetpointer.FixedTargets;
 
 import java.util.UUID;
 
@@ -26,7 +25,7 @@ public final class MarisiBreakerOfTheCoil extends CardImpl {
     public MarisiBreakerOfTheCoil(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{G}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.CAT);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(5);
@@ -69,18 +68,13 @@ class MarisiBreakerOfTheCoilSpellEffect extends ContinuousRuleModifyingEffectImp
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.CAST_SPELL;
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return game.getPhase().getType() == TurnPhase.COMBAT
+        return game.getTurnPhaseType() == TurnPhase.COMBAT
                 && game.getOpponents(source.getControllerId()).contains(event.getPlayerId());
     }
 }
@@ -104,12 +98,15 @@ class MarisiBreakerOfTheCoilEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(
-                StaticFilters.FILTER_PERMANENT_CREATURE,
-                targetPointer.getFirst(game, source), game
-        )) {
-            game.addEffect(new GoadTargetEffect().setTargetPointer(new FixedTarget(permanent, game)), source);
+        UUID playerId = getTargetPointer().getFirst(game, source);
+        if (playerId == null) {
+            return false;
         }
+        game.addEffect(new GoadTargetEffect().setTargetPointer(new FixedTargets(
+                game.getBattlefield().getActivePermanents(
+                        StaticFilters.FILTER_CONTROLLED_CREATURE, playerId, source, game
+                ), game
+        )), source);
         return true;
     }
 }

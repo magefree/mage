@@ -35,7 +35,7 @@ public final class NarsetOfTheAncientWay extends CardImpl {
     public NarsetOfTheAncientWay(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{U}{R}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.NARSET);
         this.setStartingLoyalty(4);
 
@@ -97,10 +97,10 @@ class NarsetOfTheAncientWayManaCondition extends ManaCondition implements Condit
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (!(source instanceof SpellAbility)) {
+        if (!(source instanceof SpellAbility) || source.isActivated()) {
             return false;
         }
-        MageObject object = game.getObject(source.getSourceId());
+        MageObject object = game.getObject(source);
         return object != null && !object.isCreature(game);
     }
 

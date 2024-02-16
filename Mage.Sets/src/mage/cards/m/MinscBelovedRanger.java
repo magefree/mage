@@ -8,7 +8,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.AddCardSubTypeTargetEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessTargetEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -26,7 +26,7 @@ public final class MinscBelovedRanger extends CardImpl {
     public MinscBelovedRanger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}{G}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.RANGER);
         this.power = new MageInt(3);
@@ -73,7 +73,7 @@ class MinscBelovedRangerEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         int xValue = source.getManaCostsToPay().getX();
-        game.addEffect(new SetPowerToughnessTargetEffect(xValue, xValue, Duration.EndOfTurn), source);
+        game.addEffect(new SetBasePowerToughnessTargetEffect(xValue, xValue, Duration.EndOfTurn), source);
         game.addEffect(new AddCardSubTypeTargetEffect(SubType.GIANT, Duration.EndOfTurn), source);
         return true;
     }

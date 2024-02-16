@@ -10,23 +10,23 @@ import mage.abilities.effects.common.discard.DiscardHandAllEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterCard;
-import mage.filter.predicate.Predicates;
+import mage.filter.StaticFilters;
+import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
-import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetDiscard;
+import mage.util.CardUtil;
 
-import java.util.Set;
 import java.util.UUID;
-import mage.ApprovingObject;
 
 /**
  * @author North
@@ -35,7 +35,7 @@ public final class ChandraAblaze extends CardImpl {
 
     public ChandraAblaze(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{R}{R}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.CHANDRA);
 
         this.setStartingLoyalty(5);
@@ -73,7 +73,7 @@ class ChandraAblazeEffect1 extends OneShotEffect {
         this.staticText = "Discard a card";
     }
 
-    public ChandraAblazeEffect1(final ChandraAblazeEffect1 effect) {
+    private ChandraAblazeEffect1(final ChandraAblazeEffect1 effect) {
         super(effect);
     }
 
@@ -87,7 +87,7 @@ class ChandraAblazeEffect1 extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             TargetDiscard target = new TargetDiscard(player.getId());
-            player.choose(Outcome.Discard, target, source.getSourceId(), game);
+            player.choose(Outcome.Discard, target, source, game);
             Card card = player.getHand().get(target.getFirstTarget(), game);
             if (card != null) {
                 player.discard(card, false, source, game);
@@ -107,7 +107,7 @@ class ChandraAblazeEffect2 extends OneShotEffect {
         this.staticText = "If a red card is discarded this way, {this} deals 4 damage to any target";
     }
 
-    public ChandraAblazeEffect2(final ChandraAblazeEffect2 effect) {
+    private ChandraAblazeEffect2(final ChandraAblazeEffect2 effect) {
         super(effect);
     }
 
@@ -138,12 +138,18 @@ class ChandraAblazeEffect2 extends OneShotEffect {
 
 class ChandraAblazeEffect5 extends OneShotEffect {
 
+    private static final FilterCard filter = new FilterInstantOrSorceryCard();
+
+    static {
+        filter.add(new ColorPredicate(ObjectColor.RED));
+    }
+
     public ChandraAblazeEffect5() {
         super(Outcome.PlayForFree);
         this.staticText = "Cast any number of red instant and/or sorcery cards from your graveyard without paying their mana costs";
     }
 
-    public ChandraAblazeEffect5(final ChandraAblazeEffect5 effect) {
+    private ChandraAblazeEffect5(final ChandraAblazeEffect5 effect) {
         super(effect);
     }
 
@@ -154,33 +160,17 @@ class ChandraAblazeEffect5 extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        // Under this card's current oracle wording, it only casts red instant or sorcery cards
+        // This may have been a mistake which could change in the future
         Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            FilterCard filter = new FilterCard("red instant or sorcery card from your graveyard to play");
-            filter.add(new ColorPredicate(ObjectColor.RED));
-            filter.add(Predicates.or(
-                    CardType.INSTANT.getPredicate(),
-                    CardType.SORCERY.getPredicate()));
-
-            String message = "Play red instant or sorcery card from your graveyard without paying its mana cost?";
-            Set<Card> cards = player.getGraveyard().getCards(filter, game);
-            TargetCardInGraveyard target = new TargetCardInGraveyard(filter);
-            while (!cards.isEmpty() && player.chooseUse(outcome, message, source, game)) {
-                target.clearChosen();
-                if (player.choose(outcome, target, source.getSourceId(), game)) {
-                    Card card = game.getCard(target.getFirstTarget());
-                    if (card != null) {
-                        game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
-                        player.cast(player.chooseAbilityForCast(card, game, true), game, true, new ApprovingObject(source, game));
-                        game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
-
-                        cards.remove(card);
-                    }
-                }
-            }
-
-            return true;
+        if (player == null) {
+            return false;
         }
-        return false;
+        CardUtil.castMultipleWithAttributeForFree(
+                player, source, game,
+                new CardsImpl(player.getGraveyard().getCards(filter, game)),
+                StaticFilters.FILTER_CARD
+        );
+        return true;
     }
 }

@@ -1,7 +1,5 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.FlashbackAbility;
@@ -9,12 +7,12 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
-import mage.constants.TimingRule;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author North
  */
 public final class SavingGrasp extends CardImpl {
@@ -26,14 +24,13 @@ public final class SavingGrasp extends CardImpl {
     }
 
     public SavingGrasp(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}");
 
         // Return target creature you own to your hand.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
-        this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
+        this.getSpellAbility().addEffect(new ReturnToHandTargetEffect().setText("return target creature you own to your hand"));
         // Flashback {W}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{W}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{W}")));
     }
 
     private SavingGrasp(final SavingGrasp card) {

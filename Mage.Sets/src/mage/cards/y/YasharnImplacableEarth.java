@@ -38,7 +38,7 @@ public final class YasharnImplacableEarth extends CardImpl {
     public YasharnImplacableEarth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELEMENTAL);
         this.subtype.add(SubType.BOAR);
         this.power = new MageInt(4);
@@ -114,12 +114,12 @@ class YasharnImplacableEarthTarget extends TargetCardInLibrary {
 
 class YasharnImplacableEarthEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public YasharnImplacableEarthEffect() {
+    YasharnImplacableEarthEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Neutral);
         staticText = "Players can't pay life or sacrifice nonland permanents to cast spells or activate abilities";
     }
 
-    public YasharnImplacableEarthEffect(final YasharnImplacableEarthEffect effect) {
+    private YasharnImplacableEarthEffect(final YasharnImplacableEarthEffect effect) {
         super(effect);
     }
 
@@ -129,13 +129,8 @@ class YasharnImplacableEarthEffect extends ContinuousRuleModifyingEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (mageObject != null) {
             return "Players can't pay life or sacrifice nonland permanents to cast spells or activate abilities.  (" + mageObject.getIdName() + ").";
         }
@@ -143,87 +138,93 @@ class YasharnImplacableEarthEffect extends ContinuousRuleModifyingEffectImpl {
     }
 
     @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        boolean canTargetLand = true;
-        Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
-        if (event.getType() == GameEvent.EventType.ACTIVATE_ABILITY
-                || event.getType() == GameEvent.EventType.CAST_SPELL) {
-            if (event.getType() == GameEvent.EventType.ACTIVATE_ABILITY) {
-                if (permanent == null) {
-                    return false;
-                }
-            }
-            Optional<Ability> ability = game.getAbility(event.getTargetId(), event.getSourceId());
-            for (Cost cost : ability.get().getCosts()) {
-                if (cost instanceof PayLifeCost
-                        || cost instanceof PayVariableLifeCost) {
-                    return true;  // can't pay with life
-                }
-                if (cost instanceof SacrificeSourceCost
-                        && !permanent.isLand()) {
-                    return true;
-                }
-                if (cost instanceof SacrificeTargetCost) {
-                    SacrificeTargetCost sacrificeCost = (SacrificeTargetCost) cost;
-                    Filter filter = sacrificeCost.getTargets().get(0).getFilter();
-                    for (Object predicate : filter.getPredicates()) {
-                        if (predicate instanceof CardType.CardTypePredicate) {
-                            if (!predicate.toString().equals("CardType(Land)")) {
-                                canTargetLand = false;
-                            }
-                        }
-                    }
-                    return !canTargetLand;  // must be nonland target
-                }
-                if (cost instanceof SacrificeAllCost) {
-                    SacrificeAllCost sacrificeAllCost = (SacrificeAllCost) cost;
-                    Filter filter = sacrificeAllCost.getTargets().get(0).getFilter();
-                    for (Object predicate : filter.getPredicates()) {
-                        if (predicate instanceof CardType.CardTypePredicate) {
-                            if (!predicate.toString().equals("CardType(Land)")) {
-                                canTargetLand = false;
-                            }
-                        }
-                    }
-                    return !canTargetLand;  // must be nonland target
-                }
-                if (cost instanceof SacrificeAttachedCost) {
-                    SacrificeAttachedCost sacrificeAllCost = (SacrificeAttachedCost) cost;
-                    Filter filter = sacrificeAllCost.getTargets().get(0).getFilter();
-                    for (Object predicate : filter.getPredicates()) {
-                        if (predicate instanceof CardType.CardTypePredicate) {
-                            if (!predicate.toString().equals("CardType(Land)")) {
-                                canTargetLand = false;
-                            }
-                        }
-                    }
-                    return !canTargetLand;  // must be nonland target
-                }
-                if (cost instanceof SacrificeAttachmentCost) {
-                    SacrificeAttachmentCost sacrificeAllCost = (SacrificeAttachmentCost) cost;
-                    Filter filter = sacrificeAllCost.getTargets().get(0).getFilter();
-                    for (Object predicate : filter.getPredicates()) {
-                        if (predicate instanceof CardType.CardTypePredicate) {
-                            if (!predicate.toString().equals("CardType(Land)")) {
-                                canTargetLand = false;
-                            }
-                        }
-                    }
-                    return !canTargetLand;  // must be nonland target
-                }
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ACTIVATE_ABILITY
+                || event.getType() == GameEvent.EventType.CAST_SPELL;
+    }
 
-                if (cost instanceof SacrificeXTargetCost) {
-                    SacrificeXTargetCost sacrificeCost = (SacrificeXTargetCost) cost;
-                    Filter filter = sacrificeCost.getFilter();
-                    for (Object predicate : filter.getPredicates()) {
-                        if (predicate instanceof CardType.CardTypePredicate) {
-                            if (!predicate.toString().equals("CardType(Land)")) {
-                                canTargetLand = false;
-                            }
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
+        if (event.getType() == GameEvent.EventType.ACTIVATE_ABILITY && permanent == null) {
+            return false;
+        }
+
+        boolean canTargetLand = true;
+        Optional<Ability> ability = game.getAbility(event.getTargetId(), event.getSourceId());
+        if (!ability.isPresent()) {
+            return false;
+        }
+
+        for (Cost cost : ability.get().getCosts()) {
+            if (cost instanceof PayLifeCost
+                    || cost instanceof PayVariableLifeCost) {
+                return true;  // can't pay with life
+            }
+            if (cost instanceof SacrificeSourceCost
+                    && !permanent.isLand(game)) {
+                return true;
+            }
+            if (cost instanceof SacrificeTargetCost) {
+                SacrificeTargetCost sacrificeCost = (SacrificeTargetCost) cost;
+                Filter filter = sacrificeCost.getTargets().get(0).getFilter();
+                for (Object predicate : filter.getPredicates()) {
+                    if (predicate instanceof CardType.CardTypePredicate) {
+                        if (!predicate.toString().equals("CardType(Land)")) {
+                            canTargetLand = false;
                         }
                     }
-                    return !canTargetLand;  // must be nonland target
                 }
+                return !canTargetLand;  // must be nonland target
+            }
+            if (cost instanceof SacrificeAllCost) {
+                SacrificeAllCost sacrificeAllCost = (SacrificeAllCost) cost;
+                Filter filter = sacrificeAllCost.getTargets().get(0).getFilter();
+                for (Object predicate : filter.getPredicates()) {
+                    if (predicate instanceof CardType.CardTypePredicate) {
+                        if (!predicate.toString().equals("CardType(Land)")) {
+                            canTargetLand = false;
+                        }
+                    }
+                }
+                return !canTargetLand;  // must be nonland target
+            }
+            if (cost instanceof SacrificeAttachedCost) {
+                SacrificeAttachedCost sacrificeAllCost = (SacrificeAttachedCost) cost;
+                Filter filter = sacrificeAllCost.getTargets().get(0).getFilter();
+                for (Object predicate : filter.getPredicates()) {
+                    if (predicate instanceof CardType.CardTypePredicate) {
+                        if (!predicate.toString().equals("CardType(Land)")) {
+                            canTargetLand = false;
+                        }
+                    }
+                }
+                return !canTargetLand;  // must be nonland target
+            }
+            if (cost instanceof SacrificeAttachmentCost) {
+                SacrificeAttachmentCost sacrificeAllCost = (SacrificeAttachmentCost) cost;
+                Filter filter = sacrificeAllCost.getTargets().get(0).getFilter();
+                for (Object predicate : filter.getPredicates()) {
+                    if (predicate instanceof CardType.CardTypePredicate) {
+                        if (!predicate.toString().equals("CardType(Land)")) {
+                            canTargetLand = false;
+                        }
+                    }
+                }
+                return !canTargetLand;  // must be nonland target
+            }
+
+            if (cost instanceof SacrificeXTargetCost) {
+                SacrificeXTargetCost sacrificeCost = (SacrificeXTargetCost) cost;
+                Filter filter = sacrificeCost.getFilter();
+                for (Object predicate : filter.getPredicates()) {
+                    if (predicate instanceof CardType.CardTypePredicate) {
+                        if (!predicate.toString().equals("CardType(Land)")) {
+                            canTargetLand = false;
+                        }
+                    }
+                }
+                return !canTargetLand;  // must be nonland target
             }
         }
         return false;

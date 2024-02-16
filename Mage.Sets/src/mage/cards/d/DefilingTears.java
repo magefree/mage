@@ -37,7 +37,7 @@ public final class DefilingTears extends CardImpl {
         effect.setText(", gets +1/-1");
         this.getSpellAbility().addEffect(effect);
 
-        effect = new GainAbilityTargetEffect(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}")), Duration.EndOfTurn);
+        effect = new GainAbilityTargetEffect(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{B}")), Duration.EndOfTurn);
         effect.setText(", and gains \"{B}: Regenerate this creature.\"");
         this.getSpellAbility().addEffect(effect);
     }

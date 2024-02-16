@@ -28,7 +28,6 @@ public class TargetControllerChangeTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Evangelize", 1);
         assertPermanentCount(playerA, "Balduvian Bears", 1);
@@ -52,7 +51,6 @@ public class TargetControllerChangeTest extends CardTestPlayerBase {
         //setStrictChooseMode(true); // AI must choose
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Evangelize", 1);
         assertPermanentCount(playerA, "Balduvian Bears", 1); // AI give smallest permanent to A as bad effect for target (target control change)

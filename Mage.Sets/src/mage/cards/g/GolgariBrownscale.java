@@ -26,7 +26,7 @@ public final class GolgariBrownscale extends CardImpl {
 
         // When Golgari Brownscale is put into your hand from your graveyard, you gain 2 life.
         this.addAbility(new ZoneChangeTriggeredAbility(Zone.ALL, Zone.GRAVEYARD, Zone.HAND, new GainLifeEffect(2), 
-                "When {this} is put into your hand from your graveyard,", false));
+                "When {this} is put into your hand from your graveyard, ", false));
         
         // Dredge 2
         this.addAbility(new DredgeAbility(2));

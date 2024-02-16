@@ -4,6 +4,7 @@ import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -54,7 +55,6 @@ public class DayNightTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertRuffianSmasher(true);
     }
@@ -70,7 +70,6 @@ public class DayNightTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertRuffianSmasher(false);
     }
@@ -86,7 +85,6 @@ public class DayNightTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertRuffianSmasher(false);
     }
@@ -103,7 +101,6 @@ public class DayNightTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertRuffianSmasher(true);
     }
@@ -120,7 +117,6 @@ public class DayNightTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertRuffianSmasher(true);
         assertPermanentCount(playerA, outcasts, 0);
@@ -140,7 +136,6 @@ public class DayNightTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertDayNight(true);
         assertPowerToughness(playerA, smasher, 6 + 1, 5 + 1);
@@ -170,7 +165,6 @@ public class DayNightTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertRuffianSmasher(true);
     }
@@ -195,7 +189,6 @@ public class DayNightTest extends CardTestPlayerBase {
 
         setStopAt(3, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertRuffianSmasher(false);
     }
@@ -225,7 +218,6 @@ public class DayNightTest extends CardTestPlayerBase {
 
         setStopAt(3, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertRuffianSmasher(false);
     }
@@ -240,7 +232,6 @@ public class DayNightTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertDayNight(true);
         Permanent permanent = getPermanent(curse);
@@ -259,7 +250,6 @@ public class DayNightTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertDayNight(false);
         assertPermanentCount(playerA, curse, 0);
@@ -277,7 +267,6 @@ public class DayNightTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertDayNight(false);
         assertPermanentCount(playerA, curse, 0);
@@ -297,7 +286,6 @@ public class DayNightTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertDayNight(true);
         Permanent permanent = getPermanent(curse);
@@ -315,7 +303,6 @@ public class DayNightTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertDayNight(true);
         assertLife(playerB, 20);
@@ -341,9 +328,52 @@ public class DayNightTest extends CardTestPlayerBase {
 
         setStopAt(4, PhaseStep.UPKEEP);
         execute();
-        assertAllCommandsUsed();
 
         assertDayNight(true);
         assertLife(playerB, 20 - 1 - 3 - 3 - 1);
+    }
+
+    @Test
+    @Ignore // debug only, use it to performance profiling only, can be slow
+    public void test_TransformDayboundPerformance() {
+        // day/night transform can take too much CPU usage, see https://github.com/magefree/mage/issues/11081
+        final int TEST_MAX_TURN = 300;
+        final int TEST_MAX_SIMPLE_CARDS = 50;
+        final int TEST_MAX_DAYBOUND_CARDS = 15;
+
+        // You have no maximum hand size.
+        playerA.setMaxCallsWithoutAction(10000);
+        playerB.setMaxCallsWithoutAction(10000);
+        addCard(Zone.BATTLEFIELD, playerA, "Graceful Adept", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Graceful Adept", 1);
+        // skip draw step
+        addCard(Zone.BATTLEFIELD, playerA, "Damia, Sage of Stone", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Damia, Sage of Stone", 1);
+        // simple cards
+        addCard(Zone.BATTLEFIELD, playerA, "Angelfire Crusader", TEST_MAX_SIMPLE_CARDS);
+        addCard(Zone.BATTLEFIELD, playerB, "Angelfire Crusader", TEST_MAX_SIMPLE_CARDS);
+        // day/night cards
+        addCard(Zone.BATTLEFIELD, playerA, "Baneblade Scoundrel", TEST_MAX_DAYBOUND_CARDS);
+        addCard(Zone.BATTLEFIELD, playerB, "Baneblade Scoundrel", TEST_MAX_DAYBOUND_CARDS);
+
+        for (int i = 10; i <= TEST_MAX_TURN; i++) {
+            if (i % 2 == 0) {
+                runCode("on turn " + i, i, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
+                    // switch to night: auto on untap
+                    // switch to day: here by workaround instead 2+ spells cast
+                    game.setDaytime(!game.checkDayNight(true));
+                });
+            }
+            runCode("on turn " + i, i, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
+                System.out.println(String.format("turn %d, is day: %s", game.getTurnNum(), game.checkDayNight(true) ? "yes" : "no"));
+            });
+        }
+        showBattlefield("after", TEST_MAX_TURN, PhaseStep.PRECOMBAT_MAIN, playerA);
+
+        setStrictChooseMode(true);
+        setStopAt(TEST_MAX_TURN, PhaseStep.END_TURN);
+        execute();
+
+        Assert.assertEquals(TEST_MAX_TURN, currentGame.getTurnNum());
     }
 }

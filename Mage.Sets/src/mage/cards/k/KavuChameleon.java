@@ -31,7 +31,7 @@ public final class KavuChameleon extends CardImpl {
         // Kavu Chameleon can't be countered.
         this.addAbility(new SimpleStaticAbility(Zone.STACK, new CantBeCounteredSourceEffect()));
         // {G}: Kavu Chameleon becomes the color of your choice until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesColorSourceEffect(Duration.EndOfTurn), new ManaCostsImpl("{G}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesColorSourceEffect(Duration.EndOfTurn), new ManaCostsImpl<>("{G}")));
     }
 
     private KavuChameleon(final KavuChameleon card) {

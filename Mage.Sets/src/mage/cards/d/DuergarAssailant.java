@@ -30,7 +30,7 @@ public final class DuergarAssailant extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Sacrifice Duergar Assailant: Duergar Assailant deals 1 damage to target attacking or blocking creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new SacrificeSourceCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1, "it"), new SacrificeSourceCost());
         ability.addTarget(new TargetAttackingOrBlockingCreature());
         this.addAbility(ability);
         

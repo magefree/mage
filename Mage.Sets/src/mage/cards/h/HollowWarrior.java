@@ -66,7 +66,7 @@ class HollowWarriorCostToAttackBlockEffect extends PayCostToAttackBlockEffectImp
         staticText = "{this} can't attack or block unless you tap an untapped creature you control not declared as an attacking or blocking creature this combat <i>(This cost is paid as attackers are declared.)</i>";
     }
 
-    HollowWarriorCostToAttackBlockEffect(HollowWarriorCostToAttackBlockEffect effect) {
+    private HollowWarriorCostToAttackBlockEffect(final HollowWarriorCostToAttackBlockEffect effect) {
         super(effect);
     }
 

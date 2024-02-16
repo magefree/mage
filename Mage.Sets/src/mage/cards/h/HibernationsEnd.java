@@ -14,6 +14,7 @@ import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
+import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
@@ -32,7 +33,7 @@ public final class HibernationsEnd extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{G}");
 
         // Cumulative upkeep {1}
-        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{1}")));
+        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{1}")));
         // Whenever you pay Hibernation's End's cumulative upkeep, you may search your library for a creature card with converted mana cost equal to the number of age counters on Hibernation's End and put it onto the battlefield. If you do, shuffle your library.
         this.addAbility(new HibernationsEndAbility());
     }
@@ -51,9 +52,10 @@ class HibernationsEndAbility extends TriggeredAbilityImpl {
 
     public HibernationsEndAbility() {
         super(Zone.BATTLEFIELD, new HibernationsEndEffect(), true);
+        setTriggerPhrase("Whenever you pay {this}'s cumulative upkeep, ");
     }
 
-    public HibernationsEndAbility(final HibernationsEndAbility ability) {
+    private HibernationsEndAbility(final HibernationsEndAbility ability) {
         super(ability);
     }
 
@@ -71,21 +73,16 @@ class HibernationsEndAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         return event.getTargetId().equals(this.getSourceId());
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you pay {this}'s cumulative upkeep, " ;
-    }
 }
 
 class HibernationsEndEffect extends OneShotEffect {
 
-    public HibernationsEndEffect() {
+    HibernationsEndEffect() {
         super(Outcome.Benefit);
-        this.staticText = "search your library for a creature card with mana value equal to the number of age counters on {this} and put it onto the battlefield. If you do, shuffle.";
+        this.staticText = "search your library for a creature card with mana value equal to the number of age counters on {this}, put it onto the battlefield, then shuffle.";
     }
 
-    public HibernationsEndEffect(final HibernationsEndEffect effect) {
+    private HibernationsEndEffect(final HibernationsEndEffect effect) {
         super(effect);
     }
 
@@ -99,7 +96,7 @@ class HibernationsEndEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (sourcePermanent != null && player != null) {
-            int newConvertedCost = sourcePermanent.getCounters(game).getCount("age");
+            int newConvertedCost = sourcePermanent.getCounters(game).getCount(CounterType.AGE);
             FilterCard filter = new FilterCard("creature card with mana value " + newConvertedCost);
             filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, newConvertedCost));
             filter.add(CardType.CREATURE.getPredicate());

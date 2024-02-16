@@ -43,7 +43,7 @@ public final class BlademaneBaku extends CardImpl {
         Effect effect = new BoostSourceEffect(xValue, StaticValue.get(0), Duration.EndOfTurn);
         effect.setText("for each counter removed, {this} gets +2/+0 until end of turn");
         Ability ability = new SimpleActivatedAbility(effect, new GenericManaCost(1));
-        ability.addCost(new RemoveVariableCountersSourceCost(CounterType.KI.createInstance()));
+        ability.addCost(new RemoveVariableCountersSourceCost(CounterType.KI));
         this.addAbility(ability);
     }
 

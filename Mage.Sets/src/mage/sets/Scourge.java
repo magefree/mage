@@ -81,6 +81,7 @@ public final class Scourge extends ExpansionSet {
         cards.add(new SetCardInfo("Elvish Aberration", 118, Rarity.UNCOMMON, mage.cards.e.ElvishAberration.class));
         cards.add(new SetCardInfo("Enrage", 91, Rarity.UNCOMMON, mage.cards.e.Enrage.class));
         cards.add(new SetCardInfo("Eternal Dragon", 12, Rarity.RARE, mage.cards.e.EternalDragon.class));
+        cards.add(new SetCardInfo("Exiled Doomsayer", 13, Rarity.RARE, mage.cards.e.ExiledDoomsayer.class));
         cards.add(new SetCardInfo("Extra Arms", 92, Rarity.UNCOMMON, mage.cards.e.ExtraArms.class));
         cards.add(new SetCardInfo("Faces of the Past", 35, Rarity.RARE, mage.cards.f.FacesOfThePast.class));
         cards.add(new SetCardInfo("Fatal Mutation", 66, Rarity.UNCOMMON, mage.cards.f.FatalMutation.class));
@@ -130,6 +131,7 @@ public final class Scourge extends ExpansionSet {
         cards.add(new SetCardInfo("Recuperate", 21, Rarity.COMMON, mage.cards.r.Recuperate.class));
         cards.add(new SetCardInfo("Reward the Faithful", 22, Rarity.UNCOMMON, mage.cards.r.RewardTheFaithful.class));
         cards.add(new SetCardInfo("Riptide Survivor", 48, Rarity.UNCOMMON, mage.cards.r.RiptideSurvivor.class));
+        cards.add(new SetCardInfo("Rock Jockey", 101, Rarity.COMMON, mage.cards.r.RockJockey.class));
         cards.add(new SetCardInfo("Root Elemental", 127, Rarity.RARE, mage.cards.r.RootElemental.class));
         cards.add(new SetCardInfo("Rush of Knowledge", 49, Rarity.COMMON, mage.cards.r.RushOfKnowledge.class));
         cards.add(new SetCardInfo("Scattershot", 102, Rarity.COMMON, mage.cards.s.Scattershot.class));

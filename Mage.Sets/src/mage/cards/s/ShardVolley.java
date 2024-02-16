@@ -22,7 +22,7 @@ public final class ShardVolley extends CardImpl {
 
 
         // As an additional cost to cast Shard Volley, sacrifice a land.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_LAND_SHORT_TEXT)));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_LAND_SHORT_TEXT));
 
         // Shard Volley deals 3 damage to any target.
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));

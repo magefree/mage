@@ -48,9 +48,10 @@ class PsychicSurgeryTriggeredAbility extends TriggeredAbilityImpl {
 
     public PsychicSurgeryTriggeredAbility() {
         super(Zone.BATTLEFIELD, new PsychicSurgeryEffect(), true);
+        setTriggerPhrase("Whenever an opponent shuffles their library, ");
     }
 
-    public PsychicSurgeryTriggeredAbility(final PsychicSurgeryTriggeredAbility ability) {
+    private PsychicSurgeryTriggeredAbility(final PsychicSurgeryTriggeredAbility ability) {
         super(ability);
     }
 
@@ -72,21 +73,16 @@ class PsychicSurgeryTriggeredAbility extends TriggeredAbilityImpl {
         }
         return false;
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever an opponent shuffles their library, " ;
-    }
 }
 
 class PsychicSurgeryEffect extends OneShotEffect {
 
-    public PsychicSurgeryEffect() {
+    PsychicSurgeryEffect() {
         super(Outcome.Exile);
         this.staticText = "you may look at the top two cards of that library. You may exile one of those cards. Then put the rest on top of that library in any order";
     }
 
-    public PsychicSurgeryEffect(final PsychicSurgeryEffect effect) {
+    private PsychicSurgeryEffect(final PsychicSurgeryEffect effect) {
         super(effect);
     }
 
@@ -106,7 +102,7 @@ class PsychicSurgeryEffect extends OneShotEffect {
             controller.lookAtCards(source, null, cards, game);
             if (!cards.isEmpty() && controller.chooseUse(Outcome.Exile, "Exile a card?", source, game)) {
                 TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card to exile"));
-                if (controller.choose(Outcome.Exile, cards, target, game)) {
+                if (controller.choose(Outcome.Exile, cards, target, source, game)) {
                     Card card = cards.get(target.getFirstTarget(), game);
                     if (card != null) {
                         controller.moveCards(card, Zone.EXILED, source, game);

@@ -41,7 +41,7 @@ public final class MantleOfTheAncients extends CardImpl {
         TargetPermanent auraTarget = new TargetControlledCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // When Mantle of the Ancients enters the battlefield, return any number of target Aura and/or Equipment cards from your graveyard to the battlefield attached to enchanted creature.
@@ -95,7 +95,7 @@ class MantleOfTheAncientsEffect extends OneShotEffect {
         FilterCard filter = new FilterCard("Aura or Equipment card that can be attached to " + permanent.getName());
         filter.add(new MantleOfTheAncientsPredicate(permanent));
         TargetCard target = new TargetCardInYourGraveyard(0, Integer.MAX_VALUE, filter, true);
-        player.choose(outcome, target, source.getSourceId(), game);
+        player.choose(outcome, target, source, game);
         Cards cards = new CardsImpl(target.getTargets());
         if (cards.isEmpty()) {
             return false;

@@ -29,7 +29,7 @@ public final class OpalEyeKondasYojimbo extends CardImpl {
 
     public OpalEyeKondasYojimbo(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.FOX);
         this.subtype.add(SubType.SAMURAI);
 
@@ -46,7 +46,7 @@ public final class OpalEyeKondasYojimbo extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new OpalEyeKondasYojimboRedirectionEffect(), new TapSourceCost()));
 
         // {1}{W}: Prevent the next 1 damage that would be dealt to Opal-Eye this turn.        
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToSourceEffect(Duration.EndOfTurn, 1), new ManaCostsImpl("{1}{W}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToSourceEffect(Duration.EndOfTurn, 1), new ManaCostsImpl<>("{1}{W}")));
 
     }
 
@@ -70,14 +70,14 @@ class OpalEyeKondasYojimboRedirectionEffect extends ReplacementEffectImpl {
         this.target = new TargetSource();
     }
 
-    OpalEyeKondasYojimboRedirectionEffect(final OpalEyeKondasYojimboRedirectionEffect effect) {
+    private OpalEyeKondasYojimboRedirectionEffect(final OpalEyeKondasYojimboRedirectionEffect effect) {
         super(effect);
         this.target = effect.target.copy();
     }
     
     @Override
     public void init(Ability source, Game game) {
-        this.target.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), game);
+        this.target.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), source, game);
         super.init(source, game);
     }
 

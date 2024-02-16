@@ -56,7 +56,7 @@ public final class Chromanticore extends CardImpl {
         effect.setText(", trample");
         ability.addEffect(effect);
         effect = new GainAbilityAttachedEffect(LifelinkAbility.getInstance(), AttachmentType.AURA);
-        effect.setText("and lifelink");
+        effect.setText(", and lifelink");
         ability.addEffect(effect);
         this.addAbility(ability);        
         

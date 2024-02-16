@@ -6,7 +6,6 @@ import mage.constants.CardType;
 import mage.filter.FilterCard;
 
 /**
- *
  * @author fireshoes
  */
 public class FilterPlaneswalkerCard extends FilterCard {
@@ -20,7 +19,7 @@ public class FilterPlaneswalkerCard extends FilterCard {
         this.add(CardType.PLANESWALKER.getPredicate());
     }
 
-    public FilterPlaneswalkerCard(final FilterPlaneswalkerCard filter) {
+    protected FilterPlaneswalkerCard(final FilterPlaneswalkerCard filter) {
         super(filter);
     }
 

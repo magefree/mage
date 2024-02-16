@@ -30,7 +30,7 @@ public final class FireSprites extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // {G}, {tap}: Add {R}.
-        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.RedMana(1), new ManaCostsImpl("{G}"));
+        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.RedMana(1), new ManaCostsImpl<>("{G}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

@@ -27,7 +27,7 @@ public final class GreaterSandwurm extends CardImpl {
         this.addAbility(new DauntAbility());
 
         // Cycling {2}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
     private GreaterSandwurm(final GreaterSandwurm card) {

@@ -4,26 +4,22 @@ import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author TheElk801
  */
 public final class PhyrexianZombieToken extends TokenImpl {
 
     public PhyrexianZombieToken() {
-        super("Phyrexian Zombie", "2/2 black Phyrexian Zombie creature token");
+        super("Phyrexian Zombie Token", "2/2 black Phyrexian Zombie creature token");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add(SubType.PHYREXIAN);
         subtype.add(SubType.ZOMBIE);
         power = new MageInt(2);
         toughness = new MageInt(2);
-
-        availableImageSetCodes = Arrays.asList("MBS");
     }
 
-    public PhyrexianZombieToken(final PhyrexianZombieToken token) {
+    private PhyrexianZombieToken(final PhyrexianZombieToken token) {
         super(token);
     }
 

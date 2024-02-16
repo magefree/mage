@@ -48,12 +48,12 @@ public final class Prophecy extends CardImpl {
 
 class ProphecyEffect extends OneShotEffect {
 
-    public ProphecyEffect() {
+    ProphecyEffect() {
         super(Outcome.GainLife);
         this.staticText = "Reveal the top card of target opponent's library. If it's a land, you gain 1 life. Then that player shuffles";
     }
 
-    public ProphecyEffect(final ProphecyEffect effect) {
+    private ProphecyEffect(final ProphecyEffect effect) {
         super(effect);
     }
 
@@ -66,7 +66,7 @@ class ProphecyEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player targetPlayer = game.getPlayer(source.getFirstTarget());
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (sourceObject == null || targetPlayer == null || controller == null) {
             return false;
         }

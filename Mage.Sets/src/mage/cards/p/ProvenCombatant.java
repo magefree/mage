@@ -22,10 +22,10 @@ public final class ProvenCombatant extends CardImpl {
         toughness = new MageInt(1);
 
         //Eternalize 4UU
-        addAbility(new EternalizeAbility(new ManaCostsImpl("{4}{U}{U}"), this));
+        addAbility(new EternalizeAbility(new ManaCostsImpl<>("{4}{U}{U}"), this));
     }
 
-    public ProvenCombatant(final ProvenCombatant provenCombatant){
+    private ProvenCombatant(final ProvenCombatant provenCombatant){
         super(provenCombatant);
     }
 

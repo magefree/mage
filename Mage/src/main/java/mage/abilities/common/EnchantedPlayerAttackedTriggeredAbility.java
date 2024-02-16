@@ -13,13 +13,12 @@ import mage.players.Player;
  */
 public class EnchantedPlayerAttackedTriggeredAbility extends TriggeredAbilityImpl {
 
-    protected Effect effect;
-
     public EnchantedPlayerAttackedTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect, false);
+        setTriggerPhrase("Whenever enchanted player is attacked, ");
     }
 
-    public EnchantedPlayerAttackedTriggeredAbility(final EnchantedPlayerAttackedTriggeredAbility ability) {
+    protected EnchantedPlayerAttackedTriggeredAbility(final EnchantedPlayerAttackedTriggeredAbility ability) {
         super(ability);
     }
 
@@ -31,16 +30,8 @@ public class EnchantedPlayerAttackedTriggeredAbility extends TriggeredAbilityImp
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent enchantment = game.getPermanentOrLKIBattlefield(getSourceId());
-        Player controller = game.getPlayer(getControllerId());
-        if (controller != null && enchantment != null) {
-            return game.getCombat().getPlayerDefenders(game, false).contains(enchantment.getAttachedTo());
-        }
-        return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever enchanted player is attacked, " ;
+        return enchantment != null
+                && game.getCombat().getPlayerDefenders(game, false).contains(enchantment.getAttachedTo());
     }
 
     @Override

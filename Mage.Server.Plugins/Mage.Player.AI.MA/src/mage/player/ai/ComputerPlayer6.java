@@ -24,10 +24,7 @@ import mage.game.permanent.Permanent;
 import mage.game.stack.StackAbility;
 import mage.game.stack.StackObject;
 import mage.player.ai.ma.optimizers.TreeOptimizer;
-import mage.player.ai.ma.optimizers.impl.DiscardCardOptimizer;
-import mage.player.ai.ma.optimizers.impl.EquipOptimizer;
-import mage.player.ai.ma.optimizers.impl.LevelUpOptimizer;
-import mage.player.ai.ma.optimizers.impl.OutcomeOptimizer;
+import mage.player.ai.ma.optimizers.impl.*;
 import mage.player.ai.util.CombatInfo;
 import mage.player.ai.util.CombatUtil;
 import mage.players.Player;
@@ -44,12 +41,31 @@ import java.util.concurrent.*;
 import java.util.stream.Collectors;
 
 /**
- * @author nantuko
+ * AI: server side bot with game simulations (mad bot, part of implementation)
+ *
+ * @author nantuko, JayDi85
  */
-public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
+public class ComputerPlayer6 extends ComputerPlayer {
 
     private static final Logger logger = Logger.getLogger(ComputerPlayer6.class);
-    private static final ExecutorService pool = Executors.newFixedThreadPool(1);
+
+    // TODO: add and research maxNodes logs, is it good to increase to 50000 for better results?
+    // TODO: increase maxNodes due AI skill level?
+    private static final int MAX_SIMULATED_NODES_PER_CALC = 5000;
+
+    // same params as Executors.newFixedThreadPool
+    // no needs erorrs check in afterExecute here cause that pool used for FutureTask with result check already
+    private static final ExecutorService threadPoolSimulations = new ThreadPoolExecutor(
+            COMPUTER_MAX_THREADS_FOR_SIMULATIONS,
+            COMPUTER_MAX_THREADS_FOR_SIMULATIONS,
+            0L,
+            TimeUnit.MILLISECONDS,
+            new LinkedBlockingQueue<>(),
+            r -> {
+                Thread thread = new Thread(r);
+                thread.setName("AI-SIM-" + thread.getId());
+                return thread;
+            });
     protected int maxDepth;
     protected int maxNodes;
     protected int maxThink;
@@ -72,6 +88,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
     protected static final String BLANKS = "...............................................";
 
     static {
+        optimizers.add(new WrongCodeUsageOptimizer());
         optimizers.add(new LevelUpOptimizer());
         optimizers.add(new EquipOptimizer());
         optimizers.add(new DiscardCardOptimizer());
@@ -86,7 +103,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
             maxDepth = skill;
         }
         maxThink = skill * 3;
-        maxNodes = Config2.maxNodes;
+        maxNodes = MAX_SIMULATED_NODES_PER_CALC;
         getSuggestedActions();
         this.actionCache = new HashSet<>();
     }
@@ -248,7 +265,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
             }
             val = minimaxAB(node, depth - 1, alpha, beta);
         } else {
-            logger.trace("Add Action -- alpha: " + alpha + " beta: " + beta + " depth:" + depth + " step:" + game.getTurn().getStepType() + " for player:" + game.getPlayer(game.getActivePlayerId()).getName());
+            logger.trace("Add Action -- alpha: " + alpha + " beta: " + beta + " depth:" + depth + " step:" + game.getTurnStepType() + " for player:" + game.getPlayer(game.getActivePlayerId()).getName());
             if (allPassed(game)) {
                 if (!game.getStack().isEmpty()) {
                     resolve(node, depth, game);
@@ -291,7 +308,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
             }
         }
         node.setScore(val);
-        logger.trace("returning -- score: " + val + " depth:" + depth + " step:" + game.getTurn().getStepType() + " for player:" + game.getPlayer(node.getPlayerId()).getName());
+        logger.trace("returning -- score: " + val + " depth:" + depth + " step:" + game.getTurnStepType() + " for player:" + game.getPlayer(node.getPlayerId()).getName());
         return val;
 
     }
@@ -395,8 +412,8 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
             if (effect != null
                     && stackObject.getControllerId().equals(playerId)) {
                 Target target = effect.getTarget();
-                if (!target.doneChosing()) {
-                    for (UUID targetId : target.possibleTargets(stackObject.getSourceId(), stackObject.getControllerId(), game)) {
+                if (!target.doneChoosing()) {
+                    for (UUID targetId : target.possibleTargets(stackObject.getControllerId(), stackObject.getStackAbility(), game)) {
                         Game sim = game.copy();
                         StackAbility newAbility = (StackAbility) stackObject.copy();
                         SearchEffect newEffect = getSearchEffect(newAbility);
@@ -426,39 +443,35 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
      * @return
      */
     protected Integer addActionsTimed() {
-        FutureTask<Integer> task = new FutureTask<>(new Callable<Integer>() {
-            @Override
-            public Integer call() throws Exception {
-                return addActions(root, maxDepth, Integer.MIN_VALUE, Integer.MAX_VALUE);
-            }
-        });
-        pool.execute(task);
+        // run new game simulation in parallel thread
+        FutureTask<Integer> task = new FutureTask<>(() -> addActions(root, maxDepth, Integer.MIN_VALUE, Integer.MAX_VALUE));
+        threadPoolSimulations.execute(task);
         try {
             int maxSeconds = maxThink;
             if (COMPUTER_DISABLE_TIMEOUT_IN_GAME_SIMULATIONS) {
                 maxSeconds = 3600;
             }
             logger.debug("maxThink: " + maxSeconds + " seconds ");
-            if (task.get(maxSeconds, TimeUnit.SECONDS) != null) {
-                return task.get(maxSeconds, TimeUnit.SECONDS);
+            Integer res = task.get(maxSeconds, TimeUnit.SECONDS);
+            if (res != null) {
+                return res;
             }
-        } catch (TimeoutException e) {
-            logger.info("simulating - timed out");
+        } catch (TimeoutException | InterruptedException e) {
+            // AI thinks too long
+            logger.info("ai simulating - timed out");
             task.cancel(true);
         } catch (ExecutionException e) {
-            // exception error in simulated game
-            e.printStackTrace();
+            // game error
+            logger.error("AI simulation catch game error: " + e, e);
             task.cancel(true);
-            // real games: must catch
-            // unit tests: must raise again for test fail
+            // real games: must catch and log
+            // unit tests: must raise again for fast fail
             if (this.isTestsMode()) {
-                throw new IllegalStateException("One of the simulated games raise the error: " + e.getCause());
+                throw new IllegalStateException("One of the simulated games raise the error: " + e, e);
             }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-            task.cancel(true);
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Throwable e) {
+            // ?
+            logger.error("AI simulation catch unknown error: " + e, e);
             task.cancel(true);
         }
         //TODO: timeout handling
@@ -748,10 +761,10 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
         if (targets.isEmpty()) {
             return super.chooseTarget(outcome, cards, target, source, game);
         }
-        if (!target.doneChosing()) {
+        if (!target.doneChoosing()) {
             for (UUID targetId : targets) {
                 target.addTarget(targetId, source, game);
-                if (target.doneChosing()) {
+                if (target.doneChoosing()) {
                     targets.clear();
                     return true;
                 }
@@ -762,14 +775,14 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
     }
 
     @Override
-    public boolean choose(Outcome outcome, Cards cards, TargetCard target, Game game) {
+    public boolean choose(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game) {
         if (targets.isEmpty()) {
-            return super.choose(outcome, cards, target, game);
+            return super.choose(outcome, cards, target, source, game);
         }
-        if (!target.doneChosing()) {
+        if (!target.doneChoosing()) {
             for (UUID targetId : targets) {
                 target.add(targetId, game);
-                if (target.doneChosing()) {
+                if (target.doneChoosing()) {
                     targets.clear();
                     return true;
                 }
@@ -844,7 +857,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
     }
 
     private List<Permanent> getAttackers(Game game) {
-        List<UUID> attackersUUID = game.getCombat().getAttackers();
+        Set<UUID> attackersUUID = game.getCombat().getAttackers();
         if (attackersUUID.isEmpty()) {
             return null;
         }
@@ -874,7 +887,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
         if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DECLARING_ATTACKERS, activePlayerId, activePlayerId))) {
             Player attackingPlayer = game.getPlayer(activePlayerId);
 
-            // check alpha strike first (all in attack to kill)
+            // check alpha strike first (all in attack to kill a player)
             for (UUID defenderId : game.getOpponents(playerId)) {
                 Player defender = game.getPlayer(defenderId);
                 if (!defender.isInGame()) {
@@ -895,7 +908,9 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
                 }
             }
 
-            // check all other actions
+            // TODO: add game simulations here to find best attackers/blockers combination
+
+            // find safe attackers (can't be killed by blockers)
             for (UUID defenderId : game.getOpponents(playerId)) {
                 Player defender = game.getPlayer(defenderId);
                 if (!defender.isInGame()) {
@@ -970,37 +985,64 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
                     }
                 }
 
-                // now we have a list of all attackers that can safely attack:
-                // first check to see if any Planeswalkers can be killed
+                // find possible target for attack (priority: planeswalker -> battle -> player)
                 int totalPowerOfAttackers = 0;
-                int loyaltyCounters = 0;
-                for (Permanent planeswalker : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_PLANESWALKER, defender.getId(), game)) {
-                    if (planeswalker != null) {
-                        loyaltyCounters = planeswalker.getCounters(game).getCount(CounterType.LOYALTY);
-                        // verify the attackers can kill the planeswalker, otherwise attack the player
-                        for (Permanent attacker : attackersToCheck) {
-                            totalPowerOfAttackers += attacker.getPower().getValue();
+                int usedPowerOfAttackers = 0;
+                for (Permanent attacker : attackersToCheck) {
+                    totalPowerOfAttackers += attacker.getPower().getValue();
+                }
+
+                // TRY ATTACK PLANESWALKER + BATTLE
+                List<Permanent> possiblePermanentDefenders = new ArrayList<>();
+                // planeswalker first priority
+                game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_PLANESWALKER, activePlayerId, game)
+                        .stream()
+                        .filter(p -> p.canBeAttacked(null, defenderId, game))
+                        .forEach(possiblePermanentDefenders::add);
+                // battle second priority
+                game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_BATTLE, activePlayerId, game)
+                        .stream()
+                        .filter(p -> p.canBeAttacked(null, defenderId, game))
+                        .forEach(possiblePermanentDefenders::add);
+
+                for (Permanent permanentDefender : possiblePermanentDefenders) {
+                    if (usedPowerOfAttackers >= totalPowerOfAttackers) {
+                        break;
+                    }
+                    int currentCounters;
+                    if (permanentDefender.isPlaneswalker(game)) {
+                        currentCounters = permanentDefender.getCounters(game).getCount(CounterType.LOYALTY);
+                    } else if (permanentDefender.isBattle(game)) {
+                        currentCounters = permanentDefender.getCounters(game).getCount(CounterType.DEFENSE);
+                    } else {
+                        // impossible error (SBA must remove all planeswalkers/battles with 0 counters before declare attackers)
+                        throw new IllegalStateException("AI: can't find counters for defending permanent " + permanentDefender.getName(), new Throwable());
+                    }
+
+                    // attack anyway (for kill or damage)
+                    // TODO: add attackers optimization here (1 powerfull + min number of additional permanents,
+                    //  current code uses random/etb order)
+                    for (Permanent attackingPermanent : attackersToCheck) {
+                        if (attackingPermanent.isAttacking()) {
+                            // already used for another target
+                            continue;
                         }
-                        if (totalPowerOfAttackers < loyaltyCounters) {
+                        attackingPlayer.declareAttacker(attackingPermanent.getId(), permanentDefender.getId(), game, true);
+                        currentCounters -= attackingPermanent.getPower().getValue();
+                        usedPowerOfAttackers += attackingPermanent.getPower().getValue();
+                        if (currentCounters <= 0) {
                             break;
-                        }
-                        // kill the Planeswalker
-                        for (Permanent attacker : attackersToCheck) {
-                            loyaltyCounters -= attacker.getPower().getValue();
-                            attackingPlayer.declareAttacker(attacker.getId(), planeswalker.getId(), game, true);
-                            if (loyaltyCounters <= 0) {
-                                break;
-                            }
                         }
                     }
                 }
 
+                // TRY ATTACK PLAYER
                 // any remaining attackers go for the player
                 for (Permanent attackingPermanent : attackersToCheck) {
-                    // if not already attacking a Planeswalker...
-                    if (!attackingPermanent.isAttacking()) {
-                        attackingPlayer.declareAttacker(attackingPermanent.getId(), defenderId, game, true);
+                    if (attackingPermanent.isAttacking()) {
+                        continue;
                     }
+                    attackingPlayer.declareAttacker(attackingPermanent.getId(), defenderId, game, true);
                 }
             }
         }

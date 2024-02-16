@@ -32,7 +32,7 @@ public final class PriceOfBetrayal extends CardImpl {
         ));
     }
 
-    private static final FilterPermanentOrPlayer filter2 = new FilterPermanentOrPlayer("artifact, creature, planeswalker or opponent", filter, new FilterOpponent());
+    private static final FilterPermanentOrPlayer filter2 = new FilterPermanentOrPlayer("artifact, creature, planeswalker, or opponent", filter, new FilterOpponent());
 
     public PriceOfBetrayal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{B}");
@@ -56,7 +56,7 @@ class PriceOfBetrayalEffect extends OneShotEffect {
 
     PriceOfBetrayalEffect() {
         super(Outcome.AIDontUseIt);
-        staticText = "Remove up to five counters from target artifact, creature, planeswalker or opponent.";
+        staticText = "Remove up to five counters from target artifact, creature, planeswalker, or opponent.";
     }
 
     private PriceOfBetrayalEffect(final PriceOfBetrayalEffect effect) {

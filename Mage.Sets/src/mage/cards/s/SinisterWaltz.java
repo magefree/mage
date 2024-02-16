@@ -23,9 +23,7 @@ public final class SinisterWaltz extends CardImpl {
 
         // Choose three target creature cards in your graveyard. Return two of them at random to the battlefield and put the other on the bottom of your library.
         this.getSpellAbility().addEffect(new SinisterWaltzEffect());
-        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(
-                0, 3, StaticFilters.FILTER_CARD_CREATURES
-        ));
+        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(3, StaticFilters.FILTER_CARD_CREATURES));
     }
 
     private SinisterWaltz(final SinisterWaltz card) {

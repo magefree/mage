@@ -34,7 +34,11 @@ public final class ElderLandWurm extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // When Elder Land Wurm blocks, it loses defender.
-        this.addAbility(new BlocksSourceTriggeredAbility(new LoseAbilitySourceEffect(DefenderAbility.getInstance(), Duration.Custom), false, false, true));
+        this.addAbility(
+                new BlocksSourceTriggeredAbility(
+                        new LoseAbilitySourceEffect(DefenderAbility.getInstance(), Duration.Custom).setText("it loses defender")
+                ).setTriggerPhrase("When {this} blocks, ")
+        );
     }
 
     private ElderLandWurm(final ElderLandWurm card) {

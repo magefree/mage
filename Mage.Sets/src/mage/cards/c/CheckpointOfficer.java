@@ -28,7 +28,7 @@ public final class CheckpointOfficer extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {1}{W}, {T}: Tap target creature.
-        Ability ability = new SimpleActivatedAbility(new TapTargetEffect(), new ManaCostsImpl("{1}{W}"));
+        Ability ability = new SimpleActivatedAbility(new TapTargetEffect(), new ManaCostsImpl<>("{1}{W}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

@@ -28,7 +28,7 @@ public final class PainfulQuandary extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{B}{B}");
 
         // Whenever an opponent casts a spell, that player loses 5 life unless they discard a card.
-        this.addAbility(new SpellCastOpponentTriggeredAbility(Zone.BATTLEFIELD, new PainfulQuandryEffect(), StaticFilters.FILTER_SPELL, false, SetTargetPointer.PLAYER));
+        this.addAbility(new SpellCastOpponentTriggeredAbility(Zone.BATTLEFIELD, new PainfulQuandryEffect(), StaticFilters.FILTER_SPELL_A, false, SetTargetPointer.PLAYER));
     }
 
     private PainfulQuandary(final PainfulQuandary card) {
@@ -44,12 +44,12 @@ public final class PainfulQuandary extends CardImpl {
 
 class PainfulQuandryEffect extends OneShotEffect {
 
-    public PainfulQuandryEffect() {
+    PainfulQuandryEffect() {
         super(Outcome.LoseLife);
         staticText = "that player loses 5 life unless they discard a card";
     }
 
-    public PainfulQuandryEffect(final PainfulQuandryEffect effect) {
+    private PainfulQuandryEffect(final PainfulQuandryEffect effect) {
         super(effect);
     }
 

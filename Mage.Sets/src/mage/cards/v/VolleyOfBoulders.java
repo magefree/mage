@@ -23,7 +23,7 @@ public final class VolleyOfBoulders extends CardImpl {
         this.getSpellAbility().addEffect(new DamageMultiEffect(6));
         this.getSpellAbility().addTarget(new TargetAnyTargetAmount(6));
         // Flashback {R}{R}{R}{R}{R}{R}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{R}{R}{R}{R}{R}{R}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{R}{R}{R}{R}{R}{R}")));
     }
 
     private VolleyOfBoulders(final VolleyOfBoulders card) {

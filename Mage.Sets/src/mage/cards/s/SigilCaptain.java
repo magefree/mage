@@ -50,7 +50,7 @@ class SigilCaptainTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P1.createInstance(2)));
     }
 
-    public SigilCaptainTriggeredAbility(final SigilCaptainTriggeredAbility ability) {
+    private SigilCaptainTriggeredAbility(final SigilCaptainTriggeredAbility ability) {
         super(ability);
     }
 
@@ -83,6 +83,6 @@ class SigilCaptainTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a creature enters the battlefield under your control, if that creature is 1/1, put two +1/+1 counters on it";
+        return "Whenever a creature enters the battlefield under your control, if that creature is 1/1, put two +1/+1 counters on it.";
     }
 }

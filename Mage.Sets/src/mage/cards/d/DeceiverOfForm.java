@@ -1,4 +1,3 @@
-
 package mage.cards.d;
 
 import java.util.UUID;
@@ -46,12 +45,12 @@ public final class DeceiverOfForm extends CardImpl {
 
 class DeceiverOfFormEffect extends OneShotEffect {
 
-    public DeceiverOfFormEffect() {
+    DeceiverOfFormEffect() {
         super(Outcome.Copy);
         this.staticText = "reveal the top card of your library. If a creature card is revealed this way, you may have creatures you control other than Deceiver of Form becomes copies of that card until end of turn. You may put that card on the bottom of your library";
     }
 
-    public DeceiverOfFormEffect(final DeceiverOfFormEffect effect) {
+    private DeceiverOfFormEffect(final DeceiverOfFormEffect effect) {
         super(effect);
     }
 
@@ -63,18 +62,25 @@ class DeceiverOfFormEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
+        Card copyFromCard = null;
         MageObject sourceObject = source.getSourceObject(game);
         if (controller != null
                 && sourceObject != null) {
-            Card copyFromCard = controller.getLibrary().getFromTop(game);
-            if (copyFromCard != null) {
-                Cards cards = new CardsImpl(copyFromCard);
+            Card cardFromTop = controller.getLibrary().getFromTop(game);
+            if (cardFromTop != null) {
+                Cards cards = new CardsImpl(cardFromTop);
                 controller.revealCards(sourceObject.getIdName(), cards, game);
-                if (copyFromCard.isCreature(game)) {
+                if (cardFromTop.isCreature(game)) {
+                    copyFromCard = cardFromTop;
                     if (controller.chooseUse(outcome, "Let creatures you control other than "
-                            + sourceObject.getLogName() + " becomes copies of " + copyFromCard.getLogName() + " until end of turn?", source, game)) {
+                            + sourceObject.getLogName() + " becomes copies of " + cardFromTop.getLogName() + " until end of turn?", source, game)) {
                         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, controller.getId(), game)) {
                             if (!permanent.getId().equals(sourceObject.getId())) {
+                                // handle MDFC
+                                if (cardFromTop instanceof ModalDoubleFacedCard
+                                        && ((ModalDoubleFacedCard) cardFromTop).getLeftHalfCard().isCreature(game)) {
+                                    copyFromCard = ((ModalDoubleFacedCard) cardFromTop).getLeftHalfCard();
+                                }
                                 Permanent newBluePrint = null;
                                 newBluePrint = new PermanentCard(copyFromCard, source.getControllerId(), game);
                                 newBluePrint.assignNewId();
@@ -87,8 +93,8 @@ class DeceiverOfFormEffect extends OneShotEffect {
                         }
                     }
                 }
-                if (controller.chooseUse(outcome, "Move " + copyFromCard.getLogName() + " to the bottom of your library?", source, game)) {
-                    controller.moveCardToLibraryWithInfo(copyFromCard, source, game, Zone.LIBRARY, false, true);
+                if (controller.chooseUse(outcome, "Move " + cardFromTop.getLogName() + " to the bottom of your library?", source, game)) {
+                    controller.moveCardToLibraryWithInfo(cardFromTop, source, game, Zone.LIBRARY, false, true);
                 }
             }
             return true;

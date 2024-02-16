@@ -7,11 +7,10 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
@@ -34,7 +33,7 @@ public final class SoullessOne extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Soulless One's power and toughness are each equal to the number of Zombies on the battlefield plus the number of Zombie cards in all graveyards.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new SoullessOneDynamicCount(), Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(new SoullessOneDynamicCount())));
     }
 
     private SoullessOne(final SoullessOne card) {
@@ -56,7 +55,7 @@ class SoullessOneDynamicCount implements DynamicValue {
         zombiesBattlefield.add(SubType.ZOMBIE.getPredicate());
         zombiesInGraveyard.add(SubType.ZOMBIE.getPredicate());
         
-        int count = game.getBattlefield().count(zombiesBattlefield, sourceAbility.getSourceId(), sourceAbility.getControllerId(), game);
+        int count = game.getBattlefield().count(zombiesBattlefield, sourceAbility.getControllerId(), sourceAbility, game);
         for (UUID playerId : game.getState().getPlayersInRange(sourceAbility.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player != null) {

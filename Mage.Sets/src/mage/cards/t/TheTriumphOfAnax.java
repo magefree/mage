@@ -18,7 +18,6 @@ import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
-import mage.target.Targets;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -46,7 +45,7 @@ public final class TheTriumphOfAnax extends CardImpl {
                         TrampleAbility.getInstance(), Duration.EndOfTurn,
                         "Until end of turn, target creature gains trample"
                 ), new BoostTargetEffect(
-                        xValue, StaticValue.get(0), Duration.EndOfTurn, true
+                        xValue, StaticValue.get(0), Duration.EndOfTurn
                 ).setText("and gets +X/+0, where X is the number of lore counters on {this}")),
                 new TargetCreaturePermanent()
         );
@@ -54,13 +53,15 @@ public final class TheTriumphOfAnax extends CardImpl {
         // IV — Target creature you control fights up to one target creature you don't control.
         sagaAbility.addChapterEffect(
                 this, SagaChapter.CHAPTER_IV, SagaChapter.CHAPTER_IV,
-                new Effects(new FightTargetsEffect().setText(
-                        "Target creature you control fights up to one target creature you don't control. " +
-                                "<i>(Each deals damage equal to its power to the other.)</i>")),
-                new Targets(
-                        new TargetControlledCreaturePermanent(),
-                        new TargetPermanent(0, 1,
-                                StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL, false))
+                ability -> {
+                    ability.addEffect(new FightTargetsEffect().setText(
+                            "Target creature you control fights up to one target creature you don't control. " +
+                                    "<i>(Each deals damage equal to its power to the other.)</i>"));
+                    ability.addTarget(new TargetControlledCreaturePermanent());
+                    ability.addTarget(new TargetPermanent(
+                            0, 1, StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL
+                    ));
+                }
         );
         this.addAbility(sagaAbility);
     }

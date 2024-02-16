@@ -28,7 +28,6 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertCommandZoneCount(playerA, "Balduvian Bears", 0);
         assertPermanentCount(playerA, "Balduvian Bears", 1);
@@ -64,7 +63,6 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertCommandZoneCount(playerA, "Balduvian Bears", 0);
         assertPermanentCount(playerA, "Balduvian Bears", 1);
@@ -83,7 +81,6 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertCommandZoneCount(playerA, "Academy Ruins", 0);
         assertPermanentCount(playerA, "Academy Ruins", 1);
@@ -122,7 +119,6 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
         setStopAt(5, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertCommandZoneCount(playerA, "Academy Ruins", 0);
         assertPermanentCount(playerA, "Academy Ruins", 1);
@@ -150,13 +146,12 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
         setModeChoice(playerA, "1");
         setModeChoice(playerA, "4");
 
-        checkPermanentCount("after", 1, PhaseStep.BEGIN_COMBAT, playerA, "Citizen", 3);
+        checkPermanentCount("after", 1, PhaseStep.BEGIN_COMBAT, playerA, "Citizen Token", 3);
         checkLife("after", 1, PhaseStep.BEGIN_COMBAT, playerA, 20 + 4);
 
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -179,13 +174,12 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
         setModeChoice(playerA, "4");
         setChoice(playerA, true); // return commander
 
-        checkPermanentCount("after", 1, PhaseStep.BEGIN_COMBAT, playerA, "Citizen", 3);
+        checkPermanentCount("after", 1, PhaseStep.BEGIN_COMBAT, playerA, "Citizen Token", 3);
         checkLife("after", 1, PhaseStep.BEGIN_COMBAT, playerA, 20 + 4);
 
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -226,7 +220,6 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(9, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -248,7 +241,6 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -271,17 +263,17 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
     }
 
+    /**
+     * Reported bug: https://github.com/magefree/mage/issues/5121
+     *      Exiling your commander from your graveyard should give you the option to put it in command zone
+     *      We were playing in a restarted-by-Karn game (if that mattered), and a player who exiled their
+     *      commander from graveyard via Delve was not given the opportunity to place it in the command zone.
+     *      Instead, it went directly to the exiled zone.
+     */
     @Test
     public void test_ExileWithDelvePayAndReturn() {
-        // https://github.com/magefree/mage/issues/5121
-        // Exiling your commander from your graveyard should give you the option to put it in command zone
-        // We were playing in a restarted-by-Karn game (if that mattered), and a player who exiled their
-        // commander from graveyard via Delve was not given the opportunity to place it in the command zone.
-        // Instead, it went directly to the exiled zone.
-
         // disable auto-payment for delve test
         disableManaAutoPayment(playerA);
 
@@ -307,6 +299,7 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Balduvian Bears");
         setChoice(playerA, "Red"); // pay
         setChoice(playerA, false); // leave in graveyard
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
         // use commander as delve pay
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {U}", 5);
@@ -319,7 +312,6 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertCommandZoneCount(playerA, "Balduvian Bears", 1);
     }
@@ -375,7 +367,6 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(5, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -409,7 +400,7 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
         setChoice(playerA, true); // return commander
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         checkCommandCardCount("after first cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Curious Pair", 1);
-        checkPermanentCount("after first cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Food", 1);
+        checkPermanentCount("after first cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Food Token", 1);
         // commander tax: 1x
         // can't cast due commander cost added (we stil have 2x mana)
         checkPlayableAbility("after first cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Curious Pair", false);
@@ -425,7 +416,7 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Treats to Share");
         setChoice(playerA, false); // do not return commander
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
-        checkPermanentCount("after second cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Food", 2);
+        checkPermanentCount("after second cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Food Token", 2);
         checkPlayableAbility("after second cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Curious Pair", false);
         checkPlayableAbility("after second cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Treats to Share", false);
 
@@ -484,11 +475,10 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(13, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
-    public void test_ModalDoubleFacesCard_1() {
+    public void test_ModalDoubleFacedCard_1() {
         // Player order: A -> D -> C -> B
 
         // use case:
@@ -540,11 +530,10 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(5, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
-    public void test_ModalDoubleFacesCard_CanReturnAfterKillAndCommanderControlCondition() {
+    public void test_ModalDoubleFacedCard_CanReturnAfterKillAndCommanderControlCondition() {
         // Player order: A -> D -> C -> B
 
         // Cosima, God of the Voyage, {2}{U}, creature, 2/4
@@ -577,7 +566,6 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -606,7 +594,6 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 20 + 3);
         assertPermanentCount(playerA, "Swamp", 1);
@@ -634,7 +621,6 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertCommandZoneCount(playerA, "Balduvian Bears", 0);
         assertPermanentCount(playerA, "Balduvian Bears", 1);

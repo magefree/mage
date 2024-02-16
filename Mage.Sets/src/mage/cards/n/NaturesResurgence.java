@@ -46,7 +46,7 @@ class NaturesResurgenceEffect extends OneShotEffect {
         staticText = "Each player draws a card for each creature card in their graveyard";
     }
 
-    public NaturesResurgenceEffect(final NaturesResurgenceEffect effect) {
+    private NaturesResurgenceEffect(final NaturesResurgenceEffect effect) {
         super(effect);
     }
     

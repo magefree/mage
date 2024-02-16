@@ -36,8 +36,7 @@ public final class Doomfall extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
 
         // • Target opponent reveals their hand. You choose a nonland card from it. Exile that card.
-        Mode mode = new Mode();
-        mode.addEffect(new ExileCardYouChooseTargetOpponentEffect(StaticFilters.FILTER_CARD_A_NON_LAND)
+        Mode mode = new Mode(new ExileCardYouChooseTargetOpponentEffect(StaticFilters.FILTER_CARD_A_NON_LAND)
                 .setText("Target opponent reveals their hand. You choose a nonland card from it. Exile that card"));
         mode.addTarget(new TargetOpponent());
         this.getSpellAbility().addMode(mode);
@@ -55,12 +54,12 @@ public final class Doomfall extends CardImpl {
 
 class DoomfallEffect extends OneShotEffect {
 
-    public DoomfallEffect() {
+    DoomfallEffect() {
         super(Outcome.Exile);
-        this.staticText = "target player exiles a creature they control";
+        this.staticText = "target opponent exiles a creature they control";
     }
 
-    public DoomfallEffect(final DoomfallEffect effect) {
+    private DoomfallEffect(final DoomfallEffect effect) {
         super(effect);
     }
 
@@ -74,8 +73,8 @@ class DoomfallEffect extends OneShotEffect {
         Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (targetPlayer != null) {
             Target target = new TargetControlledCreaturePermanent();
-            target.setNotTarget(true);
-            if (targetPlayer.choose(outcome, target, source.getSourceId(), game)) {
+            target.withNotTarget(true);
+            if (targetPlayer.choose(outcome, target, source, game)) {
                 targetPlayer.moveCards(game.getPermanent(target.getFirstTarget()), Zone.EXILED, source, game);
             }
             return true;

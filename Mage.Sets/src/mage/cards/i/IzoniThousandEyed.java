@@ -11,12 +11,10 @@ import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GainLifeEffect;
-import mage.constants.SubType;
-import mage.constants.SuperType;
+import mage.abilities.hint.ValueHint;
+import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.permanent.token.IzoniInsectToken;
 import mage.target.common.TargetControlledPermanent;
@@ -30,7 +28,7 @@ public final class IzoniThousandEyed extends CardImpl {
     public IzoniThousandEyed(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{B}{G}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.SHAMAN);
         this.power = new MageInt(2);
@@ -44,21 +42,20 @@ public final class IzoniThousandEyed extends CardImpl {
                                 StaticFilters.FILTER_CARD_CREATURE
                         )
                 ), false)
-                .withFlavorWord("Undergrowth")
+                .setAbilityWord(AbilityWord.UNDERGROWTH)
+                .addHint(new ValueHint("Creature cards in your graveyard", new CardsInControllerGraveyardCount(StaticFilters.FILTER_CARD_CREATURE)))
         );
 
         // {B}{G}, Sacrifice another creature: You gain 1 life and draw a card.
         Ability ability = new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
                 new GainLifeEffect(1),
-                new ManaCostsImpl("{B}{G}")
+                new ManaCostsImpl<>("{B}{G}")
         );
         ability.addEffect(
                 new DrawCardSourceControllerEffect(1).setText("and draw a card")
         );
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(
-                StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE
-        )));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE));
         this.addAbility(ability);
     }
 

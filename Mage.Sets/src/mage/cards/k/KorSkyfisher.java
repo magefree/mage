@@ -34,7 +34,7 @@ public final class KorSkyfisher extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(new FilterControlledPermanent()), false));
     }
 
-    public KorSkyfisher (final KorSkyfisher card) {
+    private KorSkyfisher(final KorSkyfisher card) {
         super(card);
     }
 

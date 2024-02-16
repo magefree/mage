@@ -35,6 +35,7 @@ public final class Apocalypse extends ExpansionSet {
         cards.add(new SetCardInfo("Bloodfire Kavu", 58, Rarity.UNCOMMON, mage.cards.b.BloodfireKavu.class));
         cards.add(new SetCardInfo("Bog Gnarr", 76, Rarity.COMMON, mage.cards.b.BogGnarr.class));
         cards.add(new SetCardInfo("Brass Herald", 133, Rarity.UNCOMMON, mage.cards.b.BrassHerald.class));
+        cards.add(new SetCardInfo("Captain's Maneuver", 92, Rarity.UNCOMMON, mage.cards.c.CaptainsManeuver.class));
         cards.add(new SetCardInfo("Caves of Koilos", 140, Rarity.RARE, mage.cards.c.CavesOfKoilos.class));
         cards.add(new SetCardInfo("Ceta Disciple", 19, Rarity.COMMON, mage.cards.c.CetaDisciple.class));
         cards.add(new SetCardInfo("Ceta Sanctuary", 20, Rarity.UNCOMMON, mage.cards.c.CetaSanctuary.class));
@@ -59,8 +60,10 @@ public final class Apocalypse extends ExpansionSet {
         cards.add(new SetCardInfo("Dwarven Landslide", 60, Rarity.COMMON, mage.cards.d.DwarvenLandslide.class));
         cards.add(new SetCardInfo("Dwarven Patrol", 61, Rarity.UNCOMMON, mage.cards.d.DwarvenPatrol.class));
         cards.add(new SetCardInfo("Ebony Treefolk", 97, Rarity.UNCOMMON, mage.cards.e.EbonyTreefolk.class));
+        cards.add(new SetCardInfo("Emblazoned Golem", 136, Rarity.UNCOMMON, mage.cards.e.EmblazonedGolem.class));
         cards.add(new SetCardInfo("Enlistment Officer", 9, Rarity.UNCOMMON, mage.cards.e.EnlistmentOfficer.class));
         cards.add(new SetCardInfo("Evasive Action", 23, Rarity.UNCOMMON, mage.cards.e.EvasiveAction.class));
+        cards.add(new SetCardInfo("False Dawn", 10, Rarity.RARE, mage.cards.f.FalseDawn.class));
         cards.add(new SetCardInfo("Fervent Charge", 98, Rarity.RARE, mage.cards.f.FerventCharge.class));
         cards.add(new SetCardInfo("Fire // Ice", 128, Rarity.UNCOMMON, mage.cards.f.FireIce.class));
         cards.add(new SetCardInfo("Flowstone Charger", 99, Rarity.UNCOMMON, mage.cards.f.FlowstoneCharger.class));
@@ -143,6 +146,7 @@ public final class Apocalypse extends ExpansionSet {
         cards.add(new SetCardInfo("Standard Bearer", 18, Rarity.COMMON, mage.cards.s.StandardBearer.class));
         cards.add(new SetCardInfo("Strength of Night", 86, Rarity.COMMON, mage.cards.s.StrengthOfNight.class));
         cards.add(new SetCardInfo("Suffocating Blast", 124, Rarity.RARE, mage.cards.s.SuffocatingBlast.class));
+        cards.add(new SetCardInfo("Suppress", 52, Rarity.UNCOMMON, mage.cards.s.Suppress.class));
         cards.add(new SetCardInfo("Sylvan Messenger", 87, Rarity.UNCOMMON, mage.cards.s.SylvanMessenger.class));
         cards.add(new SetCardInfo("Symbiotic Deployment", 88, Rarity.RARE, mage.cards.s.SymbioticDeployment.class));
         cards.add(new SetCardInfo("Tahngarth's Glare", 70, Rarity.COMMON, mage.cards.t.TahngarthsGlare.class));

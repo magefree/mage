@@ -8,7 +8,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author LoneFox
  */
 public class DestroyAttachedToEffect extends OneShotEffect {
@@ -28,7 +27,7 @@ public class DestroyAttachedToEffect extends OneShotEffect {
         }
     }
 
-    public DestroyAttachedToEffect(final DestroyAttachedToEffect effect) {
+    protected DestroyAttachedToEffect(final DestroyAttachedToEffect effect) {
         super(effect);
         this.noRegen = effect.noRegen;
     }

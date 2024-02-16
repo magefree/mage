@@ -51,13 +51,13 @@ public final class MemoryPlunder extends CardImpl {
 
 class MemoryPlunderEffect extends OneShotEffect {
 
-    public MemoryPlunderEffect() {
+    MemoryPlunderEffect() {
         super(Outcome.PlayForFree);
         this.staticText = "You may cast target instant or sorcery card from "
                 + "an opponent's graveyard without paying its mana cost";
     }
 
-    public MemoryPlunderEffect(final MemoryPlunderEffect effect) {
+    private MemoryPlunderEffect(final MemoryPlunderEffect effect) {
         super(effect);
     }
 

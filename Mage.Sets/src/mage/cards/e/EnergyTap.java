@@ -52,7 +52,7 @@ class EnergyTapEffect extends OneShotEffect {
         this.staticText = "Tap target untapped creature you control. If you do, add an amount of {C} equal to that creature's mana value";
     }
 
-    EnergyTapEffect(final EnergyTapEffect effect) {
+    private EnergyTapEffect(final EnergyTapEffect effect) {
         super(effect);
     }
 

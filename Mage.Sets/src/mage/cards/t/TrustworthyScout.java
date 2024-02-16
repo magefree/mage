@@ -41,7 +41,7 @@ public final class TrustworthyScout extends CardImpl {
                 Zone.GRAVEYARD,
                 new SearchLibraryPutInHandEffect(
                         new TargetCardInLibrary(filter), true
-                ), new ManaCostsImpl("{1}{W}"));
+                ), new ManaCostsImpl<>("{1}{W}"));
         ability.addCost(new ExileSourceFromGraveCost());
         this.addAbility(ability);
     }

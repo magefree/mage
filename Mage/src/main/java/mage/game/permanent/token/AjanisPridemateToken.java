@@ -26,7 +26,7 @@ public final class AjanisPridemateToken extends TokenImpl {
         ));
     }
 
-    public AjanisPridemateToken(final AjanisPridemateToken token) {
+    private AjanisPridemateToken(final AjanisPridemateToken token) {
         super(token);
     }
 

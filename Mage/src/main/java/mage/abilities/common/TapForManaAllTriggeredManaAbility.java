@@ -25,6 +25,7 @@ public class TapForManaAllTriggeredManaAbility extends TriggeredManaAbility {
         super(Zone.BATTLEFIELD, effect);
         this.filter = filter;
         this.setTargetPointer = setTargetPointer;
+        setTriggerPhrase("Whenever " + filter.getMessage() + " for mana, ");
     }
 
     public TapForManaAllTriggeredManaAbility(TapForManaAllTriggeredManaAbility ability) {
@@ -42,7 +43,7 @@ public class TapForManaAllTriggeredManaAbility extends TriggeredManaAbility {
     public boolean checkTrigger(GameEvent event, Game game) {
         TappedForManaEvent manaEvent = ((TappedForManaEvent) event);
         Permanent permanent = manaEvent.getPermanent();
-        if (permanent == null || !filter.match(permanent, getSourceId(), getControllerId(), game)) {
+        if (permanent == null || !filter.match(permanent, getControllerId(), this, game)) {
             return false;
         }
         getEffects().setValue("mana", manaEvent.getMana());
@@ -61,10 +62,5 @@ public class TapForManaAllTriggeredManaAbility extends TriggeredManaAbility {
     @Override
     public TapForManaAllTriggeredManaAbility copy() {
         return new TapForManaAllTriggeredManaAbility(this);
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever " + filter.getMessage() + " for mana, " ;
     }
 }

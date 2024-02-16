@@ -35,7 +35,7 @@ public final class Lithophage extends CardImpl {
 
         // At the beginning of your upkeep, sacrifice Lithophage unless you sacrifice a Mountain.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, 
-                new SacrificeSourceUnlessPaysEffect(new SacrificeTargetCost(new TargetControlledPermanent(filter))), TargetController.YOU, false));
+                new SacrificeSourceUnlessPaysEffect(new SacrificeTargetCost(filter)), TargetController.YOU, false));
     }
 
     private Lithophage(final Lithophage card) {

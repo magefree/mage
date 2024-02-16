@@ -32,7 +32,7 @@ public final class Bravado extends CardImpl {
 		TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 		
 		// Enchanted creature gets +1/+1 for each other creature you control.
@@ -51,12 +51,12 @@ public final class Bravado extends CardImpl {
 
 class BravadoBoostEnchantedEffect extends ContinuousEffectImpl {
 
-    public BravadoBoostEnchantedEffect() {
+    BravadoBoostEnchantedEffect() {
         super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
 		staticText = "Enchanted creature gets +1/+1 for each other creature you control";
     }
 
-    public BravadoBoostEnchantedEffect(final BravadoBoostEnchantedEffect effect) {
+    private BravadoBoostEnchantedEffect(final BravadoBoostEnchantedEffect effect) {
         super(effect);
     }
 
@@ -68,7 +68,7 @@ class BravadoBoostEnchantedEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
-        int count = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game) - 1;
+        int count = game.getBattlefield().count(filter, source.getControllerId(), source, game) - 1;
         if (count > 0) {
             Permanent enchantment = game.getPermanent(source.getSourceId());
             if (enchantment != null && enchantment.getAttachedTo() != null) {

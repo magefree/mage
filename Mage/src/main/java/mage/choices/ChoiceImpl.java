@@ -1,5 +1,6 @@
 package mage.choices;
 
+import mage.util.CardUtil;
 import mage.util.RandomUtil;
 import org.apache.log4j.Logger;
 
@@ -33,6 +34,8 @@ public class ChoiceImpl implements Choice {
     protected String specialText = "";
     protected String specialHint = "";
 
+    protected boolean manaColorChoice = false; // set true to allow automatic choosing with Outcome.PutManaInPool
+
     public ChoiceImpl() {
         this(false);
     }
@@ -46,7 +49,7 @@ public class ChoiceImpl implements Choice {
         this.hintType = hintType;
     }
 
-    public ChoiceImpl(final ChoiceImpl choice) {
+    protected ChoiceImpl(final ChoiceImpl choice) {
         this.choice = choice.choice;
         this.chosenNormal = choice.chosenNormal;
         this.chosenSpecial = choice.chosenSpecial;
@@ -64,6 +67,7 @@ public class ChoiceImpl implements Choice {
         this.specialCanBeEmpty = choice.specialCanBeEmpty;
         this.specialText = choice.specialText;
         this.specialHint = choice.specialHint;
+        this.manaColorChoice = choice.manaColorChoice;
     }
 
     @Override
@@ -111,6 +115,7 @@ public class ChoiceImpl implements Choice {
 
     @Override
     public void setChoices(Set<String> choices) {
+        CardUtil.checkSetParamForSerializationCompatibility(choices);
         this.choices = choices;
         protectFromEmptyChoices();
     }
@@ -324,6 +329,17 @@ public class ChoiceImpl implements Choice {
     @Override
     public ChoiceHintType getHintType() {
         return this.hintType;
+    }
+
+    @Override
+    public boolean isManaColorChoice() {
+        return manaColorChoice;
+    }
+
+    @Override
+    public ChoiceImpl setManaColorChoice(boolean manaColorChoice) {
+        this.manaColorChoice = manaColorChoice;
+        return this;
     }
 
     private void protectFromEmptyChoices() {

@@ -1,18 +1,16 @@
-
 package mage.game.permanent.token;
 
+import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.MageInt;
 
 /**
- *
  * @author spjspj
  */
 public final class WaylayToken extends TokenImpl {
 
     public WaylayToken() {
-        super("Knight", "2/2 white Knight creature token");
+        super("Knight Token", "2/2 white Knight creature token");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
         subtype.add(SubType.KNIGHT);
@@ -20,7 +18,7 @@ public final class WaylayToken extends TokenImpl {
         toughness = new MageInt(2);
     }
 
-    public WaylayToken(final WaylayToken token) {
+    private WaylayToken(final WaylayToken token) {
         super(token);
     }
 

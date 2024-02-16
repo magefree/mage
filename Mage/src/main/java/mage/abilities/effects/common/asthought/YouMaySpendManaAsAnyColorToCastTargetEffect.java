@@ -35,7 +35,7 @@ public class YouMaySpendManaAsAnyColorToCastTargetEffect extends AsThoughEffectI
         this.condition = condition;
     }
 
-    public YouMaySpendManaAsAnyColorToCastTargetEffect(final YouMaySpendManaAsAnyColorToCastTargetEffect effect) {
+    protected YouMaySpendManaAsAnyColorToCastTargetEffect(final YouMaySpendManaAsAnyColorToCastTargetEffect effect) {
         super(effect);
         this.playerId = effect.playerId;
         this.condition = effect.condition;

@@ -39,7 +39,7 @@ public final class GoblinMorningstar extends CardImpl {
         this.addAbility(ability);
 
         // Equip {1}{R}
-        this.addAbility(new EquipAbility(Outcome.BoostCreature, new ManaCostsImpl<>("{1}{R}")));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new ManaCostsImpl<>("{1}{R}"), false));
 
         // When Goblin Morningstar enters the battlefield, roll a d20.
         RollDieWithResultTableEffect effect = new RollDieWithResultTableEffect();

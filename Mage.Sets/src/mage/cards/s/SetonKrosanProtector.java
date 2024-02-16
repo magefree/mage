@@ -30,7 +30,7 @@ public final class SetonKrosanProtector extends CardImpl {
     
     public SetonKrosanProtector(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{G}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.CENTAUR);
         this.subtype.add(SubType.DRUID);
 
@@ -66,7 +66,7 @@ class SetonKrosanProtectorManaEffect extends BasicManaEffect {
         this.filter = filter;
     }
 
-    public SetonKrosanProtectorManaEffect(final SetonKrosanProtectorManaEffect effect) {
+    private SetonKrosanProtectorManaEffect(final SetonKrosanProtectorManaEffect effect) {
         super(effect);
         this.filter = effect.filter.copy();
     }
@@ -80,7 +80,7 @@ class SetonKrosanProtectorManaEffect extends BasicManaEffect {
     public List<Mana> getNetMana(Game game, Ability source) {
         if (game != null && game.inCheckPlayableState()) {
             // Because the ability can be used multiple times, multiply with untapped druids
-            int count = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game);
+            int count = game.getBattlefield().count(filter, source.getControllerId(), source, game);
             List<Mana> netMana = new ArrayList<>();
             if (count > 0) {
                 netMana.add(Mana.GreenMana(count));

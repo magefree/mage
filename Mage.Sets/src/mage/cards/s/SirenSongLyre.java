@@ -36,7 +36,7 @@ public final class SirenSongLyre extends CardImpl {
         grantedAbility.addTarget(new TargetCreaturePermanent());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(grantedAbility, AttachmentType.EQUIPMENT)));
         // Equip {2}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new ManaCostsImpl("{2}")));        
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new ManaCostsImpl<>("{2}"), false));
     }
 
     private SirenSongLyre(final SirenSongLyre card) {

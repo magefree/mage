@@ -25,7 +25,7 @@ public final class ScorchingMissile extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayerOrPlaneswalker());
 
         // Flashback {9}{R}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{9}{R}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{9}{R}")));
 
     }
 

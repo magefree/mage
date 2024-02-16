@@ -39,10 +39,12 @@ public class SelvalaHeartOfTheWildsTest extends CardTestPlayerBase {
 
     }
 
+    /**
+     * After Memnite enters the battlefield, the trigger fires.  In response, 2 Giant Growths targeting the Memnite
+     * pumps its power to the highest on the battlefield allowing the controller to draw a card.
+     */
     @Test
     public void testTriggerWithGiantGrowth() {
-        // After Memnite enters the battlefield, the trigger fires.  In response, 2 Giant Growths targeting the Memnite
-        // pumps its power to the highest on the battlefield allowing the controller to draw a card.
         addCard(Zone.LIBRARY, playerA, "Island", 2);
         // Whenever another creature enters the battlefield, its controller may draw a card if its power is greater than each other creature's power.
         // {G}, {T}: Add X mana in any combination of colors, where X is the greatest power among creatures you control.
@@ -63,6 +65,7 @@ public class SelvalaHeartOfTheWildsTest extends CardTestPlayerBase {
         setChoice(playerA, "X=0");
         setChoice(playerA, "X=0");
         setChoice(playerA, "X=5");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN ,1);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Giant Growth", "Memnite");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Giant Growth", "Memnite"); // a whopping 7/7
 

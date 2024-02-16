@@ -18,7 +18,7 @@ import mage.filter.common.FilterOwnedCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.AkoumStonewakerElementalToken;
+import mage.game.permanent.token.Elemental31TrampleHasteToken;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetCardInHand;
 import mage.target.targetpointer.FixedTargets;
@@ -81,7 +81,7 @@ class ForceOfRageEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Token token = new AkoumStonewakerElementalToken();
+        Token token = new Elemental31TrampleHasteToken();
         token.putOntoBattlefield(2, game, source, source.getControllerId());
         List<Permanent> permanentList = new ArrayList();
         for (UUID permId : token.getLastAddedTokenIds()) {

@@ -34,7 +34,6 @@ public class CastSplitCardsFromOtherZonesTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mindclaw Shaman");
         addTarget(playerA, playerB);
-        setChoice(playerA, "Wear // Tear"); // select card
         setChoice(playerA, true); // confirm to cast
         setChoice(playerA, "Cast Tear"); // select tear side
         addTarget(playerA, "Sanguine Bond"); // target for tear
@@ -42,7 +41,6 @@ public class CastSplitCardsFromOtherZonesTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Mindclaw Shaman", 1);
         assertGraveyardCount(playerB, "Wear // Tear", 1);
@@ -67,7 +65,6 @@ public class CastSplitCardsFromOtherZonesTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mindclaw Shaman");
         addTarget(playerA, playerB);
-        setChoice(playerA, "Wear // Tear"); // select card
         setChoice(playerA, true); // confirm to cast
         setChoice(playerA, "Cast Wear"); // select wear side
         addTarget(playerA, "Icy Manipulator"); // target for wear
@@ -75,7 +72,6 @@ public class CastSplitCardsFromOtherZonesTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Mindclaw Shaman", 1);
         assertGraveyardCount(playerB, "Wear // Tear", 1);
@@ -100,7 +96,6 @@ public class CastSplitCardsFromOtherZonesTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mindclaw Shaman");
         addTarget(playerA, playerB);
-        setChoice(playerA, "Wear // Tear"); // select card
         setChoice(playerA, true); // confirm to cast
         setChoice(playerA, "Cast fused Wear // Tear"); // select fused
         addTarget(playerA, "Icy Manipulator"); // target for wear
@@ -109,7 +104,6 @@ public class CastSplitCardsFromOtherZonesTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Mindclaw Shaman", 1);
         assertGraveyardCount(playerB, "Wear // Tear", 1);
@@ -137,14 +131,12 @@ public class CastSplitCardsFromOtherZonesTest extends CardTestPlayerBase {
 
         attack(2, playerB, "Etali, Primal Storm");
         setChoice(playerB, true); // free cast
-        setChoice(playerB, "Fire // Ice"); // card to cast
         setChoice(playerB, "Cast Fire"); // ability to cast
         addTargetAmount(playerB, "Silvercoat Lion", 2);
 
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.END_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 14);
         assertGraveyardCount(playerA, "Silvercoat Lion", 1);

@@ -28,7 +28,7 @@ public final class MavrenFeinDuskApostle extends CardImpl {
     public MavrenFeinDuskApostle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.VAMPIRE);
         this.subtype.add(SubType.CLERIC);
         this.power = new MageInt(2);
@@ -60,9 +60,10 @@ class MavrenFeinDuskApostleTriggeredAbility extends TriggeredAbilityImpl {
 
     public MavrenFeinDuskApostleTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new IxalanVampireToken()), false);
+        setTriggerPhrase("Whenever one or more nontoken Vampires you control attack, ");
     }
 
-    public MavrenFeinDuskApostleTriggeredAbility(final MavrenFeinDuskApostleTriggeredAbility ability) {
+    private MavrenFeinDuskApostleTriggeredAbility(final MavrenFeinDuskApostleTriggeredAbility ability) {
         super(ability);
     }
 
@@ -85,10 +86,5 @@ class MavrenFeinDuskApostleTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever one or more nontoken Vampires you control attack, " ;
     }
 }

@@ -28,14 +28,12 @@ public final class CrueltyOfTheSith extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell(StaticFilters.FILTER_SPELL_NON_CREATURE));
 
         // Target player sacrifices a creture.
-        Mode mode = new Mode();
-        mode.addEffect(new SacrificeEffect(StaticFilters.FILTER_PERMANENT_CREATURE, 1, "Target player"));
+        Mode mode = new Mode(new SacrificeEffect(StaticFilters.FILTER_PERMANENT_CREATURE, 1, "Target player"));
         mode.addTarget(new TargetPlayer());
         this.getSpellAbility().addMode(mode);
 
         // Cruelty of the Sith deals 3 damage to target player. That player discards a card.
-        mode = new Mode();
-        mode.addEffect(new DamageTargetEffect(3));
+        mode = new Mode(new DamageTargetEffect(3));
         mode.addEffect(new DiscardTargetEffect(1));
         mode.addTarget(new TargetPlayer());
         this.getSpellAbility().addMode(mode);

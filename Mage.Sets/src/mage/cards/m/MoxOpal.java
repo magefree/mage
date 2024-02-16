@@ -22,7 +22,7 @@ public final class MoxOpal extends CardImpl {
 
     public MoxOpal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{0}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         Ability ability = new ActivateIfConditionManaAbility(
                 Zone.BATTLEFIELD,

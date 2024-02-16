@@ -22,7 +22,7 @@ public final class WhispersOfTheMuse extends CardImpl {
         this.addAbility(new BuybackAbility("{5}"));
 
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
     private WhispersOfTheMuse(final WhispersOfTheMuse card) {

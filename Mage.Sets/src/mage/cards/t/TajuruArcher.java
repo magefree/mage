@@ -42,7 +42,7 @@ public final class TajuruArcher extends CardImpl {
         this.toughness = new MageInt(2);
         Ability ability = new AllyEntersBattlefieldTriggeredAbility(new DamageTargetEffect(new PermanentsOnBattlefieldCount(filter)), true);
         ability.addTarget(new TargetCreaturePermanent(filterTarget));
-        this.addAbility(ability);
+        this.addAbility(ability.setAbilityWord(null));
     }
 
     private TajuruArcher(final TajuruArcher card) {

@@ -32,7 +32,7 @@ public final class SiegeOfTowers extends CardImpl {
 
 
         // Replicate {1}{R}
-        this.addAbility(new ReplicateAbility(this, "{1}{R}"));
+        this.addAbility(new ReplicateAbility("{1}{R}"));
 
         // Target Mountain becomes a 3/1 creature. It's still a land.
         Effect effect = new BecomesCreatureTargetEffect(new CreatureToken(3, 1), false, true, Duration.EndOfGame);

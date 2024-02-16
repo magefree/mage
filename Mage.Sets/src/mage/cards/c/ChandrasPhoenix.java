@@ -59,7 +59,7 @@ class ChandrasPhoenixTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.GRAVEYARD, new ReturnToHandSourceEffect());
     }
 
-    ChandrasPhoenixTriggeredAbility(final ChandrasPhoenixTriggeredAbility ability) {
+    private ChandrasPhoenixTriggeredAbility(final ChandrasPhoenixTriggeredAbility ability) {
         super(ability);
     }
 

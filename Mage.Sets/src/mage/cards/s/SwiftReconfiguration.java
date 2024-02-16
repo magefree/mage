@@ -44,7 +44,7 @@ public final class SwiftReconfiguration extends CardImpl {
         TargetPermanent auraTarget = new TargetPermanent(filter);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // Enchanted permanent is a Vehicle artifact with crew 5 and it loses all other card types.
         this.addAbility(new SimpleStaticAbility(new SwiftReconfigurationEffect()));
@@ -93,7 +93,7 @@ class SwiftReconfigurationEffect extends ContinuousEffectImpl {
                 permanent.addSubType(game, SubType.VEHICLE);
                 return true;
             case AbilityAddingRemovingEffects_6:
-                permanent.addAbility(new CrewAbility(5));
+                permanent.addAbility(new CrewAbility(5), source.getSourceId(), game);
                 return true;
         }
         return false;

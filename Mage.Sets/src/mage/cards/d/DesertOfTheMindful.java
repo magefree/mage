@@ -29,7 +29,7 @@ public final class DesertOfTheMindful extends CardImpl {
         this.addAbility(new BlueManaAbility());
 
         // Cycling {1}{U}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{1}{U}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{1}{U}")));
 
     }
 

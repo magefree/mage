@@ -60,7 +60,7 @@ class WithdrawEffect extends OneShotEffect {
         this.staticText = "Return target creature to its owner's hand. Then return another target creature to its owner's hand unless its controller pays {1}";
     }
 
-    WithdrawEffect(final WithdrawEffect effect) {
+    private WithdrawEffect(final WithdrawEffect effect) {
         super(effect);
     }
 

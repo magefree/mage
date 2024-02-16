@@ -39,12 +39,12 @@ public final class AnHavvaInn extends CardImpl {
 
 class AnHavvaInnEffect extends OneShotEffect {
 
-    public AnHavvaInnEffect() {
+    AnHavvaInnEffect() {
         super(Outcome.GainLife);
         staticText = "You gain X plus 1 life, where X is the number of green creatures on the battlefield";
     }
 
-    public AnHavvaInnEffect(final AnHavvaInnEffect effect) {
+    private AnHavvaInnEffect(final AnHavvaInnEffect effect) {
         super(effect);
     }
 
@@ -59,7 +59,7 @@ class AnHavvaInnEffect extends OneShotEffect {
         if (player != null) {
             FilterCreaturePermanent filter = new FilterCreaturePermanent("green creatures");
             filter.add(new ColorPredicate(ObjectColor.GREEN));
-            int greenCreatures = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game);
+            int greenCreatures = game.getBattlefield().count(filter, source.getControllerId(), source, game);
             player.gainLife(greenCreatures+1, game, source);
         }
         return true;

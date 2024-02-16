@@ -1,7 +1,7 @@
 package mage.cards.s;
 
 import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
@@ -27,16 +27,16 @@ public final class SaidDone extends SplitCard {
 
         // Said
         // Return target instant or sorcery card from your graveyard to your hand.
-        this.getLeftHalfCard().getSpellAbility().addEffect(new ReturnToHandTargetEffect());
+        this.getLeftHalfCard().getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect());
         this.getLeftHalfCard().getSpellAbility().addTarget(new TargetCardInYourGraveyard(
                 StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY_FROM_YOUR_GRAVEYARD
         ));
 
         // Done
-        // Tap up to two target creatures. They don't untap during their controllers' next untap step.
+        // Tap up to two target creatures. Those creatures don't untap during their controllers' next untap step.
         this.getRightHalfCard().getSpellAbility().addEffect(new TapTargetEffect());
         this.getRightHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent(0, 2));
-        this.getRightHalfCard().getSpellAbility().addEffect(new DontUntapInControllersNextUntapStepTargetEffect("They"));
+        this.getRightHalfCard().getSpellAbility().addEffect(new DontUntapInControllersNextUntapStepTargetEffect("Those creatures"));
     }
 
     private SaidDone(final SaidDone card) {

@@ -45,7 +45,7 @@ public final class ConclaveGuildmage extends CardImpl {
         // {5}{W}, {T}: Create a 2/2 green and white Elf Knight creature token with vigilance.
         ability = new SimpleActivatedAbility(
                 new CreateTokenEffect(new ElfKnightToken()),
-                new ManaCostsImpl("{5}{W}")
+                new ManaCostsImpl<>("{5}{W}")
         );
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

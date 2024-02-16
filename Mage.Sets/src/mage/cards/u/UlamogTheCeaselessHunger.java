@@ -34,7 +34,7 @@ public final class UlamogTheCeaselessHunger extends CardImpl {
 
     public UlamogTheCeaselessHunger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{10}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELDRAZI);
         this.power = new MageInt(10);
         this.toughness = new MageInt(10);
@@ -66,9 +66,10 @@ class UlamogExilePermanentsOnCastAbility extends TriggeredAbilityImpl {
     UlamogExilePermanentsOnCastAbility() {
         super(Zone.STACK, new ExileTargetEffect("exile two target permanents"));
         this.addTarget(new TargetPermanent(2, new FilterPermanent()));
+        setTriggerPhrase("When you cast this spell, ");
     }
 
-    UlamogExilePermanentsOnCastAbility(UlamogExilePermanentsOnCastAbility ability) {
+    private UlamogExilePermanentsOnCastAbility(final UlamogExilePermanentsOnCastAbility ability) {
         super(ability);
     }
 
@@ -87,20 +88,16 @@ class UlamogExilePermanentsOnCastAbility extends TriggeredAbilityImpl {
     public UlamogExilePermanentsOnCastAbility copy() {
         return new UlamogExilePermanentsOnCastAbility(this);
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "When you cast this spell, " ;
-    }
 }
 
 class UlamogAttackTriggeredAbility extends TriggeredAbilityImpl {
 
     public UlamogAttackTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect);
+        setTriggerPhrase("Whenever {this} attacks, ");
     }
 
-    public UlamogAttackTriggeredAbility(final UlamogAttackTriggeredAbility ability) {
+    private UlamogAttackTriggeredAbility(final UlamogAttackTriggeredAbility ability) {
         super(ability);
     }
 
@@ -126,21 +123,16 @@ class UlamogAttackTriggeredAbility extends TriggeredAbilityImpl {
         }
         return false;
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} attacks, " ;
-    }
 }
 
 class UlamogExileLibraryEffect extends OneShotEffect {
 
-    public UlamogExileLibraryEffect() {
+    UlamogExileLibraryEffect() {
         super(Outcome.Exile);
         this.staticText = "defending player exiles the top twenty cards of their library";
     }
 
-    public UlamogExileLibraryEffect(final UlamogExileLibraryEffect effect) {
+    private UlamogExileLibraryEffect(final UlamogExileLibraryEffect effect) {
         super(effect);
     }
 

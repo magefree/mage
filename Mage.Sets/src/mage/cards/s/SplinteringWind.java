@@ -35,7 +35,7 @@ public final class SplinteringWind extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}{G}");
 
         // {2}{G}: Splintering Wind deals 1 damage to target creature. Create a 1/1 green Splinter creature token. It has flying and “Cumulative upkeep {G}.” When it leaves the battlefield, it deals 1 damage to you and each creature you control.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl("{2}{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl<>("{2}{G}"));
         ability.addEffect(new SplinteringWindCreateTokenEffect());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
@@ -53,12 +53,12 @@ public final class SplinteringWind extends CardImpl {
 
 class SplinteringWindCreateTokenEffect extends OneShotEffect {
 
-    public SplinteringWindCreateTokenEffect() {
+    SplinteringWindCreateTokenEffect() {
         super(Outcome.PutCreatureInPlay);
         staticText = "create a 1/1 green Splinter creature token. It has flying and \"Cumulative upkeep {G}.\" When it leaves the battlefield, it deals 1 damage to you and each creature you control";
     }
 
-    public SplinteringWindCreateTokenEffect(final SplinteringWindCreateTokenEffect effect) {
+    private SplinteringWindCreateTokenEffect(final SplinteringWindCreateTokenEffect effect) {
         super(effect);
     }
 
@@ -94,7 +94,7 @@ class SplinteringWindDelayedTriggeredAbility extends DelayedTriggeredAbility {
         this.tokenId = tokenId;
     }
 
-    SplinteringWindDelayedTriggeredAbility(final SplinteringWindDelayedTriggeredAbility ability) {
+    private SplinteringWindDelayedTriggeredAbility(final SplinteringWindDelayedTriggeredAbility ability) {
         super(ability);
         this.tokenId = ability.tokenId;
     }

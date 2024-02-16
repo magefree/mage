@@ -76,11 +76,11 @@ class DruidOfPurificationEffect extends OneShotEffect {
                 "artifact or enchantment not controlled by " + controller.getName()
         );
         filter.add(Predicates.not(new ControllerIdPredicate(controller.getId())));
-        if (game.getBattlefield().count(filter, source.getControllerId(), source.getControllerId(), game) < 1) {
+        if (game.getBattlefield().count(filter, source.getControllerId(), source, game) < 1) {
             return false;
         }
         TargetPermanent target = new TargetPermanent(0, 1, filter);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         Set<Permanent> permanents = new HashSet<>();
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);
@@ -88,7 +88,7 @@ class DruidOfPurificationEffect extends OneShotEffect {
                 continue;
             }
             target.clearChosen();
-            player.choose(Outcome.DestroyPermanent, target, source.getSourceId(), game);
+            player.choose(Outcome.DestroyPermanent, target, source, game);
             Permanent permanent = game.getPermanent(target.getFirstTarget());
             if (permanent == null) {
                 game.informPlayers(player.getLogName() + " has not chosen a permanent");

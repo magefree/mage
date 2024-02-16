@@ -45,9 +45,10 @@ class BlackViseTriggeredAbility extends TriggeredAbilityImpl {
 
     public BlackViseTriggeredAbility() {
         super(Zone.BATTLEFIELD, new BlackViseEffect(), false);
+        setTriggerPhrase("At the beginning of the chosen player's upkeep, ");
     }
 
-    public BlackViseTriggeredAbility(final BlackViseTriggeredAbility ability) {
+    private BlackViseTriggeredAbility(final BlackViseTriggeredAbility ability) {
         super(ability);
     }
 
@@ -65,21 +66,16 @@ class BlackViseTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         return event.getPlayerId().equals(game.getState().getValue(getSourceId().toString() + ChooseOpponentEffect.VALUE_KEY));
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "At the beginning of the chosen player's upkeep, " ;
-    }
 }
 
 class BlackViseEffect extends OneShotEffect {
 
-    public BlackViseEffect() {
+    BlackViseEffect() {
         super(Outcome.Detriment);
         this.staticText = "{this} deals X damage to that player, where X is the number of cards in their hand minus 4";
     }
 
-    public BlackViseEffect(final BlackViseEffect effect) {
+    private BlackViseEffect(final BlackViseEffect effect) {
         super(effect);
     }
 

@@ -40,7 +40,7 @@ public final class UmbrisFearManifest extends CardImpl {
     public UmbrisFearManifest(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.NIGHTMARE);
         this.subtype.add(SubType.HORROR);
         this.power = new MageInt(1);
@@ -128,8 +128,7 @@ class UmbrisFearManifestEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        for (int i = 0; i < 1000; i++) { // avoiding a loop
-            Card card = player.getLibrary().getFromTop(game);
+        for (Card card : player.getLibrary().getCards(game)) {
             player.moveCards(card, Zone.EXILED, source, game);
             if (card.isLand(game)) {
                 break;

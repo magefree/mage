@@ -48,7 +48,7 @@ public final class UncheckedGrowth extends CardImpl {
             staticText = "If it's a Spirit, it gains trample until end of turn";
         }
 
-        public UncheckedGrowthTrampleEffect(final UncheckedGrowthTrampleEffect effect) {
+        private UncheckedGrowthTrampleEffect(final UncheckedGrowthTrampleEffect effect) {
             super(effect);
         }
 

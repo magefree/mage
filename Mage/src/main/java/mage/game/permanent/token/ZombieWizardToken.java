@@ -7,13 +7,12 @@ import mage.constants.SubType;
 import mage.MageInt;
 
 /**
- *
  * @author spjspj
  */
 public final class ZombieWizardToken extends TokenImpl {
 
     public ZombieWizardToken() {
-        super("Zombie Wizard", "1/1 blue and black Zombie Wizard creature token");
+        super("Zombie Wizard Token", "1/1 blue and black Zombie Wizard creature token");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
         color.setBlack(true);
@@ -23,7 +22,7 @@ public final class ZombieWizardToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    public ZombieWizardToken(final ZombieWizardToken token) {
+    private ZombieWizardToken(final ZombieWizardToken token) {
         super(token);
     }
 

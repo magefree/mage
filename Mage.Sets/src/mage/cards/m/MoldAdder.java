@@ -21,7 +21,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  */
 public final class MoldAdder extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("blue or black spell");
+    private static final FilterSpell filter = new FilterSpell("a blue or black spell");
     static {
         filter.add(Predicates.or(
                 new ColorPredicate(ObjectColor.BLUE),

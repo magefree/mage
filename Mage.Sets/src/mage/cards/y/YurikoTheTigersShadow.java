@@ -39,14 +39,14 @@ public final class YurikoTheTigersShadow extends CardImpl {
     public YurikoTheTigersShadow(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.NINJA);
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 
         // Commander ninjutsu {U}{B}
-        this.addAbility(new NinjutsuAbility(new ManaCostsImpl("{U}{B}"), true));
+        this.addAbility(new NinjutsuAbility(new ManaCostsImpl<>("{U}{B}"), true));
 
         // Whenever a Ninja you control deals combat damage to a player, reveal the top card of your library and put that card into your hand. Each opponent loses life equal to that card's converted mana cost.
         this.addAbility(new DealsDamageToAPlayerAllTriggeredAbility(
@@ -67,14 +67,14 @@ public final class YurikoTheTigersShadow extends CardImpl {
 
 class YurikoTheTigersShadowEffect extends OneShotEffect {
 
-    public YurikoTheTigersShadowEffect() {
+    YurikoTheTigersShadowEffect() {
         super(Outcome.Benefit);
         this.staticText = "reveal the top card of your library "
                 + "and put that card into your hand. Each opponent loses life "
                 + "equal to that card's mana value";
     }
 
-    public YurikoTheTigersShadowEffect(final YurikoTheTigersShadowEffect effect) {
+    private YurikoTheTigersShadowEffect(final YurikoTheTigersShadowEffect effect) {
         super(effect);
     }
 

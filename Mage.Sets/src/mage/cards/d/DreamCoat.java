@@ -40,7 +40,7 @@ public final class DreamCoat extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Neutral));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // {0}: Enchanted creature becomes the color or colors of your choice. Activate this ability only once each turn.
@@ -59,12 +59,12 @@ public final class DreamCoat extends CardImpl {
 
 class BecomesColorOrColorsEnchantedEffect extends OneShotEffect {
 
-    public BecomesColorOrColorsEnchantedEffect() {
+    BecomesColorOrColorsEnchantedEffect() {
         super(Outcome.Neutral);
         this.staticText = "Enchanted creature becomes the color or colors of your choice";
     }
 
-    public BecomesColorOrColorsEnchantedEffect(final BecomesColorOrColorsEnchantedEffect effect) {
+    private BecomesColorOrColorsEnchantedEffect(final BecomesColorOrColorsEnchantedEffect effect) {
         super(effect);
     }
 

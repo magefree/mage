@@ -25,7 +25,7 @@ public final class DauthiEmbrace extends CardImpl {
 
 
         // {B}{B}: Target creature gains shadow until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(ShadowAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{B}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(ShadowAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{B}{B}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

@@ -5,7 +5,7 @@ import mage.abilities.effects.Effect;
 import mage.constants.AbilityWord;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.DamagedPermanentBatchEvent;
+import mage.game.events.DamagedBatchForPermanentsEvent;
 import mage.game.events.GameEvent;
 
 /**
@@ -22,9 +22,11 @@ public class DealtDamageToSourceTriggeredAbility extends TriggeredAbilityImpl {
         if (enrage) {
             this.setAbilityWord(AbilityWord.ENRAGE);
         }
+        setTriggerPhrase("Whenever {this} is dealt damage, ");
+        this.replaceRuleText = true;
     }
 
-    public DealtDamageToSourceTriggeredAbility(final DealtDamageToSourceTriggeredAbility ability) {
+    protected DealtDamageToSourceTriggeredAbility(final DealtDamageToSourceTriggeredAbility ability) {
         super(ability);
     }
 
@@ -35,12 +37,12 @@ public class DealtDamageToSourceTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PERMANENT_BATCH;
+        return event.getType() == GameEvent.EventType.DAMAGED_BATCH_FOR_PERMANENTS;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        DamagedPermanentBatchEvent dEvent = (DamagedPermanentBatchEvent) event;
+        DamagedBatchForPermanentsEvent dEvent = (DamagedBatchForPermanentsEvent) event;
         int damage = dEvent
                 .getEvents()
                 .stream()
@@ -52,10 +54,5 @@ public class DealtDamageToSourceTriggeredAbility extends TriggeredAbilityImpl {
         }
         this.getEffects().setValue("damage", damage);
         return true;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} is dealt damage, ";
     }
 }

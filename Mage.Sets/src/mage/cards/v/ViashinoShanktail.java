@@ -32,8 +32,10 @@ public final class ViashinoShanktail extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
 
         // Bloodrush - 2{R}, Discard Viashino Shanktail: Target attacking creature gets +3/+1 and gains first strike until end of turn.
-        Ability ability = new BloodrushAbility("{2}{R}", new BoostTargetEffect(3,1, Duration.EndOfTurn));
-        ability.addEffect(new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn));
+        Ability ability = new BloodrushAbility("{2}{R}", new BoostTargetEffect(3,1, Duration.EndOfTurn)
+                .setText("target attacking creature gets +3/+1"));
+        ability.addEffect(new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn)
+                .setText("and gains first strike until end of turn"));
         this.addAbility(ability);
 
 

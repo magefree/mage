@@ -23,7 +23,7 @@ public final class PeaceOfMind extends CardImpl {
 
 
         // {W}, Discard a card: You gain 3 life.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(3), new ManaCostsImpl("{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(3), new ManaCostsImpl<>("{W}"));
         ability.addCost(new DiscardCardCost());
         this.addAbility(ability);
     }

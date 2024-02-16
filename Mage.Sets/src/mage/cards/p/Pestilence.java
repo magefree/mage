@@ -33,7 +33,7 @@ public final class Pestilence extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(triggered, new CreatureCountCondition(0, TargetController.ANY), ruleText));
 
         // {B}: Pestilence deals 1 damage to each creature and each player.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageEverythingEffect(1), new ManaCostsImpl("{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageEverythingEffect(1), new ManaCostsImpl<>("{B}")));
     }
 
     private Pestilence(final Pestilence card) {

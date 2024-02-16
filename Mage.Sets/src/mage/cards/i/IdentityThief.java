@@ -64,9 +64,10 @@ class IdentityThiefAbility extends TriggeredAbilityImpl {
     public IdentityThiefAbility() {
         super(Zone.BATTLEFIELD, null, true);
         this.addEffect(new IdentityThiefEffect());
+        setTriggerPhrase("Whenever {this} attacks, ");
     }
 
-    public IdentityThiefAbility(final IdentityThiefAbility ability) {
+    private IdentityThiefAbility(final IdentityThiefAbility ability) {
         super(ability);
     }
 
@@ -81,11 +82,6 @@ class IdentityThiefAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} attacks, ";
-    }
-
-    @Override
     public IdentityThiefAbility copy() {
         return new IdentityThiefAbility(this);
     }
@@ -93,13 +89,13 @@ class IdentityThiefAbility extends TriggeredAbilityImpl {
 
 class IdentityThiefEffect extends OneShotEffect {
 
-    public IdentityThiefEffect() {
+    IdentityThiefEffect() {
         super(Outcome.Detriment);
         staticText = "you may exile another target nontoken creature. If you do, {this} becomes a copy of that creature until end of turn. "
                 + "Return the exiled card to the battlefield under its owner's control at the beginning of the next end step";
     }
 
-    public IdentityThiefEffect(final IdentityThiefEffect effect) {
+    private IdentityThiefEffect(final IdentityThiefEffect effect) {
         super(effect);
     }
 

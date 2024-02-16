@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
+import mage.abilities.effects.common.cost.MorphSpellsCostReductionControllerEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -16,7 +16,6 @@ import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicate;
-import mage.filter.predicate.card.FaceDownCastablePredicate;
 import mage.filter.predicate.card.FaceDownPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -43,7 +42,7 @@ public final class KadenaSlinkingSorcerer extends CardImpl {
     public KadenaSlinkingSorcerer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{G}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.NAGA);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(3);
@@ -51,7 +50,7 @@ public final class KadenaSlinkingSorcerer extends CardImpl {
 
         // The first face-down creature spell you cast each turn costs {3} less to cast.
         this.addAbility(new SimpleStaticAbility(
-                new SpellsCostReductionControllerEffect(filterFirstFaceDownSpell, 3)
+                new MorphSpellsCostReductionControllerEffect(filterFirstFaceDownSpell, 3)
                         .setText("The first face-down creature spell you cast each turn costs {3} less to cast.")
         ), new KadenaSlinkingSorcererWatcher());
 
@@ -78,8 +77,7 @@ enum KadenaSlinkingSorcererPredicate implements Predicate<Card> {
     public boolean apply(Card input, Game game) {
         KadenaSlinkingSorcererWatcher watcher = game.getState().getWatcher(KadenaSlinkingSorcererWatcher.class);
         if (watcher != null) {
-            return FaceDownCastablePredicate.instance.apply(input, game)
-                    && !watcher.castFaceDownThisTurn(input.getOwnerId());
+            return !watcher.castFaceDownThisTurn(input.getOwnerId());
         }
         return false;
     }

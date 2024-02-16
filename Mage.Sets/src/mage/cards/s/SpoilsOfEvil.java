@@ -51,7 +51,7 @@ public final class SpoilsOfEvil extends CardImpl {
             this.staticText = "For each artifact or creature card in target opponent's graveyard, add {C} and you gain 1 life.";
         }
         
-        public SpoilsOfEvilEffect(final SpoilsOfEvilEffect effect) {
+        private SpoilsOfEvilEffect(final SpoilsOfEvilEffect effect) {
             super(effect);
         }
         

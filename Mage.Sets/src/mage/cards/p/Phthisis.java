@@ -31,7 +31,7 @@ public final class Phthisis extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 
         // Suspend 5-{1}{B}
-        this.addAbility(new SuspendAbility(5, new ManaCostsImpl("{1}{B}"), this));
+        this.addAbility(new SuspendAbility(5, new ManaCostsImpl<>("{1}{B}"), this));
     }
 
     private Phthisis(final Phthisis card) {
@@ -46,12 +46,12 @@ public final class Phthisis extends CardImpl {
 
 class PhthisisEffect extends OneShotEffect {
 
-    public PhthisisEffect() {
+    PhthisisEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "Destroy target creature. Its controller loses life equal to its power plus its toughness";
     }
 
-    public PhthisisEffect(final PhthisisEffect effect) {
+    private PhthisisEffect(final PhthisisEffect effect) {
         super(effect);
     }
 

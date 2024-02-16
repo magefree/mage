@@ -56,7 +56,7 @@ class WinterBlastEffect extends OneShotEffect {
         this.staticText = "Tap X target creatures. {this} deals 2 damage to each of those creatures with flying.";
     }
 
-    WinterBlastEffect(final WinterBlastEffect effect) {
+    private WinterBlastEffect(final WinterBlastEffect effect) {
         super(effect);
     }
 

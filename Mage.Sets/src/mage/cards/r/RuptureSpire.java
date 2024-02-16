@@ -21,7 +21,7 @@ public final class RuptureSpire extends CardImpl {
 
         this.addAbility(new EntersBattlefieldTappedAbility());
         this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl("{1}")).setText("sacrifice it unless you pay {1}")
+                new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{1}")).setText("sacrifice it unless you pay {1}")
         ));
         this.addAbility(new AnyColorManaAbility());
     }

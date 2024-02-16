@@ -2,7 +2,7 @@ package mage.cards.t;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -35,7 +35,7 @@ public final class ThiefOfBlood extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // As Thief of Blood enters the battlefield, remove all counters from all permanents. Thief of Blood enters the battlefield with a +1/+1 counter on it for each counter removed this way.
-        this.addAbility(new EntersBattlefieldAbility(new ThiefOfBloodEffect(), null, "As {this} enters the battlefield, remove all counters from all permanents. {this} enters the battlefield with a +1/+1 counter on it for each counter removed this way", null));
+        this.addAbility(new AsEntersBattlefieldAbility(new ThiefOfBloodEffect()));
     }
 
     private ThiefOfBlood(final ThiefOfBlood card) {

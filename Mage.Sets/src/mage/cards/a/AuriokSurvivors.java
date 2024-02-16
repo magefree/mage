@@ -60,7 +60,7 @@ class AuriokSurvivorsEffect extends OneShotEffect {
         staticText = "If you do, you may attach it to {this}";
     }
 
-    AuriokSurvivorsEffect(final AuriokSurvivorsEffect effect) {
+    private AuriokSurvivorsEffect(final AuriokSurvivorsEffect effect) {
         super(effect);
     }
 

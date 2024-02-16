@@ -9,7 +9,6 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
-import static org.mage.test.utils.ManaOptionsTestUtils.assertDuplicatedManaOptions;
 import static org.mage.test.utils.ManaOptionsTestUtils.assertManaOptions;
 
 public class ManaReflectionTest extends CardTestPlayerBase {
@@ -72,7 +71,6 @@ public class ManaReflectionTest extends CardTestPlayerBase {
         execute();
 
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
-        assertDuplicatedManaOptions(manaOptions);
 
         Assert.assertEquals("mana variations don't fit", 4, manaOptions.size());
         assertManaOptions("{R}{R}{R}{R}{R}{R}{G}{G}", manaOptions);

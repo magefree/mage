@@ -43,11 +43,12 @@ public final class OverrideCard extends CardImpl {
 
 class OverrideEffect extends OneShotEffect {
 
-    public OverrideEffect() {
+    OverrideEffect() {
         super(Outcome.Benefit);
+        this.staticText = "Counter target spell unless its controller pays {1} for each artifact you control";
     }
 
-    public OverrideEffect(final OverrideEffect effect) {
+    private OverrideEffect(final OverrideEffect effect) {
         super(effect);
     }
 
@@ -59,7 +60,7 @@ class OverrideEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         StackObject spell = game.getStack().getStackObject(targetPointer.getFirst(game, source));
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (sourceObject != null && spell != null) {
             Player player = game.getPlayer(spell.getControllerId());
             Player controller = game.getPlayer(source.getControllerId());
@@ -77,10 +78,4 @@ class OverrideEffect extends OneShotEffect {
         }
         return false;
     }
-
-    @Override
-    public String getText(Mode mode) {
-        return "Counter target spell unless its controller pays {1} for each artifact you control";
-    }
-
 }

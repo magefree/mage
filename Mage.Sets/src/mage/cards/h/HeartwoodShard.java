@@ -29,9 +29,8 @@ public final class HeartwoodShard extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn),
                 new OrCost(
-                        new CompositeCost(new GenericManaCost(3), new TapSourceCost(), "{3}, {T}"),
-                        new CompositeCost(new ManaCostsImpl<>("{G}"), new TapSourceCost(), "{G}, {T}"),
-                        "{3}, {T} or {G}, {T}"
+                        "{3}, {T} or {G}, {T}", new CompositeCost(new GenericManaCost(3), new TapSourceCost(), "{3}, {T}"),
+                        new CompositeCost(new ManaCostsImpl<>("{G}"), new TapSourceCost(), "{G}, {T}")
                 )
         );
         ability.addTarget(new TargetCreaturePermanent());

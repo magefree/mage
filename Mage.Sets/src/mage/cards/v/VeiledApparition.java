@@ -32,13 +32,12 @@ public final class VeiledApparition extends CardImpl {
 
     public VeiledApparition(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
-        
 
         // When an opponent casts a spell, if Veiled Apparition is an enchantment, Veiled Apparition becomes a 3/3 Illusion creature with flying and "At the beginning of your upkeep, sacrifice Veiled Apparition unless you pay {1}{U}."
-         TriggeredAbility ability = new SpellCastOpponentTriggeredAbility(new BecomesCreatureSourceEffect(new VeilApparitionToken(), "", Duration.WhileOnBattlefield, true, false),
+         TriggeredAbility ability = new SpellCastOpponentTriggeredAbility(new BecomesCreatureSourceEffect(new VeilApparitionToken(), null, Duration.WhileOnBattlefield),
                 filter, false);
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, new SourceMatchesFilterCondition(StaticFilters.FILTER_PERMANENT_ENCHANTMENT),
-                "Whenever an opponent casts a spell, if Veiled Apparition is an enchantment, Veiled Apparition becomes a 3/3 Illusion creature with flying and \"At the beginning of your upkeep, sacrifice Veiled Apparition unless you pay {1}{U}."));
+                "When an opponent casts a spell, if {this} is an enchantment, {this} becomes a 3/3 Illusion creature with flying and \"At the beginning of your upkeep, sacrifice Veiled Apparition unless you pay {1}{U}.\""));
         
     }
 
@@ -60,11 +59,11 @@ class VeilApparitionToken extends TokenImpl {
         subtype.add(SubType.ILLUSION);
         power = new MageInt(3);
         toughness = new MageInt(3);
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new DoUnlessControllerPaysEffect(new SacrificeSourceEffect(), new ManaCostsImpl("{1}{U}")), TargetController.YOU, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new DoUnlessControllerPaysEffect(new SacrificeSourceEffect(), new ManaCostsImpl<>("{1}{U}")), TargetController.YOU, false);
         this.addAbility(ability);
     }
 
-    public VeilApparitionToken(final VeilApparitionToken token) {
+    private VeilApparitionToken(final VeilApparitionToken token) {
         super(token);
     }
 

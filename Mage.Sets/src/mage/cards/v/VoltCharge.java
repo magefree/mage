@@ -17,9 +17,10 @@ public final class VoltCharge extends CardImpl {
     public VoltCharge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{R}");
 
-        // Volt Charge deals 3 damage to any target. Proliferate. (You choose any number of permanents and/or players with counters on them, then give each another counter of a kind already there.)
+        // Volt Charge deals 3 damage to any target.
+        // Proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
-        this.getSpellAbility().addEffect(new ProliferateEffect());
+        this.getSpellAbility().addEffect(new ProliferateEffect(true));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 

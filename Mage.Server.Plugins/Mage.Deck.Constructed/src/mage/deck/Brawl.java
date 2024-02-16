@@ -26,14 +26,17 @@ public class Brawl extends Constructed {
         // Copy of standard sets
         setCodes.addAll(Standard.makeLegalSets());
 
-        banned.add("Golos, Tireless Pilgrim");
-        banned.add("Drannith Magistrate");
-        banned.add("Lutri, the Spellchaser");
-        banned.add("Oko, Thief of Crowns");
-        banned.add("Sorcerous Spyglass");
-        banned.add("Teferi, Time Raveler");
-        banned.add("Omnath, Locus of Creation");
-        banned.add("Winota, Joiner of Forces");
+        // The following cards are no longer legal in the format, but are still listed as banned
+        // banned.add("Golos, Tireless Pilgrim");
+        // banned.add("Drannith Magistrate");
+        // banned.add("Lutri, the Spellchaser");
+        // banned.add("Oko, Thief of Crowns");
+        // banned.add("Sorcerous Spyglass");
+        // banned.add("Teferi, Time Raveler");
+        // banned.add("Omnath, Locus of Creation");
+        // banned.add("Winota, Joiner of Forces");
+
+        banned.add("Pithing Needle");
     }
 
     @Override
@@ -57,10 +60,10 @@ public class Brawl extends Constructed {
             Iterator<Card> iter = deck.getSideboard().iterator();
             Card card1 = iter.next();
             Card card2 = iter.next();
-            if (card1.getAbilities().stream().anyMatch(ability -> ability instanceof CompanionAbility)) {
+            if (card1.getAbilities().stream().anyMatch(CompanionAbility.class::isInstance)) {
                 companion = card1;
                 brawler = card2;
-            } else if (card2.getAbilities().stream().anyMatch(ability -> ability instanceof CompanionAbility)) {
+            } else if (card2.getAbilities().stream().anyMatch(CompanionAbility.class::isInstance)) {
                 companion = card2;
                 brawler = card1;
             } else {
@@ -86,11 +89,11 @@ public class Brawl extends Constructed {
             }
         }
 
-        if (companion != null && deck.getCards().size() + deck.getSideboard().size() != getDeckMinSize() + 1) {
-            addError(DeckValidatorErrorType.DECK_SIZE, "Deck", "Must contain " + (getDeckMinSize() + 1) + " cards (companion doesn't count in deck size requirement): has " + (deck.getCards().size() + deck.getSideboard().size()) + " cards");
+        if (companion != null && deck.getMaindeckCards().size() + deck.getSideboard().size() != getDeckMinSize() + 1) {
+            addError(DeckValidatorErrorType.DECK_SIZE, "Deck", "Must contain " + (getDeckMinSize() + 1) + " cards (companion doesn't count in deck size requirement): has " + (deck.getMaindeckCards().size() + deck.getSideboard().size()) + " cards");
             valid = false;
-        } else if (companion == null && deck.getCards().size() + deck.getSideboard().size() != getDeckMinSize()) {
-            addError(DeckValidatorErrorType.DECK_SIZE, "Deck", "Must contain " + getDeckMinSize() + " cards: has " + (deck.getCards().size() + deck.getSideboard().size()) + " cards");
+        } else if (companion == null && deck.getMaindeckCards().size() + deck.getSideboard().size() != getDeckMinSize()) {
+            addError(DeckValidatorErrorType.DECK_SIZE, "Deck", "Must contain " + getDeckMinSize() + " cards: has " + (deck.getMaindeckCards().size() + deck.getSideboard().size()) + " cards");
             valid = false;
         }
 
@@ -156,7 +159,8 @@ public class Brawl extends Constructed {
                 if (ability instanceof CompanionAbility) {
                     CompanionAbility companionAbility = (CompanionAbility) ability;
                     if (!companionAbility.isLegal(cards, getDeckMinSize())) {
-                        addError(DeckValidatorErrorType.PRIMARY, companion.getName(), "Brawl Companion Invalid", true);
+                        addError(DeckValidatorErrorType.PRIMARY, companion.getName(),
+                                String.format("Brawl companion illegal: %s", companionAbility.getLegalRule()), true);
                         valid = false;
                     }
                     break;

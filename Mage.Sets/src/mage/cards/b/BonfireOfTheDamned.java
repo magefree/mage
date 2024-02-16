@@ -1,7 +1,6 @@
 package mage.cards.b;
 
 import mage.abilities.Ability;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.MiracleAbility;
 import mage.cards.CardImpl;
@@ -29,7 +28,7 @@ public final class BonfireOfTheDamned extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayerOrPlaneswalker());
 
         // Miracle {X}{R}
-        this.addAbility(new MiracleAbility(this, new ManaCostsImpl("{X}{R}")));
+        this.addAbility(new MiracleAbility("{X}{R}"));
     }
 
     private BonfireOfTheDamned(final BonfireOfTheDamned card) {
@@ -60,7 +59,7 @@ class BonfireOfTheDamnedEffect extends OneShotEffect {
         if (damage < 1) {
             return false;
         }
-        game.damagePlayerOrPlaneswalker(source.getFirstTarget(), damage, source.getSourceId(), source, game, false, true);
+        game.damagePlayerOrPermanent(source.getFirstTarget(), damage, source.getSourceId(), source, game, false, true);
         Player player = game.getPlayerOrPlaneswalkerController(source.getFirstTarget());
         if (player == null) {
             return true;

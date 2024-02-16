@@ -32,11 +32,11 @@ public final class DrownInDreams extends CardImpl {
 
         // • Target player draws X cards.
         this.getSpellAbility().addEffect(new DrawCardTargetEffect(ManacostVariableValue.REGULAR));
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addTarget(new TargetPlayer().withChooseHint("draws X cards"));
 
         // • Target player mills twice X cards.
         Mode mode = new Mode(new MillCardsTargetEffect(xValue).setText("target player mills twice X cards"));
-        mode.addTarget(new TargetPlayer());
+        mode.addTarget(new TargetPlayer().withChooseHint("mills twice X cards"));
         this.getSpellAbility().addMode(mode);
     }
 

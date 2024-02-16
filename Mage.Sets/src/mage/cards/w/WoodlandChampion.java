@@ -12,7 +12,9 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeGroupEvent;
+import mage.game.permanent.PermanentImpl;
 
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -60,18 +62,22 @@ class WoodlandChampionTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeGroupEvent zEvent = (ZoneChangeGroupEvent) event;
-        if (zEvent != null && Zone.BATTLEFIELD == zEvent.getToZone()
-                && zEvent.getTokens() != null) {
-            int tokenCount = zEvent
-                    .getTokens()
-                    .stream()
-                    .mapToInt(card -> card.isControlledBy(this.getControllerId()) ? 1 : 0)
-                    .sum();
-            if (tokenCount > 0) {
-                this.getEffects().clear();
-                this.addEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance(tokenCount)));
-                return true;
-            }
+        if (zEvent.getToZone() != Zone.BATTLEFIELD
+                || zEvent.getTokens() == null) {
+            return false;
+        }
+        int tokenCount = zEvent
+                .getTokens()
+                .stream()
+                .filter(Objects::nonNull)
+                .map(PermanentImpl::getControllerId)
+                .filter(this::isControlledBy)
+                .mapToInt(x -> 1)
+                .sum();
+        if (tokenCount > 0) {
+            this.getEffects().clear();
+            this.addEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance(tokenCount)));
+            return true;
         }
         return false;
     }

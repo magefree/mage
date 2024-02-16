@@ -51,12 +51,12 @@ public final class PullFromEternity extends CardImpl {
 
 class PullFromEternityEffect extends OneShotEffect {
 
-    public PullFromEternityEffect() {
+    PullFromEternityEffect() {
         super(Outcome.Benefit);
         this.staticText = "Put target face-up exiled card into its owner's graveyard.";
     }
 
-    public PullFromEternityEffect(final PullFromEternityEffect effect) {
+    private PullFromEternityEffect(final PullFromEternityEffect effect) {
         super(effect);
     }
 

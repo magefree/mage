@@ -15,7 +15,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.players.Player;
@@ -37,7 +37,7 @@ public final class BrainGorgers extends CardImpl {
         this.addAbility(new CastSourceTriggeredAbility(new BrainGorgersCounterSourceEffect()));
 
         // Madness {1}{B}
-        this.addAbility(new MadnessAbility(this, new ManaCostsImpl<>("{1}{B}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl<>("{1}{B}")));
     }
 
     private BrainGorgers(final BrainGorgers card) {
@@ -52,12 +52,12 @@ public final class BrainGorgers extends CardImpl {
 
 class BrainGorgersCounterSourceEffect extends OneShotEffect {
 
-    public BrainGorgersCounterSourceEffect() {
+    BrainGorgersCounterSourceEffect() {
         super(Outcome.AIDontUseIt);
         staticText = "any player may sacrifice a creature. If a player does, counter {this}";
     }
 
-    public BrainGorgersCounterSourceEffect(final BrainGorgersCounterSourceEffect effect) {
+    private BrainGorgersCounterSourceEffect(final BrainGorgersCounterSourceEffect effect) {
         super(effect);
     }
 
@@ -70,7 +70,7 @@ class BrainGorgersCounterSourceEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         MageObject sourceObject = source.getSourceObject(game);
         if (sourceObject != null) {
-            SacrificeTargetCost cost = new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
+            SacrificeTargetCost cost = new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT);
             for (UUID playerId : game.getState().getPlayerList(source.getControllerId())) {
                 cost.clearPaid();
                 Player player = game.getPlayer(playerId);

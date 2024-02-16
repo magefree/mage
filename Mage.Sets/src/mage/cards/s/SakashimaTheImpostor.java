@@ -30,7 +30,7 @@ public final class SakashimaTheImpostor extends CardImpl {
 
     public SakashimaTheImpostor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ROGUE);
         this.power = new MageInt(3);
@@ -61,7 +61,7 @@ class SakashimaTheImpostorCopyApplier extends CopyApplier {
         // {2}{U}{U}: Return Sakashima the Impostor to its owner's hand at the beginning of the next end step
         blueprint.getAbilities().add(new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new ReturnToHandSourceEffect(true)), false),
-                new ManaCostsImpl("{2}{U}{U}")
+                new ManaCostsImpl<>("{2}{U}{U}")
         ));
         return true;
     }

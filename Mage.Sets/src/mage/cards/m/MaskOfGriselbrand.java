@@ -7,6 +7,7 @@ import mage.abilities.common.DiesAttachedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.PayLifeCost;
+import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
@@ -18,6 +19,7 @@ import mage.cards.CardSetInfo;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
@@ -28,7 +30,7 @@ public final class MaskOfGriselbrand extends CardImpl {
     public MaskOfGriselbrand(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}{B}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature has flying and lifelink.
@@ -40,7 +42,7 @@ public final class MaskOfGriselbrand extends CardImpl {
         this.addAbility(new DiesAttachedTriggeredAbility(new MaskOfGriselbrandEffect(), "equipped creature"));
 
         // Equip {3}
-        this.addAbility(new EquipAbility(3));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(3), new TargetControlledCreaturePermanent(), false));
     }
 
     private MaskOfGriselbrand(final MaskOfGriselbrand card) {
@@ -55,7 +57,7 @@ public final class MaskOfGriselbrand extends CardImpl {
 
 class MaskOfGriselbrandEffect extends OneShotEffect {
 
-    public MaskOfGriselbrandEffect() {
+    MaskOfGriselbrandEffect() {
         super(Outcome.DrawCard);
         staticText = "you may pay X life, where X is its power. If you do, draw X cards";
     }

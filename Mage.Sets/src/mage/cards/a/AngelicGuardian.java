@@ -54,12 +54,12 @@ public final class AngelicGuardian extends CardImpl {
 
 class AngelicGuardianGainEffect extends OneShotEffect {
 
-    public AngelicGuardianGainEffect() {
+    AngelicGuardianGainEffect() {
         super(Outcome.Benefit);
         staticText = "they gain indestructible until end of turn";
     }
 
-    public AngelicGuardianGainEffect(final AngelicGuardianGainEffect effect) {
+    private AngelicGuardianGainEffect(final AngelicGuardianGainEffect effect) {
         super(effect);
     }
 

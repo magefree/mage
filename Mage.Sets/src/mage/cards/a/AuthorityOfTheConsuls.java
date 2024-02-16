@@ -1,14 +1,13 @@
 package mage.cards.a;
 
-import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldOpponentTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.PermanentsEnterBattlefieldTappedEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterOpponentsCreaturePermanent;
+import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -17,19 +16,15 @@ import java.util.UUID;
  */
 public final class AuthorityOfTheConsuls extends CardImpl {
 
-    private static final FilterPermanent filter
-            = new FilterOpponentsCreaturePermanent("creatures your opponents control");
-
     public AuthorityOfTheConsuls(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{W}");
 
         // Creatures your opponents control enter the battlefield tapped.
-        this.addAbility(new SimpleStaticAbility(new PermanentsEnterBattlefieldTappedEffect(filter)));
+        this.addAbility(new SimpleStaticAbility(new PermanentsEnterBattlefieldTappedEffect(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURES)));
 
         // Whenever a creature enters the battlefield under an opponent's control, you gain 1 life.
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(
-                new GainLifeEffect(1), filter, "Whenever a creature enters " +
-                "the battlefield under an opponent's control, you gain 1 life."
+        this.addAbility(new EntersBattlefieldOpponentTriggeredAbility(
+                new GainLifeEffect(1), StaticFilters.FILTER_PERMANENT_A_CREATURE, false
         ));
     }
 

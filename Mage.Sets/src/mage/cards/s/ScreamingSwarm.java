@@ -44,7 +44,7 @@ public final class ScreamingSwarm extends CardImpl {
         Ability ability = new AttacksWithCreaturesTriggeredAbility(
                 new MillCardsTargetEffect(ScreamingSwarmValue.instance)
                         .setText("target player mills that many cards"),
-                0
+                1
         ).setTriggerPhrase("Whenever you attack with one or more creatures, ");
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
@@ -68,7 +68,7 @@ enum ScreamingSwarmValue implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        return (Integer) effect.getValue("attackers");
+        return (Integer) effect.getValue(AttacksWithCreaturesTriggeredAbility.VALUEKEY_NUMBER_ATTACKERS);
     }
 
     @Override

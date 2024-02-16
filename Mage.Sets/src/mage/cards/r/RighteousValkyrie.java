@@ -69,7 +69,7 @@ public final class RighteousValkyrie extends CardImpl {
 
 class RighteousValkyrieEffect extends OneShotEffect {
 
-    public RighteousValkyrieEffect() {
+    RighteousValkyrieEffect() {
         super(Outcome.GainLife);
         staticText = "you gain life equal to that creature's toughness";
     }

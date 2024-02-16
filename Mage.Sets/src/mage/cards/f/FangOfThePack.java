@@ -1,4 +1,3 @@
-
 package mage.cards.f;
 
 import java.util.UUID;
@@ -13,8 +12,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.TargetController;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -22,12 +20,6 @@ import mage.target.common.TargetControlledCreaturePermanent;
  * @author Styxo
  */
 public final class FangOfThePack extends CardImpl {
-
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another target creature you control");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
 
     public FangOfThePack(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{G}");
@@ -41,7 +33,7 @@ public final class FangOfThePack extends CardImpl {
 
         // At the beginning of combat on your turn, another target creature you control gains melee until end of turn.
         Ability ability = new BeginningOfCombatTriggeredAbility(new GainAbilityTargetEffect(new MeleeAbility(), Duration.EndOfTurn), TargetController.YOU, false);
-        ability.addTarget(new TargetControlledCreaturePermanent(filter));
+        ability.addTarget(new TargetControlledCreaturePermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE_YOU_CONTROL));
         this.addAbility(ability);
     }
 

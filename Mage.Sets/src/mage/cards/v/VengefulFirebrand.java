@@ -42,7 +42,7 @@ public final class VengefulFirebrand extends CardImpl {
                 "{this} has haste as long as a Warrior card is in your graveyard")));
         
         // {R}: Vengeful Firebrand gets +1/+0 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{R}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{R}")));
     }
 
     private VengefulFirebrand(final VengefulFirebrand card) {

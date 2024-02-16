@@ -524,7 +524,13 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
     private final CardTypeCounter planeswalkerCounter = new CardTypeCounter() {
         @Override
         protected boolean is(CardView card) {
-            return card.isPlanesWalker();
+            return card.isPlaneswalker();
+        }
+    };
+    private final CardTypeCounter battleCounter = new CardTypeCounter() {
+        @Override
+        protected boolean is(CardView card) {
+            return card.isBattle();
         }
     };
     private final CardTypeCounter tribalCounter = new CardTypeCounter() {
@@ -542,6 +548,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
             instantCounter,
             planeswalkerCounter,
             sorceryCounter,
+            battleCounter,
             tribalCounter
     };
 
@@ -673,7 +680,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
                     s.separateCreatures = Boolean.valueOf(m.group(2));
                 }
                 if (m.groupCount() > 2) {
-                    s.cardSize = Integer.valueOf(m.group(3));
+                    s.cardSize = Integer.parseInt(m.group(3));
                 } else {
                     s.cardSize = 50;
                 }
@@ -782,11 +789,12 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
 
             @Override
             public void mousePressed(MouseEvent e) {
-                if (SwingUtilities.isLeftMouseButton(e)) {
-                    isDragging = true;
-                    beginSelectionDrag(e.getX(), e.getY(), e.isShiftDown());
-                    updateSelectionDrag(e.getX(), e.getY());
+                if (!SwingUtilities.isLeftMouseButton(e)) {
+                    return;
                 }
+                isDragging = true;
+                beginSelectionDrag(e.getX(), e.getY(), e.isShiftDown());
+                updateSelectionDrag(e.getX(), e.getY());
             }
 
             @Override
@@ -966,6 +974,9 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
             visibilityButton.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
+                    if (!SwingUtilities.isLeftMouseButton(e)) {
+                        return;
+                    }
                     visPopup.show(e.getComponent(), 0, e.getComponent().getHeight());
                 }
             });
@@ -1913,7 +1924,15 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
     }
 
     private void updateCounts() {
-        deckNameAndCountLabel.setText(role.getName() + " - " + allCards.size());
+        int extraDeckCount = allCards.stream()
+                        .filter(c -> c.isExtraDeckCard())
+                        .collect(Collectors.toSet())
+                        .size();
+        int maindeckCount = allCards.size() - extraDeckCount;
+        deckNameAndCountLabel.setText(role.getName() + " - " + maindeckCount + (
+                extraDeckCount > 0 ? " (" + extraDeckCount + ")"
+                : ""
+        ));
         creatureCountLabel.setText(String.valueOf(creatureCounter.get()));
         landCountLabel.setText(String.valueOf(landCounter.get()));
         for (CardType cardType : selectByTypeButtons.keySet()) {
@@ -2282,6 +2301,9 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
                         this.countLabelListener = new MouseAdapter() {
                             @Override
                             public void mouseClicked(MouseEvent e) {
+                                if (!SwingUtilities.isLeftMouseButton(e)) {
+                                    return;
+                                }
                                 JLabel countLabel = (JLabel) e.getComponent();
                                 List<CardView> cards = findCardStackByCountLabel(countLabel);
                                 boolean selected = !cards.isEmpty() && cards.get(0).isSelected();

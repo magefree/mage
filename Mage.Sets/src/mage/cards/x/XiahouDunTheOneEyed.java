@@ -26,7 +26,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public final class XiahouDunTheOneEyed extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("a black card");
+    private static final FilterCard filter = new FilterCard("black card");
 
     static {
         filter.add(new ColorPredicate(ObjectColor.BLACK));
@@ -34,7 +34,7 @@ public final class XiahouDunTheOneEyed extends CardImpl {
 
     public XiahouDunTheOneEyed(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SOLDIER);
         this.power = new MageInt(3);

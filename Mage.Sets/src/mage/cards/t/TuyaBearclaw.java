@@ -27,7 +27,7 @@ public final class TuyaBearclaw extends CardImpl {
     public TuyaBearclaw(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(2);
@@ -37,7 +37,7 @@ public final class TuyaBearclaw extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(
                 TuyaBearclawValue.instance,
                 TuyaBearclawValue.instance,
-                Duration.EndOfTurn, true
+                Duration.EndOfTurn
         ), false));
     }
 
@@ -59,7 +59,7 @@ enum TuyaBearclawValue implements DynamicValue {
         return game.getBattlefield()
                 .getActivePermanents(
                         StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE,
-                        sourceAbility.getControllerId(), sourceAbility.getSourceId(), game
+                        sourceAbility.getControllerId(), sourceAbility, game
                 ).stream()
                 .filter(Objects::nonNull)
                 .map(MageObject::getPower)

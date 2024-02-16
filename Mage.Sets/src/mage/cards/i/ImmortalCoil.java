@@ -79,7 +79,7 @@ class ImmortalCoilAbility extends StateTriggeredAbility {
 
     @Override
     public String getRule() {
-        return "When there are no cards in your graveyard, you lose the game";
+        return "When there are no cards in your graveyard, you lose the game.";
     }
 }
 
@@ -101,11 +101,6 @@ class ImmortalCoilPreventionEffect extends PreventionEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         if (game.replaceEvent(new PreventDamageEvent(
                 event.getTargetId(), source.getSourceId(), source, source.getControllerId(),
@@ -117,8 +112,8 @@ class ImmortalCoilPreventionEffect extends PreventionEffectImpl {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(Math.min(damage, player.getGraveyard().size()), StaticFilters.FILTER_CARD);
-            target.setNotTarget(true);
-            player.choose(outcome, target, source.getSourceId(), game);
+            target.withNotTarget(true);
+            player.choose(outcome, target, source, game);
             player.moveCards(new CardsImpl(target.getTargets()), Zone.EXILED, source, game);
         }
         event.setAmount(0);

@@ -3,9 +3,7 @@ package mage.cards.h;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.ReachAbility;
 import mage.abilities.keyword.TrampleAbility;
@@ -20,7 +18,10 @@ import mage.filter.predicate.permanent.CounterAnyPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.util.CardUtil;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -85,15 +86,11 @@ class HydradoodleEffect extends OneShotEffect {
         Permanent permanent = game.getPermanentEntering(source.getSourceId());
         Player controller = game.getPlayer(source.getControllerId());
         if (permanent != null && controller != null) {
-            SpellAbility spellAbility = (SpellAbility) getValue(EntersBattlefieldEffect.SOURCE_CAST_SPELL_ABILITY);
-            if (spellAbility != null
-                    && spellAbility.getSourceId().equals(source.getSourceId())
-                    && permanent.getZoneChangeCounter(game) == spellAbility.getSourceObjectZoneChangeCounter()) {
-                int amount = spellAbility.getManaCostsToPay().getX();
-                if (amount > 0) {
-                    int total = controller.rollDice(outcome, source, game, 6, amount, 0).stream().mapToInt(x -> x).sum();
-                    permanent.addCounters(CounterType.P1P1.createInstance(total), source.getControllerId(), source, game);
-                }
+            int amount = CardUtil.getSourceCostsTag(game, source, "X", 0);
+            if (amount > 0) {
+                int total = controller.rollDice(outcome, source, game, 6, amount, 0).stream().mapToInt(x -> x).sum();
+                List<UUID> appliedEffects = (ArrayList<UUID>) this.getValue("appliedEffects");
+                permanent.addCounters(CounterType.P1P1.createInstance(total), source.getControllerId(), source, game, appliedEffects);
             }
             return true;
         }

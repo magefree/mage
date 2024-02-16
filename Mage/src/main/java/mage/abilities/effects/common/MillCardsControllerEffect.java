@@ -1,6 +1,8 @@
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.game.Game;
@@ -13,15 +15,19 @@ import mage.util.CardUtil;
 
 public class MillCardsControllerEffect extends OneShotEffect {
 
-    private final int numberCards;
+    private final DynamicValue numberCards;
 
     public MillCardsControllerEffect(int numberCards) {
-        super(Outcome.Discard);
-        this.numberCards = numberCards;
-        this.staticText = setText();
+        this(StaticValue.get(numberCards));
     }
 
-    public MillCardsControllerEffect(final MillCardsControllerEffect effect) {
+    public MillCardsControllerEffect(DynamicValue numberCards) {
+        super(Outcome.Discard);
+        this.numberCards = numberCards;
+        setText();
+    }
+
+    private MillCardsControllerEffect(final MillCardsControllerEffect effect) {
         super(effect);
         this.numberCards = effect.numberCards;
     }
@@ -34,13 +40,21 @@ public class MillCardsControllerEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            return !controller.millCards(numberCards, source, game).isEmpty();
-        }
-        return false;
+        return controller != null && !controller.millCards(
+                numberCards.calculate(game, source, this), source, game
+        ).isEmpty();
     }
 
-    private String setText() {
-        return "mill " + (numberCards == 1 ? "a card" : CardUtil.numberToText(numberCards) + " cards");
+    private void setText() {
+        StringBuilder sb = new StringBuilder("mill ");
+        String value = numberCards.toString();
+        sb.append(CardUtil.numberToText(value, "a"));
+        sb.append(value.equals("1") ? " card" : " cards");
+        String message = numberCards.getMessage();
+        if (!message.isEmpty()) {
+            sb.append(value.equals("X") ? ", where X is " : " for each ");
+            sb.append(message);
+        }
+        staticText = sb.toString();
     }
 }

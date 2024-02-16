@@ -25,7 +25,7 @@ public final class UginsNexus extends CardImpl {
 
     public UginsNexus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // If a player would begin an extra turn, that player skips that turn instead.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new UginsNexusSkipExtraTurnsEffect()));
@@ -46,12 +46,12 @@ public final class UginsNexus extends CardImpl {
 
 class UginsNexusSkipExtraTurnsEffect extends ReplacementEffectImpl {
 
-    public UginsNexusSkipExtraTurnsEffect() {
+    UginsNexusSkipExtraTurnsEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "If a player would begin an extra turn, that player skips that turn instead";
     }
 
-    public UginsNexusSkipExtraTurnsEffect(final UginsNexusSkipExtraTurnsEffect effect) {
+    private UginsNexusSkipExtraTurnsEffect(final UginsNexusSkipExtraTurnsEffect effect) {
         super(effect);
     }
 
@@ -63,7 +63,7 @@ class UginsNexusSkipExtraTurnsEffect extends ReplacementEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player player = game.getPlayer(event.getPlayerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (player != null && sourceObject != null) {
             game.informPlayers(sourceObject.getLogName() + ": Extra turn of " + player.getLogName() + " skipped");
         }
@@ -84,23 +84,18 @@ class UginsNexusSkipExtraTurnsEffect extends ReplacementEffectImpl {
 
 class UginsNexusExileEffect extends ReplacementEffectImpl {
 
-    public UginsNexusExileEffect() {
+    UginsNexusExileEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Exile);
         staticText = "If {this} would be put into a graveyard from the battlefield, instead exile it and take an extra turn after this one";
     }
 
-    public UginsNexusExileEffect(final UginsNexusExileEffect effect) {
+    private UginsNexusExileEffect(final UginsNexusExileEffect effect) {
         super(effect);
     }
 
     @Override
     public UginsNexusExileEffect copy() {
         return new UginsNexusExileEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

@@ -10,6 +10,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SpellAbilityType;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
@@ -18,6 +19,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetSacrifice;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
@@ -53,12 +55,12 @@ public final class HitRun extends SplitCard {
 
 class HitEffect extends OneShotEffect {
 
-    public HitEffect() {
+    HitEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "Target player sacrifices an artifact or creature. Hit deals damage to that player equal to that permanent's mana value";
     }
 
-    public HitEffect(final HitEffect effect) {
+    private HitEffect(final HitEffect effect) {
         super(effect);
     }
 
@@ -71,14 +73,10 @@ class HitEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player targetPlayer = game.getPlayer(source.getTargets().getFirstTarget());
         if (targetPlayer != null) {
-            FilterControlledPermanent filter = new FilterControlledPermanent("artifact or creature");
-            filter.add(Predicates.or(
-                    CardType.ARTIFACT.getPredicate(),
-                    CardType.CREATURE.getPredicate()));
-            TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, true);
+            TargetSacrifice target = new TargetSacrifice(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_CREATURE);
 
-            if (target.canChoose(source.getSourceId(), targetPlayer.getId(), game)) {
-                targetPlayer.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
+            if (target.canChoose(targetPlayer.getId(), source, game)) {
+                targetPlayer.choose(Outcome.Sacrifice, target, source, game);
                 Permanent permanent = game.getPermanent(target.getFirstTarget());
                 if (permanent != null) {
                     permanent.sacrifice(source, game);
@@ -95,12 +93,12 @@ class HitEffect extends OneShotEffect {
 
 class RunEffect extends OneShotEffect {
 
-    public RunEffect() {
+    RunEffect() {
         super(Outcome.BoostCreature);
         this.staticText = "Attacking creatures you control get +1/+0 until end of turn for each other attacking creature";
     }
 
-    public RunEffect(final RunEffect effect) {
+    private RunEffect(final RunEffect effect) {
         super(effect);
     }
 
@@ -113,7 +111,7 @@ class RunEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            int attackingCreatures = game.getBattlefield().count(new FilterAttackingCreature(), controller.getId(), controller.getId(), game);
+            int attackingCreatures = game.getBattlefield().count(new FilterAttackingCreature(), controller.getId(), source, game);
             if (attackingCreatures > 1) {
                 for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterAttackingCreature(), controller.getId(), game)) {
                     ContinuousEffect effect = new BoostTargetEffect(attackingCreatures - 1, 0, Duration.EndOfTurn);

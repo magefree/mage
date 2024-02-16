@@ -46,7 +46,7 @@ public final class CaptainOfTheMists extends CardImpl {
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new UntapSourceEffect(), filter));
 
         // {1}{U}, {tap}: You may tap or untap target permanent.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MayTapOrUntapTargetEffect(), new ManaCostsImpl("{1}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MayTapOrUntapTargetEffect(), new ManaCostsImpl<>("{1}{U}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPermanent());
         this.addAbility(ability);

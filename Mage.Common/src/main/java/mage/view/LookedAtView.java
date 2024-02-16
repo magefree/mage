@@ -20,7 +20,7 @@ public class LookedAtView implements Serializable {
     public LookedAtView(String name, Cards cards, Game game) {
         this.name = name;
         for (Card card: cards.getCards(game)) {
-            this.cards.put(card.getId(), new SimpleCardView(card.getId(), card.getExpansionSetCode(), card.getCardNumber(), card.getUsesVariousArt(), card.getTokenSetCode(), card.getTokenDescriptor()));
+            this.cards.put(card.getId(), new SimpleCardView(card.getId(), card.getExpansionSetCode(), card.getCardNumber(), card.getUsesVariousArt()));
         }
     }
 

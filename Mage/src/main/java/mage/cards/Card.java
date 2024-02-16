@@ -25,8 +25,6 @@ public interface Card extends MageObject {
 
     UUID getOwnerId();
 
-    String getCardNumber();
-
     Rarity getRarity(); // null for tokens
 
     void setOwnerId(UUID ownerId);
@@ -48,12 +46,6 @@ public interface Card extends MageObject {
 
     List<String> getRules(Game game);  // gets card rules + in game modifications
 
-    String getExpansionSetCode();
-
-    String getTokenSetCode();
-
-    String getTokenDescriptor();
-
     void checkForCountersToAdd(Permanent permanent, Ability source, Game game);
 
     void setFaceDown(boolean value, Game game);
@@ -72,8 +64,29 @@ public interface Card extends MageObject {
 
     Card getSecondCardFace();
 
+    SpellAbility getSecondFaceSpellAbility();
+
     boolean isNightCard();
 
+    default boolean meldsWith(Card card) {
+        return false;
+    }
+
+    default Class<? extends Card> getMeldsToClazz() {
+        return null;
+    }
+
+    default Card getMeldsToCard() {
+        return null;
+    }
+
+    /**
+     * Is this an extra deck card? (such as contraptions and attractions)
+     * @return true if this is an extra deck card, false otherwise
+     */
+    default boolean isExtraDeckCard() {
+        return false;
+    }
     void assignNewId();
 
     void addInfo(String key, String value, Game game);
@@ -197,7 +210,7 @@ public interface Card extends MageObject {
         CommanderPlaysCountWatcher watcher = game.getState().getWatcher(CommanderPlaysCountWatcher.class);
         int castCount = watcher.getPlaysCount(getMainCard().getId());
         if (castCount > 0) {
-            abilityToModify.getManaCostsToPay().add(ManaUtil.createManaCost(2 * castCount, false));
+            abilityToModify.addManaCostsToPay(ManaUtil.createManaCost(2 * castCount, false));
         }
         return true;
     }

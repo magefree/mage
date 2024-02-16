@@ -40,7 +40,7 @@ public final class JerrenCorruptedBishop extends CardImpl {
     public JerrenCorruptedBishop(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.CLERIC);
         this.power = new MageInt(2);
@@ -115,7 +115,7 @@ class JerrenCorruptedBishopTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         switch (event.getType()) {
             case ENTERS_THE_BATTLEFIELD:
-                return event.getSourceId().equals(getSourceId());
+                return event.getTargetId().equals(getSourceId());
             case ZONE_CHANGE:
                 ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
                 return zEvent.isDiesEvent()

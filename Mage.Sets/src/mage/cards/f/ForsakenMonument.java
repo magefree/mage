@@ -39,7 +39,7 @@ public final class ForsakenMonument extends CardImpl {
     public ForsakenMonument(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // Colorless creatures you control get +2/+2.
         this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(

@@ -18,7 +18,7 @@ import java.util.UUID;
 public final class BrokersAscendancy extends CardImpl {
 
     public BrokersAscendancy(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{G}{U}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{G}{W}{U}");
 
         // At the beginning of your end step, put a +1/+1 counter on each creature you control and a loyalty counter on each planeswalker you control.
         Ability ability = new BeginningOfEndStepTriggeredAbility(new AddCountersAllEffect(

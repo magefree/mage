@@ -27,7 +27,7 @@ public final class ScionOfGlaciers extends CardImpl {
         this.toughness = new MageInt(5);
 
         // {U}: Scion of Glaciers gets +1/-1 until end of turn
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, -1, Duration.EndOfTurn), new ManaCostsImpl("{U}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, -1, Duration.EndOfTurn), new ManaCostsImpl<>("{U}")));
     }
 
     private ScionOfGlaciers(final ScionOfGlaciers card) {

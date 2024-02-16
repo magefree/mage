@@ -35,7 +35,7 @@ public final class KarnTheGreatCreator extends CardImpl {
     public KarnTheGreatCreator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.KARN);
         this.setStartingLoyalty(5);
 
@@ -125,8 +125,8 @@ class KarnTheGreatCreatorAnimateEffect extends ContinuousEffectImpl {
             case PTChangingEffects_7:
                 if (sublayer == SubLayer.SetPT_7b) {
                     int cmc = artifact.getManaValue();
-                    artifact.getPower().setValue(cmc);
-                    artifact.getToughness().setValue(cmc);
+                    artifact.getPower().setModifiedBaseValue(cmc);
+                    artifact.getToughness().setModifiedBaseValue(cmc);
                 }
         }
         return true;

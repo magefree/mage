@@ -35,15 +35,15 @@ public final class SyrFarenTheHengehammer extends CardImpl {
     public SyrFarenTheHengehammer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.KNIGHT);
+        this.supertype.add(SuperType.LEGENDARY);
+        this.subtype.add(SubType.HUMAN, SubType.KNIGHT);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
         // Whenever Syr Faren, the Hengehammer attacks, another target attacking creature gets +X/+X until end of turn, where X is Syr Faren's power.
         Ability ability = new AttacksTriggeredAbility(
-                new BoostTargetEffect(xValue, xValue, Duration.EndOfTurn, true), false
+                new BoostTargetEffect(xValue, xValue, Duration.EndOfTurn), false
         );
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);

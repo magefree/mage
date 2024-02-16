@@ -45,7 +45,7 @@ public final class SapseepForest extends CardImpl {
         // {G}, {tap}: You gain 1 life. Activate this ability only if you control two or more green permanents.
         Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD,
                 new GainLifeEffect(1),
-                new ManaCostsImpl("{G}"),
+                new ManaCostsImpl<>("{G}"),
                 new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 1));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

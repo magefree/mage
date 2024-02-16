@@ -31,12 +31,12 @@ public class AtTheBeginOfNextEndStepDelayedTriggeredAbility extends DelayedTrigg
 
     public AtTheBeginOfNextEndStepDelayedTriggeredAbility(Effect effect, TargetController targetController, Condition condition, boolean optional) {
         super(effect, Duration.Custom, true, optional);
-        this.zone = zone;
         this.targetController = targetController;
         this.condition = condition;
+        setTriggerPhrase(generateTriggerPhrase());
     }
 
-    public AtTheBeginOfNextEndStepDelayedTriggeredAbility(final AtTheBeginOfNextEndStepDelayedTriggeredAbility ability) {
+    protected AtTheBeginOfNextEndStepDelayedTriggeredAbility(final AtTheBeginOfNextEndStepDelayedTriggeredAbility ability) {
         super(ability);
         this.targetController = ability.targetController;
         this.condition = ability.condition;
@@ -83,8 +83,7 @@ public class AtTheBeginOfNextEndStepDelayedTriggeredAbility extends DelayedTrigg
         return new AtTheBeginOfNextEndStepDelayedTriggeredAbility(this);
     }
 
-    @Override
-    public String getTriggerPhrase() {
+    private String generateTriggerPhrase() {
         switch (targetController) {
             case YOU:
                 return "At the beginning of your next end step, ";

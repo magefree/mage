@@ -38,12 +38,12 @@ public final class MuseVessel extends CardImpl {
 
         // {3}, {tap}: Target player exiles a card from their hand. Activate this ability only any time you could cast a sorcery.
         ActivateAsSorceryActivatedAbility tapAbility = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new MuseVesselExileEffect(), new TapSourceCost());
-        tapAbility.addCost(new ManaCostsImpl("{3}"));
+        tapAbility.addCost(new ManaCostsImpl<>("{3}"));
         tapAbility.addTarget(new TargetPlayer());
         this.addAbility(tapAbility);
 
         // {1}: Choose a card exiled with Muse Vessel. You may play that card this turn.
-        SimpleActivatedAbility playAbility = new SimpleActivatedAbility(new MuseVesselMayPlayExiledEffect(), new ManaCostsImpl("{1}"));
+        SimpleActivatedAbility playAbility = new SimpleActivatedAbility(new MuseVesselMayPlayExiledEffect(), new ManaCostsImpl<>("{1}"));
         playAbility.addTarget(new TargetCardInMuseVesselExile());
         this.addAbility(playAbility);
     }
@@ -60,12 +60,12 @@ public final class MuseVessel extends CardImpl {
 
 class MuseVesselExileEffect extends OneShotEffect {
 
-    public MuseVesselExileEffect() {
+    MuseVesselExileEffect() {
         super(Outcome.Exile);
         staticText = "target player exiles a card from their hand";
     }
 
-    public MuseVesselExileEffect(final MuseVesselExileEffect effect) {
+    private MuseVesselExileEffect(final MuseVesselExileEffect effect) {
         super(effect);
     }
 
@@ -80,7 +80,7 @@ class MuseVesselExileEffect extends OneShotEffect {
             return false;
         }
         TargetCardInHand target = new TargetCardInHand();
-        if (target.canChoose(source.getSourceId(), player.getId(), game)
+        if (target.canChoose(player.getId(), source, game)
                 && target.chooseTarget(Outcome.Exile, player.getId(), source, game)) {
             UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
             return player.moveCardsToExile(new CardsImpl(target.getTargets()).getCards(game), source, game, true, exileId, sourceObject.getIdName());
@@ -97,12 +97,12 @@ class MuseVesselExileEffect extends OneShotEffect {
 
 class MuseVesselMayPlayExiledEffect extends AsThoughEffectImpl {
 
-    public MuseVesselMayPlayExiledEffect() {
+    MuseVesselMayPlayExiledEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
         this.staticText = "Choose a card exiled with {this}. You may play that card this turn";
     }
 
-    public MuseVesselMayPlayExiledEffect(final MuseVesselMayPlayExiledEffect effect) {
+    private MuseVesselMayPlayExiledEffect(final MuseVesselMayPlayExiledEffect effect) {
         super(effect);
     }
 
@@ -130,16 +130,16 @@ class TargetCardInMuseVesselExile extends TargetCardInExile {
         super(1, 1, new FilterCard("card exiled with Muse Vessel"), null);
     }
 
-    public TargetCardInMuseVesselExile(final TargetCardInMuseVesselExile target) {
+    private TargetCardInMuseVesselExile(final TargetCardInMuseVesselExile target) {
         super(target);
     }
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
         Set<UUID> possibleTargets = new HashSet<>();
-        Card sourceCard = game.getCard(sourceId);
+        Card sourceCard = game.getCard(source.getSourceId());
         if (sourceCard != null) {
-            UUID exileId = CardUtil.getCardExileZoneId(game, sourceId);
+            UUID exileId = CardUtil.getCardExileZoneId(game, source.getSourceId());
             ExileZone exile = game.getExile().getExileZone(exileId);
             if (exile != null && !exile.isEmpty()) {
                 possibleTargets.addAll(exile);
@@ -149,10 +149,10 @@ class TargetCardInMuseVesselExile extends TargetCardInExile {
     }
 
     @Override
-    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
-        Card sourceCard = game.getCard(sourceId);
+    public boolean canChoose(UUID sourceControllerId, Ability source, Game game) {
+        Card sourceCard = game.getCard(source.getSourceId());
         if (sourceCard != null) {
-            UUID exileId = CardUtil.getCardExileZoneId(game, sourceId);
+            UUID exileId = CardUtil.getCardExileZoneId(game, source.getSourceId());
             ExileZone exile = game.getExile().getExileZone(exileId);
             if (exile != null && !exile.isEmpty()) {
                 return true;

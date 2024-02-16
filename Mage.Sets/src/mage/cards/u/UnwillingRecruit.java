@@ -49,7 +49,7 @@ class UnwillingRecruitEffect extends OneShotEffect {
         staticText = "Gain control of target creature until end of turn. Untap that creature. It gets +X/+0 and gains haste until end of turn";
     }
 
-    UnwillingRecruitEffect(UnwillingRecruitEffect effect) {
+    private UnwillingRecruitEffect(final UnwillingRecruitEffect effect) {
         super(effect);
     }
 

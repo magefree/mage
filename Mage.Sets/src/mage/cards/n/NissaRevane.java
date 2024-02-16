@@ -34,7 +34,7 @@ public final class NissaRevane extends CardImpl {
 
     public NissaRevane(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{G}{G}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.NISSA);
         this.setStartingLoyalty(2);
 
@@ -67,7 +67,7 @@ class NissaRevaneGainLifeEffect extends OneShotEffect {
         staticText = "You gain 2 life for each Elf you control";
     }
 
-    public NissaRevaneGainLifeEffect(final NissaRevaneGainLifeEffect effect) {
+    private NissaRevaneGainLifeEffect(final NissaRevaneGainLifeEffect effect) {
         super(effect);
     }
 
@@ -79,7 +79,7 @@ class NissaRevaneGainLifeEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        int life = 2 * game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game);
+        int life = 2 * game.getBattlefield().count(filter, source.getControllerId(), source, game);
         if (player != null) {
             player.gainLife(life, game, source);
         }

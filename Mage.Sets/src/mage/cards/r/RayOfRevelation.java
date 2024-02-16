@@ -25,7 +25,7 @@ public final class RayOfRevelation extends CardImpl {
         this.getSpellAbility().addTarget(new TargetEnchantmentPermanent());
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         // Flashback {G}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{G}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{G}")));
     }
 
     private RayOfRevelation(final RayOfRevelation card) {

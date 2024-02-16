@@ -43,12 +43,12 @@ public final class AliFromCairo extends CardImpl {
 
 class AliFromCairoReplacementEffect extends ReplacementEffectImpl {
 
-    public AliFromCairoReplacementEffect() {
+    AliFromCairoReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Damage that would reduce your life total to less than 1 reduces it to 1 instead";
     }
 
-    public AliFromCairoReplacementEffect(final AliFromCairoReplacementEffect effect) {
+    private AliFromCairoReplacementEffect(final AliFromCairoReplacementEffect effect) {
         super(effect);
     }
 
@@ -65,27 +65,32 @@ class AliFromCairoReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
-            Player controller = game.getPlayer(source.getControllerId());
-            if (controller != null
-                    && (controller.getLife() > 0) &&(controller.getLife() - event.getAmount()) < 1
-                    && event.getPlayerId().equals(controller.getId())
-                    ) {
-                return true;
-            }
+        if (permanent == null) {
+            return false;
         }
-        return false;
+
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
+            return false;
+        }
+
+        return (controller.getLife() > 0) && (controller.getLife() - event.getAmount()) < 1
+                && event.getPlayerId().equals(controller.getId());
     }
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            // 10/1/2008: The ability doesn't change how much damage is dealt;
-            // it just changes how much life that damage makes you lose.
-            // An effect such as Spirit Link will see the full amount of damage being dealt.
-            event.setAmount(controller.getLife() - 1);
+        if (controller == null) {
+            return false;
         }
+
+        // 10/1/2008: The ability doesn't change how much damage is dealt;
+        //            it just changes how much life that damage makes you lose.
+        //            An effect such as Spirit Link will see the full amount of damage being dealt.
+        event.setAmount(controller.getLife() - 1);
+
+        // TODO: Is this supposed to be false? Seem suspicious
         return false;
     }
 }

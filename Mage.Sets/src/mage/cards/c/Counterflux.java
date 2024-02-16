@@ -53,7 +53,7 @@ public final class Counterflux extends CardImpl {
         this.getSpellAbility().addEffect(new CounterTargetEffect());
 
         // Overload {1}{U}{U}{R} (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")
-        this.addAbility(new OverloadAbility(this, new CounterfluxEffect(), new ManaCostsImpl("{1}{U}{U}{R}")));
+        this.addAbility(new OverloadAbility(this, new CounterfluxEffect(), new ManaCostsImpl<>("{1}{U}{U}{R}")));
     }
 
     private Counterflux(final Counterflux card) {
@@ -68,13 +68,13 @@ public final class Counterflux extends CardImpl {
 
 class CounterfluxEffect extends OneShotEffect {
 
-    public CounterfluxEffect() {
+    CounterfluxEffect() {
         super(Outcome.Detriment);
         staticText = "Counter each spell you don't control.";
 
     }
 
-    public CounterfluxEffect(final CounterfluxEffect effect) {
+    private CounterfluxEffect(final CounterfluxEffect effect) {
         super(effect);
     }
 

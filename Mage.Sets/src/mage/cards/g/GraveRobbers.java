@@ -1,7 +1,5 @@
-
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -17,11 +15,14 @@ import mage.constants.Zone;
 import mage.filter.common.FilterArtifactCard;
 import mage.target.common.TargetCardInGraveyard;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class GraveRobbers extends CardImpl {
+
+    private static final FilterArtifactCard filter = new FilterArtifactCard("artifact card from a graveyard");
 
     public GraveRobbers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
@@ -31,9 +32,9 @@ public final class GraveRobbers extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {B}, {tap}: Exile target artifact card from a graveyard. You gain 2 life.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new ManaCostsImpl("{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new ManaCostsImpl<>("{B}"));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCardInGraveyard(new FilterArtifactCard("artifact card from your graveyard")));
+        ability.addTarget(new TargetCardInGraveyard(filter));
         ability.addEffect(new GainLifeEffect(2));
         this.addAbility(ability);
     }

@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.target.common.TargetAnyTarget;
-import mage.watchers.common.CardsDrawnThisTurnWatcher;
 
 import java.util.UUID;
 
@@ -31,11 +30,13 @@ public final class ThunderingDjinn extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever Thundering Djinn attacks, it deals damage to any target equal to the number of cards you've drawn this turn.
-        Ability ability = new AttacksTriggeredAbility(new DamageTargetEffect(
-                CardsDrawnThisTurnDynamicValue.instance
-        ).setText("it deals damage to any target equal to the number of cards you've drawn this turn."), false);
+        Ability ability = new AttacksTriggeredAbility(
+                new DamageTargetEffect(CardsDrawnThisTurnDynamicValue.instance)
+                        .setText("it deals damage to any target equal to the number of cards you've drawn this turn."),
+                false
+        );
         ability.addTarget(new TargetAnyTarget());
-        this.addAbility(ability);
+        this.addAbility(ability.addHint(CardsDrawnThisTurnDynamicValue.getHint()));
     }
 
     private ThunderingDjinn(final ThunderingDjinn card) {

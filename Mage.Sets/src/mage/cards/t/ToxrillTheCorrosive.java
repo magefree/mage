@@ -45,7 +45,7 @@ public final class ToxrillTheCorrosive extends CardImpl {
     public ToxrillTheCorrosive(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{B}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SLUG);
         this.subtype.add(SubType.HORROR);
         this.power = new MageInt(7);
@@ -68,7 +68,7 @@ public final class ToxrillTheCorrosive extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{U}{B}")
         );
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter2)));
+        ability.addCost(new SacrificeTargetCost(filter2));
         this.addAbility(ability);
     }
 
@@ -102,11 +102,11 @@ class ToxrillTheCorrosiveEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         for (Permanent permanent : game.getBattlefield().getActivePermanents(
                 StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL,
-                source.getControllerId(), source.getSourceId(), game
+                source.getControllerId(), source, game
         )) {
             int counter = permanent.getCounters(game).getCount(CounterType.SLIME);
-            permanent.getPower().boostValue(-counter);
-            permanent.getToughness().boostValue(-counter);
+            permanent.getPower().increaseBoostedValue(-counter);
+            permanent.getToughness().increaseBoostedValue(-counter);
         }
         return true;
     }

@@ -40,14 +40,14 @@ public final class Camaraderie extends CardImpl {
 
 class CamaraderieEffect extends OneShotEffect {
 
-    public CamaraderieEffect() {
+    CamaraderieEffect() {
         super(Outcome.Benefit);
         this.staticText = "You gain X life and draw X cards, "
                 + "where X is the number of creatures you control. "
                 + "Creatures you control get +1/+1 until end of turn.";
     }
 
-    public CamaraderieEffect(final CamaraderieEffect effect) {
+    private CamaraderieEffect(final CamaraderieEffect effect) {
         super(effect);
     }
 
@@ -64,7 +64,7 @@ class CamaraderieEffect extends OneShotEffect {
         }
         int xValue = game.getBattlefield().count(
                 StaticFilters.FILTER_CONTROLLED_CREATURE,
-                source.getSourceId(), source.getControllerId(), game
+                source.getControllerId(), source, game
         );
         player.gainLife(xValue, game, source);
         player.drawCards(xValue, source, game);

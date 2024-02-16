@@ -45,7 +45,7 @@ public final class HavengulRunebinder extends CardImpl {
         // then put a +1/+1 counter on each Zombie creature you control.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new CreateTokenEffect(new ZombieToken()),
-                new ManaCostsImpl("{2}{U}"));
+                new ManaCostsImpl<>("{2}{U}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(filter)));
         ability.addEffect(new AddCountersAllEffect(CounterType.P1P1.createInstance(), filterPermanent).concatBy(", then"));

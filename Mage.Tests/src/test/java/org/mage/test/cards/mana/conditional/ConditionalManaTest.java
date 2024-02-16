@@ -1,5 +1,8 @@
 package org.mage.test.cards.mana.conditional;
 
+import mage.ConditionalMana;
+import mage.Mana;
+import mage.abilities.condition.common.AdamantCondition;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.mana.ManaOptions;
 import mage.constants.PhaseStep;
@@ -8,8 +11,6 @@ import mage.counters.CounterType;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
-
-import static org.mage.test.utils.ManaOptionsTestUtils.assertDuplicatedManaOptions;
 import static org.mage.test.utils.ManaOptionsTestUtils.assertManaOptions;
 
 /**
@@ -20,10 +21,10 @@ public class ConditionalManaTest extends CardTestPlayerBase {
     @Test
     public void testNormalUse() {
         setStrictChooseMode(true);
-        
+
         // {T}: Add one mana of any color. Spend this mana only to cast a multicolored spell.
         addCard(Zone.BATTLEFIELD, playerA, "Pillar of the Paruns", 2);
-        
+
         // Target player gains 7 life.
         addCard(Zone.HAND, playerA, "Heroes' Reunion", 1); // Instant {G}{W}
 
@@ -45,9 +46,7 @@ public class ConditionalManaTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Pillar of the Paruns", 2);
         addCard(Zone.HAND, playerA, "Silvercoat Lion", 1);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion");
-        playerA.addChoice("White");
-        playerA.addChoice("White");
+        checkPlayableAbility("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Silvercoat", false);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -93,7 +92,7 @@ public class ConditionalManaTest extends CardTestPlayerBase {
     }
 
     /**
-     * I wasunable to use "Rosheen Meanderer" ability to pay for "Candelabra of
+     * I was unable to use "Rosheen Meanderer" ability to pay for "Candelabra of
      * Tawnos" ability even thought it has "X" on its cost
      */
     @Test
@@ -107,8 +106,9 @@ public class ConditionalManaTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerB, "Island", 4);
 
-        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Snapping Drake");
+        setStrictChooseMode(true);
 
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Snapping Drake", true);
         activateManaAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "{T}: Add {C}{C}{C}{C}");
 
         activateAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "{X}, {T}: Untap");
@@ -117,6 +117,7 @@ public class ConditionalManaTest extends CardTestPlayerBase {
         addTarget(playerB, "Island");
         addTarget(playerB, "Island");
         addTarget(playerB, "Island");
+        waitStackResolved(2, PhaseStep.POSTCOMBAT_MAIN);
 
         castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Snapping Drake");
 
@@ -234,7 +235,6 @@ public class ConditionalManaTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertCounterCount(playerA, "Empowered Autogenerator", CounterType.CHARGE, 1);
         assertLife(playerB, 20 - 3);
@@ -261,7 +261,6 @@ public class ConditionalManaTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertCounterCount(playerA, "Empowered Autogenerator", CounterType.CHARGE, 2);
         assertLife(playerB, 20 - 3);
@@ -288,7 +287,6 @@ public class ConditionalManaTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertCounterCount(playerA, "Empowered Autogenerator", CounterType.CHARGE, 2);
         assertLife(playerB, 20 - 3);
@@ -311,7 +309,6 @@ public class ConditionalManaTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerB, 20 - 3);
     }
@@ -332,10 +329,8 @@ public class ConditionalManaTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
-        assertDuplicatedManaOptions(manaOptions);
         Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
         assertManaOptions("{R}{R}", manaOptions);
     }
@@ -357,15 +352,14 @@ public class ConditionalManaTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerB, 20 - 3);
     }
-    
+
     @Test
-    public void testTwoConditionalMana(){
+    public void testTwoConditionalMana() {
         setStrictChooseMode(true);
-        
+
         // At the beginning of your upkeep, look at the top card of your library. You may put that card into your graveyard.
         // Exile a card from your graveyard: Add {C}. Spend this mana only to cast a colored spell without {X} in its mana cost.
         addCard(Zone.BATTLEFIELD, playerA, "Titans' Nest"); // Enchantment {1}{B}{G}{U}
@@ -373,25 +367,95 @@ public class ConditionalManaTest extends CardTestPlayerBase {
         // {T}: Add {C}{C}{C}{C}. Spend this mana only on costs that contain {X}.
         addCard(Zone.BATTLEFIELD, playerA, "Rosheen Meanderer", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
-        
+
         addCard(Zone.GRAVEYARD, playerA, "Grizzly Bears", 2);
-       
-        
-        setChoice(playerA, false); // Put [Top Card of Library] into your graveyard?
-        
+
+        // Init library to mill a third bear
+        skipInitShuffling();
+        addCard(Zone.LIBRARY, playerA, "Grizzly Bears");
+
+        addTarget(playerA, "Grizzly Bears"); // upkeep surveil: put the Bears in the graveyard.
+
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Titans' Nest", 1);
-        
+
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
         Assert.assertEquals("mana variations don't fit", 4, manaOptions.size());
-        assertManaOptions("{R}", manaOptions);        
-        assertManaOptions("{C}{C}{R}[{TitansNestManaCondition}]", manaOptions);        
-        assertManaOptions("{C}{C}{C}{C}{R}[{RosheenMeandererManaCondition}]", manaOptions);        
-        assertManaOptions("{C}{C}{C}{C}{C}{C}{R}[{RosheenMeandererManaCondition}{TitansNestManaCondition}]", manaOptions);        
+        assertManaOptions("{R}", manaOptions);
+        assertManaOptions("{C}{C}{C}{R}[{TitansNestManaCondition}]", manaOptions);
+        assertManaOptions("{C}{C}{C}{C}{R}[{XCostManaCondition}]", manaOptions);
+        assertManaOptions("{C}{C}{C}{C}{C}{C}{C}{R}[{XCostManaCondition}{TitansNestManaCondition}]", manaOptions);
+    }
+
+    @Test
+    public void testConditionalManaSoftCounter() {
+        addCard(Zone.HAND, playerA, "Fallaji Excavation", 1);
+        addCard(Zone.HAND, playerA, "Gigantosaurus", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 5);
+        addCard(Zone.HAND, playerB, "Mana Leak");
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Fallaji Excavation");
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Gigantosaurus");
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerB, "Mana Leak", "Gigantosaurus");
+        setChoice(playerA, true);
+
+        setStrictChooseMode(true);
+        setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+        assertPermanentCount(playerA, "Gigantosaurus", 1);
+        assertTappedCount("Powerstone Token", true, 3);
+    }
+    @Test
+    public void testConditionalManaCantSoftCounter() {
+        addCard(Zone.BATTLEFIELD, playerA, "Jaya Ballard");
+        addCard(Zone.HAND, playerA, "Gigantosaurus", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 5);
+        addCard(Zone.HAND, playerB, "Mana Leak");
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+1: Add");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Gigantosaurus");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Mana Leak", "Gigantosaurus");
+        setChoice(playerA, true);
+
+        setStrictChooseMode(true);
+        setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+        assertPermanentCount(playerA, "Gigantosaurus", 0);
+    }
+
+    @Test
+    public void testConditionalManaDeduplication() {
+        ManaOptions manaOptions = new ManaOptions();
+
+        ConditionalMana originalMana = new ConditionalMana(Mana.GreenMana(1));
+
+        ConditionalMana mana2 = originalMana.copy();
+        mana2.addCondition(AdamantCondition.WHITE);
+
+        ConditionalMana mana3 = originalMana.copy();
+        mana3.addCondition(AdamantCondition.BLUE);
+        ConditionalMana mana3Copy = originalMana.copy();
+        mana3Copy.addCondition(AdamantCondition.BLUE);
+        mana3Copy.add(Mana.GreenMana(1));
+
+        ConditionalMana mana4 = originalMana.copy();
+        mana4.addCondition(AdamantCondition.BLACK);
+        ConditionalMana mana4Copy = originalMana.copy();
+        mana4Copy.addCondition(AdamantCondition.BLACK);
+
+        manaOptions.add(originalMana);
+        manaOptions.add(mana2);
+        manaOptions.add(mana3);
+        manaOptions.add(mana3Copy); // Added, and should remain since different amount of Green mana
+        manaOptions.add(mana4);
+        manaOptions.add(mana4Copy); // Adding it to make sure it gets removed
+
+        Assert.assertEquals("Incorrect number of mana", 5, manaOptions.size());
     }
 
 }

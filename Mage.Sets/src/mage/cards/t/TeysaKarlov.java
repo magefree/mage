@@ -26,7 +26,7 @@ public final class TeysaKarlov extends CardImpl {
     public TeysaKarlov(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ADVISOR);
         this.power = new MageInt(2);
@@ -92,7 +92,8 @@ class TeysaKarlovEffect extends ReplacementEffectImpl {
                     && game.getPermanentOrLKIBattlefield(numberOfTriggersEvent.getSourceId()) != null
                     && numberOfTriggersEvent.getSourceEvent() instanceof ZoneChangeEvent) {
                 ZoneChangeEvent zEvent = (ZoneChangeEvent) numberOfTriggersEvent.getSourceEvent();
-                return zEvent.isDiesEvent()
+                return zEvent != null
+                        && zEvent.isDiesEvent()
                         && zEvent.getTarget() != null
                         && zEvent.getTarget().isCreature(game);
             }

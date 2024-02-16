@@ -34,7 +34,7 @@ public final class AspectOfWolf extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // Enchanted creature gets +X/+Y, where X is half the number of Forests you control, rounded down, and Y is half the number of Forests you control, rounded up.
         this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(
@@ -66,7 +66,7 @@ enum AspectOfWolfValue implements DynamicValue {
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         int forestCount = game.getBattlefield().count(
-                filter, sourceAbility.getSourceId(), sourceAbility.getControllerId(), game
+                filter, sourceAbility.getControllerId(), sourceAbility, game
         );
         return forestCount / 2 + (up ? forestCount % 2 : 0);
     }

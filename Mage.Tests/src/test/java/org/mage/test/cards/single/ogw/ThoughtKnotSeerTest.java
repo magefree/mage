@@ -28,7 +28,7 @@ public class ThoughtKnotSeerTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Wastes", 4);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Reflector Mage");
-        addTarget(playerA, "Thought-Knot Seer");
+        // Thought-Knot Seer is auto-chosen since only target
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -56,7 +56,7 @@ public class ThoughtKnotSeerTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Wastes", 4);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Unsummon");
-        addTarget(playerA, "Thought-Knot Seer");
+        // Thought-Knot Seer is auto-chosen since only target
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -83,7 +83,7 @@ public class ThoughtKnotSeerTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Wastes", 4);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Doom Blade");
-        addTarget(playerA, "Thought-Knot Seer");
+        // Thought-Knot Seer is auto-chosen since only target
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();

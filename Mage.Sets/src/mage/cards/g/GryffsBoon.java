@@ -36,7 +36,7 @@ public final class GryffsBoon extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Enchanted creature gets +1/+0 and has flying.
@@ -47,7 +47,7 @@ public final class GryffsBoon extends CardImpl {
         this.addAbility(ability);
 
         // {3}{W}: Return Gryff's Boon from your graveyard to the battlefield attached to target creature. Activate this ability only any time you could cast a sorcery.
-        ability = new ActivateAsSorceryActivatedAbility(Zone.GRAVEYARD, new GryffsBoonEffect(), new ManaCostsImpl("{3}{W}"));
+        ability = new ActivateAsSorceryActivatedAbility(Zone.GRAVEYARD, new GryffsBoonEffect(), new ManaCostsImpl<>("{3}{W}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
@@ -64,12 +64,12 @@ public final class GryffsBoon extends CardImpl {
 
 class GryffsBoonEffect extends OneShotEffect {
 
-    public GryffsBoonEffect() {
+    GryffsBoonEffect() {
         super(Outcome.PutCardInPlay);
         staticText = "Return {this} from your graveyard to the battlefield attached to target creature";
     }
 
-    public GryffsBoonEffect(final GryffsBoonEffect effect) {
+    private GryffsBoonEffect(final GryffsBoonEffect effect) {
         super(effect);
     }
 

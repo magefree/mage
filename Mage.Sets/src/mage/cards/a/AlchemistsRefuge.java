@@ -39,7 +39,7 @@ public final class AlchemistsRefuge extends CardImpl {
         // {G}{U}, {tap}: You may cast spells this turn as though they had flash.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new AddContinuousEffectToGame(new CastAsThoughItHadFlashAllEffect(Duration.EndOfTurn, filter)),
-                new CompositeCost(new ManaCostsImpl("{G}{U}"), new TapSourceCost(), "{G}{U}, {T}")));
+                new CompositeCost(new ManaCostsImpl<>("{G}{U}"), new TapSourceCost(), "{G}{U}, {T}")));
     }
 
     private AlchemistsRefuge(final AlchemistsRefuge card) {

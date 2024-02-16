@@ -24,7 +24,7 @@ public final class RustedRelic extends CardImpl {
         // Metalcraft — Rusted Relic is a 5/5 Golem artifact creature as long as you control three or more artifacts.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(
-                        new BecomesCreatureSourceEffect(new RustedRelicToken(), "artifact", Duration.WhileOnBattlefield),
+                        new BecomesCreatureSourceEffect(new RustedRelicToken(), CardType.ARTIFACT, Duration.WhileOnBattlefield),
                         MetalcraftCondition.instance,
                         "{this} is a 5/5 Golem artifact creature as long as you control three or more artifacts"))
                 .setAbilityWord(AbilityWord.METALCRAFT)
@@ -52,7 +52,7 @@ class RustedRelicToken extends TokenImpl {
         toughness = new MageInt(5);
     }
 
-    public RustedRelicToken(final RustedRelicToken token) {
+    private RustedRelicToken(final RustedRelicToken token) {
         super(token);
     }
 

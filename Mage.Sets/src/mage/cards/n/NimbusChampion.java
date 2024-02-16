@@ -63,7 +63,7 @@ class NimbusChampionEffect extends OneShotEffect {
                 + "the number of Warriors your team controls";
     }
 
-    NimbusChampionEffect(final NimbusChampionEffect effect) {
+    private NimbusChampionEffect(final NimbusChampionEffect effect) {
         super(effect);
     }
 

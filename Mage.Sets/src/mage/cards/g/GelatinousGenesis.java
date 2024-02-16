@@ -37,12 +37,12 @@ public final class GelatinousGenesis extends CardImpl {
 
 class GelatinousGenesisEffect extends OneShotEffect {
 
-    public GelatinousGenesisEffect() {
+    GelatinousGenesisEffect() {
         super(Outcome.PutCreatureInPlay);
         staticText = "create X X/X green Ooze creature tokens";
     }
 
-    public GelatinousGenesisEffect(GelatinousGenesisEffect ability) {
+    private GelatinousGenesisEffect(final GelatinousGenesisEffect ability) {
         super(ability);
     }
 
@@ -51,8 +51,8 @@ class GelatinousGenesisEffect extends OneShotEffect {
         int count = source.getManaCostsToPay().getX();
 
         OozeToken oozeToken = new OozeToken();
-        oozeToken.getPower().modifyBaseValue(count);
-        oozeToken.getToughness().modifyBaseValue(count);
+        oozeToken.setPower(count);
+        oozeToken.setToughness(count);
         oozeToken.putOntoBattlefield(count, game, source, source.getControllerId());
         return true;
     }
@@ -62,4 +62,3 @@ class GelatinousGenesisEffect extends OneShotEffect {
         return new GelatinousGenesisEffect(this);
     }
 }
-

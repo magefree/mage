@@ -43,9 +43,10 @@ class GravityWellTriggeredAbility extends TriggeredAbilityImpl {
 
     public GravityWellTriggeredAbility() {
         super(Zone.BATTLEFIELD, new GravityWellEffect());
+        setTriggerPhrase("Whenever a creature with flying attacks, ");
     }
 
-    public GravityWellTriggeredAbility(final GravityWellTriggeredAbility ability) {
+    private GravityWellTriggeredAbility(final GravityWellTriggeredAbility ability) {
         super(ability);
     }
 
@@ -67,11 +68,6 @@ class GravityWellTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever a creature with flying attacks, " ;
-    }
-
-    @Override
     public GravityWellTriggeredAbility copy() {
         return new GravityWellTriggeredAbility(this);
     }
@@ -79,12 +75,12 @@ class GravityWellTriggeredAbility extends TriggeredAbilityImpl {
 
 class GravityWellEffect extends ContinuousEffectImpl {
 
-    public GravityWellEffect() {
+    GravityWellEffect() {
         super(Duration.EndOfTurn, Outcome.LoseAbility);
         staticText = "it loses flying until end of turn";
     }
 
-    public GravityWellEffect(final GravityWellEffect effect) {
+    private GravityWellEffect(final GravityWellEffect effect) {
         super(effect);
     }
 

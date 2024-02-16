@@ -29,7 +29,6 @@ public class JeweledLotusTest extends CardTestCommanderDuelBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -54,7 +53,6 @@ public class JeweledLotusTest extends CardTestCommanderDuelBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Balduvian Bears", 1);
     }

@@ -12,6 +12,7 @@ import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.constants.AttachmentType;
 import mage.constants.Duration;
+import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -37,7 +38,7 @@ public final class SpikedRipsaw extends CardImpl {
         // Whenever equipped creature attacks, you may sacrifice a Forest. If you do, that creature gains trample until end of turn.
         this.addAbility(new AttacksAttachedTriggeredAbility(
                 new DoIfCostPaid(new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, "that creature gains trample until end of turn"), new SacrificeTargetCost(filter)),
-                AttachmentType.EQUIPMENT, false, true
+                AttachmentType.EQUIPMENT, false, SetTargetPointer.PERMANENT
         ));
 
         // Equip {3}

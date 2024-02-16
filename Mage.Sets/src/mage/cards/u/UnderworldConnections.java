@@ -40,7 +40,7 @@ public final class UnderworldConnections extends CardImpl {
         TargetPermanent auraTarget = new TargetLandPermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.DrawCard));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Enchanted land has "{T}, Pay 1 life: Draw a card."
@@ -49,7 +49,7 @@ public final class UnderworldConnections extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA, Duration.WhileOnBattlefield, rule)));
     }
 
-    public UnderworldConnections (final UnderworldConnections card) {
+    private UnderworldConnections(final UnderworldConnections card) {
         super(card);
     }
 

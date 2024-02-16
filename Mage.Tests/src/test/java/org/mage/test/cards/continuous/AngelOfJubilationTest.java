@@ -6,8 +6,13 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- * Angel of Jubilation Other nonblack creatures you control get +1/+1. Players
- * can't pay life or sacrifice creatures to cast spells or activate abilities
+ * {@link mage.cards.a.AngelOfJubilation Angel of Jubilation}
+ * {1}{W}{W}{W}
+ * Creature — Angel
+ * Flying
+ *
+ * Other nonblack creatures you control get +1/+1.
+ * Players can't pay life or sacrifice creatures to cast spells or activate abilities
  *
  * @author noxx
  */
@@ -64,8 +69,9 @@ public class AngelOfJubilationTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Nantuko Husk");
         addCard(Zone.BATTLEFIELD, playerB, "Corpse Traders");
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Sacrifice a creature: {this} gets +2/+2 until end of turn.");
-        playerB.addChoice("Corpse Traders");
+        checkPlayableAbility("Can't sac", 1, PhaseStep.PRECOMBAT_MAIN, playerB, "Sacrifice", false);
+//        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Sacrifice a creature: {this} gets +2/+2 until end of turn.");
+//        playerB.addChoice("Corpse Traders");
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
@@ -82,14 +88,13 @@ public class AngelOfJubilationTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Island", 4);
         addCard(Zone.BATTLEFIELD, playerB, "Food Chain");
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerB, "{2}, Sacrifice a permanent you control: Return target creature to its owner's hand.");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerB, "{2}, Sacrifice a permanent: Return target creature to its owner's hand.");
         addTarget(playerB, "Angel of Jubilation"); // return to hand
         setChoice(playerB, "Food Chain"); // sacrifice cost
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Angel of Jubilation", 0);
         assertPermanentCount(playerB, "Food Chain", 0);
@@ -102,9 +107,10 @@ public class AngelOfJubilationTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Nantuko Husk");
         addCard(Zone.BATTLEFIELD, playerB, "Llanowar Elves", 2);
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerB, "{2}, Sacrifice a permanent you control: Return target creature to its owner's hand.");
-        playerB.addChoice("Nantuko Husk");
-        playerA.addTarget("Angel of Jubilation");
+        checkPlayableAbility("Can't sac", 1, PhaseStep.PRECOMBAT_MAIN, playerB, "{2}, Sacrifice", false);
+//        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerB, "{2}, Sacrifice a permanent you control: Return target creature to its owner's hand.");
+//        playerB.addChoice("Nantuko Husk");
+//        playerA.addTarget("Angel of Jubilation");
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
@@ -121,7 +127,8 @@ public class AngelOfJubilationTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Soulblast");
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 6);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Soulblast", playerA);
+        checkPlayableAbility("Can't sac all", 1, PhaseStep.PRECOMBAT_MAIN, playerB, "Soulblast", false);
+//        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Soulblast", playerA);
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
@@ -138,8 +145,7 @@ public class AngelOfJubilationTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Angel of Jubilation");
         addCard(Zone.BATTLEFIELD, playerB, "Children of Korlis");
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Sacrifice {this}: You gain life equal to the life you've lost this turn.");
-        playerB.addChoice("Skirk Prospector");
+        checkPlayableAbility("Can't sac", 1, PhaseStep.PRECOMBAT_MAIN, playerB, "Sacrifice", false);
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
@@ -208,8 +214,6 @@ public class AngelOfJubilationTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertAllCommandsUsed();
-
         assertGraveyardCount(playerB, "Lightning Bolt", 1);
         assertGraveyardCount(playerA, "Silvercoat Lion", 1);
         
@@ -225,7 +229,6 @@ public class AngelOfJubilationTest extends CardTestPlayerBase {
      * life (as Griselbrand’s activated ability does) or sacrifice a creature
      * (as Fling does), that spell or ability can’t be cast or activated.
      */
-    
     @Test
     public void testGriselbrandCantPay() {
         setStrictChooseMode(true);
@@ -240,8 +243,5 @@ public class AngelOfJubilationTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-
-        assertAllCommandsUsed();
-
-    }    
+    }
 }

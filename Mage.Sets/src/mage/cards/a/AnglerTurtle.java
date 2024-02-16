@@ -6,9 +6,9 @@ import mage.abilities.effects.common.combat.AttacksIfAbleAllEffect;
 import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.watchers.common.AttackedThisTurnWatcher;
+import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -16,12 +16,6 @@ import java.util.UUID;
  * @author JayDi85
  */
 public final class AnglerTurtle extends CardImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures your opponents control");
-
-    static {
-        filter.add(TargetController.OPPONENT.getControllerPredicate());
-    }
 
     public AnglerTurtle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{U}{U}");
@@ -33,8 +27,7 @@ public final class AnglerTurtle extends CardImpl {
         this.addAbility(HexproofAbility.getInstance());
 
         // Creatures your opponents control attack each combat if able
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AttacksIfAbleAllEffect(filter, Duration.WhileOnBattlefield)),
-                new AttackedThisTurnWatcher());
+        this.addAbility(new SimpleStaticAbility(new AttacksIfAbleAllEffect(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURES)));
     }
 
     private AnglerTurtle(final AnglerTurtle card) {

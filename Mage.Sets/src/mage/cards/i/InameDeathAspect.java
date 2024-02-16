@@ -23,7 +23,7 @@ public final class InameDeathAspect extends CardImpl {
 
     public InameDeathAspect(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPIRIT);
 
         this.power = new MageInt(4);
@@ -54,7 +54,7 @@ class InameDeathAspectEffect extends SearchEffect {
         staticText = "search your library for any number of Spirit cards, put them into your graveyard, then shuffle";
     }
 
-    public InameDeathAspectEffect(final InameDeathAspectEffect effect) {
+    private InameDeathAspectEffect(final InameDeathAspectEffect effect) {
         super(effect);
     }
 

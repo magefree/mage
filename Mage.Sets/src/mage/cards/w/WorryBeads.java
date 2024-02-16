@@ -1,7 +1,7 @@
 package mage.cards.w;
 
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -20,7 +20,7 @@ public final class WorryBeads extends CardImpl {
 
         // At the beginning of each player's upkeep, that player puts the top card of their library into their graveyard.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                Zone.BATTLEFIELD, new PutLibraryIntoGraveTargetEffect(1).setText("that player mills a card"),
+                Zone.BATTLEFIELD, new MillCardsTargetEffect(1).setText("that player mills a card"),
                 TargetController.ANY, false, true
         ));
     }

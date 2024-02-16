@@ -45,9 +45,10 @@ class TheRackTriggeredAbility extends TriggeredAbilityImpl {
 
     public TheRackTriggeredAbility() {
         super(Zone.BATTLEFIELD, new TheRackEffect(), false);
+        setTriggerPhrase("At the beginning of the chosen player's upkeep, ");
     }
 
-    public TheRackTriggeredAbility(final TheRackTriggeredAbility ability) {
+    private TheRackTriggeredAbility(final TheRackTriggeredAbility ability) {
         super(ability);
     }
 
@@ -65,22 +66,16 @@ class TheRackTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         return event.getPlayerId().equals(game.getState().getValue(this.getSourceId().toString() + ChooseOpponentEffect.VALUE_KEY));
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "At the beginning of the chosen player's upkeep, " ;
-    }
-
 }
 
 class TheRackEffect extends OneShotEffect {
 
-    public TheRackEffect() {
+    TheRackEffect() {
         super(Outcome.Benefit);
         this.staticText = "{this} deals X damage to that player, where X is 3 minus the number of cards in their hand";
     }
 
-    public TheRackEffect(final TheRackEffect effect) {
+    private TheRackEffect(final TheRackEffect effect) {
         super(effect);
     }
 

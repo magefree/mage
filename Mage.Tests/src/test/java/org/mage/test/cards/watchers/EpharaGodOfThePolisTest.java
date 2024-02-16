@@ -30,7 +30,7 @@ public class EpharaGodOfThePolisTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Ephara, God of the Polis");
         addCard(Zone.HAND, playerA, "Goblin Roughrider");
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Goblin Roughrider");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Goblin Roughrider", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ephara, God of the Polis");
 
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN);

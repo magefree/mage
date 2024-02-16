@@ -31,7 +31,7 @@ public final class GeneralHux extends CardImpl {
     public GeneralHux(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
         
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ADVISOR);
         this.power = new MageInt(3);
@@ -41,7 +41,7 @@ public final class GeneralHux extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new BoostSourceEffect(1, 1, Duration.EndOfTurn)
                         .setText("This creature gets +1/+1 until end of turn"),
-                new ManaCostsImpl("{B}"));
+                new ManaCostsImpl<>("{B}"));
         Effect effect = new GainAbilitySourceEffect(ability, Duration.EndOfTurn);
         effect.setText("until end of turn, target creature gains");
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, effect, filter, false));

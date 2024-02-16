@@ -25,12 +25,12 @@ public final class Compulsion extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}");
 
         // {1}{U}, Discard a card: Draw a card.
-        Ability ability1 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{1}{U}"));
+        Ability ability1 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{1}{U}"));
         ability1.addCost(new DiscardTargetCost(new TargetCardInHand(1, new FilterCard("a card"))));
         this.addAbility(ability1);
         
         // {1}{U}, Sacrifice Compulsion: Draw a card.
-        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{1}{U}"));
+        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{1}{U}"));
         ability2.addCost(new SacrificeSourceCost());
         this.addAbility(ability2);
     }

@@ -25,7 +25,7 @@ import java.util.UUID;
 public final class CullingScales extends CardImpl {
 
     private static final FilterPermanent filterNonlandPermanentWithLowestCmc = new FilterNonlandPermanent(
-            "nonland permanent with the lowest mana value (<i>If two or more permanents are tied for lowest cost, target any one of them.</i>)"
+            "target nonland permanent with the lowest mana value (<i>If two or more permanents are tied for lowest cost, target any one of them.</i>)"
     );
 
     static {
@@ -58,7 +58,7 @@ class HasLowestCMCAmongstNonlandPermanentsPredicate implements ObjectSourcePlaye
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
         FilterPermanent filter = new FilterNonlandPermanent();
         filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, input.getObject().getManaValue()));
-        return !game.getBattlefield().contains(filter, input.getSourceId(), input.getPlayerId(), game, 1);
+        return !game.getBattlefield().contains(filter, input.getPlayerId(), input.getSource(), game, 1);
     }
 
 }

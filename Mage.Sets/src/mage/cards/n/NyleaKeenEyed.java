@@ -32,7 +32,7 @@ public final class NyleaKeenEyed extends CardImpl {
     public NyleaKeenEyed(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{3}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GOD);
         this.power = new MageInt(5);
         this.toughness = new MageInt(6);
@@ -48,7 +48,7 @@ public final class NyleaKeenEyed extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, 1)));
 
         // {2}{G}: Reveal the top card of your library. If it's a creature card, put it into your hand. Otherwise, you may put it into your graveyard.
-        this.addAbility(new SimpleActivatedAbility(new NyleaKeenEyedEffect(), new ManaCostsImpl("{2}{G}")));
+        this.addAbility(new SimpleActivatedAbility(new NyleaKeenEyedEffect(), new ManaCostsImpl<>("{2}{G}")));
     }
 
     private NyleaKeenEyed(final NyleaKeenEyed card) {

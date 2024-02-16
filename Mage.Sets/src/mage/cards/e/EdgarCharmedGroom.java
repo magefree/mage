@@ -28,7 +28,7 @@ public final class EdgarCharmedGroom extends CardImpl {
     public EdgarCharmedGroom(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.VAMPIRE);
         this.subtype.add(SubType.NOBLE);
         this.power = new MageInt(4);

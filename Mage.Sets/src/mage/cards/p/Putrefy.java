@@ -32,7 +32,7 @@ public final class Putrefy extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
     }
 
-    public Putrefy (final Putrefy card) {
+    private Putrefy(final Putrefy card) {
         super(card);
     }
 

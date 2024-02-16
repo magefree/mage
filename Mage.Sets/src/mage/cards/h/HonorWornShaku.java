@@ -1,8 +1,5 @@
-
-
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapTargetCost;
@@ -17,12 +14,15 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.common.TargetControlledPermanent;
 
+import java.util.UUID;
+
 /**
  * @author Loki
  */
 public final class HonorWornShaku extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("untapped legendary permanent");
+    private static final FilterControlledPermanent filter
+            = new FilterControlledPermanent("untapped legendary permanent you control");
 
     static {
         filter.add(TappedPredicate.UNTAPPED);
@@ -47,5 +47,4 @@ public final class HonorWornShaku extends CardImpl {
     public HonorWornShaku copy() {
         return new HonorWornShaku(this);
     }
-
 }

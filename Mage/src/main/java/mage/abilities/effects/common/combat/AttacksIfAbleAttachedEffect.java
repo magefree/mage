@@ -1,5 +1,3 @@
-
-
 package mage.abilities.effects.common.combat;
 
 import mage.abilities.Ability;
@@ -10,7 +8,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author LevelX2
  */
 
@@ -21,7 +18,7 @@ public class AttacksIfAbleAttachedEffect extends RequirementEffect {
         this.staticText = attachmentType.verb() + " creature attacks each combat if able";
     }
 
-    public AttacksIfAbleAttachedEffect(final AttacksIfAbleAttachedEffect effect) {
+    protected AttacksIfAbleAttachedEffect(final AttacksIfAbleAttachedEffect effect) {
         super(effect);
     }
 
@@ -32,9 +29,7 @@ public class AttacksIfAbleAttachedEffect extends RequirementEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        Permanent attachment = game.getPermanent(source.getSourceId());
-        return attachment != null && attachment.getAttachedTo() != null
-                && permanent.getId().equals(attachment.getAttachedTo());
+        return permanent.getAttachments().contains(source.getSourceId());
     }
 
     @Override

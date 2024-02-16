@@ -24,6 +24,7 @@ import mage.target.targetpointer.FixedTarget;
 
 import java.util.Set;
 import java.util.UUID;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  * @author TheElk801
@@ -48,11 +49,11 @@ public final class CommandersPlate extends CardImpl {
 
         // Equip commander {3}
         this.addAbility(new EquipAbility(
-                Outcome.AddAbility, new GenericManaCost(3), new TargetPermanent(filter)
+                Outcome.AddAbility, new GenericManaCost(3), new TargetPermanent(filter), false
         ));
 
         // Equip {5}
-        this.addAbility(new EquipAbility(5));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(5), new TargetControlledCreaturePermanent(), false));
     }
 
     private CommandersPlate(final CommandersPlate card) {

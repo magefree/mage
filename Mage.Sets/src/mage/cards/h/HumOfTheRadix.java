@@ -46,7 +46,7 @@ class HumOfTheRadixCostIncreaseEffect extends CostModificationEffectImpl {
         staticText = "each artifact spell costs {1} more to cast for each artifact its controller controls";
     }
 
-    HumOfTheRadixCostIncreaseEffect(final HumOfTheRadixCostIncreaseEffect effect) {
+    private HumOfTheRadixCostIncreaseEffect(final HumOfTheRadixCostIncreaseEffect effect) {
         super(effect);
     }
 
@@ -54,7 +54,7 @@ class HumOfTheRadixCostIncreaseEffect extends CostModificationEffectImpl {
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
         CardUtil.increaseCost(abilityToModify, game.getBattlefield().getActivePermanents(
                 StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT,
-                abilityToModify.getControllerId(), source.getSourceId(), game
+                abilityToModify.getControllerId(), source, game
         ).size());
         return true;
     }

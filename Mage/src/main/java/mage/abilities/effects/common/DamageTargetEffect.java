@@ -86,7 +86,7 @@ public class DamageTargetEffect extends OneShotEffect {
         this.amount = amount;
     }
 
-    public DamageTargetEffect(final DamageTargetEffect effect) {
+    protected DamageTargetEffect(final DamageTargetEffect effect) {
         super(effect);
         this.amount = effect.amount.copy();
         this.preventable = effect.preventable;
@@ -153,7 +153,10 @@ public class DamageTargetEffect extends OneShotEffect {
         String message = amount.getMessage();
         sb.append(this.sourceName).append(" deals ");
         if (message.isEmpty() || !message.equals("1")) {
-            sb.append(amount).append(' ');
+            sb.append(amount);
+        }
+        if (!sb.toString().endsWith(" ")) {
+            sb.append(' ');
         }
         sb.append("damage to ");
         if (!targetDescription.isEmpty()) {
@@ -175,7 +178,10 @@ public class DamageTargetEffect extends OneShotEffect {
                             sb.append(' ');
                         }
                     }
-                    sb.append("target ").append(targetName);
+                    if (!targetName.contains("target ")) {
+                        sb.append("target ");
+                    }
+                    sb.append(targetName);
                 }
             } else {
                 sb.append("that target");
@@ -185,7 +191,7 @@ public class DamageTargetEffect extends OneShotEffect {
             if (message.equals("1")) {
                 sb.append(" equal to the number of ");
             } else {
-                if (message.startsWith("the") || message.startsWith("twice")) {
+                if (message.startsWith("the") || message.startsWith("that") || message.startsWith("twice")) {
                     sb.append(" equal to ");
                 } else {
                     sb.append(" for each ");

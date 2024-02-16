@@ -35,7 +35,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-install-plugin</artifactId>
-                <version>2.5.2</version>
             </plugin>
             <plugin>
                 <artifactId>maven-resources-plugin</artifactId>
@@ -63,8 +62,16 @@
                     </descriptors>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>com.ruleoftech</groupId>
+                <artifactId>markdown-page-generator-plugin</artifactId>
+            </plugin>
         </plugins>
 
         <finalName>mage-serverconsole</finalName>
     </build>
+
+    <properties>
+        <root.dir>${project.basedir}/..</root.dir>
+    </properties>
 </project>

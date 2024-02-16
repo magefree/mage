@@ -34,7 +34,7 @@ public final class EverflameEidolon extends CardImpl {
         // Bestow {2}{R}
         this.addAbility(new BestowAbility(this, "{2}{R}"));
         // {R}: Everflame Eidolon gets +1/+0 until end of turn. If it's an Aura, enchanted creature gets +1/+0 until end of turn instead.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new EverflameEidolonEffect(), new ManaCostsImpl("{R}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new EverflameEidolonEffect(), new ManaCostsImpl<>("{R}")));
         // Enchanted creature gets +1/+1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 1, Duration.WhileOnBattlefield)));
     }
@@ -51,12 +51,12 @@ public final class EverflameEidolon extends CardImpl {
 
 class EverflameEidolonEffect extends OneShotEffect {
 
-    public EverflameEidolonEffect() {
+    EverflameEidolonEffect() {
         super(Outcome.BoostCreature);
         this.staticText = "{this} gets +1/+0 until end of turn. If it's an Aura, enchanted creature gets +1/+0 until end of turn instead";
     }
 
-    public EverflameEidolonEffect(final EverflameEidolonEffect effect) {
+    private EverflameEidolonEffect(final EverflameEidolonEffect effect) {
         super(effect);
     }
 

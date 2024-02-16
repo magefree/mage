@@ -47,7 +47,7 @@ public final class BuzzingWhackADoodle extends CardImpl {
         this.addAbility(ability2);
 
         // *Buzz - 2, T: Draw a card.
-        Ability ability3 = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{2}"), new BuzzCondition());
+        Ability ability3 = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{2}"), new BuzzCondition());
         ability3.addCost(new TapSourceCost());
         this.addAbility(ability3);
     }
@@ -69,7 +69,7 @@ class BuzzingWhackADoodleEffect extends OneShotEffect {
         this.staticText = "You and an opponent each secretly choose Whack or Doodle. Then those choices are revealed. If the choices match, {this} has that ability. Otherwise it has Buzz";
     }
 
-    BuzzingWhackADoodleEffect(final BuzzingWhackADoodleEffect effect) {
+    private BuzzingWhackADoodleEffect(final BuzzingWhackADoodleEffect effect) {
         super(effect);
     }
 

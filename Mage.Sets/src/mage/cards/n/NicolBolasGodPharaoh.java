@@ -13,13 +13,14 @@ import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePlayerOrPlaneswalker;
 import mage.filter.common.FilterNonlandPermanent;
+import mage.filter.common.FilterPermanentOrPlayer;
 import mage.game.Game;
 import mage.players.Library;
 import mage.players.Player;
 import mage.target.Target;
-import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetOpponent;
+import mage.target.common.TargetPermanentOrPlayer;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.HashMap;
@@ -31,7 +32,7 @@ import java.util.UUID;
  */
 public final class NicolBolasGodPharaoh extends CardImpl {
 
-    private static final FilterCreaturePlayerOrPlaneswalker damageFilter
+    private static final FilterPermanentOrPlayer damageFilter
             = new FilterCreaturePlayerOrPlaneswalker("opponent, creature an opponent controls, or planeswalker an opponent controls.");
     private static final FilterPermanent exileFilter = new FilterNonlandPermanent();
 
@@ -43,7 +44,7 @@ public final class NicolBolasGodPharaoh extends CardImpl {
 
     public NicolBolasGodPharaoh(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{U}{B}{R}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.BOLAS);
 
         this.setStartingLoyalty(7);
@@ -58,7 +59,7 @@ public final class NicolBolasGodPharaoh extends CardImpl {
 
         // -4: Nicol Bolas, God-Pharaoh deals 7 damage to target opponent, creature an opponent controls, or planeswalker an opponent controls.
         ability = new LoyaltyAbility(new DamageTargetEffect(7), -4);
-        ability.addTarget(new TargetAnyTarget(damageFilter));
+        ability.addTarget(new TargetPermanentOrPlayer(damageFilter));
         this.addAbility(ability);
 
         // -12: Exile each nonland permanent your opponents control.
@@ -122,6 +123,7 @@ class NicolBolasGodPharaohPlusOneEffect extends OneShotEffect {
         for (UUID opponentId : game.getOpponents(source.getControllerId())) {
             Player opponent = game.getPlayer(opponentId);
             if (opponent == null || !cardsToExile.containsKey(opponentId)) {
+                continue;
             }
             cardsOpponentsChoseToExile.addAll(cardsToExile.get(opponentId));
             opponent.moveCards(cardsOpponentsChoseToExile, Zone.EXILED, source, game);

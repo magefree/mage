@@ -1,18 +1,16 @@
-
-
 package mage.game.permanent.token;
+
+import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.MageInt;
 
 /**
- *
  * @author spjspj
  */
 public final class MerfolkToken extends TokenImpl {
 
     public MerfolkToken() {
-        super("Merfolk", "1/1 blue Merfolk creature token");
+        super("Merfolk Token", "1/1 blue Merfolk creature token");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
         subtype.add(SubType.MERFOLK);
@@ -20,7 +18,7 @@ public final class MerfolkToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    public MerfolkToken(final MerfolkToken token) {
+    private MerfolkToken(final MerfolkToken token) {
         super(token);
     }
 

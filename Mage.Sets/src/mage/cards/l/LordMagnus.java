@@ -20,7 +20,7 @@ public final class LordMagnus extends CardImpl {
 
     public LordMagnus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{W}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.DRUID);
         this.power = new MageInt(4);
@@ -48,12 +48,12 @@ public final class LordMagnus extends CardImpl {
 
 class LordMagnusFirstEffect extends AsThoughEffectImpl {
 
-    public LordMagnusFirstEffect() {
+    LordMagnusFirstEffect() {
         super(AsThoughEffectType.BLOCK_PLAINSWALK, Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Creatures with plainswalk can be blocked as though they didn't have plainswalk";
     }
 
-    public LordMagnusFirstEffect(final LordMagnusFirstEffect effect) {
+    private LordMagnusFirstEffect(final LordMagnusFirstEffect effect) {
         super(effect);
     }
 
@@ -75,12 +75,12 @@ class LordMagnusFirstEffect extends AsThoughEffectImpl {
 
 class LordMagnusSecondEffect extends AsThoughEffectImpl {
 
-    public LordMagnusSecondEffect() {
+    LordMagnusSecondEffect() {
         super(AsThoughEffectType.BLOCK_FORESTWALK, Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Creatures with forestwalk can be blocked as though they didn't have forestwalk";
     }
 
-    public LordMagnusSecondEffect(final LordMagnusSecondEffect effect) {
+    private LordMagnusSecondEffect(final LordMagnusSecondEffect effect) {
         super(effect);
     }
 

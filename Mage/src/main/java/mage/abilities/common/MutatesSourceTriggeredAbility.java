@@ -17,6 +17,7 @@ public class MutatesSourceTriggeredAbility extends TriggeredAbilityImpl {
 
     public MutatesSourceTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
+        setTriggerPhrase("Whenever this creature mutates, ");
     }
 
     private MutatesSourceTriggeredAbility(final MutatesSourceTriggeredAbility ability) {
@@ -38,10 +39,5 @@ public class MutatesSourceTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         // TODO: implement this
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever this creature mutates, " ;
     }
 }

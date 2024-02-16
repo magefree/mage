@@ -38,7 +38,7 @@ public final class SeraphOfTheScales extends CardImpl {
                 new GainAbilitySourceEffect(
                         VigilanceAbility.getInstance(),
                         Duration.EndOfTurn
-                ), new ManaCostsImpl("{W}")
+                ), new ManaCostsImpl<>("{W}")
         ));
 
         // {B}: Seraph of the Scales gains deathtouch until end of turn.
@@ -47,7 +47,7 @@ public final class SeraphOfTheScales extends CardImpl {
                 new GainAbilitySourceEffect(
                         DeathtouchAbility.getInstance(),
                         Duration.EndOfTurn
-                ), new ManaCostsImpl("{B}")
+                ), new ManaCostsImpl<>("{B}")
         ));
 
         // Afterlife 2

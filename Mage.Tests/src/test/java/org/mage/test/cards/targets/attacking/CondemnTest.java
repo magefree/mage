@@ -17,15 +17,10 @@ public class CondemnTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Condemn");
         addCard(Zone.BATTLEFIELD, playerB, "Sejiri Merfolk");
 
-        // check with illegal target
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Condemn", "Sejiri Merfolk");
+        checkPlayableAbility("No valid target", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Condemn", false);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        // spell shouldn't work
-        assertPermanentCount(playerB, "Sejiri Merfolk", 1);
-        assertLife(playerA, 20);
-        assertLife(playerB, 20);
     }
 
     @Test
@@ -46,5 +41,4 @@ public class CondemnTest extends CardTestPlayerBase {
         // check was put on top
         Assert.assertEquals(72, currentGame.getPlayer(playerA.getId()).getLibrary().size());
     }
-
 }

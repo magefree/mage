@@ -43,8 +43,7 @@ public final class ConfrontThePast extends CardImpl {
         this.getSpellAbility().setTargetAdjuster(ConfrontThePastAdjuster.instance);
 
         // • Remove twice X loyalty counters from target planeswalker an opponent controls.
-        Mode mode = new Mode();
-        mode.addEffect(new ConfrontThePastLoyaltyEffect());
+        Mode mode = new Mode(new ConfrontThePastLoyaltyEffect());
         mode.addTarget(new TargetPlaneswalkerPermanent(filter));
         this.getSpellAbility().addMode(mode);
     }
@@ -83,7 +82,7 @@ class ConfrontThePastLoyaltyEffect extends OneShotEffect {
         staticText = "remove twice X loyalty counters from target planeswalker an opponent controls";
     }
 
-    public ConfrontThePastLoyaltyEffect(ConfrontThePastLoyaltyEffect effect) {
+    private ConfrontThePastLoyaltyEffect(final ConfrontThePastLoyaltyEffect effect) {
         super(effect);
     }
 

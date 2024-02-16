@@ -67,6 +67,7 @@ public class LevelUpAbilityTest extends CardTestPlayerBase {
 
         for (int i = 0; i < 6; i++) {
             activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Level up {1}");
+            waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         }
 
         setStopAt(2, PhaseStep.END_TURN);
@@ -93,6 +94,7 @@ public class LevelUpAbilityTest extends CardTestPlayerBase {
 
         for (int i = 0; i < 12; i++) {
             activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Level up {1}");
+            waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         }
 
         setStopAt(2, PhaseStep.END_TURN);
@@ -117,6 +119,7 @@ public class LevelUpAbilityTest extends CardTestPlayerBase {
 
         for (int i = 0; i < 15; i++) {
             activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Level up {1}");
+            waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         }
 
         setStopAt(2, PhaseStep.END_TURN);

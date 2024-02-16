@@ -49,7 +49,7 @@ class CabalShrineTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new CabalShrineEffect(), false);
     }
 
-    public CabalShrineTriggeredAbility(final CabalShrineTriggeredAbility ability) {
+    private CabalShrineTriggeredAbility(final CabalShrineTriggeredAbility ability) {
         super(ability);
     }
 
@@ -78,19 +78,19 @@ class CabalShrineTriggeredAbility extends TriggeredAbilityImpl {
 
 class CabalShrineEffect extends OneShotEffect {
 
-    public CabalShrineEffect() {
+    CabalShrineEffect() {
         super(Outcome.Discard);
         staticText = "Whenever a player casts a spell, that player discards X cards, where X is the number of cards in all graveyards with the same name as that spell";
     }
 
-    public CabalShrineEffect(final CabalShrineEffect effect) {
+    private CabalShrineEffect(final CabalShrineEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         int count = 0;
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if(mageObject != null) {
             Spell spell = (Spell) game.getState().getValue("cabalShrine" + mageObject);
             if (spell != null) {

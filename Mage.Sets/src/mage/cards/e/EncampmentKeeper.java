@@ -34,7 +34,7 @@ public final class EncampmentKeeper extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
 
         // {7}{W}, Sacrifice Encampment Keeper: Creatures you control get +2/+2 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostControlledEffect(2, 2, Duration.EndOfTurn), new ManaCostsImpl("{7}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostControlledEffect(2, 2, Duration.EndOfTurn), new ManaCostsImpl<>("{7}{W}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

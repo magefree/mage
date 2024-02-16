@@ -23,9 +23,11 @@ public class AttacksAndIsNotBlockedTriggeredAbility extends TriggeredAbilityImpl
     public AttacksAndIsNotBlockedTriggeredAbility(Effect effect, boolean optional, boolean setTargetPointer) {
         super(Zone.BATTLEFIELD, effect, optional);
         this.setTargetPointer = setTargetPointer;
+        setTriggerPhrase("Whenever {this} attacks and isn't blocked, ");
+        this.replaceRuleText = true; // default true to replace "{this}" with "it"
     }
 
-    public AttacksAndIsNotBlockedTriggeredAbility(final AttacksAndIsNotBlockedTriggeredAbility ability) {
+    protected AttacksAndIsNotBlockedTriggeredAbility(final AttacksAndIsNotBlockedTriggeredAbility ability) {
         super(ability);
         this.setTargetPointer = ability.setTargetPointer;
     }
@@ -51,10 +53,5 @@ public class AttacksAndIsNotBlockedTriggeredAbility extends TriggeredAbilityImpl
             ));
         }
         return true;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} attacks and isn't blocked, " ;
     }
 }

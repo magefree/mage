@@ -166,8 +166,8 @@ class NikoDefiesDestinyManaCondition extends ManaCondition implements Condition 
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (source instanceof SpellAbility) {
-            MageObject object = game.getObject(source.getSourceId());
+        if (source instanceof SpellAbility && !source.isActivated()) {
+            MageObject object = game.getObject(source);
             return object != null && object.getAbilities().containsClass(ForetellAbility.class);
         }
         return source instanceof ForetellAbility;

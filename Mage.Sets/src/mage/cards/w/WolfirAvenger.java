@@ -29,7 +29,7 @@ public final class WolfirAvenger extends CardImpl {
 
         this.addAbility(FlashAbility.getInstance());
         // {1}{G}: Regenerate Wolfir Avenger.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{1}{G}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{1}{G}")));
     }
 
     private WolfirAvenger(final WolfirAvenger card) {

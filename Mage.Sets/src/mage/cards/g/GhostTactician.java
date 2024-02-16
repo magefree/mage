@@ -31,7 +31,7 @@ public final class GhostTactician extends CardImpl {
 
         // {W}, {T}, Discard a card: Creatures you control get +1/+0 until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-            new BoostControlledEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{W}"));
+            new BoostControlledEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{W}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardCardCost());
         this.addAbility(ability);

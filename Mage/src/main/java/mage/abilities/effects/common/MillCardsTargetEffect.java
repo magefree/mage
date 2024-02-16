@@ -15,7 +15,7 @@ import mage.util.CardUtil;
  */
 public class MillCardsTargetEffect extends OneShotEffect {
 
-    private DynamicValue numberCards;
+    private final DynamicValue numberCards;
 
     public MillCardsTargetEffect(int numberCards) {
         this(StaticValue.get(numberCards));
@@ -26,7 +26,7 @@ public class MillCardsTargetEffect extends OneShotEffect {
         this.numberCards = numberCards;
     }
 
-    public MillCardsTargetEffect(final MillCardsTargetEffect effect) {
+    protected MillCardsTargetEffect(final MillCardsTargetEffect effect) {
         super(effect);
         this.numberCards = effect.numberCards;
     }
@@ -51,18 +51,19 @@ public class MillCardsTargetEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        StringBuilder sb = new StringBuilder("target ");
-        if (!mode.getTargets().isEmpty()) {
-            sb.append(mode.getTargets().get(0).getTargetName());
-        } else {
-            sb.append("player");
-        }
+        StringBuilder sb = new StringBuilder(getTargetPointer().describeTargets(mode.getTargets(), "that player"));
         sb.append(" mills ");
-        if (numberCards.toString().equals("1")) {
-            sb.append("a card");
+        String message = numberCards.getMessage();
+        if (message.isEmpty()) {
+            if (numberCards.toString().equals("1")) {
+                sb.append("a card");
+            } else {
+                sb.append(CardUtil.numberToText(numberCards.toString()));
+                sb.append(" cards");
+            }
         } else {
-            sb.append(CardUtil.numberToText(numberCards.toString()));
-            sb.append(" cards");
+            sb.append("X cards, where X is the number of ");
+            sb.append(message);
         }
         return sb.toString();
     }

@@ -50,7 +50,7 @@ class PyromancerAscensionQuestTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.QUEST.createInstance(), true), true);
     }
 
-    PyromancerAscensionQuestTriggeredAbility(final PyromancerAscensionQuestTriggeredAbility ability) {
+    private PyromancerAscensionQuestTriggeredAbility(final PyromancerAscensionQuestTriggeredAbility ability) {
         super(ability);
     }
 
@@ -103,7 +103,7 @@ class PyromancerAscensionCopyTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new CopyTargetSpellEffect(true), true);
     }
 
-    PyromancerAscensionCopyTriggeredAbility(final PyromancerAscensionCopyTriggeredAbility ability) {
+    private PyromancerAscensionCopyTriggeredAbility(final PyromancerAscensionCopyTriggeredAbility ability) {
         super(ability);
     }
 

@@ -64,7 +64,7 @@ class KarplusanMinotaurFlipWinTriggeredAbility extends TriggeredAbilityImpl {
         this.addTarget(new TargetAnyTarget());
     }
 
-    public KarplusanMinotaurFlipWinTriggeredAbility(final KarplusanMinotaurFlipWinTriggeredAbility ability) {
+    private KarplusanMinotaurFlipWinTriggeredAbility(final KarplusanMinotaurFlipWinTriggeredAbility ability) {
         super(ability);
     }
 
@@ -88,7 +88,7 @@ class KarplusanMinotaurFlipWinTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever you win a coin flip, {this} deals 1 damage to any target";
+        return "Whenever you win a coin flip, {this} deals 1 damage to any target.";
     }
 }
 
@@ -100,7 +100,7 @@ class KarplusanMinotaurFlipLoseTriggeredAbility extends TriggeredAbilityImpl {
         targetAdjuster = KarplusanMinotaurAdjuster.instance;
     }
 
-    public KarplusanMinotaurFlipLoseTriggeredAbility(final KarplusanMinotaurFlipLoseTriggeredAbility ability) {
+    private KarplusanMinotaurFlipLoseTriggeredAbility(final KarplusanMinotaurFlipLoseTriggeredAbility ability) {
         super(ability);
     }
 
@@ -152,12 +152,7 @@ class KarplusanMinotaurCost extends CostImpl {
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
         Player controller = game.getPlayer(controllerId);
-        if (controller != null) {
-            if (!game.getOpponents(controllerId).isEmpty()) {
-                return true;
-            }
-        }
-        return false;
+        return controller != null && (!game.getOpponents(controllerId).isEmpty());
     }
 
     @Override

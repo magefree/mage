@@ -48,12 +48,12 @@ public final class MindGrind extends CardImpl {
 
 class MindGrindEffect extends OneShotEffect {
 
-    public MindGrindEffect() {
+    MindGrindEffect() {
         super(Outcome.Discard);
         this.staticText = "Each opponent reveals cards from the top of their library until they reveal X land cards, then puts all cards revealed this way into their graveyard. X can't be 0";
     }
 
-    public MindGrindEffect(final MindGrindEffect effect) {
+    private MindGrindEffect(final MindGrindEffect effect) {
         super(effect);
     }
 

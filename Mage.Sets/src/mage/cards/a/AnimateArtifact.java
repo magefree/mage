@@ -38,7 +38,7 @@ public final class AnimateArtifact extends CardImpl {
         TargetPermanent auraTarget = new TargetArtifactPermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Benefit));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // As long as enchanted artifact isn't a creature, it's an artifact creature with power and toughness each equal to its converted mana cost.
@@ -57,12 +57,12 @@ public final class AnimateArtifact extends CardImpl {
 
 class AnimateArtifactContinuousEffect extends ContinuousEffectImpl {
 
-    public AnimateArtifactContinuousEffect(Duration duration) {
+    AnimateArtifactContinuousEffect(Duration duration) {
         super(duration, Outcome.Benefit);
         staticText = "As long as enchanted artifact isn't a creature, it's an artifact creature with power and toughness each equal to its mana value";
     }
 
-    public AnimateArtifactContinuousEffect(final AnimateArtifactContinuousEffect effect) {
+    private AnimateArtifactContinuousEffect(final AnimateArtifactContinuousEffect effect) {
         super(effect);
     }
 
@@ -75,19 +75,21 @@ class AnimateArtifactContinuousEffect extends ContinuousEffectImpl {
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         // Not sure, if this is layerwise handled absolutely correctly
         Permanent enchantment = game.getPermanent(source.getSourceId());
-        if (enchantment != null) {
-            Permanent permanent = game.getPermanent(enchantment.getAttachedTo());
-            if (permanent != null && !permanent.isCreature(game)) {
-                if (sublayer == SubLayer.NA) {
-                    permanent.addCardType(game, CardType.CREATURE);
-                    permanent.getPower().setValue(permanent.getManaValue());
-                    permanent.getToughness().setValue(permanent.getManaValue());
-                }
-            }
-            return true;
+        if (enchantment == null) {
+            return false;
+        }
+        Permanent permanent = game.getPermanent(enchantment.getAttachedTo());
+        if (permanent == null || permanent.isCreature(game)) {
+            return false;
+        }
+        if (sublayer != SubLayer.NA) {
+            return false;
         }
 
-        return false;
+        permanent.addCardType(game, CardType.CREATURE);
+        permanent.getPower().setModifiedBaseValue(permanent.getManaValue());
+        permanent.getToughness().setModifiedBaseValue(permanent.getManaValue());
+        return true;
     }
 
     @Override

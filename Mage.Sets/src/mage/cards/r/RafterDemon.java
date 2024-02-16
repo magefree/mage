@@ -29,7 +29,7 @@ public final class RafterDemon extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Spectacle {3}{B}{R}
-        this.addAbility(new SpectacleAbility(this, new ManaCostsImpl("{3}{B}{R}")));
+        this.addAbility(new SpectacleAbility(this, new ManaCostsImpl<>("{3}{B}{R}")));
 
         // When Rafter Demon enters the battlefield, if its spectacle cost was paid, each opponent discards a card.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(

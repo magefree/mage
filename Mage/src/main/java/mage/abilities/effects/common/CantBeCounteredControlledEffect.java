@@ -30,7 +30,7 @@ public class CantBeCounteredControlledEffect extends ContinuousRuleModifyingEffe
         this(filterTarget, null, duration);
     }
 
-    public CantBeCounteredControlledEffect(final CantBeCounteredControlledEffect effect) {
+    protected CantBeCounteredControlledEffect(final CantBeCounteredControlledEffect effect) {
         super(effect);
         if (effect.filterTarget != null) {
             this.filterTarget = effect.filterTarget.copy();
@@ -46,11 +46,6 @@ public class CantBeCounteredControlledEffect extends ContinuousRuleModifyingEffe
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.COUNTER;
     }
@@ -59,7 +54,7 @@ public class CantBeCounteredControlledEffect extends ContinuousRuleModifyingEffe
     public boolean applies(GameEvent event, Ability source, Game game) {
         Spell spell = game.getStack().getSpell(event.getTargetId());
         if (spell != null && spell.isControlledBy(source.getControllerId())
-                && filterTarget.match(spell, source.getSourceId(), source.getControllerId(), game)) {
+                && filterTarget.match(spell, source.getControllerId(), source, game)) {
             if (filterSource == null) {
                 return true;
             } else {
@@ -81,6 +76,9 @@ public class CantBeCounteredControlledEffect extends ContinuousRuleModifyingEffe
         sb.append(" can't be countered");
         if (filterSource != null) {
             sb.append(" by ").append(filterSource.getMessage());
+        }
+        if (duration == Duration.EndOfTurn) {
+            sb.append(" this turn");
         }
         staticText = sb.toString();
     }

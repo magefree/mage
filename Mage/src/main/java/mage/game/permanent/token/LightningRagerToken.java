@@ -9,8 +9,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 
-import java.util.Arrays;
-
 /**
  * @author spjspj
  */
@@ -28,25 +26,13 @@ public final class LightningRagerToken extends TokenImpl {
         this.addAbility(TrampleAbility.getInstance());
         this.addAbility(HasteAbility.getInstance());
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new SacrificeSourceEffect(), TargetController.NEXT, false));
-
-        availableImageSetCodes = Arrays.asList("C15");
     }
 
-    public LightningRagerToken(final LightningRagerToken token) {
+    private LightningRagerToken(final LightningRagerToken token) {
         super(token);
     }
 
     public LightningRagerToken copy() {
         return new LightningRagerToken(this);
-    }
-
-
-    @Override
-    public void setExpansionSetCodeForImage(String code) {
-        super.setExpansionSetCodeForImage(code);
-
-        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("C15")) {
-            this.setTokenType(2);
-        }
     }
 }

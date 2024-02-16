@@ -39,7 +39,7 @@ public final class NurturerInitiate extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever a player casts a green spell, you may pay {1}. If you do, target creature gets +1/+1 until end of turn.
-        Ability ability = new SpellCastAllTriggeredAbility(new DoIfCostPaid(new BoostTargetEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl("{1}")), filter, false);
+        Ability ability = new SpellCastAllTriggeredAbility(new DoIfCostPaid(new BoostTargetEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl<>("{1}")), filter, false);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

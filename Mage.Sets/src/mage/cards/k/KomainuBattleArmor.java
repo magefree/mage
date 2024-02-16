@@ -19,6 +19,7 @@ import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
+import mage.target.targetpointer.FixedTargets;
 
 import java.util.UUID;
 
@@ -79,7 +80,7 @@ class KomainuBattleArmorTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return false;
+        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
     }
 
     @Override
@@ -126,12 +127,11 @@ class KomainuBattleArmorEffect extends OneShotEffect {
         if (playerId == null) {
             return false;
         }
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(
-                StaticFilters.FILTER_CONTROLLED_CREATURE,
-                playerId, source.getSourceId(), game
-        )) {
-            game.addEffect(new GoadTargetEffect().setTargetPointer(new FixedTarget(permanent, game)), source);
-        }
+        game.addEffect(new GoadTargetEffect().setTargetPointer(new FixedTargets(
+                game.getBattlefield().getActivePermanents(
+                        StaticFilters.FILTER_CONTROLLED_CREATURE, playerId, source, game
+                ), game
+        )), source);
         return true;
     }
 }

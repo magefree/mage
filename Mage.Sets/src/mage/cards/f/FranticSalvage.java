@@ -21,7 +21,7 @@ public final class FranticSalvage extends CardImpl {
 
 
         this.getSpellAbility().addEffect(new PutOnLibraryTargetEffect(true));
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(0, Integer.MAX_VALUE, new FilterArtifactCard("artifact cards from your graveyard")));
     }
 

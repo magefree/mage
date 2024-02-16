@@ -22,7 +22,7 @@ public final class GraftedSkullcap extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
         // At the beginning of your draw step, draw an additional card.
-        this.addAbility(new BeginningOfDrawTriggeredAbility(new DrawCardSourceControllerEffect(1),
+        this.addAbility(new BeginningOfDrawTriggeredAbility(new DrawCardSourceControllerEffect(1).setText("draw an additional card"),
             TargetController.YOU, false));
         // At the beginning of your end step, discard your hand.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new DiscardHandControllerEffect(),

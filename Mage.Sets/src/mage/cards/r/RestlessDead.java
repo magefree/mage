@@ -26,7 +26,7 @@ public final class RestlessDead extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {B}: Regenerate Restless Dead.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{B}")));
     }
 
     private RestlessDead(final RestlessDead card) {

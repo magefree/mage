@@ -49,7 +49,7 @@ public final class SwordOfLightAndShadow extends CardImpl {
         this.addAbility(ability);
 
         // Equip {2}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2), false));
     }
 
     private SwordOfLightAndShadow(final SwordOfLightAndShadow card) {
@@ -64,12 +64,12 @@ public final class SwordOfLightAndShadow extends CardImpl {
 
 class SwordOfLightAndShadowEffect extends OneShotEffect {
 
-    public SwordOfLightAndShadowEffect() {
+    SwordOfLightAndShadowEffect() {
         super(Outcome.ReturnToHand);
         staticText = "and you may return up to one target creature card from your graveyard to your hand";
     }
 
-    public SwordOfLightAndShadowEffect(final SwordOfLightAndShadowEffect effect) {
+    private SwordOfLightAndShadowEffect(final SwordOfLightAndShadowEffect effect) {
         super(effect);
     }
 
@@ -82,8 +82,6 @@ class SwordOfLightAndShadowEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Card card = game.getCard(targetPointer.getFirst(game, source));
-        return controller != null && card != null && controller.chooseUse(
-                outcome, "Return " + card.getName() + " from your graveyard to your hand?", source, game
-        ) && controller.moveCards(card, Zone.HAND, source, game);
+        return controller != null && card != null && controller.moveCards(card, Zone.HAND, source, game);
     }
 }

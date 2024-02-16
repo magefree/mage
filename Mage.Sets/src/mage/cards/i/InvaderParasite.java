@@ -12,13 +12,9 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetLandPermanent;
 import mage.target.targetpointer.FixedTarget;
@@ -42,7 +38,7 @@ public final class InvaderParasite extends CardImpl {
         this.addAbility(ability);
 
         // Whenever a land with the same name as the exiled card enters the battlefield under an opponent's control, Invader Parasite deals 2 damage to that player.
-        this.addAbility(new InvaderParasiteTriggeredAbility());
+        this.addAbility(new InvaderParasiteTriggeredAbility().setAbilityWord(AbilityWord.IMPRINT));
     }
 
     private InvaderParasite(final InvaderParasite card) {
@@ -62,7 +58,7 @@ class InvaderParasiteImprintEffect extends OneShotEffect {
         staticText = "exile target land";
     }
 
-    InvaderParasiteImprintEffect(final InvaderParasiteImprintEffect effect) {
+    private InvaderParasiteImprintEffect(final InvaderParasiteImprintEffect effect) {
         super(effect);
     }
 
@@ -89,7 +85,7 @@ class InvaderParasiteTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(2));
     }
 
-    InvaderParasiteTriggeredAbility(final InvaderParasiteTriggeredAbility ability) {
+    private InvaderParasiteTriggeredAbility(final InvaderParasiteTriggeredAbility ability) {
         super(ability);
     }
 
@@ -125,6 +121,6 @@ class InvaderParasiteTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a land with the same name as the exiled card enters the battlefield under an opponent's control, {this} deals 2 damage to that player";
+        return "Whenever a land with the same name as the exiled card enters the battlefield under an opponent's control, {this} deals 2 damage to that player.";
     }
 }

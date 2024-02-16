@@ -34,7 +34,7 @@ public final class SpectralSailor extends CardImpl {
 
         // {3}{U}: Draw a card.
         this.addAbility(new SimpleActivatedAbility(
-                new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{3}{U}")
+                new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{3}{U}")
         ));
     }
 

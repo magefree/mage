@@ -39,7 +39,7 @@ public final class RevokePrivileges extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Enchanted creature can't attack, block, or crew Vehicles.
@@ -63,12 +63,12 @@ public final class RevokePrivileges extends CardImpl {
 
 class RevokePrivilegeCantCrewEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public RevokePrivilegeCantCrewEffect() {
+    RevokePrivilegeCantCrewEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = ", or crew Vehicles";
     }
 
-    public RevokePrivilegeCantCrewEffect(final RevokePrivilegeCantCrewEffect effect) {
+    private RevokePrivilegeCantCrewEffect(final RevokePrivilegeCantCrewEffect effect) {
         super(effect);
     }
 
@@ -79,7 +79,7 @@ class RevokePrivilegeCantCrewEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (mageObject != null) {
             return "The creature enchanted by " + mageObject.getIdName() + " can't crew vehicles.";
         }

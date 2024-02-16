@@ -26,7 +26,7 @@ public final class HereticsPunishment extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{R}");
 
         // {3}{R}: Choose any target, then put the top three cards of your library into your graveyard. Heretic's Punishment deals damage to that creature or player equal to the highest converted mana cost among those cards.
-        Ability ability = new SimpleActivatedAbility(new HereticsPunishmentEffect(), new ManaCostsImpl("{3}{R}"));
+        Ability ability = new SimpleActivatedAbility(new HereticsPunishmentEffect(), new ManaCostsImpl<>("{3}{R}"));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }
@@ -43,12 +43,12 @@ public final class HereticsPunishment extends CardImpl {
 
 class HereticsPunishmentEffect extends OneShotEffect {
 
-    public HereticsPunishmentEffect() {
+    HereticsPunishmentEffect() {
         super(Outcome.Damage);
         staticText = "Choose any target, then mill three cards. {this} deals damage to that permanent or player equal to the highest mana value among the milled cards";
     }
 
-    public HereticsPunishmentEffect(final HereticsPunishmentEffect effect) {
+    private HereticsPunishmentEffect(final HereticsPunishmentEffect effect) {
         super(effect);
     }
 

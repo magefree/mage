@@ -43,12 +43,12 @@ public final class KinTreeInvocation extends CardImpl {
 
 class KinTreeInvocationCreateTokenEffect extends OneShotEffect {
 
-    public KinTreeInvocationCreateTokenEffect() {
+    KinTreeInvocationCreateTokenEffect() {
         super(Outcome.PutCreatureInPlay);
         staticText = "Create an X/X black and green Spirit Warrior creature token, where X is the greatest toughness among creatures you control";
     }
 
-    public KinTreeInvocationCreateTokenEffect(final KinTreeInvocationCreateTokenEffect effect) {
+    private KinTreeInvocationCreateTokenEffect(final KinTreeInvocationCreateTokenEffect effect) {
         super(effect);
     }
 
@@ -80,7 +80,7 @@ class SpiritWarriorToken extends TokenImpl {
     }
 
     public SpiritWarriorToken(int x) {
-        super("Spirit Warrior", "X/X black and green Spirit Warrior creature token, where X is the greatest toughness among creatures you control");
+        super("Spirit Warrior Token", "X/X black and green Spirit Warrior creature token, where X is the greatest toughness among creatures you control");
         this.cardType.add(CardType.CREATURE);
         this.subtype.add(SubType.SPIRIT);
         this.subtype.add(SubType.WARRIOR);
@@ -90,7 +90,7 @@ class SpiritWarriorToken extends TokenImpl {
         this.toughness = new MageInt(x);
     }
 
-    public SpiritWarriorToken(final SpiritWarriorToken token) {
+    private SpiritWarriorToken(final SpiritWarriorToken token) {
         super(token);
     }
 

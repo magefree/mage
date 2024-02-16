@@ -46,7 +46,7 @@ public final class BoundDetermined extends SplitCard {
         // Other spells you control can't be countered this turn.
         // Draw a card.
         getRightHalfCard().getSpellAbility().addEffect(new DeterminedEffect());
-        getRightHalfCard().getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        getRightHalfCard().getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
 
     }
 
@@ -62,12 +62,12 @@ public final class BoundDetermined extends SplitCard {
 
 class BoundEffect extends OneShotEffect {
 
-    public BoundEffect() {
+    BoundEffect() {
         super(Outcome.ReturnToHand);
         this.staticText = "Sacrifice a creature. Return up to X cards from your graveyard to your hand, where X is the number of colors that creature was";
     }
 
-    public BoundEffect(final BoundEffect effect) {
+    private BoundEffect(final BoundEffect effect) {
         super(effect);
     }
 
@@ -81,7 +81,7 @@ class BoundEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             TargetControlledPermanent target = new TargetControlledPermanent(1, 1, new FilterControlledCreaturePermanent("a creature (to sacrifice)"), true);
-            if (target.canChoose(source.getSourceId(), controller.getId(), game)) {
+            if (target.canChoose(controller.getId(), source, game)) {
                 if (controller.chooseTarget(outcome, target, source, game)) {
                     Permanent toSacrifice = game.getPermanent(target.getFirstTarget());
                     if (toSacrifice != null) {
@@ -110,7 +110,7 @@ class DeterminedEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "Other spells you control can't be countered this turn";
     }
 
-    DeterminedEffect(final DeterminedEffect effect) {
+    private DeterminedEffect(final DeterminedEffect effect) {
         super(effect);
     }
 
@@ -120,13 +120,8 @@ class DeterminedEffect extends ContinuousRuleModifyingEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (sourceObject != null) {
             return "This spell can't be countered (" + sourceObject.getIdName() + ").";
         }

@@ -34,7 +34,7 @@ public final class ThoughtweftTrio extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
         
         // Champion a Kithkin
-        this.addAbility(new ChampionAbility(this, SubType.KITHKIN, false));
+        this.addAbility(new ChampionAbility(this, SubType.KITHKIN));
         
         // Thoughtweft Trio can block any number of creatures.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CanBlockAdditionalCreatureEffect(0)));

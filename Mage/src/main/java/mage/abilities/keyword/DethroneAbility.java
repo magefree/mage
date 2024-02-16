@@ -1,14 +1,17 @@
 
 package mage.abilities.keyword;
 
-import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.other.PlayerWithTheMostLifePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  * Dethrone triggers whenever a creature with dethrone attacks the player with
@@ -30,7 +33,7 @@ public class DethroneAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false);
     }
 
-    public DethroneAbility(final DethroneAbility ability) {
+    protected DethroneAbility(final DethroneAbility ability) {
         super(ability);
     }
 
@@ -47,23 +50,15 @@ public class DethroneAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         UUID defenderId = game.getCombat().getDefenderId(getSourceId());
-        if (defenderId != null) {
-            Player attackedPlayer = game.getPlayer(defenderId);
-            Player controller = game.getPlayer(getControllerId());
-            if (attackedPlayer != null && controller != null) {
-                int mostLife = Integer.MIN_VALUE;
-                for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-                    Player player = game.getPlayer(playerId);
-                    if (player != null) {
-                        if (player.getLife() > mostLife) {
-                            mostLife = player.getLife();
-                        }
-                    }
-                }
-                return attackedPlayer.getLife() == mostLife;
-            }
+        if (defenderId == null) {
+            return false;
         }
-        return false;
+
+        Player attackedPlayer = game.getPlayer(defenderId);
+        return PlayerWithTheMostLifePredicate.instance.apply(
+                new ObjectSourcePlayer<>(attackedPlayer, getControllerId(), null),
+                game
+        );
     }
 
     @Override

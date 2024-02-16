@@ -35,7 +35,7 @@ public final class FrenziedFugue extends CardImpl {
         TargetPermanent auraTarget = new TargetPermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.GainControl));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // When Frenzied Fugue enters the battlefield or at the beginning of your upkeep, gain control of enchanted permanent until end of turn. Untap that permanent. It gains haste until end of turn.
         this.addAbility(new FrenziedFugueTriggeredAbility());
@@ -57,7 +57,7 @@ class FrenziedFugueTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, null, false);
     }
 
-    public FrenziedFugueTriggeredAbility(final FrenziedFugueTriggeredAbility ability) {
+    private FrenziedFugueTriggeredAbility(final FrenziedFugueTriggeredAbility ability) {
         super(ability);
     }
 

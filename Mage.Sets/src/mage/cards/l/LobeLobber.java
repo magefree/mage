@@ -36,7 +36,7 @@ public final class LobeLobber extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ability, AttachmentType.EQUIPMENT)));
 
         // Equip 2
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2), false));
     }
 
     private LobeLobber(final LobeLobber card) {
@@ -51,12 +51,12 @@ public final class LobeLobber extends CardImpl {
 
 class LobeLobberEffect extends OneShotEffect {
 
-    public LobeLobberEffect() {
+    LobeLobberEffect() {
         super(Outcome.Benefit);
         this.staticText = "This creature deals 1 damage to target player. Roll a six-sided die. On a 5 or higher, untap it";
     }
 
-    public LobeLobberEffect(final LobeLobberEffect effect) {
+    private LobeLobberEffect(final LobeLobberEffect effect) {
         super(effect);
     }
 

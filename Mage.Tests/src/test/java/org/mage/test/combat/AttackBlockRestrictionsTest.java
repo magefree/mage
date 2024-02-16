@@ -453,7 +453,6 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
         } catch(UnsupportedOperationException e) {
             assertEquals("Underworld Cerberus is blocked by 1 creature(s). It has to be blocked by 3 or more.", e.getMessage());
         }
-
     }
 
     @Test

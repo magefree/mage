@@ -49,7 +49,7 @@ class ElectropotenceTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new ElectropotenceEffect());
     }
 
-    public ElectropotenceTriggeredAbility(ElectropotenceTriggeredAbility ability) {
+    private ElectropotenceTriggeredAbility(final ElectropotenceTriggeredAbility ability) {
         super(ability);
     }
 
@@ -82,11 +82,11 @@ class ElectropotenceTriggeredAbility extends TriggeredAbilityImpl {
 
 class ElectropotenceEffect extends OneShotEffect {
 
-    public ElectropotenceEffect() {
+    ElectropotenceEffect() {
         super(Outcome.Damage);
     }
 
-    public ElectropotenceEffect(final ElectropotenceEffect effect) {
+    private ElectropotenceEffect(final ElectropotenceEffect effect) {
         super(effect);
     }
 
@@ -103,7 +103,7 @@ class ElectropotenceEffect extends OneShotEffect {
         if (creature != null && controller != null) {
             if (controller.chooseUse(Outcome.Damage, "Pay {2}{R} to do the damage?", source, game)) {
                 // if (controller.chooseUse(Outcome.Damage, "Pay {2}{R}? If you do, " + creature.getName() + " deals damage equal to its power to any target.", game)) {
-                ManaCosts manaCosts = new ManaCostsImpl("{2}{R}");
+                ManaCosts manaCosts = new ManaCostsImpl<>("{2}{R}");
                 if (manaCosts.pay(source, game, source, controller.getId(), false, null)) {
                     int amount = creature.getPower().getValue();
                     UUID target = source.getTargets().getFirstTarget();

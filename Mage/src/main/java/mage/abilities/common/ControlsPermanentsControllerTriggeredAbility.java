@@ -21,7 +21,7 @@ public class ControlsPermanentsControllerTriggeredAbility extends StateTriggered
     protected final ComparisonType type;
     protected final int value;
 
-    public ControlsPermanentsControllerTriggeredAbility(FilterPermanent filter, Effect effect){
+    public ControlsPermanentsControllerTriggeredAbility(FilterPermanent filter, Effect effect) {
         this(filter, ComparisonType.MORE_THAN, 0, effect);
     }
 
@@ -30,9 +30,10 @@ public class ControlsPermanentsControllerTriggeredAbility extends StateTriggered
         this.filter = filter;
         this.value = value;
         this.type = type;
+        setTriggerPhrase("When you control " + filter.getMessage() + ", ");
     }
 
-    public ControlsPermanentsControllerTriggeredAbility(final ControlsPermanentsControllerTriggeredAbility ability) {
+    protected ControlsPermanentsControllerTriggeredAbility(final ControlsPermanentsControllerTriggeredAbility ability) {
         super(ability);
         this.filter = ability.filter;
         this.type = ability.type;
@@ -48,10 +49,5 @@ public class ControlsPermanentsControllerTriggeredAbility extends StateTriggered
     public boolean checkTrigger(GameEvent event, Game game) {
         int inputValue = game.getBattlefield().countAll(filter, getControllerId(), game);
         return ComparisonType.compare(inputValue, type, value);
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "When you control " + filter.getMessage() + ", " ;
     }
 }

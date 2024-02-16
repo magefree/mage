@@ -27,7 +27,7 @@ public final class YaroksWavecrasher extends CardImpl {
 
         // When Yarok’s Wavecrasher enters the battlefield, return another creature you control to its owner’s hand.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), false);
-        ability.addTarget(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE));
+        ability.addTarget(new TargetControlledPermanent(StaticFilters.FILTER_ANOTHER_CREATURE_YOU_CONTROL).withNotTarget(true));
         this.addAbility(ability);
     }
 
@@ -40,4 +40,3 @@ public final class YaroksWavecrasher extends CardImpl {
         return new YaroksWavecrasher(this);
     }
 }
-

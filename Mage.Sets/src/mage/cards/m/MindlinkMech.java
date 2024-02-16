@@ -157,11 +157,11 @@ class MindlinkMechWatcher extends Watcher {
                 .getState()
                 .getWatcher(MindlinkMechWatcher.class)
                 .crewMap
-                .computeIfAbsent(new MageObjectReference(source), x -> new HashSet<>())
+                .computeIfAbsent(new MageObjectReference(game.getPermanent(source.getSourceId()), game), x -> new HashSet<>())
                 .stream()
                 .filter(mor -> {
                     Permanent permanent = mor.getPermanent(game);
-                    return permanent != null && !permanent.isLegendary() && permanent.isCreature(game);
+                    return permanent != null && !permanent.isLegendary(game) && permanent.isCreature(game);
                 }).map(MageObjectReferencePredicate::new)
                 .collect(Collectors.toSet());
         if (predicates.isEmpty()) {
@@ -205,8 +205,8 @@ class MindlinkMechEffect extends OneShotEffect {
 class MindlinkMechApplier extends CopyApplier {
     @Override
     public boolean apply(Game game, MageObject blueprint, Ability source, UUID targetObjectId) {
-        blueprint.getPower().modifyBaseValue(4);
-        blueprint.getToughness().modifyBaseValue(3);
+        blueprint.getPower().setModifiedBaseValue(4);
+        blueprint.getToughness().setModifiedBaseValue(3);
         blueprint.addCardType(game, CardType.ARTIFACT);
         blueprint.addSubType(game, SubType.VEHICLE);
         blueprint.getAbilities().add(FlyingAbility.getInstance());

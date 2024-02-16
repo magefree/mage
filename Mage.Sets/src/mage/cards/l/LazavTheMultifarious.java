@@ -39,7 +39,7 @@ public final class LazavTheMultifarious extends CardImpl {
     public LazavTheMultifarious(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SHAPESHIFTER);
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
@@ -52,7 +52,7 @@ public final class LazavTheMultifarious extends CardImpl {
         // {X}: Lazav, the Multifarious becomes a copy of target creature card in your graveyard with converted mana cost X, except its name is Lazav, the Multifarious, it's legendary in addition to its other types, and it has this ability.
         Ability ability = new SimpleActivatedAbility(
                 new LazavTheMultifariousEffect(),
-                new ManaCostsImpl("{X}")
+                new ManaCostsImpl<>("{X}")
         );
         ability.setTargetAdjuster(LazavTheMultifariousAdjuster.instance);
         this.addAbility(ability);
@@ -92,7 +92,7 @@ class LazavTheMultifariousEffect extends OneShotEffect {
                 + "and it has this ability";
     }
 
-    LazavTheMultifariousEffect(final LazavTheMultifariousEffect effect) {
+    private LazavTheMultifariousEffect(final LazavTheMultifariousEffect effect) {
         super(effect);
     }
 
@@ -133,7 +133,7 @@ class LazavTheMultifariousCopyApplier extends CopyApplier {
     public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
         Ability ability = new SimpleActivatedAbility(
                 new LazavTheMultifariousEffect(),
-                new ManaCostsImpl("{X}")
+                new ManaCostsImpl<>("{X}")
         );
         ability.setTargetAdjuster(LazavTheMultifariousAdjuster.instance);
         blueprint.getAbilities().add(ability);

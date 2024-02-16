@@ -39,13 +39,13 @@ public final class SpoilsOfTheVault extends CardImpl {
 
 class SpoilsOfTheVaultEffect extends OneShotEffect {
 
-    public SpoilsOfTheVaultEffect() {
+    SpoilsOfTheVaultEffect() {
         super(Outcome.Damage);
         this.staticText = "Reveal cards from the top of your library until you reveal a card with that name, "
                 + "then put that card into your hand. Exile all other cards revealed this way, and you lose 1 life for each of the exiled cards";
     }
 
-    public SpoilsOfTheVaultEffect(final SpoilsOfTheVaultEffect effect) {
+    private SpoilsOfTheVaultEffect(final SpoilsOfTheVaultEffect effect) {
         super(effect);
     }
 
@@ -56,7 +56,7 @@ class SpoilsOfTheVaultEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         Player controller = game.getPlayer(source.getControllerId());
         String cardName = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
         if (sourceObject == null || controller == null || cardName == null || cardName.isEmpty()) {

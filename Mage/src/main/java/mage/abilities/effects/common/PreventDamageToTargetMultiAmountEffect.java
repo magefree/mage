@@ -35,7 +35,7 @@ public class PreventDamageToTargetMultiAmountEffect extends PreventionEffectImpl
         super(duration, amount, onlyCombat, consumable, dynamicValue);
     }
 
-    public PreventDamageToTargetMultiAmountEffect(final PreventDamageToTargetMultiAmountEffect effect) {
+    protected PreventDamageToTargetMultiAmountEffect(final PreventDamageToTargetMultiAmountEffect effect) {
         super(effect);
     }
 
@@ -48,7 +48,7 @@ public class PreventDamageToTargetMultiAmountEffect extends PreventionEffectImpl
     public void init(Ability source, Game game) {
         super.init(source, game);
         Target target = source.getTargets().get(0);
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (target instanceof TargetAmount && sourceObject != null) {
             TargetAmount multiTarget = (TargetAmount) target;
             for (UUID targetId : multiTarget.getTargets()) {
@@ -70,11 +70,6 @@ public class PreventDamageToTargetMultiAmountEffect extends PreventionEffectImpl
                 }
             }
         }
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override
@@ -106,16 +101,16 @@ public class PreventDamageToTargetMultiAmountEffect extends PreventionEffectImpl
 
     @Override
     public String getText(Mode mode) {
-        StringBuilder sb = new StringBuilder();
-        if (staticText.isEmpty()) {
-            sb.append("prevent the next ").append(amountToPrevent).append(" damage that would be dealt ");
-            if (duration == Duration.EndOfTurn) {
-                sb.append("this turn ");
-            }
-            sb.append("to any number of targets, divided as you choose");
-            return sb.toString();
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
         }
-        return staticText;
+        StringBuilder sb = new StringBuilder();
+        sb.append("prevent the next ").append(amountToPrevent).append(" damage that would be dealt ");
+        if (duration == Duration.EndOfTurn) {
+            sb.append("this turn ");
+        }
+        sb.append("to any number of targets, divided as you choose");
+        return sb.toString();
     }
 
 }

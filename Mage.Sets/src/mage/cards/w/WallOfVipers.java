@@ -3,6 +3,7 @@ package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DestroySourceEffect;
@@ -38,7 +39,7 @@ public final class WallOfVipers extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
 
         // {3}: Destroy Wall of Vipers and target creature it's blocking. Any player may activate this ability.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroySourceEffect(), new ManaCostsImpl("{3}"));
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroySourceEffect(), new ManaCostsImpl<>("{3}"));
         ability.addEffect(new DestroyTargetEffect(" and target creature it's blocking"));
         ability.addTarget(new TargetCreaturePermanent(new WallOfVipersFilter()));
         ability.setMayActivate(TargetController.ANY);
@@ -62,7 +63,7 @@ class WallOfVipersFilter extends FilterCreaturePermanent {
         super("creature {this} is blocking");
     }
     
-    public WallOfVipersFilter(final WallOfVipersFilter filter) {
+    private WallOfVipersFilter(final WallOfVipersFilter filter) {
         super(filter);
     }
     
@@ -72,11 +73,11 @@ class WallOfVipersFilter extends FilterCreaturePermanent {
     }
     
     @Override
-    public boolean match(Permanent permanent, UUID sourceId, UUID playerId, Game game) {
-        if (super.match(permanent, sourceId, playerId, game)) {
-            SubType subtype = (SubType) game.getState().getValue(sourceId + "_type");
+    public boolean match(Permanent permanent, UUID playerId, Ability source, Game game) {
+        if (super.match(permanent, playerId, source, game)) {
+            SubType subtype = (SubType) game.getState().getValue(source.getSourceId() + "_type");
             for (CombatGroup combatGroup : game.getCombat().getGroups()) {
-                if (combatGroup.getBlockers().contains(sourceId) && combatGroup.getAttackers().contains(permanent.getId())) {
+                if (combatGroup.getBlockers().contains(source.getSourceId()) && combatGroup.getAttackers().contains(permanent.getId())) {
                     return true;
                 }
             }

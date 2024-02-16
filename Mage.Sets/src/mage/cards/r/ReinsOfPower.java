@@ -55,7 +55,7 @@ class ReinsOfPowerEffect extends OneShotEffect {
         this.staticText = "Untap all creatures you control and all creatures target opponent controls. You and that opponent each gain control of all creatures the other controls until end of turn. Those creatures gain haste until end of turn";
     }
 
-    ReinsOfPowerEffect(final ReinsOfPowerEffect effect) {
+    private ReinsOfPowerEffect(final ReinsOfPowerEffect effect) {
         super(effect);
     }
 
@@ -76,12 +76,12 @@ class ReinsOfPowerEffect extends OneShotEffect {
             // You and that opponent each gain control of all creatures the other controls until end of turn.
             Set<UUID> yourCreatures = new HashSet<>();
             Set<UUID> opponentCreatures = new HashSet<>();
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterControlledCreaturePermanent(), source.getControllerId(), source.getSourceId(), game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterControlledCreaturePermanent(), source.getControllerId(), source, game)) {
                 yourCreatures.add(permanent.getId());
             }
             FilterCreaturePermanent filterOpponent = new FilterCreaturePermanent();
             filterOpponent.add(new ControllerIdPredicate(opponentId));
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(filterOpponent, source.getControllerId(), source.getSourceId(), game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(filterOpponent, source.getControllerId(), source, game)) {
                 opponentCreatures.add(permanent.getId());
             }
             for (UUID creatureId : yourCreatures) {

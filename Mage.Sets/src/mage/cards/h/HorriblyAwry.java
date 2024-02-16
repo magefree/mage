@@ -8,7 +8,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
-import mage.constants.Zone;
+import mage.constants.PutCards;
 import mage.filter.common.FilterCreatureSpell;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.target.TargetSpell;
@@ -32,7 +32,7 @@ public final class HorriblyAwry extends CardImpl {
         this.addAbility(new DevoidAbility(this.color));
 
         // Counter target creature spell with converted mana cost 4 or less. If that spell is countered this way, exile it instead of putting it into its owner's graveyard.
-        this.getSpellAbility().addEffect(new CounterTargetWithReplacementEffect(Zone.EXILED));
+        this.getSpellAbility().addEffect(new CounterTargetWithReplacementEffect(PutCards.EXILED));
         this.getSpellAbility().addTarget(new TargetSpell(filter));
     }
 

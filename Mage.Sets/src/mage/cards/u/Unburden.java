@@ -24,7 +24,7 @@ public final class Unburden extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
         
         // Cycling {2}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
     private Unburden(final Unburden card) {

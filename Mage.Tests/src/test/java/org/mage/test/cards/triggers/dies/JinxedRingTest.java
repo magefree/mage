@@ -60,6 +60,7 @@ public class JinxedRingTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Bonded Construct", 2); // Artifact Creature - Construct 2/1
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Legerdemain", "Jinxed Ring^Bonded Construct");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Shatterstorm");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -71,7 +72,5 @@ public class JinxedRingTest extends CardTestPlayerBase {
         assertGraveyardCount(playerB, "Bonded Construct", 2);
         assertLife(playerA, 20);
         assertLife(playerB, 18);
-
     }
-
 }

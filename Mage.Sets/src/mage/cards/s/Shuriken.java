@@ -35,7 +35,7 @@ public final class Shuriken extends CardImpl {
 
         // Equipped creature has "{tap}, Unattach Shuriken: Shuriken deals 2 damage to target creature. That creature's controller gains control of Shuriken unless it was unattached from a Ninja."
         this.addAbility(new SimpleStaticAbility(new GainAbilityWithAttachmentEffect(
-                "equipped creature has \"{tap}, Unattach {this}: {this} deals 2 damage to target creature. " +
+                "equipped creature has \"{T}, Unattach {this}: {this} deals 2 damage to target creature. " +
                         "That creature's controller gains control of {this} unless it was unattached from a Ninja.\"",
                 new ShurikenEffect(), new TargetCreaturePermanent(), new UnattachCost(), new TapSourceCost()
         )));

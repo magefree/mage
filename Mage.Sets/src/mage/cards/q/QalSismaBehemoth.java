@@ -27,7 +27,7 @@ public final class QalSismaBehemoth extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Qal Sisma Behemoth can't attack or block unless you pay {2}.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackBlockUnlessPaysSourceEffect(new ManaCostsImpl("{2}"), PayCostToAttackBlockEffectImpl.RestrictType.ATTACK_AND_BLOCK)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackBlockUnlessPaysSourceEffect(new ManaCostsImpl<>("{2}"), PayCostToAttackBlockEffectImpl.RestrictType.ATTACK_AND_BLOCK)));
 
     }
 

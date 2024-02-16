@@ -79,8 +79,8 @@ class GideonsSacrificeEffect extends OneShotEffect {
             return false;
         }
         Target target = new TargetPermanent(filter);
-        target.setNotTarget(true);
-        if (!player.choose(outcome, target, source.getSourceId(), game)) {
+        target.withNotTarget(true);
+        if (!player.choose(outcome, target, source, game)) {
             return false;
         }
         game.addEffect(new GideonsSacrificeEffectReplacementEffect(
@@ -163,11 +163,6 @@ class GideonsSacrificeEffectReplacementEffect extends ReplacementEffectImpl {
                 damageEvent.getAmount(), damageEvent.getSourceId(), source, game,
                 damageEvent.isCombatDamage(), damageEvent.isPreventable(), event.getAppliedEffects()
         );
-        return true;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
         return true;
     }
 

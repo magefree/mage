@@ -7,17 +7,16 @@ import mage.constants.SubType;
 import mage.MageInt;
 
 /**
- *
  * @author spjspj
  */
 public final class BaruFistOfKrosaToken extends TokenImpl {
 
     public BaruFistOfKrosaToken() {
-       this(1);
+        this(1);
     }
 
     public BaruFistOfKrosaToken(int xValue) {
-        super("Wurm", "X/X green Wurm creature token, where X is the number of lands you control");
+        super("Wurm Token", "X/X green Wurm creature token, where X is the number of lands you control");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add(SubType.WURM);
@@ -25,7 +24,7 @@ public final class BaruFistOfKrosaToken extends TokenImpl {
         toughness = new MageInt(xValue);
     }
 
-    public BaruFistOfKrosaToken(final BaruFistOfKrosaToken token) {
+    private BaruFistOfKrosaToken(final BaruFistOfKrosaToken token) {
         super(token);
     }
 
@@ -33,4 +32,3 @@ public final class BaruFistOfKrosaToken extends TokenImpl {
         return new BaruFistOfKrosaToken(this);
     }
 }
-

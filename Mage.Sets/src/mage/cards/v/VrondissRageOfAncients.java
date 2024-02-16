@@ -22,7 +22,7 @@ public final class VrondissRageOfAncients extends CardImpl {
     public VrondissRageOfAncients(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DRAGON);
         this.subtype.add(SubType.BARBARIAN);
         this.power = new MageInt(5);
@@ -35,7 +35,7 @@ public final class VrondissRageOfAncients extends CardImpl {
 
         // Whenever you roll one or more dice, you may have Vrondiss, Rage of Ancients deal 1 damage to itself.
         this.addAbility(new OneOrMoreDiceRolledTriggeredAbility(
-                new DamageSelfEffect(1).setText("{this} deal 1 damage to itself"), true
+                new DamageSelfEffect(1).setText("have {this} deal 1 damage to itself"), true
         ));
     }
 

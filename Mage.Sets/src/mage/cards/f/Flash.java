@@ -50,7 +50,7 @@ class FlashEffect extends OneShotEffect {
         this.staticText = "You may put a creature card from your hand onto the battlefield. If you do, sacrifice it unless you pay its mana cost reduced by up to {2}.";
     }
 
-    public FlashEffect(final FlashEffect effect) {
+    private FlashEffect(final FlashEffect effect) {
         super(effect);
     }
 
@@ -67,7 +67,7 @@ class FlashEffect extends OneShotEffect {
         }
 
         TargetCardInHand target = new TargetCardInHand(StaticFilters.FILTER_CARD_CREATURE);
-        if (controller.choose(Outcome.PutCreatureInPlay, target, source.getSourceId(), game)) {
+        if (controller.choose(Outcome.PutCreatureInPlay, target, source, game)) {
             Card card = game.getCard(target.getFirstTarget());
             if (card != null) {
                 controller.moveCards(card, Zone.BATTLEFIELD, source, game);

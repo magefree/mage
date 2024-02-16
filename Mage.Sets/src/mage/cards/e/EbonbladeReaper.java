@@ -1,4 +1,3 @@
-
 package mage.cards.e;
 
 import java.util.UUID;
@@ -9,7 +8,6 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.LoseHalfLifeEffect;
 import mage.abilities.effects.common.LoseHalfLifeTargetEffect;
 import mage.abilities.keyword.MorphAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -44,7 +42,7 @@ public final class EbonbladeReaper extends CardImpl {
     }
 
     @Override
-    public Card copy() {
+    public EbonbladeReaper copy() {
         return new EbonbladeReaper(this);
     }
 }

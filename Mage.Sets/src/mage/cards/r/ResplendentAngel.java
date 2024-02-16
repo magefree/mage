@@ -6,7 +6,7 @@ import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.YouGainedLifeCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.ControllerGotLifeCount;
+import mage.abilities.dynamicvalue.common.ControllerGainedLifeCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
@@ -39,12 +39,12 @@ public final class ResplendentAngel extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 Zone.BATTLEFIELD, new CreateTokenEffect(new AngelVigilanceToken()),
                 TargetController.ANY, new YouGainedLifeCondition(ComparisonType.MORE_THAN, 4), false
-        ).addHint(ControllerGotLifeCount.getHint()), new PlayerGainedLifeWatcher());
+        ).addHint(ControllerGainedLifeCount.getHint()), new PlayerGainedLifeWatcher());
 
         // {3}{W}{W}{W}: Until end of turn, Resplendent Angel gets +2/+2 and gains lifelink.
         Ability ability = new SimpleActivatedAbility(new BoostSourceEffect(
                 2, 2, Duration.EndOfTurn
-        ).setText("until end of turn, {this} gets +2/+2"), new ManaCostsImpl("{3}{W}{W}{W}"));
+        ).setText("until end of turn, {this} gets +2/+2"), new ManaCostsImpl<>("{3}{W}{W}{W}"));
         ability.addEffect(new GainAbilitySourceEffect(
                 LifelinkAbility.getInstance(), Duration.EndOfTurn
         ).setText("and gains lifelink"));

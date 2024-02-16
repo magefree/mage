@@ -1,4 +1,3 @@
-
 package mage.cards.p;
 
 import java.util.UUID;
@@ -12,7 +11,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.common.FilterLandCard;
+import mage.filter.StaticFilters;
 import mage.game.permanent.token.WolfToken;
 
 /**
@@ -32,7 +31,10 @@ public final class PackGuardian extends CardImpl {
         this.addAbility(FlashAbility.getInstance());
         
         // When Pack Guardian enters the battlefield, you may discard a land card. If you do, create a 2/2 green Wolf creature token.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new DoIfCostPaid(new CreateTokenEffect(new WolfToken()), new DiscardCardCost(new FilterLandCard()))));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new DoIfCostPaid(
+                new CreateTokenEffect(new WolfToken()),
+                new DiscardCardCost(StaticFilters.FILTER_CARD_LAND_A)
+        )));
     }
 
     private PackGuardian(final PackGuardian card) {

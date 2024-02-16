@@ -11,7 +11,7 @@ import mage.constants.SubType;
 public class SamuraiToken extends TokenImpl {
 
     public SamuraiToken() {
-        super("Samurai token", "2/2 white Samurai creature token with vigilance.");
+        super("Samurai Token", "2/2 white Samurai creature token with vigilance.");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
         subtype.add(SubType.SAMURAI);

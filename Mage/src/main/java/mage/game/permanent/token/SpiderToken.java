@@ -5,15 +5,13 @@ import mage.abilities.keyword.ReachAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author fireshoes
  */
 public final class SpiderToken extends TokenImpl {
 
     public SpiderToken() {
-        super("Spider", "1/2 green Spider creature token with reach");
+        super("Spider Token", "1/2 green Spider creature token with reach");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add(SubType.SPIDER);
@@ -21,11 +19,9 @@ public final class SpiderToken extends TokenImpl {
         toughness = new MageInt(2);
 
         this.addAbility(ReachAbility.getInstance());
-
-        availableImageSetCodes.addAll(Arrays.asList("C15", "EMN", "ISD", "SHM", "MH1", "THB", "MID"));
     }
 
-    public SpiderToken(final SpiderToken token) {
+    private SpiderToken(final SpiderToken token) {
         super(token);
     }
 

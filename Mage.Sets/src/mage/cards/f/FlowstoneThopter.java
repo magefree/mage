@@ -33,7 +33,7 @@ public final class FlowstoneThopter extends CardImpl {
         // {1}: Flowstone Thopter gets +1/-1 and gains flying until end of turn.
         Effect effect = new BoostSourceEffect(1, -1, Duration.EndOfTurn);
         effect.setText("{this} gets +1/-1");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{1}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{1}"));
         effect = new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("and gains flying until end of turn.");
         ability.addEffect(effect);

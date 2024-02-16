@@ -5,15 +5,13 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author LoneFox
  */
 public final class PegasusToken extends TokenImpl {
 
     public PegasusToken() {
-        super("Pegasus", "1/1 white Pegasus creature token with flying");
+        super("Pegasus Token", "1/1 white Pegasus creature token with flying");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
         subtype.add(SubType.PEGASUS);
@@ -21,11 +19,9 @@ public final class PegasusToken extends TokenImpl {
         toughness = new MageInt(1);
 
         addAbility(FlyingAbility.getInstance());
-
-        availableImageSetCodes = Arrays.asList("C14", "C19", "CMD", "EXO", "GPT", "MIR", "TMP", "TSP", "THB", "KHC");
     }
 
-    public PegasusToken(final PegasusToken token) {
+    private PegasusToken(final PegasusToken token) {
         super(token);
     }
 

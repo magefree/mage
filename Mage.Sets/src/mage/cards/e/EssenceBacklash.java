@@ -39,12 +39,12 @@ public final class EssenceBacklash extends CardImpl {
 
 class EssenceBacklashEffect extends OneShotEffect {
 
-    public EssenceBacklashEffect() {
+    EssenceBacklashEffect() {
         super(Outcome.Damage);
         staticText = "Counter target creature spell. {this} deals damage equal to that spell's power to its controller";
     }
 
-    public EssenceBacklashEffect(final EssenceBacklashEffect effect) {
+    private EssenceBacklashEffect(final EssenceBacklashEffect effect) {
         super(effect);
     }
 

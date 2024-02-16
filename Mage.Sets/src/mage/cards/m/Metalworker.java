@@ -53,12 +53,12 @@ public final class Metalworker extends CardImpl {
 
 class MetalworkerManaEffect extends ManaEffect {
 
-    public MetalworkerManaEffect() {
+    MetalworkerManaEffect() {
         super();
         staticText = "Reveal any number of artifact cards in your hand. Add {C}{C} for each card revealed this way";
     }
 
-    public MetalworkerManaEffect(final MetalworkerManaEffect effect) {
+    private MetalworkerManaEffect(final MetalworkerManaEffect effect) {
         super(effect);
     }
 
@@ -95,7 +95,7 @@ class MetalworkerManaEffect extends ManaEffect {
         int artifacts = controller.getHand().count(StaticFilters.FILTER_CARD_ARTIFACT, game);
         if (artifacts > 0) {
             TargetCardInHand target = new TargetCardInHand(0, Integer.MAX_VALUE, StaticFilters.FILTER_CARD_ARTIFACT);
-            if (controller.choose(Outcome.Benefit, target, source.getSourceId(), game)) {
+            if (controller.choose(Outcome.Benefit, target, source, game)) {
                 Cards cards = new CardsImpl(target.getTargets());
                 controller.revealCards(source, cards, game);
                 return Mana.ColorlessMana(target.getTargets().size() * 2);

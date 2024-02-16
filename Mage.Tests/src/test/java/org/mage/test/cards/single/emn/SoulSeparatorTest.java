@@ -27,6 +27,8 @@ public class SoulSeparatorTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 5);
         addCard(Zone.GRAVEYARD, playerA, "Sylvan Advocate"); // 2/3 vigilance
 
+        setStrictChooseMode(true);
+
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{5}");
         addTarget(playerA, "Sylvan Advocate");
 
@@ -36,8 +38,8 @@ public class SoulSeparatorTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Soul Separator", 1);
         assertExileCount("Sylvan Advocate", 1);
         assertPermanentCount(playerA, "Sylvan Advocate", 1);
-        assertPermanentCount(playerA, "Zombie", 1);
-        assertPowerToughness(playerA, "Zombie", 2, 3);
+        assertPermanentCount(playerA, "Zombie Token", 1);
+        assertPowerToughness(playerA, "Zombie Token", 2, 3);
 
         Permanent saToken = getPermanent("Sylvan Advocate", playerA);
         Assert.assertTrue(saToken.getAbilities().contains(FlyingAbility.getInstance()));
@@ -46,8 +48,9 @@ public class SoulSeparatorTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, "Sylvan Advocate", 1, 1);
     }
 
-    // Reported bug: Exiled Tree of Perdition with Soul Separator
-    // The token copy when activated reduced the opponent's life total to 13 (tree toughness) instead of 1 (1/1 token)
+    // Reported bug: https://github.com/magefree/mage/issues/2174
+    //      Exiled Tree of Perdition with Soul Separator
+    //      The token copy when activated reduced the opponent's life total to 13 (tree toughness) instead of 1 (1/1 token)
     @Test
     public void testExileTreeOfPerdition() {
         // Soul Separator {3} Artifact
@@ -61,6 +64,8 @@ public class SoulSeparatorTest extends CardTestPlayerBase {
         // {tap}: Exchange target opponent's life total with Tree of Perdition's toughness.
         addCard(Zone.GRAVEYARD, playerA, "Tree of Perdition");
 
+        setStrictChooseMode(true);
+
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{5}");
         addTarget(playerA, "Tree of Perdition");
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Exchange");
@@ -72,8 +77,8 @@ public class SoulSeparatorTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Soul Separator", 1);
         assertExileCount("Tree of Perdition", 1);
         assertPermanentCount(playerA, "Tree of Perdition", 1);
-        assertPermanentCount(playerA, "Zombie", 1);
-        assertPowerToughness(playerA, "Zombie", 0, 13);
+        assertPermanentCount(playerA, "Zombie Token", 1);
+        assertPowerToughness(playerA, "Zombie Token", 0, 13);
 
         Permanent treeToken = getPermanent("Tree of Perdition", playerA);
         Assert.assertTrue(treeToken.getAbilities().contains(FlyingAbility.getInstance()));

@@ -10,6 +10,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.Game;
 import mage.target.common.TargetControlledPermanent;
@@ -27,8 +28,7 @@ public final class FallingTimber extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{G}");
 
         // Kicker-Sacrifice a land.
-        this.addAbility(new KickerAbility(new SacrificeTargetCost(new TargetControlledPermanent(1, 1,
-                new FilterControlledLandPermanent("a land"), true))));
+        this.addAbility(new KickerAbility(new SacrificeTargetCost(StaticFilters.FILTER_LAND)));
 
         // Prevent all combat damage target creature would deal this turn. If Falling Timber was kicked,
         // prevent all combat damage another target creature would deal this turn.
@@ -55,6 +55,6 @@ enum FallingTimberAdjuster implements TargetAdjuster {
     @Override
     public void adjustTargets(Ability ability, Game game) {
         ability.getTargets().clear();
-        ability.addTarget(new TargetCreaturePermanent(KickedCondition.instance.apply(game, ability) ? 2 : 1));
+        ability.addTarget(new TargetCreaturePermanent(KickedCondition.ONCE.apply(game, ability) ? 2 : 1));
     }
 }

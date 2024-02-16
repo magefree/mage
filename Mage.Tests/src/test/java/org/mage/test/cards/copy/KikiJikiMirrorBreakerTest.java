@@ -46,7 +46,7 @@ public class KikiJikiMirrorBreakerTest extends CardTestPlayerBase {
 
         assertLife(playerA, 20);
         assertLife(playerB, 20);
-        assertPermanentCount(playerA, "Elemental", 1); // because the copy was sacrificed
+        assertPermanentCount(playerA, "Elemental Token", 1); // because the copy was sacrificed
         assertPermanentCount(playerA, "Voice of Resurgence", 1);
     }
 
@@ -74,7 +74,7 @@ public class KikiJikiMirrorBreakerTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Voice of Resurgence", 0);
         assertGraveyardCount(playerA, "Voice of Resurgence", 1);
 
-        assertPermanentCount(playerA, "Elemental", 2);
+        assertPermanentCount(playerA, "Elemental Token", 2);
 
     }
 
@@ -134,7 +134,7 @@ public class KikiJikiMirrorBreakerTest extends CardTestPlayerBase {
         // You may have Body Double enter the battlefield as a copy of any creature card in a graveyard.
         addCard(Zone.HAND, playerB, "Body Double", 1); // {4}{U}
 
-        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Body Double");
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Body Double", true);
         setChoice(playerB, "Silvercoat Lion");
 
         activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{T}: Create a token that's a copy of target nonlegendary creature you control, except it has haste. Sacrifice it at the beginning of the next end step.");

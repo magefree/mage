@@ -53,7 +53,7 @@ class GoblinPsychopathEffect extends ReplacementEffectImpl {
         staticText = "flip a coin. If you lose the flip, the next time it would deal combat damage this turn, it deals that damage to you instead";
     }
 
-    public GoblinPsychopathEffect(final GoblinPsychopathEffect effect) {
+    private GoblinPsychopathEffect(final GoblinPsychopathEffect effect) {
         super(effect);
     }
 
@@ -98,7 +98,7 @@ class GoblinPsychopathEffect extends ReplacementEffectImpl {
         }
         // TODO: make this redirect damage from all blockers
         controller.damage(event.getAmount(), source.getSourceId(), source, game);
-        String sourceLogName = game.getObject(source.getSourceId()).getLogName() + ": ";
+        String sourceLogName = game.getObject(source).getLogName() + ": ";
         game.informPlayers(sourceLogName + "Redirected " + event.getAmount() + " damage to " + controller.getLogName());
         this.discard();
         return true;

@@ -18,6 +18,7 @@ public class AllyEntersBattlefieldTriggeredAbility extends TriggeredAbilityImpl 
     public AllyEntersBattlefieldTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
         this.setAbilityWord(AbilityWord.RALLY);
+        setTriggerPhrase("Whenever {this} or another Ally enters the battlefield under your control, ");
     }
 
     public AllyEntersBattlefieldTriggeredAbility(AllyEntersBattlefieldTriggeredAbility ability) {
@@ -35,11 +36,6 @@ public class AllyEntersBattlefieldTriggeredAbility extends TriggeredAbilityImpl 
         return ebe.getTarget().isControlledBy(this.controllerId)
                 && (event.getTargetId().equals(this.getSourceId())
                 || (ebe.getTarget().hasSubtype(SubType.ALLY, game) && !event.getTargetId().equals(this.getSourceId())));
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} or another Ally enters the battlefield under your control, ";
     }
 
     @Override

@@ -1,6 +1,7 @@
 package mage.cards.o;
 
 import mage.abilities.Ability;
+import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.AdamantCondition;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
@@ -84,5 +85,10 @@ class OutmuscleEffect extends OneShotEffect {
         }
         game.getState().processAction(game);
         return creature.fight(permanent, source, game);
+    }
+
+    @Override
+    public Condition getCondition() {
+        return AdamantCondition.GREEN;
     }
 }

@@ -42,12 +42,12 @@ public final class Eureka extends CardImpl {
 
 class EurekaEffect extends OneShotEffect {
 
-    public EurekaEffect() {
+    EurekaEffect() {
         super(Outcome.PutCardInPlay);
         this.staticText = "Starting with you, each player may put a permanent card from their hand onto the battlefield. Repeat this process until no one puts a card onto the battlefield";
     }
 
-    public EurekaEffect(final EurekaEffect effect) {
+    private EurekaEffect(final EurekaEffect effect) {
         super(effect);
     }
 
@@ -75,7 +75,7 @@ class EurekaEffect extends OneShotEffect {
                 if (currentPlayer != null && currentPlayer.canRespond() && game.getState().getPlayersInRange(controller.getId(), game).contains(currentPlayer.getId())) {
 
                     target.clearChosen();
-                    if (target.canChoose(source.getSourceId(), currentPlayer.getId(), game)
+                    if (target.canChoose(currentPlayer.getId(), source, game)
                             && currentPlayer.chooseUse(outcome, "Put permanent from your hand to play?", source, game)) {
                         if (target.chooseTarget(outcome, currentPlayer.getId(), source, game)) {
                             Card card = game.getCard(target.getFirstTarget());

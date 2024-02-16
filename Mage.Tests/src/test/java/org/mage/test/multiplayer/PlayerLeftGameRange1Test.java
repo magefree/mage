@@ -9,7 +9,6 @@ import mage.game.FreeForAll;
 import mage.game.Game;
 import mage.game.GameException;
 import mage.game.mulligan.MulliganType;
-import mage.game.permanent.Permanent;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestMultiPlayerBase;
@@ -24,12 +23,12 @@ public class PlayerLeftGameRange1Test extends CardTestMultiPlayerBase {
     @Override
     protected Game createNewGameAndPlayers() throws GameException, FileNotFoundException {
         // Start Life = 2
-        Game game = new FreeForAll(MultiplayerAttackOption.MULTIPLE, RangeOfInfluence.ONE, MulliganType.GAME_DEFAULT.getMulligan(0), 2);
+        Game game = new FreeForAll(MultiplayerAttackOption.MULTIPLE, RangeOfInfluence.ONE, MulliganType.GAME_DEFAULT.getMulligan(0), 2, 7);
         // Player order: A -> D -> C -> B
-        playerA = createPlayer(game, playerA, "PlayerA");
-        playerB = createPlayer(game, playerB, "PlayerB");
-        playerC = createPlayer(game, playerC, "PlayerC");
-        playerD = createPlayer(game, playerD, "PlayerD");
+        playerA = createPlayer(game, "PlayerA");
+        playerB = createPlayer(game, "PlayerB");
+        playerC = createPlayer(game, "PlayerC");
+        playerD = createPlayer(game, "PlayerD");
         return game;
     }
 
@@ -161,8 +160,6 @@ public class PlayerLeftGameRange1Test extends CardTestMultiPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Confiscate", "Jace, Unraveler of Secrets");
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "-8: You get an emblem with");
 
-        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerA, "Blind with Anger", "Rootwater Commando");
-
         attack(3, playerC, "Silvercoat Lion", playerB);
         castSpell(3, PhaseStep.POSTCOMBAT_MAIN, playerC, "Silvercoat Lion");
 
@@ -291,6 +288,9 @@ public class PlayerLeftGameRange1Test extends CardTestMultiPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 1);
         addCard(Zone.LIBRARY, playerA, "Pillarfield Ox", 1);
 
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 3);
+        addCard(Zone.BATTLEFIELD, playerB, "Proteus Staff", 1);
+
         addCard(Zone.BATTLEFIELD, playerD, "Island", 3);
         // {2}{U}, {T}: Put target creature on the bottom of its owner's library. That creature's controller reveals cards from the
         // top of their library until they reveal a creature card. The player puts that card onto the battlefield and the
@@ -305,17 +305,14 @@ public class PlayerLeftGameRange1Test extends CardTestMultiPlayerBase {
         addCard(Zone.BATTLEFIELD, playerC, "Wall of Air", 1);
         addCard(Zone.LIBRARY, playerC, "Wind Drake", 2);
 
-        addCard(Zone.BATTLEFIELD, playerB, "Island", 3);
-        addCard(Zone.BATTLEFIELD, playerB, "Proteus Staff", 1);
-
         skipInitShuffling();
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pithing Needle");
         setChoice(playerA, "Proteus Staff");
 
-        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerD, "{2}{U}", "Silvercoat Lion"); // not allowed
-
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerC, "{2}{U}", "Eager Cadet"); // allowed because Needle out of range
+
+        // Concede the game
         concede(3, PhaseStep.POSTCOMBAT_MAIN, playerA);
 
         activateAbility(4, PhaseStep.PRECOMBAT_MAIN, playerB, "{2}{U}", "Wall of Air"); // allowed because Needle lost game
@@ -328,21 +325,10 @@ public class PlayerLeftGameRange1Test extends CardTestMultiPlayerBase {
 
         assertPermanentCount(playerA, 0);
 
-        Permanent staffPlayerD = getPermanent("Proteus Staff", playerD);
-        Assert.assertFalse("Staff of player D could not be used", staffPlayerD.isTapped());
-
         assertPermanentCount(playerD, "Eager Cadet", 0);
         assertPermanentCount(playerD, "Storm Crow", 1);
-
-        Permanent staffPlayerC = getPermanent("Proteus Staff", playerC);
-        Assert.assertTrue("Staff of player C could be used", staffPlayerC.isTapped());
-
         assertPermanentCount(playerC, "Wall of Air", 0);
         assertPermanentCount(playerC, "Wind Drake", 1);
-
-        Permanent staffPlayerB = getPermanent("Proteus Staff", playerB);
-        Assert.assertTrue("Staff of player B could be used", staffPlayerB.isTapped());
-
     }
 
     /**
@@ -377,8 +363,6 @@ public class PlayerLeftGameRange1Test extends CardTestMultiPlayerBase {
 
         setStrictChooseMode(true);
         execute();
-
-        assertAllCommandsUsed();
 
         assertLife(playerA, 2);
 

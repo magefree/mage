@@ -58,7 +58,7 @@ class KnowledgeVaultExileEffect extends OneShotEffect {
         this.staticText = "exile the top card of your library face down";
     }
 
-    KnowledgeVaultExileEffect(final KnowledgeVaultExileEffect effect) {
+    private KnowledgeVaultExileEffect(final KnowledgeVaultExileEffect effect) {
         super(effect);
     }
 
@@ -92,7 +92,7 @@ class KnowledgeVaultReturnEffect extends OneShotEffect {
         this.staticText = "Sacrifice {this}. If you do, discard your hand, then put all cards exiled with {this} into their owners' hands";
     }
 
-    KnowledgeVaultReturnEffect(final KnowledgeVaultReturnEffect effect) {
+    private KnowledgeVaultReturnEffect(final KnowledgeVaultReturnEffect effect) {
         super(effect);
     }
 

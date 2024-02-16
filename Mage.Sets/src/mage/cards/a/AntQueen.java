@@ -30,7 +30,7 @@ public final class AntQueen extends CardImpl {
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(insectToken), new ManaCostsImpl("{1}{G}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(insectToken), new ManaCostsImpl<>("{1}{G}")));
     }
 
     private AntQueen(final AntQueen card) {

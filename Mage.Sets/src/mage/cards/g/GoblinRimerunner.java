@@ -27,7 +27,7 @@ public final class GoblinRimerunner extends CardImpl {
     public GoblinRimerunner(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
 
-        this.addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
         this.subtype.add(SubType.GOBLIN);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(2);
@@ -39,7 +39,7 @@ public final class GoblinRimerunner extends CardImpl {
         this.addAbility(ability);
 
         // {snow}: Goblin Rimerunner gains haste until end of turn.
-        this.addAbility(new SimpleActivatedAbility(new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{S}")));
+        this.addAbility(new SimpleActivatedAbility(new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{S}")));
     }
 
     private GoblinRimerunner(final GoblinRimerunner card) {

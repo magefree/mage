@@ -49,12 +49,12 @@ public final class Equipoise extends CardImpl {
 
 class EquipoiseEffect extends OneShotEffect {
 
-    public EquipoiseEffect() {
+    EquipoiseEffect() {
         super(Outcome.Benefit);
         this.staticText = "for each land target player controls in excess of the number you control, choose a land they control, then the chosen permanents phase out. Repeat this process for artifacts and creatures";
     }
 
-    public EquipoiseEffect(final EquipoiseEffect effect) {
+    private EquipoiseEffect(final EquipoiseEffect effect) {
         super(effect);
     }
 
@@ -81,8 +81,8 @@ class EquipoiseEffect extends OneShotEffect {
     private void phaseOutCardType(Player controller, Player targetPlayer, CardType cardType, Ability source, Game game) {
         FilterPermanent filter = new FilterControlledPermanent();
         filter.add(cardType.getPredicate());
-        int numberController = game.getBattlefield().count(filter, source.getSourceId(), controller.getId(), game);
-        int numberTargetPlayer = game.getBattlefield().count(filter, source.getSourceId(), targetPlayer.getId(), game);
+        int numberController = game.getBattlefield().count(filter, controller.getId(), source, game);
+        int numberTargetPlayer = game.getBattlefield().count(filter, targetPlayer.getId(), source, game);
         int excess = numberTargetPlayer - numberController;
         if (excess > 0) {
             FilterPermanent filterChoose = new FilterPermanent(cardType.toString().toLowerCase(Locale.ENGLISH) + (excess > 1 ? "s" : "") + " of target player");

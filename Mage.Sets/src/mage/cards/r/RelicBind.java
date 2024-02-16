@@ -40,7 +40,7 @@ public final class RelicBind extends CardImpl {
         TargetPermanent auraTarget = new TargetPermanent(filter);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         
         // Whenever enchanted artifact becomes tapped, choose one
@@ -48,8 +48,7 @@ public final class RelicBind extends CardImpl {
         Ability ability2 = new BecomesTappedAttachedTriggeredAbility(new DamageTargetEffect(1), "enchanted artifact");
         ability2.addTarget(new TargetPlayerOrPlaneswalker());
         // — Target player gains 1 life.
-        Mode mode = new Mode();
-        mode.addEffect(new GainLifeTargetEffect(1));
+        Mode mode = new Mode(new GainLifeTargetEffect(1));
         mode.addTarget(new TargetPlayer());
         ability2.addMode(mode);
 

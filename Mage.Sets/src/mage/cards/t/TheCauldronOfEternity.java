@@ -31,7 +31,7 @@ public final class TheCauldronOfEternity extends CardImpl {
     public TheCauldronOfEternity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{10}{B}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // This spell costs {2} less to cast for each creature card in your graveyard.
         DynamicValue xValue = new CardsInControllerGraveyardCount(StaticFilters.FILTER_CARD_CREATURE);
@@ -48,7 +48,7 @@ public final class TheCauldronOfEternity extends CardImpl {
 
         // {2}{B}, {T}, Pay 2 life: Return target creature card from your graveyard to the battlefield. Activate this ability only any time you could cast a sorcery.
         ability = new ActivateAsSorceryActivatedAbility(
-                Zone.BATTLEFIELD, new ReturnFromGraveyardToBattlefieldTargetEffect(), new ManaCostsImpl("{2}{B}")
+                Zone.BATTLEFIELD, new ReturnFromGraveyardToBattlefieldTargetEffect(), new ManaCostsImpl<>("{2}{B}")
         );
         ability.addCost(new TapSourceCost());
         ability.addCost(new PayLifeCost(2));

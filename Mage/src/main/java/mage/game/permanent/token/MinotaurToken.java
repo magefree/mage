@@ -2,6 +2,7 @@ package mage.game.permanent.token;
 
 import mage.MageInt;
 import mage.ObjectColor;
+import mage.abilities.keyword.HasteAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
@@ -10,8 +11,17 @@ import mage.constants.SubType;
  */
 public final class MinotaurToken extends TokenImpl {
 
+    public MinotaurToken(boolean withHaste) {
+        this();
+
+        if (withHaste) {
+            addAbility(HasteAbility.getInstance());
+            this.description = "2/3 red Minotaur creature tokens with haste";
+        }
+    }
+
     public MinotaurToken() {
-        super("Minotaur", "2/3 red Minotaur creature token");
+        super("Minotaur Token", "2/3 red Minotaur creature token");
         cardType.add(CardType.CREATURE);
         color.setColor(ObjectColor.RED);
         subtype.add(SubType.MINOTAUR);

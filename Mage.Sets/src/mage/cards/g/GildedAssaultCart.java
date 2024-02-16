@@ -13,6 +13,7 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetSacrifice;
 
 import java.util.UUID;
 
@@ -41,7 +42,7 @@ public final class GildedAssaultCart extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(
                 Zone.GRAVEYARD,
                 new ReturnSourceFromGraveyardToHandEffect(),
-                new SacrificeTargetCost(new TargetControlledPermanent(2, filter))
+                new SacrificeTargetCost(2, filter)
         ));
     }
 

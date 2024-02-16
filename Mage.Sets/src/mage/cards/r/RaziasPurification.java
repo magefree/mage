@@ -43,12 +43,12 @@ public final class RaziasPurification extends CardImpl {
 
 class RaziasPurificationEffect extends OneShotEffect {
 
-    public RaziasPurificationEffect() {
+    RaziasPurificationEffect() {
         super(Outcome.DestroyPermanent);
         staticText = "Each player chooses three permanents they control, then sacrifices the rest";
     }
 
-    public RaziasPurificationEffect(RaziasPurificationEffect effect) {
+    private RaziasPurificationEffect(final RaziasPurificationEffect effect) {
         super(effect);
     }
 
@@ -61,9 +61,9 @@ class RaziasPurificationEffect extends OneShotEffect {
 
             Target target1 = new TargetControlledPermanent(1, 1, new FilterControlledPermanent(), true);
 
-            if (player != null && target1.canChoose(source.getSourceId(), player.getId(), game)) {
+            if (player != null && target1.canChoose(player.getId(), source, game)) {
                 int chosenPermanents = 0;
-                while (player.canRespond() && !target1.isChosen() && target1.canChoose(source.getSourceId(), player.getId(), game) && chosenPermanents < 3) {
+                while (player.canRespond() && !target1.isChosen() && target1.canChoose(player.getId(), source, game) && chosenPermanents < 3) {
                     player.chooseTarget(Outcome.Benefit, target1, source, game);
                     for (UUID targetId : target1.getTargets()) {
                         Permanent p = game.getPermanent(targetId);

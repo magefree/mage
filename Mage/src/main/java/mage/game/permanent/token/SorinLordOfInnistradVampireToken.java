@@ -1,19 +1,17 @@
-
 package mage.game.permanent.token;
 
-import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.LifelinkAbility;
+import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
- *
  * @author spjspj
  */
 public final class SorinLordOfInnistradVampireToken extends TokenImpl {
 
     public SorinLordOfInnistradVampireToken() {
-        super("Vampire", "1/1 black Vampire creature token with lifelink");
+        super("Vampire Token", "1/1 black Vampire creature token with lifelink");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add(SubType.VAMPIRE);
@@ -22,7 +20,7 @@ public final class SorinLordOfInnistradVampireToken extends TokenImpl {
         addAbility(LifelinkAbility.getInstance());
     }
 
-    public SorinLordOfInnistradVampireToken(final SorinLordOfInnistradVampireToken token) {
+    private SorinLordOfInnistradVampireToken(final SorinLordOfInnistradVampireToken token) {
         super(token);
     }
 

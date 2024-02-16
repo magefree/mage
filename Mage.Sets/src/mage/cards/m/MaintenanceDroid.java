@@ -2,6 +2,7 @@
 package mage.cards.m;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
@@ -65,7 +66,7 @@ public final class MaintenanceDroid extends CardImpl {
 
 class MaintenanceDroidEffect extends OneShotEffect {
 
-    private static final Set<String> choices = new HashSet<>();
+    private static final Set<String> choices = new LinkedHashSet<>();
 
     static {
         choices.add("Remove a repair counter");
@@ -77,7 +78,7 @@ class MaintenanceDroidEffect extends OneShotEffect {
         staticText = "Choose target card you own with a repair counter on it. You may remove a repair counter from it or put another repair counter on it";
     }
 
-    public MaintenanceDroidEffect(final MaintenanceDroidEffect effect) {
+    private MaintenanceDroidEffect(final MaintenanceDroidEffect effect) {
         super(effect);
     }
 

@@ -47,7 +47,7 @@ public final class OsgirTheReconstructor extends CardImpl {
 
     public OsgirTheReconstructor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{W}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GIANT);
         this.subtype.add(SubType.ARTIFICER);
         this.power = new MageInt(4);
@@ -59,13 +59,13 @@ public final class OsgirTheReconstructor extends CardImpl {
         // {1}, Sacrifice an artifact: Target creature you control gets +2/+0 until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(2, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{1}"));
         ability.addTarget(new TargetControlledCreaturePermanent());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_AN)));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_AN));
         this.addAbility(ability);
 
         // {X},{T}, Exile an artifact with mana value X from your graveyard: Create two tokens that are copies of the exiled card. Activate only as
         Ability copyAbility = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD,
                 new OsgirTheReconstructorCreateArtifactTokensEffect(),
-                new ManaCostsImpl("{X}"));
+                new ManaCostsImpl<>("{X}"));
         copyAbility.addCost(new TapSourceCost());
         copyAbility.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(), "Exile an artifact card with mana value X from your graveyard"));
 
@@ -106,12 +106,12 @@ enum OsgirTheReconstructorCostAdjuster implements CostAdjuster {
 
 class OsgirTheReconstructorCreateArtifactTokensEffect extends OneShotEffect {
 
-    public OsgirTheReconstructorCreateArtifactTokensEffect() {
+    OsgirTheReconstructorCreateArtifactTokensEffect() {
         super(Outcome.Benefit);
         this.staticText = "Create two tokens that are copies of the exiled card.";
     }
 
-    public OsgirTheReconstructorCreateArtifactTokensEffect(final OsgirTheReconstructorCreateArtifactTokensEffect effect)  {
+    private OsgirTheReconstructorCreateArtifactTokensEffect(final OsgirTheReconstructorCreateArtifactTokensEffect effect)  {
         super(effect);
     }
 

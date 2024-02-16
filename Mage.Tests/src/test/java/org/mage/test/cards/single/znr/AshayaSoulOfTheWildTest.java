@@ -31,8 +31,6 @@ public class AshayaSoulOfTheWildTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertAllCommandsUsed();
-
         assertType(ashaya, CardType.LAND, SubType.FOREST);
         assertType(ashaya, CardType.CREATURE, SubType.ELEMENTAL);
         assertAbility(playerA, ashaya, new GreenManaAbility(), true);
@@ -56,8 +54,6 @@ public class AshayaSoulOfTheWildTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-
-        assertAllCommandsUsed();
 
         // Ashaya loses all abilities and types and becomes a 3/3 Elk creature
         assertType(ashaya, CardType.LAND, false);
@@ -83,7 +79,6 @@ public class AshayaSoulOfTheWildTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, shapeshifter);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertType(ashaya, CardType.LAND, SubType.FOREST);
         assertType(ashaya, CardType.CREATURE, SubType.ELEMENTAL);

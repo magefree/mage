@@ -21,7 +21,7 @@ public final class TreasureTrove extends CardImpl {
 
 
         // {2}{U}{U}: Draw a card.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{2}{U}{U}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{2}{U}{U}")));
     }
 
     private TreasureTrove(final TreasureTrove card) {

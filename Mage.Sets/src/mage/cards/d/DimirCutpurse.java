@@ -47,7 +47,7 @@ class DimirCutpurseEffect extends OneShotEffect {
         staticText = "that player discards a card and you draw a card";
     }
 
-    DimirCutpurseEffect(final DimirCutpurseEffect effect) {
+    private DimirCutpurseEffect(final DimirCutpurseEffect effect) {
         super(effect);
     }
 

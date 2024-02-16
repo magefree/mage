@@ -33,7 +33,7 @@ public final class VolitionReins extends CardImpl {
         TargetPermanent auraTarget = new TargetPermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.GainControl));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // When Volition Reins enters the battlefield, if enchanted permanent is tapped, untap it.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new UntapVolitionReinsEffect()));
@@ -57,7 +57,7 @@ public final class VolitionReins extends CardImpl {
             staticText = "if enchanted permanent is tapped, untap it";
         }
 
-        public UntapVolitionReinsEffect(final UntapVolitionReinsEffect effect) {
+        private UntapVolitionReinsEffect(final UntapVolitionReinsEffect effect) {
             super(effect);
         }
 

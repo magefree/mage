@@ -43,7 +43,7 @@ class DissipationFieldAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new ReturnToHandTargetEffect());
     }
 
-    public DissipationFieldAbility(DissipationFieldAbility effect) {
+    private DissipationFieldAbility(final DissipationFieldAbility effect) {
         super(effect);
     }
 

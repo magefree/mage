@@ -48,7 +48,7 @@ public final class FiremaneAngel extends CardImpl {
         this.addAbility(ability);
         // {6}{R}{R}{W}{W}: Return Firemane Angel from your graveyard to the battlefield. Activate this ability only during your upkeep.
         this.addAbility(new ConditionalActivatedAbility(Zone.GRAVEYARD,
-                new ReturnSourceFromGraveyardToBattlefieldEffect(false, false), new ManaCostsImpl("{6}{R}{R}{W}{W}"), new IsStepCondition(PhaseStep.UPKEEP), null));
+                new ReturnSourceFromGraveyardToBattlefieldEffect(false, false), new ManaCostsImpl<>("{6}{R}{R}{W}{W}"), new IsStepCondition(PhaseStep.UPKEEP), null));
     }
 
     private FiremaneAngel(final FiremaneAngel card) {

@@ -31,9 +31,7 @@ public final class BloodsoakedAltar extends CardImpl {
         );
         ability.addCost(new PayLifeCost(2));
         ability.addCost(new DiscardCardCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(
-                StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT
-        )));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
         this.addAbility(ability);
     }
 

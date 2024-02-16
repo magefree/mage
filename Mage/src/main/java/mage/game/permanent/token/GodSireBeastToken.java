@@ -6,13 +6,12 @@ import mage.constants.SubType;
 import mage.MageInt;
 
 /**
- *
  * @author spjspj
  */
 public final class GodSireBeastToken extends TokenImpl {
 
     public GodSireBeastToken() {
-        super("Beast", "8/8 Beast creature token that's red, green, and white");
+        super("Beast Token", "8/8 Beast creature token that's red, green, and white");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         color.setWhite(true);
@@ -22,7 +21,7 @@ public final class GodSireBeastToken extends TokenImpl {
         toughness = new MageInt(8);
     }
 
-    public GodSireBeastToken(final GodSireBeastToken token) {
+    private GodSireBeastToken(final GodSireBeastToken token) {
         super(token);
     }
 

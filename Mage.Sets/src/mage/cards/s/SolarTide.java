@@ -10,6 +10,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
@@ -36,12 +37,11 @@ public final class SolarTide extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyAllEffect(filter1));
         
         // or destroy all creatures with power 3 or greater.
-        Mode mode = new Mode();
-        mode.addEffect(new DestroyAllEffect(filter2));
+        Mode mode = new Mode(new DestroyAllEffect(filter2));
         this.getSpellAbility().getModes().addMode(mode);
         
         // Entwine-Sacrifice two lands.
-        this.addAbility(new EntwineAbility(new SacrificeTargetCost(new TargetControlledPermanent(2, 2, new FilterControlledLandPermanent("two lands"), true))));
+        this.addAbility(new EntwineAbility(new SacrificeTargetCost(2, StaticFilters.FILTER_LANDS)));
     }
 
     private SolarTide(final SolarTide card) {

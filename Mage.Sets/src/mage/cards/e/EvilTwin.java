@@ -66,7 +66,7 @@ class EvilTwinCopyApplier extends CopyApplier {
 
     @Override
     public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{U}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl<>("{U}{B}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filter));
         blueprint.getAbilities().add(ability);
@@ -80,7 +80,7 @@ class EvilTwinPredicate implements ObjectSourcePlayerPredicate<Permanent> {
     @Override
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
         Permanent permanent = input.getObject();
-        Permanent twin = game.getPermanent(input.getSourceId());
+        Permanent twin = input.getSource().getSourcePermanentIfItStillExists(game);
         return CardUtil.haveSameNames(permanent, twin);
     }
 

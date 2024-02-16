@@ -40,7 +40,7 @@ public final class RatColony extends CardImpl {
         // Rat Colony gets +1/+0 for each other Rat you control.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new BoostSourceEffect(new PermanentsOnBattlefieldCount(filter),
-                        StaticValue.get(0), Duration.WhileOnBattlefield, false)));
+                        StaticValue.get(0), Duration.WhileOnBattlefield)));
 
         // A deck can have any number of cards named Rat Colony.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("A deck can have any number of cards named Rat Colony.")));

@@ -7,21 +7,21 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- * Make sure that AI won't equip the same creature equip already attached to.
+ * AI: make sure that AI won't equip the same creature equip already attached to.
  *
  * @author ayratn
  */
 public class EquipOptimizer extends BaseTreeOptimizer {
 
     @Override
-    public void filter(Game game, List<Ability> actions) {
+    public void filter(Game game, List<Ability> actions, List<Ability> actionsToRemove) {
         for (Ability ability : actions) {
             if (ability instanceof EquipAbility) {
                 Permanent permanent = game.getPermanent(ability.getFirstTarget());
                 if (permanent != null) {
                     // check that equipment is not already attached to {this}
                     if (permanent.getAttachments().contains(ability.getSourceId())) {
-                        removeAbility(ability);
+                        actionsToRemove.add(ability);
                     }
                 }
             }

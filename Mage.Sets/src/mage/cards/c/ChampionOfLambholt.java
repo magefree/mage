@@ -2,7 +2,7 @@ package mage.cards.c;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -10,8 +10,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -21,13 +20,6 @@ import java.util.UUID;
  * @author noxx
  */
 public final class ChampionOfLambholt extends CardImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-        filter.add(TargetController.YOU.getControllerPredicate());
-    }
 
     public ChampionOfLambholt(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
@@ -41,8 +33,9 @@ public final class ChampionOfLambholt extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ChampionOfLambholtEffect()));
 
         // Whenever another creature enters the battlefield under your control, put a +1/+1 counter on Champion of Lambholt.
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), filter, false, null, true));
-
+        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD,
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
+                StaticFilters.FILTER_ANOTHER_CREATURE, false));
     }
 
     private ChampionOfLambholt(final ChampionOfLambholt card) {
@@ -62,7 +55,7 @@ class ChampionOfLambholtEffect extends RestrictionEffect {
         staticText = "Creatures with power less than {this}'s power can't block creatures you control";
     }
 
-    ChampionOfLambholtEffect(final ChampionOfLambholtEffect effect) {
+    private ChampionOfLambholtEffect(final ChampionOfLambholtEffect effect) {
         super(effect);
     }
 

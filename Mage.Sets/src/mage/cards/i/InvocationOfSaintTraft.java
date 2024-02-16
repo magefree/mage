@@ -37,7 +37,7 @@ public final class InvocationOfSaintTraft extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Enchanted creature has "Whenever this creature attacks, create a 4/4 white Angel creature token with flying tapped
@@ -63,7 +63,7 @@ class InvocationOfSaintTraftEffect extends OneShotEffect {
         staticText = "create a 4/4 white Angel creature token with flying tapped and attacking. Exile that token at end of combat";
     }
 
-    InvocationOfSaintTraftEffect(final InvocationOfSaintTraftEffect effect) {
+    private InvocationOfSaintTraftEffect(final InvocationOfSaintTraftEffect effect) {
         super(effect);
     }
 

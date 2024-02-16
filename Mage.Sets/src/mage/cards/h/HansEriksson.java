@@ -32,7 +32,7 @@ public final class HansEriksson extends CardImpl {
     public HansEriksson(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SCOUT);
         this.power = new MageInt(1);
@@ -96,7 +96,7 @@ class HansErikssonEffect extends OneShotEffect {
         UUID defenderId;
         if (game.getBattlefield().count(
                 StaticFilters.FILTER_CONTROLLED_PERMANENT_PLANESWALKER,
-                source.getSourceId(), defendingPlayerId, game
+                defendingPlayerId, source, game
         ) < 1) {
             defenderId = defendingPlayerId;
         } else {
@@ -106,8 +106,8 @@ class HansErikssonEffect extends OneShotEffect {
             filter.getPlayerFilter().add(new PlayerIdPredicate(defendingPlayerId));
             filter.getPermanentFilter().add(new ControllerIdPredicate(defendingPlayerId));
             TargetPlayerOrPlaneswalker target = new TargetPlayerOrPlaneswalker(filter);
-            target.setNotTarget(true);
-            player.choose(outcome, target, source.getSourceId(), game);
+            target.withNotTarget(true);
+            player.choose(outcome, target, source, game);
             defenderId = target.getFirstTarget();
         }
         if (defenderId != null) {

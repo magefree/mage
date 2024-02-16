@@ -4,7 +4,6 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -28,7 +27,7 @@ public class ChooseSecretOpponentEffect extends OneShotEffect {
         staticText = "secretly choose an opponent";
     }
 
-    public ChooseSecretOpponentEffect(final ChooseSecretOpponentEffect effect) {
+    protected ChooseSecretOpponentEffect(final ChooseSecretOpponentEffect effect) {
         super(effect);
     }
 
@@ -37,14 +36,14 @@ public class ChooseSecretOpponentEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject mageObject = game.getPermanentEntering(source.getSourceId());
         if (mageObject == null) {
-            mageObject = game.getObject(source.getSourceId());
+            mageObject = game.getObject(source);
         }
         if (controller == null || mageObject == null) {
             return false;
         }
         TargetOpponent targetOpponent = new TargetOpponent(true);
         targetOpponent.setTargetName("opponent (secretly)");
-        controller.choose(outcome, targetOpponent, source.getSourceId(), game);
+        controller.choose(outcome, targetOpponent, source, game);
         if (targetOpponent.getFirstTarget() == null) {
             return false;
         }
@@ -82,7 +81,7 @@ public class ChooseSecretOpponentEffect extends OneShotEffect {
             return "" + source.getSourceId() + '_' + (game.getPermanentEntering(source.getSourceId()).getZoneChangeCounter(game) + 1);
         }
         if (game.getPermanentOrLKIBattlefield(source.getSourceId()) != null) { // Stalking Leonin
-        return "" + source.getSourceId() + '_' + (game.getPermanentOrLKIBattlefield(source.getSourceId()).getZoneChangeCounter(game));
+            return "" + source.getSourceId() + '_' + (game.getPermanentOrLKIBattlefield(source.getSourceId()).getZoneChangeCounter(game));
         }
         return "Does not exist";
     }

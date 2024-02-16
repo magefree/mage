@@ -31,7 +31,7 @@ public final class WarpArtifact extends CardImpl {
         TargetPermanent auraTarget = new TargetArtifactPermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
         // At the beginning of the upkeep of enchanted artifact's controller, Warp Artifact deals 1 damage to that player.
         Effect effect = new DamageTargetEffect(1);
         effect.setText("{this} deals 1 damage to that player");

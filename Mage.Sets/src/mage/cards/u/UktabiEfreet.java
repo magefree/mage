@@ -24,7 +24,7 @@ public final class UktabiEfreet extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Cumulative upkeep {G}
-        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{G}")));
+        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{G}")));
     }
 
     private UktabiEfreet(final UktabiEfreet card) {

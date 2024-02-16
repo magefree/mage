@@ -4,7 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.DrawCardControllerTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.DrawDiscardControllerEffect;
-import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -24,7 +24,7 @@ public final class TeferisTutelage extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawDiscardControllerEffect(1, 1)));
 
         // Whenever you draw a card, target opponent mills two cards.
-        Ability ability = new DrawCardControllerTriggeredAbility(new PutLibraryIntoGraveTargetEffect(2), false);
+        Ability ability = new DrawCardControllerTriggeredAbility(new MillCardsTargetEffect(2), false);
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }

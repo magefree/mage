@@ -24,7 +24,7 @@ public final class LonelySandbar extends CardImpl {
         // {tap}: Add {U}.
         this.addAbility(new BlueManaAbility());
         // Cycling {U}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{U}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{U}")));
     }
 
     private LonelySandbar(final LonelySandbar card) {

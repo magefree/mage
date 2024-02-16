@@ -29,7 +29,7 @@ public final class DivineCongregation extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
 
         // Suspend 5-{1}{W}
-        this.addAbility(new SuspendAbility(5, new ManaCostsImpl("{1}{W}"), this));
+        this.addAbility(new SuspendAbility(5, new ManaCostsImpl<>("{1}{W}"), this));
     }
 
     private DivineCongregation(final DivineCongregation card) {

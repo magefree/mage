@@ -1,4 +1,3 @@
-
 package mage.cards.w;
 
 import java.util.UUID;
@@ -29,7 +28,7 @@ import mage.target.TargetPermanent;
  */
 public final class WillowPriestess extends CardImpl {
     
-    private static final FilterPermanentCard filter = new FilterPermanentCard("Faerie");
+    private static final FilterPermanentCard filter = new FilterPermanentCard("a Faerie permanent card");
     private static final FilterCreaturePermanent greenCreature = new FilterCreaturePermanent("green creature");
 
     static {
@@ -51,7 +50,7 @@ public final class WillowPriestess extends CardImpl {
         
         // {2}{G}: Target green creature gains protection from black until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new GainAbilityTargetEffect(ProtectionAbility.from(ObjectColor.BLACK), Duration.EndOfTurn), new ManaCostsImpl("{2}{G}"));
+                new GainAbilityTargetEffect(ProtectionAbility.from(ObjectColor.BLACK), Duration.EndOfTurn), new ManaCostsImpl<>("{2}{G}"));
         Target target = new TargetPermanent(greenCreature);
         ability.addTarget(target);
         this.addAbility(ability);

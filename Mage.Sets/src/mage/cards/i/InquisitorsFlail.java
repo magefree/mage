@@ -16,6 +16,7 @@ import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
 
 import java.util.UUID;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  * @author nantuko
@@ -31,7 +32,7 @@ public final class InquisitorsFlail extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new InquisitorsFlailEffect()));
 
         // Equip {2}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2), new TargetControlledCreaturePermanent(), false));
     }
 
     private InquisitorsFlail(final InquisitorsFlail card) {
@@ -46,13 +47,13 @@ public final class InquisitorsFlail extends CardImpl {
 
 class InquisitorsFlailEffect extends ReplacementEffectImpl {
 
-    public InquisitorsFlailEffect() {
+    InquisitorsFlailEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Damage);
         staticText = "If equipped creature would deal combat damage, it deals double that damage instead. \n"
                 + "If another creature would deal combat damage to equipped creature, it deals double that damage to equipped creature instead";
     }
 
-    public InquisitorsFlailEffect(final InquisitorsFlailEffect effect) {
+    private InquisitorsFlailEffect(final InquisitorsFlailEffect effect) {
         super(effect);
     }
 
@@ -81,11 +82,6 @@ class InquisitorsFlailEffect extends ReplacementEffectImpl {
             }
         }
         return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

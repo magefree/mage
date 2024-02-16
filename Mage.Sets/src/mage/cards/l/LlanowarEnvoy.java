@@ -26,7 +26,7 @@ public final class LlanowarEnvoy extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {1}{G}: Add one mana of any color.
-        Ability ability = new AnyColorManaAbility(new ManaCostsImpl("{1}{G}"));
+        Ability ability = new AnyColorManaAbility(new ManaCostsImpl<>("{1}{G}"));
         this.addAbility(ability);
     }
 

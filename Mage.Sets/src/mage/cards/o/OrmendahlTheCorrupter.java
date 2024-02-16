@@ -25,7 +25,7 @@ public final class OrmendahlTheCorrupter extends CardImpl {
     public OrmendahlTheCorrupter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DEMON);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
@@ -44,9 +44,7 @@ public final class OrmendahlTheCorrupter extends CardImpl {
         // Sacrifice another creature: Draw a card.
         this.addAbility(new SimpleActivatedAbility(
                 new DrawCardSourceControllerEffect(1),
-                new SacrificeTargetCost(new TargetControlledPermanent(
-                        StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE
-                ))
+                new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE)
         ));
     }
 

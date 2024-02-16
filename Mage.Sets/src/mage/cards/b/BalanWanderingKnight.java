@@ -29,7 +29,7 @@ public final class BalanWanderingKnight extends CardImpl {
 
     public BalanWanderingKnight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.CAT, SubType.KNIGHT);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
@@ -42,7 +42,7 @@ public final class BalanWanderingKnight extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
 
         // {1}{W}: Attach all Equipment you control to Balan.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BalanWanderingKnightEffect(), new ManaCostsImpl("{1}{W}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BalanWanderingKnightEffect(), new ManaCostsImpl<>("{1}{W}")));
     }
 
     private BalanWanderingKnight(final BalanWanderingKnight card) {
@@ -61,7 +61,7 @@ public final class BalanWanderingKnight extends CardImpl {
             this.staticText = "Attach all Equipment you control to {this}.";
         }
 
-        public BalanWanderingKnightEffect(final BalanWanderingKnightEffect effect) {
+        private BalanWanderingKnightEffect(final BalanWanderingKnightEffect effect) {
             super(effect);
         }
 

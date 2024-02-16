@@ -36,7 +36,7 @@ public final class AkiriFearlessVoyager extends CardImpl {
     public AkiriFearlessVoyager(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.KOR);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(3);
@@ -142,11 +142,11 @@ class AkiriFearlessVoyagerEffect extends OneShotEffect {
             return false;
         }
         TargetPermanent target = new TargetPermanent(1, 1, filter, true);
-        if (!target.canChoose(source.getSourceId(), source.getControllerId(), game)
+        if (!target.canChoose(source.getControllerId(), source, game)
                 || !player.chooseUse(outcome, "Unnattach an equipment from a creature you control?", source, game)) {
             return false;
         }
-        player.choose(outcome, target, source.getSourceId(), game);
+        player.choose(outcome, target, source, game);
         Permanent equipment = game.getPermanent(target.getFirstTarget());
         if (equipment == null) {
             return false;

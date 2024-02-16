@@ -65,7 +65,7 @@ class BitterheartWitchEffect extends OneShotEffect {
         staticText = "you may search your library for a Curse card, put it onto the battlefield attached to target player, then shuffle";
     }
 
-    public BitterheartWitchEffect(final BitterheartWitchEffect effect) {
+    private BitterheartWitchEffect(final BitterheartWitchEffect effect) {
         super(effect);
     }
 

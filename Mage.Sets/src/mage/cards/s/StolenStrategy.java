@@ -38,14 +38,14 @@ public final class StolenStrategy extends CardImpl {
 
 class StolenStrategyEffect extends OneShotEffect {
 
-    public StolenStrategyEffect() {
+    StolenStrategyEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "exile the top card of each opponent's library. "
                 + "Until end of turn, you may cast nonland cards from among those exiled cards, "
                 + "and you may spend mana as though it were mana of any color to cast those spells";
     }
 
-    public StolenStrategyEffect(final StolenStrategyEffect effect) {
+    private StolenStrategyEffect(final StolenStrategyEffect effect) {
         super(effect);
     }
 
@@ -68,7 +68,7 @@ class StolenStrategyEffect extends OneShotEffect {
             if (damagedPlayer == null) {
                 continue;
             }
-            MageObject sourceObject = game.getObject(source.getSourceId());
+            MageObject sourceObject = game.getObject(source);
             UUID exileId = CardUtil.getCardExileZoneId(game, source);
             Card card = damagedPlayer.getLibrary().getFromTop(game);
             if (card != null && sourceObject != null) {

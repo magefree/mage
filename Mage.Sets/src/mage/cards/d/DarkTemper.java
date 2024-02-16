@@ -42,12 +42,12 @@ public final class DarkTemper extends CardImpl {
 
 class DarkTemperEffect extends OneShotEffect {
 
-    public DarkTemperEffect() {
+    DarkTemperEffect() {
         super(Outcome.Damage);
         this.staticText = "{this} deals 2 damage to target creature. If you control a black permanent, destroy the creature instead";
     }
 
-    public DarkTemperEffect(final DarkTemperEffect effect) {
+    private DarkTemperEffect(final DarkTemperEffect effect) {
         super(effect);
     }
 

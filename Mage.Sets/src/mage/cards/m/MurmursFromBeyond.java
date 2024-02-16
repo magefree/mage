@@ -45,12 +45,12 @@ public final class MurmursFromBeyond extends CardImpl {
 
 class MurmursFromBeyondEffect extends OneShotEffect {
 
-    public MurmursFromBeyondEffect() {
+    MurmursFromBeyondEffect() {
         super(Outcome.Benefit);
         this.staticText = "Reveal the top three cards of your library. An opponent chooses one of them. Put that card into your graveyard and the rest into your hand";
     }
 
-    public MurmursFromBeyondEffect(final MurmursFromBeyondEffect effect) {
+    private MurmursFromBeyondEffect(final MurmursFromBeyondEffect effect) {
         super(effect);
     }
 
@@ -62,7 +62,7 @@ class MurmursFromBeyondEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (sourceObject != null && controller != null) {
             Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, 3));
             if (!cards.isEmpty()) {

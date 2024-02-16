@@ -11,6 +11,7 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetAttackingCreature;
@@ -26,7 +27,7 @@ public final class SandstoneDeadfall extends CardImpl {
 
         // {tap}, Sacrifice two lands and Sandstone Deadfall: Destroy target attacking creature.
         Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect(), new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(2, 2, new FilterControlledLandPermanent("lands"), true)));
+        ability.addCost(new SacrificeTargetCost(2, StaticFilters.FILTER_LANDS));
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetAttackingCreature());
         this.addAbility(ability);

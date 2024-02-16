@@ -63,7 +63,7 @@ class WhiptongueHydraEffect extends OneShotEffect {
                 + "Put a +1/+1 counter on {this} for each creature destroyed this way";
     }
 
-    public WhiptongueHydraEffect(final WhiptongueHydraEffect effect) {
+    private WhiptongueHydraEffect(final WhiptongueHydraEffect effect) {
         super(effect);
     }
 
@@ -76,12 +76,13 @@ class WhiptongueHydraEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         int destroyedPermanents = 0;
         destroyedPermanents = game.getBattlefield().getActivePermanents(
-                filter, source.getControllerId(), source.getSourceId(), game
+                filter, source.getControllerId(), source, game
         ).stream().filter(
                 (permanent) -> (permanent.destroy(source, game, false))
         ).map((_item) -> 1).reduce(destroyedPermanents, Integer::sum);
         if (destroyedPermanents > 0) {
-            return new AddCountersSourceEffect(
+            game.getState().processAction(game);
+            new AddCountersSourceEffect(
                     CounterType.P1P1.createInstance(destroyedPermanents), true
             ).apply(game, source);
         }

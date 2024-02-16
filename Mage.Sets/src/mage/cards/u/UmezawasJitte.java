@@ -18,6 +18,7 @@ import mage.counters.CounterType;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  * @author Loki
@@ -26,7 +27,7 @@ public final class UmezawasJitte extends CardImpl {
 
     public UmezawasJitte(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.EQUIPMENT);
 
         // Whenever equipped creature deals combat damage, put two charge counters on Umezawa's Jitte.
@@ -41,19 +42,17 @@ public final class UmezawasJitte extends CardImpl {
                 new RemoveCountersSourceCost(CounterType.CHARGE.createInstance()));
 
         // Target creature gets -1/-1 until end of turn.
-        Mode mode = new Mode();
-        mode.addEffect(new BoostTargetEffect(-1, -1, Duration.EndOfTurn));
+        Mode mode = new Mode(new BoostTargetEffect(-1, -1, Duration.EndOfTurn));
         mode.addTarget(new TargetCreaturePermanent());
         ability.addMode(mode);
 
         // You gain 2 life.
-        mode = new Mode();
-        mode.addEffect(new GainLifeEffect(2));
+        mode = new Mode(new GainLifeEffect(2));
         ability.addMode(mode);
         this.addAbility(ability);
 
         // Equip {2}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2), new TargetControlledCreaturePermanent(), false));
     }
 
     private UmezawasJitte(final UmezawasJitte card) {

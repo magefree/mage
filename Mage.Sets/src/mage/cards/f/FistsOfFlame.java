@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
-import mage.watchers.common.CardsDrawnThisTurnWatcher;
 
 import java.util.UUID;
 
@@ -33,6 +32,7 @@ public final class FistsOfFlame extends CardImpl {
                 StaticValue.get(0), Duration.EndOfTurn
         ).setText("and gets +1/+0 for each card you've drawn this turn."));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addHint(CardsDrawnThisTurnDynamicValue.getHint());
     }
 
     private FistsOfFlame(final FistsOfFlame card) {

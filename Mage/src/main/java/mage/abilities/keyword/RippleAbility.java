@@ -70,7 +70,7 @@ class RippleEffect extends OneShotEffect {
         this.rippleNumber = rippleNumber;
     }
 
-    public RippleEffect(final RippleEffect effect) {
+    protected RippleEffect(final RippleEffect effect) {
         super(effect);
         this.rippleNumber = effect.rippleNumber;
     }
@@ -83,14 +83,14 @@ class RippleEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (player != null) {
             if (!player.chooseUse(Outcome.Neutral, "Reveal " + rippleNumber + " cards from the top of your library?", source, game)) {
                 return true; //fizzle
             }
             // reveal top cards from library
             Cards cards = new CardsImpl();
-            cards.addAll(player.getLibrary().getTopCards(game, rippleNumber));
+            cards.addAllCards(player.getLibrary().getTopCards(game, rippleNumber));
             player.revealCards(sourceObject.getIdName(), cards, game);
 
             // determine which card should be rippled
@@ -101,7 +101,7 @@ class RippleEffect extends OneShotEffect {
             target1.setRequired(false);
 
             // choose cards to play for free
-            while (player.canRespond() && cards.count(sameNameFilter, game) > 0 && player.choose(Outcome.PlayForFree, cards, target1, game)) {
+            while (player.canRespond() && cards.count(sameNameFilter, game) > 0 && player.choose(Outcome.PlayForFree, cards, target1, source, game)) {
                 Card card = cards.get(target1.getFirstTarget(), game);
                 if (card != null) {
                     game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);

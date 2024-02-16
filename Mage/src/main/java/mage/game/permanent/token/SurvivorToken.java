@@ -6,13 +6,12 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 
 /**
- *
  * @author North
  */
 public final class SurvivorToken extends TokenImpl {
 
     public SurvivorToken() {
-        super("Survivor", "1/1 red Survivor creature token");
+        super("Survivor Token", "1/1 red Survivor creature token");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.SURVIVOR);
         color.setRed(true);
@@ -20,7 +19,7 @@ public final class SurvivorToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    public SurvivorToken(final SurvivorToken token) {
+    private SurvivorToken(final SurvivorToken token) {
         super(token);
     }
 

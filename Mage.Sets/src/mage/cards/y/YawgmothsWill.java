@@ -50,7 +50,7 @@ public final class YawgmothsWill extends CardImpl {
 
 class CanPlayCardsFromGraveyardEffect extends ContinuousEffectImpl {
 
-    public CanPlayCardsFromGraveyardEffect() {
+    CanPlayCardsFromGraveyardEffect() {
         this(Duration.EndOfTurn);
     }
 
@@ -59,7 +59,7 @@ class CanPlayCardsFromGraveyardEffect extends ContinuousEffectImpl {
         staticText = "Until end of turn, you may play cards from your graveyard";
     }
 
-    public CanPlayCardsFromGraveyardEffect(final CanPlayCardsFromGraveyardEffect effect) {
+    private CanPlayCardsFromGraveyardEffect(final CanPlayCardsFromGraveyardEffect effect) {
         super(effect);
     }
 
@@ -82,12 +82,12 @@ class CanPlayCardsFromGraveyardEffect extends ContinuousEffectImpl {
 
 class YawgmothsWillReplacementEffect extends ReplacementEffectImpl {
 
-    public YawgmothsWillReplacementEffect() {
+    YawgmothsWillReplacementEffect() {
         super(Duration.EndOfTurn, Outcome.Detriment);
         this.staticText = "If a card would be put into your graveyard from anywhere this turn, exile that card instead";
     }
 
-    public YawgmothsWillReplacementEffect(final YawgmothsWillReplacementEffect effect) {
+    private YawgmothsWillReplacementEffect(final YawgmothsWillReplacementEffect effect) {
         super(effect);
     }
 

@@ -1,4 +1,3 @@
-
 package mage.cards.r;
 
 import java.util.UUID;
@@ -22,7 +21,7 @@ import mage.filter.FilterPermanent;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.RhysTheRedeemedToken;
+import mage.game.permanent.token.GreenWhiteElfWarriorToken;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
@@ -34,7 +33,7 @@ public final class RhysTheRedeemed extends CardImpl {
 
     public RhysTheRedeemed(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G/W}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.WARRIOR);
 
@@ -42,12 +41,12 @@ public final class RhysTheRedeemed extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {2}{GW}, {tap}: Create a 1/1 green and white Elf Warrior creature token.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new RhysTheRedeemedToken()), new ManaCostsImpl("{2}{G/W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new GreenWhiteElfWarriorToken()), new ManaCostsImpl<>("{2}{G/W}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 
         // {4}{GW}{GW}, {tap}: For each creature token you control, create a token that's a copy of that creature.
-        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RhysTheRedeemedEffect(), new ManaCostsImpl("{4}{G/W}{G/W}"));
+        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RhysTheRedeemedEffect(), new ManaCostsImpl<>("{4}{G/W}{G/W}"));
         ability2.addCost(new TapSourceCost());
         this.addAbility(ability2);
 
@@ -77,7 +76,7 @@ class RhysTheRedeemedEffect extends OneShotEffect {
         this.staticText = "For each creature token you control, create a token that's a copy of that creature";
     }
 
-    public RhysTheRedeemedEffect(final RhysTheRedeemedEffect effect) {
+    private RhysTheRedeemedEffect(final RhysTheRedeemedEffect effect) {
         super(effect);
     }
 

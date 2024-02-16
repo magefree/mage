@@ -39,12 +39,12 @@ public final class FriendlyFire extends CardImpl {
 
 class FriendlyFireEffect extends OneShotEffect {
 
-    public FriendlyFireEffect() {
+    FriendlyFireEffect() {
         super(Outcome.Discard);
         this.staticText = "Target creature's controller reveals a card at random from their hand. {this} deals damage to that creature and that player equal to the revealed card's mana value";
     }
 
-    public FriendlyFireEffect(final FriendlyFireEffect effect) {
+    private FriendlyFireEffect(final FriendlyFireEffect effect) {
         super(effect);
     }
 
@@ -56,7 +56,7 @@ class FriendlyFireEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (controller != null && sourceObject != null) {
             Permanent targetCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
             if (targetCreature != null) {

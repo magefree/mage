@@ -33,9 +33,7 @@ public final class Overmaster extends CardImpl {
         this.getSpellAbility().addWatcher(new OvermasterWatcher());
         
         // Draw a card.
-        Effect effect = new DrawCardSourceControllerEffect(1);
-        effect.setText("<br><br>Draw a card");
-        this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
     private Overmaster(final Overmaster card) {
@@ -55,7 +53,7 @@ class OvermasterEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "The next instant or sorcery spell you cast this turn can't be countered";
     }
 
-    OvermasterEffect(final OvermasterEffect effect) {
+    private OvermasterEffect(final OvermasterEffect effect) {
         super(effect);
     }
 
@@ -74,13 +72,8 @@ class OvermasterEffect extends ContinuousRuleModifyingEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (sourceObject != null) {
             return "This spell can't be countered (" + sourceObject.getName() + ").";
         }

@@ -32,7 +32,7 @@ public final class KiAdiMundi extends CardImpl {
 
     public KiAdiMundi(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.CEREAN);
         this.subtype.add(SubType.JEDI);
         this.power = new MageInt(4);
@@ -42,7 +42,7 @@ public final class KiAdiMundi extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter)));
 
         // Meditate {1}{G}
-        this.addAbility(new MeditateAbility(new ManaCostsImpl("{1}{G}")));
+        this.addAbility(new MeditateAbility(new ManaCostsImpl<>("{1}{G}")));
     }
 
     private KiAdiMundi(final KiAdiMundi card) {

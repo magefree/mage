@@ -45,7 +45,7 @@ class OblationEffect extends OneShotEffect {
         this.staticText = "The owner of target nonland permanent shuffles it into their library, then draws two cards";
     }
 
-    OblationEffect(final OblationEffect effect) {
+    private OblationEffect(final OblationEffect effect) {
         super(effect);
     }
 

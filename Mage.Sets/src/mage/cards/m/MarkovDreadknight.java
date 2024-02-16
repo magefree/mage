@@ -33,7 +33,7 @@ public final class MarkovDreadknight extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // {2}{B}, Discard a card: Put two +1/+1 counters on Markhov Dreadknight.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)), new ManaCostsImpl("{2}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)), new ManaCostsImpl<>("{2}{B}"));
         ability.addCost(new DiscardCardCost());
         this.addAbility(ability);
     }

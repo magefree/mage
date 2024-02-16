@@ -34,7 +34,7 @@ public final class GreaterGargadon extends CardImpl {
         this.toughness = new MageInt(7);
 
         // Suspend 10-{R}
-        this.addAbility(new SuspendAbility(10, new ManaCostsImpl("{R}"), this));
+        this.addAbility(new SuspendAbility(10, new ManaCostsImpl<>("{R}"), this));
         // Sacrifice an artifact, creature, or land: Remove a time counter from Greater Gargadon. Activate this ability only if Greater Gargadon is suspended.
         this.addAbility(new GreaterGargadonAbility());
     }
@@ -58,10 +58,10 @@ class GreaterGargadonAbility extends ActivatedAbilityImpl {
     }
 
     public GreaterGargadonAbility() {
-        super(Zone.EXILED, new RemoveCounterSourceEffect(CounterType.TIME.createInstance()), new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        super(Zone.EXILED, new RemoveCounterSourceEffect(CounterType.TIME.createInstance()), new SacrificeTargetCost(filter));
     }
 
-    public GreaterGargadonAbility(final GreaterGargadonAbility ability) {
+    private GreaterGargadonAbility(final GreaterGargadonAbility ability) {
         super(ability);
     }
 

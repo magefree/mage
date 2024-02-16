@@ -5,7 +5,6 @@ import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.GameException;
-import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestCommanderDuelBase;
 
@@ -35,7 +34,6 @@ public class TeferiMageOfZhalfirTest extends CardTestCommanderDuelBase {
         execute();
 
         assertPermanentCount(playerA, "Daxos of Meletis", 1);
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -68,7 +66,6 @@ public class TeferiMageOfZhalfirTest extends CardTestCommanderDuelBase {
         setStrictChooseMode(true);
         setStopAt(9, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Daxos of Meletis", 1);
         assertPowerToughness(playerA, "Daxos of Meletis", 6, 6); // no effects removes after game over -- users and tests can get last game state with all affected effects

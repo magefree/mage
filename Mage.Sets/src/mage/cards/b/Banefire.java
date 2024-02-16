@@ -34,6 +34,7 @@ public final class Banefire extends CardImpl {
         // Banefire deals X damage to any target.       
         this.getSpellAbility().addEffect(new BaneFireEffect());
         this.getSpellAbility().addTarget(new TargetAnyTarget());
+
         // If X is 5 or more, Banefire can't be countered and the damage can't be prevented.
         this.addAbility(new SimpleStaticAbility(Zone.STACK, new BanefireCantCounterEffect()));
     }
@@ -50,8 +51,8 @@ public final class Banefire extends CardImpl {
 
 class testCondition implements Condition {
 
-    private DynamicValue xValue;
-    private int limit;
+    private final DynamicValue xValue;
+    private final int limit;
 
     public testCondition(DynamicValue xValue, int limit) {
         this.xValue = xValue;
@@ -71,12 +72,12 @@ class testCondition implements Condition {
 
 class BaneFireEffect extends OneShotEffect {
 
-    public BaneFireEffect() {
+    BaneFireEffect() {
         super(Outcome.Damage);
         staticText = "{this} deals X damage to any target";
     }
 
-    public BaneFireEffect(final BaneFireEffect effect) {
+    private BaneFireEffect(final BaneFireEffect effect) {
         super(effect);
     }
 
@@ -105,14 +106,14 @@ class BaneFireEffect extends OneShotEffect {
 
 class BanefireCantCounterEffect extends ContinuousRuleModifyingEffectImpl {
 
-    Condition condition = new testCondition(ManacostVariableValue.REGULAR, 5);
+    private Condition condition = new testCondition(ManacostVariableValue.REGULAR, 5);
 
     public BanefireCantCounterEffect() {
         super(Duration.WhileOnStack, Outcome.Benefit);
         staticText = "If X is 5 or more, this spell can't be countered and the damage can't be prevented";
     }
 
-    public BanefireCantCounterEffect(final BanefireCantCounterEffect effect) {
+    private BanefireCantCounterEffect(final BanefireCantCounterEffect effect) {
         super(effect);
         this.condition = effect.condition;
     }
@@ -123,24 +124,22 @@ class BanefireCantCounterEffect extends ContinuousRuleModifyingEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.COUNTER;
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.COUNTER) {
-            Card card = game.getCard(source.getSourceId());
-            if (card != null) {
-                UUID spellId = card.getSpellAbility().getId();
-                if (event.getTargetId().equals(spellId)) {
-                    if (condition.apply(game, source)) {
-                        return true;
-                    }
-                }
-            }
+        Card card = game.getCard(source.getSourceId());
+        if (card == null) {
+            return false;
         }
-        return false;
-    }
 
+        UUID spellId = card.getSpellAbility().getId();
+        if (!event.getTargetId().equals(spellId)) {
+            return false;
+        }
+
+        return condition.apply(game, source);
+    }
 }

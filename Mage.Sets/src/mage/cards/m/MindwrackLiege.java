@@ -54,7 +54,7 @@ public final class MindwrackLiege extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter2, true)));
 
         // {UR}{UR}{UR}{UR}: You may put a blue or red creature card from your hand onto the battlefield.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutCardFromHandOntoBattlefieldEffect(filter3), new ManaCostsImpl("{U/R}{U/R}{U/R}{U/R}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutCardFromHandOntoBattlefieldEffect(filter3), new ManaCostsImpl<>("{U/R}{U/R}{U/R}{U/R}")));
     }
 
     private MindwrackLiege(final MindwrackLiege card) {

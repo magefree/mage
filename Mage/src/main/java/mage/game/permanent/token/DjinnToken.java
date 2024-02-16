@@ -1,19 +1,19 @@
 
 
 package mage.game.permanent.token;
+
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 
 /**
- *
  * @author spjspj
  */
 public final class DjinnToken extends TokenImpl {
 
     public DjinnToken() {
-        super("Djinn", "5/5 colorless Djinn artifact creature token with flying");
+        super("Djinn Token", "5/5 colorless Djinn artifact creature token with flying");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.DJINN);
@@ -22,7 +22,7 @@ public final class DjinnToken extends TokenImpl {
         addAbility(FlyingAbility.getInstance());
     }
 
-    public DjinnToken(final DjinnToken token) {
+    private DjinnToken(final DjinnToken token) {
         super(token);
     }
 

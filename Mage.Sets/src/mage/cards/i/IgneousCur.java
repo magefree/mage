@@ -27,7 +27,7 @@ public final class IgneousCur extends CardImpl {
 
         // {1}{R}: Igneous Cur gets +2/+0 until end of turn.
         this.addAbility(new SimpleActivatedAbility(
-                new BoostSourceEffect(2, 0, Duration.EndOfTurn), new ManaCostsImpl("{1}{R}")
+                new BoostSourceEffect(2, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{1}{R}")
         ));
     }
 

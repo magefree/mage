@@ -1,19 +1,17 @@
-
-
 package mage.game.permanent.token;
-import mage.constants.CardType;
-import mage.constants.SubType;
+
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
+import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
- *
  * @author spjspj
  */
 public final class NightwingHorrorToken extends TokenImpl {
 
     public NightwingHorrorToken() {
-        super("Horror", "1/1 blue and black Horror creature token with flying");
+        super("Horror Token", "1/1 blue and black Horror creature token with flying");
         cardType.add(CardType.CREATURE);
         this.color.setBlue(true);
         this.color.setBlack(true);
@@ -25,7 +23,7 @@ public final class NightwingHorrorToken extends TokenImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public NightwingHorrorToken(final NightwingHorrorToken token) {
+    private NightwingHorrorToken(final NightwingHorrorToken token) {
         super(token);
     }
 

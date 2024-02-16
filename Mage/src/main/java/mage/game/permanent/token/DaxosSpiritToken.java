@@ -1,33 +1,23 @@
-
-
 package mage.game.permanent.token;
-import mage.constants.CardType;
-import mage.constants.SubType;
+
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
- *
  * @author spjspj
  */
 public final class DaxosSpiritToken extends TokenImpl {
 
     public DaxosSpiritToken() {
-        super("Spirit", "white and black Spirit enchantment creature token with \"This creature's power and toughness are each equal to the number of experience counters you have.\"");
-        this.setOriginalExpansionSetCode("C15");
-        setTokenType(2);
+        super("Spirit Token", "white and black Spirit enchantment creature token with \"This creature's power and toughness are each equal to the number of experience counters you have.\"");
         cardType.add(CardType.ENCHANTMENT);
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
@@ -38,7 +28,7 @@ public final class DaxosSpiritToken extends TokenImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DaxosSpiritSetPTEffect()));
     }
 
-    public DaxosSpiritToken(final DaxosSpiritToken token) {
+    private DaxosSpiritToken(final DaxosSpiritToken token) {
         super(token);
     }
 
@@ -54,7 +44,7 @@ class DaxosSpiritSetPTEffect extends ContinuousEffectImpl {
         staticText = "This creature's power and toughness are each equal to the number of experience counters you have";
     }
 
-    public DaxosSpiritSetPTEffect(final DaxosSpiritSetPTEffect effect) {
+    protected DaxosSpiritSetPTEffect(final DaxosSpiritSetPTEffect effect) {
         super(effect);
     }
 
@@ -66,17 +56,18 @@ class DaxosSpiritSetPTEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Permanent permanent = game.getPermanent(source.getSourceId());
-            if (permanent != null && new MageObjectReference(source.getSourceObject(game), game).refersTo(permanent, game)) {
-                int amount = controller.getCounters().getCount(CounterType.EXPERIENCE);
-                permanent.getPower().setValue(amount);
-                permanent.getToughness().setValue(amount);
-                return true;
-            } else {
-                discard();
-            }
+        if (controller == null) {
+            return false;
         }
-        return false;
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent == null || !new MageObjectReference(source.getSourceObject(game), game).refersTo(permanent, game)) {
+            discard();
+            return false;
+        }
+
+        int amount = controller.getCounters().getCount(CounterType.EXPERIENCE);
+        permanent.getPower().setModifiedBaseValue(amount);
+        permanent.getToughness().setModifiedBaseValue(amount);
+        return true;
     }
 }

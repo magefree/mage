@@ -43,7 +43,7 @@ public final class TravelingPlague extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // At the beginning of each upkeep, put a plague counter on Traveling Plague.
@@ -74,9 +74,10 @@ class TravelingPlagueTriggeredAbility extends TriggeredAbilityImpl {
 
     public TravelingPlagueTriggeredAbility() {
         super(Zone.BATTLEFIELD, new TravelingPlagueEffect(), false);
+        setTriggerPhrase("When enchanted creature leaves the battlefield, ");
     }
 
-    public TravelingPlagueTriggeredAbility(final TravelingPlagueTriggeredAbility ability) {
+    private TravelingPlagueTriggeredAbility(final TravelingPlagueTriggeredAbility ability) {
         super(ability);
     }
 
@@ -93,32 +94,30 @@ class TravelingPlagueTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (zEvent.getFromZone() == Zone.BATTLEFIELD) {
-            Permanent enchantedCreature = game.getPermanentOrLKIBattlefield(event.getTargetId());
-            Permanent travelingPlague = game.getPermanentOrLKIBattlefield(sourceId);
-            if (enchantedCreature != null
-                    && enchantedCreature.getAttachments().contains(travelingPlague.getId())) {
-                game.getState().setValue("travelingPlague" + sourceId, enchantedCreature);
-                return true;
-            }
+        if (zEvent.getFromZone() != Zone.BATTLEFIELD) {
+            return false;
         }
-        return false;
-    }
 
-    @Override
-    public String getTriggerPhrase() {
-        return "When enchanted creature leaves the battlefield, " ;
+        Permanent enchantedCreature = game.getPermanentOrLKIBattlefield(event.getTargetId());
+        Permanent travelingPlague = game.getPermanentOrLKIBattlefield(sourceId);
+        if (enchantedCreature == null
+                || !enchantedCreature.getAttachments().contains(travelingPlague.getId())) {
+            return false;
+        }
+
+        game.getState().setValue("travelingPlague" + sourceId, enchantedCreature);
+        return true;
     }
 }
 
 class TravelingPlagueEffect extends OneShotEffect {
 
-    public TravelingPlagueEffect() {
+    TravelingPlagueEffect() {
         super(Outcome.Detriment);
         staticText = "that creature's controller returns {this} from its owner's graveyard to the battlefield";
     }
 
-    public TravelingPlagueEffect(final TravelingPlagueEffect effect) {
+    private TravelingPlagueEffect(final TravelingPlagueEffect effect) {
         super(effect);
     }
 
@@ -132,8 +131,8 @@ class TravelingPlagueEffect extends OneShotEffect {
                     && game.getState().getZone(travelingPlague.getId()) == Zone.GRAVEYARD // aura must come from the graveyard
                     && controllerOfEnchantedCreature != null) {
                 TargetPermanent target = new TargetPermanent(new FilterCreaturePermanent("creature to enchant with " + travelingPlague.getName()));
-                target.setNotTarget(true);
-                if (controllerOfEnchantedCreature.choose(Outcome.Detriment, target, source.getSourceId(), game)) {
+                target.withNotTarget(true);
+                if (controllerOfEnchantedCreature.choose(Outcome.Detriment, target, source, game)) {
                     Permanent targetPermanent = game.getPermanent(target.getFirstTarget());
                     if (!targetPermanent.cantBeAttachedBy(travelingPlague, source, game, false)) {
                         game.getState().setValue("attachTo:" + travelingPlague.getId(), targetPermanent);

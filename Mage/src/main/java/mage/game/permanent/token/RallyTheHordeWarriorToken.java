@@ -6,13 +6,12 @@ import mage.constants.SubType;
 import mage.MageInt;
 
 /**
- *
  * @author spjspj
  */
 public final class RallyTheHordeWarriorToken extends TokenImpl {
 
     public RallyTheHordeWarriorToken() {
-        super("Warrior", "1/1 red Warrior creature token");
+        super("Warrior Token", "1/1 red Warrior creature token");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
         subtype.add(SubType.WARRIOR);
@@ -20,7 +19,7 @@ public final class RallyTheHordeWarriorToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    public RallyTheHordeWarriorToken(final RallyTheHordeWarriorToken token) {
+    private RallyTheHordeWarriorToken(final RallyTheHordeWarriorToken token) {
         super(token);
     }
 

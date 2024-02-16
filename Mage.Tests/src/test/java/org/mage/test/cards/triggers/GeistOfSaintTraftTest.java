@@ -31,8 +31,8 @@ public class GeistOfSaintTraftTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerB, "Geist of Saint Traft", 1);
         assertPowerToughness(playerB, "Geist of Saint Traft", 2, 2);
-        assertPermanentCount(playerB, "Angel", 1);
-        assertPowerToughness(playerB, "Angel", 4, 4);
+        assertPermanentCount(playerB, "Angel Token", 1);
+        assertPowerToughness(playerB, "Angel Token", 4, 4);
 
         assertLife(playerA, 14);
         assertLife(playerB, 20);
@@ -50,7 +50,7 @@ public class GeistOfSaintTraftTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerB, "Geist of Saint Traft", 1);
         assertPowerToughness(playerB, "Geist of Saint Traft", 2, 2);
-        assertPermanentCount(playerB, "Angel", 0);
+        assertPermanentCount(playerB, "Angel Token", 0);
 
         assertLife(playerA, 14);
         assertLife(playerB, 20);

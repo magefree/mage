@@ -58,7 +58,7 @@ class GravecrawlerPlayEffect extends AsThoughEffectImpl {
         staticText = "You may cast {this} from your graveyard as long as you control a Zombie";
     }
 
-    public GravecrawlerPlayEffect(final GravecrawlerPlayEffect effect) {
+    private GravecrawlerPlayEffect(final GravecrawlerPlayEffect effect) {
         super(effect);
     }
 

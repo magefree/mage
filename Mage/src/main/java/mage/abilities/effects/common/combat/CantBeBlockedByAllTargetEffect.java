@@ -8,8 +8,6 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
-import static mage.constants.Duration.EndOfTurn;
-
 /**
  * @author LevelX2
  */
@@ -22,7 +20,7 @@ public class CantBeBlockedByAllTargetEffect extends RestrictionEffect {
         this.filterBlockedBy = filterBlockedBy;
     }
 
-    public CantBeBlockedByAllTargetEffect(final CantBeBlockedByAllTargetEffect effect) {
+    protected CantBeBlockedByAllTargetEffect(final CantBeBlockedByAllTargetEffect effect) {
         super(effect);
         this.filterBlockedBy = effect.filterBlockedBy;
     }
@@ -34,7 +32,7 @@ public class CantBeBlockedByAllTargetEffect extends RestrictionEffect {
 
     @Override
     public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
-        return !filterBlockedBy.match(blocker, source.getSourceId(), source.getControllerId(), game);
+        return !filterBlockedBy.match(blocker, source.getControllerId(), source, game);
     }
 
     @Override
@@ -47,10 +45,9 @@ public class CantBeBlockedByAllTargetEffect extends RestrictionEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        return "target "
-                + mode.getTargets().get(0).getTargetName()
+        return getTargetPointer().describeTargets(mode.getTargets(), "it")
                 + " can't be blocked "
-                + (duration == EndOfTurn ? "this turn " : "")
+                + (duration == Duration.EndOfTurn ? "this turn " : "")
                 + (filterBlockedBy.getMessage().startsWith("except by") ? "" : "by ")
                 + filterBlockedBy.getMessage();
     }

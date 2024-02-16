@@ -1,7 +1,5 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
@@ -14,30 +12,29 @@ import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.ComparisonType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.cards.*;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.Target;
-import mage.target.common.TargetCardInHand;
-import mage.target.common.TargetCardInYourGraveyard;
+import mage.target.TargetCard;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
  * @author jeffwadsworth
  */
 public final class SwiftWarkite extends CardImpl {
+
+    private static final FilterCard filter = new FilterCard("creature card with mana value 3 or less");
+
+    static {
+        filter.add(CardType.CREATURE.getPredicate());
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 4));
+    }
 
     public SwiftWarkite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{R}");
@@ -49,8 +46,7 @@ public final class SwiftWarkite extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Swift Warkite enters the battlefield, you may put a creature card with converted mana cost 3 or less from your hand or graveyard onto the battlefield. That creature gains haste. Return it to your hand at the beginning of the next end step.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SwiftWarkiteEffect(), true));
-
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SwiftWarkiteEffect()));
     }
 
     private SwiftWarkite(final SwiftWarkite card) {
@@ -65,7 +61,7 @@ public final class SwiftWarkite extends CardImpl {
 
 class SwiftWarkiteEffect extends OneShotEffect {
 
-    private static final FilterCard filter = new FilterCard("creature card with mana value 3 or less from your hand or graveyard");
+    private static final FilterCard filter = new FilterCard("creature card with mana value 3 or less");
 
     static {
         filter.add(CardType.CREATURE.getPredicate());
@@ -74,10 +70,11 @@ class SwiftWarkiteEffect extends OneShotEffect {
 
     SwiftWarkiteEffect() {
         super(Outcome.PutCardInPlay);
-        this.staticText = "you may put a creature card with mana value 3 or less from your hand or graveyard onto the battlefield. That creature gains haste. Return it to your hand at the beginning of the next end step";
+        this.staticText = "you may put a creature card with mana value 3 or less from your hand or graveyard onto the battlefield. " +
+                "That creature gains haste. Return it to your hand at the beginning of the next end step";
     }
 
-    SwiftWarkiteEffect(final SwiftWarkiteEffect effect) {
+    private SwiftWarkiteEffect(final SwiftWarkiteEffect effect) {
         super(effect);
     }
 
@@ -89,45 +86,32 @@ class SwiftWarkiteEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            if (controller.chooseUse(Outcome.PutCardInPlay, "Put a creature card from your hand? (No = from your graveyard)", source, game)) {
-                Target target = new TargetCardInHand(0, 1, filter);
-                controller.choose(outcome, target, source.getSourceId(), game);
-                Card card = controller.getHand().get(target.getFirstTarget(), game);
-                if (card != null) {
-                    if (controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
-                        Permanent creature = game.getPermanent(card.getId());
-                        if (creature != null) {
-                            ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.Custom);
-                            effect.setTargetPointer(new FixedTarget(creature.getId(), creature.getZoneChangeCounter(game)));
-                            game.addEffect(effect, source);
-                            Effect effect2 = new ReturnToHandTargetEffect();
-                            effect2.setTargetPointer(new FixedTarget(creature.getId(), creature.getZoneChangeCounter(game)));
-                            DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect2);
-                            game.addDelayedTriggeredAbility(delayedAbility, source);
-                        }
-                    }
-                }
-            } else {
-                Target target = new TargetCardInYourGraveyard(0, 1, filter);
-                target.choose(Outcome.PutCardInPlay, source.getControllerId(), source.getSourceId(), game);
-                Card card = controller.getGraveyard().get(target.getFirstTarget(), game);
-                if (card != null) {
-                    controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-                    Permanent creature = game.getPermanent(card.getId());
-                    if (creature != null) {
-                        ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.Custom);
-                        effect.setTargetPointer(new FixedTarget(creature.getId(), creature.getZoneChangeCounter(game)));
-                        game.addEffect(effect, source);
-                        Effect effect2 = new ReturnToHandTargetEffect();
-                        effect2.setTargetPointer(new FixedTarget(creature.getId(), creature.getZoneChangeCounter(game)));
-                        DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect2);
-                        game.addDelayedTriggeredAbility(delayedAbility, source);
-                    }
-                }
-            }
+        if (controller == null) {
+            return false;
+        }
+        Cards cards = new CardsImpl();
+        cards.addAllCards(controller.getHand().getCards(filter, source.getControllerId(), source, game));
+        cards.addAllCards(controller.getGraveyard().getCards(filter, source.getControllerId(), source, game));
+        if (cards.isEmpty()) {
             return true;
         }
-        return false;
+        TargetCard target = new TargetCard(0, 1, Zone.ALL, filter);
+        target.withNotTarget(true);
+        controller.choose(outcome, cards, target, source, game);
+        Card card = game.getCard(target.getFirstTarget());
+        if (card != null) {
+            controller.moveCards(card, Zone.BATTLEFIELD, source, game);
+
+            ContinuousEffect gainHasteEffect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.Custom);
+            gainHasteEffect.setTargetPointer(new FixedTarget(card, game));
+            game.addEffect(gainHasteEffect, source);
+
+            Effect returnToHandEffect = new ReturnToHandTargetEffect();
+            returnToHandEffect.setTargetPointer(new FixedTarget(card, game));
+            DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(returnToHandEffect);
+            game.addDelayedTriggeredAbility(delayedAbility, source);
+        }
+        return true;
     }
+
 }

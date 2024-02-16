@@ -57,7 +57,7 @@ class SteelcladSerpentEffect extends RestrictionEffect {
         staticText = "{this} can't attack unless you control another artifact";
     }
 
-    public SteelcladSerpentEffect(final SteelcladSerpentEffect effect) {
+    private SteelcladSerpentEffect(final SteelcladSerpentEffect effect) {
         super(effect);
     }
 
@@ -74,7 +74,7 @@ class SteelcladSerpentEffect extends RestrictionEffect {
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
         if (permanent.getId().equals(source.getSourceId())) {
-            return game.getBattlefield().getActivePermanents(filter, source.getControllerId(), permanent.getId(), game).isEmpty();
+            return game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game).isEmpty();
         }
         return false;
     }

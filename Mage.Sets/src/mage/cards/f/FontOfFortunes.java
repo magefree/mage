@@ -23,7 +23,7 @@ public final class FontOfFortunes extends CardImpl {
 
 
         // {1}{U}, Sacrifice Font of Fortunes: Draw two cards.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(2), new ManaCostsImpl("{1}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(2), new ManaCostsImpl<>("{1}{U}"));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);        
     }

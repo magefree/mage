@@ -28,7 +28,7 @@ public final class BlinkOfAnEye extends CardImpl {
         // Return target nonland permanent to its owner's hand. If this spell was kicked, draw a card.
         this.getSpellAbility().addTarget(new TargetNonlandPermanent());
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
-        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new DrawCardSourceControllerEffect(1), KickedCondition.instance,
+        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new DrawCardSourceControllerEffect(1), KickedCondition.ONCE,
                                                                       "If this spell was kicked, draw a card"));
     }
 

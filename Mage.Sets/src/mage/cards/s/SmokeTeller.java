@@ -44,7 +44,7 @@ public final class SmokeTeller extends CardImpl {
         this.toughness = new MageInt(2);
 
         // 1U: Look at target face-down creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SmokeTellerLookFaceDownEffect(), new ManaCostsImpl("{1}{U}")); 
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SmokeTellerLookFaceDownEffect(), new ManaCostsImpl<>("{1}{U}"));
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }
@@ -61,12 +61,12 @@ public final class SmokeTeller extends CardImpl {
 
 class SmokeTellerLookFaceDownEffect extends OneShotEffect {
 
-    public SmokeTellerLookFaceDownEffect() {
+    SmokeTellerLookFaceDownEffect() {
         super(Outcome.Benefit);
         this.staticText = "Look at target face-down creature";
     }
 
-    public SmokeTellerLookFaceDownEffect(final SmokeTellerLookFaceDownEffect effect) {
+    private SmokeTellerLookFaceDownEffect(final SmokeTellerLookFaceDownEffect effect) {
         super(effect);
     }
 
@@ -78,7 +78,7 @@ class SmokeTellerLookFaceDownEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (player == null || mageObject == null) {
             return false;
         }

@@ -56,10 +56,10 @@ class NivixAerieOfTheFiremindEffect extends OneShotEffect {
 
     NivixAerieOfTheFiremindEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Exile the top card of your library. Until your next turn, you may cast that card if it's an instant or sorcery card";
+        this.staticText = "Exile the top card of your library. Until your next turn, you may cast it if it's an instant or sorcery spell";
     }
 
-    NivixAerieOfTheFiremindEffect(final NivixAerieOfTheFiremindEffect effect) {
+    private NivixAerieOfTheFiremindEffect(final NivixAerieOfTheFiremindEffect effect) {
         super(effect);
     }
 
@@ -96,7 +96,7 @@ class NivixAerieOfTheFiremindCanCastEffect extends AsThoughEffectImpl {
         staticText = "Until your next turn, you may cast that card";
     }
 
-    NivixAerieOfTheFiremindCanCastEffect(final NivixAerieOfTheFiremindCanCastEffect effect) {
+    private NivixAerieOfTheFiremindCanCastEffect(final NivixAerieOfTheFiremindCanCastEffect effect) {
         super(effect);
     }
 

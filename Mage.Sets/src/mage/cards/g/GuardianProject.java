@@ -10,6 +10,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -50,14 +51,8 @@ public final class GuardianProject extends CardImpl {
 
 class GuardianProjectTriggeredAbility extends EntersBattlefieldAllTriggeredAbility {
 
-    public static final FilterPermanent filterNonTokenControlledCreature = new FilterControlledCreaturePermanent();
-
-    static {
-        filterNonTokenControlledCreature.add(TokenPredicate.FALSE);
-    }
-
     GuardianProjectTriggeredAbility() {
-        super(new GuardianProjectEffect(null), filterNonTokenControlledCreature);
+        super(new GuardianProjectEffect(null), StaticFilters.FILTER_CONTROLLED_CREATURE_NON_TOKEN);
     }
 
     private GuardianProjectTriggeredAbility(final GuardianProjectTriggeredAbility ability) {
@@ -72,7 +67,7 @@ class GuardianProjectTriggeredAbility extends EntersBattlefieldAllTriggeredAbili
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
-        if (!filter.match(permanent, sourceId, controllerId, game)) {
+        if (permanent == null || !filter.match(permanent, controllerId, this, game)) {
             return false;
         }
 
@@ -138,12 +133,11 @@ class GuardianProjectEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
+        Permanent permanent = mor.getPermanentOrLKIBattlefield(game);
+        if (player == null || permanent == null) {
             return false;
         }
-        if (GuardianProjectTriggeredAbility.checkCondition(
-                mor.getPermanentOrLKIBattlefield(game), source.getControllerId(), game)
-        ) {
+        if (GuardianProjectTriggeredAbility.checkCondition(permanent, source.getControllerId(), game)) {
             player.drawCards(1, source, game);
             return true;
         }

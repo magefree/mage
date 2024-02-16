@@ -25,7 +25,7 @@ public final class DisownedAncestor extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Outlast {1}{B}
-        this.addAbility(new OutlastAbility(new ManaCostsImpl("{1}{B}")));
+        this.addAbility(new OutlastAbility(new ManaCostsImpl<>("{1}{B}")));
     }
 
     private DisownedAncestor(final DisownedAncestor card) {

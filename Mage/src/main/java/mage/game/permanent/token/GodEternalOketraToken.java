@@ -11,8 +11,7 @@ import mage.constants.SubType;
 public final class GodEternalOketraToken extends TokenImpl {
 
     public GodEternalOketraToken() {
-        super("Zombie Warrior", "4/4 black Zombie Warrior creature token with vigilance");
-        setOriginalExpansionSetCode("WAR"); // default
+        super("Zombie Warrior Token", "4/4 black Zombie Warrior creature token with vigilance");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add(SubType.ZOMBIE);

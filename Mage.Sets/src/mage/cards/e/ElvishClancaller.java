@@ -58,7 +58,7 @@ public final class ElvishClancaller extends CardImpl {
                         new TargetCardInLibrary(filter2),
                         false
                 ),
-                new ManaCostsImpl("{4}{G}{G}"));
+                new ManaCostsImpl<>("{4}{G}{G}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

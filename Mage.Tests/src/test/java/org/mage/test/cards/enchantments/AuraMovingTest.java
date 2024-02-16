@@ -49,11 +49,9 @@ public class AuraMovingTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Alexi's Cloak", "Bruna, Light of Alabaster");
         attack(2, playerB, "Bruna, Light of Alabaster");
+        setChoice(playerB, "Yes");
+        setChoice(playerB, "Yes");
 
-        setChoice(playerB, true);
-        addTarget(playerB, "Hostile Realm");
-        setChoice(playerB, true);
-        addTarget(playerB, "Unholy Strength");
 
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
         execute();

@@ -28,13 +28,12 @@ public final class ThunderousMight extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Whenever enchanted creature attacks, it gets +X/+0 until end of turn, where X is your devotion to red.
         BoostEnchantedEffect effect = new BoostEnchantedEffect(DevotionCount.R, StaticValue.get(0), Duration.EndOfTurn);
         effect.setText("it gets +X/+0 until end of turn, where X is your devotion to red");
-        effect.setLockedIn(true);
         this.addAbility(new AttacksAttachedTriggeredAbility(effect, AttachmentType.AURA, false)
                 .addHint(DevotionCount.R.getHint()));
     }

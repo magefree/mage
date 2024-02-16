@@ -24,7 +24,7 @@ public final class SwelteringSuns extends CardImpl {
         this.getSpellAbility().addEffect(new DamageAllEffect(3, new FilterCreaturePermanent()));
         
         //Cycling {3}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{3}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{3}")));
     }
 
     private SwelteringSuns(final SwelteringSuns card) {

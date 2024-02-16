@@ -65,7 +65,7 @@ enum IndomitableCreativityAdjuster implements TargetAdjuster {
 
 class IndomitableCreativityEffect extends OneShotEffect {
 
-    public IndomitableCreativityEffect() {
+    IndomitableCreativityEffect() {
         super(Outcome.Benefit);
         this.staticText = "Destroy X target artifacts and/or creatures. " +
                 "For each permanent destroyed this way, " +
@@ -74,7 +74,7 @@ class IndomitableCreativityEffect extends OneShotEffect {
                 "Those players put the exiled cards onto the battlefield, then shuffle";
     }
 
-    public IndomitableCreativityEffect(final IndomitableCreativityEffect effect) {
+    private IndomitableCreativityEffect(final IndomitableCreativityEffect effect) {
         super(effect);
     }
 

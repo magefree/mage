@@ -3,7 +3,6 @@ package mage.abilities.effects.common;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -27,45 +26,32 @@ public class FightTargetsEffect extends OneShotEffect {
         this.showEffectHint = showEffectHint;
     }
 
-    public FightTargetsEffect(final FightTargetsEffect effect) {
+    protected FightTargetsEffect(final FightTargetsEffect effect) {
         super(effect);
         this.showEffectHint = effect.showEffectHint;
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card card = game.getCard(source.getSourceId());
-        if (card != null) {
-            UUID target1Id = null;
-            UUID target2Id = null;
-            boolean secondTargetOptional = false;
-            // first target is in target pointer, second target is a normal target
-            if (source.getTargets().size() < 2) {
-                if (!source.getTargets().get(0).isLegal(source, game)) {
-                    return false;
-                }
-                target1Id = getTargetPointer().getFirst(game, source);
-                target2Id = source.getTargets().getFirstTarget();
-                if (target1Id == target2Id) {
-                    return false;
-                }
-                // two normal targets available, only if both targets are legal the effect will be applied
-            } else if (source.getTargets().get(0).isLegal(source, game) && source.getTargets().get(1).isLegal(source, game)) {
-                target1Id = source.getTargets().get(0).getFirstTarget();
-                target2Id = source.getTargets().get(1).getFirstTarget();
-                secondTargetOptional = source.getTargets().get(1).getMinNumberOfTargets() == 0;
+        UUID target1Id = null;
+        UUID target2Id = null;
+        // first target is in target pointer, second target is a normal target
+        if (source.getTargets().size() < 2) {
+            if (!source.getTargets().get(0).isLegal(source, game)) {
+                return false;
             }
-            Permanent creature1 = game.getPermanent(target1Id);
-            Permanent creature2 = game.getPermanent(target2Id);
-            // 20110930 - 701.10
-            if (creature1 != null && creature2 != null) {
-                if (creature1.isCreature(game) && creature2.isCreature(game)) {
-                    return creature1.fight(creature2, source, game);
-                }
-            }
-            if (!game.isSimulation() && !secondTargetOptional) {
-                game.informPlayers(card.getName() + " has been fizzled.");
-            }
+            target1Id = getTargetPointer().getFirst(game, source);
+            target2Id = source.getTargets().getFirstTarget();
+            // two normal targets available, only if both targets are legal the effect will be applied
+        } else if (source.getTargets().get(0).isLegal(source, game) && source.getTargets().get(1).isLegal(source, game)) {
+            target1Id = source.getTargets().get(0).getFirstTarget();
+            target2Id = source.getTargets().get(1).getFirstTarget();
+        }
+        Permanent creature1 = game.getPermanent(target1Id);
+        Permanent creature2 = game.getPermanent(target2Id);
+        // 20110930 - 701.10
+        if (creature1 != null && creature2 != null && creature1.isCreature(game) && creature2.isCreature(game)) {
+            return creature1.fight(creature2, source, game);
         }
 
         return false;
@@ -81,11 +67,11 @@ public class FightTargetsEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        Target target=mode.getTargets().get(1);
-        StringBuilder sb=new StringBuilder("target ");
+        Target target = mode.getTargets().get(1);
+        StringBuilder sb = new StringBuilder("target ");
         sb.append(mode.getTargets().get(0).getTargetName());
         sb.append(" fights ");
-        if(!target.getTargetName().contains("other")){
+        if (!target.getTargetName().contains("other")) {
             sb.append("target ");
         }
         sb.append(target.getTargetName());

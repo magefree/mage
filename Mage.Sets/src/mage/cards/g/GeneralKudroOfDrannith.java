@@ -47,7 +47,7 @@ public final class GeneralKudroOfDrannith extends CardImpl {
     public GeneralKudroOfDrannith(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SOLDIER);
         this.power = new MageInt(3);
@@ -65,7 +65,7 @@ public final class GeneralKudroOfDrannith extends CardImpl {
 
         // {2}, Sacrifice two Humans: Destroy target creature with power 4 or greater.
         ability = new SimpleActivatedAbility(new DestroyTargetEffect(), new GenericManaCost(2));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(2, filter4)));
+        ability.addCost(new SacrificeTargetCost(2, filter4));
         ability.addTarget(new TargetPermanent(filter5));
         this.addAbility(ability);
     }

@@ -11,6 +11,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardIdPredicate;
@@ -20,6 +21,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInGraveyard;
+import mage.target.common.TargetSacrifice;
 
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -49,13 +51,6 @@ public final class DanseMacabre extends CardImpl {
 }
 
 class DanseMacabreEffect extends OneShotEffect {
-
-    private static final FilterPermanent filter
-            = new FilterControlledCreaturePermanent("nontoken creature you control");
-
-    static {
-        filter.add(TokenPredicate.FALSE);
-    }
 
     DanseMacabreEffect() {
         super(Outcome.Benefit);
@@ -87,13 +82,12 @@ class DanseMacabreEffect extends OneShotEffect {
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player == null || game.getBattlefield().count(
-                    filter, source.getSourceId(), source.getControllerId(), game
+                    StaticFilters.FILTER_CONTROLLED_CREATURE_NON_TOKEN, source.getControllerId(), source, game
             ) < 1) {
                 continue;
             }
-            TargetPermanent target = new TargetPermanent(filter);
-            target.setNotTarget(true);
-            player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
+            TargetSacrifice target = new TargetSacrifice(StaticFilters.FILTER_CONTROLLED_CREATURE_NON_TOKEN);
+            player.choose(Outcome.Sacrifice, target, source, game);
             Permanent permanent = game.getPermanent(target.getFirstTarget());
             if (permanent == null) {
                 continue;
@@ -123,8 +117,8 @@ class DanseMacabreEffect extends OneShotEffect {
         } else {
             return true;
         }
-        target.setNotTarget(true);
-        controller.choose(Outcome.PutCreatureInPlay, target, source.getSourceId(), game);
+        target.withNotTarget(true);
+        controller.choose(Outcome.PutCreatureInPlay, target, source, game);
         controller.moveCards(new CardsImpl(target.getTargets()), Zone.BATTLEFIELD, source, game);
         return true;
     }

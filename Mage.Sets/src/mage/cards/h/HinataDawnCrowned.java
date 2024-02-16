@@ -13,6 +13,7 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.util.CardUtil;
 
+import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 
@@ -24,7 +25,7 @@ public final class HinataDawnCrowned extends CardImpl {
     public HinataDawnCrowned(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{R}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.KIRIN);
         this.subtype.add(SubType.SPIRIT);
         this.power = new MageInt(4);
@@ -115,8 +116,13 @@ final class HinataDawnCrownedEffectUtility
 {
     public static int getTargetCount(Game game, Ability abilityToModify)
     {
-        return (int)(game.inCheckPlayableState() ?
-                CardUtil.getAllPossibleTargets(abilityToModify, game).stream().count():
-                CardUtil.getAllSelectedTargets(abilityToModify, game).stream().count());
+        if (game.inCheckPlayableState()) {
+            Optional<Integer> max = abilityToModify.getTargets().stream().map(x -> x.getMaxNumberOfTargets()).max(Integer::compare);
+            int allPossibleSize = CardUtil.getAllPossibleTargets(abilityToModify, game).size();
+            return max.isPresent() ?
+                        Math.min(allPossibleSize, max.get()) :
+                        allPossibleSize;
+        } else
+            return CardUtil.getAllSelectedTargets(abilityToModify, game).size();
     }
 }

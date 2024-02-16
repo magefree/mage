@@ -29,7 +29,7 @@ public final class FamishedGhoul extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {1}{B}, Sacrifice Famished Ghoul: Exile up to two target cards from a single graveyard.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new ManaCostsImpl("{1}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new ManaCostsImpl<>("{1}{B}"));
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetCardInASingleGraveyard(0, 2, StaticFilters.FILTER_CARD_CARDS));
         this.addAbility(ability);

@@ -17,7 +17,7 @@ import mage.filter.FilterPermanent;
  */
 public final class Brand extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("all permanents you own");
+    private static final FilterPermanent filter = new FilterPermanent("permanents you own");
 
     static {
         filter.add(TargetController.YOU.getOwnerPredicate());

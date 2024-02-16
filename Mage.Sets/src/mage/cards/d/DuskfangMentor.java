@@ -54,7 +54,7 @@ public final class DuskfangMentor extends CardImpl {
 
         // {1}{B}, {T}: Put a +1/+1 counter on each creature you control with lifelink.
         ability = new SimpleActivatedAbility(
-                new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter2), new ManaCostsImpl("{1}{B}")
+                new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter2), new ManaCostsImpl<>("{1}{B}")
         );
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

@@ -29,7 +29,7 @@ public final class KynaiosAndTiroOfMeletis extends CardImpl {
     public KynaiosAndTiroOfMeletis(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}{G}{W}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SOLDIER);
         this.power = new MageInt(2);
@@ -62,7 +62,7 @@ class KynaiosAndTirosEffect extends OneShotEffect {
         staticText = "draw a card. Each player may put a land card from their hand onto the battlefield, then each opponent who didn't draws a card";
     }
 
-    public KynaiosAndTirosEffect(final KynaiosAndTirosEffect effect) {
+    private KynaiosAndTirosEffect(final KynaiosAndTirosEffect effect) {
         super(effect);
     }
 
@@ -88,7 +88,7 @@ class KynaiosAndTirosEffect extends OneShotEffect {
                     }
                     target.clearChosen();
                     boolean playedLand = false;
-                    if (target.canChoose(source.getSourceId(), currentPlayer.getId(), game) && currentPlayer.chooseUse(outcome, "Put a land card from your hand onto the battlefield?", source, game)) {
+                    if (target.canChoose(currentPlayer.getId(), source, game) && currentPlayer.chooseUse(outcome, "Put a land card from your hand onto the battlefield?", source, game)) {
                         if (target.chooseTarget(outcome, currentPlayer.getId(), source, game)) {
                             Card card = game.getCard(target.getFirstTarget());
                             if (card != null) {

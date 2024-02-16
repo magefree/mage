@@ -22,7 +22,7 @@ public final class StabbingPain extends CardImpl {
 
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new BoostTargetEffect(-1, -1, Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new TapTargetEffect());
+        this.getSpellAbility().addEffect(new TapTargetEffect("tap that creature"));
     }
 
     private StabbingPain(final StabbingPain card) {

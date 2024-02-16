@@ -56,7 +56,7 @@ class OblivionStoneEffect extends OneShotEffect {
         staticText = "Destroy each nonland permanent without a fate counter on it, then remove all fate counters from all permanents";
     }
 
-    OblivionStoneEffect(final OblivionStoneEffect effect) {
+    private OblivionStoneEffect(final OblivionStoneEffect effect) {
         super(effect);
     }
 

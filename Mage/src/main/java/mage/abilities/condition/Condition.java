@@ -23,6 +23,10 @@ public interface Condition extends Serializable {
     boolean apply(Game game, Ability source);
 
     default String getManaText() {
-        return "{" + this.getClass().getSimpleName() + "}";
+        return this.getClass().getSimpleName();
+    }
+
+    default boolean caresAboutManaColor() {
+        return false;
     }
 }

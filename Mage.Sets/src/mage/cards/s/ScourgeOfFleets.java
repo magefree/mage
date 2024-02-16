@@ -59,7 +59,7 @@ class ScourgeOfFleetsEffect extends OneShotEffect {
         this.staticText = "return each creature your opponents control with toughness X or less to its owner's hand, where X is the number of Islands you control";
     }
 
-    public ScourgeOfFleetsEffect(final ScourgeOfFleetsEffect effect) {
+    private ScourgeOfFleetsEffect(final ScourgeOfFleetsEffect effect) {
         super(effect);
     }
 
@@ -72,12 +72,12 @@ class ScourgeOfFleetsEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            int islands = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game);
+            int islands = game.getBattlefield().count(filter, source.getControllerId(), source, game);
             FilterPermanent creatureFilter = new FilterCreaturePermanent();
             creatureFilter.add(TargetController.OPPONENT.getControllerPredicate());
             creatureFilter.add(new ToughnessPredicate(ComparisonType.FEWER_THAN, islands + 1));
             Cards cardsToHand = new CardsImpl();
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(creatureFilter, source.getControllerId(), source.getSourceId(), game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(creatureFilter, source.getControllerId(), source, game)) {
                 cardsToHand.add(permanent);
             }
             controller.moveCards(cardsToHand, Zone.HAND, source, game);

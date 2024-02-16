@@ -56,10 +56,10 @@ class BrilliantRestorationEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
             return false;
         }
-        return player.moveCards(player.getGraveyard().getCards(filter, game), Zone.BATTLEFIELD, source, game);
+        return controller.moveCards(controller.getGraveyard().getCards(filter, game), Zone.BATTLEFIELD, source, game);
     }
 }

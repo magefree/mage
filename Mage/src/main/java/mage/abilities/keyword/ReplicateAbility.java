@@ -18,6 +18,7 @@ import mage.game.stack.StackObject;
 import mage.players.Player;
 
 import java.util.Iterator;
+import java.util.UUID;
 
 /**
  * @author LevelX2
@@ -30,16 +31,19 @@ public class ReplicateAbility extends StaticAbility implements OptionalAdditiona
             + " You may choose new targets for the copies.";
     protected OptionalAdditionalCost additionalCost;
 
-    public ReplicateAbility(Card card, String manaString) {
-        super(Zone.STACK, null);
-        this.additionalCost = new OptionalAdditionalCostImpl(keywordText,
-                reminderTextMana, new ManaCostsImpl(manaString));
-        this.additionalCost.setRepeatable(true);
-        setRuleAtTheTop(true);
-        addSubAbility(new ReplicateTriggeredAbility());
+    public ReplicateAbility(String manaString) {
+        this(new ManaCostsImpl<>(manaString));
     }
 
-    public ReplicateAbility(final ReplicateAbility ability) {
+    public ReplicateAbility(Cost cost) {
+        super(Zone.STACK, null);
+        this.additionalCost = new OptionalAdditionalCostImpl(keywordText, reminderTextMana, cost);
+        this.additionalCost.setRepeatable(true);
+        setRuleAtTheTop(true);
+        addSubAbility(new ReplicateTriggeredAbility(this.getId()));
+    }
+
+    protected ReplicateAbility(final ReplicateAbility ability) {
         super(ability);
         additionalCost = ability.additionalCost;
     }
@@ -58,17 +62,11 @@ public class ReplicateAbility extends StaticAbility implements OptionalAdditiona
 
     @Override
     public boolean isActivated() {
-        if (additionalCost != null) {
-            return additionalCost.isActivated();
-        }
-        return false;
+        return additionalCost != null && additionalCost.isActivated();
     }
 
     public int getActivateCount() {
-        if (additionalCost != null) {
-            return additionalCost.getActivateCount();
-        }
-        return 0;
+        return additionalCost == null ? 0 : additionalCost.getActivateCount();
     }
 
     public void resetReplicate() {
@@ -79,36 +77,38 @@ public class ReplicateAbility extends StaticAbility implements OptionalAdditiona
 
     @Override
     public void addOptionalAdditionalCosts(Ability ability, Game game) {
-        if (ability instanceof SpellAbility) {
-            Player player = game.getPlayer(ability.getControllerId());
-            if (player != null) {
-                this.resetReplicate();
-                boolean again = true;
-                while (player.canRespond()
-                        && again) {
-                    String times = "";
-                    if (additionalCost.isRepeatable()) {
-                        int numActivations = additionalCost.getActivateCount();
-                        times = (numActivations + 1) + (numActivations == 0 ? " time " : " times ");
-                    }
+        if (!(ability instanceof SpellAbility)) {
+            return;
+        }
 
-                    // TODO: add AI support to find max number of possible activations (from available mana)
-                    //  canPay checks only single mana available, not total mana usage
-                    if (additionalCost.canPay(ability, this, ability.getControllerId(), game)
-                            && player.chooseUse(/*Outcome.Benefit*/Outcome.AIDontUseIt,
-                            new StringBuilder("Pay ").append(times).append(
-                                    additionalCost.getText(false)).append(" ?").toString(), ability, game)) {
-                        additionalCost.activate();
-                        for (Iterator it = ((Costs) additionalCost).iterator(); it.hasNext(); ) {
-                            Cost cost = (Cost) it.next();
-                            if (cost instanceof ManaCostsImpl) {
-                                ability.getManaCostsToPay().add((ManaCostsImpl) cost.copy());
-                            } else {
-                                ability.getCosts().add(cost.copy());
-                            }
-                        }
+        Player player = game.getPlayer(ability.getControllerId());
+        if (player == null) {
+            return;
+        }
+
+        this.resetReplicate();
+        boolean again = true;
+        while (player.canRespond() && again) {
+            String times = "";
+            if (additionalCost.isRepeatable()) {
+                int numActivations = additionalCost.getActivateCount();
+                times = (numActivations + 1) + (numActivations == 0 ? " time " : " times ");
+            }
+            String payPrompt = "Pay " + times + additionalCost.getText(false) + " ?";
+
+            // TODO: add AI support to find max number of possible activations (from available mana)
+            //  canPay checks only single mana available, not total mana usage
+            boolean canPay = additionalCost.canPay(ability, this, ability.getControllerId(), game);
+            if (!canPay || !player.chooseUse(/*Outcome.Benefit*/Outcome.AIDontUseIt, payPrompt, ability, game)) {
+                again = false;
+            } else {
+                additionalCost.activate();
+                for (Iterator it = ((Costs) additionalCost).iterator(); it.hasNext(); ) {
+                    Cost cost = (Cost) it.next();
+                    if (cost instanceof ManaCostsImpl) {
+                        ability.addManaCostsToPay((ManaCostsImpl) cost.copy());
                     } else {
-                        again = false;
+                        ability.addCost(cost.copy());
                     }
                 }
             }
@@ -117,41 +117,32 @@ public class ReplicateAbility extends StaticAbility implements OptionalAdditiona
 
     @Override
     public String getRule() {
-        StringBuilder sb = new StringBuilder();
-        if (additionalCost != null) {
-            sb.append(additionalCost.getText(false));
-            sb.append(' ').append(additionalCost.getReminderText());
-        }
-        return sb.toString();
+        return additionalCost == null ? "" : additionalCost.getText(false) + ' ' + additionalCost.getReminderText();
     }
 
     @Override
     public String getCastMessageSuffix() {
-        if (additionalCost != null) {
-            return additionalCost.getCastSuffixMessage(0);
-        } else {
-            return "";
-        }
+        return additionalCost == null ? "" : additionalCost.getCastSuffixMessage(0);
     }
 
     public String getReminderText() {
-        if (additionalCost != null) {
-            return additionalCost.getReminderText();
-        } else {
-            return "";
-        }
+        return additionalCost == null ? "" : additionalCost.getReminderText();
     }
 }
 
 class ReplicateTriggeredAbility extends TriggeredAbilityImpl {
 
-    public ReplicateTriggeredAbility() {
+    private UUID replicateId; // need to correspond only to own replicate ability, not any other instances of replicate ability
+
+    public ReplicateTriggeredAbility(UUID replicateId) {
         super(Zone.STACK, new ReplicateCopyEffect());
+        this.replicateId = replicateId;
         this.setRuleVisible(false);
     }
 
     private ReplicateTriggeredAbility(final ReplicateTriggeredAbility ability) {
         super(ability);
+        this.replicateId = ability.replicateId;
     }
 
     @Override
@@ -166,24 +157,26 @@ class ReplicateTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getSourceId().equals(this.sourceId)) {
-            StackObject spell = game.getStack().getStackObject(this.sourceId);
-            if (spell instanceof Spell) {
-                Card card = ((Spell) spell).getCard();
-                if (card != null) {
-                    for (Ability ability : card.getAbilities(game)) {
-                        if (ability instanceof ReplicateAbility) {
-                            if (ability.isActivated()) {
-                                for (Effect effect : this.getEffects()) {
-                                    effect.setValue("ReplicateSpell", spell);
-                                    effect.setValue("ReplicateCount", ((ReplicateAbility) ability).getActivateCount());
-                                }
-                                return true;
-                            }
-                        }
-                    }
-                }
+        if (!event.getSourceId().equals(this.sourceId)) {
+            return false;
+        }
+        StackObject spell = game.getStack().getStackObject(this.sourceId);
+        if (!(spell instanceof Spell)) {
+            return false;
+        }
+        Card card = ((Spell) spell).getCard();
+        if (card == null) {
+            return false;
+        }
+        for (Ability ability : card.getAbilities(game)) {
+            if (!(ability instanceof ReplicateAbility) || !ability.isActivated() || ability.getId() != replicateId) {
+                continue;
             }
+            for (Effect effect : this.getEffects()) {
+                effect.setValue("ReplicateSpell", spell);
+                effect.setValue("ReplicateCount", ((ReplicateAbility) ability).getActivateCount());
+            }
+            return true;
         }
         return false;
     }
@@ -201,36 +194,33 @@ class ReplicateCopyEffect extends OneShotEffect {
         super(Outcome.Copy);
     }
 
-    public ReplicateCopyEffect(final ReplicateCopyEffect effect) {
+    protected ReplicateCopyEffect(final ReplicateCopyEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Spell spell = (Spell) this.getValue("ReplicateSpell");
-            int replicateCount = (Integer) this.getValue("ReplicateCount");
-            if (spell != null
-                    && replicateCount > 0) {
-                // reset replicate now so the copies don't report x times Replicate
-                Card card = game.getCard(spell.getSourceId());
-                if (card != null) {
-                    for (Ability ability : card.getAbilities(game)) {
-                        if (ability instanceof ReplicateAbility) {
-                            if (ability.isActivated()) {
-                                ((ReplicateAbility) ability).resetReplicate();
-                            }
-                        }
-                    }
-                }
-                // create the copies
-                spell.createCopyOnStack(game, source, source.getControllerId(), true, replicateCount);
-                return true;
-            }
-
+        Spell spell = (Spell) this.getValue("ReplicateSpell");
+        int replicateCount = (Integer) this.getValue("ReplicateCount");
+        if (controller == null || spell == null || replicateCount == 0) {
+            return false;
         }
-        return false;
+
+        // reset replicate now so the copies don't report x times Replicate
+        Card card = game.getCard(spell.getSourceId());
+        if (card == null) {
+            return false;
+        }
+
+        for (Ability ability : card.getAbilities(game)) {
+            if ((ability instanceof ReplicateAbility) && ability.isActivated()) {
+                ((ReplicateAbility) ability).resetReplicate();
+            }
+        }
+        // create the copies
+        spell.createCopyOnStack(game, source, source.getControllerId(), true, replicateCount);
+        return true;
     }
 
     @Override

@@ -10,7 +10,6 @@ import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 
 /**
- *
  * @author fireshoes
  */
 public class SpellCounteredControllerTriggeredAbility extends TriggeredAbilityImpl {
@@ -21,9 +20,10 @@ public class SpellCounteredControllerTriggeredAbility extends TriggeredAbilityIm
 
     public SpellCounteredControllerTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
+        setTriggerPhrase("Whenever a spell or ability you control counters a spell, ");
     }
 
-    public SpellCounteredControllerTriggeredAbility(final SpellCounteredControllerTriggeredAbility ability) {
+    protected SpellCounteredControllerTriggeredAbility(final SpellCounteredControllerTriggeredAbility ability) {
         super(ability);
     }
 
@@ -48,10 +48,5 @@ public class SpellCounteredControllerTriggeredAbility extends TriggeredAbilityIm
             return (counteredStackObject instanceof Spell);
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a spell or ability you control counters a spell, " ;
     }
 }

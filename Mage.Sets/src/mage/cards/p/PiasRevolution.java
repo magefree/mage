@@ -47,12 +47,12 @@ public final class PiasRevolution extends CardImpl {
 
 class PiasRevolutionReturnEffect extends OneShotEffect {
 
-    public PiasRevolutionReturnEffect() {
+    PiasRevolutionReturnEffect() {
         super(Outcome.Benefit);
         this.staticText = "return that card to your hand unless target opponent has {this} deal 3 damage to them";
     }
 
-    public PiasRevolutionReturnEffect(final PiasRevolutionReturnEffect effect) {
+    private PiasRevolutionReturnEffect(final PiasRevolutionReturnEffect effect) {
         super(effect);
     }
 
@@ -96,9 +96,10 @@ class PiasRevolutionTriggeredAbility extends TriggeredAbilityImpl {
 
     public PiasRevolutionTriggeredAbility() {
         super(Zone.BATTLEFIELD, new PiasRevolutionReturnEffect(), false);
+        setTriggerPhrase("Whenever a nontoken artifact is put into your graveyard from the battlefield, ");
     }
 
-    public PiasRevolutionTriggeredAbility(PiasRevolutionTriggeredAbility ability) {
+    private PiasRevolutionTriggeredAbility(final PiasRevolutionTriggeredAbility ability) {
         super(ability);
     }
 
@@ -117,7 +118,7 @@ class PiasRevolutionTriggeredAbility extends TriggeredAbilityImpl {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         if (zEvent.isDiesEvent()) {
             Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-            if (permanent != null && filter.match(permanent, sourceId, controllerId, game)) {
+            if (permanent != null && filter.match(permanent, controllerId, this, game)) {
                 for (Effect effect : this.getEffects()) {
                     effect.setValue("permanentId", event.getTargetId());
                 }
@@ -125,10 +126,5 @@ class PiasRevolutionTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a nontoken artifact is put into your graveyard from the battlefield, " ;
     }
 }

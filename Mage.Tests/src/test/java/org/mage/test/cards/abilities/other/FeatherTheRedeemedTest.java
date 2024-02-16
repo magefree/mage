@@ -42,7 +42,6 @@ public class FeatherTheRedeemedTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -79,7 +78,6 @@ public class FeatherTheRedeemedTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -116,6 +114,5 @@ public class FeatherTheRedeemedTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
     }
 }

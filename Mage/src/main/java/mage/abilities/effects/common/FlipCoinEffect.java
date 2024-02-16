@@ -38,7 +38,7 @@ public class FlipCoinEffect extends OneShotEffect {
         addEffectLost(effectLost);
     }
 
-    public FlipCoinEffect(final FlipCoinEffect effect) {
+    protected FlipCoinEffect(final FlipCoinEffect effect) {
         super(effect);
         this.executingEffectsWon = effect.executingEffectsWon.copy();
         this.executingEffectsLost = effect.executingEffectsLost.copy();
@@ -59,13 +59,13 @@ public class FlipCoinEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (controller == null || mageObject == null) {
             return false;
         }
         boolean result = true;
         for (Effect effect : controller.flipCoin(source, game, true) ? executingEffectsWon : executingEffectsLost) {
-            effect.setTargetPointer(this.targetPointer);
+            effect.setTargetPointer(this.getTargetPointer().copy());
             if (effect instanceof OneShotEffect) {
                 result &= effect.apply(game, source);
             } else {

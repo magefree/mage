@@ -45,12 +45,12 @@ public final class RavingOniSlave extends CardImpl {
 
 class RavingOniSlaveEffect extends OneShotEffect {
 
-    public RavingOniSlaveEffect() {
+    RavingOniSlaveEffect() {
         super(Outcome.Benefit);
         this.staticText = "you lose 3 life if you don't control a Demon";
     }
 
-    public RavingOniSlaveEffect(final RavingOniSlaveEffect effect) {
+    private RavingOniSlaveEffect(final RavingOniSlaveEffect effect) {
         super(effect);
     }
 
@@ -63,7 +63,7 @@ class RavingOniSlaveEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            if (game.getBattlefield().count(new FilterCreaturePermanent(SubType.DEMON, "Demon"), source.getSourceId(), source.getControllerId(), game) < 1) {
+            if (game.getBattlefield().count(new FilterCreaturePermanent(SubType.DEMON, "Demon"), source.getControllerId(), source, game) < 1) {
                 controller.loseLife(3, game, source, false);
             }
             return true;

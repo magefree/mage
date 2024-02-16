@@ -51,7 +51,6 @@ public final class Constants {
 
     // cards render
     public static final Rectangle CARD_SIZE_FULL = new Rectangle(101, 149);
-    public static final Rectangle THUMBNAIL_SIZE_FULL = new Rectangle(102, 146);
 
     // resources - default images
     public static final String RESOURCE_PATH_DEFAULT_IMAGES = File.separator + "default";
@@ -93,16 +92,30 @@ public final class Constants {
     public static final int BATTLEFIELD_FEEDBACK_COLORIZING_MODE_ENABLE_BY_ONE_COLOR = 1;
     public static final int BATTLEFIELD_FEEDBACK_COLORIZING_MODE_ENABLE_BY_MULTICOLOR = 2;
 
+    public static final int AUTO_TARGET_DISABLE      = 0;
+    public static final int AUTO_TARGET_NON_FEEL_BAD = 1;
+    public static final int AUTO_TARGET_ALL          = 2;
+
     public interface IO {
         String DEFAULT_IMAGES_DIR = "plugins" + File.separator + "images" + File.separator;
     }
 
     public enum DeckEditorMode {
+        FREE_BUILDING(""),
+        LIMITED_BUILDING("building"),
+        LIMITED_SIDEBOARD_BUILDING("sideboard building"),
+        SIDEBOARDING("sideboarding"),
+        VIEW_LIMITED_DECK("view");
 
-        FREE_BUILDING,
-        LIMITED_BUILDING,
-        SIDEBOARDING,
-        VIEW_LIMITED_DECK
+        private String title;
+
+        DeckEditorMode(String title) {
+            this.title = title;
+        }
+
+        public String getTitle() {
+            return title;
+        }
     }
 
     public enum SortBy {

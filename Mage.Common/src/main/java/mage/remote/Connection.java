@@ -28,7 +28,6 @@ public class Connection {
     private String proxyUsername;
     private String proxyPassword;
     private int clientCardDatabaseVersion;
-    private boolean forceDBComparison;
     private String userIdStr;
     private int socketWriteTimeout;
 
@@ -40,7 +39,7 @@ public class Connection {
 //    private boolean confirmEmptyManaPool;
 //    private String flagName;
 //    private UserSkipPrioritySteps userSkipPrioritySteps;
-    private static final String serialization = "?serializationtype=jboss";
+    private static final String serialization = "?serializationtype=java";
     private static final String transport = "bisocket";
     private static final String threadpool = "onewayThreadPool=mage.remote.CustomThreadPool";
 
@@ -259,14 +258,6 @@ public class Connection {
 
     public UserData getUserData() {
         return userData;
-    }
-
-    public boolean isForceDBComparison() {
-        return forceDBComparison;
-    }
-
-    public void setForceDBComparison(boolean forceDBComparison) {
-        this.forceDBComparison = forceDBComparison;
     }
 
     public int getSocketWriteTimeout() {

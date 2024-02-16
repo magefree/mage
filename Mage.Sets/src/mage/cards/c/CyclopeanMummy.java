@@ -23,7 +23,7 @@ public final class CyclopeanMummy extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Cyclopean Mummy dies, exile it.
-        this.addAbility(new DiesSourceTriggeredAbility(new ExileSourceEffect()));
+        this.addAbility(new DiesSourceTriggeredAbility(new ExileSourceEffect().setText("exile it")));
     }
 
     private CyclopeanMummy(final CyclopeanMummy card) {

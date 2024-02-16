@@ -1,13 +1,12 @@
-
 package mage.cards.i;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.Effect;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessTargetEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -54,12 +53,12 @@ public final class IslandOfWakWak extends CardImpl {
 
 class IslandOfWakWakEffect extends OneShotEffect {
 
-    public IslandOfWakWakEffect() {
+    IslandOfWakWakEffect() {
         super(Outcome.Detriment);
         staticText = "Target creature with flying has base power 0 until end of turn.";
     }
 
-    public IslandOfWakWakEffect(final IslandOfWakWakEffect effect) {
+    private IslandOfWakWakEffect(final IslandOfWakWakEffect effect) {
         super(effect);
     }
 
@@ -67,15 +66,15 @@ class IslandOfWakWakEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent targetCreature = game.getPermanent(source.getFirstTarget());
         if (targetCreature != null) {
-            int toughness = targetCreature.getToughness().getBaseValueModified();
-            game.addEffect(new SetPowerToughnessTargetEffect(0, toughness, Duration.EndOfTurn), source);
+            int toughness = targetCreature.getToughness().getModifiedBaseValue();
+            game.addEffect(new SetBasePowerToughnessTargetEffect(null, StaticValue.get(toughness), Duration.EndOfTurn), source);
             return true;
         }
         return false;
     }
 
     @Override
-    public Effect copy() {
+    public IslandOfWakWakEffect copy() {
         return new IslandOfWakWakEffect(this);
     }
 }

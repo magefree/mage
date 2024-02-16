@@ -1,7 +1,7 @@
 package mage.cards.r;
 
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
+import mage.abilities.common.LandfallAbility;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.common.continuous.BecomesCreatureTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
@@ -40,9 +40,7 @@ public final class RoaringEarth extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
 
         // Whenever a land enters the battlefield under your control, put a +1/+1 counter on target creature or Vehicle you control.
-        Ability ability = new EntersBattlefieldControlledTriggeredAbility(
-                new AddCountersTargetEffect(CounterType.P1P1.createInstance()), StaticFilters.FILTER_LAND_A
-        );
+        Ability ability = new LandfallAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
 

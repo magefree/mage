@@ -21,22 +21,27 @@ public class DeclarationInStoneTest extends CardTestPlayerBase {
         String dStone = "Declaration in Stone";
         String memnite = "Memnite"; // {0} 1/1
         String hGiant = "Hill Giant"; // {3}{R} 3/3
+        String erdwal = "Erdwal Illuminator"; // Whenever you investigate for the first time each turn, investigate an additional time.
         
         addCard(Zone.BATTLEFIELD, playerB, memnite, 3);
         addCard(Zone.BATTLEFIELD, playerB, hGiant);
+        addCard(Zone.BATTLEFIELD, playerB, erdwal);
+        addCard(Zone.BATTLEFIELD, playerA, erdwal);
         addCard(Zone.HAND, playerA, dStone);
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
         
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, dStone, memnite);
-        
+
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        setStrictChooseMode(true);
         execute();
         
         assertGraveyardCount(playerA, dStone, 1);
         assertPermanentCount(playerB, hGiant, 1);
         assertPermanentCount(playerB, memnite, 0);
         assertExileCount(playerB, memnite, 3);
-        assertPermanentCount(playerB, "Clue", 3); // 3 creatures exiled = 3 clues for them
+        assertPermanentCount(playerB, "Clue Token", 3 + 1); // 3 creatures exiled = 3 clues for them, plus 1 extra from Erdwal effect
+        assertPermanentCount(playerA, "Clue Token", 0); // player A doesn't investigate here
     }
     
     @Test
@@ -62,14 +67,14 @@ public class DeclarationInStoneTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Plains", 2);
         
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, gTitan);
-        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, dStone, "Zombie");
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, dStone, "Zombie Token");
         
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
         
         assertGraveyardCount(playerB, dStone, 1);
         assertPermanentCount(playerA, gTitan, 1);
-        assertPermanentCount(playerA, "Zombie", 0);
-        assertPermanentCount(playerA, "Clue", 0); // tokens exiled do not generate clues
+        assertPermanentCount(playerA, "Zombie Token", 0);
+        assertPermanentCount(playerA, "Clue Token", 0); // tokens exiled do not generate clues
     }
 }

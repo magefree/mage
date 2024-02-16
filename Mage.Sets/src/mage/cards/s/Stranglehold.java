@@ -46,12 +46,12 @@ public final class Stranglehold extends CardImpl {
 
 class OpponentsCantSearchLibarariesEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public OpponentsCantSearchLibarariesEffect() {
+    OpponentsCantSearchLibarariesEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, true, false);
         staticText = "Your opponents can't search libraries";
     }
 
-    public OpponentsCantSearchLibarariesEffect(final OpponentsCantSearchLibarariesEffect effect) {
+    private OpponentsCantSearchLibarariesEffect(final OpponentsCantSearchLibarariesEffect effect) {
         super(effect);
     }
 
@@ -61,13 +61,8 @@ class OpponentsCantSearchLibarariesEffect extends ContinuousRuleModifyingEffectI
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (mageObject != null) {
             return "You can't search libraries (" + mageObject.getLogName() + " in play).";
         }
@@ -88,12 +83,12 @@ class OpponentsCantSearchLibarariesEffect extends ContinuousRuleModifyingEffectI
 
 class StrangleholdSkipExtraTurnsEffect extends ReplacementEffectImpl {
 
-    public StrangleholdSkipExtraTurnsEffect() {
+    StrangleholdSkipExtraTurnsEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "If an opponent would begin an extra turn, that player skips that turn instead";
     }
 
-    public StrangleholdSkipExtraTurnsEffect(final StrangleholdSkipExtraTurnsEffect effect) {
+    private StrangleholdSkipExtraTurnsEffect(final StrangleholdSkipExtraTurnsEffect effect) {
         super(effect);
     }
 
@@ -103,14 +98,9 @@ class StrangleholdSkipExtraTurnsEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player player = game.getPlayer(event.getPlayerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (player != null && sourceObject != null) {
             game.informPlayers(sourceObject.getLogName() + ": Extra turn of " + player.getLogName() + " skipped");
         }

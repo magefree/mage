@@ -22,7 +22,7 @@ public final class Borborygmos extends CardImpl {
 
     public Borborygmos(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}{G}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.CYCLOPS);
         this.power = new MageInt(6);
         this.toughness = new MageInt(7);

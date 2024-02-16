@@ -6,15 +6,13 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author spjspj
  */
 public final class InsectDeathToken extends TokenImpl {
 
     public InsectDeathToken() {
-        super("Insect", "1/1 green Insect creature token with flying and deathtouch");
+        super("Insect Token", "1/1 green Insect creature token with flying and deathtouch");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add(SubType.INSECT);
@@ -22,11 +20,9 @@ public final class InsectDeathToken extends TokenImpl {
         toughness = new MageInt(1);
         addAbility(FlyingAbility.getInstance());
         addAbility(DeathtouchAbility.getInstance());
-
-        availableImageSetCodes = Arrays.asList("M15", "C20", "C21");
     }
 
-    public InsectDeathToken(final InsectDeathToken token) {
+    private InsectDeathToken(final InsectDeathToken token) {
         super(token);
     }
 

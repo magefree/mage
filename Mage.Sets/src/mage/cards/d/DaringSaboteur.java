@@ -31,7 +31,7 @@ public final class DaringSaboteur extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {2}{U}: Daring Saboteur can't be blocked this turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBeBlockedSourceEffect(Duration.EndOfTurn), new ManaCostsImpl("{2}{U}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBeBlockedSourceEffect(Duration.EndOfTurn), new ManaCostsImpl<>("{2}{U}")));
 
         // Whenever Daring Saboteur deals combat damage to a player, you may draw a card. If you do, discard a card.
         Effect effect = new DrawDiscardControllerEffect(1, 1);

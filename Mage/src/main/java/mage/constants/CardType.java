@@ -13,6 +13,7 @@ import java.util.List;
  */
 public enum CardType {
     ARTIFACT("Artifact", true, true),
+    BATTLE("Battle", true, true),
     CONSPIRACY("Conspiracy", false, false),
     CREATURE("Creature", true, true),
     DUNGEON("Dungeon", false, false),
@@ -42,6 +43,10 @@ public enum CardType {
     @Override
     public String toString() {
         return text;
+    }
+
+    public String getPluralName() {
+        return text.endsWith("y") ? text.substring(0, text.length() - 1) + "ies" : text + 's';
     }
 
     public static CardType fromString(String value) {

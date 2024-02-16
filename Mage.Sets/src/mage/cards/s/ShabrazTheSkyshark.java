@@ -32,7 +32,7 @@ public final class ShabrazTheSkyshark extends CardImpl {
     public ShabrazTheSkyshark(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SHARK);
         this.subtype.add(SubType.BIRD);
         this.power = new MageInt(3);
@@ -54,7 +54,7 @@ public final class ShabrazTheSkyshark extends CardImpl {
         // {W/U}: Target Human gains flying until end of turn.
         ability = new SimpleActivatedAbility(new GainAbilityTargetEffect(
                 FlyingAbility.getInstance(), Duration.EndOfTurn
-        ), new ManaCostsImpl("{W/U}"));
+        ), new ManaCostsImpl<>("{W/U}"));
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }

@@ -22,6 +22,7 @@ import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
 
 import java.util.UUID;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  * @author jeffwadsworth
@@ -34,14 +35,14 @@ public final class RazorBoomerang extends CardImpl {
 
         // Equipped creature has "{tap}, Unattach Razor Boomerang: Razor Boomerang deals 1 damage to any target. Return Razor Boomerang to its owner's hand."
         this.addAbility(new SimpleStaticAbility(new GainAbilityWithAttachmentEffect(
-                "equipped creature has \"{tap}, Unattach {this}: " +
-                        "{this} deals 1 damage to any target. Return {this} to its owner's hand.\"",
+                "equipped creature has \"{T}, Unattach {this}: " +
+                        "It deals 1 damage to any target. Return {this} to its owner's hand.\"",
                 new RazorBoomerangEffect(), new TargetAnyTarget(),
                 new UnattachCost(), new TapSourceCost()
         )));
 
         // Equip {2}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2), new TargetControlledCreaturePermanent(), false));
     }
 
     private RazorBoomerang(final RazorBoomerang card) {

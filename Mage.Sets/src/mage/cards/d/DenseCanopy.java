@@ -52,13 +52,13 @@ class DenseCanopyCantBlockEffect extends RestrictionEffect {
         staticText = "creatures with flying can block only creatures with flying";
     }
 
-    public DenseCanopyCantBlockEffect(final DenseCanopyCantBlockEffect effect) {
+    private DenseCanopyCantBlockEffect(final DenseCanopyCantBlockEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return filter.match(permanent, source.getSourceId(), source.getControllerId(), game);
+        return filter.match(permanent, source.getControllerId(), source, game);
     }
 
     @Override

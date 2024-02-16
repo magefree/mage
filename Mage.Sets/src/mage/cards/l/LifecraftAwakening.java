@@ -56,12 +56,12 @@ public final class LifecraftAwakening extends CardImpl {
 
 class LifecraftAwakeningEffect extends OneShotEffect {
 
-    public LifecraftAwakeningEffect() {
+    LifecraftAwakeningEffect() {
         super(Outcome.BecomeCreature);
         this.staticText = "If it isn't a creature or Vehicle, it becomes a 0/0 Construct artifact creature";
     }
 
-    public LifecraftAwakeningEffect(final LifecraftAwakeningEffect effect) {
+    private LifecraftAwakeningEffect(final LifecraftAwakeningEffect effect) {
         super(effect);
     }
 
@@ -94,7 +94,7 @@ class LifecraftAwakeningToken extends TokenImpl {
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
     }
-    public LifecraftAwakeningToken(final LifecraftAwakeningToken token) {
+    private LifecraftAwakeningToken(final LifecraftAwakeningToken token) {
         super(token);
     }
 

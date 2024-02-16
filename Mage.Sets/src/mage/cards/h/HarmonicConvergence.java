@@ -42,12 +42,12 @@ public final class HarmonicConvergence extends CardImpl {
 
 class HarmonicConvergenceEffect extends OneShotEffect {
 
-    public HarmonicConvergenceEffect() {
+    HarmonicConvergenceEffect() {
         super(Outcome.Neutral);
         this.staticText = "Put all enchantments on top of their owners' libraries";
     }
 
-    public HarmonicConvergenceEffect(final HarmonicConvergenceEffect effect) {
+    private HarmonicConvergenceEffect(final HarmonicConvergenceEffect effect) {
         super(effect);
     }
 
@@ -64,7 +64,7 @@ class HarmonicConvergenceEffect extends OneShotEffect {
                 FilterEnchantmentPermanent filter = new FilterEnchantmentPermanent();
                 filter.add(new OwnerIdPredicate(player.getId()));
                 Cards toLib = new CardsImpl();
-                for(Permanent enchantment: game.getBattlefield().getActivePermanents(filter, playerId, source.getSourceId(), game)) {
+                for(Permanent enchantment: game.getBattlefield().getActivePermanents(filter, playerId, source, game)) {
                     toLib.add(enchantment);
                 }
                 player.putCardsOnTopOfLibrary(toLib, game, source, true);

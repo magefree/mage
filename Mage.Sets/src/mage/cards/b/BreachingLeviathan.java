@@ -70,7 +70,7 @@ class BreachingLeviathanEffect extends OneShotEffect {
         this.staticText = "tap all nonblue creatures. Those creatures don't untap during their controllers' next untap steps";
     }
 
-    public BreachingLeviathanEffect(final BreachingLeviathanEffect effect) {
+    private BreachingLeviathanEffect(final BreachingLeviathanEffect effect) {
         super(effect);
     }
 
@@ -82,7 +82,7 @@ class BreachingLeviathanEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         List<Permanent> doNotUntapNextUntapStep = new ArrayList<>();
-        for (Permanent creature : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+        for (Permanent creature : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
             creature.tap(source, game);
             doNotUntapNextUntapStep.add(creature);
         }

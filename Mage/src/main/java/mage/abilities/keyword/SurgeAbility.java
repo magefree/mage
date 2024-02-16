@@ -1,5 +1,6 @@
 package mage.abilities.keyword;
 
+import mage.ApprovingObject;
 import mage.abilities.SpellAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.cards.Card;
@@ -9,8 +10,6 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.watchers.common.CastSpellLastTurnWatcher;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 /**
@@ -20,7 +19,7 @@ public class SurgeAbility extends SpellAbility {
 
     public static final String SURGE_ACTIVATION_VALUE_KEY = "surgeActivation";
 
-    private String rule;
+    private final String rule;
 
     public SurgeAbility(Card card, String surgeCosts) {
         super(card.getSpellAbility());
@@ -29,16 +28,16 @@ public class SurgeAbility extends SpellAbility {
         zone = Zone.HAND;
         spellAbilityType = SpellAbilityType.BASE_ALTERNATE;
 
-        this.getManaCosts().clear();
-        this.getManaCostsToPay().clear();
-        this.addManaCost(new ManaCostsImpl<>(surgeCosts));
+        this.clearManaCosts();
+        this.clearManaCostsToPay();
+        this.addCost(new ManaCostsImpl<>(surgeCosts));
 
         this.setRuleAtTheTop(true);
         this.rule = "Surge " + surgeCosts
                 + " <i>(You may cast this spell for its surge cost if you or a teammate has cast another spell this turn.)</i>";
     }
 
-    public SurgeAbility(final SurgeAbility ability) {
+    protected SurgeAbility(final SurgeAbility ability) {
         super(ability);
         this.rule = ability.rule;
     }
@@ -54,7 +53,7 @@ public class SurgeAbility extends SpellAbility {
                     if (!player.hasOpponent(playerToCheckId, game)) {
                         if (watcher.getAmountOfSpellsPlayerCastOnCurrentTurn(playerToCheckId) > 0
                                 && super.canActivate(playerId, game).canActivate()) {
-                            return ActivationStatus.getTrue(this, game);
+                            return new ActivationStatus(new ApprovingObject(this, game));
                         }
                     }
                 }
@@ -64,15 +63,9 @@ public class SurgeAbility extends SpellAbility {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public boolean activate(Game game, boolean noMana) {
         if (super.activate(game, noMana)) {
-            List<Integer> surgeActivations = (ArrayList) game.getState().getValue(SURGE_ACTIVATION_VALUE_KEY + getSourceId());
-            if (surgeActivations == null) {
-                surgeActivations = new ArrayList<>(); // zoneChangeCounter
-                game.getState().setValue(SURGE_ACTIVATION_VALUE_KEY + getSourceId(), surgeActivations);
-            }
-            surgeActivations.add(game.getState().getZoneChangeCounter(getSourceId()));
+            this.setCostsTag(SURGE_ACTIVATION_VALUE_KEY, null);
             return true;
         }
         return false;

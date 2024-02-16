@@ -34,7 +34,7 @@ public final class SunmanePegasus extends CardImpl {
         // {1}{W}: Sunmane Pegasus gains vigilance and lifelink until end of turn.
         Ability ability = new SimpleActivatedAbility(new GainAbilitySourceEffect(
                 VigilanceAbility.getInstance(), Duration.EndOfTurn
-        ).setText("{this} gains vigilance"), new ManaCostsImpl("{1}{W}"));
+        ).setText("{this} gains vigilance"), new ManaCostsImpl<>("{1}{W}"));
         ability.addEffect(new GainAbilitySourceEffect(
                 LifelinkAbility.getInstance(), Duration.EndOfTurn
         ).setText("and lifelink until end of turn"));

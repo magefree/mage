@@ -32,7 +32,7 @@ public final class ShelteredThicket extends CardImpl {
         this.addAbility(new EntersBattlefieldTappedAbility());
 
         // Cycling {2}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
 
     }
 

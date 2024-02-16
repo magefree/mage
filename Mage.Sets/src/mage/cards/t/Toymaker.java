@@ -44,7 +44,7 @@ public final class Toymaker extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {1}, {tap}, Discard a card: Target noncreature artifact becomes an artifact creature with power and toughness each equal to its converted mana cost until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ToymakerEffect(), new ManaCostsImpl("{1}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ToymakerEffect(), new ManaCostsImpl<>("{1}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardCardCost());
         ability.addTarget(new TargetPermanent(filter));
@@ -63,12 +63,12 @@ public final class Toymaker extends CardImpl {
 
 class ToymakerEffect extends ContinuousEffectImpl {
 
-    public ToymakerEffect() {
+    ToymakerEffect() {
         super(Duration.EndOfTurn, Outcome.BecomeCreature);
         staticText = "Target noncreature artifact becomes an artifact creature with power and toughness each equal to its mana value until end of turn";
     }
 
-    public ToymakerEffect(final ToymakerEffect effect) {
+    private ToymakerEffect(final ToymakerEffect effect) {
         super(effect);
     }
 
@@ -98,8 +98,8 @@ class ToymakerEffect extends ContinuousEffectImpl {
             case PTChangingEffects_7:
                 if (sublayer == SubLayer.SetPT_7b) {
                     int cmc = artifact.getManaValue();
-                    artifact.getPower().setValue(cmc);
-                    artifact.getToughness().setValue(cmc);
+                    artifact.getPower().setModifiedBaseValue(cmc);
+                    artifact.getToughness().setModifiedBaseValue(cmc);
                 }
         }
         return true;

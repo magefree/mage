@@ -77,7 +77,7 @@ class TheMirariConjectureDelayedTriggeredAbility extends DelayedTriggeredAbility
         super(new CopyTargetSpellEffect(true), Duration.EndOfTurn, false);
     }
 
-    public TheMirariConjectureDelayedTriggeredAbility(final TheMirariConjectureDelayedTriggeredAbility ability) {
+    private TheMirariConjectureDelayedTriggeredAbility(final TheMirariConjectureDelayedTriggeredAbility ability) {
         super(ability);
     }
 

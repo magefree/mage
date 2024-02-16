@@ -1,6 +1,5 @@
 package mage.abilities.effects.common.continuous;
 
-import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -8,16 +7,17 @@ import mage.abilities.TriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
-import mage.abilities.mana.SimpleManaAbility;
-import mage.constants.*;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.SubLayer;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.util.CardUtil;
 
 import java.util.Iterator;
 import java.util.Locale;
-import java.util.Map;
-import java.util.UUID;
 
 /**
  * @author Loki
@@ -29,10 +29,6 @@ public class GainAbilityAllEffect extends ContinuousEffectImpl {
     protected FilterPermanent filter;
     protected boolean forceQuotes = false;
 
-    public GainAbilityAllEffect(Ability ability, Duration duration) {
-        this(ability, duration, new FilterPermanent());
-    }
-
     public GainAbilityAllEffect(Ability ability, Duration duration, FilterPermanent filter) {
         this(ability, duration, filter, false);
     }
@@ -43,11 +39,7 @@ public class GainAbilityAllEffect extends ContinuousEffectImpl {
     }
 
     public GainAbilityAllEffect(Ability ability, Duration duration, FilterPermanent filter, boolean excludeSource) {
-        this(ability, duration, filter, excludeSource, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA);
-    }
-
-    public GainAbilityAllEffect(Ability ability, Duration duration, FilterPermanent filter, boolean excludeSource, Layer layer, SubLayer subLayer) {
-        super(duration, layer, subLayer, Outcome.AddAbility);
+        super(duration, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         this.ability = ability.copy();
         this.ability.newId();
         this.filter = filter;
@@ -56,7 +48,7 @@ public class GainAbilityAllEffect extends ContinuousEffectImpl {
         this.generateGainAbilityDependencies(ability, filter);
     }
 
-    public GainAbilityAllEffect(final GainAbilityAllEffect effect) {
+    protected GainAbilityAllEffect(final GainAbilityAllEffect effect) {
         super(effect);
         this.ability = effect.ability.copy();
         ability.newId(); // This is needed if the effect is copied e.g. by a clone so the ability can be added multiple times to permanents
@@ -70,7 +62,7 @@ public class GainAbilityAllEffect extends ContinuousEffectImpl {
         super.init(source, game);
         setRuntimeData(source, game);
         if (this.affectedObjectsSet) {
-            for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+            for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
                 if (!(excludeSource && perm.getId().equals(source.getSourceId())) && selectedByRuntimeData(perm, source, game)) {
                     affectedObjectList.add(new MageObjectReference(perm, game));
                 }
@@ -99,7 +91,7 @@ public class GainAbilityAllEffect extends ContinuousEffectImpl {
             }
         } else {
             setRuntimeData(source, game);
-            for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+            for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
                 if (!(excludeSource && perm.getId().equals(source.getSourceId())) && selectedByRuntimeData(perm, source, game)) {
                     perm.addAbility(ability, source.getSourceId(), game);
                 }
@@ -140,7 +132,7 @@ public class GainAbilityAllEffect extends ContinuousEffectImpl {
 
         boolean quotes = forceQuotes
                 || ability instanceof SimpleActivatedAbility
-                ||ability instanceof ActivatedManaAbilityImpl
+                || ability instanceof ActivatedManaAbilityImpl
                 || ability instanceof TriggeredAbility;
         boolean each = filter.getMessage().toLowerCase(Locale.ENGLISH).startsWith("each");
         if (excludeSource && !each) {
@@ -154,10 +146,10 @@ public class GainAbilityAllEffect extends ContinuousEffectImpl {
         }
         if (quotes) {
             sb.append('"');
-        }
-        sb.append(ability.getRule());
-        if (quotes) {
+            sb.append(CardUtil.getTextWithFirstCharUpperCase(ability.getRule()));
             sb.append('"');
+        } else {
+            sb.append(CardUtil.stripReminderText(ability.getRule()));
         }
         if (!duration.toString().isEmpty()) {
             sb.append(' ').append(duration.toString());

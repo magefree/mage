@@ -44,7 +44,7 @@ public abstract class TargetPermanentOrPlayerAmount extends TargetAmount {
     @Override
     public boolean canTarget(UUID objectId, Game game) {
 
-        // max targets limit reached (only selected can be choosen again)
+        // max targets limit reached (only selected can be chosen again)
         if (getMaxNumberOfTargets() > 0 && getTargets().size() >= getMaxNumberOfTargets()) {
             return getTargets().contains(objectId);
         }
@@ -60,7 +60,7 @@ public abstract class TargetPermanentOrPlayerAmount extends TargetAmount {
     @Override
     public boolean canTarget(UUID objectId, Ability source, Game game) {
 
-        // max targets limit reached (only selected can be choosen again)
+        // max targets limit reached (only selected can be chosen again)
         if (getMaxNumberOfTargets() > 0 && getTargets().size() >= getMaxNumberOfTargets()) {
             return getTargets().contains(objectId);
         }
@@ -72,7 +72,7 @@ public abstract class TargetPermanentOrPlayerAmount extends TargetAmount {
             MageObject targetSource = source.getSourceObject(game);
             if (permanent != null) {
                 return permanent.canBeTargetedBy(targetSource, source.getControllerId(), game)
-                        && filter.match(permanent, source.getSourceId(), source.getControllerId(), game);
+                        && filter.match(permanent, source.getControllerId(), source, game);
             }
             if (player != null) {
                 return player.canBeTargetedBy(targetSource, source.getControllerId(), game)
@@ -92,10 +92,10 @@ public abstract class TargetPermanentOrPlayerAmount extends TargetAmount {
     }
 
     @Override
-    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
+    public boolean canChoose(UUID sourceControllerId, Ability source, Game game) {
         // no max targets limit here
         int count = 0;
-        MageObject targetSource = game.getObject(sourceId);
+        MageObject targetSource = game.getObject(source);
         for (UUID playerId : game.getState().getPlayersInRange(sourceControllerId, game)) {
             Player player = game.getPlayer(playerId);
             if (player == null
@@ -144,16 +144,16 @@ public abstract class TargetPermanentOrPlayerAmount extends TargetAmount {
     }
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
         Set<UUID> possibleTargets = new HashSet<>();
 
-        // max targets limit reached (only selected can be choosen again)
+        // max targets limit reached (only selected can be chosen again)
         if (getMaxNumberOfTargets() > 0 && getTargets().size() >= getMaxNumberOfTargets()) {
             possibleTargets.addAll(getTargets());
             return possibleTargets;
         }
 
-        MageObject targetSource = game.getObject(sourceId);
+        MageObject targetSource = game.getObject(source);
 
         game.getState()
                 .getPlayersInRange(sourceControllerId, game)
@@ -181,7 +181,7 @@ public abstract class TargetPermanentOrPlayerAmount extends TargetAmount {
     public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
         Set<UUID> possibleTargets = new HashSet<>();
 
-        // max targets limit reached (only selected can be choosen again)
+        // max targets limit reached (only selected can be chosen again)
         if (getMaxNumberOfTargets() > 0 && getTargets().size() >= getMaxNumberOfTargets()) {
             possibleTargets.addAll(getTargets());
             return possibleTargets;

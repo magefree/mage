@@ -34,7 +34,7 @@ public final class FiremindsResearch extends CardImpl {
         // {1}{U}, Remove two charge counters from Firemind's Research: Draw a card.
         Ability ability = new SimpleActivatedAbility(
                 new DrawCardSourceControllerEffect(1),
-                new ManaCostsImpl("{1}{U}")
+                new ManaCostsImpl<>("{1}{U}")
         );
         ability.addCost(new RemoveCountersSourceCost(
                 CounterType.CHARGE.createInstance(2)
@@ -44,7 +44,7 @@ public final class FiremindsResearch extends CardImpl {
         // {1}{R}, Remove five charge counters from Firemind's Research: It deals 5 damage to any target.
         ability = new SimpleActivatedAbility(
                 new DamageTargetEffect(5, "it"),
-                new ManaCostsImpl("{1}{R}")
+                new ManaCostsImpl<>("{1}{R}")
         );
         ability.addCost(new RemoveCountersSourceCost(
                 CounterType.CHARGE.createInstance(5)

@@ -63,7 +63,7 @@ class VerdantSuccessionTriggeredAbility extends TriggeredAbilityImpl {
         this.optional = true;
     }
 
-    public VerdantSuccessionTriggeredAbility(final VerdantSuccessionTriggeredAbility ability) {
+    private VerdantSuccessionTriggeredAbility(final VerdantSuccessionTriggeredAbility ability) {
         super(ability);
     }
 
@@ -106,7 +106,7 @@ class VerdantSuccessionEffect extends OneShotEffect {
         super(Outcome.PutCardInPlay);
     }
 
-    VerdantSuccessionEffect(final VerdantSuccessionEffect effect) {
+    private VerdantSuccessionEffect(final VerdantSuccessionEffect effect) {
         super(effect);
     }
 
@@ -117,7 +117,7 @@ class VerdantSuccessionEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if(mageObject != null) {
             permanent = (Permanent) game.getState().getValue("verdantSuccession" + mageObject);
             if (permanent != null) {

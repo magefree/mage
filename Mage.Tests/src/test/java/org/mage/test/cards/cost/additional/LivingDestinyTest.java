@@ -28,24 +28,21 @@ public class LivingDestinyTest extends CardTestPlayerBase {
     }
 
     /**
-     * Card can't be cast without possibility to pay additional cost
+     * Card can't be cast without possibility to pay additional cost.
      */
     @Test
     public void testCantCast() {
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 4);
         addCard(Zone.HAND, playerA, "Living Destiny");
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Living Destiny");
+        checkPlayableAbility("Cast Living Destiny", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Living", false);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-
-        // card is still at hand
-        assertHandCount(playerA, 1);
     }
 
     /**
-     * Tests that non creature card can't be revealed
+     * Tests that non creature card can't be revealed.
      */
     @Test
     public void testNonCreatureCard() {
@@ -53,7 +50,7 @@ public class LivingDestinyTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Living Destiny");
         addCard(Zone.HAND, playerA, "Divination");
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Living Destiny");
+        checkPlayableAbility("Cast Living Destiny", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Living", false);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();

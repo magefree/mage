@@ -39,7 +39,7 @@ public final class PlaneboundAccomplice extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {R}: You may put a planeswalker card from your hand onto the battlefield. Sacrifice it at the beginning of the next end step.
-        this.addAbility(new SimpleActivatedAbility(new PlaneboundAccompliceEffect(), new ManaCostsImpl("{R}")));
+        this.addAbility(new SimpleActivatedAbility(new PlaneboundAccompliceEffect(), new ManaCostsImpl<>("{R}")));
     }
 
     private PlaneboundAccomplice(final PlaneboundAccomplice card) {
@@ -81,7 +81,7 @@ class PlaneboundAccompliceEffect extends OneShotEffect {
             return true;
         }
         TargetCardInHand target = new TargetCardInHand(filter);
-        if (!controller.choose(Outcome.PutCreatureInPlay, target, source.getSourceId(), game)) {
+        if (!controller.choose(Outcome.PutCreatureInPlay, target, source, game)) {
             return true;
         }
         Card card = game.getCard(target.getFirstTarget());

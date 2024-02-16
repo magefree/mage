@@ -25,7 +25,7 @@ public final class ScepterOfFugue extends CardImpl {
 
 
         // {1}{B}, {T}: Target player discards a card. Activate this ability only during your turn.
-        Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new DiscardTargetEffect(1), new ManaCostsImpl("{1}{B}"), MyTurnCondition.instance);
+        Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new DiscardTargetEffect(1), new ManaCostsImpl<>("{1}{B}"), MyTurnCondition.instance);
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPlayer());
         ability.addHint(MyTurnHint.instance);

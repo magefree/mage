@@ -17,7 +17,7 @@ import mage.constants.SubType;
 public final class Ornithopter extends CardImpl {
 
     public Ornithopter(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE,CardType.ARTIFACT},"{0}");
+        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{0}");
         this.subtype.add(SubType.THOPTER);
         this.power = new MageInt(0);
         this.toughness = new MageInt(2);

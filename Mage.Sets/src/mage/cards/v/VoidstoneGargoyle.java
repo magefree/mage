@@ -13,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.util.CardUtil;
 
 import java.util.UUID;
@@ -57,13 +56,8 @@ class VoidstoneGargoyleReplacementEffect1 extends ContinuousRuleModifyingEffectI
         staticText = "Spells with the chosen name can't be cast";
     }
 
-    public VoidstoneGargoyleReplacementEffect1(final VoidstoneGargoyleReplacementEffect1 effect) {
+    private VoidstoneGargoyleReplacementEffect1(final VoidstoneGargoyleReplacementEffect1 effect) {
         super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override
@@ -73,7 +67,7 @@ class VoidstoneGargoyleReplacementEffect1 extends ContinuousRuleModifyingEffectI
 
     @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (mageObject != null) {
             return "You can't cast a spell with that name (" + mageObject.getName() + ").";
         }
@@ -81,13 +75,15 @@ class VoidstoneGargoyleReplacementEffect1 extends ContinuousRuleModifyingEffectI
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.CAST_SPELL;
+    }
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.CAST_SPELL) {
-            MageObject object = game.getObject(event.getSourceId());
-            String cardName = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
-            return CardUtil.haveSameNames(object, cardName, game);
-        }
-        return false;
+        MageObject object = game.getObject(event.getSourceId());
+        String cardName = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
+        return CardUtil.haveSameNames(object, cardName, game);
     }
 
 }
@@ -99,13 +95,8 @@ class VoidstoneGargoyleRuleModifyingEffect2 extends ContinuousRuleModifyingEffec
         staticText = "Activated abilities of sources with the chosen name can't be activated";
     }
 
-    public VoidstoneGargoyleRuleModifyingEffect2(final VoidstoneGargoyleRuleModifyingEffect2 effect) {
+    private VoidstoneGargoyleRuleModifyingEffect2(final VoidstoneGargoyleRuleModifyingEffect2 effect) {
         super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override
@@ -115,7 +106,7 @@ class VoidstoneGargoyleRuleModifyingEffect2 extends ContinuousRuleModifyingEffec
 
     @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (mageObject != null) {
             return "You can't activate abilities of sources with that name (" + mageObject.getName() + " in play).";
         }
@@ -123,13 +114,14 @@ class VoidstoneGargoyleRuleModifyingEffect2 extends ContinuousRuleModifyingEffec
     }
 
     @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.ACTIVATE_ABILITY) {
-            MageObject object = game.getObject(event.getSourceId());
-            String cardName = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
-            return CardUtil.haveSameNames(object, cardName, game);
-        }
-        return false;
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ACTIVATE_ABILITY;
     }
 
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        MageObject object = game.getObject(event.getSourceId());
+        String cardName = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
+        return CardUtil.haveSameNames(object, cardName, game);
+    }
 }

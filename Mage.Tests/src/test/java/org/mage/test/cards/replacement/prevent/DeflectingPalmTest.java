@@ -80,8 +80,6 @@ public class DeflectingPalmTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
-        assertAllCommandsUsed();
-
         assertGraveyardCount(playerB, "Deflecting Palm", 1);
         assertGraveyardCount(playerA, "Dromoka's Command", 1);
 
@@ -111,6 +109,8 @@ public class DeflectingPalmTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion");
         addCard(Zone.BATTLEFIELD, playerB, "Mountain");
         addCard(Zone.HAND, playerB, "Lightning Bolt");
+
+        setStrictChooseMode(true);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Lightning Bolt", playerA);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Deflecting Palm", null, "Lightning Bolt");

@@ -33,7 +33,7 @@ public final class ViolentImpact extends CardImpl {
         getSpellAbility().addTarget(new TargetPermanent(filter));
 
         // Cycling {2}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
 
     }
 

@@ -28,7 +28,6 @@ public class MeddlingMageTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Meddling Mage", 1);
         assertPermanentCount(playerA, "Savannah Lions", 0);
@@ -47,7 +46,7 @@ public class MeddlingMageTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Meddling Mage");
         setChoice(playerA, "Lightning Bolt"); // name a spell that can't be cast
-
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Isochron Scepter");
         setChoice(playerA, true); // use imprint
         setChoice(playerA, "Lightning Bolt"); // target for imprint
@@ -57,11 +56,11 @@ public class MeddlingMageTest extends CardTestPlayerBase {
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{2}, {T}:");
         setChoice(playerA, true); // create copy
         setChoice(playerA, true); // cast copy
+        addTarget(playerA, "Meddling Mage");
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Meddling Mage", 1);
         assertPermanentCount(playerA, "Isochron Scepter", 1);
@@ -82,13 +81,12 @@ public class MeddlingMageTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Meddling Mage");
         setChoice(playerA, "Ainok Tracker"); // name a spell that can't be cast
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ainok Tracker");
-        setChoice(playerA, true); // cast it face down as 2/2 creature
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ainok Tracker using Morph");
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Meddling Mage", 1);
         assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
@@ -119,7 +117,6 @@ public class MeddlingMageTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
 
         assertPermanentCount(playerA, "Meddling Mage", 1);
@@ -153,7 +150,6 @@ public class MeddlingMageTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Meddling Mage", 1);
         assertHandCount(playerA, "Meddling Mage", 0);
@@ -184,7 +180,6 @@ public class MeddlingMageTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Meddling Mage", 1);
         assertHandCount(playerA, "Meddling Mage", 0);

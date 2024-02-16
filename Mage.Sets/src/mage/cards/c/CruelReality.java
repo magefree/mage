@@ -19,6 +19,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
+import mage.target.common.TargetSacrifice;
 
 import java.util.UUID;
 
@@ -36,7 +37,7 @@ public final class CruelReality extends CardImpl {
         TargetPlayer auraTarget = new TargetPlayer();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Damage));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         //At the beginning of enchanted player's upkeep, that player sacrifices a creature or planeswalker. If the player can't, they lose 5 life.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CruelRealityEffect(), TargetController.ENCHANTED, false));
@@ -84,10 +85,9 @@ class CruelRealityEffect extends OneShotEffect {
         if (cursedPlayer == null || controller == null) {
             return false;
         }
-        TargetPermanent target = new TargetPermanent(filter);
-        target.setNotTarget(true);
-        if (target.canChoose(source.getSourceId(), cursedPlayer.getId(), game)
-                && cursedPlayer.choose(Outcome.Sacrifice, target, source.getId(), game)) {
+        TargetSacrifice target = new TargetSacrifice(filter);
+        if (target.canChoose(cursedPlayer.getId(), source, game)
+                && cursedPlayer.choose(Outcome.Sacrifice, target, source, game)) {
             Permanent objectToBeSacrificed = game.getPermanent(target.getFirstTarget());
             if (objectToBeSacrificed != null) {
                 if (objectToBeSacrificed.sacrifice(source, game)) {

@@ -60,7 +60,7 @@ class OranRiefHydraTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new OranRiefHydraEffect());
     }
 
-    public OranRiefHydraTriggeredAbility(final OranRiefHydraTriggeredAbility ability) {
+    private OranRiefHydraTriggeredAbility(final OranRiefHydraTriggeredAbility ability) {
         super(ability);
     }
 
@@ -101,11 +101,11 @@ class OranRiefHydraTriggeredAbility extends TriggeredAbilityImpl {
 
 class OranRiefHydraEffect extends OneShotEffect {
 
-    public OranRiefHydraEffect() {
+    OranRiefHydraEffect() {
         super(Outcome.BoostCreature);
     }
 
-    public OranRiefHydraEffect(final OranRiefHydraEffect effect) {
+    private OranRiefHydraEffect(final OranRiefHydraEffect effect) {
         super(effect);
     }
 

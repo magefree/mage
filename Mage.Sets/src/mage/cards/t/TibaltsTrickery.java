@@ -52,7 +52,7 @@ public final class TibaltsTrickery extends CardImpl {
 
 class TibaltsTrickeryEffect extends OneShotEffect {
 
-    public TibaltsTrickeryEffect() {
+    TibaltsTrickeryEffect() {
         super(Outcome.Detriment);
         staticText = "Counter target spell. Choose 1, 2, or 3 at random. Its controller mills that many cards, "
                 + "then exiles cards from the top of their library until they exile a nonland card "

@@ -30,7 +30,7 @@ public final class MarwynTheNurturer extends CardImpl {
 
     public MarwynTheNurturer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELF, SubType.DRUID);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

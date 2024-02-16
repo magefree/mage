@@ -57,7 +57,7 @@ class ClockworkDragonEffect extends OneShotEffect {
         staticText = "remove a +1/+1 counter from {this} at end of combat";
     }
 
-    ClockworkDragonEffect(final ClockworkDragonEffect effect) {
+    private ClockworkDragonEffect(final ClockworkDragonEffect effect) {
         super(effect);
     }
 

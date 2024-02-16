@@ -38,12 +38,12 @@ public final class WaveOfReckoning extends CardImpl {
 
 class WaveOfReckoningDamageEffect extends OneShotEffect {
 
-    public WaveOfReckoningDamageEffect() {
+    WaveOfReckoningDamageEffect() {
             super(Outcome.Detriment);
             staticText = "each creature deals damage to itself equal to its power";
         }
 
-        public WaveOfReckoningDamageEffect(final WaveOfReckoningDamageEffect effect) {
+        private WaveOfReckoningDamageEffect(final WaveOfReckoningDamageEffect effect) {
             super(effect);
         }
 
@@ -53,7 +53,7 @@ class WaveOfReckoningDamageEffect extends OneShotEffect {
             FilterPermanent filter = new FilterPermanent();
             filter.add(CardType.CREATURE.getPredicate());
 
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
                 int amount = permanent.getPower().getValue();
                 permanent.damage(amount, permanent.getId(), source, game, false, true);
             }

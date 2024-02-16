@@ -41,12 +41,12 @@ public final class PolymorphistsJest extends CardImpl {
 
 class PolymorphistsJestEffect extends ContinuousEffectImpl {
 
-    public PolymorphistsJestEffect() {
+    PolymorphistsJestEffect() {
         super(Duration.EndOfTurn, Outcome.BecomeCreature);
         staticText = "Until end of turn, each creature target player controls loses all abilities and becomes a blue Frog with base power and toughness 1/1";
     }
 
-    public PolymorphistsJestEffect(final PolymorphistsJestEffect effect) {
+    private PolymorphistsJestEffect(final PolymorphistsJestEffect effect) {
         super(effect);
     }
 
@@ -62,7 +62,7 @@ class PolymorphistsJestEffect extends ContinuousEffectImpl {
             game.getBattlefield()
                     .getActivePermanents(
                             StaticFilters.FILTER_CONTROLLED_CREATURE,
-                            getTargetPointer().getFirst(game, source), source.getSourceId(), game
+                            getTargetPointer().getFirst(game, source), source, game
                     ).stream()
                     .map(permanent -> new MageObjectReference(permanent, game))
                     .forEach(affectedObjectList::add);
@@ -90,8 +90,8 @@ class PolymorphistsJestEffect extends ContinuousEffectImpl {
                     break;
                 case PTChangingEffects_7:
                     if (sublayer == SubLayer.SetPT_7b) {
-                        permanent.getPower().setValue(1);
-                        permanent.getToughness().setValue(1);
+                        permanent.getPower().setModifiedBaseValue(1);
+                        permanent.getToughness().setModifiedBaseValue(1);
                     }
             }
         }

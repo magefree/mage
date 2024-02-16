@@ -44,12 +44,12 @@ public final class DoOrDie extends CardImpl {
 
 class DoOrDieEffect extends OneShotEffect {
 
-    public DoOrDieEffect() {
+    DoOrDieEffect() {
         super(Outcome.Sacrifice);
         this.staticText = "Separate all creatures target player controls into two piles. Destroy all creatures in the pile of that player's choice. They can't be regenerated";
     }
 
-    public DoOrDieEffect(final DoOrDieEffect effect) {
+    private DoOrDieEffect(final DoOrDieEffect effect) {
         super(effect);
     }
 
@@ -67,7 +67,7 @@ class DoOrDieEffect extends OneShotEffect {
             TargetCreaturePermanent creatures = new TargetCreaturePermanent(0, count, new FilterCreaturePermanent("creatures to put in the first pile"), true);
             List<Permanent> pile1 = new ArrayList<>();
             creatures.setRequired(false);
-            if (player.choose(Outcome.Neutral, creatures, source.getSourceId(), game)) {
+            if (player.choose(Outcome.Neutral, creatures, source, game)) {
                 List<UUID> targets = creatures.getTargets();
                 for (UUID targetId : targets) {
                     Permanent p = game.getPermanent(targetId);

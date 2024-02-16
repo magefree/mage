@@ -14,7 +14,7 @@ public class DelayedTriggeredAbilities extends AbilitiesImpl<DelayedTriggeredAbi
     public DelayedTriggeredAbilities() {
     }
 
-    public DelayedTriggeredAbilities(final DelayedTriggeredAbilities abilities) {
+    protected DelayedTriggeredAbilities(final DelayedTriggeredAbilities abilities) {
         super(abilities);
     }
 

@@ -35,7 +35,7 @@ public final class TrestleTroll extends CardImpl {
         this.addAbility(ReachAbility.getInstance());
 
         // {1}{B}{G}: Regenerate Trestle Troll.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{1}{B}{G}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{1}{B}{G}")));
     }
 
     private TrestleTroll(final TrestleTroll card) {

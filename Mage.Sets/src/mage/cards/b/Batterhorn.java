@@ -32,7 +32,7 @@ public final class Batterhorn extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Batterhorn (final Batterhorn card) {
+    private Batterhorn(final Batterhorn card) {
         super(card);
     }
 

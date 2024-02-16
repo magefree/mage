@@ -22,9 +22,7 @@ public class WorldwakePromos extends ExpansionSet {
 
         cards.add(new SetCardInfo("Celestial Colonnade", 133, Rarity.RARE, mage.cards.c.CelestialColonnade.class));
         cards.add(new SetCardInfo("Comet Storm", "76*", Rarity.MYTHIC, mage.cards.c.CometStorm.class));
-        cards.add(new SetCardInfo("Hada Freeblade", 38, Rarity.RARE, mage.cards.h.HadaFreeblade.class));
         cards.add(new SetCardInfo("Joraga Warcaller", "106*", Rarity.RARE, mage.cards.j.JoragaWarcaller.class));
-        cards.add(new SetCardInfo("Kalastria Highborn", 39, Rarity.RARE, mage.cards.k.KalastriaHighborn.class));
         cards.add(new SetCardInfo("Ruthless Cullblade", "65*", Rarity.COMMON, mage.cards.r.RuthlessCullblade.class));
     }
 }

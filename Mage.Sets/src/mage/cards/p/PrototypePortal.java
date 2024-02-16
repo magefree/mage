@@ -14,16 +14,17 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.EmptyToken;
+import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.target.TargetCard;
-import mage.util.CardUtil;
+import mage.util.functions.CopyTokenFunction;
 
 import java.util.UUID;
 
@@ -38,11 +39,11 @@ public final class PrototypePortal extends CardImpl {
         // Imprint - When Prototype Portal enters the battlefield, you may exile an artifact card from your hand.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
                 new PrototypePortalEffect(), true)
-                .withFlavorWord("Imprint")
+                .setAbilityWord(AbilityWord.IMPRINT)
         );
 
         // {X}, {tap}: Create a token that's a copy of the exiled card. X is the converted mana cost of that card.
-        Ability ability = new SimpleActivatedAbility(new PrototypePortalCreateTokenEffect(), new ManaCostsImpl("{X}"));
+        Ability ability = new SimpleActivatedAbility(new PrototypePortalCreateTokenEffect(), new ManaCostsImpl<>("{X}"));
         ability.addCost(new TapSourceCost());
         ability.setCostAdjuster(PrototypePortalAdjuster.instance);
         this.addAbility(ability);
@@ -68,7 +69,8 @@ enum PrototypePortalAdjuster implements CostAdjuster {
             if (!card.getImprinted().isEmpty()) {
                 Card imprinted = game.getCard(card.getImprinted().get(0));
                 if (imprinted != null) {
-                    ability.getManaCostsToPay().add(0, new GenericManaCost(imprinted.getManaValue()));
+                    ability.clearManaCostsToPay();
+                    ability.addManaCostsToPay(new GenericManaCost(imprinted.getManaValue()));
                 }
             }
         }
@@ -96,11 +98,11 @@ class PrototypePortalEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (controller != null && sourceObject != null) {
             if (!controller.getHand().isEmpty()) {
                 TargetCard target = new TargetCard(Zone.HAND, StaticFilters.FILTER_CARD_ARTIFACT);
-                controller.choose(Outcome.Benefit, controller.getHand(), target, game);
+                controller.choose(Outcome.Benefit, controller.getHand(), target, source, game);
                 Card card = controller.getHand().get(target.getFirstTarget(), game);
                 if (card != null) {
                     controller.moveCardsToExile(card, source, game, true, source.getSourceId(), sourceObject.getIdName() + " (Imprint)");
@@ -148,8 +150,7 @@ class PrototypePortalCreateTokenEffect extends OneShotEffect {
         if (!permanent.getImprinted().isEmpty()) {
             Card card = game.getCard(permanent.getImprinted().get(0));
             if (card != null) {
-                EmptyToken token = new EmptyToken();
-                CardUtil.copyTo(token).from(card, game);
+                Token token = CopyTokenFunction.createTokenCopy(card, game);
                 token.putOntoBattlefield(1, game, source, source.getControllerId());
                 return true;
             }

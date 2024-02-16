@@ -1,20 +1,14 @@
-
 package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.MageObject;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.PreventAllDamageToSourceEffect;
-import mage.constants.SubType;
+import mage.abilities.effects.common.PreventAllDamageToSourceByPermanentsEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
+import mage.constants.SubType;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -31,7 +25,7 @@ public final class ChampionLancer extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Prevent all damage that would be dealt to Champion Lancer by creatures.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventDamageToSourceByCardTypeEffect()));
+        this.addAbility(new SimpleStaticAbility(new PreventAllDamageToSourceByPermanentsEffect(StaticFilters.FILTER_PERMANENT_CREATURES)));
     }
 
     private ChampionLancer(final ChampionLancer card) {
@@ -42,34 +36,4 @@ public final class ChampionLancer extends CardImpl {
     public ChampionLancer copy() {
         return new ChampionLancer(this);
     }
-}
-
-class PreventDamageToSourceByCardTypeEffect extends PreventAllDamageToSourceEffect {
-
-    public PreventDamageToSourceByCardTypeEffect() {
-        super(Duration.WhileOnBattlefield);
-    }
-
-    public PreventDamageToSourceByCardTypeEffect(final PreventDamageToSourceByCardTypeEffect effect) {
-        super(effect.duration);
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (super.applies(event, source, game)) {
-            MageObject sourceObject = game.getObject(event.getSourceId());
-            if (sourceObject != null && sourceObject.isCreature(game)) {
-                if (event.getTargetId().equals(source.getSourceId())) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public PreventAllDamageToSourceEffect copy() {
-        return new PreventAllDamageToSourceEffect(this);
-    }
-
 }

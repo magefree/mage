@@ -1,13 +1,16 @@
-
 package mage.counters;
 
+import mage.util.CardUtil;
+import mage.util.Copyable;
+
 import java.io.Serializable;
+
 import org.apache.log4j.Logger;
 
 /**
  * @author BetaSteward_at_googlemail.com
  */
-public class Counter implements Serializable {
+public class Counter implements Serializable, Copyable<Counter> {
 
     private static final Logger logger = Logger.getLogger(Counter.class);
 
@@ -29,7 +32,7 @@ public class Counter implements Serializable {
      * Creates a {@link Counter} with the provided {@code name} and
      * {@code count}
      *
-     * @param name the name of this counter.
+     * @param name  the name of this counter.
      * @param count the value of this counter.
      */
     public Counter(final String name, final int count) {
@@ -42,7 +45,7 @@ public class Counter implements Serializable {
      *
      * @param counter the {@link Counter} to create a copy from.
      */
-    public Counter(final Counter counter) {
+    protected Counter(final Counter counter) {
         this.name = counter.name;
         this.count = counter.count;
     }
@@ -54,20 +57,6 @@ public class Counter implements Serializable {
      */
     public void add(int amount) {
         count += amount;
-    }
-
-    /**
-     * Decreases the {@code count} by one. Will not allow the count to be less
-     * than 0. If an attempt is made to make the count be less than zero, the
-     * call will be logged.
-     */
-    public void decrease() {
-        if (count > 0) {
-            count--;
-        } else {
-            logger.warn("An attempt was made to set the counter '" + name
-                    + "' to less than 0. Setting to 0.");
-        }
     }
 
     /**
@@ -103,6 +92,15 @@ public class Counter implements Serializable {
      */
     public int getCount() {
         return count;
+    }
+
+    /**
+     * Returns a full description of this {@link Counter}, e.g. "a +1/+1 counter" or "two -1/-1 counters"
+     *
+     * @return a full description of this {@link Counter}
+     */
+    public String getDescription() {
+        return CardUtil.getSimpleCountersText(Math.max(count, 1), CounterType.findArticle(name), name);
     }
 
     /**

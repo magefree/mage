@@ -43,7 +43,7 @@ public final class ArmedAndArmored extends CardImpl {
 
 class ArmedAndArmoredEffect extends ContinuousEffectImpl {
 
-    public ArmedAndArmoredEffect() {
+    ArmedAndArmoredEffect() {
         super(Duration.EndOfTurn, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.BecomeCreature);
         staticText = "Vehicles you control become artifact creatures until end of turn";
     }
@@ -78,7 +78,7 @@ class ArmedAndArmoredEffect extends ContinuousEffectImpl {
 
 class ArmedAndArmoredEquipEffect extends OneShotEffect {
 
-    public ArmedAndArmoredEquipEffect() {
+    ArmedAndArmoredEquipEffect() {
         super(Outcome.Benefit);
         staticText = "Choose a Dwarf you control. Attach any number of Equipment you control to it.";
     }
@@ -108,12 +108,12 @@ class ArmedAndArmoredEquipEffect extends OneShotEffect {
         if (!dwarves.isEmpty() && !equipment.isEmpty()) {
             TargetPermanent target = new TargetPermanent(0, 1, dwarfFilter, true);
             target.withChooseHint("dwarf to be equipped");
-            controller.choose(outcome, target, source.getId(), game);
+            controller.choose(outcome, target, source, game);
             Permanent dwarf = game.getPermanent(target.getFirstTarget());
             if (dwarf != null) {
                 target = new TargetPermanent(0, Integer.MAX_VALUE, equipmentFilter, true);
                 target.withChooseHint("equip to " + dwarf.getLogName());
-                controller.choose(outcome, target, source.getId(), game);
+                controller.choose(outcome, target, source, game);
                 for (UUID targetId : target.getTargets()) {
                     dwarf.addAttachment(targetId, source, game);
                     game.informPlayers(game.getPermanent(targetId).getLogName() + " was attached to " + dwarf.getLogName());

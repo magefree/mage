@@ -58,8 +58,7 @@ public class NewPerspectivesTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, flameJet);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, newPerspectives);
-        activateAbility(1, PhaseStep.BEGIN_COMBAT, playerA, "Cycling");
-        setChoice(playerA, true);
+        checkPlayableAbility("Can't cycle", 1, PhaseStep.BEGIN_COMBAT, playerA, "Cycling", false);
 
         setStopAt(1, PhaseStep.END_COMBAT);
         execute();

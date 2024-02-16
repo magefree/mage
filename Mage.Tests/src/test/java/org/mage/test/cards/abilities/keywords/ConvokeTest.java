@@ -24,7 +24,6 @@ public class ConvokeTest extends CardTestPlayerBaseWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -40,7 +39,6 @@ public class ConvokeTest extends CardTestPlayerBaseWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -56,7 +54,6 @@ public class ConvokeTest extends CardTestPlayerBaseWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -73,7 +70,6 @@ public class ConvokeTest extends CardTestPlayerBaseWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -90,7 +86,6 @@ public class ConvokeTest extends CardTestPlayerBaseWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -116,7 +111,6 @@ public class ConvokeTest extends CardTestPlayerBaseWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerB, 20 - 4);
     }
@@ -136,7 +130,6 @@ public class ConvokeTest extends CardTestPlayerBaseWithAIHelps {
         //setStrictChooseMode(true); AI must choose targets
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerB, 20 - 4);
     }
@@ -160,7 +153,6 @@ public class ConvokeTest extends CardTestPlayerBaseWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerB, 20 - 4);
     }
@@ -180,7 +172,6 @@ public class ConvokeTest extends CardTestPlayerBaseWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerB, 20 - 4);
     }
@@ -202,7 +193,6 @@ public class ConvokeTest extends CardTestPlayerBaseWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 20);
         assertLife(playerB, 20);
@@ -231,7 +221,6 @@ public class ConvokeTest extends CardTestPlayerBaseWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 20);
         assertLife(playerB, 20);
@@ -255,7 +244,6 @@ public class ConvokeTest extends CardTestPlayerBaseWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Alpha Myr", 1);
     }
@@ -280,7 +268,7 @@ public class ConvokeTest extends CardTestPlayerBaseWithAIHelps {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Call the Scions");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Call the Scions");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
-        checkPermanentCount("scions", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Eldrazi Scion", 4);
+        checkPermanentCount("scions", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Eldrazi Scion Token", 4);
 
         // test case 1 - playable abilities must not show it as playable (not work, cause we don't known real payment order before payment)
         //checkPlayableAbility("can't use convoke", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Will-Forged Golem", false);
@@ -291,7 +279,6 @@ public class ConvokeTest extends CardTestPlayerBaseWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -312,7 +299,6 @@ public class ConvokeTest extends CardTestPlayerBaseWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Hogaak, Arisen Necropolis", 1);
     }
@@ -337,7 +323,6 @@ public class ConvokeTest extends CardTestPlayerBaseWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Hogaak, Arisen Necropolis", 1);
     }
@@ -361,8 +346,117 @@ public class ConvokeTest extends CardTestPlayerBaseWithAIHelps {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
-        assertPermanentCount(playerA, "Soldier", 1);
+        assertPermanentCount(playerA, "Soldier Token", 1);
+    }
+    @Test
+    public void test_AncientImperiosaur_Convoke() {
+        // Ancient Imperiosaur {5}{G}{G}
+        // Convoke, Trample, ward {2}
+        // Ancient Imperiosaur enters the battlefield with two +1/+1 counters on it for each creature that convoked it.
+        // 6/6
+        addCard(Zone.HAND, playerA, "Ancient Imperiosaur", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears", 6);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ancient Imperiosaur");
+        addTarget(playerA, "Grizzly Bears", 6);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+        assertPowerToughness(playerA,"Ancient Imperiosaur",18,18);
+    }
+    @Test
+    public void test_Copy_Counters_Convoke() {
+        // Venerated Loxodon {4}{W}
+        // Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature’s color.)
+        // When Venerated Loxodon enters the battlefield, put a +1/+1 counter on each creature that convoked it.
+
+        //Copying a spell on the stack copies the costs paid, so both the original and the copy should add counters
+        addCard(Zone.HAND, playerA, "Venerated Loxodon", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Memnite", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears", 2);
+
+        addCard(Zone.HAND, playerA, "Double Major", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
+
+        addCard(Zone.HAND, playerB, "Hideous Laughter", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Swamp", 4);
+
+        // use special action to pay (need disabled auto-payment and prepared mana pool)
+        disableManaAutoPayment(playerA);
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {W}", 3);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Venerated Loxodon");
+        setChoice(playerA, "White", 3); // pay WWW
+        setChoice(playerA, "Convoke");
+        addTarget(playerA, "Memnite"); // pay 4 as convoke
+        setChoice(playerA, "Convoke");
+        addTarget(playerA, "Grizzly Bears"); // pay 5 as convoke
+
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {U}", 1);
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {G}", 1);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Double Major", "Venerated Loxodon");
+        setChoice(playerA, "Blue", 1);
+        setChoice(playerA, "Green", 1);
+
+        waitStackResolved(1,PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Hideous Laughter");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+        assertGraveyardCount(playerA,"Memnite",1);
+        assertGraveyardCount(playerA,"Grizzly Bears",1);
+        assertPowerToughness(playerA,"Memnite", 1, 1);
+        assertPowerToughness(playerA,"Grizzly Bears", 2, 2);
+        assertPermanentCount(playerA,"Venerated Loxodon",2);
+    }
+    @Test
+    public void test_Clone_Counters_Convoke() {
+        // Venerated Loxodon {4}{W}
+        // Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature’s color.)
+        // When Venerated Loxodon enters the battlefield, put a +1/+1 counter on each creature that convoked it.
+
+        // Cloning a creature on the battlefield should not add counters
+        addCard(Zone.HAND, playerA, "Venerated Loxodon", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Memnite", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
+
+        addCard(Zone.HAND, playerA, "Clone", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
+
+        addCard(Zone.BATTLEFIELD, playerB, "Swamp", 4);
+        addCard(Zone.HAND, playerB, "Hideous Laughter", 1);
+
+        // use special action to pay (need disabled auto-payment and prepared mana pool)
+        disableManaAutoPayment(playerA);
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {W}", 3);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Venerated Loxodon");
+        setChoice(playerA, "White", 3); //Pay WWW
+        setChoice(playerA, "Convoke");
+        addTarget(playerA, "Memnite"); // pay 4 as convoke
+        setChoice(playerA, "Convoke");
+        addTarget(playerA, "Grizzly Bears"); // pay 5 as convoke
+
+        waitStackResolved(1,PhaseStep.PRECOMBAT_MAIN);
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {U}", 4);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Clone");
+        setChoice(playerA, "Blue", 4);
+        setChoice(playerA,true);
+        setChoice(playerA,"Venerated Loxodon");
+
+        waitStackResolved(1,PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Hideous Laughter");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+        assertGraveyardCount(playerA,"Memnite",2);
+        assertGraveyardCount(playerA,"Grizzly Bears",1);
+        assertPowerToughness(playerA,"Grizzly Bears", 1, 1);
+        assertPermanentCount(playerA,"Venerated Loxodon",2);
     }
 }

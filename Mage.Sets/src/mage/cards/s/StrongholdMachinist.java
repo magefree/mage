@@ -32,7 +32,7 @@ public final class StrongholdMachinist extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {U}{U}, {tap}, Discard a card: Counter target noncreature spell.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new ManaCostsImpl("{U}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new ManaCostsImpl<>("{U}{U}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardCardCost());
         ability.addTarget(new TargetSpell(StaticFilters.FILTER_SPELL_NON_CREATURE));

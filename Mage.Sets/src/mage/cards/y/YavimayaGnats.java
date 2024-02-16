@@ -28,7 +28,7 @@ public final class YavimayaGnats extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // {G}: Regenerate Yavimaya Gnats.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{G}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{G}")));
     }
 
     private YavimayaGnats(final YavimayaGnats card) {

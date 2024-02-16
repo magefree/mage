@@ -43,19 +43,19 @@ public final class Nightcreep extends CardImpl {
 
 class NightcreepLandEffect extends BecomesBasicLandTargetEffect {
 
-    public NightcreepLandEffect() {
+    NightcreepLandEffect() {
         super(Duration.EndOfTurn, SubType.SWAMP);
-        this.staticText = "";
+        this.staticText = "and all lands become Swamps";
     }
 
-    public NightcreepLandEffect(NightcreepLandEffect effect) {
+    private NightcreepLandEffect(final NightcreepLandEffect effect) {
         super(effect);
     }
 
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        List<Permanent> targets = new ArrayList<>(game.getBattlefield().getActivePermanents(StaticFilters.FILTER_LAND, source.getControllerId(), source.getSourceId(), game));
+        List<Permanent> targets = new ArrayList<>(game.getBattlefield().getActivePermanents(StaticFilters.FILTER_LAND, source.getControllerId(), source, game));
         this.setTargetPointer(new FixedTargets(targets, game));
     }
 
@@ -67,19 +67,19 @@ class NightcreepLandEffect extends BecomesBasicLandTargetEffect {
 
 class NightcreepCreatureEffect extends BecomesColorTargetEffect {
 
-    public NightcreepCreatureEffect() {
+    NightcreepCreatureEffect() {
         super(ObjectColor.BLACK, Duration.EndOfTurn);
-        this.staticText = "Until end of turn, all creatures become black and all lands become Swamps";
+        this.staticText = "Until end of turn, all creatures become black";
     }
 
-    public NightcreepCreatureEffect(NightcreepCreatureEffect effect) {
+    private NightcreepCreatureEffect(final NightcreepCreatureEffect effect) {
         super(effect);
     }
 
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        List<Permanent> targets = new ArrayList<>(game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source.getSourceId(), game));
+        List<Permanent> targets = new ArrayList<>(game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source, game));
         this.setTargetPointer(new FixedTargets(targets, game));
     }
 

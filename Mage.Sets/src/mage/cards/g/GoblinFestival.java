@@ -31,7 +31,7 @@ public final class GoblinFestival extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{R}");
 
         // {2}: Goblin Festival deals 1 damage to any target. Flip a coin. If you lose the flip, choose one of your opponents. That player gains control of Goblin Festival.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl("{2}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl<>("{2}"));
         ability.addTarget(new TargetAnyTarget());
         ability.addEffect(new GoblinFestivalChangeControlEffect());
         this.addAbility(ability);
@@ -49,12 +49,12 @@ public final class GoblinFestival extends CardImpl {
 
 class GoblinFestivalChangeControlEffect extends OneShotEffect {
 
-    public GoblinFestivalChangeControlEffect() {
+    GoblinFestivalChangeControlEffect() {
         super(Outcome.Benefit);
         this.staticText = "Flip a coin. If you lose the flip, choose one of your opponents. That player gains control of {this}";
     }
 
-    public GoblinFestivalChangeControlEffect(final GoblinFestivalChangeControlEffect effect) {
+    private GoblinFestivalChangeControlEffect(final GoblinFestivalChangeControlEffect effect) {
         super(effect);
     }
 
@@ -71,8 +71,8 @@ class GoblinFestivalChangeControlEffect extends OneShotEffect {
             if (!controller.flipCoin(source, game, true)) {
                 if (sourcePermanent != null) {
                     Target target = new TargetOpponent(true);
-                    if (target.canChoose(source.getSourceId(), controller.getId(), game)) {
-                        while (!target.isChosen() && target.canChoose(source.getSourceId(), controller.getId(), game) && controller.canRespond()) {
+                    if (target.canChoose(controller.getId(), source, game)) {
+                        while (!target.isChosen() && target.canChoose(controller.getId(), source, game) && controller.canRespond()) {
                             controller.chooseTarget(outcome, target, source, game);
                         }
                     }
@@ -98,9 +98,10 @@ class GoblinFestivalGainControlEffect extends ContinuousEffectImpl {
     public GoblinFestivalGainControlEffect(Duration duration, UUID controller) {
         super(duration, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
         this.controller = controller;
+        this.staticText = "That player gains control of {this}";
     }
 
-    public GoblinFestivalGainControlEffect(final GoblinFestivalGainControlEffect effect) {
+    private GoblinFestivalGainControlEffect(final GoblinFestivalGainControlEffect effect) {
         super(effect);
         this.controller = effect.controller;
     }
@@ -120,10 +121,5 @@ class GoblinFestivalGainControlEffect extends ContinuousEffectImpl {
             return permanent.changeControllerId(controller, game, source);
         }
         return false;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return "That player gains control of {this}";
     }
 }

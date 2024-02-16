@@ -1,7 +1,6 @@
 
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -18,6 +17,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.filter.FilterSpell;
 import mage.filter.FilterStackObject;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.other.NumberOfTargetsPredicate;
@@ -28,13 +28,15 @@ import mage.target.TargetPermanent;
 import mage.target.TargetStackObject;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
  *
  * @author spjspj
  */
 public final class VeryCrypticCommandD extends CardImpl {
 
-    private static final FilterStackObject filter = new FilterStackObject("spell or ability with a single target");
+    private static final FilterStackObject filter = new FilterSpell("spell with a single target");
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("nontoken creature");
 
     static {
@@ -54,22 +56,19 @@ public final class VeryCrypticCommandD extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent());
 
         // Draw two cards, then discard a card.
-        Mode mode = new Mode();
-        mode.addEffect(new DrawCardSourceControllerEffect(2));
+        Mode mode = new Mode(new DrawCardSourceControllerEffect(2));
         Effect effect = new DiscardControllerEffect(1);
         effect.setText(", then discard a card");
         mode.addEffect(effect);
         this.getSpellAbility().getModes().addMode(mode);
 
         // Change the target of target spell with a single target.
-        mode = new Mode();
-        mode.addEffect(new ChooseNewTargetsTargetEffect(true, true));
+        mode = new Mode(new ChooseNewTargetsTargetEffect(true, true));
         mode.addTarget(new TargetStackObject(filter));
         this.getSpellAbility().getModes().addMode(mode);
 
         // Turn over target nontoken creature.
-        mode = new Mode();
-        mode.addEffect(new TurnOverEffect());
+        mode = new Mode(new TurnOverEffect());
         mode.addTarget(new TargetCreaturePermanent(filter2));
         this.getSpellAbility().getModes().addMode(mode);
     }
@@ -91,7 +90,7 @@ class TurnOverEffect extends OneShotEffect {
         this.staticText = "Turn over target nontoken creature";
     }
 
-    TurnOverEffect(final TurnOverEffect effect) {
+    private TurnOverEffect(final TurnOverEffect effect) {
         super(effect);
     }
 

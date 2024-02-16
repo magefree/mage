@@ -9,9 +9,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -19,13 +17,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class LoyalGryff extends CardImpl {
-
-    private static final FilterControlledPermanent filter
-            = new FilterControlledCreaturePermanent("another creature you control");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
 
     public LoyalGryff(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
@@ -42,7 +33,7 @@ public final class LoyalGryff extends CardImpl {
 
         // When Loyal Gryff enters the battlefield, you may return another creature you control to its owner's hand.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new ReturnToHandChosenControlledPermanentEffect(filter), true
+                new ReturnToHandChosenControlledPermanentEffect(StaticFilters.FILTER_ANOTHER_CREATURE_YOU_CONTROL), true
         ));
     }
 

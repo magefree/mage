@@ -10,7 +10,7 @@ import mage.constants.SubType;
 public final class DwarfToken extends TokenImpl {
 
     public DwarfToken() {
-        super("Dwarf", "1/1 red Dwarf creature token");
+        super("Dwarf Token", "1/1 red Dwarf creature token");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
         subtype.add(SubType.DWARF);

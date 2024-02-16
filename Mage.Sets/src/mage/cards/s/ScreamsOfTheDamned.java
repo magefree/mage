@@ -24,7 +24,7 @@ public final class ScreamsOfTheDamned extends CardImpl {
 
 
         // {1}{B}, Exile a card from your graveyard: Screams of the Damned deals 1 damage to each creature and each player.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageEverythingEffect(1), new ManaCostsImpl("{1}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageEverythingEffect(1), new ManaCostsImpl<>("{1}{B}"));
         ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard()));
         this.addAbility(ability);
     }

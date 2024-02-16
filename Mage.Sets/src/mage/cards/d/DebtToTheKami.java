@@ -51,7 +51,7 @@ public final class DebtToTheKami extends CardImpl {
 
 class DebtToTheKamiExileCreatureEffect extends OneShotEffect {
 
-    public DebtToTheKamiExileCreatureEffect() {
+    DebtToTheKamiExileCreatureEffect() {
         super(Outcome.Exile);
         this.staticText = "Target opponent exiles a creature they control";
     }
@@ -72,8 +72,8 @@ class DebtToTheKamiExileCreatureEffect extends OneShotEffect {
             return false;
         }
         Target target = new TargetControlledCreaturePermanent();
-        target.setNotTarget(true);
-        player.choose(outcome, target, source.getSourceId(), game);
+        target.withNotTarget(true);
+        player.choose(outcome, target, source, game);
         Permanent permanent = game.getPermanent(target.getFirstTarget());
         if (permanent == null) {
             return false;
@@ -111,8 +111,8 @@ class DebtToTheKamiExileEnchantmentEffect extends OneShotEffect {
             return false;
         }
         Target target = new TargetControlledPermanent(filter);
-        target.setNotTarget(true);
-        player.choose(outcome, target, source.getSourceId(), game);
+        target.withNotTarget(true);
+        player.choose(outcome, target, source, game);
         Permanent permanent = game.getPermanent(target.getFirstTarget());
         if (permanent == null) {
             return false;

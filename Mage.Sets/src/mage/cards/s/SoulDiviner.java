@@ -46,7 +46,7 @@ public final class SoulDiviner extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 new DrawCardSourceControllerEffect(1), new TapSourceCost()
         );
-        ability.addCost(new RemoveCounterCost(new TargetPermanent(filter)));
+        ability.addCost(new RemoveCounterCost(new TargetPermanent(1, 1, filter, true)));
         this.addAbility(ability);
     }
 

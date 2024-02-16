@@ -40,7 +40,7 @@ public final class MordantDragon extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // {1}{R}: Mordant Dragon gets +1/+0 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{1}{R}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{1}{R}")));
 
         // Whenever Mordant Dragon deals combat damage to a player, you may have it deal that much damage to target creature that player controls.
         this.addAbility(new MordantDragonTriggeredAbility());
@@ -62,7 +62,7 @@ class MordantDragonTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new MordantDragonEffect(), true);
     }
 
-    public MordantDragonTriggeredAbility(final MordantDragonTriggeredAbility ability) {
+    private MordantDragonTriggeredAbility(final MordantDragonTriggeredAbility ability) {
         super(ability);
     }
 
@@ -99,18 +99,18 @@ class MordantDragonTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         return "Whenever {this} deals combat damage to a player, "
-                + "you may have it deal that much damage to target creature that player controls";
+                + "you may have it deal that much damage to target creature that player controls.";
     }
 }
 
 class MordantDragonEffect extends OneShotEffect {
 
-    public MordantDragonEffect() {
+    MordantDragonEffect() {
         super(Outcome.Damage);
         staticText = "it deals that much damage to target creature that player controls";
     }
 
-    public MordantDragonEffect(final MordantDragonEffect effect) {
+    private MordantDragonEffect(final MordantDragonEffect effect) {
         super(effect);
     }
 

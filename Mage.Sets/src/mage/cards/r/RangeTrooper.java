@@ -59,19 +59,19 @@ public final class RangeTrooper extends CardImpl {
 
 class RangeTrooperEffect extends OneShotEffect {
 
-    public RangeTrooperEffect() {
+    RangeTrooperEffect() {
         super(Outcome.Detriment);
         staticText = "exile target creature. Return that creature to the battlefield at the beginning of the next end step";
     }
 
-    public RangeTrooperEffect(final RangeTrooperEffect effect) {
+    private RangeTrooperEffect(final RangeTrooperEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getFirstTarget());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (permanent != null && sourceObject != null) {
             if (permanent.moveToExile(source.getSourceId(), sourceObject.getIdName(), source, game)) {
                 Effect effect = new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false);

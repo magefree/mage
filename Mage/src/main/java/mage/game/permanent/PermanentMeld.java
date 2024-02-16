@@ -1,18 +1,21 @@
-
 package mage.game.permanent;
 
-import java.util.UUID;
 import mage.cards.Card;
 import mage.game.Game;
 
+import java.util.UUID;
+
 /**
- *
  * @author emerald000
  */
 public class PermanentMeld extends PermanentCard {
 
     public PermanentMeld(Card card, UUID controllerId, Game game) {
         super(card, controllerId, game);
+    }
+
+    private PermanentMeld(final PermanentMeld permanent) {
+        super(permanent);
     }
 
     @Override
@@ -22,5 +25,15 @@ public class PermanentMeld extends PermanentCard {
         } else {
             return this.getCard().getManaValue();
         }
+    }
+
+    @Override
+    public boolean isTransformable() {
+        return false;
+    }
+
+    @Override
+    public PermanentMeld copy() {
+        return new PermanentMeld(this);
     }
 }

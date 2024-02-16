@@ -12,6 +12,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.target.common.TargetControlledPermanent;
 
@@ -33,7 +34,7 @@ public final class StormwatchEagle extends CardImpl {
         // Sacrifice a land: Return Stormwatch Eagle to its owner's hand.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, 
                 new ReturnToHandSourceEffect(), 
-                new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledLandPermanent("a land")))));
+                new SacrificeTargetCost(StaticFilters.FILTER_LAND)));
     }
 
     private StormwatchEagle(final StormwatchEagle card) {

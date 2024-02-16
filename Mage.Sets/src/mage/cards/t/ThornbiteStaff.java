@@ -20,6 +20,7 @@ import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
@@ -48,9 +49,9 @@ public final class ThornbiteStaff extends CardImpl {
         // Whenever a Shaman creature enters the battlefield, you may attach Thornbite Staff to it.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(
                 Zone.BATTLEFIELD, new AttachEffect(Outcome.Detriment, "attach {this} to it"),
-                filter, true, SetTargetPointer.PERMANENT, null));
+                filter, true, SetTargetPointer.PERMANENT));
         // Equip {4}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(4)));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(4), new TargetControlledCreaturePermanent(), false));
     }
 
     private ThornbiteStaff(final ThornbiteStaff card) {

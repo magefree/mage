@@ -54,14 +54,14 @@ public final class IsolatedWatchtower extends CardImpl {
 
 class IsolatedWatchtowerEffect extends OneShotEffect {
 
-    public IsolatedWatchtowerEffect() {
+    IsolatedWatchtowerEffect() {
         super(Outcome.Benefit);
         this.staticText = "scry 1, then you may reveal the top card "
                 + "of your library. If a basic land card is revealed this way, "
                 + "put it onto the battlefield tapped";
     }
 
-    public IsolatedWatchtowerEffect(final IsolatedWatchtowerEffect effect) {
+    private IsolatedWatchtowerEffect(final IsolatedWatchtowerEffect effect) {
         super(effect);
     }
 
@@ -84,7 +84,7 @@ class IsolatedWatchtowerEffect extends OneShotEffect {
         }
         Card card = player.getLibrary().getFromTop(game);
         player.revealCards(source, new CardsImpl(card), game);
-        if (card.isBasic() && card.isLand(game)) {
+        if (card.isBasic(game) && card.isLand(game)) {
             player.moveCards(
                     card, Zone.BATTLEFIELD, source,
                     game, true, false, true, null

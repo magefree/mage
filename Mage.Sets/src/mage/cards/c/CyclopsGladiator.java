@@ -52,12 +52,12 @@ public final class CyclopsGladiator extends CardImpl {
 
 class CyclopsGladiatorEffect extends OneShotEffect {
 
-    public CyclopsGladiatorEffect() {
+    CyclopsGladiatorEffect() {
         super(Outcome.Damage);
         staticText = "you may have it deal damage equal to its power to target creature defending player controls. If you do, that creature deals damage equal to its power to {this}";
     }
 
-    public CyclopsGladiatorEffect(final CyclopsGladiatorEffect effect) {
+    private CyclopsGladiatorEffect(final CyclopsGladiatorEffect effect) {
         super(effect);
     }
 
@@ -69,7 +69,7 @@ class CyclopsGladiatorEffect extends OneShotEffect {
             filter.add(new ControllerIdPredicate(defenderId));
             TargetCreaturePermanent target = new TargetCreaturePermanent(filter);
             Player player = game.getPlayer(source.getControllerId());
-            if (target.canChoose(source.getSourceId(), source.getControllerId(), game)) {
+            if (target.canChoose(source.getControllerId(), source, game)) {
                 if (player != null && player.chooseTarget(Outcome.Detriment, target, source, game)) {
                     Permanent permanent = game.getPermanent(target.getFirstTarget());
                     Permanent cyclops = game.getPermanent(source.getSourceId());

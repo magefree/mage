@@ -52,12 +52,12 @@ public final class FertileThicket extends CardImpl {
 
 class FertileThicketEffect extends OneShotEffect {
 
-    public FertileThicketEffect() {
+    FertileThicketEffect() {
         super(Outcome.Benefit);
         this.staticText = "you may look at the top five cards of your library. If you do, reveal up to one basic land card from among them, then put that card on top of your library and the rest on the bottom in any order";
     }
 
-    public FertileThicketEffect(final FertileThicketEffect effect) {
+    private FertileThicketEffect(final FertileThicketEffect effect) {
         super(effect);
     }
 
@@ -69,7 +69,7 @@ class FertileThicketEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (controller != null && sourceObject != null) {
             Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, 5));
             controller.lookAtCards(sourceObject.getIdName(), cards, game);

@@ -39,7 +39,7 @@ public final class RonaDiscipleOfGix extends CardImpl {
     public RonaDiscipleOfGix(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ARTIFICER);
         this.power = new MageInt(2);
@@ -76,12 +76,12 @@ public final class RonaDiscipleOfGix extends CardImpl {
 
 class RonaDiscipleOfGixPlayNonLandEffect extends AsThoughEffectImpl {
 
-    public RonaDiscipleOfGixPlayNonLandEffect() {
+    RonaDiscipleOfGixPlayNonLandEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "You may cast nonland cards exiled with {this}";
     }
 
-    public RonaDiscipleOfGixPlayNonLandEffect(final RonaDiscipleOfGixPlayNonLandEffect effect) {
+    private RonaDiscipleOfGixPlayNonLandEffect(final RonaDiscipleOfGixPlayNonLandEffect effect) {
         super(effect);
     }
 
@@ -99,7 +99,7 @@ class RonaDiscipleOfGixPlayNonLandEffect extends AsThoughEffectImpl {
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
         if (affectedControllerId.equals(source.getControllerId())) {
             Card card = game.getCard(objectId);
-            MageObject sourceObject = game.getObject(source.getSourceId());
+            MageObject sourceObject = game.getObject(source);
             if (card != null && !card.isLand(game) && sourceObject != null) {
                 UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), sourceObject.getZoneChangeCounter(game));
                 if (exileId != null) {
@@ -114,12 +114,12 @@ class RonaDiscipleOfGixPlayNonLandEffect extends AsThoughEffectImpl {
 
 class RonaDiscipleOfGixExileEffect extends OneShotEffect {
 
-    public RonaDiscipleOfGixExileEffect() {
+    RonaDiscipleOfGixExileEffect() {
         super(Outcome.Exile);
         this.staticText = "Exile the top card of your library";
     }
 
-    public RonaDiscipleOfGixExileEffect(final RonaDiscipleOfGixExileEffect effect) {
+    private RonaDiscipleOfGixExileEffect(final RonaDiscipleOfGixExileEffect effect) {
         super(effect);
     }
 

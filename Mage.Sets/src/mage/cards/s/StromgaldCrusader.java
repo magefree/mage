@@ -35,10 +35,10 @@ public final class StromgaldCrusader extends CardImpl {
         this.addAbility(ProtectionAbility.from(ObjectColor.WHITE));
         
         // {B}: Stromgald Crusader gains flying until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{B}")));        
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{B}")));
         
         // {B}{B}: Stromgald Crusader gets +1/+0 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1,0, Duration.EndOfTurn), new ManaCostsImpl("{B}{B}")));                
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1,0, Duration.EndOfTurn), new ManaCostsImpl<>("{B}{B}")));
     }
 
     private StromgaldCrusader(final StromgaldCrusader card) {

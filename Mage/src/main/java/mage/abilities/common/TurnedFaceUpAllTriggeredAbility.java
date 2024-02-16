@@ -34,9 +34,10 @@ public class TurnedFaceUpAllTriggeredAbility extends TriggeredAbilityImpl {
         this.setWorksFaceDown(true);
         this.filter = filter;
         this.setTargetPointer = setTargetPointer;
+        setTriggerPhrase("Whenever " + filter.getMessage() + " is turned face up, ");
     }
 
-    public TurnedFaceUpAllTriggeredAbility(final TurnedFaceUpAllTriggeredAbility ability) {
+    protected TurnedFaceUpAllTriggeredAbility(final TurnedFaceUpAllTriggeredAbility ability) {
         super(ability);
         this.setTargetPointer = ability.setTargetPointer;
         this.filter = ability.filter;
@@ -49,7 +50,7 @@ public class TurnedFaceUpAllTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.TURNEDFACEUP;
+        return event.getType() == GameEvent.EventType.TURNED_FACE_UP;
     }
 
     @Override
@@ -67,7 +68,7 @@ public class TurnedFaceUpAllTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         Permanent permanent = game.getPermanent(event.getTargetId());
-        if (filter.match(permanent, getSourceId(), getControllerId(), game)) {
+        if (filter.match(permanent, getControllerId(), this, game)) {
             if (setTargetPointer) {
                 for (Effect effect : getEffects()) {
                     effect.setTargetPointer(new FixedTarget(event.getTargetId(), game));
@@ -76,11 +77,6 @@ public class TurnedFaceUpAllTriggeredAbility extends TriggeredAbilityImpl {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever " + filter.getMessage() + " is turned face up, " ;
     }
 }
 

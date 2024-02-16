@@ -29,7 +29,7 @@ public final class RazakethTheFoulblooded extends CardImpl {
     public RazakethTheFoulblooded(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{B}{B}{B}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DEMON);
         this.power = new MageInt(8);
         this.toughness = new MageInt(8);
@@ -42,8 +42,7 @@ public final class RazakethTheFoulblooded extends CardImpl {
 
         // Pay 2 life, Sacrifice another creature: Search your library for a card and put that card into your hand. Then shuffle your library.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInHandEffect(new TargetCardInLibrary(), false, true), new PayLifeCost(2));
-        ability.addCost(new SacrificeTargetCost(
-                new TargetControlledCreaturePermanent(1, 1, StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, false)));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE));
         this.addAbility(ability);
     }
 

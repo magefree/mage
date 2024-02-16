@@ -5,10 +5,11 @@ import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileSpellEffect;
-import mage.abilities.effects.common.continuous.BecomesBlackZombieAdditionEffect;
+import mage.abilities.effects.common.continuous.AddCreatureTypeAdditionEffect;
 import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
@@ -54,12 +55,12 @@ public final class NecromanticSelection extends CardImpl {
 
 class NecromanticSelectionEffect extends OneShotEffect {
 
-    public NecromanticSelectionEffect() {
+    NecromanticSelectionEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "Destroy all creatures, then return a creature card put into a graveyard this way to the battlefield under your control. It's a black Zombie in addition to its other colors and types";
     }
 
-    public NecromanticSelectionEffect(final NecromanticSelectionEffect effect) {
+    private NecromanticSelectionEffect(final NecromanticSelectionEffect effect) {
         super(effect);
     }
 
@@ -71,11 +72,11 @@ class NecromanticSelectionEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (sourceObject != null
                 && controller != null) {
             Cards cards = new CardsImpl();
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, controller.getId(), source.getSourceId(), game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, controller.getId(), source, game)) {
                 permanent.destroy(source, game, false);
                 game.checkStateAndTriggered(); // Meren of the Clan Nel Toth bug #8515
                 if (game.getState().getZone(permanent.getId()) == Zone.GRAVEYARD) {
@@ -89,12 +90,12 @@ class NecromanticSelectionEffect extends OneShotEffect {
             }
             filter.add(Predicates.or(cardIdPredicates));
             Target target = new TargetCardInGraveyard(filter);
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             if (controller.chooseTarget(Outcome.Benefit, target, source, game)) {
                 Card card = game.getCard(target.getFirstTarget());
                 if (card != null) {
                     controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-                    ContinuousEffect effect = new BecomesBlackZombieAdditionEffect();
+                    ContinuousEffect effect = new AddCreatureTypeAdditionEffect(SubType.ZOMBIE, true);
                     effect.setText("It's a black Zombie in addition to its other colors and types");
                     effect.setTargetPointer(new FixedTarget(card.getId(), game));
                     game.addEffect(effect, source);

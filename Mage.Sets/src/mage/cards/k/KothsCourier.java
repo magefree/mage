@@ -26,7 +26,7 @@ public final class KothsCourier extends CardImpl {
         this.addAbility(new ForestwalkAbility());
     }
 
-    public KothsCourier (final KothsCourier card) {
+    private KothsCourier(final KothsCourier card) {
         super(card);
     }
 

@@ -1,12 +1,9 @@
 package mage.game.permanent.token;
 
 import mage.MageInt;
-import mage.ObjectColor;
 import mage.abilities.keyword.FlyingAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
-
-import java.util.Arrays;
 
 /**
  * @author North
@@ -14,7 +11,7 @@ import java.util.Arrays;
 public final class DrakeToken extends TokenImpl {
 
     public DrakeToken() {
-        super("Drake", "2/2 blue Drake creature token with flying");
+        super("Drake Token", "2/2 blue Drake creature token with flying");
         this.cardType.add(CardType.CREATURE);
         this.subtype.add(SubType.DRAKE);
 
@@ -23,11 +20,9 @@ public final class DrakeToken extends TokenImpl {
         this.toughness = new MageInt(2);
 
         this.addAbility(FlyingAbility.getInstance());
-
-        availableImageSetCodes = Arrays.asList("AKH", "C15", "C19", "M13", "C20", "ZNR", "C21");
     }
 
-    public DrakeToken(final DrakeToken token) {
+    private DrakeToken(final DrakeToken token) {
         super(token);
     }
 

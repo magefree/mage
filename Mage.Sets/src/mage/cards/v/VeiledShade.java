@@ -29,7 +29,7 @@ public final class VeiledShade extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
                 new BoostSourceEffect(1, 1, Duration.EndOfTurn),
-                new ManaCostsImpl("{1}{B}")
+                new ManaCostsImpl<>("{1}{B}")
         ));
     }
 

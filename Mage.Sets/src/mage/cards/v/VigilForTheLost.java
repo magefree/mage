@@ -46,7 +46,7 @@ class VigilForTheLostTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new VigilForTheLostEffect());
     }
 
-    VigilForTheLostTriggeredAbility(final VigilForTheLostTriggeredAbility ability) {
+    private VigilForTheLostTriggeredAbility(final VigilForTheLostTriggeredAbility ability) {
         super(ability);
     }
 
@@ -84,13 +84,13 @@ class VigilForTheLostEffect extends OneShotEffect {
         staticText = "you may pay {X}. If you do, you gain X life";
     }
 
-    VigilForTheLostEffect(final VigilForTheLostEffect effect) {
+    private VigilForTheLostEffect(final VigilForTheLostEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        ManaCostsImpl cost = new ManaCostsImpl("{X}");
+        ManaCostsImpl cost = new ManaCostsImpl<>("{X}");
         cost.clearPaid();
         if (cost.payOrRollback(source, game, source, source.getControllerId())) {
             Player player = game.getPlayer(source.getControllerId());

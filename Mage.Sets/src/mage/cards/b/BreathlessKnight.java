@@ -56,6 +56,7 @@ class BreathlessKnightTriggeredAbility extends TriggeredAbilityImpl {
 
     public BreathlessKnightTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
+        setTriggerPhrase("Whenever {this} or another creature enters the battlefield under your control, if that creature entered from a graveyard or you cast it from a graveyard, ");
     }
 
     private BreathlessKnightTriggeredAbility(final BreathlessKnightTriggeredAbility ability) {
@@ -87,10 +88,5 @@ class BreathlessKnightTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} or another creature enters the battlefield under your control, if that creature entered from a graveyard or you cast it from a graveyard, " ;
     }
 }

@@ -35,18 +35,11 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public final class GateToTheAfterlife extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a nontoken creature you control");
-
-    static {
-        filter.add(TargetController.YOU.getControllerPredicate());
-        filter.add(TokenPredicate.FALSE);
-    }
-
     public GateToTheAfterlife(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // Whenever a nontoken creature you control dies, you gain 1 life. Then you may draw a card. If you do, discard a card.
-        Ability ability = new DiesCreatureTriggeredAbility(new GainLifeEffect(1), false, filter, false);
+        Ability ability = new DiesCreatureTriggeredAbility(new GainLifeEffect(1), false, StaticFilters.FILTER_CONTROLLED_CREATURE_NON_TOKEN, false);
         Effect effect = new DrawDiscardControllerEffect(1, 1, true);
         effect.setText("Then you may draw a card. If you do, discard a card");
         ability.addEffect(effect);
@@ -83,7 +76,7 @@ class GateToTheAfterlifeEffect extends OneShotEffect {
                 + " and put it onto the battlefield. If you search your library this way, shuffle";
     }
 
-    public GateToTheAfterlifeEffect(final GateToTheAfterlifeEffect effect) {
+    private GateToTheAfterlifeEffect(final GateToTheAfterlifeEffect effect) {
         super(effect);
     }
 
@@ -104,14 +97,14 @@ class GateToTheAfterlifeEffect extends OneShotEffect {
         // Graveyard check
         if (controller.chooseUse(Outcome.Benefit, "Search your graveyard for " + cardName + "?", source, game)) {
             TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(1, 1, filter, true);
-            if (controller.choose(outcome, controller.getGraveyard(), target, game)) {
+            if (controller.choose(outcome, controller.getGraveyard(), target, source, game)) {
                 card = game.getCard(target.getFirstTarget());
             }
         }
         // Hand check
         if (card == null && controller.chooseUse(Outcome.Benefit, "Search your hand for " + cardName + "?", source, game)) {
             TargetCardInHand target = new TargetCardInHand(0, 1, filter);
-            if (controller.choose(Outcome.PutCardInPlay, controller.getHand(), target, game)) {
+            if (controller.choose(Outcome.PutCardInPlay, controller.getHand(), target, source, game)) {
                 card = game.getCard(target.getFirstTarget());
             }
         }

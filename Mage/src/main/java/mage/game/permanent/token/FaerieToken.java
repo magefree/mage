@@ -11,7 +11,7 @@ import mage.constants.SubType;
 public final class FaerieToken extends TokenImpl {
 
     public FaerieToken() {
-        super("Faerie", "1/1 blue Faerie creature token with flying");
+        super("Faerie Token", "1/1 blue Faerie creature token with flying");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
         subtype.add(SubType.FAERIE);
@@ -20,7 +20,7 @@ public final class FaerieToken extends TokenImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public FaerieToken(final FaerieToken token) {
+    private FaerieToken(final FaerieToken token) {
         super(token);
     }
 

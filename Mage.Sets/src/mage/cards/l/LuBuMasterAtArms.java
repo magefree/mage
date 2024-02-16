@@ -19,7 +19,7 @@ public final class LuBuMasterAtArms extends CardImpl {
 
     public LuBuMasterAtArms(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SOLDIER);
         this.subtype.add(SubType.WARRIOR);

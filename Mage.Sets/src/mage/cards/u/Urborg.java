@@ -31,7 +31,7 @@ public final class Urborg extends CardImpl {
 
     public Urborg(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // {tap}: Add {B}.
         this.addAbility(new BlackManaAbility());
@@ -59,7 +59,7 @@ class UrborgEffect extends OneShotEffect {
         this.staticText = "Target creature loses first strike or swampwalk until end of turn.";
     }
 
-    UrborgEffect(final UrborgEffect effect) {
+    private UrborgEffect(final UrborgEffect effect) {
         super(effect);
     }
 

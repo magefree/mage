@@ -55,7 +55,7 @@ public final class BattlefieldThaumaturge extends CardImpl {
 
 class BattlefieldThaumaturgeSpellsCostReductionEffect extends CostModificationEffectImpl {
 
-    public BattlefieldThaumaturgeSpellsCostReductionEffect() {
+    BattlefieldThaumaturgeSpellsCostReductionEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.REDUCE_COST);
         this.staticText = "Each instant and sorcery spell you cast costs {1} less to cast for each creature it targets";
     }
@@ -66,7 +66,7 @@ class BattlefieldThaumaturgeSpellsCostReductionEffect extends CostModificationEf
 
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        int reduceAmount = 0;
+        int reduceAmount;
         if (game.inCheckPlayableState()) {
             // checking state (search max possible targets)
             reduceAmount = getMaxPossibleTargetCreatures(abilityToModify, game);
@@ -99,7 +99,7 @@ class BattlefieldThaumaturgeSpellsCostReductionEffect extends CostModificationEf
                 if (target.isNotTarget()) {
                     continue;
                 }
-                Set<UUID> possibleList = target.possibleTargets(ability.getSourceId(), ability.getControllerId(), game);
+                Set<UUID> possibleList = target.possibleTargets(ability.getControllerId(), ability, game);
                 possibleList.removeIf(id -> {
                     Permanent permanent = game.getPermanent(id);
                     return permanent == null || !permanent.isCreature(game);
@@ -117,7 +117,7 @@ class BattlefieldThaumaturgeSpellsCostReductionEffect extends CostModificationEf
                 && abilityToModify.isControlledBy(source.getControllerId())) {
             Spell spell = (Spell) game.getStack().getStackObject(abilityToModify.getId());
             if (spell != null) {
-                return spell != null && StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY.match(spell, game);
+                return StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY.match(spell, game);
             } else {
                 Card sourceCard = game.getCard(abilityToModify.getSourceId());
                 return sourceCard != null && StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY.match(sourceCard, game);

@@ -36,12 +36,12 @@ public final class Downdraft extends CardImpl {
         // {G}: Target creature loses flying until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, 
                 new LoseAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), 
-                new ManaCostsImpl("{G}"));
+                new ManaCostsImpl<>("{G}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
         
         // Sacrifice Downdraft: Downdraft deals 2 damage to each creature with flying.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageAllEffect(2, filter), new SacrificeSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageAllEffect(2, "it", filter), new SacrificeSourceCost()));
     }
 
     private Downdraft(final Downdraft card) {

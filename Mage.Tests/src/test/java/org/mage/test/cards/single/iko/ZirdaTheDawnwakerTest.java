@@ -28,7 +28,6 @@ public class ZirdaTheDawnwakerTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertTapped("Swamp", true);
         assertAbility(playerA, golem, TrampleAbility.getInstance(), true);
@@ -45,7 +44,6 @@ public class ZirdaTheDawnwakerTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertTapped("Swamp", true);
         assertGraveyardCount(playerA, mauler, 1);
@@ -65,7 +63,6 @@ public class ZirdaTheDawnwakerTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, lion, 1);
         assertTapped(lion, true);
@@ -91,7 +88,6 @@ public class ZirdaTheDawnwakerTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, zirda, 1);
         assertPermanentCount(playerA, lion, 1);

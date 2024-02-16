@@ -3,6 +3,7 @@ package mage.target.common;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.cards.Cards;
@@ -10,23 +11,25 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.events.TargetEvent;
 import mage.players.Player;
 import mage.target.TargetCard;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class TargetCardInYourGraveyard extends TargetCard {
 
     public TargetCardInYourGraveyard() {
-        this(1, 1, StaticFilters.FILTER_CARD_FROM_YOUR_GRAVEYARD);
+        this(1);
+    }
+
+    public TargetCardInYourGraveyard(int numTargets) {
+        this(numTargets, numTargets);
     }
 
     public TargetCardInYourGraveyard(FilterCard filter) {
-        this(1, 1, filter);
+        this(1, filter);
     }
 
     public TargetCardInYourGraveyard(int numTargets, FilterCard filter) {
@@ -34,7 +37,7 @@ public class TargetCardInYourGraveyard extends TargetCard {
     }
 
     public TargetCardInYourGraveyard(int minNumTargets, int maxNumTargets) {
-        this(minNumTargets, maxNumTargets, StaticFilters.FILTER_CARD_FROM_YOUR_GRAVEYARD);
+        this(minNumTargets, maxNumTargets, maxNumTargets > 1 ? StaticFilters.FILTER_CARDS_FROM_YOUR_GRAVEYARD : StaticFilters.FILTER_CARD_FROM_YOUR_GRAVEYARD);
     }
 
     public TargetCardInYourGraveyard(int minNumTargets, int maxNumTargets, FilterCard filter) {
@@ -43,10 +46,10 @@ public class TargetCardInYourGraveyard extends TargetCard {
 
     public TargetCardInYourGraveyard(int minNumTarget, int maxNumTargets, FilterCard filter, boolean notTarget) {
         super(minNumTarget, maxNumTargets, Zone.GRAVEYARD, filter);
-        this.setNotTarget(notTarget);
+        this.withNotTarget(notTarget);
     }
 
-    public TargetCardInYourGraveyard(final TargetCardInYourGraveyard target) {
+    protected TargetCardInYourGraveyard(final TargetCardInYourGraveyard target) {
         super(target);
     }
 
@@ -55,7 +58,7 @@ public class TargetCardInYourGraveyard extends TargetCard {
         Card card = game.getCard(id);
         if (card != null && game.getState().getZone(card.getId()) == Zone.GRAVEYARD) {
             if (game.getPlayer(source.getControllerId()).getGraveyard().contains(id)) {
-                return filter.match(card, source.getSourceId(), source.getControllerId(), game);
+                return filter.match(card, source.getControllerId(), source, game);
             }
         }
         return false;
@@ -73,11 +76,11 @@ public class TargetCardInYourGraveyard extends TargetCard {
     }
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
         Set<UUID> possibleTargets = new HashSet<>();
         Player player = game.getPlayer(sourceControllerId);
-        for (Card card : player.getGraveyard().getCards(filter, sourceId, sourceControllerId, game)) {
-            if (sourceId == null || isNotTarget() || !game.replaceEvent(new TargetEvent(card, sourceId, sourceControllerId))) {
+        for (Card card : player.getGraveyard().getCards(filter, sourceControllerId, source, game)) {
+            if (source == null || source.getSourceId() == null || isNotTarget() || !game.replaceEvent(new TargetEvent(card, source.getSourceId(), sourceControllerId))) {
                 possibleTargets.add(card.getId());
             }
         }
@@ -85,10 +88,14 @@ public class TargetCardInYourGraveyard extends TargetCard {
     }
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceControllerId, Cards cards, Game game) {
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Cards cards, Ability source, Game game) {
         Set<UUID> possibleTargets = new HashSet<>();
         Player player = game.getPlayer(sourceControllerId);
-        for (Card card : cards.getCards(filter, game)) {
+        if (player == null) {
+            return possibleTargets;
+        }
+
+        for (Card card : cards.getCards(filter, sourceControllerId, source, game)) {
             if (player.getGraveyard().getCards(game).contains(card)) {
                 possibleTargets.add(card.getId());
             }
@@ -109,15 +116,15 @@ public class TargetCardInYourGraveyard extends TargetCard {
     }
 
     @Override
-    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
+    public boolean canChoose(UUID sourceControllerId, Ability source, Game game) {
         Player player = game.getPlayer(sourceControllerId);
         if (player != null) {
             if (this.minNumberOfTargets == 0) {
                 return true;
             }
             int possibleTargets = 0;
-            for (Card card : player.getGraveyard().getCards(filter, sourceId, sourceControllerId, game)) {
-                if (sourceId == null || isNotTarget() || !game.replaceEvent(new TargetEvent(card, sourceId, sourceControllerId))) {
+            for (Card card : player.getGraveyard().getCards(filter, sourceControllerId, source, game)) {
+                if (source == null || source.getSourceId() == null || isNotTarget() || !game.replaceEvent(new TargetEvent(card, source.getSourceId(), sourceControllerId))) {
                     possibleTargets++;
                     if (possibleTargets >= this.minNumberOfTargets) {
                         return true;

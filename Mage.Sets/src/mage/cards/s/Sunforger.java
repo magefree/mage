@@ -51,12 +51,12 @@ public final class Sunforger extends CardImpl {
         // instant card with converted mana cost 4 or less and cast that card 
         // without paying its mana cost. Then shuffle your library.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new SunforgerEffect(), new ManaCostsImpl("{R}{W}"));
+                new SunforgerEffect(), new ManaCostsImpl<>("{R}{W}"));
         ability.addCost(new SunforgerUnattachCost(this.getName()));
         this.addAbility(ability);
 
         // Equip {3}
-        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(3)));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(3), false));
 
     }
 
@@ -72,14 +72,14 @@ public final class Sunforger extends CardImpl {
 
 class SunforgerEffect extends OneShotEffect {
 
-    public SunforgerEffect() {
+    SunforgerEffect() {
         super(Outcome.PlayForFree);
         staticText = "Search your library for a red or white instant "
                 + "card with mana value 4 or less and cast that "
                 + "card without paying its mana cost. Then shuffle";
     }
 
-    public SunforgerEffect(final SunforgerEffect effect) {
+    private SunforgerEffect(final SunforgerEffect effect) {
         super(effect);
     }
 
@@ -131,7 +131,7 @@ class SunforgerUnattachCost extends CostImpl {
         this.text = "Unattach " + name;
     }
 
-    public SunforgerUnattachCost(final SunforgerUnattachCost cost) {
+    private SunforgerUnattachCost(final SunforgerUnattachCost cost) {
         super(cost);
     }
 
@@ -178,7 +178,7 @@ class CardCanBeCastPredicate implements Predicate<Card> {
     public boolean apply(Card input, Game game) {
         SpellAbility ability = input.getSpellAbility().copy();
         ability.setControllerId(controllerId);
-        input.adjustTargets(ability, game);
+        ability.adjustTargets(game);
         return ability.canChooseTarget(game, controllerId);
     }
 

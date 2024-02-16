@@ -22,7 +22,6 @@ public class BasrisAcolyteTest extends CardTestPlayerBase {
         addTarget(playerA, "Grizzly Bears^Savannah Lions");
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertCounterCount(playerA, "Grizzly Bears", CounterType.P1P1, 1);
         assertCounterCount(playerA, "Savannah Lions", CounterType.P1P1, 1);

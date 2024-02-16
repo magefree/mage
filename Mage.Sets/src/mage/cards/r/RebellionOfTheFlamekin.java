@@ -100,7 +100,7 @@ class RebellionOfTheFlamekinEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Token token = new ElementalShamanToken("LRW");
+        Token token = new ElementalShamanToken();
         token.putOntoBattlefield(1, game, source, source.getControllerId());
 
         List<Permanent> permanents = token

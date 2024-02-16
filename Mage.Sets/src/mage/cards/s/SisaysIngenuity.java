@@ -38,13 +38,13 @@ public final class SisaysIngenuity extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // When Sisay's Ingenuity enters the battlefield, draw a card.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)));
         // Enchanted creature has "{2}{U}: Target creature becomes the color of your choice until end of turn."
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesColorTargetEffect(Duration.EndOfTurn),
-            new ManaCostsImpl("{2}{U}"));
+            new ManaCostsImpl<>("{2}{U}"));
         ability.addTarget(new TargetCreaturePermanent());
         Effect effect = new GainAbilityAttachedEffect(ability, AttachmentType.AURA);
         effect.setText("Enchanted creature has \"{2}{U}: Target creature becomes the color of your choice until end of turn.\"");

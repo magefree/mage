@@ -77,7 +77,7 @@ class RegularExpression extends OneShotEffect {
                 .getBattlefield()
                 .getActivePermanents(
                         StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE,
-                        source.getControllerId(), source.getSourceId(), game
+                        source.getControllerId(), source, game
                 ).stream()
                 .map(Permanent::getName)
                 .filter(Objects::nonNull)
@@ -88,7 +88,7 @@ class RegularExpression extends OneShotEffect {
                 = new FilterCard("a creature card with the same name as another creature you control");
         filter.add(Predicates.or(predicates));
         return new SearchLibraryPutInHandEffect(
-                new TargetCardInLibrary(filter), true, true
+                new TargetCardInLibrary(filter), true
         ).apply(game, source);
     }
 }

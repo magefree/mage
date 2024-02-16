@@ -43,7 +43,7 @@ public final class KaheeraTheOrphanguard extends CardImpl {
     public KaheeraTheOrphanguard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G/W}{G/W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.CAT);
         this.subtype.add(SubType.BEAST);
         this.power = new MageInt(3);
@@ -96,7 +96,7 @@ enum KaheeraTheOrphanguardCompanionCondition implements CompanionCondition {
     }
 
     @Override
-    public boolean isLegal(Set<Card> deck, int startingHandSize) {
+    public boolean isLegal(Set<Card> deck, int minimumDeckSize) {
         return deck.stream()
                 .filter(card -> card.hasCardTypeForDeckbuilding(CardType.CREATURE))
                 .allMatch(KaheeraTheOrphanguardCompanionCondition::isCardLegal);

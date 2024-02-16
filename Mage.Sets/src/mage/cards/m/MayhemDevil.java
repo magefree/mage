@@ -1,15 +1,13 @@
 package mage.cards.m;
 
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.Ability;
+import mage.abilities.common.SacrificePermanentTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
+import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetAnyTarget;
 
 import java.util.UUID;
@@ -27,7 +25,11 @@ public final class MayhemDevil extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever a player sacrifices a permanent, Mayhem Devil deals 1 damage to any target.
-        this.addAbility(new MayhemDevilTriggeredAbility());
+        Ability ability = new SacrificePermanentTriggeredAbility(Zone.BATTLEFIELD,
+                new DamageTargetEffect(1), StaticFilters.FILTER_PERMANENT,
+                TargetController.ANY, SetTargetPointer.NONE, false);
+        ability.addTarget(new TargetAnyTarget());
+        this.addAbility(ability);
     }
 
     private MayhemDevil(final MayhemDevil card) {
@@ -37,37 +39,5 @@ public final class MayhemDevil extends CardImpl {
     @Override
     public MayhemDevil copy() {
         return new MayhemDevil(this);
-    }
-}
-
-class MayhemDevilTriggeredAbility extends TriggeredAbilityImpl {
-
-    MayhemDevilTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DamageTargetEffect(1));
-        this.addTarget(new TargetAnyTarget());
-    }
-
-    private MayhemDevilTriggeredAbility(final MayhemDevilTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.SACRIFICED_PERMANENT;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return true;
-    }
-
-    @Override
-    public MayhemDevilTriggeredAbility copy() {
-        return new MayhemDevilTriggeredAbility(this);
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever a player sacrifices a permanent, {this} deals 1 damage to any target.";
     }
 }

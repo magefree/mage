@@ -43,7 +43,7 @@ public final class DesolationAngel extends CardImpl {
 
         // When Desolation Angel enters the battlefield, destroy all lands you control. If it was kicked, destroy all lands instead.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ConditionalOneShotEffect(new DestroyAllEffect(StaticFilters.FILTER_LANDS),
-                new DestroyAllEffect(filter2), KickedCondition.instance, "destroy all lands you control. If it was kicked, destroy all lands instead.")));
+                new DestroyAllEffect(filter2), KickedCondition.ONCE, "destroy all lands you control. If it was kicked, destroy all lands instead.")));
     }
 
     private DesolationAngel(final DesolationAngel card) {

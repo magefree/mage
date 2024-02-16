@@ -38,7 +38,6 @@ public class RevealedOrControlledDragonTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, lion, 1);
         assertGraveyardCount(playerA, roar, 1);
@@ -56,7 +55,6 @@ public class RevealedOrControlledDragonTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, lion, 1);
         assertGraveyardCount(playerA, roar, 1);
@@ -74,7 +72,6 @@ public class RevealedOrControlledDragonTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, lion, 1);
         assertGraveyardCount(playerA, roar, 1);
@@ -92,7 +89,6 @@ public class RevealedOrControlledDragonTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, orator, 1);
         assertHandCount(playerA, 1 + 1);
@@ -108,7 +104,6 @@ public class RevealedOrControlledDragonTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, orator, 1);
         assertHandCount(playerA, 1);
@@ -124,7 +119,6 @@ public class RevealedOrControlledDragonTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, orator, 1);
         assertHandCount(playerA, 0);
@@ -141,7 +135,6 @@ public class RevealedOrControlledDragonTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, sentinels, 1);
         assertCounterCount(playerA, sentinels, CounterType.P1P1, 1);
@@ -157,7 +150,6 @@ public class RevealedOrControlledDragonTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, sentinels, 1);
         assertCounterCount(playerA, sentinels, CounterType.P1P1, 1);
@@ -173,7 +165,6 @@ public class RevealedOrControlledDragonTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, sentinels, 1);
         assertCounterCount(playerA, sentinels, CounterType.P1P1, 0);

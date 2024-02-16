@@ -52,12 +52,12 @@ public final class ArchfiendOfDepravity extends CardImpl {
 
 class ArchfiendOfDepravityEffect extends OneShotEffect {
 
-    public ArchfiendOfDepravityEffect() {
+    ArchfiendOfDepravityEffect() {
         super(Outcome.Benefit); // AI should select two creatures if possible so it has to be a benefit
         this.staticText = "that player chooses up to two creatures they control, then sacrifices the rest";
     }
 
-    public ArchfiendOfDepravityEffect(final ArchfiendOfDepravityEffect effect) {
+    private ArchfiendOfDepravityEffect(final ArchfiendOfDepravityEffect effect) {
         super(effect);
     }
 
@@ -73,7 +73,7 @@ class ArchfiendOfDepravityEffect extends OneShotEffect {
             List<Permanent> creaturesToSacrifice = new ArrayList<>();
             TargetControlledPermanent target = new TargetControlledPermanent(0, 2, new FilterControlledCreaturePermanent("creatures to keep"), true);
             if (opponent.chooseTarget(outcome, target, source, game)) {
-                for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterControlledCreaturePermanent(), opponent.getId(), source.getSourceId(), game)) {
+                for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterControlledCreaturePermanent(), opponent.getId(), source, game)) {
                     if (permanent != null && !target.getTargets().contains(permanent.getId())) {
                         creaturesToSacrifice.add(permanent);
                     }

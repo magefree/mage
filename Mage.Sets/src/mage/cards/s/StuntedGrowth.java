@@ -45,12 +45,12 @@ public final class StuntedGrowth extends CardImpl {
 
 class StuntedGrowthEffect extends OneShotEffect {
 
-    public StuntedGrowthEffect() {
+    StuntedGrowthEffect() {
         super(Outcome.Benefit);
         this.staticText = "Target player chooses three cards from their hand and puts them on top of their library in any order";
     }
 
-    public StuntedGrowthEffect(final StuntedGrowthEffect effect) {
+    private StuntedGrowthEffect(final StuntedGrowthEffect effect) {
         super(effect);
     }
 
@@ -66,7 +66,7 @@ class StuntedGrowthEffect extends OneShotEffect {
             int possibleNumber = Math.min(3, targetPlayer.getHand().size());
             if (possibleNumber > 0) {
                 Target target = new TargetCardInHand(possibleNumber, new FilterCard("cards from your hand"));
-                targetPlayer.choose(outcome, target, source.getSourceId(), game);
+                targetPlayer.choose(outcome, target, source, game);
                 Cards cards = new CardsImpl();
                 for (UUID cardId: target.getTargets()) {
                     Card card = game.getCard(cardId);

@@ -53,12 +53,12 @@ public final class SageEyeAvengers extends CardImpl {
 
 class SageEyeAvengersEffect extends OneShotEffect {
 
-    public SageEyeAvengersEffect() {
+    SageEyeAvengersEffect() {
         super(Outcome.ReturnToHand);
         this.staticText = "you may return target creature to its owner's hand if its power is less than {this}'s power";
     }
 
-    public SageEyeAvengersEffect(final SageEyeAvengersEffect effect) {
+    private SageEyeAvengersEffect(final SageEyeAvengersEffect effect) {
         super(effect);
     }
 
@@ -70,7 +70,7 @@ class SageEyeAvengersEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (sourceObject != null && controller != null) {
             Permanent targetCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
             if (targetCreature != null && targetCreature.getPower().getValue() < sourceObject.getPower().getValue()) {

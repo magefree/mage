@@ -8,7 +8,6 @@ import mage.game.Game;
 import mage.players.Player;
 
 /**
- *
  * @author LevelX2
  */
 
@@ -20,7 +19,7 @@ public class DiscardHandControllerEffect extends OneShotEffect {
         this.staticText = "discard your hand";
     }
 
-    public DiscardHandControllerEffect(final DiscardHandControllerEffect effect) {
+    protected DiscardHandControllerEffect(final DiscardHandControllerEffect effect) {
         super(effect);
     }
 
@@ -35,7 +34,7 @@ public class DiscardHandControllerEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        player.discard(player.getHand().size(), false, false, source,game);
+        player.discard(player.getHand().size(), false, false, source, game);
         return true;
     }
 }

@@ -30,7 +30,7 @@ public final class MacetailHystrodon extends CardImpl {
         // Haste
         this.addAbility(HasteAbility.getInstance());
         // Cycling {3}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{3}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{3}")));
     }
 
     private MacetailHystrodon(final MacetailHystrodon card) {

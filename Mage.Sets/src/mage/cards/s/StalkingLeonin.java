@@ -57,12 +57,12 @@ public final class StalkingLeonin extends CardImpl {
 
 class StalkingLeoninEffect extends OneShotEffect {
 
-    public StalkingLeoninEffect() {
+    StalkingLeoninEffect() {
         super(Outcome.Exile);
         this.staticText = "Exile target creature that's attacking you if it's controlled by the chosen player. Activate only once";
     }
 
-    public StalkingLeoninEffect(final StalkingLeoninEffect effect) {
+    private StalkingLeoninEffect(final StalkingLeoninEffect effect) {
         super(effect);
     }
 

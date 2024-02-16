@@ -26,7 +26,7 @@ public final class AtarkaWorldRender extends CardImpl {
 
     public AtarkaWorldRender(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{R}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DRAGON);
         this.power = new MageInt(6);
         this.toughness = new MageInt(4);
@@ -64,7 +64,7 @@ class AtarkaWorldRenderEffect extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new GainAbilityTargetEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn));
     }
 
-    public AtarkaWorldRenderEffect(final AtarkaWorldRenderEffect ability) {
+    private AtarkaWorldRenderEffect(final AtarkaWorldRenderEffect ability) {
         super(ability);
     }
 
@@ -82,7 +82,7 @@ class AtarkaWorldRenderEffect extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent attacker = game.getPermanent(event.getSourceId());
         if (attacker != null
-                && filter.match(attacker, sourceId, controllerId, game)) {
+                && filter.match(attacker, controllerId, this, game)) {
             for (Effect effect : this.getEffects()) {
                 effect.setTargetPointer(new FixedTarget(attacker.getId(), game));
             }

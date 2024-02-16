@@ -7,7 +7,7 @@ import javax.swing.*;
 import mage.client.MagePane;
 
 /**
- * Game GUI: game panel with scrollbars
+ * Game GUI: game frame (game panel with scrolls)
  *
  * @author BetaSteward_at_googlemail.com
  */
@@ -29,6 +29,11 @@ public class GamePane extends MagePane {
         this.setTitle("Game " + gameId);
         this.gameId = gameId;
         gamePanel.showGame(gameId, playerId, this);
+    }
+
+    @Override
+    public boolean isActiveTable() {
+        return this.gameId != null;
     }
 
     public void cleanUp() {

@@ -33,7 +33,7 @@ public final class KrosanDruid extends CardImpl {
         // When Krosan Druid enters the battlefield, if it was kicked, you gain 10 life.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new GainLifeEffect(10)),
-                KickedCondition.instance,
+                KickedCondition.ONCE,
                 "When {this} enters the battlefield, if it was kicked, you gain 10 life"
         ));
     }

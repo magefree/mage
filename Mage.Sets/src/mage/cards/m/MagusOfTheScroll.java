@@ -34,7 +34,7 @@ public final class MagusOfTheScroll extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {3}, {tap}: Name a card. Reveal a card at random from your hand. If it's the named card, Magus of the Scroll deals 2 damage to any target.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ChooseACardNameEffect(ChooseACardNameEffect.TypeOfName.ALL), new ManaCostsImpl("{3}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ChooseACardNameEffect(ChooseACardNameEffect.TypeOfName.ALL), new ManaCostsImpl<>("{3}"));
         ability.addEffect(new MagusOfTheScrollEffect());
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetAnyTarget());
@@ -53,19 +53,19 @@ public final class MagusOfTheScroll extends CardImpl {
 
 class MagusOfTheScrollEffect extends OneShotEffect {
 
-    public MagusOfTheScrollEffect() {
+    MagusOfTheScrollEffect() {
         super(Outcome.Neutral);
         staticText = ", then reveal a card at random from your hand. If that card has the chosen name, {this} deals 2 damage to any target";
     }
 
-    public MagusOfTheScrollEffect(final MagusOfTheScrollEffect effect) {
+    private MagusOfTheScrollEffect(final MagusOfTheScrollEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player you = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         String cardName = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
         if (sourceObject != null && you != null && cardName != null && !cardName.isEmpty()) {
             if (!you.getHand().isEmpty()) {

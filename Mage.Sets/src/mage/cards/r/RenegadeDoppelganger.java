@@ -52,7 +52,7 @@ class RenegadeDoppelgangerTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new RenegadeDoppelgangerEffect(), true);
     }
 
-    RenegadeDoppelgangerTriggeredAbility(final RenegadeDoppelgangerTriggeredAbility ability) {
+    private RenegadeDoppelgangerTriggeredAbility(final RenegadeDoppelgangerTriggeredAbility ability) {
         super(ability);
     }
 
@@ -88,12 +88,12 @@ class RenegadeDoppelgangerTriggeredAbility extends TriggeredAbilityImpl {
 
 class RenegadeDoppelgangerEffect extends OneShotEffect {
 
-    public RenegadeDoppelgangerEffect() {
+    RenegadeDoppelgangerEffect() {
         super(Outcome.Benefit);
         this.staticText = "have {this} become a copy of that creature until end of turn";
     }
 
-    public RenegadeDoppelgangerEffect(final RenegadeDoppelgangerEffect effect) {
+    private RenegadeDoppelgangerEffect(final RenegadeDoppelgangerEffect effect) {
         super(effect);
     }
 

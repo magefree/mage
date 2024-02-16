@@ -94,7 +94,7 @@ class ImmovableRodAttackBlockTargetEffect extends RestrictionEffect {
         staticText = "and can't attack or block";
     }
 
-    public ImmovableRodAttackBlockTargetEffect(final ImmovableRodAttackBlockTargetEffect effect) {
+    private ImmovableRodAttackBlockTargetEffect(final ImmovableRodAttackBlockTargetEffect effect) {
         super(effect);
     }
 

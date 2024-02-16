@@ -26,8 +26,7 @@ public final class MirrorImage extends CardImpl {
         // You may have Mirror Image enter the battlefield as a copy of any creature you control.
         this.addAbility(new EntersBattlefieldAbility(
                 new CopyPermanentEffect(StaticFilters.FILTER_CONTROLLED_CREATURE)
-                        .setText("you may have {this} enter the battlefield "
-                                + "as a copy of a creature you control"),
+                        .setText("as a copy of a creature you control"),
                 true
         ));
     }

@@ -30,10 +30,10 @@ public final class WallOfTanglecord extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new GainAbilitySourceEffect(ReachAbility.getInstance(), Duration.EndOfTurn),
-                new ManaCostsImpl("{G}")));
+                new ManaCostsImpl<>("{G}")));
     }
 
-    public WallOfTanglecord (final WallOfTanglecord card) {
+    private WallOfTanglecord(final WallOfTanglecord card) {
         super(card);
     }
 

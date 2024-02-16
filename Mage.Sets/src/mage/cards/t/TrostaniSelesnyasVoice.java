@@ -33,7 +33,7 @@ public final class TrostaniSelesnyasVoice extends CardImpl {
 
     public TrostaniSelesnyasVoice(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{G}{W}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DRYAD);
 
         this.power = new MageInt(2);
@@ -43,7 +43,7 @@ public final class TrostaniSelesnyasVoice extends CardImpl {
         this.addAbility(new TrostaniSelesnyasVoiceTriggeredAbility());
 
         // {1}{G}{W}, {T}: Populate. (Create a token that's a copy of a creature token you control.)
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PopulateEffect(), new ManaCostsImpl("{1}{G}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PopulateEffect(), new ManaCostsImpl<>("{1}{G}{W}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
@@ -62,9 +62,10 @@ class TrostaniSelesnyasVoiceTriggeredAbility extends TriggeredAbilityImpl {
 
     public TrostaniSelesnyasVoiceTriggeredAbility() {
         super(Zone.BATTLEFIELD, new TrostaniSelesnyasVoiceEffect(), false);
+        setTriggerPhrase("Whenever another creature enters the battlefield under your control, ");
     }
 
-    public TrostaniSelesnyasVoiceTriggeredAbility(TrostaniSelesnyasVoiceTriggeredAbility ability) {
+    private TrostaniSelesnyasVoiceTriggeredAbility(final TrostaniSelesnyasVoiceTriggeredAbility ability) {
         super(ability);
     }
 
@@ -76,22 +77,18 @@ class TrostaniSelesnyasVoiceTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
-        if (permanent != null
-                && permanent.isCreature(game)
-                && permanent.isControlledBy(this.controllerId)
-                && !Objects.equals(event.getTargetId(), this.getSourceId())) {
-            Effect effect = this.getEffects().get(0);
-            // life is determined during resolution so it has to be retrieved there (e.g. Giant Growth before resolution)
-            effect.setValue("lifeSource", event.getTargetId());
-            effect.setValue("zoneChangeCounter", permanent.getZoneChangeCounter(game));
-            return true;
+        if (permanent == null
+                || !permanent.isCreature(game)
+                || !permanent.isControlledBy(this.controllerId)
+                || Objects.equals(event.getTargetId(), this.getSourceId())) {
+            return false;
         }
-        return false;
-    }
 
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever another creature enters the battlefield under your control, " ;
+        Effect effect = this.getEffects().get(0);
+        // life is determined during resolution so it has to be retrieved there (e.g. Giant Growth before resolution)
+        effect.setValue("lifeSource", event.getTargetId());
+        effect.setValue("zoneChangeCounter", permanent.getZoneChangeCounter(game));
+        return true;
     }
 
     @Override
@@ -102,12 +99,12 @@ class TrostaniSelesnyasVoiceTriggeredAbility extends TriggeredAbilityImpl {
 
 class TrostaniSelesnyasVoiceEffect extends OneShotEffect {
 
-    public TrostaniSelesnyasVoiceEffect() {
+    TrostaniSelesnyasVoiceEffect() {
         super(Outcome.GainLife);
         staticText = "you gain life equal to that creature's toughness";
     }
 
-    public TrostaniSelesnyasVoiceEffect(final TrostaniSelesnyasVoiceEffect effect) {
+    private TrostaniSelesnyasVoiceEffect(final TrostaniSelesnyasVoiceEffect effect) {
         super(effect);
     }
 

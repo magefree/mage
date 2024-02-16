@@ -70,7 +70,7 @@ class PolisCrusherTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DestroyTargetEffect(), true);
     }
 
-    public PolisCrusherTriggeredAbility(final PolisCrusherTriggeredAbility ability) {
+    private PolisCrusherTriggeredAbility(final PolisCrusherTriggeredAbility ability) {
         super(ability);
     }
 
@@ -108,6 +108,6 @@ class PolisCrusherTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         return "Whenever {this} deals combat damage to a player,"
-                + " if {this} is monstrous, destroy target enchantment that player controls";
+                + " if {this} is monstrous, destroy target enchantment that player controls.";
     }
 }

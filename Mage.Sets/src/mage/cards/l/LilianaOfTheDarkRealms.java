@@ -33,7 +33,7 @@ public final class LilianaOfTheDarkRealms extends CardImpl {
 
     public LilianaOfTheDarkRealms(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{B}{B}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.LILIANA);
 
         this.setStartingLoyalty(3);
@@ -85,7 +85,7 @@ class LilianaOfTheDarkRealmsEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        int swamps = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game);
+        int swamps = game.getBattlefield().count(filter, source.getControllerId(), source, game);
         if (swamps < 1) {
             return false;
         }

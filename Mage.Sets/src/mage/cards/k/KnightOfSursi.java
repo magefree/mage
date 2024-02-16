@@ -30,7 +30,7 @@ public final class KnightOfSursi extends CardImpl {
         // flanking
         this.addAbility(new FlankingAbility());
         // Suspend 3-{W}
-        this.addAbility(new SuspendAbility(3, new ManaCostsImpl("{W}"), this));
+        this.addAbility(new SuspendAbility(3, new ManaCostsImpl<>("{W}"), this));
     }
 
     private KnightOfSursi(final KnightOfSursi card) {

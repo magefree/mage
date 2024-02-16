@@ -40,7 +40,7 @@ public final class SteppeGlider extends CardImpl {
         // {1}{W}: Target creature with a +1/+1 counter on it gains flying and vigilance until end of turn.
         Effect effect = new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("Target creature with a +1/+1 counter on it gains flying");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{1}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{1}{W}"));
         effect = new GainAbilityTargetEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("and vigilance until end of turn");
         ability.addEffect(effect);

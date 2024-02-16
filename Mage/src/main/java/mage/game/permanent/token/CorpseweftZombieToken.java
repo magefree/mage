@@ -1,22 +1,20 @@
-
-
 package mage.game.permanent.token;
+
+import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.MageInt;
 
 /**
- *
  * @author spjspj
  */
 public final class CorpseweftZombieToken extends TokenImpl {
 
     public CorpseweftZombieToken() {
-        this(2,2);
+        this(2, 2);
     }
 
     public CorpseweftZombieToken(int power, int toughness) {
-        super("Zombie Horror", "X/X black Zombie Horror creature token, where X is twice the number of cards exiled this way");
+        super("Zombie Horror Token", "X/X black Zombie Horror creature token, where X is twice the number of cards exiled this way");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.ZOMBIE);
         subtype.add(SubType.HORROR);
@@ -25,7 +23,7 @@ public final class CorpseweftZombieToken extends TokenImpl {
         this.toughness = new MageInt(toughness);
     }
 
-    public CorpseweftZombieToken(final CorpseweftZombieToken token) {
+    private CorpseweftZombieToken(final CorpseweftZombieToken token) {
         super(token);
     }
 

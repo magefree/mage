@@ -10,10 +10,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.ChoiceColor;
 import mage.choices.VoteHandler;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubType;
+import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -38,7 +35,7 @@ public final class CouncilGuardian extends CardImpl {
         // Will of the council - When Council Guardian enters the battlefield, starting with you, each player votes for blue, black, red, or green. Council Guardian gains protection from each color with the most votes or tied for most votes.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
                 new CouncilsGuardianEffect(), false)
-                .withFlavorWord("Will of the council")
+                .setAbilityWord(AbilityWord.WILL_OF_THE_COUNCIL)
         );
     }
 

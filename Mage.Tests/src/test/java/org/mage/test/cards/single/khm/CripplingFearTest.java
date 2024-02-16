@@ -26,7 +26,6 @@ public class CripplingFearTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, lion, 0);
         assertPermanentCount(playerA, elf, 1);
@@ -47,7 +46,6 @@ public class CripplingFearTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, lion, 1);
         assertPermanentCount(playerA, elf, 0);
@@ -68,7 +66,6 @@ public class CripplingFearTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, lion, 0);
         assertPermanentCount(playerA, elf, 0);

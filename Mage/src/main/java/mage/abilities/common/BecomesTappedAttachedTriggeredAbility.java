@@ -9,12 +9,9 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author LoneFox
  */
 public class BecomesTappedAttachedTriggeredAbility extends TriggeredAbilityImpl {
-
-    private final String description;
 
     public BecomesTappedAttachedTriggeredAbility(Effect effect, String description) {
         this(effect, description, false);
@@ -22,12 +19,11 @@ public class BecomesTappedAttachedTriggeredAbility extends TriggeredAbilityImpl 
 
     public BecomesTappedAttachedTriggeredAbility(Effect effect, String description, boolean isOptional) {
         super(Zone.BATTLEFIELD, effect, isOptional);
-        this.description = description;
+        setTriggerPhrase(getWhen() + description + " becomes tapped, ");
     }
 
-    public BecomesTappedAttachedTriggeredAbility(final BecomesTappedAttachedTriggeredAbility ability) {
+    protected BecomesTappedAttachedTriggeredAbility(final BecomesTappedAttachedTriggeredAbility ability) {
         super(ability);
-        this.description = ability.description;
     }
 
     @Override
@@ -43,15 +39,10 @@ public class BecomesTappedAttachedTriggeredAbility extends TriggeredAbilityImpl 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent enchantment = game.getPermanent(this.getSourceId());
-        if(enchantment == null) {
+        if (enchantment == null) {
             return false;
         }
         Permanent enchanted = game.getPermanent(enchantment.getAttachedTo());
         return enchanted != null && event.getTargetId().equals(enchanted.getId());
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever " + description + " becomes tapped, " ;
     }
 }

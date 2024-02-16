@@ -42,7 +42,7 @@ public final class KindredBoon extends CardImpl {
         // {1}{W}: Put a divinity counter on target creature you control of the chosen type.
         FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creature you control of the chosen type");
         filter.add(ChosenSubtypePredicate.TRUE);
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.DIVINITY.createInstance()), new ManaCostsImpl("{1}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.DIVINITY.createInstance()), new ManaCostsImpl<>("{1}{W}"));
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
         

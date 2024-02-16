@@ -46,9 +46,9 @@ public final class HellkiteIgniter extends CardImpl {
                 new BoostSourceEffect(
                         new PermanentsOnBattlefieldCount(filter),
                         StaticValue.get(0),
-                        Duration.EndOfTurn,
-                        true),
-                new ManaCostsImpl("{1}{R}")));
+                        Duration.EndOfTurn
+                ),
+                new ManaCostsImpl<>("{1}{R}")));
     }
 
     private HellkiteIgniter(final HellkiteIgniter card) {

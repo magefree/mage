@@ -77,7 +77,7 @@ class MagusOfTheUnseenDelayedTriggeredAbility extends DelayedTriggeredAbility {
         super(new TapTargetEffect(), Duration.EndOfGame, true); // effect can last over turns end, if you still control the target but only one time
     }
 
-    MagusOfTheUnseenDelayedTriggeredAbility(MagusOfTheUnseenDelayedTriggeredAbility ability) {
+    private MagusOfTheUnseenDelayedTriggeredAbility(final MagusOfTheUnseenDelayedTriggeredAbility ability) {
         super(ability);
     }
 

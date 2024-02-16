@@ -39,7 +39,7 @@ public final class DiplomaticEscort extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {U}, {tap}, Discard a card: Counter target spell or ability that targets a creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new ManaCostsImpl("{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new ManaCostsImpl<>("{U}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardCardCost());
         ability.addTarget(new TargetStackObject(filter));

@@ -18,13 +18,12 @@ public final class ProtectServe extends SplitCard {
         // Protect
         // Target creature gets +2/+4 until end of turn.
         getLeftHalfCard().getSpellAbility().addEffect(new BoostTargetEffect(2, 4, Duration.EndOfTurn));
-        getLeftHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
+        getLeftHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent().withChooseHint("gets +2/+4"));
 
         // Serve
         // Target creature gets -6/-0 until end of turn.
         getRightHalfCard().getSpellAbility().addEffect(new BoostTargetEffect(-6, 0, Duration.EndOfTurn));
-        getRightHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
-
+        getRightHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent().withChooseHint("gets -6/-0"));
     }
 
     private ProtectServe(final ProtectServe card) {

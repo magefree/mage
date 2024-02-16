@@ -33,7 +33,7 @@ public final class MyojinOfInfiniteRage extends CardImpl {
 
     public MyojinOfInfiniteRage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{7}{R}{R}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPIRIT);
 
         this.power = new MageInt(7);
@@ -42,10 +42,10 @@ public final class MyojinOfInfiniteRage extends CardImpl {
         this.getSpellAbility().addWatcher(new CastFromHandWatcher());
 
         // Myojin of Infinite Rage enters the battlefield with a divinity counter on it if you cast it from your hand.
-        this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new AddCountersSourceEffect(CounterType.DIVINITY.createInstance()), CastFromHandSourcePermanentCondition.instance, ""), "{this} enters the battlefield with a divinity counter on it if you cast it from your hand"));
-        // Myojin of Infinite Rage is indestructible as long as it has a divinity counter on it.
+        this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new AddCountersSourceEffect(CounterType.DIVINITY.createInstance()), CastFromHandSourcePermanentCondition.instance, ""), "with a divinity counter on it if you cast it from your hand"));
+        // Myojin of Infinite Rage has indestructible as long as it has a divinity counter on it.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new GainAbilitySourceEffect(IndestructibleAbility.getInstance(), Duration.WhileOnBattlefield),
-                new SourceHasCounterCondition(CounterType.DIVINITY), "{this} is indestructible as long as it has a divinity counter on it")));
+                new SourceHasCounterCondition(CounterType.DIVINITY), "{this} has indestructible as long as it has a divinity counter on it")));
         // Remove a divinity counter from Myojin of Infinite Rage: Destroy all lands.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyAllEffect(StaticFilters.FILTER_LANDS), new RemoveCountersSourceCost(CounterType.DIVINITY.createInstance())));
     }

@@ -35,7 +35,7 @@ public final class StensiaBanquet extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponentOrPlaneswalker());
 
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
     private StensiaBanquet(final StensiaBanquet card) {

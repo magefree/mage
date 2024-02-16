@@ -23,7 +23,7 @@ public class PhantomPreventionEffect extends PreventionEffectImpl {
         staticText = "If damage would be dealt to {this}, prevent that damage. Remove a +1/+1 counter from {this}";
     }
 
-    public PhantomPreventionEffect(final PhantomPreventionEffect effect) {
+    protected PhantomPreventionEffect(final PhantomPreventionEffect effect) {
         super(effect);
         this.turn = effect.turn;
         this.combatPhaseStep = effect.combatPhaseStep;
@@ -32,11 +32,6 @@ public class PhantomPreventionEffect extends PreventionEffectImpl {
     @Override
     public PhantomPreventionEffect copy() {
         return new PhantomPreventionEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override
@@ -57,7 +52,7 @@ public class PhantomPreventionEffect extends PreventionEffectImpl {
                 }
             }
 
-            if(removeCounter && permanent.getCounters(game).containsKey(CounterType.P1P1)) {
+            if (removeCounter && permanent.getCounters(game).containsKey(CounterType.P1P1)) {
                 StringBuilder sb = new StringBuilder(permanent.getName()).append(": ");
                 permanent.removeCounters(CounterType.P1P1.createInstance(), source, game);
                 sb.append("Removed a +1/+1 counter ");

@@ -5,6 +5,7 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.BecomesMonarchSourceEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedByAllSourceEffect;
+import mage.abilities.hint.common.MonarchHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -38,7 +39,7 @@ public final class AzureFleetAdmiral extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Azure Fleet Admiral enters the battlefield, you become the monarch.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new BecomesMonarchSourceEffect()));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new BecomesMonarchSourceEffect()).addHint(MonarchHint.instance));
 
         // Azure Fleet Admiral can't be blocked by creatures the monarch controls.
         this.addAbility(new SimpleStaticAbility(

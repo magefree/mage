@@ -33,7 +33,7 @@ public final class KjeldoranDead extends CardImpl {
         Ability ability = new EntersBattlefieldTriggeredAbility(new SacrificeControllerEffect(StaticFilters.FILTER_PERMANENT_CREATURE, 1, null));
         this.addAbility(ability);
         // {B}: Regenerate Kjeldoran Dead.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{B}")));
     }
 
     private KjeldoranDead(final KjeldoranDead card) {

@@ -22,7 +22,7 @@ public final class Flay extends CardImpl {
 
         // Target player discards a card at random. Then that player discards another card at random unless they pay {1}.
         this.getSpellAbility().addEffect(new DiscardTargetEffect(1, true));
-        Effect effect = new DoUnlessTargetPlayerOrTargetsControllerPaysEffect(new DiscardTargetEffect(1, true), new ManaCostsImpl("{1}"));
+        Effect effect = new DoUnlessTargetPlayerOrTargetsControllerPaysEffect(new DiscardTargetEffect(1, true), new ManaCostsImpl<>("{1}"));
         effect.setText("Then that player discards another card at random unless they pay {1}");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetPlayer());

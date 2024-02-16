@@ -1,16 +1,19 @@
 package mage.cards.e;
 
 import mage.Mana;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.mana.BasicManaEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ManaType;
-import mage.filter.common.FilterCreaturePlayerOrPlaneswalker;
+import mage.filter.common.FilterAnyTarget;
+import mage.filter.common.FilterPermanentOrPlayer;
 import mage.filter.predicate.other.AnotherTargetPredicate;
 import mage.target.Target;
 import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetPermanentOrPlayer;
 import mage.target.targetpointer.SecondTargetPointer;
 
 import java.util.UUID;
@@ -20,19 +23,20 @@ import java.util.UUID;
  */
 public final class ExplosiveWelcome extends CardImpl {
 
-    private static final FilterCreaturePlayerOrPlaneswalker filter = new FilterCreaturePlayerOrPlaneswalker();
+    private static final FilterPermanentOrPlayer filter = new FilterAnyTarget();
 
     static {
-        filter.add(new AnotherTargetPredicate(2));
+        filter.getPermanentFilter().add(new AnotherTargetPredicate(2));
+        filter.getPlayerFilter().add(new AnotherTargetPredicate(2));
     }
 
     public ExplosiveWelcome(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{7}{R}");
 
         // Explosive Welcome deals 5 damage to any target and 3 damage to any other target. Add {R}{R}{R}.
-        this.getSpellAbility().addEffect(new DamageTargetEffect(5));
+        this.getSpellAbility().addEffect(new DamageTargetEffect(StaticValue.get(5), true, "", true));
         this.getSpellAbility().addEffect(
-                new DamageTargetEffect(3)
+                new DamageTargetEffect(StaticValue.get(3), true, "", true)
                         .setTargetPointer(new SecondTargetPointer())
                         .setText("and 3 damage to any other target.")
         );
@@ -40,7 +44,7 @@ public final class ExplosiveWelcome extends CardImpl {
         Target target = new TargetAnyTarget();
         target.setTargetTag(1);
         this.getSpellAbility().addTarget(target);
-        target = new TargetAnyTarget(filter);
+        target = new TargetPermanentOrPlayer(filter);
         target.setTargetTag(2);
         this.getSpellAbility().addTarget(target);
     }

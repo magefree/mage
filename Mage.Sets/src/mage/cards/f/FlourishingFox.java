@@ -31,7 +31,7 @@ public final class FlourishingFox extends CardImpl {
         ));
 
         // Cycling {1}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{1}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{1}")));
     }
 
     private FlourishingFox(final FlourishingFox card) {

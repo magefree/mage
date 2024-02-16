@@ -22,7 +22,7 @@ public final class WheelOfFate extends CardImpl {
         this.color.setRed(true);
 
         // Suspend 4-{1}{R}
-        this.addAbility(new SuspendAbility(4, new ManaCostsImpl("{1}{R}"), this));
+        this.addAbility(new SuspendAbility(4, new ManaCostsImpl<>("{1}{R}"), this));
         // Each player discards their hand, then draws seven cards.
         this.getSpellAbility().addEffect(new DiscardHandAllEffect());
         this.getSpellAbility().addEffect(new DrawCardAllEffect(7).setText(", then draws seven cards"));

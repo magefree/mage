@@ -35,7 +35,6 @@ public class ExtraplanarLensTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, lens, 1);
         assertExileCount(snow_covered_forest, 1);
@@ -60,7 +59,6 @@ public class ExtraplanarLensTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
         assertPermanentCount(playerA, lens, 1);
         assertExileCount(forest, 1);
 

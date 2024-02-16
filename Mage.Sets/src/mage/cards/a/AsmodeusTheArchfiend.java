@@ -30,7 +30,7 @@ public final class AsmodeusTheArchfiend extends CardImpl {
     public AsmodeusTheArchfiend(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DEVIL);
         this.subtype.add(SubType.GOD);
         this.power = new MageInt(6);
@@ -40,7 +40,7 @@ public final class AsmodeusTheArchfiend extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new AsmodeusTheArchfiendReplacementEffect()).withFlavorWord("Binding Contract"));
 
         // {B}{B}{B}: Draw seven cards.
-        this.addAbility(new SimpleActivatedAbility(new DrawCardSourceControllerEffect(7), new ManaCostsImpl("{B}{B}{B}")));
+        this.addAbility(new SimpleActivatedAbility(new DrawCardSourceControllerEffect(7), new ManaCostsImpl<>("{B}{B}{B}")));
 
         // {B}: Return all cards exiled with Asmodeus the Archfiend to their owner's hand and you lose that much life.
         this.addAbility(new AsmodeusTheArchfiendReturnAbility());
@@ -58,7 +58,7 @@ public final class AsmodeusTheArchfiend extends CardImpl {
 
 class AsmodeusTheArchfiendReplacementEffect extends ReplacementEffectImpl {
 
-    public AsmodeusTheArchfiendReplacementEffect() {
+    AsmodeusTheArchfiendReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Exile);
         this.staticText = "If you would draw a card, exile the top card of your library face down instead";
     }
@@ -102,7 +102,7 @@ class AsmodeusTheArchfiendReplacementEffect extends ReplacementEffectImpl {
 class AsmodeusTheArchfiendReturnAbility extends ActivatedAbilityImpl {
 
     public AsmodeusTheArchfiendReturnAbility() {
-        super(Zone.BATTLEFIELD, new AsmodeusTheArchfiendReturnEffect(), new ManaCostsImpl("{B}"));
+        super(Zone.BATTLEFIELD, new AsmodeusTheArchfiendReturnEffect(), new ManaCostsImpl<>("{B}"));
     }
 
     private AsmodeusTheArchfiendReturnAbility(final AsmodeusTheArchfiendReturnAbility ability) {
@@ -130,7 +130,7 @@ class AsmodeusTheArchfiendReturnAbility extends ActivatedAbilityImpl {
 
 class AsmodeusTheArchfiendReturnEffect extends OneShotEffect {
 
-    public AsmodeusTheArchfiendReturnEffect() {
+    AsmodeusTheArchfiendReturnEffect() {
         super(Outcome.DrawCard);
         this.staticText = "Return all cards exiled with {this} to their owner's hand and you lose that much life";
     }

@@ -15,7 +15,7 @@ public class PlayerList extends CircularList<UUID> {
     public PlayerList() {
     }
 
-    public PlayerList(final PlayerList list) {
+    protected PlayerList(final PlayerList list) {
         super(list);
     }
 
@@ -25,12 +25,12 @@ public class PlayerList extends CircularList<UUID> {
 
     public Player getNextInRange(Player basePlayer, Game game) {
         UUID currentPlayerBefore = this.get();
-        UUID nextPlayerId = super.getNext();
+        UUID nextPlayerId = game.isTurnOrderReversed() ? super.getPrevious() : super.getNext();
         do {
             if (basePlayer.getInRange().contains(nextPlayerId)) {
                 return game.getPlayer(nextPlayerId);
             }
-            nextPlayerId = super.getNext();
+            nextPlayerId = game.isTurnOrderReversed() ? super.getPrevious() : super.getNext();
         } while (!nextPlayerId.equals(currentPlayerBefore));
         return null;
     }
@@ -47,7 +47,7 @@ public class PlayerList extends CircularList<UUID> {
         }
         Player player;
         while (true) {
-            player = game.getPlayer(super.getNext());
+            player = getAffectedNext(game);
             if (player.isInGame()) {
                 break;
             }
@@ -72,7 +72,7 @@ public class PlayerList extends CircularList<UUID> {
             return null;
         }
         while (true) {
-            player = game.getPlayer(super.getPrevious());
+            player = getAffectedPrevious(game);
             if (player.isInGame()) {
                 break;
             }
@@ -82,6 +82,14 @@ public class PlayerList extends CircularList<UUID> {
             }
         }
         return player;
+    }
+
+    private Player getAffectedNext(Game game) {
+        return game.isTurnOrderReversed() ? game.getPlayer(super.getPrevious()) : game.getPlayer(super.getNext());
+    }
+
+    private Player getAffectedPrevious(Game game) {
+        return game.isTurnOrderReversed() ? game.getPlayer(super.getNext()) : game.getPlayer(super.getPrevious());
     }
 
     @Override

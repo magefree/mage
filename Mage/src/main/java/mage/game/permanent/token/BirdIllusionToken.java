@@ -1,19 +1,17 @@
-
-
 package mage.game.permanent.token;
-import mage.constants.CardType;
-import mage.constants.SubType;
+
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
+import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
- *
  * @author TheElk801
  */
 public final class BirdIllusionToken extends TokenImpl {
 
     public BirdIllusionToken() {
-        super("Bird Illusion", "1/1 blue Bird Illusion creature token with flying");
+        super("Bird Illusion Token", "1/1 blue Bird Illusion creature token with flying");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
         subtype.add(SubType.BIRD);
@@ -23,7 +21,7 @@ public final class BirdIllusionToken extends TokenImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public BirdIllusionToken(final BirdIllusionToken token) {
+    private BirdIllusionToken(final BirdIllusionToken token) {
         super(token);
     }
 

@@ -26,7 +26,7 @@ public class SimpleActivatedAbilityManaBuilder extends ConditionalManaBuilder {
 
     @Override
     public String getRule() {
-        return "Spend this mana only to activate simple abilities";
+        return "Spend this mana only to activate or pay for simple abilities";
     }
 }
 
@@ -34,7 +34,7 @@ class SimpleActivatedAbilityConditionalMana extends ConditionalMana {
 
     public SimpleActivatedAbilityConditionalMana(Mana mana) {
         super(mana);
-        staticText = "Spend this mana only to activate simple abilities";
+        staticText = "Spend this mana only to activate or pay for simple abilities";
         addCondition(new SimpleActivatedAbilityManaCondition());
     }
 }

@@ -53,7 +53,7 @@ class ArenaEffect extends OneShotEffect {
                 "Those creatures fight each other. <i>(Each deals damage equal to its power to the other.)</i>";
     }
 
-    ArenaEffect(final ArenaEffect effect) {
+    private ArenaEffect(final ArenaEffect effect) {
         super(effect);
     }
 

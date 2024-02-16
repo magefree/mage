@@ -14,10 +14,9 @@ import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SpellAbilityType;
-import mage.constants.TargetController;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetOpponentsCreaturePermanent;
 
 import java.util.UUID;
 
@@ -33,7 +32,7 @@ public final class AppealAuthority extends SplitCard {
         // Until end of turn, target creature gains trample and gets +X/+X, where X is the number of creatures you control.
         getLeftHalfCard().getSpellAbility().addEffect(new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn)
                 .setText("Until end of turn, target creature gains trample"));
-        getLeftHalfCard().getSpellAbility().addEffect(new BoostTargetEffect(CreaturesYouControlCount.instance, CreaturesYouControlCount.instance, Duration.EndOfTurn, true)
+        getLeftHalfCard().getSpellAbility().addEffect(new BoostTargetEffect(CreaturesYouControlCount.instance, CreaturesYouControlCount.instance, Duration.EndOfTurn)
                 .setText("and gets +X/+X, where X is the number of creatures you control"));
         getLeftHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
         getLeftHalfCard().getSpellAbility().addHint(CreaturesYouControlHint.instance);
@@ -43,11 +42,9 @@ public final class AppealAuthority extends SplitCard {
         getRightHalfCard().addAbility(new AftermathAbility().setRuleAtTheTop(true));
         // Tap up to two target creatures your opponents control. Creatures you control gain vigilance until end of turn.
         getRightHalfCard().getSpellAbility().addEffect(new TapTargetEffect());
-        FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures your opponents control");
-        filter.add(TargetController.OPPONENT.getControllerPredicate());
-        getRightHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent(0, 2, filter, false));
+        getRightHalfCard().getSpellAbility().addTarget(new TargetOpponentsCreaturePermanent(0, 2));
         getRightHalfCard().getSpellAbility().addEffect(new GainAbilityControlledEffect(VigilanceAbility.getInstance(),
-                Duration.EndOfTurn, new FilterControlledCreaturePermanent("creatures")));
+                Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES));
 
     }
 

@@ -4,15 +4,14 @@ import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
+import mage.abilities.effects.common.continuous.AssignNoCombatDamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.game.Game;
-import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -66,7 +65,7 @@ class GazeOfPainDelayedTriggeredAbility extends DelayedTriggeredAbility {
         }
         this.getEffects().clear();
         this.addEffect(new GazeOfPainEffect(new MageObjectReference(event.getTargetId(), game)));
-        this.addEffect(new GazeOfPainDamageEffect().setTargetPointer(new FixedTarget(event.getTargetId(), game)));
+        this.addEffect(new AssignNoCombatDamageTargetEffect().setTargetPointer(new FixedTarget(event.getTargetId(), game)));
         return true;
     }
 
@@ -111,47 +110,5 @@ class GazeOfPainEffect extends OneShotEffect {
                 && creature != null
                 && targeted != null
                 && targeted.damage(creature.getPower().getValue(), creature.getId(), source, game) > 0;
-    }
-}
-
-class GazeOfPainDamageEffect extends ReplacementEffectImpl {
-
-    GazeOfPainDamageEffect() {
-        super(Duration.EndOfTurn, Outcome.Neutral);
-    }
-
-    private GazeOfPainDamageEffect(final GazeOfPainDamageEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public GazeOfPainDamageEffect copy() {
-        return new GazeOfPainDamageEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        switch (event.getType()) {
-            case DAMAGE_PERMANENT:
-            case DAMAGE_PLAYER:
-                return true;
-            default:
-                return false;
-        }
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        return ((DamageEvent) event).isCombatDamage() && event.getSourceId().equals(targetPointer.getFirst(game, source));
     }
 }

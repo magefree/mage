@@ -23,7 +23,7 @@ public final class SkewerTheCritics extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
 
         // Spectacle {R}
-        this.addAbility(new SpectacleAbility(this, new ManaCostsImpl("{R}")));
+        this.addAbility(new SpectacleAbility(this, new ManaCostsImpl<>("{R}")));
     }
 
     private SkewerTheCritics(final SkewerTheCritics card) {

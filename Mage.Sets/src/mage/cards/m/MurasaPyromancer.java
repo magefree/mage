@@ -39,7 +39,7 @@ public final class MurasaPyromancer extends CardImpl {
 
         Ability ability = new AllyEntersBattlefieldTriggeredAbility(new DamageTargetEffect(new PermanentsOnBattlefieldCount(filter)), true);
         ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(ability);
+        this.addAbility(ability.setAbilityWord(null));
 
     }
 

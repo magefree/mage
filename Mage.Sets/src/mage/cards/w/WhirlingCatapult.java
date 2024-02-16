@@ -30,7 +30,7 @@ public final class WhirlingCatapult extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
         // {2}, Exile the top two cards of your library: Whirling Catapult deals 1 damage to each creature with flying and each player.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageEverythingEffect(1, filter), new ManaCostsImpl("{2}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageEverythingEffect(1, filter), new ManaCostsImpl<>("{2}"));
         ability.addCost(new ExileFromTopOfLibraryCost(2));
         this.addAbility(ability);
     }

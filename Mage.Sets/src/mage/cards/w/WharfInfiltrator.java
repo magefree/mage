@@ -63,9 +63,10 @@ class WharfInfiltratorDiscardAbility extends TriggeredAbilityImpl {
 
     WharfInfiltratorDiscardAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect, false);
+        setTriggerPhrase("Whenever you discard a creature card, " );
     }
 
-    WharfInfiltratorDiscardAbility(final WharfInfiltratorDiscardAbility ability) {
+    private WharfInfiltratorDiscardAbility(final WharfInfiltratorDiscardAbility ability) {
         super(ability);
     }
 
@@ -82,14 +83,6 @@ class WharfInfiltratorDiscardAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Card card = game.getCard(event.getTargetId());
-        if (isControlledBy(event.getPlayerId()) && card != null && card.isCreature(game)) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you discard a creature card, " ;
+        return isControlledBy(event.getPlayerId()) && card != null && card.isCreature(game);
     }
 }

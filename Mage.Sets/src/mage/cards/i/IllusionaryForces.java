@@ -26,7 +26,7 @@ public final class IllusionaryForces extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Cumulative upkeep {U}
-        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{U}")));
+        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{U}")));
     }
 
     private IllusionaryForces(final IllusionaryForces card) {

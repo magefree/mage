@@ -26,7 +26,7 @@ public final class CradleOfVitality extends CardImpl {
 
         // Whenever you gain life, you may pay {1}{W}. If you do, put a +1/+1 counter on target creature for each 1 life you gained.
         Ability ability = new GainLifeControllerTriggeredAbility(new DoIfCostPaid(
-                new CradleOfVitalityEffect(), new ManaCostsImpl("{1}{W}")
+                new CradleOfVitalityEffect(), new ManaCostsImpl<>("{1}{W}")
         ), false, true);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

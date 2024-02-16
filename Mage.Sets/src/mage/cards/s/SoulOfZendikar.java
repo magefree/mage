@@ -32,9 +32,9 @@ public final class SoulOfZendikar extends CardImpl {
         // Reach
         this.addAbility(ReachAbility.getInstance());
         // {3}{G}{G}: Create a 3/3 green Beast creature token.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new BeastToken()), new ManaCostsImpl("{3}{G}{G}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new BeastToken()), new ManaCostsImpl<>("{3}{G}{G}")));
         // {3}{G}{G}, Exile Soul of Zendikar from your graveyard: Create a 3/3 green Beast creature token.
-        Ability ability = new SimpleActivatedAbility(Zone.GRAVEYARD, new CreateTokenEffect(new BeastToken()), new ManaCostsImpl("{3}{G}{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.GRAVEYARD, new CreateTokenEffect(new BeastToken()), new ManaCostsImpl<>("{3}{G}{G}"));
         ability.addCost(new ExileSourceFromGraveCost());
         this.addAbility(ability);
     }

@@ -3,16 +3,17 @@ package mage.cards.m;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.ChooseACardNameEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.util.CardUtil;
 
 import java.util.UUID;
@@ -49,18 +50,13 @@ public final class MeddlingMage extends CardImpl {
 
 class MeddlingMageReplacementEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public MeddlingMageReplacementEffect() {
+    MeddlingMageReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "Spells with the chosen name can't be cast";
     }
 
-    public MeddlingMageReplacementEffect(final MeddlingMageReplacementEffect effect) {
+    private MeddlingMageReplacementEffect(final MeddlingMageReplacementEffect effect) {
         super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override
@@ -70,7 +66,7 @@ class MeddlingMageReplacementEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (mageObject != null) {
             return "You can't cast a spell with that name (" + mageObject.getName() + " in play).";
         }
@@ -84,9 +80,15 @@ class MeddlingMageReplacementEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        MageObject object = game.getObject(event.getSourceId());
+        SpellAbility spellAbility = SpellAbility.getSpellAbilityFromEvent(event, game);
+        if (spellAbility == null) {
+            return false;
+        }
+        Card card = spellAbility.getCharacteristics(game);
+        if (card == null) {
+            return false;
+        }
         String cardName = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
-        return object != null
-                && CardUtil.haveSameNames(object, cardName, game);
+        return CardUtil.haveSameNames(card, cardName, game);
     }
 }

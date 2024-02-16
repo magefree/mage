@@ -29,22 +29,20 @@ public final class VerdantConfluence extends CardImpl {
         // Choose three. You may choose the same mode more than once.
         this.getSpellAbility().getModes().setMinModes(3);
         this.getSpellAbility().getModes().setMaxModes(3);
-        this.getSpellAbility().getModes().setEachModeMoreThanOnce(true);
+        this.getSpellAbility().getModes().setMayChooseSameModeMoreThanOnce(true);
         
         // - Put two +1/+1 counters on target creature;
         this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance(2)));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         
         // Return target permanent card from your graveyard to your hand;
-        Mode mode = new Mode();
-        mode.addEffect(new ReturnFromGraveyardToHandTargetEffect());
+        Mode mode = new Mode(new ReturnFromGraveyardToHandTargetEffect());
         mode.addTarget(new TargetCardInYourGraveyard(new FilterPermanentCard()));
         this.getSpellAbility().getModes().addMode(mode);
         
         // Search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library.
         TargetCardInLibrary target = new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND);
-        mode = new Mode();
-        mode.addEffect(new SearchLibraryPutInPlayEffect(target, true));
+        mode = new Mode(new SearchLibraryPutInPlayEffect(target, true));
         this.getSpellAbility().getModes().addMode(mode);
     }
 

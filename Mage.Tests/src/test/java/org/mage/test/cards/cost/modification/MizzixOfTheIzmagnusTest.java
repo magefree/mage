@@ -24,6 +24,7 @@ public class MizzixOfTheIzmagnusTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Incinerate"); // {1}{R}
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Incinerate", playerB);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -51,6 +52,7 @@ public class MizzixOfTheIzmagnusTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Blaze", playerB);
         setChoice(playerA, "X=1");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Blaze", playerB);
         setChoice(playerA, "X=2");
 
@@ -79,6 +81,7 @@ public class MizzixOfTheIzmagnusTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Seething Anger"); // {R} Buyback {3}
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Seething Anger", "Mizzix of the Izmagnus");
         setChoice(playerA, true);
 
@@ -113,6 +116,7 @@ public class MizzixOfTheIzmagnusTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion");// 2/2
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Engulfing Flames", "Silvercoat Lion");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Flashback", "Silvercoat Lion");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);

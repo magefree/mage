@@ -48,9 +48,12 @@ public class CostModificationTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, 1);
     }
 
-    // Trinisphere interacts incorrectly with Phyrexian mana. As implemented, Gitaxian Probe gets a required cost of {2}{U/P},
-    // which allows paying 2 life and only 2 mana. This is incorrect: Trinisphere requires that at least 3 mana be paid, and
-    // payment through life doesn't count. (Source: http://blogs.magicjudges.org/rulestips/2012/08/how-trinisphere-works-with-phyrexian-mana/)
+    /**
+     * Trinisphere interacts incorrectly with Phyrexian mana.
+     * As implemented, Gitaxian Probe gets a required cost of {2}{U/P}, which allows paying 2 life and only 2 mana.
+     * This is incorrect: Trinisphere requires that at least 3 mana be paid, and payment through life doesn't count.
+     * (Source: http://blogs.magicjudges.org/rulestips/2012/08/how-trinisphere-works-with-phyrexian-mana/)
+     */
     @Test
     public void testCardTrinispherePhyrexianMana() {
         // As long as Trinisphere is untapped, each spell that would cost less than three mana to cast costs three mana to cast.
@@ -62,11 +65,18 @@ public class CostModificationTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Gitaxian Probe"); // Sorcery {U/P}
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Gitaxian Probe", playerA);
-        setStopAt(2, PhaseStep.BEGIN_COMBAT);
-        execute();
 
-        assertHandCount(playerB, "Gitaxian Probe", 1);
-        assertGraveyardCount(playerB, "Gitaxian Probe", 0);
+        setStopAt(2, PhaseStep.BEGIN_COMBAT);
+
+        try {
+            execute();
+
+            Assert.fail("must throw exception on execute");
+        } catch (Throwable e) {
+            if (!e.getMessage().contains("Cast Gitaxian Probe$targetPlayer=PlayerA")) {
+                Assert.fail("must throw error about having 0 actions, but got:\n" + e.getMessage());
+            }
+        }
     }
 
     /**
@@ -86,15 +96,13 @@ public class CostModificationTest extends CardTestPlayerBase {
         // Spend only mana produced by creatures to cast Myr Superion.
         addCard(Zone.HAND, playerA, "Myr Superion");
 
-        activateManaAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Add {G}.");
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Myr Superion");
+
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertLife(playerA, 20);
-        assertLife(playerB, 20);
-
-        assertPermanentCount(playerA, "Myr Superion", 1); // Can be cast because mana was produced by a creature
+        // Can be cast because mana was produced by a creature
+        assertPermanentCount(playerA, "Myr Superion", 1);
     }
 
     @Test
@@ -105,14 +113,18 @@ public class CostModificationTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Myr Superion");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Myr Superion");
+
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
-        execute();
 
-        assertLife(playerA, 20);
-        assertLife(playerB, 20);
+        try {
+            execute();
 
-        assertPermanentCount(playerA, "Myr Superion", 0); // Can't be cast because mana was not produced by a creature
-        assertHandCount(playerA, "Myr Superion", 1); // Can't be cast because mana was not produced by a creature
+            Assert.fail("must throw exception on execute");
+        } catch (Throwable e) {
+            if (!e.getMessage().contains("Cast Myr Superion")) {
+                Assert.fail("must throw error about having 0 actions, but got:\n" + e.getMessage());
+            }
+        }
     }
 
     /*
@@ -132,7 +144,7 @@ public class CostModificationTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerB, "Carnivorous Moss-Beast"); // 4/5
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pyretic Ritual");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pyretic Ritual", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Fated Conflagration", "Carnivorous Moss-Beast");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -171,7 +183,7 @@ public class CostModificationTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, divination);
 
         // Doom Blade cast by the opponent should cost {2}{B} now with the cost increase in effect for opponent spells.
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, doomBlade, gArbiter);
+        checkPlayableAbility("Can't Doom Blade", 1, PhaseStep.PRECOMBAT_MAIN, playerB, "Cast Doom", false);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -200,11 +212,10 @@ public class CostModificationTest extends CardTestPlayerBase {
 
         addCard(Zone.HAND, playerA, "Zoetic Cavern");
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion", true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion", true);
 
-        playLand(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Zoetic Cavern");
-        setChoice(playerA, true);
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Zoetic Cavern using Morph");
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
@@ -235,7 +246,7 @@ public class CostModificationTest extends CardTestPlayerBase {
 
         addCard(Zone.HAND, playerA, "Zoetic Cavern");
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion");
 
         setStopAt(1, PhaseStep.END_TURN);
@@ -270,7 +281,6 @@ public class CostModificationTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Grapeshot", 1);
     }
@@ -304,7 +314,6 @@ public class CostModificationTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -343,7 +352,6 @@ public class CostModificationTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Engulfing Flames", 1);
     }
@@ -384,7 +392,6 @@ public class CostModificationTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(6, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -431,6 +438,7 @@ public class CostModificationTest extends CardTestPlayerBase {
             Assert.assertEquals("must have max possible X as 4", 4, cost.getMaxValue(ability, game));
         });
 
+        waitStackResolved(3, PhaseStep.PRECOMBAT_MAIN);
         // Huatli: make x cost -3 instead -4
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "-X: {this} deals X damage divided as you choose");
         setChoice(playerA, "X=4");
@@ -440,7 +448,6 @@ public class CostModificationTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Vivien Reid", 1);
         assertGraveyardCount(playerA, "Huatli, Warrior Poet", 1);
@@ -466,7 +473,7 @@ public class CostModificationTest extends CardTestPlayerBase {
         checkPlayableAbility("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "-8:", false);
 
         // prepare duplicates
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Spark Double");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Spark Double", true);
         setChoice(playerA, true); // copy
         setChoice(playerA, "Carth the Lion"); // copy target
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Spark Double");
@@ -480,6 +487,5 @@ public class CostModificationTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 }

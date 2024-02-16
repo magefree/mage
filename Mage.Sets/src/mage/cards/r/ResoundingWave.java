@@ -26,7 +26,7 @@ public final class ResoundingWave extends CardImpl {
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
         this.getSpellAbility().addTarget(new TargetPermanent());
         // Cycling {5}{W}{U}{B}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{5}{W}{U}{B}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{5}{W}{U}{B}")));
         // When you cycle Resounding Wave, return two target permanents to their owners' hands.
         Ability ability = new CycleTriggeredAbility(new ReturnToHandTargetEffect());
         TargetPermanent target = new TargetPermanent(2, StaticFilters.FILTER_PERMANENTS);

@@ -1,11 +1,13 @@
 package mage.abilities;
 
 import mage.ApprovingObject;
+import mage.cards.Card;
 import mage.constants.AbilityType;
 import mage.constants.AsThoughEffectType;
 import mage.constants.Zone;
 import mage.game.Game;
 
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -19,7 +21,7 @@ public class PlayLandAbility extends ActivatedAbilityImpl {
         this.name = "Play " + cardName;
     }
 
-    public PlayLandAbility(PlayLandAbility ability) {
+    protected PlayLandAbility(final PlayLandAbility ability) {
         super(ability);
     }
 
@@ -33,15 +35,35 @@ public class PlayLandAbility extends ActivatedAbilityImpl {
 
         // no super.canActivate() call
 
-        ApprovingObject approvingObject = game.getContinuousEffects().asThough(getSourceId(), AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, this, playerId, game);
-        if (!controlsAbility(playerId, game) && null == approvingObject) {
+        Set<ApprovingObject> approvingObjects = game.getContinuousEffects().asThough(getSourceId(), AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, this, playerId, game);
+        if (!controlsAbility(playerId, game) && approvingObjects.isEmpty()) {
             return ActivationStatus.getFalse();
         }
+
         //20091005 - 114.2a
-        return new ActivationStatus(game.isActivePlayer(playerId)
-                && game.getPlayer(playerId).canPlayLand()
-                && game.canPlaySorcery(playerId),
-                approvingObject);
+        if(!game.isActivePlayer(playerId)
+                || !game.getPlayer(playerId).canPlayLand()
+                || !game.canPlaySorcery(playerId)) {
+            return ActivationStatus.getFalse();
+        }
+
+        // TODO: this check may not be required, but removing it require more investigation.
+        //       As of now it is only a way for One with the Multiverse to work.
+        if (!approvingObjects.isEmpty()) {
+            Card card = game.getCard(sourceId);
+            Zone zone = game.getState().getZone(sourceId);
+            if(card != null && card.isOwnedBy(playerId) && Zone.HAND.match(zone)) {
+                // Regular casting, to be an alternative to the AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE from hand (e.g. One with the Multiverse):
+                approvingObjects.add(new ApprovingObject(this, game));
+            }
+        }
+
+        if(approvingObjects.isEmpty()) {
+            return ActivationStatus.withoutApprovingObject(true);
+        }
+        else {
+            return new ActivationStatus(approvingObjects);
+        }
     }
 
     @Override

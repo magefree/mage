@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -24,6 +23,12 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
  */
 public final class SabertoothAlleyCat extends CardImpl {
 
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures without defender");
+
+    static {
+        filter.add(Predicates.not(new AbilityPredicate(DefenderAbility.class)));
+    }
+
     public SabertoothAlleyCat(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
 
@@ -31,18 +36,14 @@ public final class SabertoothAlleyCat extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        // Sabertooth Alley Cat attacks each turn if able.
+        // Sabertooth Alley Cat attacks each combat if able.
         this.addAbility(new AttacksEachCombatStaticAbility());
 
         // {1}{R}: Creatures without defender can't block Sabertooth Alley Cat this turn.
         this.addAbility(new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
-                new CantBeBlockedByCreaturesSourceEffect(
-                        (FilterCreaturePermanent) new FilterCreaturePermanent().add(Predicates.not(new AbilityPredicate(DefenderAbility.class))),
-                        Duration.EndOfTurn
-                )
-                        .setText("Creatures without defender can't block {this} this turn"),
-                new ManaCostsImpl<>("{1}{R}")));
+                new CantBeBlockedByCreaturesSourceEffect(filter, Duration.EndOfTurn),
+                new ManaCostsImpl<>("{1}{R}")
+        ));
     }
 
     private SabertoothAlleyCat(final SabertoothAlleyCat card) {

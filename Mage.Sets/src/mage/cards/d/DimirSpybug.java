@@ -56,7 +56,7 @@ class DimirSpybugTriggeredAbility extends TriggeredAbilityImpl {
         ), false);
     }
 
-    public DimirSpybugTriggeredAbility(final DimirSpybugTriggeredAbility ability) {
+    private DimirSpybugTriggeredAbility(final DimirSpybugTriggeredAbility ability) {
         super(ability);
     }
 

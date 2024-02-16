@@ -13,6 +13,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.target.common.TargetArtifactPermanent;
 import mage.target.common.TargetControlledPermanent;
@@ -32,11 +33,10 @@ public final class KrarkClanEngineers extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {R}, Sacrifice two artifacts: Destroy target artifact.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{R}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(2, 2, new FilterControlledArtifactPermanent("two artifacts"), true)));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl<>("{R}"));
+        ability.addCost(new SacrificeTargetCost(2, StaticFilters.FILTER_PERMANENT_ARTIFACTS));
         ability.addTarget(new TargetArtifactPermanent());
         this.addAbility(ability);
-        
     }
 
     private KrarkClanEngineers(final KrarkClanEngineers card) {

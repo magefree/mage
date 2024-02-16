@@ -39,7 +39,7 @@ public final class SkarrganHellkite extends CardImpl {
         // {3}{R}: Skarrgan Hellkite deals 2 damage divided as you choose among one or two targets. Activate this ability only if Skarrgan Hellkite has a +1/+1 counter on it.
         Ability ability = new ConditionalActivatedAbility(
                 Zone.BATTLEFIELD, new DamageMultiEffect(2),
-                new ManaCostsImpl("{3}{R}"), new SourceHasCounterCondition(CounterType.P1P1),
+                new ManaCostsImpl<>("{3}{R}"), new SourceHasCounterCondition(CounterType.P1P1),
                 "{3}{R}: {this} deals 2 damage divided as you choose among one or two targets. " +
                         "Activate only if {this} has a +1/+1 counter on it."
         );

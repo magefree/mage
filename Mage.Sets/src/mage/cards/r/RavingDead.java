@@ -51,12 +51,12 @@ public final class RavingDead extends CardImpl {
 
 class RavingDeadDamageEffect extends OneShotEffect {
 
-    public RavingDeadDamageEffect() {
+    RavingDeadDamageEffect() {
         super(Outcome.Damage);
         this.staticText = "that player loses half their life, rounded down";
     }
 
-    public RavingDeadDamageEffect(final RavingDeadDamageEffect effect) {
+    private RavingDeadDamageEffect(final RavingDeadDamageEffect effect) {
         super(effect);
     }
 

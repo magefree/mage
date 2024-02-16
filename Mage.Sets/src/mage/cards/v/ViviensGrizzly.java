@@ -30,7 +30,7 @@ public final class ViviensGrizzly extends CardImpl {
 
         // {3}{G}: Look at the top card of your library. If it's a creature or planeswalker card, you may reveal it and put it into your hand. If you don't put the card into your hand, put it on the bottom of your library.
         this.addAbility(new SimpleActivatedAbility(
-                new ViviensGrizzlyEffect(), new ManaCostsImpl("{3}{G}")
+                new ViviensGrizzlyEffect(), new ManaCostsImpl<>("{3}{G}")
         ));
     }
 

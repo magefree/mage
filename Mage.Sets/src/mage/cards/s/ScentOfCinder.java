@@ -54,7 +54,7 @@ class ScentOfCinderEffect extends OneShotEffect {
                 + "{this} deals X damage to any target, where X is the number of cards revealed this way";
     }
 
-    public ScentOfCinderEffect(final ScentOfCinderEffect effect) {
+    private ScentOfCinderEffect(final ScentOfCinderEffect effect) {
         super(effect);
     }
 

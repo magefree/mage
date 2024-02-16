@@ -29,7 +29,7 @@ public final class ThranTome extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
         // Reveal the top three cards of your library. Target opponent chooses one of those cards. Put that card into your graveyard, then draw two cards.
-        Ability ability = new SimpleActivatedAbility(new ThranTomeEffect(), new ManaCostsImpl("{5}"));
+        Ability ability = new SimpleActivatedAbility(new ThranTomeEffect(), new ManaCostsImpl<>("{5}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
@@ -46,12 +46,12 @@ public final class ThranTome extends CardImpl {
 
 class ThranTomeEffect extends OneShotEffect {
 
-    public ThranTomeEffect() {
+    ThranTomeEffect() {
         super(Outcome.Benefit);
         this.staticText = "Reveal the top three cards of your library. Target opponent chooses one of those cards. Put that card into your graveyard, then draw two cards";
     }
 
-    public ThranTomeEffect(final ThranTomeEffect effect) {
+    private ThranTomeEffect(final ThranTomeEffect effect) {
         super(effect);
     }
 
@@ -64,7 +64,7 @@ class ThranTomeEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         // validate source and controller exist
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
 
         if (sourceObject == null || controller == null) {
             return false;

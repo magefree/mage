@@ -60,6 +60,7 @@ class LivingBreakthroughEffect extends ContinuousRuleModifyingEffectImpl {
 
     private LivingBreakthroughEffect(final LivingBreakthroughEffect effect) {
         super(effect);
+        this.manaValue = effect.manaValue;
     }
 
     @Override
@@ -78,7 +79,7 @@ class LivingBreakthroughEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (mageObject != null) {
             return "You can't cast spells with mana value " + manaValue
                     + " this turn (" + mageObject.getIdName() + ").";
@@ -98,10 +99,5 @@ class LivingBreakthroughEffect extends ContinuousRuleModifyingEffectImpl {
         }
         Spell spell = game.getStack().getSpell(event.getTargetId());
         return spell != null && spell.getManaValue() == this.manaValue;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 }

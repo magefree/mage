@@ -30,7 +30,7 @@ public class PhageTheUntouchableTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Phage the Untouchable"); // Creature {3}{B}{B}{B}{B} 4/4
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 10);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Phage the Untouchable");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Phage the Untouchable", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Hero's Downfall", "Phage the Untouchable");
         addTarget(playerA, playerB);
 
@@ -40,8 +40,6 @@ public class PhageTheUntouchableTest extends CardTestPlayerBase {
         
         execute();
 
-        assertAllCommandsUsed();
-        
         assertLife(playerA, 20);
         assertLife(playerB, 20);
 
@@ -50,8 +48,6 @@ public class PhageTheUntouchableTest extends CardTestPlayerBase {
 
         Assert.assertTrue("Game has ended.", currentGame.hasEnded());
         assertWonTheGame(playerA);
-        Assert.assertTrue("Game ist At end phase", currentGame.getPhase().getType() == TurnPhase.END);
-
+        Assert.assertTrue("Game ist At end phase", currentGame.getTurnPhaseType() == TurnPhase.END);
     }
-
 }

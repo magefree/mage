@@ -29,7 +29,7 @@ public final class CreakwoodGhoul extends CardImpl {
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new ManaCostsImpl("{B/G}{B/G}")) ;
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new ManaCostsImpl<>("{B/G}{B/G}")) ;
         ability.addTarget(new TargetCardInGraveyard());
         ability.addEffect(new GainLifeEffect(1));
         this.addAbility(ability);

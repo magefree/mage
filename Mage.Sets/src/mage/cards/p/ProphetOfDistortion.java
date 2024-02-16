@@ -30,7 +30,7 @@ public final class ProphetOfDistortion extends CardImpl {
         this.addAbility(new DevoidAbility(this.color));
         
         // {3}{C}: Draw a card.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{3}{C}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{3}{C}")));
     }
 
     private ProphetOfDistortion(final ProphetOfDistortion card) {

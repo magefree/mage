@@ -2,7 +2,7 @@ package mage.cards.p;
 
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.GainAbilitySpellsEffect;
+import mage.abilities.effects.common.continuous.GainAbilityControlledSpellsEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
@@ -10,7 +10,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.FilterObject;
+import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 
 import java.util.UUID;
@@ -20,7 +20,7 @@ import java.util.UUID;
  */
 public final class PestilentSpirit extends CardImpl {
 
-    private static final FilterObject filter = new FilterObject("instant and sorcery spells you control");
+    private static final FilterCard filter = new FilterCard("instant and sorcery spells you control");
 
     static {
         filter.add(Predicates.or(
@@ -45,9 +45,7 @@ public final class PestilentSpirit extends CardImpl {
         // Instant and sorcery spells you control have deathtouch.
         this.addAbility(new SimpleStaticAbility(
                 Zone.BATTLEFIELD,
-                new GainAbilitySpellsEffect(
-                        DeathtouchAbility.getInstance(), filter
-                ).setText("Instant and sorcery spells you control have deathtouch")
+                new GainAbilityControlledSpellsEffect(DeathtouchAbility.getInstance(), filter)
         ));
     }
 

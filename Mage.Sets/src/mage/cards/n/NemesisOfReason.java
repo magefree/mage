@@ -5,7 +5,7 @@ package mage.cards.n;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -31,7 +31,7 @@ public final class NemesisOfReason extends CardImpl {
         this.toughness = new MageInt(7);
 
         // Whenever Nemesis of Reason attacks, defending player puts the top ten cards of their library into their graveyard.
-        this.addAbility(new NemesisOfReasonTriggeredAbility(new PutLibraryIntoGraveTargetEffect(10)));
+        this.addAbility(new NemesisOfReasonTriggeredAbility(new MillCardsTargetEffect(10)));
     }
 
     private NemesisOfReason(final NemesisOfReason card) {

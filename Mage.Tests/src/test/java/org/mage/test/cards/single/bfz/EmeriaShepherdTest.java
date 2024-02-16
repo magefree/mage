@@ -39,8 +39,11 @@ public class EmeriaShepherdTest extends CardTestPlayerBase {
         addCard(Zone.GRAVEYARD, playerA, bruna);
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 7);
 
+        setStrictChooseMode(true);
+
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Plains");
         setChoice(playerA, true); // opt to use Emeria's triggered ability
+        setChoice(playerA, true); // opt to put it onto the battlefield instead of the hand
         addTarget(playerA, bruna); // target Bruna in grave
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);

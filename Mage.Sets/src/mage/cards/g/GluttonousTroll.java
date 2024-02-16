@@ -53,9 +53,9 @@ public final class GluttonousTroll extends CardImpl {
 
         // {1}{G}, Sacrifice another nonland permanent: Gluttonous Troll gets +2/+2 until end of turn.
         Ability ability = new SimpleActivatedAbility(
-                new BoostSourceEffect(2, 2, Duration.EndOfTurn), new ManaCostsImpl("{1}{G}")
+                new BoostSourceEffect(2, 2, Duration.EndOfTurn), new ManaCostsImpl<>("{1}{G}")
         );
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        ability.addCost(new SacrificeTargetCost(filter));
         this.addAbility(ability);
     }
 

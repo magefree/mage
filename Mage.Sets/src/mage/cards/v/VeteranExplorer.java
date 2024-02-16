@@ -53,13 +53,13 @@ public final class VeteranExplorer extends CardImpl {
 
 class VeteranExplorerEffect extends OneShotEffect {
 
-    public VeteranExplorerEffect() {
+    VeteranExplorerEffect() {
         super(Outcome.Detriment);
         this.staticText = "each player may search their library for up to two basic land cards, " +
                 "put them onto the battlefield, then shuffle";
     }
 
-    public VeteranExplorerEffect(final VeteranExplorerEffect effect) {
+    private VeteranExplorerEffect(final VeteranExplorerEffect effect) {
         super(effect);
     }
 

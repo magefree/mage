@@ -23,7 +23,7 @@ public final class ScoutThePerimeter extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}");
 
         // Search your library for a land card, put it onto the battlefield tapped, then suffle your library.
-        this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(new FilterLandCard()), true, true));
+        this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(new FilterLandCard()), true));
 
         // Put a bounty counter on up to one target creature an opponent controls.
         Effect effect = new AddCountersTargetEffect(CounterType.BOUNTY.createInstance());

@@ -22,7 +22,6 @@ public class AfflictTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerB, 19);
     }
@@ -41,7 +40,6 @@ public class AfflictTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerB, 19);
 
@@ -57,7 +55,6 @@ public class AfflictTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerB, 18);
     }
@@ -87,7 +84,6 @@ public class AfflictTest extends CardTestPlayerBase {
         activateAbility(1, PhaseStep.DECLARE_BLOCKERS, playerA, "{2},", "Frontline Devastator");
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertExileCount(playerA, "Frontline Devastator", 1);
         assertPermanentCount(playerB, "Ruin Rat", 1);

@@ -29,7 +29,7 @@ public final class ShroudedSerpent extends CardImpl {
         
         // Whenever Shrouded Serpent attacks, defending player may pay {4}. If they don't, Shrouded Serpent can't be blocked this turn.
         this.addAbility(new AttacksTriggeredAbility(
-                new DoUnlessTargetPlayerOrTargetsControllerPaysEffect(new CantBeBlockedByAllSourceEffect(new FilterCreaturePermanent(), Duration.EndOfCombat), new ManaCostsImpl("{4}")), 
+                new DoUnlessTargetPlayerOrTargetsControllerPaysEffect(new CantBeBlockedByAllSourceEffect(new FilterCreaturePermanent(), Duration.EndOfCombat), new ManaCostsImpl<>("{4}")),
                 false, 
                 "Whenever {this} attacks, defending player may pay {4}. If they don't, {this} can't be blocked this turn.", 
                 SetTargetPointer.PLAYER));

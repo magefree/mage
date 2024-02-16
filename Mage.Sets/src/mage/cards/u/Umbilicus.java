@@ -42,12 +42,12 @@ public final class Umbilicus extends CardImpl {
 
 class BloodClockEffect extends OneShotEffect {
 
-    public BloodClockEffect() {
+    BloodClockEffect() {
         super(Outcome.ReturnToHand);
         this.staticText = "that player returns a permanent they control to its owner's hand unless they pay 2 life";
     }
 
-    public BloodClockEffect(final BloodClockEffect effect) {
+    private BloodClockEffect(final BloodClockEffect effect) {
         super(effect);
     }
 
@@ -69,7 +69,7 @@ class BloodClockEffect extends OneShotEffect {
             return true;
         } else {
             Target target = new TargetControlledPermanent();
-            if (target.canChoose(source.getSourceId(), player.getId(), game) && player.chooseTarget(outcome, target, source, game)) {
+            if (target.canChoose(player.getId(), source, game) && player.chooseTarget(outcome, target, source, game)) {
                 Permanent permanent = game.getPermanent(target.getFirstTarget());
                 if (permanent != null) {
                     game.informPlayers(player.getLogName() + " returns " + permanent.getName() + " to hand.");

@@ -22,7 +22,7 @@ public final class SilvosRogueElemental extends CardImpl {
 
     public SilvosRogueElemental(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELEMENTAL);
 
         this.power = new MageInt(8);
@@ -31,7 +31,7 @@ public final class SilvosRogueElemental extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
         // {G}: Regenerate Silvos, Rogue Elemental.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{G}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{G}")));
     }
 
     private SilvosRogueElemental(final SilvosRogueElemental card) {

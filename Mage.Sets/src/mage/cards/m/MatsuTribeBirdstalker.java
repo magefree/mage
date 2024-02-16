@@ -42,7 +42,7 @@ public final class MatsuTribeBirdstalker extends CardImpl {
         // {G}: Matsu-Tribe Birdstalker gains reach until end of turn. (It can block creatures with flying.)
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new GainAbilitySourceEffect(ReachAbility.getInstance(), Duration.EndOfTurn),
-                new ManaCostsImpl("{G}")));
+                new ManaCostsImpl<>("{G}")));
     }
 
     private MatsuTribeBirdstalker(final MatsuTribeBirdstalker card) {

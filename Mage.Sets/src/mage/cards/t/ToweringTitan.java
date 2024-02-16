@@ -58,7 +58,7 @@ public final class ToweringTitan extends CardImpl {
                         TrampleAbility.getInstance(), Duration.EndOfTurn,
                         StaticFilters.FILTER_PERMANENT_CREATURE
                 ).setText("All creatures gain trample until end of turn"),
-                new SacrificeTargetCost(new TargetControlledPermanent(filter))
+                new SacrificeTargetCost(filter)
         ));
     }
 
@@ -80,7 +80,7 @@ enum ToweringTitanCount implements DynamicValue {
         return game.getBattlefield()
                 .getActivePermanents(
                         StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE,
-                        sourceAbility.getControllerId(), sourceAbility.getSourceId(), game
+                        sourceAbility.getControllerId(), sourceAbility, game
                 ).stream()
                 .filter(Objects::nonNull)
                 .map(MageObject::getToughness)

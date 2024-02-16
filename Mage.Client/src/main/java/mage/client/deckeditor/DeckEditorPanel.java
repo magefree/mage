@@ -2,6 +2,8 @@ package mage.client.deckeditor;
 
 import mage.cards.Card;
 import mage.cards.decks.*;
+import static mage.cards.decks.DeckFormats.XMAGE;
+import static mage.cards.decks.DeckFormats.XMAGE_INFO;
 import mage.cards.decks.importer.DeckImporter;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
@@ -38,9 +40,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.*;
 import java.util.concurrent.*;
-
-import static mage.cards.decks.DeckFormats.XMAGE;
-import static mage.cards.decks.DeckFormats.XMAGE_INFO;
 
 /**
  * @author BetaSteward_at_googlemail.com, JayDi85, Elandril
@@ -110,10 +109,13 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 
         // deck legality cards selection
         Arrays.stream(deckLegalityDisplay.getComponents())
-                .filter(c -> c instanceof LegalityLabel)
+                .filter(LegalityLabel.class::isInstance)
                 .forEach(c -> {
                     c.addMouseListener(new MouseAdapter() {
                         public void mouseClicked(MouseEvent e) {
+                            if (!SwingUtilities.isLeftMouseButton(e)) {
+                                return;
+                            }
                             List<String> cardNames = new ArrayList<>();
                             LegalityLabel label = (LegalityLabel) e.getComponent();
                             label.getValidator().getErrorsList().stream()
@@ -198,7 +200,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         this.deckArea.changeGUISize();
     }
 
-    public void showDeckEditor(DeckEditorMode mode, Deck deck, UUID tableId, int time) {
+    public void showDeckEditor(DeckEditorMode mode, Deck deck, UUID tableId, int visibleTimer) {
         if (deck != null) {
             this.deck = deck;
         }
@@ -214,6 +216,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         restoreDividerLocationsAndDeckAreaSettings();
         switch (mode) {
             case LIMITED_BUILDING:
+            case LIMITED_SIDEBOARD_BUILDING:
                 this.btnAddLand.setVisible(true);
                 this.txtTimeRemaining.setVisible(true);
                 this.btnLegality.setVisible(false); // legality check available only in free building mode
@@ -233,7 +236,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                 }
                 this.deckArea.showSideboard(true);
                 countdown.stop();
-                this.timeout = time;
+                this.timeout = visibleTimer;
                 setTimeout(timeout);
                 if (timeout != 0) {
                     countdown.start();
@@ -275,8 +278,8 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                 this.cardSelector.setVisible(false);
                 this.deckArea.setOrientation(/*limitedBuildingOrientation = */true);
                 this.deckArea.showSideboard(true);
-                this.lblDeckName.setVisible(false);
-                this.txtDeckName.setVisible(false);
+                this.lblDeckName.setVisible(true);
+                this.txtDeckName.setVisible(true);
                 this.txtTimeRemaining.setVisible(false);
                 break;
         }
@@ -1439,7 +1442,9 @@ public class DeckEditorPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnLoadActionPerformed
 
     private void btnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewActionPerformed
-        if (mode == DeckEditorMode.SIDEBOARDING || mode == DeckEditorMode.LIMITED_BUILDING) {
+        if (mode == DeckEditorMode.SIDEBOARDING
+                || mode == DeckEditorMode.LIMITED_BUILDING
+                || mode == DeckEditorMode.LIMITED_SIDEBOARD_BUILDING) {
             for (Card card : deck.getCards()) {
                 deck.getSideboard().add(card);
             }
@@ -1481,7 +1486,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
             updateDeckTask.cancel(true);
         }
 
-        if (SessionHandler.submitDeck(tableId, deck.getDeckCardLists())) {
+        if (SessionHandler.submitDeck(mode, tableId, deck.getDeckCardLists())) {
             removeDeckEditor();
         }
     }//GEN-LAST:event_btnSubmitActionPerformed
@@ -1492,13 +1497,13 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         timeToSubmit = 60;
         this.btnSubmitTimer.setEnabled(false);
 
-        ScheduledFuture scheduledFuture = scheduledExecutorService.schedule((Callable) () -> {
+        scheduledExecutorService.schedule(() -> {
             if (updateDeckTask != null) {
                 updateDeckTask.cancel(true);
             }
 
-            if (SessionHandler.submitDeck(tableId, deck.getDeckCardLists())) {
-                removeDeckEditor();
+            if (SessionHandler.submitDeck(mode, tableId, deck.getDeckCardLists())) {
+                SwingUtilities.invokeLater(this::removeDeckEditor);
             }
             return null;
         }, 60, TimeUnit.SECONDS);

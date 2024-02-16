@@ -22,7 +22,8 @@ public final class TidyConclusion extends CardImpl {
         // Destroy target creature. You gain 1 life for each artifact you control.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addEffect(new GainLifeEffect(ArtifactYouControlCount.instance));
+        this.getSpellAbility().addEffect(new GainLifeEffect(ArtifactYouControlCount.instance)
+                .setText("you gain 1 life for each artifact you control"));
         this.getSpellAbility().addHint(ArtifactYouControlHint.instance);
     }
 

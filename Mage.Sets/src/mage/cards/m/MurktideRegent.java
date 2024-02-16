@@ -100,6 +100,7 @@ class MurktideRegentTriggeredAbility extends TriggeredAbilityImpl {
 
     public MurktideRegentTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
+        setTriggerPhrase("Whenever an instant or sorcery card leaves your graveyard, ");
     }
 
     private MurktideRegentTriggeredAbility(final MurktideRegentTriggeredAbility ability) {
@@ -124,10 +125,5 @@ class MurktideRegentTriggeredAbility extends TriggeredAbilityImpl {
             return card != null && card.isInstantOrSorcery(game) && card.getOwnerId().equals(getControllerId());
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever an instant or sorcery card leaves your graveyard, " ;
     }
 }

@@ -24,7 +24,7 @@ public final class TeferiMageOfZhalfir extends CardImpl {
 
     public TeferiMageOfZhalfir(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{U}{U}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
 
@@ -54,12 +54,12 @@ public final class TeferiMageOfZhalfir extends CardImpl {
 
 class TeferiMageOfZhalfirAddFlashEffect extends ContinuousEffectImpl {
 
-    public TeferiMageOfZhalfirAddFlashEffect() {
+    TeferiMageOfZhalfirAddFlashEffect() {
         super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         this.staticText = "Creature cards you own that aren't on the battlefield have flash";
     }
 
-    public TeferiMageOfZhalfirAddFlashEffect(final TeferiMageOfZhalfirAddFlashEffect effect) {
+    private TeferiMageOfZhalfirAddFlashEffect(final TeferiMageOfZhalfirAddFlashEffect effect) {
         super(effect);
     }
 
@@ -117,13 +117,13 @@ class TeferiMageOfZhalfirReplacementEffect extends ContinuousRuleModifyingEffect
         staticText = "Each opponent can cast spells only any time they could cast a sorcery";
     }
 
-    TeferiMageOfZhalfirReplacementEffect(final TeferiMageOfZhalfirReplacementEffect effect) {
+    private TeferiMageOfZhalfirReplacementEffect(final TeferiMageOfZhalfirReplacementEffect effect) {
         super(effect);
     }
 
     @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (mageObject != null) {
             return "You can cast spells only any time you could cast a sorcery  (" + mageObject.getIdName() + ").";
         }
@@ -142,11 +142,6 @@ class TeferiMageOfZhalfirReplacementEffect extends ContinuousRuleModifyingEffect
             return !game.canPlaySorcery(event.getPlayerId());
         }
         return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

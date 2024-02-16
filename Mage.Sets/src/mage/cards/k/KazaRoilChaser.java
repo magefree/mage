@@ -40,7 +40,7 @@ public final class KazaRoilChaser extends CardImpl {
     public KazaRoilChaser(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(1);
@@ -93,7 +93,7 @@ class KazaRoilChaserEffect extends CostModificationEffectImpl {
         if (watcher != null) {
             spellsCast = watcher.getCount(source.getControllerId());
         }
-        wizardCount = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game);
+        wizardCount = game.getBattlefield().count(filter, source.getControllerId(), source, game);
     }
 
     @Override

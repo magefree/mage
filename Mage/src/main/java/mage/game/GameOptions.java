@@ -1,10 +1,13 @@
 package mage.game;
 
+import mage.cards.decks.DeckCardInfo;
 import mage.constants.PhaseStep;
 import mage.util.Copyable;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -50,7 +53,16 @@ public class GameOptions implements Serializable, Copyable<GameOptions> {
     /**
      * Names of users banned from participating in the game
      */
-    public Set<String> bannedUsers = Collections.emptySet();
+    public Set<String> bannedUsers = new HashSet<>();
+
+    /**
+     * Cards to be given to each player as emblems
+     */
+    public Collection<DeckCardInfo> perPlayerEmblemCards = new HashSet<>();
+    /**
+     * Cards to be given to the starting player as emblems
+     */
+    public Collection<DeckCardInfo> globalEmblemCards = new HashSet<>();
 
 
     // PLANECHASE game mode
@@ -73,6 +85,8 @@ public class GameOptions implements Serializable, Copyable<GameOptions> {
         this.rollbackTurnsAllowed = options.rollbackTurnsAllowed;
         this.bannedUsers.addAll(options.bannedUsers);
         this.planeChase = options.planeChase;
+        this.perPlayerEmblemCards = new HashSet<>(options.perPlayerEmblemCards);
+        this.globalEmblemCards = new HashSet<>(options.globalEmblemCards);
     }
 
     @Override

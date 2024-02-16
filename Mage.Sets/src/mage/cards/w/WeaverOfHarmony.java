@@ -6,21 +6,15 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.CopyTargetStackAbilityEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubType;
+import mage.constants.*;
 import mage.filter.FilterStackObject;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicate;
-import mage.game.Game;
-import mage.game.stack.StackAbility;
-import mage.game.stack.StackObject;
-import mage.target.TargetStackObject;
+import mage.filter.predicate.other.EnchantmentSourcePredicate;
+import mage.target.common.TargetActivatedOrTriggeredAbility;
 
 import java.util.UUID;
 
@@ -36,7 +30,8 @@ public final class WeaverOfHarmony extends CardImpl {
 
     static {
         filter.add(CardType.ENCHANTMENT.getPredicate());
-        filter2.add(WeaverOfHarmonyPredicate.instance);
+        filter2.add(TargetController.YOU.getControllerPredicate());
+        filter2.add(EnchantmentSourcePredicate.instance);
     }
 
     public WeaverOfHarmony(UUID ownerId, CardSetInfo setInfo) {
@@ -53,9 +48,9 @@ public final class WeaverOfHarmony extends CardImpl {
         )));
 
         // {G}, {T}: Copy target activated or triggered ability you control from an enchantment source. You may choose new targets for the copy.
-        Ability ability = new SimpleActivatedAbility(new WeaverOfHarmonyEffect(), new ManaCostsImpl<>("{G}"));
+        Ability ability = new SimpleActivatedAbility(new CopyTargetStackAbilityEffect(), new ManaCostsImpl<>("{G}"));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetStackObject(filter2));
+        ability.addTarget(new TargetActivatedOrTriggeredAbility(filter2));
         this.addAbility(ability);
     }
 
@@ -66,43 +61,5 @@ public final class WeaverOfHarmony extends CardImpl {
     @Override
     public WeaverOfHarmony copy() {
         return new WeaverOfHarmony(this);
-    }
-}
-
-enum WeaverOfHarmonyPredicate implements Predicate<StackObject> {
-    instance;
-
-    @Override
-    public boolean apply(StackObject input, Game game) {
-        return input instanceof StackAbility
-                && ((StackAbility) input).getSourceObject(game).isEnchantment(game);
-    }
-}
-
-class WeaverOfHarmonyEffect extends OneShotEffect {
-
-    WeaverOfHarmonyEffect() {
-        super(Outcome.Benefit);
-        staticText = "copy target activated or triggered ability you control " +
-                "from an enchantment source. You may choose new targets for the copy";
-    }
-
-    private WeaverOfHarmonyEffect(final WeaverOfHarmonyEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public WeaverOfHarmonyEffect copy() {
-        return new WeaverOfHarmonyEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(targetPointer.getFirst(game, source));
-        if (stackAbility == null) {
-            return false;
-        }
-        stackAbility.createCopyOnStack(game, source, source.getControllerId(), true);
-        return true;
     }
 }

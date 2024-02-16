@@ -3,21 +3,31 @@ package mage.abilities.common;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.Zone;
+import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 
 /**
- *
  * @author TheElk801
  */
 public class PhaseInTriggeredAbility extends TriggeredAbilityImpl {
 
-    public PhaseInTriggeredAbility(Effect effect, boolean optional) {
-        super(Zone.BATTLEFIELD, effect, optional);
+    private FilterPermanent filter;
+
+    public PhaseInTriggeredAbility(Effect effect, FilterPermanent filter) {
+        this(effect, filter, false);
     }
 
-    public PhaseInTriggeredAbility(final PhaseInTriggeredAbility ability) {
+    public PhaseInTriggeredAbility(Effect effect, FilterPermanent filter, boolean optional) {
+        super(Zone.BATTLEFIELD, effect, optional);
+        this.filter = filter;
+        setTriggerPhrase("Whenever " + filter.getMessage() + " phases in, ");
+    }
+
+    protected PhaseInTriggeredAbility(final PhaseInTriggeredAbility ability) {
         super(ability);
+        this.filter = ability.filter;
     }
 
     @Override
@@ -32,11 +42,7 @@ public class PhaseInTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return getSourceId().equals(event.getTargetId());
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "When {this} phases in, " ;
+        Permanent permanent = game.getPermanent(event.getTargetId());
+        return permanent != null && filter.match(permanent, getControllerId(), this, game);
     }
 }

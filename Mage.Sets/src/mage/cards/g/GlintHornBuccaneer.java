@@ -43,7 +43,7 @@ public final class GlintHornBuccaneer extends CardImpl {
         // {1}{R}, Discard a card: Draw a card. Activate this ability only if Glint-Horn Buccaneer is attacking.
         Ability ability = new ConditionalActivatedAbility(
                 Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1),
-                new ManaCostsImpl("{1}{R}"), SourceAttackingCondition.instance
+                new ManaCostsImpl<>("{1}{R}"), SourceAttackingCondition.instance
         );
         ability.addCost(new DiscardCardCost());
         this.addAbility(ability);
@@ -63,6 +63,7 @@ class GlintHornBuccaneerTriggeredAbility extends TriggeredAbilityImpl {
 
     GlintHornBuccaneerTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DamagePlayersEffect(1, TargetController.OPPONENT), false);
+        setTriggerPhrase("Whenever you discard a card, ");
     }
 
     private GlintHornBuccaneerTriggeredAbility(final GlintHornBuccaneerTriggeredAbility ability) {
@@ -82,11 +83,5 @@ class GlintHornBuccaneerTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         return isControlledBy(event.getPlayerId());
-
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you discard a card, " ;
     }
 }

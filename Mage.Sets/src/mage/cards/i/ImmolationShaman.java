@@ -48,7 +48,7 @@ public final class ImmolationShaman extends CardImpl {
                 new BoostSourceEffect(
                         3, 3, Duration.EndOfTurn
                 ).setText("{this} gets +3/+3"),
-                new ManaCostsImpl("{3}{R}{R}")
+                new ManaCostsImpl<>("{3}{R}{R}")
         );
         ability.addEffect(new GainAbilitySourceEffect(
                 new MenaceAbility(), Duration.EndOfTurn
@@ -70,6 +70,7 @@ class ImmolationShamanTriggeredAbility extends TriggeredAbilityImpl {
 
     ImmolationShamanTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(StaticValue.get(1), true, "that player", true));
+        setTriggerPhrase("Whenever an opponent activates an ability of an artifact, creature, or land that isn't a mana ability, ");
     }
 
     private ImmolationShamanTriggeredAbility(final ImmolationShamanTriggeredAbility ability) {
@@ -103,9 +104,4 @@ class ImmolationShamanTriggeredAbility extends TriggeredAbilityImpl {
         return false;
     }
 
-    @Override
-    public String getRule() {
-        return "Whenever an opponent activates an ability of an artifact, creature, or land on the battlefield, " +
-                "if it isn't a mana ability, {this} deals 1 damage to that player.";
-    }
 }

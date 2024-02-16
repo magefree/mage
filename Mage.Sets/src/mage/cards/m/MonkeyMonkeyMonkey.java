@@ -2,6 +2,7 @@
 package mage.cards.m;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
@@ -60,12 +61,12 @@ public final class MonkeyMonkeyMonkey extends CardImpl {
 
 class ChooseLetterEffect extends OneShotEffect {
 
-    public ChooseLetterEffect() {
+    ChooseLetterEffect() {
         super(Outcome.Benefit);
         staticText = "choose a letter";
     }
 
-    public ChooseLetterEffect(final ChooseLetterEffect effect) {
+    private ChooseLetterEffect(final ChooseLetterEffect effect) {
         super(effect);
     }
 
@@ -74,12 +75,12 @@ class ChooseLetterEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject mageObject = game.getPermanentEntering(source.getSourceId());
         if (mageObject == null) {
-            mageObject = game.getObject(source.getSourceId());
+            mageObject = game.getObject(source);
         }
 
         ChoiceImpl choice = new ChoiceImpl(true);
         choice.setMessage("Choose letter");
-        Set<String> choices = new HashSet<>();
+        Set<String> choices = new LinkedHashSet<>();
         for (char letter = 'A'; letter <= 'Z'; letter++) {
             choices.add(Character.toString(letter));
         }
@@ -109,7 +110,7 @@ class MonkeyMonkeyMonkeyCount implements DynamicValue {
     public MonkeyMonkeyMonkeyCount() {
     }
 
-    public MonkeyMonkeyMonkeyCount(final MonkeyMonkeyMonkeyCount countersCount) {
+    private MonkeyMonkeyMonkeyCount(final MonkeyMonkeyMonkeyCount countersCount) {
     }
 
     @Override
@@ -121,7 +122,7 @@ class MonkeyMonkeyMonkeyCount implements DynamicValue {
             Permanent permanent = game.getPermanentOrLKIBattlefield(sourceAbility.getSourceId());
             if (permanent != null && game.getState().getValue(mageObject.getId() + "_letter") != null) {
                 int letters = 0;
-                for (Permanent p : game.getBattlefield().getActivePermanents(new FilterNonlandPermanent(), sourceAbility.getControllerId(), sourceAbility.getSourceId(), game)) {
+                for (Permanent p : game.getBattlefield().getActivePermanents(new FilterNonlandPermanent(), sourceAbility.getControllerId(), sourceAbility, game)) {
                     char initial = Character.toUpperCase(p.getName().charAt(0));
                     if (Character.toString(initial).equals(game.getState().getValue(mageObject.getId() + "_letter"))) {
                         letters++;

@@ -28,7 +28,6 @@ public class BoastAbility extends ActivatedAbilityImpl {
     public BoastAbility(Effect effect, Cost cost) {
         super(Zone.BATTLEFIELD, effect, cost);
         this.maxActivationsPerTurn = 1;
-        this.addWatcher(new AttackedThisTurnWatcher());
         this.condition = BoastCondition.instance;
         this.addHint(BoastHint.instance);
     }
@@ -60,7 +59,7 @@ public class BoastAbility extends ActivatedAbilityImpl {
         return game.getBattlefield()
                 .getActivePermanents(
                         StaticFilters.FILTER_CONTROLLED_PERMANENT,
-                        getControllerId(), getSourceId(), game
+                        getControllerId(), this, game
                 ).stream()
                 .map(p -> p.getAbilities(game))
                 .flatMap(Collection::stream)

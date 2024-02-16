@@ -54,7 +54,6 @@ public class ZulaportCutthroatTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 22);
         assertLife(playerB, 18);

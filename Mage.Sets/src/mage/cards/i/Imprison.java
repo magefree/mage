@@ -43,14 +43,14 @@ public final class Imprison extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Whenever a player activates an ability of enchanted creature with {T} in its activation cost that isn't a mana ability, you may pay {1}. If you do, counter that ability. If you don't, destroy Imprison.
         this.addAbility(new ImprisonTriggeredAbility());
         
         // Whenever enchanted creature attacks or blocks, you may pay {1}. If you do, tap the creature, remove it from combat, and creatures it was blocking that had become blocked by only that creature this combat become unblocked. If you don't, destroy Imprison.
-        this.addAbility(new AttacksOrBlocksAttachedTriggeredAbility(new DoIfCostPaid(new ImprisonUnblockEffect(), new DestroySourceEffect(), new ManaCostsImpl("1")), AttachmentType.AURA));
+        this.addAbility(new AttacksOrBlocksAttachedTriggeredAbility(new DoIfCostPaid(new ImprisonUnblockEffect(), new DestroySourceEffect(), new ManaCostsImpl<>("{1}")), AttachmentType.AURA));
     }
 
     private Imprison(final Imprison card) {
@@ -66,10 +66,11 @@ public final class Imprison extends CardImpl {
 class ImprisonTriggeredAbility extends TriggeredAbilityImpl {
 
     ImprisonTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DoIfCostPaid(new CounterTargetEffect().setText("counter that ability"), new DestroySourceEffect(), new ManaCostsImpl("1")));
+        super(Zone.BATTLEFIELD, new DoIfCostPaid(new CounterTargetEffect().setText("counter that ability"), new DestroySourceEffect(), new ManaCostsImpl<>("{1}")));
+        setTriggerPhrase("Whenever a player activates an ability of enchanted creature with {T} in its activation cost that isn't a mana ability, ");
     }
 
-    ImprisonTriggeredAbility(final ImprisonTriggeredAbility ability) {
+    private ImprisonTriggeredAbility(final ImprisonTriggeredAbility ability) {
         super(ability);
     }
 
@@ -101,21 +102,16 @@ class ImprisonTriggeredAbility extends TriggeredAbilityImpl {
         }
         return false;
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a player activates an ability of enchanted creature with {T} in its activation cost that isn't a mana ability, " ;
-    }
 }
 
 class ImprisonUnblockEffect extends OneShotEffect {
 
-    public ImprisonUnblockEffect() {
+    ImprisonUnblockEffect() {
         super(Outcome.Benefit);
         this.staticText = "tap the creature, remove it from combat, and creatures it was blocking that had become blocked by only that creature this combat become unblocked";
     }
 
-    public ImprisonUnblockEffect(final ImprisonUnblockEffect effect) {
+    private ImprisonUnblockEffect(final ImprisonUnblockEffect effect) {
         super(effect);
     }
 

@@ -1,8 +1,6 @@
 
 package mage.cards.m;
 
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
@@ -14,18 +12,19 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author North
  */
 public final class Mindcrank extends CardImpl {
 
     public Mindcrank(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
         // Whenever an opponent loses life, that player puts that many cards from the top of their library into their graveyard.
         // (Damage dealt by sources without infect causes loss of life.)
@@ -48,7 +47,7 @@ class MindcrankTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new MindcrankEffect(), false);
     }
 
-    public MindcrankTriggeredAbility(final MindcrankTriggeredAbility ability) {
+    private MindcrankTriggeredAbility(final MindcrankTriggeredAbility ability) {
         super(ability);
     }
 
@@ -77,17 +76,17 @@ class MindcrankTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever an opponent loses life, that player puts that many cards from the top of their library into their graveyard.";
+        return "Whenever an opponent loses life, that player mills that many cards.";
     }
 }
 
 class MindcrankEffect extends OneShotEffect {
 
-    public MindcrankEffect() {
+    MindcrankEffect() {
         super(Outcome.Detriment);
     }
 
-    public MindcrankEffect(final MindcrankEffect effect) {
+    private MindcrankEffect(final MindcrankEffect effect) {
         super(effect);
     }
 

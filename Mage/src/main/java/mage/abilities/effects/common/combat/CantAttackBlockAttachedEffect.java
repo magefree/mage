@@ -18,15 +18,13 @@ public class CantAttackBlockAttachedEffect extends RestrictionEffect {
         this.staticText = attachmentType.verb() + " creature can't attack or block";
     }
 
-    public CantAttackBlockAttachedEffect(final CantAttackBlockAttachedEffect effect) {
+    protected CantAttackBlockAttachedEffect(final CantAttackBlockAttachedEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        Permanent attachment = game.getPermanent(source.getSourceId());
-        return attachment != null && attachment.getAttachedTo() != null
-                && permanent.getId().equals(attachment.getAttachedTo());
+        return permanent.getAttachments().contains(source.getSourceId());
     }
 
     @Override

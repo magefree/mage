@@ -44,7 +44,7 @@ public final class UnrulySureshot extends CardImpl {
         this.addAbility(ability);
 
         // {3}{R}: Unruly Sureshot deals 2 damage to target creature with a bounty counter on it.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new ManaCostsImpl("{3}{R}"));
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new ManaCostsImpl<>("{3}{R}"));
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }

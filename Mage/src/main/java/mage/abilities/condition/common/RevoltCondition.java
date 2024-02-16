@@ -21,6 +21,6 @@ public enum RevoltCondition implements Condition {
 
     @Override
     public String toString() {
-        return "a permanent you control left the battlefield this turn";
+        return "a permanent you controlled left the battlefield this turn";
     }
 }

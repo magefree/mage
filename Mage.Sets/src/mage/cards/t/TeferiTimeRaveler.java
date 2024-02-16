@@ -41,7 +41,7 @@ public final class TeferiTimeRaveler extends CardImpl {
     public TeferiTimeRaveler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{W}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.TEFERI);
         this.setStartingLoyalty(4);
 
@@ -83,7 +83,7 @@ class TeferiTimeRavelerReplacementEffect extends ContinuousRuleModifyingEffectIm
 
     @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (mageObject != null) {
             return "You can cast spells only any time you could cast a sorcery  (" + mageObject.getIdName() + ").";
         }
@@ -102,11 +102,6 @@ class TeferiTimeRavelerReplacementEffect extends ContinuousRuleModifyingEffectIm
             return !game.canPlaySorcery(event.getPlayerId());
         }
         return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

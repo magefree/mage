@@ -20,12 +20,12 @@ public class BlatantThieveryTest extends CardTestMultiPlayerBase {
 
     @Override
     protected Game createNewGameAndPlayers() throws GameException, FileNotFoundException {
-        Game game = new FreeForAll(MultiplayerAttackOption.MULTIPLE, RangeOfInfluence.ALL, MulliganType.GAME_DEFAULT.getMulligan(0), 20);
+        Game game = new FreeForAll(MultiplayerAttackOption.MULTIPLE, RangeOfInfluence.ALL, MulliganType.GAME_DEFAULT.getMulligan(0), 20, 7);
         // Player order: A -> D -> C -> B
-        playerA = createPlayer(game, playerA, "PlayerA");
-        playerB = createPlayer(game, playerB, "PlayerB");
-        playerC = createPlayer(game, playerC, "PlayerC");
-        playerD = createPlayer(game, playerD, "PlayerD");
+        playerA = createPlayer(game, "PlayerA");
+        playerB = createPlayer(game, "PlayerB");
+        playerC = createPlayer(game, "PlayerC");
+        playerD = createPlayer(game, "PlayerD");
         return game;
     }
 
@@ -48,7 +48,6 @@ public class BlatantThieveryTest extends CardTestMultiPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Blatant Thievery", 1);
         assertPermanentCount(playerA, "Silvercoat Lion", 1);
@@ -75,13 +74,12 @@ public class BlatantThieveryTest extends CardTestMultiPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Blatant Thievery");
         addTarget(playerA, "Silvercoat Lion");
-        addTarget(playerA, "Walking Corpse");
-        addTarget(playerA, "Pillarfield Ox");
+        // addTarget(playerA, "Walking Corpse"); Autochosen, only target
+        // addTarget(playerA, "Pillarfield Ox"); Autochosen, only target
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Act of Aggression", "Pillarfield Ox", "Blatant Thievery");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Blatant Thievery", 1);
         assertGraveyardCount(playerB, "Act of Aggression", 1);

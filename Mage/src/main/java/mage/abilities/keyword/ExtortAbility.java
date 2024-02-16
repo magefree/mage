@@ -2,29 +2,29 @@
 
 package mage.abilities.keyword;
 
-import java.util.UUID;
-
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
  * FAQ 2013/01/11
- *
+ * <p>
  * 702.99. Extort
- *
+ * <p>
  * 702.99a Extort is a triggered ability. "Extort" means "Whenever you cast a spell,
  * you may pay White or Black Mana. If you do, each opponent loses 1 life and you gain
  * life equal to the total life lost this way."
- *
+ * <p>
  * 702.99b If a permanent has multiple instances of extort, each triggers separately.
  *
  * @author LevelX2
@@ -35,7 +35,7 @@ public class ExtortAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new ExtortEffect(), false);
     }
 
-    public ExtortAbility(final ExtortAbility ability) {
+    protected ExtortAbility(final ExtortAbility ability) {
         super(ability);
     }
 
@@ -66,7 +66,7 @@ class ExtortEffect extends OneShotEffect {
         staticText = "each opponent loses 1 life and you gain that much life";
     }
 
-    public ExtortEffect(final ExtortEffect effect) {
+    protected ExtortEffect(final ExtortEffect effect) {
         super(effect);
     }
 
@@ -76,7 +76,7 @@ class ExtortEffect extends OneShotEffect {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (player != null && permanent != null) {
             if (player.chooseUse(Outcome.Damage, new StringBuilder("Extort opponents? (").append(permanent.getName()).append(')').toString(), source, game)) {
-                Cost cost = new ManaCostsImpl("{W/B}");
+                Cost cost = new ManaCostsImpl<>("{W/B}");
                 if (cost.pay(source, game, source, player.getId(), false, null)) {
                     int loseLife = 0;
                     for (UUID opponentId : game.getOpponents(source.getControllerId())) {

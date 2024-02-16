@@ -27,8 +27,8 @@ public class ForbiddenOrchardTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Silvercoat Lion", 1);
 
-        assertPermanentCount(playerB, "Spirit", 1);
-        assertPermanentCount(playerA, "Spirit", 0);
+        assertPermanentCount(playerB, "Spirit Token", 1);
+        assertPermanentCount(playerA, "Spirit Token", 0);
 
     }
 

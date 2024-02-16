@@ -32,7 +32,7 @@ public final class TemperedVeteran extends CardImpl {
 
         // {W}, {T}: Put a +1/+1 counter on target creature with a +1/+1 counter on it.
         Ability ability = new SimpleActivatedAbility(
-                new AddCountersTargetEffect(CounterType.P1P1.createInstance()), new ManaCostsImpl("{W}")
+                new AddCountersTargetEffect(CounterType.P1P1.createInstance()), new ManaCostsImpl<>("{W}")
         );
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CREATURE_P1P1));
@@ -40,7 +40,7 @@ public final class TemperedVeteran extends CardImpl {
 
         // {4}{W}{W}, {T}: Put a +1/+1 counter on target creature.
         ability = new SimpleActivatedAbility(
-                new AddCountersTargetEffect(CounterType.P1P1.createInstance()), new ManaCostsImpl("{4}{W}{W}")
+                new AddCountersTargetEffect(CounterType.P1P1.createInstance()), new ManaCostsImpl<>("{4}{W}{W}")
         );
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());

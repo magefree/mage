@@ -7,12 +7,10 @@ import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.target.targetpointer.FixedTarget;
 
 /**
- *
  * @author LevelX2
  */
 public class PutIntoGraveFromBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
@@ -31,9 +29,11 @@ public class PutIntoGraveFromBattlefieldAllTriggeredAbility extends TriggeredAbi
         this.filter = filter;
         this.onlyToControllerGraveyard = onlyToControllerGraveyard;
         this.setTargetPointer = setTargetPointer;
+        setTriggerPhrase("Whenever " + filter.getMessage() + " is put into " + (onlyToControllerGraveyard ? "your" : "a")
+                + " graveyard from the battlefield, ");
     }
 
-    public PutIntoGraveFromBattlefieldAllTriggeredAbility(final PutIntoGraveFromBattlefieldAllTriggeredAbility ability) {
+    protected PutIntoGraveFromBattlefieldAllTriggeredAbility(final PutIntoGraveFromBattlefieldAllTriggeredAbility ability) {
         super(ability);
         this.filter = ability.filter;
         this.onlyToControllerGraveyard = ability.onlyToControllerGraveyard;
@@ -48,26 +48,15 @@ public class PutIntoGraveFromBattlefieldAllTriggeredAbility extends TriggeredAbi
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (zEvent.isDiesEvent()) {
-            if (filter.match(zEvent.getTarget(), this.getSourceId(), this.getControllerId(), game)) {
-                if (onlyToControllerGraveyard && !this.isControlledBy(game.getOwnerId(zEvent.getTargetId()))) {
-                    return false;
-                }
-                if (setTargetPointer) {
-                    for (Effect effect : this.getEffects()) {
-                        effect.setTargetPointer(new FixedTarget(event.getTargetId(), game.getObject(event.getTargetId()).getZoneChangeCounter(game)));
-                    }
-                }
-                return true;
-            }
+        if (!zEvent.isDiesEvent() || !filter.match(zEvent.getTarget(), this.getControllerId(), this, game)
+                || onlyToControllerGraveyard && !this.isControlledBy(game.getOwnerId(zEvent.getTargetId()))) {
+            return false;
         }
-        return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever " + filter.getMessage() + " is put into " + (onlyToControllerGraveyard ? "your" : "a")
-                + " graveyard from the battlefield, " ;
+        this.getEffects().setValue("permanentDied", zEvent.getTarget());
+        if (setTargetPointer) {
+            this.getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game.getObject(event.getTargetId()).getZoneChangeCounter(game)));
+        }
+        return true;
     }
 
     @Override

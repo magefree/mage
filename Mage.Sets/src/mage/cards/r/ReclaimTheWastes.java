@@ -32,7 +32,7 @@ public final class ReclaimTheWastes extends CardImpl {
                 new SearchLibraryPutInHandEffect(new TargetCardInLibrary(
                         0, 1,
                         StaticFilters.FILTER_CARD_BASIC_LAND
-                ), true), KickedCondition.instance, "search your library for a basic land card, " +
+                ), true), KickedCondition.ONCE, "search your library for a basic land card, " +
                 "reveal it, put it into your hand, then shuffle. If this spell was kicked, " +
                 "search your library for two basic land cards instead of one"
         ));

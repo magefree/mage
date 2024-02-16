@@ -1,13 +1,12 @@
 
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -17,6 +16,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -32,7 +33,7 @@ public final class Halfdane extends CardImpl {
 
     public Halfdane(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{U}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SHAPESHIFTER);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
@@ -55,12 +56,12 @@ public final class Halfdane extends CardImpl {
 
 class HalfdaneUpkeepEffect extends OneShotEffect {
 
-    public HalfdaneUpkeepEffect() {
+    HalfdaneUpkeepEffect() {
         super(Outcome.Detriment);
         this.staticText = "change {this}'s base power and toughness to the power and toughness of target creature other than Halfdane until the end of your next upkeep";
     }
 
-    public HalfdaneUpkeepEffect(final HalfdaneUpkeepEffect effect) {
+    private HalfdaneUpkeepEffect(final HalfdaneUpkeepEffect effect) {
         super(effect);
     }
 
@@ -72,39 +73,17 @@ class HalfdaneUpkeepEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Permanent permanent = game.getPermanent(this.getTargetPointer().getFirst(game, source));
-            if (permanent != null) {
-                ContinuousEffect effect = new HalfdaneSetPowerToughnessEffect(permanent.getPower().getValue(), permanent.getToughness().getValue());
-                game.addEffect(effect, source);
-                return true;
-            }
+        Permanent permanent = game.getPermanent(this.getTargetPointer().getFirst(game, source));
+        if (controller == null || permanent == null) {
+            return false;
         }
-        return false;
+
+        ContinuousEffect effect = new SetBasePowerToughnessSourceEffect(
+            permanent.getPower().getValue(),
+            permanent.getToughness().getValue(),
+            Duration.UntilYourNextUpkeepStep
+        );
+        game.addEffect(effect, source);
+        return true;
     }
-}
-
-class HalfdaneSetPowerToughnessEffect extends SetPowerToughnessSourceEffect {
-
-    public HalfdaneSetPowerToughnessEffect(int power, int toughness) {
-        super(power, toughness, Duration.UntilYourNextTurn, SubLayer.SetPT_7b);
-    }
-
-    public HalfdaneSetPowerToughnessEffect(final HalfdaneSetPowerToughnessEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean isInactive(Ability source, Game game) {
-        if (super.isInactive(source, game) && game.getStep().getType().isAfter(PhaseStep.UPKEEP)) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public HalfdaneSetPowerToughnessEffect copy() {
-        return new HalfdaneSetPowerToughnessEffect(this);
-    }
-
 }

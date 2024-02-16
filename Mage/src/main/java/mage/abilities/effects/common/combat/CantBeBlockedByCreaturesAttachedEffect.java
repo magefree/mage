@@ -24,7 +24,7 @@ public class CantBeBlockedByCreaturesAttachedEffect extends RestrictionEffect {
                 .append(filter.getMessage().startsWith("except by") ? "" : "by ").append(filter.getMessage()).toString();
     }
 
-    public CantBeBlockedByCreaturesAttachedEffect(final CantBeBlockedByCreaturesAttachedEffect effect) {
+    protected CantBeBlockedByCreaturesAttachedEffect(final CantBeBlockedByCreaturesAttachedEffect effect) {
         super(effect);
         this.filter = effect.filter;
     }
@@ -36,7 +36,7 @@ public class CantBeBlockedByCreaturesAttachedEffect extends RestrictionEffect {
 
     @Override
     public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
-        return !filter.match(blocker, source.getSourceId(), source.getControllerId(), game);
+        return !filter.match(blocker, source.getControllerId(), source, game);
     }
 
     @Override

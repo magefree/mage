@@ -33,7 +33,7 @@ public final class ChakramSlinger extends CardImpl {
         this.addAbility(new PartnerWithAbility("Chakram Retriever"));
 
         // {R}, {T}: Chakram Slinger deals 2 damage to target player or planeswalker.
-        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(2), new ManaCostsImpl("{R}"));
+        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(2), new ManaCostsImpl<>("{R}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPlayerOrPlaneswalker());
         this.addAbility(ability);

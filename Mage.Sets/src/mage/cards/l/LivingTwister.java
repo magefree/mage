@@ -41,7 +41,7 @@ public final class LivingTwister extends CardImpl {
 
         // {1}{R}, Discard a land card: Living Twister deals 2 damage to any target.
         Ability ability = new SimpleActivatedAbility(
-                new DamageTargetEffect(2), new ManaCostsImpl("{1}{R}")
+                new DamageTargetEffect(2), new ManaCostsImpl<>("{1}{R}")
         );
         ability.addCost(new DiscardTargetCost(new TargetCardInHand(StaticFilters.FILTER_CARD_LAND_A)));
         ability.addTarget(new TargetAnyTarget());
@@ -49,7 +49,7 @@ public final class LivingTwister extends CardImpl {
 
         // {G}: Return a tapped land you control to its owner's hand.
         this.addAbility(new SimpleActivatedAbility(
-                new ReturnToHandChosenControlledPermanentEffect(filter), new ManaCostsImpl("{G}")
+                new ReturnToHandChosenControlledPermanentEffect(filter), new ManaCostsImpl<>("{G}")
         ));
     }
 

@@ -19,7 +19,7 @@ import mage.constants.SubLayer;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.AnotherCardPredicate;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -34,7 +34,7 @@ public final class MeasureOfWickedness extends CardImpl {
     private static final FilterCard filter = new FilterCard("another card");
 
     static {
-        filter.add(new AnotherCardPredicate());
+        filter.add(AnotherPredicate.instance);
     }
 
     public MeasureOfWickedness(UUID ownerId, CardSetInfo setInfo) {
@@ -68,12 +68,12 @@ public final class MeasureOfWickedness extends CardImpl {
 
 class MeasureOfWickednessControlSourceEffect extends ContinuousEffectImpl {
 
-    public MeasureOfWickednessControlSourceEffect() {
+    MeasureOfWickednessControlSourceEffect() {
         super(Duration.Custom, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
         staticText = "target opponent gains control of {this}";
     }
 
-    public MeasureOfWickednessControlSourceEffect(final MeasureOfWickednessControlSourceEffect effect) {
+    private MeasureOfWickednessControlSourceEffect(final MeasureOfWickednessControlSourceEffect effect) {
         super(effect);
     }
 
@@ -85,7 +85,7 @@ class MeasureOfWickednessControlSourceEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         Player targetOpponent = game.getPlayer(source.getFirstTarget());
-        Permanent permanent = (Permanent) source.getSourceObjectIfItStillExists(game);
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent != null && targetOpponent != null) {
                 permanent.changeControllerId(targetOpponent.getId(), game, source);
         } else {

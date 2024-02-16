@@ -3,7 +3,7 @@ package mage.cards.s;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.PhaseInTriggeredAbility;
+import mage.abilities.common.SourcePhaseInTriggeredAbility;
 import mage.abilities.effects.common.PhaseOutTargetEffect;
 import mage.constants.SubType;
 import mage.abilities.keyword.FlyingAbility;
@@ -33,7 +33,7 @@ public final class ShimmeringEfreet extends CardImpl {
         this.addAbility(PhasingAbility.getInstance());
 
         // Whenever Shimmering Efreet phases in, target creature phases out.
-        Ability ability = new PhaseInTriggeredAbility(new PhaseOutTargetEffect(), false);
+        Ability ability = new SourcePhaseInTriggeredAbility(new PhaseOutTargetEffect(), false);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

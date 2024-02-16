@@ -84,11 +84,11 @@ class DermotaxiImprintEffect extends OneShotEffect {
             return false;
         }
         TargetCardInGraveyard target = new TargetCardInGraveyard(StaticFilters.FILTER_CARD_CREATURE);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         if (!target.canChoose(source.getControllerId(), game)) {
             return false;
         }
-        player.choose(outcome, target, source.getSourceId(), game);
+        player.choose(outcome, target, source, game);
         Card card = game.getCard(target.getFirstTarget());
         if (card == null) {
             return false;

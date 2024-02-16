@@ -46,12 +46,12 @@ public final class HarshMercy extends CardImpl {
 
 class HarshMercyEffect extends OneShotEffect {
 
-    public HarshMercyEffect() {
+    HarshMercyEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "Each player chooses a creature type. Destroy all creatures that aren't of a type chosen this way. They can't be regenerated.";
     }
 
-    public HarshMercyEffect(final HarshMercyEffect effect) {
+    private HarshMercyEffect(final HarshMercyEffect effect) {
         super(effect);
     }
 
@@ -63,7 +63,7 @@ class HarshMercyEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (controller != null && sourceObject != null) {
             Set<String> chosenTypes = new HashSet<>();
             PlayerIteration:

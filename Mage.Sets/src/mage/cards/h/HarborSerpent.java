@@ -56,7 +56,7 @@ class HarborSerpentEffect extends RestrictionEffect {
         staticText = "{this} can't attack unless there are five or more Islands on the battlefield";
     }
 
-    public HarborSerpentEffect(final HarborSerpentEffect effect) {
+    private HarborSerpentEffect(final HarborSerpentEffect effect) {
         super(effect);
     }
 
@@ -73,6 +73,6 @@ class HarborSerpentEffect extends RestrictionEffect {
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
         return permanent.getId().equals(source.getSourceId()) &&
-                game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game) < 5;
+                game.getBattlefield().count(filter, source.getControllerId(), source, game) < 5;
     }
 }

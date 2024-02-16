@@ -20,7 +20,7 @@ import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.ManaValuePredicate;
+import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.TreasureToken;
@@ -77,9 +77,9 @@ enum RuthlessTechnomancerAdjuster implements TargetAdjuster {
     public void adjustTargets(Ability ability, Game game) {
         int xValue = GetXValue.instance.calculate(game, ability, null);
         FilterCard filter = new FilterCreatureCard(
-                "creature card in your graveyard with mana value " + xValue + " or less"
+                "creature card in your graveyard with power " + xValue + " or less"
         );
-        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, xValue));
+        filter.add(new PowerPredicate(ComparisonType.FEWER_THAN, xValue + 1));
         ability.getTargets().clear();
         ability.addTarget(new TargetCardInYourGraveyard(filter));
     }
@@ -113,7 +113,7 @@ class RuthlessTechnomancerEffect extends OneShotEffect {
         TargetPermanent target = new TargetPermanent(
                 0, 1, StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, true
         );
-        player.choose(outcome, target, source.getSourceId(), game);
+        player.choose(outcome, target, source, game);
         Permanent permanent = game.getPermanent(target.getFirstTarget());
         if (permanent == null || !permanent.sacrifice(source, game)) {
             return false;

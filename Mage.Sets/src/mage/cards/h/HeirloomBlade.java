@@ -40,7 +40,7 @@ public final class HeirloomBlade extends CardImpl {
         this.addAbility(new DiesAttachedTriggeredAbility(new HeirloomBladeEffect(), "equipped creature", true));
 
         // Equip {1}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1)));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1), false));
 
     }
 
@@ -56,13 +56,13 @@ public final class HeirloomBlade extends CardImpl {
 
 class HeirloomBladeEffect extends OneShotEffect {
 
-    public HeirloomBladeEffect() {
+    HeirloomBladeEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "reveal cards from the top of your library until you reveal a creature card that shares a creature type with it. "
                 + "Put that card into your hand and the rest on the bottom of your library in a random order";
     }
 
-    public HeirloomBladeEffect(final HeirloomBladeEffect effect) {
+    private HeirloomBladeEffect(final HeirloomBladeEffect effect) {
         super(effect);
     }
 

@@ -15,6 +15,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
@@ -36,9 +37,9 @@ public final class CloakAndDagger extends CardImpl {
         // Whenever a Rogue creature enters the battlefield, you may attach Cloak and Dagger to it.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(
                 Zone.BATTLEFIELD, new AttachEffect(Outcome.Detriment, "attach {this} to it"),
-                filter, true, SetTargetPointer.PERMANENT, null));
+                filter, true, SetTargetPointer.PERMANENT));
         // Equip {3}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3)));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(3), new TargetControlledCreaturePermanent(), false));
     }
 
     private CloakAndDagger(final CloakAndDagger card) {

@@ -49,18 +49,13 @@ class ChannelHarmEffect extends PreventionEffectImpl {
         staticText = "Prevent all damage that would be dealt to you and permanents you control this turn by sources you don't control. If damage is prevented this way, you may have {this} deal that much damage to target creature";
     }
 
-    ChannelHarmEffect(final ChannelHarmEffect effect) {
+    private ChannelHarmEffect(final ChannelHarmEffect effect) {
         super(effect);
     }
 
     @Override
     public ChannelHarmEffect copy() {
         return new ChannelHarmEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

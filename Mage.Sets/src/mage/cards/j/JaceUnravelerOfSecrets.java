@@ -1,4 +1,3 @@
-
 package mage.cards.j;
 
 import java.util.UUID;
@@ -16,10 +15,8 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.game.command.emblems.JaceUnravelerOfSecretsEmblem;
 import mage.target.common.TargetCreaturePermanent;
-import mage.watchers.common.SpellsCastWatcher;
 
 /**
- * import mage.game.command.emblems.JaceUnravelerOfSecretsEmblem;
  *
  * @author LevelX2
  */
@@ -27,7 +24,7 @@ public final class JaceUnravelerOfSecrets extends CardImpl {
 
     public JaceUnravelerOfSecrets(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{U}{U}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.JACE);
 
         this.setStartingLoyalty(5);
@@ -46,7 +43,7 @@ public final class JaceUnravelerOfSecrets extends CardImpl {
 
         // -8: You get an emblem with "Whenever an opponent casts their first spell each turn, counter that spell."
         LoyaltyAbility ability2 = new LoyaltyAbility(new GetEmblemEffect(new JaceUnravelerOfSecretsEmblem()), -8);
-        this.addAbility(ability2, new SpellsCastWatcher());
+        this.addAbility(ability2);
 
     }
 

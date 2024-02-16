@@ -30,8 +30,8 @@ public final class Frogify extends CardImpl {
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Enchanted creature loses all abilities and is a blue Frog creature with base power and toughness 1/1.
@@ -41,7 +41,6 @@ public final class Frogify extends CardImpl {
                 Duration.WhileOnBattlefield, BecomesCreatureAttachedEffect.LoseType.ALL, Outcome.Detriment
         );
         this.addAbility(new SimpleStaticAbility(effect));
-
     }
 
     private Frogify(final Frogify card) {

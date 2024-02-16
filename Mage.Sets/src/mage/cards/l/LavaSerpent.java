@@ -28,7 +28,7 @@ public final class LavaSerpent extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // Cycling {2}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
     private LavaSerpent(final LavaSerpent card) {

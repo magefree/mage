@@ -43,7 +43,7 @@ public final class SavingGrace extends CardImpl {
         TargetPermanent auraTarget = new TargetControlledCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // When Saving Grace enters the battlefield, all damage that would be dealt this turn to you and permanents you control is dealt to enchanted creature instead.
@@ -70,7 +70,7 @@ class SavingGraceReplacementEffect extends ReplacementEffectImpl {
         staticText = "all damage that would be dealt this turn to you and permanents you control is dealt to enchanted creature instead.";
     }
 
-    SavingGraceReplacementEffect(final SavingGraceReplacementEffect effect) {
+    private SavingGraceReplacementEffect(final SavingGraceReplacementEffect effect) {
         super(effect);
     }
 
@@ -134,11 +134,6 @@ class SavingGraceReplacementEffect extends ReplacementEffectImpl {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

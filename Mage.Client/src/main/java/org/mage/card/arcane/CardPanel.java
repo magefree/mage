@@ -153,7 +153,7 @@ public abstract class CardPanel extends MagePermanent implements ComponentListen
             // Create the day night button
             dayNightButton = new JButton("");
             dayNightButton.setSize(32, 32);
-            dayNightButton.setToolTipText("This permanent is a double faced card. To see the another face card, push this button or move mouse wheel down while hovering over it.");
+            dayNightButton.setToolTipText("This permanent is a double faced card. To see the card's other face, push this button or move mouse wheel down while hovering over it.");
             BufferedImage day = ImageManagerImpl.instance.getDayImage();
             dayNightButton.setIcon(new ImageIcon(day));
             dayNightButton.addActionListener(e -> {
@@ -608,6 +608,11 @@ public abstract class CardPanel extends MagePermanent implements ComponentListen
             return;
         }
 
+        // ignore all additional mouse buttons
+        if (!SwingUtilities.isLeftMouseButton(e)) {
+            return;
+        }
+
         // double clicks processing, see https://stackoverflow.com/questions/4051659/identifying-double-click-in-java
         // logic: run timer to reset clicks counter
         mouseClicksCount = e.getClickCount();
@@ -739,7 +744,7 @@ public abstract class CardPanel extends MagePermanent implements ComponentListen
         data.setComponent(this);
         data.setCard(this.getGameCard());
         data.setGameId(this.gameId);
-        callback.mouseWheelMoved(e, data);
+        callback.mouseWheelMoved(e.getWheelRotation(), data);
     }
 
     /**
@@ -797,8 +802,10 @@ public abstract class CardPanel extends MagePermanent implements ComponentListen
             }
             if (card.isCreature()) {
                 sb.append('\n').append(card.getPower()).append('/').append(card.getToughness());
-            } else if (card.isPlanesWalker()) {
+            } else if (card.isPlaneswalker()) {
                 sb.append('\n').append(card.getLoyalty());
+            } else if (card.isBattle()) {
+                sb.append('\n').append(card.getDefense());
             }
             if (card.getRules() == null) {
                 card.overrideRules(new ArrayList<>());
@@ -856,7 +863,7 @@ public abstract class CardPanel extends MagePermanent implements ComponentListen
         if (this.guiTransformed) {
             // main side -> alternative side
             if (this.cardSideOther == null) {
-                logger.error("no second side for card to transform!");
+                logger.error("can't find second side to toggle transform from main to second: " + this.getCard().getName());
                 return;
             }
             copySelections(this.cardSideMain, this.cardSideOther);
@@ -864,6 +871,10 @@ public abstract class CardPanel extends MagePermanent implements ComponentListen
             this.getGameCard().setAlternateName(this.cardSideMain.getName());
         } else {
             // alternative side -> main side
+            if (this.cardSideOther == null) {
+                logger.error("can't find second side to toggle transform from second side to main: " + this.getCard().getName());
+                return;
+            }
             copySelections(this.cardSideOther, this.cardSideMain);
             update(this.cardSideMain);
             this.getGameCard().setAlternateName(this.cardSideOther.getName());
@@ -945,10 +956,16 @@ public abstract class CardPanel extends MagePermanent implements ComponentListen
             }
         }
 
-        // fix other side: if it's a night side permanent then the main side info must be extracted
+        // fix other side: if it's a night side permanent then the main side info can be extracted from original
         if (this.cardSideOther == null || this.cardSideOther.getName().equals(this.cardSideMain.getName())) {
-            if (this.cardSideMain instanceof PermanentView) {
-                this.cardSideOther = ((PermanentView) this.cardSideMain).getOriginal();
+            if ((this.cardSideMain instanceof PermanentView)) {
+                // some "transformed" cards don't have info about main side
+                // (example: melded card have two main sides/cards),
+                // so it must be ignored until multiple hints implement like mtga
+                CardView original = ((PermanentView) this.cardSideMain).getOriginal();
+                if (original != null && !original.getName().equals(this.getName())) {
+                    this.cardSideOther = original;
+                }
             }
         }
     }

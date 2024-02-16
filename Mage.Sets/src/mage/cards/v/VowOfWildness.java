@@ -37,7 +37,7 @@ public final class VowOfWildness extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         
         // Enchanted creature gets +3/+3, has trample, and can't attack you or a planeswalker you control.
@@ -45,7 +45,7 @@ public final class VowOfWildness extends CardImpl {
         Effect effect = new GainAbilityAttachedEffect(TrampleAbility.getInstance(), AttachmentType.AURA, Duration.WhileOnBattlefield);
         effect.setText(", has trample");
         ability.addEffect(effect);
-        effect = new CantAttackControllerAttachedEffect(AttachmentType.AURA);
+        effect = new CantAttackControllerAttachedEffect(AttachmentType.AURA, true);
         effect.setText(", and can't attack you or planeswalkers you control");
         ability.addEffect(effect);
         this.addAbility(ability);

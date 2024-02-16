@@ -22,7 +22,7 @@ import mage.filter.predicate.Predicates;
  */
 public final class SpiritualAsylum extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("Creatures and lands you control");
+    private static final FilterPermanent filter = new FilterPermanent("Creatures and lands");
 
     static {
         filter.add(Predicates.or(

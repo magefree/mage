@@ -29,7 +29,7 @@ public final class JangoFett extends CardImpl {
 
     public JangoFett(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.HUNTER);
         this.power = new MageInt(2);
@@ -47,7 +47,7 @@ public final class JangoFett extends CardImpl {
         this.addAbility(ability);
 
         // Whenever Jango Fett attacks, it gets +X/+0, where X is the number of creatures defending player controls with a bounty counter on them
-        this.addAbility(new JangoFettTriggeredAbility(new JangoFettEffect(), false));
+        this.addAbility(new AttacksTriggeredAbility(new JangoFettEffect()));
     }
 
     private JangoFett(final JangoFett card) {
@@ -60,59 +60,14 @@ public final class JangoFett extends CardImpl {
     }
 }
 
-class JangoFettTriggeredAbility extends TriggeredAbilityImpl {
-
-    protected String text;
-
-    public JangoFettTriggeredAbility(Effect effect, boolean optional) {
-        super(Zone.BATTLEFIELD, effect, optional);
-    }
-
-    public JangoFettTriggeredAbility(Effect effect, boolean optional, String text) {
-        super(Zone.BATTLEFIELD, effect, optional);
-        this.text = text;
-    }
-
-    public JangoFettTriggeredAbility(final JangoFettTriggeredAbility ability) {
-        super(ability);
-        this.text = ability.text;
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ATTACKER_DECLARED;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getSourceId().equals(this.getSourceId())) {
-            UUID defenderId = game.getCombat().getDefendingPlayerId(getSourceId(), game);
-            if (defenderId != null) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} attacks, ";
-    }
-
-    @Override
-    public JangoFettTriggeredAbility copy() {
-        return new JangoFettTriggeredAbility(this);
-    }
-}
-
 class JangoFettEffect extends OneShotEffect {
 
-    public JangoFettEffect() {
+    JangoFettEffect() {
         super(Outcome.BoostCreature);
         this.staticText = "it gets +X/+0, where X is the number of creatures defending player controls with a bounty counter on them";
     }
 
-    public JangoFettEffect(final JangoFettEffect ability) {
+    private JangoFettEffect(final JangoFettEffect ability) {
         super(ability);
     }
 

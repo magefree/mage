@@ -18,7 +18,7 @@ public class CompoundAbility extends AbilitiesImpl<Ability> {
         addAll(Arrays.asList(abilities));
     }
 
-    public CompoundAbility(final CompoundAbility compoundAbility) {
+    protected CompoundAbility(final CompoundAbility compoundAbility) {
         for (Ability ability : compoundAbility) {
             add(ability);
         }

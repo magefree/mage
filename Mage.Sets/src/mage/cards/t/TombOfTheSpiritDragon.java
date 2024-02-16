@@ -34,7 +34,8 @@ public final class TombOfTheSpiritDragon extends CardImpl {
         // T: Add 1
         this.addAbility(new ColorlessManaAbility());
         // 2, T: You gain 1 life for each colorless creature you control
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(new PermanentsOnBattlefieldCount(filter)), new GenericManaCost(2));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(new PermanentsOnBattlefieldCount(filter))
+                .setText("you gain 1 life for each colorless creature you control"), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

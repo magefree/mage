@@ -53,7 +53,7 @@ class WaitingInTheWeedsEffect extends OneShotEffect {
         staticText = "Each player creates a 1/1 green Cat creature token for each untapped Forest they control";
     }
 
-    public WaitingInTheWeedsEffect(final WaitingInTheWeedsEffect effect) {
+    private WaitingInTheWeedsEffect(final WaitingInTheWeedsEffect effect) {
         super(effect);
     }
 

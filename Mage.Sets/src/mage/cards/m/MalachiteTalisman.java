@@ -30,7 +30,7 @@ public final class MalachiteTalisman extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
         // Whenever a player casts a green spell, you may pay {3}. If you do, untap target permanent.
-        Ability ability = new SpellCastAllTriggeredAbility(new DoIfCostPaid(new UntapTargetEffect(), new ManaCostsImpl("{3}")), filter, false);
+        Ability ability = new SpellCastAllTriggeredAbility(new DoIfCostPaid(new UntapTargetEffect(), new ManaCostsImpl<>("{3}")), filter, false);
         ability.addTarget(new TargetPermanent());
         this.addAbility(ability);
     }

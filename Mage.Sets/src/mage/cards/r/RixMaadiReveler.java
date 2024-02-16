@@ -31,7 +31,7 @@ public final class RixMaadiReveler extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Spectacle {2}{B}{R}
-        this.addAbility(new SpectacleAbility(this, new ManaCostsImpl("{2}{B}{R}")));
+        this.addAbility(new SpectacleAbility(this, new ManaCostsImpl<>("{2}{B}{R}")));
 
         // When Rix Maadi Reveler enters the battlefield, discard a card, then draw a card. If Rix Maadi Reveler's spectacle cost was paid, instead discard your hand, then draw three cards.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new RixMaadiRevelerEffect(), false));

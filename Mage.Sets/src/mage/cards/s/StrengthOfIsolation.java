@@ -38,7 +38,7 @@ public final class StrengthOfIsolation extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // Enchanted creature gets +1/+2 and has protection from black.
         ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 2, Duration.WhileOnBattlefield));
@@ -47,7 +47,7 @@ public final class StrengthOfIsolation extends CardImpl {
         ability.addEffect(effect);
         this.addAbility(ability);
         // Madness {W}
-        this.addAbility(new MadnessAbility(this, new ManaCostsImpl("{W}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl<>("{W}")));
     }
 
     private StrengthOfIsolation(final StrengthOfIsolation card) {

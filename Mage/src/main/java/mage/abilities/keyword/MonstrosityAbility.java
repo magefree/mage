@@ -55,7 +55,7 @@ public class MonstrosityAbility extends ActivatedAbilityImpl {
         this.addHint(MonstrousHint.instance);
     }
 
-    public MonstrosityAbility(final MonstrosityAbility ability) {
+    protected MonstrosityAbility(final MonstrosityAbility ability) {
         super(ability);
         this.monstrosityValue = ability.monstrosityValue;
     }
@@ -78,7 +78,7 @@ class BecomeMonstrousSourceEffect extends OneShotEffect {
         this.staticText = setText(monstrosityValue);
     }
 
-    public BecomeMonstrousSourceEffect(final BecomeMonstrousSourceEffect effect) {
+    protected BecomeMonstrousSourceEffect(final BecomeMonstrousSourceEffect effect) {
         super(effect);
     }
 
@@ -111,11 +111,9 @@ class BecomeMonstrousSourceEffect extends OneShotEffect {
     }
 
     private String setText(int monstrosityValue) {
-        StringBuilder sb = new StringBuilder("Monstrosity ");
-        sb.append(monstrosityValue == Integer.MAX_VALUE ? "X" : monstrosityValue)
-                .append(". <i>(If this creature isn't monstrous, put ")
-                .append(monstrosityValue == Integer.MAX_VALUE ? "X" : CardUtil.numberToText(monstrosityValue))
-                .append(" +1/+1 counters on it and it becomes monstrous.)</i>").toString();
-        return sb.toString();
+        return "Monstrosity " + (monstrosityValue == Integer.MAX_VALUE ? "X" : monstrosityValue) +
+                ". <i>(If this creature isn't monstrous, put " +
+                (monstrosityValue == Integer.MAX_VALUE ? "X" : CardUtil.numberToText(monstrosityValue)) +
+                " +1/+1 counters on it and it becomes monstrous.)</i>";
     }
 }

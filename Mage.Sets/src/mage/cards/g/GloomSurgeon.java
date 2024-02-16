@@ -46,21 +46,17 @@ class GloomSurgeonEffect extends ReplacementEffectImpl {
         staticText = "If combat damage would be dealt to {this}, prevent that damage and exile that many cards from the top of your library";
     }
 
-    GloomSurgeonEffect(final GloomSurgeonEffect effect) {
+    private GloomSurgeonEffect(final GloomSurgeonEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        GameEvent preventEvent = new PreventDamageEvent(event.getTargetId(), source.getSourceId(), source, source.getControllerId(), event.getAmount(), ((DamageEvent) event).isCombatDamage());
-        if (!game.replaceEvent(preventEvent)) {
-            int preventedDamage = event.getAmount();
-            game.fireEvent(new PreventedDamageEvent(event.getTargetId(), source.getSourceId(), source, source.getControllerId(), preventedDamage));
-            Player player = game.getPlayer(source.getControllerId());
-            if (player != null) {
-                player.moveCards(player.getLibrary().getTopCards(game, preventedDamage), Zone.EXILED, source, game);
-            }
-            return true;
+        int damage = event.getAmount();
+        game.preventDamage(event, source, game, Integer.MAX_VALUE);
+        Player player = game.getPlayer(source.getControllerId());
+        if (player != null) {
+            player.moveCards(player.getLibrary().getTopCards(game, damage), Zone.EXILED, source, game);
         }
         return false;
     }

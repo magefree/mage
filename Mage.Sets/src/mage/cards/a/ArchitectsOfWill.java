@@ -36,7 +36,7 @@ public final class ArchitectsOfWill extends CardImpl {
         this.addAbility(ability);
 
         // Cycling {UB}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{U/B}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{U/B}")));
     }
 
     private ArchitectsOfWill(final ArchitectsOfWill card) {
@@ -51,12 +51,12 @@ public final class ArchitectsOfWill extends CardImpl {
 
 class ArchitectsOfWillEffect extends OneShotEffect {
 
-    public ArchitectsOfWillEffect() {
+    ArchitectsOfWillEffect() {
         super(Outcome.DrawCard);
         this.staticText = "look at the top three cards of target player's library, then put them back in any order";
     }
 
-    public ArchitectsOfWillEffect(final ArchitectsOfWillEffect effect) {
+    private ArchitectsOfWillEffect(final ArchitectsOfWillEffect effect) {
         super(effect);
     }
 

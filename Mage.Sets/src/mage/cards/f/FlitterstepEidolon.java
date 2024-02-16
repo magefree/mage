@@ -36,7 +36,7 @@ public final class FlitterstepEidolon extends CardImpl {
         this.addAbility(new CantBeBlockedSourceAbility());
         // Enchanted creature gets +1/+1 and can't be blocked.
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1,1, Duration.WhileOnBattlefield));
-        ability.addEffect(new CantBeBlockedAttachedEffect(AttachmentType.AURA));        
+        ability.addEffect(new CantBeBlockedAttachedEffect(AttachmentType.AURA).setText("and can't be blocked"));
         this.addAbility(ability);
     }
 

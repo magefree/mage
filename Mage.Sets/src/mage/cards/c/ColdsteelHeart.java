@@ -20,7 +20,7 @@ public final class ColdsteelHeart extends CardImpl {
 
     public ColdsteelHeart(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
-        this.addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
 
         // Coldsteel Heart enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());

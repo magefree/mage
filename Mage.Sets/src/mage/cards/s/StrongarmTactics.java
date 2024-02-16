@@ -49,7 +49,7 @@ class StrongarmTacticsEffect extends OneShotEffect {
         this.staticText = "Each player discards a card. Then each player who didn't discard a creature card this way loses 4 life.";
     }
 
-    StrongarmTacticsEffect(final StrongarmTacticsEffect effect) {
+    private StrongarmTacticsEffect(final StrongarmTacticsEffect effect) {
         super(effect);
     }
 
@@ -76,7 +76,7 @@ class StrongarmTacticsEffect extends OneShotEffect {
                     cardsToDiscard.put(playerId, cards);
                 }
             }
-            // discard all choosen cards
+            // discard all chosen cards
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {

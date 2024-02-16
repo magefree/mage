@@ -24,7 +24,6 @@ public class SeekTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, lookout, 1);
         assertHandCount(playerA, 1);

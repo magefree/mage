@@ -42,9 +42,9 @@ public final class Unstable extends ExpansionSet {
         cards.add(new SetCardInfo("Dr. Julius Jumblemorph", 130, Rarity.MYTHIC, mage.cards.d.DrJuliusJumblemorph.class));
         cards.add(new SetCardInfo("Enraged Killbot", "145d", Rarity.COMMON, mage.cards.e.EnragedKillbot.class));
         cards.add(new SetCardInfo("Earl of Squirrel", 108, Rarity.RARE, mage.cards.e.EarlOfSquirrel.class));
-        cards.add(new SetCardInfo("Everythingamajig", "147b", Rarity.UNCOMMON, mage.cards.e.EverythingamajigB.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Everythingamajig", "147c", Rarity.UNCOMMON, mage.cards.e.EverythingamajigC.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Everythingamajig", "147e", Rarity.UNCOMMON, mage.cards.e.EverythingamajigE.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Everythingamajig", "147b", Rarity.RARE, mage.cards.e.EverythingamajigB.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Everythingamajig", "147c", Rarity.RARE, mage.cards.e.EverythingamajigC.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Everythingamajig", "147e", Rarity.RARE, mage.cards.e.EverythingamajigE.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 216, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(FrameStyle.UST_FULL_ART_BASIC, false)));
         cards.add(new SetCardInfo("GO TO JAIL", 8, Rarity.COMMON, mage.cards.g.GOTOJAIL.class));
         cards.add(new SetCardInfo("Garbage Elemental", "82c", Rarity.UNCOMMON, mage.cards.g.GarbageElementalC.class, NON_FULL_USE_VARIOUS));

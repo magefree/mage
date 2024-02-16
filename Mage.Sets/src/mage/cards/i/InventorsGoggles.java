@@ -30,7 +30,7 @@ public final class InventorsGoggles extends CardImpl {
         // Whenever an Artificer enters the battlefield under your control, you may attach Inventor's Goggles to it.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 Zone.BATTLEFIELD, new AttachEffect(Outcome.BoostCreature, "attach {this} to it"),
-                filter, true, SetTargetPointer.PERMANENT, null
+                filter, true, SetTargetPointer.PERMANENT
         ));
 
         // Equip {2}

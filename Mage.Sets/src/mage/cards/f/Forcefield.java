@@ -60,7 +60,7 @@ class ForcefieldEffect extends OneShotEffect {
         this.staticText = "The next time an unblocked creature of your choice would deal combat damage to you this turn, prevent all but 1 of that damage";
     }
 
-    ForcefieldEffect(final ForcefieldEffect effect) {
+    private ForcefieldEffect(final ForcefieldEffect effect) {
         super(effect);
     }
 
@@ -75,7 +75,7 @@ class ForcefieldEffect extends OneShotEffect {
         MageObject sourceObject = source.getSourceObject(game);
         if (controller != null && sourceObject != null) {
             Target target = new TargetCreaturePermanent(1, 1, filter, true);
-            if (controller.choose(Outcome.PreventDamage, target, source.getSourceId(), game)) {
+            if (controller.choose(Outcome.PreventDamage, target, source, game)) {
                 Permanent creature = game.getPermanent(target.getFirstTarget());
                 if (creature != null) {
                     game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " has chosen " + creature.getLogName());
@@ -97,7 +97,7 @@ class ForcefieldPreventionEffect extends PreventionEffectImpl {
         this.staticText = "Prevent all but 1 of that damage";
     }
 
-    ForcefieldPreventionEffect(ForcefieldPreventionEffect effect) {
+    private ForcefieldPreventionEffect(final ForcefieldPreventionEffect effect) {
         super(effect);
     }
 

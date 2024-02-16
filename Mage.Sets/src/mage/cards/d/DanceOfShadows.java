@@ -35,7 +35,7 @@ public final class DanceOfShadows extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public DanceOfShadows (final DanceOfShadows card) {
+    private DanceOfShadows(final DanceOfShadows card) {
         super(card);
     }
 

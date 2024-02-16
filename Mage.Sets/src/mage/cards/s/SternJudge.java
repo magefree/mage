@@ -53,7 +53,7 @@ class SternJudgeEffect extends OneShotEffect {
         this.staticText = "Each player loses 1 life for each Swamp they control.";
     }
 
-    SternJudgeEffect(final SternJudgeEffect effect) {
+    private SternJudgeEffect(final SternJudgeEffect effect) {
         super(effect);
     }
 
@@ -70,7 +70,7 @@ class SternJudgeEffect extends OneShotEffect {
                 continue;
             }
             player.loseLife(game.getBattlefield().count(
-                    filter, playerId, source.getSourceId(), game
+                    filter, source.getSourceId(), source, game
             ), game, source, false);
         }
         return true;

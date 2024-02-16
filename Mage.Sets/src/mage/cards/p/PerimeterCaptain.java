@@ -52,9 +52,10 @@ class PerimeterCaptainTriggeredAbility extends TriggeredAbilityImpl {
 
     public PerimeterCaptainTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
+        setTriggerPhrase("Whenever a creature you control with defender blocks, ");
     }
 
-    public PerimeterCaptainTriggeredAbility(final PerimeterCaptainTriggeredAbility ability) {
+    private PerimeterCaptainTriggeredAbility(final PerimeterCaptainTriggeredAbility ability) {
         super(ability);
     }
 
@@ -72,11 +73,6 @@ class PerimeterCaptainTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a creature you control with defender blocks, " ;
     }
 
     @Override

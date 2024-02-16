@@ -35,7 +35,7 @@ public final class ElectricEel extends CardImpl {
         // {R}{R}: Electric Eel gets +2/+0 until end of turn and deals 1 damage to you.
         Effect effect = new DamageControllerEffect(1);
         effect.setText("and deals 1 damage to you");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 0, Duration.EndOfTurn), new ManaCostsImpl("{R}{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{R}{R}"));
         ability.addEffect(effect);
         this.addAbility(ability);
     }

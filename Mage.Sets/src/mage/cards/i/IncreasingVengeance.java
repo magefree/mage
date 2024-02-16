@@ -41,7 +41,7 @@ public final class IncreasingVengeance extends CardImpl {
         this.getSpellAbility().addTarget(target);
 
         // Flashback {3}{R}{R}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{3}{R}{R}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{3}{R}{R}")));
     }
 
     private IncreasingVengeance(final IncreasingVengeance card) {
@@ -56,12 +56,12 @@ public final class IncreasingVengeance extends CardImpl {
 
 class IncreasingVengeanceEffect extends OneShotEffect {
 
-    public IncreasingVengeanceEffect() {
+    IncreasingVengeanceEffect() {
         super(Outcome.BoostCreature);
         staticText = "Copy target instant or sorcery spell you control. If this spell was cast from a graveyard, copy that spell twice instead. You may choose new targets for the copies";
     }
 
-    public IncreasingVengeanceEffect(final IncreasingVengeanceEffect effect) {
+    private IncreasingVengeanceEffect(final IncreasingVengeanceEffect effect) {
         super(effect);
     }
 

@@ -31,7 +31,7 @@ public final class WishfulMerfolk extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
 
         // {1}{U}: Wishful Merfolk loses defender and becomes a Human until end of turn.
-        this.addAbility(new SimpleActivatedAbility(new WishfulMerfolkEffect(), new ManaCostsImpl("{1}{U}")));
+        this.addAbility(new SimpleActivatedAbility(new WishfulMerfolkEffect(), new ManaCostsImpl<>("{1}{U}")));
     }
 
     private WishfulMerfolk(final WishfulMerfolk card) {
@@ -46,12 +46,12 @@ public final class WishfulMerfolk extends CardImpl {
 
 class WishfulMerfolkEffect extends ContinuousEffectImpl {
 
-    public WishfulMerfolkEffect() {
+    WishfulMerfolkEffect() {
         super(Duration.EndOfTurn, Outcome.AddAbility);
         staticText = "{this} loses defender and becomes a Human until end of turn";
     }
 
-    public WishfulMerfolkEffect(final WishfulMerfolkEffect effect) {
+    private WishfulMerfolkEffect(final WishfulMerfolkEffect effect) {
         super(effect);
     }
 

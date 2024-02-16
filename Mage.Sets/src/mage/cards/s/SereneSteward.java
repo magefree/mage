@@ -31,7 +31,7 @@ public final class SereneSteward extends CardImpl {
 
         // Whenever you gain life, you may pay {W}. If you do, put a +1/+1 counter on target creature.
         Ability ability = new GainLifeControllerTriggeredAbility(
-                new DoIfCostPaid(new AddCountersTargetEffect(CounterType.P1P1.createInstance()), new ManaCostsImpl("{W}")),
+                new DoIfCostPaid(new AddCountersTargetEffect(CounterType.P1P1.createInstance()), new ManaCostsImpl<>("{W}")),
                 false);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

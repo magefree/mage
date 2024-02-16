@@ -54,7 +54,7 @@ public final class FrontierSiege extends CardImpl {
 
         // * Dragons - Whenever a creature with flying enters the battlefield under your control, you may have it fight target creature you don't control.
         Ability ability2 = new ConditionalTriggeredAbility(
-                new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new FrontierSiegeFightEffect(), filter, true, SetTargetPointer.PERMANENT, ""),
+                new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new FrontierSiegeFightEffect(), filter, true, SetTargetPointer.PERMANENT),
                 new ModeChoiceSourceCondition("Dragons"),
                 ruleTrigger2);
         ability2.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
@@ -76,7 +76,7 @@ class FrontierSiegeKhansTriggeredAbility extends TriggeredAbilityImpl {
 
     FrontierSiegeKhansTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddManaToManaPoolSourceControllerEffect(Mana.GreenMana(2)), false);
-
+        setTriggerPhrase("At the beginning of each of your main phases, ");
     }
 
     private FrontierSiegeKhansTriggeredAbility(final FrontierSiegeKhansTriggeredAbility ability) {
@@ -98,12 +98,6 @@ class FrontierSiegeKhansTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         return event.getPlayerId().equals(this.controllerId);
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "At the beginning of each of your main phases, " ;
-    }
-
 }
 
 class FrontierSiegeFightEffect extends OneShotEffect {

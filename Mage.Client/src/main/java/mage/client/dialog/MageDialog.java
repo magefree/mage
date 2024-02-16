@@ -1,13 +1,16 @@
 package mage.client.dialog;
 
 import mage.client.MageFrame;
+import mage.client.components.MageDesktopIconifySupport;
 import mage.client.util.SettingsManager;
 import mage.client.util.gui.GuiDisplayUtil;
 import org.apache.log4j.Logger;
 
 import javax.swing.*;
+import javax.swing.plaf.basic.BasicInternalFrameUI;
 import java.awt.*;
 import java.awt.event.InvocationEvent;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.beans.PropertyVetoException;
 import java.lang.reflect.InvocationTargetException;
@@ -26,6 +29,29 @@ public class MageDialog extends javax.swing.JInternalFrame {
      */
     public MageDialog() {
         initComponents();
+
+        // enable a minimizing window on double clicks
+        if (this instanceof MageDesktopIconifySupport) {
+            BasicInternalFrameUI ui = (BasicInternalFrameUI) this.getUI();
+            ui.getNorthPane().addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    // double clicks and repeated double clicks
+                    // minimize window to title bar
+                    if (!SwingUtilities.isLeftMouseButton(e)) {
+                        return;
+                    }
+                    if ((e.getClickCount() & 1) == 0 && (e.getClickCount() > 0) && !e.isConsumed()) {
+                        e.consume();
+                        try {
+                            MageDialog.this.setIcon(!MageDialog.this.isIcon());
+                        } catch (PropertyVetoException exp) {
+                            // ignore read only
+                        }
+                    }
+                }
+            });
+        }
     }
 
     public void changeGUISize() {

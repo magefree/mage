@@ -21,7 +21,7 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public final class VindictiveMob extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("can't be blocked by Saprolings");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Saprolings");
 
     static {
         filter.add(SubType.SAPROLING.getPredicate());

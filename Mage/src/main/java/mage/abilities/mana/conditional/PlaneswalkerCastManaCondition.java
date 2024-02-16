@@ -17,11 +17,9 @@ public class PlaneswalkerCastManaCondition extends ManaCondition implements Cond
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (source instanceof SpellAbility) {
-            MageObject object = game.getObject(source.getSourceId());
-            if (object != null && object.isPlaneswalker(game)) {
-                return true;
-            }
+        if (source instanceof SpellAbility && !source.isActivated()) {
+            MageObject object = game.getObject(source);
+            return object != null && object.isPlaneswalker(game);
         }
         return false;
     }

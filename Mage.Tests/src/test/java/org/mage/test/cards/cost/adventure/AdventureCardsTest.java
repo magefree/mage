@@ -31,10 +31,9 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerA, 0);
-        assertPermanentCount(playerA, "Food", 1);
+        assertPermanentCount(playerA, "Food Token", 1);
         assertExileCount(playerA, "Curious Pair", 1);
         assertGraveyardCount(playerA, 0);
     }
@@ -53,10 +52,9 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerA, 0);
-        assertPermanentCount(playerA, "Food", 1);
+        assertPermanentCount(playerA, "Food Token", 1);
         assertExileCount(playerA, "Curious Pair", 1);
         assertGraveyardCount(playerA, 0);
     }
@@ -72,10 +70,9 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerA, 0);
-        assertPermanentCount(playerA, "Food", 0);
+        assertPermanentCount(playerA, "Food Token", 0);
         assertPermanentCount(playerA, "Curious Pair", 1);
         assertExileCount(playerA, "Curious Pair", 0);
         assertGraveyardCount(playerA, 0);
@@ -88,16 +85,15 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Forest");
         addCard(Zone.HAND, playerA, "Curious Pair");
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Treats to Share");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Curious Pair");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Treats to Share", true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Curious Pair", true);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerA, 0);
-        assertPermanentCount(playerA, "Food", 1);
+        assertPermanentCount(playerA, "Food Token", 1);
         assertPermanentCount(playerA, "Curious Pair", 1);
         assertExileCount(playerA, "Curious Pair", 0);
         assertGraveyardCount(playerA, 0);
@@ -122,10 +118,9 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerA, 0);
-        assertPermanentCount(playerA, "Food", 1);
+        assertPermanentCount(playerA, "Food Token", 1);
         assertPermanentCount(playerA, "Curious Pair", 0);
         assertExileCount(playerA, "Curious Pair", 1);
         assertGraveyardCount(playerA, 0);
@@ -143,10 +138,9 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerA, 1);
-        assertPermanentCount(playerA, "Food", 0);
+        assertPermanentCount(playerA, "Food Token", 0);
         assertPermanentCount(playerA, "Curious Pair", 1);
         assertExileCount(playerA, "Curious Pair", 0);
         assertGraveyardCount(playerA, 0);
@@ -160,16 +154,15 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Edgewall Innkeeper");
         addCard(Zone.HAND, playerA, "Curious Pair");
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Treats to Share");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Curious Pair");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Treats to Share", true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Curious Pair", true);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerA, 1);
-        assertPermanentCount(playerA, "Food", 1);
+        assertPermanentCount(playerA, "Food Token", 1);
         assertPermanentCount(playerA, "Curious Pair", 1);
         assertExileCount(playerA, "Curious Pair", 0);
         assertGraveyardCount(playerA, 0);
@@ -186,10 +179,9 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerA, 0);
-        assertPermanentCount(playerA, "Food", 0);
+        assertPermanentCount(playerA, "Food Token", 0);
         assertPermanentCount(playerA, "Curious Pair", 1);
         assertPowerToughness(playerA, "Curious Pair", 2, 4);
         assertExileCount(playerA, "Curious Pair", 0);
@@ -222,7 +214,6 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerA, 0);
         assertExileCount(playerA, "Curious Pair", 0);
@@ -245,10 +236,9 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerA, 0);
-        assertPermanentCount(playerA, "Food", 2);
+        assertPermanentCount(playerA, "Food Token", 2);
         assertPermanentCount(playerA, "Curious Pair", 0);
         assertExileCount(playerA, "Curious Pair", 1);
         assertGraveyardCount(playerA, 0);
@@ -273,10 +263,9 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerA, 0);
-        assertPermanentCount(playerA, "Food", 2);
+        assertPermanentCount(playerA, "Food Token", 2);
         assertPermanentCount(playerA, 5);
         assertExileCount(playerA, "Curious Pair", 1);
         assertExileCount(playerA, 1);
@@ -303,10 +292,9 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerA, 0);
-        assertPermanentCount(playerA, "Food", 0);
+        assertPermanentCount(playerA, "Food Token", 0);
         assertPermanentCount(playerA, 1);
         assertExileCount(playerA, 0);
         assertGraveyardCount(playerA, "Curious Pair", 1);
@@ -331,19 +319,19 @@ public class AdventureCardsTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Psychic Intrusion", playerB);
         setChoice(playerA, "Curious Pair");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Treats to Share");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Treats to Share", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Curious Pair");
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerA, 0);
         assertHandCount(playerB, 0);
         assertPermanentCount(playerB, 0);
-        assertPermanentCount(playerA, "Food", 1);
+        assertPermanentCount(playerA, "Food Token", 1);
         assertPermanentCount(playerA, "Curious Pair", 1);
         assertExileCount(playerA, 0);
         assertExileCount(playerB, 0);
@@ -374,14 +362,15 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Rimrock Knight", 2);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Boulder Rush", "Eager Cadet");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Boulder Rush", "Eager Cadet");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Rimrock Knight");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Rimrock Knight", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Rimrock Knight");
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerA, 0);
         assertPermanentCount(playerA, "Rimrock Knight", 2);
@@ -401,7 +390,6 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerA, 0);
         assertPermanentCount(playerA, "Rimrock Knight", 1);
@@ -447,11 +435,10 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerA, 0);
         assertPermanentCount(playerA, 4);
-        assertPermanentCount(playerA, "Food", 2);
+        assertPermanentCount(playerA, "Food Token", 2);
         assertPermanentCount(playerA, "Curious Pair", 0);
         assertExileCount(playerA, "Curious Pair", 1);
         assertGraveyardCount(playerA, 0);
@@ -472,7 +459,6 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Curious Pair", 0);
         assertLibraryCount(playerA, 1);
@@ -498,10 +484,9 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerA, 0);
-        assertPermanentCount(playerA, "Food", 0);
+        assertPermanentCount(playerA, "Food Token", 0);
         assertPermanentCount(playerA, "Curious Pair", 1);
         assertExileCount(playerA, 0);
         assertGraveyardCount(playerA, 0);
@@ -522,14 +507,12 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
-        assertPermanentCount(playerA, "Food", 0);
+        assertPermanentCount(playerA, "Food Token", 0);
         assertLibraryCount(playerA, 1);
     }
 
     @Test
-    //@Ignore("Not yet working correctly.")
     public void testCastTreatsToShareWithWrennAndSixEmblem() {
         /*
          * Wrenn and Six {R}{G}
@@ -550,16 +533,15 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         // showAvailableAbilities("abils", 1, PhaseStep.PRECOMBAT_MAIN, playerA);
 
         // retrace - You may cast this card from your graveyard by discarding a land card as an additional cost to cast it
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Treats to Share");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Treats to Share with retrace");
         setChoice(playerA, "Forest");
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerA, 0);
-        assertPermanentCount(playerA, "Food", 1);
+        assertPermanentCount(playerA, "Food Token", 1);
         assertPermanentCount(playerA, "Curious Pair", 0);
         assertPermanentCount(playerA, "Wrenn and Six", 1);
         assertEmblemCount(playerA, 1);
@@ -590,11 +572,10 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerA, 0);
         assertPermanentCount(playerA, 3);
-        assertPermanentCount(playerA, "Food", 1);
+        assertPermanentCount(playerA, "Food Token", 1);
         assertPermanentCount(playerA, "Curious Pair", 0);
         assertExileCount(playerA, "Curious Pair", 1);
         assertGraveyardCount(playerA, 0);
@@ -614,7 +595,6 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -633,7 +613,6 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -652,7 +631,6 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -671,7 +649,6 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -710,7 +687,6 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -758,12 +734,125 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         checkExileCount("after exile 3", 3, PhaseStep.POSTCOMBAT_MAIN, playerA, "Curious Pair", 1);
         // play as adventure spell
         castSpell(3, PhaseStep.POSTCOMBAT_MAIN, playerA, "Treats to Share");
+        setChoice(playerA, "Hostage Taker"); // Not sure why there is an alternative there. No issue with using either. TODO: investigate?
         waitStackResolved(3, PhaseStep.POSTCOMBAT_MAIN);
-        checkPermanentCount("after play 3", 3, PhaseStep.POSTCOMBAT_MAIN, playerA, "Food", 1);
+        checkPermanentCount("after play 3", 3, PhaseStep.POSTCOMBAT_MAIN, playerA, "Food Token", 1);
 
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
+    }
+
+    @Test
+    public void test_Cascade_CuriousPair() {
+        // If a player cascades into Curious Pair with Bloodbraid Elf they can cast either spell
+        removeAllCardsFromLibrary(playerA);
+        skipInitShuffling();
+
+        // Cascade
+        addCard(Zone.HAND, playerA, "Bloodbraid Elf"); // {2}{R}{G}
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
+        //
+        addCard(Zone.LIBRARY, playerA, "Swamp", 2);
+        addCard(Zone.LIBRARY, playerA, "Curious Pair", 1);
+        addCard(Zone.LIBRARY, playerA, "Island", 2);
+
+        // play elf with cascade
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bloodbraid Elf");
+        setChoice(playerA, true); // use free cast
+        setChoice(playerA, "Cast Treats to Share"); // can cast either
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, "Curious Pair", 0);
+        assertPermanentCount(playerA, "Food Token", 1);
+        assertExileCount(playerA, "Curious Pair", 1);
+    }
+
+    @Test
+    public void test_Cascade_FlaxenIntruder() {
+        // If a player cascades into Flaxen Intruder with Bloodbraid Elf they shouldn't be able to cast Welcome Home
+        removeAllCardsFromLibrary(playerA);
+        skipInitShuffling();
+
+        // Cascade
+        addCard(Zone.HAND, playerA, "Bloodbraid Elf"); // {2}{R}{G}
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
+        //
+        addCard(Zone.LIBRARY, playerA, "Swamp", 2);
+        addCard(Zone.LIBRARY, playerA, "Flaxen Intruder", 1);
+        addCard(Zone.LIBRARY, playerA, "Island", 2);
+
+        // play elf with cascade
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bloodbraid Elf");
+        setChoice(playerA, true); // use free cast
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, "Flaxen Intruder", 1);
+        assertPermanentCount(playerA, "Bear", 0);
+    }
+
+    @Test
+    public void test_SramsExpertise_CuriousPair() {
+        addCard(Zone.HAND, playerA, "Sram's Expertise");
+        addCard(Zone.HAND, playerA, "Curious Pair");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 4);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sram's Expertise");
+        setChoice(playerA, true); // use free cast
+        setChoice(playerA, "Cast Treats to Share");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, "Curious Pair", 0);
+        assertPermanentCount(playerA, "Food Token", 1);
+        assertPermanentCount(playerA, "Servo Token", 3);
+        assertExileCount(playerA, "Curious Pair", 1);
+    }
+
+    @Test
+    public void test_SramsExpertise_FlaxenIntruder() {
+        addCard(Zone.HAND, playerA, "Sram's Expertise");
+        addCard(Zone.HAND, playerA, "Flaxen Intruder");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 4);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sram's Expertise");
+        setChoice(playerA, true); // use free cast
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, "Flaxen Intruder", 1);
+        assertPermanentCount(playerA, "Bear", 0);
+        assertPermanentCount(playerA, "Servo Token", 3);
+    }
+
+    @Test
+    public void test_SramsExpertise_LonesomeUnicorn() {
+        addCard(Zone.HAND, playerA, "Sram's Expertise");
+        addCard(Zone.HAND, playerA, "Lonesome Unicorn");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 4);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sram's Expertise");
+        setChoice(playerA, true); // use free cast
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, "Lonesome Unicorn", 0);
+        assertPermanentCount(playerA, "Knight Token", 1);
+        assertPermanentCount(playerA, "Servo Token", 3);
+        assertExileCount(playerA, "Lonesome Unicorn", 1);
     }
 }

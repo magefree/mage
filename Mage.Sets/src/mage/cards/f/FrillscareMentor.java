@@ -56,7 +56,7 @@ public final class FrillscareMentor extends CardImpl {
 
         // {2}{R}, {T}: Put a +1/+1 counter on each creature you control with menace.
         ability = new SimpleActivatedAbility(
-                new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter2), new ManaCostsImpl("{2}{R}")
+                new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter2), new ManaCostsImpl<>("{2}{R}")
         );
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

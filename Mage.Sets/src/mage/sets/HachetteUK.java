@@ -21,10 +21,9 @@ public class HachetteUK extends ExpansionSet {
         this.hasBasicLands = true;
 
         cards.add(new SetCardInfo("Betrayal of Flesh", 52, Rarity.UNCOMMON, mage.cards.b.BetrayalOfFlesh.class));
-        // Card not implemented
-        // cards.add(new SetCardInfo("Carrion Rats", 40, Rarity.COMMON, mage.cards.c.CarrionRats.class, NON_FULL_USE_VARIOUS));
-        // cards.add(new SetCardInfo("Carrion Rats", 41, Rarity.COMMON, mage.cards.c.CarrionRats.class, NON_FULL_USE_VARIOUS));
-        // cards.add(new SetCardInfo("Carrion Rats", 53, Rarity.COMMON, mage.cards.c.CarrionRats.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Carrion Rats", 40, Rarity.COMMON, mage.cards.c.CarrionRats.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Carrion Rats", 41, Rarity.COMMON, mage.cards.c.CarrionRats.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Carrion Rats", 53, Rarity.COMMON, mage.cards.c.CarrionRats.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Chittering Rats", 5, Rarity.COMMON, mage.cards.c.ChitteringRats.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Chittering Rats", 19, Rarity.COMMON, mage.cards.c.ChitteringRats.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Chittering Rats", 54, Rarity.COMMON, mage.cards.c.ChitteringRats.class, NON_FULL_USE_VARIOUS));
@@ -53,8 +52,7 @@ public class HachetteUK extends ExpansionSet {
         cards.add(new SetCardInfo("Skullsnatcher", 4, Rarity.COMMON, mage.cards.s.Skullsnatcher.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Skullsnatcher", 42, Rarity.COMMON, mage.cards.s.Skullsnatcher.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Skullsnatcher", 43, Rarity.COMMON, mage.cards.s.Skullsnatcher.class, NON_FULL_USE_VARIOUS));
-        // Card not implemented
-        // cards.add(new SetCardInfo("Suppress", 26, Rarity.UNCOMMON, mage.cards.s.Suppress.class));
+        cards.add(new SetCardInfo("Suppress", 26, Rarity.UNCOMMON, mage.cards.s.Suppress.class));
         cards.add(new SetCardInfo("Swamp", 8, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 9, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 10, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));

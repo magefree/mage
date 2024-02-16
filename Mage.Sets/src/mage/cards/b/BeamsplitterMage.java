@@ -1,7 +1,6 @@
 package mage.cards.b;
 
 import mage.MageInt;
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.AbilityImpl;
 import mage.abilities.Mode;
@@ -112,7 +111,7 @@ class BeamsplitterMageTriggeredAbility extends TriggeredAbilityImpl {
         }
         return game.getBattlefield().getActivePermanents(
                 StaticFilters.FILTER_CONTROLLED_CREATURE,
-                getControllerId(), getSourceId(), game
+                getControllerId(), this, game
         ).stream()
                 .filter(Objects::nonNull)
                 .filter(permanent -> permanent.isCreature(game))
@@ -164,8 +163,8 @@ class BeamsplitterMageEffect extends OneShotEffect {
         filter.add(AnotherPredicate.instance);
         filter.add(new BeamsplitterMagePredicate(spell));
         TargetPermanent target = new TargetPermanent(filter);
-        target.setNotTarget(true);
-        player.choose(outcome, target, source.getSourceId(), game);
+        target.withNotTarget(true);
+        player.choose(outcome, target, source, game);
         Permanent permanent = game.getPermanent(target.getFirstTarget());
         if (permanent == null) {
             return false;
@@ -197,9 +196,7 @@ class BeamsplitterMageApplier implements StackObjectCopyApplier {
     private final Iterator<MageObjectReferencePredicate> predicate;
 
     BeamsplitterMageApplier(Permanent permanent, Game game) {
-        this.predicate = Arrays.asList(new MageObjectReferencePredicate(
-                new MageObjectReference(permanent, game)
-        )).iterator();
+        this.predicate = Arrays.asList(new MageObjectReferencePredicate(permanent, game)).iterator();
     }
 
     @Override
@@ -207,7 +204,7 @@ class BeamsplitterMageApplier implements StackObjectCopyApplier {
     }
 
     @Override
-    public MageObjectReferencePredicate getNextNewTargetType(int copyNumber) {
+    public MageObjectReferencePredicate getNextNewTargetType() {
         if (predicate.hasNext()) {
             return predicate.next();
         }

@@ -63,7 +63,7 @@ class SporeCloudEffect extends OneShotEffect {
         this.staticText = "Each attacking creature and each blocking creature doesn't untap during its controller's next untap step";
     }
 
-    public SporeCloudEffect(final SporeCloudEffect effect) {
+    private SporeCloudEffect(final SporeCloudEffect effect) {
         super(effect);
     }
 
@@ -77,7 +77,7 @@ class SporeCloudEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             List<Permanent> doNotUntapNextUntapStep = new ArrayList<>();
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
                 doNotUntapNextUntapStep.add(permanent);
             }
             if (!doNotUntapNextUntapStep.isEmpty()) {

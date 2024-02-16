@@ -1,7 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -15,10 +14,11 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterAttackingCreature;
-import mage.target.common.TargetAttackingCreature;
+import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author fireshoes
  */
 public final class AccursedHorde extends CardImpl {
@@ -38,7 +38,7 @@ public final class AccursedHorde extends CardImpl {
 
         // {1}{B}: Target attacking Zombie gains indestructible until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{1}{B}"));
-        ability.addTarget(new TargetAttackingCreature(1, 1, filter, false));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 

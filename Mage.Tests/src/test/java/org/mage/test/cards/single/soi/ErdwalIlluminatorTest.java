@@ -26,7 +26,7 @@ public class ErdwalIlluminatorTest extends CardTestPlayerBase {
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
-        assertPermanentCount(playerA, "Clue", 2);
+        assertPermanentCount(playerA, "Clue Token", 2);
     }
 
     @Test
@@ -41,7 +41,7 @@ public class ErdwalIlluminatorTest extends CardTestPlayerBase {
         setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
-        assertPermanentCount(playerB, "Clue", 1);
+        assertPermanentCount(playerB, "Clue Token", 1);
     }
 
     @Test
@@ -52,12 +52,12 @@ public class ErdwalIlluminatorTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
         addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Thraben Inspector");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Thraben Inspector", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Thraben Inspector");
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
-        assertPermanentCount(playerA, "Clue", 3);
+        assertPermanentCount(playerA, "Clue Token", 3);
     }
 
     @Test
@@ -73,6 +73,6 @@ public class ErdwalIlluminatorTest extends CardTestPlayerBase {
         setStopAt(4, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
-        assertPermanentCount(playerA, "Clue", 4);
+        assertPermanentCount(playerA, "Clue Token", 4);
     }
 }

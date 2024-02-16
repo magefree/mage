@@ -14,11 +14,19 @@ public final class DomriChaosBringerEmblem extends Emblem {
 
     // -8: You get an emblem with "At the beginning of each end step, create a 4/4 red and green Beast creature token with trample."
     public DomriChaosBringerEmblem() {
-        this.setName("Emblem Domri");
-        this.setExpansionSetCodeForImage("RNA");
+        super("Emblem Domri");
         this.getAbilities().add(new BeginningOfEndStepTriggeredAbility(
                 Zone.COMMAND, new CreateTokenEffect(new RedGreenBeastToken()),
                 TargetController.ANY, null, false
         ));
+    }
+
+    private DomriChaosBringerEmblem(final DomriChaosBringerEmblem card) {
+        super(card);
+    }
+
+    @Override
+    public DomriChaosBringerEmblem copy() {
+        return new DomriChaosBringerEmblem(this);
     }
 }

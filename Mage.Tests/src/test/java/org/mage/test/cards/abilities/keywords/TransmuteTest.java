@@ -48,7 +48,10 @@ public class TransmuteTest extends CardTestPlayerBase {
     public void searchSplittedCardOneManaCmcSpell() {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
         // Target creature gets -3/-0 until end of turn.
-        // Transmute {1}{U}{U} ({1}{U}{U}, Discard this card: Search your library for a card with the same converted mana cost as this card, reveal it, and put it into your hand. Then shuffle your library. Transmute only as a sorcery.)
+        // Transmute {1}{U}{U} ({1}{U}{U}, Discard this card: Search your library for a card with the same
+        //                      converted mana cost as this card, reveal it, and put it into your hand.
+        //                      Then shuffle your library.
+        //                      Transmute only as a sorcery.)
         addCard(Zone.HAND, playerA, "Dizzy Spell"); // Instant {U}
 
         // Wear {1}{R}
@@ -58,7 +61,7 @@ public class TransmuteTest extends CardTestPlayerBase {
         addCard(Zone.LIBRARY, playerA, "Wear // Tear");
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Transmute {1}{U}{U}");
-        setChoice(playerA, "Wear // Tear");
+        // let the game choose targets
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -82,7 +85,7 @@ public class TransmuteTest extends CardTestPlayerBase {
         addCard(Zone.LIBRARY, playerA, "Wear // Tear");
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Transmute {1}{U}{B}");
-        setChoice(playerA, "Wear // Tear");
+        addTarget(playerA, "Wear // Tear");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -90,5 +93,4 @@ public class TransmuteTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Perplex", 1);
         assertHandCount(playerA, "Wear // Tear", 1);
     }
-
 }

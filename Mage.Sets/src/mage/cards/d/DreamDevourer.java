@@ -89,13 +89,13 @@ class DreamDevourerAddAbilityEffect extends ContinuousEffectImpl {
                 String leftHalfCost = CardUtil.reduceCost(((SplitCard) card).getLeftHalfCard().getManaCost(), 2).getText();
                 String rightHalfCost = CardUtil.reduceCost(((SplitCard) card).getRightHalfCard().getManaCost(), 2).getText();
                 foretellAbility = new ForetellAbility(card, leftHalfCost, rightHalfCost);
-            } else if (card instanceof ModalDoubleFacesCard) {
-                ModalDoubleFacesCardHalf leftHalfCard = ((ModalDoubleFacesCard) card).getLeftHalfCard();
+            } else if (card instanceof ModalDoubleFacedCard) {
+                ModalDoubleFacedCardHalf leftHalfCard = ((ModalDoubleFacedCard) card).getLeftHalfCard();
                 // If front side of MDFC is land, do nothing as Dream Devourer does not apply to lands
                 // MDFC cards in hand are considered lands if front side is land
                 if (!leftHalfCard.isLand(game)) {
                     String leftHalfCost = CardUtil.reduceCost(leftHalfCard.getManaCost(), 2).getText();
-                    ModalDoubleFacesCardHalf rightHalfCard = ((ModalDoubleFacesCard) card).getRightHalfCard();
+                    ModalDoubleFacedCardHalf rightHalfCard = ((ModalDoubleFacedCard) card).getRightHalfCard();
                     if (rightHalfCard.isLand(game)) {
                         foretellAbility = new ForetellAbility(card, leftHalfCost);
                     } else {

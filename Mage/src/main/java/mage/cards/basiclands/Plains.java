@@ -2,11 +2,10 @@
 
 package mage.cards.basiclands;
 
-import java.util.UUID;
-import mage.ObjectColor;
 import mage.abilities.mana.WhiteManaAbility;
-import mage.cards.Card;
 import mage.cards.CardSetInfo;
+
+import java.util.UUID;
 
 /**
  *
@@ -18,12 +17,12 @@ public class Plains extends BasicLand {
         this.frameColor.setWhite(true);
     }
 
-    public Plains(Plains land) {
+    private Plains(final Plains land) {
         super(land);
     }
 
     @Override
-    public Card copy() {
+    public Plains copy() {
         return new Plains(this);
     }
 }

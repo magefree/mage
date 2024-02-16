@@ -54,7 +54,7 @@ class TuktukScrapperTriggeredAbility extends TriggeredAbilityImpl {
         this.addTarget(new TargetArtifactPermanent());
     }
 
-    public TuktukScrapperTriggeredAbility(final TuktukScrapperTriggeredAbility ability) {
+    private TuktukScrapperTriggeredAbility(final TuktukScrapperTriggeredAbility ability) {
         super(ability);
     }
 
@@ -104,7 +104,7 @@ class TuktukScrapperEffect extends OneShotEffect {
         super(Outcome.DestroyPermanent);
     }
 
-    public TuktukScrapperEffect(final TuktukScrapperEffect effect) {
+    private TuktukScrapperEffect(final TuktukScrapperEffect effect) {
         super(effect);
     }
 
@@ -121,7 +121,7 @@ class TuktukScrapperEffect extends OneShotEffect {
             targetArtifact.destroy(source, game, false);
             Player targetController = game.getPlayer(targetArtifact.getControllerId());
             if (targetController != null && game.getState().getZone(targetArtifact.getId()) == Zone.GRAVEYARD) {
-                int alliesControlled = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game);
+                int alliesControlled = game.getBattlefield().count(filter, source.getControllerId(), source, game);
                 if (alliesControlled > 0) {
                     targetController.damage(alliesControlled, source.getSourceId(), source, game);
                 }

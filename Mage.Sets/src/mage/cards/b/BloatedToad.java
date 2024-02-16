@@ -26,7 +26,7 @@ public final class BloatedToad extends CardImpl {
         this.toughness = new MageInt(2);
 
         this.addAbility(ProtectionAbility.from(ObjectColor.BLUE));
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
     private BloatedToad(final BloatedToad card) {

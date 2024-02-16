@@ -1,12 +1,10 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.AttacksFirstTimeTriggeredAbility;
-import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.SourceAttackingPlayerWithMostLifeCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.AdditionalCombatPhaseEffect;
 import mage.abilities.effects.common.UntapAllControllerEffect;
@@ -17,11 +15,10 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
-import mage.game.Game;
-import mage.players.Player;
+
+import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class ScourgeOfTheThrone extends CardImpl {
@@ -47,11 +44,11 @@ public final class ScourgeOfTheThrone extends CardImpl {
         ability.addEffect(new AdditionalCombatPhaseEffect());
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 ability,
-                ScourgeOfTheThroneCondition.instance,
+                SourceAttackingPlayerWithMostLifeCondition.instance,
                 "Whenever {this} attacks for the first time each turn, "
-                + "if it's attacking the player with the most life or tied for most life, "
-                + "untap all attacking creatures. After this phase, "
-                + "there is an additional combat phase."
+                        + "if it's attacking the player with the most life or tied for most life, "
+                        + "untap all attacking creatures. After this phase, "
+                        + "there is an additional combat phase."
         ));
     }
 
@@ -63,35 +60,4 @@ public final class ScourgeOfTheThrone extends CardImpl {
     public ScourgeOfTheThrone copy() {
         return new ScourgeOfTheThrone(this);
     }
-}
-
-enum ScourgeOfTheThroneCondition implements Condition {
-
-    instance;
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        UUID defenderId = game.getCombat().getDefenderId(source.getSourceId());
-        if (defenderId != null) {
-            Player attackedPlayer = game.getPlayer(defenderId);
-            Player controller = game.getPlayer(source.getControllerId());
-            if (attackedPlayer != null && controller != null) {
-                int mostLife = Integer.MIN_VALUE;
-                for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-                    Player player = game.getPlayer(playerId);
-                    if (player != null && player.getLife() > mostLife) {
-                        mostLife = player.getLife();
-                    }
-                }
-                return attackedPlayer.getLife() == mostLife;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String toString() {
-        return "{this} is attacking the player with the most life or tied for most life";
-    }
-
 }

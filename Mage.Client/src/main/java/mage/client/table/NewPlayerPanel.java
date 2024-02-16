@@ -122,7 +122,7 @@ public class NewPlayerPanel extends javax.swing.JPanel {
 
         lblLevel.setText("Skill:");
 
-        spnLevel.setModel(new javax.swing.SpinnerNumberModel(6, 1, 10, 1));
+        spnLevel.setModel(new javax.swing.SpinnerNumberModel(2, 1, 10, 1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

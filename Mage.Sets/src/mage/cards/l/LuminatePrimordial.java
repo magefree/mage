@@ -13,6 +13,7 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
+import mage.game.Controllable;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -98,19 +99,23 @@ class LuminatePrimordialEffect extends OneShotEffect {
         Set<Permanent> permanents = source
                 .getTargets()
                 .stream()
-                .map(Target::getFirstTarget)
+                .map(Target::getTargets)
+                .flatMap(Collection::stream)
                 .map(game::getPermanent)
                 .filter(Objects::nonNull)
                 .collect(Collectors.toSet());
-        Map<UUID, Integer> map = new HashMap<>();
-        permanents.stream().map(p -> map.put(p.getControllerId(), p.getPower().getValue()));
+        Map<UUID, Integer> map = permanents
+                .stream()
+                .collect(Collectors.toMap(
+                        Controllable::getControllerId,
+                        permanent -> permanent.getPower().getValue()
+                ));
         controller.moveCards(permanents, Zone.EXILED, source, game);
         for (Map.Entry<UUID, Integer> entry : map.entrySet()) {
             Player player = game.getPlayer(entry.getKey());
-            if (player == null || entry.getValue() < 1) {
-                continue;
+            if (player != null && entry.getValue() > 0) {
+                player.gainLife(entry.getValue(), game, source);
             }
-            player.gainLife(entry.getValue(), game, source);
         }
         return true;
     }

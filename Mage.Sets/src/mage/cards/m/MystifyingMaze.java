@@ -42,7 +42,7 @@ public final class MystifyingMaze extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
 
         // {4}, {T}: Exile target attacking creature an opponent controls. At the beginning of the next end step, return it to the battlefield tapped under its owner's control.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MystifyingMazeEffect(), new ManaCostsImpl("{4}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MystifyingMazeEffect(), new ManaCostsImpl<>("{4}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
@@ -60,12 +60,12 @@ public final class MystifyingMaze extends CardImpl {
 
 class MystifyingMazeEffect extends OneShotEffect {
 
-    public MystifyingMazeEffect() {
+    MystifyingMazeEffect() {
         super(Outcome.Detriment);
         staticText = "Exile target attacking creature an opponent controls. At the beginning of the next end step, return it to the battlefield tapped under its owner's control";
     }
 
-    public MystifyingMazeEffect(final MystifyingMazeEffect effect) {
+    private MystifyingMazeEffect(final MystifyingMazeEffect effect) {
         super(effect);
     }
 
@@ -77,7 +77,6 @@ class MystifyingMazeEffect extends OneShotEffect {
             if (permanent.moveToExile(source.getSourceId(), sourceObject.getIdName(), source, game)) {
                 //create delayed triggered ability
                 Effect effect = new ReturnToBattlefieldUnderOwnerControlTargetEffect(true, false);
-                effect.setText("At the beginning of the next end step, return it to the battlefield tapped under its owner's control");
                 effect.setTargetPointer(new FixedTarget(source.getFirstTarget(), game));
                 game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect), source);
                 return true;

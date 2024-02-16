@@ -42,7 +42,7 @@ public final class ElderDruid extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {3}{G}, {tap}: You may tap or untap target artifact, creature, or land.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MayTapOrUntapTargetEffect(), new ManaCostsImpl("{3}{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MayTapOrUntapTargetEffect(), new ManaCostsImpl<>("{3}{G}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);

@@ -1,4 +1,3 @@
-
 package mage.cards.e;
 
 import mage.MageInt;
@@ -14,11 +13,11 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 import java.util.UUID;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -27,14 +26,14 @@ import java.util.UUID;
 public final class EssenceSliver extends CardImpl {
 
     public EssenceSliver(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
         this.subtype.add(SubType.SLIVER);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
         // Whenever a Sliver deals damage, its controller gains that much life.
-        this.addAbility(new DealsDamageAllTriggeredAbility());
+        this.addAbility(new EssenceSliverTriggeredAbility());
 
     }
 
@@ -48,19 +47,20 @@ public final class EssenceSliver extends CardImpl {
     }
 }
 
-class DealsDamageAllTriggeredAbility extends TriggeredAbilityImpl {
+class EssenceSliverTriggeredAbility extends TriggeredAbilityImpl {
 
-    public DealsDamageAllTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new EssenceSliverGainThatMuchLifeEffect(), false);
+    public EssenceSliverTriggeredAbility() {
+        super(Zone.BATTLEFIELD, new EssenceSliverEffect(), false);
+        setTriggerPhrase("Whenever a Sliver deals damage, ");
     }
 
-    public DealsDamageAllTriggeredAbility(final DealsDamageAllTriggeredAbility ability) {
+    private EssenceSliverTriggeredAbility(final EssenceSliverTriggeredAbility ability) {
         super(ability);
     }
 
     @Override
-    public DealsDamageAllTriggeredAbility copy() {
-        return new DealsDamageAllTriggeredAbility(this);
+    public EssenceSliverTriggeredAbility copy() {
+        return new EssenceSliverTriggeredAbility(this);
     }
 
     @Override
@@ -71,46 +71,43 @@ class DealsDamageAllTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent creature = game.getPermanent(event.getSourceId());
-        if (creature != null && creature.hasSubtype(SubType.SLIVER, game)) {
+        Permanent sliver = game.getPermanent(event.getSourceId());
+        if (sliver != null
+                && sliver.hasSubtype(SubType.SLIVER, game)
+                && sliver.getControllerId() != null) {
             for (Effect effect : this.getEffects()) {
                 effect.setValue("damage", event.getAmount());
+                effect.setTargetPointer(new FixedTarget(sliver.getControllerId()));
             }
             return true;
         }
         return false;
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a Sliver deals damage, " ;
-    }
 }
 
-class EssenceSliverGainThatMuchLifeEffect extends OneShotEffect {
+class EssenceSliverEffect extends OneShotEffect {
 
-    public EssenceSliverGainThatMuchLifeEffect() {
+    EssenceSliverEffect() {
         super(Outcome.GainLife);
         this.staticText = "its controller gains that much life";
     }
 
-    public EssenceSliverGainThatMuchLifeEffect(final EssenceSliverGainThatMuchLifeEffect effect) {
+    private EssenceSliverEffect(final EssenceSliverEffect effect) {
         super(effect);
     }
 
     @Override
-    public EssenceSliverGainThatMuchLifeEffect copy() {
-        return new EssenceSliverGainThatMuchLifeEffect(this);
+    public EssenceSliverEffect copy() {
+        return new EssenceSliverEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
+        Player controllerOfSliver = game.getPlayer(targetPointer.getFirst(game, source));
+        if (controllerOfSliver != null) {
             int amount = (Integer) getValue("damage");
             if (amount > 0) {
-                controller.gainLife(amount, game, source);
-
+                controllerOfSliver.gainLife(amount, game, source);
             }
             return true;
         }

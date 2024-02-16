@@ -28,7 +28,7 @@ public final class BlizzardElemental extends CardImpl {
 
         this.addAbility(FlyingAbility.getInstance());
         // {3}{U}: Untap Blizzard Elemental.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), new ManaCostsImpl("{3}{U}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), new ManaCostsImpl<>("{3}{U}")));
     }
 
     private BlizzardElemental(final BlizzardElemental card) {

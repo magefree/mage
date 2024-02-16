@@ -49,7 +49,7 @@ public final class SquealingDevil extends CardImpl {
         this.addAbility(ability);
 
         // When Squealing Devil enters the battlefield, sacrifice it unless {B} was spent to cast it.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessConditionEffect(new ManaWasSpentCondition(ColoredManaSymbol.B)), false));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessConditionEffect(ManaWasSpentCondition.BLACK), false));
 
     }
 
@@ -70,14 +70,14 @@ class SquealingDevilEffect extends OneShotEffect {
         staticText = "you may pay {X}. If you do, target creature gets +X/+0 until end of turn.";
     }
 
-    SquealingDevilEffect(final SquealingDevilEffect effect) {
+    private SquealingDevilEffect(final SquealingDevilEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        ManaCosts cost = new ManaCostsImpl("{X}");
+        ManaCosts cost = new ManaCostsImpl<>("{X}");
         if (player != null) {
             if (player.chooseUse(Outcome.BoostCreature, "Pay " + cost.getText() + "?", source, game)) {
                 int costX = player.announceXMana(0, Integer.MAX_VALUE, "Announce the value for {X}", game, source);

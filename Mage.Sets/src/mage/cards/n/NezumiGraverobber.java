@@ -19,6 +19,7 @@ import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.permanent.token.TokenImpl;
@@ -43,7 +44,7 @@ public final class NezumiGraverobber extends CardImpl {
         this.flipCardName = "Nighteyes the Desecrator";
 
         // {1}{B}: Exile target card from an opponent's graveyard. If no cards are in that graveyard, flip Nezumi Graverobber.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new ManaCostsImpl("{1}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new ManaCostsImpl<>("{1}{B}"));
         Target target = new TargetCardInOpponentsGraveyard(new FilterCard("card from an opponent's graveyard"));
         ability.addTarget(target);
         ability.addEffect(new NezumiGraverobberFlipEffect());
@@ -67,7 +68,7 @@ class NezumiGraverobberFlipEffect extends OneShotEffect {
         staticText = "If no cards are in that graveyard, flip {this}";
     }
 
-    NezumiGraverobberFlipEffect(final NezumiGraverobberFlipEffect effect) {
+    private NezumiGraverobberFlipEffect(final NezumiGraverobberFlipEffect effect) {
         super(effect);
     }
 
@@ -96,7 +97,7 @@ class NighteyesTheDesecratorToken extends TokenImpl {
     
     NighteyesTheDesecratorToken() {            
         super("Nighteyes the Desecrator", "");
-       addSuperType(SuperType.LEGENDARY);
+       this.supertype.add(SuperType.LEGENDARY);
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add(SubType.RAT);
@@ -104,11 +105,11 @@ class NighteyesTheDesecratorToken extends TokenImpl {
         power = new MageInt(4);
         toughness = new MageInt(2);
         // {4}{B}: Put target creature card from a graveyard onto the battlefield under your control.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnFromGraveyardToBattlefieldTargetEffect(), new ManaCostsImpl("{4}{B}"));
-        ability.addTarget(new TargetCardInGraveyard(new FilterCreatureCard("creature card from a graveyard")));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnFromGraveyardToBattlefieldTargetEffect(), new ManaCostsImpl<>("{4}{B}"));
+        ability.addTarget(new TargetCardInGraveyard(StaticFilters.FILTER_CARD_CREATURE_A_GRAVEYARD));
         this.addAbility(ability);
     }
-    public NighteyesTheDesecratorToken(final NighteyesTheDesecratorToken token) {
+    private NighteyesTheDesecratorToken(final NighteyesTheDesecratorToken token) {
         super(token);
     }
 

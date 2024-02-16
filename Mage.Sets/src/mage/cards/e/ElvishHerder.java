@@ -30,7 +30,7 @@ public final class ElvishHerder extends CardImpl {
 
         // {G}: Target creature gains trample until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(
-            TrampleAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{G}"));
+            TrampleAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{G}"));
        ability.addTarget(new TargetCreaturePermanent());
        this.addAbility(ability);
     }

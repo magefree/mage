@@ -41,8 +41,7 @@ public final class BranchingBolt extends CardImpl {
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filterFlying).withChooseHint("deals 3 damage, without flying"));
         // or Branching Bolt deals 3 damage to target creature without flying.
-        Mode mode = new Mode();
-        mode.addEffect(new DamageTargetEffect(3));
+        Mode mode = new Mode(new DamageTargetEffect(3));
         mode.addTarget(new TargetCreaturePermanent(filterNotFlying).withChooseHint("deals 3 damage, without flying"));
         this.getSpellAbility().addMode(mode);
     }
@@ -59,12 +58,12 @@ public final class BranchingBolt extends CardImpl {
 
 class BranchingBoltEffect extends OneShotEffect {
 
-    public BranchingBoltEffect() {
+    BranchingBoltEffect() {
         super(Outcome.Damage);
         this.staticText = "{this} deals 3 damage to target creature with flying and to target creature without flying";
     }
 
-    public BranchingBoltEffect(final BranchingBoltEffect effect) {
+    private BranchingBoltEffect(final BranchingBoltEffect effect) {
         super(effect);
     }
 

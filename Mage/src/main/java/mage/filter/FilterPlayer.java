@@ -1,8 +1,9 @@
 package mage.filter;
 
+import mage.abilities.Ability;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
-import mage.filter.predicate.Predicates;
+import mage.filter.predicate.Predicate;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -16,7 +17,7 @@ import java.util.UUID;
  */
 public class FilterPlayer extends FilterImpl<Player> {
 
-    protected List<ObjectSourcePlayerPredicate<Player>> extraPredicates = new ArrayList<>();
+    protected final List<ObjectSourcePlayerPredicate<Player>> extraPredicates = new ArrayList<>();
 
     public FilterPlayer() {
         this("player");
@@ -26,16 +27,17 @@ public class FilterPlayer extends FilterImpl<Player> {
         super(name);
     }
 
-    public FilterPlayer(final FilterPlayer filter) {
+    protected FilterPlayer(final FilterPlayer filter) {
         super(filter);
-        this.extraPredicates = new ArrayList<>(filter.extraPredicates);
+        this.extraPredicates.addAll(filter.extraPredicates);
     }
 
-    public void add(ObjectSourcePlayerPredicate predicate) {
+    public FilterPlayer add(ObjectSourcePlayerPredicate predicate) {
         if (isLockedFilter()) {
             throw new UnsupportedOperationException("You may not modify a locked filter");
         }
         extraPredicates.add(predicate);
+        return this;
     }
 
     @Override
@@ -43,16 +45,21 @@ public class FilterPlayer extends FilterImpl<Player> {
         return object instanceof Player;
     }
 
-    public boolean match(Player checkPlayer, UUID sourceId, UUID sourceControllerId, Game game) {
+    public boolean match(Player checkPlayer, UUID sourceControllerId, Ability source, Game game) {
         if (!this.match(checkPlayer, game)) {
             return false;
         }
-
-        return Predicates.and(extraPredicates).apply(new ObjectSourcePlayer<Player>(checkPlayer, sourceId, sourceControllerId), game);
+        ObjectSourcePlayer<Player> osp = new ObjectSourcePlayer<>(checkPlayer, sourceControllerId, source);
+        return extraPredicates.stream().allMatch(p -> p.apply(osp, game));
     }
 
     @Override
     public FilterPlayer copy() {
         return new FilterPlayer(this);
+    }
+
+    @Override
+    public List<Predicate> getExtraPredicates() {
+        return new ArrayList<>(extraPredicates);
     }
 }

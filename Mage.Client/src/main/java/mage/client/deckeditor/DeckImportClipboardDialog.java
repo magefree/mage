@@ -68,7 +68,14 @@ public class DeckImportClipboardDialog extends MageDialog {
     }
 
     private void onOK() {
-        tmpPath = DeckUtil.writeTextToTempFile(editData.getText());
+        String decklist = editData.getText();
+        decklist = decklist.replace(FORMAT_TEXT, "");
+        // This dialog also accepts a paste in .mtga format
+        if (decklist.startsWith("Deck\n")) {  // An .mtga list always starts with the first line being "Deck". This kind of paste is processed as .mtga
+            tmpPath = DeckUtil.writeTextToTempFile("cbimportdeck", ".mtga", decklist);
+        } else {  // If the paste is not .mtga format, it's processed as plaintext
+            tmpPath = DeckUtil.writeTextToTempFile(decklist);
+        }
         this.removeDialog();
     }
 

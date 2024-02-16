@@ -8,8 +8,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.TargetController;
-import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
@@ -19,23 +18,15 @@ import java.util.UUID;
  */
 public final class Crypsis extends CardImpl {
 
-    static final FilterPermanent filter = new FilterPermanent("creatures your opponents control");
-
-    static {
-        filter.add(CardType.CREATURE.getPredicate());
-        filter.add(TargetController.OPPONENT.getControllerPredicate());
-    }
-
     public Crypsis(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");
 
         // Target creature you control gains protection from creatures your opponents control until end of turn. Untap it.
-        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(new ProtectionAbility(filter), Duration.EndOfTurn));
-        Effect effect = new UntapTargetEffect();
-        effect.setText("Untap it.");
-        this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(
+                new ProtectionAbility(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURES),
+                Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new UntapTargetEffect("untap it"));
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
-
     }
 
     private Crypsis(final Crypsis card) {

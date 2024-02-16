@@ -52,9 +52,10 @@ class WallOfEssenceTriggeredAbility extends TriggeredAbilityImpl {
 
     public WallOfEssenceTriggeredAbility() {
         super(Zone.BATTLEFIELD, new PiousWarriorGainLifeEffect());
+        setTriggerPhrase("Whenever {this} is dealt combat damage, ");
     }
 
-    public WallOfEssenceTriggeredAbility(final WallOfEssenceTriggeredAbility effect) {
+    private WallOfEssenceTriggeredAbility(final WallOfEssenceTriggeredAbility effect) {
         super(effect);
     }
 
@@ -80,22 +81,17 @@ class WallOfEssenceTriggeredAbility extends TriggeredAbilityImpl {
         this.getEffects().setValue("damageAmount", event.getAmount());
         return true;
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} is dealt combat damage, " ;
-    }
 }
 
 
 class PiousWarriorGainLifeEffect extends OneShotEffect {
 
-    public PiousWarriorGainLifeEffect() {
+    PiousWarriorGainLifeEffect() {
         super(Outcome.GainLife);
         staticText = "you gain that much life";
     }
 
-    public PiousWarriorGainLifeEffect(final PiousWarriorGainLifeEffect effect) {
+    private PiousWarriorGainLifeEffect(final PiousWarriorGainLifeEffect effect) {
         super(effect);
     }
 

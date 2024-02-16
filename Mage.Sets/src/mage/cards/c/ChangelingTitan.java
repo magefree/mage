@@ -26,7 +26,7 @@ public final class ChangelingTitan extends CardImpl {
         this.addAbility(new ChangelingAbility());
 
         // Champion a creature
-        this.addAbility(new ChampionAbility(this, true));
+        this.addAbility(new ChampionAbility(this));
     }
 
     private ChangelingTitan(final ChangelingTitan card) {

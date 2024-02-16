@@ -20,7 +20,7 @@ public final class GostaDirk extends CardImpl {
 
     public GostaDirk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{W}{U}{U}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(4);
@@ -45,12 +45,12 @@ public final class GostaDirk extends CardImpl {
 
 class GostaDirkEffect extends AsThoughEffectImpl {
 
-    public GostaDirkEffect() {
+    GostaDirkEffect() {
         super(AsThoughEffectType.BLOCK_ISLANDWALK, Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Creatures with islandwalk can be blocked as though they didn't have islandwalk";
     }
 
-    public GostaDirkEffect(final GostaDirkEffect effect) {
+    private GostaDirkEffect(final GostaDirkEffect effect) {
         super(effect);
     }
 

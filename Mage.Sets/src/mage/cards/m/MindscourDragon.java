@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsDamageToOpponentTriggeredAbility;
-import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -29,7 +29,7 @@ public final class MindscourDragon extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever Mindscour Dragon deals combat damage to an opponent, target player puts the top four cards of their library into their graveyard.
-        Ability ability = new DealsDamageToOpponentTriggeredAbility(new PutLibraryIntoGraveTargetEffect(4), false, true);
+        Ability ability = new DealsDamageToOpponentTriggeredAbility(new MillCardsTargetEffect(4), false, true);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

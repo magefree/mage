@@ -37,7 +37,7 @@ public final class VengefulArchon extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // {X}: Prevent the next X damage that would be dealt to you this turn. If damage is prevented this way, Vengeful Archon deals that much damage to target player.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new VengefulArchonEffect(), new ManaCostsImpl("{X}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new VengefulArchonEffect(), new ManaCostsImpl<>("{X}"));
         ability.addTarget(new TargetPlayerOrPlaneswalker());
         this.addAbility(ability);
     }
@@ -55,12 +55,12 @@ public final class VengefulArchon extends CardImpl {
 
 class VengefulArchonEffect extends PreventDamageToControllerEffect {
 
-    public VengefulArchonEffect() {
+    VengefulArchonEffect() {
         super(Duration.EndOfTurn, false, true, ManacostVariableValue.REGULAR);
         staticText = "Prevent the next X damage that would be dealt to you this turn. If damage is prevented this way, {this} deals that much damage to target player or planeswalker";
     }
 
-    public VengefulArchonEffect(final VengefulArchonEffect effect) {
+    private VengefulArchonEffect(final VengefulArchonEffect effect) {
         super(effect);
     }
 
@@ -74,7 +74,7 @@ class VengefulArchonEffect extends PreventDamageToControllerEffect {
         PreventionEffectData preventionEffectData = super.preventDamageAction(event, source, game);
         int damage = preventionEffectData.getPreventedDamage();
         if (damage > 0) {
-            game.damagePlayerOrPlaneswalker(source.getFirstTarget(), damage, source.getSourceId(), source, game, false, true);
+            game.damagePlayerOrPermanent(source.getFirstTarget(), damage, source.getSourceId(), source, game, false, true);
         }
         return preventionEffectData;
     }

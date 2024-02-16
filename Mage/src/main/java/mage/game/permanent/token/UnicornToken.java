@@ -7,8 +7,7 @@ import mage.constants.SubType;
 public final class UnicornToken extends TokenImpl {
 
     public UnicornToken() {
-        super("Unicorn", "2/2 white Unicorn creature token");
-        setExpansionSetCodeForImage("JMP");
+        super("Unicorn Token", "2/2 white Unicorn creature token");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.UNICORN);
         color.setWhite(true);

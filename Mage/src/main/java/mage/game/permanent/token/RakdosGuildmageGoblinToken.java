@@ -1,19 +1,17 @@
-
-
 package mage.game.permanent.token;
-import mage.constants.CardType;
-import mage.constants.SubType;
+
 import mage.MageInt;
 import mage.abilities.keyword.HasteAbility;
+import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
- *
  * @author spjspj
  */
 public final class RakdosGuildmageGoblinToken extends TokenImpl {
 
     public RakdosGuildmageGoblinToken() {
-        super("Goblin", "2/1 red Goblin creature token with haste");
+        super("Goblin Token", "2/1 red Goblin creature token with haste");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
         subtype.add(SubType.GOBLIN);
@@ -22,7 +20,7 @@ public final class RakdosGuildmageGoblinToken extends TokenImpl {
         this.addAbility(HasteAbility.getInstance());
     }
 
-    public RakdosGuildmageGoblinToken(final RakdosGuildmageGoblinToken token) {
+    private RakdosGuildmageGoblinToken(final RakdosGuildmageGoblinToken token) {
         super(token);
     }
 

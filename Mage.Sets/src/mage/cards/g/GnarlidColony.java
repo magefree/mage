@@ -35,7 +35,7 @@ public final class GnarlidColony extends CardImpl {
 
         // If Gnarlid Colony was kicked, it enters the battlefield with two +1/+1 counters on it.
         this.addAbility(new EntersBattlefieldAbility(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)), KickedCondition.instance,
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)), KickedCondition.ONCE,
                 "If {this} was kicked, it enters the battlefield with two +1/+1 counters on it.", ""
         ));
 

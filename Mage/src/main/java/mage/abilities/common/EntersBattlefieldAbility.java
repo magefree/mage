@@ -6,9 +6,9 @@ import mage.abilities.condition.Condition;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.constants.Zone;
+import mage.util.CardUtil;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class EntersBattlefieldAbility extends StaticAbility {
@@ -21,9 +21,8 @@ public class EntersBattlefieldAbility extends StaticAbility {
     }
 
     /**
-     *
-     * @param effect effect that happens when the permanent enters the
-     * battlefield
+     * @param effect   effect that happens when the permanent enters the
+     *                 battlefield
      * @param optional
      */
     public EntersBattlefieldAbility(Effect effect, boolean optional) {
@@ -39,14 +38,13 @@ public class EntersBattlefieldAbility extends StaticAbility {
     }
 
     /**
-     *
-     * @param effect effect that happens when the permanent enters the
-     * battlefield
+     * @param effect      effect that happens when the permanent enters the
+     *                    battlefield
      * @param optional
-     * @param condition only if this condition is true, the effect will happen
+     * @param condition   only if this condition is true, the effect will happen
      * @param abilityRule rule for this ability (no text from effects will be
-     * added)
-     * @param effectText this text will be used for the EnterBattlefieldEffect
+     *                    added)
+     * @param effectText  this text will be used for the EnterBattlefieldEffect
      */
     public EntersBattlefieldAbility(Effect effect, boolean optional, Condition condition, String abilityRule, String effectText) {
         super(Zone.ALL, new EntersBattlefieldEffect(effect, condition, effectText, true, optional));
@@ -54,7 +52,7 @@ public class EntersBattlefieldAbility extends StaticAbility {
         this.optional = optional;
     }
 
-    public EntersBattlefieldAbility(final EntersBattlefieldAbility ability) {
+    protected EntersBattlefieldAbility(final EntersBattlefieldAbility ability) {
         super(ability);
         this.abilityRule = ability.abilityRule;
         this.optional = ability.optional;
@@ -83,7 +81,19 @@ public class EntersBattlefieldAbility extends StaticAbility {
             return abilityRule;
         }
         String superRule = super.getRule();
-        return (optional ? "you may have " : "") + "{this} enter" + (optional ? "" : "s") + " the battlefield"
-                + (!superRule.isEmpty() && superRule.charAt(0) == ' ' ? "" : " ") + superRule;
+        String prefix;
+        if (abilityWord != null) {
+            prefix = abilityWord.formatWord();
+        } else if (flavorWord != null) {
+            prefix = CardUtil.italicizeWithEmDash(flavorWord);
+        } else {
+            prefix = null;
+        }
+        String rule = (optional ? "you may have " : "") + "{this} enter" + (optional ? "" : "s") +
+                " the battlefield" + (!superRule.isEmpty() && superRule.charAt(0) == ' ' ? "" : " ") + superRule;
+        if (prefix != null) {
+            return prefix + CardUtil.getTextWithFirstCharUpperCase(rule);
+        }
+        return rule;
     }
 }

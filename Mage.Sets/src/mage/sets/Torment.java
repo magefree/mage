@@ -47,6 +47,8 @@ public final class Torment extends ExpansionSet {
         cards.add(new SetCardInfo("Cabal Ritual", 51, Rarity.COMMON, mage.cards.c.CabalRitual.class));
         cards.add(new SetCardInfo("Cabal Surgeon", 52, Rarity.COMMON, mage.cards.c.CabalSurgeon.class));
         cards.add(new SetCardInfo("Cabal Torturer", 53, Rarity.COMMON, mage.cards.c.CabalTorturer.class));
+        cards.add(new SetCardInfo("Carrion Rats", 54, Rarity.COMMON, mage.cards.c.CarrionRats.class));
+        cards.add(new SetCardInfo("Carrion Wurm", 55, Rarity.UNCOMMON, mage.cards.c.CarrionWurm.class));
         cards.add(new SetCardInfo("Centaur Chieftain", 122, Rarity.UNCOMMON, mage.cards.c.CentaurChieftain.class));
         cards.add(new SetCardInfo("Centaur Veteran", 123, Rarity.COMMON, mage.cards.c.CentaurVeteran.class));
         cards.add(new SetCardInfo("Cephalid Aristocrat", 27, Rarity.COMMON, mage.cards.c.CephalidAristocrat.class));
@@ -74,7 +76,9 @@ public final class Torment extends ExpansionSet {
         cards.add(new SetCardInfo("False Memories", 37, Rarity.RARE, mage.cards.f.FalseMemories.class));
         cards.add(new SetCardInfo("Far Wanderings", 125, Rarity.COMMON, mage.cards.f.FarWanderings.class));
         cards.add(new SetCardInfo("Fiery Temper", 97, Rarity.COMMON, mage.cards.f.FieryTemper.class));
+        cards.add(new SetCardInfo("Flaming Gambit", 98, Rarity.UNCOMMON, mage.cards.f.FlamingGambit.class));
         cards.add(new SetCardInfo("Flash of Defiance", 99, Rarity.COMMON, mage.cards.f.FlashOfDefiance.class));
+        cards.add(new SetCardInfo("Floating Shield", 5, Rarity.COMMON, mage.cards.f.FloatingShield.class));
         cards.add(new SetCardInfo("Frantic Purification", 6, Rarity.COMMON, mage.cards.f.FranticPurification.class));
         cards.add(new SetCardInfo("Ghostly Wings", 38, Rarity.COMMON, mage.cards.g.GhostlyWings.class));
         cards.add(new SetCardInfo("Gloomdrifter", 61, Rarity.UNCOMMON, mage.cards.g.Gloomdrifter.class));

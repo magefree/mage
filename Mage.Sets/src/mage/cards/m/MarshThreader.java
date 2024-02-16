@@ -26,7 +26,7 @@ public final class MarshThreader extends CardImpl {
         this.addAbility(new SwampwalkAbility());
     }
 
-    public MarshThreader (final MarshThreader card) {
+    private MarshThreader(final MarshThreader card) {
         super(card);
     }
 

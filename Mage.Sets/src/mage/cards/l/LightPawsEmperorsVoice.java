@@ -40,7 +40,7 @@ public final class LightPawsEmperorsVoice extends CardImpl {
     public LightPawsEmperorsVoice(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.FOX);
         this.subtype.add(SubType.ADVISOR);
         this.power = new MageInt(2);
@@ -83,7 +83,7 @@ class LightPawsEmperorsVoiceEffect extends OneShotEffect {
             return game.getBattlefield()
                     .getActivePermanents(
                             filter, input.getPlayerId(),
-                            input.getSourceId(), game
+                            input.getSource(), game
                     ).stream()
                     .filter(Objects::nonNull)
                     .noneMatch(permanent -> CardUtil.haveSameNames(permanent, input.getObject()));

@@ -2,7 +2,7 @@ package mage.cards.i;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DrawSecondCardTriggeredAbility;
+import mage.abilities.common.DrawNthCardTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -26,7 +26,7 @@ public final class IrencragPyromancer extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Whenever you draw your second card each turn, Irencrag Pyromancer deals 3 damage to any target.
-        Ability ability = new DrawSecondCardTriggeredAbility(new DamageTargetEffect(3), false);
+        Ability ability = new DrawNthCardTriggeredAbility(new DamageTargetEffect(3), false, 2);
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }

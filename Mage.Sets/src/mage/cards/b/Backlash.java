@@ -46,12 +46,12 @@ public final class Backlash extends CardImpl {
 
 class BacklashEffect extends OneShotEffect {
 
-    public BacklashEffect() {
+    BacklashEffect() {
         super(Outcome.Detriment);
         this.staticText = "Tap target untapped creature. That creature deals damage equal to its power to its controller.";
     }
 
-    public BacklashEffect(final BacklashEffect effect) {
+    private BacklashEffect(final BacklashEffect effect) {
         super(effect);
     }
 

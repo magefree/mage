@@ -79,12 +79,12 @@ class SpellWithOnlyPlayerTargetsPredicate implements ObjectSourcePlayerPredicate
 
 class RicochetEffect extends OneShotEffect {
 
-    public RicochetEffect() {
+    RicochetEffect() {
         super(Outcome.Detriment);
         staticText = "each player rolls a six-sided die. Change the target of that spell to the player with the lowest result. Reroll to break ties, if necessary";
     }
 
-    public RicochetEffect(final RicochetEffect effect) {
+    private RicochetEffect(final RicochetEffect effect) {
         super(effect);
     }
 
@@ -142,7 +142,7 @@ class RicochetEffect extends OneShotEffect {
                     target.clearChosen();
                     target.addTarget(loserId, sourceAbility, game);
                 }
-                MageObject sourceObject = game.getObject(source.getSourceId());
+                MageObject sourceObject = game.getObject(source);
                 if (oldTargetName != null && sourceObject != null) {
                     game.informPlayers(sourceObject.getLogName() + ": Changed target of " + spell.getLogName() + " from " + oldTargetName + " to " + loser.getLogName());
                 }

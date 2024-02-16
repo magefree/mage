@@ -32,7 +32,7 @@ public final class MoonBlessedCleric extends CardImpl {
         // Divine Intervention — When Moon-Blessed Cleric enters the battlefield, you may search your library for an enchantment card, reveal it, then shuffle and put that card on top.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
                 new SearchLibraryPutOnLibraryEffect(
-                        new TargetCardInLibrary(filter), true, true
+                        new TargetCardInLibrary(filter), true
                 ), true
         ).withFlavorWord("Divine Intervention"));
     }

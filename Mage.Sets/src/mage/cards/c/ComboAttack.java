@@ -44,7 +44,7 @@ class ComboAttackEffect extends OneShotEffect {
         this.staticText = "Two target creatures your team controls each deal damage equal to their power to target creature";
     }
 
-    ComboAttackEffect(final ComboAttackEffect effect) {
+    private ComboAttackEffect(final ComboAttackEffect effect) {
         super(effect);
     }
 

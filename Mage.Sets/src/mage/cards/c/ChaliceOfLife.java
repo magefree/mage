@@ -25,7 +25,7 @@ public final class ChaliceOfLife extends CardImpl {
     public ChaliceOfLife(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
-        this.secondSideCardClazz = ChaliceOfDeath.class;
+        this.secondSideCardClazz = mage.cards.c.ChaliceOfDeath.class;
         this.addAbility(new TransformAbility());
 
 
@@ -45,12 +45,12 @@ public final class ChaliceOfLife extends CardImpl {
 
 class ChaliceOfLifeEffect extends OneShotEffect {
 
-    public ChaliceOfLifeEffect() {
+    ChaliceOfLifeEffect() {
         super(Outcome.GainLife);
         staticText = "You gain 1 life. Then if you have at least 10 life more than your starting life total, transform Chalice of Life";
     }
 
-    public ChaliceOfLifeEffect(final ChaliceOfLifeEffect effect) {
+    private ChaliceOfLifeEffect(final ChaliceOfLifeEffect effect) {
         super(effect);
     }
 

@@ -58,7 +58,6 @@ public class EndOfTurnMultiOpponentsTest extends CardTestMultiPlayerBaseWithRang
         setStopAt(12, PhaseStep.CLEANUP);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -104,7 +103,6 @@ public class EndOfTurnMultiOpponentsTest extends CardTestMultiPlayerBaseWithRang
         setStopAt(12, PhaseStep.CLEANUP);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -150,7 +148,6 @@ public class EndOfTurnMultiOpponentsTest extends CardTestMultiPlayerBaseWithRang
         setStopAt(12, PhaseStep.CLEANUP);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
     }
 
     // leaved players
@@ -204,7 +201,6 @@ public class EndOfTurnMultiOpponentsTest extends CardTestMultiPlayerBaseWithRang
         setStopAt(5, PhaseStep.CLEANUP);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
     }
 
 }

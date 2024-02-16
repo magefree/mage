@@ -35,7 +35,7 @@ public final class OmenOfTheSun extends CardImpl {
         this.addAbility(ability);
 
         // {2}{W}, Sacrifice Omen of the Sun: Scry 2.
-        ability = new SimpleActivatedAbility(new ScryEffect(2), new ManaCostsImpl("{2}{W}"));
+        ability = new SimpleActivatedAbility(new ScryEffect(2), new ManaCostsImpl<>("{2}{W}"));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }

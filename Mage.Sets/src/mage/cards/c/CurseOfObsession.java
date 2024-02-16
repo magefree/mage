@@ -32,7 +32,7 @@ public final class CurseOfObsession extends CardImpl {
         TargetPlayer auraTarget = new TargetPlayer();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // At the beginning of enchanted player's draw step, that player draws two additional cards.
@@ -44,7 +44,7 @@ public final class CurseOfObsession extends CardImpl {
 
         // At the beginning of enchanted player's end step, that player discards their hand.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new DiscardHandTargetEffect("that player"),
+                new DiscardHandTargetEffect(),
                 TargetController.ENCHANTED, false
         ));
     }

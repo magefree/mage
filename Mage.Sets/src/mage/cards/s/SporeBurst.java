@@ -7,6 +7,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.hint.common.DomainHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.game.permanent.token.SaprolingToken;
 
@@ -21,8 +22,9 @@ public final class SporeBurst extends CardImpl {
 
 
         // Domain - Create a 1/1 green Saproling creature token for each basic land type among lands you control.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new SaprolingToken(), new DomainValue()));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new SaprolingToken(), DomainValue.REGULAR));
         this.getSpellAbility().addHint(DomainHint.instance);
+        this.getSpellAbility().setAbilityWord(AbilityWord.DOMAIN);
     }
 
     private SporeBurst(final SporeBurst card) {

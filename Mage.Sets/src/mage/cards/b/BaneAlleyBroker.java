@@ -71,7 +71,7 @@ public final class BaneAlleyBroker extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new BaneAlleyBrokerLookAtCardEffect()));
 
         // {U}{B}, {tap}: Return a card exiled with Bane Alley Broker to its owner's hand.
-        Ability ability = new SimpleActivatedAbility(new BaneAlleyBrokerReturnToHandEffect(), new ManaCostsImpl("{U}{B}"));
+        Ability ability = new SimpleActivatedAbility(new BaneAlleyBrokerReturnToHandEffect(), new ManaCostsImpl<>("{U}{B}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
@@ -156,13 +156,13 @@ class BaneAlleyBrokerReturnToHandEffect extends OneShotEffect {
             return false;
         }
         TargetCardInExile target = new TargetCardInExile(StaticFilters.FILTER_CARD, exile.getId());
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         player.chooseTarget(outcome, exile, target, source, game);
         Card card = game.getCard(target.getFirstTarget());
         if (card == null) {
             return false;
         }
-        return card != null && player.moveCards(card, Zone.HAND, source, game);
+        return player.moveCards(card, Zone.HAND, source, game);
     }
 }
 

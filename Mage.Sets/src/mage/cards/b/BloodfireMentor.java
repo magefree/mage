@@ -28,7 +28,7 @@ public final class BloodfireMentor extends CardImpl {
         this.toughness = new MageInt(5);
 
         // {2}{U}, T: Draw a card, then discard a card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawDiscardControllerEffect(1,1), new ManaCostsImpl("{2}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawDiscardControllerEffect(1,1), new ManaCostsImpl<>("{2}{U}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 

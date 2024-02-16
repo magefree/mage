@@ -8,9 +8,9 @@ import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.ExileTopXMayPlayUntilEndOfTurnEffect;
+import mage.abilities.effects.common.ExileTopXMayPlayUntilEffect;
 import mage.abilities.effects.common.InfoEffect;
-import mage.abilities.effects.common.continuous.SetPowerSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -36,7 +36,7 @@ public final class BellBorcaSpectralSergeant extends CardImpl {
     public BellBorcaSpectralSergeant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPIRIT);
         this.subtype.add(SubType.SOLDIER);
         this.power = new MageInt(0);
@@ -46,13 +46,14 @@ public final class BellBorcaSpectralSergeant extends CardImpl {
         this.addAbility(BellBorcaSpectralSergeantAbility.getInstance());
 
         // Bell Borca, Spectral Sergeant's power is equal to the greatest number noted for it this turn.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerSourceEffect(
-                BellBorcaSpectralSergeantValue.instance, Duration.EndOfGame
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerSourceEffect(
+                BellBorcaSpectralSergeantValue.instance
         ).setText("{this}'s power is equal to the greatest number noted for it this turn")));
 
         // At the beginning of your upkeep, exile the top card of your library. You may play that card this turn.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new ExileTopXMayPlayUntilEndOfTurnEffect(1), TargetController.YOU, false
+                new ExileTopXMayPlayUntilEffect(1, Duration.EndOfTurn),
+                TargetController.YOU, false
         ), new BellBorcaSpectralSergeantWatcher());
     }
 

@@ -50,7 +50,7 @@ public final class ThievingSkydiver extends CardImpl {
         // When Thieving Skydiver enters the battlefield, if it was kicked, gain control of target artifact with converted mana cost X or less. If that artifact is an Equipment, attach it to Thieving Skydiver.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new GainControlTargetEffect(Duration.Custom), false),
-                KickedCondition.instance, "When {this} enters the battlefield, if it was kicked, " +
+                KickedCondition.ONCE, "When {this} enters the battlefield, if it was kicked, " +
                 "gain control of target artifact with mana value X or less. " +
                 "If that artifact is an Equipment, attach it to {this}."
         );

@@ -89,7 +89,7 @@ class DevastatingMasteryAlternativeCostEffect extends OneShotEffect {
         TargetPermanent target = new TargetPermanent(
                 0, 2, StaticFilters.FILTER_PERMANENTS_NON_LAND, true
         );
-        opponent.choose(Outcome.ReturnToHand, target, source.getSourceId(), game);
+        opponent.choose(Outcome.ReturnToHand, target, source, game);
         return opponent.moveCards(new CardsImpl(target.getTargets()), Zone.HAND, source, game);
     }
 }

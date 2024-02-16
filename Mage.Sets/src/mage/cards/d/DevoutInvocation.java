@@ -50,12 +50,12 @@ public final class DevoutInvocation extends CardImpl {
 
 class DevoutInvocationEffect extends OneShotEffect {
 
-    public DevoutInvocationEffect() {
+    DevoutInvocationEffect() {
         super(Outcome.AIDontUseIt);
         staticText = "Tap any number of untapped creatures you control. Create a 4/4 white Angel creature token with flying for each creature tapped this way";
     }
 
-    public DevoutInvocationEffect(DevoutInvocationEffect effect) {
+    private DevoutInvocationEffect(final DevoutInvocationEffect effect) {
         super(effect);
     }
 
@@ -67,7 +67,7 @@ class DevoutInvocationEffect extends OneShotEffect {
         }
 
         TargetPermanent target = new TargetControlledPermanent(0, Integer.MAX_VALUE, DevoutInvocation.filter, true);
-        controller.choose(outcome, target, source.getSourceId(), game);
+        controller.choose(outcome, target, source, game);
         if (target.getTargets().isEmpty()) {
             return false;
         }

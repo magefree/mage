@@ -9,7 +9,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.AddCardSubTypeSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -27,7 +27,7 @@ public final class AscendantSpirit extends CardImpl {
     public AscendantSpirit(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}");
 
-        this.addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
         this.subtype.add(SubType.SPIRIT);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
@@ -35,20 +35,22 @@ public final class AscendantSpirit extends CardImpl {
         // {S}{S}: Ascendant Spirit becomes a Spirit Warrior with base power and toughness 2/3.
         Ability ability = new SimpleActivatedAbility(new AddCardSubTypeSourceEffect(
                 Duration.Custom, SubType.SPIRIT, SubType.WARRIOR
-        ).setText("{this} becomes a Spirit Warrior"), new ManaCostsImpl("{S}{S}"));
-        ability.addEffect(new SetPowerToughnessSourceEffect(
-                2, 3, Duration.Custom, SubLayer.SetPT_7b
+        ).setText("{this} becomes a Spirit Warrior"), new ManaCostsImpl<>("{S}{S}"));
+        ability.addEffect(new SetBasePowerToughnessSourceEffect(
+                2,
+                3,
+                Duration.Custom
         ).setText("with base power and toughness 2/3"));
         this.addAbility(ability);
 
         // {S}{S}{S}: If Ascendant Spirit is a Warrior, put a flying counter on it and it becomes a Spirit Warrior Angel with base power and toughness 4/4.
         this.addAbility(new SimpleActivatedAbility(
-                new AscendantSpiritWarriorEffect(), new ManaCostsImpl("{S}{S}{S}")
+                new AscendantSpiritWarriorEffect(), new ManaCostsImpl<>("{S}{S}{S}")
         ));
 
         // {S}{S}{S}{S}: If Ascendant Spirit is an Angel, put two +1/+1 counters on it and it gains "Whenever this creature deals damage to a player, draw a card."
         this.addAbility(new SimpleActivatedAbility(
-                new AscendantSpiritAngelEffect(), new ManaCostsImpl("{S}{S}{S}{S}")
+                new AscendantSpiritAngelEffect(), new ManaCostsImpl<>("{S}{S}{S}{S}")
         ));
     }
 
@@ -89,8 +91,8 @@ class AscendantSpiritWarriorEffect extends OneShotEffect {
         game.addEffect(new AddCardSubTypeSourceEffect(
                 Duration.Custom, SubType.SPIRIT, SubType.WARRIOR, SubType.ANGEL
         ), source);
-        game.addEffect(new SetPowerToughnessSourceEffect(
-                4, 4, Duration.Custom, SubLayer.SetPT_7b
+        game.addEffect(new SetBasePowerToughnessSourceEffect(
+                4, 4, Duration.Custom
         ), source);
         return true;
     }

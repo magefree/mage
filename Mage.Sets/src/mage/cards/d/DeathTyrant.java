@@ -42,7 +42,7 @@ public final class DeathTyrant extends CardImpl {
 
         // {5}{B}: Return Death Tyrant from your graveyard to the battlefield tapped.
         this.addAbility(new SimpleActivatedAbility(
-                Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(true),
+                Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(true, false),
                 new ManaCostsImpl<>("{5}{B}")
         ));
     }
@@ -61,6 +61,7 @@ class DeathTyrantTriggeredAbility extends TriggeredAbilityImpl {
 
     public DeathTyrantTriggeredAbility() {
         super(Zone.ALL, new CreateTokenEffect(new ZombieToken()));
+        setTriggerPhrase("Whenever an attacking creature you control or a blocking creature an opponent controls dies, ");
     }
 
     private DeathTyrantTriggeredAbility(final DeathTyrantTriggeredAbility ability) {
@@ -95,10 +96,5 @@ class DeathTyrantTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
         return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, event, game);
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever an attacking creature you control or a blocking creature an opponent controls dies, ";
     }
 }

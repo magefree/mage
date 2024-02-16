@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
@@ -8,7 +7,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class DestroySourceEffect extends OneShotEffect {
@@ -22,10 +20,10 @@ public class DestroySourceEffect extends OneShotEffect {
     public DestroySourceEffect(boolean noRegen) {
         super(Outcome.DestroyPermanent);
         this.noRegen = noRegen;
-        staticText = "destroy {this}";
+        staticText = "destroy {this}" + (noRegen ? ". It can't be regenerated" : "");
     }
 
-    public DestroySourceEffect(final DestroySourceEffect effect) {
+    protected DestroySourceEffect(final DestroySourceEffect effect) {
         super(effect);
         this.noRegen = effect.noRegen;
     }

@@ -47,12 +47,12 @@ public final class SeedGuardian extends CardImpl {
 
 class SeedGuardianEffect extends OneShotEffect {
 
-    public SeedGuardianEffect() {
+    SeedGuardianEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "create an X/X green Elemental creature token, where X is the number of creature cards in your graveyard";
     }
 
-    public SeedGuardianEffect(final SeedGuardianEffect effect) {
+    private SeedGuardianEffect(final SeedGuardianEffect effect) {
         super(effect);
     }
 

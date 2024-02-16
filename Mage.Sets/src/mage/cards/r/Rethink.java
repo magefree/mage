@@ -45,7 +45,7 @@ class RethinkEffect extends OneShotEffect {
         this.staticText = "Counter target spell unless its controller pays {X}, where X is its mana value";
     }
 
-    RethinkEffect(final RethinkEffect effect) {
+    private RethinkEffect(final RethinkEffect effect) {
         super(effect);
     }
 

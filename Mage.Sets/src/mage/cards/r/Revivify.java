@@ -93,7 +93,7 @@ class RevivifyEffect extends OneShotEffect {
             return false;
         }
         return player.moveCards(player.getGraveyard().getCards(
-                Revivify.filter, source.getSourceId(), source.getControllerId(), game
+                Revivify.filter, source.getControllerId(), source, game
         ), toHand ? Zone.HAND : Zone.BATTLEFIELD, source, game);
     }
 }

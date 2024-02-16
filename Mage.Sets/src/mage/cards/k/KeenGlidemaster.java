@@ -31,7 +31,7 @@ public final class KeenGlidemaster extends CardImpl {
         // {2}{U}: Target creature gains flying until end of turn.
         Ability ability = new SimpleActivatedAbility(new GainAbilityTargetEffect(
                 FlyingAbility.getInstance(), Duration.EndOfTurn
-        ), new ManaCostsImpl("{2}{U}"));
+        ), new ManaCostsImpl<>("{2}{U}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

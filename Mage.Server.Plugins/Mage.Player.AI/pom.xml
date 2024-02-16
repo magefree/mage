@@ -12,12 +12,17 @@
 
     <artifactId>mage-player-ai</artifactId>
     <packaging>jar</packaging>
-    <name>Mage Player AI</name>
+    <name>Mage Player AI (basic)</name>
 
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>mage</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>mage-common</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
@@ -33,8 +38,8 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
                 </configuration>
             </plugin>
             <plugin>
@@ -49,6 +54,8 @@
         <finalName>mage-player-ai</finalName>
     </build>
 
-    <properties/>
+    <properties>
+        <root.dir>${project.basedir}/../..</root.dir>
+    </properties>
 
 </project>

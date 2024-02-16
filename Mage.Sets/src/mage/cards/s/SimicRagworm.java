@@ -25,7 +25,7 @@ public final class SimicRagworm extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {U}: Untap Simic Ragworm.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), new ManaCostsImpl("{U}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), new ManaCostsImpl<>("{U}")));
     }
 
     private SimicRagworm(final SimicRagworm card) {

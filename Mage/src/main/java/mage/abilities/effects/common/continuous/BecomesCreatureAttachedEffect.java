@@ -38,7 +38,7 @@ public class BecomesCreatureAttachedEffect extends ContinuousEffectImpl {
         staticText = text;
     }
 
-    public BecomesCreatureAttachedEffect(final BecomesCreatureAttachedEffect effect) {
+    protected BecomesCreatureAttachedEffect(final BecomesCreatureAttachedEffect effect) {
         super(effect);
         this.token = effect.token.copy();
         this.type = effect.type;
@@ -62,9 +62,8 @@ public class BecomesCreatureAttachedEffect extends ContinuousEffectImpl {
         }
         switch (layer) {
             case TypeChangingEffects_4:
-                for (SuperType t : token.getSuperType()) {
-                    permanent.addSuperType(t);
-
+                for (SuperType t : token.getSuperType(game)) {
+                    permanent.addSuperType(game, t);
                 }
                 // card type
                 switch (loseType) {
@@ -113,14 +112,14 @@ public class BecomesCreatureAttachedEffect extends ContinuousEffectImpl {
                         break;
                 }
                 for (Ability ability : token.getAbilities()) {
-                    permanent.addAbility(ability, source.getSourceId(), game);
+                    permanent.addAbility(ability, source.getSourceId(), game, true);
                 }
                 break;
 
             case PTChangingEffects_7:
                 if (sublayer == SubLayer.SetPT_7b) {
-                    permanent.getPower().setValue(token.getPower().getValue());
-                    permanent.getToughness().setValue(token.getToughness().getValue());
+                    permanent.getPower().setModifiedBaseValue(token.getPower().getValue());
+                    permanent.getToughness().setModifiedBaseValue(token.getToughness().getValue());
                 }
                 break;
         }

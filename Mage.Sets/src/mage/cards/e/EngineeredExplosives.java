@@ -32,7 +32,7 @@ public final class EngineeredExplosives extends CardImpl {
         // Sunburst
         this.addAbility(new SunburstAbility(this));
         // {2}, Sacrifice Engineered Explosives: Destroy each nonland permanent with converted mana cost equal to the number of charge counters on Engineered Explosives.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new EngineeredExplosivesEffect(), new ManaCostsImpl("{2}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new EngineeredExplosivesEffect(), new ManaCostsImpl<>("{2}"));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }
@@ -58,7 +58,7 @@ class EngineeredExplosivesEffect extends OneShotEffect {
     }
 
 
-    public EngineeredExplosivesEffect(final EngineeredExplosivesEffect effect) {
+    private EngineeredExplosivesEffect(final EngineeredExplosivesEffect effect) {
         super(effect);
     }
 
@@ -72,7 +72,7 @@ class EngineeredExplosivesEffect extends OneShotEffect {
         MageObject engineeredExplosives = game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
         if(engineeredExplosives instanceof Permanent){
             int count = ((Permanent)engineeredExplosives).getCounters(game).getCount(CounterType.CHARGE);
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
                 if(permanent.getManaValue() == count){
                     permanent.destroy(source, game, false);
                 }

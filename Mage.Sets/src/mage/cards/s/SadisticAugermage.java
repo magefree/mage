@@ -47,12 +47,12 @@ public final class SadisticAugermage extends CardImpl {
 
 class WidespreadPanicEffect extends OneShotEffect {
 
-    public WidespreadPanicEffect() {
+    WidespreadPanicEffect() {
         super(Outcome.Detriment);
         this.staticText = "each player puts a card from their hand on top of their library";
     }
 
-    public WidespreadPanicEffect(final WidespreadPanicEffect effect) {
+    private WidespreadPanicEffect(final WidespreadPanicEffect effect) {
         super(effect);
     }
 
@@ -71,7 +71,7 @@ class WidespreadPanicEffect extends OneShotEffect {
                     if (!player.getHand().isEmpty()) {
                         TargetCardInHand target = new TargetCardInHand();
                         target.setTargetName("a card from your hand to put on top of your library");
-                        player.choose(Outcome.Detriment, target, source.getSourceId(), game);
+                        player.choose(Outcome.Detriment, target, source, game);
                         Card card = player.getHand().get(target.getFirstTarget(), game);
                         if (card != null) {
                             player.moveCardToLibraryWithInfo(card, source, game, Zone.HAND, true, false);

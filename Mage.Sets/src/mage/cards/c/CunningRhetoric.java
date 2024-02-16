@@ -1,5 +1,6 @@
 package mage.cards.c;
 
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -46,7 +47,7 @@ class CunningRhetoricTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new CunningRhetoricEffect(), false);
     }
 
-    public CunningRhetoricTriggeredAbility(final CunningRhetoricTriggeredAbility ability) {
+    private CunningRhetoricTriggeredAbility(final CunningRhetoricTriggeredAbility ability) {
         super(ability);
     }
 
@@ -103,14 +104,17 @@ class CunningRhetoricEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
-        if (opponent == null) {
+        MageObject sourceObject = source.getSourceObject(game);
+        if (opponent == null || sourceObject == null) {
             return false;
         }
         Card card = opponent.getLibrary().getFromTop(game);
         if (card == null) {
             return false;
         }
-        opponent.moveCards(card, Zone.EXILED, source, game);
+
+        UUID exileZoneId = CardUtil.getExileZoneId(game, sourceObject.getId(), sourceObject.getZoneChangeCounter(game));
+        opponent.moveCardsToExile(card, source, game, true, exileZoneId, sourceObject.getIdName());
         CardUtil.makeCardPlayable(game, source, card, Duration.Custom, true);
         return true;
     }

@@ -22,7 +22,7 @@ public class MatchPlayer implements Serializable {
 
     private boolean quit;
     private boolean doneSideboarding;
-    private int priorityTimeLeft;
+    private int priorityTimeLeft; // keep left time for next game
 
     public MatchPlayer(Player player, Deck deck, Match match) {
         this.player = player;
@@ -78,6 +78,17 @@ public class MatchPlayer implements Serializable {
         return deck;
     }
 
+    public Deck getDeckForViewer() {
+        if (this.deck == null) {
+            return null;
+        }
+
+        // Tiny Leaders uses deck name for game, also must hide real deck name from other players
+        Deck viewerDeck = this.deck.copy();
+        viewerDeck.setName(this.getName());
+        return viewerDeck;
+    }
+
     public void submitDeck(Deck deck) {
         this.deck = deck;
         this.doneSideboarding = true;
@@ -95,7 +106,7 @@ public class MatchPlayer implements Serializable {
 
     public Deck generateDeck(DeckValidator deckValidator) {
         // auto complete deck
-        while (deck.getCards().size() < deckValidator.getDeckMinSize() && !deck.getSideboard().isEmpty()) {
+        while (deck.getMaindeckCards().size() < deckValidator.getDeckMinSize() && !deck.getSideboard().isEmpty()) {
             Card card = deck.getSideboard().iterator().next();
             deck.getCards().add(card);
             deck.getSideboard().remove(card);
@@ -137,11 +148,6 @@ public class MatchPlayer implements Serializable {
         this.deck = null;
         this.player.cleanUpOnMatchEnd();
         // this.player = null;
-    }
-
-    public void cleanUp() {
-        // Free resources that are not needed after match end
-        this.player = null;
     }
 
     public String getName() {

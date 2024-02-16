@@ -37,7 +37,7 @@ public final class DevourerOfMemory extends CardImpl {
 
         // {1}{U}{B}: Put the top card of your library into your graveyard.
         this.addAbility(new SimpleActivatedAbility(
-                new MillCardsControllerEffect(1), new ManaCostsImpl("{1}{U}{B}")
+                new MillCardsControllerEffect(1), new ManaCostsImpl<>("{1}{U}{B}")
         ));
     }
 

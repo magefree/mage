@@ -36,6 +36,7 @@ public class PillarOfFlameTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Dutiful Thrull");
 
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Pillar of Flame", playerB);
+        waitStackResolved(3, PhaseStep.PRECOMBAT_MAIN);
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Stonewright");
 
         attack(3, playerA, "Rakdos Cackler");

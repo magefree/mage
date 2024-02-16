@@ -26,7 +26,6 @@ public class GameTrailTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertTapped("Game Trail", false);
     }
@@ -45,7 +44,6 @@ public class GameTrailTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertTapped("Game Trail", true);
     }
@@ -65,7 +63,6 @@ public class GameTrailTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertTapped("Game Trail", true);
     }
@@ -100,7 +97,6 @@ public class GameTrailTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertTapped("Game Trail", false);
     }

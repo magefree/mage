@@ -83,9 +83,12 @@ public class AmplifyEffect extends ReplacementEffectImpl {
     public AmplifyEffect(AmplifyFactor amplifyFactor) {
         super(Duration.EndOfGame, Outcome.BoostCreature);
         this.amplifyFactor = amplifyFactor;
+        this.staticText = amplifyFactor.toString() +
+                " <i>(As this enter the battlefield, " + amplifyFactor.getRuleText() + " for each card"
+                + " you reveal that shares a type with it in your hand.)</i>";
     }
 
-    public AmplifyEffect(final AmplifyEffect effect) {
+    protected AmplifyEffect(final AmplifyEffect effect) {
         super(effect);
         this.amplifyFactor = effect.amplifyFactor;
     }
@@ -116,7 +119,7 @@ public class AmplifyEffect extends ReplacementEffectImpl {
             filter.add(Predicates.not(new CardIdPredicate(enteringPermanent.getId())));
         }
 
-        if (controller.getHand().count(filter, source.getSourceId(), source.getControllerId(), game) <= 0) {
+        if (controller.getHand().count(filter, source.getControllerId(), source, game) <= 0) {
             return false;
         }
         if (!controller.chooseUse(outcome, "Reveal cards to Amplify?", source, game)) {
@@ -131,15 +134,6 @@ public class AmplifyEffect extends ReplacementEffectImpl {
             controller.revealCards(sourceCreature.getIdName(), cards, game);
         }
         return false;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        StringBuilder sb = new StringBuilder(amplifyFactor.toString());
-        sb.append(" <i>(As this enter the battlefield, ");
-        sb.append(amplifyFactor.getRuleText()).append(" for each card"
-                + " you reveal that shares a type with it in your hand.)</i>");
-        return sb.toString();
     }
 
     @Override

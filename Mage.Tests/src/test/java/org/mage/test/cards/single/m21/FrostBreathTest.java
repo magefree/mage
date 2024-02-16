@@ -21,7 +21,6 @@ public class FrostBreathTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
         assertTapped("Grizzly Bears", true);
         assertTapped("Serra Angel", true);
     }

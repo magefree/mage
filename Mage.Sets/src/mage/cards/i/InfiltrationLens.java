@@ -17,6 +17,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
@@ -32,7 +33,7 @@ public final class InfiltrationLens extends CardImpl {
         this.addAbility(new EquippedBecomesBlockedTriggeredAbility(new DrawCardSourceControllerEffect(2), true));
 
         // Equip {1}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1)));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(1), new TargetControlledCreaturePermanent(), false));
     }
 
     private InfiltrationLens(final InfiltrationLens card) {
@@ -49,9 +50,10 @@ class EquippedBecomesBlockedTriggeredAbility extends TriggeredAbilityImpl {
 
     public EquippedBecomesBlockedTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
+        setTriggerPhrase("Whenever equipped creature becomes blocked by a creature, ");
     }
 
-    public EquippedBecomesBlockedTriggeredAbility(final EquippedBecomesBlockedTriggeredAbility ability) {
+    private EquippedBecomesBlockedTriggeredAbility(final EquippedBecomesBlockedTriggeredAbility ability) {
         super(ability);
     }
 
@@ -70,11 +72,6 @@ class EquippedBecomesBlockedTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever equipped creature becomes blocked by a creature, " ;
     }
 
     @Override

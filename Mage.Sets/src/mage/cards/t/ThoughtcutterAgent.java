@@ -33,7 +33,7 @@ public final class ThoughtcutterAgent extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {U}{B}, {tap}: Target player loses 1 life and reveals their hand.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(1), new ManaCostsImpl("{U}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(1), new ManaCostsImpl<>("{U}{B}"));
         ability.addCost(new TapSourceCost());
         
         Effect revealEffect = new RevealHandTargetEffect(TargetController.ANY);

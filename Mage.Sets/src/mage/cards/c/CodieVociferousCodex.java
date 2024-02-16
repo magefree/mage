@@ -30,7 +30,7 @@ public final class CodieVociferousCodex extends CardImpl {
     public CodieVociferousCodex(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.CONSTRUCT);
         this.power = new MageInt(1);
         this.toughness = new MageInt(4);
@@ -83,7 +83,7 @@ class CodieVociferousCodexCantCastEffect extends ContinuousRuleModifyingEffectIm
         if (!source.isControlledBy(event.getPlayerId())) {
             return false;
         }
-        Card card = game.getCard(event.getTargetId());
+        Card card = game.getCard(event.getSourceId());
         return card != null && card.isPermanent(game);
     }
 }

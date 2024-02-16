@@ -54,7 +54,7 @@ class BelieveEffect extends OneShotEffect {
         this.staticText = "Look at the top card of your library. You may put it onto the battlefield if it's a creature card. If you don't, put it into your hand";
     }
 
-    BelieveEffect(final BelieveEffect effect) {
+    private BelieveEffect(final BelieveEffect effect) {
         super(effect);
     }
 

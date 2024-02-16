@@ -33,7 +33,7 @@ public final class FeatherTheRedeemed extends CardImpl {
     public FeatherTheRedeemed(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}{W}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ANGEL);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
@@ -79,14 +79,10 @@ class FeatherTheRedeemedTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (!event.getPlayerId().equals(this.getControllerId())) {
+        if (!isControlledBy(event.getPlayerId())) {
             return false;
         }
         Spell spell = game.getStack().getSpell(event.getTargetId());
-        return checkSpell(spell, game);
-    }
-
-    private boolean checkSpell(Spell spell, Game game) {
         if (spell == null) {
             return false;
         }
@@ -166,15 +162,15 @@ class FeatherTheRedeemedEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         ZoneChangeEvent zEvent = ((ZoneChangeEvent) event);
-        if (zEvent.getFromZone() == Zone.STACK
-                && zEvent.getToZone() == Zone.GRAVEYARD
-                && event.getSourceId() != null) {
-            if (event.getSourceId().equals(event.getTargetId()) && mor.getZoneChangeCounter() == game.getState().getZoneChangeCounter(event.getSourceId())) {
-                Spell spell = game.getStack().getSpell(mor.getSourceId());
-                return spell != null && spell.isInstantOrSorcery(game);
-            }
+        if (zEvent.getFromZone() != Zone.STACK
+                || zEvent.getToZone() != Zone.GRAVEYARD
+                || event.getSourceId() == null
+                || !event.getSourceId().equals(event.getTargetId())
+                || mor.getZoneChangeCounter() != game.getState().getZoneChangeCounter(event.getSourceId())) {
+            return false;
         }
-        return false;
+        Spell spell = game.getStack().getSpell(mor.getSourceId());
+        return spell != null && spell.isInstantOrSorcery(game);
     }
 
     @Override

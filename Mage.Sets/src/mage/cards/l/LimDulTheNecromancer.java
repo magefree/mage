@@ -38,17 +38,17 @@ public final class LimDulTheNecromancer extends CardImpl {
 
     public LimDulTheNecromancer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{B}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
         // Whenever a creature an opponent controls dies, you may pay {1}{B}. If you do, return that card to the battlefield under your control. If it's a creature, it's a Zombie in addition to its other creature types.
-        this.addAbility(new DiesCreatureTriggeredAbility(new DoIfCostPaid(new LimDulTheNecromancerEffect(), new ManaCostsImpl("{1}{B}")), false, StaticFilters.FILTER_OPPONENTS_PERMANENT_A_CREATURE, true));
+        this.addAbility(new DiesCreatureTriggeredAbility(new DoIfCostPaid(new LimDulTheNecromancerEffect(), new ManaCostsImpl<>("{1}{B}")), false, StaticFilters.FILTER_OPPONENTS_PERMANENT_A_CREATURE, true));
 
         // {1}{B}: Regenerate target Zombie.
-        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateTargetEffect(), new ManaCostsImpl("{1}{B}"));
+        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateTargetEffect(), new ManaCostsImpl<>("{1}{B}"));
         ability2.addTarget(new TargetPermanent(filter2));
         this.addAbility(ability2);
 
@@ -66,12 +66,12 @@ public final class LimDulTheNecromancer extends CardImpl {
 
 class LimDulTheNecromancerEffect extends OneShotEffect {
 
-    public LimDulTheNecromancerEffect() {
+    LimDulTheNecromancerEffect() {
         super(Outcome.PutCreatureInPlay);
         staticText = "return that card to the battlefield under your control. If it's a creature, it's a Zombie in addition to its other creature types";
     }
 
-    public LimDulTheNecromancerEffect(final LimDulTheNecromancerEffect effect) {
+    private LimDulTheNecromancerEffect(final LimDulTheNecromancerEffect effect) {
         super(effect);
     }
 

@@ -47,10 +47,11 @@ public final class LairOfTheHydra extends CardImpl {
         this.addAbility(new GreenManaAbility());
 
         // {X}{G}: Until end of turn, Lair of the Hydra becomes an X/X green Hydra creature. It's still a land. X can't be 0.
-        ManaCostsImpl manaCosts = new ManaCostsImpl("{X}{G}");
+        ManaCostsImpl manaCosts = new ManaCostsImpl<>("{X}{G}");
         for (Object cost : manaCosts) {
             if (cost instanceof VariableManaCost) {
                 ((VariableManaCost) cost).setMinX(1);
+                break;
             }
         }
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new LairOfTheHydraEffect(), manaCosts));
@@ -68,7 +69,7 @@ public final class LairOfTheHydra extends CardImpl {
 
 class LairOfTheHydraEffect extends OneShotEffect {
 
-    public LairOfTheHydraEffect() {
+    LairOfTheHydraEffect() {
         super(Outcome.BecomeCreature);
         this.staticText = "Until end of turn, {this} becomes an X/X green Hydra creature. It's still a land. X can't be 0";
     }
@@ -89,7 +90,7 @@ class LairOfTheHydraEffect extends OneShotEffect {
                 new CreatureToken(xValue, xValue, "X/X green Hydra creature")
                     .withColor("G")
                     .withSubType(SubType.HYDRA),
-                "land", Duration.EndOfTurn), source
+                CardType.LAND, Duration.EndOfTurn), source
         );
         return true;
     }

@@ -30,7 +30,7 @@ public final class FledglingImp extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {B}, Discard a card: Fledgling Imp gains flying until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{B}"));
         ability.addCost(new DiscardCardCost());
         this.addAbility(ability);
     }

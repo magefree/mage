@@ -30,8 +30,8 @@ public final class MoritteOfTheFrost extends CardImpl {
     public MoritteOfTheFrost(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{U}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
-        this.addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.SNOW);
         this.subtype.add(SubType.SHAPESHIFTER);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);

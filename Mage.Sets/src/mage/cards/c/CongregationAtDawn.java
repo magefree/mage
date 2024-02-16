@@ -49,7 +49,7 @@ class CongregationAtDawnEffect extends OneShotEffect {
                 "then shuffle and put those cards on top in any order";
     }
 
-    public CongregationAtDawnEffect(final CongregationAtDawnEffect effect) {
+    private CongregationAtDawnEffect(final CongregationAtDawnEffect effect) {
         super(effect);
     }
 
@@ -61,14 +61,14 @@ class CongregationAtDawnEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (controller != null && sourceObject != null) {
             TargetCardInLibrary target = new TargetCardInLibrary(0, 3, new FilterCreatureCard("creature cards"));
             if (controller.searchLibrary(target, source, game)) {
                 if (!target.getTargets().isEmpty()) {
                     Cards revealed = new CardsImpl();
                     for (UUID cardId : target.getTargets()) {
-                        Card card = controller.getLibrary().remove(cardId, game);
+                        Card card = controller.getLibrary().getCard(cardId, game);
                         revealed.add(card);
                     }
                     controller.revealCards(sourceObject.getName(), revealed, game);
@@ -77,7 +77,7 @@ class CongregationAtDawnEffect extends OneShotEffect {
                     TargetCard targetToLib = new TargetCard(Zone.LIBRARY, new FilterCard(textTop));
 
                     while (revealed.size() > 1 && controller.canRespond()) {
-                        controller.choose(Outcome.Neutral, revealed, targetToLib, game);
+                        controller.choose(Outcome.Neutral, revealed, targetToLib, source, game);
                         Card card = revealed.get(targetToLib.getFirstTarget(), game);
                         if (card != null) {
                             revealed.remove(card);

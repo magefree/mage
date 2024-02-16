@@ -37,12 +37,12 @@ public final class Worship extends CardImpl {
 
 class WorshipReplacementEffect extends ReplacementEffectImpl {
 
-    public WorshipReplacementEffect() {
+    WorshipReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "If you control a creature, damage that would reduce your life total to less than 1 reduces it to 1 instead";
     }
 
-    public WorshipReplacementEffect(final WorshipReplacementEffect effect) {
+    private WorshipReplacementEffect(final WorshipReplacementEffect effect) {
         super(effect);
     }
 
@@ -62,16 +62,11 @@ class WorshipReplacementEffect extends ReplacementEffectImpl {
             Player controller = game.getPlayer(source.getControllerId());
             if (controller != null
                     && (controller.getLife() - event.getAmount()) < 1
-                    && game.getBattlefield().count(new FilterControlledCreaturePermanent(), source.getSourceId(), event.getPlayerId(), game) > 0
+                    && game.getBattlefield().count(new FilterControlledCreaturePermanent(), event.getPlayerId(), source, game) > 0
                     ) {
                 event.setAmount(controller.getLife() - 1);
             }
         }
-        return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
         return false;
     }
 

@@ -16,7 +16,7 @@ public enum OpponentsPoisonCountersCount implements DynamicValue {
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         int amount = 0;
-        Set<UUID> playerList = game.getOpponents(sourceAbility.getControllerId());
+        Set<UUID> playerList = game.getOpponents(sourceAbility.getControllerId(), true);
         for (UUID playerUUID : playerList) {
             Player player = game.getPlayer(playerUUID);
             if (player != null) {

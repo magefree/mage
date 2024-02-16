@@ -31,7 +31,7 @@ public final class GodEternalBontu extends CardImpl {
     public GodEternalBontu(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ZOMBIE);
         this.subtype.add(SubType.GOD);
         this.power = new MageInt(5);
@@ -86,7 +86,7 @@ class GodEternalBontuEffect extends OneShotEffect {
             return false;
         }
         Target target = new TargetPermanent(0, Integer.MAX_VALUE, filter, true);
-        if (!player.choose(outcome, target, source.getSourceId(), game)) {
+        if (!player.choose(outcome, target, source, game)) {
             return false;
         }
         int counter = 0;

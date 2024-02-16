@@ -5,13 +5,12 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 
 /**
- *
  * @author LevelX2
  */
 public final class GoldForgeGarrisonGolemToken extends TokenImpl {
 
     public GoldForgeGarrisonGolemToken() {
-        super("Golem", "4/4 colorless Golem artifact creature token");
+        super("Golem Token", "4/4 colorless Golem artifact creature token");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
 
@@ -21,7 +20,7 @@ public final class GoldForgeGarrisonGolemToken extends TokenImpl {
 
     }
 
-    public GoldForgeGarrisonGolemToken(final GoldForgeGarrisonGolemToken token) {
+    private GoldForgeGarrisonGolemToken(final GoldForgeGarrisonGolemToken token) {
         super(token);
     }
 

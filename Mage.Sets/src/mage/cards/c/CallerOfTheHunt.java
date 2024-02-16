@@ -10,7 +10,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.Choice;
@@ -38,7 +38,7 @@ public final class CallerOfTheHunt extends CardImpl {
 
         // As an additional cost to cast Caller of the Hunt, choose a creature type.
         // Caller of the Hunt's power and toughness are each equal to the number of creatures of the chosen type on the battlefield.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("as an additional cost to cast this spell, choose a creature type. \r"
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("as an additional cost to cast this spell, choose a creature type.<br>"
                 + "{this}'s power and toughness are each equal to the number of creatures of the chosen type on the battlefield")));
 
         this.getSpellAbility().setCostAdjuster(CallerOfTheHuntAdjuster.instance);
@@ -114,8 +114,8 @@ enum CallerOfTheHuntAdjuster implements CostAdjuster {
         // apply boost
         FilterCreaturePermanent filter = new FilterCreaturePermanent("chosen creature type");
         filter.add(typeChoice.getPredicate());
-        ContinuousEffect effectPowerToughness = new SetPowerToughnessSourceEffect(
-                new PermanentsOnBattlefieldCount(filter), Duration.EndOfGame);
+        ContinuousEffect effectPowerToughness = new SetBasePowerToughnessSourceEffect(
+                new PermanentsOnBattlefieldCount(filter));
         effectPowerToughness.setText("");
         SimpleStaticAbility setPT = new SimpleStaticAbility(Zone.ALL, effectPowerToughness);
         GainAbilityTargetEffect gainAbility = new GainAbilityTargetEffect(setPT, Duration.EndOfGame);
@@ -126,19 +126,19 @@ enum CallerOfTheHuntAdjuster implements CostAdjuster {
 
 class ChooseCreatureTypeEffect extends OneShotEffect {
 
-    public ChooseCreatureTypeEffect(Outcome outcome) {
+    ChooseCreatureTypeEffect(Outcome outcome) {
         super(outcome);
         staticText = "choose a creature type";
     }
 
-    public ChooseCreatureTypeEffect(final ChooseCreatureTypeEffect effect) {
+    private ChooseCreatureTypeEffect(final ChooseCreatureTypeEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         Choice typeChoice = new ChoiceCreatureType(mageObject);
         if (controller != null
                 && mageObject != null

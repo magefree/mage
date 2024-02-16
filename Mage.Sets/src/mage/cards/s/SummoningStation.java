@@ -11,7 +11,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.filter.common.FilterArtifactPermanent;
+import mage.filter.StaticFilters;
 import mage.game.permanent.token.PincherToken;
 
 /**
@@ -26,7 +26,7 @@ public final class SummoningStation extends CardImpl {
         // {tap}: Create a 2/2 colorless Pincher creature token.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new PincherToken()), new TapSourceCost()));
         // Whenever an artifact is put into a graveyard from the battlefield, you may untap Summoning Station.
-        this.addAbility(new PutIntoGraveFromBattlefieldAllTriggeredAbility(new UntapSourceEffect(), true, new FilterArtifactPermanent(), false));
+        this.addAbility(new PutIntoGraveFromBattlefieldAllTriggeredAbility(new UntapSourceEffect(), true, StaticFilters.FILTER_PERMANENT_ARTIFACT_AN, false));
     }
 
     private SummoningStation(final SummoningStation card) {

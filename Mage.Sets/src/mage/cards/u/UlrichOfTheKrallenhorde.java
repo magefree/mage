@@ -22,13 +22,13 @@ public final class UlrichOfTheKrallenhorde extends CardImpl {
 
     public UlrichOfTheKrallenhorde(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WEREWOLF);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        this.secondSideCardClazz = UlrichUncontestedAlpha.class;
+        this.secondSideCardClazz = mage.cards.u.UlrichUncontestedAlpha.class;
 
         // Whenever this creature enters the battlefield or transforms into Ulrich of the Krallenhorde, target creature gets +4/+4 until end of turn.
         Ability ability = new TransformsOrEntersTriggeredAbility(

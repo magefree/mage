@@ -46,7 +46,7 @@ public final class AvengerOfZendikar extends CardImpl {
         this.addAbility(new LandfallAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter), true));
     }
 
-    public AvengerOfZendikar (final AvengerOfZendikar card) {
+    private AvengerOfZendikar(final AvengerOfZendikar card) {
         super(card);
     }
 

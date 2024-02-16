@@ -30,7 +30,7 @@ public final class SkyclaveRelic extends CardImpl {
         // When Skyclave Relic enters the battlefield, if it was kicked, create two tapped tokens that are copies of Skyclave Relic.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new CreateTokenCopySourceEffect(2, true)),
-                KickedCondition.instance, "When {this} enters the battlefield, if it was kicked, " +
+                KickedCondition.ONCE, "When {this} enters the battlefield, if it was kicked, " +
                 "create two tapped tokens that are copies of {this}."
         ));
 

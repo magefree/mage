@@ -36,7 +36,7 @@ public final class ArtificersHex extends CardImpl {
         TargetPermanent auraTarget = new TargetPermanent(filter);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // At the beginning of your upkeep, if enchanted Equipment is attached to a creature, destroy that creature.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new ArtificersHexEffect(), TargetController.YOU, false, true));
@@ -55,12 +55,12 @@ public final class ArtificersHex extends CardImpl {
 
 class ArtificersHexEffect extends OneShotEffect {
 
-    public ArtificersHexEffect() {
+    ArtificersHexEffect() {
         super(Outcome.Benefit);
         this.staticText = "if enchanted Equipment is attached to a creature, destroy that creature";
     }
 
-    public ArtificersHexEffect(final ArtificersHexEffect effect) {
+    private ArtificersHexEffect(final ArtificersHexEffect effect) {
         super(effect);
     }
 

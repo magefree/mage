@@ -31,12 +31,13 @@ public final class CursedLand extends CardImpl {
         TargetPermanent auraTarget = new TargetLandPermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
         // At the beginning of the upkeep of enchanted land's controller, Cursed Land deals 1 damage to that player.
         Effect effect = new DamageTargetEffect(1);
         effect.setText("{this} deals 1 damage to that player");
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, effect,
-            TargetController.CONTROLLER_ATTACHED_TO, false, true));
+            TargetController.CONTROLLER_ATTACHED_TO, false, true)
+                .setTriggerPhrase("At the beginning of the upkeep of enchanted land's controller, "));
     }
 
     private CursedLand(final CursedLand card) {

@@ -39,7 +39,7 @@ public final class UnnaturalHunger extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // At the beginning of the upkeep of enchanted creature's controller, Unnatural Hunger deals damage to that player equal to that creature's power unless they sacrifice another creature.
@@ -59,7 +59,7 @@ public final class UnnaturalHunger extends CardImpl {
 
 class UnnaturalHungerEffect extends OneShotEffect {
 
-    public UnnaturalHungerEffect() {
+    UnnaturalHungerEffect() {
         super(Outcome.Detriment);
         this.staticText = "{this} deals damage to that player equal to that creature's power unless they sacrifice another creature";
     }
@@ -76,7 +76,7 @@ class UnnaturalHungerEffect extends OneShotEffect {
             if (attachedTo != null) {
                 FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
                 filter.add(Predicates.not(new PermanentIdPredicate(aura.getAttachedTo())));  // not attached permanent
-                Cost cost = new SacrificeTargetCost(new TargetControlledCreaturePermanent(filter));
+                Cost cost = new SacrificeTargetCost(filter);
                 Player enchantedCreatureController = game.getPlayer(attachedTo.getControllerId());
                 if (enchantedCreatureController != null
                         && cost.canPay(source, source, enchantedCreatureController.getId(), game)

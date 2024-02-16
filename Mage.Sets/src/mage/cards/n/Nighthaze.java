@@ -22,11 +22,11 @@ public final class Nighthaze extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}");
 
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(new SwampwalkAbility(), Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public Nighthaze (final Nighthaze card) {
+    private Nighthaze(final Nighthaze card) {
         super(card);
     }
 

@@ -1,4 +1,3 @@
-
 package mage.game.permanent.token;
 
 import mage.MageInt;
@@ -7,21 +6,12 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 
 /**
- *
  * @author TheElk801
  */
 public final class DefenderPlantToken extends TokenImpl {
 
     public DefenderPlantToken() {
-        this(null, 0);
-    }
-
-    public DefenderPlantToken(String setCode) {
-        this(setCode, 0);
-    }
-
-    public DefenderPlantToken(String setCode, int tokenType) {
-        super("Plant", "0/2 green Plant creature token with defender");
+        super("Plant Token", "0/2 green Plant creature token with defender");
         color.setGreen(true);
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.PLANT);
@@ -31,7 +21,7 @@ public final class DefenderPlantToken extends TokenImpl {
         this.addAbility(DefenderAbility.getInstance());
     }
 
-    public DefenderPlantToken(final DefenderPlantToken token) {
+    private DefenderPlantToken(final DefenderPlantToken token) {
         super(token);
     }
 

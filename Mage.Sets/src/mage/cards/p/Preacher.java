@@ -55,12 +55,12 @@ public final class Preacher extends CardImpl {
 
 class PreacherEffect extends OneShotEffect {
 
-    public PreacherEffect() {
+    PreacherEffect() {
         super(Outcome.GainControl);
         this.staticText = "Gain control of target creature of an opponent's choice that they control for as long as {this} remains tapped";
     }
 
-    public PreacherEffect(final PreacherEffect effect) {
+    private PreacherEffect(final PreacherEffect effect) {
         super(effect);
     }
 

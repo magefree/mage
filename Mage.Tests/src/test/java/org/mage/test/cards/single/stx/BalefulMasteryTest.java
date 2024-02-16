@@ -27,7 +27,6 @@ public class BalefulMasteryTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerA, 0);
         assertHandCount(playerB, 0);
@@ -52,7 +51,6 @@ public class BalefulMasteryTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerA, 0);
         assertHandCount(playerB, 1); // +1 from cost's draw
@@ -82,7 +80,6 @@ public class BalefulMasteryTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerA, 0);
         assertHandCount(playerB, 1);
@@ -134,7 +131,6 @@ public class BalefulMasteryTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -177,6 +173,5 @@ public class BalefulMasteryTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 }

@@ -28,7 +28,7 @@ public final class DaxossTorment extends CardImpl {
                         .withSubType(SubType.DEMON)
                         .withAbility(FlyingAbility.getInstance())
                         .withAbility(HasteAbility.getInstance()),
-                "previous types", Duration.EndOfTurn)));
+                CardType.ENCHANTMENT, Duration.EndOfTurn)));
     }
 
     private DaxossTorment(final DaxossTorment card) {

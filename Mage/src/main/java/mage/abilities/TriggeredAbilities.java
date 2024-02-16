@@ -1,5 +1,3 @@
-
-
 package mage.abilities;
 
 import mage.MageObject;
@@ -9,6 +7,7 @@ import mage.game.events.GameEvent;
 import mage.game.events.NumberOfTriggersEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
+import mage.util.CardUtil;
 import org.apache.log4j.Logger;
 
 import java.util.*;
@@ -30,7 +29,7 @@ public class TriggeredAbilities extends ConcurrentHashMap<String, TriggeredAbili
     public TriggeredAbilities() {
     }
 
-    public TriggeredAbilities(final TriggeredAbilities abilities) {
+    protected TriggeredAbilities(final TriggeredAbilities abilities) {
         for (Map.Entry<String, TriggeredAbility> entry : abilities.entrySet()) {
             this.put(entry.getKey(), entry.getValue().copy());
         }
@@ -64,10 +63,13 @@ public class TriggeredAbilities extends ConcurrentHashMap<String, TriggeredAbili
             if (event == null || !game.getContinuousEffects().preventedByRuleModification(event, ability, game, false)) {
                 if (object != null) {
                     boolean controllerSet = false;
-                    if (ability.getZone() != Zone.COMMAND && event != null
-                            && event.getTargetId() != null
+                    Set<UUID> eventTargets = CardUtil.getEventTargets(event);
+                    if (ability.getZone() != Zone.COMMAND
+                            && event != null
+                            && !eventTargets.isEmpty()
                             && ability.isLeavesTheBattlefieldTrigger()
-                            && game.getLKI().get(Zone.BATTLEFIELD) != null && game.getLKI().get(Zone.BATTLEFIELD).containsKey(ability.getSourceId())) {
+                            && game.getLKI().get(Zone.BATTLEFIELD) != null
+                            && game.getLKI().get(Zone.BATTLEFIELD).containsKey(ability.getSourceId())) {
                         // need to check if object was face down for dies and destroy events because the ability triggers in the new zone, zone counter -1 is used
                         Permanent permanent = (Permanent) game.getLastKnownInformation(ability.getSourceId(), Zone.BATTLEFIELD, ability.getSourceObjectZoneChangeCounter() - 1);
                         if (permanent != null) {
@@ -91,10 +93,12 @@ public class TriggeredAbilities extends ConcurrentHashMap<String, TriggeredAbili
                     }
                 }
 
-                if (ability.checkTrigger(event, game) && ability.checkTriggeredAlready(game)) {
+                if (ability.checkTrigger(event, game) && ability.checkTriggeredAlready(game) && !ability.checkUsedAlready(game)) {
                     NumberOfTriggersEvent numberOfTriggersEvent = new NumberOfTriggersEvent(ability, event);
-                    if (!game.replaceEvent(numberOfTriggersEvent)) {
-                        for (int i = 0; i < numberOfTriggersEvent.getAmount(); i++) {
+                    // event == null - state based triggers like StateTriggeredAbility, must be ignored for number event
+                    if (event == null || !game.replaceEvent(numberOfTriggersEvent, ability)) {
+                        int numTriggers = ability.getTriggersOnceEachTurn() ? 1 : numberOfTriggersEvent.getAmount();
+                        for (int i = 0; i < numTriggers; i++) {
                             ability.trigger(game, ability.getControllerId(), event);
                         }
                     }

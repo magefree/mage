@@ -49,7 +49,7 @@ class RoarOfTheCrowdEffect extends OneShotEffect {
         this.staticText = "Choose a creature type. {this} deals damage to any target equal to the number of permanents you control of the chosen type.";
     }
 
-    RoarOfTheCrowdEffect(final RoarOfTheCrowdEffect effect) {
+    private RoarOfTheCrowdEffect(final RoarOfTheCrowdEffect effect) {
         super(effect);
     }
 
@@ -62,7 +62,7 @@ class RoarOfTheCrowdEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            Choice typeChoice = new ChoiceCreatureType(game.getObject(source.getSourceId()));
+            Choice typeChoice = new ChoiceCreatureType(game.getObject(source));
             if (!player.choose(Outcome.LoseLife, typeChoice, game)) {
                 return false;
             }

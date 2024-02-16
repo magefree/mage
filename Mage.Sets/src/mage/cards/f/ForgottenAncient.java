@@ -70,7 +70,7 @@ public final class ForgottenAncient extends CardImpl {
             this.staticText = "you may move any number of +1/+1 counters from {this} onto other creatures.";
         }
 
-        public ForgottenAncientEffect(final ForgottenAncientEffect effect) {
+        private ForgottenAncientEffect(final ForgottenAncientEffect effect) {
             super(effect);
         }
 
@@ -97,11 +97,11 @@ public final class ForgottenAncient extends CardImpl {
 
             do {
                 Target target = new TargetCreaturePermanent(1, 1, filter, true);
-                if (!target.canChoose(source.getSourceId(), controller.getId(), game)) {
+                if (!target.canChoose(controller.getId(), source, game)) {
                     break;
                 }
 
-                if (!target.choose(Outcome.BoostCreature, source.getControllerId(), source.getSourceId(), game)) {
+                if (!target.choose(Outcome.BoostCreature, source.getControllerId(), source.getSourceId(), source, game)) {
                     break;
                 }
 

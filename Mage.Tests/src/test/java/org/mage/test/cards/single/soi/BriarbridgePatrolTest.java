@@ -34,7 +34,7 @@ public class BriarbridgePatrolTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
-        assertPermanentCount(playerA, "Clue", 1);
+        assertPermanentCount(playerA, "Clue Token", 1);
         assertPermanentCount(playerA, "Briarbridge Patrol", 1);
         assertPermanentCount(playerB, "Elite Vanguard", 0);
         assertGraveyardCount(playerB, "Elite Vanguard", 1);
@@ -55,11 +55,11 @@ public class BriarbridgePatrolTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Rabid Bite", "Briarbridge Patrol");
-        addTarget(playerA, "Wall of Roots");
+        // Wall of Roots is auto-chosen since only target
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
-        assertPermanentCount(playerA, "Clue", 1);
+        assertPermanentCount(playerA, "Clue Token", 1);
         assertPermanentCount(playerA, "Briarbridge Patrol", 1);
         assertPermanentCount(playerB, "Wall of Roots", 1);
 

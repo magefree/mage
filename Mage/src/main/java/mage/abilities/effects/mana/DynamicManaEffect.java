@@ -12,6 +12,7 @@ import mage.players.Player;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+
 import mage.constants.ManaType;
 
 /**
@@ -55,7 +56,7 @@ public class DynamicManaEffect extends ManaEffect {
         this.netAmount = netAmount;
     }
 
-    public DynamicManaEffect(final DynamicManaEffect effect) {
+    protected DynamicManaEffect(final DynamicManaEffect effect) {
         super(effect);
         this.baseMana = effect.baseMana.copy();
         this.amount = effect.amount.copy();

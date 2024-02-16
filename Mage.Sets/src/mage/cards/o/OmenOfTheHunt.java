@@ -33,7 +33,7 @@ public final class OmenOfTheHunt extends CardImpl {
         ), true));
 
         // {2}{G}, Sacrifice Omen of the Hunt: Scry 2.
-        Ability ability = new SimpleActivatedAbility(new ScryEffect(2), new ManaCostsImpl("{2}{G}"));
+        Ability ability = new SimpleActivatedAbility(new ScryEffect(2), new ManaCostsImpl<>("{2}{G}"));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }

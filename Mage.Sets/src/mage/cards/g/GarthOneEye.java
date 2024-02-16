@@ -31,7 +31,7 @@ public final class GarthOneEye extends CardImpl {
     public GarthOneEye(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{U}{B}{R}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(5);
@@ -96,7 +96,7 @@ class GarthOneEyeEffect extends OneShotEffect {
             return false;
         }
         Set<String> alreadyChosen = getAlreadyChosen(game, source);
-        Set<String> choices = new HashSet<>(names);
+        Set<String> choices = new LinkedHashSet<>(names);
         choices.removeAll(alreadyChosen);
         String chosen;
         switch (choices.size()) {

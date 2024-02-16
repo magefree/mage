@@ -28,7 +28,7 @@ public final class PheresBandRaiders extends CardImpl {
         this.toughness = new MageInt(5);
 
         // <i>Inspired</i> &mdash; Whenever Pheres-Band Raiders becomes untapped, you may pay {2}{G}. If you do, create a 3/3 green Centaur enchantment creature token.
-        this.addAbility(new InspiredAbility(new DoIfCostPaid(new CreateTokenEffect(new CentaurEnchantmentCreatureToken()), new ManaCostsImpl("{2}{G}"))));
+        this.addAbility(new InspiredAbility(new DoIfCostPaid(new CreateTokenEffect(new CentaurEnchantmentCreatureToken()), new ManaCostsImpl<>("{2}{G}"))));
 
     }
 

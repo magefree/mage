@@ -40,7 +40,7 @@ public final class DauthiCutthroat extends CardImpl {
         // Shadow
         this.addAbility(ShadowAbility.getInstance());
         // {1}{B}, {tap}: Destroy target creature with shadow.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{1}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl<>("{1}{B}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);

@@ -59,7 +59,7 @@ class RallyTheAncestorsEffect extends OneShotEffect {
         this.staticText = "Return each creature card with mana value X or less from your graveyard to the battlefield. Exile those creatures at the beginning of your next upkeep";
     }
 
-    RallyTheAncestorsEffect(final RallyTheAncestorsEffect effect) {
+    private RallyTheAncestorsEffect(final RallyTheAncestorsEffect effect) {
         super(effect);
     }
 

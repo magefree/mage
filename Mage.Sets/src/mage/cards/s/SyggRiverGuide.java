@@ -29,7 +29,7 @@ public final class SyggRiverGuide extends CardImpl {
 
     public SyggRiverGuide(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{U}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.MERFOLK);
         this.subtype.add(SubType.WIZARD);
 
@@ -39,7 +39,7 @@ public final class SyggRiverGuide extends CardImpl {
         // Islandwalk
         this.addAbility(new IslandwalkAbility());
         // {1}{W}: Target Merfolk you control gains protection from the color of your choice until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainProtectionFromColorTargetEffect(Duration.EndOfTurn), new ManaCostsImpl("{1}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainProtectionFromColorTargetEffect(Duration.EndOfTurn), new ManaCostsImpl<>("{1}{W}"));
         Target target = new TargetControlledCreaturePermanent(1,1,filter, false);
         ability.addTarget(target);
         this.addAbility(ability);

@@ -25,7 +25,7 @@ public final class IllusionOfChoice extends CardImpl {
         this.getSpellAbility().addEffect(new IllusionOfChoiceReplacementEffect());
 
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
     private IllusionOfChoice(final IllusionOfChoice card) {

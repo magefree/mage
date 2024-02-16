@@ -2,9 +2,7 @@ package mage.cards.s;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.GainLifeEffect;
@@ -45,7 +43,7 @@ public final class ShadowgrangeArchfiend extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ShadowgrangeArchfiendEffect()));
 
         // Madness—{2}{B}, Pay 8 life.
-        MadnessAbility madnessAbility = new MadnessAbility(this, new ManaCostsImpl<>("{2}{B}"), 8);
+        MadnessAbility madnessAbility = new MadnessAbility(new ManaCostsImpl<>("{2}{B}"), 8);
         this.addAbility(madnessAbility);
     }
 
@@ -57,7 +55,7 @@ public final class ShadowgrangeArchfiend extends CardImpl {
 
 class ShadowgrangeArchfiendEffect extends OneShotEffect {
 
-    public ShadowgrangeArchfiendEffect() {
+    ShadowgrangeArchfiendEffect() {
         super(Outcome.Benefit);
         this.staticText = "each opponent sacrifices a creature with the greatest power among creatures they control. " +
                 "You gain life equal to the greatest power among creatures sacrificed this way";
@@ -71,7 +69,9 @@ class ShadowgrangeArchfiendEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {return false; }
+        if (controller == null) {
+            return false;
+        }
 
         List<Permanent> toSacrifice = new ArrayList<>();
 
@@ -103,7 +103,7 @@ class ShadowgrangeArchfiendEffect extends OneShotEffect {
                         "creature to sacrifice with power equal to " + greatestPower);
                 filter.add(new PowerPredicate(ComparisonType.EQUAL_TO, greatestPower));
                 Target target = new TargetControlledCreaturePermanent(filter);
-                if (opponent.choose(outcome, target, playerId, game)) {
+                if (opponent.choose(outcome, target, source, game)) {
                     creatureToSacrifice = game.getPermanent(target.getFirstTarget());
                 }
             }

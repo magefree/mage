@@ -37,8 +37,7 @@ public final class ShrivelingRot extends CardImpl {
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new ShrivelingRotDestroyTriggeredAbility()));
 
         // Until end of turn, whenever a creature dies, that creature's controller loses life equal to its toughness.
-        Mode mode = new Mode();
-        mode.addEffect(new CreateDelayedTriggeredAbilityEffect(new ShrivelingRotLoseLifeTriggeredAbility()));
+        Mode mode = new Mode(new CreateDelayedTriggeredAbilityEffect(new ShrivelingRotLoseLifeTriggeredAbility()));
         this.getSpellAbility().getModes().addMode(mode);
 
         // Entwine {2}{B}
@@ -61,7 +60,7 @@ class ShrivelingRotDestroyTriggeredAbility extends DelayedTriggeredAbility {
         super(new DestroyTargetEffect(), Duration.EndOfTurn, false);
     }
 
-    ShrivelingRotDestroyTriggeredAbility(final ShrivelingRotDestroyTriggeredAbility ability) {
+    private ShrivelingRotDestroyTriggeredAbility(final ShrivelingRotDestroyTriggeredAbility ability) {
         super(ability);
     }
 
@@ -97,7 +96,7 @@ class ShrivelingRotLoseLifeTriggeredAbility extends DelayedTriggeredAbility {
         super(new ShrivelingRotEffect(), Duration.EndOfTurn, false);
     }
 
-    ShrivelingRotLoseLifeTriggeredAbility(final ShrivelingRotLoseLifeTriggeredAbility ability) {
+    private ShrivelingRotLoseLifeTriggeredAbility(final ShrivelingRotLoseLifeTriggeredAbility ability) {
         super(ability);
     }
 
@@ -132,12 +131,12 @@ class ShrivelingRotLoseLifeTriggeredAbility extends DelayedTriggeredAbility {
 
 class ShrivelingRotEffect extends OneShotEffect {
 
-    public ShrivelingRotEffect() {
+    ShrivelingRotEffect() {
         super(Outcome.LoseLife);
         staticText = "that creature's controller loses life equal to its toughness";
     }
 
-    public ShrivelingRotEffect(final ShrivelingRotEffect effect) {
+    private ShrivelingRotEffect(final ShrivelingRotEffect effect) {
         super(effect);
     }
 

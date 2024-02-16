@@ -35,8 +35,7 @@ public final class FeastOrFamine extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new ZombieToken()));
         
         // or destroy target nonartifact, nonblack creature and it can't be regenerated.
-        Mode mode = new Mode();
-        mode.addEffect(new DestroyTargetEffect(true));
+        Mode mode = new Mode(new DestroyTargetEffect(true));
         mode.addTarget(new TargetCreaturePermanent(filter));
         this.getSpellAbility().addMode(mode);
     }

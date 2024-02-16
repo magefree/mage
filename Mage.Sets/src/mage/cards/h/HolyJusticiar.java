@@ -33,7 +33,7 @@ public final class HolyJusticiar extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {2}{W}, {tap}: Tap target creature. If that creature is a Zombie, exile it.
-        Ability ability = new SimpleActivatedAbility(new HolyJusticiarEffect(), new ManaCostsImpl("{2}{W}"));
+        Ability ability = new SimpleActivatedAbility(new HolyJusticiarEffect(), new ManaCostsImpl<>("{2}{W}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

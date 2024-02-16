@@ -46,12 +46,12 @@ public final class BlackMarket extends CardImpl {
 
 class BlackMarketEffect extends OneShotEffect {
 
-    public BlackMarketEffect() {
+    BlackMarketEffect() {
         super(Outcome.PutManaInPool);
         this.staticText = "add {B} for each charge counter on Black Market";
     }
 
-    public BlackMarketEffect(final BlackMarketEffect effect) {
+    private BlackMarketEffect(final BlackMarketEffect effect) {
         super(effect);
     }
 

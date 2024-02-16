@@ -2,6 +2,7 @@
 package mage.abilities.effects.common;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
@@ -10,7 +11,6 @@ import mage.game.Game;
 import mage.players.Player;
 
 /**
- *
  * @author LevelX2
  */
 public class ShuffleIntoLibraryGraveOfSourceOwnerEffect extends OneShotEffect {
@@ -20,7 +20,7 @@ public class ShuffleIntoLibraryGraveOfSourceOwnerEffect extends OneShotEffect {
         staticText = "its owner shuffles their graveyard into their library";
     }
 
-    public ShuffleIntoLibraryGraveOfSourceOwnerEffect(final ShuffleIntoLibraryGraveOfSourceOwnerEffect effect) {
+    protected ShuffleIntoLibraryGraveOfSourceOwnerEffect(final ShuffleIntoLibraryGraveOfSourceOwnerEffect effect) {
         super(effect);
     }
 

@@ -30,7 +30,7 @@ public final class GhostShip extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // {U}{U}{U}: Regenerate Ghost Ship.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{U}{U}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{U}{U}{U}"));
         this.addAbility(ability);
     }
 

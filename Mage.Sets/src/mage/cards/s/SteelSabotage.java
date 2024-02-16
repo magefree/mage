@@ -23,8 +23,7 @@ public final class SteelSabotage extends CardImpl {
         // Choose one - Counter target artifact spell; or return target artifact to its owner's hand.
         this.getSpellAbility().addEffect(new CounterTargetEffect());
         this.getSpellAbility().addTarget(new TargetSpell(new FilterArtifactSpell()));
-        Mode mode = new Mode();
-        mode.addEffect(new ReturnToHandTargetEffect());
+        Mode mode = new Mode(new ReturnToHandTargetEffect());
         mode.addTarget(new TargetArtifactPermanent());
         this.getSpellAbility().addMode(mode);
     }

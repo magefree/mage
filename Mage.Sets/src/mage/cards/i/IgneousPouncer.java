@@ -30,9 +30,9 @@ public final class IgneousPouncer extends CardImpl {
         // Haste
         this.addAbility(HasteAbility.getInstance());
         // Swampcycling {2}
-        this.addAbility(new SwampcyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new SwampcyclingAbility(new ManaCostsImpl<>("{2}")));
         // Mountaincycling {2}
-        this.addAbility(new MountaincyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new MountaincyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
     private IgneousPouncer(final IgneousPouncer card) {

@@ -33,7 +33,7 @@ public final class BladewingTheRisen extends CardImpl {
 
     public BladewingTheRisen(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}{R}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ZOMBIE, SubType.DRAGON);
 
         this.power = new MageInt(4);
@@ -47,7 +47,7 @@ public final class BladewingTheRisen extends CardImpl {
         ability.addTarget(target);
          this.addAbility(ability);
         // {B}{R}: Dragon creatures get +1/+1 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostAllEffect(1,1, Duration.EndOfTurn, filter, false), new ManaCostsImpl("{B}{R}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostAllEffect(1,1, Duration.EndOfTurn, filter, false), new ManaCostsImpl<>("{B}{R}")));
     }
 
     private BladewingTheRisen(final BladewingTheRisen card) {

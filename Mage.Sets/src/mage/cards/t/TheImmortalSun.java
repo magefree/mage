@@ -28,7 +28,7 @@ public final class TheImmortalSun extends CardImpl {
     public TheImmortalSun(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{6}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // Players can't activate planeswalkers' loyalty abilities.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TheImmortalSunCantActivateEffect()));
@@ -56,12 +56,12 @@ public final class TheImmortalSun extends CardImpl {
 
 class TheImmortalSunCantActivateEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public TheImmortalSunCantActivateEffect() {
+    TheImmortalSunCantActivateEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "Players can't activate planeswalkers' loyalty abilities";
     }
 
-    public TheImmortalSunCantActivateEffect(final TheImmortalSunCantActivateEffect effect) {
+    private TheImmortalSunCantActivateEffect(final TheImmortalSunCantActivateEffect effect) {
         super(effect);
     }
 
@@ -71,13 +71,8 @@ class TheImmortalSunCantActivateEffect extends ContinuousRuleModifyingEffectImpl
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (mageObject != null) {
             return "You can't activate loyalty abilities of planeswalkers (" + mageObject.getIdName() + ").";
         }
@@ -85,16 +80,19 @@ class TheImmortalSunCantActivateEffect extends ContinuousRuleModifyingEffectImpl
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ACTIVATE_ABILITY;
+    }
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.ACTIVATE_ABILITY) {
-            Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
-            if (permanent == null) {
-                return false;
-            }
-            if (permanent.isPlaneswalker(game)) {
-                Optional<Ability> ability = game.getAbility(event.getTargetId(), event.getSourceId());
-                return ability.isPresent() && (ability.get() instanceof LoyaltyAbility);
-            }
+        Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
+        if (permanent == null) {
+            return false;
+        }
+        if (permanent.isPlaneswalker(game)) {
+            Optional<Ability> ability = game.getAbility(event.getTargetId(), event.getSourceId());
+            return ability.isPresent() && (ability.get() instanceof LoyaltyAbility);
         }
         return false;
     }

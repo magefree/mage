@@ -9,7 +9,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.game.Game;
-import mage.game.permanent.token.TemptWithVengeanceElementalToken;
+import mage.game.permanent.token.Elemental11HasteToken;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
 
@@ -38,12 +38,12 @@ public final class TemptWithVengeance extends CardImpl {
 
 class TemptWithVengeanceEffect extends OneShotEffect {
 
-    public TemptWithVengeanceEffect() {
+    TemptWithVengeanceEffect() {
         super(Outcome.PutLandInPlay);
-        this.staticText = "<i>Tempting offer</i> &mdash; create X 1/1 red Elemental creature tokens with haste. Each opponent may create X 1/1 red Elemental creature tokens with haste. For each opponent who does, create X 1/1 red Elemental creature tokens with haste";
+        this.staticText = "<i>Tempting offer</i> &mdash; Create X 1/1 red Elemental creature tokens with haste. Each opponent may create X 1/1 red Elemental creature tokens with haste. For each opponent who does, create X 1/1 red Elemental creature tokens with haste";
     }
 
-    public TemptWithVengeanceEffect(final TemptWithVengeanceEffect effect) {
+    private TemptWithVengeanceEffect(final TemptWithVengeanceEffect effect) {
         super(effect);
     }
 
@@ -58,7 +58,7 @@ class TemptWithVengeanceEffect extends OneShotEffect {
         int xValue = source.getManaCostsToPay().getX();
         if (controller != null && xValue > 0) {
 
-            Token tokenCopy = new TemptWithVengeanceElementalToken();
+            Token tokenCopy = new Elemental11HasteToken();
             tokenCopy.putOntoBattlefield(xValue, game, source, source.getControllerId(), false, false);
 
             int opponentsAddedTokens = 0;

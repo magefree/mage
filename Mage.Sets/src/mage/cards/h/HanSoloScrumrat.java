@@ -13,8 +13,7 @@ import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.counters.CounterType;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -26,16 +25,10 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public final class HanSoloScrumrat extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another target creature you control");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
-
     public HanSoloScrumrat(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
         
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ROGUE);
         this.power = new MageInt(2);
@@ -45,11 +38,11 @@ public final class HanSoloScrumrat extends CardImpl {
         this.addAbility(new PartnerWithAbility("Chewbacca, the Beast"));
 
         // R: Han Solo, Scrumrat gains first strike until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{R}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{R}")));
 
         // Whenever Han Solo, Scrumrat deals damage during your turn, put a +1/+1 counter on another target creature you control.
         Ability ability = new HanSoloScrumratTriggeredAbility();
-        ability.addTarget(new TargetControlledCreaturePermanent(filter));
+        ability.addTarget(new TargetControlledCreaturePermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE_YOU_CONTROL));
         this.addAbility(ability);
     }
 
@@ -67,9 +60,10 @@ class HanSoloScrumratTriggeredAbility extends TriggeredAbilityImpl {
 
     public HanSoloScrumratTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P1.createInstance()), false);
+        setTriggerPhrase("Whenever {this} creature deals damage during your turn, ");
     }
 
-    public HanSoloScrumratTriggeredAbility(final HanSoloScrumratTriggeredAbility ability) {
+    private HanSoloScrumratTriggeredAbility(final HanSoloScrumratTriggeredAbility ability) {
         super(ability);
     }
 
@@ -90,10 +84,5 @@ class HanSoloScrumratTriggeredAbility extends TriggeredAbilityImpl {
         return source != null
                 && game.isActivePlayer(source.getControllerId())
                 && event.getSourceId().equals(this.getSourceId());
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} creature deals damage during your turn, " ;
     }
 }

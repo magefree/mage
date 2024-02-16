@@ -69,7 +69,7 @@ class PactOfTheSerpentEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        int permCount = game.getBattlefield().count(filter, source.getSourceId(), player.getId(), game);
+        int permCount = game.getBattlefield().count(filter, player.getId(), source, game);
         if (permCount > 0) {
             player.drawCards(permCount, source, game);
             player.loseLife(permCount, game, source, false);

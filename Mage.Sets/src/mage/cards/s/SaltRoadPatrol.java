@@ -25,7 +25,7 @@ public final class SaltRoadPatrol extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Outlast {1}{W}
-        this.addAbility(new OutlastAbility(new ManaCostsImpl("{1}{W}")));
+        this.addAbility(new OutlastAbility(new ManaCostsImpl<>("{1}{W}")));
     }
 
     private SaltRoadPatrol(final SaltRoadPatrol card) {

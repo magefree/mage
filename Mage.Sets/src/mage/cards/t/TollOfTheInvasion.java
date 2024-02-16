@@ -5,6 +5,7 @@ import mage.abilities.effects.keyword.AmassEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetOpponent;
 
@@ -23,7 +24,7 @@ public final class TollOfTheInvasion extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
 
         // Amass 1.
-        this.getSpellAbility().addEffect(new AmassEffect(1).concatBy("<br>"));
+        this.getSpellAbility().addEffect(new AmassEffect(1, SubType.ZOMBIE).concatBy("<br>"));
     }
 
     private TollOfTheInvasion(final TollOfTheInvasion card) {

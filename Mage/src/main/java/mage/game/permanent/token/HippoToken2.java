@@ -12,14 +12,15 @@ import mage.constants.SubType;
 public final class HippoToken2 extends TokenImpl {
 
     public HippoToken2() {
-        super("Hippo", "3/3 green Hippo creature token");
+        super("Hippo Token", "3/3 green Hippo creature token");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add(SubType.HIPPO);
         power = new MageInt(3);
         toughness = new MageInt(3);
     }
-    public HippoToken2(final HippoToken2 token) {
+
+    protected HippoToken2(final HippoToken2 token) {
         super(token);
     }
 

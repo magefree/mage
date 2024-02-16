@@ -7,21 +7,17 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
@@ -63,7 +59,7 @@ public final class PrimalPlasma extends CardImpl {
             staticText = "As {this} enters the battlefield, it becomes your choice of a 3/3 creature, a 2/2 creature with flying, or a 1/6 creature with defender";
         }
 
-        public PrimalPlasmaReplacementEffect(PrimalPlasmaReplacementEffect effect) {
+        private PrimalPlasmaReplacementEffect(final PrimalPlasmaReplacementEffect effect) {
             super(effect);
         }
 
@@ -76,15 +72,8 @@ public final class PrimalPlasma extends CardImpl {
         public boolean applies(GameEvent event, Ability source, Game game) {
             if (event.getTargetId().equals(source.getSourceId())) {
                 Permanent sourcePermanent = ((EntersTheBattlefieldEvent) event).getTarget();
-                if (sourcePermanent != null && !sourcePermanent.isFaceDown(game)) {
-                    return true;
-                }
+                return sourcePermanent != null && !sourcePermanent.isFaceDown(game);
             }
-            return false;
-        }
-
-        @Override
-        public boolean apply(Game game, Ability source) {
             return false;
         }
 
@@ -119,8 +108,7 @@ public final class PrimalPlasma extends CardImpl {
                         game.addEffect(new GainAbilitySourceEffect(DefenderAbility.getInstance(), Duration.Custom), source);
                         break;
                 }
-                permanent.getPower().modifyBaseValue(power);
-                permanent.getToughness().modifyBaseValue(toughness);
+                game.addEffect(new SetBasePowerToughnessSourceEffect(power, toughness, Duration.WhileOnBattlefield), source);
             }
             return false;
 

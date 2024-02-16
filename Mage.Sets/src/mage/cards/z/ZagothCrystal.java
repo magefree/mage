@@ -25,7 +25,7 @@ public final class ZagothCrystal extends CardImpl {
         this.addAbility(new BlueManaAbility());
 
         // Cycling {2}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
     private ZagothCrystal(final ZagothCrystal card) {

@@ -36,6 +36,7 @@ public final class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Ballista Squad", 5, Rarity.UNCOMMON, mage.cards.b.BallistaSquad.class));
         cards.add(new SetCardInfo("Balloon Peddler", 59, Rarity.COMMON, mage.cards.b.BalloonPeddler.class));
         cards.add(new SetCardInfo("Barbed Wire", 287, Rarity.UNCOMMON, mage.cards.b.BarbedWire.class));
+        cards.add(new SetCardInfo("Bargaining Table", 288, Rarity.RARE, mage.cards.b.BargainingTable.class));
         cards.add(new SetCardInfo("Battle Rampart", 173, Rarity.COMMON, mage.cards.b.BattleRampart.class));
         cards.add(new SetCardInfo("Battle Squadron", 174, Rarity.RARE, mage.cards.b.BattleSquadron.class));
         cards.add(new SetCardInfo("Bifurcate", 230, Rarity.RARE, mage.cards.b.Bifurcate.class));
@@ -121,6 +122,7 @@ public final class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Embargo", 77, Rarity.RARE, mage.cards.e.Embargo.class));
         cards.add(new SetCardInfo("Energy Flux", 78, Rarity.UNCOMMON, mage.cards.e.EnergyFlux.class));
         cards.add(new SetCardInfo("Enslaved Horror", 134, Rarity.UNCOMMON, mage.cards.e.EnslavedHorror.class));
+        cards.add(new SetCardInfo("Erithizon", 244, Rarity.RARE, mage.cards.e.Erithizon.class));
         cards.add(new SetCardInfo("Extortion", 135, Rarity.RARE, mage.cards.e.Extortion.class));
         cards.add(new SetCardInfo("Extravagant Spirit", 79, Rarity.RARE, mage.cards.e.ExtravagantSpirit.class));
         cards.add(new SetCardInfo("Eye of Ramos", 294, Rarity.RARE, mage.cards.e.EyeOfRamos.class));
@@ -194,6 +196,7 @@ public final class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Larceny", 143, Rarity.UNCOMMON, mage.cards.l.Larceny.class));
         cards.add(new SetCardInfo("Last Breath", 27, Rarity.UNCOMMON, mage.cards.l.LastBreath.class));
         cards.add(new SetCardInfo("Lava Runner", 200, Rarity.RARE, mage.cards.l.LavaRunner.class));
+        cards.add(new SetCardInfo("Ley Line", 256, Rarity.UNCOMMON, mage.cards.l.LeyLine.class));
         cards.add(new SetCardInfo("Liability", 144, Rarity.RARE, mage.cards.l.Liability.class));
         cards.add(new SetCardInfo("Lightning Hounds", 201, Rarity.COMMON, mage.cards.l.LightningHounds.class));
         cards.add(new SetCardInfo("Lithophage", 202, Rarity.RARE, mage.cards.l.Lithophage.class));

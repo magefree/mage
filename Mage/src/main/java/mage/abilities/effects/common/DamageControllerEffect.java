@@ -1,5 +1,3 @@
-
-
 package mage.abilities.effects.common;
 
 import mage.constants.Outcome;
@@ -12,7 +10,6 @@ import mage.game.Game;
 import mage.players.Player;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class DamageControllerEffect extends OneShotEffect {
@@ -21,42 +18,38 @@ public class DamageControllerEffect extends OneShotEffect {
     protected boolean preventable;
     private String sourceName = "{this}";
 
-    public DamageControllerEffect(int amount, String whoDealDamageName) {
-        this(amount, true, whoDealDamageName);
-    }
-
     public DamageControllerEffect(int amount) {
         this(amount, true);
     }
 
+    public DamageControllerEffect(int amount, boolean preventable) {
+        this(amount, preventable, "{this}");
+    }
+
+    public DamageControllerEffect(int amount, String whoDealDamageName) {
+        this(amount, true, whoDealDamageName);
+    }
+
     public DamageControllerEffect(int amount, boolean preventable, String whoDealDamageName) {
+        this(StaticValue.get(amount), preventable, whoDealDamageName);
+    }
+
+    public DamageControllerEffect(DynamicValue amount) {
+        this(amount, "{this}");
+    }
+
+    public DamageControllerEffect(DynamicValue amount, String whoDealDamageName) {
+        this(amount, true, whoDealDamageName);
+    }
+
+    public DamageControllerEffect(DynamicValue amount, boolean preventable, String whoDealDamageName) {
         super(Outcome.Damage);
-        this.amount = StaticValue.get(amount);
+        this.amount = amount;
         this.preventable = preventable;
         this.sourceName = whoDealDamageName;
     }
 
-    public DamageControllerEffect(int amount, boolean preventable) {
-        super(Outcome.Damage);
-        this.amount = StaticValue.get(amount);
-        this.preventable = preventable;
-    }
-
-    public DamageControllerEffect(DynamicValue amount) {
-        super(Outcome.Damage);
-        this.amount = amount;
-        this.preventable = true;
-    }
-        
-    public int getAmount() {
-        if (amount instanceof StaticValue) {
-            return amount.calculate(null, null, this);
-        } else {
-            return 0;
-        }
-    }
-
-    public DamageControllerEffect(final DamageControllerEffect effect) {
+    protected DamageControllerEffect(final DamageControllerEffect effect) {
         super(effect);
         this.amount = effect.amount;
         this.preventable = effect.preventable;
@@ -77,7 +70,7 @@ public class DamageControllerEffect extends OneShotEffect {
         }
         return false;
     }
-    
+
     @Override
     public String getText(Mode mode) {
         if (staticText != null && !staticText.isEmpty()) {
@@ -106,13 +99,5 @@ public class DamageControllerEffect extends OneShotEffect {
             sb.append(". The damage can't be prevented");
         }
         return sb.toString();
-    }
-
-    public String getSourceName() {
-        return sourceName;
-    }
-
-    public void setSourceName(String sourceName) {
-        this.sourceName = sourceName;
     }
 }

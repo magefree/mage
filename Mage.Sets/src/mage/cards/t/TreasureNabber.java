@@ -83,7 +83,7 @@ class TreasureNabberAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever an opponent taps an artifact for mana, gain control of that artifact until the end of your next turn";
+        return "Whenever an opponent taps an artifact for mana, gain control of that artifact until the end of your next turn.";
     }
 }
 

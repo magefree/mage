@@ -12,7 +12,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.filter.common.FilterArtifactCard;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.events.TargetEvent;
 import mage.game.stack.StackObject;
 import mage.players.Player;
@@ -50,7 +49,7 @@ class DrafnasRestorationTarget extends TargetCardInGraveyard {
         super(0, Integer.MAX_VALUE, new FilterArtifactCard("any number of artifact cards from that player's graveyard"));
     }
 
-    DrafnasRestorationTarget(final DrafnasRestorationTarget target) {
+    private DrafnasRestorationTarget(final DrafnasRestorationTarget target) {
         super(target);
     }
 
@@ -61,14 +60,14 @@ class DrafnasRestorationTarget extends TargetCardInGraveyard {
     }
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
         Set<UUID> possibleTargets = new HashSet<>();
-        MageObject object = game.getObject(sourceId);
+        MageObject object = game.getObject(source);
         if (object instanceof StackObject) {
             Player targetPlayer = game.getPlayer(((StackObject) object).getStackAbility().getFirstTarget());
             if (targetPlayer != null) {
-                for (Card card : targetPlayer.getGraveyard().getCards(filter, sourceId, sourceControllerId, game)) {
-                    if (sourceId == null || isNotTarget() || !game.replaceEvent(new TargetEvent(card, sourceId, sourceControllerId))) {
+                for (Card card : targetPlayer.getGraveyard().getCards(filter, sourceControllerId, source, game)) {
+                    if (source == null || source.getSourceId() == null || isNotTarget() || !game.replaceEvent(new TargetEvent(card, source.getSourceId(), sourceControllerId))) {
                         possibleTargets.add(card.getId());
                     }
                 }
@@ -90,7 +89,7 @@ class DrafnasRestorationEffect extends OneShotEffect {
         this.staticText = "Put any number of target artifact cards from target player's graveyard on top of their library in any order.";
     }
 
-    DrafnasRestorationEffect(final DrafnasRestorationEffect effect) {
+    private DrafnasRestorationEffect(final DrafnasRestorationEffect effect) {
         super(effect);
     }
 

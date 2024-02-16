@@ -31,7 +31,7 @@ public final class FesteringWound extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // At the beginning of your upkeep, you may put an infection counter on Festering Wound.
@@ -52,12 +52,12 @@ public final class FesteringWound extends CardImpl {
 
 class FesteringWoundEffect extends OneShotEffect {
 
-    public FesteringWoundEffect() {
+    FesteringWoundEffect() {
         super(Outcome.Detriment);
         this.staticText = "{this} deals X damage to that player, where X is the number of infection counters on {this}";
     }
 
-    public FesteringWoundEffect(final FesteringWoundEffect effect) {
+    private FesteringWoundEffect(final FesteringWoundEffect effect) {
         super(effect);
     }
 
@@ -68,7 +68,7 @@ class FesteringWoundEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        UUID sourceId = source.getSourceId();
+        UUID sourceId = source != null ? source.getSourceId() : null;
         int amount = game.getPermanent(sourceId).getCounters(game).getCount(CounterType.INFECTION);
         UUID id = this.getTargetPointer().getFirst(game, source);
         Player player = game.getPlayer(id);

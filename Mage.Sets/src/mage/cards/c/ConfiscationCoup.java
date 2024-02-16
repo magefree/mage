@@ -54,12 +54,12 @@ public final class ConfiscationCoup extends CardImpl {
 
 class ConfiscationCoupEffect extends OneShotEffect {
 
-    public ConfiscationCoupEffect() {
+    ConfiscationCoupEffect() {
         super(Outcome.GainControl);
         this.staticText = "Choose target artifact or creature. You get {E}{E}{E}{E}, then you may pay an amount of {E} equal to that permanent's mana value. If you do, gain control of it";
     }
 
-    public ConfiscationCoupEffect(final ConfiscationCoupEffect effect) {
+    private ConfiscationCoupEffect(final ConfiscationCoupEffect effect) {
         super(effect);
     }
 

@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -8,8 +7,8 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 
 /**
  *
@@ -25,7 +24,7 @@ public final class ShuDefender extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever Shu Defender blocks, it gets +0/+2 until end of turn.
-        this.addAbility(new BlocksSourceTriggeredAbility(new BoostSourceEffect(0, 2, Duration.EndOfTurn), false));
+        this.addAbility(new BlocksSourceTriggeredAbility(new BoostSourceEffect(0, 2, Duration.EndOfTurn, "it")));
     }
 
     private ShuDefender(final ShuDefender card) {

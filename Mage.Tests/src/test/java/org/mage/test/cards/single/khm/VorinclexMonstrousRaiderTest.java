@@ -33,7 +33,6 @@ public class VorinclexMonstrousRaiderTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertCounterCount(bear, CounterType.P1P1, 4);
     }
@@ -50,7 +49,6 @@ public class VorinclexMonstrousRaiderTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertCounterCount(bear, CounterType.P1P1, 4);
     }
@@ -66,7 +64,6 @@ public class VorinclexMonstrousRaiderTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertCounterCount(playerA, CounterType.POISON, 2);
         assertCounterCount(playerB, CounterType.POISON, 2);
@@ -83,7 +80,6 @@ public class VorinclexMonstrousRaiderTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertCounterCount(playerA, planeswalker, CounterType.LOYALTY, 4 * 2);
     }
@@ -100,7 +96,6 @@ public class VorinclexMonstrousRaiderTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertCounterCount(bear, CounterType.P1P1, 1);
     }
@@ -117,7 +112,6 @@ public class VorinclexMonstrousRaiderTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertCounterCount(bear, CounterType.P1P1, 1);
     }
@@ -133,7 +127,6 @@ public class VorinclexMonstrousRaiderTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertCounterCount(playerA, CounterType.POISON, 0);
         assertCounterCount(playerB, CounterType.POISON, 0);

@@ -30,7 +30,7 @@ public final class Wildsize extends CardImpl {
         effect.setText("and gains trample until end of turn");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
     private Wildsize(final Wildsize card) {

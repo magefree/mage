@@ -17,7 +17,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  */
 public final class Warmth extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("red spell");
+    private static final FilterSpell filter = new FilterSpell("a red spell");
     static {
         filter.add(new ColorPredicate(ObjectColor.RED));
     }

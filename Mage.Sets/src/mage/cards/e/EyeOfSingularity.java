@@ -15,7 +15,6 @@ import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -33,7 +32,7 @@ public final class EyeOfSingularity extends CardImpl {
     public EyeOfSingularity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
 
-        this.addSuperType(SuperType.WORLD);
+        this.supertype.add(SuperType.WORLD);
 
         // When Eye of Singularity enters the battlefield, destroy each permanent with the same name as another permanent, except for basic lands. They can't be regenerated.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new EyeOfSingularityETBEffect()));
@@ -65,7 +64,7 @@ class EyeOfSingularityETBEffect extends OneShotEffect {
         this.staticText = "destroy each permanent with the same name as another permanent, except for basic lands. They can't be regenerated";
     }
 
-    EyeOfSingularityETBEffect(final EyeOfSingularityETBEffect effect) {
+    private EyeOfSingularityETBEffect(final EyeOfSingularityETBEffect effect) {
         super(effect);
     }
 
@@ -79,7 +78,7 @@ class EyeOfSingularityETBEffect extends OneShotEffect {
         Map<String, UUID> cardNames = new HashMap<>();
         Map<UUID, Integer> toDestroy = new HashMap<>();
 
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
             String cardName = permanent.getName();
             if (cardNames.get(cardName) == null) {
                 cardNames.put(cardName, permanent.getId());
@@ -104,7 +103,7 @@ class EyeOfSingularityTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new EyeOfSingularityTriggeredEffect(), false);
     }
 
-    EyeOfSingularityTriggeredAbility(final EyeOfSingularityTriggeredAbility ability) {
+    private EyeOfSingularityTriggeredAbility(final EyeOfSingularityTriggeredAbility ability) {
         super(ability);
     }
 
@@ -127,7 +126,7 @@ class EyeOfSingularityTriggeredAbility extends TriggeredAbilityImpl {
             return false;
         }
 
-        if (permanent != null && !permanent.isBasic()) {
+        if (permanent != null && !permanent.isBasic(game)) {
             getEffects().get(0).setTargetPointer(new FixedTarget(event.getTargetId()));
             return true;
         }
@@ -152,7 +151,7 @@ class EyeOfSingularityTriggeredEffect extends OneShotEffect {
         super(Outcome.DestroyPermanent);
     }
 
-    EyeOfSingularityTriggeredEffect(final EyeOfSingularityTriggeredEffect effect) {
+    private EyeOfSingularityTriggeredEffect(final EyeOfSingularityTriggeredEffect effect) {
         super(effect);
     }
 
@@ -166,7 +165,7 @@ class EyeOfSingularityTriggeredEffect extends OneShotEffect {
         }
         String cn = etbPermanent.getName();
 
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
             String cardName = permanent.getName();
             if (cardName.equals(cn) && !Objects.equals(permanent.getId(), etbPermanent.getId())) {
                 toDestroy.put(permanent.getId(), 1);

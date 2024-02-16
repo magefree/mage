@@ -10,7 +10,6 @@ import mage.game.permanent.Permanent;
 
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  * @author North
  */
@@ -27,7 +26,7 @@ public class FilterCreatureForCombatBase extends FilterCreaturePermanent {
         this.add(new CanBlockPredicate());
     }
 
-    public FilterCreatureForCombatBase(final FilterCreatureForCombatBase filter) {
+    protected FilterCreatureForCombatBase(final FilterCreatureForCombatBase filter) {
         super(filter);
     }
 

@@ -142,6 +142,7 @@ public class SacredGroundTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Sacred Ground");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Molten Rain", "Caves of Koilos");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, 1);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Surgical Extraction", "Caves of Koilos");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);

@@ -49,12 +49,12 @@ public final class PetraSphinx extends CardImpl {
 
 class PetraSphinxEffect extends OneShotEffect {
 
-    public PetraSphinxEffect() {
+    PetraSphinxEffect() {
         super(Outcome.DrawCard);
         staticText = "Target player chooses a card name, then reveals the top card of their library. If that card has the chosen name, that player puts it into their hand. If it doesn't, the player puts it into their graveyard";
     }
 
-    public PetraSphinxEffect(final PetraSphinxEffect effect) {
+    private PetraSphinxEffect(final PetraSphinxEffect effect) {
         super(effect);
     }
 

@@ -17,7 +17,7 @@ public class MayTapOrUntapTargetEffect extends OneShotEffect {
         super(Outcome.AIDontUseIt);
     }
 
-    public MayTapOrUntapTargetEffect(final MayTapOrUntapTargetEffect effect) {
+    protected MayTapOrUntapTargetEffect(final MayTapOrUntapTargetEffect effect) {
         super(effect);
     }
 
@@ -45,13 +45,9 @@ public class MayTapOrUntapTargetEffect extends OneShotEffect {
 
     @Override
     public String getText(Mode mode) {
-        if (!staticText.isEmpty()) {
+        if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        if (mode.getTargets().isEmpty()) {
-            return "you may tap or untap it";
-        } else {
-            return "you may tap or untap target " + mode.getTargets().get(0).getTargetName();
-        }
+        return "you may tap or untap " + getTargetPointer().describeTargets(mode.getTargets(), "it");
     }
 }

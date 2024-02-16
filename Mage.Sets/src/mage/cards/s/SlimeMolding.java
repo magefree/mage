@@ -37,12 +37,12 @@ public final class SlimeMolding extends CardImpl {
 
 class SlimeMoldingEffect extends OneShotEffect {
 
-    public SlimeMoldingEffect() {
+    SlimeMoldingEffect() {
         super(Outcome.PutCreatureInPlay);
         staticText = "Create an X/X green Ooze creature token";
     }
 
-    public SlimeMoldingEffect(SlimeMoldingEffect ability) {
+    private SlimeMoldingEffect(final SlimeMoldingEffect ability) {
         super(ability);
     }
 
@@ -51,8 +51,8 @@ class SlimeMoldingEffect extends OneShotEffect {
         int count = source.getManaCostsToPay().getX();
 
         OozeToken oozeToken = new OozeToken();
-        oozeToken.getPower().modifyBaseValue(count);
-        oozeToken.getToughness().modifyBaseValue(count);
+        oozeToken.setPower(count);
+        oozeToken.setToughness(count);
         oozeToken.putOntoBattlefield(1, game, source, source.getControllerId());
         return true;
     }

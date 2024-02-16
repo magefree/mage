@@ -24,7 +24,8 @@ public final class Hesitation extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}");
 
         // When a player casts a spell, sacrifice Hesitation and counter that spell.
-        Ability ability = new SpellCastAllTriggeredAbility(new SacrificeSourceEffect(), StaticFilters.FILTER_SPELL_A, false, SetTargetPointer.SPELL);
+        Ability ability = new SpellCastAllTriggeredAbility(new SacrificeSourceEffect(), StaticFilters.FILTER_SPELL_A, false, SetTargetPointer.SPELL)
+                .setTriggerPhrase("When a player casts a spell, ");
         Effect effect = new CounterTargetEffect();
         effect.setText("and counter that spell");
         ability.addEffect(effect);

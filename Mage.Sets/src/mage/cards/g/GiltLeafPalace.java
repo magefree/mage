@@ -29,7 +29,7 @@ public final class GiltLeafPalace extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // As Gilt-Leaf Palace enters the battlefield, you may reveal an Elf card from your hand. If you don't, Gilt-Leaf Palace enters the battlefield tapped.
-       this.addAbility(new AsEntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new RevealTargetFromHandCost(new TargetCardInHand(filter))), "you may reveal a Elf card from your hand. If you don't, {this} enters the battlefield tapped"));
+       this.addAbility(new AsEntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new RevealTargetFromHandCost(new TargetCardInHand(filter))), "you may reveal an Elf card from your hand. If you don't, {this} enters the battlefield tapped"));
         // {tap}: Add {B} or {G}.
         this.addAbility(new BlackManaAbility());
         this.addAbility(new GreenManaAbility());

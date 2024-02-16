@@ -27,7 +27,7 @@ public final class MyrMindservant extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {2}, {tap}: Shuffle your library.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ShuffleLibrarySourceEffect(), new ManaCostsImpl("{2}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ShuffleLibrarySourceEffect(), new ManaCostsImpl<>("{2}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

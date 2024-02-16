@@ -1,18 +1,16 @@
-
-
 package mage.game.permanent.token;
+
+import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.MageInt;
 
 /**
- *
  * @author spjspj
  */
 public final class MasterOfWavesElementalToken extends TokenImpl {
 
     public MasterOfWavesElementalToken() {
-        super("Elemental", "1/0 blue Elemental creature");
+        super("Elemental Token", "1/0 blue Elemental creature");
         this.cardType.add(CardType.CREATURE);
         this.subtype.add(SubType.ELEMENTAL);
 
@@ -22,7 +20,7 @@ public final class MasterOfWavesElementalToken extends TokenImpl {
         this.toughness = new MageInt(0);
     }
 
-    public MasterOfWavesElementalToken(final MasterOfWavesElementalToken token) {
+    private MasterOfWavesElementalToken(final MasterOfWavesElementalToken token) {
         super(token);
     }
 

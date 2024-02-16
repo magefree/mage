@@ -38,16 +38,19 @@ public final class BestialFury extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability enchantAbility = new EnchantAbility(auraTarget.getTargetName());
+        Ability enchantAbility = new EnchantAbility(auraTarget);
         this.addAbility(enchantAbility);
         
         // When Bestial Fury enters the battlefield, draw a card at the beginning of the next turn's upkeep.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateDelayedTriggeredAbilityEffect(
-                new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1), Duration.OneUse)), false));
+                new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1), Duration.OneUse))
+                .setText("draw a card at the beginning of the next turn's upkeep"), false));
         
         // Whenever enchanted creature becomes blocked, it gets +4/+0 and gains trample until end of turn.
-        Ability pumpAbility = new BecomesBlockedAttachedTriggeredAbility(new BoostEnchantedEffect(4, 0, Duration.EndOfTurn), false);
-        pumpAbility.addEffect(new GainAbilityAttachedEffect(TrampleAbility.getInstance(), AttachmentType.AURA, Duration.EndOfTurn));
+        Ability pumpAbility = new BecomesBlockedAttachedTriggeredAbility(new BoostEnchantedEffect(4, 0, Duration.EndOfTurn)
+                .setText("it gets +4/+0"), false);
+        pumpAbility.addEffect(new GainAbilityAttachedEffect(TrampleAbility.getInstance(), AttachmentType.AURA, Duration.EndOfTurn)
+                .setText("and gains trample until end of turn"));
         
         
         this.addAbility(pumpAbility);

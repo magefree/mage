@@ -199,7 +199,7 @@ public class RegisterUserDialog extends MageDialog {
         }
         connection = new Connection();
         connection.setHost(this.txtServer.getText().trim());
-        connection.setPort(Integer.valueOf(this.txtPort.getText().trim()));
+        connection.setPort(Integer.parseInt(this.txtPort.getText().trim()));
         connection.setUsername(this.txtUserName.getText().trim());
         connection.setPassword(String.valueOf(this.txtPassword.getPassword()).trim());
         connection.setEmail(this.txtEmail.getText().trim());

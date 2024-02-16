@@ -29,7 +29,7 @@ public final class DesertOfTheTrue extends CardImpl {
         this.addAbility(new WhiteManaAbility());
 
         // Cycling {1}{W}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{1}{W}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{1}{W}")));
 
     }
 

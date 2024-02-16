@@ -62,8 +62,17 @@ public enum ExpansionRepository {
 
     }
 
+    /**
+     * Warning, don't forget to unsubscribe due memory leak problems
+     *
+     * @param listener
+     */
     public void subscribe(Listener<RepositoryEvent> listener) {
         eventSource.addListener(listener);
+    }
+
+    public void unsubscribe(Listener<RepositoryEvent> listener) {
+        eventSource.removeListener(listener);
     }
 
     public void saveSets(final List<ExpansionInfo> newSets, final List<ExpansionInfo> updatedSets, long newContentVersion) {
@@ -200,22 +209,6 @@ public enum ExpansionRepository {
             QueryBuilder<ExpansionInfo, Object> qb = expansionDao.queryBuilder();
             qb.orderBy("releaseDate", true);
             return expansionDao.query(qb.prepare());
-        } catch (SQLException ex) {
-            logger.error(ex);
-        }
-        return Collections.emptyList();
-    }
-
-    public List<String> getAllSetNames() {
-        try {
-            QueryBuilder<ExpansionInfo, Object> qb = expansionDao.queryBuilder();
-            qb.orderBy("releaseDate", true);
-            List<ExpansionInfo> expansions = expansionDao.query(qb.prepare());
-            List<String> setNames = new LinkedList<>();
-            for (ExpansionInfo expansionInfo : expansions) {
-                setNames.add(expansionInfo.getName());
-            }
-            return setNames;
         } catch (SQLException ex) {
             logger.error(ex);
         }

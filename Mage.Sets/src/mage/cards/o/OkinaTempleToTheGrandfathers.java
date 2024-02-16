@@ -28,7 +28,7 @@ public final class OkinaTempleToTheGrandfathers extends CardImpl {
 
     public OkinaTempleToTheGrandfathers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.addAbility(new GreenManaAbility());
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(1, 1, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.G));
         ability.addCost(new TapSourceCost());

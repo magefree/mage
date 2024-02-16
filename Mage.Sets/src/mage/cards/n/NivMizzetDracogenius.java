@@ -26,7 +26,7 @@ public final class NivMizzetDracogenius extends CardImpl {
 
     public NivMizzetDracogenius(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}{R}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DRAGON);
         this.subtype.add(SubType.WIZARD);
 
@@ -41,7 +41,7 @@ public final class NivMizzetDracogenius extends CardImpl {
         this.addAbility(new DealsDamageToAPlayerTriggeredAbility(new DrawCardSourceControllerEffect(1), true));
         
         // {U}{R}: Niv-Mizzet, Dracogenius deals 1 damage to any target.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1),new ManaCostsImpl("{U}{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1),new ManaCostsImpl<>("{U}{R}"));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }

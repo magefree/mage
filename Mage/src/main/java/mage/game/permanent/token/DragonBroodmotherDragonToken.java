@@ -1,21 +1,18 @@
-
 package mage.game.permanent.token;
 
 import mage.MageInt;
-import mage.abilities.effects.common.DevourEffect;
 import mage.abilities.keyword.DevourAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
 /**
- *
  * @author spjspj
  */
 public final class DragonBroodmotherDragonToken extends TokenImpl {
 
     public DragonBroodmotherDragonToken() {
-        super("Dragon", "1/1 red and green Dragon creature token with flying and devour 2");
+        super("Dragon Token", "1/1 red and green Dragon creature token with flying and devour 2");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         color.setRed(true);
@@ -23,10 +20,10 @@ public final class DragonBroodmotherDragonToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
         addAbility(FlyingAbility.getInstance());
-        addAbility(new DevourAbility(DevourEffect.DevourFactor.Devour2));
+        addAbility(new DevourAbility(2));
     }
 
-    public DragonBroodmotherDragonToken(final DragonBroodmotherDragonToken token) {
+    private DragonBroodmotherDragonToken(final DragonBroodmotherDragonToken token) {
         super(token);
     }
 

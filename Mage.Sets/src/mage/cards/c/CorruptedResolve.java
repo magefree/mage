@@ -45,7 +45,7 @@ class CorruptedResolveEffect extends OneShotEffect {
         staticText = "Counter target spell if its controller is poisoned";
     }
 
-    CorruptedResolveEffect(final CorruptedResolveEffect effect) {
+    private CorruptedResolveEffect(final CorruptedResolveEffect effect) {
         super(effect);
     }
 

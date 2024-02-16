@@ -41,11 +41,11 @@ public final class SerraBestiary extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Removal));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // At the beginning of your upkeep, sacrifice Serra Bestiary unless you pay {W}{W}.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl("{W}{W}")), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{W}{W}")), TargetController.YOU, false));
 
         // Enchanted creature can't attack or block, and its activated abilities with {T} in their costs can't be activated.
         Ability ability2 = new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackBlockAttachedEffect(AttachmentType.AURA));
@@ -66,12 +66,12 @@ public final class SerraBestiary extends CardImpl {
 
 class SerraBestiaryRuleModifyingEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public SerraBestiaryRuleModifyingEffect() {
+    SerraBestiaryRuleModifyingEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = ", and its activated abilities with {T} in their costs can't be activated";
     }
 
-    public SerraBestiaryRuleModifyingEffect(final SerraBestiaryRuleModifyingEffect effect) {
+    private SerraBestiaryRuleModifyingEffect(final SerraBestiaryRuleModifyingEffect effect) {
         super(effect);
     }
 
@@ -81,23 +81,13 @@ class SerraBestiaryRuleModifyingEffect extends ContinuousRuleModifyingEffectImpl
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.ACTIVATE_ABILITY;
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        // In the case that the enchantment is blinked
-        Permanent enchantment = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
-        if (enchantment == null) {
-            // It was not blinked, use the standard method
-            enchantment = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        }
+        Permanent enchantment = source.getSourcePermanentOrLKI(game);
         if (enchantment == null) {
             return false;
         }

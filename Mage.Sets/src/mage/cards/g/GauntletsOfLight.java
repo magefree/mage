@@ -36,7 +36,7 @@ public final class GauntletsOfLight extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Enchanted creature gets +0/+2 and assigns combat damage equal to its toughness rather than its power.
@@ -47,7 +47,7 @@ public final class GauntletsOfLight extends CardImpl {
         // Enchanted creature has "{2}{W}: Untap this creature."
         this.addAbility(new SimpleStaticAbility(
                 new GainAbilityAttachedEffect(new SimpleActivatedAbility(
-                        new UntapSourceEffect().setText("Untap this creature"), new ManaCostsImpl("{2}{W}")
+                        new UntapSourceEffect().setText("Untap this creature"), new ManaCostsImpl<>("{2}{W}")
                 ), AttachmentType.AURA)
         ));
     }

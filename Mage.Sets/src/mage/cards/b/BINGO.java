@@ -67,12 +67,12 @@ public final class BINGO extends CardImpl {
 
 class BingoEffect extends OneShotEffect {
 
-    public BingoEffect() {
+    BingoEffect() {
         super(Outcome.Neutral);
         staticText = "put a chip counter on its mana value";
     }
 
-    public BingoEffect(final BingoEffect effect) {
+    private BingoEffect(final BingoEffect effect) {
         super(effect);
     }
 
@@ -83,7 +83,7 @@ class BingoEffect extends OneShotEffect {
             if (spell.getManaValue() > 9) {
                 return true;
             }
-            MageObject mageObject = game.getObject(source.getSourceId());
+            MageObject mageObject = game.getObject(source);
             if (mageObject != null) {
                 Map<Integer, Integer> chipCounters = new HashMap<>(); // Map<number, amount of counters>
                 if (game.getState().getValue(mageObject.getId() + "_chip") != null) {
@@ -122,7 +122,7 @@ class BingoCount implements DynamicValue {
     public BingoCount() {
     }
 
-    public BingoCount(final BingoCount countersCount) {
+    private BingoCount(final BingoCount countersCount) {
     }
 
     @Override

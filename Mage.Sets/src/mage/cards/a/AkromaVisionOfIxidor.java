@@ -29,7 +29,7 @@ public final class AkromaVisionOfIxidor extends CardImpl {
     public AkromaVisionOfIxidor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{W}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ANGEL);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
@@ -104,9 +104,9 @@ class AkromaVisionOfIxidorEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         for (Permanent permanent : game.getBattlefield().getActivePermanents(
                 StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE,
-                source.getControllerId(), source.getSourceId(), game
+                source.getControllerId(), source, game
         )) {
-            Abilities abilities = permanent.getAbilities(game);
+            Abilities<Ability> abilities = permanent.getAbilities(game);
             int count = classes
                     .stream()
                     .map(clazz -> abilities.stream().anyMatch(clazz::isInstance))

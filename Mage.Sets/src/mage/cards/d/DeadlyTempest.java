@@ -41,12 +41,12 @@ public final class DeadlyTempest extends CardImpl {
 
 class DeadlyTempestEffect extends OneShotEffect {
 
-    public DeadlyTempestEffect() {
+    DeadlyTempestEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "Destroy all creatures. Each player loses life equal to the number of creatures they controlled that were destroyed this way";
     }
 
-    public DeadlyTempestEffect(final DeadlyTempestEffect effect) {
+    private DeadlyTempestEffect(final DeadlyTempestEffect effect) {
         super(effect);
     }
 
@@ -60,7 +60,7 @@ class DeadlyTempestEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Map<UUID, Integer> destroyedCreatures = new HashMap<>();
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source.getSourceId(), game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source, game)) {
                 if (permanent.destroy(source, game, false)) {
                     int count = destroyedCreatures.getOrDefault(permanent.getControllerId(), 0);
                     destroyedCreatures.put(permanent.getControllerId(), count + 1);

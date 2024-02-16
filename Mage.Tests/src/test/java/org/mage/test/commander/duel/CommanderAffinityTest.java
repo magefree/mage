@@ -36,7 +36,6 @@ public class CommanderAffinityTest extends CardTestCommanderDuelBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -60,7 +59,6 @@ public class CommanderAffinityTest extends CardTestCommanderDuelBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -84,14 +82,13 @@ public class CommanderAffinityTest extends CardTestCommanderDuelBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
     public void test_Gained_Affinity() {
         // bug: Mycosynth Golem did not allow my commander, Karn, Silver Golem, to cost 0 even though I had 7+ artifacts on the board.
 
-        Ability ability = new SimpleActivatedAbility(Zone.ALL, new CreateTokenEffect(new ArtifactWallToken(), 7), new ManaCostsImpl("R"));
+        Ability ability = new SimpleActivatedAbility(Zone.ALL, new CreateTokenEffect(new ArtifactWallToken(), 7), new ManaCostsImpl<>("{R}"));
         addCustomCardWithAbility("generate tokens", playerA, ability);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
         //
@@ -129,13 +126,12 @@ public class CommanderAffinityTest extends CardTestCommanderDuelBase {
         // generate artifact tokens
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{R}: Create");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
-        checkPermanentCount("after tokens", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Wall", 7);
+        checkPermanentCount("after tokens", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Wall Token", 7);
         checkPlayableAbility("after tokens", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Karn, Silver Golem", true);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -160,7 +156,6 @@ public class CommanderAffinityTest extends CardTestCommanderDuelBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Karn, Silver Golem", 1);
     }

@@ -7,7 +7,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.InfoEffect;
-import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -42,7 +42,7 @@ public final class PersistentPetitioners extends CardImpl {
 
         // {1}, {T}: Target player puts the top card of their library into their graveyard.
         Ability ability = new SimpleActivatedAbility(
-                new PutLibraryIntoGraveTargetEffect(1), new GenericManaCost(1)
+                new MillCardsTargetEffect(1), new GenericManaCost(1)
         );
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPlayer());
@@ -50,7 +50,7 @@ public final class PersistentPetitioners extends CardImpl {
 
         // Tap four untapped Advisors you control: Target player puts the top twelve cards of their library into their graveyard.
         ability = new SimpleActivatedAbility(
-                new PutLibraryIntoGraveTargetEffect(12),
+                new MillCardsTargetEffect(12),
                 new TapTargetCost(new TargetControlledPermanent(
                         4, 4, filter, true
                 ))

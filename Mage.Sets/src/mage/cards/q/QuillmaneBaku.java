@@ -44,7 +44,7 @@ public final class QuillmaneBaku extends CardImpl {
         // {1}, {T}, Remove X ki counters from Quillmane Baku: Return target creature with mana value X or less to its owner's hand.
         Ability ability = new SimpleActivatedAbility(new ReturnToHandTargetEffect(), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new RemoveVariableCountersSourceCost(CounterType.KI.createInstance()));
+        ability.addCost(new RemoveVariableCountersSourceCost(CounterType.KI));
         ability.addTarget(new TargetCreaturePermanent(filter));
         ability.setTargetAdjuster(QuillmaneBakuAdjuster.instance);
         this.addAbility(ability);

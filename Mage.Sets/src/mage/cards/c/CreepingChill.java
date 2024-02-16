@@ -56,7 +56,7 @@ class CreepingChillAbility extends ZoneChangeTriggeredAbility {
         );
     }
 
-    public CreepingChillAbility(final CreepingChillAbility ability) {
+    private CreepingChillAbility(final CreepingChillAbility ability) {
         super(ability);
     }
 

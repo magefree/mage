@@ -35,7 +35,7 @@ public final class ArixmethesSlumberingIsle extends CardImpl {
     public ArixmethesSlumberingIsle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{U}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.KRAKEN);
         this.power = new MageInt(12);
         this.toughness = new MageInt(12);
@@ -43,7 +43,7 @@ public final class ArixmethesSlumberingIsle extends CardImpl {
         // Arixmethes, Slumbering Isle enters the battlefield tapped with five slumber counters on it.
         Ability ability = new EntersBattlefieldAbility(
                 new TapSourceEffect(true), false, null,
-                "{this} enters the battlefield tapped with five slumber counters on it", null
+                "{this} enters the battlefield tapped with five slumber counters on it.", null
         );
         ability.addEffect(new AddCountersSourceEffect(CounterType.SLUMBER.createInstance(5)));
         this.addAbility(ability);
@@ -74,7 +74,8 @@ public final class ArixmethesSlumberingIsle extends CardImpl {
 class ArixmethesIsLandEffect extends ContinuousEffectImpl {
 
     ArixmethesIsLandEffect() {
-        super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Detriment);
+        super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Neutral);
+        this.dependencyTypes.add(DependencyType.BecomeNonbasicLand);
     }
 
     private ArixmethesIsLandEffect(final ArixmethesIsLandEffect effect) {

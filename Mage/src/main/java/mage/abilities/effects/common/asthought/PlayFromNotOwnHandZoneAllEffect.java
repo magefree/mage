@@ -1,19 +1,16 @@
 package mage.abilities.effects.common.asthought;
 
-import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.cards.Card;
-import mage.constants.AsThoughEffectType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.game.Game;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public class PlayFromNotOwnHandZoneAllEffect extends AsThoughEffectImpl {
@@ -31,7 +28,7 @@ public class PlayFromNotOwnHandZoneAllEffect extends AsThoughEffectImpl {
         this.allowedCaster = allowedCaster;
     }
 
-    public PlayFromNotOwnHandZoneAllEffect(final PlayFromNotOwnHandZoneAllEffect effect) {
+    protected PlayFromNotOwnHandZoneAllEffect(final PlayFromNotOwnHandZoneAllEffect effect) {
         super(effect);
         this.filter = effect.filter;
         this.fromZone = effect.fromZone;
@@ -51,21 +48,28 @@ public class PlayFromNotOwnHandZoneAllEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        throw new IllegalArgumentException("Wrong code usage: can't call applies method on empty affectedAbility");
+    }
+    @Override
+    public boolean applies(UUID objectId, Ability affectedAbility, Ability source, Game game, UUID playerId) {
         Card card = game.getCard(objectId);
         if (card != null) {
+            if (affectedAbility instanceof SpellAbility) {
+                card = ((SpellAbility) affectedAbility).getCharacteristics(game);
+            }
             switch (allowedCaster) {
                 case YOU:
-                    if (affectedControllerId != source.getControllerId()) {
+                    if (playerId != source.getControllerId()) {
                         return false;
                     }
                     break;
                 case OPPONENT:
-                    if (!game.getOpponents(source.getControllerId()).contains(affectedControllerId)) {
+                    if (!game.getOpponents(source.getControllerId()).contains(playerId)) {
                         return false;
                     }
                     break;
             }
-            return !onlyOwnedCards || card.getOwnerId().equals(source.getControllerId())
+            return (!onlyOwnedCards || card.getOwnerId().equals(source.getControllerId()))
                     && filter.match(card, game)
                     && game.getState().getZone(card.getId()).match(fromZone);
         }

@@ -48,9 +48,10 @@ class BlocksTriggeredAbility extends TriggeredAbilityImpl {
 
     public BlocksTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
+        setTriggerPhrase("Whenever one or more creatures block, ");
     }
 
-    public BlocksTriggeredAbility(final BlocksTriggeredAbility ability) {
+    private BlocksTriggeredAbility(final BlocksTriggeredAbility ability) {
         super(ability);
     }
 
@@ -70,11 +71,6 @@ class BlocksTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever one or more creatures block, " ;
-    }
-
-    @Override
     public BlocksTriggeredAbility copy() {
         return new BlocksTriggeredAbility(this);
     }
@@ -82,12 +78,12 @@ class BlocksTriggeredAbility extends TriggeredAbilityImpl {
 
 class TideOfWarEffect extends OneShotEffect {
 
-    public TideOfWarEffect() {
+    TideOfWarEffect() {
         super(Outcome.Benefit);
         this.staticText = "flip a coin. If you win the flip, each blocking creature is sacrificed by its controller. If you lose the flip, each blocked creature is sacrificed by its controller";
     }
 
-    public TideOfWarEffect(final TideOfWarEffect effect) {
+    private TideOfWarEffect(final TideOfWarEffect effect) {
         super(effect);
     }
 

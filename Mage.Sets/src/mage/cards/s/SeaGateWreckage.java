@@ -28,7 +28,7 @@ public final class SeaGateWreckage extends CardImpl {
         
         // {2}{C}, {T}: Draw a card. Activate this ability only if you have no cards in hand.
         Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1),
-            new ManaCostsImpl("{2}{C}"), HellbentCondition.instance);
+            new ManaCostsImpl<>("{2}{C}"), HellbentCondition.instance);
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

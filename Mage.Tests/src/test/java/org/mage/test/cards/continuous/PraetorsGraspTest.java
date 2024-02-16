@@ -26,7 +26,6 @@ public class PraetorsGraspTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Praetor's Grasp", 1);
     }

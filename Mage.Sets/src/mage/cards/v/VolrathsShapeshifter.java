@@ -32,7 +32,7 @@ public final class VolrathsShapeshifter extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new VolrathsShapeshifterEffect()));
 
         // {2}: Discard a card.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DiscardControllerEffect(1), new ManaCostsImpl("{2}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DiscardControllerEffect(1), new ManaCostsImpl<>("{2}")));
     }
 
     private VolrathsShapeshifter(final VolrathsShapeshifter card) {
@@ -47,14 +47,14 @@ public final class VolrathsShapeshifter extends CardImpl {
 
 class VolrathsShapeshifterEffect extends ContinuousEffectImpl {
 
-    public VolrathsShapeshifterEffect() {
+    VolrathsShapeshifterEffect() {
         super(Duration.WhileOnBattlefield, Layer.TextChangingEffects_3, SubLayer.NA, Outcome.BecomeCreature);
         staticText = "As long as the top card of your graveyard is a creature card, "
                 + "{this} has the full text of that card and has the text \"2: Discard a card.\" "
                 + "({this} has that card's name, mana cost, color, types, abilities, power, and toughness.) ";
     }
 
-    public VolrathsShapeshifterEffect(final VolrathsShapeshifterEffect effect) {
+    private VolrathsShapeshifterEffect(final VolrathsShapeshifterEffect effect) {
         super(effect);
     }
 
@@ -74,8 +74,8 @@ class VolrathsShapeshifterEffect extends ContinuousEffectImpl {
             return false;
         }
 
-        permanent.getPower().setValue(card.getPower().getValue());
-        permanent.getToughness().setValue(card.getToughness().getValue());
+        permanent.getPower().setModifiedBaseValue(card.getPower().getModifiedBaseValue());
+        permanent.getToughness().setModifiedBaseValue(card.getToughness().getModifiedBaseValue());
         permanent.getColor(game).setColor(card.getColor(game));
         permanent.getManaCost().clear();
         permanent.getManaCost().add(card.getManaCost().copy());
@@ -89,15 +89,15 @@ class VolrathsShapeshifterEffect extends ContinuousEffectImpl {
         permanent.removeAllSubTypes(game);
         permanent.copySubTypesFrom(game, card);
 
-        permanent.getSuperType().clear();
-        for (SuperType type : card.getSuperType()) {
-            permanent.addSuperType(type);
+        permanent.removeAllSuperTypes(game);
+        for (SuperType type : card.getSuperType(game)) {
+            permanent.addSuperType(game, type);
 
         }
 
         for (Ability ability : card.getAbilities(game)) {
             if (!permanent.getAbilities().contains(ability)) {
-                permanent.addAbility(ability, source.getSourceId(), game);
+                permanent.addAbility(ability, source.getSourceId(), game, true);
             }
         }
 

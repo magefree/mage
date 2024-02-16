@@ -32,6 +32,7 @@ import mage.target.TargetPermanent;
 import mage.target.common.TargetNonlandPermanent;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -49,14 +50,14 @@ public final class GideonBlackblade extends CardImpl {
     public GideonBlackblade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{W}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GIDEON);
         this.setStartingLoyalty(4);
 
         // As long as it's your turn, Gideon Blackblade is a 4/4 Human Soldier creature with indestructible that's still a planeswalker.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BecomesCreatureSourceEffect(
-                        new GideonBlackbladeToken(), "planeswalker", Duration.WhileOnBattlefield
+                        new GideonBlackbladeToken(), CardType.PLANESWALKER, Duration.WhileOnBattlefield
                 ), MyTurnCondition.instance, "As long as it's your turn, " +
                 "{this} is a 4/4 Human Soldier creature with indestructible that's still a planeswalker."
         )).addHint(MyTurnHint.instance));
@@ -111,7 +112,7 @@ class GideonBlackbladeToken extends TokenImpl {
 }
 
 class GideonBlackbladeEffect extends OneShotEffect {
-    private static final Set<String> choices = new HashSet();
+    private static final Set<String> choices = new LinkedHashSet<>();
 
     static {
         choices.add("Vigilance");

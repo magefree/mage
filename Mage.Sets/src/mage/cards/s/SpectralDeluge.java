@@ -62,6 +62,6 @@ enum SpectralDelugePredicate implements ObjectSourcePlayerPredicate<MageObject> 
                 .getValue()
                 <= game
                 .getBattlefield()
-                .count(filter, input.getSourceId(), input.getPlayerId(), game);
+                .count(filter, input.getPlayerId(), input.getSource(), game);
     }
 }

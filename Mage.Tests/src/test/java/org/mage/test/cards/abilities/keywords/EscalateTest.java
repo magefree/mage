@@ -109,6 +109,8 @@ public class EscalateTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Collective Defiance"); // {1}{R}{R} sorcery
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
 
+        setStrictChooseMode(true);
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Collective Defiance", "mode=2Wall of Omens");
         setModeChoice(playerA, "1"); // opponent discards hand and draws that many
         setModeChoice(playerA, "2"); // deal 4 dmg to target creature (Wall of Omens)

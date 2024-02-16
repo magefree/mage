@@ -47,7 +47,7 @@ public final class BoneyardScourge extends CardImpl {
 
         // Whenever a Dragon you control dies while Boneyard Scourge is in your graveyard, you may pay 1B. If you do, return Boneyard Scourge from your graveyard to the battlefield.
         TriggeredAbility ability = new DiesWhileInGraveyardTriggeredAbility(
-                new DoIfCostPaid(new ReturnSourceFromGraveyardToBattlefieldEffect(), new ManaCostsImpl("{1}{B}")),
+                new DoIfCostPaid(new ReturnSourceFromGraveyardToBattlefieldEffect(), new ManaCostsImpl<>("{1}{B}")),
                 filter);
         this.addAbility(ability);
     }
@@ -64,14 +64,15 @@ public final class BoneyardScourge extends CardImpl {
 
 class DiesWhileInGraveyardTriggeredAbility extends TriggeredAbilityImpl {
 
-    protected FilterCreaturePermanent filter;
+    private final FilterCreaturePermanent filter;
 
     public DiesWhileInGraveyardTriggeredAbility(Effect effect, FilterCreaturePermanent filter) {
         super(Zone.GRAVEYARD, effect, false);
         this.filter = filter;
+        setTriggerPhrase("Whenever " + filter.getMessage() + " dies while {this} is in your graveyard, ");
     }
 
-    public DiesWhileInGraveyardTriggeredAbility(final DiesWhileInGraveyardTriggeredAbility ability) {
+    private DiesWhileInGraveyardTriggeredAbility(final DiesWhileInGraveyardTriggeredAbility ability) {
         super(ability);
         this.filter = ability.filter;
     }
@@ -89,22 +90,16 @@ class DiesWhileInGraveyardTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+        if (!zEvent.isDiesEvent()) {
+            return false;
+        }
+
         for (Zone z : Zone.values()) {
             if (game.getShortLivingLKI(sourceId, z) && z != Zone.GRAVEYARD) {
                 return false;
             }
         }
-        if (zEvent.isDiesEvent()) {
-            if (filter.match(zEvent.getTarget(), sourceId, controllerId, game)) {
-                return true;
-            }
-        }
-        return false;
-    }
 
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever " + filter.getMessage() + " dies while {this} is in your graveyard, " ;
+        return filter.match(zEvent.getTarget(), controllerId,this, game);
     }
-
 }

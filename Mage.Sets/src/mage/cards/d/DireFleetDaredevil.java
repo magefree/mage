@@ -5,7 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.replacement.ThatSpellGraveyardExileReplacementEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -14,8 +14,6 @@ import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
 import mage.target.common.TargetCardInOpponentsGraveyard;
 import mage.target.targetpointer.FixedTarget;
@@ -67,14 +65,14 @@ public final class DireFleetDaredevil extends CardImpl {
 
 class DireFleetDaredevilEffect extends OneShotEffect {
 
-    public DireFleetDaredevilEffect() {
+    DireFleetDaredevilEffect() {
         super(Outcome.Benefit);
         this.staticText = "exile target instant or sorcery card from an opponent's graveyard. " +
-                "You may cast it this turn, and you may spend mana as though it were mana of any type " +
-                "to cast that spell. If that spell would be put into a graveyard this turn, exile it instead";
+                "You may cast it this turn, and mana of any type can be spent to cast that spell. "
+                + ThatSpellGraveyardExileReplacementEffect.RULE_A;
     }
 
-    public DireFleetDaredevilEffect(final DireFleetDaredevilEffect effect) {
+    private DireFleetDaredevilEffect(final DireFleetDaredevilEffect effect) {
         super(effect);
     }
 
@@ -86,64 +84,22 @@ class DireFleetDaredevilEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Card targetCard = game.getCard(getTargetPointer().getFirst(game, source));
-            if (targetCard != null) {
-                if (controller.moveCards(targetCard, Zone.EXILED, source, game)) {
-                    targetCard = game.getCard(targetCard.getId());
-                    if (targetCard != null) {
-                        // you may play and spend any mana
-                        CardUtil.makeCardPlayable(game, source, targetCard, Duration.EndOfTurn, true);
-                        // exile from graveyard
-                        ContinuousEffect effect = new DireFleetDaredevilReplacementEffect();
-                        effect.setTargetPointer(new FixedTarget(targetCard, game));
-                        game.addEffect(effect, source);
-                        return true;
-                    }
-                }
+        Card targetCard = game.getCard(getTargetPointer().getFirst(game, source));
+        if (controller == null || targetCard == null) {
+            return false;
+        }
+        if (controller.moveCards(targetCard, Zone.EXILED, source, game)) {
+            Card card = game.getCard(targetCard.getId());
+            if (card != null) {
+                // you may play and spend any mana
+                CardUtil.makeCardPlayable(game, source, card, Duration.EndOfTurn, true);
+                // exile from graveyard
+                ContinuousEffect effect = new ThatSpellGraveyardExileReplacementEffect(false);
+                effect.setTargetPointer(new FixedTarget(card, game));
+                game.addEffect(effect, source);
+                return true;
             }
         }
         return false;
-    }
-}
-
-class DireFleetDaredevilReplacementEffect extends ReplacementEffectImpl {
-
-    public DireFleetDaredevilReplacementEffect() {
-        super(Duration.EndOfTurn, Outcome.Exile);
-        staticText = "If that card would be put into a graveyard this turn, exile it instead";
-    }
-
-    public DireFleetDaredevilReplacementEffect(final DireFleetDaredevilReplacementEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public DireFleetDaredevilReplacementEffect copy() {
-        return new DireFleetDaredevilReplacementEffect(this);
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Card card = game.getCard(event.getTargetId());
-        Player controller = game.getPlayer(source.getControllerId());
-        if (card != null && controller != null) {
-            return controller.moveCards(card, Zone.EXILED, source, game);
-        }
-        return false;
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        return zEvent.getToZone() == Zone.GRAVEYARD
-                && event.getTargetId().equals(((FixedTarget) getTargetPointer()).getTarget())
-                && ((FixedTarget) getTargetPointer()).getZoneChangeCounter() + 1
-                == game.getState().getZoneChangeCounter(event.getTargetId());
     }
 }

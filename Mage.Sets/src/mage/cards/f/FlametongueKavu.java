@@ -24,7 +24,7 @@ public final class FlametongueKavu extends CardImpl {
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(2);
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(4), false);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(4, "it"), false);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

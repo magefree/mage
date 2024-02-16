@@ -1,4 +1,3 @@
-
 package org.mage.test.cards.abilities.other;
 
 import mage.constants.PhaseStep;
@@ -124,5 +123,56 @@ public class NecromancyTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Necromancy", 1);
         assertGraveyardCount(playerA, "Silvercoat Lion", 1);
         assertGraveyardCount(playerB, "Silvercoat Lion", 1);
+    }
+
+    @Test
+    public void testNecromancyWithYarok() {
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Yarok, the Desecrated");
+        addCard(Zone.HAND, playerA, "Necromancy");
+        addCard(Zone.GRAVEYARD, playerA, "Craw Wurm");
+        addCard(Zone.GRAVEYARD, playerA, "Silvercoat Lion");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Necromancy");
+        addTarget(playerA, "Craw Wurm");
+        addTarget(playerA, "Silvercoat Lion");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Necromancy", 1);
+        assertPermanentCount(playerA, "Craw Wurm", 1);
+        assertPermanentCount(playerA, "Silvercoat Lion", 1);
+        assertGraveyardCount(playerA, "Craw Wurm", 0);
+        assertGraveyardCount(playerA, "Silvercoat Lion", 0);
+    }
+
+    @Test
+    public void testNecromancyLeavesWithYarok() {
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Yarok, the Desecrated");
+        addCard(Zone.HAND, playerA, "Necromancy");
+        addCard(Zone.HAND, playerA, "Disenchant");
+        addCard(Zone.GRAVEYARD, playerA, "Craw Wurm");
+        addCard(Zone.GRAVEYARD, playerA, "Silvercoat Lion");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Necromancy");
+        addTarget(playerA, "Craw Wurm");
+        addTarget(playerA, "Silvercoat Lion");
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Disenchant", "Necromancy");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, "Yarok, the Desecrated", 1);
+        assertPermanentCount(playerA, "Necromancy", 0);
+        assertPermanentCount(playerA, "Craw Wurm", 0);
+        assertPermanentCount(playerA, "Silvercoat Lion", 0);
+        assertGraveyardCount(playerA, "Disenchant", 1);
+        assertGraveyardCount(playerA, "Necromancy", 1);
+        assertGraveyardCount(playerA, "Craw Wurm", 1);
+        assertGraveyardCount(playerA, "Silvercoat Lion", 1);
     }
 }

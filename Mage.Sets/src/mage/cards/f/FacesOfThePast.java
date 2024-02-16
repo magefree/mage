@@ -40,12 +40,12 @@ public final class FacesOfThePast extends CardImpl {
 
 class FacesOfThePastEffect extends OneShotEffect {
 
-    public FacesOfThePastEffect() {
+    FacesOfThePastEffect() {
         super(Outcome.Benefit);
         this.staticText = "tap all untapped creatures that share a creature type with it or untap all tapped creatures that share a creature type with it";
     }
 
-    public FacesOfThePastEffect(final FacesOfThePastEffect effect) {
+    private FacesOfThePastEffect(final FacesOfThePastEffect effect) {
         super(effect);
     }
 

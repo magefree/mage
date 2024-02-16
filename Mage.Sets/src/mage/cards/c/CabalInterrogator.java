@@ -11,7 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.target.TargetPlayer;
 
 import java.util.UUID;
@@ -32,8 +31,8 @@ public final class CabalInterrogator extends CardImpl {
         // {X}{B}, {tap}: Target player reveals X cards from their hand and you choose one of them. That player discards that card.
         // Activate only as a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(
-                new DiscardCardYouChooseTargetEffect(TargetController.ANY, ManacostVariableValue.REGULAR),
-                new ManaCostsImpl("{X}{B}"));
+                new DiscardCardYouChooseTargetEffect(ManacostVariableValue.REGULAR),
+                new ManaCostsImpl<>("{X}{B}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);

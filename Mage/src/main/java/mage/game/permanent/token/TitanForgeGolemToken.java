@@ -1,18 +1,18 @@
 
 
 package mage.game.permanent.token;
+
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.MageInt;
 
 /**
- *
  * @author spjspj
  */
 public final class TitanForgeGolemToken extends TokenImpl {
 
     public TitanForgeGolemToken() {
-        super("Golem", "9/9 colorless Golem artifact creature token");
+        super("Golem Token", "9/9 colorless Golem artifact creature token");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.GOLEM);
@@ -20,7 +20,7 @@ public final class TitanForgeGolemToken extends TokenImpl {
         toughness = new MageInt(9);
     }
 
-    public TitanForgeGolemToken(final TitanForgeGolemToken token) {
+    private TitanForgeGolemToken(final TitanForgeGolemToken token) {
         super(token);
     }
 

@@ -44,7 +44,7 @@ class ClamIAmEffect extends ReplacementEffectImpl {
         staticText = "If you roll a 3 on a six-sided die, you may reroll that die";
     }
 
-    ClamIAmEffect(final ClamIAmEffect effect) {
+    private ClamIAmEffect(final ClamIAmEffect effect) {
         super(effect);
     }
 
@@ -61,11 +61,6 @@ class ClamIAmEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         return source.isControlledBy(event.getPlayerId());
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
     }
 
     @Override

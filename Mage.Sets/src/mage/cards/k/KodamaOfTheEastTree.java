@@ -43,7 +43,7 @@ public final class KodamaOfTheEastTree extends CardImpl {
     public KodamaOfTheEastTree(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPIRIT);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
@@ -124,11 +124,11 @@ class KodamaOfTheEastTreeEffect extends OneShotEffect {
                 ComparisonType.FEWER_THAN, permanent.getManaValue() + 1
         ));
         TargetCardInHand target = new TargetCardInHand(filter);
-        if (!target.canChoose(source.getSourceId(), source.getControllerId(), game)
+        if (!target.canChoose(source.getControllerId(), source, game)
                 || !player.chooseUse(outcome, "Put a permanent card onto the battlefield?", source, game)) {
             return false;
         }
-        player.choose(outcome, target, source.getSourceId(), game);
+        player.choose(outcome, target, source, game);
         Card card = game.getCard(target.getFirstTarget());
         if (card == null) {
             return false;

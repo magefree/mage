@@ -29,7 +29,7 @@ public final class VraskaRelicSeeker extends CardImpl {
     public VraskaRelicSeeker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{B}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.VRASKA);
 
         this.setStartingLoyalty(6);
@@ -61,12 +61,12 @@ public final class VraskaRelicSeeker extends CardImpl {
 
 class VraskaRelicSeekerLifeTotalEffect extends OneShotEffect {
 
-    public VraskaRelicSeekerLifeTotalEffect() {
+    VraskaRelicSeekerLifeTotalEffect() {
         super(Outcome.Benefit);
         staticText = "Target player's life total becomes 1";
     }
 
-    public VraskaRelicSeekerLifeTotalEffect(VraskaRelicSeekerLifeTotalEffect effect) {
+    private VraskaRelicSeekerLifeTotalEffect(final VraskaRelicSeekerLifeTotalEffect effect) {
         super(effect);
     }
 

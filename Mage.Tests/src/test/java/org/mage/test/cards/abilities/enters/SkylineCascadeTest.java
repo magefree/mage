@@ -21,7 +21,7 @@ public class SkylineCascadeTest extends CardTestPlayerBase {
         // {W} 2/1
         addCard(Zone.BATTLEFIELD, playerA, "Savannah Lions");
         
-        /**
+        /*
          * Skyline Cascade enters the battlefield tapped.
          * When Skyline Cascade enters the battlefield, target creature an opponent controls doesn't untap during its controller's next untap step.
          * Tap: Add {U} .
@@ -31,8 +31,8 @@ public class SkylineCascadeTest extends CardTestPlayerBase {
         attack(1, playerA, "Savannah Lions");
 
         playLand(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Skyline Cascade");
-        addTarget(playerB, "Savannah Lions");
-        
+        // Savannah Lions is autochosen
+
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
         
         execute();
@@ -64,7 +64,7 @@ public class SkylineCascadeTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Skyline Cascade");
                 
         playLand(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Skyline Cascade");
-        addTarget(playerB, "Savannah Lions");
+        // Savannah Lions is autochosen
         
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
         

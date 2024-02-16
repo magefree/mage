@@ -9,6 +9,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 /**
  * @author TheElk801
@@ -34,9 +35,10 @@ public class AttacksAloneControlledTriggeredAbility extends TriggeredAbilityImpl
         super(Zone.BATTLEFIELD, effect, optional);
         this.filter = filter;
         this.setTargetPointer = setTargetPointer;
+        setTriggerPhrase("Whenever " + CardUtil.addArticle(filter.getMessage()) + " attacks alone, ");
     }
 
-    private AttacksAloneControlledTriggeredAbility(final AttacksAloneControlledTriggeredAbility ability) {
+    protected AttacksAloneControlledTriggeredAbility(final AttacksAloneControlledTriggeredAbility ability) {
         super(ability);
         this.filter = ability.filter;
         this.setTargetPointer = ability.setTargetPointer;
@@ -49,7 +51,7 @@ public class AttacksAloneControlledTriggeredAbility extends TriggeredAbilityImpl
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DECLARED_ATTACKERS;
+        return event.getType() == GameEvent.EventType.ATTACKER_DECLARED;
     }
 
     @Override
@@ -57,18 +59,13 @@ public class AttacksAloneControlledTriggeredAbility extends TriggeredAbilityImpl
         if (!game.getCombat().attacksAlone()) {
             return false;
         }
-        Permanent permanent = game.getPermanent(game.getCombat().getAttackers().get(0));
-        if (permanent == null || !filter.match(permanent, getSourceId(), getControllerId(), game)) {
+        Permanent permanent = game.getPermanent(event.getSourceId());
+        if (permanent == null || !filter.match(permanent, getControllerId(), this, game)) {
             return false;
         }
         if (setTargetPointer) {
             this.getEffects().setTargetPointer(new FixedTarget(permanent, game));
         }
         return true;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever " + filter.getMessage() + " attacks alone, ";
     }
 }

@@ -31,7 +31,7 @@ public final class KnightOfCliffhaven extends LevelerCard {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        this.addAbility(new LevelUpAbility(new ManaCostsImpl("{3}")));
+        this.addAbility(new LevelUpAbility(new ManaCostsImpl<>("{3}")));
 
         Abilities<Ability> abilities1 = new AbilitiesImpl<>();
         abilities1.add(FlyingAbility.getInstance());

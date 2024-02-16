@@ -16,7 +16,7 @@ public abstract class EvasionAbility extends StaticAbility {
         super(AbilityType.EVASION, zone);
     }
 
-    public EvasionAbility(final EvasionAbility ability) {
+    protected EvasionAbility(final EvasionAbility ability) {
         super(ability);
     }
 

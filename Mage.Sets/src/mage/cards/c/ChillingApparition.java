@@ -27,7 +27,7 @@ public final class ChillingApparition extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {B}: Regenerate Chilling Apparition.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{B}")));
         // Whenever Chilling Apparition deals combat damage to a player, that player discards a card.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DiscardTargetEffect(1), false, true));
     }

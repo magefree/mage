@@ -75,7 +75,7 @@ class QuakebringerTriggeredAbility extends TriggeredAbilityImpl {
                 return game.isActivePlayer(getControllerId());
             case GRAVEYARD:
                 return game.isActivePlayer(game.getOwnerId(getSourceId()))
-                        && game.getBattlefield().count(filter, getSourceId(), getControllerId(), game) > 0;
+                        && game.getBattlefield().count(filter, getControllerId(), this, game) > 0;
         }
         return false;
     }

@@ -25,12 +25,12 @@ public final class BlisterstickShaman extends CardImpl {
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(1));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(1, "it"));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }
 
-    public BlisterstickShaman (final BlisterstickShaman card) {
+    private BlisterstickShaman(final BlisterstickShaman card) {
         super(card);
     }
 

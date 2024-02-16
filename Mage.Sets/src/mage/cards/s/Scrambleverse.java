@@ -43,12 +43,12 @@ public final class Scrambleverse extends CardImpl {
 
 class ScrambleverseEffect extends OneShotEffect {
 
-    public ScrambleverseEffect() {
+    ScrambleverseEffect() {
         super(Outcome.Damage);
         staticText = "For each nonland permanent, choose a player at random. Then each player gains control of each permanent for which they were chosen. Untap those permanents";
     }
 
-    public ScrambleverseEffect(ScrambleverseEffect effect) {
+    private ScrambleverseEffect(final ScrambleverseEffect effect) {
         super(effect);
     }
 
@@ -56,7 +56,7 @@ class ScrambleverseEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         PlayerList players = game.getState().getPlayersInRange(source.getControllerId(), game);
         int count = players.size();
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterNonlandPermanent(), source.getControllerId(), source.getSourceId(), game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterNonlandPermanent(), source.getControllerId(), source, game)) {
             ContinuousEffect effect = new GainControlTargetEffect(Duration.Custom, true, players.get(RandomUtil.nextInt(count)));
             effect.setTargetPointer(new FixedTarget(permanent, game));
             game.addEffect(effect, source);

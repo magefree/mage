@@ -67,14 +67,14 @@ public final class PhantasmalSphere extends CardImpl {
 
 class PhantasmalSphereEffect extends OneShotEffect {
 
-    public PhantasmalSphereEffect() {
+    PhantasmalSphereEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "target opponent puts an X/X blue Orb creature token "
-                + "with flying onto the battlefield, where X is the number "
+        this.staticText = "target opponent creates an X/X blue Orb creature token "
+                + "with flying, where X is the number "
                 + "of +1/+1 counters on {this}";
     }
 
-    public PhantasmalSphereEffect(final PhantasmalSphereEffect effect) {
+    private PhantasmalSphereEffect(final PhantasmalSphereEffect effect) {
         super(effect);
     }
 
@@ -102,7 +102,7 @@ class PhantasmalSphereEffect extends OneShotEffect {
 class PhantasmalSphereToken extends TokenImpl {
 
     public PhantasmalSphereToken(int xValue) {
-        super("Orb", "X/X blue Orb creature token with flying");
+        super("Orb Token", "X/X blue Orb creature token with flying");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
         subtype.add(SubType.ORB);
@@ -111,7 +111,7 @@ class PhantasmalSphereToken extends TokenImpl {
         addAbility(FlyingAbility.getInstance());
     }
 
-    public PhantasmalSphereToken(final PhantasmalSphereToken token) {
+    private PhantasmalSphereToken(final PhantasmalSphereToken token) {
         super(token);
     }
 

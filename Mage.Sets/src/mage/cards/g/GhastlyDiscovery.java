@@ -40,12 +40,12 @@ public final class GhastlyDiscovery extends CardImpl {
 
 class GhastlyDiscoveryEffect extends OneShotEffect {
 
-    public GhastlyDiscoveryEffect() {
+    GhastlyDiscoveryEffect() {
         super(Outcome.Benefit);
         this.staticText = "Draw two cards, then discard a card";
     }
 
-    public GhastlyDiscoveryEffect(final GhastlyDiscoveryEffect effect) {
+    private GhastlyDiscoveryEffect(final GhastlyDiscoveryEffect effect) {
         super(effect);
     }
 

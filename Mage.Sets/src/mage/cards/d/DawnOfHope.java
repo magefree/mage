@@ -34,7 +34,7 @@ public final class DawnOfHope extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
                 new CreateTokenEffect(new SoldierLifelinkToken()),
-                new ManaCostsImpl("{3}{W}")
+                new ManaCostsImpl<>("{3}{W}")
         ));
     }
 

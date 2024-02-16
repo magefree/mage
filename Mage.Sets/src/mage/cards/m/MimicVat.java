@@ -62,7 +62,7 @@ class MimicVatTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new MimicVatEffect(), true);
     }
 
-    MimicVatTriggeredAbility(MimicVatTriggeredAbility ability) {
+    private MimicVatTriggeredAbility(final MimicVatTriggeredAbility ability) {
         super(ability);
     }
 
@@ -109,12 +109,12 @@ class MimicVatTriggeredAbility extends TriggeredAbilityImpl {
 
 class MimicVatEffect extends OneShotEffect {
 
-    public MimicVatEffect() {
+    MimicVatEffect() {
         super(Outcome.Benefit);
         staticText = "exile that card";
     }
 
-    public MimicVatEffect(MimicVatEffect effect) {
+    private MimicVatEffect(final MimicVatEffect effect) {
         super(effect);
     }
 
@@ -155,12 +155,12 @@ class MimicVatEffect extends OneShotEffect {
 
 class MimicVatCreateTokenEffect extends OneShotEffect {
 
-    public MimicVatCreateTokenEffect() {
+    MimicVatCreateTokenEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Create a token that's a copy of a card exiled with {this}. It gains haste. Exile it at the beginning of the next end step";
     }
 
-    public MimicVatCreateTokenEffect(final MimicVatCreateTokenEffect effect) {
+    private MimicVatCreateTokenEffect(final MimicVatCreateTokenEffect effect) {
         super(effect);
     }
 

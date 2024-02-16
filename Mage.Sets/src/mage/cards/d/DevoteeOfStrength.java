@@ -29,7 +29,7 @@ public final class DevoteeOfStrength extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {4}{G}: Target creature gets +2/+2 until end of turn.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(2,2,Duration.EndOfTurn), new ManaCostsImpl("{4}{G}"));
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(2,2,Duration.EndOfTurn), new ManaCostsImpl<>("{4}{G}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

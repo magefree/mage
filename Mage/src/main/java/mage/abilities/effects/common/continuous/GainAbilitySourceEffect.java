@@ -10,20 +10,19 @@ import mage.constants.Outcome;
 import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.util.CardUtil;
 
 /**
  * @author BetaSteward_at_googlemail.com
  */
-public class GainAbilitySourceEffect extends ContinuousEffectImpl implements SourceEffect {
+public class GainAbilitySourceEffect extends ContinuousEffectImpl {
 
     protected Ability ability;
     // shall a card gain the ability (otherwise permanent)
-    private boolean onCard;
+    private final boolean onCard;
 
     /**
      * Add ability with Duration.WhileOnBattlefield
-     *
-     * @param ability
      */
     public GainAbilitySourceEffect(Ability ability) {
         this(ability, Duration.WhileOnBattlefield);
@@ -34,22 +33,15 @@ public class GainAbilitySourceEffect extends ContinuousEffectImpl implements Sou
     }
 
     public GainAbilitySourceEffect(Ability ability, Duration duration, boolean onCard) {
-        this(ability, duration, onCard, false);
-        staticText = "{this} gains " + ability.getRule() + ' ' + duration.toString();
-    }
-
-    public GainAbilitySourceEffect(Ability ability, Duration duration, boolean onCard, boolean noStaticText) {
         super(duration, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         this.ability = ability;
         this.onCard = onCard;
-        if (noStaticText) {
-            staticText = null;
-        }
-
+        this.staticText = "{this} gains " + CardUtil.stripReminderText(ability.getRule())
+                + (duration.toString().isEmpty() ? "" : ' ' + duration.toString());
         this.generateGainAbilityDependencies(ability, null);
     }
 
-    public GainAbilitySourceEffect(final GainAbilitySourceEffect effect) {
+    protected GainAbilitySourceEffect(final GainAbilitySourceEffect effect) {
         super(effect);
         this.ability = effect.ability.copy();
         ability.newId(); // This is needed if the effect is copied e.g. by a clone so the ability can be added multiple times to permanents

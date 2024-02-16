@@ -1,26 +1,19 @@
-
 package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ExileThenReturnTargetEffect;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.FlyingAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.TargetPermanent;
 
 /**
  *
@@ -46,8 +39,8 @@ public final class RestorationAngel extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Restoration Angel enters the battlefield, you may exile target non-Angel creature you control, then return that card to the battlefield under your control
-        Ability ability = new EntersBattlefieldTriggeredAbility(new RestorationAngelEffect(), true);
-        ability.addTarget(new TargetControlledCreaturePermanent(1, 1, filter, false));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ExileThenReturnTargetEffect(true, true), true);
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 
@@ -58,42 +51,5 @@ public final class RestorationAngel extends CardImpl {
     @Override
     public RestorationAngel copy() {
         return new RestorationAngel(this);
-    }
-}
-
-class RestorationAngelEffect extends OneShotEffect {
-
-    public RestorationAngelEffect() {
-        super(Outcome.Exile);
-        staticText = "you may exile target non-Angel creature you control, then return that card to the battlefield under your control";
-    }
-
-    public RestorationAngelEffect(final RestorationAngelEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public RestorationAngelEffect copy() {
-        return new RestorationAngelEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
-            Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
-            if (permanent != null && sourcePermanent != null) {
-                int zcc = permanent.getZoneChangeCounter(game);
-                controller.moveCards(permanent, Zone.EXILED, source, game);
-                Card card = game.getCard(permanent.getId());
-                if (card != null
-                        && card.getZoneChangeCounter(game) == zcc + 1
-                        && game.getState().getZone(card.getId()) == Zone.EXILED) {
-                    return controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-                }
-            }
-        }
-        return false;
     }
 }

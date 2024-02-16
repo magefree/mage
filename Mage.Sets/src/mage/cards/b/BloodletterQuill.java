@@ -30,13 +30,13 @@ public final class BloodletterQuill extends CardImpl {
         // {2}, {T}, Put a blood counter on Bloodletter Quill: Draw a card, then lose 1 life for each blood counter on Bloodletter Quill.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new GenericManaCost(2));
         ability.addEffect(new LoseLifeSourceControllerEffect(new CountersSourceCount(CounterType.BLOOD))
-                .setText(", then lose 1 life for each blood counter on {this}"));
+                .setText(", then you lose 1 life for each blood counter on {this}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new PutCountersSourceCost(CounterType.BLOOD.createInstance()));
         this.addAbility(ability);
         // {U}{B}: Remove a blood counter from Bloodletter Quill.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new RemoveCounterSourceEffect(CounterType.BLOOD.createInstance()), new ManaCostsImpl("{U}{B}")));
+                new RemoveCounterSourceEffect(CounterType.BLOOD.createInstance()), new ManaCostsImpl<>("{U}{B}")));
     }
 
     private BloodletterQuill(final BloodletterQuill card) {

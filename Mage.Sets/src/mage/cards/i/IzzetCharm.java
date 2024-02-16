@@ -28,14 +28,12 @@ public final class IzzetCharm extends CardImpl {
         this.getSpellAbility().getTargets().add(new TargetSpell(StaticFilters.FILTER_SPELL_NON_CREATURE));
 
         // or Izzet Charm deals 2 damage to target creature;
-        Mode mode = new Mode();
-        mode.addEffect(new DamageTargetEffect(2));
+        Mode mode = new Mode(new DamageTargetEffect(2));
         mode.addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addMode(mode);
 
         //  or draw two cards, then discard two cards.
-        mode = new Mode();
-        mode.addEffect(new DrawDiscardControllerEffect(2, 2));
+        mode = new Mode(new DrawDiscardControllerEffect(2, 2));
         this.getSpellAbility().addMode(mode);
     }
 

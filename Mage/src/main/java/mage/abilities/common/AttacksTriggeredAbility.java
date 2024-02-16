@@ -34,9 +34,11 @@ public class AttacksTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, effect, optional);
         this.text = text;
         this.setTargetPointer = setTargetPointer;
+        setTriggerPhrase("Whenever {this} attacks, ");
+        this.replaceRuleText = true; // default true to replace "{this}" with "it"
     }
 
-    public AttacksTriggeredAbility(final AttacksTriggeredAbility ability) {
+    protected AttacksTriggeredAbility(final AttacksTriggeredAbility ability) {
         super(ability);
         this.text = ability.text;
         this.setTargetPointer = ability.setTargetPointer;
@@ -67,11 +69,6 @@ public class AttacksTriggeredAbility extends TriggeredAbilityImpl {
             return super.getRule();
         }
         return text;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} attacks, ";
     }
 
     @Override

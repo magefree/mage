@@ -10,10 +10,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -21,8 +18,6 @@ import mage.game.permanent.token.VojaFriendToElvesToken;
 import mage.target.common.TargetOpponentsCreaturePermanent;
 
 import java.util.UUID;
-
-import static mage.constants.Outcome.Benefit;
 
 /**
  * @author TheElk801
@@ -32,7 +27,7 @@ public final class TolsimirFriendToWolves extends CardImpl {
     public TolsimirFriendToWolves(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.SCOUT);
         this.power = new MageInt(3);
@@ -102,7 +97,7 @@ class TolsimirFriendToWolvesEffect extends OneShotEffect {
     private final MageObjectReference wolfMor;
 
     TolsimirFriendToWolvesEffect(MageObjectReference wolfMor) {
-        super(Benefit);
+        super(Outcome.Benefit);
         this.wolfMor = wolfMor;
     }
 

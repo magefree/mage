@@ -32,7 +32,7 @@ public final class UrsineChampion extends CardImpl {
                 Zone.BATTLEFIELD,
                 new BoostSourceEffect(3, 3, Duration.EndOfTurn)
                         .setText("{this} gets +3/+3"),
-                new ManaCostsImpl("{5}{G}")
+                new ManaCostsImpl<>("{5}{G}")
         );
         ability.addEffect(new UrsineChampionEffect());
         this.addAbility(ability);

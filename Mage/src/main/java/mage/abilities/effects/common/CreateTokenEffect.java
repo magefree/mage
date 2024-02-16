@@ -24,11 +24,11 @@ import java.util.UUID;
  */
 public class CreateTokenEffect extends OneShotEffect {
 
-    private Token token;
-    private DynamicValue amount;
-    private boolean tapped;
-    private boolean attacking;
-    private UUID lastAddedTokenId;
+    private final Token token;
+    private final DynamicValue amount;
+    private final boolean tapped;
+    private final boolean attacking;
+    private String additionalRules;
     private List<UUID> lastAddedTokenIds = new ArrayList<>();
 
     public CreateTokenEffect(Token token) {
@@ -41,6 +41,10 @@ public class CreateTokenEffect extends OneShotEffect {
 
     public CreateTokenEffect(Token token, DynamicValue amount) {
         this(token, amount, false, false);
+    }
+
+    public CreateTokenEffect(Token token, int amount, boolean tapped) {
+        this(token, amount, tapped, false);
     }
 
     public CreateTokenEffect(Token token, int amount, boolean tapped, boolean attacking) {
@@ -56,14 +60,14 @@ public class CreateTokenEffect extends OneShotEffect {
         setText();
     }
 
-    public CreateTokenEffect(final CreateTokenEffect effect) {
+    protected CreateTokenEffect(final CreateTokenEffect effect) {
         super(effect);
         this.amount = effect.amount.copy();
         this.token = effect.token.copy();
         this.tapped = effect.tapped;
         this.attacking = effect.attacking;
-        this.lastAddedTokenId = effect.lastAddedTokenId;
         this.lastAddedTokenIds.addAll(effect.lastAddedTokenIds);
+        this.additionalRules = effect.additionalRules;
     }
 
     @Override
@@ -75,14 +79,9 @@ public class CreateTokenEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         int value = amount.calculate(game, source, this);
         token.putOntoBattlefield(value, game, source, source.getControllerId(), tapped, attacking);
-        this.lastAddedTokenId = token.getLastAddedToken();
         this.lastAddedTokenIds = token.getLastAddedTokenIds();
 
         return true;
-    }
-
-    public UUID getLastAddedTokenId() {
-        return lastAddedTokenId;
     }
 
     public List<UUID> getLastAddedTokenIds() {
@@ -111,24 +110,32 @@ public class CreateTokenEffect extends OneShotEffect {
         }
     }
 
+    public CreateTokenEffect withAdditionalRules(String additionalRules) {
+        this.additionalRules = additionalRules;
+        setText();
+        return this;
+    }
+
     private void setText() {
         if (token.getDescription().contains(", a legendary")) {
             staticText = "create " + token.getDescription();
             return;
         }
+
         StringBuilder sb = new StringBuilder("create ");
         if (amount.toString().equals("1")) {
-            sb.append("a ");
             if (tapped && !attacking) {
-                sb.append("tapped ");
+                sb.append("a tapped ");
+                sb.append(token.getDescription());
+            } else {
+                sb.append(CardUtil.addArticle(token.getDescription()));
             }
-            sb.append(token.getDescription());
         } else {
             sb.append(CardUtil.numberToText(amount.toString())).append(' ');
             if (tapped && !attacking) {
                 sb.append("tapped ");
             }
-            sb.append(token.getDescription());
+            sb.append(token.getDescription().replace("token. It has", "tokens. They have"));
             if (token.getDescription().endsWith("token")) {
                 sb.append("s");
             }
@@ -137,6 +144,7 @@ public class CreateTokenEffect extends OneShotEffect {
                 sb.replace(tokenLocation, tokenLocation + 6, "tokens ");
             }
         }
+
         if (attacking) {
             if (amount.toString().equals("1")) {
                 sb.append(" that's");
@@ -148,15 +156,25 @@ public class CreateTokenEffect extends OneShotEffect {
             }
             sb.append(" attacking");
         }
+
         String message = amount.getMessage();
         if (!message.isEmpty()) {
             if (amount.toString().equals("X")) {
-                sb.append(", where X is ");
+                if (sb.toString().endsWith(".\"")) {
+                    sb.replace(sb.length() - 2, sb.length(), ",\" where X is ");
+                } else {
+                    sb.append(", where X is ");
+                }
             } else {
                 sb.append(" for each ");
             }
         }
         sb.append(message);
+
+        if (this.additionalRules != null) {
+            sb.append(this.additionalRules);
+        }
+
         staticText = sb.toString();
     }
 }

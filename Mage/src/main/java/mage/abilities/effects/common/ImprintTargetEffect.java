@@ -11,7 +11,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author noxx
  */
 public class ImprintTargetEffect extends OneShotEffect {
@@ -20,7 +19,7 @@ public class ImprintTargetEffect extends OneShotEffect {
         super(Outcome.Neutral);
     }
 
-    public ImprintTargetEffect(final ImprintTargetEffect effect) {
+    protected ImprintTargetEffect(final ImprintTargetEffect effect) {
         super(effect);
     }
 

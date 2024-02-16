@@ -46,12 +46,12 @@ public final class PerniciousDeed extends CardImpl {
 
 class PerniciousDeedEffect extends OneShotEffect {
 
-    public PerniciousDeedEffect() {
+    PerniciousDeedEffect() {
         super(Outcome.DestroyPermanent);
         staticText = "Destroy each artifact, creature, and enchantment with mana value X or less";
     }
 
-    public PerniciousDeedEffect(final PerniciousDeedEffect effect) {
+    private PerniciousDeedEffect(final PerniciousDeedEffect effect) {
         super(effect);
     }
 

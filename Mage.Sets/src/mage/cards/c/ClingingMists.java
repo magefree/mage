@@ -51,19 +51,19 @@ public final class ClingingMists extends CardImpl {
 
 class ClingingMistsEffect extends OneShotEffect {
 
-    public ClingingMistsEffect() {
+    ClingingMistsEffect() {
         super(Outcome.Tap);
         staticText = "tap all attacking creatures. Those creatures don't untap during their controller's next untap step";
     }
 
-    public ClingingMistsEffect(final ClingingMistsEffect effect) {
+    private ClingingMistsEffect(final ClingingMistsEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         List<Permanent> doNotUntapNextUntapStep = new ArrayList<>();
-        for (Permanent creature : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_ATTACKING_CREATURES, source.getControllerId(), source.getSourceId(), game)) {
+        for (Permanent creature : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_ATTACKING_CREATURES, source.getControllerId(), source, game)) {
             creature.tap(source, game);
             doNotUntapNextUntapStep.add(creature);
         }

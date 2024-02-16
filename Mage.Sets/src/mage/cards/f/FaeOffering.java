@@ -40,7 +40,7 @@ public final class FaeOffering extends CardImpl {
         );
         ability.addEffect(new CreateTokenEffect(new FoodToken()));
         ability.addEffect(new CreateTokenEffect(new TreasureToken()));
-        this.addAbility(ability.addHint(FaeOfferingHint.instance), new SpellsCastWatcher());
+        this.addAbility(ability.addHint(FaeOfferingHint.instance));
     }
 
     private FaeOffering(final FaeOffering card) {
@@ -93,7 +93,7 @@ enum FaeOfferingHint implements Hint {
                 .map(b -> b ? "Creature spell" : "Noncreature spell")
                 .sorted()
                 .collect(Collectors.toList());
-        if (messages.size() == 0) {
+        if (messages.isEmpty()) {
             return "You have not cast any spells this turn";
         }
         return "You have cast a " + String.join(" and a ", messages) + " this turn";

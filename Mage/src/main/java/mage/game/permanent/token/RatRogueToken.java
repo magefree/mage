@@ -11,7 +11,7 @@ import mage.constants.SubType;
 public class RatRogueToken extends TokenImpl {
 
     public RatRogueToken() {
-        super("Rat Rogue", "1/1 black Rat Rogue creature token");
+        super("Rat Rogue Token", "1/1 black Rat Rogue creature token");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add(SubType.RAT);

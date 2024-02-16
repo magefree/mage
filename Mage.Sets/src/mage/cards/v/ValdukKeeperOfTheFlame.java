@@ -18,7 +18,7 @@ import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.ValdukElementalToken;
+import mage.game.permanent.token.Elemental31TrampleHasteToken;
 
 /**
  *
@@ -29,7 +29,7 @@ public final class ValdukKeeperOfTheFlame extends CardImpl {
     public ValdukKeeperOfTheFlame(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SHAMAN);
         this.power = new MageInt(3);
@@ -51,12 +51,12 @@ public final class ValdukKeeperOfTheFlame extends CardImpl {
 
 class ValdukKeeperOfTheFlameEffect extends OneShotEffect {
 
-    public ValdukKeeperOfTheFlameEffect() {
+    ValdukKeeperOfTheFlameEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "for each Aura and Equipment attached to {this}, create a 3/1 red Elemental creature token with trample and haste. Exile those tokens at the beginning of the next end step";
     }
 
-    public ValdukKeeperOfTheFlameEffect(final ValdukKeeperOfTheFlameEffect effect) {
+    private ValdukKeeperOfTheFlameEffect(final ValdukKeeperOfTheFlameEffect effect) {
         super(effect);
     }
 
@@ -73,7 +73,7 @@ class ValdukKeeperOfTheFlameEffect extends OneShotEffect {
             int value = eamount.calculate(game, source, this);
             AuraAttachedCount aamount = new AuraAttachedCount();
             value += aamount.calculate(game, source, this);
-            CreateTokenEffect effect = new CreateTokenEffect(new ValdukElementalToken(), value);
+            CreateTokenEffect effect = new CreateTokenEffect(new Elemental31TrampleHasteToken(), value);
             if (effect.apply(game, source)) {
                 effect.exileTokensCreatedAtNextEndStep(game, source);
                 return true;

@@ -97,18 +97,18 @@ class OathOfGhoulsPredicate implements ObjectSourcePlayerPredicate<Player> {
 
 class OathOfGhoulsEffect extends OneShotEffect {
 
-    public OathOfGhoulsEffect() {
+    OathOfGhoulsEffect() {
         super(Outcome.Benefit);
         staticText = "that player chooses target player whose graveyard has fewer creature cards in it than their graveyard does and is their opponent. The first player may return a creature card from their graveyard to their hand";
     }
 
-    public OathOfGhoulsEffect(OathOfGhoulsEffect effect) {
+    private OathOfGhoulsEffect(final OathOfGhoulsEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         Player firstPlayer = game.getPlayer(game.getActivePlayerId());
         if (sourceObject == null || firstPlayer == null) {
             return false;
@@ -116,8 +116,8 @@ class OathOfGhoulsEffect extends OneShotEffect {
         FilterCard filter = new FilterCreatureCard("creature card");
         filter.add(new OwnerIdPredicate(firstPlayer.getId()));
         Target target = new TargetCardInGraveyard(filter);
-        target.setNotTarget(true);
-        if (target.canChoose(source.getSourceId(), firstPlayer.getId(), game)
+        target.withNotTarget(true);
+        if (target.canChoose(firstPlayer.getId(), source, game)
                 && firstPlayer.chooseUse(outcome, "Return a creature card from your graveyard to your hand?", source, game)
                 && firstPlayer.chooseTarget(Outcome.ReturnToHand, target, source, game)) {
             Card card = game.getCard(target.getFirstTarget());

@@ -29,7 +29,7 @@ public final class RecumbentBliss extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new RecumbentBlissEffect()));
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GainLifeEffect(1), TargetController.YOU, true));
@@ -47,12 +47,12 @@ public final class RecumbentBliss extends CardImpl {
 
 class RecumbentBlissEffect extends RestrictionEffect {
 
-    public RecumbentBlissEffect() {
+    RecumbentBlissEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "Enchanted creature can't attack or block";
     }
 
-    public RecumbentBlissEffect(final RecumbentBlissEffect effect) {
+    private RecumbentBlissEffect(final RecumbentBlissEffect effect) {
         super(effect);
     }
 
@@ -77,4 +77,3 @@ class RecumbentBlissEffect extends RestrictionEffect {
     }
 
 }
-

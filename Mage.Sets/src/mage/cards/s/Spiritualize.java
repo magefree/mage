@@ -1,23 +1,21 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
+import mage.abilities.dynamicvalue.common.SavedDamageValue;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -34,7 +32,7 @@ public final class Spiritualize extends CardImpl {
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new SpiritualizeTriggeredAbility()));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
     private Spiritualize(final Spiritualize card) {
@@ -50,10 +48,11 @@ public final class Spiritualize extends CardImpl {
 class SpiritualizeTriggeredAbility extends DelayedTriggeredAbility {
 
     public SpiritualizeTriggeredAbility() {
-        super(new SpiritualizeEffect(), Duration.EndOfTurn, false);
+        super(new GainLifeEffect(SavedDamageValue.MUCH), Duration.EndOfTurn, false);
+        setTriggerPhrase("Whenever target creature deals damage, ");
     }
 
-    public SpiritualizeTriggeredAbility(final SpiritualizeTriggeredAbility ability) {
+    private SpiritualizeTriggeredAbility(final SpiritualizeTriggeredAbility ability) {
         super(ability);
     }
 
@@ -76,41 +75,6 @@ class SpiritualizeTriggeredAbility extends DelayedTriggeredAbility {
                 effect.setValue("damage", event.getAmount());
             }
             return true;
-        }
-        return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever target creature deals damage, " ;
-    }
-}
-
-class SpiritualizeEffect extends OneShotEffect {
-
-    public SpiritualizeEffect() {
-        super(Outcome.GainLife);
-        this.staticText = "you gain that much life";
-    }
-
-    public SpiritualizeEffect(final SpiritualizeEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public SpiritualizeEffect copy() {
-        return new SpiritualizeEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        int amount = (Integer) getValue("damage");
-        if (amount > 0) {
-            Player controller = game.getPlayer(source.getControllerId());
-            if (controller != null) {
-                controller.gainLife(amount, game, source);
-                return true;
-            }
         }
         return false;
     }

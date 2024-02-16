@@ -9,12 +9,11 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ChooseOpponentEffect;
-import mage.abilities.effects.common.continuous.SetPowerSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
@@ -39,7 +38,7 @@ public final class Pallimud extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseOpponentEffect(Outcome.Detriment)));
         
         // Pallimud's power is equal to the number of tapped lands the chosen player controls.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerSourceEffect(new AnathemancerCount(), Duration.Custom)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerSourceEffect(new PallimudCount())));
     }
 
     private Pallimud(final Pallimud card) {
@@ -52,7 +51,7 @@ public final class Pallimud extends CardImpl {
     }
 }
 
-class AnathemancerCount implements DynamicValue {
+class PallimudCount implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -63,15 +62,15 @@ class AnathemancerCount implements DynamicValue {
                 FilterLandPermanent filter = new FilterLandPermanent("tapped lands the chosen player controls");
                 filter.add(TappedPredicate.TAPPED);
                 filter.add(new ControllerIdPredicate(playerId));
-                return game.getBattlefield().count(filter, sourceAbility.getSourceId(), sourceAbility.getControllerId(), game);
+                return game.getBattlefield().count(filter, sourceAbility.getControllerId(), sourceAbility, game);
             }
         }
         return 0;
     }
 
     @Override
-    public AnathemancerCount copy() {
-        return new AnathemancerCount();
+    public PallimudCount copy() {
+        return new PallimudCount();
     }
 
     @Override

@@ -29,7 +29,7 @@ public final class DesperateRavings extends CardImpl {
         // Draw two cards, then discard a card at random.
         this.getSpellAbility().addEffect(new DesperateRavingsEffect());
         // Flashback {2}{U}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{2}{U}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{2}{U}")));
     }
 
     private DesperateRavings(final DesperateRavings card) {
@@ -44,12 +44,12 @@ public final class DesperateRavings extends CardImpl {
 
 class DesperateRavingsEffect extends OneShotEffect {
 
-    public DesperateRavingsEffect() {
+    DesperateRavingsEffect() {
         super(Outcome.DrawCard);
         this.staticText = "Draw two cards, then discard a card at random";
     }
 
-    public DesperateRavingsEffect(final DesperateRavingsEffect effect) {
+    private DesperateRavingsEffect(final DesperateRavingsEffect effect) {
         super(effect);
     }
 

@@ -38,7 +38,7 @@ public final class LordOfShatterskullPass extends LevelerCard {
         this.toughness = new MageInt(3);
 
         // Level up {1}{R}
-        this.addAbility(new LevelUpAbility(new ManaCostsImpl("{1}{R}")));
+        this.addAbility(new LevelUpAbility(new ManaCostsImpl<>("{1}{R}")));
         // LEVEL 1-5
         // 6/6
         Abilities<Ability> abilities1 = new AbilitiesImpl<>();
@@ -66,12 +66,12 @@ public final class LordOfShatterskullPass extends LevelerCard {
 
 class LordOfShatterskullPassEffect extends OneShotEffect {
 
-    public LordOfShatterskullPassEffect() {
+    LordOfShatterskullPassEffect() {
         super(Outcome.Damage);
         this.staticText = "it deals 6 damage to each creature defending player controls";
     }
 
-    public LordOfShatterskullPassEffect(final LordOfShatterskullPassEffect effect) {
+    private LordOfShatterskullPassEffect(final LordOfShatterskullPassEffect effect) {
         super(effect);
     }
 
@@ -86,7 +86,7 @@ class LordOfShatterskullPassEffect extends OneShotEffect {
         if (defenderId != null) {
             FilterCreaturePermanent filter = new FilterCreaturePermanent();
             filter.add(new ControllerIdPredicate(defenderId));
-            List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game);
+            List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game);
             for (Permanent permanent : permanents) {
                 permanent.damage(6, source.getSourceId(), source, game, false, true);
             }

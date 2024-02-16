@@ -2,6 +2,7 @@
 package mage.abilities.effects.common;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
@@ -13,7 +14,6 @@ import mage.players.Player;
 import mage.util.CardUtil;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class DrawCardAllEffect extends OneShotEffect {
@@ -40,7 +40,7 @@ public class DrawCardAllEffect extends OneShotEffect {
         staticText = setText();
     }
 
-    public DrawCardAllEffect(final DrawCardAllEffect effect) {
+    protected DrawCardAllEffect(final DrawCardAllEffect effect) {
         super(effect);
         this.amount = effect.amount;
         this.targetController = effect.targetController;

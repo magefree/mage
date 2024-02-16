@@ -1,6 +1,7 @@
 package mage.abilities.effects.common;
 
 import java.util.Set;
+
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -17,7 +18,6 @@ import mage.players.Player;
 import mage.util.CardUtil;
 
 /**
- *
  * @author LevelX
  */
 public class RevealLibraryPutIntoHandEffect extends OneShotEffect {
@@ -44,7 +44,7 @@ public class RevealLibraryPutIntoHandEffect extends OneShotEffect {
         this.staticText = setText();
     }
 
-    public RevealLibraryPutIntoHandEffect(final RevealLibraryPutIntoHandEffect effect) {
+    protected RevealLibraryPutIntoHandEffect(final RevealLibraryPutIntoHandEffect effect) {
         super(effect);
         this.amountCards = effect.amountCards;
         this.filter = effect.filter;
@@ -60,19 +60,19 @@ public class RevealLibraryPutIntoHandEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (controller == null || sourceObject == null) {
             return false;
         }
 
         CardsImpl cards = new CardsImpl();
-        cards.addAll(controller.getLibrary().getTopCards(game, amountCards.calculate(game, source, this)));
+        cards.addAllCards(controller.getLibrary().getTopCards(game, amountCards.calculate(game, source, this)));
         controller.revealCards(sourceObject.getIdName(), cards, game);
 
         Set<Card> cardsList = cards.getCards(game);
         Cards cardsToHand = new CardsImpl();
         for (Card card : cardsList) {
-            if (filter.match(card, source.getSourceId(), controller.getId(), game)) {
+            if (filter.match(card, controller.getId(), source, game)) {
                 cardsToHand.add(card);
                 cards.remove(card);
             }

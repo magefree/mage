@@ -21,7 +21,7 @@ public class DarkAscensionPromos extends ExpansionSet {
         this.hasBasicLands = false;
 
         cards.add(new SetCardInfo("Archdemon of Greed", "71*", Rarity.RARE, mage.cards.a.ArchdemonOfGreed.class));
-        cards.add(new SetCardInfo("Gravecrawler", "*64", Rarity.RARE, mage.cards.g.Gravecrawler.class));
+        cards.add(new SetCardInfo("Gravecrawler", "64*", Rarity.RARE, mage.cards.g.Gravecrawler.class));
         cards.add(new SetCardInfo("Mondronen Shaman", "98*", Rarity.RARE, mage.cards.m.MondronenShaman.class));
         cards.add(new SetCardInfo("Ravenous Demon", "71*", Rarity.RARE, mage.cards.r.RavenousDemon.class));
         cards.add(new SetCardInfo("Strangleroot Geist", 127, Rarity.UNCOMMON, mage.cards.s.StranglerootGeist.class));

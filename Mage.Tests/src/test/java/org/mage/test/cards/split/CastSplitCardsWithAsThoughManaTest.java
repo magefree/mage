@@ -34,7 +34,6 @@ public class CastSplitCardsWithAsThoughManaTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerB, 20 - 3);
     }
@@ -67,7 +66,6 @@ public class CastSplitCardsWithAsThoughManaTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerB, "Bident of Thassa", 1);
         assertPermanentCount(playerB, "Bow of Nylea", 1);
@@ -100,7 +98,6 @@ public class CastSplitCardsWithAsThoughManaTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Balduvian Bears", 1);
         assertPermanentCount(playerB, "Balduvian Bears", 0);

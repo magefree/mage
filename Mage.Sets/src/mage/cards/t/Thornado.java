@@ -33,7 +33,7 @@ public final class Thornado extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
 
         // Cycling {1}{G}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{1}{G}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{1}{G}")));
     }
 
     private Thornado(final Thornado card) {

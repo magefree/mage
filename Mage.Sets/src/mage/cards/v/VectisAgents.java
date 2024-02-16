@@ -1,8 +1,5 @@
-
-
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -12,19 +9,18 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.constants.Zone;
+import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
- *
  * @author Loki
  */
 public final class VectisAgents extends CardImpl {
 
     public VectisAgents(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}{U}{B}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}{U}{B}");
 
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ROGUE);
@@ -32,10 +28,10 @@ public final class VectisAgents extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {U}{B}: Vectis Agents gets -2/-0 until end of turn and can't be blocked this turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new BoostSourceEffect(-2, -0, Duration.EndOfTurn),
-                new ManaCostsImpl("{U}{B}"));
-        ability.addEffect(new CantBeBlockedSourceEffect(Duration.EndOfTurn));
+        Ability ability = new SimpleActivatedAbility(new BoostSourceEffect(
+                -2, -0, Duration.EndOfTurn
+        ), new ManaCostsImpl<>("{U}{B}"));
+        ability.addEffect(new CantBeBlockedSourceEffect(Duration.EndOfTurn).setText("and can't be blocked this turn"));
         this.addAbility(ability);
     }
 
@@ -47,5 +43,4 @@ public final class VectisAgents extends CardImpl {
     public VectisAgents copy() {
         return new VectisAgents(this);
     }
-
 }

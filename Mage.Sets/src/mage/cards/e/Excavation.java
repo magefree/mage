@@ -15,6 +15,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.Game;
 import mage.players.Player;
@@ -30,8 +31,8 @@ public final class Excavation extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
 
         // {1}, Sacrifice a land: Draw a card. Any player may activate this ability.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{1}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledLandPermanent("a land"))));
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{1}"));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_LAND));
         ability.setMayActivate(TargetController.ANY);
         this.addAbility(ability);
     }
@@ -48,12 +49,12 @@ public final class Excavation extends CardImpl {
 
 class ExcavationEffect extends OneShotEffect {
 
-    public ExcavationEffect() {
+    ExcavationEffect() {
         super(Outcome.DrawCard);
         this.staticText = "Draw a card. Any player may activate this ability";
     }
 
-    public ExcavationEffect(final ExcavationEffect effect) {
+    private ExcavationEffect(final ExcavationEffect effect) {
         super(effect);
     }
 

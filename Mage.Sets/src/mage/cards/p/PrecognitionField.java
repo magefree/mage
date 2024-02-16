@@ -26,7 +26,7 @@ import java.util.UUID;
  */
 public final class PrecognitionField extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("cast instant or sorcery spells");
+    private static final FilterCard filter = new FilterCard("cast instant and sorcery spells");
 
     static {
         filter.add(Predicates.or(
@@ -60,12 +60,12 @@ public final class PrecognitionField extends CardImpl {
 
 class PrecognitionFieldExileEffect extends OneShotEffect {
 
-    public PrecognitionFieldExileEffect() {
+    PrecognitionFieldExileEffect() {
         super(Outcome.Benefit);
         staticText = "exile the top card of your library";
     }
 
-    public PrecognitionFieldExileEffect(final PrecognitionFieldExileEffect effect) {
+    private PrecognitionFieldExileEffect(final PrecognitionFieldExileEffect effect) {
         super(effect);
     }
 

@@ -67,12 +67,12 @@ class CanBlockOnlySpaceflightAbility extends SimpleStaticAbility {
 
 class CanBlockOnlySpaceflightEffect extends RestrictionEffect {
 
-    public CanBlockOnlySpaceflightEffect(Duration duration) {
+    CanBlockOnlySpaceflightEffect(Duration duration) {
         super(duration);
         this.staticText = "{this} can block only creatures with spaceflight";
     }
 
-    public CanBlockOnlySpaceflightEffect(final CanBlockOnlySpaceflightEffect effect) {
+    private CanBlockOnlySpaceflightEffect(final CanBlockOnlySpaceflightEffect effect) {
         super(effect);
     }
 

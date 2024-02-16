@@ -42,13 +42,13 @@ public final class SoulOfShandalar extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
 
         // {3}{R}{R}: Soul of Shandalar deals 3 damage to target player and 3 damage to up to one target creature that player controls.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SoulOfShandalarEffect(), new ManaCostsImpl("{3}{R}{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SoulOfShandalarEffect(), new ManaCostsImpl<>("{3}{R}{R}"));
         ability.addTarget(new TargetPlayerOrPlaneswalker());
         ability.addTarget(new SoulOfShandalarTarget());
         this.addAbility(ability);
 
         // {3}{R}{R}, Exile Soul of Shandalar from your graveyard: Soul of Shandalar deals 3 damage to target player and 3 damage to up to one target creature that player controls.
-        ability = new SimpleActivatedAbility(Zone.GRAVEYARD, new SoulOfShandalarEffect(), new ManaCostsImpl("{3}{R}{R}"));
+        ability = new SimpleActivatedAbility(Zone.GRAVEYARD, new SoulOfShandalarEffect(), new ManaCostsImpl<>("{3}{R}{R}"));
         ability.addCost(new ExileSourceFromGraveCost());
         ability.addTarget(new TargetPlayerOrPlaneswalker());
         ability.addTarget(new SoulOfShandalarTarget());
@@ -67,13 +67,13 @@ public final class SoulOfShandalar extends CardImpl {
 
 class SoulOfShandalarEffect extends OneShotEffect {
 
-    public SoulOfShandalarEffect() {
+    SoulOfShandalarEffect() {
         super(Outcome.Damage);
         staticText = "{this} deals 3 damage to target player or planeswalker "
                 + "and 3 damage to up to one target creature that player or that planeswalker's controller controls";
     }
 
-    public SoulOfShandalarEffect(final SoulOfShandalarEffect effect) {
+    private SoulOfShandalarEffect(final SoulOfShandalarEffect effect) {
         super(effect);
     }
 
@@ -84,7 +84,7 @@ class SoulOfShandalarEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        game.damagePlayerOrPlaneswalker(source.getTargets().get(0).getFirstTarget(), 3, source.getSourceId(), source, game, false, true);
+        game.damagePlayerOrPermanent(source.getTargets().get(0).getFirstTarget(), 3, source.getSourceId(), source, game, false, true);
         Permanent creature = game.getPermanent(source.getTargets().get(1).getFirstTarget());
         if (creature != null) {
             creature.damage(3, source.getSourceId(), source, game, false, true);
@@ -99,7 +99,7 @@ class SoulOfShandalarTarget extends TargetPermanent {
         super(0, 1, new FilterCreaturePermanent("creature that the targeted player or planeswalker's controller controls"), false);
     }
 
-    public SoulOfShandalarTarget(final SoulOfShandalarTarget target) {
+    private SoulOfShandalarTarget(final SoulOfShandalarTarget target) {
         super(target);
     }
 
@@ -118,16 +118,16 @@ class SoulOfShandalarTarget extends TargetPermanent {
     }
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
-        Set<UUID> availablePossibleTargets = super.possibleTargets(sourceId, sourceControllerId, game);
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
+        Set<UUID> availablePossibleTargets = super.possibleTargets(sourceControllerId, source, game);
         Set<UUID> possibleTargets = new HashSet<>();
-        MageObject object = game.getObject(sourceId);
+        MageObject object = game.getObject(source);
 
         for (StackObject item : game.getState().getStack()) {
-            if (item.getId().equals(sourceId)) {
+            if (item.getId().equals(source.getSourceId())) {
                 object = item;
             }
-            if (item.getSourceId().equals(sourceId)) {
+            if (item.getSourceId().equals(source.getSourceId())) {
                 object = item;
             }
         }

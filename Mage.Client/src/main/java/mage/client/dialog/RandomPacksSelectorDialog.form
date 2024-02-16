@@ -9,9 +9,9 @@
       <Value id="APPLICATION_EXCLUDE"/>
     </Property>
     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[600, 450]"/>
+      <Dimension value="[875, 475]"/>
     </Property>
-    <Property name="resizable" type="boolean" value="false"/>
+    <Property name="resizable" type="boolean" value="true"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -71,8 +71,8 @@
     <Container class="java.awt.Panel" name="pnlPacks">
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
-        <Property name="columns" type="int" value="13"/>
-        <Property name="rows" type="int" value="12"/>
+        <Property name="columns" type="int" value="14"/>
+        <Property name="rows" type="int" value="14"/>
       </Layout>
     </Container>
     <Container class="javax.swing.JPanel" name="pnlSelect">

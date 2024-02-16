@@ -44,12 +44,12 @@ public final class BeastmasterAscension extends CardImpl {
 
 class BeastmasterAscensionEffect extends BoostControlledEffect {
 
-    public BeastmasterAscensionEffect() {
+    BeastmasterAscensionEffect() {
         super(5, 5, Duration.WhileOnBattlefield);
         staticText = "As long as {this} has seven or more quest counters on it, creatures you control get +5/+5";
     }
 
-    public BeastmasterAscensionEffect(final BeastmasterAscensionEffect effect) {
+    private BeastmasterAscensionEffect(final BeastmasterAscensionEffect effect) {
         super(effect);
     }
 

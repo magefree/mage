@@ -59,7 +59,7 @@ public final class RealityScramble extends CardImpl {
 
 class RealityScrambleEffect extends OneShotEffect {
 
-    public RealityScrambleEffect() {
+    RealityScrambleEffect() {
         super(Outcome.Benefit);
         this.staticText = "Put target permanent you own "
                 + "on the bottom of your library. Reveal cards from "
@@ -69,7 +69,7 @@ class RealityScrambleEffect extends OneShotEffect {
                 + "on the bottom of your library in a random order.";
     }
 
-    public RealityScrambleEffect(final RealityScrambleEffect effect) {
+    private RealityScrambleEffect(final RealityScrambleEffect effect) {
         super(effect);
     }
 

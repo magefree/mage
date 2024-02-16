@@ -75,7 +75,7 @@ class RavenousRotbellyEffect extends OneShotEffect {
             return false;
         }
         TargetPermanent target = new TargetPermanent(0, 3, filter, true);
-        player.choose(outcome, target, source.getSourceId(), game);
+        player.choose(outcome, target, source, game);
         int amount = 0;
         for (UUID permanentId : target.getTargets()) {
             Permanent permanent = game.getPermanent(permanentId);

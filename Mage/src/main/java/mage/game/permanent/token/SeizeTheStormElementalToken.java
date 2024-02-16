@@ -4,15 +4,12 @@ import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.abilities.hint.Hint;
 import mage.abilities.hint.StaticHint;
 import mage.abilities.keyword.TrampleAbility;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.SubType;
-
-import java.util.Arrays;
 
 /**
  * @author TheElk801
@@ -24,7 +21,7 @@ public final class SeizeTheStormElementalToken extends TokenImpl {
     }
 
     public SeizeTheStormElementalToken(DynamicValue xValue, Hint hint) {
-        super("Elemental", "red Elemental creature token with trample and " +
+        super("Elemental Token", "red Elemental creature token with trample and " +
                 "\"This creature's power and toughness are each equal to the number of instant " +
                 "and sorcery cards in your graveyard plus the number of cards with flashback you own in exile.\"");
         cardType.add(CardType.CREATURE);
@@ -33,13 +30,11 @@ public final class SeizeTheStormElementalToken extends TokenImpl {
         power = new MageInt(0);
         toughness = new MageInt(0);
         this.addAbility(TrampleAbility.getInstance());
-        this.addAbility(new SimpleStaticAbility(new SetPowerToughnessSourceEffect(
-                xValue, Duration.WhileOnBattlefield
+        this.addAbility(new SimpleStaticAbility(new SetBasePowerToughnessSourceEffect(
+                xValue
         ).setText("this creature's power and toughness are each equal to the number of " +
                 "instant and sorcery cards in your graveyard, plus the number of cards with flashback you own in exile")
         ).addHint(hint));
-
-        availableImageSetCodes = Arrays.asList("MID");
     }
 
     private SeizeTheStormElementalToken(final SeizeTheStormElementalToken token) {

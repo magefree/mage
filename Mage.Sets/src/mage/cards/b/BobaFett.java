@@ -28,7 +28,7 @@ public final class BobaFett extends CardImpl {
 
     public BobaFett(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{R}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN, SubType.HUNTER);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

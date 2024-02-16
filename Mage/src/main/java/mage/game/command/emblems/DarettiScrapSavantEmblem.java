@@ -1,4 +1,3 @@
-
 package mage.game.command.emblems;
 
 import mage.abilities.Ability;
@@ -18,17 +17,23 @@ import mage.game.events.ZoneChangeEvent;
 import mage.target.targetpointer.FixedTarget;
 
 /**
- *
  * @author spjspj
  */
 public final class DarettiScrapSavantEmblem extends Emblem {
     // You get an emblem with "Whenever an artifact is put into your graveyard from the battlefield, return that card to the battlefield at the beginning of the next end step."
 
     public DarettiScrapSavantEmblem() {
-        setName("Emblem Daretti");
-        this.setExpansionSetCodeForImage("C14");
-
+        super("Emblem Daretti");
         this.getAbilities().add(new DarettiScrapSavantTriggeredAbility());
+    }
+
+    private DarettiScrapSavantEmblem(final DarettiScrapSavantEmblem card) {
+        super(card);
+    }
+
+    @Override
+    public DarettiScrapSavantEmblem copy() {
+        return new DarettiScrapSavantEmblem(this);
     }
 }
 
@@ -36,6 +41,7 @@ class DarettiScrapSavantTriggeredAbility extends TriggeredAbilityImpl {
 
     DarettiScrapSavantTriggeredAbility() {
         super(Zone.COMMAND, new DarettiScrapSavantEffect(), false);
+        setTriggerPhrase("Whenever an artifact is put into your graveyard from the battlefield, ");
     }
 
     DarettiScrapSavantTriggeredAbility(final DarettiScrapSavantTriggeredAbility ability) {
@@ -62,11 +68,6 @@ class DarettiScrapSavantTriggeredAbility extends TriggeredAbilityImpl {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever an artifact is put into your graveyard from the battlefield, " ;
     }
 }
 

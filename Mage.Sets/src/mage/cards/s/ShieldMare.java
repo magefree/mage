@@ -2,20 +2,21 @@ package mage.cards.s;
 
 import mage.MageInt;
 import mage.ObjectColor;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.BecomesTargetSourceTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect;
+import mage.abilities.meta.OrTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.game.Game;
-import mage.game.events.GameEvent;
 
 import java.util.UUID;
 
@@ -43,7 +44,10 @@ public final class ShieldMare extends CardImpl {
         ));
 
         // When Shield Mare enters the battlefield or becomes the target of a spell or ability and opponent controls, you gain 3 life.
-        this.addAbility(new ShieldMareTriggeredAbility());
+        this.addAbility(new OrTriggeredAbility(Zone.ALL, new GainLifeEffect(3), false,
+                "When {this} enters the battlefield or becomes the target of a spell or ability an opponent controls, ",
+                new EntersBattlefieldTriggeredAbility(null),
+                new BecomesTargetSourceTriggeredAbility(null, StaticFilters.FILTER_SPELL_OR_ABILITY_OPPONENTS)));
     }
 
     private ShieldMare(final ShieldMare card) {
@@ -53,47 +57,5 @@ public final class ShieldMare extends CardImpl {
     @Override
     public ShieldMare copy() {
         return new ShieldMare(this);
-    }
-}
-
-class ShieldMareTriggeredAbility extends TriggeredAbilityImpl {
-
-    public ShieldMareTriggeredAbility() {
-        super(Zone.ALL, new GainLifeEffect(3));
-    }
-
-    public ShieldMareTriggeredAbility(final ShieldMareTriggeredAbility effect) {
-        super(effect);
-    }
-
-    @Override
-    public ShieldMareTriggeredAbility copy() {
-        return new ShieldMareTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD
-                || event.getType() == GameEvent.EventType.TARGETED;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        switch (event.getType()) {
-            case ENTERS_THE_BATTLEFIELD:
-                return event.getTargetId().equals(getSourceId());
-            case TARGETED:
-                break;
-            default:
-                return false;
-        }
-        return event.getTargetId().equals(this.getSourceId())
-                && game.getOpponents(this.getControllerId()).contains(game.getControllerId(event.getSourceId()));
-    }
-
-    @Override
-    public String getRule() {
-        return "When {this} enters the battlefield or becomes the target "
-                + "of a spell or ability an opponent controls, you gain 3 life";
     }
 }

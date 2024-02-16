@@ -34,7 +34,7 @@ public final class Glimmerpost extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
     }
 
-    public Glimmerpost (final Glimmerpost card) {
+    private Glimmerpost(final Glimmerpost card) {
         super(card);
     }
 
@@ -57,13 +57,13 @@ class GlimmerpostEffect extends OneShotEffect {
         staticText = "you gain 1 life for each Locus on the battlefield";
     }
 
-    public GlimmerpostEffect(final GlimmerpostEffect effect) {
+    private GlimmerpostEffect(final GlimmerpostEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int amount = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game);
+        int amount = game.getBattlefield().count(filter, source.getControllerId(), source, game);
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             player.gainLife(amount, game, source);

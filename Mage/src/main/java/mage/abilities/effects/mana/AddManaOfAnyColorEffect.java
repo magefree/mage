@@ -2,6 +2,7 @@ package mage.abilities.effects.mana;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -41,7 +42,7 @@ public class AddManaOfAnyColorEffect extends BasicManaEffect {
         this.setFlag = setFlag;
     }
 
-    public AddManaOfAnyColorEffect(final AddManaOfAnyColorEffect effect) {
+    protected AddManaOfAnyColorEffect(final AddManaOfAnyColorEffect effect) {
         super(effect);
         this.amount = effect.amount;
         this.netMana.addAll(effect.netMana);
@@ -81,7 +82,7 @@ public class AddManaOfAnyColorEffect extends BasicManaEffect {
             if (controller != null) {
                 String mes = String.format("Select a color of mana to add %d of it", this.amount);
                 if (mes != null) {
-                    ChoiceColor choice = new ChoiceColor(true, mes, game.getObject(source.getSourceId()));
+                    ChoiceColor choice = new ChoiceColor(true, mes, game.getObject(source));
                     if (controller.choose(outcome, choice, game)) {
                         if (choice.getColor() != null) {
                             Mana mana = choice.getMana(amount);

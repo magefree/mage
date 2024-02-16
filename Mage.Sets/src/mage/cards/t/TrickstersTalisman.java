@@ -17,6 +17,9 @@ import mage.constants.SubType;
 import mage.game.Game;
 
 import java.util.UUID;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.constants.Outcome;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  * @author TheElk801
@@ -34,7 +37,7 @@ public final class TrickstersTalisman extends CardImpl {
         this.addAbility(ability.withFlavorWord("Invoke Duplicity"));
 
         // Equip {2}
-        this.addAbility(new EquipAbility(2));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2), new TargetControlledCreaturePermanent(), false));
     }
 
     private TrickstersTalisman(final TrickstersTalisman card) {
@@ -66,13 +69,14 @@ class TrickstersTalismanEffect extends GainAbilityWithAttachmentEffect {
 
     @Override
     protected Ability makeAbility(Game game, Ability source) {
-        if (game == null || source == null) {
+        if (game == null || source == null || source.getSourcePermanentIfItStillExists(game) == null) {
             return null;
         }
         return new DealsCombatDamageToAPlayerTriggeredAbility(new DoIfCostPaid(
-                new CreateTokenCopySourceEffect(), useAttachedCost.setMageObjectReference(source, game)
-        ), false, "Whenever this creature deals combat damage to a player, you may sacrifice "
-                + source.getSourcePermanentIfItStillExists(game).getName()
-                + ". If you do, create a token that's a copy of this creature.", false);
+                new CreateTokenCopySourceEffect().setText("create a token that's a copy of this creature"),
+                useAttachedCost.setMageObjectReference(source, game)
+        ).setText("you may sacrifice " + source.getSourcePermanentIfItStillExists(game).getName()
+                + ". If you do, create a token that's a copy of this creature"
+        ), false).setTriggerPhrase("Whenever this creature deals combat damage to a player, ");
     }
 }

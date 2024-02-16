@@ -13,7 +13,6 @@ import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 
 /**
- *
  * @author LevelX2
  */
 public abstract class PayCostToAttackBlockEffectImpl extends ReplacementEffectImpl implements PayCostToAttackBlockEffect {
@@ -50,18 +49,16 @@ public abstract class PayCostToAttackBlockEffectImpl extends ReplacementEffectIm
     public PayCostToAttackBlockEffectImpl(Duration duration, Outcome outcome, RestrictType restrictType, Cost cost) {
         super(duration, outcome, false);
         this.restrictType = restrictType;
-        this.cost = cost;
-        this.manaCosts = null;
+        if (cost instanceof ManaCosts) {
+            this.cost = null;
+            this.manaCosts = (ManaCosts) cost;
+        } else {
+            this.cost = cost;
+            this.manaCosts = null;
+        }
     }
 
-    public PayCostToAttackBlockEffectImpl(Duration duration, Outcome outcome, RestrictType restrictType, ManaCosts manaCosts) {
-        super(duration, outcome, false);
-        this.restrictType = restrictType;
-        this.cost = null;
-        this.manaCosts = manaCosts;
-    }
-
-    public PayCostToAttackBlockEffectImpl(final PayCostToAttackBlockEffectImpl effect) {
+    protected PayCostToAttackBlockEffectImpl(final PayCostToAttackBlockEffectImpl effect) {
         super(effect);
         if (effect.cost != null) {
             this.cost = effect.cost.copy();
@@ -131,7 +128,7 @@ public abstract class PayCostToAttackBlockEffectImpl extends ReplacementEffectIm
             attackBlockOtherTax.clearPaid();
             if (attackBlockOtherTax.canPay(source, source, event.getPlayerId(), game)
                     && player.chooseUse(Outcome.Neutral,
-                            attackBlockOtherTax.getText() + " to " + (event.getType() == GameEvent.EventType.DECLARE_ATTACKER ? "attack?" : "block?"), source, game)) {
+                    attackBlockOtherTax.getText() + " to " + (event.getType() == GameEvent.EventType.DECLARE_ATTACKER ? "attack?" : "block?"), source, game)) {
                 if (attackBlockOtherTax.pay(source, game, source, event.getPlayerId(), false, null)) {
                     return false;
                 }

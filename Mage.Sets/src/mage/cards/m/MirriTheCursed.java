@@ -24,7 +24,7 @@ public final class MirriTheCursed extends CardImpl {
 
     public MirriTheCursed(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.VAMPIRE);
         this.subtype.add(SubType.CAT);
         this.power = new MageInt(3);

@@ -59,7 +59,7 @@ class DelverOfSecretsEffect extends OneShotEffect {
         this.staticText = "look at the top card of your library. You may reveal that card. If an instant or sorcery card is revealed this way, transform {this}";
     }
 
-    public DelverOfSecretsEffect(final DelverOfSecretsEffect effect) {
+    private DelverOfSecretsEffect(final DelverOfSecretsEffect effect) {
         super(effect);
     }
 

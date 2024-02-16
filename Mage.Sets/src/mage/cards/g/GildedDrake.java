@@ -56,12 +56,12 @@ public final class GildedDrake extends CardImpl {
 
 class GildedDrakeEffect extends OneShotEffect {
 
-    public GildedDrakeEffect() {
+    GildedDrakeEffect() {
         super(Outcome.GainControl);
         this.staticText = "exchange control of {this} and up to one target creature an opponent controls. If you don't or can't make an exchange, sacrifice {this}. This ability still resolves if its target becomes illegal";
     }
 
-    public GildedDrakeEffect(final GildedDrakeEffect effect) {
+    private GildedDrakeEffect(final GildedDrakeEffect effect) {
         super(effect);
     }
 
@@ -72,24 +72,23 @@ class GildedDrakeEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Permanent sourceObject = game.getPermanent(source.getSourceId());
-            if (sourceObject != null) {
-                if (targetPointer.getFirst(game, source) != null) {
-                    Permanent targetPermanent = game.getPermanent(targetPointer.getFirst(game, source));
-                    if (targetPermanent != null) {
-                        ContinuousEffect effect = new ExchangeControlTargetEffect(Duration.EndOfGame, "", true);
-                        effect.setTargetPointer(targetPointer);
-                        game.addEffect(effect, source);
-                        return true;
-                    }
-                }
-                sourceObject.sacrifice(source, game);
-            }
+        if (controller == null) {
+            return false;
+        }
+        Permanent sourceObject = game.getPermanent(source.getSourceId());
+        if (sourceObject == null) {
+            return false;
+        }
+
+        if (targetPointer.getFirst(game, source) == null || game.getPermanent(targetPointer.getFirst(game, source)) == null) {
+            sourceObject.sacrifice(source, game);
             return true;
         }
-        return false;
+
+        ContinuousEffect effect = new ExchangeControlTargetEffect(Duration.EndOfGame, "", true);
+        effect.setTargetPointer(this.getTargetPointer().copy());
+        game.addEffect(effect, source);
+        return true;
     }
 }

@@ -20,12 +20,18 @@ public class AtTheBeginOfMainPhaseDelayedTriggeredAbility extends DelayedTrigger
         NEXT_PRECOMBAT_MAIN("next precombat main phase"),
         NEXT_POSTCOMAT_MAIN("next postcombat main phase"),
         NEXT_MAIN("next main phase"),
-        NEXT_MAIN_THIS_TURN("next main phase this turn");
+        NEXT_MAIN_THIS_TURN("next main phase this turn", Duration.EndOfTurn);
 
         private final String text;
+        private final Duration duration;
 
         PhaseSelection(String text) {
+            this(text, Duration.EndOfGame);
+        }
+
+        PhaseSelection(String text, Duration duration) {
             this.text = text;
+            this.duration = duration;
         }
 
         @Override
@@ -38,13 +44,13 @@ public class AtTheBeginOfMainPhaseDelayedTriggeredAbility extends DelayedTrigger
     private final PhaseSelection phaseSelection;
 
     public AtTheBeginOfMainPhaseDelayedTriggeredAbility(Effect effect, boolean optional, TargetController targetController, PhaseSelection phaseSelection) {
-        super(effect, Duration.EndOfGame, true, optional);
+        super(effect, phaseSelection.duration, true, optional);
         this.targetController = targetController;
         this.phaseSelection = phaseSelection;
-
+        setTriggerPhrase(generateTriggerPhrase());
     }
 
-    public AtTheBeginOfMainPhaseDelayedTriggeredAbility(final AtTheBeginOfMainPhaseDelayedTriggeredAbility ability) {
+    protected AtTheBeginOfMainPhaseDelayedTriggeredAbility(final AtTheBeginOfMainPhaseDelayedTriggeredAbility ability) {
         super(ability);
         this.targetController = ability.targetController;
         this.phaseSelection = ability.phaseSelection;
@@ -67,23 +73,18 @@ public class AtTheBeginOfMainPhaseDelayedTriggeredAbility extends DelayedTrigger
                 return true;
             case YOU:
                 return event.getPlayerId().equals(this.controllerId);
-
             case OPPONENT:
-                if (game.getPlayer(this.getControllerId()).hasOpponent(event.getPlayerId(), game)) {
-                    return true;
-                }
-                break;
-
+                return game.getPlayer(this.getControllerId()).hasOpponent(event.getPlayerId(), game);
             case CONTROLLER_ATTACHED_TO:
                 Permanent attachment = game.getPermanent(sourceId);
-                if (attachment != null && attachment.getAttachedTo() != null) {
-                    Permanent attachedTo = game.getPermanent(attachment.getAttachedTo());
-                    if (attachedTo != null && attachedTo.isControlledBy(event.getPlayerId())) {
-                        return true;
-                    }
+                if (attachment == null || attachment.getAttachedTo() == null) {
+                    return false;
                 }
+                Permanent attachedTo = game.getPermanent(attachment.getAttachedTo());
+                return attachedTo != null && attachedTo.isControlledBy(event.getPlayerId());
+            default:
+                return false;
         }
-        return false;
     }
 
     private boolean checkPhase(EventType eventType) {
@@ -100,8 +101,7 @@ public class AtTheBeginOfMainPhaseDelayedTriggeredAbility extends DelayedTrigger
         }
     }
 
-    @Override
-    public String getRule() {
+    private String generateTriggerPhrase() {
         switch (targetController) {
             case YOU:
                 return "At the beginning of your " + phaseSelection + ", ";

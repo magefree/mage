@@ -37,7 +37,7 @@ public final class OgreSiegebreaker extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {2}{B}{R}: Destroy target creature that was dealt damage this turn.
-        Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect(), new ManaCostsImpl("{2}{B}{R}"));
+        Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect(), new ManaCostsImpl<>("{2}{B}{R}"));
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }

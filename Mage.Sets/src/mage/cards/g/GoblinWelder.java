@@ -63,7 +63,7 @@ public final class GoblinWelder extends CardImpl {
             this.setTargetPointer(new EachTargetPointer());
         }
 
-        public GoblinWelderEffect(final GoblinWelderEffect effect) {
+        private GoblinWelderEffect(final GoblinWelderEffect effect) {
             super(effect);
         }
 
@@ -107,7 +107,7 @@ public final class GoblinWelder extends CardImpl {
             targetName = "target artifact card in that player's graveyard";
         }
 
-        public GoblinWelderTarget(final GoblinWelderTarget target) {
+        private GoblinWelderTarget(final GoblinWelderTarget target) {
             super(target);
         }
 

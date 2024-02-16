@@ -11,7 +11,6 @@ import mage.constants.PhaseStep;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
@@ -21,7 +20,6 @@ import mage.players.Player;
 public class DontUntapInPlayersNextUntapStepAllEffect extends ContinuousRuleModifyingEffectImpl {
 
     private int validForTurnNum;
-    //private String targetName;
     FilterPermanent filter;
 
     /**
@@ -36,7 +34,7 @@ public class DontUntapInPlayersNextUntapStepAllEffect extends ContinuousRuleModi
         this.filter = filter;
     }
 
-    public DontUntapInPlayersNextUntapStepAllEffect(final DontUntapInPlayersNextUntapStepAllEffect effect) {
+    protected DontUntapInPlayersNextUntapStepAllEffect(final DontUntapInPlayersNextUntapStepAllEffect effect) {
         super(effect);
         this.validForTurnNum = effect.validForTurnNum;
         this.filter = effect.filter;
@@ -49,13 +47,8 @@ public class DontUntapInPlayersNextUntapStepAllEffect extends ContinuousRuleModi
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         Permanent permanentToUntap = game.getPermanent((event.getTargetId()));
         if (permanentToUntap != null && mageObject != null) {
             return permanentToUntap.getLogName() + " doesn't untap (" + mageObject.getLogName() + ')';
@@ -65,7 +58,8 @@ public class DontUntapInPlayersNextUntapStepAllEffect extends ContinuousRuleModi
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.UNTAP_STEP || event.getType() == GameEvent.EventType.UNTAP;
+        return event.getType() == GameEvent.EventType.UNTAP_STEP
+                || event.getType() == GameEvent.EventType.UNTAP;
     }
 
     @Override
@@ -90,7 +84,7 @@ public class DontUntapInPlayersNextUntapStepAllEffect extends ContinuousRuleModi
             }
         }
 
-        if (game.getTurn().getStepType() == PhaseStep.UNTAP && event.getType() == GameEvent.EventType.UNTAP) {
+        if (game.getTurnStepType() == PhaseStep.UNTAP && event.getType() == GameEvent.EventType.UNTAP) {
             Permanent permanent = game.getPermanent(event.getTargetId());
             if (permanent != null) {
                 Player controller = game.getPlayer(source.getControllerId());
@@ -102,7 +96,7 @@ public class DontUntapInPlayersNextUntapStepAllEffect extends ContinuousRuleModi
                 }
                 if (game.isActivePlayer(permanent.getControllerId())
                         && // controller's untap step
-                        filter.match(permanent, source.getSourceId(), source.getControllerId(), game)) {
+                        filter.match(permanent, source.getControllerId(), source, game)) {
                     return true;
                 }
             }
@@ -115,6 +109,9 @@ public class DontUntapInPlayersNextUntapStepAllEffect extends ContinuousRuleModi
         if (!staticText.isEmpty()) {
             return staticText;
         }
-        return filter.getMessage() + " target opponent controls don't untap during their next untap step.";
+        return filter.getMessage()
+                + ' '
+                + getTargetPointer().describeTargets(mode.getTargets(), "target opponent")
+                + " controls don't untap during their next untap step";
     }
 }

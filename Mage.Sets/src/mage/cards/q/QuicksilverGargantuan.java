@@ -1,4 +1,3 @@
-
 package mage.cards.q;
 
 import java.util.UUID;
@@ -12,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.util.functions.CopyApplier;
 
 /**
@@ -28,7 +26,8 @@ public final class QuicksilverGargantuan extends CardImpl {
         this.toughness = new MageInt(7);
 
         Ability ability = new EntersBattlefieldAbility(new CopyPermanentEffect(new QuicksilverGargantuanCopyApplier()),
-                "You may have {this} enter the battlefield as a copy of any creature on the battlefield, except it's 7/7");
+                true, null, null,
+                "as a copy of any creature on the battlefield, except it's 7/7");
         this.addAbility(ability);
     }
 
@@ -47,8 +46,8 @@ class QuicksilverGargantuanCopyApplier extends CopyApplier {
     @Override
     public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
         blueprint.removePTCDA();
-        blueprint.getPower().modifyBaseValue(7);
-        blueprint.getToughness().modifyBaseValue(7);
+        blueprint.getPower().setModifiedBaseValue(7);
+        blueprint.getToughness().setModifiedBaseValue(7);
         return true;
     }
 }

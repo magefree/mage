@@ -27,7 +27,7 @@ public final class DarthMaul extends CardImpl {
 
     public DarthMaul(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ZABRAK);
         this.subtype.add(SubType.SITH);
         this.power = new MageInt(2);

@@ -37,7 +37,7 @@ public final class NezumiShortfang extends CardImpl {
         this.flipCardName = "Stabwhisker the Odious";
 
         // {1}{B}, {tap}: Target opponent discards a card. Then if that player has no cards in hand, flip Nezumi Shortfang.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DiscardTargetEffect(1), new ManaCostsImpl("{1}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DiscardTargetEffect(1), new ManaCostsImpl<>("{1}{B}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetOpponent());
         ability.addEffect(new ConditionalOneShotEffect(
@@ -61,7 +61,7 @@ class StabwhiskerTheOdious extends TokenImpl {
 
     StabwhiskerTheOdious() {
         super("Stabwhisker the Odious", "");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add(SubType.RAT);
@@ -73,7 +73,7 @@ class StabwhiskerTheOdious extends TokenImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 Zone.BATTLEFIELD, new StabwhiskerLoseLifeEffect(), TargetController.OPPONENT, false, true));
     }
-    public StabwhiskerTheOdious(final StabwhiskerTheOdious token) {
+    private StabwhiskerTheOdious(final StabwhiskerTheOdious token) {
         super(token);
     }
 
@@ -84,12 +84,12 @@ class StabwhiskerTheOdious extends TokenImpl {
 
 class StabwhiskerLoseLifeEffect extends OneShotEffect {
 
-    public StabwhiskerLoseLifeEffect() {
+    StabwhiskerLoseLifeEffect() {
         super(Outcome.LoseLife);
         this.staticText = "that player loses 1 life for each card fewer than three in their hand";
     }
 
-    public StabwhiskerLoseLifeEffect(final StabwhiskerLoseLifeEffect effect) {
+    private StabwhiskerLoseLifeEffect(final StabwhiskerLoseLifeEffect effect) {
         super(effect);
     }
 

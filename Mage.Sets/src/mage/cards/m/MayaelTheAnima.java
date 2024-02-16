@@ -1,4 +1,3 @@
-
 package mage.cards.m;
 
 import java.util.UUID;
@@ -9,11 +8,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.ComparisonType;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.PowerPredicate;
 
@@ -31,7 +26,7 @@ public final class MayaelTheAnima extends CardImpl {
 
     public MayaelTheAnima(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{G}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.SHAMAN);
 
@@ -41,9 +36,9 @@ public final class MayaelTheAnima extends CardImpl {
         // {3}{R}{G}{W}, {tap}: Look at the top five cards of your library.
         // You may put a creature card with power 5 or greater from among them onto the battlefield.
         // Put the rest on the bottom of your library in any order.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new LookLibraryAndPickControllerEffect(5,1, filter,false, false, Zone.BATTLEFIELD, true),
-                new ManaCostsImpl("{3}{R}{G}{W}"));
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(
+                new LookLibraryAndPickControllerEffect(5, 1, filter, PutCards.BATTLEFIELD, PutCards.BOTTOM_ANY),
+                new ManaCostsImpl<>("{3}{R}{G}{W}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

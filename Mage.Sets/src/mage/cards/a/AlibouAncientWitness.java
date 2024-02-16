@@ -32,7 +32,7 @@ public final class AlibouAncientWitness extends CardImpl {
     public AlibouAncientWitness(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}{R}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GOLEM);
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
@@ -91,7 +91,7 @@ class AlibouAncientWitnessEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int xValue = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game);
+        int xValue = game.getBattlefield().count(filter, source.getControllerId(), source, game);
         if (xValue < 1) {
             return false;
         }

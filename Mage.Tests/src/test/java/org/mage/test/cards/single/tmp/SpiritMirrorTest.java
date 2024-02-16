@@ -27,8 +27,8 @@ public class SpiritMirrorTest extends CardTestPlayerBase {
 
         execute();
 
-        assertPermanentCount(playerA, "Reflection", 1);
-        Permanent reflection = getPermanent("Reflection");
+        assertPermanentCount(playerA, "Reflection Token", 1);
+        Permanent reflection = getPermanent("Reflection Token");
         Assert.assertTrue(reflection.hasSubtype(SubType.REFLECTION, currentGame));
     }
 
@@ -38,12 +38,12 @@ public class SpiritMirrorTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Spirit Mirror");
 
         // Destroy playerAs own reflection token
-        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}: Destroy target Reflection", "Reflection");
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{0}: Destroy target Reflection", "Reflection Token");
 
         setStopAt(3, PhaseStep.END_TURN);
         execute();
 
-        assertPermanentCount(playerA, "Reflection", 0);
+        assertPermanentCount(playerA, "Reflection Token", 0);
     }
 
     @Test
@@ -59,8 +59,8 @@ public class SpiritMirrorTest extends CardTestPlayerBase {
         execute();
 
         // Only one token created
-        assertPermanentCount(playerA, "Reflection", 1);
-        Permanent reflection = getPermanent("Reflection");
+        assertPermanentCount(playerA, "Reflection Token", 1);
+        Permanent reflection = getPermanent("Reflection Token");
         Assert.assertTrue(reflection.hasSubtype(SubType.REFLECTION, currentGame));
     }
 

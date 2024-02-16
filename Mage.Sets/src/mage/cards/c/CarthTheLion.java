@@ -26,7 +26,7 @@ public final class CarthTheLion extends CardImpl {
     public CarthTheLion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(3);
@@ -56,9 +56,8 @@ class CarthTheLionTriggeredAbility extends TriggeredAbilityImpl {
 
     public CarthTheLionTriggeredAbility() {
         super(Zone.BATTLEFIELD, new LookLibraryAndPickControllerEffect(
-                7, 1, filter, true, false, Zone.HAND, true)
-                .setBackInRandomOrder(true)
-        );
+                7, 1, filter, PutCards.HAND, PutCards.BOTTOM_RANDOM));
+        setTriggerPhrase("Whenever {this} enters the battlefield or a planeswalker you control dies, ");
     }
 
     private CarthTheLionTriggeredAbility(final CarthTheLionTriggeredAbility ability) {
@@ -86,21 +85,16 @@ class CarthTheLionTriggeredAbility extends TriggeredAbilityImpl {
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
             if (zEvent.isDiesEvent()) {
                 Permanent permanent = game.getPermanentOrLKIBattlefield(zEvent.getTargetId());
-                return permanent != null && permanent.isPlaneswalker();
+                return permanent != null && permanent.isPlaneswalker(game);
             }
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} enters the battlefield or a planeswalker you control dies, " ;
     }
 }
 
 class CarthTheLionLoyaltyCostEffect extends CostModificationEffectImpl {
 
-    public CarthTheLionLoyaltyCostEffect() {
+    CarthTheLionLoyaltyCostEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.INCREASE_COST);
         this.staticText = "Planeswalkers' loyalty abilities you activate cost an additional +1 to activate";
     }

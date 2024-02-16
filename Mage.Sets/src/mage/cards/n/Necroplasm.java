@@ -63,7 +63,7 @@ class NecroplasmEffect extends OneShotEffect {
         this.staticText = "destroy each creature with mana value equal to the number of +1/+1 counters on {this}.";
     }
     
-    NecroplasmEffect(final NecroplasmEffect effect) {
+    private NecroplasmEffect(final NecroplasmEffect effect) {
         super(effect);
     }
     
@@ -80,7 +80,7 @@ class NecroplasmEffect extends OneShotEffect {
             int numCounters = sourcePermanent.getCounters(game).getCount(CounterType.P1P1);
             FilterCreaturePermanent filter = new FilterCreaturePermanent();
             filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, numCounters));
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
                 if(permanent != null) {
                     permanent.destroy(source, game, false);
                 }

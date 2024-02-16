@@ -7,6 +7,7 @@ import mage.counters.CounterType;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
+
 import static org.mage.test.utils.ManaOptionsTestUtils.assertManaOptions;
 
 /**
@@ -62,8 +63,6 @@ public class NonTappingManaAbilitiesTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();
 
-        assertAllCommandsUsed();
-
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
         Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
         assertManaOptions("{C}{C}{C}{C}", manaOptions);
@@ -80,8 +79,6 @@ public class NonTappingManaAbilitiesTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertAllCommandsUsed();
-
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
         Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
         assertManaOptions("{B}{B}{Any}{Any}{Any}{Any}", manaOptions);
@@ -96,8 +93,6 @@ public class NonTappingManaAbilitiesTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-
-        assertAllCommandsUsed();
 
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
         Assert.assertEquals("mana variations don't fit", 5, manaOptions.size());
@@ -120,8 +115,6 @@ public class NonTappingManaAbilitiesTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertAllCommandsUsed();
-
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
         Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
         assertManaOptions("{Any}{Any}", manaOptions);
@@ -140,8 +133,6 @@ public class NonTappingManaAbilitiesTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-
-        assertAllCommandsUsed();
 
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
         Assert.assertEquals("mana variations don't fit", 3, manaOptions.size());
@@ -169,8 +160,6 @@ public class NonTappingManaAbilitiesTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertAllCommandsUsed();
-
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
         Assert.assertEquals("mana variations don't fit", 3, manaOptions.size());
         assertManaOptions("{G}", manaOptions);
@@ -192,8 +181,6 @@ public class NonTappingManaAbilitiesTest extends CardTestPlayerBase {
 
         setStopAt(5, PhaseStep.BEGIN_COMBAT);
         execute();
-
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Wood", 3);
 
@@ -219,8 +206,6 @@ public class NonTappingManaAbilitiesTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();
-
-        assertAllCommandsUsed();
 
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
         Assert.assertEquals("mana variations don't fit", 9, manaOptions.size());
@@ -248,8 +233,6 @@ public class NonTappingManaAbilitiesTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();
 
-        assertAllCommandsUsed();
-
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
         Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
         assertManaOptions("{G}{G}{Any}{Any}", manaOptions);
@@ -264,8 +247,6 @@ public class NonTappingManaAbilitiesTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();
-
-        assertAllCommandsUsed();
 
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
         Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
@@ -282,8 +263,6 @@ public class NonTappingManaAbilitiesTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();
-
-        assertAllCommandsUsed();
 
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
         Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
@@ -303,9 +282,7 @@ public class NonTappingManaAbilitiesTest extends CardTestPlayerBase {
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
         execute();
 
-        assertAllCommandsUsed();
-
-        assertCounterCount("Mana Cache", CounterType.CHARGE, 2);
+       assertCounterCount("Mana Cache", CounterType.CHARGE, 2);
         
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
         Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
@@ -324,8 +301,6 @@ public class NonTappingManaAbilitiesTest extends CardTestPlayerBase {
 
         setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
         execute();
-
-        assertAllCommandsUsed();
 
         assertCounterCount("Mana Cache", CounterType.CHARGE, 2);
         

@@ -36,7 +36,7 @@ public final class MarduSkullhunter extends CardImpl {
 
         // <em>Raid</em> - When Mardu Skullhunter enters the battlefield, if you attacked this turn, target opponent discards a card.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(new EntersBattlefieldTriggeredAbility(new DiscardTargetEffect(1)), RaidCondition.instance,
-                "<i>Raid</i> &mdash; When {this} enters the battlefield, if you attacked this turn, target opponent discards a card.");
+                "When {this} enters the battlefield, if you attacked this turn, target opponent discards a card.");
         ability.addTarget(new TargetOpponent());
         ability.setAbilityWord(AbilityWord.RAID);
         ability.addHint(RaidHint.instance);

@@ -30,7 +30,7 @@ public final class WorldBottlingKit extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");
 
         // {5}, Sacrifice World-Bottling Kit: Choose a Magic set. Exile all permanents with that set’s expansion symbol except for basic lands.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new WorldBottlingKitEffect(), new ManaCostsImpl("{5}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new WorldBottlingKitEffect(), new ManaCostsImpl<>("{5}"));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }
@@ -47,12 +47,12 @@ public final class WorldBottlingKit extends CardImpl {
 
 class WorldBottlingKitEffect extends OneShotEffect {
 
-    public WorldBottlingKitEffect() {
+    WorldBottlingKitEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "Choose a Magic set. Exile all permanents with that set's expansion symbol except for basic lands";
     }
 
-    public WorldBottlingKitEffect(final WorldBottlingKitEffect effect) {
+    private WorldBottlingKitEffect(final WorldBottlingKitEffect effect) {
         super(effect);
     }
 
@@ -77,7 +77,7 @@ class WorldBottlingKitEffect extends OneShotEffect {
                 game.informPlayers(controller.getLogName() + " has chosen set " + setChosen);
                 FilterPermanent filter = new FilterPermanent();
                 filter.add(Predicates.not(Predicates.and(CardType.LAND.getPredicate(), SuperType.BASIC.getPredicate())));
-                List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game);
+                List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game);
                 for (Permanent permanent : permanents) {
                     if (permanent.getExpansionSetCode().equals(setChosen)) {
                         controller.moveCardToExileWithInfo(permanent, null, "", source, game, Zone.BATTLEFIELD, true);

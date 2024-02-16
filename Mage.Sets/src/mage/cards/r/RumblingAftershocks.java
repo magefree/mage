@@ -8,9 +8,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -23,12 +21,6 @@ import java.util.UUID;
  * @author LevelX2
  */
 public final class RumblingAftershocks extends CardImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
-
-    static {
-        filter.add(TargetController.YOU.getControllerPredicate());
-    }
 
     public RumblingAftershocks(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{R}");
@@ -55,9 +47,10 @@ class RumblingAftershocksTriggeredAbility extends TriggeredAbilityImpl {
 
     RumblingAftershocksTriggeredAbility() {
         super(Zone.BATTLEFIELD, new RumblingAftershocksDealDamageEffect(), true);
+        setTriggerPhrase("Whenever you cast a kicked spell, ");
     }
 
-    RumblingAftershocksTriggeredAbility(final RumblingAftershocksTriggeredAbility ability) {
+    private RumblingAftershocksTriggeredAbility(final RumblingAftershocksTriggeredAbility ability) {
         super(ability);
     }
 
@@ -80,21 +73,16 @@ class RumblingAftershocksTriggeredAbility extends TriggeredAbilityImpl {
         }
         return false;
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you cast a kicked spell, " ;
-    }
 }
 
 class RumblingAftershocksDealDamageEffect extends OneShotEffect {
 
-    public RumblingAftershocksDealDamageEffect() {
+    RumblingAftershocksDealDamageEffect() {
         super(Outcome.Damage);
         this.staticText = "you may have {this} deal damage to any target equal to the number of times that spell was kicked";
     }
 
-    public RumblingAftershocksDealDamageEffect(final RumblingAftershocksDealDamageEffect effect) {
+    private RumblingAftershocksDealDamageEffect(final RumblingAftershocksDealDamageEffect effect) {
         super(effect);
     }
 

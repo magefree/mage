@@ -37,7 +37,7 @@ public final class GraveyardTrespasser extends CardImpl {
         this.secondSideCardClazz = mage.cards.g.GraveyardGlutton.class;
 
         // Ward—Discard a card.
-        this.addAbility(new WardAbility(new DiscardCardCost()));
+        this.addAbility(new WardAbility(new DiscardCardCost(), false));
 
         // Whenever Graveyard Trespasser enters the battlefield or attacks, exile up to one target card from a graveyard. If a creature card was exiled this way, each opponent loses 1 life and you gain 1 life.
         Ability ability = new EntersBattlefieldOrAttacksSourceTriggeredAbility(new GraveyardTrespasserEffect());
@@ -87,6 +87,7 @@ class GraveyardTrespasserEffect extends OneShotEffect {
         if (amount < 1) {
             return true;
         }
+        game.getState().processAction(game);
         player.gainLife(amount, game, source);
         for (UUID opponentId : game.getOpponents(source.getControllerId())) {
             Player opponent = game.getPlayer(opponentId);

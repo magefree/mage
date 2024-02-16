@@ -10,7 +10,7 @@ import mage.constants.SubType;
 public final class SpiritGreenToken extends TokenImpl {
 
     public SpiritGreenToken() {
-        super("Spirit token", "4/5 green Spirit creature token");
+        super("Spirit Token", "4/5 green Spirit creature token");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.SPIRIT);
         color.setGreen(true);
@@ -18,7 +18,7 @@ public final class SpiritGreenToken extends TokenImpl {
         toughness = new MageInt(5);
     }
 
-    public SpiritGreenToken(final SpiritGreenToken token) {
+    private SpiritGreenToken(final SpiritGreenToken token) {
         super(token);
     }
 

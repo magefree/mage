@@ -33,7 +33,7 @@ public final class WallOfKelp extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
 
         // {U}{U}, {tap}: Create a 0/1 blue Plant Wall creature token with defender named Kelp.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new KelpToken()), new ManaCostsImpl("{U}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new KelpToken()), new ManaCostsImpl<>("{U}{U}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

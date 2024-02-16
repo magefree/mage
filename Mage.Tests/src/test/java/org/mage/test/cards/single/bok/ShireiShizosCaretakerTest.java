@@ -27,7 +27,6 @@ public class ShireiShizosCaretakerTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
         assertPermanentCount(playerA, shirei, 1);
         assertPermanentCount(playerA, rats, 1);
     }
@@ -46,7 +45,6 @@ public class ShireiShizosCaretakerTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
         assertPermanentCount(playerA, shirei, 0);
         assertPermanentCount(playerA, rats, 0);
     }
@@ -66,7 +64,6 @@ public class ShireiShizosCaretakerTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
         assertPermanentCount(playerA, shirei, 1);
         assertPermanentCount(playerA, rats, 0);
     }

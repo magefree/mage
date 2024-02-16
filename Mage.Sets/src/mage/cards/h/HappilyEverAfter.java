@@ -9,6 +9,7 @@ import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.WinGameSourceControllerEffect;
 import mage.abilities.hint.Hint;
+import mage.abilities.hint.HintUtils;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -16,8 +17,11 @@ import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.game.Game;
 import mage.players.Player;
+import mage.util.CardUtil;
 
+import java.awt.*;
 import java.util.*;
+import java.util.List;
 
 /**
  * @author TheElk801
@@ -37,8 +41,11 @@ public final class HappilyEverAfter extends CardImpl {
                 ), HappilyEverAfterCondition.instance, "At the beginning of your upkeep, " +
                 "if there are five colors among permanents you control, there are six or more card types " +
                 "among permanents you control and/or cards in your graveyard, and your life total is " +
-                "greater than or equal to your starting life total, you win the game."
-        ).addHint(HappilyEverAfterColorHint.instance).addHint(HappilyEverAfterCardTypeHint.instance));
+                "greater than or equal to your starting life total, you win the game.")
+                .addHint(HappilyEverAfterColorHint.instance)
+                .addHint(HappilyEverAfterCardTypeHint.instance)
+                .addHint(HappilyEverAfterLifeHint.instance)
+        );
     }
 
     private HappilyEverAfter(final HappilyEverAfter card) {
@@ -136,7 +143,7 @@ enum HappilyEverAfterColorHint implements Hint {
                 .map(permanent -> permanent.getColor(game))
                 .forEach(color::addColor);
         if (color.isColorless()) {
-            return "Colors of permanents you control: None";
+            return HintUtils.prepareText("Colors of permanents you control: 0 (None)", null, HintUtils.HINT_ICON_BAD);
         }
         List<String> colors = new ArrayList<>();
         if (color.isWhite()) {
@@ -154,7 +161,14 @@ enum HappilyEverAfterColorHint implements Hint {
         if (color.isGreen()) {
             colors.add("green");
         }
-        return "Colors of permanents you control: " + color.getColorCount() + " (" + colors.stream().reduce((a, b) -> a + ", " + b) + ")";
+
+        String hintText = "Colors of permanents you control: " + color.getColorCount() + " (" + colors.stream().reduce((a, b) -> a + ", " + b).get() + ")";
+
+        if (color.getColors().size() == 5) {
+            return HintUtils.prepareText(hintText, null, HintUtils.HINT_ICON_GOOD);
+        } else {
+            return HintUtils.prepareText(hintText, null, HintUtils.HINT_ICON_BAD);
+        }
     }
 
     @Override
@@ -186,20 +200,45 @@ enum HappilyEverAfterCardTypeHint implements Hint {
                 .flatMap(Collection::stream)
                 .forEach(cardTypeSet::add);
         if (cardTypeSet.isEmpty()) {
-            return "Card types on battlefield and in graveyard: None";
+            return HintUtils.prepareText("Card types on battlefield and in graveyard: None", null, HintUtils.HINT_ICON_BAD);
         }
         String message = cardTypeSet
                 .stream()
-                .distinct()
                 .sorted()
                 .map(CardType::toString)
                 .reduce((a, b) -> a + ", " + b)
                 .get();
-        return "Card types on battlefield and in graveyard: " + cardTypeSet.size() + " (" + message + ")";
+        return HintUtils.prepareText(
+                "Card types on battlefield and in graveyard: " + cardTypeSet.size() + " (" + message + ")",
+                null,
+                cardTypeSet.size() >= 6 ? HintUtils.HINT_ICON_GOOD : HintUtils.HINT_ICON_BAD);
     }
 
     @Override
     public HappilyEverAfterCardTypeHint copy() {
+        return instance;
+    }
+}
+
+enum HappilyEverAfterLifeHint implements Hint {
+    instance;
+
+    @Override
+    public String getText(Game game, Ability ability) {
+        Player player = game.getPlayer(ability.getControllerId());
+        if (player == null) {
+            return null;
+        }
+
+        if (player.getLife() >= game.getStartingLife()) {
+            return HintUtils.prepareText("Life total is greater than or equal to your starting life total", null, HintUtils.HINT_ICON_GOOD);
+        } else {
+            return HintUtils.prepareText("Life total less than starting amount", null, HintUtils.HINT_ICON_BAD);
+        }
+    }
+
+    @Override
+    public Hint copy() {
         return instance;
     }
 }

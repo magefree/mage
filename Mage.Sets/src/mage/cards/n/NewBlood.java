@@ -59,12 +59,12 @@ public final class NewBlood extends CardImpl {
 
 class NewBloodEffect extends OneShotEffect {
 
-    public NewBloodEffect() {
+    NewBloodEffect() {
         super(Outcome.Benefit);
         this.staticText = "Gain control of target creature. Change the text of that creature by replacing all instances of one creature type with Vampire";
     }
 
-    public NewBloodEffect(final NewBloodEffect effect) {
+    private NewBloodEffect(final NewBloodEffect effect) {
         super(effect);
     }
 
@@ -99,9 +99,10 @@ class ChangeCreatureTypeTargetEffect extends ContinuousEffectImpl {
         super(duration, Layer.TextChangingEffects_3, SubLayer.NA, Outcome.Benefit);
         this.fromSubType = fromSubType;
         this.toSubType = toSubType;
+        this.staticText = "Change the text of that creature by replacing all instances of one creature type with Vampire";
     }
 
-    public ChangeCreatureTypeTargetEffect(final ChangeCreatureTypeTargetEffect effect) {
+    private ChangeCreatureTypeTargetEffect(final ChangeCreatureTypeTargetEffect effect) {
         super(effect);
         this.fromSubType = effect.fromSubType;
         this.toSubType = effect.toSubType;
@@ -114,7 +115,7 @@ class ChangeCreatureTypeTargetEffect extends ContinuousEffectImpl {
             return;
         }
         if (fromSubType == null) {
-            Choice typeChoice = new ChoiceCreatureType(game.getObject(source.getSourceId()));
+            Choice typeChoice = new ChoiceCreatureType(game.getObject(source));
             typeChoice.setMessage("Choose creature type to change to Vampire");
             if (!controller.choose(outcome, typeChoice, game)) {
                 discard();
@@ -126,7 +127,7 @@ class ChangeCreatureTypeTargetEffect extends ContinuousEffectImpl {
             }
         }
 
-        super.init(source, game); //To change body of generated methods, choose Tools | Templates.
+        super.init(source, game);
     }
 
     @Override
@@ -170,10 +171,5 @@ class ChangeCreatureTypeTargetEffect extends ContinuousEffectImpl {
     @Override
     public ChangeCreatureTypeTargetEffect copy() {
         return new ChangeCreatureTypeTargetEffect(this);
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return "Change the text of that creature by replacing all instances of one creature type with Vampire";
     }
 }

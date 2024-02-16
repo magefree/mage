@@ -31,7 +31,7 @@ public final class ElvishAberration extends CardImpl {
         // {tap}: Add {G}{G}{G}.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.GreenMana(3), new TapSourceCost()));
         // Forestcycling {2}
-        this.addAbility(new ForestcyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new ForestcyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
     private ElvishAberration(final ElvishAberration card) {

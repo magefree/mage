@@ -36,7 +36,7 @@ public class CelestialPurgeTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Celestial Purge", 1);
 
         assertExileCount("Bitterblossom", 1);
-        assertPermanentCount(playerB, "Faerie Rogue", 1);
+        assertPermanentCount(playerB, "Faerie Rogue Token", 1);
 
     }
 }

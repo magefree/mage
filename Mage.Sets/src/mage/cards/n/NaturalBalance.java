@@ -50,7 +50,7 @@ public final class NaturalBalance extends CardImpl {
             this.staticText = "Each player who controls six or more lands chooses five lands they control and sacrifices the rest. Each player who controls four or fewer lands may search their library for up to X basic land cards and put them onto the battlefield, where X is five minus the number of lands they control. Then each player who searched their library this way shuffles.";
         }
 
-        public NaturalBalanceEffect(final NaturalBalanceEffect effect) {
+        private NaturalBalanceEffect(final NaturalBalanceEffect effect) {
             super(effect);
         }
 
@@ -71,7 +71,7 @@ public final class NaturalBalance extends CardImpl {
                         if (landCount > 5) {
                             // chooses five lands they control and sacrifices the rest
                             TargetControlledPermanent target = new TargetControlledPermanent(5, 5, new FilterControlledLandPermanent("lands to keep"), true);
-                            if (target.choose(Outcome.Sacrifice, player.getId(), source.getSourceId(), game)) {
+                            if (target.choose(Outcome.Sacrifice, player.getId(), source.getSourceId(), source, game)) {
                                 for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterLandPermanent(), player.getId(), game)) {
                                     if (!target.getTargets().contains(permanent.getId())) {
                                         permanent.sacrifice(source, game);

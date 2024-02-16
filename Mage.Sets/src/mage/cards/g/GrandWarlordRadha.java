@@ -37,7 +37,7 @@ public final class GrandWarlordRadha extends CardImpl {
     public GrandWarlordRadha(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(3);
@@ -87,9 +87,10 @@ class GrandWarlordRadhaTriggeredAbility extends TriggeredAbilityImpl {
 
     public GrandWarlordRadhaTriggeredAbility() {
         super(Zone.BATTLEFIELD, new GrandWarlordRadhaEffect(), false);
+        setTriggerPhrase("Whenever one or more creatures you control attack, ");
     }
 
-    public GrandWarlordRadhaTriggeredAbility(final GrandWarlordRadhaTriggeredAbility ability) {
+    private GrandWarlordRadhaTriggeredAbility(final GrandWarlordRadhaTriggeredAbility ability) {
         super(ability);
     }
 
@@ -115,21 +116,16 @@ class GrandWarlordRadhaTriggeredAbility extends TriggeredAbilityImpl {
         }
         return false;
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever one or more creatures you control attack, " ;
-    }
 }
 
 class GrandWarlordRadhaEffect extends OneShotEffect {
 
-    public GrandWarlordRadhaEffect() {
+    GrandWarlordRadhaEffect() {
         super(Outcome.Benefit);
         this.staticText = "add that much mana in any combination of {R} and/or {G}. Until end of turn, you don't lose this mana as steps and phases end";
     }
 
-    public GrandWarlordRadhaEffect(final GrandWarlordRadhaEffect effect) {
+    private GrandWarlordRadhaEffect(final GrandWarlordRadhaEffect effect) {
         super(effect);
     }
 

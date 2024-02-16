@@ -39,7 +39,7 @@ public final class ShaukusMinion extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {B}{R}, {tap}: Shauku's Minion deals 2 damage to target white creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new ManaCostsImpl("{B}{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new ManaCostsImpl<>("{B}{R}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);

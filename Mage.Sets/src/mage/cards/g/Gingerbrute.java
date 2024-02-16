@@ -1,14 +1,11 @@
 package mage.cards.g;
 
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect;
 import mage.abilities.keyword.HasteAbility;
+import mage.abilities.token.FoodAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -49,10 +46,7 @@ public final class Gingerbrute extends CardImpl {
         ));
 
         // {2}, {T}, Sacrifice Gingerbrute: You gain 3 life.
-        Ability ability = new SimpleActivatedAbility(new GainLifeEffect(3), new GenericManaCost(2));
-        ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeSourceCost());
-        this.addAbility(ability);
+        this.addAbility(new FoodAbility(true));
     }
 
     private Gingerbrute(final Gingerbrute card) {

@@ -25,7 +25,7 @@ import mage.filter.predicate.permanent.TokenPredicate;
  */
 public final class EchoOfDeathsWail extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent(SubType.RAT, "all Rat tokens");
+    private static final FilterPermanent filter = new FilterPermanent(SubType.RAT, "Rat tokens");
 
     static {
         filter.add(TokenPredicate.TRUE);

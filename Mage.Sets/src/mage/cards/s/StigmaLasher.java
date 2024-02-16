@@ -58,7 +58,7 @@ class StigmaLasherEffect extends ContinuousEffectImpl {
         staticText = "that player can't gain life for the rest of the game";
     }
     
-    public StigmaLasherEffect(final StigmaLasherEffect effect) {
+    private StigmaLasherEffect(final StigmaLasherEffect effect) {
         super(effect);
     }
     

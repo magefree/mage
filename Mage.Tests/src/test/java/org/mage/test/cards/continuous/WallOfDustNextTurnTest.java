@@ -61,6 +61,5 @@ public class WallOfDustNextTurnTest extends CardTestPlayerBase {
         setStopAt(6, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
     }
 }

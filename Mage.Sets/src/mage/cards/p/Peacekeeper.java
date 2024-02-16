@@ -28,7 +28,7 @@ public final class Peacekeeper extends CardImpl {
         this.toughness = new MageInt(1);
 
         // At the beginning of your upkeep, sacrifice Peacekeeper unless you pay {1}{W}.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl("{1}{W}")), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{1}{W}")), TargetController.YOU, false));
 
         // Creatures can't attack.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PeacekeeperCantAttackEffect()));
@@ -46,12 +46,12 @@ public final class Peacekeeper extends CardImpl {
 
 class PeacekeeperCantAttackEffect extends RestrictionEffect {
 
-    public PeacekeeperCantAttackEffect() {
+    PeacekeeperCantAttackEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "Creatures can't attack";
     }
 
-    public PeacekeeperCantAttackEffect(final PeacekeeperCantAttackEffect effect) {
+    private PeacekeeperCantAttackEffect(final PeacekeeperCantAttackEffect effect) {
         super(effect);
     }
 

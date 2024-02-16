@@ -35,7 +35,7 @@ public final class OrmosArchiveKeeper extends CardImpl {
     public OrmosArchiveKeeper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPHINX);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
@@ -48,7 +48,7 @@ public final class OrmosArchiveKeeper extends CardImpl {
 
         // {1}{U}{U}, Discard three cards with different names: Draw five cards.
         Ability ability = new SimpleActivatedAbility(
-                new DrawCardSourceControllerEffect(5), new ManaCostsImpl("{1}{U}{U}")
+                new DrawCardSourceControllerEffect(5), new ManaCostsImpl<>("{1}{U}{U}")
         );
         ability.addCost(new DiscardTargetCost(new OrmosArchiveKeeperTarget()));
         this.addAbility(ability);
@@ -82,11 +82,6 @@ class OrmosArchiveKeeperEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
@@ -114,7 +109,7 @@ class OrmosArchiveKeeperEffect extends ReplacementEffectImpl {
 
 class OrmosArchiveKeeperTarget extends TargetCardInHand {
 
-    private static final FilterCard filter = new FilterCard("three cards with different names");
+    private static final FilterCard filter = new FilterCard("cards with different names");
 
     OrmosArchiveKeeperTarget() {
         super(3, filter);
@@ -130,8 +125,8 @@ class OrmosArchiveKeeperTarget extends TargetCardInHand {
     }
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
-        Set<UUID> possibleTargets = super.possibleTargets(sourceId, sourceControllerId, game);
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
+        Set<UUID> possibleTargets = super.possibleTargets(sourceControllerId, source, game);
         Set<String> names = this.getTargets()
                 .stream()
                 .map(game::getCard)

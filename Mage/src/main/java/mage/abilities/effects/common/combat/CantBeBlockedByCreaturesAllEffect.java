@@ -20,11 +20,12 @@ public class CantBeBlockedByCreaturesAllEffect extends RestrictionEffect {
         this.filterCreatures = filterCreatures;
         this.filterBlockedBy = filterBlockedBy;
         staticText = filterCreatures.getMessage() + " can't be blocked "
+                + (duration == Duration.EndOfTurn ? "this turn " : "")
                 + (filterBlockedBy.getMessage().startsWith("except by") ? "" : "by ")
                 + filterBlockedBy.getMessage();
     }
 
-    public CantBeBlockedByCreaturesAllEffect(final CantBeBlockedByCreaturesAllEffect effect) {
+    protected CantBeBlockedByCreaturesAllEffect(final CantBeBlockedByCreaturesAllEffect effect) {
         super(effect);
         this.filterCreatures = effect.filterCreatures;
         this.filterBlockedBy = effect.filterBlockedBy;
@@ -32,12 +33,12 @@ public class CantBeBlockedByCreaturesAllEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return filterCreatures.match(permanent, source.getSourceId(), source.getControllerId(), game);
+        return filterCreatures.match(permanent, source.getControllerId(), source, game);
     }
 
     @Override
     public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
-        return !filterBlockedBy.match(blocker, source.getSourceId(), source.getControllerId(), game);
+        return !filterBlockedBy.match(blocker, source.getControllerId(), source, game);
     }
 
     @Override

@@ -1,7 +1,7 @@
 package mage.cards.j;
 
 import mage.MageInt;
-import mage.abilities.common.BlocksOrBecomesBlockedSourceTriggeredAbility;
+import mage.abilities.common.BlocksOrBlockedSourceTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -25,11 +25,7 @@ public final class JukaiTrainee extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever Jukai Trainee blocks or becomes blocked, it gets +1/+1 until end of turn.
-        this.addAbility(new BlocksOrBecomesBlockedSourceTriggeredAbility(
-                new BoostSourceEffect(1, 1, Duration.EndOfTurn)
-                        .setText("it gets +1/+1 until end of turn"),
-                false, false
-        ));
+        this.addAbility(new BlocksOrBlockedSourceTriggeredAbility(new BoostSourceEffect(1, 1, Duration.EndOfTurn, "it")));
     }
 
     private JukaiTrainee(final JukaiTrainee card) {

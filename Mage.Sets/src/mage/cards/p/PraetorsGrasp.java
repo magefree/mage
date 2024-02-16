@@ -43,14 +43,14 @@ public final class PraetorsGrasp extends CardImpl {
 
 class PraetorsGraspEffect extends OneShotEffect {
 
-    public PraetorsGraspEffect() {
+    PraetorsGraspEffect() {
         super(Outcome.PlayForFree);
         staticText = "Search target opponent's library for a card and exile it "
                 + "face down. Then that player shuffles. You may "
                 + "look at and play that card for as long as it remains exiled";
     }
 
-    public PraetorsGraspEffect(final PraetorsGraspEffect effect) {
+    private PraetorsGraspEffect(final PraetorsGraspEffect effect) {
         super(effect);
     }
 
@@ -103,7 +103,7 @@ class PraetorsGraspPlayEffect extends AsThoughEffectImpl {
         staticText = "You may look at and play that card for as long as it remains exiled";
     }
 
-    public PraetorsGraspPlayEffect(final PraetorsGraspPlayEffect effect) {
+    private PraetorsGraspPlayEffect(final PraetorsGraspPlayEffect effect) {
         super(effect);
         this.cardId = effect.cardId;
     }
@@ -150,7 +150,7 @@ class PraetorsGraspRevealEffect extends AsThoughEffectImpl {
         staticText = "You may look at and play that card for as long as it remains exiled";
     }
 
-    public PraetorsGraspRevealEffect(final PraetorsGraspRevealEffect effect) {
+    private PraetorsGraspRevealEffect(final PraetorsGraspRevealEffect effect) {
         super(effect);
         this.cardId = effect.cardId;
     }

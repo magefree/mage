@@ -15,13 +15,14 @@ public class DiesSourceTriggeredAbility extends ZoneChangeTriggeredAbility {
 
     public DiesSourceTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, Zone.GRAVEYARD, effect, "When {this} dies, ", optional);
+        this.replaceRuleText = true; // default true to replace "{this}" with "it"
     }
 
     public DiesSourceTriggeredAbility(Effect effect) {
         this(effect, false);
     }
 
-    public DiesSourceTriggeredAbility(final DiesSourceTriggeredAbility ability) {
+    protected DiesSourceTriggeredAbility(final DiesSourceTriggeredAbility ability) {
         super(ability);
     }
 

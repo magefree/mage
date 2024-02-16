@@ -57,7 +57,7 @@ class KillerInstinctEffect extends OneShotEffect {
         this.staticText = "reveal the top card of your library. If it's a creature card, put it onto the battlefield. That creature gains haste until end of turn. Sacrifice it at the beginning of the next end step.";
     }
 
-    KillerInstinctEffect(final KillerInstinctEffect effect) {
+    private KillerInstinctEffect(final KillerInstinctEffect effect) {
         super(effect);
     }
 

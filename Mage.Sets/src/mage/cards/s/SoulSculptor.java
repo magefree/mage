@@ -34,7 +34,7 @@ public final class SoulSculptor extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {1}{W}, {tap}: Target creature becomes an enchantment and loses all abilities until a player casts a creature spell.
-        Ability ability = new SimpleActivatedAbility(new ConditionalContinuousEffect(new SoulSculptorEffect(), SoulSculptorCondition.instance, rule), new ManaCostsImpl("{1}{W}"));
+        Ability ability = new SimpleActivatedAbility(new ConditionalContinuousEffect(new SoulSculptorEffect(), SoulSculptorCondition.instance, rule), new ManaCostsImpl<>("{1}{W}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
@@ -53,7 +53,7 @@ public final class SoulSculptor extends CardImpl {
 
 class SoulSculptorEffect extends ContinuousEffectImpl {
 
-    public SoulSculptorEffect() {
+    SoulSculptorEffect() {
         super(Duration.Custom, Outcome.LoseAbility);
         staticText = "target becomes an Enchantment and loses all abilites";
         dependencyTypes.add(DependencyType.EnchantmentAddingRemoving);
@@ -61,7 +61,7 @@ class SoulSculptorEffect extends ContinuousEffectImpl {
 
     }
 
-    public SoulSculptorEffect(final SoulSculptorEffect effect) {
+    private SoulSculptorEffect(final SoulSculptorEffect effect) {
         super(effect);
     }
 

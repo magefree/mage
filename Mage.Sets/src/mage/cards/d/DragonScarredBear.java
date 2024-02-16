@@ -31,7 +31,7 @@ public final class DragonScarredBear extends CardImpl {
         Ability ability = new ActivateIfConditionActivatedAbility(
             Zone.BATTLEFIELD,
             new RegenerateSourceEffect(),
-            new ManaCostsImpl("{1}{G}"),
+            new ManaCostsImpl<>("{1}{G}"),
             FormidableCondition.instance);
         ability.setAbilityWord(AbilityWord.FORMIDABLE);
         this.addAbility(ability);

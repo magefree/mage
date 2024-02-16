@@ -33,10 +33,10 @@ public final class CurseOfThePiercedHeart extends CardImpl {
         this.subtype.add(SubType.AURA, SubType.CURSE);
 
         // Enchant player
-        TargetPlayer target = new TargetPlayer();
-        this.getSpellAbility().addTarget(target);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
-        Ability ability = new EnchantAbility(target.getTargetName());
+        TargetPlayer auraTarget = new TargetPlayer();
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // At the beginning of enchanted player's upkeep, Curse of the Pierced Heart deals 1 damage to that player.
@@ -78,15 +78,15 @@ class CurseOfThePiercedHeartEffect extends OneShotEffect {
         if (controller == null || opponent == null) {
             return false;
         }
-        if (game.getBattlefield().count(StaticFilters.FILTER_CONTROLLED_PERMANENT_PLANESWALKER, source.getSourceId(), opponent.getId(), game) < 1
+        if (game.getBattlefield().count(StaticFilters.FILTER_CONTROLLED_PERMANENT_PLANESWALKER, opponent.getId(), source, game) < 1
                 || !controller.chooseUse(Outcome.Damage, "Redirect to a planeswalker controlled by " + opponent.getLogName() + "?", source, game)) {
             return opponent.damage(1, source.getSourceId(), source, game) > 0;
         }
         FilterPermanent filter = new FilterPlaneswalkerPermanent("a planeswalker controlled by " + opponent.getLogName());
         filter.add(new ControllerIdPredicate(opponent.getId()));
         TargetPermanent target = new TargetPermanent(filter);
-        target.setNotTarget(true);
-        controller.choose(outcome, target, source.getSourceId(), game);
+        target.withNotTarget(true);
+        controller.choose(outcome, target, source, game);
         Permanent permanent = game.getPermanent(target.getFirstTarget());
         if (permanent != null) {
             return permanent.damage(1, source.getSourceId(), source, game, false, true) > 0;

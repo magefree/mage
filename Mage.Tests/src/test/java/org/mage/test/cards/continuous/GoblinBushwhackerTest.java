@@ -26,7 +26,6 @@ public class GoblinBushwhackerTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Elite Vanguard", 1);
         assertPowerToughness(playerA, "Elite Vanguard", 3, 1);

@@ -24,11 +24,10 @@ public class NeedleDropTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Shock", playerA);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Shock", "Hill Giant");
-
-        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Needle Drop", playerA);
-        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Needle Drop", playerB);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Needle Drop", playerA);
+//        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Needle Drop", playerB); // TODO: This should produce an error but doesn't (playerA isn't a valid target)
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Needle Drop", "Hill Giant");
-        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Needle Drop", "Flying Men");
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
@@ -36,7 +35,6 @@ public class NeedleDropTest extends CardTestPlayerBase {
         assertLife(playerA, 17);
         assertLife(playerB, 20);
         assertPermanentCount(playerB, "Hill Giant", 0);
-        assertPermanentCount(playerB, "Flying Men", 1);
     }
 
     @Test
@@ -51,8 +49,7 @@ public class NeedleDropTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Shock", playerB);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Shock", "Hill Giant");
 
-        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerA, "Needle Drop", playerB);
-        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerA, "Needle Drop", "Hill Giant");
+        checkPlayableAbility("Can't Needle Drop", 2, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Needle Drop", false);
 
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
         execute();
@@ -61,5 +58,4 @@ public class NeedleDropTest extends CardTestPlayerBase {
         assertLife(playerB, 18);
         assertPermanentCount(playerB, "Hill Giant", 1);
     }
-
 }

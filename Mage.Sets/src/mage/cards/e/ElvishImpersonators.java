@@ -5,7 +5,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -22,7 +22,7 @@ public final class ElvishImpersonators extends CardImpl {
 
     public ElvishImpersonators(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
-        this.subtype.add(SubType.ELVES);
+        this.subtype.add(SubType.ELF);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 
@@ -42,12 +42,12 @@ public final class ElvishImpersonators extends CardImpl {
 
 class ElvishImpersonatorsEffect extends OneShotEffect {
 
-    public ElvishImpersonatorsEffect() {
+    ElvishImpersonatorsEffect() {
         super(Outcome.Neutral);
         staticText = "roll a six-sided die twice. Its base power becomes the first result and its base toughness becomes the second result";
     }
 
-    public ElvishImpersonatorsEffect(final ElvishImpersonatorsEffect effect) {
+    private ElvishImpersonatorsEffect(final ElvishImpersonatorsEffect effect) {
         super(effect);
     }
 
@@ -59,13 +59,13 @@ class ElvishImpersonatorsEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            List<Integer> results = controller.rollDice(outcome, source, game, 6, 2, 0);
-            int firstRoll = results.get(0);
-            int secondRoll = results.get(1);
-            game.addEffect(new SetPowerToughnessSourceEffect(firstRoll, secondRoll, Duration.WhileOnBattlefield, SubLayer.SetPT_7b), source);
-            return true;
+        if (controller == null) {
+            return false;
         }
-        return false;
+        List<Integer> results = controller.rollDice(outcome, source, game, 6, 2, 0);
+        int firstRoll = results.get(0);
+        int secondRoll = results.get(1);
+        game.addEffect(new SetBasePowerToughnessSourceEffect(firstRoll, secondRoll, Duration.Custom), source);
+        return true;
     }
 }

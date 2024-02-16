@@ -26,7 +26,7 @@ public final class ZurgoBellstriker extends CardImpl {
 
     public ZurgoBellstriker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ORC, SubType.WARRIOR);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
@@ -34,7 +34,7 @@ public final class ZurgoBellstriker extends CardImpl {
         // Zurgo Bellstriker can't block creatures with power 2 or greater.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockCreaturesSourceEffect(filter)));
         // Dash {1}{R}
-        this.addAbility(new DashAbility(this, "{1}{R}"));
+        this.addAbility(new DashAbility("{1}{R}"));
     }
 
     private ZurgoBellstriker(final ZurgoBellstriker card) {

@@ -30,7 +30,7 @@ public final class HalimarWavewatch extends LevelerCard {
         this.power = new MageInt(0);
         this.toughness = new MageInt(3);
 
-        this.addAbility(new LevelUpAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new LevelUpAbility(new ManaCostsImpl<>("{2}")));
 
         Abilities<Ability> levelAbilities = new AbilitiesImpl<>();
         levelAbilities.add(new IslandwalkAbility());

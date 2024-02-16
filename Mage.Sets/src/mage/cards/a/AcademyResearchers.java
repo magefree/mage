@@ -55,7 +55,7 @@ class AcademyResearchersEffect extends OneShotEffect {
         this.staticText = "you may put an Aura card from your hand onto the battlefield attached to {this}.";
     }
 
-    AcademyResearchersEffect(final AcademyResearchersEffect effect) {
+    private AcademyResearchersEffect(final AcademyResearchersEffect effect) {
         super(effect);
     }
 
@@ -73,7 +73,7 @@ class AcademyResearchersEffect extends OneShotEffect {
         if (controller != null && academyResearchers != null) {
             filterCardInHand.add(new AuraCardCanAttachToPermanentId(academyResearchers.getId()));
             TargetCardInHand target = new TargetCardInHand(0, 1, filterCardInHand);
-            if (controller.choose(Outcome.PutCardInPlay, target, source.getSourceId(), game)) {
+            if (controller.choose(Outcome.PutCardInPlay, target, source, game)) {
                 Card auraInHand = game.getCard(target.getFirstTarget());
                 if (auraInHand != null) {
                     game.getState().setValue("attachTo:" + auraInHand.getId(), academyResearchers);

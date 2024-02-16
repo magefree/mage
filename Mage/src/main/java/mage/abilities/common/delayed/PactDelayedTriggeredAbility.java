@@ -16,6 +16,7 @@ public class PactDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     public PactDelayedTriggeredAbility(ManaCosts cost) {
         super(new PactEffect(cost));
+        setTriggerPhrase("<br>At the beginning of your next upkeep, ");
     }
 
     public PactDelayedTriggeredAbility(PactDelayedTriggeredAbility ability) {
@@ -36,11 +37,6 @@ public class PactDelayedTriggeredAbility extends DelayedTriggeredAbility {
     public boolean checkTrigger(GameEvent event, Game game) {
         return game.isActivePlayer(this.getControllerId());
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "<br>At the beginning of your next upkeep, ";
-    }
 }
 
 class PactEffect extends OneShotEffect {
@@ -53,7 +49,7 @@ class PactEffect extends OneShotEffect {
         staticText = "pay " + cost.getText() + ". If you don't, you lose the game";
     }
 
-    public PactEffect(final PactEffect effect) {
+    protected PactEffect(final PactEffect effect) {
         super(effect);
         this.cost = effect.cost.copy();
     }

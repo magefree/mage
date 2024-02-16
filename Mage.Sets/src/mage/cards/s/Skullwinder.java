@@ -56,12 +56,12 @@ public final class Skullwinder extends CardImpl {
 
 class SkullwinderEffect extends OneShotEffect {
 
-    public SkullwinderEffect() {
+    SkullwinderEffect() {
         super(Outcome.Benefit);
         this.staticText = ", then choose an opponent. That player returns a card from their graveyard to their hand";
     }
 
-    public SkullwinderEffect(final SkullwinderEffect effect) {
+    private SkullwinderEffect(final SkullwinderEffect effect) {
         super(effect);
     }
 
@@ -76,14 +76,14 @@ class SkullwinderEffect extends OneShotEffect {
         MageObject sourceObject = source.getSourceObject(game);
         if (controller != null && sourceObject != null) {
             TargetOpponent targetOpponent = new TargetOpponent(true);
-            if (controller.choose(Outcome.Detriment, targetOpponent, source.getSourceId(), game)) {
+            if (controller.choose(Outcome.Detriment, targetOpponent, source, game)) {
                 Player opponent = game.getPlayer(targetOpponent.getFirstTarget());
                 if (opponent != null) {
                     game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " has chosen " + opponent.getLogName());
                     // That player returns a card from their graveyard to their hand
                     TargetCardInYourGraveyard targetCard = new TargetCardInYourGraveyard(new FilterCard("a card from your graveyard to return to your hand"));
-                    targetCard.setNotTarget(true);
-                    if (opponent.choose(outcome, targetCard, source.getSourceId(), game)) {
+                    targetCard.withNotTarget(true);
+                    if (opponent.choose(outcome, targetCard, source, game)) {
                         Card card = game.getCard(targetCard.getFirstTarget());
                         if (card != null) {
                             opponent.moveCards(card, Zone.HAND, source, game);

@@ -29,7 +29,7 @@ public final class PlatedGeopede extends CardImpl {
         this.addAbility(new LandfallAbility(new BoostSourceEffect(2, 2, Duration.EndOfTurn), false));
     }
 
-    public PlatedGeopede (final PlatedGeopede card) {
+    private PlatedGeopede(final PlatedGeopede card) {
         super(card);
     }
 

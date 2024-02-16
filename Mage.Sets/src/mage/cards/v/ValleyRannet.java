@@ -27,9 +27,9 @@ public final class ValleyRannet extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Mountaincycling {2}
-        this.addAbility(new MountaincyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new MountaincyclingAbility(new ManaCostsImpl<>("{2}")));
         // Forestcycling {2}
-        this.addAbility(new ForestcyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new ForestcyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
     private ValleyRannet(final ValleyRannet card) {

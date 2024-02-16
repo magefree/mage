@@ -3,7 +3,7 @@ package mage.cards.t;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
-import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -44,11 +44,9 @@ public final class TerrorOfThePeaks extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new TerrorOfThePeaksCostIncreaseEffect()));
 
         // Whenever another creature enters the battlefield under your control, Terror of the Peaks deals damage equal to that creature's power to any target.
-        Ability ability = new EntersBattlefieldAllTriggeredAbility(
-                new DamageTargetEffect(TerrorOfThePeaksValue.instance),
-                StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE,
-                "Whenever another creature enters the battlefield under your control, " +
-                        "{this} deals damage equal to that creature's power to any target."
+        Ability ability = new EntersBattlefieldControlledTriggeredAbility(
+                new DamageTargetEffect(TerrorOfThePeaksValue.instance).setText("{this} deals damage equal to that creature's power to any target"),
+                StaticFilters.FILTER_ANOTHER_CREATURE
         );
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
@@ -104,7 +102,6 @@ class TerrorOfThePeaksCostIncreaseEffect extends CostModificationEffectImpl {
             if (allTargets.stream().anyMatch(target -> !isTargetCompatible(target, source, game))) {
                 return false;
             }
-            ;
         }
 
         return allTargets.stream().anyMatch(target -> isTargetCompatible(target, source, game));

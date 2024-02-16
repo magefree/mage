@@ -1,19 +1,17 @@
-
-
 package mage.game.permanent.token;
-import mage.constants.CardType;
-import mage.constants.SubType;
+
 import mage.MageInt;
 import mage.abilities.keyword.DeathtouchAbility;
+import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
- *
  * @author spjspj
  */
 public final class DeathtouchSnakeToken extends TokenImpl {
 
     public DeathtouchSnakeToken() {
-        super("Snake", "1/1 green Snake creature token with deathtouch");
+        super("Snake Token", "1/1 green Snake creature token with deathtouch");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add(SubType.SNAKE);
@@ -22,7 +20,7 @@ public final class DeathtouchSnakeToken extends TokenImpl {
         addAbility(DeathtouchAbility.getInstance());
     }
 
-    public DeathtouchSnakeToken(final DeathtouchSnakeToken token) {
+    private DeathtouchSnakeToken(final DeathtouchSnakeToken token) {
         super(token);
     }
 

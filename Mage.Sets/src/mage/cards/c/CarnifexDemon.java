@@ -25,7 +25,7 @@ import mage.filter.predicate.mageobject.AnotherPredicate;
  */
 public final class CarnifexDemon extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("each other creature");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("other creature");
 
     static {
         filter.add(AnotherPredicate.instance);
@@ -51,7 +51,7 @@ public final class CarnifexDemon extends CardImpl {
                 new AddCountersAllEffect(
                         CounterType.M1M1.createInstance(),
                         filter
-                ), new ManaCostsImpl("{B}")
+                ), new ManaCostsImpl<>("{B}")
         );
         ability.addCost(new RemoveCountersSourceCost(CounterType.M1M1.createInstance()));
         this.addAbility(ability);

@@ -1,6 +1,0 @@
-HotKeys: Alt+E - Enlarge card image
-Wheel zoom in/out - Enlarge card image
-F4 - end current turn, response to stack
-F9 - skip all opponents' turns, no response to stack
-Welcome! You are playing Mage version 1.4.9
-Contact us on www.slightlymagic.net

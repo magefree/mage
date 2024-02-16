@@ -26,7 +26,7 @@ public final class TaintedStrike extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public TaintedStrike (final TaintedStrike card) {
+    private TaintedStrike(final TaintedStrike card) {
         super(card);
     }
 

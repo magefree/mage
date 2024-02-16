@@ -29,7 +29,7 @@ public final class Surgespanner extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever Surgespanner becomes tapped, you may pay {1}{U}. If you do, return target permanent to its owner's hand.
-        Ability ability = new BecomesTappedSourceTriggeredAbility(new DoIfCostPaid(new ReturnToHandTargetEffect(), new ManaCostsImpl("{1}{U}")));
+        Ability ability = new BecomesTappedSourceTriggeredAbility(new DoIfCostPaid(new ReturnToHandTargetEffect(), new ManaCostsImpl<>("{1}{U}")));
         ability.addTarget(new TargetPermanent());
         this.addAbility(ability);
     }

@@ -73,7 +73,7 @@ class FreeForAllExileAllEffect extends OneShotEffect {
         }
         Cards cards = new CardsImpl();
         game.getBattlefield().getActivePermanents(
-                StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source.getSourceId(), game
+                StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source, game
         ).stream().forEach(cards::add);
         player.moveCardsToExile(cards.getCards(game), source, game, false, CardUtil.getExileZoneId(game, source), CardUtil.getSourceName(game, source));
         cards.getCards(game)

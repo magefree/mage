@@ -41,11 +41,12 @@ public class SimpleDominariaCards extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Terror");
         addCard(Zone.BATTLEFIELD, playerB, "Swamp", 3);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Terror", "Knight of Grace");
-        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        // Knight of Grace has protection from Black so Terror should not be castable
+        checkPlayableAbility("before", 1, PhaseStep.PRECOMBAT_MAIN, playerB, "Cast Terror", false);
         execute();
 
         assertGraveyardCount(playerA, "Knight of Grace", 0);
+        assertHandCount(playerB,      "Terror",          1);
     }
 
     @Test
@@ -66,13 +67,15 @@ public class SimpleDominariaCards extends CardTestPlayerBase {
     @Test
     public void testKnightOfGraceBlackAbility(){
         addCard(Zone.BATTLEFIELD, playerA, "Knight of Grace");
-        addCard(Zone.BATTLEFIELD, playerB, "Royal Assassin");
+        addCard(Zone.BATTLEFIELD, playerB, "Avatar of Woe");
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerB, "{T}: ", "Knight of Grace");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerB, "{T}");
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+
         execute();
 
         assertGraveyardCount(playerA, "Knight of Grace", 0);
+        assertGraveyardCount(playerB, "Avatar of Woe", 1); // Autokills itself since its only valid target
     }
 
     @Test

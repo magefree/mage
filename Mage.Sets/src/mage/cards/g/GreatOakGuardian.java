@@ -58,12 +58,12 @@ public final class GreatOakGuardian extends CardImpl {
 
 class GreatOakGuardianEffect extends ContinuousEffectImpl {
 
-    public GreatOakGuardianEffect() {
+    GreatOakGuardianEffect() {
         super(Duration.EndOfTurn, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
-        staticText = "creatures target player controls get +2/+2 until end of turn. Untap them";
+        staticText = "creatures target player controls get +2/+2 until end of turn";
     }
 
-    public GreatOakGuardianEffect(final GreatOakGuardianEffect effect) {
+    private GreatOakGuardianEffect(final GreatOakGuardianEffect effect) {
         super(effect);
     }
 
@@ -100,12 +100,12 @@ class GreatOakGuardianEffect extends ContinuousEffectImpl {
 
 class GreatOakGuardianUntapEffect extends OneShotEffect {
 
-    public GreatOakGuardianUntapEffect() {
+    GreatOakGuardianUntapEffect() {
         super(Outcome.Benefit);
         this.staticText = "untap them";
     }
 
-    public GreatOakGuardianUntapEffect(final GreatOakGuardianUntapEffect effect) {
+    private GreatOakGuardianUntapEffect(final GreatOakGuardianUntapEffect effect) {
         super(effect);
     }
 

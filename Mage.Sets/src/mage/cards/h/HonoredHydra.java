@@ -29,7 +29,7 @@ public final class HonoredHydra extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Embalm {3}{G}
-        this.addAbility(new EmbalmAbility(new ManaCostsImpl("{3}{G}"), this));
+        this.addAbility(new EmbalmAbility(new ManaCostsImpl<>("{3}{G}"), this));
 
     }
 

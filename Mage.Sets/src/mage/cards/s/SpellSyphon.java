@@ -56,9 +56,10 @@ class SpellSyphonEffect extends OneShotEffect {
 
     public SpellSyphonEffect() {
         super(Outcome.Detriment);
+        this.staticText = "Counter target spell unless its controller pays {1} for each blue permanent you control";
     }
 
-    public SpellSyphonEffect(final SpellSyphonEffect effect) {
+    private SpellSyphonEffect(final SpellSyphonEffect effect) {
         super(effect);
     }
 
@@ -74,7 +75,7 @@ class SpellSyphonEffect extends OneShotEffect {
             Player player = game.getPlayer(spell.getControllerId());
             Player controller = game.getPlayer(source.getControllerId());
             if (player != null && controller != null) {
-                int amount = game.getBattlefield().count(filter, source.getSourceId(), controller.getId(), game);
+                int amount = game.getBattlefield().count(filter, controller.getId(), source, game);
                 if (amount == 0) {
                     game.informPlayers("Spell Syphon: no blue permanents in controller's battlefield.");
                 } else {
@@ -88,10 +89,4 @@ class SpellSyphonEffect extends OneShotEffect {
         }
         return false;
     }
-
-    @Override
-    public String getText(Mode mode) {
-        return "Counter target spell unless its controller pays {1} for each blue permanent you control";
-    }
-
 }

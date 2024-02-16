@@ -1,4 +1,3 @@
-
 package mage.cards.v;
 
 import mage.ObjectColor;
@@ -7,7 +6,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.combat.CantBeBlockedTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.ShroudAbility;
-import mage.abilities.keyword.SpliceOntoArcaneAbility;
+import mage.abilities.keyword.SpliceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -36,9 +35,9 @@ public final class VeilOfSecrecy extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");
         this.subtype.add(SubType.ARCANE);
 
-        // Target creature gains shroud until end of turn and is can't be blocked this turn.
+        // Target creature gains shroud until end of turn and can't be blocked this turn.
         Effect effect = new GainAbilityTargetEffect(ShroudAbility.getInstance(), Duration.EndOfTurn);
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent().withChooseHint("gains shroud and can't be blocked"));
         effect.setText("Target creature gains shroud until end of turn");
         this.getSpellAbility().addEffect(effect);
         effect = new CantBeBlockedTargetEffect();
@@ -46,7 +45,7 @@ public final class VeilOfSecrecy extends CardImpl {
         this.getSpellAbility().addEffect(effect);
         
         // Splice onto Arcane-Return a blue creature you control to its owner's hand.
-        this.addAbility(new SpliceOntoArcaneAbility(new ReturnToHandChosenControlledPermanentCost(new TargetControlledCreaturePermanent(filter))));
+        this.addAbility(new SpliceAbility(SpliceAbility.ARCANE, new ReturnToHandChosenControlledPermanentCost(new TargetControlledCreaturePermanent(filter))));
     }
 
     private VeilOfSecrecy(final VeilOfSecrecy card) {

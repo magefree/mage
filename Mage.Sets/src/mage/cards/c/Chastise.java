@@ -43,11 +43,12 @@ public final class Chastise extends CardImpl {
 
 class ChastiseEffect extends OneShotEffect {
 
-    public ChastiseEffect() {
+    ChastiseEffect() {
         super(Outcome.GainLife);
+        this.staticText = "You gain life equal to its power";
     }
 
-    public ChastiseEffect(final ChastiseEffect effect) {
+    private ChastiseEffect(final ChastiseEffect effect) {
         super(effect);
     }
 
@@ -68,10 +69,5 @@ class ChastiseEffect extends OneShotEffect {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return "You gain life equal to its power";
     }
 }

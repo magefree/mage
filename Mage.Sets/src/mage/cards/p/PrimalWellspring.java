@@ -57,9 +57,10 @@ class PyrimalWellspringTriggeredAbility extends TriggeredAbilityImpl {
     public PyrimalWellspringTriggeredAbility(UUID abilityOriginalId, Effect effect) {
         super(Zone.ALL, effect, false);
         this.abilityOriginalId = abilityOriginalId.toString();
+        setTriggerPhrase("When that mana is used to cast an instant or sorcery spell, ");
     }
 
-    public PyrimalWellspringTriggeredAbility(final PyrimalWellspringTriggeredAbility ability) {
+    private PyrimalWellspringTriggeredAbility(final PyrimalWellspringTriggeredAbility ability) {
         super(ability);
         this.abilityOriginalId = ability.abilityOriginalId;
     }
@@ -78,7 +79,7 @@ class PyrimalWellspringTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getData().equals(abilityOriginalId)) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell != null && filter.match(spell, getSourceId(), getControllerId(), game)) {
+            if (spell != null && filter.match(spell, getControllerId(), this, game)) {
                 for (Effect effect : getEffects()) {
                     effect.setTargetPointer(new FixedTarget(event.getTargetId()));
                 }
@@ -86,10 +87,5 @@ class PyrimalWellspringTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "When that mana is used to cast an instant or sorcery spell, " ;
     }
 }

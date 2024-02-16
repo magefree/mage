@@ -21,9 +21,9 @@ public class CountryComboBox extends JComboBox {
         {"Algeria", "dz"},
         {"American Samoa", "as"},
         {"Andorra", "ad"},
-        {"Angola", "an"},
+        {"Angola", "ao"},
         {"Anguilla", "ai"},
-        {"Antarctica", "ao"},
+        {"Antarctica", "aq"},
         {"Antigua and Barbuda", "ag"},
         {"Argentina", "ar"},
         {"Armenia", "am"},
@@ -261,7 +261,23 @@ public class CountryComboBox extends JComboBox {
         {"Western Sahara", "eh"},
         {"Yemen", "ye"},
         {"Zambia", "zm"},
-        {"Zimbabwe", "zw"},};
+        {"Zimbabwe", "zw"},
+        {"Agender", "agender"},
+        {"Aromantic", "aro"},
+        {"Asexual", "asexual"},
+        {"Bisexual", "bisexual"},
+        {"Catgender", "catgender"},
+        {"Demisexual", "demi"},
+        {"Gay", "gay"},
+        {"Genderfluid", "genderfluid"},
+        {"Genderqueer", "genderqueer"},
+        {"Intersex", "intersex"},
+        {"Lesbian", "lesbian"},
+        {"LGBT", "lgbt"},
+        {"Nonbinary", "nb"},
+        {"Pansexual", "pan"},
+        {"Transgender", "trans"},
+    };
 
     @SuppressWarnings("unchecked")
     public CountryComboBox() {
@@ -288,7 +304,7 @@ public class CountryComboBox extends JComboBox {
 
     @Override
     public Object getSelectedItem() {
-        return super.getSelectedItem(); //To change body of generated methods, choose Tools | Templates.
+        return super.getSelectedItem();
     }
 
 }

@@ -24,6 +24,7 @@ import mage.game.Game;
 import mage.players.Player;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -46,7 +47,7 @@ public final class ShiftingCeratops extends CardImpl {
         this.addAbility(ProtectionAbility.from(ObjectColor.BLUE));
 
         // {G}: Shifting Ceratops gains your choice of reach, trample, or haste until end of turn.
-        this.addAbility(new SimpleActivatedAbility(new ShiftingCeratopsEffect(), new ManaCostsImpl("{G}")));
+        this.addAbility(new SimpleActivatedAbility(new ShiftingCeratopsEffect(), new ManaCostsImpl<>("{G}")));
     }
 
     private ShiftingCeratops(final ShiftingCeratops card) {
@@ -60,7 +61,7 @@ public final class ShiftingCeratops extends CardImpl {
 }
 
 class ShiftingCeratopsEffect extends OneShotEffect {
-    private static final Set<String> choices = new HashSet();
+    private static final Set<String> choices = new LinkedHashSet();
 
     static {
         choices.add("Reach");

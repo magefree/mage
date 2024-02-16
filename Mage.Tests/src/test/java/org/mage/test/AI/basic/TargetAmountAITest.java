@@ -25,7 +25,6 @@ public class TargetAmountAITest extends CardTestPlayerBaseWithAIHelps {
         setStopAt(1, PhaseStep.END_TURN);
         //setStrictChooseMode(true); // ai must choose
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, "Balduvian Bears", 2 + 4, 2 + 4); // boost one creature (it's just a choose code, so can be different from simulation results)
     }
@@ -45,7 +44,6 @@ public class TargetAmountAITest extends CardTestPlayerBaseWithAIHelps {
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, "Balduvian Bears", 2 + 1, 2 + 1); // boost each possible creatures
         assertPowerToughness(playerB, "Balduvian Bears", 2, 2); // no boost for enemy

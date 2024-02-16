@@ -72,8 +72,8 @@ class OliviasAttendantsTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER_BATCH
-                || event.getType() == GameEvent.EventType.DAMAGED_PERMANENT_BATCH;
+        return event.getType() == GameEvent.EventType.DAMAGED_BATCH_FOR_PLAYERS
+                || event.getType() == GameEvent.EventType.DAMAGED_BATCH_FOR_PERMANENTS;
     }
 
     @Override
@@ -81,7 +81,7 @@ class OliviasAttendantsTriggeredAbility extends TriggeredAbilityImpl {
         int amount = ((DamagedBatchEvent) event)
                 .getEvents()
                 .stream()
-                .filter(e -> e.getSourceId().equals(getSourceId()))
+                .filter(e -> e.getAttackerId().equals(this.getSourceId()))
                 .mapToInt(GameEvent::getAmount)
                 .sum();
         if (amount < 1) {

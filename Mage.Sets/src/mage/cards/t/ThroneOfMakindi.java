@@ -72,6 +72,6 @@ class ThroneOfMakindiConditionalMana extends ConditionalMana {
 
     ThroneOfMakindiConditionalMana(Mana mana) {
         super(mana);
-        addCondition(KickedCondition.instance);
+        addCondition(KickedCondition.ONCE);
     }
 }

@@ -40,7 +40,7 @@ public final class FalkenrathPitFighter extends CardImpl {
                 new ManaCostsImpl<>("{1}{R}"), OpponentsLostLifeCondition.instance
         );
         ability.addCost(new DiscardCardCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        ability.addCost(new SacrificeTargetCost(filter));
         this.addAbility(ability.addHint(OpponentsLostLifeHint.instance));
     }
 

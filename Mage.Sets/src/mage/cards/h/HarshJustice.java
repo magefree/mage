@@ -63,9 +63,10 @@ class HarshJusticeTriggeredAbility extends DelayedTriggeredAbility {
 
     public HarshJusticeTriggeredAbility() {
         super(new HarshJusticeEffect(), Duration.EndOfTurn, false);
+        setTriggerPhrase("This turn, whenever an attacking creature deals combat damage to you, ");
     }
 
-    public HarshJusticeTriggeredAbility(final HarshJusticeTriggeredAbility ability) {
+    private HarshJusticeTriggeredAbility(final HarshJusticeTriggeredAbility ability) {
         super(ability);
     }
 
@@ -95,21 +96,16 @@ class HarshJusticeTriggeredAbility extends DelayedTriggeredAbility {
         }
         return false;
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "This turn, whenever an attacking creature deals combat damage to you, " ;
-    }
 }
 
 class HarshJusticeEffect extends OneShotEffect {
 
-    public HarshJusticeEffect() {
+    HarshJusticeEffect() {
         super(Outcome.Benefit);
         this.staticText = "it deals that much damage to its controller";
     }
 
-    public HarshJusticeEffect(final HarshJusticeEffect effect) {
+    private HarshJusticeEffect(final HarshJusticeEffect effect) {
         super(effect);
     }
 
@@ -122,7 +118,7 @@ class HarshJusticeEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         int damage = (Integer) this.getValue("damage");
         UUID sourceId = (UUID) this.getValue("sourceId");
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (sourceObject != null && damage > 0 && sourceId != null) {
             Permanent targetObject = game.getPermanentOrLKIBattlefield(sourceId);
             if (targetObject != null) {

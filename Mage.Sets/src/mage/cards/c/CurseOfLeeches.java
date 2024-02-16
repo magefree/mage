@@ -36,7 +36,7 @@ public final class CurseOfLeeches extends CardImpl {
         TargetPlayer auraTarget = new TargetPlayer();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // As this permanent transforms into Curse of Leeches, attach it to a player.
@@ -82,8 +82,8 @@ class CurseOfLeechesEffect extends ReplacementEffectImpl {
             return false;
         }
         TargetPlayer target = new TargetPlayer();
-        target.withChooseHint("Player to attach to").setNotTarget(true);
-        controller.choose(Outcome.Detriment, target, source.getSourceId(), game);
+        target.withChooseHint("Player to attach to").withNotTarget(true);
+        controller.choose(Outcome.Detriment, target, source, game);
         Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent == null) {
             return false;

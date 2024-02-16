@@ -32,7 +32,7 @@ public final class LeapingLizard extends CardImpl {
         // {1}{G}: Leaping Lizard gets -0/-1 and gains flying until end of turn.
         Effect effect = new BoostSourceEffect(0, -1, Duration.EndOfTurn);
         effect.setText("{this} gets -0/-1");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{1}{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{1}{G}"));
         effect = new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("and gains flying until end of turn");
         ability.addEffect(effect);

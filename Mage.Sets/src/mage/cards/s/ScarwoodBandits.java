@@ -50,7 +50,7 @@ public final class ScarwoodBandits extends CardImpl {
                                 new SourceRemainsInZoneCondition(Zone.BATTLEFIELD),
                                 "gain control of target artifact for as long as {this} remains on the battlefield"),
                         new GenericManaCost(2)),
-                new ManaCostsImpl("{2}{G}"));
+                new ManaCostsImpl<>("{2}{G}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetArtifactPermanent());
         this.addAbility(ability);
@@ -83,7 +83,7 @@ class DoUnlessAnyOpponentPaysEffect extends OneShotEffect {
         this.chooseUseText = chooseUseText;
     }
 
-    public DoUnlessAnyOpponentPaysEffect(final DoUnlessAnyOpponentPaysEffect effect) {
+    private DoUnlessAnyOpponentPaysEffect(final DoUnlessAnyOpponentPaysEffect effect) {
         super(effect);
         this.executingEffects = effect.executingEffects.copy();
         this.cost = effect.cost.copy();
@@ -97,7 +97,7 @@ class DoUnlessAnyOpponentPaysEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (controller != null && sourceObject != null) {
             String message;
             if (chooseUseText == null) {
@@ -129,7 +129,7 @@ class DoUnlessAnyOpponentPaysEffect extends OneShotEffect {
             // do the effects if nobody paid
             if (doEffect) {
                 for (Effect effect : executingEffects) {
-                    effect.setTargetPointer(this.targetPointer);
+                    effect.setTargetPointer(this.getTargetPointer().copy());
                     if (effect instanceof OneShotEffect) {
                         result &= effect.apply(game, source);
                     } else {
@@ -148,9 +148,6 @@ class DoUnlessAnyOpponentPaysEffect extends OneShotEffect {
 
     @Override
     public String getText(Mode mode) {
-        if (!staticText.isEmpty()) {
-            return staticText;
-        }
         String effectsText = executingEffects.getText(mode);
         return effectsText.substring(0, effectsText.length() - 1) + " unless any opponent pays " + cost.getText();
     }

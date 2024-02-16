@@ -35,7 +35,7 @@ public final class SpinyStarfish extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {U}: Regenerate Spiny Starfish.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{U}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{U}")));
 
         // At the beginning of each end step, if Spiny Starfish regenerated this turn, create a 0/1 blue Starfish creature token for each time it regenerated this turn.
         this.addAbility(

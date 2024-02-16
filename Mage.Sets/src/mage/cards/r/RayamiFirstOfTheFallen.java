@@ -17,6 +17,7 @@ import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 import java.util.Collection;
 import java.util.UUID;
@@ -29,7 +30,7 @@ public final class RayamiFirstOfTheFallen extends CardImpl {
     public RayamiFirstOfTheFallen(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{G}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.VAMPIRE);
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);
@@ -125,13 +126,12 @@ class RayamiFirstOfTheFallenReplacementEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent permanent = ((ZoneChangeEvent) event).getTarget();
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null || permanent == null) {
+        if (controller == null
+                || permanent == null
+                || (permanent instanceof PermanentToken)) {
             return false;
         }
-        controller.moveCards(permanent, Zone.EXILED, source, game);
-        Card card = game.getCard(permanent.getId());
-        card.addCounters(CounterType.BLOOD.createInstance(), source.getControllerId(), source, game);
-        return true;
+        return CardUtil.moveCardWithCounter(game, source, controller, permanent, Zone.EXILED, CounterType.BLOOD.createInstance());
     }
 
     @Override

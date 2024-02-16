@@ -89,7 +89,7 @@ public class DiscardTest extends CardTestPlayerBase {
 
         addCard(Zone.HAND, playerB, "Island", 2);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Liliana's Caress");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Liliana's Caress", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Coercion", playerB);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -103,7 +103,6 @@ public class DiscardTest extends CardTestPlayerBase {
 
         assertLife(playerA, 20);
         assertLife(playerB, 18);
-
     }
 
     @Test

@@ -57,12 +57,10 @@ public class EldraziTempleTest extends CardTestPlayerBase {
         // If a land is tapped for two or more mana, it produces {C} instead of any other type and amount.
         // Each spell a player casts costs {1} more to cast for each other spell that player has cast this turn.
         addCard(Zone.BATTLEFIELD, playerB, "Damping Sphere", 1);
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Barrage Tyrant");
+        checkPlayableAbility("Damping Sphere effective", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Barrage Tyrant", false);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-
-        assertPermanentCount(playerA, "Barrage Tyrant", 0);
     }
 
     @Test

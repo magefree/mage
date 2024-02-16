@@ -31,7 +31,7 @@ public final class SpectralLynx extends CardImpl {
         // Protection from green
         this.addAbility(ProtectionAbility.from(ObjectColor.GREEN));
         // {B}: Regenerate Spectral Lynx.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{B}")));
     }
 
     private SpectralLynx(final SpectralLynx card) {

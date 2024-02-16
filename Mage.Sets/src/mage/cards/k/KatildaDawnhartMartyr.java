@@ -2,10 +2,9 @@ package mage.cards.k;
 
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.abilities.hint.Hint;
 import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.DisturbAbility;
@@ -44,7 +43,7 @@ public final class KatildaDawnhartMartyr extends CardImpl {
     public KatildaDawnhartMartyr(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPIRIT);
         this.subtype.add(SubType.WARLOCK);
         this.power = new MageInt(0);
@@ -62,7 +61,7 @@ public final class KatildaDawnhartMartyr extends CardImpl {
 
         // Katilda, Dawnhart Martyr's power and toughness are each equal to the number of permanents you control that are Spirits and/or enchantments.
         this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new SetPowerToughnessSourceEffect(xValue, Duration.EndOfGame)
+                Zone.ALL, new SetBasePowerToughnessSourceEffect(xValue)
         ).addHint(hint));
 
         // Disturb {3}{W}{W}

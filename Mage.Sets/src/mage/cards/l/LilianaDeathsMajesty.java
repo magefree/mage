@@ -7,7 +7,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.abilities.effects.common.MillCardsControllerEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
-import mage.abilities.effects.common.continuous.BecomesBlackZombieAdditionEffect;
+import mage.abilities.effects.common.continuous.AddCreatureTypeAdditionEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -33,7 +33,7 @@ public final class LilianaDeathsMajesty extends CardImpl {
 
     public LilianaDeathsMajesty(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{B}{B}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.LILIANA);
 
         //Starting Loyalty: 5
@@ -45,11 +45,11 @@ public final class LilianaDeathsMajesty extends CardImpl {
         this.addAbility(ability);
 
         // -3: Return target creature card from your graveyard to the battlefield. That creature is a black Zombie in addition to its other colors and types.
-        ability = new LoyaltyAbility(new BecomesBlackZombieAdditionEffect() // because the effect has to be active for triggered effects that e.g. check if the creature entering is a Zombie, the continuous effect needs to be added before the card moving effect is applied
-                .setText(""), -3);
+        ability = new LoyaltyAbility(new AddCreatureTypeAdditionEffect(SubType.ZOMBIE, true) // because the effect has to be active for triggered effects that e.g. check if the creature entering is a Zombie, the continuous effect needs to be added before the card moving effect is applied
+                .setText("Return target creature card"), -3);
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         ability.addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect()
-                .setText("Return target creature card from your graveyard to the battlefield. That creature is a black Zombie in addition to its other colors and types"));
+                .setText(" from your graveyard to the battlefield. That creature is a black Zombie in addition to its other colors and types"));
         this.addAbility(ability);
 
         // -7: Destroy all non-Zombie creatures.

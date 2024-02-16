@@ -29,7 +29,7 @@ public final class EbondeathDracolich extends CardImpl {
     public EbondeathDracolich(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ZOMBIE);
         this.subtype.add(SubType.DRAGON);
         this.power = new MageInt(5);
@@ -60,7 +60,7 @@ public final class EbondeathDracolich extends CardImpl {
 
 class EbondeathDracolichEffect extends AsThoughEffectImpl {
 
-    public EbondeathDracolichEffect() {
+    EbondeathDracolichEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
         this.staticText = "You may cast {this} from your graveyard if a creature not named Ebondeath, Dracolich died this turn";
     }

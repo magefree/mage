@@ -24,7 +24,7 @@ public final class LazotepReaver extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Lazotep Reaver enters the battlefield, amass 1.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new AmassEffect(1)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new AmassEffect(1, SubType.ZOMBIE)));
     }
 
     private LazotepReaver(final LazotepReaver card) {

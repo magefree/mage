@@ -28,7 +28,7 @@ public final class MigrationPath extends CardImpl {
         ));
 
         // Cycling {2}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
     private MigrationPath(final MigrationPath card) {

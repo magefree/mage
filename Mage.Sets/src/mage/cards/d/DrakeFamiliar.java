@@ -65,8 +65,8 @@ class DrakeFamiliarEffect extends OneShotEffect {
             return false;
         }
         TargetPermanent target = new TargetPermanent(StaticFilters.FILTER_PERMANENT_ENCHANTMENT);
-        target.setNotTarget(true);
-        if (target.canChoose(source.getSourceId(), controller.getId(), game)
+        target.withNotTarget(true);
+        if (target.canChoose(controller.getId(), source, game)
                 && controller.chooseUse(outcome, "Return an enchantment to its owner's hand?", source, game)) {
             controller.chooseTarget(Outcome.ReturnToHand, target, source, game);
             Permanent permanent = game.getPermanent(target.getFirstTarget());

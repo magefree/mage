@@ -36,7 +36,7 @@ public final class Nihilith extends CardImpl {
         this.addAbility(FearAbility.getInstance());
         
         // Suspend 7-{1}{B}
-        this.addAbility(new SuspendAbility(7, new ManaCostsImpl("{1}{B}"), this, false));
+        this.addAbility(new SuspendAbility(7, new ManaCostsImpl<>("{1}{B}"), this, false));
         
         // Whenever a card is put into an opponent's graveyard from anywhere, if Nihilith is suspended, you may remove a time counter from Nihilith.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(

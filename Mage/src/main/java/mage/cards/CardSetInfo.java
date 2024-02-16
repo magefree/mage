@@ -13,6 +13,10 @@ public final class CardSetInfo implements Serializable, Copyable<CardSetInfo> {
     private final Rarity rarity;
     private final CardGraphicInfo graphicInfo;
 
+    public CardSetInfo(String name, CardSetInfo cardSetInfo) {
+        this(name, cardSetInfo.expansionSetCode, cardSetInfo.cardNumber, cardSetInfo.rarity, cardSetInfo.graphicInfo);
+    }
+
     public CardSetInfo(String name, String expansionSetCode, String cardNumber, Rarity rarity) {
         this(name, expansionSetCode, cardNumber, rarity, null);
     }

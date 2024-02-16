@@ -44,7 +44,7 @@ class FlourishingDefensesTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new ElfWarriorToken()), true);
     }
 
-    FlourishingDefensesTriggeredAbility(final FlourishingDefensesTriggeredAbility ability) {
+    private FlourishingDefensesTriggeredAbility(final FlourishingDefensesTriggeredAbility ability) {
         super(ability);
     }
 

@@ -9,25 +9,34 @@ import java.util.Map;
 public abstract class TargetPointerImpl implements TargetPointer {
 
     // Store custom data here. Use it to keep unique values for ability instances on stack (example: Gruul Ragebeast)
-    Map<String, String> data = new HashMap<>();
+    private Map<String, String> data;
 
     public TargetPointerImpl() {
         super();
     }
 
-    public TargetPointerImpl(final TargetPointerImpl targetPointer) {
+    protected TargetPointerImpl(final TargetPointerImpl targetPointer) {
         super();
-        this.data.putAll(targetPointer.data);
+        if (targetPointer.data != null) {
+            this.data = new HashMap<>();
+            this.data.putAll(targetPointer.data);
+        }
     }
 
     @Override
     public String getData(String key) {
-        return this.data.getOrDefault(key, "");
+        if (data == null) {
+            return "";
+        }
+        return data.getOrDefault(key, "");
     }
 
     @Override
     public TargetPointer withData(String key, String value) {
-        this.data.put(key, value);
+        if (data == null) {
+            data = new HashMap<>();
+        }
+        data.put(key, value);
         return this;
     }
 }

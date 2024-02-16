@@ -45,12 +45,12 @@ public final class Donate extends CardImpl {
 
 class DonateEffect extends OneShotEffect {
 
-    public DonateEffect() {
+    DonateEffect() {
         super(Outcome.Detriment);
         this.staticText = "Target player gains control of target permanent you control";
     }
     
-    public DonateEffect(final DonateEffect effect) {
+    private DonateEffect(final DonateEffect effect) {
         super(effect);
     }
 

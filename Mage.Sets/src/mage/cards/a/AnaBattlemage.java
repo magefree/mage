@@ -70,12 +70,12 @@ public final class AnaBattlemage extends CardImpl {
 
 class AnaBattlemageKickerEffect extends OneShotEffect {
 
-    public AnaBattlemageKickerEffect() {
+    AnaBattlemageKickerEffect() {
         super(Outcome.Detriment);
         this.staticText = "tap target untapped creature and it deals damage equal to its power to its controller";
     }
 
-    public AnaBattlemageKickerEffect(final AnaBattlemageKickerEffect effect) {
+    private AnaBattlemageKickerEffect(final AnaBattlemageKickerEffect effect) {
         super(effect);
     }
 

@@ -32,7 +32,7 @@ public final class HumbleTheBrute extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
 
         // Investigate.
-        this.getSpellAbility().addEffect(new InvestigateEffect());
+        this.getSpellAbility().addEffect(new InvestigateEffect().concatBy("<br>"));
     }
 
     private HumbleTheBrute(final HumbleTheBrute card) {

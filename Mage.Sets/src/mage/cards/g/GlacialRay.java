@@ -1,8 +1,7 @@
-
 package mage.cards.g;
 
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.keyword.SpliceOntoArcaneAbility;
+import mage.abilities.keyword.SpliceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -24,9 +23,9 @@ public final class GlacialRay extends CardImpl {
 
         // Glacial Ray deals 2 damage to any target.
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));
-        this.getSpellAbility().addTarget(new TargetAnyTarget());
+        this.getSpellAbility().addTarget(new TargetAnyTarget().withChooseHint("2 damage"));
         // Splice onto Arcane {1}{R}
-        this.addAbility(new SpliceOntoArcaneAbility("{1}{R}"));
+        this.addAbility(new SpliceAbility(SpliceAbility.ARCANE, "{1}{R}"));
     }
 
     private GlacialRay(final GlacialRay card) {

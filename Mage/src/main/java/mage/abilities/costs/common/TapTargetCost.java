@@ -22,14 +22,14 @@ public class TapTargetCost extends CostImpl {
 
     public TapTargetCost(TargetControlledPermanent target) {
         this.target = target;
-        this.target.setNotTarget(true); // costs are never targeted
+        this.target.withNotTarget(true); // costs are never targeted
         this.target.setRequired(false); // can be cancel by user
         this.text = "tap " + (target.getNumberOfTargets() > 1
                 ? CardUtil.numberToText(target.getMaxNumberOfTargets()) + ' ' + target.getTargetName()
                 : CardUtil.addArticle(target.getTargetName()));
     }
 
-    public TapTargetCost(final TapTargetCost cost) {
+    protected TapTargetCost(final TapTargetCost cost) {
         super(cost);
         this.target = cost.target.copy();
     }
@@ -37,7 +37,7 @@ public class TapTargetCost extends CostImpl {
     @Override
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         List<Permanent> permanents = new ArrayList<>();
-        if (target.choose(Outcome.Tap, controllerId, source.getSourceId(), game)) {
+        if (target.getMaxNumberOfTargets() > 0 && target.choose(Outcome.Tap, controllerId, source.getSourceId(), source, game)) {
             for (UUID targetId : target.getTargets()) {
                 Permanent permanent = game.getPermanent(targetId);
                 if (permanent == null) {
@@ -47,13 +47,16 @@ public class TapTargetCost extends CostImpl {
                 permanents.add(permanent);
             }
         }
+        if (target.getNumberOfTargets() == 0) {
+            paid = true; // e.g. Aryel with X = 0
+        }
         source.getEffects().setValue("tappedPermanents", permanents);
         return paid;
     }
 
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
-        return target.canChoose(source.getSourceId(), controllerId, game);
+        return target.canChoose(controllerId, source, game);
     }
 
     public TargetControlledPermanent getTarget() {
@@ -64,5 +67,4 @@ public class TapTargetCost extends CostImpl {
     public TapTargetCost copy() {
         return new TapTargetCost(this);
     }
-
 }

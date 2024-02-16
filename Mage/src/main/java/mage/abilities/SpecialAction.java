@@ -17,7 +17,6 @@ import java.util.UUID;
 public abstract class SpecialAction extends ActivatedAbilityImpl {
 
     private final AlternateManaPaymentAbility manaAbility; // mana actions generates on every pay cycle, no need to copy it
-    protected ManaCost unpaidMana;
 
     public SpecialAction() {
         this(Zone.ALL);
@@ -33,22 +32,13 @@ public abstract class SpecialAction extends ActivatedAbilityImpl {
         this.manaAbility = manaAbility;
     }
 
-    public SpecialAction(final SpecialAction action) {
+    protected SpecialAction(final SpecialAction action) {
         super(action);
-        this.unpaidMana = action.unpaidMana;
         this.manaAbility = action.manaAbility;
     }
 
     public boolean isManaAction() {
         return manaAbility != null;
-    }
-
-    public void setUnpaidMana(ManaCost manaCost) {
-        this.unpaidMana = manaCost;
-    }
-
-    public ManaCost getUnpaidMana() {
-        return unpaidMana;
     }
 
     public ManaOptions getManaOptions(Ability source, Game game, ManaCost unpaid) {

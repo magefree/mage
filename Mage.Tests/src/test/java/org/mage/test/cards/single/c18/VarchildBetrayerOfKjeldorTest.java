@@ -30,7 +30,7 @@ public class VarchildBetrayerOfKjeldorTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Varchild, Betrayer of Kjeldor", 1);
 
-        assertPermanentCount(playerB, "Survivor", 3);
+        assertPermanentCount(playerB, "Survivor Token", 3);
     }
 
     @Test
@@ -62,10 +62,10 @@ public class VarchildBetrayerOfKjeldorTest extends CardTestPlayerBase {
         assertExileCount(playerA, "Varchild, Betrayer of Kjeldor", 1);
         assertLife(playerA, 23);
 
-        assertPermanentCount(playerA, "Survivor", 3);
+        assertPermanentCount(playerA, "Survivor Token", 3);
 
         assertPermanentCount(playerB, "Irregular Cohort", 1);
-        assertPermanentCount(playerB, "Shapeshifter", 1);
+        assertPermanentCount(playerB, "Shapeshifter Token", 1);
 
     }
 }

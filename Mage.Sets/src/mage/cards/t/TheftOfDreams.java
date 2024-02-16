@@ -42,12 +42,12 @@ public final class TheftOfDreams extends CardImpl {
 
 class TheftOfDreamsEffect extends OneShotEffect {
 
-    public TheftOfDreamsEffect() {
+    TheftOfDreamsEffect() {
         super(Outcome.DrawCard);
         this.staticText = "Draw a card for each tapped creature target opponent controls";
     }
 
-    public TheftOfDreamsEffect(final TheftOfDreamsEffect effect) {
+    private TheftOfDreamsEffect(final TheftOfDreamsEffect effect) {
         super(effect);
     }
 
@@ -63,7 +63,7 @@ class TheftOfDreamsEffect extends OneShotEffect {
             FilterCreaturePermanent filter = new FilterCreaturePermanent();
             filter.add(TappedPredicate.TAPPED);
             filter.add(new ControllerIdPredicate(opponent.getId()));
-            return new DrawCardSourceControllerEffect(game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game)).apply(game, source);
+            return new DrawCardSourceControllerEffect(game.getBattlefield().count(filter, source.getControllerId(), source, game)).apply(game, source);
         }
         return false;
     }

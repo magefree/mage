@@ -31,7 +31,7 @@ public final class RealityTwist extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{U}{U}{U}");
 
         // Cumulative upkeep-Pay {1}{U}{U}.
-        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{1}{U}{U}")));
+        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{1}{U}{U}")));
 
         // If tapped for mana, Plains produce {R}, Swamps produce {G}, Mountains produce {W}, and Forests produce {B} instead of any other type.
         this.addAbility(new SimpleStaticAbility(new RealityTwistEffect()));
@@ -65,11 +65,6 @@ class RealityTwistEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         TappedForManaEvent manaEvent = (TappedForManaEvent) event;
         Player controller = game.getPlayer(source.getControllerId());
@@ -95,9 +90,16 @@ class RealityTwistEffect extends ReplacementEffectImpl {
         String chosenColor;
         if (choice.getChoices().size() == 1) {
             chosenColor = choice.getChoices().iterator().next();
+        } else if (choice.getChoices().size() == 0) {
+            chosenColor = null;
         } else {
-            controller.choose(Outcome.PutManaInPool, choice, game);
-            chosenColor = choice.getChoice();
+            // workaround to skip choose dialog in check playable state
+            if (game.inCheckPlayableState()) {
+                chosenColor = "Any";
+            } else {
+                controller.choose(Outcome.PutManaInPool, choice, game);
+                chosenColor = choice.getChoice();
+            }
         }
         if (chosenColor == null) {
             return false;
@@ -116,6 +118,9 @@ class RealityTwistEffect extends ReplacementEffectImpl {
                 break;
             case "Green":
                 mana.setToMana(Mana.GreenMana(amount));
+                break;
+            case "Any":
+                mana.setToMana(Mana.AnyMana(amount));
                 break;
         }
         return false;

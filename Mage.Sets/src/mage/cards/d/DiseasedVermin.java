@@ -23,7 +23,6 @@ import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPlayer;
@@ -82,7 +81,7 @@ class DiseasedVerminEffect extends OneShotEffect {
         this.staticText = "{this} deals X damage to target opponent previously dealt damage by it, where X is the number of infection counters on it";
     }
 
-    public DiseasedVerminEffect(final DiseasedVerminEffect effect) {
+    private DiseasedVerminEffect(final DiseasedVerminEffect effect) {
         super(effect);
     }
 
@@ -98,8 +97,8 @@ class DiseasedVerminEffect extends OneShotEffect {
         if (sourcePermanent != null
                 && controller != null) {
             TargetPlayer targetOpponent = new TargetPlayer(1, 1, false, filter);
-            if (targetOpponent.canChoose(source.getSourceId(), controller.getId(), game)
-                    && controller.choose(Outcome.Damage, targetOpponent, source.getSourceId(), game)) {
+            if (targetOpponent.canChoose(controller.getId(), source, game)
+                    && controller.choose(Outcome.Damage, targetOpponent, source, game)) {
                 Player opponent = game.getPlayer(targetOpponent.getFirstTarget());
                 if (opponent != null
                         && sourcePermanent.getCounters(game).getCount(CounterType.INFECTION) > 0) {

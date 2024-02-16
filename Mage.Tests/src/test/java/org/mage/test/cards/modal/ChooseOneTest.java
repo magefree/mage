@@ -49,7 +49,6 @@ public class ChooseOneTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Funeral Charm", 1);
         assertPowerToughness(playerB, "Silvercoat Lion", 4, 1);

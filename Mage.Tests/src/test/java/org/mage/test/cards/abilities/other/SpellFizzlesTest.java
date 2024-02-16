@@ -33,7 +33,7 @@ public class SpellFizzlesTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Adverse Conditions", 1);
         assertGraveyardCount(playerB, "Lightning Bolt", 1);
         assertGraveyardCount(playerB, "Silvercoat Lion", 1);
-        assertPermanentCount(playerA, "Eldrazi Scion", 0); // All targets were illegal - spell fizzles
+        assertPermanentCount(playerA, "Eldrazi Scion Token", 0); // All targets were illegal - spell fizzles
 
     }
 

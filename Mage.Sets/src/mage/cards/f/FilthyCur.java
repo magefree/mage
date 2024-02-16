@@ -49,7 +49,7 @@ class DealtDamageLoseLifeTriggeredAbility extends TriggeredAbilityImpl {
         super(zone, effect, optional);
     }
 
-    public DealtDamageLoseLifeTriggeredAbility(final DealtDamageLoseLifeTriggeredAbility ability) {
+    private DealtDamageLoseLifeTriggeredAbility(final DealtDamageLoseLifeTriggeredAbility ability) {
         super(ability);
     }
 

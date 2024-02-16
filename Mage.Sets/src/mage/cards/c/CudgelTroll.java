@@ -26,7 +26,7 @@ public final class CudgelTroll extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
 
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{G}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{G}")));
     }
 
     private CudgelTroll(final CudgelTroll card) {

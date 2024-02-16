@@ -26,7 +26,7 @@ public final class WatchfulAutomaton extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {2}{U}: Scry 1.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ScryEffect(1), new ManaCostsImpl("{2}{U}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ScryEffect(1), new ManaCostsImpl<>("{2}{U}")));
     }
 
     private WatchfulAutomaton(final WatchfulAutomaton card) {

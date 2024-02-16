@@ -15,7 +15,7 @@ public enum ArtifactYouControlCount implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        return game.getBattlefield().count(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT, sourceAbility.getSourceId(), sourceAbility.getControllerId(), game);
+        return game.getBattlefield().count(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT, sourceAbility.getControllerId(), sourceAbility, game);
     }
 
     @Override

@@ -21,7 +21,7 @@ public final class ZhaoZilongTigerGeneral extends CardImpl {
 
     public ZhaoZilongTigerGeneral(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN, SubType.SOLDIER, SubType.WARRIOR);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
@@ -29,7 +29,7 @@ public final class ZhaoZilongTigerGeneral extends CardImpl {
         // Horsemanship
         this.addAbility(HorsemanshipAbility.getInstance());
         // Whenever Zhao Zilong, Tiger General blocks, it gets +1/+1 until end of turn.
-        this.addAbility(new BlocksSourceTriggeredAbility(new BoostSourceEffect(1, 1, Duration.EndOfTurn), false));
+        this.addAbility(new BlocksSourceTriggeredAbility(new BoostSourceEffect(1, 1, Duration.EndOfTurn, "it")));
     }
 
     private ZhaoZilongTigerGeneral(final ZhaoZilongTigerGeneral card) {

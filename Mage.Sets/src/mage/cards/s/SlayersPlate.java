@@ -20,6 +20,7 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.SpiritWhiteToken;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
@@ -38,7 +39,7 @@ public final class SlayersPlate extends CardImpl {
         this.addAbility(new SlayersPlateTriggeredAbility());
 
         // Equip {3}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3)));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(3), new TargetControlledCreaturePermanent(), false));
     }
 
     private SlayersPlate(final SlayersPlate card) {
@@ -57,7 +58,7 @@ class SlayersPlateTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new SpiritWhiteToken()));
     }
 
-    public SlayersPlateTriggeredAbility(final SlayersPlateTriggeredAbility ability) {
+    private SlayersPlateTriggeredAbility(final SlayersPlateTriggeredAbility ability) {
         super(ability);
     }
 

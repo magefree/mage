@@ -45,7 +45,7 @@ public class SurgeTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Lightning Bolt");
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion");
 
-        // Create a tokenonto the battlefield that's a copy of target creature you control.
+        // Create a token that's a copy of target creature you control.
         // Flashback {5}{U}{U}(You may cast this card from your graveyard for its flashback cost. Then exile it.)
         addCard(Zone.HAND, playerB, "Cackling Counterpart");
         addCard(Zone.BATTLEFIELD, playerB, "Island", 3);
@@ -53,6 +53,7 @@ public class SurgeTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Cackling Counterpart", "Silvercoat Lion");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Crush of Tentacles with surge");
 
@@ -62,7 +63,7 @@ public class SurgeTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Lightning Bolt", 1);
         assertGraveyardCount(playerB, "Cackling Counterpart", 1);
         assertGraveyardCount(playerA, "Crush of Tentacles", 1);
-        assertPermanentCount(playerA, "Octopus", 1);
+        assertPermanentCount(playerA, "Octopus Token", 1);
         assertPermanentCount(playerB, "Silvercoat Lion", 0);
         assertHandCount(playerA, "Silvercoat Lion", 1);
         assertHandCount(playerB, "Silvercoat Lion", 1);
@@ -81,7 +82,8 @@ public class SurgeTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Lightning Bolt");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tyrant of Valakut");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tyrant of Valakut with surge");
         addTarget(playerA, playerB);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -106,7 +108,8 @@ public class SurgeTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 1, true);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Containment Membrane", "Silvercoat Lion");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Containment Membrane with surge", "Silvercoat Lion");
 
         setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
         execute();

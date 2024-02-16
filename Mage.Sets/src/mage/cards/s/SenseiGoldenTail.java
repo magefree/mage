@@ -25,7 +25,7 @@ public final class SenseiGoldenTail extends CardImpl {
 
     public SenseiGoldenTail(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.FOX);
         this.subtype.add(SubType.SAMURAI);
 
@@ -41,7 +41,7 @@ public final class SenseiGoldenTail extends CardImpl {
         Ability ability = new ActivateAsSorceryActivatedAbility(
                 Zone.BATTLEFIELD,
                 new AddCountersTargetEffect(CounterType.TRAINING.createInstance()),
-                new ManaCostsImpl("{1}{W}")
+                new ManaCostsImpl<>("{1}{W}")
         );
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());

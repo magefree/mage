@@ -24,7 +24,6 @@ public class BasrisAegisTest extends CardTestPlayerBase {
         addTarget(playerA, "Basri, Devoted Paladin");
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerA, 1);
         assertCounterCount(playerA, "Grizzly Bears", CounterType.P1P1, 1);

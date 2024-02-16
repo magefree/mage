@@ -32,7 +32,7 @@ public final class CurseOfDeathsHold extends CardImpl {
         TargetPlayer auraTarget = new TargetPlayer();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.UnboostCreature));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // Creatures enchanted player controls get -1/-1.
         this.addAbility(new SimpleStaticAbility(new BoostAllEffect(

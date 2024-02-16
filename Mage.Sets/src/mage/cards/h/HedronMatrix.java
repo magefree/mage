@@ -19,6 +19,7 @@ import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
@@ -29,11 +30,15 @@ public final class HedronMatrix extends CardImpl {
     public HedronMatrix (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
         this.subtype.add(SubType.EQUIPMENT);
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(4)));
+
+        // Equipped creature gets +X/+X, where X is its mana value.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new HedronMatrixEffect()));
+
+        // Equip {4}
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(4), new TargetControlledCreaturePermanent(), false));
     }
 
-    public HedronMatrix (final HedronMatrix card) {
+    private HedronMatrix(final HedronMatrix card) {
         super(card);
     }
 
@@ -46,12 +51,12 @@ public final class HedronMatrix extends CardImpl {
 
 class HedronMatrixEffect extends ContinuousEffectImpl {
 
-    public HedronMatrixEffect() {
+    HedronMatrixEffect() {
         super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
         staticText = "Equipped creature gets +X/+X, where X is its mana value";
     }
 
-    public HedronMatrixEffect(final HedronMatrixEffect effect) {
+    private HedronMatrixEffect(final HedronMatrixEffect effect) {
         super(effect);
     }
 

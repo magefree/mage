@@ -1,9 +1,18 @@
 package org.mage.test.mulligan;
 
+import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkState;
+import static com.google.common.collect.Iterables.getOnlyElement;
+import static java.util.Collections.unmodifiableList;
+import static java.util.Collections.unmodifiableSet;
 import mage.cards.CardSetInfo;
 import mage.cards.basiclands.Forest;
 import mage.cards.decks.Deck;
+import mage.cards.s.Squire;
+import static mage.constants.MultiplayerAttackOption.LEFT;
 import mage.constants.RangeOfInfluence;
+import static mage.constants.RangeOfInfluence.ONE;
+import static mage.constants.Rarity.LAND;
 import mage.game.Game;
 import mage.game.GameOptions;
 import mage.game.TwoPlayerDuel;
@@ -11,22 +20,13 @@ import mage.game.mulligan.Mulligan;
 import mage.game.mulligan.MulliganType;
 import mage.players.StubPlayer;
 import org.apache.log4j.Logger;
+import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Stream;
-
-import static com.google.common.base.Preconditions.checkArgument;
-import static com.google.common.base.Preconditions.checkState;
-import static com.google.common.collect.Iterables.getOnlyElement;
-import static java.util.Collections.unmodifiableList;
-import static java.util.Collections.unmodifiableSet;
-import static mage.constants.MultiplayerAttackOption.LEFT;
-import static mage.constants.RangeOfInfluence.ONE;
-import static mage.constants.Rarity.LAND;
-import static org.junit.Assert.*;
 
 public class MulliganTestBase {
 
@@ -38,7 +38,7 @@ public class MulliganTestBase {
         private final int freeMulligans;
         private final List<Step> steps = new ArrayList<>();
 
-        private PlayerProxy player1;
+        private MulliganStubPlayer player1;
 
         public MulliganScenarioTest(MulliganType mulliganType, int freeMulligans) {
             this.mulliganType = mulliganType;
@@ -59,7 +59,7 @@ public class MulliganTestBase {
 
         public void run(Runnable callback) {
             Mulligan mulligan = mulliganType.getMulligan(freeMulligans);
-            Game game = new TwoPlayerDuel(LEFT, ONE, mulligan, 20) {
+            Game game = new TwoPlayerDuel(LEFT, ONE, mulligan, 60, 20, 7) {
                 @Override
                 public void fireStatusEvent(String message, boolean withTime, boolean withTurnInfo) {
                     super.fireStatusEvent(message, withTime, withTurnInfo);
@@ -73,13 +73,13 @@ public class MulliganTestBase {
             options.skipInitShuffling = true;
             game.setGameOptions(options);
 
-            this.player1 = new PlayerProxy("p1", ONE);
+            this.player1 = new MulliganStubPlayer("p1", ONE);
             player1.setSteps(steps);
             Deck deck1 = generateDeck(player1.getId(), 40);
             game.loadCards(deck1.getCards(), player1.getId());
             game.addPlayer(player1, deck1);
 
-            PlayerProxy player2 = new PlayerProxy("p2", ONE);
+            MulliganStubPlayer player2 = new MulliganStubPlayer("p2", ONE);
             Deck deck2 = generateDeck(player2.getId(), 40);
             game.loadCards(deck2.getCards(), player2.getId());
             game.addPlayer(player2, deck2);
@@ -141,7 +141,10 @@ public class MulliganTestBase {
     public static Deck generateDeck(UUID playerId, int count) {
         Deck deck = new Deck();
         Stream.generate(() -> new Forest(playerId, new CardSetInfo("Forest", "TEST", "1", LAND)))
-                .limit(count)
+                .limit(count / 2 + (count & 1)) //If odd number of cards, add one extra forest
+                .forEach(deck.getCards()::add);
+        Stream.generate(() -> new Squire(playerId, new CardSetInfo("Squire", "TEST", "2", LAND)))
+                .limit(count / 2)
                 .forEach(deck.getCards()::add);
         return deck;
     }
@@ -161,12 +164,12 @@ public class MulliganTestBase {
         List<UUID> discardBottom(int count);
     }
 
-    static class PlayerProxy extends StubPlayer {
+    static class MulliganStubPlayer extends StubPlayer {
 
         private List<Step> steps = null;
         private int current = 0;
 
-        public PlayerProxy(String name, RangeOfInfluence range) {
+        public MulliganStubPlayer(String name, RangeOfInfluence range) {
             super(name, range);
         }
 

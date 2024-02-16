@@ -11,16 +11,16 @@ import mage.game.stack.StackAbility;
 import mage.game.stack.StackObject;
 
 /**
- *
  * @author LevelX2
  */
 public class CycleAllTriggeredAbility extends TriggeredAbilityImpl {
 
     public CycleAllTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
+        setTriggerPhrase("Whenever a player cycles a card, ");
     }
 
-    public CycleAllTriggeredAbility(final CycleAllTriggeredAbility ability) {
+    protected CycleAllTriggeredAbility(final CycleAllTriggeredAbility ability) {
         super(ability);
     }
 
@@ -40,13 +40,7 @@ public class CycleAllTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "Whenever a player cycles a card, " ;
-    }
-
-    @Override
     public CycleAllTriggeredAbility copy() {
         return new CycleAllTriggeredAbility(this);
     }
-
 }

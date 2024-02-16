@@ -66,7 +66,7 @@ class LicidEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent licid = (Permanent) source.getSourceObjectIfItStillExists(game);
+        Permanent licid = source.getSourcePermanentIfItStillExists(game);
         if (licid != null) {
             UUID messageId = UUID.randomUUID();
             LicidContinuousEffect effect = new LicidContinuousEffect(messageId);
@@ -103,7 +103,7 @@ class LicidContinuousEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        Permanent licid = (Permanent) source.getSourceObjectIfItStillExists(game);
+        Permanent licid = source.getSourcePermanentIfItStillExists(game);
         if (licid != null) {
             switch (layer) {
                 case TypeChangingEffects_4:
@@ -124,12 +124,11 @@ class LicidContinuousEffect extends ContinuousEffectImpl {
                     }
                     licid.removeAbilities(toRemove, source.getSourceId(), game);
 
-                    Ability ability = new EnchantAbility("creature");
+                    Target target = new TargetCreaturePermanent();
+                    Ability ability = new EnchantAbility(target);
                     ability.setRuleAtTheTop(true);
                     licid.addAbility(ability, source.getSourceId(), game);
                     licid.getSpellAbility().getTargets().clear();
-                    Target target = new TargetCreaturePermanent();
-                    target.addTarget(this.getTargetPointer().getFirst(game, source), source, game);
                     licid.getSpellAbility().getTargets().add(target);
             }
             return true;

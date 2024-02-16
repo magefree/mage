@@ -10,12 +10,10 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 
-import java.util.Arrays;
-
 public final class RelicRobberToken extends TokenImpl {
 
     public RelicRobberToken() {
-        super("Goblin Construct", "0/1 colorless Goblin Construct artifact creature token with \"This creature can't block\" and \"At the beginning of your upkeep, this creature deals 1 damage to you.\"");
+        super("Goblin Construct Token", "0/1 colorless Goblin Construct artifact creature token with \"This creature can't block\" and \"At the beginning of your upkeep, this creature deals 1 damage to you.\"");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.GOBLIN);
@@ -29,11 +27,9 @@ public final class RelicRobberToken extends TokenImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DamageControllerEffect(
                 1, "this creature"
         ), TargetController.YOU, false));
-
-        availableImageSetCodes = Arrays.asList("ZNR");
     }
 
-    public RelicRobberToken(final RelicRobberToken token) {
+    private RelicRobberToken(final RelicRobberToken token) {
         super(token);
     }
 

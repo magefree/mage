@@ -21,7 +21,7 @@ public final class TurnTheTide extends CardImpl {
         this.getSpellAbility().addEffect(new BoostOpponentsEffect(-2, 0, Duration.EndOfTurn));
     }
 
-    public TurnTheTide (final TurnTheTide card) {
+    private TurnTheTide(final TurnTheTide card) {
         super(card);
     }
 

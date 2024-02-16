@@ -54,7 +54,7 @@ public final class KeensightMentor extends CardImpl {
 
         // {1}{W}, {T}: Put a +1/+1 counter on each creature you control with vigilance.
         ability = new SimpleActivatedAbility(
-                new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter2), new ManaCostsImpl("{1}{W}")
+                new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter2), new ManaCostsImpl<>("{1}{W}")
         );
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

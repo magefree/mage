@@ -56,7 +56,7 @@ class DropOfHoneyEffect extends OneShotEffect {
         this.staticText = "destroy the creature with the least power. It can't be regenerated. If two or more creatures are tied for least power, you choose one of them";
     }
     
-    public DropOfHoneyEffect(final DropOfHoneyEffect effect) {
+    private DropOfHoneyEffect(final DropOfHoneyEffect effect) {
         super(effect);
     }
     
@@ -88,9 +88,9 @@ class DropOfHoneyEffect extends OneShotEffect {
                 FilterCreaturePermanent filter = new FilterCreaturePermanent("one of the creatures with the least power");
                 filter.add(new PowerPredicate(ComparisonType.EQUAL_TO, leastPower));
                 Target target = new TargetPermanent(filter);
-                target.setNotTarget(true);
-                if (target.canChoose(source.getSourceId(), source.getControllerId(), game)) {
-                    if (controller.choose(outcome, target, source.getSourceId(), game)) {
+                target.withNotTarget(true);
+                if (target.canChoose(source.getControllerId(), source, game)) {
+                    if (controller.choose(outcome, target, source, game)) {
                         permanentToDestroy = game.getPermanent(target.getFirstTarget());
                     }
                 }
@@ -110,9 +110,10 @@ class DropOfHoneyStateTriggeredAbility extends StateTriggeredAbility {
 
     public DropOfHoneyStateTriggeredAbility() {
         super(Zone.BATTLEFIELD, new SacrificeSourceEffect());
+        setTriggerPhrase("When there are no creatures on the battlefield, ");
     }
 
-    public DropOfHoneyStateTriggeredAbility(final DropOfHoneyStateTriggeredAbility ability) {
+    private DropOfHoneyStateTriggeredAbility(final DropOfHoneyStateTriggeredAbility ability) {
         super(ability);
     }
 
@@ -123,11 +124,6 @@ class DropOfHoneyStateTriggeredAbility extends StateTriggeredAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return game.getBattlefield().count(StaticFilters.FILTER_PERMANENT_CREATURES, this.getSourceId(), this.getControllerId(), game) == 0;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "When there are no creatures on the battlefield, " ;
+        return game.getBattlefield().count(StaticFilters.FILTER_PERMANENT_CREATURES, this.getControllerId(), this, game) == 0;
     }
 }

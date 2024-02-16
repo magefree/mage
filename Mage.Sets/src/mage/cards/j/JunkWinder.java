@@ -17,6 +17,7 @@ import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.filter.predicate.permanent.TokenPredicate;
@@ -51,12 +52,10 @@ public final class JunkWinder extends CardImpl {
 
         // Whenever a token enters the battlefield under your control, tap target nonland permanent an opponent controls. It doesn't untap during its controller's next untap step.
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(
-                new TapTargetEffect(), filter, "Whenever a token enters the battlefield " +
-                "under your control, tap target nonland permanent an opponent controls. " +
-                "It doesn't untap during its controller's next untap step."
+                new TapTargetEffect(), StaticFilters.FILTER_PERMANENT_TOKEN
         );
-        ability.addEffect(new DontUntapInControllersNextUntapStepTargetEffect());
-        ability.addTarget(new TargetPermanent(filter2));
+        ability.addEffect(new DontUntapInControllersNextUntapStepTargetEffect("It"));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_NON_LAND));
         this.addAbility(ability);
     }
 

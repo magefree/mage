@@ -44,7 +44,7 @@ public class WouldDieExileInsteadTest extends CardTestPlayerBase {
         assertExileCount("Sigiled Starfish", 1);
         assertGraveyardCount(playerB, 0); // all 3 creatures of playerB should be exiled not in graveyard
         assertExileCount("Kalitas, Traitor of Ghet", 0); // player controlled, not opponent so not exiled
-        assertPermanentCount(playerA, "Zombie", 3); // 3 tokens generated from exiling 3 opponent's creatures
+        assertPermanentCount(playerA, "Zombie Token", 3); // 3 tokens generated from exiling 3 opponent's creatures
     }
     
     /*
@@ -127,5 +127,27 @@ public class WouldDieExileInsteadTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, ssMage, 2, 3); // prowess triggered
         assertGraveyardCount(playerB, hGiant, 1);
         assertExileCount(playerB, hGiant, 0);
+    }
+
+    @Test
+    public void miseryShadowReplacement() {
+        // Misery's Shadow {1}{B} - 2/2 Creature
+        // If a creature an opponent controls would die, exile it instead.
+        // {1}: Misery’s Shadow gets +1/+1 until end of turn.
+        addCard(Zone.BATTLEFIELD, playerA, "Misery's Shadow", 1);
+        // Doom Blade {1}{B} - Instant
+        // Destroy target non-black creature.
+        addCard(Zone.HAND, playerA, "Doom Blade", 1);
+        // Giant Spider - 2/4 Creature
+        // Reach
+        addCard(Zone.BATTLEFIELD, playerB, "Giant Spider", 1);
+
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Doom Blade", "Giant Spider");
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerB, "Giant Spider", 0);
+        assertExileCount("Giant Spider", 1);
     }
 }

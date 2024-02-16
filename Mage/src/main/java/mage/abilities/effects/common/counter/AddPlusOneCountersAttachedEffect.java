@@ -12,7 +12,6 @@ import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class AddPlusOneCountersAttachedEffect extends OneShotEffect {
@@ -25,7 +24,7 @@ public class AddPlusOneCountersAttachedEffect extends OneShotEffect {
         setText();
     }
 
-    public AddPlusOneCountersAttachedEffect(final AddPlusOneCountersAttachedEffect effect) {
+    protected AddPlusOneCountersAttachedEffect(final AddPlusOneCountersAttachedEffect effect) {
         super(effect);
         this.amount = effect.amount;
     }
@@ -53,8 +52,7 @@ public class AddPlusOneCountersAttachedEffect extends OneShotEffect {
     private void setText() {
         if (amount > 1) {
             staticText = new StringBuilder("put ").append(CardUtil.numberToText(amount)).append(" +1/+1 counters on enchanted creature").toString();
-        }
-        else {
+        } else {
             staticText = "put a +1/+1 counter on enchanted creature";
         }
     }

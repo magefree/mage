@@ -1,4 +1,3 @@
-
 package mage.cards.d;
 
 import java.util.UUID;
@@ -13,8 +12,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.token.ZombieToken;
 import mage.players.Player;
@@ -33,13 +31,14 @@ public final class DarkSalvation extends CardImpl {
 
         // Target player creates X 2/2 black Zombie creature tokens, then up to one target creature gets -1/-1 until end of turn for each Zombie that player controls.
         this.getSpellAbility().addTarget(new TargetPlayer());
-        Effect effect = new CreateTokenTargetEffect(new ZombieToken(), ManacostVariableValue.REGULAR);
-        effect.setText("Target player creates X 2/2 black Zombie creature tokens");
-        this.getSpellAbility().addEffect(effect);
-        DynamicValue value = new ZombiesControlledByTargetPlayerCount();
+        this.getSpellAbility().addEffect(new CreateTokenTargetEffect(new ZombieToken(), ManacostVariableValue.REGULAR));
 
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 1, StaticFilters.FILTER_PERMANENT_CREATURE, false));
-        effect = new BoostTargetEffect(value, value, Duration.EndOfTurn, true);
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 1));
+        Effect effect = new BoostTargetEffect(
+                ZombiesControlledByTargetPlayerCount.instance,
+                ZombiesControlledByTargetPlayerCount.instance,
+                Duration.EndOfTurn
+        );
         effect.setTargetPointer(new SecondTargetPointer());
         effect.setText(", then up to one target creature gets -1/-1 until end of turn for each Zombie that player controls");
         this.getSpellAbility().addEffect(effect);
@@ -55,18 +54,10 @@ public final class DarkSalvation extends CardImpl {
     }
 }
 
-class ZombiesControlledByTargetPlayerCount implements DynamicValue {
+enum ZombiesControlledByTargetPlayerCount implements DynamicValue {
+    instance;
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Zombies");
-
-    static {
-        filter.add(SubType.ZOMBIE.getPredicate());
-    }
-
-    @Override
-    public ZombiesControlledByTargetPlayerCount copy() {
-        return new ZombiesControlledByTargetPlayerCount();
-    }
+    private static final FilterPermanent filter = new FilterPermanent(SubType.ZOMBIE, "Zombie");
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -80,7 +71,22 @@ class ZombiesControlledByTargetPlayerCount implements DynamicValue {
     }
 
     @Override
+    public ZombiesControlledByTargetPlayerCount copy() {
+        return instance;
+    }
+
+    @Override
+    public String toString() {
+        return "-1";
+    }
+
+    @Override
     public String getMessage() {
-        return filter.getMessage() + " that player controls";
+        return "Zombie that player controls";
+    }
+
+    @Override
+    public int getSign() {
+        return -1;
     }
 }

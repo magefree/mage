@@ -1,7 +1,6 @@
 package mage.cards.w;
 
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -39,12 +38,13 @@ public final class WheelOfTorture extends CardImpl {
 
 class WheelOfTortureEffect extends OneShotEffect {
 
-    private WheelOfTortureEffect(final WheelOfTortureEffect effect) {
-        super(effect);
+    WheelOfTortureEffect() {
+        super(Outcome.Damage);
+        this.staticText = "{this} deals X damage to that player, where X is 3 minus the number of cards in their hand";
     }
 
-    public WheelOfTortureEffect() {
-        super(Outcome.Damage);
+    private WheelOfTortureEffect(final WheelOfTortureEffect effect) {
+        super(effect);
     }
 
     @Override
@@ -64,10 +64,4 @@ class WheelOfTortureEffect extends OneShotEffect {
     public WheelOfTortureEffect copy() {
         return new WheelOfTortureEffect(this);
     }
-
-    @Override
-    public String getText(Mode mode) {
-        return "Wheel of Torture deals X damage to that player, where X is 3 minus the number of cards in their hand";
-    }
-
 }

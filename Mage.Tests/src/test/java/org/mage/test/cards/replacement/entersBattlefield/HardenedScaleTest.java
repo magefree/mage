@@ -13,8 +13,8 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  */
 public class HardenedScaleTest extends CardTestPlayerBase {
 
-    /*
-     Reported bug: Hangarback interaciton with Hardened Scales and Metallic Mimic on board is incorrect.
+    /**
+     * Reported bug: Hangarback interaciton with Hardened Scales and Metallic Mimic on board is incorrect.
      */
     @Test
     public void hangarBackHardenedScalesMetallicMimicTest() {
@@ -36,7 +36,7 @@ public class HardenedScaleTest extends CardTestPlayerBase {
         String hScales = "Hardened Scales";
 
         /*
-         Metallic Mimic {2}
+        Metallic Mimic {2}
         Artifact Creature — Shapeshifter 2/1
         As Metallic Mimic enters the battlefield, choose a creature type.
         Metallic Mimic is the chosen type in addition to its other types.
@@ -49,7 +49,7 @@ public class HardenedScaleTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, hWalker);
         addCard(Zone.BATTLEFIELD, playerA, "Wastes", 4);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, mMimic);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, mMimic, true);
         setChoice(playerA, "Construct");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, hWalker);

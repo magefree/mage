@@ -1,27 +1,28 @@
 
 package mage.abilities.common;
 
-import mage.constants.Zone;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
 /**
- *
  * @author nantuko
  */
 public class BecomesTappedSourceTriggeredAbility extends TriggeredAbilityImpl {
 
+    public BecomesTappedSourceTriggeredAbility(Effect effect) {
+        this(effect, false);
+    }
+
     public BecomesTappedSourceTriggeredAbility(Effect effect, boolean isOptional) {
         super(Zone.BATTLEFIELD, effect, isOptional);
+        setTriggerPhrase("Whenever {this} becomes tapped, ");
+        this.replaceRuleText = true; // default true to replace "{this}" with "it"
     }
 
-    public BecomesTappedSourceTriggeredAbility(Effect effect) {
-        super(Zone.BATTLEFIELD, effect);
-    }
-
-    public BecomesTappedSourceTriggeredAbility(final BecomesTappedSourceTriggeredAbility ability) {
+    protected BecomesTappedSourceTriggeredAbility(final BecomesTappedSourceTriggeredAbility ability) {
         super(ability);
     }
 
@@ -38,10 +39,5 @@ public class BecomesTappedSourceTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         return event.getTargetId().equals(sourceId);
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} becomes tapped, " ;
     }
 }

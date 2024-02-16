@@ -25,7 +25,7 @@ public final class SolkanarTheSwampKing extends CardImpl {
 
     public SolkanarTheSwampKing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{B}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DEMON);
 
         this.power = new MageInt(5);
@@ -53,7 +53,7 @@ class SolkanarTheSwampKingAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new GainLifeEffect(1), false);
     }
 
-    public SolkanarTheSwampKingAbility(final SolkanarTheSwampKingAbility ability) {
+    private SolkanarTheSwampKingAbility(final SolkanarTheSwampKingAbility ability) {
         super(ability);
     }
 

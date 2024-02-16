@@ -55,7 +55,7 @@ class LensOfClarityLookLibraryAbility extends ActivatedAbilityImpl {
         this.usesStack = false;
     }
 
-    public LensOfClarityLookLibraryAbility(LensOfClarityLookLibraryAbility ability) {
+    private LensOfClarityLookLibraryAbility(final LensOfClarityLookLibraryAbility ability) {
         super(ability);
     }
 
@@ -68,12 +68,12 @@ class LensOfClarityLookLibraryAbility extends ActivatedAbilityImpl {
 
 class LensOfClarityLookLibraryEffect extends OneShotEffect {
 
-    public LensOfClarityLookLibraryEffect() {
+    LensOfClarityLookLibraryEffect() {
         super(Outcome.Neutral);
         this.staticText = "You may look at the top card of your library";
     }
 
-    public LensOfClarityLookLibraryEffect(final LensOfClarityLookLibraryEffect effect) {
+    private LensOfClarityLookLibraryEffect(final LensOfClarityLookLibraryEffect effect) {
         super(effect);
     }
 
@@ -85,7 +85,7 @@ class LensOfClarityLookLibraryEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (controller == null || mageObject == null) {
             return false;
         }
@@ -115,10 +115,10 @@ class LensOfClarityLookFaceDownAbility extends ActivatedAbilityImpl {
     public LensOfClarityLookFaceDownAbility() {
         super(Zone.BATTLEFIELD, new LensOfClarityLookFaceDownEffect(), new GenericManaCost(0));
         this.usesStack = false;
-        this.addTarget(new TargetCreaturePermanent(filter));
+        this.addTarget(new TargetCreaturePermanent(filter).withNotTarget(true));
     }
 
-    public LensOfClarityLookFaceDownAbility(LensOfClarityLookFaceDownAbility ability) {
+    private LensOfClarityLookFaceDownAbility(final LensOfClarityLookFaceDownAbility ability) {
         super(ability);
     }
 
@@ -131,12 +131,12 @@ class LensOfClarityLookFaceDownAbility extends ActivatedAbilityImpl {
 
 class LensOfClarityLookFaceDownEffect extends OneShotEffect {
 
-    public LensOfClarityLookFaceDownEffect() {
+    LensOfClarityLookFaceDownEffect() {
         super(Outcome.Benefit);
         this.staticText = "You may look at face-down creatures you don't control";
     }
 
-    public LensOfClarityLookFaceDownEffect(final LensOfClarityLookFaceDownEffect effect) {
+    private LensOfClarityLookFaceDownEffect(final LensOfClarityLookFaceDownEffect effect) {
         super(effect);
     }
 
@@ -148,7 +148,7 @@ class LensOfClarityLookFaceDownEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller=  game.getPlayer(source.getControllerId());
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (controller == null || mageObject == null) {
             return false;
         }

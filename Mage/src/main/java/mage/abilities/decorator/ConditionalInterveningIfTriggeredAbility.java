@@ -9,6 +9,7 @@ import mage.abilities.effects.Effects;
 import mage.constants.EffectType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.util.CardUtil;
 import mage.watchers.Watcher;
 
 import java.util.List;
@@ -44,7 +45,7 @@ public class ConditionalInterveningIfTriggeredAbility extends TriggeredAbilityIm
         this.abilityText = text;
     }
 
-    public ConditionalInterveningIfTriggeredAbility(final ConditionalInterveningIfTriggeredAbility triggered) {
+    protected ConditionalInterveningIfTriggeredAbility(final ConditionalInterveningIfTriggeredAbility triggered) {
         super(triggered);
         this.ability = triggered.ability.copy();
         this.condition = triggered.condition;
@@ -78,8 +79,9 @@ public class ConditionalInterveningIfTriggeredAbility extends TriggeredAbilityIm
         if (abilityText == null || abilityText.isEmpty()) {
             return ability.getRule();
         }
-        return (abilityWord != null ? abilityWord.formatWord() : "") + abilityText +
-                (abilityText.endsWith(".") || abilityText.endsWith("\"") ? "" : ".");
+        return (flavorWord != null ? CardUtil.italicizeWithEmDash(flavorWord) : "") +
+                (abilityWord != null ? abilityWord.formatWord() : "") +
+                abilityText + (abilityText.endsWith(".") || abilityText.endsWith("\"") || abilityText.endsWith(">") ? "" : ".");
     }
 
     @Override
@@ -125,5 +127,10 @@ public class ConditionalInterveningIfTriggeredAbility extends TriggeredAbilityIm
     @Override
     public int getSourceObjectZoneChangeCounter() {
         return ability.getSourceObjectZoneChangeCounter();
+    }
+
+    @Override
+    public boolean caresAboutManaColor() {
+        return condition.caresAboutManaColor();
     }
 }

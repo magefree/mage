@@ -10,11 +10,11 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
 public class SilkwrapTest extends CardTestPlayerBase {
-    
-    /*
-    * Reported bug - Silkwrap does not exile Hangarback.
-    Cards with X CMC are considered 0 CMC on the battlefield.
-    */
+
+    /**
+     * Reported bug - Silkwrap does not exile Hangarback.
+     * Cards with X CMC are considered 0 CMC on the battlefield.
+     */
     @Test
     public void testHangarback() {
         
@@ -22,7 +22,9 @@ public class SilkwrapTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Wastes", 8);        
         addCard(Zone.HAND, playerB, "Silkwrap", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Plains", 2);
-        
+
+        setStrictChooseMode(true);
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Hangarback Walker");
         setChoice(playerA, "X=4");
         

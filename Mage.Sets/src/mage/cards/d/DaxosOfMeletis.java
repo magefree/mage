@@ -32,7 +32,7 @@ public final class DaxosOfMeletis extends CardImpl {
 
     public DaxosOfMeletis(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{U}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SOLDIER);
 
@@ -58,12 +58,12 @@ public final class DaxosOfMeletis extends CardImpl {
 
 class DaxosOfMeletisEffect extends OneShotEffect {
 
-    public DaxosOfMeletisEffect() {
+    DaxosOfMeletisEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "exile the top card of that player's library. You gain life equal to that card's mana value. Until end of turn, you may cast that card and you may spend mana as though it were mana of any color to cast it";
+        this.staticText = "exile the top card of that player's library. You gain life equal to that card's mana value. Until end of turn, you may cast that card and you may spend mana as though it were mana of any color to cast that spell";
     }
 
-    public DaxosOfMeletisEffect(final DaxosOfMeletisEffect effect) {
+    private DaxosOfMeletisEffect(final DaxosOfMeletisEffect effect) {
         super(effect);
     }
 
@@ -78,7 +78,7 @@ class DaxosOfMeletisEffect extends OneShotEffect {
         if (controller != null) {
             Player damagedPlayer = game.getPlayer(this.getTargetPointer().getFirst(game, source));
             if (damagedPlayer != null) {
-                MageObject sourceObject = game.getObject(source.getSourceId());
+                MageObject sourceObject = game.getObject(source);
                 UUID exileId = CardUtil.getCardExileZoneId(game, source);
                 Card card = damagedPlayer.getLibrary().getFromTop(game);
                 if (card != null && sourceObject != null) {

@@ -32,7 +32,7 @@ public final class GarrukPrimalHunter extends CardImpl {
 
     public GarrukPrimalHunter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{2}{G}{G}{G}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GARRUK);
 
         this.setStartingLoyalty(3);
@@ -65,7 +65,7 @@ class GarrukPrimalHunterEffect extends OneShotEffect {
         staticText = "Draw cards equal to the greatest power among creatures you control";
     }
 
-    GarrukPrimalHunterEffect(final GarrukPrimalHunterEffect effect) {
+    private GarrukPrimalHunterEffect(final GarrukPrimalHunterEffect effect) {
         super(effect);
     }
 

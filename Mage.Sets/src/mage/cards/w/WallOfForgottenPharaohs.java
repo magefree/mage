@@ -1,13 +1,9 @@
-
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
-import mage.abilities.condition.OrCondition;
-import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
-import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
+import mage.abilities.condition.common.DesertControlledOrGraveyardCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.DefenderAbility;
@@ -16,23 +12,14 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.filter.common.FilterControlledPermanent;
 import mage.target.common.TargetPlayerOrPlaneswalker;
 
+import java.util.UUID;
+
 /**
- *
  * @author spjspj
  */
 public final class WallOfForgottenPharaohs extends CardImpl {
-
-    private static final FilterControlledPermanent filterDesertPermanent = new FilterControlledPermanent("Desert");
-    private static final FilterCard filterDesertCard = new FilterCard("Desert card");
-
-    static {
-        filterDesertPermanent.add(SubType.DESERT.getPredicate());
-        filterDesertCard.add(SubType.DESERT.getPredicate());
-    }
 
     public WallOfForgottenPharaohs(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");
@@ -46,17 +33,11 @@ public final class WallOfForgottenPharaohs extends CardImpl {
 
         // {T}: Wall of Forgotten Pharaohs deals 1 damage to target player. Activate this ability only if you control a Desert or there is a Desert card in your graveyard.
         Ability ability = new ActivateIfConditionActivatedAbility(
-                Zone.BATTLEFIELD,
-                new DamageTargetEffect(1),
-                new TapSourceCost(),
-                new OrCondition(
-                        "you control a Desert or there is a Desert card in your graveyard",
-                        new PermanentsOnTheBattlefieldCondition(new FilterControlledPermanent(filterDesertPermanent)),
-                        new CardsInControllerGraveyardCondition(1, filterDesertCard)
-                )
+                Zone.BATTLEFIELD, new DamageTargetEffect(1),
+                new TapSourceCost(), DesertControlledOrGraveyardCondition.instance
         );
         ability.addTarget(new TargetPlayerOrPlaneswalker());
-        this.addAbility(ability);
+        this.addAbility(ability.addHint(DesertControlledOrGraveyardCondition.getHint()));
     }
 
     private WallOfForgottenPharaohs(final WallOfForgottenPharaohs card) {

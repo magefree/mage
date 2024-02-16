@@ -61,7 +61,7 @@ public final class LabyrinthRaptor extends CardImpl {
         // {B}{R}: Creatures you control with menace get +1/+0 until end of turn.
         this.addAbility(new SimpleActivatedAbility(new BoostAllEffect(
                 1, 0, Duration.EndOfTurn, filter2, false
-        ), new ManaCostsImpl("{B}{R}")));
+        ), new ManaCostsImpl<>("{B}{R}")));
     }
 
     private LabyrinthRaptor(final LabyrinthRaptor card) {

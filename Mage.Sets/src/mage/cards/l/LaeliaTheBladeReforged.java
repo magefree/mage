@@ -3,16 +3,13 @@ package mage.cards.l;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.effects.common.ExileTopXMayPlayUntilEndOfTurnEffect;
+import mage.abilities.effects.common.ExileTopXMayPlayUntilEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -29,7 +26,7 @@ public final class LaeliaTheBladeReforged extends CardImpl {
     public LaeliaTheBladeReforged(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPIRIT);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(2);
@@ -39,7 +36,7 @@ public final class LaeliaTheBladeReforged extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // Whenever Laelia, the Blade Reforged attacks, exile the top card of your library. You may play that card this turn.
-        this.addAbility(new AttacksTriggeredAbility(new ExileTopXMayPlayUntilEndOfTurnEffect(1), false));
+        this.addAbility(new AttacksTriggeredAbility(new ExileTopXMayPlayUntilEffect(1, Duration.EndOfTurn), false));
 
         // Whenever a spell or ability you control exiles one or more cards from your library and/or your graveyard, put a +1/+1 counter on Laelia.
         this.addAbility(new LaeliaTheBladeReforgedAddCountersTriggeredAbility());
@@ -61,7 +58,7 @@ class LaeliaTheBladeReforgedAddCountersTriggeredAbility extends TriggeredAbility
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false);
     }
 
-    LaeliaTheBladeReforgedAddCountersTriggeredAbility(final LaeliaTheBladeReforgedAddCountersTriggeredAbility ability) {
+    private LaeliaTheBladeReforgedAddCountersTriggeredAbility(final LaeliaTheBladeReforgedAddCountersTriggeredAbility ability) {
         super(ability);
     }
 

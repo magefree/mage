@@ -65,7 +65,7 @@ class MyrServitorReturnEffect extends OneShotEffect {
         this.staticText = "if {this} is on the battlefield, each player returns all cards named Myr Servitor from their graveyard to the battlefield";
     }
 
-    public MyrServitorReturnEffect(final MyrServitorReturnEffect effect) {
+    private MyrServitorReturnEffect(final MyrServitorReturnEffect effect) {
         super(effect);
     }
 

@@ -18,6 +18,7 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetSacrifice;
 
 import java.util.UUID;
 
@@ -65,7 +66,7 @@ public final class ArchdemonOfGreed extends CardImpl {
             this.staticText = "Sacrifice a Human. If you can't, tap {this} and it deals 9 damage to you.";
         }
 
-        public ArchdemonOfGreedEffect(final ArchdemonOfGreedEffect effect) {
+        private ArchdemonOfGreedEffect(final ArchdemonOfGreedEffect effect) {
             super(effect);
         }
 
@@ -82,10 +83,10 @@ public final class ArchdemonOfGreed extends CardImpl {
                 // create cost for sacrificing a human
                 Player player = game.getPlayer(source.getControllerId());
                 if (player != null) {
-                    TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, false);
+                    TargetSacrifice target = new TargetSacrifice(filter);
                     // if they can pay the cost, then they must pay
-                    if (target.canChoose(source.getSourceId(), player.getId(), game)) {
-                        player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
+                    if (target.canChoose(player.getId(), source, game)) {
+                        player.choose(Outcome.Sacrifice, target, source, game);
                         Permanent humanSacrifice = game.getPermanent(target.getFirstTarget());
                         if (humanSacrifice != null) {
                             // sacrifice the chosen card

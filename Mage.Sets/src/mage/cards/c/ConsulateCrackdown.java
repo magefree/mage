@@ -6,9 +6,8 @@ import java.util.Set;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.delayed.OnLeaveReturnExiledToBattlefieldAbility;
+import mage.abilities.common.delayed.OnLeaveReturnExiledAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -57,14 +56,14 @@ class ConsulateCracksownExileEffect extends OneShotEffect {
         this.staticText = "exile all artifacts your opponents control until {this} leaves the battlefield";
     }
 
-    ConsulateCracksownExileEffect(final ConsulateCracksownExileEffect effect) {
+    private ConsulateCracksownExileEffect(final ConsulateCracksownExileEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
 
         //If the permanent leaves the battlefield before the ability resolves, artifacts won't be exiled.
         if (permanent == null || controller == null) return false;
@@ -76,7 +75,7 @@ class ConsulateCracksownExileEffect extends OneShotEffect {
 
         if (!toExile.isEmpty()) {
             controller.moveCardsToExile(toExile, source, game, true, CardUtil.getCardExileZoneId(game, source), permanent.getIdName());
-            new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledToBattlefieldAbility()).apply(game, source);
+            game.addDelayedTriggeredAbility(new OnLeaveReturnExiledAbility(), source);
         }
 
         return true;
@@ -86,5 +85,4 @@ class ConsulateCracksownExileEffect extends OneShotEffect {
     public ConsulateCracksownExileEffect copy() {
         return new ConsulateCracksownExileEffect(this);
     }
-
 }

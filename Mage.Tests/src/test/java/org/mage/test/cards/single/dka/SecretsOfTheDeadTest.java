@@ -23,7 +23,7 @@ public class SecretsOfTheDeadTest extends CardTestPlayerBase {
 
         assertLife(playerA, 20);
         assertLife(playerB, 20);
-        assertPermanentCount(playerA, "Spirit", 2);
+        assertPermanentCount(playerA, "Spirit Token", 2);
         assertHandCount(playerA, 1);
     }
 
@@ -38,7 +38,7 @@ public class SecretsOfTheDeadTest extends CardTestPlayerBase {
 
         assertLife(playerA, 20);
         assertLife(playerB, 20);
-        assertPermanentCount(playerA, "Spirit", 2);
+        assertPermanentCount(playerA, "Spirit Token", 2);
         assertHandCount(playerA, 0);
     }
 

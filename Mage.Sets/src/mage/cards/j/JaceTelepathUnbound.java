@@ -5,6 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.effects.*;
 import mage.abilities.effects.common.GetEmblemEffect;
+import mage.abilities.effects.common.MayCastTargetThenExileEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -12,7 +13,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.filter.common.FilterInstantOrSorceryCard;
+import mage.filter.StaticFilters;
 import mage.game.command.emblems.JaceTelepathUnboundEmblem;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetCreaturePermanent;
@@ -25,7 +26,7 @@ public final class JaceTelepathUnbound extends CardImpl {
 
     public JaceTelepathUnbound(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.JACE);
 
         this.color.setBlue(true);
@@ -41,10 +42,8 @@ public final class JaceTelepathUnbound extends CardImpl {
         this.addAbility(ability);
 
         // -3: You may cast target instant or sorcery card from your graveyard this turn. If that card would be put into your graveyard this turn, exile it instead.
-        CastCardFromGraveyardThenExileItEffect minusEffect = new CastCardFromGraveyardThenExileItEffect();
-        minusEffect.setText("You may cast target instant or sorcery card from your graveyard this turn. If that card would be put into your graveyard this turn, exile it instead");
-        ability = new LoyaltyAbility(minusEffect, -3);
-        ability.addTarget(new TargetCardInYourGraveyard(new FilterInstantOrSorceryCard()));
+        ability = new LoyaltyAbility(new MayCastTargetThenExileEffect(Duration.EndOfTurn), -3);
+        ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY_FROM_YOUR_GRAVEYARD));
         this.addAbility(ability);
 
         // −9: You get an emblem with "Whenever you cast a spell, target opponent mills five cards."

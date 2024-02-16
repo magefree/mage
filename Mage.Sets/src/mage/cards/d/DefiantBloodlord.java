@@ -53,7 +53,7 @@ class DefiantBloodlordTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, null);
     }
 
-    public DefiantBloodlordTriggeredAbility(final DefiantBloodlordTriggeredAbility ability) {
+    private DefiantBloodlordTriggeredAbility(final DefiantBloodlordTriggeredAbility ability) {
         super(ability);
     }
 

@@ -42,7 +42,7 @@ public final class DragonShadow extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
                 
         // Enchanted creature gets +1/+0 and has fear.
@@ -50,7 +50,7 @@ public final class DragonShadow extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FearAbility.getInstance(), AttachmentType.AURA)));
                
          // When a creature with converted mana cost 6 or greater enters the battlefield, you may return Dragon Breath from your graveyard to the battlefield attached to that creature.
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.GRAVEYARD, new DragonShadowEffect(), filter, true, SetTargetPointer.PERMANENT, null));
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.GRAVEYARD, new DragonShadowEffect(), filter, true, SetTargetPointer.PERMANENT));
     }
 
     private DragonShadow(final DragonShadow card) {
@@ -70,7 +70,7 @@ class DragonShadowEffect extends OneShotEffect {
         this.staticText = "return {this} from your graveyard to the battlefield attached to that creature";
     }
     
-    DragonShadowEffect(final DragonShadowEffect effect) {
+    private DragonShadowEffect(final DragonShadowEffect effect) {
         super(effect);
     }
     

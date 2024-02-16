@@ -10,16 +10,11 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.watchers.Watcher;
+import mage.watchers.common.CreatureEnteredControllerWatcher;
 
-import java.util.HashSet;
-import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -37,10 +32,11 @@ public final class ZhalfirinDecoy extends CardImpl {
 
         // {T}: Tap target creature. Activate this ability only if you had a creature enter the battlefield under your control this turn.
         Ability ability = new ActivateIfConditionActivatedAbility(
-                Zone.BATTLEFIELD, new TapTargetEffect(), new TapSourceCost(), ZhalfirinDecoyCondition.instance
+                Zone.BATTLEFIELD, new TapTargetEffect(),
+                new TapSourceCost(), ZhalfirinDecoyCondition.instance
         );
         ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(ability, new ZhalfirinDecoyWatcher());
+        this.addAbility(ability, new CreatureEnteredControllerWatcher());
     }
 
     private ZhalfirinDecoy(final ZhalfirinDecoy card) {
@@ -58,42 +54,11 @@ enum ZhalfirinDecoyCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        ZhalfirinDecoyWatcher watcher = game.getState().getWatcher(ZhalfirinDecoyWatcher.class);
-        return watcher != null && watcher.enteredCreatureForPlayer(source.getControllerId());
+        return CreatureEnteredControllerWatcher.enteredCreatureForPlayer(source.getControllerId(), game);
     }
 
     @Override
     public String toString() {
         return "you had a creature enter the battlefield under your control this turn";
     }
-}
-
-class ZhalfirinDecoyWatcher extends Watcher {
-
-    private final Set<UUID> players = new HashSet<>();
-
-    ZhalfirinDecoyWatcher() {
-        super(WatcherScope.GAME);
-    }
-
-    @Override
-    public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.getToZone() == Zone.BATTLEFIELD
-                    && zEvent.getTarget().isCreature(game)) {
-                players.add(zEvent.getTarget().getControllerId());
-            }
-        }
-    }
-
-    @Override
-    public void reset() {
-        players.clear();
-    }
-
-    boolean enteredCreatureForPlayer(UUID playerId) {
-        return players.contains(playerId);
-    }
-
 }

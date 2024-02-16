@@ -46,7 +46,7 @@ public final class Mindreaver extends CardImpl {
         this.addAbility(ability);
 
         // {U}{U}, Sacrifice Mindreaver: Counter target spell with the same name as a card exiled with Mindreaver.
-        ability = new SimpleActivatedAbility(new CounterTargetEffect(), new ManaCostsImpl("{U}{U}"));
+        ability = new SimpleActivatedAbility(new CounterTargetEffect(), new ManaCostsImpl<>("{U}{U}"));
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new MindreaverTarget());
         this.addAbility(ability);

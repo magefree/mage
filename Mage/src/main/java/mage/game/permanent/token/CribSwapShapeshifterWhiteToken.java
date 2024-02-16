@@ -11,8 +11,7 @@ import mage.constants.SubType;
 public final class CribSwapShapeshifterWhiteToken extends TokenImpl {
 
     public CribSwapShapeshifterWhiteToken() {
-        super("Shapeshifter", "1/1 colorless Shapeshifter creature token with changeling");
-        this.setOriginalExpansionSetCode("LRW");
+        super("Shapeshifter Token", "1/1 colorless Shapeshifter creature token with changeling");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.SHAPESHIFTER);
         power = new MageInt(1);
@@ -20,7 +19,7 @@ public final class CribSwapShapeshifterWhiteToken extends TokenImpl {
         addAbility(new ChangelingAbility());
     }
 
-    public CribSwapShapeshifterWhiteToken(final CribSwapShapeshifterWhiteToken token) {
+    private CribSwapShapeshifterWhiteToken(final CribSwapShapeshifterWhiteToken token) {
         super(token);
     }
 

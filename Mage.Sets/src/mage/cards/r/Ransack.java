@@ -48,14 +48,14 @@ public final class Ransack extends CardImpl {
 
 class RansackEffect extends OneShotEffect {
 
-    public RansackEffect() {
+    RansackEffect() {
         super(Outcome.Detriment);
         this.staticText = "Look at the top five cards of target player's library. "
                 + "Put any number of them on the bottom of that library in any order "
                 + "and the rest on top of the library in any order";
     }
 
-    public RansackEffect(final RansackEffect effect) {
+    private RansackEffect(final RansackEffect effect) {
         super(effect);
     }
 
@@ -72,9 +72,9 @@ class RansackEffect extends OneShotEffect {
             int number = min(player.getLibrary().size(), 5);
             Set<Card> cards = player.getLibrary().getTopCards(game, number);
             Cards cardsRemaining = new CardsImpl();
-            cardsRemaining.addAll(cards);
+            cardsRemaining.addAllCards(cards);
             TargetCard target = new TargetCard(0, number, Zone.LIBRARY, filter);
-            if (player.choose(Outcome.DrawCard, cardsRemaining, target, game)) {
+            if (player.choose(Outcome.DrawCard, cardsRemaining, target, source, game)) {
                 Cards pickedCards = new CardsImpl(target.getTargets());
                 cardsRemaining.removeAll(pickedCards);
                 player.putCardsOnBottomOfLibrary(pickedCards, game, source, true);

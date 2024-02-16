@@ -1,6 +1,7 @@
 package mage.filter.common;
 
 import mage.MageItem;
+import mage.abilities.Ability;
 import mage.filter.FilterImpl;
 import mage.filter.FilterInPlay;
 import mage.filter.FilterPermanent;
@@ -35,7 +36,7 @@ public class FilterPermanentOrPlayer extends FilterImpl<MageItem> implements Fil
         this.playerFilter = playerFilter;
     }
 
-    public FilterPermanentOrPlayer(final FilterPermanentOrPlayer filter) {
+    protected FilterPermanentOrPlayer(final FilterPermanentOrPlayer filter) {
         super(filter);
         this.permanentFilter = filter.permanentFilter.copy();
         this.playerFilter = filter.playerFilter.copy();
@@ -44,11 +45,6 @@ public class FilterPermanentOrPlayer extends FilterImpl<MageItem> implements Fil
     @Override
     public boolean checkObjectClass(Object object) {
         return true;
-    }
-
-    public void add(ObjectSourcePlayerPredicate predicate) {
-        playerFilter.add((Predicate<? super Player>) predicate);
-        permanentFilter.add((Predicate<? super Permanent>) predicate);
     }
 
     @Override
@@ -64,12 +60,12 @@ public class FilterPermanentOrPlayer extends FilterImpl<MageItem> implements Fil
     }
 
     @Override
-    public boolean match(MageItem o, UUID sourceId, UUID playerId, Game game) {
+    public boolean match(MageItem o, UUID playerId, Ability source, Game game) {
         if (super.match(o, game)) { // process predicates
             if (o instanceof Player) {
-                return playerFilter.match((Player) o, sourceId, playerId, game);
+                return playerFilter.match((Player) o, playerId, source, game);
             } else if (o instanceof Permanent) {
-                return permanentFilter.match((Permanent) o, sourceId, playerId, game);
+                return permanentFilter.match((Permanent) o, playerId, source, game);
             }
         }
         return false;

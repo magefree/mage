@@ -5,13 +5,12 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 
 /**
- *
  * @author Loki
  */
 public final class MerfolkWizardToken extends TokenImpl {
 
     public MerfolkWizardToken() {
-        super("Merfolk Wizard", "1/1 blue Merfolk Wizard creature token");
+        super("Merfolk Wizard Token", "1/1 blue Merfolk Wizard creature token");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
         subtype.add(SubType.MERFOLK);
@@ -20,7 +19,7 @@ public final class MerfolkWizardToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    public MerfolkWizardToken(final MerfolkWizardToken token) {
+    private MerfolkWizardToken(final MerfolkWizardToken token) {
         super(token);
     }
 

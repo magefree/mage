@@ -1,10 +1,11 @@
-
 package mage.cards.c;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.CastOnlyDuringPhaseStepSourceAbility;
@@ -17,9 +18,9 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.PhaseStep;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.permanent.PermanentInListPredicate;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.PermanentReferenceInCollectionPredicate;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
 import mage.game.events.BlockerDeclaredEvent;
@@ -58,12 +59,16 @@ public final class Camouflage extends CardImpl {
 
 class CamouflageEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public CamouflageEffect() {
+    CamouflageEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit, false, false);
-        staticText = "This turn, instead of declaring blockers, each defending player chooses any number of creatures they control and divides them into a number of piles equal to the number of attacking creatures for whom that player is the defending player. Creatures they control that can block additional creatures may likewise be put into additional piles. Assign each pile to a different one of those attacking creatures at random. Each creature in a pile that can block the creature that pile is assigned to does so";
+        staticText = "This turn, instead of declaring blockers, each defending player chooses any number of creatures " +
+                "they control and divides them into a number of piles equal to the number of attacking creatures for " +
+                "whom that player is the defending player. Creatures those players control that can block additional creatures " +
+                "may likewise be put into additional piles. Assign each pile to a different one of those attacking " +
+                "creatures at random. Each creature in a pile that can block the creature that pile is assigned to does so";
     }
 
-    public CamouflageEffect(final CamouflageEffect effect) {
+    private CamouflageEffect(final CamouflageEffect effect) {
         super(effect);
     }
 
@@ -71,7 +76,7 @@ class CamouflageEffect extends ContinuousRuleModifyingEffectImpl {
     public CamouflageEffect copy() {
         return new CamouflageEffect(this);
     }
-    
+
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.DECLARING_BLOCKERS;
@@ -98,7 +103,7 @@ class CamouflageEffect extends ContinuousRuleModifyingEffectImpl {
                     for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), defenderId, game)) {
                         permanent.setBlocking(0);
                     }
-                    
+
                     boolean declinedChoice = false;
                     while (masterList.size() < attackerCount) {
                         List<Permanent> newPile = new ArrayList<>();
@@ -113,11 +118,11 @@ class CamouflageEffect extends ContinuousRuleModifyingEffectImpl {
                                         spentBlockers.add(possibleBlocker);
                                     }
                                 }
-                                filter.add(Predicates.not(new PermanentInListPredicate(spentBlockers)));
+                                filter.add(Predicates.not(new PermanentReferenceInCollectionPredicate(spentBlockers, game)));
                             }
                             if (defender.chooseUse(Outcome.Neutral, "Make a new blocker pile? If not, all remaining piles stay empty. (remaining piles: " + (attackerCount - masterList.size()) + ')', source, game)) {
                                 Target target = new TargetControlledCreaturePermanent(0, Integer.MAX_VALUE, filter, true);
-                                if (target.canChoose(source.getSourceId(), defenderId, game)) {
+                                if (target.canChoose(defenderId, source, game)) {
                                     if (defender.chooseTarget(Outcome.Neutral, target, source, game)) {
                                         for (UUID creatureId : target.getTargets()) {
                                             Permanent creature = game.getPermanent(creatureId);
@@ -133,7 +138,7 @@ class CamouflageEffect extends ContinuousRuleModifyingEffectImpl {
                             }
                         }
                         masterList.add(newPile);
-                        
+
                         StringBuilder sb = new StringBuilder("Blocker pile of ").append(defender.getLogName()).append(" (no. " + masterList.size() + "): ");
                         int i = 0;
                         for (Permanent permanent : newPile) {
@@ -168,6 +173,7 @@ class CamouflageEffect extends ContinuousRuleModifyingEffectImpl {
                     }
                     
                     List<List<Permanent>> allPiles = masterMap.get(playerId);
+                    Set<UUID> blockerIds = new HashSet<>();
                     for (List<Permanent> pile : allPiles) {
                         if (available.isEmpty()) {
                             break;
@@ -180,18 +186,21 @@ class CamouflageEffect extends ContinuousRuleModifyingEffectImpl {
                                 CombatGroup group = game.getCombat().findGroup(attacker.getId());
                                 if (group != null) {
                                     if (blocker.canBlock(attacker.getId(), game) && (blocker.getMaxBlocks() == 0 || group.getAttackers().size() <= blocker.getMaxBlocks())) {
+                                        blockerIds.add(blocker.getId());
                                         boolean notYetBlocked = group.getBlockers().isEmpty();
                                         group.addBlockerToGroup(blocker.getId(), blocker.getControllerId(), game);
                                         game.getCombat().addBlockingGroup(blocker.getId(), attacker.getId(), blocker.getControllerId(), game);
                                         if (notYetBlocked) {
                                             game.fireEvent(GameEvent.getEvent(GameEvent.EventType.CREATURE_BLOCKED, attacker.getId(), source, null));
                                         }
-                                        // TODO: find an alternate event solution for multi-blockers (as per issue #4285), this will work fine for single blocker creatures though
                                         game.fireEvent(new BlockerDeclaredEvent(attacker.getId(), blocker.getId(), blocker.getControllerId()));
                                     }
                                 }
                             }
                         }
+                    }
+                    for (UUID blockerId : blockerIds) {
+                        game.fireEvent(GameEvent.getEvent(GameEvent.EventType.CREATURE_BLOCKS, blockerId, source, null));
                     }
                 }
             }

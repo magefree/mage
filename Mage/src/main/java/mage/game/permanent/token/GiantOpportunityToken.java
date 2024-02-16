@@ -10,7 +10,7 @@ import mage.constants.SubType;
 public final class GiantOpportunityToken extends TokenImpl {
 
     public GiantOpportunityToken() {
-        super("Giant", "7/7 green Giant creature token");
+        super("Giant Token", "7/7 green Giant creature token");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.GIANT);
         color.setGreen(true);

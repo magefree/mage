@@ -43,7 +43,7 @@ public final class DimensionalInfiltrator extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // {1}{C}: Exile the top card of target opponent's library. If it's a land card, you may return Dimensional Infiltrator to its owner's hand.
-        Ability ability = new SimpleActivatedAbility(new DimensionalInfiltratorEffect(), new ManaCostsImpl("{1}{C}"));
+        Ability ability = new SimpleActivatedAbility(new DimensionalInfiltratorEffect(), new ManaCostsImpl<>("{1}{C}"));
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }

@@ -1,6 +1,7 @@
 package mage.abilities.effects.common;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
@@ -11,7 +12,6 @@ import mage.game.Game;
 import mage.players.Player;
 
 /**
- *
  * @author LevelX2
  */
 public class SetPlayerLifeAllEffect extends OneShotEffect {
@@ -38,7 +38,7 @@ public class SetPlayerLifeAllEffect extends OneShotEffect {
         staticText = setText();
     }
 
-    public SetPlayerLifeAllEffect(final SetPlayerLifeAllEffect effect) {
+    protected SetPlayerLifeAllEffect(final SetPlayerLifeAllEffect effect) {
         super(effect);
         this.amount = effect.amount;
         this.targetController = effect.targetController;
@@ -85,7 +85,7 @@ public class SetPlayerLifeAllEffect extends OneShotEffect {
             default:
                 throw new UnsupportedOperationException("Not supported value for targetController");
         }
-        sb.append(" 's life total becomes ");
+        sb.append("'s life total becomes ");
         sb.append(amount.toString());
         return sb.toString();
     }

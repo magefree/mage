@@ -59,12 +59,12 @@ public final class SootImp extends CardImpl {
 
 class SootImpEffect extends OneShotEffect {
 
-    public SootImpEffect() {
+    SootImpEffect() {
         super(Outcome.Neutral);
         this.staticText = "that player loses 1 life";
     }
 
-    public SootImpEffect(final SootImpEffect effect) {
+    private SootImpEffect(final SootImpEffect effect) {
         super(effect);
     }
 

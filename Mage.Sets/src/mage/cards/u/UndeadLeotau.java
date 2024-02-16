@@ -29,10 +29,10 @@ public final class UndeadLeotau extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {R}: Undead Leotau gets +1/-1 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(+1, -1, Duration.EndOfTurn), new ManaCostsImpl("{R}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(+1, -1, Duration.EndOfTurn), new ManaCostsImpl<>("{R}")));
 
         // Unearth {2}{B}
-        this.addAbility(new UnearthAbility(new ManaCostsImpl("{2}{B}")));
+        this.addAbility(new UnearthAbility(new ManaCostsImpl<>("{2}{B}")));
     }
 
     private UndeadLeotau(final UndeadLeotau card) {

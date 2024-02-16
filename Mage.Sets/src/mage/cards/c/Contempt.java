@@ -1,6 +1,8 @@
 package mage.cards.c;
 
 import java.util.UUID;
+
+import mage.constants.AttachmentType;
 import mage.constants.SubType;
 import mage.target.common.TargetCreaturePermanent;
 import mage.abilities.Ability;
@@ -36,11 +38,12 @@ public final class Contempt extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Whenever enchanted creature attacks, return it and Contempt to their owners' hands at end of combat.
-        this.addAbility(new AttacksAttachedTriggeredAbility(new ContemptEffect()));
+        this.addAbility(new AttacksAttachedTriggeredAbility(new ContemptEffect(), AttachmentType.AURA, false)
+                .setTriggerPhrase("When enchanted creature attacks, "));
 
     }
 
@@ -61,7 +64,7 @@ class ContemptEffect extends OneShotEffect {
         this.staticText = "return it and {this} to their owners' hands at end of combat.";
     }
 
-    ContemptEffect(final ContemptEffect effect) {
+    private ContemptEffect(final ContemptEffect effect) {
         super(effect);
     }
 
@@ -74,17 +77,16 @@ class ContemptEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent contempt = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (contempt != null) {
+            Effect effect = new ReturnToHandSourceEffect();
+            AtTheEndOfCombatDelayedTriggeredAbility ability = new AtTheEndOfCombatDelayedTriggeredAbility(effect);
             Permanent attachedToPermanent = game.getPermanent(contempt.getAttachedTo());
             if (attachedToPermanent != null) {
-                Effect effect = new ReturnToHandTargetEffect();
+                effect = new ReturnToHandTargetEffect();
                 effect.setTargetPointer(new FixedTarget(
                         attachedToPermanent.getId(), game)).setText("return "
                         + attachedToPermanent.getName() + " to owner's hand.");
-                AtTheEndOfCombatDelayedTriggeredAbility ability = new AtTheEndOfCombatDelayedTriggeredAbility(effect);
-                game.addDelayedTriggeredAbility(ability, source);
+                ability.addEffect(effect);
             }
-            Effect effect = new ReturnToHandSourceEffect();
-            AtTheEndOfCombatDelayedTriggeredAbility ability = new AtTheEndOfCombatDelayedTriggeredAbility(effect);
             game.addDelayedTriggeredAbility(ability, source);
             return true;
         }

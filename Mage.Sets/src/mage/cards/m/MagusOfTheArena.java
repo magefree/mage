@@ -60,7 +60,7 @@ class MagusOfTheArenaEffect extends OneShotEffect {
                 "Those creatures fight each other. <i>(Each deals damage equal to its power to the other.)</i>";
     }
 
-    MagusOfTheArenaEffect(final MagusOfTheArenaEffect effect) {
+    private MagusOfTheArenaEffect(final MagusOfTheArenaEffect effect) {
         super(effect);
     }
 

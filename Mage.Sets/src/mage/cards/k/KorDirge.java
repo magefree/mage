@@ -58,7 +58,7 @@ class KorDirgeEffect extends RedirectionEffect {
         staticText = "All damage that would be dealt this turn to target creature you control by a source of your choice is dealt to another target creature instead";
     }
 
-    KorDirgeEffect(final KorDirgeEffect effect) {
+    private KorDirgeEffect(final KorDirgeEffect effect) {
         super(effect);
         this.target = effect.target;
     }
@@ -71,7 +71,7 @@ class KorDirgeEffect extends RedirectionEffect {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        this.target.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), game);
+        this.target.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), source, game);
     }
 
     @Override

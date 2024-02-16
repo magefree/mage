@@ -40,6 +40,8 @@ public final class LovestruckBeast extends AdventureCard {
         // Heart's Desire
         // Create a 1/1 white Human creature token.
         this.getSpellCard().getSpellAbility().addEffect(new CreateTokenEffect(new HumanToken()));
+
+        this.finalizeAdventure();
     }
 
     private LovestruckBeast(final LovestruckBeast card) {

@@ -1,15 +1,15 @@
-
-
 package mage.game.permanent.token;
+
+import mage.MageInt;
+import mage.abilities.keyword.ForestwalkAbility;
+import mage.constants.CardType;
+import mage.constants.SubType;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import mage.constants.CardType;
-import mage.abilities.keyword.ForestwalkAbility;
-import mage.constants.SubType;
 
 /**
- *
  * @author spjspj
  */
 public final class CatWarriorToken extends TokenImpl {
@@ -17,15 +17,13 @@ public final class CatWarriorToken extends TokenImpl {
     static final private List<String> tokenImageSets = new ArrayList<>();
 
     static {
-        tokenImageSets.addAll(Arrays.asList("PLC", "C17"));
+        tokenImageSets.addAll(Arrays.asList("C17", "C18", "DMC"));
     }
 
     public CatWarriorToken() {
-        super("Cat Warrior", "2/2 green Cat Warrior creature token with forestwalk");
-        availableImageSetCodes = tokenImageSets;
-        this.setOriginalExpansionSetCode("PLC");
-        this.getPower().modifyBaseValue(2);
-        this.getToughness().modifyBaseValue(2);
+        super("Cat Warrior Token", "2/2 green Cat Warrior creature token with forestwalk");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
         this.color.setGreen(true);
         this.subtype.add(SubType.CAT);
         this.subtype.add(SubType.WARRIOR);
@@ -33,7 +31,7 @@ public final class CatWarriorToken extends TokenImpl {
         this.addAbility(new ForestwalkAbility());
     }
 
-    public CatWarriorToken(final CatWarriorToken token) {
+    private CatWarriorToken(final CatWarriorToken token) {
         super(token);
     }
 

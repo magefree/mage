@@ -29,7 +29,7 @@ public final class SmokeBlessingToken extends TokenImpl {
         subtype.add(SubType.AURA);
 
         TargetPermanent auraTarget = new TargetPermanent();
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         ability.addTarget(auraTarget);
         ability.addEffect(new AttachEffect(Outcome.BoostCreature));
         this.addAbility(ability);
@@ -37,7 +37,7 @@ public final class SmokeBlessingToken extends TokenImpl {
         this.addAbility(new DiesAttachedTriggeredAbility(new SmokeBlessingTokenEffect(), "enchanted creature"));
     }
 
-    public SmokeBlessingToken(final SmokeBlessingToken token) {
+    private SmokeBlessingToken(final SmokeBlessingToken token) {
         super(token);
     }
 

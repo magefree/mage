@@ -32,7 +32,7 @@ public final class RoyalDecree extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
 
         // Cumulative upkeep-Pay {W}.
-        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{W}")));
+        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{W}")));
 
         // Whenever a Swamp, Mountain, black permanent, or red permanent becomes tapped, Royal Decree deals 1 damage to that permanent's controller.
         this.addAbility(new RoyalDecreeAbility());
@@ -63,7 +63,7 @@ class RoyalDecreeAbility extends TriggeredAbilityImpl {
             super(Zone.BATTLEFIELD, new DamageTargetEffect(1));
     }
 
-    RoyalDecreeAbility(final RoyalDecreeAbility ability) {
+    private RoyalDecreeAbility(final RoyalDecreeAbility ability) {
             super(ability);
     }
 
@@ -80,7 +80,7 @@ class RoyalDecreeAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
-        if (permanent != null && filter.match(permanent, getSourceId(), getControllerId(), game)) {
+        if (permanent != null && filter.match(permanent, getControllerId(), this, game)) {
             Player player = game.getPlayer(permanent.getControllerId());
             if (player != null) {
                 for (Effect effect : this.getEffects()) {

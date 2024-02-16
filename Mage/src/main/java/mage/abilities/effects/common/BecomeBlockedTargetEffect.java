@@ -9,8 +9,6 @@ import mage.game.Game;
 import mage.game.combat.CombatGroup;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.target.Target;
-import mage.util.CardUtil;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -69,21 +67,8 @@ public class BecomeBlockedTargetEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        StringBuilder sb = new StringBuilder();
-        if (mode.getTargets().isEmpty()) {
-            return "that creature becomes blocked";
-        }
-        Target target = mode.getTargets().get(0);
-        if (target.getNumberOfTargets() == 1) {
-            String targetName = target.getTargetName();
-            sb.append("target ").append(targetName).append(" becomes blocked");
-            return sb.toString();
-        }
-        if (target.getMaxNumberOfTargets() != target.getMinNumberOfTargets()) {
-            sb.append("up to ");
-        }
-        sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets()));
-        sb.append(" target ").append(target.getTargetName()).append(" become blocked");
-        return sb.toString();
+        return getTargetPointer().describeTargets(mode.getTargets(), "that creature") +
+                (getTargetPointer().isPlural(mode.getTargets()) ? " become " : " becomes ") +
+                "blocked";
     }
 }

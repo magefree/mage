@@ -37,7 +37,7 @@ public final class KeeperOfTheBeasts extends CardImpl {
 
         // {G}, {tap}: Choose target opponent who controlled more creatures than you did as you activated this ability. Put a 2/2 green Beast creature token onto the battlefield.
         Ability ability = new SimpleActivatedAbility(new CreateTokenEffect(new BeastToken4()).setText("Choose target opponent who controlled more creatures than you did as you activated this ability. Create a 2/2 green Beast creature token."),
-                new ManaCostsImpl("{G}"));
+                new ManaCostsImpl<>("{G}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new KeeperOfTheBeastsTarget());
         this.addAbility(ability);
@@ -59,13 +59,13 @@ class KeeperOfTheBeastsTarget extends TargetPlayer {
         super(1, 1, false, new FilterOpponent("opponent that controls more creatures than you"));
     }
 
-    public KeeperOfTheBeastsTarget(final KeeperOfTheBeastsTarget target) {
+    private KeeperOfTheBeastsTarget(final KeeperOfTheBeastsTarget target) {
         super(target);
     }
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
-        Set<UUID> availablePossibleTargets = super.possibleTargets(sourceId, sourceControllerId, game);
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
+        Set<UUID> availablePossibleTargets = super.possibleTargets(sourceControllerId, source, game);
         Set<UUID> possibleTargets = new HashSet<>();
         int creaturesController = game.getBattlefield().countAll(StaticFilters.FILTER_PERMANENT_CREATURE, sourceControllerId, game);
 
@@ -78,9 +78,9 @@ class KeeperOfTheBeastsTarget extends TargetPlayer {
     }
 
     @Override
-    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
+    public boolean canChoose(UUID sourceControllerId, Ability source, Game game) {
         int count = 0;
-        MageObject targetSource = game.getObject(sourceId);
+        MageObject targetSource = game.getObject(source);
         Player controller = game.getPlayer(sourceControllerId);
         if (controller != null && targetSource != null) {
             for (UUID playerId : game.getState().getPlayersInRange(sourceControllerId, game)) {
@@ -89,7 +89,7 @@ class KeeperOfTheBeastsTarget extends TargetPlayer {
                         && game.getBattlefield().countAll(StaticFilters.FILTER_PERMANENT_CREATURE, sourceControllerId, game)
                         < game.getBattlefield().countAll(StaticFilters.FILTER_PERMANENT_CREATURE, playerId, game)
                         && !player.hasLeft()
-                        && filter.match(player, sourceId, sourceControllerId, game)
+                        && filter.match(player, sourceControllerId, source, game)
                         && player.canBeTargetedBy(targetSource, sourceControllerId, game)) {
                     count++;
                     if (count >= this.minNumberOfTargets) {

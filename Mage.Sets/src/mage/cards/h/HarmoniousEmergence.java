@@ -40,7 +40,7 @@ public final class HarmoniousEmergence extends CardImpl {
         TargetPermanent auraTarget = new TargetPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // Enchanted land is a 4/5 green Spirit creature with vigilance and haste. It's still a land.
         this.addAbility(new SimpleStaticAbility(new BecomesCreatureAttachedEffect(
@@ -101,11 +101,6 @@ class HarmoniousEmergenceEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
         return sourcePermanent != null && event.getTargetId().equals(sourcePermanent.getAttachedTo());
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

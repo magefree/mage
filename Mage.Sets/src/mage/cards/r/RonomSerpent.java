@@ -33,7 +33,7 @@ public final class RonomSerpent extends CardImpl {
     public RonomSerpent(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{U}");
 
-        this.addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
         this.subtype.add(SubType.SERPENT);
         this.power = new MageInt(5);
         this.toughness = new MageInt(6);

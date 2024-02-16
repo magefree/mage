@@ -20,7 +20,7 @@ public final class LivingEnd extends CardImpl {
         this.color.setBlack(true);
 
         // Suspend 3-{2}{B}{B}
-        this.addAbility(new SuspendAbility(3, new ManaCostsImpl("{2}{B}{B}"), this));
+        this.addAbility(new SuspendAbility(3, new ManaCostsImpl<>("{2}{B}{B}"), this));
         // Each player exiles all creature cards from their graveyard, then sacrifices all creatures
         // they control, then puts all cards they exiled this way onto the battlefield.
         this.getSpellAbility().addEffect(new LivingDeathEffect());

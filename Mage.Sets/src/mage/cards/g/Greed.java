@@ -23,7 +23,7 @@ public final class Greed extends CardImpl {
 
 
         // {B}, Pay 2 life: Draw a card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{B}"));
         ability.addCost(new PayLifeCost(2));
         this.addAbility(ability);
     }

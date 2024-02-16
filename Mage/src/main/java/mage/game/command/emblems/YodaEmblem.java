@@ -1,4 +1,3 @@
-
 package mage.game.command.emblems;
 
 import mage.abilities.Ability;
@@ -13,14 +12,13 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.game.command.Emblem;
 
 /**
- *
  * @author spjspj
  */
 public final class YodaEmblem extends Emblem {
     // You get an emblem with "Hexproof, you and your creatures have."
 
     public YodaEmblem() {
-        this.setName("Emblem Yoda, Jedi Master");
+        super("Emblem Yoda, Jedi Master");
         Effect effect = new GainAbilityControllerEffect(HexproofAbility.getInstance(), Duration.EndOfGame);
         effect.setText("Hexproof, you");
         Ability ability = new SimpleStaticAbility(Zone.COMMAND, effect);
@@ -28,5 +26,14 @@ public final class YodaEmblem extends Emblem {
         effect.setText(" you and your creatures have");
         ability.addEffect(effect);
         getAbilities().add(ability);
+    }
+
+    private YodaEmblem(final YodaEmblem card) {
+        super(card);
+    }
+
+    @Override
+    public YodaEmblem copy() {
+        return new YodaEmblem(this);
     }
 }

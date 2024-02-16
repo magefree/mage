@@ -44,11 +44,12 @@ public final class MorgueBurst extends CardImpl {
 
 class MorgueBurstEffect extends OneShotEffect {
 
-    public MorgueBurstEffect() {
+    MorgueBurstEffect() {
         super(Outcome.ReturnToHand);
+        this.staticText = "Return target creature card from your graveyard to your hand. Morgue Burst deals damage to any target equal to the power of the card returned this way";
     }
 
-    public MorgueBurstEffect(final MorgueBurstEffect effect) {
+    private MorgueBurstEffect(final MorgueBurstEffect effect) {
         super(effect);
     }
 
@@ -78,10 +79,5 @@ class MorgueBurstEffect extends OneShotEffect {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return "Return target creature card from your graveyard to your hand. Morgue Burst deals damage to any target equal to the power of the card returned this way";
     }
 }

@@ -15,8 +15,8 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
@@ -31,16 +31,10 @@ import java.util.UUID;
  */
 public final class RhonasTheIndomitable extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another target creature");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
-
     public RhonasTheIndomitable(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GOD);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
@@ -57,11 +51,11 @@ public final class RhonasTheIndomitable extends CardImpl {
         // {2}{G}: Another target creature gets +2/+0 and gains trample until end of turn.
         Effect effect = new BoostTargetEffect(2, 0, Duration.EndOfTurn);
         effect.setText("Another target creature gets +2/+0");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{2}{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{2}{G}"));
         effect = new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("and gains trample until end of turn");
         ability.addEffect(effect);
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE));
         this.addAbility(ability);
     }
 
@@ -77,12 +71,12 @@ public final class RhonasTheIndomitable extends CardImpl {
 
 class RhonasTheIndomitableRestrictionEffect extends RestrictionEffect {
 
-    public RhonasTheIndomitableRestrictionEffect() {
+    RhonasTheIndomitableRestrictionEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "{this} can't attack or block unless you control another creature with power 4 or greater";
     }
 
-    public RhonasTheIndomitableRestrictionEffect(final RhonasTheIndomitableRestrictionEffect effect) {
+    private RhonasTheIndomitableRestrictionEffect(final RhonasTheIndomitableRestrictionEffect effect) {
         super(effect);
     }
 
@@ -109,7 +103,7 @@ class RhonasTheIndomitableRestrictionEffect extends RestrictionEffect {
         if (permanent.getId().equals(source.getSourceId())) {
             Player controller = game.getPlayer(source.getControllerId());
             if (controller != null) {
-                int permanentsOnBattlefield = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game);
+                int permanentsOnBattlefield = game.getBattlefield().count(filter, source.getControllerId(), source, game);
                 return permanentsOnBattlefield < 1; // is this correct?
             }
             return true;

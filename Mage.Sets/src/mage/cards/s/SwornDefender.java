@@ -5,18 +5,17 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.permanent.BlockedByIdPredicate;
-import mage.filter.predicate.permanent.BlockingAttackerIdPredicate;
+import mage.filter.predicate.permanent.BlockingOrBlockedBySourcePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.TargetPermanent;
 import mage.util.CardUtil;
 
 import java.util.UUID;
@@ -26,6 +25,13 @@ import java.util.UUID;
  */
 public final class SwornDefender extends CardImpl {
 
+    private static final FilterPermanent filter
+            = new FilterCreaturePermanent("creature blocking or blocked by {this}");
+
+    static {
+        filter.add(BlockingOrBlockedBySourcePredicate.EITHER);
+    }
+
     public SwornDefender(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
         this.subtype.add(SubType.HUMAN);
@@ -33,14 +39,10 @@ public final class SwornDefender extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 
-        FilterCreaturePermanent filter = new FilterCreaturePermanent("creature blocking or blocked by SwornDefender");
-        filter.add(Predicates.or(new BlockedByIdPredicate(this.getId()),
-                new BlockingAttackerIdPredicate(this.getId())));
         // {1}: Sworn Defender’s power becomes the toughness of target creature blocking or being blocked by Sworn Defender minus 1 until end of turn, and Sworn Defender’s toughness becomes 1 plus the power of that creature until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SwornDefenderEffect(), new GenericManaCost(1));
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        Ability ability = new SimpleActivatedAbility(new SwornDefenderEffect(), new GenericManaCost(1));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
-
     }
 
     private SwornDefender(final SwornDefender card) {
@@ -55,12 +57,12 @@ public final class SwornDefender extends CardImpl {
 
 class SwornDefenderEffect extends OneShotEffect {
 
-    public SwornDefenderEffect() {
+    SwornDefenderEffect() {
         super(Outcome.Detriment);
         this.staticText = "{this}'s power becomes the toughness of target creature blocking or being blocked by {this} minus 1 until end of turn, and {this}'s toughness becomes 1 plus the power of that creature until end of turn";
     }
 
-    public SwornDefenderEffect(final SwornDefenderEffect effect) {
+    private SwornDefenderEffect(final SwornDefenderEffect effect) {
         super(effect);
     }
 
@@ -76,7 +78,7 @@ class SwornDefenderEffect extends OneShotEffect {
         if (controller != null && targetPermanent != null) {
             int newPower = CardUtil.overflowDec(targetPermanent.getToughness().getValue(), 1);
             int newToughness = CardUtil.overflowInc(targetPermanent.getPower().getValue(), 1);
-            game.addEffect(new SetPowerToughnessSourceEffect(newPower, newToughness, Duration.EndOfTurn, SubLayer.SetPT_7b), source);
+            game.addEffect(new SetBasePowerToughnessSourceEffect(newPower, newToughness, Duration.EndOfTurn), source);
             return true;
         }
         return false;

@@ -33,7 +33,7 @@ public final class Justice extends CardImpl {
 
 
         // At the beginning of your upkeep, sacrifice Justice unless you pay {W}{W}.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl("{W}{W}")), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{W}{W}")), TargetController.YOU, false));
 
         // Whenever a red creature or spell deals damage, Justice deals that much damage to that creature's or spell's controller.
         this.addAbility(new JusticeTriggeredAbility(new JusticeEffect()));
@@ -55,7 +55,7 @@ class JusticeTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, effect);
     }
 
-    public JusticeTriggeredAbility(final JusticeTriggeredAbility ability) {
+    private JusticeTriggeredAbility(final JusticeTriggeredAbility ability) {
         super(ability);
     }
 
@@ -92,11 +92,11 @@ class JusticeTriggeredAbility extends TriggeredAbilityImpl {
 
 class JusticeEffect extends OneShotEffect {
 
-    public JusticeEffect() {
+    JusticeEffect() {
         super(Outcome.Damage);
     }
 
-    public JusticeEffect(final JusticeEffect effect) {
+    private JusticeEffect(final JusticeEffect effect) {
         super(effect);
     }
 

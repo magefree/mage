@@ -88,7 +88,7 @@ class ScrollOfFateEffect extends OneShotEffect {
             if (card.isCreature(game)) {
                 manaCosts = card.getSpellAbility() != null ? card.getSpellAbility().getManaCosts() : null;
                 if (manaCosts == null) {
-                    manaCosts = new ManaCostsImpl("{0}");
+                    manaCosts = new ManaCostsImpl<>("{0}");
                 }
             }
             MageObjectReference objectReference = new MageObjectReference(card.getId(),

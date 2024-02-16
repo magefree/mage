@@ -2,6 +2,7 @@
 package mage.abilities.effects.common;
 
 import java.util.Set;
+
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -12,7 +13,7 @@ import mage.watchers.common.AttackedThisTurnWatcher;
 
 /**
  * !!!! This effect needs the adding of the watcher in the using card class
- *
+ * <p>
  * this.getSpellAbility().addWatcher(new AttackedThisTurnWatcher());
  *
  * @author LevelX2
@@ -24,7 +25,7 @@ public class UntapAllThatAttackedEffect extends OneShotEffect {
         staticText = "Untap all creatures that attacked this turn";
     }
 
-    public UntapAllThatAttackedEffect(final UntapAllThatAttackedEffect effect) {
+    protected UntapAllThatAttackedEffect(final UntapAllThatAttackedEffect effect) {
         super(effect);
     }
 

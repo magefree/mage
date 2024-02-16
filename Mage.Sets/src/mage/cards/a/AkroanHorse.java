@@ -1,15 +1,13 @@
-
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.CreateTokenAllEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -17,14 +15,14 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.SoldierToken;
-import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetOpponent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class AkroanHorse extends CardImpl {
@@ -37,10 +35,17 @@ public final class AkroanHorse extends CardImpl {
 
         // Defender
         this.addAbility(DefenderAbility.getInstance());
+
         // When Akroan Horse enters the battlefield, an opponent gains control of it.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new AkroanHorseChangeControlEffect(), false));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(
+                new AkroanHorseChangeControlEffect(), false
+        ));
+
         // At the beginning of your upkeep, each opponent create a 1/1 white Soldier creature token.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new AkroanHorseCreateTokenEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(
+                new CreateTokenAllEffect(new SoldierToken(), TargetController.OPPONENT),
+                TargetController.YOU, false
+        ));
     }
 
     private AkroanHorse(final AkroanHorse card) {
@@ -55,12 +60,12 @@ public final class AkroanHorse extends CardImpl {
 
 class AkroanHorseChangeControlEffect extends OneShotEffect {
 
-    public AkroanHorseChangeControlEffect() {
+    AkroanHorseChangeControlEffect() {
         super(Outcome.Benefit);
         this.staticText = "an opponent gains control of it";
     }
 
-    public AkroanHorseChangeControlEffect(final AkroanHorseChangeControlEffect effect) {
+    private AkroanHorseChangeControlEffect(final AkroanHorseChangeControlEffect effect) {
         super(effect);
     }
 
@@ -71,31 +76,31 @@ class AkroanHorseChangeControlEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Target target = new TargetOpponent();
-        target.setNotTarget(true);
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            if (controller.chooseTarget(outcome, target, source, game)) {
-                ContinuousEffect effect = new AkroanHorseGainControlEffect(Duration.Custom, target.getFirstTarget());
-                effect.setTargetPointer(new FixedTarget(source.getSourceId(), game));
-                game.addEffect(effect, source);
-                return true;
-            }
+        if (controller == null) {
+            return false;
         }
-        return false;
+        Target target = new TargetOpponent();
+        target.withNotTarget(true);
+        controller.chooseTarget(outcome, target, source, game);
+        ContinuousEffect effect = new AkroanHorseGainControlEffect(Duration.Custom, target.getFirstTarget());
+        effect.setTargetPointer(new FixedTarget(source.getSourceId(), game));
+        game.addEffect(effect, source);
+        return true;
     }
 }
 
 class AkroanHorseGainControlEffect extends ContinuousEffectImpl {
 
-    UUID controller;
+    private final UUID controller;
 
     public AkroanHorseGainControlEffect(Duration duration, UUID controller) {
         super(duration, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
         this.controller = controller;
+        this.staticText = "Gain control of Akroan Horse";
     }
 
-    public AkroanHorseGainControlEffect(final AkroanHorseGainControlEffect effect) {
+    private AkroanHorseGainControlEffect(final AkroanHorseGainControlEffect effect) {
         super(effect);
         this.controller = effect.controller;
     }
@@ -107,44 +112,15 @@ class AkroanHorseGainControlEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getFirstTarget());
-        if (targetPointer != null) {
+        Permanent permanent;
+        if (targetPointer == null) {
+            permanent = game.getPermanent(source.getFirstTarget());
+        } else {
             permanent = game.getPermanent(targetPointer.getFirst(game, source));
         }
-        if (permanent != null) {
-            return permanent.changeControllerId(controller, game, source);
+        if (permanent == null) {
+            return false;
         }
-        return false;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return "Gain control of Akroan Horse";
-    }
-}
-
-class AkroanHorseCreateTokenEffect extends OneShotEffect {
-
-    public AkroanHorseCreateTokenEffect() {
-        super(Outcome.Detriment);
-        this.staticText = "each opponent creates a 1/1 white Soldier creature token";
-    }
-
-    public AkroanHorseCreateTokenEffect(final AkroanHorseCreateTokenEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public AkroanHorseCreateTokenEffect copy() {
-        return new AkroanHorseCreateTokenEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        for (UUID opponentId : game.getOpponents(source.getControllerId())) {
-            Token token = new SoldierToken();
-            token.putOntoBattlefield(1, game, source, opponentId);
-        }
-        return true;
+        return permanent.changeControllerId(controller, game, source);
     }
 }

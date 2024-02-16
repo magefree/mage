@@ -58,10 +58,10 @@ class MoltenDisasterSplitSecondEffect extends ContinuousRuleModifyingEffectImpl 
 
     MoltenDisasterSplitSecondEffect() {
         super(Duration.WhileOnStack, Outcome.Detriment);
-        staticText = "if this spell was kicked, it has split second <i>(As long as this spell is on the stack, players can't cast spells or activate abilities that aren't mana abilities.)</i>";
+        staticText = "if this spell was kicked, it has split second. <i>(As long as this spell is on the stack, players can't cast spells or activate abilities that aren't mana abilities.)</i>";
     }
 
-    MoltenDisasterSplitSecondEffect(final MoltenDisasterSplitSecondEffect effect) {
+    private MoltenDisasterSplitSecondEffect(final MoltenDisasterSplitSecondEffect effect) {
         super(effect);
     }
 
@@ -78,21 +78,16 @@ class MoltenDisasterSplitSecondEffect extends ContinuousRuleModifyingEffectImpl 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == GameEvent.EventType.CAST_SPELL) {
-            if (KickedCondition.instance.apply(game, source)) {
+            if (KickedCondition.ONCE.apply(game, source)) {
                 return true;
             }
         }
         if (event.getType() == GameEvent.EventType.ACTIVATE_ABILITY) {
             Optional<Ability> ability = game.getAbility(event.getTargetId(), event.getSourceId());
             if (ability.isPresent() && !(ability.get() instanceof ActivatedManaAbilityImpl)) {
-                return KickedCondition.instance.apply(game, source);
+                return KickedCondition.ONCE.apply(game, source);
             }
         }
-        return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
         return false;
     }
 
@@ -115,7 +110,7 @@ class MoltenDisasterEffect extends OneShotEffect {
         staticText = "{this} deals X damage to each creature without flying and each player";
     }
 
-    public MoltenDisasterEffect(final MoltenDisasterEffect effect) {
+    private MoltenDisasterEffect(final MoltenDisasterEffect effect) {
         super(effect);
     }
 

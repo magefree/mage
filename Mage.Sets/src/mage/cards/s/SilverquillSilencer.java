@@ -1,7 +1,6 @@
 package mage.cards.s;
 
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SpellCastOpponentTriggeredAbility;
@@ -15,10 +14,7 @@ import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
-import mage.filter.predicate.ObjectSourcePlayer;
-import mage.filter.predicate.ObjectSourcePlayerPredicate;
-import mage.game.Game;
-import mage.util.CardUtil;
+import mage.filter.predicate.mageobject.ChosenNamePredicate;
 
 import java.util.UUID;
 
@@ -30,7 +26,7 @@ public final class SilverquillSilencer extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("a spell with the chosen name");
 
     static {
-        filter.add(SilverquillSilencerPredicate.instance);
+        filter.add(ChosenNamePredicate.instance);
     }
 
     public SilverquillSilencer(UUID ownerId, CardSetInfo setInfo) {
@@ -62,17 +58,5 @@ public final class SilverquillSilencer extends CardImpl {
     @Override
     public SilverquillSilencer copy() {
         return new SilverquillSilencer(this);
-    }
-}
-
-enum SilverquillSilencerPredicate implements ObjectSourcePlayerPredicate<MageObject> {
-    instance;
-
-    @Override
-    public boolean apply(ObjectSourcePlayer<MageObject> input, Game game) {
-        String cardName = (String) game.getState().getValue(
-                input.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY
-        );
-        return CardUtil.haveSameNames(input.getObject().getName(), cardName);
     }
 }

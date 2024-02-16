@@ -36,7 +36,7 @@ public final class ConsecrateConsume extends SplitCard {
         this.getLeftHalfCard().getSpellAbility().addTarget(new TargetCardInGraveyard());
 
         // Draw a card.
-        this.getLeftHalfCard().getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getLeftHalfCard().getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
 
         // Consume
         // Target player sacrifices a creature with the greatest power among creatures they control. You gain life equal to its power.

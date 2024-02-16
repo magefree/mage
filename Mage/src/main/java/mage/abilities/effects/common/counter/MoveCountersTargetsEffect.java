@@ -10,7 +10,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author Styxo
  */
 public class MoveCountersTargetsEffect extends OneShotEffect {
@@ -25,7 +24,7 @@ public class MoveCountersTargetsEffect extends OneShotEffect {
 
     }
 
-    public MoveCountersTargetsEffect(final MoveCountersTargetsEffect effect) {
+    protected MoveCountersTargetsEffect(final MoveCountersTargetsEffect effect) {
         super(effect);
         this.counterType = effect.counterType;
         this.amount = effect.amount;

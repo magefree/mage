@@ -26,7 +26,7 @@ public final class CorpulentCorpse extends CardImpl {
         // Fear
         this.addAbility(FearAbility.getInstance());
         // Suspend 5-{B}
-        this.addAbility(new SuspendAbility(5, new ManaCostsImpl("{B}"), this));
+        this.addAbility(new SuspendAbility(5, new ManaCostsImpl<>("{B}"), this));
     }
 
     private CorpulentCorpse(final CorpulentCorpse card) {

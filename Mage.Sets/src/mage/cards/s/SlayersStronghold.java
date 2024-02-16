@@ -31,7 +31,7 @@ public final class SlayersStronghold extends CardImpl {
         // {R}{W}, {tap}: Target creature gets +2/+0 and gains vigilance and haste until end of turn.
         Ability ability = new SimpleActivatedAbility(new BoostTargetEffect(
                 2, 0, Duration.EndOfTurn
-        ).setText("target creature gets +2/+0"), new ManaCostsImpl("{R}{W}"));
+        ).setText("target creature gets +2/+0"), new ManaCostsImpl<>("{R}{W}"));
         ability.addEffect(new GainAbilityTargetEffect(
                 VigilanceAbility.getInstance(), Duration.EndOfTurn
         ).setText("and gains vigilance"));

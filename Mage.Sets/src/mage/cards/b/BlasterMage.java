@@ -36,7 +36,7 @@ public final class BlasterMage extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {R}, {tap}, Discard a card: Destroy target Wall.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl<>("{R}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardCardCost());
         ability.addTarget(new TargetPermanent(filter));

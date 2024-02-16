@@ -32,7 +32,7 @@ public final class KjeldoranPhalanx extends CardImpl {
         this.addAbility(BandingAbility.getInstance());
     }
 
-    public KjeldoranPhalanx (final KjeldoranPhalanx card) {
+    private KjeldoranPhalanx(final KjeldoranPhalanx card) {
         super(card);
     }
 

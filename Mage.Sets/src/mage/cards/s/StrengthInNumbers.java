@@ -28,7 +28,7 @@ public final class StrengthInNumbers extends CardImpl {
                 TrampleAbility.getInstance(), Duration.EndOfTurn
         ).setText("Until end of turn, target creature gains trample"));
         this.getSpellAbility().addEffect(new BoostTargetEffect(
-                xValue, xValue, Duration.EndOfTurn, true
+                xValue, xValue, Duration.EndOfTurn
         ).setText("and gets +X/+X, where X is the number of attacking creatures"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }

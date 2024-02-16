@@ -49,7 +49,7 @@ class SmokeEffect extends RestrictionUntapNotMoreThanEffect {
         staticText = "Players can't untap more than one creature during their untap steps";
     }
 
-    public SmokeEffect(final SmokeEffect effect) {
+    private SmokeEffect(final SmokeEffect effect) {
         super(effect);
     }
 

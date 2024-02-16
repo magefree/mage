@@ -6,13 +6,12 @@ import mage.constants.SubType;
 import mage.MageInt;
 
 /**
- *
  * @author spjspj
  */
 public final class LizardToken extends TokenImpl {
 
     public LizardToken() {
-        super("Lizard", "2/2 green Lizard creature token");
+        super("Lizard Token", "2/2 green Lizard creature token");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add(SubType.LIZARD);
@@ -20,7 +19,7 @@ public final class LizardToken extends TokenImpl {
         toughness = new MageInt(2);
     }
 
-    public LizardToken(final LizardToken token) {
+    private LizardToken(final LizardToken token) {
         super(token);
     }
 

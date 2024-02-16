@@ -1,64 +1,36 @@
-
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
-import mage.abilities.keyword.ForestwalkAbility;
-import mage.abilities.keyword.IslandwalkAbility;
-import mage.abilities.keyword.MountainwalkAbility;
-import mage.abilities.keyword.PlainswalkAbility;
-import mage.abilities.keyword.SwampwalkAbility;
+import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.hint.common.DomainHint;
+import mage.abilities.keyword.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterLandPermanent;
+import mage.filter.StaticFilters;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
+
+import java.util.Collection;
+import java.util.List;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
- *
  * @author emerald000
  */
 public final class MagnigothTreefolk extends CardImpl {
-    
-    private static final FilterLandPermanent filterPlains = new FilterLandPermanent(SubType.PLAINS, "Plains");
-    private static final FilterLandPermanent filterIsland = new FilterLandPermanent(SubType.ISLAND, "Island");
-    private static final FilterLandPermanent filterSwamp = new FilterLandPermanent(SubType.SWAMP, "Swamp");
-    private static final FilterLandPermanent filterMountain = new FilterLandPermanent(SubType.MOUNTAIN, "Mountain");
-    private static final FilterLandPermanent filterForest = new FilterLandPermanent(SubType.FOREST, "Forest");
 
     public MagnigothTreefolk(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}");
         this.subtype.add(SubType.TREEFOLK);
         this.power = new MageInt(2);
         this.toughness = new MageInt(6);
 
         // Domain - For each basic land type among lands you control, Magnigoth Treefolk has landwalk of that type.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, 
-                new ConditionalContinuousEffect(
-                        new GainAbilitySourceEffect(new PlainswalkAbility()), 
-                        new PermanentsOnTheBattlefieldCondition(filterPlains),
-                        "Domain &mdash; For each basic land type among lands you control, {this} has landwalk of that type."));
-        ability.addEffect(new ConditionalContinuousEffect(
-                new GainAbilitySourceEffect(new IslandwalkAbility(), Duration.WhileOnBattlefield, false, true), 
-                new PermanentsOnTheBattlefieldCondition(filterIsland),
-                ""));
-        ability.addEffect(new ConditionalContinuousEffect(
-                new GainAbilitySourceEffect(new SwampwalkAbility(), Duration.WhileOnBattlefield, false, true), 
-                new PermanentsOnTheBattlefieldCondition(filterSwamp),
-                ""));
-        ability.addEffect(new ConditionalContinuousEffect(
-                new GainAbilitySourceEffect(new MountainwalkAbility(), Duration.WhileOnBattlefield, false, true), 
-                new PermanentsOnTheBattlefieldCondition(filterMountain),
-                ""));
-        ability.addEffect(new ConditionalContinuousEffect(
-                new GainAbilitySourceEffect(new ForestwalkAbility(), Duration.WhileOnBattlefield, false, true), 
-                new PermanentsOnTheBattlefieldCondition(filterForest),
-                ""));
-        this.addAbility(ability);
+        this.addAbility(new SimpleStaticAbility(new MagnigothTreefolkEffect()).setAbilityWord(AbilityWord.DOMAIN).addHint(DomainHint.instance));
     }
 
     private MagnigothTreefolk(final MagnigothTreefolk card) {
@@ -71,3 +43,64 @@ public final class MagnigothTreefolk extends CardImpl {
     }
 }
 
+class MagnigothTreefolkEffect extends ContinuousEffectImpl {
+
+    MagnigothTreefolkEffect() {
+        super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
+        staticText = "for each basic land type among lands you control, {this} has landwalk of that type";
+    }
+
+    private MagnigothTreefolkEffect(final MagnigothTreefolkEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public MagnigothTreefolkEffect copy() {
+        return new MagnigothTreefolkEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
+        if (permanent == null) {
+            return false;
+        }
+        List<SubType> landTypes = game
+                .getBattlefield()
+                .getActivePermanents(
+                        StaticFilters.FILTER_CONTROLLED_PERMANENT_LANDS,
+                        source.getControllerId(), source, game
+                ).stream()
+                .map(p -> SubType
+                        .getBasicLands()
+                        .stream()
+                        .filter(subType -> p.hasSubtype(subType, game))
+                        .collect(Collectors.toSet()))
+                .flatMap(Collection::stream)
+                .distinct()
+                .collect(Collectors.toList());
+        if (landTypes.isEmpty()) {
+            return false;
+        }
+        for (SubType subType : landTypes) {
+            switch (subType) {
+                case PLAINS:
+                    permanent.addAbility(new PlainswalkAbility(), source.getSourceId(), game);
+                    break;
+                case ISLAND:
+                    permanent.addAbility(new IslandwalkAbility(), source.getSourceId(), game);
+                    break;
+                case SWAMP:
+                    permanent.addAbility(new SwampwalkAbility(), source.getSourceId(), game);
+                    break;
+                case MOUNTAIN:
+                    permanent.addAbility(new MountainwalkAbility(), source.getSourceId(), game);
+                    break;
+                case FOREST:
+                    permanent.addAbility(new ForestwalkAbility(), source.getSourceId(), game);
+                    break;
+            }
+        }
+        return true;
+    }
+}

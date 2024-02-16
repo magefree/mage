@@ -32,7 +32,7 @@ public final class ElshaOfTheInfinite extends CardImpl {
     public ElshaOfTheInfinite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{R}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DJINN);
         this.subtype.add(SubType.MONK);
         this.power = new MageInt(3);

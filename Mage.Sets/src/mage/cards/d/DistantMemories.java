@@ -38,14 +38,14 @@ public final class DistantMemories extends CardImpl {
 
 class DistantMemoriesEffect extends OneShotEffect {
 
-    public DistantMemoriesEffect() {
+    DistantMemoriesEffect() {
         super(Outcome.DrawCard);
         this.staticText = "Search your library for a card, exile it, then shuffle. "
                 + "Any opponent may have you put that card into "
                 + "your hand. If no player does, you draw three cards";
     }
 
-    public DistantMemoriesEffect(final DistantMemoriesEffect effect) {
+    private DistantMemoriesEffect(final DistantMemoriesEffect effect) {
         super(effect);
     }
 
@@ -63,7 +63,7 @@ class DistantMemoriesEffect extends OneShotEffect {
 
         TargetCardInLibrary target = new TargetCardInLibrary();
         if (controller.searchLibrary(target, source, game)) {
-            Card card = controller.getLibrary().remove(target.getFirstTarget(), game);
+            Card card = controller.getLibrary().getCard(target.getFirstTarget(), game);
             if (card != null) {
                 controller.moveCards(card, Zone.EXILED, source, game);
                 controller.shuffleLibrary(source, game);

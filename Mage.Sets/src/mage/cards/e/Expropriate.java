@@ -81,7 +81,7 @@ class ExpropriateEffect extends OneShotEffect {
         // extra turn
         int timeCount = vote.getVoteCount(true);
         for (int i = 0; i < timeCount; i++) {
-            game.getState().getTurnMods().add(new TurnMod(source.getControllerId(), false));
+            game.getState().getTurnMods().add(new TurnMod(source.getControllerId()).withExtraTurn());
         }
 
         // gain control
@@ -94,14 +94,14 @@ class ExpropriateEffect extends OneShotEffect {
             FilterPermanent filter = new FilterPermanent();
             filter.add(new ControllerIdPredicate(playerId));
             moneyCount = Math.min(game.getBattlefield().count(
-                    filter, source.getSourceId(), source.getControllerId(), game
+                    filter, source.getControllerId(), source, game
             ), moneyCount);
             if (moneyCount == 0) {
                 continue;
             }
             TargetPermanent target = new TargetPermanent(moneyCount, filter);
-            target.setNotTarget(true);
-            player.choose(Outcome.GainControl, target, source.getSourceId(), game);
+            target.withNotTarget(true);
+            player.choose(Outcome.GainControl, target, source, game);
             target.getTargets()
                     .stream()
                     .map(game::getPermanent)

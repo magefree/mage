@@ -1,4 +1,3 @@
-
 package mage.cards.e;
 
 import mage.MageInt;
@@ -13,7 +12,6 @@ import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.watchers.Watcher;
 
 import java.util.HashMap;
@@ -55,7 +53,7 @@ class ErdwalIlluminatorTriggeredAbility extends TriggeredAbilityImpl {
         addWatcher(new InvestigatedWatcher());
     }
 
-    public ErdwalIlluminatorTriggeredAbility(final ErdwalIlluminatorTriggeredAbility ability) {
+    private ErdwalIlluminatorTriggeredAbility(final ErdwalIlluminatorTriggeredAbility ability) {
         super(ability);
     }
 
@@ -66,6 +64,9 @@ class ErdwalIlluminatorTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
+        if (!isControlledBy(event.getPlayerId())) { // only when controller investigates
+            return false;
+        }
         InvestigatedWatcher watcher = game.getState().getWatcher(InvestigatedWatcher.class);
         return watcher != null && watcher.getTimesInvestigated(getControllerId()) == 1;
     }
@@ -93,7 +94,6 @@ class InvestigatedWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.INVESTIGATED) {
             timesInvestigated.put(event.getPlayerId(), getTimesInvestigated(event.getPlayerId()) + 1);
-
         }
     }
 

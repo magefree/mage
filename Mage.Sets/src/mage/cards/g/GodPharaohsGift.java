@@ -14,11 +14,11 @@ import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.EmptyToken;
+import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetpointer.FixedTargets;
-import mage.util.CardUtil;
+import mage.util.functions.CopyTokenFunction;
 
 import java.util.List;
 import java.util.Objects;
@@ -77,18 +77,17 @@ class GodPharaohsGiftEffect extends OneShotEffect {
         TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(
                 0, 1, StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD, true
         );
-        controller.choose(Outcome.PutCreatureInPlay, target, source.getSourceId(), game);
+        controller.choose(Outcome.PutCreatureInPlay, target, source, game);
         Card cardChosen = game.getCard(target.getFirstTarget());
         if (cardChosen == null || !controller.moveCards(cardChosen, Zone.EXILED, source, game)) {
             return false;
         }
         // create token and modify all attributes permanently (without game usage)
-        EmptyToken token = new EmptyToken();
-        CardUtil.copyTo(token).from(cardChosen, game);
+        Token token = CopyTokenFunction.createTokenCopy(cardChosen, game);
         token.removePTCDA();
-        token.getPower().modifyBaseValue(4);
-        token.getToughness().modifyBaseValue(4);
-        token.getColor().setColor(ObjectColor.BLACK);
+        token.setPower(4);
+        token.setToughness(4);
+        token.setColor(ObjectColor.BLACK);
         token.removeAllCreatureTypes();
         token.addSubType(SubType.ZOMBIE);
         token.putOntoBattlefield(1, game, source, source.getControllerId());

@@ -1,4 +1,3 @@
-
 package mage.abilities.dynamicvalue.common;
 
 import mage.abilities.Ability;
@@ -8,13 +7,12 @@ import mage.filter.FilterPermanent;
 import mage.game.Game;
 
 /**
- *
  * @author North
  */
 public class PermanentsOnBattlefieldCount implements DynamicValue {
 
-    private FilterPermanent filter;
-    private Integer multiplier;
+    private final FilterPermanent filter;
+    private final Integer multiplier;
 
     public PermanentsOnBattlefieldCount() {
         this(new FilterPermanent(), 1);
@@ -25,23 +23,22 @@ public class PermanentsOnBattlefieldCount implements DynamicValue {
     }
 
     /**
-     * 
      * @param filter
-     * @param multiplier 
+     * @param multiplier
      */
     public PermanentsOnBattlefieldCount(FilterPermanent filter, Integer multiplier) {
         this.filter = filter;
         this.multiplier = multiplier;
     }
 
-    public PermanentsOnBattlefieldCount(final PermanentsOnBattlefieldCount dynamicValue) {
+    protected PermanentsOnBattlefieldCount(final PermanentsOnBattlefieldCount dynamicValue) {
         this.filter = dynamicValue.filter;
         this.multiplier = dynamicValue.multiplier;
     }
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        int value = game.getBattlefield().count(filter, sourceAbility.getSourceId(), sourceAbility.getControllerId(), game);
+        int value = game.getBattlefield().count(filter, sourceAbility.getControllerId(), sourceAbility, game);
         if (multiplier != null) {
             value *= multiplier;
         }
@@ -55,14 +52,16 @@ public class PermanentsOnBattlefieldCount implements DynamicValue {
 
     @Override
     public String toString() {
-        if (multiplier != null) {
-            return multiplier.toString();
-        }
-        return "X";
+        return multiplier == null ? "X" : multiplier.toString();
     }
 
     @Override
     public String getMessage() {
         return multiplier == null ? "the number of " + filter.getMessage() : filter.getMessage();
+    }
+
+    @Override
+    public int getSign() {
+        return multiplier == null ? 1 : multiplier;
     }
 }

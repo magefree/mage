@@ -31,7 +31,7 @@ public final class ArchersParapet extends CardImpl {
         // Defender
         this.addAbility(DefenderAbility.getInstance());
         // 1B, T: Each opponent loses 1 life.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeOpponentsEffect(1), new ManaCostsImpl("{1}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeOpponentsEffect(1), new ManaCostsImpl<>("{1}{B}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 

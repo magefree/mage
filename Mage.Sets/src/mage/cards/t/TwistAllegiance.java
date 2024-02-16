@@ -46,12 +46,12 @@ public final class TwistAllegiance extends CardImpl {
 
 class TwistAllegianceEffect extends OneShotEffect {
 
-    public TwistAllegianceEffect() {
+    TwistAllegianceEffect() {
         super(Outcome.Detriment);
         this.staticText = "You and target opponent each gain control of all creatures the other controls until end of turn. Untap those creatures. Those creatures gain haste until end of turn";
     }
 
-    public TwistAllegianceEffect(final TwistAllegianceEffect effect) {
+    private TwistAllegianceEffect(final TwistAllegianceEffect effect) {
         super(effect);
     }
 
@@ -65,7 +65,7 @@ class TwistAllegianceEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Player targetOpponent = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (controller != null) {
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source.getSourceId(), game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source, game)) {
                 // only creatures of controller & target opponent
                 if (permanent.isControlledBy(source.getControllerId()) || permanent.isControlledBy(targetOpponent.getId())) {
                     UUID newController = permanent.isControlledBy(source.getControllerId()) ? targetOpponent.getId() : source.getControllerId();

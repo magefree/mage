@@ -34,7 +34,7 @@ public final class QuakefootCyclops extends CardImpl {
         this.addAbility(ability);
 
         // Cycling {1}{R}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{1}{R}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{1}{R}")));
 
         // When you cycle Quakefoot Cyclops, target creature can't block this turn.
         ability = new CycleTriggeredAbility(new CantBlockTargetEffect(Duration.EndOfTurn));

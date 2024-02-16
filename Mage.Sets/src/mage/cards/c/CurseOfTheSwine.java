@@ -60,13 +60,13 @@ enum CurseOfTheSwineAdjuster implements TargetAdjuster {
 
 class CurseOfTheSwineEffect extends OneShotEffect {
 
-    public CurseOfTheSwineEffect() {
+    CurseOfTheSwineEffect() {
         super(Outcome.Exile);
         this.staticText = "Exile X target creatures. For each creature exiled this way, "
                 + "its controller creates a 2/2 green Boar creature token";
     }
 
-    public CurseOfTheSwineEffect(final CurseOfTheSwineEffect effect) {
+    private CurseOfTheSwineEffect(final CurseOfTheSwineEffect effect) {
         super(effect);
     }
 
@@ -107,6 +107,7 @@ class CurseOfTheSwineEffect extends OneShotEffect {
                             playersWithTargets.getOrDefault(lkiP.getControllerId(), 0) + 1);
                 }
             }
+            game.getState().processAction(game);
             Boar2Token swineToken = new Boar2Token();
             for (Map.Entry<UUID, Integer> exiledByController : playersWithTargets.entrySet()) {
                 swineToken.putOntoBattlefield(exiledByController.getValue(), game, source, exiledByController.getKey());

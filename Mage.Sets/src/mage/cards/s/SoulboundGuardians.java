@@ -28,7 +28,7 @@ public final class SoulboundGuardians extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public SoulboundGuardians (final SoulboundGuardians card) {
+    private SoulboundGuardians(final SoulboundGuardians card) {
         super(card);
     }
 

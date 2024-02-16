@@ -40,7 +40,7 @@ public final class ChariotOfVictory extends CardImpl {
         this.addAbility(ability);
 
         // Equip {1}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1)));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1), false));
     }
 
     private ChariotOfVictory(final ChariotOfVictory card) {

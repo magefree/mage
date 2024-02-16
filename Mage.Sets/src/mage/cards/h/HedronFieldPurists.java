@@ -37,7 +37,7 @@ public final class HedronFieldPurists extends LevelerCard {
         this.toughness = new MageInt(3);
 
         // Level up {2}{W}
-        this.addAbility(new LevelUpAbility(new ManaCostsImpl("{2}{W}")));
+        this.addAbility(new LevelUpAbility(new ManaCostsImpl<>("{2}{W}")));
         // LEVEL 1-4
         // 1/4
         // If a source would deal damage to you or a creature you control, prevent 1 of that damage.
@@ -67,18 +67,13 @@ public final class HedronFieldPurists extends LevelerCard {
 
 class HedronFieldPuristsEffect extends PreventionEffectImpl {
 
-    public HedronFieldPuristsEffect(int amount) {
+    HedronFieldPuristsEffect(int amount) {
         super(Duration.WhileOnBattlefield, amount, false, false);
         this.staticText = "If a source would deal damage to you or a creature you control, prevent " + amount + " of that damage";
     }
 
-    public HedronFieldPuristsEffect(HedronFieldPuristsEffect effect) {
+    private HedronFieldPuristsEffect(final HedronFieldPuristsEffect effect) {
         super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

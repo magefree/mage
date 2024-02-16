@@ -20,7 +20,7 @@ public final class BorealGriffin extends CardImpl {
 
     public BorealGriffin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");
-        addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
         this.subtype.add(SubType.GRIFFIN);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
@@ -29,7 +29,7 @@ public final class BorealGriffin extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // {S}: Boreal Griffin gains first strike until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(
-            FirstStrikeAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{S}")));
+            FirstStrikeAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{S}")));
     }
 
     private BorealGriffin(final BorealGriffin card) {

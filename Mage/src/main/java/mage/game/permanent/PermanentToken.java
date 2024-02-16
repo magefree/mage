@@ -1,13 +1,17 @@
 package mage.game.permanent;
 
+import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCost;
+import mage.abilities.keyword.ChangelingAbility;
+import mage.abilities.keyword.TransformAbility;
 import mage.cards.Card;
 import mage.constants.EmptyNames;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.token.Token;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -16,17 +20,23 @@ import java.util.UUID;
  */
 public class PermanentToken extends PermanentImpl {
 
+    // non-modifyable container with token characteristics
+    // this PermanentToken resets to it on each game cycle
     protected Token token;
 
-    public PermanentToken(Token token, UUID controllerId, String expansionSetCode, Game game) {
+    public PermanentToken(Token token, UUID controllerId, Game game) {
         super(controllerId, controllerId, token.getName());
-        this.expansionSetCode = expansionSetCode;
         this.token = token.copy();
         this.token.getAbilities().newOriginalId(); // neccessary if token has ability like DevourAbility()
         this.token.getAbilities().setSourceId(objectId);
-        this.power.modifyBaseValue(token.getPower().getBaseValueModified());
-        this.toughness.modifyBaseValue(token.getToughness().getBaseValueModified());
+        this.power = new MageInt(token.getPower().getModifiedBaseValue());
+        this.toughness = new MageInt(token.getToughness().getModifiedBaseValue());
         this.copyFromToken(this.token, game, false); // needed to have at this time (e.g. for subtypes for entersTheBattlefield replacement effects)
+
+        // if transformed on ETB
+        if (this.token.isEntersTransformed()) {
+            TransformAbility.transformPermanent(this, game, null);
+        }
 
         // token's ZCC must be synced with original token to keep abilities settings
         // Example: kicker ability and kicked status
@@ -35,10 +45,9 @@ public class PermanentToken extends PermanentImpl {
         }
     }
 
-    public PermanentToken(final PermanentToken permanent) {
+    protected PermanentToken(final PermanentToken permanent) {
         super(permanent);
         this.token = permanent.token.copy();
-        this.expansionSetCode = permanent.expansionSetCode;
     }
 
     @Override
@@ -51,12 +60,25 @@ public class PermanentToken extends PermanentImpl {
     }
 
     @Override
+    public int getManaValue() {
+        if (this.isTransformed()) {
+            return token.getManaValue();
+        }
+        return super.getManaValue();
+    }
+
+    @Override
     public String getName() {
         if (name.isEmpty()) {
             return EmptyNames.FACE_DOWN_TOKEN.toString();
         } else {
             return name;
         }
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s - %s", getExpansionSetCode(), getName());
     }
 
     private void copyFromToken(Token token, Game game, boolean reset) {
@@ -69,7 +91,8 @@ public class PermanentToken extends PermanentImpl {
             // first time -> create ContinuousEffects only once
             // so sourceId must be null (keep triggered abilities forever?)
             for (Ability ability : token.getAbilities()) {
-                this.addAbility(ability, null, game);
+                //Don't add subabilities since the original token already has them in its abilities list
+                this.addAbility(ability, null, game, true);
             }
         }
         this.abilities.setControllerId(this.controllerId);
@@ -83,10 +106,16 @@ public class PermanentToken extends PermanentImpl {
         this.frameColor = token.getFrameColor(game);
         this.frameStyle = token.getFrameStyle();
         this.supertype.clear();
-        this.supertype.addAll(token.getSuperType());
+        this.supertype.addAll(token.getSuperType(game));
         this.subtype.copyFrom(token.getSubtype(game));
-        this.tokenDescriptor = token.getTokenDescriptor();
         this.startingLoyalty = token.getStartingLoyalty();
+        this.startingDefense = token.getStartingDefense();
+        // workaround for entersTheBattlefield replacement effects
+        if (this.abilities.containsClass(ChangelingAbility.class)) {
+            this.subtype.setIsAllCreatureTypes(true);
+        }
+
+        CardUtil.copySetAndCardNumber(this, token);
     }
 
     @Override
@@ -115,5 +144,19 @@ public class PermanentToken extends PermanentImpl {
     public Card getMainCard() {
         // token don't have game card, so return itself
         return this;
+    }
+
+    @Override
+    public boolean isTransformable() {
+        // 701.28c
+        // If a spell or ability instructs a player to transform a permanent that
+        // isn’t represented by a transforming token or a transforming double-faced card,
+        // nothing happens.
+        return token.getBackFace() != null;
+    }
+
+    @Override
+    public MageObject getOtherFace() {
+        return this.transformed ? token : this.token.getBackFace();
     }
 }

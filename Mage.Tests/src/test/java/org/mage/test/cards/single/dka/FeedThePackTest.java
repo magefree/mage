@@ -21,7 +21,7 @@ public class FeedThePackTest extends CardTestPlayerBase {
 
         assertLife(playerA, 20);
         assertLife(playerB, 20);
-        assertPermanentCount(playerA, "Wolf", 4);
+        assertPermanentCount(playerA, "Wolf Token", 4);
         assertPermanentCount(playerB, "Craw Wurm", 0);
     }
 

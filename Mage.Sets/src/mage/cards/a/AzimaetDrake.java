@@ -29,7 +29,7 @@ public final class AzimaetDrake extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // {U}: Azimaet Drake gets +1/+0 until end of turn. Activate this ability only once each turn.
-        this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{U}")));
+        this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{U}")));
     }
 
     private AzimaetDrake(final AzimaetDrake card) {

@@ -26,7 +26,7 @@ public final class SeizeTheInitiative extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public SeizeTheInitiative (final SeizeTheInitiative card) {
+    private SeizeTheInitiative(final SeizeTheInitiative card) {
         super(card);
     }
 

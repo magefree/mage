@@ -38,7 +38,7 @@ public final class PilgrimOfTheAges extends CardImpl {
 
         // When Pilgrim of the Ages enters the battlefield, you may search your library for a basic Plains card, reveal it, put it into your hand, then shuffle.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(
-                new TargetCardInLibrary(filter), true, true
+                new TargetCardInLibrary(filter), true
         ), true));
 
         // {6}: Return Pilgrim of the Ages from your graveyard to your hand.

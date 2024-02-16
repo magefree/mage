@@ -27,7 +27,7 @@ public final class ScionOfTheUrDragon extends CardImpl {
 
     public ScionOfTheUrDragon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{U}{B}{R}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DRAGON);
         this.subtype.add(SubType.AVATAR);
         this.power = new MageInt(4);
@@ -38,7 +38,7 @@ public final class ScionOfTheUrDragon extends CardImpl {
         // {2}: Search your library for a Dragon permanent card and put it into your graveyard. If you do, Scion of the Ur-Dragon becomes a copy of that card until end of turn. Then shuffle your library.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new ScionOfTheUrDragonEffect(),
-                new ManaCostsImpl("{2}")));
+                new ManaCostsImpl<>("{2}")));
     }
 
     private ScionOfTheUrDragon(final ScionOfTheUrDragon card) {
@@ -64,7 +64,7 @@ class ScionOfTheUrDragonEffect extends SearchEffect {
         staticText = "Search your library for a Dragon permanent card and put it into your graveyard. If you do, {this} becomes a copy of that card until end of turn. Then shuffle.";
     }
 
-    ScionOfTheUrDragonEffect(final ScionOfTheUrDragonEffect effect) {
+    private ScionOfTheUrDragonEffect(final ScionOfTheUrDragonEffect effect) {
         super(effect);
     }
 

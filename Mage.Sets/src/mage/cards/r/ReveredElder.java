@@ -27,7 +27,7 @@ public final class ReveredElder extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {1}: Prevent the next 1 damage that would be dealt to Revered Elder this turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToSourceEffect(Duration.EndOfTurn, 1), new ManaCostsImpl("{1}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToSourceEffect(Duration.EndOfTurn, 1), new ManaCostsImpl<>("{1}")));
     }
 
     private ReveredElder(final ReveredElder card) {

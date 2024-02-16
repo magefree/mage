@@ -49,12 +49,12 @@ public final class FightOrFlight extends CardImpl {
 
 class FightOrFlightEffect extends OneShotEffect {
 
-    public FightOrFlightEffect() {
+    FightOrFlightEffect() {
         super(Outcome.Detriment);
         this.staticText = "separate all creatures that player controls into two piles. Only creatures in the pile of their choice can attack this turn";
     }
 
-    public FightOrFlightEffect(final FightOrFlightEffect effect) {
+    private FightOrFlightEffect(final FightOrFlightEffect effect) {
         super(effect);
     }
 
@@ -72,7 +72,7 @@ class FightOrFlightEffect extends OneShotEffect {
             TargetCreaturePermanent creatures = new TargetCreaturePermanent(0, count, new FilterCreaturePermanent("creatures to put in the first pile"), true);
             List<Permanent> pile1 = new ArrayList<>();
             creatures.setRequired(false);
-            if (player.choose(Outcome.Neutral, creatures, source.getSourceId(), game)) {
+            if (player.choose(Outcome.Neutral, creatures, source, game)) {
                 List<UUID> targets = creatures.getTargets();
                 for (UUID targetId : targets) {
                     Permanent p = game.getPermanent(targetId);

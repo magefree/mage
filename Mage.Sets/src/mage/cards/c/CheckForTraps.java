@@ -44,7 +44,7 @@ public final class CheckForTraps extends CardImpl {
 
 class CheckForTrapsEffect extends OneShotEffect {
 
-    public CheckForTrapsEffect() {
+    CheckForTrapsEffect() {
         super(Outcome.Discard);
         this.staticText = "Target opponent reveals their hand. You choose a nonland card from it. Exile that card. " +
                 "If an instant card or a card with flash is exiled this way, they lose 1 life. Otherwise, you lose 1 life";
@@ -68,9 +68,9 @@ class CheckForTrapsEffect extends OneShotEffect {
         }
         opponent.revealCards(source, opponent.getHand(), game);
         TargetCard target = new TargetCard(Zone.HAND, StaticFilters.FILTER_CARD_NON_LAND);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         boolean opponentLoseLife = false;
-        if (controller.choose(outcome, opponent.getHand(), target, game)) {
+        if (controller.choose(outcome, opponent.getHand(), target, source, game)) {
             Card card = game.getCard(target.getFirstTarget());
             if (card != null) {
                 controller.moveCards(card, Zone.EXILED, source, game);

@@ -23,7 +23,7 @@ public final class KopalaWardenOfWaves extends CardImpl {
     public KopalaWardenOfWaves(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.MERFOLK);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(2);
@@ -88,7 +88,7 @@ class KopalaWardenOfWavesCostModificationEffect1 extends CostModificationEffectI
         this.staticText = "Spells your opponents cast that target a Merfolk you control cost {2} more to cast";
     }
 
-    KopalaWardenOfWavesCostModificationEffect1(KopalaWardenOfWavesCostModificationEffect1 effect) {
+    private KopalaWardenOfWavesCostModificationEffect1(final KopalaWardenOfWavesCostModificationEffect1 effect) {
         super(effect);
     }
 
@@ -118,7 +118,7 @@ class KopalaWardenOfWavesCostModificationEffect2 extends CostModificationEffectI
         this.staticText = "Abilities your opponents activate that target a Merfolk you control cost {2} more to activate";
     }
 
-    KopalaWardenOfWavesCostModificationEffect2(KopalaWardenOfWavesCostModificationEffect2 effect) {
+    private KopalaWardenOfWavesCostModificationEffect2(final KopalaWardenOfWavesCostModificationEffect2 effect) {
         super(effect);
     }
 

@@ -26,7 +26,7 @@ public final class Mortipede extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {2}{G}: All creatures able to block Mortipede this turn do so.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new MustBeBlockedByAllSourceEffect(Duration.EndOfTurn), new ManaCostsImpl("{2}{G}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new MustBeBlockedByAllSourceEffect(Duration.EndOfTurn), new ManaCostsImpl<>("{2}{G}")));
     }
 
     private Mortipede(final Mortipede card) {

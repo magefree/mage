@@ -20,7 +20,6 @@ public class ChandrasPyrelingTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertAbility(playerA, "Chandra's Pyreling", DoubleStrikeAbility.getInstance(), true);
         assertPowerToughness(playerA, "Chandra's Pyreling", 2, 3);

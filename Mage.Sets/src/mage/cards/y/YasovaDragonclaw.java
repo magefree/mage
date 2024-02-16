@@ -42,7 +42,7 @@ public final class YasovaDragonclaw extends CardImpl {
 
     public YasovaDragonclaw(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(4);
@@ -51,7 +51,7 @@ public final class YasovaDragonclaw extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
         // At the beginning of combat on your turn, you may pay {1}{(U/R)}{(U/R)}.  If you do, gain control of target creature an opponent controls with power less than Yasova Dragonclaw's power until end of turn, untap that creature, and it gains haste until end of turn.
-        DoIfCostPaid effect = new DoIfCostPaid(new GainControlTargetEffect(Duration.EndOfTurn, true), new ManaCostsImpl("{1}{U/R}{U/R}"));
+        DoIfCostPaid effect = new DoIfCostPaid(new GainControlTargetEffect(Duration.EndOfTurn, true), new ManaCostsImpl<>("{1}{U/R}{U/R}"));
         Effect effect2 = new UntapTargetEffect();
         effect2.setText(", untap that creature");
         effect.addEffect(effect2);
@@ -75,7 +75,7 @@ class YasovaDragonclawPowerLessThanSourcePredicate implements ObjectSourcePlayer
 
     @Override
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
-        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(input.getSourceId());
+        Permanent sourcePermanent = input.getSource().getSourcePermanentOrLKI(game);
         return sourcePermanent != null && input.getObject().getPower().getValue() < sourcePermanent.getPower().getValue();
     }
 

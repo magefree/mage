@@ -33,7 +33,7 @@ public final class MasterTransmuter extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {U}, {tap}, Return an artifact you control to its owner's hand: You may put an artifact card from your hand onto the battlefield.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutCardFromHandOntoBattlefieldEffect(new FilterArtifactCard("an artifact card")), new ManaCostsImpl("{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutCardFromHandOntoBattlefieldEffect(new FilterArtifactCard("an artifact card")), new ManaCostsImpl<>("{U}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent(new FilterControlledArtifactPermanent("an artifact"))));
         this.addAbility(ability);

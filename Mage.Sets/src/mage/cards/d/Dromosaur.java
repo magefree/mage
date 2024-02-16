@@ -1,9 +1,8 @@
-
 package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BlocksOrBecomesBlockedSourceTriggeredAbility;
+import mage.abilities.common.BlocksOrBlockedSourceTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -13,7 +12,7 @@ import mage.constants.SubType;
 
 /**
  *
- * @author Backfir3
+ * @author awjackson
  */
 public final class Dromosaur extends CardImpl {
 
@@ -24,8 +23,8 @@ public final class Dromosaur extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
-        // Whenever Dromosaur blocks or becomes blocked by a creature, it gets +2/-2 until end of turn.
-        this.addAbility(new BlocksOrBecomesBlockedSourceTriggeredAbility(new BoostSourceEffect(2, -2, Duration.EndOfTurn), false));
+        // Whenever Dromosaur blocks or becomes blocked, it gets +2/-2 until end of turn.
+        this.addAbility(new BlocksOrBlockedSourceTriggeredAbility(new BoostSourceEffect(2, -2, Duration.EndOfTurn, "it")));
     }
 
     private Dromosaur(final Dromosaur card) {

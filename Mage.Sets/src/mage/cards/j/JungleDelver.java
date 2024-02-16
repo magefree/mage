@@ -29,7 +29,7 @@ public final class JungleDelver extends CardImpl {
 
         // {3}{G}: Put a +1/+1 counter on Jungle Delver.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new ManaCostsImpl("{3}{G}")));
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new ManaCostsImpl<>("{3}{G}")));
     }
 
     private JungleDelver(final JungleDelver card) {

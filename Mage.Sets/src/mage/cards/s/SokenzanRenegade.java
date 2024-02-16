@@ -12,12 +12,7 @@ import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.abilities.keyword.BushidoAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -31,16 +26,16 @@ public final class SokenzanRenegade extends CardImpl {
 
     public SokenzanRenegade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
-        this.subtype.add(SubType.OGRE);
-        this.subtype.add(SubType.SAMURAI);
-        this.subtype.add(SubType.MERCENARY);
+        this.subtype.add(SubType.OGRE, SubType.SAMURAI, SubType.MERCENARY);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
         // Bushido 1
         this.addAbility(new BushidoAbility(1));
-        // At the beginning of your upkeep, if a player has more cards in hand than each other player, the player who has the most cards in hand gains control of Sokenzan Renegade.
+
+        // At the beginning of your upkeep, if a player has more cards in hand than each other player,
+        // the player who has the most cards in hand gains control of Sokenzan Renegade.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new SokenzanRenegadeEffect(), TargetController.YOU, false),
                 OnePlayerHasTheMostCards.instance,
@@ -61,12 +56,12 @@ public final class SokenzanRenegade extends CardImpl {
 
 class SokenzanRenegadeEffect extends OneShotEffect {
 
-    public SokenzanRenegadeEffect() {
+    SokenzanRenegadeEffect() {
         super(Outcome.GainControl);
         this.staticText = "the player who has the most cards in hand gains control of {this}";
     }
 
-    public SokenzanRenegadeEffect(final SokenzanRenegadeEffect effect) {
+    private SokenzanRenegadeEffect(final SokenzanRenegadeEffect effect) {
         super(effect);
     }
 
@@ -77,32 +72,20 @@ class SokenzanRenegadeEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-        if (controller != null
-                && sourcePermanent != null) {
-            int max = Integer.MIN_VALUE;
-            Player newController = null;
-            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-                Player player = game.getPlayer(playerId);
-                if (player != null) {
-                    if (player.getHand().size() > max) {
-                        max = player.getHand().size();
-                        newController = player;
-                    }
-                }
-            }
-            if (newController != null) {
-                ContinuousEffect effect = new GainControlTargetEffect(Duration.EndOfGame, newController.getId());
-                effect.setTargetPointer(new FixedTarget(sourcePermanent.getId(), game));
-                game.addEffect(effect, source);
-                if (!source.isControlledBy(newController.getId())) {
-                    game.informPlayers(newController.getLogName() + " got control of " + sourcePermanent.getLogName());
-                }
-                return true;
+        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
+        if (sourcePermanent == null) {
+            return false;
+        }
+        Player newController = OnePlayerHasTheMostCards.getPlayerWithMostCards(game, source);
+        if (newController != null) {
+            ContinuousEffect effect = new GainControlTargetEffect(Duration.EndOfGame, newController.getId());
+            effect.setTargetPointer(new FixedTarget(sourcePermanent, game));
+            game.addEffect(effect, source);
+            if (!source.isControlledBy(newController.getId())) {
+                game.informPlayers(newController.getLogName() + " got control of " + sourcePermanent.getLogName());
             }
         }
-        return false;
+        return true;
     }
 }
 
@@ -112,29 +95,29 @@ enum OnePlayerHasTheMostCards implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            int max = Integer.MIN_VALUE;
-            boolean onlyOnePlayer = false;
-            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-                Player player = game.getPlayer(playerId);
-                if (player != null) {
-                    if (player.getHand().size() > max) {
-                        max = player.getHand().size();
-                        onlyOnePlayer = true;
-                    } else if (player.getHand().size() == max) {
-                        onlyOnePlayer = false;
-                    }
+        return getPlayerWithMostCards(game, source) != null;
+    }
+
+    public static Player getPlayerWithMostCards(Game game, Ability source) {
+        int max = Integer.MIN_VALUE;
+        Player playerWithMost = null;
+        for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
+            Player player = game.getPlayer(playerId);
+            if (player != null) {
+                int cards = player.getHand().size();
+                if (cards > max) {
+                    max = cards;
+                    playerWithMost = player;
+                } else if (cards == max) {
+                    playerWithMost = null;
                 }
             }
-            return onlyOnePlayer;
         }
-        return false;
+        return playerWithMost;
     }
 
     @Override
     public String toString() {
         return "a player has more cards in hand than each other player";
     }
-
 }

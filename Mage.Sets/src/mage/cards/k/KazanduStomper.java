@@ -73,7 +73,7 @@ class KazanduStomperEffect extends OneShotEffect {
         TargetPermanent target = new TargetPermanent(
                 0, 2, StaticFilters.FILTER_CONTROLLED_PERMANENT_LANDS, true
         );
-        player.choose(outcome, target, source.getSourceId(), game);
+        player.choose(outcome, target, source, game);
         return player.moveCards(new CardsImpl(target.getTargets()), Zone.HAND, source, game);
     }
 }

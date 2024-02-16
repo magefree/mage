@@ -1,4 +1,3 @@
-
 package mage.cards.m;
 
 import java.util.UUID;
@@ -36,7 +35,7 @@ public final class MistformMask extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // {1}: Enchanted creature becomes the creature type of your choice until end of turn.
@@ -55,16 +54,12 @@ public final class MistformMask extends CardImpl {
 
 class MistformMaskEffect extends OneShotEffect {
 
-    public MistformMaskEffect() {
-        this(false);
-    }
-
-    public MistformMaskEffect(boolean nonWall) {
+    MistformMaskEffect() {
         super(Outcome.BoostCreature);
         staticText = "Enchanted creature becomes the creature type of your choice until end of turn.";
     }
 
-    public MistformMaskEffect(final MistformMaskEffect effect) {
+    private MistformMaskEffect(final MistformMaskEffect effect) {
         super(effect);
     }
 
@@ -84,7 +79,7 @@ class MistformMaskEffect extends OneShotEffect {
     }
 
     @Override
-    public Effect copy() {
+    public MistformMaskEffect copy() {
         return new MistformMaskEffect(this);
     }
 

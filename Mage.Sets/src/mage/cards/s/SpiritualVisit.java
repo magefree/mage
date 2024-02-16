@@ -1,8 +1,7 @@
-
 package mage.cards.s;
 
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.keyword.SpliceOntoArcaneAbility;
+import mage.abilities.keyword.SpliceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -25,7 +24,7 @@ public final class SpiritualVisit extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new SpiritToken()));
         
         // Splice onto Arcane {W}
-        this.addAbility(new SpliceOntoArcaneAbility("{W}"));
+        this.addAbility(new SpliceAbility(SpliceAbility.ARCANE, "{W}"));
     }
 
     private SpiritualVisit(final SpiritualVisit card) {

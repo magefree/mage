@@ -39,15 +39,14 @@ public final class CurseOfTheRestlessDead extends CardImpl {
         TargetPlayer auraTarget = new TargetPlayer();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Whenever a land enters the battlefield under enchanted player's control, you create a 2/2 black Zombie creature token with decayed.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(
-                new CreateTokenEffect(new ZombieDecayedToken()),
-                filter, "Whenever a land enters the battlefield under enchanted player's control, " +
-                "you create a 2/2 black Zombie creature token with decayed."
-        ));
+                new CreateTokenEffect(new ZombieDecayedToken()).setText("you create a 2/2 black Zombie creature token with decayed."),
+                filter
+        ).setTriggerPhrase("Whenever a land enters the battlefield under enchanted player's control, "));
     }
 
     private CurseOfTheRestlessDead(final CurseOfTheRestlessDead card) {

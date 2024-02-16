@@ -52,7 +52,7 @@ class StenchOfEvilEffect extends OneShotEffect {
         this.staticText = "Destroy all Plains. For each land destroyed this way, {this} deals 1 damage to that land's controller unless they pay {2}";
     }
 
-    public StenchOfEvilEffect(final StenchOfEvilEffect effect) {
+    private StenchOfEvilEffect(final StenchOfEvilEffect effect) {
         super(effect);
     }
 
@@ -66,7 +66,7 @@ class StenchOfEvilEffect extends OneShotEffect {
         for (Permanent land : game.getBattlefield().getAllActivePermanents(filter, game)) {
             UUID landControllerId = land.getControllerId();
             if (land.destroy(source, game, false)) {
-                Cost cost = new ManaCostsImpl("{2}");
+                Cost cost = new ManaCostsImpl<>("{2}");
                 Player landController = game.getPlayer(landControllerId);
                 if (landController != null
                         && cost.canPay(source, source, landControllerId, game)

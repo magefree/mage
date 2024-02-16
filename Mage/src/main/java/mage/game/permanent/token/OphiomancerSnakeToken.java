@@ -1,19 +1,17 @@
-
-
 package mage.game.permanent.token;
-import mage.constants.CardType;
-import mage.constants.SubType;
+
 import mage.MageInt;
 import mage.abilities.keyword.DeathtouchAbility;
+import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
- *
  * @author spjspj
  */
 public final class OphiomancerSnakeToken extends TokenImpl {
 
     public OphiomancerSnakeToken() {
-        super("Snake", "1/1 black Snake creature token with deathtouch");
+        super("Snake Token", "1/1 black Snake creature token with deathtouch");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add(SubType.SNAKE);
@@ -22,7 +20,7 @@ public final class OphiomancerSnakeToken extends TokenImpl {
         this.addAbility(DeathtouchAbility.getInstance());
     }
 
-    public OphiomancerSnakeToken(final OphiomancerSnakeToken token) {
+    private OphiomancerSnakeToken(final OphiomancerSnakeToken token) {
         super(token);
     }
 

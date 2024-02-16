@@ -33,7 +33,7 @@ public final class CircleOfProtectionShadow extends CardImpl {
         // {1}: The next time a creature of your choice with shadow would deal damage to you this turn, prevent that damage.
         Effect effect = new PreventNextDamageFromChosenSourceToYouEffect(Duration.EndOfTurn, filter);
         effect.setText("The next time a creature of your choice with shadow would deal damage to you this turn, prevent that damage");
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("1")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{1}")));
     }
 
     private CircleOfProtectionShadow(final CircleOfProtectionShadow card) {

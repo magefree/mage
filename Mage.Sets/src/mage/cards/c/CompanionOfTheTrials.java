@@ -43,7 +43,7 @@ public final class CompanionOfTheTrials extends CardImpl {
         // {1}{W}: Untap target creature. Activate this ability only if you control a Gideon planeswalker.
         Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD,
                 new UntapTargetEffect(),
-                new ManaCostsImpl("{1}{W}"),
+                new ManaCostsImpl<>("{1}{W}"),
                 new PermanentsOnTheBattlefieldCondition(filter));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

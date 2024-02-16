@@ -6,6 +6,7 @@ import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetNonlandPermanent;
 
 /**
@@ -20,7 +21,7 @@ public final class QuicksilverGeyser extends CardImpl {
 
         // Return up to two target nonland permanents to their owners' hands.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
-        this.getSpellAbility().addTarget(new TargetNonlandPermanent(0, 2, false));
+        this.getSpellAbility().addTarget(new TargetNonlandPermanent(0, 2, StaticFilters.FILTER_PERMANENTS_NON_LAND, false));
     }
 
     private QuicksilverGeyser(final QuicksilverGeyser card) {

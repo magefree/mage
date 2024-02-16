@@ -57,7 +57,7 @@ public class PlayFromNotOwnHandZoneTargetEffect extends AsThoughEffectImpl {
         this.onlyCastAllowed = onlyCastAllowed;
     }
 
-    public PlayFromNotOwnHandZoneTargetEffect(final PlayFromNotOwnHandZoneTargetEffect effect) {
+    protected PlayFromNotOwnHandZoneTargetEffect(final PlayFromNotOwnHandZoneTargetEffect effect) {
         super(effect);
         this.fromZone = effect.fromZone;
         this.allowedCaster = effect.allowedCaster;
@@ -87,7 +87,7 @@ public class PlayFromNotOwnHandZoneTargetEffect extends AsThoughEffectImpl {
             // PLAY_FROM_NOT_OWN_HAND_ZONE must applies to affectedAbility only
             // If you see it then parent conditional effect must override both applies methods to support different
             // AsThough effect types in one conditional effect
-            throw new IllegalArgumentException("ERROR, can't call applies method on empty affectedAbility");
+            throw new IllegalArgumentException("Wrong code usage: can't call applies method on empty affectedAbility");
         }
 
         // invalid targets
@@ -155,8 +155,8 @@ public class PlayFromNotOwnHandZoneTargetEffect extends AsThoughEffectImpl {
     /**
      * Exiles the cards and let the allowed player play them from exile for the given duration
      * Supports:
-     *  - cards (use any side)
-     *  - permanents (use permanent, not permanent's card)
+     * - cards (use any side)
+     * - permanents (use permanent, not permanent's card)
      *
      * @param game
      * @param source

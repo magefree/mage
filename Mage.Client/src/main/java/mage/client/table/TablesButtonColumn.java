@@ -90,7 +90,10 @@ public class TablesButtonColumn extends AbstractCellEditor implements TableCellR
     }
 
     @Override
-    public void mousePressed(MouseEvent arg0) {
+    public void mousePressed(MouseEvent e) {
+        if (!SwingUtilities.isLeftMouseButton(e)) {
+            return;
+        }
         if (table.isEditing() && table.getCellEditor() == this) {
             isButtonColumnEditor = true;
         }

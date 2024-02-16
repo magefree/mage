@@ -57,7 +57,7 @@ class CrushUnderfootEffect extends OneShotEffect {
         this.staticText = "Choose a Giant creature you control. It deals damage equal to its power to target creature";
     }
 
-    public CrushUnderfootEffect(final CrushUnderfootEffect effect) {
+    private CrushUnderfootEffect(final CrushUnderfootEffect effect) {
         super(effect);
     }
 
@@ -72,7 +72,7 @@ class CrushUnderfootEffect extends OneShotEffect {
         if (controller != null) {
             // Choose a Giant creature you control (not targeted, happens during effect resolving )
             Target target = new TargetControlledCreaturePermanent(1,1, filter,false);
-            if (target.canChoose(source.getSourceId(), controller.getId(), game)
+            if (target.canChoose(controller.getId(), source, game)
                     && controller.chooseTarget(outcome, target, source, game)) {
                 Permanent giant = game.getPermanent(target.getFirstTarget());                
                 if (giant != null) {

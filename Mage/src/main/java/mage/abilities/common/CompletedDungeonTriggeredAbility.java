@@ -21,6 +21,7 @@ public class CompletedDungeonTriggeredAbility extends TriggeredAbilityImpl {
 
     public CompletedDungeonTriggeredAbility(Zone zone, Effect effect, boolean optional) {
         super(zone, effect, optional);
+        setTriggerPhrase("Whenever you complete a dungeon, ");
     }
 
     private CompletedDungeonTriggeredAbility(final CompletedDungeonTriggeredAbility ability) {
@@ -40,10 +41,5 @@ public class CompletedDungeonTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public CompletedDungeonTriggeredAbility copy() {
         return new CompletedDungeonTriggeredAbility(this);
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you complete a dungeon, " ;
     }
 }

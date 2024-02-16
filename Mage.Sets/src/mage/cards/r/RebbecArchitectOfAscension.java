@@ -36,7 +36,7 @@ public final class RebbecArchitectOfAscension extends CardImpl {
     public RebbecArchitectOfAscension(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ARTIFICER);
         this.power = new MageInt(3);
@@ -70,7 +70,7 @@ enum RebbecArchitectOfAscensionPredicate implements ObjectSourcePlayerPredicate<
         return game.getBattlefield()
                 .getActivePermanents(
                         StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT,
-                        game.getControllerId(input.getSourceId()), input.getSourceId(), game
+                        game.getControllerId(input.getSourceId()), input.getSource(), game
                 ).stream()
                 .filter(Objects::nonNull)
                 .mapToInt(MageObject::getManaValue)

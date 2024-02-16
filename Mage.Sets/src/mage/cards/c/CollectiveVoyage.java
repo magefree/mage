@@ -44,12 +44,12 @@ public final class CollectiveVoyage extends CardImpl {
 
 class CollectiveVoyageEffect extends OneShotEffect {
 
-    public CollectiveVoyageEffect() {
+    CollectiveVoyageEffect() {
         super(Outcome.Detriment);
         this.staticText = "<i>Join forces</i> &mdash; Starting with you, each player may pay any amount of mana. Each player searches their library for up to X basic land cards, where X is the total amount of mana paid this way, puts them onto the battlefield tapped, then shuffles";
     }
 
-    public CollectiveVoyageEffect(final CollectiveVoyageEffect effect) {
+    private CollectiveVoyageEffect(final CollectiveVoyageEffect effect) {
         super(effect);
     }
 
@@ -75,7 +75,7 @@ class CollectiveVoyageEffect extends OneShotEffect {
             }
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
-                if (player != null) {
+                if (player != null && xSum != 0) {
                     TargetCardInLibrary target = new TargetCardInLibrary(0, xSum, StaticFilters.FILTER_CARD_BASIC_LAND);
                     if (player.searchLibrary(target, source, game)) {
                         toBattlefield.addAll(new CardsImpl(target.getTargets()).getCards(game));

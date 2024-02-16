@@ -50,7 +50,6 @@ public class BantPlane extends Plane {
 
     public BantPlane() {
         this.setPlaneType(Planes.PLANE_BANT);
-        this.setExpansionSetCodeForImage("PCA");
 
         // All creatures have exalted
         SimpleStaticAbility ability
@@ -79,5 +78,14 @@ public class BantPlane extends Plane {
         this.getAbilities().add(chaosAbility);
         chaosAbility.setMayActivate(TargetController.ANY);
         this.getAbilities().add(new SimpleStaticAbility(Zone.ALL, new PlanarDieRollCostIncreasingEffect(chaosAbility.getOriginalId())));
+    }
+
+    private BantPlane(final BantPlane plane) {
+        super(plane);
+    }
+
+    @Override
+    public BantPlane copy() {
+        return new BantPlane(this);
     }
 }

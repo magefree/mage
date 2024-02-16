@@ -16,7 +16,6 @@ public class ServantOfTheScaleTest extends CardTestPlayerBase {
     /**
      * Tests that the dies triggered ability distributes
      * the +1/+1 counters on Servant of the Scale
-     *
      */
     @Test
     public void testDiesTriggeredAbility() {
@@ -28,6 +27,8 @@ public class ServantOfTheScaleTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerB, "Mountain");
         addCard(Zone.HAND, playerB, "Lightning Bolt");
+
+        setStrictChooseMode(true);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Servant of the Scale");
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Lightning Bolt", "Servant of the Scale");
@@ -42,10 +43,7 @@ public class ServantOfTheScaleTest extends CardTestPlayerBase {
         assertGraveyardCount(playerB, "Lightning Bolt", 1);
         assertGraveyardCount(playerA, "Servant of the Scale", 1);
 
-
         assertPermanentCount(playerA, "Silvercoat Lion", 1);
         assertPowerToughness(playerA, "Silvercoat Lion", 3,3);
-
-    }  
-
+    }
 }

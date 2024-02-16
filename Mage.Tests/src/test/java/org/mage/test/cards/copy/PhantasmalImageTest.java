@@ -1,6 +1,6 @@
 package org.mage.test.cards.copy;
 
-import mage.abilities.common.BecomesTargetTriggeredAbility;
+import mage.abilities.common.BecomesTargetSourceTriggeredAbility;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.constants.PhaseStep;
@@ -75,6 +75,7 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
 
         for (int i = 0; i < 12; i++) {
             activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Level up {1}");
+            waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         }
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Phantasmal Image");
@@ -110,11 +111,10 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Phantasmal Image", 2);
         addCard(Zone.BATTLEFIELD, playerA, "Illusionary Servant");
 
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Phantasmal Image", true);
         setChoice(playerA, "Illusionary Servant");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Phantasmal Image");
         setChoice(playerA, "Illusionary Servant-M10");
-
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Phantasmal Image");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Phantasmal Image");
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
@@ -382,7 +382,7 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Wurmcoil Engine", 1);
 
         assertGraveyardCount(playerB, "Phantasmal Image", 1);
-        assertPermanentCount(playerB, "Phyrexian Wurm", 2); // if triggered ability did not work, the Titan would be in the graveyard instaed
+        assertPermanentCount(playerB, "Phyrexian Wurm Token", 2); // if triggered ability did not work, the Titan would be in the graveyard instaed
 
     }
 
@@ -493,7 +493,6 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         assertGraveyardCount(playerB, "Phantasmal Image", 0);
         assertPermanentCount(playerB, "Kitchen Finks", 1);
         assertPowerToughness(playerB, "Kitchen Finks", 2, 1);
-
     }
 
     @Test
@@ -535,7 +534,6 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         assertGraveyardCount(playerB, "Phantasmal Image", 0);
         assertPermanentCount(playerB, "Butcher Ghoul", 1);
         assertPowerToughness(playerB, "Butcher Ghoul", 2, 2);
-
     }
 
     /**
@@ -561,7 +559,7 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Phantasmal Image");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Phantasmal Image"); // not targeted
-        setChoice(playerB, "Wurmcoil Engine");
+        setChoice(playerA, "Wurmcoil Engine");
 
         attack(2, playerB, "Wurmcoil Engine");
         block(2, playerA, "Wurmcoil Engine", "Wurmcoil Engine");
@@ -574,9 +572,8 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Phantasmal Image", 1);
         assertGraveyardCount(playerB, "Wurmcoil Engine", 1);
 
-        assertPermanentCount(playerA, "Phyrexian Wurm", 2);
-        assertPermanentCount(playerB, "Phyrexian Wurm", 2);
-
+        assertPermanentCount(playerA, "Phyrexian Wurm Token", 2);
+        assertPermanentCount(playerB, "Phyrexian Wurm Token", 2);
     }
 
     /**
@@ -585,14 +582,16 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
      */
     @Test
     public void testVoiceOfResurgence() {
-        // Whenever an opponent casts a spell during your turn or when Voice of Resurgence dies, put a green and white Elemental creature token onto the battlefield with "This creature's power and toughness are each equal to the number of creatures you control."
+        // Whenever an opponent casts a spell during your turn or when Voice of Resurgence dies,
+        // put a green and white Elemental creature token onto the battlefield with
+        // "This creature's power and toughness are each equal to the number of creatures you control."
         addCard(Zone.BATTLEFIELD, playerB, "Voice of Resurgence");
 
         addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
         addCard(Zone.HAND, playerA, "Phantasmal Image");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Phantasmal Image"); // not targeted
-        setChoice(playerB, "Voice of Resurgence");
+        setChoice(playerA, "Voice of Resurgence");
 
         attack(2, playerB, "Voice of Resurgence");
         block(2, playerA, "Voice of Resurgence", "Voice of Resurgence");
@@ -605,9 +604,8 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Phantasmal Image", 1);
         assertGraveyardCount(playerB, "Voice of Resurgence", 1);
 
-        assertPermanentCount(playerB, "Elemental", 1);
-        assertPermanentCount(playerA, "Elemental", 1);
-
+        assertPermanentCount(playerB, "Elemental Token", 1);
+        assertPermanentCount(playerA, "Elemental Token", 1);
     }
 
     @Test
@@ -626,14 +624,12 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertAllCommandsUsed();
-
         Permanent staffA = getPermanent("Chimeric Staff", playerA);
         assertTrue("Phantasmal Image should be an artifact", staffA.isArtifact(currentGame));
         assertTrue("Phantasmal Image should not be a creature", !staffA.isCreature(currentGame));
         assertTrue("Phantasmal Image should not be an Illusion", !staffA.hasSubtype(SubType.ILLUSION, currentGame));
         assertTrue("Phantasmal Image should not be a Construct", !staffA.hasSubtype(SubType.CONSTRUCT, currentGame));
-        assertTrue("Phantasmal Image should have the sacrifice trigger", staffA.getAbilities(currentGame).containsClass(BecomesTargetTriggeredAbility.class));
+        assertTrue("Phantasmal Image should have the sacrifice trigger", staffA.getAbilities(currentGame).containsClass(BecomesTargetSourceTriggeredAbility.class));
 
         Permanent staffB = getPermanent("Chimeric Staff", playerB);
         assertTrue("Chimeric Staff should be an artifact", staffB.isArtifact(currentGame));
@@ -656,8 +652,6 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertAllCommandsUsed();
-
         Permanent cloakA = getPermanent("Cloak and Dagger", playerA);
         assertTrue("Phantasmal Image should be an artifact", cloakA.isArtifact(currentGame));
         assertTrue("Phantasmal Image should be tribal", cloakA.isTribal(currentGame));
@@ -665,7 +659,7 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         assertTrue("Phantasmal Image should be a Rogue", cloakA.hasSubtype(SubType.ROGUE, currentGame));
         assertTrue("Phantasmal Image should be an Illusion", cloakA.hasSubtype(SubType.ILLUSION, currentGame));
         assertTrue("Phantasmal Image should be an Equipment", cloakA.hasSubtype(SubType.EQUIPMENT, currentGame));
-        assertTrue("Phantasmal Image should have the sacrifice trigger", cloakA.getAbilities(currentGame).containsClass(BecomesTargetTriggeredAbility.class));
+        assertTrue("Phantasmal Image should have the sacrifice trigger", cloakA.getAbilities(currentGame).containsClass(BecomesTargetSourceTriggeredAbility.class));
 
         Permanent cloakB = getPermanent("Cloak and Dagger", playerB);
         assertTrue("Cloak and Dagger should be an artifact", cloakB.isArtifact(currentGame));

@@ -41,7 +41,7 @@ public final class GristTheHungerTide extends CardImpl {
     public GristTheHungerTide(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{B}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GRIST);
         this.setStartingLoyalty(3);
 
@@ -58,9 +58,7 @@ public final class GristTheHungerTide extends CardImpl {
         ability.addTarget(new TargetCreatureOrPlaneswalker());
         this.addAbility(new LoyaltyAbility(new DoWhenCostPaid(
                 ability,
-                new SacrificeTargetCost(new TargetControlledPermanent(
-                        StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT
-                )), "Sacrifice a creature?"
+                new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT), "Sacrifice a creature?"
         ), -2));
 
         // −5: Each opponent loses life equal to the number of creature cards in your graveyard.
@@ -124,11 +122,10 @@ class GristTheHungerTideTypeEffect extends ContinuousEffectImpl {
                 sourceObject.addSubType(game, SubType.INSECT);
                 break;
             case PTChangingEffects_7:
-                if (sublayer != SubLayer.SetPT_7b) {
-                    break;
+                if (sublayer == SubLayer.SetPT_7b) {
+                    sourceObject.getPower().setModifiedBaseValue(1);
+                    sourceObject.getToughness().setModifiedBaseValue(1);
                 }
-                sourceObject.getPower().setValue(1);
-                sourceObject.getToughness().setValue(1);
                 break;
         }
         return true;

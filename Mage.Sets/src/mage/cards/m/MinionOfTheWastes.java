@@ -8,7 +8,7 @@ import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.InfoEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -35,7 +35,7 @@ public final class MinionOfTheWastes extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
 
-        // As Minion of the Wastes enters the battlefield, pay any amount of life. The amount you pay can't be more than the total number of white nontoken permanents your opponents control plus the total number of white cards in their graveyards.
+        // As Minion of the Wastes enters the battlefield, pay any amount of life.
         this.addAbility(new AsEntersBattlefieldAbility(new MinionOfTheWastesEffect()));
 
         // Minion of the Wastes's power and toughness are each equal to the life paid as it entered the battlefield.
@@ -83,8 +83,8 @@ class MinionOfTheWastesEffect extends OneShotEffect {
         Card sourceCard = game.getCard(source.getSourceId());
         game.informPlayers((sourceCard != null ? sourceCard.getLogName() : "") + ": " + controller.getLogName() +
                 " pays " + payAmount + " life");
-        game.addEffect(new SetPowerToughnessSourceEffect(
-                payAmount, payAmount, Duration.Custom, SubLayer.CharacteristicDefining_7a
+        game.addEffect(new SetBasePowerToughnessSourceEffect(
+                payAmount, payAmount, Duration.Custom
         ), source);
         permanent.addInfo("life paid", CardUtil.addToolTipMarkTags("Life paid: " + payAmount), game);
         return true;

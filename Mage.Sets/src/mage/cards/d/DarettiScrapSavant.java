@@ -10,7 +10,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterArtifactCard;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.game.Game;
 import mage.game.command.emblems.DarettiScrapSavantEmblem;
@@ -29,7 +29,7 @@ public final class DarettiScrapSavant extends CardImpl {
 
     public DarettiScrapSavant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{R}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DARETTI);
 
         this.setStartingLoyalty(3);
@@ -39,7 +39,7 @@ public final class DarettiScrapSavant extends CardImpl {
 
         // -2: Sacrifice an artifact. If you do, return target artifact card from your graveyard to the battlefield.
         LoyaltyAbility loyaltyAbility = new LoyaltyAbility(new DarettiSacrificeEffect(), -2);
-        loyaltyAbility.addTarget(new TargetCardInYourGraveyard(new FilterArtifactCard("artifact card from your graveyard")));
+        loyaltyAbility.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_ARTIFACT_FROM_YOUR_GRAVEYARD));
         this.addAbility(loyaltyAbility);
 
         // -10: You get an emblem with "Whenever an artifact is put into your graveyard from the battlefield, return that card to the battlefield at the beginning of the next end step."
@@ -82,7 +82,7 @@ class DarettiSacrificeEffect extends OneShotEffect {
             return false;
         }
         Target target = new TargetControlledPermanent(1, 1, new FilterControlledArtifactPermanent(), true);
-        if (!target.canChoose(source.getSourceId(), controller.getId(), game)
+        if (!target.canChoose(controller.getId(), source, game)
                 || !controller.chooseTarget(outcome, target, source, game)) {
             return true;
         }

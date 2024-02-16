@@ -27,7 +27,6 @@ import mage.target.targetpointer.FixedTarget;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-import static mage.constants.Outcome.Benefit;
 import mage.util.CardUtil;
 
 /**
@@ -52,16 +51,15 @@ public final class CalixDestinysHand extends CardImpl {
     public CalixDestinysHand(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{G}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.CALIX);
         this.setStartingLoyalty(4);
 
-        // +1: Look at the top four cards of your library. You may reveal an enchantment card from among them and put that card into your hand. Put the rest on the bottom of your library in a random order.
+        // +1: Look at the top four cards of your library. You may reveal an enchantment card from among them and put that card into your hand.
+        // Put the rest on the bottom of your library in a random order.
         this.addAbility(new LoyaltyAbility(new LookLibraryAndPickControllerEffect(
-                StaticValue.get(4), false, StaticValue.get(1), filter,
-                Zone.LIBRARY, false, true, false,
-                Zone.HAND, true, false, false
-        ).setBackInRandomOrder(true).setText("Look at the top four cards of your library. "
+                4, 1, filter, PutCards.HAND, PutCards.BOTTOM_RANDOM
+        ).setText("Look at the top four cards of your library. "
                 + "You may reveal an enchantment card from among them and put that card into your hand. "
                 + "Put the rest on the bottom of your library in a random order."), 1
         ));
@@ -89,7 +87,7 @@ public final class CalixDestinysHand extends CardImpl {
 class CalixDestinysHandExileEffect extends OneShotEffect {
 
     CalixDestinysHandExileEffect() {
-        super(Benefit);
+        super(Outcome.Benefit);
         staticText = "Exile target creature or enchantment you don't control "
                 + "until target enchantment you control leaves the battlefield.";
     }
@@ -173,7 +171,7 @@ class CalixDestinysHandDelayedTriggeredAbility extends DelayedTriggeredAbility {
 class CalixDestinysHandReturnEffect extends OneShotEffect {
 
     CalixDestinysHandReturnEffect() {
-        super(Benefit);
+        super(Outcome.Benefit);
         staticText = "return all enchantment cards from your graveyard to the battlefield";
     }
 

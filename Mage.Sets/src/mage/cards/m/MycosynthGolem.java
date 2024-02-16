@@ -18,7 +18,7 @@ import java.util.UUID;
  */
 public final class MycosynthGolem extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("Artifact creature spells");
+    private static final FilterCard filter = new FilterCard("Artifact creature spells you cast");
 
     static {
         filter.add(CardType.ARTIFACT.getPredicate());

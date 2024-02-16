@@ -60,9 +60,9 @@ public class SpellCastTriggerTest extends CardTestPlayerBase {
         assertLife(playerB, 14);
 
         assertGraveyardCount(playerA, "Lightning Bolt", 2);
-        assertPermanentCount(playerA, "Monk", 2);
-        assertPowerToughness(playerA, "Monk", 2, 2);
-        assertPowerToughness(playerA, "Monk", 1, 1);
+        assertPermanentCount(playerA, "Monk Token", 2);
+        assertPowerToughness(playerA, "Monk Token", 2, 2);
+        assertPowerToughness(playerA, "Monk Token", 1, 1);
 
         assertPowerToughness(playerA, "Monastery Mentor", 4, 4);
     }
@@ -84,7 +84,7 @@ public class SpellCastTriggerTest extends CardTestPlayerBase {
         execute();
 
         assertGraveyardCount(playerA, "Dance with Devils", 2);
-        assertPermanentCount(playerA, "Devil", 4);
+        assertPermanentCount(playerA, "Devil Token", 4);
     }
 
     /**
@@ -114,7 +114,7 @@ public class SpellCastTriggerTest extends CardTestPlayerBase {
         execute();
 
         assertGraveyardCount(playerA, "Dance with Devils", 1);
-        assertPermanentCount(playerA, "Devil", 2);
+        assertPermanentCount(playerA, "Devil Token", 2);
         assertGraveyardCount(playerA, "Read the Bones", 2);
         assertHandCount(playerA, 5); // one normally drawn + 4 from Read the Bones
 
@@ -142,7 +142,7 @@ public class SpellCastTriggerTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Glimpse of Freedom");
         
-        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Glimpse of Freedom");
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Glimpse of Freedom with Escape");
         setChoice(playerA,"Mountain");
         setChoice(playerA,"Mountain");
         setChoice(playerA,"Mountain");
@@ -154,7 +154,6 @@ public class SpellCastTriggerTest extends CardTestPlayerBase {
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Diamond Knight", 1);
         assertPowerToughness(playerA, "Diamond Knight", 3, 3);

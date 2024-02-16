@@ -33,7 +33,7 @@ public final class LingeringDeath extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.DestroyPermanent));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // At the beginning of the end step of enchanted creature's controller, that player sacrifices that creature.
@@ -56,7 +56,7 @@ class LingeringDeathAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new SacrificeTargetEffect());
     }
 
-    public LingeringDeathAbility(final LingeringDeathAbility ability) {
+    private LingeringDeathAbility(final LingeringDeathAbility ability) {
         super(ability);
     }
 

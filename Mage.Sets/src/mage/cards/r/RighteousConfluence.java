@@ -24,20 +24,18 @@ public final class RighteousConfluence extends CardImpl {
         // Choose three - You may choose the same mode more than once.
         this.getSpellAbility().getModes().setMinModes(3);
         this.getSpellAbility().getModes().setMaxModes(3);
-        this.getSpellAbility().getModes().setEachModeMoreThanOnce(true);
+        this.getSpellAbility().getModes().setMayChooseSameModeMoreThanOnce(true);
 
         // - Create a 2/2 white Knight creature token with vigilance;
         this.getSpellAbility().addEffect(new CreateTokenEffect(new KnightToken()));
 
         //  - Exile target enchantment;
-        Mode mode = new Mode();
-        mode.addEffect(new ExileTargetEffect());
+        Mode mode = new Mode(new ExileTargetEffect());
         mode.addTarget(new TargetEnchantmentPermanent());
         this.getSpellAbility().getModes().addMode(mode);
 
         // You gain 5 life;
-        mode = new Mode();
-        mode.addEffect(new GainLifeEffect(5));
+        mode = new Mode(new GainLifeEffect(5));
         this.getSpellAbility().getModes().addMode(mode);
     }
 

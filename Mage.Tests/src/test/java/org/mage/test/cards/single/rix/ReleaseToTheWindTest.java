@@ -32,13 +32,12 @@ public class ReleaseToTheWindTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerB, "Grizzly Bears", 1);
     }
 
     @Test
-    public void test_Exile_ModalDoubleFacesCard() {
+    public void test_Exile_ModalDoubleFacedCard() {
         // Exile target nonland permanent. For as long as that card remains exiled, its owner may cast it without paying its mana cost.
         addCard(Zone.HAND, playerA, "Release to the Wind"); // {2}{U}
         addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
@@ -69,7 +68,6 @@ public class ReleaseToTheWindTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Akoum Warrior", 1);
     }

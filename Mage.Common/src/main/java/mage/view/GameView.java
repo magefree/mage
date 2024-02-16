@@ -24,33 +24,32 @@ import mage.game.stack.StackAbility;
 import mage.game.stack.StackObject;
 import mage.players.PlayableObjectsList;
 import mage.players.Player;
-import mage.watchers.common.CastSpellLastTurnWatcher;
 import org.apache.log4j.Logger;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 /**
- * @author BetaSteward_at_googlemail.com
+ * @author BetaSteward_at_googlemail.com, JayDi85
  */
 public class GameView implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     private static final Logger LOGGER = Logger.getLogger(GameView.class);
+
     private final int priorityTime;
+    private final int bufferTime;
     private final List<PlayerView> players = new ArrayList<>();
-    private CardsView hand;
+    private UUID myPlayerId = null; // null for watcher
+    private final CardsView myHand = new CardsView();
     private PlayableObjectsList canPlayObjects;
-    private Map<String, SimpleCardsView> opponentHands;
-    private Map<String, SimpleCardsView> watchedHands;
+    private final Map<String, SimpleCardsView> opponentHands = new HashMap<>();
+    private final Map<String, SimpleCardsView> watchedHands = new HashMap<>();
     private final CardsView stack = new CardsView();
     private final List<ExileView> exiles = new ArrayList<>();
     private final List<RevealedView> revealed = new ArrayList<>();
-    private List<LookedAtView> lookedAt = new ArrayList<>();
+    private final List<LookedAtView> lookedAt = new ArrayList<>();
     private final List<RevealedView> companion = new ArrayList<>();
     private final List<CombatGroupView> combat = new ArrayList<>();
     private final TurnPhase phase;
@@ -60,18 +59,21 @@ public class GameView implements Serializable {
     private final String priorityPlayerName;
     private final int turn;
     private boolean special = false;
-    private final boolean isPlayer; // false = watching user
-    private final int spellsCastCurrentTurn;
     private final boolean rollbackTurnsAllowed;
+    private int totalErrorsCount;
 
     public GameView(GameState state, Game game, UUID createdForPlayerId, UUID watcherUserId) {
         Player createdForPlayer = null;
-        this.isPlayer = createdForPlayerId != null;
         this.priorityTime = game.getPriorityTime();
+        this.bufferTime = game.getBufferTime();
+
         for (Player player : state.getPlayers().values()) {
-            players.add(new PlayerView(player, state, game, createdForPlayerId, watcherUserId));
+            PlayerView playerView = new PlayerView(player, state, game, createdForPlayerId, watcherUserId);
+            players.add(playerView);
             if (player.getId().equals(createdForPlayerId)) {
                 createdForPlayer = player;
+                this.myPlayerId = player.getId();
+                this.myHand.putAll(new CardsView(game, player.getHand().getCards(game)));
             }
         }
         for (StackObject stackObject : state.getStack()) {
@@ -91,12 +93,12 @@ public class GameView implements Serializable {
                     if (object != null) {
                         if (object instanceof Permanent) {
                             boolean controlled = ((Permanent) object).getControllerId().equals(createdForPlayerId);
-                            stack.put(stackObject.getId(), new StackAbilityView(game, (StackAbility) stackObject, object.getName(), new CardView(((Permanent) object), game, controlled, false, false)));
+                            stack.put(stackObject.getId(), new StackAbilityView(game, (StackAbility) stackObject, object.getName(), object, new CardView(((Permanent) object), game, controlled, false, false)));
                         } else {
-                            stack.put(stackObject.getId(), new StackAbilityView(game, (StackAbility) stackObject, card.getName(), new CardView(card, game, false, false, false)));
+                            stack.put(stackObject.getId(), new StackAbilityView(game, (StackAbility) stackObject, card.getName(), card, new CardView(card, game, false, false, false)));
                         }
                     } else {
-                        stack.put(stackObject.getId(), new StackAbilityView(game, (StackAbility) stackObject, "", new CardView(card, game)));
+                        stack.put(stackObject.getId(), new StackAbilityView(game, (StackAbility) stackObject, "", card, new CardView(card, game)));
                     }
                     if (card.isTransformable()) {
                         updateLatestCardView(game, card, stackObject.getId());
@@ -105,7 +107,7 @@ public class GameView implements Serializable {
                 } else if (object != null) {
                     if (object instanceof PermanentToken) {
                         PermanentToken token = (PermanentToken) object;
-                        stack.put(stackObject.getId(), new StackAbilityView(game, (StackAbility) stackObject, token.getName(), new CardView(token, game)));
+                        stack.put(stackObject.getId(), new StackAbilityView(game, (StackAbility) stackObject, token.getName(), token, new CardView(token, game)));
                         checkPaid(stackObject.getId(), (StackAbility) stackObject);
                     } else if (object instanceof Emblem) {
                         CardView cardView = new CardView(new EmblemView((Emblem) object));
@@ -113,24 +115,24 @@ public class GameView implements Serializable {
                         stackObject.setName(object.getName());
                         // ((StackAbility) stackObject).setExpansionSetCode(sourceCard.getExpansionSetCode());
                         stack.put(stackObject.getId(),
-                                new StackAbilityView(game, (StackAbility) stackObject, object.getName(), cardView));
+                                new StackAbilityView(game, (StackAbility) stackObject, object.getName(), object, cardView));
                         checkPaid(stackObject.getId(), ((StackAbility) stackObject));
                     } else if (object instanceof Dungeon) {
                         CardView cardView = new CardView(new DungeonView((Dungeon) object));
                         stackObject.setName(object.getName());
                         stack.put(stackObject.getId(),
-                                new StackAbilityView(game, (StackAbility) stackObject, object.getName(), cardView));
+                                new StackAbilityView(game, (StackAbility) stackObject, object.getName(), object, cardView));
                         checkPaid(stackObject.getId(), ((StackAbility) stackObject));
                     } else if (object instanceof Plane) {
                         CardView cardView = new CardView(new PlaneView((Plane) object));
                         stackObject.setName(object.getName());
                         stack.put(stackObject.getId(),
-                                new StackAbilityView(game, (StackAbility) stackObject, object.getName(), cardView));
+                                new StackAbilityView(game, (StackAbility) stackObject, object.getName(), object, cardView));
                         checkPaid(stackObject.getId(), ((StackAbility) stackObject));
                     } else if (object instanceof Designation) {
                         Designation designation = (Designation) game.getObject(object.getId());
                         if (designation != null) {
-                            stack.put(stackObject.getId(), new StackAbilityView(game, (StackAbility) stackObject, designation.getName(), new CardView(designation, game)));
+                            stack.put(stackObject.getId(), new StackAbilityView(game, (StackAbility) stackObject, designation.getName(), designation, new CardView(designation, game)));
                         } else {
                             LOGGER.fatal("Designation object not found: " + object.getName() + ' ' + object.toString() + ' ' + object.getClass().toString());
                         }
@@ -158,14 +160,19 @@ public class GameView implements Serializable {
         for (String name : state.getRevealed().keySet()) {
             revealed.add(new RevealedView(name, state.getRevealed().get(name), game));
         }
+        if (this.myPlayerId != null) {
+            for (String name : state.getLookedAt(this.myPlayerId).keySet()){
+                lookedAt.add(new LookedAtView(name, state.getLookedAt(this.myPlayerId).get(name), game));
+            }
+        }
         for (String name : state.getCompanion().keySet()) {
             // Only show the companion window when the companion is still outside the game.
             if (state.getCompanion().get(name).stream().anyMatch(cardId -> state.getZone(cardId) == Zone.OUTSIDE)) {
                 companion.add(new RevealedView(name, state.getCompanion().get(name), game));
             }
         }
-        this.phase = state.getTurn().getPhaseType();
-        this.step = state.getTurn().getStepType();
+        this.phase = state.getTurnPhaseType();
+        this.step = state.getTurnStepType();
         this.turn = state.getTurnNum();
         this.activePlayerId = state.getActivePlayerId();
         if (state.getActivePlayerId() != null) {
@@ -183,9 +190,9 @@ public class GameView implements Serializable {
         for (CombatGroup combatGroup : state.getCombat().getGroups()) {
             combat.add(new CombatGroupView(combatGroup, game));
         }
-        if (isPlayer) { // no watcher
+        if (this.myPlayerId != null) { // no watcher
             // has only to be set for active player with priority (e.g. pay mana by delve or Quenchable Fire special action)
-            if (priorityPlayer != null && createdForPlayer != null && createdForPlayerId != null && createdForPlayer.isGameUnderControl()
+            if (priorityPlayer != null && createdForPlayer != null && createdForPlayer.isGameUnderControl()
                     && (createdForPlayerId.equals(priorityPlayer.getId()) // player controls the turn
                     || createdForPlayer.getPlayersUnderYourControl().contains(priorityPlayer.getId()))) { // player controls active players turn
                 this.special = !state.getSpecialActions().getControlledBy(priorityPlayer.getId(), priorityPlayer.isInPayManaMode()).isEmpty();
@@ -193,14 +200,8 @@ public class GameView implements Serializable {
         } else {
             this.special = false;
         }
-
-        CastSpellLastTurnWatcher watcher = game.getState().getWatcher(CastSpellLastTurnWatcher.class);
-        if (watcher != null) {
-            spellsCastCurrentTurn = watcher.getAmountOfSpellsAllPlayersCastOnCurrentTurn();
-        } else {
-            spellsCastCurrentTurn = 0;
-        }
-        rollbackTurnsAllowed = game.getOptions().rollbackTurnsAllowed;
+        this.rollbackTurnsAllowed = game.getOptions().rollbackTurnsAllowed;
+        this.totalErrorsCount = game.getTotalErrorsCount();
     }
 
     private void checkPaid(UUID uuid, StackAbility stackAbility) {
@@ -233,28 +234,24 @@ public class GameView implements Serializable {
         return players;
     }
 
-    public CardsView getHand() {
-        return hand;
+    public CardsView getMyHand() {
+        return myHand;
     }
 
-    public void setHand(CardsView hand) {
-        this.hand = hand;
+    public PlayerView getMyPlayer() {
+        if (this.myPlayerId == null) {
+            return null;
+        } else {
+            return players.stream().filter(p -> p.getPlayerId().equals(this.myPlayerId)).findFirst().orElse(null);
+        }
     }
 
     public Map<String, SimpleCardsView> getOpponentHands() {
         return opponentHands;
     }
 
-    public void setOpponentHands(Map<String, SimpleCardsView> opponentHands) {
-        this.opponentHands = opponentHands;
-    }
-
     public Map<String, SimpleCardsView> getWatchedHands() {
         return watchedHands;
-    }
-
-    public void setWatchedHands(Map<String, SimpleCardsView> watchedHands) {
-        this.watchedHands = watchedHands;
     }
 
     public TurnPhase getPhase() {
@@ -285,10 +282,6 @@ public class GameView implements Serializable {
         return companion;
     }
 
-    public void setLookedAt(List<LookedAtView> list) {
-        this.lookedAt = list;
-    }
-
     public List<CombatGroupView> getCombat() {
         return combat;
     }
@@ -313,12 +306,16 @@ public class GameView implements Serializable {
         return priorityTime;
     }
 
+    public int getBufferTime() {
+        return bufferTime;
+    }
+
     public UUID getActivePlayerId() {
         return activePlayerId;
     }
 
     public boolean isPlayer() {
-        return isPlayer;
+        return this.myPlayerId != null;
     }
 
     public PlayableObjectsList getCanPlayObjects() {
@@ -329,10 +326,6 @@ public class GameView implements Serializable {
         this.canPlayObjects = canPlayObjects;
     }
 
-    public int getSpellsCastCurrentTurn() {
-        return spellsCastCurrentTurn;
-    }
-
     public boolean isRollbackTurnsAllowed() {
         return rollbackTurnsAllowed;
     }
@@ -340,5 +333,9 @@ public class GameView implements Serializable {
     public String toJson() {
         Gson gson = new GsonBuilder().create();
         return gson.toJson(this);
+    }
+
+    public int getTotalErrorsCount() {
+        return this.totalErrorsCount;
     }
 }

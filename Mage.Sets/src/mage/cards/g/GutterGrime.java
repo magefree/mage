@@ -50,7 +50,7 @@ class GutterGrimeTriggeredAbility extends TriggeredAbilityImpl {
         this.addEffect(new GutterGrimeEffect());
     }
 
-    public GutterGrimeTriggeredAbility(GutterGrimeTriggeredAbility ability) {
+    private GutterGrimeTriggeredAbility(final GutterGrimeTriggeredAbility ability) {
         super(ability);
     }
 
@@ -71,13 +71,10 @@ class GutterGrimeTriggeredAbility extends TriggeredAbilityImpl {
         if (card instanceof Permanent && !(card instanceof PermanentToken)) {
             Permanent permanent = (Permanent) card;
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.isDiesEvent()
+            return zEvent.isDiesEvent()
                     && permanent.isControlledBy(this.controllerId)
                     && (targetId.equals(this.getSourceId())
-                    || (permanent.isCreature(game)
-                    && !(permanent instanceof PermanentToken)))) {
-                return true;
-            }
+                    || (permanent.isCreature(game)));
         }
         return false;
     }
@@ -90,11 +87,11 @@ class GutterGrimeTriggeredAbility extends TriggeredAbilityImpl {
 
 class GutterGrimeEffect extends OneShotEffect {
 
-    public GutterGrimeEffect() {
+    GutterGrimeEffect() {
         super(Outcome.PutCreatureInPlay);
     }
 
-    public GutterGrimeEffect(final GutterGrimeEffect effect) {
+    private GutterGrimeEffect(final GutterGrimeEffect effect) {
         super(effect);
     }
 

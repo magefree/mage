@@ -23,7 +23,7 @@ public final class AbsorbVis extends CardImpl {
         this.getSpellAbility().addEffect(new LoseLifeTargetEffect(4));
         this.getSpellAbility().addEffect(new GainLifeEffect(4).setText("and you gain 4 life"));
         this.getSpellAbility().addTarget(new TargetPlayer());
-        this.addAbility(new BasicLandcyclingAbility(new ManaCostsImpl("{1}{B}")));
+        this.addAbility(new BasicLandcyclingAbility(new ManaCostsImpl<>("{1}{B}")));
     }
 
     private AbsorbVis(final AbsorbVis card) {

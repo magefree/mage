@@ -32,7 +32,7 @@ public final class Drought extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
 
         // At the beginning of your upkeep, sacrifice Drought unless you pay {W}{W}.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl("{W}{W}")), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{W}{W}")), TargetController.YOU, false));
 
         // Spells cost an additional "Sacrifice a Swamp" to cast for each black mana symbol in their mana costs.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DroughtAdditionalCostEffect(true)));
@@ -66,7 +66,7 @@ class DroughtAdditionalCostEffect extends CostModificationEffectImpl {
         this.appliesToSpells = appliesToSpells;
     }
 
-    DroughtAdditionalCostEffect(DroughtAdditionalCostEffect effect) {
+    private DroughtAdditionalCostEffect(final DroughtAdditionalCostEffect effect) {
         super(effect);
         appliesToSpells = effect.appliesToSpells;
     }
@@ -74,9 +74,7 @@ class DroughtAdditionalCostEffect extends CostModificationEffectImpl {
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
         int blackSymbols = abilityToModify.getManaCosts().getMana().getBlack();
-        TargetControlledPermanent target = new TargetControlledPermanent(blackSymbols, blackSymbols, filter, true);
-        target.setRequired(false);
-        abilityToModify.addCost(new SacrificeTargetCost(target));
+        abilityToModify.addCost(new SacrificeTargetCost(blackSymbols, filter));
         return true;
     }
 

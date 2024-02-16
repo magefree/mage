@@ -55,7 +55,7 @@ class TombfireEffect extends OneShotEffect {
         staticText = "Target player exiles all cards with flashback from their graveyard";
     }
 
-    public TombfireEffect(final TombfireEffect effect) {
+    private TombfireEffect(final TombfireEffect effect) {
         super(effect);
     }
 

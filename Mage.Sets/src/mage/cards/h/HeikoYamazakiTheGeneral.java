@@ -1,27 +1,26 @@
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksAloneControlledTriggeredAbility;
 import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
-import mage.constants.*;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.common.FilterArtifactCard;
+import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.target.common.TargetCardInYourGraveyard;
 
+import java.util.UUID;
+
 /**
- *
  * @author weirddan455
  */
 public final class HeikoYamazakiTheGeneral extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Samurai or Warrior you control");
-    private static final FilterArtifactCard filter2 = new FilterArtifactCard("artifact card from your graveyard");
 
     static {
         filter.add(Predicates.or(SubType.SAMURAI.getPredicate(), SubType.WARRIOR.getPredicate()));
@@ -30,7 +29,7 @@ public final class HeikoYamazakiTheGeneral extends CardImpl {
     public HeikoYamazakiTheGeneral(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SAMURAI);
         this.power = new MageInt(3);
@@ -45,7 +44,7 @@ public final class HeikoYamazakiTheGeneral extends CardImpl {
                         .setText("you may cast target artifact card from your graveyard this turn"),
                 filter, false, false
         );
-        ability.addTarget(new TargetCardInYourGraveyard(filter2));
+        ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_ARTIFACT_FROM_YOUR_GRAVEYARD));
         this.addAbility(ability);
     }
 

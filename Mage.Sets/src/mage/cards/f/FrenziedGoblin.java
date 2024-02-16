@@ -32,8 +32,8 @@ public final class FrenziedGoblin extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever Frenzied Goblin attacks, you may pay {R}. If you do, target creature can't block this turn.
-        Ability ability = new AttacksTriggeredAbility(new DoIfCostPaid(new CantBlockTargetEffect(Duration.EndOfTurn), new ManaCostsImpl("{R}")),false,
-                "Whenever {this} attacks you, may pay {R}. If you do, target creature can't block this turn.");
+        Ability ability = new AttacksTriggeredAbility(new DoIfCostPaid(new CantBlockTargetEffect(Duration.EndOfTurn), new ManaCostsImpl<>("{R}")),false,
+                "Whenever {this} attacks, you may pay {R}. If you do, target creature can't block this turn.");
         Target target = new TargetCreaturePermanent();
         ability.addTarget(target);
         this.addAbility(ability);

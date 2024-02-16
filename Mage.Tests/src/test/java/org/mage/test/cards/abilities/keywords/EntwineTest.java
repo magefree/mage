@@ -30,7 +30,6 @@ public class EntwineTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 20);
         assertPermanentCount(playerA, "Balduvian Bears", 0);
@@ -56,7 +55,6 @@ public class EntwineTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 20 - 3);
         assertPermanentCount(playerA, "Balduvian Bears", 0);
@@ -84,7 +82,6 @@ public class EntwineTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 20 - 3);
         assertPermanentCount(playerA, "Balduvian Bears", 0);
@@ -112,7 +109,6 @@ public class EntwineTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 20 - 3);
         assertPermanentCount(playerA, "Balduvian Bears", 0);
@@ -142,7 +138,6 @@ public class EntwineTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 20 - 3);
         assertPermanentCount(playerA, "Balduvian Bears", 0);
@@ -170,7 +165,6 @@ public class EntwineTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Silvercoat Lion", 1);
         assertPermanentCount(playerA, "Pillarfield Ox", 1);

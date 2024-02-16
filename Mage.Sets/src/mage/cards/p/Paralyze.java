@@ -34,7 +34,7 @@ public final class Paralyze extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
         // When Paralyze enters the battlefield, tap enchanted creature.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new TapEnchantedEffect()));
         // Enchanted creature doesn't untap during its controller's untap step.
@@ -55,11 +55,11 @@ public final class Paralyze extends CardImpl {
 
 class ParalyzeEffect extends DoIfCostPaid {
 
-    public ParalyzeEffect() {
-        super(new UntapEnchantedEffect(), new GenericManaCost(4));
+    ParalyzeEffect() {
+        super(new UntapAttachedEffect(), new GenericManaCost(4));
     }
 
-    public ParalyzeEffect(final ParalyzeEffect effect) {
+    private ParalyzeEffect(final ParalyzeEffect effect) {
         super(effect);
     }
 
@@ -82,6 +82,6 @@ class ParalyzeEffect extends DoIfCostPaid {
 
     @Override
     public String getText(Mode mode) {
-        return "that player may " + CardUtil.addCostVerb(cost.getText()) + ". If they do, " + executingEffects.getText(mode);
+        return "that player may " + CardUtil.addCostVerb(cost.getText()) + ". If the player does, untap the creature.";
     }
 }

@@ -32,8 +32,7 @@ public final class BorosCharm extends CardImpl {
                 IndestructibleAbility.getInstance(), Duration.EndOfTurn
         )));
         //or target creature gains double strike until end of turn.
-        Mode mode2 = new Mode();
-        mode2.addEffect(new GainAbilityTargetEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn));
+        Mode mode2 = new Mode(new GainAbilityTargetEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn));
         mode2.addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addMode(mode2);
     }

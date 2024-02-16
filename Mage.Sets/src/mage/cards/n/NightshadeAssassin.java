@@ -49,7 +49,7 @@ public final class NightshadeAssassin extends CardImpl {
         this.addAbility(ability);
 
         // Madness {1}{B}
-        this.addAbility(new MadnessAbility(this, new ManaCostsImpl("{1}{B}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl<>("{1}{B}")));
     }
 
     private NightshadeAssassin(final NightshadeAssassin card) {
@@ -64,12 +64,12 @@ public final class NightshadeAssassin extends CardImpl {
 
 class NightshadeAssassinEffect extends OneShotEffect {
 
-    public NightshadeAssassinEffect() {
+    NightshadeAssassinEffect() {
         super(Outcome.UnboostCreature);
         staticText = "you may reveal X black cards in your hand. If you do, target creature gets -X/-X until end of turn";
     }
 
-    public NightshadeAssassinEffect(final NightshadeAssassinEffect effect) {
+    private NightshadeAssassinEffect(final NightshadeAssassinEffect effect) {
         super(effect);
     }
 
@@ -87,16 +87,16 @@ class NightshadeAssassinEffect extends OneShotEffect {
         }
         FilterCard filter = new FilterCard();
         filter.add(new ColorPredicate(ObjectColor.BLACK));
-        int blackCards = controller.getHand().count(filter, source.getSourceId(), source.getControllerId(), game);
+        int blackCards = controller.getHand().count(filter, source.getControllerId(), source, game);
         int cardsToReveal = controller.getAmount(0, blackCards, "Reveal how many black cards?", game);
         game.informPlayers(controller.getLogName() + " chooses to reveal " + cardsToReveal + " black cards.");
         if (cardsToReveal > 0) {
             TargetCardInHand target = new TargetCardInHand(cardsToReveal, cardsToReveal, filter);
-            if (controller.choose(Outcome.Benefit, target, source.getSourceId(), game)) {
+            if (controller.choose(Outcome.Benefit, target, source, game)) {
                 controller.revealCards(sourceObject.getIdName(), new CardsImpl(target.getTargets()), game);
                 int unboost = target.getTargets().size() * -1;
                 ContinuousEffect effect = new BoostTargetEffect(unboost, unboost, Duration.EndOfTurn);
-                effect.setTargetPointer(getTargetPointer());
+                effect.setTargetPointer(this.getTargetPointer().copy());
                 game.addEffect(effect, source);
             }
         }

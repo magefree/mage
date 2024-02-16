@@ -1,4 +1,3 @@
-
 package mage.game.permanent.token;
 
 import mage.MageInt;
@@ -6,13 +5,12 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 
 /**
- *
  * @author L_J
  */
 public final class SheepToken extends TokenImpl {
 
     public SheepToken() {
-        super("Sheep", "0/1 green Sheep creature token");
+        super("Sheep Token", "0/1 green Sheep creature token");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add(SubType.SHEEP);
@@ -20,7 +18,7 @@ public final class SheepToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    public SheepToken(final SheepToken token) {
+    private SheepToken(final SheepToken token) {
         super(token);
     }
 

@@ -28,7 +28,7 @@ public final class LionheartMaverick extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         this.addAbility(VigilanceAbility.getInstance());
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 2, Duration.EndOfTurn), new ManaCostsImpl("{4}{W}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 2, Duration.EndOfTurn), new ManaCostsImpl<>("{4}{W}")));
     }
 
     private LionheartMaverick(final LionheartMaverick card) {

@@ -29,10 +29,10 @@ public class GlimpseOfNatureTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Benalish Knight", 1); // Creature {2}{W}
         addCard(Zone.BATTLEFIELD, playerB, "Plains", 3);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Glimpse of Nature");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Glimpse of Nature", true);
 
-        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Silvercoat Lion");
-        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Silvercoat Lion");
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Silvercoat Lion", true);
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Silvercoat Lion", true);
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Benalish Knight");
 
         setStopAt(1, PhaseStep.END_TURN);

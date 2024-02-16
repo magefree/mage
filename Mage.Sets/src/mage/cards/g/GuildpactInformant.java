@@ -1,7 +1,7 @@
 package mage.cards.g;
 
 import mage.MageInt;
-import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
+import mage.abilities.common.DealsCombatDamageToAPlayerOrPlaneswalkerTriggeredAbility;
 import mage.abilities.effects.common.counter.ProliferateEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -29,9 +29,7 @@ public final class GuildpactInformant extends CardImpl {
 
         // Whenever Guildpact Informant deals combat damage to a player or planeswalker,
         // proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)
-        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
-                new ProliferateEffect(), false
-        ).setOrPlaneswalker(true));
+        this.addAbility(new DealsCombatDamageToAPlayerOrPlaneswalkerTriggeredAbility(new ProliferateEffect(), false));
     }
 
     private GuildpactInformant(final GuildpactInformant card) {

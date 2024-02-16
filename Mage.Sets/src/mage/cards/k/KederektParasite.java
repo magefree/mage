@@ -59,7 +59,7 @@ class KederektParasiteTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(1, true, "opponent"), true);
     }
 
-    KederektParasiteTriggeredAbility(final KederektParasiteTriggeredAbility ability) {
+    private KederektParasiteTriggeredAbility(final KederektParasiteTriggeredAbility ability) {
         super(ability);
     }
 

@@ -5,8 +5,6 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author spjspj
  */
@@ -17,7 +15,7 @@ public final class DemonFlyingToken extends TokenImpl {
     }
 
     public DemonFlyingToken(int xValue) {
-        super("Demon", "X/X black Demon creature token with flying");
+        super("Demon Token", "X/X black Demon creature token with flying");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add(SubType.DEMON);
@@ -25,24 +23,13 @@ public final class DemonFlyingToken extends TokenImpl {
         toughness = new MageInt(xValue);
 
         addAbility(FlyingAbility.getInstance());
-
-        availableImageSetCodes = Arrays.asList("C14", "C21");
     }
 
-    public DemonFlyingToken(final DemonFlyingToken token) {
+    private DemonFlyingToken(final DemonFlyingToken token) {
         super(token);
     }
 
     public DemonFlyingToken copy() {
         return new DemonFlyingToken(this);
-    }
-
-    @Override
-    public void setExpansionSetCodeForImage(String code) {
-        super.setExpansionSetCodeForImage(code);
-
-        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("C14")) {
-            setTokenType(2);
-        }
     }
 }

@@ -79,13 +79,13 @@ class CultivatorDroneManaCondition extends ManaCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source, UUID originalId, Cost costToPay) {
-        if (source instanceof SpellAbility) {
-            MageObject object = game.getObject(source.getSourceId());
+        if (source instanceof SpellAbility && !source.isActivated()) {
+            MageObject object = game.getObject(source);
             if (object != null && object.getColor(game).isColorless()) {
                 return true;
             }
         }
-        if (source instanceof ActivatedAbility) {
+        if (source instanceof ActivatedAbility && !source.isActivated()) {
             Permanent object = game.getPermanentOrLKIBattlefield(source.getSourceId());
             if (object != null && object.getColor(game).isColorless()) {
                 return true;

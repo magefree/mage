@@ -15,6 +15,7 @@ import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.game.permanent.token.ThopterToken;
 import mage.target.common.TargetControlledPermanent;
@@ -32,7 +33,7 @@ public final class BreyaEtheriumShaper extends CardImpl {
     public BreyaEtheriumShaper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{W}{U}{B}{R}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
@@ -45,18 +46,16 @@ public final class BreyaEtheriumShaper extends CardImpl {
                 Zone.BATTLEFIELD,
                 new DamageTargetEffect(3),
                 new GenericManaCost(2));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(2, 2, new FilterControlledArtifactPermanent("artifacts"), true)));
+        ability.addCost(new SacrificeTargetCost(2, StaticFilters.FILTER_PERMANENT_ARTIFACTS));
         ability.addTarget(new TargetPlayerOrPlaneswalker());
 
         // Target creature gets -4/-4 until end of turn.
-        Mode mode = new Mode();
-        mode.addEffect(new BoostTargetEffect(-4, -4, Duration.EndOfTurn));
+        Mode mode = new Mode(new BoostTargetEffect(-4, -4, Duration.EndOfTurn));
         mode.addTarget(new TargetCreaturePermanent());
         ability.addMode(mode);
 
         // or You gain 5 life.
-        mode = new Mode();
-        mode.addEffect(new GainLifeEffect(5));
+        mode = new Mode(new GainLifeEffect(5));
         ability.addMode(mode);
         this.addAbility(ability);
     }

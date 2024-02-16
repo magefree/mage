@@ -31,7 +31,7 @@ public final class VolcanoImp extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // {1}{R}: Volcano Imp gains first strike until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{1}{R}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{1}{R}")));
 
     }
 

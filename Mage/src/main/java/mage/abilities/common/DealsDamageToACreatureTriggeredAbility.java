@@ -4,6 +4,7 @@ package mage.abilities.common;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.DamagedEvent;
@@ -16,12 +17,12 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class DealsDamageToACreatureTriggeredAbility extends TriggeredAbilityImpl {
 
-    private boolean combatOnly;
+    protected boolean combatOnly;
     private final boolean setTargetPointer;
     private FilterCreaturePermanent filter;
 
     public DealsDamageToACreatureTriggeredAbility(Effect effect, boolean combatOnly, boolean optional, boolean setTargetPointer) {
-        this(effect, combatOnly, optional, setTargetPointer, null);
+        this(effect, combatOnly, optional, setTargetPointer, StaticFilters.FILTER_PERMANENT_A_CREATURE);
     }
 
     public DealsDamageToACreatureTriggeredAbility(Effect effect, boolean combatOnly, boolean optional, boolean setTargetPointer, FilterCreaturePermanent filter) {
@@ -29,9 +30,10 @@ public class DealsDamageToACreatureTriggeredAbility extends TriggeredAbilityImpl
         this.combatOnly = combatOnly;
         this.filter = filter;
         this.setTargetPointer = setTargetPointer;
+        setTriggerPhrase("Whenever {this} deals " + (combatOnly ? "combat " : "") + "damage to " + filter.getMessage() + ", ");
     }
 
-    public DealsDamageToACreatureTriggeredAbility(final DealsDamageToACreatureTriggeredAbility ability) {
+    protected DealsDamageToACreatureTriggeredAbility(final DealsDamageToACreatureTriggeredAbility ability) {
         super(ability);
         this.setTargetPointer = ability.setTargetPointer;
         this.combatOnly = ability.combatOnly;
@@ -52,12 +54,12 @@ public class DealsDamageToACreatureTriggeredAbility extends TriggeredAbilityImpl
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getSourceId().equals(this.sourceId)
                 && (!combatOnly || ((DamagedEvent) event).isCombatDamage())) {
-            if (filter != null) {
-                Permanent creature = game.getPermanentOrLKIBattlefield(event.getTargetId());
-                if (!filter.match(creature, getSourceId(), getControllerId(), game)) {
-                    return false;
-                }
+
+            Permanent creature = game.getPermanentOrLKIBattlefield(event.getTargetId());
+            if (!filter.match(creature, getControllerId(), this, game)) {
+                return false;
             }
+
             if (setTargetPointer) {
                 this.getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
                 this.getEffects().setValue("damage", event.getAmount());
@@ -66,21 +68,4 @@ public class DealsDamageToACreatureTriggeredAbility extends TriggeredAbilityImpl
         }
         return false;
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        StringBuilder sb = new StringBuilder("Whenever {this} deals ");
-        if (combatOnly) {
-            sb.append("combat ");
-        }
-        sb.append("damage to ");
-        if (filter == null) {
-            sb.append("a creature, ");
-        } else {
-            sb.append(filter.getMessage());
-            sb.append(", ");
-        }
-        return sb.toString();
-    }
-
 }

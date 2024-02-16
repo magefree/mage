@@ -6,6 +6,7 @@ import mage.abilities.Mode;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.game.Game;
+import mage.target.targetpointer.TargetPointer;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -14,28 +15,28 @@ public class CreateDelayedTriggeredAbilityEffect extends OneShotEffect {
 
     protected DelayedTriggeredAbility ability;
     protected boolean copyTargets;
-    protected boolean initAbility;
+    protected String rulePrefix;
 
     public CreateDelayedTriggeredAbilityEffect(DelayedTriggeredAbility ability) {
         this(ability, true);
     }
 
     public CreateDelayedTriggeredAbilityEffect(DelayedTriggeredAbility ability, boolean copyTargets) {
-        this(ability, copyTargets, false);
+        this(ability, copyTargets, "");
     }
 
-    public CreateDelayedTriggeredAbilityEffect(DelayedTriggeredAbility ability, boolean copyTargets, boolean initAbility) {
+    public CreateDelayedTriggeredAbilityEffect(DelayedTriggeredAbility ability, boolean copyTargets, String rulePrefix) {
         super(ability.getEffects().getOutcome(ability));
         this.ability = ability;
         this.copyTargets = copyTargets;
-        this.initAbility = initAbility;
+        this.rulePrefix = rulePrefix;
     }
 
-    public CreateDelayedTriggeredAbilityEffect(final CreateDelayedTriggeredAbilityEffect effect) {
+    protected CreateDelayedTriggeredAbilityEffect(final CreateDelayedTriggeredAbilityEffect effect) {
         super(effect);
         this.ability = effect.ability.copy();
         this.copyTargets = effect.copyTargets;
-        this.initAbility = effect.initAbility;
+        this.rulePrefix = effect.rulePrefix;
     }
 
     @Override
@@ -48,16 +49,13 @@ public class CreateDelayedTriggeredAbilityEffect extends OneShotEffect {
         DelayedTriggeredAbility delayedAbility = ability.copy();
         if (this.copyTargets) {
             if (source.getTargets().isEmpty()) {
-                delayedAbility.getEffects().setTargetPointer(targetPointer);
+                delayedAbility.getEffects().setTargetPointer(this.getTargetPointer().copy());
             } else {
                 delayedAbility.getTargets().addAll(source.getTargets());
                 for (Effect effect : delayedAbility.getEffects()) {
                     effect.getTargetPointer().init(game, source);
                 }
             }
-        }
-        if (initAbility) {
-            delayedAbility.init(game);
         }
         game.addDelayedTriggeredAbility(delayedAbility, source);
         return true;
@@ -69,7 +67,7 @@ public class CreateDelayedTriggeredAbilityEffect extends OneShotEffect {
             return staticText;
         }
         if (ability.getRuleVisible()) {
-            return ability.getRule();
+            return rulePrefix + ability.getRule();
         } else {
             return "";
         }
@@ -79,5 +77,11 @@ public class CreateDelayedTriggeredAbilityEffect extends OneShotEffect {
     public void setValue(String key, Object value) {
         ability.getEffects().setValue(key, value);
         super.setValue(key, value);
+    }
+
+    @Override
+    public Effect setTargetPointer(TargetPointer targetPointer) {
+        ability.getEffects().setTargetPointer(targetPointer);
+        return super.setTargetPointer(targetPointer);
     }
 }

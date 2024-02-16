@@ -37,7 +37,7 @@ public final class WritOfPassage extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Whenever enchanted creature attacks, if its power is 2 or less, it's unblockable this turn.
@@ -48,7 +48,7 @@ public final class WritOfPassage extends CardImpl {
                 new AttachedToMatchesFilterCondition(filter), "Whenever enchanted creature attacks, if its power is 2 or less, it can't be blocked this turn.");
         this.addAbility(ability);
         // Forecast - {1}{U}, Reveal Writ of Passage from your hand: Target creature with power 2 or less is unblockable this turn.
-        ForecastAbility ability2 = new ForecastAbility(new CantBeBlockedTargetEffect(), new ManaCostsImpl("{1}{U}"));
+        ForecastAbility ability2 = new ForecastAbility(new CantBeBlockedTargetEffect(), new ManaCostsImpl<>("{1}{U}"));
         FilterCreaturePermanent filter2 = new FilterCreaturePermanent("creature with power 2 or less");
         filter2.add(new PowerPredicate(ComparisonType.FEWER_THAN, 3));
         ability2.addTarget(new TargetCreaturePermanent(filter2));
@@ -67,12 +67,12 @@ public final class WritOfPassage extends CardImpl {
 
 class WritOfPassageAttachedEffect extends RestrictionEffect {
 
-    public WritOfPassageAttachedEffect(AttachmentType attachmentType) {
+    WritOfPassageAttachedEffect(AttachmentType attachmentType) {
         super(Duration.EndOfTurn);
         this.staticText = attachmentType.verb() + " creature can't be blocked";
     }
 
-    public WritOfPassageAttachedEffect(WritOfPassageAttachedEffect effect) {
+    private WritOfPassageAttachedEffect(final WritOfPassageAttachedEffect effect) {
         super(effect);
     }
 

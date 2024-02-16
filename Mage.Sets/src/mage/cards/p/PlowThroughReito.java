@@ -1,8 +1,6 @@
-
 package mage.cards.p;
 
 import java.util.UUID;
-import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.SweepNumber;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.keyword.SweepEffect;
@@ -25,8 +23,7 @@ public final class PlowThroughReito extends CardImpl {
 
         // Sweep - Return any number of Plains you control to their owner's hand. Target creature gets +1/+1 until end of turn for each Plains returned this way.
         this.getSpellAbility().addEffect(new SweepEffect(SubType.PLAINS));
-        DynamicValue sweepValue = new SweepNumber("Plains");
-        this.getSpellAbility().addEffect(new BoostTargetEffect(sweepValue, sweepValue, Duration.EndOfTurn, true));
+        this.getSpellAbility().addEffect(new BoostTargetEffect(SweepNumber.PLAINS, SweepNumber.PLAINS, Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 

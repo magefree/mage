@@ -11,17 +11,15 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ChoosePlayerEffect;
 import mage.abilities.effects.common.MillCardsTargetEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
@@ -41,7 +39,7 @@ public final class SewerNemesis extends CardImpl {
         // As Sewer Nemesis enters the battlefield, choose a player.
         this.addAbility(new AsEntersBattlefieldAbility(new ChoosePlayerEffect(Outcome.Detriment)));
         // Sewer Nemesis's power and toughness are each equal to the number of cards in the chosen player's graveyard.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new CardsInTargetOpponentsGraveyardCount(), Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(new CardsInTargetOpponentsGraveyardCount())));
         // Whenever the chosen player casts a spell, that player puts the top card of their library into their graveyard.
         this.addAbility(new SewerNemesisTriggeredAbility());
 
@@ -93,7 +91,7 @@ class SewerNemesisTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new MillCardsTargetEffect(1), false);
     }
 
-    public SewerNemesisTriggeredAbility(final SewerNemesisTriggeredAbility ability) {
+    private SewerNemesisTriggeredAbility(final SewerNemesisTriggeredAbility ability) {
         super(ability);
     }
 

@@ -24,7 +24,7 @@ public final class Controvert extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell());
         
         // Recover {2}{U}{U}
-        this.addAbility(new RecoverAbility(new ManaCostsImpl("{2}{U}{U}"), this));
+        this.addAbility(new RecoverAbility(new ManaCostsImpl<>("{2}{U}{U}"), this));
     }
 
     private Controvert(final Controvert card) {

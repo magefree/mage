@@ -28,7 +28,7 @@ public final class WormholeSerpent extends CardImpl {
 
         // {3}{U}: Target creature can't be blocked this turn.
         Ability ability = new SimpleActivatedAbility(
-                new CantBeBlockedTargetEffect(Duration.EndOfTurn), new ManaCostsImpl("{3}{U}")
+                new CantBeBlockedTargetEffect(Duration.EndOfTurn), new ManaCostsImpl<>("{3}{U}")
         );
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

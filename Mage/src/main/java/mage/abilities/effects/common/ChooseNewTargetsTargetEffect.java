@@ -31,7 +31,7 @@ public class ChooseNewTargetsTargetEffect extends OneShotEffect {
         this.onlyOneTarget = onlyOneTarget;
     }
 
-    public ChooseNewTargetsTargetEffect(final ChooseNewTargetsTargetEffect effect) {
+    protected ChooseNewTargetsTargetEffect(final ChooseNewTargetsTargetEffect effect) {
         super(effect);
         this.forceChange = effect.forceChange;
         this.onlyOneTarget = effect.onlyOneTarget;
@@ -58,11 +58,11 @@ public class ChooseNewTargetsTargetEffect extends OneShotEffect {
         }
         StringBuilder sb = new StringBuilder();
         if (forceChange) {
-            sb.append("change the target of target ");
+            sb.append("change the target of ");
         } else {
-            sb.append("you may choose new targets for target ");
+            sb.append("you may choose new targets for ");
         }
-        sb.append(mode.getTargets().get(0).getTargetName());
+        sb.append(getTargetPointer().describeTargets(mode.getTargets(), "it"));
         return sb.toString();
     }
 }

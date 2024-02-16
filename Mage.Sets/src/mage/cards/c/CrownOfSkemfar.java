@@ -42,7 +42,7 @@ public final class CrownOfSkemfar extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Enchanted creature gets +1/+1 for each Elf you control and has reach.
@@ -56,7 +56,7 @@ public final class CrownOfSkemfar extends CardImpl {
 
         // {2}{G}: Return Bounty of Skemfar from your graveyard to your hand.
         this.addAbility(new SimpleActivatedAbility(
-                Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), new ManaCostsImpl("{2}{G}")
+                Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), new ManaCostsImpl<>("{2}{G}")
         ));
     }
 

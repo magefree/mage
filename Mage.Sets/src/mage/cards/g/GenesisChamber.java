@@ -3,7 +3,7 @@ package mage.cards.g;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
-import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.SourceTappedCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -12,8 +12,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.TokenPredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.MyrToken;
@@ -25,19 +24,13 @@ import java.util.UUID;
  */
 public final class GenesisChamber extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nontoken creature");
-
-    static {
-        filter.add(TokenPredicate.FALSE);
-    }
-
     public GenesisChamber(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
         // Whenever a nontoken creature enters the battlefield, if Genesis Chamber is untapped, that creature's controller creates a 1/1 colorless Myr artifact creature token.
-        TriggeredAbility ability = new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new GenesisChamberEffect(), filter, false, SetTargetPointer.PERMANENT, "");
+        TriggeredAbility ability = new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new GenesisChamberEffect(), StaticFilters.FILTER_CREATURE_NON_TOKEN, false, SetTargetPointer.PERMANENT);
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability,
-                SourceUntappedCondition.instance,
+                SourceTappedCondition.UNTAPPED,
                 "Whenever a nontoken creature enters the battlefield, "
                         + "if {this} is untapped, "
                         + "that creature's controller creates a 1/1 colorless Myr artifact creature token"));
@@ -53,33 +46,14 @@ public final class GenesisChamber extends CardImpl {
     }
 }
 
-enum SourceUntappedCondition implements Condition {
-
-    instance;
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        if (permanent != null) {
-            return !permanent.isTapped();
-        }
-        return false;
-    }
-
-    @Override
-    public String toString() {
-        return "if {this} is untapped";
-    }
-}
-
 class GenesisChamberEffect extends OneShotEffect {
 
-    public GenesisChamberEffect() {
+    GenesisChamberEffect() {
         super(Outcome.Benefit);
         this.staticText = "that creature's controller creates a 1/1 colorless Myr artifact creature token";
     }
 
-    public GenesisChamberEffect(final GenesisChamberEffect effect) {
+    private GenesisChamberEffect(final GenesisChamberEffect effect) {
         super(effect);
     }
 

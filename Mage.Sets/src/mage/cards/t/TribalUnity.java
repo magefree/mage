@@ -52,14 +52,14 @@ class TribalUnityEffect extends OneShotEffect {
         this.amount = amount;
     }
 
-    public TribalUnityEffect(final TribalUnityEffect effect) {
+    private TribalUnityEffect(final TribalUnityEffect effect) {
         super(effect);
         this.amount = effect.amount;
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (sourceObject == null) {
             return false;
         }

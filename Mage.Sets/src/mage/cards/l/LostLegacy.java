@@ -44,9 +44,10 @@ class LostLegacyEffect extends SearchTargetGraveyardHandLibraryForCardNameAndExi
 
     LostLegacyEffect() {
         super(true, "target player's", "any number of cards with that name");
+        this.staticText = "Search target player's graveyard, hand, and library for any number of cards with that name and exile them. That player shuffles, then draws a card for each card exiled from their hand this way";
     }
 
-    LostLegacyEffect(final LostLegacyEffect effect) {
+    private LostLegacyEffect(final LostLegacyEffect effect) {
         super(effect);
     }
 
@@ -71,10 +72,5 @@ class LostLegacyEffect extends SearchTargetGraveyardHandLibraryForCardNameAndExi
     @Override
     public LostLegacyEffect copy() {
         return new LostLegacyEffect(this);
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return "Search target player's graveyard, hand, and library for any number of cards with that name and exile them. That player shuffles, then draws a card for each card exiled from their hand this way";
     }
 }

@@ -30,15 +30,15 @@ public final class NettlingCurse extends CardImpl {
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Whenever enchanted creature attacks or blocks, its controller loses 3 life.
         this.addAbility(new AttacksOrBlocksAttachedTriggeredAbility(new LoseLifeControllerAttachedEffect(3), AttachmentType.AURA));
 
         // {1}{R}: Enchanted creature attacks this turn if able.
-        this.addAbility(new SimpleActivatedAbility(new AttacksIfAbleAttachedEffect(Duration.EndOfTurn, AttachmentType.AURA).setText("Enchanted creature attacks this turn if able."), new ManaCostsImpl("{1}{R}")));
+        this.addAbility(new SimpleActivatedAbility(new AttacksIfAbleAttachedEffect(Duration.EndOfTurn, AttachmentType.AURA).setText("Enchanted creature attacks this turn if able."), new ManaCostsImpl<>("{1}{R}")));
     }
 
     private NettlingCurse(final NettlingCurse card) {

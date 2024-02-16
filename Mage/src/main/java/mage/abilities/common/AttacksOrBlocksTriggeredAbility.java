@@ -9,18 +9,18 @@ import mage.game.events.GameEvent;
 
 public class AttacksOrBlocksTriggeredAbility extends TriggeredAbilityImpl {
 
-    protected String startText = "Whenever";
-
     public AttacksOrBlocksTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
         if (effect instanceof CreateDelayedTriggeredAbilityEffect) {
-            startText = "When";
+            setTriggerPhrase("When {this} attacks or blocks, ");
+        } else {
+            setTriggerPhrase("Whenever {this} attacks or blocks, ");
         }
+        this.replaceRuleText = true; // default true to replace "{this}" with "it"
     }
 
-    public AttacksOrBlocksTriggeredAbility(final AttacksOrBlocksTriggeredAbility ability) {
+    protected AttacksOrBlocksTriggeredAbility(final AttacksOrBlocksTriggeredAbility ability) {
         super(ability);
-        this.startText = ability.startText;
     }
 
     @Override
@@ -29,17 +29,12 @@ public class AttacksOrBlocksTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return startText + " {this} attacks or blocks, " ;
-    }
-
-    @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ATTACKER_DECLARED || event.getType() == GameEvent.EventType.BLOCKER_DECLARED;
+        return event.getType() == GameEvent.EventType.ATTACKER_DECLARED || event.getType() == GameEvent.EventType.CREATURE_BLOCKS;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getSourceId().equals(this.getSourceId());
+        return getSourceId().equals((event.getType() == GameEvent.EventType.ATTACKER_DECLARED) ? event.getSourceId() : event.getTargetId());
     }
 }

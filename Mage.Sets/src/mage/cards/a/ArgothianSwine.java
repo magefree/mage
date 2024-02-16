@@ -25,7 +25,7 @@ public final class ArgothianSwine extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
     }
 
-    public ArgothianSwine (final ArgothianSwine card) {
+    private ArgothianSwine(final ArgothianSwine card) {
         super(card);
     }
 

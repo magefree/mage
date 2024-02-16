@@ -26,7 +26,7 @@ public final class KentaroTheSmilingCat extends CardImpl {
 
     public KentaroTheSmilingCat(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SAMURAI);
 
@@ -68,7 +68,7 @@ class KentaroTheSmilingCatCastingEffect extends ContinuousEffectImpl {
         staticText = "You may pay {X} rather than pay the mana cost for Samurai spells you cast, where X is that spell's mana value";
     }
     
-    public KentaroTheSmilingCatCastingEffect(final KentaroTheSmilingCatCastingEffect effect) {
+    private KentaroTheSmilingCatCastingEffect(final KentaroTheSmilingCatCastingEffect effect) {
         super(effect);
     }
 

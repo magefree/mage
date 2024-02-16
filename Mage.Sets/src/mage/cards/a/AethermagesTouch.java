@@ -43,12 +43,12 @@ public final class AethermagesTouch extends CardImpl {
 
 class AethermagesTouchEffect extends OneShotEffect {
 
-    public AethermagesTouchEffect() {
+    AethermagesTouchEffect() {
         super(Outcome.PutCardInPlay);
         this.staticText = "Reveal the top four cards of your library. You may put a creature card from among them onto the battlefield. It gains \"At the beginning of your end step, return this creature to its owner's hand.\" Then put the rest of the cards revealed this way on the bottom of your library in any order";
     }
 
-    public AethermagesTouchEffect(final AethermagesTouchEffect effect) {
+    private AethermagesTouchEffect(final AethermagesTouchEffect effect) {
         super(effect);
     }
 
@@ -60,14 +60,14 @@ class AethermagesTouchEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (controller != null && sourceObject != null) {
             Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, 4));
             if (!cards.isEmpty()) {
                 FilterCreatureCard filter = new FilterCreatureCard("a creature card to put onto the battlefield");
                 controller.revealCards(sourceObject.getIdName(), cards, game);
                 TargetCard target = new TargetCard(Zone.LIBRARY, filter);
-                if (cards.count(filter, game) > 0 && controller.choose(outcome, cards, target, game)) {
+                if (cards.count(filter, game) > 0 && controller.choose(outcome, cards, target, source, game)) {
                     Card card = game.getCard(target.getFirstTarget());
                     if (card != null) {
                         cards.remove(card);

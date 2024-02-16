@@ -56,7 +56,7 @@ public final class DivineIntervention extends CardImpl {
             super(Zone.BATTLEFIELD, new DivineAbilityEffect2(), false);
         }
 
-        public DivineInterventionAbility(final DivineInterventionAbility ability) {
+        private DivineInterventionAbility(final DivineInterventionAbility ability) {
             super(ability);
         }
 
@@ -91,7 +91,7 @@ public final class DivineIntervention extends CardImpl {
             this.staticText = "you draw the game";
         }
 
-        public DivineAbilityEffect2(final DivineAbilityEffect2 effect) {
+        private DivineAbilityEffect2(final DivineAbilityEffect2 effect) {
             super(effect);
         }
 

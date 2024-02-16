@@ -80,6 +80,7 @@ public final class Visions extends ExpansionSet {
         cards.add(new SetCardInfo("Griffin Canyon", 163, Rarity.RARE, mage.cards.g.GriffinCanyon.class));
         cards.add(new SetCardInfo("Guiding Spirit", 131, Rarity.RARE, mage.cards.g.GuidingSpirit.class));
         cards.add(new SetCardInfo("Hearth Charm", 82, Rarity.COMMON, mage.cards.h.HearthCharm.class));
+        cards.add(new SetCardInfo("Heat Wave", 83, Rarity.UNCOMMON, mage.cards.h.HeatWave.class));
         cards.add(new SetCardInfo("Helm of Awakening", 145, Rarity.UNCOMMON, mage.cards.h.HelmOfAwakening.class));
         cards.add(new SetCardInfo("Honorable Passage", 7, Rarity.UNCOMMON, mage.cards.h.HonorablePassage.class));
         cards.add(new SetCardInfo("Hope Charm", 8, Rarity.COMMON, mage.cards.h.HopeCharm.class));
@@ -100,13 +101,14 @@ public final class Visions extends ExpansionSet {
         cards.add(new SetCardInfo("Knight of the Mists", 36, Rarity.COMMON, mage.cards.k.KnightOfTheMists.class));
         cards.add(new SetCardInfo("Knight of Valor", 11, Rarity.COMMON, mage.cards.k.KnightOfValor.class));
         cards.add(new SetCardInfo("Kookus", 86, Rarity.RARE, mage.cards.k.Kookus.class));
-        cards.add(new SetCardInfo("Kyscu Drake", 111, Rarity.RARE, mage.cards.k.KyscuDrake.class));
+        cards.add(new SetCardInfo("Kyscu Drake", 111, Rarity.UNCOMMON, mage.cards.k.KyscuDrake.class));
         cards.add(new SetCardInfo("Lead-Belly Chimera", 148, Rarity.UNCOMMON, mage.cards.l.LeadBellyChimera.class));
         cards.add(new SetCardInfo("Lichenthrope", 112, Rarity.RARE, mage.cards.l.Lichenthrope.class));
         cards.add(new SetCardInfo("Lightning Cloud", 87, Rarity.RARE, mage.cards.l.LightningCloud.class));
         cards.add(new SetCardInfo("Longbow Archer", 12, Rarity.UNCOMMON, mage.cards.l.LongbowArcher.class));
         cards.add(new SetCardInfo("Magma Mine", 149, Rarity.UNCOMMON, mage.cards.m.MagmaMine.class));
         cards.add(new SetCardInfo("Man-o'-War", 37, Rarity.COMMON, mage.cards.m.ManOWar.class));
+        cards.add(new SetCardInfo("Matopi Golem", 150, Rarity.UNCOMMON, mage.cards.m.MatopiGolem.class));
         cards.add(new SetCardInfo("Miraculous Recovery", 13, Rarity.UNCOMMON, mage.cards.m.MiraculousRecovery.class));
         cards.add(new SetCardInfo("Mob Mentality", 88, Rarity.UNCOMMON, mage.cards.m.MobMentality.class));
         cards.add(new SetCardInfo("Mortal Wound", 113, Rarity.COMMON, mage.cards.m.MortalWound.class));

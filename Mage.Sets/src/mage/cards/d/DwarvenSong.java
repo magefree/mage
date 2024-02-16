@@ -19,9 +19,8 @@ public final class DwarvenSong extends CardImpl {
     public DwarvenSong(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{R}");
 
-        // Any number of target creatures become red until end of turn.
+        // One or more target creatures become red until end of turn.
         Effect effect = new BecomesColorTargetEffect(ObjectColor.RED, Duration.EndOfTurn);
-        effect.setText("One or more target creatures become red until end of turn");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(1, Integer.MAX_VALUE));
     }

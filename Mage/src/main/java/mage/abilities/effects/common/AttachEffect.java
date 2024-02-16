@@ -26,7 +26,7 @@ public class AttachEffect extends OneShotEffect {
         staticText = rule;
     }
 
-    public AttachEffect(final AttachEffect effect) {
+    protected AttachEffect(final AttachEffect effect) {
         super(effect);
     }
 

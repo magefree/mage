@@ -33,13 +33,13 @@ public final class MercadianLift extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
         // {1}, {tap}: Put a winch counter on Mercadian Lift.
-        Ability ability = new SimpleActivatedAbility(new AddCountersSourceEffect(CounterType.WINCH.createInstance()), new ManaCostsImpl("{1}"));
+        Ability ability = new SimpleActivatedAbility(new AddCountersSourceEffect(CounterType.WINCH.createInstance()), new ManaCostsImpl<>("{1}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 
         // {tap}, Remove X winch counters from Mercadian Lift: You may put a creature card with converted mana cost X from your hand onto the battlefield.
         Ability ability2 = new SimpleActivatedAbility(new MercadianLiftEffect(), new TapSourceCost());
-        ability2.addCost(new RemoveVariableCountersSourceCost(CounterType.WINCH.createInstance(1)));
+        ability2.addCost(new RemoveVariableCountersSourceCost(CounterType.WINCH));
         this.addAbility(ability2);
 
     }
@@ -56,12 +56,12 @@ public final class MercadianLift extends CardImpl {
 
 class MercadianLiftEffect extends OneShotEffect {
 
-    public MercadianLiftEffect() {
+    MercadianLiftEffect() {
         super(Outcome.PutCardInPlay);
         staticText = "You may put a creature card with mana value X from your hand onto the battlefield";
     }
 
-    public MercadianLiftEffect(final MercadianLiftEffect effect) {
+    private MercadianLiftEffect(final MercadianLiftEffect effect) {
         super(effect);
     }
 
@@ -80,14 +80,13 @@ class MercadianLiftEffect extends OneShotEffect {
                     numberOfCounters = ((RemoveVariableCountersSourceCost) cost).getAmount();
                 }
             }
-            System.out.println("The number is " + numberOfCounters);
             FilterCreatureCard filter = new FilterCreatureCard();
             filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, numberOfCounters));
             filter.setMessage("creature card with mana value " + numberOfCounters);
             TargetCardInHand target = new TargetCardInHand(filter);
-            if (target.canChoose(source.getSourceId(), controller.getId(), game)
+            if (target.canChoose(controller.getId(), source, game)
                     && controller.chooseUse(Outcome.PutCardInPlay, "Put " + filter.getMessage() + " from your hand onto the battlefield?", source, game)
-                    && controller.choose(Outcome.PutCardInPlay, target, source.getSourceId(), game)) {
+                    && controller.choose(Outcome.PutCardInPlay, target, source, game)) {
                 target.setRequired(false);
                 Card card = game.getCard(target.getFirstTarget());
                 if (card != null) {

@@ -25,7 +25,7 @@ public final class RalCallerOfStorms extends CardImpl {
     public RalCallerOfStorms(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{U}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.RAL);
         this.setStartingLoyalty(4);
 

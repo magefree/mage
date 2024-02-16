@@ -1,19 +1,17 @@
-
 package mage.game.permanent.token;
 
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.keyword.TrampleAbility;
+import mage.constants.CardType;
 import mage.constants.SubType;
 
 /**
- *
  * @author TheElk801
  */
 public final class DinosaurToken extends TokenImpl {
 
     public DinosaurToken() {
-        super("Dinosaur", "3/3 green Dinosaur creature token with trample");
+        super("Dinosaur Token", "3/3 green Dinosaur creature token with trample");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add(SubType.DINOSAUR);
@@ -22,7 +20,7 @@ public final class DinosaurToken extends TokenImpl {
         addAbility(TrampleAbility.getInstance());
     }
 
-    public DinosaurToken(final DinosaurToken token) {
+    private DinosaurToken(final DinosaurToken token) {
         super(token);
     }
 

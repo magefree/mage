@@ -1,10 +1,9 @@
-
 package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
-import mage.abilities.common.BlocksOrBecomesBlockedSourceTriggeredAbility;
+import mage.abilities.common.BlocksOrBlockedByCreatureSourceTriggeredAbility;
 import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
@@ -39,7 +38,7 @@ public final class Abomination extends CardImpl {
         // Whenever Abomination blocks or becomes blocked by a green or white creature, destroy that creature at end of combat.
         Effect effect = new CreateDelayedTriggeredAbilityEffect(new AtTheEndOfCombatDelayedTriggeredAbility(new DestroyTargetEffect()), true);
         effect.setText("destroy that creature at end of combat");
-        this.addAbility(new BlocksOrBecomesBlockedSourceTriggeredAbility(effect, filter, false));
+        this.addAbility(new BlocksOrBlockedByCreatureSourceTriggeredAbility(effect, filter));
     }
 
     private Abomination(final Abomination card) {

@@ -51,12 +51,12 @@ public final class AetherVial extends CardImpl {
 
 class AetherVialEffect extends OneShotEffect {
 
-    public AetherVialEffect() {
+    AetherVialEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "You may put a creature card with mana value equal to the number of charge counters on {this} from your hand onto the battlefield";
     }
 
-    public AetherVialEffect(final AetherVialEffect effect) {
+    private AetherVialEffect(final AetherVialEffect effect) {
         super(effect);
     }
 
@@ -90,7 +90,7 @@ class AetherVialEffect extends OneShotEffect {
         }
 
         TargetCardInHand target = new TargetCardInHand(filter);
-        if (controller.choose(this.outcome, target, source.getSourceId(), game)) {
+        if (controller.choose(this.outcome, target, source, game)) {
             Card card = game.getCard(target.getFirstTarget());
             if (card != null) {
                 return controller.moveCards(card, Zone.BATTLEFIELD, source, game);

@@ -1,19 +1,19 @@
 
 
 package mage.game.permanent.token;
+
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.MountainwalkAbility;
 
 /**
- *
  * @author spjspj
  */
 public final class GoblinScoutsToken extends TokenImpl {
 
     public GoblinScoutsToken() {
-        super("Goblin Scout", "1/1 red Goblin Scout creature tokens with mountainwalk");
+        super("Goblin Scout Token", "1/1 red Goblin Scout creature tokens with mountainwalk");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
         subtype.add(SubType.GOBLIN);
@@ -24,7 +24,7 @@ public final class GoblinScoutsToken extends TokenImpl {
         this.addAbility(new MountainwalkAbility());
     }
 
-    public GoblinScoutsToken(final GoblinScoutsToken token) {
+    private GoblinScoutsToken(final GoblinScoutsToken token) {
         super(token);
     }
 

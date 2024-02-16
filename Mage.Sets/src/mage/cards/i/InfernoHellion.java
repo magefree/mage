@@ -45,7 +45,6 @@ public final class InfernoHellion extends CardImpl {
                 + "if {this} attacked or blocked this turn, "
                 + "its owner shuffles it into their library."
         );
-        ability.addWatcher(new AttackedThisTurnWatcher());
         ability.addWatcher(new BlockedThisTurnWatcher());
         this.addAbility(ability);
     }

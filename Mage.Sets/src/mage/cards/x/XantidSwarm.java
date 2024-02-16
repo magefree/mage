@@ -55,9 +55,10 @@ class XantidSwarmTriggeredAbility extends TriggeredAbilityImpl {
 
     public XantidSwarmTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect);
+        setTriggerPhrase("Whenever {this} attacks, ");
     }
 
-    public XantidSwarmTriggeredAbility(final XantidSwarmTriggeredAbility ability) {
+    private XantidSwarmTriggeredAbility(final XantidSwarmTriggeredAbility ability) {
         super(ability);
     }
 
@@ -73,39 +74,29 @@ class XantidSwarmTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getSourceId().equals(this.getSourceId())) {
-            UUID defender = game.getCombat().getDefendingPlayerId(this.getSourceId(), game);
-            this.getEffects().get(0).setTargetPointer(new FixedTarget(defender));
-            return true;
+        if (!event.getSourceId().equals(this.getSourceId())) {
+            return false;
         }
-        return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} attacks, " ;
+        UUID defender = game.getCombat().getDefendingPlayerId(this.getSourceId(), game);
+        this.getEffects().get(0).setTargetPointer(new FixedTarget(defender));
+        return true;
     }
 }
 
 class XantidSwarmReplacementEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public XantidSwarmReplacementEffect() {
+    XantidSwarmReplacementEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit);
         staticText = "defending player can't cast spells this turn";
     }
 
-    public XantidSwarmReplacementEffect(final XantidSwarmReplacementEffect effect) {
+    private XantidSwarmReplacementEffect(final XantidSwarmReplacementEffect effect) {
         super(effect);
     }
 
     @Override
     public XantidSwarmReplacementEffect copy() {
         return new XantidSwarmReplacementEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override
@@ -116,9 +107,6 @@ class XantidSwarmReplacementEffect extends ContinuousRuleModifyingEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
-        if (player != null && player.getId().equals(event.getPlayerId())) {
-            return true;
-        }
-        return false;
+        return player != null && player.getId().equals(event.getPlayerId());
     }
 }

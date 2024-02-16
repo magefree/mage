@@ -9,7 +9,7 @@ import mage.abilities.effects.common.TapSourceUnlessPaysEffect;
 import mage.abilities.mana.BlackManaAbility;
 import mage.cards.Card;
 import mage.cards.CardSetInfo;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 /**
  * @author JayDi85
  */
-public final class AgadeemsAwakening extends ModalDoubleFacesCard {
+public final class AgadeemsAwakening extends ModalDoubleFacedCard {
 
     public AgadeemsAwakening(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo,
@@ -100,8 +100,8 @@ class AgadeemsAwakeningTarget extends TargetCardInYourGraveyard {
     }
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
-        Set<UUID> possibleTargets = super.possibleTargets(sourceId, sourceControllerId, game);
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
+        Set<UUID> possibleTargets = super.possibleTargets(sourceControllerId, source, game);
         Set<Integer> cmcs = this.getTargets()
                 .stream()
                 .map(game::getCard)

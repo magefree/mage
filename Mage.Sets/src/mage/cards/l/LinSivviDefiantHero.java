@@ -39,7 +39,7 @@ public final class LinSivviDefiantHero extends CardImpl {
 
     public LinSivviDefiantHero(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.REBEL);
         this.power = new MageInt(1);
@@ -48,7 +48,7 @@ public final class LinSivviDefiantHero extends CardImpl {
         // {X}, {tap}: Search your library for a Rebel permanent card with converted mana cost X or less and put it onto the battlefield. Then shuffle your library.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new LinSivviDefiantHeroEffect(),
-                new ManaCostsImpl("{X}"));
+                new ManaCostsImpl<>("{X}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 
@@ -70,12 +70,12 @@ public final class LinSivviDefiantHero extends CardImpl {
 
 class LinSivviDefiantHeroEffect extends OneShotEffect {
 
-    public LinSivviDefiantHeroEffect() {
+    LinSivviDefiantHeroEffect() {
         super(Outcome.DrawCard);
         this.staticText = "Search your library for a Rebel permanent card with mana value X or less, put it onto the battlefield, then shuffle";
     }
 
-    public LinSivviDefiantHeroEffect(final LinSivviDefiantHeroEffect effect) {
+    private LinSivviDefiantHeroEffect(final LinSivviDefiantHeroEffect effect) {
         super(effect);
     }
 

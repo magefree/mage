@@ -35,7 +35,7 @@ public final class DroningBureaucrats extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {X}, {tap}: Each creature with converted mana cost X can't attack or block this turn.
-        Ability ability = new SimpleActivatedAbility(new DroningBureaucratsEffect(), new ManaCostsImpl("{X}"));
+        Ability ability = new SimpleActivatedAbility(new DroningBureaucratsEffect(), new ManaCostsImpl<>("{X}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
@@ -57,7 +57,7 @@ class DroningBureaucratsEffect extends OneShotEffect {
         this.staticText = "Each creature with mana value X can't attack or block this turn";
     }
 
-    DroningBureaucratsEffect(final DroningBureaucratsEffect effect) {
+    private DroningBureaucratsEffect(final DroningBureaucratsEffect effect) {
         super(effect);
     }
 

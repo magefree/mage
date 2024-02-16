@@ -29,7 +29,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class ConsecratedByBlood extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("two other creatures");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("other creatures");
 
     static {
         filter.add(AnotherPredicate.instance);
@@ -43,7 +43,7 @@ public final class ConsecratedByBlood extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Benefit));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // Enchanted creature gets +2/+2 and has flying and "Sacrifice two other creatures: Regenerate this creature."
         ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield));
@@ -51,7 +51,7 @@ public final class ConsecratedByBlood extends CardImpl {
         effect.setText("and has flying");
         ability.addEffect(effect);
         effect = new GainAbilityAttachedEffect(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(),
-           new SacrificeTargetCost(new TargetControlledCreaturePermanent(2, 2, filter, true))), AttachmentType.AURA);
+           new SacrificeTargetCost(2, filter)), AttachmentType.AURA);
         effect.setText("and \"Sacrifice two other creatures: Regenerate this creature.\"");
         ability.addEffect(effect);
         this.addAbility(ability);

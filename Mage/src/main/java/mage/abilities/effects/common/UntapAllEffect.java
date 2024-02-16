@@ -18,18 +18,22 @@ public class UntapAllEffect extends OneShotEffect {
 
     public UntapAllEffect(FilterPermanent filter) {
         super(Outcome.Untap);
-        staticText = "untap all " + filter.getMessage();
+        if (filter.getMessage().startsWith("each")) {
+            staticText = "untap " + filter.getMessage();
+        } else {
+            staticText = "untap all " + filter.getMessage();
+        }
         this.filter = filter;
     }
 
-    public UntapAllEffect(final UntapAllEffect effect) {
+    protected UntapAllEffect(final UntapAllEffect effect) {
         super(effect);
         this.filter = effect.filter;
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
             permanent.untap(game);
         }
         return true;

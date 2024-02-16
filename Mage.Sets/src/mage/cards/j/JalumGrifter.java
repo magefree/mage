@@ -39,13 +39,13 @@ public final class JalumGrifter extends CardImpl {
 
     public JalumGrifter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DEVIL);
         this.power = new MageInt(3);
         this.toughness = new MageInt(5);
 
         // {1}{R}, {T}: Shuffle Jalum Grifter and two lands you control face down. Target opponent chooses one of those cards. Turn the cards face up. If they chose Jalum Grifter, sacrifice it. Otherwise, destroy target permanent.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new JalumGrifterEffect(), new ManaCostsImpl("{1}{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new JalumGrifterEffect(), new ManaCostsImpl<>("{1}{R}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetOpponent());
         ability.addTarget(new TargetPermanent());
@@ -64,12 +64,12 @@ public final class JalumGrifter extends CardImpl {
 
 class JalumGrifterEffect extends OneShotEffect {
 
-    public JalumGrifterEffect() {
+    JalumGrifterEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "Shuffle {this} and two lands you control face down. Target opponent chooses one of those cards. Turn the cards face up. If they chose {this}, sacrifice it. Otherwise, destroy target permanent";
     }
 
-    public JalumGrifterEffect(final JalumGrifterEffect effect) {
+    private JalumGrifterEffect(final JalumGrifterEffect effect) {
         super(effect);
     }
 
@@ -94,8 +94,8 @@ class JalumGrifterEffect extends OneShotEffect {
             }
             
             Target target = new TargetControlledPermanent(2, 2, new FilterControlledLandPermanent(), true);
-            if (target.canChoose(source.getSourceId(), controller.getId(), game)) {
-                while (!target.isChosen() && target.canChoose(source.getSourceId(), controller.getId(), game) && controller.canRespond()) {
+            if (target.canChoose(controller.getId(), source, game)) {
+                while (!target.isChosen() && target.canChoose(controller.getId(), source, game) && controller.canRespond()) {
                     controller.chooseTarget(outcome, target, source, game);
                 }
             }
@@ -116,8 +116,8 @@ class JalumGrifterEffect extends OneShotEffect {
             game.informPlayers(controller.getLogName() + " shuffles the face-down pile");
             TargetCard targetCard = new TargetCard(Zone.HAND, new FilterCard());
             CardsImpl cards = new CardsImpl();
-            cards.addAll(shellGamePile);
-            if (opponent.choose(Outcome.Sacrifice, cards, targetCard, game)) {
+            cards.addAllCards(shellGamePile);
+            if (opponent.choose(Outcome.Sacrifice, cards, targetCard, source, game)) {
                 Card card = game.getCard(targetCard.getFirstTarget());
                 if (card != null) {
                     card.setFaceDown(false, game);

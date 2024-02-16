@@ -14,6 +14,7 @@ import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -38,11 +39,11 @@ public final class SoulFoundry extends CardImpl {
         // Imprint - When Soul Foundry enters the battlefield, you may exile a creature card from your hand.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
                 new SoulFoundryImprintEffect(), true)
-                .withFlavorWord("Imprint")
+                .setAbilityWord(AbilityWord.IMPRINT)
         );
 
         // {X}, {T}: Create a token that's a copy of the exiled card. X is the converted mana cost of that card.
-        Ability ability = new SimpleActivatedAbility(new SoulFoundryEffect(), new ManaCostsImpl("{X}"));
+        Ability ability = new SimpleActivatedAbility(new SoulFoundryEffect(), new ManaCostsImpl<>("{X}"));
         ability.addCost(new TapSourceCost());
         ability.setCostAdjuster(SoulFoundryAdjuster.instance);
         this.addAbility(ability);
@@ -68,8 +69,8 @@ enum SoulFoundryAdjuster implements CostAdjuster {
             if (!sourcePermanent.getImprinted().isEmpty()) {
                 Card imprinted = game.getCard(sourcePermanent.getImprinted().get(0));
                 if (imprinted != null) {
-                    ability.getManaCostsToPay().clear();
-                    ability.getManaCostsToPay().add(0, new GenericManaCost(imprinted.getManaValue()));
+                    ability.clearManaCostsToPay();
+                    ability.addManaCostsToPay(new GenericManaCost(imprinted.getManaValue()));
                 }
             }
         }
@@ -107,8 +108,8 @@ class SoulFoundryImprintEffect extends OneShotEffect {
         if (controller != null) {
             if (!controller.getHand().isEmpty()) {
                 TargetCard target = new TargetCard(Zone.HAND, filter);
-                if (target.canChoose(source.getSourceId(), source.getControllerId(), game)
-                        && controller.choose(Outcome.Benefit, controller.getHand(), target, game)) {
+                if (target.canChoose(source.getControllerId(), source, game)
+                        && controller.choose(Outcome.Benefit, controller.getHand(), target, source, game)) {
                     Card card = controller.getHand().get(target.getFirstTarget(), game);
                     if (card != null) {
                         controller.moveCardToExileWithInfo(card, source.getSourceId(), sourcePermanent.getIdName() + " (Imprint)", source, game, Zone.HAND, true);

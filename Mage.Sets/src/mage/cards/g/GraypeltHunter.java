@@ -28,7 +28,7 @@ public final class GraypeltHunter extends CardImpl {
         this.toughness = new MageInt(2);
 
         this.addAbility(TrampleAbility.getInstance());
-        this.addAbility(new AllyEntersBattlefieldTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), true));
+        this.addAbility(new AllyEntersBattlefieldTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), true).setAbilityWord(null));
     }
 
     private GraypeltHunter(final GraypeltHunter card) {

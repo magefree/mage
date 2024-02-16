@@ -9,6 +9,7 @@ import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.target.common.TargetAnyTarget;
@@ -20,18 +21,10 @@ import java.util.UUID;
  */
 public final class JudithTheScourgeDiva extends CardImpl {
 
-    private static final FilterCreaturePermanent filter
-            = new FilterCreaturePermanent("nontoken creature you control");
-
-    static {
-        filter.add(TargetController.YOU.getControllerPredicate());
-        filter.add(TokenPredicate.FALSE);
-    }
-
     public JudithTheScourgeDiva(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SHAMAN);
         this.power = new MageInt(2);
@@ -44,7 +37,7 @@ public final class JudithTheScourgeDiva extends CardImpl {
         ));
 
         // Whenever a nontoken creature you control dies, Judith, the Scourge Diva deals 1 damage to any target.
-        Ability ability = new DiesCreatureTriggeredAbility(new DamageTargetEffect(1), false, filter);
+        Ability ability = new DiesCreatureTriggeredAbility(new DamageTargetEffect(1), false, StaticFilters.FILTER_CONTROLLED_CREATURE_NON_TOKEN);
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }

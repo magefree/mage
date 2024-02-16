@@ -1,5 +1,3 @@
-
-
 package mage.abilities.condition.common;
 
 import mage.Mana;
@@ -8,6 +6,7 @@ import mage.abilities.condition.Condition;
 import mage.constants.AbilityType;
 import mage.constants.ColoredManaSymbol;
 import mage.game.Game;
+import mage.util.CardUtil;
 import mage.watchers.common.ManaSpentToCastWatcher;
 
 /**
@@ -15,13 +14,16 @@ import mage.watchers.common.ManaSpentToCastWatcher;
  *
  * @author LevelX2
  */
-
-
-public class ManaWasSpentCondition implements Condition {
+public enum ManaWasSpentCondition implements Condition {
+    WHITE(ColoredManaSymbol.W),
+    BLUE(ColoredManaSymbol.U),
+    BLACK(ColoredManaSymbol.B),
+    RED(ColoredManaSymbol.R),
+    GREEN(ColoredManaSymbol.G);
 
     protected ColoredManaSymbol coloredManaSymbol;
 
-    public ManaWasSpentCondition(ColoredManaSymbol coloredManaSymbol) {
+    ManaWasSpentCondition(ColoredManaSymbol coloredManaSymbol) {
         this.coloredManaSymbol = coloredManaSymbol;
     }
 
@@ -32,7 +34,7 @@ public class ManaWasSpentCondition implements Condition {
         }
         ManaSpentToCastWatcher watcher = game.getState().getWatcher(ManaSpentToCastWatcher.class);
         if (watcher != null) {
-            Mana payment = watcher.getLastManaPayment(source.getSourceId());
+            Mana payment = watcher.getManaPayment(CardUtil.getSourceStackMomentReference(game, source));
             if (payment != null) {
                 return payment.getColor(coloredManaSymbol) > 0;
             }
@@ -45,4 +47,8 @@ public class ManaWasSpentCondition implements Condition {
         return "{" + coloredManaSymbol.toString() + "} was spent to cast it";
     }
 
+    @Override
+    public boolean caresAboutManaColor() {
+        return true;
+    }
 }

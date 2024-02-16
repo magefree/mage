@@ -42,13 +42,15 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
         load(mana);
     }
 
-    public ManaCostsImpl(final ManaCostsImpl<T> costs) {
+    private ManaCostsImpl(final ManaCostsImpl<T> costs) {
         this.id = costs.id;
         this.text = costs.text;
+        this.ensureCapacity(costs.size());
         for (T cost : costs) {
             this.add(cost.copy());
         }
         this.phyrexian = costs.phyrexian;
+        this.phyrexianPaid = costs.phyrexianPaid;
     }
 
     @Override
@@ -150,7 +152,7 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
      *
      * @param ability
      * @param game
-     * @param sourceId
+     * @param source
      * @param payingPlayerId
      * @return true if the cost was paid
      */
@@ -290,7 +292,7 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
     private boolean canPayColoredManaFromPool(ManaType needColor, ManaCost cost, ManaType canUseManaType, ManaPool pool) {
         if (canUseManaType == null || canUseManaType.equals(needColor)) {
             return cost.containsColor(CardUtil.manaTypeToColoredManaSymbol(needColor))
-                    && (pool.getColoredAmount(needColor) > 0 || pool.ConditionalManaHasManaType(needColor));
+                    && (pool.getColoredAmount(needColor) > 0 || pool.conditionalManaHasManaType(needColor));
         }
         return false;
     }
@@ -439,6 +441,9 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
         if (mana == null || mana.isEmpty()) {
             return;
         }
+        if (!mana.startsWith("{") || !mana.endsWith("}")) {
+            throw new IllegalArgumentException("mana costs should start and end with braces");
+        }
 
         if (!extractMonoHybridGenericValue && costsCache.containsKey(mana)) {
             ManaCosts<ManaCost> savedCosts = costsCache.get(mana);
@@ -455,7 +460,7 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
             }
             if (symbol.length() == 1 || isNumeric(symbol)) {
                 if (Character.isDigit(symbol.charAt(0))) {
-                    this.add(new GenericManaCost(Integer.valueOf(symbol)));
+                    this.add(new GenericManaCost(Integer.parseInt(symbol)));
                 } else if (symbol.equals("S")) {
                     this.add(new SnowManaCost());
                 } else if (symbol.equals("C")) {
@@ -538,9 +543,14 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
 
     @Override
     public ManaOptions getOptions() {
+        return getOptions(true);
+    }
+
+    @Override
+    public ManaOptions getOptions(boolean canPayLifeCost) {
         ManaOptions options = new ManaOptions();
         for (ManaCost cost : this) {
-            options.addMana(cost.getOptions());
+            options.addMana(cost.getOptions(canPayLifeCost));
         }
         return options;
     }
@@ -591,15 +601,15 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
 
     @Override
     public Targets getTargets() {
-        Targets targets = new Targets();
+        Targets res = new Targets();
         for (T cost : this) {
-            targets.addAll(cost.getTargets());
+            res.addAll(cost.getTargets());
         }
-        return targets;
+        return res.withReadOnly();
     }
 
     @Override
-    public ManaCosts<T> copy() {
+    public ManaCostsImpl<T> copy() {
         return new ManaCostsImpl<>(this);
     }
 

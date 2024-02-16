@@ -46,12 +46,12 @@ public final class SibilantSpirit extends CardImpl {
 
 class SibilantSpiritEffect extends OneShotEffect {
 
-    public SibilantSpiritEffect() {
+    SibilantSpiritEffect() {
         super(Outcome.DrawCard);
         staticText = "defending player may draw a card";
     }
 
-    public SibilantSpiritEffect(final SibilantSpiritEffect effect) {
+    private SibilantSpiritEffect(final SibilantSpiritEffect effect) {
         super(effect);
     }
 

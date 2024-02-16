@@ -22,7 +22,7 @@ import mage.target.targetpointer.FixedTarget;
  */
 public final class BattleCry extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("white creatures you control");
 
     static {
         filter.add(new ColorPredicate(ObjectColor.WHITE));
@@ -35,7 +35,7 @@ public final class BattleCry extends CardImpl {
         this.getSpellAbility().addEffect(new UntapAllEffect(filter));
 
         // Whenever a creature blocks this turn, it gets +0/+1 until end of turn.
-        this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new BattleCryTriggeredAbility()));
+        this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new BattleCryTriggeredAbility()).concatBy("<br>"));
     }
 
     private BattleCry(final BattleCry card) {
@@ -54,7 +54,7 @@ class BattleCryTriggeredAbility extends DelayedTriggeredAbility {
         super(new BoostTargetEffect(0, 1, Duration.EndOfTurn), Duration.EndOfTurn, false, false);
     }
 
-    public BattleCryTriggeredAbility(final BattleCryTriggeredAbility ability) {
+    private BattleCryTriggeredAbility(final BattleCryTriggeredAbility ability) {
         super(ability);
     }
 
@@ -65,12 +65,12 @@ class BattleCryTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.BLOCKER_DECLARED;
+        return event.getType() == GameEvent.EventType.CREATURE_BLOCKS;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        getEffects().get(0).setTargetPointer(new FixedTarget(event.getSourceId(), game));
+        getEffects().get(0).setTargetPointer(new FixedTarget(event.getTargetId(), game));
         return true;
     }
 

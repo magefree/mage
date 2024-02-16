@@ -34,11 +34,6 @@
             <artifactId>mage-client</artifactId>
             <version>${mage-version}</version>
         </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>[2.9.9.1,)</version>
-        </dependency>
 
         <dependency>
             <groupId>org.reflections</groupId>
@@ -67,11 +62,36 @@
                         <encoding>UTF-8</encoding>
                     </configuration>
                 </plugin>
+
+                <!-- empty project for tests, so ignore build lifecycle -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <configuration>
+                        <skipIfEmpty>true</skipIfEmpty>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-install-plugin</artifactId>
+                    <configuration>
+                        <skip>true</skip>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-deploy-plugin</artifactId>
+                    <configuration>
+                        <skip>true</skip>
+                    </configuration>
+                </plugin>
             </plugins>
         </pluginManagement>
         <finalName>mage-verify</finalName>
     </build>
 
-    <properties/>
+    <properties>
+        <root.dir>${project.basedir}/..</root.dir>
+    </properties>
 
 </project>

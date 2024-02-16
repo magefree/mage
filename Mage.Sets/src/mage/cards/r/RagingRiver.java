@@ -16,7 +16,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
-import mage.filter.predicate.permanent.PermanentInListPredicate;
+import mage.filter.predicate.permanent.PermanentReferenceInCollectionPredicate;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
 import mage.game.permanent.Permanent;
@@ -57,12 +57,12 @@ public final class RagingRiver extends CardImpl {
 
 class RagingRiverEffect extends OneShotEffect {
 
-    public RagingRiverEffect() {
+    RagingRiverEffect() {
         super(Outcome.Detriment);
         staticText = "each defending player divides all creatures without flying they control into a \"left\" pile and a \"right\" pile. Then, for each attacking creature you control, choose \"left\" or \"right.\" That creature can't be blocked this combat except by creatures with flying and creatures in a pile with the chosen label";
     }
 
-    public RagingRiverEffect(final RagingRiverEffect effect) {
+    private RagingRiverEffect(final RagingRiverEffect effect) {
         super(effect);
     }
 
@@ -86,13 +86,13 @@ class RagingRiverEffect extends OneShotEffect {
                     FilterControlledCreaturePermanent filterBlockers = new FilterControlledCreaturePermanent("creatures without flying you control to assign to the \"left\" pile (creatures not chosen will be assigned to the \"right\" pile)");
                     filterBlockers.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
                     Target target = new TargetControlledCreaturePermanent(0, Integer.MAX_VALUE, filterBlockers, true);
-                    if (target.canChoose(source.getSourceId(), defenderId, game)) {
+                    if (target.canChoose(defenderId, source, game)) {
                         if (defender.chooseTarget(Outcome.Neutral, target, source, game)) {
                             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), defenderId, game)) {
                                 if (target.getTargets().contains(permanent.getId())) {
                                     left.add(permanent);
                                     leftLog.add(permanent);
-                                } else if (filterBlockers.match(permanent, source.getSourceId(), defenderId, game)) {
+                                } else if (filterBlockers.match(permanent, defenderId, source, game)) {
                                     right.add(permanent);
                                     rightLog.add(permanent);
                                 }
@@ -136,10 +136,10 @@ class RagingRiverEffect extends OneShotEffect {
 
 
                                 if (controller.choosePile(outcome, attacker.getName() + ": attacking " + defender.getName(), leftLog, rightLog, game)) {
-                                    filter.add(Predicates.not(Predicates.or(new AbilityPredicate(FlyingAbility.class), new PermanentInListPredicate(left))));
+                                    filter.add(Predicates.not(Predicates.or(new AbilityPredicate(FlyingAbility.class), new PermanentReferenceInCollectionPredicate(left, game))));
                                     game.informPlayers(attacker.getLogName() + ": attacks left (" + defender.getLogName() + ")");
                                 } else {
-                                    filter.add(Predicates.not(Predicates.or(new AbilityPredicate(FlyingAbility.class), new PermanentInListPredicate(right))));
+                                    filter.add(Predicates.not(Predicates.or(new AbilityPredicate(FlyingAbility.class), new PermanentReferenceInCollectionPredicate(right, game))));
                                     game.informPlayers(attacker.getLogName() + ": attacks right (" + defender.getLogName() + ")");
                                 }
                             }

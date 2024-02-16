@@ -21,7 +21,7 @@ public final class HuntingTriad extends CardImpl {
         this.subtype.add(SubType.ELF);
 
         this.getSpellAbility().addEffect(new CreateTokenEffect(new ElfWarriorToken(), 3));
-        this.addAbility(new ReinforceAbility(3, new ManaCostsImpl("{3}{G}")));
+        this.addAbility(new ReinforceAbility(3, new ManaCostsImpl<>("{3}{G}")));
     }
 
     private HuntingTriad(final HuntingTriad card) {

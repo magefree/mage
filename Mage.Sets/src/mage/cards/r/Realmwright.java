@@ -48,12 +48,12 @@ public final class Realmwright extends CardImpl {
 
 class RealmwrightEffect extends ContinuousEffectImpl {
 
-    public RealmwrightEffect() {
+    RealmwrightEffect() {
         super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Neutral);
         staticText = "Lands you control are the chosen type in addition to their other types";
     }
 
-    public RealmwrightEffect(final RealmwrightEffect effect) {
+    private RealmwrightEffect(final RealmwrightEffect effect) {
         super(effect);
     }
 
@@ -113,7 +113,7 @@ class RealmwrightEffect extends ContinuousEffectImpl {
         }
         for (Permanent land : game.getBattlefield().getActivePermanents(
                 StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND,
-                source.getControllerId(), source.getSourceId(), game
+                source.getControllerId(), source, game
         )) {
             if (land == null || land.hasSubtype(choice, game)) {
                 continue;

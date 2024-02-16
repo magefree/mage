@@ -33,7 +33,7 @@ public final class SanctumOfStoneFangs extends CardImpl {
     public SanctumOfStoneFangs(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
         
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SHRINE);
 
         // At the beginning of your precombat main phase, each opponent loses X life and you gain X life, where X is the number of Shrines you control.

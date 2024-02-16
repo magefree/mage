@@ -18,7 +18,6 @@ public class GainControlTargetEffectTest extends CardTestPlayerBase {
 
     /**
      * Checks if control has changed and the controlled creature has Haste
-     *
      */
     @Test
     public void testPermanentControlEffect() {
@@ -63,7 +62,7 @@ public class GainControlTargetEffectTest extends CardTestPlayerBase {
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}, {T}: Gain control of target creature with power less than or equal to the number of Islands you control for as long as {this} remains tapped.", "Glen Elendra Archmage");
 
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Lightning Strike", playerA);
-        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{U}, Sacrifice {this}: Counter target noncreature spell.", "Lightning Strike");
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{U}, Sacrifice {this}: Counter target noncreature spell.", "Lightning Strike", "Lightning Strike");
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
@@ -80,7 +79,6 @@ public class GainControlTargetEffectTest extends CardTestPlayerBase {
     /**
      * The shackles can maintain control of Mutavault indefinitely, even when
      * it's not a creature.
-     *
      */
     @Test
     public void testKeepControlOfMutavault() {
@@ -119,29 +117,30 @@ public class GainControlTargetEffectTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Plains", 2);
         addCard(Zone.HAND, playerB, "Silvercoat Lion", 1);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Steel Golem");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Steel Golem", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Donate", playerB);
         addTarget(playerA, "Steel Golem");
-        
-        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Silvercoat Lion");
-        
+
+        checkPlayableAbility("Steel Golem stops casting", 2, PhaseStep.PRECOMBAT_MAIN, playerB, "Cast Silvercoat", false);
+
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertGraveyardCount(playerA, "Donate", 1);
+
         assertPermanentCount(playerA, "Steel Golem", 0);
         assertPermanentCount(playerB, "Steel Golem", 1);
-        assertPermanentCount(playerB, "Silvercoat Lion", 0);
+
         assertHandCount(playerB, "Silvercoat Lion", 1);
     }
     
-    /*
-     Reported bug: Skyfire Kirin was allowed to steal a creature with a different CMC
-    than the card cast for it. Played a 5 CMC creature and stole a 3 CMC creature.
+    /**
+     * Reported bug:
+     * Skyfire Kirin was allowed to steal a creature with a different CMC than the card cast for it.
+     * Played a 5 CMC creature and stole a 3 CMC creature.
     */
     @Test
-    public void testSkyfireKirinStealCreatureDifferentCMC()
-    {
+    public void testSkyfireKirinStealCreatureDifferentCMC() {
         /*
         Skyfire Kirin {2}{R}{R}
         Legendary Creature - Kirin Spirit 3/3
@@ -164,17 +163,18 @@ public class GainControlTargetEffectTest extends CardTestPlayerBase {
         Whenever you or a permanent you control becomes the target of a spell or ability an opponent controls, you may draw a card.
         */
         String leovold = "Leovold, Emissary of Trest";
-        
-        addCard(Zone.BATTLEFIELD, playerA, sKirin);
+
         addCard(Zone.HAND, playerA, oGorger);
+        addCard(Zone.BATTLEFIELD, playerA, sKirin);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
+
         addCard(Zone.BATTLEFIELD, playerB, leovold);
-        
+
+        setStrictChooseMode(true);
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, oGorger);
-        setChoice(playerA, true); // opt to use Kirin's ability
-        addTarget(playerA, leovold); // attempt to target Leovold with Kirin's take control ability
-        setChoice(playerB, true); // opt to use Leovold's ability to draw a card when targetted (should not occur)
-        
+        // Option to gain control is not even given since the Gorger is 5 mana but the only possible target (Leovold) is 3.
+
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
         
@@ -183,13 +183,12 @@ public class GainControlTargetEffectTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, leovold, 1); // still under playerB control
         assertHandCount(playerB, 0); // leovold ability should not have triggered due to not targetted, so no extra cards
     }
-    
-        /*
-     Skyfire Kirin should steal be able to steal creatures with same CMC.
-    */
+
+    /**
+     * Skyfire Kirin should steal be able to steal creatures with same CMC.
+     */
     @Test
-    public void testSkyfireKirinStealCreatureSameCMC()
-    {
+    public void testSkyfireKirinStealCreatureSameCMC() {
         /*
         Skyfire Kirin {2}{R}{R}
         Legendary Creature - Kirin Spirit 3/3
@@ -216,7 +215,9 @@ public class GainControlTargetEffectTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, oGorger);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
         addCard(Zone.BATTLEFIELD, playerB, aLight);
-        
+
+        setStrictChooseMode(true);
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, oGorger);
         setChoice(playerA, true); // opt to use Kirin's ability
         addTarget(playerA, aLight); // target Angel of Light with Kirin's take control ability

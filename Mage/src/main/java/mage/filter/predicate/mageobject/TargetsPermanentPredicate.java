@@ -35,7 +35,7 @@ public class TargetsPermanentPredicate implements ObjectSourcePlayerPredicate<Ma
                     }
                     for (UUID targetId : target.getTargets()) {
                         Permanent permanent = game.getPermanentOrLKIBattlefield(targetId);
-                        if (targetFilter.match(permanent, input.getSourceId(), input.getPlayerId(), game)) {
+                        if (targetFilter.match(permanent, input.getPlayerId(), input.getSource(), game)) {
                             return true;
                         }
                     }

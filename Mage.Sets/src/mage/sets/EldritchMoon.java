@@ -314,7 +314,7 @@ public final class EldritchMoon extends ExpansionSet {
         for (String name : meldCardNames) {
             cardInfos.addAll(CardRepository.instance.findCards(new CardCriteria()
                     .setCodes(this.code)
-                    .nameExact(name)));
+                    .name(name)));
         }
         return cardInfos;
     }

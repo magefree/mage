@@ -51,12 +51,12 @@ public final class TraitorsRoar extends CardImpl {
 
 class TraitorsRoarEffect extends OneShotEffect {
 
-    public TraitorsRoarEffect() {
+    TraitorsRoarEffect() {
         super(Outcome.Detriment);
         this.staticText = "Tap target untapped creature. It deals damage equal to its power to its controller";
     }
 
-    public TraitorsRoarEffect(final TraitorsRoarEffect effect) {
+    private TraitorsRoarEffect(final TraitorsRoarEffect effect) {
         super(effect);
     }
 

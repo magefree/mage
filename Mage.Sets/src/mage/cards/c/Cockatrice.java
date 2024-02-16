@@ -1,9 +1,8 @@
-
 package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BlocksOrBecomesBlockedSourceTriggeredAbility;
+import mage.abilities.common.BlocksOrBlockedByCreatureSourceTriggeredAbility;
 import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
@@ -37,11 +36,11 @@ public final class Cockatrice extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        
+
         // Whenever Cockatrice blocks or becomes blocked by a non-Wall creature, destroy that creature at end of combat.
         Effect effect = new CreateDelayedTriggeredAbilityEffect(new AtTheEndOfCombatDelayedTriggeredAbility(new DestroyTargetEffect()), true);
         effect.setText("destroy that creature at end of combat");
-        this.addAbility(new BlocksOrBecomesBlockedSourceTriggeredAbility(effect, filter, false));
+        this.addAbility(new BlocksOrBlockedByCreatureSourceTriggeredAbility(effect, filter));
     }
 
     private Cockatrice(final Cockatrice card) {

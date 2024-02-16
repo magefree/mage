@@ -28,7 +28,7 @@ import mage.target.common.TargetCreaturePermanent;
 public final class HearthcageGiant extends CardImpl {
 
     private static final FilterControlledPermanent filterElemental = new FilterControlledPermanent("Elemental");
-    private static final FilterCreaturePermanent filterGiant = new FilterCreaturePermanent("Giant");
+    private static final FilterCreaturePermanent filterGiant = new FilterCreaturePermanent("Giant creature");
 
     static {
         filterElemental.add(SubType.ELEMENTAL.getPredicate());
@@ -44,10 +44,10 @@ public final class HearthcageGiant extends CardImpl {
         this.toughness = new MageInt(5);
 
         //When Hearthcage Giant enters the battlefield, create two 3/1 red Elemental Shaman creature tokens.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new ElementalShamanToken("LRW"), 2), false));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new ElementalShamanToken(), 2), false));
 
         //Sacrifice an Elemental: Target Giant creature gets +3/+1 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(3, 1, Duration.EndOfTurn), new SacrificeTargetCost(new TargetControlledPermanent(filterElemental)));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(3, 1, Duration.EndOfTurn), new SacrificeTargetCost(filterElemental));
         ability.addTarget(new TargetCreaturePermanent(filterGiant));
         this.addAbility(ability);
     }

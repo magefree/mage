@@ -13,6 +13,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetSacrifice;
 
 /**
  *
@@ -47,7 +48,7 @@ class FrayingOmnipotenceEffect extends OneShotEffect {
                 + "Round up each time.";
     }
 
-    FrayingOmnipotenceEffect(final FrayingOmnipotenceEffect effect) {
+    private FrayingOmnipotenceEffect(final FrayingOmnipotenceEffect effect) {
         super(effect);
     }
 
@@ -89,11 +90,11 @@ class FrayingOmnipotenceEffect extends OneShotEffect {
                 continue;
             }
             FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
-            int creaturesToSacrifice = (int) Math.ceil(game.getBattlefield().count(filter, source.getSourceId(), player.getId(), game) / 2.0);
+            int creaturesToSacrifice = (int) Math.ceil(game.getBattlefield().count(filter, player.getId(), source, game) / 2.0);
             if (creaturesToSacrifice == 0) {
                 continue;
             }
-            Target target = new TargetControlledCreaturePermanent(creaturesToSacrifice, creaturesToSacrifice, filter, true);
+            Target target = new TargetSacrifice(creaturesToSacrifice, filter);
             target.chooseTarget(Outcome.Sacrifice, playerId, source, game);
             for (UUID permanentId : target.getTargets()) {
                 Permanent permanent = game.getPermanent(permanentId);

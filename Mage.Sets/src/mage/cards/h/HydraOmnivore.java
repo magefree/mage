@@ -44,12 +44,12 @@ public final class HydraOmnivore extends CardImpl {
 
 class HydraOmnivoreEffect extends OneShotEffect {
 
-    public HydraOmnivoreEffect() {
+    HydraOmnivoreEffect() {
         super(Outcome.Benefit);
         this.staticText = "it deals that much damage to each other opponent";
     }
 
-    public HydraOmnivoreEffect(final HydraOmnivoreEffect effect) {
+    private HydraOmnivoreEffect(final HydraOmnivoreEffect effect) {
         super(effect);
     }
 
@@ -62,7 +62,7 @@ class HydraOmnivoreEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         UUID damagedOpponent = this.getTargetPointer().getFirst(game, source);
         int amount = (Integer) getValue("damage");
-        MageObject object = game.getObject(source.getSourceId());
+        MageObject object = game.getObject(source);
         if (object != null && amount > 0 && damagedOpponent != null) {
             for (UUID playerId : game.getOpponents(source.getControllerId())) {
                 if (!Objects.equals(playerId, damagedOpponent)) {

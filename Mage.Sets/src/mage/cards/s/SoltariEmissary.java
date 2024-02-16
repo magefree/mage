@@ -29,7 +29,7 @@ public final class SoltariEmissary extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {W}: Soltari Emissary gains shadow until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(ShadowAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{W}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(ShadowAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{W}")));
     }
 
     private SoltariEmissary(final SoltariEmissary card) {

@@ -1,4 +1,3 @@
-
 package mage.cards.a;
 
 import java.util.UUID;
@@ -58,9 +57,10 @@ class ArashinWarBeastTriggeredAbility extends TriggeredAbilityImpl {
     public ArashinWarBeastTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
         this.usedForCombatDamageStep = false;
+        setTriggerPhrase("Whenever {this} deals combat damage to one or more blocking creatures, ");
     }
 
-    public ArashinWarBeastTriggeredAbility(final ArashinWarBeastTriggeredAbility ability) {
+    private ArashinWarBeastTriggeredAbility(final ArashinWarBeastTriggeredAbility ability) {
         super(ability);
         this.usedForCombatDamageStep = ability.usedForCombatDamageStep;
     }
@@ -82,7 +82,7 @@ class ArashinWarBeastTriggeredAbility extends TriggeredAbilityImpl {
                 ((DamagedEvent) event).isCombatDamage() &&
                 !usedForCombatDamageStep) {
             Permanent creature = game.getPermanentOrLKIBattlefield(event.getTargetId());
-            if (creature == null || !filter.match(creature, getSourceId(), getControllerId(), game)) {
+            if (creature == null || !filter.match(creature, getControllerId(), this, game)) {
                 return false;
             }
             // trigger only once per combat damage step
@@ -94,10 +94,5 @@ class ArashinWarBeastTriggeredAbility extends TriggeredAbilityImpl {
             usedForCombatDamageStep = false;
         }        
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} deals combat damage to one or more blockers, " ;
     }
 }

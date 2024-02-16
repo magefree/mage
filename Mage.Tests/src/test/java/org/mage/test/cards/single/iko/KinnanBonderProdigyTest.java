@@ -34,7 +34,6 @@ public class KinnanBonderProdigyTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, hovermyr, 1);
         assertPermanentCount(playerA, egg, 0);
@@ -58,14 +57,14 @@ public class KinnanBonderProdigyTest extends CardTestPlayerBase {
         // sacrifice treasure and add additional mana
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}, Sacrifice");
         setChoice(playerA, "Red");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, hovermyr);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, hovermyr, 1);
-        assertPermanentCount(playerA, "Treasure", 0);
+        assertPermanentCount(playerA, "Treasure Token", 0);
     }
 }

@@ -35,7 +35,7 @@ public final class Arcbond extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}");
 
         // Choose target creature. Whenever that creature is dealt damage this turn, it deals that much damage to each other creature and each player.
-        this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new ArcbondDelayedTriggeredAbility(), true, true));
+        this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new ArcbondDelayedTriggeredAbility()));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
@@ -57,14 +57,13 @@ class ArcbondDelayedTriggeredAbility extends DelayedTriggeredAbility {
         super(new ArcbondEffect(), Duration.EndOfTurn, false);
     }
 
-    public ArcbondDelayedTriggeredAbility(ArcbondDelayedTriggeredAbility ability) {
+    private ArcbondDelayedTriggeredAbility(final ArcbondDelayedTriggeredAbility ability) {
         super(ability);
         this.targetObject = ability.targetObject;
     }
 
     @Override
     public void init(Game game) {
-        super.init(game);
         // because target can already be gone from battlefield if triggered ability resolves, we need to hold an own object reference
         targetObject = new MageObjectReference(getTargets().getFirstTarget(), game);
         if (targetObject != null) {
@@ -113,11 +112,11 @@ class ArcbondDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
 class ArcbondEffect extends OneShotEffect {
 
-    public ArcbondEffect() {
+    ArcbondEffect() {
         super(Outcome.Benefit);
     }
 
-    public ArcbondEffect(final ArcbondEffect effect) {
+    private ArcbondEffect(final ArcbondEffect effect) {
         super(effect);
     }
 
@@ -130,7 +129,7 @@ class ArcbondEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         int damage = (Integer) this.getValue("damage");
         UUID sourceId = (UUID) this.getValue("sourceId");
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (sourceObject != null && damage > 0 && sourceId != null) {
             Permanent targetObject = game.getPermanentOrLKIBattlefield(sourceId);
             if (targetObject != null) {

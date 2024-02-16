@@ -74,7 +74,7 @@ public final class SorcererClass extends CardImpl {
                 new SpellCastControllerTriggeredAbility(
                         new SorcererClassEffect(),
                         StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY,
-                        false, true
+                        false, SetTargetPointer.SPELL
                 ), 3
         )), new SorcererClassWatcher());
     }
@@ -115,8 +115,8 @@ class SorcererClassManaCondition extends ManaCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (source instanceof SpellAbility) {
-            MageObject object = game.getObject(source.getSourceId());
+        if (source instanceof SpellAbility && !source.isActivated()) {
+            MageObject object = game.getObject(source);
             return object != null && object.isInstantOrSorcery(game);
         }
         return source instanceof ClassLevelAbility;

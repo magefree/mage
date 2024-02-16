@@ -38,7 +38,6 @@ public class VolrathsShapshifterTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Assault Griffin", 1);
         assertPowerToughness(playerA, "Assault Griffin", 3, 2);
@@ -71,7 +70,6 @@ public class VolrathsShapshifterTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Volrath's Shapeshifter", 1);
         assertPowerToughness(playerA, "Volrath's Shapeshifter", 0, 1);
@@ -100,7 +98,6 @@ public class VolrathsShapshifterTest extends CardTestPlayerBase {
 
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Dutiful Thrull", 1);
         assertPowerToughness(playerA, "Dutiful Thrull", 1, 1);

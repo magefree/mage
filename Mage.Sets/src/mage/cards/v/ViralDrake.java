@@ -34,7 +34,7 @@ public final class ViralDrake extends CardImpl {
         this.addAbility(InfectAbility.getInstance());
 
         // {3}{U}: Proliferate. (You choose any number of permanents and/or players with counters on them, then give each another counter of a kind already there.)
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ProliferateEffect(), new ManaCostsImpl("{3}{U}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ProliferateEffect(), new ManaCostsImpl<>("{3}{U}")));
     }
 
     private ViralDrake(final ViralDrake card) {

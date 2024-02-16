@@ -23,7 +23,7 @@ public final class CrushOfWurms extends CardImpl {
         // Put three 6/6 green Wurm creature tokens onto the battlefield.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new WurmToken(), 3));
         // Flashback {9}{G}{G}{G}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{9}{G}{G}{G}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{9}{G}{G}{G}")));
     }
 
     private CrushOfWurms(final CrushOfWurms card) {

@@ -5,6 +5,7 @@ import mage.abilities.Ability;
 import java.util.UUID;
 
 /**
+ * Raise events for normal triggers, ignore state based triggers from StateTriggeredAbility
  *
  * @author BetaSteward_at_googlemail.com
  */

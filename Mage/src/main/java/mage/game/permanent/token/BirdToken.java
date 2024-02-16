@@ -4,9 +4,6 @@ import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.util.RandomUtil;
-
-import java.util.Arrays;
 
 /**
  * @author LoneFox
@@ -14,7 +11,7 @@ import java.util.Arrays;
 public final class BirdToken extends TokenImpl {
 
     public BirdToken() {
-        super("Bird", "1/1 white Bird creature token with flying");
+        super("Bird Token", "1/1 white Bird creature token with flying");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
         subtype.add(SubType.BIRD);
@@ -22,26 +19,14 @@ public final class BirdToken extends TokenImpl {
         toughness = new MageInt(1);
 
         addAbility(FlyingAbility.getInstance());
-
-        availableImageSetCodes = Arrays.asList("BNG", "CSP", "DGM", "JUD", "MM3", "RTR", "VMA", "ZEN",
-                "MH1", "C20", "M21", "ZNC", "KHC", "MH2");
     }
 
-    public BirdToken(final BirdToken token) {
+    private BirdToken(final BirdToken token) {
         super(token);
     }
 
     @Override
     public BirdToken copy() {
         return new BirdToken(this);
-    }
-
-    @Override
-    public void setExpansionSetCodeForImage(String code) {
-        super.setExpansionSetCodeForImage(code);
-
-        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("C16")) {
-            setTokenType(RandomUtil.nextInt(2) + 1);
-        }
     }
 }

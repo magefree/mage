@@ -78,7 +78,7 @@ public class CounterspellTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Memory Lapse", "Lightning Bolt");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Twincast", "Memory Lapse");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Twincast", "Memory Lapse", "Memory Lapse");
 
         setChoice(playerA, true); // change the target
         addTarget(playerA, "Memory Lapse");
@@ -87,8 +87,6 @@ public class CounterspellTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Lightning Bolt", 1);
         assertGraveyardCount(playerA, "Twincast", 1);
@@ -114,7 +112,7 @@ public class CounterspellTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Counterspell", "Lightning Bolt");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Twincast", "Counterspell");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Twincast", "Counterspell", "Counterspell");
 
         setChoice(playerA, true); // change the target
         addTarget(playerA, "Counterspell");
@@ -123,8 +121,6 @@ public class CounterspellTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Lightning Bolt", 1);
         assertGraveyardCount(playerA, "Twincast", 1);
@@ -150,7 +146,7 @@ public class CounterspellTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Dissipate", "Lightning Bolt");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Twincast", "Dissipate");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Twincast", "Dissipate", "Dissipate");
 
         setChoice(playerA, true); // change the target
         addTarget(playerA, "Dissipate");
@@ -159,8 +155,6 @@ public class CounterspellTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Lightning Bolt", 1);
         assertGraveyardCount(playerA, "Twincast", 1);

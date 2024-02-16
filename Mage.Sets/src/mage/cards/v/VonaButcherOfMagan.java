@@ -28,7 +28,7 @@ public final class VonaButcherOfMagan extends CardImpl {
     public VonaButcherOfMagan(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.VAMPIRE);
         this.subtype.add(SubType.KNIGHT);
         this.power = new MageInt(4);

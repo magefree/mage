@@ -36,7 +36,7 @@ public final class TajicLegionsEdge extends CardImpl {
     public TajicLegionsEdge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SOLDIER);
         this.power = new MageInt(3);
@@ -62,7 +62,7 @@ public final class TajicLegionsEdge extends CardImpl {
                 new GainAbilitySourceEffect(
                         FirstStrikeAbility.getInstance(),
                         Duration.EndOfTurn
-                ), new ManaCostsImpl("{R}{W}")
+                ), new ManaCostsImpl<>("{R}{W}")
         ));
     }
 

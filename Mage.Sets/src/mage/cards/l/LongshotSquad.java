@@ -31,7 +31,7 @@ public final class LongshotSquad extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Outlast 1G
-        this.addAbility(new OutlastAbility(new ManaCostsImpl("{1}{G}")));
+        this.addAbility(new OutlastAbility(new ManaCostsImpl<>("{1}{G}")));
         // Each creature you control with a +1/+1 counter on it has reach.
         this.addAbility(new SimpleStaticAbility(
                 Zone.BATTLEFIELD,

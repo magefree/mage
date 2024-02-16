@@ -17,7 +17,7 @@ import mage.game.permanent.token.WolfToken;
  */
 public final class HowlOfTheNightPack extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("for each Forest you control");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Forest you control");
 
     static {
         filter.add(SubType.FOREST.getPredicate());

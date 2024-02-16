@@ -32,7 +32,7 @@ public final class HoppingAutomaton extends CardImpl {
         // {0}: Hopping Automaton gets -1/-1 and gains flying until end of turn.
         Effect effect = new BoostSourceEffect(-1, -1, Duration.EndOfTurn);
         effect.setText("{this} gets -1/-1");
-        Ability ability = new SimpleActivatedAbility(effect, new ManaCostsImpl("{0}"));
+        Ability ability = new SimpleActivatedAbility(effect, new ManaCostsImpl<>("{0}"));
         effect = new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("and gains flying until end of turn");
         ability.addEffect(effect);

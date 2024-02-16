@@ -41,7 +41,7 @@ public final class MartialImpetus extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Enchanted creature gets +1/+1 and is goaded.
@@ -72,7 +72,7 @@ enum MartialImpetusPredicate implements ObjectSourcePlayerPredicate<Permanent> {
 
     @Override
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
-        Permanent martialImpetus = game.getPermanentOrLKIBattlefield(input.getSourceId());
+        Permanent martialImpetus = input.getSource().getSourcePermanentOrLKI(game);
         if (martialImpetus != null) {
             Permanent attachedTo = game.getPermanentOrLKIBattlefield(martialImpetus.getAttachedTo());
             UUID auraControllerId = martialImpetus.getControllerId();

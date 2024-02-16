@@ -26,7 +26,7 @@ public final class VolrathTheFallen extends CardImpl {
 
     public VolrathTheFallen(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.SHAPESHIFTER);
         this.power = new MageInt(6);
@@ -40,7 +40,7 @@ public final class VolrathTheFallen extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
                 effect,
-                new ManaCostsImpl("{1}{B}"));
+                new ManaCostsImpl<>("{1}{B}"));
         ability.addCost(new DiscardCardCost(StaticFilters.FILTER_CARD_CREATURE));
         this.addAbility(ability);
     }

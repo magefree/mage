@@ -20,7 +20,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  */
 public final class DustElemental extends CardImpl {
     
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent(" creatures you control");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creatures you control");
     
     public DustElemental(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{W}");

@@ -6,6 +6,7 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
+import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -39,13 +40,14 @@ public final class AllThatGlitters extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Enchanted creature gets +1/+1 for each artifact and/or enchantment you control.
         this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(
                 xValue, xValue, Duration.WhileOnBattlefield
-        ).setText("enchanted creature gets +1/+1 for each artifact and/or enchantment you control")));
+        ).setText("enchanted creature gets +1/+1 for each artifact and/or enchantment you control")
+        ).addHint(new ValueHint("Artifacts and/or enchantments you control", xValue)));
     }
 
     private AllThatGlitters(final AllThatGlitters card) {

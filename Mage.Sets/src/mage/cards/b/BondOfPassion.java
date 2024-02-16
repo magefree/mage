@@ -12,15 +12,15 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.filter.FilterPermanent;
+import mage.filter.common.FilterAnyTarget;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.common.FilterCreaturePlayerOrPlaneswalker;
 import mage.filter.predicate.other.AnotherTargetPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetPermanentOrPlayer;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
@@ -32,12 +32,12 @@ public final class BondOfPassion extends CardImpl {
 
     private static final FilterPermanent filter
             = new FilterCreaturePermanent();
-    private static final FilterCreaturePlayerOrPlaneswalker otherFilter
-            = new FilterCreaturePlayerOrPlaneswalker("any other target");
+    private static final FilterAnyTarget otherFilter
+            = new FilterAnyTarget("any other target");
 
     static {
         otherFilter.getPlayerFilter().add(new AnotherTargetPredicate(2));
-        otherFilter.getPlayerFilter().add(new AnotherTargetPredicate(2));
+        otherFilter.getPermanentFilter().add(new AnotherTargetPredicate(2));
     }
 
     public BondOfPassion(UUID ownerId, CardSetInfo setInfo) {
@@ -48,7 +48,7 @@ public final class BondOfPassion extends CardImpl {
         Target target = new TargetPermanent(filter);
         target.setTargetTag(1);
         this.getSpellAbility().addTarget(target);
-        target = new TargetAnyTarget(otherFilter);
+        target = new TargetPermanentOrPlayer(otherFilter);
         target.setTargetTag(2);
         this.getSpellAbility().addTarget(target);
     }

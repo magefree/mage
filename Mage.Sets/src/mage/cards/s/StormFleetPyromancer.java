@@ -35,7 +35,7 @@ public final class StormFleetPyromancer extends CardImpl {
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(2)),
                 RaidCondition.instance,
-                "<i>Raid</i> &mdash; When {this} enters the battlefield, if you attacked this turn, {this} deals 2 damage to any target.");
+                "When {this} enters the battlefield, if you attacked this turn, {this} deals 2 damage to any target.");
         ability.addTarget(new TargetAnyTarget());
         ability.setAbilityWord(AbilityWord.RAID);
         ability.addHint(RaidHint.instance);

@@ -1,8 +1,6 @@
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.MiracleAbility;
 import mage.cards.CardImpl;
@@ -17,8 +15,9 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author North
  */
 public final class Terminus extends CardImpl {
@@ -28,8 +27,9 @@ public final class Terminus extends CardImpl {
 
         // Put all creatures on the bottom of their owners' libraries.
         this.getSpellAbility().addEffect(new TerminusEffect());
+
         // Miracle {W}
-        this.addAbility(new MiracleAbility(this, new ManaCostsImpl("{W}")));
+        this.addAbility(new MiracleAbility("{W}"));
     }
 
     private Terminus(final Terminus card) {
@@ -44,12 +44,12 @@ public final class Terminus extends CardImpl {
 
 class TerminusEffect extends OneShotEffect {
 
-    public TerminusEffect() {
+    TerminusEffect() {
         super(Outcome.Removal);
         this.staticText = "Put all creatures on the bottom of their owners' libraries";
     }
 
-    public TerminusEffect(final TerminusEffect effect) {
+    private TerminusEffect(final TerminusEffect effect) {
         super(effect);
     }
 
@@ -67,7 +67,7 @@ class TerminusEffect extends OneShotEffect {
                 filter.add(new OwnerIdPredicate(player.getId()));
                 Cards toLib = new CardsImpl();
                 for (Permanent permanent : game.getBattlefield()
-                        .getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+                        .getActivePermanents(filter, source.getControllerId(), source, game)) {
                     toLib.add(permanent);
                 }
                 player.putCardsOnBottomOfLibrary(toLib, game, source, true);

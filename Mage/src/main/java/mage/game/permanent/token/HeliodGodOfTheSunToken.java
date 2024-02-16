@@ -6,13 +6,12 @@ import mage.constants.SubType;
 import mage.MageInt;
 
 /**
- *
  * @author spjspj
  */
 public final class HeliodGodOfTheSunToken extends TokenImpl {
 
     public HeliodGodOfTheSunToken() {
-        super("Cleric", "2/1 white Cleric enchantment creature token");
+        super("Cleric Token", "2/1 white Cleric enchantment creature token");
         this.cardType.add(CardType.CREATURE);
         this.cardType.add(CardType.ENCHANTMENT);
 
@@ -23,7 +22,7 @@ public final class HeliodGodOfTheSunToken extends TokenImpl {
         this.toughness = new MageInt(1);
     }
 
-    public HeliodGodOfTheSunToken(final HeliodGodOfTheSunToken token) {
+    private HeliodGodOfTheSunToken(final HeliodGodOfTheSunToken token) {
         super(token);
     }
 

@@ -61,18 +61,13 @@ class GuileReplacementEffect extends ReplacementEffectImpl {
                 + "instead exile that spell and you may play that card without paying its mana cost";
     }
 
-    GuileReplacementEffect(final GuileReplacementEffect effect) {
+    private GuileReplacementEffect(final GuileReplacementEffect effect) {
         super(effect);
     }
 
     @Override
     public GuileReplacementEffect copy() {
         return new GuileReplacementEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

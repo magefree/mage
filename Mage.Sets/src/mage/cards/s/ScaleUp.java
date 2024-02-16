@@ -32,8 +32,7 @@ public final class ScaleUp extends CardImpl {
                 new CreatureToken(6, 4, "green Wurm with base power and toughness 6/4")
                         .withColor("G").withSubType(SubType.WURM),
                 true, false, Duration.EndOfTurn, false, true
-        ).setText("Until end of turn, target creature you control " +
-                "becomes a green Wurm with base power and toughness 6/4."));
+        ).withDurationRuleAtStart(true));
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
 
         // Overload {4}{G}{G}
@@ -41,7 +40,7 @@ public final class ScaleUp extends CardImpl {
                 new CreatureToken(6, 4, "green Wurm with base power and toughness 6/4")
                         .withColor("G").withSubType(SubType.WURM),
                 null, filter, Duration.EndOfTurn, true, false, true
-        ), new ManaCostsImpl("{4}{G}{G}")));
+        ), new ManaCostsImpl<>("{4}{G}{G}")));
     }
 
     private ScaleUp(final ScaleUp card) {

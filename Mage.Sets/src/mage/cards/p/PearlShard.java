@@ -29,9 +29,8 @@ public final class PearlShard extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 new PreventDamageToTargetEffect(Duration.EndOfTurn, 2),
                 new OrCost(
-                        new CompositeCost(new GenericManaCost(3), new TapSourceCost(), "{3}, {T}"),
-                        new CompositeCost(new ManaCostsImpl<>("{W}"), new TapSourceCost(), "{W}, {T}"),
-                        "{3}, {T} or {W}, {T}"
+                        "{3}, {T} or {W}, {T}", new CompositeCost(new GenericManaCost(3), new TapSourceCost(), "{3}, {T}"),
+                        new CompositeCost(new ManaCostsImpl<>("{W}"), new TapSourceCost(), "{W}, {T}")
                 )
         );
         ability.addTarget(new TargetAnyTarget());

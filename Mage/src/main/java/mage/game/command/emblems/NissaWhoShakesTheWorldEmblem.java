@@ -1,4 +1,3 @@
-
 package mage.game.command.emblems;
 
 import mage.abilities.common.SimpleStaticAbility;
@@ -15,7 +14,7 @@ import mage.game.command.Emblem;
 public final class NissaWhoShakesTheWorldEmblem extends Emblem {
 
     public NissaWhoShakesTheWorldEmblem() {
-        this.setName("Emblem Nissa");
+        super("Emblem Nissa");
         this.getAbilities().add(new SimpleStaticAbility(
                 Zone.COMMAND,
                 new GainAbilityAllEffect(
@@ -23,6 +22,14 @@ public final class NissaWhoShakesTheWorldEmblem extends Emblem {
                         StaticFilters.FILTER_CONTROLLED_PERMANENT_LANDS, false
                 )
         ));
-        this.setExpansionSetCodeForImage("WAR");
+    }
+
+    private NissaWhoShakesTheWorldEmblem(final NissaWhoShakesTheWorldEmblem card) {
+        super(card);
+    }
+
+    @Override
+    public NissaWhoShakesTheWorldEmblem copy() {
+        return new NissaWhoShakesTheWorldEmblem(this);
     }
 }

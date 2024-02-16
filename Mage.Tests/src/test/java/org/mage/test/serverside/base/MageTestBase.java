@@ -26,7 +26,6 @@ import mage.util.Copier;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.junit.BeforeClass;
-import org.mage.test.player.RandomPlayer;
 import org.mage.test.player.TestPlayer;
 
 import java.io.File;
@@ -299,9 +298,5 @@ public abstract class MageTestBase {
     protected Player createPlayer(String name, PlayerType playerType) {
         Optional<Player> playerOptional = PlayerFactory.instance.createPlayer(playerType, name, RangeOfInfluence.ALL, 5);
         return playerOptional.orElseThrow(() -> new NullPointerException("PlayerFactory error - player is not created"));
-    }
-
-    protected Player createRandomPlayer(String name) {
-        return new RandomPlayer(name);
     }
 }

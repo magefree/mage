@@ -22,7 +22,7 @@ public class VivienTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Vivien, Arkbow Ranger"); // Planeswalker {1}{G}{G}{G} - starts with 4 Loyality counters
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 4);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Vivien, Arkbow Ranger");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Vivien, Arkbow Ranger", true);
         addTargetAmount(playerA, TestPlayer.TARGET_SKIP); // stop choosing (not targets)
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+1: Distribute");
@@ -46,7 +46,7 @@ public class VivienTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion");
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Vivien, Arkbow Ranger");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Vivien, Arkbow Ranger", true);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+1: Distribute");
         addTargetAmount(playerA, "Silvercoat Lion", 1);
@@ -72,7 +72,7 @@ public class VivienTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion");
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Vivien, Arkbow Ranger");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Vivien, Arkbow Ranger", true);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+1: Distribute");
         addTargetAmount(playerA, "Silvercoat Lion", 2);
@@ -96,7 +96,7 @@ public class VivienTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion");
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Vivien, Arkbow Ranger");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Vivien, Arkbow Ranger", true);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+1: Distribute");
         addTargetAmount(playerA, "Silvercoat Lion", 2);
@@ -122,7 +122,7 @@ public class VivienTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion");
         addCard(Zone.BATTLEFIELD, playerA, "Pillarfield Ox");
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Vivien, Arkbow Ranger");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Vivien, Arkbow Ranger", true);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+1: Distribute");
         addTargetAmount(playerA, "Silvercoat Lion", 1);
@@ -138,7 +138,5 @@ public class VivienTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, "Pillarfield Ox", 3, 5);
         assertAbility(playerA, "Silvercoat Lion", TrampleAbility.getInstance(), true);
         assertAbility(playerA, "Pillarfield Ox", TrampleAbility.getInstance(), true);
-
     }
-
 }

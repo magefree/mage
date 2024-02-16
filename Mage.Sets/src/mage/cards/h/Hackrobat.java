@@ -28,7 +28,7 @@ public final class Hackrobat extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Spectacle {B}{R}
-        this.addAbility(new SpectacleAbility(this, new ManaCostsImpl("{B}{R}")));
+        this.addAbility(new SpectacleAbility(this, new ManaCostsImpl<>("{B}{R}")));
 
         // {B}: Hackrobat gains deathtouch until end of turn.
         this.addAbility(new SimpleActivatedAbility(

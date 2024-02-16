@@ -6,7 +6,6 @@ import mage.abilities.effects.RestrictionEffect;
 import mage.constants.Duration;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.Target;
 
 /**
  * @author LevelX2
@@ -24,7 +23,7 @@ public class CantBeBlockedByTargetSourceEffect extends RestrictionEffect {
         super(duration);
     }
 
-    public CantBeBlockedByTargetSourceEffect(final CantBeBlockedByTargetSourceEffect effect) {
+    protected CantBeBlockedByTargetSourceEffect(final CantBeBlockedByTargetSourceEffect effect) {
         super(effect);
     }
 
@@ -48,21 +47,8 @@ public class CantBeBlockedByTargetSourceEffect extends RestrictionEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        StringBuilder sb = new StringBuilder();
-        Target target = mode.getTargets().get(0);
-        if (target.getNumberOfTargets() > 1) {
-            if (target.getNumberOfTargets() < target.getMaxNumberOfTargets()) {
-                sb.append("Up to");
-            }
-            sb.append(target.getMaxNumberOfTargets()).append(" target ");
-        } else {
-            sb.append("Target ");
-        }
-        sb.append(target.getTargetName()).append(" can't block {this}");
-        if (duration == Duration.EndOfTurn) {
-            sb.append(" this turn");
-        }
-
-        return sb.toString();
+        return getTargetPointer().describeTargets(mode.getTargets(), "it") +
+                " can't block {this}" +
+                (duration == Duration.EndOfTurn ? " this turn" : "");
     }
 }

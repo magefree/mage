@@ -42,7 +42,7 @@ public final class SamutVoiceOfDissent extends CardImpl {
 
     public SamutVoiceOfDissent(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(3);
@@ -64,7 +64,7 @@ public final class SamutVoiceOfDissent extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, filter)));
 
         //W, Tap: Untap another target creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new ManaCostsImpl("{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new ManaCostsImpl<>("{W}"));
         ability.addTarget(new TargetCreaturePermanent(filter2));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

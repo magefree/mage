@@ -28,7 +28,7 @@ public class BroodSliverTest extends CardTestPlayerBase {
         execute();
 
         assertLife(playerB, 19);
-        assertPermanentCount(playerA, "Sliver", 1);
-        assertPermanentCount(playerB, "Sliver", 0);
+        assertPermanentCount(playerA, "Sliver Token", 1);
+        assertPermanentCount(playerB, "Sliver Token", 0);
     }
 }

@@ -1,9 +1,7 @@
-
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
+import mage.abilities.common.LandfallAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.PayEnergyCost;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -12,12 +10,11 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.permanent.token.ArchitectOfTheUntamedBeastToken;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class ArchitectOfTheUntamed extends CardImpl {
@@ -31,10 +28,12 @@ public final class ArchitectOfTheUntamed extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever a land enters the battlefield under your control, you get {E}.
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new GetEnergyCountersControllerEffect(1), new FilterControlledLandPermanent("a land"), false, null, true));
+        this.addAbility(new LandfallAbility(new GetEnergyCountersControllerEffect(1)));
 
         // Pay {E}{E}{E}{E}{E}{E}{E}{E}: Create a 6/6 colorless Beast artifact creature token.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new ArchitectOfTheUntamedBeastToken(), 1), new PayEnergyCost(8)));
+        this.addAbility(new SimpleActivatedAbility(
+                new CreateTokenEffect(new ArchitectOfTheUntamedBeastToken(), 1), new PayEnergyCost(8)
+        ));
     }
 
     private ArchitectOfTheUntamed(final ArchitectOfTheUntamed card) {

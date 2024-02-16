@@ -39,7 +39,7 @@ public final class PaladinOfAtonement extends CardImpl {
 
         // When Paladin of Atonement dies, you gain life equal to it's toughness.
         this.addAbility(new DiesSourceTriggeredAbility(new GainLifeEffect(SourcePermanentToughnessValue.getInstance(),
-                "you gain life equal to it's toughness")));
+                "you gain life equal to its toughness")));
     }
 
     private PaladinOfAtonement(final PaladinOfAtonement card) {

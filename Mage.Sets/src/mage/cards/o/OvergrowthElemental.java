@@ -15,6 +15,7 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
@@ -30,12 +31,9 @@ public final class OvergrowthElemental extends CardImpl {
 
     private static final FilterPermanent filter
             = new FilterControlledCreaturePermanent(SubType.ELEMENTAL, "another target Elemental you control");
-    private static final FilterPermanent filter2
-            = new FilterControlledCreaturePermanent("another creature you control");
 
     static {
         filter.add(AnotherPredicate.instance);
-        filter2.add(AnotherPredicate.instance);
     }
 
     public OvergrowthElemental(UUID ownerId, CardSetInfo setInfo) {
@@ -53,7 +51,7 @@ public final class OvergrowthElemental extends CardImpl {
         this.addAbility(ability);
 
         // Whenever another creature you control dies, you gain 1 life. If that creature was an Elemental, put a +1/+1 counter on Overgrowth Elemental.
-        ability = new DiesCreatureTriggeredAbility(new GainLifeEffect(1), false, filter2, true);
+        ability = new DiesCreatureTriggeredAbility(new GainLifeEffect(1), false, StaticFilters.FILTER_ANOTHER_CREATURE_YOU_CONTROL, true);
         ability.addEffect(new OvergrowthElementalEffect());
         this.addAbility(ability);
     }

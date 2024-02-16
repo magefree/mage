@@ -24,9 +24,9 @@ public final class ImposterMech extends CardImpl {
     private static final CopyApplier applier = new CopyApplier() {
         @Override
         public boolean apply(Game game, MageObject blueprint, Ability source, UUID targetObjectId) {
-            blueprint.removeAllCardTypes(game);
-            blueprint.addCardType(game, CardType.ARTIFACT);
-            blueprint.addSubType(game, SubType.VEHICLE);
+            blueprint.removeAllCardTypes();
+            blueprint.addCardType(CardType.ARTIFACT);
+            blueprint.addSubType(SubType.VEHICLE);
             blueprint.getAbilities().add(new CrewAbility(3));
             return true;
         }
@@ -43,7 +43,7 @@ public final class ImposterMech extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(
                 new CopyPermanentEffect(StaticFilters.FILTER_OPPONENTS_PERMANENT_A_CREATURE, applier),
                 null, "You may have {this} enter the battlefield as a copy of a creature " +
-                "an opponent controls, except its a Vehicle artifact with crew 3 and it loses all other card types.", null
+                "an opponent controls, except it's a Vehicle artifact with crew 3 and it loses all other card types.", null
         ));
 
         // Crew 3

@@ -46,7 +46,7 @@ public final class Disarm extends CardImpl {
             this.staticText = "Unattach all Equipment from target creature";
         }
 
-        public DisarmEffect(final DisarmEffect effect) {
+        private DisarmEffect(final DisarmEffect effect) {
             super(effect);
         }
 

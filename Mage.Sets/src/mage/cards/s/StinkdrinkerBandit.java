@@ -39,7 +39,7 @@ public final class StinkdrinkerBandit extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Prowl {1}, {B} (You may cast this for its prowl cost if you dealt combat damage to a player this turn with a Goblin or Rogue.)
-        this.addAbility(new ProwlAbility(this, "{1}{B}"));
+        this.addAbility(new ProwlAbility("{1}{B}"));
 
         // Whenever a Rogue you control attacks and isn't blocked, it gets +2/+1 until end of turn.
         this.addAbility(new StinkdrinkerBanditTriggeredAbility());

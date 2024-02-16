@@ -34,7 +34,7 @@ public final class ScoutsWarning extends CardImpl {
         this.getSpellAbility().addWatcher(new ScoutsWarningWatcher());
 
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
     private ScoutsWarning(final ScoutsWarning card) {
@@ -49,7 +49,6 @@ public final class ScoutsWarning extends CardImpl {
 
 class ScoutsWarningAsThoughEffect extends AsThoughEffectImpl {
 
-    private ScoutsWarningWatcher watcher;
     private int zoneChangeCounter;
 
     public ScoutsWarningAsThoughEffect() {
@@ -57,15 +56,14 @@ class ScoutsWarningAsThoughEffect extends AsThoughEffectImpl {
         staticText = "The next creature card you play this turn can be played as though it had flash";
     }
 
-    public ScoutsWarningAsThoughEffect(final ScoutsWarningAsThoughEffect effect) {
+    private ScoutsWarningAsThoughEffect(final ScoutsWarningAsThoughEffect effect) {
         super(effect);
-        this.watcher = effect.watcher;
         this.zoneChangeCounter = effect.zoneChangeCounter;
     }
 
     @Override
     public void init(Ability source, Game game) {
-        watcher = game.getState().getWatcher(ScoutsWarningWatcher.class, source.getControllerId());
+        ScoutsWarningWatcher watcher = game.getState().getWatcher(ScoutsWarningWatcher.class, source.getControllerId());
         Card card = game.getCard(source.getSourceId());
         if (watcher != null && card != null) {
             zoneChangeCounter = card.getZoneChangeCounter(game);
@@ -85,11 +83,12 @@ class ScoutsWarningAsThoughEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        if (watcher.isScoutsWarningSpellActive(source.getSourceId(), zoneChangeCounter)) {
+        ScoutsWarningWatcher watcher = game.getState().getWatcher(ScoutsWarningWatcher.class, source.getControllerId());
+        if (watcher != null && watcher.isScoutsWarningSpellActive(source.getSourceId(), zoneChangeCounter)) {
             Card card = game.getCard(sourceId);
-            if (card != null && card.isCreature(game) && source.isControlledBy(affectedControllerId)) {
-                return true;
-            }
+            return card != null
+                    && card.isCreature(game)
+                    && source.isControlledBy(affectedControllerId);
         }
         return false;
     }

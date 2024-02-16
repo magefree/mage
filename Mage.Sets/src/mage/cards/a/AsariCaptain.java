@@ -40,8 +40,7 @@ public final class AsariCaptain extends CardImpl {
 
         // Whenever a Samurai or Warrior you control attacks alone, it gets +1/+0 until end of turn for each Samurai or Warrior you control.
         this.addAbility(new AttacksAloneControlledTriggeredAbility(
-                new BoostTargetEffect(xValue, StaticValue.get(0), Duration.EndOfTurn, true)
-                        .setText("it gets +1/+0 until end of turn for each Samurai or Warrior you control"),
+                new BoostTargetEffect(xValue, StaticValue.get(0), Duration.EndOfTurn),
                 StaticFilters.FILTER_CONTROLLED_SAMURAI_OR_WARRIOR, true, false
         ).addHint(hint));
     }

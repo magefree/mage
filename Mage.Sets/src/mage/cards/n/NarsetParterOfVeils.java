@@ -3,7 +3,6 @@ package mage.cards.n;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.cards.CardImpl;
@@ -23,7 +22,7 @@ import java.util.UUID;
  */
 public final class NarsetParterOfVeils extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("noncreature, nonland card");
+    private static final FilterCard filter = new FilterCard("a noncreature, nonland card");
 
     static {
         filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
@@ -33,22 +32,17 @@ public final class NarsetParterOfVeils extends CardImpl {
     public NarsetParterOfVeils(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{U}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.NARSET);
         this.setStartingLoyalty(5);
 
         // Each opponent can't draw more than one card each turn.
         this.addAbility(new SimpleStaticAbility(new NarsetParterOfVeilsEffect()), new CardsAmountDrawnThisTurnWatcher());
 
-        // -2: Look at the top four cards of your library. You may reveal a noncreature, nonland card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
-        this.addAbility(new LoyaltyAbility(new LookLibraryAndPickControllerEffect(
-                StaticValue.get(4), false, StaticValue.get(1), filter,
-                Zone.LIBRARY, false, true, false, Zone.HAND,
-                true, false, false
-        ).setBackInRandomOrder(true).setText("Look at the top four cards of your library. " +
-                "You may reveal a noncreature, nonland card from among them and put it into your hand. " +
-                "Put the rest on the bottom of your library in a random order."
-        ), -2));
+        // -2: Look at the top four cards of your library.
+        // You may reveal a noncreature, nonland card from among them and put it into your hand.
+        // Put the rest on the bottom of your library in a random order.
+        this.addAbility(new LoyaltyAbility(new LookLibraryAndPickControllerEffect(4, 1, filter, PutCards.HAND, PutCards.BOTTOM_RANDOM), -2));
     }
 
     private NarsetParterOfVeils(final NarsetParterOfVeils card) {

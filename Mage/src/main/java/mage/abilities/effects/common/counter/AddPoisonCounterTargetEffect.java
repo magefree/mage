@@ -1,16 +1,16 @@
 
 package mage.abilities.effects.common.counter;
 
-import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
+import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 /**
- *
  * @author North
  */
 public class AddPoisonCounterTargetEffect extends OneShotEffect {
@@ -26,7 +26,7 @@ public class AddPoisonCounterTargetEffect extends OneShotEffect {
         return amount;
     }
 
-    public AddPoisonCounterTargetEffect(final AddPoisonCounterTargetEffect effect) {
+    protected AddPoisonCounterTargetEffect(final AddPoisonCounterTargetEffect effect) {
         super(effect);
         this.amount = effect.amount;
     }
@@ -48,9 +48,11 @@ public class AddPoisonCounterTargetEffect extends OneShotEffect {
 
     @Override
     public String getText(Mode mode) {
-        if(staticText != null && !staticText.isEmpty()) {
+        if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        return "target " + mode.getTargets().get(0).getTargetName() + " gets " + Integer.toString(amount) + " poison counter(s).";
+        return getTargetPointer().describeTargets(mode.getTargets(), "it") +
+                (getTargetPointer().isPlural(mode.getTargets()) ? " get " : " gets ") +
+                CardUtil.getSimpleCountersText(amount, "a",  "poison");
     }
 }

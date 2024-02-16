@@ -18,4 +18,12 @@ public interface DynamicValue extends Serializable, Copyable<DynamicValue> {
     DynamicValue copy();
 
     String getMessage();
+
+    /**
+     *
+     * @return A positive value if the result of calculate() is usually positive, and a negative value if it is usually negative.
+     */
+    default int getSign() {
+        return 1;
+    }
 }

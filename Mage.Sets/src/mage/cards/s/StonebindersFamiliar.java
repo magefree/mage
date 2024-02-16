@@ -47,7 +47,7 @@ class StonebindersFamiliarTriggeredAbility extends TriggeredAbilityImpl {
 
     StonebindersFamiliarTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
-        this.setTriggersOnce(true);
+        this.setTriggersOnceEachTurn(true);
     }
 
     private StonebindersFamiliarTriggeredAbility(final StonebindersFamiliarTriggeredAbility ability) {

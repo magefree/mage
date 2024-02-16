@@ -33,7 +33,7 @@ public final class EssenceWarden extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever another creature enters the battlefield, you gain 1 life.
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new GainLifeEffect(1), filter, false, null));
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new GainLifeEffect(1), filter, false));
     }
 
     private EssenceWarden(final EssenceWarden card) {

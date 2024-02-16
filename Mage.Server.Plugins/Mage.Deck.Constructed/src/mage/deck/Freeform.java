@@ -10,11 +10,7 @@ import mage.cards.decks.DeckValidatorErrorType;
 public class Freeform extends DeckValidator {
 
     public Freeform() {
-        super("Constructed - Freeform");
-    }
-
-    public Freeform(String name) {
-        super(name);
+        this("Constructed - Freeform", null);
     }
 
     public Freeform(String name, String shortName) {
@@ -36,8 +32,8 @@ public class Freeform extends DeckValidator {
         boolean valid = true;
         errorsList.clear();
         // http://magic.wizards.com/en/gameinfo/gameplay/formats/freeform
-        if (deck.getCards().size() < getDeckMinSize()) {
-            addError(DeckValidatorErrorType.DECK_SIZE, "Deck", "Must contain at least " + getDeckMinSize() + " cards: has only " + deck.getCards().size() + " cards");
+        if (deck.getMaindeckCards().size() < getDeckMinSize()) {
+            addError(DeckValidatorErrorType.DECK_SIZE, "Deck", "Must contain at least " + getDeckMinSize() + " cards: has only " + deck.getMaindeckCards().size() + " cards");
             valid = false;
         }
         return valid;

@@ -24,7 +24,7 @@ public final class FieldResearch extends CardImpl {
         // Draw two cards. If this spell was kicked, draw three cards instead.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new DrawCardSourceControllerEffect(3), new DrawCardSourceControllerEffect(2),
-                KickedCondition.instance, "Draw two cards. If this spell was kicked, draw three cards instead."
+                KickedCondition.ONCE, "Draw two cards. If this spell was kicked, draw three cards instead."
         ));
     }
 

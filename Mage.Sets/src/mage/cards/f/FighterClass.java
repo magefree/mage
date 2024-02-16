@@ -122,7 +122,7 @@ class FighterClassRequirementEffect extends RequirementEffect {
         this.mor = mor;
     }
 
-    public FighterClassRequirementEffect(final FighterClassRequirementEffect effect) {
+    private FighterClassRequirementEffect(final FighterClassRequirementEffect effect) {
         super(effect);
         this.mor = effect.mor;
     }

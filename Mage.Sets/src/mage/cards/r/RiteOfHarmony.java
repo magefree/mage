@@ -9,7 +9,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.TimingRule;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
@@ -32,7 +31,7 @@ public final class RiteOfHarmony extends CardImpl {
         getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new RiteOfHarmonyTriggeredAbility()));
 
         // Flashback {2}{G}{W}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{2}{G}{W}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{2}{G}{W}")));
 
     }
 
@@ -59,7 +58,7 @@ class RiteOfHarmonyTriggeredAbility extends DelayedTriggeredAbility {
         optional = false;
     }
 
-    public RiteOfHarmonyTriggeredAbility(RiteOfHarmonyTriggeredAbility ability) {
+    private RiteOfHarmonyTriggeredAbility(final RiteOfHarmonyTriggeredAbility ability) {
         super(ability);
     }
 
@@ -72,7 +71,7 @@ class RiteOfHarmonyTriggeredAbility extends DelayedTriggeredAbility {
     public boolean checkTrigger(GameEvent event, Game game) {
         UUID targetId = event.getTargetId();
         Permanent permanent = game.getPermanent(targetId);
-        return filter.match(permanent, getSourceId(), getControllerId(), game);
+        return filter.match(permanent, getControllerId(), this, game);
     }
 
     @Override

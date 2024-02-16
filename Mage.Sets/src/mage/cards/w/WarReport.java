@@ -37,12 +37,12 @@ public final class WarReport extends CardImpl {
 
 class WarReportEffect extends OneShotEffect {
 
-    public WarReportEffect() {
+    WarReportEffect() {
         super(Outcome.GainLife);
         staticText = "You gain life equal to the number of creatures on the battlefield plus the number of artifacts on the battlefield";
     }
 
-    public WarReportEffect(final WarReportEffect effect) {
+    private WarReportEffect(final WarReportEffect effect) {
         super(effect);
     }
 
@@ -55,8 +55,8 @@ class WarReportEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            int lifeToGain = game.getBattlefield().count(StaticFilters.FILTER_PERMANENT_CREATURE, source.getSourceId(), source.getControllerId(), game);
-            lifeToGain += game.getBattlefield().count(new FilterArtifactPermanent(), source.getSourceId(), source.getControllerId(), game);
+            int lifeToGain = game.getBattlefield().count(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source, game);
+            lifeToGain += game.getBattlefield().count(new FilterArtifactPermanent(), source.getControllerId(), source, game);
             player.gainLife(lifeToGain, game, source);
         }
         return true;

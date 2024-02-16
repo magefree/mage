@@ -31,7 +31,7 @@ public final class StreetSavvy extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Enchanted creature gets +0/+2 and can block creatures with landwalk abilities as though they didn't have those abilities.
@@ -53,12 +53,12 @@ public final class StreetSavvy extends CardImpl {
 
 class StreetSavvyEffect extends AsThoughEffectImpl {
 
-    public StreetSavvyEffect() {
+    StreetSavvyEffect() {
         super(AsThoughEffectType.BLOCK_LANDWALK, Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "";
     }
 
-    public StreetSavvyEffect(final StreetSavvyEffect effect) {
+    private StreetSavvyEffect(final StreetSavvyEffect effect) {
         super(effect);
     }
 

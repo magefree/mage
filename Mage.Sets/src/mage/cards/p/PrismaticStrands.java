@@ -64,7 +64,7 @@ class PrismaticStrandsEffect extends OneShotEffect {
         this.staticText = "Prevent all damage that sources of the color of your choice would deal this turn";
     }
 
-    PrismaticStrandsEffect(final PrismaticStrandsEffect effect) {
+    private PrismaticStrandsEffect(final PrismaticStrandsEffect effect) {
         super(effect);
     }
 
@@ -76,7 +76,7 @@ class PrismaticStrandsEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (controller != null && sourceObject != null) {
             ChoiceColor choice = new ChoiceColor();
             controller.choose(Outcome.PreventDamage, choice, game);
@@ -101,14 +101,9 @@ class PrismaticStrandsPreventionEffect extends PreventionEffectImpl {
         this.color = color;
     }
 
-    PrismaticStrandsPreventionEffect(PrismaticStrandsPreventionEffect effect) {
+    private PrismaticStrandsPreventionEffect(final PrismaticStrandsPreventionEffect effect) {
         super(effect);
         this.color = effect.color;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

@@ -10,7 +10,6 @@ import mage.game.Game;
 import mage.players.Player;
 
 /**
- *
  * @author Styxo
  */
 public class SetPlayerLifeTargetEffect extends OneShotEffect {
@@ -27,7 +26,7 @@ public class SetPlayerLifeTargetEffect extends OneShotEffect {
         this.staticText = setText();
     }
 
-    public SetPlayerLifeTargetEffect(final SetPlayerLifeTargetEffect effect) {
+    protected SetPlayerLifeTargetEffect(final SetPlayerLifeTargetEffect effect) {
         super(effect);
         this.amount = effect.amount;
     }

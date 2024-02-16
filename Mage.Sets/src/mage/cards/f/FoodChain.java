@@ -36,7 +36,7 @@ public final class FoodChain extends CardImpl {
 
         // Exile a creature you control: Add X mana of any one color, where X is the exiled creature's converted mana cost plus one. Spend this mana only to cast creature spells.
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new FoodChainManaEffect(),
-                new ExileTargetCost(new TargetControlledCreaturePermanent(1, 1, StaticFilters.FILTER_CONTROLLED_A_CREATURE, true)));
+                new ExileTargetCost(new TargetControlledCreaturePermanent(StaticFilters.FILTER_CONTROLLED_A_CREATURE)));
         this.addAbility(ability);
     }
 
@@ -71,7 +71,7 @@ class FoodChainManaEffect extends ManaEffect {
         this.staticText = "Add X mana of any one color, where X is 1 plus the exiled creature's mana value. Spend this mana only to cast creature spells";
     }
 
-    FoodChainManaEffect(final FoodChainManaEffect effect) {
+    private FoodChainManaEffect(final FoodChainManaEffect effect) {
         super(effect);
     }
 

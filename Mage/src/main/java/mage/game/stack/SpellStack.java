@@ -4,16 +4,16 @@ package mage.game.stack;
 import java.util.ArrayDeque;
 import java.util.Date;
 import java.util.UUID;
+
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.constants.Zone;
-import mage.constants.ZoneDetail;
+import mage.constants.PutCards;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.util.CardUtil;
 import org.apache.log4j.Logger;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class SpellStack extends ArrayDeque<StackObject> {
@@ -25,7 +25,7 @@ public class SpellStack extends ArrayDeque<StackObject> {
     public SpellStack() {
     }
 
-    public SpellStack(final SpellStack stack) {
+    protected SpellStack(final SpellStack stack) {
 
         for (StackObject spell : stack) {
             this.addLast(spell.copy());
@@ -60,15 +60,12 @@ public class SpellStack extends ArrayDeque<StackObject> {
     }
 
     public boolean counter(UUID objectId, Ability source, Game game) {
-        return counter(objectId, source, game, Zone.GRAVEYARD, false, ZoneDetail.TOP);
+        return counter(objectId, source, game, PutCards.GRAVEYARD);
     }
 
-    public boolean counter(UUID objectId, Ability source, Game game, Zone zone, boolean owner, ZoneDetail zoneDetail) {
-        // the counter logic is copied by some spells to handle replacement effects of the countered spell
-        // so if logic is changed here check those spells for needed changes too
-        // Concerned cards to check: Hinder, Spell Crumple
+    public boolean counter(UUID objectId, Ability source, Game game, PutCards putCard) {
         StackObject stackObject = getStackObject(objectId);
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (stackObject != null && sourceObject != null) {
             MageObject targetSourceObject = game.getObject(stackObject.getSourceId());
             String counteredObjectName, targetSourceName;
@@ -86,7 +83,7 @@ public class SpellStack extends ArrayDeque<StackObject> {
                 if (!(stackObject instanceof Spell)) { // spells are removed from stack by the card movement
                     this.remove(stackObject, game);
                 }
-                stackObject.counter(source, game, zone, owner, zoneDetail);
+                stackObject.counter(source, game, putCard);
                 if (!game.isSimulation()) {
                     game.informPlayers(counteredObjectName + " is countered by " + sourceObject.getLogName());
                 }
@@ -146,6 +143,6 @@ public class SpellStack extends ArrayDeque<StackObject> {
 
     @Override
     public String toString() {
-        return this.size() + (this.isEmpty() ? "" : " (top: " + this.getFirst().toString() + ")");
+        return this.size() + (this.isEmpty() ? "" : " (top: " + CardUtil.substring(this.getFirst().toString(), 100) + ")");
     }
 }

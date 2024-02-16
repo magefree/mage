@@ -27,7 +27,7 @@ public final class ZanikevLocust extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Scavenge {2}{B}{B} ({2}{B}{B}, Exile this card from your graveyard: Put a number of +1/+1 counters equal to this card's power on target creature. Scavenge only as a sorcery.)
-        this.addAbility(new ScavengeAbility(new ManaCostsImpl("{2}{B}{B}")));
+        this.addAbility(new ScavengeAbility(new ManaCostsImpl<>("{2}{B}{B}")));
     }
 
     private ZanikevLocust(final ZanikevLocust card) {

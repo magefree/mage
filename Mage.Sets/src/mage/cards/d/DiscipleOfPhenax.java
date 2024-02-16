@@ -9,7 +9,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.target.TargetPlayer;
 
 import java.util.UUID;
@@ -29,7 +28,7 @@ public final class DiscipleOfPhenax extends CardImpl {
 
         // When Disciple of Phenax enters the battlefield, target player reveals a number of cards
         // from their hand equal to your devotion to black. You choose one of them. That player discards that card.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DiscardCardYouChooseTargetEffect(TargetController.ANY, DevotionCount.B));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DiscardCardYouChooseTargetEffect(DevotionCount.B));
         ability.addTarget(new TargetPlayer());
         ability.addHint(DevotionCount.B.getHint());
         this.addAbility(ability);

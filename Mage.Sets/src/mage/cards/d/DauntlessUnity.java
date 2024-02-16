@@ -58,7 +58,7 @@ class DauntlessUnityEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (KickedCondition.instance.apply(game, source)) {
+        if (KickedCondition.ONCE.apply(game, source)) {
             game.addEffect(new BoostControlledEffect(2, 1, Duration.EndOfTurn), source);
         } else {
             game.addEffect(new BoostControlledEffect(1, 1, Duration.EndOfTurn), source);

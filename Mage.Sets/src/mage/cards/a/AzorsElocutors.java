@@ -52,9 +52,10 @@ class AzorsElocutorsTriggeredAbility extends TriggeredAbilityImpl {
 
     public AzorsElocutorsTriggeredAbility() {
         super(Zone.BATTLEFIELD, new RemoveCounterSourceEffect(CounterType.FILIBUSTER.createInstance()), false);
+        setTriggerPhrase("Whenever a source deals damage to you, ");
     }
 
-    public AzorsElocutorsTriggeredAbility(final AzorsElocutorsTriggeredAbility ability) {
+    private AzorsElocutorsTriggeredAbility(final AzorsElocutorsTriggeredAbility ability) {
         super(ability);
     }
 
@@ -72,22 +73,16 @@ class AzorsElocutorsTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         return event.getTargetId().equals(this.controllerId);
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a source deals damage to you, " ;
-    }
-
 }
 
 class AzorsElocutorsEffect extends OneShotEffect {
 
-    public AzorsElocutorsEffect() {
+    AzorsElocutorsEffect() {
         super(Outcome.Benefit);
         staticText = "put a filibuster counter on Azor's Elocutors. Then if Azor's Elocutors has five or more filibuster counters on it, you win the game";
     }
 
-    public AzorsElocutorsEffect(final AzorsElocutorsEffect effect) {
+    private AzorsElocutorsEffect(final AzorsElocutorsEffect effect) {
         super(effect);
     }
 

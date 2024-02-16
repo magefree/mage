@@ -29,7 +29,7 @@ public final class BorosLocket extends CardImpl {
         // {R/W}{R/W}{R/W}{R/W}, {T}, Sacrifice Boros Locket: Draw two cards.
         Ability ability = new SimpleActivatedAbility(
                 new DrawCardSourceControllerEffect(2),
-                new ManaCostsImpl("{R/W}{R/W}{R/W}{R/W}")
+                new ManaCostsImpl<>("{R/W}{R/W}{R/W}{R/W}")
         );
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());

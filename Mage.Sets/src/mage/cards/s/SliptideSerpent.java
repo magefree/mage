@@ -25,7 +25,7 @@ public final class SliptideSerpent extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {3}{U}: Return Sliptide Serpent to its owner's hand.
-        this.addAbility(new SimpleActivatedAbility(new ReturnToHandSourceEffect(true), new ManaCostsImpl("{3}{U}")));
+        this.addAbility(new SimpleActivatedAbility(new ReturnToHandSourceEffect(true), new ManaCostsImpl<>("{3}{U}")));
     }
 
     private SliptideSerpent(final SliptideSerpent card) {

@@ -70,7 +70,7 @@ class JourneyForTheElixirEffect extends OneShotEffect {
         player.searchLibrary(targetCardInLibrary, source, game);
         Cards cards = new CardsImpl(targetCardInLibrary.getTargets());
         TargetCard target = new JourneyForTheElixirGraveyardTarget(cards);
-        player.choose(outcome, target, source.getSourceId(), game);
+        player.choose(outcome, target, source, game);
         cards.addAll(target.getTargets());
         player.revealCards(source, cards, game);
         player.moveCards(cards, Zone.HAND, source, game);
@@ -121,14 +121,14 @@ class JourneyForTheElixirLibraryTarget extends TargetCardInLibrary {
             return true;
         }
         Cards cards = new CardsImpl(this.getTargets());
-        if (card.isBasic()
+        if (card.isBasic(game)
                 && card.isLand(game)
                 && cards
                 .getCards(game)
                 .stream()
                 .filter(Objects::nonNull)
-                .filter(MageObject::isBasic)
-                .anyMatch(card1 -> card1.isLand(game))) {
+                .filter(c -> c.isBasic(game))
+                .anyMatch(c -> c.isLand(game))) {
             return false;
         }
         if (name.equals(card.getName())
@@ -168,7 +168,7 @@ class JourneyForTheElixirGraveyardTarget extends TargetCardInYourGraveyard {
 
     private JourneyForTheElixirGraveyardTarget(final JourneyForTheElixirGraveyardTarget target) {
         super(target);
-        this.cards.addAll(cards);
+        this.cards.addAll(target.cards);
     }
 
     @Override
@@ -177,22 +177,22 @@ class JourneyForTheElixirGraveyardTarget extends TargetCardInYourGraveyard {
     }
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
-        Set<UUID> possibleTargets = super.possibleTargets(sourceId, sourceControllerId, game);
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
+        Set<UUID> possibleTargets = super.possibleTargets(sourceControllerId, source, game);
         Cards alreadyTargeted = new CardsImpl(this.getTargets());
         alreadyTargeted.addAll(cards);
         boolean hasBasic = alreadyTargeted
                 .getCards(game)
                 .stream()
                 .filter(Objects::nonNull)
-                .filter(card1 -> card1.isLand(game))
-                .anyMatch(MageObject::isBasic);
+                .filter(c -> c.isLand(game))
+                .anyMatch(c -> c.isBasic(game));
         possibleTargets.removeIf(uuid -> {
             Card card = game.getCard(uuid);
             return card != null
                     && hasBasic
                     && card.isLand(game)
-                    && card.isBasic();
+                    && card.isBasic(game);
         });
         boolean hasYanggu = alreadyTargeted
                 .getCards(game)

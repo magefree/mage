@@ -10,7 +10,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class PreventDamageToTargetEffect extends PreventionEffectImpl {
@@ -35,7 +34,7 @@ public class PreventDamageToTargetEffect extends PreventionEffectImpl {
         super(duration, 0, onlyCombat, consumable, amountToPreventDynamic);
     }
 
-    public PreventDamageToTargetEffect(final PreventDamageToTargetEffect effect) {
+    protected PreventDamageToTargetEffect(final PreventDamageToTargetEffect effect) {
         super(effect);
     }
 
@@ -60,12 +59,7 @@ public class PreventDamageToTargetEffect extends PreventionEffectImpl {
         } else {
             sb.append("prevent the next ").append(amountToPrevent).append(" damage that would be dealt to ");
         }
-        String targetName = mode.getTargets().get(0).getTargetName();
-        if (targetName.contains("any")) {
-            sb.append(targetName);
-        } else {
-            sb.append("target ").append(targetName);
-        }
+        sb.append(getTargetPointer().describeTargets(mode.getTargets(), "it"));
         if (!duration.toString().isEmpty()) {
             sb.append(' ');
             if (duration == Duration.EndOfTurn) {

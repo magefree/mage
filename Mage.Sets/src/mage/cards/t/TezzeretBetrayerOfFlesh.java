@@ -35,7 +35,7 @@ public final class TezzeretBetrayerOfFlesh extends CardImpl {
     public TezzeretBetrayerOfFlesh(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{U}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.TEZZERET);
         this.setStartingLoyalty(4);
 
@@ -172,8 +172,8 @@ class TezzeretBetrayerOfFleshTypeEffect extends ContinuousEffectImpl {
                         || permanent.hasSubtype(SubType.VEHICLE, game)) {
                     return false;
                 }
-                permanent.getPower().setValue(4);
-                permanent.getToughness().setValue(4);
+                permanent.getPower().setModifiedBaseValue(4);
+                permanent.getToughness().setModifiedBaseValue(4);
                 return true;
         }
         return false;

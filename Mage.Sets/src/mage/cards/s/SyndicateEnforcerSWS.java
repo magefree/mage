@@ -61,7 +61,7 @@ class SyndicateEnforcerTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, effect, false);
     }
 
-    public SyndicateEnforcerTriggeredAbility(final SyndicateEnforcerTriggeredAbility ability) {
+    private SyndicateEnforcerTriggeredAbility(final SyndicateEnforcerTriggeredAbility ability) {
         super(ability);
     }
 

@@ -15,7 +15,6 @@ import mage.abilities.keyword.MadnessAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TimingRule;
 import mage.game.permanent.token.GoblinToken;
 import mage.target.common.TargetAnyTarget;
 
@@ -29,23 +28,23 @@ public final class BlastFromThePast extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}");
 
         // Madness {R}
-        this.addAbility(new MadnessAbility(this, new ManaCostsImpl("{R}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl<>("{R}")));
         // Cycling {1}{R}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{1}{R}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{1}{R}")));
         // Kicker {2}{R}
         this.addAbility(new KickerAbility("{2}{R}"));
         // Flashback {3}{R}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{3}{R}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{3}{R}")));
         // Buyback {4}{R}
         this.addAbility(new BuybackAbility("{4}{R}"));
 
         // Blast from the Past deals 2 damage to any target. If this spell was kicked, create a 1/1 red Goblin creature token.
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
-        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new CreateTokenEffect(new GoblinToken()), KickedCondition.instance));
+        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new CreateTokenEffect(new GoblinToken()), KickedCondition.ONCE));
     }
 
-    public BlastFromThePast (final BlastFromThePast card) {
+    private BlastFromThePast(final BlastFromThePast card) {
         super(card);
     }
 

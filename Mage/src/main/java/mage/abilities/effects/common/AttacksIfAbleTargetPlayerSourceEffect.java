@@ -11,11 +11,11 @@ import java.util.UUID;
 public class AttacksIfAbleTargetPlayerSourceEffect extends RequirementEffect {
 
     public AttacksIfAbleTargetPlayerSourceEffect() {
-        super(Duration.EndOfTurn);
+        super(Duration.EndOfCombat);
         staticText = "{this} attacks that player this combat if able";
     }
 
-    public AttacksIfAbleTargetPlayerSourceEffect(final AttacksIfAbleTargetPlayerSourceEffect effect) {
+    protected AttacksIfAbleTargetPlayerSourceEffect(final AttacksIfAbleTargetPlayerSourceEffect effect) {
         super(effect);
     }
 

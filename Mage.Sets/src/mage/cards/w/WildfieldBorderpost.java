@@ -48,7 +48,7 @@ public final class WildfieldBorderpost extends CardImpl {
         this.addAbility(new WhiteManaAbility());
     }
 
-    public WildfieldBorderpost (final WildfieldBorderpost card) {
+    private WildfieldBorderpost(final WildfieldBorderpost card) {
         super(card);
     }
 

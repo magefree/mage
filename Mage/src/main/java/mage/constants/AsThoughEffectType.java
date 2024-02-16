@@ -36,6 +36,7 @@ public enum AsThoughEffectType {
     // 4. You must implement/override an applies method with "Ability affectedAbility" (e.g. check multiple play/cast abilities from all card's parts)
     // TODO: search all PLAY_FROM_NOT_OWN_HAND_ZONE and CAST_AS_INSTANT effects and add support of mainCard and objectId
     PLAY_FROM_NOT_OWN_HAND_ZONE(true, true),
+    CAST_ADVENTURE_FROM_NOT_OWN_HAND_ZONE(true, true),
     CAST_AS_INSTANT(true, true),
     //
     ACTIVATE_AS_INSTANT(true, false),

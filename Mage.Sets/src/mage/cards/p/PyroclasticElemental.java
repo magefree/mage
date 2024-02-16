@@ -27,7 +27,7 @@ public final class PyroclasticElemental extends CardImpl {
 
         // {1}{R}{R}: Pyroclastic Elemental deals 1 damage to target player.
         Ability ability = new SimpleActivatedAbility(
-                new DamageTargetEffect(1), new ManaCostsImpl("{1}{R}{R}")
+                new DamageTargetEffect(1), new ManaCostsImpl<>("{1}{R}{R}")
         );
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);

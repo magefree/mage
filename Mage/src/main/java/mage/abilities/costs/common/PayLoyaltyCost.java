@@ -38,7 +38,7 @@ public class PayLoyaltyCost extends CostImpl {
         // apply cost modification
         if (ability instanceof LoyaltyAbility) {
             LoyaltyAbility copiedAbility = ((LoyaltyAbility) ability).copy();
-            planeswalker.adjustCosts(copiedAbility, game);
+            copiedAbility.adjustCosts(game);
             game.getContinuousEffects().costModification(copiedAbility, game);
             loyaltyCost = 0;
             for (Cost cost : copiedAbility.getCosts()) {

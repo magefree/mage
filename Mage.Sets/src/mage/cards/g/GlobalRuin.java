@@ -46,12 +46,12 @@ public final class GlobalRuin extends CardImpl {
 
 class GlobalRuinDestroyLandEffect extends OneShotEffect {
 
-    public GlobalRuinDestroyLandEffect() {
+    GlobalRuinDestroyLandEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "Each player chooses from the lands they control a land of each basic land type, then sacrifices the rest";
     }
 
-    public GlobalRuinDestroyLandEffect(final GlobalRuinDestroyLandEffect effect) {
+    private GlobalRuinDestroyLandEffect(final GlobalRuinDestroyLandEffect effect) {
         super(effect);
     }
 
@@ -70,7 +70,7 @@ class GlobalRuinDestroyLandEffect extends OneShotEffect {
                     FilterControlledLandPermanent filter = new FilterControlledLandPermanent(landName + " you control");
                     filter.add(landName.getPredicate());
                     Target target = new TargetControlledPermanent(1, 1, filter, true);
-                    if (target.canChoose(source.getSourceId(), player.getId(), game)) {
+                    if (target.canChoose(player.getId(), source, game)) {
                         player.chooseTarget(outcome, target, source, game);
                         lands.add(target.getFirstTarget());
                     }

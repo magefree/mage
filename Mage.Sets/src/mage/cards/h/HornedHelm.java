@@ -41,7 +41,7 @@ public final class HornedHelm extends CardImpl {
         ability.addEffect(effect);
         this.addAbility(ability);
         // {G}{G}: Attach Horned Helm to target creature you control.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AttachEffect(Outcome.BoostCreature, "Attach {this} to target creature you control"), new ManaCostsImpl("{G}{G}"));
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AttachEffect(Outcome.BoostCreature, "Attach {this} to target creature you control"), new ManaCostsImpl<>("{G}{G}"));
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
         // Equip {1}

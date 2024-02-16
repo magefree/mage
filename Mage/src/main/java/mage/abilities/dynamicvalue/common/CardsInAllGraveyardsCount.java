@@ -38,8 +38,8 @@ public class CardsInAllGraveyardsCount implements DynamicValue {
                 .filter(Objects::nonNull)
                 .map(Player::getGraveyard)
                 .mapToInt(graveyard -> graveyard.count(
-                        filter, sourceAbility.getSourceId(),
-                        sourceAbility.getControllerId(), game
+                        filter,
+                        sourceAbility.getControllerId(), sourceAbility, game
                 )).sum();
     }
 

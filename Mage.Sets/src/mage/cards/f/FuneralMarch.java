@@ -36,7 +36,7 @@ public final class FuneralMarch extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Benefit));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // When enchanted creature leaves the battlefield, its controller sacrifices a creature.
@@ -59,7 +59,7 @@ class FuneralMarchTriggeredAbility extends ZoneChangeTriggeredAbility {
         super(Zone.BATTLEFIELD, null, new SacrificeEffect(StaticFilters.FILTER_PERMANENT_CREATURE, 1, "its controller"), "When enchanted creature leaves the battlefield, ", false);
     }
 
-    public FuneralMarchTriggeredAbility(final FuneralMarchTriggeredAbility ability) {
+    private FuneralMarchTriggeredAbility(final FuneralMarchTriggeredAbility ability) {
         super(ability);
     }
 

@@ -30,7 +30,7 @@ public final class BalduvianFallen extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Cumulative upkeep {1}
-        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{1}")));
+        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{1}")));
 
         // Whenever Balduvian Fallen's cumulative upkeep is paid, it gets +1/+0 until end of turn for each {B} or {R} spent this way.
         this.addAbility(new BalduvianFallenAbility());
@@ -82,6 +82,6 @@ class BalduvianFallenAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever {this}'s cumulative upkeep is paid, it gets +1/+0 until end of turn for each {B} or {R} spent this way";
+        return "Whenever {this}'s cumulative upkeep is paid, it gets +1/+0 until end of turn for each {B} or {R} spent this way.";
     }
 }

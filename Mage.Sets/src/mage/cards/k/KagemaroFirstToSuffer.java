@@ -12,7 +12,7 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
 import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -30,7 +30,7 @@ public final class KagemaroFirstToSuffer extends CardImpl {
 
     public KagemaroFirstToSuffer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DEMON);
         this.subtype.add(SubType.SPIRIT);
 
@@ -39,15 +39,15 @@ public final class KagemaroFirstToSuffer extends CardImpl {
 
         DynamicValue xValue = CardsInControllerHandCount.instance;
         // Kagemaro, First to Suffer's power and toughness are each equal to the number of cards in your hand.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(xValue, Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(xValue)));
         // {B}, Sacrifice Kagemaro: All creatures get -X/-X until end of turn, where X is the number of cards in your hand.
 
         DynamicValue xMinusValue = new SignInversionDynamicValue(xValue);
         Ability ability = new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
                 new BoostAllEffect(xMinusValue, xMinusValue, Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE, false,
-                        "All creatures get -X/-X until end of turn, where X is the number of cards in your hand", true),
-                new ManaCostsImpl("{B}")
+                        "All creatures get -X/-X until end of turn, where X is the number of cards in your hand"),
+                new ManaCostsImpl<>("{B}")
         );
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

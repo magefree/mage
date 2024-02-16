@@ -35,7 +35,7 @@ public final class AmbuscadeShaman extends CardImpl {
         ));
 
         // Dash {3}{B} <i>(You may cast this spell for its dash cost. If you do, it gains haste, and it's returned from the battlefield to its owner's hand at the beginning of the next end step.)</i>);
-        this.addAbility(new DashAbility(this, "{3}{B}"));
+        this.addAbility(new DashAbility("{3}{B}"));
     }
 
     private AmbuscadeShaman(final AmbuscadeShaman card) {

@@ -26,7 +26,7 @@ public final class NadaarSelflessPaladin extends CardImpl {
     public NadaarSelflessPaladin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DRAGON);
         this.subtype.add(SubType.KNIGHT);
         this.power = new MageInt(3);

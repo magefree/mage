@@ -15,13 +15,13 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.SpiritWhiteToken;
-import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
 
@@ -30,14 +30,12 @@ import java.util.UUID;
  */
 public final class SpiritBonds extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("non-Spirit creature you control");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Spirit creature");
     private static final FilterControlledPermanent filterSpirit = new FilterControlledPermanent("Spirit");
-    private static final FilterControlledCreaturePermanent filterNontoken = new FilterControlledCreaturePermanent("nontoken creature");
 
     static {
         filter.add(Predicates.not(SubType.SPIRIT.getPredicate()));
         filterSpirit.add(SubType.SPIRIT.getPredicate());
-        filterNontoken.add(TokenPredicate.FALSE);
     }
 
     public SpiritBonds(UUID ownerId, CardSetInfo setInfo) {
@@ -45,13 +43,13 @@ public final class SpiritBonds extends CardImpl {
 
 
         // Whenever a nontoken creature enters the battlefield under your control, you may pay {W}. If you do, but a 1/1 white Spirit creature token with flying into play.
-        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new DoIfCostPaid(new CreateTokenEffect(new SpiritWhiteToken()), new ManaCostsImpl("{W}")), filterNontoken, false));
+        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new DoIfCostPaid(new CreateTokenEffect(new SpiritWhiteToken()), new ManaCostsImpl<>("{W}")), StaticFilters.FILTER_CREATURE_NON_TOKEN, false));
 
-        // {1}{W}, Sacrifice a Spirit: Target non-Spirit creature you control gains indestructible until end of turn.
+        // {1}{W}, Sacrifice a Spirit: Target non-Spirit creature gains indestructible until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new GainAbilityTargetEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{1}{W}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(1, 1, filterSpirit, true)));
-        ability.addTarget(new TargetControlledCreaturePermanent(filter));
+                new GainAbilityTargetEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{1}{W}"));
+        ability.addCost(new SacrificeTargetCost(filterSpirit));
+        ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }
 

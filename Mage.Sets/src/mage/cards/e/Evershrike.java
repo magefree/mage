@@ -46,7 +46,7 @@ public final class Evershrike extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new BoostSourceEffect(amount, amount, Duration.WhileOnBattlefield)));
 
         // {X}{WB}{WB}: Return Evershrike from your graveyard to the battlefield. You may put an Aura card with converted mana cost X or less from your hand onto the battlefield attached to it. If you don't, exile Evershrike.
-        this.addAbility(new SimpleActivatedAbility(Zone.GRAVEYARD, new EvershrikeEffect(), new ManaCostsImpl("{X}{W/B}{W/B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.GRAVEYARD, new EvershrikeEffect(), new ManaCostsImpl<>("{X}{W/B}{W/B}")));
     }
 
     private Evershrike(final Evershrike card) {
@@ -97,7 +97,7 @@ class EvershrikeEffect extends OneShotEffect {
         int count = controller.getHand().count(filterAuraCard, game);
         if (count > 0 && controller.chooseUse(Outcome.Benefit, "Put an Aura card from your hand onto the battlefield attached to " + evershrikeCard.getIdName() + "?", source, game)) {
             TargetCard targetAura = new TargetCard(Zone.HAND, filterAuraCard);
-            if (controller.choose(Outcome.Benefit, controller.getHand(), targetAura, game)) {
+            if (controller.choose(Outcome.Benefit, controller.getHand(), targetAura, source, game)) {
                 Card aura = game.getCard(targetAura.getFirstTarget());
                 if (aura != null) {
                     game.getState().setValue("attachTo:" + aura.getId(), evershrikePermanent);

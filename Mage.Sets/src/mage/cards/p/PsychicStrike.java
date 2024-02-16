@@ -1,4 +1,3 @@
-
 package mage.cards.p;
 
 import java.util.UUID;
@@ -8,7 +7,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.stack.StackObject;
 import mage.players.Player;
@@ -23,9 +21,8 @@ public final class PsychicStrike extends CardImpl {
     public PsychicStrike(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}{B}");
 
-
         // Counter target spell. Its controller puts the top two cards of their library into their graveyard.
-        this.getSpellAbility().addTarget(new TargetSpell(StaticFilters.FILTER_SPELL));
+        this.getSpellAbility().addTarget(new TargetSpell());
         this.getSpellAbility().addEffect(new PsychicStrikeEffect());
     }
 
@@ -41,12 +38,12 @@ public final class PsychicStrike extends CardImpl {
 
 class PsychicStrikeEffect extends OneShotEffect {
 
-    public PsychicStrikeEffect() {
+    PsychicStrikeEffect() {
         super(Outcome.Detriment);
-        staticText = "Counter target spell. Its controller puts the top two cards of their library into their graveyard";
+        staticText = "Counter target spell. Its controller mills two cards";
     }
 
-    public PsychicStrikeEffect(final PsychicStrikeEffect effect) {
+    private PsychicStrikeEffect(final PsychicStrikeEffect effect) {
         super(effect);
     }
 

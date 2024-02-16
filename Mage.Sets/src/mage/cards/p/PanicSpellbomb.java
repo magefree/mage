@@ -33,7 +33,7 @@ public final class PanicSpellbomb extends CardImpl {
         this.addAbility(ability);
 
         // When Panic Spellbomb is put into a graveyard from the battlefield, you may pay Red. If you do, draw a card.
-        this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{R}")), false, false));
+        this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{R}")), false, false));
     }
 
     private PanicSpellbomb(final PanicSpellbomb card) {

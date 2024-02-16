@@ -25,7 +25,7 @@ import java.util.UUID;
  * @author ciaccona007
  */
 public final class Bifurcate extends CardImpl {
-    private static FilterCreaturePermanent filter = new FilterCreaturePermanent("nontoken creatures");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nontoken creatures");
 
     static {
         filter.add(TokenPredicate.FALSE);
@@ -51,12 +51,12 @@ public final class Bifurcate extends CardImpl {
 
 class BifurcateEffect extends OneShotEffect {
 
-    public BifurcateEffect() {
+    BifurcateEffect() {
         super(Outcome.Benefit);
         this.staticText = "search your library for a permanent card with the same name as target nontoken creature, put that card onto the battlefield, then shuffle";
     }
 
-    public BifurcateEffect(final BifurcateEffect effect) {
+    private BifurcateEffect(final BifurcateEffect effect) {
         super(effect);
     }
 

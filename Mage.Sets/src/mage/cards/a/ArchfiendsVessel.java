@@ -42,7 +42,7 @@ public final class ArchfiendsVessel extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
 
         // When Archfiend's Vessel enters the battlefield, if it entered from your graveyard or you cast it from your graveyard, exile it. If you do, create a 5/5 black Demon creature token with flying.
-        this.addAbility(new ArchfiendsVesselAbility(), new SpellsCastWatcher());
+        this.addAbility(new ArchfiendsVesselAbility());
     }
 
     private ArchfiendsVessel(final ArchfiendsVessel card) {

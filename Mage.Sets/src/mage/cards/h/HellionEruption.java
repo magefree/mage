@@ -39,12 +39,12 @@ public final class HellionEruption extends CardImpl {
 
 class HellionEruptionEffect extends OneShotEffect {
 
-    public HellionEruptionEffect() {
+    HellionEruptionEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Sacrifice all creatures you control, then create that many 4/4 red Hellion creature tokens";
     }
 
-    public HellionEruptionEffect(final HellionEruptionEffect effect) {
+    private HellionEruptionEffect(final HellionEruptionEffect effect) {
         super(effect);
     }
 

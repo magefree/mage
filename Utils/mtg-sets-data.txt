@@ -40,17 +40,20 @@ Commander 2019 Edition|C19|
 Commander 2020 Edition|C20|
 Commander 2021 Edition|C21|
 Commander Legends|CMR|
+Commander Legends: Battle for Baldur's Gate|CLB|
 Champions of Kamigawa|CHK|
 Chronicles|CHR|
 Clash Pack|CLASH|
 Commander Anthology|CMA|
 Commander Anthology 2018|CM2|
 Commander's Arsenal|CM1|
+Commander Masters|CMM|
 Commander|CMD|
 Conspiracy|CNS|
 Conspiracy: Take the Crown|CN2|
 Conflux|CON|
 Coldsnap|CSP|
+Doctor Who|WHO|
 Duel Decks: Jace vs. Chandra|DD2|
 Duel Decks: Anthology, Divine vs. Demonic|DVD|
 Duel Decks: Anthology, Elves vs. Goblins|EVG|
@@ -80,6 +83,8 @@ Dissension|DIS|
 Dark Ascension|DKA|
 Deckmasters|DKM|
 Dominaria|DOM|
+Dominaria United|DMU|
+Dominaria United Commander|DMC|
 From the Vault: Dragons|DRB|
 The Dark|DRK|
 Darksteel|DST|
@@ -95,6 +100,7 @@ Duel Decks: Elves vs. Inventors|DDU|
 Pro Tour Promos|PPRO|
 Exodus|EXO|
 Zendikar Expeditions|EXP|
+Fallout|PIP|
 Fallen Empires|FEM|
 Friday Night Magic|FNMP|
 Fate Reforged|FRF|
@@ -116,6 +122,8 @@ Iconic Masters|IMA|
 Ikoria: Lair of Behemoths|IKO|
 Invasion|INV|
 Innistrad|ISD|
+The Lost Caverns of Ixalan|LCI|
+Lost Caverns of Ixalan Commander|LCC|
 Innistrad: Midnight Hunt|MID|
 Midnight Hunt Commander|MIC|
 Innistrad: Crimson Vow|VOW|
@@ -125,6 +133,7 @@ Judge Promo|JR|
 Judgment|JUD|
 Jumpstart|JMP|
 Jumpstart: Historic Horizons|J21|
+Jumpstart 2022|J22|
 Kaladesh|KLD|
 Kaldheim|KHM|
 Kaldheim Commander|KHC|
@@ -135,6 +144,8 @@ Limited Edition Alpha|LEA|
 Limited Edition Beta|LEB|
 Legends|LEG|
 Legions|LGN|
+The Lord of the Rings: Tales of Middle-earth|LTR|
+Tales of Middle-earth Commander|LTC|
 Lorwyn|LRW|
 Magic 2010|M10|
 Magic 2011|M11|
@@ -149,6 +160,9 @@ Masters 25|A25|
 Magic: The Gathering-Commander|CMD|
 Magic: The Gathering-Conspiracy|CNS|
 Media Inserts|MBP|
+March of the Machine|MOM|
+March of the Machine Commander|MOC|
+March of the Machine: The Aftermath|MAT|
 Mirrodin Besieged|MBS|
 Masters Edition II|ME2|
 Masters Edition III|ME3|
@@ -157,6 +171,7 @@ Masters Edition|MED|
 Game Day|MGDC|
 Game Night|GNT|
 Game Night 2019|GN2|
+Game Night Free-for-All|GN3|
 Mirage|MIR|
 Launch Party|MLP|
 Modern Horizons|MH1|
@@ -169,12 +184,17 @@ Morningtide|MOR|
 Magic Player Rewards|MPRP|
 Masterpiece Series|MPS|
 Mirrodin|MRD|
+Murders at Karlov Manor|MKM|
+Murders at Karlov Manor Commander|MKC|
+Ravnica: Clue Edition|CLU|
 Nemesis|NEM|
 New Phyrexia|NPH|
 Odyssey|ODY|
 Oath of the Gatewatch|OGW|
 Onslaught|ONS|
 Magic Origins|ORI|
+Phyrexia: All Will Be One|ONE|
+Phyrexia: All Will Be One Commander|ONC|
 Portal Second Age|P02|
 Planechase 2012 Edition|PC2|
 Planechase Anthology|PCA|
@@ -188,6 +208,7 @@ Prerelease Events|PPRE|
 Portal Three Kingdoms|PTK|
 Ravnica Allegiance|RNA|
 Ravnica: City of Guilds|RAV|
+Jurassic World Collection|REX|
 Rivals of Ixalan|RIX|
 Rise of the Eldrazi|ROE|
 Return to Ravnica|RTR|
@@ -201,16 +222,21 @@ Shadows over Innistrad|SOI|
 Saviors of Kamigawa|SOK|
 Scars of Mirrodin|SOM|
 Streets of New Capenna|SNC|
+New Capenna Commander|NCC|
 Stronghold|STH|
+Special Guests|SPG|
 Super Series|SUS|
 Theros|THS|
 Theros Beyond Death|THB|
+The Brothers' War|BRO|
+The Brothers' War Commander|BRC|
 Tempest|TMP|
 Throne of Eldraine|ELD|
 Torment|TOR|
 Tempest Remastered|TPR|
 Time Spiral "Timeshifted"|TSB|
 Time Spiral|TSP|
+Transformers|BOT|
 Urza's Destiny|UDS|
 Ugin's Fate|UGIN|
 Unglued|UGL|
@@ -240,6 +266,8 @@ War of the Spark|WAR|
 Welcome Deck 2016|W16|
 Welcome Deck 2017|W17|
 Weatherlight|WTH|
+Wilds of Eldraine|WOE|
+Wilds of Eldraine Commander|WOC|
 Worldwake|WWK|
 Ixalan|XLN|
 Zendikar|ZEN|
@@ -247,3 +275,4 @@ Zendikar Rising|ZNR|
 Zendikar Rising Commander|ZNC|
 Star Wars|SWS|
 Happy Holidays|HHO|
+Warhammer 40,000|40K|

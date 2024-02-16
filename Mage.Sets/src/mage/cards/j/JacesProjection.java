@@ -40,7 +40,7 @@ public final class JacesProjection extends CardImpl {
 
         // {3}{U}: Put a loyalty counter on target Jace planeswalker.
         Ability ability = new SimpleActivatedAbility(
-                new AddCountersTargetEffect(CounterType.LOYALTY.createInstance()), new ManaCostsImpl("{3}{U}")
+                new AddCountersTargetEffect(CounterType.LOYALTY.createInstance()), new ManaCostsImpl<>("{3}{U}")
         );
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);

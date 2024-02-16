@@ -59,12 +59,12 @@ public final class WojekApothecary extends CardImpl {
 
 class WojekApothecaryEffect extends OneShotEffect {
 
-    public WojekApothecaryEffect() {
+    WojekApothecaryEffect() {
         super(Outcome.Benefit);
         this.staticText = "Prevent the next 1 damage that would be dealt to target creature and each other creature that shares a color with it this turn";
     }
 
-    public WojekApothecaryEffect(final WojekApothecaryEffect effect) {
+    private WojekApothecaryEffect(final WojekApothecaryEffect effect) {
         super(effect);
     }
 
@@ -80,7 +80,7 @@ class WojekApothecaryEffect extends OneShotEffect {
             Permanent target = game.getPermanent(getTargetPointer().getFirst(game, source));
             if (target != null) {
                 ObjectColor color = target.getColor(game);
-                for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source.getSourceId(), game)) {
+                for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source, game)) {
                     if (permanent.getColor(game).shares(color)) {
                         ContinuousEffect effect = new PreventDamageToTargetEffect(Duration.EndOfTurn, 1);
                         effect.setTargetPointer(new FixedTarget(permanent, game));

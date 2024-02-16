@@ -24,7 +24,7 @@ public final class AuraExtraction extends CardImpl {
         this.getSpellAbility().addTarget(new TargetEnchantmentPermanent());
 
         // Cycling {2}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
     private AuraExtraction(final AuraExtraction card) {

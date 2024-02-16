@@ -19,6 +19,9 @@ public class AttachedToMatchesFilterCondition implements Condition {
 
     public AttachedToMatchesFilterCondition(FilterPermanent filter) {
         this.filter = filter;
+        if (filter == null) {
+            throw new IllegalStateException("Wrong code usage. Filter must be non-nullable.");
+        }
     }
 
     @Override
@@ -29,7 +32,10 @@ public class AttachedToMatchesFilterCondition implements Condition {
             if (attachedTo == null) {
                 attachedTo = (Permanent) game.getLastKnownInformation(permanent.getAttachedTo(), Zone.BATTLEFIELD);
             }
-            if (filter.match(attachedTo, attachedTo.getId(), attachedTo.getControllerId(), game)) {
+            if (attachedTo == null) {
+                return false;
+            }
+            if (filter.match(attachedTo, attachedTo.getControllerId(), source, game)) {
                 return true;
             }
 

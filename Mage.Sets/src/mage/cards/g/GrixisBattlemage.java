@@ -32,11 +32,11 @@ public final class GrixisBattlemage extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {U}, {tap}: Draw a card, then discard a card.
-        Ability ability1 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawDiscardControllerEffect(), new ManaCostsImpl("{U}"));
+        Ability ability1 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawDiscardControllerEffect(), new ManaCostsImpl<>("{U}"));
         ability1.addCost(new TapSourceCost());
         this.addAbility(ability1);
         // {R}, {tap}: Target creature can't block this turn.
-        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBlockTargetEffect(Duration.EndOfTurn), new ManaCostsImpl("{R}"));
+        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBlockTargetEffect(Duration.EndOfTurn), new ManaCostsImpl<>("{R}"));
         ability2.addCost(new TapSourceCost());
         ability2.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability2);

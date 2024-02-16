@@ -44,7 +44,7 @@ class MisinformationEffect extends OneShotEffect {
         this.staticText = "Put up to three target cards from an opponent's graveyard on top of their library in any order";
     }
     
-    MisinformationEffect(final MisinformationEffect effect) {
+    private MisinformationEffect(final MisinformationEffect effect) {
         super(effect);
     }
     

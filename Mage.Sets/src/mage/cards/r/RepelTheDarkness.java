@@ -20,7 +20,7 @@ public final class RepelTheDarkness extends CardImpl {
 
 
         this.getSpellAbility().addEffect(new TapTargetEffect());
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 2));
     }
 

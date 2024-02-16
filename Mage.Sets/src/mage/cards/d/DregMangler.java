@@ -28,7 +28,7 @@ public final class DregMangler extends CardImpl {
         // Haste
         this.addAbility(HasteAbility.getInstance());
         // Scavenge {3}{B}{G}
-        this.addAbility(new ScavengeAbility(new ManaCostsImpl("{3}{B}{G}")));
+        this.addAbility(new ScavengeAbility(new ManaCostsImpl<>("{3}{B}{G}")));
     }
 
     private DregMangler(final DregMangler card) {

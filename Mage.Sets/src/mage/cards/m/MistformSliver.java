@@ -61,12 +61,12 @@ public final class MistformSliver extends CardImpl {
 
 class MistformSliverEffect extends OneShotEffect {
 
-    public MistformSliverEffect() {
+    MistformSliverEffect() {
         super(Outcome.Benefit);
         staticText = "This permanent becomes the creature type of your choice in addition to its other types until end of turn";
     }
 
-    public MistformSliverEffect(final MistformSliverEffect effect) {
+    private MistformSliverEffect(final MistformSliverEffect effect) {
         super(effect);
     }
 

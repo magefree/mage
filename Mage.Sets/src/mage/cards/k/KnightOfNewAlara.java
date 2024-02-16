@@ -63,7 +63,7 @@ class KnightOfNewAlaraEffect extends ContinuousEffectImpl {
         staticText = "Each other multicolored creature you control gets +1/+1 for each of its colors";
     }
 
-    public KnightOfNewAlaraEffect(final KnightOfNewAlaraEffect effect) {
+    private KnightOfNewAlaraEffect(final KnightOfNewAlaraEffect effect) {
         super(effect);
     }
 

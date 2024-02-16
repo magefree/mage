@@ -38,7 +38,7 @@ public final class AkroanHoplite extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever Akroan Hoplite attacks, it gets +X/+0 until end of turn, where X is the number of attacking creatures you control.
-        this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(xValue, StaticValue.get(0), Duration.EndOfTurn, true, "it"), false));
+        this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(xValue, StaticValue.get(0), Duration.EndOfTurn, "it"), false));
     }
 
     private AkroanHoplite(final AkroanHoplite card) {

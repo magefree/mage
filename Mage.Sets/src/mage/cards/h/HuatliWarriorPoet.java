@@ -30,7 +30,7 @@ public final class HuatliWarriorPoet extends CardImpl {
     public HuatliWarriorPoet(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{R}{W}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUATLI);
 
         this.setStartingLoyalty(3);
@@ -64,6 +64,7 @@ class HuatliWarriorPoetDamageEffect extends OneShotEffect {
 
     HuatliWarriorPoetDamageEffect() {
         super(Outcome.Damage);
+        this.staticText = "{this} deals X damage divided as you choose among any number of target creatures. Creatures dealt damage this way can't block this turn";
     }
 
     private HuatliWarriorPoetDamageEffect(final HuatliWarriorPoetDamageEffect effect) {
@@ -90,15 +91,5 @@ class HuatliWarriorPoetDamageEffect extends OneShotEffect {
             }
         }
         return true;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        if (staticText != null && !staticText.isEmpty()) {
-            return staticText;
-        }
-        return "{this} deals X damage divided as you choose among any number of target "
-                + mode.getTargets().get(0).getTargetName()
-                + ". Creatures dealt damage this way can't block this turn";
     }
 }

@@ -32,7 +32,7 @@ public final class RibbonSnake extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // {2}: Ribbon Snake loses flying until end of turn. Any player may activate this ability.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseAbilitySourceEffect(
-            FlyingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{2}"));
+            FlyingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{2}"));
         ability.setMayActivate(TargetController.ANY);
         ability.addEffect(new InfoEffect("Any player may activate this ability"));
         this.addAbility(ability);

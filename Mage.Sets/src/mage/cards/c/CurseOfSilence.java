@@ -40,7 +40,7 @@ public final class CurseOfSilence extends CardImpl {
         TargetPlayer auraTarget = new TargetPlayer();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // As Curse of Silence enters the battlefield, choose a card name.
@@ -65,7 +65,7 @@ public final class CurseOfSilence extends CardImpl {
 
 class CurseOfSilenceCostEffect extends CostModificationEffectImpl {
 
-    public CurseOfSilenceCostEffect() {
+    CurseOfSilenceCostEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment, CostModificationType.INCREASE_COST);
         staticText = "Spells with the chosen name enchanted player casts cost {2} more to cast";
     }
@@ -108,6 +108,7 @@ class CurseOfSilenceTriggeredAbility extends TriggeredAbilityImpl {
                 new DrawCardSourceControllerEffect(1),
                 new SacrificeSourceCost()
         ));
+        setTriggerPhrase("Whenever enchanted player casts a spell with the chosen name, ");
     }
 
     private CurseOfSilenceTriggeredAbility(final CurseOfSilenceTriggeredAbility ability) {
@@ -135,10 +136,5 @@ class CurseOfSilenceTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever enchanted player casts a spell with the chosen name, ";
     }
 }

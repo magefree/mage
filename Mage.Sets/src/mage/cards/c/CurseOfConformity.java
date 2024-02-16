@@ -32,7 +32,7 @@ public final class CurseOfConformity extends CardImpl {
         TargetPlayer auraTarget = new TargetPlayer();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // Nonlegendary creatures enchanted player controls have base power and toughness 3/3 and lose all creature types.
         this.addAbility(new SimpleStaticAbility(new CurseOfConformityEffect()));
@@ -75,7 +75,7 @@ class CurseOfConformityEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         for (Permanent permanent : game.getBattlefield().getActivePermanents(
-                filter, source.getControllerId(), source.getSourceId(), game
+                filter, source.getControllerId(), source, game
         )) {
             switch (layer) {
                 case TypeChangingEffects_4:
@@ -83,8 +83,8 @@ class CurseOfConformityEffect extends ContinuousEffectImpl {
                     break;
                 case PTChangingEffects_7:
                     if (sublayer == SubLayer.SetPT_7b) {
-                        permanent.getPower().setValue(3);
-                        permanent.getToughness().setValue(3);
+                        permanent.getPower().setModifiedBaseValue(3);
+                        permanent.getToughness().setModifiedBaseValue(3);
                     }
             }
         }

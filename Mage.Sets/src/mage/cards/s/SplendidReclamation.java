@@ -43,7 +43,7 @@ class ReplenishEffect extends OneShotEffect {
         this.staticText = "Return all land cards from your graveyard to the battlefield tapped";
     }
 
-    ReplenishEffect(final ReplenishEffect effect) {
+    private ReplenishEffect(final ReplenishEffect effect) {
         super(effect);
     }
 
@@ -56,8 +56,8 @@ class ReplenishEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            return controller.moveCards(controller.getGraveyard().getCards(new FilterLandCard(), source.getSourceId(),
-                    source.getControllerId(), game), Zone.BATTLEFIELD, source, game, true, false, false, null);
+            return controller.moveCards(controller.getGraveyard().getCards(new FilterLandCard(),
+                    source.getControllerId(), source, game), Zone.BATTLEFIELD, source, game, true, false, false, null);
         }
         return false;
     }

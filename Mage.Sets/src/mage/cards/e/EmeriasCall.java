@@ -8,7 +8,7 @@ import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardSetInfo;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
@@ -22,7 +22,7 @@ import java.util.UUID;
 /**
  * @author JayDi85
  */
-public final class EmeriasCall extends ModalDoubleFacesCard {
+public final class EmeriasCall extends ModalDoubleFacedCard {
 
     private static final FilterPermanent filter
             = new FilterControlledCreaturePermanent("Non-Angel creatures you control");

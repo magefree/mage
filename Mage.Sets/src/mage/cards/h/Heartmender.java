@@ -59,7 +59,7 @@ class HeartmenderEffect extends OneShotEffect {
         staticText = "remove a -1/-1 counter from each creature you control";
     }
 
-    public HeartmenderEffect(HeartmenderEffect effect) {
+    private HeartmenderEffect(final HeartmenderEffect effect) {
         super(effect);
         this.counter = effect.counter.copy();
     }

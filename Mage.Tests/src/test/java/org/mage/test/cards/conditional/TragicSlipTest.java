@@ -75,10 +75,11 @@ public class TragicSlipTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Pillarfield Ox", 0);
     }
 
-    /*
-        Killed an opponent's Young Pyromancer with Ulcerate then flashed back Tragic Slip with Snapcaster Mage targeting their Tarmogoyf.
-        Morbid didn't seem to work and only applied -1/-1 to the Tarmogoyf.
-    */
+    /**
+     * Reported bug:
+     *      Killed an opponent's Young Pyromancer with Ulcerate then flashed back Tragic Slip with Snapcaster Mage targeting their Tarmogoyf.
+     *      Morbid didn't seem to work and only applied -1/-1 to the Tarmogoyf.
+     */
     @Test
     public void testPlayedWithFlashbackAgain() {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
@@ -101,14 +102,17 @@ public class TragicSlipTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Tarmogoyf");
         addCard(Zone.GRAVEYARD, playerB, "Mountain");
 
+        setStrictChooseMode(true);
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tragic Slip", "Silvercoat Lion");
 
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Snapcaster Mage");
         addTarget(playerA, "Tragic Slip");
+        waitStackResolved(1, PhaseStep.POSTCOMBAT_MAIN);
 
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", "Snapcaster Mage");
-
-        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Flashback {B}"); // now snapcaster mage is died so -13/-13
+        waitStackResolved(1, PhaseStep.POSTCOMBAT_MAIN);
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Flashback {B}"); // now snapcaster mage is ded so -13/-13
         addTarget(playerA, "Tarmogoyf");
 
         setStopAt(1, PhaseStep.END_TURN);

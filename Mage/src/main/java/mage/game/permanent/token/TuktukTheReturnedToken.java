@@ -11,22 +11,17 @@ import mage.constants.SuperType;
 public final class TuktukTheReturnedToken extends TokenImpl {
 
     public TuktukTheReturnedToken() {
-        this("ROE");
-    }
-
-    public TuktukTheReturnedToken(String setCode) {
         super("Tuktuk the Returned", "Tuktuk the Returned, a legendary 5/5 colorless Goblin Golem artifact creature token");
-        setOriginalExpansionSetCode(setCode);
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         subtype.add(SubType.GOBLIN);
         subtype.add(SubType.GOLEM);
         power = new MageInt(5);
         toughness = new MageInt(5);
     }
 
-    public TuktukTheReturnedToken(final TuktukTheReturnedToken token) {
+    private TuktukTheReturnedToken(final TuktukTheReturnedToken token) {
         super(token);
     }
 

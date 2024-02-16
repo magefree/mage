@@ -44,7 +44,7 @@ class BredForTheHuntTriggeredAbility extends TriggeredAbilityImpl {
         this.optional = true;
     }
 
-    public BredForTheHuntTriggeredAbility(final BredForTheHuntTriggeredAbility ability) {
+    private BredForTheHuntTriggeredAbility(final BredForTheHuntTriggeredAbility ability) {
         super(ability);
     }
 

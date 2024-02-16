@@ -22,7 +22,7 @@ public final class HieroglyphicIllumination extends CardImpl {
         getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));
 
         // Cycling {U}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{U}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{U}")));
 
     }
 

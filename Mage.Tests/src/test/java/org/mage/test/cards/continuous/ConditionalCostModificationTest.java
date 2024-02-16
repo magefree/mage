@@ -34,7 +34,6 @@ public class ConditionalCostModificationTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertTappedCount("Mountain", true, 2);
         assertTappedCount("Mountain", false, 0);
@@ -53,7 +52,6 @@ public class ConditionalCostModificationTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertTappedCount("Mountain", true, 1);
         assertTappedCount("Mountain", false, 1);
@@ -78,7 +76,6 @@ public class ConditionalCostModificationTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertTappedCount("Mountain", true, 1);
         assertTappedCount("Mountain", false, 1);
@@ -103,7 +100,6 @@ public class ConditionalCostModificationTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertTappedCount("Mountain", true, 2);
         assertTappedCount("Mountain", false, 0);
@@ -131,7 +127,6 @@ public class ConditionalCostModificationTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertTappedCount("Mountain", true, 4);
         assertTappedCount("Mountain", false, 0);

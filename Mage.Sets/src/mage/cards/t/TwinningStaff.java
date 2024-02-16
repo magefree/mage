@@ -82,7 +82,8 @@ class TwinningStaffEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         return event.getPlayerId().equals(source.getControllerId())
-                && game.getSpellOrLKIStack(event.getTargetId()) != null;
+                && game.getSpellOrLKIStack(event.getTargetId()) != null
+                && event.getAmount() >= 1;
     }
 
     @Override

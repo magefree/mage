@@ -10,7 +10,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.game.Game;
-import mage.game.permanent.token.MysticGenesisOozeToken;
+import mage.game.permanent.token.OozeToken;
 import mage.game.stack.StackObject;
 import mage.target.TargetSpell;
 
@@ -41,12 +41,12 @@ public final class MysticGenesis extends CardImpl {
 
 class MysticGenesisEffect extends OneShotEffect {
 
-    public MysticGenesisEffect() {
+    MysticGenesisEffect() {
         super(Outcome.Detriment);
         staticText = "Counter target spell. Create an X/X green Ooze creature token, where X is that spell's mana value";
     }
 
-    public MysticGenesisEffect(final MysticGenesisEffect effect) {
+    private MysticGenesisEffect(final MysticGenesisEffect effect) {
         super(effect);
     }
 
@@ -60,7 +60,7 @@ class MysticGenesisEffect extends OneShotEffect {
         StackObject stackObject = game.getStack().getStackObject(targetPointer.getFirst(game, source));
         if (stackObject != null) {
             game.getStack().counter(source.getFirstTarget(), source, game);
-            return new CreateTokenEffect(new MysticGenesisOozeToken(stackObject.getManaValue())).apply(game, source);
+            return new CreateTokenEffect(new OozeToken(stackObject.getManaValue(), stackObject.getManaValue())).apply(game, source);
         }
         return false;
     }

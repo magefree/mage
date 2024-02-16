@@ -25,7 +25,7 @@ public final class CaravanHurda extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
     }
 
-    public CaravanHurda (final CaravanHurda card) {
+    private CaravanHurda(final CaravanHurda card) {
         super(card);
     }
 

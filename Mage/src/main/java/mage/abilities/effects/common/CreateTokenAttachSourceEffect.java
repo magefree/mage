@@ -6,14 +6,18 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
 
 /**
- *
  * @author weirddan455
  */
 public class CreateTokenAttachSourceEffect extends CreateTokenEffect {
 
+
     public CreateTokenAttachSourceEffect(Token token) {
+        this(token, ", then");
+    }
+
+    public CreateTokenAttachSourceEffect(Token token, String innerConcat) {
         super(token);
-        staticText = staticText.concat(", then attach {this} to it");
+        staticText = staticText.concat(innerConcat + " attach {this} to it");
     }
 
     private CreateTokenAttachSourceEffect(final CreateTokenAttachSourceEffect effect) {
@@ -28,7 +32,7 @@ public class CreateTokenAttachSourceEffect extends CreateTokenEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         super.apply(game, source);
-        Permanent token = game.getPermanent(this.getLastAddedTokenId());
+        Permanent token = game.getPermanent(this.getLastAddedTokenIds().stream().findFirst().orElse(null));
         if (token != null) {
             token.addAttachment(source.getSourceId(), source, game);
             return true;

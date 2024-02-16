@@ -34,7 +34,7 @@ public final class AwakenedAwareness extends CardImpl {
         TargetPermanent auraTarget = new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_CREATURE);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // When Awakened Awareness enters the battlefield, put X +1/+1 counters on enchanted permanent.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
@@ -57,7 +57,7 @@ public final class AwakenedAwareness extends CardImpl {
 
 class AwakenedAwarenessEffect extends ContinuousEffectImpl {
 
-    public AwakenedAwarenessEffect() {
+    AwakenedAwarenessEffect() {
         super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.SetPT_7b, Outcome.UnboostCreature);
         this.staticText = "As long as enchanted permanent is a creature, it has base power and toughness 1/1";
     }
@@ -74,14 +74,17 @@ class AwakenedAwarenessEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent enchantment = source.getSourcePermanentIfItStillExists(game);
-        if (enchantment != null) {
-            Permanent creature = game.getPermanent(enchantment.getAttachedTo());
-            if (creature != null && creature.isCreature(game)) {
-                creature.getPower().setValue(1);
-                creature.getToughness().setValue(1);
-                return true;
-            }
+        if (enchantment == null) {
+            return false;
         }
-        return false;
+
+        Permanent creature = game.getPermanent(enchantment.getAttachedTo());
+        if (creature == null || !creature.isCreature(game)) {
+            return false;
+        }
+
+        creature.getPower().setModifiedBaseValue(1);
+        creature.getToughness().setModifiedBaseValue(1);
+        return true;
     }
 }

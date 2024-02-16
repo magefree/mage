@@ -28,7 +28,7 @@ public final class MalachOfTheDawn extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // {W}{W}{W}: Regenerate Malach of the Dawn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{W}{W}{W}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{W}{W}{W}")));
     }
 
     private MalachOfTheDawn(final MalachOfTheDawn card) {

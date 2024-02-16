@@ -25,6 +25,8 @@ public class BecomesCreatureTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Chimeric Mass");
         setChoice(playerA, "X=3");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}:");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -46,6 +48,8 @@ public class BecomesCreatureTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Chimeric Mass");
         setChoice(playerA, "X=3");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}:");
 
         setStopAt(2, PhaseStep.BEGIN_COMBAT);

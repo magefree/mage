@@ -29,7 +29,7 @@ public final class SianiEyeOfTheStorm extends CardImpl {
     public SianiEyeOfTheStorm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DJINN);
         this.subtype.add(SubType.MONK);
         this.power = new MageInt(3);
@@ -84,7 +84,7 @@ class SianiEyeOfTheStormEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        int count = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game);
+        int count = game.getBattlefield().count(filter, source.getControllerId(), source, game);
         return count > 0 && player.scry(count, source, game);
     }
 }

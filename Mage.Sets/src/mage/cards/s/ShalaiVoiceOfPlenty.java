@@ -39,7 +39,7 @@ public final class ShalaiVoiceOfPlenty extends CardImpl {
     public ShalaiVoiceOfPlenty(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ANGEL);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
@@ -65,7 +65,7 @@ public final class ShalaiVoiceOfPlenty extends CardImpl {
                         CounterType.P1P1.createInstance(),
                         StaticFilters.FILTER_PERMANENT_CREATURE_CONTROLLED
                 ),
-                new ManaCostsImpl("{4}{G}{G}")
+                new ManaCostsImpl<>("{4}{G}{G}")
         ));
 
     }

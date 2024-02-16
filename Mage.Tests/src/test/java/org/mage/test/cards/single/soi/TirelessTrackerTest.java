@@ -33,7 +33,7 @@ public class TirelessTrackerTest extends CardTestPlayerBase {
         
         assertPermanentCount(playerA, "Forest", 1);
         assertPermanentCount(playerB, "Wastes", 1);
-        assertPermanentCount(playerA, "Clue", 1);
+        assertPermanentCount(playerA, "Clue Token", 1);
     }
 
     // TODO: add tests for 2nd ability

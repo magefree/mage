@@ -11,10 +11,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
-import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -26,11 +24,6 @@ import java.util.UUID;
 public final class MaraudingRaptor extends CardImpl {
 
     private static final FilterCard filter = new FilterCreatureCard("creature spells");
-    private static final FilterPermanent filter2 = new FilterCreaturePermanent("another creature");
-
-    static {
-        filter2.add(AnotherPredicate.instance);
-    }
 
     public MaraudingRaptor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
@@ -45,10 +38,7 @@ public final class MaraudingRaptor extends CardImpl {
         // Whenever another creature enters the battlefield under your control, Marauding Raptor deals 2 damage to it. If a Dinosaur is dealt damage this way, Marauding Raptor gets +2/+0 until end of turn.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 Zone.BATTLEFIELD, new MaraudingRaptorEffect(),
-                filter2, false, SetTargetPointer.PERMANENT,
-                "Whenever another creature enters the battlefield under your control, " +
-                        "{this} deals 2 damage to it. If a Dinosaur is dealt damage this way, " +
-                        "{this} gets +2/+0 until end of turn."
+                StaticFilters.FILTER_ANOTHER_CREATURE, false, SetTargetPointer.PERMANENT
         ));
     }
 
@@ -66,6 +56,7 @@ class MaraudingRaptorEffect extends OneShotEffect {
 
     MaraudingRaptorEffect() {
         super(Outcome.Benefit);
+        staticText = "{this} deals 2 damage to it. If a Dinosaur is dealt damage this way, {this} gets +2/+0 until end of turn";
     }
 
     private MaraudingRaptorEffect(final MaraudingRaptorEffect effect) {

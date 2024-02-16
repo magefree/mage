@@ -30,7 +30,7 @@ public final class EpitaphGolem extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
                 new PutOnLibraryTargetEffect(false),
-                new ManaCostsImpl("{2}"));
+                new ManaCostsImpl<>("{2}"));
         ability.addTarget(new TargetCardInYourGraveyard());
         this.addAbility(ability);
     }

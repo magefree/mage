@@ -33,7 +33,7 @@ public final class IxidorRealitySculptor extends CardImpl {
     public IxidorRealitySculptor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(3);
@@ -43,7 +43,7 @@ public final class IxidorRealitySculptor extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, false)));
 
         // {2}{U}: Turn target face-down creature face up.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TurnFaceUpTargetEffect(), new ManaCostsImpl("{2}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TurnFaceUpTargetEffect(), new ManaCostsImpl<>("{2}{U}"));
         ability.addTarget(new TargetCreaturePermanent(filterTarget));
         this.addAbility(ability);
     }

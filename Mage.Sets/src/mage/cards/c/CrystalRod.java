@@ -45,7 +45,7 @@ class CrystalRodAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DoIfCostPaid(new GainLifeEffect(1), new GenericManaCost(1)), false);
     }
 
-    public CrystalRodAbility(final CrystalRodAbility ability) {
+    private CrystalRodAbility(final CrystalRodAbility ability) {
         super(ability);
     }
 

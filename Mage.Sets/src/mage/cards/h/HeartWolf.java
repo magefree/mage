@@ -69,7 +69,7 @@ class HeartWolfDelayedTriggeredAbility extends DelayedTriggeredAbility {
         super(new SacrificeSourceEffect(), Duration.EndOfTurn, false);
     }
 
-    public HeartWolfDelayedTriggeredAbility(HeartWolfDelayedTriggeredAbility ability) {
+    private HeartWolfDelayedTriggeredAbility(final HeartWolfDelayedTriggeredAbility ability) {
         super(ability);
     }
 

@@ -27,7 +27,7 @@ public final class TheRealityChip extends CardImpl {
     public TheRealityChip(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.EQUIPMENT);
         this.subtype.add(SubType.JELLYFISH);
         this.power = new MageInt(0);

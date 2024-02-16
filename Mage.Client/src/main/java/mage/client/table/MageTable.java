@@ -6,9 +6,12 @@ import org.apache.log4j.Logger;
 import javax.swing.*;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
+import javax.swing.table.TableModel;
 import java.awt.event.MouseEvent;
 
 /**
+ * GUI: basic mage table for any data like game tables list, players list, etc
+ *
  * @author JayDi85
  */
 public class MageTable extends JTable {
@@ -38,7 +41,12 @@ public class MageTable extends JTable {
         int modelCol = this.convertColumnIndexToModel(viewCol);
         String tip = null;
         if (modelRow != -1 && modelCol != -1) {
-            tip = this.getModel().getValueAt(modelRow, modelCol).toString();
+            TableModel model = this.getModel();
+            if (model instanceof TableModelWithTooltip) {
+                tip = ((TableModelWithTooltip) model).getTooltipAt(modelRow, modelCol);
+            } else {
+                tip = model.getValueAt(modelRow, modelCol).toString();
+            }
         }
         return GUISizeHelper.textToHtmlWithSize(tip, GUISizeHelper.tableFont);
     }

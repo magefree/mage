@@ -1,4 +1,3 @@
-
 package mage.cards.g;
 
 import java.util.UUID;
@@ -23,8 +22,8 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
  */
 public final class GruulCharm extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures without flying");
-    private static final FilterPermanent filter2 = new FilterPermanent("all permanents you own");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures without flying");
+    private static final FilterPermanent filter2 = new FilterPermanent("permanents you own");
     private static final FilterCreaturePermanent filter3 = new FilterCreaturePermanent("creature with flying");
 
     static {
@@ -41,14 +40,10 @@ public final class GruulCharm extends CardImpl {
         this.getSpellAbility().addEffect(new CantBlockAllEffect(filter, Duration.EndOfTurn));
 
         // or gain control of all permanents you own;
-        Mode mode = new Mode();
-        mode.addEffect(new GainControlAllEffect(Duration.EndOfGame, filter2));
-        this.getSpellAbility().addMode(mode);
+        this.getSpellAbility().addMode(new Mode(new GainControlAllEffect(Duration.Custom, filter2)));
 
         // or Gruul Charm deals 3 damage to each creature with flying.
-        Mode mode2 = new Mode();
-        mode2.addEffect(new DamageAllEffect(3, filter3));
-        this.getSpellAbility().addMode(mode2);
+        this.getSpellAbility().addMode(new Mode(new DamageAllEffect(3, filter3)));
     }
 
     private GruulCharm(final GruulCharm card) {

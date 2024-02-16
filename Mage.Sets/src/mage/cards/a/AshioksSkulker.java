@@ -26,7 +26,7 @@ public final class AshioksSkulker extends CardImpl {
 
         // {3}{U}: Ashiok's Skulker can't be blocked this turn.
         this.addAbility(new SimpleActivatedAbility(
-                new CantBeBlockedSourceEffect(Duration.EndOfTurn), new ManaCostsImpl("{3}{U}")
+                new CantBeBlockedSourceEffect(Duration.EndOfTurn), new ManaCostsImpl<>("{3}{U}")
         ));
     }
 

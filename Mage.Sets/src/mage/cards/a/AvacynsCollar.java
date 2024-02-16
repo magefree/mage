@@ -43,7 +43,7 @@ public final class AvacynsCollar extends CardImpl {
         this.addAbility(new AvacynsCollarTriggeredAbility());
 
         // Equip {2}
-        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2)));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2), false));
     }
 
     private AvacynsCollar(final AvacynsCollar card) {
@@ -62,7 +62,7 @@ class AvacynsCollarTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new SpiritWhiteToken()));
     }
 
-    public AvacynsCollarTriggeredAbility(final AvacynsCollarTriggeredAbility ability) {
+    private AvacynsCollarTriggeredAbility(final AvacynsCollarTriggeredAbility ability) {
         super(ability);
     }
 

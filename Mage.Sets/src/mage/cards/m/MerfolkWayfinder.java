@@ -19,7 +19,7 @@ import mage.filter.FilterCard;
  */
 public final class MerfolkWayfinder extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("all Island cards");
+    private static final FilterCard filter = new FilterCard("Island cards");
 
     static {
         filter.add(SubType.ISLAND.getPredicate());

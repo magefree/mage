@@ -30,12 +30,11 @@ public class ProfaneTransfusionTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 16);
         assertLife(playerB, 24);
-        assertPermanentCount(playerA, "Phyrexian Horror", 1);
-        assertPowerToughness(playerA, "Phyrexian Horror", 24 - 16, 24 - 16);
+        assertPermanentCount(playerA, "Phyrexian Horror Token", 1);
+        assertPowerToughness(playerA, "Phyrexian Horror Token", 24 - 16, 24 - 16);
         assertGraveyardCount(playerA, transfusion, 1);
     }
 
@@ -56,12 +55,11 @@ public class ProfaneTransfusionTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 24);
         assertLife(playerB, 16);
-        assertPermanentCount(playerA, "Phyrexian Horror", 1);
-        assertPowerToughness(playerA, "Phyrexian Horror", 24 - 16, 24 - 16);
+        assertPermanentCount(playerA, "Phyrexian Horror Token", 1);
+        assertPowerToughness(playerA, "Phyrexian Horror Token", 24 - 16, 24 - 16);
         assertGraveyardCount(playerA, transfusion, 1);
     }
 
@@ -82,12 +80,11 @@ public class ProfaneTransfusionTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 16);
         assertLife(playerB, 32);
-        assertPermanentCount(playerA, "Phyrexian Horror", 1);
-        assertPowerToughness(playerA, "Phyrexian Horror", 32 - 16, 32 - 16);
+        assertPermanentCount(playerA, "Phyrexian Horror Token", 1);
+        assertPowerToughness(playerA, "Phyrexian Horror Token", 32 - 16, 32 - 16);
         assertGraveyardCount(playerA, transfusion, 1);
     }
 
@@ -101,17 +98,18 @@ public class ProfaneTransfusionTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, skullcrack, playerB);
         addTarget(playerA, playerA);
         addTarget(playerA, playerB);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, transfusion);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 20);
         assertLife(playerB, 17);
-        assertPermanentCount(playerA, "Phyrexian Horror", 1);
-        assertPowerToughness(playerA, "Phyrexian Horror", 20 - 17, 20 - 17);
+        assertPermanentCount(playerA, "Phyrexian Horror Token", 1);
+        assertPowerToughness(playerA, "Phyrexian Horror Token", 20 - 17, 20 - 17);
         assertGraveyardCount(playerA, transfusion, 1);
     }
 }

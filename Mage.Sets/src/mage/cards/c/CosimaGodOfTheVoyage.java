@@ -28,20 +28,21 @@ import java.util.stream.Collectors;
 /**
  * @author TheElk801
  */
-public final class CosimaGodOfTheVoyage extends ModalDoubleFacesCard {
+public final class CosimaGodOfTheVoyage extends ModalDoubleFacedCard {
 
     private static final FilterPermanent filter = new FilterControlledPermanent(SubType.VEHICLE, "a Vehicle you control");
 
     public CosimaGodOfTheVoyage(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo,
-                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.GOD}, "{2}{U}",
-                "The Omenkeel", new CardType[]{CardType.ARTIFACT}, new SubType[]{SubType.VEHICLE}, "{1}{U}"
+        super(
+                ownerId, setInfo,
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.GOD}, "{2}{U}",
+                "The Omenkeel",
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.ARTIFACT}, new SubType[]{SubType.VEHICLE}, "{1}{U}"
         );
 
         // 1.
         // Cosima, God of the Voyage
         // Legendary Creature - God
-        this.getLeftHalfCard().addSuperType(SuperType.LEGENDARY);
         this.getLeftHalfCard().setPT(new MageInt(2), new MageInt(4));
 
         // At the beginning of your upkeep, you may exile Cosima. If you do, it gains "Whenever a land enters the battlefield under your control, if Cosima is exiled, you may put a voyage counter on it. If you don't, return Cosima to the battlefield with X +1/+1 counters on it and draw X cards, where X is the number of voyage counters on it.
@@ -52,7 +53,6 @@ public final class CosimaGodOfTheVoyage extends ModalDoubleFacesCard {
         // 2.
         // The Omenkeel
         // Legendary Artifact - Vehicle
-        this.getRightHalfCard().addSuperType(SuperType.LEGENDARY);
         this.getRightHalfCard().setPT(new MageInt(3), new MageInt(3));
 
         // Whenever a Vehicle you control deals combat damage to a player, that player exiles that many cards from the top of their library. You may play lands from among those cards for as long as they remain exiled.

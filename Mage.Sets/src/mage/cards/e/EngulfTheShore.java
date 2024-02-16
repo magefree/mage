@@ -54,7 +54,7 @@ class EngulfTheShoreEffect extends OneShotEffect {
         this.staticText = "Return to their owners' hands all creatures with toughness less than or equal to the number of Islands you control";
     }
 
-    public EngulfTheShoreEffect(final EngulfTheShoreEffect effect) {
+    private EngulfTheShoreEffect(final EngulfTheShoreEffect effect) {
         super(effect);
     }
 
@@ -67,11 +67,11 @@ class EngulfTheShoreEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            int islands = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game);
+            int islands = game.getBattlefield().count(filter, source.getControllerId(), source, game);
             FilterPermanent creatureFilter = new FilterCreaturePermanent();
             creatureFilter.add(new ToughnessPredicate(ComparisonType.FEWER_THAN, islands + 1));
             Set<Card> cardsToHand = new HashSet<>();
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(creatureFilter, source.getControllerId(), source.getSourceId(), game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(creatureFilter, source.getControllerId(), source, game)) {
                 cardsToHand.add(permanent);
             }
             controller.moveCards(cardsToHand, Zone.HAND, source, game);

@@ -26,7 +26,7 @@ public final class SoulCharmer extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever Soul Charmer deals combat damage to a creature, you gain 2 life unless they pay {2}.
-        this.addAbility(new DealsCombatDamageToACreatureTriggeredAbility(new DoUnlessTargetPlayerOrTargetsControllerPaysEffect(new GainLifeEffect(2), new ManaCostsImpl("{2}")), false, true));
+        this.addAbility(new DealsCombatDamageToACreatureTriggeredAbility(new DoUnlessTargetPlayerOrTargetsControllerPaysEffect(new GainLifeEffect(2), new ManaCostsImpl<>("{2}")), false, true));
     }
 
     private SoulCharmer(final SoulCharmer card) {

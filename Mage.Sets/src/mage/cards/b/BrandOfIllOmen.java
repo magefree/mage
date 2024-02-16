@@ -33,12 +33,12 @@ public final class BrandOfIllOmen extends CardImpl {
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Cumulative upkeep {R}
-        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{R}")));
+        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{R}")));
 
         // Enchanted creature's controller can't cast creature spells.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BrandOfIllOmenEffect()));
@@ -57,18 +57,13 @@ public final class BrandOfIllOmen extends CardImpl {
 
 class BrandOfIllOmenEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public BrandOfIllOmenEffect() {
+    BrandOfIllOmenEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "Enchanted creature's controller can't cast creature spells";
     }
 
-    public BrandOfIllOmenEffect(final BrandOfIllOmenEffect effect) {
+    private BrandOfIllOmenEffect(final BrandOfIllOmenEffect effect) {
         super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override
@@ -78,7 +73,7 @@ class BrandOfIllOmenEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (mageObject != null) {
             return "You can't cast creature spells (" + mageObject.getLogName() + " on the battlefield).";
         }

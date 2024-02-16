@@ -14,10 +14,10 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 public class ProliferateTest extends CardTestPlayerBase {
 
     /**
-     * Volt Charge {2}{R} Instant Volt Charge deals 3 damage to target creature
-     * or player. Proliferate. (You choose any number of permanents and/or
-     * players with counters on them, then give each another counter of a kind
-     * already there.)
+     * Volt Charge
+     * {2}{R}
+     * Volt Charge deals 3 damage to any target.
+     * Proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)
      */
     @Test
     public void testCastFromHandMovedToExile() {
@@ -27,7 +27,7 @@ public class ProliferateTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Volt Charge");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Volt Charge", playerB);
-        addTarget(playerA, "Chandra, Pyromaster");
+        setChoice(playerA, "Chandra, Pyromaster");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -36,7 +36,6 @@ public class ProliferateTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Volt Charge", 1);
 
         assertCounterCount("Chandra, Pyromaster", CounterType.LOYALTY, 5); // 4 + 1 from proliferate
-
     }
 
     /**

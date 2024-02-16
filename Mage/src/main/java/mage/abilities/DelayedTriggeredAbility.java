@@ -1,4 +1,3 @@
-
 package mage.abilities;
 
 import mage.abilities.effects.Effect;
@@ -7,7 +6,6 @@ import mage.constants.Zone;
 import mage.game.Game;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public abstract class DelayedTriggeredAbility extends TriggeredAbilityImpl {
@@ -33,7 +31,7 @@ public abstract class DelayedTriggeredAbility extends TriggeredAbilityImpl {
         this.triggerOnlyOnce = triggerOnlyOnce;
     }
 
-    public DelayedTriggeredAbility(final DelayedTriggeredAbility ability) {
+    protected DelayedTriggeredAbility(final DelayedTriggeredAbility ability) {
         super(ability);
         this.duration = ability.duration;
         this.triggerOnlyOnce = ability.triggerOnlyOnce;
@@ -56,14 +54,13 @@ public abstract class DelayedTriggeredAbility extends TriggeredAbilityImpl {
      *
      * @param game
      */
-    public void initOnAdding(Game game) {
-
+    public void init(Game game) {
     }
 
-    public void init(Game game) {
-        for (Effect effect : this.getEffects()) {
-            effect.getTargetPointer().init(game, this);
-        }
+    @Override
+    public DelayedTriggeredAbility setTriggerPhrase(String triggerPhrase) {
+        super.setTriggerPhrase(triggerPhrase);
+        return this;
     }
 
     public boolean isInactive(Game game) {

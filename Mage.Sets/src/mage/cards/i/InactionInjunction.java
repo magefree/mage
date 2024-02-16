@@ -26,7 +26,7 @@ public final class InactionInjunction extends CardImpl {
         this.getSpellAbility().addTarget(target);
         
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
  
     private InactionInjunction(final InactionInjunction card) {

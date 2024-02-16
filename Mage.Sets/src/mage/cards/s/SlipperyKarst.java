@@ -22,7 +22,7 @@ public final class SlipperyKarst extends CardImpl {
 
         this.addAbility(new EntersBattlefieldTappedAbility());
         this.addAbility(new GreenManaAbility());
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
     private SlipperyKarst(final SlipperyKarst card) {

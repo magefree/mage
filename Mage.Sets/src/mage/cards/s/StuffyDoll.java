@@ -58,9 +58,10 @@ class StuffyDollTriggeredAbility extends TriggeredAbilityImpl {
 
     public StuffyDollTriggeredAbility() {
         super(Zone.BATTLEFIELD, new StuffyDollGainLifeEffect());
+        setTriggerPhrase("Whenever {this} is dealt damage, ");
     }
 
-    public StuffyDollTriggeredAbility(final StuffyDollTriggeredAbility effect) {
+    private StuffyDollTriggeredAbility(final StuffyDollTriggeredAbility effect) {
         super(effect);
     }
 
@@ -82,21 +83,16 @@ class StuffyDollTriggeredAbility extends TriggeredAbilityImpl {
         }
         return false;
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever {this} is dealt damage, " ;
-    }
 }
 
 class StuffyDollGainLifeEffect extends OneShotEffect {
 
-    public StuffyDollGainLifeEffect() {
+    StuffyDollGainLifeEffect() {
         super(Outcome.GainLife);
         staticText = "it deals that much damage to the chosen player";
     }
 
-    public StuffyDollGainLifeEffect(final StuffyDollGainLifeEffect effect) {
+    private StuffyDollGainLifeEffect(final StuffyDollGainLifeEffect effect) {
         super(effect);
     }
 

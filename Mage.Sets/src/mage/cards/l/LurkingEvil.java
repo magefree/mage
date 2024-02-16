@@ -17,7 +17,6 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.token.TokenImpl;
 import mage.players.Player;
 import mage.util.CardUtil;
@@ -32,7 +31,7 @@ public final class LurkingEvil extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{B}{B}{B}");
 
         // Pay half your life, rounded up: Lurking Evil becomes a 4/4 Horror creature with flying.
-        Effect effect = new BecomesCreatureSourceEffect(new LurkingEvilToken(), null, Duration.EndOfGame, true, false);
+        Effect effect = new BecomesCreatureSourceEffect(new LurkingEvilToken(), null, Duration.EndOfGame);
         effect.setText("{this} becomes a 4/4 Phyrexian Horror creature with flying");
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new LurkingEvilCost()));
     }
@@ -53,7 +52,7 @@ class LurkingEvilCost extends CostImpl {
         this.text = "Pay half your life, rounded up";
     }
 
-    LurkingEvilCost(LurkingEvilCost cost) {
+    private LurkingEvilCost(final LurkingEvilCost cost) {
         super(cost);
     }
 
@@ -97,7 +96,7 @@ class LurkingEvilToken extends TokenImpl {
         cardType.add(CardType.CREATURE);
         this.addAbility(FlyingAbility.getInstance());
     }
-    public LurkingEvilToken(final LurkingEvilToken token) {
+    private LurkingEvilToken(final LurkingEvilToken token) {
         super(token);
     }
 

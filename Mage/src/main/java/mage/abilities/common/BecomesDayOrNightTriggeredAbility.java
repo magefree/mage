@@ -17,6 +17,7 @@ public class BecomesDayOrNightTriggeredAbility extends TriggeredAbilityImpl {
 
     public BecomesDayOrNightTriggeredAbility(Zone zone, Effect effect) {
         super(zone, effect, false);
+        setTriggerPhrase("Whenever day becomes night or night becomes day, ");
     }
 
     private BecomesDayOrNightTriggeredAbility(final BecomesDayOrNightTriggeredAbility ability) {
@@ -36,10 +37,5 @@ public class BecomesDayOrNightTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public BecomesDayOrNightTriggeredAbility copy() {
         return new BecomesDayOrNightTriggeredAbility(this);
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever day becomes night or night becomes day, ";
     }
 }

@@ -36,7 +36,7 @@ public final class GhostlyWings extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Enchanted creature gets +1/+1 and has flying.
@@ -64,12 +64,12 @@ public final class GhostlyWings extends CardImpl {
 
 class GhostlyWingsReturnEffect extends OneShotEffect {
 
-    public GhostlyWingsReturnEffect() {
+    GhostlyWingsReturnEffect() {
         super(Outcome.ReturnToHand);
         staticText = "Return enchanted creature to its owner's hand";
     }
 
-    public GhostlyWingsReturnEffect(final GhostlyWingsReturnEffect effect) {
+    private GhostlyWingsReturnEffect(final GhostlyWingsReturnEffect effect) {
         super(effect);
     }
 

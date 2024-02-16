@@ -20,7 +20,6 @@ public final class WavesOfAggression extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R/W}{R/W}");
 
         // Untap all creatures that attacked this turn. After this main phase, there is an additional combat phase followed by an additional main phase.
-        this.getSpellAbility().addWatcher(new AttackedThisTurnWatcher());
         this.getSpellAbility().addEffect(new UntapAllThatAttackedEffect());
         this.getSpellAbility().addEffect(new AddCombatAndMainPhaseEffect());
         // Retrace

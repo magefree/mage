@@ -30,7 +30,7 @@ public final class FoulFamiliar extends CardImpl {
         // Foul Familiar can't block.
         this.addAbility(new CantBlockAbility());
         // {B}, Pay 1 life: Return Foul Familiar to its owner's hand.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new ManaCostsImpl("{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new ManaCostsImpl<>("{B}"));
         ability.addCost(new PayLifeCost(1));
         this.addAbility(ability);
     }

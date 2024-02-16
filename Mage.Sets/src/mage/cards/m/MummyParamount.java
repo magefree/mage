@@ -1,9 +1,8 @@
-
 package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -33,7 +32,7 @@ public final class MummyParamount extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever another Zombie enters the battlefield under your control, Mummy Paramount gets +1/+1 until end of turn.
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(new BoostSourceEffect(1, 1, Duration.EndOfTurn), filter));
+        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new BoostSourceEffect(1, 1, Duration.EndOfTurn), filter));
     }
 
     private MummyParamount(final MummyParamount card) {

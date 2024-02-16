@@ -100,6 +100,10 @@ public class MageObjectReference implements Comparable<MageObjectReference>, Ser
         }
     }
 
+    @Override
+    public String toString(){
+        return "("+zoneChangeCounter+"|"+sourceId.toString().substring(0,3)+")";
+    }
     public UUID getSourceId() {
         return sourceId;
     }
@@ -111,7 +115,7 @@ public class MageObjectReference implements Comparable<MageObjectReference>, Ser
     @Override
     public int compareTo(MageObjectReference o) {
         if (o.getSourceId() == null || this.sourceId == null || Objects.equals(o.getSourceId(), this.sourceId)) {
-            return o.getZoneChangeCounter() - this.zoneChangeCounter;
+            return Integer.compare(o.getZoneChangeCounter(), this.zoneChangeCounter);
         }
         return o.getSourceId().compareTo(sourceId);
     }
@@ -138,13 +142,17 @@ public class MageObjectReference implements Comparable<MageObjectReference>, Ser
     }
 
     public boolean refersTo(MageObject mageObject, Game game) {
-        if (mageObject != null) {
-            if (mageObject instanceof Spell) {
-                return Objects.equals(((Spell) mageObject).getSourceId(), this.sourceId) && this.zoneChangeCounter == mageObject.getZoneChangeCounter(game);
-            }
-            return mageObject.getId().equals(sourceId) && this.zoneChangeCounter == mageObject.getZoneChangeCounter(game);
+        return refersTo(mageObject, game, 0);
+    }
+
+    public boolean refersTo(MageObject mageObject, Game game, int offset) {
+        if (mageObject == null) {
+            return false;
         }
-        return false;
+        if (mageObject instanceof Spell) {
+            return Objects.equals(((Spell) mageObject).getSourceId(), this.sourceId) && this.zoneChangeCounter + offset == mageObject.getZoneChangeCounter(game);
+        }
+        return mageObject.getId().equals(sourceId) && this.zoneChangeCounter + offset == mageObject.getZoneChangeCounter(game);
     }
 
     public boolean refersTo(Ability source, Game game) {
@@ -164,11 +172,7 @@ public class MageObjectReference implements Comparable<MageObjectReference>, Ser
     }
 
     public Permanent getPermanentOrLKIBattlefield(Game game) {
-        Permanent permanent = game.getPermanentOrLKIBattlefield(sourceId);
-        if (permanent != null && permanent.getZoneChangeCounter(game) == zoneChangeCounter) {
-            return permanent;
-        }
-        return null;
+        return game.getPermanentOrLKIBattlefield(this);
     }
 
     public Card getCard(Game game) {

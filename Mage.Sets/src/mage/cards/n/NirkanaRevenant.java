@@ -38,7 +38,7 @@ public final class NirkanaRevenant extends CardImpl {
 
         // {B}: Nirkana Revenant gets +1/+1 until end of turn.
         this.addAbility(new SimpleActivatedAbility(
-                new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl("{B}")
+                new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl<>("{B}")
         ));
     }
 

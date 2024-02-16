@@ -26,7 +26,7 @@ public final class UlamogsCrusher extends CardImpl {
         this.addAbility(new AttacksEachCombatStaticAbility());
     }
 
-    public UlamogsCrusher (final UlamogsCrusher card) {
+    private UlamogsCrusher(final UlamogsCrusher card) {
         super(card);
     }
 

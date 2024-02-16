@@ -1,9 +1,8 @@
-
 package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BlocksSourceTriggeredAbility;
+import mage.abilities.common.BlocksCreatureTriggeredAbility;
 import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
@@ -27,7 +26,9 @@ public final class WallOfFrost extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
 
         // Whenever Wall of Frost blocks a creature, that creature doesn't untap during its controller's next untap step.
-        this.addAbility(new BlocksSourceTriggeredAbility(new DontUntapInControllersNextUntapStepTargetEffect("that creature"), false, true));
+        this.addAbility(new BlocksCreatureTriggeredAbility(
+                new DontUntapInControllersNextUntapStepTargetEffect("that creature")
+        ));
     }
 
     private WallOfFrost(final WallOfFrost card) {

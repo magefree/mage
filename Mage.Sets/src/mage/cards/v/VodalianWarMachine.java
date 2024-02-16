@@ -82,7 +82,7 @@ class VodalianWarMachineEffect extends OneShotEffect {
         staticText = "destroy all " + filter.getMessage();
     }
 
-    public VodalianWarMachineEffect(final VodalianWarMachineEffect effect) {
+    private VodalianWarMachineEffect(final VodalianWarMachineEffect effect) {
         super(effect);
     }
 
@@ -97,7 +97,7 @@ class VodalianWarMachineEffect extends OneShotEffect {
         if (sourcePermanent != null) {
             VodalianWarMachineWatcher watcher = game.getState().getWatcher(VodalianWarMachineWatcher.class);
             if (watcher != null && watcher.getTappedMerfolkIds(sourcePermanent, game) != null) {
-                for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+                for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
                     if (watcher.getTappedMerfolkIds(sourcePermanent, game).contains(new MageObjectReference(permanent, game))) {
                         permanent.destroy(source, game, false);
                     }

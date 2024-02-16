@@ -40,12 +40,12 @@ public final class MimingSlime extends CardImpl {
 
 class MimingSlimeEffect extends OneShotEffect {
 
-    public MimingSlimeEffect() {
+    MimingSlimeEffect() {
         super(Outcome.PutCreatureInPlay);
         staticText = "Create an X/X green Ooze creature token, where X is the greatest power among creatures you control";
     }
 
-    public MimingSlimeEffect(final MimingSlimeEffect effect) {
+    private MimingSlimeEffect(final MimingSlimeEffect effect) {
         super(effect);
     }
 
@@ -67,8 +67,8 @@ class MimingSlimeEffect extends OneShotEffect {
                 }
             }
             OozeToken oozeToken = new OozeToken();
-            oozeToken.getPower().modifyBaseValue(amount);
-            oozeToken.getToughness().modifyBaseValue(amount);
+            oozeToken.setPower(amount);
+            oozeToken.setToughness(amount);
             oozeToken.putOntoBattlefield(1, game, source, source.getControllerId());
             return true;
         }

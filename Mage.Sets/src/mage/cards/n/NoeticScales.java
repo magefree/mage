@@ -75,7 +75,7 @@ class NoeticScalesEffect extends OneShotEffect {
         }
         Cards cards = new CardsImpl();
         game.getBattlefield().getActivePermanents(
-                filter, game.getActivePlayerId(), source.getSourceId(), game
+                filter, game.getActivePlayerId(), source, game
         ).stream().filter(Objects::nonNull).forEach(cards::add);
         return player.moveCards(cards, Zone.HAND, source, game);
     }

@@ -1,4 +1,3 @@
-
 package mage.cards.a;
 
 import java.util.UUID;
@@ -21,11 +20,13 @@ public final class AerialManeuver extends CardImpl {
     public AerialManeuver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");
 
-
         // Target creature gets +1/+1 and gains flying and first strike until end of turn.
-        getSpellAbility().addEffect(new BoostTargetEffect(1,1, Duration.EndOfTurn));
-        getSpellAbility().addEffect(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn));
-        getSpellAbility().addEffect(new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn));
+        getSpellAbility().addEffect(new BoostTargetEffect(1,1, Duration.EndOfTurn)
+                .setText("target creature gets +1/+1"));
+        getSpellAbility().addEffect(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn)
+                .setText("and gains flying"));
+        getSpellAbility().addEffect(new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn)
+                .setText("and first strike until end of turn"));
         getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 

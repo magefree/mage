@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessAllEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -39,8 +39,8 @@ public final class HarmoniousArchon extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Non-Archon creatures have base power and toughness 3/3.
-        this.addAbility(new SimpleStaticAbility(new SetPowerToughnessAllEffect(
-                3, 3, Duration.WhileOnBattlefield, filter, true
+        this.addAbility(new SimpleStaticAbility(new SetBasePowerToughnessAllEffect(
+                3, 3, Duration.WhileOnBattlefield, filter
         )));
 
         // When Harmonious Archon enters the battlefield, create two 1/1 white Human creature tokens.

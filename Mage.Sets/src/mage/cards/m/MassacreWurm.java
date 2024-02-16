@@ -51,9 +51,10 @@ class MassacreWurmTriggeredAbility extends TriggeredAbilityImpl {
 
     MassacreWurmTriggeredAbility() {
         super(Zone.BATTLEFIELD, new LoseLifeTargetEffect(2));
+        setTriggerPhrase("Whenever a creature an opponent controls dies, ");
     }
 
-    MassacreWurmTriggeredAbility(final MassacreWurmTriggeredAbility ability) {
+    private MassacreWurmTriggeredAbility(final MassacreWurmTriggeredAbility ability) {
         super(ability);
     }
 
@@ -79,10 +80,5 @@ class MassacreWurmTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a creature an opponent controls dies, " ;
     }
 }

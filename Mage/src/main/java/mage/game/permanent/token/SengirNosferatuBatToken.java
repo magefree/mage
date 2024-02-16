@@ -19,15 +19,13 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInExile;
 
-import java.util.Arrays;
-
 /**
  * @author spjspj
  */
 public final class SengirNosferatuBatToken extends TokenImpl {
 
     public SengirNosferatuBatToken() {
-        super("Bat", "1/2 black Bat creature token with flying");
+        super("Bat Token", "1/2 black Bat creature token with flying");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add(SubType.BAT);
@@ -40,14 +38,12 @@ public final class SengirNosferatuBatToken extends TokenImpl {
         // {1}{B}, Sacrifice this creature: Return an exiled card named Sengir Nosferatu to the battlefield under its owner’s control.
         ReturnSengirNosferatuEffect effect = new ReturnSengirNosferatuEffect();
         effect.setText("Return an exiled card named Sengir Nosferatu to the battlefield under its owner's control.");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{1}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{1}{B}"));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
-
-        availableImageSetCodes = Arrays.asList("TSP", "TSR");
     }
 
-    public SengirNosferatuBatToken(final SengirNosferatuBatToken token) {
+    private SengirNosferatuBatToken(final SengirNosferatuBatToken token) {
         super(token);
     }
 
@@ -84,8 +80,8 @@ class ReturnSengirNosferatuEffect extends OneShotEffect {
             return false;
         }
         Target target = new TargetCardInExile(filter);
-        target.setNotTarget(true);
-        if (!target.canChoose(source.getSourceId(), source.getControllerId(), game)) {
+        target.withNotTarget(true);
+        if (!target.canChoose(source.getControllerId(), source, game)) {
             return false;
         }
         player.chooseTarget(Outcome.PutCreatureInPlay, target, source, game);

@@ -31,7 +31,7 @@ public final class BringerOfTheGreenDawn extends CardImpl {
         this.toughness = new MageInt(5);
 
         // You may pay {W}{U}{B}{R}{G} rather than pay Bringer of the Green Dawn's mana cost.
-        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{W}{U}{B}{R}{G}")));
+        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl<>("{W}{U}{B}{R}{G}")));
         // Trample
         this.addAbility(TrampleAbility.getInstance());
         // At the beginning of your upkeep,s you may create a 3/3 green Beast creature token.

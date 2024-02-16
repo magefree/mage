@@ -50,14 +50,14 @@ public final class ElementalAppeal extends CardImpl {
 
 class ElementalAppealEffect extends OneShotEffect {
 
-    public ElementalAppealEffect() {
+    ElementalAppealEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Create a 7/1 red Elemental creature token with trample and haste. "
                 + "Exile it at the beginning of the next end step. "
                 + "If this spell was kicked, that creature gets +7/+0 until end of turn";
     }
 
-    public ElementalAppealEffect(final ElementalAppealEffect effect) {
+    private ElementalAppealEffect(final ElementalAppealEffect effect) {
         super(effect);
     }
 
@@ -71,7 +71,7 @@ class ElementalAppealEffect extends OneShotEffect {
         CreateTokenEffect effect = new CreateTokenEffect(new RedElementalWithTrampleAndHaste());
         if (effect.apply(game, source)) {
             effect.exileTokensCreatedAtNextEndStep(game, source);
-            if (KickedCondition.instance.apply(game, source)) {
+            if (KickedCondition.ONCE.apply(game, source)) {
                 List<Predicate<MageObject>> predList = new ArrayList<>();
                 for (UUID tokenId : effect.getLastAddedTokenIds()) {
                     predList.add(new CardIdPredicate(tokenId));

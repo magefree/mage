@@ -29,7 +29,7 @@ public final class TemperedSteel extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(2, 2, Duration.WhileOnBattlefield, filter, false)));
     }
 
-    public TemperedSteel (final TemperedSteel card) {
+    private TemperedSteel(final TemperedSteel card) {
         super(card);
     }
 

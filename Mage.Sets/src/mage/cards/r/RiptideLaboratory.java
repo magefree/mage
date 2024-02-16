@@ -35,7 +35,7 @@ public final class RiptideLaboratory extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
 
         // {1}{U}, {tap}: Return target Wizard you control to its owner's hand.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new ManaCostsImpl("{1}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new ManaCostsImpl<>("{1}{U}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetControlledPermanent(filter));
         this.addAbility(ability);

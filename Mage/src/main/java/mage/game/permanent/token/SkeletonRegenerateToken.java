@@ -12,7 +12,7 @@ import mage.constants.Zone;
 public final class SkeletonRegenerateToken extends TokenImpl {
 
     public SkeletonRegenerateToken() {
-        super("Skeleton", "1/1 black Skeleton creature token with \"{B}: Regenerate this creature\"");
+        super("Skeleton Token", "1/1 black Skeleton creature token with \"{B}: Regenerate this creature\"");
         cardType.add(CardType.CREATURE);
         this.subtype.add(SubType.SKELETON);
         color.setBlack(true);
@@ -21,7 +21,7 @@ public final class SkeletonRegenerateToken extends TokenImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ColoredManaCost(ColoredManaSymbol.B)));
     }
 
-    public SkeletonRegenerateToken(final SkeletonRegenerateToken token) {
+    private SkeletonRegenerateToken(final SkeletonRegenerateToken token) {
         super(token);
     }
 

@@ -63,8 +63,8 @@ public class HiveMindTest extends CardTestPlayerBase {
         execute();
 
         assertGraveyardCount(playerA, "Pact of the Titan", 1);
-        assertPermanentCount(playerA, "Giant", 0); // was countered by Chalice
-        assertPermanentCount(playerB, "Giant", 1); // was not countered by Chalice because it was not cast
+        assertPermanentCount(playerA, "Giant Token", 0); // was countered by Chalice
+        assertPermanentCount(playerB, "Giant Token", 1); // was not countered by Chalice because it was not cast
         assertWonTheGame(playerA);
         assertLostTheGame(playerB);
         assertLife(playerB, 20);

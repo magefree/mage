@@ -16,8 +16,8 @@ public class CommanderFreeForAll extends GameCommanderImpl {
 
     private int numPlayers;
 
-    public CommanderFreeForAll(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startLife) {
-        super(attackOption, range, mulligan, startLife, 100);
+    public CommanderFreeForAll(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startLife, int startHandSize) {
+        super(attackOption, range, mulligan, 100, startLife, startHandSize);
     }
 
     public CommanderFreeForAll(final CommanderFreeForAll game) {

@@ -35,9 +35,9 @@ public final class Mirrorworks extends CardImpl {
         // Whenever another nontoken artifact enters the battlefield under your control, you may pay {2}.
         // If you do, create a token that's a copy of that artifact.
         Effect effect = new DoIfCostPaid(new CreateTokenCopyTargetEffect(true),
-                new ManaCostsImpl("{2}"), "Create a token that's a copy of that artifact?");
+                new ManaCostsImpl<>("{2}"), "Create a token that's a copy of that artifact?");
         effect.setText("you may pay {2}. If you do, create a token that's a copy of that artifact");
-        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, effect, filter, false, SetTargetPointer.PERMANENT, null));
+        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, effect, filter, false, SetTargetPointer.PERMANENT));
     }
 
     private Mirrorworks(final Mirrorworks card) {

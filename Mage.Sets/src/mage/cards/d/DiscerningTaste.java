@@ -1,20 +1,21 @@
 package mage.cards.d;
 
-import java.util.UUID;
-
+import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.constants.CardType;
+import mage.constants.PutCards;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -41,10 +42,8 @@ public final class DiscerningTaste extends CardImpl {
 
 class DiscerningTasteEffect extends LookLibraryAndPickControllerEffect {
 
-    public DiscerningTasteEffect() {
-        super(StaticValue.get(4), false, StaticValue.get(1), StaticFilters.FILTER_CARD, Zone.GRAVEYARD,
-                false, false, false, Zone.HAND, false, false, false
-        );
+    DiscerningTasteEffect() {
+        super(4, 1, PutCards.HAND, PutCards.GRAVEYARD);
     }
 
     private DiscerningTasteEffect(final DiscerningTasteEffect effect) {
@@ -57,16 +56,17 @@ class DiscerningTasteEffect extends LookLibraryAndPickControllerEffect {
     }
 
     @Override
-    protected void putCardsBack(Ability source, Player player, Cards cards, Game game) {
-        int life = 0;
-        for (Card card : cards.getCards(StaticFilters.FILTER_CARD_CREATURE, game)) {
-            int power = card.getPower().getValue();
-            if (power > life) {
-                life = power;
-            }
-        }
-        player.moveCards(cards, Zone.GRAVEYARD, source, game);
+    protected boolean actionWithPickedCards(Game game, Ability source, Player player, Cards pickedCards, Cards otherCards) {
+        super.actionWithPickedCards(game, source, player, pickedCards, otherCards);
+        otherCards.retainZone(Zone.GRAVEYARD, game);
+        int life = otherCards.getCards(StaticFilters.FILTER_CARD_CREATURE, game)
+                .stream()
+                .map(MageObject::getPower)
+                .mapToInt(MageInt::getValue)
+                .max()
+                .orElse(0);
         player.gainLife(life, game, source);
+        return true;
     }
 
     @Override

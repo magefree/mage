@@ -22,7 +22,6 @@ public final class WindSail extends CardImpl {
 
         // One or two target creatures gain flying until end of turn.
         Effect effect = new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn);
-        effect.setText("One or two target creatures gain flying until end of turn");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(1, 2));
     }

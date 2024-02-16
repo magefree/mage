@@ -9,11 +9,11 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -32,15 +32,13 @@ import java.util.UUID;
  */
 public final class ThoughtPrison extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("spell cast");
-
     public ThoughtPrison(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");
 
         // Imprint - When Thought Prison enters the battlefield, you may have target player reveal their hand. If you do, choose a nonland card from it and exile that card.
         EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new ThoughtPrisonImprintEffect(), true);
         ability.addTarget(new TargetPlayer());
-        ability.withFlavorWord("Imprint");
+        ability.setAbilityWord(AbilityWord.IMPRINT);
         this.addAbility(ability);
 
         // Whenever a player casts a spell that shares a color or converted mana cost with the exiled card, Thought Prison deals 2 damage to that player.
@@ -67,10 +65,10 @@ class ThoughtPrisonImprintEffect extends OneShotEffect {
 
     public ThoughtPrisonImprintEffect() {
         super(Outcome.Benefit);
-        staticText = "exile a nonland card from target player's hand";
+        staticText = "have target player reveal their hand. If you do, choose a nonland card from it and exile that card";
     }
 
-    public ThoughtPrisonImprintEffect(ThoughtPrisonImprintEffect effect) {
+    private ThoughtPrisonImprintEffect(final ThoughtPrisonImprintEffect effect) {
         super(effect);
     }
 
@@ -83,7 +81,7 @@ class ThoughtPrisonImprintEffect extends OneShotEffect {
             targetPlayer.revealCards("Thought Prison ", targetPlayer.getHand(), game);
 
             TargetCard target = new TargetCard(1, Zone.HAND, filter);
-            if (player.choose(Outcome.Benefit, targetPlayer.getHand(), target, game)) {
+            if (player.choose(Outcome.Benefit, targetPlayer.getHand(), target, source, game)) {
                 List<UUID> targets = target.getTargets();
                 for (UUID targetId : targets) {
                     Card card = targetPlayer.getHand().get(targetId, game);
@@ -114,9 +112,10 @@ class ThoughtPrisonTriggeredAbility extends TriggeredAbilityImpl {
 
     public ThoughtPrisonTriggeredAbility() {
         super(Zone.BATTLEFIELD, new ThoughtPrisonDamageEffect(), false);
+        setTriggerPhrase("Whenever a player casts a spell that shares a color or mana value with the exiled card, ");
     }
 
-    public ThoughtPrisonTriggeredAbility(final ThoughtPrisonTriggeredAbility ability) {
+    private ThoughtPrisonTriggeredAbility(final ThoughtPrisonTriggeredAbility ability) {
         super(ability);
     }
 
@@ -134,56 +133,53 @@ class ThoughtPrisonTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         Spell spell = (Spell) game.getObject(event.getTargetId());
         Permanent sourcePermanent = game.getPermanent(this.getSourceId());
-
-        if (spell instanceof Spell) {
-            if (sourcePermanent == null) {
-                sourcePermanent = (Permanent) game.getLastKnownInformation(event.getSourceId(), Zone.BATTLEFIELD);
-            }
-            if (sourcePermanent != null && sourcePermanent.getImprinted() != null && !sourcePermanent.getImprinted().isEmpty()) {
-                Card imprintedCard = game.getCard(sourcePermanent.getImprinted().get(0));
-                if (imprintedCard != null && game.getState().getZone(imprintedCard.getId()) == Zone.EXILED) {
-                    // Check if spell's color matches the imprinted card
-                    ObjectColor spellColor = spell.getColor(game);
-                    ObjectColor imprintedColor = imprintedCard.getColor(game);
-                    boolean matches = false;
-
-                    if (spellColor.shares(imprintedColor)) {
-                        matches = true;
-                    }
-                    // Check if spell's CMC matches the imprinted card
-                    int cmc = spell.getManaValue();
-                    int imprintedCmc = imprintedCard.getManaValue();
-                    if (cmc == imprintedCmc) {
-                        matches = true;
-                    }
-
-                    if (matches) {
-                        for (Effect effect : this.getEffects()) {
-                            effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
-                        }
-                        return matches;
-                    }
-                }
-            }
+        if (spell == null) {
+            return false;
         }
 
-        return false;
-    }
+        if (sourcePermanent == null) {
+            sourcePermanent = (Permanent) game.getLastKnownInformation(event.getSourceId(), Zone.BATTLEFIELD);
+        }
+        if (sourcePermanent == null || sourcePermanent.getImprinted() == null || sourcePermanent.getImprinted().isEmpty()) {
+            return false;
+        }
 
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a player casts a spell that shares a color or mana value with the exiled card, " ;
+        Card imprintedCard = game.getCard(sourcePermanent.getImprinted().get(0));
+        if (imprintedCard == null || game.getState().getZone(imprintedCard.getId()) != Zone.EXILED) {
+            return false;
+        }
+        // Check if spell's color matches the imprinted card
+        ObjectColor spellColor = spell.getColor(game);
+        ObjectColor imprintedColor = imprintedCard.getColor(game);
+        boolean matches = false;
+        if (spellColor.shares(imprintedColor)) {
+            matches = true;
+        }
+
+        // Check if spell's CMC matches the imprinted card
+        int cmc = spell.getManaValue();
+        int imprintedCmc = imprintedCard.getManaValue();
+        if (cmc == imprintedCmc) {
+            matches = true;
+        }
+
+        if (matches) {
+            for (Effect effect : this.getEffects()) {
+                effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
+            }
+        }
+        return matches;
     }
 }
 
 class ThoughtPrisonDamageEffect extends OneShotEffect {
 
-    public ThoughtPrisonDamageEffect() {
+    ThoughtPrisonDamageEffect() {
         super(Outcome.Damage);
         staticText = "{this} deals 2 damage to that player";
     }
 
-    public ThoughtPrisonDamageEffect(final ThoughtPrisonDamageEffect effect) {
+    private ThoughtPrisonDamageEffect(final ThoughtPrisonDamageEffect effect) {
         super(effect);
     }
 

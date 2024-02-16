@@ -50,7 +50,7 @@ class DeflectingPalmEffect extends PreventionEffectImpl {
         this.target = new TargetSource();
     }
 
-    public DeflectingPalmEffect(final DeflectingPalmEffect effect) {
+    private DeflectingPalmEffect(final DeflectingPalmEffect effect) {
         super(effect);
         this.target = effect.target.copy();
     }
@@ -62,7 +62,7 @@ class DeflectingPalmEffect extends PreventionEffectImpl {
 
     @Override
     public void init(Ability source, Game game) {
-        this.target.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), game);
+        this.target.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), source, game);
         super.init(source, game);
     }
 

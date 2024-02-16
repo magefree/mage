@@ -35,7 +35,7 @@ public final class GrenzoHavocRaiser extends CardImpl {
     public GrenzoHavocRaiser(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}{R}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GOBLIN);
         this.subtype.add(SubType.ROGUE);
         this.power = new MageInt(2);
@@ -47,8 +47,7 @@ public final class GrenzoHavocRaiser extends CardImpl {
         effect.setText(goadEffectName);
         Ability ability = new GrenzoHavocRaiserTriggeredAbility(effect);
         //or Exile the top card of that player's library. Until end of turn, you may cast that card and you may spend mana as though it were mana of any color to cast it.
-        Mode mode = new Mode();
-        mode.addEffect(new GrenzoHavocRaiserEffect());
+        Mode mode = new Mode(new GrenzoHavocRaiserEffect());
         ability.addMode(mode);
         this.addAbility(ability);
     }
@@ -69,9 +68,10 @@ class GrenzoHavocRaiserTriggeredAbility extends TriggeredAbilityImpl {
 
     public GrenzoHavocRaiserTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect, false);
+        setTriggerPhrase("Whenever a creature you control deals combat damage to a player, ");
     }
 
-    public GrenzoHavocRaiserTriggeredAbility(final GrenzoHavocRaiserTriggeredAbility ability) {
+    private GrenzoHavocRaiserTriggeredAbility(final GrenzoHavocRaiserTriggeredAbility ability) {
         super(ability);
         this.damagedPlayerName = ability.damagedPlayerName;
     }
@@ -118,21 +118,16 @@ class GrenzoHavocRaiserTriggeredAbility extends TriggeredAbilityImpl {
         }
         return false;
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a creature you control deals combat damage to a player, " ;
-    }
 }
 
 class GrenzoHavocRaiserEffect extends OneShotEffect {
 
-    public GrenzoHavocRaiserEffect() {
+    GrenzoHavocRaiserEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "exile the top card of that player's library. Until end of turn, you may cast that card and you may spend mana as though it were mana of any color to cast it";
     }
 
-    public GrenzoHavocRaiserEffect(final GrenzoHavocRaiserEffect effect) {
+    private GrenzoHavocRaiserEffect(final GrenzoHavocRaiserEffect effect) {
         super(effect);
     }
 
@@ -147,7 +142,7 @@ class GrenzoHavocRaiserEffect extends OneShotEffect {
         if (controller != null) {
             Player damagedPlayer = game.getPlayer(this.getTargetPointer().getFirst(game, source));
             if (damagedPlayer != null) {
-                MageObject sourceObject = game.getObject(source.getSourceId());
+                MageObject sourceObject = game.getObject(source);
                 UUID exileId = CardUtil.getCardExileZoneId(game, source);
                 Card card = damagedPlayer.getLibrary().getFromTop(game);
                 if (card != null && sourceObject != null) {

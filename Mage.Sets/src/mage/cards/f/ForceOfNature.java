@@ -49,12 +49,12 @@ public final class ForceOfNature extends CardImpl {
 
 class ForceOfNatureEffect extends OneShotEffect {
 
-    public ForceOfNatureEffect() {
+    ForceOfNatureEffect() {
         super(Outcome.Damage);
         this.staticText = "{this} deals 8 damage to you unless you pay {G}{G}{G}{G}";
     }
 
-    public ForceOfNatureEffect(final ForceOfNatureEffect effect) {
+    private ForceOfNatureEffect(final ForceOfNatureEffect effect) {
         super(effect);
     }
 
@@ -67,7 +67,7 @@ class ForceOfNatureEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Cost cost = new ManaCostsImpl("{G}{G}{G}{G}");
+            Cost cost = new ManaCostsImpl<>("{G}{G}{G}{G}");
             if (!(controller.chooseUse(Outcome.Benefit, "Pay {G}{G}{G}{G}?", source, game)
                     && cost.pay(source, game, source, controller.getId(), false, null))) {
                 controller.damage(8, source.getSourceId(), source, game);

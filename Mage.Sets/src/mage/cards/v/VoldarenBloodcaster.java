@@ -107,7 +107,7 @@ class VoldarenBloodcasterTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkInterveningIfClause(Game game) {
-        return game.getBattlefield().count(filter, getSourceId(), getControllerId(), game) >= 5;
+        return game.getBattlefield().count(filter, getControllerId(), this, game) >= 5;
     }
 
     @Override

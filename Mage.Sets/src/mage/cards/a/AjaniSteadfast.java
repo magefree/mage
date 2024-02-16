@@ -40,7 +40,7 @@ public final class AjaniSteadfast extends CardImpl {
 
     public AjaniSteadfast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{W}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.AJANI);
 
         this.setStartingLoyalty(4);

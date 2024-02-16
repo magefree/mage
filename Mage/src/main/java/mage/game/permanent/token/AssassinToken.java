@@ -1,21 +1,18 @@
-
-
 package mage.game.permanent.token;
 
-import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.common.LoseGameTargetPlayerEffect;
+import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
- *
  * @author spjspj
  */
 public final class AssassinToken extends TokenImpl {
 
     public AssassinToken() {
-        super("Assassin", "1/1 black Assassin creature tokens with \"Whenever this creature deals combat damage to a player, that player loses the game.\"");
+        super("Assassin Token", "1/1 black Assassin creature tokens with \"Whenever this creature deals combat damage to a player, that player loses the game.\"");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add(SubType.ASSASSIN);
@@ -24,7 +21,7 @@ public final class AssassinToken extends TokenImpl {
         addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new LoseGameTargetPlayerEffect(), false, true));
     }
 
-    public AssassinToken(final AssassinToken token) {
+    private AssassinToken(final AssassinToken token) {
         super(token);
     }
 
@@ -32,4 +29,3 @@ public final class AssassinToken extends TokenImpl {
         return new AssassinToken(this);
     }
 }
-

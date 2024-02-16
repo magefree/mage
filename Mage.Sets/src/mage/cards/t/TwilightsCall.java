@@ -30,7 +30,7 @@ public final class TwilightsCall extends CardImpl {
 
         Effect effect = new TwilightsCallEffect();
         // You may cast Twilight's Call as though it had flash if you pay {2} more to cast it.
-        Ability ability = new PayMoreToCastAsThoughtItHadFlashAbility(this, new ManaCostsImpl("{2}"));
+        Ability ability = new PayMoreToCastAsThoughtItHadFlashAbility(this, new ManaCostsImpl<>("{2}"));
         ability.addEffect(effect);
         this.addAbility(ability);
         // Each player returns all creature cards from their graveyard to the battlefield.
@@ -49,12 +49,12 @@ public final class TwilightsCall extends CardImpl {
 
 class TwilightsCallEffect extends OneShotEffect {
 
-    public TwilightsCallEffect() {
+    TwilightsCallEffect() {
         super(Outcome.Neutral);
         staticText = "Each player returns all creature cards from their graveyard to the battlefield";
     }
 
-    public TwilightsCallEffect(TwilightsCallEffect copy) {
+    private TwilightsCallEffect(final TwilightsCallEffect copy) {
         super(copy);
     }
 

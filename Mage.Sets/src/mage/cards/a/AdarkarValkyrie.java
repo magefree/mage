@@ -1,28 +1,24 @@
-
 package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
+import mage.abilities.common.delayed.WhenTargetDiesDelayedTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ReturnToBattlefieldUnderYourControlTargetEffect;
+import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
+import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.Permanent;
-import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetpointer.FixedTarget;
+import mage.constants.CardType;
+import mage.constants.SetTargetPointer;
+import mage.constants.SubType;
+import mage.constants.SuperType;
+import mage.filter.StaticFilters;
+import mage.target.TargetPermanent;
 
 /**
  *
@@ -30,15 +26,9 @@ import mage.target.targetpointer.FixedTarget;
  */
 public final class AdarkarValkyrie extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
-
     public AdarkarValkyrie(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");
-        addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
         this.subtype.add(SubType.ANGEL);
 
         this.power = new MageInt(4);
@@ -49,9 +39,14 @@ public final class AdarkarValkyrie extends CardImpl {
         // Vigilance
         this.addAbility(VigilanceAbility.getInstance());
         // {T}: When target creature other than Adarkar Valkyrie dies this turn, return that card to the battlefield under your control.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AdarkarValkyrieEffect(), new TapSourceCost());
-
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        DelayedTriggeredAbility delayedAbility = new WhenTargetDiesDelayedTriggeredAbility(
+                new ReturnFromGraveyardToBattlefieldTargetEffect()
+                        .setText("return that card to the battlefield under your control"),
+                SetTargetPointer.CARD
+        );
+        delayedAbility.setTriggerPhrase("When target creature other than {this} dies this turn, ");
+        Ability ability = new SimpleActivatedAbility(new CreateDelayedTriggeredAbilityEffect(delayedAbility), new TapSourceCost());
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE));
         this.addAbility(ability);
     }
 
@@ -62,75 +57,5 @@ public final class AdarkarValkyrie extends CardImpl {
     @Override
     public AdarkarValkyrie copy() {
         return new AdarkarValkyrie(this);
-    }
-}
-
-class AdarkarValkyrieEffect extends OneShotEffect {
-
-    public AdarkarValkyrieEffect() {
-        super(Outcome.PutCreatureInPlay);
-        this.staticText = "When target creature other than {this} dies this turn, return that card to the battlefield under your control";
-    }
-
-    public AdarkarValkyrieEffect(final AdarkarValkyrieEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public AdarkarValkyrieEffect copy() {
-        return new AdarkarValkyrieEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (permanent != null) {
-            DelayedTriggeredAbility delayedAbility = new AdarkarValkyrieDelayedTriggeredAbility(new MageObjectReference(permanent, game));
-            game.addDelayedTriggeredAbility(delayedAbility, source);
-            return true;
-        }
-        return false;
-    }
-}
-
-class AdarkarValkyrieDelayedTriggeredAbility extends DelayedTriggeredAbility {
-
-    protected MageObjectReference mor;
-
-    public AdarkarValkyrieDelayedTriggeredAbility(MageObjectReference mor) {
-        super(new ReturnToBattlefieldUnderYourControlTargetEffect(), Duration.EndOfTurn);
-        this.mor = mor;
-    }
-
-    public AdarkarValkyrieDelayedTriggeredAbility(final AdarkarValkyrieDelayedTriggeredAbility ability) {
-        super(ability);
-        this.mor = ability.mor;
-    }
-
-    @Override
-    public AdarkarValkyrieDelayedTriggeredAbility copy() {
-        return new AdarkarValkyrieDelayedTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (((ZoneChangeEvent) event).isDiesEvent()
-                && mor.refersTo(((ZoneChangeEvent) event).getTarget(), game)
-                && game.getState().getZone(event.getTargetId()) == Zone.GRAVEYARD) { // must be in the graveyard
-            getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
-            return true;
-
-        }
-        return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "When target creature other than {this} dies this turn, " ;
     }
 }

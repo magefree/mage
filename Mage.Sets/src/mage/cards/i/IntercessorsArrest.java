@@ -30,8 +30,8 @@ public final class IntercessorsArrest extends CardImpl {
         // Enchant permanent
         TargetPermanent auraTarget = new TargetPermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.UnboostCreature));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // Enchanted permanent can't attack, block, or crew Vehicles. Its activated abilities can't be activated unless they're mana abilities.
         Ability ability = new SimpleStaticAbility(new CantAttackBlockAttachedEffect(AttachmentType.AURA)
@@ -52,7 +52,7 @@ public final class IntercessorsArrest extends CardImpl {
 
 class IntercessorsArrestEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public IntercessorsArrestEffect() {
+    IntercessorsArrestEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = ", or crew Vehicles. Its activated abilities can't be activated unless they're mana abilities";
     }

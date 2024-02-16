@@ -3,7 +3,6 @@ package org.mage.card.arcane;
 import mage.MageInt;
 import mage.cards.MageCardLocation;
 import mage.cards.action.ActionCallback;
-import mage.client.constants.Constants;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.util.ImageCaches;
 import mage.client.util.ImageHelper;
@@ -19,11 +18,13 @@ import mage.view.PermanentView;
 import mage.view.StackAbilityView;
 import org.jdesktop.swingx.graphics.GraphicsUtilities;
 import org.mage.plugins.card.images.ImageCache;
+import org.mage.plugins.card.images.ImageCacheData;
 import org.mage.plugins.card.utils.impl.ImageManagerImpl;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.Objects;
 import java.util.StringTokenizer;
 import java.util.UUID;
 
@@ -35,6 +36,8 @@ import java.util.UUID;
 public class CardPanelRenderModeImage extends CardPanel {
 
     private static final long serialVersionUID = -3272134219262184411L;
+
+    private static final SoftValuesLoadingCache<Key, BufferedImage> IMAGE_CACHE = ImageCaches.register(SoftValuesLoadingCache.from(CardPanelRenderModeImage::createImage));
 
     private static final int WIDTH_LIMIT = 90; // card width limit to create smaller counter
 
@@ -79,33 +82,9 @@ public class CardPanelRenderModeImage extends CardPanel {
     private boolean displayTitleAnyway;
     private final boolean displayFullImagePath;
 
-    private final static SoftValuesLoadingCache<Key, BufferedImage> IMAGE_CACHE;
+    private int updateArtImageStamp;
 
-    public ImagePanel getOverlayPanel() {
-        return overlayPanel;
-    }
-
-    public void setOverlayPanel(ImagePanel overlayPanel) {
-        this.overlayPanel = overlayPanel;
-    }
-
-    public JPanel getTypeIconPanel() {
-        return typeIconPanel;
-    }
-
-    public void setTypeIconPanel(JPanel typeIconPanel) {
-        this.typeIconPanel = typeIconPanel;
-    }
-
-    public JPanel getCounterPanel() {
-        return counterPanel;
-    }
-
-    public void setCounterPanel(JPanel counterPanel) {
-        this.counterPanel = counterPanel;
-    }
-
-    static class Key {
+    private static class Key {
 
         final Insets border;
         final int width;
@@ -138,97 +117,33 @@ public class CardPanelRenderModeImage extends CardPanel {
         }
 
         @Override
-        public int hashCode() {
-            int hash = 3;
-            hash = 19 * hash + this.border.left;
-            hash = 19 * hash + this.border.right;
-            hash = 19 * hash + this.border.top;
-            hash = 19 * hash + this.border.bottom;
-            hash = 19 * hash + this.width;
-            hash = 19 * hash + this.height;
-            hash = 19 * hash + this.cardWidth;
-            hash = 19 * hash + this.cardHeight;
-            hash = 19 * hash + this.cardXOffset;
-            hash = 19 * hash + this.cardYOffset;
-            hash = 19 * hash + (this.hasImage ? 1 : 0);
-            hash = 19 * hash + (this.isSelected ? 1 : 0);
-            hash = 19 * hash + (this.isChoosable ? 1 : 0);
-            hash = 19 * hash + (this.isPlayable ? 1 : 0);
-            hash = 19 * hash + (this.canAttack ? 1 : 0);
-            hash = 19 * hash + (this.canBlock ? 1 : 0);
-            return hash;
-        }
-
-        @Override
         public boolean equals(Object obj) {
             if (this == obj) {
                 return true;
             }
-            if (obj == null) {
+            if (obj == null || this.getClass() != obj.getClass()) {
                 return false;
             }
-            if (getClass() != obj.getClass()) {
-                return false;
-            }
-            final Key other = (Key) obj;
-            if (this.border.left != other.border.left) {
-                return false;
-            }
-            if (this.border.right != other.border.right) {
-                return false;
-            }
-            if (this.border.top != other.border.top) {
-                return false;
-            }
-            if (this.border.bottom != other.border.bottom) {
-                return false;
-            }
-            if (this.width != other.width) {
-                return false;
-            }
-            if (this.height != other.height) {
-                return false;
-            }
-            if (this.cardWidth != other.cardWidth) {
-                return false;
-            }
-            if (this.cardHeight != other.cardHeight) {
-                return false;
-            }
-            if (this.cardXOffset != other.cardXOffset) {
-                return false;
-            }
-            if (this.cardYOffset != other.cardYOffset) {
-                return false;
-            }
-            if (this.hasImage != other.hasImage) {
-                return false;
-            }
-            if (this.isSelected != other.isSelected) {
-                return false;
-            }
-            if (this.isChoosable != other.isChoosable) {
-                return false;
-            }
-            if (this.isPlayable != other.isPlayable) {
-                return false;
-            }
-            if (this.canAttack != other.canAttack) {
-                return false;
-            }
-            return this.canBlock == other.canBlock;
+            Key that = (Key) obj;
+            return Objects.equals(this.border, that.border)
+                    && this.width == that.width
+                    && this.height == that.height
+                    && this.cardWidth == that.cardWidth
+                    && this.cardHeight == that.cardHeight
+                    && this.cardXOffset == that.cardXOffset
+                    && this.cardYOffset == that.cardYOffset
+                    && this.hasImage == that.hasImage
+                    && this.isSelected == that.isSelected
+                    && this.isChoosable == that.isChoosable
+                    && this.isPlayable == that.isPlayable
+                    && this.canAttack == that.canAttack
+                    && this.canBlock == that.canBlock;
         }
-    }
 
-    static {
-        IMAGE_CACHE = ImageCaches.register(SoftValuesLoadingCache.from(CardPanelRenderModeImage::createImage));
-    }
-
-    static private boolean canShowCardIcons(int cardFullWidth, boolean cardHasImage) {
-        // cards without images show icons and text always
-        // TODO: apply "card names on card" setting to icon too?
-        // TODO: fix card min-max size to hide (compare to settings size, not direct 60 and 200)
-        return ((cardFullWidth > 60) && (cardFullWidth < 200)) || (!cardHasImage);
+        @Override
+        public int hashCode() {
+            return Objects.hash(border, width, height, cardWidth, cardHeight, cardXOffset, cardYOffset, hasImage, isSelected, isChoosable, isPlayable, canAttack, canBlock);
+        }
     }
 
     private static class CardSizes {
@@ -254,195 +169,11 @@ public class CardPanelRenderModeImage extends CardPanel {
         }
     }
 
-    public CardPanelRenderModeImage(CardView newGameCard, UUID gameId, final boolean loadImage, ActionCallback callback, final boolean foil, Dimension dimension, boolean needFullPermanentRender) {
-        // Call to super
-        super(newGameCard, gameId, loadImage, callback, foil, dimension, needFullPermanentRender);
-
-        // Counter panel
-        if (!newGameCard.isAbility()) {
-            // panel to show counters on the card
-            setCounterPanel(new JPanel());
-            getCounterPanel().setLayout(null);
-            getCounterPanel().setOpaque(false);
-            add(getCounterPanel());
-
-            plusCounterLabel = new JLabel("");
-            plusCounterLabel.setToolTipText("+1/+1");
-            getCounterPanel().add(plusCounterLabel);
-
-            minusCounterLabel = new JLabel("");
-            minusCounterLabel.setToolTipText("-1/-1");
-            getCounterPanel().add(minusCounterLabel);
-
-            loyaltyCounterLabel = new JLabel("");
-            loyaltyCounterLabel.setToolTipText("loyalty");
-            getCounterPanel().add(loyaltyCounterLabel);
-
-            otherCounterLabel = new JLabel("");
-            getCounterPanel().add(otherCounterLabel);
-
-            getCounterPanel().setVisible(false);
-        }
-
-        // Ability icon
-        if (newGameCard.isAbility()) {
-            if (newGameCard.getAbilityType() == AbilityType.TRIGGERED) {
-                setTypeIcon(ImageManagerImpl.instance.getTriggeredAbilityImage(), "Triggered Ability");
-            } else if (newGameCard.getAbilityType() == AbilityType.ACTIVATED) {
-                setTypeIcon(ImageManagerImpl.instance.getActivatedAbilityImage(), "Activated Ability");
-            }
-        }
-
-        // Token icon
-        if (this.getGameCard().isToken()) {
-            setTypeIcon(ImageManagerImpl.instance.getTokenIconImage(), "Token Permanent");
-        }
-
-        displayTitleAnyway = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SHOW_CARD_NAMES, "true").equals("true");
-        displayFullImagePath = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SHOW_FULL_IMAGE_PATH, "false").equals("true");
-
-        // Title Text
-        titleText = new GlowText();
-        setTitle(getGameCard());
-        titleText.setForeground(Color.white);
-        titleText.setGlow(Color.black, TEXT_GLOW_SIZE, TEXT_GLOW_INTENSITY);
-        titleText.setWrap(true);
-        add(titleText);
-
-        // Full path to image text 
-        fullImageText = new JLabel();
-        fullImageText.setText(fullImagePath);
-        fullImageText.setForeground(Color.BLACK);
-        add(fullImageText);
-
-        // PT Text
-        ptPanel = new JPanel();
-        ptPanel.setOpaque(false);
-        ptPanel.setLayout(new BoxLayout(ptPanel, BoxLayout.X_AXIS));
-        ptPanel.add(new Box.Filler(new Dimension(0, 0), new Dimension(0, 0), new Dimension(Integer.MAX_VALUE, 0)));
-        ptText1 = new GlowText();
-        ptText2 = new GlowText();
-        ptText3 = new GlowText();
-        updatePTTexts(getGameCard());
-        ptPanel.add(ptText1);
-        ptPanel.add(ptText2);
-        ptPanel.add(ptText3);
-        //
-        add(ptPanel);
-
-        // Sickness overlay
-        BufferedImage sickness = ImageManagerImpl.instance.getSicknessImage();
-        setOverlayPanel(new ImagePanel(sickness, ImagePanelStyle.SCALED));
-        getOverlayPanel().setOpaque(false);
-        add(getOverlayPanel());
-
-        // Imagel panel
-        imagePanel = new ScaledImagePanel();
-        if (DebugUtil.GUI_RENDER_IMAGE_DRAW_IMAGE_BORDER) {
-            imagePanel.setBorder(BorderFactory.createLineBorder(Color.white));
-        }
-        add(imagePanel);
-
-        // Do we need to load?
-        if (loadImage) {
-            initialDraw();
-        } else {
-            // Nothing to do
-        }
-    }
-
-    private void setTypeIcon(BufferedImage bufferedImage, String toolTipText) {
-        setTypeIconPanel(new JPanel());
-        getTypeIconPanel().setLayout(null);
-        getTypeIconPanel().setOpaque(false);
-        add(getTypeIconPanel());
-
-        typeIconButton = new JButton("");
-        typeIconButton.setLocation(2, 2);
-        typeIconButton.setSize(25, 25);
-
-        getTypeIconPanel().setVisible(true);
-        typeIconButton.setIcon(new ImageIcon(bufferedImage));
-        if (toolTipText != null) {
-            typeIconButton.setToolTipText(toolTipText);
-        }
-        getTypeIconPanel().add(typeIconButton);
-    }
-
-    @Override
-    public void cleanUp() {
-        super.cleanUp();
-        this.setCounterPanel(null);
-    }
-
-    private void setTitle(CardView card) {
-        titleText.setText(!displayTitleAnyway && hasImage ? "" : card.getDisplayName());
-    }
-
-    private void setImage(BufferedImage srcImage) {
-        synchronized (imagePanel) {
-            if (srcImage != null) {
-                imagePanel.setImage(srcImage);
-            } else {
-                imagePanel.clearImage();
-            }
-            repaint();
-        }
-        doLayout();
-    }
-
-    private void setFullPath(String fullImagePath) {
-        this.fullImagePath = fullImagePath;
-        this.fullImagePath = this.fullImagePath.replaceAll("\\\\", "\\\\<br>");
-        this.fullImagePath = this.fullImagePath.replaceAll("/", "/<br>");
-        this.fullImagePath = "<html>" + this.fullImagePath + "</html>";
-        fullImageText.setText(!displayFullImagePath ? "" : this.fullImagePath);
-        doLayout();
-    }
-
-    @Override
-    public void transferResources(final CardPanel panelAbstract) {
-        if (panelAbstract instanceof CardPanelRenderModeImage) {
-            CardPanelRenderModeImage panel = (CardPanelRenderModeImage) panelAbstract;
-            synchronized (panel.imagePanel) {
-                if (panel.imagePanel.hasImage()) {
-                    setImage(panel.imagePanel.getSrcImage());
-                }
-            }
-        }
-    }
-
-    @Override
-    public void setSelected(boolean isSelected) {
-        super.setSelected(isSelected);
-        if (isSelected) {
-            this.titleText.setGlowColor(Color.green);
-        } else {
-            this.titleText.setGlowColor(Color.black);
-        }
-    }
-
-    @Override
-    protected void paintCard(Graphics2D g2d) {
-        float alpha = getAlpha();
-        if (alpha != 1.0f) {
-            AlphaComposite composite = AlphaComposite.getInstance(AlphaComposite.SRC_ATOP, alpha);
-            g2d.setComposite(composite);
-        }
-
-        // draw background (selected/chooseable/playable)
-        MageCardLocation cardLocation = getCardLocation();
-        g2d.drawImage(
-                IMAGE_CACHE.getOrThrow(
-                        new Key(getInsets(),
-                                cardLocation.getCardWidth(), cardLocation.getCardHeight(),
-                                cardLocation.getCardWidth(), cardLocation.getCardHeight(),
-                                0,
-                                0,
-                                hasImage, isSelected(), isChoosable(), getGameCard().isPlayable(), getGameCard().isCanAttack(),
-                                getGameCard().isCanBlock())),
-                0, 0, cardLocation.getCardWidth(), cardLocation.getCardHeight(), null);
-        g2d.dispose();
+    static private boolean canShowCardIcons(int cardFullWidth, boolean cardHasImage) {
+        // cards without images show icons and text always
+        // TODO: apply "card names on card" setting to icon too?
+        // TODO: fix card min-max size to hide (compare to settings size, not direct 60 and 200)
+        return ((cardFullWidth > 60) && (cardFullWidth < 200)) || (!cardHasImage);
     }
 
     private static BufferedImage createImage(Key key) {
@@ -501,6 +232,278 @@ public class CardPanelRenderModeImage extends CardPanel {
         return image;
     }
 
+    private static ImageIcon getCounterImageWithAmount(int amount, BufferedImage image, int cardWidth) {
+        int factor = cardWidth > WIDTH_LIMIT ? 2 : 1;
+        int xOffset = amount > 9 ? 2 : 5;
+        int fontSize = factor == 1 ? amount < 10 ? 12 : amount < 100 ? 10 : amount < 1000 ? 7 : 6
+                : amount < 10 ? 19 : amount < 100 ? 15 : amount < 1000 ? 12 : amount < 10000 ? 9 : 8;
+        BufferedImage newImage;
+        if (cardWidth > WIDTH_LIMIT) {
+            newImage = ImageManagerImpl.deepCopy(image);
+        } else {
+            newImage = ImageHelper.getResizedImage(image, 20, 20);
+        }
+        Graphics graphics = newImage.getGraphics();
+        graphics.setColor(Color.BLACK);
+        graphics.setFont(new Font("Arial Black", amount > 100 ? Font.PLAIN : Font.BOLD, fontSize));
+        graphics.drawString(Integer.toString(amount), xOffset * factor, 11 * factor);
+        return new ImageIcon(newImage);
+    }
+
+    public CardPanelRenderModeImage(CardView newGameCard, UUID gameId, final boolean loadImage, ActionCallback callback, final boolean foil, Dimension dimension, boolean needFullPermanentRender) {
+        // Call to super
+        super(newGameCard, gameId, loadImage, callback, foil, dimension, needFullPermanentRender);
+
+        // Counter panel
+        if (!newGameCard.isAbility()) {
+            // panel to show counters on the card
+            counterPanel = new JPanel();
+            counterPanel.setLayout(null);
+            counterPanel.setOpaque(false);
+            add(counterPanel);
+
+            plusCounterLabel = new JLabel("");
+            plusCounterLabel.setToolTipText("+1/+1");
+            counterPanel.add(plusCounterLabel);
+
+            minusCounterLabel = new JLabel("");
+            minusCounterLabel.setToolTipText("-1/-1");
+            counterPanel.add(minusCounterLabel);
+
+            loyaltyCounterLabel = new JLabel("");
+            loyaltyCounterLabel.setToolTipText("loyalty");
+            counterPanel.add(loyaltyCounterLabel);
+
+            otherCounterLabel = new JLabel("");
+            counterPanel.add(otherCounterLabel);
+
+            counterPanel.setVisible(false);
+        }
+
+        // Ability icon
+        if (newGameCard.isAbility()) {
+            if (newGameCard.getAbilityType() == AbilityType.TRIGGERED) {
+                setTypeIcon(ImageManagerImpl.instance.getTriggeredAbilityImage(), "Triggered Ability");
+            } else if (newGameCard.getAbilityType() == AbilityType.ACTIVATED) {
+                setTypeIcon(ImageManagerImpl.instance.getActivatedAbilityImage(), "Activated Ability");
+            }
+        }
+
+        // Token icon
+        if (this.getGameCard().isToken()) {
+            setTypeIcon(ImageManagerImpl.instance.getTokenIconImage(), "Token Permanent");
+        }
+
+        displayTitleAnyway = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SHOW_CARD_NAMES, "true").equals("true");
+        displayFullImagePath = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SHOW_FULL_IMAGE_PATH, "false").equals("true");
+
+        // Title Text
+        titleText = new GlowText();
+        setTitle(getGameCard());
+        titleText.setForeground(Color.white);
+        titleText.setGlow(Color.black, TEXT_GLOW_SIZE, TEXT_GLOW_INTENSITY);
+        titleText.setWrap(true);
+        add(titleText);
+
+        // Full path to image text 
+        fullImageText = new JLabel();
+        fullImageText.setText(fullImagePath);
+        fullImageText.setForeground(Color.BLACK);
+        add(fullImageText);
+
+        // PT Text
+        ptPanel = new JPanel();
+        ptPanel.setOpaque(false);
+        ptPanel.setLayout(new BoxLayout(ptPanel, BoxLayout.X_AXIS));
+        ptPanel.add(new Box.Filler(new Dimension(0, 0), new Dimension(0, 0), new Dimension(Integer.MAX_VALUE, 0)));
+        ptText1 = new GlowText();
+        ptText2 = new GlowText();
+        ptText3 = new GlowText();
+        updatePTTexts(getGameCard());
+        ptPanel.add(ptText1);
+        ptPanel.add(ptText2);
+        ptPanel.add(ptText3);
+        //
+        add(ptPanel);
+
+        // Sickness overlay
+        BufferedImage sickness = ImageManagerImpl.instance.getSicknessImage();
+        overlayPanel = new ImagePanel(sickness, ImagePanelStyle.SCALED);
+        overlayPanel.setOpaque(false);
+        add(overlayPanel);
+
+        // Imagel panel
+        imagePanel = new ScaledImagePanel();
+        if (DebugUtil.GUI_RENDER_IMAGE_DRAW_IMAGE_BORDER) {
+            imagePanel.setBorder(BorderFactory.createLineBorder(Color.white));
+        }
+        add(imagePanel);
+
+        // Do we need to load?
+        if (loadImage) {
+            initialDraw();
+        } else {
+            // Nothing to do
+        }
+    }
+
+    @Override
+    public void cleanUp() {
+        super.cleanUp();
+        counterPanel = null;
+    }
+
+    @Override
+    public void doLayout() {
+        super.doLayout();
+
+        int cardWidth;
+        int cardHeight;
+        int cardXOffset = 0;
+        int cardYOffset = 0;
+
+        CardView cardView = getGameCard();
+
+        // workaround to fix a rare NPE error with image loading
+        // reason: panel runs image load in another thread and that thread can be completed before top panel init, see updateArtImage
+        if (getTopPanelRef() == null) {
+            //noinspection deprecation - it's ok for workaround
+            cardWidth = this.getWidth();
+            //noinspection deprecation - it's ok for workaround
+            cardHeight = this.getHeight();
+        } else {
+            cardWidth = getCardLocation().getCardWidth(); // must use real card sizes to scale real image
+            cardHeight = getCardLocation().getCardHeight();
+        }
+
+        CardSizes sizes = new CardSizes(getInsets(), cardXOffset, cardYOffset, cardWidth, cardHeight);
+
+        // origin card without selection
+        Rectangle realCardSize = sizes.rectBorder;
+        imagePanel.setLocation(realCardSize.x, realCardSize.y);
+        imagePanel.setSize(realCardSize.width, realCardSize.height);
+
+        if (hasSickness() && cardView.isCreature() && isPermanent()) {
+            overlayPanel.setLocation(realCardSize.x, realCardSize.y);
+            overlayPanel.setSize(realCardSize.width, realCardSize.height);
+        } else {
+            overlayPanel.setVisible(false);
+        }
+
+        if (typeIconPanel != null) {
+            typeIconPanel.setLocation(realCardSize.x, realCardSize.y);
+            typeIconPanel.setSize(realCardSize.width, realCardSize.height);
+        }
+
+        if (counterPanel != null) {
+            counterPanel.setLocation(realCardSize.x, realCardSize.y);
+            counterPanel.setSize(realCardSize.width, realCardSize.height);
+            int size = cardWidth > WIDTH_LIMIT ? 40 : 20;
+
+            minusCounterLabel.setLocation(counterPanel.getWidth() - size, counterPanel.getHeight() - size * 2);
+            minusCounterLabel.setSize(size, size);
+
+            plusCounterLabel.setLocation(5, counterPanel.getHeight() - size * 2);
+            plusCounterLabel.setSize(size, size);
+
+            loyaltyCounterLabel.setLocation(counterPanel.getWidth() - size, counterPanel.getHeight() - size);
+            loyaltyCounterLabel.setSize(size, size);
+
+            otherCounterLabel.setLocation(5, counterPanel.getHeight() - size);
+            otherCounterLabel.setSize(size, size);
+
+        }
+
+        // TITLE
+
+        boolean showText = !isAnimationPanel() && canShowCardIcons(cardWidth, hasImage);
+        titleText.setVisible(showText);
+        ptText1.setVisible(showText && !ptText1.getText().isEmpty());
+        ptText2.setVisible(showText && !ptText2.getText().isEmpty());
+        ptText3.setVisible(showText && !ptText3.getText().isEmpty());
+        fullImageText.setVisible(fullImagePath != null);
+
+        if (showText) {
+            int fontSize = cardHeight / 13; // startup font size (it same size on all zoom levels)
+            titleText.setFont(getFont().deriveFont(Font.BOLD, Math.max(CARD_TITLE_FONT_MIN_SIZE, fontSize)));
+
+            // margins from card black border to text, not need? text show up good without margins
+            int titleMarginLeft = 0; //Math.round(28f / 672f * cardWidth);
+            int titleMarginRight = 0;
+            int titleMarginTop = Math.round(getCardCaptionTopOffset() / 100f * cardHeight);//Math.round(28f / 936f * cardHeight);
+            int titleMarginBottom = 0;
+            titleText.setBounds(
+                    imagePanel.getX() + titleMarginLeft,
+                    imagePanel.getY() + titleMarginTop,
+                    imagePanel.getBounds().width - titleMarginLeft - titleMarginRight,
+                    imagePanel.getBounds().height - titleMarginTop - titleMarginBottom
+            );
+
+            fullImageText.setFont(getFont().deriveFont(Font.PLAIN, 10));
+            fullImageText.setBounds(titleText.getX(), titleText.getY(), titleText.getBounds().width, titleText.getBounds().height);
+
+            // PT (font as title)
+            if (cardView.showPT()) {
+
+                // real PT info
+                MageInt currentPower = cardView.getOriginalPower();
+                MageInt currentToughness = cardView.getOriginalToughness();
+
+                prepareGlowFont(ptText1, Math.max(CARD_PT_FONT_MIN_SIZE, fontSize), currentPower, false);
+                prepareGlowFont(ptText2, Math.max(CARD_PT_FONT_MIN_SIZE, fontSize), null, false);
+                prepareGlowFont(ptText3, Math.max(CARD_PT_FONT_MIN_SIZE, fontSize), currentToughness, CardRendererUtils.isCardWithDamage(cardView));
+
+                // right bottom corner with margin (sizes from any sample card)
+                int ptMarginRight = Math.round(64f / 672f * cardWidth);
+                int ptMarginBottom = Math.round(62f / 936f * cardHeight);
+
+                int ptWidth = cardWidth - ptMarginRight * 2;
+                int ptHeight = ptText2.getHeight();
+                int ptX = cardXOffset + ptMarginRight;
+                int ptY = cardYOffset + cardHeight - ptMarginBottom - ptHeight;
+                ptPanel.setBounds(ptX, ptY, ptWidth, ptHeight);
+            }
+
+            // old version was with TEXT_GLOW_SIZE
+            //ptText.setLocation(cardXOffset + ptX - TEXT_GLOW_SIZE / 2 - offsetX, cardYOffset + ptY - TEXT_GLOW_SIZE / 2);
+        }
+    }
+
+    @Override
+    public Image getImage() {
+        if (this.hasImage) {
+            if (getGameCard().isFaceDown()) {
+                return getFaceDownImage().getImage();
+            } else {
+                return ImageCache.getImageOriginal(getGameCard()).getImage();
+            }
+        }
+        return null;
+    }
+
+    @Override
+    protected void paintCard(Graphics2D g2d) {
+        float alpha = getAlpha();
+        if (alpha != 1.0f) {
+            AlphaComposite composite = AlphaComposite.getInstance(AlphaComposite.SRC_ATOP, alpha);
+            g2d.setComposite(composite);
+        }
+
+        // draw background (selected/chooseable/playable)
+        MageCardLocation cardLocation = getCardLocation();
+        g2d.drawImage(
+                IMAGE_CACHE.getOrThrow(
+                        new Key(getInsets(),
+                                cardLocation.getCardWidth(), cardLocation.getCardHeight(),
+                                cardLocation.getCardWidth(), cardLocation.getCardHeight(),
+                                0,
+                                0,
+                                hasImage, isSelected(), isChoosable(), getGameCard().isPlayable(), getGameCard().isCanAttack(),
+                                getGameCard().isCanBlock())),
+                0, 0, cardLocation.getCardWidth(), cardLocation.getCardHeight(), null);
+        g2d.dispose();
+    }
+
     @Override
     protected void paintChildren(Graphics g) {
         super.paintChildren(g);
@@ -545,166 +548,6 @@ public class CardPanelRenderModeImage extends CardPanel {
         }
     }
 
-    private int getManaWidth(String manaCost, int symbolMarginX) {
-        int width = 0;
-        manaCost = manaCost.replace("\\", "");
-        StringTokenizer tok = new StringTokenizer(manaCost, " ");
-        while (tok.hasMoreTokens()) {
-            tok.nextToken();
-            if (width != 0) {
-                width += symbolMarginX;
-            }
-            width += getSymbolWidth();
-        }
-        return width;
-    }
-
-    @Override
-    public void doLayout() {
-        super.doLayout();
-
-        int cardWidth;
-        int cardHeight;
-        int cardXOffset = 0;
-        int cardYOffset = 0;
-
-        // workaround to fix a rare NPE error with image loading
-        // reason: panel runs image load in another thread and that thread can be completed before top panel init, see updateArtImage
-        if (getTopPanelRef() == null) {
-            //noinspection deprecation - it's ok for workaround
-            cardWidth = this.getWidth();
-            //noinspection deprecation - it's ok for workaround
-            cardHeight = this.getHeight();
-        } else {
-            cardWidth = getCardLocation().getCardWidth(); // must use real card sizes to scale real image
-            cardHeight = getCardLocation().getCardHeight();
-        }
-
-        CardSizes sizes = new CardSizes(getInsets(), cardXOffset, cardYOffset, cardWidth, cardHeight);
-
-        // origin card without selection
-        Rectangle realCardSize = sizes.rectBorder;
-        imagePanel.setLocation(realCardSize.x, realCardSize.y);
-        imagePanel.setSize(realCardSize.width, realCardSize.height);
-
-        if (hasSickness() && getGameCard().isCreature() && isPermanent()) {
-            getOverlayPanel().setLocation(realCardSize.x, realCardSize.y);
-            getOverlayPanel().setSize(realCardSize.width, realCardSize.height);
-        } else {
-            getOverlayPanel().setVisible(false);
-        }
-
-        if (getTypeIconPanel() != null) {
-            getTypeIconPanel().setLocation(realCardSize.x, realCardSize.y);
-            getTypeIconPanel().setSize(realCardSize.width, realCardSize.height);
-        }
-
-        if (getCounterPanel() != null) {
-            getCounterPanel().setLocation(realCardSize.x, realCardSize.y);
-            getCounterPanel().setSize(realCardSize.width, realCardSize.height);
-            int size = cardWidth > WIDTH_LIMIT ? 40 : 20;
-
-            minusCounterLabel.setLocation(getCounterPanel().getWidth() - size, getCounterPanel().getHeight() - size * 2);
-            minusCounterLabel.setSize(size, size);
-
-            plusCounterLabel.setLocation(5, getCounterPanel().getHeight() - size * 2);
-            plusCounterLabel.setSize(size, size);
-
-            loyaltyCounterLabel.setLocation(getCounterPanel().getWidth() - size, getCounterPanel().getHeight() - size);
-            loyaltyCounterLabel.setSize(size, size);
-
-            otherCounterLabel.setLocation(5, getCounterPanel().getHeight() - size);
-            otherCounterLabel.setSize(size, size);
-
-        }
-
-        // TITLE
-
-        boolean showText = !isAnimationPanel() && canShowCardIcons(cardWidth, hasImage);
-        titleText.setVisible(showText);
-        ptText1.setVisible(showText && !ptText1.getText().isEmpty());
-        ptText2.setVisible(showText && !ptText2.getText().isEmpty());
-        ptText3.setVisible(showText && !ptText3.getText().isEmpty());
-        fullImageText.setVisible(fullImagePath != null);
-
-        if (showText) {
-            int fontSize = cardHeight / 13; // startup font size (it same size on all zoom levels)
-            titleText.setFont(getFont().deriveFont(Font.BOLD, Math.max(CARD_TITLE_FONT_MIN_SIZE, fontSize)));
-
-            // margins from card black border to text, not need? text show up good without margins
-            int titleMarginLeft = 0; //Math.round(28f / 672f * cardWidth);
-            int titleMarginRight = 0;
-            int titleMarginTop = Math.round(getCardCaptionTopOffset() / 100f * cardHeight);//Math.round(28f / 936f * cardHeight);
-            int titleMarginBottom = 0;
-            titleText.setBounds(
-                    imagePanel.getX() + titleMarginLeft,
-                    imagePanel.getY() + titleMarginTop,
-                    imagePanel.getBounds().width - titleMarginLeft - titleMarginRight,
-                    imagePanel.getBounds().height - titleMarginTop - titleMarginBottom
-            );
-
-            fullImageText.setFont(getFont().deriveFont(Font.PLAIN, 10));
-            fullImageText.setBounds(titleText.getX(), titleText.getY(), titleText.getBounds().width, titleText.getBounds().height);
-
-            // PT (font as title)
-            if (getGameCard().getOriginalCard() != null) {
-                prepareGlowFont(ptText1, Math.max(CARD_PT_FONT_MIN_SIZE, fontSize), getGameCard().getOriginalCard().getPower(), false);
-                prepareGlowFont(ptText2, Math.max(CARD_PT_FONT_MIN_SIZE, fontSize), null, false);
-                prepareGlowFont(ptText3, Math.max(CARD_PT_FONT_MIN_SIZE, fontSize), getGameCard().getOriginalCard().getToughness(), CardRendererUtils.isCardWithDamage(getGameCard()));
-
-                // right bottom corner with margin (sizes from any sample card)
-                int ptMarginRight = Math.round(64f / 672f * cardWidth);
-                int ptMarginBottom = Math.round(62f / 936f * cardHeight);
-
-                int ptWidth = cardWidth - ptMarginRight * 2;
-                int ptHeight = ptText2.getHeight();
-                int ptX = cardXOffset + ptMarginRight;
-                int ptY = cardYOffset + cardHeight - ptMarginBottom - ptHeight;
-                ptPanel.setBounds(ptX, ptY, ptWidth, ptHeight);
-            }
-
-            // old version was with TEXT_GLOW_SIZE
-            //ptText.setLocation(cardXOffset + ptX - TEXT_GLOW_SIZE / 2 - offsetX, cardYOffset + ptY - TEXT_GLOW_SIZE / 2);
-        }
-    }
-
-    private void prepareGlowFont(GlowText label, int fontSize, MageInt value, boolean drawAsDamaged) {
-        label.setFont(getFont().deriveFont(Font.BOLD, fontSize));
-        label.setForeground(CardRendererUtils.getCardTextColor(value, drawAsDamaged, titleText.getForeground(), true));
-        Dimension ptSize = label.getPreferredSize();
-        label.setSize(ptSize.width, ptSize.height);
-    }
-
-    private void updatePTTexts(CardView card) {
-        if (card.isCreature() || card.getSubTypes().contains(SubType.VEHICLE)) {
-            ptText1.setText(getGameCard().getPower());
-            ptText2.setText("/");
-            ptText3.setText(CardRendererUtils.getCardLifeWithDamage(getGameCard()));
-        } else if (card.isPlanesWalker()) {
-            ptText1.setText("");
-            ptText2.setText("");
-            ptText3.setText(getGameCard().getLoyalty());
-        } else {
-            ptText1.setText("");
-            ptText2.setText("");
-            ptText3.setText("");
-        }
-
-        ptText1.setForeground(Color.white);
-        ptText1.setGlow(Color.black, TEXT_GLOW_SIZE, TEXT_GLOW_INTENSITY);
-
-        ptText2.setForeground(Color.white);
-        ptText2.setGlow(Color.black, TEXT_GLOW_SIZE, TEXT_GLOW_INTENSITY);
-
-        ptText3.setForeground(Color.white);
-        ptText3.setGlow(Color.black, TEXT_GLOW_SIZE, TEXT_GLOW_INTENSITY);
-    }
-
-    @Override
-    public String toString() {
-        return getGameCard().toString();
-    }
-
     @Override
     public void setCardBounds(int x, int y, int cardWidth, int cardHeight) {
         // Call to super
@@ -734,36 +577,86 @@ public class CardPanelRenderModeImage extends CardPanel {
         }
     }
 
-    ///////////////////////////////////////////////////////////
-    // Image updating code
-    private int updateArtImageStamp;
+    @Override
+    public void setSelected(boolean isSelected) {
+        super.setSelected(isSelected);
+        if (isSelected) {
+            this.titleText.setGlowColor(Color.green);
+        } else {
+            this.titleText.setGlowColor(Color.black);
+        }
+    }
+
+    @Override
+    public void showCardTitle() {
+        displayTitleAnyway = true;
+        setTitle(getGameCard());
+    }
+
+    @Override
+    public String toString() {
+        return getGameCard().toString();
+    }
+
+    @Override
+    public void transferResources(final CardPanel panelAbstract) {
+        if (panelAbstract instanceof CardPanelRenderModeImage) {
+            CardPanelRenderModeImage panel = (CardPanelRenderModeImage) panelAbstract;
+            synchronized (panel.imagePanel) {
+                if (panel.imagePanel.hasImage()) {
+                    setImage(panel.imagePanel.getSrcImage());
+                }
+            }
+        }
+    }
+
+    @Override
+    public void update(CardView card) {
+        // Super
+        super.update(card);
+
+        // real card to show stores in getGameCard (e.g. after user clicks on night icon -- night card must be rendered)
+        updatePTTexts(getGameCard());
+        setTitle(getGameCard());
+
+        // Summoning Sickness overlay
+        overlayPanel.setVisible(hasSickness() && getGameCard().isCreature() && isPermanent());
+
+        // Update counters panel
+        if (counterPanel != null) {
+            updateCounters(card);
+        }
+
+        // Finally, queue a repaint
+        repaint();
+    }
 
     @Override
     public void updateArtImage() {
         setTappedAngle(isTapped() ? CardPanel.TAPPED_ANGLE : 0);
         setFlippedAngle(isFlipped() ? CardPanel.FLIPPED_ANGLE : 0);
 
-        //final CardView gameCard = this.gameCard;
         final int stamp = ++updateArtImageStamp;
 
         Util.threadPool.submit(() -> {
             try {
-                final BufferedImage srcImage;
+                final ImageCacheData data;
                 if (getGameCard().isFaceDown()) {
-                    srcImage = getFaceDownImage();
-                } else if (getCardWidth() > Constants.THUMBNAIL_SIZE_FULL.width) {
-                    srcImage = ImageCache.getImage(getGameCard(), getCardWidth(), getCardHeight());
+                    data = getFaceDownImage();
                 } else {
-                    srcImage = ImageCache.getThumbnail(getGameCard());
+                    data = ImageCache.getImage(getGameCard(), getCardWidth(), getCardHeight());
                 }
-                if (srcImage == null) {
-                    setFullPath(ImageCache.getFilePath(getGameCard(), getCardWidth()));
+
+                // show path on miss image
+                if (data.getImage() == null) {
+                    setFullPath(data.getPath());
                 }
+
                 UI.invokeLater(() -> {
                     if (stamp == updateArtImageStamp) {
-                        hasImage = srcImage != null;
+                        hasImage = data.getImage() != null;
                         setTitle(getGameCard());
-                        setImage(srcImage);
+                        setImage(data.getImage());
                     }
                 });
             } catch (Exception | Error e) {
@@ -772,7 +665,7 @@ public class CardPanelRenderModeImage extends CardPanel {
         });
     }
 
-    private BufferedImage getFaceDownImage() {
+    private ImageCacheData getFaceDownImage() {
         // TODO: add download default images
         if (isPermanent() && getGameCard() instanceof PermanentView) {
             if (((PermanentView) getGameCard()).isMorphed()) {
@@ -787,31 +680,68 @@ public class CardPanelRenderModeImage extends CardPanel {
         }
     }
 
-    @Override
-    public void showCardTitle() {
-        displayTitleAnyway = true;
-        setTitle(getGameCard());
+    private int getManaWidth(String manaCost, int symbolMarginX) {
+        int width = 0;
+        manaCost = manaCost.replace("\\", "");
+        StringTokenizer tok = new StringTokenizer(manaCost, " ");
+        while (tok.hasMoreTokens()) {
+            tok.nextToken();
+            if (width != 0) {
+                width += symbolMarginX;
+            }
+            width += getSymbolWidth();
+        }
+        return width;
     }
 
-    @Override
-    public void update(CardView card) {
-        // Super
-        super.update(card);
+    private void prepareGlowFont(GlowText label, int fontSize, MageInt value, boolean drawAsDamaged) {
+        label.setFont(getFont().deriveFont(Font.BOLD, fontSize));
+        label.setForeground(CardRendererUtils.getCardTextColor(value, drawAsDamaged, titleText.getForeground(), true));
+        Dimension ptSize = label.getPreferredSize();
+        label.setSize(ptSize.width, ptSize.height);
+    }
 
-        // real card to show stores in getGameCard (e.g. after user clicks on night icon -- night card must be rendered)
-        updatePTTexts(getGameCard());
-        setTitle(getGameCard());
+    private void setFullPath(String fullImagePath) {
+        this.fullImagePath = fullImagePath;
+        this.fullImagePath = this.fullImagePath.replaceAll("\\\\", "\\\\<br>");
+        this.fullImagePath = this.fullImagePath.replaceAll("/", "/<br>");
+        this.fullImagePath = "<html>" + this.fullImagePath + "</html>";
+        fullImageText.setText(!displayFullImagePath ? "" : this.fullImagePath);
+        doLayout();
+    }
 
-        // Summoning Sickness overlay
-        getOverlayPanel().setVisible(hasSickness() && getGameCard().isCreature() && isPermanent());
-
-        // Update counters panel
-        if (getCounterPanel() != null) {
-            updateCounters(card);
+    private void setImage(BufferedImage srcImage) {
+        synchronized (imagePanel) {
+            if (srcImage != null) {
+                imagePanel.setImage(srcImage);
+            } else {
+                imagePanel.clearImage();
+            }
+            repaint();
         }
+        doLayout();
+    }
 
-        // Finally, queue a repaint
-        repaint();
+    private void setTitle(CardView card) {
+        titleText.setText(!displayTitleAnyway && hasImage ? "" : card.getDisplayName());
+    }
+
+    private void setTypeIcon(BufferedImage bufferedImage, String toolTipText) {
+        typeIconPanel = new JPanel();
+        typeIconPanel.setLayout(null);
+        typeIconPanel.setOpaque(false);
+        add(typeIconPanel);
+
+        typeIconButton = new JButton("");
+        typeIconButton.setLocation(2, 2);
+        typeIconButton.setSize(25, 25);
+
+        typeIconPanel.setVisible(true);
+        typeIconButton.setIcon(new ImageIcon(bufferedImage));
+        if (toolTipText != null) {
+            typeIconButton.setToolTipText(toolTipText);
+        }
+        typeIconPanel.add(typeIconButton);
     }
 
     private void updateCounters(CardView card) {
@@ -865,43 +795,42 @@ public class CardPanelRenderModeImage extends CardPanel {
                 }
             }
 
-            getCounterPanel().setVisible(true);
+            counterPanel.setVisible(true);
         } else {
             plusCounterLabel.setVisible(false);
             minusCounterLabel.setVisible(false);
             loyaltyCounterLabel.setVisible(false);
             otherCounterLabel.setVisible(false);
-            getCounterPanel().setVisible(false);
+            counterPanel.setVisible(false);
         }
     }
 
-    private static ImageIcon getCounterImageWithAmount(int amount, BufferedImage image, int cardWidth) {
-        int factor = cardWidth > WIDTH_LIMIT ? 2 : 1;
-        int xOffset = amount > 9 ? 2 : 5;
-        int fontSize = factor == 1 ? amount < 10 ? 12 : amount < 100 ? 10 : amount < 1000 ? 7 : 6
-                : amount < 10 ? 19 : amount < 100 ? 15 : amount < 1000 ? 12 : amount < 10000 ? 9 : 8;
-        BufferedImage newImage;
-        if (cardWidth > WIDTH_LIMIT) {
-            newImage = ImageManagerImpl.deepCopy(image);
+    private void updatePTTexts(CardView card) {
+        if (card.isCreature() || card.getSubTypes().contains(SubType.VEHICLE)) {
+            ptText1.setText(getGameCard().getPower());
+            ptText2.setText("/");
+            ptText3.setText(CardRendererUtils.getCardLifeWithDamage(getGameCard()));
+        } else if (card.isPlaneswalker()) {
+            ptText1.setText("");
+            ptText2.setText("");
+            ptText3.setText(getGameCard().getLoyalty());
+        } else if (card.isBattle()) {
+            ptText1.setText("");
+            ptText2.setText("");
+            ptText3.setText(getGameCard().getDefense());
         } else {
-            newImage = ImageHelper.getResizedImage(image, 20, 20);
+            ptText1.setText("");
+            ptText2.setText("");
+            ptText3.setText("");
         }
-        Graphics graphics = newImage.getGraphics();
-        graphics.setColor(Color.BLACK);
-        graphics.setFont(new Font("Arial Black", amount > 100 ? Font.PLAIN : Font.BOLD, fontSize));
-        graphics.drawString(Integer.toString(amount), xOffset * factor, 11 * factor);
-        return new ImageIcon(newImage);
-    }
 
-    @Override
-    public Image getImage() {
-        if (this.hasImage) {
-            if (getGameCard().isFaceDown()) {
-                return getFaceDownImage();
-            } else {
-                return ImageCache.getImageOriginal(getGameCard());
-            }
-        }
-        return null;
+        ptText1.setForeground(Color.white);
+        ptText1.setGlow(Color.black, TEXT_GLOW_SIZE, TEXT_GLOW_INTENSITY);
+
+        ptText2.setForeground(Color.white);
+        ptText2.setGlow(Color.black, TEXT_GLOW_SIZE, TEXT_GLOW_INTENSITY);
+
+        ptText3.setForeground(Color.white);
+        ptText3.setGlow(Color.black, TEXT_GLOW_SIZE, TEXT_GLOW_INTENSITY);
     }
 }

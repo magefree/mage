@@ -37,7 +37,7 @@ public final class GraveyardGlutton extends CardImpl {
         this.nightCard = true;
 
         // Ward—Discard a card.
-        this.addAbility(new WardAbility(new DiscardCardCost()));
+        this.addAbility(new WardAbility(new DiscardCardCost(), false));
 
         // Whenever Graveyard Glutton enters the battlefield or attacks, exile up to two target cards from graveyards. For each creature card exiled this way, each opponent loses 1 life and you gain 1 life.
         Ability ability = new EntersBattlefieldOrAttacksSourceTriggeredAbility(new GraveyardGluttonEffect());

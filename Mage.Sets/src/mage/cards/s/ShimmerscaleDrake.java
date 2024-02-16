@@ -28,7 +28,7 @@ public final class ShimmerscaleDrake extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Cycling {2}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
 
     }
 

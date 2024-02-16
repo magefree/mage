@@ -24,13 +24,13 @@ public final class BorisDevilboon extends CardImpl {
 
     public BorisDevilboon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ZOMBIE, SubType.WIZARD);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
         // {2}{B}{R}, {tap}: Create a 1/1 black and red Demon creature token named Minor Demon.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new MinorDemonToken()), new ManaCostsImpl("{2}{B}{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new MinorDemonToken()), new ManaCostsImpl<>("{2}{B}{R}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

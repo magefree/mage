@@ -36,7 +36,7 @@ public class DrawDiscardControllerEffect extends OneShotEffect {
         this.optional = optional;
     }
 
-    public DrawDiscardControllerEffect(final DrawDiscardControllerEffect effect) {
+    protected DrawDiscardControllerEffect(final DrawDiscardControllerEffect effect) {
         super(effect);
         this.cardsToDraw = effect.cardsToDraw;
         this.cardsToDiscard = effect.cardsToDiscard;

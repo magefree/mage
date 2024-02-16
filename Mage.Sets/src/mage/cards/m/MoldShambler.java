@@ -44,7 +44,7 @@ public final class MoldShambler extends CardImpl {
         EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), false);
         Target target = new TargetPermanent(filter);
         ability.addTarget(target);
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, KickedCondition.instance, "When {this} enters the battlefield, if it was kicked, destroy target noncreature permanent."));
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, KickedCondition.ONCE, "When {this} enters the battlefield, if it was kicked, destroy target noncreature permanent."));
     }
 
     private MoldShambler(final MoldShambler card) {

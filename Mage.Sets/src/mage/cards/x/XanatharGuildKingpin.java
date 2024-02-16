@@ -32,7 +32,7 @@ public final class XanatharGuildKingpin extends CardImpl {
 
     public XanatharGuildKingpin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.BEHOLDER);
 
         this.power = new MageInt(5);
@@ -67,7 +67,7 @@ public final class XanatharGuildKingpin extends CardImpl {
 
 class XanatharGuildKingpinRuleModifyingEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public XanatharGuildKingpinRuleModifyingEffect() {
+    XanatharGuildKingpinRuleModifyingEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit);
     }
 
@@ -81,14 +81,9 @@ class XanatharGuildKingpinRuleModifyingEffect extends ContinuousRuleModifyingEff
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
         Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (targetPlayer != null && mageObject != null) {
             return "This turn you can't cast spells" +
                     " (" + mageObject.getLogName() + ')';
@@ -109,7 +104,7 @@ class XanatharGuildKingpinRuleModifyingEffect extends ContinuousRuleModifyingEff
 
 class XanatharGuildKingpinSpendManaAsAnyColorOneShotEffect extends OneShotEffect {
 
-    public XanatharGuildKingpinSpendManaAsAnyColorOneShotEffect() {
+    XanatharGuildKingpinSpendManaAsAnyColorOneShotEffect() {
         super(Outcome.Benefit);
     }
 
@@ -142,7 +137,7 @@ class SpendManaAsAnyColorToCastTopOfLibraryTargetEffect extends AsThoughEffectIm
         super(AsThoughEffectType.SPEND_OTHER_MANA, Duration.EndOfTurn, Outcome.Benefit);
     }
 
-    public SpendManaAsAnyColorToCastTopOfLibraryTargetEffect(final SpendManaAsAnyColorToCastTopOfLibraryTargetEffect effect) {
+    private SpendManaAsAnyColorToCastTopOfLibraryTargetEffect(final SpendManaAsAnyColorToCastTopOfLibraryTargetEffect effect) {
         super(effect);
     }
 

@@ -36,7 +36,7 @@ public final class PhoenixOfAsh extends CardImpl {
 
         // {2}{R}: Phoenix of Ash gets +2/+0 until end of turn.
         this.addAbility(new SimpleActivatedAbility(
-                new BoostSourceEffect(2, 0, Duration.EndOfTurn), new ManaCostsImpl("{2}{R}")
+                new BoostSourceEffect(2, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{2}{R}")
         ));
 
         // Escape — {2}{R}{R}, Exile three other cards from your graveyard.

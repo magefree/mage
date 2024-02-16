@@ -67,7 +67,7 @@ class BazaarTraderEffect extends ContinuousEffectImpl {
         this.staticText = "Target player gains control of target artifact, creature, or land you control";
     }
 
-    public BazaarTraderEffect(final BazaarTraderEffect effect) {
+    private BazaarTraderEffect(final BazaarTraderEffect effect) {
         super(effect);
         this.targetPermanentReference = effect.targetPermanentReference;
     }

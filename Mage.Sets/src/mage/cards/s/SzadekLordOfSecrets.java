@@ -26,7 +26,7 @@ public final class SzadekLordOfSecrets extends CardImpl {
 
     public SzadekLordOfSecrets(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}{B}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.VAMPIRE);
 
         this.power = new MageInt(5);
@@ -57,7 +57,7 @@ class SzadekLordOfSecretsEffect extends ReplacementEffectImpl {
         staticText = "If {this} would deal combat damage to a player, instead put that many +1/+1 counters on {this} and that player mills that many cards";
     }
 
-    SzadekLordOfSecretsEffect(final SzadekLordOfSecretsEffect effect) {
+    private SzadekLordOfSecretsEffect(final SzadekLordOfSecretsEffect effect) {
         super(effect);
     }
 
@@ -92,11 +92,6 @@ class SzadekLordOfSecretsEffect extends ReplacementEffectImpl {
             }
         }
         return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

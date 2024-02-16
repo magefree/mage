@@ -9,6 +9,7 @@ import mage.abilities.effects.common.CopyEffect;
 import mage.cards.*;
 import mage.constants.*;
 import mage.filter.StaticFilters;
+import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -29,7 +30,7 @@ public final class OlagLudevicsHubris extends CardImpl {
     public OlagLudevicsHubris(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ZOMBIE);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
@@ -67,11 +68,17 @@ class OlagLudevicsHubrisEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Cards cards = new CardsImpl(game.getExile().getExileZone(CardUtil.getExileZoneId(game, source)));
+        ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source));
+        if (exileZone == null) {
+            return false;
+        }
+
+        Cards cards = new CardsImpl(exileZone);
         cards.removeIf(uuid -> !game.getCard(uuid).isCreature(game));
         if (cards.isEmpty()) {
             return false;
         }
+
         Card copyFromCard = getCard(cards, source, game);
         if (copyFromCard == null) {
             return false;
@@ -98,7 +105,7 @@ class OlagLudevicsHubrisEffect extends ReplacementEffectImpl {
             return cards.getRandom(game);
         }
         TargetCard target = new TargetCardInExile(StaticFilters.FILTER_CARD);
-        player.choose(outcome, target, source.getSourceId(), game);
+        player.choose(outcome, target, source, game);
         return cards.get(target.getFirstTarget(), game);
     }
 
@@ -128,8 +135,8 @@ class OlagLudevicsHubrisCopyApplier extends CopyApplier {
         blueprint.addSubType(SubType.ZOMBIE);
         blueprint.getColor().setBlue(true);
         blueprint.getColor().setBlack(true);
-        blueprint.getPower().modifyBaseValue(4);
-        blueprint.getToughness().modifyBaseValue(4);
+        blueprint.getPower().setModifiedBaseValue(4);
+        blueprint.getToughness().setModifiedBaseValue(4);
         return true;
     }
 }

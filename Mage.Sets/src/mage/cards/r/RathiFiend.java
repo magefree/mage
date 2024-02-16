@@ -46,7 +46,7 @@ public final class RathiFiend extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new LoseLifeAllPlayersEffect(3), false));
         // {3}, {T}: Search your library for a Mercenary permanent card with converted mana cost 3 or less and put it onto the battlefield. Then shuffle your library.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter)), new TapSourceCost());
-        ability.addManaCost(new GenericManaCost(3));
+        ability.addCost(new GenericManaCost(3));
         this.addAbility(ability);
     }
 

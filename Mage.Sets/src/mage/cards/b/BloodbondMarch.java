@@ -1,10 +1,8 @@
-
 package mage.cards.b;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastAllTriggeredAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -42,12 +40,12 @@ public final class BloodbondMarch extends CardImpl {
 
     private class BloodbondMarchEffect extends OneShotEffect {
 
-        public BloodbondMarchEffect() {
+        BloodbondMarchEffect() {
             super(Outcome.Benefit);
             staticText = "each player returns all cards with the same name as that spell from their graveyard to the battlefield";
         }
 
-        public BloodbondMarchEffect(BloodbondMarchEffect effect) {
+        private BloodbondMarchEffect(final BloodbondMarchEffect effect) {
             super(effect);
         }
 
@@ -79,7 +77,7 @@ public final class BloodbondMarch extends CardImpl {
         }
 
         @Override
-        public Effect copy() {
+        public BloodbondMarchEffect copy() {
             return new BloodbondMarchEffect(this);
         }
     }

@@ -39,7 +39,7 @@ public final class ScreamsFromWithin extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Enchanted creature gets -1/-1.
@@ -61,12 +61,12 @@ public final class ScreamsFromWithin extends CardImpl {
 
 class ScreamsFromWithinEffect extends OneShotEffect {
 
-    public ScreamsFromWithinEffect() {
+    ScreamsFromWithinEffect() {
         super(Outcome.PutCardInPlay);
         staticText = "return {this} from your graveyard to the battlefield";
     }
 
-    public ScreamsFromWithinEffect(final ScreamsFromWithinEffect effect) {
+    private ScreamsFromWithinEffect(final ScreamsFromWithinEffect effect) {
         super(effect);
     }
 

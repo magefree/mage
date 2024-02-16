@@ -33,6 +33,8 @@ public class ReflectingPoolTest extends CardTestPlayerBase {
 
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Crumbling Vestige");
         setChoice(playerA, "Red");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -43,7 +45,6 @@ public class ReflectingPoolTest extends CardTestPlayerBase {
 
         assertLife(playerA, 20);
         assertLife(playerB, 17);
-
     }
 
     /**
@@ -62,7 +63,7 @@ public class ReflectingPoolTest extends CardTestPlayerBase {
         execute();
 
         ManaOptions options = playerA.getAvailableManaTest(currentGame);
-        Assert.assertEquals("Player should be able to create 2 red mana", "{R}{R}", options.get(0).toString());
+        Assert.assertEquals("Player should be able to create 2 red mana", "{R}{R}", options.getAtIndex(0).toString());
 
     }
 
@@ -82,7 +83,7 @@ public class ReflectingPoolTest extends CardTestPlayerBase {
         execute();
 
         ManaOptions options = playerA.getAvailableManaTest(currentGame);
-        Assert.assertEquals("Player should be able to create 3 red mana", "{R}{R}{R}", options.get(0).toString());
+        Assert.assertEquals("Player should be able to create 3 red mana", "{R}{R}{R}", options.getAtIndex(0).toString());
 
     }
 
@@ -102,7 +103,7 @@ public class ReflectingPoolTest extends CardTestPlayerBase {
         execute();
 
         ManaOptions options = playerA.getAvailableManaTest(currentGame);
-        Assert.assertEquals("Player should be able to create 3 red mana", "{R}{R}{R}", options.get(0).toString());
+        Assert.assertEquals("Player should be able to create 3 red mana", "{R}{R}{R}", options.getAtIndex(0).toString());
 
     }
 
@@ -123,7 +124,7 @@ public class ReflectingPoolTest extends CardTestPlayerBase {
         execute();
 
         ManaOptions options = playerA.getAvailableManaTest(currentGame);
-        Assert.assertEquals("Player should be able to create 2 red mana", "{G}{G}", options.get(0).toString());
+        Assert.assertEquals("Player should be able to create 2 green mana", "{G}{G}", options.getAtIndex(0).toString());
 
     }
 
@@ -165,12 +166,12 @@ public class ReflectingPoolTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, bear1, 1);
         addCard(Zone.BATTLEFIELD, playerA, "Reflecting Pool", 1);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, bear1); // do not have any mana
+        checkPlayableAbility("can't cast bear", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast" + bear1G, false);
+
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();
 
         Assert.assertEquals(0, playerA.getManaPool().getMana().count());
-        assertPermanentCount(playerA, bear1, 0);
     }
 
     @Test
@@ -178,12 +179,10 @@ public class ReflectingPoolTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, bear1, 1);
         addCard(Zone.BATTLEFIELD, playerA, "Reflecting Pool", 2);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, bear1); // do not have any mana
+        checkPlayableAbility("can't cast bear", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast" + bear1G, false);
+
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();
-
-        Assert.assertEquals(0, playerA.getManaPool().getMana().count());
-        assertPermanentCount(playerA, bear1, 0);
     }
 
     @Test
@@ -205,11 +204,10 @@ public class ReflectingPoolTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, bear1G, 1);
         addCard(Zone.BATTLEFIELD, playerA, "Reflecting Pool", 1);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, bear1G); // have only {W} mana, can't cast
+        checkPlayableAbility("can't cast bear", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast" + bear1G, false);
+
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();
-
-        assertPermanentCount(playerA, bear1G, 0);
     }
 
     @Test

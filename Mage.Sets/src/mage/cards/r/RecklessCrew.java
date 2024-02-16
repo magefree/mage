@@ -64,10 +64,10 @@ class RecklessCrewEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         int equipCount = game.getBattlefield().count(
-                filter1, source.getSourceId(), source.getControllerId(), game
+                filter1, source.getControllerId(), source, game
         );
         int vehicleCount = game.getBattlefield().count(
-                filter2, source.getSourceId(), source.getControllerId(), game
+                filter2, source.getControllerId(), source, game
         );
         if (equipCount + vehicleCount < 1) {
             return false;
@@ -88,7 +88,7 @@ class RecklessCrewEffect extends OneShotEffect {
             }
             TargetPermanent target = new TargetPermanent(0, 1, filter1, true);
             target.withChooseHint("(to attach to " + permanent.getIdName() + ")");
-            player.choose(outcome, target, source.getSourceId(), game);
+            player.choose(outcome, target, source, game);
             permanent.addAttachment(target.getFirstTarget(), source, game);
         }
         return true;

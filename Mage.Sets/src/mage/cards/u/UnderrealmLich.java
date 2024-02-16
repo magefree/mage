@@ -6,7 +6,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.PayLifeCost;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.abilities.effects.common.TapSourceEffect;
@@ -18,8 +17,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Zone;
-import mage.filter.StaticFilters;
+import mage.constants.PutCards;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
@@ -39,13 +37,10 @@ public final class UnderrealmLich extends CardImpl {
         this.toughness = new MageInt(3);
 
         // If you would draw a card, instead look at the top three cards of your library, then put one into your hand and the rest into your graveyard.
-        this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD, new UnderrealmLichReplacementEffect()
-        ));
+        this.addAbility(new SimpleStaticAbility(new UnderrealmLichReplacementEffect()));
 
         // Pay 4 life: Underrealm Lich gains indestructible until end of turn. Tap it.
         Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new GainAbilitySourceEffect(
                         IndestructibleAbility.getInstance(),
                         Duration.EndOfTurn
@@ -67,14 +62,14 @@ public final class UnderrealmLich extends CardImpl {
 
 class UnderrealmLichReplacementEffect extends ReplacementEffectImpl {
 
-    public UnderrealmLichReplacementEffect() {
+    UnderrealmLichReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "If you would draw a card, instead look at the top "
                 + "three cards of your library, then put one into your hand "
                 + "and the rest into your graveyard.";
     }
 
-    public UnderrealmLichReplacementEffect(final UnderrealmLichReplacementEffect effect) {
+    private UnderrealmLichReplacementEffect(final UnderrealmLichReplacementEffect effect) {
         super(effect);
     }
 
@@ -84,17 +79,9 @@ class UnderrealmLichReplacementEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return new LookLibraryAndPickControllerEffect(
-                StaticValue.get(3), false, StaticValue.get(1),
-                StaticFilters.FILTER_CARD, Zone.GRAVEYARD,
-                false, false, false, Zone.HAND, false
-        ).apply(game, source);
+        new LookLibraryAndPickControllerEffect(3, 1, PutCards.HAND, PutCards.GRAVEYARD).apply(game, source);
+        return true;
     }
 
     @Override

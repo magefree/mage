@@ -38,14 +38,12 @@ public final class EmeraldCharm extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent());
 
         // or destroy target non-Aura enchantment;
-        Mode mode = new Mode();
-        mode.addEffect(new DestroyTargetEffect());
+        Mode mode = new Mode(new DestroyTargetEffect());
         mode.addTarget(new TargetEnchantmentPermanent(filter));
         this.getSpellAbility().addMode(mode);
 
         // or target creature loses flying until end of turn.
-        mode = new Mode();
-        mode.addEffect(new LoseAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn));
+        mode = new Mode(new LoseAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn));
         mode.addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addMode(mode);
     }

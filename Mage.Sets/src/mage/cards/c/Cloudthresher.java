@@ -42,7 +42,7 @@ public final class Cloudthresher extends CardImpl {
         this.addAbility(ReachAbility.getInstance());
         // When Cloudthresher enters the battlefield, it deals 2 damage to each creature with flying and each player.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DamageAllEffect(2, "it", filter));
-        ability.addEffect(new DamagePlayersEffect(2));
+        ability.addEffect(new DamagePlayersEffect(2).setText("and each player"));
         this.addAbility(ability);
         // Evoke {2}{G}{G}
         this.addAbility(new EvokeAbility("{2}{G}{G}"));

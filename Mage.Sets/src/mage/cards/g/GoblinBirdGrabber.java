@@ -43,7 +43,7 @@ public final class GoblinBirdGrabber extends CardImpl {
         // {R}: Goblin Bird-Grabber gains flying until end of turn. Activate this ability only if you control a creature with flying.
         this.addAbility(new ConditionalActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(
                 FlyingAbility.getInstance(), Duration.EndOfTurn
-        ), new ManaCostsImpl("{R}"), condition));
+        ), new ManaCostsImpl<>("{R}"), condition));
     }
 
     private GoblinBirdGrabber(final GoblinBirdGrabber card) {

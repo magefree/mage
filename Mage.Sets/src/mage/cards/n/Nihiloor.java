@@ -32,12 +32,13 @@ public final class Nihiloor extends CardImpl {
 
     static {
         filter.add(TargetController.OPPONENT.getOwnerPredicate());
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public Nihiloor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{U}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HORROR);
         this.power = new MageInt(3);
         this.toughness = new MageInt(5);
@@ -120,7 +121,7 @@ class NihiloorControlEffect extends OneShotEffect {
             }
             TargetPermanent target = new TargetPermanent(0, 1, filter, true);
             target.withChooseHint("tapping a creature controlled by " + opponent.getName());
-            controller.choose(outcome, target, source.getControllerId(), game);
+            controller.choose(outcome, target, source, game);
             Permanent permanent = game.getPermanent(target.getFirstTarget());
             if (permanent == null || !permanent.tap(source, game)) {
                 continue;
@@ -131,7 +132,7 @@ class NihiloorControlEffect extends OneShotEffect {
             );
             filter2.add(new NihiloorPredicate(permanent, playerId));
             ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(
-                    new GainControlTargetEffect(Duration.Custom, true),
+                    new GainControlTargetEffect(Duration.WhileControlled, true),
                     false, "gain control of target creature that player controls with "
                     + "power less than or equal to the tapped creature's power for as long as you control {this}"
             );

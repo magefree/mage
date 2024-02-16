@@ -58,7 +58,7 @@ public final class DefiantVanguard extends CardImpl {
         // {5}, {tap}: Search your library for a Rebel permanent card with converted mana cost 4 or less and put it onto the battlefield. Then shuffle your library.
         SimpleActivatedAbility ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), false),
-                new ManaCostsImpl("{5}"));
+                new ManaCostsImpl<>("{5}"));
         ability2.addCost(new TapSourceCost());
         this.addAbility(ability2);
     }
@@ -79,7 +79,7 @@ class DefiantVanguardTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, effect);
     }
 
-    DefiantVanguardTriggeredAbility(final DefiantVanguardTriggeredAbility ability) {
+    private DefiantVanguardTriggeredAbility(final DefiantVanguardTriggeredAbility ability) {
         super(ability);
     }
 
@@ -116,12 +116,12 @@ class DefiantVanguardTriggeredAbility extends TriggeredAbilityImpl {
 
 class DefiantVanguardEffect extends OneShotEffect {
 
-    public DefiantVanguardEffect() {
+    DefiantVanguardEffect() {
         super(Outcome.DestroyPermanent);
         staticText = "destroy it and all creatures it blocked this turn";
     }
 
-    public DefiantVanguardEffect(final DefiantVanguardEffect effect) {
+    private DefiantVanguardEffect(final DefiantVanguardEffect effect) {
         super(effect);
     }
 

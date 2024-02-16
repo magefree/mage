@@ -27,7 +27,7 @@ public final class StirringAddress extends CardImpl {
         // Overload {5}{W}
         this.addAbility(new OverloadAbility(this, new BoostControlledEffect(
                 2, 2, Duration.EndOfTurn
-        ).setText("Each creature you control gets +2/+2 until end of turn."), new ManaCostsImpl("{5}{W}")));
+        ).setText("Each creature you control gets +2/+2 until end of turn."), new ManaCostsImpl<>("{5}{W}")));
     }
 
     private StirringAddress(final StirringAddress card) {

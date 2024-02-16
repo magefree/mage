@@ -25,7 +25,7 @@ public class CastAsInstantTest extends CardTestPlayerBase {
 
         addCard(Zone.HAND, playerA, "Silvercoat Lion", 2);
 
-        castSpell(1, PhaseStep.UPKEEP, playerB, "Quicken");
+        castSpell(1, PhaseStep.UPKEEP, playerB, "Quicken", true);
         castSpell(1, PhaseStep.UPKEEP, playerB, "Witness the End", playerA);
 
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);

@@ -4,7 +4,6 @@ package mage.filter;
 import mage.constants.TargetController;
 
 /**
- *
  * @author LevelX2
  */
 public class FilterOpponent extends FilterPlayer {
@@ -18,7 +17,7 @@ public class FilterOpponent extends FilterPlayer {
         add(TargetController.OPPONENT.getPlayerPredicate());
     }
 
-    public FilterOpponent(final FilterOpponent filter) {
+    protected FilterOpponent(final FilterOpponent filter) {
         super(filter);
 
     }

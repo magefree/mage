@@ -36,7 +36,7 @@ public final class BalduvianFrostwaker extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {U}, {T}: Target snow land becomes a 2/2 blue Elemental creature with flying. It's still a land.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureTargetEffect(new BalduvianFrostwakerToken(), false, true, Duration.Custom), new ManaCostsImpl("{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureTargetEffect(new BalduvianFrostwakerToken(), false, true, Duration.Custom), new ManaCostsImpl<>("{U}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);

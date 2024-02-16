@@ -57,7 +57,7 @@ class SubterraneanTremorsEffect extends OneShotEffect {
         staticText = "{this} deals X damage to each creature without flying. If X is 4 or more, destroy all artifacts. If X is 8 or more, create an 8/8 red Lizard creature token.";
     }
 
-    public SubterraneanTremorsEffect(final SubterraneanTremorsEffect effect) {
+    private SubterraneanTremorsEffect(final SubterraneanTremorsEffect effect) {
         super(effect);
     }
 
@@ -69,7 +69,7 @@ class SubterraneanTremorsEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         int damage = source.getManaCostsToPay().getX();
-        UUID sourceId = source.getSourceId();
+        UUID sourceId = source != null ? source.getSourceId() : null;
         UUID controllerId = source.getControllerId();
 
         // X damage to each creature without flying

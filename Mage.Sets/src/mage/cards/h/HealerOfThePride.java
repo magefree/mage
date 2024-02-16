@@ -1,9 +1,8 @@
-
 package mage.cards.h;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -27,8 +26,8 @@ public final class HealerOfThePride extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever another creature enters the battlefield under your control, you gain 2 life.
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new GainLifeEffect(2),
-                StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, false, null, true));
+        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new GainLifeEffect(2),
+                StaticFilters.FILTER_ANOTHER_CREATURE, false));
 
     }
 

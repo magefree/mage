@@ -41,7 +41,7 @@ public final class RabbleRouser extends CardImpl {
         //{R}, {T}: Attacking creatures get +X/+0 until end of turn, where X is Rabble-Rouser's power.
 
         Ability ability = new SimpleActivatedAbility(
-                new BoostAllEffect(xValue, StaticValue.get(0), Duration.EndOfTurn, StaticFilters.FILTER_ATTACKING_CREATURES, false, null, true),
+                new BoostAllEffect(xValue, StaticValue.get(0), Duration.EndOfTurn, StaticFilters.FILTER_ATTACKING_CREATURES, false, null),
                 new ColoredManaCost(ColoredManaSymbol.R));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

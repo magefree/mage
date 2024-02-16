@@ -8,12 +8,14 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetSacrifice;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,9 +48,10 @@ class GravePactTriggeredAbility extends TriggeredAbilityImpl {
 
     public GravePactTriggeredAbility() {
         super(Zone.BATTLEFIELD, new GravePactEffect());
+        setTriggerPhrase("Whenever a creature you control dies, ");
     }
 
-    public GravePactTriggeredAbility(final GravePactTriggeredAbility ability) {
+    private GravePactTriggeredAbility(final GravePactTriggeredAbility ability) {
         super(ability);
     }
 
@@ -71,21 +74,16 @@ class GravePactTriggeredAbility extends TriggeredAbilityImpl {
         }
         return false;
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a creature you control dies, " ;
-    }
 }
 
 class GravePactEffect extends OneShotEffect {
 
-    public GravePactEffect() {
+    GravePactEffect() {
         super(Outcome.Sacrifice);
         this.staticText = "each other player sacrifices a creature";
     }
 
-    public GravePactEffect(final GravePactEffect effect) {
+    private GravePactEffect(final GravePactEffect effect) {
         super(effect);
     }
 
@@ -102,10 +100,9 @@ class GravePactEffect extends OneShotEffect {
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null && !playerId.equals(source.getControllerId())) {
-                    TargetControlledCreaturePermanent target = new TargetControlledCreaturePermanent();
-                    target.setNotTarget(true);
-                    if (target.canChoose(source.getSourceId(), player.getId(), game)) {
-                        player.chooseTarget(Outcome.Sacrifice, target, source, game);
+                    TargetSacrifice target = new TargetSacrifice(StaticFilters.FILTER_PERMANENT_A_CREATURE);
+                    if (target.canChoose(player.getId(), source, game)) {
+                        player.choose(Outcome.Sacrifice, target, source, game);
                         perms.addAll(target.getTargets());
                     }
                 }

@@ -30,7 +30,7 @@ public final class WildheartInvoker extends CardImpl {
 
         SimpleActivatedAbility ability = new SimpleActivatedAbility(new BoostTargetEffect(
                 5, 5, Duration.EndOfTurn
-        ).setText("target creature gets +5/+5"), new ManaCostsImpl("{8}"));
+        ).setText("target creature gets +5/+5"), new ManaCostsImpl<>("{8}"));
         ability.addEffect(new GainAbilityTargetEffect(
                 TrampleAbility.getInstance(), Duration.EndOfTurn
         ).setText("and gains trample until end of turn"));

@@ -6,24 +6,13 @@ import mage.abilities.mana.AnyColorManaAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 /**
  * @author LevelX2
  */
 public final class GoldToken extends TokenImpl {
 
-    static final private List<String> tokenImageSets = new ArrayList<>();
-
-    static {
-        tokenImageSets.addAll(Arrays.asList("BNG", "C17", "THB"));
-    }
-
     public GoldToken() {
-        super("Gold", "Gold token");
-        availableImageSetCodes = tokenImageSets;
+        super("Gold Token", "Gold token");
         cardType.add(CardType.ARTIFACT);
         subtype.add(SubType.GOLD);
 

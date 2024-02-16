@@ -37,7 +37,7 @@ public final class SquirrelMob extends CardImpl {
 
         // Squirrel Mob gets +1/+1 for each other Squirrel on the battlefield.
         this.addAbility(new SimpleStaticAbility(new BoostSourceEffect(
-                xValue, xValue, Duration.WhileOnBattlefield, false
+                xValue, xValue, Duration.WhileOnBattlefield
         ).setText("{this} gets +1/+1 for each other Squirrel on the battlefield")));
     }
 

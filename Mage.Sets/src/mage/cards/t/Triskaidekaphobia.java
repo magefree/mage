@@ -27,8 +27,7 @@ public final class Triskaidekaphobia extends CardImpl {
         // At the beginning of your upkeep, choose one - Each player with exactly 13 life loses the game, then each player gains 1 life.
         // Each player with exactly 13 life loses the game, then each player loses 1 life.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new TriskaidekaphobiaGainLifeEffect(), TargetController.YOU, false);
-        Mode mode = new Mode();
-        mode.addEffect(new TriskaidekaphobiaLoseLifeEffect());
+        Mode mode = new Mode(new TriskaidekaphobiaLoseLifeEffect());
         ability.addMode(mode);
         this.addAbility(ability);
     }
@@ -45,12 +44,12 @@ public final class Triskaidekaphobia extends CardImpl {
 
 class TriskaidekaphobiaGainLifeEffect extends OneShotEffect {
 
-    public TriskaidekaphobiaGainLifeEffect() {
+    TriskaidekaphobiaGainLifeEffect() {
         super(Outcome.Neutral);
         this.staticText = "Each player with exactly 13 life loses the game, then each player gains 1 life";
     }
 
-    public TriskaidekaphobiaGainLifeEffect(final TriskaidekaphobiaGainLifeEffect effect) {
+    private TriskaidekaphobiaGainLifeEffect(final TriskaidekaphobiaGainLifeEffect effect) {
         super(effect);
     }
 
@@ -84,12 +83,12 @@ class TriskaidekaphobiaGainLifeEffect extends OneShotEffect {
 
 class TriskaidekaphobiaLoseLifeEffect extends OneShotEffect {
 
-    public TriskaidekaphobiaLoseLifeEffect() {
+    TriskaidekaphobiaLoseLifeEffect() {
         super(Outcome.Neutral);
         this.staticText = "Each player with exactly 13 life loses the game, then each player loses 1 life";
     }
 
-    public TriskaidekaphobiaLoseLifeEffect(final TriskaidekaphobiaLoseLifeEffect effect) {
+    private TriskaidekaphobiaLoseLifeEffect(final TriskaidekaphobiaLoseLifeEffect effect) {
         super(effect);
     }
 

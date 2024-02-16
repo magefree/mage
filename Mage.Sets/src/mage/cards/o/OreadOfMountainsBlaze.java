@@ -27,7 +27,7 @@ public final class OreadOfMountainsBlaze extends CardImpl {
 
         // {2}{R}, Discard a card: Draw a card.
         Ability ability = new SimpleActivatedAbility(
-                new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{2}{R}")
+                new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{2}{R}")
         );
         ability.addCost(new DiscardCardCost());
         this.addAbility(ability);

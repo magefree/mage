@@ -27,7 +27,7 @@ public final class InfiltratorIlKor extends CardImpl {
         // Shadow
         this.addAbility(ShadowAbility.getInstance());
         // Suspend 2-{1}{U}
-        this.addAbility(new SuspendAbility(2, new ManaCostsImpl("{1}{U}"), this));
+        this.addAbility(new SuspendAbility(2, new ManaCostsImpl<>("{1}{U}"), this));
     }
 
     private InfiltratorIlKor(final InfiltratorIlKor card) {

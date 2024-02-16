@@ -78,7 +78,7 @@ public class BalanceEffect extends OneShotEffect {
 
             if (lowestHandSize > 0) {
                 TargetCardInHand target = new TargetCardInHand(lowestHandSize, filterCardHand);
-                if (target.choose(Outcome.Protect, player.getId(), source.getSourceId(), game)) {
+                if (target.choose(Outcome.Protect, player.getId(), source.getSourceId(), source, game)) {
                     for (Card card : allCardsInHand) {
                         if (card != null && target.getTargets().contains(card.getId())) {
                             cardsToKeep.add(card);
@@ -136,12 +136,12 @@ public class BalanceEffect extends OneShotEffect {
                 continue;
             }
 
-            List<Permanent> allPermanentsOfType = game.getBattlefield().getActivePermanents(filterPermanent, player.getId(), source.getSourceId(), game);
+            List<Permanent> allPermanentsOfType = game.getBattlefield().getActivePermanents(filterPermanent, player.getId(), source, game);
             List<Permanent> permanentsToKeep = new ArrayList<>();
 
             if (lowestPermanentsCount > 0) {
                 TargetControlledPermanent target = new TargetControlledPermanent(lowestPermanentsCount, lowestPermanentsCount, filterPermanent, true);
-                if (target.choose(Outcome.Protect, player.getId(), source.getSourceId(), game)) {
+                if (target.choose(Outcome.Protect, player.getId(), source.getSourceId(), source, game)) {
                     for (Permanent permanent : allPermanentsOfType) {
                         if (permanent != null && target.getTargets().contains(permanent.getId())) {
                             permanentsToKeep.add(permanent);

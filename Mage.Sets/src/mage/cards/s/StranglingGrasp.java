@@ -44,7 +44,7 @@ public final class StranglingGrasp extends CardImpl {
         TargetPermanent auraTarget = new TargetPermanent(filter);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // At the beginning of your upkeep, enchanted permanent's controller sacrifices a nonland permanent and loses 1 life.
@@ -100,9 +100,9 @@ class StranglingGraspEffect extends OneShotEffect {
             return false;
         }
         TargetPermanent target = new TargetPermanent(filter);
-        target.setNotTarget(true);
-        if (target.canChoose(source.getSourceId(), player.getId(), game)) {
-            player.choose(outcome, target, source.getSourceId(), game);
+        target.withNotTarget(true);
+        if (target.canChoose(player.getId(), source, game)) {
+            player.choose(outcome, target, source, game);
             Permanent permanent = game.getPermanent(target.getFirstTarget());
             if (permanent != null) {
                 permanent.sacrifice(source, game);

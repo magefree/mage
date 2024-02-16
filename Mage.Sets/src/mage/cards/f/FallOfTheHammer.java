@@ -61,12 +61,12 @@ public final class FallOfTheHammer extends CardImpl {
 
 class FallOfTheHammerDamageEffect extends OneShotEffect {
 
-    public FallOfTheHammerDamageEffect() {
+    FallOfTheHammerDamageEffect() {
         super(Outcome.Damage);
         this.staticText = "Target creature you control deals damage equal to its power to another target creature";
     }
 
-    public FallOfTheHammerDamageEffect(final FallOfTheHammerDamageEffect effect) {
+    private FallOfTheHammerDamageEffect(final FallOfTheHammerDamageEffect effect) {
         super(effect);
     }
 

@@ -29,7 +29,7 @@ public final class TwilightPanther extends CardImpl {
         // {B}: Twilight Panther gains deathtouch until end of turn.
         this.addAbility(new SimpleActivatedAbility(new GainAbilitySourceEffect(
                 DeathtouchAbility.getInstance(), Duration.EndOfTurn
-        ), new ManaCostsImpl("{B}")));
+        ), new ManaCostsImpl<>("{B}")));
     }
 
     private TwilightPanther(final TwilightPanther card) {

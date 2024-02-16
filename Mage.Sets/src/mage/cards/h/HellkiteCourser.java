@@ -83,8 +83,8 @@ class HellkiteCourserEffect extends OneShotEffect {
             return false;
         }
         TargetCard target = new TargetCard(0, 1, Zone.COMMAND, filter);
-        target.setNotTarget(true);
-        player.choose(outcome, target, source.getSourceId(), game);
+        target.withNotTarget(true);
+        player.choose(outcome, target, source, game);
         Card card = game.getCard(target.getFirstTarget());
         if (card == null) {
             return false;

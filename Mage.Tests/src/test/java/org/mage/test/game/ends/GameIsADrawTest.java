@@ -24,11 +24,11 @@ public class GameIsADrawTest extends CardTestPlayerBase {
         // Flame Rift deals 4 damage to each player.
         addCard(Zone.HAND, playerB, "Flame Rift", 2); // Sorcery
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Flame Rift");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Flame Rift");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Flame Rift", true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Flame Rift", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Flame Rift");
 
-        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Flame Rift");
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Flame Rift", true);
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Flame Rift");
 
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
@@ -95,10 +95,11 @@ public class GameIsADrawTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Stuffy Doll");
         setChoice(playerA, "PlayerA");
-        setChoice(playerA, "PlayerA");
 
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip", "Stuffy Doll");
         activateAbility(3, PhaseStep.POSTCOMBAT_MAIN, playerA, "{T}: {this} deals");
+        setChoice(playerA, "Yes");
+        setChoice(playerB, "Yes");
         setStopAt(3, PhaseStep.END_TURN);
         execute();
 
@@ -112,7 +113,6 @@ public class GameIsADrawTest extends CardTestPlayerBase {
         Assert.assertTrue("Game has ended.", currentGame.hasEnded());
 
         Assert.assertTrue("Infinite loop detected, game has be de a draw.", currentGame.isADraw());
-
     }
 
     /**
@@ -137,7 +137,7 @@ public class GameIsADrawTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertPermanentCount(playerA, "Angel", 20);
+        assertPermanentCount(playerA, "Angel Token", 20);
         Assert.assertFalse("Game should not have ended.", currentGame.hasEnded());
         assertLife(playerA, 100);
 

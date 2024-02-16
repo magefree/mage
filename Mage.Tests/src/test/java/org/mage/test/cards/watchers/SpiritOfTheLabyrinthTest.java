@@ -51,7 +51,7 @@ public class SpiritOfTheLabyrinthTest extends CardTestPlayerBase {
         setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
         execute();
 
-        assertPermanentCount(playerB, "Spirit", 2);
+        assertPermanentCount(playerB, "Spirit Token", 2);
         this.assertHandCount(playerA, 1);
         this.assertHandCount(playerB, 1);
 

@@ -35,7 +35,7 @@ public final class FatalFrenzy extends CardImpl {
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn)
                 .setText("Until end of turn, target creature you control gains trample")
         );
-        this.getSpellAbility().addEffect(new BoostTargetEffect(TargetPermanentPowerCount.instance, StaticValue.get(0), Duration.EndOfTurn, true)
+        this.getSpellAbility().addEffect(new BoostTargetEffect(TargetPermanentPowerCount.instance, StaticValue.get(0), Duration.EndOfTurn)
                 .setText("and gets +X/+0, where X is its power")
         );
         this.getSpellAbility().addEffect(new FatalFrenzyEffect());
@@ -55,12 +55,12 @@ public final class FatalFrenzy extends CardImpl {
 
 class FatalFrenzyEffect extends OneShotEffect {
 
-    public FatalFrenzyEffect() {
+    FatalFrenzyEffect() {
         super(Outcome.Sacrifice);
         this.staticText = "Sacrifice it at the beginning of the next end step";
     }
 
-    public FatalFrenzyEffect(final FatalFrenzyEffect effect) {
+    private FatalFrenzyEffect(final FatalFrenzyEffect effect) {
         super(effect);
     }
 

@@ -22,9 +22,11 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.watchers.Watcher;
 
+import java.util.AbstractMap;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import java.util.Map.Entry;
 
 /**
  * @author TheElk801
@@ -104,8 +106,7 @@ class VesselOfTheAllConsumingTriggeredAbility extends TriggeredAbilityImpl {
 
 class VesselOfTheAllConsumingWatcher extends Watcher {
 
-    private final Map<MageObjectReference, Map<UUID, Integer>> morMap = new HashMap<>();
-    private static final Map<UUID, Integer> emptyMap = new HashMap<>();
+    private final Map<Entry<MageObjectReference, UUID>, Integer> morMap = new HashMap<>();
 
     VesselOfTheAllConsumingWatcher() {
         super(WatcherScope.GAME);
@@ -118,8 +119,9 @@ class VesselOfTheAllConsumingWatcher extends Watcher {
         }
         Permanent permanent = game.getPermanent(event.getSourceId());
         if (permanent != null) {
-            morMap.computeIfAbsent(new MageObjectReference(permanent, game), x -> new HashMap<>())
-                    .compute(event.getTargetId(), (u, i) -> i == null ? 1 : Integer.sum(i, 1));
+            int damage = event.getAmount();
+            morMap.compute(new AbstractMap.SimpleImmutableEntry(new MageObjectReference(permanent, game), event.getTargetId()),
+                    (u, i) -> i == null ? damage : Integer.sum(i, damage));
         }
     }
 
@@ -130,10 +132,12 @@ class VesselOfTheAllConsumingWatcher extends Watcher {
     }
 
     static boolean checkPermanent(Game game, Ability source) {
-        return game.getState()
+        Map<Entry<MageObjectReference, UUID>, Integer> morMap = game.getState()
                 .getWatcher(VesselOfTheAllConsumingWatcher.class)
-                .morMap
-                .getOrDefault(new MageObjectReference(source), emptyMap)
-                .getOrDefault(source.getEffects().get(0).getTargetPointer().getFirst(game, source), 0) >= 10;
+                .morMap;
+        Entry<MageObjectReference, UUID> key = new AbstractMap.SimpleImmutableEntry(
+                new MageObjectReference(game.getPermanent(source.getSourceId()), game),
+                source.getEffects().get(0).getTargetPointer().getFirst(game, source));
+        return morMap.getOrDefault(key, 0) >= 10;
     }
 }

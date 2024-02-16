@@ -1,11 +1,10 @@
-
 package mage.cards.e;
 
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.InfoEffect;
-import mage.abilities.keyword.SpliceOntoArcaneAbility;
+import mage.abilities.keyword.SpliceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -35,7 +34,7 @@ public final class Evermind extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
         
         // Splice onto Arcane {1}{U}
-        this.addAbility(new SpliceOntoArcaneAbility("{1}{U}"));
+        this.addAbility(new SpliceAbility(SpliceAbility.ARCANE, "{1}{U}"));
     }
 
     private Evermind(final Evermind card) {

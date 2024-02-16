@@ -10,7 +10,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author LoneFox
  */
 public class DamageEachOtherEffect extends OneShotEffect {
@@ -19,7 +18,7 @@ public class DamageEachOtherEffect extends OneShotEffect {
         super(Outcome.Damage);
     }
 
-    public DamageEachOtherEffect(final DamageEachOtherEffect effect) {
+    protected DamageEachOtherEffect(final DamageEachOtherEffect effect) {
         super(effect);
     }
 
@@ -52,7 +51,7 @@ public class DamageEachOtherEffect extends OneShotEffect {
 
     @Override
     public String getText(Mode mode) {
-        if(staticText != null && !staticText.isEmpty()) {
+        if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
         return "{this} deals damage equal to its power to target creature. That creature deals damage equal to its power to {this}";

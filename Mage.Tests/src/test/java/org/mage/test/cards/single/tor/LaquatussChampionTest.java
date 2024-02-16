@@ -45,8 +45,8 @@ public class LaquatussChampionTest extends CardTestPlayerBase {
 
     @Test
     public void testDoubleZoneChange() {
-        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 6);
-        addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
         addCard(Zone.HAND, playerA, "Laquatus's Champion");
         addCard(Zone.HAND, playerA, "Cloudshift");
 

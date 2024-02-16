@@ -52,7 +52,7 @@ class ChannelEffect extends OneShotEffect {
         this.staticText = "Until end of turn, any time you could activate a mana ability, you may pay 1 life. If you do, add {C}";
     }
     
-    ChannelEffect(final ChannelEffect effect) {
+    private ChannelEffect(final ChannelEffect effect) {
         super(effect);
     }
     
@@ -81,7 +81,7 @@ class ChannelSpecialAction extends SpecialAction {
         this.addEffect(new BasicManaEffect(Mana.ColorlessMana(1)));
     }
 
-    ChannelSpecialAction(final ChannelSpecialAction ability) {
+    private ChannelSpecialAction(final ChannelSpecialAction ability) {
         super(ability);
     }
 
@@ -99,7 +99,7 @@ class ChannelDelayedTriggeredAbility extends DelayedTriggeredAbility {
         this.setRuleVisible(false);
     }
 
-    ChannelDelayedTriggeredAbility(ChannelDelayedTriggeredAbility ability) {
+    private ChannelDelayedTriggeredAbility(final ChannelDelayedTriggeredAbility ability) {
         super(ability);
     }
 

@@ -48,7 +48,7 @@ class FierceInvocationEffect extends OneShotEffect {
         this.staticText = "Manifest the top card of your library, then put two +1/+1 counters on it.<i> (To manifest a card, put it onto the battlefield face down as a 2/2 creature. Turn it face up any time for its mana cost if it's a creature card.)</i>";
     }
     
-    public FierceInvocationEffect(final FierceInvocationEffect effect) {
+    private FierceInvocationEffect(final FierceInvocationEffect effect) {
         super(effect);
     }
     

@@ -29,7 +29,7 @@ public final class DrannithHealer extends CardImpl {
         this.addAbility(new CycleControllerTriggeredAbility(new GainLifeEffect(1), false, true));
 
         // Cycling {1}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{1}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{1}")));
     }
 
     private DrannithHealer(final DrannithHealer card) {

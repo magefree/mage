@@ -36,7 +36,7 @@ public final class SkirkProspector extends CardImpl {
 
         // Sacrifice a Goblin: Add {R}.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.RedMana(1), 
-                new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1,filter,true)),
+                new SacrificeTargetCost(filter),
                 new PermanentsOnBattlefieldCount(filter)));
     }
 

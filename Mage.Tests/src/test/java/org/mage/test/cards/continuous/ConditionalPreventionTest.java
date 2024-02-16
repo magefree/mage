@@ -31,7 +31,6 @@ public class ConditionalPreventionTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Balduvian Bears", 0);
         assertHandCount(playerA, "Lightning Bolt", 0);
@@ -50,7 +49,6 @@ public class ConditionalPreventionTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Balduvian Bears", 1);
         assertHandCount(playerA, "Lightning Bolt", 0);
@@ -75,7 +73,6 @@ public class ConditionalPreventionTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Balduvian Bears", 1);
         assertHandCount(playerA, "Lightning Bolt", 0);
@@ -100,7 +97,6 @@ public class ConditionalPreventionTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Balduvian Bears", 0);
         assertHandCount(playerA, "Lightning Bolt", 0);
@@ -127,7 +123,6 @@ public class ConditionalPreventionTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Balduvian Bears", 0); // not prevented, dies
         assertLife(playerA, 20); // prevented, no damage
@@ -152,7 +147,6 @@ public class ConditionalPreventionTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(4, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Balduvian Bears", 1);
         assertPermanentCount(playerB, "Balduvian Bears", 1);
@@ -183,12 +177,29 @@ public class ConditionalPreventionTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(4, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Balduvian Bears", 0);
         assertPermanentCount(playerB, "Balduvian Bears", 1);
         assertLife(playerA, 20);
         assertLife(playerB, 20 - 2);
+    }
+
+    @Test
+    public void test_UnpreventableCombatDamageToPlayer() {
+        // Combat damage that would be dealt by creatures you control can't be prevented.
+        addCard(Zone.BATTLEFIELD, playerB, "Questing Beast", 1);
+        // When The One Ring enters the battlefield, if you cast it, you gain protection from everything until your next turn.
+        addCard(Zone.HAND, playerA, "The One Ring", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "The One Ring");
+        attack(2, playerB, "Questing Beast");
+
+        setStrictChooseMode(true);
+        setStopAt(2, PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerA, 20 - 4); // Damage should not be prevented
     }
 
     @Test
@@ -223,7 +234,6 @@ public class ConditionalPreventionTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -261,6 +271,5 @@ public class ConditionalPreventionTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 }

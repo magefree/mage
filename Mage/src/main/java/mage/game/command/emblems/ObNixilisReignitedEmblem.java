@@ -1,4 +1,3 @@
-
 package mage.game.command.emblems;
 
 import mage.abilities.TriggeredAbilityImpl;
@@ -8,19 +7,24 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.command.Emblem;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 
 /**
- *
  * @author spjspj
  */
 public final class ObNixilisReignitedEmblem extends Emblem {
 
     public ObNixilisReignitedEmblem() {
-        setName("Emblem Nixilis");
-
+        super("Emblem Nixilis");
         this.getAbilities().add(new ObNixilisEmblemTriggeredAbility(new LoseLifeSourceControllerEffect(2), false));
-        this.setExpansionSetCodeForImage("BFZ");
+    }
+
+    private ObNixilisReignitedEmblem(final ObNixilisReignitedEmblem card) {
+        super(card);
+    }
+
+    @Override
+    public ObNixilisReignitedEmblem copy() {
+        return new ObNixilisReignitedEmblem(this);
     }
 }
 
@@ -30,7 +34,7 @@ class ObNixilisEmblemTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.COMMAND, effect, optional);
     }
 
-    public ObNixilisEmblemTriggeredAbility(final ObNixilisEmblemTriggeredAbility ability) {
+    protected ObNixilisEmblemTriggeredAbility(final ObNixilisEmblemTriggeredAbility ability) {
         super(ability);
     }
 

@@ -19,7 +19,7 @@ public final class KeepWatch extends CardImpl {
 
 
         // Draw a card for each attacking creature.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(new AttackingCreatureCount()));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(new AttackingCreatureCount()).setText("draw a card for each attacking creature"));
     }
 
     private KeepWatch(final KeepWatch card) {

@@ -42,11 +42,17 @@ public class OpponentLostLifeCondition extends IntCompareCondition {
             case MORE_THAN:
                 sb.append(value + 1).append(" or more life this turn");
                 break;
+            case OR_GREATER:
+                sb.append(value).append(" or more life this turn");
+                break;
             case EQUAL_TO:
                 sb.append(value).append(" life this turn");
                 break;
             case FEWER_THAN:
                 sb.append(" less than ").append(value).append(" life this turn");
+                break;
+            case OR_LESS:
+                sb.append(value).append(" or less life this turn");
                 break;
         }
         return sb.toString();

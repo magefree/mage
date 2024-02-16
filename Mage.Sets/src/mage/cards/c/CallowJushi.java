@@ -66,7 +66,7 @@ class JarakuTheInterloper extends TokenImpl {
 
     JarakuTheInterloper() {
         super("Jaraku the Interloper", "");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
         subtype.add(SubType.SPIRIT);
@@ -81,7 +81,7 @@ class JarakuTheInterloper extends TokenImpl {
         ability.addTarget(new TargetSpell());
         this.addAbility(ability);
     }
-    public JarakuTheInterloper(final JarakuTheInterloper token) {
+    private JarakuTheInterloper(final JarakuTheInterloper token) {
         super(token);
     }
 

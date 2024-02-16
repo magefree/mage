@@ -10,7 +10,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.game.permanent.token.CoralBarrierSquidToken;
+import mage.game.permanent.token.SquidToken;
 
 /**
  *
@@ -28,7 +28,7 @@ public final class CoralBarrier extends CardImpl {
         // Defender
         this.addAbility(DefenderAbility.getInstance());
         // When Coral Barrier enters the battlefield, create a 1/1 blue Squid creature token with islandwalk.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new CoralBarrierSquidToken()), false));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new SquidToken()), false));
 
     }
 

@@ -39,7 +39,7 @@ public final class KikiJikiMirrorBreaker extends CardImpl {
 
     public KikiJikiMirrorBreaker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{R}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GOBLIN);
         this.subtype.add(SubType.SHAMAN);
 
@@ -67,12 +67,12 @@ public final class KikiJikiMirrorBreaker extends CardImpl {
 
 class KikiJikiMirrorBreakerEffect extends OneShotEffect {
 
-    public KikiJikiMirrorBreakerEffect() {
+    KikiJikiMirrorBreakerEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Create a token that's a copy of target nonlegendary creature you control, except it has haste. Sacrifice it at the beginning of the next end step";
     }
 
-    public KikiJikiMirrorBreakerEffect(final KikiJikiMirrorBreakerEffect effect) {
+    private KikiJikiMirrorBreakerEffect(final KikiJikiMirrorBreakerEffect effect) {
         super(effect);
     }
 
@@ -84,18 +84,14 @@ class KikiJikiMirrorBreakerEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
-        if (permanent != null) {
-            CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(source.getControllerId(), null, true);
-            effect.setTargetPointer(new FixedTarget(permanent, game));
-            effect.apply(game, source);
-            for (Permanent addedToken : effect.getAddedPermanents()) {
-                SacrificeTargetEffect sacrificeEffect = new SacrificeTargetEffect("Sacrifice the token at the beginning of the next end step", source.getControllerId());
-                sacrificeEffect.setTargetPointer(new FixedTarget(addedToken.getId()));
-                game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(sacrificeEffect), source);
-            }
-            return true;
+        if (permanent == null) {
+            return false;
         }
 
-        return false;
+        CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(source.getControllerId(), null, true);
+        effect.setTargetPointer(new FixedTarget(permanent, game));
+        effect.apply(game, source);
+        effect.sacrificeTokensCreatedAtNextEndStep(game, source);
+        return true;
     }
 }

@@ -68,8 +68,8 @@ class InvokeDespairEffect extends OneShotEffect {
             return false;
         }
         Target target = new TargetControlledCreaturePermanent();
-        target.setNotTarget(true);
-        opponent.choose(outcome, target, source.getSourceId(), game);
+        target.withNotTarget(true);
+        opponent.choose(outcome, target, source, game);
         Permanent permanent = game.getPermanent(target.getFirstTarget());
         boolean sacrificed = false;
         if (permanent != null) {
@@ -80,8 +80,8 @@ class InvokeDespairEffect extends OneShotEffect {
             controller.drawCards(1, source, game);
         }
         target = new TargetControlledPermanent(enchantmentFilter);
-        target.setNotTarget(true);
-        opponent.choose(outcome, target, source.getSourceId(), game);
+        target.withNotTarget(true);
+        opponent.choose(outcome, target, source, game);
         permanent = game.getPermanent(target.getFirstTarget());
         sacrificed = false;
         if (permanent != null) {
@@ -92,8 +92,8 @@ class InvokeDespairEffect extends OneShotEffect {
             controller.drawCards(1, source, game);
         }
         target = new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_PLANESWALKER);
-        target.setNotTarget(true);
-        opponent.choose(outcome, target, source.getSourceId(), game);
+        target.withNotTarget(true);
+        opponent.choose(outcome, target, source, game);
         permanent = game.getPermanent(target.getFirstTarget());
         sacrificed = false;
         if (permanent != null) {

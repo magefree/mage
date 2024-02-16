@@ -19,7 +19,7 @@ public class PutIntoPlayEffectsTest extends CardTestPlayerBase {
      * e.g. the top card of the library of the current controller of Oracle of Mul Daya is revealed
      */
     @Test
-    public void testLordOfTheVoid() {
+    public void testLordOfTheVoidDirectFromDeck() {
         skipInitShuffling();
         // You may play an additional land on each of your turns.
         // Play with the top card of your library revealed.
@@ -30,8 +30,9 @@ public class PutIntoPlayEffectsTest extends CardTestPlayerBase {
         // onto the battlefield under your control.
         addCard(Zone.BATTLEFIELD, playerB, "Lord of the Void");
 
-        attack(2, playerB, "Lord of the Void");
-        setChoice(playerB, "Oracle of Mul Daya");
+        setStrictChooseMode(true);
+        attack(2, playerB, "Lord of the Void", playerA);
+        addTarget(playerB, "Oracle of Mul Daya");
 
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
         execute();
@@ -45,12 +46,11 @@ public class PutIntoPlayEffectsTest extends CardTestPlayerBase {
         
     }
     
-    /*
-      test also if the Oracle was in play before by the owner of the oracle
+    /**
+    * Same as testLordOfTheVoid, but checks if it works when the Oracle was in previous under it's owner's control.
     */
     @Test
-    public void testLordOfTheVoid2() {
-        
+    public void testLordOfTheVoidPreviouslyControlled() {
         addCard(Zone.BATTLEFIELD, playerA, "Oracle of Mul Daya");
         // Whenever Lord of the Void deals combat damage to a player, exile the top seven cards 
         // of that player's library, then put a creature card from among them 
@@ -61,9 +61,10 @@ public class PutIntoPlayEffectsTest extends CardTestPlayerBase {
         // Put target creature on top of its owner's library.
         addCard(Zone.HAND, playerB, "Griptide");
 
+        setStrictChooseMode(true);
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Griptide", "Oracle of Mul Daya");
-        attack(2, playerB, "Lord of the Void");
-        setChoice(playerB, "Oracle of Mul Daya");
+        attack(2, playerB, "Lord of the Void", playerA);
+        addTarget(playerB, "Oracle of Mul Daya");
 
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
         execute();
@@ -77,12 +78,11 @@ public class PutIntoPlayEffectsTest extends CardTestPlayerBase {
     }
     
     /**
-     * A Silvercoat Lion from opponents deck will be put into play with Bribery. Than the opponent bounces this card
-     * back to hand and cast the spell itself.
+     * A Silvercoat Lion from opponents deck will be put into play with Bribery.
+     * Then the opponent bounces this card back to hand and cast the spell itself.
      */
     @Test
-    public void bribery1() {
-        
+    public void testBribery() {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
         // Bribery - Sorcery {3}{U}{U}
         // Search target opponent's library for a creature card and put that card onto the battlefield
@@ -96,9 +96,10 @@ public class PutIntoPlayEffectsTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Eye of Nowhere");
         addCard(Zone.LIBRARY, playerB, "Silvercoat Lion", 1);
         skipInitShuffling();
-        
+
+        setStrictChooseMode(true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bribery", playerB);        
-        setChoice(playerA, "Silvercoat Lion");
+        addTarget(playerA, "Silvercoat Lion");
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Eye of Nowhere", "Silvercoat Lion");        
         castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Silvercoat Lion");        
@@ -112,6 +113,5 @@ public class PutIntoPlayEffectsTest extends CardTestPlayerBase {
         assertGraveyardCount(playerB, "Eye of Nowhere", 1);
         assertHandCount(playerB, "Silvercoat Lion", 0);        
         assertPermanentCount(playerB, "Silvercoat Lion", 1);
-
     }    
 }

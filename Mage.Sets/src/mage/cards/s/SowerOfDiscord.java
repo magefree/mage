@@ -59,12 +59,12 @@ public final class SowerOfDiscord extends CardImpl {
 
 class SowerOfDiscordEntersBattlefieldEffect extends OneShotEffect {
 
-    public SowerOfDiscordEntersBattlefieldEffect() {
+    SowerOfDiscordEntersBattlefieldEffect() {
         super(Outcome.Damage);
         staticText = "choose two players";
     }
 
-    public SowerOfDiscordEntersBattlefieldEffect(final SowerOfDiscordEntersBattlefieldEffect effect) {
+    private SowerOfDiscordEntersBattlefieldEffect(final SowerOfDiscordEntersBattlefieldEffect effect) {
         super(effect);
     }
 
@@ -113,7 +113,7 @@ class SowerOfDiscordTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, null);
     }
 
-    public SowerOfDiscordTriggeredAbility(final SowerOfDiscordTriggeredAbility ability) {
+    private SowerOfDiscordTriggeredAbility(final SowerOfDiscordTriggeredAbility ability) {
         super(ability);
     }
 

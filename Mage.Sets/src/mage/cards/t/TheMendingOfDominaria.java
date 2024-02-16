@@ -54,12 +54,12 @@ public final class TheMendingOfDominaria extends CardImpl {
 
 class TheMendingOfDominariaFirstEffect extends OneShotEffect {
 
-    public TheMendingOfDominariaFirstEffect() {
+    TheMendingOfDominariaFirstEffect() {
         super(Outcome.ReturnToHand);
         this.staticText = "Mill two cards, then you may return a creature card from your graveyard to your hand";
     }
 
-    public TheMendingOfDominariaFirstEffect(final TheMendingOfDominariaFirstEffect effect) {
+    private TheMendingOfDominariaFirstEffect(final TheMendingOfDominariaFirstEffect effect) {
         super(effect);
     }
 
@@ -76,10 +76,10 @@ class TheMendingOfDominariaFirstEffect extends OneShotEffect {
         }
         new MillCardsControllerEffect(2).apply(game, source);
         TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD);
-        target.setNotTarget(true);
-        if (target.canChoose(source.getSourceId(), source.getControllerId(), game)
+        target.withNotTarget(true);
+        if (target.canChoose(source.getControllerId(), source, game)
                 && controller.chooseUse(outcome, "Return a creature card from your graveyard to hand?", source, game)
-                && controller.choose(Outcome.ReturnToHand, target, source.getSourceId(), game)) {
+                && controller.choose(Outcome.ReturnToHand, target, source, game)) {
             Card card = game.getCard(target.getFirstTarget());
             if (card != null) {
                 controller.moveCards(card, Zone.HAND, source, game);
@@ -96,7 +96,7 @@ class TheMendingOfDominariaSecondEffect extends OneShotEffect {
         this.staticText = "Return all land cards from your graveyard to the battlefield, then shuffle your graveyard into your library";
     }
 
-    TheMendingOfDominariaSecondEffect(final TheMendingOfDominariaSecondEffect effect) {
+    private TheMendingOfDominariaSecondEffect(final TheMendingOfDominariaSecondEffect effect) {
         super(effect);
     }
 
@@ -110,7 +110,7 @@ class TheMendingOfDominariaSecondEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             controller.moveCards(
-                    controller.getGraveyard().getCards(new FilterLandCard(), source.getSourceId(), source.getControllerId(), game),
+                    controller.getGraveyard().getCards(new FilterLandCard(), source.getControllerId(), source, game),
                     Zone.BATTLEFIELD, source, game, false, false, false, null
             );
             for (Card card : controller.getGraveyard().getCards(game)) {

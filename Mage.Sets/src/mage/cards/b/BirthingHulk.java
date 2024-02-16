@@ -38,7 +38,7 @@ public final class BirthingHulk extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(effect, false));
 
         // {1}{C}: Regenerate Birthing Hulk.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{1}{C}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{1}{C}")));
 
     }
 

@@ -10,6 +10,8 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
+import java.util.UUID;
+
 public class AttacksOrBlocksAttachedTriggeredAbility extends TriggeredAbilityImpl {
 
     private final AttachmentType attachmentType;
@@ -17,9 +19,10 @@ public class AttacksOrBlocksAttachedTriggeredAbility extends TriggeredAbilityImp
     public AttacksOrBlocksAttachedTriggeredAbility(Effect effect, AttachmentType attachmentType) {
         super(Zone.BATTLEFIELD, effect);
         this.attachmentType = attachmentType;
+        setTriggerPhrase("Whenever " + attachmentType.verb().toLowerCase() + " creature attacks or blocks, ");
     }
 
-    public AttacksOrBlocksAttachedTriggeredAbility(final AttacksOrBlocksAttachedTriggeredAbility ability) {
+    protected AttacksOrBlocksAttachedTriggeredAbility(final AttacksOrBlocksAttachedTriggeredAbility ability) {
         super(ability);
         this.attachmentType = ability.attachmentType;
     }
@@ -32,17 +35,16 @@ public class AttacksOrBlocksAttachedTriggeredAbility extends TriggeredAbilityImp
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.ATTACKER_DECLARED
-                || event.getType() == GameEvent.EventType.BLOCKER_DECLARED;
+                || event.getType() == GameEvent.EventType.CREATURE_BLOCKS;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent enchantment = getSourcePermanentOrLKI(game);
-        return enchantment != null && event.getSourceId().equals(enchantment.getAttachedTo());
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever " + attachmentType.verb().toLowerCase() + " creature attacks or blocks, ";
+        if (enchantment == null) {
+            return false;
+        }
+        UUID idToCheck = (event.getType() == GameEvent.EventType.ATTACKER_DECLARED) ? event.getSourceId() : event.getTargetId();
+        return idToCheck.equals(enchantment.getAttachedTo());
     }
 }

@@ -52,12 +52,12 @@ public final class TheFallenApart extends CardImpl {
 
 class TheFallenApartEntersEffect extends OneShotEffect {
 
-    public TheFallenApartEntersEffect() {
+    TheFallenApartEntersEffect() {
         super(Outcome.Neutral);
         staticText = "with two arms and two legs";
     }
 
-    public TheFallenApartEntersEffect(final TheFallenApartEntersEffect effect) {
+    private TheFallenApartEntersEffect(final TheFallenApartEntersEffect effect) {
         super(effect);
     }
 
@@ -65,7 +65,7 @@ class TheFallenApartEntersEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         MageObject mageObject = game.getPermanentEntering(source.getSourceId());
         if (mageObject == null) {
-            mageObject = game.getObject(source.getSourceId());
+            mageObject = game.getObject(source);
         }
         if (mageObject != null) {
             game.getState().setValue(mageObject.getId() + "_arms", 2);
@@ -86,19 +86,19 @@ class TheFallenApartEntersEffect extends OneShotEffect {
 
 class TheFallenApartToggleEffect extends OneShotEffect {
 
-    public TheFallenApartToggleEffect() {
+    TheFallenApartToggleEffect() {
         super(Outcome.Neutral);
         staticText = "remove an arm or a leg from it";
     }
 
-    public TheFallenApartToggleEffect(final TheFallenApartToggleEffect effect) {
+    private TheFallenApartToggleEffect(final TheFallenApartToggleEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (controller != null && mageObject != null) {
             if (game.getState().getValue(mageObject.getId() + "_arms") == null
                     || game.getState().getValue(mageObject.getId() + "_legs") == null) {
@@ -142,12 +142,12 @@ class TheFallenApartToggleEffect extends OneShotEffect {
 
 class TheFallenApartRestrictionEffect extends RestrictionEffect {
 
-    public TheFallenApartRestrictionEffect() {
+    TheFallenApartRestrictionEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "{this} can't attack if it has no legs and can't block if it has no arms";
     }
 
-    public TheFallenApartRestrictionEffect(final TheFallenApartRestrictionEffect effect) {
+    private TheFallenApartRestrictionEffect(final TheFallenApartRestrictionEffect effect) {
         super(effect);
     }
 
@@ -158,7 +158,7 @@ class TheFallenApartRestrictionEffect extends RestrictionEffect {
 
     @Override
     public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (mageObject != null) {
             return (Integer) game.getState().getValue(mageObject.getId() + "_arms") > 0;
         }
@@ -167,7 +167,7 @@ class TheFallenApartRestrictionEffect extends RestrictionEffect {
 
     @Override
     public boolean canAttack(Permanent attacker, UUID defenderId, Ability source, Game game, boolean canUseChooseDialogs) {
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (mageObject != null) {
             return (Integer) game.getState().getValue(mageObject.getId() + "_legs") > 0;
         }

@@ -42,7 +42,7 @@ public final class DeepSeaKraken extends CardImpl {
         // Deep-Sea Kraken can't be blocked.
         this.addAbility(new CantBeBlockedSourceAbility());
         // Suspend 9-{2}{U}
-        this.addAbility(new SuspendAbility(9, new ManaCostsImpl("{2}{U}"), this));
+        this.addAbility(new SuspendAbility(9, new ManaCostsImpl<>("{2}{U}"), this));
         // Whenever an opponent casts a spell, if Deep-Sea Kraken is suspended, remove a time counter from it.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new SpellCastAllTriggeredAbility(Zone.EXILED, new RemoveCounterSourceEffect(CounterType.TIME.createInstance()), filter, false, SetTargetPointer.NONE), SuspendedCondition.instance,

@@ -1,4 +1,3 @@
-
 package mage.game.command.emblems;
 
 import mage.abilities.Ability;
@@ -8,7 +7,6 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.constants.*;
-
 import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.game.command.Emblem;
@@ -16,15 +14,23 @@ import mage.game.permanent.Permanent;
 import mage.target.common.TargetAnyTarget;
 
 /**
- *
  * @author spjspj
  */
 public final class KothOfTheHammerEmblem extends Emblem {
     // "Mountains you control have '{T}: This land deals 1 damage to any target.'"
 
     public KothOfTheHammerEmblem() {
-        this.setName("Emblem Koth");
+        super("Emblem Koth");
         this.getAbilities().add(new SimpleStaticAbility(Zone.COMMAND, new KothOfTheHammerThirdEffect()));
+    }
+
+    private KothOfTheHammerEmblem(final KothOfTheHammerEmblem card) {
+        super(card);
+    }
+
+    @Override
+    public KothOfTheHammerEmblem copy() {
+        return new KothOfTheHammerEmblem(this);
     }
 }
 
@@ -39,10 +45,10 @@ class KothOfTheHammerThirdEffect extends ContinuousEffectImpl {
 
     public KothOfTheHammerThirdEffect() {
         super(Duration.EndOfGame, Outcome.AddAbility);
-        staticText = "You get an emblem with \"Mountains you control have '{T}: This land deals 1 damage to any target.'\"";
+        staticText = "Mountains you control have '{T}: This land deals 1 damage to any target.'";
     }
 
-    public KothOfTheHammerThirdEffect(final KothOfTheHammerThirdEffect effect) {
+    protected KothOfTheHammerThirdEffect(final KothOfTheHammerThirdEffect effect) {
         super(effect);
     }
 
@@ -51,7 +57,7 @@ class KothOfTheHammerThirdEffect extends ContinuousEffectImpl {
         switch (layer) {
             case AbilityAddingRemovingEffects_6:
                 if (sublayer == SubLayer.NA) {
-                    for (Permanent permanent : game.getBattlefield().getActivePermanents(mountains, source.getControllerId(), source.getSourceId(), game)) {
+                    for (Permanent permanent : game.getBattlefield().getActivePermanents(mountains, source.getControllerId(), source, game)) {
                         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
                         ability.addTarget(new TargetAnyTarget());
                         permanent.addAbility(ability, source.getSourceId(), game);

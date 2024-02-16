@@ -69,7 +69,7 @@ public final class Aurification extends CardImpl {
             super(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.GOLD.createInstance()));
         }
 
-        public AddGoldCountersAbility(final AddGoldCountersAbility ability) {
+        private AddGoldCountersAbility(final AddGoldCountersAbility ability) {
             super(ability);
         }
 
@@ -110,7 +110,7 @@ public final class Aurification extends CardImpl {
             this.staticText = "remove all gold counters from all creatures";
         }
 
-        public RemoveAllGoldCountersEffect(final RemoveAllGoldCountersEffect effect) {
+        private RemoveAllGoldCountersEffect(final RemoveAllGoldCountersEffect effect) {
             super(effect);
         }
 

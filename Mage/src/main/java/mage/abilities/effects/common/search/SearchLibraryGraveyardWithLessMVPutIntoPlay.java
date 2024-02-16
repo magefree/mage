@@ -16,7 +16,6 @@ import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
 
 /**
- *
  * @author antoni-g
  */
 public class SearchLibraryGraveyardWithLessMVPutIntoPlay extends OneShotEffect {
@@ -30,10 +29,10 @@ public class SearchLibraryGraveyardWithLessMVPutIntoPlay extends OneShotEffect {
     public SearchLibraryGraveyardWithLessMVPutIntoPlay(FilterCard filter) {
         super(Outcome.PutCreatureInPlay);
         this.filter = filter;
-        staticText = "Search your library and/or graveyard for a " + filter.getMessage() + " with mana value X or less, put it onto the battlefield. If you search your library this way, shuffle.";
+        staticText = "Search your library and/or graveyard for a " + filter.getMessage() + " with mana value X or less and put it onto the battlefield. If you search your library this way, shuffle.";
     }
 
-    public SearchLibraryGraveyardWithLessMVPutIntoPlay(final SearchLibraryGraveyardWithLessMVPutIntoPlay effect) {
+    protected SearchLibraryGraveyardWithLessMVPutIntoPlay(final SearchLibraryGraveyardWithLessMVPutIntoPlay effect) {
         super(effect);
         this.filter = effect.filter;
     }
@@ -48,7 +47,7 @@ public class SearchLibraryGraveyardWithLessMVPutIntoPlay extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
         Card cardFound = null;
-        if (controller != null  && sourceObject != null) {
+        if (controller != null && sourceObject != null) {
             // create x cost filter
             FilterCard advancedFilter = filter.copy(); // never change static objects so copy the object here before
             advancedFilter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, source.getManaCostsToPay().getX() + 1));
@@ -67,7 +66,7 @@ public class SearchLibraryGraveyardWithLessMVPutIntoPlay extends OneShotEffect {
             if (cardFound == null && controller.chooseUse(outcome, "Search your graveyard for a " + filter.getMessage() + " with mana value X or less" + '?', source, game)) {
                 TargetCard target = new TargetCard(0, 1, Zone.GRAVEYARD, advancedFilter);
                 target.clearChosen();
-                if (controller.choose(outcome, controller.getGraveyard(), target, game)) {
+                if (controller.choose(outcome, controller.getGraveyard(), target, source, game)) {
                     if (!target.getTargets().isEmpty()) {
                         cardFound = game.getCard(target.getFirstTarget());
                     }

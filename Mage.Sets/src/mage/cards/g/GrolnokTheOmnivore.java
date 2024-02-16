@@ -33,7 +33,7 @@ public final class GrolnokTheOmnivore extends CardImpl {
     public GrolnokTheOmnivore(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.FROG);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
@@ -62,6 +62,7 @@ class GrolnokTheOmnivoreTriggeredAbility extends TriggeredAbilityImpl {
 
     public GrolnokTheOmnivoreTriggeredAbility() {
         super(Zone.BATTLEFIELD, new GrolnokTheOmnivoreExileEffect());
+        setTriggerPhrase("Whenever a permanent card is put into your graveyard from your library, ");
     }
 
     private GrolnokTheOmnivoreTriggeredAbility(final GrolnokTheOmnivoreTriggeredAbility ability) {
@@ -89,16 +90,11 @@ class GrolnokTheOmnivoreTriggeredAbility extends TriggeredAbilityImpl {
         }
         return false;
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a permanent card is put into your graveyard from your library, ";
-    }
 }
 
 class GrolnokTheOmnivoreExileEffect extends OneShotEffect {
 
-    public GrolnokTheOmnivoreExileEffect() {
+    GrolnokTheOmnivoreExileEffect() {
         super(Outcome.Exile);
         staticText = "exile it with a croak counter on it";
     }
@@ -125,7 +121,7 @@ class GrolnokTheOmnivoreExileEffect extends OneShotEffect {
 
 class GrolnokTheOmnivorePlayEffect extends AsThoughEffectImpl {
 
-    public GrolnokTheOmnivorePlayEffect() {
+    GrolnokTheOmnivorePlayEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "You may play lands and cast spells from among cards you own in exile with croak counters on them";
     }

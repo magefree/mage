@@ -49,7 +49,7 @@ public final class SpectralSteel extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Enchanted creature gets +2/+2.
@@ -57,7 +57,7 @@ public final class SpectralSteel extends CardImpl {
 
         // {1}{W}, Exile Spectral Steel from your graveyard: Return another target Aura or Equipment card from your graveyard to your hand.
         ability = new SimpleActivatedAbility(
-                Zone.GRAVEYARD, new ReturnFromGraveyardToHandTargetEffect(), new ManaCostsImpl("{1}{W}")
+                Zone.GRAVEYARD, new ReturnFromGraveyardToHandTargetEffect(), new ManaCostsImpl<>("{1}{W}")
         );
         ability.addCost(new ExileSourceFromGraveCost());
         ability.addTarget(new TargetCardInYourGraveyard(filter));

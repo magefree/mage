@@ -1,22 +1,18 @@
-
-
 package mage.game.permanent.token;
-import mage.constants.CardType;
-import mage.constants.SubType;
+
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.keyword.ReachAbility;
-
-import java.util.Arrays;
+import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
- *
  * @author spjspj
  */
 public final class RenownedWeaverSpiderToken extends TokenImpl {
 
     public RenownedWeaverSpiderToken() {
-        super("Spider", "1/3 green Spider enchantment creature token with reach");
+        super("Spider Token", "1/3 green Spider enchantment creature token with reach");
         cardType.add(CardType.ENCHANTMENT);
         cardType.add(CardType.CREATURE);
         color.setColor(ObjectColor.GREEN);
@@ -25,11 +21,9 @@ public final class RenownedWeaverSpiderToken extends TokenImpl {
         toughness = new MageInt(3);
 
         this.addAbility(ReachAbility.getInstance());
-
-        availableImageSetCodes = Arrays.asList("JOU");
     }
 
-    public RenownedWeaverSpiderToken(final RenownedWeaverSpiderToken token) {
+    private RenownedWeaverSpiderToken(final RenownedWeaverSpiderToken token) {
         super(token);
     }
 

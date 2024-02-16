@@ -31,7 +31,7 @@ public final class FetidImp extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // {B}: Fetid Imp gains deathtouch until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{B}")));
     }
 
     private FetidImp(final FetidImp card) {

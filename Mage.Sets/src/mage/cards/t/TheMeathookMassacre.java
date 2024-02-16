@@ -27,7 +27,7 @@ public final class TheMeathookMassacre extends CardImpl {
     public TheMeathookMassacre(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{X}{B}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // When The Meathook Massacre enters the battlefield, each creature gets -X/-X until end of turn.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new BoostAllEffect(

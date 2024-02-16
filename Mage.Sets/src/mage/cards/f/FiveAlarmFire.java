@@ -16,7 +16,6 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetAnyTarget;
 
@@ -38,7 +37,7 @@ public final class FiveAlarmFire extends CardImpl {
         //Whenever a creature you control deals combat damage, put a blaze counter on Five-Alarm Fire.
         this.addAbility(new FiveAlarmFireTriggeredAbility());
         //Remove five blaze counters from Five-Alarm Fire: Five-Alarm Fire deals 5 damage to any target.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(5), new RemoveCountersSourceCost(CounterType.BLAZE.createInstance(5)));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(5, "it"), new RemoveCountersSourceCost(CounterType.BLAZE.createInstance(5)));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }
@@ -64,9 +63,10 @@ class FiveAlarmFireTriggeredAbility extends TriggeredAbilityImpl {
     
     public FiveAlarmFireTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.BLAZE.createInstance()), false);
+        setTriggerPhrase("Whenever a creature you control deals combat damage, ");
     }
 
-    public FiveAlarmFireTriggeredAbility(final FiveAlarmFireTriggeredAbility ability) {
+    private FiveAlarmFireTriggeredAbility(final FiveAlarmFireTriggeredAbility ability) {
             super(ability);
             triggeringCreatures.addAll(ability.triggeringCreatures);
     }
@@ -89,7 +89,7 @@ class FiveAlarmFireTriggeredAbility extends TriggeredAbilityImpl {
                 || event.getType() == GameEvent.EventType.DAMAGED_PLAYER) {
             if (((DamagedEvent) event).isCombatDamage() && !triggeringCreatures.contains(event.getSourceId())) {
                 Permanent permanent = game.getPermanent(event.getSourceId());
-                if (permanent != null && filter.match(permanent, sourceId, controllerId, game)) {
+                if (permanent != null && filter.match(permanent, controllerId, this, game)) {
                     triggeringCreatures.add(event.getSourceId());
                     return true;
                 }
@@ -101,10 +101,4 @@ class FiveAlarmFireTriggeredAbility extends TriggeredAbilityImpl {
         }
         return false;
     }
-
-    @Override
-    public String getTriggerPhrase() {
-            return "Whenever a creature you control deals combat damage, " ;
-    }
-
 }

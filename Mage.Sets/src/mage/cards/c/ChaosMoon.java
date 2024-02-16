@@ -81,7 +81,7 @@ class ChaosMoonEffect extends OneShotEffect {
             return false;
         }
         int permanentsInPlay = game.getBattlefield().count(
-                StaticFilters.FILTER_PERMANENT, source.getSourceId(), source.getControllerId(), game
+                StaticFilters.FILTER_PERMANENT, source.getControllerId(), source, game
         );
         // Odd
         if (permanentsInPlay % 2 == 1) {
@@ -147,11 +147,6 @@ class ChaosMoonEvenReplacementEffect extends ReplacementEffectImpl {
     @Override
     public ChaosMoonEvenReplacementEffect copy() {
         return new ChaosMoonEvenReplacementEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

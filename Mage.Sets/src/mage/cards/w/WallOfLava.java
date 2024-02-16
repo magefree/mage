@@ -31,7 +31,7 @@ public final class WallOfLava extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
 
         // {R}: Wall of Lava gets +1/+1 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl("{R}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl<>("{R}")));
     }
 
     private WallOfLava(final WallOfLava card) {

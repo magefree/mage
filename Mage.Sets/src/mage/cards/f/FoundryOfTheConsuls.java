@@ -29,7 +29,7 @@ public final class FoundryOfTheConsuls extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
         // {5}, {T}, Sacrifice Foundry of the Consuls: Create two 1/1 colorless Thopter artifact creature tokens with flying.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new ThopterColorlessToken(), 2),
-                new ManaCostsImpl("{5}"));
+                new ManaCostsImpl<>("{5}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

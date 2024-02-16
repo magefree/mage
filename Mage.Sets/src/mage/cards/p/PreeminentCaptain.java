@@ -62,7 +62,7 @@ class PreeminentCaptainEffect extends OneShotEffect {
         this.staticText = "put a Soldier creature card from your hand onto the battlefield tapped and attacking";
     }
 
-    public PreeminentCaptainEffect(final PreeminentCaptainEffect effect) {
+    private PreeminentCaptainEffect(final PreeminentCaptainEffect effect) {
         super(effect);
     }
 
@@ -70,8 +70,8 @@ class PreeminentCaptainEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         TargetCardInHand target = new TargetCardInHand(filter);
-        if (controller != null && target.canChoose(source.getSourceId(), controller.getId(), game)
-                && target.choose(outcome, controller.getId(), source.getSourceId(), game)) {
+        if (controller != null && target.canChoose(controller.getId(), source, game)
+                && target.choose(outcome, controller.getId(), source.getSourceId(), source, game)) {
             if (!target.getTargets().isEmpty()) {
                 UUID cardId = target.getFirstTarget();
                 Card card = controller.getHand().get(cardId, game);

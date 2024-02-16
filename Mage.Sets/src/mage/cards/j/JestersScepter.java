@@ -43,7 +43,7 @@ public final class JestersScepter extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new JestersScepterLookAtCardEffect()));
 
         // {2}, {tap}, Put a card exiled with Jester's Scepter into its owner's graveyard: Counter target spell if it has the same name as that card.
-        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new JestersScepterCounterEffect(), new ManaCostsImpl("{2}"));
+        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new JestersScepterCounterEffect(), new ManaCostsImpl<>("{2}"));
         ability2.addCost(new TapSourceCost());
         ability2.addCost(new JestersScepterCost());
         ability2.addTarget(new TargetSpell());
@@ -63,12 +63,12 @@ public final class JestersScepter extends CardImpl {
 
 class JestersScepterEffect extends OneShotEffect {
 
-    public JestersScepterEffect() {
+    JestersScepterEffect() {
         super(Outcome.DrawCard);
         staticText = "exile the top five cards of target player's library face down";
     }
 
-    public JestersScepterEffect(final JestersScepterEffect effect) {
+    private JestersScepterEffect(final JestersScepterEffect effect) {
         super(effect);
     }
 
@@ -76,7 +76,7 @@ class JestersScepterEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Player targetedPlayer = game.getPlayer(source.getFirstTarget());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (controller != null
                 && targetedPlayer != null
                 && sourceObject != null) {
@@ -101,12 +101,12 @@ class JestersScepterEffect extends OneShotEffect {
 
 class JestersScepterLookAtCardEffect extends AsThoughEffectImpl {
 
-    public JestersScepterLookAtCardEffect() {
+    JestersScepterLookAtCardEffect() {
         super(AsThoughEffectType.LOOK_AT_FACE_DOWN, Duration.EndOfGame, Outcome.Benefit);
         staticText = "You may look at cards exiled with {this}";
     }
 
-    public JestersScepterLookAtCardEffect(final JestersScepterLookAtCardEffect effect) {
+    private JestersScepterLookAtCardEffect(final JestersScepterLookAtCardEffect effect) {
         super(effect);
     }
 
@@ -125,7 +125,7 @@ class JestersScepterLookAtCardEffect extends AsThoughEffectImpl {
         if (affectedControllerId.equals(source.getControllerId())) {
             Card card = game.getCard(objectId);
             if (card != null) {
-                MageObject sourceObject = game.getObject(source.getSourceId());
+                MageObject sourceObject = game.getObject(source);
                 if (sourceObject == null) {
                     return false;
                 }
@@ -145,7 +145,7 @@ class JestersScepterCost extends CostImpl {
         this.text = "Put a card exiled with {this} into its owner's graveyard";
     }
 
-    public JestersScepterCost(JestersScepterCost cost) {
+    private JestersScepterCost(final JestersScepterCost cost) {
         super(cost);
     }
 
@@ -154,20 +154,20 @@ class JestersScepterCost extends CostImpl {
         Player controller = game.getPlayer(controllerId);
         if (controller != null) {
             TargetCardInExile target = new TargetCardInExile(new FilterCard(), CardUtil.getCardExileZoneId(game, ability));
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             Cards cards = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, ability));
             if (cards != null
                     && !cards.isEmpty()
-                    && controller.choose(Outcome.Benefit, cards, target, game)) {
+                    && controller.choose(Outcome.Benefit, cards, target, source, game)) {
                 Card card = game.getCard(target.getFirstTarget());
                 if (card != null) {
                     if (controller.moveCardToGraveyardWithInfo(card, source, game, Zone.EXILED)) {
                         if (card instanceof SplitCard) {
                             game.getState().setValue(source.getSourceId() + "_nameOfExiledCardPayment", ((SplitCard) card).getLeftHalfCard().getName());
                             game.getState().setValue(source.getSourceId() + "_nameOfExiledCardPayment2", ((SplitCard) card).getRightHalfCard().getName());
-                        } else if (card instanceof ModalDoubleFacesCard) {
-                            game.getState().setValue(source.getSourceId() + "_nameOfExiledCardPayment", ((ModalDoubleFacesCard) card).getLeftHalfCard().getName());
-                            game.getState().setValue(source.getSourceId() + "_nameOfExiledCardPayment2", ((ModalDoubleFacesCard) card).getRightHalfCard().getName());
+                        } else if (card instanceof ModalDoubleFacedCard) {
+                            game.getState().setValue(source.getSourceId() + "_nameOfExiledCardPayment", ((ModalDoubleFacedCard) card).getLeftHalfCard().getName());
+                            game.getState().setValue(source.getSourceId() + "_nameOfExiledCardPayment2", ((ModalDoubleFacedCard) card).getRightHalfCard().getName());
                         } else {
                             game.getState().setValue(source.getSourceId() + "_nameOfExiledCardPayment", card.getName());
                         }
@@ -198,7 +198,7 @@ class JestersScepterCounterEffect extends OneShotEffect {
         staticText = "Counter target spell if it has the same name as that card";
     }
 
-    JestersScepterCounterEffect(final JestersScepterCounterEffect effect) {
+    private JestersScepterCounterEffect(final JestersScepterCounterEffect effect) {
         super(effect);
     }
 

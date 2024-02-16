@@ -54,7 +54,7 @@ public class FixedTarget extends TargetPointerImpl {
     }
 
     /**
-     * Target counter is immediatly initialised with current zoneChangeCounter
+     * Target counter is immediately initialized with current zoneChangeCounter
      * value from the given permanent
      *
      * @param permanent
@@ -93,7 +93,7 @@ public class FixedTarget extends TargetPointerImpl {
         this.zoneChangeCounter = game.getState().getZoneChangeCounter(targetId);
     }
 
-    public FixedTarget(final FixedTarget targetPointer) {
+    protected FixedTarget(final FixedTarget targetPointer) {
         super(targetPointer);
 
         this.targetId = targetPointer.targetId;

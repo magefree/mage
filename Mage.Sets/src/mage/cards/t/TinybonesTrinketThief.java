@@ -30,7 +30,7 @@ public final class TinybonesTrinketThief extends CardImpl {
     public TinybonesTrinketThief(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SKELETON);
         this.subtype.add(SubType.ROGUE);
         this.power = new MageInt(1);
@@ -48,7 +48,7 @@ public final class TinybonesTrinketThief extends CardImpl {
         this.addAbility(ability, new TinybonesTrinketThiefWatcher());
 
         // {4}{B}{B}: Each opponent with no cards in hand loses 10 life.
-        this.addAbility(new SimpleActivatedAbility(new TinybonesTrinketThiefEffect(), new ManaCostsImpl("{4}{B}{B}")));
+        this.addAbility(new SimpleActivatedAbility(new TinybonesTrinketThiefEffect(), new ManaCostsImpl<>("{4}{B}{B}")));
     }
 
     private TinybonesTrinketThief(final TinybonesTrinketThief card) {

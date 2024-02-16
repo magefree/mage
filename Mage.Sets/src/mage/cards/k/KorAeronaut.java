@@ -39,7 +39,7 @@ public final class KorAeronaut extends CardImpl {
         //When Kor Aeronaut enters the battlefield, if it was kicked, target creature gains flying until end of turn.
         EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), false);
         ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, KickedCondition.instance, "When {this} enters the battlefield, if it was kicked, target creature gains flying until end of turn."));
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, KickedCondition.ONCE, "When {this} enters the battlefield, if it was kicked, target creature gains flying until end of turn."));
     }
 
     private KorAeronaut(final KorAeronaut card) {

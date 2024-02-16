@@ -6,7 +6,6 @@ import mage.abilities.costs.CostImpl;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.util.CardUtil;
 
@@ -18,6 +17,7 @@ import java.util.UUID;
 public class PayLifeCost extends CostImpl {
 
     private final DynamicValue amount;
+    private int lifePaid = 0;
 
     public PayLifeCost(int amount) {
         this(StaticValue.get(amount), Integer.toString(amount) + " life");
@@ -28,7 +28,7 @@ public class PayLifeCost extends CostImpl {
         this.text = "pay " + text;
     }
 
-    public PayLifeCost(PayLifeCost cost) {
+    protected PayLifeCost(final PayLifeCost cost) {
         super(cost);
         this.amount = cost.amount.copy();
     }
@@ -55,6 +55,7 @@ public class PayLifeCost extends CostImpl {
         }
         int lifeToPayAmount = amount.calculate(game, ability, null);
         this.paid = CardUtil.tryPayLife(lifeToPayAmount, controller, source, game);
+        this.lifePaid = lifeToPayAmount;
         return this.paid;
     }
 
@@ -63,4 +64,13 @@ public class PayLifeCost extends CostImpl {
         return new PayLifeCost(this);
     }
 
+    @Override
+    public void clearPaid() {
+        super.clearPaid();
+        lifePaid = 0;
+    }
+
+    public int getLifePaid() {
+        return lifePaid;
+    }
 }

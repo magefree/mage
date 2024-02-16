@@ -23,9 +23,9 @@ public final class BlinkmothInfusion extends CardImpl {
     public BlinkmothInfusion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{12}{U}{U}");
 
-
         // Affinity for artifacts
         this.addAbility(new AffinityForArtifactsAbility());
+
         // Untap all artifacts.
         this.getSpellAbility().addEffect(new UntapAllArtifactsEffect());
     }
@@ -47,20 +47,21 @@ class UntapAllArtifactsEffect extends OneShotEffect {
         staticText = "Untap all artifacts";
     }
 
-    public UntapAllArtifactsEffect(final UntapAllArtifactsEffect effect) {
+    private UntapAllArtifactsEffect(final UntapAllArtifactsEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            for (Permanent artifact: game.getBattlefield().getAllActivePermanents(new FilterArtifactPermanent(), game)) {
-                artifact.untap(game);
-            }
-            return true;
+        if (player == null) {
+            return false;
         }
-        return false;
+
+        for (Permanent artifact: game.getBattlefield().getAllActivePermanents(new FilterArtifactPermanent(), game)) {
+            artifact.untap(game);
+        }
+        return true;
     }
 
     @Override

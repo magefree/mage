@@ -35,7 +35,7 @@ public final class HydrasGrowth extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // When Hydra's Growth enters the battlefield, put a +1/+1 counter on enchanted creature.
@@ -64,7 +64,7 @@ class HydrasGrowthDoubleEffect extends OneShotEffect {
         staticText = "double the number of +1/+1 counters on enchanted creature";
     }
 
-    HydrasGrowthDoubleEffect(final HydrasGrowthDoubleEffect effect) {
+    private HydrasGrowthDoubleEffect(final HydrasGrowthDoubleEffect effect) {
         super(effect);
     }
 

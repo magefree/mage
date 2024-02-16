@@ -44,12 +44,12 @@ public final class KamahlsSummons extends CardImpl {
 
 class KamahlsSummonsEffect extends OneShotEffect {
 
-    public KamahlsSummonsEffect() {
+    KamahlsSummonsEffect() {
         super(Outcome.Benefit);
         this.staticText = "Each player may reveal any number of creature cards from their hand. Then each player creates a 2/2 green Bear creature token for each card they revealed this way";
     }
 
-    public KamahlsSummonsEffect(final KamahlsSummonsEffect effect) {
+    private KamahlsSummonsEffect(final KamahlsSummonsEffect effect) {
         super(effect);
     }
 
@@ -61,7 +61,7 @@ class KamahlsSummonsEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (controller != null && sourceObject != null) {
             Map<UUID, Integer> revealedCards = new HashMap<>();
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
@@ -69,7 +69,7 @@ class KamahlsSummonsEffect extends OneShotEffect {
                 if (player != null) {
                     if (player.getHand().count(StaticFilters.FILTER_CARD_CREATURE, game) > 0) {
                         TargetCardInHand target = new TargetCardInHand(0, Integer.MAX_VALUE, StaticFilters.FILTER_CARD_CREATURE);
-                        if (player.choose(outcome, target, source.getSourceId(), game)) {
+                        if (player.choose(outcome, target, source, game)) {
                             Cards cards = new CardsImpl(target.getTargets());
                             controller.revealCards(sourceObject.getIdName(), cards, game);
                             revealedCards.put(playerId, target.getTargets().size());

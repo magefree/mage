@@ -28,7 +28,7 @@ public final class CragPuca extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {UR}: Switch Crag Puca's power and toughness until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SwitchPowerToughnessSourceEffect(Duration.EndOfTurn), new ManaCostsImpl("{U/R}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SwitchPowerToughnessSourceEffect(Duration.EndOfTurn), new ManaCostsImpl<>("{U/R}")));
         
     }
 

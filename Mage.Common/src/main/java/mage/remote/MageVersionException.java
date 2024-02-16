@@ -8,18 +8,10 @@ import mage.utils.MageVersion;
  */
 public class MageVersionException extends MageException {
 
-    private final MageVersion serverVersion;
-
     public MageVersionException(MageVersion clientVersion, MageVersion serverVersion) {
         super("Wrong client version."
                 + "<br/>Your version: " + clientVersion
-                + "<br/>Server version: " + serverVersion
-                + "<br/>Release app download: http://xmage.de"
-                + "<br/>BETA app download: http://xmage.today");
-        this.serverVersion = serverVersion;
-    }
-
-    public MageVersion getServerVersion() {
-        return serverVersion;
+                + "<br/>Server version: " + (serverVersion == null ? "unknown" : serverVersion)
+                + "<br/>App download: http://xmage.today");
     }
 }

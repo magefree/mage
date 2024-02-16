@@ -60,12 +60,12 @@ public final class SkyshroudWarBeast extends CardImpl {
 
 class SkyshroudWarBeastEffect extends ContinuousEffectImpl {
 
-    public SkyshroudWarBeastEffect() {
+    SkyshroudWarBeastEffect() {
         super(Duration.EndOfGame, Layer.PTChangingEffects_7, SubLayer.CharacteristicDefining_7a, Outcome.BoostCreature);
         staticText = "{this}'s power and toughness are each equal to the number of nonbasic lands the chosen player controls";
     }
 
-    public SkyshroudWarBeastEffect(final SkyshroudWarBeastEffect effect) {
+    private SkyshroudWarBeastEffect(final SkyshroudWarBeastEffect effect) {
         super(effect);
     }
 
@@ -77,18 +77,18 @@ class SkyshroudWarBeastEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            MageObject target = game.getObject(source.getSourceId());
-            if (target != null) {
-                UUID playerId = (UUID) game.getState().getValue(source.getSourceId().toString() + ChooseOpponentEffect.VALUE_KEY);
-                FilterLandPermanent filter = FilterLandPermanent.nonbasicLand();
-                filter.add(new ControllerIdPredicate(playerId));
-                int number = new PermanentsOnBattlefieldCount(filter).calculate(game, source, this);
-                target.getPower().setValue(number);
-                target.getToughness().setValue(number);
-                return true;
-            }
+        MageObject target = game.getObject(source);
+        if (controller == null || target == null) {
+            return false;
         }
-        return false;
+
+        UUID playerId = (UUID) game.getState().getValue(source.getSourceId().toString() + ChooseOpponentEffect.VALUE_KEY);
+        FilterLandPermanent filter = FilterLandPermanent.nonbasicLand();
+        filter.add(new ControllerIdPredicate(playerId));
+
+        int number = new PermanentsOnBattlefieldCount(filter).calculate(game, source, this);
+        target.getPower().setModifiedBaseValue(number);
+        target.getToughness().setModifiedBaseValue(number);
+        return true;
     }
 }

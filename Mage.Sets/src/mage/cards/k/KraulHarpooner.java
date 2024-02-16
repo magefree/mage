@@ -7,14 +7,10 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.constants.SubType;
+import mage.constants.*;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
@@ -53,7 +49,7 @@ public final class KraulHarpooner extends CardImpl {
                 new KraulHarpoonerEffect(), false
         );
         ability.addTarget(new TargetPermanent(0, 1, filter, false));
-        ability.withFlavorWord("Undergrowth");
+        ability.setAbilityWord(AbilityWord.UNDERGROWTH);
         this.addAbility(ability);
     }
 
@@ -69,7 +65,7 @@ public final class KraulHarpooner extends CardImpl {
 
 class KraulHarpoonerEffect extends OneShotEffect {
 
-    public KraulHarpoonerEffect() {
+    KraulHarpoonerEffect() {
         super(Outcome.Benefit);
         this.staticText = "choose up to one target creature with flying "
                 + "you don't control. {this} gets +X/+0 until end of turn, "
@@ -77,7 +73,7 @@ class KraulHarpoonerEffect extends OneShotEffect {
                 + "then you may have {this} fight that creature.";
     }
 
-    public KraulHarpoonerEffect(final KraulHarpoonerEffect effect) {
+    private KraulHarpoonerEffect(final KraulHarpoonerEffect effect) {
         super(effect);
     }
 

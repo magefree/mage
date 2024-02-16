@@ -5,7 +5,9 @@ import mage.abilities.Ability;
 import mage.abilities.common.MutatesSourceTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.CreateTokenControllerTargetPermanentEffect;
 import mage.abilities.effects.common.CreateTokenTargetEffect;
+import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.MutateAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
@@ -49,7 +51,8 @@ public final class SawtuskDemolisher extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Whenever this creature mutates, destroy target noncreature permanent. Its controller creates a 3/3 green Beast creature token.
-        Ability ability = new MutatesSourceTriggeredAbility(new SawtuskDemolisherEffect());
+        Ability ability = new MutatesSourceTriggeredAbility(new DestroyTargetEffect());
+        ability.addEffect(new CreateTokenControllerTargetPermanentEffect(new BeastToken()));
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }

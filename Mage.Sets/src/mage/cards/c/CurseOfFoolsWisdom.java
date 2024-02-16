@@ -37,15 +37,15 @@ public final class CurseOfFoolsWisdom extends CardImpl {
         // Enchant player
         TargetPlayer auraTarget = new TargetPlayer();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Whenever enchanted player draws a card, they lose 2 life and you gain 2 life.
         this.addAbility(new CurseOfFoolsWisdomTriggeredAbility());
 
         // Madness {3}{B}
-        this.addAbility(new MadnessAbility(this, new ManaCostsImpl("{3}{B}")));
+        this.addAbility(new MadnessAbility(new ManaCostsImpl<>("{3}{B}")));
     }
 
     private CurseOfFoolsWisdom(final CurseOfFoolsWisdom card) {

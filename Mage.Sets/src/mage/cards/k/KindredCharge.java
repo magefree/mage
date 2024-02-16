@@ -48,13 +48,13 @@ public final class KindredCharge extends CardImpl {
 
 class KindredChargeEffect extends OneShotEffect {
 
-    public KindredChargeEffect() {
+    KindredChargeEffect() {
         super(Outcome.Copy);
         this.staticText = "For each creature you control of the chosen type, create a token that's a copy of that creature. "
                 + "Those tokens gain haste. Exile them at the beginning of the next end step";
     }
 
-    public KindredChargeEffect(final KindredChargeEffect effect) {
+    private KindredChargeEffect(final KindredChargeEffect effect) {
         super(effect);
     }
 
@@ -66,7 +66,7 @@ class KindredChargeEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (controller != null && sourceObject != null) {
             SubType subType = ChooseCreatureTypeEffect.getChosenCreatureType(source.getSourceId(), game);
             if (subType != null) {

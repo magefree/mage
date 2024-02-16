@@ -66,7 +66,7 @@ class AWingAttacksNextCombatIfAbleSourceEffect extends RequirementEffect {
         staticText = "It must attack on your next combat if able";
     }
 
-    public AWingAttacksNextCombatIfAbleSourceEffect(final AWingAttacksNextCombatIfAbleSourceEffect effect) {
+    private AWingAttacksNextCombatIfAbleSourceEffect(final AWingAttacksNextCombatIfAbleSourceEffect effect) {
         super(effect);
         this.turnNumber = effect.turnNumber;
         this.phaseCount = effect.phaseCount;

@@ -31,7 +31,7 @@ public final class MawOfKozilek extends CardImpl {
         this.addAbility(new DevoidAbility(this.color));
 
         // {C}: Maw of Kozilek gets +2/-2 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, -2, Duration.EndOfTurn), new ManaCostsImpl("{C}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, -2, Duration.EndOfTurn), new ManaCostsImpl<>("{C}")));
     }
 
     private MawOfKozilek(final MawOfKozilek card) {

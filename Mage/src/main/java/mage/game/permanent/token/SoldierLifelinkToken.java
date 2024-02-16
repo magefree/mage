@@ -6,13 +6,12 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 
 /**
- *
  * @author TheElk801
  */
 public final class SoldierLifelinkToken extends TokenImpl {
 
     public SoldierLifelinkToken() {
-        super("Soldier", "1/1 white Soldier creature token with lifelink");
+        super("Soldier Token", "1/1 white Soldier creature token with lifelink");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
         subtype.add(SubType.SOLDIER);
@@ -21,7 +20,7 @@ public final class SoldierLifelinkToken extends TokenImpl {
         addAbility(LifelinkAbility.getInstance());
     }
 
-    public SoldierLifelinkToken(final SoldierLifelinkToken token) {
+    private SoldierLifelinkToken(final SoldierLifelinkToken token) {
         super(token);
     }
 

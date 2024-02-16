@@ -40,6 +40,7 @@ public final class LandscaperColos extends CardImpl {
                 false, "put target card from an opponent's graveyard on the bottom of their library"
         ));
         ability.addTarget(new TargetCardInGraveyard());
+        this.addAbility(ability);
 
         // Basic landcycling {1}{W}
         this.addAbility(new BasicLandcyclingAbility(new ManaCostsImpl<>("{1}{W}")));

@@ -20,10 +20,11 @@ public class RemoveCounterCostTest extends CardTestPlayerBase {
         // {1}, Remove two +1/+1 counters from among creatures you control: Draw a card.        
         addCard(Zone.HAND, playerA, "Novijen Sages");
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Novijen Sages");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Novijen Sages", true);
         
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}, Remove two +1/+1 counters");
         setChoice(playerA, "X=2");
+
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 

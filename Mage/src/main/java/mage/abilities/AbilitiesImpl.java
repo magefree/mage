@@ -24,11 +24,16 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
 
     private static final ThreadLocalStringBuilder threadLocalBuilder = new ThreadLocalStringBuilder(200);
 
+    public AbilitiesImpl() {
+        // fast constructor
+    }
+
     public AbilitiesImpl(T... abilities) {
         Collections.addAll(this, abilities);
     }
 
     public AbilitiesImpl(final AbilitiesImpl<T> abilities) {
+        this.ensureCapacity(abilities.size());
         for (T ability : abilities) {
             this.add((T) ability.copy());
         }
@@ -132,14 +137,6 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
                 .filter(ability -> ability.getZone().match(zone))
                 .map(ActivatedManaAbilityImpl.class::cast)
                 .filter(ability -> ability.canActivate(playerId, game).canActivate())
-                .collect(Collectors.toCollection(AbilitiesImpl::new));
-    }
-
-    @Override
-    public Abilities<Ability> getManaAbilities(Zone zone) {
-        return stream()
-                .filter(ability -> ability.getAbilityType() == AbilityType.MANA)
-                .filter(ability -> ability.getZone().match(zone))
                 .collect(Collectors.toCollection(AbilitiesImpl::new));
     }
 

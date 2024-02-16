@@ -38,7 +38,7 @@ public final class WildDogs extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new WildDogsEffect(), TargetController.YOU, false));
 
         // Cycling {2}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
     private WildDogs(final WildDogs card) {
@@ -53,12 +53,12 @@ public final class WildDogs extends CardImpl {
 
 class WildDogsEffect extends OneShotEffect {
 
-    public WildDogsEffect() {
+    WildDogsEffect() {
         super(Outcome.GainControl);
         this.staticText = "the player with the most life gains control of {this}";
     }
 
-    public WildDogsEffect(final WildDogsEffect effect) {
+    private WildDogsEffect(final WildDogsEffect effect) {
         super(effect);
     }
 

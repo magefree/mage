@@ -28,6 +28,5 @@ public class FootlightFiendTest extends CardTestPlayerBase {
         assertLife(playerB, 20);
         assertGraveyardCount(playerA, "Footlight Fiend", 1);
         assertGraveyardCount(playerB, "Grizzly Bears", 1);
-        assertAllCommandsUsed();
     }
 }

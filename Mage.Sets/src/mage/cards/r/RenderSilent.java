@@ -1,10 +1,8 @@
-
 package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -12,8 +10,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.MulticoloredPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
@@ -26,12 +22,6 @@ import mage.target.targetpointer.FixedTarget;
  * @author LevelX2
  */
 public final class RenderSilent extends CardImpl {
-
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("multicolored permanent");
-
-    static {
-        filter.add(MulticoloredPredicate.instance);
-    }
 
     public RenderSilent(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}{U}{U}");
@@ -54,11 +44,12 @@ public final class RenderSilent extends CardImpl {
 
 class RenderSilentCounterEffect extends OneShotEffect {
 
-    public RenderSilentCounterEffect() {
+    RenderSilentCounterEffect() {
         super(Outcome.Detriment);
+        staticText = "counter target spell";
     }
 
-    public RenderSilentCounterEffect(final RenderSilentCounterEffect effect) {
+    private RenderSilentCounterEffect(final RenderSilentCounterEffect effect) {
         super(effect);
     }
 
@@ -77,21 +68,16 @@ class RenderSilentCounterEffect extends OneShotEffect {
         return false;
     }
 
-    @Override
-    public String getText(Mode mode) {
-        return "Counter target " + mode.getTargets().get(0).getTargetName();
-    }
-
 }
 
 class RenderSilentEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public RenderSilentEffect() {
+    RenderSilentEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit);
         staticText = "Its controller can't cast spells this turn";
     }
 
-    public RenderSilentEffect(final RenderSilentEffect effect) {
+    private RenderSilentEffect(final RenderSilentEffect effect) {
         super(effect);
     }
 
@@ -101,13 +87,8 @@ class RenderSilentEffect extends ContinuousRuleModifyingEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (mageObject != null) {
             return "You can't cast spells this turn (" + mageObject.getIdName() + ").";
         }
@@ -122,10 +103,7 @@ class RenderSilentEffect extends ContinuousRuleModifyingEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
-        if (player != null && player.getId().equals(event.getPlayerId())) {
-            return true;
-        }
-        return false;
+        return player != null && player.getId().equals(event.getPlayerId());
     }
 
 }

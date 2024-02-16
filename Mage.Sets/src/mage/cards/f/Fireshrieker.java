@@ -29,7 +29,7 @@ public final class Fireshrieker extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(DoubleStrikeAbility.getInstance(), AttachmentType.EQUIPMENT)));
 
         // Equip {2}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new ManaCostsImpl("{2}")));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new ManaCostsImpl<>("{2}")));
     }
 
     private Fireshrieker(final Fireshrieker card) {

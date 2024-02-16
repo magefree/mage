@@ -30,7 +30,7 @@ public final class SteepleCreeper extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(
                 new GainAbilitySourceEffect(
                         FlyingAbility.getInstance(), Duration.EndOfTurn
-                ), new ManaCostsImpl("{3}{U}")
+                ), new ManaCostsImpl<>("{3}{U}")
         ));
     }
 

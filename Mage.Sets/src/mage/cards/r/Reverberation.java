@@ -48,12 +48,12 @@ public final class Reverberation extends CardImpl {
 
 class ReverberationEffect extends ReplacementEffectImpl {
 
-    public ReverberationEffect() {
+    ReverberationEffect() {
         super(Duration.EndOfTurn, Outcome.RedirectDamage);
         staticText = "All damage that would be dealt this turn by target sorcery spell is dealt to that spell's controller instead";
     }
 
-    public ReverberationEffect(final ReverberationEffect effect) {
+    private ReverberationEffect(final ReverberationEffect effect) {
         super(effect);
     }
 
@@ -66,11 +66,6 @@ class ReverberationEffect extends ReplacementEffectImpl {
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.DAMAGE_PERMANENT ||
                 event.getType() == GameEvent.EventType.DAMAGE_PLAYER;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

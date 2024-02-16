@@ -40,7 +40,7 @@ public final class WheelOfSunAndMoon extends CardImpl {
         TargetPlayer auraTarget = new TargetPlayer();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // If a card would be put into enchanted player's graveyard from anywhere, instead that card is revealed and put on the bottom of that player's library.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new WheelOfSunAndMoonEffect()));
@@ -58,12 +58,12 @@ public final class WheelOfSunAndMoon extends CardImpl {
 
 class WheelOfSunAndMoonEffect extends ReplacementEffectImpl {
 
-    public WheelOfSunAndMoonEffect() {
+    WheelOfSunAndMoonEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "If a card would be put into enchanted player's graveyard from anywhere, instead that card is revealed and put on the bottom of that player's library";
     }
 
-    public WheelOfSunAndMoonEffect(final WheelOfSunAndMoonEffect effect) {
+    private WheelOfSunAndMoonEffect(final WheelOfSunAndMoonEffect effect) {
         super(effect);
     }
 
@@ -96,7 +96,7 @@ class WheelOfSunAndMoonEffect extends ReplacementEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (controller != null && sourceObject != null) {
             Card card = game.getCard(event.getTargetId());
             if (card != null) {

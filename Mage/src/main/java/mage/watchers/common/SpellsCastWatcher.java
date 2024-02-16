@@ -13,6 +13,7 @@ import mage.game.stack.Spell;
 import mage.watchers.Watcher;
 
 import java.util.*;
+import java.util.stream.Stream;
 
 /**
  * @author LevelX2
@@ -23,6 +24,9 @@ public class SpellsCastWatcher extends Watcher {
     private final Map<UUID, List<Spell>> spellsCastFromGraveyard = new HashMap<>();
     private int nonCreatureSpells;
 
+    /**
+     * Game default watcher
+     */
     public SpellsCastWatcher() {
         super(WatcherScope.GAME);
     }
@@ -59,6 +63,10 @@ public class SpellsCastWatcher extends Watcher {
         spellsCastFromGraveyard.clear();
     }
 
+    public Stream<Spell> getAllSpellsCastThisTurn() {
+        return spellsCast.values().stream().flatMap(Collection::stream);
+    }
+
     public List<Spell> getSpellsCastThisTurn(UUID playerId) {
         return spellsCast.computeIfAbsent(playerId, x -> new ArrayList<>());
     }
@@ -84,4 +92,9 @@ public class SpellsCastWatcher extends Watcher {
         }
         return null;
     }
+
+    public int getCount(UUID playerId) {
+        return spellsCast.getOrDefault(playerId, new ArrayList<>()).size();
+    }
+
 }

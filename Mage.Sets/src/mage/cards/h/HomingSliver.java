@@ -40,7 +40,7 @@ public final class HomingSliver extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new HomingSliverEffect()));
         
         // Slivercycling {3}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{3}"), filter, "Slivercycling"));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{3}"), filter, "Slivercycling"));
     }
 
     private HomingSliver(final HomingSliver card) {
@@ -66,7 +66,7 @@ class HomingSliverEffect extends ContinuousEffectImpl {
         this.staticText = "each Sliver card in each player's hand has slivercycling {3}";
     }
 
-    public HomingSliverEffect(final HomingSliverEffect effect) {
+    private HomingSliverEffect(final HomingSliverEffect effect) {
         super(effect);
     }
 

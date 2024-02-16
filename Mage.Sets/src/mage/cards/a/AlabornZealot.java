@@ -1,16 +1,15 @@
-
 package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.BlocksSourceTriggeredAbility;
+import mage.abilities.TriggeredAbility;
+import mage.abilities.common.BlocksCreatureTriggeredAbility;
 import mage.abilities.effects.common.DestroySourceEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -27,8 +26,11 @@ public final class AlabornZealot extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Alaborn Zealot blocks a creature, destroy that creature and Alaborn Zealot.
-        Ability ability = new BlocksSourceTriggeredAbility(new DestroyTargetEffect().setText("destroy that creature"), false, true, true);
+        TriggeredAbility ability = new BlocksCreatureTriggeredAbility(
+                new DestroyTargetEffect().setText("destroy that creature")
+        );
         ability.addEffect(new DestroySourceEffect().setText("and {this}"));
+        ability.setTriggerPhrase("When {this} blocks a creature, ");
         this.addAbility(ability);
     }
 

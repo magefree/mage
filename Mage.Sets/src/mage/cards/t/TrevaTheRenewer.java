@@ -30,7 +30,7 @@ public final class TrevaTheRenewer extends CardImpl {
 
     public TrevaTheRenewer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{W}{U}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DRAGON);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
@@ -38,7 +38,7 @@ public final class TrevaTheRenewer extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Whenever Treva, the Renewer deals combat damage to a player, you may pay {2}{W}. If you do, choose a color, then you gain 1 life for each permanent of that color.
-        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DoIfCostPaid(new TrevaTheRenewerEffect(), new ManaCostsImpl("{2}{W}")), false));
+        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DoIfCostPaid(new TrevaTheRenewerEffect(), new ManaCostsImpl<>("{2}{W}")), false));
     }
 
     private TrevaTheRenewer(final TrevaTheRenewer card) {
@@ -53,12 +53,12 @@ public final class TrevaTheRenewer extends CardImpl {
 
 class TrevaTheRenewerEffect extends OneShotEffect {
 
-    public TrevaTheRenewerEffect() {
+    TrevaTheRenewerEffect() {
         super(Outcome.Benefit);
         this.staticText = "choose a color, then you gain 1 life for each permanent of that color.";
     }
 
-    public TrevaTheRenewerEffect(final TrevaTheRenewerEffect effect) {
+    private TrevaTheRenewerEffect(final TrevaTheRenewerEffect effect) {
         super(effect);
     }
 
@@ -78,7 +78,7 @@ class TrevaTheRenewerEffect extends OneShotEffect {
             game.informPlayers(controller.getLogName() + " chooses " + choice.getColor());
             FilterPermanent filter = new FilterPermanent();
             filter.add(new ColorPredicate(choice.getColor()));
-            int cardsWithColor = game.getBattlefield().count(filter, source.getSourceId(), controller.getId(), game);
+            int cardsWithColor = game.getBattlefield().count(filter, controller.getId(), source, game);
             if (cardsWithColor > 0) {
                 new GainLifeEffect(cardsWithColor).apply(game, source);
             }

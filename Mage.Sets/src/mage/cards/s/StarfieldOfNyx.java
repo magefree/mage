@@ -100,7 +100,7 @@ public final class StarfieldOfNyx extends CardImpl {
 
         }
 
-        public StarfieldOfNyxEffect(final StarfieldOfNyxEffect effect) {
+        private StarfieldOfNyxEffect(final StarfieldOfNyxEffect effect) {
             super(effect);
         }
 
@@ -112,7 +112,7 @@ public final class StarfieldOfNyx extends CardImpl {
         @Override
         public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
             for (Permanent permanent : game.getBattlefield().getActivePermanents(filter,
-                    source.getControllerId(), source.getSourceId(), game)) {
+                    source.getControllerId(), source, game)) {
                 switch (layer) {
                     case TypeChangingEffects_4:
                         if (sublayer == SubLayer.NA) {
@@ -128,8 +128,8 @@ public final class StarfieldOfNyx extends CardImpl {
                                 && permanent.isCreature(game)
                                 && !permanent.hasSubtype(SubType.AURA, game)) {
                             int manaCost = permanent.getManaValue();
-                            permanent.getPower().setValue(manaCost);
-                            permanent.getToughness().setValue(manaCost);
+                            permanent.getPower().setModifiedBaseValue(manaCost);
+                            permanent.getToughness().setModifiedBaseValue(manaCost);
                         }
                         break;
                 }

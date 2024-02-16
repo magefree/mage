@@ -34,7 +34,7 @@ public final class EasyPrey extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
 
         // Cycling {2}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
     private EasyPrey(final EasyPrey card) {

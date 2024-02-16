@@ -25,7 +25,7 @@ public final class RoarOfTheWurm extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new WurmToken()));
 
         // Flashback {3}{G}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{3}{G}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{3}{G}")));
     }
 
     private RoarOfTheWurm(final RoarOfTheWurm card) {

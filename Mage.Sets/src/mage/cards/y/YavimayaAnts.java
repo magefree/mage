@@ -30,7 +30,7 @@ public final class YavimayaAnts extends CardImpl {
         // Haste
         this.addAbility(HasteAbility.getInstance());
         // Cumulative upkeep {G}{G}
-        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{G}{G}")));
+        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{G}{G}")));
     }
 
     private YavimayaAnts(final YavimayaAnts card) {

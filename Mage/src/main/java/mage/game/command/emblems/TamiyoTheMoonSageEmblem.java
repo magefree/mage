@@ -23,7 +23,7 @@ public final class TamiyoTheMoonSageEmblem extends Emblem {
      */
 
     public TamiyoTheMoonSageEmblem() {
-        this.setName("Emblem Tamiyo");
+        super("Emblem Tamiyo");
         this.getAbilities().add(new SimpleStaticAbility(Zone.COMMAND, new MaximumHandSizeControllerEffect(
                 Integer.MAX_VALUE, Duration.Custom, HandSizeModification.SET
         )));
@@ -31,5 +31,14 @@ public final class TamiyoTheMoonSageEmblem extends Emblem {
                 Zone.COMMAND, new ReturnToHandTargetEffect().setText("return it to your hand"),
                 true, StaticFilters.FILTER_CARD_A, TargetController.YOU, SetTargetPointer.CARD
         ));
+    }
+
+    private TamiyoTheMoonSageEmblem(final TamiyoTheMoonSageEmblem card) {
+        super(card);
+    }
+
+    @Override
+    public TamiyoTheMoonSageEmblem copy() {
+        return new TamiyoTheMoonSageEmblem(this);
     }
 }

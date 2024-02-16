@@ -1,30 +1,17 @@
-
 package mage.game.permanent.token;
 
-import java.util.Arrays;
-
+import mage.MageInt;
+import mage.abilities.mana.GreenManaAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.MageInt;
-import mage.ObjectColor;
-import mage.abilities.mana.GreenManaAbility;
 
 /**
- *
  * @author spjspj
  */
 public final class ElfDruidToken extends TokenImpl {
 
     public ElfDruidToken() {
-        this(null, 0);
-    }
-
-    public ElfDruidToken(String setCode) {
-        this(setCode, 0);
-    }
-
-    public ElfDruidToken(String setCode, int tokenType) {
-        super("Elf Druid", "1/1 green Elf Druid creature token with \"{T}: Add {G}.\"");
+        super("Elf Druid Token", "1/1 green Elf Druid creature token with \"{T}: Add {G}.\"");
         this.cardType.add(CardType.CREATURE);
         this.color.setGreen(true);
         this.subtype.add(SubType.ELF);
@@ -35,11 +22,9 @@ public final class ElfDruidToken extends TokenImpl {
 
         // {T}: Add {G}.
         this.addAbility(new GreenManaAbility());
-
-        availableImageSetCodes = Arrays.asList("C14");
     }
 
-    public ElfDruidToken(final ElfDruidToken token) {
+    private ElfDruidToken(final ElfDruidToken token) {
         super(token);
     }
 

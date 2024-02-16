@@ -26,9 +26,8 @@ public class BronzehideLionTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Terror", lion);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
         assertGraveyardCount(playerA, lion, 0);
-        assertIsAttachedTo(playerA, lion, "Grizzly Bears");
+        assertAttachedTo(playerA, lion, "Grizzly Bears", true);
     }
 
 
@@ -42,7 +41,6 @@ public class BronzehideLionTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Terror", lion);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
         assertGraveyardCount(playerA, lion, 1);
     }
 }

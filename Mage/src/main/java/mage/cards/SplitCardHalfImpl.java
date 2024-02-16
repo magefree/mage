@@ -21,7 +21,7 @@ public class SplitCardHalfImpl extends CardImpl implements SplitCardHalf {
         this.splitCardParent = splitCardParent;
     }
 
-    public SplitCardHalfImpl(final SplitCardHalfImpl card) {
+    protected SplitCardHalfImpl(final SplitCardHalfImpl card) {
         super(card);
         this.splitCardParent = card.splitCardParent;
     }
@@ -29,11 +29,6 @@ public class SplitCardHalfImpl extends CardImpl implements SplitCardHalf {
     @Override
     public UUID getOwnerId() {
         return splitCardParent.getOwnerId();
-    }
-
-    @Override
-    public String getImageName() {
-        return splitCardParent.getImageName();
     }
 
     @Override
@@ -74,7 +69,7 @@ public class SplitCardHalfImpl extends CardImpl implements SplitCardHalf {
     }
 
     @Override
-    public SplitCardHalf copy() {
+    public SplitCardHalfImpl copy() {
         return new SplitCardHalfImpl(this);
     }
 

@@ -13,11 +13,17 @@ import mage.players.Player;
 public class RevealTopLandToBattlefieldElseHandEffect extends OneShotEffect {
 
     public RevealTopLandToBattlefieldElseHandEffect() {
-        super(Outcome.DrawCard);
-        this.staticText = "reveal the top card of your library. If it's a land card, put it onto the battlefield. Otherwise, put that card into your hand";
+        this("that card");
     }
 
-    public RevealTopLandToBattlefieldElseHandEffect(final RevealTopLandToBattlefieldElseHandEffect effect) {
+    public RevealTopLandToBattlefieldElseHandEffect(String cardTextOtherwise) {
+        super(Outcome.DrawCard);
+        this.staticText = "reveal the top card of your library. "
+                + "If it's a land card, put it onto the battlefield. "
+                + "Otherwise, put " + cardTextOtherwise + " into your hand";
+    }
+
+    protected RevealTopLandToBattlefieldElseHandEffect(final RevealTopLandToBattlefieldElseHandEffect effect) {
         super(effect);
     }
 
@@ -29,7 +35,7 @@ public class RevealTopLandToBattlefieldElseHandEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (sourceObject == null || controller == null) {
             return false;
         }

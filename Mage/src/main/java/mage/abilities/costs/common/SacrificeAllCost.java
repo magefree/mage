@@ -1,23 +1,23 @@
-
 package mage.abilities.costs.common;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
+import mage.abilities.costs.SacrificeCost;
 import mage.constants.AbilityType;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
-public class SacrificeAllCost extends CostImpl {
+public class SacrificeAllCost extends CostImpl implements SacrificeCost {
 
     private final FilterPermanent filter;
     private final List<Permanent> permanents = new ArrayList<>();
@@ -27,7 +27,7 @@ public class SacrificeAllCost extends CostImpl {
         this.text = "Sacrifice all " + filter.getMessage();
     }
 
-    public SacrificeAllCost(final SacrificeAllCost cost) {
+    protected SacrificeAllCost(final SacrificeAllCost cost) {
         super(cost);
         this.permanents.addAll(cost.permanents); // because this are already copied permanents, they can't change, so no copy again is needed
         this.filter = cost.filter.copy();
@@ -50,10 +50,7 @@ public class SacrificeAllCost extends CostImpl {
         if (ability.getAbilityType() == AbilityType.ACTIVATED || ability.getAbilityType() == AbilityType.SPECIAL_ACTION) {
             if (((ActivatedAbilityImpl) ability).getActivatorId() != null) {
                 activator = ((ActivatedAbilityImpl) ability).getActivatorId();
-            } else {
-                // Aktivator not filled?
-                activator = controllerId;
-            }
+            }  // else, Activator not filled?
         }
 
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, controllerId, game)) {

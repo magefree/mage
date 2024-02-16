@@ -52,20 +52,27 @@
             <artifactId>mage-game-freeforall</artifactId>
             <version>${project.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+        </dependency>
         <dependency>
             <groupId>com.sun.xml.bind</groupId>
             <artifactId>jaxb-impl</artifactId>
-            <version>3.0.2</version>
         </dependency>
         <dependency>
             <!-- server xml config needs optional dependency for jaxb-impl -->
             <groupId>org.glassfish.jaxb</groupId>
-            <artifactId>jaxb-runtime</artifactId>
-            <version>3.0.2</version>
+            <artifactId>jaxb-core</artifactId>
         </dependency>
         <dependency>
             <groupId>net.java.truevfs</groupId>
             <artifactId>truevfs-profile-base</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jsoup</groupId>
+            <artifactId>jsoup</artifactId>
         </dependency>
     </dependencies>
 
@@ -104,10 +111,36 @@
                     </filesets>
                 </configuration>
             </plugin>
+
+            <!-- empty project for tests, so ignore build lifecycle -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <skipIfEmpty>true</skipIfEmpty>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-install-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
         </plugins>
+
         <finalName>mage-tests</finalName>
     </build>
 
-    <properties/>
+    <properties>
+        <root.dir>${project.basedir}/..</root.dir>
+    </properties>
 
 </project>

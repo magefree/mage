@@ -44,7 +44,7 @@ class BiorhythmEffect extends OneShotEffect {
         this.staticText = "Each player's life total becomes the number of creatures they control";
     }
 
-    public BiorhythmEffect(final BiorhythmEffect effect) {
+    private BiorhythmEffect(final BiorhythmEffect effect) {
         super(effect);
     }
 

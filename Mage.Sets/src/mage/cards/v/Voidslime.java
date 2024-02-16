@@ -19,7 +19,7 @@ public final class Voidslime extends CardImpl {
 
 
         // Counter target spell, activated ability, or triggered ability.
-        this.getSpellAbility().addEffect(new CounterTargetEffect());
+        this.getSpellAbility().addEffect(new CounterTargetEffect().setText("Counter target spell, activated ability, or triggered ability"));
         this.getSpellAbility().addTarget(new TargetStackObject());
     }
 

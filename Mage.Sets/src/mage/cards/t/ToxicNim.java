@@ -28,7 +28,7 @@ public final class ToxicNim extends CardImpl {
         this.toughness = new MageInt(1);
 
         this.addAbility(InfectAbility.getInstance());
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{B}")));
     }
 
     private ToxicNim(final ToxicNim card) {

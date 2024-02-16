@@ -38,7 +38,7 @@ public final class SpellweaverVolute extends CardImpl {
         TargetCardInGraveyard auraTarget = new TargetCardInGraveyard(filter);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Whenever you cast a sorcery spell, copy the enchanted instant card. 
@@ -62,13 +62,13 @@ public final class SpellweaverVolute extends CardImpl {
 
 class SpellweaverVoluteEffect extends OneShotEffect {
 
-    public SpellweaverVoluteEffect() {
+    SpellweaverVoluteEffect() {
         super(Outcome.PlayForFree);
-        this.staticText = "copy the enchanted instant card. You may cast the copy without paying its mana cost. \n"
+        this.staticText = "copy the enchanted instant card. You may cast the copy without paying its mana cost. "
                 + "If you do, exile the enchanted card and attach {this} to another instant card in a graveyard";
     }
 
-    public SpellweaverVoluteEffect(final SpellweaverVoluteEffect effect) {
+    private SpellweaverVoluteEffect(final SpellweaverVoluteEffect effect) {
         super(effect);
     }
 
@@ -90,8 +90,6 @@ class SpellweaverVoluteEffect extends OneShotEffect {
                             && controller.chooseUse(Outcome.Copy, "Create a copy of " + enchantedCard.getName() + '?', source, game)) {
                         Card copiedCard = game.copyCard(enchantedCard, source, source.getControllerId());
                         if (copiedCard != null) {
-                            controller.getGraveyard().add(copiedCard);
-                            game.getState().setZone(copiedCard.getId(), Zone.GRAVEYARD);
                             if (controller.chooseUse(Outcome.PlayForFree, "Cast the copied card without paying mana cost?", source, game)) {
                                 if (copiedCard.getSpellAbility() != null) {
                                     game.getState().setValue("PlayFromNotOwnHandZone" + copiedCard.getId(), Boolean.TRUE);
@@ -103,8 +101,8 @@ class SpellweaverVoluteEffect extends OneShotEffect {
                                     FilterCard filter = new FilterCard("instant card in a graveyard");
                                     filter.add(CardType.INSTANT.getPredicate());
                                     TargetCardInGraveyard auraTarget = new TargetCardInGraveyard(filter);
-                                    if (auraTarget.canChoose(source.getSourceId(), controller.getId(), game)) {
-                                        controller.choose(Outcome.Benefit, auraTarget, source.getSourceId(), game);
+                                    if (auraTarget.canChoose(controller.getId(), source, game)) {
+                                        controller.choose(Outcome.Benefit, auraTarget, source, game);
                                         Card newAuraTarget = game.getCard(auraTarget.getFirstTarget());
                                         if (newAuraTarget != null) {
                                             if (enchantedCard.getId().equals(newAuraTarget.getId())) {

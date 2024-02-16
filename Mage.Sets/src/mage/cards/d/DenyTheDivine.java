@@ -4,7 +4,7 @@ import mage.abilities.effects.common.CounterTargetWithReplacementEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
+import mage.constants.PutCards;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.target.TargetSpell;
@@ -29,7 +29,7 @@ public final class DenyTheDivine extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{U}");
 
         // Counter target creature or enchantment spell. If that spell is countered this way, exile it instead of putting it into its owner's graveyard.
-        this.getSpellAbility().addEffect(new CounterTargetWithReplacementEffect(Zone.EXILED));
+        this.getSpellAbility().addEffect(new CounterTargetWithReplacementEffect(PutCards.EXILED));
         this.getSpellAbility().addTarget(new TargetSpell(filter));
     }
 

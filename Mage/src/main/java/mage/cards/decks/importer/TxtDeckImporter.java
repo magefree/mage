@@ -126,7 +126,7 @@ public class TxtDeckImporter extends PlainTextDeckImporter {
 
         wasCardLines = true;
 
-        CardInfo cardInfo = CardRepository.instance.findPreferredCoreExpansionCard(lineName, true);
+        CardInfo cardInfo = CardRepository.instance.findPreferredCoreExpansionCard(lineName);
         if (cardInfo == null) {
             sbMessage.append("Could not find card: '").append(lineName).append("' at line ").append(lineCount).append('\n');
         } else {

@@ -52,7 +52,7 @@ class HarshMentorTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(StaticValue.get(2), true, "that player", true));
     }
 
-    HarshMentorTriggeredAbility(final HarshMentorTriggeredAbility ability) {
+    private HarshMentorTriggeredAbility(final HarshMentorTriggeredAbility ability) {
         super(ability);
     }
 

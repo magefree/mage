@@ -43,7 +43,7 @@ class SanguineBondTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, null);
     }
 
-    public SanguineBondTriggeredAbility(final SanguineBondTriggeredAbility ability) {
+    private SanguineBondTriggeredAbility(final SanguineBondTriggeredAbility ability) {
         super(ability);
     }
 

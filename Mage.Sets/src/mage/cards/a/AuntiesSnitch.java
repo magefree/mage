@@ -18,7 +18,6 @@ import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 
 /**
@@ -38,7 +37,7 @@ public final class AuntiesSnitch extends CardImpl {
         // Auntie's Snitch can't block.
         this.addAbility(new CantBlockAbility());
         // Prowl {1}{B}
-        this.addAbility(new ProwlAbility(this, "{1}{B}"));
+        this.addAbility(new ProwlAbility("{1}{B}"));
         // Whenever a Goblin or Rogue you control deals combat damage to a player, if Auntie's Snitch is in your graveyard, you may return Auntie's Snitch to your hand.
         this.addAbility(new AuntiesSnitchTriggeredAbility());
     }
@@ -65,7 +64,7 @@ class AuntiesSnitchTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.GRAVEYARD, new ReturnToHandSourceEffect(), true);
     }
 
-    public AuntiesSnitchTriggeredAbility(final AuntiesSnitchTriggeredAbility ability) {
+    private AuntiesSnitchTriggeredAbility(final AuntiesSnitchTriggeredAbility ability) {
         super(ability);
     }
 
@@ -83,7 +82,7 @@ class AuntiesSnitchTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         DamagedPlayerEvent damageEvent = (DamagedPlayerEvent)event;
         Permanent p = game.getPermanent(event.getSourceId());
-        return damageEvent.isCombatDamage() && filter.match(p, getSourceId(), getControllerId(), game);
+        return damageEvent.isCombatDamage() && filter.match(p, getControllerId(), this, game);
     }
 
     @Override

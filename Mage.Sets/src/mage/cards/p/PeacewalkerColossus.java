@@ -42,7 +42,7 @@ public final class PeacewalkerColossus extends CardImpl {
         // {1}{W}: Another target Vehicle you control becomes an artifact creature until end of turn.
         Effect effect = new AddCardTypeTargetEffect(Duration.EndOfTurn, CardType.CREATURE);
         effect.setText("Another target Vehicle you control becomes an artifact creature until end of turn");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{1}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{1}{W}"));
         ability.addTarget(new TargetControlledPermanent(filter));
         this.addAbility(ability);
 

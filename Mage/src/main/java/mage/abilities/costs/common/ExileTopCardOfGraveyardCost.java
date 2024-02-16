@@ -1,6 +1,5 @@
 package mage.abilities.costs.common;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
@@ -9,45 +8,40 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public class ExileTopCardOfGraveyardCost extends CostImpl {
 
-    private final int amount;
-
-    public ExileTopCardOfGraveyardCost(int amount) {
-        this.amount = amount;
+    public ExileTopCardOfGraveyardCost() {
         this.text = "Exile the top card of your graveyard";
     }
 
-    public ExileTopCardOfGraveyardCost(ExileTopCardOfGraveyardCost cost) {
+    private ExileTopCardOfGraveyardCost(final ExileTopCardOfGraveyardCost cost) {
         super(cost);
-        this.amount = cost.amount;
     }
 
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
         Player controller = game.getPlayer(controllerId);
-        if(controller == null) {
+        if (controller == null) {
             return false;
         }
-        return controller.getGraveyard().size() >= amount;
+        return !controller.getGraveyard().isEmpty();
     }
 
     @Override
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         Player controller = game.getPlayer(controllerId);
-        if(controller != null) {
-            Card topCard = null;
-            for (Card card :controller.getGraveyard().getCards(game)) {
-                topCard = card;
-            }
-            if (topCard != null) {
-                controller.moveCardToExileWithInfo(topCard, null, "", source, game, Zone.GRAVEYARD, true);
-                paid = true;
-            }
+        if (controller == null) {
+            return paid;
+        }
+        Card topCard = controller.getGraveyard().getTopCard(game);
+        if (topCard != null) {
+            controller.moveCards(topCard, Zone.EXILED, source, game);
+            paid = true;
         }
         return paid;
     }

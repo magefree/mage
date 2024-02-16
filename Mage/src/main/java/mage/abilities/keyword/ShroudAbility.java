@@ -5,6 +5,8 @@ package mage.abilities.keyword;
 import mage.constants.Zone;
 import mage.abilities.MageSingleton;
 import mage.abilities.StaticAbility;
+import mage.abilities.icon.CardIconImpl;
+import mage.abilities.icon.CardIconType;
 
 import java.io.ObjectStreamException;
 
@@ -14,7 +16,13 @@ import java.io.ObjectStreamException;
  */
 public class ShroudAbility extends StaticAbility implements MageSingleton {
 
-    private static final ShroudAbility instance =  new ShroudAbility();
+    private static final ShroudAbility instance;
+
+    static {
+        instance = new ShroudAbility();
+        instance.addIcon(
+                new CardIconImpl(CardIconType.ABILITY_HEXPROOF, "Shroud"));
+    }
 
     private Object readResolve() throws ObjectStreamException {
         return instance;

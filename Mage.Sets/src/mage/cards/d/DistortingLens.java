@@ -46,12 +46,12 @@ public final class DistortingLens extends CardImpl {
 
 class ChangeColorEffect extends OneShotEffect {
 
-    public ChangeColorEffect() {
+    ChangeColorEffect() {
         super(Outcome.Neutral);
         staticText = "Target permanent becomes the color of your choice until end of turn";
     }
 
-    public ChangeColorEffect(final ChangeColorEffect effect) {
+    private ChangeColorEffect(final ChangeColorEffect effect) {
         super(effect);
     }
 

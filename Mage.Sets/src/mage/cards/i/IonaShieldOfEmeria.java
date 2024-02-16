@@ -26,7 +26,7 @@ public final class IonaShieldOfEmeria extends CardImpl {
 
     public IonaShieldOfEmeria(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{W}{W}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ANGEL);
 
         this.power = new MageInt(7);
@@ -60,14 +60,14 @@ class IonaShieldOfEmeriaReplacementEffect extends ContinuousRuleModifyingEffectI
         staticText = "Your opponents can't cast spells of the chosen color";
     }
 
-    IonaShieldOfEmeriaReplacementEffect(final IonaShieldOfEmeriaReplacementEffect effect) {
+    private IonaShieldOfEmeriaReplacementEffect(final IonaShieldOfEmeriaReplacementEffect effect) {
         super(effect);
     }
 
     @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
         ObjectColor chosenColor = (ObjectColor) game.getState().getValue(source.getSourceId() + "_color");
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (mageObject != null && chosenColor != null) {
             return "You can't cast " + chosenColor.toString() + " spells (" + mageObject.getIdName() + ").";
         }

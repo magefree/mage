@@ -22,7 +22,7 @@ public class SecondGuessTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Second Guess");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Second Guess", "Lightning Bolt");
+        checkPlayableAbility("can't counter lightning bolt", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Second", false);
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
@@ -66,8 +66,9 @@ public class SecondGuessTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Shock", playerB);
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Second Guess", "Shock"); // can't be cast (no valid target), so Secon Guess spell stays on hand
+        checkPlayableAbility("can't counter lightning bolt", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Second", false);
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
@@ -84,17 +85,17 @@ public class SecondGuessTest extends CardTestPlayerBase {
      */
     @Test
     public void testOverallCount() {
+        addCard(Zone.HAND, playerA, "Second Guess");
         addCard(Zone.HAND, playerA, "Lightning Bolt");
         addCard(Zone.BATTLEFIELD, playerA, "Mountain");
         addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
-        addCard(Zone.HAND, playerA, "Second Guess");
 
         addCard(Zone.HAND, playerB, "Shock");
         addCard(Zone.BATTLEFIELD, playerB, "Mountain");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Shock", playerA);
-        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Second Guess", "Shock");
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Second Guess", "Shock", "Shock");
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();

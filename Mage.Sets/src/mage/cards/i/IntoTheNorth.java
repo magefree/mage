@@ -6,7 +6,6 @@ import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.filter.common.FilterLandCard;
 import mage.target.common.TargetCardInLibrary;
@@ -28,7 +27,7 @@ public final class IntoTheNorth extends CardImpl {
 
 
         // Search your library for a snow land card and put it onto the battlefield tapped. Then shuffle your library.
-        this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), true, Outcome.PutLandInPlay));
+        this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), true));
         
     }
 

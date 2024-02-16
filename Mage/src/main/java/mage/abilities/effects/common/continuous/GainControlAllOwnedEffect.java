@@ -26,7 +26,7 @@ public class GainControlAllOwnedEffect extends ContinuousEffectImpl {
         this.staticText = "each player gains control of all " + filter + " they own";
     }
 
-    public GainControlAllOwnedEffect(final GainControlAllOwnedEffect effect) {
+    protected GainControlAllOwnedEffect(final GainControlAllOwnedEffect effect) {
         super(effect);
         this.filter = effect.filter;
     }
@@ -40,7 +40,7 @@ public class GainControlAllOwnedEffect extends ContinuousEffectImpl {
     public void init(Ability source, Game game) {
         super.init(source, game);
         for (Permanent permanent : game.getBattlefield().getActivePermanents(
-                filter, source.getControllerId(), source.getSourceId(), game
+                filter, source.getControllerId(), source, game
         )) {
             affectedObjectList.add(new MageObjectReference(permanent, game));
         }

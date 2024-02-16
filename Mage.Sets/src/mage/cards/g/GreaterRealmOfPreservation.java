@@ -33,7 +33,7 @@ public final class GreaterRealmOfPreservation extends CardImpl {
 
         // {1}{W}: The next time a black or red source of your choice would deal damage to you this turn, prevent that damage.
         Effect effect = new PreventNextDamageFromChosenSourceToYouEffect(Duration.EndOfTurn, filter);
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{1}{W}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{1}{W}")));
     }
 
     private GreaterRealmOfPreservation(final GreaterRealmOfPreservation card) {

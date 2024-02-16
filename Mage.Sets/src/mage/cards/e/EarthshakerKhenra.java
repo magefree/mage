@@ -55,7 +55,7 @@ public final class EarthshakerKhenra extends CardImpl {
         this.addAbility(ability);
 
         // Eternalize {4}{R}{R}
-        this.addAbility(new EternalizeAbility(new ManaCostsImpl("{4}{R}{R}"), this));
+        this.addAbility(new EternalizeAbility(new ManaCostsImpl<>("{4}{R}{R}"), this));
     }
 
     private EarthshakerKhenra(final EarthshakerKhenra card) {
@@ -73,7 +73,7 @@ enum EarthshakerKhenraPredicate implements ObjectSourcePlayerPredicate<Card> {
 
     @Override
     public boolean apply(ObjectSourcePlayer<Card> input, Game game) {
-        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(input.getSourceId());
+        Permanent sourcePermanent = input.getSource().getSourcePermanentOrLKI(game);
         return sourcePermanent != null && input.getObject().getPower().getValue() <= sourcePermanent.getPower().getValue();
     }
 }

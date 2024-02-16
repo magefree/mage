@@ -30,7 +30,7 @@ public final class SavageGorilla extends CardImpl {
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(-3, -3, Duration.EndOfTurn), new ManaCostsImpl("{U}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(-3, -3, Duration.EndOfTurn), new ManaCostsImpl<>("{U}{B}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addEffect(new DrawCardSourceControllerEffect(1));

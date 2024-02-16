@@ -63,7 +63,7 @@ public final class CemeteryGatekeeper extends CardImpl {
 
 class CemeteryGatekeeperEffect extends OneShotEffect {
 
-    public CemeteryGatekeeperEffect() {
+    CemeteryGatekeeperEffect() {
         super(Outcome.Exile);
         staticText = "exile a card from a graveyard";
     }
@@ -82,8 +82,8 @@ class CemeteryGatekeeperEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             TargetCardInGraveyard target = new TargetCardInGraveyard();
-            target.setNotTarget(true);
-            controller.choose(outcome, target, source.getSourceId(), game);
+            target.withNotTarget(true);
+            controller.choose(outcome, target, source, game);
             Card card = game.getCard(target.getFirstTarget());
             if (card != null) {
                 UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
@@ -100,6 +100,7 @@ class CemeteryGatekeeperTriggeredAbility extends TriggeredAbilityImpl {
 
     public CemeteryGatekeeperTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(2, true, "that player"));
+        setTriggerPhrase("Whenever a player plays a land or casts a spell, if it shares a card type with the exiled card, ");
     }
 
     private CemeteryGatekeeperTriggeredAbility(final CemeteryGatekeeperTriggeredAbility ability) {
@@ -160,10 +161,5 @@ class CemeteryGatekeeperTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a player plays a land or casts a spell, if it shares a card type with the exiled card, ";
     }
 }

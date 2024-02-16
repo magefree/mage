@@ -26,7 +26,7 @@ public final class SenTriplets extends CardImpl {
 
     public SenTriplets(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}{W}{U}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(3);
@@ -57,7 +57,7 @@ public final class SenTriplets extends CardImpl {
 
 class SenTripletsRuleModifyingEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public SenTripletsRuleModifyingEffect() {
+    SenTripletsRuleModifyingEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit);
         staticText = "choose target opponent. This turn, that player can't cast spells or activate abilities";
     }
@@ -72,14 +72,9 @@ class SenTripletsRuleModifyingEffect extends ContinuousRuleModifyingEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
         Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (targetPlayer != null && mageObject != null) {
             return "This turn you can't cast spells or activate abilities" +
                     " (" + mageObject.getLogName() + ')';
@@ -101,7 +96,7 @@ class SenTripletsRuleModifyingEffect extends ContinuousRuleModifyingEffectImpl {
 
 class SenTripletsOpponentRevealsHandEffect extends ContinuousEffectImpl {
 
-    public SenTripletsOpponentRevealsHandEffect() {
+    SenTripletsOpponentRevealsHandEffect() {
         super(Duration.EndOfTurn, Layer.PlayerEffects, SubLayer.NA, Outcome.Detriment);
         staticText = "and plays with their hand revealed";
     }
@@ -127,12 +122,12 @@ class SenTripletsOpponentRevealsHandEffect extends ContinuousEffectImpl {
 
 class SenTripletsPlayFromOpponentsHandEffect extends AsThoughEffectImpl {
 
-    public SenTripletsPlayFromOpponentsHandEffect() {
+    SenTripletsPlayFromOpponentsHandEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
-        staticText = "You may play cards from that player's hand this turn";
+        staticText = "You may play lands and cast spells from that player's hand this turn";
     }
 
-    public SenTripletsPlayFromOpponentsHandEffect(final SenTripletsPlayFromOpponentsHandEffect effect) {
+    private SenTripletsPlayFromOpponentsHandEffect(final SenTripletsPlayFromOpponentsHandEffect effect) {
         super(effect);
     }
 

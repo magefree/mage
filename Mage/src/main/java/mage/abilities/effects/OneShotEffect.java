@@ -6,7 +6,6 @@ import mage.constants.EffectType;
 import mage.constants.Outcome;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public abstract class OneShotEffect extends EffectImpl {
@@ -16,7 +15,13 @@ public abstract class OneShotEffect extends EffectImpl {
         this.effectType = EffectType.ONESHOT;
     }
 
-    public OneShotEffect(final OneShotEffect effect) {
+    protected OneShotEffect(final OneShotEffect effect) {
         super(effect);
+    }
+
+    @Override
+    public OneShotEffect setText(String staticText) {
+        super.setText(staticText);
+        return this;
     }
 }

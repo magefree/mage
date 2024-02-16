@@ -52,9 +52,10 @@ class PossibilityStormTriggeredAbility extends TriggeredAbilityImpl {
 
     public PossibilityStormTriggeredAbility() {
         super(Zone.BATTLEFIELD, new PossibilityStormEffect(), false);
+        setTriggerPhrase("Whenever a player casts a spell from their hand, ");
     }
 
-    public PossibilityStormTriggeredAbility(final PossibilityStormTriggeredAbility ability) {
+    private PossibilityStormTriggeredAbility(final PossibilityStormTriggeredAbility ability) {
         super(ability);
     }
 
@@ -70,32 +71,30 @@ class PossibilityStormTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getZone() == Zone.HAND) {
-            Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell != null) {
-                for (Effect effect : this.getEffects()) {
-                    effect.setTargetPointer(new FixedTarget(event.getTargetId()));
-                }
-                return true;
-            }
+        if (event.getZone() != Zone.HAND) {
+            return false;
         }
-        return false;
-    }
 
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a player casts a spell from their hand, " ;
+        Spell spell = game.getStack().getSpell(event.getTargetId());
+        if (spell == null) {
+            return false;
+        }
+
+        for (Effect effect : this.getEffects()) {
+            effect.setTargetPointer(new FixedTarget(event.getTargetId()));
+        }
+        return true;
     }
 }
 
 class PossibilityStormEffect extends OneShotEffect {
 
-    public PossibilityStormEffect() {
+    PossibilityStormEffect() {
         super(Outcome.Neutral);
         staticText = "that player exiles it, then exiles cards from the top of their library until they exile a card that shares a card type with it. That player may cast that card without paying its mana cost. Then they put all cards exiled with {this} on the bottom of their library in a random order";
     }
 
-    public PossibilityStormEffect(final PossibilityStormEffect effect) {
+    private PossibilityStormEffect(final PossibilityStormEffect effect) {
         super(effect);
     }
 
@@ -107,43 +106,50 @@ class PossibilityStormEffect extends OneShotEffect {
             spell = ((Spell) game.getLastKnownInformation(targetPointer.getFirst(game, source), Zone.STACK));
             noLongerOnStack = true;
         }
+        if (spell == null) {
+            return false;
+        }
+
+        Player spellController = game.getPlayer(spell.getControllerId());
+        if (spellController == null) {
+            return false;
+        }
+
         MageObject sourceObject = source.getSourceObject(game);
-        if (sourceObject != null && spell != null) {
-            Player spellController = game.getPlayer(spell.getControllerId());
-            if (spellController != null) {
-                if (!noLongerOnStack) {
-                    spellController.moveCardsToExile(spell, source, game, true, source.getSourceId(), sourceObject.getIdName());
-                }
-                if (spellController.getLibrary().hasCards()) {
-                    Library library = spellController.getLibrary();
-                    Card card;
-                    do {
-                        card = library.getFromTop(game);
-                        if (card != null) {
-                            spellController.moveCardsToExile(card, source, game, true, source.getSourceId(), sourceObject.getIdName());
-                        }
-                    } while (library.hasCards() && card != null && !sharesType(card, spell.getCardType(game), game));
+        if (sourceObject == null) {
+            return false;
+        }
 
-                    if (card != null && sharesType(card, spell.getCardType(game), game)
-                            && !card.isLand(game)
-                            && card.getSpellAbility().canChooseTarget(game, spellController.getId())) {
-                        if (spellController.chooseUse(Outcome.PlayForFree, "Cast " + card.getLogName() + " without paying cost?", source, game)) {
-                            game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
-                            spellController.cast(spellController.chooseAbilityForCast(card, game, true), game, true, new ApprovingObject(source, game));
-                            game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
-                        }
-                    }
+        if (!noLongerOnStack) {
+            spellController.moveCardsToExile(spell, source, game, true, source.getSourceId(), sourceObject.getIdName());
+        }
 
-                    ExileZone exile = game.getExile().getExileZone(source.getSourceId());
-                    if (exile != null) {
-                        spellController.putCardsOnBottomOfLibrary(exile, game, source, false);
-                    }
+        if (!spellController.getLibrary().hasCards()) { return true; }
+        Library library = spellController.getLibrary();
+        Card card;
+        do {
+            card = library.getFromTop(game);
+            if (card != null) {
+                spellController.moveCardsToExile(card, source, game, true, source.getSourceId(), sourceObject.getIdName());
+            }
+        } while (library.hasCards() && card != null && !sharesType(card, spell.getCardType(game), game));
 
-                }
-                return true;
+        if (card != null && sharesType(card, spell.getCardType(game), game)
+                && !card.isLand(game)
+                && card.getSpellAbility().canChooseTarget(game, spellController.getId())) {
+            if (spellController.chooseUse(Outcome.PlayForFree, "Cast " + card.getLogName() + " without paying cost?", source, game)) {
+                game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
+                spellController.cast(spellController.chooseAbilityForCast(card, game, true), game, true, new ApprovingObject(source, game));
+                game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
             }
         }
-        return false;
+
+        ExileZone exile = game.getExile().getExileZone(source.getSourceId());
+        if (exile != null) {
+            spellController.putCardsOnBottomOfLibrary(exile, game, source, false);
+        }
+
+        return true;
     }
 
     private boolean sharesType(Card card, List<CardType> cardTypes, Game game) {

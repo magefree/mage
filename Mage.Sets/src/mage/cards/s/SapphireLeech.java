@@ -38,7 +38,7 @@ public final class SapphireLeech extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // Blue spells you cast cost {U} more to cast.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
-                new SpellsCostIncreasingAllEffect(new ManaCostsImpl("{U}"), filter, TargetController.YOU)));
+                new SpellsCostIncreasingAllEffect(new ManaCostsImpl<>("{U}"), filter, TargetController.YOU)));
     }
 
     private SapphireLeech(final SapphireLeech card) {

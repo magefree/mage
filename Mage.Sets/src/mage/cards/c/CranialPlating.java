@@ -35,12 +35,12 @@ public final class CranialPlating extends CardImpl {
                 .addHint(ArtifactYouControlHint.instance));
 
         // {B}{B}: Attach Cranial Plating to target creature you control.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AttachEffect(Outcome.BoostCreature, "Attach {this} to target creature you control"), new ManaCostsImpl("{B}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AttachEffect(Outcome.BoostCreature, "Attach {this} to target creature you control"), new ManaCostsImpl<>("{B}{B}"));
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
 
         // Equip {1}
-        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(1)));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(1), false));
     }
 
     private CranialPlating(final CranialPlating card) {

@@ -26,6 +26,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -93,13 +94,13 @@ public enum Plugins implements MagePlugins {
     @Override
     public MageCard getMagePermanent(PermanentView card, BigCard bigCard, CardIconRenderSettings cardIconRenderSettings, Dimension dimension, UUID gameId, boolean loadImage, int renderMode, boolean needFullPermanentRender) {
         MageCard mageCard;
-        if (cardPlugin != null) {
-            mageActionCallback.refreshSession();
-            mageActionCallback.setCardPreviewComponent(bigCard);
-            mageCard = cardPlugin.getMagePermanent(card, dimension, gameId, mageActionCallback, false, !MageFrame.isLite() && loadImage, renderMode, needFullPermanentRender);
-        } else {
+        if (cardPlugin == null) {
             throw new IllegalArgumentException("Card's plugin must be loaded");
         }
+        mageActionCallback.refreshSession();
+        mageActionCallback.setCardPreviewComponent(bigCard);
+        mageCard = cardPlugin.getMagePermanent(card, dimension, gameId, mageActionCallback, false, !MageFrame.isLite() && loadImage, renderMode, needFullPermanentRender);
+
         return createLayeredCard(mageCard, dimension, cardIconRenderSettings);
     }
 
@@ -108,15 +109,14 @@ public enum Plugins implements MagePlugins {
         // Card icons panels must be put outside of the card like MTG Arena.
         // So for compatibility purposes: keep free space for icons and change card dimention
         MageCard mageCard;
-        if (cardPlugin != null) {
-            if (previewable) {
-                mageActionCallback.refreshSession();
-                mageActionCallback.setCardPreviewComponent(bigCard);
-            }
-            mageCard = cardPlugin.getMageCard(card, dimension, gameId, mageActionCallback, false, !MageFrame.isLite() && loadImage, renderMode, needFullPermanentRender);
-        } else {
+        if (cardPlugin == null) {
             throw new IllegalArgumentException("Card's plugin must be loaded");
         }
+        if (previewable) {
+            mageActionCallback.refreshSession();
+            mageActionCallback.setCardPreviewComponent(bigCard);
+        }
+        mageCard = cardPlugin.getMageCard(card, dimension, gameId, mageActionCallback, false, !MageFrame.isLite() && loadImage, renderMode, needFullPermanentRender);
         return createLayeredCard(mageCard, dimension, cardIconRenderSettings);
     }
 

@@ -27,6 +27,5 @@ public class MonohybridCostReduceTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
     }
 }

@@ -34,7 +34,7 @@ public final class GrapplingHook extends CardImpl {
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
         // Equip {4}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(4)));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(4), false));
     }
 
     private GrapplingHook(final GrapplingHook card) {
@@ -49,7 +49,7 @@ public final class GrapplingHook extends CardImpl {
 
 class GrapplingHookEffect extends RequirementEffect {
 
-    public GrapplingHookEffect() {
+    GrapplingHookEffect() {
         this(Duration.EndOfTurn);
     }
 
@@ -58,7 +58,7 @@ class GrapplingHookEffect extends RequirementEffect {
         staticText = "target creature block it this turn if able";
     }
 
-    public GrapplingHookEffect(final GrapplingHookEffect effect) {
+    private GrapplingHookEffect(final GrapplingHookEffect effect) {
         super(effect);
     }
 

@@ -7,7 +7,7 @@ import mage.abilities.common.AttacksWithCreaturesTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.CreaturesYouControlCount;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.SetPowerSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerSourceEffect;
 import mage.abilities.hint.common.CreaturesYouControlHint;
 import mage.constants.*;
 import mage.abilities.keyword.VigilanceAbility;
@@ -25,7 +25,7 @@ public final class AdelineResplendentCathar extends CardImpl {
     public AdelineResplendentCathar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.KNIGHT);
         this.power = new MageInt(0);
@@ -35,8 +35,8 @@ public final class AdelineResplendentCathar extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // Adeline, Resplendent Cathar's power is equal to the number of creatures you control.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerSourceEffect(
-                CreaturesYouControlCount.instance, Duration.EndOfGame)).addHint(CreaturesYouControlHint.instance)
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerSourceEffect(
+                CreaturesYouControlCount.instance)).addHint(CreaturesYouControlHint.instance)
         );
 
         // Whenever you attack, for each opponent, create a 1/1 white Human creature token that's tapped and attacking that player or a planeswalker they control.
@@ -55,7 +55,7 @@ public final class AdelineResplendentCathar extends CardImpl {
 
 class AdelineResplendentCatharEffect extends OneShotEffect {
 
-    public AdelineResplendentCatharEffect() {
+    AdelineResplendentCatharEffect() {
         super(Outcome.Benefit);
         staticText = "for each opponent, create a 1/1 white Human creature token that's tapped and attacking that player or a planeswalker they control";
     }

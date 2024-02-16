@@ -26,6 +26,7 @@ import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -43,10 +44,10 @@ public final class LeechBonder extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Leech Bonder enters the battlefield with two -1/-1 counters on it.
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.M1M1.createInstance(2))));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.M1M1.createInstance(2)), "with two -1/-1 counters on it"));
 
         // {U}, {untap}: Move a counter from target creature onto another target creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LeechBonderEffect(), new ManaCostsImpl("{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LeechBonderEffect(), new ManaCostsImpl<>("{U}"));
         ability.addCost(new UntapSourceCost());
         // target 1
         TargetCreaturePermanent target1 = new TargetCreaturePermanent(new FilterCreaturePermanent("creature to remove counter from"));
@@ -75,12 +76,12 @@ public final class LeechBonder extends CardImpl {
 
 class LeechBonderEffect extends OneShotEffect {
 
-    public LeechBonderEffect() {
+    LeechBonderEffect() {
         super(Outcome.AIDontUseIt);
         this.staticText = "Move a counter from target creature onto a second target creature";
     }
 
-    public LeechBonderEffect(final LeechBonderEffect effect) {
+    private LeechBonderEffect(final LeechBonderEffect effect) {
         super(effect);
     }
 
@@ -100,7 +101,7 @@ class LeechBonderEffect extends OneShotEffect {
             return false;
         }
 
-        Set<String> possibleChoices = new HashSet<>(fromPermanent.getCounters(game).keySet());
+        Set<String> possibleChoices = new LinkedHashSet<>(fromPermanent.getCounters(game).keySet());
         if (possibleChoices.size() == 0) {
             return false;
         }

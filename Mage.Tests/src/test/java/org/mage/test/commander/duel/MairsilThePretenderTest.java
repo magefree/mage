@@ -61,8 +61,7 @@ public class MairsilThePretenderTest extends CardTestCommanderDuelBase {
 
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
-        
+
         assertLife(playerA, 40);
         assertLife(playerB, 40);
 
@@ -122,8 +121,7 @@ public class MairsilThePretenderTest extends CardTestCommanderDuelBase {
 
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
-        
+
         assertLife(playerA, 40);
         assertLife(playerB, 40);
 
@@ -180,8 +178,7 @@ public class MairsilThePretenderTest extends CardTestCommanderDuelBase {
 
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
-        
+
         assertLife(playerA, 40);
         assertLife(playerB, 40);
 

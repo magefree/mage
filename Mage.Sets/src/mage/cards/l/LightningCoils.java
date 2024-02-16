@@ -12,8 +12,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.TokenPredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.ElementalTokenWithHaste;
@@ -26,13 +25,6 @@ import java.util.UUID;
  */
 public final class LightningCoils extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a nontoken creature you control");
-
-    static {
-        filter.add(TargetController.YOU.getControllerPredicate());
-        filter.add(TokenPredicate.FALSE);
-    }
-
     public LightningCoils(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
@@ -40,7 +32,7 @@ public final class LightningCoils extends CardImpl {
         this.addAbility(
                 new DiesCreatureTriggeredAbility(
                         new AddCountersSourceEffect(CounterType.CHARGE.createInstance(), true),
-                        false, filter));
+                        false, StaticFilters.FILTER_CONTROLLED_CREATURE_NON_TOKEN));
 
         // At the beginning of your upkeep, if Lightning Coils has five or more charge counters on it, remove all of them from it 
         // and put that many 3/1 red Elemental creature tokens with haste onto the battlefield. 
@@ -62,10 +54,10 @@ class LightningCoilsEffect extends OneShotEffect {
 
     LightningCoilsEffect() {
         super(Outcome.Benefit);
-        staticText = "if {this} has five or more charge counters on it, remove all of them from it and put that many 3/1 red Elemental creature tokens with haste onto the battlefield. Exile them at the beginning of the next end step.";
+        staticText = "if {this} has five or more charge counters on it, remove all of them from it and create that many 3/1 red Elemental creature tokens with haste. Exile them at the beginning of the next end step.";
     }
 
-    LightningCoilsEffect(final LightningCoilsEffect effect) {
+    private LightningCoilsEffect(final LightningCoilsEffect effect) {
         super(effect);
     }
 

@@ -40,11 +40,11 @@ public final class PhosphorescentFeast extends CardImpl {
 
 class PhosphorescentFeastEffect extends OneShotEffect {
 
-    public PhosphorescentFeastEffect() {
+    PhosphorescentFeastEffect() {
         super(Outcome.GainLife);
     }
 
-    public PhosphorescentFeastEffect(final PhosphorescentFeastEffect effect) {
+    private PhosphorescentFeastEffect(final PhosphorescentFeastEffect effect) {
         super(effect);
     }
 
@@ -62,13 +62,9 @@ class PhosphorescentFeastEffect extends OneShotEffect {
         }
         if (player.getHand().count(new FilterCard(), game) > 0) {
             TargetCardInHand target = new TargetCardInHand(0, Integer.MAX_VALUE, new FilterCard());
-            if (player.choose(Outcome.Benefit, target, source.getSourceId(), game)) {
-
-                Cards cards = new CardsImpl();
-                for (UUID uuid : target.getTargets()) {
-                    cards.add(player.getHand().get(uuid, game));
-                }
-                player.revealCards("cards", cards, game);
+            if (player.choose(Outcome.Benefit, target, source, game)) {
+                Cards cards = new CardsImpl(target.getTargets());
+                player.revealCards(source, cards, game);
                 for (Card card : cards.getCards(game)) {
                     chroma += card.getManaCost().getMana().getGreen();
                 }

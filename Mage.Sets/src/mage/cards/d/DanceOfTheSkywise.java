@@ -24,7 +24,9 @@ public final class DanceOfTheSkywise extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");
 
         // Until end of turn, target creature you control becomes a blue Dragon Illusion with base power and toughness 4/4, loses all abilities, and gains flying.
-        Effect effect = new BecomesCreatureTargetEffect(new DragonIllusionToken(), true, false, Duration.EndOfTurn);
+        Effect effect = new BecomesCreatureTargetEffect(
+                new DragonIllusionToken(), true, false, Duration.EndOfTurn)
+                .withDurationRuleAtStart(true);
         effect.setText("Until end of turn, target creature you control becomes a blue Dragon Illusion with base power and toughness 4/4, loses all abilities, and gains flying.");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
@@ -51,7 +53,7 @@ public final class DanceOfTheSkywise extends CardImpl {
             toughness = new MageInt(4);
             this.addAbility(FlyingAbility.getInstance());
         }
-        public DragonIllusionToken(final DragonIllusionToken token) {
+        private DragonIllusionToken(final DragonIllusionToken token) {
             super(token);
         }
 

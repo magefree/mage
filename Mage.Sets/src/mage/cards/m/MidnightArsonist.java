@@ -58,14 +58,14 @@ enum MidnightArsonistAdjuster implements TargetAdjuster {
     private static final FilterPermanent filter2 = new FilterArtifactPermanent("artifacts without mana abilities");
 
     static {
-        filter.add(MidnightArsonistPredicate.instance);
+        filter2.add(MidnightArsonistPredicate.instance);
     }
 
     private static final Hint hint = new ValueHint("Vampires you control", new PermanentsOnBattlefieldCount(filter));
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        int vampires = game.getBattlefield().count(filter, ability.getSourceId(), ability.getControllerId(), game);
+        int vampires = game.getBattlefield().count(filter, ability.getControllerId(), ability, game);
         ability.getTargets().clear();
         ability.addTarget(new TargetPermanent(0, vampires, filter2));
     }

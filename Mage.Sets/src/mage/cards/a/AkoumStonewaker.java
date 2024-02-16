@@ -15,7 +15,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.game.Game;
-import mage.game.permanent.token.AkoumStonewakerElementalToken;
+import mage.game.permanent.token.Elemental31TrampleHasteToken;
 
 /**
  *
@@ -32,7 +32,7 @@ public final class AkoumStonewaker extends CardImpl {
 
         // <i>Landfall</i> &mdash; Whenever a land enters the battlefield under your control, you may pay {2}{R}. If you do, create a 3/1 red Elemental creature token with trample and haste.
         // Exile that token at the beginning of the next end step.
-        this.addAbility(new LandfallAbility(new DoIfCostPaid(new AkoumStonewakerEffect(), new ManaCostsImpl("{2}{R}")), false));
+        this.addAbility(new LandfallAbility(new DoIfCostPaid(new AkoumStonewakerEffect(), new ManaCostsImpl<>("{2}{R}")), false));
 
     }
 
@@ -48,12 +48,12 @@ public final class AkoumStonewaker extends CardImpl {
 
 class AkoumStonewakerEffect extends OneShotEffect {
 
-    public AkoumStonewakerEffect() {
+    AkoumStonewakerEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "create a 3/1 red Elemental creature token with trample and haste. Exile that token at the beginning of the next end step";
     }
 
-    public AkoumStonewakerEffect(final AkoumStonewakerEffect effect) {
+    private AkoumStonewakerEffect(final AkoumStonewakerEffect effect) {
         super(effect);
     }
 
@@ -65,7 +65,7 @@ class AkoumStonewakerEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
 
-        CreateTokenEffect effect = new CreateTokenEffect(new AkoumStonewakerElementalToken());
+        CreateTokenEffect effect = new CreateTokenEffect(new Elemental31TrampleHasteToken());
         if (effect.apply(game, source)) {
             effect.exileTokensCreatedAtNextEndStep(game, source);
             return true;

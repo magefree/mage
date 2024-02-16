@@ -2,6 +2,7 @@
 package mage.abilities.effects.common;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -13,7 +14,6 @@ import mage.players.Player;
 import mage.util.CardUtil;
 
 /**
- *
  * @author noxx
  */
 public class ReturnToBattlefieldUnderYourControlSourceEffect extends OneShotEffect {
@@ -23,7 +23,7 @@ public class ReturnToBattlefieldUnderYourControlSourceEffect extends OneShotEffe
         staticText = "return that card to the battlefield under your control";
     }
 
-    public ReturnToBattlefieldUnderYourControlSourceEffect(final ReturnToBattlefieldUnderYourControlSourceEffect effect) {
+    protected ReturnToBattlefieldUnderYourControlSourceEffect(final ReturnToBattlefieldUnderYourControlSourceEffect effect) {
         super(effect);
     }
 

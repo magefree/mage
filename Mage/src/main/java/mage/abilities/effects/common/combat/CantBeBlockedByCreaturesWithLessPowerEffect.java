@@ -16,7 +16,7 @@ public class CantBeBlockedByCreaturesWithLessPowerEffect extends RestrictionEffe
         staticText = "Creatures with power less than {this}'s power can't block it";
     }
 
-    public CantBeBlockedByCreaturesWithLessPowerEffect(final CantBeBlockedByCreaturesWithLessPowerEffect effect) {
+    protected CantBeBlockedByCreaturesWithLessPowerEffect(final CantBeBlockedByCreaturesWithLessPowerEffect effect) {
         super(effect);
     }
 

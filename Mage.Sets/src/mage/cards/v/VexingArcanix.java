@@ -46,14 +46,14 @@ public final class VexingArcanix extends CardImpl {
 
 class VexingArcanixEffect extends OneShotEffect {
 
-    public VexingArcanixEffect() {
+    VexingArcanixEffect() {
         super(Outcome.DrawCard);
         staticText = "Target player chooses a card name, then reveals the top card of their library. " +
                 "If that card has the chosen name, the player puts it into their hand. Otherwise, " +
                 "the player puts it into their graveyard and {this} deals 2 damage to them";
     }
 
-    public VexingArcanixEffect(final VexingArcanixEffect effect) {
+    private VexingArcanixEffect(final VexingArcanixEffect effect) {
         super(effect);
     }
 

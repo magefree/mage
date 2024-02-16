@@ -3,8 +3,6 @@ package mage.cards.g;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BecomesBlockedByCreatureTriggeredAbility;
-import mage.abilities.common.delayed.OnLeaveReturnExiledToBattlefieldAbility;
-import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.ExileUntilSourceLeavesEffect;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
@@ -30,11 +28,7 @@ public final class GraspingGiant extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // Whenever Grasping Giant becomes blocked by a creature, exile that creature until Grasping Giant leaves the battlefield.
-        Ability ability = new BecomesBlockedByCreatureTriggeredAbility(
-                new ExileUntilSourceLeavesEffect("")
-                        .setText("exile that creature until {this} leaves the battlefield"), false
-        );
-        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledToBattlefieldAbility()));
+        Ability ability = new BecomesBlockedByCreatureTriggeredAbility(new ExileUntilSourceLeavesEffect(), false);
         this.addAbility(ability);
     }
 

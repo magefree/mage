@@ -27,7 +27,7 @@ public final class SatyrHedonist extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {R}, Sacrifice Satyr Hedonist: Add {R}{R}{R}.
-        SimpleManaAbility ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.RedMana(3), new ManaCostsImpl("{R}"));
+        SimpleManaAbility ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.RedMana(3), new ManaCostsImpl<>("{R}"));
         ability .addCost(new SacrificeSourceCost());
         this.addAbility(ability);
 

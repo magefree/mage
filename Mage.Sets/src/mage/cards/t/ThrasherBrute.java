@@ -1,4 +1,3 @@
-
 package mage.cards.t;
 
 import mage.MageInt;
@@ -35,11 +34,9 @@ public final class ThrasherBrute extends CardImpl {
 
         // Whenever Thrasher Brute or another Warrior enters the battlefield under your team's control, target opponent loses 1 life and you gain 1 life.
         Ability ability = new EntersBattlefieldAllTriggeredAbility(
-                Zone.BATTLEFIELD, new LoseLifeTargetEffect(1), filter, false,
-                "Whenever {this} or another Warrior enters the battlefield under your team's control, "
-                        + "target opponent loses 1 life and you gain 1 life."
-        );
-        ability.addEffect(new GainLifeEffect(1));
+                Zone.BATTLEFIELD, new LoseLifeTargetEffect(1), filter, false
+        ).setTriggerPhrase("Whenever {this} or another Warrior enters the battlefield under your team's control, ");
+        ability.addEffect(new GainLifeEffect(1).concatBy("and"));
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }
@@ -70,9 +67,9 @@ class ThrasherBruteFilter extends FilterTeamPermanent {
     }
 
     @Override
-    public boolean match(Permanent permanent, UUID sourceId, UUID playerId, Game game) {
-        return super.match(permanent, sourceId, playerId, game)
-                && (sourceId.equals(permanent.getId())
+    public boolean match(Permanent permanent, UUID playerId, Ability source, Game game) {
+        return super.match(permanent, playerId, source, game)
+                && (source.getSourceId().equals(permanent.getId())
                 || permanent.hasSubtype(SubType.WARRIOR, game));
     }
 }

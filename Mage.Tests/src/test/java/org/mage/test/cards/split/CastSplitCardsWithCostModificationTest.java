@@ -42,7 +42,6 @@ public class CastSplitCardsWithCostModificationTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Armed // Dangerous", 1);
     }
@@ -67,7 +66,6 @@ public class CastSplitCardsWithCostModificationTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Armed // Dangerous", 1);
     }
@@ -94,7 +92,6 @@ public class CastSplitCardsWithCostModificationTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Armed // Dangerous", 1);
     }
@@ -121,7 +118,6 @@ public class CastSplitCardsWithCostModificationTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Armed // Dangerous", 1);
     }
@@ -153,7 +149,6 @@ public class CastSplitCardsWithCostModificationTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerB, "Balduvian Bears", 1);
     }
@@ -191,7 +186,6 @@ public class CastSplitCardsWithCostModificationTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Armed // Dangerous", 1);
     }
@@ -228,7 +222,6 @@ public class CastSplitCardsWithCostModificationTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Armed // Dangerous", 1);
     }
@@ -268,7 +261,6 @@ public class CastSplitCardsWithCostModificationTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Armed // Dangerous", 1);
     }
@@ -308,7 +300,6 @@ public class CastSplitCardsWithCostModificationTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Armed // Dangerous", 1);
     }

@@ -1,4 +1,3 @@
-
 package mage.cards.b;
 
 import mage.MageInt;
@@ -20,18 +19,15 @@ import mage.game.stack.Spell;
 import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class BriselaVoiceOfNightmares extends MeldCard {
     public BriselaVoiceOfNightmares(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELDRAZI, SubType.ANGEL);
         this.power = new MageInt(9);
         this.toughness = new MageInt(10);
-
-        this.nightCard = true;// Meld card
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
@@ -44,9 +40,9 @@ public final class BriselaVoiceOfNightmares extends MeldCard {
 
         // Lifelink
         this.addAbility(LifelinkAbility.getInstance());
-        
+
         // Your opponents can't cast spells with converted mana cost 3 or less.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BriselaVoiceOfNightmaresCantCastEffect()));
+        this.addAbility(new SimpleStaticAbility(new BriselaVoiceOfNightmaresCantCastEffect()));
     }
 
     private BriselaVoiceOfNightmares(final BriselaVoiceOfNightmares card) {
@@ -61,12 +57,12 @@ public final class BriselaVoiceOfNightmares extends MeldCard {
 
 class BriselaVoiceOfNightmaresCantCastEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public BriselaVoiceOfNightmaresCantCastEffect() {
+    BriselaVoiceOfNightmaresCantCastEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Your opponents can't cast spells with mana value 3 or less";
     }
 
-    public BriselaVoiceOfNightmaresCantCastEffect(final BriselaVoiceOfNightmaresCantCastEffect effect) {
+    private BriselaVoiceOfNightmaresCantCastEffect(final BriselaVoiceOfNightmaresCantCastEffect effect) {
         super(effect);
     }
 
@@ -76,13 +72,8 @@ class BriselaVoiceOfNightmaresCantCastEffect extends ContinuousRuleModifyingEffe
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (mageObject != null) {
             return "You can't cast spells with mana value 3 or less (" + mageObject.getIdName() + ").";
         }

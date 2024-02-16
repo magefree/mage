@@ -21,9 +21,7 @@ public final class RatsFeast extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{B}");
 
         // Exile X target cards from a single graveyard.
-        this.getSpellAbility().addEffect(new ExileTargetEffect(
-                "Exile X target cards from a single graveyard", true
-        ));
+        this.getSpellAbility().addEffect(new ExileTargetEffect("Exile X target cards from a single graveyard"));
         this.getSpellAbility().setTargetAdjuster(RatsFeastAdjuster.instance);
     }
 

@@ -1,13 +1,12 @@
 package mage.cards.e;
 
 import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
+import mage.abilities.common.LandfallAbility;
 import mage.abilities.effects.common.counter.ProliferateEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledLandPermanent;
 
@@ -30,10 +29,7 @@ public final class EvolutionSage extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever a land enters the battlefield under your control, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(
-                Zone.BATTLEFIELD, new ProliferateEffect(), filter,
-                false, null, true
-        ));
+        this.addAbility(new LandfallAbility(new ProliferateEffect()));
     }
 
     private EvolutionSage(final EvolutionSage card) {

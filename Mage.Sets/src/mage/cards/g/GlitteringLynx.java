@@ -33,7 +33,7 @@ public final class GlitteringLynx extends CardImpl {
         // Prevent all damage that would be dealt to Glittering Lynx.
         this.addAbility(GlitteringLynxAbility.getInstance());
         // {2}: Until end of turn, Glittering Lynx loses "Prevent all damage that would be dealt to Glittering Lynx." Any player may activate this ability.
-        SimpleActivatedAbility ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseAbilitySourceEffect(GlitteringLynxAbility.getInstance(), Duration.EndOfTurn).setText("Until end of turn, {this} loses \"Prevent all damage that would be dealt to {this}.\""), new ManaCostsImpl("{2}"));
+        SimpleActivatedAbility ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseAbilitySourceEffect(GlitteringLynxAbility.getInstance(), Duration.EndOfTurn).setText("Until end of turn, {this} loses \"Prevent all damage that would be dealt to {this}.\""), new ManaCostsImpl<>("{2}"));
         ability2.setMayActivate(TargetController.ANY);
         ability2.addEffect(new InfoEffect("Any player may activate this ability"));
         this.addAbility(ability2);

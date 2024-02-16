@@ -31,10 +31,10 @@ public final class DemonspineWhip extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // {X}: Equipped creature gets +X/+0 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(new XPaid(), StaticValue.get(0), Duration.EndOfTurn), new ManaCostsImpl("{X}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(new XPaid(), StaticValue.get(0), Duration.EndOfTurn), new ManaCostsImpl<>("{X}")));
 
         // Equip {1}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1)));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1), false));
     }
 
     private DemonspineWhip(final DemonspineWhip card) {

@@ -76,7 +76,7 @@ class BoreasChargerEffect extends OneShotEffect {
                 "and the rest into your hand, then shuffle";
     }
 
-    public BoreasChargerEffect(final BoreasChargerEffect effect) {
+    private BoreasChargerEffect(final BoreasChargerEffect effect) {
         super(effect);
     }
 
@@ -92,7 +92,7 @@ class BoreasChargerEffect extends OneShotEffect {
             return false;
         }
         TargetPlayer target = new TargetPlayer(1, 1, true, filter);
-        controller.choose(outcome, target, source.getSourceId(), game);
+        controller.choose(outcome, target, source, game);
         Player opponent = game.getPlayer(target.getFirstTarget());
         if (opponent == null) {
             controller.shuffleLibrary(source, game);
@@ -122,7 +122,7 @@ class BoreasChargerEffect extends OneShotEffect {
         }
         TargetCard target3 = new TargetCard(Zone.LIBRARY, filter3);
         Card cardToBattlefield = null;
-        if (controller.choose(outcome, cardsToHand, target3, game)) {
+        if (controller.choose(outcome, cardsToHand, target3, source, game)) {
             cardToBattlefield = cardsToHand.get(target2.getFirstTarget(), game);
             cardsToHand.remove(cardToBattlefield);
         }

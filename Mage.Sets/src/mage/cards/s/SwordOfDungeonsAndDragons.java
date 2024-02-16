@@ -30,6 +30,7 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.DragonTokenGold;
 import mage.players.Player;
+import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -60,7 +61,7 @@ public final class SwordOfDungeonsAndDragons extends CardImpl {
         this.addAbility(new SwordOfDungeonsAndDragonsAbility());
 
         // Equip {2}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2), new TargetControlledCreaturePermanent(), false));
     }
 
     private SwordOfDungeonsAndDragons(final SwordOfDungeonsAndDragons card) {
@@ -79,7 +80,7 @@ class SwordOfDungeonsAndDragonsAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new SwordOfDungeonsAndDragonsEffect(),false);
     }
 
-    public SwordOfDungeonsAndDragonsAbility(final SwordOfDungeonsAndDragonsAbility ability) {
+    private SwordOfDungeonsAndDragonsAbility(final SwordOfDungeonsAndDragonsAbility ability) {
         super(ability);
     }
 
@@ -118,7 +119,7 @@ class SwordOfDungeonsAndDragonsEffect extends OneShotEffect {
         super(Outcome.Benefit);
     }
 
-    public SwordOfDungeonsAndDragonsEffect(final SwordOfDungeonsAndDragonsEffect effect) {
+    private SwordOfDungeonsAndDragonsEffect(final SwordOfDungeonsAndDragonsEffect effect) {
         super(effect);
     }
 

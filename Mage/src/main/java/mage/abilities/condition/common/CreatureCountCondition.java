@@ -43,7 +43,7 @@ public class CreatureCountCondition implements Condition {
                 }
                 return true;
             case ANY:
-                return game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game) == creatureCount;
+                return game.getBattlefield().count(filter, source.getControllerId(), source, game) == creatureCount;
             default:
                 throw new UnsupportedOperationException("Value for targetController not supported: " + targetController.toString());
         }

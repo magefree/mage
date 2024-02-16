@@ -3,21 +3,15 @@ package mage.cards.o;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetEffect;
+import mage.abilities.effects.common.ExileReturnBattlefieldNextEndStepTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.TargetPermanent;
-import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
 
@@ -26,20 +20,14 @@ import java.util.UUID;
  */
 public final class OathOfTeferi extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("another target permanent you control");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
-
     public OathOfTeferi(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // When Oath of Teferi enters the battlefield, exile another target permanent you control. Return it to the battlefield under its owner's control at the beginning of the next end step.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new OathOfTeferiBlinkEffect());
-        ability.addTarget(new TargetPermanent(filter));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ExileReturnBattlefieldNextEndStepTargetEffect().withTextThatCard(false));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_TARGET_PERMANENT));
         this.addAbility(ability);
 
         // You may activate the loyalty abilities of planeswalkers you control twice each turn rather than only once.
@@ -56,53 +44,14 @@ public final class OathOfTeferi extends CardImpl {
     }
 }
 
-class OathOfTeferiBlinkEffect extends OneShotEffect {
-
-    private static final String effectText = "exile another target permanent you control. Return it to the battlefield under its owner's control at the beginning of the next end step";
-
-    OathOfTeferiBlinkEffect() {
-        super(Outcome.Detriment);
-        staticText = effectText;
-    }
-
-    OathOfTeferiBlinkEffect(OathOfTeferiBlinkEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Permanent permanent = game.getPermanent(source.getFirstTarget());
-            if (permanent != null) {
-                int zcc = permanent.getZoneChangeCounter(game);
-                controller.moveCards(permanent, Zone.EXILED, source, game);
-                //create delayed triggered ability
-                Effect effect = new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false);
-                effect.setTargetPointer(new FixedTarget(permanent.getId(), zcc + 1));
-                AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect);
-                game.addDelayedTriggeredAbility(delayedAbility, source);
-            }
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public OathOfTeferiBlinkEffect copy() {
-        return new OathOfTeferiBlinkEffect(this);
-    }
-
-}
-
 class OathOfTeferiLoyaltyEffect extends ContinuousEffectImpl {
 
-    public OathOfTeferiLoyaltyEffect() {
+    OathOfTeferiLoyaltyEffect() {
         super(Duration.WhileOnBattlefield, Layer.RulesEffects, SubLayer.NA, Outcome.Benefit);
         staticText = "You may activate the loyalty abilities of planeswalkers you control twice each turn rather than only once";
     }
 
-    public OathOfTeferiLoyaltyEffect(final OathOfTeferiLoyaltyEffect effect) {
+    private OathOfTeferiLoyaltyEffect(final OathOfTeferiLoyaltyEffect effect) {
         super(effect);
     }
 
@@ -112,21 +61,13 @@ class OathOfTeferiLoyaltyEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            controller.setLoyaltyUsePerTurn(Math.max(2, controller.getLoyaltyUsePerTurn()));
+    public boolean apply(Game game, Ability source) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(
+                StaticFilters.FILTER_CONTROLLED_PERMANENT_PLANESWALKER,
+                source.getControllerId(), source, game
+        )) {
+            permanent.setLoyaltyActivationsAvailable(2);
         }
         return true;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public boolean hasLayer(Layer layer) {
-        return layer == Layer.RulesEffects;
     }
 }

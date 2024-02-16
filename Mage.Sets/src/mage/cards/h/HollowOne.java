@@ -40,7 +40,7 @@ public final class HollowOne extends CardImpl {
         this.addAbility(ability, new CardsCycledOrDiscardedThisTurnWatcher());
 
         // Cycling {2}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
     private HollowOne(final HollowOne card) {
@@ -55,7 +55,7 @@ public final class HollowOne extends CardImpl {
 
 class HollowOneReductionEffect extends CostModificationEffectImpl {
 
-    public HollowOneReductionEffect() {
+    HollowOneReductionEffect() {
         super(Duration.WhileOnStack, Outcome.Benefit, CostModificationType.REDUCE_COST);
         staticText = "this spell costs {2} less to cast for each card you've cycled or discarded this turn";
     }

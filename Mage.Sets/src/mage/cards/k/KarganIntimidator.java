@@ -10,6 +10,7 @@ import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureTypeTargetEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.abilities.hint.common.ModesAlreadyUsedHint;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -47,20 +48,24 @@ public final class KarganIntimidator extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 new BoostSourceEffect(1, 1, Duration.EndOfTurn), new GenericManaCost(1)
         );
-        ability.getModes().setEachModeOnlyOnce(true);
-        ability.getModes().setResetEachTurn(true);
+        ability.setModeTag("gets +1/+1");
+        ability.getModes().setLimitUsageByOnce(true);
 
         // • Target creature becomes a Coward until end of turn.
         Mode mode = new Mode(new BecomesCreatureTypeTargetEffect(
                 Duration.EndOfTurn, SubType.COWARD
         ).setText("Target creature becomes a Coward until end of turn"));
         mode.addTarget(new TargetCreaturePermanent());
+        mode.setModeTag("target becomes a Coward");
         ability.addMode(mode);
 
         // • Target Warrior gains trample until end of turn.
         mode = new Mode(new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn));
         mode.addTarget(new TargetPermanent(filter));
+        mode.setModeTag("target gain trample");
         ability.addMode(mode);
+
+        ability.addHint(ModesAlreadyUsedHint.instance);
         this.addAbility(ability);
     }
 
@@ -81,7 +86,7 @@ class KarganIntimidatorEffect extends RestrictionEffect {
         staticText = "Cowards can't block Warriors";
     }
 
-    KarganIntimidatorEffect(final KarganIntimidatorEffect effect) {
+    private KarganIntimidatorEffect(final KarganIntimidatorEffect effect) {
         super(effect);
     }
 

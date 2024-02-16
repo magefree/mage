@@ -29,7 +29,7 @@ public final class GolgariLocket extends CardImpl {
         // {B/G}{B/G}{B/G}{B/G}, {T}, Sacrifice Golgari Locket: Draw two cards.
         Ability ability = new SimpleActivatedAbility(
                 new DrawCardSourceControllerEffect(2),
-                new ManaCostsImpl("{B/G}{B/G}{B/G}{B/G}")
+                new ManaCostsImpl<>("{B/G}{B/G}{B/G}{B/G}")
         );
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());

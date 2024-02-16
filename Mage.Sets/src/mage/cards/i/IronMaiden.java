@@ -1,7 +1,6 @@
 package mage.cards.i;
 
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -46,6 +45,7 @@ class IronMaidenEffect extends OneShotEffect {
 
     public IronMaidenEffect() {
         super(Outcome.Damage);
+        this.staticText = "{this} deals X damage to that player, where X is the number of cards in their hand minus 4";
     }
 
     @Override
@@ -65,10 +65,4 @@ class IronMaidenEffect extends OneShotEffect {
     public IronMaidenEffect copy() {
         return new IronMaidenEffect(this);
     }
-
-    @Override
-    public String getText(Mode mode) {
-        return "Iron Maiden deals X damage to that player, where X is the number of cards in their hand minus 4";
-    }
-
 }

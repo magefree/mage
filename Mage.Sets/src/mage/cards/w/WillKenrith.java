@@ -8,7 +8,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.effects.common.GetEmblemTargetPlayerEffect;
 import mage.abilities.effects.common.continuous.LoseAllAbilitiesTargetEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessTargetEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessTargetEffect;
 import mage.abilities.effects.common.cost.SpellsCostReductionAllEffect;
 import mage.abilities.keyword.PartnerWithAbility;
 import mage.cards.CardImpl;
@@ -31,13 +31,13 @@ public final class WillKenrith extends CardImpl {
     public WillKenrith(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{U}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.WILL);
         this.setStartingLoyalty(4);
 
         // +2: Until your next turn, up to two target creatures each have base power and toughness 0/3 and lose all abilities.
         Ability ability = new LoyaltyAbility(
-                new SetPowerToughnessTargetEffect(0, 3, Duration.UntilYourNextTurn)
+                new SetBasePowerToughnessTargetEffect(0, 3, Duration.UntilYourNextTurn)
                         .setText("until your next turn, up to two target creatures each have base power and toughness 0/3"), 2);
         ability.addEffect(new LoseAllAbilitiesTargetEffect(Duration.UntilYourNextTurn)
                 .setText("and lose all abilities")
@@ -91,7 +91,7 @@ class WillKenrithCostReductionEffect extends OneShotEffect {
         this.staticText = "Until your next turn, instant, sorcery, and planeswalker spells that player casts cost {2} less to cast";
     }
 
-    WillKenrithCostReductionEffect(final WillKenrithCostReductionEffect effect) {
+    private WillKenrithCostReductionEffect(final WillKenrithCostReductionEffect effect) {
         super(effect);
     }
 

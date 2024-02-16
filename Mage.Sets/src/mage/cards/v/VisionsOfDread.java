@@ -3,6 +3,7 @@ package mage.cards.v;
 import mage.abilities.Ability;
 import mage.abilities.costs.costadjusters.CommanderManaValueAdjuster;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.dynamicvalue.common.GreatestCommanderManaValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
@@ -34,7 +35,8 @@ public final class VisionsOfDread extends CardImpl {
         this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{8}{B}{B}"))
                 .setAbilityName("This spell costs {X} less to cast this way, where X is the greatest mana value " +
                         "of a commander you own on the battlefield or in the command zone.")
-                .setCostAdjuster(CommanderManaValueAdjuster.instance));
+                .setCostAdjuster(CommanderManaValueAdjuster.instance)
+                .addHint(GreatestCommanderManaValue.getHint()));
     }
 
     private VisionsOfDread(final VisionsOfDread card) {
@@ -75,8 +77,8 @@ class VisionsOfDreadEffect extends OneShotEffect {
         TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(
                 StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD
         );
-        target.setNotTarget(true);
-        opponent.choose(Outcome.Detriment, target, source.getSourceId(), game);
+        target.withNotTarget(true);
+        opponent.choose(Outcome.Detriment, target, source, game);
         return controller.moveCards(game.getCard(target.getFirstTarget()), Zone.BATTLEFIELD, source, game);
     }
 }

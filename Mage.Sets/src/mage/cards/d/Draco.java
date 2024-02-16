@@ -39,7 +39,8 @@ public final class Draco extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new DracoCostReductionEffect()).addHint(DomainHint.instance));
 
         // Domain - At the beginning of your upkeep, sacrifice Draco unless you pay {10}. This cost is reduced by {2} for each basic land type among lands you control.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DracoSacrificeUnlessPaysEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DracoSacrificeUnlessPaysEffect(), TargetController.YOU, false)
+                .setAbilityWord(AbilityWord.DOMAIN));
     }
 
     private Draco(final Draco card) {
@@ -54,7 +55,7 @@ public final class Draco extends CardImpl {
 
 class DracoCostReductionEffect extends CostModificationEffectImpl {
 
-    public DracoCostReductionEffect() {
+    DracoCostReductionEffect() {
         super(Duration.WhileOnStack, Outcome.Benefit, CostModificationType.REDUCE_COST);
         staticText = "<i>Domain</i> &mdash; This spell costs {2} less to cast for each basic land type among lands you control.";
     }
@@ -65,7 +66,7 @@ class DracoCostReductionEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        CardUtil.reduceCost(abilityToModify, new DomainValue(2).calculate(game, source, this));
+        CardUtil.reduceCost(abilityToModify, 2 * DomainValue.REGULAR.calculate(game, source, this));
         return true;
     }
 
@@ -88,7 +89,7 @@ class DracoSacrificeUnlessPaysEffect extends OneShotEffect {
         staticText = "sacrifice {this} unless you pay {10}. This cost is reduced by {2} for each basic land type among lands you control.";
     }
 
-    public DracoSacrificeUnlessPaysEffect(final DracoSacrificeUnlessPaysEffect effect) {
+    private DracoSacrificeUnlessPaysEffect(final DracoSacrificeUnlessPaysEffect effect) {
         super(effect);
     }
 
@@ -98,7 +99,7 @@ class DracoSacrificeUnlessPaysEffect extends OneShotEffect {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (player != null && permanent != null) {
             // The cost is reduced by {2} for each basic land type.
-            int domainValueReduction = new DomainValue(2).calculate(game, source, this);
+            int domainValueReduction = 2 * DomainValue.REGULAR.calculate(game, source, this);
             int count = Math.max(0, MAX_DOMAIN_VALUE - domainValueReduction);
             if (player.chooseUse(Outcome.Benefit, "Pay {" + count + "}? Or " + permanent.getName() + " will be sacrificed.", source, game)) {
                 Cost cost = ManaUtil.createManaCost(count, false);
@@ -118,5 +119,3 @@ class DracoSacrificeUnlessPaysEffect extends OneShotEffect {
     }
 
 }
-
-

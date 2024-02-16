@@ -51,12 +51,12 @@ public final class CankerAbomination extends CardImpl {
 
 class CankerAbominationEffect extends OneShotEffect {
 
-    public CankerAbominationEffect() {
+    CankerAbominationEffect() {
         super(Outcome.Neutral);
         this.staticText = "choose an opponent. {this} enters the battlefield with a -1/-1 counter on it for each creature that player controls";
     }
 
-    public CankerAbominationEffect(final CankerAbominationEffect effect) {
+    private CankerAbominationEffect(final CankerAbominationEffect effect) {
         super(effect);
     }
 
@@ -71,8 +71,8 @@ class CankerAbominationEffect extends OneShotEffect {
         Permanent cankerAbomination = game.getPermanentEntering(source.getSourceId());
         if (controller != null && cankerAbomination != null) {
             Target target = new TargetOpponent();
-            target.setNotTarget(true);
-            controller.choose(outcome, target, source.getSourceId(), game);
+            target.withNotTarget(true);
+            controller.choose(outcome, target, source, game);
             Player opponent = game.getPlayer(target.getFirstTarget());
             if (opponent != null) {
                 game.informPlayers(cankerAbomination.getName() + ": " + controller.getLogName() + " has chosen " + opponent.getLogName());

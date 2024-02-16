@@ -18,8 +18,7 @@ public class ProsperousInnkeeperTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, innkeeper);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
-        assertPermanentCount(playerA, "Treasure", 1);
+        assertPermanentCount(playerA, "Treasure Token", 1);
     }
 
     @Test
@@ -30,7 +29,6 @@ public class ProsperousInnkeeperTest extends CardTestPlayerBase {
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, innkeeper);
         setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
         assertLife(playerA, 21);
     }
 

@@ -12,7 +12,6 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author North
  */
 public class DontUntapInControllersUntapStepSourceEffect extends ContinuousRuleModifyingEffectImpl {
@@ -26,7 +25,7 @@ public class DontUntapInControllersUntapStepSourceEffect extends ContinuousRuleM
         staticText = "{this} doesn't untap during your untap step";
     }
 
-    public DontUntapInControllersUntapStepSourceEffect(final DontUntapInControllersUntapStepSourceEffect effect) {
+    protected DontUntapInControllersUntapStepSourceEffect(final DontUntapInControllersUntapStepSourceEffect effect) {
         super(effect);
     }
 
@@ -36,18 +35,13 @@ public class DontUntapInControllersUntapStepSourceEffect extends ContinuousRuleM
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.UNTAP;
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (game.getTurn().getStepType() == PhaseStep.UNTAP
+        if (game.getTurnStepType() == PhaseStep.UNTAP
                 && event.getTargetId().equals(source.getSourceId())) {
             Permanent permanent = game.getPermanent(source.getSourceId());
             if (permanent != null && permanent.isControlledBy(game.getActivePlayerId())) {

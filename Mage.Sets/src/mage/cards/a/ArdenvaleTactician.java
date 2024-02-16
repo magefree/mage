@@ -31,6 +31,8 @@ public final class ArdenvaleTactician extends AdventureCard {
         // Tap up to two target creatures.
         this.getSpellCard().getSpellAbility().addEffect(new TapTargetEffect());
         this.getSpellCard().getSpellAbility().addTarget(new TargetCreaturePermanent(0, 2));
+
+        this.finalizeAdventure();
     }
 
     private ArdenvaleTactician(final ArdenvaleTactician card) {

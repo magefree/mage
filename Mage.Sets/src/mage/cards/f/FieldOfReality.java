@@ -29,13 +29,13 @@ public final class FieldOfReality extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // Enchanted creature can't be blocked by Spirits.
         this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesAttachedEffect(
                 Duration.WhileOnBattlefield, new FilterCreaturePermanent(SubType.SPIRIT, "Spirits"), AttachmentType.AURA)));
         // {1}{U}: Return Field of Reality to its owner's hand.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new ManaCostsImpl("{1}{U}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new ManaCostsImpl<>("{1}{U}")));
     }
 
     private FieldOfReality(final FieldOfReality card) {

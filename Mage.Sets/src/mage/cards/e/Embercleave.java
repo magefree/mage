@@ -1,11 +1,10 @@
 package mage.cards.e;
 
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldAttachToTarget;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.AttackingCreatureCount;
-import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.effects.common.cost.SpellCostReductionForEachSourceEffect;
@@ -18,9 +17,10 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.StaticFilters;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  * @author TheElk801
@@ -30,7 +30,7 @@ public final class Embercleave extends CardImpl {
     public Embercleave(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}{R}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.EQUIPMENT);
 
         // Flash
@@ -43,14 +43,10 @@ public final class Embercleave extends CardImpl {
         ).addHint(new ValueHint("Attacking creature you control", xValue)));
 
         // When Embercleave enters the battlefield, attach it to target creature you control.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new AttachEffect(
-                Outcome.BoostCreature, "attach it to target creature you control"
-        ), false);
-        ability.addTarget(new TargetControlledCreaturePermanent());
-        this.addAbility(ability);
+        this.addAbility(new EntersBattlefieldAttachToTarget());
 
         // Equipped creature gets +1/+1 and has double strike and trample.
-        ability = new SimpleStaticAbility(new BoostEquippedEffect(1, 1));
+        Ability ability = new SimpleStaticAbility(new BoostEquippedEffect(1, 1));
         ability.addEffect(new GainAbilityAttachedEffect(
                 DoubleStrikeAbility.getInstance(), AttachmentType.EQUIPMENT
         ).setText("and has double strike"));
@@ -60,7 +56,7 @@ public final class Embercleave extends CardImpl {
         this.addAbility(ability);
 
         // Equip {3}
-        this.addAbility(new EquipAbility(3));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(3), new TargetControlledCreaturePermanent(), false));
     }
 
     private Embercleave(final Embercleave card) {

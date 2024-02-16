@@ -35,7 +35,7 @@ public final class SpawnOfMayhem extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Spectacle {1}{B}{B}
-        this.addAbility(new SpectacleAbility(this, new ManaCostsImpl("{1}{B}{B}")));
+        this.addAbility(new SpectacleAbility(this, new ManaCostsImpl<>("{1}{B}{B}")));
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());

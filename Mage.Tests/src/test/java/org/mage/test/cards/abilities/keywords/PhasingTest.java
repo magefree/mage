@@ -61,7 +61,7 @@ public class PhasingTest extends CardTestPlayerBase {
         // {R}: Enchanted creature gets +1/+0 until end of turn.
         addCard(Zone.HAND, playerA, "Firebreathing", 1); // {R}
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tolarian Drake");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tolarian Drake", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Firebreathing", "Tolarian Drake");
 
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
@@ -83,7 +83,7 @@ public class PhasingTest extends CardTestPlayerBase {
         // {R}: Enchanted creature gets +1/+0 until end of turn.
         addCard(Zone.HAND, playerA, "Firebreathing", 1); // {R}
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tolarian Drake");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tolarian Drake", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Firebreathing", "Tolarian Drake");
 
         setStopAt(5, PhaseStep.PRECOMBAT_MAIN);

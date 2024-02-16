@@ -1,7 +1,5 @@
-
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.SourceMatchesFilterCondition;
@@ -16,8 +14,9 @@ import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.permanent.TokenPredicate;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class ImperialMask extends CardImpl {
@@ -34,10 +33,10 @@ public final class ImperialMask extends CardImpl {
         // When Imperial Mask enters the battlefield, if it's not a token, each of your teammates puts a token that's a copy of Imperial Mask onto the battlefield.
         // No implementation of teammates currently, so no effect needed
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new InfoEffect("each of your teammates puts a token that's a copy of {this} onto the battlefield"), false),
+                new EntersBattlefieldTriggeredAbility(new InfoEffect(""), false),
                 new SourceMatchesFilterCondition(filter),
                 "When {this} enters the battlefield, if it's not a token, "
-                + "each of your teammates puts a token that's a copy of {this} onto the battlefield"
+                        + "each of your teammates creates a token that's a copy of {this}"
         ));
 
         // You have hexproof.

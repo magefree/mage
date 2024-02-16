@@ -51,12 +51,12 @@ public final class HumbleDefector extends CardImpl {
 
 class HumbleDefectorEffect extends OneShotEffect {
 
-    public HumbleDefectorEffect() {
+    HumbleDefectorEffect() {
         super(Outcome.Discard);
         this.staticText = "Draw two cards. Target opponent gains control of {this}.";
     }
 
-    public HumbleDefectorEffect(final HumbleDefectorEffect effect) {
+    private HumbleDefectorEffect(final HumbleDefectorEffect effect) {
         super(effect);
     }
 
@@ -71,7 +71,7 @@ class HumbleDefectorEffect extends OneShotEffect {
         if (controller != null) {
             controller.drawCards(2, source, game);
         }
-        Permanent humbleDefector = (Permanent) source.getSourceObjectIfItStillExists(game);
+        Permanent humbleDefector = source.getSourcePermanentIfItStillExists(game);
         Player targetOpponent = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (targetOpponent != null && humbleDefector != null) {
             ContinuousEffect effect = new HumbleDefectorControlSourceEffect();
@@ -85,11 +85,11 @@ class HumbleDefectorEffect extends OneShotEffect {
 
 class HumbleDefectorControlSourceEffect extends ContinuousEffectImpl {
 
-    public HumbleDefectorControlSourceEffect() {
+    HumbleDefectorControlSourceEffect() {
         super(Duration.Custom, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
     }
 
-    public HumbleDefectorControlSourceEffect(final HumbleDefectorControlSourceEffect effect) {
+    private HumbleDefectorControlSourceEffect(final HumbleDefectorControlSourceEffect effect) {
         super(effect);
     }
 

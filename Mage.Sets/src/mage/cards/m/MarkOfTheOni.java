@@ -33,7 +33,7 @@ public final class MarkOfTheOni extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.GainControl));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // You control enchanted creature.
@@ -42,7 +42,7 @@ public final class MarkOfTheOni extends CardImpl {
         // At the beginning of the end step, if you control no Demons, sacrifice Mark of the Oni.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD,
                 new SacrificeSourceEffect(),
-                TargetController.ANY,
+                TargetController.NEXT,
                 new PermanentsOnTheBattlefieldCondition(
                         new FilterControlledCreaturePermanent(SubType.DEMON, "if you control no Demons"),
                         ComparisonType.FEWER_THAN, 1),

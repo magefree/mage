@@ -1,7 +1,6 @@
 
 package mage.abilities.effects.common.continuous;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.SourceIsSpellCondition;
 import mage.abilities.costs.AlternativeCostSourceAbility;
@@ -14,20 +13,22 @@ import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
  * @author JRHerlehy
- *         Created on 4/4/18.
+ * Created on 4/4/18.
  */
 public class WUBRGInsteadEffect extends ContinuousEffectImpl {
 
-    private final AlternativeCostSourceAbility alternativeCastingCostAbility = new AlternativeCostSourceAbility(new ManaCostsImpl("{W}{U}{B}{R}{G}"), SourceIsSpellCondition.instance);
+    private final AlternativeCostSourceAbility alternativeCastingCostAbility = new AlternativeCostSourceAbility(new ManaCostsImpl<>("{W}{U}{B}{R}{G}"), SourceIsSpellCondition.instance);
 
     public WUBRGInsteadEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "You may pay {W}{U}{B}{R}{G} rather than pay the mana cost for spells that you cast";
     }
 
-    public WUBRGInsteadEffect(final WUBRGInsteadEffect effect) {
+    protected WUBRGInsteadEffect(final WUBRGInsteadEffect effect) {
         super(effect);
     }
 

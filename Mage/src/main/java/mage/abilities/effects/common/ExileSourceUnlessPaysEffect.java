@@ -2,6 +2,7 @@
 package mage.abilities.effects.common;
 
 import java.util.Locale;
+
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.costs.Cost;
@@ -13,7 +14,6 @@ import mage.players.Player;
 import mage.util.CardUtil;
 
 /**
- *
  * @author fireshoes
  */
 public class ExileSourceUnlessPaysEffect extends OneShotEffect {
@@ -25,7 +25,7 @@ public class ExileSourceUnlessPaysEffect extends OneShotEffect {
         this.cost = cost;
     }
 
-    public ExileSourceUnlessPaysEffect(final ExileSourceUnlessPaysEffect effect) {
+    protected ExileSourceUnlessPaysEffect(final ExileSourceUnlessPaysEffect effect) {
         super(effect);
         this.cost = effect.cost.copy();
     }

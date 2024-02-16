@@ -39,7 +39,7 @@ public final class EssenceLeak extends CardImpl {
         TargetPermanent auraTarget = new TargetPermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.UnboostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // As long as enchanted permanent is red or green, it has "At the beginning of your upkeep, sacrifice this permanent unless you pay its mana cost."
@@ -63,12 +63,12 @@ public final class EssenceLeak extends CardImpl {
 
 class EssenceLeakEffect extends OneShotEffect {
 
-    public EssenceLeakEffect() {
+    EssenceLeakEffect() {
         super(Outcome.Sacrifice);
         staticText =  "sacrifice this permanent unless you pay its mana cost";
     }
 
-    public EssenceLeakEffect(final EssenceLeakEffect effect) {
+    private EssenceLeakEffect(final EssenceLeakEffect effect) {
         super(effect);
     }
 

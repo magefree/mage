@@ -101,7 +101,7 @@ class MagmaticChannelerExileEffect extends OneShotEffect {
             card = cards.getRandom(game);
         } else {
             TargetCard targetCard = new TargetCardInExile(StaticFilters.FILTER_CARD, null);
-            player.choose(outcome, cards, targetCard, game);
+            player.choose(outcome, cards, targetCard, source, game);
             card = game.getCard(targetCard.getFirstTarget());
         }
         if (card == null) {
@@ -138,6 +138,12 @@ class MagmaticChannelerCastFromExileEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        Card theCard = game.getCard(objectId);
+        if (theCard == null) {
+            return false;
+        }
+        objectId = theCard.getMainCard().getId(); // for split cards/MDFC/Adventure cards
+
         return source.isControlledBy(affectedControllerId)
                 && mor.refersTo(objectId, game);
     }

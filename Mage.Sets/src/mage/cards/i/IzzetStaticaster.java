@@ -60,12 +60,12 @@ public final class IzzetStaticaster extends CardImpl {
 
 class IzzetStaticasterDamageEffect extends OneShotEffect {
 
-    public IzzetStaticasterDamageEffect() {
+    IzzetStaticasterDamageEffect() {
         super(Outcome.Exile);
         this.staticText = "{this} deals 1 damage to target creature and each other creature with the same name as that creature";
     }
 
-    public IzzetStaticasterDamageEffect(final IzzetStaticasterDamageEffect effect) {
+    private IzzetStaticasterDamageEffect(final IzzetStaticasterDamageEffect effect) {
         super(effect);
     }
 
@@ -84,7 +84,7 @@ class IzzetStaticasterDamageEffect extends OneShotEffect {
             } else {
                 filter.add(new NamePredicate(targetPermanent.getName()));
             }
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
                 permanent.damage(1, source.getSourceId(), source, game, false, true);
             }
             return true;

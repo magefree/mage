@@ -10,7 +10,6 @@ import mage.choices.Choice;
 import mage.choices.ChoiceCardType;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TimingRule;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
@@ -33,7 +32,7 @@ public final class CreepingRenaissance extends CardImpl {
         this.getSpellAbility().addEffect(new CreepingRenaissanceEffect());
 
         // Flashback {5}{G}{G}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{5}{G}{G}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{5}{G}{G}")));
     }
 
     private CreepingRenaissance(final CreepingRenaissance card) {
@@ -48,12 +47,12 @@ public final class CreepingRenaissance extends CardImpl {
 
 class CreepingRenaissanceEffect extends OneShotEffect {
 
-    public CreepingRenaissanceEffect() {
+    CreepingRenaissanceEffect() {
         super(Outcome.Detriment);
         staticText = "Choose a permanent type. Return all cards of the chosen type from your graveyard to your hand";
     }
 
-    public CreepingRenaissanceEffect(final CreepingRenaissanceEffect effect) {
+    private CreepingRenaissanceEffect(final CreepingRenaissanceEffect effect) {
         super(effect);
     }
 
@@ -76,7 +75,7 @@ class CreepingRenaissanceEffect extends OneShotEffect {
         }
         FilterCard filter = new FilterCard(chosenType.toString().toLowerCase(Locale.ENGLISH) + " card");
         filter.add(chosenType.getPredicate());
-        return controller.moveCards(controller.getGraveyard().getCards(filter, source.getSourceId(), controller.getId(), game), Zone.HAND, source, game);
+        return controller.moveCards(controller.getGraveyard().getCards(filter, controller.getId(), source, game), Zone.HAND, source, game);
     }
 
     @Override

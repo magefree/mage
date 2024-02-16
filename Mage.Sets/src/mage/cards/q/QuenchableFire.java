@@ -23,7 +23,7 @@ public final class QuenchableFire extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayerOrPlaneswalker());
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
         // It deals an additional 3 damage to that player or planeswalker at the beginning of your next upkeep step unless that player or that planeswalker’s controller pays {U} before that step.
-        this.getSpellAbility().addEffect(new UnlessPaysDelayedEffect(new ManaCostsImpl("{U}"),
+        this.getSpellAbility().addEffect(new UnlessPaysDelayedEffect(new ManaCostsImpl<>("{U}"),
                 new DamageTargetEffect(3, true, "that player or that planeswalker's controller"), PhaseStep.UPKEEP, false,
                 "It deals an additional 3 damage to that player or planeswalker at the beginning of your next upkeep step unless that player or that planeswalker's controller pays {U} before that step."));
     }

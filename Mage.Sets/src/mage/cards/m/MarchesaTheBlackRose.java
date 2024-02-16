@@ -33,7 +33,7 @@ public final class MarchesaTheBlackRose extends CardImpl {
 
     public MarchesaTheBlackRose(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{B}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
 
@@ -66,9 +66,10 @@ class MarchesaTheBlackRoseTriggeredAbility extends TriggeredAbilityImpl {
 
     public MarchesaTheBlackRoseTriggeredAbility() {
         super(Zone.BATTLEFIELD, new MarchesaTheBlackRoseEffect());
+        setTriggerPhrase("Whenever a creature you control with a +1/+1 counter on it dies, ");
     }
 
-    public MarchesaTheBlackRoseTriggeredAbility(final MarchesaTheBlackRoseTriggeredAbility ability) {
+    private MarchesaTheBlackRoseTriggeredAbility(final MarchesaTheBlackRoseTriggeredAbility ability) {
         super(ability);
     }
 
@@ -99,11 +100,6 @@ class MarchesaTheBlackRoseTriggeredAbility extends TriggeredAbilityImpl {
         }
         return false;
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a creature you control with a +1/+1 counter on it dies, " ;
-    }
 }
 
 class MarchesaTheBlackRoseEffect extends OneShotEffect {
@@ -113,7 +109,7 @@ class MarchesaTheBlackRoseEffect extends OneShotEffect {
         this.staticText = "return that card to the battlefield under your control at the beginning of the next end step.";
     }
 
-    MarchesaTheBlackRoseEffect(final MarchesaTheBlackRoseEffect effect) {
+    private MarchesaTheBlackRoseEffect(final MarchesaTheBlackRoseEffect effect) {
         super(effect);
     }
 
@@ -129,7 +125,7 @@ class MarchesaTheBlackRoseEffect extends OneShotEffect {
             Effect effect = new ReturnToBattlefieldUnderYourControlTargetEffect();
             effect.setText("return that card to the battlefield under your control at the beginning of the next end step");
             DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect);
-            delayedAbility.getEffects().get(0).setTargetPointer(getTargetPointer());
+            delayedAbility.getEffects().get(0).setTargetPointer(this.getTargetPointer().copy());
             game.addDelayedTriggeredAbility(delayedAbility, source);
             return true;
         }

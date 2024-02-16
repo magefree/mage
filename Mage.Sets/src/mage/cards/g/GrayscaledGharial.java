@@ -25,7 +25,7 @@ public final class GrayscaledGharial extends CardImpl {
         this.addAbility(new IslandwalkAbility());
     }
 
-    public GrayscaledGharial (final GrayscaledGharial card) {
+    private GrayscaledGharial(final GrayscaledGharial card) {
         super(card);
     }
 

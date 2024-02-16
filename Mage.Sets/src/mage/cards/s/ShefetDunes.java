@@ -49,9 +49,9 @@ public final class ShefetDunes extends CardImpl {
         Ability ability2 = new ActivateAsSorceryActivatedAbility(
                 Zone.BATTLEFIELD,
                 new BoostControlledEffect(1, 1, Duration.EndOfTurn),
-                new ManaCostsImpl("{2}{W}{W}"));
+                new ManaCostsImpl<>("{2}{W}{W}"));
         ability2.addCost(new TapSourceCost());
-        ability2.addCost(new SacrificeTargetCost(new TargetControlledPermanent(1, 1, filterDesertPermanent, true)));
+        ability2.addCost(new SacrificeTargetCost(filterDesertPermanent));
         this.addAbility(ability2);
     }
 

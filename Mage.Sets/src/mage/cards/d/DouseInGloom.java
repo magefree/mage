@@ -20,7 +20,7 @@ public final class DouseInGloom extends CardImpl {
 
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addEffect(new GainLifeEffect(2));
+        this.getSpellAbility().addEffect(new GainLifeEffect(2).concatBy("and"));
     }
 
     private DouseInGloom(final DouseInGloom card) {

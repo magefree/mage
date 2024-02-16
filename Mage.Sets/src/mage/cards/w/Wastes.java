@@ -16,7 +16,7 @@ public final class Wastes extends CardImpl {
 
     public Wastes(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
-        addSuperType(SuperType.BASIC);
+        this.supertype.add(SuperType.BASIC);
 
         // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());

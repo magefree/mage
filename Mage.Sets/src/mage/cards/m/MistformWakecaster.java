@@ -1,4 +1,3 @@
-
 package mage.cards.m;
 
 import java.util.UUID;
@@ -8,7 +7,6 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BecomesChosenCreatureTypeSourceEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureTypeTargetEffect;
@@ -44,10 +42,10 @@ public final class MistformWakecaster extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // {1}: Mistform Wakecaster becomes the creature type of your choice until end of turn.
-        this.addAbility(new SimpleActivatedAbility(new BecomesChosenCreatureTypeSourceEffect(), new ManaCostsImpl("{1}")));
+        this.addAbility(new SimpleActivatedAbility(new BecomesChosenCreatureTypeSourceEffect(), new ManaCostsImpl<>("{1}")));
 
         // {2}{U}{U}, {T}: Choose a creature type. Each creature you control becomes that type until end of turn.
-        Ability ability = new SimpleActivatedAbility(new BecomesChosenCreatureTypeControlledEffect(), new ManaCostsImpl("{2}{U}{U}"));
+        Ability ability = new SimpleActivatedAbility(new BecomesChosenCreatureTypeControlledEffect(), new ManaCostsImpl<>("{2}{U}{U}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
@@ -64,12 +62,12 @@ public final class MistformWakecaster extends CardImpl {
 
 class BecomesChosenCreatureTypeControlledEffect extends OneShotEffect {
 
-    public BecomesChosenCreatureTypeControlledEffect() {
+    BecomesChosenCreatureTypeControlledEffect() {
         super(Outcome.BoostCreature);
         staticText = "Choose a creature type. Each creature you control becomes that type until end of turn";
     }
 
-    public BecomesChosenCreatureTypeControlledEffect(final BecomesChosenCreatureTypeControlledEffect effect) {
+    private BecomesChosenCreatureTypeControlledEffect(final BecomesChosenCreatureTypeControlledEffect effect) {
         super(effect);
     }
 
@@ -103,7 +101,7 @@ class BecomesChosenCreatureTypeControlledEffect extends OneShotEffect {
     }
 
     @Override
-    public Effect copy() {
+    public BecomesChosenCreatureTypeControlledEffect copy() {
         return new BecomesChosenCreatureTypeControlledEffect(this);
     }
 

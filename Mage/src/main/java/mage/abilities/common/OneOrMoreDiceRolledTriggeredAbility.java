@@ -8,6 +8,8 @@ import mage.game.events.DiceRolledEvent;
 import mage.game.events.GameEvent;
 
 /**
+ * Controller rolls one or more dice.
+ *
  * @author weirddan455
  */
 public class OneOrMoreDiceRolledTriggeredAbility extends TriggeredAbilityImpl {
@@ -18,6 +20,7 @@ public class OneOrMoreDiceRolledTriggeredAbility extends TriggeredAbilityImpl {
 
     public OneOrMoreDiceRolledTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
+        setTriggerPhrase("Whenever you roll one or more dice, ");
     }
 
     private OneOrMoreDiceRolledTriggeredAbility(final OneOrMoreDiceRolledTriggeredAbility effect) {
@@ -36,24 +39,27 @@ public class OneOrMoreDiceRolledTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (!isControlledBy(event.getPlayerId())) {
+        if (!isControlledBy(event.getTargetId())) {
             return false;
         }
         int maxRoll = ((DiceRolledEvent) event)
                 .getResults()
                 .stream()
-                .filter(Integer.class::isInstance) // only numerical die result can be masured
+                .filter(Integer.class::isInstance) // only numerical die result can be measured
                 .map(Integer.class::cast)
                 .mapToInt(Integer::intValue)
                 .max()
                 .orElse(0);
+        int totalRoll = ((DiceRolledEvent) event)
+                .getResults()
+                .stream()
+                .filter(Integer.class::isInstance) // only numerical die result can be measured
+                .map(Integer.class::cast)
+                .mapToInt(Integer::intValue)
+                .sum();
         this.getEffects().setValue("maxDieRoll", maxRoll);
+        this.getEffects().setValue("totalDieRoll", totalRoll);
         return true;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you roll one or more dice, ";
     }
 
     @Override

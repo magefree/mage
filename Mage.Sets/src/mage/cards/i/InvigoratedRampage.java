@@ -33,10 +33,9 @@ public final class InvigoratedRampage extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 
         // Two target creatures each get +2/+0 and gain trample until end of turn.
-        Mode mode = new Mode();
         effect = new BoostTargetEffect(2, 0, Duration.EndOfTurn);
         effect.setText("Two target creatures each get +2/+0");
-        mode.addEffect(effect);
+        Mode mode = new Mode(effect);
         effect = new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("and gain trample until end of turn");
         mode.addEffect(effect);

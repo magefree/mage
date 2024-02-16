@@ -32,7 +32,7 @@ public final class DarksteelBrute extends CardImpl {
                 new CreatureToken(2, 2, "2/2 Beast artifact creature")
                         .withSubType(SubType.BEAST)
                         .withType(CardType.ARTIFACT),
-                "", Duration.EndOfTurn), new GenericManaCost(3)));
+                CardType.ARTIFACT, Duration.EndOfTurn), new GenericManaCost(3)));
     }
 
     private DarksteelBrute(final DarksteelBrute card) {

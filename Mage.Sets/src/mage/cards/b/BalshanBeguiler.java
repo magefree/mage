@@ -72,13 +72,13 @@ class BalshanBeguilerEffect extends OneShotEffect {
             return false;
         }
         CardsImpl cards = new CardsImpl();
-        cards.addAll(player.getLibrary().getTopCards(game, 2));
+        cards.addAllCards(player.getLibrary().getTopCards(game, 2));
         if (cards.isEmpty()) {
             return false;
         }
         player.revealCards(source, cards, game);
         TargetCard target = new TargetCardInLibrary();
-        if (you.choose(Outcome.Benefit, cards, target, game)) {
+        if (you.choose(Outcome.Benefit, cards, target, source, game)) {
             Card card = player.getLibrary().getCard(target.getFirstTarget(), game);
             you.moveCards(card, Zone.GRAVEYARD, source, game);
         }

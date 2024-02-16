@@ -75,7 +75,7 @@ class ConcoctEffect extends OneShotEffect {
                 + "from your graveyard to the battlefield.";
     }
 
-    public ConcoctEffect(final ConcoctEffect effect) {
+    private ConcoctEffect(final ConcoctEffect effect) {
         super(effect);
     }
 
@@ -92,8 +92,8 @@ class ConcoctEffect extends OneShotEffect {
         }
         player.surveil(3, source, game);
         Target target = new TargetCardInYourGraveyard(filter);
-        target.setNotTarget(true);
-        if (player.choose(outcome, target, source.getSourceId(), game)) {
+        target.withNotTarget(true);
+        if (player.choose(outcome, target, source, game)) {
             Effect effect = new ReturnFromGraveyardToBattlefieldTargetEffect();
             effect.setTargetPointer(new FixedTarget(target.getFirstTarget(), game));
             effect.apply(game, source);

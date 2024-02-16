@@ -41,12 +41,12 @@ public final class PersonalSanctuary extends CardImpl {
 
 class PersonalSanctuaryEffect extends PreventionEffectImpl {
 
-    public PersonalSanctuaryEffect() {
+    PersonalSanctuaryEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "During your turn, prevent all damage that would be dealt to you";
     }
 
-    public PersonalSanctuaryEffect(PersonalSanctuaryEffect effect) {
+    private PersonalSanctuaryEffect(final PersonalSanctuaryEffect effect) {
         super(effect);
     }
 
@@ -60,11 +60,6 @@ class PersonalSanctuaryEffect extends PreventionEffectImpl {
             game.fireEvent(new PreventedDamageEvent(event.getTargetId(), source.getSourceId(), source, source.getControllerId(), damage));
         }
         return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

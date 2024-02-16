@@ -50,7 +50,7 @@ class ChaliceOfTheVoidTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new CounterTargetEffect());
     }
 
-    public ChaliceOfTheVoidTriggeredAbility(final ChaliceOfTheVoidTriggeredAbility abiltity) {
+    private ChaliceOfTheVoidTriggeredAbility(final ChaliceOfTheVoidTriggeredAbility abiltity) {
         super(abiltity);
     }
 

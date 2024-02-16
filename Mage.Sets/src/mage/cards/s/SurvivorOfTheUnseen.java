@@ -35,7 +35,7 @@ public final class SurvivorOfTheUnseen extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Cumulative upkeep {2}
-        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{2}")));
 
         // {T}: Draw two cards, then put a card from your hand on top of your library.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SurvivorOfTheUnseenEffect(), new TapSourceCost()));
@@ -53,12 +53,12 @@ public final class SurvivorOfTheUnseen extends CardImpl {
 
 class SurvivorOfTheUnseenEffect extends OneShotEffect {
 
-    public SurvivorOfTheUnseenEffect() {
+    SurvivorOfTheUnseenEffect() {
         super(Outcome.DrawCard);
         staticText = "Draw two cards, then put a card from your hand on top of your library";
     }
 
-    public SurvivorOfTheUnseenEffect(final SurvivorOfTheUnseenEffect effect) {
+    private SurvivorOfTheUnseenEffect(final SurvivorOfTheUnseenEffect effect) {
         super(effect);
     }
 
@@ -80,7 +80,7 @@ class SurvivorOfTheUnseenEffect extends OneShotEffect {
 
     private boolean putOnLibrary(Player player, Ability source, Game game) {
         TargetCardInHand target = new TargetCardInHand();
-        if (target.canChoose(source.getSourceId(), player.getId(), game)) {
+        if (target.canChoose(player.getId(), source, game)) {
             player.chooseTarget(Outcome.ReturnToHand, target, source, game);
             Card card = player.getHand().get(target.getFirstTarget(), game);
             if (card != null) {

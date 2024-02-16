@@ -58,7 +58,7 @@ public final class NecropolisFiend extends CardImpl {
         effect.setText("Target creature gets -X/-X until end of turn");
         Ability ability = new SimpleActivatedAbility(
                 Zone.BATTLEFIELD, effect,
-                new ManaCostsImpl("{X}")
+                new ManaCostsImpl<>("{X}")
         );
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());

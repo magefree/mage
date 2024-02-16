@@ -28,7 +28,7 @@ public final class SorcererOfTheFang extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {5}{B}, {T}: Sorcerer of the Fang deals 2 damage to target opponent or planeswalker.
-        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(2), new ManaCostsImpl("{5}{B}"));
+        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(2), new ManaCostsImpl<>("{5}{B}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetOpponentOrPlaneswalker());
         this.addAbility(ability);

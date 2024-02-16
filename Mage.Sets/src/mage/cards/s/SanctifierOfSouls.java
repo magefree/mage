@@ -47,7 +47,7 @@ public final class SanctifierOfSouls extends CardImpl {
         // {2}{W}, Exile a creature card from your graveyard: Create a 1/1 white Spirit creature token with flying.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new CreateTokenEffect(new SpiritWhiteToken()),
-                new ManaCostsImpl("{2}{W}"));
+                new ManaCostsImpl<>("{2}{W}"));
         ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(new FilterCreatureCard("a creature card from your graveyard"))));
         this.addAbility(ability);
     }

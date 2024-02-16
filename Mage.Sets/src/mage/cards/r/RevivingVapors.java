@@ -38,19 +38,19 @@ public final class RevivingVapors extends CardImpl {
 
 class RevivingVaporsEffect extends OneShotEffect {
 
-    public RevivingVaporsEffect() {
+    RevivingVaporsEffect() {
         super(Outcome.Benefit);
         staticText = "Reveal the top three cards of your library and put one of them into your hand. You gain life equal to that card's mana value. Put all other cards revealed this way into your graveyard";
     }
 
-    public RevivingVaporsEffect(final RevivingVaporsEffect effect) {
+    private RevivingVaporsEffect(final RevivingVaporsEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (controller == null || sourceObject == null) {
             return false;
         }
@@ -64,9 +64,9 @@ class RevivingVaporsEffect extends OneShotEffect {
                 card = cards.getRandom(game);
             } else {
                 TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card to put into your hand"));
-                target.setNotTarget(true);
+                target.withNotTarget(true);
                 target.setRequired(true);
-                if (controller.choose(Outcome.DrawCard, cards, target, game)) {
+                if (controller.choose(Outcome.DrawCard, cards, target, source, game)) {
                     card = cards.get(target.getFirstTarget(), game);
                 }
             }

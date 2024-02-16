@@ -1,4 +1,3 @@
-
 package mage.cards.m;
 
 import java.util.UUID;
@@ -28,7 +27,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author emerald000
  */
 public final class MartyrOfSpores extends CardImpl {
-    
+
     private static final FilterCard filter = new FilterCard("X green cards from your hand");
     static {
         filter.add(new ColorPredicate(ObjectColor.GREEN));
@@ -36,16 +35,16 @@ public final class MartyrOfSpores extends CardImpl {
 
     public MartyrOfSpores(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.SHAMAN);
+        this.subtype.add(SubType.HUMAN, SubType.SHAMAN);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
         // {1}, Reveal X green cards from your hand, Sacrifice Martyr of Spores: Target creature gets +X/+X until end of turn.
-        Effect effect = new BoostTargetEffect(RevealTargetFromHandCostCount.instance, RevealTargetFromHandCostCount.instance, Duration.EndOfTurn, true);
-        effect.setText("Target creature gets +X/+X until end of turn.");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new GenericManaCost(1));
+        Ability ability = new SimpleActivatedAbility(
+                new BoostTargetEffect(RevealTargetFromHandCostCount.instance, RevealTargetFromHandCostCount.instance, Duration.EndOfTurn),
+                new GenericManaCost(1)
+        );
         ability.addCost(new RevealTargetFromHandCost(new TargetCardInHand(0, Integer.MAX_VALUE, filter)));
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetCreaturePermanent());

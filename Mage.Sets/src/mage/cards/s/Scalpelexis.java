@@ -53,12 +53,12 @@ public final class Scalpelexis extends CardImpl {
 
 class ScalpelexisEffect extends OneShotEffect {
 
-    public ScalpelexisEffect() {
+    ScalpelexisEffect() {
         super(Outcome.Exile);
         this.staticText = "that player exiles the top four cards of their library. If two or more of those cards have the same name, repeat this process";
     }
 
-    public ScalpelexisEffect(final ScalpelexisEffect effect) {
+    private ScalpelexisEffect(final ScalpelexisEffect effect) {
         super(effect);
     }
 

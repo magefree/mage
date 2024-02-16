@@ -18,6 +18,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  * @author halljared
@@ -32,13 +33,13 @@ public final class NeglectedHeirloom extends CardImpl {
 
         // Equipped creature gets +1/+1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(1, 1)));
-        // Equip {1}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1)));
 
         // When equipped creature transforms, transform Neglected Heirloom.
         this.addAbility(new TransformAbility());
         this.addAbility(new NeglectedHeirloomTriggeredAbility());
 
+        // Equip {1}
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(1), new TargetControlledCreaturePermanent(), false));
     }
 
     private NeglectedHeirloom(final NeglectedHeirloom card) {
@@ -58,7 +59,7 @@ class NeglectedHeirloomTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new TransformSourceEffect(), false);
     }
 
-    public NeglectedHeirloomTriggeredAbility(final NeglectedHeirloomTriggeredAbility ability) {
+    private NeglectedHeirloomTriggeredAbility(final NeglectedHeirloomTriggeredAbility ability) {
         super(ability);
     }
 

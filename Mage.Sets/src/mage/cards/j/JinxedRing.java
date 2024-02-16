@@ -17,7 +17,7 @@ import mage.constants.Outcome;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
+import mage.filter.StaticFilters;
 
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
@@ -45,7 +45,7 @@ public final class JinxedRing extends CardImpl {
 
         // Sacrifice a creature: Target opponent gains control of Jinxed Ring.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new JinxedRingEffect(),
-                new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
+                new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }
@@ -62,12 +62,12 @@ public final class JinxedRing extends CardImpl {
 
 class JinxedRingEffect extends ContinuousEffectImpl {
 
-    public JinxedRingEffect() {
+    JinxedRingEffect() {
         super(Duration.Custom, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
         staticText = "Target opponent gains control of {this}";
     }
 
-    public JinxedRingEffect(final JinxedRingEffect effect) {
+    private JinxedRingEffect(final JinxedRingEffect effect) {
         super(effect);
     }
 
@@ -78,7 +78,7 @@ class JinxedRingEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = (Permanent) source.getSourceObjectIfItStillExists(game);
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent != null) {
             return permanent.changeControllerId(source.getFirstTarget(), game, source);
         } else {

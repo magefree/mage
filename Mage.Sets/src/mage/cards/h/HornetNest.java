@@ -1,19 +1,15 @@
 package mage.cards.h;
 
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.DealtDamageToSourceTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.dynamicvalue.common.SavedDamageValue;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.game.Game;
 import mage.game.permanent.token.InsectDeathToken;
-import mage.players.Player;
 
 import java.util.UUID;
 
@@ -33,7 +29,8 @@ public final class HornetNest extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
 
         // Whenever Hornet Nest is dealt damage, create that many 1/1 green Insect creature tokens with flying and deathtouch.
-        this.addAbility(new DealtDamageToSourceTriggeredAbility(new HornetNestDealDamageEffect(), false, false));
+        this.addAbility(new DealtDamageToSourceTriggeredAbility(
+                new CreateTokenEffect(new InsectDeathToken(), SavedDamageValue.MANY), false));
     }
 
     private HornetNest(final HornetNest card) {
@@ -43,34 +40,5 @@ public final class HornetNest extends CardImpl {
     @Override
     public HornetNest copy() {
         return new HornetNest(this);
-    }
-}
-
-class HornetNestDealDamageEffect extends OneShotEffect {
-
-    public HornetNestDealDamageEffect() {
-        super(Outcome.Damage);
-        this.staticText = "create that many 1/1 green Insect creature tokens with flying and deathtouch";
-    }
-
-    public HornetNestDealDamageEffect(final HornetNestDealDamageEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public HornetNestDealDamageEffect copy() {
-        return new HornetNestDealDamageEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            int amount = (Integer) getValue("damage");
-            if (amount > 0) {
-                return new CreateTokenEffect(new InsectDeathToken(), amount).apply(game, source);
-            }
-        }
-        return false;
     }
 }

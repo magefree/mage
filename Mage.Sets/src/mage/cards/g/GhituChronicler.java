@@ -40,7 +40,7 @@ public final class GhituChronicler extends CardImpl {
         // When Ghitu Chronicler enters the battlefield, if it was kicked, return target instant or sorcery card from your graveyard to your hand.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), false),
-                KickedCondition.instance, "When {this} enters the battlefield, if it was kicked, " +
+                KickedCondition.ONCE, "When {this} enters the battlefield, if it was kicked, " +
                 "return target instant or sorcery card from your graveyard to your hand."
         );
         ability.addTarget(new TargetCardInYourGraveyard(filter));

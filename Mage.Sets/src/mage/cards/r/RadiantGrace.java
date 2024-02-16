@@ -37,7 +37,7 @@ public final class RadiantGrace extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // Enchanted creature gets +1/+0 and has vigilance.
         Ability ability = new SimpleStaticAbility(new BoostEnchantedEffect(1, 0));
@@ -96,8 +96,7 @@ class RadiantGraceEffect extends OneShotEffect {
         }
 
         game.getState().setValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + source.getSourceId(), Boolean.TRUE);
-        UUID secondFaceId = game.getCard(source.getSourceId()).getSecondCardFace().getId();
-        game.getState().setValue("attachTo:" + secondFaceId, player.getId());
+        game.getState().setValue("attachTo:" + source.getSourceId(), player.getId());
         if (controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
             player.addAttachment(card.getId(), source, game);
         }

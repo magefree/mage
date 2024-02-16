@@ -203,8 +203,9 @@ public class ExertTest extends CardTestPlayerBase {
     }
 
     /*
-    "If you gain control of another player's creature until end of turn and exert it, it will untap during that player's untap step."
-    See issue #3183
+     * "If you gain control of another player's creature until end of turn and exert it,
+     * it will untap during that player's untap step."
+     * See issue #3183
     */
     @Test
     public void stolenExertCreatureShouldUntapDuringOwnersUntapStep() {
@@ -239,23 +240,32 @@ public class ExertTest extends CardTestPlayerBase {
     @Test
     public void combatCelebrantExertedCannotExertAgainDuringNextCombatPhase() {
         /*
-        Combat Celebrant 2R
-        Creature - Human Warrior 4/1
-        If Combat Celebrant hasn't been exerted this turn, you may exert it as it attacks. When you do, untap all other creatures you control and after this phase, there is an additional combat phase.
-        */
+         * Combat Celebrant 2R
+         * Creature - Human Warrior 4/1
+         * If Combat Celebrant hasn't been exerted this turn, you may exert it as it attacks.
+         * When you do, untap all other creatures you control and after this phase, there is an additional combat phase.
+         */
         String cCelebrant = "Combat Celebrant";
         String memnite = "Memnite"; // {0} 1/1
 
         addCard(Zone.BATTLEFIELD, playerA, cCelebrant);
         addCard(Zone.BATTLEFIELD, playerA, memnite);
 
+        setStrictChooseMode(true);
+
+        // First combat phase
         attack(1, playerA, cCelebrant);
         attack(1, playerA, memnite);
         setChoice(playerA, true); // exert for extra turn
-        attack(1, playerA, cCelebrant);
-        attack(1, playerA, memnite);
-        setChoice(playerA, true); // try to exert again
-        attack(1, playerA, cCelebrant); // should not be able to enter this 3rd combat phase
+
+        setStopAt(1, PhaseStep.COMBAT_DAMAGE);
+        execute();
+
+        assertLife(playerB, 15); // 4 + 1
+        assertTapped(cCelebrant, true);
+        assertTapped(memnite, false);
+
+        // Second combat phase
         attack(1, playerA, memnite);
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
@@ -267,22 +277,24 @@ public class ExertTest extends CardTestPlayerBase {
     }
 
     /*
-     * Reported bug: Combat Celebrant able to exert again despite being exerted already if Always Watching is in play. (Or presumably any Vigilance granting effect)
-    */
+     * Reported bug: Combat Celebrant able to exert again despite being exerted already if Always Watching is in play.
+     * (Or presumably any Vigilance granting effect)
+     */
     @Test
     public void combatCelebrantExertedCannotExertDuringNextCombatPhase_InteractionWithAlwaysWatching() {
         /*
-        Combat Celebrant 2R
-        Creature - Human Warrior 4/1
-        If Combat Celebrant hasn't been exerted this turn, you may exert it as it attacks. When you do, untap all other creatures you control and after this phase, there is an additional combat phase.
-        */
+         * Combat Celebrant 2R
+         * Creature - Human Warrior 4/1
+         * If Combat Celebrant hasn't been exerted this turn, you may exert it as it attacks.
+         * When you do, untap all other creatures you control and after this phase, there is an additional combat phase.
+         */
         String cCelebrant = "Combat Celebrant";
-        
+
         /*
-        Always Watching 1WW
-        Enchantment
-        Non-token creatures you control get +1/+1 and have vigilance. 
-        */
+         * Always Watching 1WW
+         * Enchantment
+         * Non-token creatures you control get +1/+1 and have vigilance.
+         */
         String aWatching = "Always Watching";
         String memnite = "Memnite"; // {0} 1/1
 
@@ -290,13 +302,22 @@ public class ExertTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, cCelebrant);
         addCard(Zone.BATTLEFIELD, playerA, memnite);
 
+        setStrictChooseMode(true);
+
+        // First combat phase
         attack(1, playerA, cCelebrant);
         attack(1, playerA, memnite);
         setChoice(playerA, true); // exert for extra turn
+
+        setStopAt(1, PhaseStep.COMBAT_DAMAGE);
+        execute();
+
+        assertLife(playerB, 13); // 5 + 2 (Celebrant once, Memnite once with +1/+1 on both)
+        assertTapped(cCelebrant, false);
+        assertTapped(memnite, false);
+
+        // Extra combat phase
         attack(1, playerA, cCelebrant);
-        attack(1, playerA, memnite);
-        setChoice(playerA, true); // try to exert again
-        attack(1, playerA, cCelebrant); // should not be able to enter this 3rd combat phase
         attack(1, playerA, memnite);
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
@@ -313,17 +334,18 @@ public class ExertTest extends CardTestPlayerBase {
     @Test
     public void combatCelebrantExertedCannotExertAgainDuringNextCombatPhase_InteractionWithArlinnKord() {
         /*
-        Combat Celebrant 2R
-        Creature - Human Warrior 4/1
-        If Combat Celebrant hasn't been exerted this turn, you may exert it as it attacks. When you do, untap all other creatures you control and after this phase, there is an additional combat phase.
+         * Combat Celebrant 2R
+         * Creature - Human Warrior 4/1
+         * If Combat Celebrant hasn't been exerted this turn, you may exert it as it attacks.
+         * When you do, untap all other creatures you control and after this phase, there is an additional combat phase.
         */
         String cCelebrant = "Combat Celebrant";
         
         /*
-        Arlinn Kord {2}{R}{G}
-       Planeswalker — Arlinn 3 loyalty
-       +1: Until end of turn, up to one target creature gets +2/+2 and gains vigilance and haste.
-       0: Create a 2/2 green Wolf creature token. Transform Arlinn Kord.
+         * Arlinn Kord {2}{R}{G}
+         * Planeswalker — Arlinn 3 loyalty
+         * +1: Until end of turn, up to one target creature gets +2/+2 and gains vigilance and haste.
+         * 0: Create a 2/2 green Wolf creature token. Transform Arlinn Kord.
         */
         String aKord = "Arlinn Kord";
 
@@ -332,11 +354,13 @@ public class ExertTest extends CardTestPlayerBase {
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+1:"); // grant +2/+2 vig and haste to celebrant
         addTarget(playerA, cCelebrant);
+
+        // First combat phase
         attack(1, playerA, cCelebrant);
         setChoice(playerA, true); // exert for extra turn
+
+        // Second combat phase
         attack(1, playerA, cCelebrant);
-        setChoice(playerA, true); // try to exert again
-        attack(1, playerA, cCelebrant); // should not be able to enter this 3rd combat phase
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();

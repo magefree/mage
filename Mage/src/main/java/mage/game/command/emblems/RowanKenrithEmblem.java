@@ -1,7 +1,7 @@
 package mage.game.command.emblems;
 
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.common.CopyStackAbilityEffect;
+import mage.abilities.effects.common.CopyStackObjectEffect;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -16,15 +16,24 @@ public final class RowanKenrithEmblem extends Emblem {
     // Target player gets an emblem with "Whenever you activate an ability that isn't a mana ability, copy it. You may choose new targets for the copy."
 
     public RowanKenrithEmblem() {
-        this.setName("Emblem Rowan Kenrith");
+        super("Emblem Rowan Kenrith");
         this.getAbilities().add(new RowanKenrithEmblemTriggeredAbility());
+    }
+
+    private RowanKenrithEmblem(final RowanKenrithEmblem card) {
+        super(card);
+    }
+
+    @Override
+    public RowanKenrithEmblem copy() {
+        return new RowanKenrithEmblem(this);
     }
 }
 
 class RowanKenrithEmblemTriggeredAbility extends TriggeredAbilityImpl {
 
     RowanKenrithEmblemTriggeredAbility() {
-        super(Zone.COMMAND, new CopyStackAbilityEffect(), false);
+        super(Zone.COMMAND, new CopyStackObjectEffect(), false);
     }
 
     private RowanKenrithEmblemTriggeredAbility(final RowanKenrithEmblemTriggeredAbility ability) {
@@ -50,7 +59,7 @@ class RowanKenrithEmblemTriggeredAbility extends TriggeredAbilityImpl {
         if (stackAbility == null || stackAbility.getStackAbility() instanceof ActivatedManaAbilityImpl) {
             return false;
         }
-        this.getEffects().setValue("stackAbility", stackAbility);
+        this.getEffects().setValue("stackObject", stackAbility);
         return true;
     }
 

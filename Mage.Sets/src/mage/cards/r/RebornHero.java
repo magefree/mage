@@ -42,7 +42,7 @@ public final class RebornHero extends CardImpl {
                 Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(
                         new GainAbilitySourceEffect(new DiesSourceTriggeredAbility(new DoIfCostPaid(
-                                new ReturnSourceFromGraveyardToBattlefieldEffect(), new ManaCostsImpl("{W}{W}")
+                                new ReturnSourceFromGraveyardToBattlefieldEffect(), new ManaCostsImpl<>("{W}{W}")
                         ))),
                         new CardsInControllerGraveyardCondition(7),
                         "As long as seven or more cards are in your graveyard, "

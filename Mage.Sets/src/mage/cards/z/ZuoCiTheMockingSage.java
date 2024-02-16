@@ -30,7 +30,7 @@ public final class ZuoCiTheMockingSage extends CardImpl {
 
     public ZuoCiTheMockingSage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN, SubType.ADVISOR);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);

@@ -25,7 +25,7 @@ public final class WarlordsFury extends CardImpl {
                 StaticFilters.FILTER_CONTROLLED_CREATURES, "Creatures you control gain first strike until end of turn.<br>"));
 
         // Draw a card.
-        getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
 
     }
 

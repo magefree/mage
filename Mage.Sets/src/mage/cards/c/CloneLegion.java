@@ -43,12 +43,12 @@ public final class CloneLegion extends CardImpl {
 
 class CloneLegionEffect extends OneShotEffect {
 
-    public CloneLegionEffect() {
+    CloneLegionEffect() {
         super(Outcome.Benefit);
         this.staticText = "For each creature target player controls, create a token that's a copy of that creature";
     }
 
-    public CloneLegionEffect(final CloneLegionEffect effect) {
+    private CloneLegionEffect(final CloneLegionEffect effect) {
         super(effect);
     }
 

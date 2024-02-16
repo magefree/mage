@@ -29,7 +29,7 @@ public final class AjaniStrengthOfThePride extends CardImpl {
     public AjaniStrengthOfThePride(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{W}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.AJANI);
         this.setStartingLoyalty(5);
 

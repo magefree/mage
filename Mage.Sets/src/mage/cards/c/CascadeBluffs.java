@@ -25,15 +25,15 @@ public final class CascadeBluffs extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
 
         // {U/R}, {tap}: Add {U}{U}, {U}{R}, or {R}{R}.
-        SimpleManaAbility ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlueMana(2), new ManaCostsImpl("{U/R}"));
+        SimpleManaAbility ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlueMana(2), new ManaCostsImpl<>("{U/R}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 
-        ability = new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 1, 0, 1, 0, 0, 0, 0), new ManaCostsImpl("{U/R}"));
+        ability = new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 1, 0, 1, 0, 0, 0, 0), new ManaCostsImpl<>("{U/R}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 
-        ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.RedMana(2), new ManaCostsImpl("{U/R}"));
+        ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.RedMana(2), new ManaCostsImpl<>("{U/R}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);        
     }

@@ -49,7 +49,7 @@ class IntellectualOfferingDrawEffect extends OneShotEffect {
         this.staticText = "Choose an opponent. You and that player each draw three cards";
     }
     
-    IntellectualOfferingDrawEffect(final IntellectualOfferingDrawEffect effect) {
+    private IntellectualOfferingDrawEffect(final IntellectualOfferingDrawEffect effect) {
         super(effect);
     }
     
@@ -63,7 +63,7 @@ class IntellectualOfferingDrawEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             Target target = new TargetOpponent(true);
-            target.choose(Outcome.DrawCard, source.getControllerId(), source.getSourceId(), game);
+            target.choose(Outcome.DrawCard, source.getControllerId(), source.getSourceId(), source, game);
             player.drawCards(3, source, game);
             Player opponent = game.getPlayer(target.getFirstTarget());
             if (opponent != null) {
@@ -82,7 +82,7 @@ class IntellectualOfferingUntapEffect extends OneShotEffect {
         this.staticText = "<br><br>Choose an opponent. Untap all nonland permanents you control and all nonland permanents that player controls";
     }
     
-    IntellectualOfferingUntapEffect(final IntellectualOfferingUntapEffect effect) {
+    private IntellectualOfferingUntapEffect(final IntellectualOfferingUntapEffect effect) {
         super(effect);
     }
     
@@ -96,7 +96,7 @@ class IntellectualOfferingUntapEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             Target target = new TargetOpponent(true);
-            target.choose(Outcome.Untap, source.getControllerId(), source.getSourceId(), game);
+            target.choose(Outcome.Untap, source.getControllerId(), source.getSourceId(), source, game);
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterNonlandPermanent(), player.getId(), game)) {
                 permanent.untap(game);
             }

@@ -29,8 +29,6 @@ public class DemonsHornTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertAllCommandsUsed();
-        
         assertPermanentCount(playerA, "Abyssal Gatekeeper", 1);
 
         assertLife(playerA, 20);
@@ -61,8 +59,6 @@ public class DemonsHornTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertAllCommandsUsed();
-        
         assertPermanentCount(playerA, "Alesha, Who Smiles at Death", 1);
 
         assertLife(playerA, 20);

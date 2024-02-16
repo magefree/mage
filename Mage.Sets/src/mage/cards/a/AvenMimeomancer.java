@@ -28,8 +28,6 @@ public final class AvenMimeomancer extends CardImpl {
         this.subtype.add(SubType.BIRD);
         this.subtype.add(SubType.WIZARD);
 
-
-
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
 
@@ -56,11 +54,12 @@ public final class AvenMimeomancer extends CardImpl {
 
 class AvenEffect extends ContinuousEffectImpl {
 
-    public AvenEffect() {
+    AvenEffect() {
         super(Duration.Custom, Layer.PTChangingEffects_7, SubLayer.SetPT_7b, Outcome.BoostCreature);
+        this.staticText = "If you do, that creature has base power and toughness 3/1 and has flying for as long as it has a feather counter on it";
     }
 
-    public AvenEffect(final AvenEffect effect) {
+    private AvenEffect(final AvenEffect effect) {
         super(effect);
     }
 
@@ -72,12 +71,12 @@ class AvenEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent target = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (target != null) {
-            target.getPower().setValue(3);
-            target.getToughness().setValue(1);
-            return true;
+        if (target == null) {
+            return false;
         }
-        return false;
+        target.getPower().setModifiedBaseValue(3);
+        target.getToughness().setModifiedBaseValue(1);
+        return true;
     }
 
     @Override
@@ -88,11 +87,6 @@ class AvenEffect extends ContinuousEffectImpl {
         }
         return false;
     }
-
-    @Override
-    public String getText(Mode mode) {
-        return "If you do, that creature has base power and toughness 3/1 and has flying for as long as it has a feather counter on it";
-    }
 }
 
 class AvenEffect2 extends ContinuousEffectImpl {
@@ -101,7 +95,7 @@ class AvenEffect2 extends ContinuousEffectImpl {
         super(Duration.Custom, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.BoostCreature);
     }
 
-    public AvenEffect2(final AvenEffect2 effect) {
+    private AvenEffect2(final AvenEffect2 effect) {
         super(effect);
     }
 

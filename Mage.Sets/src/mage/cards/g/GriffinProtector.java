@@ -1,9 +1,8 @@
-
 package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -31,8 +30,8 @@ public final class GriffinProtector extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever another creature enters the battlefield under your control, Griffin Protector gets +1/+1 until end of turn.
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn),
-                StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, false, null, true));
+        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn),
+                StaticFilters.FILTER_ANOTHER_CREATURE, false));
 
     }
 

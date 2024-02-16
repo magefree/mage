@@ -39,7 +39,7 @@ public final class Mudslide extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
 
         // Creatures without flying don't untap during their controllers' untap steps.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepAllEffect(Duration.WhileOnBattlefield, TargetController.ANY, filterCreature)));
+        this.addAbility(new SimpleStaticAbility(new DontUntapInControllersUntapStepAllEffect(Duration.WhileOnBattlefield, TargetController.ANY, filterCreature)));
 
         // At the beginning of each player's upkeep, that player may choose any number of tapped creatures without flying they control and pay {2} for each creature chosen this way. If the player does, untap those creatures.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new MudslideEffect(), TargetController.ANY, false));
@@ -69,7 +69,7 @@ class MudslideEffect extends OneShotEffect {
         staticText = "that player may choose any number of tapped creatures without flying they control and pay {2} for each creature chosen this way. If the player does, untap those creatures.";
     }
 
-    MudslideEffect(MudslideEffect effect) {
+    private MudslideEffect(final MudslideEffect effect) {
         super(effect);
     }
 
@@ -87,7 +87,7 @@ class MudslideEffect extends OneShotEffect {
             int countBattlefield = game.getBattlefield().getAllActivePermanents(filter, game.getActivePlayerId(), game).size();
             while (player.canRespond() && countBattlefield > 0 && player.chooseUse(Outcome.Benefit, "Pay {2} and untap a tapped creature without flying under your control?", source, game)) {
                 Target tappedCreatureTarget = new TargetControlledCreaturePermanent(1, 1, filter, true);
-                if (player.choose(Outcome.Untap, tappedCreatureTarget, source.getSourceId(), game)) {
+                if (player.choose(Outcome.Untap, tappedCreatureTarget, source, game)) {
                     Cost cost = ManaUtil.createManaCost(2, false);
                     Permanent tappedCreature = game.getPermanent(tappedCreatureTarget.getFirstTarget());
                     if (tappedCreature != null && cost.pay(source, game, source, player.getId(), false)) {

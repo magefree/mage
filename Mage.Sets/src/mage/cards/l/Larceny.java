@@ -46,7 +46,7 @@ class LarcenyTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DiscardTargetEffect(1), false);
     }
 
-    public LarcenyTriggeredAbility(final LarcenyTriggeredAbility ability) {
+    private LarcenyTriggeredAbility(final LarcenyTriggeredAbility ability) {
         super(ability);
     }
 

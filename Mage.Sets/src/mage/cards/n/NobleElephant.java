@@ -31,7 +31,7 @@ public final class NobleElephant extends CardImpl {
         this.addAbility(BandingAbility.getInstance());
     }
 
-    public NobleElephant (final NobleElephant card) {
+    private NobleElephant(final NobleElephant card) {
         super(card);
     }
 

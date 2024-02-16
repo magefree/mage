@@ -44,19 +44,16 @@ public final class DiscipleOfTheRing extends CardImpl {
         ability.addTarget(new TargetSpell(StaticFilters.FILTER_SPELL_NON_CREATURE));
         
         // or Disciple of the Ring gets +1/+1 until end of turn; 
-        Mode mode = new Mode();
-        mode.addEffect(new BoostSourceEffect(1, 1, Duration.EndOfTurn));
+        Mode mode = new Mode(new BoostSourceEffect(1, 1, Duration.EndOfTurn));
         ability.addMode(mode);
         
         // or Tap target creature;
-        mode = new Mode();
-        mode.addEffect(new TapTargetEffect());
+        mode = new Mode(new TapTargetEffect());
         mode.addTarget(new TargetCreaturePermanent());
         ability.addMode(mode);
         
         // or Untap target creature.
-        mode = new Mode();
-        mode.addEffect(new UntapTargetEffect());
+        mode = new Mode(new UntapTargetEffect());
         mode.addTarget(new TargetCreaturePermanent());
         ability.addMode(mode);
 

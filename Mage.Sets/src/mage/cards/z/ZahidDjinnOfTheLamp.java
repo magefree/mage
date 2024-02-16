@@ -25,13 +25,13 @@ public final class ZahidDjinnOfTheLamp extends CardImpl {
     public ZahidDjinnOfTheLamp(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DJINN);
         this.power = new MageInt(5);
         this.toughness = new MageInt(6);
 
         // You may pay {3}{U} and tap an untapped artifact you control rather than pay this spell's mana cost.
-        AlternativeCostSourceAbility alternativeCostSourceAbility = new AlternativeCostSourceAbility(new ManaCostsImpl("{3}{U}"), null,
+        AlternativeCostSourceAbility alternativeCostSourceAbility = new AlternativeCostSourceAbility(new ManaCostsImpl<>("{3}{U}"), null,
                 "You may pay {3}{U} and tap an untapped artifact you control rather than pay this spell's mana cost.");
         FilterControlledArtifactPermanent filter = new FilterControlledArtifactPermanent("untapped artifact you control");
         filter.add(TappedPredicate.UNTAPPED);

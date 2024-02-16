@@ -22,6 +22,7 @@ public class MagecraftAbility extends TriggeredAbilityImpl {
     public MagecraftAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
         this.setAbilityWord(AbilityWord.MAGECRAFT);
+        setTriggerPhrase("Whenever you cast or copy an instant or sorcery spell, ");
     }
 
     private MagecraftAbility(final MagecraftAbility ability) {
@@ -44,11 +45,6 @@ public class MagecraftAbility extends TriggeredAbilityImpl {
         }
         getEffects().setValue(SPELL_KEY, spell);
         return true;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you cast or copy an instant or sorcery spell, ";
     }
 
     @Override

@@ -4,6 +4,7 @@ package mage.abilities.effects.common.continuous;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -16,7 +17,6 @@ import mage.game.Game;
 import mage.players.Player;
 
 /**
- *
  * @author LoneFox
  */
 public class PlayWithHandRevealedEffect extends ContinuousEffectImpl {
@@ -28,7 +28,7 @@ public class PlayWithHandRevealedEffect extends ContinuousEffectImpl {
         this.who = who;
     }
 
-    public PlayWithHandRevealedEffect(final PlayWithHandRevealedEffect effect) {
+    protected PlayWithHandRevealedEffect(final PlayWithHandRevealedEffect effect) {
         super(effect);
         who = effect.who;
     }

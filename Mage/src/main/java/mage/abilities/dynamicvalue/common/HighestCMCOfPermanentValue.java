@@ -9,7 +9,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
- *
  * @author LevelX2
  */
 public class HighestCMCOfPermanentValue implements DynamicValue {
@@ -23,7 +22,7 @@ public class HighestCMCOfPermanentValue implements DynamicValue {
         this.onlyIfCanBeSacrificed = onlyIfCanBeSacrificed;
     }
 
-    public HighestCMCOfPermanentValue(final HighestCMCOfPermanentValue dynamicValue) {
+    protected HighestCMCOfPermanentValue(final HighestCMCOfPermanentValue dynamicValue) {
         this.filter = dynamicValue.filter;
         this.onlyIfCanBeSacrificed = dynamicValue.onlyIfCanBeSacrificed;
     }
@@ -34,7 +33,7 @@ public class HighestCMCOfPermanentValue implements DynamicValue {
         Player controller = game.getPlayer(sourceAbility.getControllerId());
         if (controller != null) {
             for (Permanent permanent : game.getBattlefield()
-                    .getActivePermanents(filter, sourceAbility.getControllerId(), sourceAbility.getSourceId(), game)) {
+                    .getActivePermanents(filter, sourceAbility.getControllerId(), sourceAbility, game)) {
                 if ((!onlyIfCanBeSacrificed || controller.canPaySacrificeCost(permanent, sourceAbility, sourceAbility.getControllerId(), game))
                         && permanent.getManaValue() > value) {
                     value = permanent.getManaValue();

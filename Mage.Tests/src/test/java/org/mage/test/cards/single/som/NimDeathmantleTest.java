@@ -37,8 +37,6 @@ public class NimDeathmantleTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertAllCommandsUsed();
-
         assertGraveyardCount(playerB, "Lightning Bolt",1);
         
         assertPermanentCount(playerA, "Nim Deathmantle", 1);

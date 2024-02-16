@@ -29,7 +29,7 @@ public final class SoulSnuffers extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new AddCountersAllEffect(CounterType.M1M1.createInstance(), new FilterCreaturePermanent())));
     }
 
-    public SoulSnuffers (final SoulSnuffers card) {
+    private SoulSnuffers(final SoulSnuffers card) {
         super(card);
     }
 

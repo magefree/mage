@@ -50,12 +50,12 @@ public final class PanopticMirror extends CardImpl {
 
 class PanopticMirrorExileEffect extends OneShotEffect {
 
-    public PanopticMirrorExileEffect() {
+    PanopticMirrorExileEffect() {
         super(Outcome.Exile);
         this.staticText = "You may exile an instant or sorcery card with mana value X from your hand";
     }
 
-    public PanopticMirrorExileEffect(final PanopticMirrorExileEffect effect) {
+    private PanopticMirrorExileEffect(final PanopticMirrorExileEffect effect) {
         super(effect);
     }
 
@@ -80,7 +80,7 @@ class PanopticMirrorExileEffect extends OneShotEffect {
         }
 
         TargetCardInHand target = new TargetCardInHand(filter);
-        if (player.choose(Outcome.PlayForFree, target, source.getSourceId(), game)) {
+        if (player.choose(Outcome.PlayForFree, target, source, game)) {
             Card card = game.getCard(target.getFirstTarget());
             if (card != null) {
                 card.moveToExile(CardUtil.getCardExileZoneId(game, source), "Panoptic Mirror", source, game);
@@ -97,12 +97,12 @@ class PanopticMirrorExileEffect extends OneShotEffect {
 
 class PanopticMirrorCastEffect extends OneShotEffect {
 
-    public PanopticMirrorCastEffect() {
+    PanopticMirrorCastEffect() {
         super(Outcome.ReturnToHand);
         this.staticText = "you may copy a card exiled with {this}. If you do, you may cast the copy without paying its mana cost";
     }
 
-    public PanopticMirrorCastEffect(final PanopticMirrorCastEffect effect) {
+    private PanopticMirrorCastEffect(final PanopticMirrorCastEffect effect) {
         super(effect);
     }
 
@@ -129,9 +129,9 @@ class PanopticMirrorCastEffect extends OneShotEffect {
                     if (card instanceof SplitCard) {
                         cards.add(((SplitCard) card).getLeftHalfCard());
                         cards.add(((SplitCard) card).getRightHalfCard());
-                    } else if (card instanceof ModalDoubleFacesCard) {
-                        cards.add(((ModalDoubleFacesCard) card).getLeftHalfCard());
-                        cards.add(((ModalDoubleFacesCard) card).getRightHalfCard());
+                    } else if (card instanceof ModalDoubleFacedCard) {
+                        cards.add(((ModalDoubleFacedCard) card).getLeftHalfCard());
+                        cards.add(((ModalDoubleFacedCard) card).getRightHalfCard());
                     } else {
                         cards.add(card);
                     }
@@ -142,7 +142,7 @@ class PanopticMirrorCastEffect extends OneShotEffect {
                 cardToCopy = cards.getCards(game).iterator().next();
             } else {
                 TargetCard target = new TargetCard(1, Zone.EXILED, new FilterCard("card to copy"));
-                controller.choose(Outcome.Copy, cards, target, game);
+                controller.choose(Outcome.Copy, cards, target, source, game);
                 cardToCopy = cards.get(target.getFirstTarget(), game);
             }
             if (cardToCopy != null) {

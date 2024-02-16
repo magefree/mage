@@ -61,11 +61,12 @@ public final class DisruptingShoal extends CardImpl {
 
 class DisruptingShoalCounterTargetEffect extends OneShotEffect {
 
-    public DisruptingShoalCounterTargetEffect() {
+    DisruptingShoalCounterTargetEffect() {
         super(Outcome.Detriment);
+        this.staticText = "Counter target spell if its mana value is X";
     }
 
-    public DisruptingShoalCounterTargetEffect(final DisruptingShoalCounterTargetEffect effect) {
+    private DisruptingShoalCounterTargetEffect(final DisruptingShoalCounterTargetEffect effect) {
         super(effect);
     }
 
@@ -94,10 +95,5 @@ class DisruptingShoalCounterTargetEffect extends OneShotEffect {
         }
         // No alternate costs payed so compare to X value
         return sourceAbility.getManaCostsToPay().getX() == amount;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return "Counter target spell if its mana value is X";
     }
 }

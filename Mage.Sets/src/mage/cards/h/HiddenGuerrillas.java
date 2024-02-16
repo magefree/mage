@@ -30,7 +30,7 @@ public final class HiddenGuerrillas extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G}");
 
         // When an opponent casts an artifact spell, if Hidden Guerrillas is an enchantment, Hidden Guerrillas becomes a 5/3 Soldier creature with trample.
-        TriggeredAbility ability = new SpellCastOpponentTriggeredAbility(new BecomesCreatureSourceEffect(new HiddenGuerrillasSoldier(), "", Duration.WhileOnBattlefield, true, false),
+        TriggeredAbility ability = new SpellCastOpponentTriggeredAbility(new BecomesCreatureSourceEffect(new HiddenGuerrillasSoldier(), null, Duration.WhileOnBattlefield),
                 new FilterArtifactSpell(), false);
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, new SourceMatchesFilterCondition(StaticFilters.FILTER_PERMANENT_ENCHANTMENT),
                 "When an opponent casts an artifact spell, if {this} is an enchantment, {this} becomes a 5/3 Soldier creature with trample."));
@@ -56,7 +56,7 @@ class HiddenGuerrillasSoldier extends TokenImpl {
         toughness = new MageInt(3);
         this.addAbility(TrampleAbility.getInstance());
     }
-    public HiddenGuerrillasSoldier(final HiddenGuerrillasSoldier token) {
+    private HiddenGuerrillasSoldier(final HiddenGuerrillasSoldier token) {
         super(token);
     }
 

@@ -1,6 +1,7 @@
 package mage.abilities.effects.common;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -11,7 +12,6 @@ import mage.game.Game;
 import mage.players.Player;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class LoseLifeTargetEffect extends OneShotEffect {
@@ -27,7 +27,7 @@ public class LoseLifeTargetEffect extends OneShotEffect {
         this.amount = amount;
     }
 
-    public LoseLifeTargetEffect(final LoseLifeTargetEffect effect) {
+    protected LoseLifeTargetEffect(final LoseLifeTargetEffect effect) {
         super(effect);
         this.amount = effect.amount.copy();
     }
@@ -52,19 +52,13 @@ public class LoseLifeTargetEffect extends OneShotEffect {
 
     @Override
     public String getText(Mode mode) {
-        if (!staticText.isEmpty()) {
+        if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        StringBuilder sb = new StringBuilder();
-        String message = amount.getMessage();
-
-        if (!mode.getTargets().isEmpty()) {
-            sb.append("target ").append(mode.getTargets().get(0).getTargetName());
-        } else {
-            sb.append("that player");
-        }
+        StringBuilder sb = new StringBuilder(getTargetPointer().describeTargets(mode.getTargets(), "that player"));
         sb.append(" loses ");
-        if (message.isEmpty() || !message.equals("1")) {
+        String message = amount.getMessage();
+        if (!message.equals("1")) {
             sb.append(amount).append(' ');
         }
         sb.append("life");

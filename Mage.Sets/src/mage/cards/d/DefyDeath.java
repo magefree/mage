@@ -42,12 +42,12 @@ public final class DefyDeath extends CardImpl {
 
 class DefyDeathEffect extends OneShotEffect {
 
-    public DefyDeathEffect() {
+    DefyDeathEffect() {
         super(Outcome.BoostCreature);
         this.staticText = "If it's an Angel, put two +1/+1 counters on it";
     }
 
-    public DefyDeathEffect(final DefyDeathEffect effect) {
+    private DefyDeathEffect(final DefyDeathEffect effect) {
         super(effect);
     }
 

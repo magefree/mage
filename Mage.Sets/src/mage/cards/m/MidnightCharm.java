@@ -27,12 +27,10 @@ public final class MidnightCharm extends CardImpl {
         this.getSpellAbility().addEffect(new DamageTargetEffect(1));
         this.getSpellAbility().addEffect(new GainLifeEffect(1).setText("and you gain 1 life"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        Mode mode = new Mode();
-        mode.addEffect(new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn));
+        Mode mode = new Mode(new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn));
         mode.addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addMode(mode);
-        mode = new Mode();
-        mode.addEffect(new TapTargetEffect());
+        mode = new Mode(new TapTargetEffect());
         mode.addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addMode(mode);
     }

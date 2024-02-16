@@ -1,10 +1,10 @@
-
 package mage.cards.m;
 
 import java.util.UUID;
 import mage.Mana;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.mana.DynamicManaEffect;
+import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -26,9 +26,9 @@ public final class ManaGeyser extends CardImpl {
     public ManaGeyser(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}{R}");
 
-
         // Add {R} for each tapped land your opponents control.
         this.getSpellAbility().addEffect(new DynamicManaEffect(Mana.RedMana(1), new PermanentsOnBattlefieldCount(filter)));
+        this.getSpellAbility().addHint(new ValueHint("Tapped lands your opponents control", new PermanentsOnBattlefieldCount(filter)));
     }
 
     private ManaGeyser(final ManaGeyser card) {

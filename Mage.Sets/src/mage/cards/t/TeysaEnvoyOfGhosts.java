@@ -30,7 +30,7 @@ public final class TeysaEnvoyOfGhosts extends CardImpl {
 
     public TeysaEnvoyOfGhosts(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{W}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ADVISOR);
 
@@ -65,7 +65,7 @@ class TeysaEnvoyOfGhostsTriggeredAbility extends TriggeredAbilityImpl {
         this.addEffect(new CreateTokenEffect(new WhiteBlackSpiritToken(), 1));
     }
 
-    public TeysaEnvoyOfGhostsTriggeredAbility(final TeysaEnvoyOfGhostsTriggeredAbility ability) {
+    private TeysaEnvoyOfGhostsTriggeredAbility(final TeysaEnvoyOfGhostsTriggeredAbility ability) {
         super(ability);
     }
 

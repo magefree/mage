@@ -28,7 +28,7 @@ public final class DarklitGargoyle extends CardImpl {
     this.power = new MageInt(1);
     this.toughness = new MageInt(2);
         this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, -1, Duration.EndOfTurn), new ManaCostsImpl(("{B}"))));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, -1, Duration.EndOfTurn), new ManaCostsImpl<>(("{B}"))));
     }
 
     private DarklitGargoyle(final DarklitGargoyle card) {

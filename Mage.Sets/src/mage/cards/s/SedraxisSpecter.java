@@ -31,7 +31,7 @@ public final class SedraxisSpecter extends CardImpl {
         // Whenever Sedraxis Specter deals combat damage to a player, that player discards a card.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DiscardTargetEffect(1), false, true));
         // Unearth {1}{B}
-        this.addAbility(new UnearthAbility(new ManaCostsImpl("{1}{B}")));
+        this.addAbility(new UnearthAbility(new ManaCostsImpl<>("{1}{B}")));
     }
 
     private SedraxisSpecter(final SedraxisSpecter card) {

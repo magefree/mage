@@ -1,23 +1,27 @@
 package mage.cards.a;
 
-import java.util.UUID;
-import mage.ApprovingObject;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.CardsImpl;
 import mage.constants.*;
 import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
+import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.AshiokNightmareMuseToken;
 import mage.players.Player;
-import mage.target.common.TargetCardInExile;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetNonlandPermanent;
+import mage.util.CardUtil;
+
+import java.util.UUID;
+import mage.filter.predicate.card.FaceDownPredicate;
+import mage.filter.predicate.card.OwnerIdPredicate;
 
 /**
  * @author TheElk801
@@ -27,7 +31,7 @@ public final class AshiokNightmareMuse extends CardImpl {
     public AshiokNightmareMuse(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{U}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ASHIOK);
         this.setStartingLoyalty(5);
 
@@ -82,7 +86,7 @@ class AshiokNightmareMuseBounceEffect extends OneShotEffect {
             return true;
         }
         TargetCardInHand target = new TargetCardInHand();
-        if (!player.choose(outcome, player.getHand(), target, game)) {
+        if (!player.choose(outcome, player.getHand(), target, source, game)) {
             return false;
         }
         return player.moveCards(game.getCard(target.getFirstTarget()), Zone.EXILED, source, game);
@@ -93,12 +97,8 @@ class AshiokNightmareMuseCastEffect extends OneShotEffect {
 
     private static final FilterCard filter = new FilterCard("face-up cards your opponents own from exile");
 
-    static {
-        filter.add(TargetController.OPPONENT.getOwnerPredicate());
-    }
-
     AshiokNightmareMuseCastEffect() {
-        super(Outcome.Discard);
+        super(Outcome.Benefit);
         staticText = "You may cast up to three spells from among face-up cards your opponents own from exile without paying their mana costs.";
     }
 
@@ -117,25 +117,13 @@ class AshiokNightmareMuseCastEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        TargetCardInExile target = new TargetCardInExile(0, 3, filter, null);
-        target.setNotTarget(true);
-        if (!controller.chooseTarget(outcome, target, source, game)) { // method is fine, controller is still choosing the card
-            return false;
-        }
-        for (UUID targetId : target.getTargets()) {
-            if (targetId != null) {
-                Card chosenCard = game.getCard(targetId);
-                if (chosenCard != null
-                        && game.getState().getZone(chosenCard.getId()) == Zone.EXILED // must be exiled
-                        && game.getOpponents(controller.getId()).contains(chosenCard.getOwnerId()) // must be owned by an opponent
-                        && controller.chooseUse(outcome, "Cast " + chosenCard.getName() + " without paying its mana cost?", source, game)) {
-                    game.getState().setValue("PlayFromNotOwnHandZone" + chosenCard.getId(), Boolean.TRUE);
-                    controller.cast(controller.chooseAbilityForCast(chosenCard, game, true),
-                            game, true, new ApprovingObject(source, game));
-                    game.getState().setValue("PlayFromNotOwnHandZone" + chosenCard.getId(), null);
-                }
-            }
-        }
+        // card is owned by an opponent and is face up
+        filter.add(Predicates.not(new OwnerIdPredicate(controller.getId())));
+        filter.add(Predicates.not(FaceDownPredicate.instance));
+        CardUtil.castMultipleWithAttributeForFree(
+                controller, source, game, new CardsImpl(game.getExile().getCards(filter, game)),
+                StaticFilters.FILTER_CARD, 3
+        );
         return true;
     }
 }

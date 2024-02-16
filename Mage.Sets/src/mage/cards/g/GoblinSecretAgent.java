@@ -50,12 +50,12 @@ public final class GoblinSecretAgent extends CardImpl {
 
 class GoblinSecretAgentEffect extends OneShotEffect {
 
-    public GoblinSecretAgentEffect() {
+    GoblinSecretAgentEffect() {
         super(Outcome.Detriment);
         this.staticText = "reveal a card from your hand at random";
     }
     
-    public GoblinSecretAgentEffect(final GoblinSecretAgentEffect effect) {
+    private GoblinSecretAgentEffect(final GoblinSecretAgentEffect effect) {
         super(effect);
     }
 
@@ -67,7 +67,7 @@ class GoblinSecretAgentEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (controller != null && sourceObject != null) {
             if (!controller.getHand().isEmpty()) {
                 CardsImpl randomCard = new CardsImpl();

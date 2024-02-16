@@ -34,7 +34,7 @@ public final class OkoThiefOfCrowns extends CardImpl {
     public OkoThiefOfCrowns(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{G}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.OKO);
         this.setStartingLoyalty(4);
 
@@ -109,8 +109,8 @@ class OkoThiefOfCrownsEffect extends ContinuousEffectImpl {
                 return true;
             case PTChangingEffects_7:
                 if (sublayer == SubLayer.SetPT_7b) {
-                    permanent.getPower().setValue(3);
-                    permanent.getToughness().setValue(3);
+                    permanent.getPower().setModifiedBaseValue(3);
+                    permanent.getToughness().setModifiedBaseValue(3);
                     return true;
                 }
         }

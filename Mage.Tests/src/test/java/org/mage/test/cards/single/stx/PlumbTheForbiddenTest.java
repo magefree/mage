@@ -28,7 +28,6 @@ public class PlumbTheForbiddenTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, bear, 1);
         assertGraveyardCount(playerA, lion, 1);

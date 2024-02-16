@@ -40,7 +40,7 @@ public final class DeadMansChest extends CardImpl {
         TargetPermanent auraTarget = new TargetPermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Benefit));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // When enchanted creature dies, exile cards equal to its power from the top of its owner's library. You may cast nonland cards from among them as long as they remain exiled, and you may spend mana as though it were mana of any type to cast those spells.
@@ -59,14 +59,14 @@ public final class DeadMansChest extends CardImpl {
 
 class DeadMansChestEffect extends OneShotEffect {
 
-    public DeadMansChestEffect() {
+    DeadMansChestEffect() {
         super(Outcome.Benefit);
         this.staticText = "exile cards equal to its power from the top of its owner's library. "
                 + "You may cast spells from among those cards for as long as they remain exiled, "
                 + "and you may spend mana as though it were mana of any type to cast those spells";
     }
 
-    public DeadMansChestEffect(final DeadMansChestEffect effect) {
+    private DeadMansChestEffect(final DeadMansChestEffect effect) {
         super(effect);
     }
 
@@ -107,12 +107,12 @@ class DeadMansChestEffect extends OneShotEffect {
 
 class DeadMansChestCastFromExileEffect extends AsThoughEffectImpl {
 
-    public DeadMansChestCastFromExileEffect() {
+    DeadMansChestCastFromExileEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
         staticText = "You may cast nonland cards from among them as long as they remain exiled";
     }
 
-    public DeadMansChestCastFromExileEffect(final DeadMansChestCastFromExileEffect effect) {
+    private DeadMansChestCastFromExileEffect(final DeadMansChestCastFromExileEffect effect) {
         super(effect);
     }
 
@@ -147,7 +147,7 @@ class DeadMansChestSpendManaEffect extends AsThoughEffectImpl implements AsThoug
         staticText = "and you may spend mana as though it were mana of any type to cast those spells";
     }
 
-    public DeadMansChestSpendManaEffect(final DeadMansChestSpendManaEffect effect) {
+    private DeadMansChestSpendManaEffect(final DeadMansChestSpendManaEffect effect) {
         super(effect);
     }
 

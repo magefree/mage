@@ -26,7 +26,7 @@ public class EnchantedCreatureSubtypeCondition implements Condition {
         Permanent enchantment = game.getPermanent(source.getSourceId());
         if (enchantment != null) {
             Permanent creature = game.getPermanent(enchantment.getAttachedTo());
-            if (filter.match(creature, source.getSourceId(), enchantment.getControllerId(), game)) {
+            if (filter.match(creature, enchantment.getControllerId(), source, game)) {
                 return true;
             }
 

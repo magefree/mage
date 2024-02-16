@@ -27,7 +27,7 @@ public class RevealHandSourceControllerCost extends CostImpl {
     @Override
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         Player controller = game.getPlayer(controllerId);
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (controller != null && sourceObject != null) {
             controller.revealCards(sourceObject.getName(), controller.getHand(), game);
             paid = true;

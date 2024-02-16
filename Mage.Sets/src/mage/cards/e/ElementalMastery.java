@@ -20,7 +20,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.ElementalMasteryElementalToken;
+import mage.game.permanent.token.Elemental11HasteToken;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -38,7 +38,7 @@ public final class ElementalMastery extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Enchanted creature has "{tap}: create X 1/1 red Elemental creature tokens with haste, where X is this creature's power. Exile them at the beginning of the next end step."
@@ -58,12 +58,12 @@ public final class ElementalMastery extends CardImpl {
 
 class ElementalMasteryEffect extends OneShotEffect {
 
-    public ElementalMasteryEffect() {
+    ElementalMasteryEffect() {
         super(Outcome.Benefit);
         staticText = "create X 1/1 red Elemental creature tokens with haste, where X is this creature's power. Exile them at the beginning of the next end step";
     }
 
-    public ElementalMasteryEffect(final ElementalMasteryEffect effect) {
+    private ElementalMasteryEffect(final ElementalMasteryEffect effect) {
         super(effect);
     }
 
@@ -78,7 +78,7 @@ class ElementalMasteryEffect extends OneShotEffect {
         if (creatureAttached != null) {
             int power = creatureAttached.getPower().getValue();
             if (power > 0) {
-                CreateTokenEffect effect = new CreateTokenEffect(new ElementalMasteryElementalToken(), power);
+                CreateTokenEffect effect = new CreateTokenEffect(new Elemental11HasteToken(), power);
                 effect.apply(game, source);
                 effect.exileTokensCreatedAtNextEndStep(game, source);
                 return true;

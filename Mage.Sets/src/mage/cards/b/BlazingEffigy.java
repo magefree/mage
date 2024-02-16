@@ -89,15 +89,16 @@ class BlazingEffigyWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.DAMAGED_PERMANENT) {
-            if (!event.getSourceId().equals(event.getTargetId())) {
-                MageObjectReference damageSourceRef = new MageObjectReference(event.getSourceId(), game);
-                MageObjectReference damageTargetRef = new MageObjectReference(event.getTargetId(), game);
-                if (game.getPermanentOrLKIBattlefield(event.getSourceId()) != null && game.getPermanentOrLKIBattlefield(event.getSourceId()).getName().equals("Blazing Effigy")) {
-                    damagedObjects.putIfAbsent(damageTargetRef, 0);
-                    damagedObjects.compute(damageTargetRef, (k, damage) -> damage + event.getAmount());
-                }
-            }
+        if (event.getType() != GameEvent.EventType.DAMAGED_PERMANENT) { return; }
+
+        if (event.getSourceId().equals(event.getTargetId())) { return; }
+
+        // TODO: Should damageSourceRef be used for anything?
+        MageObjectReference damageSourceRef = new MageObjectReference(event.getSourceId(), game);
+        MageObjectReference damageTargetRef = new MageObjectReference(event.getTargetId(), game);
+        if (game.getPermanentOrLKIBattlefield(event.getSourceId()) != null && game.getPermanentOrLKIBattlefield(event.getSourceId()).getName().equals("Blazing Effigy")) {
+            damagedObjects.putIfAbsent(damageTargetRef, 0);
+            damagedObjects.compute(damageTargetRef, (k, damage) -> damage + event.getAmount());
         }
     }
 

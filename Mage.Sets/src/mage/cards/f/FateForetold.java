@@ -1,4 +1,3 @@
-
 package mage.cards.f;
 
 import java.util.UUID;
@@ -7,10 +6,12 @@ import mage.abilities.common.DiesAttachedTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.target.TargetPermanent;
@@ -31,12 +32,13 @@ public final class FateForetold extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // When Fate Foretold enters the battlefield, draw a card.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1),false));
         // When enchanted creature dies, its controller draws a card.
-        this.addAbility(new DiesAttachedTriggeredAbility(new DrawCardSourceControllerEffect(1),"enchanted creature", false));
+        this.addAbility(new DiesAttachedTriggeredAbility(new DrawCardTargetEffect(1).setText("its controller draws a card"),
+                "enchanted creature", false, true, SetTargetPointer.ATTACHED_TO_CONTROLLER));
     }
 
     private FateForetold(final FateForetold card) {

@@ -1,4 +1,3 @@
-
 package mage.game.command.emblems;
 
 import mage.MageObject;
@@ -15,17 +14,25 @@ import mage.game.events.GameEvent;
 import mage.players.Player;
 
 /**
- *
  * @author spjspj
  */
 public final class NarsetTranscendentEmblem extends Emblem {
-    
+
     // "Your opponents can't cast noncreature spells.
     public NarsetTranscendentEmblem() {
 
-        this.setName("Emblem Narset");
+        super("Emblem Narset");
 
         this.getAbilities().add(new SimpleStaticAbility(Zone.COMMAND, new NarsetTranscendentCantCastEffect()));
+    }
+
+    private NarsetTranscendentEmblem(final NarsetTranscendentEmblem card) {
+        super(card);
+    }
+
+    @Override
+    public NarsetTranscendentEmblem copy() {
+        return new NarsetTranscendentEmblem(this);
     }
 }
 
@@ -36,7 +43,7 @@ class NarsetTranscendentCantCastEffect extends ContinuousRuleModifyingEffectImpl
         staticText = "Your opponents can't cast noncreature spells";
     }
 
-    public NarsetTranscendentCantCastEffect(final NarsetTranscendentCantCastEffect effect) {
+    protected NarsetTranscendentCantCastEffect(final NarsetTranscendentCantCastEffect effect) {
         super(effect);
     }
 
@@ -46,13 +53,8 @@ class NarsetTranscendentCantCastEffect extends ContinuousRuleModifyingEffectImpl
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (mageObject != null) {
             return "You can't cast can't cast noncreature spells (it is prevented by emblem of " + mageObject.getLogName() + ')';
         }

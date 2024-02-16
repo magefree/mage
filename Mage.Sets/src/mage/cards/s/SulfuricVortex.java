@@ -47,12 +47,12 @@ public final class SulfuricVortex extends CardImpl {
 
 class SulfuricVortexReplacementEffect extends ReplacementEffectImpl {
 
-    public SulfuricVortexReplacementEffect() {
+    SulfuricVortexReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "If a player would gain life, that player gains no life instead";
     }
 
-    public SulfuricVortexReplacementEffect(final SulfuricVortexReplacementEffect effect) {
+    private SulfuricVortexReplacementEffect(final SulfuricVortexReplacementEffect effect) {
         super(effect);
     }
 
@@ -69,11 +69,6 @@ class SulfuricVortexReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         return true;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
     }
 
     @Override

@@ -30,7 +30,7 @@ public final class Insolence extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // Whenever enchanted creature becomes tapped, Insolence deals 2 damage to that creature's controller.
         this.addAbility(new BecomesTappedAttachedTriggeredAbility(new DamageAttachedControllerEffect(2), "enchanted creature"));

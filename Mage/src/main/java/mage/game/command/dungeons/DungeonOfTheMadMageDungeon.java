@@ -29,7 +29,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class DungeonOfTheMadMageDungeon extends Dungeon {
 
     public DungeonOfTheMadMageDungeon() {
-        super("Dungeon of the Mad Mage", "AFR");
+        super("Dungeon of the Mad Mage");
         // (1) Yawning Portal — You gain 1 life. (→ 2)
         DungeonRoom yawningPortal = new DungeonRoom("Yawning Portal", new GainLifeEffect(1));
 
@@ -173,7 +173,7 @@ class MadWizardsLairEffect extends OneShotEffect {
         }
         player.revealCards(source, cards, game);
         TargetCardInHand target = new TargetCardInHand(0, 1, StaticFilters.FILTER_CARD_NON_LAND);
-        player.choose(Outcome.PlayForFree, cards, target, game);
+        player.choose(Outcome.PlayForFree, cards, target, source, game);
         Card card = player.getHand().get(target.getFirstTarget(), game);
         if (card == null) {
             return true;

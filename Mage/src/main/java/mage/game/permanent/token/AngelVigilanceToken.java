@@ -9,7 +9,7 @@ import mage.constants.SubType;
 public final class AngelVigilanceToken extends TokenImpl {
 
     public AngelVigilanceToken() {
-        super("Angel", "4/4 white Angel creature token with flying and vigilance");
+        super("Angel Token", "4/4 white Angel creature token with flying and vigilance");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
         subtype.add(SubType.ANGEL);
@@ -19,7 +19,7 @@ public final class AngelVigilanceToken extends TokenImpl {
         addAbility(VigilanceAbility.getInstance());
     }
 
-    public AngelVigilanceToken(final AngelVigilanceToken token) {
+    private AngelVigilanceToken(final AngelVigilanceToken token) {
         super(token);
     }
 

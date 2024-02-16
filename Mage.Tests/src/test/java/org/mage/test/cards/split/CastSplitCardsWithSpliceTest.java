@@ -39,7 +39,6 @@ public class CastSplitCardsWithSpliceTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Wear // Tear", 1);
         assertGraveyardCount(playerB, "Bident of Thassa", 1);
@@ -82,7 +81,6 @@ public class CastSplitCardsWithSpliceTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Wear // Tear", 1);
         assertGraveyardCount(playerB, "Bident of Thassa", 1);

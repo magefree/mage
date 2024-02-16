@@ -2,7 +2,6 @@ package mage.cards.z;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
@@ -33,7 +32,7 @@ public final class ZaxaraTheExemplary extends CardImpl {
     public ZaxaraTheExemplary(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{G}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.NIGHTMARE);
         this.subtype.add(SubType.HYDRA);
         this.power = new MageInt(2);
@@ -64,9 +63,10 @@ class ZaxaraTheExemplaryHydraTokenAbility extends TriggeredAbilityImpl {
 
     public ZaxaraTheExemplaryHydraTokenAbility() {
         super(Zone.BATTLEFIELD, new ZaxaraTheExemplaryHydraTokenEffect(), false);
+        setTriggerPhrase("Whenever you cast a spell with {X} in its mana cost");
     }
 
-    public ZaxaraTheExemplaryHydraTokenAbility(final ZaxaraTheExemplaryHydraTokenAbility ability) {
+    private ZaxaraTheExemplaryHydraTokenAbility(final ZaxaraTheExemplaryHydraTokenAbility ability) {
         super(ability);
     }
 
@@ -77,29 +77,20 @@ class ZaxaraTheExemplaryHydraTokenAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getPlayerId().equals(getControllerId())) {
-            if (event.getType() == GameEvent.EventType.SPELL_CAST) {
-                Spell spell = game.getStack().getSpell(event.getTargetId());
-                if (spell != null) {
-                    if (spell.getSpellAbility().getManaCostsToPay().containsX()) {
-                        game.getState().setValue(this.getSourceId() + ZaxaraTheExemplary.needPrefix, spell);
-                        return true;
-                    }
-                }
-            }
-
+        if (!event.getPlayerId().equals(getControllerId()) || event.getType() != GameEvent.EventType.SPELL_CAST) {
+            return false;
         }
-        return false;
+        Spell spell = game.getStack().getSpell(event.getTargetId());
+        if (spell == null || !spell.getSpellAbility().getManaCostsToPay().containsX()) {
+            return false;
+        }
+        game.getState().setValue(this.getSourceId() + ZaxaraTheExemplary.needPrefix, spell);
+        return true;
     }
 
     @Override
-    public TriggeredAbility copy() {
+    public ZaxaraTheExemplaryHydraTokenAbility copy() {
         return new ZaxaraTheExemplaryHydraTokenAbility(this);
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you cast a spell with {X} in its mana cost" ;
     }
 }
 
@@ -109,7 +100,7 @@ class ZaxaraTheExemplaryHydraTokenEffect extends OneShotEffect {
         this.staticText = ", create a 0/0 green Hydra creature token, then put X +1/+1 counters on it.";
     }
 
-    ZaxaraTheExemplaryHydraTokenEffect(final ZaxaraTheExemplaryHydraTokenEffect effect) {
+    private ZaxaraTheExemplaryHydraTokenEffect(final ZaxaraTheExemplaryHydraTokenEffect effect) {
         super(effect);
     }
 

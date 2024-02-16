@@ -12,7 +12,7 @@ import mage.client.util.Event;
 import mage.client.util.Listener;
 import mage.client.util.gui.GuiDisplayUtil;
 import mage.constants.EnlargeMode;
-import mage.game.draft.RateCard;
+import mage.cards.RateCard;
 import mage.view.CardView;
 import mage.view.CardsView;
 import org.apache.log4j.Logger;
@@ -253,7 +253,7 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
             case 8:
                 return c.getCardNumber();
             case 9:
-                return RateCard.rateCard(c.getOriginalCard(), null);
+                return RateCard.rateCard(c, null);
             case 10:
                 return ManaSymbols.getClearManaCost(c.getColorIdentityStr());
             default:
@@ -345,6 +345,9 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
         table.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
+                if (!SwingUtilities.isLeftMouseButton(e)) {
+                    return;
+                }
                 int row = table.getSelectedRow();
                 if (row != -1) {
                     showImage(row);
@@ -356,6 +359,9 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
         MouseListener mouse = new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
+                if (!SwingUtilities.isLeftMouseButton(e)) {
+                    return;
+                }
                 TableColumnModel columnModel = table.getColumnModel();
                 int viewColumn = columnModel.getColumnIndexAtX(e.getX());
                 int column = table.convertColumnIndexToModel(viewColumn);
@@ -447,7 +453,7 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
         if (numberEditable && col == 0) {
             return true;
         }
-        return super.isCellEditable(row, col); //To change body of generated methods, choose Tools | Templates.
+        return super.isCellEditable(row, col);
     }
 
 }

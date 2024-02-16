@@ -5,7 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.LandsYouControlCount;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -26,14 +26,14 @@ public final class AshayaSoulOfTheWild extends CardImpl {
     public AshayaSoulOfTheWild(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELEMENTAL);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 
         // Ashaya, Soul of the Wild’s power and toughness are each equal to the number of lands you control.
         this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new SetPowerToughnessSourceEffect(LandsYouControlCount.instance, Duration.EndOfGame)
+                Zone.ALL, new SetBasePowerToughnessSourceEffect(LandsYouControlCount.instance)
         ));
 
         // Nontoken creatures you control are Forest lands in addition to their other types. (They’re still affected by summoning sickness.)
@@ -65,7 +65,7 @@ class AshayaSoulOfTheWildEffect extends ContinuousEffectImpl {
         this.dependencyTypes.add(DependencyType.BecomeForest);
     }
 
-    public AshayaSoulOfTheWildEffect(final AshayaSoulOfTheWildEffect effect) {
+    private AshayaSoulOfTheWildEffect(final AshayaSoulOfTheWildEffect effect) {
         super(effect);
     }
 
@@ -77,7 +77,7 @@ class AshayaSoulOfTheWildEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         for (Permanent permanent : game.getBattlefield().getActivePermanents(
-                filter, source.getControllerId(), source.getSourceId(), game
+                filter, source.getControllerId(), source, game
         )) {
             if (!permanent.isLand(game)) {
                 permanent.addCardType(game, CardType.LAND);

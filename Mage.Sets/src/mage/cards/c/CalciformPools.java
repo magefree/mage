@@ -39,7 +39,7 @@ public final class CalciformPools extends CardImpl {
                 new AddManaInAnyCombinationEffect(RemovedCountersForCostValue.instance,
                         new CountersSourceCount(CounterType.STORAGE), ColoredManaSymbol.W, ColoredManaSymbol.U),
                 new GenericManaCost(1));
-        ability.addCost(new RemoveVariableCountersSourceCost(CounterType.STORAGE.createInstance()));
+        ability.addCost(new RemoveVariableCountersSourceCost(CounterType.STORAGE));
         this.addAbility(ability);
 
     }

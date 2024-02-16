@@ -44,11 +44,11 @@ public final class ElvishWarmaster extends CardImpl {
         // Whenever one or more other Elves enters the battlefield under your control, create a 1/1 green Elf Warrior creature token. This ability triggers only once each turn.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 new CreateTokenEffect(new ElfWarriorToken()), filter
-        ).setTriggersOnce(true));
+        ).setTriggersOnceEachTurn(true));
 
         // {5}{G}{G}: Elves you control get +2/+2 and gain deathtouch until end of turn.
         Ability ability = new SimpleActivatedAbility(new BoostControlledEffect(
-                2, 2, Duration.EndOfTurn, filter2).setText("Elves you control get +2/+2"), new ManaCostsImpl("{5}{G}{G}")
+                2, 2, Duration.EndOfTurn, filter2).setText("Elves you control get +2/+2"), new ManaCostsImpl<>("{5}{G}{G}")
         );
         ability.addEffect(new GainAbilityControlledEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn, filter2
                 ).setText("and gain deathtouch until end of turn")

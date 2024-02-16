@@ -44,12 +44,12 @@ public final class Rebound extends CardImpl {
 
 class ReboundEffect extends OneShotEffect {
 
-    public ReboundEffect() {
+    ReboundEffect() {
         super(Outcome.Neutral);
         this.staticText = "Change the target of target spell that targets only a player. The new target must be a player";
     }
 
-    public ReboundEffect(final ReboundEffect effect) {
+    private ReboundEffect(final ReboundEffect effect) {
         super(effect);
     }
 
@@ -66,7 +66,7 @@ class ReboundEffect extends OneShotEffect {
                 && controller != null) {
             spell.getSpellAbility().getTargets().clear();
             TargetPlayer targetPlayer = new TargetPlayer();
-            if (controller.choose(Outcome.Neutral, targetPlayer, source.getSourceId(), game)) {
+            if (controller.choose(Outcome.Neutral, targetPlayer, source, game)) {
                 spell.getSpellAbility().addTarget(targetPlayer);
                 game.informPlayers("The target of the spell was changed to " + targetPlayer.getTargetedName(game));
                 return true;

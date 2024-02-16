@@ -2,6 +2,7 @@
 package mage.abilities.effects.common;
 
 import java.util.Locale;
+
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
@@ -16,7 +17,6 @@ import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
 
 /**
- *
  * @author LevelX2
  */
 public class EnterBattlefieldPayCostOrPutGraveyardEffect extends ReplacementEffectImpl {
@@ -29,7 +29,7 @@ public class EnterBattlefieldPayCostOrPutGraveyardEffect extends ReplacementEffe
         staticText = "If {this} would enter the battlefield, " + cost.getText() + " instead. If you do, put {this} onto the battlefield. If you don't, put it into its owner's graveyard";
     }
 
-    public EnterBattlefieldPayCostOrPutGraveyardEffect(final EnterBattlefieldPayCostOrPutGraveyardEffect effect) {
+    protected EnterBattlefieldPayCostOrPutGraveyardEffect(final EnterBattlefieldPayCostOrPutGraveyardEffect effect) {
         super(effect);
         this.cost = effect.cost.copy();
     }
@@ -40,20 +40,15 @@ public class EnterBattlefieldPayCostOrPutGraveyardEffect extends ReplacementEffe
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player player = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (player != null && cost != null && sourceObject != null) {
             boolean replace = true;
             if (cost.canPay(source, source, player.getId(), game)) {
                 if (player.chooseUse(outcome,
                         cost.getText().substring(0, 1).toUpperCase(Locale.ENGLISH) + cost.getText().substring(1)
-                        + "? (otherwise " + sourceObject.getLogName() + " is put into graveyard)", source, game)) {
+                                + "? (otherwise " + sourceObject.getLogName() + " is put into graveyard)", source, game)) {
                     cost.clearPaid();
                     replace = !cost.pay(source, game, source, source.getControllerId(), false, null);
                 }

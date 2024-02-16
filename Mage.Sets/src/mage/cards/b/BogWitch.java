@@ -28,7 +28,7 @@ public final class BogWitch extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {B}, {tap}, Discard a card: Add {B}{B}{B}.
-        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlackMana(3), new ManaCostsImpl("{B}"));
+        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlackMana(3), new ManaCostsImpl<>("{B}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardCardCost());
         this.addAbility(ability);

@@ -59,7 +59,7 @@ class RiversRebukeReturnToHandEffect extends OneShotEffect {
         Cards cards = new CardsImpl();
         game.getBattlefield().getActivePermanents(
                 StaticFilters.FILTER_CONTROLLED_PERMANENT_NON_LAND,
-                source.getFirstTarget(), source.getSourceId(), game
+                source.getFirstTarget(), source, game
         ).stream().forEach(cards::add);
         return player.moveCards(cards, Zone.HAND, source, game);
     }

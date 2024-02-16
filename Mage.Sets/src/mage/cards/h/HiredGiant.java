@@ -53,7 +53,7 @@ class HiredGiantEffect extends OneShotEffect {
         this.staticText = "each other player may search their library for a land card and put that card onto the battlefield. Then each player who searched their library this way shuffles";
     }
 
-    HiredGiantEffect(final HiredGiantEffect effect) {
+    private HiredGiantEffect(final HiredGiantEffect effect) {
         super(effect);
     }
 

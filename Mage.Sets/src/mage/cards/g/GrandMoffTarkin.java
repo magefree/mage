@@ -26,7 +26,7 @@ public final class GrandMoffTarkin extends CardImpl {
 
     public GrandMoffTarkin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ADVISOR);
         this.power = new MageInt(2);
@@ -48,20 +48,13 @@ public final class GrandMoffTarkin extends CardImpl {
 
 class GrandMoffTarkinTriggeredAbility extends TriggeredAbilityImpl {
 
-    protected String text;
-
     public GrandMoffTarkinTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
+        setTriggerPhrase("At the beginning of each opponent's upkeep, ");
     }
 
-    public GrandMoffTarkinTriggeredAbility(Effect effect, boolean optional, String text) {
-        super(Zone.BATTLEFIELD, effect, optional);
-        this.text = text;
-    }
-
-    public GrandMoffTarkinTriggeredAbility(final GrandMoffTarkinTriggeredAbility ability) {
+    private GrandMoffTarkinTriggeredAbility(final GrandMoffTarkinTriggeredAbility ability) {
         super(ability);
-        this.text = ability.text;
     }
 
     @Override
@@ -86,11 +79,6 @@ class GrandMoffTarkinTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public String getTriggerPhrase() {
-        return "At the beginning of each opponent's upkeep, ";
-    }
-
-    @Override
     public GrandMoffTarkinTriggeredAbility copy() {
         return new GrandMoffTarkinTriggeredAbility(this);
     }
@@ -98,12 +86,12 @@ class GrandMoffTarkinTriggeredAbility extends TriggeredAbilityImpl {
 
 class GrandMoffTarkinEffect extends OneShotEffect {
 
-    public GrandMoffTarkinEffect() {
+    GrandMoffTarkinEffect() {
         super(Outcome.ReturnToHand);
         this.staticText = "destroy target creature that that player controls unless that player pays 2 life. If a player pays life this way, draw a card";
     }
 
-    public GrandMoffTarkinEffect(final GrandMoffTarkinEffect effect) {
+    private GrandMoffTarkinEffect(final GrandMoffTarkinEffect effect) {
         super(effect);
     }
 

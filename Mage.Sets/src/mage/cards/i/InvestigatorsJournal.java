@@ -1,26 +1,26 @@
 package mage.cards.i;
 
-import java.util.HashMap;
 import java.util.UUID;
 
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
-import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.token.ClueAbility;
 import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.counters.CounterType;
+import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.players.Player;
 
 /**
  *
@@ -46,9 +46,7 @@ public final class InvestigatorsJournal extends CardImpl {
         this.addAbility(ability);
 
         // {2}, Sacrifice Investigator's Journal: Draw a card.
-        ability = new SimpleActivatedAbility(new DrawCardSourceControllerEffect(1), new GenericManaCost(2));
-        ability.addCost(new SacrificeSourceCost());
-        this.addAbility(ability);
+        this.addAbility(new ClueAbility(true));
     }
 
     private InvestigatorsJournal(final InvestigatorsJournal card) {
@@ -66,25 +64,19 @@ enum InvestigatorsJournalValue implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        HashMap<UUID, Integer> creatureCounts = new HashMap<>();
-        for (UUID playerId : game.getState().getPlayersInRange(sourceAbility.getControllerId(), game)) {
-            creatureCounts.put(playerId, 0);
-        }
-        for (Permanent permanent : game.getBattlefield().getAllPermanents()) {
-            if (permanent.isPhasedIn() && permanent.isCreature(game)) {
-                UUID controllerId = permanent.getControllerId();
-                Integer count = creatureCounts.get(controllerId);
-                if (count != null) {
-                    creatureCounts.put(controllerId, count + 1);
-                }
-            }
-        }
         int greatestCreatureCount = 0;
-        for (Integer count : creatureCounts.values()) {
-            if (count > greatestCreatureCount) {
-                greatestCreatureCount = count;
+
+        for (UUID playerId : game.getState().getPlayersInRange(sourceAbility.getControllerId(), game)) {
+            Player player = game.getPlayer(playerId);
+            if (player == null) {
+                continue;
             }
+
+            greatestCreatureCount = Math.max(
+                    greatestCreatureCount,
+                    game.getBattlefield().countAll(StaticFilters.FILTER_PERMANENT_CREATURE, playerId, game));
         }
+
         return greatestCreatureCount;
     }
 

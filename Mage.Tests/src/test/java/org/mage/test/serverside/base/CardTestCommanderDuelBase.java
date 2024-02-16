@@ -23,10 +23,10 @@ public abstract class CardTestCommanderDuelBase extends CardTestPlayerAPIImpl {
 
     @Override
     protected Game createNewGameAndPlayers() throws GameException, FileNotFoundException {
-        Game game = new CommanderDuel(MultiplayerAttackOption.LEFT, RangeOfInfluence.ONE, MulliganType.GAME_DEFAULT.getMulligan(0), 40);
+        Game game = new CommanderDuel(MultiplayerAttackOption.LEFT, RangeOfInfluence.ONE, MulliganType.GAME_DEFAULT.getMulligan(0), 40, 7);
 
-        playerA = createPlayer(game, playerA, "PlayerA", deckNameA);
-        playerB = createPlayer(game, playerB, "PlayerB", deckNameB);
+        playerA = createPlayer(game, "PlayerA", deckNameA);
+        playerB = createPlayer(game, "PlayerB", deckNameB);
         return game;
     }
 

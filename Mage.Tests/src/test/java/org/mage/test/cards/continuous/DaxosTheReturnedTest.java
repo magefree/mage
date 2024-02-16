@@ -32,8 +32,8 @@ public class DaxosTheReturnedTest extends CardTestPlayerBase {
         // Whenever an opponent draws a card, Underworld Dreams deals 1 damage to that player.
         addCard(Zone.HAND, playerA, "Underworld Dreams", 2); // {B}{B}{B}
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Underworld Dreams");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Underworld Dreams");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Underworld Dreams", true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Underworld Dreams", true);
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{1}{W}{B}");
         setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
         execute();
@@ -43,8 +43,8 @@ public class DaxosTheReturnedTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Underworld Dreams", 2);
         assertCounterCount(playerA, CounterType.EXPERIENCE, 2);
-        assertPowerToughness(playerA, "Spirit", 2, 2, Filter.ComparisonScope.All);
-        assertType("Spirit", CardType.ENCHANTMENT, SubType.SPIRIT);
+        assertPowerToughness(playerA, "Spirit Token", 2, 2, Filter.ComparisonScope.All);
+        assertType("Spirit Token", CardType.ENCHANTMENT, SubType.SPIRIT);
 
     }
 

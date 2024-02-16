@@ -9,12 +9,13 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.TargetEvent;
+import mage.game.permanent.Permanent;
+import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.util.CardUtil;
 import mage.util.RandomUtil;
 
 import java.util.*;
-import mage.game.permanent.Permanent;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -39,20 +40,20 @@ public abstract class TargetImpl implements Target {
 
     protected int targetTag; // can be set if other target check is needed (AnotherTargetPredicate)
     protected String chooseHint = null; // UI choose hints after target name
-    protected boolean shouldReportEvents = true;
+    protected boolean shouldReportEvents = true; // generates TARGET and TARGETED events (can be disabled in non targeting mode, e.g. on target change)
 
     @Override
     public abstract TargetImpl copy();
 
-    public TargetImpl() {
+    protected TargetImpl() {
         this(false);
     }
 
-    public TargetImpl(boolean notTarget) {
+    protected TargetImpl(boolean notTarget) {
         this.notTarget = notTarget;
     }
 
-    public TargetImpl(final TargetImpl target) {
+    protected TargetImpl(final TargetImpl target) {
         this.targetName = target.targetName;
         this.zone = target.zone;
         this.maxNumberOfTargets = target.maxNumberOfTargets;
@@ -94,6 +95,51 @@ public abstract class TargetImpl implements Target {
     @Override
     public void setMaxNumberOfTargets(int maxNumberOftargets) {
         this.maxNumberOfTargets = maxNumberOftargets;
+    }
+
+    @Override
+    public String getDescription() {
+        // target description for ability text
+        StringBuilder sb = new StringBuilder();
+        int min = getMinNumberOfTargets();
+        int max = getMaxNumberOfTargets();
+        if (min > 0 && max == Integer.MAX_VALUE) {
+            sb.append(CardUtil.numberToText(min));
+            sb.append(" or more ");
+        } else if (!getTargetName().startsWith("X") && (min != 1 || max != 1)) {
+            if (min < max && max != Integer.MAX_VALUE) {
+                if (min == 1 && max == 2) {
+                    sb.append("one or ");
+                } else if (min == 1 && max == 3) {
+                    sb.append("one, two, or ");
+                } else {
+                    sb.append("up to ");
+                }
+            }
+            sb.append(CardUtil.numberToText(max));
+            sb.append(' ');
+        }
+        boolean addTargetWord = false;
+        if (!isNotTarget()) {
+            addTargetWord = true;
+            if (getTargetName().contains("target ")) {
+                addTargetWord = false;
+            } else if (getTargetName().endsWith("any target")
+                    || getTargetName().endsWith("any other target")) {
+                addTargetWord = false;
+            }
+            // endsWith needs to be specific.
+            // e.g. "spell with a single target" => need to prefix with "target ".
+        }
+        if (addTargetWord) {
+            sb.append("target ");
+        }
+        if (isNotTarget() && min == 1 && max == 1) {
+            sb.append(CardUtil.addArticle(getTargetName()));
+        } else {
+            sb.append(getTargetName());
+        }
+        return sb.toString();
     }
 
     @Override
@@ -175,7 +221,7 @@ public abstract class TargetImpl implements Target {
     }
 
     @Override
-    public boolean doneChosing() {
+    public boolean doneChoosing() {
         return getMaxNumberOfTargets() != 0 && targets.size() == getMaxNumberOfTargets();
     }
 
@@ -269,7 +315,7 @@ public abstract class TargetImpl implements Target {
     }
 
     @Override
-    public boolean choose(Outcome outcome, UUID playerId, UUID sourceId, Game game) {
+    public boolean choose(Outcome outcome, UUID playerId, UUID sourceId, Ability source, Game game) {
         Player targetController = getTargetController(game, playerId);
         if (targetController == null) {
             return false;
@@ -280,11 +326,11 @@ public abstract class TargetImpl implements Target {
             if (!targetController.canRespond()) {
                 return chosen;
             }
-            if (!targetController.choose(outcome, this, sourceId, game)) {
+            if (!targetController.choose(outcome, this, source, game)) {
                 return chosen;
             }
             chosen = targets.size() >= getNumberOfTargets();
-        } while (!isChosen() && !doneChosing());
+        } while (!isChosen() && !doneChoosing());
         return chosen;
     }
 
@@ -295,7 +341,7 @@ public abstract class TargetImpl implements Target {
             return false;
         }
 
-        List<UUID> possibleTargets = new ArrayList<>(possibleTargets(source.getSourceId(), playerId, game));
+        List<UUID> possibleTargets = new ArrayList<>(possibleTargets(playerId, source, game));
 
         chosen = targets.size() >= getNumberOfTargets();
         do {
@@ -317,11 +363,17 @@ public abstract class TargetImpl implements Target {
                         possibleTargets.remove(index);
                     }
                 }
-            } else if (!targetController.chooseTarget(outcome, this, source, game)) {
-                return chosen;
+            } else {
+                // Try to autochoosen
+                UUID autoChosenId = required ? tryToAutoChoose(playerId, source, game) : null;
+                if (autoChosenId != null) {
+                    addTarget(autoChosenId, source, game);
+                } else if (!targetController.chooseTarget(outcome, this, source, game)) { // If couldn't autochoose ask player
+                    return chosen;
+                }
             }
             chosen = targets.size() >= getNumberOfTargets();
-        } while (!isChosen() && !doneChosing());
+        } while (!isChosen() && !doneChoosing());
 
         return chosen;
     }
@@ -385,7 +437,7 @@ public abstract class TargetImpl implements Target {
     public List<? extends TargetImpl> getTargetOptions(Ability source, Game game) {
         List<TargetImpl> options = new ArrayList<>();
         List<UUID> possibleTargets = new ArrayList<>();
-        possibleTargets.addAll(possibleTargets(source.getSourceId(), source.getControllerId(), game));
+        possibleTargets.addAll(possibleTargets(source.getControllerId(), source, game));
         possibleTargets.removeAll(getTargets());
 
         // get the length of the array
@@ -494,8 +546,9 @@ public abstract class TargetImpl implements Target {
     }
 
     @Override
-    public void setNotTarget(boolean notTarget) {
+    public TargetImpl withNotTarget(boolean notTarget) {
         this.notTarget = notTarget;
+        return this;
     }
 
     @Override
@@ -554,8 +607,9 @@ public abstract class TargetImpl implements Target {
      * @param targetTag
      */
     @Override
-    public void setTargetTag(int targetTag) {
+    public TargetImpl setTargetTag(int targetTag) {
         this.targetTag = targetTag;
+        return this;
     }
 
     @Override
@@ -593,5 +647,88 @@ public abstract class TargetImpl implements Target {
     @Override
     public boolean contains(UUID targetId) {
         return targets.containsKey(targetId);
+    }
+
+    @Override
+    public UUID tryToAutoChoose(UUID abilityControllerId, Ability source, Game game) {
+        Set<UUID> possibleTargets = possibleTargets(abilityControllerId, source, game);
+        possibleTargets.removeAll(this.targets.keySet());
+        return tryToAutoChoose(abilityControllerId, source, game, possibleTargets);
+    }
+
+    @Override
+    public UUID tryToAutoChoose(UUID abilityControllerId, Ability source, Game game, Collection<UUID> possibleTargets) {
+        if (possibleTargets == null || game == null || source == null) {
+            return null;
+        }
+
+        Player player = game.getPlayer(abilityControllerId);
+        if (player == null) {
+            return null;
+        }
+        int playerAutoTargetLevel;
+        if (player.isHuman() && player.getControllingPlayersUserData(game) != null) { // Ensure that non-strictChooseMode ComputerPlayer will still use this ability
+            playerAutoTargetLevel = player.getControllingPlayersUserData(game).getAutoTargetLevel();
+        } else {
+            playerAutoTargetLevel = 2;
+        }
+        String abilityText = source.getRule(true).toLowerCase();
+        boolean strictModeEnabled = player.getStrictChooseMode();
+        boolean canAutoChoose = this.getMinNumberOfTargets() == this.getMaxNumberOfTargets() // Targets must be picked
+                                && possibleTargets.size() == this.getNumberOfTargets() - this.getSize() // Available targets are equal to the number that must be picked
+                                && !strictModeEnabled  // Test AI is not set to strictChooseMode(true)
+                                && playerAutoTargetLevel > 0 // Human player has enabled auto-choose in settings
+                                && !abilityText.contains("search"); // Do not autochoose for any effects which involve searching
+
+
+        if (canAutoChoose) {
+            boolean autoTargetAll = playerAutoTargetLevel == 2;
+            for (UUID possibleChooseId : possibleTargets) {
+                // Don't pick a target that's already been chosen, this will lead to an infinite loop of
+                // choosen and unchoosing the same target.
+                if (this.targets.containsKey(possibleChooseId)) {
+                    continue;
+                }
+                if (autoTargetAll) { // No need for further checks since all targeting is to be automated
+                    return possibleChooseId;
+                }
+
+                // Check if you control the target (or own the card)
+                boolean targetingOwnThing;
+                if (possibleChooseId == abilityControllerId) {
+                    targetingOwnThing = true;
+                } else {
+                    Permanent targetPermanent = game.getPermanent(possibleChooseId);
+                    Card targetCard = game.getCard(possibleChooseId);
+                    Spell targetSpell = game.getSpell(possibleChooseId);
+                    if (targetPermanent != null) {
+                        targetingOwnThing = abilityControllerId == targetPermanent.getControllerId();
+                    } else if (targetCard != null) {
+                        targetingOwnThing = abilityControllerId == targetCard.getOwnerId();
+                    } else if (targetSpell != null) {
+                        targetingOwnThing = abilityControllerId == targetSpell.getControllerId();
+                    } else {
+                        // No point further checking
+                        continue;
+                    }
+                }
+
+                // If you control (or own the card) the target, check if it's one of the feel-bad effects.
+                if (targetingOwnThing) {
+                    if (abilityText.contains("discard")
+                            || abilityText.contains("sacrifice")
+                            || abilityText.contains("destroy")
+                            || abilityText.contains("exile")) {
+                        continue;
+                    }
+                    // Otherwise return the target with the return statement below.
+                }
+
+                // If we get here then it means that the target UUID passes the checks.
+                return possibleChooseId;
+            }
+        }
+
+        return null;
     }
 }

@@ -32,7 +32,7 @@ public final class MaceWindu extends CardImpl {
 
     public MaceWindu(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.JEDI);
         this.power = new MageInt(2);
@@ -47,7 +47,7 @@ public final class MaceWindu extends CardImpl {
         this.addAbility(ability);
 
         // Meditate {1}{U}
-        this.addAbility(new MeditateAbility(new ManaCostsImpl("{1}{U}")));
+        this.addAbility(new MeditateAbility(new ManaCostsImpl<>("{1}{U}")));
     }
 
     private MaceWindu(final MaceWindu card) {

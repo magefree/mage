@@ -31,7 +31,7 @@ public class TidehollowScullerTest extends CardTestPlayerBase {
         // cast and exile from hand
         checkHandCardCount("B hand must have blood", 1, PhaseStep.UPKEEP, playerB, "Bloodflow Connoisseur", 1);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tidehollow Sculler");
-        addTarget(playerA, playerB); // choose opponent
+        // addTarget(playerA, playerB); // choose opponent (Autochosen, only target)
         setChoice(playerA, "Bloodflow Connoisseur"); // card to exile
         checkHandCardCount("B hand must lost blood", 1, PhaseStep.BEGIN_COMBAT, playerB, "Bloodflow Connoisseur", 0);
 
@@ -43,7 +43,6 @@ public class TidehollowScullerTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerB, "Bloodflow Connoisseur", 1);
         assertPermanentCount(playerA, "Tidehollow Sculler", 0);
@@ -68,13 +67,13 @@ public class TidehollowScullerTest extends CardTestPlayerBase {
         // cast 1 and exile from hand
         checkHandCardCount("B hand must have blood", 1, PhaseStep.UPKEEP, playerB, "Bloodflow Connoisseur", 1);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tidehollow Sculler");
-        addTarget(playerA, playerB); // choose opponent
+        // addTarget(playerA, playerB); // choose opponent (Autochosen, only target)
         setChoice(playerA, "Bloodflow Connoisseur"); // card to exile
         checkHandCardCount("B hand must lost blood", 1, PhaseStep.BEGIN_COMBAT, playerB, "Bloodflow Connoisseur", 0);
         // cast 2 and exile from hand
         checkHandCardCount("B hand must have lion", 1, PhaseStep.END_COMBAT, playerB, "Silvercoat Lion", 1);
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Tidehollow Sculler");
-        addTarget(playerA, playerB); // choose opponent
+        // addTarget(playerA, playerB); // choose opponent (Autochosen, only target)
         setChoice(playerA, "Silvercoat Lion"); // card to exile
         checkHandCardCount("B hand must lost lion", 1, PhaseStep.END_TURN, playerB, "Silvercoat Lion", 0);
 
@@ -95,7 +94,6 @@ public class TidehollowScullerTest extends CardTestPlayerBase {
 
         setStopAt(2, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test

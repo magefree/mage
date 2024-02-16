@@ -25,7 +25,7 @@ public final class RaugrinCrystal extends CardImpl {
         this.addAbility(new WhiteManaAbility());
 
         // Cycling {2}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
     private RaugrinCrystal(final RaugrinCrystal card) {

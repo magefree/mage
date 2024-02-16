@@ -46,12 +46,12 @@ class HarmsWayPreventDamageTargetEffect extends RedirectionEffect {
     private final TargetSource damageSource;
 
     public HarmsWayPreventDamageTargetEffect() {
-        super(Duration.EndOfTurn, 2, UsageType.ONE_USAGE_ABSOLUTE);
+        super(Duration.EndOfTurn, 2, UsageType.ACCORDING_DURATION);
         staticText = "The next 2 damage that a source of your choice would deal to you and/or permanents you control this turn is dealt to any target instead";
         this.damageSource = new TargetSource();
     }
 
-    public HarmsWayPreventDamageTargetEffect(final HarmsWayPreventDamageTargetEffect effect) {
+    private HarmsWayPreventDamageTargetEffect(final HarmsWayPreventDamageTargetEffect effect) {
         super(effect);
         this.damageSource = effect.damageSource.copy();
     }
@@ -63,7 +63,7 @@ class HarmsWayPreventDamageTargetEffect extends RedirectionEffect {
 
     @Override
     public void init(Ability source, Game game) {
-        this.damageSource.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), game);
+        this.damageSource.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), source, game);
         super.init(source, game);
     }
 

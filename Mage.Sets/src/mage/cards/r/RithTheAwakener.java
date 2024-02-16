@@ -31,7 +31,7 @@ public final class RithTheAwakener extends CardImpl {
 
     public RithTheAwakener(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{G}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DRAGON);
 
         this.power = new MageInt(6);
@@ -41,7 +41,7 @@ public final class RithTheAwakener extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // Whenever Rith, the Awakener deals combat damage to a player, you may pay {2}{G}. If you do, choose a color, then create a 1/1 green Saproling creature token for each permanent of that color.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
-                new DoIfCostPaid(new RithTheAwakenerEffect(), new ManaCostsImpl("{2}{G}")), false));
+                new DoIfCostPaid(new RithTheAwakenerEffect(), new ManaCostsImpl<>("{2}{G}")), false));
     }
 
     private RithTheAwakener(final RithTheAwakener card) {
@@ -56,12 +56,12 @@ public final class RithTheAwakener extends CardImpl {
 
 class RithTheAwakenerEffect extends OneShotEffect {
 
-    public RithTheAwakenerEffect() {
+    RithTheAwakenerEffect() {
         super(Outcome.Benefit);
         this.staticText = "choose a color, then create a 1/1 green Saproling creature token for each permanent of that color";
     }
 
-    public RithTheAwakenerEffect(final RithTheAwakenerEffect effect) {
+    private RithTheAwakenerEffect(final RithTheAwakenerEffect effect) {
         super(effect);
     }
 
@@ -81,7 +81,7 @@ class RithTheAwakenerEffect extends OneShotEffect {
             game.informPlayers(controller.getLogName() + " chooses " + choice.getColor());
             FilterPermanent filter = new FilterPermanent();
             filter.add(new ColorPredicate(choice.getColor()));
-            int cardsWithColor = game.getBattlefield().count(filter, source.getSourceId(), controller.getId(), game);
+            int cardsWithColor = game.getBattlefield().count(filter, controller.getId(), source, game);
             if (cardsWithColor > 0) {
                 new CreateTokenEffect(new SaprolingToken(), cardsWithColor).apply(game, source);
             }

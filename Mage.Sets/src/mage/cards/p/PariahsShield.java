@@ -18,6 +18,7 @@ import mage.game.Game;
 import mage.game.events.DamagePlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
@@ -30,10 +31,10 @@ public final class PariahsShield extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // All damage that would be dealt to you is dealt to equipped creature instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PariahEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PariahsShieldEffect()));
         
         // Equip {3}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3)));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(3), new TargetControlledCreaturePermanent(), false));
     }
 
     private PariahsShield(final PariahsShield card) {
@@ -45,48 +46,43 @@ public final class PariahsShield extends CardImpl {
         return new PariahsShield(this);
     }
 
-    class PariahEffect extends ReplacementEffectImpl {
-        PariahEffect() {
-            super(Duration.WhileOnBattlefield, Outcome.RedirectDamage);
-            staticText = "All damage that would be dealt to you is dealt to equipped creature instead";
-        }
+}
+class PariahsShieldEffect extends ReplacementEffectImpl { // TODO: extend redirection effect instead? Redundant with PariahEffect?
+    PariahsShieldEffect() {
+        super(Duration.WhileOnBattlefield, Outcome.RedirectDamage);
+        staticText = "All damage that would be dealt to you is dealt to equipped creature instead";
+    }
 
-        PariahEffect(final PariahEffect effect) {
-            super(effect);
-        }
+    private PariahsShieldEffect(final PariahsShieldEffect effect) {
+        super(effect);
+    }
 
-        @Override
-        public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-            Permanent equipment = game.getPermanent(source.getSourceId());
-            if (equipment != null) {
-                Permanent permanent = game.getPermanent(equipment.getAttachedTo());
-                if (permanent != null) {
-                    DamagePlayerEvent damageEvent = (DamagePlayerEvent) event;
-                    permanent.damage(damageEvent.getAmount(), event.getSourceId(), source, game, damageEvent.isCombatDamage(), damageEvent.isPreventable());
-                    return true;
-                }
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        Permanent equipment = game.getPermanent(source.getSourceId());
+        if (equipment != null) {
+            Permanent permanent = game.getPermanent(equipment.getAttachedTo());
+            if (permanent != null) {
+                DamagePlayerEvent damageEvent = (DamagePlayerEvent) event;
+                permanent.damage(damageEvent.getAmount(), event.getSourceId(), source, game, damageEvent.isCombatDamage(), damageEvent.isPreventable());
+                return true;
             }
-            return false;
         }
+        return false;
+    }
 
-        @Override
-        public boolean checksEventType(GameEvent event, Game game) {
-            return event.getType() == GameEvent.EventType.DAMAGE_PLAYER;
-        }
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DAMAGE_PLAYER;
+    }
 
-        @Override
-        public boolean applies(GameEvent event, Ability source, Game game) {
-            return event.getPlayerId().equals(source.getControllerId());
-        }
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        return event.getPlayerId().equals(source.getControllerId());
+    }
 
-        @Override
-        public boolean apply(Game game, Ability source) {
-            return true;
-        }
-
-        @Override
-        public PariahEffect copy() {
-            return new PariahEffect(this);
-        }
+    @Override
+    public PariahsShieldEffect copy() {
+        return new PariahsShieldEffect(this);
     }
 }

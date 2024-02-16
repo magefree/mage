@@ -18,7 +18,7 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.ChasmSkulkerSquidToken;
+import mage.game.permanent.token.SquidToken;
 import mage.players.Player;
 
 /**
@@ -54,12 +54,12 @@ public final class ChasmSkulker extends CardImpl {
 
 class ChasmSkulkerEffect extends OneShotEffect {
 
-    public ChasmSkulkerEffect() {
+    ChasmSkulkerEffect() {
         super(Outcome.Benefit);
         this.staticText = "create X 1/1 blue Squid creature tokens with islandwalk, where X is the number of +1/+1 counters on Chasm Skulker";
     }
 
-    public ChasmSkulkerEffect(final ChasmSkulkerEffect effect) {
+    private ChasmSkulkerEffect(final ChasmSkulkerEffect effect) {
         super(effect);
     }
 
@@ -76,7 +76,7 @@ class ChasmSkulkerEffect extends OneShotEffect {
             if (permanent != null) {
                 int counters = permanent.getCounters(game).getCount(CounterType.P1P1);
                 if (counters > 0) {
-                    return new CreateTokenEffect(new ChasmSkulkerSquidToken(), counters).apply(game, source);
+                    return new CreateTokenEffect(new SquidToken(), counters).apply(game, source);
                 }
                 return true;
             }

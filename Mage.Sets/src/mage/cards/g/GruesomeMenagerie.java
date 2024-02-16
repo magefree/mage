@@ -66,7 +66,7 @@ class GruesomeMenagerieEffect extends OneShotEffect {
                 + "Return those cards to the battlefield.";
     }
 
-    public GruesomeMenagerieEffect(final GruesomeMenagerieEffect effect) {
+    private GruesomeMenagerieEffect(final GruesomeMenagerieEffect effect) {
         super(effect);
     }
 
@@ -84,24 +84,24 @@ class GruesomeMenagerieEffect extends OneShotEffect {
         Cards cards = new CardsImpl();
         Target target;
         target = new TargetCardInYourGraveyard(filter1);
-        target.setNotTarget(true);
-        if (player.choose(outcome, target, source.getSourceId(), game)) {
+        target.withNotTarget(true);
+        if (player.choose(outcome, target, source, game)) {
             Card card = game.getCard(target.getFirstTarget());
             if (card != null) {
                 cards.add(card);
             }
         }
         target = new TargetCardInYourGraveyard(filter2);
-        target.setNotTarget(true);
-        if (player.choose(outcome, target, source.getSourceId(), game)) {
+        target.withNotTarget(true);
+        if (player.choose(outcome, target, source, game)) {
             Card card = game.getCard(target.getFirstTarget());
             if (card != null) {
                 cards.add(card);
             }
         }
         target = new TargetCardInYourGraveyard(filter3);
-        target.setNotTarget(true);
-        if (player.choose(outcome, target, source.getSourceId(), game)) {
+        target.withNotTarget(true);
+        if (player.choose(outcome, target, source, game)) {
             Card card = game.getCard(target.getFirstTarget());
             if (card != null) {
                 cards.add(card);

@@ -52,7 +52,7 @@ class MarchOfTheMachinesEffect extends ContinuousEffectImpl {
         dependendToTypes.add(DependencyType.ArtifactAddingRemoving);
     }
 
-    public MarchOfTheMachinesEffect(final MarchOfTheMachinesEffect effect) {
+    private MarchOfTheMachinesEffect(final MarchOfTheMachinesEffect effect) {
         super(effect);
     }
 
@@ -82,8 +82,8 @@ class MarchOfTheMachinesEffect extends ContinuousEffectImpl {
                         Permanent permanent = it.next().getPermanent(game);
                         if (permanent != null) {
                             int manaCost = permanent.getManaValue();
-                            permanent.getPower().setValue(manaCost);
-                            permanent.getToughness().setValue(manaCost);
+                            permanent.getPower().setModifiedBaseValue(manaCost);
+                            permanent.getToughness().setModifiedBaseValue(manaCost);
                         }
                     }
                 }

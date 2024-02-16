@@ -52,12 +52,12 @@ public final class SpellboundDragon extends CardImpl {
 
 class SpellboundDragonEffect extends OneShotEffect {
 
-    public SpellboundDragonEffect() {
+    SpellboundDragonEffect() {
         super(Outcome.BoostCreature);
         staticText = "draw a card, then discard a card. Spellbound Dragon gets +X/+0 until end of turn, where X is the discarded card's mana value";
     }
 
-    public SpellboundDragonEffect(final SpellboundDragonEffect effect) {
+    private SpellboundDragonEffect(final SpellboundDragonEffect effect) {
         super(effect);
     }
 
@@ -73,7 +73,7 @@ class SpellboundDragonEffect extends OneShotEffect {
         if(you != null) {
             you.drawCards(1, source, game);
             TargetDiscard target = new TargetDiscard(you.getId());
-            you.choose(Outcome.Discard, target, source.getSourceId(), game);
+            you.choose(Outcome.Discard, target, source, game);
             Card card = you.getHand().get(target.getFirstTarget(), game);
             if (card != null && you.discard(card, false, source, game)) {
                 int cmc = card.getManaValue();

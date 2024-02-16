@@ -59,7 +59,7 @@ class KheruSpellsnatcherEffect extends OneShotEffect {
                 + "You may cast that card without paying its mana cost as long as it remains exiled";
     }
 
-    KheruSpellsnatcherEffect(final KheruSpellsnatcherEffect effect) {
+    private KheruSpellsnatcherEffect(final KheruSpellsnatcherEffect effect) {
         super(effect);
     }
 
@@ -73,7 +73,7 @@ class KheruSpellsnatcherEffect extends OneShotEffect {
         MageObject sourceObject = source.getSourceObject(game);
         StackObject stackObject = game.getStack().getStackObject(targetPointer.getFirst(game, source));
         if (stackObject != null && sourceObject != null
-                && game.getStack().counter(targetPointer.getFirst(game, source), source, game, Zone.EXILED, false, ZoneDetail.NONE)) {
+                && game.getStack().counter(targetPointer.getFirst(game, source), source, game, PutCards.EXILED)) {
             if (!stackObject.isCopy()) {
                 MageObject card = game.getObject(stackObject.getSourceId());
                 if (card instanceof Card) {

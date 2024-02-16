@@ -55,7 +55,7 @@ class AddCounterAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance(1)), false);
     }
 
-    public AddCounterAbility(final AddCounterAbility ability) {
+    private AddCounterAbility(final AddCounterAbility ability) {
         super(ability);
     }
 
@@ -85,18 +85,18 @@ class AddCounterAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever you cast a spell of the chosen type, put a charge counter on {this}";
+        return "Whenever you cast a spell of the chosen type, put a charge counter on {this}.";
     }
 }
 
 class BoostCreatureEffectEffect extends ContinuousEffectImpl {
 
-    public BoostCreatureEffectEffect() {
+    BoostCreatureEffectEffect() {
         super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
         staticText = "Creatures you control of the chosen type get +1/+1 for each charge counter on {this}";
     }
 
-    public BoostCreatureEffectEffect(final BoostCreatureEffectEffect effect) {
+    private BoostCreatureEffectEffect(final BoostCreatureEffectEffect effect) {
         super(effect);
     }
 

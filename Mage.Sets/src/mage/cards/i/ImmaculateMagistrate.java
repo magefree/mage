@@ -61,7 +61,7 @@ class ImmaculateMagistrateEffect extends OneShotEffect {
         this.staticText = "Put a +1/+1 counter on target creature for each Elf you control";
     }
 
-    public ImmaculateMagistrateEffect(final ImmaculateMagistrateEffect effect) {
+    private ImmaculateMagistrateEffect(final ImmaculateMagistrateEffect effect) {
         super(effect);
     }
 
@@ -74,7 +74,7 @@ class ImmaculateMagistrateEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getFirstTarget());
         if (permanent != null) {
-            int count = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game);
+            int count = game.getBattlefield().count(filter, source.getControllerId(), source, game);
             if (count > 0) {
                 permanent.addCounters(CounterType.P1P1.createInstance(count), source.getControllerId(), source, game);
                 return true;

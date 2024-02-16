@@ -27,7 +27,7 @@ public final class TectonicReformation extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new TectonicReformationEffect()));
 
         // Cycling {2}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
     private TectonicReformation(final TectonicReformation card) {
@@ -63,7 +63,7 @@ class TectonicReformationEffect extends ContinuousEffectImpl {
             return false;
         }
         for (Card card : controller.getHand().getCards(StaticFilters.FILTER_CARD_LAND, game)) {
-            game.getState().addOtherAbility(card, new CyclingAbility(new ManaCostsImpl("{R}")));
+            game.getState().addOtherAbility(card, new CyclingAbility(new ManaCostsImpl<>("{R}")));
         }
         return true;
     }

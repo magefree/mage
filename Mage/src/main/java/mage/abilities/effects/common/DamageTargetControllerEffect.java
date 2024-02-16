@@ -36,7 +36,7 @@ public class DamageTargetControllerEffect extends OneShotEffect {
         this.preventable = preventable;
     }
 
-    public DamageTargetControllerEffect(final DamageTargetControllerEffect effect) {
+    protected DamageTargetControllerEffect(final DamageTargetControllerEffect effect) {
         super(effect);
         amount = effect.amount.copy();
         preventable = effect.preventable;
@@ -65,11 +65,9 @@ public class DamageTargetControllerEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        String text = "{this} deals " + amount.getMessage() + " damage to target "
-                + mode.getTargets().get(0).getTargetName() + "'s controller";
-        if (!preventable) {
-            text += ". The damage can't be prevented";
-        }
-        return text;
+        return "{this} deals " + amount.getMessage() + " damage to "
+                + getTargetPointer().describeTargets(mode.getTargets(), "that creature")
+                + "'s controller"
+                + (preventable ? "" : ". The damage can't be prevented");
     }
 }

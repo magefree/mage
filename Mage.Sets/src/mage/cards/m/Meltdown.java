@@ -42,7 +42,7 @@ class MeltdownEffect extends OneShotEffect {
         this.staticText = "Destroy each artifact with mana value X or less";
     }
     
-    MeltdownEffect(final MeltdownEffect effect) {
+    private MeltdownEffect(final MeltdownEffect effect) {
         super(effect);
     }
     

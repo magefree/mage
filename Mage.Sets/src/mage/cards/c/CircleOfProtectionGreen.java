@@ -33,7 +33,7 @@ public final class CircleOfProtectionGreen extends CardImpl {
 
         // {1}: The next time a green source of your choice would deal damage to you this turn, prevent that damage.
         Effect effect = new PreventNextDamageFromChosenSourceToYouEffect(Duration.EndOfTurn, filter);
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("1")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{1}")));
     }
 
     private CircleOfProtectionGreen(final CircleOfProtectionGreen card) {

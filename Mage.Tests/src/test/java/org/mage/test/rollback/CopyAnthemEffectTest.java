@@ -30,7 +30,6 @@ public class CopyAnthemEffectTest extends CardTestPlayerBase {
 
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, "Runeclaw Bear", 4, 4);
     }

@@ -40,26 +40,26 @@ public final class SanityGrinding extends CardImpl {
 
 class SanityGrindingEffect extends OneShotEffect {
 
-    public SanityGrindingEffect() {
+    SanityGrindingEffect() {
         super(Outcome.Neutral);
         staticText = "<i>Chroma</i> &mdash; Reveal the top ten cards of your library. " +
                 "For each blue mana symbol in the mana costs of the revealed cards, target opponent mills a card. " +
                 "Then put the cards you revealed this way on the bottom of your library in any order";
     }
 
-    public SanityGrindingEffect(final SanityGrindingEffect effect) {
+    private SanityGrindingEffect(final SanityGrindingEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (controller == null || sourceObject == null) {
             return false;
         }
         Cards revealed = new CardsImpl();
-        revealed.addAll(controller.getLibrary().getTopCards(game, 10));
+        revealed.addAllCards(controller.getLibrary().getTopCards(game, 10));
         controller.revealCards(sourceObject.getIdName(), revealed, game);
         Player targetOpponent = game.getPlayer(source.getFirstTarget());
         if (targetOpponent != null) {
@@ -82,7 +82,7 @@ class ChromaSanityGrindingCount implements DynamicValue {
         this.revealed = revealed;
     }
 
-    public ChromaSanityGrindingCount(final ChromaSanityGrindingCount dynamicValue) {
+    private ChromaSanityGrindingCount(final ChromaSanityGrindingCount dynamicValue) {
         this.revealed = dynamicValue.revealed;
     }
 

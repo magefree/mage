@@ -48,11 +48,12 @@ public final class SpellRupture extends CardImpl {
 
 class SpellRuptureCounterUnlessPaysEffect extends OneShotEffect {
 
-    public SpellRuptureCounterUnlessPaysEffect() {
+    SpellRuptureCounterUnlessPaysEffect() {
         super(Outcome.Detriment);
+        this.staticText = "Counter target spell unless its controller pays {X}, where X is the greatest power among creatures you control";
     }
 
-    public SpellRuptureCounterUnlessPaysEffect(final SpellRuptureCounterUnlessPaysEffect effect) {
+    private SpellRuptureCounterUnlessPaysEffect(final SpellRuptureCounterUnlessPaysEffect effect) {
         super(effect);
     }
 
@@ -67,7 +68,7 @@ class SpellRuptureCounterUnlessPaysEffect extends OneShotEffect {
         if (spell != null) {
             Player player = game.getPlayer(spell.getControllerId());
             Player controller = game.getPlayer(source.getControllerId());
-            MageObject sourceObject = game.getObject(source.getSourceId());
+            MageObject sourceObject = game.getObject(source);
             if (player != null && controller != null && sourceObject != null) {
                 int maxPower = new GreatestPowerCountCreatureYouControl().calculate(game, source, this);
                 Cost cost = ManaUtil.createManaCost(maxPower, true);
@@ -80,11 +81,6 @@ class SpellRuptureCounterUnlessPaysEffect extends OneShotEffect {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return "Counter target spell unless its controller pays {X}, where X is the greatest power among creatures you control";
     }
 }
 

@@ -12,7 +12,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.filter.common.FilterControlledPermanent;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -22,8 +22,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class BogNaughty extends CardImpl {
-
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.FOOD, "a Food");
 
     public BogNaughty(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
@@ -37,9 +35,9 @@ public final class BogNaughty extends CardImpl {
 
         // {2}{B}, Sacrifice a Food: Target creature gets -3/-3 until end of turn.
         Ability ability = new SimpleActivatedAbility(
-                new BoostTargetEffect(-3, -3, Duration.EndOfTurn), new ManaCostsImpl("{2}{B}")
+                new BoostTargetEffect(-3, -3, Duration.EndOfTurn), new ManaCostsImpl<>("{2}{B}")
         );
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_FOOD));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

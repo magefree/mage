@@ -60,7 +60,7 @@ class SoulSeizerTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new SoulSeizerEffect(), true);
     }
 
-    public SoulSeizerTriggeredAbility(SoulSeizerTriggeredAbility ability) {
+    private SoulSeizerTriggeredAbility(final SoulSeizerTriggeredAbility ability) {
         super(ability);
     }
 
@@ -99,11 +99,11 @@ class SoulSeizerTriggeredAbility extends TriggeredAbilityImpl {
 
 class SoulSeizerEffect extends OneShotEffect {
 
-    public SoulSeizerEffect() {
+    SoulSeizerEffect() {
         super(Outcome.GainControl);
     }
 
-    public SoulSeizerEffect(final SoulSeizerEffect effect) {
+    private SoulSeizerEffect(final SoulSeizerEffect effect) {
         super(effect);
     }
 

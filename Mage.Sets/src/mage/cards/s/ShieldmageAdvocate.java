@@ -70,7 +70,7 @@ class ShieldmageAdvocateEffect extends PreventionEffectImpl {
         this.targetSource = new TargetSource();
     }
     
-    public ShieldmageAdvocateEffect(final ShieldmageAdvocateEffect effect) {
+    private ShieldmageAdvocateEffect(final ShieldmageAdvocateEffect effect) {
         super(effect);
         this.targetSource = effect.targetSource.copy();
     }
@@ -82,7 +82,7 @@ class ShieldmageAdvocateEffect extends PreventionEffectImpl {
 
     @Override
     public void init(Ability source, Game game) {
-        this.targetSource.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), game);
+        this.targetSource.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), source, game);
     }
 
     @Override

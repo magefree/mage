@@ -28,7 +28,7 @@ public final class DarigaazTheIgniter extends CardImpl {
 
     public DarigaazTheIgniter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{R}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DRAGON);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
@@ -38,7 +38,7 @@ public final class DarigaazTheIgniter extends CardImpl {
 
         // Whenever Darigaaz, the Igniter deals combat damage to a player, you may pay {2}{R}. If you do, choose a color, then that player reveals their hand and Darigaaz deals damage to the player equal to the number of cards of that color revealed this way.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DoIfCostPaid(
-                new DarigaazTheIgniterEffect(), new ManaCostsImpl("{2}{R}")), false, true));
+                new DarigaazTheIgniterEffect(), new ManaCostsImpl<>("{2}{R}")), false, true));
     }
 
     private DarigaazTheIgniter(final DarigaazTheIgniter card) {
@@ -53,13 +53,13 @@ public final class DarigaazTheIgniter extends CardImpl {
 
 class DarigaazTheIgniterEffect extends OneShotEffect {
 
-    public DarigaazTheIgniterEffect() {
+    DarigaazTheIgniterEffect() {
         super(Outcome.Damage);
         staticText = "choose a color, then that player reveals their hand and {this} deals damage"
                 + " to the player equal to the number of cards of that color revealed this way";
     }
 
-    public DarigaazTheIgniterEffect(final DarigaazTheIgniterEffect effect) {
+    private DarigaazTheIgniterEffect(final DarigaazTheIgniterEffect effect) {
         super(effect);
     }
 
@@ -79,7 +79,7 @@ class DarigaazTheIgniterEffect extends OneShotEffect {
                 damagedPlayer.revealCards("hand of " + damagedPlayer.getName(), damagedPlayer.getHand(), game);
                 FilterCard filter = new FilterCard();
                 filter.add(new ColorPredicate(choice.getColor()));
-                int damage = damagedPlayer.getHand().count(filter, source.getSourceId(), source.getControllerId(), game);
+                int damage = damagedPlayer.getHand().count(filter, source.getControllerId(), source, game);
                 if (damage > 0) {
                     damagedPlayer.damage(damage, source.getSourceId(), source, game);
                 }

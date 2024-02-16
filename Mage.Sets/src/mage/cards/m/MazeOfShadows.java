@@ -1,7 +1,6 @@
 
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -18,21 +17,23 @@ import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.predicate.mageobject.AbilityPredicate;
-import mage.target.common.TargetAttackingCreature;
+import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author emerald000
  */
 public final class MazeOfShadows extends CardImpl {
-    
+
     private static final FilterAttackingCreature filter = new FilterAttackingCreature("attacking creature with shadow");
+
     static {
         filter.add(new AbilityPredicate(ShadowAbility.class));
     }
 
     public MazeOfShadows(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
         // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
@@ -45,7 +46,7 @@ public final class MazeOfShadows extends CardImpl {
         effect = new PreventDamageToTargetEffect(Duration.EndOfTurn, Integer.MAX_VALUE, true);
         effect.setText("and dealt by that creature this turn");
         ability.addEffect(effect);
-        ability.addTarget(new TargetAttackingCreature(1, 1, filter, false));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 

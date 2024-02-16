@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import java.util.UUID;
@@ -11,19 +10,13 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.Predicates;
+import mage.filter.StaticFilters;
 
 /**
  *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
 public final class CatharsCompanion extends CardImpl {
-    
-    private static final FilterSpell filter = new FilterSpell("a noncreature spell");
-    static {
-        filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
-    }
 
     public CatharsCompanion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
@@ -32,7 +25,8 @@ public final class CatharsCompanion extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever you cast a noncreature spell, Cathar's Companion gains indestructible until end of turn.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new GainAbilitySourceEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn), filter, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new GainAbilitySourceEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn),
+                StaticFilters.FILTER_SPELL_A_NON_CREATURE, false));
     }
 
     private CatharsCompanion(final CatharsCompanion card) {

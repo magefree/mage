@@ -39,12 +39,12 @@ public final class DamnablePact extends CardImpl {
 
 class DamnablePactEffect extends OneShotEffect {
 
-    public DamnablePactEffect() {
+    DamnablePactEffect() {
         super(Outcome.Neutral);
         staticText = "Target player draws X cards and loses X life";
     }
 
-    public DamnablePactEffect(DamnablePactEffect effect) {
+    private DamnablePactEffect(final DamnablePactEffect effect) {
         super(effect);
     }
 

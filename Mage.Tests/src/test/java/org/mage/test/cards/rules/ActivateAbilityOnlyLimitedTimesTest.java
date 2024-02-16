@@ -77,6 +77,7 @@ public class ActivateAbilityOnlyLimitedTimesTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Wall of Wood");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Momentary Blink", "Wall of Roots", "Cast Wall of Wood");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Wall of Wood");
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();

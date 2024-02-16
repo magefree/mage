@@ -37,7 +37,6 @@ public class PromiseOfTomorrowTest extends CardTestCommander4Players {
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -76,7 +75,6 @@ public class PromiseOfTomorrowTest extends CardTestCommander4Players {
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -116,6 +114,5 @@ public class PromiseOfTomorrowTest extends CardTestCommander4Players {
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 }

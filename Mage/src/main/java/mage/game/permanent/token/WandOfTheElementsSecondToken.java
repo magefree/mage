@@ -10,17 +10,15 @@ import mage.constants.SubType;
 public final class WandOfTheElementsSecondToken extends TokenImpl {
 
     public WandOfTheElementsSecondToken() {
-        super("Elemental", "3/3 red Elemental creature token");
+        super("Elemental Token", "3/3 red Elemental creature token");
         cardType.add(CardType.CREATURE);
         this.subtype.add(SubType.ELEMENTAL);
         this.color.setRed(true);
         power = new MageInt(3);
         toughness = new MageInt(3);
-
-        setTokenType(2);
     }
 
-    public WandOfTheElementsSecondToken(final WandOfTheElementsSecondToken token) {
+    private WandOfTheElementsSecondToken(final WandOfTheElementsSecondToken token) {
         super(token);
     }
 

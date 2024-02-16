@@ -59,7 +59,7 @@ public final class DeathbringerLiege extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DeathbringerLiege (final DeathbringerLiege card) {
+    private DeathbringerLiege(final DeathbringerLiege card) {
         super(card);
     }
 
@@ -76,7 +76,7 @@ class DeathbringerLiegeEffect extends OneShotEffect {
         staticText = "destroy target creature if it's tapped";
     }
 
-    DeathbringerLiegeEffect(final DeathbringerLiegeEffect effect) {
+    private DeathbringerLiegeEffect(final DeathbringerLiegeEffect effect) {
         super(effect);
     }
 

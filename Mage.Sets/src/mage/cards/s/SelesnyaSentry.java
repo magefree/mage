@@ -27,7 +27,7 @@ public final class SelesnyaSentry extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {5}{G}: Regenerate Selesnya Sentry.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{5}{G}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{5}{G}")));
     }
 
     private SelesnyaSentry(final SelesnyaSentry card) {

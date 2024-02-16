@@ -38,7 +38,7 @@ public final class CrashLanding extends CardImpl {
         DynamicValue amount = new PermanentsOnBattlefieldCount(filter);
         this.getSpellAbility().addEffect(new LoseAbilityTargetEffect(
                 FlyingAbility.getInstance(), Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new DamageTargetEffect(amount));
+        this.getSpellAbility().addEffect(new DamageTargetEffect(amount).setText("{this} deals damage to that creature equal to the number of Forests you control"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter2));
     }
 

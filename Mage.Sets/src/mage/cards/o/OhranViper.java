@@ -23,7 +23,7 @@ public final class OhranViper extends CardImpl {
 
     public OhranViper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{G}");
-        addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
         this.subtype.add(SubType.SNAKE);
 
         this.power = new MageInt(1);
@@ -32,7 +32,8 @@ public final class OhranViper extends CardImpl {
         // Whenever Ohran Viper deals combat damage to a creature, destroy that creature at end of combat.
         this.addAbility(new DealsCombatDamageToACreatureTriggeredAbility(
                 new CreateDelayedTriggeredAbilityEffect(
-                        new AtTheEndOfCombatDelayedTriggeredAbility(new DestroyTargetEffect("destroy that creature at end of combat")), true),
+                        new AtTheEndOfCombatDelayedTriggeredAbility(new DestroyTargetEffect("destroy that creature at end of combat"))
+                                .setTriggerPhrase(""), true),
                 false, 
                 true));
 

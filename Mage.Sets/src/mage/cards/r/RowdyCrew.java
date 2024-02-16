@@ -57,7 +57,7 @@ class RowdyCrewEffect extends OneShotEffect {
         this.staticText = "draw three cards, then discard two cards at random. If two cards that share a card type are discarded this way, put two +1/+1 counters on {this}";
     }
 
-    RowdyCrewEffect(final RowdyCrewEffect effect) {
+    private RowdyCrewEffect(final RowdyCrewEffect effect) {
         super(effect);
     }
 

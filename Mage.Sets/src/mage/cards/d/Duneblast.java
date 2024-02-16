@@ -44,12 +44,12 @@ public final class Duneblast extends CardImpl {
 
 class DuneblastEffect extends OneShotEffect {
 
-    public DuneblastEffect() {
+    DuneblastEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "Choose up to one creature. Destroy the rest";
     }
 
-    public DuneblastEffect(final DuneblastEffect effect) {
+    private DuneblastEffect(final DuneblastEffect effect) {
         super(effect);
     }
 
@@ -65,10 +65,10 @@ class DuneblastEffect extends OneShotEffect {
             Target target = new TargetCreaturePermanent(0,1,new FilterCreaturePermanent("creature to keep"), true);
             target.setRequired(true);
             Permanent creatureToKeep = null;
-            if (controller.choose(outcome, target, source.getSourceId(), game)) {
+            if (controller.choose(outcome, target, source, game)) {
                 creatureToKeep = game.getPermanent(target.getFirstTarget());
             }
-            for(Permanent creature: game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURES, source.getControllerId(), source.getSourceId(), game)) {
+            for(Permanent creature: game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURES, source.getControllerId(), source, game)) {
                 if (!Objects.equals(creature, creatureToKeep)) {
                     creature.destroy(source, game, false);
                 }

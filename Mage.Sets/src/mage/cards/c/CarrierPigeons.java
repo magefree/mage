@@ -31,7 +31,8 @@ public final class CarrierPigeons extends CardImpl {
 
         // When Carrier Pigeons enters the battlefield, draw a card at the beginning of the next turn's upkeep.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateDelayedTriggeredAbilityEffect(
-                new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1), Duration.OneUse), false)));
+                new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1), Duration.OneUse), false)
+                .setText("draw a card at the beginning of the next turn's upkeep")));
     }
 
     private CarrierPigeons(final CarrierPigeons card) {

@@ -7,6 +7,7 @@ import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.AsThoughManaEffect;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.asthought.MayLookAtTargetCardEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.*;
 import mage.constants.*;
@@ -79,9 +80,9 @@ class SiphonInsightEffect extends OneShotEffect {
             return false;
         }
         Cards topCards = new CardsImpl();
-        topCards.addAll(opponent.getLibrary().getTopCards(game, 2));
+        topCards.addAllCards(opponent.getLibrary().getTopCards(game, 2));
         TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card to exile"));
-        controller.choose(outcome, topCards, target, game);
+        controller.choose(outcome, topCards, target, source, game);
         Card card = game.getCard(target.getFirstTarget());
         if (card == null) {
             controller.putCardsOnBottomOfLibrary(topCards, game, source, false);
@@ -108,7 +109,7 @@ class SiphonInsightEffect extends OneShotEffect {
             effect.setTargetPointer(new FixedTarget(card.getId(), game));
             game.addEffect(effect, source);
             // For as long as that card remains exiled, you may look at it
-            effect = new SiphonInsightLookEffect(controller.getId());
+            effect = new MayLookAtTargetCardEffect(controller.getId());
             effect.setTargetPointer(new FixedTarget(card.getId(), game));
             game.addEffect(effect, source);
         }
@@ -120,7 +121,7 @@ class SiphonInsightEffect extends OneShotEffect {
 
 class SiphonInsightCastFromExileEffect extends AsThoughEffectImpl {
 
-    public SiphonInsightCastFromExileEffect() {
+    SiphonInsightCastFromExileEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
         staticText = "You may cast that card for as long as it remains exiled, and you may spend mana as though it were mana of any color to cast that spell";
     }
@@ -147,7 +148,7 @@ class SiphonInsightCastFromExileEffect extends AsThoughEffectImpl {
             return false;
         }
         Card theCard = game.getCard(objectId);
-        if (theCard == null || theCard.isLand(game)) {
+        if (theCard == null) {
             return false;
         }
         objectId = theCard.getMainCard().getId(); // for split cards
@@ -204,41 +205,5 @@ class SiphonInsightSpendAnyManaEffect extends AsThoughEffectImpl implements AsTh
     @Override
     public ManaType getAsThoughManaType(ManaType manaType, ManaPoolItem mana, UUID affectedControllerId, Ability source, Game game) {
         return mana.getFirstAvailable();
-    }
-}
-
-class SiphonInsightLookEffect extends AsThoughEffectImpl {
-
-    private final UUID authorizedPlayerId;
-
-    public SiphonInsightLookEffect(UUID authorizedPlayerId) {
-        super(AsThoughEffectType.LOOK_AT_FACE_DOWN, Duration.EndOfGame, Outcome.Benefit);
-        this.authorizedPlayerId = authorizedPlayerId;
-        staticText = "You may look at the cards exiled with {this}";
-    }
-
-    private SiphonInsightLookEffect(final SiphonInsightLookEffect effect) {
-        super(effect);
-        this.authorizedPlayerId = effect.authorizedPlayerId;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public SiphonInsightLookEffect copy() {
-        return new SiphonInsightLookEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        UUID cardId = getTargetPointer().getFirst(game, source);
-        if (cardId == null) {
-            this.discard(); // card is no longer in the origin zone, effect can be discarded
-        }
-        return affectedControllerId.equals(authorizedPlayerId)
-                && objectId.equals(cardId);
     }
 }

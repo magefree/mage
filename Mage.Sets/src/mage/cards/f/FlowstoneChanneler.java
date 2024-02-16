@@ -36,7 +36,7 @@ public final class FlowstoneChanneler extends CardImpl {
         // {1}{R}, {tap}, Discard a card: Target creature gets +1/-1 and gains haste until end of turn.
         Effect effect = new BoostTargetEffect(1, -1, Duration.EndOfTurn);
         effect.setText("Target creature gets +1/-1");
-        Ability ability = new SimpleActivatedAbility(effect, new ManaCostsImpl("{1}{R}"));
+        Ability ability = new SimpleActivatedAbility(effect, new ManaCostsImpl<>("{1}{R}"));
         effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("and gains haste until end of turn");
         ability.addEffect(effect);

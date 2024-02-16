@@ -1,4 +1,3 @@
-
 package mage.cards.r;
 
 import java.util.UUID;
@@ -8,7 +7,8 @@ import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.AttachedToMatchesFilterCondition;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
+import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.RegenerateAttachedEffect;
 import mage.abilities.effects.common.counter.AddPlusOneCountersAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
@@ -20,12 +20,12 @@ import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
- * @author jeffwadsworth
+ * @author awjackson
  */
 public final class RingOfXathrid extends CardImpl {
-    
+
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
-    
+
     static {
         filter.add(new ColorPredicate(ObjectColor.BLACK));
     }
@@ -35,13 +35,16 @@ public final class RingOfXathrid extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // {2}: Regenerate equipped creature.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateAttachedEffect(AttachmentType.EQUIPMENT), new GenericManaCost(2)));
-        
+        this.addAbility(new SimpleActivatedAbility(new RegenerateAttachedEffect(AttachmentType.EQUIPMENT), new GenericManaCost(2)));
+
         // At the beginning of your upkeep, put a +1/+1 counter on equipped creature if it's black.
-        TriggeredAbility triggeredAbility = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new AddPlusOneCountersAttachedEffect(1), TargetController.YOU, false);
-        ConditionalInterveningIfTriggeredAbility ability = new ConditionalInterveningIfTriggeredAbility(triggeredAbility, new AttachedToMatchesFilterCondition(filter), "At the beginning of your upkeep, put a +1/+1 counter on equipped creature if it's black");
-        this.addAbility(ability);
-        
+        Effect effect = new ConditionalOneShotEffect(
+                new AddPlusOneCountersAttachedEffect(1),
+                new AttachedToMatchesFilterCondition(filter),
+                "put a +1/+1 counter on equipped creature if it's black"
+        );
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(effect, TargetController.YOU, false));
+
         // Equip {1}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(1)));
     }

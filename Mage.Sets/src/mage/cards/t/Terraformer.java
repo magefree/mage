@@ -119,7 +119,7 @@ class TerraformerContinuousEffect extends ContinuousEffectImpl {
             game.getBattlefield()
                     .getActivePermanents(
                             StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND,
-                            source.getControllerId(), source.getSourceId(), game
+                            source.getControllerId(), source, game
                     ).stream()
                     .map(permanent -> new MageObjectReference(permanent, game))
                     .forEach(affectedObjectList::add);
@@ -128,7 +128,7 @@ class TerraformerContinuousEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        SubType choice = SubType.byDescription((String) game.getState().getValue(source.getSourceId().toString() + "_ElsewhereFlask"));
+        SubType choice = SubType.byDescription((String) game.getState().getValue(source.getSourceId().toString() + "_Terraformer"));
         if (choice == null) {
             return false;
         }

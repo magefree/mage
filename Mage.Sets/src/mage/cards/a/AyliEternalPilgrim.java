@@ -1,4 +1,3 @@
-
 package mage.cards.a;
 
 import java.util.UUID;
@@ -35,9 +34,8 @@ public final class AyliEternalPilgrim extends CardImpl {
 
     public AyliEternalPilgrim(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{B}");
-        this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add(SubType.KOR);
-        this.subtype.add(SubType.CLERIC);
+        this.supertype.add(SuperType.LEGENDARY);
+        this.subtype.add(SubType.KOR, SubType.CLERIC);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
@@ -48,18 +46,18 @@ public final class AyliEternalPilgrim extends CardImpl {
         Effect effect = new GainLifeEffect(SacrificeCostCreaturesToughness.instance);
         effect.setText("You gain life equal to the sacrificed creature's toughness");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new GenericManaCost(1));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE)));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE));
         this.addAbility(ability);
 
-        // {1}{W}{B}, Sacrifice another creature: Exile target nonland permanent. Activate this ability only if you have at least 10 life more than your starting life total.
+        // {1}{W}{B}, Sacrifice another creature: Exile target nonland permanent. Activate only if you have at least 10 life more than your starting life total.
         ability = new ConditionalActivatedAbility(
                 Zone.BATTLEFIELD,
                 new ExileTargetEffect(),
-                new ManaCostsImpl("{1}{W}{B}"),
-                new AyliEternalPilgrimCondition(),
-                "{1}{W}{B}, Sacrifice another creature: Exile target nonland permanent. Activate only if you have at least 10 life more than your starting life total.");
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE)));
-        ability.addTarget(new TargetNonlandPermanent());
+                new ManaCostsImpl<>("{1}{W}{B}"),
+                new AyliEternalPilgrimCondition()
+        );
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE));
+        ability.addTarget(new TargetNonlandPermanent().withChooseHint("to exile"));
         this.addAbility(ability);
     }
 
@@ -82,5 +80,10 @@ class AyliEternalPilgrimCondition implements Condition {
             return player.getLife() >= game.getStartingLife() + 10;
         }
         return false;
+    }
+
+    @Override
+    public String toString() {
+        return "you have at least 10 life more than your starting life total";
     }
 }

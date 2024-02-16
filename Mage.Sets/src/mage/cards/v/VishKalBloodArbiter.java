@@ -20,13 +20,12 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.counters.CounterType;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
-
-import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 
 /**
  * @author LevelX2
@@ -35,7 +34,7 @@ public final class VishKalBloodArbiter extends CardImpl {
 
     public VishKalBloodArbiter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}{B}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.VAMPIRE);
 
         this.power = new MageInt(5);
@@ -52,15 +51,14 @@ public final class VishKalBloodArbiter extends CardImpl {
                 new AddCountersSourceEffect(
                         CounterType.P1P1.createInstance(), SacrificeCostCreaturesPower.instance, true
                 ).setText("put X +1/+1 counters on {this}, where X is the sacrificed creature's power"),
-                new SacrificeTargetCost(new TargetControlledPermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT))
+                new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT)
         ));
 
         // Remove all +1/+1 counters from Vish Kal: Target creature gets -1/-1 until end of turn for each +1/+1 counter removed this way.
         Ability ability = new SimpleActivatedAbility(new BoostTargetEffect(
                 VishKalBloodArbiterDynamicValue.instance,
                 VishKalBloodArbiterDynamicValue.instance,
-                Duration.EndOfTurn, true
-        ).setText("target creature gets -1/-1 until end of turn for each +1/+1 counter removed this way"), new RemoveAllCountersSourceCost(CounterType.P1P1));
+                Duration.EndOfTurn), new RemoveAllCountersSourceCost(CounterType.P1P1));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
@@ -96,11 +94,16 @@ enum VishKalBloodArbiterDynamicValue implements DynamicValue {
 
     @Override
     public String toString() {
-        return "1";
+        return "-1";
     }
 
     @Override
     public String getMessage() {
-        return "the number of +1/+1 counters removed this way";
+        return "+1/+1 counter removed this way";
+    }
+
+    @Override
+    public int getSign() {
+        return -1;
     }
 }

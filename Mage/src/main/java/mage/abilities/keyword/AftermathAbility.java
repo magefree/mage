@@ -6,8 +6,7 @@ import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.Card;
-import mage.cards.ModalDoubleFacesCardHalf;
-import mage.cards.SplitCardHalf;
+import mage.cards.SubCard;
 import mage.constants.AsThoughEffectType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
@@ -38,7 +37,7 @@ public class AftermathAbility extends SimpleStaticAbility {
         addEffect(new AftermathExileAsResolvesFromGraveyard());
     }
 
-    public AftermathAbility(final AftermathAbility ability) {
+    protected AftermathAbility(final AftermathAbility ability) {
         super(ability);
     }
 
@@ -59,7 +58,7 @@ class AftermathCastFromGraveyard extends AsThoughEffectImpl {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
     }
 
-    public AftermathCastFromGraveyard(final AftermathCastFromGraveyard effect) {
+    protected AftermathCastFromGraveyard(final AftermathCastFromGraveyard effect) {
         super(effect);
     }
 
@@ -96,18 +95,13 @@ class AftermathCantCastFromHand extends ContinuousRuleModifyingEffectImpl {
         staticText = ", but not from anywhere else";
     }
 
-    public AftermathCantCastFromHand(final AftermathCantCastFromHand effect) {
+    protected AftermathCantCastFromHand(final AftermathCantCastFromHand effect) {
         super(effect);
     }
 
     @Override
     public AftermathCantCastFromHand copy() {
         return new AftermathCantCastFromHand(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override
@@ -154,14 +148,10 @@ class AftermathExileAsResolvesFromGraveyard extends ReplacementEffectImpl {
             // If branch so that we also support putting Aftermath on
             // non-split cards for... whatever reason, in case somebody
             // wants to do that in the future.
-            UUID sourceId = source.getSourceId();
+            UUID sourceId = source != null ? source.getSourceId() : null;
             Card sourceCard = game.getCard(source.getSourceId());
-            if (sourceCard instanceof SplitCardHalf) {
-                sourceCard = ((SplitCardHalf) sourceCard).getParentCard();
-                sourceId = sourceCard.getId();
-            }
-            if (sourceCard instanceof ModalDoubleFacesCardHalf) {
-                sourceCard = ((ModalDoubleFacesCardHalf) sourceCard).getParentCard();
+            if (sourceCard instanceof SubCard) {
+                sourceCard = ((SubCard<?>) sourceCard).getParentCard();
                 sourceId = sourceCard.getId();
             }
 
@@ -178,11 +168,8 @@ class AftermathExileAsResolvesFromGraveyard extends ReplacementEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Card sourceCard = game.getCard(source.getSourceId());
-        if (sourceCard instanceof SplitCardHalf) {
-            sourceCard = ((SplitCardHalf) sourceCard).getParentCard();
-        }
-        if (sourceCard instanceof ModalDoubleFacesCardHalf) {
-            sourceCard = ((ModalDoubleFacesCardHalf) sourceCard).getParentCard();
+        if (sourceCard instanceof SubCard) {
+            sourceCard = ((SubCard<?>) sourceCard).getParentCard();
         }
         if (sourceCard != null) {
             Player player = game.getPlayer(sourceCard.getOwnerId());

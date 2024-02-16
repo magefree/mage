@@ -6,6 +6,7 @@ import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
+import mage.abilities.effects.mana.ManaEffect;
 import mage.constants.Duration;
 import mage.constants.ManaType;
 import mage.constants.TurnPhase;
@@ -38,6 +39,7 @@ public class ManaPool implements Serializable {
     private final List<ManaPoolItem> poolBookmark = new ArrayList<>(); // mana pool bookmark for rollback purposes
 
     private final Set<ManaType> doNotEmptyManaTypes = new HashSet<>();
+    private boolean manaBecomesBlack = false;
     private boolean manaBecomesColorless = false;
 
     private static final class ConditionalManaInfo {
@@ -58,7 +60,7 @@ public class ManaPool implements Serializable {
         forcedToPay = false;
     }
 
-    public ManaPool(final ManaPool pool) {
+    protected ManaPool(final ManaPool pool) {
         this.playerId = pool.playerId;
         for (ManaPoolItem item : pool.manaItems) {
             manaItems.add(item.copy());
@@ -71,6 +73,7 @@ public class ManaPool implements Serializable {
             poolBookmark.add(item.copy());
         }
         this.doNotEmptyManaTypes.addAll(pool.doNotEmptyManaTypes);
+        this.manaBecomesBlack = pool.manaBecomesBlack;
         this.manaBecomesColorless = pool.manaBecomesColorless;
     }
 
@@ -136,13 +139,19 @@ public class ManaPool implements Serializable {
         }
 
         for (ManaPoolItem mana : manaItems) {
-            if (filter != null) {
-                if (!filter.match(mana.getSourceObject(), game)) {
-                    // Prevent that cost reduction by convoke is filtered out
-                    if (!(mana.getSourceObject() instanceof Spell)
-                            || ability.getSourceId().equals(mana.getSourceId())) {
-                        continue;
-                    }
+            if (filter != null && !filter.match(mana.getSourceObject(), game)) {
+                // If here, then mana source does not match the filter
+                // However, alternate mana payment abilities such as convoke won't match the filter but are valid
+                // So we need to do some ugly checks to allow them
+                // For convoke, mana apparently comes from a spell without a mana effect, that doesn't match the ability source
+                if (ability.getSourceId().equals(mana.getSourceId())
+                        || !(mana.getSourceObject() instanceof Spell)
+                        || ((Spell) mana.getSourceObject())
+                                .getAbilities(game)
+                                .stream()
+                                .flatMap(a -> a.getAllEffects().stream())
+                                .anyMatch(ManaEffect.class::isInstance)) {
+                    continue; // if any of the above cases, not an alt mana payment ability, thus excluded by filter
                 }
             }
             if (possibleAsThoughPoolManaType == null
@@ -194,8 +203,7 @@ public class ManaPool implements Serializable {
                     }
                 }
                 if (manaTypeToUse != null && mana.getConditionalMana().apply(ability, game, mana.getSourceId(), costToPay)) {
-                    if (filter == null
-                            || filter.match(mana.getSourceObject(), game)) {
+                    if (filter == null || filter.match(mana.getSourceObject(), game)) {
                         return new ConditionalManaInfo(manaTypeToUse, mana.getSourceObject());
                     }
                 }
@@ -225,6 +233,7 @@ public class ManaPool implements Serializable {
 
     public void clearEmptyManaPoolRules() {
         doNotEmptyManaTypes.clear();
+        this.manaBecomesBlack = false;
         this.manaBecomesColorless = false;
     }
 
@@ -232,12 +241,12 @@ public class ManaPool implements Serializable {
         doNotEmptyManaTypes.add(manaType);
     }
 
-    public void setManaBecomesColorless(boolean manaBecomesColorless) {
-        this.manaBecomesColorless = manaBecomesColorless;
+    public void setManaBecomesBlack(boolean manaBecomesBlack) {
+        this.manaBecomesBlack = manaBecomesBlack;
     }
 
-    public boolean isManaBecomesColorless() {
-        return manaBecomesColorless;
+    public void setManaBecomesColorless(boolean manaBecomesColorless) {
+        this.manaBecomesColorless = manaBecomesColorless;
     }
 
     public void init() {
@@ -271,18 +280,24 @@ public class ManaPool implements Serializable {
 
     private int emptyItem(ManaPoolItem item, Emptiable toEmpty, Game game, ManaType manaType) {
         if (item.getDuration() == Duration.EndOfTurn
-                && game.getPhase().getType() != TurnPhase.END) {
+                && game.getTurnPhaseType() != TurnPhase.END) {
             return 0;
         }
-        if (!manaBecomesColorless) {
+        if (manaBecomesBlack) {
             int amount = toEmpty.get(manaType);
             toEmpty.clear(manaType);
-            return amount;
+            toEmpty.add(ManaType.BLACK, amount);
+            return 0;
+        }
+        if (manaBecomesColorless) {
+            int amount = toEmpty.get(manaType);
+            toEmpty.clear(manaType);
+            toEmpty.add(ManaType.COLORLESS, amount);
+            return 0;
         }
         int amount = toEmpty.get(manaType);
         toEmpty.clear(manaType);
-        toEmpty.add(ManaType.COLORLESS, amount);
-        return 0;
+        return amount;
     }
 
     public Mana getMana() {
@@ -376,7 +391,7 @@ public class ManaPool implements Serializable {
         return conditionalMana;
     }
 
-    public boolean ConditionalManaHasManaType(ManaType manaType) {
+    public boolean conditionalManaHasManaType(ManaType manaType) {
         for (ManaPoolItem item : manaItems) {
             if (item.isConditional()) {
                 if (item.getConditionalMana().get(manaType) > 0) {

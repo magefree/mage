@@ -38,7 +38,7 @@ public final class TheSpaceFamilyGoblinson extends CardImpl {
     public TheSpaceFamilyGoblinson(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GOBLIN);
         this.subtype.add(SubType.GUEST);
         this.power = new MageInt(1);
@@ -127,6 +127,7 @@ class TheSpaceFamilyGoblinsonTriggeredAbility extends TriggeredAbilityImpl {
 
     TheSpaceFamilyGoblinsonTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
+        setTriggerPhrase("Whenever you roll a die, ");
     }
 
     private TheSpaceFamilyGoblinsonTriggeredAbility(final TheSpaceFamilyGoblinsonTriggeredAbility ability) {
@@ -148,8 +149,4 @@ class TheSpaceFamilyGoblinsonTriggeredAbility extends TriggeredAbilityImpl {
         return isControlledBy(event.getPlayerId());
     }
 
-    @Override
-    public String getRule() {
-        return "Whenever you roll a die, put a +1/+1 counter on {this}";
-    }
 }

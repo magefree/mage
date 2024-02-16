@@ -43,7 +43,7 @@ public final class EtherealAbsolution extends CardImpl {
 
         // {2}{W}{B}: Exile target card from an opponent's graveyard. If it was a creature card, you create a 1/1 white and black Spirit creature token with flying.
         Ability ability = new SimpleActivatedAbility(
-                new EtherealAbsolutionEffect(), new ManaCostsImpl("{2}{W}{B}")
+                new EtherealAbsolutionEffect(), new ManaCostsImpl<>("{2}{W}{B}")
         );
         ability.addTarget(new TargetCardInOpponentsGraveyard(StaticFilters.FILTER_CARD));
         this.addAbility(ability);

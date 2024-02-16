@@ -4,6 +4,8 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.condition.Condition;
+import mage.abilities.condition.InvertCondition;
+import mage.abilities.condition.common.SourceEnteredThisTurnCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.discard.DiscardControllerEffect;
@@ -12,8 +14,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 
 import java.util.UUID;
 
@@ -21,6 +21,8 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class MoonCircuitHacker extends CardImpl {
+
+    private static final Condition condition = new InvertCondition(SourceEnteredThisTurnCondition.instance);
 
     public MoonCircuitHacker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{1}{U}");
@@ -38,7 +40,7 @@ public final class MoonCircuitHacker extends CardImpl {
                 new DrawCardSourceControllerEffect(1), true
         );
         ability.addEffect(new ConditionalOneShotEffect(
-                new DiscardControllerEffect(1), MoonCircuitHackerCondition.instance,
+                new DiscardControllerEffect(1), condition,
                 "If you do, discard a card unless {this} entered the battlefield this turn"
         ));
         this.addAbility(ability);
@@ -51,15 +53,5 @@ public final class MoonCircuitHacker extends CardImpl {
     @Override
     public MoonCircuitHacker copy() {
         return new MoonCircuitHacker(this);
-    }
-}
-
-enum MoonCircuitHackerCondition implements Condition {
-    instance;
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = source.getSourcePermanentOrLKI(game);
-        return permanent == null || permanent.getTurnsOnBattlefield() > 0;
     }
 }

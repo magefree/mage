@@ -40,9 +40,10 @@ class OverwhelmingInstinctTriggeredAbility extends TriggeredAbilityImpl {
 
     public OverwhelmingInstinctTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect);
+        setTriggerPhrase("Whenever you attack with three or more creatures, ");
     }
 
-    public OverwhelmingInstinctTriggeredAbility(final OverwhelmingInstinctTriggeredAbility ability) {
+    private OverwhelmingInstinctTriggeredAbility(final OverwhelmingInstinctTriggeredAbility ability) {
         super(ability);
     }
 
@@ -59,10 +60,5 @@ class OverwhelmingInstinctTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         return game.getCombat().getAttackers().size() >= 3 && game.getCombat().getAttackingPlayerId().equals(getControllerId());
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you attack with three or more creatures, " ;
     }
 }

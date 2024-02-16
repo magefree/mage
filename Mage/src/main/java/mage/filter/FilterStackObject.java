@@ -1,8 +1,9 @@
 package mage.filter;
 
+import mage.abilities.Ability;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
-import mage.filter.predicate.Predicates;
+import mage.filter.predicate.Predicate;
 import mage.game.Game;
 import mage.game.stack.StackObject;
 
@@ -15,7 +16,7 @@ import java.util.UUID;
  */
 public class FilterStackObject extends FilterObject<StackObject> {
 
-    protected List<ObjectSourcePlayerPredicate<StackObject>> extraPredicates = new ArrayList<>();
+    protected final List<ObjectSourcePlayerPredicate<StackObject>> extraPredicates = new ArrayList<>();
 
     public FilterStackObject() {
         this("spell or ability");
@@ -25,17 +26,17 @@ public class FilterStackObject extends FilterObject<StackObject> {
         super(name);
     }
 
-    public FilterStackObject(final FilterStackObject filter) {
+    protected FilterStackObject(final FilterStackObject filter) {
         super(filter);
-        this.extraPredicates = new ArrayList<>(filter.extraPredicates);
+        this.extraPredicates.addAll(filter.extraPredicates);
     }
 
-    public boolean match(StackObject stackObject, UUID sourceId, UUID playerId, Game game) {
+    public boolean match(StackObject stackObject, UUID playerId, Ability source, Game game) {
         if (!this.match(stackObject, game)) {
             return false;
         }
-
-        return Predicates.and(extraPredicates).apply(new ObjectSourcePlayer<StackObject>(stackObject, sourceId, playerId), game);
+        ObjectSourcePlayer<StackObject> osp = new ObjectSourcePlayer<>(stackObject, playerId, source);
+        return extraPredicates.stream().allMatch(p -> p.apply(osp, game));
     }
 
     public final void add(ObjectSourcePlayerPredicate predicate) {
@@ -48,5 +49,10 @@ public class FilterStackObject extends FilterObject<StackObject> {
     @Override
     public FilterStackObject copy() {
         return new FilterStackObject(this);
+    }
+
+    @Override
+    public List<Predicate> getExtraPredicates() {
+        return new ArrayList<>(extraPredicates);
     }
 }

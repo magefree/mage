@@ -21,6 +21,7 @@ public class TournamentTypeView implements Serializable {
     private final boolean cubeBooster;
     private final boolean elimination;
     private final boolean random;
+    private final boolean remixed;
     private final boolean richMan;
     private final boolean jumpstart;
 
@@ -34,6 +35,7 @@ public class TournamentTypeView implements Serializable {
         this.cubeBooster = tournamentType.isCubeBooster();
         this.elimination = tournamentType.isElimination();
         this.random = tournamentType.isRandom();
+        this.remixed = tournamentType.isRemixed();
         this.richMan = tournamentType.isRichMan();
         this.jumpstart = tournamentType.isJumpstart();
     }
@@ -77,6 +79,10 @@ public class TournamentTypeView implements Serializable {
 
     public boolean isRandom() {
         return random;
+    }
+
+    public boolean isRemixed() {
+        return remixed;
     }
 
     public boolean isRichMan() {

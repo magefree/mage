@@ -1,5 +1,3 @@
-
-
 package mage.cards.c;
 
 import java.util.UUID;
@@ -26,8 +24,7 @@ public final class CarnageGladiator extends CardImpl {
 
     public CarnageGladiator (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{R}");
-        this.subtype.add(SubType.SKELETON);
-        this.subtype.add(SubType.WARRIOR);
+        this.subtype.add(SubType.SKELETON, SubType.WARRIOR);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(2);
@@ -36,12 +33,12 @@ public final class CarnageGladiator extends CardImpl {
         this.addAbility(new CarnageGladiatorTriggeredAbility());
 
         // {1}{B}{R}: Renegerate Carnage Gladiator.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(),new ManaCostsImpl("{1}{B}{R}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(),new ManaCostsImpl<>("{1}{B}{R}")));
 
 
     }
 
-    public CarnageGladiator (final CarnageGladiator card) {
+    private CarnageGladiator(final CarnageGladiator card) {
         super(card);
     }
 
@@ -58,7 +55,7 @@ class CarnageGladiatorTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new LoseLifeTargetEffect(1));
     }
 
-    public CarnageGladiatorTriggeredAbility(final CarnageGladiatorTriggeredAbility ability) {
+    private CarnageGladiatorTriggeredAbility(final CarnageGladiatorTriggeredAbility ability) {
         super(ability);
     }
 
@@ -69,12 +66,12 @@ class CarnageGladiatorTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.BLOCKER_DECLARED;
+        return event.getType() == GameEvent.EventType.CREATURE_BLOCKS;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent blocker = game.getPermanent(event.getSourceId());
+        Permanent blocker = game.getPermanent(event.getTargetId());
         if (blocker != null) {
             getEffects().get(0).setTargetPointer(new FixedTarget(blocker.getControllerId()));
             return true;

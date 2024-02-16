@@ -33,7 +33,7 @@ public final class AyeshaTanaka extends CardImpl {
 
     public AyeshaTanaka(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{W}{U}{U}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ARTIFICER);
         this.power = new MageInt(2);
@@ -43,7 +43,7 @@ public final class AyeshaTanaka extends CardImpl {
         this.addAbility(BandingAbility.getInstance());
 
         // {T}: Counter target activated ability from an artifact source unless that ability's controller pays {W}.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterUnlessPaysEffect(new ManaCostsImpl("{W}")), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterUnlessPaysEffect(new ManaCostsImpl<>("{W}")), new TapSourceCost());
         ability.addTarget(new TargetActivatedAbility(filter));
         this.addAbility(ability);
     }

@@ -49,12 +49,12 @@ public final class HarmonyOfNature extends CardImpl {
 
 class HarmonyOfNatureEffect extends OneShotEffect {
 
-    public HarmonyOfNatureEffect() {
+    HarmonyOfNatureEffect() {
         super(Outcome.AIDontUseIt);
         staticText = "Tap any number of untapped creatures you control. You gain 4 life for each creature tapped this way";
     }
 
-    public HarmonyOfNatureEffect(HarmonyOfNatureEffect effect) {
+    private HarmonyOfNatureEffect(final HarmonyOfNatureEffect effect) {
         super(effect);
     }
 
@@ -66,7 +66,7 @@ class HarmonyOfNatureEffect extends OneShotEffect {
         }
 
         TargetPermanent target = new TargetControlledPermanent(0, Integer.MAX_VALUE, HarmonyOfNature.filter, true);
-        controller.choose(outcome, target, source.getSourceId(), game);
+        controller.choose(outcome, target, source, game);
         if (target.getTargets().isEmpty()) {
             return false;
         }

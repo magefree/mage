@@ -23,7 +23,7 @@ import mage.filter.predicate.mageobject.AnotherPredicate;
  */
 public final class FireAnts extends CardImpl {
     
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("each other creature without flying");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("other creature without flying");
 
     static {
         filter.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));

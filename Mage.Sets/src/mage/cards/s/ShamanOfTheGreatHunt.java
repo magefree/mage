@@ -48,9 +48,9 @@ public final class ShamanOfTheGreatHunt extends CardImpl {
         // Haste
         this.addAbility(HasteAbility.getInstance());
         
-        // Whenever a creature you control deals combat damage to a player, put a +1/+1 counter on that creature.
+        // Whenever a creature you control deals combat damage to a player, put a +1/+1 counter on it.
         Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance());
-        effect.setText("put a +1/+1 counter on that creature");
+        effect.setText("put a +1/+1 counter on it");
         this.addAbility(new DealsDamageToAPlayerAllTriggeredAbility(
                 effect,
                 StaticFilters.FILTER_CONTROLLED_A_CREATURE, false, SetTargetPointer.PERMANENT, true
@@ -58,7 +58,7 @@ public final class ShamanOfTheGreatHunt extends CardImpl {
         
         // <i>Ferocious</i> &mdash; {2}{G/U}{G/U}: Draw a card for each creature you control with power 4 or greater.
         DynamicValue amount = new PermanentsOnBattlefieldCount(filter);
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(amount), new ManaCostsImpl("{2}{G/U}{G/U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(amount), new ManaCostsImpl<>("{2}{G/U}{G/U}"));
         ability.setAbilityWord(AbilityWord.FEROCIOUS);
         this.addAbility(ability);
         

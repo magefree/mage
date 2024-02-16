@@ -69,6 +69,7 @@ public final class Planechase2012Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Forest", 154, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 155, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 156, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Fractured Powerstone", 111, Rarity.COMMON, mage.cards.f.FracturedPowerstone.class));
         cards.add(new SetCardInfo("Fusion Elemental", 93, Rarity.UNCOMMON, mage.cards.f.FusionElemental.class));
         cards.add(new SetCardInfo("Ghostly Prison", 7, Rarity.UNCOMMON, mage.cards.g.GhostlyPrison.class));
         cards.add(new SetCardInfo("Glen Elendra Liege", 94, Rarity.RARE, mage.cards.g.GlenElendraLiege.class));

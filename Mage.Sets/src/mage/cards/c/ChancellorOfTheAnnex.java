@@ -21,7 +21,6 @@ import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -44,7 +43,8 @@ public final class ChancellorOfTheAnnex extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever an opponent casts a spell, counter it unless that player pays {1}.
-        this.addAbility(new SpellCastOpponentTriggeredAbility(Zone.BATTLEFIELD, new CounterUnlessPaysEffect(new GenericManaCost(1)), StaticFilters.FILTER_SPELL, false, SetTargetPointer.SPELL));
+        this.addAbility(new SpellCastOpponentTriggeredAbility(Zone.BATTLEFIELD, new CounterUnlessPaysEffect(new GenericManaCost(1))
+                .setText("counter it unless that player pays {1}"), StaticFilters.FILTER_SPELL_A, false, SetTargetPointer.SPELL));
     }
 
     private ChancellorOfTheAnnex(final ChancellorOfTheAnnex card) {
@@ -59,12 +59,12 @@ public final class ChancellorOfTheAnnex extends CardImpl {
 
 class ChancellorOfTheAnnexEffect extends OneShotEffect {
 
-    public ChancellorOfTheAnnexEffect() {
+    ChancellorOfTheAnnexEffect() {
         super(Outcome.Benefit);
         staticText = "when each opponent casts their first spell of the game, counter that spell unless that player pays {1}";
     }
 
-    public ChancellorOfTheAnnexEffect(ChancellorOfTheAnnexEffect effect) {
+    private ChancellorOfTheAnnexEffect(final ChancellorOfTheAnnexEffect effect) {
         super(effect);
     }
 
@@ -93,7 +93,7 @@ class ChancellorOfTheAnnexDelayedTriggeredAbility extends DelayedTriggeredAbilit
         this.playerId = playerId;
     }
 
-    ChancellorOfTheAnnexDelayedTriggeredAbility(final ChancellorOfTheAnnexDelayedTriggeredAbility ability) {
+    private ChancellorOfTheAnnexDelayedTriggeredAbility(final ChancellorOfTheAnnexDelayedTriggeredAbility ability) {
         super(ability);
         this.playerId = ability.playerId;
     }

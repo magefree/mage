@@ -11,6 +11,7 @@ import mage.constants.Outcome;
 import mage.constants.RollDieType;
 import mage.constants.Zone;
 import mage.counters.Counter;
+import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.DieRolledEvent;
 import mage.game.events.GameEvent;
@@ -50,9 +51,10 @@ class AsLuckWouldHaveItTriggeredAbility extends TriggeredAbilityImpl {
 
     public AsLuckWouldHaveItTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AsLuckWouldHaveItEffect(), false);
+        setTriggerPhrase("Whenever you roll a die, ");
     }
 
-    public AsLuckWouldHaveItTriggeredAbility(final AsLuckWouldHaveItTriggeredAbility ability) {
+    private AsLuckWouldHaveItTriggeredAbility(final AsLuckWouldHaveItTriggeredAbility ability) {
         super(ability);
     }
 
@@ -79,21 +81,16 @@ class AsLuckWouldHaveItTriggeredAbility extends TriggeredAbilityImpl {
         }
         return false;
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you roll a die, " ;
-    }
 }
 
 class AsLuckWouldHaveItEffect extends OneShotEffect {
 
-    public AsLuckWouldHaveItEffect() {
+    AsLuckWouldHaveItEffect() {
         super(Outcome.Benefit);
         this.staticText = "put a number of luck counters on {this} equal to the result. Then if there are 100 or more luck counters on {this}, you win the game.";
     }
 
-    public AsLuckWouldHaveItEffect(final AsLuckWouldHaveItEffect effect) {
+    private AsLuckWouldHaveItEffect(final AsLuckWouldHaveItEffect effect) {
         super(effect);
     }
 
@@ -109,9 +106,9 @@ class AsLuckWouldHaveItEffect extends OneShotEffect {
         if (controller != null && permanent != null) {
             if (getValue("rolled") != null) {
                 int amount = (Integer) getValue("rolled");
-                permanent.addCounters(new Counter("luck", amount), source.getControllerId(), source, game);
+                permanent.addCounters(new Counter(CounterType.LUCK.getName(), amount), source.getControllerId(), source, game);
 
-                if (permanent.getCounters(game).getCount("luck") >= 100) {
+                if (permanent.getCounters(game).getCount(CounterType.LUCK) >= 100) {
                     Player player = game.getPlayer(permanent.getControllerId());
                     if (player != null) {
                         player.won(game);

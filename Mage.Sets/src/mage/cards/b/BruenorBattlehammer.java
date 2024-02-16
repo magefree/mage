@@ -29,7 +29,7 @@ public final class BruenorBattlehammer extends CardImpl {
     public BruenorBattlehammer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DWARF);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(5);
@@ -72,7 +72,7 @@ class BruenorBattlehammerBoostEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         for (Permanent permanent : game.getBattlefield().getActivePermanents(
                 StaticFilters.FILTER_CONTROLLED_CREATURE,
-                source.getControllerId(), source.getSourceId(), game
+                source.getControllerId(), source, game
         )) {
             int equipped = permanent
                     .getAttachments()
@@ -94,7 +94,7 @@ class BruenorBattlehammerCostEffect extends CostModificationEffectImpl {
                 "of the first equip ability you activate each turn.";
     }
 
-    BruenorBattlehammerCostEffect(final BruenorBattlehammerCostEffect effect) {
+    private BruenorBattlehammerCostEffect(final BruenorBattlehammerCostEffect effect) {
         super(effect);
     }
 
@@ -122,8 +122,8 @@ class BruenorBattlehammerCostEffect extends CostModificationEffectImpl {
         }
 
         if (applyReduce) {
-            abilityToModify.getCosts().clear();
-            abilityToModify.getManaCostsToPay().clear();
+            abilityToModify.clearCosts();
+            abilityToModify.clearManaCostsToPay();
             return true;
         }
 

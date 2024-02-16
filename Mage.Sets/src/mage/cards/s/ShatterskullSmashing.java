@@ -12,7 +12,7 @@ import mage.abilities.effects.common.DamageMultiEffect;
 import mage.abilities.effects.common.TapSourceUnlessPaysEffect;
 import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardSetInfo;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.game.Game;
@@ -25,7 +25,7 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class ShatterskullSmashing extends ModalDoubleFacesCard {
+public final class ShatterskullSmashing extends ModalDoubleFacedCard {
 
     private static final DynamicValue xValue = new MultipliedValue(ManacostVariableValue.REGULAR, 2);
 

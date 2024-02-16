@@ -49,12 +49,12 @@ public final class HiddenStrings extends CardImpl {
 
 class HiddenStringsEffect extends OneShotEffect {
 
-    public HiddenStringsEffect() {
+    HiddenStringsEffect() {
         super(Outcome.Tap);
         this.staticText = "You may tap or untap target permanent, then you may tap or untap another target permanent";
     }
 
-    public HiddenStringsEffect(final HiddenStringsEffect effect) {
+    private HiddenStringsEffect(final HiddenStringsEffect effect) {
         super(effect);
     }
 

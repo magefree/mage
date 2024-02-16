@@ -21,7 +21,7 @@ public final class AdarkarWindform extends CardImpl {
 
     public AdarkarWindform(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}");
-        addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
         this.subtype.add(SubType.ILLUSION);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
@@ -30,7 +30,7 @@ public final class AdarkarWindform extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // {1}{S}: Target creature loses flying until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseAbilityTargetEffect(
-            FlyingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{1}{S}"));
+            FlyingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{1}{S}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

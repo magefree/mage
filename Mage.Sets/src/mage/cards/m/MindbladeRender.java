@@ -54,7 +54,7 @@ class MindbladeRenderTriggeredAbility extends TriggeredAbilityImpl {
         this.usedForCombatDamageStep = false;
     }
 
-    public MindbladeRenderTriggeredAbility(final MindbladeRenderTriggeredAbility effect) {
+    private MindbladeRenderTriggeredAbility(final MindbladeRenderTriggeredAbility effect) {
         super(effect);
         this.usedForCombatDamageStep = effect.usedForCombatDamageStep;
     }

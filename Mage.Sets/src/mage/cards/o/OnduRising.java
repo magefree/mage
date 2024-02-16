@@ -50,7 +50,7 @@ class OnduRisingTriggeredAbility extends DelayedTriggeredAbility {
         super(new GainAbilityTargetEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn), Duration.EndOfTurn, false);
     }
 
-    public OnduRisingTriggeredAbility(OnduRisingTriggeredAbility ability) {
+    private OnduRisingTriggeredAbility(final OnduRisingTriggeredAbility ability) {
         super(ability);
     }
 

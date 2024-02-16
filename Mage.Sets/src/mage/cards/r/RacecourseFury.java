@@ -41,7 +41,7 @@ public final class RacecourseFury extends CardImpl {
         TargetPermanent auraTarget = new TargetLandPermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Enchanted land has "{T}: Target creature gains haste until end of turn."
@@ -50,7 +50,7 @@ public final class RacecourseFury extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA, Duration.WhileOnBattlefield, rule)));
     }
 
-    public RacecourseFury (final RacecourseFury card) {
+    private RacecourseFury(final RacecourseFury card) {
         super(card);
     }
 

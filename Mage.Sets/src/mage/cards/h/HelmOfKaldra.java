@@ -43,7 +43,7 @@ public final class HelmOfKaldra extends CardImpl {
 
     public HelmOfKaldra(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature has first strike, trample, and haste.
@@ -52,7 +52,7 @@ public final class HelmOfKaldra extends CardImpl {
         effect.setText(", trample");
         ability.addEffect(effect);
         effect = new GainAbilityAttachedEffect(HasteAbility.getInstance(), AttachmentType.EQUIPMENT);
-        effect.setText("and haste");
+        effect.setText(", and haste");
         ability.addEffect(effect);
         this.addAbility(ability);
         // {1}: If you control Equipment named Helm of Kaldra, Sword of Kaldra, and Shield of Kaldra, create a legendary 4/4 colorless Avatar creature token named Kaldra and attach those Equipment to it.
@@ -61,9 +61,9 @@ public final class HelmOfKaldra extends CardImpl {
                 new HelmOfKaldraEffect(),
                 new GenericManaCost(1),
                 new HelmOfKaldraCondition(),
-                "{1}: If you control Equipment named Helm of Kaldra, Sword of Kaldra, and Shield of Kaldra, create a legendary 4/4 colorless Avatar creature token named Kaldra and attach those Equipment to it"));
+                "{1}: If you control Equipment named Helm of Kaldra, Sword of Kaldra, and Shield of Kaldra, create Kaldra, a legendary 4/4 colorless Avatar creature token. Attach those Equipment to it."));
         // Equip {2}
-        this.addAbility(new EquipAbility(Outcome.Benefit, new ManaCostsImpl("{2}")));
+        this.addAbility(new EquipAbility(Outcome.Benefit, new ManaCostsImpl<>("{2}"), false));
     }
 
     private HelmOfKaldra(final HelmOfKaldra card) {
@@ -80,25 +80,25 @@ class HelmOfKaldraCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (game.getBattlefield().count(HelmOfKaldra.filterHelm, source.getSourceId(), source.getControllerId(), game) < 1) {
+        if (game.getBattlefield().count(HelmOfKaldra.filterHelm, source.getControllerId(), source, game) < 1) {
             return false;
         }
-        if (game.getBattlefield().count(HelmOfKaldra.filterSword, source.getSourceId(), source.getControllerId(), game) < 1) {
+        if (game.getBattlefield().count(HelmOfKaldra.filterSword, source.getControllerId(), source, game) < 1) {
             return false;
         }
-        return game.getBattlefield().count(HelmOfKaldra.filterShield, source.getSourceId(), source.getControllerId(), game) >= 1;
+        return game.getBattlefield().count(HelmOfKaldra.filterShield, source.getControllerId(), source, game) >= 1;
     }
 
 }
 
 class HelmOfKaldraEffect extends OneShotEffect {
 
-    public HelmOfKaldraEffect() {
+    HelmOfKaldraEffect() {
         super(Outcome.Benefit);
         this.staticText = "if you control Equipment named Helm of Kaldra, Sword of Kaldra, and Shield of Kaldra, create Kaldra, a legendary 4/4 colorless Avatar creature token. Attach those Equipment to it";
     }
 
-    public HelmOfKaldraEffect(final HelmOfKaldraEffect effect) {
+    private HelmOfKaldraEffect(final HelmOfKaldraEffect effect) {
         super(effect);
     }
 

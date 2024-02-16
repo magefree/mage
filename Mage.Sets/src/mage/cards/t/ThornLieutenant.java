@@ -1,7 +1,7 @@
 package mage.cards.t;
 
 import mage.MageInt;
-import mage.abilities.common.BecomesTargetTriggeredAbility;
+import mage.abilities.common.BecomesTargetSourceTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -30,15 +30,15 @@ public final class ThornLieutenant extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever Thorn Lieutenant becomes the target of a spell or ability an opponent controls, create a 1/1 green Elf Warrior creature token.
-        this.addAbility(new BecomesTargetTriggeredAbility(
+        this.addAbility(new BecomesTargetSourceTriggeredAbility(
                 new CreateTokenEffect(new ElfWarriorToken()),
                 StaticFilters.FILTER_SPELL_OR_ABILITY_OPPONENTS
-        ));
+        ).setTriggerPhrase("Whenever {this} becomes the target of a spell or ability an opponent controls, "));
 
         // {5}{G}: Thorn Lieutenant gets +4/+4 until end of turn.
         this.addAbility(new SimpleActivatedAbility(
                 new BoostSourceEffect(4, 4, Duration.EndOfTurn),
-                new ManaCostsImpl("{5}{G}")
+                new ManaCostsImpl<>("{5}{G}")
         ));
     }
 

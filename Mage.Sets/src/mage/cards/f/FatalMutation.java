@@ -1,4 +1,3 @@
-
 package mage.cards.f;
 
 import java.util.UUID;
@@ -34,7 +33,7 @@ public final class FatalMutation extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // When enchanted creature is turned face up, destroy it. It can't be regenerated.
         this.addAbility(new FatalMutationAbility(new DestroyAttachedToEffect("it", true)));
@@ -54,9 +53,10 @@ class FatalMutationAbility extends TriggeredAbilityImpl {
 
     public FatalMutationAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect, false);
+        setTriggerPhrase("When enchanted creature is turned face up, ");
     }
 
-    public FatalMutationAbility(final FatalMutationAbility ability) {
+    private FatalMutationAbility(final FatalMutationAbility ability) {
         super(ability);
     }
 
@@ -67,7 +67,7 @@ class FatalMutationAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.TURNEDFACEUP;
+        return event.getType() == GameEvent.EventType.TURNED_FACE_UP;
     }
 
     @Override
@@ -79,11 +79,4 @@ class FatalMutationAbility extends TriggeredAbilityImpl {
         return false;
 
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever enchanted creature is turned face up, " ;
-    }
-
 }
-

@@ -44,7 +44,7 @@ public final class JinxedChoker extends CardImpl {
         this.addAbility(upkeepAbility);
 
         // {3}: Put a charge counter on Jinxed Choker or remove one from it.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new JinxedChokerCounterEffect(), new ManaCostsImpl("{3}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new JinxedChokerCounterEffect(), new ManaCostsImpl<>("{3}"));
         this.addAbility(ability);
     }
 
@@ -60,12 +60,12 @@ public final class JinxedChoker extends CardImpl {
 
 class JinxedChokerChangeControllerEffect extends ContinuousEffectImpl {
 
-    public JinxedChokerChangeControllerEffect() {
+    JinxedChokerChangeControllerEffect() {
         super(Duration.Custom, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
         staticText = "target opponent gains control of {this}";
     }
 
-    public JinxedChokerChangeControllerEffect(final JinxedChokerChangeControllerEffect effect) {
+    private JinxedChokerChangeControllerEffect(final JinxedChokerChangeControllerEffect effect) {
         super(effect);
     }
 
@@ -76,7 +76,7 @@ class JinxedChokerChangeControllerEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = (Permanent) source.getSourceObjectIfItStillExists(game);
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent != null) {
             return permanent.changeControllerId(source.getFirstTarget(), game, source);
         } else {
@@ -144,12 +144,12 @@ class JinxedChokerDynamicValue implements DynamicValue {
 
 class JinxedChokerCounterEffect extends OneShotEffect {
 
-    public JinxedChokerCounterEffect() {
+    JinxedChokerCounterEffect() {
         super(Outcome.Detriment);
         this.staticText = "Put a charge counter on {this} or remove one from it";
     }
 
-    public JinxedChokerCounterEffect(final JinxedChokerCounterEffect effect) {
+    private JinxedChokerCounterEffect(final JinxedChokerCounterEffect effect) {
         super(effect);
     }
 

@@ -45,10 +45,10 @@ class ImperialEdictEffect extends OneShotEffect {
 
     ImperialEdictEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Target opponent chooses a creature they control. Destroy it.";
+        this.staticText = "Target opponent chooses a creature they control. Destroy that creature.";
     }
 
-    ImperialEdictEffect(final ImperialEdictEffect effect) {
+    private ImperialEdictEffect(final ImperialEdictEffect effect) {
         super(effect);
     }
 
@@ -66,8 +66,8 @@ class ImperialEdictEffect extends OneShotEffect {
         FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you control");
         filter.add(new ControllerIdPredicate(player.getId()));
         Target target = new TargetPermanent(1, 1, filter, true);
-        if (target.canChoose(source.getSourceId(), player.getId(), game)) {
-            while (!target.isChosen() && target.canChoose(source.getSourceId(), player.getId(), game) && player.canRespond()) {
+        if (target.canChoose(player.getId(), source, game)) {
+            while (!target.isChosen() && target.canChoose(player.getId(), source, game) && player.canRespond()) {
                 player.chooseTarget(Outcome.DestroyPermanent, target, source, game);
             }
             Permanent permanent = game.getPermanent(target.getFirstTarget());

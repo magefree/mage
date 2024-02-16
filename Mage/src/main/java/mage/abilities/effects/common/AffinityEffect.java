@@ -11,10 +11,10 @@ import mage.game.Game;
 import mage.util.CardUtil;
 
 /**
- *     702.40. Affinity
-        702.40a Affinity is a static ability that functions while the spell with affinity is on the stack. 
-                “Affinity for [text]” means “This spell costs you {1} less to cast for each [text] you control.”
-        702.40b If a spell has multiple instances of affinity, each of them applies. 
+ * 702.40. Affinity
+ * 702.40a Affinity is a static ability that functions while the spell with affinity is on the stack.
+ * “Affinity for [text]” means “This spell costs you {1} less to cast for each [text] you control.”
+ * 702.40b If a spell has multiple instances of affinity, each of them applies.
  */
 public class AffinityEffect extends CostModificationEffectImpl {
 
@@ -26,7 +26,7 @@ public class AffinityEffect extends CostModificationEffectImpl {
         staticText = "Affinity for " + filter.getMessage();
     }
 
-    public AffinityEffect(final AffinityEffect effect) {
+    protected AffinityEffect(final AffinityEffect effect) {
         super(effect);
         this.filter = effect.filter.copy();
     }
@@ -34,7 +34,7 @@ public class AffinityEffect extends CostModificationEffectImpl {
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
         // abilityToModify.getControllerId() works with Sen Triplets and in multiplayer games, see https://github.com/magefree/mage/issues/5931
-        int count = game.getBattlefield().getActivePermanents(filter, abilityToModify.getControllerId(), source.getId(), game).size();
+        int count = game.getBattlefield().getActivePermanents(filter, abilityToModify.getControllerId(), source, game).size();
         CardUtil.reduceCost(abilityToModify, count);
         return true;
     }

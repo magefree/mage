@@ -57,7 +57,7 @@ public final class SwordOfHearthAndHome extends CardImpl {
         this.addAbility(ability);
 
         // Equip {2}
-        this.addAbility(new EquipAbility(Outcome.Benefit, new GenericManaCost(2)));
+        this.addAbility(new EquipAbility(Outcome.Benefit, new GenericManaCost(2), false));
     }
 
     private SwordOfHearthAndHome(final SwordOfHearthAndHome card) {

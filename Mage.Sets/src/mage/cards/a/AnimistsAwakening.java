@@ -43,35 +43,35 @@ public final class AnimistsAwakening extends CardImpl {
 
 class AnimistsAwakeningEffect extends OneShotEffect {
 
-    public AnimistsAwakeningEffect() {
+    AnimistsAwakeningEffect() {
         super(Outcome.PutCardInPlay);
-        staticText = "Reveal the top X cards of your library. Put all land cards from among them onto the battlefield tapped and the rest on the bottom of your library in any order."
+        staticText = "Reveal the top X cards of your library. Put all land cards from among them onto the battlefield tapped and the rest on the bottom of your library in a random order."
                 + "<br><i>Spell mastery</i> &mdash; If there are two or more instant and/or sorcery cards in your graveyard, untap those lands";
     }
 
-    public AnimistsAwakeningEffect(final AnimistsAwakeningEffect effect) {
+    private AnimistsAwakeningEffect(final AnimistsAwakeningEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (controller == null || sourceObject == null) {
             return false;
         }
         Cards cards = new CardsImpl();
         int xValue = source.getManaCostsToPay().getX();
-        cards.addAll(controller.getLibrary().getTopCards(game, xValue));
+        cards.addAllCards(controller.getLibrary().getTopCards(game, xValue));
         if (!cards.isEmpty()) {
             controller.revealCards(sourceObject.getIdName(), cards, game);
             Set<Card> toBattlefield = new LinkedHashSet<>();
-            for (Card card : cards.getCards(new FilterLandCard(), source.getSourceId(), source.getControllerId(), game)) {
+            for (Card card : cards.getCards(new FilterLandCard(), source.getControllerId(), source, game)) {
                 cards.remove(card);
                 toBattlefield.add(card);
             }
             controller.moveCards(toBattlefield, Zone.BATTLEFIELD, source, game, true, false, true, null);
-            controller.putCardsOnBottomOfLibrary(cards, game, source, true);
+            controller.putCardsOnBottomOfLibrary(cards, game, source, false);
 
             if (SpellMasteryCondition.instance.apply(game, source)) {
                 for (Card card : toBattlefield) {

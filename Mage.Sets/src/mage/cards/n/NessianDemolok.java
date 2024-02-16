@@ -42,7 +42,7 @@ public final class NessianDemolok extends CardImpl {
         TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), false);
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, TributeNotPaidCondition.instance,
-                "When {this} enters the battlefield, if its tribute wasn't paid, destroy target noncreature permanent."));
+                "When {this} enters the battlefield, if tribute wasn't paid, destroy target noncreature permanent."));
     }
 
     private NessianDemolok(final NessianDemolok card) {

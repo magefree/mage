@@ -16,13 +16,15 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.DamagedEvent;
-import mage.game.events.DamagedPermanentBatchEvent;
+import mage.game.events.DamagedBatchForPermanentsEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
 
 import java.util.UUID;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  * @author TheElk801
@@ -43,7 +45,7 @@ public final class BlazingSunsteel extends CardImpl {
         this.addAbility(new BlazingSunsteelTriggeredAbility());
 
         // Equip {4}
-        this.addAbility(new EquipAbility(4));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(4), new TargetControlledCreaturePermanent(), false));
     }
 
     private BlazingSunsteel(final BlazingSunsteel card) {
@@ -74,7 +76,7 @@ class BlazingSunsteelTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PERMANENT_BATCH;
+        return event.getType() == GameEvent.EventType.DAMAGED_BATCH_FOR_PERMANENTS;
     }
 
     @Override
@@ -90,7 +92,7 @@ class BlazingSunsteelTriggeredAbility extends TriggeredAbilityImpl {
         }
 
         int damage = 0;
-        DamagedPermanentBatchEvent dEvent = (DamagedPermanentBatchEvent) event;
+        DamagedBatchForPermanentsEvent dEvent = (DamagedBatchForPermanentsEvent) event;
         for (DamagedEvent damagedEvent : dEvent.getEvents()) {
             UUID targetID = damagedEvent.getTargetId();
             if (targetID == null) {

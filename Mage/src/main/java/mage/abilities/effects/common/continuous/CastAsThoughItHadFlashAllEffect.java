@@ -1,11 +1,10 @@
 package mage.abilities.effects.common.continuous;
 
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
-import mage.abilities.keyword.MorphAbility;
 import mage.cards.Card;
 import mage.constants.AsThoughEffectType;
-import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.filter.FilterCard;
@@ -33,7 +32,7 @@ public class CastAsThoughItHadFlashAllEffect extends AsThoughEffectImpl {
         staticText = setText();
     }
 
-    public CastAsThoughItHadFlashAllEffect(final CastAsThoughItHadFlashAllEffect effect) {
+    protected CastAsThoughItHadFlashAllEffect(final CastAsThoughItHadFlashAllEffect effect) {
         super(effect);
         this.filter = effect.filter;
         this.anyPlayer = effect.anyPlayer;
@@ -50,40 +49,28 @@ public class CastAsThoughItHadFlashAllEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean applies(UUID affectedSpellId, Ability source, UUID affectedControllerId, Game game) {
-        if (anyPlayer || source.isControlledBy(affectedControllerId)) {
-            Card card = game.getCard(affectedSpellId);
+    public boolean applies(UUID objectId, Ability affectedAbility, Ability source, Game game, UUID playerId) {
+        if (affectedAbility instanceof SpellAbility && (anyPlayer||source.isControlledBy(playerId))) {
+            Card card = ((SpellAbility) affectedAbility).getCharacteristics(game);
             if (card != null) {
-                //Allow lands with morph to be played at instant speed
-                if (card.isLand(game)) {
-                    boolean morphAbility = card.getAbilities().stream().anyMatch(ability -> ability instanceof MorphAbility);
-                    if (morphAbility) {
-                        Card cardCopy = card.copy();
-                        cardCopy.removeAllCardTypes(game);
-                        cardCopy.addCardType(game, CardType.CREATURE);
-                        return filter.match(cardCopy, source.getSourceId(), affectedControllerId, game);
-                    }
-                }
-                return filter.match(card, source.getSourceId(), affectedControllerId, game);
+                return filter.match(card, playerId, source, game);
             }
         }
         return false;
     }
+    @Override
+    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        throw new IllegalArgumentException("Wrong code usage: can't call applies method on empty affectedAbility");
+    }
 
     private String setText() {
-        StringBuilder sb = new StringBuilder();
-        if (anyPlayer) {
-            sb.append("Any player");
-        } else {
-            sb.append("You");
-        }
+        StringBuilder sb = new StringBuilder(anyPlayer ? "any player" : "you");
         sb.append(" may cast ");
         sb.append(filter.getMessage());
         if (!duration.toString().isEmpty()) {
             if (duration == Duration.EndOfTurn) {
                 sb.append(" this turn");
             } else {
-                sb.append(' ');
                 sb.append(' ');
                 sb.append(duration.toString());
             }

@@ -57,7 +57,7 @@ public final class HammerJammer extends CardImpl {
 
 class HammerJammerEntersEffect extends EntersBattlefieldWithXCountersEffect {
 
-    public HammerJammerEntersEffect(Counter counter) {
+    HammerJammerEntersEffect(Counter counter) {
         super(counter);
     }
 
@@ -88,9 +88,10 @@ class HammerJammerTriggeredAbility extends TriggeredAbilityImpl {
 
     public HammerJammerTriggeredAbility() {
         super(Zone.BATTLEFIELD, new HammerJammerEffect(), false);
+        setTriggerPhrase("Whenever you roll a die, ");
     }
 
-    public HammerJammerTriggeredAbility(final HammerJammerTriggeredAbility ability) {
+    private HammerJammerTriggeredAbility(final HammerJammerTriggeredAbility ability) {
         super(ability);
     }
 
@@ -115,21 +116,16 @@ class HammerJammerTriggeredAbility extends TriggeredAbilityImpl {
         }
         return false;
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever you roll a die, " ;
-    }
 }
 
 class HammerJammerEffect extends OneShotEffect {
 
-    public HammerJammerEffect() {
+    HammerJammerEffect() {
         super(Outcome.Benefit);
         this.staticText = "remove all +1/+1 counters from {this}, then put a number of +1/+1 counters on it equal to the result";
     }
 
-    public HammerJammerEffect(final HammerJammerEffect effect) {
+    private HammerJammerEffect(final HammerJammerEffect effect) {
         super(effect);
     }
 

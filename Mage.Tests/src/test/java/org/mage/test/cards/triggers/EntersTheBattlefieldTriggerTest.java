@@ -87,6 +87,7 @@ public class EntersTheBattlefieldTriggerTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Terror", 1); // {1}{B}
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Scion of Vitu-Ghazi");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Terror", "Scion of Vitu-Ghazi");
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Reanimate", "Scion of Vitu-Ghazi");
 
@@ -97,7 +98,7 @@ public class EntersTheBattlefieldTriggerTest extends CardTestPlayerBase {
 
         assertGraveyardCount(playerA, "Reanimate", 1);
         assertPermanentCount(playerA, "Scion of Vitu-Ghazi", 1);
-        assertPermanentCount(playerA, "Bird", 2); // only 2 from cast from hand creation and populate. Populate may not trigger from reanimate
+        assertPermanentCount(playerA, "Bird Token", 2); // only 2 from cast from hand creation and populate. Populate may not trigger from reanimate
 
         assertLife(playerA, 15);
         assertLife(playerB, 20);
@@ -181,24 +182,28 @@ public class EntersTheBattlefieldTriggerTest extends CardTestPlayerBase {
      */
     @Test
     public void testWildPair() {
-
-        // Whenever a creature enters the battlefield, if you cast it from your hand, you may search your library for a creature card with the same total power and toughness and put it onto the battlefield. If you do, shuffle your library.
+        // Whenever a creature enters the battlefield, if you cast it from your hand,
+        // you may search your library for a creature card with the same total power and toughness and put it onto the battlefield.
+        // If you do, shuffle your library.
         addCard(Zone.BATTLEFIELD, playerA, "Wild Pair");
         addCard(Zone.HAND, playerA, "Silvercoat Lion", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
-        setChoice(playerA, "Silvercoat Lion");
         addCard(Zone.LIBRARY, playerA, "Silvercoat Lion");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion");
+        setChoice(playerA, "Yes"); // Yes for Wild Pair to find another creature
+        // Silvercoat Lion is the only other choice, let it be auto-chosen
+
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
 
         execute();
 
         assertPermanentCount(playerA, "Silvercoat Lion", 2);
-
     }
 
-    // Test self trigger
+    /**
+     * Test self trigger for Noxious Ghoul.
+     */
     @Test
     public void testNoxiousGhoul1() {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 5);
@@ -221,7 +226,9 @@ public class EntersTheBattlefieldTriggerTest extends CardTestPlayerBase {
 
     }
 
-    // Test another zombie trigger
+    /**
+     * Test another zombie trigger
+     */
     @Test
     public void testNoxiousGhoul2() {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 8);
@@ -242,6 +249,7 @@ public class EntersTheBattlefieldTriggerTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Noxious Ghoul");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Ego Erasure", "targetPlayer=PlayerA", "Whenever");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Scathe Zombies");
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
 
@@ -257,7 +265,9 @@ public class EntersTheBattlefieldTriggerTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Silvercoat Lion", 1);
     }
 
-    // Test copy of Noxious Ghoul
+    /**
+     * Test copy of Noxious Ghoul
+     */
     @Test
     public void testCopyNoxiousGhoul() {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
@@ -325,8 +335,8 @@ public class EntersTheBattlefieldTriggerTest extends CardTestPlayerBase {
         execute();
 
         assertPermanentCount(playerA, "Hearthcage Giant", 1);
-        assertPermanentCount(playerA, "Elemental Shaman", 2);
-        assertPowerToughness(playerA, "Elemental Shaman", 3, 1);
+        assertPermanentCount(playerA, "Elemental Shaman Token", 2);
+        assertPowerToughness(playerA, "Elemental Shaman Token", 3, 1);
     }
 
     /**
@@ -390,7 +400,7 @@ public class EntersTheBattlefieldTriggerTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
         addCard(Zone.GRAVEYARD, playerA, "Balduvian Bears", 5);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Uro, Titan of Nature's Wrath");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Uro, Titan of Nature's Wrath with Escape");
         setChoice(playerA, "Balduvian Bears^Balduvian Bears^Balduvian Bears^Balduvian Bears^Balduvian Bears");
         setChoice(playerA, "When {this} enters the battlefield, sacrifice it"); // sacrifice trigger must go first
         setChoice(playerA, false); // do not put land to battlefield
@@ -400,7 +410,6 @@ public class EntersTheBattlefieldTriggerTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Uro, Titan of Nature's Wrath", 1);
     }

@@ -31,7 +31,7 @@ public final class TurtleshellChangeling extends CardImpl {
         this.addAbility(new ChangelingAbility());
 
         //{1}{U}: Switch {this}'s power and toughness until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SwitchPowerToughnessSourceEffect(Duration.EndOfTurn), new ManaCostsImpl("{1}{U}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SwitchPowerToughnessSourceEffect(Duration.EndOfTurn), new ManaCostsImpl<>("{1}{U}")));
     }
 
     private TurtleshellChangeling(final TurtleshellChangeling card) {

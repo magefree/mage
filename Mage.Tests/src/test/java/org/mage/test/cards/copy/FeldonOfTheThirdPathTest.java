@@ -48,7 +48,6 @@ public class FeldonOfTheThirdPathTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 22); // +2 from Robber
         assertLife(playerB, 18); // -2 from Robber
@@ -75,7 +74,6 @@ public class FeldonOfTheThirdPathTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Feldon of the Third Path", 1);
         assertPermanentCount(playerA, "Sepulchral Primordial", 1);

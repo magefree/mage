@@ -37,8 +37,7 @@ public final class BlueElementalBlast extends CardImpl {
         this.getSpellAbility().addEffect(new CounterTargetEffect());
         this.getSpellAbility().addTarget(new TargetSpell(filterSpell));
         
-        Mode mode = new Mode();
-        mode.addEffect(new DestroyTargetEffect());
+        Mode mode = new Mode(new DestroyTargetEffect());
         mode.addTarget(new TargetPermanent(filterPermanent));
         
         this.getSpellAbility().addMode(mode);

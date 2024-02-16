@@ -7,13 +7,13 @@ import mage.constants.SubType;
 import mage.filter.common.FilterLandCard;
 
 /**
- *
  * @author Plopman
  */
-public class ForestcyclingAbility extends CyclingAbility{
+public class ForestcyclingAbility extends CyclingAbility {
     private static final FilterLandCard filter = new FilterLandCard("Forest card");
     private static final String text = "Forestcycling";
-    static{
+
+    static {
         filter.add(SubType.FOREST.getPredicate());
     }
 
@@ -21,7 +21,7 @@ public class ForestcyclingAbility extends CyclingAbility{
         super(costs, filter, text);
     }
 
-    public ForestcyclingAbility(final ForestcyclingAbility ability) {
+    protected ForestcyclingAbility(final ForestcyclingAbility ability) {
         super(ability);
     }
 

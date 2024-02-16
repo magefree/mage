@@ -33,13 +33,13 @@ public final class DailyRegimen extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // {1}{W}: Put a +1/+1 counter on enchanted creature.
         this.addAbility(new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
                 new AddCountersAttachedEffect(CounterType.P1P1.createInstance(),"enchanted creature"),
-                new ManaCostsImpl("{1}{W}")));
+                new ManaCostsImpl<>("{1}{W}")));
     }
 
     private DailyRegimen(final DailyRegimen card) {

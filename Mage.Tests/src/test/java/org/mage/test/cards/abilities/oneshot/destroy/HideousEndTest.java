@@ -32,7 +32,7 @@ public class HideousEndTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Hideous End");
         addCard(Zone.BATTLEFIELD, playerB, "Zombie Goliath");
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Hideous End", "Zombie Goliath");
+        checkPlayableAbility("No Non-Black creature", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Hideous", false);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();

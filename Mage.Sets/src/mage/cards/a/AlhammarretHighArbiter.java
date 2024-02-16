@@ -1,10 +1,10 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.EntersBattlefieldEffect;
@@ -15,12 +15,13 @@ import mage.constants.*;
 import mage.filter.common.FilterNonlandCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.util.CardUtil;
 import mage.util.GameLog;
+
+import java.util.UUID;
 
 /**
  *
@@ -30,7 +31,7 @@ public final class AlhammarretHighArbiter extends CardImpl {
 
     public AlhammarretHighArbiter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{U}{U}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPHINX);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
@@ -54,13 +55,13 @@ public final class AlhammarretHighArbiter extends CardImpl {
 
 class AlhammarretHighArbiterEffect extends OneShotEffect {
 
-    public AlhammarretHighArbiterEffect() {
+    AlhammarretHighArbiterEffect() {
         super(Outcome.Benefit);
         this.staticText = "As {this} enters the battlefield, each opponent reveals their hand. You choose the name of a nonland card revealed this way."
                 + "<br>Your opponents can't cast spells with the chosen name";
     }
 
-    public AlhammarretHighArbiterEffect(final AlhammarretHighArbiterEffect effect) {
+    private AlhammarretHighArbiterEffect(final AlhammarretHighArbiterEffect effect) {
         super(effect);
     }
 
@@ -86,7 +87,7 @@ class AlhammarretHighArbiterEffect extends OneShotEffect {
             controller.chooseTarget(Outcome.Benefit, revealedCards, target, source, game);
             Card card = game.getCard(target.getFirstTarget());
             if (card != null) {
-                game.informPlayers("The choosen card name is [" + GameLog.getColoredObjectName(card) + ']');
+                game.informPlayers("The chosen card name is [" + GameLog.getColoredObjectName(card) + ']');
                 Permanent sourcePermanent = game.getPermanentEntering(source.getSourceId());
                 if (sourcePermanent == null) {
                     sourcePermanent = game.getPermanentEntering(source.getSourceId());
@@ -114,7 +115,7 @@ class AlhammarretHighArbiterCantCastEffect extends ContinuousRuleModifyingEffect
         staticText = "Your opponents can't cast spells with the chosen name";
     }
 
-    public AlhammarretHighArbiterCantCastEffect(final AlhammarretHighArbiterCantCastEffect effect) {
+    private AlhammarretHighArbiterCantCastEffect(final AlhammarretHighArbiterCantCastEffect effect) {
         super(effect);
         this.cardName = effect.cardName;
         this.zoneChangeCounter = effect.zoneChangeCounter;
@@ -138,7 +139,7 @@ class AlhammarretHighArbiterCantCastEffect extends ContinuousRuleModifyingEffect
 
     @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (mageObject != null) {
             return "You may not cast a card named " + cardName + " (" + mageObject.getIdName() + ").";
         }
@@ -153,10 +154,15 @@ class AlhammarretHighArbiterCantCastEffect extends ContinuousRuleModifyingEffect
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
-            MageObject object = game.getObject(event.getSourceId());
-            if (object != null && object.getName().equals(cardName)) {
-                return true;
+            SpellAbility spellAbility = SpellAbility.getSpellAbilityFromEvent(event, game);
+            if (spellAbility == null) {
+                return false;
             }
+            Card card = spellAbility.getCharacteristics(game);
+            if (card == null) {
+                return false;
+            }
+            return CardUtil.haveSameNames(card, cardName, game);
         }
         return false;
     }

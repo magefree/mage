@@ -62,7 +62,7 @@ class WillingTestSubjectTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
     }
 
-    public WillingTestSubjectTriggeredAbility(final WillingTestSubjectTriggeredAbility ability) {
+    private WillingTestSubjectTriggeredAbility(final WillingTestSubjectTriggeredAbility ability) {
         super(ability);
     }
 

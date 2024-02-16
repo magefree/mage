@@ -3,7 +3,7 @@ package mage.cards.h;
 import mage.abilities.mana.BlueManaAbility;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardSetInfo;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
@@ -12,7 +12,7 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class HengegatePathway extends ModalDoubleFacesCard {
+public final class HengegatePathway extends ModalDoubleFacedCard {
 
     public HengegatePathway(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo,

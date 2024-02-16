@@ -2,7 +2,7 @@
 package mage.cards.w;
 
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -23,7 +23,7 @@ public final class WeightOfMemory extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(3));
         // Target player puts the top three cards of their library into their graveyard.
         this.getSpellAbility().addTarget(new TargetPlayer());
-        this.getSpellAbility().addEffect(new PutLibraryIntoGraveTargetEffect(3));
+        this.getSpellAbility().addEffect(new MillCardsTargetEffect(3));
     }
 
     private WeightOfMemory(final WeightOfMemory card) {

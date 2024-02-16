@@ -10,6 +10,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.StaticFilters;
 import mage.target.TargetPlayer;
+import mage.watchers.common.DragonOnTheBattlefieldWhileSpellWasCastWatcher;
 
 import java.util.UUID;
 
@@ -33,6 +34,7 @@ public final class FoulTongueInvocation extends CardImpl {
                 "If you revealed a Dragon card or controlled a Dragon as you cast this spell, you gain 4 life."
         ));
         this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addWatcher(new DragonOnTheBattlefieldWhileSpellWasCastWatcher());
     }
 
     private FoulTongueInvocation(final FoulTongueInvocation card) {

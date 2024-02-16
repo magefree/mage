@@ -30,7 +30,7 @@ public final class SoulShepherd extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {W}, Exile a creature card from your graveyard: You gain 1 life.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(1), new ManaCostsImpl("{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(1), new ManaCostsImpl<>("{W}"));
         ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(new FilterCreatureCard("a creature card from your graveyard"))));
         this.addAbility(ability);
     }

@@ -217,7 +217,8 @@ public final class Commander2021Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Knight of the White Orchid", 95, Rarity.RARE, mage.cards.k.KnightOfTheWhiteOrchid.class));
         cards.add(new SetCardInfo("Kodama's Reach", 197, Rarity.COMMON, mage.cards.k.KodamasReach.class));
         cards.add(new SetCardInfo("Krosan Grip", 198, Rarity.UNCOMMON, mage.cards.k.KrosanGrip.class));
-        cards.add(new SetCardInfo("Laelia, the Blade Reforged", 53, Rarity.UNCOMMON, mage.cards.l.LaeliaTheBladeReforged.class));
+        cards.add(new SetCardInfo("Laelia, the Blade Reforged", 53, Rarity.RARE, mage.cards.l.LaeliaTheBladeReforged.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Laelia, the Blade Reforged", 380, Rarity.RARE, mage.cards.l.LaeliaTheBladeReforged.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Leyline Prowler", 222, Rarity.UNCOMMON, mage.cards.l.LeylineProwler.class));
         cards.add(new SetCardInfo("Living Lore", 121, Rarity.UNCOMMON, mage.cards.l.LivingLore.class));
         cards.add(new SetCardInfo("Llanowar Reborn", 296, Rarity.UNCOMMON, mage.cards.l.LlanowarReborn.class));

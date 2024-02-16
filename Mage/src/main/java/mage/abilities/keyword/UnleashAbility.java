@@ -28,7 +28,7 @@ public class UnleashAbility extends SimpleStaticAbility {
         this.addEffect(new UnleashRestrictionEffect());
     }
 
-    public UnleashAbility(final UnleashAbility ability) {
+    protected UnleashAbility(final UnleashAbility ability) {
         super(ability);
     }
 
@@ -64,11 +64,6 @@ class UnleashReplacementEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent creature = ((EntersTheBattlefieldEvent) event).getTarget();
         Player controller = game.getPlayer(source.getControllerId());
@@ -101,7 +96,7 @@ class UnleashRestrictionEffect extends RestrictionEffect {
         super(Duration.WhileOnBattlefield);
     }
 
-    public UnleashRestrictionEffect(final UnleashRestrictionEffect effect) {
+    protected UnleashRestrictionEffect(final UnleashRestrictionEffect effect) {
         super(effect);
     }
 

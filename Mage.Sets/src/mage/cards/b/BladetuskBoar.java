@@ -25,7 +25,7 @@ public final class BladetuskBoar extends CardImpl {
         this.addAbility(IntimidateAbility.getInstance());
     }
 
-    public BladetuskBoar (final BladetuskBoar card) {
+    private BladetuskBoar(final BladetuskBoar card) {
         super(card);
     }
 

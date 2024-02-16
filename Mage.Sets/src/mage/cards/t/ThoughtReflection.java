@@ -43,23 +43,18 @@ public final class ThoughtReflection extends CardImpl {
 
 class ThoughtReflectionReplacementEffect extends ReplacementEffectImpl {
 
-    public ThoughtReflectionReplacementEffect() {
+    ThoughtReflectionReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Neutral);
         staticText = "If you would draw a card, draw two cards instead";
     }
 
-    public ThoughtReflectionReplacementEffect(final ThoughtReflectionReplacementEffect effect) {
+    private ThoughtReflectionReplacementEffect(final ThoughtReflectionReplacementEffect effect) {
         super(effect);
     }
 
     @Override
     public ThoughtReflectionReplacementEffect copy() {
         return new ThoughtReflectionReplacementEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

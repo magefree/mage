@@ -30,7 +30,7 @@ public final class StupefyingTouch extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // When Stupefying Touch enters the battlefield, draw a card.
@@ -52,12 +52,12 @@ public final class StupefyingTouch extends CardImpl {
 
 class CantActivateAbilitiesAttachedEffect extends RestrictionEffect {
 
-    public CantActivateAbilitiesAttachedEffect() {
+    CantActivateAbilitiesAttachedEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "Enchanted creature's activated abilities can't be activated";
     }
 
-    public CantActivateAbilitiesAttachedEffect(final CantActivateAbilitiesAttachedEffect effect) {
+    private CantActivateAbilitiesAttachedEffect(final CantActivateAbilitiesAttachedEffect effect) {
         super(effect);
     }
 

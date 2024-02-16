@@ -16,6 +16,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
@@ -42,11 +43,15 @@ public final class MoonveilRegent extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever you cast a spell, you may discard your hand. If you do, draw a card for each of that spell's colors.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new DoIfCostPaid(
-                new DrawCardSourceControllerEffect(MoonveilRegentSpellValue.instance)
-                        .setText("draw a card for each of that spell's colors"),
-                new DiscardHandCost()
-        ), StaticFilters.FILTER_SPELL_A, false, true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(
+                new DoIfCostPaid(
+                        new DrawCardSourceControllerEffect(MoonveilRegentSpellValue.instance)
+                                .setText("draw a card for each of that spell's colors"),
+                        new DiscardHandCost()
+                ),
+                StaticFilters.FILTER_SPELL_A,
+                false, SetTargetPointer.SPELL
+        ));
 
         // When Moonveil Regent dies, it deals X damage to any target, where X is the number of colors among permanents you control.
         Ability ability = new DiesSourceTriggeredAbility(new DamageTargetEffect(

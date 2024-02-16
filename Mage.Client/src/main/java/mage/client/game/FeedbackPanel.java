@@ -11,6 +11,7 @@ import mage.constants.PlayerAction;
 import mage.constants.TurnPhase;
 import org.apache.log4j.Logger;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.io.Serializable;
@@ -38,9 +39,9 @@ public class FeedbackPanel extends javax.swing.JPanel {
     private FeedbackMode mode;
     private MageDialog connectedDialog;
     private ChatPanelBasic connectedChatPanel;
-    private int lastMessageId;
     private Map<String, Serializable> lastOptions = new HashMap<>();
 
+    private static final int AUTO_CLOSE_END_DIALOG_TIMEOUT_SECS = 8;
     private static final ScheduledExecutorService WORKER = Executors.newSingleThreadScheduledExecutor();
 
     /**
@@ -66,14 +67,8 @@ public class FeedbackPanel extends javax.swing.JPanel {
     }
 
     public void prepareFeedback(FeedbackMode mode, String message, boolean special, Map<String, Serializable> options,
-                                int messageId, boolean gameNeedUserFeedback, TurnPhase gameTurnPhase) {
+                                boolean gameNeedUserFeedback, TurnPhase gameTurnPhase) {
         synchronized (this) {
-            if (messageId < this.lastMessageId) {
-                // if too many warning messages here then look at GAME_REDRAW_GUI event logic
-                LOGGER.warn("catch un-synced message from later source (possible reason: connection or performance problems): " + messageId + ", text=" + message);
-                return;
-            }
-            this.lastMessageId = messageId;
             this.lastOptions = options;
             this.mode = mode;
         }
@@ -160,16 +155,18 @@ public class FeedbackPanel extends javax.swing.JPanel {
      */
     private void endWithTimeout() {
         Runnable task = () -> {
-            LOGGER.info("Ending game...");
-            Component c = MageFrame.getGame(gameId);
-            while (c != null && !(c instanceof GamePane)) {
-                c = c.getParent();
-            }
-            if (c != null && c.isVisible()) { // check if GamePanel still visible
-                FeedbackPanel.this.btnRight.doClick();
-            }
+            SwingUtilities.invokeLater(() -> {
+                LOGGER.info("Ending game...");
+                Component c = MageFrame.getGame(gameId);
+                while (c != null && !(c instanceof GamePane)) {
+                    c = c.getParent();
+                }
+                if (c != null && c.isVisible()) { // check if GamePanel still visible
+                    FeedbackPanel.this.btnRight.doClick();
+                }
+            });
         };
-        WORKER.schedule(task, 8, TimeUnit.SECONDS);
+        WORKER.schedule(task, AUTO_CLOSE_END_DIALOG_TIMEOUT_SECS, TimeUnit.SECONDS);
     }
 
     public void updateOptions(Map<String, Serializable> options) {

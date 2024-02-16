@@ -44,7 +44,7 @@ public final class MazeGlider extends CardImpl {
 
     }
 
-    public MazeGlider (final MazeGlider card) {
+    private MazeGlider(final MazeGlider card) {
         super(card);
     }
 

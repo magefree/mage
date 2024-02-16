@@ -12,20 +12,17 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class EnchantedTappedTriggeredManaAbility extends TriggeredManaAbility {
 
-    private final String permName;
-
     public EnchantedTappedTriggeredManaAbility(ManaEffect manaEffect) {
         this(manaEffect, "land");
     }
 
     public EnchantedTappedTriggeredManaAbility(ManaEffect manaEffect, String permName) {
         super(Zone.BATTLEFIELD, manaEffect);
-        this.permName = permName;
+        setTriggerPhrase("Whenever enchanted " + permName + " is tapped for mana, ");
     }
 
     private EnchantedTappedTriggeredManaAbility(final EnchantedTappedTriggeredManaAbility ability) {
         super(ability);
-        this.permName = ability.permName;
     }
 
     @Override
@@ -46,10 +43,5 @@ public class EnchantedTappedTriggeredManaAbility extends TriggeredManaAbility {
     @Override
     public EnchantedTappedTriggeredManaAbility copy() {
         return new EnchantedTappedTriggeredManaAbility(this);
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever enchanted " + permName + " is tapped for mana, " ;
     }
 }

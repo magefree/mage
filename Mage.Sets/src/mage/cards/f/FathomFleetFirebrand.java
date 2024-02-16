@@ -28,7 +28,7 @@ public final class FathomFleetFirebrand extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {1}{r}: Fathom Fleet Firebrand gets +1/+0 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{1}{R}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{1}{R}")));
     }
 
     private FathomFleetFirebrand(final FathomFleetFirebrand card) {

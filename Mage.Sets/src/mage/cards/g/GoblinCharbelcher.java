@@ -27,7 +27,7 @@ public final class GoblinCharbelcher extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
         // {3}, {tap}: Reveal cards from the top of your library until you reveal a land card. Goblin Charbelcher deals damage equal to the number of nonland cards revealed this way to any target. If the revealed land card was a Mountain, Goblin Charbelcher deals double that damage instead. Put the revealed cards on the bottom of your library in any order.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GoblinCharbelcherEffect(), new ManaCostsImpl("{3}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GoblinCharbelcherEffect(), new ManaCostsImpl<>("{3}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
@@ -45,12 +45,12 @@ public final class GoblinCharbelcher extends CardImpl {
 
 class GoblinCharbelcherEffect extends OneShotEffect {
 
-    public GoblinCharbelcherEffect() {
+    GoblinCharbelcherEffect() {
         super(Outcome.Damage);
         this.staticText = "Reveal cards from the top of your library until you reveal a land card. {this} deals damage equal to the number of nonland cards revealed this way to any target. If the revealed land card was a Mountain, {this} deals double that damage instead. Put the revealed cards on the bottom of your library in any order";
     }
 
-    public GoblinCharbelcherEffect(final GoblinCharbelcherEffect effect) {
+    private GoblinCharbelcherEffect(final GoblinCharbelcherEffect effect) {
         super(effect);
     }
 
@@ -62,7 +62,7 @@ class GoblinCharbelcherEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         boolean isMountain = false;
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         Player controller = game.getPlayer(source.getControllerId());
         if (controller == null || sourceObject == null) {
             return false;

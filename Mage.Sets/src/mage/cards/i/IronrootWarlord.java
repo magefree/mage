@@ -7,11 +7,10 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.continuous.SetPowerSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
@@ -37,13 +36,13 @@ public final class IronrootWarlord extends CardImpl {
         // Ironroot Warlord's power is equal to the number of creatures you control.
         this.addAbility(new SimpleStaticAbility(
                 Zone.ALL,
-                new SetPowerSourceEffect(xValue, Duration.EndOfGame)
+                new SetBasePowerSourceEffect(xValue)
                         .setText("{this}'s power is equal to the number of creatures you control")
         ));
 
         // {3}{G}{W}: Create a 1/1 white Soldier creature token.
         this.addAbility(new SimpleActivatedAbility(
-                new CreateTokenEffect(new SoldierToken()), new ManaCostsImpl("{3}{G}{W}")
+                new CreateTokenEffect(new SoldierToken()), new ManaCostsImpl<>("{3}{G}{W}")
         ));
     }
 

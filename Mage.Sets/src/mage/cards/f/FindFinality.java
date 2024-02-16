@@ -59,14 +59,14 @@ public final class FindFinality extends SplitCard {
 
 class FinalityEffect extends OneShotEffect {
 
-    public FinalityEffect() {
+    FinalityEffect() {
         super(Outcome.Benefit);
         this.staticText = "You may put two +1/+1 counters "
                 + "on a creature you control. "
                 + "Then all creatures get -4/-4 until end of turn.";
     }
 
-    public FinalityEffect(final FinalityEffect effect) {
+    private FinalityEffect(final FinalityEffect effect) {
         super(effect);
     }
 
@@ -82,9 +82,9 @@ class FinalityEffect extends OneShotEffect {
             return false;
         }
         Target target = new TargetControlledCreaturePermanent(0, 1);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         if (player.choose(
-                Outcome.BoostCreature, target, source.getSourceId(), game
+                Outcome.BoostCreature, target, source, game
         )) {
             Effect effect = new AddCountersTargetEffect(
                     CounterType.P1P1.createInstance(2)

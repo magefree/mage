@@ -49,7 +49,7 @@ class SoulquakeEffect extends OneShotEffect {
         staticText = "Return all creatures on the battlefield and all creature cards in graveyards to their owners' hands";
     }
 
-    public SoulquakeEffect(final SoulquakeEffect effect) {
+    private SoulquakeEffect(final SoulquakeEffect effect) {
         super(effect);
     }
 
@@ -65,7 +65,7 @@ class SoulquakeEffect extends OneShotEffect {
             return false;
         }
         Set<Card> cardsToHand = new LinkedHashSet<>();
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source.getSourceId(), game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source, game)) {
             cardsToHand.add((Card) permanent);
         }
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {

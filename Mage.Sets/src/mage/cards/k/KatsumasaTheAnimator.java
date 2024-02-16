@@ -8,7 +8,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.AddCardTypeTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessTargetEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -43,7 +43,7 @@ public final class KatsumasaTheAnimator extends CardImpl {
     public KatsumasaTheAnimator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.MOONFOLK);
         this.subtype.add(SubType.ARTIFICER);
         this.power = new MageInt(3);
@@ -104,8 +104,8 @@ class KatsumasaTheAnimatorEffect extends OneShotEffect {
         game.addEffect(new GainAbilityTargetEffect(
                 FlyingAbility.getInstance(), Duration.EndOfTurn
         ), source);
-        if (permanent.hasSubtype(SubType.VEHICLE, game)) {
-            game.addEffect(new SetPowerToughnessTargetEffect(
+        if (!permanent.hasSubtype(SubType.VEHICLE, game)) {
+            game.addEffect(new SetBasePowerToughnessTargetEffect(
                     1, 1, Duration.EndOfTurn
             ), source);
         }

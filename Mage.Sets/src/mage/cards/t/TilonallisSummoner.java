@@ -20,7 +20,7 @@ import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
 import mage.constants.*;
 import mage.game.Game;
-import mage.game.permanent.token.TilonallisSummonerElementalToken;
+import mage.game.permanent.token.RedElementalToken;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTargets;
 
@@ -58,12 +58,12 @@ public final class TilonallisSummoner extends CardImpl {
 
 class TilonallisSummonerEffect extends OneShotEffect {
 
-    public TilonallisSummonerEffect() {
+    TilonallisSummonerEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "you may pay {X}{R}. If you do, create X 1/1 red Elemental creature tokens that are tapped and attacking. At the beginning of the next end step, exile those tokens unless you have the city's blessing";
     }
 
-    public TilonallisSummonerEffect(final TilonallisSummonerEffect effect) {
+    private TilonallisSummonerEffect(final TilonallisSummonerEffect effect) {
         super(effect);
     }
 
@@ -76,13 +76,13 @@ class TilonallisSummonerEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            ManaCosts cost = new ManaCostsImpl("{X}{R}");
+            ManaCosts cost = new ManaCostsImpl<>("{X}{R}");
             if (controller.chooseUse(outcome, "Pay " + cost.getText() + "? If you do, you create X 1/1 red Elemental creature tokens that are tapped and attacking.", source, game)) {
                 int costX = controller.announceXMana(0, Integer.MAX_VALUE, "Announce the value for {X}", game, source);
                 cost.add(new GenericManaCost(costX));
                 if (cost.pay(source, game, source, source.getControllerId(), false, null)) {
                     controller.resetStoredBookmark(game); // otherwise you can undo the payment
-                    CreateTokenEffect effect = new CreateTokenEffect(new TilonallisSummonerElementalToken(), costX, true, true);
+                    CreateTokenEffect effect = new CreateTokenEffect(new RedElementalToken(), costX, true, true);
                     effect.apply(game, source);
                     Effect exileEffect = new ExileTargetEffect(null, "", Zone.BATTLEFIELD)
                             .setText("exile those tokens unless you have the city's blessing");

@@ -24,14 +24,14 @@ public final class FrostAugur extends CardImpl {
     public FrostAugur(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}");
 
-        this.addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 
         // {S}, {T}: Look at the top card of your library. If it's a snow card, you may reveal it and put it into your hand.
-        Ability ability = new SimpleActivatedAbility(new FrostAugurEffect(), new ManaCostsImpl("{S}"));
+        Ability ability = new SimpleActivatedAbility(new FrostAugurEffect(), new ManaCostsImpl<>("{S}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
@@ -74,7 +74,7 @@ class FrostAugurEffect extends OneShotEffect {
             return false;
         }
         player.lookAtCards("", card, game);
-        if (card.isSnow() && player.chooseUse(
+        if (card.isSnow(game) && player.chooseUse(
                 outcome, "Reveal " + card.getName() + " and put it into your hand?", source, game
         )) {
             player.revealCards(source, new CardsImpl(card), game);

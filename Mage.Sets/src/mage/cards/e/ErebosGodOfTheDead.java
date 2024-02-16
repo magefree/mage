@@ -24,7 +24,7 @@ public final class ErebosGodOfTheDead extends CardImpl {
 
     public ErebosGodOfTheDead(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{3}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GOD);
 
         this.power = new MageInt(5);
@@ -44,7 +44,7 @@ public final class ErebosGodOfTheDead extends CardImpl {
 
         // {1}{B}, Pay 2 life: Draw a card.
         Ability ability = new SimpleActivatedAbility(
-                new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{1}{B}")
+                new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{1}{B}")
         );
         ability.addCost(new PayLifeCost(2));
         this.addAbility(ability);

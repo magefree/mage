@@ -46,14 +46,14 @@ public final class MarduRunemark extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // Enchanted creature gets +2/+2.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield)));
         // Enchanted creature has first strike as long as you control a white or black permanent.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.AURA),
-                new PermanentsOnTheBattlefieldCondition(filter), "{this} has first strike as long as you control a white or black permanent")));
+                new PermanentsOnTheBattlefieldCondition(filter), "Enchanted creature has first strike as long as you control a white or black permanent")));
     }
 
     private MarduRunemark(final MarduRunemark card) {

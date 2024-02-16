@@ -31,7 +31,7 @@ public final class MemorialToGlory extends CardImpl {
         this.addAbility(new WhiteManaAbility());
         
         // {3}{W}, {T}, Sacrifice Memorial to Glory: Creature two 1/1 white Soldier creature tokens.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SoldierToken(), 2), new ManaCostsImpl("{3}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SoldierToken(), 2), new ManaCostsImpl<>("{3}{W}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

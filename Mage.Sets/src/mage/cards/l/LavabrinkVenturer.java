@@ -75,11 +75,11 @@ class LavabrinkVenturerEffect extends GainAbilitySourceEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        String choosenMode = (String) game.getState().getValue(source.getSourceId() + "_modeChoice");
-        if (choosenMode == null) {
+        String chosenMode = (String) game.getState().getValue(source.getSourceId() + "_modeChoice");
+        if (chosenMode == null) {
             return false;
         }
-        switch (choosenMode) {
+        switch (chosenMode) {
             case "Odd":
                 this.ability = new ProtectionAbility(oddFilter);
                 break;

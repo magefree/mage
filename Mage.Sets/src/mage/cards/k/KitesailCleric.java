@@ -38,7 +38,7 @@ public final class KitesailCleric extends CardImpl {
         // When Kitesail Cleric enters the battelfield, if it was kicked, tap up to two target creatures.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new TapTargetEffect()),
-                KickedCondition.instance, "When {this} enters the battlefield, " +
+                KickedCondition.ONCE, "When {this} enters the battlefield, " +
                 "if it was kicked, tap up to two target creatures."
         );
         ability.addTarget(new TargetCreaturePermanent(0, 2));

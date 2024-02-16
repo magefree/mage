@@ -33,7 +33,7 @@ public final class PurphorosGodOfTheForge extends CardImpl {
     public PurphorosGodOfTheForge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{3}{R}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GOD);
 
         this.power = new MageInt(6);
@@ -53,7 +53,7 @@ public final class PurphorosGodOfTheForge extends CardImpl {
 
         // {2}{R}: Creatures you control get +1/+0 until end of turn.
         this.addAbility(new SimpleActivatedAbility(
-                new BoostControlledEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{2}{R}")
+                new BoostControlledEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{2}{R}")
         ));
     }
 

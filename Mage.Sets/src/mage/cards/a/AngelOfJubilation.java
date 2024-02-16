@@ -57,12 +57,12 @@ public final class AngelOfJubilation extends CardImpl {
 
 class AngelOfJubilationEffect extends ContinuousEffectImpl {
 
-    public AngelOfJubilationEffect() {
+    AngelOfJubilationEffect() {
         super(Duration.WhileOnBattlefield, Layer.PlayerEffects, SubLayer.NA, Outcome.Detriment);
         staticText = "Players can't pay life or sacrifice creatures to cast spells";
     }
 
-    public AngelOfJubilationEffect(final AngelOfJubilationEffect effect) {
+    private AngelOfJubilationEffect(final AngelOfJubilationEffect effect) {
         super(effect);
     }
 
@@ -75,7 +75,7 @@ class AngelOfJubilationEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);
-            player.setCanPayLifeCost(false);
+            player.setPayLifeCostLevel(Player.PayLifeCostLevel.nonSpellnonActivatedAbilities);
             player.setCanPaySacrificeCostFilter(new FilterCreaturePermanent());
         }
         return true;
@@ -84,7 +84,7 @@ class AngelOfJubilationEffect extends ContinuousEffectImpl {
 
 class AngelOfJubilationSacrificeFilterEffect extends CostModificationEffectImpl {
 
-    public AngelOfJubilationSacrificeFilterEffect() {
+    AngelOfJubilationSacrificeFilterEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment, CostModificationType.SET_COST);
         staticText = "or activate abilities";
     }

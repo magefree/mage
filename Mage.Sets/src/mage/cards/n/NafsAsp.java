@@ -27,7 +27,7 @@ public final class NafsAsp extends CardImpl {
 
         // Whenever Nafs Asp deals damage to a player, that player loses 1 life at the beginning of their next draw step unless they pay {1} before that draw step.
         this.addAbility(new DealsDamageToAPlayerTriggeredAbility(new UnlessPaysDelayedEffect(
-            new ManaCostsImpl("{1}"), new LoseLifeTargetEffect(1), PhaseStep.DRAW, true,
+            new ManaCostsImpl<>("{1}"), new LoseLifeTargetEffect(1), PhaseStep.DRAW, true,
             "that player loses 1 life at the beginning of their next draw step unless they pay {1} before that draw step."),
             false, true));
     }

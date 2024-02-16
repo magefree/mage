@@ -30,7 +30,7 @@ public final class DiamondFaerie extends CardImpl {
 
     public DiamondFaerie(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{W}{U}");
-        addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
         this.subtype.add(SubType.FAERIE);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
@@ -39,7 +39,7 @@ public final class DiamondFaerie extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // {1}{S}: Snow creatures you control get +1/+1 until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1,
-            Duration.EndOfTurn, filter), new ManaCostsImpl("{1}{S}")));
+            Duration.EndOfTurn, filter), new ManaCostsImpl<>("{1}{S}")));
     }
 
     private DiamondFaerie(final DiamondFaerie card) {

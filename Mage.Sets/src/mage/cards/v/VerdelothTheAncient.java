@@ -39,7 +39,7 @@ public final class VerdelothTheAncient extends CardImpl {
 
     public VerdelothTheAncient(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.TREEFOLK);
 
         this.power = new MageInt(4);
@@ -56,7 +56,7 @@ public final class VerdelothTheAncient extends CardImpl {
         // When Verdeloth the Ancient enters the battlefield, if it was kicked, create X 1/1 green Saproling creature tokens.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(new EntersBattlefieldTriggeredAbility(
                 new CreateTokenEffect(new SaprolingToken(), GetKickerXValue.instance), false
-        ), KickedCondition.instance, "When {this} enters the battlefield, " +
+        ), KickedCondition.ONCE, "When {this} enters the battlefield, " +
                 "if it was kicked, create X 1/1 green Saproling creature tokens."));
     }
 

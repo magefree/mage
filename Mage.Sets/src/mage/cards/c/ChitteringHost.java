@@ -1,27 +1,26 @@
-
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
-import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
+import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardSetInfo;
 import mage.cards.MeldCard;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.constants.SubType;
+import mage.filter.StaticFilters;
+
+import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class ChitteringHost extends MeldCard {
+
     public ChitteringHost(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "");
         this.subtype.add(SubType.ELDRAZI);
@@ -29,21 +28,20 @@ public final class ChitteringHost extends MeldCard {
         this.power = new MageInt(5);
         this.toughness = new MageInt(6);
 
-        this.nightCard = true; // Meld card
-
         // Haste
         this.addAbility(HasteAbility.getInstance());
 
-        // Menace <i>(This creature can't be blocked except by two or more creatures.
+        // Menace
         this.addAbility(new MenaceAbility());
 
         // When Chittering Host enters the battlefield, other creatures you control get +1/+0 and gain menace until end of turn.
-        Effect effect = new BoostControlledEffect(1, 0, Duration.EndOfTurn, true);
-        effect.setText("other creatures you control get +1/+0");
-        Ability ability = new EntersBattlefieldTriggeredAbility(effect, false);
-        effect = new GainAbilityAllEffect(new MenaceAbility(), Duration.EndOfTurn, new FilterControlledCreaturePermanent("other creatures"), true);
-        effect.setText("and gain menace until end of turn");
-        ability.addEffect(effect);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new BoostControlledEffect(
+                1, 0, Duration.EndOfTurn, true
+        ).setText("other creatures you control get +1/+0"), false);
+        ability.addEffect(new GainAbilityControlledEffect(
+                new MenaceAbility(false), Duration.EndOfTurn,
+                StaticFilters.FILTER_PERMANENT_CREATURE, true
+        ).setText("and gain menace until end of turn"));
         this.addAbility(ability);
     }
 

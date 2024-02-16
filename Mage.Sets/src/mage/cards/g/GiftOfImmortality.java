@@ -8,6 +8,7 @@ import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbil
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.ReturnToBattlefieldAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -37,7 +38,7 @@ public final class GiftOfImmortality extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // When enchanted creature dies, return that card to the battlefield under its owner's control.
@@ -57,12 +58,12 @@ public final class GiftOfImmortality extends CardImpl {
 
 class GiftOfImmortalityEffect extends OneShotEffect {
 
-    public GiftOfImmortalityEffect() {
+    GiftOfImmortalityEffect() {
         super(Outcome.Benefit);
         this.staticText = "return that card to the battlefield under its owner's control. Return {this} to the battlefield attached to that creature at the beginning of the next end step";
     }
 
-    public GiftOfImmortalityEffect(final GiftOfImmortalityEffect effect) {
+    private GiftOfImmortalityEffect(final GiftOfImmortalityEffect effect) {
         super(effect);
     }
 
@@ -75,57 +76,25 @@ class GiftOfImmortalityEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent enchantment = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null && enchantment != null && enchantment.getAttachedTo() != null) {
-            Permanent enchanted = (Permanent) game.getLastKnownInformation(enchantment.getAttachedTo(), Zone.BATTLEFIELD);
-            Card card = game.getCard(enchantment.getAttachedTo());
-            if (card != null && enchanted != null && card.getZoneChangeCounter(game) == enchanted.getZoneChangeCounter(game) + 1) {
-                controller.moveCards(card, Zone.BATTLEFIELD, source, game, false, false, true, null);
-                Permanent permanent = game.getPermanent(card.getId());
-                if (permanent != null) {
-                    //create delayed triggered ability
-                    Effect effect = new GiftOfImmortalityReturnEnchantmentEffect();
-                    effect.setTargetPointer(new FixedTarget(permanent, game));
-                    game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect), source);
-                }
-
-            }
-            return true;
+        if (controller == null || enchantment == null || enchantment.getAttachedTo() == null) {
+            return false;
+        }
+        Permanent enchanted = (Permanent) game.getLastKnownInformation(enchantment.getAttachedTo(), Zone.BATTLEFIELD);
+        Card card = game.getCard(enchantment.getAttachedTo());
+        if (card == null || enchanted == null || card.getZoneChangeCounter(game) != enchanted.getZoneChangeCounter(game) + 1) {
+            return false;
         }
 
-        return false;
-    }
-
-}
-
-class GiftOfImmortalityReturnEnchantmentEffect extends OneShotEffect {
-
-    public GiftOfImmortalityReturnEnchantmentEffect() {
-        super(Outcome.PutCardInPlay);
-        staticText = "Return {this} to the battlefield attached to that creature at the beginning of the next end step";
-    }
-
-    public GiftOfImmortalityReturnEnchantmentEffect(final GiftOfImmortalityReturnEnchantmentEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Card aura = game.getCard(source.getSourceId());
-        if (aura != null && game.getState().getZone(aura.getId()) == Zone.GRAVEYARD) {
-            Player controller = game.getPlayer(source.getControllerId());
-            Permanent creature = game.getPermanent(getTargetPointer().getFirst(game, source));
-            if (controller != null && creature != null) {
-                game.getState().setValue("attachTo:" + aura.getId(), creature);
-                controller.moveCards(aura, Zone.BATTLEFIELD, source, game);
-                return creature.addAttachment(aura.getId(), source, game);
-            }
+        controller.moveCards(card, Zone.BATTLEFIELD, source, game, false, false, true, null);
+        Permanent permanent = game.getPermanent(card.getId());
+        if (permanent == null) {
+            return false;
         }
 
-        return false;
-    }
-
-    @Override
-    public GiftOfImmortalityReturnEnchantmentEffect copy() {
-        return new GiftOfImmortalityReturnEnchantmentEffect(this);
+        // Create delayed triggered ability
+        Effect effect = new ReturnToBattlefieldAttachedEffect();
+        effect.setTargetPointer(new FixedTarget(permanent, game));
+        game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect), source);
+        return true;
     }
 }

@@ -23,7 +23,7 @@ public final class LagacLizard extends CardImpl {
         this.toughness = new MageInt(3);
     }
 
-    public LagacLizard (final LagacLizard card) {
+    private LagacLizard(final LagacLizard card) {
         super(card);
     }
 

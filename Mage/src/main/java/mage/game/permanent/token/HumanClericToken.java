@@ -1,18 +1,16 @@
-
-
 package mage.game.permanent.token;
+
+import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.MageInt;
 
 /**
- *
  * @author spjspj
  */
 public final class HumanClericToken extends TokenImpl {
 
     public HumanClericToken() {
-        super("Human Cleric", "1/1 white and black Human Cleric creature token");
+        super("Human Cleric Token", "1/1 white and black Human Cleric creature token");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.HUMAN);
         subtype.add(SubType.CLERIC);
@@ -21,7 +19,8 @@ public final class HumanClericToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
     }
-    public HumanClericToken(final HumanClericToken token) {
+
+    private HumanClericToken(final HumanClericToken token) {
         super(token);
     }
 

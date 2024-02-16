@@ -35,7 +35,7 @@ public final class PravaOfTheSteelLegion extends CardImpl {
     public PravaOfTheSteelLegion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.CAT);
         this.subtype.add(SubType.SOLDIER);
         this.power = new MageInt(1);
@@ -48,7 +48,7 @@ public final class PravaOfTheSteelLegion extends CardImpl {
 
         // {3}{W}: Create a 1/1 white Soldier creature token.
         this.addAbility(new SimpleActivatedAbility(
-                new CreateTokenEffect(new SoldierToken()), new ManaCostsImpl("{3}{W}")
+                new CreateTokenEffect(new SoldierToken()), new ManaCostsImpl<>("{3}{W}")
         ));
 
         // Partner

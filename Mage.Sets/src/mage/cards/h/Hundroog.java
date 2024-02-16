@@ -24,7 +24,7 @@ public final class Hundroog extends CardImpl {
         this.toughness = new MageInt(7);
 
         // Cycling {3}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{3}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{3}")));
     }
 
     private Hundroog(final Hundroog card) {

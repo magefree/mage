@@ -41,12 +41,12 @@ public final class SweepAway extends CardImpl {
 
 class SweepAwayEffect extends OneShotEffect {
 
-    public SweepAwayEffect() {
+    SweepAwayEffect() {
         super(Outcome.Benefit);
         staticText = "Return target creature to its owner's hand. If that creature is attacking, you may put it on top of its owner's library instead";
     }
 
-    public SweepAwayEffect(final SweepAwayEffect effect) {
+    private SweepAwayEffect(final SweepAwayEffect effect) {
         super(effect);
     }
 

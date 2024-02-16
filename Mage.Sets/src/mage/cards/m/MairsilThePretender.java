@@ -33,7 +33,7 @@ public final class MairsilThePretender extends CardImpl {
     public MairsilThePretender(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{B}{R}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(4);
@@ -72,7 +72,7 @@ class MairsilThePretenderExileEffect extends OneShotEffect {
         this.staticText = "you may exile an artifact or creature card from your hand or graveyard and put a cage counter on it.";
     }
 
-    MairsilThePretenderExileEffect(final MairsilThePretenderExileEffect effect) {
+    private MairsilThePretenderExileEffect(final MairsilThePretenderExileEffect effect) {
         super(effect);
     }
 
@@ -93,18 +93,22 @@ class MairsilThePretenderExileEffect extends OneShotEffect {
         if (controller.chooseUse(Outcome.Detriment, "Exile a card from your hand? (No = from graveyard)", source, game)) {
             // from hand
             target = new TargetCardInHand(0, 1, filter);
-            controller.choose(outcome, target, source.getSourceId(), game);
+            controller.choose(outcome, target, source, game);
         } else {
             // from graveyard
             target = new TargetCardInYourGraveyard(0, 1, filter);
-            target.choose(outcome, source.getControllerId(), source.getSourceId(), game);
+            target.choose(outcome, source.getControllerId(), source.getSourceId(), source, game);
         }
 
         Card card = controller.getHand().get(target.getFirstTarget(), game);
         if (card != null) {
-            CardUtil.moveCardWithCounter(game, source, controller, card, Zone.EXILED, CounterType.CAGE.createInstance());
+            return CardUtil.moveCardWithCounter(game, source, controller, card, Zone.EXILED, CounterType.CAGE.createInstance());
         }
-        return true;
+        card = controller.getGraveyard().get(target.getFirstTarget(), game);
+        if (card != null) {
+            return CardUtil.moveCardWithCounter(game, source, controller, card, Zone.EXILED, CounterType.CAGE.createInstance());
+        }
+        return false;
     }
 }
 
@@ -121,7 +125,7 @@ class MairsilThePretenderGainAbilitiesEffect extends ContinuousEffectImpl {
         staticText = "{this} has all activated abilities of all cards you own in exile with cage counters on them. You may activate each of those abilities only once each turn";
     }
 
-    public MairsilThePretenderGainAbilitiesEffect(final MairsilThePretenderGainAbilitiesEffect effect) {
+    private MairsilThePretenderGainAbilitiesEffect(final MairsilThePretenderGainAbilitiesEffect effect) {
         super(effect);
     }
 
@@ -137,7 +141,7 @@ class MairsilThePretenderGainAbilitiesEffect extends ContinuousEffectImpl {
                     if (ability instanceof ActivatedAbility) {
                         ActivatedAbility copyAbility = (ActivatedAbility) ability.copy();
                         copyAbility.setMaxActivationsPerTurn(1);
-                        perm.addAbility(copyAbility, source.getSourceId(), game);
+                        perm.addAbility(copyAbility, source.getSourceId(), game, true);
                     }
                 }
             }

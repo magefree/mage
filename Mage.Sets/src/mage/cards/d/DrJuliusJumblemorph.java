@@ -27,7 +27,7 @@ public final class DrJuliusJumblemorph extends CardImpl {
 
     public DrJuliusJumblemorph(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{W}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

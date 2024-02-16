@@ -1,18 +1,16 @@
-
-
 package mage.game.permanent.token;
+
+import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.MageInt;
 
 /**
- *
  * @author spjspj
  */
 public final class TreefolkShamanToken extends TokenImpl {
 
     public TreefolkShamanToken() {
-        super("Treefolk Shaman", "2/5 green Treefolk Shaman creature token");
+        super("Treefolk Shaman Token", "2/5 green Treefolk Shaman creature token");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add(SubType.TREEFOLK);
@@ -21,7 +19,7 @@ public final class TreefolkShamanToken extends TokenImpl {
         toughness = new MageInt(5);
     }
 
-    public TreefolkShamanToken(final TreefolkShamanToken token) {
+    private TreefolkShamanToken(final TreefolkShamanToken token) {
         super(token);
     }
 

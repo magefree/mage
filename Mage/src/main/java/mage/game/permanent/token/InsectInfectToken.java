@@ -11,7 +11,7 @@ import mage.constants.SubType;
 public final class InsectInfectToken extends TokenImpl {
 
     public InsectInfectToken() {
-        super("Phyrexian Insect", "1/1 green Phyrexian Insect creature token with infect");
+        super("Phyrexian Insect Token", "1/1 green Phyrexian Insect creature token with infect");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add(SubType.PHYREXIAN);
@@ -19,10 +19,9 @@ public final class InsectInfectToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
         addAbility(InfectAbility.getInstance());
-        setOriginalExpansionSetCode("SOM");
     }
 
-    public InsectInfectToken(final InsectInfectToken token) {
+    private InsectInfectToken(final InsectInfectToken token) {
         super(token);
     }
 

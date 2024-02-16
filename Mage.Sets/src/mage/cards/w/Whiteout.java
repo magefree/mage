@@ -39,7 +39,7 @@ public final class Whiteout extends CardImpl {
         this.getSpellAbility().addEffect(effect);
 
         // Sacrifice a snow land: Return Whiteout from your graveyard to your hand.
-        this.addAbility(new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnToHandSourceEffect(), new SacrificeTargetCost(new TargetControlledPermanent(filter))));
+        this.addAbility(new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnToHandSourceEffect(), new SacrificeTargetCost(filter)));
     }
 
     private Whiteout(final Whiteout card) {

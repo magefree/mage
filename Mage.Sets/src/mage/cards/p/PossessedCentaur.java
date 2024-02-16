@@ -58,7 +58,7 @@ public final class PossessedCentaur extends CardImpl {
             new CardsInControllerGraveyardCondition(7), ", is black");
         ability.addEffect(effect);
 
-        Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{2}{B}"));
+        Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl<>("{2}{B}"));
         gainedAbility.addCost(new TapSourceCost());
         gainedAbility.addTarget(new TargetCreaturePermanent(filter));
         effect = new ConditionalContinuousEffect(new GainAbilitySourceEffect(gainedAbility),

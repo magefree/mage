@@ -23,7 +23,7 @@ public final class PilferingHawk extends CardImpl {
     public PilferingHawk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
 
-        this.addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
         this.subtype.add(SubType.BIRD);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
@@ -33,7 +33,7 @@ public final class PilferingHawk extends CardImpl {
 
         // {S}, {T}: Draw a card, then discard a card.
         Ability ability = new SimpleActivatedAbility(
-                new DrawDiscardControllerEffect(1, 1), new ManaCostsImpl("{S}")
+                new DrawDiscardControllerEffect(1, 1), new ManaCostsImpl<>("{S}")
         );
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

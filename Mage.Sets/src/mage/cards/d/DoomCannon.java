@@ -37,7 +37,7 @@ public final class DoomCannon extends CardImpl {
         // {3}, {T}, Sacrifice a creature of the chosen type: Doom Cannon deals 3 damage to any target.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(3), new GenericManaCost(3));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(new DoomCannonFilter())));
+        ability.addCost(new SacrificeTargetCost(new DoomCannonFilter()));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }
@@ -58,7 +58,7 @@ class DoomCannonFilter extends FilterControlledCreaturePermanent {
         super("a creature of the chosen type");
     }
 
-    public DoomCannonFilter(final DoomCannonFilter filter) {
+    private DoomCannonFilter(final DoomCannonFilter filter) {
         super(filter);
     }
 
@@ -68,9 +68,9 @@ class DoomCannonFilter extends FilterControlledCreaturePermanent {
     }
 
     @Override
-    public boolean match(Permanent permanent, UUID sourceId, UUID playerId, Game game) {
-        if (super.match(permanent, sourceId, playerId, game)) {
-            SubType subType = ChooseCreatureTypeEffect.getChosenCreatureType(sourceId, game);
+    public boolean match(Permanent permanent, UUID playerId, Ability source, Game game) {
+        if (super.match(permanent, playerId, source, game)) {
+            SubType subType = ChooseCreatureTypeEffect.getChosenCreatureType(source.getSourceId(), game);
             if (subType != null && permanent.hasSubtype(subType, game)) {
                 return true;
             }

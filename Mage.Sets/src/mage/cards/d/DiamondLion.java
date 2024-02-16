@@ -59,7 +59,7 @@ class DiamondLionAbility extends ActivatedManaAbilityImpl {
 
     }
 
-    public DiamondLionAbility(final DiamondLionAbility ability) {
+    private DiamondLionAbility(final DiamondLionAbility ability) {
         super(ability);
     }
 

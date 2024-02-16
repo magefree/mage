@@ -6,13 +6,12 @@ import mage.constants.SubType;
 import mage.MageInt;
 
 /**
- *
  * @author spjspj
  */
 public final class InexorableBlobOozeToken extends TokenImpl {
 
     public InexorableBlobOozeToken() {
-        super("Ooze", "3/3 green Ooze creature token");
+        super("Ooze Token", "3/3 green Ooze creature token");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.OOZE);
         color.setGreen(true);
@@ -20,7 +19,7 @@ public final class InexorableBlobOozeToken extends TokenImpl {
         toughness = new MageInt(3);
     }
 
-    public InexorableBlobOozeToken(final InexorableBlobOozeToken token) {
+    private InexorableBlobOozeToken(final InexorableBlobOozeToken token) {
         super(token);
     }
 

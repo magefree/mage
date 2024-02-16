@@ -48,12 +48,12 @@ public final class ShieldsOfVelisVel extends CardImpl {
 
 class ShieldsOfVelisVelGainEffect extends ContinuousEffectImpl {
 
-    public ShieldsOfVelisVelGainEffect() {
+    ShieldsOfVelisVelGainEffect() {
         super(Duration.EndOfTurn, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Neutral);
         staticText = "and gain all creature types until end of turn";
     }
 
-    public ShieldsOfVelisVelGainEffect(final ShieldsOfVelisVelGainEffect effect) {
+    private ShieldsOfVelisVelGainEffect(final ShieldsOfVelisVelGainEffect effect) {
         super(effect);
     }
 
@@ -89,12 +89,12 @@ class ShieldsOfVelisVelGainEffect extends ContinuousEffectImpl {
 
 class ShieldsOfVelisVelBoostEffect extends ContinuousEffectImpl {
 
-    public ShieldsOfVelisVelBoostEffect() {
+    ShieldsOfVelisVelBoostEffect() {
         super(Duration.EndOfTurn, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
         staticText = "Creatures target player controls get +0/+1";
     }
 
-    public ShieldsOfVelisVelBoostEffect(final ShieldsOfVelisVelBoostEffect effect) {
+    private ShieldsOfVelisVelBoostEffect(final ShieldsOfVelisVelBoostEffect effect) {
         super(effect);
     }
 

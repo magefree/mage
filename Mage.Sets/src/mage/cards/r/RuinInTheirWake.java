@@ -56,7 +56,7 @@ class RuinInTheirWakeEffect extends OneShotEffect {
         this.staticText = "Search your library for a basic land card and reveal it. You may put that card onto the battlefield tapped if you control a land named Wastes. Otherwise, put that card into your hand. Then shuffle";
     }
 
-    public RuinInTheirWakeEffect(final RuinInTheirWakeEffect effect) {
+    private RuinInTheirWakeEffect(final RuinInTheirWakeEffect effect) {
         super(effect);
     }
 

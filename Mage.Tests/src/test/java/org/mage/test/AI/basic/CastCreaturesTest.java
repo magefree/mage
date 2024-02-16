@@ -196,7 +196,6 @@ public class CastCreaturesTest extends CardTestPlayerBaseAI {
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerB, "Ammit Eternal", 1);
 

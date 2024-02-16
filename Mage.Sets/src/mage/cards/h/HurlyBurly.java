@@ -30,8 +30,7 @@ public final class HurlyBurly extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}");
 
         this.getSpellAbility().addEffect(new DamageAllEffect(1, filterWithFlying));
-        Mode mode = new Mode();
-        mode.addEffect(new DamageAllEffect(1, filterWithoutFlying));
+        Mode mode = new Mode(new DamageAllEffect(1, filterWithoutFlying));
         this.getSpellAbility().addMode(mode);
     }
 

@@ -7,6 +7,7 @@ import mage.game.draft.Draft;
 import mage.game.match.MatchOptions;
 import mage.game.tournament.MultiplayerRound;
 import mage.game.tournament.TournamentPairing;
+import org.apache.log4j.Logger;
 
 import java.io.Serializable;
 import java.util.EventObject;
@@ -17,10 +18,14 @@ import java.util.UUID;
  */
 public class TableEvent extends EventObject implements ExternalEvent, Serializable {
 
+    private static final Logger logger = Logger.getLogger(TableEvent.class);
+
     public enum EventType {
         UPDATE, INFO, STATUS, START_DRAFT, START_MATCH, SIDEBOARD, CONSTRUCT, SUBMIT_DECK, END, END_GAME_INFO, ERROR,
         INIT_TIMER, RESUME_TIMER, PAUSE_TIMER, CHECK_STATE_PLAYERS, START_MULTIPLAYER_MATCH
     }
+
+
 
     private Game game;
     private Draft draft;

@@ -23,7 +23,7 @@ public final class MarbleChalice extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(1), new TapSourceCost()));
     }
 
-    public MarbleChalice (final MarbleChalice card) {
+    private MarbleChalice(final MarbleChalice card) {
         super(card);
     }
 

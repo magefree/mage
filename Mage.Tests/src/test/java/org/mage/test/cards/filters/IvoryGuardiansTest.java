@@ -34,7 +34,7 @@ public class IvoryGuardiansTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertPowerToughness(playerA, "Goblin", 1, 1);
+        assertPowerToughness(playerA, "Goblin Token", 1, 1);
         assertPowerToughness(playerB, "Ivory Guardians", 3, 3);
     }
 

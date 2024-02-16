@@ -30,7 +30,7 @@ public final class SatyrPiper extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {3}{G}: Target creature must be blocked this turn if able.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MustBeBlockedByAtLeastOneTargetEffect(Duration.EndOfTurn), new ManaCostsImpl("{3}{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MustBeBlockedByAtLeastOneTargetEffect(Duration.EndOfTurn), new ManaCostsImpl<>("{3}{G}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 

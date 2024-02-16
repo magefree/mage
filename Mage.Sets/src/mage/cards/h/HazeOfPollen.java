@@ -27,7 +27,7 @@ public final class HazeOfPollen extends CardImpl {
         getSpellAbility().addEffect(effect);
 
         // Cycling {3}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{3}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{3}")));
 
     }
 

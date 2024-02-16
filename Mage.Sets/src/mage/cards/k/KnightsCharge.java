@@ -41,7 +41,7 @@ public final class KnightsCharge extends CardImpl {
         this.addAbility(ability);
 
         // {6}{W}{B}, Sacrifice Knights' Charge: Return all Knight creature cards from your graveyard to the battlefield.
-        ability = new SimpleActivatedAbility(new KnightsChargeEffect(), new ManaCostsImpl("{6}{W}{B}"));
+        ability = new SimpleActivatedAbility(new KnightsChargeEffect(), new ManaCostsImpl<>("{6}{W}{B}"));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }

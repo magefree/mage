@@ -9,6 +9,7 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.AbilityPredicate;
 
 import java.util.UUID;
 
@@ -17,17 +18,21 @@ import java.util.UUID;
  */
 public final class InspiringStatuary extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("nonartifact spells");
+    private static final FilterCard filter = new FilterCard("nonartifact spells you cast");
 
     static {
         filter.add(Predicates.not(CardType.ARTIFACT.getPredicate()));
+        filter.add(Predicates.not(CardType.LAND.getPredicate()));
+        filter.add(Predicates.not(new AbilityPredicate(ImproviseAbility.class))); // So there are not redundant copies being added to each card
     }
 
     public InspiringStatuary(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // Non-artifact spells you cast have improvise.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledSpellsEffect(new ImproviseAbility(), filter)));
+        ImproviseAbility improviseAbility = new ImproviseAbility();
+        improviseAbility.setRuleAtTheTop(false);
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledSpellsEffect(improviseAbility, filter)));
 
     }
 

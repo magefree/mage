@@ -33,7 +33,7 @@ public final class CrawlFromTheCellar extends CardImpl {
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect());
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
 
-        this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance()).setTargetPointer(SecondTargetPointer.getInstance()));
+        this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance()).setTargetPointer(new SecondTargetPointer()));
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(0, 1, filter, false));
 
         // Flashback {3}{B}

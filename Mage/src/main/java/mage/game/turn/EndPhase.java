@@ -8,7 +8,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent.EventType;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class EndPhase extends Phase {
@@ -22,7 +21,7 @@ public class EndPhase extends Phase {
         this.steps.add(new CleanupStep());
     }
 
-    public EndPhase(final EndPhase phase) {
+    protected EndPhase(final EndPhase phase) {
         super(phase);
     }
 
@@ -42,8 +41,7 @@ public class EndPhase extends Phase {
                 playStep(game);
             }
             currentStep.endStep(game, activePlayerId);
-        }
-        else {
+        } else {
             super.playStep(game);
         }
     }

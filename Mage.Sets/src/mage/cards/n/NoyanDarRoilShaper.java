@@ -43,7 +43,7 @@ public final class NoyanDarRoilShaper extends CardImpl {
 
     public NoyanDarRoilShaper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{U}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.MERFOLK);
         this.subtype.add(SubType.ALLY);
         this.power = new MageInt(4);
@@ -68,12 +68,12 @@ public final class NoyanDarRoilShaper extends CardImpl {
 
 class NoyanDarEffect extends OneShotEffect {
 
-    public NoyanDarEffect() {
+    NoyanDarEffect() {
         super(Outcome.BoostCreature);
         this.staticText = "put three +1/+1 counters on target land you control. If you do, that land becomes a 0/0 Elemental creature with haste that's still a land.";
     }
 
-    public NoyanDarEffect(final NoyanDarEffect effect) {
+    private NoyanDarEffect(final NoyanDarEffect effect) {
         super(effect);
     }
 
@@ -114,7 +114,7 @@ class AwakenElementalToken extends TokenImpl {
         this.addAbility(HasteAbility.getInstance());
     }
 
-    public AwakenElementalToken(final AwakenElementalToken token) {
+    private AwakenElementalToken(final AwakenElementalToken token) {
         super(token);
     }
 

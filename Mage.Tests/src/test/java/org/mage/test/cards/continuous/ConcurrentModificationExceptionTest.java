@@ -46,6 +46,5 @@ public class ConcurrentModificationExceptionTest extends CardTestPlayerBaseWithA
         //setStrictChooseMode(true); // need AI while cards adding
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
     }
 }

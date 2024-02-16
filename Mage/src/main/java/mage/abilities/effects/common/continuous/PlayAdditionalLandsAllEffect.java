@@ -35,7 +35,7 @@ public class PlayAdditionalLandsAllEffect extends ContinuousEffectImpl {
         }
     }
 
-    public PlayAdditionalLandsAllEffect(final PlayAdditionalLandsAllEffect effect) {
+    protected PlayAdditionalLandsAllEffect(final PlayAdditionalLandsAllEffect effect) {
         super(effect);
         this.numExtraLands = effect.numExtraLands;
         this.staticText = effect.staticText;

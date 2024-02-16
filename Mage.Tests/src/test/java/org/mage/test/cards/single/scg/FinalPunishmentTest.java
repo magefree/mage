@@ -11,10 +11,13 @@ public class FinalPunishmentTest extends CardTestPlayerBase {
     final String shock = "Shock";
     final String bob = "Dark Confidant";
 
+    /**
+     * Ensure it works for damage from spells.
+     */
     @Test
     public void lifelossBecauseOfDirectDamage() {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 5);
-        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
         addCard(Zone.HAND, playerA, finalPunishment);
         addCard(Zone.HAND, playerA, shock);
 
@@ -24,10 +27,11 @@ public class FinalPunishmentTest extends CardTestPlayerBase {
         execute();
 
         assertLife(playerB, 16);
-
-
     }
 
+    /**
+     * Ensure it works for damage from combat.
+     */
     @Test
     public void lifelossBecauseOfCombat() {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 5);
@@ -40,21 +44,23 @@ public class FinalPunishmentTest extends CardTestPlayerBase {
         execute();
 
         assertLife(playerB, 16);
-
     }
 
+    /**
+     * Ensure it does not count damage that occured in the previous turns.
+     */
     @Test
     public void nolifelossInNextTurn() {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 5);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
         addCard(Zone.HAND, playerA, finalPunishment);
-        addCard(Zone.BATTLEFIELD, playerA, bob);
+        addCard(Zone.HAND, playerA, shock);
 
-        attack(1, playerA, bob, playerB);
-        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerA, finalPunishment, playerB);
-        setStopAt(2, PhaseStep.END_TURN);
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerA, shock, playerB);
+        castSpell(3, PhaseStep.POSTCOMBAT_MAIN, playerA, finalPunishment, playerB);
+        setStopAt(3, PhaseStep.END_TURN);
         execute();
 
         assertLife(playerB, 18);
-
     }
 }

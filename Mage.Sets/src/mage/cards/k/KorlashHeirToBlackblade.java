@@ -10,7 +10,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.RegenerateSourceEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -35,7 +35,7 @@ public final class KorlashHeirToBlackblade extends CardImpl {
 
     public KorlashHeirToBlackblade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ZOMBIE);
         this.subtype.add(SubType.WARRIOR);
 
@@ -43,15 +43,15 @@ public final class KorlashHeirToBlackblade extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Korlash, Heir to Blackblade's power and toughness are each equal to the number of Swamps you control.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filterPermanent), Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filterPermanent))));
 
         // {1}{B}: Regenerate Korlash.
         Effect effect = new RegenerateSourceEffect();
         effect.setText("Regenerate Korlash.");
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{1}{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{1}{B}")));
         
         // Grandeur - Discard another card named Korlash, Heir to Blackblade: Search your library for up to two Swamp cards, put them onto the battlefield tapped, then shuffle your library.
-        effect = new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, 2, filterCard), true, true);
+        effect = new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, 2, filterCard), true);
         effect.setText("Search your library for up to two Swamp cards, put them onto the battlefield tapped, then shuffle.");
         this.addAbility(new GrandeurAbility(effect, "Korlash, Heir to Blackblade"));
     }

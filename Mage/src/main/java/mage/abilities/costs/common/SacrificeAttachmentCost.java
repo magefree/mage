@@ -2,6 +2,7 @@ package mage.abilities.costs.common;
 
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
+import mage.abilities.costs.SacrificeCost;
 import mage.abilities.costs.UseAttachedCost;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -11,13 +12,13 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public class SacrificeAttachmentCost extends UseAttachedCost {
+public class SacrificeAttachmentCost extends UseAttachedCost implements SacrificeCost {
 
     public SacrificeAttachmentCost() {
         super();
     }
 
-    public SacrificeAttachmentCost(final SacrificeAttachmentCost cost) {
+    protected SacrificeAttachmentCost(final SacrificeAttachmentCost cost) {
         super(cost);
     }
 
@@ -44,6 +45,14 @@ public class SacrificeAttachmentCost extends UseAttachedCost {
         }
 
         return paid;
+    }
+
+    @Override
+    public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
+        if (!super.canPay(ability, source, controllerId, game)) {
+            return false;
+        }
+        return game.getPermanent(source.getSourceId()).canBeSacrificed();
     }
 
     @Override

@@ -29,8 +29,8 @@ public final class SylvokLifestaff extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(1, 0)));
         // Whenever equipped creature dies, you gain 3 life.
         this.addAbility(new DiesAttachedTriggeredAbility(new GainLifeEffect(3), "equipped creature"));
-        // // Equip {1}
-        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(1)));
+        // Equip {1}
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(1), false));
     }
 
     private SylvokLifestaff(final SylvokLifestaff card) {

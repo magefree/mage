@@ -17,7 +17,7 @@ public class CopyTokenEffect extends ContinuousEffectImpl {
         staticText = "You may have {this} enter the battlefield as a copy of " + token.getDescription() + " on the battlefield";
     }
 
-    public CopyTokenEffect(final CopyTokenEffect effect) {
+    protected CopyTokenEffect(final CopyTokenEffect effect) {
         super(effect);
         this.token = effect.token.copy();
     }
@@ -33,17 +33,17 @@ public class CopyTokenEffect extends ContinuousEffectImpl {
         }
         permanent.removeAllSubTypes(game);
         permanent.copySubTypesFrom(game, token);
-        permanent.getSuperType().clear();
-        for (SuperType type : token.getSuperType()) {
-            permanent.addSuperType(type);
+        permanent.removeAllSuperTypes(game);
+        for (SuperType type : token.getSuperType(game)) {
+            permanent.addSuperType(game, type);
         }
         permanent.getAbilities().clear();
         for (Ability ability : token.getAbilities()) {
-            permanent.addAbility(ability, source.getSourceId(), game);
+            permanent.addAbility(ability, source.getSourceId(), game, true);
         }
-        permanent.getPower().setValue(token.getPower().getValue());
-        permanent.getToughness().setValue(token.getToughness().getValue());
-        //permanent.getLoyalty().setValue(card.getLoyalty().getValue());
+        permanent.getPower().setModifiedBaseValue(token.getPower().getModifiedBaseValue());
+        permanent.getToughness().setModifiedBaseValue(token.getToughness().getModifiedBaseValue());
+        //permanent.getLoyalty().setBoostedValue(card.getLoyalty().getValue());
 
         return true;
 

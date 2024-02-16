@@ -29,7 +29,7 @@ public final class LazavDimirMastermind extends CardImpl {
 
     public LazavDimirMastermind(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}{U}{B}{B}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SHAPESHIFTER);
 
         this.power = new MageInt(3);
@@ -62,7 +62,7 @@ class LazavDimirMastermindEffect extends OneShotEffect {
         staticText = "you may have {this} become a copy of that card, except its name is Lazav, Dimir Mastermind, it's legendary in addition to its other types, and it has hexproof and this ability";
     }
 
-    LazavDimirMastermindEffect(final LazavDimirMastermindEffect effect) {
+    private LazavDimirMastermindEffect(final LazavDimirMastermindEffect effect) {
         super(effect);
     }
 

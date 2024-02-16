@@ -45,9 +45,10 @@ class TotalWarTriggeredAbility extends TriggeredAbilityImpl {
 
     public TotalWarTriggeredAbility() {
         super(Zone.BATTLEFIELD, new TotalWarDestroyEffect());
+        setTriggerPhrase("Whenever a player attacks with one or more creatures, ");
     }
 
-    public TotalWarTriggeredAbility(final TotalWarTriggeredAbility ability) {
+    private TotalWarTriggeredAbility(final TotalWarTriggeredAbility ability) {
         super(ability);
     }
 
@@ -65,11 +66,6 @@ class TotalWarTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         return !game.getCombat().getAttackers().isEmpty();
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a player attacks with one or more creatures, " ;
-    }
 }
 
 class TotalWarDestroyEffect extends OneShotEffect {
@@ -79,7 +75,7 @@ class TotalWarDestroyEffect extends OneShotEffect {
         this.staticText = "destroy all untapped non-Wall creatures that player controls that didn't attack, except for creatures the player hasn't controlled continuously since the beginning of the turn";
     }
 
-    TotalWarDestroyEffect(final TotalWarDestroyEffect effect) {
+    private TotalWarDestroyEffect(final TotalWarDestroyEffect effect) {
         super(effect);
     }
 
@@ -91,35 +87,36 @@ class TotalWarDestroyEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player activePlayer = game.getPlayer(game.getActivePlayerId());
-        if (activePlayer != null) {
-            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(activePlayer.getId())) {
-                // Noncreature cards are safe.
-                if (!permanent.isCreature(game)) {
-                    continue;
-                }
-                // Tapped cards are safe.
-                if (permanent.isTapped()) {
-                    continue;
-                }
-                // Walls are safe.
-                if (permanent.hasSubtype(SubType.WALL, game)) {
-                    continue;
-                }
-                // Creatures that attacked are safe.
-                AttackedOrBlockedThisCombatWatcher watcher = game.getState().getWatcher(AttackedOrBlockedThisCombatWatcher.class);
-                if (watcher != null 
-                    && watcher.getAttackedThisTurnCreatures().contains(new MageObjectReference(permanent, game))) {
-                    continue;
-                }
-                // Creatures that weren't controlled since the beginning of turn are safe.
-                if (!permanent.wasControlledFromStartOfControllerTurn()) {
-                    continue;
-                }
-                // Destroy the rest.
-                permanent.destroy(source, game, false);
-            }
-            return true;
+        if (activePlayer == null) {
+            return false;
         }
-        return false;
+
+        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(activePlayer.getId())) {
+            // Noncreature cards are safe.
+            if (!permanent.isCreature(game)) {
+                continue;
+            }
+            // Tapped cards are safe.
+            if (permanent.isTapped()) {
+                continue;
+            }
+            // Walls are safe.
+            if (permanent.hasSubtype(SubType.WALL, game)) {
+                continue;
+            }
+            // Creatures that attacked are safe.
+            AttackedOrBlockedThisCombatWatcher watcher = game.getState().getWatcher(AttackedOrBlockedThisCombatWatcher.class);
+            if (watcher != null
+                && watcher.getAttackedThisTurnCreatures().contains(new MageObjectReference(permanent, game))) {
+                continue;
+            }
+            // Creatures that weren't controlled since the beginning of turn are safe.
+            if (!permanent.wasControlledFromStartOfControllerTurn()) {
+                continue;
+            }
+            // Destroy the rest.
+            permanent.destroy(source, game, false);
+        }
+        return true;
     }
 }

@@ -207,6 +207,7 @@ public class ConstellationTest extends CardTestPlayerBase {
         // give dax a new type (on next turn) -- effects dependacy
         if (castVampireDifferentWay) {
             castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Archetype of Courage"); // make dax to creature
+            waitStackResolved(3, PhaseStep.PRECOMBAT_MAIN);
             castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Mephidross Vampire"); // give vampire to creatures
         } else {
             // Make sure not white mana is used here to cast the vampire
@@ -219,6 +220,7 @@ public class ConstellationTest extends CardTestPlayerBase {
             activateManaAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {B}");
             checkManaPool("after B mana", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "B", 6);
             castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Mephidross Vampire"); // give vampire to creatures
+            waitStackResolved(3, PhaseStep.PRECOMBAT_MAIN);
             castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Archetype of Courage"); // make dax to creature
         }
 
@@ -231,8 +233,12 @@ public class ConstellationTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void test_DaxosGotBoostAndNewTypeByDependencyEffects() {
+    public void test_DaxosGotBoostAndNewTypeByDependencyEffects_RegularWay() {
         playDaxosAndVampire(false);
+    }
+
+    @Test
+    public void test_DaxosGotBoostAndNewTypeByDependencyEffects_DifferentWay() {
         playDaxosAndVampire(true);
     }
 }

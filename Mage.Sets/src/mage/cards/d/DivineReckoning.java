@@ -14,7 +14,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TimingRule;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
@@ -35,7 +34,7 @@ public final class DivineReckoning extends CardImpl {
         this.getSpellAbility().addEffect(new DivineReckoningEffect());
 
         // Flashback {5}{W}{W}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{5}{W}{W}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{5}{W}{W}")));
     }
 
     private DivineReckoning(final DivineReckoning card) {
@@ -50,12 +49,12 @@ public final class DivineReckoning extends CardImpl {
 
 class DivineReckoningEffect extends OneShotEffect {
 
-    public DivineReckoningEffect() {
+    DivineReckoningEffect() {
         super(Outcome.DestroyPermanent);
         staticText = "Each player chooses a creature they control. Destroy the rest";
     }
 
-    public DivineReckoningEffect(DivineReckoningEffect effect) {
+    private DivineReckoningEffect(final DivineReckoningEffect effect) {
         super(effect);
     }
 
@@ -68,8 +67,8 @@ class DivineReckoningEffect extends OneShotEffect {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     Target target = new TargetControlledPermanent(1, 1, new FilterControlledCreaturePermanent(), true);
-                    if (target.canChoose(source.getSourceId(), player.getId(), game)) {
-                        while (player.canRespond() && !target.isChosen() && target.canChoose(source.getSourceId(), player.getId(), game)) {
+                    if (target.canChoose(player.getId(), source, game)) {
+                        while (player.canRespond() && !target.isChosen() && target.canChoose(player.getId(), source, game)) {
                             player.chooseTarget(Outcome.Benefit, target, source, game);
                         }
                         Permanent permanent = game.getPermanent(target.getFirstTarget());
@@ -80,7 +79,7 @@ class DivineReckoningEffect extends OneShotEffect {
                 }
             }
 
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURES, source.getControllerId(), source.getSourceId(), game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURES, source.getControllerId(), source, game)) {
                 if (!chosen.contains(permanent)) {
                     permanent.destroy(source, game, false);
                 }

@@ -31,7 +31,6 @@ public class GilanraCallerOfWirewoodTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Angel of Deliverance", 1);
         assertHandCount(playerA, 1); // draw from trigger
@@ -57,7 +56,6 @@ public class GilanraCallerOfWirewoodTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Angel of Deliverance", 1);
         assertHandCount(playerA, 1); // draw from trigger
@@ -87,7 +85,6 @@ public class GilanraCallerOfWirewoodTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Angel of Deliverance", 1);
         assertHandCount(playerA, 1 + 1); // draw from turn 3 and draw from trigger
@@ -124,7 +121,6 @@ public class GilanraCallerOfWirewoodTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Angel of Deliverance", 1);
         assertHandCount(playerA, 2); // 2 draws from 2 triggers

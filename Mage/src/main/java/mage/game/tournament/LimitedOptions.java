@@ -17,6 +17,7 @@ public class LimitedOptions implements Serializable {
     protected DraftCube draftCube;
     protected int numberBoosters;
     protected boolean isRandom;
+    protected boolean isRemixed;
     protected boolean isRichMan;
     protected Deck cubeFromDeck;
 
@@ -93,6 +94,14 @@ public class LimitedOptions implements Serializable {
 
     public void setIsRandom(boolean isRandom) {
         this.isRandom = isRandom;
+    }
+
+    public boolean getIsRemixed() {
+        return isRemixed;
+    }
+
+    public void setIsRemixed(boolean isRemixed) {
+        this.isRemixed = isRemixed;
     }
 
     public boolean getIsRichMan() {

@@ -7,8 +7,7 @@ import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
-import mage.constants.Zone;
-import mage.constants.ZoneDetail;
+import mage.constants.PutCards;
 import mage.game.Game;
 import mage.game.stack.StackObject;
 import mage.players.Player;
@@ -43,7 +42,7 @@ public class CounterUnlessPaysEffect extends OneShotEffect {
         this.exile = exile;
     }
 
-    public CounterUnlessPaysEffect(final CounterUnlessPaysEffect effect) {
+    protected CounterUnlessPaysEffect(final CounterUnlessPaysEffect effect) {
         super(effect);
         if (effect.cost != null) {
             this.cost = effect.cost.copy();
@@ -85,14 +84,11 @@ public class CounterUnlessPaysEffect extends OneShotEffect {
         message += costValueMessage + '?';
 
         costToPay.clearPaid();
-        if (!(player.chooseUse(Outcome.Benefit, message, source, game)
+        if (!(costToPay.canPay(source, source, player.getId(), game)
+                && player.chooseUse(Outcome.Benefit, message, source, game)
                 && costToPay.pay(source, game, source, spell.getControllerId(), false, null))) {
             game.informPlayers(player.getLogName() + " chooses not to pay " + costValueMessage + " to prevent the counter effect");
-            if (exile) {
-                game.getStack().counter(spell.getId(), source, game, Zone.EXILED, false, ZoneDetail.NONE);
-            } else {
-                return game.getStack().counter(spell.getId(), source, game);
-            }
+            game.getStack().counter(spell.getId(), source, game, exile ? PutCards.EXILED : PutCards.GRAVEYARD);
         }
         game.informPlayers(player.getLogName() + " chooses to pay " + costValueMessage + " to prevent the counter effect");
         return true;
@@ -103,13 +99,8 @@ public class CounterUnlessPaysEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-
-        StringBuilder sb = new StringBuilder();
-        if (mode.getTargets().isEmpty()) {
-            sb.append("counter it");
-        } else {
-            sb.append("counter target ").append(mode.getTargets().get(0).getTargetName());
-        }
+        StringBuilder sb = new StringBuilder("counter ");
+        sb.append(getTargetPointer().describeTargets(mode.getTargets(), "it"));
         sb.append(" unless its controller pays ");
         if (cost != null) {
             sb.append(cost.getText());
@@ -121,9 +112,8 @@ public class CounterUnlessPaysEffect extends OneShotEffect {
             sb.append(genericMana.getMessage());
         }
         if (exile) {
-            sb.append(". If that spell is countered this way, exile it instead of putting it into its owner's graveyard.");
+            sb.append(". If that spell is countered this way, exile it instead of putting it into its owner's graveyard");
         }
         return sb.toString();
     }
-
 }

@@ -33,7 +33,7 @@ public final class DawnrayArcher extends CardImpl {
         // Exalted
         this.addAbility(new ExaltedAbility());
         // {W}, {tap}: Dawnray Archer deals 1 damage to target attacking or blocking creature.
-       Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl("{W}"));
+       Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl<>("{W}"));
        ability.addTarget(new TargetAttackingOrBlockingCreature());
        ability.addCost(new TapSourceCost());
        this.addAbility(ability);

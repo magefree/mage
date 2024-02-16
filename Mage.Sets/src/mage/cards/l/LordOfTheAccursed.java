@@ -42,7 +42,7 @@ public final class LordOfTheAccursed extends CardImpl {
                 new MenaceAbility(),
                 Duration.EndOfTurn,
                 filter, "All Zombies gain menace until end of turn."),
-                new ManaCostsImpl("{1}{B}"));
+                new ManaCostsImpl<>("{1}{B}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

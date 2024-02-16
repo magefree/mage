@@ -59,15 +59,15 @@ public final class Extirpate extends CardImpl {
 
 class ExtirpateEffect extends OneShotEffect {
 
-    public ExtirpateEffect() {
+    ExtirpateEffect() {
         super(Outcome.Exile);
         this.staticText = "Choose target card in a graveyard other than "
                 + "a basic land card. Search its owner's graveyard, hand, "
-                + "and library for any number of cards with the same name "
+                + "and library for all cards with the same name "
                 + "as that card and exile them. Then that player shuffles";
     }
 
-    public ExtirpateEffect(final ExtirpateEffect effect) {
+    private ExtirpateEffect(final ExtirpateEffect effect) {
         super(effect);
     }
 
@@ -79,7 +79,7 @@ class ExtirpateEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         Card chosenCard = game.getCard(getTargetPointer().getFirst(game, source));
         if (chosenCard != null && sourceObject != null && controller != null) {
             Player owner = game.getPlayer(chosenCard.getOwnerId());
@@ -105,7 +105,7 @@ class ExtirpateEffect extends OneShotEffect {
             // search cards in hand
             filterNamedCard.setMessage("card named " + chosenCard.getLogName() + " in the hand of " + owner.getLogName());
             TargetCard targetCardInHand = new TargetCard(0, Integer.MAX_VALUE, Zone.HAND, filterNamedCard);
-            targetCardInHand.setNotTarget(true);
+            targetCardInHand.withNotTarget(true);
             if (controller.chooseTarget(Outcome.Exile, owner.getHand(), targetCardInHand, source, game)) {
                 List<UUID> targets = targetCardInHand.getTargets();
                 for (UUID targetId : targets) {

@@ -42,7 +42,7 @@ public final class Duplicant extends CardImpl {
         // Imprint - When Duplicant enters the battlefield, you may exile target nontoken creature.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DuplicantExileTargetEffect(), true);
         ability.addTarget(new TargetCreaturePermanent(filter));
-        ability.withFlavorWord("Imprint");
+        ability.setAbilityWord(AbilityWord.IMPRINT);
         this.addAbility(ability);
         // As long as the exiled card is a creature card, Duplicant has that card's power, toughness, and creature types. It's still a Shapeshifter.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DuplicantContinuousEffect()));
@@ -60,11 +60,12 @@ public final class Duplicant extends CardImpl {
 
 class DuplicantExileTargetEffect extends OneShotEffect {
 
-    public DuplicantExileTargetEffect() {
+    DuplicantExileTargetEffect() {
         super(Outcome.Exile);
+        this.staticText = "you may exile target nontoken creature";
     }
 
-    public DuplicantExileTargetEffect(final DuplicantExileTargetEffect effect) {
+    private DuplicantExileTargetEffect(final DuplicantExileTargetEffect effect) {
         super(effect);
     }
 
@@ -87,21 +88,16 @@ class DuplicantExileTargetEffect extends OneShotEffect {
 
         return false;
     }
-
-    @Override
-    public String getText(Mode mode) {
-        return "you may exile target nontoken creature";
-    }
 }
 
 class DuplicantContinuousEffect extends ContinuousEffectImpl {
 
-    public DuplicantContinuousEffect() {
+    DuplicantContinuousEffect() {
         super(Duration.WhileOnBattlefield, Outcome.BoostCreature);
         staticText = "As long as a card exiled with {this} is a creature card, {this} has the power, toughness, and creature types of the last creature card exiled with {this}. It's still a Shapeshifter.";
     }
 
-    public DuplicantContinuousEffect(final DuplicantContinuousEffect effect) {
+    private DuplicantContinuousEffect(final DuplicantContinuousEffect effect) {
         super(effect);
     }
 
@@ -133,8 +129,8 @@ class DuplicantContinuousEffect extends ContinuousEffectImpl {
                 break;
             case PTChangingEffects_7:
                 if (sublayer == SubLayer.SetPT_7b) {
-                    permanent.getPower().setValue(card.getPower().getValue());
-                    permanent.getToughness().setValue(card.getToughness().getValue());
+                    permanent.getPower().setModifiedBaseValue(card.getPower().getValue());
+                    permanent.getToughness().setModifiedBaseValue(card.getToughness().getValue());
                 }
         }
         return true;

@@ -28,7 +28,7 @@ public final class TerrainGenerator extends CardImpl {
 
         // {2}, {T}: You may put a basic land card from your hand onto the battlefield tapped.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new PutCardFromHandOntoBattlefieldEffect(StaticFilters.FILTER_CARD_BASIC_LAND_A, false, true), new ManaCostsImpl("{2}"));
+                new PutCardFromHandOntoBattlefieldEffect(StaticFilters.FILTER_CARD_BASIC_LAND_A, false, true), new ManaCostsImpl<>("{2}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

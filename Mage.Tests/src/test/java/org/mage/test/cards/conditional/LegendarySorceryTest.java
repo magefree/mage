@@ -38,7 +38,6 @@ public class LegendarySorceryTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Akroma, Angel of Wrath", 1);
         assertPermanentCount(playerB, "Akroma, Angel of Wrath", 1);
-
     }
 
     @Test
@@ -53,13 +52,11 @@ public class LegendarySorceryTest extends CardTestPlayerBase {
         // Flying, first strike, vigilance, trample, haste, protection from black and from red
         addCard(Zone.BATTLEFIELD, playerB, "Akroma, Angel of Wrath", 1); // Legendary
 
-        // can't cast cause you don't have a legendary creature (only opponent have)
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Urza's Ruinous Blast");
+        // Can't cast cause you don't have a legendary creature (only opponent have)
+        checkPlayableAbility("Can't cast Legendary Sorcery", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Urza's", false);
 
-        //setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        //assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Urza's Ruinous Blast", 0);
 
@@ -92,12 +89,14 @@ public class LegendarySorceryTest extends CardTestPlayerBase {
         // Exile all nonland permanents that aren't legendary.
         addCard(Zone.GRAVEYARD, playerB, "Urza's Ruinous Blast"); // Sorcery Legendary  {4}{W}
 
+        setStrictChooseMode(true);
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Dire Fleet Daredevil");
         addTarget(playerA, "Urza's Ruinous Blast");
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Urza's Ruinous Blast");
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Urza's Ruinous Blast");
 
-        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, PhaseStep.END_TURN);
         execute();
 
         assertExileCount(playerB, "Urza's Ruinous Blast", 1);
@@ -116,6 +115,5 @@ public class LegendarySorceryTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Akroma, Angel of Wrath", 1);
         assertPermanentCount(playerB, "Akroma, Angel of Wrath", 1);
-
     }
 }

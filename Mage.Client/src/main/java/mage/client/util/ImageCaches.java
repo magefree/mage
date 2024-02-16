@@ -11,7 +11,7 @@ import com.google.common.cache.Cache;
  */
 public final class ImageCaches {
 
-    private final static ArrayList<Cache<?, ?>> IMAGE_CACHES;
+    private static final ArrayList<Cache<?, ?>> IMAGE_CACHES;
 
     static {
         IMAGE_CACHES = new ArrayList<>();

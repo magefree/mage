@@ -69,7 +69,7 @@ class BlightedCrossroadsConditionalMana extends ConditionalMana {
 class BlightedCrossroadsManaCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
-        MageObject object = game.getObject(source.getSourceId());
+        MageObject object = game.getObject(source);
         if (object != null) {
             for (Ability ability: object.getAbilities()) {
                 if (ability instanceof DevoidAbility) {

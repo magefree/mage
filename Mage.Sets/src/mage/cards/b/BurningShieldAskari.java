@@ -31,7 +31,7 @@ public final class BurningShieldAskari extends CardImpl {
         // Flanking
         this.addAbility(new FlankingAbility());
         // {R}{R}: Burning Shield Askari gains first strike until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{R}{R}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{R}{R}")));
     }
 
     private BurningShieldAskari(final BurningShieldAskari card) {

@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common.combat;
 
 import mage.abilities.Ability;
@@ -9,7 +8,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author LevelX2
  */
 
@@ -18,18 +16,16 @@ public class BlocksIfAbleAllEffect extends RequirementEffect {
     private final FilterCreaturePermanent filter;
 
     public BlocksIfAbleAllEffect(FilterCreaturePermanent filter) {
-        this(filter,Duration.WhileOnBattlefield);
+        this(filter, Duration.WhileOnBattlefield);
     }
 
     public BlocksIfAbleAllEffect(FilterCreaturePermanent filter, Duration duration) {
         super(duration);
-        staticText = new StringBuilder(filter.getMessage())
-                .append(" block ")
-                .append(duration == Duration.EndOfTurn ? "this":"each")
-                .append(" turn if able").toString();
         this.filter = filter;
+        staticText = filter.getMessage() + " block " + (duration == Duration.EndOfTurn ? "this turn" : "each combat") + " if able";
     }
-    public BlocksIfAbleAllEffect(final BlocksIfAbleAllEffect effect) {
+
+    protected BlocksIfAbleAllEffect(final BlocksIfAbleAllEffect effect) {
         super(effect);
         this.filter = effect.filter;
     }
@@ -41,24 +37,21 @@ public class BlocksIfAbleAllEffect extends RequirementEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return filter.match(permanent, source.getSourceId(), source.getControllerId(), game);
+        return filter.match(permanent, source.getControllerId(), source, game);
     }
-    
+
     @Override
     public boolean mustBlock(Game game) {
         return true;
     }
-    
+
     @Override
     public boolean mustBlockAny(Game game) {
         return true;
     }
-    
+
     @Override
     public boolean mustAttack(Game game) {
         return false;
     }
-
-
-
 }

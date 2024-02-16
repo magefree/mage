@@ -38,7 +38,7 @@ public final class GroveOfTheGuardian extends CardImpl {
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(1), new TapSourceCost()));
 
         // {3}{G}{W}, {T}, Tap two untapped creatures you control, Sacrifice Grove of the Guardian: Create an 8/8 green and white Elemental creature token with vigilance.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new GreenAndWhiteElementalToken(), 1), new ManaCostsImpl("{3}{G}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new GreenAndWhiteElementalToken(), 1), new ManaCostsImpl<>("{3}{G}{W}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new TapTargetCost(new TargetControlledCreaturePermanent(2, 2, filter, false)));
         ability.addCost(new SacrificeSourceCost());

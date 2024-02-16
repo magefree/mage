@@ -3,6 +3,7 @@
 package mage.abilities.effects.common.ruleModifying;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.constants.Duration;
@@ -12,7 +13,6 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 
 /**
- *
  * @author LevelX2
  */
 
@@ -23,18 +23,13 @@ public class CantRegenerateTargetEffect extends ContinuousRuleModifyingEffectImp
         staticText = objectText + " can't be regenerated this turn";
     }
 
-    public CantRegenerateTargetEffect(final CantRegenerateTargetEffect effect) {
+    protected CantRegenerateTargetEffect(final CantRegenerateTargetEffect effect) {
         super(effect);
     }
 
     @Override
     public CantRegenerateTargetEffect copy() {
         return new CantRegenerateTargetEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

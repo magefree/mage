@@ -45,12 +45,12 @@ public final class ErraticMutation extends CardImpl {
 
 class ErraticMutationEffect extends OneShotEffect {
 
-    public ErraticMutationEffect() {
+    ErraticMutationEffect() {
         super(Outcome.UnboostCreature);
         this.staticText = "Choose target creature. Reveal cards from the top of your library until you reveal a nonland card. That creature gets +X/-X until end of turn, where X is that card's mana value. Put all cards revealed this way on the bottom of your library in any order";
     }
 
-    public ErraticMutationEffect(final ErraticMutationEffect effect) {
+    private ErraticMutationEffect(final ErraticMutationEffect effect) {
         super(effect);
     }
 
@@ -62,7 +62,7 @@ class ErraticMutationEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (controller != null && sourceObject != null) {
             CardsImpl toReveal = new CardsImpl();
             Card nonLandCard = null;

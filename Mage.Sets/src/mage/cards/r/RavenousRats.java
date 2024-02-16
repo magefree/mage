@@ -30,7 +30,7 @@ public final class RavenousRats extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RavenousRats (final RavenousRats card) {
+    private RavenousRats(final RavenousRats card) {
         super(card);
     }
 

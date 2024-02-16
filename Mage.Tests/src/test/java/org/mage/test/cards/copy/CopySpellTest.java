@@ -4,12 +4,14 @@ import mage.abilities.MageSingleton;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.AdventureCard;
 import mage.cards.Card;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.cards.SplitCard;
 import mage.cards.repository.CardRepository;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import mage.game.permanent.PermanentCard;
+import mage.game.permanent.PermanentToken;
 import mage.util.CardUtil;
 import org.junit.Assert;
 import org.junit.Test;
@@ -52,7 +54,6 @@ public class CopySpellTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertHandCount(playerA, "Silvercoat Lion", 1);
         assertHandCount(playerB, "Pillarfield Ox", 2);
@@ -82,7 +83,6 @@ public class CopySpellTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Angelic Blessing", 1);
         // original target
@@ -119,7 +119,6 @@ public class CopySpellTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, "Bonecrusher Giant", 4 + 2 * 2, 3 + 2 * 2);
         assertPowerToughness(playerA, "Grizzly Bears", 2, 2);
@@ -151,7 +150,6 @@ public class CopySpellTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, "Bonecrusher Giant", 4 + 2, 3 + 2);
         assertPowerToughness(playerA, "Grizzly Bears", 2 + 2, 2 + 2);
@@ -183,7 +181,6 @@ public class CopySpellTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();
-        assertAllCommandsUsed();
 
         assertPowerToughness(playerA, "Bonecrusher Giant", 4 + 2, 3 + 2);
         assertPowerToughness(playerA, "Grizzly Bears", 2 + 2, 2 + 2);
@@ -195,7 +192,7 @@ public class CopySpellTest extends CardTestPlayerBase {
      * Reported bug: "Silverfur Partisan and fellow wolves did not trigger off
      * of copies of Strength of Arms made by Zada, Hedron Grinder. Not sure
      * about other spells, but I imagine similar results."
-    
+
     // Perhaps someone knows the correct implementation for this test.
     // Just target the Silverfur Partisan and hit done
     // This test works fine in game.  The @Ignore would not work for me either.
@@ -221,7 +218,7 @@ public class CopySpellTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Giant Growth", 1);
         assertPowerToughness(playerA, "Silverfur Partisan", 5, 5);
         assertPowerToughness(playerA, "Zada, Hedron Grinder", 6, 6);
-        assertPermanentCount(playerA, "Wolf", 1); // created from Silverfur ability
+        assertPermanentCount(playerA, "Wolf Token", 1); // created from Silverfur ability
     }
     */
 
@@ -358,7 +355,7 @@ public class CopySpellTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
         // Flying, vigilance, deathtouch, lifelink
         // At the beginning of your end step, proliferate.
-        addCard(Zone.BATTLEFIELD, playerA, "Atraxa, Praetors' Voice", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Atraxa, Praetors' Voice", 1);
         // Walking Ballista enters the battlefield with X +1/+1 counters on it.
         // {4}: Put a +1/+1 counter on Walking Ballista.
         // Remove a +1/+1 counter from Walking Ballista: It deals 1 damage to any target.
@@ -371,6 +368,8 @@ public class CopySpellTest extends CardTestPlayerBase {
         // When Dualcaster Mage enters the battlefield, copy target instant or sorcery spell. You may choose new targets for the copy.
         addCard(Zone.HAND, playerB, "Dualcaster Mage"); // Creature {1}{R}{R}
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 4);
+
+        setStrictChooseMode(true);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Walking Ballista");
         setChoice(playerA, "X=1");
@@ -418,7 +417,6 @@ public class CopySpellTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Mountain", 1);
         assertPermanentCount(playerA, "Island", 1);
@@ -477,7 +475,6 @@ public class CopySpellTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerB, 20 - 3 * 2); // 2x bolts from 2x cascades
     }
@@ -520,7 +517,6 @@ public class CopySpellTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         setStrictChooseMode(true);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
@@ -573,14 +569,13 @@ public class CopySpellTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
     }
 
     @Test
-    public void test_CopiedSpellsHasntETB() {
+    public void test_CopiedSpellsETBCounters() {
         // testing:
         // - x in copied creature spell (copy x)
-        // - copied spells enters as tokens and it hasn't ETB, see rules below
+        // - copied spells enters as tokens and correctly ETB, see rules below
 
         // 0/0
         // Capricopian enters the battlefield with X +1/+1 counters on it.
@@ -622,37 +617,34 @@ public class CopySpellTest extends CardTestPlayerBase {
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {U}", 1);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Double Major", "Grenzo, Dungeon Warden", "Grenzo, Dungeon Warden");
 
-        // ETB triggers will not trigger here due not normal cast. From rules:
-        // - The token that a resolving copy of a spell becomes isn’t said to have been “created.” (2021-04-16)
-        // - A nontoken permanent “enters the battlefield” when it’s moved onto the battlefield from another zone.
-        //   A token “enters the battlefield” when it’s created. See rules 403.3, 603.6a, 603.6d, and 614.12.
-        //
-        // So both copies enters without counters:
-        // - Capricopian copy must die
-        // - Grenzo, Dungeon Warden must have default PT
+        // 608.3f If the object that’s resolving is a copy of a permanent spell, it will become a token permanent
+        //   as it is put onto the battlefield in any of the steps above.
+        // 111.12. A copy of a permanent spell becomes a token as it resolves. The token has the characteristics of
+        //   the spell that became that token. The token is not “created” for the purposes of any replacement effects
+        //   or triggered abilities that refer to creating a token.
+        // The tokens must enter with counters
 
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
-        checkPermanentCount("after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Capricopian", 1); // copy dies
+        checkPermanentCount("after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Capricopian", 2);
         checkPermanentCount("after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Grenzo, Dungeon Warden", 2);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
-        // counters checks
+        // counters checks, have to check if it's a card or a token since token copies have isCopy()=false
         int originalCounters = currentGame.getBattlefield().getAllActivePermanents().stream()
                 .filter(p -> p.getName().equals("Grenzo, Dungeon Warden"))
-                .filter(p -> !p.isCopy())
+                .filter(p -> p instanceof PermanentCard)
                 .mapToInt(p -> p.getCounters(currentGame).getCount(CounterType.P1P1))
                 .sum();
         int copyCounters = currentGame.getBattlefield().getAllActivePermanents().stream()
                 .filter(p -> p.getName().equals("Grenzo, Dungeon Warden"))
-                .filter(p -> p.isCopy())
+                .filter(p -> p instanceof PermanentToken)
                 .mapToInt(p -> p.getCounters(currentGame).getCount(CounterType.P1P1))
                 .sum();
         Assert.assertEquals("original grenzo must have 2x counters", 2, originalCounters);
-        Assert.assertEquals("copied grenzo must have 0x counters", 0, copyCounters);
+        Assert.assertEquals("copied grenzo must have 2x counters", 2, copyCounters);
     }
 
     @Test
@@ -723,10 +715,10 @@ public class CopySpellTest extends CardTestPlayerBase {
 
     @Test
     public void test_SimpleCopy_MDFC() {
-        ModalDoubleFacesCard sourceCard = (ModalDoubleFacesCard) CardRepository.instance.findCard("Agadeem's Awakening").getCard();
-        ModalDoubleFacesCard originalCard = (ModalDoubleFacesCard) CardRepository.instance.findCard("Agadeem's Awakening").getCard();
+        ModalDoubleFacedCard sourceCard = (ModalDoubleFacedCard) CardRepository.instance.findCard("Agadeem's Awakening").getCard();
+        ModalDoubleFacedCard originalCard = (ModalDoubleFacedCard) CardRepository.instance.findCard("Agadeem's Awakening").getCard();
         prepareZoneAndZCC(originalCard);
-        ModalDoubleFacesCard copiedCard = (ModalDoubleFacesCard) currentGame.copyCard(originalCard, null, playerA.getId());
+        ModalDoubleFacedCard copiedCard = (ModalDoubleFacedCard) currentGame.copyCard(originalCard, null, playerA.getId());
         // main
         Assert.assertNotEquals("main - id must be different", originalCard.getId(), copiedCard.getId());
         Assert.assertEquals("main - rules must be same", originalCard.getRules(), copiedCard.getRules());
@@ -748,6 +740,136 @@ public class CopySpellTest extends CardTestPlayerBase {
         abilitySourceMustBeSame(originalCard.getRightHalfCard(), "right original");
         abilitySourceMustBeSame(copiedCard.getRightHalfCard(), "right copied");
         //cardsMustHaveSameZoneAndZCC(originalCard.getRightHalfCard(), copiedCard.getRightHalfCard(), "right");
+    }
+
+    /**
+     * Reported bug: https://github.com/magefree/mage/issues/7655
+     * Thieving Skydiver is kicked and then copied, but the copied version does not let you gain control of anything.
+     */
+    @Test
+    public void copySpellWithKicker() {
+        // When Thieving Skydiver enters the battlefield, if it was kicked, gain control of target artifact with mana value X or less.
+        // If that artifact is an Equipment, attach it to Thieving Skydiver.
+        addCard(Zone.HAND, playerA, "Thieving Skydiver");
+        // Copy target creature spell you control, except it isn’t legendary if the spell is legendary.
+        addCard(Zone.HAND, playerA, "Double Major");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 3); // Original price, + 1 kicker, + 1 for Double Major
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
+
+        addCard(Zone.BATTLEFIELD, playerB, "Sol Ring", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Expedition Map", 1);
+        setStrictChooseMode(true);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Thieving Skydiver");
+        setChoice(playerA, "Yes");
+        setChoice(playerA, "X=1");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Double Major", "Thieving Skydiver", "Thieving Skydiver");
+        addTarget(playerA, "Sol Ring"); // Choice for copy
+        addTarget(playerA, "Expedition Map"); // Choice for original
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+
+        execute();
+
+        assertPermanentCount(playerA, "Sol Ring", 1);
+        assertPermanentCount(playerA, "Expedition Map", 1);
+        assertPermanentCount(playerB, "Sol Ring", 0);
+        assertPermanentCount(playerB, "Expedition Map", 0);
+    }
+
+    /**
+     * Reported bug: https://github.com/magefree/mage/issues/11581
+     * Neverwinter Hydra is copied by Magus Lucea Kane's ability, but the copied version does not enter with +1/+1 counters.
+     */
+    @Test
+    public void test_CopyNeverwinterHydra() {
+        addCard(Zone.BATTLEFIELD, playerA, "Tropical Island", 4 + 2);
+        // <i>Psychic Stimulus</i> &mdash; {T}: Add {C}{C}. When you next cast a spell with {X} in its mana cost
+        // or activate an ability with {X} in its activation cost this turn, copy that spell or ability.
+        // You may choose new targets for the copy.
+        addCard(Zone.BATTLEFIELD, playerA, "Magus Lucea Kane");
+        addCard(Zone.HAND, playerA, "Neverwinter Hydra");
+        // Copy target creature spell you control, except it isn’t legendary if the spell is legendary.
+        addCard(Zone.HAND, playerA, "Double Major");
+
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "<i>Psychic");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Neverwinter Hydra");
+        setChoice(playerA, "X=2");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Double Major", "Neverwinter Hydra");
+
+        // Although the value of X should be the same, the actual dice rolls can be different
+        setDieRollResult(playerA, 3);
+        setDieRollResult(playerA, 4);
+
+        setDieRollResult(playerA, 6);
+        setDieRollResult(playerA, 6);
+
+        setDieRollResult(playerA, 1);
+        setDieRollResult(playerA, 1);
+
+        setStrictChooseMode(true);
+        // Target for Lucea Kane's Spiritual Leader ability
+        addTarget(playerA, "Magus Lucea Kane");
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Neverwinter Hydra", 3);
+    }
+
+    /**
+     * Reported bug: https://github.com/magefree/mage/issues/11581
+     * Neverwinter Hydra is copied by Magus Lucea Kane's ability, but the copied version does not enter with +1/+1 counters.
+     */
+    @Test
+    public void test_CopyHydradoodle() {
+        String hydradoodle = "Hydradoodle";
+
+        addCard(Zone.BATTLEFIELD, playerA, "Tropical Island", 4 + 2);
+        addCard(Zone.HAND, playerA, hydradoodle);
+        // Copy target creature spell you control, except it isn’t legendary if the spell is legendary.
+        addCard(Zone.HAND, playerA, "Double Major");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, hydradoodle);
+        setChoice(playerA, "X=1");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Double Major", hydradoodle);
+
+        setDieRollResult(playerA, 5);
+
+        setDieRollResult(playerA, 1);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, hydradoodle, 2);
+    }
+
+    /**
+     * Reported bug: https://github.com/magefree/mage/issues/11581
+     * Neverwinter Hydra is copied by Magus Lucea Kane's ability, but the copied version does not enter with +1/+1 counters.
+     */
+    @Test
+    public void test_CopyApocalypseHydra() {
+        String apocalypseHydra = "Apocalypse Hydra";
+
+        addCard(Zone.BATTLEFIELD, playerA, "Taiga", 10);
+        addCard(Zone.BATTLEFIELD, playerA, "Magus Lucea Kane");
+
+        addCard(Zone.HAND, playerA, apocalypseHydra);
+
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "<i>Psychic");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, apocalypseHydra);
+        setChoice(playerA, "X=5");
+
+        setStrictChooseMode(true);
+        // Target for Lucea Kane's Spiritual Leader ability
+        addTarget(playerA, "Magus Lucea Kane");
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, apocalypseHydra, 2);
     }
 
     private void abilitySourceMustBeSame(Card card, String infoPrefix) {

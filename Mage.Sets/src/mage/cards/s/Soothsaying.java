@@ -29,7 +29,7 @@ public final class Soothsaying extends CardImpl {
         // {X}: Look at the top X cards of your library, then put them back in any order.
         Effect effect = new LookLibraryControllerEffect(ManacostVariableValue.REGULAR);
         effect.setText("Look at the top X cards of your library, then put them back in any order");
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("X")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{X}")));
     }
 
     private Soothsaying(final Soothsaying card) {

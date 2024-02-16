@@ -58,7 +58,7 @@ public class WinLoseEffectsTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Island", 6);
         
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Set Adrift");
-        addTarget(playerB, "Platinum Angel");
+        // Platinum Angel is auto-chosen since only possible target
         
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -128,7 +128,7 @@ public class WinLoseEffectsTest extends CardTestPlayerBase {
         addCard(Zone.LIBRARY, playerA, "Bogardan Hellkite", 3); // 24 life lost
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Angel's Grace");
-        
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ad Nauseam");
         setChoice(playerA, true);
         setChoice(playerA, true);

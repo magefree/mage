@@ -62,7 +62,7 @@ class HeritageDruidManaEffect extends BasicManaEffect {
         this.filter = filter;
     }
 
-    public HeritageDruidManaEffect(final HeritageDruidManaEffect effect) {
+    private HeritageDruidManaEffect(final HeritageDruidManaEffect effect) {
         super(effect);
         this.filter = effect.filter.copy();
     }
@@ -75,7 +75,7 @@ class HeritageDruidManaEffect extends BasicManaEffect {
     @Override
     public List<Mana> getNetMana(Game game, Ability source) {
         if (game != null && game.inCheckPlayableState()) {
-            int count = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game) / 3;
+            int count = game.getBattlefield().count(filter, source.getControllerId(), source, game) / 3;
             List<Mana> netMana = new ArrayList<>();
             if (count > 0) {
                 netMana.add(Mana.GreenMana(count * 3));

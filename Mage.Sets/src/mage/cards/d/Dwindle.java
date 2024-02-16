@@ -32,8 +32,8 @@ public final class Dwindle extends CardImpl {
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Enchanted creature gets -6/-0.
@@ -59,7 +59,7 @@ class DwindleTriggeredAbility extends BlocksAttachedTriggeredAbility {
         super(new DestroyAttachedToEffect(""), "", false);
     }
 
-    DwindleTriggeredAbility(final DwindleTriggeredAbility ability) {
+    private DwindleTriggeredAbility(final DwindleTriggeredAbility ability) {
         super(ability);
     }
 

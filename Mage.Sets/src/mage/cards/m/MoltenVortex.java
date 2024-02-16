@@ -25,7 +25,7 @@ public final class MoltenVortex extends CardImpl {
 
         // {R}, Discard a land card: Molten Vortex deals 2 damage to any target.
         Ability ability = new SimpleActivatedAbility(
-                new DamageTargetEffect(2), new ManaCostsImpl("{R}")
+                new DamageTargetEffect(2), new ManaCostsImpl<>("{R}")
         );
         ability.addCost(new DiscardTargetCost(new TargetCardInHand(StaticFilters.FILTER_CARD_LAND_A)));
         ability.addTarget(new TargetAnyTarget());

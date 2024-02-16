@@ -8,7 +8,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TimingRule;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
@@ -34,7 +33,7 @@ public final class SeverTheBloodline extends CardImpl {
         this.getSpellAbility().addEffect(new SeverTheBloodlineEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         // Flashback {5}{B}{B}
-        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl("{5}{B}{B}")));
+        this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{5}{B}{B}")));
     }
 
     private SeverTheBloodline(final SeverTheBloodline card) {
@@ -49,12 +48,12 @@ public final class SeverTheBloodline extends CardImpl {
 
 class SeverTheBloodlineEffect extends OneShotEffect {
 
-    public SeverTheBloodlineEffect() {
+    SeverTheBloodlineEffect() {
         super(Outcome.Exile);
         this.staticText = "Exile target creature and all other creatures with the same name as that creature";
     }
 
-    public SeverTheBloodlineEffect(final SeverTheBloodlineEffect effect) {
+    private SeverTheBloodlineEffect(final SeverTheBloodlineEffect effect) {
         super(effect);
     }
 
@@ -74,7 +73,7 @@ class SeverTheBloodlineEffect extends OneShotEffect {
             } else {
                 filter.add(new NamePredicate(targetPermanent.getName()));
             }
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
                 controller.moveCardToExileWithInfo(permanent, null, "", source, game, Zone.BATTLEFIELD, true);
             }
             return true;

@@ -60,7 +60,7 @@ class DinOfTheFireherdEffect extends OneShotEffect {
         this.staticText = "create a 5/5 black and red Elemental creature token. Target opponent sacrifices a creature for each black creature you control, then sacrifices a land for each red creature you control";
     }
 
-    public DinOfTheFireherdEffect(final DinOfTheFireherdEffect effect) {
+    private DinOfTheFireherdEffect(final DinOfTheFireherdEffect effect) {
         super(effect);
     }
 

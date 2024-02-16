@@ -27,7 +27,7 @@ public final class CorruptOfficial extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {2}{B}: Regenerate Corrupt Official.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{2}{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{2}{B}")));
 
         // Whenever Corrupt Official becomes blocked, defending player discards a card at random.
         this.addAbility(new BecomesBlockedSourceTriggeredAbility(

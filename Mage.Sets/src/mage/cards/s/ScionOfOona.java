@@ -22,7 +22,7 @@ import mage.filter.common.FilterCreaturePermanent;
 public final class ScionOfOona extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("Faeries");
-    private static final FilterCreaturePermanent filterCreature = new FilterCreaturePermanent("Faeries");
+    private static final FilterCreaturePermanent filterCreature = new FilterCreaturePermanent("Faerie creatures");
 
     static {
         filter.add(SubType.FAERIE.getPredicate());

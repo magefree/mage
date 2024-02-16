@@ -70,7 +70,7 @@ enum ChromeReplicatorCondition implements Condition {
         return game
                 .getBattlefield()
                 .getActivePermanents(
-                        filter, source.getControllerId(), source.getSourceId(), game
+                        filter, source.getControllerId(), source, game
                 ).stream()
                 .filter(Objects::nonNull)
                 .map(MageObject::getName)

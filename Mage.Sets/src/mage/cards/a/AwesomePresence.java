@@ -36,11 +36,11 @@ public final class AwesomePresence extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Enchanted creature can't be blocked unless defending player pays {3} for each creature they control that's blocking it.
-        this.addAbility(new SimpleStaticAbility(new AwesomePresenceRestrictionEffect(new ManaCostsImpl("{3}"))));
+        this.addAbility(new SimpleStaticAbility(new AwesomePresenceRestrictionEffect(new ManaCostsImpl<>("{3}"))));
 
     }
 
@@ -56,7 +56,7 @@ public final class AwesomePresence extends CardImpl {
 
 class AwesomePresenceRestrictionEffect extends PayCostToAttackBlockEffectImpl {
 
-    public AwesomePresenceRestrictionEffect(ManaCosts manaCosts) {
+    AwesomePresenceRestrictionEffect(ManaCosts manaCosts) {
         super(Duration.WhileOnBattlefield, Outcome.Neutral, RestrictType.BLOCK, manaCosts);
         staticText = "Enchanted creature"
                 + " can't be blocked "
@@ -65,7 +65,7 @@ class AwesomePresenceRestrictionEffect extends PayCostToAttackBlockEffectImpl {
                 + " for each creature they control that's blocking it");
     }
 
-    public AwesomePresenceRestrictionEffect(AwesomePresenceRestrictionEffect effect) {
+    private AwesomePresenceRestrictionEffect(final AwesomePresenceRestrictionEffect effect) {
         super(effect);
     }
 

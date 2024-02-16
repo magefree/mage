@@ -24,7 +24,7 @@ public class GetEmblemTargetPlayerEffect extends OneShotEffect {
 
     }
 
-    public GetEmblemTargetPlayerEffect(final GetEmblemTargetPlayerEffect effect) {
+    protected GetEmblemTargetPlayerEffect(final GetEmblemTargetPlayerEffect effect) {
         super(effect);
         this.emblem = effect.emblem;
     }
@@ -36,7 +36,7 @@ public class GetEmblemTargetPlayerEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (sourceObject == null) {
             return false;
         }
@@ -53,6 +53,7 @@ public class GetEmblemTargetPlayerEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        return "target " + mode.getTargets().get(0).getTargetName() + " gets an emblem with \"" + emblem.getAbilities().getRules(null).stream().collect(Collectors.joining("; ")) + "\"";
+        return getTargetPointer().describeTargets(mode.getTargets(), "that player")
+                + " gets an emblem with \"" + String.join("; ", emblem.getAbilities().getRules(null)) + "\"";
     }
 }

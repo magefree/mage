@@ -32,8 +32,8 @@ public final class BalothGorger extends CardImpl {
         // If Baloth Gorger was kicked, it enters the battlefield with three +1/+1 counters on it
         Ability ability = new EntersBattlefieldAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance(3)),
-                KickedCondition.instance,
-                "If {this} was kicked, it enters the battlefield with three +1/+1 counters on it",
+                KickedCondition.ONCE,
+                "If {this} was kicked, it enters the battlefield with three +1/+1 counters on it.",
                 "");
         this.addAbility(ability);
     }

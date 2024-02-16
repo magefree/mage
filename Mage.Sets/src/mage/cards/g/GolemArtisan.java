@@ -71,7 +71,7 @@ class GolemArtisanEffect extends OneShotEffect {
         staticText = "Target artifact creature gains your choice of flying, trample, or haste until end of turn";
     }
 
-    GolemArtisanEffect(final GolemArtisanEffect effect) {
+    private GolemArtisanEffect(final GolemArtisanEffect effect) {
         super(effect);
     }
 

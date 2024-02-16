@@ -40,7 +40,7 @@ public final class BronzehideLion extends CardImpl {
         // {G}{W}: Bronzehide Lion gains indestructible until end of turn.
         this.addAbility(new SimpleActivatedAbility(new GainAbilitySourceEffect(
                 IndestructibleAbility.getInstance(), Duration.EndOfTurn
-        ), new ManaCostsImpl("{G}{W}")));
+        ), new ManaCostsImpl<>("{G}{W}")));
 
         // When Bronzehide Lion dies, return it to the battlefield.
         // It's an Aura enchantment with enchant creature you control and
@@ -87,8 +87,8 @@ class BronzehideLionReturnEffect extends OneShotEffect {
             return false;
         }
         TargetPermanent target = new TargetControlledCreaturePermanent();
-        target.setNotTarget(true);
-        if (controller.choose(outcome, target, source.getSourceId(), game)
+        target.withNotTarget(true);
+        if (controller.choose(outcome, target, source, game)
                 && game.getPermanent(target.getFirstTarget()) != null) {
             game.getState().setValue("attachTo:" + source.getSourceId(), target.getFirstTarget());
         }
@@ -109,7 +109,7 @@ class BronzehideLionContinuousEffect extends ContinuousEffectImpl {
     private final int zoneChangeCounter;
     private final Ability activatedAbility = new SimpleActivatedAbility(new GainAbilityAttachedEffect(
             IndestructibleAbility.getInstance(), AttachmentType.AURA, Duration.EndOfTurn
-    ), new ManaCostsImpl("{G}{W}"));
+    ), new ManaCostsImpl<>("{G}{W}"));
 
     BronzehideLionContinuousEffect(int zoneChangeCounter) {
         super(Duration.Custom, Outcome.Neutral);
@@ -161,7 +161,7 @@ class BronzehideLionContinuousEffect extends ContinuousEffectImpl {
                 TargetPermanent auraTarget = new TargetControlledCreaturePermanent();
                 lion.getSpellAbility().addTarget(auraTarget);
                 lion.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-                lion.addAbility(new EnchantAbility(auraTarget.getTargetName()), source.getSourceId(), game);
+                lion.addAbility(new EnchantAbility(auraTarget), source.getSourceId(), game);
 
                 // add the activated ability
                 activatedAbility.setControllerId(source.getControllerId());

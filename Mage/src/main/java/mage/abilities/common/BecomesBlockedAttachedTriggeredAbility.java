@@ -2,23 +2,35 @@ package mage.abilities.common;
 
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
- *
  * @author L_J
  */
 public class BecomesBlockedAttachedTriggeredAbility extends TriggeredAbilityImpl {
 
+    private final SetTargetPointer setTargetPointer;
+
     public BecomesBlockedAttachedTriggeredAbility(Effect effect, boolean optional) {
-        super(Zone.BATTLEFIELD, effect, optional);
+        this(effect, optional, SetTargetPointer.NONE);
     }
 
-    public BecomesBlockedAttachedTriggeredAbility(final BecomesBlockedAttachedTriggeredAbility ability) {
+    public BecomesBlockedAttachedTriggeredAbility(Effect effect, boolean optional, SetTargetPointer setTargetPointer) {
+        super(Zone.BATTLEFIELD, effect, optional);
+        this.setTargetPointer = setTargetPointer;
+        setTriggerPhrase("Whenever enchanted creature becomes blocked, ");
+    }
+
+    protected BecomesBlockedAttachedTriggeredAbility(final BecomesBlockedAttachedTriggeredAbility ability) {
         super(ability);
+        this.setTargetPointer = ability.setTargetPointer;
     }
 
     @Override
@@ -28,19 +40,23 @@ public class BecomesBlockedAttachedTriggeredAbility extends TriggeredAbilityImpl
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent equipment = game.getPermanent(sourceId);
-        if (equipment != null 
-                && equipment.getAttachedTo() != null) {
-            Permanent equipped = game.getPermanent(equipment.getAttachedTo());
-            return (equipped != null
-                    && equipped.getId().equals(event.getTargetId()));
+        Permanent enchantment = getSourcePermanentOrLKI(game);
+        UUID blockedId = event.getTargetId();
+        if (enchantment == null || !blockedId.equals(enchantment.getAttachedTo())) {
+            return false;
         }
-        return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever enchanted creature becomes blocked, " ;
+        switch (setTargetPointer) {
+            case PERMANENT:
+                getEffects().setTargetPointer(new FixedTarget(blockedId, game));
+                break;
+            case PLAYER:
+                UUID playerId = game.getCombat().getDefendingPlayerId(blockedId, game);
+                if (playerId != null) {
+                    getEffects().setTargetPointer(new FixedTarget(playerId));
+                }
+                break;
+        }
+        return true;
     }
 
     @Override

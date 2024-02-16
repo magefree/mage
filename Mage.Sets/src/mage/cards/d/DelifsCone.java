@@ -6,15 +6,14 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
+import mage.abilities.effects.common.continuous.AssignNoCombatDamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.game.Game;
-import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -32,9 +31,7 @@ public final class DelifsCone extends CardImpl {
 
         // {tap}, Sacrifice Delif's Cone: This turn, when target creature you control attacks and isn't blocked, you may gain life equal to its power. If you do, it assigns no combat damage this turn.
         Ability ability = new SimpleActivatedAbility(
-                new CreateDelayedTriggeredAbilityEffect(
-                        new DelifsConeTriggeredAbility(), false
-                ), new TapSourceCost()
+                new CreateDelayedTriggeredAbilityEffect(new DelifsConeTriggeredAbility()), new TapSourceCost()
         );
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetControlledCreaturePermanent());
@@ -55,7 +52,7 @@ class DelifsConeTriggeredAbility extends DelayedTriggeredAbility {
 
     DelifsConeTriggeredAbility() {
         super(new DelifsConeLifeEffect(), Duration.EndOfTurn, false, true);
-        this.addEffect(new DelifsConePreventEffect());
+        this.addEffect(new AssignNoCombatDamageTargetEffect());
     }
 
     private DelifsConeTriggeredAbility(final DelifsConeTriggeredAbility ability) {
@@ -108,47 +105,5 @@ class DelifsConeLifeEffect extends OneShotEffect {
             return true;
         }
         return false;
-    }
-}
-
-class DelifsConePreventEffect extends ReplacementEffectImpl {
-
-    DelifsConePreventEffect() {
-        super(Duration.EndOfTurn, Outcome.Neutral);
-    }
-
-    private DelifsConePreventEffect(final DelifsConePreventEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public DelifsConePreventEffect copy() {
-        return new DelifsConePreventEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        switch (event.getType()) {
-            case DAMAGE_PERMANENT:
-            case DAMAGE_PLAYER:
-                return true;
-            default:
-                return false;
-        }
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        return ((DamageEvent) event).isCombatDamage() && event.getTargetId().equals(targetPointer.getFirst(game, source));
     }
 }

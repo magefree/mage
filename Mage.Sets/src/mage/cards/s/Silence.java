@@ -39,12 +39,12 @@ public final class Silence extends CardImpl {
 
 class SilenceEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public SilenceEffect() {
+    SilenceEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit);
         staticText = "Your opponents can't cast spells this turn. <i>(Spells cast before this resolves are unaffected.)</i>";
     }
 
-    public SilenceEffect(final SilenceEffect effect) {
+    private SilenceEffect(final SilenceEffect effect) {
         super(effect);
     }
 
@@ -54,13 +54,8 @@ class SilenceEffect extends ContinuousRuleModifyingEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (mageObject != null) {
             return "You can't cast spells this turn (" + mageObject.getIdName() + ").";
         }

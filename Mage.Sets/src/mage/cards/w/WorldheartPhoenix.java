@@ -1,7 +1,7 @@
 
 package mage.cards.w;
 
-import java.util.UUID;
+import mage.MageIdentifier;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
@@ -13,16 +13,13 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AsThoughEffectType;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -41,7 +38,8 @@ public final class WorldheartPhoenix extends CardImpl {
 
         // You may cast Worldheart Phoenix from your graveyard by paying {W}{U}{B}{R}{G} rather than paying its mana cost.
         // If you do, it enters the battlefield with two +1/+1 counters on it.
-        Ability ability = new SimpleStaticAbility(Zone.ALL, new WorldheartPhoenixPlayEffect());
+        Ability ability = new SimpleStaticAbility(Zone.ALL, new WorldheartPhoenixPlayEffect())
+                .setIdentifier(MageIdentifier.WorldheartPhoenixAlternateCast);
         ability.addEffect(new EntersBattlefieldEffect(new WorldheartPhoenixEntersBattlefieldEffect(),
                 "If you do, it enters the battlefield with two +1/+1 counters on it"));
         this.addAbility(ability);
@@ -64,7 +62,7 @@ public final class WorldheartPhoenix extends CardImpl {
             staticText = "You may cast {this} from your graveyard by paying {W}{U}{B}{R}{G} rather than paying its mana cost";
         }
 
-        public WorldheartPhoenixPlayEffect(final WorldheartPhoenixPlayEffect effect) {
+        private WorldheartPhoenixPlayEffect(final WorldheartPhoenixPlayEffect effect) {
             super(effect);
         }
 
@@ -84,8 +82,10 @@ public final class WorldheartPhoenix extends CardImpl {
                 if (game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD) {
                     Player player = game.getPlayer(affectedControllerId);
                     if (player != null) {
-                        // can sometimes be cast with base mana cost from grave????
-                        player.setCastSourceIdWithAlternateMana(sourceId, new ManaCostsImpl<>("{W}{U}{B}{R}{G}"), null);
+                        player.setCastSourceIdWithAlternateMana(
+                                sourceId, new ManaCostsImpl<>("{W}{U}{B}{R}{G}"), null,
+                                MageIdentifier.WorldheartPhoenixAlternateCast
+                        );
                         return true;
                     }
                 }
@@ -102,7 +102,7 @@ public final class WorldheartPhoenix extends CardImpl {
             staticText = "If you do, it enters the battlefield with two +1/+1 counters on it";
         }
 
-        public WorldheartPhoenixEntersBattlefieldEffect(final WorldheartPhoenixEntersBattlefieldEffect effect) {
+        private WorldheartPhoenixEntersBattlefieldEffect(final WorldheartPhoenixEntersBattlefieldEffect effect) {
             super(effect);
         }
 

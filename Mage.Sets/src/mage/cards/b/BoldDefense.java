@@ -61,7 +61,7 @@ class BoldDefenseEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (KickedCondition.instance.apply(game, source)) {
+        if (KickedCondition.ONCE.apply(game, source)) {
             game.addEffect(new BoostControlledEffect(2, 2, Duration.EndOfTurn), source);
             game.addEffect(new GainAbilityControlledEffect(
                     FirstStrikeAbility.getInstance(), Duration.EndOfTurn,

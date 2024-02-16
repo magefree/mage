@@ -29,7 +29,7 @@ public final class GiltLeafSeer extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {G}, {tap}: Look at the top two cards of your library, then put them back in any order.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LookLibraryControllerEffect(2), new ManaCostsImpl("{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LookLibraryControllerEffect(2), new ManaCostsImpl<>("{G}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

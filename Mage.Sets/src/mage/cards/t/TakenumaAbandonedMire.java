@@ -28,7 +28,7 @@ public final class TakenumaAbandonedMire extends CardImpl {
     public TakenumaAbandonedMire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // {T}: Add {B}.
         this.addAbility(new BlackManaAbility());
@@ -36,7 +36,7 @@ public final class TakenumaAbandonedMire extends CardImpl {
         // Channel — {3}{B}, Discard Takenuma, Abandoned Mire: Mill three cards, then return a creature or planeswalker card from your graveyard to your hand. This ability costs {1} less to activate for each legendary creature you control.
         Ability ability = new ChannelAbility("{3}{B}", new TakenumaAbandonedMireEffect());
         ability.setCostAdjuster(LegendaryCreatureCostAdjuster.instance);
-        this.addAbility(ability);
+        this.addAbility(ability.addHint(LegendaryCreatureCostAdjuster.getHint()));
     }
 
     private TakenumaAbandonedMire(final TakenumaAbandonedMire card) {
@@ -86,8 +86,8 @@ class TakenumaAbandonedMireEffect extends OneShotEffect {
             return true;
         }
         TargetCard target = new TargetCardInGraveyard(filter);
-        target.setNotTarget(true);
-        player.choose(outcome, player.getGraveyard(), target, game);
+        target.withNotTarget(true);
+        player.choose(outcome, player.getGraveyard(), target, source, game);
         return player.moveCards(game.getCard(target.getFirstTarget()), Zone.HAND, source, game);
     }
 }

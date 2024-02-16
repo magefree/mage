@@ -46,7 +46,7 @@ public final class MoonringIsland extends CardImpl {
         // {U}, {tap}: Look at the top card of target player's library. Activate this ability only if you control two or more blue permanents.
         Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD,
                 new LookLibraryTopCardTargetPlayerEffect(),
-                new ManaCostsImpl("{U}"),
+                new ManaCostsImpl<>("{U}"),
                 new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 1));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPlayer());

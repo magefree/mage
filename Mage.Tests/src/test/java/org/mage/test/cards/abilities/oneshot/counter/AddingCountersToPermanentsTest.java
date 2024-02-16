@@ -76,7 +76,7 @@ public class AddingCountersToPermanentsTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Pillarfield Ox", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Soulstinger");
-        addTarget(playerA, "Soulstinger");
+        // Soulstinger auto-chosen since only target
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Turn to Slag", "Soulstinger");
 
@@ -151,10 +151,9 @@ public class AddingCountersToPermanentsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerB, "Lightning Bolt", 1);
         assertPowerToughness(playerA, "Kitchen Finks", 2, 1);
-        assertPermanentCount(playerA, "Snake", 1);
+        assertPermanentCount(playerA, "Snake Token", 1);
     }
 }

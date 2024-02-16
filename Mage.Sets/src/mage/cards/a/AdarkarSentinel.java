@@ -27,7 +27,7 @@ public final class AdarkarSentinel extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {1}: Adarkar Sentinel gets +0/+1 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(0,1,Duration.EndOfTurn), new ManaCostsImpl("{1}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(0,1,Duration.EndOfTurn), new ManaCostsImpl<>("{1}"));
         this.addAbility(ability);
     }
 

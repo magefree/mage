@@ -26,7 +26,7 @@ public final class ResoundingScream extends CardImpl {
         this.getSpellAbility().addEffect(new DiscardTargetEffect(1, true));
         this.getSpellAbility().addTarget(new TargetPlayer());
         // Cycling {5}{U}{B}{R}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{5}{U}{B}{R}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{5}{U}{B}{R}")));
         // When you cycle Resounding Scream, target player discards two cards at random.
         Ability ability = new CycleTriggeredAbility(new DiscardTargetEffect(2, true));
         ability.addTarget(new TargetPlayer());

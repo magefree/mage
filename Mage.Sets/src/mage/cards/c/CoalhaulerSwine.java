@@ -28,8 +28,7 @@ public final class CoalhaulerSwine extends CardImpl {
 
         // Whenever Coalhauler Swine is dealt damage, it deals that much damage to each player.
         this.addAbility(new DealtDamageToSourceTriggeredAbility(new DamagePlayersEffect(
-                Outcome.Neutral, SavedDamageValue.instance, TargetController.ANY, "it"
-        ), false, false));
+                Outcome.Damage, SavedDamageValue.MUCH, TargetController.ANY, "it"), false));
     }
 
     private CoalhaulerSwine(final CoalhaulerSwine card) {

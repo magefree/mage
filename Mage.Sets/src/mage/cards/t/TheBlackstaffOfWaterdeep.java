@@ -35,7 +35,7 @@ public final class TheBlackstaffOfWaterdeep extends CardImpl {
     public TheBlackstaffOfWaterdeep(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // You many choose not to untap The Blackstaff of Waterdeep during your untap step.
         this.addAbility(new SkipUntapOptionalAbility());
@@ -91,8 +91,8 @@ class TheBlackstaffOfWaterdeepEffect extends ContinuousEffectImpl {
                 return true;
             case PTChangingEffects_7:
                 if (sublayer == SubLayer.SetPT_7b) {
-                    artifact.getPower().setValue(4);
-                    artifact.getToughness().setValue(4);
+                    artifact.getPower().setModifiedBaseValue(4);
+                    artifact.getToughness().setModifiedBaseValue(4);
                     return true;
                 }
         }

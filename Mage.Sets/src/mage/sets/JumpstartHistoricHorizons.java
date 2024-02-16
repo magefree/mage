@@ -269,7 +269,7 @@ public final class JumpstartHistoricHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Sanctuary Raptor", 755, Rarity.UNCOMMON, mage.cards.s.SanctuaryRaptor.class));
         cards.add(new SetCardInfo("Sanctum Weaver", 627, Rarity.RARE, mage.cards.s.SanctumWeaver.class));
         cards.add(new SetCardInfo("Sandsteppe Outcast", 121, Rarity.COMMON, mage.cards.s.SandsteppeOutcast.class));
-        cards.add(new SetCardInfo("Sarkhan's Scorn", 22, Rarity.COMMON, mage.cards.s.SarkhansScorn.class));
+        cards.add(new SetCardInfo("Sarkhan's Scorn", 23, Rarity.COMMON, mage.cards.s.SarkhansScorn.class));
         cards.add(new SetCardInfo("Savage Swipe", 630, Rarity.COMMON, mage.cards.s.SavageSwipe.class));
         cards.add(new SetCardInfo("Scale Up", 631, Rarity.UNCOMMON, mage.cards.s.ScaleUp.class));
         cards.add(new SetCardInfo("Scour All Possibilities", 242, Rarity.COMMON, mage.cards.s.ScourAllPossibilities.class));

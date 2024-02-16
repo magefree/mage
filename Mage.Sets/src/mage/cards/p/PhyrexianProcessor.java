@@ -112,8 +112,8 @@ class PhyrexianProcessorCreateTokenEffect extends OneShotEffect {
         if (object instanceof Integer) {
             int lifePaid = (int) object;
             MinionToken token = new MinionToken();
-            token.getPower().modifyBaseValue(lifePaid);
-            token.getToughness().modifyBaseValue(lifePaid);
+            token.setPower(lifePaid);
+            token.setToughness(lifePaid);
             token.putOntoBattlefield(1, game, source, source.getControllerId());
             return true;
         }

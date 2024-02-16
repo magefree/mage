@@ -47,7 +47,7 @@ class PrimitiveEtchingsAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new InfoEffect(""), false);
     }
 
-    PrimitiveEtchingsAbility(final PrimitiveEtchingsAbility ability) {
+    private PrimitiveEtchingsAbility(final PrimitiveEtchingsAbility ability) {
         super(ability);
     }
 

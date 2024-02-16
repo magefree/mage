@@ -40,8 +40,6 @@ public final class RevengeStarWars extends CardImpl {
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         this.getSpellAbility().addTarget(new TargetOpponentsCreaturePermanent());
 
-        this.getSpellAbility().addWatcher(new PlayerLostLifeWatcher());
-
     }
 
     private RevengeStarWars(final RevengeStarWars card) {
@@ -72,11 +70,11 @@ enum LostLifeCondition implements Condition {
 
 class RevengeEffect extends OneShotEffect {
 
-    public RevengeEffect() {
+    RevengeEffect() {
         super(Outcome.BoostCreature);
     }
 
-    public RevengeEffect(final RevengeEffect effect) {
+    private RevengeEffect(final RevengeEffect effect) {
         super(effect);
     }
 

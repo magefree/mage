@@ -10,8 +10,6 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.StaticFilters;
 
-import java.util.Arrays;
-
 /**
  * @author TheElk801
  */
@@ -33,8 +31,6 @@ public final class KeimiToken extends TokenImpl {
         );
         ability.addEffect(new GainLifeEffect(1).concatBy("and"));
         this.addAbility(ability);
-
-        availableImageSetCodes = Arrays.asList("NEO");
     }
 
     private KeimiToken(final KeimiToken token) {

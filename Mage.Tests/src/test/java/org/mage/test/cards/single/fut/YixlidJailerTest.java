@@ -27,7 +27,6 @@ public class YixlidJailerTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
-        assertAllCommandsUsed();
         assertPermanentCount(playerA, "Narcomoeba", 1);
         assertGraveyardCount(playerA, "Thought Scour", 1);
         assertGraveyardCount(playerA, "Narcomoeba", 0);
@@ -47,7 +46,6 @@ public class YixlidJailerTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
-        assertAllCommandsUsed();
         assertGraveyardCount(playerA, 0); // Emrakul should shuffle graveyard into library
     }
 
@@ -64,7 +62,6 @@ public class YixlidJailerTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
-        assertAllCommandsUsed();
         assertGraveyardCount(playerA, 0); // Emrakul should shuffle graveyard into library
         assertPermanentCount(playerA, "Emrakul, the Aeons Torn", 0);
     }
@@ -84,7 +81,6 @@ public class YixlidJailerTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
-        assertAllCommandsUsed();
         assertPermanentCount(playerA, "Narcomoeba", 0);
         assertGraveyardCount(playerA, "Thought Scour", 1);
         assertGraveyardCount(playerA, "Narcomoeba", 1);
@@ -105,7 +101,6 @@ public class YixlidJailerTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
-        assertAllCommandsUsed();
         assertGraveyardCount(playerA, "Emrakul, the Aeons Torn", 1);
     }
 
@@ -123,7 +118,6 @@ public class YixlidJailerTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
-        assertAllCommandsUsed();
         assertGraveyardCount(playerA, "Emrakul, the Aeons Torn", 1); // Emrakul should not trigger even if removed from the battlefield
         assertPermanentCount(playerA, "Emrakul, the Aeons Torn", 0);
     }
@@ -142,7 +136,6 @@ public class YixlidJailerTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
-        assertAllCommandsUsed();
         assertGraveyardCount(playerA, "Midnight Reaper", 1);
         assertPermanentCount(playerB, "Yixlid Jailer", 1);
         assertLife(playerA, 19); // Midnight Reaper should still trigger
@@ -161,7 +154,6 @@ public class YixlidJailerTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
-        assertAllCommandsUsed();
         assertGraveyardCount(playerA, "Midnight Reaper", 1);
         assertGraveyardCount(playerB, "Yixlid Jailer", 1);
         assertLife(playerA, 19); // Midnight Reaper should still trigger

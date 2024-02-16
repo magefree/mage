@@ -1,19 +1,19 @@
 
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.ComparisonType;
+import mage.constants.SubType;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.predicate.mageobject.PowerPredicate;
-import mage.target.common.TargetAttackingCreature;
+import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author Loki
  */
 public final class TerashisVerdict extends CardImpl {
@@ -25,12 +25,12 @@ public final class TerashisVerdict extends CardImpl {
     }
 
     public TerashisVerdict(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{W}");
         this.subtype.add(SubType.ARCANE);
 
         // Destroy target attacking creature with power 3 or less.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetAttackingCreature(1, 1, filter, false));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
     private TerashisVerdict(final TerashisVerdict card) {

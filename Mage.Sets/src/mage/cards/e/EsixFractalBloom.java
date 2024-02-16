@@ -18,12 +18,11 @@ import mage.game.Game;
 import mage.game.events.CreateTokenEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.EmptyToken;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.target.TargetPermanent;
-import mage.util.CardUtil;
 import mage.util.functions.CopyApplier;
+import mage.util.functions.CopyTokenFunction;
 import mage.util.functions.EmptyCopyApplier;
 import mage.watchers.Watcher;
 
@@ -39,7 +38,7 @@ public final class EsixFractalBloom extends CardImpl {
     public EsixFractalBloom(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.FRACTAL);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
@@ -91,7 +90,7 @@ class EsixFractalBloomEffect extends ReplacementEffectImpl {
                 && game.isActivePlayer(source.getControllerId())
                 && !EsixFractalBloomWatcher.checkPlayer(source.getControllerId(), game)
                 && game.getBattlefield().count(
-                filter, source.getSourceId(), source.getControllerId(), game
+                filter, source.getControllerId(), source, game
         ) > 0;
     }
 
@@ -102,7 +101,7 @@ class EsixFractalBloomEffect extends ReplacementEffectImpl {
             return false;
         }
         TargetPermanent target = new TargetPermanent(0, 1, filter, true);
-        player.choose(outcome, target, source.getSourceId(), game);
+        player.choose(outcome, target, source, game);
         Permanent permanent = game.getPermanent(target.getFirstTarget());
         if (permanent == null) {
             return false;
@@ -145,8 +144,7 @@ class EsixFractalBloomEffect extends ReplacementEffectImpl {
         }
 
         // create token and modify all attributes permanently (without game usage)
-        EmptyToken token = new EmptyToken();
-        CardUtil.copyTo(token).from(copyFromPermanent, game); // needed so that entersBattlefied triggered abilities see the attributes (e.g. Master Biomancer)
+        Token token = CopyTokenFunction.createTokenCopy(copyFromPermanent, game); // needed so that entersBattlefied triggered abilities see the attributes (e.g. Master Biomancer)
         applier.apply(game, token, source, permanent.getId());
         return token;
     }

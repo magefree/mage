@@ -42,4 +42,9 @@ public class LockedInCondition implements Condition {
         return condition;
     }
 
+    @Override
+    public boolean caresAboutManaColor() {
+        return condition.caresAboutManaColor();
+    }
+
 }

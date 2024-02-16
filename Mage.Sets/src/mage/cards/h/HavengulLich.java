@@ -25,7 +25,6 @@ import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCardInGraveyard;
 
@@ -46,7 +45,7 @@ public final class HavengulLich extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {1}: You may cast target creature card in a graveyard this turn. When you cast that card this turn, Havengul Lich gains all activated abilities of that card until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new HavengulLichPlayEffect(), new ManaCostsImpl("{1}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new HavengulLichPlayEffect(), new ManaCostsImpl<>("{1}"));
         ability.addEffect(new HavengulLichPlayedEffect());
         ability.addTarget(new TargetCardInGraveyard(filter));
         this.addAbility(ability);
@@ -66,12 +65,12 @@ public final class HavengulLich extends CardImpl {
 //allow card in graveyard to be played
 class HavengulLichPlayEffect extends AsThoughEffectImpl {
 
-    public HavengulLichPlayEffect() {
+    HavengulLichPlayEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
         staticText = "You may cast target creature card in a graveyard this turn";
     }
 
-    public HavengulLichPlayEffect(final HavengulLichPlayEffect effect) {
+    private HavengulLichPlayEffect(final HavengulLichPlayEffect effect) {
         super(effect);
     }
 
@@ -103,11 +102,11 @@ class HavengulLichPlayEffect extends AsThoughEffectImpl {
 //create delayed triggered ability to watch for card being played
 class HavengulLichPlayedEffect extends OneShotEffect {
 
-    public HavengulLichPlayedEffect() {
+    HavengulLichPlayedEffect() {
         super(Outcome.PutCreatureInPlay);
     }
 
-    public HavengulLichPlayedEffect(final HavengulLichPlayedEffect effect) {
+    private HavengulLichPlayedEffect(final HavengulLichPlayedEffect effect) {
         super(effect);
         staticText = "When you cast that card this turn, {this} gains all activated abilities of that card until end of turn";
     }
@@ -136,7 +135,7 @@ class HavengulLichDelayedTriggeredAbility extends DelayedTriggeredAbility {
         this.cardId = cardId;
     }
 
-    public HavengulLichDelayedTriggeredAbility(HavengulLichDelayedTriggeredAbility ability) {
+    private HavengulLichDelayedTriggeredAbility(final HavengulLichDelayedTriggeredAbility ability) {
         super(ability);
         this.cardId = ability.cardId;
     }
@@ -172,7 +171,7 @@ class HavengulLichEffect extends ContinuousEffectImpl {
         this.cardId = cardId;
     }
 
-    public HavengulLichEffect(final HavengulLichEffect effect) {
+    private HavengulLichEffect(final HavengulLichEffect effect) {
         super(effect);
         this.cardId = effect.cardId;
     }
@@ -188,7 +187,7 @@ class HavengulLichEffect extends ContinuousEffectImpl {
         Card card = game.getCard(cardId);
         if (permanent != null && card != null) {
             for (ActivatedAbility ability : card.getAbilities(game).getActivatedAbilities(Zone.BATTLEFIELD)) {
-                permanent.addAbility(ability, source.getSourceId(), game);
+                permanent.addAbility(ability, source.getSourceId(), game, true);
             }
         }
         return false;

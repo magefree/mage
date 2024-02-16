@@ -35,7 +35,7 @@ public final class Unearth extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(filter));
 
         // Cycling {2}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
     private Unearth(final Unearth card) {

@@ -30,7 +30,7 @@ public final class KillerBees extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         
         // {G}: Killer Bees gets +1/+1 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl("{G}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl<>("{G}")));
         
     }
 

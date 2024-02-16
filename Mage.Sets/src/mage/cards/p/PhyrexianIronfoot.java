@@ -23,7 +23,7 @@ public final class PhyrexianIronfoot extends CardImpl {
 
     public PhyrexianIronfoot(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");
-        this.addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
         this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.CONSTRUCT);
         this.power = new MageInt(3);
@@ -33,7 +33,7 @@ public final class PhyrexianIronfoot extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepSourceEffect()));
 
         // {1}{S}: Untap Phyrexian Ironfoot.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), new ManaCostsImpl("{1}{S}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), new ManaCostsImpl<>("{1}{S}")));
     }
 
     private PhyrexianIronfoot(final PhyrexianIronfoot card) {

@@ -49,7 +49,7 @@ public final class ShamanOfForgottenWays extends CardImpl {
         Ability ability = new ActivateIfConditionActivatedAbility(
                 Zone.BATTLEFIELD, 
                 new ShamanOfForgottenWaysEffect(), 
-                new ManaCostsImpl("{9}{G}{G}"), 
+                new ManaCostsImpl<>("{9}{G}{G}"),
                 FormidableCondition.instance);
         ability.addCost(new TapSourceCost());
         ability.setAbilityWord(AbilityWord.FORMIDABLE);        
@@ -86,7 +86,7 @@ class ShamanOfForgottenWaysEffect extends OneShotEffect {
         this.staticText = "each player's life total becomes the number of creatures they control";
     }
     
-    public ShamanOfForgottenWaysEffect(final ShamanOfForgottenWaysEffect effect) {
+    private ShamanOfForgottenWaysEffect(final ShamanOfForgottenWaysEffect effect) {
         super(effect);
     }
     

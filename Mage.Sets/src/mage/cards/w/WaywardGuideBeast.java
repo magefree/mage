@@ -72,14 +72,14 @@ class WaywardGuideBeastEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         if (player == null || game.getBattlefield().count(
                 StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND,
-                source.getSourceId(), source.getControllerId(), game
+                source.getControllerId(), source, game
         ) == 0) {
             return false;
         }
         TargetPermanent target = new TargetPermanent(
                 1, 1, StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND, true
         );
-        player.choose(outcome, target, source.getSourceId(), game);
+        player.choose(outcome, target, source, game);
         player.moveCards(game.getCard(target.getFirstTarget()), Zone.HAND, source, game);
         return true;
     }

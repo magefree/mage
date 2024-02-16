@@ -43,12 +43,12 @@ public final class DivinerSpirit extends CardImpl {
 
 class DivinerSpiritEffect extends OneShotEffect {
 
-    public DivinerSpiritEffect() {
+    DivinerSpiritEffect() {
         super(Outcome.DrawCard);
         this.staticText = "you and that player each draw that many cards";
     }
 
-    public DivinerSpiritEffect(final DivinerSpiritEffect effect) {
+    private DivinerSpiritEffect(final DivinerSpiritEffect effect) {
         super(effect);
     }
 

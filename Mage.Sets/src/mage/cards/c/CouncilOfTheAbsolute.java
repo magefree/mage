@@ -55,18 +55,13 @@ public final class CouncilOfTheAbsolute extends CardImpl {
 
 class CouncilOfTheAbsoluteReplacementEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public CouncilOfTheAbsoluteReplacementEffect() {
+    CouncilOfTheAbsoluteReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "Your opponents can't cast spells with the chosen name";
     }
 
-    public CouncilOfTheAbsoluteReplacementEffect(final CouncilOfTheAbsoluteReplacementEffect effect) {
+    private CouncilOfTheAbsoluteReplacementEffect(final CouncilOfTheAbsoluteReplacementEffect effect) {
         super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override
@@ -76,7 +71,7 @@ class CouncilOfTheAbsoluteReplacementEffect extends ContinuousRuleModifyingEffec
 
     @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source);
         if (mageObject != null) {
             return "You can't cast a spell with that name (" + mageObject.getName() + " in play).";
         }
@@ -101,7 +96,7 @@ class CouncilOfTheAbsoluteReplacementEffect extends ContinuousRuleModifyingEffec
 
 class CouncilOfTheAbsoluteCostReductionEffect extends CostModificationEffectImpl {
 
-    public CouncilOfTheAbsoluteCostReductionEffect() {
+    CouncilOfTheAbsoluteCostReductionEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.REDUCE_COST);
         this.staticText = "Spells with the chosen name you cast cost 2 less to cast";
     }

@@ -22,7 +22,7 @@ public final class SkitteringInvasion extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new EldraziSpawnToken(), 5));
     }
 
-    public SkitteringInvasion (final SkitteringInvasion card) {
+    private SkitteringInvasion(final SkitteringInvasion card) {
         super(card);
     }
 

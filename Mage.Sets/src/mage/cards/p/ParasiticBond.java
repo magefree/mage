@@ -31,7 +31,7 @@ public final class ParasiticBond extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
         // At the beginning of the upkeep of enchanted creature's controller, Parasitic Bond deals 2 damage to that player.
         Effect effect = new DamageTargetEffect(2);
         effect.setText("{this} deals 2 damage to that player");

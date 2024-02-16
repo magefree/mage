@@ -4,6 +4,8 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldOrLeavesSourceTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.keyword.InvestigateEffect;
+import mage.abilities.effects.keyword.InvestigateTargetEffect;
 import mage.abilities.keyword.FriendsForeverAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -12,10 +14,8 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.permanent.token.ClueArtifactToken;
-import mage.game.permanent.token.Token;
 import mage.players.Player;
+import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
 
@@ -27,7 +27,7 @@ public final class WernogRidersChaplain extends CardImpl {
     public WernogRidersChaplain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
@@ -69,7 +69,6 @@ class WernogRidersChaplainEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         int count = 1;
-        Token token = new ClueArtifactToken();
         for (UUID playerId : game.getOpponents(source.getControllerId())) {
             Player opponent = game.getPlayer(playerId);
             if (opponent == null) {
@@ -77,14 +76,12 @@ class WernogRidersChaplainEffect extends OneShotEffect {
             }
             if (opponent.chooseUse(outcome, "Investigate?", source, game)) {
                 count++;
-                token.putOntoBattlefield(1, game, source, playerId);
-                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.INVESTIGATED, source.getSourceId(), source, playerId));
+                new InvestigateTargetEffect().setTargetPointer(new FixedTarget(playerId)).apply(game, source);
             } else {
                 opponent.loseLife(1, game, source, false);
             }
         }
-        token.putOntoBattlefield(count, game, source, source.getControllerId());
-        game.fireEvent(GameEvent.getEvent(GameEvent.EventType.INVESTIGATED, source.getSourceId(), source, source.getControllerId()));
+        new InvestigateEffect(count).apply(game, source);
         return true;
     }
 }

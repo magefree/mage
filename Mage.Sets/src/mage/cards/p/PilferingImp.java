@@ -13,7 +13,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetOpponent;
@@ -38,9 +37,8 @@ public final class PilferingImp extends CardImpl {
         Ability ability = new ActivateAsSorceryActivatedAbility(
                 Zone.BATTLEFIELD,
                 new DiscardCardYouChooseTargetEffect(
-                        StaticFilters.FILTER_CARD_NON_LAND,
-                        TargetController.OPPONENT
-                ), new ManaCostsImpl("{1}{B}")
+                        StaticFilters.FILTER_CARD_NON_LAND
+                ), new ManaCostsImpl<>("{1}{B}")
         );
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());

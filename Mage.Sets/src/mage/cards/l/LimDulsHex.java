@@ -40,12 +40,12 @@ public final class LimDulsHex extends CardImpl {
 
 class LimDulsHexEffect extends OneShotEffect {
 
-    public LimDulsHexEffect() {
+    LimDulsHexEffect() {
         super(Outcome.Damage);
         this.staticText = "for each player, {this} deals 1 damage to that player unless they pay {B} or {3}";
     }
 
-    public LimDulsHexEffect(final LimDulsHexEffect effect) {
+    private LimDulsHexEffect(final LimDulsHexEffect effect) {
         super(effect);
     }
 
@@ -61,7 +61,7 @@ class LimDulsHexEffect extends OneShotEffect {
             for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    OrCost costToPay = new OrCost(new ManaCostsImpl("{B}"), new ManaCostsImpl("{3}"), "{B} or {3}");
+                    OrCost costToPay = new OrCost("{B} or {3}", new ManaCostsImpl<>("{B}"), new ManaCostsImpl<>("{3}"));
                     costToPay.clearPaid();
                     if (!(player.chooseUse(Outcome.Benefit, "Pay {B} or {3}?", source, game) && costToPay.pay(source, game, source, player.getId(), false, null))) {
                         game.informPlayers(player.getLogName() + " chooses not to pay " + costToPay.getText() + " to prevent 1 damage from " + sourcePermanent.getLogName());

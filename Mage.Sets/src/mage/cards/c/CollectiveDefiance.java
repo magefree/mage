@@ -44,18 +44,16 @@ public final class CollectiveDefiance extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer(1, 1, false, filterDiscard).withChooseHint("discards all cards and draws"));
 
         // Collective Defiance deals 4 damage to target creature.;
-        Mode mode = new Mode();
         Effect effect = new DamageTargetEffect(4);
         effect.setText("{this} deals 4 damage to target creature");
-        mode.addEffect(effect);
+        Mode mode = new Mode(effect);
         mode.addTarget(new TargetCreaturePermanent(filterCreature).withChooseHint("deals 4 damage to"));
         this.getSpellAbility().addMode(mode);
 
         // Collective Defiance deals 3 damage to target opponent or planeswalker.
-        mode = new Mode();
         effect = new DamageTargetEffect(3);
         effect.setText("{this} deals 3 damage to target opponent or planeswalker");
-        mode.addEffect(effect);
+        mode = new Mode(effect);
         mode.addTarget(new TargetOpponentOrPlaneswalker().withChooseHint("deals 3 damage to"));
         this.getSpellAbility().addMode(mode);
     }
@@ -72,12 +70,12 @@ public final class CollectiveDefiance extends CardImpl {
 
 class CollectiveDefianceEffect extends OneShotEffect {
 
-    public CollectiveDefianceEffect() {
+    CollectiveDefianceEffect() {
         super(Outcome.Discard);
         this.staticText = "Target player discards all the cards in their hand, then draws that many cards";
     }
 
-    public CollectiveDefianceEffect(final CollectiveDefianceEffect effect) {
+    private CollectiveDefianceEffect(final CollectiveDefianceEffect effect) {
         super(effect);
     }
 

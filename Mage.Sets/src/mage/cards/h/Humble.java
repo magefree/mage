@@ -3,7 +3,7 @@ package mage.cards.h;
 
 import java.util.UUID;
 import mage.abilities.effects.common.continuous.LoseAllAbilitiesTargetEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessTargetEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -24,7 +24,7 @@ public final class Humble extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new LoseAllAbilitiesTargetEffect(Duration.EndOfTurn)
                 .setText("Target creature loses all abilities"));
-        this.getSpellAbility().addEffect(new SetPowerToughnessTargetEffect(0, 1, Duration.EndOfTurn)
+        this.getSpellAbility().addEffect(new SetBasePowerToughnessTargetEffect(0, 1, Duration.EndOfTurn)
                 .setText("and becomes 0/1 until end of turn"));
     }
 

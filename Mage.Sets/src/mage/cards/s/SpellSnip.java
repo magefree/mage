@@ -24,7 +24,7 @@ public final class SpellSnip extends CardImpl {
         // Counter target spell unless its controller pays {1}.
         this.getSpellAbility().addTarget(new TargetSpell());
         this.getSpellAbility().addEffect(new CounterUnlessPaysEffect(new GenericManaCost(1)));
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
     private SpellSnip(final SpellSnip card) {

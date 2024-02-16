@@ -50,9 +50,10 @@ class BloodletterStateTriggeredAbility extends StateTriggeredAbility {
 
     public BloodletterStateTriggeredAbility() {
         super(Zone.BATTLEFIELD, new BloodletterEffect());
+        setTriggerPhrase("When the names of three or more nonland permanents begin with the same letter, ");
     }
 
-    public BloodletterStateTriggeredAbility(final BloodletterStateTriggeredAbility ability) {
+    private BloodletterStateTriggeredAbility(final BloodletterStateTriggeredAbility ability) {
         super(ability);
     }
 
@@ -64,7 +65,7 @@ class BloodletterStateTriggeredAbility extends StateTriggeredAbility {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Map<Character, Integer> initialCount = new HashMap<>();
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterNonlandPermanent(), getControllerId(), getSourceId(), game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterNonlandPermanent(), getControllerId(), this, game)) {
             Character initial = permanent.getName().charAt(0);
             initialCount.putIfAbsent(initial, 0);
             initialCount.put(initial, initialCount.get(initial) + 1);
@@ -76,21 +77,16 @@ class BloodletterStateTriggeredAbility extends StateTriggeredAbility {
         }
         return false;
     }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "When the names of three or more nonland permanents begin with the same letter, " ;
-    }
 }
 
 class BloodletterEffect extends OneShotEffect {
 
-    public BloodletterEffect() {
+    BloodletterEffect() {
         super(Outcome.Sacrifice);
         staticText = "sacrifice {this}. If you do, it deals 2 damage to each creature and each player";
     }
 
-    public BloodletterEffect(final BloodletterEffect effect) {
+    private BloodletterEffect(final BloodletterEffect effect) {
         super(effect);
     }
 

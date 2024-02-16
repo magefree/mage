@@ -36,7 +36,7 @@ public final class MarchesasSmuggler extends CardImpl {
         // Dethrone
         this.addAbility(new DethroneAbility());
         // {1}{U}{R}: Target creature you control gains haste until end of turn and can't be blocked this turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{1}{U}{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{1}{U}{R}"));
         ability.addTarget(new TargetControlledCreaturePermanent());
         Effect effect = new CantBeBlockedTargetEffect(Duration.EndOfTurn);
         effect.setText("and can't be blocked this turn");

@@ -38,30 +38,28 @@ public final class DromokasCommand extends CardImpl {
         this.getSpellAbility().getModes().setMaxModes(2);
 
         // Prevent all damage target instant or sorcery spell would deal this turn;
-        this.getSpellAbility().getEffects().add(new PreventDamageByTargetEffect(Duration.EndOfTurn));
+        this.getSpellAbility().getEffects().add(new PreventDamageByTargetEffect(Duration.EndOfTurn, false)
+                .withTextOptions(false, true));
         this.getSpellAbility().getTargets().add(new TargetSpell(new FilterInstantOrSorcerySpell()));
 
         // or Target player sacrifices an enchantment;
-        Mode mode = new Mode();
         Effect effect = new SacrificeEffect(filterEnchantment, 1, "target player");
         effect.setText("Target player sacrifices an enchantment");
-        mode.addEffect(effect);
+        Mode mode = new Mode(effect);
         mode.addTarget(new TargetPlayer());
         this.getSpellAbility().getModes().addMode(mode);
 
         // Put a +1/+1 counter on target creature;
-        mode = new Mode();
         effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance());
         effect.setText("Put a +1/+1 counter on target creature");
-        mode.addEffect(effect);
+        mode = new Mode(effect);
         mode.addTarget(new TargetCreaturePermanent(filterCreature));
         this.getSpellAbility().getModes().addMode(mode);
 
         // or Target creature you control fights target creature you don't control.
-        mode = new Mode();
         effect = new FightTargetsEffect();
         effect.setText("Target creature you control fights target creature you don't control");
-        mode.addEffect(effect);
+        mode = new Mode(effect);
         mode.addTarget(new TargetControlledCreaturePermanent());
         mode.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
         this.getSpellAbility().getModes().addMode(mode);

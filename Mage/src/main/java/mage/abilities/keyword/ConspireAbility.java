@@ -21,7 +21,6 @@ import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
 import mage.util.CardUtil;
 
-import java.util.Iterator;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -63,8 +62,8 @@ public class ConspireAbility extends StaticAbility implements OptionalAdditional
         }
 
         public String getReminder() {
-            return "as you cast this spell, you may tap two untapped creatures you control " +
-                    "that share a color with it. When you do, copy it" + message;
+            return "As you cast this spell, you may tap two untapped creatures you control " +
+                    "that share a color with it. When you do, copy it" + message + ".";
         }
     }
 
@@ -91,7 +90,7 @@ public class ConspireAbility extends StaticAbility implements OptionalAdditional
         this.addSubAbility(new ConspireTriggeredAbility(conspireId));
     }
 
-    public ConspireAbility(final ConspireAbility ability) {
+    protected ConspireAbility(final ConspireAbility ability) {
         super(ability);
         this.conspireId = ability.conspireId;
         this.addedById = ability.addedById;
@@ -131,25 +130,19 @@ public class ConspireAbility extends StaticAbility implements OptionalAdditional
                 + conspireCost.getText(false) + " ?", ability, game)) {
             return;
         }
-        ability.getEffects().setValue("ConspireActivation" + conspireId + addedById, true);
-        for (Iterator<Cost> it = ((Costs<Cost>) conspireCost).iterator(); it.hasNext(); ) {
-            Cost cost = (Cost) it.next();
+        ability.getAllEffects().setValue("ConspireActivation" + conspireId + addedById, true);
+        for (Cost cost : (Costs<Cost>) conspireCost) {
             if (cost instanceof ManaCostsImpl) {
-                ability.getManaCostsToPay().add((ManaCostsImpl<?>) cost.copy());
+                ability.addManaCostsToPay((ManaCostsImpl<?>) cost.copy());
             } else {
-                ability.getCosts().add(cost.copy());
+                ability.addCost(cost.copy());
             }
         }
     }
 
     @Override
     public String getRule() {
-        StringBuilder sb = new StringBuilder();
-        if (conspireCost != null) {
-            sb.append(conspireCost.getText(false));
-            sb.append(' ').append(conspireCost.getReminderText());
-        }
-        return sb.toString();
+        return "Conspire <i>(" + reminderText + ")</i>";
     }
 
     @Override
@@ -198,7 +191,7 @@ class ConspireTriggeredAbility extends CastSourceTriggeredAbility {
         return spell != null
                 && spell
                 .getSpellAbility()
-                .getEffects()
+                .getAllEffects()
                 .stream()
                 .map(effect -> effect.getValue("ConspireActivation" + conspireId + addedById))
                 .anyMatch(Objects::nonNull);

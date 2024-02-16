@@ -5,15 +5,13 @@ import mage.abilities.Ability;
 import mage.abilities.common.PassAbility;
 import mage.cards.Card;
 import mage.cards.Cards;
-import mage.cards.decks.Deck;
-import mage.cards.decks.DeckCardLists;
-import mage.cards.repository.CardInfo;
-import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
 import mage.constants.ManaType;
 import mage.constants.PlayerAction;
-import mage.constants.Zone;
-import mage.game.*;
+import mage.game.Game;
+import mage.game.GameOptions;
+import mage.game.GameState;
+import mage.game.Table;
 import mage.game.command.Plane;
 import mage.game.events.Listener;
 import mage.game.events.PlayerQueryEvent;
@@ -27,7 +25,7 @@ import mage.server.Main;
 import mage.server.User;
 import mage.server.managers.ManagerFactory;
 import mage.server.util.Splitter;
-import mage.server.util.SystemUtil;
+import mage.util.MultiAmountMessage;
 import mage.utils.StreamUtils;
 import mage.utils.timer.PriorityTimer;
 import mage.view.*;
@@ -46,7 +44,7 @@ import java.util.stream.Collectors;
 import java.util.zip.GZIPOutputStream;
 
 /**
- * @author BetaSteward_at_googlemail.com
+ * @author BetaSteward_at_googlemail.com, JayDi85
  */
 public class GameController implements GameCallback {
 
@@ -80,7 +78,7 @@ public class GameController implements GameCallback {
     private boolean useTimeout = true;
     private final GameOptions gameOptions;
 
-    private UUID userReqestingRollback;
+    private UUID userRequestingRollback;
     private int turnsToRollback;
     private int requestsOpen;
 
@@ -91,7 +89,7 @@ public class GameController implements GameCallback {
         gameSessionId = UUID.randomUUID();
         this.userPlayerMap = userPlayerMap;
         chatId = managerFactory.chatManager().createChatSession("Game " + game.getId());
-        this.userReqestingRollback = null;
+        this.userRequestingRollback = null;
         this.game = game;
         this.game.setSaveGame(managerFactory.configSettings().isSaveGameActivated());
         this.tableId = tableId;
@@ -104,13 +102,14 @@ public class GameController implements GameCallback {
 
     public void cleanUp() {
         cancelTimeout();
-        for (GameSessionPlayer gameSessionPlayer : getGameSessions()) {
-            gameSessionPlayer.cleanUp();
-        }
-        managerFactory.chatManager().destroyChatSession(chatId);
         for (PriorityTimer priorityTimer : timers.values()) {
             priorityTimer.cancel();
         }
+
+        getGameSessions().forEach(GameSessionPlayer::cleanUp);
+        getGameSessionWatchers().forEach(GameSessionWatcher::cleanUp);
+
+        managerFactory.chatManager().destroyChatSession(chatId);
     }
 
     private void init() {
@@ -149,15 +148,18 @@ public class GameController implements GameCallback {
                                 if (playerId == null) {
                                     throw new MageException("RESUME_TIMER: playerId can't be null");
                                 }
+                                Player player = game.getState().getPlayer(playerId);
+                                if (player == null) {
+                                    throw new MageException("RESUME_TIMER: player can't be null");
+                                }
+
                                 timer = timers.get(playerId);
                                 if (timer == null) {
-                                    Player player = game.getState().getPlayer(playerId);
-                                    if (player != null) {
-                                        timer = createPlayerTimer(event.getPlayerId(), player.getPriorityTimeLeft());
-                                    } else {
-                                        throw new MageException("RESUME_TIMER: player can't be null");
-                                    }
+                                    timer = createPlayerTimer(event.getPlayerId(), player.getPriorityTimeLeft());
                                 }
+
+                                player.setBufferTimeLeft(game.getBufferTime());
+                                timer.setBufferCount(game.getBufferTime());
                                 timer.resume();
                                 break;
                             case PAUSE_TIMER:
@@ -225,6 +227,12 @@ public class GameController implements GameCallback {
                             case PERSONAL_MESSAGE:
                                 informPersonal(event.getPlayerId(), event.getMessage());
                                 break;
+                            case TOURNAMENT_CONSTRUCT:
+                            case DRAFT_PICK_CARD:
+                                // tournament and draft events, impossible to catch it here
+                                break;
+                            default:
+                                throw new IllegalArgumentException("Unknown game event: " + event.getQueryType());
                         }
                     } catch (MageException ex) {
                         logger.fatal("Player event listener error ", ex);
@@ -238,7 +246,7 @@ public class GameController implements GameCallback {
                 logger.fatal("Send info about player not joined yet:", ex);
             }
         }, GAME_TIMEOUTS_CHECK_JOINING_STATUS_EVERY_SECS, GAME_TIMEOUTS_CHECK_JOINING_STATUS_EVERY_SECS, TimeUnit.SECONDS);
-        checkStart();
+        checkJoinAndStart();
     }
 
     /**
@@ -258,6 +266,7 @@ public class GameController implements GameCallback {
         long delayMs = 250L; // run each 250 ms
 
         Action executeOnNoTimeLeft = () -> {
+            // TODO: buggy, must run in game thread, not in timer thread
             game.timerTimeout(initPlayerId);
             logger.debug("Player has no time left to end the match: " + initPlayerId + ". Conceding.");
         };
@@ -308,7 +317,7 @@ public class GameController implements GameCallback {
         user.get().addGame(playerId, gameSession);
         logger.debug("Player " + player.getName() + ' ' + playerId + " has " + joinType + " gameId: " + game.getId());
         managerFactory.chatManager().broadcast(chatId, "", game.getPlayer(playerId).getLogName() + " has " + joinType + " the game", MessageColor.ORANGE, true, game, MessageType.GAME, null);
-        checkStart();
+        checkJoinAndStart();
     }
 
     private synchronized void startGame() {
@@ -318,16 +327,19 @@ public class GameController implements GameCallback {
                 player.updateRange(game);
             }
 
+            // send first info to users
             for (GameSessionPlayer gameSessionPlayer : getGameSessions()) {
                 gameSessionPlayer.init();
             }
 
+            // real game start
             GameWorker worker = new GameWorker(game, choosingPlayerId, this);
             gameFuture = gameExecutor.submit(worker);
             try {
                 Thread.sleep(1000);
-            } catch (InterruptedException ex) {
+            } catch (InterruptedException ignore) {
             }
+
             if (game.getState().getChoosingPlayerId() != null) {
                 // start timer to force player to choose starting player otherwise loosing by being idle
                 setupTimeout(game.getState().getChoosingPlayerId());
@@ -336,7 +348,7 @@ public class GameController implements GameCallback {
     }
 
     private void sendInfoAboutPlayersNotJoinedYetAndTryToFixIt() {
-        // runs every 5 secs untill all players join
+        // runs every 10 secs untill all players join
         for (Player player : game.getPlayers().values()) {
             if (player.canRespond() && player.isHuman()) {
                 Optional<User> requestedUser = getUserByPlayerId(player.getId());
@@ -347,7 +359,7 @@ public class GameController implements GameCallback {
                         // join the game because player has not joined or was removed because of disconnect
                         String problemPlayerFixes;
                         user.removeConstructing(player.getId());
-                        managerFactory.gameManager().joinGame(game.getId(), user.getId());
+                        managerFactory.gameManager().joinGame(game.getId(), user.getId()); // will generate new session on empty
                         logger.warn("Forced join of player " + player.getName() + " (" + user.getUserState() + ") to gameId: " + game.getId());
                         if (user.isConnected()) {
                             // init game session, see reconnect()
@@ -359,9 +371,8 @@ public class GameController implements GameCallback {
                                 session.init();
                                 managerFactory.gameManager().sendPlayerString(session.getGameId(), user.getId(), "");
                             } else {
-                                problemPlayerFixes = "leave on broken game session";
-                                logger.error("Can't find game session for forced join, leave it: player " + player.getName() + " in gameId: " + game.getId());
-                                player.leave();
+                                throw new IllegalStateException("Wrong code usage: session can't be null cause it created in forced joinGame already");
+                                //player.leave();
                             }
                         } else {
                             problemPlayerFixes = "leave on disconnected";
@@ -388,7 +399,7 @@ public class GameController implements GameCallback {
                 }
             }
         }
-        checkStart();
+        checkJoinAndStart();
     }
 
     private Optional<User> getUserByPlayerId(UUID playerId) {
@@ -400,14 +411,14 @@ public class GameController implements GameCallback {
         return Optional.empty();
     }
 
-    private void checkStart() {
-        if (allJoined()) {
+    private void checkJoinAndStart() {
+        if (isAllJoined()) {
             joinWaitingExecutor.shutdownNow();
             managerFactory.threadExecutor().getCallExecutor().execute(this::startGame);
         }
     }
 
-    private boolean allJoined() {
+    private boolean isAllJoined() {
         for (Player player : game.getPlayers().values()) {
             if (!player.hasLeft()) {
                 Optional<User> user = getUserByPlayerId(player.getId());
@@ -473,7 +484,7 @@ public class GameController implements GameCallback {
     public void quitMatch(UUID userId) {
         UUID playerId = getPlayerId(userId);
         if (playerId != null) {
-            if (allJoined()) {
+            if (isAllJoined()) {
                 GameSessionPlayer gameSessionPlayer = gameSessions.get(playerId);
                 if (gameSessionPlayer != null) {
                     gameSessionPlayer.quitGame();
@@ -485,13 +496,17 @@ public class GameController implements GameCallback {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     player.leave();
-                    checkStart(); // => So the game starts and gets an result or multiplayer game starts with active players
+                    checkJoinAndStart(); // => So the game starts and gets an result or multiplayer game starts with active players
                 }
             }
         }
     }
 
     public void sendPlayerAction(PlayerAction playerAction, UUID userId, Object data) {
+        // TODO: critical bug, must be enabled and research/rework due:
+        // * game change commands must be executed by game thread (example: undo)
+        // * user change commands can be executed by network thread??? (example: change skip settings)
+        //SystemUtil.ensureRunInGameThread();
         switch (playerAction) {
             case UNDO:
                 game.undo(getPlayerId(userId));
@@ -508,7 +523,7 @@ public class GameController implements GameCallback {
                                 turnsToRollback = -1;
                                 requestsOpen = -1;
                             } else {
-                                userReqestingRollback = userId;
+                                userRequestingRollback = userId;
                             }
                         } else {
                             Player player = game.getPlayer(playerId);
@@ -528,25 +543,25 @@ public class GameController implements GameCallback {
                 }
                 break;
             case ADD_PERMISSION_TO_ROLLBACK_TURN:
-                if (userReqestingRollback != null && requestsOpen > 0 && !userId.equals(userReqestingRollback)) {
+                if (userRequestingRollback != null && requestsOpen > 0 && !userId.equals(userRequestingRollback)) {
                     requestsOpen--;
                     if (requestsOpen == 0) {
                         game.rollbackTurns(turnsToRollback);
                         turnsToRollback = -1;
-                        userReqestingRollback = null;
+                        userRequestingRollback = null;
                         requestsOpen = -1;
                     }
                 }
                 break;
-            case DENY_PERMISSON_TO_ROLLBACK_TURN: // one player has denied - so cancel the request
+            case DENY_PERMISSION_TO_ROLLBACK_TURN: // one player has denied - so cancel the request
             {
                 UUID playerId = getPlayerId(userId);
                 if (playerId != null) {
                     Player player = game.getPlayer(playerId);
                     if (player != null) {
-                        if (userReqestingRollback != null && requestsOpen > 0 && !userId.equals(userReqestingRollback)) {
+                        if (userRequestingRollback != null && requestsOpen > 0 && !userId.equals(userRequestingRollback)) {
                             turnsToRollback = -1;
-                            userReqestingRollback = null;
+                            userRequestingRollback = null;
                             requestsOpen = -1;
                             game.informPlayers("Rollback request denied by " + player.getLogName());
                         }
@@ -601,12 +616,15 @@ public class GameController implements GameCallback {
                 }
                 break;
             case VIEW_LIMITED_DECK:
-                viewLimitedDeck(getPlayerId(userId), userId);
+                if (data instanceof UUID) {
+                    UUID targetPlayerId = (UUID) data;
+                    viewDeckOrSideboard(getPlayerId(userId), userId, targetPlayerId, false);
+                }
                 break;
             case VIEW_SIDEBOARD:
                 if (data instanceof UUID) {
                     UUID targetPlayerId = (UUID) data;
-                    viewSideboard(getPlayerId(userId), userId, targetPlayerId);
+                    viewDeckOrSideboard(getPlayerId(userId), userId, targetPlayerId, true);
                 }
                 break;
             default:
@@ -667,59 +685,44 @@ public class GameController implements GameCallback {
         }
     }
 
-    private void viewLimitedDeck(UUID playerId, UUID userId) {
-        Player viewLimitedDeckPlayer = game.getPlayer(playerId);
-        if (viewLimitedDeckPlayer != null) {
-            if (viewLimitedDeckPlayer.isHuman()) {
-                for (MatchPlayer p : managerFactory.tableManager().getTable(tableId).getMatch().getPlayers()) {
-                    if (p.getPlayer().getId().equals(playerId)) {
-                        Optional<User> u = managerFactory.userManager().getUser(userId);
-                        if (u.isPresent() && p.getDeck() != null) {
-                            u.get().ccViewLimitedDeck(p.getDeck(), tableId, requestsOpen, true);
-                        }
-                    }
-                }
-            }
+    private void viewDeckOrSideboard(UUID playerId, UUID userId, UUID targetPlayerId, boolean isSideboardOnly) {
+        Player requestPlayer = game.getPlayer(playerId);
+        Player targetPlayer = game.getPlayer(targetPlayerId);
+        if (requestPlayer == null || targetPlayer == null) {
+            return;
         }
-    }
 
-    private void viewSideboard(UUID playerId, UUID userId, UUID targetPlayerId) {
-        Player needPlayer = game.getPlayer(playerId);
-        if (needPlayer != null && needPlayer.isHuman()) {
-            for (MatchPlayer p : managerFactory.tableManager().getTable(tableId).getMatch().getPlayers()) {
-                if (p.getPlayer().getId().equals(playerId)) {
-                    Optional<User> u = managerFactory.userManager().getUser(userId);
-                    u.ifPresent(user -> user.ccViewSideboard(tableId, game.getId(), targetPlayerId));
-                }
-            }
+        // allows for itself or computers only
+        // TODO: implement allow deck view for all (same as allow hand view for all)
+        if (!requestPlayer.getId().equals(targetPlayer.getId()) && !targetPlayer.isComputer()) {
+            logger.error("Player " + requestPlayer.getName() + " trying to cheat with deck/sideboard view");
+            // TODO: inform other players about cheating?
+            return;
         }
-    }
 
-    public void cheat(UUID userId, UUID playerId, DeckCardLists deckList) {
-        try {
-            Deck deck = Deck.load(deckList, false, false);
-            game.loadCards(deck.getCards(), playerId);
-            for (Card card : deck.getCards()) {
-                card.putOntoBattlefield(game, Zone.OUTSIDE, null, playerId);
-            }
-        } catch (GameException ex) {
-            logger.warn(ex.getMessage());
+        User user = managerFactory.userManager().getUser(userId).orElse(null);
+        Table table = managerFactory.tableManager().getTable(tableId);
+        if (user == null || table == null) {
+            return;
         }
-        addCardsForTesting(game, playerId);
-        updateGame();
-    }
 
-    public boolean cheat(UUID userId, UUID playerId, String cardName) {
-        CardInfo cardInfo = CardRepository.instance.findCard(cardName);
-        Card card = cardInfo != null ? cardInfo.getCard() : null;
-        if (card != null) {
-            Set<Card> cards = new HashSet<>();
-            cards.add(card);
-            game.loadCards(cards, playerId);
-            card.moveToZone(Zone.HAND, null, game, false);
-            return true;
+        MatchPlayer deckSource = table.getMatch().getPlayer(targetPlayerId);
+        if (deckSource == null) {
+            return;
+        }
+
+        if (isSideboardOnly) {
+            // sideboard data already sent in PlayerView, so no need to re-sent it TODO: re-sent deck instead?
+            user.ccViewSideboard(tableId, game.getId(), targetPlayerId);
         } else {
-            return false;
+            user.ccViewLimitedDeck(deckSource.getDeckForViewer(), tableId, requestsOpen, true);
+        }
+    }
+
+    public void cheatShow(UUID playerId) {
+        Player player = game.getPlayer(playerId);
+        if (player != null) {
+            player.signalPlayerCheat();
         }
     }
 
@@ -735,6 +738,7 @@ public class GameController implements GameCallback {
     }
 
     public void endGame(final String message) throws MageException {
+        // send end game message/dialog
         for (final GameSessionPlayer gameSession : getGameSessions()) {
             gameSession.gameOver(message);
             gameSession.removeGame();
@@ -742,6 +746,8 @@ public class GameController implements GameCallback {
         for (final GameSessionWatcher gameWatcher : getGameSessionWatchers()) {
             gameWatcher.gameOver(message);
         }
+
+        // start next game or close finished table
         managerFactory.tableManager().endGame(tableId);
     }
 
@@ -767,15 +773,14 @@ public class GameController implements GameCallback {
 
     public void sendPlayerBoolean(UUID userId, final Boolean data) {
         sendMessage(userId, playerId -> getGameSession(playerId).sendPlayerBoolean(data));
-
     }
 
     public void sendPlayerInteger(UUID userId, final Integer data) {
         sendMessage(userId, playerId -> getGameSession(playerId).sendPlayerInteger(data));
-
     }
 
-    private synchronized void updateGame() {
+    private void updatePriorityTimers() {
+        // update player timers to actual values
         if (!timers.isEmpty()) {
             for (Player player : game.getState().getPlayers().values()) {
                 PriorityTimer timer = timers.get(player.getId());
@@ -784,6 +789,10 @@ public class GameController implements GameCallback {
                 }
             }
         }
+    }
+
+    private synchronized void updateGame() {
+        updatePriorityTimers();
         for (final GameSessionPlayer gameSession : getGameSessions()) {
             gameSession.update();
         }
@@ -870,14 +879,16 @@ public class GameController implements GameCallback {
         perform(playerId, playerId1 -> getGameSession(playerId1).getAmount(message, min, max));
     }
 
-    private synchronized void multiAmount(UUID playerId, final List<String> messages, final int min, final int max, final Map<String, Serializable> options) throws MageException {
+    private synchronized void multiAmount(UUID playerId, final List<MultiAmountMessage> messages,
+                                          final int min, final int max, final Map<String, Serializable> options)
+            throws MageException {
         perform(playerId, playerId1 -> getGameSession(playerId1).getMultiAmount(messages, min, max, options));
     }
 
-    private void informOthers(UUID playerId) throws MageException {
+    private void informOthers(UUID playerId) {
         StringBuilder message = new StringBuilder();
         if (game.getStep() != null) {
-            message.append(game.getStep().getType().toString()).append(" - ");
+            message.append(game.getTurnStepType().toString()).append(" - ");
         }
         message.append("Waiting for ").append(game.getPlayer(playerId).getLogName());
         for (final Entry<UUID, GameSessionPlayer> entry : getGameSessionsMap().entrySet()) {
@@ -890,16 +901,16 @@ public class GameController implements GameCallback {
         }
     }
 
-    private void informOthers(List<UUID> players) throws MageException {
+    private void informOthers(List<UUID> players) {
         // first player is always original controller
         Player controller = null;
         if (players != null && !players.isEmpty()) {
             controller = game.getPlayer(players.get(0));
         }
-        if (controller == null || game.getStep() == null || game.getStep().getType() == null) {
+        if (controller == null || game.getStep() == null || game.getTurnStepType() == null) {
             return;
         }
-        final String message = new StringBuilder(game.getStep().getType().toString()).append(" - Waiting for ").append(controller.getName()).toString();
+        final String message = new StringBuilder(game.getTurnStepType().toString()).append(" - Waiting for ").append(controller.getName()).toString();
         for (final Entry<UUID, GameSessionPlayer> entry : getGameSessionsMap().entrySet()) {
             boolean skip = players.stream().anyMatch(playerId -> entry.getKey().equals(playerId));
             if (!skip) {
@@ -917,23 +928,30 @@ public class GameController implements GameCallback {
 
     private void error(String message, Exception ex) {
         StringBuilder sb = new StringBuilder();
-        sb.append(message).append(ex.toString());
+        sb.append(message);
+        sb.append("\n");
+        sb.append("\n");
+        sb.append(ex);
         sb.append("\nServer version: ").append(Main.getVersion().toString());
-        sb.append('\n');
+        sb.append("\nStack trace:");
+        sb.append("\n");
         for (StackTraceElement e : ex.getStackTrace()) {
-            sb.append(e.toString()).append('\n');
+            sb.append(e.toString()).append("\n");
         }
+        String mes = sb.toString();
+
+        // send error for each player
         for (final Entry<UUID, GameSessionPlayer> entry : getGameSessionsMap().entrySet()) {
-            entry.getValue().gameError(sb.toString());
+            entry.getValue().gameError(mes);
         }
     }
 
-    public GameView getGameView(UUID playerId) {
+    public synchronized GameView getGameView(UUID playerId) {
         return getGameSession(playerId).getGameView();
     }
 
     @Override
-    public void gameResult(String result) {
+    public void endGameWithResult(String result) {
         try {
             endGame(result);
         } catch (MageException ex) {
@@ -964,29 +982,23 @@ public class GameController implements GameCallback {
     }
 
     /**
-     * Adds cards in player's hands that are specified in config/init.txt.
-     */
-    private void addCardsForTesting(Game game, UUID playerId) {
-        SystemUtil.addCardsForTesting(game, null, game.getPlayer(playerId));
-    }
-
-    /**
      * Performs a request to a player
      *
      * @param playerId
      * @param command
-     * @throws MageException
      */
-    private void perform(UUID playerId, Command command) throws MageException {
+    private void perform(UUID playerId, Command command) {
         perform(playerId, command, true);
     }
 
-    private void perform(UUID playerId, Command command, boolean informOthers) throws MageException {
+    private void perform(UUID playerId, Command command, boolean informOthers) {
         if (game.getPlayer(playerId).isGameUnderControl()) { // is the player controlling it's own turn
             if (gameSessions.containsKey(playerId)) {
                 setupTimeout(playerId);
                 command.execute(playerId);
             }
+            // TODO: if watcher disconnects then game freezes with active timer, must be fix for such use case
+            //  same for another player (can be fixed by super-duper connection)
             if (informOthers) {
                 informOthers(playerId);
             }
@@ -998,6 +1010,8 @@ public class GameController implements GameCallback {
                     command.execute(uuid);
                 }
             }
+            // TODO: if watcher disconnects then game freeze with active timer, must be fix for such use case
+            //  same for another player (can be fixed by super-duper connection)
             if (informOthers) {
                 informOthers(players);
             }
@@ -1103,14 +1117,13 @@ public class GameController implements GameCallback {
     }
 
     private GameSessionPlayer getGameSession(UUID playerId) {
-        if (!timers.isEmpty()) {
-            Player player = game.getState().getPlayer(playerId);
-            PriorityTimer timer = timers.get(playerId);
-            if (timer != null) {
-                //logger.warn("Timer Player " + player.getName()+ " " + player.getPriorityTimeLeft() + " Timer: " + timer.getCount());
-                player.setPriorityTimeLeft(timer.getCount());
-            }
-        }
+        // TODO: check parent callers - there are possible problems with sync, can be related to broken "fix" logs too
+        //  It modify players data, but:
+        //  * some sendXXX methods calls without synchronized (getGameSession can be in read mode?)
+        //  * some informXXX methods calls with synchronized (users must get actual data, so keep write mode and add synchronized?)
+        // find actual timers before send data
+        updatePriorityTimers();
+
         return gameSessions.get(playerId);
     }
 
@@ -1205,8 +1218,8 @@ public class GameController implements GameCallback {
         sb.append(state.getStepNum());
         sb.append("<br>getTurn: ");
         sb.append(state.getTurn());
-        sb.append("<br>getTurnId: ");
-        sb.append(state.getTurnId());
+        sb.append("<br>getExtraTurnId: ");
+        sb.append(state.getExtraTurnId());
         sb.append("<br>getTurnMods: ");
         sb.append(state.getTurnMods());
         sb.append("<br>getTurnNum: ");
@@ -1296,10 +1309,10 @@ public class GameController implements GameCallback {
         sb.append("<font color='red'>FIX command called by ").append(user.getName()).append("</font>");
         sb.append("<font size='-2'>"); // font resize start for all next logs
         sb.append("<br>Game ID: ").append(game.getId());
-        if (game.getTurn().getPhaseType() == null) {
+        if (game.getTurnPhaseType() == null) {
             sb.append("<br>Phase: not started").append(" Step: not started");
         } else {
-            sb.append("<br>Phase: ").append(game.getTurn().getPhaseType().toString()).append(" Step: ").append(game.getTurn().getStepType().toString());
+            sb.append("<br>Phase: ").append(game.getTurnPhaseType().toString()).append(" Step: ").append(game.getTurnStepType().toString());
         }
         // pings info
         sb.append("<br>");
@@ -1309,87 +1322,13 @@ public class GameController implements GameCallback {
         List<String> fixActions = new ArrayList<>(); // for logs info
 
         // fix active
-        Player playerActive = game.getPlayer(state.getActivePlayerId());
-        sb.append("<br>Fixing active player: ").append(getName(playerActive));
-        if (playerActive != null && !playerActive.canRespond()) {
-            fixActions.add("active player fix");
-
-            sb.append("<br><font color='red'>WARNING, active player can't respond.</font>");
-            sb.append("<br>Try to concede...");
-            playerActive.concede(game);
-            playerActive.leave(); // abort any wait response actions
-            sb.append(" (").append(asWarning("OK")).append(", concede done)");
-
-            sb.append("<br>Try to skip step...");
-            Phase currentPhase = game.getPhase();
-            if (currentPhase != null) {
-                currentPhase.getStep().skipStep(game, state.getActivePlayerId());
-                fixedAlready = true;
-                sb.append(" (").append(asWarning("OK")).append(", skip step done)");
-            } else {
-                sb.append(" (").append(asBad("FAIL")).append(", step is null)");
-            }
-        } else {
-            sb.append(playerActive != null ? " (" + asGood("OK") + ", can respond)" : " (" + asGood("OK") + ", no player)");
-        }
+        fixedAlready = fixPlayer(game.getPlayer(state.getActivePlayerId()), state, "active", sb, fixActions, fixedAlready);
 
         // fix lost choosing dialog
-        Player choosingPlayer = game.getPlayer(state.getChoosingPlayerId());
-        sb.append("<br>Fixing choosing player: ").append(getName(choosingPlayer));
-        if (choosingPlayer != null && !choosingPlayer.canRespond()) {
-            fixActions.add("choosing player fix");
-
-            sb.append("<br><font color='red'>WARNING, choosing player can't respond.</font>");
-            sb.append("<br>Try to concede...");
-            choosingPlayer.concede(game);
-            choosingPlayer.leave(); // abort any wait response actions
-            sb.append(" (").append(asWarning("OK")).append(", concede done)");
-
-            sb.append("<br>Try to skip step...");
-            if (fixedAlready) {
-                sb.append(" (OK, already skipped before)");
-            } else {
-                Phase currentPhase = game.getPhase();
-                if (currentPhase != null) {
-                    currentPhase.getStep().skipStep(game, state.getActivePlayerId());
-                    fixedAlready = true;
-                    sb.append(" (").append(asWarning("OK")).append(", skip step done)");
-                } else {
-                    sb.append(" (").append(asBad("FAIL")).append(", step is null)");
-                }
-            }
-        } else {
-            sb.append(choosingPlayer != null ? " (" + asGood("OK") + ", can respond)" : " (" + asGood("OK") + ", no player)");
-        }
+        fixedAlready = fixPlayer(game.getPlayer(state.getChoosingPlayerId()), state, "choosing", sb, fixActions, fixedAlready);
 
         // fix lost priority
-        Player priorityPlayer = game.getPlayer(state.getPriorityPlayerId());
-        sb.append("<br>Fixing priority player: ").append(getName(priorityPlayer));
-        if (priorityPlayer != null && !priorityPlayer.canRespond()) {
-            fixActions.add("priority player fix");
-
-            sb.append("<br><font color='red'>WARNING, priority player can't respond.</font>");
-            sb.append("<br>Try to concede...");
-            priorityPlayer.concede(game);
-            priorityPlayer.leave(); // abort any wait response actions
-            sb.append(" (").append(asWarning("OK")).append(", concede done)");
-
-            sb.append("<br>Try to skip step...");
-            if (fixedAlready) {
-                sb.append(" (").append(asWarning("OK")).append(", already skipped before)");
-            } else {
-                Phase currentPhase = game.getPhase();
-                if (currentPhase != null) {
-                    currentPhase.getStep().skipStep(game, state.getActivePlayerId());
-                    fixedAlready = true;
-                    sb.append(" (").append(asWarning("OK")).append(", skip step done)");
-                } else {
-                    sb.append(" (").append(asBad("FAIL")).append(", step is null)");
-                }
-            }
-        } else {
-            sb.append(priorityPlayer != null ? " (" + asGood("OK") + ", can respond)" : " (" + asGood("OK") + ", no player)");
-        }
+        fixedAlready = fixPlayer(game.getPlayer(state.getPriorityPlayerId()), state, "priority", sb, fixActions, fixedAlready);
 
         // fix timeout
         sb.append("<br>Fixing future timeout: ");
@@ -1427,5 +1366,36 @@ public class GameController implements GameCallback {
         logger.warn("FIX command result for game " + game.getId() + ": " + appliedFixes);
 
         return sb.toString();
+    }
+
+    private boolean fixPlayer(Player player, GameState state, String fixType, StringBuilder sb, List<String> fixActions, boolean fixedAlready) {
+        sb.append("<br>Fixing ").append(fixType).append(" player: ").append(getName(player));
+        if (player != null && !player.canRespond()) {
+            fixActions.add(fixType + " fix");
+
+            sb.append("<br><font color='red'>WARNING, ").append(fixType).append(" player can't respond.</font>");
+            sb.append("<br>Try to concede...");
+            player.concede(game);
+            player.leave(); // abort any wait response actions
+            sb.append(" (").append(asWarning("OK")).append(", concede done)");
+
+            sb.append("<br>Try to skip step...");
+            if (!fixedAlready) {
+                Phase currentPhase = game.getPhase();
+                if (currentPhase != null) {
+                    currentPhase.getStep().skipStep(game, state.getActivePlayerId());
+                    fixedAlready = true;
+                    sb.append(" (").append(asWarning("OK")).append(", skip step done)");
+                } else {
+                    sb.append(" (").append(asBad("FAIL")).append(", step is null)");
+                }
+            } else {
+                sb.append(" (OK, already skipped before)");
+            }
+        } else {
+            sb.append(player != null ? " (" + asGood("OK") + ", can respond)" : " (" + asGood("OK") + ", no player)");
+        }
+
+        return fixedAlready;
     }
 }

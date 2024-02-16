@@ -30,7 +30,7 @@ public final class FrilledSeaSerpent extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
                 new CantBeBlockedSourceEffect(Duration.EndOfTurn),
-                new ManaCostsImpl("{5}{U}{U}")
+                new ManaCostsImpl<>("{5}{U}{U}")
         ));
     }
 

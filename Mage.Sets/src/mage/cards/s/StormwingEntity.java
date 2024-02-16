@@ -41,8 +41,8 @@ public final class StormwingEntity extends CardImpl {
 
         // This spell costs {2}{U} less to cast if you've cast an instant or sorcery spell this turn.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SpellCostReductionSourceEffect(
-                new ManaCostsImpl("{2}{U}"), StormwingEntityCondition.instance
-        )).setRuleAtTheTop(true).addHint(hint), new SpellsCastWatcher());
+                new ManaCostsImpl<>("{2}{U}"), StormwingEntityCondition.instance
+        )).setRuleAtTheTop(true).addHint(hint));
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());

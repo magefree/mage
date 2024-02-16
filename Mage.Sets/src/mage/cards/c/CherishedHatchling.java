@@ -16,8 +16,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
@@ -46,7 +45,7 @@ public final class CherishedHatchling extends CardImpl {
 
         // When Cherished Hatchling dies, you may cast Dinosaur spells this turn as though they had flash, and whenever you cast a Dinosaur spell this turn, it gains "When this creature enters the battlefield, you may have it fight another target creature."
         Ability ability = new DiesSourceTriggeredAbility(new CastAsThoughItHadFlashAllEffect(Duration.EndOfTurn, filterCard, false));
-        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new CherishedHatchlingTriggeredAbility()));
+        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new CherishedHatchlingTriggeredAbility()).concatBy(", and"));
         this.addAbility(ability);
     }
 
@@ -62,19 +61,14 @@ public final class CherishedHatchling extends CardImpl {
 
 class CherishedHatchlingTriggeredAbility extends DelayedTriggeredAbility {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
-
     public CherishedHatchlingTriggeredAbility() {
-        super(getEffectToAdd(), Duration.EndOfTurn, true);
+        super(getEffectToAdd(), Duration.EndOfTurn, false);
+        setTriggerPhrase("whenever you cast a Dinosaur spell this turn, ");
     }
 
     private static Effect getEffectToAdd() {
         Ability abilityToAdd = new EntersBattlefieldTriggeredAbility(new FightTargetSourceEffect().setText("you may have it fight another target creature"), true);
-        abilityToAdd.addTarget(new TargetCreaturePermanent(filter));
+        abilityToAdd.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE));
         Effect effect = new GainAbilityTargetEffect(abilityToAdd, Duration.EndOfTurn,
                 "it gains \"When this creature enters the battlefield, you may have it fight another target creature.\"", true);
         return effect;
@@ -104,10 +98,5 @@ class CherishedHatchlingTriggeredAbility extends DelayedTriggeredAbility {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "and whenever you cast a Dinosaur spell this turn, " ;
     }
 }

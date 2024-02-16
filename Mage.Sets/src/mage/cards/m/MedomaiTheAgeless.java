@@ -29,7 +29,7 @@ public final class MedomaiTheAgeless extends CardImpl {
 
     public MedomaiTheAgeless(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}{U}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPHINX);
 
         this.power = new MageInt(4);

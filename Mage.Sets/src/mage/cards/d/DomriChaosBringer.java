@@ -5,26 +5,23 @@ import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.abilities.effects.mana.ManaEffect;
-import mage.abilities.effects.common.continuous.GainAbilityControlledSpellsEffect;
 import mage.abilities.effects.mana.BasicManaEffect;
 import mage.abilities.keyword.RiotAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
-import mage.filter.predicate.mageobject.CardIdPredicate;
 import mage.game.Game;
 import mage.game.command.emblems.DomriChaosBringerEmblem;
 import mage.game.events.GameEvent;
 import mage.players.Player;
 
 import java.util.UUID;
+import mage.abilities.effects.ContinuousEffectImpl;
 import mage.game.stack.StackObject;
 
 /**
@@ -35,7 +32,7 @@ public final class DomriChaosBringer extends CardImpl {
     public DomriChaosBringer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{R}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DOMRI);
         this.setStartingLoyalty(5);
 
@@ -46,15 +43,7 @@ public final class DomriChaosBringer extends CardImpl {
         // creature cards from among them and put them into your hand. Put the rest 
         // on the bottom of your library in a random order.
         this.addAbility(new LoyaltyAbility(new LookLibraryAndPickControllerEffect(
-                StaticValue.get(4), false, StaticValue.get(2),
-                StaticFilters.FILTER_CARD_CREATURE, Zone.LIBRARY, false,
-                true, true, Zone.HAND, false, false, false
-        ).setText(
-                "Look at the top four cards of your library. "
-                + "You may reveal up to two creature cards from among them "
-                + "and put them into your hand. Put the rest on the bottom of your library "
-                + "in a random order."
-        ), -3));
+                4, 2, StaticFilters.FILTER_CARD_CREATURES, PutCards.HAND, PutCards.BOTTOM_RANDOM), -3));
 
         // −8: You get an emblem with "At the beginning of each end step, create a 4/4 red 
         // and green Beast creature token with trample."
@@ -136,24 +125,53 @@ class DomriChaosBringerTriggeredAbility extends DelayedTriggeredAbility {
             return false;
         }
         MageObject mo = game.getObject(event.getTargetId());
-        if (mo == null || !mo.isCreature(game)) {
+        if (mo == null
+                || !mo.isCreature(game)) {
             return false;
         }
-        
+
         StackObject stackObject = game.getStack().getStackObject(event.getTargetId());
-        
+
         if (stackObject == null) {
             return false;
         }
         this.getEffects().clear();
-        FilterCard filter = new FilterCard();
-        filter.add(new CardIdPredicate(stackObject.getSourceId()));
-        this.addEffect(new GainAbilityControlledSpellsEffect(new RiotAbility(), filter));
+        game.addEffect(new DomriChaosBringAddRiotToSpellEffect(stackObject.getSourceId()), this);
         return true;
     }
 
     @Override
     public DomriChaosBringerTriggeredAbility copy() {
         return new DomriChaosBringerTriggeredAbility(this);
+    }
+}
+
+class DomriChaosBringAddRiotToSpellEffect extends ContinuousEffectImpl {
+
+    private final Ability riotAbility = new RiotAbility();
+    private final UUID cardId;
+
+    public DomriChaosBringAddRiotToSpellEffect(UUID cardId) {
+        super(Duration.WhileOnStack, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
+        this.cardId = cardId;
+    }
+
+    private DomriChaosBringAddRiotToSpellEffect(final DomriChaosBringAddRiotToSpellEffect effect) {
+        super(effect);
+        this.cardId = effect.cardId;
+    }
+
+    @Override
+    public DomriChaosBringAddRiotToSpellEffect copy() {
+        return new DomriChaosBringAddRiotToSpellEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        if (cardId != null) {
+            game.getState().addOtherAbility(game.getCard(cardId), riotAbility);
+            return true;
+        }
+        return false;
     }
 }

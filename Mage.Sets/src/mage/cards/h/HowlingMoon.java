@@ -1,25 +1,24 @@
 package mage.cards.h;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.common.CastSecondSpellTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.constants.TargetController;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
-import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.token.WolfToken;
 import mage.target.common.TargetControlledPermanent;
-import mage.watchers.common.CastSpellLastTurnWatcher;
+
+import java.util.UUID;
 
 /**
- *
  * @author weirddan455
  */
 public final class HowlingMoon extends CardImpl {
@@ -42,7 +41,9 @@ public final class HowlingMoon extends CardImpl {
         this.addAbility(ability);
 
         // Whenever an opponent casts their second spell each turn, create a 2/2 green Wolf creature token.
-        this.addAbility(new HowlingMoonTriggeredAbility(), new CastSpellLastTurnWatcher());
+        this.addAbility(new CastSecondSpellTriggeredAbility(
+                new CreateTokenEffect(new WolfToken()), TargetController.OPPONENT
+        ));
     }
 
     private HowlingMoon(final HowlingMoon card) {
@@ -52,40 +53,5 @@ public final class HowlingMoon extends CardImpl {
     @Override
     public HowlingMoon copy() {
         return new HowlingMoon(this);
-    }
-}
-
-class HowlingMoonTriggeredAbility extends TriggeredAbilityImpl {
-
-    public HowlingMoonTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new CreateTokenEffect(new WolfToken()));
-    }
-
-    private HowlingMoonTriggeredAbility(final HowlingMoonTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public HowlingMoonTriggeredAbility copy() {
-        return new HowlingMoonTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.SPELL_CAST;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (game.getOpponents(controllerId).contains(event.getPlayerId())) {
-            CastSpellLastTurnWatcher watcher = game.getState().getWatcher(CastSpellLastTurnWatcher.class);
-            return watcher != null && watcher.getAmountOfSpellsPlayerCastOnCurrentTurn(event.getPlayerId()) == 2;
-        }
-        return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever an opponent casts their second spell each turn, ";
     }
 }

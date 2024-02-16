@@ -50,12 +50,12 @@ public final class StandOrFall extends CardImpl {
 
 class StandOrFallEffect extends OneShotEffect {
 
-    public StandOrFallEffect() {
+    StandOrFallEffect() {
         super(Outcome.Detriment);
         this.staticText = "separate all creatures that player controls into two piles and that player chooses one. Only creatures in the chosen piles can block this turn";
     }
 
-    public StandOrFallEffect(final StandOrFallEffect effect) {
+    private StandOrFallEffect(final StandOrFallEffect effect) {
         super(effect);
     }
 
@@ -94,7 +94,7 @@ class StandOrFallEffect extends OneShotEffect {
                 TargetCreaturePermanent creatures = new TargetCreaturePermanent(0, count, new FilterCreaturePermanent("creatures to put in the first pile"), true);
                 List<Permanent> pile1 = new ArrayList<>();
                 creatures.setRequired(false);
-                if (player.choose(Outcome.Neutral, creatures, source.getSourceId(), game)) {
+                if (player.choose(Outcome.Neutral, creatures, source, game)) {
                     List<UUID> targets = creatures.getTargets();
                     for (UUID targetId : targets) {
                         Permanent p = game.getPermanent(targetId);

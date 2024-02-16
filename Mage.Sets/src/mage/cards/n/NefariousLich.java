@@ -19,7 +19,6 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -62,7 +61,7 @@ class NefariousLichDamageReplacementEffect extends ReplacementEffectImpl {
         staticText = "If damage would be dealt to you, exile that many cards from your graveyard instead. If you can't, you lose the game.";
     }
 
-    NefariousLichDamageReplacementEffect(final NefariousLichDamageReplacementEffect effect) {
+    private NefariousLichDamageReplacementEffect(final NefariousLichDamageReplacementEffect effect) {
         super(effect);
         this.amount = effect.amount;
     }
@@ -77,8 +76,8 @@ class NefariousLichDamageReplacementEffect extends ReplacementEffectImpl {
         Player controller = game.getPlayer(event.getPlayerId());
         if (controller != null) {
             Target target = new TargetCardInYourGraveyard(amount, new FilterCard("card in your graveyard"));
-            if (target.canChoose(source.getSourceId(), controller.getId(), game)) {
-                if (controller.choose(Outcome.Exile, target, source.getSourceId(), game)) {
+            if (target.canChoose(controller.getId(), source, game)) {
+                if (controller.choose(Outcome.Exile, target, source, game)) {
                     Set<Card> cards = new HashSet<>(amount);
                     for (UUID targetId : target.getTargets()) {
                         Card card = controller.getGraveyard().get(targetId, game);
@@ -117,7 +116,7 @@ class NefariousLichLifeGainReplacementEffect extends ReplacementEffectImpl {
         staticText = "If you would gain life, draw that many cards instead";
     }
 
-    NefariousLichLifeGainReplacementEffect(final NefariousLichLifeGainReplacementEffect effect) {
+    private NefariousLichLifeGainReplacementEffect(final NefariousLichLifeGainReplacementEffect effect) {
         super(effect);
     }
 

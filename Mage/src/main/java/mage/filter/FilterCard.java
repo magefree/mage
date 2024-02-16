@@ -1,5 +1,6 @@
 package mage.filter;
 
+import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.constants.TargetController;
 import mage.filter.predicate.ObjectSourcePlayer;
@@ -23,7 +24,7 @@ import java.util.stream.Collectors;
 public class FilterCard extends FilterObject<Card> {
 
     private static final long serialVersionUID = 1L;
-    protected List<ObjectSourcePlayerPredicate<Card>> extraPredicates = new ArrayList<>();
+    protected final List<ObjectSourcePlayerPredicate<Card>> extraPredicates = new ArrayList<>();
 
     public FilterCard() {
         super("card");
@@ -33,9 +34,9 @@ public class FilterCard extends FilterObject<Card> {
         super(name);
     }
 
-    public FilterCard(FilterCard filter) {
+    protected FilterCard(final FilterCard filter) {
         super(filter);
-        this.extraPredicates = new ArrayList<>(filter.extraPredicates);
+        this.extraPredicates.addAll(filter.extraPredicates);
     }
 
     //20130711 708.6c
@@ -56,14 +57,15 @@ public class FilterCard extends FilterObject<Card> {
     }
 
     public boolean match(Card card, UUID playerId, Game game) {
-        return match(card, null, playerId, game);
+        return match(card, playerId, null, game);
     }
 
-    public boolean match(Card card, UUID sourceId, UUID playerId, Game game) {
+    public boolean match(Card card, UUID playerId, Ability source, Game game) {
         if (!this.match(card, game)) {
             return false;
         }
-        return Predicates.and(extraPredicates).apply(new ObjectSourcePlayer<Card>(card, sourceId, playerId), game);
+        ObjectSourcePlayer<Card> osp = new ObjectSourcePlayer<>(card, playerId, source);
+        return extraPredicates.stream().allMatch(p -> p.apply(osp, game));
     }
 
     public final void add(ObjectSourcePlayerPredicate predicate) {
@@ -81,7 +83,7 @@ public class FilterCard extends FilterObject<Card> {
     }
 
     public boolean hasPredicates() {
-        return !predicates.isEmpty();
+        return !predicates.isEmpty() || !extraPredicates.isEmpty();
     }
 
     @Override
@@ -89,12 +91,17 @@ public class FilterCard extends FilterObject<Card> {
         return new FilterCard(this);
     }
 
+    @Override
+    public List<Predicate> getExtraPredicates() {
+        return new ArrayList<>(extraPredicates);
+    }
+
     public static void checkPredicateIsSuitableForCardFilter(Predicate predicate) {
         // card filter can't contain controller predicate (only permanents on battlefield have controller)
         List<Predicate> list = new ArrayList<>();
         Predicates.collectAllComponents(predicate, list);
-        if (list.stream().anyMatch(p -> p instanceof TargetController.ControllerPredicate)) {
-            throw new IllegalArgumentException("Card filter doesn't support controller predicate");
+        if (list.stream().anyMatch(TargetController.ControllerPredicate.class::isInstance)) {
+            throw new IllegalArgumentException("Wrong code usage: card filter doesn't support controller predicate");
         }
     }
 

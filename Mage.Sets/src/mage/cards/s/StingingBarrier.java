@@ -30,7 +30,7 @@ public final class StingingBarrier extends CardImpl {
         // Defender
         this.addAbility(DefenderAbility.getInstance());
         // {U}, {tap}: Stinging Barrier deals 1 damage to any target.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl("{U}"));
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl<>("{U}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);

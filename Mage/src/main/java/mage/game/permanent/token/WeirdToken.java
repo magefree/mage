@@ -1,20 +1,18 @@
-
-
 package mage.game.permanent.token;
-import mage.constants.CardType;
-import mage.constants.SubType;
+
 import mage.MageInt;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.FlyingAbility;
+import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
- *
  * @author spjspj
  */
 public final class WeirdToken extends TokenImpl {
 
     public WeirdToken() {
-        super("Weird", "3/3 blue Weird create token with defender and flying");
+        super("Weird Token", "3/3 blue Weird create token with defender and flying");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
         subtype.add(SubType.WEIRD);
@@ -24,7 +22,7 @@ public final class WeirdToken extends TokenImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public WeirdToken(final WeirdToken token) {
+    private WeirdToken(final WeirdToken token) {
         super(token);
     }
 

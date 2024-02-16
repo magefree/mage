@@ -39,7 +39,7 @@ public final class MagneticMountain extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}{R}");
 
         // Blue creatures don't untap during their controllers' untap steps.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepAllEffect(Duration.WhileOnBattlefield, TargetController.ANY, filter)));
+        this.addAbility(new SimpleStaticAbility(new DontUntapInControllersUntapStepAllEffect(Duration.WhileOnBattlefield, TargetController.ANY, filter)));
 
         // At the beginning of each player's upkeep, that player may choose any number of tapped blue creatures they control and pay {4} for each creature chosen this way. If the player does, untap those creatures.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new MagneticMountainEffect(), TargetController.ANY, false));
@@ -69,7 +69,7 @@ class MagneticMountainEffect extends OneShotEffect {
         staticText = "that player may choose any number of tapped blue creatures they control and pay {4} for each creature chosen this way. If the player does, untap those creatures.";
     }
 
-    MagneticMountainEffect(MagneticMountainEffect effect) {
+    private MagneticMountainEffect(final MagneticMountainEffect effect) {
         super(effect);
     }
 
@@ -87,7 +87,7 @@ class MagneticMountainEffect extends OneShotEffect {
             int countBattlefield = game.getBattlefield().getAllActivePermanents(filter2, game.getActivePlayerId(), game).size();
             while (player.canRespond() && countBattlefield > 0 && player.chooseUse(Outcome.Benefit, "Pay {4} and untap a tapped blue creature under your control?", source, game)) {
                 Target tappedCreatureTarget = new TargetControlledCreaturePermanent(1, 1, filter2, true);
-                if (player.choose(Outcome.Untap, tappedCreatureTarget, source.getSourceId(), game)) {
+                if (player.choose(Outcome.Untap, tappedCreatureTarget, source, game)) {
                     Cost cost = ManaUtil.createManaCost(4, false);
                     Permanent tappedCreature = game.getPermanent(tappedCreatureTarget.getFirstTarget());
                     if (tappedCreature != null && cost.pay(source, game, source, player.getId(), false)) {

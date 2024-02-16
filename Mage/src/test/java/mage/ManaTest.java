@@ -1,34 +1,41 @@
 package mage;
 
+import mage.abilities.SpellAbility;
+import mage.abilities.costs.mana.ManaCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.ManaType;
 import mage.filter.FilterMana;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
+import mage.util.CardUtil;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
+import java.util.Arrays;
+import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
- * Custom unit tests for {link Mana}.
+ * Custom unit tests for {@link Mana}.
  *
  * @author githubpoixen@github.com
  */
 public class ManaTest {
 
-    @Rule
-    public ExpectedException expectedException = ExpectedException.none();
-
     @Test
     public void shouldNotAllowNullCopyConstructor() {
-        // given
-        expectedException.expect(NullPointerException.class);
-        expectedException.expectMessage("The passed in mana can not be null");
-
         // when
-        Mana nullMana = null;
-        new Mana(nullMana);
+        NullPointerException expectedException = assertThrows(NullPointerException.class, () -> {
+            Mana nullMana = null;
+            new Mana(nullMana);
+        });
+
+        // then
+        assertEquals("The passed in mana can not be null", expectedException.getMessage());
     }
 
     @Test
@@ -130,19 +137,18 @@ public class ManaTest {
 
     @Test
     public void shouldNotCreateManaFromNullColoredManaSymbol() {
-        // given
-        ColoredManaSymbol nullSymbol = null;
-
-        expectedException.expect(NullPointerException.class);
-        expectedException.expectMessage("The passed in ColoredManaSymbol can not be null");
-
         // when
-        new Mana(nullSymbol);
+        NullPointerException exception = assertThrows(NullPointerException.class, () -> {
+            ColoredManaSymbol nullSymbol = null;
+            new Mana(nullSymbol);
+        });
+
+        // then
+        assertEquals("The passed in ColoredManaSymbol can not be null", exception.getMessage());
     }
 
     @Test
     public void shouldCreateManaFromIntegers() {
-
         // when
         Mana mana = new Mana(4, 3, 5, 1, 2, 6, 7, 8);
 
@@ -159,8 +165,6 @@ public class ManaTest {
 
     @Test
     public void shouldNotAllowNegativeIntegers() {
-        // given
-
         // when
         Mana mana = new Mana(4, 3, 5, -1, 2, 6, 7, 0);
 
@@ -170,7 +174,6 @@ public class ManaTest {
 
     @Test
     public void shouldCreateRedMana() {
-
         // when
         Mana mana = Mana.RedMana(1);
 
@@ -180,7 +183,6 @@ public class ManaTest {
 
     @Test
     public void shouldCreateGreenMana() {
-
         // when
         Mana mana = Mana.GreenMana(1);
 
@@ -190,7 +192,6 @@ public class ManaTest {
 
     @Test
     public void shouldCreateBlueMana() {
-
         // when
         Mana mana = Mana.BlueMana(1);
 
@@ -200,7 +201,6 @@ public class ManaTest {
 
     @Test
     public void shouldCreateWhiteMana() {
-
         // when
         Mana mana = Mana.WhiteMana(1);
 
@@ -210,7 +210,6 @@ public class ManaTest {
 
     @Test
     public void shouldCreateBlackMana() {
-
         // when
         Mana mana = Mana.BlackMana(1);
 
@@ -220,7 +219,6 @@ public class ManaTest {
 
     @Test
     public void shouldCreateGenericMana() {
-
         // when
         Mana mana = Mana.GenericMana(1);
 
@@ -230,7 +228,6 @@ public class ManaTest {
 
     @Test
     public void shouldCreateColorlessMana() {
-
         // when
         Mana mana = Mana.ColorlessMana(1);
 
@@ -240,19 +237,15 @@ public class ManaTest {
 
     @Test
     public void shouldNotAllowNegativeRedMana() {
-        // given
-
         // when
         Mana mana = Mana.RedMana(-1);
 
-        //then
+        // then
         assertEquals(0, mana.getRed());
     }
 
     @Test
     public void shouldNotAllowNegativeGreenMana() {
-        // given
-
         // when
         Mana mana = Mana.GreenMana(-1);
 
@@ -262,8 +255,6 @@ public class ManaTest {
 
     @Test
     public void shouldNotAllowNegativeBlueMana() {
-        // given
-
         // when
         Mana mana = Mana.BlueMana(-1);
 
@@ -273,8 +264,6 @@ public class ManaTest {
 
     @Test
     public void shouldNotAllowNegativeWhiteMana() {
-        // given
-
         // when
         Mana mana = Mana.WhiteMana(-1);
 
@@ -284,23 +273,19 @@ public class ManaTest {
 
     @Test
     public void shouldNotAllowNegativeBlackMana() {
-        // given
-
         // when
         Mana mana = Mana.BlackMana(-1);
 
-        //then
+        // then
         assertEquals(0, mana.getBlack());
     }
 
     @Test
     public void shouldNotAllowNegativeColorlessMana() {
-        // given
-
         // when
         Mana mana = Mana.GenericMana(-1);
 
-        //then
+        // then
         assertEquals(0, mana.getGeneric());
     }
 
@@ -454,8 +439,6 @@ public class ManaTest {
     @Test
     public void shouldThrowExceptionOnUnavailableColorless() {
         // given
-        expectedException.expect(ArithmeticException.class);
-        expectedException.expectMessage("Not enough mana to pay colorless");
         Mana available = new Mana();
         available.setRed(4);
 
@@ -464,7 +447,12 @@ public class ManaTest {
         cost.setGeneric(2);
 
         // when
-        available.subtractCost(cost);
+        ArithmeticException exception = assertThrows(ArithmeticException.class, () -> {
+            available.subtractCost(cost);
+        });
+
+        // then
+        assertEquals("Not enough mana to pay colorless", exception.getMessage());
     }
 
     @Test
@@ -686,4 +674,258 @@ public class ManaTest {
         assertEquals(Integer.MAX_VALUE, mana.getGeneric());
         assertEquals(Integer.MAX_VALUE, mana.getAny());
     }
+
+    /**
+     * Mana.enough is used to check if a spell can be cast with an given amount
+     * of avalable mana
+     */
+    @Test
+    public void testManaEnough() {
+        assertAvailableManaEnough("{G}", 1, "", true);
+        assertAvailableManaEnough("{G}", 0, "{G}", true);
+        assertAvailableManaEnough("{R}", 0, "{G}", false);
+        assertAvailableManaEnough("{B}", 0, "{G}", false);
+        assertAvailableManaEnough("{U}", 0, "{G}", false);
+        assertAvailableManaEnough("{W}", 0, "{G}", false);
+        assertAvailableManaEnough("{W}", 0, "{C}", false);
+
+        assertAvailableManaEnough("{R}", 1, "", true);
+        assertAvailableManaEnough("{R}", 0, "{R}", true);
+        assertAvailableManaEnough("{G}", 0, "{R}", false);
+        assertAvailableManaEnough("{B}", 0, "{R}", false);
+        assertAvailableManaEnough("{U}", 0, "{R}", false);
+        assertAvailableManaEnough("{W}", 0, "{R}", false);
+
+        assertAvailableManaEnough("{U}{B}{W}{G}{R}", 4, "{R}", true);
+        assertAvailableManaEnough("{U}{B}{W}{G}{R}", 3, "{R}{B}", true);
+
+        assertAvailableManaEnough("{U}{U}{U}{G}{G}{2}", 2, "{U}{U}{G}{R}{B}", true);
+
+        assertAvailableManaEnough("{2}{U}{U}", 0, "{U}{U}{U}{U}", true);
+        assertAvailableManaEnough("{2}{U}{U}", 0, "{4}", false);
+        assertAvailableManaEnough("{2}{U}{U}", 0, "{B}{B}{4}", false);
+
+        assertAvailableManaEnough("{G}",    0, "{G/W}", true);
+        assertAvailableManaEnough("{G}{W}", 0, "{G/W}{G/W}", true);
+        assertAvailableManaEnough("{W}{W}", 0, "{G/W}{G/W}", true);
+        assertAvailableManaEnough("{G}{G}", 0, "{G/W}{G/W}", true);
+
+        assertAvailableManaEnough("{C}", 1, "", false);
+        assertAvailableManaEnough("{C}", 0, "{C}", true);
+        assertAvailableManaEnough("{C}", 0, "{G}", false);
+        assertAvailableManaEnough("{C}", 0, "{R}", false);
+        assertAvailableManaEnough("{C}", 0, "{B}", false);
+        assertAvailableManaEnough("{C}", 0, "{W}", false);
+        assertAvailableManaEnough("{C}", 0, "{U}", false);
+    }
+
+    /**
+     * Mana.enough is used to check if a spell can be cast with an given amount
+     * of avalable mana
+     */
+    @Test
+    public void testManaReduction() {
+        // cost - reduction - rest
+        assertManaReduction("{G}{G}",       "{G}", "{G}");
+        assertManaReduction("{1}{G}{G}",    "{G}", "{1}{G}");
+        assertManaReduction("{B}{B}",       "{B}", "{B}");
+        assertManaReduction("{1}{B}{B}",    "{B}", "{1}{B}");
+        assertManaReduction("{W}{W}",       "{W}", "{W}");
+        assertManaReduction("{1}{W}{W}",    "{W}", "{1}{W}");
+        assertManaReduction("{U}{U}",       "{U}", "{U}");
+        assertManaReduction("{1}{U}{U}",    "{U}", "{1}{U}");
+        assertManaReduction("{R}{R}",       "{R}", "{R}");
+        assertManaReduction("{1}{R}{R}",    "{R}", "{1}{R}");
+
+        assertManaReduction("{R}{G}{B}{U}{W}", "{R}{G}{B}{U}{W}", "{0}");
+
+        // Hybrid Mana
+        assertManaReduction("{2/B}{2/B}{2/B}", "{B}{B}", "{2/B}");
+        assertManaReduction("{2/B}{2/B}{2/B}", "{B}{B}{B}", "{0}");
+        assertManaReduction("{2/W}{2/W}{2/W}", "{W}{W}", "{2/W}");
+        assertManaReduction("{2/W}{2/W}{2/W}", "{W}{W}{W}", "{0}");
+
+        assertManaReduction("{G/B}{G/B}{G/B}", "{B}{G}{B}", "{0}");
+    }
+
+    /**
+     * Mana.needed is used by the AI to know how much mana it needs in order to be able to play a card.
+     *
+     * TODO: How should generic and any be handled?
+     */
+    @Test
+    public void manaNeededWorks() {
+        testManaNeeded(
+                new Mana(ManaType.COLORLESS, 1), // Available
+                new Mana(ManaType.COLORLESS, 2), // Cost
+                new Mana(ManaType.COLORLESS, 1)  // Needed
+        );
+        testManaNeeded(
+                new Mana(ManaType.RED,      1), // Avaiable
+                new Mana(ManaType.GENERIC,  1), // Cost
+                new Mana()                           // Needed
+        );
+        testManaNeeded(
+                new Mana(ManaType.COLORLESS, 1), // Avaiable
+                new Mana(ManaType.GENERIC,   1), // Cost
+                new Mana()                            // Needed
+        );
+        testManaNeeded(
+                new Mana(),                                                                         // Available
+                new Mana(2, 0, 0, 0, 0, 2, 0, 0), // Cost
+                new Mana(2, 0, 0, 0, 0, 2, 0, 0)  // Needed
+        );
+    }
+
+    /**
+     * Test that {@link Mana#getMoreValuableMana(Mana, Mana)} works as intended.
+     * All calls to getMoreValuableMana are run twice, with the second time having the inputs flipped to make sure the same result is given.
+     */
+    @Test
+    public void moreValuableManaTest() {
+        final Mana anyMana        = Mana.AnyMana(1);
+        final Mana genericMana    = Mana.GenericMana(1);
+        final Mana colorlessMana  = Mana.ColorlessMana(1);
+
+        final Mana whiteMana      = Mana.WhiteMana(1);
+        final Mana blueMana       = Mana.BlueMana(1);
+        final Mana blackMana      = Mana.BlackMana(1);
+        final Mana redMana        = Mana.RedMana(1);
+        final Mana greenMana      = Mana.GreenMana(1);
+
+        final List<Mana> coloredManas = Arrays.asList(whiteMana, blueMana, blackMana, redMana, greenMana);
+
+        // 1. A color of WUBURG is not more valuable than any other
+        for (Mana coloredMana1 : coloredManas) {
+            for (Mana coloredMana2 : coloredManas) {
+              assertNull(Mana.getMoreValuableMana(coloredMana1, coloredMana2), String.format("%s and %s should not be comparable.", coloredMana1, coloredMana2));
+              assertNull(Mana.getMoreValuableMana(coloredMana2, coloredMana1), String.format("%s and %s should not be comparable.", coloredMana1, coloredMana2));
+            }
+        }
+
+        // 2. Generic is less valuable than any other type of mana
+        final List<Mana> nonGenericManas = Arrays.asList(whiteMana, blueMana, blackMana, redMana, greenMana, colorlessMana);
+        for (Mana coloredMana : nonGenericManas) {
+            assertEquals(coloredMana, Mana.getMoreValuableMana(coloredMana, genericMana));
+            assertEquals(coloredMana, Mana.getMoreValuableMana(genericMana, coloredMana));
+        }
+        assertEquals(anyMana, Mana.getMoreValuableMana(genericMana, anyMana));
+        assertEquals(anyMana, Mana.getMoreValuableMana(anyMana, genericMana));
+
+        // 3. ANY mana is more valuable than generic or a specific color
+        for (Mana coloredMana : coloredManas) {
+            assertEquals(anyMana, Mana.getMoreValuableMana(coloredMana, anyMana));
+            assertEquals(anyMana, Mana.getMoreValuableMana(anyMana, coloredMana));
+        }
+
+        // 4. Colorless mana is not comparable with colored mana or ANY mana
+        for (Mana coloredMana : coloredManas) {
+            assertNull(Mana.getMoreValuableMana(colorlessMana, coloredMana));
+            assertNull(Mana.getMoreValuableMana(coloredMana, colorlessMana));
+        }
+        assertNull(Mana.getMoreValuableMana(anyMana, colorlessMana));
+        assertNull(Mana.getMoreValuableMana(colorlessMana, anyMana));
+
+        // 5. Mana is more valuable if it has more of any type of mana but not less of any type (other than generic)
+        final List<Mana> allManas = Arrays.asList(whiteMana, blueMana, blackMana, redMana, greenMana, colorlessMana, genericMana, anyMana);
+        for (Mana specificMana : nonGenericManas) {
+            for (Mana toAddMana : allManas) {
+                Mana manaToCompare = specificMana.copy();
+                manaToCompare.add(toAddMana);
+                manaToCompare.add(toAddMana);
+
+                assertEquals(manaToCompare, Mana.getMoreValuableMana(specificMana, manaToCompare));
+                assertEquals(manaToCompare, Mana.getMoreValuableMana(manaToCompare, specificMana));
+            }
+        }
+
+        // 6. Greater amount of mana but no less of any kind other than generic
+        final List<Mana> nonAnyManas = Arrays.asList(whiteMana, blueMana, blackMana, redMana, greenMana, colorlessMana, genericMana);
+        Mana manaBase = new ManaCostsImpl<>("{1}{W}{U}{B}{R}{G}{C}").getMana();
+        Mana manaToCompare = manaBase.copy();
+
+        // To avoid the copying that goes with it, manaToCompare is edited in place and always
+        // reset back to its base state at the end of each outer loop.
+        for (Mana manaToAddTwice : nonAnyManas) {
+            manaToCompare.add(manaToAddTwice);
+            manaToCompare.add(manaToAddTwice);
+            for (Mana manaToSubtract : nonAnyManas) {
+                manaToCompare.subtract(manaToSubtract);
+
+                if (manaToSubtract == genericMana || manaToSubtract == manaToAddTwice) {
+                    assertEquals(manaToCompare, Mana.getMoreValuableMana(manaBase, manaToCompare));
+                    assertEquals(manaToCompare, Mana.getMoreValuableMana(manaToCompare, manaBase));
+                } else if (manaToAddTwice == genericMana ){
+                    assertEquals(manaBase, Mana.getMoreValuableMana(manaBase, manaToCompare));
+                    assertEquals(manaBase, Mana.getMoreValuableMana(manaToCompare, manaBase));
+                } else {
+                    assertNull(Mana.getMoreValuableMana(manaBase, manaToCompare));
+                    assertNull(Mana.getMoreValuableMana(manaToCompare, manaBase));
+                }
+
+                manaToCompare.add(manaToSubtract);
+            }
+            manaToCompare.subtract(manaToAddTwice);
+            manaToCompare.subtract(manaToAddTwice);
+        }
+    }
+
+    /**
+     * Checks if the mana needed calculations produces the expected needed mana amount.
+     *
+     * @param available         The mana currently available.
+     * @param cost              The mana needed for a cost.
+     * @param neededExpected    The mana expected to be required to pay the cost.
+     */
+    private void testManaNeeded(Mana available, Mana cost, Mana neededExpected) {
+        Mana neededActual = cost.needed(available);
+        assertTrue(
+            neededActual.equalManaValue(neededExpected),
+            String.format("The mana needed to pay %s given %s should have been %s but was calculated to be %s", cost, available, neededExpected, neededActual)
+        );
+    }
+
+    /**
+     * Checks if the given available Mana is enough to pay a given mana cost
+     *
+     * @param manaCostsToPay    The mana cost that needs to be paid.
+     * @param availablyAny      The amount of generic mana available.
+     * @param available         The colored and colorless mana available.
+     * @param expected          boolean indicating if the available mana is expected to cover the mana cost.
+     */
+    private void assertAvailableManaEnough(String manaCostsToPay, int availablyAny, String available, boolean expected) {
+        ManaCost unpaid = new ManaCostsImpl<>(manaCostsToPay);
+        ManaCost costAvailable = new ManaCostsImpl<>(available);
+        Mana manaAvailable = costAvailable.getMana();
+        manaAvailable.setAny(availablyAny);
+        if (expected) {
+            assertTrue(
+                unpaid.getMana().enough(manaAvailable),
+                String.format("The available Mana %s should be enough to pay the costs %s", costAvailable.getText(), unpaid.getText())
+            );
+        } else {
+            assertFalse(
+                unpaid.getMana().enough(manaAvailable),
+                String.format("The available Mana %s shouldn't be enough to pay the costs %s", costAvailable.getText(), unpaid.getText())
+            );
+        }
+    }
+
+    /**
+     * Checks if a given mana reduction left the expected amount of mana costs
+     *
+     * @param manaCostsToPay    The mana cost before reductions are applied.
+     * @param manaToReduce      The amount and types of many to reduced the cost by.
+     * @param restMana          The expected amount of mana left
+     */
+    private void assertManaReduction(String manaCostsToPay, String manaToReduce, String restMana) {
+        SpellAbility spellAbility = new SpellAbility(new ManaCostsImpl<>(manaCostsToPay), "Test");
+        CardUtil.adjustCost(spellAbility, new ManaCostsImpl<>(manaToReduce), true);
+        assertEquals(
+            spellAbility.getManaCostsToPay().getText(),
+            restMana,
+            String.format("The mana cost to pay %s reduced by %s should have left %s but the rest was %s", manaCostsToPay,manaToReduce, restMana, spellAbility.getManaCostsToPay() )
+        );
+    }
+
 }

@@ -76,7 +76,7 @@ class PoppetFactoryEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         for (Permanent permanent : game.getBattlefield().getActivePermanents(
-                filter, source.getControllerId(), source.getSourceId(), game
+                filter, source.getControllerId(), source, game
         )) {
             switch (layer) {
                 case AbilityAddingRemovingEffects_6:
@@ -84,8 +84,8 @@ class PoppetFactoryEffect extends ContinuousEffectImpl {
                     break;
                 case PTChangingEffects_7:
                     if (sublayer == SubLayer.SetPT_7b) {
-                        permanent.getPower().setValue(3);
-                        permanent.getToughness().setValue(3);
+                        permanent.getPower().setModifiedBaseValue(3);
+                        permanent.getToughness().setModifiedBaseValue(3);
                     }
                     break;
             }

@@ -61,7 +61,7 @@ public final class ChampionOfStraySouls extends CardImpl {
         // {5}{B}{B}: Put Champion of Stray Souls on top of your library from your graveyard.
         this.addAbility(new SimpleActivatedAbility(Zone.GRAVEYARD,
                 new PutOnLibrarySourceEffect(true, "Put {this} on top of your library from your graveyard"),
-                new ManaCostsImpl("{5}{B}{B}")));
+                new ManaCostsImpl<>("{5}{B}{B}")));
     }
 
     private ChampionOfStraySouls(final ChampionOfStraySouls card) {

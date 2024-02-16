@@ -38,7 +38,7 @@ public enum ServerMessagesUtil {
     private static final AtomicInteger gamesEnded = new AtomicInteger(0);
     private static final AtomicInteger tournamentsStarted = new AtomicInteger(0);
     private static final AtomicInteger tournamentsEnded = new AtomicInteger(0);
-    private static final AtomicInteger lostConnection = new AtomicInteger(0);
+    private static final AtomicInteger lostConnection = new AtomicInteger(0); // bad connections only
     private static final AtomicInteger reconnects = new AtomicInteger(0);
 
     ServerMessagesUtil() {
@@ -79,7 +79,10 @@ public enum ServerMessagesUtil {
         InputStream is = null;
         File file = new File(SERVER_MSG_TXT_FILE);
         if (!file.exists() || !file.canRead()) {
-            LOGGER.warn("Couldn't find server messages file using path: " + file.getAbsolutePath());
+            // warn user about miss messages file, except dev environment
+            if (!file.getAbsolutePath().contains("Mage.Server")) {
+                LOGGER.warn("Couldn't find server messages file using path: " + file.getAbsolutePath());
+            }
         } else {
             try {
                 is = new FileInputStream(file);

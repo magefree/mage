@@ -3,8 +3,7 @@ package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
-import mage.abilities.common.BecomesTargetTriggeredAbility;
+import mage.abilities.common.BecomesTargetSourceTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.effects.common.continuous.CreaturesBecomeOtherTypeEffect;
@@ -30,7 +29,6 @@ public final class DismissIntoDream extends CardImpl {
     public DismissIntoDream(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{6}{U}");
 
-
         // Each creature your opponents control is an Illusion in addition to its other types 
         // and has "When this creature becomes the target of a spell or ability, sacrifice it."
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DismissIntoDreamEffect(filter)));
@@ -51,9 +49,10 @@ class DismissIntoDreamEffect extends CreaturesBecomeOtherTypeEffect {
     DismissIntoDreamEffect(FilterPermanent filter) {
         super(filter, SubType.ILLUSION, Duration.WhileOnBattlefield);
         this.outcome = Outcome.Detriment;
+        this.staticText = this.staticText + " and has \"When this creature becomes the target of a spell or ability, sacrifice it.\"";
     }
 
-    DismissIntoDreamEffect(final DismissIntoDreamEffect effect) {
+    private DismissIntoDreamEffect(final DismissIntoDreamEffect effect) {
         super(effect);
     }
 
@@ -73,7 +72,7 @@ class DismissIntoDreamEffect extends CreaturesBecomeOtherTypeEffect {
 
         if (layer == Layer.AbilityAddingRemovingEffects_6) {
             for (Permanent object: game.getBattlefield().getActivePermanents(this.filter, source.getControllerId(), game)) {
-                object.addAbility(new BecomesTargetTriggeredAbility(new SacrificeSourceEffect()), source.getSourceId(), game);
+                object.addAbility(new BecomesTargetSourceTriggeredAbility(new SacrificeSourceEffect()), source.getSourceId(), game);
             }
         }
 
@@ -83,10 +82,5 @@ class DismissIntoDreamEffect extends CreaturesBecomeOtherTypeEffect {
     @Override
     public boolean hasLayer(Layer layer) {
         return super.hasLayer(layer) || layer == Layer.AbilityAddingRemovingEffects_6;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return super.getText(mode) + " and has \"When this creature becomes the target of a spell or ability, sacrifice it.\"";
     }
 }

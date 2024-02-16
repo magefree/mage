@@ -41,7 +41,6 @@ public class BloodArtistTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertAllCommandsUsed();
 
         assertLife(playerA, 23);
         assertLife(playerB, 17);
@@ -68,7 +67,6 @@ public class BloodArtistTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Bone Splinters", 1);
         assertGraveyardCount(playerA, "Silvercoat Lion", 1);
@@ -96,7 +94,6 @@ public class BloodArtistTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Bone Splinters", 1);
         assertGraveyardCount(playerA, "Blood Artist", 1);
@@ -129,7 +126,6 @@ public class BloodArtistTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Bone Splinters", 1);
         assertGraveyardCount(playerA, "Terror", 1);

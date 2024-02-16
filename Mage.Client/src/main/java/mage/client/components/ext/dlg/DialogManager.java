@@ -249,15 +249,15 @@ public class DialogManager extends JComponent implements MouseListener, MouseMot
 
     @Override
     public void mousePressed(MouseEvent e) {
-        if (SwingUtilities.isLeftMouseButton(e)) {
-            j = (JComponent) getComponentAt(e.getX(), e.getY());
-
-            if (j instanceof DialogContainer) {
-                rec = j.getBounds();
-                bDragged = true;
-                mx = e.getX();
-                my = e.getY();
-            }
+        if (!SwingUtilities.isLeftMouseButton(e)) {
+            return;
+        }
+        j = (JComponent) getComponentAt(e.getX(), e.getY());
+        if (j instanceof DialogContainer) {
+            rec = j.getBounds();
+            bDragged = true;
+            mx = e.getX();
+            my = e.getY();
         }
     }
 

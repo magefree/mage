@@ -37,7 +37,7 @@ public final class GiantSlug extends CardImpl {
         // {5}: At the beginning of your next upkeep, choose a basic land type. Giant Slug gains landwalk of the chosen type until the end of that turn.
         this.addAbility(new SimpleActivatedAbility(new CreateDelayedTriggeredAbilityEffect(
                 new AtTheBeginOfYourNextUpkeepDelayedTriggeredAbility(new GiantSlugEffect())
-        ), new ManaCostsImpl("{5}")));
+        ), new ManaCostsImpl<>("{5}")));
     }
 
     private GiantSlug(final GiantSlug card) {
@@ -82,27 +82,27 @@ class GiantSlugEffect extends OneShotEffect {
         switch (choices.getChoice()) {
             case "Plains":
                 game.addEffect(new GainAbilitySourceEffect(
-                        new PlainswalkAbility(), Duration.EndOfTurn, false
+                        new PlainswalkAbility(), Duration.EndOfTurn
                 ), source);
                 return true;
             case "Island":
                 game.addEffect(new GainAbilitySourceEffect(
-                        new IslandwalkAbility(), Duration.EndOfTurn, false
+                        new IslandwalkAbility(), Duration.EndOfTurn
                 ), source);
                 return true;
             case "Swamp":
                 game.addEffect(new GainAbilitySourceEffect(
-                        new SwampwalkAbility(), Duration.EndOfTurn, false
+                        new SwampwalkAbility(), Duration.EndOfTurn
                 ), source);
                 return true;
             case "Mountain":
                 game.addEffect(new GainAbilitySourceEffect(
-                        new MountainwalkAbility(), Duration.EndOfTurn, false
+                        new MountainwalkAbility(), Duration.EndOfTurn
                 ), source);
                 return true;
             case "Forest":
                 game.addEffect(new GainAbilitySourceEffect(
-                        new ForestwalkAbility(), Duration.EndOfTurn, false
+                        new ForestwalkAbility(), Duration.EndOfTurn
                 ), source);
                 return true;
             default:

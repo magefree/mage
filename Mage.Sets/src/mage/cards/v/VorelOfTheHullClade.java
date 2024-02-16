@@ -39,7 +39,7 @@ public final class VorelOfTheHullClade extends CardImpl {
 
     public VorelOfTheHullClade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{U}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.MERFOLK);
 
@@ -47,7 +47,7 @@ public final class VorelOfTheHullClade extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {G}{U}, {tap}: For each counter on target artifact, creature, or land, put another of those counters on that permanent.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new VorelOfTheHullCladeEffect(), new ManaCostsImpl("{G}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new VorelOfTheHullCladeEffect(), new ManaCostsImpl<>("{G}{U}"));
         ability.addTarget(new TargetPermanent(filter));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
@@ -66,12 +66,12 @@ public final class VorelOfTheHullClade extends CardImpl {
 
 class VorelOfTheHullCladeEffect extends OneShotEffect {
 
-    public VorelOfTheHullCladeEffect() {
+    VorelOfTheHullCladeEffect() {
         super(Outcome.Benefit);
-        staticText = "For each counter on target artifact, creature, or land, put another of those counters on that permanent";
+        staticText = "double the number of each kind of counter on target artifact, creature, or land";
     }
 
-    public VorelOfTheHullCladeEffect(VorelOfTheHullCladeEffect effect) {
+    private VorelOfTheHullCladeEffect(final VorelOfTheHullCladeEffect effect) {
         super(effect);
     }
 

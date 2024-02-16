@@ -41,7 +41,7 @@ public final class ElvishScout extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {G}, {tap}: Untap target attacking creature you control. Prevent all combat damage that would be dealt to and dealt by it this turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new ManaCostsImpl("{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new ManaCostsImpl<>("{G}"));
         ability.addCost(new TapSourceCost());
         Effect effect = new PreventDamageByTargetEffect(Duration.EndOfTurn, true);
         effect.setText("Prevent all combat damage that would be dealt to");

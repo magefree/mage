@@ -1,11 +1,7 @@
 package mage.cards.p;
 
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.token.ClueAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -27,11 +23,7 @@ public final class ParcelMyr extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {2}, Sacrifice Parcel Myr: Draw a card
-        Ability ability = new SimpleActivatedAbility(
-                new DrawCardSourceControllerEffect(1), new GenericManaCost(2)
-        );
-        ability.addCost(new SacrificeSourceCost());
-        this.addAbility(ability);
+        this.addAbility(new ClueAbility(true));
     }
 
     private ParcelMyr(final ParcelMyr card) {

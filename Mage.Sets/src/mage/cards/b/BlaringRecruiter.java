@@ -31,7 +31,7 @@ public final class BlaringRecruiter extends CardImpl {
         this.addAbility(new PartnerWithAbility("Blaring Captain"));
 
         // {2}{W}: Create a 1/1 white Warrior creature token.
-        this.addAbility(new SimpleActivatedAbility(new CreateTokenEffect(new WarriorToken()), new ManaCostsImpl("{2}{W}")));
+        this.addAbility(new SimpleActivatedAbility(new CreateTokenEffect(new WarriorToken()), new ManaCostsImpl<>("{2}{W}")));
     }
 
     private BlaringRecruiter(final BlaringRecruiter card) {

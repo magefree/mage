@@ -55,7 +55,7 @@ class SettleTheScoreEffect extends OneShotEffect {
         this.staticText = "Put two loyalty counters on a planeswalker you control";
     }
 
-    public SettleTheScoreEffect(final SettleTheScoreEffect effect) {
+    private SettleTheScoreEffect(final SettleTheScoreEffect effect) {
         super(effect);
     }
 
@@ -71,7 +71,7 @@ class SettleTheScoreEffect extends OneShotEffect {
             return false;
         }
         TargetPermanent target = new TargetPermanent(filter);
-        if (target.choose(Outcome.Benefit, player.getId(), source.getSourceId(), game)) {
+        if (target.choose(Outcome.Benefit, player.getId(), source.getSourceId(), source, game)) {
             Permanent permanent = game.getPermanent(target.getFirstTarget());
             if (permanent != null) {
                 permanent.addCounters(CounterType.LOYALTY.createInstance(2), source.getControllerId(), source, game);

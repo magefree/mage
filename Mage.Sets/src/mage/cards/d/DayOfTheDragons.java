@@ -62,14 +62,14 @@ class DayOfTheDragonsEntersEffect extends OneShotEffect {
         staticText = "exile all creatures you control. Then create that many 5/5 red Dragon creature tokens with flying";
     }
 
-    public DayOfTheDragonsEntersEffect(final DayOfTheDragonsEntersEffect effect) {
+    private DayOfTheDragonsEntersEffect(final DayOfTheDragonsEntersEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = game.getObject(source);
         if (controller != null && sourceObject != null) {
             Set<Card> toExile = new HashSet<>();
             toExile.addAll(game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game));
@@ -104,7 +104,7 @@ class DayOfTheDragonsLeavesEffect extends OneShotEffect {
         staticText = "sacrifice all Dragons you control. Then return the exiled cards to the battlefield under your control";
     }
 
-    public DayOfTheDragonsLeavesEffect(final DayOfTheDragonsLeavesEffect effect) {
+    private DayOfTheDragonsLeavesEffect(final DayOfTheDragonsLeavesEffect effect) {
         super(effect);
     }
 

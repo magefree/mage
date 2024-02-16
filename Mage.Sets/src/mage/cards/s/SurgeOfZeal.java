@@ -48,12 +48,12 @@ public final class SurgeOfZeal extends CardImpl {
 
 class SurgeOfZealEffect extends OneShotEffect {
 
-    public SurgeOfZealEffect() {
+    SurgeOfZealEffect() {
         super(Outcome.AddAbility);
         this.staticText = "Target creature and each other creature that shares a color with it gain haste until end of turn";
     }
 
-    public SurgeOfZealEffect(final SurgeOfZealEffect effect) {
+    private SurgeOfZealEffect(final SurgeOfZealEffect effect) {
         super(effect);
     }
 
@@ -69,7 +69,7 @@ class SurgeOfZealEffect extends OneShotEffect {
             Permanent target = game.getPermanent(getTargetPointer().getFirst(game, source));
             if (target != null) {
                 ObjectColor color = target.getColor(game);
-                for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source.getSourceId(), game)) {
+                for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source, game)) {
                     if (permanent.getColor(game).shares(color)) {
                         ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);
                         effect.setTargetPointer(new FixedTarget(permanent, game));

@@ -24,8 +24,12 @@ public class ChainerNightmareAdeptTest extends CardTestPlayerBase {
         addCard(Zone.GRAVEYARD, playerA, maaka, 2);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Discard");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, maaka);
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, maaka);
+
+        // Only one should be castable
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPlayableAbility("during", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast " + maaka, false);
 
         attack(1, playerA, maaka);
 
@@ -49,7 +53,8 @@ public class ChainerNightmareAdeptTest extends CardTestPlayerBase {
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Discard");
         setChoice(playerA, true);
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, maaka);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, maaka, true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, khenra);
 
         attack(1, playerA, maaka);
@@ -66,7 +71,7 @@ public class ChainerNightmareAdeptTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, khenra, 1);
         assertTapped(khenra, true);
-        assertAbility(playerA, maaka, HasteAbility.getInstance(), true);
+        assertAbility(playerA, khenra, HasteAbility.getInstance(), true);
         assertGraveyardCount(playerA, khenra, 0);
 
         assertLife(playerB, 20 - 2 - 2);
