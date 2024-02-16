@@ -110,7 +110,7 @@
                   </jacocoReports>
 
                   <excludes>
-                    <exclude>**/generated-sources/*</exclude>
+                    <exclude>**/generated-sources/**</exclude>
                   </excludes>
                 </configuration>
             </plugin>
