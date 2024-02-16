@@ -2,11 +2,15 @@ name: CI
 
 on:
   push:
-    branches:
-      - github-actions
+    paths:
+      - '**.java'
+      - '**.xml'
   pull_request:
     branches:
       - master
+    paths:
+      - '**.java'
+      - '**.xml'
 
 env:
   MAVEN_OPTS: -Xmx3g -Dhttp.keepAlive=false -Dmaven.wagon.http.pool=false -Dmaven.wagon.httpconnectionManager.ttlSeconds=120
