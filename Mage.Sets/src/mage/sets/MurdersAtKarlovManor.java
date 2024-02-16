@@ -141,6 +141,7 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Krovod Haunch", 21, Rarity.UNCOMMON, mage.cards.k.KrovodHaunch.class));
         cards.add(new SetCardInfo("Kylox, Visionary Inventor", 214, Rarity.RARE, mage.cards.k.KyloxVisionaryInventor.class));
         cards.add(new SetCardInfo("Lamplight Phoenix", 137, Rarity.RARE, mage.cards.l.LamplightPhoenix.class));
+        cards.add(new SetCardInfo("Lazav, Wearer of Faces", 216, Rarity.RARE, mage.cards.l.LazavWearerOfFaces.class));
         cards.add(new SetCardInfo("Lead Pipe", 90, Rarity.UNCOMMON, mage.cards.l.LeadPipe.class));
         cards.add(new SetCardInfo("Leering Onlooker", 91, Rarity.UNCOMMON, mage.cards.l.LeeringOnlooker.class));
         cards.add(new SetCardInfo("Leyline of the Guildpact", 217, Rarity.RARE, mage.cards.l.LeylineOfTheGuildpact.class));
