@@ -9,8 +9,11 @@ on:
       - master
 
 env:
-  MAVEN_OPTS: -Xmx3g -Dhttp.keepAlive=false -Dmaven.wagon.http.pool=false -Dmaven.wagon.httpconnectionManager.ttlSeconds=120
-
+  MAVEN_OPTS: >- 
+    -Xmx3g 
+    --define http.keepAlive=false 
+    --define maven.wagon.http.pool=false 
+    --define maven.wagon.httpconnectionManager.ttlSeconds=120
 
 jobs:
   test:
@@ -44,7 +47,6 @@ jobs:
 
       - env:
           CI_BUILD_NUMBER: ${{ github.run_id }}
-          # this will need to be updated to work on the main branch
           CI_BUILD_URL: https://github.com/${{ github.repository }}/pull/${{ github.event.pull_request.number }}/checks
           CI_BRANCH: ${{ github.head_ref }}
           CI_NAME: github
