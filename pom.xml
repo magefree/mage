@@ -108,6 +108,10 @@
                   <jacocoReports>
                     <jacocoReport>${root.dir}/Mage.Reports/target/site/jacoco-aggregate/jacoco.xml</jacocoReport>
                   </jacocoReports>
+
+                  <excludes>
+                    <exclude>**/generated-sources/*</exclude>
+                  </excludes>
                 </configuration>
             </plugin>
         </plugins>
