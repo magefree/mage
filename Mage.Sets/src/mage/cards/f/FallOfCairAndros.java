@@ -31,7 +31,7 @@ public final class FallOfCairAndros extends CardImpl {
         this.addAbility(new FallOfCairAndrosTriggeredAbility());
 
         // {7}{R}: Fall of Cair Andros deals 7 damage to target creature.
-        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(7), new ManaCostsImpl("{7}{R}"));
+        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(7), new ManaCostsImpl<>("{7}{R}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
