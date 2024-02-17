@@ -1,4 +1,3 @@
-
 package mage.abilities.common;
 
 import mage.abilities.TriggeredAbilityImpl;
@@ -53,6 +52,6 @@ public class CounterRemovedFromSourceWhileExiledTriggeredAbility extends Trigger
     public boolean checkTrigger(GameEvent event, Game game) {
         return event.getData().equals(counterType.getName())
                 && event.getTargetId().equals(this.getSourceId())
-                && (!onlyController || event.getPlayerId() == this.getControllerId());
+                && (!onlyController || event.getPlayerId().equals(getControllerId()));
     }
 }
