@@ -1,4 +1,3 @@
-
 package mage.cards.t;
 
 import java.util.UUID;
@@ -14,7 +13,6 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 
 /**
  *
@@ -42,34 +40,35 @@ public final class TolarianEntrancer extends CardImpl {
         return new TolarianEntrancer(this);
     }
 
-    class TolarianEntrancerDelayedTriggeredAbility extends DelayedTriggeredAbility {
+}
 
-        public TolarianEntrancerDelayedTriggeredAbility() {
-            super(new GainControlTargetEffect(Duration.EndOfGame));
-        }
+class TolarianEntrancerDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
-        private TolarianEntrancerDelayedTriggeredAbility(final TolarianEntrancerDelayedTriggeredAbility ability) {
-            super(ability);
-        }
+    TolarianEntrancerDelayedTriggeredAbility() {
+        super(new GainControlTargetEffect(Duration.EndOfGame));
+    }
 
-        @Override
-        public TolarianEntrancerDelayedTriggeredAbility copy() {
-            return new TolarianEntrancerDelayedTriggeredAbility(this);
-        }
+    private TolarianEntrancerDelayedTriggeredAbility(final TolarianEntrancerDelayedTriggeredAbility ability) {
+        super(ability);
+    }
 
-        @Override
-        public boolean checkEventType(GameEvent event, Game game) {
-            return event.getType() == GameEvent.EventType.END_COMBAT_STEP_POST;
-        }
+    @Override
+    public TolarianEntrancerDelayedTriggeredAbility copy() {
+        return new TolarianEntrancerDelayedTriggeredAbility(this);
+    }
 
-        @Override
-        public boolean checkTrigger(GameEvent event, Game game) {
-            return true;
-        }
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.END_COMBAT_STEP_POST;
+    }
 
-        @Override
-        public String getRule() {
-            return "gain control of that creature at end of combat";
-        }
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        return true;
+    }
+
+    @Override
+    public String getRule() {
+        return "gain control of that creature at end of combat";
     }
 }
