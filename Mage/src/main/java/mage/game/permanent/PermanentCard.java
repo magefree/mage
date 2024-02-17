@@ -39,7 +39,6 @@ public class PermanentCard extends PermanentImpl {
 
         // runtime check: must use real card only inside
         if (card instanceof PermanentCard) {
-            // TODO: allow?
             throw new IllegalArgumentException("Wrong code usage: can't use PermanentCard inside another PermanentCard");
         }
 

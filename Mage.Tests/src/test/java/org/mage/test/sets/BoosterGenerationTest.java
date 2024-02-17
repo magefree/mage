@@ -17,7 +17,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.mage.test.serverside.base.MageTestBase;
+import org.mage.test.serverside.base.MageTestPlayerBase;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -27,7 +27,7 @@ import static org.junit.Assert.*;
 /**
  * @author nigelzor, JayDi85
  */
-public class BoosterGenerationTest extends MageTestBase {
+public class BoosterGenerationTest extends MageTestPlayerBase {
 
     private static final List<String> basics = new ArrayList<>(Arrays.asList("Plains", "Island", "Swamp", "Mountain", "Forest"));
 
