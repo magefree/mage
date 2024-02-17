@@ -15,7 +15,7 @@ import org.apache.log4j.Logger;
  */
 public abstract class DraftCube {
 
-    public class CardIdentity {
+    public static class CardIdentity {
 
         private final String name;
         private final String extension;
@@ -55,7 +55,7 @@ public abstract class DraftCube {
     protected List<CardIdentity> cubeCards = new ArrayList<>();
     protected List<CardIdentity> leftCubeCards = new ArrayList<>();
 
-    public DraftCube(String name) {
+    protected DraftCube(String name) {
         this.name = name;
         this.code = getClass().getSimpleName();
     }
