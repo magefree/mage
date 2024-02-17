@@ -12,8 +12,8 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
-import mage.watchers.Watcher;
 import mage.watchers.common.CastSpellLastTurnWatcher;
+import mage.watchers.common.DrawCardWatcher;
 
 import java.util.*;
 
@@ -84,7 +84,6 @@ class TroubleInPairsTriggeredAbility extends TriggeredAbilityImpl {
 
     TroubleInPairsTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1));
-        this.addWatcher(new TroubleInPairsDrawCardWatcher());
     }
 
     private TroubleInPairsTriggeredAbility(final TroubleInPairsTriggeredAbility ability) {
@@ -109,8 +108,7 @@ class TroubleInPairsTriggeredAbility extends TriggeredAbilityImpl {
         if (controller == null || !game.getOpponents(getControllerId()).contains(event.getPlayerId())) {
             return false;
         }
-        GameEvent.EventType eventType = event.getType();
-        switch (eventType) {
+        switch (event.getType()) {
             // Whenever an opponent attacks you with two or more creatures
             case DECLARED_ATTACKERS:
                 return game
@@ -122,7 +120,7 @@ class TroubleInPairsTriggeredAbility extends TriggeredAbilityImpl {
                         .count() >= 2;
             // Whenever an opponent draws their second card each turn
             case DREW_CARD:
-                return TroubleInPairsDrawCardWatcher.checkEvent(event.getPlayerId(), event, game);
+                return DrawCardWatcher.checkEvent(event.getPlayerId(), event, game, 2);
             // Whenever an opponent casts their second spell each turn
             case SPELL_CAST:
                 CastSpellLastTurnWatcher watcher = game.getState().getWatcher(CastSpellLastTurnWatcher.class);
@@ -136,36 +134,5 @@ class TroubleInPairsTriggeredAbility extends TriggeredAbilityImpl {
     public String getRule() {
         return "Whenever an opponent attacks you with two or more creatures, draws their second " +
                 "card each turn, or casts their second spell each turn, you draw a card.";
-    }
-}
-
-class TroubleInPairsDrawCardWatcher extends Watcher {
-
-    private final Map<UUID, List<UUID>> drawMap = new HashMap<>();
-
-    TroubleInPairsDrawCardWatcher() {
-        super(WatcherScope.GAME);
-    }
-
-    @Override
-    public void watch(GameEvent event, Game game) {
-        if (event.getType() != GameEvent.EventType.DREW_CARD) {
-            return;
-        }
-        if (!drawMap.containsKey(event.getPlayerId())) {
-            drawMap.putIfAbsent(event.getPlayerId(), new ArrayList<>());
-        }
-        drawMap.get(event.getPlayerId()).add(event.getId());
-    }
-
-    @Override
-    public void reset() {
-        super.reset();
-        drawMap.clear();
-    }
-
-    static boolean checkEvent(UUID playerId, GameEvent event, Game game) {
-        Map<UUID, List<UUID>> drawMap = game.getState().getWatcher(TroubleInPairsDrawCardWatcher.class).drawMap;
-        return drawMap.containsKey(playerId) && Objects.equals(drawMap.get(playerId).size(), 2) && event.getId().equals(drawMap.get(playerId).get(1));
     }
 }
