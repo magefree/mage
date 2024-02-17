@@ -144,6 +144,8 @@ public final class MurdersAtKarlovManorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Master of Pearls", 73, Rarity.RARE, mage.cards.m.MasterOfPearls.class));
         cards.add(new SetCardInfo("Mastery of the Unseen", 74, Rarity.RARE, mage.cards.m.MasteryOfTheUnseen.class));
         cards.add(new SetCardInfo("Mechanized Production", 109, Rarity.MYTHIC, mage.cards.m.MechanizedProduction.class));
+        cards.add(new SetCardInfo("Merchant of Truth", 11, Rarity.RARE, mage.cards.m.MerchantOfTruth.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Merchant of Truth", 322, Rarity.RARE, mage.cards.m.MerchantOfTruth.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mind Stone", 232, Rarity.UNCOMMON, mage.cards.m.MindStone.class));
         cards.add(new SetCardInfo("Mirror Entity", 75, Rarity.RARE, mage.cards.m.MirrorEntity.class));
         cards.add(new SetCardInfo("Mission Briefing", 110, Rarity.RARE, mage.cards.m.MissionBriefing.class));
