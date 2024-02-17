@@ -259,6 +259,8 @@ public final class MurdersAtKarlovManorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Toxic Deluge", 142, Rarity.RARE, mage.cards.t.ToxicDeluge.class));
         cards.add(new SetCardInfo("Trail of Mystery", 192, Rarity.RARE, mage.cards.t.TrailOfMystery.class));
         cards.add(new SetCardInfo("Tranquil Thicket", 309, Rarity.COMMON, mage.cards.t.TranquilThicket.class));
+        cards.add(new SetCardInfo("Trouble in Pairs", 15, Rarity.RARE, mage.cards.t.TroubleInPairs.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Trouble in Pairs", 326, Rarity.RARE, mage.cards.t.TroubleInPairs.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Twilight Prophet", 143, Rarity.MYTHIC, mage.cards.t.TwilightProphet.class));
         cards.add(new SetCardInfo("Ugin's Mastery", 53, Rarity.RARE, mage.cards.u.UginsMastery.class));
         cards.add(new SetCardInfo("Ulvenwald Mysteries", 193, Rarity.UNCOMMON, mage.cards.u.UlvenwaldMysteries.class));

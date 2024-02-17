@@ -128,5 +128,4 @@ class DrawCardWatcher extends Watcher {
         Map<UUID, List<UUID>> drawMap = game.getState().getWatcher(DrawCardWatcher.class).drawMap;
         return drawMap.containsKey(playerId) && Objects.equals(drawMap.get(playerId).size(), cardNumber) && event.getId().equals(drawMap.get(playerId).get(cardNumber - 1));
     }
-
 }

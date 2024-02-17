@@ -23,6 +23,9 @@ import mage.watchers.common.CardsPutIntoGraveyardWatcher;
 
 import java.util.UUID;
 
+/**
+ * @author PurpleCrowbar
+ */
 public final class GerrardsHourglassPendant extends CardImpl {
 
     public GerrardsHourglassPendant(UUID ownerId, CardSetInfo setInfo) {
