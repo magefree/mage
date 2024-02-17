@@ -1376,7 +1376,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         NOT_REQUIRED_NO_CHOICE,
     }
 
-    private class ApprovingObjectResult {
+    private static class ApprovingObjectResult {
         public final ApprovingObjectResultStatus status;
         public final ApprovingObject approvingObject; // not null iff status is CHOSEN
 
