@@ -889,9 +889,10 @@ public class CopySpellTest extends CardTestPlayerBase {
     }
 
     private void prepareZoneAndZCC(Card originalCard) {
-        // prepare custom zcc and zone for copy testing
+        // prepare custom zcc and zone for copy testing (it's not real game)
+        // HAND zone is safest way (some card types require diff zones for stack/battlefield, e.g. MDFC)
         originalCard.setZoneChangeCounter(5, currentGame);
-        originalCard.setZone(Zone.STACK, currentGame);
+        originalCard.setZone(Zone.HAND, currentGame);
     }
 
     private void cardsMustHaveSameZoneAndZCC(Card originalCard, Card copiedCard, String infoPrefix) {

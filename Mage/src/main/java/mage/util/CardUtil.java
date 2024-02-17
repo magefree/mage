@@ -1082,15 +1082,25 @@ public final class CardUtil {
     }
 
     /**
-     * Put card to battlefield without resolve (for cheats and tests only)
+     * Put card to battlefield without resolve/ETB (for cheats and tests only)
      *
-     * @param source  must be non null (if you need it empty then use fakeSourceAbility)
+     * @param source  must be non-null (if you need it empty then use fakeSourceAbility)
      * @param game
      * @param newCard
      * @param player
      */
-    public static void putCardOntoBattlefieldWithEffects(Ability source, Game game, Card newCard, Player player) {
+    public static void putCardOntoBattlefieldWithEffects(Ability source, Game game, Card newCard, Player player, boolean tapped) {
         // same logic as ZonesHandler->maybeRemoveFromSourceZone
+
+        // runtime check: must have source
+        if (source == null) {
+            throw new IllegalArgumentException("Wrong code usage: must use source ability or fakeSourceAbility");
+        }
+
+        // runtime check: must use only real cards
+        if (newCard instanceof PermanentCard) {
+            throw new IllegalArgumentException("Wrong code usage: must put to battlefield only real cards, not PermanentCard");
+        }
 
         // workaround to put real permanent from one side (example: you call mdf card by cheats)
         Card permCard = getDefaultCardSideForBattlefield(game, newCard);
@@ -1105,15 +1115,16 @@ public final class CardUtil {
             permanent = new PermanentCard(permCard, player.getId(), game);
         }
 
-        // put onto battlefield with possible counters
+        // put onto battlefield with possible counters without ETB
         game.getPermanentsEntering().put(permanent.getId(), permanent);
         permCard.checkForCountersToAdd(permanent, source, game);
         permanent.entersBattlefield(source, game, Zone.OUTSIDE, false);
         game.addPermanent(permanent, game.getState().getNextPermanentOrderNumber());
         game.getPermanentsEntering().remove(permanent.getId());
 
-        // workaround for special tapped status from test framework's command (addCard)
-        if (permCard instanceof PermanentCard && ((PermanentCard) permCard).isTapped()) {
+        // tapped status
+        // warning, "enters the battlefield tapped" abilities will be executed before, so don't set to false here
+        if (tapped) {
             permanent.setTapped(true);
         }
 

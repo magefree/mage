@@ -798,7 +798,7 @@ public final class SystemUtil {
         // TODO: replace by player.move?
         switch (zone) {
             case BATTLEFIELD:
-                CardUtil.putCardOntoBattlefieldWithEffects(source, game, card, player);
+                CardUtil.putCardOntoBattlefieldWithEffects(source, game, card, player, false);
                 break;
             case LIBRARY:
                 card.setZone(Zone.LIBRARY, game);

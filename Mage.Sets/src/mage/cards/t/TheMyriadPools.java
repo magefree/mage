@@ -175,7 +175,6 @@ class TheMyriadPoolsCopyEffect extends OneShotEffect {
                 newBluePrint = new PermanentCard(copyFromCardOnStack, source.getControllerId(), game);
                 newBluePrint.assignNewId();
                 CopyEffect copyEffect = new CopyEffect(Duration.EndOfTurn, newBluePrint, targetPermanentToCopyTo.getId());
-                copyEffect.newId();
                 Ability newAbility = source.copy();
                 copyEffect.init(newAbility, game);
                 game.addEffect(copyEffect, newAbility);

@@ -159,10 +159,12 @@ public abstract class PlayerImpl implements Player, Serializable {
     protected FilterPermanent sacrificeCostFilter;
     protected final List<AlternativeSourceCosts> alternativeSourceCosts = new ArrayList<>();
 
-    protected boolean isGameUnderControl = true;
-    protected UUID turnController;
-    protected List<UUID> turnControllers = new ArrayList<>();
-    protected Set<UUID> playersUnderYourControl = new HashSet<>();
+    // TODO: rework turn controller to use single list (see other todos)
+    //protected Stack<UUID> allTurnControllers = new Stack<>();
+    protected boolean isGameUnderControl = true; // TODO: replace with allTurnControllers.isEmpty
+    protected UUID turnController; // null on own control TODO: replace with allTurnControllers.last
+    protected List<UUID> turnControllers = new ArrayList<>(); // TODO: remove
+    protected Set<UUID> playersUnderYourControl = new HashSet<>(); // TODO: replace with game method and search in allTurnControllers
 
     protected Set<UUID> usersAllowedToSeeHandCards = new HashSet<>();
     protected List<UUID> attachments = new ArrayList<>();
@@ -263,14 +265,14 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.storedBookmark = player.storedBookmark;
 
         this.topCardRevealed = player.topCardRevealed;
-        this.playersUnderYourControl.addAll(player.playersUnderYourControl);
         this.usersAllowedToSeeHandCards.addAll(player.usersAllowedToSeeHandCards);
 
         this.isTestMode = player.isTestMode;
-        this.isGameUnderControl = player.isGameUnderControl;
 
+        this.isGameUnderControl = player.isGameUnderControl;
         this.turnController = player.turnController;
         this.turnControllers.addAll(player.turnControllers);
+        this.playersUnderYourControl.addAll(player.playersUnderYourControl);
 
         this.passed = player.passed;
         this.passedTurn = player.passedTurn;
@@ -363,13 +365,14 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.alternativeSourceCosts.addAll(player.getAlternativeSourceCosts());
 
         this.topCardRevealed = player.isTopCardRevealed();
-        this.playersUnderYourControl.clear();
-        this.playersUnderYourControl.addAll(player.getPlayersUnderYourControl());
-        this.isGameUnderControl = player.isGameUnderControl();
 
-        this.turnController = player.getTurnControlledBy();
+        this.isGameUnderControl = player.isGameUnderControl();
+        this.turnController = this.getId().equals(player.getTurnControlledBy()) ? null : player.getTurnControlledBy();
         this.turnControllers.clear();
         this.turnControllers.addAll(player.getTurnControllers());
+        this.playersUnderYourControl.clear();
+        this.playersUnderYourControl.addAll(player.getPlayersUnderYourControl());
+
         this.reachedNextTurnAfterLeaving = player.hasReachedNextTurnAfterLeaving();
 
         this.clearCastSourceIdManaCosts();
@@ -607,6 +610,9 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public void setTurnControlledBy(UUID playerId) {
+        if (playerId == null) {
+            throw new IllegalArgumentException("Can't add unknown player to turn controllers: " + playerId);
+        }
         this.turnController = playerId;
         this.turnControllers.add(playerId);
     }
@@ -618,7 +624,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public UUID getTurnControlledBy() {
-        return this.turnController;
+        return this.turnController == null ? this.getId() : this.turnController;
     }
 
     @Override
@@ -647,14 +653,18 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.isGameUnderControl = value;
         if (isGameUnderControl) {
             if (fullRestore) {
+                // to own
                 this.turnControllers.clear();
-                this.turnController = getId();
+                this.turnController = null;
+                this.isGameUnderControl = true;
             } else {
+                // to prev player
                 if (!turnControllers.isEmpty()) {
                     this.turnControllers.remove(turnControllers.size() - 1);
                 }
                 if (turnControllers.isEmpty()) {
-                    this.turnController = getId();
+                    this.turnController = null;
+                    this.isGameUnderControl = true;
                 } else {
                     this.turnController = turnControllers.get(turnControllers.size() - 1);
                     isGameUnderControl = false;
@@ -2515,7 +2525,8 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public void concede(Game game) {
         game.setConcedingPlayer(playerId);
-        lost(game);
+
+        lost(game); // it's ok to be ignored by "can't lose abilities" here (setConcedingPlayer done all work above)
     }
 
     @Override

@@ -99,7 +99,6 @@ class ShadowKinEffect extends OneShotEffect {
         CopyApplier applier = new ShadowKinApplier();
         applier.apply(game, blueprint, source, sourcePermanent.getId());
         CopyEffect copyEffect = new CopyEffect(Duration.Custom, blueprint, sourcePermanent.getId());
-        copyEffect.newId();
         copyEffect.setApplier(applier);
         Ability newAbility = source.copy();
         copyEffect.init(newAbility, game);

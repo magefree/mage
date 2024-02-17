@@ -1301,7 +1301,6 @@ public class ComputerPlayer extends PlayerImpl {
     @Override
     public boolean priority(Game game) {
         game.resumeTimer(getTurnControlledBy());
-        log.debug("priority");
         boolean result = priorityPlay(game);
         game.pauseTimer(getTurnControlledBy());
         return result;

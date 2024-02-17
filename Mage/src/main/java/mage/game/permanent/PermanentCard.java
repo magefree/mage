@@ -14,6 +14,7 @@ import mage.cards.SplitCard;
 import mage.constants.SpellAbilityType;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
+import mage.game.permanent.token.Token;
 
 import javax.annotation.processing.SupportedSourceVersion;
 import javax.lang.model.SourceVersion;
@@ -25,17 +26,22 @@ import java.util.UUID;
  *
  * @author BetaSteward_at_googlemail.com
  */
-@SupportedSourceVersion(SourceVersion.RELEASE_8)
 public class PermanentCard extends PermanentImpl {
 
     protected int maxLevelCounters;
-    // A copy of the origin card that was cast (this is not the original card, so it's possible to change some attribute to this blueprint to change attributes to the permanent if it enters the battlefield with e.g. a subtype)
-    protected Card card;
+    // A copy of the original card that was cast (this is not the original card, so it's possible to change some attribute to this blueprint to change attributes to the permanent if it enters the battlefield with e.g. a subtype)
+    protected Card card; // TODO: wtf, it modified on getCard and other places, e.g. on bestow -- must be fixed!
     // the number this permanent instance had
     protected int zoneChangeCounter;
 
     public PermanentCard(Card card, UUID controllerId, Game game) {
         super(card.getId(), card.getOwnerId(), controllerId, card.getName());
+
+        // runtime check: must use real card only inside
+        if (card instanceof PermanentCard) {
+            // TODO: allow?
+            throw new IllegalArgumentException("Wrong code usage: can't use PermanentCard inside another PermanentCard");
+        }
 
         // usage check: you must put to play only real card's part
         // if you use it in test code then call CardUtil.getDefaultCardSideForBattlefield for default side
@@ -101,6 +107,7 @@ public class PermanentCard extends PermanentImpl {
     }
 
     protected void copyFromCard(final Card card, final Game game) {
+        // TODO: must research - is it copy all fields or something miss
         this.name = card.getName();
         this.abilities.clear();
         if (this.faceDown) {
@@ -224,6 +231,10 @@ public class PermanentCard extends PermanentImpl {
 
     @Override
     public String toString() {
-        return card.toString();
+        return card.toString()
+                + ", " + ((this instanceof Token) ? "T" : "C")
+                + (this.isCopy() ? ", copy" : "")
+                + ", " + this.getPower() + "/" + this.getToughness()
+                + (this.isTapped() ? ", tapped" : "");
     }
 }

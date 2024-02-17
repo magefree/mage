@@ -631,7 +631,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
     /**
-     * Add any amount of cards to specified zone of specified player.
+     * Add any amount of cards to specified zone of specified player without resolve/ETB
      *
      * @param gameZone {@link mage.constants.Zone} to add cards to.
      * @param player   {@link Player} to add cards for. Use either playerA or
@@ -684,14 +684,13 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         if (gameZone == Zone.BATTLEFIELD) {
             for (int i = 0; i < count; i++) {
                 Card newCard = cardInfo.getCard();
-                Card permCard = CardUtil.getDefaultCardSideForBattlefield(currentGame, newCard);
-
-                PermanentCard p = new PermanentCard(permCard, player.getId(), currentGame);
-                p.setTapped(tapped);
-                getBattlefieldCards(player).add(p);
-
+                getBattlefieldCards(player).add(new PutToBattlefieldInfo(
+                        newCard,
+                        tapped
+                ));
                 if (!aliasName.isEmpty()) {
-                    player.addAlias(player.generateAliasName(aliasName, useAliasMultiNames, i + 1), p.getId());
+                    // TODO: is it bugged with double faced cards (wrong ref)?
+                    player.addAlias(player.generateAliasName(aliasName, useAliasMultiNames, i + 1), newCard.getId());
                 }
             }
         } else {

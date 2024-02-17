@@ -22,6 +22,7 @@ import mage.cards.repository.CardRepository;
 import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
+import mage.game.PutToBattlefieldInfo;
 import mage.game.match.Match;
 import mage.game.match.MatchType;
 import mage.game.permanent.PermanentCard;
@@ -72,7 +73,7 @@ public abstract class MageTestPlayerBase {
     protected Pattern pattern = Pattern.compile("([a-zA-Z]*):([\\w]*):([a-zA-Z ,\\-.!'\\d]*):([\\d]*)(:\\{tapped\\})?");
 
     protected Map<TestPlayer, List<Card>> handCards = new HashMap<>();
-    protected Map<TestPlayer, List<PermanentCard>> battlefieldCards = new HashMap<>();
+    protected Map<TestPlayer, List<PutToBattlefieldInfo>> battlefieldCards = new HashMap<>(); // cards + additional status like tapped
     protected Map<TestPlayer, List<Card>> graveyardCards = new HashMap<>();
     protected Map<TestPlayer, List<Card>> libraryCards = new HashMap<>();
     protected Map<TestPlayer, List<Card>> commandCards = new HashMap<>();
@@ -111,7 +112,7 @@ public abstract class MageTestPlayerBase {
         EXPECTED
     }
 
-    protected ParserState parserState;
+    protected ParserState parserState; // TODO: remove outdated and unsued code
 
     /**
      * Expected results of the test. Read from test case in {@link String} based
@@ -216,6 +217,7 @@ public abstract class MageTestPlayerBase {
     }
 
     private void parseLine(String line) {
+        // TODO: delete unused code
         if (parserState == ParserState.EXPECTED) {
             expectedResults.add(line); // just remember for future use
             return;
@@ -229,14 +231,14 @@ public abstract class MageTestPlayerBase {
 
             if (nickname.startsWith("Computer")) {
                 List<Card> cards = null;
-                List<PermanentCard> perms = null;
+                //List<PermanentCard> perms = null;
                 Zone gameZone;
                 if ("hand".equalsIgnoreCase(zone)) {
                     gameZone = Zone.HAND;
                     cards = getHandCards(getPlayer(nickname));
                 } else if ("battlefield".equalsIgnoreCase(zone)) {
                     gameZone = Zone.BATTLEFIELD;
-                    perms = getBattlefieldCards(getPlayer(nickname));
+                    //perms = getBattlefieldCards(getPlayer(nickname));
                 } else if ("graveyard".equalsIgnoreCase(zone)) {
                     gameZone = Zone.GRAVEYARD;
                     cards = getGraveCards(getPlayer(nickname));
@@ -268,10 +270,10 @@ public abstract class MageTestPlayerBase {
                         Card newCard = cardInfo != null ? cardInfo.getCard() : null;
                         if (newCard != null) {
                             if (gameZone == Zone.BATTLEFIELD) {
-                                Card permCard = CardUtil.getDefaultCardSideForBattlefield(currentGame, newCard);
-                                PermanentCard p = new PermanentCard(permCard, null, currentGame);
-                                p.setTapped(tapped);
-                                perms.add(p);
+                                //Card permCard = CardUtil.getDefaultCardSideForBattlefield(currentGame, newCard);
+                                //PermanentCard p = new PermanentCard(permCard, null, currentGame);
+                                //p.setTapped(tapped);
+                                //perms.add(p);
                             } else {
                                 cards.add(newCard);
                             }
@@ -339,11 +341,11 @@ public abstract class MageTestPlayerBase {
         return res;
     }
 
-    protected List<PermanentCard> getBattlefieldCards(TestPlayer player) {
+    protected List<PutToBattlefieldInfo> getBattlefieldCards(TestPlayer player) {
         if (battlefieldCards.containsKey(player)) {
             return battlefieldCards.get(player);
         }
-        List<PermanentCard> res = new ArrayList<>();
+        List<PutToBattlefieldInfo> res = new ArrayList<>();
         battlefieldCards.put(player, res);
         return res;
     }
@@ -437,12 +439,13 @@ public abstract class MageTestPlayerBase {
 
         CardSetInfo testSet = new CardSetInfo(needCardName, needSetCode, "123", Rarity.COMMON);
         Card newCard = new CustomTestCard(controllerPlayer.getId(), testSet, cardType, spellCost);
-        Card permCard = CardUtil.getDefaultCardSideForBattlefield(currentGame, newCard);
-        PermanentCard permanent = new PermanentCard(permCard, controllerPlayer.getId(), currentGame);
 
         switch (putAtZone) {
             case BATTLEFIELD:
-                getBattlefieldCards(controllerPlayer).add(permanent);
+                getBattlefieldCards(controllerPlayer).add(new PutToBattlefieldInfo(
+                        newCard,
+                        false
+                ));
                 break;
             case GRAVEYARD:
                 getGraveCards(controllerPlayer).add(newCard);
@@ -565,7 +568,7 @@ public abstract class MageTestPlayerBase {
     }
 }
 
-// custom card with global abilities list to init (can contains abilities per card name)
+// custom card with global abilities list to init (can contain abilities per card name)
 class CustomTestCard extends CardImpl {
 
     static private final Map<String, Abilities<Ability>> abilitiesList = new HashMap<>(); // card name -> abilities
