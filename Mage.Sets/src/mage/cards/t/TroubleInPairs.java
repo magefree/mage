@@ -1,10 +1,7 @@
 package mage.cards.t;
 
-import mage.MageObject;
-import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.common.SkipExtraTurnsAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -26,7 +23,7 @@ public final class TroubleInPairs extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
 
         // If an opponent would begin an extra turn, that player skips that turn instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TroubleInPairsSkipExtraTurnsEffect()));
+        this.addAbility(new SkipExtraTurnsAbility(true));
 
         // Whenever an opponent attacks you with two or more creatures, draws their second card each turn, or casts their second spell each turn, you draw a card.
         this.addAbility(new TroubleInPairsTriggeredAbility());
@@ -39,44 +36,6 @@ public final class TroubleInPairs extends CardImpl {
     @Override
     public TroubleInPairs copy() {
         return new TroubleInPairs(this);
-    }
-}
-
-class TroubleInPairsSkipExtraTurnsEffect extends ReplacementEffectImpl {
-
-    TroubleInPairsSkipExtraTurnsEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        staticText = "If an opponent would begin an extra turn, that player skips that turn instead";
-    }
-
-    private TroubleInPairsSkipExtraTurnsEffect(final TroubleInPairsSkipExtraTurnsEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public TroubleInPairsSkipExtraTurnsEffect copy() {
-        return new TroubleInPairsSkipExtraTurnsEffect(this);
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Player player = game.getPlayer(event.getPlayerId());
-        MageObject sourceObject = game.getObject(source);
-        if (player != null && sourceObject != null) {
-            game.informPlayers(sourceObject.getLogName() + ": Extra turn of " + player.getLogName() + " skipped");
-        }
-        return true;
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.EXTRA_TURN;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        Player controller = game.getPlayer(source.getControllerId());
-        return controller != null && controller.hasOpponent(event.getPlayerId(), game);
     }
 }
 
