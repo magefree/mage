@@ -6,10 +6,10 @@ import mage.abilities.common.OnEventTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageControllerEffect;
+import mage.abilities.effects.common.TargetPlayerGainControlSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
 import mage.cards.CardImpl;
@@ -34,7 +34,7 @@ public final class JinxedChoker extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // At the beginning of your end step, target opponent gains control of Jinxed Choker and puts a charge counter on it.
-        Ability endStepAbility = new BeginningOfYourEndStepTriggeredAbility(new JinxedChokerChangeControllerEffect(), false);
+        Ability endStepAbility = new BeginningOfYourEndStepTriggeredAbility(new TargetPlayerGainControlSourceEffect(), false);
         endStepAbility.addEffect(new JinxedChokerAddCounterEffect());
         endStepAbility.addTarget(new TargetOpponent());
         this.addAbility(endStepAbility);
@@ -56,35 +56,6 @@ public final class JinxedChoker extends CardImpl {
     public JinxedChoker copy() {
         return new JinxedChoker(this);
     }
-}
-
-class JinxedChokerChangeControllerEffect extends ContinuousEffectImpl {
-
-    JinxedChokerChangeControllerEffect() {
-        super(Duration.Custom, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
-        staticText = "target opponent gains control of {this}";
-    }
-
-    private JinxedChokerChangeControllerEffect(final JinxedChokerChangeControllerEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public JinxedChokerChangeControllerEffect copy() {
-        return new JinxedChokerChangeControllerEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
-        if (permanent != null) {
-            return permanent.changeControllerId(source.getFirstTarget(), game, source);
-        } else {
-            discard();
-        }
-        return false;
-    }
-
 }
 
 class JinxedChokerAddCounterEffect extends OneShotEffect {

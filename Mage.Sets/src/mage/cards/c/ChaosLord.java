@@ -7,7 +7,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.ControlsPermanentsComparedToOpponentsCondition;
 import mage.abilities.effects.AsThoughEffectImpl;
-import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.common.TargetPlayerGainControlSourceEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -62,7 +62,7 @@ class ChaosLordTriggeredAbility extends BeginningOfUpkeepTriggeredAbility {
 
     ChaosLordTriggeredAbility() {
         super(Zone.BATTLEFIELD,
-                new GainControlSourceEffect(),
+                new TargetPlayerGainControlSourceEffect(),
                 TargetController.YOU,
                 false);
     }
@@ -96,39 +96,11 @@ class ChaosLordTriggeredAbility extends BeginningOfUpkeepTriggeredAbility {
 
 }
 
-class GainControlSourceEffect extends ContinuousEffectImpl {
-
-    GainControlSourceEffect() {
-        super(Duration.Custom, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
-        staticText = "target opponent gains control of {this}";
-    }
-
-    private GainControlSourceEffect(final GainControlSourceEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public GainControlSourceEffect copy() {
-        return new GainControlSourceEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
-        if (permanent != null) {
-            return permanent.changeControllerId(source.getFirstTarget(), game, source);
-        } else {
-            discard();
-        }
-        return false;
-    }
-}
-
 class ChaosLordEffect extends AsThoughEffectImpl {
 
     ChaosLordEffect() {
         super(AsThoughEffectType.ATTACK_AS_HASTE, Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "Chaos Lord can attack as though it had haste unless it entered the battlefield this turn";
+        staticText = "{this} can attack as though it had haste unless it entered the battlefield this turn";
     }
 
     private ChaosLordEffect(final ChaosLordEffect effect) {
