@@ -158,6 +158,24 @@
             <artifactId>prettytime</artifactId>
             <version>4.0.6.Final</version>
         </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-base</artifactId>
+            <version>13</version>
+            <type>pom</type>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-swing</artifactId>
+            <version>13</version>
+            <type>pom</type>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-web</artifactId>
+            <version>13</version>
+            <type>pom</type>            
+        </dependency>
     </dependencies>
 
     <!-- to get the reference to local repository with com\googlecode\jspf\jspf-core\0.9.1\ -->
