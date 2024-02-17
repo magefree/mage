@@ -1,18 +1,18 @@
 package mage.cards.c;
 
-import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.DrawCardTargetEffect;
+import mage.abilities.effects.common.TargetPlayerGainControlSourceEffect;
 import mage.abilities.effects.common.UntapSourceEffect;
 import mage.abilities.effects.mana.AddManaOfAnyColorEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -59,7 +59,7 @@ class CovetedJewelTriggeredAbility extends TriggeredAbilityImpl {
 
     public CovetedJewelTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DrawCardTargetEffect(3), false);
-        this.addEffect(new CovetedJewelControlEffect());
+        this.addEffect(new TargetPlayerGainControlSourceEffect());
         this.addEffect(new UntapSourceEffect());
     }
 
@@ -101,33 +101,5 @@ class CovetedJewelTriggeredAbility extends TriggeredAbilityImpl {
         return "Whenever one or more creatures an opponent controls attack you "
                 + "and aren't blocked, that player draws three cards "
                 + "and gains control of {this}. Untap it.";
-    }
-}
-
-class CovetedJewelControlEffect extends ContinuousEffectImpl {
-
-    CovetedJewelControlEffect() {
-        super(Duration.Custom, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
-    }
-
-    private CovetedJewelControlEffect(final CovetedJewelControlEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public CovetedJewelControlEffect copy() {
-        return new CovetedJewelControlEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        Player newControllingPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
-        if (permanent == null || newControllingPlayer == null || !newControllingPlayer.canRespond()) {
-            this.discard();
-            return false;
-        }
-        permanent.changeControllerId(getTargetPointer().getFirst(game, source), game, source);
-        return true;
     }
 }

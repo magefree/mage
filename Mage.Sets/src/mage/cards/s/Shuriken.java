@@ -80,7 +80,7 @@ class ShurikenEffect extends OneShotEffect {
         Permanent equipment = (Permanent) object;
         targetedPermanent.damage(2, equipment.getId(), source, game);
         Permanent attached = source.getSourcePermanentOrLKI(game);
-        if (attached != null && attached.hasSubtype(SubType.NINJA, game)) {
+        if (attached == null || attached.hasSubtype(SubType.NINJA, game)) {
             return true;
         }
         game.addEffect(new GainControlTargetEffect(

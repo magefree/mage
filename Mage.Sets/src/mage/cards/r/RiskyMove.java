@@ -3,7 +3,6 @@ package mage.cards.r;
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
@@ -100,7 +99,7 @@ class RiskyMoveGetControlEffect extends OneShotEffect {
 
 class RiskyMoveTriggeredAbility extends TriggeredAbilityImpl {
 
-    public RiskyMoveTriggeredAbility() {
+    RiskyMoveTriggeredAbility() {
         super(Zone.BATTLEFIELD, new RiskyMoveFlipCoinEffect(), false);
         setTriggerPhrase("When you gain control of {this} from another player, ");
     }
@@ -180,9 +179,9 @@ class RiskyMoveFlipCoinEffect extends OneShotEffect {
 
 class RiskyMoveCreatureGainControlEffect extends ContinuousEffectImpl {
 
-    private UUID controller;
+    private final UUID controller;
 
-    public RiskyMoveCreatureGainControlEffect(Duration duration, UUID controller) {
+    RiskyMoveCreatureGainControlEffect(Duration duration, UUID controller) {
         super(duration, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
         this.controller = controller;
         this.staticText = "If you lose the flip, that opponent gains control of that creature";
