@@ -36,7 +36,7 @@ public final class MurdersAtKarlovManorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Ash Barrens", 248, Rarity.UNCOMMON, mage.cards.a.AshBarrens.class));
         cards.add(new SetCardInfo("Ashcloud Phoenix", 147, Rarity.MYTHIC, mage.cards.a.AshcloudPhoenix.class));
         cards.add(new SetCardInfo("Austere Command", 56, Rarity.RARE, mage.cards.a.AustereCommand.class));
-        cards.add(new SetCardInfo("Azorius Chancery", 249, Rarity.COMMON, mage.cards.a.AzoriusChancery.class));
+        cards.add(new SetCardInfo("Azorius Chancery", 249, Rarity.UNCOMMON, mage.cards.a.AzoriusChancery.class));
         cards.add(new SetCardInfo("Azorius Signet", 224, Rarity.UNCOMMON, mage.cards.a.AzoriusSignet.class));
         cards.add(new SetCardInfo("Baleful Strix", 200, Rarity.RARE, mage.cards.b.BalefulStrix.class));
         cards.add(new SetCardInfo("Beast Whisperer", 166, Rarity.RARE, mage.cards.b.BeastWhisperer.class));
@@ -113,7 +113,7 @@ public final class MurdersAtKarlovManorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Hooded Hydra", 171, Rarity.MYTHIC, mage.cards.h.HoodedHydra.class));
         cards.add(new SetCardInfo("Hornet Queen", 172, Rarity.RARE, mage.cards.h.HornetQueen.class));
         cards.add(new SetCardInfo("Hostile Desert", 266, Rarity.RARE, mage.cards.h.HostileDesert.class));
-        cards.add(new SetCardInfo("Hydroid Krasis", 212, Rarity.MYTHIC, mage.cards.h.HydroidKrasis.class));
+        cards.add(new SetCardInfo("Hydroid Krasis", 212, Rarity.RARE, mage.cards.h.HydroidKrasis.class));
         cards.add(new SetCardInfo("Idol of Oblivion", 229, Rarity.RARE, mage.cards.i.IdolOfOblivion.class));
         cards.add(new SetCardInfo("Imperial Hellkite", 155, Rarity.RARE, mage.cards.i.ImperialHellkite.class));
         cards.add(new SetCardInfo("Inspiring Statuary", 230, Rarity.RARE, mage.cards.i.InspiringStatuary.class));
@@ -135,7 +135,7 @@ public final class MurdersAtKarlovManorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Labyrinth of Skophos", 272, Rarity.RARE, mage.cards.l.LabyrinthOfSkophos.class));
         cards.add(new SetCardInfo("Lazav, the Multifarious", 214, Rarity.MYTHIC, mage.cards.l.LazavTheMultifarious.class));
         cards.add(new SetCardInfo("Lifecrafter's Bestiary", 231, Rarity.RARE, mage.cards.l.LifecraftersBestiary.class));
-        cards.add(new SetCardInfo("Lonely Sandbar", 273, Rarity.UNCOMMON, mage.cards.l.LonelySandbar.class));
+        cards.add(new SetCardInfo("Lonely Sandbar", 273, Rarity.COMMON, mage.cards.l.LonelySandbar.class));
         cards.add(new SetCardInfo("Lonis, Cryptozoologist", 215, Rarity.RARE, mage.cards.l.LonisCryptozoologist.class));
         cards.add(new SetCardInfo("Loran of the Third Path", 71, Rarity.RARE, mage.cards.l.LoranOfTheThirdPath.class));
         cards.add(new SetCardInfo("Martial Impetus", 72, Rarity.UNCOMMON, mage.cards.m.MartialImpetus.class));
@@ -198,7 +198,7 @@ public final class MurdersAtKarlovManorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Scavenger Grounds", 287, Rarity.RARE, mage.cards.s.ScavengerGrounds.class));
         cards.add(new SetCardInfo("Scourge of the Throne", 160, Rarity.RARE, mage.cards.s.ScourgeOfTheThrone.class));
         cards.add(new SetCardInfo("Scroll of Fate", 235, Rarity.RARE, mage.cards.s.ScrollOfFate.class));
-        cards.add(new SetCardInfo("Seal of Cleansing", 80, Rarity.UNCOMMON, mage.cards.s.SealOfCleansing.class));
+        cards.add(new SetCardInfo("Seal of Cleansing", 80, Rarity.COMMON, mage.cards.s.SealOfCleansing.class));
         cards.add(new SetCardInfo("Search the Premises", 81, Rarity.RARE, mage.cards.s.SearchThePremises.class));
         cards.add(new SetCardInfo("Seaside Citadel", 288, Rarity.UNCOMMON, mage.cards.s.SeasideCitadel.class));
         cards.add(new SetCardInfo("Secluded Steppe", 289, Rarity.COMMON, mage.cards.s.SecludedSteppe.class));
@@ -261,6 +261,8 @@ public final class MurdersAtKarlovManorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Toxic Deluge", 142, Rarity.RARE, mage.cards.t.ToxicDeluge.class));
         cards.add(new SetCardInfo("Trail of Mystery", 192, Rarity.RARE, mage.cards.t.TrailOfMystery.class));
         cards.add(new SetCardInfo("Tranquil Thicket", 309, Rarity.COMMON, mage.cards.t.TranquilThicket.class));
+        cards.add(new SetCardInfo("Trouble in Pairs", 15, Rarity.RARE, mage.cards.t.TroubleInPairs.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Trouble in Pairs", 326, Rarity.RARE, mage.cards.t.TroubleInPairs.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Twilight Prophet", 143, Rarity.MYTHIC, mage.cards.t.TwilightProphet.class));
         cards.add(new SetCardInfo("Ugin's Mastery", 53, Rarity.RARE, mage.cards.u.UginsMastery.class));
         cards.add(new SetCardInfo("Ulvenwald Mysteries", 193, Rarity.UNCOMMON, mage.cards.u.UlvenwaldMysteries.class));
