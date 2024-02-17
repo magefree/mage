@@ -133,7 +133,7 @@ public final class MurdersAtKarlovManorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Krosan Colossus", 176, Rarity.RARE, mage.cards.k.KrosanColossus.class));
         cards.add(new SetCardInfo("Krosan Verge", 271, Rarity.UNCOMMON, mage.cards.k.KrosanVerge.class));
         cards.add(new SetCardInfo("Labyrinth of Skophos", 272, Rarity.RARE, mage.cards.l.LabyrinthOfSkophos.class));
-        cards.add(new SetCardInfo("Lazav, the Multifarious", 214, Rarity.RARE, mage.cards.l.LazavTheMultifarious.class));
+        cards.add(new SetCardInfo("Lazav, the Multifarious", 214, Rarity.MYTHIC, mage.cards.l.LazavTheMultifarious.class));
         cards.add(new SetCardInfo("Lifecrafter's Bestiary", 231, Rarity.RARE, mage.cards.l.LifecraftersBestiary.class));
         cards.add(new SetCardInfo("Lonely Sandbar", 273, Rarity.UNCOMMON, mage.cards.l.LonelySandbar.class));
         cards.add(new SetCardInfo("Lonis, Cryptozoologist", 215, Rarity.RARE, mage.cards.l.LonisCryptozoologist.class));

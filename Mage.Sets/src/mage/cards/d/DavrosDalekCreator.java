@@ -43,7 +43,8 @@ public final class DavrosDalekCreator extends CardImpl {
         Ability ability = new BeginningOfEndStepTriggeredAbility(
                 new ConditionalOneShotEffect(
                         new CreateTokenEffect(new DalekToken()),
-                        new OpponentLostLifeCondition(ComparisonType.OR_GREATER, 3)
+                        new OpponentLostLifeCondition(ComparisonType.OR_GREATER, 3),
+                        "create a 3/3 black Dalek artifact creature token with menace if an opponent lost 3 or more life this turn"
                 ),
                 TargetController.YOU, false
         );

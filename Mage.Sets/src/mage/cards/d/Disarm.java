@@ -1,4 +1,3 @@
-
 package mage.cards.d;
 
 import java.util.UUID;
@@ -39,39 +38,40 @@ public final class Disarm extends CardImpl {
         return new Disarm(this);
     }
 
-    class DisarmEffect extends OneShotEffect {
+}
 
-        public DisarmEffect() {
-            super(Outcome.UnboostCreature);
-            this.staticText = "Unattach all Equipment from target creature";
-        }
+class DisarmEffect extends OneShotEffect {
 
-        private DisarmEffect(final DisarmEffect effect) {
-            super(effect);
-        }
+    DisarmEffect() {
+        super(Outcome.UnboostCreature);
+        this.staticText = "Unattach all Equipment from target creature";
+    }
 
-        @Override
-        public DisarmEffect copy() {
-            return new DisarmEffect(this);
-        }
+    private DisarmEffect(final DisarmEffect effect) {
+        super(effect);
+    }
 
-        @Override
-        public boolean apply(Game game, Ability source) {
-            Permanent creature = game.getPermanent(targetPointer.getFirst(game, source));
-            if (creature != null) {
-                FilterPermanent creatureFilter = new FilterPermanent();
-                creatureFilter.add(new PermanentIdPredicate(creature.getId()));
+    @Override
+    public DisarmEffect copy() {
+        return new DisarmEffect(this);
+    }
 
-                FilterPermanent equipmentFilter = new FilterPermanent();
-                equipmentFilter.add(new AttachedToPredicate(creatureFilter));
-                equipmentFilter.add(SubType.EQUIPMENT.getPredicate());
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent creature = game.getPermanent(getTargetPointer().getFirst(game, source));
+        if (creature != null) {
+            FilterPermanent creatureFilter = new FilterPermanent();
+            creatureFilter.add(new PermanentIdPredicate(creature.getId()));
 
-                for (Permanent equipment : game.getBattlefield().getAllActivePermanents(equipmentFilter, game)) {
-                    creature.removeAttachment(equipment.getId(), source, game);
-                }
-                return true;
+            FilterPermanent equipmentFilter = new FilterPermanent();
+            equipmentFilter.add(new AttachedToPredicate(creatureFilter));
+            equipmentFilter.add(SubType.EQUIPMENT.getPredicate());
+
+            for (Permanent equipment : game.getBattlefield().getAllActivePermanents(equipmentFilter, game)) {
+                creature.removeAttachment(equipment.getId(), source, game);
             }
-            return false;
+            return true;
         }
+        return false;
     }
 }
