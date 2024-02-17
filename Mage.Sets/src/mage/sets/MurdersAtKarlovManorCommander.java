@@ -270,6 +270,8 @@ public final class MurdersAtKarlovManorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Vow of Lightning", 164, Rarity.UNCOMMON, mage.cards.v.VowOfLightning.class));
         cards.add(new SetCardInfo("Wall of Omens", 90, Rarity.UNCOMMON, mage.cards.w.WallOfOmens.class));
         cards.add(new SetCardInfo("War Room", 310, Rarity.RARE, mage.cards.w.WarRoom.class));
+        cards.add(new SetCardInfo("Watcher of Hours", 25, Rarity.RARE, mage.cards.w.WatcherOfHours.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Watcher of Hours", 335, Rarity.RARE, mage.cards.w.WatcherOfHours.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Wavesifter", 220, Rarity.COMMON, mage.cards.w.Wavesifter.class));
         cards.add(new SetCardInfo("Welcoming Vampire", 91, Rarity.RARE, mage.cards.w.WelcomingVampire.class));
         cards.add(new SetCardInfo("Whirler Rogue", 124, Rarity.UNCOMMON, mage.cards.w.WhirlerRogue.class));
