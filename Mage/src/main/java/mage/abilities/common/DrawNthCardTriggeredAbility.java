@@ -11,7 +11,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.util.CardUtil;
-import mage.watchers.common.DrawCardWatcher;
+import mage.watchers.common.CardsDrawnThisTurnWatcher;
 
 /**
  * @author TheElk801
@@ -73,7 +73,8 @@ public class DrawNthCardTriggeredAbility extends TriggeredAbilityImpl {
             default:
                 throw new IllegalArgumentException("TargetController " + targetController + " not supported");
         }
-        return DrawCardWatcher.checkEvent(event.getPlayerId(), event, game, cardNumber);
+        CardsDrawnThisTurnWatcher watcher = game.getState().getWatcher(CardsDrawnThisTurnWatcher.class);
+        return watcher != null && watcher.getCardsDrawnThisTurn(event.getPlayerId()) == cardNumber;
     }
 
     public String generateTriggerPhrase() {

@@ -12,8 +12,8 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
+import mage.watchers.common.CardsDrawnThisTurnWatcher;
 import mage.watchers.common.CastSpellLastTurnWatcher;
-import mage.watchers.common.DrawCardWatcher;
 
 import java.util.*;
 
@@ -120,11 +120,12 @@ class TroubleInPairsTriggeredAbility extends TriggeredAbilityImpl {
                         .count() >= 2;
             // Whenever an opponent draws their second card each turn
             case DREW_CARD:
-                return DrawCardWatcher.checkEvent(event.getPlayerId(), event, game, 2);
+                CardsDrawnThisTurnWatcher drawWatcher = game.getState().getWatcher(CardsDrawnThisTurnWatcher.class);
+                return drawWatcher != null && drawWatcher.getCardsDrawnThisTurn(event.getPlayerId()) == 2;
             // Whenever an opponent casts their second spell each turn
             case SPELL_CAST:
-                CastSpellLastTurnWatcher watcher = game.getState().getWatcher(CastSpellLastTurnWatcher.class);
-                return watcher != null && watcher.getAmountOfSpellsPlayerCastOnCurrentTurn(event.getPlayerId()) == 2;
+                CastSpellLastTurnWatcher spellWatcher = game.getState().getWatcher(CastSpellLastTurnWatcher.class);
+                return spellWatcher != null && spellWatcher.getAmountOfSpellsPlayerCastOnCurrentTurn(event.getPlayerId()) == 2;
         }
 
         return false;
