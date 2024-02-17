@@ -110,7 +110,8 @@
                   </jacocoReports>
 
                   <excludes>
-                    <exclude>**/generated-sources/**/*</exclude>
+                    <exclude>${root.dir}/**/generated-sources/**/*.java</exclude>
+                    <exclude>${root.dir}/Mage.Server/src/target/generated-sources/**/*.java</exclude>
                   </excludes>
                 </configuration>
             </plugin>
