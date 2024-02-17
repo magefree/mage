@@ -165,6 +165,8 @@ public final class MurdersAtKarlovManorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Obscuring Aether", 179, Rarity.RARE, mage.cards.o.ObscuringAether.class));
         cards.add(new SetCardInfo("Ohran Frostfang", 180, Rarity.RARE, mage.cards.o.OhranFrostfang.class));
         cards.add(new SetCardInfo("Ongoing Investigation", 114, Rarity.UNCOMMON, mage.cards.o.OngoingInvestigation.class));
+        cards.add(new SetCardInfo("On the Trail", 39, Rarity.RARE, mage.cards.o.OnTheTrail.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("On the Trail", 349, Rarity.RARE, mage.cards.o.OnTheTrail.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Organic Extinction", 76, Rarity.RARE, mage.cards.o.OrganicExtinction.class));
         cards.add(new SetCardInfo("Orzhov Advokist", 77, Rarity.UNCOMMON, mage.cards.o.OrzhovAdvokist.class));
         cards.add(new SetCardInfo("Otherworldly Gaze", 115, Rarity.COMMON, mage.cards.o.OtherworldlyGaze.class));
