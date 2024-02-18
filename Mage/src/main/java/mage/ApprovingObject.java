@@ -4,7 +4,6 @@ import mage.abilities.Ability;
 import mage.game.Game;
 
 /**
- *
  * @author LevelX2
  */
 public class ApprovingObject {
