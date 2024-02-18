@@ -1,11 +1,11 @@
 name: "Pull Request Labeler (manual)"
 on:
-  - workflow_dispatch:
-      inputs:
-        oldPRs:
-          description: 'PRs list to process'
-          required: true
-          default: '1, 2, 3'
+  workflow_dispatch:
+    inputs:
+      oldPRs:
+        description: 'PRs list to process'
+        required: true
+        default: '1, 2, 3'
 
 jobs:
   labeler:
