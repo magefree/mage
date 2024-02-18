@@ -1,0 +1,22 @@
+name: "Pull Request Labeler (manual)"
+on:
+  - workflow_dispatch:
+      inputs:
+        oldPRs:
+          description: 'PRs list to process'
+          required: true
+          default: '1, 2, 3'
+
+jobs:
+  labeler:
+    permissions:
+      contents: read
+      pull-requests: write
+    runs-on: ubuntu-latest
+    steps:
+      - id: label-the-PR
+        uses: actions/labeler@v5
+        with:
+          configuration-path: '.github/labeler.yml'
+          pr-number: |
+            ${{ github.event.inputs.oldPRs }}
