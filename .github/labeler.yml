@@ -1,0 +1,17 @@
+dev:
+  - any: [ '*', 'Utils/**', '/.github/**' ]
+
+engine:
+  - any: [ 'Mage/**' ]
+
+client:
+  - any: [ 'Mage.Client/**', 'Mage.Common/**', 'Mage.Plugins/**' ]
+
+server:
+  - any: [ 'Mage.Server*/**' ]
+
+tests:
+  - any: [ 'Mage.Verify/**', 'Mage.Tests/**', 'Mage.Reports/**' ]
+
+cards:
+  - any: [ 'Mage.Sets/**' ]
