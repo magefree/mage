@@ -2,6 +2,7 @@ package mage.util;
 
 import mage.MageObject;
 import mage.ObjectColor;
+import mage.constants.EmptyNames;
 
 import java.util.UUID;
 import java.util.regex.Pattern;
@@ -32,6 +33,15 @@ public final class GameLog {
     static final String LOG_TT_COLOR_COLORLESS = "#94A4BA";
     static final String LOG_COLOR_NEUTRAL = "#F0F8FF"; // AliceBlue
 
+    private static String getNameForLogs(MageObject mageObject) {
+        if (mageObject.getName().equals(EmptyNames.FACE_DOWN_CREATURE.toString())
+            || mageObject.getName().equals(EmptyNames.FACE_DOWN_TOKEN.toString())) {
+            return EmptyNames.EMPTY_NAME_IN_LOGS;
+        } else {
+            return mageObject.getName();
+        }
+    }
+
     public static String replaceNameByColoredName(MageObject mageObject, String text) {
         return replaceNameByColoredName(mageObject, text, null);
     }
@@ -47,7 +57,7 @@ public final class GameLog {
     }
 
     public static String getColoredObjectName(MageObject mageObject) {
-        return "<font color='" + getColorName(mageObject.getColor(null)) + "'>" + mageObject.getName() + "</font>";
+        return "<font color='" + getColorName(mageObject.getColor(null)) + "'>" + getNameForLogs(mageObject) + "</font>";
     }
 
     public static String getColoredObjectIdName(MageObject mageObject) {
@@ -58,9 +68,9 @@ public final class GameLog {
         return getColoredObjectIdName(
                 mageObject.getColor(null),
                 mageObject.getId(),
-                mageObject.getName(),
+                getNameForLogs(mageObject),
                 String.format("[%s]", mageObject.getId().toString().substring(0, 3)),
-                alternativeObject == null ? null : alternativeObject.getName()
+                alternativeObject == null ? null : getNameForLogs(alternativeObject)
         );
     }
 
