@@ -33,7 +33,7 @@ public class LifelinkAbility extends StaticAbility implements MageSingleton {
 
     @Override
     public String getRule() {
-        return "lifelink <i>(Damage dealt by this creature also causes you to gain that much life.)</i>";
+        return "lifelink";
     }
 
     @Override
