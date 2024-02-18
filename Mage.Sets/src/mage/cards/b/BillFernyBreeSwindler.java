@@ -88,7 +88,7 @@ class BillFernyEffect extends OneShotEffect {
         if (permanent == null) {
             return false;
         }
-        UUID opponentToGainControl = targetPointer.getFirst(game, source);
+        UUID opponentToGainControl = getTargetPointer().getFirst(game, source);
         game.addEffect(new GainControlTargetEffect(
                 Duration.Custom, true, opponentToGainControl
         ).setTargetPointer(new FixedTarget(permanent.getId(), game)), source);

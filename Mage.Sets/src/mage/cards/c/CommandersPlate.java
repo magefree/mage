@@ -107,7 +107,7 @@ class CommandersPlateEffect extends ContinuousEffectImpl {
         }
         Permanent permanent = null;
         if (affectedObjectsSet) {
-            permanent = game.getPermanent(targetPointer.getFirst(game, source));
+            permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
             if (permanent == null) {
                 discard();
                 return true;

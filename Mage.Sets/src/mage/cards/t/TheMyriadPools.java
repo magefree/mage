@@ -168,7 +168,7 @@ class TheMyriadPoolsCopyEffect extends OneShotEffect {
         if (controller.choose(Outcome.Neutral, target, source, game)) {
             targetPermanentToCopyTo = game.getPermanent(target.getFirstTarget());
         }
-        Card copyFromCardOnStack = game.getCard(targetPointer.getFirst(game, source));
+        Card copyFromCardOnStack = game.getCard(getTargetPointer().getFirst(game, source));
         Permanent newBluePrint = null;
         if (targetPermanentToCopyTo != null) {
             if (copyFromCardOnStack != null) {

@@ -88,7 +88,7 @@ class KaitoDancingShadowEffect extends OneShotEffect {
         if (watcher == null) {
             return false;
         }
-        Player damagedPlayer = game.getPlayer(targetPointer.getFirst(game, source));
+        Player damagedPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
         if (controller == null || damagedPlayer == null) {
             return false;

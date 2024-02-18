@@ -60,7 +60,7 @@ class CoralFightersEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Player defendingPlayer = game.getPlayer(targetPointer.getFirst(game, source));
+        Player defendingPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
         if(controller != null && defendingPlayer != null) {
             Card card = defendingPlayer.getLibrary().getFromTop(game);
             if(card != null) {

@@ -79,10 +79,10 @@ public class ExchangeControlTargetEffect extends ContinuousEffectImpl {
         Permanent permanent2 = null;
 
         if (withSource) {
-            permanent1 = game.getPermanent(targetPointer.getFirst(game, source));
+            permanent1 = game.getPermanent(getTargetPointer().getFirst(game, source));
             permanent2 = game.getPermanent(source.getSourceId());
         } else {
-            for (UUID permanentId : targetPointer.getTargets(game, source)) {
+            for (UUID permanentId : getTargetPointer().getTargets(game, source)) {
                 if (permanent1 == null) {
                     permanent1 = game.getPermanent(permanentId);
                 } else if (permanent2 == null) {

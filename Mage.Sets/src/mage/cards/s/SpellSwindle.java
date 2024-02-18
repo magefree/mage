@@ -54,7 +54,7 @@ class SpellSwindleEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        StackObject stackObject = game.getStack().getStackObject(targetPointer.getFirst(game, source));
+        StackObject stackObject = game.getStack().getStackObject(getTargetPointer().getFirst(game, source));
         if (stackObject != null) {
             game.getStack().counter(source.getFirstTarget(), source, game);
             return new TreasureToken().putOntoBattlefield(stackObject.getManaValue(), game, source);

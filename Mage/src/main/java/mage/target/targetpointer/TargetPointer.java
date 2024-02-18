@@ -15,7 +15,9 @@ public interface TargetPointer extends Serializable, Copyable<TargetPointer> {
     /**
      * Init dynamic targets (must save current targets zcc to fizzle it later on outdated targets)
      * - one shot effects: no needs to init
-     * - continues effects: must use init logic
+     * - continues effects: must use init logic (effect init on resolve or game add)
+     * <p>
+     * Targets list can be accessible before effect's init.
      */
     void init(Game game, Ability source);
 

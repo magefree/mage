@@ -57,7 +57,7 @@ class AethertowEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent targetCreature = game.getPermanent(targetPointer.getFirst(game, source));
+        Permanent targetCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
         if (targetCreature != null) {
             return controller.putCardsOnTopOfLibrary(targetCreature, game, source, true);

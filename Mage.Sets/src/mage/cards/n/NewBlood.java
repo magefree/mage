@@ -140,7 +140,7 @@ class ChangeCreatureTypeTargetEffect extends ContinuousEffectImpl {
             throw new UnsupportedOperationException("No subtype to change set");
         }
         boolean objectFound = false;
-        for (UUID targetId : targetPointer.getTargets(game, source)) {
+        for (UUID targetId : getTargetPointer().getTargets(game, source)) {
             MageObject targetObject = game.getObject(targetId);
             if (targetObject != null) {
                 objectFound = true;

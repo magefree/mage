@@ -73,7 +73,7 @@ class RishadanPawnshopShuffleIntoLibraryEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
+        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (permanent != null) {
             Player owner = game.getPlayer(permanent.getOwnerId());
             if (owner != null) {

@@ -65,7 +65,7 @@ class SeverTheBloodlineEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent targetPermanent = game.getPermanent(targetPointer.getFirst(game, source));
+        Permanent targetPermanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (controller != null && targetPermanent != null) {
             FilterCreaturePermanent filter = new FilterCreaturePermanent();
             if (CardUtil.haveEmptyName(targetPermanent)) {

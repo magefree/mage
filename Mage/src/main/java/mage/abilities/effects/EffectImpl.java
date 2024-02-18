@@ -22,8 +22,7 @@ public abstract class EffectImpl implements Effect {
 
     // read related docs about static and dynamic targets in ContinuousEffectImpl.affectedObjectsSet
     // warning, do not change it directly, use setTargetPointer instead
-    // TODO: make it private and replace all usage to getTargetPointer
-    protected TargetPointer targetPointer = new FirstTargetPointer();
+    private TargetPointer targetPointer = new FirstTargetPointer();
 
     protected String staticText = "";
     protected Map<String, Object> values;

@@ -52,7 +52,7 @@ class CleansingBeamEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent target = game.getPermanent(targetPointer.getFirst(game, source));
+        Permanent target = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (target != null) {
             ObjectColor color = target.getColor(game);
             target.damage(2, source, game);

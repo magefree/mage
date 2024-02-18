@@ -207,7 +207,7 @@ class WordOfCommandCantActivateEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return !permanent.isLand(game) && permanent.getControllerId().equals(this.targetPointer.getFirst(game, source));
+        return !permanent.isLand(game) && permanent.getControllerId().equals(this.getTargetPointer().getFirst(game, source));
     }
 
     @Override

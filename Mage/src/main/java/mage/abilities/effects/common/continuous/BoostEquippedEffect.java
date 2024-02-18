@@ -72,7 +72,7 @@ public class BoostEquippedEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         Permanent creature = null;
         if (fixedTarget) {
-            creature = game.getPermanent(targetPointer.getFirst(game, source));
+            creature = game.getPermanent(getTargetPointer().getFirst(game, source));
         } else {
             Permanent equipment = game.getPermanent(source.getSourceId());
             if (equipment != null && equipment.getAttachedTo() != null) {

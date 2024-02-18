@@ -66,7 +66,7 @@ class BrightflameEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         int damageDealt = 0;
 
-        Permanent target = game.getPermanent(targetPointer.getFirst(game, source));
+        Permanent target = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (target == null) {
             return false;
         }

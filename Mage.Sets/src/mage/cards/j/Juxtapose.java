@@ -77,7 +77,7 @@ class JuxtaposeEffect extends ContinuousEffectImpl {
     public void init(Ability source, Game game) {
         super.init(source, game);
         Player you = game.getPlayer(source.getControllerId());
-        Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
+        Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
 
         if (you != null && targetPlayer != null) {
             Permanent permanent1 = chooseOnePermanentsWithTheHighestCMC(you, filter, source, game);

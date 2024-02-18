@@ -73,7 +73,7 @@ public class GainAbilityWithAttachmentEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = null;
         if (affectedObjectsSet) {
-            permanent = game.getPermanent(targetPointer.getFirst(game, source));
+            permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
             if (permanent == null) {
                 discard();
                 return true;
