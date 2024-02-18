@@ -1,17 +1,23 @@
 dev:
-  - any: [ '*', 'Utils/**', '/.github/**' ]
+  - changed-files:
+    - any-glob-to-any-file: [ '*', 'Utils/**', '/.github/**' ]
 
 engine:
-  - any: [ 'Mage/**' ]
+  - changed-files:
+      - any-glob-to-any-file: [ 'Mage/**' ]
 
 client:
-  - any: [ 'Mage.Client/**', 'Mage.Common/**', 'Mage.Plugins/**' ]
+  - changed-files:
+      - any-glob-to-any-file: [ 'Mage.Client/**', 'Mage.Common/**', 'Mage.Plugins/**' ]
 
 server:
-  - any: [ 'Mage.Server*/**' ]
+  - changed-files:
+      - any-glob-to-any-file: [ 'Mage.Server*/**' ]
 
 tests:
-  - any: [ 'Mage.Verify/**', 'Mage.Tests/**', 'Mage.Reports/**' ]
+  - changed-files:
+      - any-glob-to-any-file: [ 'Mage.Verify/**', 'Mage.Tests/**', 'Mage.Reports/**' ]
 
 cards:
-  - any: [ 'Mage.Sets/**' ]
+  - changed-files:
+      - any-glob-to-any-file: [ 'Mage.Sets/**' ]
