@@ -123,6 +123,7 @@ class MournersShieldEffect extends PreventionEffectImpl {
 
     @Override
     public void init(Ability source, Game game) {
+        super.init(source, game);
         ObjectColor colorsAmongImprinted = new ObjectColor();
         Permanent sourceObject = game.getPermanent(source.getSourceId());
         ExileZone exileZone = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source.getSourceId()));

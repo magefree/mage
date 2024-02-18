@@ -3,7 +3,6 @@ package mage.abilities.effects;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.CompoundAbility;
-import mage.abilities.MageSingleton;
 import mage.abilities.keyword.ChangelingAbility;
 import mage.constants.*;
 import mage.filter.Filter;
@@ -152,6 +151,11 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
     public void discard() {
         this.used = true; // to prevent further usage before effect is removed
         this.discarded = true;
+    }
+
+    @Override
+    public final void initNewTargetPointer() {
+        // continuous effect uses init code, so do nothing here
     }
 
     @Override

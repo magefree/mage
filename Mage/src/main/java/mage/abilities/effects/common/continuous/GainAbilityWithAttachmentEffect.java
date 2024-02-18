@@ -60,13 +60,13 @@ public class GainAbilityWithAttachmentEffect extends ContinuousEffectImpl {
 
     @Override
     public void init(Ability source, Game game) {
-        super.init(source, game);
         if (affectedObjectsSet) {
             Permanent equipment = game.getPermanentOrLKIBattlefield(source.getSourceId());
             if (equipment != null && equipment.getAttachedTo() != null) {
                 this.setTargetPointer(new FixedTarget(equipment.getAttachedTo(), game.getState().getZoneChangeCounter(equipment.getAttachedTo())));
             }
         }
+        super.init(source, game); // must call at the end due target pointer setup
     }
 
     @Override

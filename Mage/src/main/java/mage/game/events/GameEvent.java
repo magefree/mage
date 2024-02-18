@@ -812,4 +812,9 @@ public class GameEvent implements Serializable {
     protected void setSourceId(UUID sourceId) {
         this.sourceId = sourceId;
     }
+
+    @Override
+    public String toString() {
+        return this.type.toString();
+    }
 }

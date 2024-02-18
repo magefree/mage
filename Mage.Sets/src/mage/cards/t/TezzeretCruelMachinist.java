@@ -97,7 +97,7 @@ class TezzeretCruelMachinistEffect extends OneShotEffect {
                         .getCards(game)
                         .stream()
                         .map(card -> new MageObjectReference(card, game, 1))
-                        .collect(Collectors.toSet()), game
+                        .collect(Collectors.toList())
         )), source);
         player.moveCards(
                 cardsToMove.getCards(game), Zone.BATTLEFIELD, source, game,

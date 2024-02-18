@@ -66,7 +66,6 @@ class GiftOfFangsEffect extends ContinuousEffectImpl {
 
     @Override
     public void init(Ability source, Game game) {
-        super.init(source, game);
         if (affectedObjectsSet) {
             // Added boosts of activated or triggered abilities exist independent from the source they are created by
             // so a continuous effect for the permanent itself with the attachment is created
@@ -75,6 +74,8 @@ class GiftOfFangsEffect extends ContinuousEffectImpl {
                 this.setTargetPointer(new FixedTarget(equipment.getAttachedTo(), game.getState().getZoneChangeCounter(equipment.getAttachedTo())));
             }
         }
+
+        super.init(source, game); // must call at the end due target pointer setup
     }
 
     @Override

@@ -25,6 +25,7 @@ import mage.util.functions.CopyTokenFunction;
 import mage.util.functions.EmptyCopyApplier;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author LevelX2
@@ -418,7 +419,7 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
         } else {
             effect = new SacrificeTargetEffect("sacrifice the token copies", source.getControllerId());
         }
-        effect.setTargetPointer(new FixedTargets(addedTokenPermanents, game));
+        effect.setTargetPointer(new FixedTargets(new ArrayList<>(addedTokenPermanents), game));
 
         DelayedTriggeredAbility exileAbility;
 

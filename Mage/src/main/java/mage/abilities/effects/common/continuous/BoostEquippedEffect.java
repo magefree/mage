@@ -65,7 +65,7 @@ public class BoostEquippedEffect extends ContinuousEffectImpl {
                 this.setTargetPointer(new FixedTarget(equipment.getAttachedTo(), game));
             }
         }
-        super.init(source, game); // inits the target pointer so call it after setting the targetPointer
+        super.init(source, game); // must call at the end due target pointer setup
     }
 
     @Override

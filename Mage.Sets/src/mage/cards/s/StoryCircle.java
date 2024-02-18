@@ -54,9 +54,9 @@ class StoryCircleEffect extends PreventNextDamageFromChosenSourceToYouEffect {
 
     @Override
     public void init(Ability source, Game game) {
+        super.init(source, game);
         FilterObject filter = targetSource.getFilter();
         filter.add(new ColorPredicate((ObjectColor) game.getState().getValue(source.getSourceId() + "_color")));
-        super.init(source, game);
     }
 
     private StoryCircleEffect(final StoryCircleEffect effect) {

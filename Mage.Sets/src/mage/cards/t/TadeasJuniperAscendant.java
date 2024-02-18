@@ -110,7 +110,7 @@ class TadeasJuniperAscendantEvasionEffect extends RestrictionEffect {
 
     TadeasJuniperAscendantEvasionEffect(TargetPointer targetPointer) {
         super(Duration.EndOfCombat);
-        this.targetPointer = targetPointer;
+        this.setTargetPointer(targetPointer);
         staticText = "and can't be blocked by creatures with greater power";
     }
 

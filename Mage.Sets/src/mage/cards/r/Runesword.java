@@ -120,6 +120,7 @@ class RuneswordCantBeRegeneratedEffect extends ContinuousRuleModifyingEffectImpl
     }
 
     public void init(Ability source, Game game) {
+        super.init(source, game);
         targetCreatureId = getTargetPointer().getFirst(game, source);
     }
 

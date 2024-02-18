@@ -110,6 +110,8 @@ class ChangeCreatureTypeTargetEffect extends ContinuousEffectImpl {
 
     @Override
     public void init(Ability source, Game game) {
+        super.init(source, game);
+
         Player controller = game.getPlayer(source.getControllerId());
         if (controller == null) {
             return;
@@ -126,8 +128,6 @@ class ChangeCreatureTypeTargetEffect extends ContinuousEffectImpl {
                 game.informPlayers(controller.getLogName() + " has chosen the creature type: " + fromSubType.toString());
             }
         }
-
-        super.init(source, game);
     }
 
     @Override

@@ -73,6 +73,8 @@ public class ExchangeControlTargetEffect extends ContinuousEffectImpl {
 
     @Override
     public void init(Ability source, Game game) {
+        super.init(source, game);
+
         Permanent permanent1 = null;
         Permanent permanent2 = null;
 
