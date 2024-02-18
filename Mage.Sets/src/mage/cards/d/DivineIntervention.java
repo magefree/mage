@@ -32,7 +32,7 @@ public final class DivineIntervention extends CardImpl {
 
         // Divine Intervention enters the battlefield with 2 intervention counters on it.
         Effect effect = new AddCountersSourceEffect(CounterType.INTERVENTION.createInstance(2));
-        this.addAbility(new EntersBattlefieldAbility(effect, "with 2 intervention counters on it"));
+        this.addAbility(new EntersBattlefieldAbility(effect, "with two intervention counters on it"));
 
         // At the beginning of your upkeep, remove an intervention counter from Divine Intervention.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new RemoveCounterSourceEffect(CounterType.INTERVENTION.createInstance()), TargetController.YOU, false));
