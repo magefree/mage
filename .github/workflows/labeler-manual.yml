@@ -3,9 +3,11 @@ on:
   workflow_dispatch:
     inputs:
       oldPRs:
-        description: 'PRs list to process'
+        # no multi lines support, so call by single PR only
+        description: 'PR number to process'
         required: true
-        default: '1, 2, 3'
+        type: string
+        default: '123'
 
 jobs:
   labeler:
