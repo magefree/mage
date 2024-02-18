@@ -184,9 +184,9 @@ public class Deck implements Serializable, Copyable<Deck> {
         }
 
         if (mockCards) {
-            return cardInfo.getMockCard();
+            return cardInfo.createMockCard();
         } else {
-            return cardInfo.getCard();
+            return cardInfo.createCard();
         }
     }
 

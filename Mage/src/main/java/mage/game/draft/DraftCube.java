@@ -96,7 +96,7 @@ public abstract class DraftCube {
                     }
 
                     if (cardInfo != null) {
-                        booster.add(cardInfo.getCard());
+                        booster.add(cardInfo.createCard());
                         done = true;
                     } else {
                         logger.warn(new StringBuilder(this.getName()).append(" - Card not found: ").append(cardId.getName()).append(':').append(cardId.extension));

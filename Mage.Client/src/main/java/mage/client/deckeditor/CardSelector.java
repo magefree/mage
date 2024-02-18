@@ -480,7 +480,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
                         }
                     }
                     // filter by settings
-                    Card card = cardInfo.getMockCard();
+                    Card card = cardInfo.createMockCard();
                     if (!filter.match(card, null)) {
                         continue;
                     }

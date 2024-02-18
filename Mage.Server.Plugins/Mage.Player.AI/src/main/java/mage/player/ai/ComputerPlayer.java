@@ -2283,7 +2283,7 @@ public class ComputerPlayer extends PlayerImpl {
         }
 
         for (int i = 0; i < number; i++) {
-            Card land = cards.get(RandomUtil.nextInt(cards.size())).getCard();
+            Card land = cards.get(RandomUtil.nextInt(cards.size())).createCard();
             deck.getCards().add(land);
         }
     }

@@ -21,7 +21,6 @@ import mage.game.command.CommandObject;
 import mage.game.command.Emblem;
 import mage.game.match.MatchOptions;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.PermanentCard;
 import mage.game.permanent.PermanentToken;
 import mage.player.ai.ComputerPlayer7;
 import mage.player.ai.ComputerPlayerMCTS;
@@ -683,7 +682,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 
         if (gameZone == Zone.BATTLEFIELD) {
             for (int i = 0; i < count; i++) {
-                Card newCard = cardInfo.getCard();
+                Card newCard = cardInfo.createCard();
                 getBattlefieldCards(player).add(new PutToBattlefieldInfo(
                         newCard,
                         tapped
@@ -699,7 +698,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
             }
             List<Card> cards = getCardList(gameZone, player);
             for (int i = 0; i < count; i++) {
-                Card newCard = cardInfo.getCard();
+                Card newCard = cardInfo.createCard();
                 cards.add(newCard);
                 if (!aliasName.isEmpty()) {
                     player.addAlias(player.generateAliasName(aliasName, useAliasMultiNames, i + 1), newCard.getId());

@@ -18,7 +18,7 @@ public final class CardsViewUtil {
 
         for (SimpleCardView simple : view.values()) {
             CardInfo cardInfo = CardRepository.instance.findCard(simple.getExpansionSetCode(), simple.getCardNumber());
-            Card card = cardInfo != null ? cardInfo.getMockCard() : null;
+            Card card = cardInfo != null ? cardInfo.createMockCard() : null;
             if (card != null) {
                 cards.put(simple.getId(), new CardView(card, simple));
             }
@@ -35,7 +35,7 @@ public final class CardsViewUtil {
             Card card = loadedCards.get(key);
             if (card == null) {
                 CardInfo cardInfo = CardRepository.instance.findCard(simple.getExpansionSetCode(), simple.getCardNumber());
-                card = cardInfo != null ? cardInfo.getMockCard() : null;
+                card = cardInfo != null ? cardInfo.createMockCard() : null;
                 loadedCards.put(key, card);
             }
             if (card != null) {

@@ -620,7 +620,7 @@ public class VerifyCardDataTest {
                 CardInfo cardInfo = CardRepository.instance.findCardsByClass(info.getCardClass().getCanonicalName()).stream().findFirst().orElse(null);
                 Assert.assertNotNull(cardInfo);
 
-                Card card = cardInfo.getCard();
+                Card card = cardInfo.createCard();
                 Card secondCard = card.getSecondCardFace();
                 if (secondCard != null) {
                     if (set.findCardInfoByClass(secondCard.getClass()).isEmpty()) {
