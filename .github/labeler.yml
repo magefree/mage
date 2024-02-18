@@ -4,20 +4,20 @@ dev:
 
 engine:
   - changed-files:
-      - any-glob-to-any-file: [ 'Mage/**' ]
+    - any-glob-to-any-file: [ 'Mage/**' ]
 
 client:
   - changed-files:
-      - any-glob-to-any-file: [ 'Mage.Client/**', 'Mage.Common/**', 'Mage.Plugins/**' ]
+    - any-glob-to-any-file: [ 'Mage.Client/**', 'Mage.Common/**', 'Mage.Plugins/**' ]
 
 server:
   - changed-files:
-      - any-glob-to-any-file: [ 'Mage.Server*/**' ]
+    - any-glob-to-any-file: [ 'Mage.Server*/**' ]
 
 tests:
   - changed-files:
-      - any-glob-to-any-file: [ 'Mage.Verify/**', 'Mage.Tests/**', 'Mage.Reports/**' ]
+    - any-glob-to-any-file: [ 'Mage.Verify/**', 'Mage.Tests/**', 'Mage.Reports/**' ]
 
 cards:
   - changed-files:
-      - any-glob-to-any-file: [ 'Mage.Sets/**' ]
+    - any-glob-to-any-file: [ 'Mage.Sets/**' ]
