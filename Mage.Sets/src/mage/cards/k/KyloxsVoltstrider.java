@@ -4,7 +4,6 @@ import java.util.UUID;
 
 import mage.ApprovingObject;
 import mage.MageInt;
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -30,6 +29,7 @@ import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInExile;
+import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
 /**
@@ -111,8 +111,8 @@ class KyloxsVoltstriderEffect extends OneShotEffect {
             game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
 
             // If that spell would be put into a graveyard, put it on the bottom of its owner's library instead.
-            MageObjectReference mor = new MageObjectReference(card, game);
-            ContinuousEffect effect = new KyloxsVoltstriderReplacementEffect(mor);
+            ContinuousEffect effect = new KyloxsVoltstriderReplacementEffect();
+            effect.setTargetPointer(new FixedTarget(card, game));
             game.addEffect(effect, source);
         }
         return true;
@@ -121,17 +121,13 @@ class KyloxsVoltstriderEffect extends OneShotEffect {
 
 class KyloxsVoltstriderReplacementEffect extends ReplacementEffectImpl {
 
-    private final MageObjectReference mor;
-
-    KyloxsVoltstriderReplacementEffect(MageObjectReference mor) {
+    KyloxsVoltstriderReplacementEffect() {
         super(Duration.Custom, Outcome.Exile);
         staticText = "If that spell would be put into a graveyard, put it on the bottom of its owner's library instead.";
-        this.mor = mor;
     }
 
     private KyloxsVoltstriderReplacementEffect(final KyloxsVoltstriderReplacementEffect effect) {
         super(effect);
-        this.mor = effect.mor;
     }
 
     @Override
@@ -147,15 +143,16 @@ class KyloxsVoltstriderReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        return event.getTargetId().equals(mor.getSourceId()) &&
-                zEvent.getToZone() == Zone.GRAVEYARD &&
-                mor.zoneCounterIsCurrent(game);
+        return zEvent.getToZone() == Zone.GRAVEYARD &&
+                event.getTargetId().equals(((FixedTarget) getTargetPointer()).getTarget()) &&
+                ((FixedTarget) getTargetPointer()).getZoneChangeCounter() ==
+                game.getState().getZoneChangeCounter(zEvent.getTargetId());
     }
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
-        Card card = mor.getCard(game);
+        Card card = game.getCard(getTargetPointer().getFirst(game, source));
         if (card == null || controller == null) {
             return false;
         }
