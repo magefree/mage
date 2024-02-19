@@ -11,7 +11,6 @@ public class CardDownloadData {
 
     private String name;
     private String downloadName;
-    private String fileName = "";
     private String set;
     private final String collectorId;
     private final Integer imageNumber;
@@ -25,16 +24,11 @@ public class CardDownloadData {
     private String tokenClassName;
 
     public CardDownloadData(String name, String setCode, String collectorId, boolean usesVariousArt, Integer imageNumber) {
-        this(name, setCode, collectorId, usesVariousArt, imageNumber, false, "");
+        this(name, setCode, collectorId, usesVariousArt, imageNumber, false);
     }
 
     public CardDownloadData(String name, String setCode, String collectorId, boolean usesVariousArt, Integer imageNumber, boolean token) {
         this(name, setCode, collectorId, usesVariousArt, imageNumber, token, false, false, "");
-    }
-
-    public CardDownloadData(String name, String setCode, String collectorId, boolean usesVariousArt, Integer imageNumber, boolean token, String fileName) {
-        this(name, setCode, collectorId, usesVariousArt, imageNumber, token, false, false, "");
-        this.fileName = fileName;
     }
 
     public CardDownloadData(String name, String setCode, String collectorId, boolean usesVariousArt, Integer imageNumber, boolean token, boolean twoFacedCard, boolean secondSide) {
@@ -56,7 +50,6 @@ public class CardDownloadData {
     public CardDownloadData(final CardDownloadData card) {
         this.name = card.name;
         this.downloadName = card.downloadName;
-        this.fileName = card.fileName;
         this.set = card.set;
         this.collectorId = card.collectorId;
         this.imageNumber = card.imageNumber;
@@ -142,14 +135,6 @@ public class CardDownloadData {
 
     public String getName() {
         return name;
-    }
-
-    public String getFileName() {
-        return fileName;
-    }
-
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
     }
 
     public void setName(String name) {

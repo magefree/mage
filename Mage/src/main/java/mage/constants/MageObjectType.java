@@ -43,27 +43,29 @@ package mage.constants;
  * @author LevelX2
  */
 public enum MageObjectType {
-    ABILITY_STACK("Ability on the Stack", false, false),
-    CARD("Card", false, true),
-    COPY_CARD("Copy of a Card", false, true),
-    TOKEN("Token", true, true),
-    SPELL("Spell", false, true),
-    PERMANENT("Permanent", true, true),
-    DUNGEON("Dungeon", false, false),
-    EMBLEM("Emblem", false, false),
-    COMMANDER("Commander", false, false),
-    DESIGNATION("Designation", false, false),
-    PLANE("Plane", false, false),
-    NULL("NullObject", false, false);
+    ABILITY_STACK("Ability on the Stack", false, false, false),
+    CARD("Card", false, true, false),
+    COPY_CARD("Copy of a Card", false, true, false),
+    TOKEN("Token", true, true, true),
+    SPELL("Spell", false, true, false),
+    PERMANENT("Permanent", true, true, false),
+    DUNGEON("Dungeon", false, false, true),
+    EMBLEM("Emblem", false, false, true),
+    COMMANDER("Commander", false, false, true),
+    DESIGNATION("Designation", false, false, true),
+    PLANE("Plane", false, false, true),
+    NULL("NullObject", false, false, false);
 
     private final String text;
     private final boolean permanent;
     private final boolean canHaveCounters;
+    private final boolean useTokensRepository; // card image from tokens or cards repository
 
-    MageObjectType(String text, boolean permanent, boolean canHaveCounters) {
+    MageObjectType(String text, boolean permanent, boolean canHaveCounters, boolean useTokensRepository) {
         this.text = text;
         this.permanent = permanent;
         this.canHaveCounters = canHaveCounters;
+        this.useTokensRepository = useTokensRepository;
     }
 
     @Override
@@ -77,6 +79,10 @@ public enum MageObjectType {
 
     public boolean canHaveCounters() {
         return canHaveCounters;
+    }
+
+    public boolean isUseTokensRepository() {
+        return useTokensRepository;
     }
 
 }
