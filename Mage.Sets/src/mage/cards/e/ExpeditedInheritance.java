@@ -5,19 +5,19 @@ import java.util.UUID;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.effects.AsThoughEffectImpl;
+import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
 /**
@@ -30,7 +30,7 @@ public final class ExpeditedInheritance extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{R}{R}");
 
         // Whenever a creature is dealt damage, its controller may exile that many cards from the top of their library. They may play those cards until the end of their next turn.
-        this.addAbility(new ExpeditedInheritanceTriggeredAbility(new ExpeditedInheritanceEffect()));
+        this.addAbility(new ExpeditedInheritanceTriggeredAbility(new ExpeditedInheritanceExileEffect()));
     }
 
     private ExpeditedInheritance(final ExpeditedInheritance card) {
@@ -83,15 +83,15 @@ class ExpeditedInheritanceTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class ExpeditedInheritanceEffect extends OneShotEffect {
+class ExpeditedInheritanceExileEffect extends OneShotEffect {
 
-    ExpeditedInheritanceEffect() {
+    ExpeditedInheritanceExileEffect() {
         super(Outcome.Benefit);
         staticText = "Exile that many cards from the top of your library. " +
                 "Until the end of your next turn, you may play those cards.";
     }
 
-    private ExpeditedInheritanceEffect(final ExpeditedInheritanceEffect effect) {
+    private ExpeditedInheritanceExileEffect(final ExpeditedInheritanceExileEffect effect) {
         super(effect);
     }
 
@@ -112,9 +112,9 @@ class ExpeditedInheritanceEffect extends OneShotEffect {
                     if (!cards.isEmpty()) {
                         player.moveCards(cards, Zone.EXILED, source, game);
                         for (Card card:cards){
-                            CardUtil.makeCardPlayableWithOwnerDuration(
-                                    game, source, card, Duration.UntilEndOfYourNextTurn, playerId
-                            );
+                            ContinuousEffect effect = new ExpeditedInheritanceMayPlayEffect(playerId);
+                            effect.setTargetPointer(new FixedTarget(card.getId(), game));
+                            game.addEffect(effect, source);
                         }
                     }
                 }
@@ -125,7 +125,55 @@ class ExpeditedInheritanceEffect extends OneShotEffect {
     }
 
     @Override
-    public ExpeditedInheritanceEffect copy() {
-        return new ExpeditedInheritanceEffect(this);
+    public ExpeditedInheritanceExileEffect copy() {
+        return new ExpeditedInheritanceExileEffect(this);
+    }
+}
+
+class ExpeditedInheritanceMayPlayEffect extends AsThoughEffectImpl {
+
+    private int triggeredOnTurn = 0;
+    private final UUID cardOwnerId;
+
+    ExpeditedInheritanceMayPlayEffect(UUID playerId) {
+        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
+        this.staticText = "Until the end of your next turn, you may play this card.";
+        this.cardOwnerId = playerId;
+    }
+
+    private ExpeditedInheritanceMayPlayEffect(final ExpeditedInheritanceMayPlayEffect effect) {
+        super(effect);
+        triggeredOnTurn = effect.triggeredOnTurn;
+        cardOwnerId = effect.cardOwnerId;
+    }
+
+    @Override
+    public ExpeditedInheritanceMayPlayEffect copy() {
+        return new ExpeditedInheritanceMayPlayEffect(this);
+    }
+
+    @Override
+    public void init(Ability source, Game game) {
+        super.init(source, game);
+        triggeredOnTurn = game.getTurnNum();
+    }
+
+    @Override
+    public boolean isInactive(Ability source, Game game) {
+        return triggeredOnTurn != game.getTurnNum()
+                && game.getPhase().getStep().getType() == PhaseStep.END_TURN
+                && game.isActivePlayer(cardOwnerId);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
+
+    @Override
+    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
+        UUID objectIdToCast = CardUtil.getMainCardId(game, sourceId);
+        return cardOwnerId == affectedControllerId
+                && getTargetPointer().getTargets(game, source).contains(objectIdToCast);
     }
 }

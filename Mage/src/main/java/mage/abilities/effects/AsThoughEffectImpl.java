@@ -27,12 +27,6 @@ public abstract class AsThoughEffectImpl extends ContinuousEffectImpl implements
         this.effectType = EffectType.ASTHOUGH;
     }
 
-    public AsThoughEffectImpl(AsThoughEffectType type, Duration duration, Outcome outcome, UUID customControllerId) {
-        super(duration, outcome, customControllerId);
-        this.type = type;
-        this.effectType = EffectType.ASTHOUGH;
-    }
-
     protected AsThoughEffectImpl(final AsThoughEffectImpl effect) {
         super(effect);
         this.type = effect.type;

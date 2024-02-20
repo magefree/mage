@@ -62,8 +62,6 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
     // set to the turn number on your next turn.
     private int effectStartingStepNum = 0; // Some continuous are waiting for the next step of a kind.
     // Avoid miscancelling if the start step is of that kind.
-    private boolean useCustomController = false;
-    private UUID customControllerId;
 
     public ContinuousEffectImpl(Duration duration, Outcome outcome) {
         super(outcome);
@@ -78,12 +76,6 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
         this(duration, outcome);
         this.layer = layer;
         this.sublayer = sublayer;
-    }
-
-    public ContinuousEffectImpl(Duration duration, Outcome outcome, UUID customControllerId) {
-        this(duration, outcome);
-        this.customControllerId = customControllerId;
-        this.useCustomController = true;
     }
 
     protected ContinuousEffectImpl(final ContinuousEffectImpl effect) {
@@ -106,8 +98,6 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
         this.characterDefining = effect.characterDefining;
         this.nextTurnNumber = effect.nextTurnNumber;
         this.effectStartingStepNum = effect.effectStartingStepNum;
-        this.customControllerId = effect.customControllerId;
-        this.useCustomController = effect.useCustomController;
     }
 
     @Override
@@ -205,8 +195,7 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
                 this.affectedObjectsSet = true;
             }
         }
-        UUID controllerId = (useCustomController && customControllerId != null) ? customControllerId : source.getControllerId();
-        setStartingControllerAndTurnNum(game, controllerId, activePlayerId);
+        setStartingControllerAndTurnNum(game, source.getControllerId(), activePlayerId);
     }
 
     @Override

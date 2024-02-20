@@ -39,14 +39,6 @@ public class CanPlayCardControllerEffect extends AsThoughEffectImpl {
         this.condition = condition;
     }
 
-    public CanPlayCardControllerEffect(Game game, UUID cardId, int cardZCC, Duration duration, UUID playerId, Condition condition, UUID customControllerId) {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, duration, Outcome.Benefit, customControllerId);
-        this.staticText = "You may play those card";
-        this.mor = new MageObjectReference(cardId, cardZCC, game);
-        this.playerId = playerId;
-        this.condition = condition;
-    }
-
     protected CanPlayCardControllerEffect(final CanPlayCardControllerEffect effect) {
         super(effect);
         this.mor = effect.mor;
