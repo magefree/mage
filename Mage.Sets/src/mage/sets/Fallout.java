@@ -52,6 +52,7 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Radstorm", 37, Rarity.RARE, mage.cards.r.Radstorm.class));
         cards.add(new SetCardInfo("Ravages of War", 882, Rarity.MYTHIC, mage.cards.r.RavagesOfWar.class));
         cards.add(new SetCardInfo("Ruinous Ultimatum", 220, Rarity.RARE, mage.cards.r.RuinousUltimatum.class));
+        cards.add(new SetCardInfo("Silver Shroud Costume", 142, Rarity.UNCOMMON, mage.cards.s.SilverShroudCostume.class));
         cards.add(new SetCardInfo("Sol Ring", 239, Rarity.UNCOMMON, mage.cards.s.SolRing.class));
         cards.add(new SetCardInfo("Solemn Simulacrum", 240, Rarity.RARE, mage.cards.s.SolemnSimulacrum.class));
         cards.add(new SetCardInfo("Sunscorched Divide", 153, Rarity.RARE, mage.cards.s.SunscorchedDivide.class));
