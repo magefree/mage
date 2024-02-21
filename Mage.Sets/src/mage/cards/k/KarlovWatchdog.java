@@ -17,6 +17,7 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 
 /**
  *
@@ -75,7 +76,8 @@ class KarlovWatchdogEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return game.isActivePlayer(source.getControllerId()) &&
-                game.getOpponents(source.getControllerId()).contains(event.getPlayerId());
+        Permanent permanent = game.getPermanent(event.getTargetId());
+        return permanent != null && game.isActivePlayer(source.getControllerId()) &&
+                game.getOpponents(source.getControllerId()).contains(permanent.getControllerId());
     }
 }
