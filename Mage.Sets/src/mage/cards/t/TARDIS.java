@@ -39,11 +39,11 @@ public final class TARDIS extends CardImpl {
         this.toughness = new MageInt(4);
         this.addAbility(FlyingAbility.getInstance());
 
-        // Whenever TARDIS attacks, if you control a Time Lord, the next spell you cast this turn has cascade, and you may planeswalk.
+        // Whenever TARDIS attacks, if you control a Time Lord, the next spell you cast this turn has cascade and you may planeswalk.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new AttacksTriggeredAbility(new NextSpellCastHasAbilityEffect(new CascadeAbility()), false),
                 new PermanentsOnTheBattlefieldCondition(filter),
-                "Whenever {this} attacks, if you control a Time Lord, the next spell you cast this turn has cascade, and you may planeswalk.");
+                "Whenever {this} attacks, if you control a Time Lord, the next spell you cast this turn has cascade and you may planeswalk.");
 
         ability.addEffect(new PlaneswalkEffect(true));
 
