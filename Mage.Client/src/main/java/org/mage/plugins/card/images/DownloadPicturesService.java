@@ -532,8 +532,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                         "0",
                         false,
                         token.getImageNumber(),
-                        true,
-                        token.getImageFileName()
+                        true
                 );
                 allCardsUrls.add(card);
             });

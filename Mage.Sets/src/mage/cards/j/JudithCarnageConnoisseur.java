@@ -44,7 +44,7 @@ public final class JudithCarnageConnoisseur extends CardImpl {
         // * That spell gains deathtouch and lifelink.
         Ability ability = new SpellCastControllerTriggeredAbility(
                 new JudithCarnageConnoisseurEffect(),
-                StaticFilters.FILTER_SPELL_INSTANT_OR_SORCERY,
+                StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY,
                 false, SetTargetPointer.SPELL);
 
         // * Create a 2/2 red Imp creature token with "When this creature dies, it deals 2 damage to each opponent."

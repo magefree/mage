@@ -143,6 +143,7 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Krenko's Buzzcrusher", 136, Rarity.RARE, mage.cards.k.KrenkosBuzzcrusher.class));
         cards.add(new SetCardInfo("Krenko, Baron of Tin Street", 135, Rarity.RARE, mage.cards.k.KrenkoBaronOfTinStreet.class));
         cards.add(new SetCardInfo("Krovod Haunch", 21, Rarity.UNCOMMON, mage.cards.k.KrovodHaunch.class));
+        cards.add(new SetCardInfo("Kylox's Voltstrider", 215, Rarity.MYTHIC, mage.cards.k.KyloxsVoltstrider.class));
         cards.add(new SetCardInfo("Kylox, Visionary Inventor", 214, Rarity.RARE, mage.cards.k.KyloxVisionaryInventor.class));
         cards.add(new SetCardInfo("Lamplight Phoenix", 137, Rarity.RARE, mage.cards.l.LamplightPhoenix.class));
         cards.add(new SetCardInfo("Lazav, Wearer of Faces", 216, Rarity.RARE, mage.cards.l.LazavWearerOfFaces.class));

@@ -41,7 +41,7 @@ public final class BloodOperative extends CardImpl {
 
         // Whenever you surveil, if Blood Operative is in your graveyard, you may pay 3 life. If you do, return Blood Operative to your hand.
         this.addAbility(new SurveilTriggeredAbility(Zone.GRAVEYARD, new DoIfCostPaid(
-                new ReturnSourceFromGraveyardToHandEffect(), new PayLifeCost(3)
+                new ReturnSourceFromGraveyardToHandEffect().setText("return {this} to your hand"), new PayLifeCost(3)
         )));
     }
 

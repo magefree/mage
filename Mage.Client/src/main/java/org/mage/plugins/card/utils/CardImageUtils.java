@@ -1,10 +1,14 @@
 package org.mage.plugins.card.utils;
 
+import mage.cards.repository.CardInfo;
+import mage.cards.repository.CardRepository;
+import mage.cards.repository.TokenRepository;
 import mage.client.MageFrame;
 import mage.client.constants.Constants;
 import mage.client.dialog.PreferencesDialog;
 import mage.remote.Connection;
 import mage.remote.Connection.ProxyType;
+import mage.view.CardView;
 import org.apache.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -113,7 +117,6 @@ public final class CardImageUtils {
     }
 
     public static String buildImagePathToCardOrToken(CardDownloadData card) {
-
         String setPath = buildImagePathToSet(card);
 
         String prefixType = "";
@@ -121,10 +124,7 @@ public final class CardImageUtils {
             prefixType = " " + card.getImageNumber();
         }
 
-        String cardName = card.getFileName();
-        if (cardName.isEmpty()) {
-            cardName = prepareCardNameForFile(card.getName());
-        }
+        String cardName = prepareCardNameForFile(card.getName());
 
         String finalFileName;
         if (card.getUsesVariousArt()) {
@@ -136,6 +136,49 @@ public final class CardImageUtils {
         }
 
         return setPath + finalFileName;
+    }
+
+    /**
+     * Special version for CardView and direct images info
+     * (real card images uses image cache and key logic, see ImageCache.getKey)
+     *
+     * @return relative image path or "ERROR + reason"
+     */
+    public static String buildImagePathToCardView(CardView card) {
+        String imageFile;
+        if (card.getMageObjectType().isUseTokensRepository()) {
+            // token images
+            CardDownloadData cardData = new CardDownloadData(
+                    card.getName().replace(" Token", ""),
+                    card.getExpansionSetCode(),
+                    "0",
+                    false,
+                    card.getImageNumber(),
+                    true);
+            imageFile = CardImageUtils.buildImagePathToCardOrToken(cardData);
+        } else {
+            TokenRepository.instance.getAll();
+            // card images
+            // workaround to find various art settings first
+            CardInfo cardInfo = CardRepository.instance.findCardWithPreferredSetAndNumber(
+                    card.getName(),
+                    card.getExpansionSetCode(),
+                    card.getCardNumber()
+            );
+            if (cardInfo != null) {
+                CardDownloadData cardData = new CardDownloadData(
+                        cardInfo.getName(),
+                        cardInfo.getSetCode(),
+                        cardInfo.getCardNumber(),
+                        cardInfo.usesVariousArt(),
+                        card.getImageNumber()
+                );
+                imageFile = CardImageUtils.buildImagePathToCardOrToken(cardData);
+            } else {
+                imageFile = "ERROR: can't find card info in repository - " + card.getName();
+            }
+        }
+        return imageFile;
     }
 
     public static String generateFaceImagePath(String cardName, String setCode) {
