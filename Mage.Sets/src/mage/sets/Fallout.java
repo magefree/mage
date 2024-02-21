@@ -33,6 +33,7 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Forest", 853, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gary Clone", 16, Rarity.UNCOMMON, mage.cards.g.GaryClone.class));
         cards.add(new SetCardInfo("Guardian Project", 199, Rarity.RARE, mage.cards.g.GuardianProject.class));
+        cards.add(new SetCardInfo("Hancock, Ghoulish Mayor", 45, Rarity.RARE, mage.cards.h.HancockGhoulishMayor.class));
         cards.add(new SetCardInfo("Heroic Intervention", 202, Rarity.RARE, mage.cards.h.HeroicIntervention.class));
         cards.add(new SetCardInfo("Intelligence Bobblehead", 134, Rarity.UNCOMMON, mage.cards.i.IntelligenceBobblehead.class));
         cards.add(new SetCardInfo("Island", 847, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
