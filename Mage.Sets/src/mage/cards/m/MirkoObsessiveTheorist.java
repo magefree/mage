@@ -3,23 +3,22 @@ package mage.cards.m;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.SurveilTriggeredAbility;
-import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldWithCounterTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.VigilanceAbility;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.PowerPredicate;
+import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.targetadjustment.TargetAdjuster;
 
 import java.util.UUID;
 
@@ -27,6 +26,12 @@ import java.util.UUID;
  * @author PurpleCrowbar
  */
 public final class MirkoObsessiveTheorist extends CardImpl {
+
+    private static final FilterCreatureCard filter = new FilterCreatureCard("creature with power less than this creature's");
+
+    static {
+        filter.add(MirkoObsessiveTheoristPredicate.instance);
+    }
 
     public MirkoObsessiveTheorist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{B}");
@@ -46,15 +51,12 @@ public final class MirkoObsessiveTheorist extends CardImpl {
 
         // At the beginning of your end step, you may return target creature card with power less than Mirko's from your graveyard to the battlefield with a finality counter on it.
         Ability ability = new BeginningOfYourEndStepTriggeredAbility(
-                new ReturnFromGraveyardToBattlefieldWithCounterTargetEffect(CounterType.FINALITY.createInstance()),true
+                new ReturnFromGraveyardToBattlefieldWithCounterTargetEffect(CounterType.FINALITY.createInstance())
+                        .setText("you may return target creature card with power less than {this}'s from your graveyard to the " +
+                                "battlefield with a finality counter on it. <i>(If it would die, exile it instead.)</i>"),true
         );
-        ability.setTargetAdjuster(MirkoObsessiveTheoristAdjuster.instance);
-        this.addAbility(ability.setRuleVisible(false));
-
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect(
-                "At the beginning of your end step, you may return target creature card with power less than {this}'s " +
-                        "from your graveyard to the battlefield with a finality counter on it. <i>(If it would die, exile it instead.)</i>"
-        )));
+        ability.addTarget(new TargetCardInYourGraveyard(filter));
+        this.addAbility(ability);
     }
 
     private MirkoObsessiveTheorist(final MirkoObsessiveTheorist card) {
@@ -67,19 +69,12 @@ public final class MirkoObsessiveTheorist extends CardImpl {
     }
 }
 
-enum MirkoObsessiveTheoristAdjuster implements TargetAdjuster {
+enum MirkoObsessiveTheoristPredicate implements ObjectSourcePlayerPredicate<Card> {
     instance;
 
     @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        Permanent sourcePermanent = game.getPermanent(ability.getSourceId());
-        if (sourcePermanent == null) {
-            return;
-        }
-        int xValue = sourcePermanent.getPower().getValue();
-        FilterCreatureCard filter = new FilterCreatureCard("creature card with power less than " + xValue + " from your graveyard");
-        filter.add(new PowerPredicate(ComparisonType.FEWER_THAN, xValue));
-        ability.getTargets().add(new TargetCardInYourGraveyard(filter));
+    public boolean apply(ObjectSourcePlayer<Card> input, Game game) {
+        Permanent sourcePermanent = input.getSource().getSourcePermanentOrLKI(game);
+        return sourcePermanent != null && input.getObject().getPower().getValue() <= sourcePermanent.getPower().getValue();
     }
 }
