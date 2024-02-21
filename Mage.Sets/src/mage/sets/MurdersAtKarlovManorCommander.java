@@ -60,6 +60,7 @@ public final class MurdersAtKarlovManorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Confirm Suspicions", 97, Rarity.RARE, mage.cards.c.ConfirmSuspicions.class));
         cards.add(new SetCardInfo("Connive // Concoct", 203, Rarity.RARE, mage.cards.c.ConniveConcoct.class));
         cards.add(new SetCardInfo("Consider", 98, Rarity.COMMON, mage.cards.c.Consider.class));
+        cards.add(new SetCardInfo("Copy Catchers", 20, Rarity.RARE, mage.cards.c.CopyCatchers.class));
         cards.add(new SetCardInfo("Curate", 99, Rarity.COMMON, mage.cards.c.Curate.class));
         cards.add(new SetCardInfo("Curse of Opulence", 150, Rarity.UNCOMMON, mage.cards.c.CurseOfOpulence.class));
         cards.add(new SetCardInfo("Darien, King of Kjeldor", 59, Rarity.RARE, mage.cards.d.DarienKingOfKjeldor.class));
@@ -149,6 +150,9 @@ public final class MurdersAtKarlovManorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Merchant of Truth", 11, Rarity.RARE, mage.cards.m.MerchantOfTruth.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Merchant of Truth", 322, Rarity.RARE, mage.cards.m.MerchantOfTruth.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mind Stone", 232, Rarity.UNCOMMON, mage.cards.m.MindStone.class));
+        cards.add(new SetCardInfo("Mirko, Obsessive Theorist", 2, Rarity.MYTHIC, mage.cards.m.MirkoObsessiveTheorist.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mirko, Obsessive Theorist", 50, Rarity.MYTHIC, mage.cards.m.MirkoObsessiveTheorist.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mirko, Obsessive Theorist", 316, Rarity.MYTHIC, mage.cards.m.MirkoObsessiveTheorist.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mirror Entity", 75, Rarity.RARE, mage.cards.m.MirrorEntity.class));
         cards.add(new SetCardInfo("Mission Briefing", 110, Rarity.RARE, mage.cards.m.MissionBriefing.class));
         cards.add(new SetCardInfo("Morska, Undersea Sleuth", 3, Rarity.MYTHIC, mage.cards.m.MorskaUnderseaSleuth.class));

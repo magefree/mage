@@ -137,12 +137,14 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("It Doesn't Add Up", 89, Rarity.UNCOMMON, mage.cards.i.ItDoesntAddUp.class));
         cards.add(new SetCardInfo("Izoni, Center of the Web", 209, Rarity.RARE, mage.cards.i.IzoniCenterOfTheWeb.class));
         cards.add(new SetCardInfo("Jaded Analyst", 62, Rarity.COMMON, mage.cards.j.JadedAnalyst.class));
+        cards.add(new SetCardInfo("Judith, Carnage Connoisseur", 210, Rarity.RARE, mage.cards.j.JudithCarnageConnoisseur.class));
         cards.add(new SetCardInfo("Kellan, Inquisitive Prodigy", 212, Rarity.RARE, mage.cards.k.KellanInquisitiveProdigy.class));
         cards.add(new SetCardInfo("Knife", 134, Rarity.UNCOMMON, mage.cards.k.Knife.class));
         cards.add(new SetCardInfo("Kraul Whipcracker", 213, Rarity.UNCOMMON, mage.cards.k.KraulWhipcracker.class));
         cards.add(new SetCardInfo("Krenko's Buzzcrusher", 136, Rarity.RARE, mage.cards.k.KrenkosBuzzcrusher.class));
         cards.add(new SetCardInfo("Krenko, Baron of Tin Street", 135, Rarity.RARE, mage.cards.k.KrenkoBaronOfTinStreet.class));
         cards.add(new SetCardInfo("Krovod Haunch", 21, Rarity.UNCOMMON, mage.cards.k.KrovodHaunch.class));
+        cards.add(new SetCardInfo("Kylox's Voltstrider", 215, Rarity.MYTHIC, mage.cards.k.KyloxsVoltstrider.class));
         cards.add(new SetCardInfo("Kylox, Visionary Inventor", 214, Rarity.RARE, mage.cards.k.KyloxVisionaryInventor.class));
         cards.add(new SetCardInfo("Lamplight Phoenix", 137, Rarity.RARE, mage.cards.l.LamplightPhoenix.class));
         cards.add(new SetCardInfo("Lazav, Wearer of Faces", 216, Rarity.RARE, mage.cards.l.LazavWearerOfFaces.class));

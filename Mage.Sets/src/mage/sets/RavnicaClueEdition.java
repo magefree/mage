@@ -203,7 +203,7 @@ public final class RavnicaClueEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Seller of Songbirds", 72, Rarity.COMMON, mage.cards.s.SellerOfSongbirds.class));
         cards.add(new SetCardInfo("Senator Peacock", 2, Rarity.RARE, mage.cards.s.SenatorPeacock.class));
         cards.add(new SetCardInfo("Seraph of the Scales", 208, Rarity.MYTHIC, mage.cards.s.SeraphOfTheScales.class));
-        cards.add(new SetCardInfo("Shiny Impetus", 147, Rarity.UNCOMMON, mage.cards.s.ShinyImpetus.class));
+        cards.add(new SetCardInfo("Shiny Impetus", 147, Rarity.COMMON, mage.cards.s.ShinyImpetus.class));
         cards.add(new SetCardInfo("Simic Growth Chamber", 247, Rarity.COMMON, mage.cards.s.SimicGrowthChamber.class));
         cards.add(new SetCardInfo("Simic Guildgate", 248, Rarity.COMMON, mage.cards.s.SimicGuildgate.class));
         cards.add(new SetCardInfo("Simic Signet", 228, Rarity.COMMON, mage.cards.s.SimicSignet.class));
