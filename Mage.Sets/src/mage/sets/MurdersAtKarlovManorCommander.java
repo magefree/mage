@@ -131,6 +131,8 @@ public final class MurdersAtKarlovManorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Kessig Wolf Run", 269, Rarity.RARE, mage.cards.k.KessigWolfRun.class));
         cards.add(new SetCardInfo("Kher Keep", 270, Rarity.RARE, mage.cards.k.KherKeep.class));
         cards.add(new SetCardInfo("Killer Service", 174, Rarity.RARE, mage.cards.k.KillerService.class));
+        cards.add(new SetCardInfo("Knowledge is Power", 42, Rarity.RARE, mage.cards.k.KnowledgeIsPower.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Knowledge is Power", 352, Rarity.RARE, mage.cards.k.KnowledgeIsPower.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Koma, Cosmos Serpent", 213, Rarity.MYTHIC, mage.cards.k.KomaCosmosSerpent.class));
         cards.add(new SetCardInfo("Krosan Cloudscraper", 175, Rarity.RARE, mage.cards.k.KrosanCloudscraper.class));
         cards.add(new SetCardInfo("Krosan Colossus", 176, Rarity.RARE, mage.cards.k.KrosanColossus.class));
