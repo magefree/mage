@@ -34,6 +34,7 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Heroic Intervention", 202, Rarity.RARE, mage.cards.h.HeroicIntervention.class));
         cards.add(new SetCardInfo("Intelligence Bobblehead", 134, Rarity.UNCOMMON, mage.cards.i.IntelligenceBobblehead.class));
         cards.add(new SetCardInfo("Island", 847, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Liberty Prime, Recharged", 5, Rarity.MYTHIC, mage.cards.l.LibertyPrimeRecharged.class));
         cards.add(new SetCardInfo("Mantle of the Ancients", 165, Rarity.RARE, mage.cards.m.MantleOfTheAncients.class));
         cards.add(new SetCardInfo("Mechanized Production", 178, Rarity.MYTHIC, mage.cards.m.MechanizedProduction.class));
         cards.add(new SetCardInfo("Mountain", 851, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
