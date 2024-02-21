@@ -22,7 +22,7 @@ import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.ThopterColorlessToken2;
+import mage.game.permanent.token.Thopter00ColorlessToken;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.target.Target;
@@ -101,6 +101,9 @@ class IntrudeOnTheMindEffect extends OneShotEffect {
         pile2.addAll(cards.getCards(game));
 
         Player opponent = getOpponent(controller, game, source);
+        if (opponent == null) {
+            return false;
+        }
         boolean choice = opponent.choosePile(outcome, "Choose a pile to put into hand.", pile1, pile2, game);
 
         Zone pile1Zone = choice ? Zone.HAND : Zone.GRAVEYARD;
@@ -118,7 +121,7 @@ class IntrudeOnTheMindEffect extends OneShotEffect {
         cards.addAllCards(pile2);
         controller.moveCards(cards, pile2Zone, source, game);
 
-        Token token = new ThopterColorlessToken2();
+        Token token = new Thopter00ColorlessToken();
         token.putOntoBattlefield(1, game, source);
 
         allCards.retainZone(Zone.GRAVEYARD, game);
@@ -148,11 +151,7 @@ class IntrudeOnTheMindEffect extends OneShotEffect {
             Target targetOpponent = new TargetOpponent(true);
             controller.chooseTarget(Outcome.Neutral, targetOpponent, source, game);
             opponent = game.getPlayer(targetOpponent.getFirstTarget());
-            if (opponent != null) {
-                game.informPlayers(controller.getLogName() + " chose " + opponent.getLogName() + " to choose the piles");
-            } else {
-                game.informPlayers(controller.getLogName() + " chose nothing" + " to choose the piles");
-            }
+            game.informPlayers(controller.getLogName() + " chose " + opponent.getLogName() + " to choose the piles");
         }
         return opponent;
     }

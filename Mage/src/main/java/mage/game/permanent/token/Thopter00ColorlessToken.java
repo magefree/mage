@@ -5,9 +5,9 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-public class ThopterColorlessToken2 extends TokenImpl {
+public class Thopter00ColorlessToken extends TokenImpl {
 
-    public ThopterColorlessToken2() {
+    public Thopter00ColorlessToken() {
         super("Thopter Token", "0/0 colorless Thopter artifact creature token with flying");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
@@ -18,12 +18,12 @@ public class ThopterColorlessToken2 extends TokenImpl {
         addAbility(FlyingAbility.getInstance());
     }
 
-    private ThopterColorlessToken2(final ThopterColorlessToken2 token) {
+    private Thopter00ColorlessToken(final Thopter00ColorlessToken token) {
         super(token);
     }
 
     @Override
-    public ThopterColorlessToken2 copy() {
-        return new ThopterColorlessToken2(this);
+    public Thopter00ColorlessToken copy() {
+        return new Thopter00ColorlessToken(this);
     }
 }
