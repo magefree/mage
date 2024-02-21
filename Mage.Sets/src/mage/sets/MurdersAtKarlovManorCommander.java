@@ -60,6 +60,7 @@ public final class MurdersAtKarlovManorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Confirm Suspicions", 97, Rarity.RARE, mage.cards.c.ConfirmSuspicions.class));
         cards.add(new SetCardInfo("Connive // Concoct", 203, Rarity.RARE, mage.cards.c.ConniveConcoct.class));
         cards.add(new SetCardInfo("Consider", 98, Rarity.COMMON, mage.cards.c.Consider.class));
+        cards.add(new SetCardInfo("Copy Catchers", 20, Rarity.RARE, mage.cards.c.CopyCatchers.class));
         cards.add(new SetCardInfo("Curate", 99, Rarity.COMMON, mage.cards.c.Curate.class));
         cards.add(new SetCardInfo("Curse of Opulence", 150, Rarity.UNCOMMON, mage.cards.c.CurseOfOpulence.class));
         cards.add(new SetCardInfo("Darien, King of Kjeldor", 59, Rarity.RARE, mage.cards.d.DarienKingOfKjeldor.class));
