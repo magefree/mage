@@ -29,7 +29,7 @@ import mage.target.TargetPermanent;
 public final class KellanInquisitiveProdigy extends AdventureCard {
 
     public KellanInquisitiveProdigy(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.SORCERY}, "{2}{G}{U}", "Tail the Suspect", "{U}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.SORCERY}, "{2}{G}{U}", "Tail the Suspect", "{G}{U}");
 
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
