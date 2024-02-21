@@ -105,7 +105,7 @@ class ExpeditedInheritanceExileEffect extends OneShotEffect {
                 UUID playerId = creature.getControllerId();
                 Player player = game.getPlayer(playerId);
                 String message = impulseDrawAmount > 1 ?
-                        "Exile " + impulseDrawAmount + " cards from the top of your library. Until the end of your next turn, you may play those cards."
+                        "Exile " + CardUtil.numberToText(impulseDrawAmount) + " cards from the top of your library. Until the end of your next turn, you may play those cards."
                         : "Exile the top card of your library. Until the end of your next turn, you may play that card.";
                 if (player != null && player.chooseUse(outcome, message, source, game)) {
                     Set<Card> cards = player.getLibrary().getTopCards(game, impulseDrawAmount);
@@ -173,7 +173,7 @@ class ExpeditedInheritanceMayPlayEffect extends AsThoughEffectImpl {
     @Override
     public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
         UUID objectIdToCast = CardUtil.getMainCardId(game, sourceId);
-        return cardOwnerId == affectedControllerId
+        return cardOwnerId != null && cardOwnerId.equals(affectedControllerId)
                 && getTargetPointer().getTargets(game, source).contains(objectIdToCast);
     }
 }
