@@ -39,7 +39,7 @@ public class UnleashAbility extends SimpleStaticAbility {
 
     @Override
     public String getRule() {
-        return "Unleash <i>(You may have this creature enter the battlefield with a +1/+1 counter on it. It can't block as long as it has a +1/+1 counter on it.)</i>";
+        return "unleash <i>(You may have this creature enter the battlefield with a +1/+1 counter on it. It can't block as long as it has a +1/+1 counter on it.)</i>";
     }
 }
 
