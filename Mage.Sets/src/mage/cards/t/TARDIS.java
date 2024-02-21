@@ -3,7 +3,6 @@ package mage.cards.t;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.CastOnlyIfConditionIsTrueAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.effects.common.PlaneswalkEffect;
@@ -11,7 +10,6 @@ import mage.abilities.effects.common.continuous.NextSpellCastHasAbilityEffect;
 import mage.abilities.hint.ConditionHint;
 import mage.abilities.hint.Hint;
 import mage.abilities.keyword.CascadeAbility;
-import mage.constants.ComparisonType;
 import mage.constants.SubType;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.CrewAbility;
@@ -27,10 +25,9 @@ import mage.filter.common.FilterControlledPermanent;
  * @author Skiwkr
  */
 public final class TARDIS extends CardImpl {
-    private static final FilterControlledPermanent TimeLordFilter = new FilterControlledPermanent();
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.TIME_LORD);
 
-    static {TimeLordFilter.add(SubType.TIME_LORD.getPredicate());}
-    private static final Condition condition = new PermanentsOnTheBattlefieldCondition(TimeLordFilter, ComparisonType.MORE_THAN, 1);
+    private static final Condition condition = new PermanentsOnTheBattlefieldCondition(filter);
 
     private static final Hint hint = new ConditionHint(condition, "You control a Time Lord");
 
@@ -43,16 +40,18 @@ public final class TARDIS extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever TARDIS attacks, if you control a Time Lord, the next spell you cast this turn has cascade, and you may planeswalk.
-        Ability TardisAttackTrigger = new ConditionalInterveningIfTriggeredAbility(
+        Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new AttacksTriggeredAbility(new NextSpellCastHasAbilityEffect(new CascadeAbility()), false),
-                new PermanentsOnTheBattlefieldCondition(TimeLordFilter),
-                "Whenever TARDIS attacks, if you control a Time Lord, the next spell you cast this turn has cascade, and you may planeswalk.");
-        TardisAttackTrigger.addEffect(new PlaneswalkEffect(true));
-		this.addAbility(TardisAttackTrigger);
+                new PermanentsOnTheBattlefieldCondition(filter),
+                "Whenever {this} attacks, if you control a Time Lord, the next spell you cast this turn has cascade, and you may planeswalk.");
+
+        ability.addEffect(new PlaneswalkEffect(true));
+
+        ability.addHint(hint);
+
+		this.addAbility(ability);
         // Crew 2
         this.addAbility(new CrewAbility(2));
-
-        this.addAbility(new CastOnlyIfConditionIsTrueAbility(condition).addHint(hint));
 
     }
 
