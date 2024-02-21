@@ -40,6 +40,7 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Mr. House, President and CEO", 7, Rarity.MYTHIC, mage.cards.m.MrHousePresidentAndCEO.class));
         cards.add(new SetCardInfo("Nuka-Cola Vending Machine", 137, Rarity.UNCOMMON, mage.cards.n.NukaColaVendingMachine.class));
         cards.add(new SetCardInfo("Open the Vaults", 168, Rarity.RARE, mage.cards.o.OpenTheVaults.class));
+        cards.add(new SetCardInfo("Overflowing Basin", 152, Rarity.RARE, mage.cards.o.OverflowingBasin.class));
         cards.add(new SetCardInfo("Path of Ancestry", 279, Rarity.COMMON, mage.cards.p.PathOfAncestry.class));
         cards.add(new SetCardInfo("Plains", 845, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Puresteel Paladin", 170, Rarity.RARE, mage.cards.p.PuresteelPaladin.class));
