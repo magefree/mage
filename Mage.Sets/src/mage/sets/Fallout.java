@@ -48,6 +48,7 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Ruinous Ultimatum", 220, Rarity.RARE, mage.cards.r.RuinousUltimatum.class));
         cards.add(new SetCardInfo("Sol Ring", 239, Rarity.UNCOMMON, mage.cards.s.SolRing.class));
         cards.add(new SetCardInfo("Solemn Simulacrum", 240, Rarity.RARE, mage.cards.s.SolemnSimulacrum.class));
+        cards.add(new SetCardInfo("Sunscorched Divide", 153, Rarity.RARE, mage.cards.s.SunscorchedDivide.class));
         cards.add(new SetCardInfo("Swamp", 849, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tarmogoyf", 349, Rarity.MYTHIC, mage.cards.t.Tarmogoyf.class));
         cards.add(new SetCardInfo("Terramorphic Expanse", 313, Rarity.COMMON, mage.cards.t.TerramorphicExpanse.class));
