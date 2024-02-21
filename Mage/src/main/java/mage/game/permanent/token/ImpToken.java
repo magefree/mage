@@ -1,9 +1,7 @@
 package mage.game.permanent.token;
 
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.DiesSourceTriggeredAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.constants.CardType;
 import mage.constants.SubType;
@@ -20,10 +18,8 @@ public final class ImpToken extends TokenImpl {
         toughness = new MageInt(2);
 
         // When this creature dies, it deals 2 damage to each opponent.
-        Effect effect = new DamagePlayersEffect(2, TargetController.OPPONENT);
-        effect.setText("it deals 2 damage to each opponent");
-        Ability ability = new DiesSourceTriggeredAbility(effect);
-        this.addAbility(ability);
+        this.addAbility(new DiesSourceTriggeredAbility(
+                new DamagePlayersEffect(2, TargetController.OPPONENT)));
     }
 
     private ImpToken(final ImpToken token) {
