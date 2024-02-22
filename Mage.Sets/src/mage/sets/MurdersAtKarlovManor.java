@@ -105,6 +105,7 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Felonious Rage", 125, Rarity.COMMON, mage.cards.f.FeloniousRage.class));
         cards.add(new SetCardInfo("Festerleech", 85, Rarity.UNCOMMON, mage.cards.f.Festerleech.class));
         cards.add(new SetCardInfo("Flotsam // Jetsam", 247, Rarity.UNCOMMON, mage.cards.f.FlotsamJetsam.class));
+        cards.add(new SetCardInfo("Flourishing Bloom-Kin", 160, Rarity.UNCOMMON, mage.cards.f.FlourishingBloomKin.class));
         cards.add(new SetCardInfo("Forensic Gadgeteer", 57, Rarity.RARE, mage.cards.f.ForensicGadgeteer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forensic Gadgeteer", 342, Rarity.RARE, mage.cards.f.ForensicGadgeteer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forensic Researcher", 58, Rarity.UNCOMMON, mage.cards.f.ForensicResearcher.class));
