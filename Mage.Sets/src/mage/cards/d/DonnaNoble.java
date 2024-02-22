@@ -12,6 +12,7 @@ import mage.abilities.keyword.DoctorsCompanionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.game.Game;
+import mage.game.events.DamagedBatchForPermanentsEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -53,12 +54,11 @@ public final class DonnaNoble extends CardImpl {
     }
 }
 
-// Based on WrathfulRaptorsTriggeredAbility
+// Based on DealtDamageToSourceTriggeredAbility
 class DonnaNobleTriggeredAbility extends TriggeredAbilityImpl {
 
     DonnaNobleTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DonnaNobleEffect());
-        this.addTarget(new TargetOpponent());
     }
 
     private DonnaNobleTriggeredAbility(final DonnaNobleTriggeredAbility ability) {
@@ -72,31 +72,59 @@ class DonnaNobleTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PERMANENT;
+        return event.getType() == GameEvent.EventType.DAMAGED_BATCH_FOR_PERMANENTS;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent damagedPermanent = game.getPermanent(event.getTargetId());
-        int damage = event.getAmount();
-        if (damagedPermanent == null || damage < 1) {
+        this.getTargets().clear();
+        DamagedBatchForPermanentsEvent dEvent = (DamagedBatchForPermanentsEvent) event;
+        return checkTriggerThis(dEvent) || checkTriggerPaired(dEvent, game);
+    }
+
+    boolean checkTriggerThis(DamagedBatchForPermanentsEvent dEvent) {
+        this.getEffects().setValue("damageToThis", null);
+        int damage = dEvent
+                .getEvents()
+                .stream()
+                .filter(damagedEvent -> getSourceId().equals(damagedEvent.getTargetId()))
+                .mapToInt(GameEvent::getAmount)
+                .sum();
+        if (damage < 1) {
             return false;
         }
+        this.getEffects().setValue("damageToThis", damage);
+        this.addTarget(new TargetOpponent());
+        return true;
+    }
 
-        Permanent paired = null;
+    boolean checkTriggerPaired(DamagedBatchForPermanentsEvent dEvent, Game game) {
+
+        this.getEffects().setValue("damageToPaired", null);
+
+        Permanent paired;
         Permanent permanent = game.getPermanent(getSourceId());
         if (permanent != null && permanent.getPairedCard() != null) {
             paired = permanent.getPairedCard().getPermanent(game);
+            if (paired == null || paired.getPairedCard() == null || !paired.getPairedCard().equals(new MageObjectReference(permanent, game))) {
+                return false;
+            }
+        } else {
+            paired = null;
         }
-        boolean isPaired = paired != null && paired.getPairedCard() != null &&
-                paired.getPairedCard().equals(new MageObjectReference(permanent, game));
 
-        if (getSourceId().equals(event.getTargetId()) || (isPaired && paired.getId().equals(event.getTargetId()))){
-            this.getEffects().setValue("damagedPermanentUUID", event.getTargetId());
-            this.getEffects().setValue("damage", damage);
-            return true;
+        int damage = dEvent
+                .getEvents()
+                .stream()
+                .filter(damagedEvent -> paired != null && paired.getId().equals(damagedEvent.getTargetId()))
+                .mapToInt(GameEvent::getAmount)
+                .sum();
+        if (damage < 1) {
+            return false;
         }
-        return false;
+        this.getEffects().setValue("damageToPaired", damage);
+        this.addTarget(new TargetOpponent());
+        return true;
     }
 
     @Override
@@ -124,16 +152,28 @@ class DonnaNobleEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent damagedPermanent = game.getPermanent((UUID) getValue("damagedPermanentUUID"));
-        Integer damage = (Integer) getValue("damage");
-        if (damagedPermanent == null || damage == null) {
-            return false;
+
+        // Only resolve the targets we need.
+        int targetIdx = 0;
+        boolean damageApplied = false;
+
+        Integer[] damages = {
+                (Integer) getValue("damageToThis"),
+                (Integer) getValue("damageToPaired")
+        };
+
+        for (Integer damage : damages){
+            if (damage == null) {
+                continue;
+            }
+            UUID targetId = source.getTargets().get(targetIdx++).getFirstTarget();
+            Player player = game.getPlayer(targetId);
+            UUID sourceId = source.getSourcePermanentOrLKI(game).getId();
+            if (player != null && sourceId != null) {
+                damageApplied |= player.damage(damage, sourceId, source, game) > 0;
+            }
         }
-        UUID targetId = getTargetPointer().getFirst(game, source);
-        Player player = game.getPlayer(targetId);
-        if (player != null) {
-            return player.damage(damage, source.getSourcePermanentOrLKI(game).getId(), source, game) > 0;
-        }
-        return false;
+
+        return damageApplied;
     }
 }
