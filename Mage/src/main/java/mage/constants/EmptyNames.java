@@ -11,6 +11,8 @@ public enum EmptyNames {
     FACE_DOWN_CREATURE(""), // "Face down creature"
     FACE_DOWN_TOKEN(""); // "Face down token"
 
+    public static final String EMPTY_NAME_IN_LOGS = "face down object";
+
     private final String cardName;
 
     EmptyNames(String cardName) {

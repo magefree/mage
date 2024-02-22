@@ -50,8 +50,11 @@ public class BecomesColorTargetEffect extends ContinuousEffectImpl {
 
     @Override
     public void init(Ability source, Game game) {
+        super.init(source, game);
+
         Player controller = game.getPlayer(source.getControllerId());
         if (controller == null) {
+            discard();
             return;
         }
         if (setColor == null) {
@@ -65,8 +68,6 @@ public class BecomesColorTargetEffect extends ContinuousEffectImpl {
                 game.informPlayers(controller.getLogName() + " has chosen the color: " + setColor.toString());
             }
         }
-
-        super.init(source, game);
     }
 
     @Override
@@ -77,7 +78,7 @@ public class BecomesColorTargetEffect extends ContinuousEffectImpl {
         }
         if (setColor != null) {
             boolean objectFound = false;
-            for (UUID targetId : targetPointer.getTargets(game, source)) {
+            for (UUID targetId : getTargetPointer().getTargets(game, source)) {
                 MageObject targetObject = game.getObject(targetId);
                 if (targetObject != null) {
                     if (targetObject instanceof Spell || targetObject instanceof Permanent) {

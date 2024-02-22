@@ -141,7 +141,7 @@ class PrimordialMistCastFromExileEffect extends AsThoughEffectImpl {
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
         return source.isControlledBy(affectedControllerId)
-                && (game.getCard(targetPointer.getFirst(game, source)) != null)
-                && objectId == targetPointer.getFirst(game, source);
+                && (game.getCard(getTargetPointer().getFirst(game, source)) != null)
+                && objectId == getTargetPointer().getFirst(game, source);
     }
 }

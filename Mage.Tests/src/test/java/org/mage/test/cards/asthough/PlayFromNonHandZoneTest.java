@@ -2,6 +2,7 @@ package org.mage.test.cards.asthough;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.counters.CounterType;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBaseWithAIHelps;
@@ -20,12 +21,13 @@ public class PlayFromNonHandZoneTest extends CardTestPlayerBaseWithAIHelps {
         addCard(Zone.HAND, playerA, "Worldheart Phoenix");
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Worldheart Phoenix"); // can only be cast by {W}{U}{B}{R}{G}
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Worldheart Phoenix");
 
         setStopAt(1, PhaseStep.END_COMBAT);
         execute();
 
         assertPowerToughness(playerA, "Worldheart Phoenix", 2, 2);
+        assertCounterCount(playerA, "Worldheart Phoenix", CounterType.P1P1, 0);
     }
 
     @Test
@@ -73,6 +75,7 @@ public class PlayFromNonHandZoneTest extends CardTestPlayerBaseWithAIHelps {
         execute();
 
         assertPermanentCount(playerA, "Worldheart Phoenix", 1);
+        assertCounterCount(playerA, "Worldheart Phoenix", CounterType.P1P1, 2);
     }
 
     @Test

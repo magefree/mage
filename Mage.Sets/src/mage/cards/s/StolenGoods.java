@@ -58,7 +58,7 @@ class StolenGoodsEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player opponent = game.getPlayer(targetPointer.getFirst(game, source));
+        Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (opponent == null) {
             return false;
         }

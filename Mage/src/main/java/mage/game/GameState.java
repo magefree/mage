@@ -952,9 +952,11 @@ public class GameState implements Serializable, Copyable<GameState> {
 
         Map<ZoneChangeData, List<GameEvent>> eventsByKey = new HashMap<>();
         List<GameEvent> groupEvents = new LinkedList<>();
+        ZoneChangeBatchEvent batchEvent = new ZoneChangeBatchEvent();
         for (GameEvent event : events) {
             if (event instanceof ZoneChangeEvent) {
                 ZoneChangeEvent castEvent = (ZoneChangeEvent) event;
+                batchEvent.addEvent(castEvent);
                 ZoneChangeData key = new ZoneChangeData(
                         castEvent.getSource(),
                         castEvent.getSourceId(),
@@ -998,6 +1000,9 @@ public class GameState implements Serializable, Copyable<GameState> {
                         eventData.toZone);
                 groupEvents.add(event);
             }
+        }
+        if (!batchEvent.getEvents().isEmpty()) {
+            groupEvents.add(batchEvent);
         }
         return groupEvents;
     }

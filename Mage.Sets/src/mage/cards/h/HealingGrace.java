@@ -62,6 +62,7 @@ class HealingGraceEffect extends PreventionEffectImpl {
 
     @Override
     public void init(Ability source, Game game) {
+        super.init(source, game);
         this.targetSource.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), source, game);
         // be sure to note the target source's zcc, etc, if able.
         if (targetSource.getFirstTarget() != null) {

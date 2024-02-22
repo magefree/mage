@@ -6,14 +6,12 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.choices.ChoiceImpl;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.CardUtil;
-import java.util.LinkedHashSet;
-import java.util.Set;
+
 import java.util.UUID;
 
 /**
@@ -64,26 +62,8 @@ class TrainingGroundsEffect extends CostModificationEffectImpl {
         if (reduceMax <= 0) {
             return true;
         }
-        ChoiceImpl choice = new ChoiceImpl(true);
-        Set<String> set = new LinkedHashSet<>();
-
-        int reduce;
-        if (game.inCheckPlayableState()) {
-            reduce = reduceMax;
-        } else {
-            for (int i = 0; i <= reduceMax; i++) {
-                set.add(String.valueOf(i));
-            }
-            choice.setChoices(set);
-            choice.setMessage("Reduce ability cost");
-            if (!controller.choose(Outcome.Benefit, choice, game)) {
-                return false;
-            }
-            reduce = Integer.parseInt(choice.getChoice());
-        }
-        CardUtil.reduceCost(abilityToModify, reduce);
+        CardUtil.reduceCost(abilityToModify, reduceMax);
         return true;
-
     }
 
     @Override

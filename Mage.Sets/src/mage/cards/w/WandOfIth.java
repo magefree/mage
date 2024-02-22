@@ -58,7 +58,7 @@ class WandOfIthEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (player != null && !player.getHand().isEmpty()) {
             Cards revealed = new CardsImpl();

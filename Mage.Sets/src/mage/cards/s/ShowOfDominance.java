@@ -90,14 +90,14 @@ class ShowOfDominanceEffect extends OneShotEffect {
                     }
                 }
                 if (selectedCreature != null) {
-                    FixedTarget target = new FixedTarget(selectedCreature.getId(), game);
+                    FixedTarget blueprintTarget = new FixedTarget(selectedCreature.getId(), game);
 
                     Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance(4));
-                    effect.setTargetPointer(target);
+                    effect.setTargetPointer(blueprintTarget.copy());
                     effect.apply(game, source);
 
                     ContinuousEffect continuousEffect = new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn);
-                    continuousEffect.setTargetPointer(target);
+                    continuousEffect.setTargetPointer(blueprintTarget.copy());
                     game.addEffect(continuousEffect, source);
                     return true;
                 }

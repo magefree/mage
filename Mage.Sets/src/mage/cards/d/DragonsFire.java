@@ -186,7 +186,7 @@ class DragonsFireEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent targetedPermanent = game.getPermanent(targetPointer.getFirst(game, source));
+        Permanent targetedPermanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (targetedPermanent == null) {
             return false;
         }

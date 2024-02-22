@@ -89,7 +89,7 @@ class PyramidsEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
+        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (permanent == null) {
             return false;
         }
@@ -105,7 +105,7 @@ class PyramidsEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return event.getTargetId().equals(targetPointer.getFirst(game, source)) && !this.used;
+        return event.getTargetId().equals(getTargetPointer().getFirst(game, source)) && !this.used;
     }
 
 }

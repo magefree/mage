@@ -27,7 +27,7 @@ public class ReturnToHandChosenControlledPermanentEffect extends ReturnToHandCho
 
     @Override
     public boolean apply(Game game, Ability source) {
-        this.targetPointer = new FixedTarget(source.getControllerId());
+        this.setTargetPointer(new FixedTarget(source.getControllerId()));
         return super.apply(game, source);
     }
 

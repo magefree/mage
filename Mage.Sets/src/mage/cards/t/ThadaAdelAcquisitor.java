@@ -64,7 +64,7 @@ class ThadaAdelAcquisitorEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Player damagedPlayer = game.getPlayer(targetPointer.getFirst(game, source));
+        Player damagedPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (controller == null || damagedPlayer == null) {
             return false;
         }

@@ -24,7 +24,6 @@ import mage.players.Player;
 import mage.server.Main;
 import mage.server.User;
 import mage.server.managers.ManagerFactory;
-import mage.server.util.Splitter;
 import mage.util.MultiAmountMessage;
 import mage.utils.StreamUtils;
 import mage.utils.timer.PriorityTimer;
@@ -174,8 +173,8 @@ public class GameController implements GameCallback {
                                 timer.pause();
                                 break;
                         }
-                    } catch (MageException ex) {
-                        logger.fatal("Table event listener error ", ex);
+                    } catch (MageException e) {
+                        logger.fatal("Table event listener error: " + e, e);
                     }
                 }
         );
@@ -992,29 +991,24 @@ public class GameController implements GameCallback {
     }
 
     private void perform(UUID playerId, Command command, boolean informOthers) {
-        if (game.getPlayer(playerId).isGameUnderControl()) { // is the player controlling it's own turn
-            if (gameSessions.containsKey(playerId)) {
-                setupTimeout(playerId);
-                command.execute(playerId);
-            }
-            // TODO: if watcher disconnects then game freezes with active timer, must be fix for such use case
-            //  same for another player (can be fixed by super-duper connection)
-            if (informOthers) {
-                informOthers(playerId);
-            }
-        } else {
-            List<UUID> players = Splitter.split(game, playerId);
-            for (UUID uuid : players) {
-                if (gameSessions.containsKey(uuid)) {
-                    setupTimeout(uuid);
-                    command.execute(uuid);
-                }
-            }
-            // TODO: if watcher disconnects then game freeze with active timer, must be fix for such use case
-            //  same for another player (can be fixed by super-duper connection)
-            if (informOthers) {
-                informOthers(players);
-            }
+        Player player = game.getPlayer(playerId);
+        if (player == null) {
+            throw new IllegalArgumentException("Can't perform command for unknown player id: " + playerId);
+        }
+
+        Player realPlayerController = game.getPlayer(player.getTurnControlledBy());
+        if (realPlayerController == null) {
+            throw new IllegalArgumentException("Can't find real turn controller for player id: " + playerId);
+        }
+
+        if (gameSessions.containsKey(realPlayerController.getId())) {
+            setupTimeout(realPlayerController.getId());
+            command.execute(realPlayerController.getId());
+        }
+        // TODO: if watcher disconnects then game freezes with active timer, must be fix for such use case
+        //  same for another player (can be fixed by super-duper connection)
+        if (informOthers) {
+            informOthers(playerId);
         }
     }
 

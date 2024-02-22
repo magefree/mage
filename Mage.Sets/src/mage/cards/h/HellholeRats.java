@@ -68,7 +68,7 @@ class HellholeRatsEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         int damage = 0;
-        Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
+        Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (targetPlayer != null) {
             Cards cards = targetPlayer.discard(1, false, false, source, game);
             if (!cards.isEmpty()) {

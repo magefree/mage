@@ -100,10 +100,10 @@ class PossibilityStormEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
+        Spell spell = game.getStack().getSpell(getTargetPointer().getFirst(game, source));
         boolean noLongerOnStack = false; // spell was exiled already by another effect, for example NivMagus Elemental
         if (spell == null) {
-            spell = ((Spell) game.getLastKnownInformation(targetPointer.getFirst(game, source), Zone.STACK));
+            spell = ((Spell) game.getLastKnownInformation(getTargetPointer().getFirst(game, source), Zone.STACK));
             noLongerOnStack = true;
         }
         if (spell == null) {

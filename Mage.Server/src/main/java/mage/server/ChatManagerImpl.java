@@ -153,7 +153,7 @@ public class ChatManagerImpl implements ChatManager {
                         CardInfo cardInfo = CardRepository.instance.findCard(searchName, true);
                         if (cardInfo != null) {
                             String newMessagePart = GameLog.getColoredObjectIdName(
-                                    cardInfo.getCard().getColor(),
+                                    cardInfo.createCard().getColor(),
                                     UUID.randomUUID(),
                                     cardInfo.getName(),
                                     "",

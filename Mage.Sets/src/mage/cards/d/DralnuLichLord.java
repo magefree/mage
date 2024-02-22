@@ -116,7 +116,7 @@ class DralnuLichLordFlashbackEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card card = game.getCard(targetPointer.getFirst(game, source));
+        Card card = game.getCard(getTargetPointer().getFirst(game, source));
         if (card != null) {
             FlashbackAbility ability = new FlashbackAbility(card, card.getManaCost());
             ability.setSourceId(card.getId());

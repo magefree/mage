@@ -54,7 +54,7 @@ public class PutOnLibraryTargetEffect extends OneShotEffect {
         if (controller != null) {
             List<Card> cards = new ArrayList<>();
             List<Permanent> permanents = new ArrayList<>();
-            for (UUID targetId : targetPointer.getTargets(game, source)) {
+            for (UUID targetId : getTargetPointer().getTargets(game, source)) {
                 switch (game.getState().getZone(targetId)) {
                     case BATTLEFIELD:
                         Permanent permanent = game.getPermanent(targetId);

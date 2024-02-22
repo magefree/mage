@@ -79,7 +79,7 @@ class MentorEffect extends AddCountersTargetEffect {
             return false;
         }
 
-        Permanent mentoredPermanent = game.getPermanent(targetPointer.getFirst(game, source));
+        Permanent mentoredPermanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (mentoredPermanent == null) {
             return false;
         }

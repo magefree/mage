@@ -34,7 +34,7 @@ public final class RuinsRecluse extends CardImpl {
 
         // {3}{G}: Put a +1/+1 counter on Ruins Recluse.
         this.addAbility(new SimpleActivatedAbility(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new ManaCostsImpl("{3}{G}")
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new ManaCostsImpl<>("{3}{G}")
         ));
     }
 

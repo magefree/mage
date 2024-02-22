@@ -56,7 +56,7 @@ class PriceOfKnowledgeEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
+        Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (targetPlayer != null) {
             int xValue = targetPlayer.getHand().size();
             if (xValue > 0) {

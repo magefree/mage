@@ -99,7 +99,6 @@ class EchoingDeepsEffect extends OneShotEffect {
         CopyApplier applier = new EchoingDeepsApplier();
         applier.apply(game, newBluePrint, source, source.getSourceId());
         CopyEffect copyEffect = new CopyEffect(Duration.WhileOnBattlefield, newBluePrint, source.getSourceId());
-        copyEffect.newId();
         copyEffect.setApplier(applier);
         copyEffect.init(source, game);
         game.addEffect(copyEffect, source);
