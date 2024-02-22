@@ -151,6 +151,9 @@ class IntrudeOnTheMindEffect extends OneShotEffect {
             Target targetOpponent = new TargetOpponent(true);
             controller.chooseTarget(Outcome.Neutral, targetOpponent, source, game);
             opponent = game.getPlayer(targetOpponent.getFirstTarget());
+            if (opponent == null) {
+                return null;
+            }
             game.informPlayers(controller.getLogName() + " chose " + opponent.getLogName() + " to choose the piles");
         }
         return opponent;
