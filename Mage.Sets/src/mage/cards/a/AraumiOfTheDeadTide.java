@@ -68,7 +68,7 @@ class AraumiOfTheDeadTideEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card card = game.getCard(targetPointer.getFirst(game, source));
+        Card card = game.getCard(getTargetPointer().getFirst(game, source));
         if (card == null) {
             return false;
         }

@@ -57,6 +57,7 @@ class RideTheAvalancheAsThoughEffect extends AsThoughEffectImpl {
 
     @Override
     public void init(Ability source, Game game) {
+        super.init(source, game);
         RideTheAvalancheWatcher.addPlayer(source.getControllerId(), game);
     }
 

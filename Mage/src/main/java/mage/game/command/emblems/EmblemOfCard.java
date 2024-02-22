@@ -44,7 +44,7 @@ public final class EmblemOfCard extends Emblem {
                 .orElseGet(() -> found.stream()
                         .findFirst()
                         .orElseThrow(() -> new IllegalArgumentException("No real card for " + infoTypeForError + " " + cardName)))
-                .getCard();
+                .createCard();
     }
     
     public static Card cardFromDeckInfo(DeckCardInfo info) {

@@ -20,6 +20,7 @@ public final class RavnicaClueEdition extends ExpansionSet {
         this.hasBasicLands = true;
         this.hasBoosters = false;
 
+        cards.add(new SetCardInfo("Aegis of the Legion", 22, Rarity.RARE, mage.cards.a.AegisOfTheLegion.class));
         cards.add(new SetCardInfo("Affectionate Indrik", 155, Rarity.UNCOMMON, mage.cards.a.AffectionateIndrik.class));
         cards.add(new SetCardInfo("Afterlife Insurance", 23, Rarity.UNCOMMON, mage.cards.a.AfterlifeInsurance.class));
         cards.add(new SetCardInfo("Ajani's Pridemate", 52, Rarity.UNCOMMON, mage.cards.a.AjanisPridemate.class));
@@ -142,6 +143,7 @@ public final class RavnicaClueEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Light Up the Stage", 140, Rarity.UNCOMMON, mage.cards.l.LightUpTheStage.class));
         cards.add(new SetCardInfo("Lightning Bolt", 141, Rarity.UNCOMMON, mage.cards.l.LightningBolt.class));
         cards.add(new SetCardInfo("Living Lightning", 142, Rarity.UNCOMMON, mage.cards.l.LivingLightning.class));
+        cards.add(new SetCardInfo("Lonis, Genetics Expert", 37, Rarity.RARE, mage.cards.l.LonisGeneticsExpert.class));
         cards.add(new SetCardInfo("Lounge", 19, Rarity.UNCOMMON, mage.cards.l.Lounge.class));
         cards.add(new SetCardInfo("Martial Impetus", 65, Rarity.UNCOMMON, mage.cards.m.MartialImpetus.class));
         cards.add(new SetCardInfo("Masked Blackguard", 115, Rarity.COMMON, mage.cards.m.MaskedBlackguard.class));
@@ -192,6 +194,7 @@ public final class RavnicaClueEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Sage's Row Savant", 97, Rarity.COMMON, mage.cards.s.SagesRowSavant.class));
         cards.add(new SetCardInfo("Sauroform Hybrid", 173, Rarity.COMMON, mage.cards.s.SauroformHybrid.class));
         cards.add(new SetCardInfo("Scuttlegator", 206, Rarity.COMMON, mage.cards.s.Scuttlegator.class));
+        cards.add(new SetCardInfo("Scuttling Sentinel", 42, Rarity.UNCOMMON, mage.cards.s.ScuttlingSentinel.class));
         cards.add(new SetCardInfo("Secret Passage", 20, Rarity.UNCOMMON, mage.cards.s.SecretPassage.class));
         cards.add(new SetCardInfo("Selesnya Guildgate", 245, Rarity.COMMON, mage.cards.s.SelesnyaGuildgate.class));
         cards.add(new SetCardInfo("Selesnya Guildmage", 207, Rarity.UNCOMMON, mage.cards.s.SelesnyaGuildmage.class));
@@ -200,7 +203,7 @@ public final class RavnicaClueEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Seller of Songbirds", 72, Rarity.COMMON, mage.cards.s.SellerOfSongbirds.class));
         cards.add(new SetCardInfo("Senator Peacock", 2, Rarity.RARE, mage.cards.s.SenatorPeacock.class));
         cards.add(new SetCardInfo("Seraph of the Scales", 208, Rarity.MYTHIC, mage.cards.s.SeraphOfTheScales.class));
-        cards.add(new SetCardInfo("Shiny Impetus", 147, Rarity.UNCOMMON, mage.cards.s.ShinyImpetus.class));
+        cards.add(new SetCardInfo("Shiny Impetus", 147, Rarity.COMMON, mage.cards.s.ShinyImpetus.class));
         cards.add(new SetCardInfo("Simic Growth Chamber", 247, Rarity.COMMON, mage.cards.s.SimicGrowthChamber.class));
         cards.add(new SetCardInfo("Simic Guildgate", 248, Rarity.COMMON, mage.cards.s.SimicGuildgate.class));
         cards.add(new SetCardInfo("Simic Signet", 228, Rarity.COMMON, mage.cards.s.SimicSignet.class));
@@ -219,6 +222,7 @@ public final class RavnicaClueEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Street Spasm", 150, Rarity.UNCOMMON, mage.cards.s.StreetSpasm.class));
         cards.add(new SetCardInfo("Study", 21, Rarity.UNCOMMON, mage.cards.s.Study.class));
         cards.add(new SetCardInfo("Stunt Double", 101, Rarity.RARE, mage.cards.s.StuntDouble.class));
+        cards.add(new SetCardInfo("Sumala Rumblers", 45, Rarity.UNCOMMON, mage.cards.s.SumalaRumblers.class));
         cards.add(new SetCardInfo("Sunhome Stalwart", 73, Rarity.UNCOMMON, mage.cards.s.SunhomeStalwart.class));
         cards.add(new SetCardInfo("Supreme Verdict", 211, Rarity.RARE, mage.cards.s.SupremeVerdict.class));
         cards.add(new SetCardInfo("Swamp", 262, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));

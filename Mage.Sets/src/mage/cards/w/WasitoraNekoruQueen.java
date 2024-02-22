@@ -77,7 +77,7 @@ class WasitoraNekoruQueenEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player damagedPlayer = game.getPlayer(targetPointer.getFirst(game, source));
+        Player damagedPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
         if (damagedPlayer != null && controller != null) {
             TargetSacrifice target = new TargetSacrifice(StaticFilters.FILTER_PERMANENT_CREATURE);

@@ -54,9 +54,9 @@ class NightcreepLandEffect extends BecomesBasicLandTargetEffect {
 
     @Override
     public void init(Ability source, Game game) {
-        super.init(source, game);
         List<Permanent> targets = new ArrayList<>(game.getBattlefield().getActivePermanents(StaticFilters.FILTER_LAND, source.getControllerId(), source, game));
         this.setTargetPointer(new FixedTargets(targets, game));
+        super.init(source, game); // must call at the end due target pointer setup
     }
 
     @Override
@@ -78,9 +78,9 @@ class NightcreepCreatureEffect extends BecomesColorTargetEffect {
 
     @Override
     public void init(Ability source, Game game) {
-        super.init(source, game);
         List<Permanent> targets = new ArrayList<>(game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source, game));
         this.setTargetPointer(new FixedTargets(targets, game));
+        super.init(source, game); // must call at the end due target pointer setup
     }
 
     @Override

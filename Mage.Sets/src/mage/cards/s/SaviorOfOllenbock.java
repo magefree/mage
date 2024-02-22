@@ -13,12 +13,15 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
+import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.stack.StackAbility;
+import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.common.TargetCardInGraveyardBattlefieldOrStack;
 import mage.util.CardUtil;
@@ -86,11 +89,27 @@ class SaviorOfOllenbockTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.TRAINED_CREATURE;
+        return event.getType() == GameEvent.EventType.COUNTER_ADDED;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
+        // 20240202 - 702.149c
+        // Some creatures with training have abilities that trigger when they train.
+        // "When this creature trains" means "When a resolving training ability puts a +1/+1 counter on this creature."
+        if (!event.getData().equals(CounterType.P1P1.getName())) {
+            return false;
+        }
+
+        StackObject stackObject = game.getStack().getStackObject(event.getSourceId());
+        if (!(stackObject instanceof StackAbility)) {
+            return false;
+        }
+        Ability ability = stackObject.getStackAbility();
+        if (!(ability instanceof TrainingAbility)) {
+            return false;
+        }
+
         return event.getTargetId().equals(getSourceId());
     }
 

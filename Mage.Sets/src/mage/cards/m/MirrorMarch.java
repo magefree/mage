@@ -77,7 +77,7 @@ class MirrorMarchEffect extends OneShotEffect {
             CreateTokenCopyTargetEffect effect
                     = new CreateTokenCopyTargetEffect(player.getId(), null, true, counter);
             effect.setUseLKI(true);
-            effect.setTargetPointer(targetPointer);
+            effect.setTargetPointer(this.getTargetPointer().copy());
             effect.apply(game, source);
             effect.exileTokensCreatedAtNextEndStep(game, source);
         }

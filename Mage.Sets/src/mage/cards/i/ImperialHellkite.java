@@ -36,7 +36,7 @@ public final class ImperialHellkite extends CardImpl {
         
         // When Imperial Hellkite is turned face up, you may search your library for a Dragon card, reveal it, and put it into your hand. If you do, shuffle your library.
         Effect effect = new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0, 1, new FilterBySubtypeCard(SubType.DRAGON)), true);
-        effect.setText("you may search your library for a Dragon card, reveal it, and put it into your hand. If you do, shuffle");
+        effect.setText("you may search your library for a Dragon card, reveal it, put it into your hand, then shuffle");
         this.addAbility(new TurnedFaceUpSourceTriggeredAbility(effect));
     }
 

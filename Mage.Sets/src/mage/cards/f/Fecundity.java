@@ -54,9 +54,9 @@ class FecundityEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = (Permanent) game.getLastKnownInformation(this.getTargetPointer()
-                // Card can be moved again (e.g. commander replacement) so we need the row id from fixed target to check
-                .getFixedTarget(game, source).getTarget(), Zone.BATTLEFIELD);
+        // card can be moved again (e.g. commander replacement) so we need the row id from fixed target to check
+        // TODO: bugged with commander replacement effects?
+        Permanent permanent = (Permanent) game.getLastKnownInformation(this.getTargetPointer().getFirst(game, source), Zone.BATTLEFIELD);
         if (permanent != null) {
             Player controller = game.getPlayer(permanent.getControllerId());
             if (controller != null) {

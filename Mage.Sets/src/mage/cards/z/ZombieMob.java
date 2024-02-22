@@ -1,27 +1,27 @@
-
 package mage.cards.z;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 
-/**
- *
- * @author tcontis
- */
+import java.util.UUID;
 
+/**
+ * @author xenohedron
+ */
 public final class ZombieMob extends CardImpl {
 
     public ZombieMob(UUID ownerId, CardSetInfo setInfo) {
@@ -31,8 +31,12 @@ public final class ZombieMob extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Zombie Mob enters the battlefield with a +1/+1 counter on it for each creature card in your graveyard.
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(
+                CounterType.P1P1.createInstance(0), new CardsInControllerGraveyardCount(StaticFilters.FILTER_CARD_CREATURE), false
+        ), "with a +1/+1 counter on it for each creature card in your graveyard"));
+
         // When Zombie Mob enters the battlefield, exile all creature cards from your graveyard.
-        this.addAbility(new EntersBattlefieldAbility(new ZombieMobEffect(), "with a +1/+1 counter on it for each creature card in your graveyard. When {this} enters the battlefield, exile all creature cards from your graveyard."));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new ZombieMobExileEffect()));
 
     }
 
@@ -46,42 +50,30 @@ public final class ZombieMob extends CardImpl {
     }
 }
 
-class ZombieMobEffect extends OneShotEffect {
+class ZombieMobExileEffect extends OneShotEffect {
 
-    private static final FilterCard filter = new FilterCard();
-    static {
-        filter.add(CardType.CREATURE.getPredicate());
+    ZombieMobExileEffect() {
+        super(Outcome.Benefit);
+        staticText = "exile all creature cards from your graveyard";
     }
 
-    public ZombieMobEffect() {
-        super(Outcome.BoostCreature);
-        staticText = "{this} enters the battlefield with a +1/+1 counter on it for each creature card in your graveyard. When {this} enters the battlefield, exile all creature cards from your graveyard.";
-    }
-
-    private ZombieMobEffect(final ZombieMobEffect effect) {
+    private ZombieMobExileEffect(final ZombieMobExileEffect effect) {
         super(effect);
+    }
+
+    @Override
+    public ZombieMobExileEffect copy() {
+        return new ZombieMobExileEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanentEntering(source.getSourceId());
-        if (permanent != null && controller != null) {
-            int amount = 0;
-            amount += controller.getGraveyard().count(filter, game);
-            if (amount > 0) {
-                permanent.addCounters(CounterType.P1P1.createInstance(amount), source.getControllerId(), source, game);
-            }
-            Cards cards = new CardsImpl(controller.getGraveyard().getCards(filter, game));
-            controller.moveCards(cards, Zone.EXILED, source, game);
-            return true;
+        if (controller == null) {
+            return false;
         }
-        return false;
+        Cards cards = new CardsImpl(controller.getGraveyard().getCards(StaticFilters.FILTER_CARD_CREATURE, game));
+        controller.moveCards(cards, Zone.EXILED, source, game);
+        return true;
     }
-
-    @Override
-    public ZombieMobEffect copy() {
-        return new ZombieMobEffect(this);
-    }
-
 }

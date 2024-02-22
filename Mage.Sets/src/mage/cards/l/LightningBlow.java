@@ -28,7 +28,7 @@ public final class LightningBlow extends CardImpl {
 
         // Draw a card at the beginning of the next turn's upkeep.
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(
-                new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1), Duration.OneUse), false));
+                new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1), Duration.OneUse), false).concatBy("<br>"));
     }
 
     private LightningBlow(final LightningBlow card) {

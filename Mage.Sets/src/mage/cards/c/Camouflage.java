@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import java.util.ArrayList;
@@ -19,9 +18,9 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.PhaseStep;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.permanent.PermanentInListPredicate;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.PermanentReferenceInCollectionPredicate;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
 import mage.game.events.BlockerDeclaredEvent;
@@ -119,7 +118,7 @@ class CamouflageEffect extends ContinuousRuleModifyingEffectImpl {
                                         spentBlockers.add(possibleBlocker);
                                     }
                                 }
-                                filter.add(Predicates.not(new PermanentInListPredicate(spentBlockers)));
+                                filter.add(Predicates.not(new PermanentReferenceInCollectionPredicate(spentBlockers, game)));
                             }
                             if (defender.chooseUse(Outcome.Neutral, "Make a new blocker pile? If not, all remaining piles stay empty. (remaining piles: " + (attackerCount - masterList.size()) + ')', source, game)) {
                                 Target target = new TargetControlledCreaturePermanent(0, Integer.MAX_VALUE, filter, true);

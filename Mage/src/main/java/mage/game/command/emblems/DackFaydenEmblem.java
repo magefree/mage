@@ -118,7 +118,7 @@ class DackFaydenEmblemTriggeredAbility extends TriggeredAbilityImpl {
 
 class DackFaydenEmblemEffect extends ContinuousEffectImpl {
 
-    protected FixedTargets fixedTargets;
+    protected FixedTargets fixedTargets = new FixedTargets(new ArrayList<>());
 
     DackFaydenEmblemEffect() {
         super(Duration.EndOfGame, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
@@ -127,7 +127,7 @@ class DackFaydenEmblemEffect extends ContinuousEffectImpl {
 
     DackFaydenEmblemEffect(final DackFaydenEmblemEffect effect) {
         super(effect);
-        this.fixedTargets = effect.fixedTargets;
+        this.fixedTargets = effect.fixedTargets.copy();
     }
 
     @Override
@@ -147,6 +147,6 @@ class DackFaydenEmblemEffect extends ContinuousEffectImpl {
     }
 
     public void setTargets(List<Permanent> targetedPermanents, Game game) {
-        this.fixedTargets = new FixedTargets(targetedPermanents, game);
+        this.fixedTargets = new FixedTargets(new ArrayList<>(targetedPermanents), game);
     }
 }

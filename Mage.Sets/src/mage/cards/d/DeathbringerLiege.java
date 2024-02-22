@@ -82,7 +82,7 @@ class DeathbringerLiegeEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent p = game.getPermanent(targetPointer.getFirst(game, source));
+        Permanent p = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (p != null && p.isTapped()) {
             p.destroy(source, game, false);
         }

@@ -75,6 +75,7 @@ class ProtectiveSphereEffect extends PreventionEffectImpl {
 
     @Override
     public void init(Ability source, Game game) {
+        super.init(source, game);
         target.withNotTarget(true);
         target.setRequired(false);
         Player controller = game.getPlayer(source.getControllerId());
@@ -89,7 +90,6 @@ class ProtectiveSphereEffect extends PreventionEffectImpl {
                             + source.getManaCostsToPay().getUsedManaToPay()), game);
         }
         this.target.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), source, game);
-        super.init(source, game);
     }
 
     @Override

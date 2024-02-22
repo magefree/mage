@@ -92,7 +92,7 @@ class EchoMageEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
+        Spell spell = game.getStack().getSpell(getTargetPointer().getFirst(game, source));
         if (spell != null) {
             spell.createCopyOnStack(game, source, source.getControllerId(), true, 2);
             return true;

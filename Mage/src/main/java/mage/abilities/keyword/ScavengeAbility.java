@@ -72,7 +72,7 @@ class ScavengeEffect extends OneShotEffect {
             int count = card.getPower().getValue();
             if (count > 0) {
                 Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance(count));
-                effect.setTargetPointer(getTargetPointer());
+                effect.setTargetPointer(this.getTargetPointer().copy());
                 return effect.apply(game, source);
             }
         }

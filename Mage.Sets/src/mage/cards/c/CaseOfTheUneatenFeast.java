@@ -37,7 +37,12 @@ import mage.watchers.common.PlayerGainedLifeWatcher;
  */
 public final class CaseOfTheUneatenFeast extends CardImpl {
 
-    private static final Condition condition = new YouGainedLifeCondition(ComparisonType.MORE_THAN, 4);
+    private static final Condition condition = new YouGainedLifeCondition(ComparisonType.MORE_THAN, 4){
+        @Override
+        public String toString() {
+            return "you've gained 5 or more life this turn";
+        }
+    };
 
     public CaseOfTheUneatenFeast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{W}");

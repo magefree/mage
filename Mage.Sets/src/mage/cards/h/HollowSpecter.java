@@ -70,7 +70,7 @@ class HollowSpecterEffect extends OneShotEffect {
         if (targetPlayer != null && controller != null && controller.chooseUse(Outcome.Benefit, "Pay {X}?", source, game)) {
             int payCount = ManaUtil.playerPaysXGenericMana(true, "Hollow Specter", controller, source, game);
             if (payCount > 0) {
-                return new DiscardCardYouChooseTargetEffect(payCount).setTargetPointer(targetPointer).apply(game, source);
+                return new DiscardCardYouChooseTargetEffect(payCount).setTargetPointer(this.getTargetPointer().copy()).apply(game, source);
             }
             return true;
         }

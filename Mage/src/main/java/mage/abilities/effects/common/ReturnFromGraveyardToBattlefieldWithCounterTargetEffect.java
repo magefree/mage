@@ -2,15 +2,9 @@ package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.effects.ReplacementEffectImpl;
-import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.counters.Counter;
+import mage.counters.Counters;
 import mage.game.Game;
-import mage.game.events.EntersTheBattlefieldEvent;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
-import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
 
@@ -19,27 +13,24 @@ import java.util.UUID;
  */
 public class ReturnFromGraveyardToBattlefieldWithCounterTargetEffect extends ReturnFromGraveyardToBattlefieldTargetEffect {
 
-    private final Counter counter;
-    private final boolean additional;
+    private final Counters counters;
+    private final String counterText;
 
     public ReturnFromGraveyardToBattlefieldWithCounterTargetEffect(Counter counter) {
         this(counter, false);
     }
 
     public ReturnFromGraveyardToBattlefieldWithCounterTargetEffect(Counter counter, boolean additional) {
-        this(counter, additional, false);
-    }
-
-    public ReturnFromGraveyardToBattlefieldWithCounterTargetEffect(Counter counter, boolean additional, boolean underOwnerControl) {
-        super(false, false, underOwnerControl);
-        this.counter = counter;
-        this.additional = additional;
+        super(false);
+        this.counters = new Counters();
+        this.counters.addCounter(counter);
+        this.counterText = makeText(counter, additional);
     }
 
     protected ReturnFromGraveyardToBattlefieldWithCounterTargetEffect(final ReturnFromGraveyardToBattlefieldWithCounterTargetEffect effect) {
         super(effect);
-        this.counter = effect.counter.copy();
-        this.additional = effect.additional;
+        this.counters = effect.counters.copy();
+        this.counterText = effect.counterText;
     }
 
     @Override
@@ -50,20 +41,13 @@ public class ReturnFromGraveyardToBattlefieldWithCounterTargetEffect extends Ret
     @Override
     public boolean apply(Game game, Ability source) {
         for (UUID targetId : getTargetPointer().getTargets(game, source)) {
-            AddCounterTargetReplacementEffect counterEffect = new AddCounterTargetReplacementEffect(counter);
-            counterEffect.setTargetPointer(new FixedTarget(targetId, game));
-            game.addEffect(counterEffect, source);
+            game.setEnterWithCounters(targetId, counters.copy());
         }
         return super.apply(game, source);
     }
 
-    @Override
-    public String getText(Mode mode) {
-        if (staticText != null && !staticText.isEmpty()) {
-            return staticText;
-        }
-        StringBuilder sb = new StringBuilder(super.getText(mode));
-        sb.append(" with ");
+    private String makeText(Counter counter, boolean additional) {
+        StringBuilder sb = new StringBuilder(" with ");
         if (additional) {
             if (counter.getCount() == 1) {
                 sb.append("an");
@@ -82,52 +66,14 @@ public class ReturnFromGraveyardToBattlefieldWithCounterTargetEffect extends Ret
         if (counter.getCount() != 1) {
             sb.append('s');
         }
-        if (targetPointer.isPlural(mode.getTargets())) {
-            sb.append(" on them");
-        } else {
-            sb.append(" on it");
-        }
         return sb.toString();
     }
-}
-
-class AddCounterTargetReplacementEffect extends ReplacementEffectImpl {
-
-    private final Counter counter;
-
-    public AddCounterTargetReplacementEffect(Counter counter) {
-        super(Duration.EndOfStep, Outcome.BoostCreature);
-        this.counter = counter;
-    }
-
-    private AddCounterTargetReplacementEffect(final AddCounterTargetReplacementEffect effect) {
-        super(effect);
-        this.counter = effect.counter.copy();
-    }
 
     @Override
-    public AddCounterTargetReplacementEffect copy() {
-        return new AddCounterTargetReplacementEffect(this);
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        return getTargetPointer().getTargets(game, source).contains(event.getTargetId());
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent creature = ((EntersTheBattlefieldEvent) event).getTarget();
-        if (creature == null) {
-            return false;
+    public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
         }
-        creature.addCounters(counter.copy(), source.getControllerId(), source, game, event.getAppliedEffects());
-        discard();
-        return false;
+        return super.getText(mode) + counterText + (getTargetPointer().isPlural(mode.getTargets()) ? " on them" : " on it");
     }
 }

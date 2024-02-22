@@ -39,7 +39,7 @@ public class ReturnToHandTargetEffect extends OneShotEffect {
         }
         List<UUID> copyIds = new ArrayList<>();
         Set<Card> cards = new LinkedHashSet<>();
-        for (UUID targetId : targetPointer.getTargets(game, source)) {
+        for (UUID targetId : getTargetPointer().getTargets(game, source)) {
             MageObject mageObject = game.getObject(targetId);
             if (mageObject != null) {
                 if (mageObject instanceof Spell

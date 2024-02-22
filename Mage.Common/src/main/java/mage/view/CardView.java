@@ -398,11 +398,20 @@ public class CardView extends SimpleCardView {
             this.manaCostLeftStr = mainCard.getLeftHalfCard().getManaCostSymbols();
             this.manaCostRightStr = mainCard.getRightHalfCard().getManaCostSymbols();
         } else if (card instanceof AdventureCard) {
+            this.isSplitCard = true;
             AdventureCard adventureCard = ((AdventureCard) card);
+            leftSplitName = adventureCard.getName();
+            leftSplitCostsStr = String.join("", adventureCard.getManaCostSymbols());
+            leftSplitRules = adventureCard.getSharedRules(game);
+            leftSplitTypeLine = getCardTypeLine(game, adventureCard);
             AdventureCardSpell adventureCardSpell = adventureCard.getSpellCard();
+            rightSplitName = adventureCardSpell.getName();
+            rightSplitCostsStr = String.join("", adventureCardSpell.getManaCostSymbols());
+            rightSplitRules = adventureCardSpell.getRules(game);
+            rightSplitTypeLine = getCardTypeLine(game, adventureCardSpell);
             fullCardName = adventureCard.getName() + MockCard.ADVENTURE_NAME_SEPARATOR + adventureCardSpell.getName();
-            this.manaCostLeftStr = adventureCardSpell.getManaCostSymbols();
-            this.manaCostRightStr = adventureCard.getManaCostSymbols();
+            this.manaCostLeftStr = adventureCard.getManaCostSymbols();
+            this.manaCostRightStr = adventureCardSpell.getManaCostSymbols();
         } else if (card instanceof MockCard) {
             // deck editor cards
             fullCardName = ((MockCard) card).getFullName(true);
@@ -573,6 +582,14 @@ public class CardView extends SimpleCardView {
                 }
 
             }
+        }
+
+        // Cases, classes and sagas have portrait art
+        if (card.getSubtype().contains(SubType.CASE) ||
+                card.getSubtype().contains(SubType.CLASS)) {
+            artRect = ArtRect.FULL_LENGTH_LEFT;
+        } else if (card.getSubtype().contains(SubType.SAGA)) {
+            artRect = ArtRect.FULL_LENGTH_RIGHT;
         }
 
         // Frame color
@@ -786,6 +803,12 @@ public class CardView extends SimpleCardView {
             this.rarity = Rarity.SPECIAL;
             this.rules = new ArrayList<>();
             this.rules.add(stackAbility.getRule());
+        }
+        if (object.getSubtype().contains(SubType.CASE) ||
+                object.getSubtype().contains(SubType.CLASS)) {
+            artRect = ArtRect.FULL_LENGTH_LEFT;
+        } else if (object.getSubtype().contains(SubType.SAGA)) {
+            artRect = ArtRect.FULL_LENGTH_RIGHT;
         }
         // Frame color
         this.frameColor = object.getFrameColor(game).copy();

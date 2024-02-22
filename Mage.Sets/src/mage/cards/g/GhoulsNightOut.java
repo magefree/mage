@@ -123,7 +123,7 @@ class GhoulsNightOutTypeChangingEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Layer layer, SubLayer subLayer, Ability source, Game game) {
         boolean isActive = false;
-        for (UUID permId : targetPointer.getTargets(game, source)) {
+        for (UUID permId : getTargetPointer().getTargets(game, source)) {
             Permanent permanent = game.getPermanent(permId);
             if (permanent != null) {
                 switch (layer) {

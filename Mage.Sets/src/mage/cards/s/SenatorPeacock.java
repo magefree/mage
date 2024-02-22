@@ -15,7 +15,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -24,8 +23,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class SenatorPeacock extends CardImpl {
-
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.CLUE, "a Clue");
 
     public SenatorPeacock(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
@@ -48,7 +45,7 @@ public final class SenatorPeacock extends CardImpl {
         this.addAbility(ability);
 
         // Whenever you sacrifice a Clue, target creature can't be blocked this turn.
-        ability = new SacrificePermanentTriggeredAbility(new CantBeBlockedTargetEffect(), filter);
+        ability = new SacrificePermanentTriggeredAbility(new CantBeBlockedTargetEffect(), StaticFilters.FILTER_CONTROLLED_CLUE);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

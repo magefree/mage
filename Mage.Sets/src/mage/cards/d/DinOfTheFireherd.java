@@ -78,7 +78,7 @@ class DinOfTheFireherdEffect extends OneShotEffect {
         int blackCreaturesControllerControls = game.getBattlefield().countAll(blackCreatureFilter, source.getControllerId(), game);
         int redCreaturesControllerControls = game.getBattlefield().countAll(redCreatureFilter, source.getControllerId(), game);
 
-        Player targetOpponent = game.getPlayer(targetPointer.getFirst(game, source));
+        Player targetOpponent = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (targetOpponent != null) {
             Effect effect = new SacrificeEffect(new FilterControlledCreaturePermanent(), blackCreaturesControllerControls, "Target Opponent");
             effect.setTargetPointer(new FixedTarget(targetOpponent.getId()));

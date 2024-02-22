@@ -110,6 +110,8 @@ class ChangeCreatureTypeTargetEffect extends ContinuousEffectImpl {
 
     @Override
     public void init(Ability source, Game game) {
+        super.init(source, game);
+
         Player controller = game.getPlayer(source.getControllerId());
         if (controller == null) {
             return;
@@ -126,8 +128,6 @@ class ChangeCreatureTypeTargetEffect extends ContinuousEffectImpl {
                 game.informPlayers(controller.getLogName() + " has chosen the creature type: " + fromSubType.toString());
             }
         }
-
-        super.init(source, game);
     }
 
     @Override
@@ -140,7 +140,7 @@ class ChangeCreatureTypeTargetEffect extends ContinuousEffectImpl {
             throw new UnsupportedOperationException("No subtype to change set");
         }
         boolean objectFound = false;
-        for (UUID targetId : targetPointer.getTargets(game, source)) {
+        for (UUID targetId : getTargetPointer().getTargets(game, source)) {
             MageObject targetObject = game.getObject(targetId);
             if (targetObject != null) {
                 objectFound = true;

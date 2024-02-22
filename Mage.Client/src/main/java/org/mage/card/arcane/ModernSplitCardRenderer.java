@@ -18,6 +18,14 @@ import java.util.List;
  */
 public class ModernSplitCardRenderer extends ModernCardRenderer {
 
+    public static final Color ADVENTURE_BOX_WHITE = new Color(135, 122, 103);
+    public static final Color ADVENTURE_BOX_BLUE = new Color(2, 96, 131);
+    public static final Color ADVENTURE_BOX_BLACK = new Color(52, 44, 46);
+    public static final Color ADVENTURE_BOX_RED = new Color(126, 61, 42);
+    public static final Color ADVENTURE_BOX_GREEN = new Color(9, 51, 30);
+    public static final Color ADVENTURE_BOX_GOLD = new Color(118, 92, 42);
+    public static final Color ADVENTURE_BOX_COLORLESS = new Color(131, 133, 135);
+
     static String RULES_MARK_FUSE = "Fuse";
     static String RULES_MARK_AFTERMATH = "Aftermath";
 
@@ -29,8 +37,8 @@ public class ModernSplitCardRenderer extends ModernCardRenderer {
         String typeLineString;
         String manaCostString;
         ObjectColor color;
-        List<TextboxRule> rules = new ArrayList<>();
-        List<TextboxRule> keywords = new ArrayList<>();
+        ArrayList<TextboxRule> rules = new ArrayList<>();
+        ArrayList<TextboxRule> keywords = new ArrayList<>();
     }
 
     private static final List<CardType> ONLY_LAND_TYPE = Arrays.asList(CardType.LAND);
@@ -47,6 +55,13 @@ public class ModernSplitCardRenderer extends ModernCardRenderer {
     private boolean isFuse = false;
     private boolean isAftermath = false;
 
+    private static String trimAdventure(String rule) {
+        if (rule.startsWith("Adventure")) {
+            return rule.substring(rule.lastIndexOf("&mdash;") + 8);
+        }
+        return rule;
+    }
+
     public ModernSplitCardRenderer(CardView view) {
         super(view);
 
@@ -56,7 +71,15 @@ public class ModernSplitCardRenderer extends ModernCardRenderer {
         rightHalf.color = new ObjectColor(cardView.getRightSplitCostsStr());
         leftHalf.color = new ObjectColor(cardView.getLeftSplitCostsStr());
 
-        parseRules(view.getRightSplitRules(), rightHalf.keywords, rightHalf.rules);
+        if (isAdventure()) {
+            List<String> trimmedRules = new ArrayList<>();
+            for (String rule : view.getRightSplitRules()) {
+                trimmedRules.add(trimAdventure(rule));
+            }
+            parseRules(trimmedRules, rightHalf.keywords, rightHalf.rules);
+        } else {
+            parseRules(view.getRightSplitRules(), rightHalf.keywords, rightHalf.rules);
+        }
         parseRules(view.getLeftSplitRules(), leftHalf.keywords, leftHalf.rules);
 
         rightHalf.typeLineString = cardView.getRightSplitTypeLine();
@@ -71,7 +94,12 @@ public class ModernSplitCardRenderer extends ModernCardRenderer {
         // It's easier for rendering to swap the card halves here because for aftermath cards
         // they "rotate" in opposite directions making consquence and normal split cards
         // have the "right" vs "left" as the top half.
-        if (!isAftermath()) {
+        // Adventures are treated differently and not rotated at all.
+        if (isAdventure()) {
+            manaCostString = leftHalf.manaCostString;
+            textboxKeywords = leftHalf.keywords;
+            textboxRules = leftHalf.rules;
+        } else if (!isAftermath()) {
             HalfCardProps tmp = leftHalf;
             leftHalf = rightHalf;
             rightHalf = tmp;
@@ -131,6 +159,8 @@ public class ModernSplitCardRenderer extends ModernCardRenderer {
     protected void drawBackground(Graphics2D g) {
         if (cardView.isFaceDown()) {
             drawCardBack(g);
+        } if (isAdventure()) {
+            super.drawBackground(g);
         } else {
             { // Left half background (top of the card)
                 // Set texture to paint the left with
@@ -174,7 +204,9 @@ public class ModernSplitCardRenderer extends ModernCardRenderer {
 
     @Override
     protected void drawArt(Graphics2D g) {
-        if (artImage != null && !cardView.isFaceDown()) {
+        if (isAdventure) {
+            super.drawArt(g);
+        } else if (artImage != null && !cardView.isFaceDown()) {
             if (isAftermath()) {
                 Rectangle2D topRect = ArtRect.AFTERMATH_TOP.rect;
                 int topLineY = (int) (leftHalf.ch * TYPE_LINE_Y_FRAC);
@@ -286,7 +318,43 @@ public class ModernSplitCardRenderer extends ModernCardRenderer {
 
     @Override
     protected void drawFrame(Graphics2D g, CardPanelAttributes attribs, BufferedImage image, boolean lessOpaqueRulesTextBox) {
-        if (isAftermath()) {
+        if (isAdventure()) {
+            super.drawFrame(g, attribs, image, lessOpaqueRulesTextBox);
+
+            CardPanelAttributes adventureAttribs = new CardPanelAttributes(
+                    attribs.cardWidth, attribs.cardHeight, attribs.isChoosable,
+                    attribs.isSelected, true);
+
+            // Draw the adventure name line box
+            g.setPaint(getBoxColor(rightHalf.color, cardView.getCardTypes(), true));
+            g.fillRect(totalContentInset, typeLineY + boxHeight + 1,
+                    contentWidth / 2 - 1, boxHeight - 2);
+
+            // Draw the adventure type line box
+            g.setPaint(getAdventureBoxColor(rightHalf.color));
+            g.fillRect(totalContentInset , typeLineY + boxHeight * 2 - 1,
+                    contentWidth / 2 - 1, boxHeight - 2);
+
+            // Draw the adventure text box
+            g.setPaint(getTextboxPaint(rightHalf.color, cardView.getCardTypes(), cardWidth, lessOpaqueRulesTextBox));
+            g.fillRect(totalContentInset, typeLineY + boxHeight * 3 - 3,
+                    contentWidth / 2 - 1, cardHeight - borderWidth * 3 - typeLineY - boxHeight * 3 + 2);
+
+            // Draw the adventure name line
+            drawNameLine(g, adventureAttribs, rightHalf.name, rightHalf.manaCostString,
+                    totalContentInset + 2, typeLineY + boxHeight,
+                    contentWidth / 2 - 8, boxHeight - 2);
+
+            // Draw the adventure type line
+            drawTypeLine(g, adventureAttribs, rightHalf.typeLineString,
+                    totalContentInset + 2, typeLineY + boxHeight * 2 - 2,
+                    contentWidth / 2 - 8, boxHeight - 2, true);
+
+            // Draw the adventure textbox rules
+            drawRulesText(g, rightHalf.keywords, rightHalf.rules,
+                    totalContentInset + 3, typeLineY + boxHeight * 3 - 1,
+                    contentWidth / 2 - 8, cardHeight - borderWidth * 3 - typeLineY - boxHeight * 3 + 2, false);
+        } else if (isAftermath()) {
             drawSplitHalfFrame(getUnmodifiedHalfContext(g), attribs, leftHalf, (int) (leftHalf.ch * TYPE_LINE_Y_FRAC));
             drawSplitHalfFrame(getAftermathHalfContext(g), attribs, rightHalf, (rightHalf.ch - boxHeight) / 2);
         } else {
@@ -306,6 +374,26 @@ public class ModernSplitCardRenderer extends ModernCardRenderer {
                         0, rightHalf.ch,
                         totalFuseBoxWidth - 2 * borderWidth, boxHeight);
             }
+        }
+    }
+
+    protected Color getAdventureBoxColor(ObjectColor colors) {
+        if (colors.isMulticolored()) {
+            return ADVENTURE_BOX_GOLD;
+        } else if (colors.isColorless()) {
+            return ADVENTURE_BOX_COLORLESS;
+        } else if (colors.isWhite()) {
+            return ADVENTURE_BOX_WHITE;
+        } else if (colors.isBlue()) {
+            return ADVENTURE_BOX_BLUE;
+        } else if (colors.isBlack()) {
+            return ADVENTURE_BOX_BLACK;
+        } else if (colors.isRed()) {
+            return ADVENTURE_BOX_RED;
+        } else if (colors.isGreen()) {
+            return ADVENTURE_BOX_GREEN;
+        } else {
+            return ERROR_COLOR;
         }
     }
 }

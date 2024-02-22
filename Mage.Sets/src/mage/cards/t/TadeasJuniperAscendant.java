@@ -110,7 +110,7 @@ class TadeasJuniperAscendantEvasionEffect extends RestrictionEffect {
 
     TadeasJuniperAscendantEvasionEffect(TargetPointer targetPointer) {
         super(Duration.EndOfCombat);
-        this.targetPointer = targetPointer;
+        this.setTargetPointer(targetPointer);
         staticText = "and can't be blocked by creatures with greater power";
     }
 
@@ -120,7 +120,7 @@ class TadeasJuniperAscendantEvasionEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return this.targetPointer.getTargets(game, source).contains(permanent.getId());
+        return this.getTargetPointer().getTargets(game, source).contains(permanent.getId());
     }
 
     @Override

@@ -13,6 +13,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.Predicates;
 import mage.target.common.TargetCardInGraveyard;
@@ -26,7 +27,6 @@ import mage.target.common.TargetOpponent;
 public final class TheCrueltyOfGix extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("creature or planeswalker card");
-    private static final FilterCreatureCard filter2 = new FilterCreatureCard("creature card from a graveyard");
 
     static {
         filter.add(Predicates.or(
@@ -60,7 +60,7 @@ public final class TheCrueltyOfGix extends CardImpl {
         sagaAbility.addChapterEffect(
                 this, SagaChapter.CHAPTER_III, SagaChapter.CHAPTER_III,
                 new ReturnFromGraveyardToBattlefieldTargetEffect(),
-                new TargetCardInGraveyard(filter2)
+                new TargetCardInGraveyard(StaticFilters.FILTER_CARD_CREATURE_A_GRAVEYARD)
         );
         this.addAbility(sagaAbility);
     }

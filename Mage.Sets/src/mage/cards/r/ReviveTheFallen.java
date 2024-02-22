@@ -9,6 +9,7 @@ import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureCard;
 import mage.target.common.TargetCardInGraveyard;
 
@@ -23,7 +24,7 @@ public final class ReviveTheFallen extends CardImpl {
 
         // Return target creature card from a graveyard to its owner's hand.
          this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
-         this.getSpellAbility().addTarget(new TargetCardInGraveyard(new FilterCreatureCard("creature card from a graveyard")));
+         this.getSpellAbility().addTarget(new TargetCardInGraveyard(StaticFilters.FILTER_CARD_CREATURE_A_GRAVEYARD));
         // Clash with an opponent. If you win, return Revive the Fallen to its owner's hand.
         this.getSpellAbility().addEffect(new DoIfClashWonEffect(ReturnToHandSpellEffect.getInstance()));
     }

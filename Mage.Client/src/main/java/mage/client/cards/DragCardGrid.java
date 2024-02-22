@@ -1705,7 +1705,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
                         java.util.List<CardInfo> cardPool = CardRepository.instance.findCards(cardCriteria);
 
                         if (!cardPool.isEmpty()) {
-                            Card acard = cardPool.get(RandomUtil.nextInt(cardPool.size())).getMockCard();
+                            Card acard = cardPool.get(RandomUtil.nextInt(cardPool.size())).createMockCard();
 
                             if (acard.getName().equals(card.getName())) {
                                 CardView pimpedCard = new CardView(acard);
@@ -1751,7 +1751,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
                 for (CardView card : stack) {
                     CardInfo oldestCardInfo = CardRepository.instance.findOldestNonPromoVersionCard(card.getName());
                     if (oldestCardInfo != null) {
-                        CardView oldestCardView = new CardView(oldestCardInfo.getMockCard());
+                        CardView oldestCardView = new CardView(oldestCardInfo.createMockCard());
                         this.removeCardView(card);
                         eventSource.fireEvent(card, ClientEventType.DECK_REMOVE_SPECIFIC_CARD);
                         this.addCardView(oldestCardView, false);

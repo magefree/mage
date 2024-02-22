@@ -36,7 +36,7 @@ public final class MurdersAtKarlovManorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Ash Barrens", 248, Rarity.UNCOMMON, mage.cards.a.AshBarrens.class));
         cards.add(new SetCardInfo("Ashcloud Phoenix", 147, Rarity.MYTHIC, mage.cards.a.AshcloudPhoenix.class));
         cards.add(new SetCardInfo("Austere Command", 56, Rarity.RARE, mage.cards.a.AustereCommand.class));
-        cards.add(new SetCardInfo("Azorius Chancery", 249, Rarity.COMMON, mage.cards.a.AzoriusChancery.class));
+        cards.add(new SetCardInfo("Azorius Chancery", 249, Rarity.UNCOMMON, mage.cards.a.AzoriusChancery.class));
         cards.add(new SetCardInfo("Azorius Signet", 224, Rarity.UNCOMMON, mage.cards.a.AzoriusSignet.class));
         cards.add(new SetCardInfo("Baleful Strix", 200, Rarity.RARE, mage.cards.b.BalefulStrix.class));
         cards.add(new SetCardInfo("Beast Whisperer", 166, Rarity.RARE, mage.cards.b.BeastWhisperer.class));
@@ -60,6 +60,7 @@ public final class MurdersAtKarlovManorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Confirm Suspicions", 97, Rarity.RARE, mage.cards.c.ConfirmSuspicions.class));
         cards.add(new SetCardInfo("Connive // Concoct", 203, Rarity.RARE, mage.cards.c.ConniveConcoct.class));
         cards.add(new SetCardInfo("Consider", 98, Rarity.COMMON, mage.cards.c.Consider.class));
+        cards.add(new SetCardInfo("Copy Catchers", 20, Rarity.RARE, mage.cards.c.CopyCatchers.class));
         cards.add(new SetCardInfo("Curate", 99, Rarity.COMMON, mage.cards.c.Curate.class));
         cards.add(new SetCardInfo("Curse of Opulence", 150, Rarity.UNCOMMON, mage.cards.c.CurseOfOpulence.class));
         cards.add(new SetCardInfo("Darien, King of Kjeldor", 59, Rarity.RARE, mage.cards.d.DarienKingOfKjeldor.class));
@@ -98,6 +99,8 @@ public final class MurdersAtKarlovManorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Fetid Pools", 261, Rarity.RARE, mage.cards.f.FetidPools.class));
         cards.add(new SetCardInfo("Fiendish Duo", 153, Rarity.MYTHIC, mage.cards.f.FiendishDuo.class));
         cards.add(new SetCardInfo("Finale of Revelation", 106, Rarity.MYTHIC, mage.cards.f.FinaleOfRevelation.class));
+        cards.add(new SetCardInfo("Follow the Bodies", 23, Rarity.RARE, mage.cards.f.FollowTheBodies.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Follow the Bodies", 333, Rarity.RARE, mage.cards.f.FollowTheBodies.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fortified Village", 262, Rarity.RARE, mage.cards.f.FortifiedVillage.class));
         cards.add(new SetCardInfo("Frontier Warmonger", 154, Rarity.RARE, mage.cards.f.FrontierWarmonger.class));
         cards.add(new SetCardInfo("Fumigate", 66, Rarity.RARE, mage.cards.f.Fumigate.class));
@@ -113,7 +116,7 @@ public final class MurdersAtKarlovManorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Hooded Hydra", 171, Rarity.MYTHIC, mage.cards.h.HoodedHydra.class));
         cards.add(new SetCardInfo("Hornet Queen", 172, Rarity.RARE, mage.cards.h.HornetQueen.class));
         cards.add(new SetCardInfo("Hostile Desert", 266, Rarity.RARE, mage.cards.h.HostileDesert.class));
-        cards.add(new SetCardInfo("Hydroid Krasis", 212, Rarity.MYTHIC, mage.cards.h.HydroidKrasis.class));
+        cards.add(new SetCardInfo("Hydroid Krasis", 212, Rarity.RARE, mage.cards.h.HydroidKrasis.class));
         cards.add(new SetCardInfo("Idol of Oblivion", 229, Rarity.RARE, mage.cards.i.IdolOfOblivion.class));
         cards.add(new SetCardInfo("Imperial Hellkite", 155, Rarity.RARE, mage.cards.i.ImperialHellkite.class));
         cards.add(new SetCardInfo("Inspiring Statuary", 230, Rarity.RARE, mage.cards.i.InspiringStatuary.class));
@@ -123,19 +126,21 @@ public final class MurdersAtKarlovManorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Jungle Shrine", 268, Rarity.UNCOMMON, mage.cards.j.JungleShrine.class));
         cards.add(new SetCardInfo("Junk Winder", 107, Rarity.UNCOMMON, mage.cards.j.JunkWinder.class));
         cards.add(new SetCardInfo("Kappa Cannoneer", 108, Rarity.RARE, mage.cards.k.KappaCannoneer.class));
-        cards.add(new SetCardInfo("Kazuul, Tyrant of the Cliffs", 157, Rarity.UNCOMMON, mage.cards.k.KazuulTyrantOfTheCliffs.class));
+        cards.add(new SetCardInfo("Kazuul, Tyrant of the Cliffs", 157, Rarity.RARE, mage.cards.k.KazuulTyrantOfTheCliffs.class));
         cards.add(new SetCardInfo("Keeper of the Accord", 70, Rarity.RARE, mage.cards.k.KeeperOfTheAccord.class));
         cards.add(new SetCardInfo("Kessig Wolf Run", 269, Rarity.RARE, mage.cards.k.KessigWolfRun.class));
         cards.add(new SetCardInfo("Kher Keep", 270, Rarity.RARE, mage.cards.k.KherKeep.class));
         cards.add(new SetCardInfo("Killer Service", 174, Rarity.RARE, mage.cards.k.KillerService.class));
+        cards.add(new SetCardInfo("Knowledge is Power", 42, Rarity.RARE, mage.cards.k.KnowledgeIsPower.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Knowledge is Power", 352, Rarity.RARE, mage.cards.k.KnowledgeIsPower.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Koma, Cosmos Serpent", 213, Rarity.MYTHIC, mage.cards.k.KomaCosmosSerpent.class));
         cards.add(new SetCardInfo("Krosan Cloudscraper", 175, Rarity.RARE, mage.cards.k.KrosanCloudscraper.class));
-        cards.add(new SetCardInfo("Krosan Colossus", 176, Rarity.UNCOMMON, mage.cards.k.KrosanColossus.class));
+        cards.add(new SetCardInfo("Krosan Colossus", 176, Rarity.RARE, mage.cards.k.KrosanColossus.class));
         cards.add(new SetCardInfo("Krosan Verge", 271, Rarity.UNCOMMON, mage.cards.k.KrosanVerge.class));
         cards.add(new SetCardInfo("Labyrinth of Skophos", 272, Rarity.RARE, mage.cards.l.LabyrinthOfSkophos.class));
-        cards.add(new SetCardInfo("Lazav, the Multifarious", 214, Rarity.RARE, mage.cards.l.LazavTheMultifarious.class));
+        cards.add(new SetCardInfo("Lazav, the Multifarious", 214, Rarity.MYTHIC, mage.cards.l.LazavTheMultifarious.class));
         cards.add(new SetCardInfo("Lifecrafter's Bestiary", 231, Rarity.RARE, mage.cards.l.LifecraftersBestiary.class));
-        cards.add(new SetCardInfo("Lonely Sandbar", 273, Rarity.UNCOMMON, mage.cards.l.LonelySandbar.class));
+        cards.add(new SetCardInfo("Lonely Sandbar", 273, Rarity.COMMON, mage.cards.l.LonelySandbar.class));
         cards.add(new SetCardInfo("Lonis, Cryptozoologist", 215, Rarity.RARE, mage.cards.l.LonisCryptozoologist.class));
         cards.add(new SetCardInfo("Loran of the Third Path", 71, Rarity.RARE, mage.cards.l.LoranOfTheThirdPath.class));
         cards.add(new SetCardInfo("Martial Impetus", 72, Rarity.UNCOMMON, mage.cards.m.MartialImpetus.class));
@@ -144,7 +149,12 @@ public final class MurdersAtKarlovManorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Master of Pearls", 73, Rarity.RARE, mage.cards.m.MasterOfPearls.class));
         cards.add(new SetCardInfo("Mastery of the Unseen", 74, Rarity.RARE, mage.cards.m.MasteryOfTheUnseen.class));
         cards.add(new SetCardInfo("Mechanized Production", 109, Rarity.MYTHIC, mage.cards.m.MechanizedProduction.class));
+        cards.add(new SetCardInfo("Merchant of Truth", 11, Rarity.RARE, mage.cards.m.MerchantOfTruth.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Merchant of Truth", 322, Rarity.RARE, mage.cards.m.MerchantOfTruth.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mind Stone", 232, Rarity.UNCOMMON, mage.cards.m.MindStone.class));
+        cards.add(new SetCardInfo("Mirko, Obsessive Theorist", 2, Rarity.MYTHIC, mage.cards.m.MirkoObsessiveTheorist.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mirko, Obsessive Theorist", 50, Rarity.MYTHIC, mage.cards.m.MirkoObsessiveTheorist.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mirko, Obsessive Theorist", 316, Rarity.MYTHIC, mage.cards.m.MirkoObsessiveTheorist.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mirror Entity", 75, Rarity.RARE, mage.cards.m.MirrorEntity.class));
         cards.add(new SetCardInfo("Mission Briefing", 110, Rarity.RARE, mage.cards.m.MissionBriefing.class));
         cards.add(new SetCardInfo("Morska, Undersea Sleuth", 3, Rarity.MYTHIC, mage.cards.m.MorskaUnderseaSleuth.class));
@@ -165,6 +175,8 @@ public final class MurdersAtKarlovManorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Obscuring Aether", 179, Rarity.RARE, mage.cards.o.ObscuringAether.class));
         cards.add(new SetCardInfo("Ohran Frostfang", 180, Rarity.RARE, mage.cards.o.OhranFrostfang.class));
         cards.add(new SetCardInfo("Ongoing Investigation", 114, Rarity.UNCOMMON, mage.cards.o.OngoingInvestigation.class));
+        cards.add(new SetCardInfo("On the Trail", 39, Rarity.RARE, mage.cards.o.OnTheTrail.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("On the Trail", 349, Rarity.RARE, mage.cards.o.OnTheTrail.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Organic Extinction", 76, Rarity.RARE, mage.cards.o.OrganicExtinction.class));
         cards.add(new SetCardInfo("Orzhov Advokist", 77, Rarity.UNCOMMON, mage.cards.o.OrzhovAdvokist.class));
         cards.add(new SetCardInfo("Otherworldly Gaze", 115, Rarity.COMMON, mage.cards.o.OtherworldlyGaze.class));
@@ -196,7 +208,7 @@ public final class MurdersAtKarlovManorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Scavenger Grounds", 287, Rarity.RARE, mage.cards.s.ScavengerGrounds.class));
         cards.add(new SetCardInfo("Scourge of the Throne", 160, Rarity.RARE, mage.cards.s.ScourgeOfTheThrone.class));
         cards.add(new SetCardInfo("Scroll of Fate", 235, Rarity.RARE, mage.cards.s.ScrollOfFate.class));
-        cards.add(new SetCardInfo("Seal of Cleansing", 80, Rarity.UNCOMMON, mage.cards.s.SealOfCleansing.class));
+        cards.add(new SetCardInfo("Seal of Cleansing", 80, Rarity.COMMON, mage.cards.s.SealOfCleansing.class));
         cards.add(new SetCardInfo("Search the Premises", 81, Rarity.RARE, mage.cards.s.SearchThePremises.class));
         cards.add(new SetCardInfo("Seaside Citadel", 288, Rarity.UNCOMMON, mage.cards.s.SeasideCitadel.class));
         cards.add(new SetCardInfo("Secluded Steppe", 289, Rarity.COMMON, mage.cards.s.SecludedSteppe.class));
@@ -259,6 +271,8 @@ public final class MurdersAtKarlovManorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Toxic Deluge", 142, Rarity.RARE, mage.cards.t.ToxicDeluge.class));
         cards.add(new SetCardInfo("Trail of Mystery", 192, Rarity.RARE, mage.cards.t.TrailOfMystery.class));
         cards.add(new SetCardInfo("Tranquil Thicket", 309, Rarity.COMMON, mage.cards.t.TranquilThicket.class));
+        cards.add(new SetCardInfo("Trouble in Pairs", 15, Rarity.RARE, mage.cards.t.TroubleInPairs.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Trouble in Pairs", 326, Rarity.RARE, mage.cards.t.TroubleInPairs.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Twilight Prophet", 143, Rarity.MYTHIC, mage.cards.t.TwilightProphet.class));
         cards.add(new SetCardInfo("Ugin's Mastery", 53, Rarity.RARE, mage.cards.u.UginsMastery.class));
         cards.add(new SetCardInfo("Ulvenwald Mysteries", 193, Rarity.UNCOMMON, mage.cards.u.UlvenwaldMysteries.class));
@@ -268,6 +282,8 @@ public final class MurdersAtKarlovManorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Vow of Lightning", 164, Rarity.UNCOMMON, mage.cards.v.VowOfLightning.class));
         cards.add(new SetCardInfo("Wall of Omens", 90, Rarity.UNCOMMON, mage.cards.w.WallOfOmens.class));
         cards.add(new SetCardInfo("War Room", 310, Rarity.RARE, mage.cards.w.WarRoom.class));
+        cards.add(new SetCardInfo("Watcher of Hours", 25, Rarity.RARE, mage.cards.w.WatcherOfHours.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Watcher of Hours", 335, Rarity.RARE, mage.cards.w.WatcherOfHours.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Wavesifter", 220, Rarity.COMMON, mage.cards.w.Wavesifter.class));
         cards.add(new SetCardInfo("Welcoming Vampire", 91, Rarity.RARE, mage.cards.w.WelcomingVampire.class));
         cards.add(new SetCardInfo("Whirler Rogue", 124, Rarity.UNCOMMON, mage.cards.w.WhirlerRogue.class));
@@ -277,7 +293,7 @@ public final class MurdersAtKarlovManorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Wilderness Reclamation", 196, Rarity.UNCOMMON, mage.cards.w.WildernessReclamation.class));
         cards.add(new SetCardInfo("Windborn Muse", 92, Rarity.RARE, mage.cards.w.WindbornMuse.class));
         cards.add(new SetCardInfo("Winds of Rath", 93, Rarity.RARE, mage.cards.w.WindsOfRath.class));
-        cards.add(new SetCardInfo("Yedora, Grave Gardener", 197, Rarity.UNCOMMON, mage.cards.y.YedoraGraveGardener.class));
+        cards.add(new SetCardInfo("Yedora, Grave Gardener", 197, Rarity.RARE, mage.cards.y.YedoraGraveGardener.class));
         cards.add(new SetCardInfo("Zoetic Cavern", 311, Rarity.UNCOMMON, mage.cards.z.ZoeticCavern.class));
     }
 }

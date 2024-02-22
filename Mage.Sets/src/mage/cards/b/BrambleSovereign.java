@@ -80,7 +80,7 @@ class BrambleSovereignEffect extends OneShotEffect {
         Permanent permanent = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
         if (permanent != null) {
             CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(permanent.getControllerId());
-            effect.setTargetPointer(targetPointer);
+            effect.setTargetPointer(this.getTargetPointer().copy());
             effect.apply(game, source);
         }
         return true;

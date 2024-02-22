@@ -278,7 +278,7 @@ public class DeckGeneratorPool
     public List<Card> filterLands(List<CardInfo> landCardsInfo) {
         List<Card> matchingLandList = new ArrayList<>();
         for(CardInfo landCardInfo: landCardsInfo) {
-            Card landCard = landCardInfo.getMockCard();
+            Card landCard = landCardInfo.createMockCard();
             if(landProducesChosenColors(landCard)) {
                 matchingLandList.add(landCard);
             }
@@ -556,7 +556,7 @@ public class DeckGeneratorPool
         if (retrievedCount > 0 && retrievedCount >= spellCount) {
             int tries = 0;
             while (count < spellCount) {
-                Card card = cardPool.get(RandomUtil.nextInt(retrievedCount)).getMockCard();
+                Card card = cardPool.get(RandomUtil.nextInt(retrievedCount)).createMockCard();
                 if (genPool.isValidSpellCard(card)) {
                     int cardCMC = card.getManaValue();
                     for (DeckGeneratorCMC.CMC deckCMC : deckCMCs) {

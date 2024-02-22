@@ -1,4 +1,3 @@
-
 package mage.cards.f;
 
 import mage.MageInt;
@@ -28,11 +27,6 @@ import java.util.UUID;
  * @author Blinke
  */
 public final class ForgottenAncient extends CardImpl {
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
 
     public ForgottenAncient(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
@@ -58,82 +52,89 @@ public final class ForgottenAncient extends CardImpl {
         return new ForgottenAncient(this);
     }
 
-    class CounterMovement {
+}
+
+class ForgottenAncientEffect extends OneShotEffect {
+
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature");
+
+    static {
+        filter.add(AnotherPredicate.instance);
+    }
+
+    ForgottenAncientEffect() {
+        super(Outcome.Benefit);
+        this.staticText = "you may move any number of +1/+1 counters from {this} onto other creatures.";
+    }
+
+    private ForgottenAncientEffect(final ForgottenAncientEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public ForgottenAncientEffect copy() {
+        return new ForgottenAncientEffect(this);
+    }
+
+    static class CounterMovement {
         public UUID target;
         public int counters;
     }
 
-    class ForgottenAncientEffect extends OneShotEffect {
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
 
-        public ForgottenAncientEffect() {
-            super(Outcome.Benefit);
-            this.staticText = "you may move any number of +1/+1 counters from {this} onto other creatures.";
+        if (controller == null || sourcePermanent == null) {
+            return false;
         }
 
-        private ForgottenAncientEffect(final ForgottenAncientEffect effect) {
-            super(effect);
+        int numCounters = sourcePermanent.getCounters(game).getCount(CounterType.P1P1);
+        if (numCounters == 0) {
+            return false;
         }
 
-        @Override
-        public ForgottenAncientEffect copy() {
-            return new ForgottenAncientEffect(this);
-        }
+        List<CounterMovement> counterMovements = new ArrayList<>();
 
-        @Override
-        public boolean apply(Game game, Ability source) {
-            Player controller = game.getPlayer(source.getControllerId());
-            Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-
-            if (controller == null || sourcePermanent == null) {
-                return false;
+        do {
+            Target target = new TargetCreaturePermanent(1, 1, filter, true);
+            if (!target.canChoose(controller.getId(), source, game)) {
+                break;
             }
 
-            int numCounters = sourcePermanent.getCounters(game).getCount(CounterType.P1P1);
-            if (numCounters == 0) {
-                return false;
+            if (!target.choose(Outcome.BoostCreature, source.getControllerId(), source.getSourceId(), source, game)) {
+                break;
             }
 
-            List<CounterMovement> counterMovements = new ArrayList<>();
+            int amountToMove = controller.getAmount(0, numCounters, "Choose how many counters to move (" + numCounters + " counters remaining.)", game);
+            if (amountToMove == 0) {
+                break;
+            }
 
-            do {
-                Target target = new TargetCreaturePermanent(1, 1, filter, true);
-                if (!target.canChoose(controller.getId(), source, game)) {
-                    break;
-                }
-
-                if (!target.choose(Outcome.BoostCreature, source.getControllerId(), source.getSourceId(), source, game)) {
-                    break;
-                }
-
-                int amountToMove = controller.getAmount(0, numCounters, "Choose how many counters to move (" + numCounters + " counters remaining.)", game);
-                if (amountToMove == 0) {
-                    break;
-                }
-
-                boolean previouslyChosen = false;
-                for (CounterMovement cm : counterMovements) {
-                    if (cm.target.equals(target.getFirstTarget())) {
-                        cm.counters += amountToMove;
-                        previouslyChosen = true;
-                    }
-                }
-                if (!previouslyChosen) {
-                    CounterMovement cm = new CounterMovement();
-                    cm.target = target.getFirstTarget();
-                    cm.counters = amountToMove;
-                    counterMovements.add(cm);
-                }
-
-                numCounters -= amountToMove;
-
-            } while (numCounters > 0 && controller.chooseUse(Outcome.Benefit, "Move additional counters?", source, game));
-
-            //Move all the counters for each chosen creature
+            boolean previouslyChosen = false;
             for (CounterMovement cm : counterMovements) {
-                sourcePermanent.removeCounters(CounterType.P1P1.createInstance(cm.counters), source, game);
-                game.getPermanent(cm.target).addCounters(CounterType.P1P1.createInstance(cm.counters), source.getControllerId(), source, game);
+                if (cm.target.equals(target.getFirstTarget())) {
+                    cm.counters += amountToMove;
+                    previouslyChosen = true;
+                }
             }
-            return true;
+            if (!previouslyChosen) {
+                CounterMovement cm = new CounterMovement();
+                cm.target = target.getFirstTarget();
+                cm.counters = amountToMove;
+                counterMovements.add(cm);
+            }
+
+            numCounters -= amountToMove;
+
+        } while (numCounters > 0 && controller.chooseUse(Outcome.Benefit, "Move additional counters?", source, game));
+
+        //Move all the counters for each chosen creature
+        for (CounterMovement cm : counterMovements) {
+            sourcePermanent.removeCounters(CounterType.P1P1.createInstance(cm.counters), source, game);
+            game.getPermanent(cm.target).addCounters(CounterType.P1P1.createInstance(cm.counters), source.getControllerId(), source, game);
         }
+        return true;
     }
 }

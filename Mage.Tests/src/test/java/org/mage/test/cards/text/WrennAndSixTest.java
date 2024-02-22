@@ -9,7 +9,7 @@ public class WrennAndSixTest {
 
     @Test
     public void testFirstLoyaltyAbilityRulesText() {
-        Card wrennAndSix = CardRepository.instance.findCard("Wrenn and Six").getCard();
+        Card wrennAndSix = CardRepository.instance.findCard("Wrenn and Six").createCard();
         String firstLoyaltyAbilityRulesText = wrennAndSix.getRules().get(0);
 
         Assert.assertEquals(firstLoyaltyAbilityRulesText, "+1: Return up to one target land card from your graveyard to your hand.");

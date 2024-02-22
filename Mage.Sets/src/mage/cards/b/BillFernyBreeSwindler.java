@@ -68,7 +68,7 @@ class BillFernyEffect extends OneShotEffect {
     private static final Effect create3TreasureTokens = new CreateTokenEffect(new TreasureToken(), 3);
     private static final Effect removeFromCombat = new RemoveFromCombatSourceEffect();
 
-    public BillFernyEffect() {
+    BillFernyEffect() {
         super(Outcome.Benefit);
         this.staticText = "Target opponent gains control of target Horse you control. If they do, remove Bill Ferny from combat and create three Treasure tokens.";
     }
@@ -88,7 +88,7 @@ class BillFernyEffect extends OneShotEffect {
         if (permanent == null) {
             return false;
         }
-        UUID opponentToGainControl = targetPointer.getFirst(game, source);
+        UUID opponentToGainControl = getTargetPointer().getFirst(game, source);
         game.addEffect(new GainControlTargetEffect(
                 Duration.Custom, true, opponentToGainControl
         ).setTargetPointer(new FixedTarget(permanent.getId(), game)), source);
