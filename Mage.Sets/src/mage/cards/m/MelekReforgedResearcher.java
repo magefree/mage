@@ -37,7 +37,7 @@ public final class MelekReforgedResearcher extends CardImpl {
     private static final FilterCard filter = new FilterInstantOrSorceryCard("the first instant or sorcery spell");
 
     static {
-        filter.add(new MelekReforgedResearcherPredicate());
+        filter.add(MelekReforgedResearcherPredicate.instance);
     }
 
     public MelekReforgedResearcher(UUID ownerId, CardSetInfo setInfo) {
@@ -72,7 +72,8 @@ public final class MelekReforgedResearcher extends CardImpl {
     }
 }
 
-class MelekReforgedResearcherPredicate implements ObjectSourcePlayerPredicate<Controllable> {
+enum MelekReforgedResearcherPredicate implements ObjectSourcePlayerPredicate<Controllable> {
+    instance;
 
     @Override
     public boolean apply(ObjectSourcePlayer<Controllable> input, Game game) {
