@@ -74,7 +74,7 @@ class MinasMorgulEffect extends AddCardSubTypeTargetEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent creature = game.getPermanent(this.targetPointer.getFirst(game, source));
+        Permanent creature = game.getPermanent(this.getTargetPointer().getFirst(game, source));
         if (creature == null || creature.getCounters(game).getCount(CounterType.SHADOW) < 1) {
             discard();
             return false;

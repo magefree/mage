@@ -126,7 +126,7 @@ public class MageEditorPane extends JEditorPane {
                 if (cardView == null) {
                     CardInfo card = CardRepository.instance.findCards(cardName).stream().findFirst().orElse(null);
                     if (card != null) {
-                        cardView = new CardView(card.getMockCard());
+                        cardView = new CardView(card.createMockCard());
                     }
                 }
 

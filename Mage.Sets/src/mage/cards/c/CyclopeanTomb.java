@@ -79,7 +79,7 @@ class BecomeSwampEffect extends BecomesBasicLandTargetEffect {
 
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        Permanent land = game.getPermanent(this.targetPointer.getFirst(game, source));
+        Permanent land = game.getPermanent(this.getTargetPointer().getFirst(game, source));
         if (land == null || land.getCounters(game).getCount(CounterType.MIRE) < 1) {
             this.discard();
             return false;

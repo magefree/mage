@@ -49,8 +49,8 @@ public class AliasesApiTest extends CardTestPlayerBase {
         Assert.assertFalse(CardUtil.haveSameNames("Name1", "Name2", true));
 
         // name with split card
-        Card splitCard1 = CardRepository.instance.findCard("Armed // Dangerous").getCard();
-        Card splitCard2 = CardRepository.instance.findCard("Alive // Well").getCard();
+        Card splitCard1 = CardRepository.instance.findCard("Armed // Dangerous").createCard();
+        Card splitCard2 = CardRepository.instance.findCard("Alive // Well").createCard();
         Assert.assertTrue(CardUtil.haveSameNames(splitCard1, "Armed", currentGame));
         Assert.assertTrue(CardUtil.haveSameNames(splitCard1, "Dangerous", currentGame));
         Assert.assertTrue(CardUtil.haveSameNames(splitCard1, "Armed // Dangerous", currentGame));
@@ -61,7 +61,7 @@ public class AliasesApiTest extends CardTestPlayerBase {
         Assert.assertFalse(CardUtil.haveSameNames(splitCard1, splitCard2));
 
         // name with face down spells: face down spells don't have names, see https://github.com/magefree/mage/issues/6569
-        Card bearCard = CardRepository.instance.findCard("Balduvian Bears").getCard();
+        Card bearCard = CardRepository.instance.findCard("Balduvian Bears").createCard();
         Spell normalSpell = new Spell(bearCard, bearCard.getSpellAbility(), playerA.getId(), Zone.HAND, currentGame);
         Spell faceDownSpell = new Spell(bearCard, bearCard.getSpellAbility(), playerA.getId(), Zone.HAND, currentGame);
         faceDownSpell.setFaceDown(true, currentGame);

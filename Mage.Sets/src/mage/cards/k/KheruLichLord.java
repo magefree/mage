@@ -81,26 +81,26 @@ class KheruLichLordEffect extends OneShotEffect {
                 controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                 Permanent permanent = game.getPermanent(card.getId());
                 if (permanent != null) {
-                    FixedTarget fixedTarget = new FixedTarget(permanent, game);
+                    FixedTarget blueprintTarget = new FixedTarget(permanent, game);
                     ContinuousEffect effect = new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn);
-                    effect.setTargetPointer(fixedTarget);
+                    effect.setTargetPointer(blueprintTarget.copy());
                     game.addEffect(effect, source);
 
                     effect = new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn);
-                    effect.setTargetPointer(fixedTarget);
+                    effect.setTargetPointer(blueprintTarget.copy());
                     game.addEffect(effect, source);
 
                     effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);
-                    effect.setTargetPointer(fixedTarget);
+                    effect.setTargetPointer(blueprintTarget.copy());
                     game.addEffect(effect, source);
 
                     ExileTargetEffect exileEffect = new ExileTargetEffect();
-                    exileEffect.setTargetPointer(fixedTarget);
+                    exileEffect.setTargetPointer(blueprintTarget.copy());
                     DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect);
                     game.addDelayedTriggeredAbility(delayedAbility, source);
 
                     ReplacementEffect replacementEffect = new LeaveBattlefieldExileTargetReplacementEffect("that card");
-                    replacementEffect.setTargetPointer(fixedTarget);
+                    replacementEffect.setTargetPointer(blueprintTarget.copy());
                     game.addEffect(replacementEffect, source);
                 }
             }

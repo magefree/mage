@@ -26,6 +26,7 @@ public final class Mirage extends ExpansionSet {
         this.ratioBoosterMythic = 0;
 
         cards.add(new SetCardInfo("Abyssal Hunter", 103, Rarity.RARE, mage.cards.a.AbyssalHunter.class));
+        cards.add(new SetCardInfo("Acidic Dagger", 291, Rarity.RARE, mage.cards.a.AcidicDagger.class));
         cards.add(new SetCardInfo("Afiya Grove", 205, Rarity.RARE, mage.cards.a.AfiyaGrove.class));
         cards.add(new SetCardInfo("Afterlife", 1, Rarity.UNCOMMON, mage.cards.a.Afterlife.class));
         cards.add(new SetCardInfo("Agility", 154, Rarity.COMMON, mage.cards.a.Agility.class));
@@ -329,6 +330,7 @@ public final class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Thirst", 99, Rarity.COMMON, mage.cards.t.Thirst.class));
         cards.add(new SetCardInfo("Tidal Wave", 100, Rarity.UNCOMMON, mage.cards.t.TidalWave.class));
         cards.add(new SetCardInfo("Tombstone Stairwell", 149, Rarity.RARE, mage.cards.t.TombstoneStairwell.class));
+        cards.add(new SetCardInfo("Torrent of Lava", 199, Rarity.RARE, mage.cards.t.TorrentOfLava.class));
         cards.add(new SetCardInfo("Tranquil Domain", 245, Rarity.COMMON, mage.cards.t.TranquilDomain.class));
         cards.add(new SetCardInfo("Tropical Storm", 246, Rarity.UNCOMMON, mage.cards.t.TropicalStorm.class));
         cards.add(new SetCardInfo("Uktabi Faerie", 247, Rarity.COMMON, mage.cards.u.UktabiFaerie.class));

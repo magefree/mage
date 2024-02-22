@@ -83,6 +83,7 @@ class TenthDistrictHeroEffect extends ContinuousEffectImpl {
 
     @Override
     public void init(Ability source, Game game) {
+        super.init(source, game);
         Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent == null || !permanent.hasSubtype(SubType.DETECTIVE, game)) {
             discard();

@@ -81,7 +81,7 @@ class BiolumeEggEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        Card card = game.getCard(targetPointer.getFirst(game, source));
+        Card card = game.getCard(getTargetPointer().getFirst(game, source));
         if (card != null) {
             game.getState().setValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + card.getId(), Boolean.TRUE);
             controller.moveCards(card, Zone.BATTLEFIELD, source, game, false, false, true, null);

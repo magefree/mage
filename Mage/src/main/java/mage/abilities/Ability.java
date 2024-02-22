@@ -228,6 +228,8 @@ public interface Ability extends Controllable, Serializable {
      * Retrieves the {@link Target} located at the 0th index in the
      * {@link Targets}. A call to the method is equivalent to
      * {@link #getTargets()}.get(0).getFirstTarget().
+     * <p>
+     * Warning, if you effect uses target pointers then it must search getTargetPointer too
      *
      * @return The {@link java.util.UUID} of the first target within the targets
      * list.

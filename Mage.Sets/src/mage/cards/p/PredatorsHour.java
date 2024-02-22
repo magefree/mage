@@ -88,7 +88,7 @@ class PredatorsHourEffect extends OneShotEffect {
             return false;
         }
 
-        Player opponent = game.getPlayer(targetPointer.getFirst(game, source));
+        Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (opponent == null) {
             return false;
         }

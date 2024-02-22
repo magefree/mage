@@ -4,16 +4,13 @@ import mage.cards.Card;
 import mage.cards.decks.Deck;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
-import mage.cards.repository.CardRepository;
 import mage.cards.repository.ExpansionRepository;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.util.sets.ConstructedFormats;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
-import mage.constants.Rarity;
 import mage.constants.SuperType;
 import mage.util.RandomUtil;
-import mage.util.TournamentUtil;
 
 import java.util.*;
 
@@ -230,6 +227,6 @@ public final class DeckGenerator {
     private static Card getBasicLand(ColoredManaSymbol color, Map<String, List<CardInfo>> basicLands) {
         String landName = DeckGeneratorPool.getBasicLandName(color.toString());
         List<CardInfo> basicLandsInfo = basicLands.get(landName);
-        return basicLandsInfo.get(RandomUtil.nextInt(basicLandsInfo.size())).getMockCard().copy();
+        return basicLandsInfo.get(RandomUtil.nextInt(basicLandsInfo.size())).createMockCard().copy();
     }
 }

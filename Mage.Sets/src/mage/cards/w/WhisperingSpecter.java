@@ -65,7 +65,7 @@ class WhisperingSpecterEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (player != null) {
             int value = player.getCounters().getCount(CounterType.POISON);
             if (value > 0) {

@@ -82,13 +82,13 @@ class HuntingWildsEffect extends OneShotEffect {
             if (sourceEffect instanceof SearchLibraryPutInPlayEffect) {
                 Cards foundCards = new CardsImpl(((SearchLibraryPutInPlayEffect) sourceEffect).getTargets());
                 if (!foundCards.isEmpty()) {
-                    FixedTargets fixedTargets = new FixedTargets(foundCards, game);
+                    FixedTargets blueprintTarget = new FixedTargets(foundCards, game);
                     UntapTargetEffect untapEffect = new UntapTargetEffect();
-                    untapEffect.setTargetPointer(fixedTargets);
+                    untapEffect.setTargetPointer(blueprintTarget.copy());
                     untapEffect.apply(game, source);
 
                     BecomesCreatureTargetEffect becomesCreatureEffect = new BecomesCreatureTargetEffect(new HuntingWildsToken(), false, true, Duration.Custom);
-                    becomesCreatureEffect.setTargetPointer(fixedTargets);
+                    becomesCreatureEffect.setTargetPointer(blueprintTarget.copy());
                     game.addEffect(becomesCreatureEffect, source);
                 }
                 return true;

@@ -131,7 +131,7 @@ class ThievingAmalgamLifeLossEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(game.getOwnerId(targetPointer.getFirst(game, source)));
+        Player player = game.getPlayer(game.getOwnerId(getTargetPointer().getFirst(game, source)));
         if (player == null) {
             return false;
         }

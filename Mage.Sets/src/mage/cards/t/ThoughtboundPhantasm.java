@@ -2,8 +2,8 @@ package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.common.SurveilTriggeredAbility;
 import mage.abilities.condition.common.SourceHasCounterCondition;
 import mage.abilities.decorator.ConditionalAsThoughEffect;
 import mage.abilities.effects.common.combat.CanAttackAsThoughItDidntHaveDefenderSourceEffect;
@@ -16,8 +16,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.game.Game;
-import mage.game.events.GameEvent;
 
 /**
  *
@@ -36,7 +34,7 @@ public final class ThoughtboundPhantasm extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
 
         // Whenever you surveil, put a +1/+1 counter on Thoughtbound Phantasm.
-        this.addAbility(new ThoughtboundPhantasmTriggeredAbility());
+        this.addAbility(new SurveilTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance())));
 
         // As long as Thoughtbound Phantasm has three or more +1/+1 counters on it, it can attack as though it didn't have defender.
         this.addAbility(new SimpleStaticAbility(
@@ -59,38 +57,5 @@ public final class ThoughtboundPhantasm extends CardImpl {
     @Override
     public ThoughtboundPhantasm copy() {
         return new ThoughtboundPhantasm(this);
-    }
-}
-
-class ThoughtboundPhantasmTriggeredAbility extends TriggeredAbilityImpl {
-
-    public ThoughtboundPhantasmTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new AddCountersSourceEffect(
-                CounterType.P1P1.createInstance()
-        ), false);
-    }
-
-    private ThoughtboundPhantasmTriggeredAbility(final ThoughtboundPhantasmTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public ThoughtboundPhantasmTriggeredAbility copy() {
-        return new ThoughtboundPhantasmTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.SURVEILED;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getPlayerId().equals(this.getControllerId());
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever you surveil, put a +1/+1 counter on {this}.";
     }
 }

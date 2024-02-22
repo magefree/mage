@@ -64,7 +64,7 @@ public class VirtualCardInfo {
             return;
         }
 
-        this.init(new CardView(cardInfo.getCard()), bigCard, gameId);
+        this.init(new CardView(cardInfo.createCard()), bigCard, gameId);
     }
 
     public void init(CardView cardView, BigCard bigCard, UUID gameId) {

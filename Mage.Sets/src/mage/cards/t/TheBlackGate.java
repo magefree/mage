@@ -53,7 +53,7 @@ public final class TheBlackGate extends CardImpl {
         // {1}{B}, {T}: Choose a player with the most life or tied for most life. Target creature can't be blocked by creatures that player controls this turn.
         ActivatedAbility ability = new SimpleActivatedAbility(
                 new BlackGateEffect(),
-                new ManaCostsImpl("{1}{B}")
+                new ManaCostsImpl<>("{1}{B}")
         );
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());

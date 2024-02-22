@@ -443,7 +443,7 @@ public class MageBook extends JComponent {
         List<CardInfo> cards = CardRepository.instance.findCards(criteria);
         cards.sort(new NaturalOrderCardNumberComparator());
         List<Object> res = new ArrayList<>();
-        cards.forEach(card -> res.add(new CardView(card.getMockCard())));
+        cards.forEach(card -> res.add(new CardView(card.createMockCard())));
         return res;
     }
 

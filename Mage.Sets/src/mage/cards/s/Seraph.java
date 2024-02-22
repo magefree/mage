@@ -74,7 +74,7 @@ class SeraphEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Card creatureCard = game.getCard(targetPointer.getFirst(game, source));
+        Card creatureCard = game.getCard(getTargetPointer().getFirst(game, source));
         if (controller != null
                 && creatureCard != null
                 && game.getState().getZone(creatureCard.getId()) == Zone.GRAVEYARD) { // must be still in the graveyard

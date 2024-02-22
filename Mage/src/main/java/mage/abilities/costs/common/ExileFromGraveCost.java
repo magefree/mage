@@ -18,6 +18,7 @@ import mage.util.CardUtil;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * @author nantuko
@@ -95,7 +96,7 @@ public class ExileFromGraveCost extends CostImpl {
                         CardUtil.getSourceName(game, source)
                 );
                 if (setTargetPointer) {
-                    source.getEffects().setTargetPointer(new FixedTargets(cardsToExile, game));
+                    source.getEffects().setTargetPointer(new FixedTargets(cardsToExile.getCards(game), game));
                 }
                 paid = true;
             }

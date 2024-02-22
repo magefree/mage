@@ -999,4 +999,33 @@ public class ModalDoubleFacedCardsTest extends CardTestPlayerBase {
         setStopAt(2, PhaseStep.END_TURN);
         execute();
     }
+
+    @Test
+    public void test_Battlefield_MustHaveAbilitiesFromOneSideOnly() {
+        // possible bug: test framework adds second side abilities
+
+        // left side - Reidane, God of the Worthy:
+        // Snow lands your opponents control enter the battlefield tapped.
+        // right side - Valkmira, Protector's Shield:
+        // If a source an opponent controls would deal damage to you or a permanent you control, prevent 1 of that damage.
+        // Whenever you or another permanent you control becomes the target of a spell or ability an opponent controls,
+        // counter that spell or ability unless its controller pays {1}.
+        addCard(Zone.BATTLEFIELD, playerB, "Reidane, God of the Worthy", 1);
+        //
+        addCard(Zone.HAND, playerA, "Snow-Covered Forest", 1);
+        addCard(Zone.HAND, playerA, "Lightning Bolt", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+
+        // cast, second side effects must be ignored (e.g. counter trigger)
+        playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Snow-Covered Forest");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt");
+        addTarget(playerA, playerB);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertTappedCount("Snow-Covered Forest", true, 1);
+        assertLife(playerB, 20 - 3);
+    }
 }

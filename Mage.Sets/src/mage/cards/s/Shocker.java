@@ -57,7 +57,7 @@ class ShockerEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
+        Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (targetPlayer == null) {
             return false;
         }

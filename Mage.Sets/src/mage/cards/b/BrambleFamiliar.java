@@ -84,8 +84,8 @@ class FetchQuestEffect extends OneShotEffect {
 
     FetchQuestEffect() {
         super(Outcome.Benefit);
-        staticText = "mill seven cards, then put a creature, enchantment, or land card "
-                + "from among cards milled this way onto the battlefield";
+        staticText = "mill seven cards. Then put a creature, enchantment, or land card "
+                + "from among the milled cards onto the battlefield";
     }
 
     private FetchQuestEffect(final FetchQuestEffect effect) {

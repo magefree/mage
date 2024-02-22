@@ -292,7 +292,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         if (card == null) {
             // Need to make a new card
             Logger.getLogger(DeckEditorPanel.class).info("Retrieve " + cardView.getCardNumber() + " Failed");
-            card = CardRepository.instance.findCard(cardView.getExpansionSetCode(), cardView.getCardNumber()).getCard();
+            card = CardRepository.instance.findCard(cardView.getExpansionSetCode(), cardView.getCardNumber()).createCard();
         } else {
             // Only need a temporary card once
             temporaryCards.remove(cardView.getId());
@@ -578,7 +578,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
             // add cards
             CardInfo cardInfo = CardRepository.instance.findCard(cardView.getExpansionSetCode(), cardView.getCardNumber());
             for (int i = cardsFound; i < numberToSet; i++) {
-                cards.add(cardInfo.getMockCard());
+                cards.add(cardInfo.createMockCard());
             }
         } else {
             // remove cards
@@ -605,7 +605,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         } else {
             // editor: create mock card
             CardInfo cardInfo = CardRepository.instance.findCard(cardView.getExpansionSetCode(), cardView.getCardNumber());
-            card = cardInfo != null ? cardInfo.getMockCard() : null;
+            card = cardInfo != null ? cardInfo.createMockCard() : null;
         }
 
         if (card != null) {
@@ -633,7 +633,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 
         SimpleCardView cardView = (SimpleCardView) event.getSource();
         CardInfo cardInfo = CardRepository.instance.findCard(cardView.getExpansionSetCode(), cardView.getCardNumber());
-        Card card = cardInfo != null ? cardInfo.getMockCard() : null;
+        Card card = cardInfo != null ? cardInfo.createMockCard() : null;
         if (card != null) {
             deck.getSideboard().add(card);
         }

@@ -142,7 +142,7 @@ class GraftDistributeCounterEffect extends OneShotEffect {
         if (sourcePermanent != null) {
             int numberOfCounters = sourcePermanent.getCounters(game).getCount(CounterType.P1P1);
             if (numberOfCounters > 0) {
-                Permanent targetCreature = game.getPermanent(targetPointer.getFirst(game, source));
+                Permanent targetCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
                 if (targetCreature != null) {
                     sourcePermanent.removeCounters(CounterType.P1P1.getName(), 1, source, game);
                     targetCreature.addCounters(CounterType.P1P1.createInstance(1), source.getControllerId(), source, game);

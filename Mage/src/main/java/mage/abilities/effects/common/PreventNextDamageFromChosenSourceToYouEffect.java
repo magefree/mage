@@ -43,6 +43,7 @@ public class PreventNextDamageFromChosenSourceToYouEffect extends PreventionEffe
 
     @Override
     public void init(Ability source, Game game) {
+        super.init(source, game);
         this.targetSource.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), source, game);
     }
 

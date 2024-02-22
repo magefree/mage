@@ -60,7 +60,7 @@ class PainfulQuandryEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (player != null) {
             boolean paid = false;
             Cost cost = new DiscardTargetCost(new TargetCardInHand());

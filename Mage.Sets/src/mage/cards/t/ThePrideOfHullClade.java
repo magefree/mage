@@ -54,14 +54,14 @@ public final class ThePrideOfHullClade extends CardImpl {
         // {2}{U}{U}: Until end of turn, target creature you control gets +1/+0, gains "Whenever this creature deals combat damage to a player, draw cards equal to its toughness," and can attack as though it didn't have defender.
         Ability ability = new SimpleActivatedAbility(
                 new BoostTargetEffect(1, 0)
-                        .setText("Until end of turn, target creature you control gets +1/0"),
+                        .setText("Until end of turn, target creature you control gets +1/+0"),
                 new ManaCostsImpl<>("{2}{U}{U}"))
                 ;
         ability.addEffect(
                 new GainAbilityTargetEffect(
                         new DealsCombatDamageToAPlayerTriggeredAbility(
                                 new DrawCardSourceControllerEffect
-                                        (SourcePermanentToughnessValue.getInstance()), false))
+                                        (SourcePermanentToughnessValue.getInstance()).setText("draw cards equal to its toughness"), false))
                         .setText(", gains \"Whenever this creature deals combat damage to a player, draw cards equal to its toughness,\""));
         ability.addEffect(
                 new CanAttackAsThoughItDidntHaveDefenderTargetEffect(Duration.EndOfTurn)

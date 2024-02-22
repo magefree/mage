@@ -66,7 +66,7 @@ class OpalTitanBecomesCreatureEffect extends ContinuousEffectImpl {
     public void init(Ability source, Game game) {
         super.init(source, game);
         affectedObjectList.add(new MageObjectReference(source.getSourceId(), game));
-        Spell creatureSpellCast = game.getSpell(targetPointer.getFirst(game, source));
+        Spell creatureSpellCast = game.getSpell(getTargetPointer().getFirst(game, source));
         if (creatureSpellCast != null
                 && creatureSpellCast.getColor(game).hasColor()) {
             game.getState().setValue("opalTitanColor" + source.getSourceId(), creatureSpellCast.getColor(game));

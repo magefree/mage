@@ -82,7 +82,7 @@ class BloodlordOfVaasgothEffect extends ContinuousEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        Spell object = game.getStack().getSpell(targetPointer.getFirst(game, source));
+        Spell object = game.getStack().getSpell(getTargetPointer().getFirst(game, source));
         if (object != null) {
             zoneChangeCounter = game.getState().getZoneChangeCounter(object.getSourceId()) + 1;
             permanentId = object.getSourceId();
@@ -98,7 +98,7 @@ class BloodlordOfVaasgothEffect extends ContinuousEffectImpl {
             if (game.getState().getZoneChangeCounter(permanentId) >= zoneChangeCounter) {
                 discard();
             }
-            Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
+            Spell spell = game.getStack().getSpell(getTargetPointer().getFirst(game, source));
             if (spell != null) { // Bloodthirst checked while spell is on the stack so needed to give it already to the spell
                 game.getState().addOtherAbility(spell.getCard(), ability, true);
             }

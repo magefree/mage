@@ -112,11 +112,9 @@ class AkroanHorseGainControlEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent;
-        if (targetPointer == null) {
+        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
+        if (permanent == null) {
             permanent = game.getPermanent(source.getFirstTarget());
-        } else {
-            permanent = game.getPermanent(targetPointer.getFirst(game, source));
         }
         if (permanent == null) {
             return false;

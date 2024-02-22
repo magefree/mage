@@ -64,7 +64,7 @@ class MindblazeEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         Player playerControls = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
         if (player == null || playerControls == null || sourceObject == null) {

@@ -69,7 +69,7 @@ class HubrisReturnEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            for (UUID targetId : targetPointer.getTargets(game, source)) {
+            for (UUID targetId : getTargetPointer().getTargets(game, source)) {
                 Permanent creature = game.getPermanent(targetId);
                 if (creature != null) {
                     Cards cardsToHand = new CardsImpl();
