@@ -35,6 +35,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Beast Within", 228, Rarity.UNCOMMON, mage.cards.b.BeastWithin.class));
         cards.add(new SetCardInfo("Become the Pilot", 37, Rarity.RARE, mage.cards.b.BecomeThePilot.class));
         cards.add(new SetCardInfo("Bessie, the Doctor's Roadster", 171, Rarity.RARE, mage.cards.b.BessieTheDoctorsRoadster.class));
+        cards.add(new SetCardInfo("Bigger on the Inside", 115, Rarity.UNCOMMON, mage.cards.b.BiggerOnTheInside.class));
         cards.add(new SetCardInfo("Blasphemous Act", 224, Rarity.RARE, mage.cards.b.BlasphemousAct.class));
         cards.add(new SetCardInfo("Canopy Vista", 258, Rarity.RARE, mage.cards.c.CanopyVista.class));
         cards.add(new SetCardInfo("Canyon Slough", 259, Rarity.RARE, mage.cards.c.CanyonSlough.class));

@@ -369,6 +369,16 @@ public final class StaticFilters {
         FILTER_PERMANENT_ARTIFACT_CREATURE_ENCHANTMENT_OR_LAND.setLockedFilter(true);
     }
 
+    public static final FilterPermanent FILTER_PERMANENT_ARTIFACT_OR_LAND = new FilterPermanent("artifact or land");
+
+    static {
+        FILTER_PERMANENT_ARTIFACT_OR_LAND.add(Predicates.or(
+                CardType.ARTIFACT.getPredicate(),
+                CardType.LAND.getPredicate()
+        ));
+        FILTER_PERMANENT_ARTIFACT_OR_LAND.setLockedFilter(true);
+    }
+
     public static final FilterControlledPermanent FILTER_CONTROLLED_PERMANENT = new FilterControlledPermanent();
 
     static {
