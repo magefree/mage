@@ -139,6 +139,7 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Izoni, Center of the Web", 209, Rarity.RARE, mage.cards.i.IzoniCenterOfTheWeb.class));
         cards.add(new SetCardInfo("Jaded Analyst", 62, Rarity.COMMON, mage.cards.j.JadedAnalyst.class));
         cards.add(new SetCardInfo("Judith, Carnage Connoisseur", 210, Rarity.RARE, mage.cards.j.JudithCarnageConnoisseur.class));
+        cards.add(new SetCardInfo("Karlov Watchdog", 20, Rarity.UNCOMMON, mage.cards.k.KarlovWatchdog.class));
         cards.add(new SetCardInfo("Kellan, Inquisitive Prodigy", 212, Rarity.RARE, mage.cards.k.KellanInquisitiveProdigy.class));
         cards.add(new SetCardInfo("Knife", 134, Rarity.UNCOMMON, mage.cards.k.Knife.class));
         cards.add(new SetCardInfo("Kraul Whipcracker", 213, Rarity.UNCOMMON, mage.cards.k.KraulWhipcracker.class));
