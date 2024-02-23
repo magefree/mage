@@ -157,6 +157,7 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Vandalblast", 355, Rarity.UNCOMMON, mage.cards.v.Vandalblast.class));
         cards.add(new SetCardInfo("Vault 101: Birthday Party", 28, Rarity.RARE, mage.cards.v.Vault101BirthdayParty.class));
         cards.add(new SetCardInfo("Vigor", 347, Rarity.RARE, mage.cards.v.Vigor.class));
+        cards.add(new SetCardInfo("Viridescent Bog", 154, Rarity.RARE, mage.cards.v.ViridescentBog.class));
         cards.add(new SetCardInfo("Walking Ballista", 352, Rarity.RARE, mage.cards.w.WalkingBallista.class));
         cards.add(new SetCardInfo("War Room", 1068, Rarity.RARE, mage.cards.w.WarRoom.class));
         cards.add(new SetCardInfo("Wasteland", 361, Rarity.RARE, mage.cards.w.Wasteland.class));
