@@ -110,13 +110,13 @@ class DonnaNobleTriggeredAbility extends TriggeredAbilityImpl {
                 return false;
             }
         } else {
-            paired = null;
+            return false;
         }
 
         int damage = dEvent
                 .getEvents()
                 .stream()
-                .filter(damagedEvent -> paired != null && paired.getId().equals(damagedEvent.getTargetId()))
+                .filter(damagedEvent -> paired.getId().equals(damagedEvent.getTargetId()))
                 .mapToInt(GameEvent::getAmount)
                 .sum();
         if (damage < 1) {
