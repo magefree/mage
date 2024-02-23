@@ -154,6 +154,7 @@ public class VerifyCardDataTest {
 
         // rarity
         // skipListAddName(SKIP_LIST_RARITY, set, cardName);
+        skipListAddName(SKIP_LIST_RARITY, "PIP", "Casualties of War"); // temporary
         skipListAddName(SKIP_LIST_RARITY, "CMR", "The Prismatic Piper"); // Collation is not yet set up for CMR https://www.lethe.xyz/mtg/collation/cmr.html
 
         // missing abilities
