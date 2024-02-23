@@ -68,7 +68,7 @@ class IncineratorOfTheGuiltyEffect extends OneShotEffect {
 
     IncineratorOfTheGuiltyEffect() {
         super(Outcome.Benefit);
-        staticText = "you may collect evidence X. When you do, Incinerator of the Guilty deals X damage " +
+        staticText = "you may collect evidence X. When you do, {this} deals X damage " +
                 "to each creature and each planeswalker that player controls.";
     }
 
@@ -96,7 +96,7 @@ class IncineratorOfTheGuiltyEffect extends OneShotEffect {
 
         ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(
                 new DamageAllControlledTargetEffect(xValue, filter)
-                        .setTargetPointer(getTargetPointer()), false);
+                        .setTargetPointer(getTargetPointer().copy()), false);
         game.fireReflexiveTriggeredAbility(ability, source);
         return true;
     }
