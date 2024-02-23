@@ -134,6 +134,7 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Innocent Bystander", 133, Rarity.COMMON, mage.cards.i.InnocentBystander.class));
         cards.add(new SetCardInfo("Inside Source", 19, Rarity.COMMON, mage.cards.i.InsideSource.class));
         cards.add(new SetCardInfo("Insidious Roots", 208, Rarity.UNCOMMON, mage.cards.i.InsidiousRoots.class));
+        cards.add(new SetCardInfo("Intrude on the Mind", 61, Rarity.MYTHIC, mage.cards.i.IntrudeOnTheMind.class));
         cards.add(new SetCardInfo("Island", 273, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("It Doesn't Add Up", 89, Rarity.UNCOMMON, mage.cards.i.ItDoesntAddUp.class));
         cards.add(new SetCardInfo("Izoni, Center of the Web", 209, Rarity.RARE, mage.cards.i.IzoniCenterOfTheWeb.class));
