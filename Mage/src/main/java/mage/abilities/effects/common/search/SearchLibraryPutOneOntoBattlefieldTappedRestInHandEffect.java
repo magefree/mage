@@ -11,10 +11,7 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
-
-import java.util.Set;
 
 /**
  * @author BetaSteward_at_googlemail.com, edited by Cguy7777
@@ -52,21 +49,22 @@ public class SearchLibraryPutOneOntoBattlefieldTappedRestInHandEffect extends Se
                 controller.revealCards(sourceObject.getIdName(), revealed, game);
 
                 if (target.getTargets().size() >= 2) {
-                    TargetCard targetCardToBattlefield = new TargetCard(Zone.LIBRARY, filter);
+                    TargetCardInLibrary targetCardToBattlefield = new TargetCardInLibrary(filter);
                     controller.choose(Outcome.PutLandInPlay, revealed, targetCardToBattlefield, source, game);
+
                     Card cardToBattlefield = revealed.get(targetCardToBattlefield.getFirstTarget(), game);
+                    Cards cardsToHand = new CardsImpl(revealed);
                     if (cardToBattlefield != null) {
                         controller.moveCards(cardToBattlefield, Zone.BATTLEFIELD, source, game, true, false, false, null);
-                        revealed.remove(cardToBattlefield);
+                        cardsToHand.remove(cardToBattlefield);
                     }
 
-                    Set<Card> cardsToHand = revealed.getCards(game);
                     controller.moveCards(cardsToHand, Zone.HAND, source, game);
                 } else if (target.getTargets().size() == 1) {
-                    Set<Card> cards = revealed.getCards(game);
-                    Card card = cards.isEmpty() ? null : cards.iterator().next();
-                    if (card != null) {
-                        controller.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, false, null);
+                    Cards cards = new CardsImpl(revealed);
+                    Card cardToBattlefield = cards.getRandom(game);
+                    if (cardToBattlefield != null) {
+                        controller.moveCards(cardToBattlefield, Zone.BATTLEFIELD, source, game, true, false, false, null);
                     }
                 }
             }
