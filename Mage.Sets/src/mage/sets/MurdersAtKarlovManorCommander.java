@@ -257,6 +257,8 @@ public final class MurdersAtKarlovManorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Temple of Triumph", 306, Rarity.RARE, mage.cards.t.TempleOfTriumph.class));
         cards.add(new SetCardInfo("Temple of the False God", 305, Rarity.UNCOMMON, mage.cards.t.TempleOfTheFalseGod.class));
         cards.add(new SetCardInfo("Temur War Shaman", 187, Rarity.RARE, mage.cards.t.TemurWarShaman.class));
+        cards.add(new SetCardInfo("Tesak, Judith's Hellhound", 36, Rarity.RARE, mage.cards.t.TesakJudithsHellhound.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Tesak, Judith's Hellhound", 346, Rarity.RARE, mage.cards.t.TesakJudithsHellhound.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tezzeret, Betrayer of Flesh", 120, Rarity.MYTHIC, mage.cards.t.TezzeretBetrayerOfFlesh.class));
         cards.add(new SetCardInfo("Thelonite Hermit", 188, Rarity.RARE, mage.cards.t.TheloniteHermit.class));
         cards.add(new SetCardInfo("Thought Monitor", 121, Rarity.RARE, mage.cards.t.ThoughtMonitor.class));
