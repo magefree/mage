@@ -450,6 +450,11 @@ public class GameEvent implements Serializable {
          */
         DAMAGED_BATCH_FOR_PERMANENTS,
 
+        /* DAMAGED_BATCH_FOR_ONE_PERMANENT
+         combines all permanent damage events to a single batch (event) and split it per damaged permanent
+         */
+        DAMAGED_BATCH_FOR_ONE_PERMANENT,
+
         DESTROY_PERMANENT,
         /* DESTROY_PERMANENT_BY_LEGENDARY_RULE
          targetId    id of the permanent to destroy

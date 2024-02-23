@@ -812,15 +812,18 @@ public class GameState implements Serializable, Copyable<GameState> {
         // Combine multiple damage events in the single event (batch)
         // * per damage type (see GameEvent.DAMAGED_BATCH_FOR_PERMANENTS, GameEvent.DAMAGED_BATCH_FOR_PLAYERS)
         // * per player (see GameEvent.DAMAGED_BATCH_FOR_ONE_PLAYER)
+        // * per permanent (see GameEvent.DAMAGED_BATCH_FOR_ONE_PERMANENT)
         //
         // Warning, one event can be stored in multiple batches,
         // example: DAMAGED_BATCH_FOR_PLAYERS + DAMAGED_BATCH_FOR_ONE_PLAYER
 
         boolean isPlayerDamage = damagedEvent instanceof DamagedPlayerEvent;
+        boolean isPermanentDamage = damagedEvent instanceof DamagedPermanentEvent;
 
         // existing batch
         boolean isDamageBatchUsed = false;
         boolean isPlayerBatchUsed = false;
+        boolean isPermanentBatchUsed = false;
         for (GameEvent event : simultaneousEvents) {
 
             // per damage type
@@ -839,6 +842,16 @@ public class GameState implements Serializable, Copyable<GameState> {
                     isPlayerBatchUsed = true;
                 }
             }
+
+            // per permanent
+            if (isPermanentDamage && event instanceof DamagedBatchForOnePermanentEvent) {
+                DamagedBatchForOnePermanentEvent oldPermanentBatch = (DamagedBatchForOnePermanentEvent) event;
+                if (oldPermanentBatch.getDamageClazz().isInstance(damagedEvent)
+                        && event.getTargetId().equals(damagedEvent.getTargetId())) {
+                    oldPermanentBatch.addEvent(damagedEvent);
+                    isPermanentBatchUsed = true;
+                }
+            }
         }
 
         // new batch
@@ -847,6 +860,11 @@ public class GameState implements Serializable, Copyable<GameState> {
         }
         if (!isPlayerBatchUsed && isPlayerDamage) {
             DamagedBatchEvent event = new DamagedBatchForOnePlayerEvent(damagedEvent.getTargetId());
+            event.addEvent(damagedEvent);
+            addSimultaneousEvent(event, game);
+        }
+        if (!isPermanentBatchUsed && isPermanentDamage) {
+            DamagedBatchEvent event = new DamagedBatchForOnePermanentEvent(damagedEvent.getTargetId());
             event.addEvent(damagedEvent);
             addSimultaneousEvent(event, game);
         }
