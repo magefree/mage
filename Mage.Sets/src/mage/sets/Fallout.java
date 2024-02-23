@@ -52,6 +52,7 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Clifftop Retreat", 258, Rarity.RARE, mage.cards.c.ClifftopRetreat.class));
         cards.add(new SetCardInfo("Command Tower", 259, Rarity.COMMON, mage.cards.c.CommandTower.class));
         cards.add(new SetCardInfo("Corpsejack Menace", 742, Rarity.UNCOMMON, mage.cards.c.CorpsejackMenace.class));
+        cards.add(new SetCardInfo("Crimson Caravaneer", 56, Rarity.UNCOMMON, mage.cards.c.CrimsonCaravaneer.class));
         cards.add(new SetCardInfo("Crucible of Worlds", 357, Rarity.MYTHIC, mage.cards.c.CrucibleOfWorlds.class));
         cards.add(new SetCardInfo("Deadly Dispute", 184, Rarity.COMMON, mage.cards.d.DeadlyDispute.class));
         cards.add(new SetCardInfo("Desolate Mire", 146, Rarity.RARE, mage.cards.d.DesolateMire.class));
