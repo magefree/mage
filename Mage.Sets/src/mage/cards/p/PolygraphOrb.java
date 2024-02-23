@@ -92,12 +92,14 @@ class PolygraphOrbEffect extends OneShotEffect {
             }
 
             TargetDiscard targetDiscard = new TargetDiscard(0, 1, StaticFilters.FILTER_CARD_A, opponentId);
+            targetDiscard.withChooseHint("otherwise you have to sacrifice a creature or lose 3 life");
             if (opponent.choose(Outcome.PreventDamage, targetDiscard, source, game)) {
                 chosenCards.put(opponentId, game.getCard(targetDiscard.getFirstTarget()));
                 continue;
             }
 
             TargetSacrifice targetSacrifice = new TargetSacrifice(0, 1, StaticFilters.FILTER_CONTROLLED_CREATURE);
+            targetSacrifice.withChooseHint("otherwise you lose 3 life");
             if (opponent.choose(Outcome.PreventDamage, targetSacrifice, source, game)) {
                 chosenCards.put(opponentId, game.getCard(targetSacrifice.getFirstTarget()));
                 continue;
