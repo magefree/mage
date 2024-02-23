@@ -193,6 +193,7 @@ public final class MurdersAtKarlovManorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Psychosis Crawler", 234, Rarity.RARE, mage.cards.p.PsychosisCrawler.class));
         cards.add(new SetCardInfo("Ravenous Chupacabra", 136, Rarity.UNCOMMON, mage.cards.r.RavenousChupacabra.class));
         cards.add(new SetCardInfo("Reanimate", 137, Rarity.RARE, mage.cards.r.Reanimate.class));
+        cards.add(new SetCardInfo("Redemption Arc", 13, Rarity.RARE, mage.cards.r.RedemptionArc.class));
         cards.add(new SetCardInfo("Reliquary Tower", 282, Rarity.UNCOMMON, mage.cards.r.ReliquaryTower.class));
         cards.add(new SetCardInfo("Return of the Wildspeaker", 181, Rarity.RARE, mage.cards.r.ReturnOfTheWildspeaker.class));
         cards.add(new SetCardInfo("Rise of the Dark Realms", 138, Rarity.MYTHIC, mage.cards.r.RiseOfTheDarkRealms.class));
