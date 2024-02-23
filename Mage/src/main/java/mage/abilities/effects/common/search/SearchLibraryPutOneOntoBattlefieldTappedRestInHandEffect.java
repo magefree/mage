@@ -59,7 +59,7 @@ public class SearchLibraryPutOneOntoBattlefieldTappedRestInHandEffect extends Se
                         cardsToHand.remove(cardToBattlefield);
                     }
 
-                    controller.moveCards(cardsToHand, Zone.HAND, source, game);
+                    controller.moveCardsToHandWithInfo(cardsToHand, source, game, true);
                 } else if (target.getTargets().size() == 1) {
                     Cards cards = new CardsImpl(revealed);
                     Card cardToBattlefield = cards.getRandom(game);
