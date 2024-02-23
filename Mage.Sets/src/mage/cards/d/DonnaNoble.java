@@ -79,7 +79,7 @@ class DonnaNobleTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         this.getTargets().clear();
         DamagedBatchForPermanentsEvent dEvent = (DamagedBatchForPermanentsEvent) event;
-        return checkTriggerThis(dEvent) || checkTriggerPaired(dEvent, game);
+        return checkTriggerThis(dEvent) | checkTriggerPaired(dEvent, game);
     }
 
     boolean checkTriggerThis(DamagedBatchForPermanentsEvent dEvent) {
