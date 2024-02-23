@@ -27,6 +27,7 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Arcane Signet", 224, Rarity.UNCOMMON, mage.cards.a.ArcaneSignet.class));
         cards.add(new SetCardInfo("Ash Barrens", 253, Rarity.COMMON, mage.cards.a.AshBarrens.class));
         cards.add(new SetCardInfo("Assemble the Legion", 210, Rarity.RARE, mage.cards.a.AssembleTheLegion.class));
+        cards.add(new SetCardInfo("Atomize", 94, Rarity.RARE, mage.cards.a.Atomize.class));
         cards.add(new SetCardInfo("Ayula, Queen Among Bears", 348, Rarity.RARE, mage.cards.a.AyulaQueenAmongBears.class));
         cards.add(new SetCardInfo("Basilisk Collar", 225, Rarity.RARE, mage.cards.b.BasiliskCollar.class));
         cards.add(new SetCardInfo("Bastion of Remembrance", 182, Rarity.UNCOMMON, mage.cards.b.BastionOfRemembrance.class));
