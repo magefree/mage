@@ -74,7 +74,7 @@ class NezumiGraverobberFlipEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card card = game.getCard(targetPointer.getFirst(game, source));
+        Card card = game.getCard(getTargetPointer().getFirst(game, source));
         if (card != null) {
             Player player = game.getPlayer(card.getOwnerId());
             if (player != null) {

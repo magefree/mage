@@ -439,6 +439,7 @@ public final class ZonesHandler {
         if (Zone.STACK == event.getFromZone()) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
             if (spell != null && !spell.isFaceDown(game)) {
+                // TODO: wtf, why only colors!? Must research and remove colors workaround
                 if (!card.getColor(game).equals(spell.getColor(game))) {
                     // the card that is referenced to in the permanent is copied and the spell attributes are set to this copied card
                     card.getColor(game).setColor(spell.getColor(game));

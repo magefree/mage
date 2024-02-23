@@ -101,7 +101,7 @@ class AuraGraftMoveAuraEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent enchantment = game.getPermanent(targetPointer.getFirst(game, source));
+        Permanent enchantment = game.getPermanent(getTargetPointer().getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
         if (enchantment == null || controller == null) {
             return false;

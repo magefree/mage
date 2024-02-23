@@ -117,12 +117,6 @@ public enum TokenRepository {
                         imageNumber = Integer.parseInt(params.get(4));
                     }
 
-                    // image file name
-                    String imageFileName = "";
-                    if (params.size() > 5 && !params.get(5).isEmpty()) {
-                        imageFileName = params.get(5);
-                    }
-
                     // token class name (uses for images search for render)
                     String tokenClassName = "";
                     if (params.size() > 7 && !params.get(6).isEmpty()) {
@@ -190,7 +184,7 @@ public enum TokenRepository {
                     }
 
                     // OK
-                    TokenInfo token = new TokenInfo(tokenType, tokenName, setCode, imageNumber, tokenClassName, imageFileName);
+                    TokenInfo token = new TokenInfo(tokenType, tokenName, setCode, imageNumber, tokenClassName);
                     list.add(token);
                 } finally {
                     line = reader.readLine();

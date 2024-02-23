@@ -73,7 +73,7 @@ public final class TournamentUtil {
         List<Card> cards = new ArrayList<>();
         if (!lands.isEmpty()) {
             for (int i = 0; i < number; i++) {
-                Card land = lands.get(RandomUtil.nextInt(lands.size())).getCard();
+                Card land = lands.get(RandomUtil.nextInt(lands.size())).createCard();
                 cards.add(land);
             }
         }

@@ -67,7 +67,7 @@ class PsychicIntrusionExileEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player opponent = game.getPlayer(targetPointer.getFirst(game, source));
+        Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
         MageObject sourceObject = game.getObject(source);
         if (opponent != null && sourceObject != null) {
             opponent.revealCards(sourceObject.getName(), opponent.getHand(), game);

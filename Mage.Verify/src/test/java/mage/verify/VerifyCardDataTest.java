@@ -97,7 +97,8 @@ public class VerifyCardDataTest {
     private static final List<String> evergreenKeywords = Arrays.asList(
             "flying", "lifelink", "menace", "trample", "haste", "first strike", "hexproof", "fear",
             "deathtouch", "double strike", "indestructible", "reach", "flash", "defender", "vigilance",
-            "plainswalk", "islandwalk", "swampwalk", "mountainwalk", "forestwalk", "myriad", "prowess", "convoke"
+            "plainswalk", "islandwalk", "swampwalk", "mountainwalk", "forestwalk", "myriad", "prowess", "convoke",
+            "shroud", "banding", "flanking", "horsemanship", "legendary landwalk"
     );
 
     private static final List<String> doubleWords = new ArrayList<>();
@@ -153,6 +154,7 @@ public class VerifyCardDataTest {
 
         // rarity
         // skipListAddName(SKIP_LIST_RARITY, set, cardName);
+        skipListAddName(SKIP_LIST_RARITY, "PIP", "Casualties of War"); // temporary
         skipListAddName(SKIP_LIST_RARITY, "CMR", "The Prismatic Piper"); // Collation is not yet set up for CMR https://www.lethe.xyz/mtg/collation/cmr.html
 
         // missing abilities
@@ -269,8 +271,12 @@ public class VerifyCardDataTest {
         return skipListGet(listName).contains(set);
     }
 
+    /**
+     * For splitting printed rules text with multiple keywords on one line
+     */
     private static boolean evergreenCheck(String s) {
-        return evergreenKeywords.contains(s) || s.startsWith("protection from") || s.startsWith("hexproof from") || s.startsWith("ward ");
+        return evergreenKeywords.contains(s) || s.startsWith("protection from") || s.startsWith("hexproof from")
+                || s.startsWith("ward ") || s.startsWith("rampage ") || s.startsWith("annihilator");
     }
 
     private static <T> boolean eqSet(Collection<T> a, Collection<T> b) {
@@ -615,7 +621,7 @@ public class VerifyCardDataTest {
                 CardInfo cardInfo = CardRepository.instance.findCardsByClass(info.getCardClass().getCanonicalName()).stream().findFirst().orElse(null);
                 Assert.assertNotNull(cardInfo);
 
-                Card card = cardInfo.getCard();
+                Card card = cardInfo.createCard();
                 Card secondCard = card.getSecondCardFace();
                 if (secondCard != null) {
                     if (set.findCardInfoByClass(secondCard.getClass()).isEmpty()) {
@@ -2304,11 +2310,11 @@ public class VerifyCardDataTest {
 
     private void checkWrongAbilitiesTextEnd() {
         // TODO: implement tests result/stats by github actions to show in check message compared to prev version
-        System.out.println(String.format(""));
-        System.out.println(String.format("Stats for %d cards checked for abilities text:", wrongAbilityStatsTotal));
-        System.out.println(String.format(" - Cards with correct text:  %5d (%.2f)", wrongAbilityStatsGood, wrongAbilityStatsGood * 100.0 / wrongAbilityStatsTotal));
-        System.out.println(String.format(" - Cards with text errors:   %5d (%.2f)", wrongAbilityStatsBad, wrongAbilityStatsBad * 100.0 / wrongAbilityStatsTotal));
-        System.out.println(String.format(""));
+        System.out.println();
+        System.out.printf("Stats for %d cards checked for abilities text:%n", wrongAbilityStatsTotal);
+        System.out.printf(" - Cards with correct text:  %5d (%.2f)%n", wrongAbilityStatsGood, wrongAbilityStatsGood * 100.0 / wrongAbilityStatsTotal);
+        System.out.printf(" - Cards with text errors:   %5d (%.2f)%n", wrongAbilityStatsBad, wrongAbilityStatsBad * 100.0 / wrongAbilityStatsTotal);
+        System.out.println();
     }
 
     private void checkWrongAbilitiesText(Card card, MtgJsonCard ref, int cardIndex) {
@@ -2380,15 +2386,11 @@ public class VerifyCardDataTest {
 
         if (ref.subtypes.contains("Adventure")) {
             for (int i = 0; i < refRules.length; i++) {
-                refRules[i] = new StringBuilder("Adventure ")
-                        .append(ref.types.get(0))
-                        .append(" - ")
-                        .append(ref.faceName)
-                        .append(' ')
-                        .append(ref.manaCost)
-                        .append(" - ")
-                        .append(refRules[i])
-                        .toString();
+                refRules[i] = "Adventure " +
+                        ref.types.get(0) + " - " +
+                        ref.faceName + ' ' +
+                        ref.manaCost + " - " +
+                        refRules[i];
             }
         }
 

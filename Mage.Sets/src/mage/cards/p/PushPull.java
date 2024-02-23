@@ -109,14 +109,14 @@ class PullEffect extends OneShotEffect {
         }
 
         permanents.forEach(permanent -> {
-            FixedTarget target = new FixedTarget(permanent, game);
+            FixedTarget blueprintTarget = new FixedTarget(permanent, game);
 
             ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance());
-            effect.setTargetPointer(target);
+            effect.setTargetPointer(blueprintTarget.copy());
             game.addEffect(effect, source);
 
             Effect sacrificeEffect = new SacrificeTargetEffect("sacrifice " + permanent.getLogName(), controller.getId());
-            sacrificeEffect.setTargetPointer(target);
+            sacrificeEffect.setTargetPointer(blueprintTarget.copy());
             game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(sacrificeEffect), source);
         });
 

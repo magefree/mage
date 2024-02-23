@@ -111,7 +111,7 @@ class CombustibleGearhulkMillAndDamageEffect extends OneShotEffect {
                     .stream()
                     .mapToInt(MageObject::getManaValue)
                     .sum();
-            Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
+            Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
             if (targetPlayer != null) {
                 targetPlayer.damage(sumCMC, source.getSourceId(), source, game);
                 return true;

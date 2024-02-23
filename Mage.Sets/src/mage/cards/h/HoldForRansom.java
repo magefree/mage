@@ -95,7 +95,7 @@ class HoldForRansomSacrificeEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent aura = game.getPermanent(targetPointer.getFirst(game, source));
+        Permanent aura = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (aura == null) {
             return false;
         }

@@ -27,7 +27,7 @@ public final class JeskasWill extends CardImpl {
 
         // Choose one. If you control a commander as you cast this spell, you may choose both.
         this.getSpellAbility().getModes().setChooseText(
-                "Choose one. If you control a commander as you cast this spell, you may choose both."
+                "Choose one. If you control a commander as you cast this spell, you may choose both instead."
         );
         this.getSpellAbility().getModes().setMoreCondition(ControlACommanderCondition.instance);
 
@@ -70,7 +70,7 @@ class JeskasWillEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Player player = game.getPlayer(source.getFirstTarget());
-        if (controller == null || player == null || player.getHand().size() < 1) {
+        if (controller == null || player == null || player.getHand().isEmpty()) {
             return false;
         }
         controller.getManaPool().addMana(Mana.RedMana(player.getHand().size()), game, source);

@@ -111,6 +111,6 @@ class ChampionsOfMinasTirithDoIfCostPaid extends DoIfCostPaid {
 
     @Override
     protected Player getPayingPlayer(Game game, Ability source) {
-        return game.getPlayer(targetPointer.getFirst(game, source));
+        return game.getPlayer(getTargetPointer().getFirst(game, source));
     }
 }

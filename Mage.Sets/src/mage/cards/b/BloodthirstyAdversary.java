@@ -124,7 +124,7 @@ class BloodthirstyAdversaryCopyEffect extends OneShotEffect {
             return false;
         }
         Set<Card> cardsToExile = new LinkedHashSet<>();
-        for (UUID cardId : targetPointer.getTargets(game, source)) {
+        for (UUID cardId : getTargetPointer().getTargets(game, source)) {
             Card card = game.getCard(cardId);
             if (card != null) {
                 cardsToExile.add(card);

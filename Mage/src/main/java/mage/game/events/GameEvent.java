@@ -73,6 +73,7 @@ public class GameEvent implements Serializable {
          */
         ZONE_CHANGE,
         ZONE_CHANGE_GROUP,
+        ZONE_CHANGE_BATCH,
         DRAW_CARDS, // event calls for multi draws only (if player draws 2+ cards at once)
         DRAW_CARD, DREW_CARD,
         EXPLORE, EXPLORED, // targetId is exploring permanent, playerId is its controller
@@ -811,5 +812,10 @@ public class GameEvent implements Serializable {
      */
     protected void setSourceId(UUID sourceId) {
         this.sourceId = sourceId;
+    }
+
+    @Override
+    public String toString() {
+        return this.type.toString();
     }
 }

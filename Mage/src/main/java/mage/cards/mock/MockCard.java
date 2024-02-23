@@ -75,7 +75,7 @@ public class MockCard extends CardImpl {
         }
 
         if (card.isModalDoubleFacedCard()) {
-            ModalDoubleFacedCard mdfCard = (ModalDoubleFacedCard) card.getCard();
+            ModalDoubleFacedCard mdfCard = (ModalDoubleFacedCard) card.createCard();
             CardInfo mdfSecondSide = new CardInfo(mdfCard.getRightHalfCard());
             this.secondSideCard = new MockCard(mdfSecondSide);
             this.isModalDoubleFacedCard = true;

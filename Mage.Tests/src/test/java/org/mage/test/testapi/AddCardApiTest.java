@@ -78,14 +78,16 @@ public class AddCardApiTest extends CardTestPlayerBase {
         execute();
 
         assertPermanentCount(playerA, "Memorial to Glory", 2);
-        getBattlefieldCards(playerA).stream()
-                .filter(card -> card.getName().equals("Memorial to Glory"))
-                .forEach(card -> Assert.assertEquals("40K", card.getExpansionSetCode()));
+        getBattlefieldCards(playerA)
+                .stream()
+                .filter(info -> info.getCard().getName().equals("Memorial to Glory"))
+                .forEach(info -> Assert.assertEquals("40K", info.getCard().getExpansionSetCode()));
 
         assertPermanentCount(playerA, "Plains", 2);
-        getBattlefieldCards(playerA).stream()
-                .filter(card -> card.getName().equals("Plains"))
-                .forEach(card -> Assert.assertEquals("PANA", card.getExpansionSetCode()));
+        getBattlefieldCards(playerA)
+                .stream()
+                .filter(info -> info.getCard().getName().equals("Plains"))
+                .forEach(info -> Assert.assertEquals("PANA", info.getCard().getExpansionSetCode()));
     }
 
     @Test(expected = org.junit.ComparisonFailure.class)

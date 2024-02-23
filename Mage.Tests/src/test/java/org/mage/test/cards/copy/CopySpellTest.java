@@ -649,8 +649,8 @@ public class CopySpellTest extends CardTestPlayerBase {
 
     @Test
     public void test_SimpleCopy_Card() {
-        Card sourceCard = CardRepository.instance.findCard("Grizzly Bears").getCard();
-        Card originalCard = CardRepository.instance.findCard("Grizzly Bears").getCard();
+        Card sourceCard = CardRepository.instance.findCard("Grizzly Bears").createCard();
+        Card originalCard = CardRepository.instance.findCard("Grizzly Bears").createCard();
         prepareZoneAndZCC(originalCard);
         Card copiedCard = currentGame.copyCard(originalCard, null, playerA.getId());
         // main
@@ -664,8 +664,8 @@ public class CopySpellTest extends CardTestPlayerBase {
 
     @Test
     public void test_SimpleCopy_SplitCard() {
-        SplitCard sourceCard = (SplitCard) CardRepository.instance.findCard("Alive // Well").getCard();
-        SplitCard originalCard = (SplitCard) CardRepository.instance.findCard("Alive // Well").getCard();
+        SplitCard sourceCard = (SplitCard) CardRepository.instance.findCard("Alive // Well").createCard();
+        SplitCard originalCard = (SplitCard) CardRepository.instance.findCard("Alive // Well").createCard();
         prepareZoneAndZCC(originalCard);
         SplitCard copiedCard = (SplitCard) currentGame.copyCard(originalCard, null, playerA.getId());
         // main
@@ -693,8 +693,8 @@ public class CopySpellTest extends CardTestPlayerBase {
 
     @Test
     public void test_SimpleCopy_AdventureCard() {
-        AdventureCard sourceCard = (AdventureCard) CardRepository.instance.findCard("Animating Faerie").getCard();
-        AdventureCard originalCard = (AdventureCard) CardRepository.instance.findCard("Animating Faerie").getCard();
+        AdventureCard sourceCard = (AdventureCard) CardRepository.instance.findCard("Animating Faerie").createCard();
+        AdventureCard originalCard = (AdventureCard) CardRepository.instance.findCard("Animating Faerie").createCard();
         prepareZoneAndZCC(originalCard);
         AdventureCard copiedCard = (AdventureCard) currentGame.copyCard(originalCard, null, playerA.getId());
         // main
@@ -715,8 +715,8 @@ public class CopySpellTest extends CardTestPlayerBase {
 
     @Test
     public void test_SimpleCopy_MDFC() {
-        ModalDoubleFacedCard sourceCard = (ModalDoubleFacedCard) CardRepository.instance.findCard("Agadeem's Awakening").getCard();
-        ModalDoubleFacedCard originalCard = (ModalDoubleFacedCard) CardRepository.instance.findCard("Agadeem's Awakening").getCard();
+        ModalDoubleFacedCard sourceCard = (ModalDoubleFacedCard) CardRepository.instance.findCard("Agadeem's Awakening").createCard();
+        ModalDoubleFacedCard originalCard = (ModalDoubleFacedCard) CardRepository.instance.findCard("Agadeem's Awakening").createCard();
         prepareZoneAndZCC(originalCard);
         ModalDoubleFacedCard copiedCard = (ModalDoubleFacedCard) currentGame.copyCard(originalCard, null, playerA.getId());
         // main
@@ -889,9 +889,10 @@ public class CopySpellTest extends CardTestPlayerBase {
     }
 
     private void prepareZoneAndZCC(Card originalCard) {
-        // prepare custom zcc and zone for copy testing
+        // prepare custom zcc and zone for copy testing (it's not real game)
+        // HAND zone is safest way (some card types require diff zones for stack/battlefield, e.g. MDFC)
         originalCard.setZoneChangeCounter(5, currentGame);
-        originalCard.setZone(Zone.STACK, currentGame);
+        originalCard.setZone(Zone.HAND, currentGame);
     }
 
     private void cardsMustHaveSameZoneAndZCC(Card originalCard, Card copiedCard, String infoPrefix) {
