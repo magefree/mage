@@ -161,6 +161,7 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Walking Ballista", 352, Rarity.RARE, mage.cards.w.WalkingBallista.class));
         cards.add(new SetCardInfo("War Room", 1068, Rarity.RARE, mage.cards.w.WarRoom.class));
         cards.add(new SetCardInfo("Wasteland", 361, Rarity.RARE, mage.cards.w.Wasteland.class));
+        cards.add(new SetCardInfo("Watchful Radstag", 615, Rarity.RARE, mage.cards.w.WatchfulRadstag.class));
         cards.add(new SetCardInfo("Wear // Tear", 222, Rarity.UNCOMMON, mage.cards.w.WearTear.class));
         cards.add(new SetCardInfo("Wild Growth", 208, Rarity.COMMON, mage.cards.w.WildGrowth.class));
         cards.add(new SetCardInfo("Windbrisk Heights", 315, Rarity.RARE, mage.cards.w.WindbriskHeights.class));
