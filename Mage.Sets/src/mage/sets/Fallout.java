@@ -25,6 +25,7 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Alpha Deathclaw", 91, Rarity.RARE, mage.cards.a.AlphaDeathclaw.class));
         cards.add(new SetCardInfo("Anguished Unmaking", 209, Rarity.RARE, mage.cards.a.AnguishedUnmaking.class));
         cards.add(new SetCardInfo("Arcane Signet", 224, Rarity.UNCOMMON, mage.cards.a.ArcaneSignet.class));
+        cards.add(new SetCardInfo("Armory Paladin", 93, Rarity.RARE, mage.cards.a.ArmoryPaladin.class));
         cards.add(new SetCardInfo("Ash Barrens", 253, Rarity.COMMON, mage.cards.a.AshBarrens.class));
         cards.add(new SetCardInfo("Assemble the Legion", 210, Rarity.RARE, mage.cards.a.AssembleTheLegion.class));
         cards.add(new SetCardInfo("Atomize", 94, Rarity.RARE, mage.cards.a.Atomize.class));
