@@ -57,6 +57,8 @@
 
      private Dimension cardDimension;
      private final ReentrantReadWriteLock countLabelsLock = new ReentrantReadWriteLock();
+     private final Lock countLabelsLockRead = countLabelsLock.readLock();
+      private final Lock countLabelsLockWrite = countLabelsLock.writeLock();
      private final List<JLabel> countLabels = new ArrayList<>(); // count label code copy-pasted from CardGrid.java
      private int rowHeight;
      private CardsView cards;
@@ -285,14 +287,14 @@
 
      @Override
      public void drawCards(SortSetting sortSetting) {
-         Lock writeLock = this.countLabelsLock.writeLock();
+         this.countLabelsLockWrite.lock();
          try  {
              for (JLabel label : this.countLabels) {
                  cardArea.remove(label);
              }
              this.countLabels.clear();
          } finally {
-             writeLock.unlock();
+             this.countLabelsLockWrite.unlock();
          }
 
          int maxWidth = this.getParent().getWidth();
@@ -408,11 +410,11 @@
 
      private JLabel addNewCountLabel(int columnNumber) {
          JLabel label = DragCardGrid.createCountLabel(null);
-         Lock writeLock = this.countLabelsLock.writeLock();
+         this.countLabelsLockWrite.lock();
          try {
              this.countLabels.add(label);
          } finally {
-              writeLock.unlock();
+              this.countLabelsLockWrite.unlock();
          }
          cardArea.add(label, (Integer) 0); // draw on background
          label.setLocation(columnNumber * cardDimension.width, 5);
