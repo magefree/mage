@@ -105,6 +105,7 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Felonious Rage", 125, Rarity.COMMON, mage.cards.f.FeloniousRage.class));
         cards.add(new SetCardInfo("Festerleech", 85, Rarity.UNCOMMON, mage.cards.f.Festerleech.class));
         cards.add(new SetCardInfo("Flotsam // Jetsam", 247, Rarity.UNCOMMON, mage.cards.f.FlotsamJetsam.class));
+        cards.add(new SetCardInfo("Flourishing Bloom-Kin", 160, Rarity.UNCOMMON, mage.cards.f.FlourishingBloomKin.class));
         cards.add(new SetCardInfo("Forensic Gadgeteer", 57, Rarity.RARE, mage.cards.f.ForensicGadgeteer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forensic Gadgeteer", 342, Rarity.RARE, mage.cards.f.ForensicGadgeteer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forensic Researcher", 58, Rarity.UNCOMMON, mage.cards.f.ForensicResearcher.class));
@@ -131,6 +132,7 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Hunted Bonebrute", 87, Rarity.RARE, mage.cards.h.HuntedBonebrute.class));
         cards.add(new SetCardInfo("Hustle // Bustle", 249, Rarity.UNCOMMON, mage.cards.h.HustleBustle.class));
         cards.add(new SetCardInfo("Ill-Timed Explosion", 207, Rarity.RARE, mage.cards.i.IllTimedExplosion.class));
+        cards.add(new SetCardInfo("Incinerator of the Guilty", 132, Rarity.MYTHIC, mage.cards.i.IncineratorOfTheGuilty.class));
         cards.add(new SetCardInfo("Innocent Bystander", 133, Rarity.COMMON, mage.cards.i.InnocentBystander.class));
         cards.add(new SetCardInfo("Inside Source", 19, Rarity.COMMON, mage.cards.i.InsideSource.class));
         cards.add(new SetCardInfo("Insidious Roots", 208, Rarity.UNCOMMON, mage.cards.i.InsidiousRoots.class));

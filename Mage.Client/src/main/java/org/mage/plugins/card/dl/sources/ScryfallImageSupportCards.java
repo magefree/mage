@@ -543,6 +543,11 @@ public class ScryfallImageSupportCards {
             add("MKM"); // Murders at Karlov Manor
             add("MKC"); // Murders at Karlov Manor Commander
             add("CLU"); // Ravnica: Clue Edition
+            add("OTJ"); // Outlaws of Thunder Junction
+            add("BIG"); // The Big Score
+            add("MH3"); // Modern Horizons 3
+            add("ACR"); // Assassin's Creed
+            add("BLB"); // Bloomburrow
 
             // Custom sets using Scryfall images - must provide a direct link for each card in directDownloadLinks
             add("CALC"); // Custom Alchemized versions of existing cards

@@ -51,7 +51,7 @@ public final class KellanInquisitiveProdigy extends AdventureCard {
 
         // Tail the Suspect
         // Investigate. You may play an additional land this turn.
-        this.getSpellCard().getSpellAbility().addEffect(new InvestigateEffect());
+        this.getSpellCard().getSpellAbility().addEffect(new InvestigateEffect(false));
         this.getSpellCard().getSpellAbility().addEffect(new PlayAdditionalLandsControllerEffect(1, Duration.EndOfTurn));
 
         this.finalizeAdventure();
