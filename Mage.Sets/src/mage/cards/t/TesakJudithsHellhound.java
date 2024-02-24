@@ -32,7 +32,7 @@ import java.util.UUID;
 public final class TesakJudithsHellhound extends CardImpl {
 
     private static final FilterCreaturePermanent filter1 = new FilterCreaturePermanent(SubType.DOG, "Dogs");
-    private static final FilterControlledCreaturePermanent filter2 = new FilterControlledCreaturePermanent("Creatures you control with counters on  them");
+    private static final FilterControlledCreaturePermanent filter2 = new FilterControlledCreaturePermanent("Creatures you control with counters on them");
     private static final FilterCard filter3 = new FilterCreatureCard();
 
     static {

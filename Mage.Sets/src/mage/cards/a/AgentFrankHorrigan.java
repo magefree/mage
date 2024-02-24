@@ -44,7 +44,7 @@ public final class AgentFrankHorrigan extends CardImpl {
 
         // Whenever Agent Frank Horrigan enters the battlefield or attacks, proliferate twice.
         Ability ability = new EntersBattlefieldOrAttacksSourceTriggeredAbility(new ProliferateEffect(false));
-        ability.addEffect(new ProliferateEffect().setText("twice"));
+        ability.addEffect(new ProliferateEffect().setText(" twice"));
         this.addAbility(ability);
     }
 
