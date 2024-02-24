@@ -177,6 +177,7 @@ Mirrodin|Mirrodin|
 Mirrodin Besieged|MirrodinBesieged|
 Modern Horizons|ModernHorizons|
 Modern Horizons 2|ModernHorizons2|
+Modern Horizons 3|ModernHorizons3|
 Modern Masters|ModernMasters|
 Modern Masters 2015|ModernMasters2015|
 Modern Masters 2017|ModernMasters2017|
