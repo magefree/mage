@@ -9,9 +9,19 @@
  import mage.client.deckeditor.table.UpdateCountsCallback;
  import mage.client.dialog.PreferencesDialog;
  import mage.client.plugins.impl.Plugins;
+ import mage.client.util.ClientEventType;
  import mage.client.util.Event;
- import mage.client.util.*;
- import mage.client.util.comparators.*;
+ import mage.client.util.GUISizeHelper;
+ import mage.client.util.Listener;
+ import mage.client.util.comparators.CardViewCardTypeComparator;
+ import mage.client.util.comparators.CardViewColorComparator;
+ import mage.client.util.comparators.CardViewColorIdentityComparator;
+ import mage.client.util.comparators.CardViewComparator;
+ import mage.client.util.comparators.CardViewCostComparator;
+ import mage.client.util.comparators.CardViewEDHPowerLevelComparator;
+ import mage.client.util.comparators.CardViewNameComparator;
+ import mage.client.util.comparators.CardViewNoneComparator;
+ import mage.client.util.comparators.CardViewRarityComparator;
  import mage.client.util.gui.TableSpinnerEditor;
  import mage.view.CardView;
  import mage.view.CardsView;
@@ -26,8 +36,14 @@
  import java.awt.event.MouseEvent;
  import java.awt.event.MouseListener;
  import java.beans.Beans;
+ import java.util.ArrayList;
+ import java.util.Collections;
+ import java.util.LinkedHashMap;
  import java.util.List;
- import java.util.*;
+ import java.util.Map;
+ import java.util.UUID;
+ import java.util.concurrent.locks.Lock;
+ import java.util.concurrent.locks.ReentrantReadWriteLock;
 
  /**
   * Deck editor: grid mode for drafting (NOT a normal deck editor or sideboarding)
@@ -40,6 +56,7 @@
      protected final CardEventSource cardEventSource = new CardEventSource();
 
      private Dimension cardDimension;
+     private final ReentrantReadWriteLock countLabelsLock = new ReentrantReadWriteLock(); // count label code copy-pasted from CardGrid.java
      private final List<JLabel> countLabels = new ArrayList<>(); // count label code copy-pasted from CardGrid.java
      private int rowHeight;
      private CardsView cards;
@@ -268,10 +285,15 @@
 
      @Override
      public void drawCards(SortSetting sortSetting) {
-         for (JLabel label : this.countLabels) {
-             cardArea.remove(label);
+         Lock writeLock = this.countLabelsLock.writeLock();
+         try  {
+             for (JLabel label : this.countLabels) {
+                 cardArea.remove(label);
+             }
+             this.countLabels.clear();
+         } finally {
+             writeLock.unlock();
          }
-         this.countLabels.clear();
 
          int maxWidth = this.getParent().getWidth();
          int numColumns = maxWidth / cardDimension.width;
@@ -386,7 +408,12 @@
 
      private JLabel addNewCountLabel(int columnNumber) {
          JLabel label = DragCardGrid.createCountLabel(null);
-         this.countLabels.add(label);
+         Lock writeLock = this.countLabelsLock.writeLock();
+         try {
+             this.countLabels.add(label);
+         } finally {
+              writeLock.unlock();
+         }
          cardArea.add(label, (Integer) 0); // draw on background
          label.setLocation(columnNumber * cardDimension.width, 5);
          label.setSize(cardDimension.width, DragCardGrid.COUNT_LABEL_HEIGHT);
