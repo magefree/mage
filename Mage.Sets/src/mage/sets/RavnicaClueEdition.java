@@ -214,6 +214,7 @@ public final class RavnicaClueEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Snow Day", 100, Rarity.UNCOMMON, mage.cards.s.SnowDay.class));
         cards.add(new SetCardInfo("Spawn of Mayhem", 122, Rarity.MYTHIC, mage.cards.s.SpawnOfMayhem.class));
         cards.add(new SetCardInfo("Spellgorger Weird", 148, Rarity.COMMON, mage.cards.s.SpellgorgerWeird.class));
+        cards.add(new SetCardInfo("Stampede Surfer", 44, Rarity.RARE, mage.cards.s.StampedeSurfer.class));
         cards.add(new SetCardInfo("Status // Statue", 210, Rarity.UNCOMMON, mage.cards.s.StatusStatue.class));
         cards.add(new SetCardInfo("Steam Vents", 280, Rarity.RARE, mage.cards.s.SteamVents.class));
         cards.add(new SetCardInfo("Steeple Creeper", 174, Rarity.COMMON, mage.cards.s.SteepleCreeper.class));
