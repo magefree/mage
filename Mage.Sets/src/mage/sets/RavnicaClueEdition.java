@@ -244,6 +244,7 @@ public final class RavnicaClueEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Tithebearer Giant", 124, Rarity.COMMON, mage.cards.t.TithebearerGiant.class));
         cards.add(new SetCardInfo("Towering Thunderfist", 151, Rarity.COMMON, mage.cards.t.ToweringThunderfist.class));
         cards.add(new SetCardInfo("Transluminant", 177, Rarity.COMMON, mage.cards.t.Transluminant.class));
+        cards.add(new SetCardInfo("Tribune of Rot", 48, Rarity.UNCOMMON, mage.cards.t.TribuneOfRot.class));
         cards.add(new SetCardInfo("Trostani Discordant", 213, Rarity.MYTHIC, mage.cards.t.TrostaniDiscordant.class));
         cards.add(new SetCardInfo("Trusted Pegasus", 77, Rarity.COMMON, mage.cards.t.TrustedPegasus.class));
         cards.add(new SetCardInfo("Turn to Frog", 103, Rarity.UNCOMMON, mage.cards.t.TurnToFrog.class));
