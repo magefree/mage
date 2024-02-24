@@ -847,7 +847,7 @@ public class GameState implements Serializable, Copyable<GameState> {
             if (isPermanentDamage && event instanceof DamagedBatchForOnePermanentEvent) {
                 DamagedBatchForOnePermanentEvent oldPermanentBatch = (DamagedBatchForOnePermanentEvent) event;
                 if (oldPermanentBatch.getDamageClazz().isInstance(damagedEvent)
-                        && event.getTargetId().equals(damagedEvent.getTargetId())) {
+                        && CardUtil.getEventTargets(event).contains(damagedEvent.getTargetId())) {
                     oldPermanentBatch.addEvent(damagedEvent);
                     isPermanentBatchUsed = true;
                 }
