@@ -56,7 +56,7 @@
      protected final CardEventSource cardEventSource = new CardEventSource();
 
      private Dimension cardDimension;
-     private final ReentrantReadWriteLock countLabelsLock = new ReentrantReadWriteLock(); // count label code copy-pasted from CardGrid.java
+     private final ReentrantReadWriteLock countLabelsLock = new ReentrantReadWriteLock();
      private final List<JLabel> countLabels = new ArrayList<>(); // count label code copy-pasted from CardGrid.java
      private int rowHeight;
      private CardsView cards;
