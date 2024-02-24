@@ -192,6 +192,7 @@ New Phyrexia|NPH|
 Odyssey|ODY|
 Oath of the Gatewatch|OGW|
 Onslaught|ONS|
+Outlaws of Thunder Junction|OTJ|
 Magic Origins|ORI|
 Phyrexia: All Will Be One|ONE|
 Phyrexia: All Will Be One Commander|ONC|

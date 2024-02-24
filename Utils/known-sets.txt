@@ -190,6 +190,7 @@ Ninth Edition|NinthEdition|
 Oath of the Gatewatch|OathOfTheGatewatch|
 Odyssey|Odyssey|
 Onslaught|Onslaught|
+Outlaws of Thunder Junction|OutlawsOfThunderJunction|
 Phyrexia: All Will Be One|PhyrexiaAllWillBeOne|
 Phyrexia: All Will Be One Commander|PhyrexiaAllWillBeOneCommander|
 Planar Chaos|PlanarChaos|
