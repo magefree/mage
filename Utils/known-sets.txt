@@ -12,6 +12,7 @@ Archenemy: Nicol Bolas|ArchenemyNicolBolas|
 Arabian Nights|ArabianNights|
 Arena League|ArenaLeague|
 Asia Pacific Land Program|AsiaPacificLandProgram|
+Assassin's Creed|AssassinsCreed|
 Avacyn Restored|AvacynRestored|
 Battlebond|Battlebond|
 Battle for Zendikar|BattleForZendikar|

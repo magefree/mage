@@ -23,6 +23,7 @@ Arena League|ARENA|
 Arabian Nights|ARN|
 Anthologies|ATH|
 Antiquities|ATQ|
+Assassin's Creed|ACR|
 Avacyn Restored|AVR|
 Battle for Zendikar|BFZ|
 Battlebond|BBD|

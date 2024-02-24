@@ -546,6 +546,7 @@ public class ScryfallImageSupportCards {
             add("OTJ"); // Outlaws of Thunder Junction
             add("BIG"); // The Big Score
             add("MH3"); // Modern Horizons 3
+            add("ACR"); // Assassin's Creed
             add("BLB"); // Bloomburrow
 
             // Custom sets using Scryfall images - must provide a direct link for each card in directDownloadLinks
