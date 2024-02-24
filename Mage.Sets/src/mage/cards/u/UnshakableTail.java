@@ -62,7 +62,8 @@ public final class UnshakableTail extends CardImpl {
 class UnshakableTailSurveilTriggeredAbility extends TriggeredAbilityImpl {
 
     UnshakableTailSurveilTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new SurveilEffect(1));
+        super(Zone.BATTLEFIELD, new SurveilEffect(1, false));
+        setTriggerPhrase("When {this} enters the battlefield and at the beginning of your upkeep, ");
     }
 
     private UnshakableTailSurveilTriggeredAbility(final UnshakableTailSurveilTriggeredAbility ability) {
@@ -88,16 +89,13 @@ class UnshakableTailSurveilTriggeredAbility extends TriggeredAbilityImpl {
         return game.isActivePlayer(getControllerId());
     }
 
-    @Override
-    public String getRule() {
-        return "When {this} enters the battlefield and at the beginning of your upkeep, surveil 1.";
-    }
 }
 
 class UnshakableTailInvestigateTriggeredAbility extends TriggeredAbilityImpl {
 
-    public UnshakableTailInvestigateTriggeredAbility() {
+    UnshakableTailInvestigateTriggeredAbility() {
         super(Zone.BATTLEFIELD, new InvestigateEffect(), false);
+        setTriggerPhrase("Whenever one or more creature cards are put into your graveyard from your library, ");
     }
 
     private UnshakableTailInvestigateTriggeredAbility(final UnshakableTailInvestigateTriggeredAbility ability) {
@@ -136,8 +134,4 @@ class UnshakableTailInvestigateTriggeredAbility extends TriggeredAbilityImpl {
         return new UnshakableTailInvestigateTriggeredAbility(this);
     }
 
-    @Override
-    public String getRule() {
-        return "Whenever one or more creature cards are put into your graveyard from your library, investigate.";
-    }
 }

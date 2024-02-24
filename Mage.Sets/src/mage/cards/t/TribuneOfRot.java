@@ -1,4 +1,3 @@
-
 package mage.cards.t;
 
 import mage.MageInt;
@@ -12,11 +11,10 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.permanent.token.Token;
 import mage.game.permanent.token.SaprolingToken;
+import mage.game.permanent.token.Token;
 import mage.players.Player;
 
-import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -52,7 +50,7 @@ class TribuneOfRotEffect extends OneShotEffect {
 
     TribuneOfRotEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "For each creature card milled this way, create a 1/1 green Saproling creature token.";
+        this.staticText = "mill two cards. For each creature card milled this way, create a 1/1 green Saproling creature token";
     }
 
     private TribuneOfRotEffect(final TribuneOfRotEffect effect) {
