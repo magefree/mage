@@ -50,6 +50,7 @@ public final class MurdersAtKarlovManorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Brash Taunter", 148, Rarity.RARE, mage.cards.b.BrashTaunter.class));
         cards.add(new SetCardInfo("Broodhatch Nantuko", 167, Rarity.UNCOMMON, mage.cards.b.BroodhatchNantuko.class));
         cards.add(new SetCardInfo("Canopy Vista", 252, Rarity.RARE, mage.cards.c.CanopyVista.class));
+        cards.add(new SetCardInfo("Case of the Shifting Visage", 19, Rarity.RARE, mage.cards.c.CaseOfTheShiftingVisage.class));
         cards.add(new SetCardInfo("Castle Ardenvale", 253, Rarity.RARE, mage.cards.c.CastleArdenvale.class));
         cards.add(new SetCardInfo("Chaos Warp", 149, Rarity.RARE, mage.cards.c.ChaosWarp.class));
         cards.add(new SetCardInfo("Choked Estuary", 254, Rarity.RARE, mage.cards.c.ChokedEstuary.class));
