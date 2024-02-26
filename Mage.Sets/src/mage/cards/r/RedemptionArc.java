@@ -39,13 +39,12 @@ public final class RedemptionArc extends CardImpl {
         // Enchanted creature has indestructible and is goaded.
         Effect effect = new GainAbilityAttachedEffect(IndestructibleAbility.getInstance(),
                 AttachmentType.AURA, Duration.WhileOnBattlefield);
-        effect.setOutcome(Outcome.Benefit);
 
         Effect effect2 = new GoadAttachedEffect();
-        effect2.setOutcome(Outcome.Benefit);
 
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
         ability.addEffect(effect2);
+        ability.addCustomOutcome(Outcome.Protect);
         this.addAbility(ability);
 
         // {1}{W}: Exile enchanted creature.
