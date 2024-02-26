@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsDamageToAPlayerAllTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DoubleCountersTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.RenownAbility;
@@ -16,8 +16,6 @@ import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.RenownedPredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 
 import java.util.UUID;
 
@@ -54,7 +52,7 @@ public final class AragornHornburgHero extends CardImpl {
         this.addAbility(ability);
         // Whenever a renowned creature you control deals combat damage to a player, double the number of +1/+1 counters on it.
         this.addAbility(new DealsDamageToAPlayerAllTriggeredAbility(
-                new AragornDoubleCountersTargetEffect(), filter,
+                new DoubleCountersTargetEffect(CounterType.P1P1), filter,
                 false, SetTargetPointer.PERMANENT, true
         ));
 
@@ -67,30 +65,5 @@ public final class AragornHornburgHero extends CardImpl {
     @Override
     public AragornHornburgHero copy() {
         return new AragornHornburgHero(this);
-    }
-}
-//Copied from Elvish Vatkeeper
-class AragornDoubleCountersTargetEffect extends OneShotEffect {
-
-    AragornDoubleCountersTargetEffect() {
-        super(Outcome.Benefit);
-        staticText = "double the number of +1/+1 counters on it";
-    }
-
-    private AragornDoubleCountersTargetEffect(final AragornDoubleCountersTargetEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public AragornDoubleCountersTargetEffect copy() {
-        return new AragornDoubleCountersTargetEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-        return permanent != null && permanent.addCounters(CounterType.P1P1.createInstance(
-                permanent.getCounters(game).getCount(CounterType.P1P1)
-        ), source.getControllerId(), source, game);
     }
 }
