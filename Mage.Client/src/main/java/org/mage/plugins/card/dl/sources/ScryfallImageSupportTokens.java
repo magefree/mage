@@ -2207,6 +2207,28 @@ public class ScryfallImageSupportTokens {
             put("LCC/Vampire/1", "https://api.scryfall.com/cards/tlcc/6/en?format=image");
             put("LCC/Vampire/2", "https://api.scryfall.com/cards/tlcc/14/en?format=image");
 
+            // RVR
+            put("RVR/Angel/1", "https://api.scryfall.com/cards/trvr/2/en?format=image");
+            put("RVR/Angel/2", "https://api.scryfall.com/cards/trvr/3/en?format=image");
+            put("RVR/Beast", "https://api.scryfall.com/cards/trvr/14/en?format=image");
+            put("RVR/Bird", "https://api.scryfall.com/cards/trvr/1/en?format=image");
+            put("RVR/Bird Illusion", "https://api.scryfall.com/cards/trvr/5/en?format=image");
+            put("RVR/Centaur", "https://api.scryfall.com/cards/trvr/10/en?format=image");
+            put("RVR/Emblem Domri", "https://api.scryfall.com/cards/trvr/20/en?format=image");
+            put("RVR/Dragon", "https://api.scryfall.com/cards/trvr/7/en?format=image");
+            put("RVR/Elf Knight", "https://api.scryfall.com/cards/trvr/15/en?format=image");
+            put("RVR/Goblin/1", "https://api.scryfall.com/cards/trvr/8/en?format=image");
+            put("RVR/Goblin/2", "https://api.scryfall.com/cards/trvr/9/en?format=image");
+            put("RVR/Rhino", "https://api.scryfall.com/cards/trvr/11/en?format=image");
+            put("RVR/Saproling", "https://api.scryfall.com/cards/trvr/12/en?format=image");
+            put("RVR/Soldier", "https://api.scryfall.com/cards/trvr/16/en?format=image");
+            put("RVR/Sphinx", "https://api.scryfall.com/cards/trvr/17/en?format=image");
+            put("RVR/Spirit/1", "https://api.scryfall.com/cards/trvr/4/en?format=image");
+            put("RVR/Spirit/2", "https://api.scryfall.com/cards/trvr/18/en?format=image");
+            put("RVR/Voja", "https://api.scryfall.com/cards/trvr/19/en?format=image");
+            put("RVR/Wurm", "https://api.scryfall.com/cards/trvr/13/en?format=image");
+            put("RVR/Zombie", "https://api.scryfall.com/cards/trvr/6/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {

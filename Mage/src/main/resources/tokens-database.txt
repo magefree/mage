@@ -125,6 +125,7 @@
 |Generate|EMBLEM:CMM|Emblem Nixilis|||ObNixilisOfTheBlackOathEmblem|
 |Generate|EMBLEM:CMM|Emblem Teferi|||TeferiTemporalArchmageEmblem|
 |Generate|EMBLEM:LCC|Emblem Sorin|||SorinLordOfInnistradEmblem|
+|Generate|EMBLEM:RVR|Emblem Domri|||DomriRadeEmblem|
 
 # ALL PLANES
 # Usage hints:
@@ -2139,3 +2140,24 @@
 |Generate|TOK:LCC|Shapeshifter|||Shapeshifter32Token|
 |Generate|TOK:LCC|Vampire|1||SorinLordOfInnistradVampireToken|
 |Generate|TOK:LCC|Vampire|2||EdgarMarkovsCoffinVampireToken|
+
+# RVR
+|Generate|TOK:RVR|Angel|1||AngelToken|
+|Generate|TOK:RVR|Angel|2||AngelVigilanceToken|
+|Generate|TOK:RVR|Beast|||RedGreenBeastToken|
+|Generate|TOK:RVR|Bird|||BirdToken|
+|Generate|TOK:RVR|Bird Illusion|||BirdIllusionToken|
+|Generate|TOK:RVR|Centaur|||CentaurToken|
+|Generate|TOK:RVR|Dragon|||UtvaraHellkiteDragonToken|
+|Generate|TOK:RVR|Elf Knight|||ElfKnightToken|
+|Generate|TOK:RVR|Goblin|1||GoblinToken|
+|Generate|TOK:RVR|Goblin|2||RakdosGuildmageGoblinToken|
+|Generate|TOK:RVR|Rhino|||RhinoToken|
+|Generate|TOK:RVR|Saproling|||SaprolingToken|
+|Generate|TOK:RVR|Soldier|||SoldierTokenWithHaste|
+|Generate|TOK:RVR|Sphinx|||WardenSphinxToken|
+|Generate|TOK:RVR|Spirit|1||SpiritWhiteToken|
+|Generate|TOK:RVR|Spirit|2||WhiteBlackSpiritToken|
+|Generate|TOK:RVR|Voja|||VojaToken|
+|Generate|TOK:RVR|Wurm|||WurmToken|
+|Generate|TOK:RVR|Zombie|||ZombieToken|
