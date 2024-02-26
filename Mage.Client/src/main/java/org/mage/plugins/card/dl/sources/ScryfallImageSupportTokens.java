@@ -2189,6 +2189,24 @@ public class ScryfallImageSupportTokens {
             put("LCI/Vampire", "https://api.scryfall.com/cards/tlci/4/en?format=image");
             put("LCI/Vampire Demon", "https://api.scryfall.com/cards/tlci/15/en?format=image");
 
+            // LCC
+            put("LCC/Beast", "https://api.scryfall.com/cards/tlcc/8/en?format=image");
+            put("LCC/Bird", "https://api.scryfall.com/cards/tlcc/2/en?format=image");
+            put("LCC/Blood", "https://api.scryfall.com/cards/tlcc/15/en?format=image");
+            put("LCC/Boar", "https://api.scryfall.com/cards/tlcc/9/en?format=image");
+            put("LCC/Dinosaur", "https://api.scryfall.com/cards/tlcc/10/en?format=image");
+            put("LCC/Dinosaur Beast", "https://api.scryfall.com/cards/tlcc/11/en?format=image");
+            put("LCC/Elephant", "https://api.scryfall.com/cards/tlcc/12/en?format=image");
+            put("LCC/Frog Lizard", "https://api.scryfall.com/cards/tlcc/13/en?format=image");
+            put("LCC/Merfolk", "https://api.scryfall.com/cards/tlcc/3/en?format=image");
+            put("LCC/Pirate", "https://api.scryfall.com/cards/tlcc/5/en?format=image");
+            put("LCC/Ragavan", "https://api.scryfall.com/cards/tlcc/7/en?format=image");
+            put("LCC/Salamander Warrior", "https://api.scryfall.com/cards/tlcc/4/en?format=image");
+            put("LCC/Shapeshifter", "https://api.scryfall.com/cards/tlcc/1/en?format=image");
+            put("LCC/Emblem Sorin", "https://api.scryfall.com/cards/tlcc/16/en?format=image");
+            put("LCC/Vampire/1", "https://api.scryfall.com/cards/tlcc/6/en?format=image");
+            put("LCC/Vampire/2", "https://api.scryfall.com/cards/tlcc/14/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {

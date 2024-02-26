@@ -124,6 +124,7 @@
 |Generate|EMBLEM:CMM|Emblem Narset|||NarsetOfTheAncientWayEmblem|
 |Generate|EMBLEM:CMM|Emblem Nixilis|||ObNixilisOfTheBlackOathEmblem|
 |Generate|EMBLEM:CMM|Emblem Teferi|||TeferiTemporalArchmageEmblem|
+|Generate|EMBLEM:LCC|Emblem Sorin|||SorinLordOfInnistradEmblem|
 
 # ALL PLANES
 # Usage hints:
@@ -2121,3 +2122,20 @@
 |Generate|TOK:LCI|Treasure|||TreasureToken|
 |Generate|TOK:LCI|Vampire|||IxalanVampireToken|
 |Generate|TOK:LCI|Vampire Demon|||VampireDemonToken|
+
+# LCC
+|Generate|TOK:LCC|Beast|||BeastToken|
+|Generate|TOK:LCC|Bird|||BlueBirdToken|
+|Generate|TOK:LCC|Blood|||BloodToken|
+|Generate|TOK:LCC|Boar|||Boar2Token|
+|Generate|TOK:LCC|Dinosaur|||DinosaurToken|
+|Generate|TOK:LCC|Dinosaur Beast|||DinosaurBeastToken|
+|Generate|TOK:LCC|Elephant|||ElephantToken|
+|Generate|TOK:LCC|Frog Lizard|||FrogLizardToken|
+|Generate|TOK:LCC|Merfolk|||MerfolkToken|
+|Generate|TOK:LCC|Pirate|||PirateToken|
+|Generate|TOK:LCC|Ragavan|||RagavanToken|
+|Generate|TOK:LCC|Salamander Warrior|||SalamanderWarriorToken|
+|Generate|TOK:LCC|Shapeshifter|||Shapeshifter32Token|
+|Generate|TOK:LCC|Vampire|1||SorinLordOfInnistradVampireToken|
+|Generate|TOK:LCC|Vampire|2||EdgarMarkovsCoffinVampireToken|
