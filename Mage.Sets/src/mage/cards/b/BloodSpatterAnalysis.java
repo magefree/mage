@@ -86,12 +86,9 @@ class BloodSpatterAnalysisTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeBatchEvent zBatchEvent = (ZoneChangeBatchEvent) event;
-        if (zBatchEvent == null) {
-            return false;
-        }
 
         for (ZoneChangeEvent zEvent : zBatchEvent.getEvents()) {
-            if (zEvent.getFromZone().match(Zone.BATTLEFIELD) && zEvent.getToZone().match(Zone.GRAVEYARD)) {
+            if (zEvent.isDiesEvent()) {
                 Permanent permanent = game.getPermanentOrLKIBattlefield(zEvent.getTargetId());
                 if (permanent != null && permanent.isCreature(game)) {
                     return true;
