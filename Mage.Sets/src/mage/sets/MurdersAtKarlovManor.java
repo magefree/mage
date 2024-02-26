@@ -127,6 +127,7 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Hard-Hitting Question", 164, Rarity.UNCOMMON, mage.cards.h.HardHittingQuestion.class));
         cards.add(new SetCardInfo("Harried Dronesmith", 131, Rarity.UNCOMMON, mage.cards.h.HarriedDronesmith.class));
         cards.add(new SetCardInfo("Hedge Maze", 262, Rarity.RARE, mage.cards.h.HedgeMaze.class));
+        cards.add(new SetCardInfo("Hedge Whisperer", 165, Rarity.UNCOMMON, mage.cards.h.HedgeWhisperer.class));
         cards.add(new SetCardInfo("Homicide Investigator", 86, Rarity.RARE, mage.cards.h.HomicideInvestigator.class));
         cards.add(new SetCardInfo("Hotshot Investigators", 60, Rarity.COMMON, mage.cards.h.HotshotInvestigators.class));
         cards.add(new SetCardInfo("Hunted Bonebrute", 87, Rarity.RARE, mage.cards.h.HuntedBonebrute.class));
