@@ -43,7 +43,6 @@ public final class ArenaNewPlayerExperienceExtras extends ExpansionSet {
         cards.add(new SetCardInfo("Rise from the Grave", 34, Rarity.UNCOMMON, mage.cards.r.RiseFromTheGrave.class));
         cards.add(new SetCardInfo("Rumbling Baloth", 47, Rarity.COMMON, mage.cards.r.RumblingBaloth.class));
         cards.add(new SetCardInfo("Seismic Rupture", 44, Rarity.UNCOMMON, mage.cards.s.SeismicRupture.class));
-        cards.add(new SetCardInfo("Shorecomber Crab", 20, Rarity.COMMON, mage.cards.s.ShorecomberCrab.class));
         cards.add(new SetCardInfo("Soulhunter Rakshasa", 35, Rarity.RARE, mage.cards.s.SoulhunterRakshasa.class));
         cards.add(new SetCardInfo("Swamp", 53, Rarity.LAND, mage.cards.basiclands.Swamp.class));
         cards.add(new SetCardInfo("Take Vengeance", 13, Rarity.COMMON, mage.cards.t.TakeVengeance.class));
