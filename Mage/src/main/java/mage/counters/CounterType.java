@@ -26,6 +26,7 @@ public enum CounterType {
     BLESSING("blessing"),
     BLOOD("blood"),
     BLOODLINE("bloodline"),
+    BLOODSTAIN("bloodstain"),
     BOOK("book"),
     BORE("bore"),
     BOUNTY("bounty"),
