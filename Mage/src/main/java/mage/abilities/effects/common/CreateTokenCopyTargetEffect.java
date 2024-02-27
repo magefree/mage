@@ -274,9 +274,8 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
             Permanent tokenPermanent = game.getPermanent(tokenId);
             if (tokenPermanent != null) {
                 addedTokenPermanents.add(tokenPermanent);
-                // add counters if necessary ie Ochre Jelly
-                if (counter != null
-                        && numberOfCounters > 0) {
+                // TODO: Workaround to add counters to all created tokens, necessary for correct interactions with cards like Chatterfang, Squirrel General and Ochre Jelly / Printlifter Ooze. See #10786
+                if (counter != null && numberOfCounters > 0) {
                     tokenPermanent.addCounters(counter.createInstance(numberOfCounters), source.getControllerId(), source, game);
                 }
             }
