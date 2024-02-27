@@ -190,6 +190,8 @@ public final class MurdersAtKarlovManorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Port of Karfell", 280, Rarity.UNCOMMON, mage.cards.p.PortOfKarfell.class));
         cards.add(new SetCardInfo("Prairie Stream", 281, Rarity.RARE, mage.cards.p.PrairieStream.class));
         cards.add(new SetCardInfo("Price of Fame", 135, Rarity.UNCOMMON, mage.cards.p.PriceOfFame.class));
+        cards.add(new SetCardInfo("Printlifter Ooze", 40, Rarity.RARE, mage.cards.p.PrintlifterOoze.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Printlifter Ooze", 350, Rarity.RARE, mage.cards.p.PrintlifterOoze.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Promise of Loyalty", 79, Rarity.RARE, mage.cards.p.PromiseOfLoyalty.class));
         cards.add(new SetCardInfo("Psychosis Crawler", 234, Rarity.RARE, mage.cards.p.PsychosisCrawler.class));
         cards.add(new SetCardInfo("Ravenous Chupacabra", 136, Rarity.UNCOMMON, mage.cards.r.RavenousChupacabra.class));
