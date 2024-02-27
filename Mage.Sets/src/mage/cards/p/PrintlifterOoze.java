@@ -2,12 +2,14 @@ package mage.cards.p;
 
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.TurnedFaceUpAllTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.DisguiseAbility;
 import mage.cards.CardImpl;
@@ -20,6 +22,7 @@ import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.token.OozeTrampleToken;
+import mage.game.permanent.token.Token;
 
 import java.util.UUID;
 
@@ -80,8 +83,10 @@ class PrintlifterOozeEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
+        Token token = new OozeTrampleToken();
         int xVal = game.getBattlefield().count(StaticFilters.FILTER_CONTROLLED_CREATURE, controller, source, game);
-        Effect effect = new CreateTokenEffect(new OozeTrampleToken(), StaticValue.get(1), false, false, CounterType.P1P1, StaticValue.get(xVal));
+        token.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(), StaticValue.get(xVal), false)));
+        Effect effect = new CreateTokenEffect(token);
         return effect.apply(game, source);
     }
 }
