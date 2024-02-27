@@ -8,7 +8,7 @@ import mage.abilities.keyword.CascadeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.FilterCard;
+import mage.filter.common.FilterNonlandCard;
 import mage.filter.predicate.card.CastFromZonePredicate;
 import mage.filter.predicate.mageobject.ColorlessPredicate;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
@@ -20,7 +20,7 @@ import java.util.UUID;
  */
 public final class ZhulodokVoidGorger extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("colorless spells you cast from your hand with mana value 7 or greater");
+    private static final FilterNonlandCard filter = new FilterNonlandCard("colorless spells you cast from your hand with mana value 7 or greater");
 
     static {
         filter.add(ColorlessPredicate.instance);
