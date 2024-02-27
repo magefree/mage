@@ -81,7 +81,7 @@ class PrintlifterOozeEffect extends OneShotEffect {
             return false;
         }
         int xVal = game.getBattlefield().count(StaticFilters.FILTER_CONTROLLED_CREATURE, controller, source, game);
-        Effect effect = new CreateTokenEffect(new OozeTrampleToken(), StaticValue.get(1), false, false, CounterType.P1P1, StaticValue.get(xVal));
+        Effect effect = new CreateTokenEffect(new OozeTrampleToken()).entersWithCounters(CounterType.P1P1, StaticValue.get(xVal));
         return effect.apply(game, source);
     }
 }

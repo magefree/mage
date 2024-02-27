@@ -30,8 +30,8 @@ public class CreateTokenEffect extends OneShotEffect {
     private final boolean attacking;
     private String additionalRules;
     private List<UUID> lastAddedTokenIds = new ArrayList<>();
-    private final CounterType counterType;
-    private final DynamicValue numberOfCounters;
+    private CounterType counterType;
+    private DynamicValue numberOfCounters;
 
     public CreateTokenEffect(Token token) {
         this(token, StaticValue.get(1));
@@ -54,17 +54,11 @@ public class CreateTokenEffect extends OneShotEffect {
     }
 
     public CreateTokenEffect(Token token, DynamicValue amount, boolean tapped, boolean attacking) {
-        this(token, amount, tapped, attacking, null, StaticValue.get(0));
-    }
-
-    public CreateTokenEffect(Token token, DynamicValue amount, boolean tapped, boolean attacking, CounterType counterType, DynamicValue numberOfCounters) {
         super(Outcome.PutCreatureInPlay);
         this.token = token;
         this.amount = amount.copy();
         this.tapped = tapped;
         this.attacking = attacking;
-        this.counterType = counterType;
-        this.numberOfCounters = numberOfCounters;
         setText();
     }
 
@@ -78,6 +72,12 @@ public class CreateTokenEffect extends OneShotEffect {
         this.counterType = effect.counterType;
         this.numberOfCounters = effect.numberOfCounters;
         this.additionalRules = effect.additionalRules;
+    }
+
+    public CreateTokenEffect entersWithCounters(CounterType counterType, DynamicValue numberOfCounters) {
+        this.counterType = counterType;
+        this.numberOfCounters = numberOfCounters;
+        return this;
     }
 
     @Override
