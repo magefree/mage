@@ -90,6 +90,7 @@ public class CreateTokenEffect extends OneShotEffect {
         int value = amount.calculate(game, source, this);
         token.putOntoBattlefield(value, game, source, source.getControllerId(), tapped, attacking);
         this.lastAddedTokenIds = token.getLastAddedTokenIds();
+        // TODO: Workaround to add counters to all created tokens, necessary for correct interactions with cards like Chatterfang, Squirrel General and Ochre Jelly / Printlifter Ooze. See #10786
         if (counterType != null) {
             for (UUID tokenId : lastAddedTokenIds) {
                 Permanent tokenPermanent = game.getPermanent(tokenId);
