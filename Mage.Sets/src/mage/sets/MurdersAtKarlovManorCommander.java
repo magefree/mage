@@ -88,6 +88,8 @@ public final class MurdersAtKarlovManorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Dream Eater", 101, Rarity.MYTHIC, mage.cards.d.DreamEater.class));
         cards.add(new SetCardInfo("Drownyard Temple", 259, Rarity.RARE, mage.cards.d.DrownyardTemple.class));
         cards.add(new SetCardInfo("Duelist's Heritage", 60, Rarity.RARE, mage.cards.d.DuelistsHeritage.class));
+        cards.add(new SetCardInfo("Duskana, the Rage Mother", 5, Rarity.MYTHIC, mage.cards.d.DuskanaTheRageMother.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Duskana, the Rage Mother", 312, Rarity.MYTHIC, mage.cards.d.DuskanaTheRageMother.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dusk // Dawn", 61, Rarity.RARE, mage.cards.d.DuskDawn.class));
         cards.add(new SetCardInfo("Elspeth, Sun's Champion", 62, Rarity.MYTHIC, mage.cards.e.ElspethSunsChampion.class));
         cards.add(new SetCardInfo("Enhanced Surveillance", 102, Rarity.UNCOMMON, mage.cards.e.EnhancedSurveillance.class));
