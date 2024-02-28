@@ -240,6 +240,8 @@ public final class MurdersAtKarlovManorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Smuggler's Share", 84, Rarity.RARE, mage.cards.s.SmugglersShare.class));
         cards.add(new SetCardInfo("Sol Ring", 237, Rarity.UNCOMMON, mage.cards.s.SolRing.class));
         cards.add(new SetCardInfo("Solemn Simulacrum", 238, Rarity.RARE, mage.cards.s.SolemnSimulacrum.class));
+        cards.add(new SetCardInfo("Sophia, Dogged Detective", 8, Rarity.MYTHIC, mage.cards.s.SophiaDoggedDetective.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Sophia, Dogged Detective", 319, Rarity.MYTHIC, mage.cards.s.SophiaDoggedDetective.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Soul Snare", 85, Rarity.UNCOMMON, mage.cards.s.SoulSnare.class));
         cards.add(new SetCardInfo("Spectacular Showdown", 162, Rarity.RARE, mage.cards.s.SpectacularShowdown.class));
         cards.add(new SetCardInfo("Sphinx of the Second Sun", 118, Rarity.MYTHIC, mage.cards.s.SphinxOfTheSecondSun.class));
