@@ -12,13 +12,13 @@ import java.util.List;
  */
 public final class MurdersAtKarlovManorCommander extends ExpansionSet {
 
+    private static final List<String> unfinished = Arrays.asList("Boltbender", "Experiment Twelve", "Printlifter Ooze", "True Identity", "Ransom Note", "Unexplained Absence", "Veiled Ascension");
+
     private static final MurdersAtKarlovManorCommander instance = new MurdersAtKarlovManorCommander();
 
     public static MurdersAtKarlovManorCommander getInstance() {
         return instance;
     }
-
-    private static final List<String> unfinished = Arrays.asList("Boltbender", "Experiment Twelve", "Printlifter Ooze", "True Identity", "Ransom Note", "Unexplained Absence", "Veiled Ascension");
 
     private MurdersAtKarlovManorCommander() {
         super("Murders at Karlov Manor Commander", "MKC", ExpansionSet.buildDate(2024, 2, 9), SetType.SUPPLEMENTAL);
