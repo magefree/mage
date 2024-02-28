@@ -17,11 +17,10 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.common.FilterNonlandCard;
 import mage.filter.predicate.permanent.CounterAnyPredicate;
 
 import java.util.UUID;
@@ -33,7 +32,7 @@ public final class TesakJudithsHellhound extends CardImpl {
 
     private static final FilterCreaturePermanent filter1 = new FilterCreaturePermanent(SubType.DOG, "Dogs");
     private static final FilterControlledCreaturePermanent filter2 = new FilterControlledCreaturePermanent("Creatures you control with counters on them");
-    private static final FilterCard filter3 = new FilterCreatureCard();
+    private static final FilterNonlandCard filter3 = new FilterNonlandCard();
 
     static {
         filter2.add(CounterAnyPredicate.instance);
