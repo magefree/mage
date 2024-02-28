@@ -13,7 +13,7 @@ import mage.game.permanent.token.GoblinToken;
 
 /**
  *
- * @author tiera3 - modifed from GoblinInstigator
+ * @author tiera3 - modified from GoblinInstigator
  */
 public final class TinStreetCadet extends CardImpl {
 
