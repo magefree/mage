@@ -155,7 +155,9 @@ public class GameView implements Serializable {
         }
         //Collections.reverse(stackOrder);
         for (ExileZone exileZone : state.getExile().getExileZones()) {
-            exiles.add(new ExileView(exileZone, game));
+            if (!exileZone.isEmpty()) {
+                exiles.add(new ExileView(exileZone, game));
+            }
         }
         for (String name : state.getRevealed().keySet()) {
             revealed.add(new RevealedView(name, state.getRevealed().get(name), game));

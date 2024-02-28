@@ -51,6 +51,7 @@ import java.util.*;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 import static mage.client.dialog.PreferencesDialog.*;
 import static mage.constants.PlayerAction.*;
@@ -301,28 +302,22 @@ public final class GamePanel extends javax.swing.JPanel {
             pickMultiNumber.removeDialog();
         }
         for (CardInfoWindowDialog windowDialog : exiles.values()) {
-            windowDialog.cleanUp();
-            windowDialog.removeDialog();
+            cleanUpAndRemoveWindowDialog(windowDialog);
         }
         for (CardInfoWindowDialog windowDialog : graveyardWindows.values()) {
-            windowDialog.cleanUp();
-            windowDialog.removeDialog();
+            cleanUpAndRemoveWindowDialog(windowDialog);
         }
         for (CardInfoWindowDialog windowDialog : sideboardWindows.values()) {
-            windowDialog.cleanUp();
-            windowDialog.removeDialog();
+            cleanUpAndRemoveWindowDialog(windowDialog);
         }
         for (CardInfoWindowDialog windowDialog : revealed.values()) {
-            windowDialog.cleanUp();
-            windowDialog.removeDialog();
+            cleanUpAndRemoveWindowDialog(windowDialog);
         }
         for (CardInfoWindowDialog windowDialog : lookedAt.values()) {
-            windowDialog.cleanUp();
-            windowDialog.removeDialog();
+            cleanUpAndRemoveWindowDialog(windowDialog);
         }
         for (CardInfoWindowDialog windowDialog : companion.values()) {
-            windowDialog.cleanUp();
-            windowDialog.removeDialog();
+            cleanUpAndRemoveWindowDialog(windowDialog);
         }
         for (CardHintsHelperDialog windowDialog : cardHintsWindows.values()) {
             windowDialog.cleanUp();
@@ -866,6 +861,7 @@ public final class GamePanel extends javax.swing.JPanel {
         }
 
         for (PlayerView player : lastGameData.game.getPlayers()) {
+            final String playerName = player.getName();
             if (players.containsKey(player.getPlayerId())) {
                 if (!possibleAttackers.isEmpty()) {
                     for (UUID permanentId : possibleAttackers) {
@@ -886,33 +882,14 @@ public final class GamePanel extends javax.swing.JPanel {
                     skipButtons.updateFromPlayer(player);
                 }
 
-                // update open or remove closed graveyard windows
-                graveyards.put(player.getName(), player.getGraveyard());
-                if (graveyardWindows.containsKey(player.getName())) {
-                    CardInfoWindowDialog windowDialog = graveyardWindows.get(player.getName());
-                    if (windowDialog.isClosed()) {
-                        graveyardWindows.remove(player.getName());
-                    } else {
-                        windowDialog.loadCardsAndShow(player.getGraveyard(), bigCard, gameId, false);
-                    }
-                }
-
-                // update open or remove closed sideboard windows
-                sideboards.put(player.getName(), player.getSideboard());
-                if (sideboardWindows.containsKey(player.getName())) {
-                    CardInfoWindowDialog windowDialog = sideboardWindows.get(player.getName());
-                    if (windowDialog.isClosed()) {
-                        sideboardWindows.remove(player.getName());
-                    } else {
-                        windowDialog.loadCardsAndShow(player.getSideboard(), bigCard, gameId, false);
-                    }
-                }
+                updateOpenOrRemoveClosedCardViewWindows(playerName, player.getGraveyard(), graveyards, graveyardWindows);
+                updateOpenOrRemoveClosedCardViewWindows(playerName, player.getSideboard(), sideboards, sideboardWindows);
 
                 // show top card window
                 if (player.getTopCard() != null) {
                     CardsView cardsView = new CardsView();
                     cardsView.put(player.getTopCard().getId(), player.getTopCard());
-                    handleGameInfoWindow(revealed, ShowType.REVEAL_TOP_LIBRARY, player.getName() + "'s top library card", cardsView);
+                    handleGameInfoWindow(revealed, ShowType.REVEAL_TOP_LIBRARY, playerName + "'s top library card", cardsView);
                 }
             } else if (!players.isEmpty()) {
                 logger.warn("Couldn't find player.");
@@ -949,9 +926,13 @@ public final class GamePanel extends javax.swing.JPanel {
 
         GameManager.instance.setStackSize(lastGameData.game.getStack().size());
         displayStack(lastGameData.game, bigCard, feedbackPanel, gameId);
+        final List<ExileView> exileViewList = lastGameData.game.getExile();
+        final Set<UUID> cardIDs = exileViewList.stream()
+                .flatMap(currentExileView -> currentExileView.keySet().stream())
+                .collect(Collectors.toSet());
 
         // auto-show exile views
-        for (ExileView exile : lastGameData.game.getExile()) {
+        for (ExileView exile : exileViewList) {
             CardInfoWindowDialog exileWindow = exiles.getOrDefault(exile.getId(), null);
             if (exileWindow == null) {
                 exileWindow = new CardInfoWindowDialog(ShowType.EXILE, exile.getName());
@@ -960,6 +941,22 @@ public final class GamePanel extends javax.swing.JPanel {
                 exileWindow.show();
             }
             exileWindow.loadCardsAndShow(exile, bigCard, gameId);
+        }
+
+        // Remove old exiles entries and windowDialogs, which can prevent generating new windowDialogs after rollbacks.
+        Iterator<CardInfoWindowDialog> iterator = exiles.values().iterator();
+        while (iterator.hasNext()) {
+            CardInfoWindowDialog exileWindow = iterator.next();
+            Map<UUID, MageCard> exileWindowCards = exileWindow.getMageCardsForUpdate();
+
+            long cardsToRemove = exileWindowCards.keySet().stream()
+                    .filter(uuid -> !cardIDs.contains(uuid))
+                    .count();
+
+            if (exileWindowCards.size() - cardsToRemove == 0) {
+                cleanUpAndRemoveWindowDialog(exileWindow);
+                iterator.remove();
+            }
         }
 
         // update open or remove closed card hints windows
@@ -1024,6 +1021,27 @@ public final class GamePanel extends javax.swing.JPanel {
 
         this.revalidate();
         this.repaint();
+    }
+
+    private static void cleanUpAndRemoveWindowDialog(CardInfoWindowDialog windowDialog) {
+        windowDialog.cleanUp();
+        windowDialog.removeDialog();
+    }
+
+    private void updateOpenOrRemoveClosedCardViewWindows(String playerName,
+                                                         CardsView cardsView,
+                                                         Map<String, CardsView> cardsViewMap,
+                                                         Map<String, CardInfoWindowDialog> cardInfoWindowDialogMap) {
+        cardsViewMap.put(playerName, cardsView);
+        if (cardInfoWindowDialogMap.containsKey(playerName)) {
+            CardInfoWindowDialog windowDialog = cardInfoWindowDialogMap.get(playerName);
+            if (windowDialog.isClosed() || cardsView.isEmpty()) {
+                cardInfoWindowDialogMap.remove(playerName);
+                cleanUpAndRemoveWindowDialog(windowDialog);
+            } else {
+                windowDialog.loadCardsAndShow(cardsView, bigCard, gameId, false);
+            }
+        }
     }
 
     // skip buttons border
