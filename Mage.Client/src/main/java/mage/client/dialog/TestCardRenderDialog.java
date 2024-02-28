@@ -2,6 +2,7 @@ package mage.client.dialog;
 
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.continuous.BecomesFaceDownCreatureEffect;
 import mage.abilities.icon.*;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.*;
@@ -184,6 +185,18 @@ public class TestCardRenderDialog extends MageDialog {
         if (perm.isTransformable()) {
             perm.setTransformed(true);
         }
+
+        // workaround to apply face down image and other settings
+        if (perm.isFaceDown(game)) {
+            BecomesFaceDownCreatureEffect.makeFaceDownObject(
+                    game,
+                    null,
+                    perm,
+                    BecomesFaceDownCreatureEffect.findFaceDownType(game, perm),
+                    null
+            );
+        }
+
         PermanentView cardView = new PermanentView(perm, permCard, controllerId, game);
         cardView.setInViewerOnly(false); // must false for face down
         return cardView;
@@ -386,9 +399,9 @@ public class TestCardRenderDialog extends MageDialog {
 
         List<CardView> cardViews = new ArrayList<>();
 
-        /* test morphed
-        cardViews.add(createPermanentCard(game, playerYou.getId(), "RNA", "263", 0, 0, 0, false, null)); // mountain
-        cardViews.add(createPermanentCard(game, playerYou.getId(), "RNA", "185", 0, 0, 0, true, null)); // Judith, the Scourge Diva
+        //* test face down
+        cardViews.add(createPermanentCard(game, playerYou.getId(), "RNA", "263", 0, 0, 0, false, false, null)); // mountain
+        cardViews.add(createPermanentCard(game, playerYou.getId(), "RNA", "185", 0, 0, 0, true, false, null)); // Judith, the Scourge Diva
         cardViews.add(createHandCard(game, playerYou.getId(), "DIS", "153")); // Odds // Ends (split card)
         cardViews.add(createHandCard(game, playerYou.getId(), "ELD", "38")); // Animating Faerie (adventure card)
         cardViews.add(createFaceDownCard(game, playerOpponent.getId(), "ELD", "38", false, false, false)); // face down
@@ -414,7 +427,7 @@ public class TestCardRenderDialog extends MageDialog {
         cardViews.add(createHandCard(game, playerYou.getId(), "AKH", "210")); // Dusk // Dawn
         //*/
 
-        //* test adventure cards in hands
+        /* test adventure cards in hands
         cardViews.add(createHandCard(game, playerYou.getId(), "ELD", "14")); // Giant Killer
         cardViews.add(createHandCard(game, playerYou.getId(), "WOE", "222")); // Cruel Somnophage
         cardViews.add(createHandCard(game, playerYou.getId(), "WOE", "227")); // Gingerbread Hunter
@@ -430,7 +443,7 @@ public class TestCardRenderDialog extends MageDialog {
         cardViews.add(createHandCard(game, playerYou.getId(), "MKM", "155")); // Case of the Locked Hothouse
         //*/
 
-        //* test case, class and saga cards in hands
+        /* test case, class and saga cards in hands
         cardViews.add(createHandCard(game, playerYou.getId(), "MKM", "113")); // Case of the Burning Masks
         cardViews.add(createHandCard(game, playerYou.getId(), "MKM", "155")); // Case of the Locked Hothouse
         cardViews.add(createHandCard(game, playerYou.getId(), "AFR", "6")); // Cleric Class
@@ -504,7 +517,7 @@ public class TestCardRenderDialog extends MageDialog {
                     PermanentView oldPermanent = (PermanentView) main.getGameCard();
                     PermanentView newPermament = new PermanentView(
                             oldPermanent,
-                            game.getCard(oldPermanent.getOriginalId()),
+                            game.getCard(oldPermanent.getId()),
                             UUID.randomUUID(),
                             game
                     );

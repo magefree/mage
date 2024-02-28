@@ -1,11 +1,14 @@
 package org.mage.test.cards.abilities.keywords;
 
 import mage.cards.Card;
+import mage.cards.repository.TokenRepository;
 import mage.constants.EmptyNames;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.PermanentCard;
+import mage.util.CardUtil;
 import mage.view.CardView;
 import mage.view.GameView;
 import mage.view.PermanentView;
@@ -535,9 +538,14 @@ public class ManifestTest extends CardTestPlayerBase {
         Permanent perm = game.getBattlefield().getAllPermanents()
                 .stream()
                 .filter(permanent -> permanent.isFaceDown(game))
+                .filter(permanent -> {
+                    Assert.assertEquals("face down permanent must have not name", "", permanent.getName());
+                    return true;
+                })
                 .findFirst()
                 .orElse(null);
         Assert.assertNotNull(perm);
+        Assert.assertEquals("server side face down permanent must have empty name", EmptyNames.FACE_DOWN_CREATURE.toString(), perm.getName());
         GameView gameView = new GameView(game.getState(), game, viewFromPlayer.getId(), null);
         PlayerView playerView = gameView.getPlayers()
                 .stream()
@@ -548,29 +556,34 @@ public class ManifestTest extends CardTestPlayerBase {
         PermanentView permanentView = playerView.getBattlefield().values()
                 .stream()
                 .filter(CardView::isFaceDown)
+                .filter(p -> {
+                    CardView debugView = new CardView((PermanentCard) currentGame.getPermanent(p.getId()), currentGame, false, false);
+                    Assert.assertNotEquals("face down view must have name", "", p.getName());
+                    return true;
+                })
                 .findFirst()
                 .orElse(null);
         Assert.assertNotNull(permanentView);
         return permanentView;
     }
 
-    private void assertFaceDown(String info, PermanentView faceDownPermanent, String realPermanentName, boolean realInfoMustBeVisible) {
-        if (realInfoMustBeVisible) {
-            // show all info
-            Assert.assertEquals(realPermanentName, faceDownPermanent.getName()); // show real name
-            Assert.assertEquals("2", faceDownPermanent.getPower());
-            Assert.assertEquals("2", faceDownPermanent.getToughness());
-            //
-            Assert.assertNotNull(faceDownPermanent.getOriginal());
-            Assert.assertEquals(realPermanentName, faceDownPermanent.getOriginal().getName());
-        } else {
-            // hide original info
-            Assert.assertEquals(info, "", faceDownPermanent.getName());
-            Assert.assertEquals(info, "2", faceDownPermanent.getPower());
-            Assert.assertEquals(info, "2", faceDownPermanent.getToughness());
-            Assert.assertNull(info, faceDownPermanent.getOriginal());
-        }
+    private void assertFaceDown(String checkInfo, PermanentView faceDownPermanentView, String needRealName, String needFaceDownStatus, boolean needShowRealInfo) {
+        String info = checkInfo + " - " + faceDownPermanentView;
+        String needName = CardUtil.getCardNameForGUI(needShowRealInfo ? needRealName : "", needFaceDownStatus);
 
+        // check view
+        Assert.assertTrue(info + " - wrong face down status", faceDownPermanentView.isFaceDown());
+        Assert.assertEquals(info + " - wrong name", needName, faceDownPermanentView.getName()); // show real name
+        Assert.assertEquals(info + " - wrong power", "2", faceDownPermanentView.getPower());
+        Assert.assertEquals(info + " - wrong toughness", "2", faceDownPermanentView.getToughness());
+
+        // check original info
+        if (needShowRealInfo) {
+            Assert.assertNotNull(info + " - miss original card data", faceDownPermanentView.getOriginal());
+            Assert.assertEquals(info + " - wrong original card name", needRealName, faceDownPermanentView.getOriginal().getName());
+        } else {
+            Assert.assertNull(info + " - original data must be hidden", faceDownPermanentView.getOriginal());
+        }
     }
 
     @Test
@@ -587,17 +600,16 @@ public class ManifestTest extends CardTestPlayerBase {
         runCode("on active game", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
             // hide from opponent
             PermanentView permanent = findFaceDownPermanent(game, playerA, playerB);
-            assertFaceDown("in game: must hide from opponent", permanent, "Mountain", false);
+            assertFaceDown("in game: must hide from opponent", permanent, "Mountain", TokenRepository.XMAGE_IMAGE_NAME_FACE_DOWN_MANIFEST, false);
 
             // show for yourself
             permanent = findFaceDownPermanent(game, playerB, playerB);
-            assertFaceDown("in game: must show for yourself", permanent, "Mountain", true);
+            assertFaceDown("in game: must show for yourself", permanent, "Mountain", TokenRepository.XMAGE_IMAGE_NAME_FACE_DOWN_MANIFEST, true);
         });
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-
 
         // workaround to force end game (can't use other test commands after that)
         playerA.won(currentGame);
@@ -605,9 +617,9 @@ public class ManifestTest extends CardTestPlayerBase {
 
         // show all after game end
         PermanentView permanent = findFaceDownPermanent(currentGame, playerA, playerB);
-        assertFaceDown("end game: must show for opponent", permanent, "Mountain", true);
+        assertFaceDown("end game: must show for opponent", permanent, "Mountain", TokenRepository.XMAGE_IMAGE_NAME_FACE_DOWN_MANIFEST, true);
         //
         permanent = findFaceDownPermanent(currentGame, playerB, playerB);
-        assertFaceDown("end game: must show for yourself", permanent, "Mountain", true);
+        assertFaceDown("end game: must show for yourself", permanent, "Mountain", TokenRepository.XMAGE_IMAGE_NAME_FACE_DOWN_MANIFEST, true);
     }
 }

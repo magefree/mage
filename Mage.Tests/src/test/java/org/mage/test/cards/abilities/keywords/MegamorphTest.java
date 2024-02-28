@@ -21,7 +21,7 @@ public class MegamorphTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Aerie Bowmasters", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 6);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Aerie Bowmasters using Morph");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Aerie Bowmasters using Megamorph");
 
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{5}{G}: Turn");
 

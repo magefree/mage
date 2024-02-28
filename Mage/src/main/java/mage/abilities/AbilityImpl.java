@@ -428,6 +428,7 @@ public abstract class AbilityImpl implements Ability {
                 case MORE_THAN_MEETS_THE_EYE:
                 case BESTOW:
                 case MORPH:
+                case MEGAMORPH:
                     // from Snapcaster Mage:
                     // If you cast a spell from a graveyard using its flashback ability, you can't pay other alternative costs
                     // (such as that of Foil). (2018-12-07)
@@ -647,6 +648,11 @@ public abstract class AbilityImpl implements Ability {
     @Override
     public UUID getControllerId() {
         return controllerId;
+    }
+
+    @Override
+    public UUID getControllerOrOwnerId() {
+        return getControllerId();
     }
 
     @Override

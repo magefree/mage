@@ -2928,8 +2928,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
         save(prefs, dialog.sliderCardSizeMinBattlefield, KEY_GUI_CARD_BATTLEFIELD_MIN_SIZE, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.sliderCardSizeMaxBattlefield, KEY_GUI_CARD_BATTLEFIELD_MAX_SIZE, "true", "false", UPDATE_CACHE_POLICY);
 
-        // do as worker job
-        GUISizeHelper.changeGUISize();
+        // refresh full GUI with new settings
+        GUISizeHelper.refreshGUIAndCards();
     }
 
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed

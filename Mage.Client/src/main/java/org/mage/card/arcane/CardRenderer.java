@@ -55,10 +55,7 @@ public abstract class CardRenderer {
     protected final CardView cardView;
 
     // The card image
-    protected BufferedImage artImage;
-
-    // The face card image
-    protected BufferedImage faceArtImage;
+    protected BufferedImage artImage; // TODO: make sure it changed/reset on face down/up change
 
     ///////////////////////////////////////////////////////////////////////////
     // Common layout metrics between all cards
@@ -206,7 +203,7 @@ public abstract class CardRenderer {
     }
 
     // The Draw Method
-    // The draw method takes the information caculated by the constructor
+    // The draw method takes the information calculated by the constructor
     // and uses it to draw to a concrete size of card and graphics.
     public void draw(Graphics2D g, CardPanelAttributes attribs, BufferedImage image) {
 
@@ -313,51 +310,6 @@ public abstract class CardRenderer {
     }
 
     private boolean lessOpaqueRulesTextBox = false;
-    protected void drawFaceArtIntoRect(Graphics2D g, int x, int y, int w, int h, int alternate_h, Rectangle2D artRect, boolean shouldPreserveAspect) {
-        // Perform a process to make sure that the art is scaled uniformly to fill the frame, cutting
-        // off the minimum amount necessary to make it completely fill the frame without "squashing" it.
-        double fullCardImgWidth = faceArtImage.getWidth();
-        double fullCardImgHeight = faceArtImage.getHeight();
-        double artWidth = fullCardImgWidth;
-        double artHeight = fullCardImgHeight;
-        double targetWidth = w;
-        double targetHeight = h;
-        double targetAspect = targetWidth / targetHeight;
-        if (!shouldPreserveAspect) {
-            // No adjustment to art
-        } else if (targetAspect * artHeight < artWidth) {
-            // Trim off some width
-            artWidth = targetAspect * artHeight;
-        } else {
-            // Trim off some height
-            artHeight = artWidth / targetAspect;
-        }
-        try {
-            /*BufferedImage subImg
-                    = faceArtImage.getSubimage(
-                    (int) (artRect.getX() * fullCardImgWidth), (int) (artRect.getY() * fullCardImgHeight),
-                    (int) artWidth, (int) artHeight);*/
-            RenderingHints rh = new RenderingHints(
-                    RenderingHints.KEY_INTERPOLATION,
-                    RenderingHints.VALUE_INTERPOLATION_BICUBIC);
-            g.setRenderingHints(rh);
-            if (fullCardImgWidth > fullCardImgHeight) {
-                g.drawImage(faceArtImage,
-                        x, y,
-                        (int) targetWidth, (int) targetHeight,
-                        null);
-            } else {
-                g.drawImage(faceArtImage,
-                        x, y,
-                        (int) targetWidth, alternate_h, // alernate_h is roughly (targetWidth / 0.74)
-                        null);
-                lessOpaqueRulesTextBox = true;
-            }
-        } catch (RasterFormatException e) {
-            // At very small card sizes we may encounter a problem with rounding error making the rect not fit
-            System.out.println(e);
-        }
-    }
 
     // Draw +1/+1 and other counters
     protected void drawCounters(Graphics2D g) {
@@ -531,11 +483,5 @@ public abstract class CardRenderer {
     // is loaded and ready)
     public void setArtImage(Image image) {
         artImage = CardRendererUtils.toBufferedImage(image);
-    }
-
-    // Set the card art image (CardPanel will give it to us when it
-    // is loaded and ready)
-    public void setFaceArtImage(Image image) {
-        faceArtImage = CardRendererUtils.toBufferedImage(image);
     }
 }

@@ -36,15 +36,6 @@ import java.util.UUID;
 public interface Ability extends Controllable, Serializable {
 
     /**
-     * Gets the globally unique id of the ability contained within the game.
-     *
-     * @return A {@link java.util.UUID} which the game will use to store and
-     * retrieve the exact instance of this ability.
-     */
-    @Override
-    UUID getId();
-
-    /**
      * Assigns a new {@link java.util.UUID}
      *
      * @see mage.players.PlayerImpl#playAbility(mage.abilities.ActivatedAbility,
@@ -70,14 +61,6 @@ public interface Ability extends Controllable, Serializable {
      * @return The {@link AbilityType type} of this ability.
      */
     AbilityType getAbilityType();
-
-    /**
-     * Gets the id of the player in control of this ability.
-     *
-     * @return The {@link java.util.UUID} of the controlling player.
-     */
-    @Override
-    UUID getControllerId();
 
     /**
      * Sets the id of the controller of this ability.

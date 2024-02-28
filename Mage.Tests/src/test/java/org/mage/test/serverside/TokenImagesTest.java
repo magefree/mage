@@ -2,21 +2,26 @@ package org.mage.test.serverside;
 
 import mage.MageObject;
 import mage.MageObjectImpl;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.Card;
 import mage.cards.repository.TokenRepository;
+import mage.constants.EmptyNames;
 import mage.constants.PhaseStep;
 import mage.constants.SubType;
 import mage.constants.Zone;
+import mage.counters.CounterType;
+import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.HumanToken;
 import mage.game.permanent.token.SoldierToken;
 import mage.game.permanent.token.Token;
 import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.custom.CreatureToken;
+import mage.game.stack.Spell;
 import mage.util.CardUtil;
 import mage.view.CardView;
 import mage.view.GameView;
@@ -261,13 +266,13 @@ public class TokenImagesTest extends CardTestPlayerBase {
         }
     }
 
-    private void assert_TokenImageNumber(String tokenName, List<Integer> needUniqueImages) {
+    private void assert_TokenOrCardImageNumber(String tokenOrCardName, List<Integer> needUniqueImages) {
         Set<Integer> serverStats = currentGame.getBattlefield().getAllPermanents()
                 .stream()
-                .filter(card -> card.getName().equals(tokenName))
-                .filter(card -> card instanceof PermanentToken)
+                .filter(card -> card.getName().equals(tokenOrCardName))
+                .filter(card -> card instanceof MageObjectImpl)
                 .sorted(Comparator.comparing(Card::getExpansionSetCode))
-                .map(card -> (PermanentToken) card)
+                .map(card -> (MageObjectImpl) card)
                 .map(MageObjectImpl::getImageNumber)
                 .collect(Collectors.toSet());
 
@@ -280,7 +285,7 @@ public class TokenImagesTest extends CardTestPlayerBase {
         Assert.assertNotNull(playerView);
         Set<Integer> clientStats = playerView.getBattlefield().values()
                 .stream()
-                .filter(card -> card.getName().equals(tokenName))
+                .filter(card -> card.getName().equals(tokenOrCardName))
                 .sorted(Comparator.comparing(CardView::getExpansionSetCode))
                 .map(CardView::getImageNumber)
                 .collect(Collectors.toSet());
@@ -289,8 +294,79 @@ public class TokenImagesTest extends CardTestPlayerBase {
         String imagesNeed = needUniqueImages.stream().sorted().map(Object::toString).collect(Collectors.joining(", "));
         String imagesServer = serverStats.stream().sorted().map(Object::toString).collect(Collectors.joining(", "));
         String imagesClient = clientStats.stream().sorted().map(Object::toString).collect(Collectors.joining(", "));
-        Assert.assertEquals(imagesNeed, imagesServer);
-        Assert.assertEquals(imagesNeed, imagesClient);
+        Assert.assertEquals("server side", imagesNeed, imagesServer);
+        Assert.assertEquals("client side", imagesNeed, imagesClient);
+    }
+
+    private void assertFaceDownCharacteristics(String info, MageObject object, String faceDownTypeName) {
+        String prefix = info + " - " + object;
+
+        // image info
+        Assert.assertEquals(prefix + " - wrong set code", TokenRepository.XMAGE_TOKENS_SET_CODE, object.getExpansionSetCode());
+        Assert.assertEquals(prefix + " - wrong card number", "0", object.getCardNumber());
+        Assert.assertEquals(prefix + " - wrong image file name", faceDownTypeName, object.getImageFileName());
+        Assert.assertNotEquals(prefix + " - wrong image number", Integer.valueOf(0), object.getImageNumber());
+
+        // characteristic checks instead new test
+        Assert.assertEquals(prefix + " - wrong name", EmptyNames.FACE_DOWN_CREATURE.toString(), object.getName());
+        Assert.assertEquals(prefix + " - wrong power", 2, object.getPower().getValue());
+        Assert.assertEquals(prefix + " - wrong toughness", 2, object.getToughness().getValue());
+        Assert.assertEquals(prefix + " - wrong color", "", object.getColor(currentGame).toString());
+        Assert.assertEquals(prefix + " - wrong supertypes", "[]", object.getSuperType(currentGame).toString());
+        Assert.assertEquals(prefix + " - wrong types", "[Creature]", object.getCardType(currentGame).toString());
+        Assert.assertEquals(prefix + " - wrong subtypes", "[]", object.getSubtype(currentGame).toString());
+        Assert.assertEquals(prefix + " - wrong abilities", 2, object.getAbilities().size()); // become face down + face up abilities only
+    }
+
+    private void assertOriginalData(String info, CardView cardView, int needPower, int needToughness, String needColor) {
+        String prefix = info + " - " + cardView;
+        int currentPower = cardView.getOriginalPower() == null ? 0 : cardView.getOriginalPower().getValue();
+        int currentToughness = cardView.getOriginalToughness() == null ? 0 : cardView.getOriginalToughness().getValue();
+        Assert.assertEquals(prefix + " - wrong power", needPower, currentPower);
+        Assert.assertEquals(prefix + " - wrong toughness", needToughness, currentToughness);
+        if (needColor != null) {
+            Assert.assertEquals(prefix + " - wrong color", needColor, cardView.getOriginalColorIdentity());
+        }
+    }
+
+    private void assert_FaceDownMorphImageNumber(List<Integer> needUniqueImages) {
+        Set<Integer> serverStats = currentGame.getBattlefield().getAllPermanents()
+                .stream()
+                .filter(card -> card.isFaceDown(currentGame))
+                .filter(card -> {
+                    Assert.assertEquals("server side - wrong set code - " + card, TokenRepository.XMAGE_TOKENS_SET_CODE, card.getExpansionSetCode());
+                    return true;
+                })
+                .sorted(Comparator.comparing(Card::getExpansionSetCode))
+                .map(card -> (MageObjectImpl) card)
+                .map(MageObjectImpl::getImageNumber)
+                .collect(Collectors.toSet());
+
+        // use another player to hide card view names in face down
+        GameView gameView = new GameView(currentGame.getState(), currentGame, playerB.getId(), null);
+        PlayerView playerView = gameView.getPlayers()
+                .stream()
+                .filter(p -> p.getName().equals(playerA.getName()))
+                .findFirst()
+                .orElse(null);
+        Assert.assertNotNull(playerView);
+        Set<Integer> clientStats = playerView.getBattlefield().values()
+                .stream()
+                .filter(CardView::isFaceDown)
+                .filter(card -> {
+                    Assert.assertEquals("client side - wrong set code - " + card, TokenRepository.XMAGE_TOKENS_SET_CODE, card.getExpansionSetCode());
+                    return true;
+                })
+                .sorted(Comparator.comparing(CardView::getExpansionSetCode))
+                .map(CardView::getImageNumber)
+                .collect(Collectors.toSet());
+
+        // server and client sides must have same data
+        String imagesNeed = needUniqueImages.stream().sorted().map(Object::toString).collect(Collectors.joining(", "));
+        String imagesServer = serverStats.stream().sorted().map(Object::toString).collect(Collectors.joining(", "));
+        String imagesClient = clientStats.stream().sorted().map(Object::toString).collect(Collectors.joining(", "));
+        Assert.assertEquals("server side", imagesNeed, imagesServer);
+        Assert.assertEquals("client side", imagesNeed, imagesClient);
     }
 
     @Test
@@ -317,7 +393,7 @@ public class TokenImagesTest extends CardTestPlayerBase {
 
         // x2 tokens
         assert_MemorialToGlory(20, "40K=40");
-        assert_TokenImageNumber("Soldier Token", Arrays.asList(1, 2, 3)); // 40K set contains 3 diffrent soldiers
+        assert_TokenOrCardImageNumber("Soldier Token", Arrays.asList(1, 2, 3)); // 40K set contains 3 diffrent soldiers
     }
 
     @Test
@@ -381,7 +457,7 @@ public class TokenImagesTest extends CardTestPlayerBase {
         execute();
 
         assertPermanentCount(playerA, 1 + 10); // 1 test card + 10 tokens
-        assert_TokenImageNumber("Soldier Token", Arrays.asList(realImageNumber.get())); // one ability's call must generate tokens with same image
+        assert_TokenOrCardImageNumber("Soldier Token", Arrays.asList(realImageNumber.get())); // one ability's call must generate tokens with same image
         assert_Inner("test", 0, 0, 1,
                 "Soldier Token", 10, false, "40K=10");
     }
@@ -479,7 +555,7 @@ public class TokenImagesTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assert_TokenImageNumber("Human Token", Arrays.asList(2)); // one ability's call must generate tokens with same image
+        assert_TokenOrCardImageNumber("Human Token", Arrays.asList(2)); // one ability's call must generate tokens with same image
         assert_Inner("test", 0, 0, 1,
                 "Human Token", 10, false, "MOC=10");
     }
@@ -614,9 +690,9 @@ public class TokenImagesTest extends CardTestPlayerBase {
 
     @Test // it's ok for fail in 1 of 50
     // TODO: implement mock or test command to setup "random" images in TokenImpl.generateTokenInfo
-    //  (see setFlipCoinResult and setDieRollResult), so no needs in big amout
+    //  (see setFlipCoinResult and setDieRollResult), so no needs in big amount
     public void test_Abilities_Incubator_MustTransformWithSameSettings() {
-        // bug with miss image data in tranformed incubator token: https://github.com/magefree/mage/issues/11535
+        // bug with miss image data in transformed incubator token: https://github.com/magefree/mage/issues/11535
 
         // make sure random images take all 3 diff images
         int needIncubatorTokens = 30;
@@ -656,8 +732,261 @@ public class TokenImagesTest extends CardTestPlayerBase {
                 "Phyrexian Token", needPhyrexianTokens, false, "MOM=" + needPhyrexianTokens);
 
         // MOM-Incubator has 1 image (number is 0)
-        assert_TokenImageNumber("Incubator Token", Arrays.asList(0));
+        assert_TokenOrCardImageNumber("Incubator Token", Arrays.asList(0));
         // MOM-Phyrexian has 3 images
-        assert_TokenImageNumber("Phyrexian Token", Arrays.asList(1, 2, 3));
+        assert_TokenOrCardImageNumber("Phyrexian Token", Arrays.asList(1, 2, 3));
+    }
+
+    @Test // it's ok for fail in very rare random
+    // TODO: implement mock or test command to setup "random" images in TokenImpl.generateTokenInfo
+    //  (see setFlipCoinResult and setDieRollResult), so no needs in big amount
+    public void test_FaceDown_CardWithMorph_MustGetDefaultImage() {
+        int faceDownAmount = 15;
+        addCard(Zone.HAND, playerA, "Ainok Tracker", faceDownAmount); // {5}{R}, Morph {4}{R}, face up {3}
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5 * faceDownAmount);
+
+        IntStream.range(0, faceDownAmount).forEach(i -> {
+            castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ainok Tracker using Morph");
+            waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        });
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), faceDownAmount);
+        assert_FaceDownMorphImageNumber(Arrays.asList(1, 2, 3));
+    }
+
+    @Test // it's ok for fail in very rare random
+    public void test_FaceDown_LandWithMorph_MustGetDefaultImage() {
+        int faceDownAmount = 15;
+        addCard(Zone.HAND, playerA, "Zoetic Cavern", faceDownAmount);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3 * faceDownAmount);
+
+        IntStream.range(0, faceDownAmount).forEach(i -> {
+            castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Zoetic Cavern using Morph");
+            waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        });
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), faceDownAmount);
+        assert_FaceDownMorphImageNumber(Arrays.asList(1, 2, 3));
+    }
+
+    @Test
+    public void test_FaceDown_Spell() {
+        addCard(Zone.HAND, playerA, "Zoetic Cavern", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Zoetic Cavern using Morph");
+        runCode("stack check", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
+            Assert.assertEquals("stack must be active", 1, game.getState().getStack().size());
+
+            // server side spell before resolve contains full info, not empty
+            // so real data will be full, but view data will be hidden by face down status
+            String cardName = "Zoetic Cavern";
+            String needClientControllerName = CardUtil.getCardNameForGUI(cardName, TokenRepository.XMAGE_IMAGE_NAME_FACE_DOWN_MORPH);
+            String needClientOpponentName = CardUtil.getCardNameForGUI("", TokenRepository.XMAGE_IMAGE_NAME_FACE_DOWN_MORPH);
+
+            Spell spell = (Spell) game.getState().getStack().stream().findFirst().orElse(null);
+            Assert.assertNotNull("server - spell must exists", spell);
+
+            // make sure image from object's id works fine
+            IntStream.of(5).forEach(i -> {
+                UUID objectId = UUID.randomUUID();
+                int objectImageNumber = TokenRepository.instance.findPreferredTokenInfoForXmage(TokenRepository.XMAGE_IMAGE_NAME_FACE_DOWN_MORPH, objectId).getImageNumber();
+                Assert.assertNotEquals("wrong image number", 0, objectImageNumber);
+                IntStream.of(5).forEach(j -> {
+                    int newImageNumber = TokenRepository.instance.findPreferredTokenInfoForXmage(TokenRepository.XMAGE_IMAGE_NAME_FACE_DOWN_MORPH, objectId).getImageNumber();
+                    Assert.assertEquals("generated image numbers must be same for same id", objectImageNumber, newImageNumber);
+                });
+            });
+
+            // debug
+            //CardView debugViewOpponent = new CardView(spell, currentGame, false, false);
+            //CardView debugViewController = new CardView(spell, currentGame, true, false);
+
+            // server side (full data)
+            Assert.assertTrue("server - wrong face down status", spell.isFaceDown(game));
+            Assert.assertEquals("server - wrong color", spell.getColor(game), new ObjectColor());
+            Assert.assertEquals("server - wrong name", cardName, spell.getName());
+            //
+            // workaround to find image number (from id) - it must be same on each generate
+            int serverImageNumber = spell.getSpellAbility().getCharacteristics(game).getImageNumber();
+            Assert.assertNotEquals("server - wrong set code", TokenRepository.XMAGE_TOKENS_SET_CODE, spell.getExpansionSetCode());
+            Assert.assertNotEquals("server - wrong image number", 0, serverImageNumber);
+
+            // client side - controller (hidden + card name)
+            GameView gameView = getGameView(playerA);
+            CardView spellView = gameView.getStack().values().stream().findFirst().orElse(null);
+            Assert.assertNotNull("client, controller - spell must exists", spellView);
+            Assert.assertTrue("client, controller - wrong face down status", spellView.isFaceDown());
+            Assert.assertEquals("client, controller - wrong color", spellView.getColor(), new ObjectColor());
+            Assert.assertEquals("client, controller - wrong spell name", needClientControllerName, spellView.getName());
+            //
+            Assert.assertEquals("client, controller - wrong set code", TokenRepository.XMAGE_TOKENS_SET_CODE, spellView.getExpansionSetCode());
+            Assert.assertEquals("client, controller - wrong card number", "0", spellView.getCardNumber());
+            Assert.assertEquals("client, controller - wrong image file", TokenRepository.XMAGE_IMAGE_NAME_FACE_DOWN_MORPH, spellView.getImageFileName());
+            Assert.assertEquals("client, controller - wrong image number", serverImageNumber, spellView.getImageNumber());
+
+            // client side - opponent (hidden)
+            gameView = getGameView(playerB);
+            spellView = gameView.getStack().values().stream().findFirst().orElse(null);
+            Assert.assertNotNull("client, opponent - spell must exists", spellView);
+            Assert.assertTrue("client, opponent - wrong face down status", spellView.isFaceDown());
+            Assert.assertEquals("client, opponent - wrong color", spellView.getColor(), new ObjectColor());
+            Assert.assertEquals("client, opponent - wrong spell name", needClientOpponentName, spellView.getName());
+            //
+            Assert.assertEquals("client, opponent - wrong set code", TokenRepository.XMAGE_TOKENS_SET_CODE, spellView.getExpansionSetCode());
+            Assert.assertEquals("client, opponent - wrong card number", "0", spellView.getCardNumber());
+            Assert.assertEquals("client, opponent - wrong image file", TokenRepository.XMAGE_IMAGE_NAME_FACE_DOWN_MORPH, spellView.getImageFileName());
+            Assert.assertEquals("client, opponent - wrong image number", serverImageNumber, spellView.getImageNumber());
+        });
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
+    }
+
+    @Test
+    public void test_FaceDown_Megamorph_MustGetDefaultImage() {
+        addCard(Zone.HAND, playerA, "Aerie Bowmasters", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 6 + 3);
+
+        // prepare face down permanent
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Aerie Bowmasters using Megamorph");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        runCode("on face down", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
+            assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
+            assertPermanentCount(playerA, "Aerie Bowmasters", 0);
+            Permanent permanent = getPermanent(EmptyNames.FACE_DOWN_CREATURE.toString(), playerA);
+            assertFaceDownCharacteristics("permanent", permanent, TokenRepository.XMAGE_IMAGE_NAME_FACE_DOWN_MEGAMORPH);
+        });
+
+        // face up it and find counter
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{5}{G}: Turn this");
+        runCode("on face up", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
+            assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 0);
+            assertPermanentCount(playerA, "Aerie Bowmasters", 1);
+            assertCounterCount(playerA, "Aerie Bowmasters", CounterType.P1P1, 1);
+        });
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+    }
+
+    @Test
+    public void test_FaceDown_ExileZone_MustGetDefaultImage() {
+        // {T}: Draw a card, then exile a card from your hand face down.
+        addCard(Zone.BATTLEFIELD, playerA, "Bane Alley Broker", 1);
+        addCard(Zone.HAND, playerA, "Forest", 1);
+
+        // exile face down
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Draw a card");
+        addTarget(playerA, "Forest");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        // check face down card in exile
+        runCode("on face down", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
+            Card card = currentGame.getExile().getAllCards(currentGame, playerA.getId()).get(0);
+            GameView gameView = getGameView(playerA);
+            CardView controllerCardView = gameView.getExile()
+                    .stream()
+                    .flatMap(e -> e.values().stream())
+                    .findFirst()
+                    .orElse(null);
+            gameView = getGameView(playerB);
+            CardView opponentCardView = gameView.getExile()
+                    .stream()
+                    .flatMap(e -> e.values().stream())
+                    .findFirst()
+                    .orElse(null);
+
+            // server side (full data)
+            // TODO: possible bugged?! Other abilities must not see faced-down card as real on server side!
+            String needName = "Forest";
+            Assert.assertTrue("server side - must be face down", card.isFaceDown(currentGame));
+            Assert.assertEquals("server side - wrong name", needName, card.getName());
+            Assert.assertEquals("server side - wrong abilities", 2, card.getAbilities(currentGame).size()); // play + add mana
+
+            // client side - controller (hidden data + original name)
+            needName = "Face Down: Forest";
+            Assert.assertEquals("controller - wrong name", needName, controllerCardView.getName());
+            Assert.assertTrue("controller - must be face down", controllerCardView.isFaceDown());
+            Assert.assertEquals("controller - must not have abilities", 0, controllerCardView.getRules().size());
+            assertOriginalData("controller, original data", controllerCardView, 0, 0, "");
+
+            // client side - opponent (hidden data)
+            needName = "Face Down";
+            Assert.assertTrue("opponent - must be face down", opponentCardView.isFaceDown());
+            Assert.assertEquals("opponent - wrong name", needName, opponentCardView.getName());
+            Assert.assertEquals("opponent - must not have abilities", 0, opponentCardView.getRules().size());
+            assertOriginalData("opponent, original data", opponentCardView, 0, 0, "");
+        });
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+    }
+
+    @Test
+    public void test_FaceDown_ForetellInExile_MustGetDefaultImage() {
+        // Foretell {1}{U}
+        addCard(Zone.HAND, playerA, "Behold the Multiverse", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+
+        // exile face down as foretell
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Foretell {1}{U}");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        // check face down card
+        runCode("on face down", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
+            Card card = currentGame.getExile().getAllCards(currentGame, playerA.getId()).get(0);
+            GameView gameView = getGameView(playerA);
+            CardView controllerCardView = gameView.getExile()
+                    .stream()
+                    .flatMap(e -> e.values().stream())
+                    .findFirst()
+                    .orElse(null);
+            gameView = getGameView(playerB);
+            CardView opponentCardView = gameView.getExile()
+                    .stream()
+                    .flatMap(e -> e.values().stream())
+                    .findFirst()
+                    .orElse(null);
+
+            // server side (full data)
+            // TODO: possible bugged?! Other abilities must not see faced-down card as real on server side!
+            String needName = "Behold the Multiverse";
+            Assert.assertTrue("server side - must be face down", card.isFaceDown(currentGame));
+            Assert.assertEquals("server side - wrong name", needName, card.getName());
+            Assert.assertTrue("server side - wrong abilities", card.getAbilities(currentGame).size() > 0);
+
+            // client side - controller (hidden data + original name)
+            needName = "Foretell: Behold the Multiverse";
+            Assert.assertEquals("controller - wrong name", needName, controllerCardView.getName());
+            Assert.assertTrue("controller - must be face down", controllerCardView.isFaceDown());
+            Assert.assertEquals("controller - must not have abilities", 0, controllerCardView.getRules().size());
+            assertOriginalData("controller, original data", controllerCardView, 0, 0, "");
+
+            // client side - opponent (hidden data)
+            needName = "Foretell";
+            Assert.assertTrue("opponent - must be face down", opponentCardView.isFaceDown());
+            Assert.assertEquals("opponent - wrong name", needName, opponentCardView.getName());
+            Assert.assertEquals("opponent - must not have abilities", 0, opponentCardView.getRules().size());
+            assertOriginalData("opponent, original data", opponentCardView, 0, 0, "");
+        });
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
     }
 }

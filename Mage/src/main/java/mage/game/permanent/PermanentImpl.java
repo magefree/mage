@@ -12,6 +12,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.RequirementEffect;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.RegenerateSourceEffect;
+import mage.abilities.effects.common.continuous.BecomesFaceDownCreatureEffect;
 import mage.abilities.hint.HintUtils;
 import mage.abilities.keyword.*;
 import mage.cards.Card;
@@ -30,6 +31,7 @@ import mage.game.command.CommandObject;
 import mage.game.events.*;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.token.SquirrelToken;
+import mage.game.permanent.token.Token;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
@@ -118,6 +120,12 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     protected PermanentImpl(UUID ownerId, UUID controllerId, String name) {
         super(ownerId, name);
+
+        // runtime check: need controller (if you catch it in non-game then use random uuid)
+        if (controllerId == null) {
+            throw new IllegalArgumentException("Wrong code usage: controllerId can't be null - " + name, new Throwable());
+        }
+
         this.originalControllerId = controllerId;
         this.controllerId = controllerId;
         this.counters = new Counters();
@@ -186,12 +194,20 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public String toString() {
-        StringBuilder sb = threadLocalBuilder.get();
-        sb.append(this.getName()).append('-').append(this.getExpansionSetCode());
-        if (copy) {
-            sb.append(" [Copy]");
-        }
-        return sb.toString();
+        String name = getName().isEmpty()
+                ? "face down" + " [" + getId().toString().substring(0, 3) + "]"
+                : getIdName();
+        String imageInfo = getExpansionSetCode()
+                + ":" + getCardNumber()
+                + ":" + getImageFileName()
+                + ":" + getImageNumber();
+        return  name
+                + ", " + (getBasicMageObject() instanceof Token ? "T" : "C")
+                + ", " + getBasicMageObject().getClass().getSimpleName()
+                + ", " + imageInfo
+                + ", " + this.getPower() + "/" + this.getToughness()
+                + (this.isCopy() ? ", copy" : "")
+                + (this.isTapped() ? ", tapped" : "");
     }
 
     @Override
@@ -483,7 +499,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
-    protected UUID getControllerOrOwner() {
+    public UUID getControllerOrOwnerId() {
         return controllerId;
     }
 
@@ -1222,18 +1238,24 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     @Override
     public boolean entersBattlefield(Ability source, Game game, Zone fromZone, boolean fireEvent) {
         controlledFromStartOfControllerTurn = false;
-        if (this.isFaceDown(game)) { // ?? add morphed/manifested here ???
+
+        BecomesFaceDownCreatureEffect.FaceDownType faceDownType = BecomesFaceDownCreatureEffect.findFaceDownType(game, this);
+        if (faceDownType != null) {
             // remove some attributes here, because first apply effects comes later otherwise abilities (e.g. color related) will unintended trigger
-            MorphAbility.setPermanentToFaceDownCreature(this, this, game);
+            BecomesFaceDownCreatureEffect.makeFaceDownObject(game, null, this, faceDownType, null);
         }
 
+        // own etb event
         if (game.replaceEvent(new EntersTheBattlefieldEvent(this, source, getControllerId(), fromZone, EnterEventType.SELF))) {
             return false;
         }
+
+        // normal etb event
         EntersTheBattlefieldEvent event = new EntersTheBattlefieldEvent(this, source, getControllerId(), fromZone);
         if (game.replaceEvent(event)) {
             return false;
         }
+
         if (this.isPlaneswalker(game)) {
             int loyalty;
             if (this.getStartingLoyalty() == -2) {

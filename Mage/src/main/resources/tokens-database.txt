@@ -7,6 +7,8 @@
 
 # Use verify test to check it: test_checkMissingTokenData
 
+# Inner/xmage related tokens stores in TokenRepository (copy, morph, etc)
+
 # ALL EMBLEMS
 # Usage hints:
 # - use simple name for the emblem like Gideon

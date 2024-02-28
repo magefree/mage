@@ -19,6 +19,7 @@ import mage.client.util.audio.AudioManager;
 import mage.client.util.sets.ConstructedFormats;
 import mage.components.ImagePanel;
 import mage.components.ImagePanelStyle;
+import mage.constants.MageObjectType;
 import mage.game.command.Dungeon;
 import mage.game.command.Emblem;
 import mage.game.command.Plane;
@@ -396,7 +397,7 @@ public class MageBook extends JComponent {
             draftRating.setBounds(rectangle.x, rectangle.y + cardImg.getCardLocation().getCardHeight() + dy, cardDimensions.getFrameWidth(), 20);
             draftRating.setHorizontalAlignment(SwingConstants.CENTER);
             draftRating.setFont(jLayeredPane.getFont().deriveFont(jLayeredPane.getFont().getStyle() | Font.BOLD));
-            if (card.isOriginalACard()) {
+            if (card.getMageObjectType().equals(MageObjectType.CARD)) {
                 // card
                 draftRating.setText("draft rating: " + RateCard.rateCard(card, null));
             } else {
