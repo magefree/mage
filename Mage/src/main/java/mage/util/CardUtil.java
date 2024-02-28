@@ -1117,7 +1117,7 @@ public final class CardUtil {
 
         // put onto battlefield with possible counters without ETB
         game.getPermanentsEntering().put(permanent.getId(), permanent);
-        permCard.checkForCountersToAdd(permanent, source, game);
+        permCard.applyEnterWithCounters(permanent, source, game);
         permanent.entersBattlefield(source, game, Zone.OUTSIDE, false);
         game.addPermanent(permanent, game.getState().getNextPermanentOrderNumber());
         game.getPermanentsEntering().remove(permanent.getId());
@@ -2141,41 +2141,61 @@ public final class CardUtil {
 
 
     /**
-     * Copy image related data from one object to another (set code, card number, image number)
+     * Copy image related data from one object to another (set code, card number, image number, file name)
      * Use it in copy/transform effects
      */
     public static void copySetAndCardNumber(MageObject targetObject, MageObject copyFromObject) {
         String needSetCode;
         String needCardNumber;
+        String needImageFileName;
         int needImageNumber;
+        boolean needUsesVariousArt = false;
+        if (copyFromObject instanceof Card) {
+            needUsesVariousArt = ((Card) copyFromObject).getUsesVariousArt();
+        }
+
         needSetCode = copyFromObject.getExpansionSetCode();
         needCardNumber = copyFromObject.getCardNumber();
+        needImageFileName = copyFromObject.getImageFileName();
         needImageNumber = copyFromObject.getImageNumber();
 
         if (targetObject instanceof Permanent) {
-            copySetAndCardNumber((Permanent) targetObject, needSetCode, needCardNumber, needImageNumber);
+            copySetAndCardNumber((Permanent) targetObject, needSetCode, needCardNumber, needImageFileName, needImageNumber, needUsesVariousArt);
         } else if (targetObject instanceof Token) {
-            copySetAndCardNumber((Token) targetObject, needSetCode, needCardNumber, needImageNumber);
+            copySetAndCardNumber((Token) targetObject, needSetCode, needCardNumber, needImageFileName, needImageNumber);
+        } else if (targetObject instanceof Card) {
+            copySetAndCardNumber((Card) targetObject, needSetCode, needCardNumber, needImageFileName, needImageNumber, needUsesVariousArt);
         } else {
             throw new IllegalStateException("Unsupported target object class: " + targetObject.getClass().getSimpleName());
         }
     }
 
-    private static void copySetAndCardNumber(Permanent targetPermanent, String newSetCode, String newCardNumber, Integer newImageNumber) {
+    private static void copySetAndCardNumber(Permanent targetPermanent, String newSetCode, String newCardNumber, String newImageFileName, Integer newImageNumber, boolean usesVariousArt) {
         if (targetPermanent instanceof PermanentCard
                 || targetPermanent instanceof PermanentToken) {
             targetPermanent.setExpansionSetCode(newSetCode);
             targetPermanent.setCardNumber(newCardNumber);
+            targetPermanent.setImageFileName(newImageFileName);
             targetPermanent.setImageNumber(newImageNumber);
+            targetPermanent.setUsesVariousArt(usesVariousArt);
         } else {
             throw new IllegalArgumentException("Wrong code usage: un-supported target permanent type: " + targetPermanent.getClass().getSimpleName());
         }
     }
 
-    private static void copySetAndCardNumber(Token targetToken, String newSetCode, String newCardNumber, Integer newImageNumber) {
+    private static void copySetAndCardNumber(Token targetToken, String newSetCode, String newCardNumber, String newImageFileName, Integer newImageNumber) {
         targetToken.setExpansionSetCode(newSetCode);
         targetToken.setCardNumber(newCardNumber);
+        targetToken.setImageFileName(newImageFileName);
         targetToken.setImageNumber(newImageNumber);
+    }
+
+    private static void copySetAndCardNumber(Card targetCard, String newSetCode, String newCardNumber, String newImageFileName, Integer newImageNumber, boolean usesVariousArt) {
+        targetCard.setExpansionSetCode(newSetCode);
+        targetCard.setCardNumber(newCardNumber);
+        targetCard.setImageFileName(newImageFileName);
+        targetCard.setImageNumber(newImageNumber);
+        targetCard.setUsesVariousArt(usesVariousArt);
     }
 
     /**
@@ -2192,5 +2212,27 @@ public final class CardUtil {
             res.add(event.getTargetId());
         }
         return res;
+    }
+
+    /**
+     * Prepare card name for render in card panels, popups, etc. Can show face down status and real card name instead empty string
+     *
+     * @param imageFileName face down status or another inner image name like Morph, Copy, etc
+     */
+    public static String getCardNameForGUI(String name, String imageFileName) {
+        if (imageFileName.isEmpty()) {
+            // normal name
+            return name;
+        } else {
+            // face down or inner name
+            return imageFileName + (name.isEmpty() ? "" : ": " + name);
+        }
+    }
+
+    /**
+     * GUI related: show real name and day/night button for face down card
+     */
+    public static boolean canShowAsControlled(Card card, UUID createdForPlayer) {
+        return card.getControllerOrOwnerId().equals(createdForPlayer);
     }
 }

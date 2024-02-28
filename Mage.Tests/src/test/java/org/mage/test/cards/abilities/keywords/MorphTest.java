@@ -521,14 +521,10 @@ public class MorphTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akroma, Angel of Fury using Morph");
-//        showBattlefield("A battle", 1, PhaseStep.POSTCOMBAT_MAIN, playerA);
-//        showBattlefield("B battle", 1, PhaseStep.POSTCOMBAT_MAIN, playerB);
 
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Supplant Form");
         addTarget(playerB, EmptyNames.FACE_DOWN_CREATURE.toString());
 
-//        showBattlefield("A battle end", 1, PhaseStep.END_TURN, playerA);
-//        showBattlefield("B battle end", 1, PhaseStep.END_TURN, playerB);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
@@ -1103,10 +1099,17 @@ public class MorphTest extends CardTestPlayerBase {
 
     @Test
     public void test_MorphIsColorlessFlash() {
+        // creature
+        // Morph {4}{G}
         addCard(Zone.HAND, playerA, "Pine Walker", 1);
+        // land
+        // Morph {2}
         addCard(Zone.HAND, playerA, "Zoetic Cavern", 1);
-        addCard(Zone.BATTLEFIELD, playerA, "Liberator, Urza's Battlethopter", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Island", 6);
+        //
+        // You may cast colorless spells and artifact spells as though they had flash.
+        addCard(Zone.BATTLEFIELD, playerA, "Liberator, Urza's Battlethopter", 1);
+
         castSpell(1, PhaseStep.BEGIN_COMBAT, playerA, "Pine Walker using Morph");
         castSpell(1, PhaseStep.BEGIN_COMBAT, playerA, "Zoetic Cavern using Morph");
 

@@ -8,6 +8,7 @@ import mage.client.dialog.PreferencesDialog;
 import mage.constants.CardType;
 import mage.constants.MageObjectType;
 import mage.constants.SubType;
+import mage.util.CardUtil;
 import mage.util.SubTypes;
 import mage.view.CardView;
 import mage.view.PermanentView;
@@ -25,27 +26,6 @@ import java.text.CharacterIterator;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-
-
-/*
-    private void cardRendererBasedRender(Graphics2D g) {
-        // Prepare for draw
-        g.translate(cardXOffset, cardYOffset);
-        int cardWidth = this.cardWidth - cardXOffset;
-        int cardHeight = this.cardHeight - cardYOffset;
-
-        // AA on
-        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
-        // Renderer
-        CardRenderer render = new ModernCardRenderer(gameCard, transformed);
-        Image img = imagePanel.getSrcImage();
-        if (img != null) {
-            render.setArtImage(img);
-        }
-        render.draw(g, cardWidth, cardHeight);
-    }
- */
 
 /**
  * @author stravant@gmail.com, JayDi85
@@ -285,7 +265,8 @@ public class ModernCardRenderer extends CardRenderer {
     protected void drawBackground(Graphics2D g) {
         // Draw background, in 3 parts
 
-        if (cardView.isFaceDown()) {
+        if (false && cardView.isFaceDown()) {
+            // TODO: delete un-used code?!
             // Just draw a brown rectangle
             drawCardBack(g);
         } else {
@@ -392,16 +373,9 @@ public class ModernCardRenderer extends CardRenderer {
 
     @Override
     protected void drawArt(Graphics2D g) {
-        if ((artImage != null || faceArtImage != null) && !cardView.isFaceDown()) {
-
-            boolean useFaceArt = false;
-            if (faceArtImage != null && !isZendikarFullArtLand()) {
-                useFaceArt = true;
-            }
-
+        if (artImage != null) {
             // Invention rendering, art fills the entire frame
             if (useInventionFrame()) {
-                useFaceArt = false;
                 drawArtIntoRect(g,
                         borderWidth, borderWidth,
                         cardWidth - 2 * borderWidth, cardHeight - 2 * borderWidth,
@@ -412,7 +386,6 @@ public class ModernCardRenderer extends CardRenderer {
             Rectangle2D sourceRect = getArtRect();
 
             if (cardView.getMageObjectType() == MageObjectType.SPELL) {
-                useFaceArt = false;
                 ArtRect rect = cardView.getArtRect();
                 if (rect != ArtRect.NORMAL) {
                     sourceRect = rect.rect;
@@ -421,14 +394,7 @@ public class ModernCardRenderer extends CardRenderer {
             }
 
             // Normal drawing of art from a source part of the card frame into the rect
-            if (useFaceArt) {
-                int alternate_height = cardHeight - boxHeight * 2 - totalContentInset;
-                drawFaceArtIntoRect(g,
-                        totalContentInset + 1, totalContentInset + boxHeight,
-                        contentWidth - 2, typeLineY - totalContentInset - boxHeight,
-                        alternate_height,
-                        sourceRect, shouldPreserveAspect);
-            } else if (cardView.getArtRect() == ArtRect.FULL_LENGTH_RIGHT) {
+            if (cardView.getArtRect() == ArtRect.FULL_LENGTH_RIGHT) {
                 drawArtIntoRect(g,
                         contentWidth / 2 + totalContentInset + 1, totalContentInset + boxHeight,
                         contentWidth / 2 - 1, typeLineY - totalContentInset - boxHeight,
@@ -713,27 +679,20 @@ public class ModernCardRenderer extends CardRenderer {
 
     public void drawZendikarCurvedFace(Graphics2D g2, BufferedImage image, int x, int y, int x2, int y2,
                                        Color boxColor, Paint paint) {
-
-        BufferedImage artToUse = faceArtImage;
-        boolean hadToUseFullArt = false;
-        if (faceArtImage == null) {
-            if (artImage == null) {
-                return;
-            }
-            hadToUseFullArt = true;
-            artToUse = artImage;
+        if (artImage == null) {
+            return;
         }
+
+        BufferedImage artToUse = artImage;
         int srcW = artToUse.getWidth();
         int srcH = artToUse.getHeight();
 
-        if (hadToUseFullArt) {
-            // Get a box based on the standard scan from gatherer.
-            // Width = 185/223 pixels (centered)
-            // Height = 220/310, 38 pixels from top
-            int subx = 19 * srcW / 223;
-            int suby = 38 * srcH / 310;
-            artToUse = artImage.getSubimage(subx, suby, 185 * srcW / 223, 220 * srcH / 310);
-        }
+        // Get a box based on the standard scan from gatherer.
+        // Width = 185/223 pixels (centered)
+        // Height = 220/310, 38 pixels from top
+        int subx = 19 * srcW / 223;
+        int suby = 38 * srcH / 310;
+        artToUse = artImage.getSubimage(subx, suby, 185 * srcW / 223, 220 * srcH / 310);
 
         Path2D.Double curve = new Path2D.Double();
 
@@ -762,26 +721,19 @@ public class ModernCardRenderer extends CardRenderer {
     public void drawBFZCurvedFace(Graphics2D g2, BufferedImage image, int x, int y, int x2, int y2,
                                   int topxdelta, int endydelta,
                                   Color boxColor, Paint paint) {
-        BufferedImage artToUse = faceArtImage;
-        boolean hadToUseFullArt = false;
-        if (faceArtImage == null) {
-            if (artImage == null) {
-                return;
-            }
-            hadToUseFullArt = true;
-            artToUse = artImage;
+        if (artImage == null) {
+            return;
         }
+        BufferedImage artToUse = artImage;
         int srcW = artToUse.getWidth();
         int srcH = artToUse.getHeight();
 
-        if (hadToUseFullArt) {
-            // Get a box based on the standard scan from gatherer.
-            // Width = 185/223 pixels (centered)
-            // Height = 220/310, 38 pixels from top
-            int subx = 19 * srcW / 223;
-            int suby = 38 * srcH / 310;
-            artToUse = artImage.getSubimage(subx, suby, 185 * srcW / 223, 220 * srcH / 310);
-        }
+        // Get a box based on the standard scan from gatherer.
+        // Width = 185/223 pixels (centered)
+        // Height = 220/310, 38 pixels from top
+        int subx = 19 * srcW / 223;
+        int suby = 38 * srcH / 310;
+        artToUse = artImage.getSubimage(subx, suby, 185 * srcW / 223, 220 * srcH / 310);
 
         Path2D.Double curve = new Path2D.Double();
         curve.moveTo(x + topxdelta, y);
@@ -907,23 +859,13 @@ public class ModernCardRenderer extends CardRenderer {
         int availableWidth = w - manaCostWidth + 2;
 
         // Draw the name
-        String nameStr;
-        if (cardView.isFaceDown()) {
-            if (cardView instanceof PermanentView && ((PermanentView) cardView).isManifested()) {
-                nameStr = "Manifest: " + cardView.getName();
-            } else {
-                nameStr = "Morph: " + cardView.getName();
-            }
-        } else {
-            nameStr = baseName;
-        }
-        if (!nameStr.isEmpty()) {
-            AttributedString str = new AttributedString(nameStr);
+        if (!baseName.isEmpty()) {
+            AttributedString str = new AttributedString(baseName);
             str.addAttribute(TextAttribute.FONT, boxTextFont);
             TextMeasurer measure = new TextMeasurer(str.getIterator(), g.getFontRenderContext());
             int breakIndex = measure.getLineBreakIndex(0, availableWidth);
-            if (breakIndex < nameStr.length()) {
-                str = new AttributedString(nameStr);
+            if (breakIndex < baseName.length()) {
+                str = new AttributedString(baseName);
                 str.addAttribute(TextAttribute.FONT, boxTextFontNarrow);
                 measure = new TextMeasurer(str.getIterator(), g.getFontRenderContext());
                 breakIndex = measure.getLineBreakIndex(0, availableWidth);

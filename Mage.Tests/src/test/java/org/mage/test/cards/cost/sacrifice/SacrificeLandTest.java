@@ -2,6 +2,7 @@ package org.mage.test.cards.cost.sacrifice;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.util.RandomUtil;
 import org.junit.Test;
 import org.mage.test.sba.PlaneswalkerRuleTest;
 import org.mage.test.serverside.base.CardTestPlayerBase;
@@ -22,16 +23,15 @@ public class SacrificeLandTest extends CardTestPlayerBase {
      */
     @Test
     public void testRollback() {
-        // If Soldevi Excavations would enter the battlefield, sacrifice an untapped Island instead.
+        // If Soldevi Excavations entered the battlefield, sacrifice an untapped Island instead.
         // If you do, put Soldevi Excavations onto the battlefield. If you don't, put it into its owner's graveyard.
         String soldeviExcavations = "Soldevi Excavations";
 
         addCard(Zone.HAND, playerA, soldeviExcavations);
         addCard(Zone.BATTLEFIELD, playerA, "Island");
 
-        Random random = new Random();
-        boolean sacFirstLand = random.nextBoolean();
-        boolean sacSecondLand = random.nextBoolean();
+        boolean sacFirstLand = RandomUtil.nextBoolean();
+        boolean sacSecondLand = RandomUtil.nextBoolean();
 
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, soldeviExcavations);
         setChoice(playerA, sacFirstLand);

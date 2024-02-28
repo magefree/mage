@@ -1275,9 +1275,9 @@ public class ScryfallImageSupportTokens {
             put("DDE/Saproling", "https://api.scryfall.com/cards/tdde/3/en?format=image");
 
             // DDD
-            put("DDD/Beast/1", "https://api.scryfall.com/cards/tddd/1/en?format=image");
-            put("DDD/Beast/2", "https://api.scryfall.com/cards/tddd/2/en?format=image");
-            put("DDD/Elephant", "https://api.scryfall.com/cards/tddd/3/en?format=image");
+            put("DDD/Beast/1", "https://api.scryfall.com/cards/tddd/T1/en?format=image");
+            put("DDD/Beast/2", "https://api.scryfall.com/cards/tddd/T2/en?format=image");
+            put("DDD/Elephant", "https://api.scryfall.com/cards/tddd/T3/en?format=image");
 
             // SOM
             put("SOM/Cat", "https://api.scryfall.com/cards/tsom/1/en?format=image");

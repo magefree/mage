@@ -21,6 +21,7 @@ import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.custom.CreatureToken;
 import mage.players.Player;
 import mage.target.Target;
+import org.apache.log4j.Logger;
 
 import java.lang.reflect.Constructor;
 import java.util.*;
@@ -29,6 +30,8 @@ import java.util.*;
  * Each token must have default constructor without params (GUI require for card viewer)
  */
 public abstract class TokenImpl extends MageObjectImpl implements Token {
+
+    private static final Logger logger = Logger.getLogger(MageObjectImpl.class);
 
     protected String description;
     private final ArrayList<UUID> lastAddedTokenIds = new ArrayList<>();
@@ -142,6 +145,14 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         return putOntoBattlefield(amount, game, source, controllerId, tapped, attacking, null);
     }
 
+    /**
+     * Find random token image from a database
+     *
+     * @param token
+     * @param game
+     * @param sourceId
+     * @return
+     */
     public static TokenInfo generateTokenInfo(TokenImpl token, Game game, UUID sourceId) {
         // Choose a token image by priority:
         // - use source's set code
@@ -190,11 +201,10 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
             // TODO: return default creature token image
         }
 
-        // TODO: implement Copy image
-        // TODO: implement Manifest image
-        // TODO: implement Morph image
-
-        // unknown tokens
+        // unknown tokens:
+        // - without official token sets;
+        // - un-implemented token set (must add missing images to tokens database);
+        // - another use cases with unknown tokens
         return new TokenInfo(TokenType.TOKEN, "Unknown", TokenRepository.XMAGE_TOKENS_SET_CODE, 0);
     }
 

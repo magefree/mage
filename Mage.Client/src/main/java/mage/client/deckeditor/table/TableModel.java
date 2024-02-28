@@ -255,7 +255,7 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
             case 9:
                 return RateCard.rateCard(c, null);
             case 10:
-                return ManaSymbols.getClearManaCost(c.getColorIdentityStr());
+                return ManaSymbols.getClearManaCost(c.getOriginalColorIdentity());
             default:
                 return "error";
         }

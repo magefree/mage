@@ -103,4 +103,8 @@ public class ZoneChangeEvent extends GameEvent {
         return this.source;
     }
 
+    @Override
+    public String toString() {
+        return super.toString() + ", from " + getFromZone() + " to " + getToZone();
+    }
 }

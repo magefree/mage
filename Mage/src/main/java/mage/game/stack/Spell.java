@@ -89,7 +89,7 @@ public class Spell extends StackObjectImpl implements Card {
         }
 
         this.card = affectedCard;
-        this.manaCost = this.card.getManaCost().copy();
+        this.manaCost = affectedCard.getManaCost().copy();
         this.color = affectedCard.getColor(null).copy();
         this.frameColor = affectedCard.getFrameColor(null).copy();
         this.frameStyle = affectedCard.getFrameStyle();
@@ -100,7 +100,11 @@ public class Spell extends StackObjectImpl implements Card {
         this.ability = ability;
         this.ability.setControllerId(controllerId);
 
-        if (ability.getSpellAbilityCastMode() == SpellAbilityCastMode.MORPH){
+        if (ability.getSpellAbilityCastMode() == SpellAbilityCastMode.MORPH
+            || ability.getSpellAbilityCastMode() == SpellAbilityCastMode.MEGAMORPH){
+            // TODO: need research:
+            //  - why it use game param for color and subtype (possible bug?)
+            //  - is it possible to use BecomesFaceDownCreatureEffect.makeFaceDownObject or like that?
             this.faceDown = true;
             this.getColor(game).setColor(null);
             game.getState().getCreateMageObjectAttribute(this.getCard(), game).getSubtype().clear();
@@ -236,6 +240,16 @@ public class Spell extends StackObjectImpl implements Card {
     @Override
     public void setCardNumber(String cardNumber) {
         throw new IllegalStateException("Wrong code usage: you can't change card number for the spell");
+    }
+
+    @Override
+    public String getImageFileName() {
+        return card.getImageFileName();
+    }
+
+    @Override
+    public void setImageFileName(String imageFile) {
+        throw new IllegalStateException("Wrong code usage: you can't change image file name for the spell");
     }
 
     @Override
@@ -510,6 +524,11 @@ public class Spell extends StackObjectImpl implements Card {
     }
 
     @Override
+    public UUID getControllerOrOwnerId() {
+        return getControllerId();
+    }
+
+    @Override
     public String getName() {
         return card.getName();
     }
@@ -544,6 +563,11 @@ public class Spell extends StackObjectImpl implements Card {
     @Override
     public Rarity getRarity() {
         return card.getRarity();
+    }
+
+    @Override
+    public void setRarity(Rarity rarity) {
+        throw new IllegalArgumentException("Un-supported operation: " + this, new Throwable());
     }
 
     @Override
@@ -934,6 +958,11 @@ public class Spell extends StackObjectImpl implements Card {
     }
 
     @Override
+    public void setUsesVariousArt(boolean usesVariousArt) {
+        card.setUsesVariousArt(usesVariousArt);
+    }
+
+    @Override
     public List<Mana> getMana() {
         return card.getMana();
     }
@@ -1104,8 +1133,8 @@ public class Spell extends StackObjectImpl implements Card {
     }
 
     @Override
-    public void checkForCountersToAdd(Permanent permanent, Ability source, Game game) {
-        card.checkForCountersToAdd(permanent, source, game);
+    public void applyEnterWithCounters(Permanent permanent, Ability source, Game game) {
+        card.applyEnterWithCounters(permanent, source, game);
     }
 
     @Override

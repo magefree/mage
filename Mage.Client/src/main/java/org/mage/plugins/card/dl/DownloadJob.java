@@ -24,15 +24,17 @@ public class DownloadJob extends AbstractLaternaBean {
     private final String name;
     private Source source;
     private final Destination destination;
+    private final boolean forceToDownload; // download image everytime, do not keep old image
     private final Property<State> state = properties.property("state", State.NEW);
     private final Property<String> message = properties.property("message");
     private final Property<Exception> error = properties.property("error");
     private final BoundedRangeModel progress = new DefaultBoundedRangeModel();
 
-    public DownloadJob(String name, Source source, Destination destination) {
+    public DownloadJob(String name, Source source, Destination destination, boolean forceToDownload) {
         this.name = name;
         this.source = source;
         this.destination = destination;
+        this.forceToDownload = forceToDownload;
     }
 
     /**
@@ -153,6 +155,10 @@ public class DownloadJob extends AbstractLaternaBean {
 
     public Destination getDestination() {
         return destination;
+    }
+
+    public boolean isForceToDownload() {
+        return forceToDownload;
     }
 
     public static Source fromURL(final String url) {

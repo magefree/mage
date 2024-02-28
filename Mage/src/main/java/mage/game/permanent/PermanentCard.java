@@ -14,28 +14,30 @@ import mage.cards.SplitCard;
 import mage.constants.SpellAbilityType;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.token.Token;
 
-import javax.annotation.processing.SupportedSourceVersion;
-import javax.lang.model.SourceVersion;
 import java.util.UUID;
 
 /**
  * Static permanent on the battlefield. There are possible multiple permanents per one card,
- * so be carefull for targets (ids are different) and ZCC (zcc is static for permanent).
+ * so be carefully for targets (ids are different) and ZCC (zcc is static for permanent).
  *
  * @author BetaSteward_at_googlemail.com
  */
 public class PermanentCard extends PermanentImpl {
 
+    // blueprint e.g. a copy of the original card that was cast
+    // (this is not the original card, so it's possible to change some attribute before it enters the battlefield)
+    // TODO: wtf, it modified on getCard/getBasicMageObject/getMainCard() and other places, e.g. on bestow -- must be fixed!
+    protected Card card;
+
     protected int maxLevelCounters;
-    // A copy of the original card that was cast (this is not the original card, so it's possible to change some attribute to this blueprint to change attributes to the permanent if it enters the battlefield with e.g. a subtype)
-    protected Card card; // TODO: wtf, it modified on getCard and other places, e.g. on bestow -- must be fixed!
-    // the number this permanent instance had
     protected int zoneChangeCounter;
 
     public PermanentCard(Card card, UUID controllerId, Game game) {
-        super(card.getId(), card.getOwnerId(), controllerId, card.getName());
+        super(card.getId(), card.getOwnerId(), controllerId, card.getName()); // card id
+        // TODO: wtf, must research - is it possible to have diff ids for same card id?!
+        //  ETB with counters depends on card id, not permanent id
+        // TODO: ETB with counters works with tokens?! Must research
 
         // runtime check: must use real card only inside
         if (card instanceof PermanentCard) {
@@ -124,7 +126,7 @@ public class PermanentCard extends PermanentImpl {
         this.abilities.setSourceId(objectId);
         this.cardType.clear();
         this.cardType.addAll(card.getCardType());
-        this.color = card.getColor(null).copy();
+        this.color = card.getColor(null).copy(); // TODO: need research - why it null
         this.frameColor = card.getFrameColor(game).copy();
         this.frameStyle = card.getFrameStyle();
         this.manaCost = card.getManaCost().copy();
@@ -134,10 +136,12 @@ public class PermanentCard extends PermanentImpl {
         this.subtype.copyFrom(card.getSubtype());
         this.supertype.clear();
         this.supertype.addAll(card.getSuperType());
+        this.rarity = card.getRarity();
 
         this.setExpansionSetCode(card.getExpansionSetCode());
         this.setCardNumber(card.getCardNumber());
-        this.rarity = card.getRarity();
+        this.setImageFileName(card.getImageFileName());
+        this.setImageNumber(card.getImageNumber());
         this.usesVariousArt = card.getUsesVariousArt();
 
         if (card.getSecondCardFace() != null) {
@@ -152,7 +156,7 @@ public class PermanentCard extends PermanentImpl {
     }
 
     @Override
-    public MageObject getBasicMageObject(Game game) {
+    public MageObject getBasicMageObject() {
         return card;
     }
 
@@ -214,26 +218,20 @@ public class PermanentCard extends PermanentImpl {
 
     @Override
     public void updateZoneChangeCounter(Game game, ZoneChangeEvent event) {
+        // TODO: wtf, permanent must not change ZCC at all, is it buggy here?!
         card.updateZoneChangeCounter(game, event);
         zoneChangeCounter = card.getZoneChangeCounter(game);
     }
 
     @Override
     public void setZoneChangeCounter(int value, Game game) {
+        // TODO: wtf, why it sync card only without permanent zcc, is it buggy here?!
+        // TODO: miss zoneChangeCounter = card.getZoneChangeCounter(game); ?
         card.setZoneChangeCounter(value, game);
     }
 
     @Override
     public Card getMainCard() {
         return card.getMainCard();
-    }
-
-    @Override
-    public String toString() {
-        return card.toString()
-                + ", " + ((this instanceof Token) ? "T" : "C")
-                + (this.isCopy() ? ", copy" : "")
-                + ", " + this.getPower() + "/" + this.getToughness()
-                + (this.isTapped() ? ", tapped" : "");
     }
 }

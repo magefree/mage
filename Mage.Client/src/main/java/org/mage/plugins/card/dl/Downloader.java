@@ -146,7 +146,7 @@ public class Downloader extends AbstractLaternaBean {
                 Destination dst = job.getDestination();
                 BoundedRangeModel progress = job.getProgress();
 
-                if (dst.isValid()) {
+                if (dst.isValid() && !job.isForceToDownload()) {
                     // already done
                     progress.setMaximum(1);
                     progress.setValue(1);
