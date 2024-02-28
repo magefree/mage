@@ -38,6 +38,8 @@ public final class MurdersAtKarlovManorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Animate Dead", 125, Rarity.UNCOMMON, mage.cards.a.AnimateDead.class));
         cards.add(new SetCardInfo("Anya, Merciless Angel", 199, Rarity.MYTHIC, mage.cards.a.AnyaMercilessAngel.class));
         cards.add(new SetCardInfo("Arcane Signet", 223, Rarity.COMMON, mage.cards.a.ArcaneSignet.class));
+        cards.add(new SetCardInfo("Armed with Proof", 9, Rarity.RARE, mage.cards.a.ArmedWithProof.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Armed with Proof", 320, Rarity.RARE, mage.cards.a.ArmedWithProof.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ash Barrens", 248, Rarity.UNCOMMON, mage.cards.a.AshBarrens.class));
         cards.add(new SetCardInfo("Ashcloud Phoenix", 147, Rarity.MYTHIC, mage.cards.a.AshcloudPhoenix.class));
         cards.add(new SetCardInfo("Austere Command", 56, Rarity.RARE, mage.cards.a.AustereCommand.class));
