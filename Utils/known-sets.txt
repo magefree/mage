@@ -10,6 +10,7 @@ Apocalypse|Apocalypse|
 Archenemy|Archenemy|
 Archenemy: Nicol Bolas|ArchenemyNicolBolas|
 Arabian Nights|ArabianNights|
+Arena Beginner Set|ArenaBeginnerSet|
 Arena League|ArenaLeague|
 Asia Pacific Land Program|AsiaPacificLandProgram|
 Assassin's Creed|AssassinsCreed|

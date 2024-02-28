@@ -472,6 +472,7 @@ public class ScryfallImageSupportCards {
             add("PH19"); // 2019 Heroes of the Realm
             add("2XM"); // Double Masters
             add("AKR"); // Amonkhet Remastered
+            add("ANB"); // Arena Beginner Set
             add("ZNR"); // Zendikar Rising
             add("ZNC"); // Zendikar Rising Commander
             add("ZNE"); // Zendikar Rising Expeditions

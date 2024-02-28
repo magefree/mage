@@ -15,6 +15,7 @@ Aether Revolt|AER|
 Amonkhet|AKH|
 Shards of Alara|ALA|
 Alliances|ALL|
+Arena Beginner Set|ANB|
 Asia Pacific Land Program|APAC|
 Apocalypse|APC|
 Alara Reborn|ARB|
