@@ -19,7 +19,7 @@ public final class ImpToken extends TokenImpl {
 
         // When this creature dies, it deals 2 damage to each opponent.
         this.addAbility(new DiesSourceTriggeredAbility(
-                new DamagePlayersEffect(2, TargetController.OPPONENT)));
+                new DamagePlayersEffect(2, TargetController.OPPONENT)).setTriggerPhrase("When this creature dies, "));
     }
 
     private ImpToken(final ImpToken token) {

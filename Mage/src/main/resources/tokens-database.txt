@@ -2161,3 +2161,25 @@
 |Generate|TOK:RVR|Voja|||VojaToken|
 |Generate|TOK:RVR|Wurm|||WurmToken|
 |Generate|TOK:RVR|Zombie|||ZombieToken|
+
+# MKM
+|Generate|TOK:MKM|Bat|||BatToken|
+|Generate|TOK:MKM|Clue|1||ClueArtifactToken|
+|Generate|TOK:MKM|Clue|2||ClueArtifactToken|
+|Generate|TOK:MKM|Clue|3||ClueArtifactToken|
+|Generate|TOK:MKM|Clue|4||ClueArtifactToken|
+|Generate|TOK:MKM|Clue|5||ClueArtifactToken|
+|Generate|TOK:MKM|Detective|||DetectiveToken|
+|Generate|TOK:MKM|Dog|||WhiteDogToken|
+|Generate|TOK:MKM|Goblin|||GoblinToken|
+|Generate|TOK:MKM|Human|||HumanToken|
+|Generate|TOK:MKM|Imp|||ImpToken|
+|Generate|TOK:MKM|Merfolk|||MerfolkToken|
+|Generate|TOK:MKM|Ooze|||OozeTrampleToken|
+|Generate|TOK:MKM|Plant|||PlantToken|
+|Generate|TOK:MKM|Skeleton|||SkeletonToken2|
+|Generate|TOK:MKM|Spider|||IzoniSpiderToken|
+|Generate|TOK:MKM|Spirit|||WhiteBlackSpiritToken|
+|Generate|TOK:MKM|Thopter|1||Thopter00ColorlessToken|
+|Generate|TOK:MKM|Thopter|2||ThopterColorlessToken|
+|Generate|TOK:MKM|Voja Fenstalker|||TolsimirMidnightsLightToken|

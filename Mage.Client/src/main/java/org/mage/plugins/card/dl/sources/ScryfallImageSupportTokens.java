@@ -2229,6 +2229,28 @@ public class ScryfallImageSupportTokens {
             put("RVR/Wurm", "https://api.scryfall.com/cards/trvr/13/en?format=image");
             put("RVR/Zombie", "https://api.scryfall.com/cards/trvr/6/en?format=image");
 
+            // MKM
+            put("MKM/Bat", "https://api.scryfall.com/cards/tmkm/4/en?format=image");
+            put("MKM/Clue/1", "https://api.scryfall.com/cards/tmkm/14/en?format=image");
+            put("MKM/Clue/2", "https://api.scryfall.com/cards/tmkm/15/en?format=image");
+            put("MKM/Clue/3", "https://api.scryfall.com/cards/tmkm/16/en?format=image");
+            put("MKM/Clue/4", "https://api.scryfall.com/cards/tmkm/17/en?format=image");
+            put("MKM/Clue/5", "https://api.scryfall.com/cards/tmkm/18/en?format=image");
+            put("MKM/Detective", "https://api.scryfall.com/cards/tmkm/10/en?format=image");
+            put("MKM/Dog", "https://api.scryfall.com/cards/tmkm/1/en?format=image");
+            put("MKM/Goblin", "https://api.scryfall.com/cards/tmkm/6/en?format=image");
+            put("MKM/Human", "https://api.scryfall.com/cards/tmkm/2/en?format=image");
+            put("MKM/Imp", "https://api.scryfall.com/cards/tmkm/7/en?format=image");
+            put("MKM/Merfolk", "https://api.scryfall.com/cards/tmkm/3/en?format=image");
+            put("MKM/Ooze", "https://api.scryfall.com/cards/tmkm/8/en?format=image");
+            put("MKM/Plant", "https://api.scryfall.com/cards/tmkm/9/en?format=image");
+            put("MKM/Skeleton", "https://api.scryfall.com/cards/tmkm/5/en?format=image");
+            put("MKM/Spider", "https://api.scryfall.com/cards/tmkm/11/en?format=image");
+            put("MKM/Spirit", "https://api.scryfall.com/cards/tmkm/12/en?format=image");
+            put("MKM/Thopter/1", "https://api.scryfall.com/cards/tmkm/19/en?format=image");
+            put("MKM/Thopter/2", "https://api.scryfall.com/cards/tmkm/20/en?format=image");
+            put("MKM/Voja Fenstalker", "https://api.scryfall.com/cards/tmkm/13/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {
