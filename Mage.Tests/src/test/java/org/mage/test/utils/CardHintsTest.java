@@ -106,7 +106,6 @@ public class CardHintsTest extends CardTestCommanderDuelBase {
     }
 
     @Test
-    @Ignore
     public void test_ObjectNamesInHtml() {
         skipInitShuffling();
 
