@@ -1873,7 +1873,7 @@ public abstract class GameImpl implements Game {
     @Override
     public void addEffect(ContinuousEffect continuousEffect, Ability source) {
         Ability newAbility = source.copy();
-        newAbility.updateSourceObjectZoneChangeCounter(this, true);
+        newAbility.initSourceObjectZoneChangeCounter(this, true);
         ContinuousEffect newEffect = continuousEffect.copy();
 
         newEffect.newId();
@@ -2069,13 +2069,13 @@ public abstract class GameImpl implements Game {
         if (ability instanceof TriggeredManaAbility || ability instanceof DelayedTriggeredManaAbility) {
             // 20110715 - 605.4
             Ability manaAbility = ability.copy();
-            manaAbility.updateSourceObjectZoneChangeCounter(this, false);
+            manaAbility.initSourceObjectZoneChangeCounter(this, false);
             manaAbility.activate(this, false);
             manaAbility.resolve(this);
         } else {
             TriggeredAbility newAbility = ability.copy();
             newAbility.newId();
-            newAbility.updateSourceObjectZoneChangeCounter(this, false);
+            newAbility.initSourceObjectZoneChangeCounter(this, false);
             if (!(newAbility instanceof DelayedTriggeredAbility)) {
                 newAbility.setSourcePermanentTransformCount(this);
             }
@@ -2094,7 +2094,7 @@ public abstract class GameImpl implements Game {
         DelayedTriggeredAbility newAbility = delayedAbility.copy();
         newAbility.newId();
         if (source != null) {
-            newAbility.updateSourceObjectZoneChangeCounter(this, true);
+            newAbility.initSourceObjectZoneChangeCounter(this, true);
             newAbility.setSourcePermanentTransformCount(this);
         }
         newAbility.init(this);

@@ -236,7 +236,7 @@ public abstract class AbilityImpl implements Ability {
         game.applyEffects();
 
         MageObject sourceObject = getSourceObject(game);
-        updateSourceObjectZoneChangeCounter(game, false);
+        initSourceObjectZoneChangeCounter(game, false);
         setSourcePermanentTransformCount(game);
 
         // if ability can be cast for no mana, clear the mana costs now, because additional mana costs must be paid.
@@ -1302,7 +1302,7 @@ public abstract class AbilityImpl implements Ability {
     @Override
     public MageObject getSourceObjectIfItStillExists(Game game) {
         if (getSourceObjectZoneChangeCounter() == 0
-                || getSourceObjectZoneChangeCounter() == getCurrentSourceZCC(game)) {
+                || getSourceObjectZoneChangeCounter() == getCurrentSourceObjectZoneChangeCounter(game)) {
             // exists or lki from battlefield
             return game.getObject(getSourceId());
         }
@@ -1333,13 +1333,13 @@ public abstract class AbilityImpl implements Ability {
     }
 
     @Override
-    public void updateSourceObjectZoneChangeCounter(Game game, boolean force) {
+    public void initSourceObjectZoneChangeCounter(Game game, boolean force) {
         if (!(this instanceof MageSingleton) && (force || sourceObjectZoneChangeCounter == 0 )) {
-            setSourceObjectZoneChangeCounter(getCurrentSourceZCC(game));
+            setSourceObjectZoneChangeCounter(getCurrentSourceObjectZoneChangeCounter(game));
         }
     }
 
-    private int getCurrentSourceZCC(Game game){
+    private int getCurrentSourceObjectZoneChangeCounter(Game game){
         int zcc = game.getState().getZoneChangeCounter(getSourceId());
         if (game.getPermanentEntering(getSourceId()) != null){
             // If the triggered ability triggered while the permanent is entering the battlefield

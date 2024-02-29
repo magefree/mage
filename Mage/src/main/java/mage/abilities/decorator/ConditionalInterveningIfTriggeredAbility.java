@@ -125,8 +125,8 @@ public class ConditionalInterveningIfTriggeredAbility extends TriggeredAbilityIm
     }
 
     @Override
-    public void updateSourceObjectZoneChangeCounter(Game game, boolean force) {
-        ability.updateSourceObjectZoneChangeCounter(game, force);
+    public void initSourceObjectZoneChangeCounter(Game game, boolean force) {
+        ability.initSourceObjectZoneChangeCounter(game, force);
     }
 
     @Override
