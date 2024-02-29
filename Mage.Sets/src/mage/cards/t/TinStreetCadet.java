@@ -25,7 +25,7 @@ public final class TinStreetCadet extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever Tin Street Cadet becomes blocked, create a 1/1 red Goblin creature token.
-        this.addAbility(new BecomesBlockedByCreatureTriggeredAbility(new CreateTokenEffect(new GoblinToken()), false));
+        this.addAbility(new BecomesBlockedSourceTriggeredAbility(new CreateTokenEffect(new GoblinToken()), false));
     }
 
     private TinStreetCadet(final TinStreetCadet card) {
