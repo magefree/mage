@@ -4,6 +4,9 @@ import mage.cards.Card;
 import mage.constants.*;
 import mage.filter.Filter;
 import mage.game.permanent.Permanent;
+import mage.view.GameView;
+import mage.view.PermanentView;
+import mage.view.PlayerView;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.player.TestPlayer;
@@ -1224,4 +1227,69 @@ public class MorphTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 2, 3);
     }
 
+    private void assertMorphedFaceDownColor(String info, String needColor) {
+        Permanent permanent = currentGame.getBattlefield().getAllPermanents()
+                .stream()
+                .filter(Permanent::isMorphed)
+                .findFirst()
+                .orElse(null);
+        Assert.assertNotNull(info + ", server side: can't find morphed permanent", permanent);
+        Assert.assertEquals(info + ", server side: wrong name", EmptyNames.FACE_DOWN_CREATURE.toString(), permanent.getName());
+        Assert.assertEquals(info + ", server side: wrong color", needColor, permanent.getColor(currentGame).toString());
+
+        // client side - controller
+        GameView gameView = getGameView(playerA);
+        PermanentView permanentView = gameView.getMyPlayer().getBattlefield().values()
+                .stream()
+                .filter(PermanentView::isMorphed)
+                .findFirst()
+                .orElse(null);
+        Assert.assertNotNull(info + ", client side - controller: can't find morphed permanent", permanentView);
+        Assert.assertEquals(info + ", client side - controller: wrong name", "Morph: Zoetic Cavern", permanentView.getName());
+        Assert.assertEquals(info + ", client side - controller: wrong color", needColor, permanentView.getColor().toString());
+
+        // client side - opponent
+        gameView = getGameView(playerB);
+        PlayerView playerView = gameView.getPlayers().stream().filter(p -> p.getName().equals(playerA.getName())).findFirst().orElse(null);
+        Assert.assertNotNull(playerView);
+        permanentView = playerView.getBattlefield().values()
+                .stream()
+                .filter(PermanentView::isMorphed)
+                .findFirst()
+                .orElse(null);
+        Assert.assertNotNull(info + ", client side - opponent: can't find morphed permanent", permanentView);
+        Assert.assertEquals(info + ", client side - opponent: wrong name", "Morph", permanentView.getName());
+        Assert.assertEquals(info + ", client side - opponent: wrong color", needColor, permanentView.getColor().toString());
+    }
+
+    @Test
+    public void test_Morph_MustGetColor() {
+        // Morph {2}
+        addCard(Zone.HAND, playerA, "Zoetic Cavern");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
+        //
+        // As Painter's Servant enters the battlefield, choose a color.
+        // All cards that aren't on the battlefield, spells, and permanents are the chosen color in addition to their other colors.
+        addCard(Zone.HAND, playerA, "Painter's Servant"); // {2}
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+
+        // prepare face down
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Zoetic Cavern using Morph");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
+        runCode("face down before color", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
+            assertMorphedFaceDownColor(info, "");
+        });
+
+        // add effect with new green color for a face down
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Painter's Servant");
+        setChoice(playerA, "Green");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
+        runCode("face down with G color", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
+            assertMorphedFaceDownColor(info, "G");
+        });
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+    }
 }

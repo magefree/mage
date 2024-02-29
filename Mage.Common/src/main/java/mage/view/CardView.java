@@ -353,12 +353,15 @@ public class CardView extends SimpleCardView {
             this.fillEmptyWithImageInfo(game, card, true);
 
             // can show face up card name for controller or game end
+            // TODO: add exception on non empty name of the faced-down card here
             String visibleName = CardUtil.getCardNameForGUI(showHiddenFaceDownData ? sourceName : "", this.imageFileName);
             this.name = visibleName;
             this.displayName = visibleName;
             this.displayFullName = visibleName;
             this.alternateName = visibleName;
 
+            // TODO: remove workaround - all actual characteristics must get from a card -- same as normal card do
+            // TODO: must use same code in all zones
             // workaround to add PT, creature type and face up ability text (for stack and battlefield zones only)
             // in other zones it has only face down status/name
             if (sourceCard instanceof Spell
@@ -366,6 +369,9 @@ public class CardView extends SimpleCardView {
                 this.power = Integer.toString(card.getPower().getValue());
                 this.toughness = Integer.toString(card.getToughness().getValue());
                 this.cardTypes = new ArrayList<>(card.getCardType());
+                this.color = card.getColor(null);
+                this.superTypes = new ArrayList<>(card.getSuperType());
+                this.subTypes = card.getSubtype().copy();
                 this.rules = new ArrayList<>(card.getRules());
 
                 // additional rules for stack (example: morph ability text)
@@ -507,6 +513,8 @@ public class CardView extends SimpleCardView {
 
         // FACE UP INFO
         if (showFaceUp) {
+            // TODO: extract characteristics setup to shared code (same for face down and normal cards)
+            //  PT, card types/subtypes/super/color/rules
             this.power = Integer.toString(card.getPower().getValue());
             this.toughness = Integer.toString(card.getToughness().getValue());
             this.cardTypes = new ArrayList<>(card.getCardType(game));

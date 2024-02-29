@@ -167,9 +167,7 @@ public class TokenImagesTest extends CardTestPlayerBase {
         // collect real client stats
         Map<String, List<PermanentView>> realClientStats = new LinkedHashMap<>();
         GameView gameView = new GameView(currentGame.getState(), currentGame, playerA.getId(), null);
-        PlayerView playerView = gameView.getPlayers().stream().filter(p -> p.getName().equals(playerA.getName())).findFirst().orElse(null);
-        Assert.assertNotNull(playerView);
-        playerView.getBattlefield().values()
+        gameView.getMyPlayer().getBattlefield().values()
                 .stream()
                 .filter(card -> card.getName().equals(tokenName))
                 .filter(CardView::isToken)
@@ -277,13 +275,7 @@ public class TokenImagesTest extends CardTestPlayerBase {
                 .collect(Collectors.toSet());
 
         GameView gameView = new GameView(currentGame.getState(), currentGame, playerA.getId(), null);
-        PlayerView playerView = gameView.getPlayers()
-                .stream()
-                .filter(p -> p.getName().equals(playerA.getName()))
-                .findFirst()
-                .orElse(null);
-        Assert.assertNotNull(playerView);
-        Set<Integer> clientStats = playerView.getBattlefield().values()
+        Set<Integer> clientStats = gameView.getMyPlayer().getBattlefield().values()
                 .stream()
                 .filter(card -> card.getName().equals(tokenOrCardName))
                 .sorted(Comparator.comparing(CardView::getExpansionSetCode))
