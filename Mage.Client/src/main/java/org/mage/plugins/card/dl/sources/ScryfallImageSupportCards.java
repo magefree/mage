@@ -820,6 +820,8 @@ public class ScryfallImageSupportCards {
             put("PJOU/Heroes' Bane/126*", "https://api.scryfall.com/cards/pjou/126★/");
             put("PJOU/Scourge of Fleets/51*", "https://api.scryfall.com/cards/pjou/51★/");
             put("PJOU/Spawn of Thraxes/112*", "https://api.scryfall.com/cards/pjou/112★/");
+            // PL21
+            put("PL21/Sethron, Hurloon General/1*", "https://api.scryfall.com/cards/pl21/1★/");
             // PM10
             put("PM10/Ant Queen/166*", "https://api.scryfall.com/cards/pm10/166★/");
             put("PM10/Honor of the Pure/16*", "https://api.scryfall.com/cards/pm10/16★/");
@@ -848,11 +850,14 @@ public class ScryfallImageSupportCards {
             put("PMBS/Glissa, the Traitor/96*", "https://api.scryfall.com/cards/pmbs/96★/");
             put("PMBS/Hero of Bladehold/8*", "https://api.scryfall.com/cards/pmbs/8★/");
             put("PMBS/Thopter Assembly/140*", "https://api.scryfall.com/cards/pmbs/140★/");
+            // PMEI
+            put("PMEI/Jamuraan Lion/10*", "https://api.scryfall.com/cards/pmei/10★/");
             // PNPH
             put("PNPH/Phyrexian Metamorph/42*", "https://api.scryfall.com/cards/pnph/42★/");
             put("PNPH/Sheoldred, Whispering One/73*", "https://api.scryfall.com/cards/pnph/73★/");
             // PRES
             put("PRES/Goblin Chieftain/141*", "https://api.scryfall.com/cards/pres/141★/");
+            put("PRES/Lathliss, Dragon Queen/149*", "https://api.scryfall.com/cards/pres/149★/");
             put("PRES/Loam Lion/13*", "https://api.scryfall.com/cards/pres/13★/");
             put("PRES/Oran-Rief, the Vastwood/221*", "https://api.scryfall.com/cards/pres/221★/");
             // PROE
@@ -1039,12 +1044,6 @@ public class ScryfallImageSupportCards {
             put("SLD/Toxin Sliver/635Ph", "https://api.scryfall.com/cards/sld/635Φ/");
             put("SLD/Shattergang Brothers/1315*", "https://api.scryfall.com/cards/sld/1315★/");
             put("SLD/Virulent Sliver/659Ph", "https://api.scryfall.com/cards/sld/659Φ/");
-            // PMEI
-            put("PMEI/Jamuraan Lion/10*", "https://api.scryfall.com/cards/pmei/10★/");
-            // PRES
-            put("PRES/Lathliss, Dragon Queen/149*", "https://api.scryfall.com/cards/pres/149★/");
-            // PL21
-            put("PL21/Sethron, Hurloon General/1*", "https://api.scryfall.com/cards/pl21/1★/");
 			
             // CALC - custom alchemy version of cards.
             put("CALC/C-Pillar of the Paruns", "https://api.scryfall.com/cards/dis/176/");
