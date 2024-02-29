@@ -64,7 +64,6 @@ public final class ImageCache {
 
             CardDownloadData info = new CardDownloadData(name, setCode, collectorId, usesVariousArt, imageNumber);
 
-            boolean cardback = false;
             String path;
             if (collectorId.isEmpty() || "0".equals(collectorId)) {
                 // TOKEN
@@ -89,7 +88,6 @@ public final class ImageCache {
                 // try unknown token image
                 if (tokenFile == null || !tokenFile.exists()) {
                     // TODO: replace empty token by other default card, not cardback
-                    cardback = true;
                     path = CardImageUtils.buildImagePathToDefault(DirectLinksForDownload.cardbackFilename);
                 }
             } else {
@@ -102,19 +100,9 @@ public final class ImageCache {
                 return new ImageCacheData(path, null);
             }
 
-            if (cardback) {
-                // TODO: is there any different in images styles? Cardback must be from scryfall, not wizards
-                // need cardback image
-                BufferedImage image = loadImage(file);
-                image = getRoundCorner(image);
-                return new ImageCacheData(path, image);
-            } else {
-                // need normal card image
-                BufferedImage image = loadImage(file);
-                image = getWizardsCard(image);
-                image = getRoundCorner(image);
-                return new ImageCacheData(path, image);
-            }
+            BufferedImage image = loadImage(file);
+            image = getRoundCorner(image);
+            return new ImageCacheData(path, image);
         } else {
             throw new IllegalArgumentException("Unknown card image's key format: " + key);
         }

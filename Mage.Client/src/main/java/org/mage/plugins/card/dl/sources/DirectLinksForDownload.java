@@ -11,8 +11,7 @@ import static org.mage.plugins.card.dl.DownloadJob.toFile;
 import static org.mage.plugins.card.utils.CardImageUtils.getImagesDir;
 
 /**
- * TODO: outdated, delete and use xmage tokens instead ?!
- * Used when we need to point to direct links to download resources from.
+ * Additional images from a third party sources
  *
  * @author noxx
  */
@@ -20,6 +19,9 @@ public class DirectLinksForDownload implements Iterable<DownloadJob> {
 
     private static final Map<String, String> directLinks = new LinkedHashMap<>();
 
+    // face down cards uses tokens source for a cardback image
+    // that's cardback used for miss images
+    // TODO: replace miss image cardback to some generic card (must be diff from face down image)
     public static final String cardbackFilename = "cardback.jpg";
 
     static {
