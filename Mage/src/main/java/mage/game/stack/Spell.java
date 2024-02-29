@@ -100,8 +100,7 @@ public class Spell extends StackObjectImpl implements Card {
         this.ability = ability;
         this.ability.setControllerId(controllerId);
 
-        if (ability.getSpellAbilityCastMode() == SpellAbilityCastMode.MORPH
-            || ability.getSpellAbilityCastMode() == SpellAbilityCastMode.MEGAMORPH){
+        if (ability.getSpellAbilityCastMode().isFaceDown()){
             // TODO: need research:
             //  - why it use game param for color and subtype (possible bug?)
             //  - is it possible to use BecomesFaceDownCreatureEffect.makeFaceDownObject or like that?

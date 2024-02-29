@@ -8,8 +8,6 @@ import mage.cards.Card;
 import mage.game.Game;
 import mage.game.stack.Spell;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -22,8 +20,8 @@ public enum SpellAbilityCastMode {
     FLASHBACK("Flashback"),
     BESTOW("Bestow"),
     PROTOTYPE("Prototype"),
-    MORPH("Morph", false, SpellAbilityCastMode.MORPH_ADDITIONAL_RULE),
-    MEGAMORPH("Megamorph", false, SpellAbilityCastMode.MORPH_ADDITIONAL_RULE),
+    MORPH("Morph", false, true, SpellAbilityCastMode.MORPH_ADDITIONAL_RULE),
+    MEGAMORPH("Megamorph", false, true, SpellAbilityCastMode.MORPH_ADDITIONAL_RULE),
     TRANSFORMED("Transformed", true),
     DISTURB("Disturb", true),
     MORE_THAN_MEETS_THE_EYE("More than Meets the Eye", true);
@@ -35,6 +33,8 @@ public enum SpellAbilityCastMode {
 
     // should the cast mode use the second face?
     private final boolean isTransformed;
+
+    private final boolean isFaceDown;
 
     // use it to add additional info in stack object cause face down has nothing
     // TODO: is it possible to use InfoEffect or CardHint instead that?
@@ -49,13 +49,18 @@ public enum SpellAbilityCastMode {
     }
 
     SpellAbilityCastMode(String text, boolean isTransformed) {
-        this(text, isTransformed, null);
+        this(text, isTransformed, false, null);
     }
 
-    SpellAbilityCastMode(String text, boolean isTransformed, String additionalRulesOnStack) {
+    SpellAbilityCastMode(String text, boolean isTransformed, boolean isFaceDown, String additionalRulesOnStack) {
         this.text = text;
         this.isTransformed = isTransformed;
+        this.isFaceDown = isFaceDown;
         this.additionalRulesOnStack = additionalRulesOnStack == null ? null : Collections.singletonList(additionalRulesOnStack);
+    }
+
+    public boolean isFaceDown() {
+        return this.isFaceDown;
     }
 
     public List<String> getAdditionalRulesOnStack() {
