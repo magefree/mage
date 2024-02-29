@@ -412,14 +412,14 @@ public class MageBook extends JComponent {
         if (cardDimension == null) {
             cardDimension = new Dimension(ClientDefaultSettings.dimensions.getFrameWidth(), ClientDefaultSettings.dimensions.getFrameHeight());
         }
-        PermanentToken newToken = new PermanentToken(token, null, null);
-        newToken.removeSummoningSickness();
-        PermanentView theToken = new PermanentView(newToken, null, null, null);
-        theToken.setInViewerOnly(true);
-        final MageCard cardImg = Plugins.instance.getMagePermanent(theToken, bigCard, new CardIconRenderSettings(), cardDimension, gameId, true, PreferencesDialog.getRenderMode(), true);
+        PermanentToken fakePermanent = new PermanentToken(token, UUID.randomUUID(), null);
+        fakePermanent.removeSummoningSickness();
+        PermanentView permanentView = new PermanentView(fakePermanent, null, null, null);
+        permanentView.setInViewerOnly(true);
+        final MageCard cardImg = Plugins.instance.getMagePermanent(permanentView, bigCard, new CardIconRenderSettings(), cardDimension, gameId, true, PreferencesDialog.getRenderMode(), true);
         cardImg.setCardContainerRef(jLayeredPane);
         jLayeredPane.add(cardImg, JLayeredPane.DEFAULT_LAYER, 10);
-        cardImg.update(theToken);
+        cardImg.update(permanentView);
         cardImg.setCardBounds(rectangle.x, rectangle.y, cardDimensions.getFrameWidth(), cardDimensions.getFrameHeight());
     }
 
