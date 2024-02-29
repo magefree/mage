@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -46,10 +45,6 @@ public final class ArmedWithProof extends CardImpl {
 class ArmedWithProofEffect extends ContinuousEffectImpl {
 
     private static final FilterPermanent filter = new FilterControlledPermanent(SubType.CLUE);
-
-    static {
-        filter.add(TokenPredicate.TRUE);
-    }
 
     ArmedWithProofEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
