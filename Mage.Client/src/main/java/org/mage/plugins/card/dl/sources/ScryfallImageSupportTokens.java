@@ -2251,6 +2251,33 @@ public class ScryfallImageSupportTokens {
             put("MKM/Thopter/2", "https://api.scryfall.com/cards/tmkm/20/en?format=image");
             put("MKM/Voja Fenstalker", "https://api.scryfall.com/cards/tmkm/13/en?format=image");
 
+            // MKC
+            put("MKC/Cat", "https://api.scryfall.com/cards/tmkc/15/en?format=image");
+            put("MKC/Clue", "https://api.scryfall.com/cards/tmkc/22/en?format=image");
+            put("MKC/Construct", "https://api.scryfall.com/cards/tmkc/23/en?format=image");
+            put("MKC/Drake", "https://api.scryfall.com/cards/tmkc/6/en?format=image");
+            put("MKC/Eldrazi", "https://api.scryfall.com/cards/tmkc/1/en?format=image");
+            put("MKC/Food", "https://api.scryfall.com/cards/tmkc/24/en?format=image");
+            put("MKC/Gold", "https://api.scryfall.com/cards/tmkc/25/en?format=image");
+            put("MKC/Human Soldier", "https://api.scryfall.com/cards/tmkc/2/en?format=image");
+            put("MKC/Insect/1", "https://api.scryfall.com/cards/tmkc/16/en?format=image");
+            put("MKC/Insect/2", "https://api.scryfall.com/cards/tmkc/17/en?format=image");
+            put("MKC/Kobolds of Kher Keep", "https://api.scryfall.com/cards/tmkc/12/en?format=image");
+            put("MKC/Koma's Coil", "https://api.scryfall.com/cards/tmkc/7/en?format=image");
+            put("MKC/Lightning Rager", "https://api.scryfall.com/cards/tmkc/13/en?format=image");
+            put("MKC/Ogre", "https://api.scryfall.com/cards/tmkc/14/en?format=image");
+            put("MKC/Phyrexian Germ", "https://api.scryfall.com/cards/tmkc/10/en?format=image");
+            put("MKC/Rhino Warrior", "https://api.scryfall.com/cards/tmkc/18/en?format=image");
+            put("MKC/Salamander Warrior", "https://api.scryfall.com/cards/tmkc/8/en?format=image");
+            put("MKC/Saproling", "https://api.scryfall.com/cards/tmkc/19/en?format=image");
+            put("MKC/Snake", "https://api.scryfall.com/cards/tmkc/20/en?format=image");
+            put("MKC/Soldier", "https://api.scryfall.com/cards/tmkc/3/en?format=image");
+            put("MKC/Spirit", "https://api.scryfall.com/cards/tmkc/4/en?format=image");
+            put("MKC/Tentacle", "https://api.scryfall.com/cards/tmkc/9/en?format=image");
+            put("MKC/Tiny", "https://api.scryfall.com/cards/tmkc/21/en?format=image");
+            put("MKC/Treasure", "https://api.scryfall.com/cards/tmkc/26/en?format=image");
+            put("MKC/Zombie", "https://api.scryfall.com/cards/tmkc/11/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {

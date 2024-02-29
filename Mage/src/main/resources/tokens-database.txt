@@ -2185,3 +2185,30 @@
 |Generate|TOK:MKM|Thopter|1||Thopter00ColorlessToken|
 |Generate|TOK:MKM|Thopter|2||ThopterColorlessToken|
 |Generate|TOK:MKM|Voja Fenstalker|||TolsimirMidnightsLightToken|
+
+# MKC
+|Generate|TOK:MKC|Cat|||GreenCat2Token|
+|Generate|TOK:MKC|Clue|||ClueArtifactToken|
+|Generate|TOK:MKC|Construct|||StoneIdolToken|
+|Generate|TOK:MKC|Drake|||DrakeToken|
+|Generate|TOK:MKC|Eldrazi|||EldraziToken|
+|Generate|TOK:MKC|Food|||FoodToken|
+|Generate|TOK:MKC|Gold|||GoldToken|
+|Generate|TOK:MKC|Human Soldier|||HumanSoldierToken|
+|Generate|TOK:MKC|Insect|1||InsectToken|
+|Generate|TOK:MKC|Insect|2||InsectDeathToken|
+|Generate|TOK:MKC|Kobolds of Kher Keep|||KherKeepKoboldToken|
+|Generate|TOK:MKC|Koma's Coil|||KomasCoilToken|
+|Generate|TOK:MKC|Lightning Rager|||LightningRagerToken|
+|Generate|TOK:MKC|Ogre|||OgreToken|
+|Generate|TOK:MKC|Phyrexian Germ|||PhyrexianGermToken|
+|Generate|TOK:MKC|Rhino Warrior|||RhinoWarriorToken|
+|Generate|TOK:MKC|Salamander Warrior|||SalamanderWarriorToken|
+|Generate|TOK:MKC|Saproling|||SaprolingToken|
+|Generate|TOK:MKC|Snake|||SnakeToken|
+|Generate|TOK:MKC|Soldier|||SoldierToken|
+|Generate|TOK:MKC|Spirit|||SpiritWhiteToken|
+|Generate|TOK:MKC|Tentacle|||TentacleToken|
+|Generate|TOK:MKC|Tiny|||TinyToken|
+|Generate|TOK:MKC|Treasure|||TreasureToken|
+|Generate|TOK:MKC|Zombie|||ZombieToken|
