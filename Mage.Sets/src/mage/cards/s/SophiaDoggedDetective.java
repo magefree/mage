@@ -53,9 +53,7 @@ public final class SophiaDoggedDetective extends CardImpl {
         this.addAbility(ability);
 
         // Whenever a Dog you control deals combat damage to a player, create a Food token, then investigate.
-        ability = new DealsDamageToAPlayerAllTriggeredAbility(
-                new CreateTokenEffect(new FoodToken()), filter, false, SetTargetPointer.NONE, true
-        ).setTriggerPhrase("Whenever a Dog you control deals combat damage to a player, ");
+        ability = new DealsDamageToAPlayerAllTriggeredAbility(new CreateTokenEffect(new FoodToken()), filter, false, SetTargetPointer.NONE, true);
         ability.addEffect(new InvestigateEffect(false).concatBy(", then"));
         this.addAbility(ability);
     }
