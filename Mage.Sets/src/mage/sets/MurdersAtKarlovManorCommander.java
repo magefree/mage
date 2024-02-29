@@ -264,6 +264,8 @@ public final class MurdersAtKarlovManorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Talisman of Dominance", 242, Rarity.UNCOMMON, mage.cards.t.TalismanOfDominance.class));
         cards.add(new SetCardInfo("Talisman of Progress", 243, Rarity.UNCOMMON, mage.cards.t.TalismanOfProgress.class));
         cards.add(new SetCardInfo("Talisman of Unity", 244, Rarity.UNCOMMON, mage.cards.t.TalismanOfUnity.class));
+        cards.add(new SetCardInfo("Tangletrove Kelp", 24, Rarity.RARE, mage.cards.t.TangletroveKelp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Tangletrove Kelp", 334, Rarity.RARE, mage.cards.t.TangletroveKelp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Teferi's Ageless Insight", 119, Rarity.RARE, mage.cards.t.TeferisAgelessInsight.class));
         cards.add(new SetCardInfo("Temple of Abandon", 301, Rarity.RARE, mage.cards.t.TempleOfAbandon.class));
         cards.add(new SetCardInfo("Temple of Enlightenment", 302, Rarity.RARE, mage.cards.t.TempleOfEnlightenment.class));
