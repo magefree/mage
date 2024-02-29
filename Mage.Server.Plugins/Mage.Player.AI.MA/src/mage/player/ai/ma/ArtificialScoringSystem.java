@@ -85,6 +85,7 @@ public final class ArtificialScoringSystem {
                 MageObject object = game.getObject(uuid);
                 if (object instanceof Card) {
                     Card card = (Card) object;
+                    // TODO: implement getOutcomeTotal for permanents and cards too (not only attachments)
                     int outcomeScore = card.getAbilities(game).getOutcomeTotal();
                     if (card.getCardType(game).contains(CardType.ENCHANTMENT)) {
                         enchantments = enchantments + outcomeScore * 100;

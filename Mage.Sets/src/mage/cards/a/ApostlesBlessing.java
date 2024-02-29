@@ -56,7 +56,7 @@ public final class ApostlesBlessing extends CardImpl {
 
 class ApostlesBlessingEffect extends OneShotEffect {
 
-    public ApostlesBlessingEffect() {
+    ApostlesBlessingEffect() {
         super(Outcome.AddAbility);
         this.staticText = "Target artifact or creature you control gains protection from artifacts or from the color of your choice until end of turn";
     }
@@ -85,7 +85,7 @@ class ApostlesBlessingEffect extends OneShotEffect {
                 protectionFilter.setMessage(choice.getChoice());
                 ProtectionAbility protectionAbility = new ProtectionAbility(protectionFilter);
                 ContinuousEffect effect = new GainAbilityTargetEffect(protectionAbility, Duration.EndOfTurn);
-                effect.setTargetPointer(getTargetPointer());
+                effect.setTargetPointer(this.getTargetPointer().copy());
                 game.addEffect(effect, source);
                 return true;
             }

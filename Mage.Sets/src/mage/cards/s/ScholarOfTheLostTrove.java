@@ -95,7 +95,6 @@ class ScholarOfTheLostTroveEffect extends OneShotEffect {
         if (!controller.chooseUse(Outcome.PlayForFree, "Cast " + card.getLogName() + '?', source, game)) {
             return true;
         }
-        FixedTarget fixedTarget = new FixedTarget(card, game);
         game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
         boolean cardWasCast = controller.cast(controller.chooseAbilityForCast(card, game, true),
                 game, true, new ApprovingObject(source, game));
@@ -104,7 +103,7 @@ class ScholarOfTheLostTroveEffect extends OneShotEffect {
             return true;
         }
         ContinuousEffect effect = new ThatSpellGraveyardExileReplacementEffect(true);
-        effect.setTargetPointer(fixedTarget);
+        effect.setTargetPointer(new FixedTarget(card, game));
         effect.setText("If an instant or sorcery spell cast this way would be put into your graveyard this turn, exile it instead");
         game.addEffect(effect, source);
         return true;

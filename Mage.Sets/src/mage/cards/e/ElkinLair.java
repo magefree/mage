@@ -55,7 +55,7 @@ public final class ElkinLair extends CardImpl {
 
 class ElkinLairUpkeepEffect extends OneShotEffect {
 
-    public ElkinLairUpkeepEffect() {
+    ElkinLairUpkeepEffect() {
         super(Outcome.Benefit);
         this.staticText = "that player exiles a card at random from their hand. "
                 + "The player may play that card this turn. "
@@ -107,7 +107,7 @@ class ElkinLairUpkeepEffect extends OneShotEffect {
 
 class ElkinLairPutIntoGraveyardEffect extends OneShotEffect {
 
-    public ElkinLairPutIntoGraveyardEffect() {
+    ElkinLairPutIntoGraveyardEffect() {
         super(Outcome.Neutral);
         staticText = "if the player hasn't played the card, they put it into their graveyard";
     }

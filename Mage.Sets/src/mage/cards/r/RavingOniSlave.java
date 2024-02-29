@@ -45,7 +45,7 @@ public final class RavingOniSlave extends CardImpl {
 
 class RavingOniSlaveEffect extends OneShotEffect {
 
-    public RavingOniSlaveEffect() {
+    RavingOniSlaveEffect() {
         super(Outcome.Benefit);
         this.staticText = "you lose 3 life if you don't control a Demon";
     }

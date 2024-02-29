@@ -50,7 +50,7 @@ public final class MirrorOfFate extends CardImpl {
 
 class MirrorOfFateEffect extends OneShotEffect {
 
-    public MirrorOfFateEffect() {
+    MirrorOfFateEffect() {
         super(Outcome.Neutral);
         this.staticText = "Choose up to seven face-up exiled cards you own. Exile all the cards from your library, then put the chosen cards on top of your library";
     }

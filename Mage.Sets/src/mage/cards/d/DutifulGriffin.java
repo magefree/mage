@@ -15,6 +15,7 @@ import mage.constants.Zone;
 import mage.filter.common.FilterControlledEnchantmentPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetSacrifice;
 
 import java.util.UUID;
 
@@ -39,7 +40,7 @@ public final class DutifulGriffin extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), new ManaCostsImpl<>("{2}{W}")
         );
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(2, filter)));
+        ability.addCost(new SacrificeTargetCost(2, filter));
         this.addAbility(ability);
     }
 

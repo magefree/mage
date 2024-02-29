@@ -55,7 +55,7 @@ public final class RakdosAugermage extends CardImpl {
 
 class RakdosAugermageEffect extends OneShotEffect {
 
-    public RakdosAugermageEffect() {
+    RakdosAugermageEffect() {
         super(Outcome.Discard);
         staticText = "reveal your hand and discard a card of target opponent's choice";
     }
@@ -66,7 +66,7 @@ class RakdosAugermageEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
         if (player != null && controller != null) {
             Cards revealedCards = new CardsImpl();

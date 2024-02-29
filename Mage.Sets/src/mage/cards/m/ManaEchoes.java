@@ -43,7 +43,7 @@ public final class ManaEchoes extends CardImpl {
 
 class ManaEchoesEffect extends OneShotEffect {
 
-    public ManaEchoesEffect() {
+    ManaEchoesEffect() {
         super(Outcome.Benefit);
         this.staticText = "you may add X mana of {C}, where X is the number of creatures you control that share a creature type with it";
     }

@@ -73,7 +73,7 @@ class GandalfWestwardVoyagerEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Spell spell = game.getSpellOrLKIStack(targetPointer.getFirst(game, source));
+        Spell spell = game.getSpellOrLKIStack(getTargetPointer().getFirst(game, source));
         List<CardType> typesSpell = spell == null ? new ArrayList<>() : spell.getCardType(game);
 
         boolean foundCard = false;

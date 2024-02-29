@@ -54,7 +54,7 @@ public final class RitesOfReaping extends CardImpl {
 
 class RitesOfReapingEffect extends ContinuousEffectImpl {
 
-    public RitesOfReapingEffect() {
+    RitesOfReapingEffect() {
         super(Duration.EndOfTurn, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
         this.staticText = "Target creature gets +3/+3 until end of turn. Another target creature gets -3/-3 until end of turn";
     }

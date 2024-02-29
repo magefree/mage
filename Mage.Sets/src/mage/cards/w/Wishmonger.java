@@ -64,7 +64,7 @@ public final class Wishmonger extends CardImpl {
 
 class WishmongerEffect extends OneShotEffect {
 
-    public WishmongerEffect() {
+    WishmongerEffect() {
         super(Outcome.BoostCreature);
         staticText = "Target creature gains protection from the color of its controller's choice until end of turn";
     }

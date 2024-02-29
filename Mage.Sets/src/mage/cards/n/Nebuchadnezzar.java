@@ -52,7 +52,7 @@ public final class Nebuchadnezzar extends CardImpl {
 
 class NebuchadnezzarEffect extends OneShotEffect {
 
-    public NebuchadnezzarEffect() {
+    NebuchadnezzarEffect() {
         super(Outcome.Detriment);
         staticText = "Target opponent reveals X cards at random from their hand. Then that player discards all cards with that name revealed this way";
     }
@@ -63,7 +63,7 @@ class NebuchadnezzarEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player opponent = game.getPlayer(targetPointer.getFirst(game, source));
+        Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
         MageObject sourceObject = game.getObject(source);
         String cardName = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
         if (opponent == null || sourceObject == null || cardName.isEmpty()) {

@@ -100,14 +100,18 @@ public class AddManaOfAnyTypeProducedEffect extends ManaEffect {
             choice.getChoices().add("Colorless");
         }
 
-        if (choice.getChoices().isEmpty()) {
-            return newMana;
+        switch (choice.getChoices().size()) {
+            case 0: // no mana possible to add
+                return newMana;
+            case 1: // no choice necessary for one option
+                choice.setChoice(choice.getChoices().iterator().next());
+                break;
+            default:
+                // attempt to make choice
+                if (!targetController.choose(outcome, choice, game)) {
+                    return newMana; // no mana if no choice made
+                }
         }
-        if (choice.getChoices().size() != 1
-                && !targetController.choose(outcome, choice, game)) {
-            return newMana;
-        }
-        choice.setChoice(choice.getChoices().iterator().next());
 
         switch (choice.getChoice()) {
             case "White":
@@ -128,6 +132,7 @@ public class AddManaOfAnyTypeProducedEffect extends ManaEffect {
             case "Colorless":
                 newMana.setColorless(1);
                 break;
+            default:
         }
         return newMana;
     }

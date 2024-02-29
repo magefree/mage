@@ -44,7 +44,7 @@ public final class HeatShimmer extends CardImpl {
 
 class HeatShimmerEffect extends OneShotEffect {
 
-    public HeatShimmerEffect() {
+    HeatShimmerEffect() {
         super(Outcome.Copy);
         this.staticText = "Create a token that's a copy of target creature, except it has haste and \"At the beginning of the end step, exile this permanent.\"";
     }

@@ -11,7 +11,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.game.permanent.token.SaprolingToken;
 import mage.target.common.TargetCardInGraveyard;
 
@@ -26,7 +26,7 @@ public final class Necrogenesis extends CardImpl {
 
         // {2}: Exile target creature card from a graveyard. Create a 1/1 green Saproling creature token.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new GenericManaCost(2));
-        ability.addTarget(new TargetCardInGraveyard(new FilterCreatureCard("creature card from a graveyard")));
+        ability.addTarget(new TargetCardInGraveyard(StaticFilters.FILTER_CARD_CREATURE_A_GRAVEYARD));
         ability.addEffect(new CreateTokenEffect(new SaprolingToken()));
         this.addAbility(ability);
     }

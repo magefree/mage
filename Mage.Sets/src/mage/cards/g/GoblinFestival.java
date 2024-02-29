@@ -49,7 +49,7 @@ public final class GoblinFestival extends CardImpl {
 
 class GoblinFestivalChangeControlEffect extends OneShotEffect {
 
-    public GoblinFestivalChangeControlEffect() {
+    GoblinFestivalChangeControlEffect() {
         super(Outcome.Benefit);
         this.staticText = "Flip a coin. If you lose the flip, choose one of your opponents. That player gains control of {this}";
     }
@@ -114,9 +114,7 @@ class GoblinFestivalGainControlEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getFirstTarget());
-        if (targetPointer != null) {
-            permanent = game.getPermanent(targetPointer.getFirst(game, source));
-        }
+        permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (permanent != null) {
             return permanent.changeControllerId(controller, game, source);
         }

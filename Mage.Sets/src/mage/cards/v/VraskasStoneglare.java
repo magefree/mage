@@ -50,7 +50,7 @@ public final class VraskasStoneglare extends CardImpl {
 
 class VraskasStoneglareEffect extends OneShotEffect {
 
-    public VraskasStoneglareEffect() {
+    VraskasStoneglareEffect() {
         super(Outcome.Benefit);
         this.staticText = "Destroy target creature. "
                 + "You gain life equal to its toughness";

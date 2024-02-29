@@ -51,7 +51,7 @@ public final class Seizures extends CardImpl {
 
 class SeizuresEffect extends OneShotEffect {
 
-    public SeizuresEffect() {
+    SeizuresEffect() {
         super(Outcome.Damage);
         staticText = "{this} deals 3 damage to that creature's controller unless that player pays {3}";
     }

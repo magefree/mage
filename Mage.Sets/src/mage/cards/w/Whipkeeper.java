@@ -49,7 +49,7 @@ public final class Whipkeeper extends CardImpl {
 
 class WhipkeeperEffect extends OneShotEffect {
 
-    public WhipkeeperEffect() {
+    WhipkeeperEffect() {
         super(Outcome.Damage);
         staticText = "{this} deals damage to target creature equal to the damage already dealt to it this turn.";
     }

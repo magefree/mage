@@ -48,7 +48,7 @@ public final class SixyBeast extends CardImpl {
 
 class SixyBeastEffect extends OneShotEffect {
 
-    public SixyBeastEffect() {
+    SixyBeastEffect() {
         super(Outcome.BoostCreature);
         this.staticText = "you secretly put six or fewer +1/+1 counters on it, then an opponent guesses the number of counters. If that player guesses right, sacrifice {this} after it enters the battlefield";
     }

@@ -43,7 +43,7 @@ public final class AliFromCairo extends CardImpl {
 
 class AliFromCairoReplacementEffect extends ReplacementEffectImpl {
 
-    public AliFromCairoReplacementEffect() {
+    AliFromCairoReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Damage that would reduce your life total to less than 1 reduces it to 1 instead";
     }

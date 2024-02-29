@@ -44,7 +44,7 @@ public final class StrongholdGambit extends CardImpl {
 
 class StrongholdGambitEffect extends OneShotEffect {
 
-    public StrongholdGambitEffect() {
+    StrongholdGambitEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Each player chooses a card in their hand. Then each player reveals their chosen card. The owner of each creature card revealed this way with the lowest mana value puts it onto the battlefield";
     }

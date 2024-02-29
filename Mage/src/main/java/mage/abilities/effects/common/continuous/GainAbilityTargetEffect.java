@@ -60,7 +60,7 @@ public class GainAbilityTargetEffect extends ContinuousEffectImpl {
         // must support dynamic targets from static ability and static targets from activated abilities
         if (this.affectedObjectsSet) {
             // target permanents (by default)
-            targetPointer.getTargets(game, source)
+            getTargetPointer().getTargets(game, source)
                     .stream()
                     .map(game::getPermanent)
                     .filter(Objects::nonNull)
@@ -70,7 +70,7 @@ public class GainAbilityTargetEffect extends ContinuousEffectImpl {
 
             // target cards with linked permanents
             if (this.useOnCard) {
-                targetPointer.getTargets(game, source)
+                getTargetPointer().getTargets(game, source)
                         .stream()
                         .map(game::getCard)
                         .filter(Objects::nonNull)
@@ -147,7 +147,7 @@ public class GainAbilityTargetEffect extends ContinuousEffectImpl {
             }
         } else {
             // DYNAMIC TARGETS
-            for (UUID objectId : targetPointer.getTargets(game, source)) {
+            for (UUID objectId : getTargetPointer().getTargets(game, source)) {
                 Permanent permanent = game.getPermanent(objectId);
                 if (permanent != null) {
                     permanent.addAbility(ability, source.getSourceId(), game);

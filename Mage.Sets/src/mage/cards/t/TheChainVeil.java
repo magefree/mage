@@ -90,7 +90,7 @@ class ActivatedLoyaltyAbilityWatcher extends Watcher {
 
 class TheChainVeilIncreaseLoyaltyUseEffect extends ContinuousEffectImpl {
 
-    public TheChainVeilIncreaseLoyaltyUseEffect() {
+    TheChainVeilIncreaseLoyaltyUseEffect() {
         super(Duration.EndOfTurn, Layer.RulesEffects, SubLayer.NA, Outcome.Benefit);
         staticText = "For each planeswalker you control, you may activate one of its loyalty abilities once this turn as though none of its loyalty abilities have been activated this turn";
     }

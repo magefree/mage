@@ -359,7 +359,7 @@ class UrzaAcademyHeadmasterRandomEffect extends OneShotEffect {
                             case 6: // CHANDRA NALAAR 3
                                 sb.append("Urza deals 10 damage to target player and each creature they control.");
                                 effects.add(new DamageTargetEffect(10));
-                                effects.add(new DamageAllControlledTargetEffect(10, new FilterCreaturePermanent()));
+                                effects.add(new DamageAllControlledTargetEffect(10));
                                 target = new TargetPlayerOrPlaneswalker();
                                 break;
                             case 7: // DOMRI RADE 3
@@ -468,7 +468,7 @@ class UrzaAcademyHeadmasterRandomEffect extends OneShotEffect {
 
 class UrzaAcademyHeadmasterManaEffect extends OneShotEffect {
 
-    public UrzaAcademyHeadmasterManaEffect() {
+    UrzaAcademyHeadmasterManaEffect() {
         super(Outcome.PutManaInPool);
     }
 
@@ -531,7 +531,7 @@ class UrzaAcademyHeadmasterManaEffect extends OneShotEffect {
 
 class UrzaAcademyHeadmasterBrainstormEffect extends OneShotEffect {
 
-    public UrzaAcademyHeadmasterBrainstormEffect() {
+    UrzaAcademyHeadmasterBrainstormEffect() {
         super(Outcome.DrawCard);
         staticText = "draw three cards, then put a card from your hand on top of your library";
     }

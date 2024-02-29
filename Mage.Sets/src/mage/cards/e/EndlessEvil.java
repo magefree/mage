@@ -65,7 +65,7 @@ public final class EndlessEvil extends CardImpl {
 
 class EndlessEvilCloneEffect extends OneShotEffect {
 
-    public EndlessEvilCloneEffect() {
+    EndlessEvilCloneEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "create a token that's a copy of enchanted creature, except the token is 1/1";
     }

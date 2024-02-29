@@ -58,7 +58,7 @@ public final class EleshNorn extends CardImpl {
                 new ExileAndReturnSourceEffect(PutCards.BATTLEFIELD_TRANSFORMED),
                 new ManaCostsImpl<>("{2}{W}")
         );
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(3, filter)));
+        ability.addCost(new SacrificeTargetCost(3, filter));
         this.addAbility(ability);
     }
 

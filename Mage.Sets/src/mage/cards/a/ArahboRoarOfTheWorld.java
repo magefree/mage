@@ -81,7 +81,7 @@ public final class ArahboRoarOfTheWorld extends CardImpl {
 
 class ArahboEffect extends OneShotEffect {
 
-    public ArahboEffect() {
+    ArahboEffect() {
         super(Outcome.Benefit);
         this.staticText = "it gains trample and gets +X/+X until end of turn, where X is its power";
     }
@@ -97,7 +97,7 @@ class ArahboEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent creature = game.getPermanent(targetPointer.getFirst(game, source));
+        Permanent creature = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (creature != null && creature.isCreature(game)) {
             int pow = creature.getPower().getValue();
             ContinuousEffect effect = new BoostTargetEffect(pow, pow, Duration.EndOfTurn);

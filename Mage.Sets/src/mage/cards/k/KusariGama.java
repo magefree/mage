@@ -102,7 +102,7 @@ class KusariGamaAbility extends TriggeredAbilityImpl {
 
 class KusariGamaDamageEffect extends OneShotEffect {
 
-    public KusariGamaDamageEffect() {
+    KusariGamaDamageEffect() {
         super(Outcome.Damage);
         this.staticText = "{this} deals that much damage to each other creature defending player controls";
     }

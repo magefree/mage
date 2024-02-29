@@ -52,7 +52,7 @@ public final class AladdinsLamp extends CardImpl {
 
 class AladdinsLampEffect extends ReplacementEffectImpl {
 
-    public AladdinsLampEffect() {
+    AladdinsLampEffect() {
         super(Duration.EndOfTurn, Outcome.DrawCard);
         staticText = "The next time you would draw a card this turn, instead look at the top X cards of your library, put all but one of them on the bottom of your library in a random order, then draw a card. X can't be 0.";
     }

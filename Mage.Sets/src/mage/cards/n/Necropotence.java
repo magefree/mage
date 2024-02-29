@@ -90,7 +90,7 @@ class NecropotenceTriggeredAbility extends TriggeredAbilityImpl {
 
 class NecropotenceEffect extends OneShotEffect {
 
-    public NecropotenceEffect() {
+    NecropotenceEffect() {
         super(Outcome.Benefit);
         this.staticText = "Exile the top card of your library face down. Put that card into your hand at the beginning of your next end step";
     }

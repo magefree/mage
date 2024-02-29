@@ -23,7 +23,7 @@ public final class ForgeArmor extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{4}{R}");
 
         // As an additional cost to cast Forge Armor, sacrifice an artifact.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_AN)));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_AN));
         // Put X +1/+1 counters on target creature, where X is the sacrificed artifact's converted mana cost.
         this.getSpellAbility().addEffect(new AddCountersTargetEffect(
                 CounterType.P1P1.createInstance(), SacrificeCostManaValue.ARTIFACT));

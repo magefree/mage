@@ -39,7 +39,7 @@ public final class LilianasIndignation extends CardImpl {
 
 class LilianasIndignationEffect extends OneShotEffect {
 
-    public LilianasIndignationEffect() {
+    LilianasIndignationEffect() {
         super(Outcome.LoseLife);
         this.staticText = "Mill X cards. Target player loses 2 life for each creature card put into your graveyard this way";
     }

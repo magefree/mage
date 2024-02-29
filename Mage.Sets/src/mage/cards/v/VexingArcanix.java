@@ -46,7 +46,7 @@ public final class VexingArcanix extends CardImpl {
 
 class VexingArcanixEffect extends OneShotEffect {
 
-    public VexingArcanixEffect() {
+    VexingArcanixEffect() {
         super(Outcome.DrawCard);
         staticText = "Target player chooses a card name, then reveals the top card of their library. " +
                 "If that card has the chosen name, the player puts it into their hand. Otherwise, " +
@@ -60,7 +60,7 @@ class VexingArcanixEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         MageObject sourceObject = source.getSourceObject(game);
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (sourceObject == null || player == null) {
             return false;
         }

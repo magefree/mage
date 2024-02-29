@@ -42,7 +42,7 @@ public final class MageSlayer extends CardImpl {
 
 class MageSlayerEffect extends OneShotEffect {
 
-    public MageSlayerEffect() {
+    MageSlayerEffect() {
         super(Outcome.Damage);
         staticText = "it deals damage equal to its power to the player or planeswalker it's attacking";
     }

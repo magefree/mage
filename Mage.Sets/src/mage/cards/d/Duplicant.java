@@ -60,7 +60,7 @@ public final class Duplicant extends CardImpl {
 
 class DuplicantExileTargetEffect extends OneShotEffect {
 
-    public DuplicantExileTargetEffect() {
+    DuplicantExileTargetEffect() {
         super(Outcome.Exile);
         this.staticText = "you may exile target nontoken creature";
     }
@@ -76,7 +76,7 @@ class DuplicantExileTargetEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
+        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         MageObject sourceObject = source.getSourceObject(game);
         if (permanent != null && sourceObject instanceof Permanent) {
             if (permanent.moveToExile(null, null, source, game)
@@ -92,7 +92,7 @@ class DuplicantExileTargetEffect extends OneShotEffect {
 
 class DuplicantContinuousEffect extends ContinuousEffectImpl {
 
-    public DuplicantContinuousEffect() {
+    DuplicantContinuousEffect() {
         super(Duration.WhileOnBattlefield, Outcome.BoostCreature);
         staticText = "As long as a card exiled with {this} is a creature card, {this} has the power, toughness, and creature types of the last creature card exiled with {this}. It's still a Shapeshifter.";
     }

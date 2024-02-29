@@ -27,7 +27,8 @@ public final class OketrasAvenger extends CardImpl {
         this.toughness = new MageInt(1);
 
         // You may exert Oketra's Avenger as it attacks. When you do, prevent all combat damage that would be dealt to it this turn.
-        BecomesExertSourceTriggeredAbility ability = new BecomesExertSourceTriggeredAbility(new PreventCombatDamageToSourceEffect(Duration.EndOfTurn));
+        BecomesExertSourceTriggeredAbility ability = new BecomesExertSourceTriggeredAbility(new PreventCombatDamageToSourceEffect(Duration.EndOfTurn)
+                .setText("prevent all combat damage that would be dealt to it this turn"));
         this.addAbility(new ExertAbility(ability));
     }
 

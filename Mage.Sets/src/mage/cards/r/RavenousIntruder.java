@@ -35,7 +35,7 @@ public final class RavenousIntruder extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Sacrifice an artifact: Ravenous Intruder gets +2/+2 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 2, Duration.EndOfTurn), new SacrificeTargetCost(new TargetControlledPermanent(filter))));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 2, Duration.EndOfTurn), new SacrificeTargetCost(filter)));
     }
 
     private RavenousIntruder(final RavenousIntruder card) {

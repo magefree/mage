@@ -81,7 +81,7 @@ public final class NicolBolasTheArisen extends CardImpl {
 
 class NicolBolasTheArisenEffect extends OneShotEffect {
 
-    public NicolBolasTheArisenEffect() {
+    NicolBolasTheArisenEffect() {
         super(Outcome.Benefit);
         this.staticText = "Exile all but the bottom card of target player's library.";
     }

@@ -72,7 +72,7 @@ public final class OjerPakpatiqDeepestEpoch extends CardImpl {
  */
 class OjerPakpatiqDeepestEpochGainReboundEffect extends ContinuousEffectImpl {
 
-    public OjerPakpatiqDeepestEpochGainReboundEffect() {
+    OjerPakpatiqDeepestEpochGainReboundEffect() {
         super(Duration.Custom, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         staticText = "it gains rebound";
     }

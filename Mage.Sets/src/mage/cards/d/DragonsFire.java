@@ -169,7 +169,7 @@ class DragonsFireCost extends CostImpl {
 
 class DragonsFireEffect extends OneShotEffect {
 
-    public DragonsFireEffect() {
+    DragonsFireEffect() {
         super(Outcome.Damage);
         this.staticText = "{this} deals 3 damage to target creature or planeswalker. "
                 + "If you revealed a Dragon card or chose a Dragon as you cast this spell, {this} deals damage equal to the power of that card or creature instead";
@@ -186,7 +186,7 @@ class DragonsFireEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent targetedPermanent = game.getPermanent(targetPointer.getFirst(game, source));
+        Permanent targetedPermanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (targetedPermanent == null) {
             return false;
         }

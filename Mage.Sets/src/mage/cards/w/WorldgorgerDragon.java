@@ -105,7 +105,7 @@ class WorldgorgerDragonEntersEffect extends OneShotEffect {
 
 class WorldgorgerDragonLeavesEffect extends OneShotEffect {
 
-    public WorldgorgerDragonLeavesEffect() {
+    WorldgorgerDragonLeavesEffect() {
         super(Outcome.Neutral);
         staticText = "return the exiled cards to the battlefield under their owners' control";
     }

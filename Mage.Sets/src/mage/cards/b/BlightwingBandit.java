@@ -80,7 +80,7 @@ class BlightwingBanditEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Player opponent = game.getPlayer(targetPointer.getFirst(game, source));
+        Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
         MageObject sourceObject = source.getSourceObject(game);
 
         if (controller == null || opponent == null || sourceObject == null) { 
@@ -128,7 +128,7 @@ class BlightwingBanditEffect extends OneShotEffect {
 
 class BlightwingBanditPlayFromExileEffect extends AsThoughEffectImpl {
 
-    public BlightwingBanditPlayFromExileEffect() {
+    BlightwingBanditPlayFromExileEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
         staticText = "You may look at and play that card for as long as it remains exiled, " +
                 "and you may spend mana as though it were mana of any color to cast that spell.";

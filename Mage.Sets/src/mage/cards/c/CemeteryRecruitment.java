@@ -42,7 +42,7 @@ public final class CemeteryRecruitment extends CardImpl {
 
 class CemeteryRecruitmentEffect extends OneShotEffect {
 
-    public CemeteryRecruitmentEffect() {
+    CemeteryRecruitmentEffect() {
         super(Outcome.Benefit);
         staticText = "Return target creature card from your graveyard to your hand. If it's a Zombie card, draw a card";
     }
@@ -60,7 +60,7 @@ class CemeteryRecruitmentEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Card card = game.getCard(targetPointer.getFirst(game, source));
+            Card card = game.getCard(getTargetPointer().getFirst(game, source));
             if (card != null) {
                 if (controller.moveCards(card, Zone.HAND, source, game)
                         && card.hasSubtype(SubType.ZOMBIE, game)) {

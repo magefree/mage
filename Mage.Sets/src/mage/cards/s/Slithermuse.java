@@ -56,7 +56,7 @@ public final class Slithermuse extends CardImpl {
  */
 class SlithermuseEffect extends OneShotEffect {
 
-    public SlithermuseEffect() {
+    SlithermuseEffect() {
         super(Outcome.Benefit);
         this.staticText = "choose an opponent. If that player has more cards in hand than you, draw cards equal to the difference";
     }

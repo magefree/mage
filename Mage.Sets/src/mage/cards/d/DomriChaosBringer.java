@@ -9,21 +9,19 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.abilities.effects.mana.ManaEffect;
-import mage.abilities.effects.common.continuous.GainAbilityControlledSpellsEffect;
 import mage.abilities.effects.mana.BasicManaEffect;
 import mage.abilities.keyword.RiotAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
-import mage.filter.predicate.mageobject.CardIdPredicate;
 import mage.game.Game;
 import mage.game.command.emblems.DomriChaosBringerEmblem;
 import mage.game.events.GameEvent;
 import mage.players.Player;
 
 import java.util.UUID;
+import mage.abilities.effects.ContinuousEffectImpl;
 import mage.game.stack.StackObject;
 
 /**
@@ -127,24 +125,53 @@ class DomriChaosBringerTriggeredAbility extends DelayedTriggeredAbility {
             return false;
         }
         MageObject mo = game.getObject(event.getTargetId());
-        if (mo == null || !mo.isCreature(game)) {
+        if (mo == null
+                || !mo.isCreature(game)) {
             return false;
         }
-        
+
         StackObject stackObject = game.getStack().getStackObject(event.getTargetId());
-        
+
         if (stackObject == null) {
             return false;
         }
         this.getEffects().clear();
-        FilterCard filter = new FilterCard();
-        filter.add(new CardIdPredicate(stackObject.getSourceId()));
-        this.addEffect(new GainAbilityControlledSpellsEffect(new RiotAbility(), filter));
+        game.addEffect(new DomriChaosBringAddRiotToSpellEffect(stackObject.getSourceId()), this);
         return true;
     }
 
     @Override
     public DomriChaosBringerTriggeredAbility copy() {
         return new DomriChaosBringerTriggeredAbility(this);
+    }
+}
+
+class DomriChaosBringAddRiotToSpellEffect extends ContinuousEffectImpl {
+
+    private final Ability riotAbility = new RiotAbility();
+    private final UUID cardId;
+
+    public DomriChaosBringAddRiotToSpellEffect(UUID cardId) {
+        super(Duration.WhileOnStack, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
+        this.cardId = cardId;
+    }
+
+    private DomriChaosBringAddRiotToSpellEffect(final DomriChaosBringAddRiotToSpellEffect effect) {
+        super(effect);
+        this.cardId = effect.cardId;
+    }
+
+    @Override
+    public DomriChaosBringAddRiotToSpellEffect copy() {
+        return new DomriChaosBringAddRiotToSpellEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        if (cardId != null) {
+            game.getState().addOtherAbility(game.getCard(cardId), riotAbility);
+            return true;
+        }
+        return false;
     }
 }

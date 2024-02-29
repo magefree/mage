@@ -20,7 +20,7 @@ public final class ClownRobotToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    protected ClownRobotToken(final ClownRobotToken token) {
+    private ClownRobotToken(final ClownRobotToken token) {
         super(token);
     }
 

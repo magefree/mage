@@ -82,7 +82,7 @@ class ElvishBranchbenderEffect extends OneShotEffect {
                 new ElvishBranchbenderToken(xValue),
                 false, false, Duration.EndOfTurn)
                 .withDurationRuleAtStart(true);
-        effect.setTargetPointer(targetPointer);
+        effect.setTargetPointer(this.getTargetPointer().copy());
         game.addEffect(effect, source);
         return false;
     }

@@ -78,7 +78,7 @@ public final class KyloRen extends CardImpl {
 
 class KyloRenTapTargetEffect extends TapTargetEffect {
 
-    public KyloRenTapTargetEffect() {
+    KyloRenTapTargetEffect() {
         super();
         this.staticText = "and you may tap target creature defending player controls";
     }

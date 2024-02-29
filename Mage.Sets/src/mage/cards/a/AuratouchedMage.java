@@ -49,7 +49,7 @@ public final class AuratouchedMage extends CardImpl {
 
 class AuratouchedMageEffect extends OneShotEffect {
 
-    public AuratouchedMageEffect() {
+    AuratouchedMageEffect() {
         super(Outcome.BoostCreature);
         staticText = "search your library for an Aura card that could enchant it. If {this} is still on the battlefield, put that Aura card onto the battlefield attached to it. Otherwise, reveal the Aura card and put it into your hand. Then shuffle";
     }

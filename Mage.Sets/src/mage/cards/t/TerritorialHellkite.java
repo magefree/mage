@@ -98,7 +98,7 @@ class AttackedLastCombatWatcher extends Watcher {
 
 class AttackIfAbleTargetRandoOpponentSourceEffect extends OneShotEffect {
 
-    public AttackIfAbleTargetRandoOpponentSourceEffect() {
+    AttackIfAbleTargetRandoOpponentSourceEffect() {
         super(Outcome.Benefit);
         this.staticText = "choose an opponent at random that {this} didn't attack during your last combat. {this} attacks that player this combat if able. If you can't choose an opponent this way, tap {this}";
     }

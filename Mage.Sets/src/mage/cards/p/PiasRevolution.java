@@ -47,7 +47,7 @@ public final class PiasRevolution extends CardImpl {
 
 class PiasRevolutionReturnEffect extends OneShotEffect {
 
-    public PiasRevolutionReturnEffect() {
+    PiasRevolutionReturnEffect() {
         super(Outcome.Benefit);
         this.staticText = "return that card to your hand unless target opponent has {this} deal 3 damage to them";
     }

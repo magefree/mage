@@ -40,7 +40,7 @@ public final class BloodOfTheMartyr extends CardImpl {
 
 class BloodOfTheMartyrEffect extends ReplacementEffectImpl {
 
-    public BloodOfTheMartyrEffect() {
+    BloodOfTheMartyrEffect() {
         super(Duration.EndOfTurn, Outcome.RedirectDamage);
         staticText = "Until end of turn, if damage would be dealt to any creature, you may have that damage dealt to you instead";
     }

@@ -45,7 +45,7 @@ public final class RiddleOfLightning extends CardImpl {
 
 class RiddleOfLightningEffect extends OneShotEffect {
 
-    public RiddleOfLightningEffect() {
+    RiddleOfLightningEffect() {
         super(Outcome.Damage);
         this.staticText = ", then reveal the top card of your library. {this} deals damage equal to that card's mana value to that permanent or player";
     }

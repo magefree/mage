@@ -39,7 +39,7 @@ public final class Repentance extends CardImpl {
 
 class RepentanceEffect extends OneShotEffect {
 
-    public RepentanceEffect() {
+    RepentanceEffect() {
         super(Outcome.Damage);
         this.staticText = "Target creature deals damage to itself equal to its power";
     }

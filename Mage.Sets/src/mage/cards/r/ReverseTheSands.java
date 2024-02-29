@@ -41,7 +41,7 @@ public final class ReverseTheSands extends CardImpl {
 
 class ReverseTheSandsEffect extends OneShotEffect {
 
-    public ReverseTheSandsEffect() {
+    ReverseTheSandsEffect() {
         super(Outcome.Benefit);
         this.staticText = "Redistribute any number of players' life totals";
     }

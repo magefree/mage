@@ -91,7 +91,7 @@ class FlamesOfRemembranceExileEffect extends OneShotEffect {
 
 class FlamesOfRemembranceMayPlayExiledEffect extends AsThoughEffectImpl {
 
-    public FlamesOfRemembranceMayPlayExiledEffect() {
+    FlamesOfRemembranceMayPlayExiledEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
     }
 

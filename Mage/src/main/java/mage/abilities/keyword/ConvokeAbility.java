@@ -24,7 +24,6 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.ManaPool;
@@ -69,7 +68,7 @@ import java.util.*;
  */
 public class ConvokeAbility extends SimpleStaticAbility implements AlternateManaPaymentAbility {
 
-    public static String convokingCreaturesKey = "convokingCreatures";
+    public static final String convokingCreaturesKey = "convokingCreatures";
     private static final FilterControlledCreaturePermanent filterUntapped = new FilterControlledCreaturePermanent();
 
     static {
@@ -133,7 +132,7 @@ public class ConvokeAbility extends SimpleStaticAbility implements AlternateMana
                     filter.add(Predicates.or(colorPredicates));
                 }
                 Target target = new TargetControlledCreaturePermanent(1, 1, filter, true);
-                target.setTargetName("tap creature card as convoke's pay");
+                target.setTargetName("creature to tap for convoke");
                 specialAction.addTarget(target);
                 if (specialAction.canActivate(source.getControllerId(), game).canActivate()) {
                     game.getState().getSpecialActions().add(specialAction);

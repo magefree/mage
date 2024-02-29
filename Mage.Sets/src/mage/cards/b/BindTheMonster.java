@@ -57,7 +57,7 @@ public final class BindTheMonster extends CardImpl {
 
 class BindTheMonsterEffect extends OneShotEffect {
 
-    public BindTheMonsterEffect() {
+    BindTheMonsterEffect() {
         super(Outcome.Tap);
         staticText = "tap enchanted creature. It deals damage to you equal to its power";
     }

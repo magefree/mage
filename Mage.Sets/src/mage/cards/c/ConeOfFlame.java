@@ -55,7 +55,7 @@ public final class ConeOfFlame extends CardImpl {
 
 class ConeOfFlameEffect extends OneShotEffect {
 
-    public ConeOfFlameEffect() {
+    ConeOfFlameEffect() {
         super(Outcome.Damage);
         this.staticText = "{this} deals 1 damage to any target, "
                 + "2 damage to another target, "

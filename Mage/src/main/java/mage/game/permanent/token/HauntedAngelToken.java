@@ -22,7 +22,7 @@ public final class HauntedAngelToken extends TokenImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    protected HauntedAngelToken(final HauntedAngelToken token) {
+    private HauntedAngelToken(final HauntedAngelToken token) {
         super(token);
     }
 

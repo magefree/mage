@@ -78,7 +78,7 @@ class CabalShrineTriggeredAbility extends TriggeredAbilityImpl {
 
 class CabalShrineEffect extends OneShotEffect {
 
-    public CabalShrineEffect() {
+    CabalShrineEffect() {
         super(Outcome.Discard);
         staticText = "Whenever a player casts a spell, that player discards X cards, where X is the number of cards in all graveyards with the same name as that spell";
     }

@@ -51,7 +51,7 @@ public final class LobeLobber extends CardImpl {
 
 class LobeLobberEffect extends OneShotEffect {
 
-    public LobeLobberEffect() {
+    LobeLobberEffect() {
         super(Outcome.Benefit);
         this.staticText = "This creature deals 1 damage to target player. Roll a six-sided die. On a 5 or higher, untap it";
     }

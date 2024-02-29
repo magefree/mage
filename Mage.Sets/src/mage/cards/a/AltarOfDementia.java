@@ -46,7 +46,7 @@ public final class AltarOfDementia extends CardImpl {
 
 class AltarOfDementiaEffect extends OneShotEffect {
 
-    public AltarOfDementiaEffect() {
+    AltarOfDementiaEffect() {
         super(Outcome.Damage);
         staticText = "Target player mills cards equal to the sacrificed creature's power";
     }

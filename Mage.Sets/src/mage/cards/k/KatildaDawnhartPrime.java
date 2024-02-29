@@ -97,7 +97,7 @@ class KatildaDawnhartPrimeManaAbility extends ActivatedManaAbilityImpl {
 
 class KatildaDawnhartPrimeManaEffect extends ManaEffect {
 
-    public KatildaDawnhartPrimeManaEffect() {
+    KatildaDawnhartPrimeManaEffect() {
         super();
         staticText = "Add one mana of any of this creature's colors";
     }

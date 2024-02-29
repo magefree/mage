@@ -17,7 +17,7 @@ public final class BatToken extends TokenImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    protected BatToken(final BatToken token) {
+    private BatToken(final BatToken token) {
         super(token);
     }
 

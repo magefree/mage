@@ -50,7 +50,7 @@ public final class TempOfTheDamned extends CardImpl {
 
 class TempOfTheDamnedEffect extends OneShotEffect {
 
-    public TempOfTheDamnedEffect() {
+    TempOfTheDamnedEffect() {
         super(Outcome.Neutral);
         staticText = "roll a six-sided die. {this} enters the battlefield with a number of funk counters on it equal to the result";
     }

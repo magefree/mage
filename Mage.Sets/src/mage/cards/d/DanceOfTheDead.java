@@ -73,7 +73,7 @@ public final class DanceOfTheDead extends CardImpl {
 
 class DanceOfTheDeadDoIfCostPaidEffect extends DoIfCostPaid {
 
-    public DanceOfTheDeadDoIfCostPaidEffect() {
+    DanceOfTheDeadDoIfCostPaidEffect() {
         super(new UntapAttachedEffect(), new ManaCostsImpl<>("{1}{B}"));
     }
 

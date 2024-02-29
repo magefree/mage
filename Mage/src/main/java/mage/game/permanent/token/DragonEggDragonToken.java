@@ -27,7 +27,7 @@ public final class DragonEggDragonToken extends TokenImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{R}")));
     }
 
-    protected DragonEggDragonToken(final DragonEggDragonToken token) {
+    private DragonEggDragonToken(final DragonEggDragonToken token) {
         super(token);
     }
 

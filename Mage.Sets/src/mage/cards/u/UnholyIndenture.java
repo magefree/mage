@@ -55,7 +55,7 @@ public final class UnholyIndenture extends CardImpl {
 
 class UnholyIndentureReturnEffect extends OneShotEffect {
 
-    public UnholyIndentureReturnEffect() {
+    UnholyIndentureReturnEffect() {
         super(Outcome.Benefit);
         staticText = "return that card to the battlefield under your control with a +1/+1 counter on it";
     }

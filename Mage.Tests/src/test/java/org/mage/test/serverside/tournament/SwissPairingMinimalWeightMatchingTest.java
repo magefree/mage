@@ -1,14 +1,16 @@
 package org.mage.test.serverside.tournament;
 
+import mage.constants.RangeOfInfluence;
 import mage.game.tournament.Round;
 import mage.game.tournament.TournamentPairing;
 import mage.game.tournament.TournamentPlayer;
 import mage.game.tournament.pairing.RoundPairings;
 import mage.game.tournament.pairing.SwissPairingMinimalWeightMatching;
+import mage.players.Player;
+import mage.players.StubPlayer;
 import mage.util.RandomUtil;
 import org.junit.Assert;
 import org.junit.Test;
-import org.mage.test.stub.PlayerStub;
 import org.mage.test.stub.TournamentStub;
 
 import java.util.ArrayList;
@@ -21,15 +23,19 @@ import java.util.Set;
  */
 public class SwissPairingMinimalWeightMatchingTest {
 
+    private Player createTourneyPlayer(int number) {
+        return new StubPlayer("Tourney player " + number, RangeOfInfluence.ALL);
+    }
+
     @Test
     public void FourPlayersSecondRoundTest() {
         // 1 > 3
         // 2 > 4
 
-        TournamentPlayer player1 = new TournamentPlayer(new PlayerStub(), null);
-        TournamentPlayer player2 = new TournamentPlayer(new PlayerStub(), null);
-        TournamentPlayer player3 = new TournamentPlayer(new PlayerStub(), null);
-        TournamentPlayer player4 = new TournamentPlayer(new PlayerStub(), null);
+        TournamentPlayer player1 = new TournamentPlayer(createTourneyPlayer(1), null);
+        TournamentPlayer player2 = new TournamentPlayer(createTourneyPlayer(2), null);
+        TournamentPlayer player3 = new TournamentPlayer(createTourneyPlayer(3), null);
+        TournamentPlayer player4 = new TournamentPlayer(createTourneyPlayer(3), null);
         List<TournamentPlayer> players = new ArrayList<>();
         players.add(player4);
         players.add(player2);
@@ -68,10 +74,10 @@ public class SwissPairingMinimalWeightMatchingTest {
         // 1 > 2
         // 3 > 4
 
-        TournamentPlayer player3 = new TournamentPlayer(new PlayerStub(), null);
-        TournamentPlayer player2 = new TournamentPlayer(new PlayerStub(), null);
-        TournamentPlayer player4 = new TournamentPlayer(new PlayerStub(), null);
-        TournamentPlayer player1 = new TournamentPlayer(new PlayerStub(), null);
+        TournamentPlayer player3 = new TournamentPlayer(createTourneyPlayer(3), null);
+        TournamentPlayer player2 = new TournamentPlayer(createTourneyPlayer(2), null);
+        TournamentPlayer player4 = new TournamentPlayer(createTourneyPlayer(4), null);
+        TournamentPlayer player1 = new TournamentPlayer(createTourneyPlayer(1), null);
         List<TournamentPlayer> players = new ArrayList<>();
         players.add(player4);
         players.add(player2);
@@ -116,10 +122,10 @@ public class SwissPairingMinimalWeightMatchingTest {
         // 2 > 4
         // 4 left the tournament
 
-        TournamentPlayer player1 = new TournamentPlayer(new PlayerStub(), null);
-        TournamentPlayer player2 = new TournamentPlayer(new PlayerStub(), null);
-        TournamentPlayer player3 = new TournamentPlayer(new PlayerStub(), null);
-        TournamentPlayer player4 = new TournamentPlayer(new PlayerStub(), null);
+        TournamentPlayer player1 = new TournamentPlayer(createTourneyPlayer(1), null);
+        TournamentPlayer player2 = new TournamentPlayer(createTourneyPlayer(2), null);
+        TournamentPlayer player3 = new TournamentPlayer(createTourneyPlayer(3), null);
+        TournamentPlayer player4 = new TournamentPlayer(createTourneyPlayer(4), null);
         List<TournamentPlayer> players = new ArrayList<>();
         //players.add(player4); -- player 4 is not active
         players.add(player2);
@@ -159,11 +165,11 @@ public class SwissPairingMinimalWeightMatchingTest {
         // 2 > 3
         // 4
 
-        TournamentPlayer player1 = new TournamentPlayer(new PlayerStub(), null);
-        TournamentPlayer player2 = new TournamentPlayer(new PlayerStub(), null);
-        TournamentPlayer player3 = new TournamentPlayer(new PlayerStub(), null);
-        TournamentPlayer player4 = new TournamentPlayer(new PlayerStub(), null);
-        TournamentPlayer player5 = new TournamentPlayer(new PlayerStub(), null);
+        TournamentPlayer player1 = new TournamentPlayer(createTourneyPlayer(1), null);
+        TournamentPlayer player2 = new TournamentPlayer(createTourneyPlayer(2), null);
+        TournamentPlayer player3 = new TournamentPlayer(createTourneyPlayer(3), null);
+        TournamentPlayer player4 = new TournamentPlayer(createTourneyPlayer(4), null);
+        TournamentPlayer player5 = new TournamentPlayer(createTourneyPlayer(5), null);
         List<TournamentPlayer> players = new ArrayList<>();
         players.add(player4);
         players.add(player2);
@@ -214,11 +220,11 @@ public class SwissPairingMinimalWeightMatchingTest {
         // 5 left the tournament
 
 
-        TournamentPlayer player1 = new TournamentPlayer(new PlayerStub(), null);
-        TournamentPlayer player2 = new TournamentPlayer(new PlayerStub(), null);
-        TournamentPlayer player3 = new TournamentPlayer(new PlayerStub(), null);
-        TournamentPlayer player4 = new TournamentPlayer(new PlayerStub(), null);
-        TournamentPlayer player5 = new TournamentPlayer(new PlayerStub(), null);
+        TournamentPlayer player1 = new TournamentPlayer(createTourneyPlayer(1), null);
+        TournamentPlayer player2 = new TournamentPlayer(createTourneyPlayer(2), null);
+        TournamentPlayer player3 = new TournamentPlayer(createTourneyPlayer(3), null);
+        TournamentPlayer player4 = new TournamentPlayer(createTourneyPlayer(4), null);
+        TournamentPlayer player5 = new TournamentPlayer(createTourneyPlayer(5), null);
         List<TournamentPlayer> players = new ArrayList<>();
         //players.add(player5); -- player 5 is not active
         players.add(player4);
@@ -268,7 +274,7 @@ public class SwissPairingMinimalWeightMatchingTest {
 
         List<TournamentPlayer> players = new ArrayList<>();
         for (int i = 0; i < playersCount; i++) {
-            players.add(new TournamentPlayer(new PlayerStub(), null));
+            players.add(new TournamentPlayer(createTourneyPlayer(i + 1), null));
         }
 
         List<TournamentPairing> playedPairs = new ArrayList<>();

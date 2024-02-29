@@ -52,7 +52,7 @@ public final class MinionReflector extends CardImpl {
 
 class MinionReflectorEffect extends OneShotEffect {
 
-    public MinionReflectorEffect() {
+    MinionReflectorEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "create a token that's a copy of that creature, except it has haste and \"At the beginning of the end step, sacrifice this permanent.\"";
     }

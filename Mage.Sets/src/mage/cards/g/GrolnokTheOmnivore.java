@@ -94,7 +94,7 @@ class GrolnokTheOmnivoreTriggeredAbility extends TriggeredAbilityImpl {
 
 class GrolnokTheOmnivoreExileEffect extends OneShotEffect {
 
-    public GrolnokTheOmnivoreExileEffect() {
+    GrolnokTheOmnivoreExileEffect() {
         super(Outcome.Exile);
         staticText = "exile it with a croak counter on it";
     }
@@ -111,7 +111,7 @@ class GrolnokTheOmnivoreExileEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Card card = game.getCard(targetPointer.getFirst(game, source));
+        Card card = game.getCard(getTargetPointer().getFirst(game, source));
         if (controller != null && card != null) {
             return CardUtil.moveCardWithCounter(game, source, controller, card, Zone.EXILED, CounterType.CROAK.createInstance());
         }
@@ -121,7 +121,7 @@ class GrolnokTheOmnivoreExileEffect extends OneShotEffect {
 
 class GrolnokTheOmnivorePlayEffect extends AsThoughEffectImpl {
 
-    public GrolnokTheOmnivorePlayEffect() {
+    GrolnokTheOmnivorePlayEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "You may play lands and cast spells from among cards you own in exile with croak counters on them";
     }

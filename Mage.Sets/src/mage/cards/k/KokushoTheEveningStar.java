@@ -1,20 +1,16 @@
-
-
 package mage.cards.k;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.DiesSourceTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.LoseLifeOpponentsYouGainLifeLostEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Outcome;
 import mage.constants.SuperType;
-import mage.game.Game;
+
+import java.util.UUID;
 
 /**
  * @author Loki
@@ -30,7 +26,7 @@ public final class KokushoTheEveningStar extends CardImpl {
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
         this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new DiesSourceTriggeredAbility(new KokushoTheEveningStarEffect(), false));
+        this.addAbility(new DiesSourceTriggeredAbility(new LoseLifeOpponentsYouGainLifeLostEffect(5), false));
     }
 
     private KokushoTheEveningStar(final KokushoTheEveningStar card) {
@@ -40,34 +36,6 @@ public final class KokushoTheEveningStar extends CardImpl {
     @Override
     public KokushoTheEveningStar copy() {
         return new KokushoTheEveningStar(this);
-    }
-
-}
-
-class KokushoTheEveningStarEffect extends OneShotEffect {
-    public KokushoTheEveningStarEffect() {
-        super(Outcome.Damage);
-        staticText = "each opponent loses 5 life. You gain life equal to the life lost this way";
-    }
-
-    private KokushoTheEveningStarEffect(final KokushoTheEveningStarEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        int loseLife = 0;
-        for (UUID opponentId : game.getOpponents(source.getControllerId())) {
-            loseLife += game.getPlayer(opponentId).loseLife(5, game, source, false);
-        }
-        if (loseLife > 0)
-            game.getPlayer(source.getControllerId()).gainLife(loseLife, game, source);
-        return true;
-    }
-
-    @Override
-    public KokushoTheEveningStarEffect copy() {
-        return new KokushoTheEveningStarEffect(this);
     }
 
 }

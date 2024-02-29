@@ -94,7 +94,7 @@ class GreatbowDoyenTriggeredAbility extends TriggeredAbilityImpl {
 
 class GreatbowDoyenEffect extends OneShotEffect {
 
-    public GreatbowDoyenEffect() {
+    GreatbowDoyenEffect() {
         super(Outcome.Damage);
         this.staticText = "that Archer deals that much damage to that creature's controller";
     }

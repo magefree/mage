@@ -30,7 +30,8 @@ public final class FavoredHoplite extends CardImpl {
 
         // Heroic - Whenever you cast a spell that targets Favored Hoplite, put a +1/+1 counter on Favored Hoplite and prevent all damage that would be dealt to it this turn.
         Ability ability = new HeroicAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
-        ability.addEffect(new PreventAllDamageToSourceEffect(Duration.EndOfTurn));
+        ability.addEffect(new PreventAllDamageToSourceEffect(Duration.EndOfTurn)
+                .setText("and prevent all damage that would be dealt to it this turn"));
         this.addAbility(ability);
     }
 

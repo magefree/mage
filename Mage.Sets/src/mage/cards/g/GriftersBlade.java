@@ -59,7 +59,7 @@ public final class GriftersBlade extends CardImpl {
 
 class GriftersBladeChooseCreatureEffect extends OneShotEffect {
 
-    public GriftersBladeChooseCreatureEffect(Outcome outcome) {
+    GriftersBladeChooseCreatureEffect(Outcome outcome) {
         super(outcome);
         this.staticText = "choose a creature you control it could be attached to. If you do, it enters the battlefield attached to that creature";
     }

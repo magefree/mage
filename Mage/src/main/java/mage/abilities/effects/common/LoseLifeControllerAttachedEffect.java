@@ -44,7 +44,10 @@ public class LoseLifeControllerAttachedEffect extends OneShotEffect {
         Permanent attachedTo = (Permanent) game.getLastKnownInformation(attachment.getAttachedTo(),
                     Zone.BATTLEFIELD, attachment.getAttachedToZoneChangeCounter());
         if (attachedTo == null) {
-            return false;
+            attachedTo = game.getPermanent(attachment.getAttachedTo());
+            if (attachedTo == null) {
+                return false;
+            }
         }
         Player player = game.getPlayer(attachedTo.getControllerId());
         if (player == null) {

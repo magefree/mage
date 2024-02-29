@@ -100,7 +100,7 @@ class ChooseACreature extends OneShotEffect {
 
 class MetamorphicAlterationEffect extends ContinuousEffectImpl {
 
-    public MetamorphicAlterationEffect() {
+    MetamorphicAlterationEffect() {
         super(Duration.WhileOnBattlefield, Layer.CopyEffects_1, SubLayer.CopyEffects_1a, Outcome.Copy);
         this.staticText = "Enchanted creature is a copy of the chosen creature.";
     }

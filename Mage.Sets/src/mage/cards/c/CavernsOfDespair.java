@@ -43,7 +43,7 @@ public final class CavernsOfDespair extends CardImpl {
 
 class CavernsOfDespairAttackRestrictionEffect extends RestrictionEffect {
 
-    public CavernsOfDespairAttackRestrictionEffect() {
+    CavernsOfDespairAttackRestrictionEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "No more than two creatures can attack each combat";
     }
@@ -70,7 +70,7 @@ class CavernsOfDespairAttackRestrictionEffect extends RestrictionEffect {
 
 class CavernsOfDespairBlockRestrictionEffect extends RestrictionEffect {
 
-    public CavernsOfDespairBlockRestrictionEffect() {
+    CavernsOfDespairBlockRestrictionEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "No more than two creatures can block each combat";
     }

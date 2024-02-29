@@ -49,7 +49,7 @@ public final class DarkRevenant extends CardImpl {
 
 class DarkRevenantEffect extends OneShotEffect {
 
-    public DarkRevenantEffect() {
+    DarkRevenantEffect() {
         super(Outcome.ReturnToHand);
         staticText = "put it on top of its owner's library";
     }

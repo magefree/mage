@@ -18,7 +18,7 @@ public final class CrestedSunmareToken extends TokenImpl {
         cardType.add(CardType.CREATURE);
     }
 
-    protected CrestedSunmareToken(final CrestedSunmareToken token) {
+    private CrestedSunmareToken(final CrestedSunmareToken token) {
         super(token);
     }
 

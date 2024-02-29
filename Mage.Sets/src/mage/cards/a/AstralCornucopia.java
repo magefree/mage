@@ -49,7 +49,7 @@ public final class AstralCornucopia extends CardImpl {
 
 class AstralCornucopiaManaEffect extends ManaEffect {
 
-    public AstralCornucopiaManaEffect() {
+    AstralCornucopiaManaEffect() {
         super();
         this.staticText = "Choose a color. Add one mana of that color for each charge counter on {this}";
     }

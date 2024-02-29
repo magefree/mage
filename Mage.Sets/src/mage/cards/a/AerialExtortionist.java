@@ -64,7 +64,7 @@ public class AerialExtortionist extends CardImpl {
 
 class AerialExtortionistExileEffect extends OneShotEffect {
 
-    public AerialExtortionistExileEffect() {
+    AerialExtortionistExileEffect() {
         super(Outcome.Benefit);
         this.staticText = "exile up to one target nonland permanent. " +
                 "For as long as that card remains exiled, its owner may cast it";

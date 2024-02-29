@@ -65,7 +65,7 @@ public final class ExtraplanarLens extends CardImpl {
 
 class ExtraplanarLensImprintEffect extends OneShotEffect {
 
-    public ExtraplanarLensImprintEffect() {
+    ExtraplanarLensImprintEffect() {
         super(Outcome.Neutral);
         staticText = "you may exile target land you control";
     }

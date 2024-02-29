@@ -41,7 +41,7 @@ public final class Scrounge extends CardImpl {
 
 class ScroungeEffect extends OneShotEffect {
 
-    public ScroungeEffect() {
+    ScroungeEffect() {
         super(Outcome.Benefit);
         staticText = "Target opponent chooses an artifact card in their graveyard. Put that card onto the battlefield under your control";
     }
@@ -58,7 +58,7 @@ class ScroungeEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Player opponent = game.getPlayer(targetPointer.getFirst(game, source));
+        Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (controller != null && opponent != null) {
             FilterArtifactCard filter = new FilterArtifactCard();
             filter.add(new OwnerIdPredicate(opponent.getId()));

@@ -60,8 +60,7 @@ public final class GlassCastHeart extends CardImpl {
         ability.addCost(new TapSourceCost());
         ability.addCost(new CompositeCost(
                 new SacrificeSourceCost(),
-                new SacrificeTargetCost(
-                        new TargetControlledPermanent(13, filter2)
+                new SacrificeTargetCost(13, filter2
                 ), "sacrifice {this} and thirteen Blood tokens"
         ));
         ability.addEffect(new GainLifeEffect(13).concatBy("and"));

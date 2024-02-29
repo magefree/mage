@@ -98,7 +98,7 @@ class EnigmaSphinxTriggeredAbility extends TriggeredAbilityImpl {
 
 class EnigmaSphinxEffect extends OneShotEffect {
 
-    public EnigmaSphinxEffect() {
+    EnigmaSphinxEffect() {
         super(Outcome.ReturnToHand);
         staticText = "put it into your library third from the top";
     }

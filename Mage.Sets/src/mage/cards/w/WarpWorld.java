@@ -47,7 +47,7 @@ public final class WarpWorld extends CardImpl {
 
 class WarpWorldEffect extends OneShotEffect {
 
-    public WarpWorldEffect() {
+    WarpWorldEffect() {
         super(Outcome.Neutral);
         this.staticText = "Each player shuffles all permanents they own into their library, then reveals that many cards from the top of their library. Each player puts all artifact, creature, and land cards revealed this way onto the battlefield, then does the same for enchantment cards, then puts all cards revealed this way that weren't put onto the battlefield on the bottom of their library";
     }

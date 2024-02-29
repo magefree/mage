@@ -47,7 +47,7 @@ public final class Delay extends CardImpl {
 
 class DelayEffect extends OneShotEffect {
 
-    public DelayEffect() {
+    DelayEffect() {
         super(Outcome.Benefit);
         this.staticText = "Counter target spell. If the spell is countered this way, exile it with three time counters on it instead of putting it into its owner's graveyard. If it doesn't have suspend, it gains suspend";
     }
@@ -67,7 +67,7 @@ class DelayEffect extends OneShotEffect {
         Spell spell = game.getStack().getSpell(getTargetPointer().getFirst(game, source));
         if (controller != null && spell != null) {
             Effect effect = new CounterTargetWithReplacementEffect(PutCards.EXILED);
-            effect.setTargetPointer(targetPointer);
+            effect.setTargetPointer(this.getTargetPointer().copy());
             Card card = game.getCard(spell.getSourceId());
             if (card != null && effect.apply(game, source) && game.getState().getZone(card.getId()) == Zone.EXILED) {
                 boolean hasSuspend = card.getAbilities(game).containsClass(SuspendAbility.class);

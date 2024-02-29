@@ -47,7 +47,7 @@ public final class OdricBloodCursed extends CardImpl {
 
 class OdricBloodCursedEffect extends OneShotEffect {
 
-    public OdricBloodCursedEffect() {
+    OdricBloodCursedEffect() {
         super(Outcome.Benefit);
         staticText = "create X Blood tokens, where X is the number of abilities from among flying, first strike, double strike, deathtouch, haste, hexproof, indestructible, lifelink, menace, reach, trample, and vigilance found among creatures you control";
     }

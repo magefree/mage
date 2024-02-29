@@ -55,7 +55,7 @@ public final class AdelineResplendentCathar extends CardImpl {
 
 class AdelineResplendentCatharEffect extends OneShotEffect {
 
-    public AdelineResplendentCatharEffect() {
+    AdelineResplendentCatharEffect() {
         super(Outcome.Benefit);
         staticText = "for each opponent, create a 1/1 white Human creature token that's tapped and attacking that player or a planeswalker they control";
     }

@@ -23,7 +23,7 @@ public final class ForestDryadToken extends TokenImpl {
         this.addAbility(new GreenManaAbility());
     }
 
-    protected ForestDryadToken(final ForestDryadToken token) {
+    private ForestDryadToken(final ForestDryadToken token) {
         super(token);
     }
 

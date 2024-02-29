@@ -87,7 +87,7 @@ enum AmberGristleOMaulValue implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "player you're attacking";
+        return "player being attacked";
     }
 
     @Override

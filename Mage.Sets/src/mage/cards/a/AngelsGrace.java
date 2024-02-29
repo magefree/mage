@@ -47,7 +47,7 @@ public final class AngelsGrace extends CardImpl {
 
 class AngelsGraceEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public AngelsGraceEffect() {
+    AngelsGraceEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit, false, false);
         staticText = "You can't lose the game this turn "
                 + "and your opponents can't win the game this turn";
@@ -79,7 +79,7 @@ class AngelsGraceEffect extends ContinuousRuleModifyingEffectImpl {
 
 class AngelsGraceReplacementEffect extends ReplacementEffectImpl {
 
-    public AngelsGraceReplacementEffect() {
+    AngelsGraceReplacementEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit);
         staticText = "Until end of turn, damage that would reduce your "
                 + "life total to less than 1 reduces it to 1 instead";

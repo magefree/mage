@@ -69,7 +69,7 @@ class AquamorphEntityReplacementEffect extends ReplacementEffectImpl {
     public boolean checksEventType(GameEvent event, Game game) {
         switch (event.getType()) {
             case ENTERS_THE_BATTLEFIELD:
-            case TURNFACEUP:
+            case TURN_FACE_UP:
                 return true;
             default:
                 return false;
@@ -86,7 +86,7 @@ class AquamorphEntityReplacementEffect extends ReplacementEffectImpl {
                 }
             }
         }
-        if (event.getType() == GameEvent.EventType.TURNFACEUP) {
+        if (event.getType() == GameEvent.EventType.TURN_FACE_UP) {
             return event.getTargetId().equals(source.getSourceId());
         }
         return false;

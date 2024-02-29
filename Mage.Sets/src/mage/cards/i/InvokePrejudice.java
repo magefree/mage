@@ -90,7 +90,7 @@ class InvokePrejudiceTriggeredAbility extends TriggeredAbilityImpl {
 
 class InvokePrejudiceEffect extends CounterUnlessPaysEffect {
 
-    public InvokePrejudiceEffect() {
+    InvokePrejudiceEffect() {
         super(new GenericManaCost(1));
         this.staticText = "counter that spell unless that player pays {X}, where X is its mana value";
     }
@@ -110,7 +110,7 @@ class InvokePrejudiceEffect extends CounterUnlessPaysEffect {
         Spell spell = game.getStack().getSpell(getTargetPointer().getFirst(game, source));
         if (spell != null) {
             CounterUnlessPaysEffect effect = new CounterUnlessPaysEffect(new GenericManaCost(spell.getManaValue()));
-            effect.setTargetPointer(getTargetPointer());
+            effect.setTargetPointer(this.getTargetPointer().copy());
             result = effect.apply(game, source);
         }
         return result;

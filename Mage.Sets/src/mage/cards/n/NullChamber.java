@@ -102,7 +102,7 @@ class NullChamberChooseEffect extends OneShotEffect {
 
 class NullChamberReplacementEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public NullChamberReplacementEffect() {
+    NullChamberReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.AIDontUseIt);
         staticText = "The named cards can't be played";
     }

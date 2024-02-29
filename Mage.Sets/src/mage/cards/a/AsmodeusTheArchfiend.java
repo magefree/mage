@@ -58,7 +58,7 @@ public final class AsmodeusTheArchfiend extends CardImpl {
 
 class AsmodeusTheArchfiendReplacementEffect extends ReplacementEffectImpl {
 
-    public AsmodeusTheArchfiendReplacementEffect() {
+    AsmodeusTheArchfiendReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Exile);
         this.staticText = "If you would draw a card, exile the top card of your library face down instead";
     }
@@ -130,7 +130,7 @@ class AsmodeusTheArchfiendReturnAbility extends ActivatedAbilityImpl {
 
 class AsmodeusTheArchfiendReturnEffect extends OneShotEffect {
 
-    public AsmodeusTheArchfiendReturnEffect() {
+    AsmodeusTheArchfiendReturnEffect() {
         super(Outcome.DrawCard);
         this.staticText = "Return all cards exiled with {this} to their owner's hand and you lose that much life";
     }

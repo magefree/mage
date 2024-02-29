@@ -56,7 +56,7 @@ public final class PlanarGuide extends CardImpl {
 
 class PlanarGuideExileEffect extends OneShotEffect {
 
-    public PlanarGuideExileEffect() {
+    PlanarGuideExileEffect() {
         super(Outcome.Detriment);
         staticText = "Exile all creatures. At the beginning of the next end step, return those cards to the battlefield under their owners' control";
     }
@@ -93,7 +93,7 @@ class PlanarGuideExileEffect extends OneShotEffect {
 
 class PlanarGuideReturnFromExileEffect extends OneShotEffect {
 
-    public PlanarGuideReturnFromExileEffect() {
+    PlanarGuideReturnFromExileEffect() {
         super(Outcome.PutCardInPlay);
         staticText = "At the beginning of the next end step, return those cards to the battlefield under their owners' control";
     }

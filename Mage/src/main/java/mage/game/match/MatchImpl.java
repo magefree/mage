@@ -199,7 +199,7 @@ public abstract class MatchImpl implements Match {
                 matchPlayer.getPlayer().init(game);
                 game.loadCards(matchPlayer.getDeck().getCards(), matchPlayer.getPlayer().getId());
                 game.loadCards(matchPlayer.getDeck().getSideboard(), matchPlayer.getPlayer().getId());
-                game.addPlayer(matchPlayer.getPlayer(), matchPlayer.getDeck());
+                game.addPlayer(matchPlayer.getPlayer(), matchPlayer.getDeck()); // TODO: keeps old player?!
                 // time limits
                 matchPlayer.getPlayer().setBufferTimeLeft(options.getMatchBufferTime().getBufferSecs());
                 if (games.isEmpty()) {

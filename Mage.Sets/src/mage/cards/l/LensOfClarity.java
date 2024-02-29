@@ -68,7 +68,7 @@ class LensOfClarityLookLibraryAbility extends ActivatedAbilityImpl {
 
 class LensOfClarityLookLibraryEffect extends OneShotEffect {
 
-    public LensOfClarityLookLibraryEffect() {
+    LensOfClarityLookLibraryEffect() {
         super(Outcome.Neutral);
         this.staticText = "You may look at the top card of your library";
     }
@@ -131,7 +131,7 @@ class LensOfClarityLookFaceDownAbility extends ActivatedAbilityImpl {
 
 class LensOfClarityLookFaceDownEffect extends OneShotEffect {
 
-    public LensOfClarityLookFaceDownEffect() {
+    LensOfClarityLookFaceDownEffect() {
         super(Outcome.Benefit);
         this.staticText = "You may look at face-down creatures you don't control";
     }

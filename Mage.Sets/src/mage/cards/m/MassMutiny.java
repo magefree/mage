@@ -66,7 +66,7 @@ enum MassMutinyAdjuster implements TargetAdjuster {
 
 class MassMutinyEffect extends OneShotEffect {
 
-    public MassMutinyEffect() {
+    MassMutinyEffect() {
         super(Outcome.GainControl);
         this.staticText = "For each opponent, gain control of up to one target creature that player controls until end of turn. Untap those creatures. They gain haste until end of turn";
     }

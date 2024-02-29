@@ -38,7 +38,7 @@ public final class GoblinBarrage extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{R}");
 
         // Kicker—Sacrifice an artifact or Goblin.
-        this.addAbility(new KickerAbility(new SacrificeTargetCost(new TargetControlledPermanent(filter))));
+        this.addAbility(new KickerAbility(new SacrificeTargetCost(filter)));
 
         // Goblin Barrage deals 4 damage to target creature. If this spell was kicked, it also deals 4 damage to target player or planeswalker.
         this.getSpellAbility().addEffect(new DamageTargetEffect(4)

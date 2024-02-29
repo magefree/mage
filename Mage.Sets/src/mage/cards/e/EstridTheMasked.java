@@ -75,7 +75,7 @@ public final class EstridTheMasked extends CardImpl {
 
 class EstridTheMaskedTokenEffect extends OneShotEffect {
 
-    public EstridTheMaskedTokenEffect() {
+    EstridTheMaskedTokenEffect() {
         super(Outcome.Benefit);
         this.staticText = "create a white Aura enchantment token named Mask "
                 + "attached to another target permanent. "

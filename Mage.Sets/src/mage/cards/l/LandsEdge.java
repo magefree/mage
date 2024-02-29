@@ -51,7 +51,7 @@ public final class LandsEdge extends CardImpl {
 
 class LandsEdgeEffect extends OneShotEffect {
 
-    public LandsEdgeEffect() {
+    LandsEdgeEffect() {
         super(Outcome.Neutral);
         staticText = "If the discarded card was a land card, {this} deals 2 damage to target player or planeswalker";
     }
@@ -69,7 +69,7 @@ class LandsEdgeEffect extends OneShotEffect {
                 List<Card> cards = cost.getCards();
                 if (cards.size() == 1 && cards.get(0).isLand(game)) {
                     Effect effect = new DamageTargetEffect(2);
-                    effect.setTargetPointer(getTargetPointer());
+                    effect.setTargetPointer(this.getTargetPointer().copy());
                     effect.apply(game, source);
                 }
 

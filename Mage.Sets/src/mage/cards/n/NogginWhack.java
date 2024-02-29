@@ -20,7 +20,7 @@ public final class NogginWhack extends CardImpl {
         this.subtype.add(SubType.ROGUE);
 
         // Prowl {1}{B}
-        this.addAbility(new ProwlAbility(this, "{1}{B}"));
+        this.addAbility(new ProwlAbility("{1}{B}"));
         // Target player reveals three cards from their hand. You choose two of them. That player discards those cards.
         this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(2, 3));
         this.getSpellAbility().addTarget(new TargetPlayer());

@@ -57,7 +57,7 @@ public final class EndrekSahrMasterBreeder extends CardImpl {
 
 class EndrekSahrMasterBreederEffect extends OneShotEffect {
 
-    public EndrekSahrMasterBreederEffect() {
+    EndrekSahrMasterBreederEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "create X 1/1 black Thrull creature tokens, where X is that spell's mana value";
     }

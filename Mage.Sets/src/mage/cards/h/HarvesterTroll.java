@@ -37,7 +37,7 @@ public final class HarvesterTroll extends CardImpl {
         // When Harvester Troll enters the battlefield, you may sacrifice a creature or land. If you do, put two +1/+1 counters on Harvester Troll.
         EntersBattlefieldTriggeredAbility ability
                 = new EntersBattlefieldTriggeredAbility(new DoIfCostPaid(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)),
-                                new SacrificeTargetCost(new TargetControlledPermanent(filter))), false);
+                                new SacrificeTargetCost(filter)), false);
         this.addAbility(ability);
     }
 

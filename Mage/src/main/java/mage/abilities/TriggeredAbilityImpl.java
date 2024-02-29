@@ -226,7 +226,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
                 }
             }
             if (replaceRuleText && triggerPhrase != null) {
-                superRule = superRule.replaceFirst("^((?:you may )?sacrifice |(put|remove) an? [^ ]+ counter (on|from) |return |transform |untap |regenerate )?\\{this\\}", "$1it");
+                superRule = superRule.replaceFirst("^((?:you may )?sacrifice |(put|remove) [^ ]+ [^ ]+ counters? (on|from) |return |transform |untap |regenerate )?\\{this\\}", "$1it");
             }
             sb.append(superRule);
             if (triggersOnceEachTurn) {
@@ -370,7 +370,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
     }
 
     public static boolean isInUseableZoneDiesTrigger(TriggeredAbility source, GameEvent event, Game game) {
-        // Get the source permanent of the ability 
+        // Get the source permanent of the ability
         MageObject sourceObject = null;
         if (game.getState().getZone(source.getSourceId()) == Zone.BATTLEFIELD) {
             sourceObject = game.getPermanent(source.getSourceId());

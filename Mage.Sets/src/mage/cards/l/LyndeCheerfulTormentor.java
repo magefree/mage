@@ -114,7 +114,7 @@ class LyndeCheerfulTormentorCurseDiesTriggeredAbility extends TriggeredAbilityIm
 
 class LyndeCheerfulTormentorReturnCurseEffect extends OneShotEffect {
 
-    public LyndeCheerfulTormentorReturnCurseEffect() {
+    LyndeCheerfulTormentorReturnCurseEffect() {
         super(Outcome.Benefit);
         staticText = "return it to the battlefield attached to you at the beginning of the next end step";
     }

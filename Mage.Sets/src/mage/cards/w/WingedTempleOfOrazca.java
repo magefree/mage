@@ -57,7 +57,7 @@ public final class WingedTempleOfOrazca extends CardImpl {
 
 class WingedTempleOfOrazcaEffect extends OneShotEffect {
 
-    public WingedTempleOfOrazcaEffect() {
+    WingedTempleOfOrazcaEffect() {
         super(Outcome.Benefit);
         this.staticText = "target creature you control gains flying and gets +X/+X until end of turn, where X is its power";
     }
@@ -73,7 +73,7 @@ class WingedTempleOfOrazcaEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent creature = game.getPermanent(targetPointer.getFirst(game, source));
+        Permanent creature = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (creature != null && creature.isCreature(game)) {
             int pow = creature.getPower().getValue();
             ContinuousEffect effect = new BoostTargetEffect(pow, pow, Duration.EndOfTurn);

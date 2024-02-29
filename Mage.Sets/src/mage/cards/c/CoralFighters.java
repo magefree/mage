@@ -43,7 +43,7 @@ public final class CoralFighters extends CardImpl {
 
 class CoralFightersEffect extends OneShotEffect {
 
-    public CoralFightersEffect() {
+    CoralFightersEffect() {
         super(Outcome.Detriment);
         staticText = "look at the top card of defending player's library. You may put that card on the bottom of that player's library";
     }
@@ -60,7 +60,7 @@ class CoralFightersEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Player defendingPlayer = game.getPlayer(targetPointer.getFirst(game, source));
+        Player defendingPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
         if(controller != null && defendingPlayer != null) {
             Card card = defendingPlayer.getLibrary().getFromTop(game);
             if(card != null) {

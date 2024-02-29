@@ -52,7 +52,7 @@ public final class BrassHerald extends CardImpl {
 
 class BrassHeraldEntersEffect extends OneShotEffect {
 
-    public BrassHeraldEntersEffect() {
+    BrassHeraldEntersEffect() {
         super(Outcome.Benefit);
         this.staticText = "reveal the top four cards of your library. Put all creature cards of the chosen type revealed this way into your hand and the rest on the bottom of your library in any order";
     }

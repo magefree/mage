@@ -88,7 +88,7 @@ class PredatorsHourEffect extends OneShotEffect {
             return false;
         }
 
-        Player opponent = game.getPlayer(targetPointer.getFirst(game, source));
+        Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (opponent == null) {
             return false;
         }
@@ -139,7 +139,7 @@ class PredatorsHourEffect extends OneShotEffect {
 
 class PredatorsHourPlayFromExileEffect extends AsThoughEffectImpl {
 
-    public PredatorsHourPlayFromExileEffect() {
+    PredatorsHourPlayFromExileEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
         staticText = "You may look at and play that card for as long as it remains exiled, " +
                 "and you may spend mana as though it were mana of any color to cast that spell.";

@@ -63,7 +63,7 @@ public final class Toymaker extends CardImpl {
 
 class ToymakerEffect extends ContinuousEffectImpl {
 
-    public ToymakerEffect() {
+    ToymakerEffect() {
         super(Duration.EndOfTurn, Outcome.BecomeCreature);
         staticText = "Target noncreature artifact becomes an artifact creature with power and toughness each equal to its mana value until end of turn";
     }

@@ -48,7 +48,7 @@ public final class WildEvocation extends CardImpl {
 
 class WildEvocationEffect extends OneShotEffect {
 
-    public WildEvocationEffect() {
+    WildEvocationEffect() {
         super(Outcome.PutCardInPlay);
         staticText = "that player reveals a card at random from their hand. "
                 + "If it's a land card, the player puts it onto the battlefield. "
@@ -61,7 +61,7 @@ class WildEvocationEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         MageObject sourceObject = source.getSourceObject(game);
         if (player != null 
                 && sourceObject != null) {

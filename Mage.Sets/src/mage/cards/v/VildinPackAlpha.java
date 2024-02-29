@@ -54,7 +54,7 @@ public final class VildinPackAlpha extends CardImpl {
 
 class VildinPackAlphaEffect extends OneShotEffect {
 
-    public VildinPackAlphaEffect() {
+    VildinPackAlphaEffect() {
         super(Outcome.Benefit);
         this.staticText = "you may transform it";
     }

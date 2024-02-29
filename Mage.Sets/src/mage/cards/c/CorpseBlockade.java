@@ -37,7 +37,7 @@ public final class CorpseBlockade extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
                 new GainAbilitySourceEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn),
-                new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, true))));
+                new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE)));
     }
 
     private CorpseBlockade(final CorpseBlockade card) {

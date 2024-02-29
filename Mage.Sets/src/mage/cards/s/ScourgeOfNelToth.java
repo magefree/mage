@@ -15,6 +15,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -53,7 +54,7 @@ public final class ScourgeOfNelToth extends CardImpl {
 
 class ScourgeOfNelTothPlayEffect extends AsThoughEffectImpl {
 
-    public ScourgeOfNelTothPlayEffect() {
+    ScourgeOfNelTothPlayEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
         staticText = "You may cast {this} from your graveyard by paying {B}{B} and sacrificing two creatures rather than paying its mana cost";
     }
@@ -79,7 +80,7 @@ class ScourgeOfNelTothPlayEffect extends AsThoughEffectImpl {
                 Player player = game.getPlayer(affectedControllerId);
                 if (player != null) {
                     Costs<Cost> costs = new CostsImpl<>();
-                    costs.add(new SacrificeTargetCost(new TargetControlledCreaturePermanent(2)));
+                    costs.add(new SacrificeTargetCost(2, StaticFilters.FILTER_PERMANENT_CREATURES));
                     player.setCastSourceIdWithAlternateMana(
                             sourceId, new ManaCostsImpl<>("{B}{B}"), costs,
                             MageIdentifier.ScourgeOfNelTothAlternateCast

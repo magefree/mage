@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public abstract class DeckImporter {
 
-    public class FixedInfo {
+    public static class FixedInfo {
         private final String originalLine;
         private String fixedLine;
         private Boolean canFix = true; // set false if deck have critical error and can't be auto-fixed

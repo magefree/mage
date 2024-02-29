@@ -59,7 +59,7 @@ public final class AzraOddsmaker extends CardImpl {
 
 class AzraOddsmakerEffect extends OneShotEffect {
 
-    public AzraOddsmakerEffect() {
+    AzraOddsmakerEffect() {
         super(Outcome.Benefit);
         this.staticText = "choose a creature. Whenever that creature deals combat damage to a player this turn, you draw two cards";
     }

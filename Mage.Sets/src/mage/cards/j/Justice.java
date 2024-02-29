@@ -92,7 +92,7 @@ class JusticeTriggeredAbility extends TriggeredAbilityImpl {
 
 class JusticeEffect extends OneShotEffect {
 
-    public JusticeEffect() {
+    JusticeEffect() {
         super(Outcome.Damage);
     }
 
@@ -108,7 +108,7 @@ class JusticeEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Integer damageAmount = (Integer) this.getValue("damageAmount");
-        UUID targetId = this.targetPointer.getFirst(game, source);
+        UUID targetId = this.getTargetPointer().getFirst(game, source);
         if (damageAmount != null && targetId != null) {
             Player player = game.getPlayer(targetId);
             if (player != null) {

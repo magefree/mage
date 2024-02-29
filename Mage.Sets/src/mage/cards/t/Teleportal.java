@@ -51,7 +51,7 @@ public final class Teleportal extends CardImpl {
 
 class TeleportalEffect extends OneShotEffect {
 
-    public TeleportalEffect() {
+    TeleportalEffect() {
         super(Outcome.ReturnToHand);
         staticText = "each creature you control can't be blocked this turn";
     }

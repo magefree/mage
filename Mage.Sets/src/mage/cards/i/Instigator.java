@@ -58,7 +58,7 @@ public final class Instigator extends CardImpl {
 
 class InstigatorEffect extends OneShotEffect {
 
-    public InstigatorEffect() {
+    InstigatorEffect() {
         super(Outcome.Detriment);
         staticText = "Creatures target player controls attack this turn if able";
     }

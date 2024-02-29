@@ -47,7 +47,7 @@ public final class ImpulsiveWager extends CardImpl {
 
 class ImpulsiveWagerEffect extends OneShotEffect {
 
-    public ImpulsiveWagerEffect() {
+    ImpulsiveWagerEffect() {
         super(Outcome.Benefit);
         staticText = "If the discarded card was a nonland card, draw two cards. Otherwise, put a bounty counter on target creature";
     }
@@ -65,7 +65,7 @@ class ImpulsiveWagerEffect extends OneShotEffect {
                 List<Card> cards = cost.getCards();
                 if (cards.size() == 1 && cards.get(0).isLand(game)) {
                     Effect effect = new AddCountersTargetEffect(CounterType.BOUNTY.createInstance());
-                    effect.setTargetPointer(getTargetPointer());
+                    effect.setTargetPointer(this.getTargetPointer().copy());
                     effect.apply(game, source);
                 } else {
                     player.drawCards(2, source, game);

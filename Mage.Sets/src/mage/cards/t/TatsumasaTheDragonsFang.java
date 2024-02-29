@@ -59,7 +59,7 @@ public final class TatsumasaTheDragonsFang extends CardImpl {
 
 class TatsumaTheDragonsFangEffect extends OneShotEffect {
 
-    public TatsumaTheDragonsFangEffect() {
+    TatsumaTheDragonsFangEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Create a 5/5 blue Dragon Spirit creature token with flying. " +
                 "Return {this} to the battlefield under its owner's control when that token dies";

@@ -22,7 +22,7 @@ public final class ZombieWizardToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    protected ZombieWizardToken(final ZombieWizardToken token) {
+    private ZombieWizardToken(final ZombieWizardToken token) {
         super(token);
     }
 

@@ -46,7 +46,7 @@ public final class Grindclock extends CardImpl {
 
 class GrindclockEffect extends OneShotEffect {
 
-    public GrindclockEffect() {
+    GrindclockEffect() {
         super(Outcome.Detriment);
         staticText = "Target player mills X cards, where X is the number of charge counters on {this}";
     }

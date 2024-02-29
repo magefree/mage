@@ -88,7 +88,7 @@ class KaitoDancingShadowEffect extends OneShotEffect {
         if (watcher == null) {
             return false;
         }
-        Player damagedPlayer = game.getPlayer(targetPointer.getFirst(game, source));
+        Player damagedPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
         if (controller == null || damagedPlayer == null) {
             return false;
@@ -114,7 +114,7 @@ class KaitoDancingShadowEffect extends OneShotEffect {
 
 class KaitoDancingShadowIncreaseLoyaltyUseEffect extends ContinuousEffectImpl {
 
-    public KaitoDancingShadowIncreaseLoyaltyUseEffect() {
+    KaitoDancingShadowIncreaseLoyaltyUseEffect() {
         super(Duration.EndOfTurn, Layer.RulesEffects, SubLayer.NA, Outcome.Benefit);
     }
 
@@ -143,4 +143,3 @@ class KaitoDancingShadowIncreaseLoyaltyUseEffect extends ContinuousEffectImpl {
         return layer == Layer.RulesEffects;
     }
 }
-

@@ -49,7 +49,7 @@ public final class KarnsTouch extends CardImpl {
 
 class KarnsTouchEffect extends ContinuousEffectImpl {
 
-    public KarnsTouchEffect() {
+    KarnsTouchEffect() {
         super(Duration.EndOfTurn, Outcome.BecomeCreature);
         staticText = "Target noncreature artifact becomes an artifact creature with power and toughness each equal to its mana value until end of turn";
     }

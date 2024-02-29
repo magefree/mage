@@ -57,7 +57,7 @@ public final class BrandOfIllOmen extends CardImpl {
 
 class BrandOfIllOmenEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public BrandOfIllOmenEffect() {
+    BrandOfIllOmenEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "Enchanted creature's controller can't cast creature spells";
     }

@@ -48,7 +48,7 @@ public final class Lifeline extends CardImpl {
 
 class LifelineEffect extends OneShotEffect {
 
-    public LifelineEffect() {
+    LifelineEffect() {
         super(Outcome.PutCardInPlay);
         this.staticText = "";
     }

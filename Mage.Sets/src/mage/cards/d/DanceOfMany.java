@@ -71,7 +71,7 @@ public final class DanceOfMany extends CardImpl {
 
 class DanceOfManyCreateTokenCopyEffect extends OneShotEffect {
 
-    public DanceOfManyCreateTokenCopyEffect() {
+    DanceOfManyCreateTokenCopyEffect() {
         super(Outcome.PutCreatureInPlay);
         staticText = "create a token that's a copy of target nontoken creature";
     }
@@ -115,7 +115,7 @@ class DanceOfManyCreateTokenCopyEffect extends OneShotEffect {
 
 class DanceOfManyExileTokenEffect extends OneShotEffect {
 
-    public DanceOfManyExileTokenEffect() {
+    DanceOfManyExileTokenEffect() {
         super(Outcome.Removal);
         staticText = "exile the token";
     }

@@ -58,7 +58,7 @@ public final class MeriekeRiBerit extends CardImpl {
 
 class MeriekeRiBeritCreateDelayedTriggerEffect extends OneShotEffect {
 
-    public MeriekeRiBeritCreateDelayedTriggerEffect() {
+    MeriekeRiBeritCreateDelayedTriggerEffect() {
         super(Outcome.Detriment);
         this.staticText = "When {this} leaves the battlefield or becomes untapped, destroy that creature. It can't be regenerated";
     }

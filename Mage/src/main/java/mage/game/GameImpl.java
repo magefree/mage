@@ -15,6 +15,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.PreventionEffectData;
 import mage.abilities.effects.common.CopyEffect;
 import mage.abilities.effects.common.InfoEffect;
+import mage.abilities.effects.common.continuous.BecomesFaceDownCreatureEffect;
 import mage.abilities.effects.keyword.FinalityCounterEffect;
 import mage.abilities.effects.keyword.ShieldCounterEffect;
 import mage.abilities.effects.keyword.StunCounterEffect;
@@ -77,6 +78,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 /**
@@ -98,6 +100,8 @@ public abstract class GameImpl implements Game {
     private transient Player losingPlayer; // temporary data, used in AI simulations
     protected boolean simulation = false;
     protected boolean checkPlayableState = false;
+
+    protected AtomicInteger totalErrorsCount = new AtomicInteger(); // for debug only: error stats
 
     protected final UUID id;
 
@@ -180,6 +184,7 @@ public abstract class GameImpl implements Game {
         this.checkPlayableState = game.checkPlayableState;
 
         this.id = game.id;
+        this.totalErrorsCount.set(game.totalErrorsCount.get());
 
         this.ready = game.ready;
         //this.tableEventSource = game.tableEventSource; // client-server part, not need on copy/simulations
@@ -284,6 +289,8 @@ public abstract class GameImpl implements Game {
     public void loadCards(Set<Card> cards, UUID ownerId) {
         for (Card card : cards) {
             if (card instanceof PermanentCard) {
+                // TODO: impossible use case, can be deleted?
+                // trying to put permanent card to battlefield
                 card = ((PermanentCard) card).getCard();
             }
 
@@ -1331,7 +1338,11 @@ public abstract class GameImpl implements Game {
             for (UUID playerId : state.getPlayerList(startingPlayerId)) {
                 for (DeckCardInfo info : gameOptions.perPlayerEmblemCards) {
                     Card card = EmblemOfCard.cardFromDeckInfo(info);
-                    addEmblem(new EmblemOfCard(card), card, playerId);
+                    Emblem emblem = new EmblemOfCard(card);
+                    addEmblem(emblem, card, playerId);
+                    for (Ability ability : emblem.getAbilities()) {
+                        state.addAbility(ability, null, emblem);
+                    }
                 }
             }
         }
@@ -1339,7 +1350,11 @@ public abstract class GameImpl implements Game {
         if (!gameOptions.globalEmblemCards.isEmpty()) {
             for (DeckCardInfo info : gameOptions.globalEmblemCards) {
                 Card card = EmblemOfCard.cardFromDeckInfo(info);
-                addEmblem(new EmblemOfCard(card), card, startingPlayerId);
+                Emblem emblem = new EmblemOfCard(card);
+                addEmblem(emblem, card, startingPlayerId);
+                for (Ability ability : emblem.getAbilities()) {
+                    state.addAbility(ability, null, emblem);
+                }
             }
         }
     }
@@ -1374,7 +1389,6 @@ public abstract class GameImpl implements Game {
     public void initPlayerDefaultWatchers(UUID playerId) {
         PlayerDamagedBySourceWatcher playerDamagedBySourceWatcher = new PlayerDamagedBySourceWatcher();
         playerDamagedBySourceWatcher.setControllerId(playerId);
-
         getState().addWatcher(playerDamagedBySourceWatcher);
 
         BloodthirstWatcher bloodthirstWatcher = new BloodthirstWatcher();
@@ -1588,9 +1602,9 @@ public abstract class GameImpl implements Game {
 
     @Override
     public void playPriority(UUID activePlayerId, boolean resuming) {
-        int errorContinueCounter = 0;
+        int priorityErrorsCount = 0;
         infiniteLoopCounter = 0;
-        int rollbackBookmark = 0;
+        int rollbackBookmarkOnPriorityStart = 0;
         clearAllBookmarks();
         try {
             applyEffects();
@@ -1605,8 +1619,8 @@ public abstract class GameImpl implements Game {
                 Player player;
                 while (!isPaused() && !checkIfGameIsOver()) {
                     try {
-                        if (rollbackBookmark == 0) {
-                            rollbackBookmark = bookmarkState();
+                        if (rollbackBookmarkOnPriorityStart == 0) {
+                            rollbackBookmarkOnPriorityStart = bookmarkState();
                         }
                         player = getPlayer(state.getPlayerList().get());
                         state.setPriorityPlayerId(player.getId());
@@ -1656,39 +1670,44 @@ public abstract class GameImpl implements Game {
                                 return;
                             }
                         }
-                    } catch (Exception ex) {
-                        logger.fatal("Game exception gameId: " + getId(), ex);
-                        if ((ex instanceof NullPointerException)
-                                && errorContinueCounter == 0 && ex.getStackTrace() != null) {
-                            logger.fatal(ex.getStackTrace());
-                        }
-                        this.fireErrorEvent("Game exception occurred: ", ex);
+                    } catch (Exception e) {
+                        // INNER error - can continue to execute
+                        this.totalErrorsCount.incrementAndGet();
+                        logger.fatal("Game error: " + getId() + " - " + this, e);
+                        this.fireErrorEvent("Game error occurred: ", e);
 
-                        // stack info
-                        String info = this.getStack().stream().map(MageObject::toString).collect(Collectors.joining("\n"));
-                        logger.info(String.format("\nStack before error %d: \n%s\n", this.getStack().size(), info));
+                        // additional info
+                        logger.info("---");
+                        logger.info("Game state on error: " + this);
+                        String info = this.getStack()
+                                .stream()
+                                .map(o -> "* " + o.toString())
+                                .collect(Collectors.joining("\n"));
+                        logger.info(String.format("Stack on error %d: \n%s\n", this.getStack().size(), info));
+                        logger.info("---");
 
                         // too many errors - end game
-                        if (errorContinueCounter > 15) {
-                            throw new MageException("Iterated player priority after game exception too often, game ends! Last error:\n "
-                                    + ex.getMessage());
+                        if (priorityErrorsCount > 15) {
+                            throw new MageException("Too many errors, game will be end. Last error: " + e);
                         }
 
-                        // rollback game to prev state
-                        GameState restoredState = restoreState(rollbackBookmark, "Game exception: " + ex.getMessage());
-                        rollbackBookmark = 0;
-
+                        // rollback to prev state
+                        GameState restoredState = restoreState(rollbackBookmarkOnPriorityStart, "Game error: " + e);
+                        rollbackBookmarkOnPriorityStart = 0;
                         if (restoredState != null) {
-                            this.informPlayers(String.format("Auto-restored to %s due game error: %s", restoredState, ex.getMessage()));
+                            this.informPlayers(String.format("Auto-restored to %s due game error: %s", restoredState, e));
                         } else {
-                            logger.error("Can't auto-restore to prev state.");
+                            logger.error("Can't auto-restore to prev state");
                         }
 
+                        // count total errors
                         Player activePlayer = this.getPlayer(getActivePlayerId());
                         if (activePlayer != null && !activePlayer.isTestsMode()) {
-                            errorContinueCounter++;
+                            // real game - try to continue
+                            priorityErrorsCount++;
                             continue;
                         } else {
+                            // tests - try to fail fast
                             throw new MageException(UNIT_TESTS_ERROR_TEXT);
                         }
                     } finally {
@@ -1697,14 +1716,15 @@ public abstract class GameImpl implements Game {
                     state.getPlayerList().getNext();
                 }
             }
-        } catch (Exception ex) {
-            logger.fatal("Game exception " + ex.getMessage(), ex);
-            this.fireErrorEvent("Game exception occurred: ", ex);
+        } catch (Exception e) {
+            // OUTER error - game must end (too many errors also come here)
+            this.totalErrorsCount.incrementAndGet();
+            logger.fatal("Game end on critical error: " + e, e);
+            this.fireErrorEvent("Game end on critical error: " + e, e);
             this.end();
 
-            // don't catch game errors in unit tests, so test framework can process it (example: errors in AI simulations)
-            if (ex.getMessage() != null && ex.getMessage().equals(UNIT_TESTS_ERROR_TEXT)) {
-                //this.getContinuousEffects().traceContinuousEffects(this);
+            // re-raise error in unit tests, so framework can catch it (example: errors in AI simulations)
+            if (UNIT_TESTS_ERROR_TEXT.equals(e.getMessage())) {
                 throw new IllegalStateException(UNIT_TESTS_ERROR_TEXT);
             }
         } finally {
@@ -1714,7 +1734,6 @@ public abstract class GameImpl implements Game {
         }
     }
 
-    //resolve top StackObject
     protected void resolve() {
         StackObject top = null;
         try {
@@ -1978,14 +1997,13 @@ public abstract class GameImpl implements Game {
 
             // workaround to find real copyable characteristics of transformed/facedown/etc permanents
 
-            if (copyFromPermanent.isMorphed()
-                    || copyFromPermanent.isManifested()
-                    || copyFromPermanent.isFaceDown(this)) {
-                MorphAbility.setPermanentToFaceDownCreature(newBluePrint, copyFromPermanent, this);
+            BecomesFaceDownCreatureEffect.FaceDownType faceDownType = BecomesFaceDownCreatureEffect.findFaceDownType(this, copyFromPermanent);
+            if (faceDownType != null) {
+                BecomesFaceDownCreatureEffect.makeFaceDownObject(this, null, newBluePrint, faceDownType, null);
             }
             newBluePrint.assignNewId();
             if (copyFromPermanent.isTransformed()) {
-                TransformAbility.transformPermanent(newBluePrint,this, source);
+                TransformAbility.transformPermanent(newBluePrint, this, source);
             }
             if (copyFromPermanent.isPrototyped()) {
                 Abilities<Ability> abilities = copyFromPermanent.getAbilities();
@@ -2003,11 +2021,10 @@ public abstract class GameImpl implements Game {
         // save original copy link (handle copy of copies too)
         newBluePrint.setCopy(true, (copyFromPermanent.getCopyFrom() != null ? copyFromPermanent.getCopyFrom() : copyFromPermanent));
 
-        CopyEffect newEffect = new CopyEffect(duration, newBluePrint, copyToPermanentId);
-        newEffect.newId();
-        newEffect.setApplier(applier);
+        CopyEffect newCopyEffect = new CopyEffect(duration, newBluePrint, copyToPermanentId);
+        newCopyEffect.setApplier(applier);
         Ability newAbility = source.copy();
-        newEffect.init(newAbility, this);
+        newCopyEffect.init(newAbility, this);
 
         // If there are already copy effects with duration = Custom to the same object, remove the existing effects because they no longer have any effect
         if (duration == Duration.Custom) {
@@ -2021,7 +2038,7 @@ public abstract class GameImpl implements Game {
                 }
             }
         }
-        state.addEffect(newEffect, newAbility);
+        state.addEffect(newCopyEffect, newAbility);
         return newBluePrint;
     }
 
@@ -3495,6 +3512,11 @@ public abstract class GameImpl implements Game {
     }
 
     @Override
+    public int getTotalErrorsCount() {
+        return this.totalErrorsCount.get();
+    }
+
+    @Override
     public void cheat(UUID ownerId, Map<Zone, String> commands) {
         if (commands != null) {
             Player player = getPlayer(ownerId);
@@ -3515,15 +3537,9 @@ public abstract class GameImpl implements Game {
                             if (command.getValue().contains("life:")) {
                                 String[] s = command.getValue().split(":");
                                 if (s.length == 2) {
-                                    try {
-                                        int amount = Integer.parseInt(s[1]);
-                                        player.setLife(amount, this, null);
-                                        logger.debug("Setting player's life: ");
-                                    } catch (NumberFormatException e) {
-                                        logger.fatal("error setting life", e);
-                                    }
+                                    int amount = Integer.parseInt(s[1]);
+                                    player.setLife(amount, this, null);
                                 }
-
                             }
                             break;
                     }
@@ -3541,24 +3557,33 @@ public abstract class GameImpl implements Game {
     public Map<MageObjectReference, Map<String, Object>> getPermanentCostsTags() {
         return state.getPermanentCostsTags();
     }
+
     @Override
-    public void storePermanentCostsTags(MageObjectReference permanentMOR, Ability source){
+    public void storePermanentCostsTags(MageObjectReference permanentMOR, Ability source) {
         state.storePermanentCostsTags(permanentMOR, source);
     }
 
     @Override
-    public void cheat(UUID ownerId, List<Card> library, List<Card> hand, List<PermanentCard> battlefield, List<Card> graveyard, List<Card> command) {
+    public void cheat(UUID ownerId, List<Card> library, List<Card> hand, List<PutToBattlefieldInfo> battlefield, List<Card> graveyard, List<Card> command, List<Card> exiled) {
         // fake test ability for triggers and events
         Ability fakeSourceAbilityTemplate = new SimpleStaticAbility(Zone.OUTSIDE, new InfoEffect("adding testing cards"));
         fakeSourceAbilityTemplate.setControllerId(ownerId);
 
         Player player = getPlayer(ownerId);
         if (player != null) {
+            // init cards
             loadCards(ownerId, library);
             loadCards(ownerId, hand);
-            loadCards(ownerId, battlefield);
+            loadCards(ownerId, battlefield
+                    .stream()
+                    .map(PutToBattlefieldInfo::getCard)
+                    .collect(Collectors.toList())
+            );
             loadCards(ownerId, graveyard);
             loadCards(ownerId, command);
+            loadCards(ownerId, exiled);
+
+            // move cards to zones
 
             for (Card card : library) {
                 player.getLibrary().putOnTop(card, this);
@@ -3584,10 +3609,15 @@ public abstract class GameImpl implements Game {
                 throw new IllegalArgumentException("Command zone supports in commander test games");
             }
 
-            for (PermanentCard permanentCard : battlefield) {
+            for (Card card : exiled) {
+                card.setZone(Zone.EXILED, this);
+                getExile().add(card);
+            }
+
+            for (PutToBattlefieldInfo info : battlefield) {
                 Ability fakeSourceAbility = fakeSourceAbilityTemplate.copy();
-                fakeSourceAbility.setSourceId(permanentCard.getId());
-                CardUtil.putCardOntoBattlefieldWithEffects(fakeSourceAbility, this, permanentCard, player);
+                fakeSourceAbility.setSourceId(info.getCard().getId());
+                CardUtil.putCardOntoBattlefieldWithEffects(fakeSourceAbility, this, info.getCard(), player, info.isTapped());
             }
 
             applyEffects();
@@ -3972,7 +4002,8 @@ public abstract class GameImpl implements Game {
                 .append(this.getGameType().toString())
                 .append("; ").append(CardUtil.getTurnInfo(this))
                 .append("; active: ").append((activePayer == null ? "none" : activePayer.getName()))
-                .append("; stack: ").append(this.getStack().toString());
+                .append("; stack: ").append(this.getStack().toString())
+                .append(this.getState().isGameOver() ? "; FINISHED: " + this.getWinner() : "");
         return sb.toString();
     }
 }

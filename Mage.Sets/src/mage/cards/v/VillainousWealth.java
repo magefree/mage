@@ -45,7 +45,7 @@ public final class VillainousWealth extends CardImpl {
 
 class VillainousWealthEffect extends OneShotEffect {
 
-    public VillainousWealthEffect() {
+    VillainousWealthEffect() {
         super(Outcome.PlayForFree);
         this.staticText = "Target opponent exiles the top X cards of their library. "
                 + "You may cast any number of spells with mana value X "
@@ -64,7 +64,7 @@ class VillainousWealthEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Player opponent = game.getPlayer(targetPointer.getFirst(game, source));
+        Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
         int xValue = source.getManaCostsToPay().getX();
         if (controller == null || opponent == null || xValue < 1) {
             return false;

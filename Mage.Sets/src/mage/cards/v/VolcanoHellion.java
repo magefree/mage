@@ -52,7 +52,7 @@ public final class VolcanoHellion extends CardImpl {
 
 class VolcanoHellionEffect extends OneShotEffect {
 
-    public VolcanoHellionEffect() {
+    VolcanoHellionEffect() {
         super(Outcome.Damage);
         this.staticText = "it deals an amount of damage of your choice to you and target creature. The damage can't be prevented";
     }

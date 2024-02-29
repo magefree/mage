@@ -91,8 +91,11 @@ class Vault101BirthdayPartyEffect extends OneShotEffect {
             return false;
         }
         Cards cards = new CardsImpl();
-        cards.addAllCards(player.getHand().getCards(filter, game));
-        cards.addAllCards(player.getGraveyard().getCards(filter, game));
+        cards.addAllCards(player.getHand().getCards(filter, source.getControllerId(), source, game));
+        cards.addAllCards(player.getGraveyard().getCards(filter, source.getControllerId(), source, game));
+        if (cards.isEmpty()) {
+            return false;
+        }
         TargetCard targetCard = new TargetCard(0, 1, Zone.ALL, filter);
         targetCard.withNotTarget(true);
         player.choose(outcome, cards, targetCard, source, game);
@@ -103,7 +106,7 @@ class Vault101BirthdayPartyEffect extends OneShotEffect {
         player.moveCards(card, Zone.BATTLEFIELD, source, game);
         Permanent equipment = game.getPermanent(card.getId());
         if (equipment == null || !equipment.hasSubtype(SubType.EQUIPMENT, game)) {
-            return false;
+            return true;
         }
         TargetPermanent targetPermanent = new TargetControlledCreaturePermanent(0, 1);
         targetCard.withNotTarget(true);

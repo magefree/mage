@@ -50,7 +50,7 @@ public final class ThranTurbine extends CardImpl {
 
 class ThranTurbineEffect extends OneShotEffect {
 
-    public ThranTurbineEffect() {
+    ThranTurbineEffect() {
         super(Outcome.Benefit);
         staticText = "add {C}{C}. You can't spend this mana to cast spells";
     }
@@ -66,7 +66,7 @@ class ThranTurbineEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
 
         if (player != null) {
             new AddConditionalColorlessManaEffect(2, new ThranTurbineManaBuilder()).apply(game, source);

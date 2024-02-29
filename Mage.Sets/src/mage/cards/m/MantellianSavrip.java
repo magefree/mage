@@ -48,7 +48,7 @@ public final class MantellianSavrip extends CardImpl {
 
 class MantellianSavripRestrictionEffect extends RestrictionEffect {
 
-    public MantellianSavripRestrictionEffect() {
+    MantellianSavripRestrictionEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "Creatures with power less than {this}'s power can't block it";
     }

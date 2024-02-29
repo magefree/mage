@@ -98,7 +98,7 @@ class SatyrFiredancerTriggeredAbility extends TriggeredAbilityImpl {
 
 class SatyrFiredancerDamageEffect extends OneShotEffect {
 
-    public SatyrFiredancerDamageEffect() {
+    SatyrFiredancerDamageEffect() {
         super(Outcome.Damage);
         this.staticText = "{this} deals that much damage to target creature that player controls";
     }

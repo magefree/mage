@@ -24,7 +24,7 @@ public final class InvasionPlans extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
 
         // All creatures block each turn if able. 
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BlocksIfAbleAllEffect(StaticFilters.FILTER_PERMANENT_CREATURES)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BlocksIfAbleAllEffect(StaticFilters.FILTER_PERMANENT_ALL_CREATURES)));
         // The attacking player chooses how each creature blocks each turn.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new InvasionPlansEffect()));
     }
@@ -41,7 +41,7 @@ public final class InvasionPlans extends CardImpl {
 
 class InvasionPlansEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public InvasionPlansEffect() {
+    InvasionPlansEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, false, false);
         staticText = "The attacking player chooses how each creature blocks each combat";
     }

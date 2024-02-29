@@ -1,20 +1,14 @@
 package mage.cards.g;
 
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
+import mage.abilities.effects.common.SacrificeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.filter.StaticFilters;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.target.Target;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.targetpointer.SecondTargetPointer;
 
 import java.util.UUID;
 
@@ -31,7 +25,8 @@ public final class GraveExchange extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
 
         // Target player sacrifices a creature.
-        this.getSpellAbility().addEffect(new GraveExchangeEffect());
+        this.getSpellAbility().addEffect(new SacrificeEffect(StaticFilters.FILTER_PERMANENT_CREATURE, 1, "Target player")
+                .setTargetPointer(new SecondTargetPointer()));
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
@@ -42,41 +37,5 @@ public final class GraveExchange extends CardImpl {
     @Override
     public GraveExchange copy() {
         return new GraveExchange(this);
-    }
-}
-
-class GraveExchangeEffect extends OneShotEffect {
-
-    public GraveExchangeEffect() {
-        super(Outcome.Sacrifice);
-        this.staticText = "Target player sacrifices a creature";
-    }
-
-    private GraveExchangeEffect(final GraveExchangeEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public GraveExchangeEffect copy() {
-        return new GraveExchangeEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getTargets().get(1).getFirstTarget());
-        if (player == null) {
-            return false;
-        }
-
-        Target target = new TargetControlledCreaturePermanent();
-        target.withNotTarget(true);
-        if (target.canChoose(player.getId(), source, game)
-                && player.choose(Outcome.Sacrifice, target, source, game)) {
-            Permanent permanent = game.getPermanent(target.getFirstTarget());
-            if (permanent != null) {
-                return permanent.sacrifice(source, game);
-            }
-        }
-        return false;
     }
 }

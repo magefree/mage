@@ -64,7 +64,7 @@ public final class ErtaisFamiliar extends CardImpl {
 
 class ErtaisFamiliarReplacementEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public ErtaisFamiliarReplacementEffect() {
+    ErtaisFamiliarReplacementEffect() {
         super(Duration.UntilYourNextUpkeepStep, Outcome.Neutral);
         staticText = "until your next upkeep, {this} can't phase out";
     }

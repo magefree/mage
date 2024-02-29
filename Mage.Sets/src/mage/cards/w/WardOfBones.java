@@ -48,7 +48,7 @@ public final class WardOfBones extends CardImpl {
 
 class WardOfBonesEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public WardOfBonesEffect() {
+    WardOfBonesEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Each opponent who controls more creatures than you can't cast creature spells. "
                 + "The same is true for artifacts and enchantments.<br><br>"

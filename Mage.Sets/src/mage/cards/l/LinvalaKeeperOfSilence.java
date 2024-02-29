@@ -45,7 +45,7 @@ public final class LinvalaKeeperOfSilence extends CardImpl {
 
 class LinvalaKeeperOfSilenceCantActivateEffect extends RestrictionEffect {
 
-    public LinvalaKeeperOfSilenceCantActivateEffect() {
+    LinvalaKeeperOfSilenceCantActivateEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "Activated abilities of creatures your opponents control can't be activated";
     }

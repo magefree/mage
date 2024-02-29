@@ -1,20 +1,14 @@
-
 package mage.abilities.keyword;
 
-import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.OneShotEffect;
-import mage.constants.Outcome;
+import mage.abilities.effects.common.SacrificeEffect;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledPermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.players.Player;
-import mage.target.Target;
-import mage.target.common.TargetControlledPermanent;
+import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
-import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -29,16 +23,17 @@ import java.util.UUID;
  */
 public class AnnihilatorAbility extends TriggeredAbilityImpl {
 
-    int count;
+    String rule;
 
     public AnnihilatorAbility(int count) {
-        super(Zone.BATTLEFIELD, new AnnihilatorEffect(count), false);
-        this.count = count;
+        super(Zone.BATTLEFIELD, new SacrificeEffect(StaticFilters.FILTER_CONTROLLED_PERMANENTS, count, ""), false);
+        this.rule = "Annihilator " + count + " <i>(Whenever this creature attacks, defending player sacrifices "
+                + (count == 1 ? "a permanent" : CardUtil.numberToText(count) + " permanents") + ".)</i>";
     }
 
     protected AnnihilatorAbility(final AnnihilatorAbility ability) {
         super(ability);
-        this.count = ability.count;
+        this.rule = ability.rule;
     }
 
     @Override
@@ -52,9 +47,7 @@ public class AnnihilatorAbility extends TriggeredAbilityImpl {
             UUID defendingPlayerId = game.getCombat().getDefendingPlayerId(sourceId, game);
             if (defendingPlayerId != null) {
                 // the id has to be set here because the source can be leave battlefield
-                getEffects().forEach((effect) -> {
-                    effect.setValue("defendingPlayerId", defendingPlayerId);
-                });
+                getEffects().setTargetPointer(new FixedTarget(defendingPlayerId));
                 return true;
             }
         }
@@ -63,62 +56,12 @@ public class AnnihilatorAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Annihilator " + count + " <i>(Whenever this creature attacks, defending player sacrifices "
-                + (count == 1 ? "a permanent" : CardUtil.numberToText(count) + " permanents") + ".)</i>";
+        return rule;
     }
 
     @Override
     public AnnihilatorAbility copy() {
         return new AnnihilatorAbility(this);
-    }
-
-}
-
-class AnnihilatorEffect extends OneShotEffect {
-
-    private final int count;
-
-    AnnihilatorEffect(int count) {
-        super(Outcome.Sacrifice);
-        this.count = count;
-    }
-
-    AnnihilatorEffect(AnnihilatorEffect effect) {
-        super(effect);
-        this.count = effect.count;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        UUID defendingPlayerId = (UUID) getValue("defendingPlayerId");
-        Player player = null;
-        if (defendingPlayerId != null) {
-            player = game.getPlayer(defendingPlayerId);
-        }
-        if (player != null) {
-            int amount = Math.min(count, game.getBattlefield().countAll(new FilterControlledPermanent(), player.getId(), game));
-            if (amount > 0) {
-                Target target = new TargetControlledPermanent(amount, amount, new FilterControlledPermanent(), true);
-                if (target.canChoose(player.getId(), source, game)) {
-                    while (player.canRespond()
-                            && target.canChoose(player.getId(), source, game)
-                            && !target.isChosen()) {
-                        player.choose(Outcome.Sacrifice, target, source, game);
-                    }
-                    target.getTargets().stream()
-                            .map(game::getPermanent)
-                            .filter(Objects::nonNull)
-                            .forEach(permanent -> permanent.sacrifice(source, game));
-                }
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public AnnihilatorEffect copy() {
-        return new AnnihilatorEffect(this);
     }
 
 }

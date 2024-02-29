@@ -55,7 +55,7 @@ public final class RelicOfProgenitus extends CardImpl {
 
 class RelicOfProgenitusEffect extends OneShotEffect {
 
-    public RelicOfProgenitusEffect() {
+    RelicOfProgenitusEffect() {
         super(Outcome.Exile);
         this.staticText = "Target player exiles a card from their graveyard";
     }

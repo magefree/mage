@@ -86,7 +86,7 @@ class SatoruUmezawaTriggeredAbility extends TriggeredAbilityImpl {
 
 class SatoruUmezawaEffect extends ContinuousEffectImpl {
 
-    public SatoruUmezawaEffect() {
+    SatoruUmezawaEffect() {
         super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         this.staticText = "each creature card in your hand has ninjutsu {2}{U}{B}";
     }

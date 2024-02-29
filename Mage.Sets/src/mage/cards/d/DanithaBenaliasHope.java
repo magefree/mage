@@ -59,9 +59,9 @@ public final class DanithaBenaliasHope extends CardImpl {
 
 class DanithaBenaliasHopeEffect extends OneShotEffect {
 
-    public DanithaBenaliasHopeEffect() {
+    DanithaBenaliasHopeEffect() {
         super(Outcome.PutCardInPlay);
-        this.staticText = "put an Aura or Equipment card from your hand or graveyard onto the battlefield attached to Danitha";
+        this.staticText = "you may put an Aura or Equipment card from your hand or graveyard onto the battlefield attached to {this}";
     }
 
     private DanithaBenaliasHopeEffect(final DanithaBenaliasHopeEffect effect) {
@@ -88,9 +88,12 @@ class DanithaBenaliasHopeEffect extends OneShotEffect {
                 SubType.EQUIPMENT.getPredicate()
         ));
         Cards cards = new CardsImpl();
-        cards.addAllCards(controller.getHand().getCards(filter, game));
-        cards.addAllCards(controller.getGraveyard().getCards(filter, game));
-        TargetCard target = new TargetCard(Zone.ALL, filter);
+        cards.addAllCards(controller.getHand().getCards(filter, source.getControllerId(), source, game));
+        cards.addAllCards(controller.getGraveyard().getCards(filter, source.getControllerId(), source, game));
+        if (cards.isEmpty()) {
+            return true;
+        }
+        TargetCard target = new TargetCard(0, 1, Zone.ALL, filter);
         target.withNotTarget(true);
         target.withChooseHint("to attach to " + sourcePermanentName);
         controller.choose(outcome, cards, target, source, game);

@@ -81,7 +81,7 @@ class IsolationCellTriggeredAbility extends TriggeredAbilityImpl {
 
 class IsolationCellEffect extends OneShotEffect {
 
-    public IsolationCellEffect() {
+    IsolationCellEffect() {
         super(Outcome.Neutral);
         this.staticText = "that player loses 2 life unless they pay {2}";
     }
@@ -97,7 +97,7 @@ class IsolationCellEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (player != null) {
             Cost cost = ManaUtil.createManaCost(2, false);
             if (!cost.pay(source, game, source, player.getId(), false)) {

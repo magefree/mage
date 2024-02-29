@@ -18,6 +18,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetSacrifice;
 import mage.target.targetpointer.TargetPointer;
 import mage.watchers.common.DamagedPlayerThisCombatWatcher;
 
@@ -74,11 +75,7 @@ class DescendantsFurySacrificeCost extends CostImpl implements SacrificeCost {
         if (watcher == null) {
             return false;
         }
-        TargetPointer targetPointer = source.getEffects().get(0).getTargetPointer();
-        if (targetPointer == null) {
-            return false;
-        }
-        Player damagedPlayer = game.getPlayer(targetPointer.getFirst(game, source));
+        Player damagedPlayer = game.getPlayer(source.getEffects().get(0).getTargetPointer().getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
         if (controller == null || damagedPlayer == null) {
             return false;
@@ -88,7 +85,7 @@ class DescendantsFurySacrificeCost extends CostImpl implements SacrificeCost {
         filter.add(new PermanentReferenceInCollectionPredicate(
                 watcher.getPermanents(controller.getId(), damagedPlayer.getId())));
 
-        TargetControlledPermanent target = new TargetControlledPermanent(0, 1, filter, true);
+        TargetSacrifice target = new TargetSacrifice(0, 1, filter);
 
         if (!controller.choose(Outcome.Sacrifice, target, source, game)) {
             return false;
@@ -113,11 +110,7 @@ class DescendantsFurySacrificeCost extends CostImpl implements SacrificeCost {
         if (watcher == null) {
             return false;
         }
-        TargetPointer targetPointer = source.getEffects().get(0).getTargetPointer();
-        if (targetPointer == null) {
-            return false;
-        }
-        Player damagedPlayer = game.getPlayer(targetPointer.getFirst(game, source));
+        Player damagedPlayer = game.getPlayer(source.getEffects().get(0).getTargetPointer().getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
         if (controller == null || damagedPlayer == null) {
             return false;

@@ -54,7 +54,7 @@ public final class FeralContest extends CardImpl {
 
 class FeralContestEffect extends RequirementEffect {
 
-    public FeralContestEffect() {
+    FeralContestEffect() {
         this(Duration.EndOfTurn);
     }
 

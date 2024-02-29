@@ -56,7 +56,7 @@ public final class VanishIntoMemory extends CardImpl {
 
 class VanishIntoMemoryEffect extends OneShotEffect {
 
-    public VanishIntoMemoryEffect() {
+    VanishIntoMemoryEffect() {
         super(Outcome.Detriment);
         staticText = "Exile target creature. You draw cards equal to that creature's power. At the beginning of your next upkeep, return that card to the battlefield under its owner's control. If you do, discard cards equal to that creature's toughness";
     }
@@ -95,7 +95,7 @@ class VanishIntoMemoryEffect extends OneShotEffect {
 
 class VanishIntoMemoryReturnFromExileEffect extends OneShotEffect {
 
-    public VanishIntoMemoryReturnFromExileEffect() {
+    VanishIntoMemoryReturnFromExileEffect() {
         super(Outcome.PutCardInPlay);
         staticText = "return that card to the battlefield under its owner's control";
     }
@@ -128,7 +128,7 @@ class VanishIntoMemoryReturnFromExileEffect extends OneShotEffect {
 
 class VanishIntoMemoryEntersBattlefieldEffect extends ReplacementEffectImpl {
 
-    public VanishIntoMemoryEntersBattlefieldEffect() {
+    VanishIntoMemoryEntersBattlefieldEffect() {
         super(Duration.EndOfTurn, Outcome.Discard);
         staticText = "discard cards equal to that creature's toughness.";
     }

@@ -48,7 +48,7 @@ public final class VeneratedTeacher extends CardImpl {
 
 class VeneratedTeacherEffect extends OneShotEffect {
 
-    public VeneratedTeacherEffect() {
+    VeneratedTeacherEffect() {
         super(Outcome.BoostCreature);
         staticText = "put two level counters on each creature you control with level up";
     }

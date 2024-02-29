@@ -56,7 +56,7 @@ public final class Riftsweeper extends CardImpl {
 
 class RiftsweeperEffect extends OneShotEffect {
 
-    public RiftsweeperEffect() {
+    RiftsweeperEffect() {
         super(Outcome.Benefit);
         this.staticText = "choose target face-up exiled card. Its owner shuffles it into their library";
     }
@@ -72,7 +72,7 @@ class RiftsweeperEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card card = game.getCard(targetPointer.getFirst(game, source));
+        Card card = game.getCard(getTargetPointer().getFirst(game, source));
         if (card != null) {
             // remove existing suspend counters
             card.getCounters(game).clear();

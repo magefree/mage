@@ -48,7 +48,7 @@ public final class SqueeTheImmortal extends CardImpl {
 
 class SqueePlayEffect extends AsThoughEffectImpl {
 
-    public SqueePlayEffect() {
+    SqueePlayEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
         staticText = "You may cast {this} from your graveyard or from exile";
     }

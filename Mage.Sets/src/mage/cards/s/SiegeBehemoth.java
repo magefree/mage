@@ -49,7 +49,7 @@ public final class SiegeBehemoth extends CardImpl {
 
 class SiegeBehemothEffect extends AsThoughEffectImpl {
 
-    public SiegeBehemothEffect() {
+    SiegeBehemothEffect() {
         super(AsThoughEffectType.DAMAGE_NOT_BLOCKED, Duration.WhileOnBattlefield, Outcome.Damage);
         this.staticText = "As long as {this} is attacking, for each creature you control, you may have that creature assign its combat damage as though it weren't blocked";
     }

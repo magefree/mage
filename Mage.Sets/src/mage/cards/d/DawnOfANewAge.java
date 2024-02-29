@@ -52,7 +52,7 @@ public final class DawnOfANewAge extends CardImpl {
 
 class DawnOfANewAgeEffect extends OneShotEffect {
 
-    public DawnOfANewAgeEffect() {
+    DawnOfANewAgeEffect() {
         super(Outcome.Sacrifice);
         staticText = "remove a hope counter from {this}. If you do, draw a card. Then if {this} has no hope counters on it, sacrifice it and you gain 4 life";
     }

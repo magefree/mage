@@ -80,7 +80,7 @@ enum SkyfireKirinAdjuster implements TargetAdjuster {
 
 class SkyfireKirinEffect extends OneShotEffect {
 
-    public SkyfireKirinEffect() {
+    SkyfireKirinEffect() {
         super(Outcome.Detriment);
         this.staticText = "you may gain control of target creature with that spell's mana value until end of turn";
     }

@@ -61,7 +61,7 @@ public final class LagomosHandOfHatred extends CardImpl {
 
 class LagomosHandOfHatredEffect extends OneShotEffect {
 
-    public LagomosHandOfHatredEffect() {
+    LagomosHandOfHatredEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "create a 2/1 red Elemental creature token with trample and haste. Sacrifice it at the beginning of the next end step.";
     }

@@ -22,7 +22,7 @@ public final class Raze extends CardImpl {
 
 
         // As an additional cost to cast Raze, sacrifice a land.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledPermanent(1, 1, StaticFilters.FILTER_CONTROLLED_LAND_SHORT_TEXT, true)));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_LAND_SHORT_TEXT));
         // Destroy target land.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetLandPermanent());

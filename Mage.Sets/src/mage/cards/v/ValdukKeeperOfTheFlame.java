@@ -51,7 +51,7 @@ public final class ValdukKeeperOfTheFlame extends CardImpl {
 
 class ValdukKeeperOfTheFlameEffect extends OneShotEffect {
 
-    public ValdukKeeperOfTheFlameEffect() {
+    ValdukKeeperOfTheFlameEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "for each Aura and Equipment attached to {this}, create a 3/1 red Elemental creature token with trample and haste. Exile those tokens at the beginning of the next end step";
     }

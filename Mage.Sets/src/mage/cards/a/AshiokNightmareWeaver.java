@@ -59,7 +59,7 @@ public final class AshiokNightmareWeaver extends CardImpl {
 
 class AshiokNightmareWeaverExileEffect extends OneShotEffect {
 
-    public AshiokNightmareWeaverExileEffect() {
+    AshiokNightmareWeaverExileEffect() {
         super(Outcome.Exile);
         this.staticText = "Exile the top three cards of target opponent's library";
     }
@@ -90,7 +90,7 @@ class AshiokNightmareWeaverExileEffect extends OneShotEffect {
 
 class AshiokNightmareWeaverPutIntoPlayEffect extends OneShotEffect {
 
-    public AshiokNightmareWeaverPutIntoPlayEffect() {
+    AshiokNightmareWeaverPutIntoPlayEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Put a creature card with mana value X exiled with {this} onto the battlefield under your control. That creature is a Nightmare in addition to its other types";
     }
@@ -141,7 +141,7 @@ class AshiokNightmareWeaverPutIntoPlayEffect extends OneShotEffect {
 
 class AshiokNightmareWeaverExileAllEffect extends OneShotEffect {
 
-    public AshiokNightmareWeaverExileAllEffect() {
+    AshiokNightmareWeaverExileAllEffect() {
         super(Outcome.Exile);
         this.staticText = "Exile all cards from all opponents' hands and graveyards";
     }

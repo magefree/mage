@@ -8,6 +8,7 @@ import mage.constants.CardType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetSacrifice;
 
 import java.util.UUID;
 
@@ -23,7 +24,7 @@ public final class BankruptInBlood extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{B}");
 
         // As an additional cost to cast this spell, sacrifice two creatures.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledPermanent(2, filter)));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(2, filter));
 
         // Draw three cards.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(3));

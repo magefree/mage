@@ -217,7 +217,7 @@ public class BestowTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "fused Far // Away");
         addTarget(playerB, "Cyclops of One-Eyed Pass"); // Far
         addTarget(playerB, playerA); // Away
-        addTarget(playerA, "Nyxborn Rollicker");
+        setChoice(playerA, "Nyxborn Rollicker");
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);

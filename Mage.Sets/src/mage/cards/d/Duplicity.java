@@ -63,7 +63,7 @@ public final class Duplicity extends CardImpl {
 
 class DuplicityEffect extends OneShotEffect {
 
-    public DuplicityEffect() {
+    DuplicityEffect() {
         super(Outcome.Exile);
         staticText = "exile the top five cards of your library face down";
     }
@@ -99,7 +99,7 @@ class DuplicityEffect extends OneShotEffect {
 
 class DuplicityExileHandEffect extends OneShotEffect {
 
-    public DuplicityExileHandEffect() {
+    DuplicityExileHandEffect() {
         super(Outcome.Exile);
         staticText = "you may exile all cards from your hand face down. If you do, put all other cards you own exiled with {this} into your hand";
     }

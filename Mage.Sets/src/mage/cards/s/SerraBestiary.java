@@ -66,7 +66,7 @@ public final class SerraBestiary extends CardImpl {
 
 class SerraBestiaryRuleModifyingEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public SerraBestiaryRuleModifyingEffect() {
+    SerraBestiaryRuleModifyingEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = ", and its activated abilities with {T} in their costs can't be activated";
     }

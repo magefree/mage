@@ -76,7 +76,7 @@ public final class ObsidianFireheart extends CardImpl {
 
 class ObsidianFireheartOneShotEffect extends OneShotEffect {
 
-    public ObsidianFireheartOneShotEffect() {
+    ObsidianFireheartOneShotEffect() {
         super(Outcome.Detriment);
     }
 
@@ -124,7 +124,7 @@ class ObsidianFireheartOneShotEffect extends OneShotEffect {
 
 class ObsidianFireheartGainAbilityEffect extends GainAbilityTargetEffect {
 
-    public ObsidianFireheartGainAbilityEffect(Ability ability, Duration duration, String rule) {
+    ObsidianFireheartGainAbilityEffect(Ability ability, Duration duration, String rule) {
         super(ability, duration, rule);
     }
 
@@ -134,7 +134,7 @@ class ObsidianFireheartGainAbilityEffect extends GainAbilityTargetEffect {
 
     @Override
     public boolean isInactive(Ability source, Game game) {
-        Permanent targetLand = game.getPermanent(this.targetPointer.getFirst(game, source));
+        Permanent targetLand = game.getPermanent(this.getTargetPointer().getFirst(game, source));
         if (targetLand != null 
                 && targetLand.getCounters(game).getCount(CounterType.BLAZE) < 1) {
             return true;

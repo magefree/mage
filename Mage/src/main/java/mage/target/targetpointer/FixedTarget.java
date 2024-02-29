@@ -16,10 +16,11 @@ import java.util.UUID;
 public class FixedTarget extends TargetPointerImpl {
 
     private final UUID targetId;
-    private int zoneChangeCounter;
-    private boolean initialized;
+    private int zoneChangeCounter = 0;
 
     /**
+     * Dynamic ZCC (not recommended)
+     * <p>
      * Use this best only to target to a player or spells on the stack. Try to
      * avoid this method to set the target to a specific card or permanent if
      * possible. Because the zoneChangeCounter is not set immediately, it can be
@@ -32,7 +33,6 @@ public class FixedTarget extends TargetPointerImpl {
     public FixedTarget(UUID target) {
         super();
         this.targetId = target;
-        this.initialized = false;
     }
 
     public FixedTarget(MageObjectReference mor) {
@@ -40,7 +40,9 @@ public class FixedTarget extends TargetPointerImpl {
     }
 
     /**
-     * Target counter is immediatly initialised with current zoneChangeCounter
+     * Static ZCC
+     * <p>
+     * Target counter is immediately initialised with current zoneChangeCounter
      * value from the GameState Sets fixed the currect zoneChangeCounter
      *
      * @param card used to get the objectId
@@ -50,10 +52,13 @@ public class FixedTarget extends TargetPointerImpl {
         super();
         this.targetId = card.getId();
         this.zoneChangeCounter = card.getZoneChangeCounter(game);
-        this.initialized = true;
+
+        this.setInitialized(); // no need dynamic init
     }
 
     /**
+     * Static ZCC
+     * <p>
      * Target counter is immediately initialized with current zoneChangeCounter
      * value from the given permanent
      *
@@ -65,6 +70,8 @@ public class FixedTarget extends TargetPointerImpl {
     }
 
     /**
+     * Static ZCC
+     * <p>
      * Use this if you already want to fix the target object to the known zone
      * now (otherwise the zone will be set if the ability triggers or not at
      * all) If not initialized, the object of the current zone then will be
@@ -76,11 +83,14 @@ public class FixedTarget extends TargetPointerImpl {
     public FixedTarget(UUID targetId, int zoneChangeCounter) {
         super();
         this.targetId = targetId;
-        this.initialized = true;
         this.zoneChangeCounter = zoneChangeCounter;
+
+        this.setInitialized(); // no need dynamic init
     }
 
     /**
+     * Static ZCC
+     * <p>
      * Use this to set the target to exactly the zone the target is currently in
      *
      * @param targetId
@@ -89,8 +99,9 @@ public class FixedTarget extends TargetPointerImpl {
     public FixedTarget(UUID targetId, Game game) {
         super();
         this.targetId = targetId;
-        this.initialized = true;
         this.zoneChangeCounter = game.getState().getZoneChangeCounter(targetId);
+
+        this.setInitialized(); // no need dynamic init
     }
 
     protected FixedTarget(final FixedTarget targetPointer) {
@@ -98,15 +109,16 @@ public class FixedTarget extends TargetPointerImpl {
 
         this.targetId = targetPointer.targetId;
         this.zoneChangeCounter = targetPointer.zoneChangeCounter;
-        this.initialized = targetPointer.initialized;
     }
 
     @Override
     public void init(Game game, Ability source) {
-        if (!initialized) {
-            initialized = true;
-            this.zoneChangeCounter = game.getState().getZoneChangeCounter(targetId);
+        if (isInitialized()) {
+            return;
         }
+        setInitialized();
+
+        this.zoneChangeCounter = game.getState().getZoneChangeCounter(targetId);
     }
 
     /**
@@ -159,12 +171,6 @@ public class FixedTarget extends TargetPointerImpl {
 
     public int getZoneChangeCounter() {
         return zoneChangeCounter;
-    }
-
-    @Override
-    public FixedTarget getFixedTarget(Game game, Ability source) {
-        init(game, source);
-        return this;
     }
 
     @Override

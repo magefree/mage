@@ -2,7 +2,6 @@ package mage.abilities.effects.common.counter;
 
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
@@ -12,7 +11,6 @@ import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.util.CardUtil;
 
 /**
  * @author North
@@ -20,7 +18,7 @@ import mage.util.CardUtil;
 public class AddCountersAllEffect extends OneShotEffect {
 
     private final Counter counter;
-    private DynamicValue amount;
+    private final DynamicValue amount;
     private final FilterPermanent filter;
 
     public AddCountersAllEffect(Counter counter, FilterPermanent filter) {
@@ -50,7 +48,7 @@ public class AddCountersAllEffect extends OneShotEffect {
             if (counter != null) {
                 for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
                     Counter newCounter = counter.copy();
-                    int calculated = amount.calculate(game, source, this); // 0 -- you must use default couner
+                    int calculated = amount.calculate(game, source, this); // 0 -- you must use default counter
                     if (calculated < 0) {
                         continue;
                     } else if (calculated == 0) {
@@ -62,9 +60,9 @@ public class AddCountersAllEffect extends OneShotEffect {
                     }
 
                     permanent.addCounters(newCounter, source.getControllerId(), source, game);
-                    if (!game.isSimulation()) {
+                    if (!game.isSimulation() && newCounter.getCount() > 0) {
                         game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " puts " + newCounter.getCount() + ' ' + newCounter.getName()
-                                + " counter on " + permanent.getLogName());
+                                + (newCounter.getCount() == 1 ? " counter" : " counters") + " on " + permanent.getLogName());
                     }
                 }
             }

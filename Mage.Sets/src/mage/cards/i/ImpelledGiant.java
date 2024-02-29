@@ -112,7 +112,7 @@ class ImpelledGiantCost extends CostImpl {
 
 class ImpelledGiantBoostEffect extends OneShotEffect {
 
-    public ImpelledGiantBoostEffect() {
+    ImpelledGiantBoostEffect() {
         super(Outcome.BoostCreature);
         staticText = "{this} gets +X/+0 until end of turn, where X is the power of the creature tapped this way";
     }

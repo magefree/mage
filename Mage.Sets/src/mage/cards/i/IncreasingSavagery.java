@@ -45,7 +45,7 @@ public final class IncreasingSavagery extends CardImpl {
 
 class IncreasingSavageryEffect extends OneShotEffect {
 
-    public IncreasingSavageryEffect() {
+    IncreasingSavageryEffect() {
         super(Outcome.BoostCreature);
         staticText = "Put five +1/+1 counters on target creature. If this spell was cast from a graveyard, put ten +1/+1 counters on that creature instead";
     }
@@ -62,7 +62,7 @@ class IncreasingSavageryEffect extends OneShotEffect {
             if (spell.getFromZone() == Zone.GRAVEYARD) {
                 amount = 10;
             }
-            Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
+            Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
             if (permanent != null) {
                 permanent.addCounters(CounterType.P1P1.createInstance(amount), source.getControllerId(), source, game);
             }

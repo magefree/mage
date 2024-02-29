@@ -2,19 +2,41 @@ package org.mage.test.cards.single.inv;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Ignore;
+import mage.util.CardUtil;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author JayDi85
  */
-
 public class ManaMazeTest extends CardTestPlayerBase {
 
+    @Test(expected = StackOverflowError.class)
+    public void test_DeepCopy_WithSelfReference() {
+        // stack overflow bug: https://github.com/magefree/mage/issues/11572
+        // proof of self ref reason for stack overflow
+
+        // list
+        List<String> sourceList = new ArrayList<>(Arrays.asList("val1", "val2", "val3"));
+        List<String> copyList = CardUtil.deepCopyObject(sourceList);
+        Assert.assertNotSame(sourceList, copyList);
+        Assert.assertEquals(sourceList.size(), copyList.size());
+        Assert.assertEquals(sourceList.toString(), copyList.toString());
+
+        // list with self ref
+        List<List<Object>> sourceObjectList = new ArrayList<>();
+        sourceObjectList.add(new ArrayList<>(Arrays.asList("val1", "val2", "val3")));
+        sourceObjectList.add(new ArrayList<>(Arrays.asList(sourceObjectList)));
+        CardUtil.deepCopyObject(sourceObjectList);
+    }
+
     @Test
-    @Ignore // TODO: enable after deep copy fix
-    public void test_DeepCopyWithWatcherAndSelfReference() {
+    public void test_DeepCopy_WatcherWithSelfReference() {
         // stack overflow bug: https://github.com/magefree/mage/issues/11572
         // card's watcher can have spell's ref to itself, so deep copy must be able to process it
 

@@ -81,7 +81,7 @@ enum FinaleOfPromiseAdjuster implements TargetAdjuster {
 
 class FinaleOfPromiseEffect extends OneShotEffect {
 
-    public FinaleOfPromiseEffect() {
+    FinaleOfPromiseEffect() {
         super(Outcome.PlayForFree);
         this.staticText = "You may cast up to one target instant card and/or up to one target sorcery card from your graveyard "
                 + "each with mana value X or less without paying their mana costs. If a card cast this way would "

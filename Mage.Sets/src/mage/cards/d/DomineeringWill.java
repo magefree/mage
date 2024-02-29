@@ -58,7 +58,7 @@ public final class DomineeringWill extends CardImpl {
 
 class DomineeringWillEffect extends OneShotEffect {
 
-    public DomineeringWillEffect() {
+    DomineeringWillEffect() {
         super(Outcome.Benefit);
         staticText = "Target player gains control of up to three target nonattacking creatures until end of turn. Untap those creatures. They block this turn if able";
     }

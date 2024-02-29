@@ -60,7 +60,7 @@ public class Combat implements Serializable, Copyable<Combat> {
 
     protected List<CombatGroup> groups = new ArrayList<>();
     protected Map<UUID, CombatGroup> blockingGroups = new HashMap<>();
-    // player and planeswalker ids
+    // all possible defenders (players, planeswalkers or battle)
     protected Set<UUID> defenders = new HashSet<>();
     // how many creatures attack defending player
     protected Map<UUID, Set<UUID>> numberCreaturesDefenderAttackedBy = new HashMap<>();
@@ -115,7 +115,7 @@ public class Combat implements Serializable, Copyable<Combat> {
     }
 
     /**
-     * Get all possible defender (players and planeswalkers) That does not mean
+     * Get all possible defender (players, planeswalkers and battles) That does not mean
      * necessarily mean that they are really attacked
      *
      * @return
@@ -447,13 +447,18 @@ public class Combat implements Serializable, Copyable<Combat> {
         game.informPlayers(sb.toString());
     }
 
+    /**
+     * Force "must attack" creatures to attack
+     */
     protected void checkAttackRequirements(Player player, Game game) {
         //20101001 - 508.1d
         for (Permanent creature : player.getAvailableAttackers(game)) {
+
+            // find must attack targets
             boolean mustAttack = false;
-            Set<UUID> defendersForcedToAttack = new HashSet<>();
+            Set<UUID> defendersForcedToAttack = new HashSet<>(); // contains only forced defenders
             if (creature.getGoadingPlayers().isEmpty()) {
-                // check if a creature has to attack
+                // must attack effects (not goad)
                 for (Map.Entry<RequirementEffect, Set<Ability>> entry : game.getContinuousEffects().getApplicableRequirementEffects(creature, false, game).entrySet()) {
                     RequirementEffect effect = entry.getKey();
                     if (!effect.mustAttack(game)) {
@@ -466,6 +471,8 @@ public class Combat implements Serializable, Copyable<Combat> {
                         if (defenderId != null) {
                             // creature is not forced to attack players that are no longer in the game
                             if (game.getPermanentOrLKIBattlefield(defenderId) == null && game.getPlayer(defenderId).hasLost()) {
+                                // TODO: must attack bugged (not goad)? Must use not LKI here or must check controller's lost too?
+                                // TODO: multiple must attack bugged (not goad)? It skip ALL other effects on outdated one of the effects (must continue instead?)
                                 return;
                             } else if (defenders.contains(defenderId)) {
                                 defendersForcedToAttack.add(defenderId);
@@ -475,9 +482,10 @@ public class Combat implements Serializable, Copyable<Combat> {
                     }
                 }
             } else {
+                // goad effects
                 // if creature is goaded then we start with assumption that it needs to attack any player
                 mustAttack = true;
-                // Filter out the planeswalkers
+                // filter only players
                 defendersForcedToAttack.addAll(defenders.stream()
                         .map(game::getPlayer)
                         .filter(Objects::nonNull)
@@ -487,9 +495,17 @@ public class Combat implements Serializable, Copyable<Combat> {
             if (!mustAttack) {
                 continue;
             }
-            // check which defenders the forced to attack creature can attack without paying a cost
-            Set<UUID> defendersCostlessAttackable = new HashSet<>(defenders);
+
+            // If a goaded creature can't attack for any reason (such as being tapped or having come under
+            // that player's control that turn), then it doesn't attack. If there's a cost associated with having
+            // it attack, its controller isn't forced to pay that cost, so it doesn't have to attack in that case
+            // either.
+            // (2020-04-17)
+
+            // remove costable targets from require list
+            Set<UUID> defendersCostlessAttackable = new HashSet<>(defenders); // contains all defenders (forced + own)
             for (UUID defenderId : defenders) {
+                // filter must pay to attack
                 if (game.getContinuousEffects().checkIfThereArePayCostToAttackBlockEffects(
                         new DeclareAttackerEvent(defenderId, creature.getId(), creature.getControllerId()), game
                 )) {
@@ -497,6 +513,8 @@ public class Combat implements Serializable, Copyable<Combat> {
                     defendersForcedToAttack.remove(defenderId);
                     continue;
                 }
+
+                // filter can't attack
                 for (Map.Entry<RestrictionEffect, Set<Ability>> entry : game.getContinuousEffects().getApplicableRestrictionEffects(creature, game).entrySet()) {
                     if (entry
                             .getValue()
@@ -511,17 +529,34 @@ public class Combat implements Serializable, Copyable<Combat> {
                     break;
                 }
             }
-            // Remove all the players which have goaded the attacker
+
+            // If a goaded creature doesn't meet any of the above exceptions and can attack,
+            // it must attack a player other than a player who goaded it if able.
+            // It the creature can't attack any of those players but could otherwise attack,
+            // it must attack an opposing planeswalker (controlled by any opponent) or a player who goaded it.
+            // (2020-04-17)
+
+            // filter goaded players
             defendersForcedToAttack.removeAll(creature.getGoadingPlayers());
 
-            // force attack only if a defender can be attacked without paying a cost
+            // if no free and valid targets then skip forced attack at all
             if (defendersCostlessAttackable.isEmpty()) {
                 continue;
             }
+
+            // OK, creature can be forced to attack something here
+
+            // TODO: bugged, can't attack own planeswalker on restricted opponent? Must store defendersToChooseFrom?
             creaturesForcedToAttack.put(creature.getId(), defendersForcedToAttack);
-            // No need to attack a special defender
+
+            // If a creature you control has been goaded by multiple opponents, it must attack one of your opponents
+            // who hasn't goaded it. If a creature you control has been goaded by each of your opponents,
+            // you choose which opponent it attacks.
+            // (2020-04-17)
             Set<UUID> defendersToChooseFrom = defendersForcedToAttack.isEmpty() ? defendersCostlessAttackable : defendersForcedToAttack;
+
             if (defendersToChooseFrom.size() == 1) {
+                // TODO: add game log here about forced to attack?
                 player.declareAttacker(creature.getId(), defendersToChooseFrom.iterator().next(), game, false);
                 continue;
             }
@@ -1271,9 +1306,12 @@ public class Combat implements Serializable, Copyable<Combat> {
     }
 
     public void setDefenders(Game game) {
+        // player + planeswalkers
         for (UUID playerId : getAttackablePlayers(game)) {
-            addDefender(playerId, game);
+            addDefendersFromPlayer(playerId, game);
         }
+
+        // battles
         for (Permanent permanent : game.getBattlefield().getActivePermanents(filterBattles, attackingPlayerId, game)) {
             defenders.add(permanent.getId());
         }
@@ -1316,22 +1354,31 @@ public class Combat implements Serializable, Copyable<Combat> {
         return attackablePlayers;
     }
 
-    private void addDefender(UUID defenderId, Game game) {
-        if (!defenders.contains(defenderId)) {
+    private void addDefendersFromPlayer(UUID playerId, Game game) {
+        if (!defenders.contains(playerId)) {
+
+            // workaround to find max number of attackers, example: Mirri, Weatherlight Duelist
+            // TODO: must research - is Integer.MIN_VALUE logic works fine on maxAttackers usage
             if (maxAttackers < Integer.MAX_VALUE) {
-                Player defendingPlayer = game.getPlayer(defenderId);
+                Player defendingPlayer = game.getPlayer(playerId);
                 if (defendingPlayer != null) {
                     if (defendingPlayer.getMaxAttackedBy() == Integer.MAX_VALUE) {
                         maxAttackers = Integer.MAX_VALUE;
                     } else if (maxAttackers == Integer.MIN_VALUE) {
+                        // first player
                         maxAttackers = defendingPlayer.getMaxAttackedBy();
                     } else {
+                        // second+ player
                         maxAttackers += defendingPlayer.getMaxAttackedBy();
                     }
                 }
             }
-            defenders.add(defenderId);
-            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_PLANESWALKER, defenderId, game)) {
+
+            // player
+            defenders.add(playerId);
+
+            // planeswalkers
+            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_PLANESWALKER, playerId, game)) {
                 defenders.add(permanent.getId());
             }
         }

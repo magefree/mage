@@ -51,7 +51,7 @@ public final class BrineHag extends CardImpl {
 
 class BrineHagEffect extends OneShotEffect {
 
-    public BrineHagEffect() {
+    BrineHagEffect() {
         super(Outcome.Detriment);
         this.staticText = "change the base power and toughness of all creatures that dealt damage to it this turn to 0/2";
     }

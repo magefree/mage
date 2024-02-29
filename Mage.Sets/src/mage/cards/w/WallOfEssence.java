@@ -86,7 +86,7 @@ class WallOfEssenceTriggeredAbility extends TriggeredAbilityImpl {
 
 class PiousWarriorGainLifeEffect extends OneShotEffect {
 
-    public PiousWarriorGainLifeEffect() {
+    PiousWarriorGainLifeEffect() {
         super(Outcome.GainLife);
         staticText = "you gain that much life";
     }

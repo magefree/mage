@@ -40,7 +40,7 @@ public final class Thunderheads extends CardImpl {
 
 class ThunderheadsEffect extends OneShotEffect {
 
-    public ThunderheadsEffect() {
+    ThunderheadsEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Create a 3/3 blue Weird creature token with defender and flying. Exile it at the beginning of the next end step.";
     }

@@ -51,7 +51,7 @@ public final class DebtToTheKami extends CardImpl {
 
 class DebtToTheKamiExileCreatureEffect extends OneShotEffect {
 
-    public DebtToTheKamiExileCreatureEffect() {
+    DebtToTheKamiExileCreatureEffect() {
         super(Outcome.Exile);
         this.staticText = "Target opponent exiles a creature they control";
     }

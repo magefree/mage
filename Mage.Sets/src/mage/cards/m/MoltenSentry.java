@@ -49,7 +49,7 @@ public final class MoltenSentry extends CardImpl {
 
 class MoltenSentryEffect extends OneShotEffect {
 
-    public MoltenSentryEffect() {
+    MoltenSentryEffect() {
         super(Outcome.Damage);
     }
 

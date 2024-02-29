@@ -8,7 +8,7 @@ import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.ExileTopXMayPlayUntilEndOfTurnEffect;
+import mage.abilities.effects.common.ExileTopXMayPlayUntilEffect;
 import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.continuous.SetBasePowerSourceEffect;
 import mage.cards.Card;
@@ -52,7 +52,8 @@ public final class BellBorcaSpectralSergeant extends CardImpl {
 
         // At the beginning of your upkeep, exile the top card of your library. You may play that card this turn.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new ExileTopXMayPlayUntilEndOfTurnEffect(1), TargetController.YOU, false
+                new ExileTopXMayPlayUntilEffect(1, Duration.EndOfTurn),
+                TargetController.YOU, false
         ), new BellBorcaSpectralSergeantWatcher());
     }
 

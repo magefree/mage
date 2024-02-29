@@ -139,6 +139,12 @@ public final class StaticFilters {
         FILTER_CARD_ARTIFACT_FROM_YOUR_GRAVEYARD.setLockedFilter(true);
     }
 
+    public static final FilterCreatureCard FILTER_CARD_CREATURE_A_GRAVEYARD = new FilterCreatureCard("creature card from a graveyard");
+
+    static {
+        FILTER_CARD_CREATURE_A_GRAVEYARD.setLockedFilter(true);
+    }
+
     public static final FilterNoncreatureCard FILTER_CARD_NON_CREATURE = new FilterNoncreatureCard();
 
     static {
@@ -546,12 +552,6 @@ public final class StaticFilters {
     static {
         FILTER_OPPONENTS_PERMANENT_NON_LAND.add(TargetController.OPPONENT.getControllerPredicate());
         FILTER_OPPONENTS_PERMANENT_NON_LAND.setLockedFilter(true);
-    }
-
-    public static final FilterNoncreaturePermanent FILTER_PERMANENT_NON_CREATURE = new FilterNoncreaturePermanent();
-
-    static {
-        FILTER_PERMANENT_NON_CREATURE.setLockedFilter(true);
     }
 
     public static final FilterCreaturePermanent FILTER_OPPONENTS_PERMANENT_CREATURE = new FilterOpponentsCreaturePermanent();
@@ -1234,6 +1234,12 @@ public final class StaticFilters {
 
     static {
         FILTER_CONTROLLED_FOOD.setLockedFilter(true);
+    }
+
+    public static final FilterControlledPermanent FILTER_CONTROLLED_CLUE = new FilterControlledPermanent(SubType.CLUE, "a Clue");
+
+    static {
+        FILTER_CONTROLLED_CLUE.setLockedFilter(true);
     }
 
 }

@@ -62,7 +62,7 @@ public final class OrissSamiteGuardian extends CardImpl {
 
 class OrissSamiteGuardianEffect extends OneShotEffect {
 
-    public OrissSamiteGuardianEffect() {
+    OrissSamiteGuardianEffect() {
         super(Outcome.Benefit);
         this.staticText = "Target player can't cast spells this turn, and creatures that player controls can't attack this turn";
     }

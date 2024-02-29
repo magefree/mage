@@ -51,7 +51,7 @@ public final class BloodSun extends CardImpl {
 
 class BloodSunEffect extends ContinuousEffectImpl {
 
-    public BloodSunEffect(Duration duration) {
+    BloodSunEffect(Duration duration) {
         super(duration, Outcome.LoseAbility);
         staticText = "all lands lose all abilities except mana abilities";
     }

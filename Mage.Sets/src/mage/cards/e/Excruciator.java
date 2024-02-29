@@ -45,7 +45,7 @@ public final class Excruciator extends CardImpl {
 
 class ExcruciatorEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public ExcruciatorEffect() {
+    ExcruciatorEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Damage that would be dealt by {this} can't be prevented";
     }

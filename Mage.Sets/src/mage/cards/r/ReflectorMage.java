@@ -57,7 +57,7 @@ public final class ReflectorMage extends CardImpl {
 
 class ReflectorMageEffect extends OneShotEffect {
 
-    public ReflectorMageEffect() {
+    ReflectorMageEffect() {
         super(Outcome.Benefit);
         this.staticText = "return target creature an opponent controls to its owner's hand. That creature's owner can't cast spells with the same name as that creature until your next turn";
     }

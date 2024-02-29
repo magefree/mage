@@ -22,7 +22,7 @@ public class CantAttackBlockTargetEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return permanent.getId().equals(targetPointer.getFirst(game, source));
+        return permanent.getId().equals(getTargetPointer().getFirst(game, source));
     }
 
     @Override
@@ -45,12 +45,7 @@ public class CantAttackBlockTargetEffect extends RestrictionEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        StringBuilder sb = new StringBuilder("target ");
-        if (mode.getTargets().isEmpty()) {
-            sb.append("creature");
-        } else {
-            sb.append(mode.getTargets().get(0).getTargetName());
-        }
+        StringBuilder sb = new StringBuilder(getTargetPointer().describeTargets(mode.getTargets(), "that creature"));
         sb.append(" can't attack or block ");
         if (duration == Duration.EndOfTurn) {
             sb.append("this turn");

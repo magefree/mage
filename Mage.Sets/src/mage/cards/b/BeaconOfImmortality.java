@@ -42,7 +42,7 @@ public final class BeaconOfImmortality extends CardImpl {
 
 class BeaconOfImmortalityEffect extends OneShotEffect {
 
-    public BeaconOfImmortalityEffect() {
+    BeaconOfImmortalityEffect() {
         super(Outcome.GainLife);
         this.staticText = "Double target player's life total";
     }

@@ -49,7 +49,7 @@ public final class AutumnWillow extends CardImpl {
 
 class AutumnWillowEffect extends AsThoughEffectImpl {
 
-    public AutumnWillowEffect() {
+    AutumnWillowEffect() {
         super(AsThoughEffectType.SHROUD, Duration.EndOfTurn, Outcome.Benefit);
         staticText = "Until end of turn, Autumn Willow can be the target of spells and abilities controlled by target player as though it didn't have shroud";
     }

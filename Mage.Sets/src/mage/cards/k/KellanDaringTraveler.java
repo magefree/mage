@@ -99,7 +99,7 @@ enum KellanDynamicValue implements DynamicValue {
 
 class KellanDaringTravelerEffect extends OneShotEffect {
 
-    public KellanDaringTravelerEffect() {
+    KellanDaringTravelerEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "reveal the top card of your library. "
                 + "If it's a creature card with mana value 3 or less, put it into your hand. "

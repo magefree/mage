@@ -19,6 +19,7 @@ import mage.interfaces.callback.ClientCallback;
 import mage.interfaces.callback.ClientCallbackType;
 import mage.remote.ActionData;
 import mage.remote.Session;
+import mage.util.DebugUtil;
 import mage.view.*;
 import mage.view.ChatMessage.MessageType;
 import org.apache.log4j.Logger;
@@ -33,8 +34,6 @@ import java.util.*;
 public class CallbackClientImpl implements CallbackClient {
 
     private static final Logger logger = Logger.getLogger(CallbackClientImpl.class);
-
-    private static final boolean DEBUG_CALLBACK_MESSAGES_LOG = false; // show all callback messages (server commands)
 
     private final MageFrame frame;
     private final Map<ClientCallbackType, Integer> lastMessages;
@@ -71,7 +70,7 @@ public class CallbackClientImpl implements CallbackClient {
         // all GUI related code must be executed in swing thread
         SwingUtilities.invokeLater(() -> {
             try {
-                if (DEBUG_CALLBACK_MESSAGES_LOG) {
+                if (DebugUtil.NETWORK_SHOW_CLIENT_CALLBACK_MESSAGES_LOG) {
                     logger.info("message " + callback.getMessageId() + " - " + callback.getMethod().getType() + " - " + callback.getMethod());
                 }
 

@@ -33,7 +33,7 @@ public final class MizzixsMastery extends CardImpl {
         // For each card exiled this way, copy it, and you may cast the copy 
         // without paying its mana cost. Exile Mizzix's Mastery.
         this.getSpellAbility().addEffect(new ExileTargetCardCopyAndCastEffect(true).setText(
-                "Exile target card that's an instant or sorcery from your graveyard. For each card exiled this way, copy it, and you may cast the copy without paying its mana cost. Exile Mizzix's Mastery."));
+                "Exile target card that's an instant or sorcery from your graveyard. For each card exiled this way, copy it, and you may cast the copy without paying its mana cost"));
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(
                 new FilterInstantOrSorceryCard("card that's an instant or sorcery from your graveyard")));
         this.getSpellAbility().addEffect(new ExileSpellEffect());
@@ -57,11 +57,11 @@ public final class MizzixsMastery extends CardImpl {
 
 class MizzixsMasteryOverloadEffect extends OneShotEffect {
 
-    public MizzixsMasteryOverloadEffect() {
+    MizzixsMasteryOverloadEffect() {
         super(Outcome.PlayForFree);
         this.staticText = "Exile each card that's an instant or sorcery from "
                 + "your graveyard. For each card exiled this way, copy it, "
-                + "and you may cast the copy without paying its mana cost. Exile {this}";
+                + "and you may cast the copy without paying its mana cost";
     }
 
     private MizzixsMasteryOverloadEffect(final MizzixsMasteryOverloadEffect effect) {

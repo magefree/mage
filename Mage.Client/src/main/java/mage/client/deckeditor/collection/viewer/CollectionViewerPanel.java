@@ -44,7 +44,7 @@ public final class CollectionViewerPanel extends JPanel {
     }
 
     private void reloadFormatCombobox() {
-        DefaultComboBoxModel model = new DefaultComboBoxModel<>(ConstructedFormats.getTypes());
+        DefaultComboBoxModel model = new DefaultComboBoxModel<>(ConstructedFormats.getTypes(true).toArray());
         formats.setModel(model);
         formats.setSelectedItem(ConstructedFormats.getDefault());
     }

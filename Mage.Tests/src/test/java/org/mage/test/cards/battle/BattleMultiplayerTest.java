@@ -9,7 +9,6 @@ import mage.game.FreeForAll;
 import mage.game.Game;
 import mage.game.GameException;
 import mage.game.mulligan.MulliganType;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.FileNotFoundException;
@@ -71,7 +70,6 @@ public class BattleMultiplayerTest extends BattleBaseTest {
         assertCounterCount(belenon, CounterType.DEFENSE, 5 - 2);
     }
 
-    @Ignore // TODO: this test fails randomly and it's not clear exactly why, it works correctly though
     @Test
     public void testAttackBattleBlock() {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);

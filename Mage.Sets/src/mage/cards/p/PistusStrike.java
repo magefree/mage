@@ -50,7 +50,7 @@ public final class PistusStrike extends CardImpl {
 
 class PoisonControllerTargetCreatureEffect extends OneShotEffect {
 
-    public PoisonControllerTargetCreatureEffect() {
+    PoisonControllerTargetCreatureEffect() {
         super(Outcome.Damage);
         staticText = "Its controller gets a poison counter";
     }

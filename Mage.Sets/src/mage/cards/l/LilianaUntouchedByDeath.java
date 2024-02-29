@@ -60,7 +60,7 @@ public final class LilianaUntouchedByDeath extends CardImpl {
 
 class LilianaUntouchedByDeathEffect extends OneShotEffect {
 
-    public LilianaUntouchedByDeathEffect() {
+    LilianaUntouchedByDeathEffect() {
         super(Outcome.Benefit);
         this.staticText = "mill three cards. If at least one of them is a Zombie card, each opponent loses 2 life and you gain 2 life";
     }
@@ -94,7 +94,7 @@ class LilianaUntouchedByDeathEffect extends OneShotEffect {
 
 class LilianaUntouchedByDeathGraveyardEffect extends AsThoughEffectImpl {
 
-    public LilianaUntouchedByDeathGraveyardEffect() {
+    LilianaUntouchedByDeathGraveyardEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
         staticText = "You may cast Zombie cards from your graveyard this turn";
     }

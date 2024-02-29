@@ -58,7 +58,7 @@ public final class EtherealValkyrie extends CardImpl {
 
 class EtherealValkyrieEffect extends OneShotEffect {
 
-    public EtherealValkyrieEffect() {
+    EtherealValkyrieEffect() {
         super(Outcome.Benefit);
         this.staticText = "draw a card, then exile a card from your hand face down. " +
                 "It becomes foretold. " +
@@ -147,7 +147,7 @@ class EtherealValkyrieEffect extends OneShotEffect {
             foretellAbility.setControllerId(exileCard.getOwnerId());
             game.getState().addOtherAbility(exileCard, foretellAbility);
             foretellAbility.activate(game, true);
-            ContinuousEffect effect = foretellAbility.new ForetellAddCostEffect(new MageObjectReference(exileCard, game));
+            ContinuousEffect effect = new ForetellAbility.ForetellAddCostEffect(new MageObjectReference(exileCard, game));
             game.addEffect(effect, copiedSource);
             game.fireEvent(GameEvent.getEvent(GameEvent.EventType.FORETOLD, exileCard.getId(), null, null));
         }

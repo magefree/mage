@@ -26,7 +26,7 @@ public final class TetraviteToken extends TokenImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TetraviteTokenEffect()));
     }
 
-    protected TetraviteToken(final TetraviteToken token) {
+    private TetraviteToken(final TetraviteToken token) {
         super(token);
     }
 

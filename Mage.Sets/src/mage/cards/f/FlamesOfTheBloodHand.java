@@ -42,7 +42,7 @@ public final class FlamesOfTheBloodHand extends CardImpl {
 
 class FlamesOfTheBloodHandReplacementEffect extends ReplacementEffectImpl {
 
-    public FlamesOfTheBloodHandReplacementEffect() {
+    FlamesOfTheBloodHandReplacementEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit);
         staticText = "If that player or that planeswalker's controller would gain life this turn, that player gains no life instead";
     }

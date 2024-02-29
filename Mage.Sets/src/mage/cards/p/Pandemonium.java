@@ -62,7 +62,7 @@ enum PandemoniumAdjuster implements TargetAdjuster {
 
 class PandemoniumEffect extends OneShotEffect {
 
-    public PandemoniumEffect() {
+    PandemoniumEffect() {
         super(Outcome.Benefit);
         this.staticText = "that creature's controller may have it deal damage equal to its power to any target of their choice";
     }

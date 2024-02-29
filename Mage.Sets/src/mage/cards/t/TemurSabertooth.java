@@ -51,7 +51,7 @@ public final class TemurSabertooth extends CardImpl {
 
 class TemurSabertoothEffect extends OneShotEffect {
 
-    public TemurSabertoothEffect() {
+    TemurSabertoothEffect() {
         super(Outcome.Detriment);
         this.staticText = "You may return another creature you control to its owner's hand. If you do, {this} gains indestructible until end of turn";
     }

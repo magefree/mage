@@ -26,6 +26,7 @@ import mage.game.permanent.token.VecnaToken;
 import mage.game.permanent.token.ZombieToken;
 import mage.players.Player;
 import mage.target.TargetPermanent;
+import mage.target.common.TargetSacrifice;
 import mage.watchers.common.PlayerLostLifeWatcher;
 
 import java.util.Arrays;
@@ -144,8 +145,7 @@ class TheBookOfVileDarknessCost extends CostImpl {
             default:
                 break;
         }
-        TargetPermanent target = new TargetPermanent(filter);
-        target.withNotTarget(true);
+        TargetSacrifice target = new TargetSacrifice(filter);
         controller.choose(Outcome.Sacrifice, target, source, game);
         return game.getPermanent(target.getFirstTarget());
     }

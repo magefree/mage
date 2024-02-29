@@ -12,6 +12,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -48,7 +49,7 @@ public final class PillarTombsOfAku extends CardImpl {
 
 class PillarTombsOfAkuEffect extends OneShotEffect {
 
-    public PillarTombsOfAkuEffect() {
+    PillarTombsOfAkuEffect() {
         super(Outcome.Benefit);
         this.staticText = "that player may sacrifice a creature. If that "
                 + "player doesn't, they lose 5 life and you sacrifice {this}";
@@ -70,7 +71,7 @@ class PillarTombsOfAkuEffect extends OneShotEffect {
             return false;
         }
         if (activePlayer.chooseUse(Outcome.Sacrifice, "Sacrifice a creature?", source, game)) {
-            Cost cost = new SacrificeTargetCost(new TargetControlledCreaturePermanent());
+            Cost cost = new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE);
             if (cost.canPay(source, source, activePlayer.getId(), game)
                     && cost.pay(source, game, source, activePlayer.getId(), true)) {
                 return true;

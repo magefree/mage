@@ -57,7 +57,7 @@ public final class HammerJammer extends CardImpl {
 
 class HammerJammerEntersEffect extends EntersBattlefieldWithXCountersEffect {
 
-    public HammerJammerEntersEffect(Counter counter) {
+    HammerJammerEntersEffect(Counter counter) {
         super(counter);
     }
 
@@ -120,7 +120,7 @@ class HammerJammerTriggeredAbility extends TriggeredAbilityImpl {
 
 class HammerJammerEffect extends OneShotEffect {
 
-    public HammerJammerEffect() {
+    HammerJammerEffect() {
         super(Outcome.Benefit);
         this.staticText = "remove all +1/+1 counters from {this}, then put a number of +1/+1 counters on it equal to the result";
     }

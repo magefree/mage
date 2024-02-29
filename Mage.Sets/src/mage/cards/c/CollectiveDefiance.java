@@ -70,7 +70,7 @@ public final class CollectiveDefiance extends CardImpl {
 
 class CollectiveDefianceEffect extends OneShotEffect {
 
-    public CollectiveDefianceEffect() {
+    CollectiveDefianceEffect() {
         super(Outcome.Discard);
         this.staticText = "Target player discards all the cards in their hand, then draws that many cards";
     }
@@ -86,7 +86,7 @@ class CollectiveDefianceEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
+        Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (targetPlayer == null) {
             return false;
         }

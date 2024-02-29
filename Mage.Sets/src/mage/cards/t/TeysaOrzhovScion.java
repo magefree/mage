@@ -46,7 +46,7 @@ public final class TeysaOrzhovScion extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Sacrifice three white creatures: Exile target creature.
-        Ability ability = new SimpleActivatedAbility(new ExileTargetEffect(), new SacrificeTargetCost(new TargetControlledCreaturePermanent(3, 3, filterWhite, true)));
+        Ability ability = new SimpleActivatedAbility(new ExileTargetEffect(), new SacrificeTargetCost(3, filterWhite));
         ability.addTarget(new TargetCreaturePermanent().withChooseHint("to exile"));
         this.addAbility(ability);
 

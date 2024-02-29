@@ -125,7 +125,7 @@ class MarchesaTheBlackRoseEffect extends OneShotEffect {
             Effect effect = new ReturnToBattlefieldUnderYourControlTargetEffect();
             effect.setText("return that card to the battlefield under your control at the beginning of the next end step");
             DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect);
-            delayedAbility.getEffects().get(0).setTargetPointer(getTargetPointer());
+            delayedAbility.getEffects().get(0).setTargetPointer(this.getTargetPointer().copy());
             game.addDelayedTriggeredAbility(delayedAbility, source);
             return true;
         }

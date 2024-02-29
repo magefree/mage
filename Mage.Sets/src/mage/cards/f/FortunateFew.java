@@ -45,7 +45,7 @@ public final class FortunateFew extends CardImpl {
 
 class FortunateFewEffect extends OneShotEffect {
 
-    public FortunateFewEffect() {
+    FortunateFewEffect() {
         super(Outcome.DestroyPermanent);
         staticText = "Choose a nonland permanent you don't control, then each other player chooses a nonland permanent they don't control that hasn't been chosen this way. Destroy all other nonland permanents";
     }

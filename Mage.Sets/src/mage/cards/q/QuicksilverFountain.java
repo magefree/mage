@@ -78,7 +78,7 @@ enum QuicksilverFountainAdjuster implements TargetAdjuster {
 
 class QuicksilverFountainEffect extends OneShotEffect {
 
-    public QuicksilverFountainEffect() {
+    QuicksilverFountainEffect() {
         super(Outcome.Neutral);
         staticText = "that player puts a flood counter on target non-Island land "
                 + "they control of their choice. That land is an Island for as "

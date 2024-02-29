@@ -52,7 +52,7 @@ public final class DakraMystic extends CardImpl {
 
 class DakraMysticEffect extends OneShotEffect {
 
-    public DakraMysticEffect() {
+    DakraMysticEffect() {
         super(Outcome.Detriment);
         this.staticText = "Each player reveals the top card of their library. You may put the revealed cards into their owners' graveyard. If you don't, each player draws a card";
     }

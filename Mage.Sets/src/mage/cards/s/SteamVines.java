@@ -58,7 +58,7 @@ public final class SteamVines extends CardImpl {
 
 class SteamVinesEffect extends OneShotEffect {
 
-    public SteamVinesEffect() {
+    SteamVinesEffect() {
         super(Outcome.Detriment);
         staticText = "destroy it and {this} deals 1 damage to that land's controller. That player attaches {this} to a land of their choice";
     }

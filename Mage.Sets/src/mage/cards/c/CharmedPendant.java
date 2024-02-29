@@ -86,7 +86,7 @@ class CharmedPendantAbility extends ActivatedManaAbilityImpl {
 
 class CharmedPendantManaEffect extends ManaEffect {
 
-    public CharmedPendantManaEffect() {
+    CharmedPendantManaEffect() {
         super();
         staticText = "For each colored mana symbol in the milled card's mana cost, add one mana of that color";
     }

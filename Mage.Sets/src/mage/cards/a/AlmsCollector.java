@@ -50,7 +50,7 @@ public final class AlmsCollector extends CardImpl {
 
 class AlmsCollectorReplacementEffect extends ReplacementEffectImpl {
 
-    public AlmsCollectorReplacementEffect() {
+    AlmsCollectorReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.DrawCard);
         staticText = "If an opponent would draw two or more cards, instead you and that player each draw a card";
     }

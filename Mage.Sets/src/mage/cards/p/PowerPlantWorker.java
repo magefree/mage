@@ -44,7 +44,7 @@ public final class PowerPlantWorker extends CardImpl {
 
 class PowerPlantWorkerEffect extends OneShotEffect {
 
-    public PowerPlantWorkerEffect() {
+    PowerPlantWorkerEffect() {
         super(Outcome.BoostCreature);
         this.staticText = "{this} gets +2/+2 until end of turn. If you control creatures named Mine Worker and Tower Worker, put two +1/+1 counters on {this} instead.";
     }

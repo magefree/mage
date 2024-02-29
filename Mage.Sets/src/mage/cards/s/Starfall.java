@@ -40,7 +40,7 @@ public final class Starfall extends CardImpl {
 
 class StarfallEffect extends OneShotEffect {
 
-    public StarfallEffect() {
+    StarfallEffect() {
         super(Outcome.Damage);
         staticText = "{this} deals 3 damage to target creature. If that creature is an enchantment, {this} deals 3 damage to that creature's controller";
     }

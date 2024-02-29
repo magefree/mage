@@ -82,7 +82,7 @@ class ContainmentConstructTriggeredAbility extends TriggeredAbilityImpl {
 
 class ContainmentConstructEffect extends OneShotEffect {
 
-    public ContainmentConstructEffect() {
+    ContainmentConstructEffect() {
         super(Outcome.Benefit);
         this.staticText = "you may exile that card from your graveyard. If you do, you may play that card this turn";
     }
@@ -98,7 +98,7 @@ class ContainmentConstructEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card discardedCard = game.getCard(targetPointer.getFirst(game, source));
+        Card discardedCard = game.getCard(getTargetPointer().getFirst(game, source));
         Card containmentConstruct = game.getCard(source.getSourceId());
         if (discardedCard != null
                 && containmentConstruct != null) {

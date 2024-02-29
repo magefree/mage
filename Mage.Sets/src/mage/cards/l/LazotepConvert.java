@@ -95,6 +95,7 @@ class LazotepConvertCopyEffect extends OneShotEffect {
         }
         Card modifiedCopy = copyFromCard.copy();
         //Appliers must be applied before CopyEffect, its applier setting is just for copies of copies
+        // TODO: research applier usage, why it here
         applier.apply(game, modifiedCopy, source, source.getSourceId());
         game.addEffect(new CopyEffect(
                 Duration.Custom, modifiedCopy, source.getSourceId()

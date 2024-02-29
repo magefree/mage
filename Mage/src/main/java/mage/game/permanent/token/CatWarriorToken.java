@@ -31,7 +31,7 @@ public final class CatWarriorToken extends TokenImpl {
         this.addAbility(new ForestwalkAbility());
     }
 
-    protected CatWarriorToken(final CatWarriorToken token) {
+    private CatWarriorToken(final CatWarriorToken token) {
         super(token);
     }
 

@@ -20,7 +20,7 @@ public final class NissaSageAnimistToken extends TokenImpl {
         this.cardType.add(CardType.CREATURE);
     }
 
-    protected NissaSageAnimistToken(final NissaSageAnimistToken token) {
+    private NissaSageAnimistToken(final NissaSageAnimistToken token) {
         super(token);
     }
 

@@ -43,7 +43,7 @@ public final class DestructiveDigger extends CardImpl {
                 new DrawCardSourceControllerEffect(1), new GenericManaCost(3)
         );
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        ability.addCost(new SacrificeTargetCost(filter));
         this.addAbility(ability);
     }
 

@@ -44,7 +44,7 @@ public final class ShelteringWord extends CardImpl {
 
 class ShelteringWordEffect extends OneShotEffect {
 
-    public ShelteringWordEffect() {
+    ShelteringWordEffect() {
         super(Outcome.GainLife);
         this.staticText = "You gain life equal to that creature's toughness";
     }

@@ -16,6 +16,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.target.common.TargetControlledPermanent;
 
@@ -37,7 +38,7 @@ public final class FaultRiders extends CardImpl {
         effect.setText("{this} gets +2/+0");
         Ability ability = new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, 
                 effect, 
-                new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledLandPermanent("a land"))));
+                new SacrificeTargetCost(StaticFilters.FILTER_LAND));
         effect = new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("and gains first strike until end of turn");
         ability.addEffect(effect);

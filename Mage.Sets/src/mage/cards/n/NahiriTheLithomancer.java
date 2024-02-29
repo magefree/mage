@@ -8,7 +8,7 @@ import mage.abilities.common.CanBeYourCommanderAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.PutCardFromOneOfTwoZonesOntoBattlefieldEffect;
+import mage.abilities.effects.common.PutCardFromHandOrGraveyardOntoBattlefieldEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -32,7 +32,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public final class NahiriTheLithomancer extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("an Equipment card");
+    private static final FilterCard filter = new FilterCard("Equipment card");
 
     static {
         filter.add(SubType.EQUIPMENT.getPredicate());
@@ -49,7 +49,7 @@ public final class NahiriTheLithomancer extends CardImpl {
         this.addAbility(new LoyaltyAbility(new NahiriTheLithomancerFirstAbilityEffect(), 2));
 
         // -2: You may put an Equipment card from your hand or graveyard onto the battlefield.
-        this.addAbility(new LoyaltyAbility(new PutCardFromOneOfTwoZonesOntoBattlefieldEffect(filter), -2));
+        this.addAbility(new LoyaltyAbility(new PutCardFromHandOrGraveyardOntoBattlefieldEffect(filter, false), -2));
 
         // -10: Create a colorless Equipment artifact token named Stoneforged Blade. It has indestructible, "Equipped creature gets +5/+5 and has double strike," and equip {0}.
         Effect effect = new CreateTokenEffect(new NahiriTheLithomancerEquipmentToken());

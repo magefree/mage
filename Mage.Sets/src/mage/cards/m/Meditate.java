@@ -39,7 +39,7 @@ public final class Meditate extends CardImpl {
 
 class SpipTurnEffect extends OneShotEffect {
 
-    public SpipTurnEffect() {
+    SpipTurnEffect() {
         super(Outcome.Neutral);
         staticText = "You skip your next turn";
     }

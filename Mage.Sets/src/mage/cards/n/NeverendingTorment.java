@@ -48,7 +48,7 @@ public final class NeverendingTorment extends CardImpl {
 
 class NeverendingTormentEffect extends OneShotEffect {
 
-    public NeverendingTormentEffect() {
+    NeverendingTormentEffect() {
         super(Outcome.Benefit);
         staticText = "Search target player's library for X cards, where X is the number of cards in your hand, and exile them. Then that player shuffles";
     }

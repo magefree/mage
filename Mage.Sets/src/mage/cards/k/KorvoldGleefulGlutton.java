@@ -66,7 +66,7 @@ public final class KorvoldGleefulGlutton extends CardImpl {
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance(), PermanentTypesInGraveyardCount.instance, true)
                         .setText("put X +1/+1 counters on {this}"),
                 false
-        );
+        ).withRuleTextReplacement(false);
         combatDamageAbility.addEffect(new DrawCardSourceControllerEffect(PermanentTypesInGraveyardCount.instance).setText("and draw X cards, where X is the number of permanent types among cards in your graveyard"));
         combatDamageAbility.addHint(new ValueHint("Permanent types among cards in your graveyard", PermanentTypesInGraveyardCount.instance));
         this.addAbility(combatDamageAbility);
@@ -100,7 +100,7 @@ class KorvoldGleefulGluttonWatcher extends Watcher {
 
         if (permanent != null) {
             permanent.getCardType(game).forEach(type -> 
-                map.computeIfAbsent(event.getPlayerId(), (key) -> new HashSet<>()).add(type)
+                map.computeIfAbsent(event.getPlayerId(), k -> new HashSet<>()).add(type)
             );
         }
     }
@@ -112,8 +112,8 @@ class KorvoldGleefulGluttonWatcher extends Watcher {
     }
 
     public int getNumberOfTypes(UUID playerId) {
-        return map.computeIfAbsent(playerId, (key) -> new HashSet<>()).size();
-    };
+        return map.computeIfAbsent(playerId, k -> new HashSet<>()).size();
+    }
 }
 
 enum CardTypesAmongSacrificedPermanentsCount implements DynamicValue {

@@ -51,7 +51,7 @@ public final class CraterHellion extends CardImpl {
 
 class CraterHellionEffect extends OneShotEffect {
 
-    public CraterHellionEffect() {
+    CraterHellionEffect() {
         super(Outcome.Damage);
         staticText = "it deals 4 damage to each other creature";
     }

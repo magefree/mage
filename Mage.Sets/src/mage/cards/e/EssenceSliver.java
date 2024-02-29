@@ -87,7 +87,7 @@ class EssenceSliverTriggeredAbility extends TriggeredAbilityImpl {
 
 class EssenceSliverEffect extends OneShotEffect {
 
-    public EssenceSliverEffect() {
+    EssenceSliverEffect() {
         super(Outcome.GainLife);
         this.staticText = "its controller gains that much life";
     }
@@ -103,7 +103,7 @@ class EssenceSliverEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controllerOfSliver = game.getPlayer(targetPointer.getFirst(game, source));
+        Player controllerOfSliver = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (controllerOfSliver != null) {
             int amount = (Integer) getValue("damage");
             if (amount > 0) {

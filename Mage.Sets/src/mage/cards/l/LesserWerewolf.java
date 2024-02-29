@@ -61,7 +61,7 @@ public final class LesserWerewolf extends CardImpl {
 
 class LesserWerewolfEffect extends OneShotEffect {
 
-    public LesserWerewolfEffect() {
+    LesserWerewolfEffect() {
         super(Outcome.Detriment);
         this.staticText = "If {this}'s power is 1 or more, it gets -1/-0 until end of turn and put a -0/-1 counter on target creature blocking or blocked by {this}";
     }
@@ -79,7 +79,7 @@ class LesserWerewolfEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-        Permanent targetPermanent = game.getPermanent(targetPointer.getFirst(game, source)); // must be valid target
+        Permanent targetPermanent = game.getPermanent(getTargetPointer().getFirst(game, source)); // must be valid target
         if (controller == null || sourcePermanent == null || targetPermanent == null) {
             return false;
         }

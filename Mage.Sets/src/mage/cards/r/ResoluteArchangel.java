@@ -49,7 +49,7 @@ public final class ResoluteArchangel extends CardImpl {
 
 class ResoluteArchangelEffect extends OneShotEffect {
 
-    public ResoluteArchangelEffect() {
+    ResoluteArchangelEffect() {
         super(Outcome.Benefit);
         this.staticText = "if your life total is lower than your starting life total, it becomes equal to your starting life total";
     }

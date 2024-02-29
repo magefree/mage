@@ -18,7 +18,7 @@ public class Phyrexian00Token extends TokenImpl {
         toughness = new MageInt(0);
     }
 
-    protected Phyrexian00Token(final Phyrexian00Token token) {
+    private Phyrexian00Token(final Phyrexian00Token token) {
         super(token);
     }
 
@@ -26,4 +26,3 @@ public class Phyrexian00Token extends TokenImpl {
         return new Phyrexian00Token(this);
     }
 }
-

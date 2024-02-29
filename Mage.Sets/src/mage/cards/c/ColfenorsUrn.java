@@ -59,7 +59,7 @@ public final class ColfenorsUrn extends CardImpl {
 
 class ColfenorsUrnEffect extends OneShotEffect {
 
-    public ColfenorsUrnEffect() {
+    ColfenorsUrnEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "If you do, return those cards to the battlefield under their owner's control";
     }

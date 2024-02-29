@@ -55,7 +55,7 @@ public final class VexingShusher extends CardImpl {
 
 class VexingShusherCantCounterTargetEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public VexingShusherCantCounterTargetEffect() {
+    VexingShusherCantCounterTargetEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit);
         staticText = "Target spell can't be countered";
     }
@@ -85,7 +85,7 @@ class VexingShusherCantCounterTargetEffect extends ContinuousRuleModifyingEffect
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return event.getTargetId().equals(targetPointer.getFirst(game, source));
+        return event.getTargetId().equals(getTargetPointer().getFirst(game, source));
     }
 
 }

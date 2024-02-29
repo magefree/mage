@@ -2,7 +2,6 @@ package mage.abilities.effects.common;
 
 import mage.ApprovingObject;
 import mage.abilities.Ability;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.constants.Outcome;
@@ -52,7 +51,7 @@ public class ExileTargetCardCopyAndCastEffect extends OneShotEffect {
         player.moveCards(card, Zone.EXILED, source, game);
         Card cardCopy = game.copyCard(card, source, source.getControllerId());
         if (optional && !player.chooseUse(outcome, "Cast copy of " +
-                card.getName() + " without paying its mana cost?", source, game)) {
+                card.getName() + (this.noMana ? " without paying its mana cost?" : "?" ), source, game)) {
             return true;
         }
         game.getState().setValue("PlayFromNotOwnHandZone" + cardCopy.getId(), Boolean.TRUE);

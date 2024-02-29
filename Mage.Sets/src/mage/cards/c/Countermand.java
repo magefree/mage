@@ -41,7 +41,7 @@ public final class Countermand extends CardImpl {
 
 class CountermandEffect extends OneShotEffect {
 
-    public CountermandEffect() {
+    CountermandEffect() {
         super(Outcome.Detriment);
         staticText = "Counter target spell. Its controller mills four cards.";
     }
@@ -58,7 +58,7 @@ class CountermandEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         boolean countered = false;
-        StackObject stackObject = game.getStack().getStackObject(targetPointer.getFirst(game, source));
+        StackObject stackObject = game.getStack().getStackObject(getTargetPointer().getFirst(game, source));
         if (game.getStack().counter(source.getFirstTarget(), source, game)) {
             countered = true;
         }

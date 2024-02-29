@@ -48,7 +48,7 @@ public final class AncestorDragon extends CardImpl {
 
 class AncestorDragonEffect extends OneShotEffect {
 
-    public AncestorDragonEffect() {
+    AncestorDragonEffect() {
         super(Outcome.GainLife);
         staticText = "you gain 1 life for each attacking creature";
     }

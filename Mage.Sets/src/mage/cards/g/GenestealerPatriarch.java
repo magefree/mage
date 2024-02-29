@@ -70,7 +70,7 @@ public final class GenestealerPatriarch extends CardImpl {
 
 class GenestealerPatriarchCloneEffect extends OneShotEffect {
 
-    public GenestealerPatriarchCloneEffect() {
+    GenestealerPatriarchCloneEffect() {
         super(Outcome.PutCreatureInPlay);
         staticText = "you create a token that's a copy of that creature, " +
                 "except it's a Tyranid in addition to its other types";

@@ -60,7 +60,7 @@ public final class MarchOfRecklessJoy extends CardImpl {
 
 class MarchOfRecklessJoyEffect extends OneShotEffect {
 
-    public MarchOfRecklessJoyEffect() {
+    MarchOfRecklessJoyEffect() {
         super(Outcome.Benefit);
         this.staticText = "exile the top X cards of your library. " +
                 "You may play up to two of those cards until the end of your next turn.";

@@ -26,7 +26,7 @@ public final class MorselTheft extends CardImpl {
         this.subtype.add(SubType.ROGUE);
 
         // Prowl {1}{B}
-        this.addAbility(new ProwlAbility(this, "{1}{B}"));
+        this.addAbility(new ProwlAbility("{1}{B}"));
 
         // Target player loses 3 life and you gain 3 life. If Morsel Theft's prowl cost was paid, draw a card.
         getSpellAbility().addEffect(new LoseLifeTargetEffect(3));

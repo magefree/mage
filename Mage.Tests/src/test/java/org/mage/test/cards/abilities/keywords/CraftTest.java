@@ -2,6 +2,7 @@ package org.mage.test.cards.abilities.keywords;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.counters.CounterType;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
@@ -201,4 +202,77 @@ public class CraftTest extends CardTestPlayerBase {
         assertHandCount(playerA, 0);
     }
 
+    @Test
+    @Ignore // TODO: enable and search code by "int takeMaxTargetsPerChoose"
+    public void test_JadeSeedstonesAndMultiTargets() {
+        // testing multiple addTarget support (possible bug: one ability can take target definition from other ability)
+
+        // Jade Seedstones:
+        // Craft with creature {5}{G}{G} ({5}{G}{G}, Exile this artifact, Exile a creature you control or a
+        // creature card from your graveyard: Return this card transformed under its owner’s control.
+        // Craft only as a sorcery.)
+        // Jadeheart Attendant:
+        // When Jadeheart Attendant enters the battlefield, you gain life equal to the mana value of the
+        // exiled card used to craft it.
+        addCard(Zone.BATTLEFIELD, playerA, "Jade Seedstones"); // {3}{G}
+        addCard(Zone.GRAVEYARD, playerA, "Elvish Mystic"); // {G}
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 8);
+        //
+        addCard(Zone.BATTLEFIELD, playerA, "Llanowar Elves");
+        //
+        // When Bond Beetle enters the battlefield, put a +1/+1 counter on target creature.
+        addCard(Zone.HAND, playerA, "Bond Beetle"); // {G}
+
+        // craft, transform and gain 1 life from exiled elvish
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Craft");
+        addTarget(playerA, "Elvish Mystic");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPermanentCount("after craft", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Jadeheart Attendant", 1);
+        checkLife("after craft", 1, PhaseStep.PRECOMBAT_MAIN, playerA, 20 + 1);
+
+        // cast beetle and add counter to elves
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bond Beetle");
+        addTarget(playerA,"Llanowar Elves");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPermanentCounters("after beetle", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Llanowar Elves", CounterType.P1P1, 1);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+    }
+
+    /**
+     * Ore-Rich Stalactite {1}{R}
+     * Artifact
+     * {T}: Add {R}. Spend this mana only to cast an instant or sorcery spell.
+     * Craft with four or more red instant and/or sorcery cards {3}{R}{R}.
+     */
+    @Test
+    public void test_OreRichStalactite() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1 + 5);
+        addCard(Zone.BATTLEFIELD, playerA, "Ore-Rich Stalactite");
+        addCard(Zone.GRAVEYARD, playerA, "Ancestral Recall");
+        addCard(Zone.GRAVEYARD, playerA, "Arc Lightning");
+        addCard(Zone.GRAVEYARD, playerA, "Lightning Helix");
+        addCard(Zone.GRAVEYARD, playerA, "Lightning Strike");
+        addCard(Zone.HAND, playerA, "Lightning Bolt");
+
+        // Test that craft cannot be activated yet
+        checkPlayableAbility("craft not available", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Craft", false);
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+        waitStackResolved(1, PhaseStep.POSTCOMBAT_MAIN, 1);
+
+        // Test that craft can now be activated
+        checkPlayableAbility("craft available", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Craft", true);
+
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Craft");
+        addTarget(playerA, "Lightning Bolt^Lightning Helix^Lightning Strike^Arc Lightning");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, "Cosmium Catalyst", 1);
+    }
 }

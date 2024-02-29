@@ -48,7 +48,7 @@ public final class RodOfSpanking extends CardImpl {
 
 class RodOfSpankingEffect extends OneShotEffect {
 
-    public RodOfSpankingEffect() {
+    RodOfSpankingEffect() {
         super(Outcome.Benefit);
         staticText = "{this} deals 1 damage to target player. Then untap {this} unless that player says \"Thank you, sir. May I have another?\"";
     }

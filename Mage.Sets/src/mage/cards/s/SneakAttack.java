@@ -6,6 +6,7 @@ import mage.abilities.effects.common.PutCardIntoPlayWithHasteAndSacrificeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.filter.StaticFilters;
 
 import java.util.UUID;
@@ -19,9 +20,9 @@ public final class SneakAttack extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}");
 
         // {R}: You may put a creature card from your hand onto the battlefield. That creature gains haste. Sacrifice the creature at the beginning of the next end step.
-        this.addAbility(new SimpleActivatedAbility(
-                new PutCardIntoPlayWithHasteAndSacrificeEffect(StaticFilters.FILTER_CARD_CREATURE), new ManaCostsImpl<>("{R}")
-        ));
+        this.addAbility(new SimpleActivatedAbility(new PutCardIntoPlayWithHasteAndSacrificeEffect(
+                StaticFilters.FILTER_CARD_CREATURE, Duration.Custom, "That creature", "the creature"
+        ), new ManaCostsImpl<>("{R}")));
     }
 
     private SneakAttack(final SneakAttack card) {
@@ -33,4 +34,3 @@ public final class SneakAttack extends CardImpl {
         return new SneakAttack(this);
     }
 }
-

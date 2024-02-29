@@ -55,7 +55,7 @@ public class KarnsSylex extends CardImpl {
 
 class KarnsSylexEffect extends ContinuousEffectImpl {
 
-    public KarnsSylexEffect() {
+    KarnsSylexEffect() {
         super(Duration.WhileOnBattlefield, Layer.PlayerEffects, SubLayer.NA, Outcome.Detriment);
         staticText = "Players can't pay life to cast spells or to activate abilities that aren't mana abilities";
     }

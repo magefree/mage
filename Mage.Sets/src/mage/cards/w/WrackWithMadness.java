@@ -39,7 +39,7 @@ public final class WrackWithMadness extends CardImpl {
 
 class WrackWithMadnessEffect extends OneShotEffect {
 
-    public WrackWithMadnessEffect() {
+    WrackWithMadnessEffect() {
         super(Outcome.Damage);
         this.staticText = "Target creature deals damage to itself equal to its power";
     }
@@ -55,7 +55,7 @@ class WrackWithMadnessEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
+        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (permanent != null) {
             permanent.damage(permanent.getPower().getValue(), permanent.getId(), source, game, false, true);
             return true;

@@ -85,7 +85,7 @@ class AsLuckWouldHaveItTriggeredAbility extends TriggeredAbilityImpl {
 
 class AsLuckWouldHaveItEffect extends OneShotEffect {
 
-    public AsLuckWouldHaveItEffect() {
+    AsLuckWouldHaveItEffect() {
         super(Outcome.Benefit);
         this.staticText = "put a number of luck counters on {this} equal to the result. Then if there are 100 or more luck counters on {this}, you win the game.";
     }

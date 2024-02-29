@@ -67,7 +67,7 @@ public final class XanatharGuildKingpin extends CardImpl {
 
 class XanatharGuildKingpinRuleModifyingEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public XanatharGuildKingpinRuleModifyingEffect() {
+    XanatharGuildKingpinRuleModifyingEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit);
     }
 
@@ -104,7 +104,7 @@ class XanatharGuildKingpinRuleModifyingEffect extends ContinuousRuleModifyingEff
 
 class XanatharGuildKingpinSpendManaAsAnyColorOneShotEffect extends OneShotEffect {
 
-    public XanatharGuildKingpinSpendManaAsAnyColorOneShotEffect() {
+    XanatharGuildKingpinSpendManaAsAnyColorOneShotEffect() {
         super(Outcome.Benefit);
     }
 

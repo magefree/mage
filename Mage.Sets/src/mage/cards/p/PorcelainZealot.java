@@ -53,7 +53,7 @@ public final class PorcelainZealot extends CardImpl {
 
 class PorcelainZealotEffect extends OneShotEffect {
 
-    public PorcelainZealotEffect() {
+    PorcelainZealotEffect() {
         super(Outcome.Benefit);
         this.staticText = "target creature you control gets +1/+1 until end of turn. If that creature has toxic, instead it gets +2/+2 until end of turn.";
     }

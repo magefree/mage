@@ -43,7 +43,7 @@ public final class Chastise extends CardImpl {
 
 class ChastiseEffect extends OneShotEffect {
 
-    public ChastiseEffect() {
+    ChastiseEffect() {
         super(Outcome.GainLife);
         this.staticText = "You gain life equal to its power";
     }

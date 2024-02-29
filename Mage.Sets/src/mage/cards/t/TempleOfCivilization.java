@@ -35,7 +35,7 @@ public final class TempleOfCivilization extends CardImpl {
         Ability ability = new ActivateIfConditionActivatedAbility(
                 Zone.BATTLEFIELD,
                 new TransformSourceEffect(),
-                new ManaCostsImpl("{2}{W}"),
+                new ManaCostsImpl<>("{2}{W}"),
                 TempleOfCivilizationCondition.instance,
                 TimingRule.SORCERY
         );

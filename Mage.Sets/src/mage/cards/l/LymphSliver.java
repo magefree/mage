@@ -49,7 +49,7 @@ public final class LymphSliver extends CardImpl {
 
 class SliverAbsorbEffect extends PreventionEffectImpl {
 
-    public SliverAbsorbEffect() {
+    SliverAbsorbEffect() {
         super(Duration.WhileOnBattlefield, 1, false, false);
         this.staticText = "Absorb 1 <i>(If a source would deal damage to this creature, prevent 1 of that damage.</i>)";
     }

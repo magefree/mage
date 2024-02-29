@@ -54,7 +54,7 @@ public final class Aetherspouts extends CardImpl {
 */
 class AetherspoutsEffect extends OneShotEffect {
 
-    public AetherspoutsEffect() {
+    AetherspoutsEffect() {
         super(Outcome.Benefit);
         this.staticText = "For each attacking creature, its owner puts it on the top or bottom of their library";
     }

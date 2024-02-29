@@ -46,7 +46,7 @@ public final class CranialArchive extends CardImpl {
 
 class CranialArchiveEffect extends OneShotEffect {
 
-    public CranialArchiveEffect() {
+    CranialArchiveEffect() {
         super(Outcome.Benefit);
         this.staticText = "Target player shuffles their graveyard into their library. Draw a card";
     }

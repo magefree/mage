@@ -20,7 +20,7 @@ public final class PenumbraKavuToken extends TokenImpl {
         toughness = new MageInt(3);
     }
 
-    protected PenumbraKavuToken(final PenumbraKavuToken token) {
+    private PenumbraKavuToken(final PenumbraKavuToken token) {
         super(token);
     }
 

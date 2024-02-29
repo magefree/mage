@@ -47,7 +47,7 @@ public final class InquisitorsSnare extends CardImpl {
 
 class InquisitorsSnareEffect extends OneShotEffect {
 
-    public InquisitorsSnareEffect() {
+    InquisitorsSnareEffect() {
         super(Outcome.Detriment);
         this.staticText = "Prevent all damage target attacking or blocking creature would deal this turn. If that creature is black or red, destroy it";
     }

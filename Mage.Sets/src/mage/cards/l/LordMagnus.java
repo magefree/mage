@@ -48,7 +48,7 @@ public final class LordMagnus extends CardImpl {
 
 class LordMagnusFirstEffect extends AsThoughEffectImpl {
 
-    public LordMagnusFirstEffect() {
+    LordMagnusFirstEffect() {
         super(AsThoughEffectType.BLOCK_PLAINSWALK, Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Creatures with plainswalk can be blocked as though they didn't have plainswalk";
     }
@@ -75,7 +75,7 @@ class LordMagnusFirstEffect extends AsThoughEffectImpl {
 
 class LordMagnusSecondEffect extends AsThoughEffectImpl {
 
-    public LordMagnusSecondEffect() {
+    LordMagnusSecondEffect() {
         super(AsThoughEffectType.BLOCK_FORESTWALK, Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Creatures with forestwalk can be blocked as though they didn't have forestwalk";
     }

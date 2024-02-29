@@ -49,7 +49,7 @@ public final class UrgorosTheEmptyOne extends CardImpl {
 
 class UrgorosTheEmptyOneEffect extends OneShotEffect {
 
-    public UrgorosTheEmptyOneEffect() {
+    UrgorosTheEmptyOneEffect() {
         super(Outcome.Benefit);
         this.staticText = "that player discards a card at random. If the player can't, you draw a card";
     }

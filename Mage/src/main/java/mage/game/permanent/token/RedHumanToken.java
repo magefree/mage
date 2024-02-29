@@ -19,7 +19,7 @@ public final class RedHumanToken extends TokenImpl {
         this.toughness = new MageInt(1);
     }
 
-    protected RedHumanToken(final RedHumanToken token) {
+    private RedHumanToken(final RedHumanToken token) {
         super(token);
     }
 

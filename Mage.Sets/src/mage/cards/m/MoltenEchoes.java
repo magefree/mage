@@ -59,7 +59,7 @@ public final class MoltenEchoes extends CardImpl {
 
 class MoltenEchoesEffect extends OneShotEffect {
 
-    public MoltenEchoesEffect() {
+    MoltenEchoesEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "create a token that's a copy of that creature. That token gains haste. Exile it at the beginning of the next end step";
     }
@@ -78,7 +78,7 @@ class MoltenEchoesEffect extends OneShotEffect {
         Permanent permanent = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
         if (permanent != null) {
             CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(null, null, true);
-            effect.setTargetPointer(getTargetPointer());
+            effect.setTargetPointer(this.getTargetPointer().copy());
             if (effect.apply(game, source)) {
                 for (Permanent tokenPermanent : effect.getAddedPermanents()) {
                     ExileTargetEffect exileEffect = new ExileTargetEffect();

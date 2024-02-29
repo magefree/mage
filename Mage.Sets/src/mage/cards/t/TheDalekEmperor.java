@@ -24,6 +24,7 @@ import mage.game.permanent.token.DalekToken;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetSacrifice;
 
 import java.util.UUID;
 
@@ -111,8 +112,7 @@ class TheDalekEmperorFirstChoice extends VillainousChoice {
         )) {
             return false;
         }
-        TargetPermanent target = new TargetControlledCreaturePermanent();
-        target.withNotTarget(true);
+        TargetSacrifice target = new TargetSacrifice(StaticFilters.FILTER_PERMANENT_CREATURE);
         player.choose(Outcome.Sacrifice, target, source, game);
         Permanent permanent = game.getPermanent(target.getFirstTarget());
         return permanent != null && permanent.sacrifice(source, game);

@@ -26,7 +26,7 @@ public final class RowansGrimSearch extends CardImpl {
 
         // If this spell was bargained, look at the top four cards of your library, then put up to two of them back on top of your library in any order and the rest into your graveyard.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
-                new LookLibraryAndPickControllerEffect(4, 2, PutCards.TOP_ANY, PutCards.GRAVEYARD),
+                new LookLibraryAndPickControllerEffect(4, 2, PutCards.TOP_ANY, PutCards.GRAVEYARD, true),
                 BargainedCondition.instance,
                 "If this spell was bargained, look at the top four cards of your library, "
                         + "then put up to two of them back on top of your library in any order and the rest into your graveyard."

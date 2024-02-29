@@ -42,7 +42,7 @@ public final class StolenGoods extends CardImpl {
 
 class StolenGoodsEffect extends OneShotEffect {
 
-    public StolenGoodsEffect() {
+    StolenGoodsEffect() {
         super(Outcome.Detriment);
         this.staticText = "Target opponent exiles cards from the top of their library until they exile a nonland card. Until end of turn, you may cast that card without paying its mana cost";
     }
@@ -58,7 +58,7 @@ class StolenGoodsEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player opponent = game.getPlayer(targetPointer.getFirst(game, source));
+        Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (opponent == null) {
             return false;
         }

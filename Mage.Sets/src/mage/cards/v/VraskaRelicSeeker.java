@@ -61,7 +61,7 @@ public final class VraskaRelicSeeker extends CardImpl {
 
 class VraskaRelicSeekerLifeTotalEffect extends OneShotEffect {
 
-    public VraskaRelicSeekerLifeTotalEffect() {
+    VraskaRelicSeekerLifeTotalEffect() {
         super(Outcome.Benefit);
         staticText = "Target player's life total becomes 1";
     }
@@ -72,7 +72,7 @@ class VraskaRelicSeekerLifeTotalEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (player != null) {
             player.setLife(1, game, source);
             return true;

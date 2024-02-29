@@ -29,9 +29,7 @@ public final class MorkrutBehemoth extends CardImpl {
 
         // As an additional cost to cast this spell, sacrifice a creature or pay {1}{B}.
         this.getSpellAbility().addCost(new OrCost(
-                "sacrifice a creature or pay {1}{B}", new SacrificeTargetCost(new TargetControlledPermanent(
-                        StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT
-                )), new ManaCostsImpl<>("{1}{B}")
+                "sacrifice a creature or pay {1}{B}", new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT), new ManaCostsImpl<>("{1}{B}")
         ));
 
         // Menace

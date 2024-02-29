@@ -53,7 +53,7 @@ public final class MartyrsOfKorlis extends CardImpl {
 
 class RedirectArtifactDamageFromPlayerToSourceEffect extends RedirectionEffect {
 
-    public RedirectArtifactDamageFromPlayerToSourceEffect(Duration duration) {
+    RedirectArtifactDamageFromPlayerToSourceEffect(Duration duration) {
         super(duration);
     }
 

@@ -53,7 +53,7 @@ public final class BrokenVisage extends CardImpl {
 
 class BrokenVisageEffect extends OneShotEffect {
 
-    public BrokenVisageEffect() {
+    BrokenVisageEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "Destroy target nonartifact attacking creature. It can't be regenerated. Create a black Spirit creature token. Its power is equal to that creature's power and its toughness is equal to that creature's toughness. Sacrifice the token at the beginning of the next end step";
     }

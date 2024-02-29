@@ -46,7 +46,7 @@ public final class BringTheEnding extends CardImpl {
 
 class BringTheEndingCounterEffect extends OneShotEffect {
 
-    public BringTheEndingCounterEffect() {
+    BringTheEndingCounterEffect() {
         super(Outcome.Benefit);
         staticText = "Counter target spell unless its controller pays {2}.<br>" + AbilityWord.CORRUPTED.formatWord() + "Counter that spell instead if its controller has three or more poison counters.";
     }
@@ -71,10 +71,10 @@ class BringTheEndingCounterEffect extends OneShotEffect {
         Player player = game.getPlayer(controllerId);
 
         if (player != null && player.getCounters().getCount(CounterType.POISON) >= 3) {
-            hardCounterEffect.setTargetPointer(this.getTargetPointer());
+            hardCounterEffect.setTargetPointer(this.getTargetPointer().copy());
             return hardCounterEffect.apply(game, source);
         } else {
-            softCounterEffect.setTargetPointer(this.getTargetPointer());
+            softCounterEffect.setTargetPointer(this.getTargetPointer().copy());
             return softCounterEffect.apply(game, source);
         }
 

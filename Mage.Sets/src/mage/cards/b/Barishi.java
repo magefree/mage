@@ -46,7 +46,7 @@ public final class Barishi extends CardImpl {
 
 class BarishiEffect extends OneShotEffect {
 
-    public BarishiEffect() {
+    BarishiEffect() {
         super(Outcome.Benefit);
         this.staticText = "exile {this}, then shuffle all creature cards from your graveyard into your library";
     }

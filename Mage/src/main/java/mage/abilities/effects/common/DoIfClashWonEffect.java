@@ -51,7 +51,7 @@ public class DoIfClashWonEffect extends OneShotEffect {
                     executingEffect.setTargetPointer(new FixedTarget(opponent.getId()));
                 }
             } else {
-                executingEffect.setTargetPointer(this.targetPointer);
+                executingEffect.setTargetPointer(this.getTargetPointer().copy());
             }
             if (executingEffect instanceof OneShotEffect) {
                 return executingEffect.apply(game, source);

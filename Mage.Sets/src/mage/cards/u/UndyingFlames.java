@@ -45,7 +45,7 @@ public final class UndyingFlames extends CardImpl {
 
 class UndyingFlamesEffect extends OneShotEffect {
 
-    public UndyingFlamesEffect() {
+    UndyingFlamesEffect() {
         super(Outcome.Benefit);
         staticText = "Exile cards from the top of your library until you exile a nonland card. {this} deals damage to any target equal to that card's mana value";
     }

@@ -50,7 +50,7 @@ public final class TreeOfPerdition extends CardImpl {
 
 class TreeOfPerditionEffect extends OneShotEffect {
 
-    public TreeOfPerditionEffect() {
+    TreeOfPerditionEffect() {
         super(Outcome.Neutral);
         staticText = "Exchange target opponent's life total with {this}'s toughness";
     }

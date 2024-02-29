@@ -89,7 +89,7 @@ class PossibilityStormTriggeredAbility extends TriggeredAbilityImpl {
 
 class PossibilityStormEffect extends OneShotEffect {
 
-    public PossibilityStormEffect() {
+    PossibilityStormEffect() {
         super(Outcome.Neutral);
         staticText = "that player exiles it, then exiles cards from the top of their library until they exile a card that shares a card type with it. That player may cast that card without paying its mana cost. Then they put all cards exiled with {this} on the bottom of their library in a random order";
     }
@@ -100,10 +100,10 @@ class PossibilityStormEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
+        Spell spell = game.getStack().getSpell(getTargetPointer().getFirst(game, source));
         boolean noLongerOnStack = false; // spell was exiled already by another effect, for example NivMagus Elemental
         if (spell == null) {
-            spell = ((Spell) game.getLastKnownInformation(targetPointer.getFirst(game, source), Zone.STACK));
+            spell = ((Spell) game.getLastKnownInformation(getTargetPointer().getFirst(game, source), Zone.STACK));
             noLongerOnStack = true;
         }
         if (spell == null) {

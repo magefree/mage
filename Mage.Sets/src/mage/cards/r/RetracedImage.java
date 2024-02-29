@@ -42,7 +42,7 @@ public final class RetracedImage extends CardImpl {
 
 class RetracedImageEffect extends OneShotEffect {
 
-    public RetracedImageEffect() {
+    RetracedImageEffect() {
         super(Outcome.PutCardInPlay);
         this.staticText = "Reveal a card in your hand, then put that card onto the battlefield if it has the same name as a permanent";
     }

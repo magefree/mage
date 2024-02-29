@@ -89,7 +89,7 @@ class PlayerLosesTheGameTriggeredAbility extends TriggeredAbilityImpl {
 
 class BloodTyrantEffect extends OneShotEffect {
 
-    public BloodTyrantEffect() {
+    BloodTyrantEffect() {
         super(Outcome.Benefit);
         staticText = "each player loses 1 life. Put a +1/+1 counter on {this} for each 1 life lost this way";
     }

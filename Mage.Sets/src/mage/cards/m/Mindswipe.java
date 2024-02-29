@@ -47,7 +47,7 @@ public final class Mindswipe extends CardImpl {
 
 class MindswipeEffect extends OneShotEffect {
 
-    public MindswipeEffect() {
+    MindswipeEffect() {
         super(Outcome.Damage);
         this.staticText = "{this} deals X damage to that spell's controller";
     }

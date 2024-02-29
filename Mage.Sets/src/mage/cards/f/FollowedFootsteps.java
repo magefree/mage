@@ -54,7 +54,7 @@ public final class FollowedFootsteps extends CardImpl {
 
 class FollowedFootstepsEffect extends OneShotEffect {
 
-    public FollowedFootstepsEffect() {
+    FollowedFootstepsEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "create a token that's a copy of enchanted creature";
     }

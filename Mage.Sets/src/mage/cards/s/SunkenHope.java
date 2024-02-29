@@ -42,7 +42,7 @@ public final class SunkenHope extends CardImpl {
 
 class SunkenHopeReturnToHandEffect extends OneShotEffect {
 
-    public SunkenHopeReturnToHandEffect() {
+    SunkenHopeReturnToHandEffect() {
         super(Outcome.ReturnToHand);
         staticText = "that player returns a creature they control to its owner's hand";
     }
@@ -60,7 +60,7 @@ class SunkenHopeReturnToHandEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         boolean result = false;
 
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (player == null) {
             return false;
         }

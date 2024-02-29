@@ -57,7 +57,7 @@ public final class GodEternalKefnet extends CardImpl {
 
 class GodEternalKefnetDrawCardReplacementEffect extends ReplacementEffectImpl {
 
-    public GodEternalKefnetDrawCardReplacementEffect() {
+    GodEternalKefnetDrawCardReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Neutral);
         this.staticText = "You may reveal the first card you draw each turn as you draw it. Whenever you reveal an instant "
                 + "or sorcery card this way, copy that card and you may cast the copy. That copy costs {2} less to cast";

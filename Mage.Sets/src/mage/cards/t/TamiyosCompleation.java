@@ -67,7 +67,7 @@ public final class TamiyosCompleation extends CardImpl {
 
 class TamiyosCompleationTapEffect extends OneShotEffect {
 
-    public TamiyosCompleationTapEffect() {
+    TamiyosCompleationTapEffect() {
         super(Outcome.Tap);
         this.staticText = "tap enchanted permanent. If it's an Equipment, unattach it";
     }
@@ -103,7 +103,7 @@ class TamiyosCompleationTapEffect extends OneShotEffect {
 
 class TamiyosCompleationLoseAbilitiesEffect extends ContinuousEffectImpl {
 
-    public TamiyosCompleationLoseAbilitiesEffect() {
+    TamiyosCompleationLoseAbilitiesEffect() {
         super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.LoseAbility);
         this.staticText = "Enchanted permanent loses all abilities";
     }

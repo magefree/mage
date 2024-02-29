@@ -54,7 +54,7 @@ public final class PathwayArrows extends CardImpl {
 
 class PathwayArrowsEffect extends OneShotEffect {
 
-    public PathwayArrowsEffect() {
+    PathwayArrowsEffect() {
         super(Outcome.Benefit);
         this.staticText = "This creature deals 1 damage to target creature. If a colorless creature is dealt damage this way, tap it";
     }

@@ -10,7 +10,7 @@ import mage.constants.SubType;
 public final class OgreToken extends TokenImpl {
 
     public OgreToken() {
-        super("Ogre Token", "3/3 red Ogre creature");
+        super("Ogre Token", "3/3 red Ogre creature token");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
         subtype.add(SubType.OGRE);
@@ -18,7 +18,7 @@ public final class OgreToken extends TokenImpl {
         toughness = new MageInt(3);
     }
 
-    protected OgreToken(final OgreToken token) {
+    private OgreToken(final OgreToken token) {
         super(token);
     }
 

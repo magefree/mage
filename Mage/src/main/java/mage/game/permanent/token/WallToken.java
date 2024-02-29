@@ -20,7 +20,7 @@ public final class WallToken extends TokenImpl {
         addAbility(DefenderAbility.getInstance());
     }
 
-    protected WallToken(final WallToken token) {
+    private WallToken(final WallToken token) {
         super(token);
     }
 

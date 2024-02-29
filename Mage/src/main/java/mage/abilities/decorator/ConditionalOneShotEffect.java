@@ -53,7 +53,7 @@ public class ConditionalOneShotEffect extends OneShotEffect {
         if (toApply.isEmpty()) {
             return true;
         }
-        toApply.setTargetPointer(this.targetPointer);
+        toApply.setTargetPointer(this.getTargetPointer().copy());
         toApply.stream().forEach(effect -> effect.apply(game, source));
         return true;
     }

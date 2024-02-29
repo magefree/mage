@@ -28,6 +28,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetSacrifice;
 
 /**
  *
@@ -167,7 +168,7 @@ class LichDamageEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Target target = new TargetControlledPermanent(amount, amount, filter, true);
+            TargetSacrifice target = new TargetSacrifice(amount, filter);
             if (target.canChoose(controller.getId(), source, game)) {
                 if (controller.choose(Outcome.Sacrifice, target, source, game)) {
                     for (UUID targetId : target.getTargets()) {

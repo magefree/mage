@@ -91,7 +91,7 @@ class OccupationTapEffect extends ReplacementEffectImpl {
 
 class OccupationOneShotEffect extends OneShotEffect {
 
-    public OccupationOneShotEffect() {
+    OccupationOneShotEffect() {
         super(Outcome.LoseAbility);
     }
 
@@ -119,7 +119,7 @@ class OccupationOneShotEffect extends OneShotEffect {
 
 class OccupationRestrictionEffect extends RestrictionEffect {
 
-    public OccupationRestrictionEffect() {
+    OccupationRestrictionEffect() {
         super(Duration.Custom);
         staticText = "";
     }
@@ -159,7 +159,7 @@ class OccupationRestrictionEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return this.targetPointer.getTargets(game, source).contains(permanent.getId());
+        return this.getTargetPointer().getTargets(game, source).contains(permanent.getId());
     }
 
     @Override

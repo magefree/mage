@@ -57,7 +57,7 @@ public final class MisfortuneTeller extends CardImpl {
 
 class MisfortuneTellerEffect extends OneShotEffect {
 
-    public MisfortuneTellerEffect() {
+    MisfortuneTellerEffect() {
         super(Outcome.Exile);
         this.staticText = "exile target card from a graveyard. If it was a creature card, create a 2/2 black Rogue creature token. If it was a land card, create a Treasure token. Otherwise, you gain 3 life.";
     }

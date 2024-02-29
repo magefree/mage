@@ -83,7 +83,7 @@ enum JohannApprenticeSorcererHint implements Hint {
 
 class JohannApprenticeSorcererPlayTopEffect extends AsThoughEffectImpl {
 
-    public JohannApprenticeSorcererPlayTopEffect() {
+    JohannApprenticeSorcererPlayTopEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Once each turn, you may cast an instant or sorcery spell from the top of your library";
     }
@@ -160,6 +160,6 @@ class JohannApprenticeSorcererWatcher extends Watcher {
     }
 
     public boolean isAbilityUsed(UUID playerId, MageObjectReference mor) {
-        return usedFrom.getOrDefault(playerId, new HashSet<>()).contains(mor);
+        return usedFrom.getOrDefault(playerId, Collections.emptySet()).contains(mor);
     }
 }

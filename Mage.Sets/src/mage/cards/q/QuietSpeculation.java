@@ -52,7 +52,7 @@ public final class QuietSpeculation extends CardImpl {
 
 class SearchLibraryPutInGraveEffect extends SearchEffect {
 
-    public SearchLibraryPutInGraveEffect(TargetCardInLibrary target) {
+    SearchLibraryPutInGraveEffect(TargetCardInLibrary target) {
         super(target, Outcome.Neutral);
         staticText = "Search target player's library for up to three cards with flashback and put them into that player's graveyard. Then the player shuffles.";
     }

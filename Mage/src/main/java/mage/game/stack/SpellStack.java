@@ -143,6 +143,6 @@ public class SpellStack extends ArrayDeque<StackObject> {
 
     @Override
     public String toString() {
-        return this.size() + (this.isEmpty() ? "" : " (top: " + CardUtil.substring(this.getFirst().toString(), 100) + ")");
+        return this.size() + (this.isEmpty() ? "" : " (top: " + CardUtil.substring(this.getFirst().toString(), 100, "...") + ")");
     }
 }

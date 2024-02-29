@@ -43,7 +43,7 @@ public final class FiendOfTheShadows extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new FiendOfTheShadowsEffect(), false, true));
 
         // Sacrifice a Human: Regenerate Fiend of the Shadows.
-        this.addAbility(new SimpleActivatedAbility(new RegenerateSourceEffect(), new SacrificeTargetCost(new TargetControlledPermanent(filter))));
+        this.addAbility(new SimpleActivatedAbility(new RegenerateSourceEffect(), new SacrificeTargetCost(filter)));
     }
 
     private FiendOfTheShadows(final FiendOfTheShadows card) {
@@ -75,7 +75,7 @@ class FiendOfTheShadowsEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (player == null || player.getHand().isEmpty()) {
             return false;
         }

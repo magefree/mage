@@ -40,7 +40,7 @@ public final class VarolzTheScarStriped extends CardImpl {
 
         // Sacrifice another creature: Regenerate Varolz, the Scar-Striped.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(),
-                new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, true))));
+                new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE)));
     }
 
     private VarolzTheScarStriped(final VarolzTheScarStriped card) {

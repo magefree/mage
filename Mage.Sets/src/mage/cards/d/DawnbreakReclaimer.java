@@ -56,7 +56,7 @@ public final class DawnbreakReclaimer extends CardImpl {
 
 class DawnbreakReclaimerEffect extends OneShotEffect {
 
-    public DawnbreakReclaimerEffect() {
+    DawnbreakReclaimerEffect() {
         super(Outcome.Detriment);
         this.staticText = "choose a creature card in an opponent's graveyard, then that player chooses a creature card in your graveyard. You may return those cards to the battlefield under their owners' control";
     }

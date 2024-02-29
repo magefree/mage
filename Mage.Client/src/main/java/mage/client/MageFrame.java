@@ -652,6 +652,10 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         menu.show(component, 0, component.getHeight());
     }
 
+    public static boolean isGameActive() {
+        return activeFrame instanceof GamePane;
+    }
+
     public static void setActive(MagePane frame) {
         // Always hide not hidden popup window or enlarged card view if a frame is set to active
         try {
@@ -1513,7 +1517,11 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
     public void setConnectButtonText(String status) {
         this.btnConnect.setText(status);
-        changeGUISize(); // Needed to layout the tooltbar after text length change
+
+        // Needed to layout the tooltbar after text length change
+        // TODO: need research, is it actual?
+        GUISizeHelper.refreshGUIAndCards();
+
         this.btnConnect.repaint();
         this.btnConnect.revalidate();
     }
@@ -1737,8 +1745,13 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         }
     }
 
-    public void changeGUISize() {
-        ImageCaches.flush();
+    /**
+     * Refresh whole GUI including cards and card images.
+     * Use it after new images downloaded, new fonts or theme settings selected.
+     */
+    public void refreshGUIAndCards() {
+        ImageCaches.clearAll();
+
         setGUISize();
 
         setGUISizeTooltipContainer();

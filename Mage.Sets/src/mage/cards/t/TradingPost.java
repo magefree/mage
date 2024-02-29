@@ -54,7 +54,7 @@ public final class TradingPost extends CardImpl {
         // {1}, {T}, Sacrifice an artifact: Draw a card.
         Ability ability4 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new GenericManaCost(1));
         ability4.addCost(new TapSourceCost());
-        ability4.addCost(new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_AN)));
+        ability4.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_AN));
         this.addAbility(ability4);
 
     }

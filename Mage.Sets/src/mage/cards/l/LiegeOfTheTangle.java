@@ -59,7 +59,7 @@ public final class LiegeOfTheTangle extends CardImpl {
 
 class LiegeOfTheTangleEffect extends ContinuousEffectImpl {
 
-    public LiegeOfTheTangleEffect() {
+    LiegeOfTheTangleEffect() {
         super(Duration.EndOfGame, Outcome.BecomeCreature);
         staticText = "each of those lands is an 8/8 green Elemental creature for as long as it has an awakening counter on it. They're still lands";
     }
@@ -107,7 +107,7 @@ class LiegeOfTheTangleEffect extends ContinuousEffectImpl {
     public void init(Ability source, Game game) {
         super.init(source, game);
         if (this.affectedObjectsSet) {
-            for (UUID permId : targetPointer.getTargets(game, source)) {
+            for (UUID permId : getTargetPointer().getTargets(game, source)) {
                 affectedObjectList.add(new MageObjectReference(permId, game));
             }
         }

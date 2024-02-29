@@ -45,7 +45,7 @@ public final class PlaneswalkersMirth extends CardImpl {
 
 class PlaneswalkersMirthEffect extends OneShotEffect {
 
-    public PlaneswalkersMirthEffect() {
+    PlaneswalkersMirthEffect() {
         super(Outcome.Damage);
         staticText = "Target opponent reveals a card at random from their hand. You gain life equal to that card's mana value";
     }
@@ -56,7 +56,7 @@ class PlaneswalkersMirthEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player opponent = game.getPlayer(targetPointer.getFirst(game, source));
+        Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
         Player player = game.getPlayer(source.getControllerId());
         if (opponent != null && player!= null && !opponent.getHand().isEmpty()) {
             Cards revealed = new CardsImpl();

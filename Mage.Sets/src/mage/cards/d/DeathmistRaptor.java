@@ -56,7 +56,7 @@ public final class DeathmistRaptor extends CardImpl {
 
 class DeathmistRaptorEffect extends OneShotEffect {
 
-    public DeathmistRaptorEffect() {
+    DeathmistRaptorEffect() {
         super(Outcome.Benefit);
         this.staticText = "you may return {this} from your graveyard to the battlefield face up or face down";
     }

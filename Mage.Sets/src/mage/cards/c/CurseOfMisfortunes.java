@@ -59,7 +59,7 @@ public final class CurseOfMisfortunes extends CardImpl {
 
 class CurseOfMisfortunesEffect extends OneShotEffect {
 
-    public CurseOfMisfortunesEffect() {
+    CurseOfMisfortunesEffect() {
         super(Outcome.Detriment);
         staticText = "you may search your library for a Curse card that doesn't have the same name as a Curse attached to enchanted player, put it onto the battlefield attached to that player, then shuffle";
     }

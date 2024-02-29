@@ -46,7 +46,7 @@ public final class MurderousSpoils extends CardImpl {
 
 class MurderousSpoilsEffect extends OneShotEffect {
 
-    public MurderousSpoilsEffect() {
+    MurderousSpoilsEffect() {
         super(Outcome.DestroyPermanent);
         staticText = "Destroy target nonblack creature. It can't be regenerated. You gain control of all Equipment that were attached to it.";
     }

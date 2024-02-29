@@ -46,9 +46,9 @@ public final class KembasLegion extends CardImpl {
 
 class KembasLegionEffect extends ContinuousEffectImpl {
 
-    public KembasLegionEffect() {
+    KembasLegionEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "{this} can block an additional creature for each Equipment attached to Kemba's Legion";
+        staticText = "{this} can block an additional creature each combat for each Equipment attached to {this}";
     }
 
     private KembasLegionEffect(final KembasLegionEffect effect) {

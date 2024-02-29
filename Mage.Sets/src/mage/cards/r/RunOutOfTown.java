@@ -17,7 +17,7 @@ public final class RunOutOfTown extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{U}");
 
         // The owner of target nonland permanent puts it on the top or bottom of their library.
-        this.getSpellAbility().addEffect(new PutOnTopOrBottomLibraryTargetEffect());
+        this.getSpellAbility().addEffect(new PutOnTopOrBottomLibraryTargetEffect(true));
         this.getSpellAbility().addTarget(new TargetNonlandPermanent());
     }
 

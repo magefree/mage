@@ -48,7 +48,7 @@ public final class TimeOut extends CardImpl {
 
 class TimeOutEffect extends OneShotEffect {
 
-    public TimeOutEffect() {
+    TimeOutEffect() {
         super(Outcome.Benefit);
         this.staticText = "Roll a six-sided die. Put target nonland permanent into its owner's library just beneath the top X cards of that library, where X is the result";
     }

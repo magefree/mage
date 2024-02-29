@@ -56,7 +56,7 @@ public final class SabaccGame extends CardImpl {
 
 class SabaccGameEffect extends OneShotEffect {
 
-    public SabaccGameEffect() {
+    SabaccGameEffect() {
         super(Outcome.Detriment);
         this.staticText = "Choose target permanent an opponent controls. That opponent chooses a permanent you control. "
                 + "Flip a coin. If you win the flip, gain control of the permanent you chose. "

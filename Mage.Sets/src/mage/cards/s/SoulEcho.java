@@ -61,7 +61,7 @@ public final class SoulEcho extends CardImpl {
 
 class SoulEchoOpponentsChoiceEffect extends OneShotEffect {
 
-    public SoulEchoOpponentsChoiceEffect() {
+    SoulEchoOpponentsChoiceEffect() {
         super(Outcome.PreventDamage);
         staticText = "target opponent may choose that for each 1 damage that would be dealt to you " +
             "until your next upkeep, you remove an echo counter from {this} instead";
@@ -80,7 +80,7 @@ class SoulEchoOpponentsChoiceEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         Player controller = game.getPlayer(source.getControllerId());
-        Player opponent = game.getPlayer(targetPointer.getFirst(game, source));
+        Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (controller != null && opponent != null && permanent != null) {
             if (opponent.chooseUse(outcome, "Have all damage dealt to " + controller.getLogName() + " be decremented from echo counters on " + permanent.getLogName() + " until " + controller.getLogName() + "'s next upkeep instead?", source, game)) {
                 game.informPlayers("Until " + controller.getLogName() + "'s next upkeep, for each 1 damage that would be dealt to " + controller.getLogName() + ", an echo counter from " + permanent.getLogName() + " is removed instead");

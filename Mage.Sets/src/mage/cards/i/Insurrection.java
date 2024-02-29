@@ -41,7 +41,7 @@ public final class Insurrection extends CardImpl {
 
 class InsurrectionEffect extends OneShotEffect {
 
-    public InsurrectionEffect() {
+    InsurrectionEffect() {
         super(Outcome.Benefit);
         this.staticText = "Untap all creatures and gain control of them until end of turn. They gain haste until end of turn";
     }

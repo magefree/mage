@@ -46,7 +46,7 @@ public final class GhastlyConscription extends CardImpl {
 
 class GhastlyConscriptionEffect extends OneShotEffect {
 
-    public GhastlyConscriptionEffect() {
+    GhastlyConscriptionEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Exile all creature cards from target player's graveyard in a face-down pile, shuffle that pile, then manifest those cards.<i> (To manifest a card, put it onto the battlefield face down as a 2/2 creature. Turn it face up at any time for its mana cost if it's a creature card.)</i>";
     }

@@ -97,7 +97,7 @@ class SilumgarScavengerExploitedWatcher extends Watcher {
 
 class SilumgarScavengerBoostEffect extends OneShotEffect {
 
-    public SilumgarScavengerBoostEffect() {
+    SilumgarScavengerBoostEffect() {
         super(Outcome.AddAbility);
         staticText = "It gains haste until end of turn if it exploited that creature";
     }

@@ -118,7 +118,7 @@ class ArvinoxTheMindFlailExileEffect extends OneShotEffect {
 
 class ArvinoxTheMindFlailCastFromExileEffect extends AsThoughEffectImpl {
 
-    public ArvinoxTheMindFlailCastFromExileEffect() {
+    ArvinoxTheMindFlailCastFromExileEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
     }
 

@@ -9,6 +9,10 @@ import mage.constants.SubType;
  */
 public final class FungusDinosaurToken extends TokenImpl {
 
+    public FungusDinosaurToken() {
+        this(0);
+    }
+
     public FungusDinosaurToken(int xValue) {
         super("Fungus Dinosaur Token", "X/X green Fungus Dinosaur creature token");
         cardType.add(CardType.CREATURE);

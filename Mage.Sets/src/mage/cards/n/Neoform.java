@@ -34,9 +34,7 @@ public final class Neoform extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{G}{U}");
 
         // As an additional cost to cast this spell, sacrifice a creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(
-                1, 1, StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT, true
-        )));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
 
         // Search your library for a creature card with converted mana cost equal to 1 plus the sacrificed creature's converted mana cost,
         // put that card onto the battlefield with an additional +1/+1 counter on it, then shuffle your library.

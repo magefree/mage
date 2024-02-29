@@ -49,7 +49,7 @@ public final class HauntedAngel extends CardImpl {
 
 class HauntedAngelEffect extends OneShotEffect {
 
-    public HauntedAngelEffect() {
+    HauntedAngelEffect() {
         super(Outcome.Detriment);
         staticText = "and each other player creates a 3/3 black Angel creature token with flying.";
     }

@@ -43,7 +43,7 @@ public final class Borrowing100000Arrows extends CardImpl {
 
 class Borrowing100000ArrowsEffect extends OneShotEffect {
 
-    public Borrowing100000ArrowsEffect() {
+    Borrowing100000ArrowsEffect() {
         super(Outcome.DrawCard);
         this.staticText = "Draw a card for each tapped creature target opponent controls";
     }

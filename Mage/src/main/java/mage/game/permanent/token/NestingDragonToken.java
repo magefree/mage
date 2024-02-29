@@ -34,7 +34,7 @@ public final class NestingDragonToken extends TokenImpl {
         ));
     }
 
-    protected NestingDragonToken(final NestingDragonToken token) {
+    private NestingDragonToken(final NestingDragonToken token) {
         super(token);
     }
 

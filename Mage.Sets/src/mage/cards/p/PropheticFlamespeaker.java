@@ -57,7 +57,7 @@ public final class PropheticFlamespeaker extends CardImpl {
 
 class PropheticFlamespeakerExileEffect extends OneShotEffect {
 
-    public PropheticFlamespeakerExileEffect() {
+    PropheticFlamespeakerExileEffect() {
         super(Outcome.Detriment);
         this.staticText = "exile the top card of your library. You may play it this turn";
     }
@@ -92,7 +92,7 @@ class PropheticFlamespeakerExileEffect extends OneShotEffect {
 
 class PropheticFlamespeakerCastFromExileEffect extends AsThoughEffectImpl {
 
-    public PropheticFlamespeakerCastFromExileEffect() {
+    PropheticFlamespeakerCastFromExileEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
         staticText = "You may play the card from exile";
     }

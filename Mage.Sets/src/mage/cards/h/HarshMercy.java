@@ -46,7 +46,7 @@ public final class HarshMercy extends CardImpl {
 
 class HarshMercyEffect extends OneShotEffect {
 
-    public HarshMercyEffect() {
+    HarshMercyEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "Each player chooses a creature type. Destroy all creatures that aren't of a type chosen this way. They can't be regenerated.";
     }

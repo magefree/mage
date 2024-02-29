@@ -20,7 +20,7 @@ public final class AlienWarriorToken extends TokenImpl {
         toughness = new MageInt(2);
     }
 
-    protected AlienWarriorToken(final AlienWarriorToken token) {
+    private AlienWarriorToken(final AlienWarriorToken token) {
         super(token);
     }
 

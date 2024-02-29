@@ -44,7 +44,7 @@ public final class DreamsOfSteelAndOil extends CardImpl {
 
 class DreamsOfSteelAndOilEffect extends OneShotEffect {
 
-    public DreamsOfSteelAndOilEffect() {
+    DreamsOfSteelAndOilEffect() {
         super(Outcome.Discard);
         this.staticText = "Target opponent reveals their hand. You choose an artifact or creature card from it, then choose an artifact or creature card from their graveyard. Exile the chosen cards.";
     }

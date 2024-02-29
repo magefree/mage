@@ -46,7 +46,7 @@ public final class PardicMiner extends CardImpl {
 
 class PardicMinerEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public PardicMinerEffect() {
+    PardicMinerEffect() {
         super(Duration.EndOfTurn, Outcome.Detriment);
         staticText = "Target player can't play lands this turn.";
     }

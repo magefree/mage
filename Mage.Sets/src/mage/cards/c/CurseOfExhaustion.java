@@ -50,7 +50,7 @@ public final class CurseOfExhaustion extends CardImpl {
 
 class CurseOfExhaustionEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public CurseOfExhaustionEffect() {
+    CurseOfExhaustionEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Enchanted player can't cast more than one spell each turn";
     }

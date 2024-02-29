@@ -18,7 +18,7 @@ public final class CarnivoreToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    protected CarnivoreToken(final CarnivoreToken token) {
+    private CarnivoreToken(final CarnivoreToken token) {
         super(token);
     }
 

@@ -61,7 +61,7 @@ public final class DisruptingShoal extends CardImpl {
 
 class DisruptingShoalCounterTargetEffect extends OneShotEffect {
 
-    public DisruptingShoalCounterTargetEffect() {
+    DisruptingShoalCounterTargetEffect() {
         super(Outcome.Detriment);
         this.staticText = "Counter target spell if its mana value is X";
     }
@@ -77,7 +77,7 @@ class DisruptingShoalCounterTargetEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
+        Spell spell = game.getStack().getSpell(getTargetPointer().getFirst(game, source));
         if (spell != null && isManaValueEqual(source, spell.getManaValue())) {
             return game.getStack().counter(source.getFirstTarget(), source, game);
         }

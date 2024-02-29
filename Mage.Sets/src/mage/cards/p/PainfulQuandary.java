@@ -44,7 +44,7 @@ public final class PainfulQuandary extends CardImpl {
 
 class PainfulQuandryEffect extends OneShotEffect {
 
-    public PainfulQuandryEffect() {
+    PainfulQuandryEffect() {
         super(Outcome.LoseLife);
         staticText = "that player loses 5 life unless they discard a card";
     }
@@ -60,7 +60,7 @@ class PainfulQuandryEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (player != null) {
             boolean paid = false;
             Cost cost = new DiscardTargetCost(new TargetCardInHand());

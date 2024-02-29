@@ -41,13 +41,13 @@ public final class SongOfFreyalise extends CardImpl {
 
         // III — Put a +1/+1 counter on each creature you control. Those creatures gain vigilance, trample, and indestructible until end of turn.
         Effects effects = new Effects();
-        effects.add(new AddCountersAllEffect(CounterType.P1P1.createInstance(), StaticFilters.FILTER_CONTROLLED_CREATURES));
+        effects.add(new AddCountersAllEffect(CounterType.P1P1.createInstance(), StaticFilters.FILTER_CONTROLLED_CREATURE));
         effects.add(new GainAbilityControlledEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_CONTROLLED_CREATURES)
                 .setText("Those creatures gain vigilance"));
         effects.add(new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_CONTROLLED_CREATURES)
                 .setText(", trample"));
         effects.add(new GainAbilityControlledEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_CONTROLLED_CREATURES)
-                .setText("and indestructible until end of turn"));
+                .setText(", and indestructible until end of turn"));
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_III, SagaChapter.CHAPTER_III, effects);
         this.addAbility(sagaAbility);
     }

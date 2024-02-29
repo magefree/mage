@@ -33,9 +33,7 @@ public final class CryptLurker extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DoIfCostPaid(
                 new DrawCardSourceControllerEffect(1),
                 new OrCost(
-                        "sacrifice a creature or discard a creature card", new SacrificeTargetCost(new TargetControlledPermanent(
-                                StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT
-                        )), new DiscardTargetCost(new TargetCardInHand(StaticFilters.FILTER_CARD_CREATURE_A))
+                        "sacrifice a creature or discard a creature card", new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT), new DiscardTargetCost(new TargetCardInHand(StaticFilters.FILTER_CARD_CREATURE_A))
                 )
         )));
     }

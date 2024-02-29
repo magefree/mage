@@ -42,7 +42,7 @@ public final class ElvishImpersonators extends CardImpl {
 
 class ElvishImpersonatorsEffect extends OneShotEffect {
 
-    public ElvishImpersonatorsEffect() {
+    ElvishImpersonatorsEffect() {
         super(Outcome.Neutral);
         staticText = "roll a six-sided die twice. Its base power becomes the first result and its base toughness becomes the second result";
     }

@@ -48,7 +48,7 @@ public final class NobleBenefactor extends CardImpl {
 
 class NobleBenefactorEffect extends OneShotEffect {
 
-    public NobleBenefactorEffect() {
+    NobleBenefactorEffect() {
         super(Outcome.Benefit);
         this.staticText = "each player may search their library for a card and put that card into their hand. Then each player who searched their library this way shuffles";
     }

@@ -3,8 +3,8 @@ package mage.cards.i;
 import mage.MageInt;
 import mage.MageObject;
 import mage.ObjectColor;
+import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
 import mage.abilities.costs.common.ExileFromGraveCost;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
@@ -41,7 +41,7 @@ public final class Ichorid extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // At the beginning of the end step, sacrifice Ichorid.
-        this.addAbility(new BeginningOfYourEndStepTriggeredAbility(new SacrificeSourceEffect(), false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(new SacrificeSourceEffect(), TargetController.NEXT, false));
 
         // At the beginning of your upkeep, if Ichorid is in your graveyard, you may exile a black creature card other than Ichorid from your graveyard. If you do, return Ichorid to the battlefield.
         this.addAbility(new IchoridTriggerdAbility());

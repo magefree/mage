@@ -50,7 +50,7 @@ public final class MeddlingMage extends CardImpl {
 
 class MeddlingMageReplacementEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public MeddlingMageReplacementEffect() {
+    MeddlingMageReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "Spells with the chosen name can't be cast";
     }

@@ -100,7 +100,7 @@ public final class PlarggDeanOfChaos extends ModalDoubleFacedCard {
 
 class PlarggDeanOfChaosEffect extends OneShotEffect {
 
-    public PlarggDeanOfChaosEffect() {
+    PlarggDeanOfChaosEffect() {
         super(Outcome.PlayForFree);
         this.staticText = "reveal cards from the top of your library until you reveal a "
                 + "nonlegendary, nonland card with mana value 3 or less. "

@@ -52,7 +52,7 @@ public final class MindleechMass extends CardImpl {
 
 class MindleechMassEffect extends OneShotEffect {
 
-    public MindleechMassEffect() {
+    MindleechMassEffect() {
         super(Outcome.PlayForFree);
         this.staticText = "look at that player's hand. If you do, you " +
                 "may cast a spell from among those cards without paying its mana cost";

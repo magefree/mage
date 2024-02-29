@@ -42,7 +42,7 @@ public final class Bulwark extends CardImpl {
 
 class BulwarkDamageEffect extends OneShotEffect {
 
-    public BulwarkDamageEffect() {
+    BulwarkDamageEffect() {
         super(Outcome.Damage);
         staticText = "Bulwark deals X damage to target opponent, where X is the number of cards in your hand minus the number of cards in that player's hand";
     }
@@ -58,7 +58,7 @@ class BulwarkDamageEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player opponent = game.getPlayer(targetPointer.getFirst(game, source));
+        Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
         if (opponent != null && controller != null) {
             int amount = controller.getHand().size() - opponent.getHand().size();

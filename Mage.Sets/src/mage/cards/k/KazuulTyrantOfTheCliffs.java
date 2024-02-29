@@ -99,7 +99,7 @@ class KazuulTyrantOfTheCliffsEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player payee = game.getPlayer(targetPointer.getFirst(game, source));
+        Player payee = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (payee == null) {
             return false;
         }

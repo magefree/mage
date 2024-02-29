@@ -46,7 +46,7 @@ public final class WarmongersChariot extends CardImpl {
 
 class WarmongersChariotEffect extends AsThoughEffectImpl {
 
-    public WarmongersChariotEffect() {
+    WarmongersChariotEffect() {
         super(AsThoughEffectType.ATTACK, Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "As long as equipped creature has defender, it can attack as though it didn't have defender";
     }

@@ -85,7 +85,7 @@ class FrayingSanityTriggeredAbility extends TriggeredAbilityImpl {
 
 class FrayingSanityEffect extends OneShotEffect {
 
-    public FrayingSanityEffect() {
+    FrayingSanityEffect() {
         super(Outcome.Detriment);
         this.staticText = "";
     }

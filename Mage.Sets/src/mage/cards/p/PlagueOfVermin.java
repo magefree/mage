@@ -42,7 +42,7 @@ public final class PlagueOfVermin extends CardImpl {
 
 class PlagueOfVerminEffect extends OneShotEffect {
 
-    public PlagueOfVerminEffect() {
+    PlagueOfVerminEffect() {
         super(Outcome.PutCardInPlay);
         this.staticText = "Starting with you, each player may pay any amount of life. Repeat this process until no one pays life. Each player creates a 1/1 black Rat creature token for each 1 life they paid this way.";
     }

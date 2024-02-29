@@ -81,7 +81,7 @@ class LoseControlTriggeredAbility extends TriggeredAbilityImpl {
 
 class BronzeBombshellEffect extends OneShotEffect {
 
-    public BronzeBombshellEffect() {
+    BronzeBombshellEffect() {
         super(Outcome.Damage);
         this.staticText = "that player sacrifices it. If the player does, {this} deals 7 damage to the player.";
     }

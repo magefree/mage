@@ -52,7 +52,7 @@ public final class KnollspineDragon extends CardImpl {
 
 class KnollspineDragonEffect extends OneShotEffect {
 
-    public KnollspineDragonEffect() {
+    KnollspineDragonEffect() {
         super(Outcome.Neutral);
         staticText = "you may discard your hand and draw cards equal to the damage dealt to target opponent this turn";
     }
@@ -64,7 +64,7 @@ class KnollspineDragonEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Player targetOpponent = game.getPlayer(targetPointer.getFirst(game, source));
+        Player targetOpponent = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (controller != null) {
             new DiscardHandControllerEffect().apply(game, source);
             if (targetOpponent != null) {

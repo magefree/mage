@@ -51,7 +51,7 @@ public final class CraftyCutpurse extends CardImpl {
 
 class CraftyCutpurseReplacementEffect extends ReplacementEffectImpl {
 
-    public CraftyCutpurseReplacementEffect() {
+    CraftyCutpurseReplacementEffect() {
         super(Duration.EndOfTurn, Outcome.GainControl);
         staticText = "each token that would be created under an opponent's control this turn is created under your control instead";
     }

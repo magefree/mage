@@ -43,7 +43,7 @@ public final class EMPBlast extends CardImpl {
 
 class EMPBlastEffect extends OneShotEffect {
 
-    public EMPBlastEffect() {
+    EMPBlastEffect() {
         super(Outcome.Tap);
         this.staticText = "Tap all other artifacts";
     }

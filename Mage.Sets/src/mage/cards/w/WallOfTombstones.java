@@ -47,7 +47,7 @@ public final class WallOfTombstones extends CardImpl {
 
 class WallOfTombstonesEffect extends OneShotEffect {
 
-    public WallOfTombstonesEffect() {
+    WallOfTombstonesEffect() {
         super(Outcome.Detriment);
         this.staticText = "change {this}'s base toughness to 1 plus the number of creature cards in your graveyard";
     }

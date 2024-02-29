@@ -78,7 +78,7 @@ class BlocksTriggeredAbility extends TriggeredAbilityImpl {
 
 class TideOfWarEffect extends OneShotEffect {
 
-    public TideOfWarEffect() {
+    TideOfWarEffect() {
         super(Outcome.Benefit);
         this.staticText = "flip a coin. If you win the flip, each blocking creature is sacrificed by its controller. If you lose the flip, each blocked creature is sacrificed by its controller";
     }

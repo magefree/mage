@@ -54,7 +54,7 @@ public final class ChasmSkulker extends CardImpl {
 
 class ChasmSkulkerEffect extends OneShotEffect {
 
-    public ChasmSkulkerEffect() {
+    ChasmSkulkerEffect() {
         super(Outcome.Benefit);
         this.staticText = "create X 1/1 blue Squid creature tokens with islandwalk, where X is the number of +1/+1 counters on Chasm Skulker";
     }

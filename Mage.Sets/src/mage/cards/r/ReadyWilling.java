@@ -1,8 +1,5 @@
-
 package mage.cards.r;
 
-import java.util.UUID;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.UntapAllControllerEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
@@ -15,7 +12,8 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SpellAbilityType;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -28,17 +26,19 @@ public final class ReadyWilling extends SplitCard {
 
         // Ready
         // Creatures you control are indestructible this turn. Untap each creature you control.
-        Effect effect = new GainAbilityAllEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent("Creatures you controll"), false);
-        effect.setText("Creatures you control are indestructible this turn");
-        getLeftHalfCard().getSpellAbility().addEffect(effect);
-        getLeftHalfCard().getSpellAbility().addEffect(new UntapAllControllerEffect(new FilterControlledCreaturePermanent(), "Untap each creature you control"));
+        getLeftHalfCard().getSpellAbility().addEffect(new GainAbilityAllEffect(IndestructibleAbility.getInstance(),
+                Duration.EndOfTurn, StaticFilters.FILTER_CONTROLLED_CREATURES, false));
+        getLeftHalfCard().getSpellAbility().addEffect(new UntapAllControllerEffect(StaticFilters.FILTER_CONTROLLED_CREATURES,
+                "Untap each creature you control"));
 
         // Willing
         // Creatures you control gain deathtouch and lifelink until end of turn.
-        getRightHalfCard().getSpellAbility().addEffect(new GainAbilityControlledEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES));
-        effect = new GainAbilityControlledEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES);
-        effect.setText("Creatures you control gain lifelink until end of turn");
-        getRightHalfCard().getSpellAbility().addEffect(effect);
+        getRightHalfCard().getSpellAbility().addEffect(new GainAbilityControlledEffect(DeathtouchAbility.getInstance(),
+                Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES)
+                .setText("creatures you control gain deathtouch"));
+        getRightHalfCard().getSpellAbility().addEffect(new GainAbilityControlledEffect(LifelinkAbility.getInstance(),
+                Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES)
+                .setText("and lifelink until end of turn"));
 
     }
 

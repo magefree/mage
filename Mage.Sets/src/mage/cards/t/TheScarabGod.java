@@ -28,6 +28,7 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
@@ -60,7 +61,7 @@ public final class TheScarabGod extends CardImpl {
 
         // {2}{U}{B}: Exile target creature card from a graveyard. Create a token that's a copy of it, except it's a 4/4 black Zombie.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TheScarabGodEffect2(), new ManaCostsImpl<>("{2}{U}{B}"));
-        ability.addTarget(new TargetCardInGraveyard(1, 1, new FilterCreatureCard("creature card from a graveyard")));
+        ability.addTarget(new TargetCardInGraveyard(StaticFilters.FILTER_CARD_CREATURE_A_GRAVEYARD));
         this.addAbility(ability);
 
         // When The Scarab God dies, return it to its owner's hand at the beginning of the next end step.

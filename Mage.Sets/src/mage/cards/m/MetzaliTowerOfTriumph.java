@@ -67,7 +67,7 @@ public final class MetzaliTowerOfTriumph extends CardImpl {
 
 class MetzaliTowerOfTriumphEffect extends OneShotEffect {
 
-    public MetzaliTowerOfTriumphEffect() {
+    MetzaliTowerOfTriumphEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "Choose a creature at random that attacked this turn. Destroy that creature";
     }

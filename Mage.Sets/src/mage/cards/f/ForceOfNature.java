@@ -49,7 +49,7 @@ public final class ForceOfNature extends CardImpl {
 
 class ForceOfNatureEffect extends OneShotEffect {
 
-    public ForceOfNatureEffect() {
+    ForceOfNatureEffect() {
         super(Outcome.Damage);
         this.staticText = "{this} deals 8 damage to you unless you pay {G}{G}{G}{G}";
     }

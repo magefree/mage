@@ -56,7 +56,7 @@ public final class KillSuitCultist extends CardImpl {
 
 class KillSuitCultistEffect extends ReplacementEffectImpl {
 
-    public KillSuitCultistEffect() {
+    KillSuitCultistEffect() {
         super(Duration.EndOfTurn, Outcome.Detriment);
         staticText = "The next time damage would be dealt to target creature this turn, destroy that creature instead";
     }
@@ -77,12 +77,12 @@ class KillSuitCultistEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return event.getTargetId().equals(targetPointer.getFirst(game, source));
+        return event.getTargetId().equals(getTargetPointer().getFirst(game, source));
     }
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
+        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if(permanent != null) {
             permanent.destroy(source, game, false);
             return true;

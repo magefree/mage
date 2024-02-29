@@ -43,7 +43,7 @@ public final class HarnessedLightning extends CardImpl {
 
 class HarnessedLightningEffect extends OneShotEffect {
 
-    public HarnessedLightningEffect() {
+    HarnessedLightningEffect() {
         super(Outcome.UnboostCreature);
         this.staticText = "Choose target creature. You get {E}{E}{E}, then you may pay any amount of {E}. {this} deals that much damage to that creature";
     }

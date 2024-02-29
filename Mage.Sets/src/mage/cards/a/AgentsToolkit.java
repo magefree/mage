@@ -62,7 +62,7 @@ public class AgentsToolkit extends CardImpl {
 
 class AgentToolkitMoveCounterEffect extends OneShotEffect {
 
-    public AgentToolkitMoveCounterEffect() {
+    AgentToolkitMoveCounterEffect() {
         super(Outcome.Benefit);
         this.staticText = "you may move a counter from {this} onto that creature";
     }

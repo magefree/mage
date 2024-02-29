@@ -117,7 +117,7 @@ class DarksteelMonolithAlternativeCost extends AlternativeCostSourceAbility {
 
 class DarksteelMonolithAddAltCostEffect extends ContinuousEffectImpl {
 
-    public DarksteelMonolithAddAltCostEffect() {
+    DarksteelMonolithAddAltCostEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Once each turn, you may pay {0} rather than pay the mana cost for a colorless spell you cast from your hand.";
     }

@@ -75,6 +75,10 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Dragonskull Summit", 272, Rarity.RARE, mage.cards.d.DragonskullSummit.class));
         cards.add(new SetCardInfo("Dreamroot Cascade", 273, Rarity.RARE, mage.cards.d.DreamrootCascade.class));
         cards.add(new SetCardInfo("Drowned Catacomb", 274, Rarity.RARE, mage.cards.d.DrownedCatacomb.class));
+        cards.add(new SetCardInfo("Duggan, Private Detective", 123, Rarity.RARE, mage.cards.d.DugganPrivateDetective.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Duggan, Private Detective", 409, Rarity.RARE, mage.cards.d.DugganPrivateDetective.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Duggan, Private Detective", 728, Rarity.RARE, mage.cards.d.DugganPrivateDetective.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Duggan, Private Detective", 1000, Rarity.RARE, mage.cards.d.DugganPrivateDetective.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ecstatic Beauty", 83, Rarity.RARE, mage.cards.e.EcstaticBeauty.class));
         cards.add(new SetCardInfo("Evolving Wilds", 275, Rarity.COMMON, mage.cards.e.EvolvingWilds.class));
         cards.add(new SetCardInfo("Exotic Orchard", 276, Rarity.RARE, mage.cards.e.ExoticOrchard.class));
@@ -129,6 +133,10 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Kate Stewart", 139, Rarity.RARE, mage.cards.k.KateStewart.class));
         cards.add(new SetCardInfo("Laser Screwdriver", 178, Rarity.UNCOMMON, mage.cards.l.LaserScrewdriver.class));
         cards.add(new SetCardInfo("Lavaclaw Reaches", 289, Rarity.RARE, mage.cards.l.LavaclawReaches.class));
+        cards.add(new SetCardInfo("Leela, Sevateem Warrior", 107, Rarity.RARE, mage.cards.l.LeelaSevateemWarrior.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Leela, Sevateem Warrior", 398, Rarity.RARE, mage.cards.l.LeelaSevateemWarrior.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Leela, Sevateem Warrior", 712, Rarity.RARE, mage.cards.l.LeelaSevateemWarrior.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Leela, Sevateem Warrior", 989, Rarity.RARE, mage.cards.l.LeelaSevateemWarrior.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lightning Greaves", 243, Rarity.UNCOMMON, mage.cards.l.LightningGreaves.class));
         cards.add(new SetCardInfo("Lunar Hatchling", 141, Rarity.RARE, mage.cards.l.LunarHatchling.class));
         cards.add(new SetCardInfo("Madame Vastra", 142, Rarity.RARE, mage.cards.m.MadameVastra.class));
@@ -192,6 +200,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Surge of Brilliance", 57, Rarity.UNCOMMON, mage.cards.s.SurgeOfBrilliance.class));
         cards.add(new SetCardInfo("Swamp", 200, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swords to Plowshares", 212, Rarity.UNCOMMON, mage.cards.s.SwordsToPlowshares.class));
+        cards.add(new SetCardInfo("TARDIS", 187, Rarity.UNCOMMON, mage.cards.t.TARDIS.class));
         cards.add(new SetCardInfo("Talisman of Conviction", 247, Rarity.UNCOMMON, mage.cards.t.TalismanOfConviction.class));
         cards.add(new SetCardInfo("Talisman of Creativity", 248, Rarity.UNCOMMON, mage.cards.t.TalismanOfCreativity.class));
         cards.add(new SetCardInfo("Talisman of Curiosity", 249, Rarity.UNCOMMON, mage.cards.t.TalismanOfCuriosity.class));

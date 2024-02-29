@@ -95,7 +95,7 @@ enum LongRestAdjuster implements TargetAdjuster {
 
 class LongRestEffect extends OneShotEffect {
 
-    public LongRestEffect() {
+    LongRestEffect() {
         super(Outcome.Benefit);
         this.staticText = "Return X target cards with different mana values from your graveyard to your hand. "
                 + "If eight or more cards were returned to your hand this way, your life total becomes equal to your starting life total";
@@ -115,7 +115,7 @@ class LongRestEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Set<Card> cardsToHand = new HashSet<>();
-            for (UUID targetId : targetPointer.getTargets(game, source)) {
+            for (UUID targetId : getTargetPointer().getTargets(game, source)) {
                 Card card = game.getCard(targetId);
                 if (card != null && game.getState().getZone(targetId) == Zone.GRAVEYARD) {
                     cardsToHand.add(card);

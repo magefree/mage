@@ -45,7 +45,7 @@ public final class HallsOfMist extends CardImpl {
 
 class CantAttackIfAttackedLastTurnAllEffect extends RestrictionEffect {
 
-    public CantAttackIfAttackedLastTurnAllEffect() {
+    CantAttackIfAttackedLastTurnAllEffect() {
         super(Duration.WhileOnBattlefield);
         this.staticText = "Creatures that attacked during their controller's last turn can't attack";
     }

@@ -83,7 +83,7 @@ public final class TheEternalWanderer extends CardImpl {
 
 class TheEternalWandererExileEffect extends OneShotEffect {
 
-    public TheEternalWandererExileEffect() {
+    TheEternalWandererExileEffect() {
         super(Outcome.Detriment);
         staticText = "Exile up to one target artifact or creature. Return that card to the battlefield " +
                 "under its owner's control at the beginning of that player's next end step.";
@@ -121,7 +121,7 @@ class TheEternalWandererExileEffect extends OneShotEffect {
 
 class TheEternalWandererSacrificeEffect extends OneShotEffect {
 
-    public TheEternalWandererSacrificeEffect() {
+    TheEternalWandererSacrificeEffect() {
         super(Outcome.Detriment);
         staticText = "For each player, choose a creature that player controls. Each player sacrifices all creatures they control not chosen this way";
     }

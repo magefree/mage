@@ -43,7 +43,7 @@ public final class FearsomeAwakening extends CardImpl {
 
 class FearsomeAwakeningEffect extends OneShotEffect {
 
-    public FearsomeAwakeningEffect() {
+    FearsomeAwakeningEffect() {
         super(Outcome.BoostCreature);
         this.staticText = "If it's a Dragon, put two +1/+1 counters on it";
     }

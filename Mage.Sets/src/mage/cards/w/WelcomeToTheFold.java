@@ -50,7 +50,7 @@ public final class WelcomeToTheFold extends CardImpl {
 
 class WelcomeToTheFoldEffect extends GainControlTargetEffect {
 
-    public WelcomeToTheFoldEffect(Duration duration, boolean fixedControl) {
+    WelcomeToTheFoldEffect(Duration duration, boolean fixedControl) {
         super(duration, fixedControl);
         staticText = "Gain control of target creature if its toughness is 2 or less. If this spell's madness cost was paid, instead gain control of that creature if its toughness is X or less";
     }
@@ -61,6 +61,7 @@ class WelcomeToTheFoldEffect extends GainControlTargetEffect {
 
     @Override
     public void init(Ability source, Game game) {
+        super.init(source, game);
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             int maxToughness = 2;
@@ -71,10 +72,8 @@ class WelcomeToTheFoldEffect extends GainControlTargetEffect {
             Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
             if (permanent != null && permanent.getToughness().getValue() > maxToughness) {
                 this.discard();
-                return;
             }
         }
-        super.init(source, game);
     }
 
     @Override

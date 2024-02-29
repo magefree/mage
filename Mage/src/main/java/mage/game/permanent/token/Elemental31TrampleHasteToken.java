@@ -22,7 +22,7 @@ public final class Elemental31TrampleHasteToken extends TokenImpl {
         this.addAbility(HasteAbility.getInstance());
     }
 
-    protected Elemental31TrampleHasteToken(final Elemental31TrampleHasteToken token) {
+    private Elemental31TrampleHasteToken(final Elemental31TrampleHasteToken token) {
         super(token);
     }
 
@@ -30,4 +30,3 @@ public final class Elemental31TrampleHasteToken extends TokenImpl {
         return new Elemental31TrampleHasteToken(this);
     }
 }
-

@@ -70,9 +70,20 @@ import java.util.*;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
+/**
+ * Server: basic player implementation, shared for human and AI
+ * <p>
+ * WARNING, if you add new fields then sync it with constructor, restore, reset and init methods
+ */
 public abstract class PlayerImpl implements Player, Serializable {
 
     private static final Logger logger = Logger.getLogger(PlayerImpl.class);
+
+    /**
+     * During some steps we can't play anything
+     */
+    final static Map<PhaseStep, Step.StepPart> SILENT_PHASES_STEPS = ImmutableMap.<PhaseStep, Step.StepPart>builder().
+            put(PhaseStep.DECLARE_ATTACKERS, Step.StepPart.PRE).build();
 
     /**
      * Used to cancel waiting requests send to the player
@@ -82,15 +93,18 @@ public abstract class PlayerImpl implements Player, Serializable {
     protected final UUID playerId;
     protected String name;
     protected boolean human;
+
     protected int life;
     protected boolean wins;
     protected boolean draws;
     protected boolean loses;
+
     protected Library library;
     protected Cards sideboard;
     protected Cards hand;
     protected Graveyard graveyard;
     protected Set<UUID> commandersIds = new HashSet<>(0);
+
     protected Abilities<Ability> abilities;
     protected Counters counters;
     protected int landsPlayed;
@@ -98,6 +112,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     protected int maxHandSize = 7;
     protected int maxAttackedBy = Integer.MAX_VALUE;
     protected ManaPool manaPool;
+
     // priority control
     protected boolean passed; // player passed priority
     protected boolean passedTurn; // F4
@@ -142,18 +157,17 @@ public abstract class PlayerImpl implements Player, Serializable {
     protected boolean drawsOnOpponentsTurn = false;
 
     protected FilterPermanent sacrificeCostFilter;
-
     protected final List<AlternativeSourceCosts> alternativeSourceCosts = new ArrayList<>();
 
-    protected boolean isGameUnderControl = true;
-    protected UUID turnController;
-    protected List<UUID> turnControllers = new ArrayList<>();
-    protected Set<UUID> playersUnderYourControl = new HashSet<>();
+    // TODO: rework turn controller to use single list (see other todos)
+    //protected Stack<UUID> allTurnControllers = new Stack<>();
+    protected boolean isGameUnderControl = true; // TODO: replace with allTurnControllers.isEmpty
+    protected UUID turnController; // null on own control TODO: replace with allTurnControllers.last
+    protected List<UUID> turnControllers = new ArrayList<>(); // TODO: remove
+    protected Set<UUID> playersUnderYourControl = new HashSet<>(); // TODO: replace with game method and search in allTurnControllers
 
     protected Set<UUID> usersAllowedToSeeHandCards = new HashSet<>();
-
     protected List<UUID> attachments = new ArrayList<>();
-
     protected boolean topCardRevealed = false;
 
     // 800.4i When a player leaves the game, any continuous effects with durations that last until that player's next turn
@@ -184,12 +198,6 @@ public abstract class PlayerImpl implements Player, Serializable {
     // Used during available mana calculation to give back possible available net mana from triggered mana abilities (No need to copy)
     protected final List<List<Mana>> availableTriggeredManaList = new ArrayList<>();
 
-    /**
-     * During some steps we can't play anything
-     */
-    protected final Map<PhaseStep, Step.StepPart> silentPhaseSteps = ImmutableMap.<PhaseStep, Step.StepPart>builder().
-            put(PhaseStep.DECLARE_ATTACKERS, Step.StepPart.PRE).build();
-
     protected PlayerImpl(String name, RangeOfInfluence range) {
         this(UUID.randomUUID());
         this.name = name;
@@ -205,7 +213,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     protected PlayerImpl(UUID id) {
-        this.playerId = id;
+        this.playerId = id; // TODO: miss another fields init?
     }
 
     protected PlayerImpl(final PlayerImpl player) {
@@ -257,14 +265,14 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.storedBookmark = player.storedBookmark;
 
         this.topCardRevealed = player.topCardRevealed;
-        this.playersUnderYourControl.addAll(player.playersUnderYourControl);
         this.usersAllowedToSeeHandCards.addAll(player.usersAllowedToSeeHandCards);
 
         this.isTestMode = player.isTestMode;
-        this.isGameUnderControl = player.isGameUnderControl;
 
+        this.isGameUnderControl = player.isGameUnderControl;
         this.turnController = player.turnController;
         this.turnControllers.addAll(player.turnControllers);
+        this.playersUnderYourControl.addAll(player.playersUnderYourControl);
 
         this.passed = player.passed;
         this.passedTurn = player.passedTurn;
@@ -291,6 +299,11 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.designations = CardUtil.deepCopyObject(player.designations);
     }
 
+    /**
+     * Restore on rollback
+     *
+     * @param player
+     */
     @Override
     public void restore(Player player) {
         this.name = player.getName();
@@ -352,13 +365,14 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.alternativeSourceCosts.addAll(player.getAlternativeSourceCosts());
 
         this.topCardRevealed = player.isTopCardRevealed();
-        this.playersUnderYourControl.clear();
-        this.playersUnderYourControl.addAll(player.getPlayersUnderYourControl());
-        this.isGameUnderControl = player.isGameUnderControl();
 
-        this.turnController = player.getTurnControlledBy();
+        this.isGameUnderControl = player.isGameUnderControl();
+        this.turnController = this.getId().equals(player.getTurnControlledBy()) ? null : player.getTurnControlledBy();
         this.turnControllers.clear();
         this.turnControllers.addAll(player.getTurnControllers());
+        this.playersUnderYourControl.clear();
+        this.playersUnderYourControl.addAll(player.getPlayersUnderYourControl());
+
         this.reachedNextTurnAfterLeaving = player.hasReachedNextTurnAfterLeaving();
 
         this.clearCastSourceIdManaCosts();
@@ -398,43 +412,35 @@ public abstract class PlayerImpl implements Player, Serializable {
         for (Card card : deck.getSideboard()) {
             sideboard.add(card);
         }
-        //TODO ARTI initialize extra decks here!
     }
 
-    /**
-     * Cast e.g. from Karn Liberated to restart the current game
-     *
-     * @param game
-     */
     @Override
     public void init(Game game) {
-        init(game, false);
-    }
-
-    @Override
-    public void init(Game game, boolean testMode) {
         this.abort = false;
-        if (!testMode) {
-            this.hand.clear();
-            this.graveyard.clear();
-        }
-        this.library.reset();
-        this.abilities.clear();
-        this.counters.clear();
+
+        // keep old
+        //this.playerId;
+        //this.name;
+        //this.human;
+
+        this.life = game.getStartingLife();
         this.wins = false;
         this.draws = false;
         this.loses = false;
-        this.left = false;
-        // reset is necessary because in tournament player will be used for each round
-        this.quit = false;
-        this.timerTimeout = false;
-        this.idleTimeout = false;
 
-        this.turns = 0;
-        this.isGameUnderControl = true;
-        this.turnController = this.getId();
-        this.turnControllers.clear();
-        this.playersUnderYourControl.clear();
+        this.library.reset();
+        this.sideboard.clear();
+        this.hand.clear();
+        this.graveyard.clear();
+        this.commandersIds.clear();
+
+        this.abilities.clear();
+        this.counters.clear();
+        this.landsPlayed = 0;
+        this.landsPerTurn = 1;
+        this.maxHandSize = 7;
+        this.maxAttackedBy = Integer.MAX_VALUE;
+        this.getManaPool().init(); // needed to remove mana that not empties on step change from previous game if left
 
         this.passed = false;
         this.passedTurn = false;
@@ -448,19 +454,51 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.passedAllTurns = false;
         this.justActivatedType = null;
 
+        this.turns = 0;
+        this.storedBookmark = -1;
+        this.priorityTimeLeft = Integer.MAX_VALUE;
+        this.bufferTimeLeft = 0;
+
+        // reset is necessary because in tournament player will be used for each round
+        this.left = false;
+        this.quit = false;
+        this.timerTimeout = false;
+        this.idleTimeout = false;
+
+        //this.range; // must keep
+        this.inRange.clear();
+
+        //this.isTestMode // must keep
         this.canGainLife = true;
         this.canLoseLife = true;
+        this.payLifeCostLevel = PayLifeCostLevel.allAbilities;
+        this.loseByZeroOrLessLife = true;
+        this.canPlayCardsFromGraveyard = true;
+        this.drawsOnOpponentsTurn = false;
+
+        this.sacrificeCostFilter = null;
+        this.alternativeSourceCosts.clear();
+
+        this.isGameUnderControl = true;
+        this.turnController = null;
+        this.turnControllers.clear();
+        this.playersUnderYourControl.clear();
+
+        //this.usersAllowedToSeeHandCards; // must keep
+        this.attachments.clear();
         this.topCardRevealed = false;
-        this.payManaMode = false;
-        this.setLife(game.getStartingLife(), game, null);
-        this.setReachedNextTurnAfterLeaving(false);
 
+        this.reachedNextTurnAfterLeaving = false;
         this.clearCastSourceIdManaCosts();
+        this.payManaMode = false;
 
-        this.getManaPool().init(); // needed to remove mana that not empties on step change from previous game if left
-        this.phyrexianColors = null;
+        // must keep
+        //this.userData;
+        //this.matchPlayer;
 
         this.designations.clear();
+        this.phyrexianColors = null;
+        this.availableTriggeredManaList.clear();
     }
 
     /**
@@ -572,6 +610,9 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public void setTurnControlledBy(UUID playerId) {
+        if (playerId == null) {
+            throw new IllegalArgumentException("Can't add unknown player to turn controllers: " + playerId);
+        }
         this.turnController = playerId;
         this.turnControllers.add(playerId);
     }
@@ -583,7 +624,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public UUID getTurnControlledBy() {
-        return this.turnController;
+        return this.turnController == null ? this.getId() : this.turnController;
     }
 
     @Override
@@ -612,14 +653,18 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.isGameUnderControl = value;
         if (isGameUnderControl) {
             if (fullRestore) {
+                // to own
                 this.turnControllers.clear();
-                this.turnController = getId();
+                this.turnController = null;
+                this.isGameUnderControl = true;
             } else {
+                // to prev player
                 if (!turnControllers.isEmpty()) {
                     this.turnControllers.remove(turnControllers.size() - 1);
                 }
                 if (turnControllers.isEmpty()) {
-                    this.turnController = getId();
+                    this.turnController = null;
+                    this.isGameUnderControl = true;
                 } else {
                     this.turnController = turnControllers.get(turnControllers.size() - 1);
                     isGameUnderControl = false;
@@ -797,13 +842,13 @@ public abstract class PlayerImpl implements Player, Serializable {
     private boolean doDiscard(Card card, Ability source, Game game, boolean payForCost, boolean fireFinalEvent) {
         //20100716 - 701.7
         /* 701.7. Discard #
-         701.7a To discard a card, move it from its owners hand to that players graveyard.
+         701.7a To discard a card, move it from its owner's hand to that player's graveyard.
          701.7b By default, effects that cause a player to discard a card allow the affected
          player to choose which card to discard. Some effects, however, require a random
          discard or allow another player to choose which card is discarded.
          701.7c If a card is discarded, but an effect causes it to be put into a hidden zone
-         instead of into its owners graveyard without being revealed, all values of that
-         cards characteristics are considered to be undefined.
+         instead of into its owner's graveyard without being revealed, all values of that
+         card's characteristics are considered to be undefined.
          TODO:
          If a card is discarded this way to pay a cost that specifies a characteristic
          about the discarded card, that cost payment is illegal; the game returns to
@@ -1331,7 +1376,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         NOT_REQUIRED_NO_CHOICE,
     }
 
-    private class ApprovingObjectResult {
+    private static class ApprovingObjectResult {
         public final ApprovingObjectResultStatus status;
         public final ApprovingObject approvingObject; // not null iff status is CHOSEN
 
@@ -1804,7 +1849,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             int last = cards.size();
             for (Card card : cards.getCards(game)) {
                 current++;
-                sb.append(GameLog.getColoredObjectName(card));
+                sb.append(GameLog.getColoredObjectName(card)); // TODO: see same usage in OfferingAbility for hide card's id (is it needs for reveal too?!)
                 if (current < last) {
                     sb.append(", ");
                 }
@@ -2480,7 +2525,8 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public void concede(Game game) {
         game.setConcedingPlayer(playerId);
-        lost(game);
+
+        lost(game); // it's ok to be ignored by "can't lose abilities" here (setConcedingPlayer done all work above)
     }
 
     @Override
@@ -2675,6 +2721,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public void declareAttacker(UUID attackerId, UUID defenderId, Game game, boolean allowUndo) {
         if (allowUndo) {
+            // TODO: allowUndo is smells bad, must be researched (what will be restored on allowUndo = false and why there are so diff usage), 2024-01-16
             setStoredBookmark(game.bookmarkState()); // makes it possible to UNDO a declared attacker with costs from e.g. Propaganda
         }
         Permanent attacker = game.getPermanent(attackerId);
@@ -4246,7 +4293,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         if (game.getStep() == null) { // happens at the start of the game
             return true;
         }
-        for (Entry<PhaseStep, Step.StepPart> phaseStep : silentPhaseSteps.entrySet()) {
+        for (Entry<PhaseStep, Step.StepPart> phaseStep : SILENT_PHASES_STEPS.entrySet()) {
             if (game.getPhase() != null
                     && game.getPhase().getStep() != null
                     && phaseStep.getKey() == game.getPhase().getStep().getType()) {
@@ -4437,7 +4484,8 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public boolean canPaySacrificeCost(Permanent permanent, Ability source, UUID controllerId, Game game) {
-        return sacrificeCostFilter == null || !sacrificeCostFilter.match(permanent, controllerId, source, game);
+        return permanent.canBeSacrificed() &&
+                (sacrificeCostFilter == null || !sacrificeCostFilter.match(permanent, controllerId, source, game));
     }
 
     @Override
@@ -4651,7 +4699,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                             Player eventPlayer = game.getPlayer(info.event.getPlayerId());
                             if (eventPlayer != null && fromZone != null) {
                                 game.informPlayers(eventPlayer.getLogName() + " puts "
-                                        + (info.faceDown ? "a card face down " : permanent.getLogName()) + " from "
+                                        + GameLog.getColoredObjectIdName(permanent) + " from "
                                         + fromZone.toString().toLowerCase(Locale.ENGLISH) + " onto the Battlefield"
                                         + CardUtil.getSourceLogName(game, source, permanent.getId()));
                             }
@@ -4677,10 +4725,23 @@ public abstract class PlayerImpl implements Player, Serializable {
                 break;
             case EXILED:
                 for (Card card : cards) {
+                    // 708.9.
+                    // If a face-down permanent or a face-down component of a merged permanent moves from the
+                    // battlefield to any other zone, its owner must reveal it to all players as they move it.
+                    // If a face-down spell moves from the stack to any zone other than the battlefield,
+                    // its owner must reveal it to all players as they move it. If a player leaves the game,
+                    // all face-down permanents, face-down components of merged permanents, and face-down spells
+                    // owned by that player must be revealed to all players. At the end of each game, all
+                    // face-down permanents, face-down components of merged permanents, and face-down spells must
+                    // be revealed to all players.
+
+                    // force to show face down name in logs
+                    // TODO: replace it to real reveal code somehow?
                     fromZone = game.getState().getZone(card.getId());
                     boolean withName = (fromZone == Zone.BATTLEFIELD
                             || fromZone == Zone.STACK)
                             || !card.isFaceDown(game);
+
                     if (moveCardToExileWithInfo(card, null, "", source, game, fromZone, withName)) {
                         successfulMovedCards.add(card);
                     }
@@ -4958,10 +5019,19 @@ public abstract class PlayerImpl implements Player, Serializable {
                     }
                 }
                 if (Zone.EXILED.equals(game.getState().getZone(card.getId()))) { // only if target zone was not replaced
-                    game.informPlayers(this.getLogName() + " moves " + (withName ? card.getLogName()
-                            + (card.isCopy() ? " (Copy)" : "") : "a card face down") + ' '
-                            + (fromZone != null ? "from " + fromZone.toString().toLowerCase(Locale.ENGLISH)
-                            + ' ' : "") + "to the exile zone" + CardUtil.getSourceLogName(game, source, card.getId()));
+                    String visibleName;
+                    if (withName) {
+                        // warning, withName param used to forced name show of the face down card (see 708.9.)
+                        if (card.getName().isEmpty()) {
+                            throw new IllegalStateException("Wrong code usage: method must find real card name, but found nothing", new Throwable());
+                        }
+                        visibleName = card.getLogName() + (card.isCopy() ? " (Copy)" : "");
+                    } else {
+                        visibleName = "a " + GameLog.getNeutralObjectIdName(EmptyNames.FACE_DOWN_CARD.toString(), card.getId());
+                    }
+                    game.informPlayers(this.getLogName() + " moves " + visibleName
+                            + (fromZone != null ? " from " + fromZone.toString().toLowerCase(Locale.ENGLISH) : "")
+                            + " to the exile zone" + CardUtil.getSourceLogName(game, source, card.getId()));
                 }
 
             }

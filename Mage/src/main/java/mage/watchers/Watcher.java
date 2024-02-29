@@ -60,7 +60,7 @@ public abstract class Watcher implements Serializable {
             case CARD:
                 return sourceId + getBasicKey();
             default:
-                return getBasicKey();
+                throw new IllegalArgumentException("Unknown watcher scope: " + this.getClass().getSimpleName() + " - " + scope);
         }
     }
 

@@ -78,7 +78,7 @@ public final class HellkiteTyrant extends CardImpl {
 
 class HellkiteTyrantEffect extends OneShotEffect {
 
-    public HellkiteTyrantEffect() {
+    HellkiteTyrantEffect() {
         super(Outcome.GainControl);
         this.staticText = "gain control of all artifacts that player controls";
     }
@@ -132,7 +132,7 @@ class HellkiteTyrantControlEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
+        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (permanent != null && controllerId != null) {
             return permanent.changeControllerId(controllerId, game, source);
         }

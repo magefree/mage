@@ -41,7 +41,7 @@ public final class IizukaTheRuthless extends CardImpl {
         this.addAbility(new BushidoAbility(2));
         // {2}{R}, Sacrifice a Samurai: Samurai creatures you control gain double strike until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn, filter2, false), new ManaCostsImpl<>("{2}{R}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, true)));
+        ability.addCost(new SacrificeTargetCost(filter));
         this.addAbility(ability);
     }
 

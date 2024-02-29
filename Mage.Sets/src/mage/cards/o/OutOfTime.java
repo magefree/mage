@@ -51,7 +51,7 @@ public final class OutOfTime extends CardImpl {
 
 class OutOfTimePhaseOutEffect extends OneShotEffect {
 
-    public OutOfTimePhaseOutEffect() {
+    OutOfTimePhaseOutEffect() {
         super(Outcome.AIDontUseIt);
         this.staticText = "untap all creatures, then those creatures phase out until {this} leaves the battlefield. "
                 + "Put a time counter on {this} for each creature that phased out this way";
@@ -128,7 +128,7 @@ class OutOfTimeDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
 class OutOfTimeLeavesBattlefieldEffect extends OneShotEffect {
 
-    public OutOfTimeLeavesBattlefieldEffect() {
+    OutOfTimeLeavesBattlefieldEffect() {
         super(Outcome.Neutral);
     }
 
@@ -163,7 +163,7 @@ class OutOfTimeLeavesBattlefieldEffect extends OneShotEffect {
 // Stops creatures from phasing back in on their controller's next turn
 class OutOfTimeReplacementEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public OutOfTimeReplacementEffect() {
+    OutOfTimeReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Neutral, false, false);
     }
 

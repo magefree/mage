@@ -134,7 +134,7 @@ class GodsendTriggeredAbility extends TriggeredAbilityImpl {
 
 class GodsendExileEffect extends OneShotEffect {
 
-    public GodsendExileEffect() {
+    GodsendExileEffect() {
         super(Outcome.Exile);
         this.staticText = "you may exile one of those creatures";
     }
@@ -165,7 +165,7 @@ class GodsendExileEffect extends OneShotEffect {
 
 class GodsendRuleModifyingEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public GodsendRuleModifyingEffect() {
+    GodsendRuleModifyingEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "Your opponents can't cast cards with the same name as cards exiled with {this}";
     }

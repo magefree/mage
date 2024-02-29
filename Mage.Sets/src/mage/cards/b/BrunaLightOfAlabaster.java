@@ -59,7 +59,7 @@ public final class BrunaLightOfAlabaster extends CardImpl {
 
 class BrunaLightOfAlabasterEffect extends OneShotEffect {
 
-    public BrunaLightOfAlabasterEffect() {
+    BrunaLightOfAlabasterEffect() {
         super(Outcome.Benefit);
         this.staticText = "attach to it any number of Auras on the battlefield and you may put onto the battlefield attached to it any number of Aura cards that could enchant it from your graveyard and/or hand";
     }

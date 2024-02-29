@@ -80,7 +80,7 @@ class ShahOfNaarIsleTriggeredAbility extends TriggeredAbilityImpl {
 
 class ShahOfNaarIsleEffect extends OneShotEffect {
 
-    public ShahOfNaarIsleEffect() {
+    ShahOfNaarIsleEffect() {
         super(Outcome.DrawCard);
         this.staticText = "each opponent may draw up to three cards";
     }

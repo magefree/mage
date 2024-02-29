@@ -49,7 +49,7 @@ public final class Tariff extends CardImpl {
 
 class TariffEffect extends OneShotEffect {
 
-    public TariffEffect() {
+    TariffEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "Each player sacrifices the creature they control with the highest mana value unless they pay that creature's mana cost. If two or more creatures a player controls are tied for highest, that player chooses one.";
     }

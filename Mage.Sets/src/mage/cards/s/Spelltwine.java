@@ -64,7 +64,7 @@ public final class Spelltwine extends CardImpl {
 
 class SpelltwineEffect extends OneShotEffect {
 
-    public SpelltwineEffect() {
+    SpelltwineEffect() {
         super(Outcome.PlayForFree);
         staticText = "Exile target instant or sorcery card from your graveyard and "
                 + "target instant or sorcery card from an opponent's graveyard. "

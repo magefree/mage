@@ -57,7 +57,7 @@ public final class TheTwelfthDoctor extends CardImpl {
 // Code adapted from Wild-Magic Sorcerer
 class TheTwelfthDoctorGainDemonstrateEffect extends ContinuousEffectImpl {
 
-    public TheTwelfthDoctorGainDemonstrateEffect() {
+    TheTwelfthDoctorGainDemonstrateEffect() {
         super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         staticText = "The first spell you cast from anywhere other than your hand each turn has demonstrate";
     }

@@ -43,7 +43,7 @@ public final class Martyrdom extends CardImpl {
 
 class MartyrdomGainAbilityTargetEffect extends ContinuousEffectImpl {
 
-    public MartyrdomGainAbilityTargetEffect() {
+    MartyrdomGainAbilityTargetEffect() {
         super(Duration.EndOfTurn, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         this.staticText = "Until end of turn, target creature you control gains \"{0}: The next 1 damage that would be dealt to target creature, planeswalker, or player this turn is dealt to this creature instead.\" Only you may activate this ability";
     }

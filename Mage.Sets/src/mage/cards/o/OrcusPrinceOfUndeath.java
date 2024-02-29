@@ -70,7 +70,7 @@ public final class OrcusPrinceOfUndeath extends CardImpl {
 
 class OrcusPrinceOfUndeathBoostEffect extends OneShotEffect {
 
-    public OrcusPrinceOfUndeathBoostEffect() {
+    OrcusPrinceOfUndeathBoostEffect() {
         super(Outcome.UnboostCreature);
         this.staticText = "Each other creature gets -X/-X until end of turn. You lose X life";
     }

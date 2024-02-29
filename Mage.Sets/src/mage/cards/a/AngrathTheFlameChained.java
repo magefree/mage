@@ -72,7 +72,7 @@ public final class AngrathTheFlameChained extends CardImpl {
 
 class AngrathTheFlameUltimateEffect extends OneShotEffect {
 
-    public AngrathTheFlameUltimateEffect() {
+    AngrathTheFlameUltimateEffect() {
         super(Outcome.Benefit);
         this.staticText = "Each opponent loses life equal to the number of cards in their graveyard";
     }
@@ -100,7 +100,7 @@ class AngrathTheFlameUltimateEffect extends OneShotEffect {
 
 class AngrathTheFlameCreateDelayedTriggerEffect extends OneShotEffect {
 
-    public AngrathTheFlameCreateDelayedTriggerEffect() {
+    AngrathTheFlameCreateDelayedTriggerEffect() {
         super(Outcome.Sacrifice);
         staticText = "Sacrifice it at the beginning of the next end step if it has mana value 3 or less";
     }

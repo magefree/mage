@@ -25,7 +25,7 @@ public final class TheAtropalToken extends TokenImpl {
         addAbility(DeathtouchAbility.getInstance());
     }
 
-    protected TheAtropalToken(final TheAtropalToken token) {
+    private TheAtropalToken(final TheAtropalToken token) {
         super(token);
     }
 

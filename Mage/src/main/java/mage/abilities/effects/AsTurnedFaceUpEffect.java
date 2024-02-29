@@ -35,7 +35,7 @@ public class AsTurnedFaceUpEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.TURNFACEUP;
+        return event.getType() == GameEvent.EventType.TURN_FACE_UP;
     }
 
     @Override

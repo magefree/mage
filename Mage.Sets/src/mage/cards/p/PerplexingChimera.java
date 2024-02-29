@@ -130,7 +130,7 @@ class PerplexingChimeraTriggeredAbility extends TriggeredAbilityImpl {
 
 class PerplexingChimeraControlExchangeEffect extends OneShotEffect {
 
-    public PerplexingChimeraControlExchangeEffect() {
+    PerplexingChimeraControlExchangeEffect() {
         super(Outcome.Benefit);
         this.staticText = "exchange control of {this} and that spell. If you do, you may choose new targets for the spell";
     }
@@ -146,7 +146,7 @@ class PerplexingChimeraControlExchangeEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
+        Spell spell = game.getStack().getSpell(getTargetPointer().getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
         if (spell != null && controller != null) {
             Player spellCaster = game.getPlayer(spell.getControllerId());
@@ -169,7 +169,7 @@ class PerplexingChimeraControlExchangeEffect extends OneShotEffect {
 
 class PerplexingChimeraControlEffect extends ContinuousEffectImpl {
 
-    public PerplexingChimeraControlEffect() {
+    PerplexingChimeraControlEffect() {
         super(Duration.Custom, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
         staticText = "PerplexingChimeraControlEffect";
     }

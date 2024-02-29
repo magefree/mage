@@ -50,7 +50,7 @@ public final class EvraHalcyonWitness extends CardImpl {
 
 class EvraHalcyonWitnessEffect extends OneShotEffect {
 
-    public EvraHalcyonWitnessEffect() {
+    EvraHalcyonWitnessEffect() {
         super(Outcome.GainLife);
         staticText = "Exchange your life total with {this}'s power";
     }

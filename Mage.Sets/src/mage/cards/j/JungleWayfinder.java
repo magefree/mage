@@ -49,7 +49,7 @@ public final class JungleWayfinder extends CardImpl {
 
 class JungleWayfinderEffect extends OneShotEffect {
 
-    public JungleWayfinderEffect() {
+    JungleWayfinderEffect() {
         super(Outcome.Benefit);
         this.staticText = "each player may search their library for a basic land card, reveal it, put it into their hand, then shuffle";
     }

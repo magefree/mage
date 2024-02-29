@@ -63,7 +63,7 @@ public final class KnacksawClique extends CardImpl {
 
 class KnacksawCliqueEffect extends OneShotEffect {
 
-    public KnacksawCliqueEffect() {
+    KnacksawCliqueEffect() {
         super(Outcome.Benefit);
         this.staticText = "Target opponent exiles the top card of their library. Until end of turn, you may play that card";
     }
@@ -79,7 +79,7 @@ class KnacksawCliqueEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player opponent = game.getPlayer(targetPointer.getFirst(game, source));
+        Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
         MageObject sourceObject = game.getObject(source);
         if (sourceObject != null && opponent != null) {
             if (opponent.getLibrary().hasCards()) {
@@ -100,7 +100,7 @@ class KnacksawCliqueEffect extends OneShotEffect {
 
 class KnacksawCliqueCastFromExileEffect extends AsThoughEffectImpl {
 
-    public KnacksawCliqueCastFromExileEffect() {
+    KnacksawCliqueCastFromExileEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
         staticText = "Until end of turn, you may play that card";
     }

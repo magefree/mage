@@ -32,7 +32,7 @@ public final class DroolingGroodion extends CardImpl {
         // {2}{B}{G}, Sacrifice a creature: Target creature gets +2/+2 until end of turn. Another target creature gets -2/-2 until end of turn.
         Ability ability = new SimpleActivatedAbility(new BoostTargetEffect(2, 2), new ManaCostsImpl<>("{2}{B}{G}"));
         ability.addEffect(new BoostTargetEffect(-2, -2).setTargetPointer(new SecondTargetPointer()));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
 
         TargetCreaturePermanent target = new TargetCreaturePermanent();
         target.setTargetTag(1);

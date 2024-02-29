@@ -41,7 +41,7 @@ public final class CommuneWithLava extends CardImpl {
 
 class CommuneWithLavaEffect extends OneShotEffect {
 
-    public CommuneWithLavaEffect() {
+    CommuneWithLavaEffect() {
         super(Outcome.PlayForFree);
         this.staticText = "Exile the top X cards of your library. Until the end of your next turn, you may play those cards";
     }

@@ -40,7 +40,7 @@ public final class Camaraderie extends CardImpl {
 
 class CamaraderieEffect extends OneShotEffect {
 
-    public CamaraderieEffect() {
+    CamaraderieEffect() {
         super(Outcome.Benefit);
         this.staticText = "You gain X life and draw X cards, "
                 + "where X is the number of creatures you control. "

@@ -39,7 +39,7 @@ public final class RiteOfRuin extends CardImpl {
 
 class RiteOfRuinEffect extends OneShotEffect {
 
-    public RiteOfRuinEffect() {
+    RiteOfRuinEffect() {
         super(Outcome.Sacrifice);
         this.staticText = "Choose an order for artifacts, creatures, and lands. Each player sacrifices one permanent of the first type, sacrifices two of the second type, then sacrifices three of the third type";
     }

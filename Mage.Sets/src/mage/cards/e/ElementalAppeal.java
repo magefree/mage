@@ -50,7 +50,7 @@ public final class ElementalAppeal extends CardImpl {
 
 class ElementalAppealEffect extends OneShotEffect {
 
-    public ElementalAppealEffect() {
+    ElementalAppealEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Create a 7/1 red Elemental creature token with trample and haste. "
                 + "Exile it at the beginning of the next end step. "

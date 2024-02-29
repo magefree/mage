@@ -40,7 +40,7 @@ public final class ErraticExplosion extends CardImpl {
 
 class ErraticExplosionEffect extends OneShotEffect {
 
-    public ErraticExplosionEffect() {
+    ErraticExplosionEffect() {
         super(Outcome.Damage);
         this.staticText = "Choose any target. Reveal cards from the top of your library until you reveal a nonland card. {this} deals damage equal to that card's mana value to that permanent or player. Put the revealed cards on the bottom of your library in any order";
     }

@@ -47,7 +47,7 @@ public final class AcornCatapult extends CardImpl {
 
 class AcornCatapultEffect extends OneShotEffect {
 
-    public AcornCatapultEffect() {
+    AcornCatapultEffect() {
         super(Outcome.PutCreatureInPlay);
         staticText = "that creature's controller or that player creates a 1/1 green Squirrel creature token";
     }

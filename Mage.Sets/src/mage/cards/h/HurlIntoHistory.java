@@ -53,7 +53,7 @@ public final class HurlIntoHistory extends CardImpl {
  */
 class HurlIntoHistoryEffect extends OneShotEffect {
 
-    public HurlIntoHistoryEffect() {
+    HurlIntoHistoryEffect() {
         super(Outcome.Detriment);
         staticText = "Counter target artifact or creature spell. Discover X, where X is that spell's mana value.";
     }
@@ -69,7 +69,7 @@ class HurlIntoHistoryEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        StackObject stackObject = game.getStack().getStackObject(targetPointer.getFirst(game, source));
+        StackObject stackObject = game.getStack().getStackObject(getTargetPointer().getFirst(game, source));
         if (stackObject == null) {
             return false;
         }

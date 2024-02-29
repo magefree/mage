@@ -47,7 +47,7 @@ public final class SadisticAugermage extends CardImpl {
 
 class WidespreadPanicEffect extends OneShotEffect {
 
-    public WidespreadPanicEffect() {
+    WidespreadPanicEffect() {
         super(Outcome.Detriment);
         this.staticText = "each player puts a card from their hand on top of their library";
     }

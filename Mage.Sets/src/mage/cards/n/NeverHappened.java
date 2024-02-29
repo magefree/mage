@@ -43,7 +43,7 @@ public final class NeverHappened extends CardImpl {
 
 class NeverHappenedEffect extends OneShotEffect {
 
-    public NeverHappenedEffect() {
+    NeverHappenedEffect() {
         super(Outcome.Benefit);
         this.staticText = "Target opponent reveals their hand. "
                 + "You choose a nonland card from that player's graveyard "

@@ -44,7 +44,7 @@ public class TableController {
     private static final Logger logger = Logger.getLogger(TableController.class);
 
     private final ManagerFactory managerFactory;
-    private final UUID userId;
+    private final UUID userId; // table owner/creator (null in tourney's table)
     private final UUID chatId;
     private final String controllerName;
     private final Table table;
@@ -59,20 +59,20 @@ public class TableController {
 
     public TableController(ManagerFactory managerFactory, UUID roomId, UUID userId, MatchOptions options) {
         this.managerFactory = managerFactory;
-        timeoutExecutor = managerFactory.threadExecutor().getTimeoutExecutor();
+        this.timeoutExecutor = managerFactory.threadExecutor().getTimeoutExecutor();
         this.userId = userId;
         this.options = options;
-        match = GameFactory.instance.createMatch(options.getGameType(), options);
+        this.match = GameFactory.instance.createMatch(options.getGameType(), options);
         if (userId != null) {
             Optional<User> user = managerFactory.userManager().getUser(userId);
             // TODO: Handle if user == null
-            controllerName = user.map(User::getName).orElse("undefined");
+            this.controllerName = user.map(User::getName).orElse("undefined");
         } else {
-            controllerName = "System";
+            this.controllerName = "System";
         }
-        table = new Table(roomId, options.getGameType(), options.getName(), controllerName, DeckValidatorFactory.instance.createDeckValidator(options.getDeckType()),
+        this.table = new Table(roomId, options.getGameType(), options.getName(), controllerName, DeckValidatorFactory.instance.createDeckValidator(options.getDeckType()),
                 options.getPlayerTypes(), new TableRecorderImpl(managerFactory.userManager()), match, options.getBannedUsers(), options.isPlaneChase());
-        chatId = managerFactory.chatManager().createChatSession("Match Table " + table.getId());
+        this.chatId = managerFactory.chatManager().createChatSession("Match Table " + table.getId());
         init();
     }
 
@@ -604,17 +604,17 @@ public class TableController {
         if (table.getState() == TableState.STARTING) {
             try {
                 if (table.isTournamentSubTable()) {
-                    logger.info("Tourn. match started id:" + match.getId() + " tournId: " + table.getTournament().getId());
+                    logger.info("Tourney MATCH started id:" + match.getId() + " tournId: " + table.getTournament().getId());
                 } else {
                     managerFactory.userManager().getUser(userId).ifPresent(user -> {
-                        logger.info("MATCH started [" + match.getName() + "] " + match.getId() + " (" + user.getName() + ')');
+                        logger.info("Single MATCH started [" + match.getName() + "] " + match.getId() + " (" + user.getName() + ')');
                         logger.debug("- " + match.getOptions().getGameType() + " - " + match.getOptions().getDeckType());
                     });
                 }
                 match.startMatch();
                 startGame(null);
-            } catch (GameException ex) {
-                logger.fatal("Error starting match ", ex);
+            } catch (GameException e) {
+                logger.fatal("Error starting match: " + e, e);
                 match.endGame();
             }
         }

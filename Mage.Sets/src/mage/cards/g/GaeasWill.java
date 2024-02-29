@@ -51,7 +51,7 @@ public final class GaeasWill extends CardImpl {
 
 class GaeasWillGraveyardEffect extends ContinuousEffectImpl {
 
-    public GaeasWillGraveyardEffect() {
+    GaeasWillGraveyardEffect() {
         this(Duration.EndOfTurn);
     }
 
@@ -82,7 +82,7 @@ class GaeasWillGraveyardEffect extends ContinuousEffectImpl {
 
 class GaeassWillReplacementEffect extends ReplacementEffectImpl {
 
-    public GaeassWillReplacementEffect() {
+    GaeassWillReplacementEffect() {
         super(Duration.EndOfTurn, Outcome.Detriment);
         this.staticText = "<br>If a card would be put into your graveyard from anywhere this turn, exile that card instead";
     }

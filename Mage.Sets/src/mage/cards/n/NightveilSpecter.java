@@ -68,7 +68,7 @@ public final class NightveilSpecter extends CardImpl {
 
 class NightveilSpecterExileEffect extends OneShotEffect {
 
-    public NightveilSpecterExileEffect() {
+    NightveilSpecterExileEffect() {
         super(Outcome.Discard);
         staticText = "that player exiles the top card of their library";
     }
@@ -79,7 +79,7 @@ class NightveilSpecterExileEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (player != null) {
             Card card = player.getLibrary().getFromTop(game);
             if (card != null) {
@@ -98,7 +98,7 @@ class NightveilSpecterExileEffect extends OneShotEffect {
 
 class NightveilSpecterEffect extends AsThoughEffectImpl {
 
-    public NightveilSpecterEffect() {
+    NightveilSpecterEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
         staticText = "You may play cards exiled with {this}";
     }

@@ -41,7 +41,7 @@ public final class IntimidationBolt extends CardImpl {
 
 class IntimidationEffect extends RestrictionEffect {
 
-    public IntimidationEffect(Duration duration) {
+    IntimidationEffect(Duration duration) {
         super(duration);
         staticText = "Other creatures can't attack this turn";
     }

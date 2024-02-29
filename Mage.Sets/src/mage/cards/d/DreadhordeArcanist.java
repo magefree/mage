@@ -5,17 +5,13 @@ import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.common.MayCastTargetThenExileEffect;
 import mage.abilities.keyword.TrampleAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterInstantOrSorceryCard;
-import mage.filter.predicate.ObjectSourcePlayer;
-import mage.filter.predicate.ObjectSourcePlayerPredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.filter.predicate.card.ManaValueLessThanOrEqualToSourcePowerPredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 
 import java.util.UUID;
@@ -30,7 +26,7 @@ public final class DreadhordeArcanist extends CardImpl {
     );
 
     static {
-        filter.add(DreadhordeArcanistPredicate.instance);
+        filter.add(ManaValueLessThanOrEqualToSourcePowerPredicate.instance);
     }
 
     public DreadhordeArcanist(UUID ownerId, CardSetInfo setInfo) {
@@ -58,16 +54,5 @@ public final class DreadhordeArcanist extends CardImpl {
     @Override
     public DreadhordeArcanist copy() {
         return new DreadhordeArcanist(this);
-    }
-}
-
-enum DreadhordeArcanistPredicate implements ObjectSourcePlayerPredicate<Card> {
-    instance;
-
-    @Override
-    public boolean apply(ObjectSourcePlayer<Card> input, Game game) {
-        Permanent sourcePermanent = input.getSource().getSourcePermanentOrLKI(game);
-        return sourcePermanent != null
-                && input.getObject().getManaValue() <= sourcePermanent.getPower().getValue();
     }
 }

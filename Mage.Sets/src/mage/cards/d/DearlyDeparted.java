@@ -46,7 +46,7 @@ public final class DearlyDeparted extends CardImpl {
 
 class DearlyDepartedEntersBattlefieldEffect extends ReplacementEffectImpl {
 
-    public DearlyDepartedEntersBattlefieldEffect() {
+    DearlyDepartedEntersBattlefieldEffect() {
         super(Duration.WhileInGraveyard, Outcome.BoostCreature);
         staticText = "As long as {this} is in your graveyard, each Human creature you control enters the battlefield with an additional +1/+1 counter on it";
     }

@@ -64,6 +64,7 @@ class QuickenAsThoughEffect extends AsThoughEffectImpl {
 
     @Override
     public void init(Ability source, Game game) {
+        super.init(source, game);
         quickenWatcher = game.getState().getWatcher(QuickenWatcher.class);
         Card card = game.getCard(source.getSourceId());
         if (quickenWatcher != null && card != null) {

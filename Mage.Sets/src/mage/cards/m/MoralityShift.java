@@ -1,10 +1,5 @@
-
 package mage.cards.m;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -16,19 +11,21 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class MoralityShift extends CardImpl {
 
     public MoralityShift(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{5}{B}{B}");
-        
 
         // Exchange your graveyard and library. Then shuffle your library.
         this.getSpellAbility().addEffect(new MoralityShiftEffect());
-        
+
     }
 
     private MoralityShift(final MoralityShift card) {
@@ -43,7 +40,7 @@ public final class MoralityShift extends CardImpl {
 
 class MoralityShiftEffect extends OneShotEffect {
 
-   MoralityShiftEffect() {
+    MoralityShiftEffect() {
         super(Outcome.AIDontUseIt);
         staticText = "Exchange your graveyard and library. Then shuffle your library.";
     }
@@ -60,20 +57,14 @@ class MoralityShiftEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Set<Card> copyLibrary = new HashSet<>();
-            List<Card> listCopyLibrary = controller.getLibrary().getCards(game);
-            listCopyLibrary.forEach((card) -> {
-                copyLibrary.add(card);
-            });
-            Set<Card> copyGraveyard = controller.getGraveyard().getCards(game);
-            controller.getLibrary().clear();
-            controller.getGraveyard().clear();
-            controller.moveCards(copyLibrary, Zone.GRAVEYARD, source, game);
-            controller.moveCards(copyGraveyard, Zone.LIBRARY, source, game);
-            controller.shuffleLibrary(source, game);
-            return true;
+        if (controller == null) {
+            return false;
         }
-        return false;
+        Set<Card> copyLibrary = new LinkedHashSet<>(controller.getLibrary().getCards(game));
+        Set<Card> copyGraveyard = new LinkedHashSet<>(controller.getGraveyard().getCards(game));
+        controller.moveCards(copyGraveyard, Zone.LIBRARY, source, game);
+        controller.moveCards(copyLibrary, Zone.GRAVEYARD, source, game);
+        controller.shuffleLibrary(source, game);
+        return true;
     }
 }

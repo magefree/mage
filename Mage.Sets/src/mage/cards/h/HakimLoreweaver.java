@@ -80,7 +80,7 @@ public final class HakimLoreweaver extends CardImpl {
 
 class HakimLoreweaverEffect extends OneShotEffect {
 
-    public HakimLoreweaverEffect() {
+    HakimLoreweaverEffect() {
         super(Outcome.Benefit);
         this.staticText = "Return target Aura card from your graveyard to the battlefield attached to {this}.";
     }

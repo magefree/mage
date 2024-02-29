@@ -54,7 +54,7 @@ public final class GraveSifter extends CardImpl {
 
 class GraveSifterEffect extends OneShotEffect {
 
-    public GraveSifterEffect() {
+    GraveSifterEffect() {
         super(Outcome.ReturnToHand);
         this.staticText = "each player chooses a creature type and returns any number of cards of that type from their graveyard to their hand";
     }

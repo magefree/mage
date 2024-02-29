@@ -53,7 +53,7 @@ public final class NotionThief extends CardImpl {
 
 class NotionThiefReplacementEffect extends ReplacementEffectImpl {
 
-    public NotionThiefReplacementEffect() {
+    NotionThiefReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "If an opponent would draw a card except the first one they draw in each of their draw steps, instead that player skips that draw and you draw a card";
     }

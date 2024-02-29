@@ -108,7 +108,7 @@ class UnscytheKillerOfKingsTriggeredAbility extends TriggeredAbilityImpl {
 
 class UnscytheEffect extends OneShotEffect {
 
-    public UnscytheEffect() {
+    UnscytheEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "you may exile that card. If you do, create a 2/2 black Zombie creature token";
     }
@@ -128,7 +128,7 @@ class UnscytheEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        Card card = game.getCard(targetPointer.getFirst(game, source));
+        Card card = game.getCard(getTargetPointer().getFirst(game, source));
         if (card == null) {
             return false;
         }

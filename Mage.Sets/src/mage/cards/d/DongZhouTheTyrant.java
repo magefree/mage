@@ -46,7 +46,7 @@ public final class DongZhouTheTyrant extends CardImpl {
 
 class DongZhouTheTyrantEffect extends OneShotEffect {
 
-    public DongZhouTheTyrantEffect() {
+    DongZhouTheTyrantEffect() {
         super(Outcome.Damage);
         staticText = "target creature an opponent controls deals damage equal to its power to that player";
     }

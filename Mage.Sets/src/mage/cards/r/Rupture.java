@@ -10,6 +10,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -18,6 +19,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetSacrifice;
 
 /**
  *
@@ -64,10 +66,10 @@ class RuptureEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             int power = 0;
-            TargetControlledCreaturePermanent target = new TargetControlledCreaturePermanent(1, 1, new FilterControlledCreaturePermanent("creature to sacrifice"), true);
+            TargetSacrifice target = new TargetSacrifice(StaticFilters.FILTER_PERMANENT_CREATURE);
             if (target.canChoose(player.getId(), source, game)) {
                 while (!target.isChosen() && target.canChoose(player.getId(), source, game) && player.canRespond()) {
-                    player.chooseTarget(Outcome.Sacrifice, target, source, game);
+                    player.choose(Outcome.Sacrifice, target, source, game);
                 }
                 Permanent permanent = game.getPermanent(target.getFirstTarget());
                 if (permanent != null) {

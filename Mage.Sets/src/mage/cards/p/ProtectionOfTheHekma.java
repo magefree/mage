@@ -39,7 +39,7 @@ public final class ProtectionOfTheHekma extends CardImpl {
 
 class ProtectionOfTheHekmaEffect extends PreventionEffectImpl {
 
-    public ProtectionOfTheHekmaEffect() {
+    ProtectionOfTheHekmaEffect() {
         super(Duration.WhileOnBattlefield, 1, false, false);
         this.staticText = "If a source an opponent controls would deal damage to you, prevent 1 of that damage";
     }

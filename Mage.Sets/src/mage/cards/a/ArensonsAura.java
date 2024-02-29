@@ -36,7 +36,7 @@ public final class ArensonsAura extends CardImpl {
 
         // {W}, Sacrifice an enchantment: Destroy target enchantment.
         Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect(), new ManaCostsImpl<>("{W}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(1, 1, filter, true)));
+        ability.addCost(new SacrificeTargetCost(filter));
         ability.addTarget(new TargetEnchantmentPermanent().withChooseHint("to destroy"));
         this.addAbility(ability);
         // {3}{U}{U}: Counter target enchantment spell.

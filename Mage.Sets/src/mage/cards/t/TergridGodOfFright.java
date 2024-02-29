@@ -22,6 +22,7 @@ import mage.game.permanent.PermanentToken;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
+import mage.target.common.TargetSacrifice;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.HashSet;
@@ -138,7 +139,7 @@ class TergridGodOfFrightTriggeredAbility extends TriggeredAbilityImpl {
 
 class TergridGodOfFrightEffect extends OneShotEffect {
 
-    public TergridGodOfFrightEffect() {
+    TergridGodOfFrightEffect() {
         super(Outcome.Neutral);
     }
 
@@ -155,7 +156,7 @@ class TergridGodOfFrightEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Card card = game.getCard(targetPointer.getFirst(game, source));
+            Card card = game.getCard(getTargetPointer().getFirst(game, source));
             if (card != null) {
                 // controller gets to choose the order in which the cards enter the battlefield
                 controller.moveCards(card, Zone.BATTLEFIELD, source, game);
@@ -219,8 +220,7 @@ class TergridsLaternEffect extends OneShotEffect {
         }
         switch (chosen) {
             case SACRIFICE_CHOICE:
-                TargetPermanent target = new TargetPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_NON_LAND);
-                target.withNotTarget(true);
+                TargetSacrifice target = new TargetSacrifice(StaticFilters.FILTER_CONTROLLED_PERMANENT_NON_LAND);
                 targetedPlayer.choose(Outcome.Sacrifice, target, source, game);
                 Permanent chosenLand = game.getPermanent(target.getFirstTarget());
                 return chosenLand != null && chosenLand.sacrifice(source, game);

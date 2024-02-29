@@ -11,7 +11,9 @@ public enum ArtRect {
     AFTERMATH_BOTTOM(new Rectangle2D.Double(0.546, 0.562, 0.272, 0.346)),
     SPLIT_LEFT(new Rectangle2D.Double(0.152, 0.539, 0.386, 0.400)),
     SPLIT_RIGHT(new Rectangle2D.Double(0.152, 0.058, 0.386, 0.400)),
-    SPLIT_FUSED(null);
+    SPLIT_FUSED(null),
+    FULL_LENGTH_LEFT(new Rectangle2D.Double(0.069, 0.11, 0.426, 0.727)),
+    FULL_LENGTH_RIGHT(new Rectangle2D.Double(0.497, 0.11, 0.426, 0.727));
 
     public final Rectangle2D rect;
 

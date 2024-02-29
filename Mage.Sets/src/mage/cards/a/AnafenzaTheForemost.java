@@ -67,7 +67,7 @@ public final class AnafenzaTheForemost extends CardImpl {
 
 class AnafenzaTheForemostEffect extends ReplacementEffectImpl {
 
-    public AnafenzaTheForemostEffect() {
+    AnafenzaTheForemostEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "If a nontoken creature an opponent owns would die or a creature card not on the battlefield would be put into an opponent's graveyard, exile that card instead";
     }

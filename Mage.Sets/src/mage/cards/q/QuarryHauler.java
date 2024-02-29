@@ -51,7 +51,7 @@ public final class QuarryHauler extends CardImpl {
 
 class QuarryHaulerEffect extends OneShotEffect {
 
-    public QuarryHaulerEffect() {
+    QuarryHaulerEffect() {
         super(Outcome.BoostCreature);
         this.staticText = "for each kind of counter on target permanent, " +
                 "put another counter of that kind on it or remove one from it";

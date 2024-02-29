@@ -18,7 +18,7 @@ public final class CrabToken extends TokenImpl {
         toughness = new MageInt(3);
     }
 
-    protected CrabToken(final CrabToken token) {
+    private CrabToken(final CrabToken token) {
         super(token);
     }
 

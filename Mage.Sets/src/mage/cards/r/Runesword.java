@@ -68,7 +68,7 @@ public final class Runesword extends CardImpl {
 
 class RuneswordCreateTriggeredAbilityEffect extends OneShotEffect {
 
-    public RuneswordCreateTriggeredAbilityEffect() {
+    RuneswordCreateTriggeredAbilityEffect() {
         super(Outcome.PutCreatureInPlay);
         staticText = "When that creature leaves the battlefield this turn, sacrifice {this}";
     }
@@ -120,6 +120,7 @@ class RuneswordCantBeRegeneratedEffect extends ContinuousRuleModifyingEffectImpl
     }
 
     public void init(Ability source, Game game) {
+        super.init(source, game);
         targetCreatureId = getTargetPointer().getFirst(game, source);
     }
 

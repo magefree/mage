@@ -29,6 +29,7 @@ Delve|new|
 Dethrone|new|
 Devoid|color|
 Defender|instance|
+Disguise|card, cost|
 Disturb|cost|
 Dredge|number|
 Doctor's companion|instance|

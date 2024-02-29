@@ -37,7 +37,7 @@ public final class Amnesia extends CardImpl {
 
 class AmnesiaEffect extends OneShotEffect {
 
-    public AmnesiaEffect() {
+    AmnesiaEffect() {
         super(Outcome.Discard);
         this.staticText = "Target player reveals their hand and discards all nonland cards";
     }

@@ -47,7 +47,7 @@ public final class FoulRenewal extends CardImpl {
 
 class FoulRenewalEffect extends OneShotEffect {
 
-    public FoulRenewalEffect() {
+    FoulRenewalEffect() {
         super(Outcome.Benefit);
         this.staticText = "Return target creature card from your graveyard to your hand. Target creature gets -X/-X until end of turn, where X is the toughness of the card returned this way";
     }
@@ -65,7 +65,7 @@ class FoulRenewalEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Card card = game.getCard(targetPointer.getFirst(game, source));
+            Card card = game.getCard(getTargetPointer().getFirst(game, source));
             if (card != null) {
                 int xValue = card.getToughness().getValue() * -1;
                 controller.moveCards(card, Zone.HAND, source, game);

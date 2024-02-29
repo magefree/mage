@@ -70,7 +70,7 @@ public final class RowanKenrith extends CardImpl {
 
 class RowanKenrithAttackEffect extends RequirementEffect {
 
-    public RowanKenrithAttackEffect() {
+    RowanKenrithAttackEffect() {
         super(Duration.Custom);
         staticText = "During target player's next turn, each creature that player controls attacks if able";
     }

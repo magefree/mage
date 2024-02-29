@@ -65,7 +65,7 @@ public final class UnexpectedResults extends CardImpl {
 
 class UnexpectedResultEffect extends OneShotEffect {
 
-    public UnexpectedResultEffect() {
+    UnexpectedResultEffect() {
         super(Outcome.PlayForFree);
         this.staticText = "Shuffle your library, then reveal the top card. "
                 + "If it's a nonland card, you may cast it without paying its mana "

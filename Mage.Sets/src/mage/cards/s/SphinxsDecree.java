@@ -41,7 +41,7 @@ public final class SphinxsDecree extends CardImpl {
 
 class SphinxsDecreeEffect extends OneShotEffect {
 
-    public SphinxsDecreeEffect() {
+    SphinxsDecreeEffect() {
         super(Outcome.Benefit);
         this.staticText = "Each opponent can't cast instant or sorcery spells during that player's next turn";
     }

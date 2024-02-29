@@ -1329,7 +1329,7 @@ public class NewTournamentDialog extends MageDialog {
         tOptions.getMatchOptions().setMatchBufferTime((MatchBufferTime) this.cbBufferTime.getSelectedItem());
         tOptions.getMatchOptions().setSkillLevel((SkillLevel) this.cbSkillLevel.getSelectedItem());
         tOptions.getMatchOptions().setWinsNeeded((Integer) this.spnNumWins.getValue());
-        tOptions.getMatchOptions().setAttackOption(MultiplayerAttackOption.LEFT);
+        tOptions.getMatchOptions().setAttackOption(MultiplayerAttackOption.MULTIPLE);
         tOptions.getMatchOptions().setRange(RangeOfInfluence.ALL);
         tOptions.getMatchOptions().setRollbackTurnsAllowed(this.chkRollbackTurnsAllowed.isSelected());
         tOptions.getMatchOptions().setRated(this.chkRated.isSelected());

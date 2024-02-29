@@ -60,7 +60,7 @@ public final class EdificeOfAuthority extends CardImpl {
 
 class EdificeOfAuthorityEffect extends OneShotEffect {
 
-    public EdificeOfAuthorityEffect() {
+    EdificeOfAuthorityEffect() {
         super(Outcome.LoseAbility);
     }
 
@@ -88,7 +88,7 @@ class EdificeOfAuthorityEffect extends OneShotEffect {
 
 class EdificeOfAuthorityRestrictionEffect extends RestrictionEffect {
 
-    public EdificeOfAuthorityRestrictionEffect() {
+    EdificeOfAuthorityRestrictionEffect() {
         super(Duration.Custom);
         staticText = "";
     }
@@ -128,7 +128,7 @@ class EdificeOfAuthorityRestrictionEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return this.targetPointer.getTargets(game, source).contains(permanent.getId());
+        return this.getTargetPointer().getTargets(game, source).contains(permanent.getId());
     }
 
     @Override

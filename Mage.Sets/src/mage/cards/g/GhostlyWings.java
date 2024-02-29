@@ -64,7 +64,7 @@ public final class GhostlyWings extends CardImpl {
 
 class GhostlyWingsReturnEffect extends OneShotEffect {
 
-    public GhostlyWingsReturnEffect() {
+    GhostlyWingsReturnEffect() {
         super(Outcome.ReturnToHand);
         staticText = "Return enchanted creature to its owner's hand";
     }

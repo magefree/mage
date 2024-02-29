@@ -52,7 +52,7 @@ public final class BrainGorgers extends CardImpl {
 
 class BrainGorgersCounterSourceEffect extends OneShotEffect {
 
-    public BrainGorgersCounterSourceEffect() {
+    BrainGorgersCounterSourceEffect() {
         super(Outcome.AIDontUseIt);
         staticText = "any player may sacrifice a creature. If a player does, counter {this}";
     }

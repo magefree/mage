@@ -19,7 +19,7 @@ public final class MonkeyToken extends TokenImpl {
         toughness = new MageInt(2);
     }
 
-    protected MonkeyToken(final MonkeyToken token) {
+    private MonkeyToken(final MonkeyToken token) {
         super(token);
     }
 

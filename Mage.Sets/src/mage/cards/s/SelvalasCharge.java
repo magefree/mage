@@ -44,7 +44,7 @@ public final class SelvalasCharge extends CardImpl {
 
 class SelvalasChargeEffect extends OneShotEffect {
 
-    public SelvalasChargeEffect() {
+    SelvalasChargeEffect() {
         super(Outcome.Benefit);
         this.staticText = "<i>Parley</i> &mdash; Each player reveals the top card of their library. For each nonland card revealed this way, you create a 3/3 green Elephant creature token";
     }

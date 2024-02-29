@@ -59,7 +59,7 @@ public final class NashiMoonSagesScion extends CardImpl {
 
 class NashiMoonSagesScionEffect extends OneShotEffect {
 
-    public NashiMoonSagesScionEffect() {
+    NashiMoonSagesScionEffect() {
         super(Outcome.Benefit);
         this.staticText = "exile the top card of each player's library. Until end of turn, " +
                 "you may play one of those cards. If you cast a spell this way, " +

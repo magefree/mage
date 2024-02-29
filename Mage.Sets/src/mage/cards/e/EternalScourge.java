@@ -48,7 +48,7 @@ public final class EternalScourge extends CardImpl {
 
 class EternalScourgePlayEffect extends AsThoughEffectImpl {
 
-    public EternalScourgePlayEffect() {
+    EternalScourgePlayEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
         staticText = "You may cast {this} from exile";
     }

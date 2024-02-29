@@ -52,7 +52,7 @@ public final class SearchTheCity extends CardImpl {
 
 class SearchTheCityExileEffect extends OneShotEffect {
 
-    public SearchTheCityExileEffect() {
+    SearchTheCityExileEffect() {
         super(Outcome.DrawCard);
         staticText = "exile the top five cards of your library";
     }
@@ -134,7 +134,7 @@ class SearchTheCityTriggeredAbility extends PlayCardTriggeredAbility {
 
 class SearchTheCityExiledCardToHandEffect extends OneShotEffect {
 
-    public SearchTheCityExiledCardToHandEffect() {
+    SearchTheCityExiledCardToHandEffect() {
         super(Outcome.DrawCard);
         staticText = "you may put one of those cards with that name into its owner's hand. Then if there are no cards exiled with {this}, sacrifice it. If you do, take an extra turn after this one";
     }

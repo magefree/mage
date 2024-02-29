@@ -19,7 +19,7 @@ public final class AlienToken extends TokenImpl {
         toughness = new MageInt(2);
     }
 
-    protected AlienToken(final AlienToken token) {
+    private AlienToken(final AlienToken token) {
         super(token);
     }
 

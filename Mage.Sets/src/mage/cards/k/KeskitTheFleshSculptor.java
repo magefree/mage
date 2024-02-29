@@ -51,7 +51,7 @@ public final class KeskitTheFleshSculptor extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 new LookLibraryAndPickControllerEffect(3, 2, PutCards.HAND, PutCards.GRAVEYARD),
                 new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(3, filter)));
+        ability.addCost(new SacrificeTargetCost(3, filter));
         this.addAbility(ability);
 
         // Partner

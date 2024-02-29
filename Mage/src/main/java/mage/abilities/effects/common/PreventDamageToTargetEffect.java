@@ -45,7 +45,7 @@ public class PreventDamageToTargetEffect extends PreventionEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return !this.used && super.applies(event, source, game) && event.getTargetId().equals(targetPointer.getFirst(game, source));
+        return !this.used && super.applies(event, source, game) && event.getTargetId().equals(getTargetPointer().getFirst(game, source));
     }
 
     @Override
@@ -59,12 +59,7 @@ public class PreventDamageToTargetEffect extends PreventionEffectImpl {
         } else {
             sb.append("prevent the next ").append(amountToPrevent).append(" damage that would be dealt to ");
         }
-        String targetName = mode.getTargets().get(0).getTargetName();
-        if (targetName.contains("any")) {
-            sb.append(targetName);
-        } else {
-            sb.append("target ").append(targetName);
-        }
+        sb.append(getTargetPointer().describeTargets(mode.getTargets(), "it"));
         if (!duration.toString().isEmpty()) {
             sb.append(' ');
             if (duration == Duration.EndOfTurn) {

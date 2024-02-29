@@ -52,7 +52,7 @@ public final class LureOfPrey extends CardImpl {
 
 class LureOfPreyRestrictionEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public LureOfPreyRestrictionEffect() {
+    LureOfPreyRestrictionEffect() {
         super(Duration.EndOfGame, Outcome.Detriment);
         staticText = "Cast this spell only if an opponent cast a creature spell this turn";
     }

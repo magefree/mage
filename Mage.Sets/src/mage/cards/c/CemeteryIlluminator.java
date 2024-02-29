@@ -68,7 +68,7 @@ public final class CemeteryIlluminator extends CardImpl {
 
 class CemeteryIlluminatorExileEffect extends OneShotEffect {
 
-    public CemeteryIlluminatorExileEffect() {
+    CemeteryIlluminatorExileEffect() {
         super(Outcome.Exile);
         staticText = "exile a card from a graveyard";
     }
@@ -103,7 +103,7 @@ class CemeteryIlluminatorExileEffect extends OneShotEffect {
 
 class CemeteryIlluminatorPlayTopEffect extends AsThoughEffectImpl {
 
-    public CemeteryIlluminatorPlayTopEffect() {
+    CemeteryIlluminatorPlayTopEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Once each turn, you may cast a spell from the top of your library if it shares a card type with a card exiled with {this}";
     }

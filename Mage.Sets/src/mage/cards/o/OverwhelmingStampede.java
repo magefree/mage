@@ -43,7 +43,7 @@ public final class OverwhelmingStampede extends CardImpl {
 
 class OverwhelmingStampedeInitEffect extends OneShotEffect {
 
-    public OverwhelmingStampedeInitEffect() {
+    OverwhelmingStampedeInitEffect() {
         super(Outcome.BoostCreature);
         this.staticText = "Until end of turn, creatures you control gain trample and get +X/+X, where X is the greatest power among creatures you control";
     }

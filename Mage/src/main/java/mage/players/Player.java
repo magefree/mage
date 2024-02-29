@@ -294,10 +294,8 @@ public interface Player extends MageItem, Copyable<Player> {
     void setTopCardRevealed(boolean topCardRevealed);
 
     /**
-     * Get data from the client Preferences (e.g. avatarId or
-     * showAbilityPickerForce)
-     *
-     * @return
+     * User's settings like avatar or skip buttons.
+     * WARNING, game related code must use controlling player settings only, e.g. getControllingPlayersUserData
      */
     UserData getUserData();
 
@@ -333,6 +331,9 @@ public interface Player extends MageItem, Copyable<Player> {
 
     List<UUID> getTurnControllers();
 
+    /**
+     * Current turn controller for a player (return own id for own control)
+     */
     UUID getTurnControlledBy();
 
     /**
@@ -360,6 +361,11 @@ public interface Player extends MageItem, Copyable<Player> {
      */
     void setGameUnderYourControl(boolean value);
 
+    /**
+     * Return player's turn control to prev player
+     * @param value
+     * @param fullRestore return turn control to own
+     */
     void setGameUnderYourControl(boolean value, boolean fullRestore);
 
     void setTestMode(boolean value);
@@ -370,9 +376,10 @@ public interface Player extends MageItem, Copyable<Player> {
 
     void setAllowBadMoves(boolean allowBadMoves);
 
+    /**
+     * Reset values before new game, e.g. for next game
+     */
     void init(Game game);
-
-    void init(Game game, boolean testMode);
 
     void useDeck(Deck deck, Game game);
 
@@ -785,6 +792,7 @@ public interface Player extends MageItem, Copyable<Player> {
 
     void pickCard(List<Card> cards, Deck deck, Draft draft);
 
+    // TODO: add result, process it in AI code (if something put creature to attack then it can broke current AI logic)
     void declareAttacker(UUID attackerId, UUID defenderId, Game game, boolean allowUndo);
 
     void declareBlocker(UUID defenderId, UUID blockerId, UUID attackerId, Game game);
@@ -980,7 +988,7 @@ public interface Player extends MageItem, Copyable<Player> {
      * @param source
      * @param game
      * @param fromZone
-     * @param withName
+     * @param withName for face down: used to hide card name in game logs before real face down status apply
      * @return
      */
     @Deprecated

@@ -46,7 +46,7 @@ public final class TimeSpiral extends CardImpl {
 
 class TimeSpiralEffect extends OneShotEffect {
 
-    public TimeSpiralEffect() {
+    TimeSpiralEffect() {
         super(Outcome.Neutral);
         staticText = "Each player shuffles their hand and graveyard into their library";
     }
