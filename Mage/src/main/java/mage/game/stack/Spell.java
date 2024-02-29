@@ -6,7 +6,6 @@ import mage.abilities.costs.mana.ActivationManaAbilityStep;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.keyword.BestowAbility;
-import mage.abilities.keyword.MorphAbility;
 import mage.abilities.keyword.PrototypeAbility;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.*;
@@ -83,8 +82,8 @@ public class Spell extends StackObjectImpl implements Card {
             // simulate another side as new card (another code part in continues effect from disturb ability)
             affectedCard = TransformAbility.transformCardSpellStatic(card, card.getSecondCardFace(), game);
         }
-        if (ability instanceof PrototypeAbility){
-            affectedCard = ((PrototypeAbility)ability).prototypeCardSpell(card);
+        if (ability instanceof PrototypeAbility) {
+            affectedCard = ((PrototypeAbility) ability).prototypeCardSpell(card);
             this.prototyped = true;
         }
 
@@ -100,7 +99,7 @@ public class Spell extends StackObjectImpl implements Card {
         this.ability = ability;
         this.ability.setControllerId(controllerId);
 
-        if (ability.getSpellAbilityCastMode().isFaceDown()){
+        if (ability.getSpellAbilityCastMode().isFaceDown()) {
             // TODO: need research:
             //  - why it use game param for color and subtype (possible bug?)
             //  - is it possible to use BecomesFaceDownCreatureEffect.makeFaceDownObject or like that?
@@ -202,8 +201,10 @@ public class Spell extends StackObjectImpl implements Card {
     }
 
     public String getSpellCastText(Game game) {
-        if (this.getSpellAbility() instanceof MorphAbility) {
-            return "a card face down";
+        if (this.getSpellAbility().getSpellAbilityCastMode().isFaceDown()) {
+            // add face down name with object link, so user can look at it from logs
+            return "a " + GameLog.getColoredObjectIdName(this.getSpellAbility().getCharacteristics(game))
+                    + " using " + this.getSpellAbility().getSpellAbilityCastMode();
         }
 
         if (card instanceof AdventureCardSpell) {
@@ -677,7 +678,9 @@ public class Spell extends StackObjectImpl implements Card {
     }
 
     @Override
-    public void setManaCost(ManaCosts<ManaCost> costs) { this.manaCost = costs.copy(); }
+    public void setManaCost(ManaCosts<ManaCost> costs) {
+        this.manaCost = costs.copy();
+    }
 
     /**
      * 202.3b When calculating the converted mana cost of an object with an {X}

@@ -33,12 +33,15 @@ public final class GameLog {
     static final String LOG_TT_COLOR_COLORLESS = "#94A4BA";
     static final String LOG_COLOR_NEUTRAL = "#F0F8FF"; // AliceBlue
 
-    private static String getNameForLogs(MageObject mageObject) {
-        if (mageObject.getName().equals(EmptyNames.FACE_DOWN_CREATURE.toString())
-            || mageObject.getName().equals(EmptyNames.FACE_DOWN_TOKEN.toString())) {
+    private static String getNameForLogs(MageObject object) {
+        return getNameForLogs(object.getName());
+    }
+
+    private static String getNameForLogs(String objectName) {
+        if (EmptyNames.isEmptyName(objectName)) {
             return EmptyNames.EMPTY_NAME_IN_LOGS;
         } else {
-            return mageObject.getName();
+            return objectName;
         }
     }
 
@@ -75,13 +78,26 @@ public final class GameLog {
     }
 
     /**
+     * Create object "link" in game logs
+     */
+    public static String getNeutralObjectIdName(String objectName, UUID objectId) {
+        return getColoredObjectIdName(
+                new ObjectColor(),
+                objectId,
+                getNameForLogs(objectName),
+                String.format("[%s]", objectId.toString().substring(0, 3)),
+                null
+        );
+    }
+
+    /**
      * Prepare html text with additional object info (can be used for card popup in GUI)
      *
-     * @param color text color of the colored part
-     * @param objectID object id
-     * @param visibleColorPart colored part, popup will be work on it
+     * @param color             text color of the colored part
+     * @param objectID          object id
+     * @param visibleColorPart  colored part, popup will be work on it
      * @param visibleNormalPart additional part with default color
-     * @param alternativeName alternative name, popup will use it on unknown object id or name
+     * @param alternativeName   alternative name, popup will use it on unknown object id or name
      * @return
      */
     public static String getColoredObjectIdName(ObjectColor color,

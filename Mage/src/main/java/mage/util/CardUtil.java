@@ -757,7 +757,9 @@ public final class CardUtil {
     }
 
     public static boolean haveEmptyName(String name) {
-        return name == null || name.isEmpty() || name.equals(EmptyNames.FACE_DOWN_CREATURE.toString()) || name.equals(EmptyNames.FACE_DOWN_TOKEN.toString());
+        return name == null
+                || name.isEmpty()
+                || EmptyNames.isEmptyName(name);
     }
 
     public static boolean haveEmptyName(MageObject object) {
