@@ -8,7 +8,6 @@ import mage.client.dialog.PreferencesDialog;
 import mage.constants.CardType;
 import mage.constants.MageObjectType;
 import mage.constants.SubType;
-import mage.util.CardUtil;
 import mage.util.SubTypes;
 import mage.view.CardView;
 import mage.view.PermanentView;
@@ -264,11 +263,9 @@ public class ModernCardRenderer extends CardRenderer {
     @Override
     protected void drawBackground(Graphics2D g) {
         // Draw background, in 3 parts
-
-        if (false && cardView.isFaceDown()) {
-            // TODO: delete un-used code?!
-            // Just draw a brown rectangle
-            drawCardBack(g);
+        if (cardView.isFaceDown()) {
+            // just draw a brown rectangle
+            drawCardBackTexture(g);
         } else {
             if (cardView.getFrameStyle() == FrameStyle.UST_FULL_ART_BASIC) {
                 return;
@@ -278,7 +275,7 @@ public class ModernCardRenderer extends CardRenderer {
             if (cardView.getExpansionSetCode().equals("EXP")) {
                 isExped = true;
             }
-            BufferedImage bg = getBackgroundImage(cardView.getColor(), cardView.getCardTypes(), cardView.getSubTypes(), isExped);
+            BufferedImage bg = getBackgroundTexture(cardView.getColor(), cardView.getCardTypes(), cardView.getSubTypes(), isExped);
             if (bg == null) {
                 return;
             }
@@ -1542,7 +1539,7 @@ public class ModernCardRenderer extends CardRenderer {
 
     // Determine which background image to use from a set of colors
     // and the current card.
-    protected static BufferedImage getBackgroundImage(ObjectColor colors, Collection<CardType> types, SubTypes subTypes, boolean isExped) {
+    protected static BufferedImage getBackgroundTexture(ObjectColor colors, Collection<CardType> types, SubTypes subTypes, boolean isExped) {
         if (subTypes.contains(SubType.VEHICLE)) {
             return BG_IMG_VEHICLE;
         } else if (types.contains(CardType.LAND)) {

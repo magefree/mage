@@ -157,9 +157,8 @@ public class ModernSplitCardRenderer extends ModernCardRenderer {
 
     @Override
     protected void drawBackground(Graphics2D g) {
-        if (false && cardView.isFaceDown()) {
-            // TODO: delete un-used code?!
-            drawCardBack(g);
+        if (cardView.isFaceDown()) {
+            drawCardBackTexture(g);
         } if (isAdventure()) {
             super.drawBackground(g);
         } else {

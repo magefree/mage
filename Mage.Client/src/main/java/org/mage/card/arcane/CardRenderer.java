@@ -237,7 +237,7 @@ public abstract class CardRenderer {
     // Template methods that are possible to override, but unlikely to be
     // overridden.
     // Draw the card back
-    protected void drawCardBack(Graphics2D g) {
+    protected void drawCardBackTexture(Graphics2D g) {
         g.setPaint(BG_TEXTURE_CARDBACK);
         g.fillRect(borderWidth, borderWidth,
                 cardWidth - 2 * borderWidth, cardHeight - 2 * borderWidth);

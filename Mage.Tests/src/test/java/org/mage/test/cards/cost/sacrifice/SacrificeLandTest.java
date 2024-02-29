@@ -23,7 +23,7 @@ public class SacrificeLandTest extends CardTestPlayerBase {
      */
     @Test
     public void testRollback() {
-        // If Soldevi Excavations entered the battlefield, sacrifice an untapped Island instead.
+        // If Soldevi Excavations would enter the battlefield, sacrifice an untapped Island instead.
         // If you do, put Soldevi Excavations onto the battlefield. If you don't, put it into its owner's graveyard.
         String soldeviExcavations = "Soldevi Excavations";
 
