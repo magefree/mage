@@ -15,8 +15,6 @@ public class ArenaBeginnerSet extends ExpansionSet {
         return instance;
     }
 
-//  Missing cards - Baloth Packhunter , Compound Fracture , Hallowed Priest , Mardu Outrider , Tin Street Cadet
-
     private ArenaBeginnerSet() {
         super("Arena Beginner Set", "ANB", ExpansionSet.buildDate(2020, 8, 13), SetType.MAGIC_ONLINE);
         this.hasBoosters = false;
@@ -30,7 +28,7 @@ public class ArenaBeginnerSet extends ExpansionSet {
         cards.add(new SetCardInfo("Arcane Signet", 117, Rarity.COMMON, mage.cards.a.ArcaneSignet.class));
         cards.add(new SetCardInfo("Armored Whirl Turtle", 24, Rarity.COMMON, mage.cards.a.ArmoredWhirlTurtle.class));
         cards.add(new SetCardInfo("Bad Deal", 45, Rarity.UNCOMMON, mage.cards.b.BadDeal.class));
-//        cards.add(new SetCardInfo("Baloth Packhunter", 90, Rarity.COMMON, mage.cards.b.BalothPackhunter.class));
+        cards.add(new SetCardInfo("Baloth Packhunter", 90, Rarity.COMMON, mage.cards.b.BalothPackhunter.class));
         cards.add(new SetCardInfo("Bombard", 67, Rarity.COMMON, mage.cards.b.Bombard.class));
         cards.add(new SetCardInfo("Bond of Discipline", 4, Rarity.UNCOMMON, mage.cards.b.BondOfDiscipline.class));
         cards.add(new SetCardInfo("Burn Bright", 68, Rarity.COMMON, mage.cards.b.BurnBright.class));
@@ -39,7 +37,7 @@ public class ArenaBeginnerSet extends ExpansionSet {
         cards.add(new SetCardInfo("Cloudkin Seer", 25, Rarity.COMMON, mage.cards.c.CloudkinSeer.class));
         cards.add(new SetCardInfo("Colossal Majesty", 92, Rarity.UNCOMMON, mage.cards.c.ColossalMajesty.class));
         cards.add(new SetCardInfo("Command Tower", 118, Rarity.COMMON, mage.cards.c.CommandTower.class));
-//        cards.add(new SetCardInfo("Compound Fracture", 46, Rarity.COMMON, mage.cards.c.CompoundFracture.class));
+        cards.add(new SetCardInfo("Compound Fracture", 46, Rarity.COMMON, mage.cards.c.CompoundFracture.class));
         cards.add(new SetCardInfo("Confront the Assault", 6, Rarity.UNCOMMON, mage.cards.c.ConfrontTheAssault.class));
         cards.add(new SetCardInfo("Coral Merfolk", 26, Rarity.COMMON, mage.cards.c.CoralMerfolk.class));
         cards.add(new SetCardInfo("Cruel Cut", 47, Rarity.COMMON, mage.cards.c.CruelCut.class));
@@ -61,7 +59,7 @@ public class ArenaBeginnerSet extends ExpansionSet {
         cards.add(new SetCardInfo("Goblin Tunneler", 73, Rarity.COMMON, mage.cards.g.GoblinTunneler.class));
         cards.add(new SetCardInfo("Goring Ceratops", 8, Rarity.RARE, mage.cards.g.GoringCeratops.class));
         cards.add(new SetCardInfo("Greenwood Sentinel", 97, Rarity.COMMON, mage.cards.g.GreenwoodSentinel.class));
-//        cards.add(new SetCardInfo("Hallowed Priest", 9, Rarity.UNCOMMON, mage.cards.h.HallowedPriest.class));
+        cards.add(new SetCardInfo("Hallowed Priest", 9, Rarity.UNCOMMON, mage.cards.h.HallowedPriest.class));
         cards.add(new SetCardInfo("Hurloon Minotaur", 74, Rarity.COMMON, mage.cards.h.HurloonMinotaur.class));
         cards.add(new SetCardInfo("Ilysian Caryatid", 98, Rarity.COMMON, mage.cards.i.IlysianCaryatid.class));
         cards.add(new SetCardInfo("Immortal Phoenix", 75, Rarity.RARE, mage.cards.i.ImmortalPhoenix.class));
@@ -76,7 +74,7 @@ public class ArenaBeginnerSet extends ExpansionSet {
         cards.add(new SetCardInfo("Loxodon Line Breaker", 14, Rarity.COMMON, mage.cards.l.LoxodonLineBreaker.class));
         cards.add(new SetCardInfo("Malakir Cullblade", 51, Rarity.UNCOMMON, mage.cards.m.MalakirCullblade.class));
         cards.add(new SetCardInfo("Maniacal Rage", 77, Rarity.COMMON, mage.cards.m.ManiacalRage.class));
-//        cards.add(new SetCardInfo("Mardu Outrider", 52, Rarity.RARE, mage.cards.m.MarduOutrider.class));
+        cards.add(new SetCardInfo("Mardu Outrider", 52, Rarity.RARE, mage.cards.m.MarduOutrider.class));
         cards.add(new SetCardInfo("Molten Ravager", 78, Rarity.COMMON, mage.cards.m.MoltenRavager.class));
         cards.add(new SetCardInfo("Moorland Inquisitor", 15, Rarity.COMMON, mage.cards.m.MoorlandInquisitor.class));
         cards.add(new SetCardInfo("Mountain", 114, Rarity.LAND, mage.cards.basiclands.Mountain.class));
@@ -122,7 +120,7 @@ public class ArenaBeginnerSet extends ExpansionSet {
         cards.add(new SetCardInfo("Swamp", 116, Rarity.LAND, mage.cards.basiclands.Swamp.class));
         cards.add(new SetCardInfo("Sworn Guardian", 35, Rarity.COMMON, mage.cards.s.SwornGuardian.class));
         cards.add(new SetCardInfo("Tactical Advantage", 22, Rarity.COMMON, mage.cards.t.TacticalAdvantage.class));
-//        cards.add(new SetCardInfo("Tin Street Cadet", 87, Rarity.COMMON, mage.cards.t.TinStreetCadet.class));
+        cards.add(new SetCardInfo("Tin Street Cadet", 87, Rarity.COMMON, mage.cards.t.TinStreetCadet.class));
         cards.add(new SetCardInfo("Titanic Growth", 106, Rarity.COMMON, mage.cards.t.TitanicGrowth.class));
         cards.add(new SetCardInfo("Treetop Warden", 107, Rarity.COMMON, mage.cards.t.TreetopWarden.class));
         cards.add(new SetCardInfo("Typhoid Rats", 63, Rarity.COMMON, mage.cards.t.TyphoidRats.class));
