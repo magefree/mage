@@ -5,31 +5,20 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.effects.common.cost.CostModificationEffectImpl;
-import mage.constants.CostModificationType;
+import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
 import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterCard;
-import mage.filter.predicate.card.FaceDownPredicate;
 import mage.game.Game;
-import mage.game.stack.Spell;
-import mage.util.CardUtil;
 
 /**
  *
  * @author DominionSpy
  */
 public final class GoblinMaskmaker extends CardImpl {
-
-    private static final FilterCard filter = new FilterCard("face-down spells");
-
-    static {
-        filter.add(FaceDownPredicate.instance);
-    }
 
     public GoblinMaskmaker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}");
@@ -53,10 +42,13 @@ public final class GoblinMaskmaker extends CardImpl {
     }
 }
 
-class GoblinMaskmakerEffect extends CostModificationEffectImpl {
+class GoblinMaskmakerEffect extends SpellsCostReductionControllerEffect {
+
+    private static final FilterCard filter = new FilterCard("face-down spells");
 
     GoblinMaskmakerEffect() {
-        super(Duration.EndOfTurn, Outcome.Benefit, CostModificationType.REDUCE_COST);
+        super(filter, 1);
+        this.duration = Duration.EndOfTurn;
         this.staticText = "face-down spells you cast this turn cost {1} less to cast";
     }
 
@@ -70,23 +62,12 @@ class GoblinMaskmakerEffect extends CostModificationEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        CardUtil.reduceCost(abilityToModify, 1);
-        return true;
-    }
-
-    @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (!abilityToModify.isControlledBy(source.getControllerId())) {
-            return false;
-        }
         if (abilityToModify instanceof SpellAbility) {
-            Spell spell = game.getSpell(abilityToModify.getId());
-            if (spell == null) {
-                return false;
+            SpellAbility spellAbility = (SpellAbility) abilityToModify;
+            if (spellAbility.getSpellAbilityCastMode().isFaceDown()) {
+                return super.applies(abilityToModify, source, game);
             }
-
-            return spell.isFaceDown(game);
         }
         return false;
     }
