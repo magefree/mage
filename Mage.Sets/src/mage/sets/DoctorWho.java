@@ -192,6 +192,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Sol Ring", 245, Rarity.UNCOMMON, mage.cards.s.SolRing.class));
         cards.add(new SetCardInfo("Solemn Simulacrum", 246, Rarity.RARE, mage.cards.s.SolemnSimulacrum.class));
         cards.add(new SetCardInfo("Sonic Screwdriver", 184, Rarity.UNCOMMON, mage.cards.s.SonicScrewdriver.class));
+        cards.add(new SetCardInfo("Sontaran General", 96, Rarity.UNCOMMON, mage.cards.s.SontaranGeneral.class));
         cards.add(new SetCardInfo("Star Whale", 55, Rarity.UNCOMMON, mage.cards.s.StarWhale.class));
         cards.add(new SetCardInfo("Start the TARDIS", 56, Rarity.UNCOMMON, mage.cards.s.StartTheTARDIS.class));
         cards.add(new SetCardInfo("Stormcarved Coast", 308, Rarity.RARE, mage.cards.s.StormcarvedCoast.class));
