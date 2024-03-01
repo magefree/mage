@@ -100,9 +100,9 @@ public class DisguiseAbility extends SpellAbility {
     @Override
     public String getRule() {
         boolean isMana = disguiseCosts.get(0) instanceof ManaCost;
+        String costInfo = this.disguiseCosts.getText() + (isMana ? " " : ". ");
         return ABILITY_KEYWORD + (isMana ? " " : "&mdash;")
-                + this.disguiseCosts.getText()
-                + (isMana ? ' ' : ". ")
+                + costInfo
                 + " <i>(" + REMINDER_TEXT + ")</i>";
     }
 }

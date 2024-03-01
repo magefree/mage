@@ -373,14 +373,6 @@ public class CardView extends SimpleCardView {
                 this.superTypes = new ArrayList<>(card.getSuperType());
                 this.subTypes = card.getSubtype().copy();
                 this.rules = new ArrayList<>(card.getRules());
-
-                // additional rules for stack (example: morph ability text)
-                if (sourceCard instanceof Spell) {
-                    List<String> extraRules = sourceCard.getSpellAbility().getSpellAbilityCastMode().getAdditionalRulesOnStack();
-                    if (extraRules != null) {
-                        this.rules.addAll(extraRules);
-                    }
-                }
             }
 
             // GUI: enable day/night button to view original face up card

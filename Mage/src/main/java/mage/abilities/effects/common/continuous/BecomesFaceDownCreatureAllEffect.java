@@ -15,6 +15,8 @@ import mage.game.permanent.Permanent;
 import java.util.*;
 
 /**
+ * TODO: must be reworked to use same face down logic as BecomesFaceDownCreatureEffect
+ *
  * @author LevelX2
  */
 

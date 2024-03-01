@@ -4,12 +4,14 @@ import mage.MageObject;
 import mage.MageObjectReference;
 import mage.ObjectColor;
 import mage.abilities.Ability;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.TurnFaceUpAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.Costs;
 import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.keyword.WardAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -29,6 +31,7 @@ import java.util.UUID;
 
 /**
  * Support different face down types: morph/manifest and disguise/cloak
+ *
  * <p>
  * This effect lets the card be a 2/2 face-down creature, with no text, no name,
  * no subtypes, and no mana cost, if it's face down on the battlefield. And it
@@ -81,15 +84,36 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl {
         this.objectReference = objectReference;
         this.zoneChangeCounter = Integer.MIN_VALUE;
 
-        // additional abilities
-        // face up
+        // add additional face up and information abilities
         if (turnFaceUpCosts != null) {
+            // face up for all
             this.additionalAbilities.add(new TurnFaceUpAbility(turnFaceUpCosts, faceDownType == FaceDownType.MEGAMORPHED));
-        }
-        // ward
-        if (faceDownType == FaceDownType.DISGUISED
-                || faceDownType == faceDownType.CLOAKED) {
-            this.additionalAbilities.add(new WardAbility(new ManaCostsImpl<>("{2}")));
+
+            switch (faceDownType) {
+                case MORPHED:
+                case MEGAMORPHED:
+                    // face up rules replace for cost hide
+                    this.additionalAbilities.add(new SimpleStaticAbility(Zone.ALL, new InfoEffect(
+                            "Turn it face up any time for its morph cost."
+                    )));
+                    break;
+                case DISGUISED:
+                case CLOAKED:
+                    // ward
+                    this.additionalAbilities.add(new WardAbility(new ManaCostsImpl<>("{2}")));
+
+                    // face up rules replace for cost hide
+                    this.additionalAbilities.add(new SimpleStaticAbility(Zone.ALL, new InfoEffect(
+                            "Turn it face up any time for its disguise/cloaked cost."
+                    )));
+                    break;
+                case MANUAL:
+                case MANIFESTED:
+                    // no face up abilities
+                    break;
+                default:
+                    throw new IllegalArgumentException("Un-supported face down type: " + faceDownType);
+            }
         }
 
         staticText = "{this} becomes a 2/2 face-down creature, with no text, no name, no subtypes, and no mana cost";
@@ -216,16 +240,17 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl {
             // If a card with morph is manifested, its controller may turn that card face up using
             // either the procedure described in rule 702.36e to turn a face-down permanent with morph face up
             // or the procedure described above to turn a manifested permanent face up.
-            //
-            // so keep all tune face up abilities and other face down compatible
+
+            // keep face down abilities active, but hide it from rules description
             if (ability.getWorksFaceDown()) {
-                // keep face down abilities active, but hide it from rules description
+
                 // example: When Dog Walker is turned face up, create two tapped 1/1 white Dog creature tokens
                 ability.setRuleVisible(false);
 
-                // but do not hide default ability (becomes a 2/2 face-down creature)
-                if (!ability.getRuleVisible() && !ability.getEffects().isEmpty()) {
+                // becomes a 2/2 face-down creature - it hides a real ability too, but adds fake rule, see
+                if (!ability.getEffects().isEmpty()) {
                     if (ability.getEffects().get(0) instanceof BecomesFaceDownCreatureEffect) {
+                        // enable for stack
                         ability.setRuleVisible(true);
                     }
                 }
@@ -236,7 +261,7 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl {
             abilitiesToRemove.add(ability);
         }
 
-        // add additional abilities like face up
+        // add additional abilities like face up (real ability hidden and duplicated with information without cost data)
         if (object instanceof Permanent) {
             // as permanent
             Permanent permanentObject = (Permanent) object;
@@ -244,7 +269,7 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl {
             if (additionalAbilities != null) {
                 additionalAbilities.forEach(blueprintAbility -> {
                     Ability newAbility = blueprintAbility.copy();
-                    newAbility.setRuleVisible(true);
+                    newAbility.setRuleVisible(CardUtil.isInformationAbility(newAbility));
                     permanentObject.addAbility(newAbility, sourceId, game);
                 });
             }
@@ -255,7 +280,7 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl {
             if (additionalAbilities != null) {
                 additionalAbilities.forEach(blueprintAbility -> {
                     Ability newAbility = blueprintAbility.copy();
-                    newAbility.setRuleVisible(true);
+                    newAbility.setRuleVisible(CardUtil.isInformationAbility(newAbility));
                     cardObject.addAbility(newAbility);
                 });
             }

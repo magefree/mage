@@ -13,6 +13,7 @@ import mage.abilities.dynamicvalue.common.SavedDamageValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.asthought.CanPlayCardControllerEffect;
 import mage.abilities.effects.common.asthought.YouMaySpendManaAsAnyColorToCastTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
@@ -2236,5 +2237,13 @@ public final class CardUtil {
      */
     public static boolean canShowAsControlled(Card card, UUID createdForPlayer) {
         return card.getControllerOrOwnerId().equals(createdForPlayer);
+    }
+
+    /**
+     * Ability used for information only, e.g. adds additional rule texts
+     */
+    public static boolean isInformationAbility(Ability ability) {
+        return !ability.getEffects().isEmpty()
+                && ability.getEffects().stream().allMatch(e -> e instanceof InfoEffect);
     }
 }
