@@ -76,9 +76,6 @@ public class InvestigateEffect extends OneShotEffect {
     }
 
     private String makeText(boolean showAbilityHint) {
-        if (!showAbilityHint) {
-            return "investigate";
-        }
         String message;
         if (amount instanceof StaticValue) {
             int value = ((StaticValue) amount).getValue();
@@ -95,7 +92,8 @@ public class InvestigateEffect extends OneShotEffect {
         } else {
             message = " X times, where X is the " + amount.getMessage() + ". <i>(To investigate, c";
         }
-        return "investigate" + message + "reate a Clue token. " +
+        String finalMessage = "investigate" + message + "reate a Clue token. " +
                 "It's an artifact with \"{2}, Sacrifice this artifact: Draw a card.\")</i>";
+        return showAbilityHint ? finalMessage : CardUtil.stripReminderText(finalMessage);
     }
 }
