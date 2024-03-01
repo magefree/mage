@@ -59,6 +59,7 @@ public interface Card extends MageObject, Ownerable {
 
     boolean turnFaceUp(Ability source, Game game, UUID playerId);
 
+    // TODO: need research, is it lost morph and other face down statuses?
     boolean turnFaceDown(Ability source, Game game, UUID playerId);
 
     boolean isFlipCard();

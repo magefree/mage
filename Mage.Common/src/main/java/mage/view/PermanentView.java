@@ -31,6 +31,7 @@ public class PermanentView extends CardView {
     private final boolean controlled;
     private final UUID attachedTo;
     private final boolean morphed;
+    private final boolean disguised;
     private final boolean manifested;
     private final boolean attachedToPermanent;
     // If this card is attached to a permanent which is controlled by a player other than the one which controls this permanent
@@ -44,6 +45,7 @@ public class PermanentView extends CardView {
         this.phasedIn = permanent.isPhasedIn();
         this.summoningSickness = permanent.hasSummoningSickness();
         this.morphed = permanent.isMorphed();
+        this.disguised = permanent.isDisguised();
         this.manifested = permanent.isManifested();
         this.damage = permanent.getDamage();
         this.attachments = new ArrayList<>(permanent.getAttachments());
@@ -139,6 +141,7 @@ public class PermanentView extends CardView {
         this.nameController = permanentView.nameController;
         this.attachedTo = permanentView.attachedTo;
         this.morphed = permanentView.morphed;
+        this.disguised = permanentView.disguised;
         this.manifested = permanentView.manifested;
         this.attachedToPermanent = permanentView.attachedToPermanent;
         this.attachedControllerDiffers = permanentView.attachedControllerDiffers;
@@ -210,6 +213,10 @@ public class PermanentView extends CardView {
 
     public boolean isMorphed() {
         return morphed;
+    }
+
+    public boolean isDisguised() {
+        return disguised;
     }
 
     public boolean isManifested() {

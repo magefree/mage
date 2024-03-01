@@ -25,6 +25,7 @@ public enum TokenRepository {
     public static final String XMAGE_IMAGE_NAME_FACE_DOWN_MANIFEST = "Manifest";
     public static final String XMAGE_IMAGE_NAME_FACE_DOWN_MORPH = "Morph";
     public static final String XMAGE_IMAGE_NAME_FACE_DOWN_MEGAMORPH = "Megamorph";
+    public static final String XMAGE_IMAGE_NAME_FACE_DOWN_DISGUISE = "Disguise";
     public static final String XMAGE_IMAGE_NAME_FACE_DOWN_FORETELL = "Foretell";
     public static final String XMAGE_IMAGE_NAME_COPY = "Copy";
     public static final String XMAGE_IMAGE_NAME_CITY_BLESSING = "City's Blessing";
@@ -287,6 +288,10 @@ public enum TokenRepository {
         res.add(createXmageToken(XMAGE_IMAGE_NAME_FACE_DOWN_MEGAMORPH, 1, "https://api.scryfall.com/cards/tktk/11/en?format=image"));
         res.add(createXmageToken(XMAGE_IMAGE_NAME_FACE_DOWN_MEGAMORPH, 2, "https://api.scryfall.com/cards/ta25/15/en?format=image"));
         res.add(createXmageToken(XMAGE_IMAGE_NAME_FACE_DOWN_MEGAMORPH, 3, "https://api.scryfall.com/cards/tc19/27/en?format=image"));
+
+        // Disguise
+        // support only 1 image: https://scryfall.com/card/tmkm/21/a-mysterious-creature
+        res.add(createXmageToken(XMAGE_IMAGE_NAME_FACE_DOWN_DISGUISE, 1, "https://api.scryfall.com/cards/tmkm/21/en?format=image"));
 
         // Foretell
         // https://scryfall.com/search?q=Foretell+unique%3Aprints+otag%3Aassistant-cards&unique=cards&as=grid&order=name

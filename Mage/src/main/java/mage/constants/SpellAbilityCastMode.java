@@ -22,12 +22,15 @@ public enum SpellAbilityCastMode {
     PROTOTYPE("Prototype"),
     MORPH("Morph", false, true, SpellAbilityCastMode.MORPH_ADDITIONAL_RULE),
     MEGAMORPH("Megamorph", false, true, SpellAbilityCastMode.MORPH_ADDITIONAL_RULE),
+    DISGUISE("Disguise", false, true, SpellAbilityCastMode.DISGUISE_ADDITIONAL_RULE),
     TRANSFORMED("Transformed", true),
     DISTURB("Disturb", true),
     MORE_THAN_MEETS_THE_EYE("More than Meets the Eye", true);
 
     private static final String MORPH_ADDITIONAL_RULE = "You may cast this card as a 2/2 face-down creature, with no text,"
             + " no name, no subtypes, and no mana cost by paying {3} rather than paying its mana cost.";
+    private static final String DISGUISE_ADDITIONAL_RULE = "You may cast this card face down for {3} as a 2/2 creature with "
+            + "ward {2}. Turn it face up any time for its disguise cost.";
 
     private final String text;
 
@@ -90,12 +93,18 @@ public enum SpellAbilityCastMode {
                 break;
             case MORPH:
             case MEGAMORPH:
+            case DISGUISE:
                 if (cardCopy instanceof Spell) {
                     //Spell doesn't support setName, so make a copy of the card (we're blowing it away anyway)
                     // TODO: research - is it possible to apply face down code to spell instead workaround with card
                     cardCopy = ((Spell) cardCopy).getCard().copy();
                 }
-                BecomesFaceDownCreatureEffect.makeFaceDownObject(game, null, cardCopy, BecomesFaceDownCreatureEffect.FaceDownType.MORPHED, null);
+                BecomesFaceDownCreatureEffect.FaceDownType faceDownType = BecomesFaceDownCreatureEffect.FaceDownType.MORPHED;
+                if (this == DISGUISE) {
+                    faceDownType = BecomesFaceDownCreatureEffect.FaceDownType.DISGUISED;
+                }
+                // no needs in additional abilities for spell
+                BecomesFaceDownCreatureEffect.makeFaceDownObject(game, null, cardCopy, faceDownType, null);
                 break;
             case NORMAL:
             case MADNESS:

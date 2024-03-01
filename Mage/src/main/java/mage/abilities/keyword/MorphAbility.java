@@ -84,7 +84,7 @@ public class MorphAbility extends SpellAbility {
 
         // face down effect (hidden by default, visible in face down objects)
         Ability ability = new SimpleStaticAbility(new BecomesFaceDownCreatureEffect(
-                morphCosts, (useMegamorph ? FaceDownType.MEGAMORPHED : FaceDownType.MORPHED)));
+                this.morphCosts, (useMegamorph ? FaceDownType.MEGAMORPHED : FaceDownType.MORPHED)));
         ability.setWorksFaceDown(true);
         ability.setRuleVisible(false);
         addSubAbility(ability);
@@ -92,7 +92,7 @@ public class MorphAbility extends SpellAbility {
 
     protected MorphAbility(final MorphAbility ability) {
         super(ability);
-        this.morphCosts = ability.morphCosts; // can't be changed
+        this.morphCosts = ability.morphCosts; // can't be changed TODO: looks buggy, need research
     }
 
     @Override
@@ -100,8 +100,8 @@ public class MorphAbility extends SpellAbility {
         return new MorphAbility(this);
     }
 
-    public Costs<Cost> getMorphCosts() {
-        return morphCosts;
+    public Costs<Cost> getFaceUpCosts() {
+        return this.morphCosts;
     }
 
     @Override

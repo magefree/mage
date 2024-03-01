@@ -8,7 +8,9 @@ import mage.abilities.common.TurnFaceUpAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.Costs;
 import mage.abilities.costs.CostsImpl;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.keyword.WardAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.repository.TokenInfo;
@@ -26,9 +28,11 @@ import java.util.List;
 import java.util.UUID;
 
 /**
+ * Support different face down types: morph/manifest and disguise/cloak
+ * <p>
  * This effect lets the card be a 2/2 face-down creature, with no text, no name,
  * no subtypes, and no mana cost, if it's face down on the battlefield. And it
- * adds the a TurnFaceUpAbility ability.
+ * adds the TurnFaceUpAbility and other additional abilities
  * <p>
  * Warning, if a card has multiple face down abilities then keep only one face up cost
  * Example: Mischievous Quanar
@@ -51,7 +55,7 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl {
     }
 
     protected int zoneChangeCounter;
-    protected Ability turnFaceUpAbility = null;
+    protected List<Ability> additionalAbilities = new ArrayList<>();
     protected MageObjectReference objectReference = null;
     protected boolean foundPermanent;
     protected FaceDownType faceDownType;
@@ -76,9 +80,18 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl {
         super(duration, Layer.CopyEffects_1, SubLayer.FaceDownEffects_1b, Outcome.BecomeCreature);
         this.objectReference = objectReference;
         this.zoneChangeCounter = Integer.MIN_VALUE;
+
+        // additional abilities
+        // face up
         if (turnFaceUpCosts != null) {
-            this.turnFaceUpAbility = new TurnFaceUpAbility(turnFaceUpCosts, faceDownType == FaceDownType.MEGAMORPHED);
+            this.additionalAbilities.add(new TurnFaceUpAbility(turnFaceUpCosts, faceDownType == FaceDownType.MEGAMORPHED));
         }
+        // ward
+        if (faceDownType == FaceDownType.DISGUISED
+                || faceDownType == faceDownType.CLOAKED) {
+            this.additionalAbilities.add(new WardAbility(new ManaCostsImpl<>("{2}")));
+        }
+
         staticText = "{this} becomes a 2/2 face-down creature, with no text, no name, no subtypes, and no mana cost";
         foundPermanent = false;
         this.faceDownType = faceDownType;
@@ -87,9 +100,9 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl {
     protected BecomesFaceDownCreatureEffect(final BecomesFaceDownCreatureEffect effect) {
         super(effect);
         this.zoneChangeCounter = effect.zoneChangeCounter;
-        if (effect.turnFaceUpAbility != null) {
-            this.turnFaceUpAbility = effect.turnFaceUpAbility.copy();
-        }
+        effect.additionalAbilities.forEach(ability -> {
+            this.additionalAbilities.add(ability.copy());
+        });
         this.objectReference = effect.objectReference;
         this.foundPermanent = effect.foundPermanent;
         this.faceDownType = effect.faceDownType;
@@ -139,27 +152,33 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl {
                 foundPermanent = true;
                 switch (faceDownType) {
                     case MANIFESTED:
-                    case MANUAL: // sets manifested image
+                    case MANUAL: // sets manifested image // TODO: wtf
                         permanent.setManifested(true);
                         break;
                     case MORPHED:
                     case MEGAMORPHED:
                         permanent.setMorphed(true);
                         break;
+                    case DISGUISED:
+                        permanent.setDisguised(true);
+                        break;
                     default:
                         throw new UnsupportedOperationException("FaceDownType not yet supported: " + faceDownType);
                 }
             }
-            makeFaceDownObject(game, source.getSourceId(), permanent, faceDownType, this.turnFaceUpAbility);
+            makeFaceDownObject(game, source.getSourceId(), permanent, faceDownType, this.additionalAbilities);
         } else if (duration == Duration.Custom && foundPermanent) {
             discard();
         }
         return true;
     }
 
+    // TODO: implement multiple face down types?!
     public static FaceDownType findFaceDownType(Game game, Permanent permanent) {
         if (permanent.isMorphed()) {
             return BecomesFaceDownCreatureEffect.FaceDownType.MORPHED;
+        } else if (permanent.isDisguised()) {
+            return BecomesFaceDownCreatureEffect.FaceDownType.DISGUISED;
         } else if (permanent.isManifested()) {
             return BecomesFaceDownCreatureEffect.FaceDownType.MANIFESTED;
         } else if (permanent.isFaceDown(game)) {
@@ -172,7 +191,7 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl {
     /**
      * Convert any object (card, token) to face down (remove/hide all face up information and make it a 2/2 creature)
      */
-    public static void makeFaceDownObject(Game game, UUID sourceId, MageObject object, FaceDownType faceDownType, Ability turnFaceUpAbility) {
+    public static void makeFaceDownObject(Game game, UUID sourceId, MageObject object, FaceDownType faceDownType, List<Ability> additionalAbilities) {
         String originalObjectInfo = object.toString();
 
         // warning, it's a direct changes to the object (without game state, so no game param here)
@@ -200,38 +219,45 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl {
             //
             // so keep all tune face up abilities and other face down compatible
             if (ability.getWorksFaceDown()) {
-                // only face up abilities hidden by default (see below), so no needs in setRuleVisible
-                //ability.setRuleVisible(true);
+                // keep face down abilities active, but hide it from rules description
+                // example: When Dog Walker is turned face up, create two tapped 1/1 white Dog creature tokens
+                ability.setRuleVisible(false);
+
+                // but do not hide default ability (becomes a 2/2 face-down creature)
+                if (!ability.getRuleVisible() && !ability.getEffects().isEmpty()) {
+                    if (ability.getEffects().get(0) instanceof BecomesFaceDownCreatureEffect) {
+                        ability.setRuleVisible(true);
+                    }
+                }
                 continue;
             }
 
-            if (!ability.getRuleVisible() && !ability.getEffects().isEmpty()) {
-                if (ability.getEffects().get(0) instanceof BecomesFaceDownCreatureEffect) {
-                    continue;
-                }
-            }
+            // all other can be removed
             abilitiesToRemove.add(ability);
         }
 
-        // add face up abilities
-        // TODO: add here all possible face up like morph/disguis, manifest/cloak?
+        // add additional abilities like face up
         if (object instanceof Permanent) {
             // as permanent
             Permanent permanentObject = (Permanent) object;
             permanentObject.removeAbilities(abilitiesToRemove, sourceId, game);
-            if (turnFaceUpAbility != null) {
-                Ability faceUp = turnFaceUpAbility.copy();
-                faceUp.setRuleVisible(true);
-                permanentObject.addAbility(faceUp, sourceId, game);
+            if (additionalAbilities != null) {
+                additionalAbilities.forEach(blueprintAbility -> {
+                    Ability newAbility = blueprintAbility.copy();
+                    newAbility.setRuleVisible(true);
+                    permanentObject.addAbility(newAbility, sourceId, game);
+                });
             }
         } else if (object instanceof CardImpl) {
             // as card
             CardImpl cardObject = (CardImpl) object;
             cardObject.getAbilities().removeAll(abilitiesToRemove);
-            if (turnFaceUpAbility != null) {
-                Ability faceUp = turnFaceUpAbility.copy();
-                faceUp.setRuleVisible(true);
-                cardObject.addAbility(faceUp);
+            if (additionalAbilities != null) {
+                additionalAbilities.forEach(blueprintAbility -> {
+                    Ability newAbility = blueprintAbility.copy();
+                    newAbility.setRuleVisible(true);
+                    cardObject.addAbility(newAbility);
+                });
             }
         }
 
@@ -247,14 +273,14 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl {
             case MEGAMORPHED:
                 tokenName = TokenRepository.XMAGE_IMAGE_NAME_FACE_DOWN_MEGAMORPH;
                 break;
+            case DISGUISED:
+                tokenName = TokenRepository.XMAGE_IMAGE_NAME_FACE_DOWN_DISGUISE;
+                break;
             case MANIFESTED:
                 tokenName = TokenRepository.XMAGE_IMAGE_NAME_FACE_DOWN_MANIFEST;
                 break;
             case CLOAKED:
                 tokenName = "TODO-CLOAKED";
-                break;
-            case DISGUISED:
-                tokenName = "TODO-DISGUISED";
                 break;
             case MANUAL:
                 tokenName = TokenRepository.XMAGE_IMAGE_NAME_FACE_DOWN_MANUAL;

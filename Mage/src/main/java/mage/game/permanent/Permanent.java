@@ -442,6 +442,10 @@ public interface Permanent extends Card, Controllable {
 
     boolean isMorphed();
 
+    void setDisguised(boolean value);
+
+    boolean isDisguised();
+
     void setManifested(boolean value);
 
     boolean isManifested();

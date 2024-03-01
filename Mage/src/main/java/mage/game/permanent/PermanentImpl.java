@@ -74,6 +74,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     protected boolean suspected;
     protected boolean manifested = false;
     protected boolean morphed = false;
+    protected boolean disguised = false;
     protected boolean ringBearerFlag = false;
     protected boolean canBeSacrificed = true;
     protected int classLevel = 1;
@@ -186,6 +187,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.protectorId = permanent.protectorId;
 
         this.morphed = permanent.morphed;
+        this.disguised = permanent.disguised;
         this.manifested = permanent.manifested;
         this.createOrder = permanent.createOrder;
         this.prototyped = permanent.prototyped;
@@ -1906,6 +1908,16 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     @Override
     public void setMorphed(boolean value) {
         morphed = value;
+    }
+
+    @Override
+    public boolean isDisguised() {
+        return disguised;
+    }
+
+    @Override
+    public void setDisguised(boolean value) {
+        disguised = value;
     }
 
     @Override
