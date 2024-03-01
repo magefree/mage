@@ -1,27 +1,21 @@
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.combat.CantBlockTargetEffect;
 import mage.abilities.effects.common.combat.GoadTargetEffect;
 import mage.abilities.keyword.BattalionAbility;
-import mage.constants.Duration;
-import mage.constants.SubType;
-import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.keyword.HasteAbility;
+import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
-import mage.game.Game;
-import mage.players.Player;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetAnyTarget;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetadjustment.EachOpponentPermanentTargetsAdjuster;
+
+import java.util.UUID;
 
 /**
  *
@@ -48,7 +42,7 @@ public final class SontaranGeneral extends CardImpl {
                 .setText("for each opponent, goad up to one target creature that player controls."));
         ability.addEffect(new CantBlockTargetEffect(Duration.EndOfTurn)
                 .setText("Those creatures can't block this turn."));
-        ability.setTargetAdjuster(SontaranGeneralAdjuster.instance);
+        ability.setTargetAdjuster(new EachOpponentPermanentTargetsAdjuster(new TargetCreaturePermanent(0, 1)));
         this.addAbility(ability);
     }
 
@@ -59,24 +53,5 @@ public final class SontaranGeneral extends CardImpl {
     @Override
     public SontaranGeneral copy() {
         return new SontaranGeneral(this);
-    }
-}
-
-//From TheBalrogOfMoria
-enum SontaranGeneralAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        for (UUID opponentId : game.getOpponents(ability.getControllerId())) {
-            Player opponent = game.getPlayer(opponentId);
-            if (opponent == null) {
-                continue;
-            }
-            FilterPermanent filter = new FilterCreaturePermanent("creature controlled by " + opponent.getLogName());
-            filter.add(new ControllerIdPredicate(opponentId));
-            ability.addTarget(new TargetPermanent(0, 1, filter, false));
-        }
     }
 }

@@ -13,16 +13,14 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.mageobject.ManaValueParityPredicate;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.EachOpponentPermanentTargetsAdjuster;
 import mage.target.targetpointer.EachTargetPointer;
 import mage.target.targetpointer.FixedTarget;
 
@@ -33,6 +31,11 @@ import java.util.UUID;
  */
 public final class DesecrateReality extends CardImpl {
 
+    private static final FilterPermanent evenFilter = new FilterPermanent("permanent with an even mana value");
+
+    static {
+        evenFilter.add(ManaValueParityPredicate.EVEN);
+    }
     public DesecrateReality(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{7}");
 
@@ -41,7 +44,7 @@ public final class DesecrateReality extends CardImpl {
         this.getSpellAbility().addEffect(new ExileTargetEffect()
             .setTargetPointer(new EachTargetPointer())
             .setText("for each opponent, exile up to one target permanent that player controls with an even mana value."));
-        this.getSpellAbility().setTargetAdjuster(DesecrateRealityAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(new EachOpponentPermanentTargetsAdjuster(new TargetPermanent(0, 1, evenFilter)));
 
         // Adamant -- If at least three colorless mana was spent to cast this spell, return a permanent card with an odd mana value from your graveyard to the battlefield.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
@@ -59,36 +62,6 @@ public final class DesecrateReality extends CardImpl {
     @Override
     public DesecrateReality copy() {
         return new DesecrateReality(this);
-    }
-}
-
-enum DesecrateRealityAdjuster implements TargetAdjuster {
-    instance;
-
-    private static final FilterControlledPermanent filterCount = new FilterControlledPermanent("");
-
-    static {
-        filterCount.add(ManaValueParityPredicate.EVEN);
-    }
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        for (UUID opponentId : game.getOpponents(ability.getControllerId())) {
-            Player opponent = game.getPlayer(opponentId);
-
-            if (opponent == null || game.getBattlefield().count(
-                filterCount,
-                opponentId, ability, game
-            ) < 1) {
-                continue;
-            }
-            FilterPermanent filter = new FilterPermanent("permanent controlled by " + opponent.getName() + " with an even mana value.");
-            filter.add(new ControllerIdPredicate(opponentId));
-            filter.add(ManaValueParityPredicate.EVEN);
-            TargetPermanent targetPermanent = new TargetPermanent(0, 1, filter);
-            ability.addTarget(targetPermanent);
-        }
     }
 }
 
