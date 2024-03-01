@@ -7,6 +7,7 @@ import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
+import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
 import mage.abilities.hint.Hint;
 import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
