@@ -820,6 +820,8 @@ public class ScryfallImageSupportCards {
             put("PJOU/Heroes' Bane/126*", "https://api.scryfall.com/cards/pjou/126★/");
             put("PJOU/Scourge of Fleets/51*", "https://api.scryfall.com/cards/pjou/51★/");
             put("PJOU/Spawn of Thraxes/112*", "https://api.scryfall.com/cards/pjou/112★/");
+            // PL21
+            put("PL21/Sethron, Hurloon General/1*", "https://api.scryfall.com/cards/pl21/1★/");
             // PM10
             put("PM10/Ant Queen/166*", "https://api.scryfall.com/cards/pm10/166★/");
             put("PM10/Honor of the Pure/16*", "https://api.scryfall.com/cards/pm10/16★/");
@@ -848,11 +850,14 @@ public class ScryfallImageSupportCards {
             put("PMBS/Glissa, the Traitor/96*", "https://api.scryfall.com/cards/pmbs/96★/");
             put("PMBS/Hero of Bladehold/8*", "https://api.scryfall.com/cards/pmbs/8★/");
             put("PMBS/Thopter Assembly/140*", "https://api.scryfall.com/cards/pmbs/140★/");
+            // PMEI
+            put("PMEI/Jamuraan Lion/10*", "https://api.scryfall.com/cards/pmei/10★/");
             // PNPH
             put("PNPH/Phyrexian Metamorph/42*", "https://api.scryfall.com/cards/pnph/42★/");
             put("PNPH/Sheoldred, Whispering One/73*", "https://api.scryfall.com/cards/pnph/73★/");
             // PRES
             put("PRES/Goblin Chieftain/141*", "https://api.scryfall.com/cards/pres/141★/");
+            put("PRES/Lathliss, Dragon Queen/149*", "https://api.scryfall.com/cards/pres/149★/");
             put("PRES/Loam Lion/13*", "https://api.scryfall.com/cards/pres/13★/");
             put("PRES/Oran-Rief, the Vastwood/221*", "https://api.scryfall.com/cards/pres/221★/");
             // PROE
@@ -1004,27 +1009,42 @@ public class ScryfallImageSupportCards {
             put("WAR/Vraska, Swarm's Eminence/236*", "https://api.scryfall.com/cards/war/236★/");
             // SLD
             // fake double faced cards
-            put("SLD/Zndrsplt, Eye of Wisdom/379", "https://api.scryfall.com/cards/sld/379/");
-            put("SLD/Zndrsplt, Eye of Wisdom/379b", "https://c1.scryfall.com/file/scryfall-cards/large/back/d/5/d5dfd236-b1da-4552-b94f-ebf6bb9dafdf.jpg");
-            put("SLD/Krark's Thumb/383", "https://api.scryfall.com/cards/sld/383/");
-            put("SLD/Krark's Thumb/383b", "https://c1.scryfall.com/file/scryfall-cards/large/back/9/f/9f63277b-e139-46c8-b9e3-0cfb647f44cc.jpg");
-            put("SLD/Okaun, Eye of Chaos/380", "https://api.scryfall.com/cards/sld/380/");
-            put("SLD/Okaun, Eye of Chaos/380b", "https://c1.scryfall.com/file/scryfall-cards/large/back/9/4/94eea6e3-20bc-4dab-90ba-3113c120fb90.jpg");
-            put("SLD/Propaganda/381", "https://api.scryfall.com/cards/sld/381/");
-            put("SLD/Propaganda/381b", "https://c1.scryfall.com/file/scryfall-cards/large/back/3/e/3e3f0bcd-0796-494d-bf51-94b33c1671e9.jpg");
-            put("SLD/Stitch in Time/382", "https://api.scryfall.com/cards/sld/382/");
-            put("SLD/Stitch in Time/382b", "https://c1.scryfall.com/file/scryfall-cards/large/back/0/8/087c3a0d-c710-4451-989e-596b55352184.jpg");
+            put("SLD/Blightsteel Colossus/1079b", "https://api.scryfall.com/cards/sld/1079/en?format=image&face=back");
+            put("SLD/Doubling Cube/1080b", "https://api.scryfall.com/cards/sld/1080/en?format=image&face=back");
+            put("SLD/Darksteel Colossus/1081b", "https://api.scryfall.com/cards/sld/1081/en?format=image&face=back");
+            put("SLD/Ulamog, the Ceaseless Hunger/1122b", "https://api.scryfall.com/cards/sld/1122/en?format=image&face=back");
+            put("SLD/Etali, Primal Storm/1123b", "https://api.scryfall.com/cards/sld/1123/en?format=image&face=back");
+            put("SLD/Ghalta, Primal Hunger/1124b", "https://api.scryfall.com/cards/sld/1124/en?format=image&face=back");
+			put("SLD/Zndrsplt, Eye of Wisdom/379b", "https://api.scryfall.com/cards/sld/379/en?format=image&face=back");
+            put("SLD/Zndrsplt, Eye of Wisdom/379*", "https://api.scryfall.com/cards/sld/379★/");
+            put("SLD/Zndrsplt, Eye of Wisdom/379b*", "https://api.scryfall.com/cards/sld/379★/en?format=image&face=back");
+            put("SLD/Ajani Goldmane/1453b", "https://api.scryfall.com/cards/sld/1453/en?format=image&face=back");
+            put("SLD/Jace Beleren/1454b", "https://api.scryfall.com/cards/sld/1454/en?format=image&face=back");
+            put("SLD/Liliana Vess/1455b", "https://api.scryfall.com/cards/sld/1455/en?format=image&face=back");
+            put("SLD/Chandra Nalaar/1456b", "https://api.scryfall.com/cards/sld/1456/en?format=image&face=back");
+            put("SLD/Garruk Wildspeaker/1457b", "https://api.scryfall.com/cards/sld/1457/en?format=image&face=back");
+            put("SLD/Okaun, Eye of Chaos/380b", "https://api.scryfall.com/cards/sld/380/en?format=image&face=back");
+            put("SLD/Okaun, Eye of Chaos/380*", "https://api.scryfall.com/cards/sld/380★/");
+            put("SLD/Okaun, Eye of Chaos/380b*", "https://api.scryfall.com/cards/sld/380★/en?format=image&face=back");
+            put("SLD/Propaganda/381b", "https://api.scryfall.com/cards/sld/381/en?format=image&face=back");
+            put("SLD/Stitch in Time/382b", "https://api.scryfall.com/cards/sld/382/en?format=image&face=back");
+            put("SLD/Krark's Thumb/383b", "https://api.scryfall.com/cards/sld/383/en?format=image&face=back");
             // normal cards
             put("SLD/Demonlord Belzenlok/159*", "https://api.scryfall.com/cards/sld/159★/");
             put("SLD/Griselbrand/160*", "https://api.scryfall.com/cards/sld/160★/");
             put("SLD/Kothophed, Soul Hoarder/162*", "https://api.scryfall.com/cards/sld/162★/");
             put("SLD/Liliana's Contract/161*", "https://api.scryfall.com/cards/sld/161★/");
             put("SLD/Razaketh, the Foulblooded/163*", "https://api.scryfall.com/cards/sld/163★/");
-            // PMEI
-            put("PMEI/Jamuraan Lion/10*", "https://api.scryfall.com/cards/pmei/10★/");
-            // PRES
-            put("PRES/Lathliss, Dragon Queen/149*", "https://api.scryfall.com/cards/pres/149★/");
-
+            put("SLD/Goblin Lackey/1311*", "https://api.scryfall.com/cards/sld/1311★/");
+            put("SLD/Goblin Matron/1312*", "https://api.scryfall.com/cards/sld/1312★/");
+            put("SLD/Muxus, Goblin Grandee/1314*", "https://api.scryfall.com/cards/sld/1314★/");
+            put("SLD/Goblin Recruiter/1313*", "https://api.scryfall.com/cards/sld/1313★/");
+            put("SLD/Plague Sliver/633Ph", "https://api.scryfall.com/cards/sld/633Φ/");
+            put("SLD/Shadowborn Apostle/681Ph", "https://api.scryfall.com/cards/sld/681Φ/");
+            put("SLD/Toxin Sliver/635Ph", "https://api.scryfall.com/cards/sld/635Φ/");
+            put("SLD/Shattergang Brothers/1315*", "https://api.scryfall.com/cards/sld/1315★/");
+            put("SLD/Virulent Sliver/659Ph", "https://api.scryfall.com/cards/sld/659Φ/");
+			
             // CALC - custom alchemy version of cards.
             put("CALC/C-Pillar of the Paruns", "https://api.scryfall.com/cards/dis/176/");
 

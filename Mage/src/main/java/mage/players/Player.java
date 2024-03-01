@@ -988,7 +988,7 @@ public interface Player extends MageItem, Copyable<Player> {
      * @param source
      * @param game
      * @param fromZone
-     * @param withName
+     * @param withName for face down: used to hide card name in game logs before real face down status apply
      * @return
      */
     @Deprecated

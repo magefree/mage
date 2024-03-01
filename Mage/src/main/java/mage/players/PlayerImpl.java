@@ -1849,7 +1849,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             int last = cards.size();
             for (Card card : cards.getCards(game)) {
                 current++;
-                sb.append(GameLog.getColoredObjectName(card));
+                sb.append(GameLog.getColoredObjectName(card)); // TODO: see same usage in OfferingAbility for hide card's id (is it needs for reveal too?!)
                 if (current < last) {
                     sb.append(", ");
                 }
@@ -4699,7 +4699,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                             Player eventPlayer = game.getPlayer(info.event.getPlayerId());
                             if (eventPlayer != null && fromZone != null) {
                                 game.informPlayers(eventPlayer.getLogName() + " puts "
-                                        + (info.faceDown ? "a card face down " : permanent.getLogName()) + " from "
+                                        + GameLog.getColoredObjectIdName(permanent) + " from "
                                         + fromZone.toString().toLowerCase(Locale.ENGLISH) + " onto the Battlefield"
                                         + CardUtil.getSourceLogName(game, source, permanent.getId()));
                             }
@@ -4725,10 +4725,23 @@ public abstract class PlayerImpl implements Player, Serializable {
                 break;
             case EXILED:
                 for (Card card : cards) {
+                    // 708.9.
+                    // If a face-down permanent or a face-down component of a merged permanent moves from the
+                    // battlefield to any other zone, its owner must reveal it to all players as they move it.
+                    // If a face-down spell moves from the stack to any zone other than the battlefield,
+                    // its owner must reveal it to all players as they move it. If a player leaves the game,
+                    // all face-down permanents, face-down components of merged permanents, and face-down spells
+                    // owned by that player must be revealed to all players. At the end of each game, all
+                    // face-down permanents, face-down components of merged permanents, and face-down spells must
+                    // be revealed to all players.
+
+                    // force to show face down name in logs
+                    // TODO: replace it to real reveal code somehow?
                     fromZone = game.getState().getZone(card.getId());
                     boolean withName = (fromZone == Zone.BATTLEFIELD
                             || fromZone == Zone.STACK)
                             || !card.isFaceDown(game);
+
                     if (moveCardToExileWithInfo(card, null, "", source, game, fromZone, withName)) {
                         successfulMovedCards.add(card);
                     }
@@ -5006,10 +5019,19 @@ public abstract class PlayerImpl implements Player, Serializable {
                     }
                 }
                 if (Zone.EXILED.equals(game.getState().getZone(card.getId()))) { // only if target zone was not replaced
-                    game.informPlayers(this.getLogName() + " moves " + (withName ? card.getLogName()
-                            + (card.isCopy() ? " (Copy)" : "") : "a card face down") + ' '
-                            + (fromZone != null ? "from " + fromZone.toString().toLowerCase(Locale.ENGLISH)
-                            + ' ' : "") + "to the exile zone" + CardUtil.getSourceLogName(game, source, card.getId()));
+                    String visibleName;
+                    if (withName) {
+                        // warning, withName param used to forced name show of the face down card (see 708.9.)
+                        if (card.getName().isEmpty()) {
+                            throw new IllegalStateException("Wrong code usage: method must find real card name, but found nothing", new Throwable());
+                        }
+                        visibleName = card.getLogName() + (card.isCopy() ? " (Copy)" : "");
+                    } else {
+                        visibleName = "a " + GameLog.getNeutralObjectIdName(EmptyNames.FACE_DOWN_CARD.toString(), card.getId());
+                    }
+                    game.informPlayers(this.getLogName() + " moves " + visibleName
+                            + (fromZone != null ? " from " + fromZone.toString().toLowerCase(Locale.ENGLISH) : "")
+                            + " to the exile zone" + CardUtil.getSourceLogName(game, source, card.getId()));
                 }
 
             }
