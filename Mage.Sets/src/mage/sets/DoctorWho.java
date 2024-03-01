@@ -81,6 +81,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Duggan, Private Detective", 728, Rarity.RARE, mage.cards.d.DugganPrivateDetective.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Duggan, Private Detective", 1000, Rarity.RARE, mage.cards.d.DugganPrivateDetective.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ecstatic Beauty", 83, Rarity.RARE, mage.cards.e.EcstaticBeauty.class));
+        cards.add(new SetCardInfo("Everything Comes to Dust", 19, Rarity.RARE, mage.cards.e.EverythingComesToDust.class));
         cards.add(new SetCardInfo("Evolving Wilds", 275, Rarity.COMMON, mage.cards.e.EvolvingWilds.class));
         cards.add(new SetCardInfo("Exotic Orchard", 276, Rarity.RARE, mage.cards.e.ExoticOrchard.class));
         cards.add(new SetCardInfo("Explore", 231, Rarity.COMMON, mage.cards.e.Explore.class));
