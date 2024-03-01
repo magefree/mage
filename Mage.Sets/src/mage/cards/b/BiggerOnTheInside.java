@@ -92,13 +92,8 @@ class BiggerOnTheInsideEffect extends OneShotEffect { //Not a mana ability since
         if (player == null) {
             return false;
         }
-        ContinuousEffect cascadeEffect = new NextSpellCastHasAbilityEffect(new CascadeAbility());
-
-        // Make a copy of the source ability with the target as controller
-        // a hack to allow use of the common class
-        Ability changedController = source.copy();
-        changedController.setControllerId(player.getId());
-        game.addEffect(cascadeEffect, changedController);
+        ContinuousEffect cascadeEffect = new NextSpellCastHasAbilityEffect(new CascadeAbility(), TargetController.SOURCE_TARGETS);
+        game.addEffect(cascadeEffect, source);
 
         ManaEffect manaEffect = new AddManaOfAnyColorEffect(2);
         Mana manaToAdd = manaEffect.produceMana(game, source);
