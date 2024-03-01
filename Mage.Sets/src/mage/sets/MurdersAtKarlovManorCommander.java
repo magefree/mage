@@ -12,7 +12,7 @@ import java.util.List;
  */
 public final class MurdersAtKarlovManorCommander extends ExpansionSet {
 
-    private static final List<String> unfinished = Arrays.asList("Boltbender", "Experiment Twelve", "Printlifter Ooze", "True Identity", "Ransom Note", "Unexplained Absence", "Veiled Ascension");
+    private static final List<String> unfinished = Arrays.asList("Boltbender", "Experiment Twelve", "True Identity", "Ransom Note", "Unexplained Absence", "Veiled Ascension");
 
     private static final MurdersAtKarlovManorCommander instance = new MurdersAtKarlovManorCommander();
 
