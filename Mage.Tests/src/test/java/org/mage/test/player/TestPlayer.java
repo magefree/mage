@@ -183,8 +183,11 @@ public class TestPlayer implements Player {
         targets.add(target);
     }
 
-    public void addAlias(String name, UUID Id) {
-        aliases.put(name, Id);
+    public void addAlias(String aliasId, UUID objectId) {
+        if (aliases.containsKey(aliasId)) {
+            throw new IllegalArgumentException("Alias with same aliasId already exists: " + aliasId);
+        }
+        aliases.put(aliasId, objectId);
     }
 
     public ManaOptions getAvailableManaTest(Game game) {

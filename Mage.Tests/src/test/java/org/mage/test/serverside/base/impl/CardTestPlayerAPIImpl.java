@@ -689,7 +689,9 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
                 ));
                 if (!aliasName.isEmpty()) {
                     // TODO: is it bugged with double faced cards (wrong ref)?
-                    player.addAlias(player.generateAliasName(aliasName, useAliasMultiNames, i + 1), newCard.getId());
+                    // add to all players
+                    String aliasId = player.generateAliasName(aliasName, useAliasMultiNames, i + 1);
+                    currentGame.getPlayers().values().forEach(pl -> ((TestPlayer) pl).addAlias(aliasId, newCard.getId()));
                 }
             }
         } else {
@@ -701,7 +703,9 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
                 Card newCard = cardInfo.createCard();
                 cards.add(newCard);
                 if (!aliasName.isEmpty()) {
-                    player.addAlias(player.generateAliasName(aliasName, useAliasMultiNames, i + 1), newCard.getId());
+                    // add to all players
+                    String aliasId = player.generateAliasName(aliasName, useAliasMultiNames, i + 1);
+                    currentGame.getPlayers().values().forEach(pl -> ((TestPlayer) pl).addAlias(aliasId, newCard.getId()));
                 }
             }
         }
