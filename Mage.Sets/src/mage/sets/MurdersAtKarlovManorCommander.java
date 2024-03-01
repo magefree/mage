@@ -108,6 +108,8 @@ public final class MurdersAtKarlovManorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Fellwar Stone", 228, Rarity.UNCOMMON, mage.cards.f.FellwarStone.class));
         cards.add(new SetCardInfo("Fetid Pools", 261, Rarity.RARE, mage.cards.f.FetidPools.class));
         cards.add(new SetCardInfo("Fiendish Duo", 153, Rarity.MYTHIC, mage.cards.f.FiendishDuo.class));
+        cards.add(new SetCardInfo("Final-Word Phantom", 22, Rarity.RARE, mage.cards.f.FinalWordPhantom.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Final-Word Phantom", 332, Rarity.RARE, mage.cards.f.FinalWordPhantom.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Finale of Revelation", 106, Rarity.MYTHIC, mage.cards.f.FinaleOfRevelation.class));
         cards.add(new SetCardInfo("Follow the Bodies", 23, Rarity.RARE, mage.cards.f.FollowTheBodies.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Follow the Bodies", 333, Rarity.RARE, mage.cards.f.FollowTheBodies.class, NON_FULL_USE_VARIOUS));
