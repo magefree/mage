@@ -30,7 +30,7 @@ public final class GalvanicBombardment extends CardImpl {
         filter.add(new NamePredicate("Galvanic Bombardment"));
     }
     private static final Hint hint = new ValueHint(
-            "Cards named Galvanic Bombardment in your graveyard", new CardsInControllerGraveyardCount(filter)
+            "Cards named Galvanic Bombardment in your graveyard", new GalvanicBombardmentCardsInControllerGraveyardCount(filter)
     );
 
     public GalvanicBombardment(UUID ownerId, CardSetInfo setInfo) {
