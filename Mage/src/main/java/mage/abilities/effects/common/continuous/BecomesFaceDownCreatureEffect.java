@@ -15,6 +15,7 @@ import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.keyword.WardAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.ModalDoubleFacedCard;
 import mage.cards.repository.TokenInfo;
 import mage.cards.repository.TokenRepository;
 import mage.constants.*;
@@ -31,6 +32,9 @@ import java.util.UUID;
 
 /**
  * Support different face down types: morph/manifest and disguise/cloak
+ * <p>
+ * WARNING, if you use it custom effect then must create it for left side card,
+ * not main (see findDefaultCardSideForFaceDown)
  *
  * <p>
  * This effect lets the card be a 2/2 face-down creature, with no text, no name,
@@ -334,4 +338,21 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl {
         }
     }
 
+    /**
+     * There are cards with multiple sides like MDFC, but face down must use only main/left side all the time.
+     * So try to find that side.
+     */
+    public static Card findDefaultCardSideForFaceDown(Game game, Card card) {
+        // rules example:
+        // If a double-faced card is manifested, it will be put onto the battlefield face down. While face down,
+        // it can't transform. If the front face of the card is a creature card, you can turn it face up by paying
+        // its mana cost. If you do, its front face will be up.
+
+        if (card instanceof ModalDoubleFacedCard) {
+            // only MDFC uses independent card sides on 2024
+            return ((ModalDoubleFacedCard) card).getLeftHalfCard();
+        } else {
+            return card;
+        }
+    }
 }

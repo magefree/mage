@@ -58,10 +58,6 @@ import java.util.Set;
  * 701.34g TODO: need support it
  * If a manifested permanent that’s represented by an instant or sorcery card would turn face up, its controller
  * reveals it and leaves it face down. Abilities that trigger whenever a permanent is turned face up won’t trigger.
- * <p>
- * 701.34g
- * If a manifested permanent that’s represented by an instant or sorcery card would turn face up, its controller
- * reveals it and leaves it face down. Abilities that trigger whenever a permanent is turned face up won’t trigger.
  *
  * @author LevelX2, JayDi85
  */
@@ -123,16 +119,19 @@ public class ManifestEffect extends OneShotEffect {
         // prepare face down effect for battlefield permanents
         // TODO: need research - why it add effect before move?!
         for (Card card : cardsToManifest) {
+            Card battlefieldCard = BecomesFaceDownCreatureEffect.findDefaultCardSideForFaceDown(game, card);
+
             // search mana cost for a face up ability (look at face side of the double side card)
             ManaCosts manaCosts = null;
-            if (card.isCreature(game)) {
-                manaCosts = card.getSpellAbility() != null ? card.getSpellAbility().getManaCosts() : null;
+            if (battlefieldCard.isCreature(game)) {
+                manaCosts = battlefieldCard.getSpellAbility() != null ? battlefieldCard.getSpellAbility().getManaCosts() : null;
                 if (manaCosts == null) {
                     manaCosts = new ManaCostsImpl<>("{0}");
                 }
             }
+
             // zcc + 1 for use case with Rally the Ancestors (see related test)
-            MageObjectReference objectReference = new MageObjectReference(card.getId(), card.getZoneChangeCounter(game) + 1, game);
+            MageObjectReference objectReference = new MageObjectReference(battlefieldCard.getId(), battlefieldCard.getZoneChangeCounter(game) + 1, game);
             game.addEffect(new BecomesFaceDownCreatureEffect(manaCosts, objectReference, Duration.Custom, FaceDownType.MANIFESTED), newSource);
         }
 
@@ -140,13 +139,16 @@ public class ManifestEffect extends OneShotEffect {
         // TODO: possible buggy for multiple cards, see rule 701.34e - it require manifest one by one (card to check: Omarthis, Ghostfire Initiate)
         manifestPlayer.moveCards(cardsToManifest, Zone.BATTLEFIELD, source, game, false, true, false, null);
         for (Card card : cardsToManifest) {
-            Permanent permanent = game.getPermanent(card.getId());
+            Card battlefieldCard = BecomesFaceDownCreatureEffect.findDefaultCardSideForFaceDown(game, card);
+
+            Permanent permanent = game.getPermanent(battlefieldCard.getId());
             if (permanent != null) {
-                // TODO: why it set manifested here (face down effect doesn't work?!)
+                // TODO: permanent already has manifested status, so code can be deleted later
                 // TODO: add test with battlefield trigger/watcher (must not see normal card, must not see face down status without manifest)
                 permanent.setManifested(true);
             } else {
                 // TODO: looks buggy, card can't be moved to battlefield, but face down effect already active
+                //  or it can be face down on another move to battalefield
             }
         }
 

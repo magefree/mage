@@ -1219,6 +1219,7 @@ public class TestPlayer implements Player {
                 .map(c -> (((c instanceof PermanentToken) ? "[T] " : "[C] ")
                         + c.getIdName()
                         + (c.isCopy() ? " [copy of " + c.getCopyFrom().getId().toString().substring(0, 3) + "]" : "")
+                        + " class " + c.getMainCard().getClass().getSimpleName() + ""
                         + " - " + c.getPower().getValue() + "/" + c.getToughness().getValue()
                         + (c.isPlaneswalker(game) ? " - L" + c.getCounters(game).getCount(CounterType.LOYALTY) : "")
                         + ", " + (c.isTapped() ? "Tapped" : "Untapped")

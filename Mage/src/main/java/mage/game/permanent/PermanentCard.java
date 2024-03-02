@@ -56,6 +56,12 @@ public class PermanentCard extends PermanentImpl {
                 goodForBattlefield = false;
             }
         }
+
+        // face down cards allows in any forms (only face up restricted for non-permanents)
+        if (card.isFaceDown(game)) {
+            goodForBattlefield = true;
+        }
+
         if (!goodForBattlefield) {
             throw new IllegalArgumentException("Wrong code usage: can't create permanent card from split or mdf: " + card.getName());
         }

@@ -1,5 +1,6 @@
 package org.mage.test.cards.abilities.keywords;
 
+import mage.MageObject;
 import mage.cards.Card;
 import mage.cards.repository.TokenRepository;
 import mage.constants.EmptyNames;
@@ -116,6 +117,102 @@ public class ManifestTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 2);
         assertPermanentCount(playerB, EmptyNames.FACE_DOWN_CREATURE.toString(), 0);
         Assert.assertEquals("manifested cards must be taken from opponent's library", 2, playerA.getLibrary().size() - playerB.getLibrary().size());
+    }
+
+    private void runManifestThenBlink(String cardToManifest, String cardAfterBlink) {
+        // split, mdfc and other cards must be able to manifested
+        // bug: https://github.com/magefree/mage/issues/10608
+        skipInitShuffling();
+
+        // Manifest the top card of your library.
+        addCard(Zone.HAND, playerA, "Soul Summons", 1); // {1}{W}, sorcery
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
+        //
+        // Exile target creature you control, then return that card to the battlefield under your control.
+        addCard(Zone.HAND, playerA, "Cloudshift", 1); // {W}, instant
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
+        //
+        addCard(Zone.LIBRARY, playerA, cardToManifest, 1);
+
+        // manifest
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Soul Summons");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPermanentCount("need face down", 1, PhaseStep.PRECOMBAT_MAIN, playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
+
+        // blink
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cloudshift", EmptyNames.FACE_DOWN_CREATURE.toString());
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPermanentCount("need no face down", 1, PhaseStep.PRECOMBAT_MAIN, playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 0);
+
+        runCode("after blink", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
+            if (cardAfterBlink == null) {
+                Assert.assertEquals("after blink card must keep in exile",
+                        1, currentGame.getExile().getAllCardsByRange(currentGame, playerA.getId()).size());
+            } else {
+                String realPermanentName = currentGame.getBattlefield().getAllPermanents()
+                        .stream()
+                        .filter(p -> p.getName().equals(cardAfterBlink))
+                        .map(MageObject::getName)
+                        .findFirst()
+                        .orElse(null);
+                Assert.assertEquals("after blink card must go to battlefield",
+                        cardAfterBlink, realPermanentName);
+            }
+        });
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+    }
+
+    @Test
+    public void test_ManifestThenBlink_Creature() {
+        runManifestThenBlink("Grizzly Bears", "Grizzly Bears");
+    }
+
+    @Test
+    public void test_ManifestThenBlink_Instant() {
+        runManifestThenBlink("Lightning Bolt", null);
+    }
+
+    @Test
+    public void test_ManifestThenBlink_MDFC_Creature() {
+        runManifestThenBlink("Akoum Warrior // Akoum Teeth", "Akoum Warrior");
+    }
+
+    @Test
+    public void test_ManifestThenBlink_MDFC_LandOnMainSide() {
+        runManifestThenBlink("Barkchannel Pathway // Tidechannel Pathway", "Barkchannel Pathway");
+    }
+
+    @Test
+    public void test_ManifestThenBlink_MDFC_LandOnSecondSide() {
+        runManifestThenBlink("Bala Ged Recovery // Bala Ged Sanctuary", null);
+    }
+
+    @Test
+    public void test_ManifestThenBlink_Split_Normal() {
+        runManifestThenBlink("Assault // Battery", null);
+    }
+
+    @Test
+    public void test_ManifestThenBlink_Split_Fused() {
+        runManifestThenBlink("Alive // Well", null);
+    }
+
+    @Test
+    public void test_ManifestThenBlink_Split_Aftermath() {
+        runManifestThenBlink("Dusk // Dawn", null);
+    }
+
+    @Test
+    public void test_ManifestThenBlink_Meld() {
+        runManifestThenBlink("Graf Rats", "Graf Rats");
+    }
+
+    @Test
+    public void test_ManifestThenBlink_Adventure() {
+        runManifestThenBlink("Ardenvale Tactician // Dizzying Swoop", "Ardenvale Tactician");
     }
 
     /**
