@@ -62,6 +62,7 @@ class GhastlyConscriptionEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        // TODO: migrate to shared manifested code
         Player controller = game.getPlayer(source.getControllerId());
         Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (controller != null && targetPlayer != null) {
@@ -85,7 +86,8 @@ class GhastlyConscriptionEffect extends OneShotEffect {
                         manaCosts = new ManaCostsImpl<>("{0}");
                     }
                 }
-                MageObjectReference objectReference = new MageObjectReference(card.getId(), card.getZoneChangeCounter(game) + 1, game);
+                Card battlefieldCard = BecomesFaceDownCreatureEffect.findDefaultCardSideForFaceDown(game, card);
+                MageObjectReference objectReference = new MageObjectReference(battlefieldCard.getId(), battlefieldCard.getZoneChangeCounter(game) + 1, game);
                 game.addEffect(new BecomesFaceDownCreatureEffect(manaCosts, objectReference, Duration.Custom, FaceDownType.MANIFESTED), newSource);
             }
             Set<Card> toBattlefield = new LinkedHashSet();

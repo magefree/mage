@@ -81,6 +81,7 @@ class JeskaiInfiltratorEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        // TODO: migrade to shared manifest code
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Set<Card> cardsToManifest = new HashSet<>();
@@ -105,7 +106,8 @@ class JeskaiInfiltratorEffect extends OneShotEffect {
                         manaCosts = new ManaCostsImpl<>("{0}");
                     }
                 }
-                MageObjectReference objectReference = new MageObjectReference(card.getId(), card.getZoneChangeCounter(game) + 1, game);
+                Card battlefieldCard = BecomesFaceDownCreatureEffect.findDefaultCardSideForFaceDown(game, card);
+                MageObjectReference objectReference = new MageObjectReference(battlefieldCard.getId(), battlefieldCard.getZoneChangeCounter(game) + 1, game);
                 game.addEffect(new BecomesFaceDownCreatureEffect(manaCosts, objectReference, Duration.Custom, FaceDownType.MANIFESTED), newSource);
             });
             controller.moveCards(exileZone.getCards(game), Zone.BATTLEFIELD, source, game, false, true, false, null);
