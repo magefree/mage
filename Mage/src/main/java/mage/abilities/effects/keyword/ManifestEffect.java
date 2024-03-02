@@ -49,6 +49,19 @@ import java.util.Set;
  * <p>
  * 701.34e TODO: need support it
  * If an effect instructs a player to manifest multiple cards from their library, those cards are manifested one at a time.
+ * <p>
+ * 701.34f TODO: need research, possible buggy (see face down effect order doManifestCards)
+ * If an effect instructs a player to manifest a card and a rule or effect prohibits the face-down object from
+ * entering the battlefield, that card isn’t manifested. Its characteristics remain unmodified and it remains in
+ * its previous zone. If it was face up, it remains face up.
+ * <p>
+ * 701.34g TODO: need support it
+ * If a manifested permanent that’s represented by an instant or sorcery card would turn face up, its controller
+ * reveals it and leaves it face down. Abilities that trigger whenever a permanent is turned face up won’t trigger.
+ * <p>
+ * 701.34g
+ * If a manifested permanent that’s represented by an instant or sorcery card would turn face up, its controller
+ * reveals it and leaves it face down. Abilities that trigger whenever a permanent is turned face up won’t trigger.
  *
  * @author LevelX2, JayDi85
  */
