@@ -114,10 +114,10 @@ public class StarterCommanderDecks extends ExpansionSet {
         cards.add(new SetCardInfo("Emeria Angel", 21, Rarity.RARE, mage.cards.e.EmeriaAngel.class));
         cards.add(new SetCardInfo("Emmara, Soul of the Accord", 2, Rarity.MYTHIC, mage.cards.e.EmmaraSoulOfTheAccord.class));
         cards.add(new SetCardInfo("Empyrean Eagle", 226, Rarity.UNCOMMON, mage.cards.e.EmpyreanEagle.class));
-        cards.add(new SetCardInfo("Enter the God-Eternals", 227, Rarity.RARE, mage.cards.e.EnterTheGod-Eternals.class));
+        cards.add(new SetCardInfo("Enter the God-Eternals", 227, Rarity.RARE, mage.cards.e.EnterTheGodEternals.class));
         cards.add(new SetCardInfo("Eternal Skylord", 49, Rarity.UNCOMMON, mage.cards.e.EternalSkylord.class));
         cards.add(new SetCardInfo("Eternal Witness", 181, Rarity.UNCOMMON, mage.cards.e.EternalWitness.class));
-        cards.add(new SetCardInfo("Ever-Watching Threshold", 50, Rarity.RARE, mage.cards.e.Ever-WatchingThreshold.class));
+        cards.add(new SetCardInfo("Ever-Watching Threshold", 50, Rarity.RARE, mage.cards.e.EverWatchingThreshold.class));
         cards.add(new SetCardInfo("Explosion of Riches", 140, Rarity.UNCOMMON, mage.cards.e.ExplosionOfRiches.class));
         cards.add(new SetCardInfo("Faerie Formation", 51, Rarity.RARE, mage.cards.f.FaerieFormation.class));
         cards.add(new SetCardInfo("Farhaven Elf", 182, Rarity.COMMON, mage.cards.f.FarhavenElf.class));
@@ -128,7 +128,7 @@ public class StarterCommanderDecks extends ExpansionSet {
         cards.add(new SetCardInfo("Fires of Yavimaya", 228, Rarity.UNCOMMON, mage.cards.f.FiresOfYavimaya.class));
         cards.add(new SetCardInfo("Flameblast Dragon", 142, Rarity.RARE, mage.cards.f.FlameblastDragon.class));
         cards.add(new SetCardInfo("Fleshbag Marauder", 78, Rarity.COMMON, mage.cards.f.FleshbagMarauder.class));
-        cards.add(new SetCardInfo("Foe-Razer Regent", 183, Rarity.RARE, mage.cards.f.Foe-RazerRegent.class));
+        cards.add(new SetCardInfo("Foe-Razer Regent", 183, Rarity.RARE, mage.cards.f.FoeRazerRegent.class));
         cards.add(new SetCardInfo("Foreboding Ruins", 300, Rarity.RARE, mage.cards.f.ForebodingRuins.class));
         cards.add(new SetCardInfo("Forest", 349, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 350, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
@@ -161,7 +161,7 @@ public class StarterCommanderDecks extends ExpansionSet {
         cards.add(new SetCardInfo("Haven of the Spirit Dragon", 304, Rarity.RARE, mage.cards.h.HavenOfTheSpiritDragon.class));
         cards.add(new SetCardInfo("Hedron Archive", 266, Rarity.UNCOMMON, mage.cards.h.HedronArchive.class));
         cards.add(new SetCardInfo("Heraldic Banner", 267, Rarity.UNCOMMON, mage.cards.h.HeraldicBanner.class));
-        cards.add(new SetCardInfo("Hoard-Smelter Dragon", 147, Rarity.RARE, mage.cards.h.Hoard-SmelterDragon.class));
+        cards.add(new SetCardInfo("Hoard-Smelter Dragon", 147, Rarity.RARE, mage.cards.h.HoardSmelterDragon.class));
         cards.add(new SetCardInfo("Holdout Settlement", 305, Rarity.COMMON, mage.cards.h.HoldoutSettlement.class));
         cards.add(new SetCardInfo("Hornet Nest", 189, Rarity.RARE, mage.cards.h.HornetNest.class));
         cards.add(new SetCardInfo("Hornet Queen", 190, Rarity.RARE, mage.cards.h.HornetQueen.class));
