@@ -143,7 +143,7 @@ public class StarterCommanderDecks extends ExpansionSet {
         cards.add(new SetCardInfo("Geode Rager", 144, Rarity.RARE, mage.cards.g.GeodeRager.class));
         cards.add(new SetCardInfo("Geralf's Mindcrusher", 53, Rarity.RARE, mage.cards.g.GeralfsMindcrusher.class));
         cards.add(new SetCardInfo("Gideon Jura", 24, Rarity.MYTHIC, mage.cards.g.GideonJura.class));
-        cards.add(new SetCardInfo("Gisa and Geralf", 3, Rarity.MYTHIC, mage.cards.g.GisaandGeralf.class));
+        cards.add(new SetCardInfo("Gisa and Geralf", 3, Rarity.MYTHIC, mage.cards.g.GisaAndGeralf.class));
         cards.add(new SetCardInfo("Gleaming Overseer", 229, Rarity.UNCOMMON, mage.cards.g.GleamingOverseer.class));
         cards.add(new SetCardInfo("Gravespawn Sovereign", 79, Rarity.RARE, mage.cards.g.GravespawnSovereign.class));
         cards.add(new SetCardInfo("Gravitational Shift", 54, Rarity.RARE, mage.cards.g.GravitationalShift.class));
