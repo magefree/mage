@@ -78,6 +78,8 @@ public final class MurdersAtKarlovManorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Deep Analysis", 100, Rarity.COMMON, mage.cards.d.DeepAnalysis.class));
         cards.add(new SetCardInfo("Deflecting Palm", 205, Rarity.RARE, mage.cards.d.DeflectingPalm.class));
         cards.add(new SetCardInfo("Den Protector", 169, Rarity.RARE, mage.cards.d.DenProtector.class));
+        cards.add(new SetCardInfo("Detective of the Month", 21, Rarity.RARE, mage.cards.d.DetectiveOfTheMonth.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Detective of the Month", 331, Rarity.RARE, mage.cards.d.DetectiveOfTheMonth.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dimir Aqueduct", 258, Rarity.UNCOMMON, mage.cards.d.DimirAqueduct.class));
         cards.add(new SetCardInfo("Dimir Signet", 226, Rarity.UNCOMMON, mage.cards.d.DimirSignet.class));
         cards.add(new SetCardInfo("Dimir Spybug", 206, Rarity.UNCOMMON, mage.cards.d.DimirSpybug.class));
