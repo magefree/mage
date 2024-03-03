@@ -16,12 +16,12 @@ public enum TargetPermanentPowerCount implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        Permanent sourcePermanent = game.getPermanent(sourceAbility.getFirstTarget());
-        if (sourcePermanent == null) {
-            sourcePermanent = (Permanent) game.getLastKnownInformation(sourceAbility.getFirstTarget(), Zone.BATTLEFIELD);
+        Permanent targetPermanent = game.getPermanent(effect.getTargetPointer().getFirst(game, sourceAbility));
+        if (targetPermanent == null) {
+            targetPermanent = (Permanent) game.getLastKnownInformation(effect.getTargetPointer().getFirst(game, sourceAbility), Zone.BATTLEFIELD);
         }
-        if (sourcePermanent != null) {
-            return sourcePermanent.getPower().getValue();
+        if (targetPermanent != null) {
+            return targetPermanent.getPower().getValue();
         }
 
         return 0;
