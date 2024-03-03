@@ -23,7 +23,7 @@ public class StarterCommanderDecks extends ExpansionSet {
         cards.add(new SetCardInfo("Abrade", 122, Rarity.UNCOMMON, mage.cards.a.Abrade.class));
         cards.add(new SetCardInfo("Absorb", 216, Rarity.RARE, mage.cards.a.Absorb.class));
         cards.add(new SetCardInfo("Aetherize", 42, Rarity.UNCOMMON, mage.cards.a.Aetherize.class));
-        cards.add(new SetCardInfo("Ajani, Caller of the Pride", 6, Rarity.MYTHIC, mage.cards.a.Ajani,CallerOfthePride.class));
+        cards.add(new SetCardInfo("Ajani, Caller of the Pride", 6, Rarity.MYTHIC, mage.cards.a.Ajani,CallerOfThePride.class));
         cards.add(new SetCardInfo("Akoum Hellkite", 123, Rarity.RARE, mage.cards.a.AkoumHellkite.class));
         cards.add(new SetCardInfo("Akoum Refuge", 289, Rarity.UNCOMMON, mage.cards.a.AkoumRefuge.class));
         cards.add(new SetCardInfo("Ambition's Cost", 66, Rarity.UNCOMMON, mage.cards.a.AmbitionsCost.class));
@@ -31,7 +31,7 @@ public class StarterCommanderDecks extends ExpansionSet {
         cards.add(new SetCardInfo("Arcane Signet", 257, Rarity.COMMON, mage.cards.a.ArcaneSignet.class));
         cards.add(new SetCardInfo("Archfiend of Depravity", 67, Rarity.RARE, mage.cards.a.ArchfiendOfDepravity.class));
         cards.add(new SetCardInfo("Archon of Redemption", 7, Rarity.RARE, mage.cards.a.ArchonOfRedemption.class));
-        cards.add(new SetCardInfo("Army of the Damned", 68, Rarity.MYTHIC, mage.cards.a.ArmyOftheDamned.class));
+        cards.add(new SetCardInfo("Army of the Damned", 68, Rarity.MYTHIC, mage.cards.a.ArmyOfTheDamned.class));
         cards.add(new SetCardInfo("Atarka Monument", 258, Rarity.UNCOMMON, mage.cards.a.AtarkaMonument.class));
         cards.add(new SetCardInfo("Atarka, World Render", 1, Rarity.MYTHIC, mage.cards.a.Atarka,WorldRender.class));
         cards.add(new SetCardInfo("Aura Mutation", 217, Rarity.RARE, mage.cards.a.AuraMutation.class));
@@ -55,7 +55,7 @@ public class StarterCommanderDecks extends ExpansionSet {
         cards.add(new SetCardInfo("Cemetery Reaper", 70, Rarity.RARE, mage.cards.c.CemeteryReaper.class));
         cards.add(new SetCardInfo("Chain Reaction", 126, Rarity.RARE, mage.cards.c.ChainReaction.class));
         cards.add(new SetCardInfo("Champion of Lambholt", 174, Rarity.RARE, mage.cards.c.ChampionOfLambholt.class));
-        cards.add(new SetCardInfo("Champion of the Perished", 71, Rarity.RARE, mage.cards.c.ChampionOfthePerished.class));
+        cards.add(new SetCardInfo("Champion of the Perished", 71, Rarity.RARE, mage.cards.c.ChampionOfThePerished.class));
         cards.add(new SetCardInfo("Chaos Warp", 127, Rarity.RARE, mage.cards.c.ChaosWarp.class));
         cards.add(new SetCardInfo("Choked Estuary", 293, Rarity.RARE, mage.cards.c.ChokedEstuary.class));
         cards.add(new SetCardInfo("Cinder Barrens", 294, Rarity.UNCOMMON, mage.cards.c.CinderBarrens.class));
@@ -90,7 +90,7 @@ public class StarterCommanderDecks extends ExpansionSet {
         cards.add(new SetCardInfo("Demanding Dragon", 130, Rarity.RARE, mage.cards.d.DemandingDragon.class));
         cards.add(new SetCardInfo("Devouring Light", 18, Rarity.UNCOMMON, mage.cards.d.DevouringLight.class));
         cards.add(new SetCardInfo("Dictate of Heliod", 19, Rarity.RARE, mage.cards.d.DictateOfHeliod.class));
-        cards.add(new SetCardInfo("Dictate of the Twin Gods", 131, Rarity.RARE, mage.cards.d.DictateOftheTwinGods.class));
+        cards.add(new SetCardInfo("Dictate of the Twin Gods", 131, Rarity.RARE, mage.cards.d.DictateOfTheTwinGods.class));
         cards.add(new SetCardInfo("Diluvian Primordial", 47, Rarity.RARE, mage.cards.d.DiluvianPrimordial.class));
         cards.add(new SetCardInfo("Dimir Signet", 263, Rarity.UNCOMMON, mage.cards.d.DimirSignet.class));
         cards.add(new SetCardInfo("Diregraf Captain", 224, Rarity.UNCOMMON, mage.cards.d.DiregrafCaptain.class));
@@ -112,7 +112,7 @@ public class StarterCommanderDecks extends ExpansionSet {
         cards.add(new SetCardInfo("Elemental Bond", 180, Rarity.UNCOMMON, mage.cards.e.ElementalBond.class));
         cards.add(new SetCardInfo("Elfhame Palace", 299, Rarity.UNCOMMON, mage.cards.e.ElfhamePalace.class));
         cards.add(new SetCardInfo("Emeria Angel", 21, Rarity.RARE, mage.cards.e.EmeriaAngel.class));
-        cards.add(new SetCardInfo("Emmara, Soul of the Accord", 2, Rarity.MYTHIC, mage.cards.e.Emmara,SoulOftheAccord.class));
+        cards.add(new SetCardInfo("Emmara, Soul of the Accord", 2, Rarity.MYTHIC, mage.cards.e.Emmara,SoulOfTheAccord.class));
         cards.add(new SetCardInfo("Empyrean Eagle", 226, Rarity.UNCOMMON, mage.cards.e.EmpyreanEagle.class));
         cards.add(new SetCardInfo("Enter the God-Eternals", 227, Rarity.RARE, mage.cards.e.EnterTheGod-Eternals.class));
         cards.add(new SetCardInfo("Eternal Skylord", 49, Rarity.UNCOMMON, mage.cards.e.EternalSkylord.class));
@@ -150,15 +150,15 @@ public class StarterCommanderDecks extends ExpansionSet {
         cards.add(new SetCardInfo("Gray Merchant of Asphodel", 80, Rarity.UNCOMMON, mage.cards.g.GrayMerchantOfAsphodel.class));
         cards.add(new SetCardInfo("Graypelt Refuge", 303, Rarity.UNCOMMON, mage.cards.g.GraypeltRefuge.class));
         cards.add(new SetCardInfo("Great Oak Guardian", 186, Rarity.UNCOMMON, mage.cards.g.GreatOakGuardian.class));
-        cards.add(new SetCardInfo("Grimoire of the Dead", 265, Rarity.MYTHIC, mage.cards.g.GrimoireOftheDead.class));
+        cards.add(new SetCardInfo("Grimoire of the Dead", 265, Rarity.MYTHIC, mage.cards.g.GrimoireOfTheDead.class));
         cards.add(new SetCardInfo("Guttersnipe", 145, Rarity.UNCOMMON, mage.cards.g.Guttersnipe.class));
         cards.add(new SetCardInfo("Hanged Executioner", 25, Rarity.RARE, mage.cards.h.HangedExecutioner.class));
-        cards.add(new SetCardInfo("Harbinger of the Hunt", 230, Rarity.RARE, mage.cards.h.HarbingerOftheHunt.class));
+        cards.add(new SetCardInfo("Harbinger of the Hunt", 230, Rarity.RARE, mage.cards.h.HarbingerOfTheHunt.class));
         cards.add(new SetCardInfo("Harmonize", 187, Rarity.UNCOMMON, mage.cards.h.Harmonize.class));
         cards.add(new SetCardInfo("Harvest Season", 188, Rarity.RARE, mage.cards.h.HarvestSeason.class));
         cards.add(new SetCardInfo("Hate Mirage", 146, Rarity.UNCOMMON, mage.cards.h.HateMirage.class));
         cards.add(new SetCardInfo("Havengul Lich", 231, Rarity.MYTHIC, mage.cards.h.HavengulLich.class));
-        cards.add(new SetCardInfo("Haven of the Spirit Dragon", 304, Rarity.RARE, mage.cards.h.HavenOftheSpiritDragon.class));
+        cards.add(new SetCardInfo("Haven of the Spirit Dragon", 304, Rarity.RARE, mage.cards.h.HavenOfTheSpiritDragon.class));
         cards.add(new SetCardInfo("Hedron Archive", 266, Rarity.UNCOMMON, mage.cards.h.HedronArchive.class));
         cards.add(new SetCardInfo("Heraldic Banner", 267, Rarity.UNCOMMON, mage.cards.h.HeraldicBanner.class));
         cards.add(new SetCardInfo("Hoard-Smelter Dragon", 147, Rarity.RARE, mage.cards.h.Hoard-SmelterDragon.class));
@@ -187,7 +187,7 @@ public class StarterCommanderDecks extends ExpansionSet {
         cards.add(new SetCardInfo("Karametra's Favor", 195, Rarity.UNCOMMON, mage.cards.k.KarametrasFavor.class));
         cards.add(new SetCardInfo("Kardur, Doomscourge", 5, Rarity.MYTHIC, mage.cards.k.Kardur,Doomscourge.class));
         cards.add(new SetCardInfo("Kazandu Refuge", 307, Rarity.UNCOMMON, mage.cards.k.KazanduRefuge.class));
-        cards.add(new SetCardInfo("Kazuul, Tyrant of the Cliffs", 148, Rarity.RARE, mage.cards.k.Kazuul,TyrantOftheCliffs.class));
+        cards.add(new SetCardInfo("Kazuul, Tyrant of the Cliffs", 148, Rarity.RARE, mage.cards.k.Kazuul,TyrantOfTheCliffs.class));
         cards.add(new SetCardInfo("Laboratory Drudge", 56, Rarity.RARE, mage.cards.l.LaboratoryDrudge.class));
         cards.add(new SetCardInfo("Lazotep Plating", 57, Rarity.UNCOMMON, mage.cards.l.LazotepPlating.class));
         cards.add(new SetCardInfo("Lazotep Reaver", 83, Rarity.COMMON, mage.cards.l.LazotepReaver.class));
