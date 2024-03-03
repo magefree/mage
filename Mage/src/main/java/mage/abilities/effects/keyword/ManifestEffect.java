@@ -148,7 +148,7 @@ public class ManifestEffect extends OneShotEffect {
                 permanent.setManifested(true);
             } else {
                 // TODO: looks buggy, card can't be moved to battlefield, but face down effect already active
-                //  or it can be face down on another move to battalefield
+                //  or it can be face down on another move to battlefield
             }
         }
 
