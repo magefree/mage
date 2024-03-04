@@ -13,7 +13,8 @@ import mage.abilities.keyword.DisguiseAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.FilterPermanentThisOrAnother;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -22,6 +23,8 @@ import mage.players.Player;
  * @author Cguy7777
  */
 public final class PyrotechnicPerformer extends CardImpl {
+
+    private static final FilterPermanentThisOrAnother filter = new FilterPermanentThisOrAnother(StaticFilters.FILTER_CONTROLLED_CREATURE, true);
 
     public PyrotechnicPerformer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
@@ -35,10 +38,7 @@ public final class PyrotechnicPerformer extends CardImpl {
         this.addAbility(new DisguiseAbility(this, new ManaCostsImpl<>("{R}")));
 
         // Whenever Pyrotechnic Performer or another creature you control is turned face up, that creature deals damage equal to its power to each opponent.
-        this.addAbility(new TurnedFaceUpAllTriggeredAbility(
-                new PyrotechnicPerformerEffect(),
-                new FilterControlledCreaturePermanent("{this} or another creature you control"),
-                true));
+        this.addAbility(new TurnedFaceUpAllTriggeredAbility(new PyrotechnicPerformerEffect(), filter, true));
     }
 
     private PyrotechnicPerformer(final PyrotechnicPerformer card) {
