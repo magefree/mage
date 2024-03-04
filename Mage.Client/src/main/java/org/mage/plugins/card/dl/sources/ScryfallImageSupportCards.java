@@ -518,6 +518,7 @@ public class ScryfallImageSupportCards {
             add("BRR"); // The Brothers' War Retro Artifacts
             add("BOT"); // Transformers
             add("J22"); // Jumpstart 2022
+            add("SCD"); // Starter Commander Decks
             add("SLC"); // Secret Lair 30th Anniversary Countdown Kit
             add("DMR"); // Dominaria Remastered
             add("ONE"); // Phyrexia: All Will Be One

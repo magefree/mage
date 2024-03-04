@@ -220,6 +220,7 @@ Rise of the Eldrazi|ROE|
 Return to Ravnica|RTR|
 Starter 2000|S00|
 Starter 1999|S99|
+Starter Commander Decks|SCD|
 Strixhaven: School of Mages|STX|
 Scourge|SCG|
 Secret Lair|SLD|
