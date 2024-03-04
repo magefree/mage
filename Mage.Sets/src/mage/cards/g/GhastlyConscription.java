@@ -1,24 +1,20 @@
 package mage.cards.g;
 
-import java.util.*;
-import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.costs.mana.ManaCosts;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.BecomesFaceDownCreatureEffect;
-import mage.abilities.effects.common.continuous.BecomesFaceDownCreatureEffect.FaceDownType;
+import mage.abilities.effects.keyword.ManifestEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
+
+import java.util.*;
 
 /**
  *
@@ -48,7 +44,10 @@ class GhastlyConscriptionEffect extends OneShotEffect {
 
     GhastlyConscriptionEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "Exile all creature cards from target player's graveyard in a face-down pile, shuffle that pile, then manifest those cards.<i> (To manifest a card, put it onto the battlefield face down as a 2/2 creature. Turn it face up at any time for its mana cost if it's a creature card.)</i>";
+        this.staticText = "Exile all creature cards from target player's graveyard in a face-down pile, " +
+                "shuffle that pile, then manifest those cards. " +
+                "<i>(To manifest a card, put it onto the battlefield face down as a 2/2 creature. " +
+                "Turn it face up at any time for its mana cost if it's a creature card.)</i>";
     }
 
     private GhastlyConscriptionEffect(final GhastlyConscriptionEffect effect) {
@@ -62,39 +61,24 @@ class GhastlyConscriptionEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        // TODO: migrate to shared manifested code
         Player controller = game.getPlayer(source.getControllerId());
         Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
-        if (controller != null && targetPlayer != null) {
-            List<Card> cardsToManifest = new ArrayList<>();
-            for (Card card : targetPlayer.getGraveyard().getCards(StaticFilters.FILTER_CARD_CREATURE, game)) {
-                cardsToManifest.add(card);
-                controller.moveCardToExileWithInfo(card, null, "", source, game, Zone.GRAVEYARD, true);
-            }
-            if (cardsToManifest.isEmpty()) {
-                return true;
-            }
-            Collections.shuffle(cardsToManifest);
-            game.informPlayers(controller.getLogName() + " shuffles the face-down pile");
-            Ability newSource = source.copy();
-            newSource.setWorksFaceDown(true);
-            for (Card card : cardsToManifest) {
-                ManaCosts manaCosts = null;
-                if (card.isCreature(game)) {
-                    manaCosts = card.getSpellAbility() != null ? card.getSpellAbility().getManaCosts() : null;
-                    if (manaCosts == null) {
-                        manaCosts = new ManaCostsImpl<>("{0}");
-                    }
-                }
-                Card battlefieldCard = BecomesFaceDownCreatureEffect.findDefaultCardSideForFaceDown(game, card);
-                MageObjectReference objectReference = new MageObjectReference(battlefieldCard.getId(), battlefieldCard.getZoneChangeCounter(game) + 1, game);
-                game.addEffect(new BecomesFaceDownCreatureEffect(manaCosts, objectReference, Duration.Custom, FaceDownType.MANIFESTED), newSource);
-            }
-            Set<Card> toBattlefield = new LinkedHashSet();
-            toBattlefield.addAll(cardsToManifest);
-            controller.moveCards(toBattlefield, Zone.BATTLEFIELD, source, game, false, true, false, null);
+        if (controller == null || targetPlayer == null) {
+            return false;
+        }
+        List<Card> cardsToManifest = new ArrayList<>();
+        for (Card card : targetPlayer.getGraveyard().getCards(StaticFilters.FILTER_CARD_CREATURE, game)) {
+            cardsToManifest.add(card);
+            controller.moveCardToExileWithInfo(card, null, "", source, game, Zone.GRAVEYARD, true);
+            card.setFaceDown(true, game);
+        }
+        if (cardsToManifest.isEmpty()) {
             return true;
         }
-        return false;
+        Collections.shuffle(cardsToManifest);
+        game.informPlayers(controller.getLogName() + " shuffles the face-down pile");
+        game.getState().processAction(game);
+        ManifestEffect.doManifestCards(game, source, controller, new LinkedHashSet<>(cardsToManifest));
+        return true;
     }
 }

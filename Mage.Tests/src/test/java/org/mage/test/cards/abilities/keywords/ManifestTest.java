@@ -151,8 +151,8 @@ public class ManifestTest extends CardTestPlayerBase {
             } else {
                 String realPermanentName = currentGame.getBattlefield().getAllPermanents()
                         .stream()
-                        .filter(p -> p.getName().equals(cardAfterBlink))
                         .map(MageObject::getName)
+                        .filter(name -> name.equals(cardAfterBlink))
                         .findFirst()
                         .orElse(null);
                 Assert.assertEquals("after blink card must go to battlefield",
@@ -818,4 +818,36 @@ public class ManifestTest extends CardTestPlayerBase {
         permanent = findFaceDownPermanent(currentGame, playerB, playerB);
         assertFaceDownManifest("end game: must show for yourself", permanent, "Mountain", true);
     }
+
+    @Test
+    public void testJeskaiInfiltrator() {
+        // Whenever Jeskai Infiltrator deals combat damage to a player,
+        // exile it and the top card of your library in a face-down pile, shuffle that pile, then manifest those cards.
+        String infiltrator = "Jeskai Infiltrator"; // 2/3
+        String excommunicate = "Excommunicate"; // 2W Sorcery, Put target creature on top of its owner's library
+        String missionary = "Lone Missionary"; // 2/1 for 1W, ETB gain 4 life
+
+        addCard(Zone.BATTLEFIELD, playerA, "Tundra", 8);
+        addCard(Zone.BATTLEFIELD, playerA, infiltrator);
+        addCard(Zone.BATTLEFIELD, playerA, missionary);
+        addCard(Zone.HAND, playerA, excommunicate);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, excommunicate, missionary);
+
+        attack(1, playerA, infiltrator, playerB);
+
+        checkPlayableAbility("missionary manifest",1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{1}{W}: Turn ", true);
+        checkPlayableAbility("infiltrator manifest",1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{2}{U}: Turn ", true);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertGraveyardCount(playerA, excommunicate, 1);
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 2);
+        assertPowerToughness(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 2, 2);
+        assertLife(playerA, 20);
+        assertLife(playerB, 18);
+    }
+
 }
