@@ -224,6 +224,7 @@ Starter Commander Decks|SCD|
 Strixhaven: School of Mages|STX|
 Scourge|SCG|
 Secret Lair|SLD|
+Secret Lair Showdown|SLP|
 Shadowmoor|SHM|
 Shadows over Innistrad|SOI|
 Saviors of Kamigawa|SOK|
