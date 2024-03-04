@@ -64,7 +64,7 @@ class PyrotechnicPerformerEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent turnedUpCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
+        Permanent turnedUpCreature = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
         if (turnedUpCreature == null) {
             return false;
         }
