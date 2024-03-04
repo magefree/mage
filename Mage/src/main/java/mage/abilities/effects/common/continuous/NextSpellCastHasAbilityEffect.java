@@ -40,7 +40,7 @@ public class NextSpellCastHasAbilityEffect extends ContinuousEffectImpl {
         this.filter = filter;
         this.targetController = targetController;
         staticText = "the next " + filter.getMessage().replace("card", "spell")
-                + (targetController == TargetController.SOURCE_CONTROLLER ? "you cast" : "target player casts")
+                + (targetController == TargetController.SOURCE_CONTROLLER ? " you cast" : " target player casts")
                 + " this turn has " + CardUtil.getTextWithFirstCharLowerCase(CardUtil.stripReminderText(ability.getRule()));
     }
 
