@@ -15,12 +15,15 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.counters.CounterType;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.FilterPermanentThisOrAnother;
+import mage.filter.StaticFilters;
 
 /**
  * @author Cguy7777
  */
 public final class ExperimentTwelve extends CardImpl {
+
+    private static final FilterPermanentThisOrAnother filter = new FilterPermanentThisOrAnother(StaticFilters.FILTER_CONTROLLED_CREATURE, true);
 
     public ExperimentTwelve(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
@@ -37,11 +40,7 @@ public final class ExperimentTwelve extends CardImpl {
         // Whenever Experiment Twelve or another creature you control is turned face up, put +1/+1 counters on that creature equal to its power.
         Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance(0), TargetPermanentPowerCount.instance)
                 .setText("put +1/+1 counters on that creature equal to its power");
-
-        this.addAbility(new TurnedFaceUpAllTriggeredAbility(
-                effect,
-                new FilterControlledCreaturePermanent("{this} or another creature you control"),
-                true));
+        this.addAbility(new TurnedFaceUpAllTriggeredAbility(effect, filter, true));
 
         // Disguise {4}{G}
         this.addAbility(new DisguiseAbility(this, new ManaCostsImpl<>("{4}{G}")));
