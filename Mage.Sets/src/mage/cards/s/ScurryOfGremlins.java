@@ -31,7 +31,7 @@ public final class ScurryOfGremlins extends CardImpl {
         // When Scurry of Gremlins enters the battlefield, create two 1/1 red Gremlin creature tokens. Then you get an amount of {E} equal to the number of creatures you control.
         Ability ability = new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new GremlinToken(), 2));
         ability.addEffect(new GetEnergyCountersControllerEffect(CreaturesYouControlCount.instance)
-                .setText("then you get an amount of {E} equal to the number of creatures you control"));
+                .setText("Then you get an amount of {E} equal to the number of creatures you control"));
         this.addAbility(ability.addHint(CreaturesYouControlHint.instance));
 
         // Pay {E}{E}{E}{E}: Creatures you control get +1/+0 and gain haste until end of turn.
