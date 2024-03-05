@@ -278,7 +278,7 @@ public class StarterCommanderDecks extends ExpansionSet {
         cards.add(new SetCardInfo("Shamanic Revelation", 211, Rarity.RARE, mage.cards.s.ShamanicRevelation.class));
         cards.add(new SetCardInfo("Sharding Sphinx", 59, Rarity.RARE, mage.cards.s.ShardingSphinx.class));
         cards.add(new SetCardInfo("Shivan Oasis", 318, Rarity.UNCOMMON, mage.cards.s.ShivanOasis.class));
-        cards.add(new SetCardInfo("Sign in Blood", 107, Rarity.COMMON, mage.cards.s.SigninBlood.class));
+        cards.add(new SetCardInfo("Sign in Blood", 107, Rarity.COMMON, mage.cards.s.SignInBlood.class));
         cards.add(new SetCardInfo("Sinister Sabotage", 60, Rarity.UNCOMMON, mage.cards.s.SinisterSabotage.class));
         cards.add(new SetCardInfo("Skycat Sovereign", 243, Rarity.RARE, mage.cards.s.SkycatSovereign.class));
         cards.add(new SetCardInfo("Sky Diamond", 273, Rarity.COMMON, mage.cards.s.SkyDiamond.class));
@@ -349,7 +349,7 @@ public class StarterCommanderDecks extends ExpansionSet {
         cards.add(new SetCardInfo("Unlicensed Disintegration", 255, Rarity.UNCOMMON, mage.cards.u.UnlicensedDisintegration.class));
         cards.add(new SetCardInfo("Unstable Obelisk", 286, Rarity.UNCOMMON, mage.cards.u.UnstableObelisk.class));
         cards.add(new SetCardInfo("Urborg Volcano", 331, Rarity.UNCOMMON, mage.cards.u.UrborgVolcano.class));
-        cards.add(new SetCardInfo("Valor in Akros", 39, Rarity.UNCOMMON, mage.cards.v.ValorinAkros.class));
+        cards.add(new SetCardInfo("Valor in Akros", 39, Rarity.UNCOMMON, mage.cards.v.ValorInAkros.class));
         cards.add(new SetCardInfo("Vampire Nighthawk", 115, Rarity.UNCOMMON, mage.cards.v.VampireNighthawk.class));
         cards.add(new SetCardInfo("Vampiric Rites", 116, Rarity.UNCOMMON, mage.cards.v.VampiricRites.class));
         cards.add(new SetCardInfo("Vandalblast", 167, Rarity.UNCOMMON, mage.cards.v.Vandalblast.class));
