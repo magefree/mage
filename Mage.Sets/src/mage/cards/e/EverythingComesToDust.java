@@ -13,8 +13,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
 
-import java.util.Collections;
-import java.util.Set;
+import java.util.HashSet;
 import java.util.UUID;
 
 /**
@@ -59,7 +58,7 @@ enum EverythingComesToDustPredicate implements ObjectSourcePlayerPredicate<Perma
         if (!p.isCreature(game)){
             return false;
         }
-        Set<MageObjectReference> set = CardUtil.getSourceCostsTag(game, input.getSource(), ConvokeAbility.convokingCreaturesKey, Collections.emptySet());
+        HashSet<MageObjectReference> set = CardUtil.getSourceCostsTag(game, input.getSource(), ConvokeAbility.convokingCreaturesKey, new HashSet<>(0));
         for (MageObjectReference mor : set){
             Permanent convoked = game.getPermanentOrLKIBattlefield(mor);
             if (convoked.shareCreatureTypes(game, p)){
