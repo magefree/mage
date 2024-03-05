@@ -37,7 +37,7 @@ public class SecretLairShowdown extends ExpansionSet {
         cards.add(new SetCardInfo("Spell Pierce", "18", Rarity.RARE, mage.cards.s.SpellPierce.class));
         cards.add(new SetCardInfo("Ugin, the Spirit Dragon", "6", Rarity.MYTHIC, mage.cards.u.UginTheSpiritDragon.class));
         cards.add(new SetCardInfo("Unholy Heat", "4", Rarity.RARE, mage.cards.u.UnholyHeat.class));
-        cards.add(new SetCardInfo("Valakut, the Molten Pinnacle", "14", Rarity.MYTHIC, mage.cards.v.ValakutTheMoltenPinnacle.class));
+        cards.add(new SetCardInfo("Valakut, the Molten Pinnacle", "14", Rarity.RARE, mage.cards.v.ValakutTheMoltenPinnacle.class));
         cards.add(new SetCardInfo("Wrenn and Six", "15", Rarity.MYTHIC, mage.cards.w.WrennAndSix.class));
     }
 }
