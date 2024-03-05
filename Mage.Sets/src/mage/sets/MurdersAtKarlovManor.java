@@ -12,7 +12,7 @@ import java.util.List;
  */
 public final class MurdersAtKarlovManor extends ExpansionSet {
 
-    private static final List<String> unfinished = Arrays.asList("Aurelia's Vindicator", "Bubble Smuggler", "Coveted Falcon", "Crowd-Control Warden", "Expose the Culprit", "Fugitive Codebreaker", "Lumbering Laundry", "Museum Nightwatch", "Pyrotechnic Performer", "Unyielding Gatekeeper");
+    private static final List<String> unfinished = Arrays.asList("Aurelia's Vindicator", "Bubble Smuggler", "Coveted Falcon", "Crowd-Control Warden", "Expose the Culprit", "Fugitive Codebreaker", "Lumbering Laundry", "Museum Nightwatch", "Unyielding Gatekeeper");
 
     private static final MurdersAtKarlovManor instance = new MurdersAtKarlovManor();
 
@@ -207,6 +207,8 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Proft's Eidetic Memory", 67, Rarity.RARE, mage.cards.p.ProftsEideticMemory.class));
         cards.add(new SetCardInfo("Public Thoroughfare", 265, Rarity.COMMON, mage.cards.p.PublicThoroughfare.class));
         cards.add(new SetCardInfo("Push // Pull", 250, Rarity.UNCOMMON, mage.cards.p.PushPull.class));
+        cards.add(new SetCardInfo("Pyrotechnic Performer", 140, Rarity.RARE, mage.cards.p.PyrotechnicPerformer.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Pyrotechnic Performer", 407, Rarity.RARE, mage.cards.p.PyrotechnicPerformer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Rakdos, Patron of Chaos", 224, Rarity.MYTHIC, mage.cards.r.RakdosPatronOfChaos.class));
         cards.add(new SetCardInfo("Rakish Scoundrel", 225, Rarity.COMMON, mage.cards.r.RakishScoundrel.class));
         cards.add(new SetCardInfo("Raucous Theater", 266, Rarity.RARE, mage.cards.r.RaucousTheater.class));
