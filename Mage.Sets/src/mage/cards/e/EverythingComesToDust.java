@@ -9,12 +9,12 @@ import mage.constants.CardType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
-import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
 
-import java.util.HashSet;
+import java.util.Collections;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -47,18 +47,19 @@ public final class EverythingComesToDust extends CardImpl {
         return new EverythingComesToDust(this);
     }
 }
+
 enum EverythingComesToDustPredicate implements ObjectSourcePlayerPredicate<Permanent> {
     instance;
     @Override
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
         Permanent p = input.getObject();
-        if (CardType.ARTIFACT.getPredicate().apply(p, game) || CardType.ENCHANTMENT.getPredicate().apply(p, game)){
+        if (p.isArtifact(game) || p.isEnchantment(game)){
             return true;
         }
-        if (!CardType.CREATURE.getPredicate().apply(p, game)){
+        if (!p.isCreature(game)){
             return false;
         }
-        HashSet<MageObjectReference> set = CardUtil.getSourceCostsTag(game, input.getSource(), ConvokeAbility.convokingCreaturesKey, new HashSet<>(0));
+        Set<MageObjectReference> set = CardUtil.getSourceCostsTag(game, input.getSource(), ConvokeAbility.convokingCreaturesKey, Collections.emptySet());
         for (MageObjectReference mor : set){
             Permanent convoked = game.getPermanentOrLKIBattlefield(mor);
             if (convoked.shareCreatureTypes(game, p)){

@@ -7,7 +7,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
-import mage.util.Copyable;
 
 import java.util.UUID;
 
@@ -15,15 +14,11 @@ import java.util.UUID;
  *
  * @author notgreat
  */
-public class EachOpponentPermanentTargetsAdjuster implements TargetAdjuster, Copyable<TargetAdjuster> {
-    TargetPermanent baseTarget;
+public class EachOpponentPermanentTargetsAdjuster implements TargetAdjuster {
+    private final TargetPermanent baseTarget;
 
     public EachOpponentPermanentTargetsAdjuster(TargetPermanent baseTarget) {
         this.baseTarget = baseTarget;
-    }
-
-    protected EachOpponentPermanentTargetsAdjuster(final EachOpponentPermanentTargetsAdjuster targetAdjuster) {
-        this.baseTarget = targetAdjuster.baseTarget.copy();
     }
 
     @Override
@@ -42,10 +37,5 @@ public class EachOpponentPermanentTargetsAdjuster implements TargetAdjuster, Cop
                 ability.addTarget(newTarget);
             }
         }
-    }
-
-    @Override
-    public EachOpponentPermanentTargetsAdjuster copy() {
-        return new EachOpponentPermanentTargetsAdjuster(this);
     }
 }

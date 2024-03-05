@@ -1,13 +1,8 @@
 package mage.cards.r;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedAllEffect;
 import mage.abilities.effects.common.continuous.SwitchPowerToughnessAllEffect;
 import mage.cards.CardImpl;
@@ -20,6 +15,10 @@ import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 
+import java.util.LinkedList;
+import java.util.List;
+import java.util.UUID;
+
 /**
  *
  * @author notgreat
@@ -31,7 +30,7 @@ public final class ReverseThePolarity extends CardImpl {
 
         // Choose one --
         // * Counter all other spells.
-        this.getSpellAbility().addEffect(new CounterAllEffect());
+        this.getSpellAbility().addEffect(new ReverseThePolarityCounterAllEffect());
         // * Switch each creature's power and toughness until end of turn.
         this.getSpellAbility().addMode(new Mode(new SwitchPowerToughnessAllEffect(Duration.EndOfTurn)));
         // * Creatures can't be blocked this turn.
@@ -48,14 +47,14 @@ public final class ReverseThePolarity extends CardImpl {
     }
 }
 //Based on Counterflux/Swift Silence
-class CounterAllEffect extends OneShotEffect {
+class ReverseThePolarityCounterAllEffect extends OneShotEffect {
 
-    CounterAllEffect() {
+    ReverseThePolarityCounterAllEffect() {
         super(Outcome.Detriment);
         staticText = "Counter all other spells.";
     }
 
-    private CounterAllEffect(final CounterAllEffect effect) {
+    private ReverseThePolarityCounterAllEffect(final ReverseThePolarityCounterAllEffect effect) {
         super(effect);
     }
 
@@ -74,8 +73,8 @@ class CounterAllEffect extends OneShotEffect {
     }
 
     @Override
-    public CounterAllEffect copy() {
-        return new CounterAllEffect(this);
+    public ReverseThePolarityCounterAllEffect copy() {
+        return new ReverseThePolarityCounterAllEffect(this);
     }
 
 }
