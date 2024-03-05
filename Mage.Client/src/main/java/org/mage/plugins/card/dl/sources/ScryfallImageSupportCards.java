@@ -439,7 +439,7 @@ public class ScryfallImageSupportCards {
             add("ELD"); // Throne of Eldraine
             //add("PTG"); // Ponies: The Galloping
             add("CMB1"); // Mystery Booster Playtest Cards
-            add("MB1"); // Mystery Booster
+            //add("MB1"); // Mystery Booster
             add("GN2"); // Game Night 2019
             add("HA1"); // Historic Anthology 1
             //add("HHO"); // Happy Holidays
@@ -453,7 +453,7 @@ public class ScryfallImageSupportCards {
             add("PWOR"); // World Championship Promos
             add("PANA"); // MTG Arena Promos
             add("UND"); // Unsanctioned
-            add("FMB1"); // Mystery Booster Retail Edition Foils
+            //add("FMB1"); // Mystery Booster Retail Edition Foils
             add("HA2"); // Historic Anthology 2
             add("SLD"); // Secret Lair Drop
             add("PMEI"); // Magazine Inserts
