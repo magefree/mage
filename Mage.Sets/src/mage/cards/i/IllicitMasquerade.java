@@ -89,13 +89,15 @@ class IllicitMasquerageAbility extends DiesCreatureTriggeredAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        boolean value = super.checkTrigger(event, game);
-
-        getEffects().stream()
-                .filter(ReturnFromGraveyardToBattlefieldTargetEffect.class::isInstance)
-                .forEach(effect -> effect.setTargetPointer(new FirstTargetPointer()));
-
-        return value;
+        if (super.checkTrigger(event, game)) {
+            // DiesCreatureTriggeredAbility rewrites targets, so need to point the second effect
+            // back to the correct target.
+            getEffects().stream()
+                    .filter(ReturnFromGraveyardToBattlefieldTargetEffect.class::isInstance)
+                    .forEach(effect -> effect.setTargetPointer(new FirstTargetPointer()));
+            return true;
+        }
+        return false;
     }
 }
 
