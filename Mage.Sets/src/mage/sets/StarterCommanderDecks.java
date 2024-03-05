@@ -196,7 +196,7 @@ public class StarterCommanderDecks extends ExpansionSet {
         cards.add(new SetCardInfo("Liliana's Devotee", 85, Rarity.UNCOMMON, mage.cards.l.LilianasDevotee.class));
         cards.add(new SetCardInfo("Liliana's Mastery", 86, Rarity.RARE, mage.cards.l.LilianasMastery.class));
         cards.add(new SetCardInfo("Liliana's Standard Bearer", 87, Rarity.RARE, mage.cards.l.LilianasStandardBearer.class));
-        cards.add(new SetCardInfo("Liliana, Untouched by Death", 84, Rarity.MYTHIC, mage.cards.l.LilianaUntouchedbyDeath.class));
+        cards.add(new SetCardInfo("Liliana, Untouched by Death", 84, Rarity.MYTHIC, mage.cards.l.LilianaUntouchedByDeath.class));
         cards.add(new SetCardInfo("Loaming Shaman", 197, Rarity.UNCOMMON, mage.cards.l.LoamingShaman.class));
         cards.add(new SetCardInfo("Lord of the Accursed", 88, Rarity.UNCOMMON, mage.cards.l.LordOfTheAccursed.class));
         cards.add(new SetCardInfo("Lotleth Giant", 89, Rarity.UNCOMMON, mage.cards.l.LotlethGiant.class));
