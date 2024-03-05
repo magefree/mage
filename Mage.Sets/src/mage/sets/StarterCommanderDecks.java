@@ -240,8 +240,8 @@ public class StarterCommanderDecks extends ExpansionSet {
         cards.add(new SetCardInfo("Plains", 334, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 335, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 336, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
-        // cards.add(new SetCardInfo("Port Town", 313, Rarity.RARE, mage.cards.p.PortTown.class));
-        // cards.add(new SetCardInfo("Prairie Stream", 314, Rarity.RARE, mage.cards.p.PrairieStream.class));
+        cards.add(new SetCardInfo("Port Town", 313, Rarity.RARE, mage.cards.p.PortTown.class));
+        cards.add(new SetCardInfo("Prairie Stream", 314, Rarity.RARE, mage.cards.p.PrairieStream.class));
         cards.add(new SetCardInfo("Presence of Gond", 203, Rarity.COMMON, mage.cards.p.PresenceOfGond.class));
         cards.add(new SetCardInfo("Primal Might", 204, Rarity.RARE, mage.cards.p.PrimalMight.class));
         cards.add(new SetCardInfo("Profane Command", 99, Rarity.RARE, mage.cards.p.ProfaneCommand.class));
@@ -258,10 +258,10 @@ public class StarterCommanderDecks extends ExpansionSet {
         cards.add(new SetCardInfo("Return to Nature", 206, Rarity.COMMON, mage.cards.r.ReturnToNature.class));
         cards.add(new SetCardInfo("Rishkar, Peema Renegade", 207, Rarity.RARE, mage.cards.r.RishkarPeemaRenegade.class));
         cards.add(new SetCardInfo("Rootborn Defenses", 32, Rarity.COMMON, mage.cards.r.RootbornDefenses.class));
-        // cards.add(new SetCardInfo("Rugged Highlands", 315, Rarity.COMMON, mage.cards.r.RuggedHighlands.class));
+        cards.add(new SetCardInfo("Rugged Highlands", 315, Rarity.COMMON, mage.cards.r.RuggedHighlands.class));
         cards.add(new SetCardInfo("Runehorn Hellkite", 155, Rarity.RARE, mage.cards.r.RunehornHellkite.class));
         cards.add(new SetCardInfo("Sakura-Tribe Elder", 208, Rarity.COMMON, mage.cards.s.SakuraTribeElder.class));
-        // cards.add(new SetCardInfo("Salt Marsh", 316, Rarity.UNCOMMON, mage.cards.s.SaltMarsh.class));
+        cards.add(new SetCardInfo("Salt Marsh", 316, Rarity.UNCOMMON, mage.cards.s.SaltMarsh.class));
         cards.add(new SetCardInfo("Sangromancer", 103, Rarity.RARE, mage.cards.s.Sangromancer.class));
         cards.add(new SetCardInfo("Sarkhan, the Dragonspeaker", 156, Rarity.MYTHIC, mage.cards.s.SarkhanTheDragonspeaker.class));
         cards.add(new SetCardInfo("Savage Ventmaw", 240, Rarity.UNCOMMON, mage.cards.s.SavageVentmaw.class));
@@ -270,7 +270,7 @@ public class StarterCommanderDecks extends ExpansionSet {
         cards.add(new SetCardInfo("Scourge of Nel Toth", 104, Rarity.RARE, mage.cards.s.ScourgeOfNelToth.class));
         cards.add(new SetCardInfo("Scourge of Valkas", 157, Rarity.MYTHIC, mage.cards.s.ScourgeOfValkas.class));
         cards.add(new SetCardInfo("Scythe Specter", 105, Rarity.RARE, mage.cards.s.ScytheSpecter.class));
-        // cards.add(new SetCardInfo("Sejiri Refuge", 317, Rarity.UNCOMMON, mage.cards.s.SejiriRefuge.class));
+        cards.add(new SetCardInfo("Sejiri Refuge", 317, Rarity.UNCOMMON, mage.cards.s.SejiriRefuge.class));
         cards.add(new SetCardInfo("Selesnya Evangel", 241, Rarity.COMMON, mage.cards.s.SelesnyaEvangel.class));
         cards.add(new SetCardInfo("Selesnya Guildmage", 242, Rarity.UNCOMMON, mage.cards.s.SelesnyaGuildmage.class));
         cards.add(new SetCardInfo("Sephara, Sky's Blade", 33, Rarity.RARE, mage.cards.s.SepharaSkysBlade.class));
