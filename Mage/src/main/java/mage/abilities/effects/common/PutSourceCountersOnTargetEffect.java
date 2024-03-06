@@ -45,6 +45,6 @@ public class PutSourceCountersOnTargetEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        return "put its counters on target " + mode.getTargets().get(0).getTargetName();
+        return "put its counters on " + getTargetPointer().describeTargets(mode.getTargets(), "that creature");
     }
 }

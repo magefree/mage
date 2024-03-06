@@ -1,15 +1,13 @@
-
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.DiesAttachedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.TargetPlayerGainControlSourceEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
@@ -17,9 +15,9 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.common.TargetOpponent;
+
+import java.util.UUID;
 
 /**
  *
@@ -46,7 +44,7 @@ public final class AvariceAmulet extends CardImpl {
         this.addAbility(ability);
 
         // Whenever equipped creature dies, target opponent gains control of Avarice Amulet.
-        ability = new DiesAttachedTriggeredAbility(new AvariceAmuletChangeControlEffect(), "equipped creature", false);
+        ability = new DiesAttachedTriggeredAbility(new TargetPlayerGainControlSourceEffect(), "equipped creature", false);
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
 
@@ -62,31 +60,4 @@ public final class AvariceAmulet extends CardImpl {
     public AvariceAmulet copy() {
         return new AvariceAmulet(this);
     }
-}
-
-class AvariceAmuletChangeControlEffect extends ContinuousEffectImpl {
-
-    AvariceAmuletChangeControlEffect() {
-        super(Duration.Custom, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
-        staticText = "target opponent gains control of {this}";
-    }
-
-    private AvariceAmuletChangeControlEffect(final AvariceAmuletChangeControlEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public AvariceAmuletChangeControlEffect copy() {
-        return new AvariceAmuletChangeControlEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
-            return permanent.changeControllerId(source.getFirstTarget(), game, source);
-        }
-        return false;
-    }
-
 }

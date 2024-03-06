@@ -3,12 +3,15 @@ package org.mage.test.utils;
 import mage.MageObject;
 import mage.abilities.keyword.FlyingAbility;
 import mage.constants.CommanderCardType;
+import mage.constants.EmptyNames;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.util.GameLog;
 import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestCommanderDuelBase;
 
@@ -28,6 +31,11 @@ public class CardHintsTest extends CardTestCommanderDuelBase {
     // * client side: inject additional elements for popup support (e.g. "a" with "href")
     // * client side: process mouse move over a href and show object data like a card popup
 
+    private Document parseHtmlLog(String originalLog) {
+        // replace log's face down info by real empty name (need for compatibility)
+        return Jsoup.parse(originalLog.replace(EmptyNames.EMPTY_NAME_IN_LOGS, ""));
+    }
+
     private void assertObjectHtmlLog(String originalLog, String needVisibleColorPart, String needVisibleNormalPart, String needId) {
         String needVisibleFull = needVisibleColorPart;
         if (!needVisibleNormalPart.isEmpty()) {
@@ -43,7 +51,7 @@ public class CardHintsTest extends CardTestCommanderDuelBase {
         Assert.assertTrue(mesPrefix + "can't find id" + mesPostfix, originalLog.contains(needId));
 
         // html check
-        Element html = Jsoup.parse(originalLog);
+        Element html = parseHtmlLog(originalLog);
         Assert.assertEquals(mesPrefix + "can't find full text" + mesPostfix, needVisibleFull, html.text());
         Element htmlFont = html.getElementsByTag("font").stream().findFirst().orElse(null);
         Assert.assertNotNull(mesPrefix + "can't find tag [font]" + mesPostfix, htmlFont);
@@ -52,7 +60,7 @@ public class CardHintsTest extends CardTestCommanderDuelBase {
 
         // improved log from client (with href and popup support)
         String popupLog = GameLog.injectPopupSupport(originalLog);
-        html = Jsoup.parse(popupLog);
+        html = parseHtmlLog(popupLog);
         Assert.assertEquals(mesPrefix + "injected, can't find full text" + mesPostfix, needVisibleFull, html.text());
         // href
         Element htmlA = html.getElementsByTag("a").stream().findFirst().orElse(null);
@@ -125,7 +133,7 @@ public class CardHintsTest extends CardTestCommanderDuelBase {
                 .stream()
                 .map(c -> currentGame.getObject(c))
                 .collect(Collectors.toList()));
-        Assert.assertEquals(3 + 7 + 1, sampleObjects.size()); // defaul commander game already contains +1 commander
+        Assert.assertEquals(3 + 7 + 1, sampleObjects.size()); // default commander game already contains +1 commander
 
         sampleObjects.forEach(this::assertObjectSupport);
     }

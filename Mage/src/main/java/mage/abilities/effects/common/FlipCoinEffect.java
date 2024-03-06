@@ -65,7 +65,7 @@ public class FlipCoinEffect extends OneShotEffect {
         }
         boolean result = true;
         for (Effect effect : controller.flipCoin(source, game, true) ? executingEffectsWon : executingEffectsLost) {
-            effect.setTargetPointer(this.targetPointer);
+            effect.setTargetPointer(this.getTargetPointer().copy());
             if (effect instanceof OneShotEffect) {
                 result &= effect.apply(game, source);
             } else {

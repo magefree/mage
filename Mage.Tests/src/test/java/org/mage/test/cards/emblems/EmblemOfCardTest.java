@@ -18,7 +18,7 @@ public class EmblemOfCardTest extends CardTestPlayerBase {
         // Flying, lifelink
         // Pay 7 life: Draw seven cards.
         addEmblem(playerA, new EmblemOfCard(
-                CardRepository.instance.findCard("Griselbrand", true).getMockCard()
+                CardRepository.instance.findCard("Griselbrand", true).createMockCard()
         ));
 
         setLife(playerA, 20);
@@ -33,13 +33,14 @@ public class EmblemOfCardTest extends CardTestPlayerBase {
         assertLife(playerA, 13);
         assertEmblemCount(playerA, 1);
     }
+
     @Test
     public void testEmblemOfYurlok() {
         // Vigilance
         // A player losing unspent mana causes that player to lose that much life.
         // {1}, {T}: Each player adds {B}{R}{G}.
         addEmblem(playerA, new EmblemOfCard(
-                CardRepository.instance.findCard("Yurlok of Scorch Thrash", true).getMockCard()
+                CardRepository.instance.findCard("Yurlok of Scorch Thrash", true).createMockCard()
         ));
 
         setLife(playerA, 20);
@@ -65,7 +66,7 @@ public class EmblemOfCardTest extends CardTestPlayerBase {
     public void testEmblemOfOmniscience() {
         // You may cast spells from your hand without paying their mana costs.
         addEmblem(playerA, new EmblemOfCard(
-                CardRepository.instance.findCard("Omniscience", true).getMockCard()
+                CardRepository.instance.findCard("Omniscience", true).createMockCard()
         ));
 
         // Colossal Dreadmaw {4}{G}{G}
@@ -79,11 +80,12 @@ public class EmblemOfCardTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Colossal Dreadmaw", 1);
         assertEmblemCount(playerA, 1);
     }
+
     @Test
     public void testEmblemOfParadoxEngine() {
         // Whenever you cast a spell, untap all nonland permanents you control.
         addEmblem(playerA, new EmblemOfCard(
-                CardRepository.instance.findCard("Paradox Engine", true).getMockCard()
+                CardRepository.instance.findCard("Paradox Engine", true).createMockCard()
         ));
 
         // {T}: Add {G}.
@@ -126,6 +128,7 @@ public class EmblemOfCardTest extends CardTestPlayerBase {
         assertLife(playerA, 14);
         assertEmblemCount(playerA, 1);
     }
+
     @Test
     public void testEmblemOfDoublingSeason() {
         // If an effect would create one or more tokens under your control, it
@@ -133,7 +136,7 @@ public class EmblemOfCardTest extends CardTestPlayerBase {
         // If an effect would put one or more counters on a permanent you
         // control, it puts twice that many of those counters on that permanent instead.
         addEmblem(playerA, new EmblemOfCard(
-                CardRepository.instance.findCard("Doubling Season", true).getMockCard()
+                CardRepository.instance.findCard("Doubling Season", true).createMockCard()
         ));
 
         // {T}: Add {W}.
@@ -181,4 +184,34 @@ public class EmblemOfCardTest extends CardTestPlayerBase {
         execute();
         assertEmblemCount(playerA, 1);
     }
+
+    @Test
+    public void testEmblemOfMaelstromNexus() {
+        setStrictChooseMode(true);
+
+        // The first spell you cast each turn has cascade.
+        addEmblem(playerA, new EmblemOfCard(
+                CardRepository.instance.findCard("Maelstrom Nexus", true).createMockCard()
+        ));
+
+        // Grizzly Bears {1}{G}
+        addCard(Zone.HAND, playerA, "Grizzly Bears");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+
+        skipInitShuffling();
+        // Elite Vanguard {W}
+        addCard(Zone.LIBRARY, playerA, "Elite Vanguard");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Grizzly Bears");
+        setChoice(playerA, true); // yes to cascade
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerA, "Elite Vanguard", 1);
+        assertPermanentCount(playerA, "Grizzly Bears", 1);
+        assertEmblemCount(playerA, 1);
+    }
+
 }

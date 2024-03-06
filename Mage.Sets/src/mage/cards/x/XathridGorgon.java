@@ -6,7 +6,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.continuous.AddCardTypeTargetEffect;
 import mage.abilities.effects.common.continuous.BecomesColorTargetEffect;
@@ -43,16 +42,17 @@ public final class XathridGorgon extends CardImpl {
         this.addAbility(DeathtouchAbility.getInstance());
 
         // {2}{B}, {tap}: Put a petrification counter on target creature. It gains defender and becomes a colorless artifact in addition to its other types. Its activated abilities can't be activated.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.PETRIFICATION.createInstance()), new ManaCostsImpl<>("{2}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new AddCountersTargetEffect(CounterType.PETRIFICATION.createInstance()),
+                new ManaCostsImpl<>("{2}{B}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
-        Effect effect = new GainAbilityTargetEffect(DefenderAbility.getInstance(), Duration.Custom);
-        effect.setText("It gains defender");
-        ability.addEffect(effect);
-        effect = new AddCardTypeTargetEffect(Duration.Custom, CardType.ARTIFACT);
-        effect.setText("and becomes a colorless");
-        ability.addEffect(effect);
-        ability.addEffect(new BecomesColorTargetEffect(ObjectColor.COLORLESS, Duration.Custom, " artifact in addition to its other types"));
+        ability.addEffect(new GainAbilityTargetEffect(DefenderAbility.getInstance(), Duration.Custom)
+                .setText("It gains defender"));
+        ability.addEffect(new AddCardTypeTargetEffect(Duration.Custom, CardType.ARTIFACT)
+                .setText("and becomes a colorless"));
+        ability.addEffect(new BecomesColorTargetEffect(ObjectColor.COLORLESS, Duration.Custom)
+                .setText(" artifact in addition to its other types"));
         ability.addEffect(new XathridGorgonCantActivateEffect());
         this.addAbility(ability);
 

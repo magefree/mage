@@ -86,15 +86,17 @@ class CommandersPlateEffect extends ContinuousEffectImpl {
 
     @Override
     public void init(Ability source, Game game) {
-        super.init(source, game);
         if (!affectedObjectsSet) {
             return;
         }
         Permanent equipment = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (equipment == null || equipment.getAttachedTo() == null) {
+            discard();
             return;
         }
         this.setTargetPointer(new FixedTarget(equipment.getAttachedTo(), game));
+
+        super.init(source, game); // must call at the end due target pointer setup
     }
 
     @Override
@@ -105,7 +107,7 @@ class CommandersPlateEffect extends ContinuousEffectImpl {
         }
         Permanent permanent = null;
         if (affectedObjectsSet) {
-            permanent = game.getPermanent(targetPointer.getFirst(game, source));
+            permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
             if (permanent == null) {
                 discard();
                 return true;

@@ -75,7 +75,7 @@ class MirkwoodElkEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Card targetElf = game.getCard(targetPointer.getFirst(game, source));
+            Card targetElf = game.getCard(getTargetPointer().getFirst(game, source));
             if (targetElf != null) {
                 controller.moveCards(targetElf, Zone.HAND, source, game);
                 controller.gainLife(targetElf.getPower().getValue(), game, source);

@@ -62,7 +62,8 @@ public final class IntiSeneschalOfTheSun extends CardImpl {
 class IntiSeneschalOfTheSunTriggeredAbility extends TriggeredAbilityImpl {
 
     IntiSeneschalOfTheSunTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new ExileTopXMayPlayUntilEffect(1, Duration.UntilYourNextEndStep));
+        super(Zone.BATTLEFIELD, new ExileTopXMayPlayUntilEffect(1, Duration.UntilYourNextEndStep)
+                .withTextOptions("that card", true));
         this.setTriggerPhrase("Whenever you discard one or more cards, ");
     }
 

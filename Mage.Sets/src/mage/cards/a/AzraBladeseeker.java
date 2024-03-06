@@ -90,7 +90,7 @@ class AzraBladeseekerEffect extends OneShotEffect {
         return true;
     }
 
-    class PlayerCard {
+    static class PlayerCard {
 
         private final Player player;
         private final Card card;

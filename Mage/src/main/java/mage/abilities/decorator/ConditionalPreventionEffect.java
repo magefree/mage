@@ -68,10 +68,10 @@ public class ConditionalPreventionEffect extends PreventionEffectImpl {
         } else {
             condition = baseCondition;
         }
-        effect.setTargetPointer(this.targetPointer);
+        effect.setTargetPointer(this.getTargetPointer().copy());
         effect.init(source, game);
         if (otherwiseEffect != null) {
-            otherwiseEffect.setTargetPointer(this.targetPointer);
+            otherwiseEffect.setTargetPointer(this.getTargetPointer().copy());
             otherwiseEffect.init(source, game);
         }
         initDone = true;
@@ -80,10 +80,10 @@ public class ConditionalPreventionEffect extends PreventionEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         if (conditionState) {
-            effect.setTargetPointer(this.targetPointer);
+            effect.setTargetPointer(this.getTargetPointer().copy());
             return effect.replaceEvent(event, source, game);
         } else if (otherwiseEffect != null) {
-            otherwiseEffect.setTargetPointer(this.targetPointer);
+            otherwiseEffect.setTargetPointer(this.getTargetPointer().copy());
             return otherwiseEffect.replaceEvent(event, source, game);
         }
 
@@ -110,10 +110,10 @@ public class ConditionalPreventionEffect extends PreventionEffectImpl {
         }
         conditionState = condition.apply(game, source);
         if (conditionState) {
-            effect.setTargetPointer(this.targetPointer);
+            effect.setTargetPointer(this.getTargetPointer().copy());
             return effect.applies(event, source, game);
         } else if (otherwiseEffect != null) {
-            otherwiseEffect.setTargetPointer(this.targetPointer);
+            otherwiseEffect.setTargetPointer(this.getTargetPointer().copy());
             return otherwiseEffect.applies(event, source, game);
         }
         return false;

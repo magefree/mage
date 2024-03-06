@@ -3,6 +3,8 @@ package mage.cards.g;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.abilities.hint.Hint;
+import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -15,6 +17,7 @@ import java.util.UUID;
 
 /**
  * @author awjackson
+ * @modified tiera3 - added cardHint
  */
 public final class GrowthCycle extends CardImpl {
 
@@ -24,6 +27,9 @@ public final class GrowthCycle extends CardImpl {
     }
     private static final DynamicValue xValue = new CardsInControllerGraveyardCount(filter, 2);
     private static final String rule = "it gets an additional +2/+2 until end of turn for each " + xValue.getMessage();
+    private static final Hint hint = new ValueHint(
+            "Cards named Growth Cycle in your graveyard", new CardsInControllerGraveyardCount(filter)
+    );
 
     public GrowthCycle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{G}");
@@ -33,6 +39,7 @@ public final class GrowthCycle extends CardImpl {
         // It gets an additional +2/+2 until end of turn for each card named Growth Cycle in your graveyard.
         this.getSpellAbility().addEffect(new BoostTargetEffect(xValue, xValue, Duration.EndOfTurn).setText(rule));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addHint(hint);
     }
 
     private GrowthCycle(final GrowthCycle card) {

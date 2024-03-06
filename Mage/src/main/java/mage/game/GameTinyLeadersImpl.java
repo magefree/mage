@@ -121,7 +121,7 @@ public abstract class GameTinyLeadersImpl extends GameImpl {
                 default:
                     CardInfo cardInfo = CardRepository.instance.findCard(commanderName);
                     if (cardInfo != null) {
-                        commander = cardInfo.getCard();
+                        commander = cardInfo.createCard();
                     }
             }
         }

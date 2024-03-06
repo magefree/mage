@@ -6,7 +6,6 @@ import mage.abilities.costs.mana.ActivationManaAbilityStep;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.keyword.BestowAbility;
-import mage.abilities.keyword.MorphAbility;
 import mage.abilities.keyword.PrototypeAbility;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.*;
@@ -83,13 +82,13 @@ public class Spell extends StackObjectImpl implements Card {
             // simulate another side as new card (another code part in continues effect from disturb ability)
             affectedCard = TransformAbility.transformCardSpellStatic(card, card.getSecondCardFace(), game);
         }
-        if (ability instanceof PrototypeAbility){
-            affectedCard = ((PrototypeAbility)ability).prototypeCardSpell(card);
+        if (ability instanceof PrototypeAbility) {
+            affectedCard = ((PrototypeAbility) ability).prototypeCardSpell(card);
             this.prototyped = true;
         }
 
         this.card = affectedCard;
-        this.manaCost = this.card.getManaCost().copy();
+        this.manaCost = affectedCard.getManaCost().copy();
         this.color = affectedCard.getColor(null).copy();
         this.frameColor = affectedCard.getFrameColor(null).copy();
         this.frameStyle = affectedCard.getFrameStyle();
@@ -100,7 +99,10 @@ public class Spell extends StackObjectImpl implements Card {
         this.ability = ability;
         this.ability.setControllerId(controllerId);
 
-        if (ability.getSpellAbilityCastMode() == SpellAbilityCastMode.MORPH){
+        if (ability.getSpellAbilityCastMode().isFaceDown()) {
+            // TODO: need research:
+            //  - why it use game param for color and subtype (possible bug?)
+            //  - is it possible to use BecomesFaceDownCreatureEffect.makeFaceDownObject or like that?
             this.faceDown = true;
             this.getColor(game).setColor(null);
             game.getState().getCreateMageObjectAttribute(this.getCard(), game).getSubtype().clear();
@@ -199,8 +201,10 @@ public class Spell extends StackObjectImpl implements Card {
     }
 
     public String getSpellCastText(Game game) {
-        if (this.getSpellAbility() instanceof MorphAbility) {
-            return "a card face down";
+        if (this.getSpellAbility().getSpellAbilityCastMode().isFaceDown()) {
+            // add face down name with object link, so user can look at it from logs
+            return "a " + GameLog.getColoredObjectIdName(this.getSpellAbility().getCharacteristics(game))
+                    + " using " + this.getSpellAbility().getSpellAbilityCastMode();
         }
 
         if (card instanceof AdventureCardSpell) {
@@ -236,6 +240,16 @@ public class Spell extends StackObjectImpl implements Card {
     @Override
     public void setCardNumber(String cardNumber) {
         throw new IllegalStateException("Wrong code usage: you can't change card number for the spell");
+    }
+
+    @Override
+    public String getImageFileName() {
+        return card.getImageFileName();
+    }
+
+    @Override
+    public void setImageFileName(String imageFile) {
+        throw new IllegalStateException("Wrong code usage: you can't change image file name for the spell");
     }
 
     @Override
@@ -510,6 +524,11 @@ public class Spell extends StackObjectImpl implements Card {
     }
 
     @Override
+    public UUID getControllerOrOwnerId() {
+        return getControllerId();
+    }
+
+    @Override
     public String getName() {
         return card.getName();
     }
@@ -544,6 +563,11 @@ public class Spell extends StackObjectImpl implements Card {
     @Override
     public Rarity getRarity() {
         return card.getRarity();
+    }
+
+    @Override
+    public void setRarity(Rarity rarity) {
+        throw new IllegalArgumentException("Un-supported operation: " + this, new Throwable());
     }
 
     @Override
@@ -654,7 +678,9 @@ public class Spell extends StackObjectImpl implements Card {
     }
 
     @Override
-    public void setManaCost(ManaCosts<ManaCost> costs) { this.manaCost = costs.copy(); }
+    public void setManaCost(ManaCosts<ManaCost> costs) {
+        this.manaCost = costs.copy();
+    }
 
     /**
      * 202.3b When calculating the converted mana cost of an object with an {X}
@@ -765,14 +791,12 @@ public class Spell extends StackObjectImpl implements Card {
 
     @Override
     public boolean turnFaceUp(Ability source, Game game, UUID playerId) {
-        setFaceDown(false, game);
-        return true;
+        throw new IllegalStateException("Spells un-support turn face up commands");
     }
 
     @Override
     public boolean turnFaceDown(Ability source, Game game, UUID playerId) {
-        setFaceDown(true, game);
-        return true;
+        throw new IllegalStateException("Spells un-support turn face up commands");
     }
 
     @Override
@@ -931,6 +955,11 @@ public class Spell extends StackObjectImpl implements Card {
     @Override
     public boolean getUsesVariousArt() {
         return card.getUsesVariousArt();
+    }
+
+    @Override
+    public void setUsesVariousArt(boolean usesVariousArt) {
+        card.setUsesVariousArt(usesVariousArt);
     }
 
     @Override
@@ -1104,8 +1133,8 @@ public class Spell extends StackObjectImpl implements Card {
     }
 
     @Override
-    public void checkForCountersToAdd(Permanent permanent, Ability source, Game game) {
-        card.checkForCountersToAdd(permanent, source, game);
+    public void applyEnterWithCounters(Permanent permanent, Ability source, Game game) {
+        card.applyEnterWithCounters(permanent, source, game);
     }
 
     @Override

@@ -47,7 +47,6 @@ public class RealitySmasherTest extends CardTestPlayerBase {
         
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Doom Blade");
         addTarget(playerB, "Reality Smasher");
-        setChoice(playerB, false); // no discard
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         setStrictChooseMode(true);
         execute();

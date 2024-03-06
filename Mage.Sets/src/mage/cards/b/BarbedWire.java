@@ -71,7 +71,7 @@ class BarbwireDamageEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player activePlayer = game.getPlayer(targetPointer.getFirst(game, source));
+        Player activePlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (activePlayer != null) {
             activePlayer.damage(1, source.getSourceId(), source, game);
             return true;

@@ -359,7 +359,7 @@ class UrzaAcademyHeadmasterRandomEffect extends OneShotEffect {
                             case 6: // CHANDRA NALAAR 3
                                 sb.append("Urza deals 10 damage to target player and each creature they control.");
                                 effects.add(new DamageTargetEffect(10));
-                                effects.add(new DamageAllControlledTargetEffect(10, new FilterCreaturePermanent()));
+                                effects.add(new DamageAllControlledTargetEffect(10));
                                 target = new TargetPlayerOrPlaneswalker();
                                 break;
                             case 7: // DOMRI RADE 3

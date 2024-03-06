@@ -62,7 +62,7 @@ class ChaosWarpShuffleIntoLibraryEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
+        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (permanent != null) {
             Player owner = game.getPlayer(permanent.getOwnerId());
             if (owner != null) {
@@ -93,7 +93,7 @@ class ChaosWarpRevealEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = (Permanent) game.getLastKnownInformation(targetPointer.getFirst(game, source), Zone.BATTLEFIELD);
+        Permanent permanent = (Permanent) game.getLastKnownInformation(getTargetPointer().getFirst(game, source), Zone.BATTLEFIELD);
         if (permanent == null) {
             return false;
         }

@@ -79,6 +79,7 @@ class HisokasGuardGainAbilityTargetEffect extends ContinuousEffectImpl {
 
     @Override
     public void init(Ability source, Game game) {
+        super.init(source, game);
         // remember the guarded creature
         Permanent guardedCreature = game.getPermanent(this.getTargetPointer().getFirst(game, source));
         Permanent hisokasGuard = game.getPermanent(source.getSourceId());

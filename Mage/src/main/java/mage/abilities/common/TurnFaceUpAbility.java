@@ -29,8 +29,8 @@ public class TurnFaceUpAbility extends SpecialAction {
         this.addCost(costs);
         this.usesStack = false;
         this.abilityType = AbilityType.SPECIAL_ACTION;
-        this.setRuleVisible(false); // will be made visible only to controller in CardView
         this.setWorksFaceDown(true);
+        this.setRuleVisible(false); // hide in face up, but show in face down view (it will be enabled as default ability)
     }
 
     protected TurnFaceUpAbility(final TurnFaceUpAbility ability) {

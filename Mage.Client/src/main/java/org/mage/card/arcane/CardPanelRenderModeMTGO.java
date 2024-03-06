@@ -3,45 +3,39 @@ package org.mage.card.arcane;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import mage.cards.action.ActionCallback;
+import mage.client.util.ImageCaches;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.view.CardView;
 import mage.view.CounterView;
 import mage.view.PermanentView;
-import mage.view.StackAbilityView;
 import org.jdesktop.swingx.graphics.GraphicsUtilities;
 import org.mage.plugins.card.images.ImageCache;
-import org.mage.plugins.card.images.ImageCacheData;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.UUID;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
 /**
  * Render mode: MTGO
- *
  */
 public class CardPanelRenderModeMTGO extends CardPanel {
 
-    //
     // https://www.mtg.onl/evolution-of-magic-token-card-frame-design/
 
-    // Map of generated images
-    private static final Cache<ImageKey, BufferedImage> IMAGE_CACHE = CacheBuilder
-            .newBuilder()
-            .maximumSize(3000)
-            .expireAfterAccess(60, TimeUnit.MINUTES)
-            .softValues()
-            .build();
+    private static final Cache<ImageKey, BufferedImage> MTGO_MODE_RENDERED_CACHE = ImageCaches.register(
+            CacheBuilder
+                    .newBuilder()
+                    .maximumSize(3000)
+                    .expireAfterAccess(60, TimeUnit.MINUTES)
+                    .softValues()
+                    .build()
+    );
 
     // The art image for the card, loaded in from the disk
     private BufferedImage artImage;
-
-    // The faceart image for the card, loaded in from the disk (based on artid from mtgo)
-    private BufferedImage faceArtImage;
 
     // Factory to generate card appropriate views
     private final CardRendererFactory cardRendererFactory = new CardRendererFactory();
@@ -161,11 +155,7 @@ public class CardPanelRenderModeMTGO extends CardPanel {
         if (artImage == null) {
             return null;
         }
-        if (getGameCard().isFaceDown()) {
-            return getFaceDownImage().getImage();
-        } else {
-            return ImageCache.getImageOriginal(getGameCard()).getImage();
-        }
+        return ImageCache.getCardImageOriginal(getGameCard()).getImage();
     }
 
     @Override
@@ -173,16 +163,21 @@ public class CardPanelRenderModeMTGO extends CardPanel {
         // Render the card if we don't have an image ready to use
         if (cardImage == null) {
             // Try to get card image from cache based on our card characteristics
-            ImageKey key = new ImageKey(getGameCard(), artImage,
-                    getCardWidth(), getCardHeight(),
-                    isChoosable(), isSelected(), isTransformed());
+            ImageKey key = new ImageKey(
+                    getGameCard(),
+                    artImage,
+                    getCardWidth(),
+                    getCardHeight(),
+                    isChoosable(),
+                    isSelected(),
+                    isTransformed()
+            );
             try {
-                cardImage = IMAGE_CACHE.get(key, this::renderCard);
-            } catch (ExecutionException e) {
+                cardImage = MTGO_MODE_RENDERED_CACHE.get(key, this::renderCard);
+            } catch (Exception e) {
+                // TODO: research and replace with logs, message and backface image
                 throw new RuntimeException(e);
             }
-
-            // No cached copy exists? Render one and cache it
         }
 
         // And draw the image we now have
@@ -237,8 +232,6 @@ public class CardPanelRenderModeMTGO extends CardPanel {
             // Use the art image and current rendered image from the card
             artImage = impl.artImage;
             cardRenderer.setArtImage(artImage);
-            faceArtImage = impl.faceArtImage;
-            cardRenderer.setFaceArtImage(faceArtImage);
             cardImage = impl.cardImage;
         }
     }
@@ -252,7 +245,6 @@ public class CardPanelRenderModeMTGO extends CardPanel {
         cardImage = null;
         cardRenderer = cardRendererFactory.create(getGameCard());
         cardRenderer.setArtImage(artImage);
-        cardRenderer.setFaceArtImage(faceArtImage);
 
         // Repaint
         repaint();
@@ -264,7 +256,6 @@ public class CardPanelRenderModeMTGO extends CardPanel {
         artImage = null;
         cardImage = null;
         cardRenderer.setArtImage(null);
-        cardRenderer.setFaceArtImage(null);
 
         // Stop animation
         setTappedAngle(isTapped() ? CardPanel.TAPPED_ANGLE : 0);
@@ -276,29 +267,18 @@ public class CardPanelRenderModeMTGO extends CardPanel {
         // See if the image is already loaded
         //artImage = ImageCache.tryGetImage(gameCard, getCardWidth(), getCardHeight());
         //this.cardRenderer.setArtImage(artImage);
+
         // Submit a task to draw with the card art when it arrives
         if (artImage == null) {
             final int stamp = ++updateArtImageStamp;
             Util.threadPool.submit(() -> {
                 try {
                     final BufferedImage srcImage;
-                    final BufferedImage faceArtSrcImage;
-                    if (getGameCard().isFaceDown()) {
-                        // Nothing to do
-                        srcImage = null;
-                        faceArtSrcImage = null;
-                    } else {
-                        srcImage = ImageCache.getImage(getGameCard(), getCardWidth(), getCardHeight()).getImage();
-                        faceArtSrcImage = ImageCache.getFaceImage(getGameCard(), getCardWidth(), getCardHeight()).getImage();
-                    }
-
+                    srcImage = ImageCache.getCardImage(getGameCard(), getCardWidth(), getCardHeight()).getImage();
                     UI.invokeLater(() -> {
                         if (stamp == updateArtImageStamp) {
                             artImage = srcImage;
                             cardRenderer.setArtImage(srcImage);
-                            faceArtImage = faceArtSrcImage;
-                            cardRenderer.setFaceArtImage(faceArtSrcImage);
-
                             if (srcImage != null) {
                                 // Invalidate and repaint
                                 cardImage = null;
@@ -315,21 +295,6 @@ public class CardPanelRenderModeMTGO extends CardPanel {
 
     private CardPanelAttributes getAttributes() {
         return new CardPanelAttributes(getCardWidth(), getCardHeight(), isChoosable(), isSelected(), isTransformed());
-    }
-
-    private ImageCacheData getFaceDownImage() {
-        // TODO: add download default images
-        if (isPermanent() && getGameCard() instanceof PermanentView) {
-            if (((PermanentView) getGameCard()).isMorphed()) {
-                return ImageCache.getMorphImage();
-            } else {
-                return ImageCache.getManifestImage();
-            }
-        } else if (this.getGameCard() instanceof StackAbilityView) {
-            return ImageCache.getMorphImage();
-        } else {
-            return ImageCache.getCardbackImage();
-        }
     }
 
     /**

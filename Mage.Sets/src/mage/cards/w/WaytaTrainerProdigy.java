@@ -101,22 +101,35 @@ enum WaytaTrainerProdigyAdjuster implements CostAdjuster {
 
     @Override
     public void adjustCosts(Ability ability, Game game) {
-        Target secondTarget = null;
-        for (Target target : ability.getTargets()){
-            if (target.getTargetTag() == 2){
-                secondTarget = target;
-                break;
+        if (game.inCheckPlayableState()) {
+            int controllerTargets = 0; //number of possible targets controlled by the ability's controller
+            for (UUID permId : CardUtil.getAllPossibleTargets(ability, game)) {
+                Permanent permanent = game.getPermanent(permId);
+                if (permanent != null && permanent.isControlledBy(ability.getControllerId())) {
+                    controllerTargets++;
+                }
             }
-        }
-        if (secondTarget == null){
-            return;
-        }
-        // Having to call getFirstTarget() on a Target object called secondTarget
-        // (because it's the second target of a two-target ability)
-        // seems like an insult, but this is just getting the UUID of that target
-        Permanent permanent = game.getPermanentOrLKIBattlefield(secondTarget.getFirstTarget());
-        if (permanent != null && permanent.isControlledBy(ability.getControllerId())) {
-            CardUtil.reduceCost(ability, 2);
+            if (controllerTargets > 1) {
+                CardUtil.reduceCost(ability, 2);
+            }
+        } else {
+            Target secondTarget = null;
+            for (Target target : ability.getTargets()) {
+                if (target.getTargetTag() == 2) {
+                    secondTarget = target;
+                    break;
+                }
+            }
+            if (secondTarget == null) {
+                return;
+            }
+            // Having to call getFirstTarget() on a Target object called secondTarget
+            // (because it's the second target of a two-target ability)
+            // seems like an insult, but this is just getting the UUID of that target
+            Permanent permanent = game.getPermanentOrLKIBattlefield(secondTarget.getFirstTarget());
+            if (permanent != null && permanent.isControlledBy(ability.getControllerId())) {
+                CardUtil.reduceCost(ability, 2);
+            }
         }
     }
 }

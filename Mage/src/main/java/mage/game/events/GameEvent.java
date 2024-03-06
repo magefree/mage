@@ -72,7 +72,8 @@ public class GameEvent implements Serializable {
          flag        not used for this event
          */
         ZONE_CHANGE,
-        ZONE_CHANGE_GROUP,
+        ZONE_CHANGE_GROUP, // between two specific zones only; TODO: rework all usages to ZONE_CHANGE_BATCH instead, see #11895
+        ZONE_CHANGE_BATCH, // all zone changes that occurred from a single effect
         DRAW_CARDS, // event calls for multi draws only (if player draws 2+ cards at once)
         DRAW_CARD, DREW_CARD,
         EXPLORE, EXPLORED, // targetId is exploring permanent, playerId is its controller
@@ -470,7 +471,6 @@ public class GameEvent implements Serializable {
         EVOLVED_CREATURE,
         EMBALMED_CREATURE,
         ETERNALIZED_CREATURE,
-        TRAINED_CREATURE,
         ATTACH, ATTACHED,
         UNATTACH, UNATTACHED,
         /* ATTACH, ATTACHED,
@@ -567,6 +567,30 @@ public class GameEvent implements Serializable {
          playerId   the player crafting
          */
         EXILED_WHILE_CRAFTING,
+        /* Solving a Case
+         targetId   the permanent being solved
+         sourceId   of the ability solving
+         playerId   the player solving
+         */
+        SOLVE_CASE, CASE_SOLVED,
+        /* Become suspected
+         targetId   the permanent being suspected
+         sourceId   of the ability suspecting
+         playerId   the player suspecting
+         */
+        BECOME_SUSPECTED,
+        /* Evidence collected
+         targetId   same as sourceId
+         sourceId   of the ability for the cost
+         playerId   the player paying the cost
+         */
+        EVIDENCE_COLLECTED,
+        /* Mentored Creature
+         targetId   creature that was mentored
+         sourceId   of the mentor ability
+         playerId   controller of the creature mentoring
+         */
+        MENTORED_CREATURE,
         //custom events
         CUSTOM_EVENT
     }
@@ -788,5 +812,10 @@ public class GameEvent implements Serializable {
      */
     protected void setSourceId(UUID sourceId) {
         this.sourceId = sourceId;
+    }
+
+    @Override
+    public String toString() {
+        return this.type.toString();
     }
 }

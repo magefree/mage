@@ -38,7 +38,7 @@ public final class AkkiBattleSquad extends CardImpl {
         Ability ability = new AttacksCreatureYouControlTriggeredAbility(
                 new UntapAllEffect(filter), false, filter
         ).setTriggerPhrase("Whenever one or more modified creatures you control attack, ").setTriggersOnceEachTurn(true);
-        ability.addEffect(new AdditionalCombatPhaseEffect());
+        ability.addEffect(new AdditionalCombatPhaseEffect().setText("After this combat phase, there is an additional combat phase"));
         this.addAbility(ability);
     }
 

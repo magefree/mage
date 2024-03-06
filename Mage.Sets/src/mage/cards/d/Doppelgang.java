@@ -52,7 +52,7 @@ class DoppelgangEffect extends OneShotEffect {
 
     DoppelgangEffect() {
         super(Outcome.Benefit);
-        staticText = "create X tokens that are copies of that permanent";
+        staticText = "for each of X target permanents, create X tokens that are copies of that permanent";
     }
 
     private DoppelgangEffect(final DoppelgangEffect effect) {

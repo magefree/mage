@@ -41,7 +41,9 @@ public final class AjaniAdversaryOfTyrants extends CardImpl {
         this.setStartingLoyalty(4);
 
         // +1: Put a +1/+1 counter on each of up to two target creatures.
-        Ability ability = new LoyaltyAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()), 1);
+        Ability ability = new LoyaltyAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance())
+                .setText("put a +1/+1 counter on each of up to two target creatures"), 1
+        );
         ability.addTarget(new TargetPermanent(0, 2, StaticFilters.FILTER_PERMANENT_CREATURES));
         this.addAbility(ability);
 

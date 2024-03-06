@@ -2,8 +2,9 @@ package mage.client.themes;
 
 import mage.abilities.hint.HintUtils;
 import mage.abilities.icon.CardIconColor;
+import mage.client.util.GUISizeHelper;
+import mage.client.util.ImageCaches;
 import org.mage.card.arcane.SvgUtils;
-import org.mage.plugins.card.images.ImageCache;
 
 import java.awt.*;
 
@@ -350,6 +351,6 @@ public enum ThemeType {
         }
 
         // reload card icons and other rendering things from cache - it can depend on current theme
-        ImageCache.clearCache();
+        GUISizeHelper.refreshGUIAndCards();
     }
 }

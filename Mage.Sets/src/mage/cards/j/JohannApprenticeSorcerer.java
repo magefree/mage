@@ -160,6 +160,6 @@ class JohannApprenticeSorcererWatcher extends Watcher {
     }
 
     public boolean isAbilityUsed(UUID playerId, MageObjectReference mor) {
-        return usedFrom.getOrDefault(playerId, new HashSet<>()).contains(mor);
+        return usedFrom.getOrDefault(playerId, Collections.emptySet()).contains(mor);
     }
 }

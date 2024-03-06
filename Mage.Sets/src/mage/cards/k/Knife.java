@@ -42,7 +42,7 @@ public final class Knife extends CardImpl {
         this.addAbility(new ClueAbility(true));
 
         // Equip {2}
-        this.addAbility(new EquipAbility(2));
+        this.addAbility(new EquipAbility(2, false));
     }
 
     private Knife(final Knife card) {

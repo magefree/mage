@@ -80,7 +80,7 @@ class CruelRealityEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player cursedPlayer = game.getPlayer(targetPointer.getFirst(game, source));
+        Player cursedPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
         if (cursedPlayer == null || controller == null) {
             return false;

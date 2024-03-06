@@ -62,7 +62,7 @@ class IncreasingSavageryEffect extends OneShotEffect {
             if (spell.getFromZone() == Zone.GRAVEYARD) {
                 amount = 10;
             }
-            Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
+            Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
             if (permanent != null) {
                 permanent.addCounters(CounterType.P1P1.createInstance(amount), source.getControllerId(), source, game);
             }

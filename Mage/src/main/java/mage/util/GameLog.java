@@ -2,6 +2,7 @@ package mage.util;
 
 import mage.MageObject;
 import mage.ObjectColor;
+import mage.constants.EmptyNames;
 
 import java.util.UUID;
 import java.util.regex.Pattern;
@@ -32,6 +33,18 @@ public final class GameLog {
     static final String LOG_TT_COLOR_COLORLESS = "#94A4BA";
     static final String LOG_COLOR_NEUTRAL = "#F0F8FF"; // AliceBlue
 
+    private static String getNameForLogs(MageObject object) {
+        return getNameForLogs(object.getName());
+    }
+
+    private static String getNameForLogs(String objectName) {
+        if (EmptyNames.isEmptyName(objectName)) {
+            return EmptyNames.EMPTY_NAME_IN_LOGS;
+        } else {
+            return objectName;
+        }
+    }
+
     public static String replaceNameByColoredName(MageObject mageObject, String text) {
         return replaceNameByColoredName(mageObject, text, null);
     }
@@ -47,7 +60,7 @@ public final class GameLog {
     }
 
     public static String getColoredObjectName(MageObject mageObject) {
-        return "<font color='" + getColorName(mageObject.getColor(null)) + "'>" + mageObject.getName() + "</font>";
+        return "<font color='" + getColorName(mageObject.getColor(null)) + "'>" + getNameForLogs(mageObject) + "</font>";
     }
 
     public static String getColoredObjectIdName(MageObject mageObject) {
@@ -58,20 +71,33 @@ public final class GameLog {
         return getColoredObjectIdName(
                 mageObject.getColor(null),
                 mageObject.getId(),
-                mageObject.getName(),
+                getNameForLogs(mageObject),
                 String.format("[%s]", mageObject.getId().toString().substring(0, 3)),
-                alternativeObject == null ? null : alternativeObject.getName()
+                alternativeObject == null ? null : getNameForLogs(alternativeObject)
+        );
+    }
+
+    /**
+     * Create object "link" in game logs
+     */
+    public static String getNeutralObjectIdName(String objectName, UUID objectId) {
+        return getColoredObjectIdName(
+                new ObjectColor(),
+                objectId,
+                getNameForLogs(objectName),
+                String.format("[%s]", objectId.toString().substring(0, 3)),
+                null
         );
     }
 
     /**
      * Prepare html text with additional object info (can be used for card popup in GUI)
      *
-     * @param color text color of the colored part
-     * @param objectID object id
-     * @param visibleColorPart colored part, popup will be work on it
+     * @param color             text color of the colored part
+     * @param objectID          object id
+     * @param visibleColorPart  colored part, popup will be work on it
      * @param visibleNormalPart additional part with default color
-     * @param alternativeName alternative name, popup will use it on unknown object id or name
+     * @param alternativeName   alternative name, popup will use it on unknown object id or name
      * @return
      */
     public static String getColoredObjectIdName(ObjectColor color,
@@ -111,7 +137,11 @@ public final class GameLog {
     }
 
     public static String getColoredObjectIdNameForTooltip(MageObject mageObject) {
-        return "<font color='" + getTooltipColorName(mageObject.getColor(null)) + "'>" + mageObject.getIdName() + "</font>";
+        return getColoredObjectIdNameForTooltip(mageObject.getColor(null), mageObject.getIdName());
+    }
+
+    public static String getColoredObjectIdNameForTooltip(ObjectColor color, String idName) {
+        return "<font color='" + getTooltipColorName(color) + "'>" + idName + "</font>";
     }
 
     public static String getNeutralColoredText(String text) {

@@ -9,6 +9,7 @@ import mage.game.Game;
 import mage.players.Player;
 
 /**
+ * TODO: delete, there are already end turn code with control reset
  * @author nantuko
  */
 public class LoseControlOnOtherPlayersControllerEffect extends OneShotEffect {

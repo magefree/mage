@@ -54,7 +54,7 @@ public final class Melee extends CardImpl {
         this.getSpellAbility().addWatcher(new ControlCombatRedundancyWatcher());
 
         // Whenever a creature attacks and isn't blocked this combat, untap it and remove it from combat.
-        this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new MeleeTriggeredAbility()));
+        this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new MeleeTriggeredAbility()).concatBy("<br>"));
     }
 
     private Melee(final Melee card) {

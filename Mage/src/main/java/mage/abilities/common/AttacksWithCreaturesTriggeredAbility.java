@@ -11,6 +11,7 @@ import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTargets;
 import mage.util.CardUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -91,7 +92,7 @@ public class AttacksWithCreaturesTriggeredAbility extends TriggeredAbilityImpl {
         }
         getEffects().setValue(VALUEKEY_NUMBER_ATTACKERS, attackers.size());
         if (setTargetPointer) {
-            getEffects().setTargetPointer(new FixedTargets(attackers, game));
+            getEffects().setTargetPointer(new FixedTargets(new ArrayList<>(attackers), game));
         }
         return true;
     }

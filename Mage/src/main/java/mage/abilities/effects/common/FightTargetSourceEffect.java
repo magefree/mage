@@ -1,13 +1,11 @@
 package mage.abilities.effects.common;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.Target;
 
 /**
  * @author LevelX2
@@ -24,21 +22,14 @@ public class FightTargetSourceEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        MageObject sourceObject = source.getSourceObject(game);
-        if (sourceObject != null) {
-            Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
-            Permanent creature1 = game.getPermanent(getTargetPointer().getFirst(game, source));
-            // 20110930 - 701.10
-            if (creature1 != null && sourcePermanent != null) {
-                if (creature1.isCreature(game) && sourcePermanent.isCreature(game)) {
-                    return sourcePermanent.fight(creature1, source, game);
-                }
-            }
-            if (!game.isSimulation()) {
-                game.informPlayers(sourceObject.getLogName() + ": Fighting effect has been fizzled.");
-            }
+        // 701.12
+        Permanent sourceCreature = source.getSourcePermanentIfItStillExists(game);
+        Permanent targetCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
+        if (sourceCreature == null || !sourceCreature.isCreature(game)
+                || targetCreature == null || !targetCreature.isCreature(game)) {
+            return false;
         }
-        return false;
+        return sourceCreature.fight(targetCreature, source, game);
     }
 
     @Override
@@ -51,15 +42,6 @@ public class FightTargetSourceEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        Target target = mode.getTargets().get(0);
-        StringBuilder sb = new StringBuilder("{this} fights ");
-        if (target.getMinNumberOfTargets() == 0 && target.getMaxNumberOfTargets() == 1) {
-            sb.append("up to one ");
-        }
-        if (!target.getTargetName().contains("other")) {
-            sb.append("target ");
-        }
-        sb.append(target.getTargetName());
-        return sb.toString();
+        return "{this} fights " + getTargetPointer().describeTargets(mode.getTargets(), "that creature");
     }
 }

@@ -183,8 +183,11 @@ public class TestPlayer implements Player {
         targets.add(target);
     }
 
-    public void addAlias(String name, UUID Id) {
-        aliases.put(name, Id);
+    public void addAlias(String aliasId, UUID objectId) {
+        if (aliases.containsKey(aliasId)) {
+            throw new IllegalArgumentException("Alias with same aliasId already exists: " + aliasId);
+        }
+        aliases.put(aliasId, objectId);
     }
 
     public ManaOptions getAvailableManaTest(Game game) {
@@ -1216,6 +1219,7 @@ public class TestPlayer implements Player {
                 .map(c -> (((c instanceof PermanentToken) ? "[T] " : "[C] ")
                         + c.getIdName()
                         + (c.isCopy() ? " [copy of " + c.getCopyFrom().getId().toString().substring(0, 3) + "]" : "")
+                        + " class " + c.getMainCard().getClass().getSimpleName() + ""
                         + " - " + c.getPower().getValue() + "/" + c.getToughness().getValue()
                         + (c.isPlaneswalker(game) ? " - L" + c.getCounters(game).getCount(CounterType.LOYALTY) : "")
                         + ", " + (c.isTapped() ? "Tapped" : "Untapped")

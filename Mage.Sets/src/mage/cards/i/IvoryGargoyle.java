@@ -37,7 +37,7 @@ public final class IvoryGargoyle extends CardImpl {
         Ability ability = new DiesSourceTriggeredAbility(new CreateDelayedTriggeredAbilityEffect(
                 new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new ReturnSourceFromGraveyardToBattlefieldEffect(false, true)
                         .setText("return it to the battlefield under its owner's control at the beginning of the next end step")
-                ).setTriggerPhrase("")));
+                ).setTriggerPhrase("")).setText("return it to the battlefield under its owner's control at the beginning of the next end step"));
         ability.addEffect(new SkipNextDrawStepControllerEffect().concatBy("and"));
         this.addAbility(ability);
 

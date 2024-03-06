@@ -96,12 +96,12 @@ class RumblingAftershocksDealDamageEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         Integer damageAmount = (Integer) this.getValue("damageAmount");
         if (player != null && damageAmount > 0) {
-            Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
+            Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
             if (targetPlayer != null) {
                 targetPlayer.damage(damageAmount, source.getSourceId(), source, game);
                 return true;
             }
-            Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
+            Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
             if (permanent != null) {
                 permanent.damage(damageAmount, source.getSourceId(), source, game, false, true);
                 return true;
