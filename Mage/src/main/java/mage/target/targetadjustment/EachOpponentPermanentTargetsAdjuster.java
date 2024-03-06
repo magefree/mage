@@ -17,8 +17,15 @@ import java.util.UUID;
 public class EachOpponentPermanentTargetsAdjuster implements TargetAdjuster {
     private final TargetPermanent blueprintTarget;
 
-    public EachOpponentPermanentTargetsAdjuster(TargetPermanent baseTarget) {
-        this.blueprintTarget = baseTarget.copy();
+    /**
+     * Duplicates the permanent target for each opponent.
+     * Filtering of permanent's controllers will be handled inside, so
+     * do not pass a blueprint target with a controller restriction filter/predicate.
+     *
+     * @param blueprintTarget The target to be duplicated per opponent
+     */
+    public EachOpponentPermanentTargetsAdjuster(TargetPermanent blueprintTarget) {
+        this.blueprintTarget = blueprintTarget.copy();
     }
 
     @Override
