@@ -15,10 +15,10 @@ import java.util.UUID;
  * @author notgreat
  */
 public class EachOpponentPermanentTargetsAdjuster implements TargetAdjuster {
-    private final TargetPermanent baseTarget;
+    private final TargetPermanent blueprintTarget;
 
     public EachOpponentPermanentTargetsAdjuster(TargetPermanent baseTarget) {
-        this.baseTarget = baseTarget;
+        this.blueprintTarget = baseTarget.copy();
     }
 
     @Override
@@ -29,7 +29,7 @@ public class EachOpponentPermanentTargetsAdjuster implements TargetAdjuster {
             if (opponent == null) {
                 continue;
             }
-            TargetPermanent newTarget = baseTarget.copy();
+            TargetPermanent newTarget = blueprintTarget.copy();
             Filter<Permanent> filter = newTarget.getFilter();
             filter.add(new ControllerIdPredicate(opponentId));
             if (newTarget.canChoose(ability.getControllerId(), ability, game)) {
