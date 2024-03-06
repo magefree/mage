@@ -74,8 +74,6 @@ class InzervaMasterOfInsightsEffect extends OneShotEffect {
                 if (playerId.equals(controller.getId()) || opponent == null) {
                     continue;
                 }
-                boolean revealed = opponent.isTopCardRevealed(); // temporarily unreveal top card until process finished
-                opponent.setTopCardRevealed(false);
                 Cards cards = new CardsImpl();
                 int count = Math.min(2, opponent.getLibrary().size());
                 if (count == 0) {
@@ -94,7 +92,6 @@ class InzervaMasterOfInsightsEffect extends OneShotEffect {
                 cards.removeIf(targets.getTargets()::contains);
 
                 controller.putCardsOnTopOfLibrary(cards, game, source, true);
-                controller.setTopCardRevealed(revealed);
             }
             return true;
         }

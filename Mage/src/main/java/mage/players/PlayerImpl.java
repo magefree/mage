@@ -978,7 +978,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 UUID cardOwner = cards.getRandom(game).getOwnerId();
                 TargetCard target = new TargetCard(Zone.ALL,
                         new FilterCard("card ORDER to put on the BOTTOM of " +
-                                (cardOwner == playerId ? "your" : game.getPlayer(cardOwner).getName() + "'s") +
+                                (cardOwner.equals(playerId) ? "your" : game.getPlayer(cardOwner).getName() + "'s") +
                                 " library (last one chosen will be bottommost)"));
                 target.setRequired(true);
                 while (cards.size() > 1 && this.canRespond()
