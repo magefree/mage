@@ -5,6 +5,7 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileCardsFromTopOfLibraryControllerEffect;
@@ -29,16 +30,20 @@ public final class KnowledgeVault extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
         // {2}, {T}: Exile the top card of your library face down.
-        this.addAbility(new SimpleActivatedAbility(
+        Ability ability = new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
                 new ExileCardsFromTopOfLibraryControllerEffect(1, true, true),
-                new GenericManaCost(2)));
+                new GenericManaCost(2));
+        ability.addCost(new TapSourceCost());
+        this.addAbility(ability);
 
         // {0}: Sacrifice Knowledge Vault. If you do, discard your hand, then put all cards exiled with Knowledge Vault into their owner’s hand.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new KnowledgeVaultReturnEffect(), new GenericManaCost(0)));
 
         // When Knowledge Vault leaves the battlefield, put all cards exiled with Knowledge Vault into their owner’s graveyard.
-        this.addAbility(new LeavesBattlefieldTriggeredAbility(new ReturnFromExileForSourceEffect(Zone.GRAVEYARD), false));
+        this.addAbility(new LeavesBattlefieldTriggeredAbility(
+                new ReturnFromExileForSourceEffect(Zone.GRAVEYARD).withText(true, false, true),
+                false));
     }
 
     private KnowledgeVault(final KnowledgeVault card) {
