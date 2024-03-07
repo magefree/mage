@@ -1,9 +1,8 @@
-
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.Ability;
+import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
@@ -13,18 +12,15 @@ import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SubType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.game.permanent.token.DeathtouchRatToken;
-import mage.target.Target;
 import mage.target.common.TargetOpponent;
+
+import java.util.UUID;
 
 /**
  *
@@ -32,20 +28,14 @@ import mage.target.common.TargetOpponent;
  */
 public final class HungryLynx extends CardImpl {
     
-    private static final FilterControlledCreaturePermanent filterCat = new FilterControlledCreaturePermanent("Cats");
-    static {
-        filterCat.add(SubType.CAT.getPredicate());
-    }
+    private static final FilterControlledPermanent filterCat = new FilterControlledPermanent(SubType.CAT, "Cats");
     
     private static final FilterCard filterProRat = new FilterCard("Rats");
     static {
         filterProRat.add(SubType.RAT.getPredicate());
     }
     
-    private static final FilterCreaturePermanent filterRat = new FilterCreaturePermanent("a Rat");
-    static {
-        filterRat.add(SubType.RAT.getPredicate());
-    }
+    private static final FilterPermanent filterRat = new FilterPermanent(SubType.RAT, "a Rat");
     
     public HungryLynx(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
@@ -60,8 +50,7 @@ public final class HungryLynx extends CardImpl {
         
         // At the beginning of your end step, target opponent creates a 1/1 black Rat creature token with deathtouch. 
         Ability ability = new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, new CreateTokenTargetEffect(new DeathtouchRatToken()), TargetController.YOU, null, false);
-        Target target = new TargetOpponent();
-        ability.addTarget(target);
+        ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
         
         // Whenever a Rat dies, put a +1/+1 counter on each Cat you control. 

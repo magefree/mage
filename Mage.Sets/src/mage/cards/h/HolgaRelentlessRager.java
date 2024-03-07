@@ -55,15 +55,16 @@ public final class HolgaRelentlessRager extends CardImpl {
     }
 }
 
-class HolgaRelentlessRagerEffect extends OneShotEffect {
-    private enum HolgaRelentlessRagerPredicate implements Predicate<Permanent> {
-        instance;
+enum HolgaRelentlessRagerPredicate implements Predicate<Permanent> {
+    instance;
 
-        @Override
-        public boolean apply(Permanent input, Game game) {
-            return game.getPlayer(game.getCombat().getDefenderId(input.getId())) != null;
-        }
+    @Override
+    public boolean apply(Permanent input, Game game) {
+        return game.getPlayer(game.getCombat().getDefenderId(input.getId())) != null;
     }
+}
+
+class HolgaRelentlessRagerEffect extends OneShotEffect {
 
     private static final FilterPermanent filter = new FilterControlledCreaturePermanent();
 
