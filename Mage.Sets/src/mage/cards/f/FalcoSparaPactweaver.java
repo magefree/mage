@@ -19,7 +19,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -115,7 +114,7 @@ class FalcoSparaPactweaverEffect extends AsThoughEffectImpl {
         }
 
         Costs<Cost> newCosts = new CostsImpl<>();
-        newCosts.add(new RemoveCounterCost(new TargetControlledCreaturePermanent(1, 1, new FilterControlledCreaturePermanent(), true)));
+        newCosts.add(new RemoveCounterCost(new TargetControlledCreaturePermanent().withNotTarget(true)));
         newCosts.addAll(cardToCheck.getSpellAbility().getCosts());
         player.setCastSourceIdWithAlternateMana(
                 cardToCheck.getId(), cardToCheck.getManaCost(), newCosts,
