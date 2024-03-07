@@ -1,7 +1,5 @@
-
 package mage.cards.k;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -15,9 +13,10 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.FilterPermanent;
 import mage.game.permanent.token.SoldierToken;
-import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -25,11 +24,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public final class KnightCaptainOfEos extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a Soldier");
-
-    static {
-        filter.add(SubType.SOLDIER.getPredicate());
-    }
+    private static final FilterPermanent filter = new FilterPermanent(SubType.SOLDIER, "a Soldier");
 
     public KnightCaptainOfEos(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}");
@@ -39,7 +34,10 @@ public final class KnightCaptainOfEos extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
+        // When Knight-Captain of Eos enters the battlefield, create two 1/1 white Soldier creature tokens.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new SoldierToken(), 2), false));
+
+        // {W}, Sacrifice a Soldier: Prevent all combat damage that would be dealt this turn.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventAllDamageByAllPermanentsEffect(Duration.EndOfTurn, true), new ManaCostsImpl<>("{W}"));
         ability.addCost(new SacrificeTargetCost(filter));
         this.addAbility(ability);
