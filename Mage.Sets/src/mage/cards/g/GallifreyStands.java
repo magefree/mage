@@ -16,7 +16,7 @@ import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.*;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.players.Player;
@@ -29,7 +29,7 @@ import java.util.UUID;
 public final class GallifreyStands extends CardImpl {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("a Doctor creature card");
-    private static final FilterControlledCreaturePermanent filter2 = new FilterControlledCreaturePermanent(SubType.DOCTOR, "Doctors");
+    private static final FilterControlledPermanent filter2 = new FilterControlledPermanent(SubType.DOCTOR, "Doctors");
 
     static {
         filter.add(SubType.DOCTOR.getPredicate());
