@@ -15,6 +15,7 @@ import mage.abilities.keyword.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.game.Game;
@@ -34,7 +35,7 @@ public final class MajesticMyriarch extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Majestic Myriarch's power and toughness are each equal to twice the number of creatures you control.
-        DynamicValue xValue = new MultipliedValue(new PermanentsOnBattlefieldCount(new FilterControlledCreaturePermanent()), 2);
+        DynamicValue xValue = new MultipliedValue(new PermanentsOnBattlefieldCount(StaticFilters.FILTER_CONTROLLED_CREATURES), 2);
         Effect effect = new SetBasePowerToughnessSourceEffect(xValue);
         effect.setText("{this}'s power and toughness are each equal to twice the number of creatures you control");
         this.addAbility(new SimpleStaticAbility(Zone.ALL, effect));

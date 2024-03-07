@@ -12,7 +12,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 
 import java.util.UUID;
 
@@ -21,7 +21,7 @@ import java.util.UUID;
  */
 public final class LavakinBrawler extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledCreaturePermanent(SubType.ELEMENTAL);
+    private static final FilterPermanent filter = new FilterControlledPermanent(SubType.ELEMENTAL);
     private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter);
 
     public LavakinBrawler(UUID ownerId, CardSetInfo setInfo) {
