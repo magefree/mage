@@ -239,6 +239,7 @@ public final class MurdersAtKarlovManorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Sheltered Thicket", 291, Rarity.RARE, mage.cards.s.ShelteredThicket.class));
         cards.add(new SetCardInfo("Shimmer Dragon", 117, Rarity.RARE, mage.cards.s.ShimmerDragon.class));
         cards.add(new SetCardInfo("Shiny Impetus", 161, Rarity.UNCOMMON, mage.cards.s.ShinyImpetus.class));
+        cards.add(new SetCardInfo("Showstopping Surprise", 35, Rarity.RARE, mage.cards.s.ShowstoppingSurprise.class));
         cards.add(new SetCardInfo("Shriekmaw", 139, Rarity.UNCOMMON, mage.cards.s.Shriekmaw.class));
         cards.add(new SetCardInfo("Shrine of the Forsaken Gods", 292, Rarity.RARE, mage.cards.s.ShrineOfTheForsakenGods.class));
         cards.add(new SetCardInfo("Sidar Kondo of Jamuraa", 219, Rarity.MYTHIC, mage.cards.s.SidarKondoOfJamuraa.class));
