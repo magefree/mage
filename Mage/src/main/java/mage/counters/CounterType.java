@@ -105,6 +105,7 @@ public enum CounterType {
     HOURGLASS("hourglass", "an"),
     HUNGER("hunger"),
     ICE("ice"),
+    IMPOSTOR("impostor"),
     INCARNATION("incarnation"),
     INDESTRUCTIBLE("indestructible"),
     INFECTION("infection"),
