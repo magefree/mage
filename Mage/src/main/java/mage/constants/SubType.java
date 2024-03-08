@@ -464,6 +464,7 @@ public enum SubType {
     GRIST("Grist", SubTypeSet.PlaneswalkerType),
     GUFF("Guff", SubTypeSet.PlaneswalkerType),
     HUATLI("Huatli", SubTypeSet.PlaneswalkerType),
+    INZERVA("Inzerva", SubTypeSet.PlaneswalkerType),
     JACE("Jace", SubTypeSet.PlaneswalkerType),
     JARED("Jared", SubTypeSet.PlaneswalkerType),
     JESKA("Jeska", SubTypeSet.PlaneswalkerType),
