@@ -4,15 +4,10 @@ import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
-import java.util.Arrays;
-import java.util.List;
-
 /**
  * @author TheElk801
  */
 public final class MurdersAtKarlovManorCommander extends ExpansionSet {
-
-    private static final List<String> unfinished = Arrays.asList("Boltbender", "Experiment Twelve", "Printlifter Ooze", "True Identity");
 
     private static final MurdersAtKarlovManorCommander instance = new MurdersAtKarlovManorCommander();
 
@@ -323,7 +318,5 @@ public final class MurdersAtKarlovManorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Winds of Rath", 93, Rarity.RARE, mage.cards.w.WindsOfRath.class));
         cards.add(new SetCardInfo("Yedora, Grave Gardener", 197, Rarity.RARE, mage.cards.y.YedoraGraveGardener.class));
         cards.add(new SetCardInfo("Zoetic Cavern", 311, Rarity.UNCOMMON, mage.cards.z.ZoeticCavern.class));
-
-        cards.removeIf(setCardInfo -> unfinished.contains(setCardInfo.getName())); // remove when mechanic is implemented
     }
 }
