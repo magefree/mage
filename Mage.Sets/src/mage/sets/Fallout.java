@@ -70,6 +70,8 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Everflowing Chalice", 230, Rarity.UNCOMMON, mage.cards.e.EverflowingChalice.class));
         cards.add(new SetCardInfo("Evolving Wilds", 263, Rarity.COMMON, mage.cards.e.EvolvingWilds.class));
         cards.add(new SetCardInfo("Exotic Orchard", 264, Rarity.RARE, mage.cards.e.ExoticOrchard.class));
+        cards.add(new SetCardInfo("Expert-Level Safe", 133, Rarity.UNCOMMON, mage.cards.e.ExpertLevelSafe.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Expert-Level Safe", 661, Rarity.UNCOMMON, mage.cards.e.ExpertLevelSafe.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Explorer's Scope", 231, Rarity.COMMON, mage.cards.e.ExplorersScope.class));
         cards.add(new SetCardInfo("Farewell", 353, Rarity.RARE, mage.cards.f.Farewell.class));
         cards.add(new SetCardInfo("Farseek", 197, Rarity.COMMON, mage.cards.f.Farseek.class));
