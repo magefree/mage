@@ -1,4 +1,3 @@
-
 package mage.cards.v;
 
 import java.util.UUID;
@@ -14,10 +13,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.target.Target;
 import mage.target.TargetSpell;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
@@ -25,11 +23,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public final class VoidmageProdigy extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a Wizard");
-
-    static {
-        filter.add(SubType.WIZARD.getPredicate());
-    }
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.WIZARD, "a Wizard");
 
     public VoidmageProdigy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}{U}");
