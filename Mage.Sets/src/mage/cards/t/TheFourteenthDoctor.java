@@ -3,7 +3,7 @@ package mage.cards.t;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CastSourceTriggeredAbility;
 import mage.abilities.effects.common.CopyEffect;
@@ -43,7 +43,7 @@ public final class TheFourteenthDoctor extends CardImpl {
         this.addAbility(new CastSourceTriggeredAbility(new TheFourteenthDoctorRevealEffect()));
 
         // You may have The Fourteenth Doctor enter the battlefield as a copy of a Doctor card in your graveyard that was put there from your library this turn. If you do, it gains haste until end of turn.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new TheFourteenthDoctorCopyEffect(), true));
+        this.addAbility(new EntersBattlefieldAbility(new TheFourteenthDoctorCopyEffect(), true));
     }
 
     private TheFourteenthDoctor(final TheFourteenthDoctor card) {
