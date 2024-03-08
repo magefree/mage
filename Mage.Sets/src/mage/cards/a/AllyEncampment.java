@@ -1,4 +1,3 @@
-
 package mage.cards.a;
 
 import java.util.UUID;
@@ -17,8 +16,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
+import mage.target.common.TargetControlledPermanent;
 
 /**
  *
@@ -26,10 +25,11 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public final class AllyEncampment extends CardImpl {
 
-    private static final FilterSpell FILTER = new FilterSpell("an Ally spell");
+    private static final FilterSpell filterSpell = new FilterSpell("an Ally spell");
+    private static final FilterControlledPermanent filterPermanent = new FilterControlledPermanent(SubType.ALLY, "Ally you control");
 
     static {
-        FILTER.add(SubType.ALLY.getPredicate());
+        filterSpell.add(SubType.ALLY.getPredicate());
     }
 
     public AllyEncampment(UUID ownerId, CardSetInfo setInfo) {
@@ -39,13 +39,13 @@ public final class AllyEncampment extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
 
         // {T} Add one mana of any color. Spend this mana only to cast an Ally spell.
-        this.addAbility(new ConditionalAnyColorManaAbility(new TapSourceCost(), 1, new ConditionalSpellManaBuilder(FILTER), true));
+        this.addAbility(new ConditionalAnyColorManaAbility(new TapSourceCost(), 1, new ConditionalSpellManaBuilder(filterSpell), true));
 
         // {1}, {T}, Sacrifice Ally Encampment: Return target Ally you control to its owner's hand.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
-        ability.addTarget(new TargetControlledCreaturePermanent(new FilterControlledCreaturePermanent(SubType.ALLY, "Ally you control")));
+        ability.addTarget(new TargetControlledPermanent(filterPermanent));
         this.addAbility(ability);
     }
 

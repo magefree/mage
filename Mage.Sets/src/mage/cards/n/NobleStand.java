@@ -1,4 +1,3 @@
-
 package mage.cards.n;
 
 import java.util.UUID;
@@ -8,8 +7,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.permanent.TokenPredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -39,11 +37,12 @@ public final class NobleStand extends CardImpl {
 
 class NobleStandAbility extends TriggeredAbilityImpl {
 
-    public NobleStandAbility() {
+    NobleStandAbility() {
         super(Zone.BATTLEFIELD, new GainLifeEffect(2));
+        setTriggerPhrase("Whenever a creature you control blocks, ");
     }
 
-    public NobleStandAbility(final mage.cards.n.NobleStandAbility ability) {
+    private NobleStandAbility(final NobleStandAbility ability) {
         super(ability);
     }
 
@@ -54,19 +53,12 @@ class NobleStandAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
-        filter.add(TokenPredicate.FALSE);
         Permanent permanent = game.getPermanent(event.getSourceId());
-        return permanent != null && filter.match(permanent, controllerId, this, game);
+        return permanent != null && StaticFilters.FILTER_CONTROLLED_CREATURE.match(permanent, controllerId, this, game);
     }
 
     @Override
-    public String getRule() {
-        return "Whenever a creature you control blocks, you gain 2 life.";
-    }
-
-    @Override
-    public mage.cards.n.NobleStandAbility copy() {
-        return new mage.cards.n.NobleStandAbility(this);
+    public NobleStandAbility copy() {
+        return new NobleStandAbility(this);
     }
 }

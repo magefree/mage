@@ -11,7 +11,6 @@ import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -144,7 +143,7 @@ class RiskyMoveFlipCoinEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Target target1 = new TargetControlledCreaturePermanent(1, 1, new FilterControlledCreaturePermanent(), true);
+            Target target1 = new TargetControlledCreaturePermanent().withNotTarget(true);
             Target target2 = new TargetOpponent(true);
 
             if (target1.canChoose(controller.getId(), source, game)) {

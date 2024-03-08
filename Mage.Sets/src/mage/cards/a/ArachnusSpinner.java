@@ -1,4 +1,3 @@
-
 package mage.cards.a;
 
 import java.util.UUID;
@@ -16,16 +15,13 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetCardInLibrary;
-import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.*;
 
 /**
  *
@@ -33,7 +29,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class ArachnusSpinner extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Spider you control");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("untapped Spider you control");
 
     static {
         filter.add(SubType.SPIDER.getPredicate());
@@ -52,7 +48,7 @@ public final class ArachnusSpinner extends CardImpl {
         // Tap an untapped Spider you control: Search your graveyard and/or library for a card named Arachnus Web and put it onto the battlefield attached to target creature. If you search your library this way, shuffle it.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new ArachnusSpinnerEffect(),
-                new TapTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, false)));
+                new TapTargetCost(new TargetControlledPermanent(1, 1, filter, false)));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

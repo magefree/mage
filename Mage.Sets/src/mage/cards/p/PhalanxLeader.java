@@ -10,7 +10,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -27,7 +27,7 @@ public final class PhalanxLeader extends CardImpl {
         this.toughness = new MageInt(1);
 
         // <i>Heroic</i> Whenever you cast a spell that targets Phalanx Leader, put a +1/+1 counter on each creature you control.
-        this.addAbility(new HeroicAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(), new FilterControlledCreaturePermanent())));
+        this.addAbility(new HeroicAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(), StaticFilters.FILTER_CONTROLLED_CREATURE)));
     }
 
     private PhalanxLeader(final PhalanxLeader card) {

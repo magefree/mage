@@ -9,7 +9,7 @@ import mage.constants.SubType;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.AttachEffect;
 import mage.constants.Outcome;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.target.TargetPermanent;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
@@ -23,7 +23,7 @@ import mage.target.common.TargetNonlandPermanent;
  */
 public final class GiantsGrasp extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent(SubType.GIANT);
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.GIANT);
 
     public GiantsGrasp(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{U}");

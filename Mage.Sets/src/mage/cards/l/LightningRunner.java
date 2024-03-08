@@ -1,4 +1,3 @@
-
 package mage.cards.l;
 
 import java.util.UUID;
@@ -19,7 +18,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.counters.CounterType;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -82,7 +81,7 @@ class LightningRunnerEffect extends OneShotEffect {
                         "Untap all creatures you control and after this phase, there is an additional combat phase.",
                         "Yes", "No", source, game)
                         && cost.pay(source, game, source, source.getControllerId(), true)) {
-                    new UntapAllControllerEffect(new FilterControlledCreaturePermanent()).apply(game, source);
+                    new UntapAllControllerEffect(StaticFilters.FILTER_CONTROLLED_CREATURES).apply(game, source);
                     new AdditionalCombatPhaseEffect().apply(game, source);
                 }
             }

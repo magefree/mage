@@ -1,4 +1,3 @@
-
 package mage.cards.g;
 
 import java.util.UUID;
@@ -11,8 +10,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
+import mage.target.common.TargetControlledPermanent;
 
 /**
  *
@@ -20,7 +19,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public final class GangrenousGoliath extends CardImpl {
     
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent(SubType.CLERIC,"untapped Clerics you control");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.CLERIC,"untapped Clerics you control");
 
     public GangrenousGoliath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");
@@ -33,7 +32,7 @@ public final class GangrenousGoliath extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(
                 Zone.GRAVEYARD,
                 new ReturnToHandSourceEffect(),
-                new TapTargetCost(new TargetControlledCreaturePermanent(3, 3, filter, true))));
+                new TapTargetCost(new TargetControlledPermanent(3, 3, filter, true))));
     }
 
     private GangrenousGoliath(final GangrenousGoliath card) {

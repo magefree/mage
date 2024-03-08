@@ -1,5 +1,3 @@
-
-
 package mage.cards.t;
 
 import java.util.Iterator;
@@ -47,13 +45,14 @@ public final class TakenoSamuraiGeneral extends CardImpl {
 }
 
 class TakenoSamuraiGeneralEffect extends ContinuousEffectImpl {
+
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
 
     static {
         filter.add(SubType.SAMURAI.getPredicate());
     }
 
-    public TakenoSamuraiGeneralEffect() {
+    TakenoSamuraiGeneralEffect() {
         super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
         staticText = "Each other Samurai creature you control gets +1/+1 for each point of bushido it has";
     }

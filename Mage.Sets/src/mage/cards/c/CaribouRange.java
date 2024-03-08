@@ -17,12 +17,11 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledLandPermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.CaribouToken;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
@@ -30,7 +29,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public final class CaribouRange extends CardImpl {
 
-    static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a Caribou token");
+    static FilterControlledPermanent filter = new FilterControlledPermanent("a Caribou token");
 
     static {
         filter.add(TokenPredicate.TRUE);

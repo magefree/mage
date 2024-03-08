@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.ArrayList;
@@ -17,16 +16,21 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetControlledPermanent;
 
 /**
  *
  * @author cbt33
  */
 public final class SetonKrosanProtector extends CardImpl {
+
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.DRUID, "untapped Druid you control");
+    static {
+        filter.add(TappedPredicate.UNTAPPED);
+    }
     
     public SetonKrosanProtector(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{G}{G}");
@@ -38,13 +42,10 @@ public final class SetonKrosanProtector extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Tap an untapped Druid you control: Add {G}.
-        FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Druid you control");
-        filter.add(TappedPredicate.UNTAPPED);
-        filter.add(SubType.DRUID.getPredicate());
         this.addAbility(new SimpleManaAbility(
                 Zone.BATTLEFIELD, 
                 new SetonKrosanProtectorManaEffect(filter),
-                new TapTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, true))));
+                new TapTargetCost(new TargetControlledPermanent(1, 1, filter, true))));
     }
 
     private SetonKrosanProtector(final SetonKrosanProtector card) {
@@ -61,7 +62,7 @@ class SetonKrosanProtectorManaEffect extends BasicManaEffect {
 
     private final FilterPermanent filter;
     
-    public SetonKrosanProtectorManaEffect(FilterPermanent filter) {
+    SetonKrosanProtectorManaEffect(FilterPermanent filter) {
         super(Mana.GreenMana(1));
         this.filter = filter;
     }

@@ -12,11 +12,10 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.counters.CounterType;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
-
  *
  * @author LoneFox
  */
@@ -26,7 +25,7 @@ public final class DecreeOfSavagery extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{7}{G}{G}");
 
         // Put four +1/+1 counters on each creature you control.
-        this.getSpellAbility().addEffect(new AddCountersAllEffect(CounterType.P1P1.createInstance(4), new FilterControlledCreaturePermanent()));
+        this.getSpellAbility().addEffect(new AddCountersAllEffect(CounterType.P1P1.createInstance(4), StaticFilters.FILTER_CONTROLLED_CREATURE));
         // Cycling {4}{G}{G}
         this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{4}{G}{G}")));
         // When you cycle Decree of Savagery, you may put four +1/+1 counters on target creature.
