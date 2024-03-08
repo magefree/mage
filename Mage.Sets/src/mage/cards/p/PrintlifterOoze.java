@@ -16,8 +16,8 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.counters.CounterType;
+import mage.filter.FilterPermanentThisOrAnother;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.token.OozeTrampleToken;
 
@@ -27,6 +27,8 @@ import java.util.UUID;
  * @author PurpleCrowbar
  */
 public final class PrintlifterOoze extends CardImpl {
+
+    private static final FilterPermanentThisOrAnother filter = new FilterPermanentThisOrAnother(StaticFilters.FILTER_CONTROLLED_CREATURE, true);
 
     public PrintlifterOoze(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
@@ -40,7 +42,7 @@ public final class PrintlifterOoze extends CardImpl {
         // Whenever Printlifter Ooze or another creature you control is turned face up, create a 0/0 green Ooze creature token with trample.
         // The token enters the battlefield with X +1/+1 counters on it, where X is the number of other creatures you control.
         this.addAbility(new TurnedFaceUpAllTriggeredAbility(
-                new PrintlifterOozeEffect(), new FilterControlledCreaturePermanent("{this} or another creature you control")
+                new PrintlifterOozeEffect(), filter
         ));
 
         // Disguise {3}{G}
