@@ -8,18 +8,13 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.DiscardHandCost;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileCardsFromTopOfLibraryControllerEffect;
+import mage.abilities.effects.common.ReturnFromExileForSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.game.ExileZone;
-import mage.game.Game;
-import mage.players.Player;
-import mage.util.CardUtil;
 
 /**
  *
@@ -40,7 +35,7 @@ public final class KyrenArchive extends CardImpl {
         // {5}, Discard your hand, Sacrifice Kyren Archive: Put all cards exiled with Kyren Archive into their owner's hand.
         Ability ability = new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
-                new KyrenArchiveReturnEffect(),
+                new ReturnFromExileForSourceEffect(Zone.HAND).withText(true, false, true),
                 new GenericManaCost(5)
         );
         ability.addCost(new DiscardHandCost());
@@ -55,35 +50,5 @@ public final class KyrenArchive extends CardImpl {
     @Override
     public KyrenArchive copy() {
         return new KyrenArchive(this);
-    }
-}
-
-class KyrenArchiveReturnEffect extends OneShotEffect {
-
-    KyrenArchiveReturnEffect() {
-        super(Outcome.DrawCard);
-        this.staticText = "Put all cards exiled with {this} into their owners' hands";
-    }
-
-    private KyrenArchiveReturnEffect(final KyrenArchiveReturnEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public KyrenArchiveReturnEffect copy() {
-        return new KyrenArchiveReturnEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter()));
-            if (exileZone != null) {
-                controller.moveCards(exileZone, Zone.HAND, source, game);
-            }
-            return true;
-        }
-        return false;
     }
 }

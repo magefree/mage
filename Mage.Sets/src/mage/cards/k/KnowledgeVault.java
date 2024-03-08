@@ -15,11 +15,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.util.CardUtil;
 
 /**
  *
@@ -76,10 +74,7 @@ class KnowledgeVaultReturnEffect extends OneShotEffect {
         if (sourcePermanent != null && controller != null) {
             if (sourcePermanent.sacrifice(source, game)) {
                 new DiscardHandControllerEffect().apply(game, source);
-                ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter()));
-                if (exileZone != null) {
-                    controller.moveCards(exileZone, Zone.HAND, source, game);
-                }
+                new ReturnFromExileForSourceEffect(Zone.HAND).apply(game, source);
             }
             return true;
         }
