@@ -139,6 +139,7 @@ public final class MurdersAtKarlovManorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Jungle Shrine", 268, Rarity.UNCOMMON, mage.cards.j.JungleShrine.class));
         cards.add(new SetCardInfo("Junk Winder", 107, Rarity.UNCOMMON, mage.cards.j.JunkWinder.class));
         cards.add(new SetCardInfo("Kappa Cannoneer", 108, Rarity.RARE, mage.cards.k.KappaCannoneer.class));
+        cards.add(new SetCardInfo("Kaust, Eyes of the Glade", 1, Rarity.MYTHIC, mage.cards.k.KaustEyesOfTheGlade.class));
         cards.add(new SetCardInfo("Kazuul, Tyrant of the Cliffs", 157, Rarity.RARE, mage.cards.k.KazuulTyrantOfTheCliffs.class));
         cards.add(new SetCardInfo("Keeper of the Accord", 70, Rarity.RARE, mage.cards.k.KeeperOfTheAccord.class));
         cards.add(new SetCardInfo("Kessig Wolf Run", 269, Rarity.RARE, mage.cards.k.KessigWolfRun.class));
