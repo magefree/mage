@@ -55,6 +55,7 @@ public final class MurdersAtKarlovManorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Case of the Shifting Visage", 19, Rarity.RARE, mage.cards.c.CaseOfTheShiftingVisage.class));
         cards.add(new SetCardInfo("Castle Ardenvale", 253, Rarity.RARE, mage.cards.c.CastleArdenvale.class));
         cards.add(new SetCardInfo("Chaos Warp", 149, Rarity.RARE, mage.cards.c.ChaosWarp.class));
+        cards.add(new SetCardInfo("Charnel Serenade", 26, Rarity.RARE, mage.cards.c.CharnelSerenade.class));
         cards.add(new SetCardInfo("Choked Estuary", 254, Rarity.RARE, mage.cards.c.ChokedEstuary.class));
         cards.add(new SetCardInfo("Chulane, Teller of Tales", 202, Rarity.MYTHIC, mage.cards.c.ChulaneTellerOfTales.class));
         cards.add(new SetCardInfo("Cinder Glade", 255, Rarity.RARE, mage.cards.c.CinderGlade.class));
