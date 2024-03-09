@@ -360,6 +360,7 @@ public enum SubType {
     SKELETON("Skeleton", SubTypeSet.CreatureType),
     SLITH("Slith", SubTypeSet.CreatureType),
     SLIVER("Sliver", SubTypeSet.CreatureType),
+    SLOTH("Sloth", SubTypeSet.CreatureType),
     SLUG("Slug", SubTypeSet.CreatureType),
     SNAIL("Snail", SubTypeSet.CreatureType),
     SNAKE("Snake", SubTypeSet.CreatureType),
