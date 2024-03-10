@@ -8,16 +8,16 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 /**
  * @author Alex-Vasile, Susucr
  */
-public class MultipleAsThoughEffects extends CardTestPlayerBase {
+public class MultipleAsThoughEffectsTest extends CardTestPlayerBase {
 
     /**
-     * Reported bug: https://github.com/magefree/mage/issues/8584
-     *
+     * Reported bug #8584
+     * <p>
      * If there are multiple effects which allow a player to cast a spell,
-     * they should be able to choose which one they whish to use.
+     * they should be able to choose which one they wish to use.
      */
     @Test
-    public void ChoosingAlternateCastingMethod() {
+    public void testChoosingAlternateCastingMethod() {
         setStrictChooseMode(true);
         skipInitShuffling();
 
@@ -51,13 +51,13 @@ public class MultipleAsThoughEffects extends CardTestPlayerBase {
     }
 
     /**
-     * Reported bug: https://github.com/magefree/mage/issues/2087
-     *
+     * Reported bug: #2087
+     * <p>
      * If there are multiple effects which allow a player to cast a spell,
-     * they should be able to choose which one they whish to use, even if one is single-use.
+     * they should be able to choose which one they wish to use, even if one is single-use.
      */
     @Test
-    public void RisenExecutioner() {
+    public void testRisenExecutioner() {
         setStrictChooseMode(true);
 
         // You may cast Risen Executioner from your graveyard if you pay {1} more to cast it for each other creature card in your graveyard.
