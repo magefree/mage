@@ -56,7 +56,7 @@ class ExpertLevelSafeEffect extends OneShotEffect {
     ExpertLevelSafeEffect() {
         super(Outcome.Benefit);
         staticText = "you and target opponent each secretly choose 1, 2, or 3. Then those choices are revealed. " +
-                "If they match, sacrifice Expert-Level Safe and put all cards exiled with it into their owners' hands. " +
+                "If they match, sacrifice {this} and put all cards exiled with it into their owners' hands. " +
                 "Otherwise, exile the top card of your library face down";
     }
 
