@@ -2,12 +2,13 @@ package mage.constants;
 
 /**
  * The time per player to have activity in a match.
- * If time runs out for a player, they loose the currently running game of a match.
+ * If time runs out for a player, they lose the match.
  *
  * @author LevelX2
  */
 public enum MatchTimeLimit {
     NONE(0),
+    MIN___5(300),
     MIN__10(600),
     MIN__15(900),
     MIN__20(1200),
@@ -33,10 +34,10 @@ public enum MatchTimeLimit {
     }
 
     public String getName() {
-        if (this == NONE){
+        if (this == NONE) {
             return "None";
         } else {
-            return (prioritySecs/60)+" Minutes";
+            return (prioritySecs/60) + " Minutes";
         }
     }
 
@@ -46,7 +47,7 @@ public enum MatchTimeLimit {
     }
 
     public String getShortName() {
-        if (this == NONE){
+        if (this == NONE) {
             return "None";
         } else {
             return (prioritySecs/60) + "m";
