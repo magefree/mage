@@ -83,14 +83,17 @@ public enum ScryfallImageSource implements CardImageSource {
                 if (ScryfallImageSupportCards.isApiLink(link)) {
                     // api link - must prepare direct link
                     baseUrl = link + localizedCode + "?format=image";
-                    // fallback no loc code
-                    alternativeUrl = link.substring(0,link.length()-1) + "?format=image";
+                    // workaround to use cards without english images (some promos or special cards)
+                    if (link.endsWith("/")) {
+                        alternativeUrl = link.substring(0,link.length()-1) + "?format=image";
+                    }
                 } else {
                     // direct link to image
                     baseUrl = link;
-                    if( link.contains( "/?format=image" )){
-                        baseUrl = link.replaceFirst( "\\?format=image" , localizedCode + "?format=image" );
-                        alternativeUrl = link.replaceFirst( "/\\?format=image" , "?format=image" );
+                    // workaround to use localization in direct links
+                    if (link.contains("/?format=image")){
+                        baseUrl = link.replaceFirst("\\?format=image" , localizedCode + "?format=image");
+                        alternativeUrl = link.replaceFirst("/\\?format=image" , "?format=image");
                     }
                 }
             }
@@ -109,10 +112,7 @@ public enum ScryfallImageSource implements CardImageSource {
         // basic cards by api call (redirect to img link)
         // example: https://api.scryfall.com/cards/xln/121/en?format=image
         if (baseUrl == null) {
-            String cn= card.getCollectorId() ;
-            if( cn.endsWith( "*" )) cn= cn.substring(0 , cn.length() -1) +"★" ;
-            else if( cn.endsWith( "+" )) cn= cn.substring(0 , cn.length() -1) +"†" ;
-            else if( cn.endsWith( "Ph" )) cn= cn.substring(0 , cn.length() -2) +"Φ" ;
+            String cn= ScryfallImageSupportCards.prepareCardNumber(card.getCollectorId()) ;
             baseUrl = String.format("https://api.scryfall.com/cards/%s/%s/%s?format=image",
                     formatSetName(card.getSet(), isToken),
                     cn,
@@ -120,8 +120,16 @@ public enum ScryfallImageSource implements CardImageSource {
             alternativeUrl = String.format("https://api.scryfall.com/cards/%s/%s?format=image",
                     formatSetName(card.getSet(), isToken),
                     cn);
+            // with no localisation code, scryfall defaults to first available image - usually english, but may not be for some special cards
+            // workaround to use cards without english images (some promos or special cards)
+            // bug: https://github.com/magefree/mage/issues/6829
+            // example: Mysterious Egg from IKO https://api.scryfall.com/cards/iko/385/?format=image
+
         }
 
+        // workaround to deal with the cards that scryfall has marked as variations that seem to sometimes fail
+        // eg https://api.scryfall.com/cards/4ed/134†?format=image fails
+        // eg https://api.scryfall.com/cards/4ed/134†?format=image&variation=true succeeds
         return new CardImageUrls(baseUrl, alternativeUrl , alternativeUrl +"&variation=true");
     }
 
@@ -134,9 +142,9 @@ public enum ScryfallImageSource implements CardImageSource {
 
         String apiUrl = ScryfallImageSupportCards.findDirectDownloadLink(card.getSet(), card.getName(), card.getCollectorId());
         if (apiUrl != null) {
-            if( apiUrl.endsWith( "*/" )) apiUrl= apiUrl.substring(0 , apiUrl.length() -2) +"★/" ;
-            else if( apiUrl.endsWith( "+/" )) apiUrl= apiUrl.substring(0 , apiUrl.length() -2) +"†/" ;
-            else if( apiUrl.endsWith( "Ph/" )) apiUrl= apiUrl.substring(0 , apiUrl.length() -3) +"Φ/" ;
+            if (apiUrl.endsWith("*/")) apiUrl= apiUrl.substring(0 , apiUrl.length() -2) +"★/" ;
+            else if (apiUrl.endsWith("+/")) apiUrl= apiUrl.substring(0 , apiUrl.length() -2) +"†/" ;
+            else if (apiUrl.endsWith("Ph/")) apiUrl= apiUrl.substring(0 , apiUrl.length() -3) +"Φ/" ;
             // BY DIRECT URL
             // direct links via hardcoded API path. Used for cards with non-ASCII collector numbers
             if (localizedCode.equals(defaultCode)) {
@@ -150,11 +158,8 @@ public enum ScryfallImageSource implements CardImageSource {
             }
         } else {
             // BY CARD NUMBER
-            // localized and none
-            String cn= card.getCollectorId() ;
-            if( cn.endsWith( "*" )) cn= cn.substring(0 , cn.length() -1) +"★" ;
-            else if( cn.endsWith( "+" )) cn= cn.substring(0 , cn.length() -1) +"†" ;
-            else if( cn.endsWith( "Ph" )) cn= cn.substring(0 , cn.length() -2) +"Φ" ;
+            // localized and default
+            String cn= ScryfallImageSupportCards.prepareCardNumber (card.getCollectorId()) ;
             needUrls.add(String.format("https://api.scryfall.com/cards/%s/%s/%s",
                     formatSetName(card.getSet(), isToken),
                     cn,
