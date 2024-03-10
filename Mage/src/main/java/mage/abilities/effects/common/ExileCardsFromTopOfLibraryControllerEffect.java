@@ -2,7 +2,6 @@ package mage.abilities.effects.common;
 
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.constants.Outcome;
@@ -49,6 +48,12 @@ public class ExileCardsFromTopOfLibraryControllerEffect extends OneShotEffect {
         this.toUniqueExileZone = toUniqueExileZone;
         this.faceDown = faceDown;
         this.withFaceDownReminderText = withFaceDownReminderText;
+
+        staticText = "exile the top "
+                + ((amount > 1) ? CardUtil.numberToText(amount) + " cards" : "card")
+                + " of your library"
+                + (faceDown ? " face down" : "")
+                + (withFaceDownReminderText ? ". <i>(You can't look at it.)</i>" : "");
     }
 
     protected ExileCardsFromTopOfLibraryControllerEffect(final ExileCardsFromTopOfLibraryControllerEffect effect) {
@@ -94,27 +99,5 @@ public class ExileCardsFromTopOfLibraryControllerEffect extends OneShotEffect {
     @Override
     public ExileCardsFromTopOfLibraryControllerEffect copy() {
         return new ExileCardsFromTopOfLibraryControllerEffect(this);
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        StringBuilder sb = new StringBuilder();
-
-        sb.append("exile the top ");
-        if (amount > 1) {
-            sb.append(CardUtil.numberToText(amount)).append(" cards");
-        } else {
-            sb.append("card");
-        }
-
-        sb.append(" of your library");
-
-        if (faceDown) {
-            sb.append(" face down");
-            if (withFaceDownReminderText) {
-                sb.append(". <i>(You can't look at it.)</i>");
-            }
-        }
-        return sb.toString();
     }
 }
