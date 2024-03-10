@@ -79,7 +79,7 @@ public class ExileCardsFromTopOfLibraryControllerEffect extends OneShotEffect {
                 return false;
             }
             exileZoneId = CardUtil.getExileZoneId(game, source);
-            exileZoneName = sourceObject.getName();
+            exileZoneName = CardUtil.createObjectRealtedWindowTitle(source, game, null);
         }
 
         Set<Card> cards = controller.getLibrary().getTopCards(game, amount);
