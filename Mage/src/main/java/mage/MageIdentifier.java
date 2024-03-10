@@ -21,7 +21,6 @@ public enum MageIdentifier {
     //
     CastFromGraveyardOnceWatcher,
     CemeteryIlluminatorWatcher,
-    GisaAndGeralfWatcher,
     HaukensInsightWatcher,
     IntrepidPaleontologistWatcher,
     KaradorGhostChieftainWatcher,
