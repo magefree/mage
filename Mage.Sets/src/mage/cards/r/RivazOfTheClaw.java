@@ -24,7 +24,7 @@ import java.util.UUID;
 public final class RivazOfTheClaw extends CardImpl {
 
     private static final FilterCreatureSpell manaAbilityFilter = new FilterCreatureSpell("Dragon creature spells");
-    private static final FilterCreatureCard staticAbilityFilter = new FilterCreatureCard();
+    private static final FilterCreatureCard staticAbilityFilter = new FilterCreatureCard("a Dragon creature spell");
     private static final FilterCreatureSpell spellCastFilter = new FilterCreatureSpell("a Dragon creature spell from your graveyard");
 
     static {
@@ -50,7 +50,7 @@ public final class RivazOfTheClaw extends CardImpl {
         this.addAbility(new ConditionalAnyColorManaAbility(2, new ConditionalSpellManaBuilder(manaAbilityFilter)));
 
         // Once during each of your turns, you may cast a Dragon creature spell from your graveyard.
-        this.addAbility(new CastFromGraveyardOnceEachTurnAbility(staticAbilityFilter, "Once during each of your turns, you may cast a Dragon creature spell from your graveyard"));
+        this.addAbility(new CastFromGraveyardOnceEachTurnAbility(staticAbilityFilter));
 
         // Whenever you cast a Dragon creature spell from your graveyard, it gains "When this creature dies, exile it."
         this.addAbility(new SpellCastControllerTriggeredAbility(

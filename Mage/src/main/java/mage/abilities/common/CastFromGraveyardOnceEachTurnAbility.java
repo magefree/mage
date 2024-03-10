@@ -18,15 +18,15 @@ import java.util.UUID;
 
 /**
  * Once during each of your turns, you may cast... from your graveyard
- *
+ * <p>
  * See Lurrus of the Dream Den and Rivaz of the Claw
  *
  * @author weirddan455
  */
 public class CastFromGraveyardOnceEachTurnAbility extends SimpleStaticAbility {
 
-    public CastFromGraveyardOnceEachTurnAbility(FilterCard filter, String text) {
-        super(new CastFromGraveyardOnceEffect(filter, text));
+    public CastFromGraveyardOnceEachTurnAbility(FilterCard filter) {
+        super(new CastFromGraveyardOnceEffect(filter));
         this.addWatcher(new CastFromGraveyardOnceWatcher());
         this.setIdentifier(MageIdentifier.CastFromGraveyardOnceWatcher);
     }
@@ -45,10 +45,10 @@ class CastFromGraveyardOnceEffect extends AsThoughEffectImpl {
 
     private final FilterCard filter;
 
-    CastFromGraveyardOnceEffect(FilterCard filter, String text) {
+    CastFromGraveyardOnceEffect(FilterCard filter) {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
         this.filter = filter;
-        this.staticText = text;
+        this.staticText = "Once during each of your turns, you may cast " + filter.getMessage() + " from your graveyard";
     }
 
     private CastFromGraveyardOnceEffect(final CastFromGraveyardOnceEffect effect) {
