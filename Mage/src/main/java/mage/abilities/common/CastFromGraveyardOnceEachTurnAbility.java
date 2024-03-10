@@ -23,21 +23,21 @@ import java.util.UUID;
  *
  * @author weirddan455
  */
-public class CastFromGraveyardOnceStaticAbility extends SimpleStaticAbility {
+public class CastFromGraveyardOnceEachTurnAbility extends SimpleStaticAbility {
 
-    public CastFromGraveyardOnceStaticAbility(FilterCard filter, String text) {
+    public CastFromGraveyardOnceEachTurnAbility(FilterCard filter, String text) {
         super(new CastFromGraveyardOnceEffect(filter, text));
         this.addWatcher(new CastFromGraveyardOnceWatcher());
         this.setIdentifier(MageIdentifier.CastFromGraveyardOnceWatcher);
     }
 
-    private CastFromGraveyardOnceStaticAbility(final CastFromGraveyardOnceStaticAbility ability) {
+    private CastFromGraveyardOnceEachTurnAbility(final CastFromGraveyardOnceEachTurnAbility ability) {
         super(ability);
     }
 
     @Override
-    public CastFromGraveyardOnceStaticAbility copy() {
-        return new CastFromGraveyardOnceStaticAbility(this);
+    public CastFromGraveyardOnceEachTurnAbility copy() {
+        return new CastFromGraveyardOnceEachTurnAbility(this);
     }
 }
 
