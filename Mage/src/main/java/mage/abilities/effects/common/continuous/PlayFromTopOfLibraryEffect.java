@@ -20,31 +20,35 @@ import java.util.UUID;
 /**
  * @author nantuko, JayDi85
  */
-public class PlayTheTopCardEffect extends AsThoughEffectImpl {
+public class PlayFromTopOfLibraryEffect extends AsThoughEffectImpl {
 
     private final FilterCard filter;
     private final TargetController targetLibrary;
 
-    // can play card or can play lands/cast spells, see two modes below
-    private final boolean canPlayCardOnly;
-
+    private static final FilterCard defaultFilter = new FilterCard("play lands and cast spells");
 
     /**
-     * Support targets, use TargetController.SOURCE_TARGETS
+     * You may play lands and cast spells from the top of your library
      */
-    public PlayTheTopCardEffect() {
-        this(TargetController.YOU);
+    public PlayFromTopOfLibraryEffect() {
+        this(defaultFilter);
     }
 
-    public PlayTheTopCardEffect(TargetController targetLibrary) {
-        this(targetLibrary, new FilterCard("play lands and cast spells"), false);
+    /**
+     * You may [play lands and/or cast spells, according to filter] from the top of your library
+     */
+    public PlayFromTopOfLibraryEffect(FilterCard filter) {
+        this(TargetController.YOU, filter);
     }
 
-    public PlayTheTopCardEffect(TargetController targetLibrary, FilterCard filter, boolean canPlayCardOnly) {
+    public PlayFromTopOfLibraryEffect(TargetController targetLibrary) {
+        this(targetLibrary, defaultFilter);
+    }
+
+    public PlayFromTopOfLibraryEffect(TargetController targetLibrary, FilterCard filter) {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
         this.filter = filter;
         this.targetLibrary = targetLibrary;
-        this.canPlayCardOnly = canPlayCardOnly;
 
         String libInfo;
         switch (this.targetLibrary) {
@@ -62,18 +66,16 @@ public class PlayTheTopCardEffect extends AsThoughEffectImpl {
         }
         this.staticText = "you may " + filter.getMessage() + " from the top of " + libInfo;
 
-        // verify check: if you see "card" text in the rules then use card mode
-        // (there aren't any real cards after oracle update, but can be added in the future)
-        if (this.canPlayCardOnly != filter.getMessage().toLowerCase(Locale.ENGLISH).contains("card")) {
-            throw new IllegalArgumentException("Wrong usage of card mode settings");
+        // verify check: this ability is to allow playing lands or casting spells, not playing a "card"
+        if (filter.getMessage().toLowerCase(Locale.ENGLISH).contains("card")) {
+            throw new IllegalArgumentException("Wrong code usage or wrong filter text: PlayTheTopCardEffect");
         }
     }
 
-    protected PlayTheTopCardEffect(final PlayTheTopCardEffect effect) {
+    protected PlayFromTopOfLibraryEffect(final PlayFromTopOfLibraryEffect effect) {
         super(effect);
         this.filter = effect.filter;
         this.targetLibrary = effect.targetLibrary;
-        this.canPlayCardOnly = effect.canPlayCardOnly;
     }
 
     @Override
@@ -82,38 +84,31 @@ public class PlayTheTopCardEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public PlayTheTopCardEffect copy() {
-        return new PlayTheTopCardEffect(this);
+    public PlayFromTopOfLibraryEffect copy() {
+        return new PlayFromTopOfLibraryEffect(this);
     }
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
         throw new IllegalArgumentException("Wrong code usage: can't call applies method on empty affectedAbility");
     }
+
     @Override
     public boolean applies(UUID objectId, Ability affectedAbility, Ability source, Game game, UUID playerId) {
-        // main card and all parts are checks in different calls.
-        // two modes:
-        // * can play cards (must check main card and allows any parts)
-        // * can play lands/spells (must check specific part and allows specific part)
+        // can play lands/spells (must check specific part and allows specific part)
 
-        // current card's part
-        Card cardToCheck = game.getCard(objectId);
+        Card cardToCheck = game.getCard(objectId); // maybe this should be removed and only check SpellAbility characteristics
         if (cardToCheck == null) {
             return false;
         }
-
-        if (this.canPlayCardOnly) {
-            // check whole card instead part
-            cardToCheck = cardToCheck.getMainCard();
-        } else if (affectedAbility instanceof SpellAbility) {
+        if (affectedAbility instanceof SpellAbility) {
             SpellAbility spell = (SpellAbility) affectedAbility;
             cardToCheck = spell.getCharacteristics(game);
             if (spell.getManaCosts().isEmpty()){
                 return false;
             }
         }
-        // must be you
+        // only permits you to cast
         if (!playerId.equals(source.getControllerId())) {
             return false;
         }
@@ -124,7 +119,7 @@ public class PlayTheTopCardEffect extends AsThoughEffectImpl {
             return false;
         }
 
-        // must be your or opponents library
+        // main card of spell must be on top of the relevant library
         switch (this.targetLibrary) {
             case YOU: {
                 Card topCard = controller.getLibrary().getFromTop(game);
@@ -134,7 +129,7 @@ public class PlayTheTopCardEffect extends AsThoughEffectImpl {
                 break;
             }
 
-            case OPPONENT: {
+            case OPPONENT: { // no current usage
                 if (!game.getOpponents(controller.getId()).contains(cardOwner.getId())) {
                     return false;
                 }
@@ -145,7 +140,7 @@ public class PlayTheTopCardEffect extends AsThoughEffectImpl {
                 break;
             }
 
-            case SOURCE_TARGETS: {
+            case SOURCE_TARGETS: { // only used for Xanathar, Guild Kingpin
                 UUID needCardId = cardToCheck.getMainCard().getId();
                 if (CardUtil.getAllSelectedTargets(source, game).stream()
                         .map(game::getPlayer)
@@ -164,7 +159,7 @@ public class PlayTheTopCardEffect extends AsThoughEffectImpl {
             }
         }
 
-        // must be correct card
+        // spell characteristics must match filter
         return filter.match(cardToCheck, playerId, source, game);
     }
 }

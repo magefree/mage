@@ -9,7 +9,7 @@ import mage.abilities.effects.AsThoughManaEffect;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.LookAtTopCardOfLibraryAnyTimeTargetEffect;
-import mage.abilities.effects.common.continuous.PlayTheTopCardTargetEffect;
+import mage.abilities.effects.common.continuous.PlayFromTopOfTargetLibraryEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -46,7 +46,7 @@ public final class XanatharGuildKingpin extends CardImpl {
         );
         ability.addEffect(new LookAtTopCardOfLibraryAnyTimeTargetEffect(Duration.EndOfTurn)
                 .setText(" you may look at the top card of their library any time,"));
-        ability.addEffect(new PlayTheTopCardTargetEffect()
+        ability.addEffect(new PlayFromTopOfTargetLibraryEffect().setDuration(Duration.EndOfTurn)
                 .setText(" you may play the top card of their library,"));
         ability.addEffect(new XanatharGuildKingpinSpendManaAsAnyColorOneShotEffect()
                 .setText(" and you may spend mana as thought it were mana of any color to cast spells this way"));
