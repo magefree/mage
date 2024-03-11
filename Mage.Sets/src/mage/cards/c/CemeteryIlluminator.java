@@ -1,6 +1,7 @@
 package mage.cards.c;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 
@@ -9,6 +10,7 @@ import mage.MageInt;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.abilities.common.EntersBattlefieldOrAttacksSourceTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
@@ -124,36 +126,48 @@ class CemeteryIlluminatorPlayTopEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        throw new IllegalArgumentException("Wrong code usage: can't call applies method on empty affectedAbility");
+    }
+
+    @Override
+    public boolean applies(UUID objectId, Ability affectedAbility, Ability source, Game game, UUID playerId) {
+        Player controller = game.getPlayer(source.getControllerId());
+        CemeteryIlluminatorWatcher watcher = game.getState().getWatcher(CemeteryIlluminatorWatcher.class);
+        Permanent sourceObject = game.getPermanent(source.getSourceId());
+        if (controller == null || watcher == null || sourceObject == null) {
+            return false;
+        }
         // Same checks as in PlayTheTopCardEffect
         // Once per turn clause checked by Watcher same as Lurrus of the Dream Den
-        if (affectedControllerId.equals(source.getControllerId())) {
-            Player controller = game.getPlayer(source.getControllerId());
-            CemeteryIlluminatorWatcher watcher = game.getState().getWatcher(CemeteryIlluminatorWatcher.class);
-            Permanent sourceObject = game.getPermanent(source.getSourceId());
-            if (controller != null && watcher != null && sourceObject != null && !watcher.isAbilityUsed(new MageObjectReference(sourceObject, game))) {
-                Card card = game.getCard(objectId);
-                Card topCard = controller.getLibrary().getFromTop(game);
-                if (card != null && topCard != null && topCard.getId().equals(card.getMainCard().getId()) && !card.isLand(game) && !card.getManaCost().isEmpty()) {
-                    // Check if it shares a card type with exiled cards
-                    UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), game.getState().getZoneChangeCounter(source.getSourceId()));
-                    ExileZone exileZone = game.getExile().getExileZone(exileId);
-                    if (exileZone != null) {
-                        HashSet<CardType> cardTypes = new HashSet<>(card.getCardType(game));
-                        for (UUID exileCardId : exileZone) {
-                            Card exileCard = game.getCard(exileCardId);
-                            if (exileCard != null) {
-                                for (CardType exileType : exileCard.getCardType(game)) {
-                                    if (cardTypes.contains(exileType)) {
-                                        return true;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+        if (!playerId.equals(controller.getId()) || watcher.isAbilityUsed(new MageObjectReference(sourceObject, game))) {
+            return false; // must be you
         }
-        return false;
+        Card card = game.getCard(objectId);
+        Card topCard = controller.getLibrary().getFromTop(game);
+        if (card == null || topCard == null || !topCard.getId().equals(card.getMainCard().getId())) {
+            return false;
+        }
+        if (!(affectedAbility instanceof SpellAbility)) {
+            return false;
+        }
+        // need to check characteristics of spell rather than card (e.g. adventure, morph, etc.)
+        Card cardToCast = ((SpellAbility) affectedAbility).getCharacteristics(game);
+        if (cardToCast.getManaCost().isEmpty()) {
+            return false;
+        }
+        Set<CardType> cardTypes = new HashSet<>(cardToCast.getCardType(game));
+        // Check if it shares a card type with exiled cards
+        UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), game.getState().getZoneChangeCounter(source.getSourceId()));
+        ExileZone exileZone = game.getExile().getExileZone(exileId);
+        if (exileZone == null) {
+            return false;
+        }
+        return exileZone
+                .stream()
+                .map(game::getCard)
+                .filter(Objects::nonNull)
+                .flatMap(c -> c.getCardType(game).stream())
+                .anyMatch(cardTypes::contains);
     }
 }
 
