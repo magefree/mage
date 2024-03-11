@@ -97,4 +97,32 @@ public class KessDissidentMageTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
     }
+
+    @Test
+    public void testKessCastAdventure() {
+        String unicorn = "Lonesome Unicorn"; // 4W 3/3 with adventure 2W 2/2 token
+        String rider = "Rider in Need";
+        String lifegain = "Chaplain's Blessing";
+        String kess = "Kess, Dissident Mage";
+        // Once during each of your turns, you may cast an instant or sorcery spell from your graveyard.
+        // If a spell cast this way would be put into your graveyard, exile it instead.
+        addCard(Zone.BATTLEFIELD, playerA, kess);
+        addCard(Zone.GRAVEYARD, playerA, lifegain);
+        addCard(Zone.GRAVEYARD, playerA, unicorn);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 6);
+
+        checkPlayableAbility("lifegain", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast " + lifegain, true);
+        checkPlayableAbility("creature", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast " + unicorn, false);
+        checkPlayableAbility("adventure", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast " + rider, true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, rider);
+
+        checkPlayableAbility("already used", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Cast " + lifegain, false);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, "Knight Token", 1);
+        assertExileCount(playerA, unicorn, 1);
+    }
 }

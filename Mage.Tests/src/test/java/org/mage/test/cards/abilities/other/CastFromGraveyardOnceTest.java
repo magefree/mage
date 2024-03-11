@@ -134,9 +134,9 @@ public class CastFromGraveyardOnceTest extends CardTestPlayerBase {
         addCard(Zone.GRAVEYARD, playerA, unicorn);
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
 
-        checkPlayableAbility("creature", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Cast " + unicorn, true);
-        checkPlayableAbility("sorcery", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Cast " + rider, false);
-        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, unicorn);
+        checkPlayableAbility("creature", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast " + unicorn, true);
+        checkPlayableAbility("sorcery", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast " + rider, false);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, unicorn);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
