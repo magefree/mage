@@ -141,6 +141,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Lunar Hatchling", 141, Rarity.RARE, mage.cards.l.LunarHatchling.class));
         cards.add(new SetCardInfo("Madame Vastra", 142, Rarity.RARE, mage.cards.m.MadameVastra.class));
         cards.add(new SetCardInfo("Martha Jones", 48, Rarity.RARE, mage.cards.m.MarthaJones.class));
+        cards.add(new SetCardInfo("Me, the Immortal", 147, Rarity.RARE, mage.cards.m.MeTheImmortal.class));
         cards.add(new SetCardInfo("Memory Worm", 90, Rarity.UNCOMMON, mage.cards.m.MemoryWorm.class));
         cards.add(new SetCardInfo("Mind Stone", 244, Rarity.UNCOMMON, mage.cards.m.MindStone.class));
         cards.add(new SetCardInfo("Mountain", 202, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
