@@ -1,6 +1,5 @@
 package org.mage.test.cards.single.vow;
 
-import mage.abilities.effects.common.continuous.BecomesFaceDownCreatureEffect;
 import mage.constants.EmptyNames;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
