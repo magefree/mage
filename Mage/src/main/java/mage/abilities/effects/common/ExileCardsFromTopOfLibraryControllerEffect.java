@@ -20,7 +20,6 @@ public class ExileCardsFromTopOfLibraryControllerEffect extends OneShotEffect {
     private final int amount;
     private final boolean toUniqueExileZone;
     private final boolean faceDown;
-    private final boolean withFaceDownReminderText;
 
     public ExileCardsFromTopOfLibraryControllerEffect(int amount) {
         this(amount, false);
@@ -47,7 +46,6 @@ public class ExileCardsFromTopOfLibraryControllerEffect extends OneShotEffect {
         this.amount = amount;
         this.toUniqueExileZone = toUniqueExileZone;
         this.faceDown = faceDown;
-        this.withFaceDownReminderText = withFaceDownReminderText;
 
         staticText = "exile the top "
                 + ((amount > 1) ? CardUtil.numberToText(amount) + " cards" : "card")
@@ -61,7 +59,6 @@ public class ExileCardsFromTopOfLibraryControllerEffect extends OneShotEffect {
         this.amount = effect.amount;
         this.toUniqueExileZone = effect.toUniqueExileZone;
         this.faceDown = effect.faceDown;
-        this.withFaceDownReminderText = effect.withFaceDownReminderText;
     }
 
     @Override
