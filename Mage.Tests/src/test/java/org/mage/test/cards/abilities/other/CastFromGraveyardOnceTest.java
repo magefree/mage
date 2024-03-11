@@ -16,17 +16,21 @@ public class CastFromGraveyardOnceTest extends CardTestPlayerBase {
 
     private static final String bonesplitter = "Bonesplitter"; // 1 mana equip 1 for +2/+0
     private static final String kitesail = "Kitesail"; // 2 mana equip 2 for +1/+0 and flying
+    private static final String creature = "Field Creeper"; // 2 mana 2/1
+
 
     @Test
     public void testDanithaAllowsOneCast() {
         addCard(Zone.BATTLEFIELD, playerA, danitha);
         addCard(Zone.GRAVEYARD, playerA, bonesplitter);
         addCard(Zone.GRAVEYARD, playerA, kitesail);
+        addCard(Zone.GRAVEYARD, playerA, creature);
         addCard(Zone.BATTLEFIELD, playerA, "Wastes", 3);
         addCard(Zone.BATTLEFIELD, playerA, "Raff Capashen, Ship's Mage"); // historic spells have flash
 
         checkPlayableAbility("bonesplitter your turn", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast " + bonesplitter, true);
         checkPlayableAbility("kitesail your turn", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast " + kitesail, true);
+        checkPlayableAbility("creature not permitted", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast " + creature, false);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, kitesail);
 
         checkPermanentCount("kitesail on battlefield", 1, PhaseStep.BEGIN_COMBAT, playerA, kitesail, 1);

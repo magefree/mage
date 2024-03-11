@@ -133,7 +133,7 @@ class CemeteryIlluminatorPlayTopEffect extends AsThoughEffectImpl {
     public boolean applies(UUID objectId, Ability affectedAbility, Ability source, Game game, UUID playerId) {
         Player controller = game.getPlayer(source.getControllerId());
         CemeteryIlluminatorWatcher watcher = game.getState().getWatcher(CemeteryIlluminatorWatcher.class);
-        Permanent sourceObject = game.getPermanent(source.getSourceId());
+        Permanent sourceObject = source.getSourcePermanentIfItStillExists(game);
         if (controller == null || watcher == null || sourceObject == null) {
             return false;
         }
