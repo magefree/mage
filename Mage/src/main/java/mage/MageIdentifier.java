@@ -23,7 +23,6 @@ public enum MageIdentifier {
     CemeteryIlluminatorWatcher,
     HaukensInsightWatcher,
     IntrepidPaleontologistWatcher,
-    KaradorGhostChieftainWatcher,
     KessDissidentMageWatcher,
     MuldrothaTheGravetideWatcher,
     ShareTheSpoilsWatcher,
