@@ -27,6 +27,10 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Arcane Signet", 224, Rarity.UNCOMMON, mage.cards.a.ArcaneSignet.class));
         cards.add(new SetCardInfo("Armory Paladin", 93, Rarity.RARE, mage.cards.a.ArmoryPaladin.class));
         cards.add(new SetCardInfo("Ash Barrens", 253, Rarity.COMMON, mage.cards.a.AshBarrens.class));
+        cards.add(new SetCardInfo("Assaultron Dominator", 54, Rarity.RARE, mage.cards.a.AssaultronDominator.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Assaultron Dominator", 384, Rarity.RARE, mage.cards.a.AssaultronDominator.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Assaultron Dominator", 582, Rarity.RARE, mage.cards.a.AssaultronDominator.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Assaultron Dominator", 912, Rarity.RARE, mage.cards.a.AssaultronDominator.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Assemble the Legion", 210, Rarity.RARE, mage.cards.a.AssembleTheLegion.class));
         cards.add(new SetCardInfo("Atomize", 94, Rarity.RARE, mage.cards.a.Atomize.class));
         cards.add(new SetCardInfo("Austere Command", 156, Rarity.RARE, mage.cards.a.AustereCommand.class));
