@@ -6,7 +6,6 @@ import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.dynamicvalue.common.SavedDamageValue;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.constants.*;
 import mage.abilities.keyword.SoulbondAbility;
@@ -17,7 +16,6 @@ import mage.game.Game;
 import mage.game.events.DamagedBatchForOnePermanentEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.common.TargetOpponent;
 import mage.util.CardUtil;
 
@@ -113,55 +111,5 @@ class DonnaNobleTriggeredAbility extends TriggeredAbilityImpl {
         }
         this.getEffects().setValue("damage", damage);
         return true;
-    }
-
-//    @Override
-//    public String getRule() {
-//        return "Whenever {this} or a creature it's paired with is dealt damage, " +
-//                "{this} deals that much damage to target opponent.";
-//    }
-}
-
-//Based on WrathfulRaptorsEffect
-class DonnaNobleEffect extends OneShotEffect {
-
-    DonnaNobleEffect() {
-        super(Outcome.Benefit);
-    }
-
-    private DonnaNobleEffect(final DonnaNobleEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public DonnaNobleEffect copy() {
-        return new DonnaNobleEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-
-        // Only resolve the targets we need.
-        int targetIdx = 0;
-        boolean damageApplied = false;
-
-        Integer[] damages = {
-                (Integer) getValue("damageToThis"),
-                (Integer) getValue("damageToPaired")
-        };
-
-        for (Integer damage : damages){
-            if (damage == null) {
-                continue;
-            }
-            UUID targetId = source.getTargets().get(targetIdx++).getFirstTarget();
-            Player player = game.getPlayer(targetId);
-            UUID sourceId = source.getSourcePermanentOrLKI(game).getId();
-            if (player != null && sourceId != null) {
-                damageApplied |= player.damage(damage, sourceId, source, game) > 0;
-            }
-        }
-
-        return damageApplied;
     }
 }
