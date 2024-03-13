@@ -67,8 +67,7 @@ public final class DonnaNoble extends CardImpl {
 class DonnaNobleTriggeredAbility extends TriggeredAbilityImpl {
 
     DonnaNobleTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DonnaNobleEffect());
-        this.addEffect(new DamageTargetEffect(SavedDamageValue.MUCH));
+        super(Zone.BATTLEFIELD, new DamageTargetEffect(SavedDamageValue.MUCH));
         this.addTarget(new TargetOpponent());
         this.setTriggerPhrase("Whenever {this} or a creature it's paired with is dealt damage, ");
     }
