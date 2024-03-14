@@ -62,7 +62,7 @@ public final class AssaultronDominator extends CardImpl {
 
 class AssaultronDominatorEffect extends OneShotEffect {
 
-    private static final Set<String> choices = new LinkedHashSet<>(Arrays.asList("+1/+1", "First Strike", "Trample"));
+    private static final Set<String> choices = new LinkedHashSet<>(Arrays.asList("+1/+1", "First strike", "Trample"));
 
     AssaultronDominatorEffect() {
         super(Outcome.BoostCreature);
@@ -93,7 +93,7 @@ class AssaultronDominatorEffect extends OneShotEffect {
             case "+1/+1":
                 counterType = CounterType.P1P1;
                 break;
-            case "First Strike":
+            case "First strike":
                 counterType = CounterType.FIRST_STRIKE;
                 break;
             case "Trample":
