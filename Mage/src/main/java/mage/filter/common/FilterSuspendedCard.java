@@ -1,22 +1,15 @@
 package mage.filter.common;
 
 import mage.MageObject;
-import mage.abilities.Ability;
 import mage.abilities.keyword.SuspendAbility;
-import mage.cards.Card;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
-import mage.filter.FilterImpl;
-import mage.filter.FilterInPlay;
 import mage.filter.predicate.mageobject.AbilityPredicate;
-import mage.game.Game;
-
-import java.util.UUID;
 
 /**
- * @author emerald000
+ * @author skiwkr
  */
-public class FilterSuspendedCard extends FilterImpl<MageObject> implements FilterInPlay<MageObject> {
+public class FilterSuspendedCard extends FilterCard {
 
     protected FilterCard cardFilter;
 
@@ -41,21 +34,6 @@ public class FilterSuspendedCard extends FilterImpl<MageObject> implements Filte
         return object instanceof MageObject;
     }
 
-    @Override
-    public boolean match(MageObject o, Game game) {
-        if (o instanceof Card) {
-            return cardFilter.match((Card) o, game);
-        }
-        return false;
-    }
-
-    @Override
-    public boolean match(MageObject o, UUID playerId, Ability source, Game game) {
-        if (o instanceof Card) {
-            return cardFilter.match((Card) o, playerId, source, game);
-        }
-        return false;
-    }
 
     public FilterCard getCardFilter() {
         return this.cardFilter;

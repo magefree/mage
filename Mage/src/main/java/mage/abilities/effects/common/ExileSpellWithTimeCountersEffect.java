@@ -38,7 +38,7 @@ public class ExileSpellWithTimeCountersEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Card card = game.getStack().getSpell(source.getId()).getCard();
+        Card card = game.getStack().getSpell(source.getSourceId()).getCard();
         if (controller == null || card == null) {
             return true;
         }

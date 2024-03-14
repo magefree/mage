@@ -1,20 +1,17 @@
 package mage.target.common;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.constants.Zone;
-import mage.filter.Filter;
 import mage.filter.common.FilterSuspendedCard;
 import mage.game.Game;
 import mage.target.TargetImpl;
-
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
 /**
- * @author emerald000
+ * @author skiwkr
  */
 public class TargetSuspendedCard extends TargetImpl {
 
@@ -43,7 +40,7 @@ public class TargetSuspendedCard extends TargetImpl {
     }
 
     @Override
-    public Filter<MageObject> getFilter() {
+    public FilterSuspendedCard getFilter() {
         return this.filter;
     }
 

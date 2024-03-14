@@ -5,19 +5,18 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.SavedDamageValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.PartnerWithAbility;
-import mage.abilities.keyword.SuspendAbility;
 import mage.cards.*;
 import mage.constants.*;
 import mage.abilities.keyword.DoctorsCompanionAbility;
 import mage.counters.CounterType;
 import mage.filter.common.FilterSuspendedCard;
-import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.game.Game;
 import mage.players.Player;
-import mage.filter.FilterCard;
-import mage.target.common.TargetSuspendedCard;
+import mage.target.common.TargetCardInExile;
 
 /**
  *
@@ -25,7 +24,7 @@ import mage.target.common.TargetSuspendedCard;
  */
 public final class AmyPond extends CardImpl {
 
-    private static final FilterSuspendedCard filter = new FilterSuspendedCard("permanent you control or suspended card you own");
+    private static final FilterSuspendedCard filter = new FilterSuspendedCard("suspended card you own");
     static {
         filter.getCardFilter().add(TargetController.YOU.getOwnerPredicate());
     }
@@ -42,8 +41,9 @@ public final class AmyPond extends CardImpl {
         this.addAbility(new PartnerWithAbility("Rory Williams"));
 
         // Whenever Amy Pond deals combat damage to a player, choose a suspended card you own and remove that many time counters from it.
-        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new AmyPondEffect(), false);
-        ability.addTarget(new TargetSuspendedCard(filter, true));
+        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new AmyPondEffect(SavedDamageValue.MANY),
+                false, true);
+        ability.addTarget(new TargetCardInExile(filter).withNotTarget(true));
         this.addAbility(ability);
         // Doctor's companion
         this.addAbility(DoctorsCompanionAbility.getInstance());
@@ -62,19 +62,17 @@ public final class AmyPond extends CardImpl {
 
 class AmyPondEffect extends OneShotEffect {
 
-    private static final FilterCard filter = new FilterCard("suspended card you own");
+    private final DynamicValue numberCounters;
 
-    static {
-        filter.add(CounterType.TIME.getPredicate());
-        filter.add(new AbilityPredicate(SuspendAbility.class));
-    }
-    AmyPondEffect() {
+    public AmyPondEffect(DynamicValue numberCounters) {
         super(Outcome.Benefit);
-        this.staticText = "choose a suspended card you own and remove that many time counters from it";
+        this.numberCounters = numberCounters;
     }
 
-    private AmyPondEffect(final AmyPondEffect effect) {
+    protected AmyPondEffect(final AmyPondEffect effect) {
         super(effect);
+        this.numberCounters = effect.numberCounters;
+        this.staticText= "choose a suspended card you own and remove that many time counters from it";
     }
 
     @Override
@@ -82,13 +80,14 @@ class AmyPondEffect extends OneShotEffect {
         return new AmyPondEffect(this);
     }
 
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Card card = game.getExile().getCard(this.getTargetPointer().getFirst(game, source), game);
+            Card card = game.getExile().getCard(source.getFirstTarget(), game);
             if (card != null) {
-                card.removeCounters(CounterType.TIME.toString(),card.getCounters(game).getCount(CounterType.TIME),source, game);
+                card.removeCounters(CounterType.TIME.toString(),(Integer) getValue("damage"),source, game);
                 return true;
                 }
         }

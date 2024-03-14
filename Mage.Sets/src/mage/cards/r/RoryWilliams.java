@@ -5,22 +5,18 @@ import mage.MageInt;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.CastSourceTriggeredAbility;
+import mage.abilities.effects.common.ExileSpellWithTimeCountersEffect;
 import mage.abilities.effects.common.continuous.GainSuspendEffect;
 import mage.abilities.effects.keyword.InvestigateEffect;
 import mage.abilities.keyword.*;
-import mage.cards.Card;
 import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
-import mage.players.Player;
-
 
 /**
  *
@@ -47,8 +43,10 @@ public final class RoryWilliams extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
 
         // The Last Centurion -- When you cast this spell from anywhere other than exile, exile it with three time counters on it. It gains suspend. Then investigate.
-        Ability ability = new RoryWilliamsTriggeredAbility(new RoryWilliamsEffect());
-        ability.addEffect(new InvestigateEffect(1).concatBy(", then"));
+        Ability ability = new RoryWilliamsTriggeredAbility(new ExileSpellWithTimeCountersEffect(3));
+        ability.addEffect(new GainSuspendEffect(new MageObjectReference(ability.getSourceId())));
+        ability.addEffect(new InvestigateEffect(1).concatBy("Then"));
+        ability.withFlavorWord("The Last Centurion");
         this.addAbility(ability);
     }
 
@@ -62,16 +60,10 @@ public final class RoryWilliams extends CardImpl {
     }
 }
 
-class RoryWilliamsTriggeredAbility extends TriggeredAbilityImpl {
+class RoryWilliamsTriggeredAbility extends CastSourceTriggeredAbility {
 
-    public static final String SOURCE_CAST_SPELL_ABILITY = "sourceCastSpellAbility";
-
-    public RoryWilliamsTriggeredAbility(Effect effect) {
-        this(effect, false);
-    }
-
-    public RoryWilliamsTriggeredAbility(Effect effect, boolean optional) {
-        super(Zone.STACK, effect, optional);
+    protected RoryWilliamsTriggeredAbility(Effect effect) {
+        super(effect, false);
         this.ruleAtTheTop = true;
         setTriggerPhrase("When you cast this spell from anywhere other than exile, ");
     }
@@ -103,48 +95,10 @@ class RoryWilliamsTriggeredAbility extends TriggeredAbilityImpl {
         if (spell.getSpellAbility() != null) {
             getEffects().setValue(SOURCE_CAST_SPELL_ABILITY, spell.getSpellAbility());
         }
-        if (spell.getFromZone().toString().equals("exile zone")){
+        if (spell.getFromZone().equals(Zone.EXILED)){
             return false;
         }
         getEffects().setValue("spellCast", spell);
-        return true;
-    }
-}
-
-class RoryWilliamsEffect extends OneShotEffect {
-
-    RoryWilliamsEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "exile it with three time counters on it and it gains suspend";
-    }
-
-    private RoryWilliamsEffect(final RoryWilliamsEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public RoryWilliamsEffect copy() {
-        return new RoryWilliamsEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        Card card = game.getCard(source.getSourceId());
-        if (controller == null || card == null) {
-            return false;
-        }
-
-        if (game.getState().getZone(card.getId()) == Zone.EXILED) {
-            return false;
-        }
-
-        card = card.getMainCard();
-        UUID exileId = SuspendAbility.getSuspendExileId(controller.getId(), game);
-        controller.moveCards(card,Zone.EXILED,source, game);
-        card.addCounters(CounterType.TIME.createInstance(3), source.getControllerId(), source, game);
-        game.addEffect(new GainSuspendEffect(new MageObjectReference(card, game)), source);
-
         return true;
     }
 }
