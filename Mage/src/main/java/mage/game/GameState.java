@@ -823,21 +823,24 @@ public class GameState implements Serializable, Copyable<GameState> {
         boolean isPlayerBatchUsed = false;
         for (GameEvent event : simultaneousEvents) {
 
-            // per damage type
-            if ((event instanceof DamagedBatchEvent)
-                    && ((DamagedBatchEvent) event).getDamageClazz().isInstance(damagedEvent)) {
-                ((DamagedBatchEvent) event).addEvent(damagedEvent);
-                isDamageBatchUsed = true;
-            }
-
-            // per player
             if (isPlayerDamage && event instanceof DamagedBatchForOnePlayerEvent) {
+                // per player
                 DamagedBatchForOnePlayerEvent oldPlayerBatch = (DamagedBatchForOnePlayerEvent) event;
                 if (oldPlayerBatch.getDamageClazz().isInstance(damagedEvent)
                         && event.getPlayerId().equals(damagedEvent.getTargetId())) {
                     oldPlayerBatch.addEvent(damagedEvent);
                     isPlayerBatchUsed = true;
                 }
+            } else if ((event instanceof DamagedBatchEvent)
+                    && ((DamagedBatchEvent) event).getDamageClazz().isInstance(damagedEvent)) {
+                // per damage type
+                // If the batch event isn't DAMAGED_BATCH_FOR_ONE_PLAYER, the targetIDs need not match,
+                // since "event" is a generic batch in this case
+                // (either DAMAGED_BATCH_FOR_PERMANENTS or DAMAGED_BATCH_FOR_PLAYERS)
+                // Just needs to be a permanent-damaging event for DAMAGED_BATCH_FOR_PERMANENTS,
+                // or a player-damaging event for DAMAGED_BATCH_FOR_PLAYERS
+                ((DamagedBatchEvent) event).addEvent(damagedEvent);
+                isDamageBatchUsed = true;
             }
         }
 
