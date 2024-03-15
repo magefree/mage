@@ -834,6 +834,14 @@ public class GameState implements Serializable, Copyable<GameState> {
                     oldPlayerBatch.addEvent(damagedEvent);
                     isPlayerBatchUsed = true;
                 }
+            } else if (isPermanentDamage && event instanceof DamagedBatchForOnePermanentEvent) {
+                // per permanent
+                DamagedBatchForOnePermanentEvent oldPermanentBatch = (DamagedBatchForOnePermanentEvent) event;
+                if (oldPermanentBatch.getDamageClazz().isInstance(damagedEvent)
+                        && CardUtil.getEventTargets(event).contains(damagedEvent.getTargetId())) {
+                    oldPermanentBatch.addEvent(damagedEvent);
+                    isPermanentBatchUsed = true;
+                }
             } else if ((event instanceof DamagedBatchEvent)
                     && ((DamagedBatchEvent) event).getDamageClazz().isInstance(damagedEvent)) {
                 // per damage type
@@ -846,15 +854,6 @@ public class GameState implements Serializable, Copyable<GameState> {
                 isDamageBatchUsed = true;
             }
 
-            // per permanent
-            if (isPermanentDamage && event instanceof DamagedBatchForOnePermanentEvent) {
-                DamagedBatchForOnePermanentEvent oldPermanentBatch = (DamagedBatchForOnePermanentEvent) event;
-                if (oldPermanentBatch.getDamageClazz().isInstance(damagedEvent)
-                        && CardUtil.getEventTargets(event).contains(damagedEvent.getTargetId())) {
-                    oldPermanentBatch.addEvent(damagedEvent);
-                    isPermanentBatchUsed = true;
-                }
-            }
         }
 
         // new batch
