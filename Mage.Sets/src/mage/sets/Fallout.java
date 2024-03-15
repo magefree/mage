@@ -56,6 +56,11 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Brotherhood Scribe", 541, Rarity.RARE, mage.cards.b.BrotherhoodScribe.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Brotherhood Scribe", 893, Rarity.RARE, mage.cards.b.BrotherhoodScribe.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Buried Ruin", 254, Rarity.UNCOMMON, mage.cards.b.BuriedRuin.class));
+        cards.add(new SetCardInfo("Caesar, Legion's Emperor", 1, Rarity.MYTHIC, mage.cards.c.CaesarLegionsEmperor.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Caesar, Legion's Emperor", 339, Rarity.MYTHIC, mage.cards.c.CaesarLegionsEmperor.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Caesar, Legion's Emperor", 529, Rarity.MYTHIC, mage.cards.c.CaesarLegionsEmperor.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Caesar, Legion's Emperor", 867, Rarity.MYTHIC, mage.cards.c.CaesarLegionsEmperor.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Caesar, Legion's Emperor", 1064, Rarity.MYTHIC, mage.cards.c.CaesarLegionsEmperor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Canopy Vista", 255, Rarity.RARE, mage.cards.c.CanopyVista.class));
         cards.add(new SetCardInfo("Canyon Slough", 256, Rarity.RARE, mage.cards.c.CanyonSlough.class));
         cards.add(new SetCardInfo("Captain of the Watch", 157, Rarity.RARE, mage.cards.c.CaptainOfTheWatch.class));
