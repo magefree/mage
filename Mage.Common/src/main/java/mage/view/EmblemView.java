@@ -16,7 +16,8 @@ public class EmblemView implements CommandObjectView, Serializable {
     protected UUID id;
     protected String name;
     protected String cardNumber = "";
-    protected int imageNum;
+    protected String imageFileName = "";
+    protected int imageNumber;
     protected boolean usesVariousArt = false;
     protected String expansionSetCode;
     protected List<String> rules;
@@ -25,7 +26,8 @@ public class EmblemView implements CommandObjectView, Serializable {
     public EmblemView(Emblem emblem) {
         this.id = emblem.getId();
         this.name = emblem.getName();
-        this.imageNum = emblem.getImageNumber();
+        this.imageFileName = emblem.getImageFileName();
+        this.imageNumber = emblem.getImageNumber();
         this.expansionSetCode = emblem.getExpansionSetCode();
         this.rules = emblem.getAbilities().getRules(emblem.getName());
         if (emblem instanceof EmblemOfCard) {
@@ -54,9 +56,15 @@ public class EmblemView implements CommandObjectView, Serializable {
     }
 
     @Override
-    public int getImageNumber() {
-        return imageNum;
+    public String getImageFileName() {
+        return imageFileName;
     }
+
+    @Override
+    public int getImageNumber() {
+        return imageNumber;
+    }
+
     public boolean getUsesVariousArt() {
         return this.usesVariousArt;
     }

@@ -10,12 +10,11 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
-import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
@@ -65,7 +64,7 @@ class SunkenHopeReturnToHandEffect extends OneShotEffect {
             return false;
         }
 
-        Target target = new TargetControlledPermanent(1, 1, new FilterControlledCreaturePermanent(), true);
+        Target target = new TargetControlledCreaturePermanent().withNotTarget(true);
         if (target.canChoose(player.getId(), source, game)) {
             while (player.canRespond() && !target.isChosen()
                     && target.canChoose(player.getId(), source, game)) {

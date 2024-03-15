@@ -21,7 +21,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TimingRule;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.SuspectedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -34,7 +34,7 @@ import mage.target.common.TargetCardInLibrary;
  */
 public final class CaseOfTheStashedSkeleton extends CardImpl {
 
-    static final FilterPermanent filter = new FilterControlledCreaturePermanent(SubType.SKELETON, "You control no suspected Skeletons");
+    static final FilterPermanent filter = new FilterControlledPermanent(SubType.SKELETON, "You control no suspected Skeletons");
 
     static {
         filter.add(SuspectedPredicate.instance);

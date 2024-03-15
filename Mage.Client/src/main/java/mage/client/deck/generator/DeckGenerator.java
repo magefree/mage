@@ -37,17 +37,16 @@ public final class DeckGenerator {
     /**
      * Builds a deck out of the selected block/set/format.
      *
-     * @return a path to the generated deck.
+     * @return a path to the generated deck or null on canceled
      */
     public static String generateDeck() {
-
         genDialog = new DeckGeneratorDialog();
         if (genDialog.getSelectedColors() != null) {
             Deck deck = buildDeck();
             return genDialog.saveDeck(deck);
+        } else {
+            return null;
         }
-        // If the deck couldn't be generated or the user cancelled, repopulate the deck selection with its cached value
-        return PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_DECK_FILE, null);
     }
 
     protected static Deck buildDeck() {

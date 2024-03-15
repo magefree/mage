@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -7,7 +6,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.counters.CounterType;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -19,7 +18,7 @@ public final class StrengthOfThePack extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{G}{G}");
 
         // Put two +1/+1 counters on each creature you control.
-        this.getSpellAbility().addEffect(new AddCountersAllEffect(CounterType.P1P1.createInstance(2), new FilterControlledCreaturePermanent()));
+        this.getSpellAbility().addEffect(new AddCountersAllEffect(CounterType.P1P1.createInstance(2), StaticFilters.FILTER_CONTROLLED_CREATURE));
     }
 
     private StrengthOfThePack(final StrengthOfThePack card) {

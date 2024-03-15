@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import mage.MageInt;
@@ -13,10 +12,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.Predicate;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -26,15 +24,14 @@ import java.util.UUID;
  */
 public final class CrookclawElder extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter
-            = new FilterControlledCreaturePermanent(SubType.BIRD, "untapped Birds you control");
-    private static final FilterControlledCreaturePermanent filter2
-            = new FilterControlledCreaturePermanent(SubType.WIZARD, "untapped Wizards you control");
-    private static final Predicate pred = TappedPredicate.UNTAPPED;
+    private static final FilterControlledPermanent filter
+            = new FilterControlledPermanent(SubType.BIRD, "untapped Birds you control");
+    private static final FilterControlledPermanent filter2
+            = new FilterControlledPermanent(SubType.WIZARD, "untapped Wizards you control");
 
     static {
-        filter.add(pred);
-        filter2.add(pred);
+        filter.add(TappedPredicate.UNTAPPED);
+        filter2.add(TappedPredicate.UNTAPPED);
     }
 
     public CrookclawElder(UUID ownerId, CardSetInfo setInfo) {
@@ -51,7 +48,7 @@ public final class CrookclawElder extends CardImpl {
         // Tap two untapped Birds you control: Draw a card.
         Ability ability = new SimpleActivatedAbility(
                 new DrawCardSourceControllerEffect(1),
-                new TapTargetCost(new TargetControlledCreaturePermanent(
+                new TapTargetCost(new TargetControlledPermanent(
                         2, 2, filter, true
                 ))
         );
@@ -60,7 +57,7 @@ public final class CrookclawElder extends CardImpl {
         // Tap two untapped Wizards you control: Target creature gains flying until end of turn.
         ability = new SimpleActivatedAbility(
                 new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn),
-                new TapTargetCost(new TargetControlledCreaturePermanent(
+                new TapTargetCost(new TargetControlledPermanent(
                         2, 2, filter2, true
                 ))
         );

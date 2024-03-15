@@ -4,6 +4,7 @@ import mage.cards.MageCard;
 import mage.cards.MagePermanent;
 import mage.cards.action.ActionCallback;
 import mage.client.util.GUISizeHelper;
+import mage.client.util.ImageCaches;
 import mage.interfaces.plugin.CardPlugin;
 import mage.view.CardView;
 import mage.view.CounterView;
@@ -667,7 +668,7 @@ public class CardPluginImpl implements CardPlugin {
                         LOGGER.info("Symbols download finished");
                         dialog.dispose();
                         ManaSymbols.loadImages();
-                        ImageCache.clearCache();
+                        GUISizeHelper.refreshGUIAndCards();
                     }
                 }
             }
@@ -710,6 +711,6 @@ public class CardPluginImpl implements CardPlugin {
 
     @Override
     public BufferedImage getOriginalImage(CardView card) {
-        return ImageCache.getImageOriginal(card).getImage();
+        return ImageCache.getCardImageOriginal(card).getImage();
     }
 }

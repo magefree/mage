@@ -154,7 +154,6 @@ public class VerifyCardDataTest {
 
         // rarity
         // skipListAddName(SKIP_LIST_RARITY, set, cardName);
-        skipListAddName(SKIP_LIST_RARITY, "PIP", "Casualties of War"); // temporary
         skipListAddName(SKIP_LIST_RARITY, "CMR", "The Prismatic Piper"); // Collation is not yet set up for CMR https://www.lethe.xyz/mtg/collation/cmr.html
 
         // missing abilities
@@ -2727,7 +2726,7 @@ public class VerifyCardDataTest {
             if (!card.isBasic()) {
                 fail(card, "supertype", "basic land must be SuperType.BASIC");
             }
-        } else if (name.equals("Wastes")) {
+        } else if (name.equals("Wastes") || name.equals("Snow-Covered Wastes")) {
             // Wastes are SuperType.BASIC but not necessarily Rarity.LAND
             if (!card.isBasic()) {
                 fail(card, "supertype", "Wastes must be SuperType.BASIC");

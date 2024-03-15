@@ -18,7 +18,8 @@ import java.util.List;
 /**
  * @author North
  */
-public class MockSplitCard extends SplitCard {
+public class MockSplitCard extends SplitCard implements MockableCard {
+
     public MockSplitCard(CardInfo card) {
         super(null, new CardSetInfo(card.getName(), card.getSetCode(), card.getCardNumber(), card.getRarity()),
                 card.getTypes().toArray(new CardType[0]),

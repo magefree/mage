@@ -7,9 +7,9 @@ import mage.constants.SubType;
 /**
  * @author TheElk801
  */
-public final class SalamnderWarriorToken extends TokenImpl {
+public final class SalamanderWarriorToken extends TokenImpl {
 
-    public SalamnderWarriorToken() {
+    public SalamanderWarriorToken() {
         super("Salamander Warrior Token", "4/3 blue Salamander Warrior creature token");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
@@ -19,11 +19,11 @@ public final class SalamnderWarriorToken extends TokenImpl {
         toughness = new MageInt(3);
     }
 
-    private SalamnderWarriorToken(final SalamnderWarriorToken token) {
+    private SalamanderWarriorToken(final SalamanderWarriorToken token) {
         super(token);
     }
 
-    public SalamnderWarriorToken copy() {
-        return new SalamnderWarriorToken(this);
+    public SalamanderWarriorToken copy() {
+        return new SalamanderWarriorToken(this);
     }
 }

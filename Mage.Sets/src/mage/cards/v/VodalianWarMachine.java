@@ -1,4 +1,3 @@
-
 package mage.cards.v;
 
 import mage.MageInt;
@@ -15,14 +14,14 @@ import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackAbility;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetControlledPermanent;
 import mage.watchers.Watcher;
 
 import java.util.*;
@@ -32,7 +31,7 @@ import java.util.*;
  */
 public final class VodalianWarMachine extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Merfolk you control");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("untapped Merfolk you control");
 
     static {
         filter.add(TappedPredicate.UNTAPPED);
@@ -49,11 +48,11 @@ public final class VodalianWarMachine extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
 
         // Tap an untapped Merfolk you control: Vodalian War Machine can attack this turn as though it didn't have defender.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CanAttackAsThoughItDidntHaveDefenderSourceEffect(Duration.EndOfTurn), new TapTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, true)));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CanAttackAsThoughItDidntHaveDefenderSourceEffect(Duration.EndOfTurn), new TapTargetCost(new TargetControlledPermanent(1, 1, filter, true)));
         this.addAbility(ability);
 
         // Tap an untapped Merfolk you control: Vodalian War Machine gets +2/+1 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 1, Duration.EndOfTurn), new TapTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, true))));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 1, Duration.EndOfTurn), new TapTargetCost(new TargetControlledPermanent(1, 1, filter, true))));
 
         // When Vodalian War Machine dies, destroy all Merfolk tapped this turn to pay for its abilities.
         this.addAbility(new DiesSourceTriggeredAbility(new VodalianWarMachineEffect()), new VodalianWarMachineWatcher());
@@ -71,13 +70,13 @@ public final class VodalianWarMachine extends CardImpl {
 
 class VodalianWarMachineEffect extends OneShotEffect {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Merfolk tapped this turn to pay for its abilities");
+    private static final FilterPermanent filter = new FilterPermanent("Merfolk tapped this turn to pay for its abilities");
 
     static {
         filter.add(SubType.MERFOLK.getPredicate());
     }
 
-    public VodalianWarMachineEffect() {
+    VodalianWarMachineEffect() {
         super(Outcome.Detriment);
         staticText = "destroy all " + filter.getMessage();
     }
@@ -112,13 +111,13 @@ class VodalianWarMachineEffect extends OneShotEffect {
 
 class VodalianWarMachineWatcher extends Watcher {
 
-    private Map<MageObjectReference, Set<MageObjectReference>> tappedMerfolkIds = new HashMap<>();
+    private final Map<MageObjectReference, Set<MageObjectReference>> tappedMerfolkIds = new HashMap<>();
 
-    public VodalianWarMachineWatcher() {
+    VodalianWarMachineWatcher() {
         super(WatcherScope.GAME);
     }
 
-    public Set<MageObjectReference> getTappedMerfolkIds(Permanent permanent, Game game) {
+    Set<MageObjectReference> getTappedMerfolkIds(Permanent permanent, Game game) {
         return tappedMerfolkIds.get(new MageObjectReference(permanent, game));
     }
 

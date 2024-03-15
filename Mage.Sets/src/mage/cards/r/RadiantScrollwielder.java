@@ -14,8 +14,8 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
+import mage.filter.common.FilterNonlandCard;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -33,7 +33,7 @@ import java.util.UUID;
  */
 public final class RadiantScrollwielder extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("instant and sorcery spells you control");
+    private static final FilterNonlandCard filter = new FilterNonlandCard("instant and sorcery spells you control");
 
     static {
         filter.add(Predicates.or(

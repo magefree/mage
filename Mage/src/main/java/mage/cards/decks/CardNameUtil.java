@@ -19,6 +19,7 @@ public class CardNameUtil {
                 .replace("ö", "o")
                 .replace("û", "u")
                 .replace("í", "i")
+                .replace("ï", "i")
                 .replace("â", "a")
                 .replace("á", "a")
                 .replace("à", "a")

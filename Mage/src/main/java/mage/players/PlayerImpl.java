@@ -842,13 +842,13 @@ public abstract class PlayerImpl implements Player, Serializable {
     private boolean doDiscard(Card card, Ability source, Game game, boolean payForCost, boolean fireFinalEvent) {
         //20100716 - 701.7
         /* 701.7. Discard #
-         701.7a To discard a card, move it from its owners hand to that players graveyard.
+         701.7a To discard a card, move it from its owner's hand to that player's graveyard.
          701.7b By default, effects that cause a player to discard a card allow the affected
          player to choose which card to discard. Some effects, however, require a random
          discard or allow another player to choose which card is discarded.
          701.7c If a card is discarded, but an effect causes it to be put into a hidden zone
-         instead of into its owners graveyard without being revealed, all values of that
-         cards characteristics are considered to be undefined.
+         instead of into its owner's graveyard without being revealed, all values of that
+         card's characteristics are considered to be undefined.
          TODO:
          If a card is discarded this way to pay a cost that specifies a characteristic
          about the discarded card, that cost payment is illegal; the game returns to
@@ -985,8 +985,11 @@ public abstract class PlayerImpl implements Player, Serializable {
                 }
             } else {
                 // user defined order
+                UUID cardOwner = cards.getRandom(game).getOwnerId();
                 TargetCard target = new TargetCard(Zone.ALL,
-                        new FilterCard("card ORDER to put on the BOTTOM of your library (last one chosen will be bottommost)"));
+                        new FilterCard("card ORDER to put on the BOTTOM of " +
+                                (cardOwner.equals(playerId) ? "your" : game.getPlayer(cardOwner).getName() + "'s") +
+                                " library (last one chosen will be bottommost)"));
                 target.setRequired(true);
                 while (cards.size() > 1 && this.canRespond()
                         && this.choose(Outcome.Neutral, cards, target, source, game)) {
@@ -1078,8 +1081,11 @@ public abstract class PlayerImpl implements Player, Serializable {
                 }
             } else {
                 // user defined order
+                UUID cardOwner = cards.getRandom(game).getOwnerId();
                 TargetCard target = new TargetCard(Zone.ALL,
-                        new FilterCard("card ORDER to put on the TOP of your library (last one chosen will be topmost)"));
+                        new FilterCard("card ORDER to put on the TOP of " +
+                                (cardOwner.equals(playerId) ? "your" : game.getPlayer(cardOwner).getName() + "'s") +
+                                " library (last one chosen will be topmost)"));
                 target.setRequired(true);
                 while (cards.size() > 1
                         && this.canRespond()
@@ -1849,7 +1855,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             int last = cards.size();
             for (Card card : cards.getCards(game)) {
                 current++;
-                sb.append(GameLog.getColoredObjectName(card));
+                sb.append(GameLog.getColoredObjectName(card)); // TODO: see same usage in OfferingAbility for hide card's id (is it needs for reveal too?!)
                 if (current < last) {
                     sb.append(", ");
                 }
@@ -4699,7 +4705,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                             Player eventPlayer = game.getPlayer(info.event.getPlayerId());
                             if (eventPlayer != null && fromZone != null) {
                                 game.informPlayers(eventPlayer.getLogName() + " puts "
-                                        + (info.faceDown ? "a card face down " : permanent.getLogName()) + " from "
+                                        + GameLog.getColoredObjectIdName(permanent) + " from "
                                         + fromZone.toString().toLowerCase(Locale.ENGLISH) + " onto the Battlefield"
                                         + CardUtil.getSourceLogName(game, source, permanent.getId()));
                             }
@@ -4725,10 +4731,23 @@ public abstract class PlayerImpl implements Player, Serializable {
                 break;
             case EXILED:
                 for (Card card : cards) {
+                    // 708.9.
+                    // If a face-down permanent or a face-down component of a merged permanent moves from the
+                    // battlefield to any other zone, its owner must reveal it to all players as they move it.
+                    // If a face-down spell moves from the stack to any zone other than the battlefield,
+                    // its owner must reveal it to all players as they move it. If a player leaves the game,
+                    // all face-down permanents, face-down components of merged permanents, and face-down spells
+                    // owned by that player must be revealed to all players. At the end of each game, all
+                    // face-down permanents, face-down components of merged permanents, and face-down spells must
+                    // be revealed to all players.
+
+                    // force to show face down name in logs
+                    // TODO: replace it to real reveal code somehow?
                     fromZone = game.getState().getZone(card.getId());
                     boolean withName = (fromZone == Zone.BATTLEFIELD
                             || fromZone == Zone.STACK)
                             || !card.isFaceDown(game);
+
                     if (moveCardToExileWithInfo(card, null, "", source, game, fromZone, withName)) {
                         successfulMovedCards.add(card);
                     }
@@ -5006,10 +5025,19 @@ public abstract class PlayerImpl implements Player, Serializable {
                     }
                 }
                 if (Zone.EXILED.equals(game.getState().getZone(card.getId()))) { // only if target zone was not replaced
-                    game.informPlayers(this.getLogName() + " moves " + (withName ? card.getLogName()
-                            + (card.isCopy() ? " (Copy)" : "") : "a card face down") + ' '
-                            + (fromZone != null ? "from " + fromZone.toString().toLowerCase(Locale.ENGLISH)
-                            + ' ' : "") + "to the exile zone" + CardUtil.getSourceLogName(game, source, card.getId()));
+                    String visibleName;
+                    if (withName) {
+                        // warning, withName param used to forced name show of the face down card (see 708.9.)
+                        if (card.getName().isEmpty()) {
+                            throw new IllegalStateException("Wrong code usage: method must find real card name, but found nothing", new Throwable());
+                        }
+                        visibleName = card.getLogName() + (card.isCopy() ? " (Copy)" : "");
+                    } else {
+                        visibleName = "a " + GameLog.getNeutralObjectIdName(EmptyNames.FACE_DOWN_CARD.toString(), card.getId());
+                    }
+                    game.informPlayers(this.getLogName() + " moves " + visibleName
+                            + (fromZone != null ? " from " + fromZone.toString().toLowerCase(Locale.ENGLISH) : "")
+                            + " to the exile zone" + CardUtil.getSourceLogName(game, source, card.getId()));
                 }
 
             }

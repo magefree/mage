@@ -7,6 +7,8 @@
 
 # Use verify test to check it: test_checkMissingTokenData
 
+# Inner/xmage related tokens stores in TokenRepository (copy, morph, etc)
+
 # ALL EMBLEMS
 # Usage hints:
 # - use simple name for the emblem like Gideon
@@ -124,6 +126,9 @@
 |Generate|EMBLEM:CMM|Emblem Narset|||NarsetOfTheAncientWayEmblem|
 |Generate|EMBLEM:CMM|Emblem Nixilis|||ObNixilisOfTheBlackOathEmblem|
 |Generate|EMBLEM:CMM|Emblem Teferi|||TeferiTemporalArchmageEmblem|
+|Generate|EMBLEM:PH17|Emblem Inzerva|||InzervaMasterOfInsightsEmblem|
+|Generate|EMBLEM:LCC|Emblem Sorin|||SorinLordOfInnistradEmblem|
+|Generate|EMBLEM:RVR|Emblem Domri|||DomriRadeEmblem|
 
 # ALL PLANES
 # Usage hints:
@@ -2121,3 +2126,90 @@
 |Generate|TOK:LCI|Treasure|||TreasureToken|
 |Generate|TOK:LCI|Vampire|||IxalanVampireToken|
 |Generate|TOK:LCI|Vampire Demon|||VampireDemonToken|
+
+# LCC
+|Generate|TOK:LCC|Beast|||BeastToken|
+|Generate|TOK:LCC|Bird|||BlueBirdToken|
+|Generate|TOK:LCC|Blood|||BloodToken|
+|Generate|TOK:LCC|Boar|||Boar2Token|
+|Generate|TOK:LCC|Dinosaur|||DinosaurToken|
+|Generate|TOK:LCC|Dinosaur Beast|||DinosaurBeastToken|
+|Generate|TOK:LCC|Elephant|||ElephantToken|
+|Generate|TOK:LCC|Frog Lizard|||FrogLizardToken|
+|Generate|TOK:LCC|Merfolk|||MerfolkToken|
+|Generate|TOK:LCC|Pirate|||PirateToken|
+|Generate|TOK:LCC|Ragavan|||RagavanToken|
+|Generate|TOK:LCC|Salamander Warrior|||SalamanderWarriorToken|
+|Generate|TOK:LCC|Shapeshifter|||Shapeshifter32Token|
+|Generate|TOK:LCC|Vampire|1||SorinLordOfInnistradVampireToken|
+|Generate|TOK:LCC|Vampire|2||EdgarMarkovsCoffinVampireToken|
+
+# RVR
+|Generate|TOK:RVR|Angel|1||AngelToken|
+|Generate|TOK:RVR|Angel|2||AngelVigilanceToken|
+|Generate|TOK:RVR|Beast|||RedGreenBeastToken|
+|Generate|TOK:RVR|Bird|||BirdToken|
+|Generate|TOK:RVR|Bird Illusion|||BirdIllusionToken|
+|Generate|TOK:RVR|Centaur|||CentaurToken|
+|Generate|TOK:RVR|Dragon|||UtvaraHellkiteDragonToken|
+|Generate|TOK:RVR|Elf Knight|||ElfKnightToken|
+|Generate|TOK:RVR|Goblin|1||GoblinToken|
+|Generate|TOK:RVR|Goblin|2||RakdosGuildmageGoblinToken|
+|Generate|TOK:RVR|Rhino|||RhinoToken|
+|Generate|TOK:RVR|Saproling|||SaprolingToken|
+|Generate|TOK:RVR|Soldier|||SoldierTokenWithHaste|
+|Generate|TOK:RVR|Sphinx|||WardenSphinxToken|
+|Generate|TOK:RVR|Spirit|1||SpiritWhiteToken|
+|Generate|TOK:RVR|Spirit|2||WhiteBlackSpiritToken|
+|Generate|TOK:RVR|Voja|||VojaToken|
+|Generate|TOK:RVR|Wurm|||WurmToken|
+|Generate|TOK:RVR|Zombie|||ZombieToken|
+
+# MKM
+|Generate|TOK:MKM|Bat|||BatToken|
+|Generate|TOK:MKM|Clue|1||ClueArtifactToken|
+|Generate|TOK:MKM|Clue|2||ClueArtifactToken|
+|Generate|TOK:MKM|Clue|3||ClueArtifactToken|
+|Generate|TOK:MKM|Clue|4||ClueArtifactToken|
+|Generate|TOK:MKM|Clue|5||ClueArtifactToken|
+|Generate|TOK:MKM|Detective|||DetectiveToken|
+|Generate|TOK:MKM|Dog|||WhiteDogToken|
+|Generate|TOK:MKM|Goblin|||GoblinToken|
+|Generate|TOK:MKM|Human|||HumanToken|
+|Generate|TOK:MKM|Imp|||ImpToken|
+|Generate|TOK:MKM|Merfolk|||MerfolkToken|
+|Generate|TOK:MKM|Ooze|||OozeTrampleToken|
+|Generate|TOK:MKM|Plant|||PlantToken|
+|Generate|TOK:MKM|Skeleton|||SkeletonToken2|
+|Generate|TOK:MKM|Spider|||IzoniSpiderToken|
+|Generate|TOK:MKM|Spirit|||WhiteBlackSpiritToken|
+|Generate|TOK:MKM|Thopter|1||Thopter00ColorlessToken|
+|Generate|TOK:MKM|Thopter|2||ThopterColorlessToken|
+|Generate|TOK:MKM|Voja Fenstalker|||TolsimirMidnightsLightToken|
+
+# MKC
+|Generate|TOK:MKC|Cat|||GreenCat2Token|
+|Generate|TOK:MKC|Clue|||ClueArtifactToken|
+|Generate|TOK:MKC|Construct|||StoneIdolToken|
+|Generate|TOK:MKC|Drake|||DrakeToken|
+|Generate|TOK:MKC|Eldrazi|||EldraziToken|
+|Generate|TOK:MKC|Food|||FoodToken|
+|Generate|TOK:MKC|Gold|||GoldToken|
+|Generate|TOK:MKC|Human Soldier|||HumanSoldierToken|
+|Generate|TOK:MKC|Insect|1||InsectToken|
+|Generate|TOK:MKC|Insect|2||InsectDeathToken|
+|Generate|TOK:MKC|Kobolds of Kher Keep|||KherKeepKoboldToken|
+|Generate|TOK:MKC|Koma's Coil|||KomasCoilToken|
+|Generate|TOK:MKC|Lightning Rager|||LightningRagerToken|
+|Generate|TOK:MKC|Ogre|||OgreToken|
+|Generate|TOK:MKC|Phyrexian Germ|||PhyrexianGermToken|
+|Generate|TOK:MKC|Rhino Warrior|||RhinoWarriorToken|
+|Generate|TOK:MKC|Salamander Warrior|||SalamanderWarriorToken|
+|Generate|TOK:MKC|Saproling|||SaprolingToken|
+|Generate|TOK:MKC|Snake|||SnakeToken|
+|Generate|TOK:MKC|Soldier|||SoldierToken|
+|Generate|TOK:MKC|Spirit|||SpiritWhiteToken|
+|Generate|TOK:MKC|Tentacle|||TentacleToken|
+|Generate|TOK:MKC|Tiny|||TinyToken|
+|Generate|TOK:MKC|Treasure|||TreasureToken|
+|Generate|TOK:MKC|Zombie|||ZombieToken|

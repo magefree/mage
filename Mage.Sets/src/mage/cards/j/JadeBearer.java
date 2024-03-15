@@ -9,7 +9,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.target.TargetPermanent;
 
@@ -19,8 +19,8 @@ import mage.target.TargetPermanent;
  */
 public final class JadeBearer extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter =
-            new FilterControlledCreaturePermanent(SubType.MERFOLK, "another target Merfolk you control");
+    private static final FilterControlledPermanent filter =
+            new FilterControlledPermanent(SubType.MERFOLK, "another target Merfolk you control");
     static {
         filter.add(AnotherPredicate.instance);
     }

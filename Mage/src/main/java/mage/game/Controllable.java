@@ -5,11 +5,9 @@ import java.util.UUID;
 /**
  * @author magenoxx_at_gmail.com
  */
-public interface Controllable {
+public interface Controllable extends ControllableOrOwnerable {
 
     UUID getControllerId();
-
-    UUID getId();
 
     default boolean isControlledBy(UUID controllerID) {
         if (getControllerId() == null) {
