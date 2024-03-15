@@ -2,6 +2,7 @@ package org.mage.test.cards.single.c17;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -98,14 +99,15 @@ public class KessDissidentMageTest extends CardTestPlayerBase {
         execute();
     }
 
+    private static final String unicorn = "Lonesome Unicorn"; // 4W 3/3 with adventure 2W 2/2 token
+    private static final String rider = "Rider in Need";
+    private static final String lifegain = "Chaplain's Blessing";
+    private static final String kess = "Kess, Dissident Mage";
+    // Once during each of your turns, you may cast an instant or sorcery spell from your graveyard.
+    // If a spell cast this way would be put into your graveyard, exile it instead.
+
     @Test
     public void testKessCastAdventure() {
-        String unicorn = "Lonesome Unicorn"; // 4W 3/3 with adventure 2W 2/2 token
-        String rider = "Rider in Need";
-        String lifegain = "Chaplain's Blessing";
-        String kess = "Kess, Dissident Mage";
-        // Once during each of your turns, you may cast an instant or sorcery spell from your graveyard.
-        // If a spell cast this way would be put into your graveyard, exile it instead.
         addCard(Zone.BATTLEFIELD, playerA, kess);
         addCard(Zone.GRAVEYARD, playerA, lifegain);
         addCard(Zone.GRAVEYARD, playerA, unicorn);
@@ -125,4 +127,39 @@ public class KessDissidentMageTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Knight Token", 1);
         assertExileCount(playerA, unicorn, 1);
     }
+
+    @Test
+    @Ignore("failing, see issue #11924")
+    public void testKessCastAdventureAfterDeath() {
+        addCard(Zone.BATTLEFIELD, playerA, kess);
+        addCard(Zone.GRAVEYARD, playerA, lifegain);
+        addCard(Zone.HAND, playerA, unicorn);
+        addCard(Zone.BATTLEFIELD, playerA, "Blood Bairn"); // for sacrificing creature
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 6);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, unicorn);
+
+        checkPlayableAbility("lifegain", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Cast " + lifegain, true);
+        checkPlayableAbility("creature", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Cast " + unicorn, false);
+        checkPlayableAbility("adventure", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Cast " + rider, false);
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Sacrifice another");
+        setChoice(playerA, unicorn);
+
+        checkGraveyardCount("sacrificed", 2, PhaseStep.PRECOMBAT_MAIN, playerA, unicorn, 1);
+
+        checkPlayableAbility("lifegain", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast " + lifegain, true);
+        checkPlayableAbility("creature", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast " + unicorn, false);
+        checkPlayableAbility("adventure", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast " + rider, true);
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, rider);
+
+        checkPlayableAbility("already used", 3, PhaseStep.POSTCOMBAT_MAIN, playerA, "Cast " + lifegain, false);
+
+        setStrictChooseMode(true);
+        setStopAt(3, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, "Knight Token", 1);
+        assertExileCount(playerA, unicorn, 1);
+    }
+
 }
