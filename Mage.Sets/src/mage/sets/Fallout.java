@@ -51,6 +51,10 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Brass Knuckles", 227, Rarity.UNCOMMON, mage.cards.b.BrassKnuckles.class));
         cards.add(new SetCardInfo("Break Down", 74, Rarity.UNCOMMON, mage.cards.b.BreakDown.class));
         cards.add(new SetCardInfo("Brotherhood Outcast", 12, Rarity.UNCOMMON, mage.cards.b.BrotherhoodOutcast.class));
+        cards.add(new SetCardInfo("Brotherhood Scribe", 13, Rarity.RARE, mage.cards.b.BrotherhoodScribe.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Brotherhood Scribe", 365, Rarity.RARE, mage.cards.b.BrotherhoodScribe.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Brotherhood Scribe", 541, Rarity.RARE, mage.cards.b.BrotherhoodScribe.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Brotherhood Scribe", 893, Rarity.RARE, mage.cards.b.BrotherhoodScribe.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Buried Ruin", 254, Rarity.UNCOMMON, mage.cards.b.BuriedRuin.class));
         cards.add(new SetCardInfo("Canopy Vista", 255, Rarity.RARE, mage.cards.c.CanopyVista.class));
         cards.add(new SetCardInfo("Canyon Slough", 256, Rarity.RARE, mage.cards.c.CanyonSlough.class));
