@@ -34,6 +34,10 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Assemble the Legion", 210, Rarity.RARE, mage.cards.a.AssembleTheLegion.class));
         cards.add(new SetCardInfo("Atomize", 94, Rarity.RARE, mage.cards.a.Atomize.class));
         cards.add(new SetCardInfo("Austere Command", 156, Rarity.RARE, mage.cards.a.AustereCommand.class));
+        cards.add(new SetCardInfo("Automated Assembly Line", 10, Rarity.RARE, mage.cards.a.AutomatedAssemblyLine.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Automated Assembly Line", 363, Rarity.RARE, mage.cards.a.AutomatedAssemblyLine.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Automated Assembly Line", 538, Rarity.RARE, mage.cards.a.AutomatedAssemblyLine.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Automated Assembly Line", 891, Rarity.RARE, mage.cards.a.AutomatedAssemblyLine.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ayula, Queen Among Bears", 348, Rarity.RARE, mage.cards.a.AyulaQueenAmongBears.class));
         cards.add(new SetCardInfo("Basilisk Collar", 225, Rarity.RARE, mage.cards.b.BasiliskCollar.class));
         cards.add(new SetCardInfo("Bastion of Remembrance", 182, Rarity.UNCOMMON, mage.cards.b.BastionOfRemembrance.class));
