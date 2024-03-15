@@ -169,6 +169,10 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Secure the Wastes", 171, Rarity.RARE, mage.cards.s.SecureTheWastes.class));
         cards.add(new SetCardInfo("Shadowblood Ridge", 288, Rarity.RARE, mage.cards.s.ShadowbloodRidge.class));
         cards.add(new SetCardInfo("Sheltered Thicket", 289, Rarity.RARE, mage.cards.s.ShelteredThicket.class));
+        cards.add(new SetCardInfo("Sierra, Nuka's Biggest Fan", 25, Rarity.RARE, mage.cards.s.SierraNukasBiggestFan.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Sierra, Nuka's Biggest Fan", 372, Rarity.RARE, mage.cards.s.SierraNukasBiggestFan.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Sierra, Nuka's Biggest Fan", 553, Rarity.RARE, mage.cards.s.SierraNukasBiggestFan.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Sierra, Nuka's Biggest Fan", 900, Rarity.RARE, mage.cards.s.SierraNukasBiggestFan.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Silver Shroud Costume", 142, Rarity.UNCOMMON, mage.cards.s.SilverShroudCostume.class));
         cards.add(new SetCardInfo("Silverbluff Bridge", 290, Rarity.COMMON, mage.cards.s.SilverbluffBridge.class));
         cards.add(new SetCardInfo("Single Combat", 172, Rarity.RARE, mage.cards.s.SingleCombat.class));
