@@ -69,6 +69,10 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Chaos Warp", 189, Rarity.RARE, mage.cards.c.ChaosWarp.class));
         cards.add(new SetCardInfo("Cinder Glade", 257, Rarity.RARE, mage.cards.c.CinderGlade.class));
         cards.add(new SetCardInfo("Clifftop Retreat", 258, Rarity.RARE, mage.cards.c.ClifftopRetreat.class));
+        cards.add(new SetCardInfo("Colonel Autumn", 98, Rarity.RARE, mage.cards.c.ColonelAutumn.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Colonel Autumn", 411, Rarity.RARE, mage.cards.c.ColonelAutumn.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Colonel Autumn", 626, Rarity.RARE, mage.cards.c.ColonelAutumn.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Colonel Autumn", 939, Rarity.RARE, mage.cards.c.ColonelAutumn.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Command Tower", 259, Rarity.COMMON, mage.cards.c.CommandTower.class));
         cards.add(new SetCardInfo("Commander Sofia Daguerre", 15, Rarity.UNCOMMON, mage.cards.c.CommanderSofiaDaguerre.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Commander Sofia Daguerre", 543, Rarity.UNCOMMON, mage.cards.c.CommanderSofiaDaguerre.class, NON_FULL_USE_VARIOUS));
