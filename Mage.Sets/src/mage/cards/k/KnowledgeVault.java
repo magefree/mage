@@ -1,4 +1,3 @@
-
 package mage.cards.k;
 
 import java.util.UUID;
@@ -60,7 +59,7 @@ class KnowledgeVaultReturnEffect extends OneShotEffect {
 
     KnowledgeVaultReturnEffect() {
         super(Outcome.DrawCard);
-        this.staticText = "Sacrifice {this}. If you do, discard your hand, then put all cards exiled with {this} into their owners' hands";
+        this.staticText = "Sacrifice {this}. If you do, discard your hand, then put all cards exiled with {this} into their owner's hand";
     }
 
     private KnowledgeVaultReturnEffect(final KnowledgeVaultReturnEffect effect) {
