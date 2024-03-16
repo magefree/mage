@@ -70,6 +70,8 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Cinder Glade", 257, Rarity.RARE, mage.cards.c.CinderGlade.class));
         cards.add(new SetCardInfo("Clifftop Retreat", 258, Rarity.RARE, mage.cards.c.ClifftopRetreat.class));
         cards.add(new SetCardInfo("Command Tower", 259, Rarity.COMMON, mage.cards.c.CommandTower.class));
+        cards.add(new SetCardInfo("Commander Sofia Daguerre", 15, Rarity.UNCOMMON, mage.cards.c.CommanderSofiaDaguerre.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Commander Sofia Daguerre", 543, Rarity.UNCOMMON, mage.cards.c.CommanderSofiaDaguerre.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Contagion Clasp", 229, Rarity.UNCOMMON, mage.cards.c.ContagionClasp.class));
         cards.add(new SetCardInfo("Corpsejack Menace", 214, Rarity.UNCOMMON, mage.cards.c.CorpsejackMenace.class));
         cards.add(new SetCardInfo("Crimson Caravaneer", 56, Rarity.UNCOMMON, mage.cards.c.CrimsonCaravaneer.class));
