@@ -153,6 +153,10 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Mechanized Production", 178, Rarity.MYTHIC, mage.cards.m.MechanizedProduction.class));
         cards.add(new SetCardInfo("Memorial to Glory", 271, Rarity.UNCOMMON, mage.cards.m.MemorialToGlory.class));
         cards.add(new SetCardInfo("Mind Stone", 235, Rarity.UNCOMMON, mage.cards.m.MindStone.class));
+        cards.add(new SetCardInfo("Mister Gutsy", 136, Rarity.RARE, mage.cards.m.MisterGutsy.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mister Gutsy", 433, Rarity.RARE, mage.cards.m.MisterGutsy.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mister Gutsy", 664, Rarity.RARE, mage.cards.m.MisterGutsy.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mister Gutsy", 961, Rarity.RARE, mage.cards.m.MisterGutsy.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Morbid Opportunist", 186, Rarity.UNCOMMON, mage.cards.m.MorbidOpportunist.class));
         cards.add(new SetCardInfo("Mortuary Mire", 272, Rarity.COMMON, mage.cards.m.MortuaryMire.class));
         cards.add(new SetCardInfo("Mossfire Valley", 273, Rarity.RARE, mage.cards.m.MossfireValley.class));
