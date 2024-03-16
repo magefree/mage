@@ -157,6 +157,8 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Myriad Landscape", 274, Rarity.UNCOMMON, mage.cards.m.MyriadLandscape.class));
         cards.add(new SetCardInfo("Mystic Forge", 236, Rarity.RARE, mage.cards.m.MysticForge.class));
         cards.add(new SetCardInfo("Mystic Monastery", 275, Rarity.UNCOMMON, mage.cards.m.MysticMonastery.class));
+        cards.add(new SetCardInfo("Nerd Rage", 34, Rarity.UNCOMMON, mage.cards.n.NerdRage.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Nerd Rage", 562, Rarity.UNCOMMON, mage.cards.n.NerdRage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Nesting Grounds", 276, Rarity.RARE, mage.cards.n.NestingGrounds.class));
         cards.add(new SetCardInfo("Nomad Outpost", 277, Rarity.UNCOMMON, mage.cards.n.NomadOutpost.class));
         cards.add(new SetCardInfo("Nuka-Cola Vending Machine", 137, Rarity.UNCOMMON, mage.cards.n.NukaColaVendingMachine.class));
