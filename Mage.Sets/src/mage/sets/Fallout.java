@@ -142,6 +142,10 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Lightning Greaves", 233, Rarity.UNCOMMON, mage.cards.l.LightningGreaves.class));
         cards.add(new SetCardInfo("Lord of the Undead", 345, Rarity.RARE, mage.cards.l.LordOfTheUndead.class));
         cards.add(new SetCardInfo("Loyal Apprentice", 190, Rarity.UNCOMMON, mage.cards.l.LoyalApprentice.class));
+        cards.add(new SetCardInfo("MacCready, Lamplight Mayor", 108, Rarity.RARE, mage.cards.m.MacCreadyLamplightMayor.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("MacCready, Lamplight Mayor", 417, Rarity.RARE, mage.cards.m.MacCreadyLamplightMayor.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("MacCready, Lamplight Mayor", 636, Rarity.RARE, mage.cards.m.MacCreadyLamplightMayor.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("MacCready, Lamplight Mayor", 945, Rarity.RARE, mage.cards.m.MacCreadyLamplightMayor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mantle of the Ancients", 165, Rarity.RARE, mage.cards.m.MantleOfTheAncients.class));
         cards.add(new SetCardInfo("Marshal's Anthem", 166, Rarity.RARE, mage.cards.m.MarshalsAnthem.class));
         cards.add(new SetCardInfo("Martial Coup", 167, Rarity.RARE, mage.cards.m.MartialCoup.class));
