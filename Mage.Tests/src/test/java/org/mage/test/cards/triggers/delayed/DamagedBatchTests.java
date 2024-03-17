@@ -1,5 +1,5 @@
 
-package org.mage.test.game.events;
+package org.mage.test.cards.triggers.delayed;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
