@@ -37,8 +37,7 @@ public final class DonnaNoble extends CardImpl {
         this.addAbility(new SoulbondAbility());
 
         // Whenever Donna or a creature it's paired with is dealt damage, Donna deals that much damage to target opponent.
-        Ability ability = new DonnaNobleTriggeredAbility();
-        this.addAbility(ability);
+        this.addAbility(new DonnaNobleTriggeredAbility());
 
         // If Donna is paired with another creature and they are both dealt damage at the same time,
         // the second ability triggers twice. (2023-10-13)
