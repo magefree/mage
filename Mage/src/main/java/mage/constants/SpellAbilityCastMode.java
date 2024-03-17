@@ -18,7 +18,6 @@ public enum SpellAbilityCastMode {
     BESTOW("Bestow"),
     PROTOTYPE("Prototype"),
     MORPH("Morph", false, true),
-    MEGAMORPH("Megamorph", false, true),
     DISGUISE("Disguise", false, true),
     TRANSFORMED("Transformed", true),
     DISTURB("Disturb", true),
@@ -75,7 +74,6 @@ public enum SpellAbilityCastMode {
                 cardCopy = ((PrototypeAbility) spellAbility).prototypeCardSpell(cardCopy);
                 break;
             case MORPH:
-            case MEGAMORPH:
             case DISGUISE:
                 if (cardCopy instanceof Spell) {
                     //Spell doesn't support setName, so make a copy of the card (we're blowing it away anyway)

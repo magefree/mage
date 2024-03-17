@@ -428,7 +428,6 @@ public abstract class AbilityImpl implements Ability {
                 case MORE_THAN_MEETS_THE_EYE:
                 case BESTOW:
                 case MORPH:
-                case MEGAMORPH:
                 case DISGUISE:
                     // from Snapcaster Mage:
                     // If you cast a spell from a graveyard using its flashback ability, you can't pay other alternative costs
