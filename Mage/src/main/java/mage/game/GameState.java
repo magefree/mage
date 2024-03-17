@@ -812,15 +812,18 @@ public class GameState implements Serializable, Copyable<GameState> {
         // Combine multiple damage events in the single event (batch)
         // * per damage type (see GameEvent.DAMAGED_BATCH_FOR_PERMANENTS, GameEvent.DAMAGED_BATCH_FOR_PLAYERS)
         // * per player (see GameEvent.DAMAGED_BATCH_FOR_ONE_PLAYER)
+        // * per permanent (see GameEvent.DAMAGED_BATCH_FOR_ONE_PERMANENT)
         //
         // Warning, one event can be stored in multiple batches,
         // example: DAMAGED_BATCH_FOR_PLAYERS + DAMAGED_BATCH_FOR_ONE_PLAYER
 
         boolean isPlayerDamage = damagedEvent instanceof DamagedPlayerEvent;
+        boolean isPermanentDamage = damagedEvent instanceof DamagedPermanentEvent;
 
         // existing batch
         boolean isDamageBatchUsed = false;
         boolean isPlayerBatchUsed = false;
+        boolean isPermanentBatchUsed = false;
         for (GameEvent event : simultaneousEvents) {
 
             if (isPlayerDamage && event instanceof DamagedBatchForOnePlayerEvent) {
@@ -830,6 +833,14 @@ public class GameState implements Serializable, Copyable<GameState> {
                         && event.getPlayerId().equals(damagedEvent.getTargetId())) {
                     oldPlayerBatch.addEvent(damagedEvent);
                     isPlayerBatchUsed = true;
+                }
+            } else if (isPermanentDamage && event instanceof DamagedBatchForOnePermanentEvent) {
+                // per permanent
+                DamagedBatchForOnePermanentEvent oldPermanentBatch = (DamagedBatchForOnePermanentEvent) event;
+                if (oldPermanentBatch.getDamageClazz().isInstance(damagedEvent)
+                        && CardUtil.getEventTargets(event).contains(damagedEvent.getTargetId())) {
+                    oldPermanentBatch.addEvent(damagedEvent);
+                    isPermanentBatchUsed = true;
                 }
             } else if ((event instanceof DamagedBatchEvent)
                     && ((DamagedBatchEvent) event).getDamageClazz().isInstance(damagedEvent)) {
@@ -842,6 +853,7 @@ public class GameState implements Serializable, Copyable<GameState> {
                 ((DamagedBatchEvent) event).addEvent(damagedEvent);
                 isDamageBatchUsed = true;
             }
+
         }
 
         // new batch
@@ -849,8 +861,11 @@ public class GameState implements Serializable, Copyable<GameState> {
             addSimultaneousEvent(DamagedBatchEvent.makeEvent(damagedEvent), game);
         }
         if (!isPlayerBatchUsed && isPlayerDamage) {
-            DamagedBatchEvent event = new DamagedBatchForOnePlayerEvent(damagedEvent.getTargetId());
-            event.addEvent(damagedEvent);
+            DamagedBatchEvent event = new DamagedBatchForOnePlayerEvent(damagedEvent);
+            addSimultaneousEvent(event, game);
+        }
+        if (!isPermanentBatchUsed && isPermanentDamage) {
+            DamagedBatchEvent event = new DamagedBatchForOnePermanentEvent(damagedEvent);
             addSimultaneousEvent(event, game);
         }
     }
