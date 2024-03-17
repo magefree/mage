@@ -1,11 +1,10 @@
 package mage.game.events;
 
-import java.util.UUID;
-
 public class DamagedBatchForOnePermanentEvent extends DamagedBatchEvent {
 
-    public DamagedBatchForOnePermanentEvent(UUID targetId) {
+    public DamagedBatchForOnePermanentEvent(DamagedEvent firstEvent) {
         super(GameEvent.EventType.DAMAGED_BATCH_FOR_ONE_PERMANENT, DamagedPermanentEvent.class);
-        this.setTargetId(targetId);
+        addEvent(firstEvent);
+        setTargetId(firstEvent.getTargetId());
     }
 }

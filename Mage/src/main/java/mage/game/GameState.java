@@ -861,13 +861,11 @@ public class GameState implements Serializable, Copyable<GameState> {
             addSimultaneousEvent(DamagedBatchEvent.makeEvent(damagedEvent), game);
         }
         if (!isPlayerBatchUsed && isPlayerDamage) {
-            DamagedBatchEvent event = new DamagedBatchForOnePlayerEvent(damagedEvent.getTargetId());
-            event.addEvent(damagedEvent);
+            DamagedBatchEvent event = new DamagedBatchForOnePlayerEvent(damagedEvent);
             addSimultaneousEvent(event, game);
         }
         if (!isPermanentBatchUsed && isPermanentDamage) {
-            DamagedBatchEvent event = new DamagedBatchForOnePermanentEvent(damagedEvent.getTargetId());
-            event.addEvent(damagedEvent);
+            DamagedBatchEvent event = new DamagedBatchForOnePermanentEvent(damagedEvent);
             addSimultaneousEvent(event, game);
         }
     }
