@@ -17,7 +17,7 @@ public enum SpellAbilityCastMode {
     FLASHBACK("Flashback"),
     BESTOW("Bestow"),
     PROTOTYPE("Prototype"),
-    MORPH("Morph", false, true),
+    MORPH("Morph", false, true), // and megamorph
     DISGUISE("Disguise", false, true),
     TRANSFORMED("Transformed", true),
     DISTURB("Disturb", true),
