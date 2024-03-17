@@ -188,6 +188,10 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Rancor", 205, Rarity.UNCOMMON, mage.cards.r.Rancor.class));
         cards.add(new SetCardInfo("Ravages of War", 354, Rarity.MYTHIC, mage.cards.r.RavagesOfWar.class));
         cards.add(new SetCardInfo("Razortide Bridge", 281, Rarity.COMMON, mage.cards.r.RazortideBridge.class));
+        cards.add(new SetCardInfo("Red Death, Shipwrecker", 116, Rarity.RARE, mage.cards.r.RedDeathShipwrecker.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Red Death, Shipwrecker", 426, Rarity.RARE, mage.cards.r.RedDeathShipwrecker.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Red Death, Shipwrecker", 644, Rarity.RARE, mage.cards.r.RedDeathShipwrecker.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Red Death, Shipwrecker", 954, Rarity.RARE, mage.cards.r.RedDeathShipwrecker.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Roadside Reliquary", 282, Rarity.UNCOMMON, mage.cards.r.RoadsideReliquary.class));
         cards.add(new SetCardInfo("Rogue's Passage", 283, Rarity.UNCOMMON, mage.cards.r.RoguesPassage.class));
         cards.add(new SetCardInfo("Rootbound Crag", 284, Rarity.RARE, mage.cards.r.RootboundCrag.class));
