@@ -24,7 +24,6 @@ public enum TokenRepository {
     public static final String XMAGE_IMAGE_NAME_FACE_DOWN_MANUAL = "Face Down";
     public static final String XMAGE_IMAGE_NAME_FACE_DOWN_MANIFEST = "Manifest";
     public static final String XMAGE_IMAGE_NAME_FACE_DOWN_MORPH = "Morph";
-    public static final String XMAGE_IMAGE_NAME_FACE_DOWN_MEGAMORPH = "Megamorph";
     public static final String XMAGE_IMAGE_NAME_FACE_DOWN_DISGUISE = "Disguise";
     public static final String XMAGE_IMAGE_NAME_FACE_DOWN_FORETELL = "Foretell";
     public static final String XMAGE_IMAGE_NAME_COPY = "Copy";
@@ -277,17 +276,11 @@ public enum TokenRepository {
         res.add(createXmageToken(XMAGE_IMAGE_NAME_FACE_DOWN_MANIFEST, 3, "https://api.scryfall.com/cards/tfrf/4/en?format=image"));
         res.add(createXmageToken(XMAGE_IMAGE_NAME_FACE_DOWN_MANIFEST, 4, "https://api.scryfall.com/cards/tncc/3/en?format=image"));
 
-        // Morph
+        // Morph and Megamorph
         // https://scryfall.com/search?q=Morph+unique%3Aprints+otag%3Aassistant-cards&unique=cards&as=grid&order=name
         res.add(createXmageToken(XMAGE_IMAGE_NAME_FACE_DOWN_MORPH, 1, "https://api.scryfall.com/cards/tktk/11/en?format=image"));
         res.add(createXmageToken(XMAGE_IMAGE_NAME_FACE_DOWN_MORPH, 2, "https://api.scryfall.com/cards/ta25/15/en?format=image"));
         res.add(createXmageToken(XMAGE_IMAGE_NAME_FACE_DOWN_MORPH, 3, "https://api.scryfall.com/cards/tc19/27/en?format=image"));
-
-        // Megamorph
-        // warning, mtg don't have megamorph tokens yet so use morph instead (users will see the diff by card name and face up ability text)
-        res.add(createXmageToken(XMAGE_IMAGE_NAME_FACE_DOWN_MEGAMORPH, 1, "https://api.scryfall.com/cards/tktk/11/en?format=image"));
-        res.add(createXmageToken(XMAGE_IMAGE_NAME_FACE_DOWN_MEGAMORPH, 2, "https://api.scryfall.com/cards/ta25/15/en?format=image"));
-        res.add(createXmageToken(XMAGE_IMAGE_NAME_FACE_DOWN_MEGAMORPH, 3, "https://api.scryfall.com/cards/tc19/27/en?format=image"));
 
         // Disguise
         // support only 1 image: https://scryfall.com/card/tmkm/21/a-mysterious-creature

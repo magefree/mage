@@ -297,10 +297,8 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl {
         String tokenName;
         switch (faceDownType) {
             case MORPHED:
-                tokenName = TokenRepository.XMAGE_IMAGE_NAME_FACE_DOWN_MORPH;
-                break;
             case MEGAMORPHED:
-                tokenName = TokenRepository.XMAGE_IMAGE_NAME_FACE_DOWN_MEGAMORPH;
+                tokenName = TokenRepository.XMAGE_IMAGE_NAME_FACE_DOWN_MORPH;
                 break;
             case DISGUISED:
                 tokenName = TokenRepository.XMAGE_IMAGE_NAME_FACE_DOWN_DISGUISE;
