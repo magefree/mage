@@ -7,18 +7,16 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.common.continuous.LookAtTopCardOfLibraryAnyTimeEffect;
-import mage.abilities.hint.Hint;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.watchers.Watcher;
+import mage.watchers.common.OnceEachTurnCastWatcher;
 
-import java.util.*;
+import java.util.UUID;
 
 /**
  * @author Susucr
@@ -40,9 +38,9 @@ public final class JohannApprenticeSorcerer extends CardImpl {
         // Once each turn, you may cast an instant or sorcery spell from the top of your library.
         this.addAbility(
                 new SimpleStaticAbility(new JohannApprenticeSorcererPlayTopEffect())
-                        .setIdentifier(MageIdentifier.JohannApprenticeSorcererWatcher)
-                        .addHint(JohannApprenticeSorcererHint.instance),
-                new JohannApprenticeSorcererWatcher()
+                        .setIdentifier(MageIdentifier.OnceEachTurnCastWatcher)
+                        .addHint(OnceEachTurnCastWatcher.getHint()),
+                new OnceEachTurnCastWatcher()
         );
     }
 
@@ -53,31 +51,6 @@ public final class JohannApprenticeSorcerer extends CardImpl {
     @Override
     public JohannApprenticeSorcerer copy() {
         return new JohannApprenticeSorcerer(this);
-    }
-}
-
-enum JohannApprenticeSorcererHint implements Hint {
-    instance;
-
-    @Override
-    public String getText(Game game, Ability ability) {
-        JohannApprenticeSorcererWatcher watcher = game.getState().getWatcher(JohannApprenticeSorcererWatcher.class);
-        if (watcher != null) {
-            boolean used = watcher.isAbilityUsed(ability.getControllerId(), new MageObjectReference(ability.getSourceId(), game));
-            if (used) {
-                Player player = game.getPlayer(ability.getControllerId());
-                if (player != null) {
-                    return "A spell has been cast by " + player.getLogName() + " with {this} this turn.";
-                }
-            }
-        }
-
-        return "";
-    }
-
-    @Override
-    public JohannApprenticeSorcererHint copy() {
-        return this;
     }
 }
 
@@ -110,7 +83,7 @@ class JohannApprenticeSorcererPlayTopEffect extends AsThoughEffectImpl {
         }
 
         Player controller = game.getPlayer(source.getControllerId());
-        JohannApprenticeSorcererWatcher watcher = game.getState().getWatcher(JohannApprenticeSorcererWatcher.class);
+        OnceEachTurnCastWatcher watcher = game.getState().getWatcher(OnceEachTurnCastWatcher.class);
         Permanent sourceObject = game.getPermanent(source.getSourceId());
         if (controller == null || watcher == null || sourceObject == null) {
             return false;
@@ -130,36 +103,5 @@ class JohannApprenticeSorcererPlayTopEffect extends AsThoughEffectImpl {
 
         // Only works for instant & sorcery.
         return card.isInstantOrSorcery(game);
-    }
-}
-
-class JohannApprenticeSorcererWatcher extends Watcher {
-
-    // player -> set of all permanent's mor that already used their once per turn Approval.
-    private final Map<UUID, Set<MageObjectReference>> usedFrom = new HashMap<>();
-
-    public JohannApprenticeSorcererWatcher() {
-        super(WatcherScope.GAME);
-    }
-
-    @Override
-    public void watch(GameEvent event, Game game) {
-        UUID playerId = event.getPlayerId();
-        if (event.getType() == GameEvent.EventType.SPELL_CAST
-                && event.hasApprovingIdentifier(MageIdentifier.JohannApprenticeSorcererWatcher)
-                && playerId != null) {
-            usedFrom.computeIfAbsent(playerId, k -> new HashSet<>())
-                    .add(event.getAdditionalReference().getApprovingMageObjectReference());
-        }
-    }
-
-    @Override
-    public void reset() {
-        super.reset();
-        usedFrom.clear();
-    }
-
-    public boolean isAbilityUsed(UUID playerId, MageObjectReference mor) {
-        return usedFrom.getOrDefault(playerId, Collections.emptySet()).contains(mor);
     }
 }

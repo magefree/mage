@@ -1,10 +1,5 @@
 package mage.cards.c;
 
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
-import java.util.UUID;
-
 import mage.MageIdentifier;
 import mage.MageInt;
 import mage.MageObject;
@@ -16,19 +11,23 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.LookAtTopCardOfLibraryAnyTimeEffect;
-import mage.cards.Card;
-import mage.constants.*;
 import mage.abilities.keyword.FlyingAbility;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.game.ExileZone;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInGraveyard;
 import mage.util.CardUtil;
-import mage.watchers.Watcher;
+import mage.watchers.common.OnceEachTurnCastWatcher;
+
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -54,8 +53,9 @@ public final class CemeteryIlluminator extends CardImpl {
 
         // Once each turn, you may cast a spell from the top of your library if it shares a card type with a card exiled with Cemetery Illuminator.
         this.addAbility(new SimpleStaticAbility(new CemeteryIlluminatorPlayTopEffect())
-                .setIdentifier(MageIdentifier.CemeteryIlluminatorWatcher),
-                new CemeteryIlluminatorWatcher());
+                .setIdentifier(MageIdentifier.OnceEachTurnCastWatcher)
+                        .addHint(OnceEachTurnCastWatcher.getHint()),
+                new OnceEachTurnCastWatcher());
     }
 
     private CemeteryIlluminator(final CemeteryIlluminator card) {
@@ -132,15 +132,14 @@ class CemeteryIlluminatorPlayTopEffect extends AsThoughEffectImpl {
     @Override
     public boolean applies(UUID objectId, Ability affectedAbility, Ability source, Game game, UUID playerId) {
         Player controller = game.getPlayer(source.getControllerId());
-        CemeteryIlluminatorWatcher watcher = game.getState().getWatcher(CemeteryIlluminatorWatcher.class);
+        OnceEachTurnCastWatcher watcher = game.getState().getWatcher(OnceEachTurnCastWatcher.class);
         Permanent sourceObject = source.getSourcePermanentIfItStillExists(game);
         if (controller == null || watcher == null || sourceObject == null) {
             return false;
         }
-        // Same checks as in PlayTheTopCardEffect
-        // Once per turn clause checked by Watcher same as Lurrus of the Dream Den
-        if (!playerId.equals(controller.getId()) || watcher.isAbilityUsed(new MageObjectReference(sourceObject, game))) {
-            return false; // must be you
+        // Reference logic from PlayFromTopOfLibraryEffect and CastFromGraveyardOnceEachTurnAbility
+        if (!playerId.equals(controller.getId()) || watcher.isAbilityUsed(playerId, new MageObjectReference(sourceObject, game))) {
+            return false;
         }
         Card card = game.getCard(objectId);
         Card topCard = controller.getLibrary().getFromTop(game);
@@ -168,32 +167,5 @@ class CemeteryIlluminatorPlayTopEffect extends AsThoughEffectImpl {
                 .filter(Objects::nonNull)
                 .flatMap(c -> c.getCardType(game).stream())
                 .anyMatch(cardTypes::contains);
-    }
-}
-
-class CemeteryIlluminatorWatcher extends Watcher {
-
-    private final Set<MageObjectReference> usedFrom = new HashSet<>();
-
-    public CemeteryIlluminatorWatcher() {
-        super(WatcherScope.GAME);
-    }
-
-    @Override
-    public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.SPELL_CAST
-                && event.hasApprovingIdentifier(MageIdentifier.CemeteryIlluminatorWatcher)) {
-            usedFrom.add(event.getAdditionalReference().getApprovingMageObjectReference());
-        }
-    }
-
-    @Override
-    public void reset() {
-        super.reset();
-        usedFrom.clear();
-    }
-
-    public boolean isAbilityUsed(MageObjectReference mor) {
-        return usedFrom.contains(mor);
     }
 }
