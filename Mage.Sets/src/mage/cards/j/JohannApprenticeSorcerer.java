@@ -4,6 +4,7 @@ import mage.MageIdentifier;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.common.continuous.LookAtTopCardOfLibraryAnyTimeEffect;
@@ -77,31 +78,42 @@ class JohannApprenticeSorcererPlayTopEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        // Only applies for the controller of the ability.
-        if (!affectedControllerId.equals(source.getControllerId())) {
-            return false;
-        }
+        throw new IllegalArgumentException("Wrong code usage: can't call applies method on empty affectedAbility");
+    }
 
+    @Override
+    public boolean applies(UUID objectId, Ability affectedAbility, Ability source, Game game, UUID playerId) {
         Player controller = game.getPlayer(source.getControllerId());
         OnceEachTurnCastWatcher watcher = game.getState().getWatcher(OnceEachTurnCastWatcher.class);
-        Permanent sourceObject = game.getPermanent(source.getSourceId());
-        if (controller == null || watcher == null || sourceObject == null) {
+        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
+        if (controller == null || sourcePermanent == null || watcher == null) {
             return false;
         }
-
+        // Only applies for the controller of the ability.
+        if (!playerId.equals(source.getControllerId())) {
+            return false;
+        }
         // Has the ability already been used this turn by the player?
-        if (watcher.isAbilityUsed(controller.getId(), new MageObjectReference(sourceObject, game))) {
+        if (watcher.isAbilityUsed(controller.getId(), new MageObjectReference(sourcePermanent, game))) {
             return false;
         }
-
         Card card = game.getCard(objectId);
         Card topCard = controller.getLibrary().getFromTop(game);
         // Is the card attempted to be played the top card of the library?
         if (card == null || topCard == null || !topCard.getId().equals(card.getMainCard().getId())) {
             return false;
         }
-
-        // Only works for instant & sorcery.
-        return card.isInstantOrSorcery(game);
+        if (affectedAbility instanceof SpellAbility) {
+            SpellAbility spellAbility = (SpellAbility) affectedAbility;
+            if (spellAbility.getManaCosts().isEmpty()
+                    || !spellAbility.spellCanBeActivatedRegularlyNow(playerId, game)) {
+                return false;
+            }
+            Card cardToCheck = spellAbility.getCharacteristics(game);
+            // Only works for instant & sorcery.
+            return cardToCheck.isInstantOrSorcery(game);
+        }
+        return false;
     }
+
 }
