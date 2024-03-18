@@ -129,7 +129,7 @@ class DoUnlessAnyOpponentPaysEffect extends OneShotEffect {
             // do the effects if nobody paid
             if (doEffect) {
                 for (Effect effect : executingEffects) {
-                    effect.setTargetPointer(this.targetPointer);
+                    effect.setTargetPointer(this.getTargetPointer().copy());
                     if (effect instanceof OneShotEffect) {
                         result &= effect.apply(game, source);
                     } else {

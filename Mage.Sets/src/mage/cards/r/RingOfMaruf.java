@@ -51,7 +51,7 @@ class RingOfMarufEffect extends ReplacementEffectImpl {
 
     RingOfMarufEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit);
-        staticText = "The next time you would draw a card this turn, instead choose a card you own from outside the game and put it into your hand.";
+        staticText = "The next time you would draw a card this turn, instead put a card you own from outside the game into your hand";
     }
 
     private RingOfMarufEffect(final RingOfMarufEffect effect) {

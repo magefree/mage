@@ -84,7 +84,7 @@ class LimDulTheNecromancerEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Card card = game.getCard(targetPointer.getFirst(game, source));
+            Card card = game.getCard(getTargetPointer().getFirst(game, source));
             if (card != null) {
                 if (controller.moveCards(card, Zone.BATTLEFIELD, source, game)
                         && card.isCreature(game)) {

@@ -71,10 +71,10 @@ class BringTheEndingCounterEffect extends OneShotEffect {
         Player player = game.getPlayer(controllerId);
 
         if (player != null && player.getCounters().getCount(CounterType.POISON) >= 3) {
-            hardCounterEffect.setTargetPointer(this.getTargetPointer());
+            hardCounterEffect.setTargetPointer(this.getTargetPointer().copy());
             return hardCounterEffect.apply(game, source);
         } else {
-            softCounterEffect.setTargetPointer(this.getTargetPointer());
+            softCounterEffect.setTargetPointer(this.getTargetPointer().copy());
             return softCounterEffect.apply(game, source);
         }
 

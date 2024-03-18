@@ -1,6 +1,6 @@
 package mage.target.targetpointer;
 
-import mage.MageObject;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.constants.Zone;
@@ -15,154 +15,148 @@ import java.util.*;
  */
 public abstract class NthTargetPointer extends TargetPointerImpl {
 
-    private static final Map<UUID, Integer> emptyZoneChangeCounter = Collections.unmodifiableMap(new HashMap<>(0));
     private static final List<UUID> emptyTargets = Collections.unmodifiableList(new ArrayList<>(0));
 
-    private Map<UUID, Integer> zoneChangeCounter;
-    private final int targetNumber;
+    // TODO: rework to list of MageObjectReference instead zcc
+    private final Map<UUID, Integer> zoneChangeCounter = new HashMap<>();
+    private final int targetIndex; // zero-based target numbers (1 -> 0, 2 -> 1, 3 -> 2, etc)
 
     public NthTargetPointer(int targetNumber) {
         super();
-        this.targetNumber = targetNumber;
+        this.targetIndex = targetNumber - 1;
     }
 
     protected NthTargetPointer(final NthTargetPointer nthTargetPointer) {
         super(nthTargetPointer);
-        this.targetNumber = nthTargetPointer.targetNumber;
-
-        if (nthTargetPointer.zoneChangeCounter != null) {
-            this.zoneChangeCounter = new HashMap<>(nthTargetPointer.zoneChangeCounter.size());
-            for (Map.Entry<UUID, Integer> entry : nthTargetPointer.zoneChangeCounter.entrySet()) {
-                addToZoneChangeCounter(entry.getKey(), entry.getValue());
-            }
-        }
+        this.targetIndex = nthTargetPointer.targetIndex;
+        this.zoneChangeCounter.putAll(nthTargetPointer.zoneChangeCounter);
     }
 
     @Override
     public void init(Game game, Ability source) {
-        if (source.getTargets().size() < targetNumber) {
+        if (isInitialized()) {
+            return;
+        }
+        this.setInitialized();
+
+        if (source.getTargets().size() <= this.targetIndex) {
+            wrongTargetsUsage(source);
             return;
         }
 
-        for (UUID target : source.getTargets().get(targetIndex()).getTargets()) {
+        for (UUID target : source.getTargets().get(this.targetIndex).getTargets()) {
             Card card = game.getCard(target);
             if (card != null) {
-                addToZoneChangeCounter(target, card.getZoneChangeCounter(game));
+                this.zoneChangeCounter.put(target, card.getZoneChangeCounter(game));
             }
+        }
+    }
+
+    private void wrongTargetsUsage(Ability source) {
+        if (this.targetIndex > 0) {
+            // first target pointer is default, so must be ignored
+            throw new IllegalStateException("Wrong code usage: source ability miss targets setup for target pointer - "
+                    + this.getClass().getSimpleName() + " - " + source.getClass().getSimpleName() + " - " + source);
         }
     }
 
     @Override
     public List<UUID> getTargets(Game game, Ability source) {
-        if (source.getTargets().size() < targetNumber) {
+        // can be used before effect's init (example: checking spell targets on stack before resolve like HeroicAbility)
+
+        if (source.getTargets().size() <= this.targetIndex) {
+            wrongTargetsUsage(source);
             return emptyTargets;
         }
 
-        List<UUID> targetIds = source.getTargets().get(targetIndex()).getTargets();
-        List<UUID> finalTargetIds = new ArrayList<>(targetIds.size());
-
-        for (UUID targetId : targetIds) {
-            Card card = game.getCard(targetId);
-            if (card != null
-                    && getZoneChangeCounter().containsKey(targetId)
-            && card.getZoneChangeCounter(game) != getZoneChangeCounter().get(targetId)) {
-                // But no longer if new permanent is already on the battlefield
-                Permanent permanent = game.getPermanentOrLKIBattlefield(targetId);
-                if (permanent == null || permanent.getZoneChangeCounter(game) != getZoneChangeCounter().get(targetId)) {
-                    continue;
-                }
+        List<UUID> res = new ArrayList<>();
+        for (UUID targetId : source.getTargets().get(this.targetIndex).getTargets()) {
+            if (!isOutdatedTarget(game, targetId)) {
+                res.add(targetId);
             }
-
-            finalTargetIds.add(targetId);
         }
-        return finalTargetIds;
+        return res;
+    }
+
+    private boolean isOutdatedTarget(Game game, UUID targetId) {
+        int needZcc = this.zoneChangeCounter.getOrDefault(targetId, 0);
+        if (needZcc == 0) {
+            // any zcc (target not init yet here)
+            return false;
+        }
+
+        // card
+        Card card = game.getCard(targetId);
+        if (card != null && card.getZoneChangeCounter(game) == needZcc) {
+            return false;
+        }
+
+        // permanent
+        Permanent permanent = game.getPermanentOrLKIBattlefield(targetId);
+        if (permanent != null && permanent.getZoneChangeCounter(game) == needZcc) {
+            return false;
+        }
+
+        // TODO: if no bug reports with die triggers and new code then remove it, 2024-02-18
+        //  if you catch bugs then add code like if permanent.getZoneChangeCounter(game) == needZcc + 1 then return false
+        // old comments:
+        // Because if dies trigger has to trigger as permanent has already moved zone, we have to check if target
+        // was on the battlefield immed. before, but no longer if new permanent is already on the battlefield
+
+        // outdated
+        return true;
     }
 
     @Override
     public UUID getFirst(Game game, Ability source) {
-        if (source.getTargets().size() < targetNumber) {
+        if (source.getTargets().size() <= this.targetIndex) {
+            wrongTargetsUsage(source);
             return null;
         }
 
-        UUID targetId = source.getTargets().get(targetIndex()).getFirstTarget();
-        if (getZoneChangeCounter().containsKey(targetId)) {
-            Card card = game.getCard(targetId);
-            if (card != null && getZoneChangeCounter().containsKey(targetId)
-                    && card.getZoneChangeCounter(game) != getZoneChangeCounter().get(targetId)) {
-
-                // Because if dies trigger has to trigger as permanent has already moved zone, we have to check if target was on the battlefield immed. before
-                // but no longer if new permanent is already on the battlefield
-                Permanent permanent = game.getPermanentOrLKIBattlefield(targetId);
-                if (permanent == null || permanent.getZoneChangeCounter(game) != zoneChangeCounter.get(targetId)) {
-                    return null;
-                }
-            }
+        UUID targetId = source.getTargets().get(this.targetIndex).getFirstTarget();
+        if (isOutdatedTarget(game, targetId)) {
+            return null;
         }
+
         return targetId;
-
-    }
-
-    @Override
-    public FixedTarget getFixedTarget(Game game, Ability source) {
-        this.init(game, source);
-        UUID firstId = getFirst(game, source);
-        if (firstId != null) {
-            return new FixedTarget(firstId, game.getState().getZoneChangeCounter(firstId));
-        }
-
-        return null;
     }
 
     @Override
     public Permanent getFirstTargetPermanentOrLKI(Game game, Ability source) {
-        if (source.getTargets().size() < targetNumber) {
+        if (source.getTargets().size() < this.targetIndex) {
+            wrongTargetsUsage(source);
             return null;
         }
+        UUID targetId = source.getTargets().get(this.targetIndex).getFirstTarget();
 
-        Permanent permanent;
-        UUID targetId = source.getTargets().get(targetIndex()).getFirstTarget();
-
-        if (getZoneChangeCounter().containsKey(targetId)) {
-            permanent = game.getPermanent(targetId);
-            if (permanent != null && permanent.getZoneChangeCounter(game) == getZoneChangeCounter().get(targetId)) {
-                return permanent;
-            }
-            MageObject mageObject = game.getLastKnownInformation(targetId, Zone.BATTLEFIELD, getZoneChangeCounter().get(targetId));
-            if (mageObject instanceof Permanent) {
-                return (Permanent) mageObject;
-            }
-
+        if (this.zoneChangeCounter.containsKey(targetId)) {
+            // need static zcc
+            MageObjectReference needRef = new MageObjectReference(targetId, this.zoneChangeCounter.getOrDefault(targetId, 0), game);
+            return game.getPermanentOrLKIBattlefield(needRef);
         } else {
-            permanent = game.getPermanent(targetId);
+            // need any zcc
+            // TODO: must research, is it used at all?! Init code must fill all static zcc data before go here
+            Permanent permanent = game.getPermanent(targetId);
             if (permanent == null) {
                 permanent = (Permanent) game.getLastKnownInformation(targetId, Zone.BATTLEFIELD);
             }
+            return permanent;
         }
-        return permanent;
     }
 
     @Override
     public String describeTargets(Targets targets, String defaultDescription) {
-        return targets.size() < targetNumber ? defaultDescription : targets.get(targetIndex()).getDescription();
+        if (targets.size() <= this.targetIndex) {
+            // TODO: need research, is it used for non setup targets ?!
+            return defaultDescription;
+        } else {
+            return targets.get(this.targetIndex).getDescription();
+        }
     }
 
     @Override
     public boolean isPlural(Targets targets) {
-        return targets.size() > targetIndex() && targets.get(targetIndex()).getMaxNumberOfTargets() > 1;
-    }
-
-    private int targetIndex() {
-        return targetNumber - 1;
-    }
-
-    private Map<UUID, Integer> getZoneChangeCounter() {
-        return zoneChangeCounter != null ? zoneChangeCounter : emptyZoneChangeCounter;
-    }
-
-    private void addToZoneChangeCounter(UUID key, Integer value) {
-        if (zoneChangeCounter == null) {
-            zoneChangeCounter = new HashMap<>();
-        }
-        getZoneChangeCounter().put(key, value);
+        return targets.size() > this.targetIndex && targets.get(this.targetIndex).getMaxNumberOfTargets() > 1;
     }
 }

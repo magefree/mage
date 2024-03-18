@@ -4,7 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.Card;
 import mage.constants.*;
-import mage.filter.FilterCard;
+import mage.filter.common.FilterNonlandCard;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
@@ -17,9 +17,9 @@ import mage.util.CardUtil;
 public class GainAbilityControlledSpellsEffect extends ContinuousEffectImpl {
 
     private final Ability ability;
-    private final FilterCard filter;
+    private final FilterNonlandCard filter;
 
-    public GainAbilityControlledSpellsEffect(Ability ability, FilterCard filter) {
+    public GainAbilityControlledSpellsEffect(Ability ability, FilterNonlandCard filter) {
         super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         this.ability = ability;
         this.filter = filter;

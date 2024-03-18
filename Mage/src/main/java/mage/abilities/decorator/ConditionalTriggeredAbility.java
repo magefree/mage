@@ -1,5 +1,6 @@
 package mage.abilities.decorator;
 
+import mage.abilities.Ability;
 import mage.abilities.Modes;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
@@ -106,6 +107,12 @@ public class ConditionalTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean isOptional() {
         return ability.isOptional();
+    }
+
+    @Override
+    public Ability withFlavorWord(String flavorWord) {
+        ability.withFlavorWord(flavorWord);
+        return this;
     }
 
 }

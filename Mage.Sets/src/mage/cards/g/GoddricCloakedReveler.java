@@ -46,7 +46,7 @@ public final class GoddricCloakedReveler extends CardImpl {
         // Celebration -- As long as two or more nonland permanents entered the battlefield under your control this turn, Goddric, Cloaked Reveler is a Dragon with base power and toughness 4/4, flying, and "{R}: Dragons you control get +1/+0 until end of turn."
         Ability dragonFirebreath = new SimpleActivatedAbility(
                 new BoostAllEffect(1, 0, Duration.EndOfTurn, filter, false),
-                new ManaCostsImpl("{R}")
+                new ManaCostsImpl<>("{R}")
         );
 
         Ability ability = new SimpleStaticAbility(new ConditionalContinuousEffect(

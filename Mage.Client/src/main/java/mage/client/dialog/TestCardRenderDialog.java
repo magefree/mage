@@ -2,6 +2,7 @@ package mage.client.dialog;
 
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.continuous.BecomesFaceDownCreatureEffect;
 import mage.abilities.icon.*;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.*;
@@ -184,6 +185,18 @@ public class TestCardRenderDialog extends MageDialog {
         if (perm.isTransformable()) {
             perm.setTransformed(true);
         }
+
+        // workaround to apply face down image and other settings
+        if (perm.isFaceDown(game)) {
+            BecomesFaceDownCreatureEffect.makeFaceDownObject(
+                    game,
+                    null,
+                    perm,
+                    BecomesFaceDownCreatureEffect.findFaceDownType(game, perm),
+                    null
+            );
+        }
+
         PermanentView cardView = new PermanentView(perm, permCard, controllerId, game);
         cardView.setInViewerOnly(false); // must false for face down
         return cardView;
@@ -386,9 +399,9 @@ public class TestCardRenderDialog extends MageDialog {
 
         List<CardView> cardViews = new ArrayList<>();
 
-        /* test morphed
-        cardViews.add(createPermanentCard(game, playerYou.getId(), "RNA", "263", 0, 0, 0, false, null)); // mountain
-        cardViews.add(createPermanentCard(game, playerYou.getId(), "RNA", "185", 0, 0, 0, true, null)); // Judith, the Scourge Diva
+        //* test face down
+        cardViews.add(createPermanentCard(game, playerYou.getId(), "RNA", "263", 0, 0, 0, false, false, null)); // mountain
+        cardViews.add(createPermanentCard(game, playerYou.getId(), "RNA", "185", 0, 0, 0, true, false, null)); // Judith, the Scourge Diva
         cardViews.add(createHandCard(game, playerYou.getId(), "DIS", "153")); // Odds // Ends (split card)
         cardViews.add(createHandCard(game, playerYou.getId(), "ELD", "38")); // Animating Faerie (adventure card)
         cardViews.add(createFaceDownCard(game, playerOpponent.getId(), "ELD", "38", false, false, false)); // face down
@@ -408,9 +421,35 @@ public class TestCardRenderDialog extends MageDialog {
 
         /* test split, transform and mdf in hands
         cardViews.add(createHandCard(game, playerYou.getId(), "SOI", "97")); // Accursed Witch
-        cardViews.add(createHandCard(game, playerYou.getId(), "UMA", "225")); // Fire // Ice
-        cardViews.add(createHandCard(game, playerYou.getId(), "ELD", "14")); // Giant Killer
         cardViews.add(createHandCard(game, playerYou.getId(), "ZNR", "134")); // Akoum Warrior
+        cardViews.add(createHandCard(game, playerYou.getId(), "UMA", "225")); // Fire // Ice
+        cardViews.add(createHandCard(game, playerYou.getId(), "DGM", "123")); // Beck // Call
+        cardViews.add(createHandCard(game, playerYou.getId(), "AKH", "210")); // Dusk // Dawn
+        //*/
+
+        /* test adventure cards in hands
+        cardViews.add(createHandCard(game, playerYou.getId(), "ELD", "14")); // Giant Killer
+        cardViews.add(createHandCard(game, playerYou.getId(), "WOE", "222")); // Cruel Somnophage
+        cardViews.add(createHandCard(game, playerYou.getId(), "WOE", "227")); // Gingerbread Hunter
+        cardViews.add(createHandCard(game, playerYou.getId(), "WOE", "221")); // Callous Sell-Sword
+        cardViews.add(createHandCard(game, playerYou.getId(), "ELD", "149")); // Beanstalk Giant
+        cardViews.add(createHandCard(game, playerYou.getId(), "WOE", "220")); // Beluna Grandsquall
+        //*/
+
+        /* test saga and case cards in hands
+        cardViews.add(createHandCard(game, playerYou.getId(), "DOM", "90")); // The Eldest Reborn
+        cardViews.add(createHandCard(game, playerYou.getId(), "MH2", "259")); // Urza's Saga
+        cardViews.add(createHandCard(game, playerYou.getId(), "MKM", "113")); // Case of the Burning Masks
+        cardViews.add(createHandCard(game, playerYou.getId(), "MKM", "155")); // Case of the Locked Hothouse
+        //*/
+
+        /* test case, class and saga cards in hands
+        cardViews.add(createHandCard(game, playerYou.getId(), "MKM", "113")); // Case of the Burning Masks
+        cardViews.add(createHandCard(game, playerYou.getId(), "MKM", "155")); // Case of the Locked Hothouse
+        cardViews.add(createHandCard(game, playerYou.getId(), "AFR", "6")); // Cleric Class
+        cardViews.add(createHandCard(game, playerYou.getId(), "AFR", "230")); // Rogue Class
+        cardViews.add(createHandCard(game, playerYou.getId(), "DOM", "90")); // The Eldest Reborn
+        cardViews.add(createHandCard(game, playerYou.getId(), "MH2", "259")); // Urza's Saga
         //*/
 
         /* test meld cards in hands and battlefield
@@ -441,7 +480,7 @@ public class TestCardRenderDialog extends MageDialog {
         //cardViews.add(createPermanentCard(game, playerYou.getId(), "KHM", "50", 1, 1, 0, true, false, additionalIcons)); // Cosima, God of the Voyage
         //*/
 
-        //* test tokens
+        /* test tokens
         // normal
         cardViews.add(createToken(game, playerYou.getId(), new ZombieToken(), "10E", 0, false, false));
         cardViews.add(createToken(game, playerYou.getId(), new ZombieToken(), "XXX", 1, false, false));
@@ -478,7 +517,7 @@ public class TestCardRenderDialog extends MageDialog {
                     PermanentView oldPermanent = (PermanentView) main.getGameCard();
                     PermanentView newPermament = new PermanentView(
                             oldPermanent,
-                            game.getCard(oldPermanent.getOriginalId()),
+                            game.getCard(oldPermanent.getId()),
                             UUID.randomUUID(),
                             game
                     );
@@ -826,7 +865,7 @@ public class TestCardRenderDialog extends MageDialog {
     }//GEN-LAST:event_comboRenderModeItemStateChanged
 
     private void sliderSizeStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sliderSizeStateChanged
-        // from DragCardGrid         
+        // from DragCardGrid
         // Fraction in [-1, 1]
         float sliderFrac = ((float) (sliderSize.getValue() - 50)) / 50;
         // Convert to frac in [0.5, 2.0] exponentially

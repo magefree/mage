@@ -76,6 +76,7 @@ class HazduhrTheAbbotRedirectDamageEffect extends RedirectionEffect {
 
     @Override
     public void init(Ability source, Game game) {
+        super.init(source, game);
         amountToRedirect = source.getManaCostsToPay().getX();
     }
 

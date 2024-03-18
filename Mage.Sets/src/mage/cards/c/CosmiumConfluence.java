@@ -104,16 +104,16 @@ class CosmiumConfluenceEffect extends OneShotEffect {
         }
 
         controller.choose(outcome, target, source, game);
-        FixedTarget fixedTarget = new FixedTarget(target.getFirstTarget(), game);
+        FixedTarget blueprintTarget = new FixedTarget(target.getFirstTarget(), game);
         new AddCountersTargetEffect(CounterType.P1P1.createInstance(3))
-                .setTargetPointer(fixedTarget)
+                .setTargetPointer(blueprintTarget.copy())
                 .apply(game, source);
         ContinuousEffect effect = new BecomesCreatureTargetEffect(
                 new CreatureToken(0, 0, "0/0 Elemental creature with haste", SubType.ELEMENTAL)
                         .withAbility(HasteAbility.getInstance()),
                 false, true, Duration.Custom
         );
-        effect.setTargetPointer(fixedTarget);
+        effect.setTargetPointer(blueprintTarget.copy());
         game.addEffect(effect, source);
         return true;
     }

@@ -8,8 +8,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.FilterCard;
-import mage.filter.predicate.Predicates;
+import mage.filter.common.FilterNonlandCard;
 import mage.filter.predicate.mageobject.CommanderPredicate;
 
 import java.util.UUID;
@@ -19,11 +18,10 @@ import java.util.UUID;
  */
 public final class FlamekinHerald extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("Commander spells you cast");
+    private static final FilterNonlandCard filter = new FilterNonlandCard("Commander spells you cast");
 
     static {
         filter.add(CommanderPredicate.instance);
-        filter.add(Predicates.not(CardType.LAND.getPredicate()));
     }
 
     public FlamekinHerald(UUID ownerId, CardSetInfo setInfo) {

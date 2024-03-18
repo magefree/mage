@@ -3,8 +3,10 @@ package mage.abilities.keyword;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.hint.ValueHint;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -21,6 +23,7 @@ public class StormAbility extends TriggeredAbilityImpl {
 
     public StormAbility() {
         super(Zone.STACK, new StormEffect());
+        this.addHint(new ValueHint("Spells cast this turn", SpellsCastThisTurnValue.instance));
     }
 
     private StormAbility(final StormAbility ability) {
@@ -95,5 +98,25 @@ class StormEffect extends OneShotEffect {
     @Override
     public StormEffect copy() {
         return new StormEffect(this);
+    }
+}
+
+enum SpellsCastThisTurnValue implements DynamicValue {
+    instance;
+
+    @Override
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
+        CastSpellLastTurnWatcher watcher = game.getState().getWatcher(CastSpellLastTurnWatcher.class);
+        return watcher.getAmountOfSpellsCastOnCurrentTurn().values().stream().mapToInt(Integer::intValue).sum();
+    }
+
+    @Override
+    public SpellsCastThisTurnValue copy() {
+        return instance;
+    }
+
+    @Override
+    public String getMessage() {
+        return "";
     }
 }

@@ -15,7 +15,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 
@@ -26,7 +26,7 @@ import java.util.UUID;
  */
 public final class HamletVanguard extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledCreaturePermanent(SubType.HUMAN);
+    private static final FilterPermanent filter = new FilterControlledPermanent(SubType.HUMAN);
 
     static {
         filter.add(AnotherPredicate.instance);

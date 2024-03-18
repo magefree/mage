@@ -103,7 +103,7 @@ class ShelobDreadWeaverExileEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         Permanent permanent = source.getSourcePermanentIfItStillExists(game);
-        Card card = game.getCard(targetPointer.getFirst(game, source));
+        Card card = game.getCard(getTargetPointer().getFirst(game, source));
         if (player == null || permanent == null || card == null) {
             return false;
         }

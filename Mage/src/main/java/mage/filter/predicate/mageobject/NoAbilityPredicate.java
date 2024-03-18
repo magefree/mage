@@ -8,6 +8,7 @@ import mage.abilities.keyword.special.JohanVigilanceAbility;
 import mage.cards.Card;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
+import mage.util.CardUtil;
 
 import java.util.Objects;
 
@@ -43,11 +44,18 @@ public enum NoAbilityPredicate implements Predicate<MageObject> {
             // (2007-05-01)
 
             for (Ability ability : abilities) {
+                // ignore inner face down abilities like turn up and becomes creature
                 if (ability.getWorksFaceDown()) {
-                    // inner face down abilities like turn up and becomes creature
                     continue;
                 }
-                if (!Objects.equals(ability.getClass(), SpellAbility.class) && !ability.getClass().equals(JohanVigilanceAbility.class)) {
+
+                // ignore information abilities
+                if (CardUtil.isInformationAbility(ability)) {
+                    continue;
+                }
+
+                if (!Objects.equals(ability.getClass(), SpellAbility.class)
+                        && !ability.getClass().equals(JohanVigilanceAbility.class)) {
                     return false;
                 }
             }

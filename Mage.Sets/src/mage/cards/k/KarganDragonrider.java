@@ -13,7 +13,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 
 /**
  *
@@ -21,7 +21,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  */
 public final class KarganDragonrider extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent(SubType.DRAGON, "a Dragon");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.DRAGON, "a Dragon");
 
     public KarganDragonrider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");

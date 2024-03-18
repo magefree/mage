@@ -16,10 +16,10 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 
@@ -28,11 +28,7 @@ import java.util.UUID;
  */
 public final class WalkerOfSecretWays extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filterCreature = new FilterControlledCreaturePermanent("Ninja you control");
-
-    static {
-        filterCreature.add((SubType.NINJA.getPredicate()));
-    }
+    private static final FilterControlledPermanent filterCreature = new FilterControlledPermanent(SubType.NINJA, "Ninja you control");
 
     public WalkerOfSecretWays(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
@@ -50,7 +46,7 @@ public final class WalkerOfSecretWays extends CardImpl {
 
         // {1}{U}: Return target Ninja you control to its owner's hand. Activate this ability only during your turn.
         Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new ManaCostsImpl<>("{1}{U}"), MyTurnCondition.instance);
-        ability.addTarget(new TargetControlledCreaturePermanent(1, 1, filterCreature, false));
+        ability.addTarget(new TargetControlledPermanent(filterCreature));
         ability.addHint(MyTurnHint.instance);
         this.addAbility(ability);
 
@@ -80,7 +76,7 @@ class WalkerOfSecretWaysEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (player != null && controller != null) {
             controller.lookAtCards("Walker of Secret Ways", player.getHand(), game);
         }

@@ -150,7 +150,7 @@ class ModularDistributeCounterEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent sourcePermanent = (Permanent) getValue("permanentLeftBattlefield");
-        Permanent targetArtifact = game.getPermanent(targetPointer.getFirst(game, source));
+        Permanent targetArtifact = game.getPermanent(getTargetPointer().getFirst(game, source));
         Player player = game.getPlayer(source.getControllerId());
         if (sourcePermanent != null && targetArtifact != null && player != null) {
             int numberOfCounters = sourcePermanent.getCounters(game).getCount(CounterType.P1P1);

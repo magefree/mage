@@ -10,7 +10,7 @@ import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.filter.FilterCard;
+import mage.filter.common.FilterNonlandCard;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 
 import java.util.UUID;
@@ -20,7 +20,7 @@ import java.util.UUID;
  */
 public final class ImotiCelebrantOfBounty extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("spells you cast with mana value 6 or greater");
+    private static final FilterNonlandCard filter = new FilterNonlandCard("spells you cast with mana value 6 or greater");
 
     static {
         filter.add(new ManaValuePredicate(ComparisonType.MORE_THAN, 5));

@@ -83,7 +83,7 @@ enum capitaloffensecount implements DynamicValue {
             return 0;
         }
 
-        Card card = cardsInfo.get(0).getCard();
+        Card card = cardsInfo.get(0).createCard();
         if (card == null) {
             return 0;
         }

@@ -62,7 +62,7 @@ class HornOfPlentyEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player caster = game.getPlayer(targetPointer.getFirst(game, source));
+        Player caster = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (caster != null) {
             if (caster.chooseUse(Outcome.DrawCard, "Pay {1} to draw a card at the beginning of the next end step?", source, game)) {
                 Cost cost = new ManaCostsImpl<>("{1}");

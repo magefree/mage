@@ -49,7 +49,7 @@ public final class EdgewallInn extends CardImpl {
         // {3}, {T}, Sacrifice Edgewall Inn: Return target card that has an Adventure from your graveyard to your hand.
         Ability ability = new SimpleActivatedAbility(
                 new ReturnFromGraveyardToHandTargetEffect(),
-                new ManaCostsImpl("{3}")
+                new ManaCostsImpl<>("{3}")
         );
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());

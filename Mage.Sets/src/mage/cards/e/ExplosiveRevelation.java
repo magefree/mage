@@ -78,7 +78,7 @@ class ExplosiveRevelationEffect extends OneShotEffect {
                 // the nonland card
                 int damage = nonLandCard == null ? 0 : nonLandCard.getManaValue();
                 // assign damage to target
-                for (UUID targetId : targetPointer.getTargets(game, source)) {
+                for (UUID targetId : getTargetPointer().getTargets(game, source)) {
                     Permanent targetedCreature = game.getPermanent(targetId);
                     if (targetedCreature != null) {
                         targetedCreature.damage(damage, source.getSourceId(), source, game, false, true);

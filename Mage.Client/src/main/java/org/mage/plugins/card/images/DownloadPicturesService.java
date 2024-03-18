@@ -10,6 +10,8 @@ import mage.client.MageFrame;
 import mage.client.dialog.DownloadImagesDialog;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.util.CardLanguage;
+import mage.client.util.GUISizeHelper;
+import mage.client.util.ImageCaches;
 import mage.client.util.sets.ConstructedFormats;
 import mage.remote.Connection;
 import net.java.truevfs.access.TFile;
@@ -437,14 +439,19 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                         && !"0".equals(card.getCardNumber())
                         && !card.getSetCode().isEmpty()) {
                     String cardName = card.getName();
-                    CardDownloadData url = new CardDownloadData(cardName, card.getSetCode(), card.getCardNumber(), card.usesVariousArt(), 0, false, card.isDoubleFaced(), card.isNightCard());
+                    CardDownloadData url = new CardDownloadData(
+                            cardName,
+                            card.getSetCode(),
+                            card.getCardNumber(),
+                            card.usesVariousArt(),
+                            0);
+                    url.setSecondSide(card.isNightCard());
 
                     // variations must have diff file names with additional postfix
                     if (url.getUsesVariousArt()) {
                         url.setDownloadName(createDownloadName(card));
                     }
 
-                    url.setFlipCard(card.isFlipCard());
                     url.setSplitCard(card.isSplitCard());
 
                     // main side
@@ -467,7 +474,9 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                                 card.getSetCode(),
                                 secondSideCard.getCardNumber(),
                                 card.usesVariousArt(),
-                                0, false, card.isDoubleFaced(), true);
+                                0
+                        );
+                        url.setSecondSide(true);
                         allCardsUrls.add(url);
                     }
                     if (card.isFlipCard()) {
@@ -479,9 +488,10 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                                 card.getSetCode(),
                                 card.getCardNumber(),
                                 card.usesVariousArt(),
-                                0, false, card.isDoubleFaced(), card.isNightCard());
-                        cardDownloadData.setFlipCard(true);
+                                0
+                        );
                         cardDownloadData.setFlippedSide(true);
+                        cardDownloadData.setSecondSide(card.isNightCard());
                         allCardsUrls.add(cardDownloadData);
                     }
                     if (card.getMeldsToCardName() != null) {
@@ -500,7 +510,8 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                                 card.getSetCode(),
                                 meldsToCard.getCardNumber(),
                                 card.usesVariousArt(),
-                                0, false, false, false);
+                                0
+                        );
                         allCardsUrls.add(url);
                     }
                     if (card.isModalDoubleFacedCard()) {
@@ -512,7 +523,9 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                                 card.getSetCode(),
                                 card.getCardNumber(),
                                 card.usesVariousArt(),
-                                0, false, true, true);
+                                0
+                        );
+                        cardDownloadData.setSecondSide(true);
                         allCardsUrls.add(cardDownloadData);
                     }
                 } else if (card.getCardNumber().isEmpty() || "0".equals(card.getCardNumber())) {
@@ -531,10 +544,8 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                         token.getSetCode(),
                         "0",
                         false,
-                        token.getImageNumber(),
-                        true,
-                        token.getImageFileName()
-                );
+                        token.getImageNumber());
+                card.setToken(true);
                 allCardsUrls.add(card);
             });
         } catch (Exception e) {
@@ -675,8 +686,8 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
         reloadCardsToDownload(uiDialog.getSetsCombo().getSelectedItem().toString());
         enableDialogButtons();
 
-        // reset images cache
-        ImageCache.clearCache();
+        // reset GUI and cards to use new images
+        GUISizeHelper.refreshGUIAndCards();
     }
 
     static String convertStreamToString(InputStream is) {

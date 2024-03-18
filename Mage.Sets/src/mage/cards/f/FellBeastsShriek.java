@@ -12,7 +12,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.PermanentInListPredicate;
+import mage.filter.predicate.permanent.PermanentReferenceInCollectionPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -66,30 +66,26 @@ class FellBeastsShriekEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            List<Permanent> creaturesChosen = new ArrayList<>();
-
-            // For each opponent, get the creature to tap+goad
-            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-                if (controller.hasOpponent(playerId, game)) {
-                    Player opponent = game.getPlayer(playerId);
-                    if (opponent != null) {
-                        TargetControlledCreaturePermanent target = new TargetControlledCreaturePermanent();
-                        target.withNotTarget(true);
-                        if (opponent.choose(Outcome.Detriment, target, source, game)) {
-                            creaturesChosen.add(game.getPermanent(target.getTargets().get(0)));
-                        }
-                    }
+        if (controller == null) {
+            return false;
+        }
+        List<Permanent> creaturesChosen = new ArrayList<>();
+        // For each opponent, get the creature to tap+goad
+        for (UUID playerId : game.getOpponents(controller.getId())) {
+            Player opponent = game.getPlayer(playerId);
+            if (opponent != null) {
+                TargetControlledCreaturePermanent target = new TargetControlledCreaturePermanent();
+                target.withNotTarget(true);
+                if (opponent.choose(Outcome.Detriment, target, source, game)) {
+                    creaturesChosen.add(game.getPermanent(target.getTargets().get(0)));
                 }
             }
-
-            FilterPermanent filter = new FilterCreaturePermanent();
-            filter.add(new PermanentInListPredicate(creaturesChosen));
-            new TapAllEffect(filter).apply(game, source);
-            ContinuousEffect goadEffect = new GoadAllEffect(filter);
-            game.addEffect(goadEffect, source);
-            return true;
         }
-        return false;
+        FilterPermanent filter = new FilterCreaturePermanent();
+        filter.add(new PermanentReferenceInCollectionPredicate(creaturesChosen, game));
+        new TapAllEffect(filter).apply(game, source);
+        ContinuousEffect goadEffect = new GoadAllEffect(filter);
+        game.addEffect(goadEffect, source);
+        return true;
     }
 }

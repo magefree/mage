@@ -87,8 +87,8 @@ public class MageCardComparator implements CardViewComparator {
                 bCom = RateCard.rateCard(b, null);
                 break;
             case 10:
-                aCom = a.getColorIdentityStr();
-                bCom = b.getColorIdentityStr();
+                aCom = a.getOriginalColorIdentity();
+                bCom = b.getOriginalColorIdentity();
                 break;
             default:
                 break;

@@ -1,4 +1,3 @@
-
 package mage.cards.r;
 
 import java.util.UUID;
@@ -10,7 +9,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -27,7 +26,7 @@ public final class RoarOfTheKha extends CardImpl {
         this.getSpellAbility().addEffect(new BoostControlledEffect(1, 1, Duration.EndOfTurn));
         
         // or untap all creatures you control.
-        Mode mode = new Mode(new UntapAllControllerEffect(new FilterControlledCreaturePermanent(), rule));
+        Mode mode = new Mode(new UntapAllControllerEffect(StaticFilters.FILTER_CONTROLLED_CREATURES, rule));
         this.getSpellAbility().getModes().addMode(mode);
         
         // Entwine {1}{W}

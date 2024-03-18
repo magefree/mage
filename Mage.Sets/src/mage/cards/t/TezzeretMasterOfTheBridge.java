@@ -12,8 +12,8 @@ import mage.abilities.hint.common.ArtifactYouControlHint;
 import mage.abilities.keyword.AffinityForArtifactsAbility;
 import mage.cards.*;
 import mage.constants.*;
-import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
+import mage.filter.common.FilterNonlandCard;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.players.Player;
@@ -26,7 +26,7 @@ import java.util.UUID;
  */
 public final class TezzeretMasterOfTheBridge extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("creature and planeswalker spells you cast");
+    private static final FilterNonlandCard filter = new FilterNonlandCard("creature and planeswalker spells you cast");
 
     static {
         filter.add(Predicates.or(

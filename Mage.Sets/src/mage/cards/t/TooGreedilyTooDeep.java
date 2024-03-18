@@ -23,14 +23,12 @@ import java.util.UUID;
  */
 public final class TooGreedilyTooDeep extends CardImpl {
 
-    private static final FilterCard filter = new FilterCreatureCard("creature card from a graveyard");
-
     public TooGreedilyTooDeep(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{5}{B}{R}");
 
         // Put target creature card from a graveyard onto the battlefield under your control. That creature deals damage equal to its power to each other creature.
         this.getSpellAbility().addEffect(new TooGreedilyTooDeepEffect());
-        this.getSpellAbility().addTarget(new TargetCardInGraveyard(filter));
+        this.getSpellAbility().addTarget(new TargetCardInGraveyard(StaticFilters.FILTER_CARD_CREATURE_A_GRAVEYARD));
     }
 
     private TooGreedilyTooDeep(final TooGreedilyTooDeep card) {

@@ -100,7 +100,7 @@ class CurseOfTheWerefoxFightEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent triggeredCreature = game.getPermanent(this.targetPointer.getFirst(game, source));
+        Permanent triggeredCreature = game.getPermanent(this.getTargetPointer().getFirst(game, source));
         Permanent target = game.getPermanent(source.getFirstTarget());
         if (triggeredCreature != null
                 && target != null

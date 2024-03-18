@@ -81,10 +81,10 @@ public class ConditionalContinuousEffect extends ContinuousEffectImpl {
         } else {
             condition = baseCondition;
         }
-        effect.setTargetPointer(this.targetPointer);
+        effect.setTargetPointer(this.getTargetPointer().copy());
         effect.init(source, game);
         if (otherwiseEffect != null) {
-            otherwiseEffect.setTargetPointer(this.targetPointer);
+            otherwiseEffect.setTargetPointer(this.getTargetPointer().copy());
             otherwiseEffect.init(source, game);
         }
         initDone = true;
@@ -122,10 +122,10 @@ public class ConditionalContinuousEffect extends ContinuousEffectImpl {
         }
         boolean conditionState = condition != null && condition.apply(game, source);
         if (conditionState) {
-            effect.setTargetPointer(this.targetPointer);
+            effect.setTargetPointer(this.getTargetPointer().copy());
             return effect.apply(game, source);
         } else if (otherwiseEffect != null) {
-            otherwiseEffect.setTargetPointer(this.targetPointer);
+            otherwiseEffect.setTargetPointer(this.getTargetPointer().copy());
             return otherwiseEffect.apply(game, source);
         }
         switch (effect.getDuration()) {

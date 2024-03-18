@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -10,7 +9,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -28,7 +27,7 @@ public final class ShriekingDrake extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // When Shrieking Drake enters the battlefield, return a creature you control to its owner's hand.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(new FilterControlledCreaturePermanent())));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(StaticFilters.FILTER_CONTROLLED_CREATURE)));
     }
 
     private ShriekingDrake(final ShriekingDrake card) {

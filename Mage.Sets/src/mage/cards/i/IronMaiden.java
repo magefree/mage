@@ -50,7 +50,7 @@ class IronMaidenEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (player != null) {
             int amount = player.getHand().size() - 4;
             if (amount > 0) {

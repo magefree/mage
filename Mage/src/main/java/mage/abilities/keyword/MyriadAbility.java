@@ -89,7 +89,7 @@ class MyriadEffect extends OneShotEffect {
             }
             if (!tokens.isEmpty()) {
                 ExileTargetEffect exileEffect = new ExileTargetEffect();
-                exileEffect.setTargetPointer(new FixedTargets(tokens, game));
+                exileEffect.setTargetPointer(new FixedTargets(new ArrayList<>(tokens), game));
                 game.addDelayedTriggeredAbility(new AtTheEndOfCombatDelayedTriggeredAbility(exileEffect), source);
             }
             return true;

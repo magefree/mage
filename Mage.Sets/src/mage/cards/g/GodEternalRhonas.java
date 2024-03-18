@@ -7,18 +7,18 @@ import mage.abilities.common.GodEternalDiesTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
-import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
-import mage.filter.common.FilterControlledCreaturePermanent;
 
 /**
  * @author TheElk801
@@ -55,8 +55,6 @@ public final class GodEternalRhonas extends CardImpl {
 }
 
 class GodEternalRhonasEffect extends OneShotEffect {
-    
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
 
     GodEternalRhonasEffect() {
         super(Outcome.Benefit);
@@ -76,7 +74,7 @@ class GodEternalRhonasEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent godEternalRhonas = game.getPermanent(source.getSourceId());
-        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
+        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_CONTROLLED_CREATURES, source.getControllerId(), game)) {
             if (permanent == null
                     || godEternalRhonas != null
                     && permanent == godEternalRhonas) {

@@ -9,6 +9,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.permanent.token.SaprolingToken;
@@ -22,14 +23,12 @@ import java.util.UUID;
  */
 public final class MorbidBloom extends CardImpl {
 
-    private static final FilterCard filter = new FilterCreatureCard("creature card from a graveyard");
-
     public MorbidBloom(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{B}{G}");
 
         // Exile target creature card from a graveyard, then create X 1/1 green Saproling creature tokens, where X is the exiled card's toughness.
         this.getSpellAbility().addEffect(new MorbidBloomEffect());
-        this.getSpellAbility().addTarget(new TargetCardInGraveyard(filter));
+        this.getSpellAbility().addTarget(new TargetCardInGraveyard(StaticFilters.FILTER_CARD_CREATURE_A_GRAVEYARD));
     }
 
     private MorbidBloom(final MorbidBloom card) {

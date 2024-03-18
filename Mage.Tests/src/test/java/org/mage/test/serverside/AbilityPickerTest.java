@@ -86,7 +86,7 @@ public class AbilityPickerTest extends CardTestPlayerBase {
 
     private Abilities<Ability> getAbilitiesFromCard(String cardName) {
         CardInfo info = CardRepository.instance.findCard(cardName);
-        PermanentImpl permanent = new PermanentCard(info.getCard(), playerA.getId(), currentGame);
+        PermanentImpl permanent = new PermanentCard(info.createCard(), playerA.getId(), currentGame);
         return permanent.getAbilities(currentGame);
     }
 }

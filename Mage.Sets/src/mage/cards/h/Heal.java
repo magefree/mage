@@ -24,7 +24,8 @@ public final class Heal extends CardImpl {
         // Prevent the next 1 damage that would be dealt to any target this turn.
         // Draw a card at the beginning of the next turn's upkeep.
         this.getSpellAbility().addEffect(new PreventDamageToTargetEffect(Duration.EndOfTurn, 1));
-        this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1)), false));
+        this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(
+                new DrawCardSourceControllerEffect(1)), false).concatBy("<br>"));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
         
     }

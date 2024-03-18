@@ -85,7 +85,7 @@ class ApostlesBlessingEffect extends OneShotEffect {
                 protectionFilter.setMessage(choice.getChoice());
                 ProtectionAbility protectionAbility = new ProtectionAbility(protectionFilter);
                 ContinuousEffect effect = new GainAbilityTargetEffect(protectionAbility, Duration.EndOfTurn);
-                effect.setTargetPointer(getTargetPointer());
+                effect.setTargetPointer(this.getTargetPointer().copy());
                 game.addEffect(effect, source);
                 return true;
             }

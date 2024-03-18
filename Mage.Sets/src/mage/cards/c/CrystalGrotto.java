@@ -22,7 +22,7 @@ public final class CrystalGrotto extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
         // When Crystal Grotto enters the battlefield, scry 1.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new ScryEffect(1)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new ScryEffect(1, false)));
 
         // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());

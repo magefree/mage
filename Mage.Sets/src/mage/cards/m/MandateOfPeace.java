@@ -36,7 +36,7 @@ public final class MandateOfPeace extends CardImpl {
         this.getSpellAbility().addEffect(new MandateOfPeaceOpponentsCantCastSpellsEffect());
 
         // End the combat phase.
-        this.getSpellAbility().addEffect(new MandateOfPeaceEndCombatEffect());
+        this.getSpellAbility().addEffect(new MandateOfPeaceEndCombatEffect().concatBy("<br>"));
     }
 
     private MandateOfPeace(final MandateOfPeace card) {

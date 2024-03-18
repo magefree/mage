@@ -1,4 +1,3 @@
-
 package mage.cards.f;
 
 import java.util.UUID;
@@ -15,7 +14,7 @@ import mage.abilities.keyword.LifelinkAbility;
 import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.FilterCard;
+import mage.filter.common.FilterNonlandCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
@@ -28,7 +27,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public final class FiresongAndSunspeaker extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("red instant and sorcery spells you control");
+    private static final FilterNonlandCard filter = new FilterNonlandCard("red instant and sorcery spells you control");
 
     static {
         filter.add(new ColorPredicate(ObjectColor.RED));
@@ -99,6 +98,6 @@ class FiresongAndSunspeakerTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a white instant or sorcery spell causes you to gain life, Firesong and Sunspeaker deals 3 damage to target creature or player.";
+        return "Whenever a white instant or sorcery spell causes you to gain life, {this} deals 3 damage to target creature or player.";
     }
 }

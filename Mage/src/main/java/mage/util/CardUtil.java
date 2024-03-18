@@ -13,6 +13,7 @@ import mage.abilities.dynamicvalue.common.SavedDamageValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.asthought.CanPlayCardControllerEffect;
 import mage.abilities.effects.common.asthought.YouMaySpendManaAsAnyColorToCastTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
@@ -757,7 +758,9 @@ public final class CardUtil {
     }
 
     public static boolean haveEmptyName(String name) {
-        return name == null || name.isEmpty() || name.equals(EmptyNames.FACE_DOWN_CREATURE.toString()) || name.equals(EmptyNames.FACE_DOWN_TOKEN.toString());
+        return name == null
+                || name.isEmpty()
+                || EmptyNames.isEmptyName(name);
     }
 
     public static boolean haveEmptyName(MageObject object) {
@@ -986,6 +989,7 @@ public final class CardUtil {
                 || text.startsWith("an ")
                 || text.startsWith("another ")
                 || text.startsWith("any ")
+                || text.startsWith("{this} ")
                 || text.startsWith("one ")) {
             return text;
         }
@@ -1081,15 +1085,25 @@ public final class CardUtil {
     }
 
     /**
-     * Put card to battlefield without resolve (for cheats and tests only)
+     * Put card to battlefield without resolve/ETB (for cheats and tests only)
      *
-     * @param source  must be non null (if you need it empty then use fakeSourceAbility)
+     * @param source  must be non-null (if you need it empty then use fakeSourceAbility)
      * @param game
      * @param newCard
      * @param player
      */
-    public static void putCardOntoBattlefieldWithEffects(Ability source, Game game, Card newCard, Player player) {
+    public static void putCardOntoBattlefieldWithEffects(Ability source, Game game, Card newCard, Player player, boolean tapped) {
         // same logic as ZonesHandler->maybeRemoveFromSourceZone
+
+        // runtime check: must have source
+        if (source == null) {
+            throw new IllegalArgumentException("Wrong code usage: must use source ability or fakeSourceAbility");
+        }
+
+        // runtime check: must use only real cards
+        if (newCard instanceof PermanentCard) {
+            throw new IllegalArgumentException("Wrong code usage: must put to battlefield only real cards, not PermanentCard");
+        }
 
         // workaround to put real permanent from one side (example: you call mdf card by cheats)
         Card permCard = getDefaultCardSideForBattlefield(game, newCard);
@@ -1104,15 +1118,16 @@ public final class CardUtil {
             permanent = new PermanentCard(permCard, player.getId(), game);
         }
 
-        // put onto battlefield with possible counters
+        // put onto battlefield with possible counters without ETB
         game.getPermanentsEntering().put(permanent.getId(), permanent);
-        permCard.checkForCountersToAdd(permanent, source, game);
+        permCard.applyEnterWithCounters(permanent, source, game);
         permanent.entersBattlefield(source, game, Zone.OUTSIDE, false);
         game.addPermanent(permanent, game.getState().getNextPermanentOrderNumber());
         game.getPermanentsEntering().remove(permanent.getId());
 
-        // workaround for special tapped status from test framework's command (addCard)
-        if (permCard instanceof PermanentCard && ((PermanentCard) permCard).isTapped()) {
+        // tapped status
+        // warning, "enters the battlefield tapped" abilities will be executed before, so don't set to false here
+        if (tapped) {
             permanent.setTapped(true);
         }
 
@@ -2129,41 +2144,61 @@ public final class CardUtil {
 
 
     /**
-     * Copy image related data from one object to another (set code, card number, image number)
+     * Copy image related data from one object to another (set code, card number, image number, file name)
      * Use it in copy/transform effects
      */
     public static void copySetAndCardNumber(MageObject targetObject, MageObject copyFromObject) {
         String needSetCode;
         String needCardNumber;
+        String needImageFileName;
         int needImageNumber;
+        boolean needUsesVariousArt = false;
+        if (copyFromObject instanceof Card) {
+            needUsesVariousArt = ((Card) copyFromObject).getUsesVariousArt();
+        }
+
         needSetCode = copyFromObject.getExpansionSetCode();
         needCardNumber = copyFromObject.getCardNumber();
+        needImageFileName = copyFromObject.getImageFileName();
         needImageNumber = copyFromObject.getImageNumber();
 
         if (targetObject instanceof Permanent) {
-            copySetAndCardNumber((Permanent) targetObject, needSetCode, needCardNumber, needImageNumber);
+            copySetAndCardNumber((Permanent) targetObject, needSetCode, needCardNumber, needImageFileName, needImageNumber, needUsesVariousArt);
         } else if (targetObject instanceof Token) {
-            copySetAndCardNumber((Token) targetObject, needSetCode, needCardNumber, needImageNumber);
+            copySetAndCardNumber((Token) targetObject, needSetCode, needCardNumber, needImageFileName, needImageNumber);
+        } else if (targetObject instanceof Card) {
+            copySetAndCardNumber((Card) targetObject, needSetCode, needCardNumber, needImageFileName, needImageNumber, needUsesVariousArt);
         } else {
             throw new IllegalStateException("Unsupported target object class: " + targetObject.getClass().getSimpleName());
         }
     }
 
-    private static void copySetAndCardNumber(Permanent targetPermanent, String newSetCode, String newCardNumber, Integer newImageNumber) {
+    private static void copySetAndCardNumber(Permanent targetPermanent, String newSetCode, String newCardNumber, String newImageFileName, Integer newImageNumber, boolean usesVariousArt) {
         if (targetPermanent instanceof PermanentCard
                 || targetPermanent instanceof PermanentToken) {
             targetPermanent.setExpansionSetCode(newSetCode);
             targetPermanent.setCardNumber(newCardNumber);
+            targetPermanent.setImageFileName(newImageFileName);
             targetPermanent.setImageNumber(newImageNumber);
+            targetPermanent.setUsesVariousArt(usesVariousArt);
         } else {
             throw new IllegalArgumentException("Wrong code usage: un-supported target permanent type: " + targetPermanent.getClass().getSimpleName());
         }
     }
 
-    private static void copySetAndCardNumber(Token targetToken, String newSetCode, String newCardNumber, Integer newImageNumber) {
+    private static void copySetAndCardNumber(Token targetToken, String newSetCode, String newCardNumber, String newImageFileName, Integer newImageNumber) {
         targetToken.setExpansionSetCode(newSetCode);
         targetToken.setCardNumber(newCardNumber);
+        targetToken.setImageFileName(newImageFileName);
         targetToken.setImageNumber(newImageNumber);
+    }
+
+    private static void copySetAndCardNumber(Card targetCard, String newSetCode, String newCardNumber, String newImageFileName, Integer newImageNumber, boolean usesVariousArt) {
+        targetCard.setExpansionSetCode(newSetCode);
+        targetCard.setCardNumber(newCardNumber);
+        targetCard.setImageFileName(newImageFileName);
+        targetCard.setImageNumber(newImageNumber);
+        targetCard.setUsesVariousArt(usesVariousArt);
     }
 
     /**
@@ -2180,5 +2215,35 @@ public final class CardUtil {
             res.add(event.getTargetId());
         }
         return res;
+    }
+
+    /**
+     * Prepare card name for render in card panels, popups, etc. Can show face down status and real card name instead empty string
+     *
+     * @param imageFileName face down status or another inner image name like Morph, Copy, etc
+     */
+    public static String getCardNameForGUI(String name, String imageFileName) {
+        if (imageFileName.isEmpty()) {
+            // normal name
+            return name;
+        } else {
+            // face down or inner name
+            return imageFileName + (name.isEmpty() ? "" : ": " + name);
+        }
+    }
+
+    /**
+     * GUI related: show real name and day/night button for face down card
+     */
+    public static boolean canShowAsControlled(Card card, UUID createdForPlayer) {
+        return card.getControllerOrOwnerId().equals(createdForPlayer);
+    }
+
+    /**
+     * Ability used for information only, e.g. adds additional rule texts
+     */
+    public static boolean isInformationAbility(Ability ability) {
+        return !ability.getEffects().isEmpty()
+                && ability.getEffects().stream().allMatch(e -> e instanceof InfoEffect);
     }
 }

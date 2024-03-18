@@ -20,7 +20,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.RingBearerPredicate;
 import mage.game.permanent.token.WraithToken;
 
@@ -31,7 +31,7 @@ import java.util.UUID;
  */
 public final class LordOfTheNazgul extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filterWraith = new FilterControlledCreaturePermanent("Wraiths you control");
+    private static final FilterPermanent filterWraith = new FilterControlledPermanent("Wraiths you control");
     private static final FilterPermanent filterRingBearer = new FilterPermanent("Ring-bearers");
     private static final Condition condition = new PermanentsOnTheBattlefieldCondition(filterWraith, ComparisonType.MORE_THAN, 8);
     private static final Hint hint = new ValueHint(

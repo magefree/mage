@@ -60,7 +60,7 @@ class CloneLegionEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
+        Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (controller != null && targetPlayer != null) {
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, targetPlayer.getId(), game)) {
                 if (permanent != null) {

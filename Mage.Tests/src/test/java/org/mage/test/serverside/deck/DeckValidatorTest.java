@@ -7,7 +7,7 @@ import mage.deck.Modern;
 import mage.deck.Standard;
 import org.junit.Assert;
 import org.junit.Test;
-import org.mage.test.serverside.base.MageTestBase;
+import org.mage.test.serverside.base.MageTestPlayerBase;
 
 import java.util.ArrayList;
 
@@ -16,7 +16,7 @@ import static org.mage.test.serverside.deck.DeckValidationUtil.testDeckValid;
 /**
  * @author LevelX2
  */
-public class DeckValidatorTest extends MageTestBase {
+public class DeckValidatorTest extends MageTestPlayerBase {
 
     @Test
     public void testStandardDeckCardsAmountValid() {

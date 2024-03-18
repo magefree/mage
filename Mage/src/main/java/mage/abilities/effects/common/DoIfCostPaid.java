@@ -111,7 +111,7 @@ public class DoIfCostPaid extends OneShotEffect {
     private void applyEffects(Game game, Ability source, Effects effects) {
         if (!effects.isEmpty()) {
             for (Effect effect : effects) {
-                effect.setTargetPointer(this.targetPointer);
+                effect.setTargetPointer(this.getTargetPointer().copy());
                 if (effect instanceof OneShotEffect) {
                     effect.apply(game, source);
                 } else {

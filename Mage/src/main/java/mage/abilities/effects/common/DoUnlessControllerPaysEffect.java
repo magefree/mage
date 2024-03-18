@@ -75,7 +75,7 @@ public class DoUnlessControllerPaysEffect extends OneShotEffect {
             // do the effects if not paid
             if (doEffect) {
                 for (Effect effect : executingEffects) {
-                    effect.setTargetPointer(this.targetPointer);
+                    effect.setTargetPointer(this.getTargetPointer().copy());
                     if (effect instanceof OneShotEffect) {
                         result &= effect.apply(game, source);
                     } else {

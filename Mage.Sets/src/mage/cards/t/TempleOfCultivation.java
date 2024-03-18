@@ -37,7 +37,7 @@ public final class TempleOfCultivation extends CardImpl {
         Ability ability = new ActivateIfConditionActivatedAbility(
                 Zone.BATTLEFIELD,
                 new TransformSourceEffect(),
-                new ManaCostsImpl("{2}{G}"),
+                new ManaCostsImpl<>("{2}{G}"),
                 new TempleOfCultivationCondition(),
                 TimingRule.SORCERY
         );

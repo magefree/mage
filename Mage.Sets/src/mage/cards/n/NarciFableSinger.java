@@ -79,7 +79,7 @@ class NarciFableSingerEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        FixedTarget fixedTarget = targetPointer.getFixedTarget(game, source);
+        FixedTarget fixedTarget = getTargetPointer().getFirstAsFixedTarget(game, source);
         if (fixedTarget == null) {
             return false;
         }

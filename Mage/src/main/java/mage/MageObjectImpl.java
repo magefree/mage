@@ -36,6 +36,7 @@ public abstract class MageObjectImpl implements MageObject {
 
     private String expansionSetCode = "";
     private String cardNumber = "";
+    private String imageFileName = "";
     private int imageNumber = 0;
 
     protected List<SuperType> supertype = new ArrayList<>();
@@ -77,6 +78,7 @@ public abstract class MageObjectImpl implements MageObject {
         frameStyle = object.frameStyle;
         expansionSetCode = object.expansionSetCode;
         cardNumber = object.cardNumber;
+        imageFileName = object.imageFileName;
         imageNumber = object.imageNumber;
         power = object.power.copy();
         toughness = object.toughness.copy();
@@ -264,6 +266,16 @@ public abstract class MageObjectImpl implements MageObject {
     @Override
     public void setCardNumber(String cardNumber) {
         this.cardNumber = cardNumber;
+    }
+
+    @Override
+    public String getImageFileName() {
+        return imageFileName;
+    }
+
+    @Override
+    public void setImageFileName(String imageFileName) {
+        this.imageFileName = imageFileName;
     }
 
     @Override

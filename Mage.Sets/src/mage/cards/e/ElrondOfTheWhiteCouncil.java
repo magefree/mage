@@ -1,6 +1,7 @@
 package mage.cards.e;
 
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -23,6 +24,7 @@ import mage.target.targetpointer.FixedTargets;
 import mage.target.targetpointer.TargetPointer;
 import mage.util.CardUtil;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -127,16 +129,16 @@ class ElrondOfWhiteCouncilEffect extends OneShotEffect {
         }
 
         // You gain control of each creature chosen this way, and they gain "This creature can't attack its owner."
-        TargetPointer pointer = new FixedTargets(chosenCreatures.stream().collect(Collectors.toList()), game);
+        TargetPointer blueprintTarget = new FixedTargets(new ArrayList<>(chosenCreatures), game);
 
         game.addEffect(new GainControlTargetEffect(
                 Duration.WhileOnBattlefield
-        ).setTargetPointer(pointer), source);
+        ).setTargetPointer(blueprintTarget.copy()), source);
 
         game.addEffect(new GainAbilityTargetEffect(
                 new SimpleStaticAbility(new CantAttackItsOwnerEffect()),
                 Duration.WhileOnBattlefield
-        ).setTargetPointer(pointer), source);
+        ).setTargetPointer(blueprintTarget.copy()), source);
 
         // Need to process the control change.
         game.getState().processAction(game);

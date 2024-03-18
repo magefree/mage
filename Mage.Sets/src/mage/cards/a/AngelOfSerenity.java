@@ -55,7 +55,8 @@ public final class AngelOfSerenity extends CardImpl {
         this.addAbility(ability);
 
         // When Angel of Serenity leaves the battlefield, return the exiled cards to their owners' hands.
-        this.addAbility(new LeavesBattlefieldTriggeredAbility(new ReturnFromExileForSourceEffect(Zone.HAND).withText(true, true), false));
+        this.addAbility(new LeavesBattlefieldTriggeredAbility(new ReturnFromExileForSourceEffect(Zone.HAND)
+                .withText(true, true, false), false));
     }
 
     private AngelOfSerenity(final AngelOfSerenity card) {

@@ -65,7 +65,7 @@ class FoulRenewalEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Card card = game.getCard(targetPointer.getFirst(game, source));
+            Card card = game.getCard(getTargetPointer().getFirst(game, source));
             if (card != null) {
                 int xValue = card.getToughness().getValue() * -1;
                 controller.moveCards(card, Zone.HAND, source, game);

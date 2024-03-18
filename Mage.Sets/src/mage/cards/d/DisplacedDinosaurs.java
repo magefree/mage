@@ -78,15 +78,15 @@ class DisplacedDinosaursEntersBattlefieldEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent historic = ((EntersTheBattlefieldEvent) event).getTarget();
         if (historic != null) {
-            TargetPointer historicTarget = new FixedTarget(historic.getId(), historic.getZoneChangeCounter(game) + 1);
+            TargetPointer blueprintTarget = new FixedTarget(historic.getId(), historic.getZoneChangeCounter(game) + 1);
             ContinuousEffect creatureEffect = new AddCardTypeTargetEffect(Duration.Custom, CardType.CREATURE);
-            creatureEffect.setTargetPointer(historicTarget);
+            creatureEffect.setTargetPointer(blueprintTarget.copy());
             game.addEffect(creatureEffect, source);
             ContinuousEffect dinosaurEffect = new AddCardSubTypeTargetEffect(SubType.DINOSAUR, Duration.Custom);
-            dinosaurEffect.setTargetPointer(historicTarget);
+            dinosaurEffect.setTargetPointer(blueprintTarget.copy());
             game.addEffect(dinosaurEffect, source);
             ContinuousEffect sevenSevenEffect = new SetBasePowerToughnessTargetEffect(7, 7, Duration.Custom);
-            sevenSevenEffect.setTargetPointer(historicTarget);
+            sevenSevenEffect.setTargetPointer(blueprintTarget.copy());
             game.addEffect(sevenSevenEffect, source);
         }
         return false;

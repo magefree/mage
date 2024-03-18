@@ -76,7 +76,7 @@ class DiabolicServitudeReturnCreatureEffect extends OneShotEffect {
         Card cardInGraveyard = game.getCard(getTargetPointer().getFirst(game, source));
         if (cardInGraveyard != null) {
             Effect effect = new ReturnFromGraveyardToBattlefieldTargetEffect();
-            effect.setTargetPointer(getTargetPointer());
+            effect.setTargetPointer(this.getTargetPointer().copy());
             effect.apply(game, source);
 
             game.getState().setValue(source.getSourceId().toString() + "returnedCreature", new MageObjectReference(cardInGraveyard.getId(), game));

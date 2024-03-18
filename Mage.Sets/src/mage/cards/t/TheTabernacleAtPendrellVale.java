@@ -33,7 +33,7 @@ public final class TheTabernacleAtPendrellVale extends CardImpl {
                                 new InfoEffect(""), new DestroySourceEffect(), new GenericManaCost(1)
                         ).setText("destroy this creature unless you pay {1}"),
                         TargetController.YOU, false
-                ), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURES)
+                ), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_ALL_CREATURES)
         ));
     }
 

@@ -1,28 +1,20 @@
 package mage.cards.s;
 
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.ManaCosts;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.BecomesFaceDownCreatureEffect;
-import mage.cards.Card;
+import mage.abilities.effects.keyword.ManifestEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 
-import java.util.Objects;
-import java.util.Set;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
  * @author TheElk801
@@ -66,42 +58,15 @@ class ScrollOfFateEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null
-                || controller.getHand().isEmpty()) {
+        if (controller == null) {
             return false;
         }
+
         TargetCardInHand targetCard = new TargetCardInHand();
-        if (!controller.chooseTarget(Outcome.PutCardInPlay, controller.getHand(),
-                targetCard, source, game)) {
+        if (!controller.chooseTarget(Outcome.PutCardInPlay, controller.getHand(), targetCard, source, game)) {
             return false;
         }
-        Ability newSource = source.copy();
-        newSource.setWorksFaceDown(true);
-        Set<Card> cards = targetCard
-                .getTargets()
-                .stream()
-                .map(game::getCard)
-                .filter(Objects::nonNull)
-                .collect(Collectors.toSet());
-        cards.stream().forEach(card -> {
-            ManaCosts manaCosts = null;
-            if (card.isCreature(game)) {
-                manaCosts = card.getSpellAbility() != null ? card.getSpellAbility().getManaCosts() : null;
-                if (manaCosts == null) {
-                    manaCosts = new ManaCostsImpl<>("{0}");
-                }
-            }
-            MageObjectReference objectReference = new MageObjectReference(card.getId(),
-                    card.getZoneChangeCounter(game) + 1, game);
-            game.addEffect(new BecomesFaceDownCreatureEffect(manaCosts, objectReference,
-                    Duration.Custom, BecomesFaceDownCreatureEffect.FaceDownType.MANIFESTED), newSource);
-        });
-        controller.moveCards(cards, Zone.BATTLEFIELD, source, game, false, true, false, null);
-        cards.stream()
-                .map(Card::getId)
-                .map(game::getPermanent)
-                .filter(permanent -> permanent != null)
-                .forEach(permanent -> permanent.setManifested(true));
-        return true;
+
+        return ManifestEffect.doManifestCards(game, source, controller, new CardsImpl(targetCard.getTargets()).getCards(game));
     }
 }

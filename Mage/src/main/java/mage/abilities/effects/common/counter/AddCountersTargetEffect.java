@@ -57,7 +57,7 @@ public class AddCountersTargetEffect extends OneShotEffect {
         MageObject sourceObject = game.getObject(source);
         if (controller != null && sourceObject != null && counter != null) {
             int affectedTargets = 0;
-            for (UUID uuid : targetPointer.getTargets(game, source)) {
+            for (UUID uuid : getTargetPointer().getTargets(game, source)) {
                 Counter newCounter = counter.copy();
                 int calculated = amount.calculate(game, source, this); // 0 -- you must use default couner
                 if (calculated < 0) {
@@ -72,7 +72,7 @@ public class AddCountersTargetEffect extends OneShotEffect {
 
                 Permanent permanent = game.getPermanent(uuid);
                 Player player = game.getPlayer(uuid);
-                Card card = game.getCard(targetPointer.getFirst(game, source));
+                Card card = game.getCard(getTargetPointer().getFirst(game, source));
                 if (permanent != null) {
                     permanent.addCounters(newCounter, source.getControllerId(), source, game);
                     affectedTargets++;
@@ -97,7 +97,7 @@ public class AddCountersTargetEffect extends OneShotEffect {
 
     @Override
     public String getText(Mode mode) {
-        if (!staticText.isEmpty()) {
+        if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
         return CardUtil.getAddRemoveCountersText(amount, counter, getTargetPointer().describeTargets(mode.getTargets(), "that creature"), true);

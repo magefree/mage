@@ -80,27 +80,34 @@ public class ProtectionAbility extends StaticAbility {
     }
 
     public boolean canTarget(MageObject source, Game game) {
+        // TODO: need research, protection ability can be bugged with aura and aura permanents, spells (see below)
+
+        // permanent restriction
         if (filter instanceof FilterPermanent) {
             if (source instanceof Permanent) {
-                return !filter.match(source, game);
+                return !((FilterPermanent) filter).match((Permanent) source, game);
             }
+            // TODO: possible bugged, need token too?
             return true;
         }
 
+        // card restriction
         if (filter instanceof FilterCard) {
-            if (source instanceof Permanent) {
-                return !((FilterCard) filter).match((Card) source, ((Permanent) source).getControllerId(), this, game);
-            } else if (source instanceof Card) {
-                return !((FilterCard) filter).match((Card) source, ((Card) source).getOwnerId(), this, game);
+            if (source instanceof Card) {
+                return !((FilterCard) filter).match((Card) source, ((Card) source).getControllerOrOwnerId(), this, game);
             } else if (source instanceof Token) {
-                // Fake a permanent with the Token info.
-                PermanentToken token = new PermanentToken((Token) source, null, game);
-                return !((FilterCard) filter).match((Card) token, game);
+                // make fake permanent cause it checked before real permanent create
+                // warning, Token don't have controllerId info, so it can be a problem here
+                // TODO: wtf, possible bugged for filters that checking controller/player (if so then use with controllerId param)
+                PermanentToken fakePermanent = new PermanentToken((Token) source, UUID.randomUUID(), game);
+                return !((FilterCard) filter).match(fakePermanent, game);
             }
             return true;
         }
 
+        // spell restriction
         if (filter instanceof FilterSpell) {
+            // TODO: need research, possible bugged
             // Problem here is that for the check if a player can play a Spell, the source
             // object is still a card and not a spell yet.
             if (source instanceof Spell || game.inCheckPlayableState() && source.isInstantOrSorcery(game)) {
@@ -109,16 +116,20 @@ public class ProtectionAbility extends StaticAbility {
             return true;
         }
 
+        // unknown restriction
         if (filter instanceof FilterObject) {
-            return !filter.match(source, game);
+            return !((FilterObject) filter).match(source, game);
         }
 
+        // player restriction
         if (filter instanceof FilterPlayer) {
             Player player = null;
-            if (source instanceof Permanent) {
-                player = game.getPlayer(((Permanent) source).getControllerId());
-            } else if (source instanceof Card) {
-                player = game.getPlayer(((Card) source).getOwnerId());
+            if (source instanceof Card) {
+                player = game.getPlayer(((Card) source).getControllerOrOwnerId());
+            } else if (source instanceof Token) {
+                // TODO: fakePermanent will not work here like above, so try to rework whole logic
+                throw new IllegalArgumentException("Wrong code usage: token can't be checked in player restriction filter");
+
             }
             return !((FilterPlayer) filter).match(player, this.getControllerId(), this, game);
         }

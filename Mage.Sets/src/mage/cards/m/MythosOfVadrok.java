@@ -97,7 +97,7 @@ class MythosOfVadrokRestrictionEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return this.targetPointer.getTargets(game, source).contains(permanent.getId());
+        return this.getTargetPointer().getTargets(game, source).contains(permanent.getId());
     }
 
     @Override

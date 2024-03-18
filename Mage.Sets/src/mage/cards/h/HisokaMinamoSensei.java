@@ -62,7 +62,7 @@ class HisokaMinamoSenseiCounterEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
+        Spell spell = game.getStack().getSpell(getTargetPointer().getFirst(game, source));
         if (spell == null) {
             return false;
         }
@@ -70,7 +70,7 @@ class HisokaMinamoSenseiCounterEffect extends OneShotEffect {
                 .map(DiscardTargetCost::getCards)
                 .flatMap(Collection::stream)
                 .anyMatch(card -> card.getManaValue() == spell.getManaValue())) {
-            return game.getStack().counter(targetPointer.getFirst(game, source), source, game);
+            return game.getStack().counter(getTargetPointer().getFirst(game, source), source, game);
         }
         return false;
     }

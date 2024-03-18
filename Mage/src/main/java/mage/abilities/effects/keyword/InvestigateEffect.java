@@ -28,9 +28,21 @@ public class InvestigateEffect extends OneShotEffect {
     }
 
     public InvestigateEffect(DynamicValue amount) {
+        this(amount, true);
+    }
+
+    public InvestigateEffect(boolean showAbilityHint) {
+        this(1, showAbilityHint);
+    }
+
+    public InvestigateEffect(int amount, boolean showAbilityHint) {
+        this(StaticValue.get(amount), showAbilityHint);
+    }
+
+    public InvestigateEffect(DynamicValue amount, boolean showAbilityHint) {
         super(Outcome.Benefit);
         this.amount = amount;
-        this.staticText = makeText();
+        this.staticText = makeText(showAbilityHint);
     }
 
     protected InvestigateEffect(final InvestigateEffect effect) {
@@ -63,7 +75,7 @@ public class InvestigateEffect extends OneShotEffect {
         return new InvestigateEffect(this);
     }
 
-    private String makeText() {
+    private String makeText(boolean showAbilityHint) {
         String message;
         if (amount instanceof StaticValue) {
             int value = ((StaticValue) amount).getValue();
@@ -80,7 +92,8 @@ public class InvestigateEffect extends OneShotEffect {
         } else {
             message = " X times, where X is the " + amount.getMessage() + ". <i>(To investigate, c";
         }
-        return "investigate" + message + "reate a Clue token. " +
+        String finalMessage = "investigate" + message + "reate a Clue token. " +
                 "It's an artifact with \"{2}, Sacrifice this artifact: Draw a card.\")</i>";
+        return showAbilityHint ? finalMessage : CardUtil.stripReminderText(finalMessage);
     }
 }

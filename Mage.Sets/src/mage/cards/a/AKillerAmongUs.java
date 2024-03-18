@@ -208,7 +208,7 @@ class AKillerAmongUsEffect extends OneShotEffect {
 class AKillerAmongUsCost extends CostImpl {
 
     AKillerAmongUsCost() {
-        this.text = "Reveal the chosen creature type";
+        this.text = "Reveal the creature type you chose";
     }
 
     private AKillerAmongUsCost(final AKillerAmongUsCost cost) {

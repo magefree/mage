@@ -95,6 +95,11 @@ class ElsewhereFlaskContinuousEffect extends ContinuousEffectImpl {
     public void init(Ability source, Game game) {
         super.init(source, game);
         SubType choice = SubType.byDescription((String) game.getState().getValue(source.getSourceId().toString() + "_ElsewhereFlask"));
+        if (choice == null) {
+            discard();
+            return;
+        }
+
         switch (choice) {
             case FOREST:
                 dependencyTypes.add(DependencyType.BecomeForest);

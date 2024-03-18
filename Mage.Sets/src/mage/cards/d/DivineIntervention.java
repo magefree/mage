@@ -32,7 +32,7 @@ public final class DivineIntervention extends CardImpl {
 
         // Divine Intervention enters the battlefield with 2 intervention counters on it.
         Effect effect = new AddCountersSourceEffect(CounterType.INTERVENTION.createInstance(2));
-        this.addAbility(new EntersBattlefieldAbility(effect, "with 2 intervention counters"));
+        this.addAbility(new EntersBattlefieldAbility(effect, "with two intervention counters on it"));
 
         // At the beginning of your upkeep, remove an intervention counter from Divine Intervention.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new RemoveCounterSourceEffect(CounterType.INTERVENTION.createInstance()), TargetController.YOU, false));
@@ -50,69 +50,64 @@ public final class DivineIntervention extends CardImpl {
         return new DivineIntervention(this);
     }
 
-    class DivineInterventionAbility extends TriggeredAbilityImpl {
+}
 
-        public DivineInterventionAbility() {
-            super(Zone.BATTLEFIELD, new DivineAbilityEffect2(), false);
-        }
+class DivineInterventionAbility extends TriggeredAbilityImpl {
 
-        private DivineInterventionAbility(final DivineInterventionAbility ability) {
-            super(ability);
-        }
-
-        @Override
-        public DivineInterventionAbility copy() {
-            return new DivineInterventionAbility(this);
-        }
-
-        @Override
-        public boolean checkEventType(GameEvent event, Game game) {
-            return event.getType() == GameEvent.EventType.COUNTERS_REMOVED;
-        }
-
-        @Override
-        public boolean checkTrigger(GameEvent event, Game game) {
-            return (event.getData().equals(CounterType.INTERVENTION.getName())
-                    && event.getTargetId().equals(this.getSourceId())
-                    && event.getPlayerId() != null
-                    && event.getPlayerId() == this.getControllerId());  // the controller of this removed the counter 
-        }
-
-        @Override
-        public String getRule() {
-            return "When you remove the last intervention counter from {this}, the game is drawn.";
-        }
+    DivineInterventionAbility() {
+        super(Zone.BATTLEFIELD, new DivineInterventionDrawEffect(), false);
+        setTriggerPhrase("When you remove the last intervention counter from {this}, ");
     }
 
-    class DivineAbilityEffect2 extends OneShotEffect {
+    private DivineInterventionAbility(final DivineInterventionAbility ability) {
+        super(ability);
+    }
 
-        public DivineAbilityEffect2() {
-            super(Outcome.Neutral);
-            this.staticText = "you draw the game";
-        }
+    @Override
+    public DivineInterventionAbility copy() {
+        return new DivineInterventionAbility(this);
+    }
 
-        private DivineAbilityEffect2(final DivineAbilityEffect2 effect) {
-            super(effect);
-        }
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.COUNTERS_REMOVED;
+    }
 
-        @Override
-        public DivineAbilityEffect2 copy() {
-            return new DivineAbilityEffect2(this);
-        }
-
-        @Override
-        public boolean apply(Game game, Ability source) {
-            Player controller = game.getPlayer(source.getControllerId());
-            Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
-            if (controller != null 
-                    && sourcePermanent != null) {
-                if (game.getState().getZone(sourcePermanent.getId()) == Zone.BATTLEFIELD
-                        && sourcePermanent.getCounters(game).getCount(CounterType.INTERVENTION) == 0) {
-                    game.setDraw(controller.getId());
-                }
-                return true;
-            }
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (!event.getData().equals(CounterType.INTERVENTION.getName())
+                || !this.getSourceId().equals(event.getTargetId())
+                || !this.getControllerId().equals(event.getPlayerId())) {
             return false;
         }
+        Permanent permanent = game.getPermanent(this.getSourceId());
+        return permanent != null && permanent.getCounters(game).getCount(CounterType.INTERVENTION) == 0;
+    }
+}
+
+class DivineInterventionDrawEffect extends OneShotEffect {
+
+    DivineInterventionDrawEffect() {
+        super(Outcome.Neutral);
+        this.staticText = "the game is a draw";
+    }
+
+    private DivineInterventionDrawEffect(final DivineInterventionDrawEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public DivineInterventionDrawEffect copy() {
+        return new DivineInterventionDrawEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            game.setDraw(controller.getId());
+            return true;
+        }
+        return false;
     }
 }

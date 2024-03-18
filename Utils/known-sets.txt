@@ -10,12 +10,15 @@ Apocalypse|Apocalypse|
 Archenemy|Archenemy|
 Archenemy: Nicol Bolas|ArchenemyNicolBolas|
 Arabian Nights|ArabianNights|
+Arena Beginner Set|ArenaBeginnerSet|
 Arena League|ArenaLeague|
 Asia Pacific Land Program|AsiaPacificLandProgram|
+Assassin's Creed|AssassinsCreed|
 Avacyn Restored|AvacynRestored|
 Battlebond|Battlebond|
 Battle for Zendikar|BattleForZendikar|
 Betrayers of Kamigawa|BetrayersOfKamigawa|
+Bloomburrow|Bloomburrow|
 Born of the Gods|BornOfTheGods|
 Champions of Kamigawa|ChampionsOfKamigawa|
 Champs|Champs|
@@ -177,6 +180,7 @@ Mirrodin|Mirrodin|
 Mirrodin Besieged|MirrodinBesieged|
 Modern Horizons|ModernHorizons|
 Modern Horizons 2|ModernHorizons2|
+Modern Horizons 3|ModernHorizons3|
 Modern Masters|ModernMasters|
 Modern Masters 2015|ModernMasters2015|
 Modern Masters 2017|ModernMasters2017|
@@ -190,6 +194,8 @@ Ninth Edition|NinthEdition|
 Oath of the Gatewatch|OathOfTheGatewatch|
 Odyssey|Odyssey|
 Onslaught|Onslaught|
+Outlaws of Thunder Junction|OutlawsOfThunderJunction|
+The Big Score|TheBigScore|
 Phyrexia: All Will Be One|PhyrexiaAllWillBeOne|
 Phyrexia: All Will Be One Commander|PhyrexiaAllWillBeOneCommander|
 Planar Chaos|PlanarChaos|
@@ -215,6 +221,7 @@ Saviors of Kamigawa|SaviorsOfKamigawa|
 Scars of Mirrodin|ScarsOfMirrodin|
 Scourge|Scourge|
 Secret Lair Drop|SecretLairDrop|
+Secret Lair Showdown|SecretLairShowdown|
 Seventh Edition|SeventhEdition|
 Shadowmoor|Shadowmoor|
 Shadows over Innistrad|ShadowsOverInnistrad|
@@ -222,6 +229,7 @@ Shards of Alara|ShardsOfAlara|
 Special Guests|SpecialGuests|
 Starter 1999|Starter1999|
 Starter 2000|Starter2000|
+Starter Commander Decks|StarterCommanderDecks|
 Star Wars|StarWars|
 Streets of New Capenna|StreetsOfNewCapenna|
 New Capenna Commander|NewCapennaCommander|

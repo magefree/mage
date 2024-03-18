@@ -19,10 +19,9 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.permanent.token.ThopterColorlessToken;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *
@@ -30,7 +29,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public final class ThopterSquadron extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another Thopter");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("another Thopter");
 
     static {
         filter.add(AnotherPredicate.instance);

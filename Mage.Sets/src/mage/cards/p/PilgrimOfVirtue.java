@@ -82,6 +82,7 @@ class PilgrimOfVirtueEffect extends PreventionEffectImpl {
 
     @Override
     public void init(Ability source, Game game) {
+        super.init(source, game);
         this.target.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), source, game);
     }
 

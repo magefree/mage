@@ -71,9 +71,9 @@ class KheruSpellsnatcherEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         MageObject sourceObject = source.getSourceObject(game);
-        StackObject stackObject = game.getStack().getStackObject(targetPointer.getFirst(game, source));
+        StackObject stackObject = game.getStack().getStackObject(getTargetPointer().getFirst(game, source));
         if (stackObject != null && sourceObject != null
-                && game.getStack().counter(targetPointer.getFirst(game, source), source, game, PutCards.EXILED)) {
+                && game.getStack().counter(getTargetPointer().getFirst(game, source), source, game, PutCards.EXILED)) {
             if (!stackObject.isCopy()) {
                 MageObject card = game.getObject(stackObject.getSourceId());
                 if (card instanceof Card) {

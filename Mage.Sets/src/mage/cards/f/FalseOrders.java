@@ -14,7 +14,7 @@ import mage.constants.PhaseStep;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.predicate.permanent.DefendingPlayerControlsNoSourcePredicate;
-import mage.filter.predicate.permanent.PermanentInListPredicate;
+import mage.filter.predicate.permanent.PermanentReferenceInCollectionPredicate;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
 import mage.game.events.BlockerDeclaredEvent;
@@ -125,7 +125,7 @@ class FalseOrdersUnblockEffect extends OneShotEffect {
             return false;
         }
         FilterAttackingCreature filter = new FilterAttackingCreature("creature attacking " + targetsController.getLogName());
-        filter.add(new PermanentInListPredicate(list));
+        filter.add(new PermanentReferenceInCollectionPredicate(list, game));
         TargetPermanent target = new TargetPermanent(filter);
         target.withNotTarget(true);
         if (target.canChoose(controller.getId(), source, game)) {

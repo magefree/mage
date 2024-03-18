@@ -94,15 +94,29 @@ public abstract class ModalDoubleFacedCard extends CardImpl implements CardWithH
     @Override
     public void setCopy(boolean isCopy, MageObject copiedFrom) {
         super.setCopy(isCopy, copiedFrom);
-        leftHalfCard.setCopy(isCopy, copiedFrom);
+        leftHalfCard.setCopy(isCopy, copiedFrom); // TODO: must check copiedFrom and assign sides? (??? related to #8476 ???)
         rightHalfCard.setCopy(isCopy, copiedFrom);
+    }
+
+    private void setSideZones(Zone mainZone, Game game) {
+        switch (mainZone) {
+            case BATTLEFIELD:
+            case STACK:
+                throw new IllegalArgumentException("Wrong code usage: you must put to battlefield/stack only real side card (half), not main");
+            default:
+                // must keep both sides in same zone cause xmage need access to cost reduction, spell
+                // and other abilities before put it to stack (in playable calcs)
+                game.setZone(leftHalfCard.getId(), mainZone);
+                game.setZone(rightHalfCard.getId(), mainZone);
+                break;
+        }
+        checkGoodZones(game, this);
     }
 
     @Override
     public boolean moveToZone(Zone toZone, Ability source, Game game, boolean flag, List<UUID> appliedEffects) {
         if (super.moveToZone(toZone, source, game, flag, appliedEffects)) {
-            game.getState().setZone(leftHalfCard.getId(), toZone);
-            game.getState().setZone(rightHalfCard.getId(), toZone);
+            setSideZones(toZone, game);
             return true;
         }
         return false;
@@ -111,19 +125,67 @@ public abstract class ModalDoubleFacedCard extends CardImpl implements CardWithH
     @Override
     public void setZone(Zone zone, Game game) {
         super.setZone(zone, game);
-        game.setZone(leftHalfCard.getId(), zone);
-        game.setZone(rightHalfCard.getId(), zone);
+        setSideZones(zone, game);
     }
 
     @Override
     public boolean moveToExile(UUID exileId, String name, Ability source, Game game, List<UUID> appliedEffects) {
         if (super.moveToExile(exileId, name, source, game, appliedEffects)) {
-            Zone currentZone = game.getState().getZone(getId());
-            game.getState().setZone(leftHalfCard.getId(), currentZone);
-            game.getState().setZone(rightHalfCard.getId(), currentZone);
+            setSideZones(Zone.EXILED, game);
             return true;
         }
         return false;
+    }
+
+    /**
+     * Runtime check for good zones and other MDF data
+     */
+    public static void checkGoodZones(Game game, ModalDoubleFacedCard card) {
+        Card leftPart = card.getLeftHalfCard();
+        Card rightPart = card.getRightHalfCard();
+
+        Zone zoneMain = game.getState().getZone(card.getId());
+        Zone zoneLeft = game.getState().getZone(leftPart.getId());
+        Zone zoneRight = game.getState().getZone(rightPart.getId());
+
+        // runtime check:
+        // * in battlefield and stack - card + one of the sides (another side in outside zone)
+        // * in other zones - card + both sides (need both sides due cost reductions, spell and other access before put to stack)
+        //
+        // 712.8a While a double-faced card is outside the game or in a zone other than the battlefield or stack,
+        // it has only the characteristics of its front face.
+        //
+        // 712.8f While a modal double-faced spell is on the stack or a modal double-faced permanent is on the battlefield,
+        // it has only the characteristics of the face that’s up.
+        Zone needZoneLeft;
+        Zone needZoneRight;
+        switch (zoneMain) {
+            case BATTLEFIELD:
+            case STACK:
+                if (zoneMain == zoneLeft) {
+                    needZoneLeft = zoneMain;
+                    needZoneRight = Zone.OUTSIDE;
+                } else if (zoneMain == zoneRight) {
+                    needZoneLeft = Zone.OUTSIDE;
+                    needZoneRight = zoneMain;
+                } else {
+                    // impossible
+                    needZoneLeft = zoneMain;
+                    needZoneRight = Zone.OUTSIDE;
+                }
+                break;
+            default:
+                needZoneLeft = zoneMain;
+                needZoneRight = zoneMain;
+                break;
+        }
+
+        if (zoneLeft != needZoneLeft || zoneRight != needZoneRight) {
+            throw new IllegalStateException("Wrong code usage: MDF card uses wrong zones - " + card
+                    + "\r\n" + String.format("* main zone: %s", zoneMain)
+                    + "\r\n" + String.format("* left side: need %s, actual %s", needZoneLeft, zoneLeft)
+                    + "\r\n" + String.format("* right side: need %s, actual %s", needZoneRight, zoneRight));
+        }
     }
 
     @Override

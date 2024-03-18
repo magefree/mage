@@ -1,4 +1,3 @@
-
 package mage.cards.f;
 
 import java.util.UUID;
@@ -10,13 +9,13 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.counters.CounterType;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -26,7 +25,7 @@ import mage.target.common.TargetCreaturePermanent;
 public final class FulfillContract extends CardImpl {
 
     private static final FilterCreaturePermanent filterBountyCreature = new FilterCreaturePermanent("creature with a bounty counter on it");
-    private static final FilterControlledCreaturePermanent filterRogueOrHunter = new FilterControlledCreaturePermanent("Rogue or Hunter you control");
+    private static final FilterControlledPermanent filterRogueOrHunter = new FilterControlledPermanent("Rogue or Hunter you control");
 
     static {
         filterBountyCreature.add(CounterType.BOUNTY.getPredicate());
@@ -39,7 +38,7 @@ public final class FulfillContract extends CardImpl {
         // Destroy target creature with a bounty counter on it. If that creature is destroyed this way, you may put a +1/+1 counter on target Rogue or Hunter you control.
         this.getSpellAbility().addEffect(new FulfillContractEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filterBountyCreature));
-        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(filterRogueOrHunter));
+        this.getSpellAbility().addTarget(new TargetControlledPermanent(filterRogueOrHunter));
 
     }
 

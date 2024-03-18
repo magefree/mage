@@ -103,7 +103,7 @@ class EssenceSliverEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controllerOfSliver = game.getPlayer(targetPointer.getFirst(game, source));
+        Player controllerOfSliver = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (controllerOfSliver != null) {
             int amount = (Integer) getValue("damage");
             if (amount > 0) {

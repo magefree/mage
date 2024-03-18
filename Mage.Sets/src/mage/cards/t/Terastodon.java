@@ -77,7 +77,7 @@ class TerastodonEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Map<UUID, Integer> destroyedPermanents = new HashMap<>();
-        for (UUID targetID : this.targetPointer.getTargets(game, source)) {
+        for (UUID targetID : this.getTargetPointer().getTargets(game, source)) {
             Permanent permanent = game.getPermanent(targetID);
             if (permanent != null) {
                 if (permanent.destroy(source, game, false)) {

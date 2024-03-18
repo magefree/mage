@@ -60,7 +60,7 @@ public class CantBlockAttachedEffect extends RestrictionEffect {
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
         if (affectedObjectsSet) {
-            return targetPointer.getFirst(game, source).equals(permanent.getId());
+            return getTargetPointer().getFirst(game, source).equals(permanent.getId());
         }
         return permanent.getAttachments().contains(source.getSourceId());
     }

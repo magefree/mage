@@ -77,7 +77,7 @@ class SereneMasterEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent sourceCreature = game.getPermanent(source.getSourceId());
-        Permanent attackingCreature = game.getPermanent(targetPointer.getFirst(game, source));
+        Permanent attackingCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (sourceCreature != null && attackingCreature != null) {
             StaticValue newSourcePower = StaticValue.get(attackingCreature.getPower().getValue());
             StaticValue newAttackerPower = StaticValue.get(sourceCreature.getPower().getValue());

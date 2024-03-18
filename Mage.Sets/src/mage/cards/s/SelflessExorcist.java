@@ -13,6 +13,7 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -26,8 +27,6 @@ import java.util.UUID;
  */
 public final class SelflessExorcist extends CardImpl {
 
-    private static final FilterCard filter = new FilterCreatureCard("creature card from a graveyard");
-
     public SelflessExorcist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
 
@@ -38,7 +37,7 @@ public final class SelflessExorcist extends CardImpl {
 
         // {tap}: Exile target creature card from a graveyard. That card deals damage equal to its power to Selfless Exorcist.
         Ability ability = new SimpleActivatedAbility(new SelflessExorcistEffect(), new TapSourceCost());
-        ability.addTarget(new TargetCardInGraveyard(filter));
+        ability.addTarget(new TargetCardInGraveyard(StaticFilters.FILTER_CARD_CREATURE_A_GRAVEYARD));
         this.addAbility(ability);
     }
 

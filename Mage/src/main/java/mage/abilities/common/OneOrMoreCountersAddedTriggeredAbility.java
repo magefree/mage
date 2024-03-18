@@ -25,7 +25,7 @@ public class OneOrMoreCountersAddedTriggeredAbility extends TriggeredAbilityImpl
         setTriggerPhrase("Whenever one or more " + counterType.getName() + " counters are put on {this}, ");
     }
 
-    private OneOrMoreCountersAddedTriggeredAbility(final OneOrMoreCountersAddedTriggeredAbility ability) {
+    protected OneOrMoreCountersAddedTriggeredAbility(final OneOrMoreCountersAddedTriggeredAbility ability) {
         super(ability);
         this.counterType = ability.counterType;
     }

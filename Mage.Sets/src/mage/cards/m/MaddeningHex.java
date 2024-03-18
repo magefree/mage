@@ -127,7 +127,7 @@ class MaddeningHexEffect extends OneShotEffect {
         if (permanent == null) {
             return true;
         }
-        Set<UUID> opponents = game.getOpponents(source.getControllerId());
+        Set<UUID> opponents = game.getOpponents(source.getControllerId(), true);
 
         if (player != null) {
             opponents.remove(player.getId());

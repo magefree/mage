@@ -58,7 +58,7 @@ class FrightfulDelusionEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         StackObject spell = game.getStack().getStackObject(
-                targetPointer.getFirst(game, source));
+                getTargetPointer().getFirst(game, source));
         Cost cost = ManaUtil.createManaCost(1, false);
         if (spell != null) {
             Player player = game.getPlayer(spell.getControllerId());

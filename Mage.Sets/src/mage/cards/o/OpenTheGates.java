@@ -17,7 +17,7 @@ import java.util.UUID;
  */
 public final class OpenTheGates extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("a basic land card or a Gate card");
+    private static final FilterCard filter = new FilterCard("a basic land card or Gate card");
 
     static {
         filter.add(Predicates.or(

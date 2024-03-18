@@ -88,7 +88,7 @@ class StonewiseFortifierPreventAllDamageToEffect extends PreventionEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (super.applies(event, source, game) && event.getTargetId().equals(source.getSourceId())) {
-            return event.getSourceId().equals(targetPointer.getFirst(game, source));
+            return event.getSourceId().equals(getTargetPointer().getFirst(game, source));
         }
         return false;
     }

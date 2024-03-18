@@ -8,7 +8,7 @@ import mage.abilities.effects.common.UntapAllControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -23,7 +23,7 @@ public final class ToArms extends CardImpl {
 
 
         // Untap all creatures you control.
-        Effect effect = new UntapAllControllerEffect(new FilterControlledCreaturePermanent(), rule);
+        Effect effect = new UntapAllControllerEffect(StaticFilters.FILTER_CONTROLLED_CREATURES, rule);
         this.getSpellAbility().addEffect(effect);
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));

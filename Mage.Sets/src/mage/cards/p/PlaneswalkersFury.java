@@ -51,7 +51,7 @@ class PlaneswalkersFuryEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player opponent = game.getPlayer(targetPointer.getFirst(game, source));
+        Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (opponent != null && !opponent.getHand().isEmpty()) {
             Cards revealed = new CardsImpl();
             Card card = opponent.getHand().getRandom(game);

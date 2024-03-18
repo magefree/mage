@@ -95,7 +95,7 @@ class XenicPoltergeistEffect extends ContinuousEffectImpl {
         switch (layer) {
             case TypeChangingEffects_4:
                 if (sublayer == SubLayer.NA) {
-                    UUID permanentId = targetPointer.getFirst(game, source);
+                    UUID permanentId = getTargetPointer().getFirst(game, source);
                     Permanent permanent = game.getPermanentOrLKIBattlefield(permanentId);
                     if (permanent != null) {
                         if (!permanent.isArtifact(game)) {
@@ -110,7 +110,7 @@ class XenicPoltergeistEffect extends ContinuousEffectImpl {
 
             case PTChangingEffects_7:
                 if (sublayer == SubLayer.SetPT_7b) {
-                    UUID permanentId = targetPointer.getFirst(game, source);
+                    UUID permanentId = getTargetPointer().getFirst(game, source);
                     Permanent permanent = game.getPermanentOrLKIBattlefield(permanentId);
                     if (permanent != null) {
                         int manaCost = permanent.getManaValue();

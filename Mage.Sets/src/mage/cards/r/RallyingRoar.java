@@ -1,4 +1,3 @@
-
 package mage.cards.r;
 
 import java.util.UUID;
@@ -8,7 +7,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -21,7 +20,7 @@ public final class RallyingRoar extends CardImpl {
 
         // Creatures you control get +1/+1 until end of turn.  Untap them.
         this.getSpellAbility().addEffect(new BoostControlledEffect(1, 1, Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new UntapAllControllerEffect(new FilterControlledCreaturePermanent(), "Untap them."));
+        this.getSpellAbility().addEffect(new UntapAllControllerEffect(StaticFilters.FILTER_CONTROLLED_CREATURES, "Untap them."));
     }
 
     private RallyingRoar(final RallyingRoar card) {

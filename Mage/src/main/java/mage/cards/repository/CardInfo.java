@@ -238,11 +238,17 @@ public class CardInfo {
         this.isExtraDeckCard = card.isExtraDeckCard();
     }
 
-    public Card getCard() {
+    /**
+     * Create normal card (with full abilities)
+     */
+    public Card createCard() {
         return CardImpl.createCard(className, new CardSetInfo(name, setCode, cardNumber, rarity, new CardGraphicInfo(FrameStyle.valueOf(frameStyle), variousArt)));
     }
 
-    public Card getMockCard() {
+    /**
+     * Create deck editor's mock card (with text only instead real abilities)
+     */
+    public Card createMockCard() {
         if (this.splitCard) {
             return new MockSplitCard(this);
         } else {

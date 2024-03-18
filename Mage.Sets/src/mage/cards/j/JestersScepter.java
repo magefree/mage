@@ -204,13 +204,13 @@ class JestersScepterCounterEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
+        Spell spell = game.getStack().getSpell(getTargetPointer().getFirst(game, source));
         if (spell != null) {
             String nameOfExiledCardPayment = (String) game.getState().getValue(source.getSourceId() + "_nameOfExiledCardPayment");
             String nameOfExiledCardPayment2 = (String) game.getState().getValue(source.getSourceId() + "_nameOfExiledCardPayment2");
             if (CardUtil.haveSameNames(spell.getCard(), nameOfExiledCardPayment, game)
                     || CardUtil.haveSameNames(spell.getCard(), nameOfExiledCardPayment2, game)) {
-                return game.getStack().counter(targetPointer.getFirst(game, source), source, game);
+                return game.getStack().counter(getTargetPointer().getFirst(game, source), source, game);
             }
         }
         return false;

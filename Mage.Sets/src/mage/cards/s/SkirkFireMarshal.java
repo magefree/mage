@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -14,9 +13,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetControlledPermanent;
 
 /**
  *
@@ -24,7 +23,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public final class SkirkFireMarshal extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Goblins you control");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("untapped Goblins you control");
 
     static {
         filter.add(TappedPredicate.UNTAPPED);
@@ -44,7 +43,7 @@ public final class SkirkFireMarshal extends CardImpl {
         // Tap five untapped Goblins you control: Skirk Fire Marshal deals 10 damage to each creature and each player.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new DamageEverythingEffect(10),
-                new TapTargetCost(new TargetControlledCreaturePermanent(5,5, filter, true)));
+                new TapTargetCost(new TargetControlledPermanent(5,5, filter, true)));
         this.addAbility(ability);
     }
 

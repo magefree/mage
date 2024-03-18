@@ -17,7 +17,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.filter.common.FilterControlledPermanent;
+import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -25,8 +25,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class AlquistProftMasterSleuth extends CardImpl {
-
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.CLUE, "a Clue");
 
     public AlquistProftMasterSleuth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{U}");
@@ -48,7 +46,7 @@ public final class AlquistProftMasterSleuth extends CardImpl {
                 new DrawCardSourceControllerEffect(ManacostVariableValue.REGULAR, "you"), new ManaCostsImpl<>("{X}{W}{U}{U}")
         );
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(filter));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CLUE));
         ability.addEffect(new GainLifeEffect(ManacostVariableValue.REGULAR).setText("and gain X life"));
         this.addAbility(ability);
     }

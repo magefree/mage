@@ -49,7 +49,7 @@ public class MomirDuel extends GameImpl {
             Player player = getPlayer(playerId);
             if (player != null) {
                 CardInfo cardInfo = CardRepository.instance.findCard("Momir Vig, Simic Visionary");
-                addEmblem(new MomirEmblem(), cardInfo.getCard(), playerId);
+                addEmblem(new MomirEmblem(), cardInfo.createCard(), playerId);
             }
         }
         getState().addAbility(ability, null);

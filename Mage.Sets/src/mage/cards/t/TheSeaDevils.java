@@ -132,11 +132,10 @@ class TheSeaDevilsTrigger extends DelayedTriggeredAbility {
     public String getRule() {
         // that triggers depends on stack order, so make each trigger unique with extra info
         String triggeredInfo = "";
-        if (this.getEffects().get(0).getTargetPointer() != null) {
-            if (!this.getEffects().get(0).getTargetPointer().getData("damageAmount").isEmpty()) {
-                triggeredInfo += "<br><i>Damage: " + this.getEffects().get(0).getTargetPointer().getData("damageAmount") + "</i>";
-                triggeredInfo += "<br><i>Salamander: " + this.getEffects().get(0).getTargetPointer().getData("triggeredName") + "</i>";
-            }
+        String triggeredDamage = this.getEffects().get(0).getTargetPointer().getData("damageAmount");
+        if (!triggeredDamage.isEmpty()) {
+            triggeredInfo += "<br><i>Damage: " + this.getEffects().get(0).getTargetPointer().getData("damageAmount") + "</i>";
+            triggeredInfo += "<br><i>Salamander: " + this.getEffects().get(0).getTargetPointer().getData("triggeredName") + "</i>";
         }
         return "Until end of turn, whenever a Salamander deals combat damage to a player, "
                 + "it deals that much damage to target creature that player controls." + triggeredInfo;

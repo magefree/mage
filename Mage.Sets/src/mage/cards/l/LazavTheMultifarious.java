@@ -115,7 +115,6 @@ class LazavTheMultifariousEffect extends OneShotEffect {
                 CopyApplier applier = new LazavTheMultifariousCopyApplier();
                 applier.apply(game, newBluePrint, source, lazavTheMultifarious.getId());
                 CopyEffect copyEffect = new CopyEffect(Duration.Custom, newBluePrint, lazavTheMultifarious.getId());
-                copyEffect.newId();
                 copyEffect.setApplier(applier);
                 Ability newAbility = source.copy();
                 copyEffect.init(newAbility, game);

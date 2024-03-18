@@ -90,13 +90,13 @@ public class ForetellAbility extends SpecialAction {
         return " foretells a card from hand";
     }
 
-    public class ForetellExileEffect extends OneShotEffect {
+    static class ForetellExileEffect extends OneShotEffect {
 
         private final Card card;
         String foretellCost;
         String foretellSplitCost;
 
-        public ForetellExileEffect(Card card, String foretellCost, String foretellSplitCost) {
+        ForetellExileEffect(Card card, String foretellCost, String foretellSplitCost) {
             super(Outcome.Neutral);
             this.card = card;
             this.foretellCost = foretellCost;
@@ -150,9 +150,9 @@ public class ForetellAbility extends SpecialAction {
         }
     }
 
-    public class ForetellLookAtCardEffect extends AsThoughEffectImpl {
+    static class ForetellLookAtCardEffect extends AsThoughEffectImpl {
 
-        public ForetellLookAtCardEffect() {
+        ForetellLookAtCardEffect() {
             super(AsThoughEffectType.LOOK_AT_FACE_DOWN, Duration.EndOfGame, Outcome.AIDontUseIt);
         }
 
@@ -190,7 +190,7 @@ public class ForetellAbility extends SpecialAction {
         }
     }
 
-    public class ForetellAddCostEffect extends ContinuousEffectImpl {
+    public static class ForetellAddCostEffect extends ContinuousEffectImpl {
 
         private final MageObjectReference mor;
 
@@ -297,12 +297,12 @@ public class ForetellAbility extends SpecialAction {
         }
     }
 
-    public class ForetellCostAbility extends SpellAbility {
+    static class ForetellCostAbility extends SpellAbility {
 
         private String abilityName;
         private SpellAbility spellAbilityToResolve;
 
-        public ForetellCostAbility(String foretellCost) {
+        ForetellCostAbility(String foretellCost) {
             super(null, "Testing", Zone.EXILED, SpellAbilityType.BASE_ALTERNATE, SpellAbilityCastMode.NORMAL);
             // Needed for Dream Devourer and Ethereal Valkyrie reducing the cost of a colorless CMC 2 or less spell to 0
             // CardUtil.reduceCost returns an empty string in that case so we add a cost of 0 here
@@ -457,12 +457,15 @@ public class ForetellAbility extends SpecialAction {
         /**
          * Used for split card in PlayerImpl method:
          * getOtherUseableActivatedAbilities
-         *
-         * @param abilityName
          */
         public void setAbilityName(String abilityName) {
             this.abilityName = abilityName;
         }
 
+    }
+
+    public static boolean isCardInForetell(Card card, Game game) {
+        // searching ForetellCostAbility - it adds for foretelled cards only after exile
+        return card.getAbilities(game).containsClass(ForetellCostAbility.class);
     }
 }

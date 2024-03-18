@@ -65,7 +65,7 @@ class SpellshiftEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player spellController = game.getPlayer(((Spell) game.getLastKnownInformation(targetPointer.getFirst(game, source), Zone.STACK)).getControllerId());
+        Player spellController = game.getPlayer(((Spell) game.getLastKnownInformation(getTargetPointer().getFirst(game, source), Zone.STACK)).getControllerId());
         if (spellController != null) {
             Cards cardsToReveal = new CardsImpl();
             Card toCast = null;

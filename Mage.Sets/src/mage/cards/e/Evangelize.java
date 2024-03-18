@@ -6,7 +6,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetOpponentsChoicePermanent;
 
 import java.util.UUID;
@@ -15,8 +15,6 @@ import java.util.UUID;
  * @author spjspj
  */
 public final class Evangelize extends CardImpl {
-
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
 
     public Evangelize(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{W}");
@@ -28,7 +26,7 @@ public final class Evangelize extends CardImpl {
         GainControlTargetEffect effect = new GainControlTargetEffect(Duration.EndOfGame);
         effect.setText("Gain control of target creature of an opponent's choice they control");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetOpponentsChoicePermanent(1, 1, filter, false));
+        this.getSpellAbility().addTarget(new TargetOpponentsChoicePermanent(1, 1, StaticFilters.FILTER_CONTROLLED_CREATURE, false));
     }
 
     private Evangelize(final Evangelize card) {

@@ -34,7 +34,7 @@ public abstract class TargetImpl implements Target {
     protected boolean chosen = false;
     // is the target handled as targeted spell/ability (notTarget = true is used for not targeted effects like e.g. sacrifice)
     protected boolean notTarget = false;
-    protected boolean atRandom = false;
+    protected boolean atRandom = false; // for inner choose logic
     protected UUID targetController = null; // if null the ability controller is the targetController
     protected UUID abilityController = null; // only used if target controller != ability controller
 

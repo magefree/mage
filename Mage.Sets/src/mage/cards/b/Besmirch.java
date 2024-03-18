@@ -61,22 +61,22 @@ class BesmirchEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         if (game.getPermanent(source.getFirstTarget()) != null) {
-            TargetPointer target = new FixedTarget(source.getFirstTarget(), game);
+            TargetPointer blueprintTarget = new FixedTarget(source.getFirstTarget(), game);
 
             // gain control
             game.addEffect(new GainControlTargetEffect(Duration.EndOfTurn)
-                    .setTargetPointer(target), source);
+                    .setTargetPointer(blueprintTarget.copy()), source);
 
             // haste
             game.addEffect(new GainAbilityTargetEffect(
                     HasteAbility.getInstance(), Duration.EndOfTurn
-            ).setTargetPointer(target), source);
+            ).setTargetPointer(blueprintTarget.copy()), source);
 
             // goad
-            game.addEffect(new GoadTargetEffect().setTargetPointer(target), source);
+            game.addEffect(new GoadTargetEffect().setTargetPointer(blueprintTarget.copy()), source);
 
             // untap
-            new UntapTargetEffect().setTargetPointer(target).apply(game, source);
+            new UntapTargetEffect().setTargetPointer(blueprintTarget.copy()).apply(game, source);
 
             return true;
         }

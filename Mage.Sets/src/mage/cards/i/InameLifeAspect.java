@@ -80,7 +80,7 @@ class InameLifeAspectEffect extends OneShotEffect {
         if (controller != null && sourceObject != null) {
             if (controller.chooseUse(outcome, "Exile " + sourceObject.getLogName() + " to return Spirit cards?", source, game)) {
                 Effect effect = new ReturnToHandTargetEffect();
-                effect.setTargetPointer(getTargetPointer());
+                effect.setTargetPointer(this.getTargetPointer().copy());
                 effect.getTargetPointer().init(game, source);
                 new ExileSourceEffect().apply(game, source);
                 return effect.apply(game, source);

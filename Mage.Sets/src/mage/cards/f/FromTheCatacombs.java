@@ -10,6 +10,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureCard;
 import mage.target.common.TargetCardInGraveyard;
 
@@ -20,15 +21,13 @@ import java.util.UUID;
  */
 public final class FromTheCatacombs extends CardImpl {
 
-    private static final FilterCard filter = new FilterCreatureCard("creature card from a graveyard");
-
     public FromTheCatacombs(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{B}{B}");
 
         // Return target creature card from a graveyard to the battlefield with a corpse counter on it. If that creature would leave the battlefield, exile it instead of putting it anywhere else.
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldWithCounterTargetEffect(CounterType.CORPSE.createInstance()));
         this.getSpellAbility().addEffect(new LeaveBattlefieldExileTargetReplacementEffect("that creature"));
-        this.getSpellAbility().addTarget(new TargetCardInGraveyard(filter));
+        this.getSpellAbility().addTarget(new TargetCardInGraveyard(StaticFilters.FILTER_CARD_CREATURE_A_GRAVEYARD));
 
         // You take the initiative.
         this.getSpellAbility().addEffect(new TakeTheInitiativeEffect().concatBy("<br>"));

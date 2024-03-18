@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -10,8 +9,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.common.FilterControlledPermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -24,7 +22,6 @@ public final class Smoke extends CardImpl {
 
     public Smoke(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{R}{R}");
-
 
         // Players can't untap more than one creature during their untap steps.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SmokeEffect()));
@@ -42,10 +39,8 @@ public final class Smoke extends CardImpl {
 
 class SmokeEffect extends RestrictionUntapNotMoreThanEffect {
 
-    private static final FilterControlledPermanent filter = new FilterControlledCreaturePermanent();
-
-    public SmokeEffect() {
-        super(Duration.WhileOnBattlefield, 1, filter);
+    SmokeEffect() {
+        super(Duration.WhileOnBattlefield, 1, StaticFilters.FILTER_CONTROLLED_CREATURE);
         staticText = "Players can't untap more than one creature during their untap steps";
     }
 

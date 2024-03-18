@@ -1,4 +1,3 @@
-
 package mage.cards.a;
 
 import java.util.UUID;
@@ -10,7 +9,7 @@ import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SpellAbilityType;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.token.CentaurToken;
 import mage.players.Player;
@@ -46,8 +45,6 @@ public final class AliveWell extends SplitCard {
 
 class WellEffect extends OneShotEffect {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
-
     public WellEffect() {
         super(Outcome.GainLife);
         staticText = "You gain 2 life for each creature you control";
@@ -66,7 +63,7 @@ class WellEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            int life = 2 * game.getBattlefield().count(filter, source.getControllerId(), source, game);
+            int life = 2 * game.getBattlefield().count(StaticFilters.FILTER_CONTROLLED_CREATURE, source.getControllerId(), source, game);
             player.gainLife(life, game, source);
         }
         return true;

@@ -34,7 +34,7 @@ public final class HopelessNightmare extends CardImpl {
         this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new ScryEffect(2, false)));
 
         // {2}{B}: Sacrifice Hopeless Nightmare.
-        this.addAbility(new SimpleActivatedAbility(new SacrificeSourceEffect(), new ManaCostsImpl("{2}{B}")));
+        this.addAbility(new SimpleActivatedAbility(new SacrificeSourceEffect(), new ManaCostsImpl<>("{2}{B}")));
     }
 
     private HopelessNightmare(final HopelessNightmare card) {

@@ -64,7 +64,7 @@ public final class BaneAlleyBroker extends CardImpl {
         this.power = new MageInt(0);
         this.toughness = new MageInt(3);
 
-        // {tap}: Draw a card, then exile a card from your hand face down.
+        // {T}: Draw a card, then exile a card from your hand face down.
         this.addAbility(new SimpleActivatedAbility(new BaneAlleyBrokerDrawExileEffect(), new TapSourceCost()));
 
         // You may look at cards exiled with Bane Alley Broker.

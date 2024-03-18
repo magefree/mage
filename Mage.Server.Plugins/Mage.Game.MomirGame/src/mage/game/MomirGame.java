@@ -55,7 +55,7 @@ public class MomirGame extends GameImpl {
                     // how-to fix: make sure that a Momir Emblem and a source card uses same set (DIS - Dissension)
                     throw new IllegalStateException("Wrong code usage: momir card and emblem must exists in the same set (DIS)");
                 }
-                addEmblem(new MomirEmblem(), cardInfo.getCard(), playerId);
+                addEmblem(new MomirEmblem(), cardInfo.createCard(), playerId);
             }
         }
         getState().addAbility(ability, null);

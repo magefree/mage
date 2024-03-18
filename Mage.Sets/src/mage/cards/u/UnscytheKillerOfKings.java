@@ -128,7 +128,7 @@ class UnscytheEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        Card card = game.getCard(targetPointer.getFirst(game, source));
+        Card card = game.getCard(getTargetPointer().getFirst(game, source));
         if (card == null) {
             return false;
         }

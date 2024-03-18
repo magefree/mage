@@ -81,7 +81,7 @@ class SwordOfLightAndShadowEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Card card = game.getCard(targetPointer.getFirst(game, source));
+        Card card = game.getCard(getTargetPointer().getFirst(game, source));
         return controller != null && card != null && controller.moveCards(card, Zone.HAND, source, game);
     }
 }

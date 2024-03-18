@@ -115,7 +115,7 @@ public class BestowAbility extends SpellAbility {
     public static void becomeCreature(Permanent permanent, Game game) {
         // permanently changes to the object
         if (permanent != null) {
-            MageObject basicObject = permanent.getBasicMageObject(game);
+            MageObject basicObject = permanent.getBasicMageObject();
             if (basicObject != null) {
                 game.checkStateAndTriggered();  // Bug #8157
                 basicObject.getSubtype().remove(SubType.AURA);
@@ -164,7 +164,7 @@ class BestowEntersBattlefieldEffect extends ReplacementEffectImpl {
         }
 
         // change types permanently
-        MageObject basicObject = bestowPermanent.getBasicMageObject(game);
+        MageObject basicObject = bestowPermanent.getBasicMageObject();
         if (basicObject != null && !basicObject.getSubtype().contains(SubType.AURA)) {
             basicObject.addSubType(SubType.AURA);
             basicObject.removeCardType(CardType.CREATURE);

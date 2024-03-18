@@ -6,7 +6,7 @@ import mage.abilities.keyword.ReboundAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterCard;
+import mage.filter.common.FilterNonlandCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 
@@ -17,7 +17,7 @@ import java.util.UUID;
  */
 public final class CastThroughTime extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("Instant and sorcery spells you control");
+    private static final FilterNonlandCard filter = new FilterNonlandCard("Instant and sorcery spells you control");
 
     static {
         filter.add(Predicates.or(CardType.INSTANT.getPredicate(), CardType.SORCERY.getPredicate()));

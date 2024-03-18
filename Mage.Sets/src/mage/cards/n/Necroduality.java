@@ -9,7 +9,7 @@ import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.TokenPredicate;
 
 import java.util.UUID;
@@ -19,7 +19,7 @@ import java.util.UUID;
  */
 public final class Necroduality extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledCreaturePermanent(SubType.ZOMBIE, "a nontoken Zombie");
+    private static final FilterPermanent filter = new FilterControlledPermanent(SubType.ZOMBIE, "a nontoken Zombie");
 
     static {
         filter.add(TokenPredicate.FALSE);

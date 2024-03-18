@@ -6,6 +6,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureCard;
 import mage.target.common.TargetCardInGraveyard;
 
@@ -16,14 +17,12 @@ import java.util.UUID;
  */
 public final class DisturbingPlot extends CardImpl {
 
-    private static final FilterCard filter = new FilterCreatureCard("creature card from a graveyard");
-
     public DisturbingPlot(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{B}");
 
         // Return target creature card from a graveyard to its owner's hand.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCardInGraveyard(filter));
+        this.getSpellAbility().addTarget(new TargetCardInGraveyard(StaticFilters.FILTER_CARD_CREATURE_A_GRAVEYARD));
 
         // Conspire
         this.addAbility(new ConspireAbility(ConspireAbility.ConspireTargets.ONE));

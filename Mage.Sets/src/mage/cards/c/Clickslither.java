@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import java.util.UUID;
@@ -17,8 +16,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.filter.FilterPermanent;
 
 /**
  *
@@ -26,11 +24,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public final class Clickslither extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a Goblin");
-
-    static {
-        filter.add(SubType.GOBLIN.getPredicate());
-    }
+    private static final FilterPermanent filter = new FilterPermanent(SubType.GOBLIN, "a Goblin");
 
     public Clickslither(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}{R}");

@@ -1,4 +1,3 @@
-
 package mage.cards.d;
 
 import java.util.ArrayList;
@@ -18,7 +17,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.permanent.PermanentInListPredicate;
+import mage.filter.predicate.permanent.PermanentReferenceInCollectionPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.ManaPoolItem;
@@ -112,7 +111,7 @@ class DrainPowerEffect extends OneShotEffect {
                 Permanent permanent;
                 if (permList.size() > 1 || target != null) {
                     FilterLandPermanent filter2 = new FilterLandPermanent("land you control to tap for mana (remaining: " + permList.size() + ')');
-                    filter2.add(new PermanentInListPredicate(permList));
+                    filter2.add(new PermanentReferenceInCollectionPredicate(permList, game));
                     target = new TargetPermanent(1, 1, filter2, true);
                     while (!target.isChosen() && target.canChoose(targetPlayer.getId(), source, game) && targetPlayer.canRespond()) {
                         targetPlayer.chooseTarget(Outcome.Neutral, target, source, game);

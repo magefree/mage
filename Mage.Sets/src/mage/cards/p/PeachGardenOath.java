@@ -8,7 +8,7 @@ import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -19,9 +19,8 @@ public final class PeachGardenOath extends CardImpl {
     public PeachGardenOath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{W}");
 
-
         // You gain 2 life for each creature you control.
-        DynamicValue amount = new PermanentsOnBattlefieldCount(new FilterControlledCreaturePermanent(), 2);
+        DynamicValue amount = new PermanentsOnBattlefieldCount(StaticFilters.FILTER_CONTROLLED_CREATURE, 2);
         this.getSpellAbility().addEffect(new GainLifeEffect(amount));
     }
 

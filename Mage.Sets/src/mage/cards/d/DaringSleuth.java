@@ -8,7 +8,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -16,8 +16,6 @@ import java.util.UUID;
  * @author fireshoes
  */
 public final class DaringSleuth extends CardImpl {
-
-    private static final FilterPermanent filter = new FilterPermanent(SubType.CLUE, "a Clue");
 
     public DaringSleuth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
@@ -30,7 +28,7 @@ public final class DaringSleuth extends CardImpl {
 
         // When you sacrifice a Clue, transform Daring Sleuth.
         this.addAbility(new TransformAbility());
-        this.addAbility(new SacrificePermanentTriggeredAbility(new TransformSourceEffect(), filter)
+        this.addAbility(new SacrificePermanentTriggeredAbility(new TransformSourceEffect(), StaticFilters.FILTER_CONTROLLED_CLUE)
                 .setTriggerPhrase("When you sacrifice a Clue, "));
     }
 

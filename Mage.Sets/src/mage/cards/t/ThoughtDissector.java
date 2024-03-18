@@ -68,7 +68,7 @@ class ThoughtDissectorEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Player targetOpponent = game.getPlayer(targetPointer.getFirst(game, source));
+        Player targetOpponent = game.getPlayer(getTargetPointer().getFirst(game, source));
         int max = amount.calculate(game, source, this);
         if (targetOpponent != null && controller != null && max > 0) {
             int numberOfCard = 0;

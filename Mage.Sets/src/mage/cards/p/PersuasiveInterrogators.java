@@ -10,7 +10,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetOpponent;
 
 import java.util.UUID;
@@ -19,8 +19,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class PersuasiveInterrogators extends CardImpl {
-
-    private static final FilterPermanent filter = new FilterPermanent(SubType.CLUE, "a Clue");
 
     public PersuasiveInterrogators(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
@@ -34,7 +32,7 @@ public final class PersuasiveInterrogators extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new InvestigateEffect()));
 
         // Whenever you sacrifice a Clue, target opponent gets two poison counters.
-        Ability ability = new SacrificePermanentTriggeredAbility(new AddPoisonCounterTargetEffect(2), filter);
+        Ability ability = new SacrificePermanentTriggeredAbility(new AddPoisonCounterTargetEffect(2), StaticFilters.FILTER_CONTROLLED_CLUE);
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }

@@ -22,7 +22,7 @@ public class CopyTargetStackAbilityEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(targetPointer.getFirst(game, source));
+        StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(getTargetPointer().getFirst(game, source));
         if (stackAbility == null) {
             return false;
         }

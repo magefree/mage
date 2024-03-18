@@ -1,23 +1,19 @@
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.abilities.Mode;
-import mage.abilities.effects.common.UntapAllEffect;
-import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
-import mage.abilities.effects.common.continuous.GainControlAllEffect;
-import mage.abilities.keyword.HasteAbility;
+import mage.abilities.effects.common.continuous.GainControlAllUntapGainHasteEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
-import mage.constants.Duration;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
 
+import java.util.UUID;
+
 /**
- *
- * @author awjackson
+ * @author xenohedron
  */
 public final class MobRule extends CardImpl {
 
@@ -34,26 +30,10 @@ public final class MobRule extends CardImpl {
 
         // Choose one
         // Gain control of all creatures with power 4 or greater until end of turn. Untap those creatures. They gain haste until end of turn.
-        this.getSpellAbility().addEffect(new GainControlAllEffect(Duration.EndOfTurn, filter4orMore));
-        this.getSpellAbility().addEffect(new UntapAllEffect(filter4orMore).setText("untap those creatures"));
-        this.getSpellAbility().addEffect(new GainAbilityAllEffect(
-                HasteAbility.getInstance(),
-                Duration.EndOfTurn,
-                filter4orMore,
-                "they gain haste until end of turn"
-        ));
+        this.getSpellAbility().addEffect(new GainControlAllUntapGainHasteEffect(filter4orMore).withTextOptions("those creatures"));
 
         // Gain control of all creatures with power 3 or less until end of turn. Untap those creatures. They gain haste until end of turn.
-        Mode mode = new Mode(new GainControlAllEffect(Duration.EndOfTurn, filter3orLess));
-        mode.addEffect(new UntapAllEffect(filter3orLess).setText("untap those creatures"));
-        mode.addEffect(new GainAbilityAllEffect(
-                HasteAbility.getInstance(),
-                Duration.EndOfTurn,
-                filter3orLess,
-                "they gain haste until end of turn"
-        ));
-
-        this.getSpellAbility().addMode(mode);
+        this.getSpellAbility().addMode(new Mode(new GainControlAllUntapGainHasteEffect(filter3orLess).withTextOptions("those creatures")));
     }
 
     private MobRule(final MobRule card) {

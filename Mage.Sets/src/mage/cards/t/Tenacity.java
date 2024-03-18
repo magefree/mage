@@ -1,4 +1,3 @@
-
 package mage.cards.t;
 
 import java.util.UUID;
@@ -12,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledCreaturePermanent;
 
 /**
  *
@@ -27,7 +25,7 @@ public final class Tenacity extends CardImpl {
         Effect boost = new BoostControlledEffect(1, 1, Duration.EndOfTurn);
         boost.setText("Creatures you control get +1/+1");
         this.getSpellAbility().addEffect(boost);
-        this.getSpellAbility().addEffect(new GainAbilityAllEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent(), " and gain lifelink until end of turn"));
+        this.getSpellAbility().addEffect(new GainAbilityAllEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_CONTROLLED_CREATURES, " and gain lifelink until end of turn"));
         this.getSpellAbility().addEffect(new UntapAllControllerEffect(StaticFilters.FILTER_PERMANENT_CREATURE, "Untap those creatures"));
     }
 

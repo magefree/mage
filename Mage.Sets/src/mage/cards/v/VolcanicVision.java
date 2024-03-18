@@ -72,7 +72,7 @@ class VolcanicVisionReturnToHandTargetEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        for (UUID targetId : targetPointer.getTargets(game, source)) {
+        for (UUID targetId : getTargetPointer().getTargets(game, source)) {
             switch (game.getState().getZone(targetId)) {
                 case GRAVEYARD:
                     Card card = game.getCard(targetId);

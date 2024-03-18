@@ -61,6 +61,7 @@ class WelcomeToTheFoldEffect extends GainControlTargetEffect {
 
     @Override
     public void init(Ability source, Game game) {
+        super.init(source, game);
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             int maxToughness = 2;
@@ -71,10 +72,8 @@ class WelcomeToTheFoldEffect extends GainControlTargetEffect {
             Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
             if (permanent != null && permanent.getToughness().getValue() > maxToughness) {
                 this.discard();
-                return;
             }
         }
-        super.init(source, game);
     }
 
     @Override

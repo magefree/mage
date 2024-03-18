@@ -1,4 +1,3 @@
-
 package mage.cards.i;
 
 import java.util.UUID;
@@ -13,8 +12,8 @@ import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
@@ -22,13 +21,8 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public final class IizukaTheRuthless extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Samurai");
-    private static final FilterControlledCreaturePermanent filter2 = new FilterControlledCreaturePermanent("Samurai creatures");
-
-    static {
-        filter.add(SubType.SAMURAI.getPredicate());
-        filter2.add(SubType.SAMURAI.getPredicate());
-    }
+    private static final FilterPermanent filter = new FilterPermanent(SubType.SAMURAI,  "Samurai");
+    private static final FilterControlledCreaturePermanent filter2 = new FilterControlledCreaturePermanent(SubType.SAMURAI, "Samurai creatures");
 
     public IizukaTheRuthless(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}");

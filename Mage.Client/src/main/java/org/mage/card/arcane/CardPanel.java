@@ -377,7 +377,7 @@ public abstract class CardPanel extends MagePermanent implements ComponentListen
     protected void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D) (g.create());
 
-        // Deferr to subclasses
+        // Defer to subclasses
         paintCard(g2d);
 
         // Done, dispose of the context
@@ -854,7 +854,7 @@ public abstract class CardPanel extends MagePermanent implements ComponentListen
         // VIEW mode (user can change card side at any time by n/d button)
         this.guiTransformed = !this.guiTransformed;
 
-        if (dayNightButton != null) { // if transformbable card is copied, button can be null
+        if (dayNightButton != null) { // if transformable card is copied, button can be null
             BufferedImage image = this.isTransformed() ? ImageManagerImpl.instance.getNightImage() : ImageManagerImpl.instance.getDayImage();
             dayNightButton.setIcon(new ImageIcon(image));
         }

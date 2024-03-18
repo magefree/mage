@@ -106,13 +106,13 @@ class WakeToSlaughterEffect extends OneShotEffect {
                 } else {
                     player.moveCards(card, Zone.BATTLEFIELD, source, game);
 
-                    FixedTarget fixedTarget = new FixedTarget(card, game);
+                    FixedTarget blueprintTarget = new FixedTarget(card, game);
                     ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfGame);
-                    effect.setTargetPointer(fixedTarget);
+                    effect.setTargetPointer(blueprintTarget.copy());
                     game.addEffect(effect, source);
 
                     ExileTargetEffect exileEffect = new ExileTargetEffect(null, null, Zone.BATTLEFIELD);
-                    exileEffect.setTargetPointer(fixedTarget);
+                    exileEffect.setTargetPointer(blueprintTarget.copy());
                     DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect);
                     game.addDelayedTriggeredAbility(delayedAbility, source);
                 }

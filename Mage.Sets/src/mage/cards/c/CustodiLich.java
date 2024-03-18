@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import mage.MageInt;
@@ -12,7 +11,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.target.TargetPlayer;
 
 import java.util.UUID;
@@ -35,7 +34,7 @@ public final class CustodiLich extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new BecomesMonarchSourceEffect()).addHint(MonarchHint.instance));
 
         // Whenever you become the monarch, target player sacrifices a creature.
-        Ability ability = new BecomesMonarchSourceControllerTriggeredAbility(new SacrificeEffect(new FilterControlledCreaturePermanent("creature"), 1, "target player"));
+        Ability ability = new BecomesMonarchSourceControllerTriggeredAbility(new SacrificeEffect(StaticFilters.FILTER_PERMANENT_CREATURE, 1, "target player"));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
 

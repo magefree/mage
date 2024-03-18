@@ -337,6 +337,6 @@ public class GathererSets implements Iterable<DownloadJob> {
             set = codeReplacements.get(set);
         }
         String url = "https://gatherer.wizards.com/Handlers/Image.ashx?type=symbol&set=" + set + "&size=small&rarity=" + urlRarity;
-        return new DownloadJob(set + '-' + rarity, fromURL(url), toFile(dst));
+        return new DownloadJob(set + '-' + rarity, fromURL(url), toFile(dst), false);
     }
 }

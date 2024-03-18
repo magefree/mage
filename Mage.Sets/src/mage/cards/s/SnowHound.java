@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -41,11 +40,11 @@ public final class SnowHound extends CardImpl {
 
         // {1}, {tap}: Return Snow Hound and target green or blue creature you control to their owner's hand.
         Effect effect = new ReturnToHandSourceEffect(true);
-        effect.setText("Return Snow Hound");
+        effect.setText("Return {this}");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{1}"));
         ability.addCost(new TapSourceCost());
         effect = new ReturnToHandTargetEffect();
-        effect.setText("and target green or blue creature you control to their owners' hands");
+        effect.setText("and target green or blue creature you control to their owner's hand");
         ability.addTarget(new TargetControlledCreaturePermanent(filter));
         ability.addEffect(effect);
         this.addAbility(ability);

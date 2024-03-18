@@ -14,80 +14,61 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
+ * Targets list with static ZCC
+ *
  * @author LevelX2
  */
 public class FixedTargets extends TargetPointerImpl {
 
     final ArrayList<MageObjectReference> targets = new ArrayList<>();
-    final ArrayList<UUID> targetsNotInitialized = new ArrayList<>();
 
-    private boolean initialized;
-
-    public FixedTargets(UUID targetId) {
-        super();
-
-        targetsNotInitialized.add(targetId);
-        this.initialized = false;
+    public FixedTargets(List<Permanent> objects, Game game) {
+        this(objects
+                .stream()
+                .map(o -> new MageObjectReference(o.getId(), game))
+                .collect(Collectors.toList()));
     }
 
-    public FixedTargets(Cards cards, Game game) {
-        super();
-        if (cards != null) {
-            for (UUID targetId : cards) {
-                MageObjectReference mor = new MageObjectReference(targetId, game);
-                targets.add(mor);
-            }
-        }
-        this.initialized = true;
+    public FixedTargets(Set<Card> objects, Game game) {
+        this(objects
+                .stream()
+                .map(o -> new MageObjectReference(o.getId(), game))
+                .collect(Collectors.toList()));
+    }
+
+    public FixedTargets(Cards objects, Game game) {
+        this(objects.getCards(game)
+                .stream()
+                .map(o -> new MageObjectReference(o.getId(), game))
+                .collect(Collectors.toList()));
     }
 
     public FixedTargets(Token token, Game game) {
-        this(token.getLastAddedTokenIds().stream().map(game::getPermanent).collect(Collectors.toList()), game);
+        this(token.getLastAddedTokenIds()
+                .stream()
+                .map(game::getPermanent)
+                .collect(Collectors.toList()), game);
     }
 
-    public FixedTargets(List<Permanent> permanents, Game game) {
+    public FixedTargets(List<MageObjectReference> morList) {
         super();
-
-        for (Permanent permanent : permanents) {
-            MageObjectReference mor = new MageObjectReference(permanent.getId(), permanent.getZoneChangeCounter(game), game);
-            targets.add(mor);
-        }
-        this.initialized = true;
+        targets.addAll(morList);
+        this.setInitialized(); // no need dynamic init
     }
 
-    public FixedTargets(Set<Card> cards, Game game) {
-        super();
-
-        for (Card card : cards) {
-            MageObjectReference mor = new MageObjectReference(card.getId(), card.getZoneChangeCounter(game), game);
-            targets.add(mor);
-        }
-        this.initialized = true;
-    }
-
-    public FixedTargets(Collection<MageObjectReference> morSet, Game game) {
-        super();
-
-        targets.addAll(morSet);
-        this.initialized = true;
-    }
-
-    private FixedTargets(final FixedTargets targetPointer) {
-        super(targetPointer);
-
-        this.targets.addAll(targetPointer.targets);
-        this.targetsNotInitialized.addAll(targetPointer.targetsNotInitialized);
-        this.initialized = targetPointer.initialized;
+    private FixedTargets(final FixedTargets pointer) {
+        super(pointer);
+        this.targets.addAll(pointer.targets);
     }
 
     @Override
     public void init(Game game, Ability source) {
-        if (!initialized) {
-            initialized = true;
-            for (UUID targetId : targetsNotInitialized) {
-                targets.add(new MageObjectReference(targetId, game.getState().getZoneChangeCounter(targetId), game));
-            }
+        if (isInitialized()) {
+            return;
         }
+
+        // impossible use case
+        throw new IllegalArgumentException("Wrong code usage: FixedTargets support only static ZCC, you can't get here");
     }
 
     @Override
@@ -118,23 +99,6 @@ public class FixedTargets extends TargetPointerImpl {
         return new FixedTargets(this);
     }
 
-    /**
-     * Returns a fixed target for (and only) the first taget
-     *
-     * @param game
-     * @param source
-     * @return
-     */
-    @Override
-    public FixedTarget getFixedTarget(Game game, Ability source) {
-        this.init(game, source);
-        UUID firstId = getFirst(game, source);
-        if (firstId != null) {
-            return new FixedTarget(firstId, game.getState().getZoneChangeCounter(firstId));
-        }
-        return null;
-    }
-
     @Override
     public Permanent getFirstTargetPermanentOrLKI(Game game, Ability source) {
         UUID targetId = null;
@@ -143,8 +107,6 @@ public class FixedTargets extends TargetPointerImpl {
             MageObjectReference mor = targets.get(0);
             targetId = mor.getSourceId();
             zoneChangeCounter = mor.getZoneChangeCounter();
-        } else if (!targetsNotInitialized.isEmpty()) {
-            targetId = targetsNotInitialized.get(0);
         }
         if (targetId != null) {
             Permanent permanent = game.getPermanent(targetId);

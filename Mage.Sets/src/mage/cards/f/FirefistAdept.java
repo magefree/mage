@@ -1,4 +1,3 @@
-
 package mage.cards.f;
 
 import java.util.UUID;
@@ -11,7 +10,7 @@ import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.target.common.TargetOpponentsCreaturePermanent;
 
 /**
@@ -20,7 +19,7 @@ import mage.target.common.TargetOpponentsCreaturePermanent;
  */
 public final class FirefistAdept extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filterCount = new FilterControlledCreaturePermanent("Wizards you control");
+    private static final FilterControlledPermanent filterCount = new FilterControlledPermanent("Wizards you control");
 
     static {
         filterCount.add(SubType.WIZARD.getPredicate());

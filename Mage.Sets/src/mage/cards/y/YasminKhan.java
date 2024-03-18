@@ -31,7 +31,7 @@ public final class YasminKhan extends CardImpl {
         // {T}: Exile the top card of your library. Until your next end step, you may play it.
         this.addAbility(new SimpleActivatedAbility(new ExileTopXMayPlayUntilEffect(
                 1, Duration.UntilYourNextEndStep
-        ), new TapSourceCost()));
+        ).withTextOptions("it", false), new TapSourceCost()));
 
         // Doctor's companion
         this.addAbility(DoctorsCompanionAbility.getInstance());

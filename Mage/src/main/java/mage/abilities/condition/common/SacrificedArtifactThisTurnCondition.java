@@ -7,6 +7,10 @@ import mage.abilities.hint.Hint;
 import mage.game.Game;
 import mage.watchers.common.PermanentsSacrificedWatcher;
 
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Stream;
+
 /**
  * @author TheElk801
  */
@@ -20,11 +24,12 @@ public enum SacrificedArtifactThisTurnCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return game
-                .getState()
-                .getWatcher(PermanentsSacrificedWatcher.class)
-                .getThisTurnSacrificedPermanents(source.getControllerId())
-                .stream()
+        return Optional.ofNullable(game
+                        .getState()
+                        .getWatcher(PermanentsSacrificedWatcher.class)
+                        .getThisTurnSacrificedPermanents(source.getControllerId()))
+                .map(List::stream)
+                .orElseGet(Stream::empty)
                 .anyMatch(permanent -> permanent.isArtifact(game));
     }
 

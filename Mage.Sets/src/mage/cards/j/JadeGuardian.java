@@ -1,4 +1,3 @@
-
 package mage.cards.j;
 
 import java.util.UUID;
@@ -12,14 +11,16 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
+import mage.target.common.TargetControlledPermanent;
 
 /**
  *
  * @author LevelX2
  */
 public final class JadeGuardian extends CardImpl {
+
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.MERFOLK, "Merfolk you control");
 
     public JadeGuardian(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
@@ -34,7 +35,7 @@ public final class JadeGuardian extends CardImpl {
 
         // When Jade Guardian enters the battlefield, put a +1/+1 counter on target Merfolk you control.
         Ability ability = new EntersBattlefieldTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
-        ability.addTarget(new TargetControlledCreaturePermanent(new FilterControlledCreaturePermanent(SubType.MERFOLK, "Merfolk you control")));
+        ability.addTarget(new TargetControlledPermanent(filter));
         this.addAbility(ability);
     }
 

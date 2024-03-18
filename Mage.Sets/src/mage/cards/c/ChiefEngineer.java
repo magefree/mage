@@ -9,8 +9,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.filter.common.FilterArtifactCard;
+import mage.filter.common.FilterNonlandCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 
@@ -21,10 +20,10 @@ import java.util.UUID;
  */
 public final class ChiefEngineer extends CardImpl {
 
-    private static final FilterCard filter = new FilterArtifactCard("artifact spells you cast");
+    private static final FilterNonlandCard filter = new FilterNonlandCard("artifact spells you cast");
 
     static {
-        filter.add(Predicates.not(CardType.LAND.getPredicate()));
+        filter.add(CardType.ARTIFACT.getPredicate());
         filter.add(Predicates.not(new AbilityPredicate(ConvokeAbility.class))); // So there are not redundant copies being added to each card
     }
 

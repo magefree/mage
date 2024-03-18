@@ -16,7 +16,7 @@ import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -30,7 +30,7 @@ import java.util.UUID;
 public final class OvergrowthElemental extends CardImpl {
 
     private static final FilterPermanent filter
-            = new FilterControlledCreaturePermanent(SubType.ELEMENTAL, "another target Elemental you control");
+            = new FilterControlledPermanent(SubType.ELEMENTAL, "another target Elemental you control");
 
     static {
         filter.add(AnotherPredicate.instance);

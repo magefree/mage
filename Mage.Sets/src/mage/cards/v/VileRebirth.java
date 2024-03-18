@@ -7,6 +7,7 @@ import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.permanent.token.ZombieToken;
 import mage.target.common.TargetCardInGraveyard;
@@ -22,7 +23,7 @@ public final class VileRebirth extends CardImpl {
 
         // Exile target creature card from a graveyard.
         this.getSpellAbility().addEffect(new ExileTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCardInGraveyard(new FilterCreatureCard("creature card from a graveyard")));
+        this.getSpellAbility().addTarget(new TargetCardInGraveyard(StaticFilters.FILTER_CARD_CREATURE_A_GRAVEYARD));
 
         // Create a 2/2 black Zombie creature token.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new ZombieToken()));

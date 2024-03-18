@@ -12,7 +12,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
@@ -59,13 +59,13 @@ public final class Immerwolf extends CardImpl {
 
 class ImmerwolfEffect extends RestrictionEffect {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent(SubType.WEREWOLF);
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.WEREWOLF);
 
     static {
         filter.add(Predicates.not(SubType.HUMAN.getPredicate()));
     }
 
-    public ImmerwolfEffect() {
+    ImmerwolfEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "Non-Human Werewolves you control can't transform";
     }

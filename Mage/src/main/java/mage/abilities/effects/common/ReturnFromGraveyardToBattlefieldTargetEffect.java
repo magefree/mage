@@ -23,9 +23,8 @@ public class ReturnFromGraveyardToBattlefieldTargetEffect extends OneShotEffect 
 
     private final boolean tapped;
     private final boolean attacking;
-    // If true, creatures are returned to their owner's control.
-    // If false, creatures are returned under the effect's controller control.
-    private final boolean underOwnerControl;
+
+    // Targets are returned under the control of the effect controller (e.g. "under your control")
 
     public ReturnFromGraveyardToBattlefieldTargetEffect() {
         this(false);
@@ -34,22 +33,17 @@ public class ReturnFromGraveyardToBattlefieldTargetEffect extends OneShotEffect 
     public ReturnFromGraveyardToBattlefieldTargetEffect(boolean tapped) {
         this(tapped, false);
     }
-    public ReturnFromGraveyardToBattlefieldTargetEffect(boolean tapped, boolean attacking) {
-        this(tapped, attacking, false);
-    }
 
-    public ReturnFromGraveyardToBattlefieldTargetEffect(boolean tapped, boolean attacking, boolean underOwnerControl) {
+    public ReturnFromGraveyardToBattlefieldTargetEffect(boolean tapped, boolean attacking) {
         super(Outcome.PutCreatureInPlay);
         this.tapped = tapped;
         this.attacking = attacking;
-        this.underOwnerControl = underOwnerControl;
     }
 
     protected ReturnFromGraveyardToBattlefieldTargetEffect(final ReturnFromGraveyardToBattlefieldTargetEffect effect) {
         super(effect);
         this.tapped = effect.tapped;
         this.attacking = effect.attacking;
-        this.underOwnerControl = effect.underOwnerControl;
     }
 
     @Override
@@ -68,7 +62,7 @@ public class ReturnFromGraveyardToBattlefieldTargetEffect extends OneShotEffect 
                     cardsToMove.add(card);
                 }
             }
-            controller.moveCards(cardsToMove, Zone.BATTLEFIELD, source, game, tapped, false, underOwnerControl, null);
+            controller.moveCards(cardsToMove, Zone.BATTLEFIELD, source, game, tapped, false, false, null);
             if (attacking) {
                 for (Card card : cardsToMove) {
                     game.getCombat().addAttackingCreature(card.getId(), game);
@@ -119,12 +113,7 @@ public class ReturnFromGraveyardToBattlefieldTargetEffect extends OneShotEffect 
             sb.append(" attacking");
         }
         if (!yourGrave) {
-            if (underOwnerControl) {
-                sb.append("under their owner's control");
-            }
-            else {
-                sb.append(" under your control");
-            }
+            sb.append(" under your control");
         }
         return sb.toString();
     }

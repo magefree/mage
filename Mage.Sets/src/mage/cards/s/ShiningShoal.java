@@ -86,6 +86,7 @@ class ShiningShoalRedirectDamageTargetEffect extends RedirectDamageFromSourceToT
 
     @Override
     public void init(Ability source, Game game) {
+        super.init(source, game);
         amountToRedirect = dynamicAmount.calculate(game, source, this);
     }
 

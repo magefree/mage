@@ -20,7 +20,7 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -111,7 +111,7 @@ class PatronOfTheVeinCreatureDiesTriggeredAbility extends TriggeredAbilityImpl {
 
 class PatronOfTheVeinExileCreatureEffect extends OneShotEffect {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent();
 
     static {
         filter.add(SubType.VAMPIRE.getPredicate());

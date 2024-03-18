@@ -1,4 +1,3 @@
-
 package mage.cards.h;
 
 import java.util.UUID;
@@ -15,7 +14,7 @@ import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.counters.Counter;
 import mage.counters.CounterType;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -53,7 +52,7 @@ class HeartmenderEffect extends OneShotEffect {
 
     private final Counter counter;
 
-    public HeartmenderEffect(Counter counter) {
+    HeartmenderEffect(Counter counter) {
         super(Outcome.BoostCreature);
         this.counter = counter;
         staticText = "remove a -1/-1 counter from each creature you control";
@@ -67,11 +66,10 @@ class HeartmenderEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         boolean applied = false;
-        FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
-        if (game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game).isEmpty()) {
+        if (game.getBattlefield().getActivePermanents(StaticFilters.FILTER_CONTROLLED_CREATURE, source.getControllerId(), game).isEmpty()) {
             return true;
         }
-        for (Permanent creature : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
+        for (Permanent creature : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_CONTROLLED_CREATURE, source.getControllerId(), game)) {
             if (creature != null
                     && creature.getCounters(game).getCount(counter.getName()) >= counter.getCount()) {
                 creature.removeCounters(counter.getName(), counter.getCount(), source, game);

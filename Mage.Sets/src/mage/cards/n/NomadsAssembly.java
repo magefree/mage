@@ -1,4 +1,3 @@
-
 package mage.cards.n;
 
 import java.util.UUID;
@@ -8,7 +7,7 @@ import mage.abilities.keyword.ReboundAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.permanent.token.KorSoldierToken;
 
 /**
@@ -17,13 +16,11 @@ import mage.game.permanent.token.KorSoldierToken;
  */
 public final class NomadsAssembly extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
-
     public NomadsAssembly(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{W}{W}");
 
-
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new KorSoldierToken(), new PermanentsOnBattlefieldCount(filter)));
+        // Create a 1/1 white Kor Soldier creature token for each creature you control.
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new KorSoldierToken(), new PermanentsOnBattlefieldCount(StaticFilters.FILTER_CONTROLLED_CREATURE)));
         this.addAbility(new ReboundAbility());
     }
 

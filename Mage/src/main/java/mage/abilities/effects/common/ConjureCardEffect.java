@@ -65,7 +65,7 @@ public class ConjureCardEffect extends OneShotEffect {
         }
         Set<Card> cards = new HashSet<>();
         for (int i = 0; i < amount; i++) {
-            Card card = cardInfo.getCard();
+            Card card = cardInfo.createCard();
             cards.add(card);
         }
         game.loadCards(cards, source.getControllerId());

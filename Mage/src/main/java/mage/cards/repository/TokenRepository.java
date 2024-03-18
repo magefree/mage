@@ -18,6 +18,20 @@ public enum TokenRepository {
 
     public static final String XMAGE_TOKENS_SET_CODE = "XMAGE";
 
+    // All possible image names. Used for:
+    // - image name from tok/xmage folder
+    // - additional card name for controller like "Morph: face up name"
+    public static final String XMAGE_IMAGE_NAME_FACE_DOWN_MANUAL = "Face Down";
+    public static final String XMAGE_IMAGE_NAME_FACE_DOWN_MANIFEST = "Manifest";
+    public static final String XMAGE_IMAGE_NAME_FACE_DOWN_MORPH = "Morph";
+    public static final String XMAGE_IMAGE_NAME_FACE_DOWN_DISGUISE = "Disguise";
+    public static final String XMAGE_IMAGE_NAME_FACE_DOWN_FORETELL = "Foretell";
+    public static final String XMAGE_IMAGE_NAME_COPY = "Copy";
+    public static final String XMAGE_IMAGE_NAME_CITY_BLESSING = "City's Blessing";
+    public static final String XMAGE_IMAGE_NAME_DAY = "Day";
+    public static final String XMAGE_IMAGE_NAME_NIGHT = "Night";
+    public static final String XMAGE_IMAGE_NAME_THE_MONARCH = "The Monarch";
+
     private static final Logger logger = Logger.getLogger(TokenRepository.class);
 
     private ArrayList<TokenInfo> allTokens = new ArrayList<>();
@@ -117,12 +131,6 @@ public enum TokenRepository {
                         imageNumber = Integer.parseInt(params.get(4));
                     }
 
-                    // image file name
-                    String imageFileName = "";
-                    if (params.size() > 5 && !params.get(5).isEmpty()) {
-                        imageFileName = params.get(5);
-                    }
-
                     // token class name (uses for images search for render)
                     String tokenClassName = "";
                     if (params.size() > 7 && !params.get(6).isEmpty()) {
@@ -190,7 +198,7 @@ public enum TokenRepository {
                     }
 
                     // OK
-                    TokenInfo token = new TokenInfo(tokenType, tokenName, setCode, imageNumber, tokenClassName, imageFileName);
+                    TokenInfo token = new TokenInfo(tokenType, tokenName, setCode, imageNumber, tokenClassName);
                     list.add(token);
                 } finally {
                     line = reader.readLine();
@@ -235,44 +243,58 @@ public enum TokenRepository {
         // Search by
         // - https://tagger.scryfall.com/tags/card/assistant-cards
         // - https://scryfall.com/search?q=otag%3Aassistant-cards&unique=cards&as=grid&order=name
-        // Must add only unique prints
+        // Must add only unique images/prints
         // TODO: add custom set in download window to download a custom tokens only
-        // TODO: add custom set in card viewer to view a custom tokens only
         ArrayList<TokenInfo> res = new ArrayList<>();
+
+        // Backface
+        // TODO: can't find backface's api url so use direct link from third party site instead (must be replaced to scryfall someday)
+        res.add(createXmageToken(XMAGE_IMAGE_NAME_FACE_DOWN_MANUAL, 1, "https://upload.wikimedia.org/wikipedia/en/a/aa/Magic_the_gathering-card_back.jpg"));
 
         // Copy
         // https://scryfall.com/search?q=include%3Aextras+unique%3Aprints+type%3Atoken+copy&unique=cards&as=grid&order=name
-        res.add(createXmageToken("Copy", 1, "https://api.scryfall.com/cards/tclb/19/en?format=image"));
-        res.add(createXmageToken("Copy", 2, "https://api.scryfall.com/cards/tsnc/1/en?format=image"));
-        res.add(createXmageToken("Copy", 3, "https://api.scryfall.com/cards/tvow/19/en?format=image"));
-        res.add(createXmageToken("Copy", 4, "https://api.scryfall.com/cards/tznr/12/en?format=image"));
+        res.add(createXmageToken(XMAGE_IMAGE_NAME_COPY, 1, "https://api.scryfall.com/cards/tclb/19/en?format=image"));
+        res.add(createXmageToken(XMAGE_IMAGE_NAME_COPY, 2, "https://api.scryfall.com/cards/tsnc/1/en?format=image"));
+        res.add(createXmageToken(XMAGE_IMAGE_NAME_COPY, 3, "https://api.scryfall.com/cards/tvow/19/en?format=image"));
+        res.add(createXmageToken(XMAGE_IMAGE_NAME_COPY, 4, "https://api.scryfall.com/cards/tznr/12/en?format=image"));
+        res.add(createXmageToken(XMAGE_IMAGE_NAME_COPY, 5, "https://api.scryfall.com/cards/twho/1/en?format=image"));
+        res.add(createXmageToken(XMAGE_IMAGE_NAME_COPY, 6, "https://api.scryfall.com/cards/tlci/1/en?format=image"));
 
         // City's Blessing
         // https://scryfall.com/search?q=type%3Atoken+include%3Aextras+unique%3Aprints+City%27s+Blessing+&unique=cards&as=grid&order=name
-        res.add(createXmageToken("City's Blessing", 1, "https://api.scryfall.com/cards/f18/2/en?format=image"));
+        res.add(createXmageToken(XMAGE_IMAGE_NAME_CITY_BLESSING, 1, "https://api.scryfall.com/cards/f18/2/en?format=image"));
 
         // Day // Night
         // https://scryfall.com/search?q=include%3Aextras+unique%3Aprints+%22Day+%2F%2F+Night%22&unique=cards&as=grid&order=name
-        res.add(createXmageToken("Day", 1, "https://api.scryfall.com/cards/tvow/21/en?format=image&face=front"));
-        res.add(createXmageToken("Night", 1, "https://api.scryfall.com/cards/tvow/21/en?format=image&face=back"));
+        res.add(createXmageToken(XMAGE_IMAGE_NAME_DAY, 1, "https://api.scryfall.com/cards/tvow/21/en?format=image&face=front"));
+        res.add(createXmageToken(XMAGE_IMAGE_NAME_NIGHT, 1, "https://api.scryfall.com/cards/tvow/21/en?format=image&face=back"));
 
         // Manifest
         // https://scryfall.com/search?q=Manifest+include%3Aextras+unique%3Aprints&unique=cards&as=grid&order=name
-        res.add(createXmageToken("Manifest", 1, "https://api.scryfall.com/cards/tc19/28/en?format=image"));
-        res.add(createXmageToken("Manifest", 2, "https://api.scryfall.com/cards/tc18/1/en?format=image"));
-        res.add(createXmageToken("Manifest", 3, "https://api.scryfall.com/cards/tfrf/4/en?format=image"));
-        res.add(createXmageToken("Manifest", 4, "https://api.scryfall.com/cards/tncc/3/en?format=image"));
+        res.add(createXmageToken(XMAGE_IMAGE_NAME_FACE_DOWN_MANIFEST, 1, "https://api.scryfall.com/cards/tc19/28/en?format=image"));
+        res.add(createXmageToken(XMAGE_IMAGE_NAME_FACE_DOWN_MANIFEST, 2, "https://api.scryfall.com/cards/tc18/1/en?format=image"));
+        res.add(createXmageToken(XMAGE_IMAGE_NAME_FACE_DOWN_MANIFEST, 3, "https://api.scryfall.com/cards/tfrf/4/en?format=image"));
+        res.add(createXmageToken(XMAGE_IMAGE_NAME_FACE_DOWN_MANIFEST, 4, "https://api.scryfall.com/cards/tncc/3/en?format=image"));
 
-        // Morph
+        // Morph and Megamorph
         // https://scryfall.com/search?q=Morph+unique%3Aprints+otag%3Aassistant-cards&unique=cards&as=grid&order=name
-        res.add(createXmageToken("Morph", 1, "https://api.scryfall.com/cards/tktk/11/en?format=image"));
-        res.add(createXmageToken("Morph", 2, "https://api.scryfall.com/cards/ta25/15/en?format=image"));
-        res.add(createXmageToken("Morph", 3, "https://api.scryfall.com/cards/tc19/27/en?format=image"));
+        res.add(createXmageToken(XMAGE_IMAGE_NAME_FACE_DOWN_MORPH, 1, "https://api.scryfall.com/cards/tktk/11/en?format=image"));
+        res.add(createXmageToken(XMAGE_IMAGE_NAME_FACE_DOWN_MORPH, 2, "https://api.scryfall.com/cards/ta25/15/en?format=image"));
+        res.add(createXmageToken(XMAGE_IMAGE_NAME_FACE_DOWN_MORPH, 3, "https://api.scryfall.com/cards/tc19/27/en?format=image"));
+
+        // Disguise
+        // support only 1 image: https://scryfall.com/card/tmkm/21/a-mysterious-creature
+        res.add(createXmageToken(XMAGE_IMAGE_NAME_FACE_DOWN_DISGUISE, 1, "https://api.scryfall.com/cards/tmkm/21/en?format=image"));
+
+        // Foretell
+        // https://scryfall.com/search?q=Foretell+unique%3Aprints+otag%3Aassistant-cards&unique=cards&as=grid&order=name
+        res.add(createXmageToken(XMAGE_IMAGE_NAME_FACE_DOWN_FORETELL, 1, "https://api.scryfall.com/cards/tkhm/23/en?format=image"));
 
         // The Monarch
         // https://scryfall.com/search?q=Monarch+unique%3Aprints+otag%3Aassistant-cards&unique=cards&as=grid&order=name
-        res.add(createXmageToken("The Monarch", 1, "https://api.scryfall.com/cards/tonc/22/en?format=image"));
-        res.add(createXmageToken("The Monarch", 2, "https://api.scryfall.com/cards/tcn2/1/en?format=image"));
+        res.add(createXmageToken(XMAGE_IMAGE_NAME_THE_MONARCH, 1, "https://api.scryfall.com/cards/tonc/22/en?format=image"));
+        res.add(createXmageToken(XMAGE_IMAGE_NAME_THE_MONARCH, 2, "https://api.scryfall.com/cards/tcn2/1/en?format=image"));
+        res.add(createXmageToken(XMAGE_IMAGE_NAME_THE_MONARCH, 3, "https://api.scryfall.com/cards/tltc/15/en?format=image"));
 
         return res;
     }
@@ -312,5 +334,34 @@ public enum TokenRepository {
      */
     public TokenInfo findPreferredTokenInfoForClass(String className, String preferredSetCode) {
         return findPreferredTokenInfo(TokenRepository.instance.getByClassName(className), preferredSetCode);
+    }
+
+    /**
+     * Try to find random image info by related set code (use for inner tokens like copy, morph, etc)
+     * <p>
+     * Allow to generate "random" image number from an object's UUID (workaround to keep same image after each update)
+     *
+     * @param randomFromId object's UUID for image number generation
+     */
+    public TokenInfo findPreferredTokenInfoForXmage(String name, UUID randomFromId) {
+        List<TokenInfo> needList = TokenRepository.instance.getByType(TokenType.XMAGE)
+                .stream()
+                .filter(info -> info.getName().equals(name))
+                .collect(Collectors.toList());
+        if (needList.isEmpty()) {
+            return null;
+        }
+        if (needList.size() == 1) {
+            return needList.get(0);
+        }
+
+        // workaround to find stable image from object's id (need for face down image generation)
+        if (randomFromId == null) {
+            return RandomUtil.randomFromCollection(needList);
+        } else {
+            // warning, do not use global random here (it can break it with same seed)
+            int itemIndex = new Random(randomFromId.getLeastSignificantBits()).nextInt(needList.size());
+            return needList.get(itemIndex);
+        }
     }
 }

@@ -108,9 +108,9 @@ class NacatlWarPrideEffect extends OneShotEffect {
         copies.addAll(effect.getAddedPermanents());
         
         if (!copies.isEmpty()) {
-            FixedTargets fixedTargets = new FixedTargets(copies, game);
+            FixedTargets blueprintTarget = new FixedTargets(copies, game);
             ExileTargetEffect exileEffect = new ExileTargetEffect();
-            exileEffect.setTargetPointer(fixedTargets).setText("exile the tokens");
+            exileEffect.setTargetPointer(blueprintTarget.copy()).setText("exile the tokens");
             game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect), source);
             return true;
         }

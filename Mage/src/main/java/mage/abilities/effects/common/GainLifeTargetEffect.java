@@ -39,7 +39,7 @@ public class GainLifeTargetEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (UUID playerId : targetPointer.getTargets(game, source)) {
+        for (UUID playerId : getTargetPointer().getTargets(game, source)) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
                 player.gainLife(life.calculate(game, source, this), game, source);

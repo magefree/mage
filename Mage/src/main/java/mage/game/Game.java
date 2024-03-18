@@ -503,6 +503,7 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
      */
     void applyEffects();
 
+    @Deprecated // TODO: must research usage and remove it from all non engine code (example: Bestow ability, ProcessActions must be used instead)
     boolean checkStateAndTriggered();
 
     void playPriority(UUID activePlayerId, boolean resuming);
@@ -555,7 +556,7 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
 
     // game cheats (for tests only)
     void cheat(UUID ownerId, Map<Zone, String> commands);
-    void cheat(UUID ownerId, List<Card> library, List<Card> hand, List<PermanentCard> battlefield, List<Card> graveyard, List<Card> command);
+    void cheat(UUID ownerId, List<Card> library, List<Card> hand, List<PutToBattlefieldInfo> battlefield, List<Card> graveyard, List<Card> command, List<Card> exiled);
 
     // controlling the behaviour of replacement effects while permanents entering the battlefield
     void setScopeRelevant(boolean scopeRelevant);
@@ -589,6 +590,9 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
 
     boolean executingRollback();
 
+    /**
+     * Add counters to permanent before ETB. Use it before put real permanent to battlefield.
+     */
     void setEnterWithCounters(UUID sourceId, Counters counters);
 
     Counters getEnterWithCounters(UUID sourceId);

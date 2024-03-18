@@ -53,7 +53,7 @@ class SweepAwayEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
+        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (permanent != null && controller != null) {
             if (permanent.isAttacking()) {
                 if (controller.chooseUse(Outcome.Neutral, "Put " + permanent.getIdName() + " on top of its owner's library (otherwise return to hand)?", source, game)) {

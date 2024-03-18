@@ -51,10 +51,10 @@ public class ConditionalCostModificationEffect extends CostModificationEffectImp
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
         conditionState = condition.apply(game, source);
         if (conditionState) {
-            effect.setTargetPointer(this.targetPointer);
+            effect.setTargetPointer(this.getTargetPointer().copy());
             return effect.apply(game, source, abilityToModify);
         } else if (otherwiseEffect != null) {
-            otherwiseEffect.setTargetPointer(this.targetPointer);
+            otherwiseEffect.setTargetPointer(this.getTargetPointer().copy());
             return otherwiseEffect.apply(game, source, abilityToModify);
         }
         if (!conditionState && effect.getDuration() == Duration.OneUse) {
@@ -70,10 +70,10 @@ public class ConditionalCostModificationEffect extends CostModificationEffectImp
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
         conditionState = condition.apply(game, source);
         if (conditionState) {
-            effect.setTargetPointer(this.targetPointer);
+            effect.setTargetPointer(this.getTargetPointer().copy());
             return effect.applies(abilityToModify, source, game);
         } else if (otherwiseEffect != null) {
-            otherwiseEffect.setTargetPointer(this.targetPointer);
+            otherwiseEffect.setTargetPointer(this.getTargetPointer().copy());
             return otherwiseEffect.applies(abilityToModify, source, game);
         }
         return false;

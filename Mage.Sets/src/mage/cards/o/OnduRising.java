@@ -1,4 +1,3 @@
-
 package mage.cards.o;
 
 import java.util.UUID;
@@ -14,7 +13,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -28,7 +26,7 @@ public final class OnduRising extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{W}");
 
         // Whenever a creature attacks this turn, it gains lifelink until end of turn.
-        this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new OnduRisingTriggeredAbility()));
+        this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new OnduRisingTriggeredAbility(), false));
 
         // Awaken 4—{4}{W}
         this.addAbility(new AwakenAbility(this, 4, "{4}{W}"));

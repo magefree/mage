@@ -39,7 +39,7 @@ public final class MinotaurIllusionist extends CardImpl {
             Duration.EndOfTurn), new ManaCostsImpl<>("{1}{U}")));
         // {R}, Sacrifice Minotaur Illusionist: Minotaur Illusionist deals damage equal to its power to target creature.
         Effect effect = new DamageTargetEffect(new SourcePermanentPowerCount());
-        effect.setText("{this} deals damage equal to its power to target creature.");
+        effect.setText("it deals damage equal to its power to target creature.");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{R}"));
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetCreaturePermanent());

@@ -7,6 +7,9 @@ import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
+import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
+import mage.abilities.hint.Hint;
+import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -22,11 +25,15 @@ import java.util.UUID;
 
 /**
  * @author TheElk801
+ * @modified tiera3 - added cardHint
  */
 public final class DragonsApproach extends CardImpl {
 
     private static final FilterCard filter = new FilterCreatureCard("Dragon creature card");
     private static final FilterCard filter2 = new FilterCard("cards named Dragon's Approach");
+    private static final Hint hint = new ValueHint(
+            "Cards named Dragon's Approach in your graveyard", new CardsInControllerGraveyardCount(filter2)
+    );
 
     static {
         filter.add(SubType.DRAGON.getPredicate());
@@ -45,6 +52,7 @@ public final class DragonsApproach extends CardImpl {
                         "exile {this} and four cards named Dragon's Approach from your graveyard"
                 )
         ));
+        this.getSpellAbility().addHint(hint);
 
         // A deck can have any number of cards named Dragon's Approach.
         this.getSpellAbility().addEffect(new InfoEffect(

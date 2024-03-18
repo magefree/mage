@@ -82,6 +82,7 @@ class ShieldmageAdvocateEffect extends PreventionEffectImpl {
 
     @Override
     public void init(Ability source, Game game) {
+        super.init(source, game);
         this.targetSource.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), source, game);
     }
 
@@ -94,7 +95,7 @@ class ShieldmageAdvocateEffect extends PreventionEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (super.applies(event, source, game)) {
-            if (event.getTargetId().equals(targetPointer.getFirst(game, source)) && event.getSourceId().equals(targetSource.getFirstTarget())) {
+            if (event.getTargetId().equals(getTargetPointer().getFirst(game, source)) && event.getSourceId().equals(targetSource.getFirstTarget())) {
                 return true;
             }
         }

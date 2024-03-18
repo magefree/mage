@@ -79,12 +79,12 @@ public class CopyTargetSpellEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Spell spell;
         if (useLKI) {
-            spell = game.getSpellOrLKIStack(targetPointer.getFirst(game, source));
+            spell = game.getSpellOrLKIStack(getTargetPointer().getFirst(game, source));
         } else {
-            spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
+            spell = game.getStack().getSpell(getTargetPointer().getFirst(game, source));
         }
         if (spell == null) {
-            spell = (Spell) game.getLastKnownInformation(targetPointer.getFirst(game, source), Zone.STACK);
+            spell = (Spell) game.getLastKnownInformation(getTargetPointer().getFirst(game, source), Zone.STACK);
         }
         if (spell != null) {
             spell.createCopyOnStack(game, source, useController ? spell.getControllerId() : source.getControllerId(),

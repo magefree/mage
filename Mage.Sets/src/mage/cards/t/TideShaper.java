@@ -92,11 +92,10 @@ class TideShaperEffect extends BecomesBasicLandTargetEffect {
 
     @Override
     public void init(Ability source, Game game) {
+        super.init(source, game);
         if (source.getSourcePermanentIfItStillExists(game) == null) {
             discard();
-            return;
         }
-        super.init(source, game);
     }
 
     @Override

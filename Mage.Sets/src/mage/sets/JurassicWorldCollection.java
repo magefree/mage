@@ -22,6 +22,7 @@ public final class JurassicWorldCollection extends ExpansionSet {
 
         cards.add(new SetCardInfo("Command Tower", 26, Rarity.COMMON, mage.cards.c.CommandTower.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Command Tower", "26b", Rarity.COMMON, mage.cards.c.CommandTower.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Dino DNA", 20, Rarity.RARE, mage.cards.d.DinoDNA.class));
         cards.add(new SetCardInfo("Don't Move", 1, Rarity.RARE, mage.cards.d.DontMove.class));
         cards.add(new SetCardInfo("Ellie and Alan, Paleontologists", 10, Rarity.RARE, mage.cards.e.EllieAndAlanPaleontologists.class));
         cards.add(new SetCardInfo("Forest", 25, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));

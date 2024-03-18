@@ -36,7 +36,7 @@ public class UntapTargetEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (UUID target : targetPointer.getTargets(game, source)) {
+        for (UUID target : getTargetPointer().getTargets(game, source)) {
             Permanent permanent = game.getPermanent(target);
             if (permanent != null) {
                 permanent.untap(game);

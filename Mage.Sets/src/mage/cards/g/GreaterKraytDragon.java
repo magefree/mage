@@ -13,7 +13,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -34,7 +34,7 @@ public final class GreaterKraytDragon extends CardImpl {
         this.addAbility(new MonstrosityAbility("{X}{X}{R}{G}{W}", Integer.MAX_VALUE));
 
         //  When Greater Krayt Dragon becomes monstrous, draw a card for each +1/+1 counter on creatures you control.
-        this.addAbility(new BecomesMonstrousSourceTriggeredAbility(new DrawCardSourceControllerEffect(new CountersCount(CounterType.P1P1, new FilterControlledCreaturePermanent()))));
+        this.addAbility(new BecomesMonstrousSourceTriggeredAbility(new DrawCardSourceControllerEffect(new CountersCount(CounterType.P1P1, StaticFilters.FILTER_CONTROLLED_CREATURES))));
 
     }
 

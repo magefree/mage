@@ -48,7 +48,7 @@ public class DontUntapInControllersUntapStepTargetEffect extends ContinuousRuleM
         if (game.getTurnStepType() != PhaseStep.UNTAP) {
             return false;
         }
-        for (UUID targetId : targetPointer.getTargets(game, source)) {
+        for (UUID targetId : getTargetPointer().getTargets(game, source)) {
             if (!event.getTargetId().equals(targetId)) {
                 continue;
             }

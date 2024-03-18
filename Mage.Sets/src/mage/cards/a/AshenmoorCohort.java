@@ -1,4 +1,3 @@
-
 package mage.cards.a;
 
 import mage.MageInt;
@@ -32,7 +31,7 @@ public final class AshenmoorCohort extends CardImpl {
         filter.add(AnotherPredicate.instance);
     }
 
-    private static final String rule = "Ashenmoor Cohort gets +1/+1 as long as you control another black creature";
+    private static final String rule = "{this} gets +1/+1 as long as you control another black creature";
 
     public AshenmoorCohort(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{B}");

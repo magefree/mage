@@ -41,7 +41,7 @@ public class SerializationTest extends CardTestPlayerBase {
     @Test
     public void test_PermanentImpl_Simple() {
         CardInfo cardInfo = CardRepository.instance.findCard("Balduvian Bears");
-        Card newCard = cardInfo.getCard();
+        Card newCard = cardInfo.createCard();
         Card permCard = CardUtil.getDefaultCardSideForBattlefield(currentGame, newCard);
         PermanentImpl permanent = new PermanentCard(permCard, playerA.getId(), currentGame);
         currentGame.addPermanent(permanent, 0);
@@ -55,7 +55,7 @@ public class SerializationTest extends CardTestPlayerBase {
     @Test
     public void test_PermanentImpl_MarkedDamageInfo() {
         CardInfo cardInfo = CardRepository.instance.findCard("Balduvian Bears");
-        Card newCard = cardInfo.getCard();
+        Card newCard = cardInfo.createCard();
         Card permCard = CardUtil.getDefaultCardSideForBattlefield(currentGame, newCard);
         PermanentImpl permanent = new PermanentCard(permCard, playerA.getId(), currentGame);
         currentGame.addPermanent(permanent, 0);
@@ -77,7 +77,7 @@ public class SerializationTest extends CardTestPlayerBase {
 
     private void processSingleCard(CardInfo cardInfo) {
         // compress each card's part
-        Card newCard = cardInfo.getCard();
+        Card newCard = cardInfo.createCard();
         CardUtil.getObjectPartsAsObjects(newCard).stream()
                 .map(Card.class::cast)
                 .forEach(card -> {

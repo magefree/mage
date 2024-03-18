@@ -9,9 +9,11 @@ import mage.constants.*;
 import mage.view.CardView;
 import mage.view.CounterView;
 import mage.view.PermanentView;
+import net.java.truevfs.access.TFile;
 import org.jdesktop.swingx.JXPanel;
 import org.mage.card.arcane.ManaSymbols;
 import org.mage.card.arcane.UI;
+import org.mage.plugins.card.utils.CardImageUtils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -400,6 +402,15 @@ public final class GuiDisplayUtil {
         Zone zone = card.getZone();
         if (zone != null) {
             buffer.append("<p style='margin: 2px'><b>Card Zone:</b> ").append(zone).append("</p>");
+        }
+
+        // missing image info in card popup
+        boolean displayFullImagePath = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SHOW_FULL_IMAGE_PATH, "false").equals("true");
+        if (displayFullImagePath) {
+            String imageFile = CardImageUtils.buildImagePathToCardView(card);
+            if (imageFile.startsWith("ERROR") || !(new TFile(imageFile).exists())) {
+                buffer.append("<p style='margin: 2px'><b>Missing image:</b> ").append(imageFile).append("</p>");
+            }
         }
 
         buffer.append("<br></body></html>");

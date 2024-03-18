@@ -14,7 +14,7 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -44,7 +44,7 @@ public final class MarkOfTheOni extends CardImpl {
                 new SacrificeSourceEffect(),
                 TargetController.NEXT,
                 new PermanentsOnTheBattlefieldCondition(
-                        new FilterControlledCreaturePermanent(SubType.DEMON, "if you control no Demons"),
+                        new FilterControlledPermanent(SubType.DEMON, "if you control no Demons"),
                         ComparisonType.FEWER_THAN, 1),
                 false));
     }

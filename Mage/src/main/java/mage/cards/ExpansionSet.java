@@ -232,7 +232,7 @@ public abstract class ExpansionSet implements Serializable {
         }
 
         CardInfo cardInfo = cards.remove(RandomUtil.nextInt(cards.size()));
-        Card card = cardInfo.getCard();
+        Card card = cardInfo.createCard();
         if (card == null) {
             // card with error
             return;
@@ -273,7 +273,7 @@ public abstract class ExpansionSet implements Serializable {
                 .makeBooster()
                 .stream()
                 .map(inBoosterMap::get)
-                .map(CardInfo::getCard)
+                .map(CardInfo::createCard)
                 .collect(Collectors.toList());
     }
 
@@ -569,7 +569,7 @@ public abstract class ExpansionSet implements Serializable {
         booster.forEach(card -> {
             List<CardInfo> reprints = this.savedReprints.getOrDefault(card.getName(), null);
             if (reprints != null && reprints.size() > 1) {
-                Card newCard = reprints.get(RandomUtil.nextInt(reprints.size())).getCard();
+                Card newCard = reprints.get(RandomUtil.nextInt(reprints.size())).createCard();
                 if (newCard != null) {
                     finalBooster.add(newCard);
                     return;

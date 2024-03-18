@@ -97,7 +97,7 @@ class TezzeretCruelMachinistEffect extends OneShotEffect {
                         .getCards(game)
                         .stream()
                         .map(card -> new MageObjectReference(card, game, 1))
-                        .collect(Collectors.toSet()), game
+                        .collect(Collectors.toList())
         )), source);
         player.moveCards(
                 cardsToMove.getCards(game), Zone.BATTLEFIELD, source, game,
@@ -125,7 +125,7 @@ class TezzeretCruelMachinistCardTypeEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         boolean flag = false;
-        for (UUID targetId : targetPointer.getTargets(game, source)) {
+        for (UUID targetId : getTargetPointer().getTargets(game, source)) {
             Permanent target = game.getPermanent(targetId);
             if (target == null || !target.isFaceDown(game)) {
                 continue;

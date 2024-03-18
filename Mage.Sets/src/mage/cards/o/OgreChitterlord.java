@@ -48,7 +48,7 @@ public final class OgreChitterlord extends CardImpl {
         //  Whenever Ogre Chitterlord enters the battlefield or attacks, create two 1/1 black Rat creature tokens with "This creature can't block." Then if you control five or more Rats, each Rat you control gets +2/+0 until end of turn.
         Ability ability = new OrTriggeredAbility(
                 Zone.BATTLEFIELD, new CreateTokenEffect(new RatCantBlockToken(), 2),
-                false, "whenever {this} enters the battlefield or attacks, ",
+                false, "Whenever {this} enters the battlefield or attacks, ",
                 new EntersBattlefieldTriggeredAbility(null),
                 new AttacksTriggeredAbility(null)
         );

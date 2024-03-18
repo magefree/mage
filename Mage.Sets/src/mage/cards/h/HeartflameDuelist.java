@@ -11,7 +11,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
+import mage.filter.common.FilterNonlandCard;
 import mage.filter.predicate.Predicates;
 import mage.target.common.TargetAnyTarget;
 
@@ -22,7 +22,7 @@ import java.util.UUID;
  */
 public final class HeartflameDuelist extends AdventureCard {
 
-    private static final FilterCard filter = new FilterCard("instant and sorcery spells you control");
+    private static final FilterNonlandCard filter = new FilterNonlandCard("instant and sorcery spells you control");
 
     static {
         filter.add(Predicates.or(CardType.INSTANT.getPredicate(), CardType.SORCERY.getPredicate()));

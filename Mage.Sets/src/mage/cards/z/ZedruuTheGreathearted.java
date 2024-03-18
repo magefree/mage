@@ -1,25 +1,22 @@
-
 package mage.cards.z;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.PermanentsYouOwnThatOpponentsControlCount;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.effects.common.TargetPlayerGainControlTargetPermanentEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetOpponent;
+
+import java.util.UUID;
 
 /**
  *
@@ -44,7 +41,7 @@ public final class ZedruuTheGreathearted extends CardImpl {
         this.addAbility(ability);
 
         // {R}{W}{U}: Target opponent gains control of target permanent you control.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ZedruuTheGreatheartedEffect(), new ManaCostsImpl<>("{U}{R}{W}"));
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TargetPlayerGainControlTargetPermanentEffect(), new ManaCostsImpl<>("{U}{R}{W}"));
         ability.addTarget(new TargetOpponent());
         ability.addTarget(new TargetControlledPermanent());
         this.addAbility(ability);
@@ -59,40 +56,4 @@ public final class ZedruuTheGreathearted extends CardImpl {
         return new ZedruuTheGreathearted(this);
     }
 
-    class ZedruuTheGreatheartedEffect extends ContinuousEffectImpl {
-
-        private MageObjectReference targetPermanentReference;
-
-        public ZedruuTheGreatheartedEffect() {
-            super(Duration.Custom, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
-            this.staticText = "Target opponent gains control of target permanent you control";
-        }
-
-        private ZedruuTheGreatheartedEffect(final ZedruuTheGreatheartedEffect effect) {
-            super(effect);
-            this.targetPermanentReference = effect.targetPermanentReference;
-        }
-
-        @Override
-        public ZedruuTheGreatheartedEffect copy() {
-            return new ZedruuTheGreatheartedEffect(this);
-        }
-
-        @Override
-        public void init(Ability source, Game game) {
-            super.init(source, game);
-            targetPermanentReference = new MageObjectReference(source.getTargets().get(1).getFirstTarget(), game);
-        }
-
-        @Override
-        public boolean apply(Game game, Ability source) {
-            Permanent permanent = targetPermanentReference.getPermanent(game);
-            if (permanent != null) {
-                return permanent.changeControllerId(source.getFirstTarget(), game, source);
-            } else {
-                discard();
-            }
-            return false;
-        }
-    }
 }

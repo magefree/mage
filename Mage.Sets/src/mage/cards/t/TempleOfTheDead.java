@@ -35,7 +35,7 @@ public final class TempleOfTheDead extends CardImpl {
         Ability ability = new ActivateIfConditionActivatedAbility(
                 Zone.BATTLEFIELD,
                 new TransformSourceEffect(),
-                new ManaCostsImpl("{2}{B}"),
+                new ManaCostsImpl<>("{2}{B}"),
                 TempleOfTheDeadCondition.instance,
                 TimingRule.SORCERY
         );

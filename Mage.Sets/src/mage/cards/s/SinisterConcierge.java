@@ -6,7 +6,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.costs.common.ExileSourceFromGraveCost;
 import mage.abilities.dynamicvalue.common.StaticValue;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
@@ -102,10 +101,10 @@ class SinisterConciergeEffect extends OneShotEffect {
 
         // Exile, put time counters, and give suspend for target
         Effect exileTarget = new ExileTargetEffect();
-        exileTarget.setTargetPointer(this.getTargetPointer());
+        exileTarget.setTargetPointer(this.getTargetPointer().copy());
         if (exileTarget.apply(game, source)) {
             Effect addCountersTargetEffect = new AddCountersTargetEffect(CounterType.TIME.createInstance(3));
-            addCountersTargetEffect.setTargetPointer(this.getTargetPointer());
+            addCountersTargetEffect.setTargetPointer(this.getTargetPointer().copy());
             boolean targetCardShouldGetSuspend = addCountersTargetEffect.apply(game, source);
 
             if (targetCardShouldGetSuspend && !targetCreature.getAbilities(game).containsClass(SuspendAbility.class)) {

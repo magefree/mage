@@ -21,8 +21,11 @@ public final class TaintedStrike extends CardImpl {
     public TaintedStrike (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}");
 
-        this.getSpellAbility().addEffect(new BoostTargetEffect(1, 0, Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(InfectAbility.getInstance(), Duration.EndOfTurn));
+        // Target creature gets +1/+0 and gains infect until end of turn.
+        this.getSpellAbility().addEffect(new BoostTargetEffect(1, 0, Duration.EndOfTurn)
+                .setText("target creature gets +1/+0"));
+        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(InfectAbility.getInstance(), Duration.EndOfTurn)
+                .setText("and gains infect until end of turn"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 

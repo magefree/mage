@@ -3516,7 +3516,7 @@ public class MysteryBooster extends ExpansionSet {
         for (int slot = 1; slot < 16; ++slot) {
             final List<CardInfo> availableCards = this.possibleCardsPerBoosterSlot.get(slot);
             final int printSheetCardNumber = RandomUtil.nextInt(availableCards.size());
-            final Card chosenCard = availableCards.get(printSheetCardNumber).getCard();
+            final Card chosenCard = availableCards.get(printSheetCardNumber).createCard();
             booster.add(chosenCard);
         }
         return booster;

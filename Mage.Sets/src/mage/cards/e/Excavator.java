@@ -106,7 +106,7 @@ class ExcavatorEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (UUID permanentId : targetPointer.getTargets(game, source)) {
+        for (UUID permanentId : getTargetPointer().getTargets(game, source)) {
             Permanent permanent = game.getPermanentOrLKIBattlefield(permanentId);
             if (permanent != null) {
                 for(Ability ability : abilities)

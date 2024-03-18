@@ -71,9 +71,32 @@ public class ModalDoubleFacedCardHalfImpl extends CardImpl implements ModalDoubl
 
     @Override
     public void setZone(Zone zone, Game game) {
+        // see ModalDoubleFacedCard.checkGoodZones for details
         game.setZone(parentCard.getId(), zone);
-        game.setZone(parentCard.getLeftHalfCard().getId(), zone);
-        game.setZone(parentCard.getRightHalfCard().getId(), zone);
+        game.setZone(this.getId(), zone);
+
+        // find another side to sync
+        ModalDoubleFacedCardHalf otherSide;
+        if (!parentCard.getLeftHalfCard().getId().equals(this.getId())) {
+            otherSide = parentCard.getLeftHalfCard();
+        } else if (!parentCard.getRightHalfCard().getId().equals(this.getId())) {
+            otherSide = parentCard.getRightHalfCard();
+        } else {
+            throw new IllegalStateException("Wrong code usage: MDF halves must use different ids");
+        }
+
+        switch (zone) {
+            case STACK:
+            case BATTLEFIELD:
+                // stack and battlefield must have only one side
+                game.setZone(otherSide.getId(), Zone.OUTSIDE);
+                break;
+            default:
+                game.setZone(otherSide.getId(), zone);
+                break;
+        }
+
+        ModalDoubleFacedCard.checkGoodZones(game, parentCard);
     }
 
     @Override

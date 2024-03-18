@@ -62,7 +62,7 @@ public final class SpoilsOfEvil extends CardImpl {
         
         @Override
         public boolean apply(Game game, Ability source) {
-            Player targetOpponent = game.getPlayer(targetPointer.getFirst(game, source));
+            Player targetOpponent = game.getPlayer(getTargetPointer().getFirst(game, source));
             Player controller = game.getPlayer(source.getControllerId());
             
             if(targetOpponent != null && controller != null) {

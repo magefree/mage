@@ -82,12 +82,11 @@ class LocusOfEnlightenmentEffect extends ContinuousEffectImpl {
         }
         for (Card card : exileZone.getCards(game)) {
             for (Ability ability : card.getAbilities(game)) {
-                if (!(ability instanceof ActivatedAbility)) {
-                    continue;
+                if (ability.getAbilityType() == AbilityType.ACTIVATED || ability.getAbilityType() == AbilityType.MANA) {
+                    ActivatedAbility copyAbility = (ActivatedAbility) ability.copy();
+                    copyAbility.setMaxActivationsPerTurn(1);
+                    permanent.addAbility(copyAbility, source.getSourceId(), game);
                 }
-                ActivatedAbility copyAbility = (ActivatedAbility) ability.copy();
-                copyAbility.setMaxActivationsPerTurn(1);
-                permanent.addAbility(copyAbility, source.getSourceId(), game);
             }
         }
         return true;

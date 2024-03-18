@@ -10,8 +10,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 
 /**
  *
@@ -19,12 +18,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  */
 public final class OnduCleric extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Allies you control");
-
-    static {
-        filter.add(SubType.ALLY.getPredicate());
-        filter.add(TargetController.YOU.getControllerPredicate());
-    }
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.ALLY, "Allies you control");
 
     public OnduCleric(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
@@ -35,6 +29,7 @@ public final class OnduCleric extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
+        // Whenever Ondu Cleric or another Ally enters the battlefield under your control, you may gain life equal to the number of Allies you control.
         this.addAbility(new AllyEntersBattlefieldTriggeredAbility(new GainLifeEffect(new PermanentsOnBattlefieldCount(filter)), true).setAbilityWord(null));
     }
 

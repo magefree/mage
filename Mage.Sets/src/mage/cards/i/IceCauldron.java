@@ -137,7 +137,7 @@ class IceCauldronCastFromExileEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (targetPointer.getTargets(game, source).contains(objectId)
+        if (getTargetPointer().getTargets(game, source).contains(objectId)
                 && game.getState().getZone(objectId) == Zone.EXILED) {
             Player player = game.getPlayer(source.getControllerId());
             Card card = game.getCard(objectId);

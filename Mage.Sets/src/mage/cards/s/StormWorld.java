@@ -54,7 +54,7 @@ class StormWorldEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (player != null) {
             int damage = 4 - player.getHand().size();
             if (damage > 0) {

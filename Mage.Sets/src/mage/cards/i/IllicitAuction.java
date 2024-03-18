@@ -64,6 +64,8 @@ class IllicitAuctionEffect extends GainControlTargetEffect {
 
     @Override
     public void init(Ability source, Game game) {
+        super.init(source, game);
+
         Player controller = game.getPlayer(source.getControllerId());
         Permanent targetCreature = game.getPermanent(source.getFirstTarget());
         if (controller != null && targetCreature != null) {
@@ -108,7 +110,6 @@ class IllicitAuctionEffect extends GainControlTargetEffect {
             winner.loseLife(highBid, game, source, false);
             super.controllingPlayerId = winner.getId();
         }
-        super.init(source, game);
     }
 }
 

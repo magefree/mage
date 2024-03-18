@@ -3,8 +3,7 @@ package mage.cards.e;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -13,9 +12,13 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.filter.StaticFilters;
-import mage.target.common.TargetControlledPermanent;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.players.Player;
+import mage.target.common.TargetSacrifice;
 
 import java.util.UUID;
 
@@ -43,10 +46,7 @@ public final class EldraziMonument extends CardImpl {
         this.addAbility(ability);
 
         // At the beginning of your upkeep, sacrifice a creature. If you can't, sacrifice Eldrazi Monument.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new SacrificeSourceUnlessPaysEffect(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT)
-                ).setText("sacrifice a creature. If you can't, sacrifice {this}"), TargetController.YOU, false
-        ));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new EldraziMonumentEffect(), TargetController.YOU, false));
     }
 
     private EldraziMonument(final EldraziMonument card) {
@@ -57,4 +57,45 @@ public final class EldraziMonument extends CardImpl {
     public EldraziMonument copy() {
         return new EldraziMonument(this);
     }
+}
+
+class EldraziMonumentEffect extends OneShotEffect {
+
+    EldraziMonumentEffect() {
+        super(Outcome.Sacrifice);
+        staticText = "sacrifice a creature. If you can't, sacrifice {this}";
+    }
+
+    private EldraziMonumentEffect(final EldraziMonumentEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public EldraziMonumentEffect copy() {
+        return new EldraziMonumentEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
+            return false;
+        }
+        // Sacrifice a creature
+        TargetSacrifice target = new TargetSacrifice(StaticFilters.FILTER_PERMANENT_CREATURE);
+        if (target.canChoose(controller.getId(), source, game)) {
+            controller.choose(Outcome.Sacrifice, target, source, game);
+            Permanent permanent = game.getPermanent(target.getFirstTarget());
+            if (permanent != null) {
+                return permanent.sacrifice(source, game);
+            }
+        }
+        // If you can't, sacrifice Eldrazi Monument
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent != null) {
+            return permanent.sacrifice(source, game);
+        }
+        return false;
+    }
+
 }

@@ -61,7 +61,7 @@ class EchoingCourageEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent targetPermanent = game.getPermanent(targetPointer.getFirst(game, source));
+        Permanent targetPermanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (targetPermanent != null) {
             FilterCreaturePermanent filter = new FilterCreaturePermanent();
             if (CardUtil.haveEmptyName(targetPermanent)) {

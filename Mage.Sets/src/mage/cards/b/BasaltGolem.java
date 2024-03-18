@@ -72,7 +72,7 @@ class BasaltGolemEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent creature = game.getPermanent(targetPointer.getFirst(game, source));
+        Permanent creature = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (creature == null)
             return false;
 

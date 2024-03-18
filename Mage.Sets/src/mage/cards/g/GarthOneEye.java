@@ -69,7 +69,7 @@ class GarthOneEyeEffect extends OneShotEffect {
                 .findCards(new CardCriteria().setCodes("LEA"))
                 .stream()
                 .filter(cardInfo -> names.contains(cardInfo.getName()))
-                .collect(Collectors.toMap(CardInfo::getName, CardInfo::getCard)));
+                .collect(Collectors.toMap(CardInfo::getName, CardInfo::createCard)));
     }
 
     GarthOneEyeEffect() {

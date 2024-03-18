@@ -12,6 +12,7 @@ import mage.game.command.Plane;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
 import mage.target.targetpointer.TargetPointer;
+import mage.util.CardUtil;
 import mage.util.GameLog;
 import org.apache.log4j.Logger;
 
@@ -50,15 +51,15 @@ public class CardsView extends LinkedHashMap<UUID, CardView> {
         }
     }
 
-    public CardsView(Game game, Collection<? extends Card> cards) {
+    public CardsView(Game game, Collection<? extends Card> cards, UUID createdForPlayerId) {
         for (Card card : cards) {
-            this.put(card.getId(), new CardView(card, game, false));
+            this.put(card.getId(), new CardView(card, game, CardUtil.canShowAsControlled(card, createdForPlayerId)));
         }
     }
 
-    public CardsView(Game game, Collection<? extends Card> cards, boolean showFaceDown, boolean storeZone) {
+    public CardsView(Game game, Collection<? extends Card> cards, UUID createdForPlayerId, boolean storeZone) {
         for (Card card : cards) {
-            this.put(card.getId(), new CardView(card, game, false, showFaceDown, storeZone));
+            this.put(card.getId(), new CardView(card, game, CardUtil.canShowAsControlled(card, createdForPlayerId), storeZone));
         }
     }
 

@@ -1,20 +1,16 @@
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DamageAllEffect;
-import mage.constants.SubType;
+import mage.abilities.effects.common.DamageAllControlledTargetEffect;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
-import mage.game.Game;
+import mage.constants.SetTargetPointer;
+import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -34,7 +30,9 @@ public final class SwathcutterGiant extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // Whenever Swathcutter Giant attacks, it deals 1 damage to each creature defending player controls.
-        this.addAbility(new AttacksTriggeredAbility(new SwathcutterGiantEffect(), false));
+        this.addAbility(new AttacksTriggeredAbility(new DamageAllControlledTargetEffect(1)
+                .setText("it deals 1 damage to each creature defending player controls"),
+                false, null, SetTargetPointer.PLAYER));
     }
 
     private SwathcutterGiant(final SwathcutterGiant card) {
@@ -44,32 +42,5 @@ public final class SwathcutterGiant extends CardImpl {
     @Override
     public SwathcutterGiant copy() {
         return new SwathcutterGiant(this);
-    }
-}
-
-class SwathcutterGiantEffect extends OneShotEffect {
-
-    SwathcutterGiantEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "it deals 1 damage to each creature "
-                + "defending player controls.";
-    }
-
-    private SwathcutterGiantEffect(final SwathcutterGiantEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public SwathcutterGiantEffect copy() {
-        return new SwathcutterGiantEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        FilterCreaturePermanent filter = new FilterCreaturePermanent();
-        filter.add(new ControllerIdPredicate(
-                game.getCombat().getDefenderId(source.getSourceId())
-        ));
-        return new DamageAllEffect(1, filter).apply(game, source);
     }
 }

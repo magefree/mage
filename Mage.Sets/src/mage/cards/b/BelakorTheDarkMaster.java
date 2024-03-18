@@ -78,7 +78,7 @@ public final class BelakorTheDarkMaster extends CardImpl {
 class BelakorTheDarkMasterEffect extends OneShotEffect {
 
     BelakorTheDarkMasterEffect() {
-        super(Outcome.Benefit);
+        super(Outcome.Damage);
         staticText = "it deals damage equal to its power to any target";
     }
 

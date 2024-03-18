@@ -14,13 +14,11 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.permanent.token.GoblinToken;
 import mage.target.common.TargetAnyTarget;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 
@@ -32,7 +30,7 @@ public final class PashalikMons extends CardImpl {
     private static final FilterCreaturePermanent filter
             = new FilterCreaturePermanent(SubType.GOBLIN, "Goblin you control");
     private static final FilterControlledPermanent filter2
-            = new FilterControlledCreaturePermanent(SubType.GOBLIN, "a Goblin");
+            = new FilterControlledPermanent(SubType.GOBLIN, "a Goblin");
 
     static {
         filter.add(AnotherPredicate.instance);

@@ -19,7 +19,7 @@ public class Plus2MaceTest extends CardTestPlayerBase {
         String cardName = "+2 Mace";
         CardInfo cardinfo = CardRepository.instance.findCard(cardName);
         Assert.assertNotNull(cardName + " must exists", cardinfo);
-        Card card = cardinfo.getCard();
+        Card card = cardinfo.createCard();
         String cardText = GameLog.replaceNameByColoredName(card, card.getSpellAbility().toString(), null);
         Assert.assertTrue("card text must contain card name", cardText.contains(cardName));
     }

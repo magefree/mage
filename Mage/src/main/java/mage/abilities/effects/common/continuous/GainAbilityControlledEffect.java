@@ -138,6 +138,8 @@ public class GainAbilityControlledEffect extends ContinuousEffectImpl {
         }
         if (forceQuotes || gainedAbility.startsWith("When") || gainedAbility.startsWith("{T}")) {
             gainedAbility = '"' + gainedAbility + '"';
+        } else {
+            gainedAbility = CardUtil.getTextWithFirstCharLowerCase(gainedAbility);
         }
         sb.append(gainedAbility);
         if (!durationRuleAtStart && !duration.toString().isEmpty() && duration != Duration.EndOfGame) {

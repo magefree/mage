@@ -70,7 +70,7 @@ class SpellSyphonEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        StackObject spell = game.getStack().getStackObject(targetPointer.getFirst(game, source));
+        StackObject spell = game.getStack().getStackObject(getTargetPointer().getFirst(game, source));
         if (spell != null) {
             Player player = game.getPlayer(spell.getControllerId());
             Player controller = game.getPlayer(source.getControllerId());

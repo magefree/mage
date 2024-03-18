@@ -1,35 +1,25 @@
-
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.common.TapTargetCost;
+import mage.abilities.abilityword.CohortAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
-import mage.constants.*;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.permanent.TappedPredicate;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.common.TargetControlledPermanent;
+
+import java.util.UUID;
 
 /**
  *
  * @author fireshoes
  */
 public final class AkoumFlameseeker extends CardImpl {
-
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("an untapped Ally you control");
-
-    static {
-        filter.add(SubType.ALLY.getPredicate());
-        filter.add(TappedPredicate.UNTAPPED);
-    }
 
     public AkoumFlameseeker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
@@ -40,11 +30,7 @@ public final class AkoumFlameseeker extends CardImpl {
         this.toughness = new MageInt(2);
 
         // <i>Cohort</i> &mdash; {T}, Tap an untapped Ally you control: Discard a card. If you do, draw a card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new AkoumFlameseekerEffect(), new TapSourceCost());
-        ability.addCost(new TapTargetCost(new TargetControlledPermanent(filter)));
-        ability.setAbilityWord(AbilityWord.COHORT);
-        this.addAbility(ability);
+        this.addAbility(new CohortAbility(new AkoumFlameseekerEffect()));
     }
 
     private AkoumFlameseeker(final AkoumFlameseeker card) {

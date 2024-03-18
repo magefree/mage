@@ -5,22 +5,20 @@ import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.TargetPlayerGainControlSourceEffect;
 import mage.abilities.hint.common.MyTurnHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
+import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.Zone;
 import mage.target.common.TargetOpponent;
 
 import java.util.UUID;
 
 /**
- * @author jeffwadsworth
+ * @author xenohedron
  */
 public final class HumbleDefector extends CardImpl {
 
@@ -32,7 +30,9 @@ public final class HumbleDefector extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {T}: Draw two cards. Target opponent gains control of Humble Defector. Activate this ability only during your turn.
-        Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new HumbleDefectorEffect(), new TapSourceCost(), MyTurnCondition.instance);
+        Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD,
+                new DrawCardSourceControllerEffect(2), new TapSourceCost(), MyTurnCondition.instance);
+        ability.addEffect(new TargetPlayerGainControlSourceEffect());
         ability.addTarget(new TargetOpponent());
         ability.addHint(MyTurnHint.instance);
         this.addAbility(ability);
@@ -46,68 +46,5 @@ public final class HumbleDefector extends CardImpl {
     @Override
     public HumbleDefector copy() {
         return new HumbleDefector(this);
-    }
-}
-
-class HumbleDefectorEffect extends OneShotEffect {
-
-    HumbleDefectorEffect() {
-        super(Outcome.Discard);
-        this.staticText = "Draw two cards. Target opponent gains control of {this}.";
-    }
-
-    private HumbleDefectorEffect(final HumbleDefectorEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public HumbleDefectorEffect copy() {
-        return new HumbleDefectorEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            controller.drawCards(2, source, game);
-        }
-        Permanent humbleDefector = source.getSourcePermanentIfItStillExists(game);
-        Player targetOpponent = game.getPlayer(getTargetPointer().getFirst(game, source));
-        if (targetOpponent != null && humbleDefector != null) {
-            ContinuousEffect effect = new HumbleDefectorControlSourceEffect();
-            game.addEffect(effect, source);
-            game.informPlayers(humbleDefector.getName() + " is now controlled by " + targetOpponent.getLogName());
-            return true;
-        }
-        return false;
-    }
-}
-
-class HumbleDefectorControlSourceEffect extends ContinuousEffectImpl {
-
-    HumbleDefectorControlSourceEffect() {
-        super(Duration.Custom, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
-    }
-
-    private HumbleDefectorControlSourceEffect(final HumbleDefectorControlSourceEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public HumbleDefectorControlSourceEffect copy() {
-        return new HumbleDefectorControlSourceEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player targetOpponent = game.getPlayer(source.getFirstTarget());
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null && targetOpponent != null) {
-            permanent.changeControllerId(targetOpponent.getId(), game, source);
-        } else {
-            // no valid target exists, effect can be discarded
-            discard();
-        }
-        return true;
     }
 }

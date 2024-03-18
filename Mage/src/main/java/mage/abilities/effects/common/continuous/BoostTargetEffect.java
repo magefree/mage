@@ -68,7 +68,7 @@ public class BoostTargetEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         int affectedTargets = 0;
-        for (UUID permanentId : targetPointer.getTargets(game, source)) {
+        for (UUID permanentId : getTargetPointer().getTargets(game, source)) {
             Permanent target = game.getPermanent(permanentId);
             if (target != null && target.isCreature(game)) {
                 target.addPower(power.calculate(game, source, this));

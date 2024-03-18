@@ -83,6 +83,7 @@ class ShamanEnKorRedirectFromTargetEffect extends RedirectionEffect {
 
     @Override
     public void init(Ability source, Game game) {
+        super.init(source, game);
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             TargetSource target = new TargetSource();

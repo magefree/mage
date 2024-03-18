@@ -80,7 +80,7 @@ class JarJarBinksEffect extends OneShotEffect {
         Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (player != null && jarJar != null && opponent != null) {
             ContinuousEffect effect = new JarJarBinksGainControlSourceEffect();
-            effect.setTargetPointer(getTargetPointer());
+            effect.setTargetPointer(this.getTargetPointer().copy());
             game.addEffect(effect, source);
             game.informPlayers(jarJar.getName() + " is now controlled by " + opponent.getLogName());
             return true;

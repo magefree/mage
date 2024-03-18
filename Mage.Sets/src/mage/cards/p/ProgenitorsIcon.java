@@ -64,6 +64,7 @@ class ProgenitorsIconAsThoughEffect extends AsThoughEffectImpl {
 
     @Override
     public void init(Ability source, Game game) {
+        super.init(source, game);
         SubType subType = ChooseCreatureTypeEffect.getChosenCreatureType(source.getSourceId(), game);
         ProgenitorsIconWatcher.addPlayer(source.getControllerId(), subType, game);
     }

@@ -69,12 +69,12 @@ class GoreVassalEffect extends RegenerateTargetEffect {
 
     @Override
     public void init(Ability source, Game game) {
+        super.init(source, game);
+
         Permanent creature = game.getPermanent(source.getFirstTarget());
         if (creature == null || creature.getToughness().getValue() < 1) {
             this.discard();
-            return;
         }
-        super.init(source, game);
     }
 
 }

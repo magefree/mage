@@ -18,10 +18,10 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.FilterObject;
 import mage.filter.FilterStackObject;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
@@ -37,12 +37,11 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public final class RaidingParty extends CardImpl {
     
-    private static final FilterObject filterWhite = new FilterStackObject("white spells or abilities from white sources");
-    private static final FilterControlledCreaturePermanent filterOrc = new FilterControlledCreaturePermanent("an Orc");
+    private static final FilterStackObject filterWhite = new FilterStackObject("white spells or abilities from white sources");
+    private static final FilterControlledPermanent filterOrc = new FilterControlledPermanent(SubType.ORC, "an Orc");
     
     static {
         filterWhite.add(new ColorPredicate(ObjectColor.WHITE));
-        filterOrc.add(SubType.ORC.getPredicate());
     }
 
     public RaidingParty(UUID ownerId, CardSetInfo setInfo) {

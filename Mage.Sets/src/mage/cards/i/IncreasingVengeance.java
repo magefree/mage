@@ -71,7 +71,7 @@ class IncreasingVengeanceEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
+        Spell spell = game.getStack().getSpell(getTargetPointer().getFirst(game, source));
         if (spell == null) {
             return false;
         }

@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
@@ -9,6 +8,7 @@ import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.constants.Zone;
+import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
@@ -30,6 +30,8 @@ public class CreateTokenEffect extends OneShotEffect {
     private final boolean attacking;
     private String additionalRules;
     private List<UUID> lastAddedTokenIds = new ArrayList<>();
+    private CounterType counterType;
+    private DynamicValue numberOfCounters;
 
     public CreateTokenEffect(Token token) {
         this(token, StaticValue.get(1));
@@ -67,7 +69,15 @@ public class CreateTokenEffect extends OneShotEffect {
         this.tapped = effect.tapped;
         this.attacking = effect.attacking;
         this.lastAddedTokenIds.addAll(effect.lastAddedTokenIds);
+        this.counterType = effect.counterType;
+        this.numberOfCounters = effect.numberOfCounters;
         this.additionalRules = effect.additionalRules;
+    }
+
+    public CreateTokenEffect entersWithCounters(CounterType counterType, DynamicValue numberOfCounters) {
+        this.counterType = counterType;
+        this.numberOfCounters = numberOfCounters;
+        return this;
     }
 
     @Override
@@ -80,6 +90,15 @@ public class CreateTokenEffect extends OneShotEffect {
         int value = amount.calculate(game, source, this);
         token.putOntoBattlefield(value, game, source, source.getControllerId(), tapped, attacking);
         this.lastAddedTokenIds = token.getLastAddedTokenIds();
+        // TODO: Workaround to add counters to all created tokens, necessary for correct interactions with cards like Chatterfang, Squirrel General and Ochre Jelly / Printlifter Ooze. See #10786
+        if (counterType != null) {
+            for (UUID tokenId : lastAddedTokenIds) {
+                Permanent tokenPermanent = game.getPermanent(tokenId);
+                if (tokenPermanent != null) {
+                    tokenPermanent.addCounters(counterType.createInstance(numberOfCounters.calculate(game, source, this)), source.getControllerId(), source, game);
+                }
+            }
+        }
 
         return true;
     }

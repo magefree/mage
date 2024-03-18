@@ -58,7 +58,7 @@ public final class ThingInTheIce extends CardImpl {
         effect.setText("remove an ice counter from {this}");
         Ability ability = new SpellCastControllerTriggeredAbility(effect, filter, false);
         effect = new ConditionalOneShotEffect(new TransformSourceEffect(), new SourceHasCounterCondition(CounterType.ICE, 0, 0),
-                "if there are no ice counters on it, transform it");
+                "Then if it has no ice counters on it, transform it");
         ability.addEffect(effect);
         this.addAbility(ability);
 

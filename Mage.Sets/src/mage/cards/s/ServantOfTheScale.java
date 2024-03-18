@@ -81,7 +81,7 @@ class ServantOfTheScaleEffect extends OneShotEffect {
             int amount = sourcePermanent.getCounters(game).getCount(CounterType.P1P1);
             if (amount > 0) {
                 Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance(amount));
-                effect.setTargetPointer(targetPointer);
+                effect.setTargetPointer(this.getTargetPointer().copy());
                 effect.apply(game, source);
             }
             return true;

@@ -1,4 +1,3 @@
-
 package mage.cards.t;
 
 import java.util.UUID;
@@ -16,6 +15,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.counters.CounterType;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -38,10 +38,10 @@ public final class TheBattleOfEndor extends CardImpl {
         this.getSpellAbility().addEffect(new TheBattleOfEndorEffect());
 
         // Creatures you control gain trample and haste until end of turn.
-        Effect effect = new GainAbilityAllEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent());
+        Effect effect = new GainAbilityAllEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_CONTROLLED_CREATURES);
         effect.setText("Creatures you control gain trample");
         this.getSpellAbility().addEffect(effect);
-        effect = new GainAbilityAllEffect(HasteAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent());
+        effect = new GainAbilityAllEffect(HasteAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_CONTROLLED_CREATURES);
         effect.setText("and haste until end of turn");
         this.getSpellAbility().addEffect(effect);
 

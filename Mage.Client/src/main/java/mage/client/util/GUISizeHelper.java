@@ -84,9 +84,11 @@ public final class GUISizeHelper {
         return new Font("Arial", Font.PLAIN, 14);
     }
 
-    public static void changeGUISize() {
+    public static void refreshGUIAndCards() {
         calculateGUISizes();
-        MageFrame.getInstance().changeGUISize();
+        if (MageFrame.getInstance() != null) {
+            MageFrame.getInstance().refreshGUIAndCards();
+        }
     }
 
     public static void calculateGUISizes() {

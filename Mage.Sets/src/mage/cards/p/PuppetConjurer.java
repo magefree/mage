@@ -16,7 +16,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.game.permanent.token.HomunculusToken;
 
 /**
@@ -25,11 +25,7 @@ import mage.game.permanent.token.HomunculusToken;
  */
 public final class PuppetConjurer extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Homunculus");
-
-    static {
-        filter.add(SubType.HOMUNCULUS.getPredicate());
-    }
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.HOMUNCULUS, "Homunculus");
 
     public PuppetConjurer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}{B}");

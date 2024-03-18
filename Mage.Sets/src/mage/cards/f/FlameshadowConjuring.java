@@ -69,7 +69,7 @@ class FlameshadowConjuringEffect extends OneShotEffect {
         Permanent permanent = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
         if (permanent != null) {
             CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(null, null, true);
-            effect.setTargetPointer(getTargetPointer());
+            effect.setTargetPointer(this.getTargetPointer().copy());
             if (effect.apply(game, source)) {
                 for (Permanent tokenPermanent : effect.getAddedPermanents()) {
                     ExileTargetEffect exileEffect = new ExileTargetEffect();

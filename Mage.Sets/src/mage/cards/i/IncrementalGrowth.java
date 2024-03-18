@@ -33,7 +33,7 @@ public final class IncrementalGrowth extends CardImpl {
         target1.setTargetTag(1);
         this.getSpellAbility().addTarget(target1);
 
-        FilterCreaturePermanent filter2 = new FilterCreaturePermanent("another creature (gets two +1/+1 counter)");
+        FilterCreaturePermanent filter2 = new FilterCreaturePermanent("another creature (gets two +1/+1 counters)");
         filter2.add(new AnotherTargetPredicate(2));
         TargetCreaturePermanent target2 = new TargetCreaturePermanent(filter2);
         target2.setTargetTag(2);

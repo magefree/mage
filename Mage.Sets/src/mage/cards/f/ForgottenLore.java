@@ -61,7 +61,7 @@ class ForgottenLoreEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player you = game.getPlayer(source.getControllerId());
-        Player opponent = game.getPlayer(targetPointer.getFirst(game, source));
+        Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (you != null && opponent != null) {
             FilterCard filter = new FilterCard();
             filter.add(new OwnerIdPredicate(you.getId()));

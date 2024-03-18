@@ -96,15 +96,13 @@ public enum ScryfallImageSource implements CardImageSource {
         }
 
         // double faced cards (modal double faces cards too)
-        if (card.isTwoFacedCard()) {
-            if (card.isSecondSide()) {
-                // back face - must be prepared before
-                logger.warn("Can't find back face info in prepared list "
-                        + card.getName() + " (" + card.getSet() + ") #" + card.getCollectorId());
-                return new CardImageUrls(null, null);
-            } else {
-                // front face - can be downloaded normally as basic card
-            }
+        if (card.isSecondSide()) {
+            // back face - must be prepared before
+            logger.warn("Can't find back face info in prepared list "
+                    + card.getName() + " (" + card.getSet() + ") #" + card.getCollectorId());
+            return new CardImageUrls(null, null);
+        } else {
+            // front face - can be downloaded normally as basic card
         }
 
         // basic cards by api call (redirect to img link)
@@ -219,7 +217,7 @@ public enum ScryfallImageSource implements CardImageSource {
         int needPrepareCount = 0;
         int currentPrepareCount = 0;
         for (CardDownloadData card : downloadList) {
-            if (card.isTwoFacedCard() && card.isSecondSide()) {
+            if (card.isSecondSide()) {
                 needPrepareCount++;
             }
         }
@@ -232,7 +230,7 @@ public enum ScryfallImageSource implements CardImageSource {
             }
 
             // prepare the back face URL
-            if (card.isTwoFacedCard() && card.isSecondSide()) {
+            if (card.isSecondSide()) {
                 currentPrepareCount++;
                 try {
                     String url = getFaceImageUrl(proxy, card, card.isToken());

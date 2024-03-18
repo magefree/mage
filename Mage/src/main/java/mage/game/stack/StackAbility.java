@@ -148,6 +148,16 @@ public class StackAbility extends StackObjectImpl implements Ability {
     }
 
     @Override
+    public String getImageFileName() {
+        return "";
+    }
+
+    @Override
+    public void setImageFileName(String imageFile) {
+        throw new IllegalStateException("Wrong code usage: you can't change image file name for the stack ability");
+    }
+
+    @Override
     public Integer getImageNumber() {
         return 0;
     }
@@ -299,6 +309,11 @@ public class StackAbility extends StackObjectImpl implements Ability {
     @Override
     public UUID getControllerId() {
         return this.controllerId;
+    }
+
+    @Override
+    public UUID getControllerOrOwnerId() {
+        return getControllerId();
     }
 
     @Override

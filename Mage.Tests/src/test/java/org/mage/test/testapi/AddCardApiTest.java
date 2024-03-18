@@ -78,18 +78,42 @@ public class AddCardApiTest extends CardTestPlayerBase {
         execute();
 
         assertPermanentCount(playerA, "Memorial to Glory", 2);
-        getBattlefieldCards(playerA).stream()
-                .filter(card -> card.getName().equals("Memorial to Glory"))
-                .forEach(card -> Assert.assertEquals("40K", card.getExpansionSetCode()));
+        getBattlefieldCards(playerA)
+                .stream()
+                .filter(info -> info.getCard().getName().equals("Memorial to Glory"))
+                .forEach(info -> Assert.assertEquals("40K", info.getCard().getExpansionSetCode()));
 
         assertPermanentCount(playerA, "Plains", 2);
-        getBattlefieldCards(playerA).stream()
-                .filter(card -> card.getName().equals("Plains"))
-                .forEach(card -> Assert.assertEquals("PANA", card.getExpansionSetCode()));
+        getBattlefieldCards(playerA)
+                .stream()
+                .filter(info -> info.getCard().getName().equals("Plains"))
+                .forEach(info -> Assert.assertEquals("PANA", info.getCard().getExpansionSetCode()));
     }
 
     @Test(expected = org.junit.ComparisonFailure.class)
     public void test_CardNameWithSetCode_RaiseErrorOnUnknownSet() {
         addCard(Zone.BATTLEFIELD, playerA, "SS4-Plains", 1);
+    }
+
+    // Add card to exile added for #11738
+    @Test
+    public void test_AddCardExiled() {
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 4);
+        addCard(Zone.HAND, playerA, "Mind Raker");
+
+        addCard(Zone.EXILED, playerB, "Llanowar Elves");
+
+        checkExileCount("llanowar elves in exile", 1, PhaseStep.PRECOMBAT_MAIN, playerB, "Llanowar Elves", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mind Raker");
+        setChoice(playerA, true);
+        addTarget(playerA, "Llanowar Elves");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertExileCount(playerB, "Llanowar Elves", 0);
+        assertGraveyardCount(playerB, "Llanowar Elves", 1);
     }
 }

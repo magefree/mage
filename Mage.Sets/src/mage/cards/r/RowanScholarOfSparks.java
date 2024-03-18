@@ -158,7 +158,7 @@ class WillScholarOfFrostEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        Cards cards = new CardsImpl(targetPointer.getTargets(game, source));
+        Cards cards = new CardsImpl(getTargetPointer().getTargets(game, source));
         Map<UUID, Integer> playerMap = cards
                 .getCards(game)
                 .stream()

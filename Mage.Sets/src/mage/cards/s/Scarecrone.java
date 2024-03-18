@@ -16,9 +16,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  * @author Loki
@@ -26,7 +25,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 public final class Scarecrone extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("artifact creature card from your graveyard");
-    private static final FilterControlledCreaturePermanent filterScarecrow = new FilterControlledCreaturePermanent("Scarecrow");
+    private static final FilterControlledPermanent filterScarecrow = new FilterControlledPermanent("Scarecrow");
     static {
         filter.add(CardType.ARTIFACT.getPredicate());
         filter.add(CardType.CREATURE.getPredicate());

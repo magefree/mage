@@ -1,4 +1,3 @@
-
 package mage.cards.d;
 
 import java.util.UUID;
@@ -12,8 +11,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.filter.FilterPermanent;
 import mage.target.common.TargetAnyTarget;
 
 /**
@@ -23,11 +21,7 @@ import mage.target.common.TargetAnyTarget;
  */
 public final class Deadapult extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a Zombie");
-
-    static {
-        filter.add(SubType.ZOMBIE.getPredicate());
-    }
+    private static final FilterPermanent filter = new FilterPermanent(SubType.ZOMBIE, "a Zombie");
 
     public Deadapult(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}");

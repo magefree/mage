@@ -72,9 +72,9 @@ class SandsOfTimeEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (player != null) {
-            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, targetPointer.getFirst(game, source), game)) {
+            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, getTargetPointer().getFirst(game, source), game)) {
                 if (permanent.isTapped()) {
                     permanent.untap(game);
                 } else {

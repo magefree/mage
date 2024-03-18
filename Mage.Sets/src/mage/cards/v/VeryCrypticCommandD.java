@@ -103,9 +103,20 @@ class TurnOverEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent creature = game.getPermanent(source.getFirstTarget());
         if (creature != null) {
+            // To turn over a creature means to physically turn the card over. If the result is a face-down card, it’s
+            // a colorless 2/2 creature, the same as one would get from using the morph ability. Turning a face-down
+            // card over results in it being turned face up. Any abilities that trigger when it’s turned face up will
+            // work. Turning a double-faced card over is the same as transforming it. Any abilities that trigger when
+            // you transform it will work. Turning a combined host/augment creature over will result in a big colorless
+            // 2/2 creature represented by two cards. Turning a melded creature over will result in the two cards
+            // breaking apart and forming two separate creatures, but they’ll probably just get right back together.
+            // Turning B.F.M. (Big Furry Monster) over is the same as turning a combined creature over.
+            // (2018-01-19)
             if (creature.isFaceDown(game)) {
+                // face down -> face up
                 creature.turnFaceUp(source, game, source.getControllerId());
             } else {
+                // face up -> face down without face up ability
                 creature.turnFaceDown(source, game, source.getControllerId());
                 MageObjectReference objectReference = new MageObjectReference(creature.getId(), creature.getZoneChangeCounter(game), game);
                 game.addEffect(new BecomesFaceDownCreatureEffect(null, objectReference, Duration.Custom, FaceDownType.MANUAL), source);

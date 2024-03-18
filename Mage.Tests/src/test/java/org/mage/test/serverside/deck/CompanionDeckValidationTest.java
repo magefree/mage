@@ -2,12 +2,12 @@ package org.mage.test.serverside.deck;
 
 import mage.deck.Commander;
 import org.junit.Test;
-import org.mage.test.serverside.base.MageTestBase;
+import org.mage.test.serverside.base.MageTestPlayerBase;
 
 /**
  * @author TheElk801
  */
-public class CompanionDeckValidationTest extends MageTestBase {
+public class CompanionDeckValidationTest extends MageTestPlayerBase {
 
     @Test
     public void testGyrudaTrue() {

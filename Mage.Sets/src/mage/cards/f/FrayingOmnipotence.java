@@ -1,19 +1,18 @@
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.Target;
-import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetSacrifice;
+
+import java.util.UUID;
 
 /**
  *
@@ -89,12 +88,11 @@ class FrayingOmnipotenceEffect extends OneShotEffect {
             if (player == null) {
                 continue;
             }
-            FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
-            int creaturesToSacrifice = (int) Math.ceil(game.getBattlefield().count(filter, player.getId(), source, game) / 2.0);
+            int creaturesToSacrifice = (int) Math.ceil(game.getBattlefield().count(StaticFilters.FILTER_CONTROLLED_CREATURE, player.getId(), source, game) / 2.0);
             if (creaturesToSacrifice == 0) {
                 continue;
             }
-            Target target = new TargetSacrifice(creaturesToSacrifice, filter);
+            TargetSacrifice target = new TargetSacrifice(creaturesToSacrifice, StaticFilters.FILTER_PERMANENT_CREATURE);
             target.chooseTarget(Outcome.Sacrifice, playerId, source, game);
             for (UUID permanentId : target.getTargets()) {
                 Permanent permanent = game.getPermanent(permanentId);

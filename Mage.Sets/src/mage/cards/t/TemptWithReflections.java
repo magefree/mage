@@ -62,7 +62,7 @@ class TemptWithReflectionsEffect extends OneShotEffect {
         Permanent permanent = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
         if (permanent != null) {
             Effect effect = new CreateTokenCopyTargetEffect();
-            effect.setTargetPointer(getTargetPointer());
+            effect.setTargetPointer(this.getTargetPointer().copy());
             effect.apply(game, source);
 
             Set<UUID> playersSaidYes = new HashSet<>();
@@ -85,12 +85,12 @@ class TemptWithReflectionsEffect extends OneShotEffect {
 
             for (UUID playerId : playersSaidYes) {
                 effect = new CreateTokenCopyTargetEffect(playerId);
-                effect.setTargetPointer(getTargetPointer());
+                effect.setTargetPointer(this.getTargetPointer().copy());
                 effect.apply(game, source);
 
                 // create a token for the source controller as well
                 effect = new CreateTokenCopyTargetEffect();
-                effect.setTargetPointer(getTargetPointer());
+                effect.setTargetPointer(this.getTargetPointer().copy());
                 effect.apply(game, source);
             }
             return true;

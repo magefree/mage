@@ -59,9 +59,9 @@ class ColdSnapDamageTargetEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (player != null) {
-            int damage = game.getBattlefield().getAllActivePermanents(filter, targetPointer.getFirst(game, source), game).size();
+            int damage = game.getBattlefield().getAllActivePermanents(filter, getTargetPointer().getFirst(game, source), game).size();
             player.damage(damage, source.getSourceId(), source, game);
             return true;
         }

@@ -124,7 +124,7 @@ class StrixhavenStadiumEffect extends OneShotEffect {
                     permanent.getCounters(game).getCount(CounterType.POINT)
             ), source, game);
         }
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (player != null) {
             player.lost(game);
             return true;

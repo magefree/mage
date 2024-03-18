@@ -88,7 +88,6 @@ class OlagLudevicsHubrisEffect extends ReplacementEffectImpl {
         CopyApplier applier = new OlagLudevicsHubrisCopyApplier();
         applier.apply(game, newBluePrint, source, source.getSourceId());
         CopyEffect copyEffect = new CopyEffect(Duration.Custom, newBluePrint, source.getSourceId());
-        copyEffect.newId();
         copyEffect.setApplier(applier);
         Ability newAbility = source.copy();
         copyEffect.init(newAbility, game);

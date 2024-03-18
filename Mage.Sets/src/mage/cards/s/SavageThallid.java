@@ -19,10 +19,9 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.game.permanent.token.SaprolingToken;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
@@ -36,11 +35,7 @@ public final class SavageThallid extends CardImpl {
         filter.add(SubType.FUNGUS.getPredicate());
     }
 
-    private static final FilterControlledCreaturePermanent filter2 = new FilterControlledCreaturePermanent("Saproling");
-    
-    static {
-        filter2.add(SubType.SAPROLING.getPredicate());
-    }
+    private static final FilterControlledPermanent filter2 = new FilterControlledPermanent(SubType.SAPROLING, "Saproling");
     
     public SavageThallid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");

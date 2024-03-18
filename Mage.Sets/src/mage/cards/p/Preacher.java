@@ -12,7 +12,7 @@ import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -38,7 +38,7 @@ public final class Preacher extends CardImpl {
 
         // {T}: Gain control of target creature of an opponent's choice that they control for as long as Preacher remains tapped.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreacherEffect(), new TapSourceCost());
-        ability.addTarget(new TargetOpponentsChoicePermanent(1, 1, new FilterControlledCreaturePermanent(), false));
+        ability.addTarget(new TargetOpponentsChoicePermanent(1, 1, StaticFilters.FILTER_CONTROLLED_CREATURE, false));
         this.addAbility(ability);
 
     }

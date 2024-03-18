@@ -102,7 +102,7 @@ class WrathfulRaptorsTriggeredAbility extends TriggeredAbilityImpl {
 class WrathfulRaptorsEffect extends OneShotEffect {
 
     WrathfulRaptorsEffect() {
-        super(Outcome.Benefit);
+        super(Outcome.Damage);
     }
 
     private WrathfulRaptorsEffect(final WrathfulRaptorsEffect effect) {

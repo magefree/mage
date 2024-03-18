@@ -66,12 +66,12 @@ class HereticsPunishmentEffect extends OneShotEffect {
                 .mapToInt(MageObject::getManaValue)
                 .max()
                 .orElse(0);
-        Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
+        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (permanent != null) {
             permanent.damage(maxCost, source.getSourceId(), source, game, false, true);
             return true;
         }
-        Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
+        Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (targetPlayer != null) {
             targetPlayer.damage(maxCost, source.getSourceId(), source, game);
             return true;

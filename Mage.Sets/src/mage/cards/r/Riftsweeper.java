@@ -72,7 +72,7 @@ class RiftsweeperEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card card = game.getCard(targetPointer.getFirst(game, source));
+        Card card = game.getCard(getTargetPointer().getFirst(game, source));
         if (card != null) {
             // remove existing suspend counters
             card.getCounters(game).clear();

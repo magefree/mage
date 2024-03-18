@@ -76,7 +76,7 @@ class VastwoodAnimistEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         int amount = new PermanentsOnBattlefieldCount(filterAllies).calculate(game, source, this);
         ContinuousEffect effect = new BecomesCreatureTargetEffect(new VastwoodAnimistElementalToken(amount), false, true, Duration.EndOfTurn);
-        effect.setTargetPointer(targetPointer);
+        effect.setTargetPointer(this.getTargetPointer().copy());
         game.addEffect(effect, source);
         return false;
     }

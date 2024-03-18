@@ -11,8 +11,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.filter.predicate.Predicates;
+import mage.filter.common.FilterNonlandCard;
 
 /**
  *
@@ -20,10 +19,9 @@ import mage.filter.predicate.Predicates;
  */
 public final class HuntingVelociraptor extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("Dinosaur spells you cast");
+    private static final FilterNonlandCard filter = new FilterNonlandCard("Dinosaur spells you cast");
 
     static {
-        filter.add(Predicates.not(CardType.LAND.getPredicate()));
         filter.add(SubType.DINOSAUR.getPredicate());
     }
 

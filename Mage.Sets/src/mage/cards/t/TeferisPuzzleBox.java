@@ -51,7 +51,7 @@ class TeferisPuzzleBoxEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (player != null) {
             int count = player.getHand().size();
             player.putCardsOnBottomOfLibrary(player.getHand(), game, source, true);

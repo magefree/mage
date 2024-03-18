@@ -90,7 +90,7 @@ class ChampionsOfMinasTirithEffect extends OneShotEffect {
                 new TargetPlayerCantAttackYouEffect(Duration.EndOfCombat),
                 ManaUtil.createManaCost(CardsInTargetPlayerHandCount.instance, game, source, this),
                 "Pay to be able to attack " + player.getName() + " this combat?"
-        ).setTargetPointer(targetPointer).apply(game, source);
+        ).setTargetPointer(this.getTargetPointer().copy()).apply(game, source);
     }
 }
 
@@ -111,6 +111,6 @@ class ChampionsOfMinasTirithDoIfCostPaid extends DoIfCostPaid {
 
     @Override
     protected Player getPayingPlayer(Game game, Ability source) {
-        return game.getPlayer(targetPointer.getFirst(game, source));
+        return game.getPlayer(getTargetPointer().getFirst(game, source));
     }
 }

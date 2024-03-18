@@ -14,7 +14,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
@@ -34,8 +34,7 @@ public final class DelayTactic extends CardImpl {
 
         // Choose one -
         //   Creatures you control gain hexproof until end of turn.
-        this.getSpellAbility().addEffect(new GainAbilityAllEffect(HexproofAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent())
-            .setText("Creatures you control gain hexproof until end of turn"));
+        this.getSpellAbility().addEffect(new GainAbilityAllEffect(HexproofAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_CONTROLLED_CREATURES));
 
         //   Creatures target opponent controls don't untap during their next untap step.
         Mode mode = new Mode(new DelayTacticEffect());

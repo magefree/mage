@@ -18,14 +18,14 @@ import mage.constants.Outcome;
 import mage.constants.SpellAbilityType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetSacrifice;
 
 /**
  *
@@ -79,27 +79,27 @@ class BoundEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            TargetControlledPermanent target = new TargetControlledPermanent(1, 1, new FilterControlledCreaturePermanent("a creature (to sacrifice)"), true);
-            if (target.canChoose(controller.getId(), source, game)) {
-                if (controller.chooseTarget(outcome, target, source, game)) {
-                    Permanent toSacrifice = game.getPermanent(target.getFirstTarget());
-                    if (toSacrifice != null) {
-                        toSacrifice.sacrifice(source, game);
-                        game.getState().processAction(game);
-                        int colors = toSacrifice.getColor(game).getColorCount();
-                        if (colors > 0) {
-                            TargetCardInYourGraveyard targetCard = new TargetCardInYourGraveyard(0, colors,
-                                    new FilterCard("up to " + colors + " card" + (colors > 1 ? "s" : "") + " from your graveyard"));
-                            controller.chooseTarget(outcome, targetCard, source, game);
-                            controller.moveCards(new CardsImpl(targetCard.getTargets()), Zone.HAND, source, game);
-                        }
-                    }
+        if (controller == null) {
+            return false;
+        }
+        TargetSacrifice target = new TargetSacrifice(StaticFilters.FILTER_PERMANENT_CREATURE);
+        if (target.canChoose(controller.getId(), source, game)
+                && (controller.chooseTarget(outcome, target, source, game))) {
+            Permanent toSacrifice = game.getPermanent(target.getFirstTarget());
+            if (toSacrifice != null) {
+                toSacrifice.sacrifice(source, game);
+                game.getState().processAction(game);
+                int colors = toSacrifice.getColor(game).getColorCount();
+                if (colors > 0) {
+                    TargetCardInYourGraveyard targetCard = new TargetCardInYourGraveyard(0, colors,
+                            new FilterCard("up to " + colors + " card" + (colors > 1 ? "s" : "") + " from your graveyard"));
+                    controller.chooseTarget(outcome, targetCard, source, game);
+                    controller.moveCards(new CardsImpl(targetCard.getTargets()), Zone.HAND, source, game);
                 }
             }
-            return true;
+
         }
-        return false;
+        return true;
     }
 }
 

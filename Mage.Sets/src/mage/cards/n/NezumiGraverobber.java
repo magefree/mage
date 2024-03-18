@@ -19,6 +19,7 @@ import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.permanent.token.TokenImpl;
@@ -73,7 +74,7 @@ class NezumiGraverobberFlipEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card card = game.getCard(targetPointer.getFirst(game, source));
+        Card card = game.getCard(getTargetPointer().getFirst(game, source));
         if (card != null) {
             Player player = game.getPlayer(card.getOwnerId());
             if (player != null) {
@@ -105,7 +106,7 @@ class NighteyesTheDesecratorToken extends TokenImpl {
         toughness = new MageInt(2);
         // {4}{B}: Put target creature card from a graveyard onto the battlefield under your control.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnFromGraveyardToBattlefieldTargetEffect(), new ManaCostsImpl<>("{4}{B}"));
-        ability.addTarget(new TargetCardInGraveyard(new FilterCreatureCard("creature card from a graveyard")));
+        ability.addTarget(new TargetCardInGraveyard(StaticFilters.FILTER_CARD_CREATURE_A_GRAVEYARD));
         this.addAbility(ability);
     }
     private NighteyesTheDesecratorToken(final NighteyesTheDesecratorToken token) {

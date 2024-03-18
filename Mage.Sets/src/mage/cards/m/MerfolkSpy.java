@@ -60,7 +60,7 @@ class MerfolkSpyEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (player != null && !player.getHand().isEmpty()) {
             Cards revealed = new CardsImpl();
             revealed.add(player.getHand().getRandom(game));

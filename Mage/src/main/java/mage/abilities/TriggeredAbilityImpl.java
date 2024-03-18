@@ -370,7 +370,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
     }
 
     public static boolean isInUseableZoneDiesTrigger(TriggeredAbility source, GameEvent event, Game game) {
-        // Get the source permanent of the ability 
+        // Get the source permanent of the ability
         MageObject sourceObject = null;
         if (game.getState().getZone(source.getSourceId()) == Zone.BATTLEFIELD) {
             sourceObject = game.getPermanent(source.getSourceId());

@@ -1,12 +1,10 @@
-
 package mage.cards.q;
 
-import java.util.UUID;
 import mage.ConditionalMana;
 import mage.MageInt;
-import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.abilities.common.TurnFaceUpAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.common.TapSourceCost;
@@ -17,7 +15,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.game.Game;
-import mage.game.stack.Spell;
+import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -71,14 +71,17 @@ class QarsiDeceiverManaCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        MageObject object = game.getObject(source);
-        if (object instanceof Spell) {
-            if (((Spell) object).isFaceDown(game)) {
-                return true;
-            }
+        if (source instanceof SpellAbility) {
+            return ((SpellAbility) source).getSpellAbilityCastMode().isFaceDown()
+                    && ((SpellAbility) source).getCharacteristics(game).isCreature(game);
         }
+        // morph cost or turn manifest creature face up
         if (source instanceof TurnFaceUpAbility) {
-            return true;
+            Permanent permanent = game.getPermanent(source.getSourceId());
+            if (permanent == null) {
+                return false;
+            }
+            return permanent.isManifested() || permanent.isMorphed();
         }
         return false;
     }

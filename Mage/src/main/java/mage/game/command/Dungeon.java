@@ -185,6 +185,11 @@ public class Dungeon extends CommandObjectImpl {
     }
 
     @Override
+    public UUID getControllerOrOwnerId() {
+        return getControllerId();
+    }
+
+    @Override
     public void setCopy(boolean isCopy, MageObject copyFrom) {
         this.copy = isCopy;
         this.copyFrom = (copyFrom != null ? copyFrom.copy() : null);

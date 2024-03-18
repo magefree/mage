@@ -131,7 +131,6 @@ class DermotaxiCopyEffect extends OneShotEffect {
         DermotaxiCopyApplier applier = new DermotaxiCopyApplier();
         applier.apply(game, newBluePrint, source, sourcePermanent.getId());
         CopyEffect copyEffect = new CopyEffect(Duration.EndOfTurn, newBluePrint, sourcePermanent.getId());
-        copyEffect.newId();
         copyEffect.setApplier(applier);
         game.addEffect(copyEffect, source);
         return true;

@@ -1,35 +1,24 @@
-
 package mage.cards.j;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.CreatureCountCondition;
-import mage.abilities.costs.mana.ManaCosts;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalRestrictionEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedSourceEffect;
-import mage.abilities.effects.common.continuous.BecomesFaceDownCreatureEffect;
-import mage.abilities.effects.common.continuous.BecomesFaceDownCreatureEffect.FaceDownType;
+import mage.abilities.effects.keyword.ManifestEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
-import mage.game.ExileZone;
+import mage.constants.*;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.*;
 
 /**
  *
@@ -82,35 +71,30 @@ class JeskaiInfiltratorEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Set<Card> cardsToManifest = new HashSet<>();
-            cardsToManifest.add(source.getSourcePermanentIfItStillExists(game));
-            cardsToManifest.add(controller.getLibrary().getFromTop(game));
-            UUID exileId = UUID.randomUUID();
-            controller.moveCardsToExile(cardsToManifest, source, game, false, exileId, "");
-            ExileZone exileZone = game.getExile().getExileZone(exileId);
-            for (Card card : exileZone.getCards(game)) {
-                card.setFaceDown(true, game);
-            }
-            game.fireUpdatePlayersEvent(); // removes Jeskai Infiltrator from Battlefield, so Jeskai Infiltrator returns as a fresh permanent to the battlefield with new position
-
-            Ability newSource = source.copy();
-            newSource.setWorksFaceDown(true);
-            //the Set will mimic the Shuffling
-            exileZone.getCards(game).forEach(card -> {
-                ManaCosts manaCosts = null;
-                if (card.isCreature(game)) {
-                    manaCosts = card.getSpellAbility() != null ? card.getSpellAbility().getManaCosts() : null;
-                    if (manaCosts == null) {
-                        manaCosts = new ManaCostsImpl<>("{0}");
-                    }
-                }
-                MageObjectReference objectReference = new MageObjectReference(card.getId(), card.getZoneChangeCounter(game) + 1, game);
-                game.addEffect(new BecomesFaceDownCreatureEffect(manaCosts, objectReference, Duration.Custom, FaceDownType.MANIFESTED), newSource);
-            });
-            controller.moveCards(exileZone.getCards(game), Zone.BATTLEFIELD, source, game, false, true, false, null);
-            return true;
+        if (controller == null) {
+            return false;
         }
-        return false;
+        UUID exileId = UUID.randomUUID();
+        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
+        if (sourcePermanent != null) {
+            controller.moveCardsToExile(sourcePermanent, source, game, false, exileId, "");
+        }
+        Card topCard = controller.getLibrary().getFromTop(game);
+        if (topCard != null) {
+            controller.moveCardsToExile(topCard, source, game, false, exileId, "");
+        }
+        // need to get source permanent as card rather than permanent for next steps, hence this convoluted code
+        List<Card> cardsToManifest = new ArrayList<>(game.getExile().getExileZone(exileId).getCards(game));
+        if (cardsToManifest.isEmpty()) {
+            return false;
+        }
+        for (Card card : cardsToManifest) {
+            card.setFaceDown(true, game);
+        }
+        Collections.shuffle(cardsToManifest);
+        game.informPlayers(controller.getLogName() + " shuffles the face-down pile");
+        game.getState().processAction(game);
+        ManifestEffect.doManifestCards(game, source, controller, new LinkedHashSet<>(cardsToManifest));
+        return true;
     }
 }

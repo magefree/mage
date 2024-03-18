@@ -173,7 +173,7 @@ public class AddLandDialog extends MageDialog {
         int foundLands = 0;
         int foundNoneAfter = 0;
         for (int i = 0; foundLands != number && foundNoneAfter < 1000; i++) {
-            Card land = cards.get(RandomUtil.nextInt(cards.size())).getMockCard();
+            Card land = cards.get(RandomUtil.nextInt(cards.size())).createMockCard();
             boolean useLand = !useFullArt;
             if (useFullArt && (land.getFrameStyle() == FrameStyle.BFZ_FULL_ART_BASIC
                     || land.getFrameStyle() == FrameStyle.UGL_FULL_ART_BASIC

@@ -98,7 +98,7 @@ class ContainmentConstructEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card discardedCard = game.getCard(targetPointer.getFirst(game, source));
+        Card discardedCard = game.getCard(getTargetPointer().getFirst(game, source));
         Card containmentConstruct = game.getCard(source.getSourceId());
         if (discardedCard != null
                 && containmentConstruct != null) {

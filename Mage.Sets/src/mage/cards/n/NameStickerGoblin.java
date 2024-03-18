@@ -63,11 +63,14 @@ public final class NameStickerGoblin extends CardImpl {
 }
 
 class NameStickerGoblinTriggeredAbility extends TriggeredAbilityImpl {
+
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
     static{
         filter.add(new NamePredicate("\"Name Sticker\" Goblin"));
     }
+
     private static final Condition condition = new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.OR_LESS, 9);
+
     NameStickerGoblinTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect);
         setTriggerPhrase("When this creature enters the battlefield from anywhere other than a graveyard or exile, if it's on the battlefield and you control 9 or fewer creatures named \"Name Sticker\" Goblin, ");

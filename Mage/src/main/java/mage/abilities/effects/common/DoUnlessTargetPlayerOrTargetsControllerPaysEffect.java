@@ -110,7 +110,7 @@ public class DoUnlessTargetPlayerOrTargetsControllerPaysEffect extends OneShotEf
             // do the effects if not paid
             if (doEffect) {
                 for (Effect effect : executingEffects) {
-                    effect.setTargetPointer(this.targetPointer);
+                    effect.setTargetPointer(this.getTargetPointer().copy());
                     if (effect instanceof OneShotEffect) {
                         result &= effect.apply(game, source);
                     } else {
@@ -118,7 +118,7 @@ public class DoUnlessTargetPlayerOrTargetsControllerPaysEffect extends OneShotEf
                     }
                 }
             } else if (otherwiseEffect != null) {
-                otherwiseEffect.setTargetPointer(this.targetPointer);
+                otherwiseEffect.setTargetPointer(this.getTargetPointer().copy());
                 if (otherwiseEffect instanceof OneShotEffect) {
                     result &= otherwiseEffect.apply(game, source);
                 } else {

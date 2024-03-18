@@ -22,10 +22,11 @@ public class PermanentToken extends PermanentImpl {
 
     // non-modifyable container with token characteristics
     // this PermanentToken resets to it on each game cycle
+    // TODO: see PermanentCard.card for usage research and fixes
     protected Token token;
 
     public PermanentToken(Token token, UUID controllerId, Game game) {
-        super(controllerId, controllerId, token.getName());
+        super(controllerId, controllerId, token.getName()); // random id
         this.token = token.copy();
         this.token.getAbilities().newOriginalId(); // neccessary if token has ability like DevourAbility()
         this.token.getAbilities().setSourceId(objectId);
@@ -76,11 +77,6 @@ public class PermanentToken extends PermanentImpl {
         }
     }
 
-    @Override
-    public String toString() {
-        return String.format("%s - %s", getExpansionSetCode(), getName());
-    }
-
     private void copyFromToken(Token token, Game game, boolean reset) {
         // modify all attributes permanently (without game usage)
         this.name = token.getName();
@@ -119,7 +115,7 @@ public class PermanentToken extends PermanentImpl {
     }
 
     @Override
-    public MageObject getBasicMageObject(Game game) {
+    public MageObject getBasicMageObject() {
         return token;
     }
 

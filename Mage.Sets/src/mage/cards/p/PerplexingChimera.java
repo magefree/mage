@@ -146,7 +146,7 @@ class PerplexingChimeraControlExchangeEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
+        Spell spell = game.getStack().getSpell(getTargetPointer().getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
         if (spell != null && controller != null) {
             Player spellCaster = game.getPlayer(spell.getControllerId());

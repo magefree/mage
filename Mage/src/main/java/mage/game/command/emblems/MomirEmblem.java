@@ -93,7 +93,7 @@ class MomirEffect extends OneShotEffect {
             if (expansionSet == null || !expansionSet.getSetType().isEternalLegal()) {
                 options.remove(index);
             } else {
-                Card card = options.get(index).getCard();
+                Card card = options.get(index).createCard();
                 if (card != null) {
                     token = CopyTokenFunction.createTokenCopy(card, game);
                     break;

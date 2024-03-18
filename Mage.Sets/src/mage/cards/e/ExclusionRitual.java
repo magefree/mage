@@ -67,7 +67,7 @@ class ExclusionRitualImprintEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-        Permanent targetPermanent = game.getPermanent(targetPointer.getFirst(game, source));
+        Permanent targetPermanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && sourcePermanent != null && targetPermanent != null) {
             controller.moveCardToExileWithInfo(targetPermanent, getId(), sourcePermanent.getIdName(), source, game, Zone.BATTLEFIELD, true);

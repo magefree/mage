@@ -106,7 +106,7 @@ public class ManaUtilTest extends CardTestPlayerBase {
      */
     private void testManaToPayVsLand(String manaToPay, String landName, int expected1, int expected2) {
         ManaCost unpaid = new ManaCostsImpl<>(manaToPay);
-        Card card = CardRepository.instance.findCard(landName).getCard();
+        Card card = CardRepository.instance.findCard(landName).createCard();
         Assert.assertNotNull(card);
 
         Map<UUID, ActivatedManaAbilityImpl> useableAbilities = getManaAbilities(card);
@@ -134,7 +134,7 @@ public class ManaUtilTest extends CardTestPlayerBase {
      */
     private void testManaToPayVsLand(String manaToPay, String landName, int expected1, Class<? extends BasicManaAbility> expectedChosen) {
         ManaCost unpaid = new ManaCostsImpl<>(manaToPay);
-        Card card = CardRepository.instance.findCard(landName).getCard();
+        Card card = CardRepository.instance.findCard(landName).createCard();
         Assert.assertNotNull(card);
 
         Map<UUID, ActivatedManaAbilityImpl> useableAbilities = getManaAbilities(card);

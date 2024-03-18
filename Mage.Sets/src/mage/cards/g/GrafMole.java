@@ -7,7 +7,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -17,8 +17,6 @@ import java.util.UUID;
  */
 public final class GrafMole extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent(SubType.CLUE, "a Clue");
-
     public GrafMole(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
         this.subtype.add(SubType.MOLE);
@@ -27,7 +25,7 @@ public final class GrafMole extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Whenever you sacrifice a Clue, you gain 3 life.
-        this.addAbility(new SacrificePermanentTriggeredAbility(new GainLifeEffect(3), filter));
+        this.addAbility(new SacrificePermanentTriggeredAbility(new GainLifeEffect(3), StaticFilters.FILTER_CONTROLLED_CLUE));
     }
 
     private GrafMole(final GrafMole card) {

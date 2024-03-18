@@ -66,7 +66,7 @@ public final class DiscerningFinancier extends CardImpl {
         // {2}{W}: Choose another player. That player gains control of target Treasure you control. You draw a card.
         Ability ability = new SimpleActivatedAbility(
                 new DiscerningFinancierEffect(),
-                new ManaCostsImpl("{2}{W}")
+                new ManaCostsImpl<>("{2}{W}")
         );
         ability.addTarget(new TargetControlledPermanent(filter));
         ability.addEffect(new DrawCardSourceControllerEffect(1, "you"));

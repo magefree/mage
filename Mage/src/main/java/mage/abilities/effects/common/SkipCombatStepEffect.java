@@ -39,6 +39,6 @@ public class SkipCombatStepEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return event.getPlayerId().equals(targetPointer.getFirst(game, source));
+        return event.getPlayerId().equals(getTargetPointer().getFirst(game, source));
     }
 }

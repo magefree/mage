@@ -16,11 +16,11 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.token.SaprolingToken;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
 
@@ -29,8 +29,8 @@ import java.util.UUID;
  */
 public final class NemataPrimevalWarden extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Saproling");
-    private static final FilterControlledCreaturePermanent filter2 = new FilterControlledCreaturePermanent("Saprolings");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Saproling");
+    private static final FilterControlledPermanent filter2 = new FilterControlledPermanent("Saprolings");
 
     static {
         filter.add(SubType.SAPROLING.getPredicate());

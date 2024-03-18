@@ -15,7 +15,7 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.TargetCard;
+import mage.target.common.TargetCardInYourGraveyard;
 
 /**
  *
@@ -36,8 +36,8 @@ public final class ShredsOfSanity extends CardImpl {
 
         // Return up to one target instant card and up to one target sorcery card from your graveyard to your hand, then discard a card. Exile Shreds of Sanity.
         this.getSpellAbility().addEffect(new ShredsOfSanityEffect());
-        this.getSpellAbility().addTarget(new TargetCard(0, 1, Zone.GRAVEYARD, filterInstant));
-        this.getSpellAbility().addTarget(new TargetCard(0, 1, Zone.GRAVEYARD, filterSorcery));
+        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(0, 1, filterInstant));
+        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(0, 1, filterSorcery));
         this.getSpellAbility().addEffect(new ExileSpellEffect());
     }
 

@@ -84,7 +84,7 @@ class TezzeretMasterOfMetalEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        List<Permanent> permanents = game.getBattlefield().getAllActivePermanents(filter, targetPointer.getFirst(game, source), game);
+        List<Permanent> permanents = game.getBattlefield().getAllActivePermanents(filter, getTargetPointer().getFirst(game, source), game);
         for (Permanent permanent : permanents) {
             ContinuousEffect effect = new TezzeretMasterOfMetalControlEffect(source.getControllerId());
             effect.setTargetPointer(new FixedTarget(permanent, game));
@@ -115,7 +115,7 @@ class TezzeretMasterOfMetalControlEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
+        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (permanent != null && controllerId != null) {
             return permanent.changeControllerId(controllerId, game, source);
         }

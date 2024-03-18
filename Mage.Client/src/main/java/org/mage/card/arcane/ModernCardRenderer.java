@@ -15,41 +15,16 @@ import org.apache.log4j.Logger;
 import static org.mage.card.arcane.ManaSymbols.getSizedManaSymbol;
 import static org.mage.card.arcane.ModernCardResourceLoader.*;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.font.*;
 import java.awt.geom.*;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
 import java.text.AttributedCharacterIterator;
 import java.text.AttributedString;
 import java.text.CharacterIterator;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-
-
-/*
-    private void cardRendererBasedRender(Graphics2D g) {
-        // Prepare for draw
-        g.translate(cardXOffset, cardYOffset);
-        int cardWidth = this.cardWidth - cardXOffset;
-        int cardHeight = this.cardHeight - cardYOffset;
-
-        // AA on
-        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
-        // Renderer
-        CardRenderer render = new ModernCardRenderer(gameCard, transformed);
-        Image img = imagePanel.getSrcImage();
-        if (img != null) {
-            render.setArtImage(img);
-        }
-        render.draw(g, cardWidth, cardHeight);
-    }
- */
 
 /**
  * @author stravant@gmail.com, JayDi85
@@ -147,6 +122,8 @@ public class ModernCardRenderer extends CardRenderer {
 
     public static final Color ERROR_COLOR = new Color(255, 0, 255);
 
+    static String SUB_TYPE_ADVENTURE = "Adventure";
+
     ///////////////////////////////////////////////////////////////////////////
     // Layout metrics for modern border cards
     // How far the main box, art, and name / type line are inset from the
@@ -171,6 +148,7 @@ public class ModernCardRenderer extends CardRenderer {
     protected static final float TYPE_LINE_Y_FRAC = 0.57f; // x cardHeight
     protected static final float TYPE_LINE_Y_FRAC_TOKEN = 0.70f;
     protected static final float TYPE_LINE_Y_FRAC_FULL_ART = 0.74f;
+    protected static final float TYPE_LINE_Y_FRAC_BOTTOM = 0.89f;
     protected int typeLineY;
 
     // Possible sizes of rules text font
@@ -188,7 +166,10 @@ public class ModernCardRenderer extends CardRenderer {
     protected Font ptTextFont;
 
     // Processed mana cost string
-    protected final String manaCostString;
+    protected String manaCostString;
+
+    // Is an adventure
+    protected boolean isAdventure = false;
 
     public ModernCardRenderer(CardView card) {
         // Pass off to parent
@@ -196,6 +177,14 @@ public class ModernCardRenderer extends CardRenderer {
 
         // Mana cost string
         manaCostString = ManaSymbols.getClearManaCost(cardView.getManaCostStr());
+
+        if (cardView.isSplitCard()) {
+            isAdventure = cardView.getRightSplitTypeLine().contains(SUB_TYPE_ADVENTURE);
+        }
+    }
+
+    protected boolean isAdventure() {
+        return isAdventure;
     }
 
     @Override
@@ -274,10 +263,9 @@ public class ModernCardRenderer extends CardRenderer {
     @Override
     protected void drawBackground(Graphics2D g) {
         // Draw background, in 3 parts
-
         if (cardView.isFaceDown()) {
-            // Just draw a brown rectangle
-            drawCardBack(g);
+            // just draw a brown rectangle
+            drawCardBackTexture(g);
         } else {
             if (cardView.getFrameStyle() == FrameStyle.UST_FULL_ART_BASIC) {
                 return;
@@ -287,7 +275,7 @@ public class ModernCardRenderer extends CardRenderer {
             if (cardView.getExpansionSetCode().equals("EXP")) {
                 isExped = true;
             }
-            BufferedImage bg = getBackgroundImage(cardView.getColor(), cardView.getCardTypes(), cardView.getSubTypes(), isExped);
+            BufferedImage bg = getBackgroundTexture(cardView.getColor(), cardView.getCardTypes(), cardView.getSubTypes(), isExped);
             if (bg == null) {
                 return;
             }
@@ -327,6 +315,9 @@ public class ModernCardRenderer extends CardRenderer {
             rect = new Rectangle2D.Float(.079f, .11f, .84f, .84f);
         } else if (isUnstableFullArtLand()) {
             rect = new Rectangle2D.Float(.0f, .0f, 1.0f, 1.0f);
+        } else if (cardView.getArtRect() == ArtRect.FULL_LENGTH_LEFT ||
+                cardView.getArtRect() == ArtRect.FULL_LENGTH_RIGHT) {
+            rect = cardView.getArtRect().rect;
         } else if (cardView.getFrameStyle().isFullArt() || (cardView.isToken())) {
             rect = new Rectangle2D.Float(.079f, .11f, .84f, .63f);
         } else {
@@ -340,6 +331,9 @@ public class ModernCardRenderer extends CardRenderer {
             return TYPE_LINE_Y_FRAC_TOKEN;
         } else if (cardView.getFrameStyle().isFullArt()) {
             return TYPE_LINE_Y_FRAC_FULL_ART;
+        } else if (cardView.getArtRect() == ArtRect.FULL_LENGTH_LEFT ||
+                cardView.getArtRect() == ArtRect.FULL_LENGTH_RIGHT) {
+            return TYPE_LINE_Y_FRAC_BOTTOM;
         } else {
             return TYPE_LINE_Y_FRAC;
         }
@@ -376,16 +370,9 @@ public class ModernCardRenderer extends CardRenderer {
 
     @Override
     protected void drawArt(Graphics2D g) {
-        if ((artImage != null || faceArtImage != null) && !cardView.isFaceDown()) {
-
-            boolean useFaceArt = false;
-            if (faceArtImage != null && !isZendikarFullArtLand()) {
-                useFaceArt = true;
-            }
-
+        if (artImage != null) {
             // Invention rendering, art fills the entire frame
             if (useInventionFrame()) {
-                useFaceArt = false;
                 drawArtIntoRect(g,
                         borderWidth, borderWidth,
                         cardWidth - 2 * borderWidth, cardHeight - 2 * borderWidth,
@@ -396,34 +383,24 @@ public class ModernCardRenderer extends CardRenderer {
             Rectangle2D sourceRect = getArtRect();
 
             if (cardView.getMageObjectType() == MageObjectType.SPELL) {
-                useFaceArt = false;
                 ArtRect rect = cardView.getArtRect();
-                if (rect == ArtRect.SPLIT_FUSED) {
-                    // Special handling for fused, draw the art from both halves stacked on top of one and other
-                    // each filling half of the art rect
-                    drawArtIntoRect(g,
-                            totalContentInset + 1, totalContentInset + boxHeight,
-                            contentWidth - 2, (typeLineY - totalContentInset - boxHeight) / 2,
-                            ArtRect.SPLIT_LEFT.rect, useInventionFrame());
-                    drawArtIntoRect(g,
-                            totalContentInset + 1, totalContentInset + boxHeight + (typeLineY - totalContentInset - boxHeight) / 2,
-                            contentWidth - 2, (typeLineY - totalContentInset - boxHeight) / 2,
-                            ArtRect.SPLIT_RIGHT.rect, useInventionFrame());
-                    return;
-                } else if (rect != ArtRect.NORMAL) {
+                if (rect != ArtRect.NORMAL) {
                     sourceRect = rect.rect;
                     shouldPreserveAspect = false;
                 }
             }
 
             // Normal drawing of art from a source part of the card frame into the rect
-            if (useFaceArt) {
-                int alternate_height = cardHeight - boxHeight * 2 - totalContentInset;
-                drawFaceArtIntoRect(g,
+            if (cardView.getArtRect() == ArtRect.FULL_LENGTH_RIGHT) {
+                drawArtIntoRect(g,
+                        contentWidth / 2 + totalContentInset + 1, totalContentInset + boxHeight,
+                        contentWidth / 2 - 1, typeLineY - totalContentInset - boxHeight,
+                        sourceRect, false);
+            } else if (cardView.getArtRect() == ArtRect.FULL_LENGTH_LEFT) {
+                drawArtIntoRect(g,
                         totalContentInset + 1, totalContentInset + boxHeight,
-                        contentWidth - 2, typeLineY - totalContentInset - boxHeight,
-                        alternate_height,
-                        sourceRect, shouldPreserveAspect);
+                        contentWidth / 2 - 1, typeLineY - totalContentInset - boxHeight,
+                        sourceRect, false);
             } else if (!isZendikarFullArtLand()) {
                 drawArtIntoRect(g,
                         totalContentInset + 1, totalContentInset + boxHeight,
@@ -474,7 +451,13 @@ public class ModernCardRenderer extends CardRenderer {
             g.setPaint(textboxPaint);
         }
 
-        if (!isZenUst) {
+        if (cardView.getArtRect() == ArtRect.FULL_LENGTH_RIGHT) {
+            g.fillRect(totalContentInset + 2, totalContentInset + boxHeight,
+                    contentWidth / 2 - 2, typeLineY - totalContentInset - boxHeight + 2);
+        } else if (cardView.getArtRect() == ArtRect.FULL_LENGTH_LEFT) {
+            g.fillRect(contentWidth / 2 + totalContentInset + 1, totalContentInset + boxHeight,
+                    contentWidth / 2 - 2, typeLineY - totalContentInset - boxHeight + 2);
+        } else if (!isZenUst) {
             if (cardView.getCardTypes().contains(CardType.LAND)) {
                 int total_height_of_box = cardHeight - borderWidth * 3 - typeLineY - 2 - boxHeight;
 
@@ -669,6 +652,18 @@ public class ModernCardRenderer extends CardRenderer {
             drawUSTCurves(g, image, x, y, w, h,
                     0, 0,
                     additionalBoxColor, borderPaint);
+        } else if (cardView.getArtRect() == ArtRect.FULL_LENGTH_RIGHT) {
+            drawRulesText(g, textboxKeywords, textboxRules,
+                    totalContentInset + 4, totalContentInset + boxHeight + 2,
+                    contentWidth / 2 - 8, typeLineY - totalContentInset - boxHeight - 6, false);
+        } else if (cardView.getArtRect() == ArtRect.FULL_LENGTH_LEFT) {
+            drawRulesText(g, textboxKeywords, textboxRules,
+                    contentWidth / 2 + totalContentInset + 4, totalContentInset + boxHeight + 2,
+                    contentWidth / 2 - 8, typeLineY - totalContentInset - boxHeight - 6, false);
+        } else if (isAdventure) {
+            drawRulesText(g, textboxKeywords, textboxRules,
+                    contentWidth / 2 + totalContentInset + 4, typeLineY + boxHeight + 2,
+                    contentWidth / 2 - 8, cardHeight - typeLineY - boxHeight - 4 - borderWidth * 3, false);
         } else if (!isZenUst) {
             drawRulesText(g, textboxKeywords, textboxRules,
                     totalContentInset + 2, typeLineY + boxHeight + 2,
@@ -681,27 +676,20 @@ public class ModernCardRenderer extends CardRenderer {
 
     public void drawZendikarCurvedFace(Graphics2D g2, BufferedImage image, int x, int y, int x2, int y2,
                                        Color boxColor, Paint paint) {
-
-        BufferedImage artToUse = faceArtImage;
-        boolean hadToUseFullArt = false;
-        if (faceArtImage == null) {
-            if (artImage == null) {
-                return;
-            }
-            hadToUseFullArt = true;
-            artToUse = artImage;
+        if (artImage == null) {
+            return;
         }
+
+        BufferedImage artToUse = artImage;
         int srcW = artToUse.getWidth();
         int srcH = artToUse.getHeight();
 
-        if (hadToUseFullArt) {
-            // Get a box based on the standard scan from gatherer.
-            // Width = 185/223 pixels (centered)
-            // Height = 220/310, 38 pixels from top
-            int subx = 19 * srcW / 223;
-            int suby = 38 * srcH / 310;
-            artToUse = artImage.getSubimage(subx, suby, 185 * srcW / 223, 220 * srcH / 310);
-        }
+        // Get a box based on the standard scan from gatherer.
+        // Width = 185/223 pixels (centered)
+        // Height = 220/310, 38 pixels from top
+        int subx = 19 * srcW / 223;
+        int suby = 38 * srcH / 310;
+        artToUse = artImage.getSubimage(subx, suby, 185 * srcW / 223, 220 * srcH / 310);
 
         Path2D.Double curve = new Path2D.Double();
 
@@ -730,26 +718,19 @@ public class ModernCardRenderer extends CardRenderer {
     public void drawBFZCurvedFace(Graphics2D g2, BufferedImage image, int x, int y, int x2, int y2,
                                   int topxdelta, int endydelta,
                                   Color boxColor, Paint paint) {
-        BufferedImage artToUse = faceArtImage;
-        boolean hadToUseFullArt = false;
-        if (faceArtImage == null) {
-            if (artImage == null) {
-                return;
-            }
-            hadToUseFullArt = true;
-            artToUse = artImage;
+        if (artImage == null) {
+            return;
         }
+        BufferedImage artToUse = artImage;
         int srcW = artToUse.getWidth();
         int srcH = artToUse.getHeight();
 
-        if (hadToUseFullArt) {
-            // Get a box based on the standard scan from gatherer.
-            // Width = 185/223 pixels (centered)
-            // Height = 220/310, 38 pixels from top
-            int subx = 19 * srcW / 223;
-            int suby = 38 * srcH / 310;
-            artToUse = artImage.getSubimage(subx, suby, 185 * srcW / 223, 220 * srcH / 310);
-        }
+        // Get a box based on the standard scan from gatherer.
+        // Width = 185/223 pixels (centered)
+        // Height = 220/310, 38 pixels from top
+        int subx = 19 * srcW / 223;
+        int suby = 38 * srcH / 310;
+        artToUse = artImage.getSubimage(subx, suby, 185 * srcW / 223, 220 * srcH / 310);
 
         Path2D.Double curve = new Path2D.Double();
         curve.moveTo(x + topxdelta, y);
@@ -875,23 +856,13 @@ public class ModernCardRenderer extends CardRenderer {
         int availableWidth = w - manaCostWidth + 2;
 
         // Draw the name
-        String nameStr;
-        if (cardView.isFaceDown()) {
-            if (cardView instanceof PermanentView && ((PermanentView) cardView).isManifested()) {
-                nameStr = "Manifest: " + cardView.getName();
-            } else {
-                nameStr = "Morph: " + cardView.getName();
-            }
-        } else {
-            nameStr = baseName;
-        }
-        if (!nameStr.isEmpty()) {
-            AttributedString str = new AttributedString(nameStr);
+        if (!baseName.isEmpty()) {
+            AttributedString str = new AttributedString(baseName);
             str.addAttribute(TextAttribute.FONT, boxTextFont);
             TextMeasurer measure = new TextMeasurer(str.getIterator(), g.getFontRenderContext());
             int breakIndex = measure.getLineBreakIndex(0, availableWidth);
-            if (breakIndex < nameStr.length()) {
-                str = new AttributedString(nameStr);
+            if (breakIndex < baseName.length()) {
+                str = new AttributedString(baseName);
                 str.addAttribute(TextAttribute.FONT, boxTextFontNarrow);
                 measure = new TextMeasurer(str.getIterator(), g.getFontRenderContext());
                 breakIndex = measure.getLineBreakIndex(0, availableWidth);
@@ -1568,7 +1539,7 @@ public class ModernCardRenderer extends CardRenderer {
 
     // Determine which background image to use from a set of colors
     // and the current card.
-    protected static BufferedImage getBackgroundImage(ObjectColor colors, Collection<CardType> types, SubTypes subTypes, boolean isExped) {
+    protected static BufferedImage getBackgroundTexture(ObjectColor colors, Collection<CardType> types, SubTypes subTypes, boolean isExped) {
         if (subTypes.contains(SubType.VEHICLE)) {
             return BG_IMG_VEHICLE;
         } else if (types.contains(CardType.LAND)) {

@@ -16,9 +16,8 @@ import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.game.permanent.token.SaprolingToken;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
@@ -28,11 +27,7 @@ import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
  */
 public final class UtopiaMycon extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Saproling");
-
-    static {
-        filter.add(SubType.SAPROLING.getPredicate());
-    }
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.SAPROLING, "Saproling");
 
     public UtopiaMycon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}");

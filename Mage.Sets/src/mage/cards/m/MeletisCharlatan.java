@@ -65,7 +65,7 @@ class MeletisCharlatanCopyTargetSpellEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
+        Spell spell = game.getStack().getSpell(getTargetPointer().getFirst(game, source));
         if (spell != null) {
             spell.createCopyOnStack(game, source, spell.getControllerId(), true);
             return true;

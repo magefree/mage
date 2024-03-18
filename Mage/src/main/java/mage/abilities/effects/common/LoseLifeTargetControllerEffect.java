@@ -42,11 +42,11 @@ public class LoseLifeTargetControllerEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        MageObject targetCard = targetPointer.getFirstTargetPermanentOrLKI(game, source);
+        MageObject targetCard = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
 
         // if target is a countered spell
         if (targetCard == null) {
-            targetCard = game.getLastKnownInformation(targetPointer.getFirst(game, source), Zone.STACK);
+            targetCard = game.getLastKnownInformation(getTargetPointer().getFirst(game, source), Zone.STACK);
         }
 
         if (targetCard != null) {

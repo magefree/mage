@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -12,7 +11,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 
 /**
@@ -48,13 +47,13 @@ public final class SaltRoadAmbushers extends CardImpl {
 class SaltRoadAmbushersTriggeredAbility extends TurnedFaceUpAllTriggeredAbility {
     
     
-private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another permanent you control");
+private static final FilterControlledPermanent filter = new FilterControlledPermanent("another permanent you control");
 
     static {
         filter.add(AnotherPredicate.instance);
     }
     
-    public SaltRoadAmbushersTriggeredAbility() {
+    SaltRoadAmbushersTriggeredAbility() {
         super(new AddCountersTargetEffect(CounterType.P1P1.createInstance(2)), filter, true);
     }
 

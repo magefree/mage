@@ -1,7 +1,5 @@
-
 package mage.cards.k;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -16,7 +14,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
@@ -26,14 +24,15 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.ZombieToken;
 import mage.players.Player;
-import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  * @author fireshoes
  */
 public final class KalitasTraitorOfGhet extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another Vampire or Zombie");
+    private static final FilterPermanent filter = new FilterPermanent("another Vampire or Zombie");
 
     static {
         filter.add(AnotherPredicate.instance);

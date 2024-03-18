@@ -89,12 +89,12 @@ class NoyanDarEffect extends OneShotEffect {
             targetId = target.getFirstTarget();
         }
         if (targetId != null) {
-            FixedTarget fixedTarget = new FixedTarget(targetId, game);
+            FixedTarget blueprintTarget = new FixedTarget(targetId, game);
             ContinuousEffect continuousEffect = new BecomesCreatureTargetEffect(new AwakenElementalToken(), false, true, Duration.EndOfGame);
-            continuousEffect.setTargetPointer(fixedTarget);
+            continuousEffect.setTargetPointer(blueprintTarget.copy());
             game.addEffect(continuousEffect, source);
             Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance(3));
-            effect.setTargetPointer(fixedTarget);
+            effect.setTargetPointer(blueprintTarget.copy());
             return effect.apply(game, source);
         }
         return true;

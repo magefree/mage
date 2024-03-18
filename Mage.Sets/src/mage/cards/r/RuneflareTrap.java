@@ -1,4 +1,3 @@
-
 package mage.cards.r;
 
 import mage.abilities.Ability;
@@ -33,7 +32,8 @@ public final class RuneflareTrap extends CardImpl {
         this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl<>("{R}"), RuneflareTrapCondition.instance), new CardsAmountDrawnThisTurnWatcher());
 
         // Runeflare Trap deals damage to target player equal to the number of cards in that player's hand.
-        this.getSpellAbility().addEffect(new DamageTargetEffect(new TargetPlayerCardsInHandCount()));
+        this.getSpellAbility().addEffect(new DamageTargetEffect(new TargetPlayerCardsInHandCount())
+                .setText("{this} deals damage to target player equal to the number of cards in that player's hand"));
         this.getSpellAbility().addTarget(new TargetPlayer());
 
     }

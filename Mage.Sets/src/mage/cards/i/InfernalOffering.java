@@ -1,12 +1,5 @@
-
 package mage.cards.i;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -15,15 +8,18 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetOpponent;
+import mage.target.common.TargetSacrifice;
+
+import java.util.*;
+import java.util.Map.Entry;
 
 /**
  *
@@ -79,7 +75,7 @@ class InfernalOfferingSacrificeEffect extends OneShotEffect {
                 Map<UUID, UUID> toSacrifice = new HashMap<>(2);
                 for (UUID playerId : game.getState().getPlayersInRange(player.getId(), game)) {
                     if (playerId.equals(player.getId()) || playerId.equals(opponent.getId())) {
-                        target = new TargetControlledCreaturePermanent(1, 1, new FilterControlledCreaturePermanent(), true);
+                        target = new TargetSacrifice(StaticFilters.FILTER_PERMANENT_CREATURE);
                         if (target.choose(Outcome.Sacrifice, playerId, source.getControllerId(), source, game)) {
                             toSacrifice.put(playerId, target.getFirstTarget());
                         }

@@ -207,7 +207,7 @@ class ShelobChildOfUngoliantEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent copyFrom = targetPointer.getFirstTargetPermanentOrLKI(game, source);
+        Permanent copyFrom = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
         if(controller == null || copyFrom == null) {
             return false;
         }

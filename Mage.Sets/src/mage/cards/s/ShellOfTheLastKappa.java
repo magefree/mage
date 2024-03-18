@@ -93,7 +93,7 @@ class ShellOfTheLastKappaEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
+        Spell spell = game.getStack().getSpell(getTargetPointer().getFirst(game, source));
         if (spell != null) {
             Permanent sourcePermanent = game.getPermanent(source.getSourceId());
             if (sourcePermanent == null) {

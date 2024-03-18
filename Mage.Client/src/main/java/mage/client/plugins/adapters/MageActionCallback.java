@@ -117,7 +117,7 @@ public class MageActionCallback implements ActionCallback {
     }
 
     @Override
-    public void mouseClicked(MouseEvent e, TransferData data, boolean doubleClick) {
+        public void mouseClicked(MouseEvent e, TransferData data, boolean doubleClick) {
         // send mouse clicked event to the card's area and other cards list components for processing
         if (e.isConsumed()) {
             return;
@@ -720,7 +720,7 @@ public class MageActionCallback implements ActionCallback {
                         switch (enlargeMode) {
                             case COPY:
                                 if (cardView instanceof PermanentView) {
-                                    image = ImageCache.getImageOriginal(((PermanentView) cardView).getOriginal()).getImage();
+                                    image = ImageCache.getCardImageOriginal(((PermanentView) cardView).getOriginal()).getImage();
                                 }
                                 break;
                             case ALTERNATE:
@@ -729,10 +729,14 @@ public class MageActionCallback implements ActionCallback {
                                             && !cardView.isFlipCard()
                                             && !cardView.canTransform()
                                             && ((PermanentView) cardView).isCopy()) {
-                                        image = ImageCache.getImageOriginal(((PermanentView) cardView).getOriginal()).getImage();
+                                        image = ImageCache.getCardImageOriginal(((PermanentView) cardView).getOriginal()).getImage();
                                     } else {
-                                        image = ImageCache.getImageOriginalAlternateName(cardView).getImage();
+                                        image = ImageCache.getCardImageAlternate(cardView).getImage();
                                         displayCard = displayCard.getSecondCardFace();
+                                        if (displayCard == null) {
+                                            // opponent's face down cards are hidden, so no alternative
+                                            displayCard = cardPanel.getOriginal();
+                                        }
                                     }
                                 }
                                 break;
@@ -745,7 +749,6 @@ public class MageActionCallback implements ActionCallback {
                     } else {
                         logger.warn("No Card preview Pane in Mage Frame defined. Card: " + cardView.getName());
                     }
-
                 } catch (Exception e) {
                     logger.warn("Problem dring display of enlarged card", e);
                 }
@@ -786,6 +789,7 @@ public class MageActionCallback implements ActionCallback {
 
     private void displayCardInfo(CardView card, Image image, BigCard bigCard) {
         if (image instanceof BufferedImage) {
+            // IMAGE MODE
             // XXX: scaled to fit width
             bigCard.setCard(card.getId(), enlargeMode, image, card.getRules(), card.isToRotate());
             // if it's an ability, show only the ability text as overlay
@@ -795,6 +799,7 @@ public class MageActionCallback implements ActionCallback {
                 bigCard.hideTextComponent();
             }
         } else {
+            // TEXT MODE
             JXPanel panel = GuiDisplayUtil.getDescription(card, bigCard.getWidth(), bigCard.getHeight());
             panel.setVisible(true);
             bigCard.hideTextComponent();

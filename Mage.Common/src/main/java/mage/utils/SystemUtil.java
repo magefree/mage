@@ -715,7 +715,7 @@ public final class SystemUtil {
                 Set<Card> cardsToLoad = new HashSet<>();
                 for (int i = 0; i < command.Amount; i++) {
                     CardInfo cardInfo = cards.get(RandomUtil.nextInt(cards.size()));
-                    Card card = cardInfo != null ? cardInfo.getCard() : null;
+                    Card card = cardInfo != null ? cardInfo.createCard() : null;
                     if (card != null) {
                         cardsToLoad.add(card);
                     }
@@ -783,7 +783,7 @@ public final class SystemUtil {
 
         Set<Card> cardsToLoad = new LinkedHashSet<>();
         for (int i = 0; i < amount; i++) {
-            cardsToLoad.add(cardInfo.getCard());
+            cardsToLoad.add(cardInfo.createCard());
         }
         game.loadCards(cardsToLoad, owner.getId());
 
@@ -798,7 +798,7 @@ public final class SystemUtil {
         // TODO: replace by player.move?
         switch (zone) {
             case BATTLEFIELD:
-                CardUtil.putCardOntoBattlefieldWithEffects(source, game, card, player);
+                CardUtil.putCardOntoBattlefieldWithEffects(source, game, card, player, false);
                 break;
             case LIBRARY:
                 card.setZone(Zone.LIBRARY, game);

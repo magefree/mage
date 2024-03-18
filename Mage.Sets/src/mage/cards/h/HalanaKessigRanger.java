@@ -79,7 +79,7 @@ class HalanaKessigRangerTriggerEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(
                 new HalanaKessigRangerDamageEffect(
-                        new MageObjectReference(targetPointer.getFirst(game, source), game)
+                        new MageObjectReference(getTargetPointer().getFirst(game, source), game)
                 ), false, "that creature deals damage equal to its power to target creature"
         );
         ability.addTarget(new TargetCreaturePermanent());

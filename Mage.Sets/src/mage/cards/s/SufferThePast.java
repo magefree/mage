@@ -60,7 +60,7 @@ class SufferThePastEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player you = game.getPlayer(source.getControllerId());
-        Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
+        Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (you == null || targetPlayer == null) {
             return false;
         }

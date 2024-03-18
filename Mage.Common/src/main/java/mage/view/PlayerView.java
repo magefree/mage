@@ -10,6 +10,7 @@ import mage.game.command.*;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.players.net.UserData;
+import mage.util.CardUtil;
 
 import java.io.Serializable;
 import java.util.*;
@@ -82,19 +83,19 @@ public class PlayerView implements Serializable {
 
         this.hasLeft = player.hasLeft();
         for (Card card : player.getGraveyard().getCards(game)) {
-            graveyard.put(card.getId(), new CardView(card, game, false));
+            graveyard.put(card.getId(), new CardView(card, game, CardUtil.canShowAsControlled(card, createdForPlayerId)));
         }
         for (ExileZone exileZone : game.getExile().getExileZones()) {
             for (Card card : exileZone.getCards(game)) {
                 if (player.getId().equals(card.getOwnerId())) {
-                    exile.put(card.getId(), new CardView(card, game, false)); // unnown if it's allowed to look under a face down card
+                    exile.put(card.getId(), new CardView(card, game, CardUtil.canShowAsControlled(card, createdForPlayerId)));
                 }
             }
         }
         if (this.controlled || !player.isHuman()) {
             // sideboard available for itself or for computer only
             for (Card card : player.getSideboard().getCards(game)) {
-                sideboard.put(card.getId(), new CardView(card, game, false));
+                sideboard.put(card.getId(), new CardView(card, game, CardUtil.canShowAsControlled(card, createdForPlayerId)));
             }
         }
 
@@ -137,7 +138,7 @@ public class PlayerView implements Serializable {
                 if (commander.getControllerId().equals(this.playerId)) {
                     Card sourceCard = game.getCard(commander.getSourceId());
                     if (sourceCard != null) {
-                        commandList.add(new CommanderView(commander, sourceCard, game));
+                        commandList.add(new CommanderView(commander, sourceCard, game, createdForPlayerId));
                     }
                 }
             }

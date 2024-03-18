@@ -1,4 +1,3 @@
-
 package mage.cards.m;
 
 import java.util.UUID;
@@ -15,7 +14,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 
 /**
@@ -25,7 +24,7 @@ import mage.filter.predicate.mageobject.AnotherPredicate;
 public final class MarkovCrusader extends CardImpl {
 
     private static final String rule = "{this} has haste as long as you control another Vampire";
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another Vampire");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("another Vampire");
 
     static {
         filter.add(AnotherPredicate.instance);

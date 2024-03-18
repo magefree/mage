@@ -66,7 +66,7 @@ class JointAssaultBoostTargetEffect extends ContinuousEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        UUID permanentId = targetPointer.getFirst(game, source);
+        UUID permanentId = getTargetPointer().getFirst(game, source);
         Permanent target = game.getPermanent(permanentId);
         if (target != null) {
             if (target.getPairedCard() != null) {
@@ -78,7 +78,7 @@ class JointAssaultBoostTargetEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         int affectedTargets = 0;
-        UUID permanentId = targetPointer.getFirst(game, source);
+        UUID permanentId = getTargetPointer().getFirst(game, source);
 
         Permanent target = game.getPermanent(permanentId);
         if (target != null) {

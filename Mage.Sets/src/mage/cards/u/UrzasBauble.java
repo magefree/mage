@@ -35,7 +35,7 @@ public final class UrzasBauble extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LookAtRandomCardEffect(), new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetPlayer());
-        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1)), false));
+        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1, "you")), false));
         this.addAbility(ability);
     }
 

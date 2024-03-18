@@ -100,7 +100,7 @@ class EaterOfVirtueExileEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent eaterOfVirtue = game.getPermanent(source.getSourceId());
-        Card exiledCard = game.getCard(targetPointer.getFirst(game, source));
+        Card exiledCard = game.getCard(getTargetPointer().getFirst(game, source));
         if (controller != null
                 && eaterOfVirtue != null
                 && exiledCard != null) {

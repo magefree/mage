@@ -14,7 +14,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.target.common.TargetCreaturePermanent;
@@ -26,7 +26,6 @@ import java.util.UUID;
  */
 public final class MarthaJones extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent(SubType.CLUE, "a Clue");
     private static final FilterCreaturePermanent filterOther = new FilterCreaturePermanent("other target creature");
 
     static {
@@ -49,7 +48,7 @@ public final class MarthaJones extends CardImpl {
 
         // Whenever you sacrifice a Clue, Martha Jones and up to one other target creature can't be blocked this turn.
         Ability ability = new SacrificePermanentTriggeredAbility(
-                new CantBeBlockedSourceEffect(Duration.EndOfTurn).setText("{this}"), filter
+                new CantBeBlockedSourceEffect(Duration.EndOfTurn).setText("{this}"), StaticFilters.FILTER_CONTROLLED_CLUE
         );
         ability.addEffect(new CantBeBlockedTargetEffect()
                 .setText("and up to one other target creature can't be blocked this turn"));

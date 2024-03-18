@@ -81,13 +81,13 @@ class GildedDrakeEffect extends OneShotEffect {
             return false;
         }
 
-        if (targetPointer.getFirst(game, source) == null || game.getPermanent(targetPointer.getFirst(game, source)) == null) {
+        if (getTargetPointer().getFirst(game, source) == null || game.getPermanent(getTargetPointer().getFirst(game, source)) == null) {
             sourceObject.sacrifice(source, game);
             return true;
         }
 
         ContinuousEffect effect = new ExchangeControlTargetEffect(Duration.EndOfGame, "", true);
-        effect.setTargetPointer(targetPointer);
+        effect.setTargetPointer(this.getTargetPointer().copy());
         game.addEffect(effect, source);
         return true;
     }

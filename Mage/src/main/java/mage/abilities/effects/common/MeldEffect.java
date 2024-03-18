@@ -105,7 +105,7 @@ public class MeldEffect extends OneShotEffect {
         if (cardInfoList.isEmpty()) {
             return false;
         }
-        MeldCard meldCard = (MeldCard) cardInfoList.get(0).getCard().copy();
+        MeldCard meldCard = (MeldCard) cardInfoList.get(0).createCard().copy();
         meldCard.setOwnerId(controller.getId());
         meldCard.setTopHalfCard(meldWithCard, game);
         meldCard.setBottomHalfCard(sourceCard, game);

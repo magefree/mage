@@ -97,7 +97,7 @@ public class BecomesBasicLandTargetEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (UUID targetPermanent : targetPointer.getTargets(game, source)) {
+        for (UUID targetPermanent : getTargetPointer().getTargets(game, source)) {
             Permanent land = game.getPermanent(targetPermanent);
             if (land == null) {
                 continue;

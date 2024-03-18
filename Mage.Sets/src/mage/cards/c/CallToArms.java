@@ -115,6 +115,8 @@ class CallToArmsStateTriggeredAbility extends StateTriggeredAbility {
 
     public CallToArmsStateTriggeredAbility() {
         super(Zone.BATTLEFIELD, new SacrificeSourceEffect());
+        setTriggerPhrase("When the chosen color isn't the most common color among nontoken permanents " +
+                "the chosen player controls or is tied for most common, ");
     }
 
     private CallToArmsStateTriggeredAbility(final CallToArmsStateTriggeredAbility ability) {
@@ -139,13 +141,6 @@ class CallToArmsStateTriggeredAbility extends StateTriggeredAbility {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "When the chosen color isn't the most common color "
-                + "among nontoken permanents the chosen player controls "
-                + "or is tied for most common, sacrifice {this}";
     }
 
 }

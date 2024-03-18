@@ -40,8 +40,7 @@ public final class AnzragTheQuakeMole extends CardImpl {
         Ability ability = new BecomesBlockedSourceTriggeredAbility(
                 new UntapAllEffect(filter), false
         );
-        ability.addEffect(new AdditionalCombatPhaseEffect()
-                .setText("After this combat phase, there is an additional combat phase"));
+        ability.addEffect(new AdditionalCombatPhaseEffect());
         this.addAbility(ability);
 
         // {3}{R}{R}{G}{G}: Anzrag must be blocked each combat this turn if able.

@@ -1,4 +1,3 @@
-
 package mage.cards.t;
 
 import java.util.UUID;
@@ -13,8 +12,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.target.common.TargetAnyTarget;
 
 /**
@@ -23,11 +21,7 @@ import mage.target.common.TargetAnyTarget;
  */
 public final class TarPitcher extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Goblin");
-
-    static {
-        filter.add(SubType.GOBLIN.getPredicate());
-    }
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.GOBLIN, "Goblin");
 
     public TarPitcher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");

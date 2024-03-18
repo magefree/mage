@@ -92,7 +92,7 @@ class LiesaForgottenArchangelReturnToHandEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Effect effect = new ReturnToHandTargetEffect();
         effect.setText("return that card to its owner's hand");
-        effect.setTargetPointer(targetPointer);
+        effect.setTargetPointer(this.getTargetPointer().copy());
         DelayedTriggeredAbility ability = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect);
         game.addDelayedTriggeredAbility(ability, source);
         return true;

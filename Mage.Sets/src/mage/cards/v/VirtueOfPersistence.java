@@ -11,6 +11,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureCard;
 import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetCreaturePermanent;
@@ -22,8 +23,6 @@ import java.util.UUID;
  */
 public final class VirtueOfPersistence extends AdventureCard {
 
-    private static final FilterCard filter = new FilterCreatureCard("creature card from a graveyard");
-
     public VirtueOfPersistence(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, new CardType[]{CardType.SORCERY}, "{5}{B}{B}", "Locthwain Scorn", "{1}{B}");
 
@@ -31,7 +30,7 @@ public final class VirtueOfPersistence extends AdventureCard {
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
                 new ReturnFromGraveyardToBattlefieldTargetEffect(), TargetController.YOU, false
         );
-        ability.addTarget(new TargetCardInGraveyard(filter));
+        ability.addTarget(new TargetCardInGraveyard(StaticFilters.FILTER_CARD_CREATURE_A_GRAVEYARD));
         this.addAbility(ability);
 
         // Locthwain Scorn

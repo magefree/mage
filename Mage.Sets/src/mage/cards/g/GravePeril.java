@@ -61,7 +61,7 @@ class GravePerilEffect extends OneShotEffect {
         if (permanent != null) {
             if (permanent.sacrifice(source, game)) {
                 Effect effect = new DestroyTargetEffect();
-                effect.setTargetPointer(this.getTargetPointer());
+                effect.setTargetPointer(this.getTargetPointer().copy());
                 return effect.apply(game, source);
             }
         }

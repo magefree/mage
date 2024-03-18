@@ -23,9 +23,11 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  */
 public class PrototypeTest extends CardTestPlayerBase {
 
+    // Prototype {2}{R} - 3/2
     private static final String automaton = "Blitz Automaton";
     private static final String withPrototype = " using Prototype";
     private static final String automatonWithPrototype = automaton+withPrototype;
+
     private static final String bolt = "Lightning Bolt";
     private static final String cloudshift = "Cloudshift";
     private static final String clone = "Clone";
@@ -89,6 +91,7 @@ public class PrototypeTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
         addCard(Zone.HAND, playerA, automaton);
 
+        showAvailableAbilities("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, automatonWithPrototype);
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);

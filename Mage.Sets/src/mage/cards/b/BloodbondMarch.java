@@ -38,47 +38,48 @@ public final class BloodbondMarch extends CardImpl {
         return new BloodbondMarch(this);
     }
 
-    private class BloodbondMarchEffect extends OneShotEffect {
+}
 
-        BloodbondMarchEffect() {
-            super(Outcome.Benefit);
-            staticText = "each player returns all cards with the same name as that spell from their graveyard to the battlefield";
+class BloodbondMarchEffect extends OneShotEffect {
+
+    BloodbondMarchEffect() {
+        super(Outcome.Benefit);
+        staticText = "each player returns all cards with the same name as that spell from their graveyard to the battlefield";
+    }
+
+    private BloodbondMarchEffect(final BloodbondMarchEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+
+        if (controller == null || game.getPermanentOrLKIBattlefield(source.getSourceId()) == null) {
+            return false;
         }
 
-        private BloodbondMarchEffect(final BloodbondMarchEffect effect) {
-            super(effect);
+        Spell spell = game.getSpellOrLKIStack(this.getTargetPointer().getFirst(game, source));
+
+        if (spell == null) {
+            return false;
         }
 
-        @Override
-        public boolean apply(Game game, Ability source) {
-            Player controller = game.getPlayer(source.getControllerId());
+        FilterCard filter = new FilterCard();
+        filter.add(new NamePredicate(spell.getName()));
 
-            if (controller == null || game.getPermanentOrLKIBattlefield(source.getSourceId()) == null) {
-                return false;
+        for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
+            Player player = game.getPlayer(playerId);
+            if (player != null) {
+                player.moveCards(player.getGraveyard().getCards(filter, game), Zone.BATTLEFIELD, source, game);
             }
-
-            Spell spell = game.getSpellOrLKIStack(this.getTargetPointer().getFirst(game, source));
-
-            if (spell == null) {
-                return false;
-            }
-
-            FilterCard filter = new FilterCard();
-            filter.add(new NamePredicate(spell.getName()));
-
-            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-                Player player = game.getPlayer(playerId);
-                if (player != null) {
-                    player.moveCards(player.getGraveyard().getCards(filter, game), Zone.BATTLEFIELD, source, game);
-                }
-            }
-
-            return true;
         }
 
-        @Override
-        public BloodbondMarchEffect copy() {
-            return new BloodbondMarchEffect(this);
-        }
+        return true;
+    }
+
+    @Override
+    public BloodbondMarchEffect copy() {
+        return new BloodbondMarchEffect(this);
     }
 }

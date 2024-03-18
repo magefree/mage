@@ -1,5 +1,6 @@
 package mage.abilities.effects.common;
 
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
@@ -14,7 +15,9 @@ import mage.players.Player;
 import mage.target.targetpointer.FixedTargets;
 import mage.util.CardUtil;
 
+import java.util.ArrayList;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class ExileTopXMayPlayUntilEffect extends OneShotEffect {
 

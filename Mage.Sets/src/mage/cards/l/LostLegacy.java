@@ -59,7 +59,7 @@ class LostLegacyEffect extends SearchTargetGraveyardHandLibraryForCardNameAndExi
             FilterCard filter = new FilterCard();
             filter.add(new NamePredicate(cardName));
             int cardsInHandBefore = targetPlayer.getHand().count(filter, game);
-            boolean result = super.applySearchAndExile(game, source, cardName, targetPointer.getFirst(game, source));
+            boolean result = super.applySearchAndExile(game, source, cardName, getTargetPointer().getFirst(game, source));
             int cardsExiled = cardsInHandBefore - targetPlayer.getHand().count(filter, game);
             if (cardsExiled > 0) {
                 targetPlayer.drawCards(cardsExiled, source, game);

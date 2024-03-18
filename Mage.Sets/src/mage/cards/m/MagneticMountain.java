@@ -81,7 +81,7 @@ class MagneticMountainEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
 
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         if (player != null && sourcePermanent != null) {
             int countBattlefield = game.getBattlefield().getAllActivePermanents(filter2, game.getActivePlayerId(), game).size();

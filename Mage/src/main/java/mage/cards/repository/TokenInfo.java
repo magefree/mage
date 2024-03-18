@@ -14,21 +14,18 @@ public class TokenInfo {
 
     private final String classFileName;
 
-    private final String imageFileName;
-
     private String downloadUrl = "";
 
     public TokenInfo(TokenType tokenType, String name, String setCode, Integer imageNumber) {
-        this(tokenType, name, setCode, imageNumber, "", "");
+        this(tokenType, name, setCode, imageNumber, "");
     }
 
-    public TokenInfo(TokenType tokenType, String name, String setCode, Integer imageNumber, String classFileName, String imageFileName) {
+    public TokenInfo(TokenType tokenType, String name, String setCode, Integer imageNumber, String classFileName) {
         this.tokenType = tokenType;
         this.name = name;
         this.setCode = setCode;
         this.imageNumber = imageNumber;
         this.classFileName = classFileName;
-        this.imageFileName = imageFileName;
     }
 
     @Override
@@ -42,10 +39,6 @@ public class TokenInfo {
 
     public String getName() {
         return name;
-    }
-
-    public String getImageFileName() {
-        return imageFileName;
     }
 
     public String getSetCode() {

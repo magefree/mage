@@ -143,7 +143,7 @@ class UlamogExileLibraryEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player defender = game.getPlayer(targetPointer.getFirst(game, source));
+        Player defender = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (defender != null) {
             defender.moveCards(defender.getLibrary().getTopCards(game, 20), Zone.EXILED, source, game);
             return true;

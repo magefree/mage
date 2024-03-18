@@ -1,35 +1,20 @@
-
 package mage.cards.o;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.common.TapTargetCost;
+import mage.abilities.abilityword.CohortAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.permanent.TappedPredicate;
-import mage.target.common.TargetControlledPermanent;
+
+import java.util.UUID;
 
 /**
  *
  * @author fireshoes
  */
 public final class OnduWarCleric extends CardImpl {
-
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("an untapped Ally you control");
-
-    static {
-        filter.add(SubType.ALLY.getPredicate());
-        filter.add(TappedPredicate.UNTAPPED);
-    }
 
     public OnduWarCleric(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
@@ -40,10 +25,7 @@ public final class OnduWarCleric extends CardImpl {
         this.toughness = new MageInt(2);
 
         // <i>Cohort</i> &mdash; {T}, Tap an untapped Ally you control: You gain 2 life.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(2), new TapSourceCost());
-        ability.addCost(new TapTargetCost(new TargetControlledPermanent(filter)));
-        ability.setAbilityWord(AbilityWord.COHORT);
-        this.addAbility(ability);
+        this.addAbility(new CohortAbility(new GainLifeEffect(2)));
     }
 
     private OnduWarCleric(final OnduWarCleric card) {

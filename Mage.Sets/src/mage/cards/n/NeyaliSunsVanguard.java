@@ -132,7 +132,7 @@ class NeyaliSunsVanguardEffect extends OneShotEffect {
         if (card == null) {
             return false;
         }
-        player.moveCards(card, Zone.EXILED, source, game);
+        player.moveCardsToExile(card, source, game, true, CardUtil.getExileZoneId(game, source), CardUtil.getSourceName(game, source));
         CardUtil.makeCardPlayable(
                 game, source, card, Duration.Custom, false,
                 source.getControllerId(), NeyaliSunsVanguardWatcher::checkPlayer

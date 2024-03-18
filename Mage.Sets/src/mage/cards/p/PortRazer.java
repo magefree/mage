@@ -41,8 +41,7 @@ public final class PortRazer extends CardImpl {
                         "untap each creature you control"
                 ), false
         );
-        ability.addEffect(new AdditionalCombatPhaseEffect()
-                .setText("After this combat phase, there is an additional combat phase."));
+        ability.addEffect(new AdditionalCombatPhaseEffect());
         this.addAbility(ability);
 
         // Port Razer can't attack a player it has already attacked this turn.

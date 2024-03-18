@@ -74,7 +74,7 @@ public class CommanderColorIdentityTest extends CardTestCommander3PlayersFFA {
         if (cardInfo == null) {
             throw new IllegalArgumentException("Couldn't find the card " + cardName + " in the DB.");
         }
-        Card card = cardInfo.getCard();
+        Card card = cardInfo.createCard();
         FilterMana filterMana = card.getColorIdentity();
         return filterMana.toString();
     }

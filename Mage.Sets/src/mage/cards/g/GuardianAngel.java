@@ -19,7 +19,6 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
@@ -80,10 +79,10 @@ class GuardianAngelEffect extends OneShotEffect {
                 targetName = "player " + targetPlayer.getName();
             }
             ContinuousEffect effect = new PreventDamageToTargetEffect(Duration.EndOfTurn, source.getManaCostsToPay().getX(), false);
-            effect.setTargetPointer(getTargetPointer());
+            effect.setTargetPointer(this.getTargetPointer().copy());
             game.addEffect(effect, source);
             SpecialAction specialAction = new GuardianAngelAction();
-            specialAction.getEffects().get(0).setTargetPointer(getTargetPointer());
+            specialAction.getEffects().get(0).setTargetPointer(this.getTargetPointer().copy());
             specialAction.getEffects().get(0).setText("Prevent the next 1 damage that would be dealt to any target this turn (" + targetName + ").");
             new CreateSpecialActionEffect(specialAction).apply(game, source);
             // Create a hidden delayed triggered ability to remove the special action at end of turn.

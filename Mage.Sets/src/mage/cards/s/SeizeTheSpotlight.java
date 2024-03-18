@@ -2,8 +2,9 @@ package mage.cards.s;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
-import mage.abilities.effects.common.continuous.GainControlTargetEffect;
+import mage.abilities.effects.common.UntapAllEffect;
+import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
+import mage.abilities.effects.common.continuous.GainControlAllEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -13,12 +14,12 @@ import mage.constants.Outcome;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
+import mage.filter.predicate.permanent.PermanentReferenceInCollectionPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.TreasureToken;
 import mage.players.Player;
 import mage.target.TargetPermanent;
-import mage.target.targetpointer.FixedTargets;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -92,7 +93,7 @@ class SeizeTheSpotlightEffect extends OneShotEffect {
             filter.add(new ControllerIdPredicate(opponent.getId()));
             TargetPermanent target = new TargetPermanent(filter);
             target.withNotTarget(true);
-            if (!target.canChoose(source.getSourceId(), source, game)) {
+            if (!target.canChoose(controller.getId(), source, game)) {
                 continue;
             }
             controller.choose(outcome, target, source, game);
@@ -100,14 +101,15 @@ class SeizeTheSpotlightEffect extends OneShotEffect {
             if (permanent == null) {
                 continue;
             }
-            permanent.untap(game);
             permanents.add(permanent);
         }
         if (!permanents.isEmpty()) {
-            game.addEffect(new GainControlTargetEffect(Duration.EndOfTurn)
-                    .setTargetPointer(new FixedTargets(permanents, game)), source);
-            game.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance())
-                    .setTargetPointer(new FixedTargets(permanents, game)), source);
+            FilterPermanent affectedFilter = new FilterPermanent();
+            affectedFilter.add(new PermanentReferenceInCollectionPredicate(permanents, game));
+            new GainControlAllEffect(Duration.EndOfTurn, affectedFilter).apply(game, source);
+            game.getState().processAction(game);
+            new UntapAllEffect(affectedFilter).apply(game, source);
+            game.addEffect(new GainAbilityAllEffect(HasteAbility.getInstance(), Duration.EndOfTurn, affectedFilter), source);
         }
         if (fortune > 0) {
             controller.drawCards(fortune, source, game);

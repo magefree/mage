@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -13,7 +12,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInGraveyard;
 
 /**
@@ -34,7 +33,7 @@ public final class Stonecloaker extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // When Stonecloaker enters the battlefield, return a creature you control to its owner's hand.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(new FilterControlledCreaturePermanent()), false);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(StaticFilters.FILTER_CONTROLLED_CREATURE), false);
 
         this.addAbility(ability);
         // When Stonecloaker enters the battlefield, exile target card from a graveyard.

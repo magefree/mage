@@ -162,9 +162,7 @@ class BurningCinderFuryOfCrimsonChaosFireCreatureGainControlEffect extends Conti
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getFirstTarget());
-        if (targetPointer != null) {
-            permanent = game.getPermanent(targetPointer.getFirst(game, source));
-        }
+        permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (permanent != null && controller != null) {
             return permanent.changeControllerId(controller, game, source);
         }

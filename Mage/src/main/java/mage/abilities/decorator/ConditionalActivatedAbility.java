@@ -18,6 +18,7 @@ public class ConditionalActivatedAbility extends ActivatedAbilityImpl {
     private static final Effects emptyEffects = new Effects();
 
     private String ruleText = null;
+    private boolean showCondition = true;
 
     public ConditionalActivatedAbility(Effect effect, Cost cost, Condition condition) {
         this(Zone.BATTLEFIELD, effect, cost, condition);
@@ -36,6 +37,7 @@ public class ConditionalActivatedAbility extends ActivatedAbilityImpl {
     protected ConditionalActivatedAbility(final ConditionalActivatedAbility ability) {
         super(ability);
         this.ruleText = ability.ruleText;
+        this.showCondition = ability.showCondition;
     }
 
     @Override
@@ -51,22 +53,29 @@ public class ConditionalActivatedAbility extends ActivatedAbilityImpl {
         return new ConditionalActivatedAbility(this);
     }
 
+    public ConditionalActivatedAbility hideCondition() {
+        this.showCondition = false;
+        return this;
+    }
+
     @Override
     public String getRule() {
         if (ruleText != null && !ruleText.isEmpty()) {
             return ruleText;
         }
         StringBuilder sb = new StringBuilder(super.getRule());
-        sb.append(" Activate only ");
-        if (timing == TimingRule.SORCERY) {
-            sb.append("as a sorcery and only ");
+        if (showCondition) {
+            sb.append(" Activate only ");
+            if (timing == TimingRule.SORCERY) {
+                sb.append("as a sorcery and only ");
+            }
+            String conditionText = condition.toString();
+            if (!conditionText.startsWith("during") && !conditionText.startsWith("before") && !conditionText.startsWith("if")) {
+                sb.append("if ");
+            }
+            sb.append(conditionText);
+            sb.append('.');
         }
-        String conditionText = condition.toString();
-        if (!conditionText.startsWith("during") && !conditionText.startsWith("before") && !conditionText.startsWith("if")) {
-            sb.append("if ");
-        }
-        sb.append(conditionText);
-        sb.append('.');
         return sb.toString();
     }
 }

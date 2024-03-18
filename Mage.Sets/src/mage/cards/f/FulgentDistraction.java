@@ -1,5 +1,3 @@
-
-
 package mage.cards.f;
 
 import java.util.ArrayList;
@@ -42,20 +40,18 @@ public final class FulgentDistraction extends CardImpl {
 
 class FulgentDistractionEffect extends OneShotEffect {
 
-    private static String text = "Choose two target creatures. Tap those creatures, then unattach all Equipment from them";
-
-    FulgentDistractionEffect ( ) {
+    FulgentDistractionEffect() {
         super(Outcome.Tap);
-        staticText = text;
+        staticText = "Choose two target creatures. Tap those creatures, then unattach all Equipment from them";
     }
 
-    FulgentDistractionEffect ( FulgentDistractionEffect effect ) {
+    private FulgentDistractionEffect(FulgentDistractionEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for ( UUID target : targetPointer.getTargets(game, source) ) {
+        for ( UUID target : getTargetPointer().getTargets(game, source) ) {
             Permanent creature = game.getPermanent(target);
 
             List<UUID> copiedAttachments = new ArrayList<>(creature.getAttachments());
@@ -63,13 +59,14 @@ class FulgentDistractionEffect extends OneShotEffect {
                 Permanent equipment = game.getPermanent(equipmentId);
                 boolean isEquipment = false;
 
-                for ( Ability ability : equipment.getAbilities() ) {
-                    if ( ability instanceof EquipAbility ) {
+                for (Ability ability : equipment.getAbilities()) {
+                    if (ability instanceof EquipAbility) {
                         isEquipment = true;
+                        break;
                     }
                 }
 
-                if ( isEquipment ) {
+                if (isEquipment) {
                     creature.removeAttachment(equipmentId, source, game);
                 }
             }

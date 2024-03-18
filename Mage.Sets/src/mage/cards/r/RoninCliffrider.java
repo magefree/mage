@@ -1,22 +1,16 @@
-    
 package mage.cards.r;
 
-import java.util.List;
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DamageAllControlledTargetEffect;
 import mage.abilities.keyword.BushidoAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
-import mage.constants.Outcome;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -35,7 +29,9 @@ public final class RoninCliffrider extends CardImpl {
         // Bushido 1
         this.addAbility(new BushidoAbility(1));
         // Whenever Ronin Cliffrider attacks, you may have it deal 1 damage to each creature defending player controls.
-        this.addAbility(new AttacksTriggeredAbility(new RoninCliffriderEffect(), true));
+        this.addAbility(new AttacksTriggeredAbility(new DamageAllControlledTargetEffect(1)
+                .setText("you may have it deal 1 damage to each creature defending player controls"),
+                true, null, SetTargetPointer.PLAYER));
     }
 
     private RoninCliffrider(final RoninCliffrider card) {
@@ -45,36 +41,5 @@ public final class RoninCliffrider extends CardImpl {
     @Override
     public RoninCliffrider copy() {
         return new RoninCliffrider(this);
-    }
-}
-class RoninCliffriderEffect extends OneShotEffect {
-
-    RoninCliffriderEffect() {
-        super(Outcome.Damage);
-        this.staticText = "you may have it deal 1 damage to each creature defending player controls";
-    }
-
-    private RoninCliffriderEffect(final RoninCliffriderEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public RoninCliffriderEffect copy() {
-        return new RoninCliffriderEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        UUID defenderId = game.getCombat().getDefenderId(source.getSourceId());
-        if (defenderId != null) {
-            FilterCreaturePermanent filter = new FilterCreaturePermanent();
-            filter.add(new ControllerIdPredicate(defenderId));
-            List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game);
-            for (Permanent permanent : permanents) {
-                permanent.damage(1, source.getSourceId(), source, game, false, true);
-            }
-            return true;
-        }
-        return false;
     }
 }

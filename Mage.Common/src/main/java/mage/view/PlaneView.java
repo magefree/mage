@@ -1,6 +1,5 @@
 package mage.view;
 
-import mage.cards.Card;
 import mage.game.command.Plane;
 import mage.players.PlayableObjectStats;
 
@@ -15,15 +14,17 @@ public class PlaneView implements CommandObjectView, Serializable {
 
     protected UUID id;
     protected String name;
-    protected int imageNum;
-    protected String expansionSetCode;
+    protected String imageFileName = "";
+    protected int imageNumber = 0;
+    protected String expansionSetCode = "";
     protected List<String> rules;
     protected PlayableObjectStats playableStats = new PlayableObjectStats();
 
     public PlaneView(Plane plane) {
         this.id = plane.getId();
         this.name = plane.getName();
-        this.imageNum = plane.getImageNumber();
+        this.imageFileName = plane.getImageFileName();
+        this.imageNumber = plane.getImageNumber();
         this.expansionSetCode = plane.getExpansionSetCode();
         this.rules = plane.getAbilities().getRules(plane.getName());
     }
@@ -44,8 +45,13 @@ public class PlaneView implements CommandObjectView, Serializable {
     }
 
     @Override
+    public String getImageFileName() {
+        return imageFileName;
+    }
+
+    @Override
     public int getImageNumber() {
-        return imageNum;
+        return imageNumber;
     }
 
     @Override

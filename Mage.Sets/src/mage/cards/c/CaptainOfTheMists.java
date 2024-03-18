@@ -16,7 +16,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.target.TargetPermanent;
 
@@ -27,7 +27,7 @@ import mage.target.TargetPermanent;
  */
 public final class CaptainOfTheMists extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("another Human");
+    private static final FilterPermanent filter = new FilterControlledPermanent("another Human");
 
     static {
         filter.add(AnotherPredicate.instance);

@@ -125,7 +125,7 @@ public class GathererSymbols implements Iterable<DownloadJob> {
 
                     String url = format(urlFmt, sizes[modSizeIndex], symbol);
 
-                    return new DownloadJob(sym, fromURL(url), toFile(dst));
+                    return new DownloadJob(sym, fromURL(url), toFile(dst), false);
                 }
             }
         };

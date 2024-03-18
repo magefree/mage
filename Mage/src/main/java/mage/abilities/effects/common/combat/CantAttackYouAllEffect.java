@@ -31,9 +31,9 @@ public class CantAttackYouAllEffect extends RestrictionEffect {
         super(duration, Outcome.Benefit);
         this.filterAttacker = filter;
         this.alsoPlaneswalker = alsoPlaneswalker;
-        staticText = filterAttacker.getMessage() + " can't attack you"
-                + (alsoPlaneswalker ? " or planeswalkers you control" : "")
-                + (duration == Duration.UntilYourNextTurn || duration == Duration.UntilEndOfYourNextTurn ? " " + duration.toString() : "");
+        staticText = (duration == Duration.UntilYourNextTurn ? duration.toString() + ", " : "")
+                + filterAttacker.getMessage() + " can't attack you"
+                + (alsoPlaneswalker ? " or planeswalkers you control" : "");
     }
 
     protected CantAttackYouAllEffect(final CantAttackYouAllEffect effect) {

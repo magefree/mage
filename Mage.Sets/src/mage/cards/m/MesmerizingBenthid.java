@@ -13,7 +13,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.game.permanent.token.MesmerizingBenthidToken;
 
 import java.util.UUID;
@@ -23,7 +23,7 @@ import java.util.UUID;
  */
 public final class MesmerizingBenthid extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledCreaturePermanent(SubType.ILLUSION);
+    private static final FilterPermanent filter = new FilterControlledPermanent(SubType.ILLUSION);
 
     public MesmerizingBenthid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");

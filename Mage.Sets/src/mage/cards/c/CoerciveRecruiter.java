@@ -14,7 +14,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -24,7 +24,7 @@ import java.util.UUID;
  */
 public final class CoerciveRecruiter extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledCreaturePermanent(SubType.PIRATE, "Pirate");
+    private static final FilterPermanent filter = new FilterControlledPermanent(SubType.PIRATE, "Pirate");
 
     public CoerciveRecruiter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}");

@@ -5,10 +5,16 @@ import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.AttachEffect;
 import mage.constants.Outcome;
+import mage.constants.TargetController;
 import mage.constants.TimingRule;
 import mage.constants.Zone;
+import mage.filter.predicate.Predicate;
+import mage.filter.predicate.Predicates;
 import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -40,6 +46,23 @@ public class EquipAbility extends ActivatedAbilityImpl {
 
     public EquipAbility(Outcome outcome, Cost cost, Target target, boolean showAbilityHint) {
         super(Zone.BATTLEFIELD, new AttachEffect(outcome, "Equip"), cost);
+
+        // verify check: only controlled target allowed
+        // 702.6c
+        // Equip abilities may further restrict what creatures may be chosen as legal targets.
+        // Such restrictions usually appear in the form “Equip [quality]” or “Equip [quality] creature.”
+        // These equip abilities may legally target only a creature that’s controlled by the player
+        // activating the ability and that has the chosen quality. Additional restrictions for an equip
+        // ability don’t restrict what the Equipment may be attached to.
+        List<Predicate> list = new ArrayList<>();
+        Predicates.collectAllComponents(target.getFilter().getPredicates(), target.getFilter().getExtraPredicates(), list);
+        if (list.stream()
+                .filter(p -> p instanceof TargetController.ControllerPredicate)
+                .map(p -> (TargetController.ControllerPredicate) p)
+                .noneMatch(p -> p.getController().equals(TargetController.YOU))) {
+            throw new IllegalArgumentException("Wrong code usage: equip ability must use target/filter with controller predicate - " + target);
+        }
+
         this.addTarget(target);
         this.timing = TimingRule.SORCERY;
         this.showAbilityHint = showAbilityHint;

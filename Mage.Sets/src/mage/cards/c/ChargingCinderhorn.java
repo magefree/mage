@@ -95,7 +95,7 @@ class ChargingCinderhornDamageTargetEffect extends OneShotEffect {
         }
 
         DynamicValue amount = new CountersSourceCount(CounterType.FURY);
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (player != null) {
             player.damage(amount.calculate(game, source, this), source.getSourceId(), source, game);
             return true;

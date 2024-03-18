@@ -14,7 +14,7 @@ import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.common.FilterPlaneswalkerPermanent;
 import mage.filter.predicate.Predicates;
@@ -51,7 +51,7 @@ public final class AjaniUnyielding extends CardImpl {
         this.addAbility(ajaniAbility2);
 
         // -9: Put five +1/+1 counters on each creature you control and five loyalty counters on each other planeswalker you control.
-        LoyaltyAbility ajaniAbility3 = new LoyaltyAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(5), new FilterControlledCreaturePermanent()), -9);
+        LoyaltyAbility ajaniAbility3 = new LoyaltyAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(5), StaticFilters.FILTER_CONTROLLED_CREATURE), -9);
         ajaniAbility3.addEffect(new AddCountersAllEffect(CounterType.LOYALTY.createInstance(5), planeswalkerFilter).setText("and five loyalty counters on each other planeswalker you control"));
         this.addAbility(ajaniAbility3);
     }

@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -16,9 +15,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.game.permanent.token.BatToken;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
@@ -26,11 +24,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public final class SkeletalVampire extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a Bat");
-
-    static {
-        filter.add(SubType.BAT.getPredicate());
-    }
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.BAT, "a Bat");
 
     public SkeletalVampire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}");

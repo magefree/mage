@@ -14,7 +14,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetOpponentsChoicePermanent;
@@ -27,15 +27,13 @@ import java.util.UUID;
  */
 public final class EchoChamber extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
-
     public EchoChamber(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
         // {4}, {tap}: An opponent chooses target creature they control. Create a token that's a copy of that creature. That token gains haste until end of turn. Exile the token at the beginning of the next end step. Activate this ability only any time you could cast a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new EchoChamberCreateTokenEffect(), new GenericManaCost(4));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetOpponentsChoicePermanent(1, 1, filter, false));
+        ability.addTarget(new TargetOpponentsChoicePermanent(1, 1, StaticFilters.FILTER_CONTROLLED_CREATURE, false));
         this.addAbility(ability);
     }
 

@@ -4,16 +4,13 @@ import mage.cards.Card;
 import mage.cards.decks.Deck;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
-import mage.cards.repository.CardRepository;
 import mage.cards.repository.ExpansionRepository;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.util.sets.ConstructedFormats;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
-import mage.constants.Rarity;
 import mage.constants.SuperType;
 import mage.util.RandomUtil;
-import mage.util.TournamentUtil;
 
 import java.util.*;
 
@@ -40,17 +37,16 @@ public final class DeckGenerator {
     /**
      * Builds a deck out of the selected block/set/format.
      *
-     * @return a path to the generated deck.
+     * @return a path to the generated deck or null on canceled
      */
     public static String generateDeck() {
-
         genDialog = new DeckGeneratorDialog();
         if (genDialog.getSelectedColors() != null) {
             Deck deck = buildDeck();
             return genDialog.saveDeck(deck);
+        } else {
+            return null;
         }
-        // If the deck couldn't be generated or the user cancelled, repopulate the deck selection with its cached value
-        return PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_DECK_FILE, null);
     }
 
     protected static Deck buildDeck() {
@@ -230,6 +226,6 @@ public final class DeckGenerator {
     private static Card getBasicLand(ColoredManaSymbol color, Map<String, List<CardInfo>> basicLands) {
         String landName = DeckGeneratorPool.getBasicLandName(color.toString());
         List<CardInfo> basicLandsInfo = basicLands.get(landName);
-        return basicLandsInfo.get(RandomUtil.nextInt(basicLandsInfo.size())).getMockCard().copy();
+        return basicLandsInfo.get(RandomUtil.nextInt(basicLandsInfo.size())).createMockCard().copy();
     }
 }

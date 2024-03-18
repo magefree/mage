@@ -70,7 +70,7 @@ class FlameKinWarScourEffect extends OneShotEffect {
         if (permanent != null) {
             if (permanent.sacrifice(source, game)) {
                 Effect effect = new DamageTargetEffect(4).setText("{this} deals 4 damage to it");
-                effect.setTargetPointer(this.getTargetPointer());
+                effect.setTargetPointer(this.getTargetPointer().copy());
                 return effect.apply(game, source);
             }
         }

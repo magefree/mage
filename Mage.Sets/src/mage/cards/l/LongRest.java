@@ -115,7 +115,7 @@ class LongRestEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Set<Card> cardsToHand = new HashSet<>();
-            for (UUID targetId : targetPointer.getTargets(game, source)) {
+            for (UUID targetId : getTargetPointer().getTargets(game, source)) {
                 Card card = game.getCard(targetId);
                 if (card != null && game.getState().getZone(targetId) == Zone.GRAVEYARD) {
                     cardsToHand.add(card);

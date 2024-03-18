@@ -53,9 +53,9 @@ class AssemblyHallEffect extends OneShotEffect {
 
     AssemblyHallEffect() {
         super(Outcome.Benefit);
-        this.staticText = "reveal a creature card from your hand. "
+        this.staticText = "reveal a creature card in your hand. "
                 + "Search your library for a card with the same name as that card, "
-                + "reveal it, and put it into your hand. Then shuffle";
+                + "reveal it, put it into your hand, then shuffle";
     }
 
     private AssemblyHallEffect(final AssemblyHallEffect effect) {

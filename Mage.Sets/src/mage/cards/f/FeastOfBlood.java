@@ -11,7 +11,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.SubType;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -26,7 +26,7 @@ public final class FeastOfBlood extends CardImpl {
         // Cast Feast of Blood only if you control two or more Vampires.
         this.addAbility(new CastOnlyIfConditionIsTrueAbility(
                 new PermanentsOnTheBattlefieldCondition(
-                        new FilterControlledCreaturePermanent(SubType.VAMPIRE, "you control two or more Vampires"),
+                        new FilterControlledPermanent(SubType.VAMPIRE, "you control two or more Vampires"),
                         ComparisonType.MORE_THAN, 1)));
 
         // Destroy target creature. You gain 4 life.

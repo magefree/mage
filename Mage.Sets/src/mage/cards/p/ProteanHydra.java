@@ -1,4 +1,3 @@
-
 package mage.cards.p;
 
 import java.util.UUID;
@@ -53,67 +52,68 @@ public final class ProteanHydra extends CardImpl {
         return new ProteanHydra(this);
     }
 
-    class ProteanHydraAbility extends TriggeredAbilityImpl {
+}
 
-        public ProteanHydraAbility() {
-            super(Zone.BATTLEFIELD, new CreateDelayedTriggeredAbilityEffect(new ProteanHydraDelayedTriggeredAbility()), false);
-        }
+class ProteanHydraAbility extends TriggeredAbilityImpl {
 
-        private ProteanHydraAbility(final ProteanHydraAbility ability) {
-            super(ability);
-        }
-
-        @Override
-        public ProteanHydraAbility copy() {
-            return new ProteanHydraAbility(this);
-        }
-
-        @Override
-        public boolean checkEventType(GameEvent event, Game game) {
-            return event.getType() == GameEvent.EventType.COUNTER_REMOVED;
-        }
-
-        @Override
-        public boolean checkTrigger(GameEvent event, Game game) {
-            return event.getData().equals(CounterType.P1P1.getName()) && event.getTargetId().equals(this.getSourceId());
-        }
-
-        @Override
-        public String getRule() {
-            return "Whenever a +1/+1 counter is removed from {this}, put two +1/+1 counters on it at the beginning of the next end step.";
-        }
-
+    ProteanHydraAbility() {
+        super(Zone.BATTLEFIELD, new CreateDelayedTriggeredAbilityEffect(new ProteanHydraDelayedTriggeredAbility()), false);
     }
 
-    static class ProteanHydraDelayedTriggeredAbility extends DelayedTriggeredAbility {
-
-        public ProteanHydraDelayedTriggeredAbility() {
-            super(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)));
-        }
-
-        private ProteanHydraDelayedTriggeredAbility(final ProteanHydraDelayedTriggeredAbility ability) {
-            super(ability);
-        }
-
-        @Override
-        public ProteanHydraDelayedTriggeredAbility copy() {
-            return new ProteanHydraDelayedTriggeredAbility(this);
-        }
-
-        @Override
-        public boolean checkEventType(GameEvent event, Game game) {
-            return event.getType() == GameEvent.EventType.END_TURN_STEP_PRE;
-        }
-
-        @Override
-        public boolean checkTrigger(GameEvent event, Game game) {
-            return true;
-        }
-
-        @Override
-        public String getRule() {
-            return "Put two +1/+1 counters on {this} at the beginning of the next end step";
-        }
-
+    private ProteanHydraAbility(final ProteanHydraAbility ability) {
+        super(ability);
     }
+
+    @Override
+    public ProteanHydraAbility copy() {
+        return new ProteanHydraAbility(this);
+    }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.COUNTER_REMOVED;
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        return event.getData().equals(CounterType.P1P1.getName()) && event.getTargetId().equals(this.getSourceId());
+    }
+
+    @Override
+    public String getRule() {
+        return "Whenever a +1/+1 counter is removed from {this}, put two +1/+1 counters on it at the beginning of the next end step.";
+    }
+
+}
+
+class ProteanHydraDelayedTriggeredAbility extends DelayedTriggeredAbility {
+
+    ProteanHydraDelayedTriggeredAbility() {
+        super(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)));
+    }
+
+    private ProteanHydraDelayedTriggeredAbility(final ProteanHydraDelayedTriggeredAbility ability) {
+        super(ability);
+    }
+
+    @Override
+    public ProteanHydraDelayedTriggeredAbility copy() {
+        return new ProteanHydraDelayedTriggeredAbility(this);
+    }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.END_TURN_STEP_PRE;
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        return true;
+    }
+
+    @Override
+    public String getRule() {
+        return "Put two +1/+1 counters on {this} at the beginning of the next end step";
+    }
+
 }

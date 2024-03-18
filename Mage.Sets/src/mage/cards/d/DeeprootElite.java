@@ -1,4 +1,3 @@
-
 package mage.cards.d;
 
 import java.util.UUID;
@@ -13,9 +12,9 @@ import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetControlledPermanent;
 
 /**
  *
@@ -29,10 +28,7 @@ public final class DeeprootElite extends CardImpl {
         filterYourAnotherMerfolk.add(TargetController.YOU.getControllerPredicate());
     }
 
-    private static final FilterControlledCreaturePermanent filterYourAnyMerfolk = new FilterControlledCreaturePermanent(SubType.MERFOLK);
-    static {
-        filterYourAnyMerfolk.add(TargetController.YOU.getControllerPredicate());
-    }
+    private static final FilterControlledPermanent filterYourAnyMerfolk = new FilterControlledPermanent(SubType.MERFOLK);
 
     public DeeprootElite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
@@ -44,7 +40,7 @@ public final class DeeprootElite extends CardImpl {
 
         // Whenever another Merfolk enters the battlefield under your control, put a +1/+1 counter on target Merfolk you control.
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()), filterYourAnotherMerfolk);
-        ability.addTarget(new TargetControlledCreaturePermanent(filterYourAnyMerfolk));
+        ability.addTarget(new TargetControlledPermanent(filterYourAnyMerfolk));
         this.addAbility(ability);
     }
 

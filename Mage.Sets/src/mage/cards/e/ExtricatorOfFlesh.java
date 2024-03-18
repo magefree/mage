@@ -1,4 +1,3 @@
-
 package mage.cards.e;
 
 import java.util.UUID;
@@ -19,6 +18,7 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.game.permanent.token.EldraziHorrorToken;
 
@@ -29,7 +29,7 @@ import mage.game.permanent.token.EldraziHorrorToken;
 public final class ExtricatorOfFlesh extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filterNonEldrazi = new FilterControlledCreaturePermanent("non-Eldrazi creature");
-    private static final FilterControlledCreaturePermanent filterEldrazi = new FilterControlledCreaturePermanent(SubType.ELDRAZI, "Eldrazi");
+    private static final FilterControlledPermanent filterEldrazi = new FilterControlledPermanent(SubType.ELDRAZI, "Eldrazi");
 
     static {
         filterNonEldrazi.add(Predicates.not(SubType.ELDRAZI.getPredicate()));

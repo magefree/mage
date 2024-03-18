@@ -21,7 +21,7 @@ import java.util.UUID;
 public class GainControlTargetEffect extends ContinuousEffectImpl {
 
     protected UUID controllingPlayerId;
-    private boolean fixedControl;
+    private final boolean fixedControl;
     private boolean firstControlChange = true;
     private final Condition condition;
 
@@ -63,6 +63,7 @@ public class GainControlTargetEffect extends ContinuousEffectImpl {
         this.controllingPlayerId = effect.controllingPlayerId;
         this.fixedControl = effect.fixedControl;
         this.condition = effect.condition;
+        this.firstControlChange = effect.firstControlChange;
     }
 
     @Override

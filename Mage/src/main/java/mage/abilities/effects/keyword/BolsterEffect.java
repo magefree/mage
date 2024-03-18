@@ -94,12 +94,12 @@ public class BolsterEffect extends OneShotEffect {
             return false;
         }
         Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance(amount.calculate(game, source, this)));
-        FixedTarget fixedTarget = new FixedTarget(selectedCreature, game);
-        effect.setTargetPointer(fixedTarget);
+        FixedTarget blueprintTarget = new FixedTarget(selectedCreature, game);
+        effect.setTargetPointer(blueprintTarget.copy());
         effect.apply(game, source);
         if (!additionalEffects.isEmpty()) {
             for (Effect additionalEffect : additionalEffects) {
-                additionalEffect.setTargetPointer(fixedTarget);
+                additionalEffect.setTargetPointer(blueprintTarget.copy());
                 if (additionalEffect instanceof OneShotEffect) {
                     additionalEffect.apply(game, source);
                 } else {

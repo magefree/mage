@@ -81,11 +81,8 @@ class DeceiverOfFormEffect extends OneShotEffect {
                                         && ((ModalDoubleFacedCard) cardFromTop).getLeftHalfCard().isCreature(game)) {
                                     copyFromCard = ((ModalDoubleFacedCard) cardFromTop).getLeftHalfCard();
                                 }
-                                Permanent newBluePrint = null;
-                                newBluePrint = new PermanentCard(copyFromCard, source.getControllerId(), game);
-                                newBluePrint.assignNewId();
+                                Permanent newBluePrint = new PermanentCard(copyFromCard, source.getControllerId(), game);
                                 CopyEffect copyEffect = new CopyEffect(Duration.EndOfTurn, newBluePrint, permanent.getId());
-                                copyEffect.newId();
                                 Ability newAbility = source.copy();
                                 copyEffect.init(newAbility, game);
                                 game.addEffect(copyEffect, newAbility);

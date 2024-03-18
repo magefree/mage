@@ -46,8 +46,7 @@ public class DetainAllEffect extends OneShotEffect {
             if (!game.isSimulation()) {
                 game.informPlayers("Detained permanent: " + permanent.getName());
             }
-            FixedTarget fixedTarget = new FixedTarget(permanent, game);
-            detainedObjects.add(fixedTarget);
+            detainedObjects.add(new FixedTarget(permanent, game));
         }
 
         game.addEffect(new DetainAllRestrictionEffect(detainedObjects), source);

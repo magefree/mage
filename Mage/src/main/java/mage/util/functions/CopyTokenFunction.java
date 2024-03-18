@@ -3,7 +3,7 @@ package mage.util.functions;
 import mage.MageObject;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
-import mage.abilities.keyword.MorphAbility;
+import mage.abilities.effects.common.continuous.BecomesFaceDownCreatureEffect;
 import mage.abilities.keyword.PrototypeAbility;
 import mage.cards.Card;
 import mage.constants.CardType;
@@ -68,11 +68,11 @@ public class CopyTokenFunction {
         if (source instanceof PermanentCard) {
             // create token from non-token permanent
 
-            // morph/manifest must hide all info
-            if (((PermanentCard) source).isMorphed()
-                    || ((PermanentCard) source).isManifested()
-                    || source.isFaceDown(game)) {
-                MorphAbility.setPermanentToFaceDownCreature(target, (PermanentCard) source, game);
+            // face down must hide all info
+            PermanentCard sourcePermanent = (PermanentCard) source;
+            BecomesFaceDownCreatureEffect.FaceDownType faceDownType = BecomesFaceDownCreatureEffect.findFaceDownType(game, sourcePermanent);
+            if (faceDownType != null) {
+                BecomesFaceDownCreatureEffect.makeFaceDownObject(game, null, target, faceDownType, null);
                 return;
             }
 

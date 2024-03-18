@@ -83,7 +83,7 @@ class XolatoyacTheSmilingFloodEffect extends BecomesBasicLandTargetEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent land = game.getPermanent(this.targetPointer.getFirst(game, source));
+        Permanent land = game.getPermanent(this.getTargetPointer().getFirst(game, source));
         if (land == null || land.getCounters(game).getCount(CounterType.FLOOD) < 1) {
             discard();
             return false;

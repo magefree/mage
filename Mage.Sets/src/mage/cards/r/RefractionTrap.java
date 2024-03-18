@@ -106,8 +106,8 @@ class RefractionTrapPreventDamageEffect extends PreventionEffectImpl {
 
     @Override
     public void init(Ability source, Game game) {
-        this.target.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), source, game);
         super.init(source, game);
+        this.target.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), source, game);
     }
 
     @Override

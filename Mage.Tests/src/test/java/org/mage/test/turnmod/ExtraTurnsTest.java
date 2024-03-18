@@ -16,7 +16,7 @@ public class ExtraTurnsTest extends CardTestPlayerBase {
     private void checkTurnControl(int turn, TestPlayer needTurnController, boolean isExtraTurn) {
         runCode("checking turn " + turn, turn, PhaseStep.POSTCOMBAT_MAIN, playerA, (info, player, game) -> {
             Player defaultTurnController = game.getPlayer(game.getActivePlayerId());
-            Player realTurnController = defaultTurnController.getTurnControlledBy() == null ? defaultTurnController : game.getPlayer(defaultTurnController.getTurnControlledBy());
+            Player realTurnController = game.getPlayer(defaultTurnController.getTurnControlledBy());
             Assert.assertEquals(String.format("turn %d must be controlled by %s", turn, needTurnController.getName()),
                     needTurnController.getName(), realTurnController.getName());
             Assert.assertEquals(String.format("turn %d must be %s", turn, (isExtraTurn ? "extra turn" : "normal turn")),

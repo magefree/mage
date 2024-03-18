@@ -14,6 +14,7 @@ import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInYourGraveyard;
+import mage.util.CardUtil;
 
 import java.awt.*;
 import java.util.Objects;
@@ -25,16 +26,23 @@ import java.util.UUID;
 public class CollectEvidenceCost extends CostImpl {
 
     private final int amount;
+    private final boolean withSource;
 
     public CollectEvidenceCost(int amount) {
+        this(amount, false);
+    }
+
+    public CollectEvidenceCost(int amount, boolean withSource) {
         super();
         this.amount = amount;
+        this.withSource = withSource;
         this.text = "collect evidence " + amount;
     }
 
     private CollectEvidenceCost(final CollectEvidenceCost cost) {
         super(cost);
         this.amount = cost.amount;
+        this.withSource = cost.withSource;
     }
 
     @Override
@@ -83,7 +91,11 @@ public class CollectEvidenceCost extends CostImpl {
                 .mapToInt(MageObject::getManaValue)
                 .sum() >= amount;
         if (paid) {
-            player.moveCards(cards, Zone.EXILED, source, game);
+            if (withSource) {
+                player.moveCardsToExile(cards.getCards(game), source, game, true, CardUtil.getExileZoneId(game, source), CardUtil.getSourceName(game, source));
+            } else {
+                player.moveCards(cards, Zone.EXILED, source, game);
+            }
             game.fireEvent(GameEvent.getEvent(
                     GameEvent.EventType.EVIDENCE_COLLECTED,
                     source.getSourceId(), source, source.getControllerId(), amount

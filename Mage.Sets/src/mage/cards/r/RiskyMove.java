@@ -1,9 +1,7 @@
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
@@ -13,7 +11,6 @@ import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -23,8 +20,9 @@ import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetOpponent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author L_J
  */
 public final class RiskyMove extends CardImpl {
@@ -100,7 +98,7 @@ class RiskyMoveGetControlEffect extends OneShotEffect {
 
 class RiskyMoveTriggeredAbility extends TriggeredAbilityImpl {
 
-    public RiskyMoveTriggeredAbility() {
+    RiskyMoveTriggeredAbility() {
         super(Zone.BATTLEFIELD, new RiskyMoveFlipCoinEffect(), false);
         setTriggerPhrase("When you gain control of {this} from another player, ");
     }
@@ -145,7 +143,7 @@ class RiskyMoveFlipCoinEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Target target1 = new TargetControlledCreaturePermanent(1, 1, new FilterControlledCreaturePermanent(), true);
+            Target target1 = new TargetControlledCreaturePermanent().withNotTarget(true);
             Target target2 = new TargetOpponent(true);
 
             if (target1.canChoose(controller.getId(), source, game)) {
@@ -180,9 +178,9 @@ class RiskyMoveFlipCoinEffect extends OneShotEffect {
 
 class RiskyMoveCreatureGainControlEffect extends ContinuousEffectImpl {
 
-    private UUID controller;
+    private final UUID controller;
 
-    public RiskyMoveCreatureGainControlEffect(Duration duration, UUID controller) {
+    RiskyMoveCreatureGainControlEffect(Duration duration, UUID controller) {
         super(duration, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
         this.controller = controller;
         this.staticText = "If you lose the flip, that opponent gains control of that creature";
@@ -200,10 +198,11 @@ class RiskyMoveCreatureGainControlEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getFirstTarget());
-        if (targetPointer != null) {
-            permanent = game.getPermanent(targetPointer.getFirst(game, source));
+        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
+        if (permanent == null) {
+            permanent = game.getPermanent(source.getFirstTarget());
         }
+
         if (permanent != null) {
             return permanent.changeControllerId(controller, game, source);
         }

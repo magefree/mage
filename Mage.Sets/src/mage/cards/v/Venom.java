@@ -42,7 +42,7 @@ public final class Venom extends CardImpl {
         // Whenever enchanted creature blocks or becomes blocked by a non-Wall creature, destroy the other creature at end of combat.
         Effect effect = new CreateDelayedTriggeredAbilityEffect(
                 new AtTheEndOfCombatDelayedTriggeredAbility(new DestroyTargetEffect()), true);
-        effect.setText("destroy that creature at end of combat");
+        effect.setText("destroy the other creature at end of combat");
         this.addAbility(new VenomTriggeredAbility(effect));
     }
 

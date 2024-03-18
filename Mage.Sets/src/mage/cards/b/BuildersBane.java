@@ -73,7 +73,7 @@ class BuildersBaneEffect extends OneShotEffect {
         Map<UUID, Integer> destroyedArtifactPerPlayer = new HashMap<>();
 
         // Destroy X target artifacts.
-        for (UUID targetID : this.targetPointer.getTargets(game, source)) {
+        for (UUID targetID : this.getTargetPointer().getTargets(game, source)) {
             Permanent permanent = game.getPermanent(targetID);
             if (permanent != null) {
                 if (permanent.destroy(source, game, false)) {

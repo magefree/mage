@@ -54,7 +54,7 @@ class MemoricideEffect extends SearchTargetGraveyardHandLibraryForCardNameAndExi
         if (cardName == null) {
             return false;
         }
-        return super.applySearchAndExile(game, source, cardName, targetPointer.getFirst(game, source));
+        return super.applySearchAndExile(game, source, cardName, getTargetPointer().getFirst(game, source));
     }
 
     @Override

@@ -82,7 +82,7 @@ class DecimatorBeetleEffect extends OneShotEffect {
         if (targetCreature != null
                 && targetCreature.getCounters(game).containsKey(CounterType.M1M1)) {
             Effect effect = new RemoveCounterTargetEffect(CounterType.M1M1.createInstance(1));
-            effect.setTargetPointer(targetPointer);
+            effect.setTargetPointer(this.getTargetPointer().copy());
             effect.apply(game, source);
         }
         targetCreature = game.getPermanent(source.getTargets().get(1).getFirstTarget());

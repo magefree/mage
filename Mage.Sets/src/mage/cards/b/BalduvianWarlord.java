@@ -14,7 +14,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.common.FilterBlockingCreature;
-import mage.filter.predicate.permanent.PermanentInListPredicate;
+import mage.filter.predicate.permanent.PermanentReferenceInCollectionPredicate;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
 import mage.game.events.BlockerDeclaredEvent;
@@ -111,7 +111,7 @@ class BalduvianWarlordUnblockEffect extends OneShotEffect {
                 Player targetsController = game.getPlayer(permanent.getControllerId());
                 if (targetsController != null) {
                     FilterAttackingCreature filter = new FilterAttackingCreature("creature attacking " + targetsController.getLogName());
-                    filter.add(new PermanentInListPredicate(list));
+                    filter.add(new PermanentReferenceInCollectionPredicate(list, game));
                     TargetPermanent target = new TargetPermanent(filter);
                     target.withNotTarget(true);
                     if (target.canChoose(controller.getId(), source, game)) {

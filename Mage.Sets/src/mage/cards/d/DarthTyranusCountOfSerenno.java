@@ -81,8 +81,8 @@ class DarthTyranusEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player1 = game.getPlayer(targetPointer.getTargets(game, source).get(0));
-        Player player2 = game.getPlayer(targetPointer.getTargets(game, source).get(1));
+        Player player1 = game.getPlayer(getTargetPointer().getTargets(game, source).get(0));
+        Player player2 = game.getPlayer(getTargetPointer().getTargets(game, source).get(1));
         if (player1 != null && player2 != null) {
             player1.setLife(5, game, source);
             player1.setLife(30, game, source);

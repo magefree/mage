@@ -156,7 +156,7 @@ class TergridGodOfFrightEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Card card = game.getCard(targetPointer.getFirst(game, source));
+            Card card = game.getCard(getTargetPointer().getFirst(game, source));
             if (card != null) {
                 // controller gets to choose the order in which the cards enter the battlefield
                 controller.moveCards(card, Zone.BATTLEFIELD, source, game);

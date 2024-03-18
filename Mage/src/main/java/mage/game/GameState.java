@@ -812,33 +812,48 @@ public class GameState implements Serializable, Copyable<GameState> {
         // Combine multiple damage events in the single event (batch)
         // * per damage type (see GameEvent.DAMAGED_BATCH_FOR_PERMANENTS, GameEvent.DAMAGED_BATCH_FOR_PLAYERS)
         // * per player (see GameEvent.DAMAGED_BATCH_FOR_ONE_PLAYER)
+        // * per permanent (see GameEvent.DAMAGED_BATCH_FOR_ONE_PERMANENT)
         //
         // Warning, one event can be stored in multiple batches,
         // example: DAMAGED_BATCH_FOR_PLAYERS + DAMAGED_BATCH_FOR_ONE_PLAYER
 
         boolean isPlayerDamage = damagedEvent instanceof DamagedPlayerEvent;
+        boolean isPermanentDamage = damagedEvent instanceof DamagedPermanentEvent;
 
         // existing batch
         boolean isDamageBatchUsed = false;
         boolean isPlayerBatchUsed = false;
+        boolean isPermanentBatchUsed = false;
         for (GameEvent event : simultaneousEvents) {
 
-            // per damage type
-            if ((event instanceof DamagedBatchEvent)
-                    && ((DamagedBatchEvent) event).getDamageClazz().isInstance(damagedEvent)) {
-                ((DamagedBatchEvent) event).addEvent(damagedEvent);
-                isDamageBatchUsed = true;
-            }
-
-            // per player
             if (isPlayerDamage && event instanceof DamagedBatchForOnePlayerEvent) {
+                // per player
                 DamagedBatchForOnePlayerEvent oldPlayerBatch = (DamagedBatchForOnePlayerEvent) event;
                 if (oldPlayerBatch.getDamageClazz().isInstance(damagedEvent)
                         && event.getPlayerId().equals(damagedEvent.getTargetId())) {
                     oldPlayerBatch.addEvent(damagedEvent);
                     isPlayerBatchUsed = true;
                 }
+            } else if (isPermanentDamage && event instanceof DamagedBatchForOnePermanentEvent) {
+                // per permanent
+                DamagedBatchForOnePermanentEvent oldPermanentBatch = (DamagedBatchForOnePermanentEvent) event;
+                if (oldPermanentBatch.getDamageClazz().isInstance(damagedEvent)
+                        && CardUtil.getEventTargets(event).contains(damagedEvent.getTargetId())) {
+                    oldPermanentBatch.addEvent(damagedEvent);
+                    isPermanentBatchUsed = true;
+                }
+            } else if ((event instanceof DamagedBatchEvent)
+                    && ((DamagedBatchEvent) event).getDamageClazz().isInstance(damagedEvent)) {
+                // per damage type
+                // If the batch event isn't DAMAGED_BATCH_FOR_ONE_PLAYER, the targetIDs need not match,
+                // since "event" is a generic batch in this case
+                // (either DAMAGED_BATCH_FOR_PERMANENTS or DAMAGED_BATCH_FOR_PLAYERS)
+                // Just needs to be a permanent-damaging event for DAMAGED_BATCH_FOR_PERMANENTS,
+                // or a player-damaging event for DAMAGED_BATCH_FOR_PLAYERS
+                ((DamagedBatchEvent) event).addEvent(damagedEvent);
+                isDamageBatchUsed = true;
             }
+
         }
 
         // new batch
@@ -846,8 +861,11 @@ public class GameState implements Serializable, Copyable<GameState> {
             addSimultaneousEvent(DamagedBatchEvent.makeEvent(damagedEvent), game);
         }
         if (!isPlayerBatchUsed && isPlayerDamage) {
-            DamagedBatchEvent event = new DamagedBatchForOnePlayerEvent(damagedEvent.getTargetId());
-            event.addEvent(damagedEvent);
+            DamagedBatchEvent event = new DamagedBatchForOnePlayerEvent(damagedEvent);
+            addSimultaneousEvent(event, game);
+        }
+        if (!isPermanentBatchUsed && isPermanentDamage) {
+            DamagedBatchEvent event = new DamagedBatchForOnePermanentEvent(damagedEvent);
             addSimultaneousEvent(event, game);
         }
     }
@@ -952,9 +970,11 @@ public class GameState implements Serializable, Copyable<GameState> {
 
         Map<ZoneChangeData, List<GameEvent>> eventsByKey = new HashMap<>();
         List<GameEvent> groupEvents = new LinkedList<>();
+        ZoneChangeBatchEvent batchEvent = new ZoneChangeBatchEvent();
         for (GameEvent event : events) {
             if (event instanceof ZoneChangeEvent) {
                 ZoneChangeEvent castEvent = (ZoneChangeEvent) event;
+                batchEvent.addEvent(castEvent);
                 ZoneChangeData key = new ZoneChangeData(
                         castEvent.getSource(),
                         castEvent.getSourceId(),
@@ -998,6 +1018,9 @@ public class GameState implements Serializable, Copyable<GameState> {
                         eventData.toZone);
                 groupEvents.add(event);
             }
+        }
+        if (!batchEvent.getEvents().isEmpty()) {
+            groupEvents.add(batchEvent);
         }
         return groupEvents;
     }

@@ -57,7 +57,7 @@ public class PlayWithHandRevealedEffect extends ContinuousEffectImpl {
             for (UUID playerID : affectedPlayers) {
                 Player player = game.getPlayer(playerID);
                 if (player != null) {
-                    player.revealCards(player.getName() + "'s hand cards", player.getHand(), game, false);
+                    player.revealCards("Cards in " + player.getName() + "'s hand", player.getHand(), game, false);
                 }
             }
             return true;

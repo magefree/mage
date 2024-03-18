@@ -1,4 +1,3 @@
-
 package mage.cards.p;
 
 import java.util.UUID;
@@ -12,13 +11,16 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.FilterPermanentThisOrAnother;
+import mage.filter.StaticFilters;
 
 /**
  *
  * @author LevelX2
  */
 public final class PineWalker extends CardImpl {
+
+    private static final FilterPermanentThisOrAnother filter = new FilterPermanentThisOrAnother(StaticFilters.FILTER_CONTROLLED_CREATURE, true);
 
     public PineWalker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");
@@ -32,7 +34,7 @@ public final class PineWalker extends CardImpl {
         // Whenever Pine Walker or another creature you control is turned face up, untap that creature.
         Effect effect = new UntapTargetEffect();
         effect.setText("untap that creature");
-        this.addAbility(new TurnedFaceUpAllTriggeredAbility(effect, new FilterControlledCreaturePermanent("{this} or another creature you control"), true));
+        this.addAbility(new TurnedFaceUpAllTriggeredAbility(effect, filter, true));
 
     }
 

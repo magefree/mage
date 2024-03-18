@@ -56,7 +56,7 @@ class DispersalShieldEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         DynamicValue amount = new HighestManaValueCount();
-        Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
+        Spell spell = game.getStack().getSpell(getTargetPointer().getFirst(game, source));
         if (spell != null && spell.getManaValue() <= amount.calculate(game, source, this)) {
             return game.getStack().counter(source.getFirstTarget(), source, game);
         }

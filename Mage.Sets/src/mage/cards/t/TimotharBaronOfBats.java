@@ -89,7 +89,7 @@ class TimotharBaronOfBatsCreateBatEffect extends OneShotEffect {
         }
 
         // Check vampire card still exists and is still in the graveyard
-        Card vampireCard = game.getCard(targetPointer.getFirst(game, source));
+        Card vampireCard = game.getCard(getTargetPointer().getFirst(game, source));
         if (vampireCard == null) {
             return false;
         }

@@ -81,7 +81,7 @@ class CephalidSnitchEffect extends LoseAbilityTargetEffect{
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent targetCreature = game.getPermanent(targetPointer.getFirst(game, source));
+        Permanent targetCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (targetCreature != null) {
             List<Ability> toRemove = new ArrayList<>();
             //Go through protection abilities and sort out any containing black

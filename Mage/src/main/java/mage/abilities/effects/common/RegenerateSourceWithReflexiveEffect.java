@@ -39,7 +39,7 @@ public class RegenerateSourceWithReflexiveEffect extends RegenerateSourceEffect 
         if (super.replaceEvent(event, source, game)) {
             if (this.setReflexiveTarget) {
                 reflexive.getEffects().setTargetPointer(
-                        new FixedTarget(targetPointer.getFirst(game, source), game)
+                        new FixedTarget(getTargetPointer().getFirst(game, source), game)
                 );
             }
             game.fireReflexiveTriggeredAbility(reflexive, source);

@@ -89,7 +89,7 @@ class XenagosGodOfRevelsEffect extends OneShotEffect {
         int power = targetCreature.getPower().getValue();
         game.addEffect(new BoostTargetEffect(
                 power, power, Duration.EndOfTurn
-        ).setTargetPointer(this.getTargetPointer()), source);
+        ).setTargetPointer(this.getTargetPointer().copy()), source);
         return false;
     }
 }

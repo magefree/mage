@@ -10,7 +10,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
-import mage.filter.common.FilterControlledPermanent;
+import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -18,8 +18,6 @@ import java.util.UUID;
  * @author fireshoes
  */
 public final class TirelessTracker extends CardImpl {
-
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.CLUE, "a Clue");
 
     public TirelessTracker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
@@ -33,7 +31,7 @@ public final class TirelessTracker extends CardImpl {
 
         // Whenever you sacrifice a Clue, put a +1/+1 counter on Tireless Tracker.
         this.addAbility(new SacrificePermanentTriggeredAbility(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance()), filter
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance()), StaticFilters.FILTER_CONTROLLED_CLUE
         ));
     }
 

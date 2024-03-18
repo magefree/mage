@@ -16,7 +16,7 @@ import java.util.UUID;
 public final class SanitationAutomaton extends CardImpl {
 
     public SanitationAutomaton(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");
 
         this.subtype.add(SubType.CONSTRUCT);
         this.power = new MageInt(2);

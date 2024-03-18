@@ -12,7 +12,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 
 import java.util.UUID;
@@ -22,7 +22,7 @@ import java.util.UUID;
  */
 public final class ZhalfirinLancer extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledCreaturePermanent(SubType.KNIGHT, "another Knight");
+    private static final FilterPermanent filter = new FilterControlledPermanent(SubType.KNIGHT, "another Knight");
 
     static {
         filter.add(AnotherPredicate.instance);

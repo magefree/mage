@@ -1,4 +1,3 @@
-
 package mage.cards.l;
 
 import java.util.HashSet;
@@ -95,7 +94,7 @@ class LoxodonPeacekeeperEffect extends OneShotEffect {
                     }
                 }
                 
-                if (tiedPlayers.size() > 0) {
+                if (!tiedPlayers.isEmpty()) {
                     UUID newControllerId = null;
                     if (tiedPlayers.size() > 1) {
                         FilterPlayer filter = new FilterPlayer("a player tied for lowest life total");

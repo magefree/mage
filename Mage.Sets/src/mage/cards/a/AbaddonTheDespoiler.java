@@ -18,9 +18,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
+import mage.filter.common.FilterNonlandCard;
 import mage.filter.predicate.Predicate;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.card.CastFromZonePredicate;
 import mage.game.Game;
 import mage.watchers.common.PlayerLostLifeWatcher;
@@ -32,11 +31,10 @@ import java.util.UUID;
  */
 public final class AbaddonTheDespoiler extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard();
+    private static final FilterNonlandCard filter = new FilterNonlandCard();
 
     static {
         filter.add(new CastFromZonePredicate(Zone.HAND));
-        filter.add(Predicates.not(CardType.LAND.getPredicate()));
         filter.add(AbaddonTheDespoilerPredicate.instance);
     }
 

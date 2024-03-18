@@ -63,8 +63,8 @@ class CulturalExchangeEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player1 = game.getPlayer(targetPointer.getTargets(game, source).get(0));
-        Player player2 = game.getPlayer(targetPointer.getTargets(game, source).get(1));
+        Player player1 = game.getPlayer(getTargetPointer().getTargets(game, source).get(0));
+        Player player2 = game.getPlayer(getTargetPointer().getTargets(game, source).get(1));
         Player controller = game.getPlayer(source.getControllerId());
         if (player1 == null || player2 == null || controller == null) {
             return false;

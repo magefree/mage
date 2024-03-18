@@ -71,7 +71,7 @@ class RecommissionEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Card card = game.getCard(targetPointer.getFirst(game, source));
+        Card card = game.getCard(getTargetPointer().getFirst(game, source));
         if (controller == null || card == null) {
             return false;
         }
@@ -103,7 +103,7 @@ class RecommissionCounterEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return targetPointer.getTargets(game, source).contains(event.getTargetId());
+        return getTargetPointer().getTargets(game, source).contains(event.getTargetId());
     }
 
     @Override

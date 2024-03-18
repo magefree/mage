@@ -20,7 +20,7 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterPermanent;
 import mage.filter.FilterSpell;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.game.permanent.token.GreenCatToken;
 import mage.game.permanent.token.WhiteDogToken;
 import mage.target.common.TargetAnyTarget;
@@ -35,8 +35,8 @@ public final class RinAndSeriInseparable extends CardImpl {
     private static final FilterSpell dogSpellFilter = new FilterSpell("a Dog spell");
     private static final FilterSpell catSpellFilter = new FilterSpell("a Cat spell");
 
-    private static final FilterPermanent dogPermanentFilter = new FilterControlledCreaturePermanent("Dogs you control");
-    private static final FilterPermanent catPermanentFilter = new FilterControlledCreaturePermanent("Cats you control");
+    private static final FilterPermanent dogPermanentFilter = new FilterControlledPermanent("Dogs you control");
+    private static final FilterPermanent catPermanentFilter = new FilterControlledPermanent("Cats you control");
 
     static {
         dogSpellFilter.add(SubType.DOG.getPredicate());

@@ -59,7 +59,7 @@ class LithomancersFocusPreventDamageToTargetEffect extends PreventionEffectImpl 
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (super.applies(event, source, game) && event.getTargetId().equals(targetPointer.getFirst(game, source))) {
+        if (super.applies(event, source, game) && event.getTargetId().equals(getTargetPointer().getFirst(game, source))) {
             MageObject object = game.getObject(event.getSourceId());
             return object != null && object.getColor(game).isColorless();
         }

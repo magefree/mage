@@ -67,7 +67,7 @@ class SwanSongEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         boolean countered = false;
-        for (UUID targetId : targetPointer.getTargets(game, source)) {
+        for (UUID targetId : getTargetPointer().getTargets(game, source)) {
             Spell spell = game.getStack().getSpell(targetId);
             if (game.getStack().counter(targetId, source, game)) {
                 countered = true;

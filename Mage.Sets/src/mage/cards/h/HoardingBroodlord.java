@@ -12,7 +12,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.FilterCard;
+import mage.filter.common.FilterNonlandCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.card.CastFromZonePredicate;
 import mage.filter.predicate.mageobject.AbilityPredicate;
@@ -28,7 +28,7 @@ import java.util.UUID;
  */
 public final class HoardingBroodlord extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("spells you cast from exile");
+    private static final FilterNonlandCard filter = new FilterNonlandCard("spells you cast from exile");
 
     static {
         filter.add(new CastFromZonePredicate(Zone.EXILED));

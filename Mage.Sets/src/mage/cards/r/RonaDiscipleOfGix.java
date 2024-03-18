@@ -11,7 +11,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.AsThoughEffectImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ExileCardsFromTopOfLibraryControllerEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -26,7 +26,6 @@ import mage.constants.Zone;
 import mage.filter.common.FilterHistoricCard;
 import mage.game.ExileZone;
 import mage.game.Game;
-import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.util.CardUtil;
 
@@ -59,7 +58,10 @@ public final class RonaDiscipleOfGix extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new RonaDiscipleOfGixPlayNonLandEffect()));
 
         // {4}, {T}: Exile the top card of your library.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RonaDiscipleOfGixExileEffect(), new GenericManaCost(4));
+        ability = new SimpleActivatedAbility(
+                Zone.BATTLEFIELD,
+                new ExileCardsFromTopOfLibraryControllerEffect(1, true),
+                new GenericManaCost(4));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
@@ -107,38 +109,6 @@ class RonaDiscipleOfGixPlayNonLandEffect extends AsThoughEffectImpl {
                     return exileZone != null && exileZone.contains(objectId);
                 }
             }
-        }
-        return false;
-    }
-}
-
-class RonaDiscipleOfGixExileEffect extends OneShotEffect {
-
-    RonaDiscipleOfGixExileEffect() {
-        super(Outcome.Exile);
-        this.staticText = "Exile the top card of your library";
-    }
-
-    private RonaDiscipleOfGixExileEffect(final RonaDiscipleOfGixExileEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public RonaDiscipleOfGixExileEffect copy() {
-        return new RonaDiscipleOfGixExileEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = source.getSourceObject(game);
-        if (controller != null && sourceObject != null) {
-            Card card = controller.getLibrary().getFromTop(game);
-            if (card != null) {
-                UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
-                controller.moveCardsToExile(card, source, game, true, exileId, sourceObject.getIdName());
-            }
-            return true;
         }
         return false;
     }

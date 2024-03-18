@@ -5,6 +5,7 @@ import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ReturnFromExileForSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
@@ -36,7 +37,8 @@ public final class FreeForAll extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new FreeForAllReturnFromExileEffect(), TargetController.ANY, false));
 
         // When Free-for-All leaves the battlefield, put all cards exiled with it into their owners' graveyards.
-        this.addAbility(new LeavesBattlefieldTriggeredAbility(new FreeForAllLeavesBattlefieldEffect(), false));
+        this.addAbility(new LeavesBattlefieldTriggeredAbility(new ReturnFromExileForSourceEffect(Zone.GRAVEYARD)
+                .setText("put all cards exiled with it into their owners' graveyards"), false));
     }
 
     private FreeForAll(final FreeForAll card) {
@@ -109,31 +111,5 @@ class FreeForAllReturnFromExileEffect extends OneShotEffect {
         }
         Cards exiledCards = new CardsImpl(exZone.getCards(game));
         return player.moveCards(exiledCards.getRandom(game), Zone.BATTLEFIELD, source, game);
-    }
-}
-
-class FreeForAllLeavesBattlefieldEffect extends OneShotEffect {
-
-    FreeForAllLeavesBattlefieldEffect() {
-        super(Outcome.Detriment);
-        this.staticText = "put all cards exiled with it into their owners' graveyards";
-    }
-
-    private FreeForAllLeavesBattlefieldEffect(final FreeForAllLeavesBattlefieldEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public FreeForAllLeavesBattlefieldEffect copy() {
-        return new FreeForAllLeavesBattlefieldEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        ExileZone exZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source));
-        return controller != null
-                && exZone != null
-                && controller.moveCards(exZone.getCards(game), Zone.GRAVEYARD, source, game);
     }
 }

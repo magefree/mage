@@ -50,7 +50,7 @@ class DamnablePactEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
+        Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (targetPlayer != null) {
             targetPlayer.drawCards(source.getManaCostsToPay().getX(), source, game);
             targetPlayer.loseLife(source.getManaCostsToPay().getX(), game, source, false);

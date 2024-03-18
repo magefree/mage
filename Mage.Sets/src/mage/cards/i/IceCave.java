@@ -62,7 +62,7 @@ class IceCaveEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        Spell spell = (Spell) game.getStack().getStackObject(targetPointer.getFirst(game, source));
+        Spell spell = (Spell) game.getStack().getStackObject(getTargetPointer().getFirst(game, source));
         if (sourcePermanent != null && spell != null && controller != null) {
             Player spellController = game.getPlayer(spell.getControllerId());
             Cost cost = new ManaCostsImpl<>(spell.getSpellAbility() == null ? "" : spell.getSpellAbility().getManaCosts().getText());

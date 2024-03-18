@@ -76,6 +76,7 @@ class AWingAttacksNextCombatIfAbleSourceEffect extends RequirementEffect {
 
     @Override
     public void init(Ability source, Game game) {
+        super.init(source, game);
         turnNumber = game.getTurnNum();
         phaseCount = game.getPhase().getCount();
     }

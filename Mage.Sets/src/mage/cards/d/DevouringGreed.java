@@ -1,4 +1,3 @@
-
 package mage.cards.d;
 
 import java.util.UUID;
@@ -11,11 +10,10 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
-import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetSacrifice;
 
 /**
@@ -24,16 +22,11 @@ import mage.target.common.TargetSacrifice;
  */
 public final class DevouringGreed extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("any number of Spirits");
-
-    static {
-        filter.add(SubType.SPIRIT.getPredicate());
-    }
+    private static final FilterPermanent filter = new FilterPermanent(SubType.SPIRIT, "any number of Spirits");
 
     public DevouringGreed(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}{B}");
         this.subtype.add(SubType.ARCANE);
-
 
         // As an additional cost to cast Devouring Greed, you may sacrifice any number of Spirits.
         this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetSacrifice(0, Integer.MAX_VALUE, filter)));

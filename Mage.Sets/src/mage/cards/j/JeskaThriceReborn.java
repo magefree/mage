@@ -136,7 +136,7 @@ class JeskaThriceRebornEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (!((DamagePlayerEvent) event).isCombatDamage()
-                || !event.getSourceId().equals(targetPointer.getFirst(game, source))) {
+                || !event.getSourceId().equals(getTargetPointer().getFirst(game, source))) {
             return false;
         }
         Player player = game.getPlayer(source.getControllerId());

@@ -61,7 +61,7 @@ class SpelljackEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            UUID targetId = targetPointer.getFirst(game, source);
+            UUID targetId = getTargetPointer().getFirst(game, source);
             StackObject stackObject = game.getStack().getStackObject(targetId);
             if (stackObject != null && game.getStack().counter(targetId, source, game, PutCards.EXILED)) {
                 Card card = ((Spell) stackObject).getCard();

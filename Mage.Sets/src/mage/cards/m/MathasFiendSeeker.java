@@ -78,7 +78,7 @@ class MathasFiendSeekerGainAbilityEffect extends GainAbilityTargetEffect {
 
     @Override
     public boolean isInactive(Ability source, Game game) {
-        Permanent creature = game.getPermanent(this.targetPointer.getFirst(game, source));
+        Permanent creature = game.getPermanent(this.getTargetPointer().getFirst(game, source));
         if (creature != null && creature.getCounters(game).getCount(CounterType.BOUNTY) < 1) {
             return true;
         }

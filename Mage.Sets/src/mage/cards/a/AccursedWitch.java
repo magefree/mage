@@ -73,7 +73,7 @@ class AccursedWitchReturnTransformedEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Player attachTo = game.getPlayer(targetPointer.getFirst(game, source));
+        Player attachTo = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (controller == null || !(game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD) || attachTo == null) {
             return false;
         }

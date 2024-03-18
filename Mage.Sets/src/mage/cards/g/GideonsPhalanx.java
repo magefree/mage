@@ -1,4 +1,3 @@
-
 package mage.cards.g;
 
 import java.util.UUID;
@@ -13,7 +12,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.permanent.token.KnightToken;
 
 /**
@@ -30,7 +29,7 @@ public final class GideonsPhalanx extends CardImpl {
 
         // <i>Spell mastery</i> &mdash; If there are two or more instant and/or sorcery cards in your graveyard, creatures you control gain indestructible until end of turn.
         Effect effect = new ConditionalOneShotEffect(
-                new AddContinuousEffectToGame(new GainAbilityAllEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent())),
+                new AddContinuousEffectToGame(new GainAbilityAllEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_CONTROLLED_CREATURES)),
                 SpellMasteryCondition.instance,
                 "<br><i>Spell mastery</i> &mdash; If there are two or more instant and/or sorcery cards in your graveyard, creatures you control gain indestructible until end of turn");
         this.getSpellAbility().addEffect(effect);

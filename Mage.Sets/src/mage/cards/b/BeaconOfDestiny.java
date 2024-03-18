@@ -71,8 +71,8 @@ class BeaconOfDestinyEffect extends RedirectionEffect {
 
     @Override
     public void init(Ability source, Game game) {
-        this.damageSource.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), source, game);
         super.init(source, game);
+        this.damageSource.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), source, game);
     }
 
     @Override

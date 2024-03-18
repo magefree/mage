@@ -12,15 +12,32 @@ import java.util.UUID;
 
 public interface TargetPointer extends Serializable, Copyable<TargetPointer> {
 
+    /**
+     * Init dynamic targets (must save current targets zcc to fizzle it later on outdated targets)
+     * - one shot effects: no needs to init
+     * - continues effects: must use init logic (effect init on resolve or game add)
+     * <p>
+     * Targets list can be accessible before effect's init.
+     */
     void init(Game game, Ability source);
+
+    boolean isInitialized();
+
+    void setInitialized();
 
     List<UUID> getTargets(Game game, Ability source);
 
+    /**
+     * Return first actual target id (null on outdated targets)
+     */
     UUID getFirst(Game game, Ability source);
 
-    TargetPointer copy();
+    /**
+     * Return first actual target data (null on outdated targets)
+     */
+    FixedTarget getFirstAsFixedTarget(Game game, Ability source);
 
-    FixedTarget getFixedTarget(Game game, Ability source);
+    TargetPointer copy();
 
     /**
      * Retrieves the permanent according the first targetId and
