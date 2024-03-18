@@ -20,6 +20,7 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetPermanentOrPlayer;
+import mage.util.CardUtil;
 
 /**
  * @author arcox
@@ -75,12 +76,12 @@ class WrathfulRaptorsTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PERMANENT;
+        return event.getType() == GameEvent.EventType.DAMAGED_BATCH_FOR_ONE_PERMANENT;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent dinosaur = game.getPermanent(event.getTargetId());
+        Permanent dinosaur = game.getPermanent((UUID) CardUtil.getEventTargets(event).toArray()[0]);
         int damage = event.getAmount();
         if (dinosaur == null || damage < 1
                 || !dinosaur.isControlledBy(getControllerId())
