@@ -81,8 +81,15 @@ class WrathfulRaptorsTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent dinosaur = game.getPermanent((UUID) CardUtil.getEventTargets(event).toArray()[0]);
+
+        UUID dinosaurUUID = CardUtil.getEventTargets(event)
+                .stream()
+                .findFirst()
+                .orElse(null);
+
+        Permanent dinosaur = game.getPermanent(dinosaurUUID);
         int damage = event.getAmount();
+
         if (dinosaur == null || damage < 1
                 || !dinosaur.isControlledBy(getControllerId())
                 || !dinosaur.hasSubtype(SubType.DINOSAUR, game)) {
