@@ -384,6 +384,7 @@ public enum SubType {
     SULLUSTAN("Sullustan", SubTypeSet.CreatureType, true), // Star Wars
     SURRAKAR("Surrakar", SubTypeSet.CreatureType),
     SURVIVOR("Survivor", SubTypeSet.CreatureType),
+    SYNTH("Synth", SubTypeSet.CreatureType),
     // T
     TENTACLE("Tentacle", SubTypeSet.CreatureType),
     TETRAVITE("Tetravite", SubTypeSet.CreatureType),
