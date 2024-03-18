@@ -10,7 +10,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -23,12 +22,6 @@ import java.util.UUID;
  * @author BursegSardaukar
  */
 public final class StinkdrinkerBandit extends CardImpl {
-
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Rogue");
-
-    static {
-        filter.add(SubType.ROGUE.getPredicate());
-    }
 
     public StinkdrinkerBandit(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");

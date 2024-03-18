@@ -1,4 +1,3 @@
-
 package mage.cards.e;
 
 import java.util.UUID;
@@ -17,7 +16,6 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.constants.Zone;
-import mage.target.Target;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetSpellOrPermanent;
 
@@ -38,14 +36,12 @@ public final class EightAndAHalfTails extends CardImpl {
 
         // {1}{W}: Target permanent you control gains protection from white until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(ProtectionAbility.from(ObjectColor.WHITE), Duration.EndOfTurn), new ManaCostsImpl<>("{1}{W}"));
-        Target target = new TargetControlledPermanent();
-        ability.addTarget(target);
+        ability.addTarget(new TargetControlledPermanent());
         this.addAbility(ability);
         // {1}: Target spell or permanent becomes white until end of turn.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new BecomesColorTargetEffect(ObjectColor.WHITE, Duration.EndOfTurn, "Target spell or permanent becomes white until end of turn"), new ManaCostsImpl<>("{1}"));
-        target = new TargetSpellOrPermanent();
-        ability.addTarget(target);
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesColorTargetEffect(ObjectColor.WHITE, Duration.EndOfTurn)
+                .setText("Target spell or permanent becomes white until end of turn"), new ManaCostsImpl<>("{1}"));
+        ability.addTarget(new TargetSpellOrPermanent());
         this.addAbility(ability);
     }
 

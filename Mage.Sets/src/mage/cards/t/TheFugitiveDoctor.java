@@ -16,7 +16,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -26,8 +25,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class TheFugitiveDoctor extends CardImpl {
-
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.CLUE, "a Clue");
 
     public TheFugitiveDoctor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{G}");
@@ -45,7 +42,7 @@ public final class TheFugitiveDoctor extends CardImpl {
         ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(new TheFugitiveDoctorEffect(), false);
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY));
         this.addAbility(new AttacksTriggeredAbility(new DoWhenCostPaid(
-                ability, new SacrificeTargetCost(filter), "Sacrifice a Clue?"
+                ability, new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CLUE), "Sacrifice a Clue?"
         )));
     }
 
@@ -77,7 +74,7 @@ class TheFugitiveDoctorEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card card = game.getCard(targetPointer.getFirst(game, source));
+        Card card = game.getCard(getTargetPointer().getFirst(game, source));
         if (card == null) {
             return false;
         }

@@ -86,7 +86,7 @@ class EmeriaShepherdReturnToHandTargetEffect extends OneShotEffect {
                 && controller.chooseUse(Outcome.PutCardInPlay, "Put the card to battlefield instead?", source, game)) {
             toZone = Zone.BATTLEFIELD;
         }
-        return controller.moveCards(new CardsImpl(targetPointer.getTargets(game, source)), toZone, source, game);
+        return controller.moveCards(new CardsImpl(getTargetPointer().getTargets(game, source)), toZone, source, game);
     }
 
 }

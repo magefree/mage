@@ -54,7 +54,7 @@ class DimirCutpurseEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player you = game.getPlayer(source.getControllerId());
-        Player damagedPlayer = game.getPlayer(targetPointer.getFirst(game, source));
+        Player damagedPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (damagedPlayer != null) {
             damagedPlayer.discard(1, false, false, source, game);
         }

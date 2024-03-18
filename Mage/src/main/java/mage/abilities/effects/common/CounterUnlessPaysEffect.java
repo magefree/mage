@@ -60,7 +60,7 @@ public class CounterUnlessPaysEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        StackObject spell = game.getStack().getStackObject(targetPointer.getFirst(game, source));
+        StackObject spell = game.getStack().getStackObject(getTargetPointer().getFirst(game, source));
         if (spell == null) {
             return false;
         }

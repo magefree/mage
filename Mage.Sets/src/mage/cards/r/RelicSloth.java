@@ -18,7 +18,7 @@ public final class RelicSloth extends CardImpl {
     public RelicSloth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{W}");
 
-        this.subtype.add(SubType.BEAST);
+        this.subtype.add(SubType.SLOTH, SubType.BEAST);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

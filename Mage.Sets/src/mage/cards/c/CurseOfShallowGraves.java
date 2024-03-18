@@ -16,7 +16,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.ZombieToken;
 import mage.players.Player;
@@ -120,7 +119,7 @@ class CurseOfShallowEffect extends OneShotEffect {
         Player attacker = game.getPlayer(this.getTargetPointer().getFirst(game, source));
         if (attacker != null && attacker.chooseUse(outcome, "create a tapped 2/2 black Zombie creature token?", source, game)) {
             Effect effect = new CreateTokenTargetEffect(new ZombieToken(), StaticValue.get(1), true, false);
-            effect.setTargetPointer(targetPointer);
+            effect.setTargetPointer(this.getTargetPointer().copy());
             return effect.apply(game, source);
         }
         return false;

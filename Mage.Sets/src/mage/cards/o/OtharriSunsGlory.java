@@ -18,7 +18,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.permanent.token.RebelRedToken;
@@ -32,7 +32,7 @@ import java.util.UUID;
  */
 public final class OtharriSunsGlory extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Rebel you control");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("untapped Rebel you control");
 
     static {
         filter.add(TappedPredicate.UNTAPPED);

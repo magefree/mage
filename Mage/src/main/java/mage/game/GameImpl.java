@@ -15,6 +15,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.PreventionEffectData;
 import mage.abilities.effects.common.CopyEffect;
 import mage.abilities.effects.common.InfoEffect;
+import mage.abilities.effects.common.continuous.BecomesFaceDownCreatureEffect;
 import mage.abilities.effects.keyword.FinalityCounterEffect;
 import mage.abilities.effects.keyword.ShieldCounterEffect;
 import mage.abilities.effects.keyword.StunCounterEffect;
@@ -288,6 +289,8 @@ public abstract class GameImpl implements Game {
     public void loadCards(Set<Card> cards, UUID ownerId) {
         for (Card card : cards) {
             if (card instanceof PermanentCard) {
+                // TODO: impossible use case, can be deleted?
+                // trying to put permanent card to battlefield
                 card = ((PermanentCard) card).getCard();
             }
 
@@ -1994,10 +1997,9 @@ public abstract class GameImpl implements Game {
 
             // workaround to find real copyable characteristics of transformed/facedown/etc permanents
 
-            if (copyFromPermanent.isMorphed()
-                    || copyFromPermanent.isManifested()
-                    || copyFromPermanent.isFaceDown(this)) {
-                MorphAbility.setPermanentToFaceDownCreature(newBluePrint, copyFromPermanent, this);
+            BecomesFaceDownCreatureEffect.FaceDownType faceDownType = BecomesFaceDownCreatureEffect.findFaceDownType(this, copyFromPermanent);
+            if (faceDownType != null) {
+                BecomesFaceDownCreatureEffect.makeFaceDownObject(this, null, newBluePrint, faceDownType, null);
             }
             newBluePrint.assignNewId();
             if (copyFromPermanent.isTransformed()) {
@@ -2019,11 +2021,10 @@ public abstract class GameImpl implements Game {
         // save original copy link (handle copy of copies too)
         newBluePrint.setCopy(true, (copyFromPermanent.getCopyFrom() != null ? copyFromPermanent.getCopyFrom() : copyFromPermanent));
 
-        CopyEffect newEffect = new CopyEffect(duration, newBluePrint, copyToPermanentId);
-        newEffect.newId();
-        newEffect.setApplier(applier);
+        CopyEffect newCopyEffect = new CopyEffect(duration, newBluePrint, copyToPermanentId);
+        newCopyEffect.setApplier(applier);
         Ability newAbility = source.copy();
-        newEffect.init(newAbility, this);
+        newCopyEffect.init(newAbility, this);
 
         // If there are already copy effects with duration = Custom to the same object, remove the existing effects because they no longer have any effect
         if (duration == Duration.Custom) {
@@ -2037,7 +2038,7 @@ public abstract class GameImpl implements Game {
                 }
             }
         }
-        state.addEffect(newEffect, newAbility);
+        state.addEffect(newCopyEffect, newAbility);
         return newBluePrint;
     }
 
@@ -3567,18 +3568,26 @@ public abstract class GameImpl implements Game {
     }
 
     @Override
-    public void cheat(UUID ownerId, List<Card> library, List<Card> hand, List<PermanentCard> battlefield, List<Card> graveyard, List<Card> command) {
+    public void cheat(UUID ownerId, List<Card> library, List<Card> hand, List<PutToBattlefieldInfo> battlefield, List<Card> graveyard, List<Card> command, List<Card> exiled) {
         // fake test ability for triggers and events
         Ability fakeSourceAbilityTemplate = new SimpleStaticAbility(Zone.OUTSIDE, new InfoEffect("adding testing cards"));
         fakeSourceAbilityTemplate.setControllerId(ownerId);
 
         Player player = getPlayer(ownerId);
         if (player != null) {
+            // init cards
             loadCards(ownerId, library);
             loadCards(ownerId, hand);
-            loadCards(ownerId, battlefield);
+            loadCards(ownerId, battlefield
+                    .stream()
+                    .map(PutToBattlefieldInfo::getCard)
+                    .collect(Collectors.toList())
+            );
             loadCards(ownerId, graveyard);
             loadCards(ownerId, command);
+            loadCards(ownerId, exiled);
+
+            // move cards to zones
 
             for (Card card : library) {
                 player.getLibrary().putOnTop(card, this);
@@ -3604,10 +3613,15 @@ public abstract class GameImpl implements Game {
                 throw new IllegalArgumentException("Command zone supports in commander test games");
             }
 
-            for (PermanentCard permanentCard : battlefield) {
+            for (Card card : exiled) {
+                card.setZone(Zone.EXILED, this);
+                getExile().add(card);
+            }
+
+            for (PutToBattlefieldInfo info : battlefield) {
                 Ability fakeSourceAbility = fakeSourceAbilityTemplate.copy();
-                fakeSourceAbility.setSourceId(permanentCard.getId());
-                CardUtil.putCardOntoBattlefieldWithEffects(fakeSourceAbility, this, permanentCard, player);
+                fakeSourceAbility.setSourceId(info.getCard().getId());
+                CardUtil.putCardOntoBattlefieldWithEffects(fakeSourceAbility, this, info.getCard(), player, info.isTapped());
             }
 
             applyEffects();

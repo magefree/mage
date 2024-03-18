@@ -127,7 +127,7 @@ public class Sets extends HashMap<String, ExpansionSet> {
         List<Card> cardPool = new ArrayList<>();
         while (count < cardsCount) {
             CardInfo cardInfo = cards.get(RandomUtil.nextInt(cards.size()));
-            Card card = cardInfo != null ? cardInfo.getCard() : null;
+            Card card = cardInfo != null ? cardInfo.createCard() : null;
             if (card != null) {
 
                 FilterMana manaCard = card.getColorIdentity();

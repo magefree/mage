@@ -75,11 +75,7 @@ class DescendantsFurySacrificeCost extends CostImpl implements SacrificeCost {
         if (watcher == null) {
             return false;
         }
-        TargetPointer targetPointer = source.getEffects().get(0).getTargetPointer();
-        if (targetPointer == null) {
-            return false;
-        }
-        Player damagedPlayer = game.getPlayer(targetPointer.getFirst(game, source));
+        Player damagedPlayer = game.getPlayer(source.getEffects().get(0).getTargetPointer().getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
         if (controller == null || damagedPlayer == null) {
             return false;
@@ -114,11 +110,7 @@ class DescendantsFurySacrificeCost extends CostImpl implements SacrificeCost {
         if (watcher == null) {
             return false;
         }
-        TargetPointer targetPointer = source.getEffects().get(0).getTargetPointer();
-        if (targetPointer == null) {
-            return false;
-        }
-        Player damagedPlayer = game.getPlayer(targetPointer.getFirst(game, source));
+        Player damagedPlayer = game.getPlayer(source.getEffects().get(0).getTargetPointer().getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
         if (controller == null || damagedPlayer == null) {
             return false;

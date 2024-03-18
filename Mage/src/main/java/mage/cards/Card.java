@@ -14,6 +14,7 @@ import mage.counters.Counters;
 import mage.filter.FilterMana;
 import mage.game.Game;
 import mage.game.GameState;
+import mage.game.Ownerable;
 import mage.game.permanent.Permanent;
 import mage.util.ManaUtil;
 import mage.watchers.common.CommanderPlaysCountWatcher;
@@ -21,11 +22,11 @@ import mage.watchers.common.CommanderPlaysCountWatcher;
 import java.util.List;
 import java.util.UUID;
 
-public interface Card extends MageObject {
-
-    UUID getOwnerId();
+public interface Card extends MageObject, Ownerable {
 
     Rarity getRarity(); // null for tokens
+
+    void setRarity(Rarity rarity);
 
     void setOwnerId(UUID ownerId);
 
@@ -46,7 +47,11 @@ public interface Card extends MageObject {
 
     List<String> getRules(Game game);  // gets card rules + in game modifications
 
-    void checkForCountersToAdd(Permanent permanent, Ability source, Game game);
+    /**
+     * Find ETB counters and apply it to permanent.
+     * Warning, it's one time action, use it before a put to battlefield only.
+     */
+    void applyEnterWithCounters(Permanent permanent, Ability source, Game game);
 
     void setFaceDown(boolean value, Game game);
 
@@ -54,6 +59,7 @@ public interface Card extends MageObject {
 
     boolean turnFaceUp(Ability source, Game game, UUID playerId);
 
+    // TODO: need research, is it lost morph and other face down statuses?
     boolean turnFaceDown(Ability source, Game game, UUID playerId);
 
     boolean isFlipCard();
@@ -143,9 +149,11 @@ public interface Card extends MageObject {
     List<Mana> getMana();
 
     /**
-     * @return true if there exists various art images for this card
+     * Set contains multiple cards with same card name but different images. Used for image path generation.
      */
     boolean getUsesVariousArt();
+
+    void setUsesVariousArt(boolean usesVariousArt);
 
     Counters getCounters(Game game);
 

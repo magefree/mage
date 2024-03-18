@@ -79,7 +79,7 @@ class SemestersEndEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        Cards cards = new CardsImpl(targetPointer.getTargets(game, source));
+        Cards cards = new CardsImpl(getTargetPointer().getTargets(game, source));
         player.moveCards(cards, Zone.EXILED, source, game);
         cards.retainZone(Zone.EXILED, game);
         game.addDelayedTriggeredAbility(

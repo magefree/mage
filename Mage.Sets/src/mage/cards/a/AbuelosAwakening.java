@@ -58,7 +58,7 @@ public final class AbuelosAwakening extends CardImpl {
 class AbuelosAwakeningEffect extends ReturnFromGraveyardToBattlefieldTargetEffect {
 
     AbuelosAwakeningEffect() {
-        super(false, false, false);
+        super();
         staticText = "return target artifact or non-Aura enchantment card from your graveyard to the battlefield "
                 + "with X additional +1/+1 counters on it. "
                 + "It's a 1/1 Spirit creature with flying in addition to its other types";

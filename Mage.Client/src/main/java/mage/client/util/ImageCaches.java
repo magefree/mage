@@ -1,11 +1,11 @@
-
 package mage.client.util;
-
-import java.util.ArrayList;
 
 import com.google.common.cache.Cache;
 
+import java.util.ArrayList;
+
 /**
+ * GUI: collect info about all used image caches, so it can be cleared from a single place
  *
  * @author draxdyn
  */
@@ -22,7 +22,11 @@ public final class ImageCaches {
         return map;
     }
 
-    public static void flush() {
+    /**
+     * Global method to clear all images cache.
+     * Warning, GUI must be refreshed too for card updates, so use GUISizeHelper.refreshGUIAndCards instead
+     */
+    public static void clearAll() {
         for (Cache<?, ?> map : IMAGE_CACHES) {
             map.invalidateAll();
         }

@@ -1,4 +1,3 @@
-
 package mage.cards.g;
 
 import java.util.UUID;
@@ -15,17 +14,16 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
  * Gatecrash FAQ 21.01.2013
- *
+ * <p>
  * Creatures your opponents control don't actually lose hexproof, although you
  * will ignore hexproof for purposes of choosing targets of spells and abilities
  * you control.
- *
+ * <p>
  * Creatures that come under your control after Glaring Spotlight's last ability
  * resolves won't have hexproof but can't be blocked that turn.
  *
@@ -41,9 +39,9 @@ public final class GlaringSpotlight extends CardImpl {
 
         // {3}, Sacrifice Glaring Spotlight: Creatures you control gain hexproof until end of turn and can't be blocked this turn.
         Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD, new GainAbilityControlledEffect(HexproofAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE, false),
+                Zone.BATTLEFIELD, new GainAbilityControlledEffect(HexproofAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES, false),
                 new GenericManaCost(3));
-        ability.addEffect(new CantBeBlockedAllEffect(new FilterControlledCreaturePermanent(), Duration.EndOfTurn));
+        ability.addEffect(new CantBeBlockedAllEffect(StaticFilters.FILTER_CONTROLLED_CREATURES, Duration.EndOfTurn).setText("and can't be blocked this turn"));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }

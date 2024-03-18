@@ -1,4 +1,3 @@
-
 package mage.cards.t;
 
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
@@ -52,7 +51,7 @@ public final class TrailOfMystery extends CardImpl {
 
 class TrailOfMysteryTriggeredAbility extends TurnedFaceUpAllTriggeredAbility {
 
-    public TrailOfMysteryTriggeredAbility() {
+    TrailOfMysteryTriggeredAbility() {
         super(new BoostTargetEffect(2, 2, Duration.EndOfTurn), new FilterControlledCreaturePermanent(), true);
     }
 

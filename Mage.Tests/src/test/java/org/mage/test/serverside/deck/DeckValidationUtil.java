@@ -69,7 +69,7 @@ public class DeckValidationUtil {
                 }
                 for (int i = 0; i < cardNameAmount.getNumber(); i++) {
                     assert cardinfo != null;
-                    deckToTest.getCards().add(cardinfo.getCard());
+                    deckToTest.getCards().add(cardinfo.createCard());
                 }
             }
         }
@@ -83,7 +83,7 @@ public class DeckValidationUtil {
                 }
                 for (int i = 0; i < cardNameAmount.getNumber(); i++) {
                     assert cardinfo != null;
-                    deckToTest.getSideboard().add(cardinfo.getCard());
+                    deckToTest.getSideboard().add(cardinfo.createCard());
                 }
             }
         }

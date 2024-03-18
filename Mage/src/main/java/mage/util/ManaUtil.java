@@ -640,7 +640,12 @@ public final class ManaUtil {
     }
 
     public static FilterMana getColorIdentity(Token token) {
-        return getColorIdentity(token.getColor(), String.join("", token.getManaCostSymbols()), token.getAbilities().getRules(token.getName()), null);
+        return getColorIdentity(
+                token.getColor(),
+                String.join("", token.getManaCostSymbols()),
+                token.getAbilities().getRules(token.getName()),
+                token.getBackFace() == null ? null : token.getBackFace().getCopySourceCard()
+        );
     }
 
     public static int getColorIdentityHash(FilterMana colorIdentity) {

@@ -3,9 +3,7 @@ package mage.cards.t;
 import mage.ConditionalMana;
 import mage.MageObject;
 import mage.Mana;
-import mage.abilities.Abilities;
 import mage.abilities.Ability;
-import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
@@ -21,7 +19,6 @@ import mage.constants.CardType;
 import mage.constants.SuperType;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 
 import java.util.UUID;
 
@@ -66,20 +63,12 @@ enum TheEnigmaJewelPredicate implements Predicate<MageObject> {
     @Override
     public boolean apply(MageObject input, Game game) {
         return !input.isLand(game)
-                && getAbilities(input, game)
+                && input instanceof Card
+                && ((Card) input).getAbilities(game)
                 .stream()
-                .anyMatch(ActivatedAbilityImpl.class::isInstance);
+                .anyMatch(a -> (a.getAbilityType() == AbilityType.ACTIVATED || a.getAbilityType() == AbilityType.MANA));
     }
 
-    private static Abilities<Ability> getAbilities(MageObject input, Game game) {
-        if (input instanceof Permanent) {
-            return ((Permanent) input).getAbilities(game);
-        } else if (input instanceof Card) {
-            return ((Card) input).getAbilities(game);
-        } else {
-            throw new UnsupportedOperationException("there shouldn't be a nonpermanent, noncard object here");
-        }
-    }
 }
 
 class TheEnigmaJewelManaBuilder extends ConditionalManaBuilder {

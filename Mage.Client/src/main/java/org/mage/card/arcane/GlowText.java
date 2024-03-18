@@ -28,7 +28,7 @@ public class GlowText extends JLabel {
     private Color glowColor;
     private boolean wrap;
     private int lineCount = 0;
-    private static final SoftValuesLoadingCache<Key, BufferedImage> IMAGE_CACHE;
+    private static final SoftValuesLoadingCache<Key, BufferedImage> GLOW_TEXT_IMAGES_CACHE;
 
     private static final class Key {
 
@@ -122,7 +122,7 @@ public class GlowText extends JLabel {
     }
 
     static {
-        IMAGE_CACHE = ImageCaches.register(SoftValuesLoadingCache.from(GlowText::createGlowImage));
+        GLOW_TEXT_IMAGES_CACHE = ImageCaches.register(SoftValuesLoadingCache.from(GlowText::createGlowImage));
     }
 
     public void setGlow(Color glowColor, int size, float intensity) {
@@ -153,7 +153,7 @@ public class GlowText extends JLabel {
     }
 
     public BufferedImage getGlowImage() {
-        return IMAGE_CACHE.getOrThrow(new Key(getWidth(), getHeight(), getText(), getFont(), getForeground(), glowSize, glowIntensity, glowColor, wrap));
+        return GLOW_TEXT_IMAGES_CACHE.getOrThrow(new Key(getWidth(), getHeight(), getText(), getFont(), getForeground(), glowSize, glowIntensity, glowColor, wrap));
     }
 
     private static BufferedImage createGlowImage(Key key) {

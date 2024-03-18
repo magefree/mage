@@ -25,6 +25,7 @@ import mage.util.functions.CopyTokenFunction;
 import mage.util.functions.EmptyCopyApplier;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author LevelX2
@@ -273,9 +274,8 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
             Permanent tokenPermanent = game.getPermanent(tokenId);
             if (tokenPermanent != null) {
                 addedTokenPermanents.add(tokenPermanent);
-                // add counters if necessary ie Ochre Jelly
-                if (counter != null
-                        && numberOfCounters > 0) {
+                // TODO: Workaround to add counters to all created tokens, necessary for correct interactions with cards like Chatterfang, Squirrel General and Ochre Jelly / Printlifter Ooze. See #10786
+                if (counter != null && numberOfCounters > 0) {
                     tokenPermanent.addCounters(counter.createInstance(numberOfCounters), source.getControllerId(), source, game);
                 }
             }
@@ -418,7 +418,7 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
         } else {
             effect = new SacrificeTargetEffect("sacrifice the token copies", source.getControllerId());
         }
-        effect.setTargetPointer(new FixedTargets(addedTokenPermanents, game));
+        effect.setTargetPointer(new FixedTargets(new ArrayList<>(addedTokenPermanents), game));
 
         DelayedTriggeredAbility exileAbility;
 

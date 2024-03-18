@@ -64,7 +64,7 @@ class DreadSlaverEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        Card card = game.getCard(targetPointer.getFirst(game, source));
+        Card card = game.getCard(getTargetPointer().getFirst(game, source));
         if (card != null) {
             if (controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
                 ContinuousEffect effect = new AddCreatureTypeAdditionEffect(SubType.ZOMBIE, true);

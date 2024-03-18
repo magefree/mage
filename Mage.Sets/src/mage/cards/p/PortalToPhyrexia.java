@@ -23,8 +23,6 @@ import java.util.UUID;
  */
 public final class PortalToPhyrexia extends CardImpl {
 
-    private static final FilterCard filter = new FilterCreatureCard("creature card from a graveyard");
-
     public PortalToPhyrexia(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{9}");
 
@@ -38,7 +36,7 @@ public final class PortalToPhyrexia extends CardImpl {
                 new ReturnFromGraveyardToBattlefieldTargetEffect(), TargetController.YOU, false
         );
         ability.addEffect(new AddCreatureTypeAdditionEffect(SubType.PHYREXIAN, false));
-        ability.addTarget(new TargetCardInGraveyard(filter));
+        ability.addTarget(new TargetCardInGraveyard(StaticFilters.FILTER_CARD_CREATURE_A_GRAVEYARD));
         this.addAbility(ability);
     }
 

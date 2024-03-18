@@ -68,7 +68,7 @@ class PrimordialMistCost extends CostImpl {
 
     public PrimordialMistCost(TargetPermanent target) {
         this.target = target;
-        this.text = "Exile a face-down permanent you control face-up";
+        this.text = "Exile a face-down permanent you control face up";
     }
 
     private PrimordialMistCost(final PrimordialMistCost cost) {
@@ -121,7 +121,7 @@ class PrimordialMistCastFromExileEffect extends AsThoughEffectImpl {
 
     PrimordialMistCastFromExileEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
-        staticText = "Exile a face-down permanent you control face up: You may play that card this turn.";
+        staticText = "You may play that card this turn.";
     }
 
     private PrimordialMistCastFromExileEffect(final PrimordialMistCastFromExileEffect effect) {
@@ -141,7 +141,7 @@ class PrimordialMistCastFromExileEffect extends AsThoughEffectImpl {
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
         return source.isControlledBy(affectedControllerId)
-                && (game.getCard(targetPointer.getFirst(game, source)) != null)
-                && objectId == targetPointer.getFirst(game, source);
+                && (game.getCard(getTargetPointer().getFirst(game, source)) != null)
+                && objectId == getTargetPointer().getFirst(game, source);
     }
 }

@@ -27,7 +27,7 @@ import java.util.UUID;
  */
 public final class AmaliaBenavidesAguirre extends CardImpl {
 
-    private final static FilterPermanent filter = new FilterCreaturePermanent("other creatures");
+    private static final FilterPermanent filter = new FilterCreaturePermanent("other creatures");
 
     static {
         filter.add(AnotherPredicate.instance);
@@ -50,7 +50,7 @@ public final class AmaliaBenavidesAguirre extends CardImpl {
         ability.addEffect(new ConditionalOneShotEffect(
                 new DestroyAllEffect(filter),
                 AmaliaBenavidesAguirreCondition.instance
-        ).setText("Then, destroy all other creatures if its power is exactly 20"));
+        ).setText("Then destroy all other creatures if its power is exactly 20"));
         this.addAbility(ability);
     }
 

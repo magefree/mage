@@ -17,6 +17,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterNoncreatureCard;
 import mage.game.Game;
@@ -31,7 +32,6 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public final class KirinTouchedOrochi extends CardImpl {
 
-    private static final FilterCreatureCard filter = new FilterCreatureCard("creature card from a graveyard");
     private static final FilterNoncreatureCard filter2 = new FilterNoncreatureCard("noncreature card from a graveyard");
 
     public KirinTouchedOrochi(UUID ownerId, CardSetInfo setInfo) {
@@ -47,7 +47,7 @@ public final class KirinTouchedOrochi extends CardImpl {
         // Whenever Kirin-Touched Orochi attacks, choose one —
         // • Exile target creature card from a graveyard. When you do, create a 1/1 colorless Spirit creature token.
         Ability ability = new AttacksTriggeredAbility(new KirinTouchedOrochiTokenEffect());
-        ability.addTarget(new TargetCardInGraveyard(filter));
+        ability.addTarget(new TargetCardInGraveyard(StaticFilters.FILTER_CARD_CREATURE_A_GRAVEYARD));
 
         // • Exile target noncreature card from a graveyard. When you do, put a +1/+1 counter on target creature you control.
         Mode mode = new Mode(new KirinTouchedOrochiCounterEffect());

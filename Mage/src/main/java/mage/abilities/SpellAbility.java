@@ -148,7 +148,7 @@ public class SpellAbility extends ActivatedAbilityImpl {
             if (!approvingObjects.isEmpty()) {
                 Card card = game.getCard(sourceId);
                 Zone zone = game.getState().getZone(sourceId);
-                if(card != null && card.isOwnedBy(playerId) && Zone.HAND.match(zone)) {
+                if (card != null && card.isOwnedBy(playerId) && Zone.HAND.match(zone)) {
                     // Regular casting, to be an alternative to the AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE from hand (e.g. One with the Multiverse):
                     approvingObjects.add(new ApprovingObject(this, game));
                 }
@@ -160,8 +160,8 @@ public class SpellAbility extends ActivatedAbilityImpl {
                 Player player = game.getPlayer(playerId);
                 if (player != null
                         && player.getCastSourceIdWithAlternateMana()
-                                .getOrDefault(getSourceId(), Collections.emptySet())
-                                .contains(MageIdentifier.Default)
+                        .getOrDefault(getSourceId(), Collections.emptySet())
+                        .contains(MageIdentifier.Default)
                 ) {
                     return ActivationStatus.getFalse();
                 }
@@ -181,11 +181,10 @@ public class SpellAbility extends ActivatedAbilityImpl {
                     }
                     return ActivationStatus.getFalse();
                 } else {
-                    if(canChooseTarget(game, playerId)) {
-                        if(approvingObjects == null || approvingObjects.isEmpty()) {
+                    if (canChooseTarget(game, playerId)) {
+                        if (approvingObjects == null || approvingObjects.isEmpty()) {
                             return ActivationStatus.withoutApprovingObject(true);
-                        }
-                        else {
+                        } else {
                             return new ActivationStatus(approvingObjects);
                         }
                     }
@@ -308,22 +307,27 @@ public class SpellAbility extends ActivatedAbilityImpl {
     }
 
     /**
-     * Returns a card object with the spell characteristics like color, types,
+     * Returns combined card object with the spell characteristics like color, types,
      * subtypes etc. E.g. if you cast a Bestow card as enchantment, the
      * characteristics don't include the creature type.
+     * <p>
+     * Warning, it's not a real card - use it as a blueprint or characteristics searching
      *
-     * @param game
      * @return card object with the spell characteristics
      */
     public Card getCharacteristics(Game game) {
         Card spellCharacteristics = game.getSpell(this.getId());
         if (spellCharacteristics == null) {
+            // playable check (without put to stack)
             spellCharacteristics = game.getCard(this.getSourceId());
         }
+
         if (spellCharacteristics != null) {
             if (getSpellAbilityCastMode() != SpellAbilityCastMode.NORMAL) {
-                spellCharacteristics = getSpellAbilityCastMode().getTypeModifiedCardObjectCopy(spellCharacteristics, this);
+                // transform characteristics (morph, transform, bestow, etc)
+                spellCharacteristics = getSpellAbilityCastMode().getTypeModifiedCardObjectCopy(spellCharacteristics, this, game);
             }
+            spellCharacteristics = spellCharacteristics.copy();
         }
         return spellCharacteristics;
     }

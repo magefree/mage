@@ -1,4 +1,3 @@
-
 package mage.cards.w;
 
 import java.util.UUID;
@@ -57,22 +56,24 @@ public final class WindZendikon extends CardImpl {
         return new WindZendikon(this);
     }
 
-    class WindZendikonElementalToken extends TokenImpl {
-        WindZendikonElementalToken() {
-            super("", "2/2 blue Elemental creature with flying");
-            cardType.add(CardType.CREATURE);
-            color.setBlue(true);
-            subtype.add(SubType.ELEMENTAL);
-            power = new MageInt(2);
-            toughness = new MageInt(2);
-            addAbility(FlyingAbility.getInstance());
-        }
-        private WindZendikonElementalToken(final WindZendikonElementalToken token) {
-            super(token);
-        }
+}
 
-        public WindZendikonElementalToken copy() {
-            return new WindZendikonElementalToken(this);
-        }
+class WindZendikonElementalToken extends TokenImpl {
+
+    WindZendikonElementalToken() {
+        super("", "2/2 blue Elemental creature with flying");
+        cardType.add(CardType.CREATURE);
+        color.setBlue(true);
+        subtype.add(SubType.ELEMENTAL);
+        power = new MageInt(2);
+        toughness = new MageInt(2);
+        addAbility(FlyingAbility.getInstance());
+    }
+    private WindZendikonElementalToken(final WindZendikonElementalToken token) {
+        super(token);
+    }
+
+    public WindZendikonElementalToken copy() {
+        return new WindZendikonElementalToken(this);
     }
 }

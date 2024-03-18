@@ -70,7 +70,7 @@ class OutmaneuverEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        return targetPointer.getTargets(game, source).contains(sourceId);
+        return getTargetPointer().getTargets(game, source).contains(sourceId);
     }
 
     @Override

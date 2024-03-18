@@ -81,7 +81,7 @@ public class RemixedSet implements Serializable {
             return;
         }
         CardInfo cardInfo = cards.remove(RandomUtil.nextInt(cards.size())); // so no duplicates in a booster
-        Card card = cardInfo.getCard();
+        Card card = cardInfo.createCard();
         if (card == null) {
             return;
         }

@@ -15,6 +15,8 @@ import mage.game.permanent.Permanent;
 import java.util.*;
 
 /**
+ * TODO: must be reworked to use same face down logic as BecomesFaceDownCreatureEffect
+ *
  * @author LevelX2
  */
 
@@ -45,6 +47,8 @@ public class BecomesFaceDownCreatureAllEffect extends ContinuousEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
+
+        // save permanents to become face down (one time usage on resolve)
         for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
             if (!perm.isFaceDown(game) && !perm.isTransformable()) {
                 affectedObjectList.add(new MageObjectReference(perm, game));
@@ -54,7 +58,7 @@ public class BecomesFaceDownCreatureAllEffect extends ContinuousEffectImpl {
                 if (card != null) {
                     for (Ability ability : card.getAbilities(game)) {
                         if (ability instanceof MorphAbility) {
-                            this.turnFaceUpAbilityMap.put(card.getId(), new TurnFaceUpAbility(((MorphAbility) ability).getMorphCosts()));
+                            this.turnFaceUpAbilityMap.put(card.getId(), new TurnFaceUpAbility(((MorphAbility) ability).getFaceUpCosts()));
                         }
                     }
                 }
@@ -66,6 +70,7 @@ public class BecomesFaceDownCreatureAllEffect extends ContinuousEffectImpl {
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         boolean targetExists = false;
         for (MageObjectReference mor : affectedObjectList) {
+            // TODO: wtf, why it not use a BecomesFaceDownCreatureEffect.makeFaceDownObject and applied by layers?! Looks buggy
             Permanent permanent = mor.getPermanent(game);
             if (permanent != null && permanent.isFaceDown(game)) {
                 targetExists = true;
@@ -119,7 +124,6 @@ public class BecomesFaceDownCreatureAllEffect extends ContinuousEffectImpl {
                             permanent.getPower().setModifiedBaseValue(2);
                             permanent.getToughness().setModifiedBaseValue(2);
                         }
-
                 }
             }
         }

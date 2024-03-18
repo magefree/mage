@@ -12,7 +12,7 @@ import mage.constants.Zone;
 public final class EldraziSliverToken extends TokenImpl {
 
     public EldraziSliverToken() {
-        super("Eldrazi Sliver Token", "1/1 colorless Eldrazi Sliver creature token with \"Sacrifice this creature: Add {C}.\"");
+        super("Eldrazi Sliver Token", "1/1 colorless Eldrazi Sliver creature token. It has \"Sacrifice this creature: Add {C}.\"");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.ELDRAZI);
         subtype.add(SubType.SLIVER);

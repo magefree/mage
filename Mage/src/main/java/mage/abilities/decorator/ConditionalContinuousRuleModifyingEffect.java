@@ -52,10 +52,10 @@ public class ConditionalContinuousRuleModifyingEffect extends ContinuousRuleModi
         } else {
             condition = baseCondition;
         }
-        effect.setTargetPointer(this.targetPointer);
+        effect.setTargetPointer(this.getTargetPointer().copy());
         effect.init(source, game);
         if (otherwiseEffect != null) {
-            otherwiseEffect.setTargetPointer(this.targetPointer);
+            otherwiseEffect.setTargetPointer(this.getTargetPointer().copy());
             otherwiseEffect.init(source, game);
         }
         initDone = true;
@@ -82,10 +82,10 @@ public class ConditionalContinuousRuleModifyingEffect extends ContinuousRuleModi
             init(source, game);
         }
         if (condition.apply(game, source)) {
-            effect.setTargetPointer(this.targetPointer);
+            effect.setTargetPointer(this.getTargetPointer().copy());
             return effect.applies(event, source, game);
         } else if (otherwiseEffect != null) {
-            otherwiseEffect.setTargetPointer(this.targetPointer);
+            otherwiseEffect.setTargetPointer(this.getTargetPointer().copy());
             return otherwiseEffect.applies(event, source, game);
         }
         return false;

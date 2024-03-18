@@ -72,6 +72,7 @@ class SavageSummoningAsThoughEffect extends AsThoughEffectImpl {
 
     @Override
     public void init(Ability source, Game game) {
+        super.init(source, game);
         watcher = game.getState().getWatcher(SavageSummoningWatcher.class, source.getControllerId());
         Card card = game.getCard(source.getSourceId());
         if (watcher != null && card != null) {
@@ -188,6 +189,7 @@ class SavageSummoningCantCounterEffect extends ContinuousRuleModifyingEffectImpl
 
     @Override
     public void init(Ability source, Game game) {
+        super.init(source, game);
         watcher = game.getState().getWatcher(SavageSummoningWatcher.class, source.getControllerId());
         Card card = game.getCard(source.getSourceId());
         if (watcher == null || card == null) {
@@ -244,6 +246,7 @@ class SavageSummoningEntersBattlefieldEffect extends ReplacementEffectImpl {
 
     @Override
     public void init(Ability source, Game game) {
+        super.init(source, game);
         watcher = game.getState().getWatcher(SavageSummoningWatcher.class, source.getControllerId());
         Card card = game.getCard(source.getSourceId());
         if (watcher == null || card == null) {

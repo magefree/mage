@@ -55,14 +55,14 @@ public class ExileTargetForSourceEffect extends OneShotEffect {
         }
 
         Set<UUID> objectsToMove = new LinkedHashSet<>();
-        if (this.targetPointer instanceof FirstTargetPointer
+        if (this.getTargetPointer() instanceof FirstTargetPointer
                 && source.getTargets().size() > 1) {
             for (Target target : source.getTargets()) {
                 objectsToMove.addAll(target.getTargets());
             }
         } else {
-            if (this.targetPointer != null && !this.targetPointer.getTargets(game, source).isEmpty()) {
-                objectsToMove.addAll(this.targetPointer.getTargets(game, source));
+            if (!this.getTargetPointer().getTargets(game, source).isEmpty()) {
+                objectsToMove.addAll(this.getTargetPointer().getTargets(game, source));
             } else {
                 // issue with Madness keyword  #6889
                 UUID fixedTargetId = null;

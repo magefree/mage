@@ -1,5 +1,3 @@
-
-
 package mage.game.permanent.token;
 
 import java.util.UUID;
@@ -35,7 +33,7 @@ public final class GutterGrimeToken extends TokenImpl {
         color.setGreen(true);
         power = new MageInt(0);
         toughness = new MageInt(0);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SetBasePowerToughnessSourceEffect(new GutterGrimeCounters(sourceId))));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SetBasePowerToughnessSourceEffect(new GutterGrimeCountersCount(sourceId))));
     }
 
     private GutterGrimeToken(final GutterGrimeToken token) {
@@ -46,36 +44,37 @@ public final class GutterGrimeToken extends TokenImpl {
         return new GutterGrimeToken(this);
     }
 
-    class GutterGrimeCounters implements DynamicValue {
+}
 
-        private final UUID sourceId;
+class GutterGrimeCountersCount implements DynamicValue {
 
-        public GutterGrimeCounters(UUID sourceId) {
-            this.sourceId = sourceId;
+    private final UUID sourceId;
+
+    public GutterGrimeCountersCount(UUID sourceId) {
+        this.sourceId = sourceId;
+    }
+
+    @Override
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
+        Permanent p = game.getPermanent(sourceId);
+        if (p != null) {
+            return p.getCounters(game).getCount(CounterType.SLIME);
         }
+        return 0;
+    }
 
-        @Override
-        public int calculate(Game game, Ability sourceAbility, Effect effect) {
-            Permanent p = game.getPermanent(sourceId);
-            if (p != null) {
-                return p.getCounters(game).getCount(CounterType.SLIME);
-            }
-            return 0;
-        }
+    @Override
+    public GutterGrimeCountersCount copy() {
+        return this;
+    }
 
-        @Override
-        public GutterGrimeCounters copy() {
-            return this;
-        }
+    @Override
+    public String getMessage() {
+        return "slime counters on Gutter Grime";
+    }
 
-        @Override
-        public String getMessage() {
-            return "slime counters on Gutter Grime";
-        }
-
-        @Override
-        public String toString() {
-            return "1";
-        }
+    @Override
+    public String toString() {
+        return "1";
     }
 }

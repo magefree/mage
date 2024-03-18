@@ -248,8 +248,8 @@ class AddCardSubTypeEnteringTargetEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Spell spell = game.getSpell(targetPointer.getFixedTarget(game, source).getTarget());
-        MageObject target = game.getObject(targetPointer.getFixedTarget(game, source).getTarget());
+        Spell spell = game.getSpell(getTargetPointer().getFirst(game, source));
+        MageObject target = game.getObject(getTargetPointer().getFirst(game, source));
         if (spell != null) {
             card = spell.getCard();
         }

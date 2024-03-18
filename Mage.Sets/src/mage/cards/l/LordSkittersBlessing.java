@@ -35,7 +35,7 @@ public final class LordSkittersBlessing extends CardImpl {
     }
 
     private static final Condition condition = new PermanentsOnTheBattlefieldCondition(filter);
-    private static final Hint hint = new ConditionHint(condition, "You control an enchanted creaeture");
+    private static final Hint hint = new ConditionHint(condition, "You control an enchanted creature");
 
     public LordSkittersBlessing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
@@ -53,7 +53,7 @@ public final class LordSkittersBlessing extends CardImpl {
                 "an enchanted creature, you lose 1 life and you draw an additional card."
         );
         ability.addEffect(new DrawCardSourceControllerEffect(1));
-        this.addAbility(ability);
+        this.addAbility(ability.addHint(hint));
     }
 
     private LordSkittersBlessing(final LordSkittersBlessing card) {

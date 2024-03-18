@@ -15,6 +15,7 @@ Aether Revolt|AER|
 Amonkhet|AKH|
 Shards of Alara|ALA|
 Alliances|ALL|
+Arena Beginner Set|ANB|
 Asia Pacific Land Program|APAC|
 Apocalypse|APC|
 Alara Reborn|ARB|
@@ -23,6 +24,7 @@ Arena League|ARENA|
 Arabian Nights|ARN|
 Anthologies|ATH|
 Antiquities|ATQ|
+Assassin's Creed|ACR|
 Avacyn Restored|AVR|
 Battle for Zendikar|BFZ|
 Battlebond|BBD|
@@ -30,6 +32,7 @@ Born of the Gods|BNG|
 Betrayers of Kamigawa|BOK|
 Battle Royale Box Set|BRB|
 Beatdown Box Set|BTD|
+Bloomburrow|BLB|
 Commander 2013 Edition|C13|
 Commander 2014 Edition|C14|
 Commander 2015 Edition|C15|
@@ -176,6 +179,7 @@ Mirage|MIR|
 Launch Party|MLP|
 Modern Horizons|MH1|
 Modern Horizons 2|MH2|
+Modern Horizons 3|MH3|
 Modern Masters 2015|MM2|
 Modern Masters 2017|MM3|
 Modern Masters|MMA|
@@ -192,6 +196,8 @@ New Phyrexia|NPH|
 Odyssey|ODY|
 Oath of the Gatewatch|OGW|
 Onslaught|ONS|
+Outlaws of Thunder Junction|OTJ|
+The Big Score|BIG|
 Magic Origins|ORI|
 Phyrexia: All Will Be One|ONE|
 Phyrexia: All Will Be One Commander|ONC|
@@ -214,9 +220,11 @@ Rise of the Eldrazi|ROE|
 Return to Ravnica|RTR|
 Starter 2000|S00|
 Starter 1999|S99|
+Starter Commander Decks|SCD|
 Strixhaven: School of Mages|STX|
 Scourge|SCG|
 Secret Lair|SLD|
+Secret Lair Showdown|SLP|
 Shadowmoor|SHM|
 Shadows over Innistrad|SOI|
 Saviors of Kamigawa|SOK|

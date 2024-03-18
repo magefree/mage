@@ -10,7 +10,7 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -95,7 +95,7 @@ class MyrBattlesphereTriggeredAbility extends TriggeredAbilityImpl {
 
 class MyrBattlesphereEffect extends OneShotEffect {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Myr you control");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("untapped Myr you control");
 
     static {
         filter.add(TappedPredicate.UNTAPPED);
@@ -142,7 +142,7 @@ class MyrBattlesphereEffect extends OneShotEffect {
                 // boost effect
                 game.addEffect(new BoostSourceEffect(tappedAmount, 0, Duration.EndOfTurn), source);
                 // damage to defender
-                return game.damagePlayerOrPermanent(targetPointer.getFirst(game, source), tappedAmount, myr.getId(), source, game, false, true) > 0;
+                return game.damagePlayerOrPermanent(getTargetPointer().getFirst(game, source), tappedAmount, myr.getId(), source, game, false, true) > 0;
             }
             return true;
         }

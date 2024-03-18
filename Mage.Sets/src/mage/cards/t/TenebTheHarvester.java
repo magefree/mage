@@ -14,6 +14,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureCard;
 import mage.target.Target;
 import mage.target.common.TargetCardInGraveyard;
@@ -37,7 +38,7 @@ public final class TenebTheHarvester extends CardImpl {
         // Whenever Teneb, the Harvester deals combat damage to a player, you may pay {2}{B}. If you do, put target creature card from a graveyard onto the battlefield under your control.
         Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(
                 new DoIfCostPaid(new ReturnFromGraveyardToBattlefieldTargetEffect(), new ManaCostsImpl<>("{2}{B}")), false);
-        Target target = new TargetCardInGraveyard(new FilterCreatureCard("creature card from a graveyard"));
+        Target target = new TargetCardInGraveyard(StaticFilters.FILTER_CARD_CREATURE_A_GRAVEYARD);
         ability.addTarget(target);
         this.addAbility(ability);
     }

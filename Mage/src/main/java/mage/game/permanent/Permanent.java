@@ -4,7 +4,6 @@ import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.cards.Card;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Controllable;
 import mage.game.Game;
@@ -113,8 +112,6 @@ public interface Permanent extends Card, Controllable {
 
     void setExpansionSetCode(String expansionSetCode);
 
-    void setRarity(Rarity rarity);
-
     void setFlipCard(boolean flipCard);
 
     void setFlipCardName(String flipCardName);
@@ -136,7 +133,7 @@ public interface Permanent extends Card, Controllable {
     boolean hasProtectionFrom(MageObject source, Game game);
 
     /**
-     * @param attachment
+     * @param attachment can be any object: card, permanent, token
      * @param source     can be null for default checks like state base
      * @param game
      * @param silentMode - use it to ignore warning message for users (e.g. for
@@ -194,7 +191,14 @@ public interface Permanent extends Card, Controllable {
 
     void reset(Game game);
 
-    MageObject getBasicMageObject(Game game);
+    /**
+     * Return original/blueprint/printable object (token or card)
+     * <p>
+     * Original object used on each game cycle for permanent reset and apply all active effects
+     * <p>
+     * Warning, all changes to the original object will be applied forever
+     */
+    MageObject getBasicMageObject();
 
     boolean destroy(Ability source, Game game);
 
@@ -221,7 +225,7 @@ public interface Permanent extends Card, Controllable {
      * Add abilities to the permanent, can be used in effects
      *
      * @param ability
-     * @param sourceId
+     * @param sourceId can be null
      * @param game
      * @return can be null for exists abilities
      */
@@ -437,6 +441,10 @@ public interface Permanent extends Card, Controllable {
     void setMorphed(boolean value);
 
     boolean isMorphed();
+
+    void setDisguised(boolean value);
+
+    boolean isDisguised();
 
     void setManifested(boolean value);
 

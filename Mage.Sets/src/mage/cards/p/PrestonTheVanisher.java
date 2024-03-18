@@ -21,7 +21,6 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetNonlandPermanent;
 
 /**
@@ -32,7 +31,7 @@ public final class PrestonTheVanisher extends CardImpl {
 
     private static final FilterControlledCreaturePermanent triggerFilter = new FilterControlledCreaturePermanent(
             "another nontoken creature");
-    private static final FilterControlledPermanent activeCostFilter = new FilterControlledCreaturePermanent(
+    private static final FilterControlledPermanent activeCostFilter = new FilterControlledPermanent(
             SubType.ILLUSION, "Illusions");
 
     static {

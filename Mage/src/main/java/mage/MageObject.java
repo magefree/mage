@@ -34,6 +34,15 @@ public interface MageObject extends MageItem, Serializable, Copyable<MageObject>
 
     void setImageNumber(Integer imageNumber);
 
+    /**
+     * Get image file name
+     * - empty for default name from a card
+     * - non-empty for face down objects like Morph (GUI show empty name, but image must show some image)
+     */
+    String getImageFileName();
+
+    void setImageFileName(String imageFile);
+
     String getName();
 
     /**

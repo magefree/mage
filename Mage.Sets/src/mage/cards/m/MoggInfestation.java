@@ -85,7 +85,7 @@ class MoggInfestationEffect extends OneShotEffect {
                         || (game.getLastKnownInformation(uuid, Zone.BATTLEFIELD) instanceof PermanentToken
                         && !game.getBattlefield().containsPermanent(uuid))) {
                     Effect effect = new CreateTokenTargetEffect(new GoblinToken(), 2);
-                    effect.setTargetPointer(getTargetPointer());
+                    effect.setTargetPointer(this.getTargetPointer().copy());
                     effect.apply(game, source);
                 }
             }

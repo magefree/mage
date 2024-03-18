@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -18,7 +17,7 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -70,12 +69,12 @@ class SamiteElderEffect extends OneShotEffect {
 
     public boolean apply(Game game, Ability source) {
         Permanent target = game.getPermanent(source.getFirstTarget());
-        if(target != null) {
-            for(ObjectColor color : target.getColor(game).getColors()) {
+        if (target != null) {
+            for (ObjectColor color : target.getColor(game).getColors()) {
                 FilterCard filter = new FilterCard(color.getDescription());
                 filter.add(new ColorPredicate(color));
                 game.addEffect(new GainAbilityControlledEffect(new ProtectionAbility(filter),
-                    Duration.EndOfTurn, new FilterControlledCreaturePermanent()), source);
+                    Duration.EndOfTurn, StaticFilters.FILTER_CONTROLLED_CREATURES), source);
             }
             return true;
         }

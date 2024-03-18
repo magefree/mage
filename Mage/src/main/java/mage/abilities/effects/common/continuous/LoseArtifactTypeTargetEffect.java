@@ -41,7 +41,7 @@ public class LoseArtifactTypeTargetEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (UUID targetId : targetPointer.getTargets(game, source)) {
+        for (UUID targetId : getTargetPointer().getTargets(game, source)) {
             if (targetId == null) {
                 continue;
             }

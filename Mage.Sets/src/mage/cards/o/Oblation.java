@@ -56,7 +56,7 @@ class OblationEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
+        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (permanent != null) {
             Player player = game.getPlayer(permanent.getOwnerId());
             if (player != null) {

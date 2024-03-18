@@ -40,7 +40,7 @@ public class LoseLifeTargetEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         boolean applied = false;
-        for (UUID playerId : targetPointer.getTargets(game, source)) {
+        for (UUID playerId : getTargetPointer().getTargets(game, source)) {
             Player player = game.getPlayer(playerId);
             if (player != null
                     && player.loseLife(amount.calculate(game, source, this), game, source, false) > 0) {

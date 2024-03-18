@@ -22,6 +22,7 @@ public class ReturnFromExileForSourceEffect extends OneShotEffect {
     private final Zone returnToZone;
     private boolean pluralCards;
     private boolean pluralOwners;
+    private boolean putPhrasing;
 
     /**
      * @param zone Zone the card should return to
@@ -31,6 +32,7 @@ public class ReturnFromExileForSourceEffect extends OneShotEffect {
         this.returnToZone = zone;
         this.pluralCards = false;
         this.pluralOwners = false;
+        this.putPhrasing = false;
         updateText();
     }
 
@@ -39,6 +41,7 @@ public class ReturnFromExileForSourceEffect extends OneShotEffect {
         this.returnToZone = effect.returnToZone;
         this.pluralCards = effect.pluralCards;
         this.pluralOwners = effect.pluralOwners;
+        this.putPhrasing = effect.putPhrasing;
     }
 
     @Override
@@ -77,16 +80,22 @@ public class ReturnFromExileForSourceEffect extends OneShotEffect {
         return true;
     }
 
-    public ReturnFromExileForSourceEffect withText(boolean pluralCards, boolean pluralOwners) {
+    public ReturnFromExileForSourceEffect withText(boolean pluralCards, boolean pluralOwners, boolean putPhrasing) {
         this.pluralCards = pluralCards;
         this.pluralOwners = pluralOwners;
+        this.putPhrasing = putPhrasing;
         updateText();
         return this;
     }
 
     private void updateText() {
         StringBuilder sb = new StringBuilder();
-        sb.append("return the exiled ").append(pluralCards ? "cards" : "card").append(" to ");
+        if (putPhrasing) {
+            sb.append("put ").append(pluralCards ? "all cards " : "the card ").append("exiled with {this} ");
+            sb.append(returnToZone == Zone.BATTLEFIELD ? "onto " : "into ");
+        } else {
+            sb.append("return the exiled ").append(pluralCards ? "cards" : "card").append(" to ");
+        }
         if (returnToZone == Zone.BATTLEFIELD) {
             sb.append("the battlefield under ");
         }

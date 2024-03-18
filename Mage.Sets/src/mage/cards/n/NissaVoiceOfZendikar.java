@@ -16,7 +16,7 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.permanent.token.PlantToken;
 
@@ -43,7 +43,7 @@ public final class NissaVoiceOfZendikar extends CardImpl {
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new PlantToken()), 1));
 
         // -2: Put a +1/+1 counter on each creature you control.
-        this.addAbility(new LoyaltyAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(), new FilterControlledCreaturePermanent()), -2));
+        this.addAbility(new LoyaltyAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(), StaticFilters.FILTER_CONTROLLED_CREATURE), -2));
 
         // -7: You gain X life and draw X cards, where X is the number of lands you control.
         Effect effect = new GainLifeEffect(new PermanentsOnBattlefieldCount(filter));

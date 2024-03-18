@@ -1,4 +1,3 @@
-
 package mage.cards.m;
 
 import java.util.UUID;
@@ -11,8 +10,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -21,12 +19,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class MurasaPyromancer extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Ally you control");
-
-    static {
-        filter.add(SubType.ALLY.getPredicate());
-        filter.add(TargetController.YOU.getControllerPredicate());
-    }
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.ALLY, "Ally you control");
 
     public MurasaPyromancer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{R}");

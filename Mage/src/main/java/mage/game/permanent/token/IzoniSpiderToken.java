@@ -21,7 +21,7 @@ public final class IzoniSpiderToken extends TokenImpl {
         toughness = new MageInt(1);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Reach
         this.addAbility(ReachAbility.getInstance());
