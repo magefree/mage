@@ -173,4 +173,28 @@ public class DisguiseTest extends CardTestPlayerBase {
             Assert.assertFalse(info, foundAbility != null);
         }
     }
+
+    @Test
+    public void testCostReduction() {
+        String chisel = "Dream Chisel"; // Face-down creature spells you cast cost {1} less to cast.
+        String nightdrinker = "Nightdrinker Moroii";
+        /* Nightdrinker Moroii {3}{B} Creature — Vampire
+         * Flying
+         * When Nightdrinker Moroii enters the battlefield, you lose 3 life.
+         * Disguise {B}{B}
+         */
+        addCard(Zone.BATTLEFIELD, playerA, chisel);
+        addCard(Zone.HAND, playerA, nightdrinker);
+        addCard(Zone.BATTLEFIELD, playerA, "Wastes", 2);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, nightdrinker + " using Disguise");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPowerToughness(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 2, 2);
+        assertLife(playerA, 20);
+    }
+
 }
