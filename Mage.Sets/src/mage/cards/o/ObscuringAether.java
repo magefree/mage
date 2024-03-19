@@ -5,13 +5,12 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BecomesFaceDownCreatureEffect;
-import mage.abilities.effects.common.cost.MorphSpellsCostReductionControllerEffect;
+import mage.abilities.effects.common.cost.FaceDownSpellsCostReductionControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
 
 import java.util.UUID;
 
@@ -24,7 +23,7 @@ public final class ObscuringAether extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{G}");
 
         // Face-down creature spells you cast cost {1} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MorphSpellsCostReductionControllerEffect(1)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new FaceDownSpellsCostReductionControllerEffect(1)));
 
         // {1}{G}: Turn Obscuring Aether face down.
         Effect effect = new BecomesFaceDownCreatureEffect(Duration.Custom, BecomesFaceDownCreatureEffect.FaceDownType.MANUAL);
