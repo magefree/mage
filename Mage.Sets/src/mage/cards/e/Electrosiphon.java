@@ -49,13 +49,12 @@ class ElectrosiphonEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        UUID spellId = getTargetPointer().getFirst(game, source);
-        Spell spell = game.getStack().getSpell(spellId);
+        Spell spell = game.getStack().getSpell(getTargetPointer().getFirst(game, source));
         if (spell == null) {
             return false;
         }
 
-        game.getStack().counter(spellId, source, game);
+        game.getStack().counter(spell.getId(), source, game);
         new GetEnergyCountersControllerEffect(spell.getManaValue()).apply(game, source);
         return true;
     }
