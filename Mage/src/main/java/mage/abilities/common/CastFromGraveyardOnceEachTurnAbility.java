@@ -3,6 +3,7 @@ package mage.abilities.common;
 import mage.MageIdentifier;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.cards.Card;
 import mage.constants.*;
@@ -10,6 +11,7 @@ import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.watchers.Watcher;
 
 import java.util.HashSet;
@@ -18,26 +20,26 @@ import java.util.UUID;
 
 /**
  * Once during each of your turns, you may cast... from your graveyard
- *
+ * <p>
  * See Lurrus of the Dream Den and Rivaz of the Claw
  *
  * @author weirddan455
  */
-public class CastFromGraveyardOnceStaticAbility extends SimpleStaticAbility {
+public class CastFromGraveyardOnceEachTurnAbility extends SimpleStaticAbility {
 
-    public CastFromGraveyardOnceStaticAbility(FilterCard filter, String text) {
-        super(new CastFromGraveyardOnceEffect(filter, text));
+    public CastFromGraveyardOnceEachTurnAbility(FilterCard filter) {
+        super(new CastFromGraveyardOnceEffect(filter));
         this.addWatcher(new CastFromGraveyardOnceWatcher());
         this.setIdentifier(MageIdentifier.CastFromGraveyardOnceWatcher);
     }
 
-    private CastFromGraveyardOnceStaticAbility(final CastFromGraveyardOnceStaticAbility ability) {
+    private CastFromGraveyardOnceEachTurnAbility(final CastFromGraveyardOnceEachTurnAbility ability) {
         super(ability);
     }
 
     @Override
-    public CastFromGraveyardOnceStaticAbility copy() {
-        return new CastFromGraveyardOnceStaticAbility(this);
+    public CastFromGraveyardOnceEachTurnAbility copy() {
+        return new CastFromGraveyardOnceEachTurnAbility(this);
     }
 }
 
@@ -45,10 +47,10 @@ class CastFromGraveyardOnceEffect extends AsThoughEffectImpl {
 
     private final FilterCard filter;
 
-    CastFromGraveyardOnceEffect(FilterCard filter, String text) {
+    CastFromGraveyardOnceEffect(FilterCard filter) {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
         this.filter = filter;
-        this.staticText = text;
+        this.staticText = "Once during each of your turns, you may cast " + filter.getMessage() + " from your graveyard";
     }
 
     private CastFromGraveyardOnceEffect(final CastFromGraveyardOnceEffect effect) {
@@ -68,19 +70,30 @@ class CastFromGraveyardOnceEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (source.isControlledBy(affectedControllerId)
-                && Zone.GRAVEYARD.equals(game.getState().getZone(objectId))
-                && game.isActivePlayer(affectedControllerId)) {
-            Card card = game.getCard(objectId);
-            Permanent sourceObject = source.getSourcePermanentIfItStillExists(game);
-            if (card != null && sourceObject != null
-                    && card.isOwnedBy(affectedControllerId)
-                    && card.getSpellAbility() != null
-                    && card.getSpellAbility().spellCanBeActivatedRegularlyNow(affectedControllerId, game)
-                    && filter.match(card, affectedControllerId, source, game)) {
-                CastFromGraveyardOnceWatcher watcher = game.getState().getWatcher(CastFromGraveyardOnceWatcher.class);
-                return watcher != null && watcher.abilityNotUsed(new MageObjectReference(sourceObject, game));
+        throw new IllegalArgumentException("Wrong code usage: can't call applies method on empty affectedAbility");
+    }
+
+    @Override
+    public boolean applies(UUID objectId, Ability affectedAbility, Ability source, Game game, UUID playerId) {
+        Player controller = game.getPlayer(source.getControllerId());
+        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
+        CastFromGraveyardOnceWatcher watcher = game.getState().getWatcher(CastFromGraveyardOnceWatcher.class);
+        if (controller == null || sourcePermanent == null || watcher == null) {
+            return false;
+        }
+        if (game.isActivePlayer(playerId) // only during your turn
+                && source.isControlledBy(playerId) // only you may cast
+                && Zone.GRAVEYARD.equals(game.getState().getZone(objectId)) // from graveyard
+                && affectedAbility instanceof SpellAbility // characteristics to check
+                && watcher.abilityNotUsed(new MageObjectReference(sourcePermanent, game)) // once per turn
+        ) {
+            SpellAbility spellAbility = (SpellAbility) affectedAbility;
+            Card cardToCheck = spellAbility.getCharacteristics(game);
+            if (spellAbility.getManaCosts().isEmpty()) {
+                return false;
             }
+            return spellAbility.spellCanBeActivatedRegularlyNow(playerId, game)
+                    && filter.match(cardToCheck, playerId, source, game);
         }
         return false;
     }

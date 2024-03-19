@@ -12,7 +12,7 @@ import mage.abilities.decorator.ConditionalAsThoughEffect;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.LookAtTopCardOfLibraryAnyTimeEffect;
 import mage.abilities.effects.common.continuous.PlayAdditionalLandsControllerEffect;
-import mage.abilities.effects.common.continuous.PlayTheTopCardEffect;
+import mage.abilities.effects.common.continuous.PlayFromTopOfLibraryEffect;
 import mage.abilities.hint.common.CaseSolvedHint;
 import mage.constants.ComparisonType;
 import mage.constants.Duration;
@@ -64,7 +64,7 @@ public final class CaseOfTheLockedHothouse extends CardImpl {
         Ability solvedAbility = new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new LookAtTopCardOfLibraryAnyTimeEffect(), SolvedSourceCondition.SOLVED, ""));
         solvedAbility.addEffect(new ConditionalAsThoughEffect(
-                new PlayTheTopCardEffect(TargetController.YOU, filter2, false),
+                new PlayFromTopOfLibraryEffect(filter2),
                 SolvedSourceCondition.SOLVED)
                 .setText(", and you may play lands and cast creature and enchantment spells from the top of your library."));
 

@@ -3,13 +3,9 @@ package mage.cards.x;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.effects.AsThoughEffectImpl;
-import mage.abilities.effects.AsThoughManaEffect;
-import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.LookAtTopCardOfLibraryAnyTimeTargetEffect;
-import mage.abilities.effects.common.continuous.PlayTheTopCardTargetEffect;
+import mage.abilities.effects.*;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -44,9 +40,9 @@ public final class XanatharGuildKingpin extends CardImpl {
                 .setText("choose target opponent. Until end of turn, that player can't cast spells,"),
                 TargetController.YOU, false
         );
-        ability.addEffect(new LookAtTopCardOfLibraryAnyTimeTargetEffect(Duration.EndOfTurn)
+        ability.addEffect(new XanatharLookAtTopCardOfLibraryEffect()
                 .setText(" you may look at the top card of their library any time,"));
-        ability.addEffect(new PlayTheTopCardTargetEffect()
+        ability.addEffect(new XanatharPlayFromTopOfTargetLibraryEffect()
                 .setText(" you may play the top card of their library,"));
         ability.addEffect(new XanatharGuildKingpinSpendManaAsAnyColorOneShotEffect()
                 .setText(" and you may spend mana as thought it were mana of any color to cast spells this way"));
@@ -99,6 +95,90 @@ class XanatharGuildKingpinRuleModifyingEffect extends ContinuousRuleModifyingEff
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         return event.getPlayerId().equals(getTargetPointer().getFirst(game, source));
+    }
+}
+
+class XanatharLookAtTopCardOfLibraryEffect extends ContinuousEffectImpl {
+
+    XanatharLookAtTopCardOfLibraryEffect() {
+        super(Duration.EndOfTurn, Layer.PlayerEffects, SubLayer.NA, Outcome.Benefit);
+    }
+
+    private XanatharLookAtTopCardOfLibraryEffect(final XanatharLookAtTopCardOfLibraryEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public XanatharLookAtTopCardOfLibraryEffect copy() {
+        return new XanatharLookAtTopCardOfLibraryEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        if (game.inCheckPlayableState()) { // Ignored - see https://github.com/magefree/mage/issues/6994
+            return false;
+        }
+        Player controller = game.getPlayer(source.getControllerId());
+        Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
+        if (controller == null || opponent == null) {
+            return false;
+        }
+        if (!canLookAtNextTopLibraryCard(game)) {
+            return false;
+        }
+        Card topCard = opponent.getLibrary().getFromTop(game);
+        if (topCard == null) {
+            return false;
+        }
+        controller.lookAtCards("Top card of " + opponent.getName() + "'s library", topCard, game);
+        return true;
+    }
+
+}
+
+class XanatharPlayFromTopOfTargetLibraryEffect extends AsThoughEffectImpl {
+
+    XanatharPlayFromTopOfTargetLibraryEffect() {
+        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
+    }
+
+    private XanatharPlayFromTopOfTargetLibraryEffect(final XanatharPlayFromTopOfTargetLibraryEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
+
+    @Override
+    public XanatharPlayFromTopOfTargetLibraryEffect copy() {
+        return new XanatharPlayFromTopOfTargetLibraryEffect(this);
+    }
+
+    @Override
+    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        throw new IllegalArgumentException("Wrong code usage: can't call applies method on empty affectedAbility");
+    }
+
+    @Override
+    public boolean applies(UUID objectId, Ability affectedAbility, Ability source, Game game, UUID playerId) {
+        if (!(affectedAbility instanceof SpellAbility) || !playerId.equals(source.getControllerId())) {
+            return false;
+        }
+        SpellAbility spell = (SpellAbility) affectedAbility;
+        Card cardToCheck = spell.getCharacteristics(game);
+        if (spell.getManaCosts().isEmpty()) {
+            return false;
+        }
+        Player controller = game.getPlayer(source.getControllerId());
+        Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
+        if (controller == null || opponent == null) {
+            return false;
+        }
+        // main card of spell must be on top of the opponent's library
+        Card topCard = opponent.getLibrary().getFromTop(game);
+        return topCard != null && topCard.getId().equals(cardToCheck.getMainCard().getId());
     }
 }
 
