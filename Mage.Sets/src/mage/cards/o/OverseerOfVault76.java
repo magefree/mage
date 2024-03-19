@@ -59,7 +59,7 @@ public final class OverseerOfVault76 extends CardImpl {
                 .setText("and they gain vigilance until end of turn"));
 
         Cost cost = new RemoveCounterCost(
-                new TargetPermanent(0, Integer.MAX_VALUE, StaticFilters.FILTER_CONTROLLED_PERMANENTS),
+                new TargetPermanent(1, 3, StaticFilters.FILTER_CONTROLLED_PERMANENTS),
                 CounterType.QUEST,
                 3)
                 .setText("remove three quest counters from among permanents you control");
