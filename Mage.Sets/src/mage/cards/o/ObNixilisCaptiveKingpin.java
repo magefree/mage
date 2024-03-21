@@ -81,7 +81,7 @@ class ObNixilisCaptiveKingpinAbility extends TriggeredAbilityImpl {
 
         for (UUID targetPlayer : CardUtil.getEventTargets(lifeLostBatchEvent)){
             // skip controller
-            if (targetPlayer == getControllerId()){
+            if (targetPlayer.equals(getControllerId())){
                 continue;
             }
             opponentLostLife = true;

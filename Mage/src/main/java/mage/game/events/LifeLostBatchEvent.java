@@ -42,7 +42,7 @@ public class LifeLostBatchEvent extends GameEvent implements BatchGameEvent<Life
     public int getAmount(UUID targetID) {
         return events
                 .stream()
-                .filter(ev -> ev.getTargetId() == targetID)
+                .filter(ev -> ev.getTargetId().equals(targetID))
                 .mapToInt(GameEvent::getAmount)
                 .sum();
     }
