@@ -49,7 +49,6 @@ public final class StructuralAssault extends CardImpl {
     }
 }
 
-// CardsPutIntoGraveyardWatcher does not count tokens so custom watcher is needed.
 class StructuralAssaultWatcher extends Watcher {
 
     private int artifactsDied = 0;

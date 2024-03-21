@@ -46,10 +46,8 @@ public final class AnzragsRampage extends CardImpl {
     public AnzragsRampage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");
 
-        // Destroy all artifacts you don't control, then exile the top X cards of your library,
-        // where X is the number of artifacts that were put into graveyards from the battlefield this turn.
-        // You may put a creature card exiled this way onto the battlefield. It gains haste.
-        // Return it to your hand at the beginning of the next end step.
+        // Destroy all artifacts you don't control, then exile the top X cards of your library, where X is the number of artifacts that were put into graveyards from the battlefield this turn.
+        // You may put a creature card exiled this way onto the battlefield. It gains haste. Return it to your hand at the beginning of the next end step.
         this.getSpellAbility().addEffect(new DestroyAllEffect(filter));
         this.getSpellAbility().addEffect(new AnzragsRampageEffect().concatBy(", then"));
         this.getSpellAbility().addWatcher(new AnzragsRampageWatcher());
@@ -66,8 +64,6 @@ public final class AnzragsRampage extends CardImpl {
     }
 }
 
-// CardsPutIntoGraveyardWatcher does not count tokens so custom watcher is needed.
-// Copied from StructuralAssaultWatcher
 class AnzragsRampageWatcher extends Watcher {
 
     private int artifactsDied;
@@ -141,6 +137,8 @@ class AnzragsRampageEffect extends OneShotEffect {
             return false;
         }
 
+        // Exile the top X cards of your library,
+        // where X is the number of artifacts that were put into graveyards from the battlefield this turn.
         Cards cards = new CardsImpl(controller.getLibrary()
                 .getTopCards(game, AnzragsRampageValue.instance.calculate(game, source, this)));
         controller.moveCardsToExile(
@@ -148,6 +146,7 @@ class AnzragsRampageEffect extends OneShotEffect {
                 CardUtil.getExileZoneId(game, source),
                 CardUtil.createObjectRealtedWindowTitle(source, game, null));
 
+        // You may put a creature card exiled this way onto the battlefield.
         TargetCard targetCard = new TargetCardInExile(
                 0, 1, StaticFilters.FILTER_CARD_CREATURE, CardUtil.getExileZoneId(game, source));
         targetCard.withNotTarget(true);
@@ -163,10 +162,12 @@ class AnzragsRampageEffect extends OneShotEffect {
                 return true;
             }
 
+            // It gains haste.
             ContinuousEffect hasteEffect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.Custom);
             hasteEffect.setTargetPointer(new FixedTarget(permanent, game));
             game.addEffect(hasteEffect, source);
 
+            // Return it to your hand at the beginning of the next end step.
             ReturnToHandTargetEffect returnToHandEffect = new ReturnToHandTargetEffect();
             returnToHandEffect.setText("return it to your hand");
             returnToHandEffect.setTargetPointer(new FixedTarget(permanent, game));
