@@ -142,6 +142,10 @@ public class GameEvent implements Serializable {
          amount      amount of life loss
          flag        true = from combat damage - other from non combat damage
          */
+        LOST_LIFE_BATCH,
+        /* LOST_LIFE_BATCH
+         combines all player life lost events to a single batch (event)
+        */
         PLAY_LAND, LAND_PLAYED,
         CREATURE_CHAMPIONED,
         /* CREATURE_CHAMPIONED
