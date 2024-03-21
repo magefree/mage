@@ -24,9 +24,9 @@ import mage.target.common.TargetCardInExile;
  */
 public final class AmyPond extends CardImpl {
 
-    private static final FilterSuspendedCard filter = new FilterSuspendedCard("suspended card you own");
+    protected static final FilterSuspendedCard filter = new FilterSuspendedCard("suspended card you own");
     static {
-        filter.getCardFilter().add(TargetController.YOU.getOwnerPredicate());
+        filter.add(TargetController.YOU.getOwnerPredicate());
     }
 
     public AmyPond(UUID ownerId, CardSetInfo setInfo) {

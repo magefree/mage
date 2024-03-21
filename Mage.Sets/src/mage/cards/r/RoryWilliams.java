@@ -3,12 +3,10 @@ package mage.cards.r;
 import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CastSourceTriggeredAbility;
 import mage.abilities.effects.common.ExileSpellWithTimeCountersEffect;
-import mage.abilities.effects.common.continuous.GainSuspendEffect;
 import mage.abilities.effects.keyword.InvestigateEffect;
 import mage.abilities.keyword.*;
 import mage.constants.*;
@@ -43,8 +41,7 @@ public final class RoryWilliams extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
 
         // The Last Centurion -- When you cast this spell from anywhere other than exile, exile it with three time counters on it. It gains suspend. Then investigate.
-        Ability ability = new RoryWilliamsTriggeredAbility(new ExileSpellWithTimeCountersEffect(3));
-        ability.addEffect(new GainSuspendEffect(new MageObjectReference(ability.getSourceId())));
+        Ability ability = new RoryWilliamsTriggeredAbility(new ExileSpellWithTimeCountersEffect(3, true));
         ability.addEffect(new InvestigateEffect(1).concatBy("Then"));
         ability.withFlavorWord("The Last Centurion");
         this.addAbility(ability);
