@@ -8,6 +8,18 @@ import org.mage.test.serverside.base.CardTestCommander4Players;
 
 public class ObNixilisCaptiveKingpinTest extends CardTestCommander4Players {
 
+    //  - 1 opponent dealt 1 damage -> Ob Nixilis triggers
+    //  - 1 opponent dealt 2 damage -> No trigger
+    //  - 2 opponents dealt 1 damage each -> Ob Nixilis triggers
+    //  - 2 opponents dealt 2 damage each -> No trigger
+    //  - opponent pays 1 life-> Ob Nixilis triggers
+    //  - opponent pays 2 life -> No trigger
+    //  - 1 opponent loses 1 life -> Ob Nixilis triggers
+    //  - 1 opponent loses 2 life -> No trigger
+    //  - 2 opponents lose 1 life each -> Ob Nixilis triggers
+    //  - 2 opponents lose 2 life each -> No trigger
+    //  - controller loses 1 life -> No trigger
+
     @Test
     public void damageController1Point() {
         addCard(Zone.BATTLEFIELD, playerA, "Ob Nixilis, Captive Kingpin", 1);
