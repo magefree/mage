@@ -4,15 +4,12 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.constants.SubType;
-import mage.constants.SuperType;
+import mage.abilities.effects.common.ExileTopXMayPlayUntilEffect;
+import mage.constants.*;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.*;
 import mage.util.CardUtil;
@@ -38,7 +35,10 @@ public final class ObNixilisCaptiveKingpin extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Whenever one or more opponents each lose exactly 1 life, put a +1/+1 counter on Ob Nixilis, Captive Kingpin. Exile the top card of your library. Until your next end step, you may play that card.
-        this.addAbility(new ObNixilisCaptiveKingpinAbility(new DrawCardSourceControllerEffect(1)));
+        this.addAbility(new ObNixilisCaptiveKingpinAbility(
+                new ExileTopXMayPlayUntilEffect(1, Duration.UntilYourNextEndStep)
+                .withTextOptions("that card", false)
+        ));
     }
 
     private ObNixilisCaptiveKingpin(final ObNixilisCaptiveKingpin card) {
