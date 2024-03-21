@@ -53,12 +53,8 @@ public final class ObNixilisCaptiveKingpin extends CardImpl {
 
 class ObNixilisCaptiveKingpinAbility extends TriggeredAbilityImpl {
     
-    public ObNixilisCaptiveKingpinAbility(Effect effect) {
-        this(Zone.BATTLEFIELD, effect, false);
-    }
-    
-    public ObNixilisCaptiveKingpinAbility(Zone zone, Effect effect, boolean optional) {
-        super(zone, effect, optional);
+    ObNixilisCaptiveKingpinAbility(Effect effect) {
+        super(Zone.BATTLEFIELD, effect);
         setTriggerPhrase("Whenever one or more opponents each lose exactly 1 life, ");
     }
 
