@@ -89,7 +89,7 @@ class ObNixilisCaptiveKingpinAbility extends TriggeredAbilityImpl {
             }
             opponentLostLife = true;
 
-            int lifelost = lifeLostBatchEvent.getAmount(targetPlayer);
+            int lifelost = lifeLostBatchEvent.getLifeLostByPlayer(targetPlayer);
             if (lifelost != 1){
                 allis1 = false;
                 break;
