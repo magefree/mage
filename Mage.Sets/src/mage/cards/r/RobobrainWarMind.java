@@ -39,6 +39,11 @@ import mage.target.TargetSpell;
  * @author justinjohnson14
  */
 public final class RobobrainWarMind extends CardImpl {
+    private static FilterPermanent filter = new FilterArtifactCreaturePermanent();
+
+    static {
+        filter.add(TargetController.YOU.getControllerPredicate());
+    }
 
     public RobobrainWarMind(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}{U}");
@@ -51,9 +56,7 @@ public final class RobobrainWarMind extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerSourceEffect(CardsInControllerHandCount.instance)));
 
         // When Robobrain War Mind enters the battlefield, you get an amount of {E} equal to the number of artifact creatures you control.
-        //this.addAbility(new EntersBattlefieldTriggeredAbility(new GetEnergyCountersControllerEffect(new PermanentsOnBattlefieldCount(filter))));
-        //this.getSpellAbility().addEffect(new EntersBattlefieldEffect(new RobobrainWarMindEffect()));
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new RobobrainWarMindEffect()));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new GetEnergyCountersControllerEffect(new PermanentsOnBattlefieldCount(filter))));
 
         // Whenever Robobrain War Mind attacks, you may pay {E}{E}{E}. If you do, draw a card.
         this.addAbility(new AttacksTriggeredAbility(new DoIfCostPaid(new DrawCardTargetEffect(1, false), new PayEnergyCost(3))));
@@ -66,32 +69,5 @@ public final class RobobrainWarMind extends CardImpl {
     @Override
     public RobobrainWarMind copy() {
         return new RobobrainWarMind(this);
-    }
-}
-class RobobrainWarMindEffect extends OneShotEffect {
-
-    RobobrainWarMindEffect() {
-        super(Outcome.Detriment);
-        this.staticText = "you get an amount of {E} <i>(energy counters)</i> equal to the number of artifact creatures you control.";
-    }
-
-    private RobobrainWarMindEffect(final mage.cards.r.RobobrainWarMindEffect effect) {
-        super(effect);
-    }
-
-    private static FilterPermanent filter = new FilterArtifactCreaturePermanent();
-
-    static {
-        filter.add(TargetController.YOU.getControllerPredicate());
-    }
-    @Override
-    public boolean apply(Game game, Ability source) {
-        new GetEnergyCountersControllerEffect(new PermanentsOnBattlefieldCount(filter)).apply(game, source);
-        return true;
-    }
-
-    @Override
-    public mage.cards.r.RobobrainWarMindEffect copy() {
-        return new mage.cards.r.RobobrainWarMindEffect(this);
     }
 }
