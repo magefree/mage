@@ -808,7 +808,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         return !simultaneousEvents.isEmpty();
     }
 
-    public void addSimultaneousLifeLoss(LifeLostEvent lifeLossEvent, Game game) {
+    public void addSimultaneousLifeLossEventToBatches(LifeLostEvent lifeLossEvent, Game game) {
         // Combine multiple life loss events in the single event (batch)
         // see GameEvent.LOST_LIFE_BATCH
 
