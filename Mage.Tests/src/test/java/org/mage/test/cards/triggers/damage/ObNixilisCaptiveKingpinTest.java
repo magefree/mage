@@ -28,6 +28,7 @@ public class ObNixilisCaptiveKingpinTest extends CardTestCommander4Players {
         attack(2, playerD, "Memnite", playerA);
 
         setStopAt(2, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
         execute();
 
         assertCounterCount("Ob Nixilis, Captive Kingpin", CounterType.P1P1, 0);
@@ -41,6 +42,7 @@ public class ObNixilisCaptiveKingpinTest extends CardTestCommander4Players {
         attack(1, playerA, "Memnite", playerB);
 
         setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
         execute();
 
         assertCounterCount("Ob Nixilis, Captive Kingpin", CounterType.P1P1, 1);
@@ -54,6 +56,7 @@ public class ObNixilisCaptiveKingpinTest extends CardTestCommander4Players {
         attack(1, playerA, "Expedition Envoy", playerB);
 
         setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
         execute();
 
         assertCounterCount("Ob Nixilis, Captive Kingpin", CounterType.P1P1, 0);
@@ -68,6 +71,7 @@ public class ObNixilisCaptiveKingpinTest extends CardTestCommander4Players {
         attack(1, playerA, "Memnite", playerC);
 
         setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
         execute();
 
         assertCounterCount("Ob Nixilis, Captive Kingpin", CounterType.P1P1, 1);
@@ -82,6 +86,7 @@ public class ObNixilisCaptiveKingpinTest extends CardTestCommander4Players {
         attack(1, playerA, "Expedition Envoy", playerC);
 
         setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
         execute();
 
         assertCounterCount("Ob Nixilis, Captive Kingpin", CounterType.P1P1, 0);
@@ -91,10 +96,14 @@ public class ObNixilisCaptiveKingpinTest extends CardTestCommander4Players {
     public void payLife1Opp1Point() {
         addCard(Zone.BATTLEFIELD, playerA, "Ob Nixilis, Captive Kingpin", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Arid Mesa");
+//        addCard(Zone.LIBRARY, playerA, "Mountain");
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerB, "{T}, Pay 1 life");
 
+        addTarget(playerB, "Mountain");
+
         setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
         execute();
 
         assertCounterCount("Ob Nixilis, Captive Kingpin", CounterType.P1P1, 1);
@@ -112,6 +121,7 @@ public class ObNixilisCaptiveKingpinTest extends CardTestCommander4Players {
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerB, "{2}, Pay 2 life");
 
         setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
         execute();
 
         assertCounterCount("Ob Nixilis, Captive Kingpin", CounterType.P1P1, 0);
@@ -125,9 +135,12 @@ public class ObNixilisCaptiveKingpinTest extends CardTestCommander4Players {
         // {1}{B}, {T}: Target player loses 1 life.
         addCard(Zone.BATTLEFIELD, playerA, "Acolyte of Xathrid");
 
+        addTarget(playerA, playerC);
+
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}{B}, {T}");
 
         setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
         execute();
 
         assertCounterCount("Ob Nixilis, Captive Kingpin", CounterType.P1P1, 1);
@@ -141,9 +154,12 @@ public class ObNixilisCaptiveKingpinTest extends CardTestCommander4Players {
         // Target player draws two cards and loses 2 life.
         addCard(Zone.HAND, playerA, "Blood Pact");
 
+        addTarget(playerA, playerD);
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Blood Pact");
 
         setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
         execute();
 
         assertCounterCount("Ob Nixilis, Captive Kingpin", CounterType.P1P1, 0);
@@ -161,6 +177,7 @@ public class ObNixilisCaptiveKingpinTest extends CardTestCommander4Players {
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}{B}");
 
         setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
         execute();
 
         assertCounterCount("Ob Nixilis, Captive Kingpin", CounterType.P1P1, 1);
@@ -177,6 +194,7 @@ public class ObNixilisCaptiveKingpinTest extends CardTestCommander4Players {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Crushing Disappointment");
 
         setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
         execute();
 
         assertCounterCount("Ob Nixilis, Captive Kingpin", CounterType.P1P1, 0);
