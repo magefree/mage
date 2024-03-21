@@ -47,7 +47,7 @@ public class LifeLostBatchEvent extends GameEvent implements BatchGameEvent<Life
                 .sum();
     }
 
-    public boolean isCombatDamage() {
+    public boolean isLifeLostByCombatDamage() {
         return events.stream().anyMatch(LifeLostEvent::isCombatDamage);
     }
 
