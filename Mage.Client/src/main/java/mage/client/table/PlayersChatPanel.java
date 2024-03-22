@@ -6,6 +6,8 @@ import mage.client.util.GUISizeHelper;
 import mage.client.util.MageTableRowSorter;
 import mage.client.util.gui.TableUtil;
 import mage.client.util.gui.countryBox.CountryCellRenderer;
+import mage.components.table.MageTable;
+import mage.components.table.TableInfo;
 import mage.remote.MageRemoteException;
 import mage.view.RoomUsersView;
 import mage.view.UsersView;

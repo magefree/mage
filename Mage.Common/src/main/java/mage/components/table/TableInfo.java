@@ -1,4 +1,4 @@
-package mage.client.table;
+package mage.components.table;
 
 import java.util.ArrayList;
 import java.util.List;

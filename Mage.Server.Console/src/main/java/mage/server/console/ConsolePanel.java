@@ -1,5 +1,8 @@
  package mage.server.console;
 
+ import mage.components.table.MageTable;
+ import mage.components.table.TableModelWithTooltip;
+ import mage.components.table.TimeAgoTableCellRenderer;
  import mage.remote.Session;
  import mage.view.TableView;
  import mage.view.UserView;
@@ -13,6 +16,7 @@
  import java.util.*;
  import java.util.concurrent.CancellationException;
  import java.util.concurrent.ExecutionException;
+ import java.util.stream.Collectors;
 
  import static javax.swing.JTable.AUTO_RESIZE_NEXT_COLUMN;
  import static javax.swing.JTable.AUTO_RESIZE_OFF;
@@ -36,6 +40,7 @@
          this.tableUserModel = new TableUserModel();
          this.tableTableModel = new TableTableModel();
          initComponents();
+
          spinnerMuteDurationMinutes.setValue(60);
          this.tblUsers.createDefaultColumnsFromModel();
          this.tblUsers.setRowSorter(new TableRowSorter(tableUserModel));
@@ -43,7 +48,8 @@
 
          this.tblTables.createDefaultColumnsFromModel();
          this.tblTables.setRowSorter(new TableRowSorter(tableTableModel));
-         this.tblUsers.setAutoResizeMode(AUTO_RESIZE_NEXT_COLUMN);
+         this.tblTables.setAutoResizeMode(AUTO_RESIZE_NEXT_COLUMN);
+         this.tblTables.getColumnModel().getColumn(TableTableModel.COLUMN_CREATED).setCellRenderer(TimeAgoTableCellRenderer.getInstance());
      }
 
      public void update(List<UserView> users) {
@@ -93,7 +99,7 @@
          jPanel1 = new javax.swing.JPanel();
          jPanel3 = new javax.swing.JPanel();
          jScrollPane1 = new javax.swing.JScrollPane();
-         tblUsers = new javax.swing.JTable();
+         tblUsers = new MageTable();
          jPanel4 = new javax.swing.JPanel();
          btnDisconnect = new javax.swing.JButton();
          btnEndSession = new javax.swing.JButton();
@@ -105,7 +111,7 @@
          jPanel2 = new javax.swing.JPanel();
          jPanel5 = new javax.swing.JPanel();
          jScrollPane2 = new javax.swing.JScrollPane();
-         tblTables = new javax.swing.JTable();
+         tblTables = new MageTable();
          jPanel6 = new javax.swing.JPanel();
          btnRemoveTable = new javax.swing.JButton();
          jUserName = new javax.swing.JTextField();
@@ -373,7 +379,10 @@
 
      private void btnRemoveTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveTableActionPerformed
          int row = this.tblTables.convertRowIndexToModel(tblTables.getSelectedRow());
-         ConsoleFrame.getSession().removeTable((UUID) tableTableModel.getValueAt(row, 7));
+         if (row >= 0) {
+             TableView tableView = this.tableTableModel.getTableView(row);
+             ConsoleFrame.getSession().removeTable(tableView.getTableId());
+         }
      }//GEN-LAST:event_btnRemoveTableActionPerformed
 
      // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -484,9 +493,11 @@
 
  }
 
- class TableTableModel extends AbstractTableModel {
+ class TableTableModel extends AbstractTableModel implements TableModelWithTooltip {
 
-     private final String[] columnNames = new String[]{"Table Name", "Owner", "Game Type", "Deck Type", "Status"};
+     protected static final int COLUMN_CREATED = 4;
+
+     private final String[] columnNames = new String[]{"Table name", "Players", "Game type", "Deck type", "Created", "Status", "Games"};
      private TableView[] tables = new TableView[0];
 
      public void loadData(Collection<TableView> tables) {
@@ -515,17 +526,20 @@
                  return tables[arg0].getGameType();
              case 3:
                  return tables[arg0].getDeckType();
-             case 4:
-                 return tables[arg0].getTableState().toString();
+             case COLUMN_CREATED:
+                 return tables[arg0].getCreateTime();
              case 5:
-                 return tables[arg0].isTournament();
-             case 6:
-                 if (!tables[arg0].getGames().isEmpty()) {
-                     return tables[arg0].getGames().get(0);
+                 return tables[arg0].getTableStateText();
+             case 6:{
+                 if (tables[arg0].getGames().isEmpty()) {
+                     return "NO GAMES";
+                 } else if (tables[arg0].getGames().size() == 0) {
+                     return tables[arg0].getGames().get(0).toString();
+                 } else {
+                     return String.format("%d games:", tables[arg0].getGames().size())
+                             + "<br>" + tables[arg0].getGames().stream().map(UUID::toString).collect(Collectors.joining("<br>"));
                  }
-                 return null;
-             case 7:
-                 return tables[arg0].getTableId();
+             }
          }
          return "";
      }
@@ -543,14 +557,31 @@
 
      @Override
      public Class getColumnClass(int columnIndex) {
-         return String.class;
+         if (columnIndex == COLUMN_CREATED) {
+             return Date.class;
+         } else {
+             return String.class;
+         }
      }
 
      @Override
      public boolean isCellEditable(int rowIndex, int columnIndex) {
-         return columnIndex == 5;
+         return false;
      }
 
+     public TableView getTableView(int row) {
+         if (row >= 0 && row <= this.tables.length - 1) {
+             return this.tables[row];
+         } else {
+             throw new IllegalArgumentException("Unknown table row: " + row);
+         }
+     }
+
+     @Override
+     public String getTooltipAt(int rowIndex, int columnIndex) {
+         Object res = this.getValueAt(rowIndex, columnIndex);
+         return res == null ? null : res.toString();
+     }
  }
 
  class UpdateUsersTask extends SwingWorker<Void, List<UserView>> {
