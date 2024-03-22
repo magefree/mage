@@ -533,7 +533,7 @@
              case 6:{
                  if (tables[arg0].getGames().isEmpty()) {
                      return "NO GAMES";
-                 } else if (tables[arg0].getGames().size() == 0) {
+                 } else if (tables[arg0].getGames().size() == 1) {
                      return tables[arg0].getGames().get(0).toString();
                  } else {
                      return String.format("%d games:", tables[arg0].getGames().size())
