@@ -808,26 +808,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         return !simultaneousEvents.isEmpty();
     }
 
-    public void addSimultaneousLifeLossEventToBatches(LifeLostEvent lifeLossEvent, Game game) {
-        // Combine multiple life loss events in the single event (batch)
-        // see GameEvent.LOST_LIFE_BATCH
-
-        // existing batch
-        boolean isLifeLostBatchUsed = false;
-        for (GameEvent event : simultaneousEvents) {
-            if (event instanceof LifeLostBatchEvent) {
-                ((LifeLostBatchEvent) event).addEvent(lifeLossEvent);
-                isLifeLostBatchUsed = true;
-            }
-        }
-
-        // new batch
-        if (!isLifeLostBatchUsed) {
-            addSimultaneousEvent(new LifeLostBatchEvent(lifeLossEvent), game);
-        }
-    }
-
-    public void addSimultaneousDamage(DamagedEvent damagedEvent, Game game) {
+    public void addSimultaneousDamage(DamagedEvent damagedEvent, Game game) { // TODO: cleanup logic to new framework
         // Combine multiple damage events in the single event (batch)
         // * per damage type (see GameEvent.DAMAGED_BATCH_FOR_PERMANENTS, GameEvent.DAMAGED_BATCH_FOR_PLAYERS)
         // * per player (see GameEvent.DAMAGED_BATCH_FOR_ONE_PLAYER)
@@ -886,6 +867,25 @@ public class GameState implements Serializable, Copyable<GameState> {
         if (!isPermanentBatchUsed && isPermanentDamage) {
             DamagedBatchEvent event = new DamagedBatchForOnePermanentEvent(damagedEvent);
             addSimultaneousEvent(event, game);
+        }
+    }
+
+    public void addSimultaneousLifeLossEventToBatches(LifeLostEvent lifeLossEvent, Game game) {
+        // Combine multiple life loss events in the single event (batch)
+        // see GameEvent.LOST_LIFE_BATCH
+
+        // existing batch
+        boolean isLifeLostBatchUsed = false;
+        for (GameEvent event : simultaneousEvents) {
+            if (event instanceof LifeLostBatchEvent) {
+                ((LifeLostBatchEvent) event).addEvent(lifeLossEvent);
+                isLifeLostBatchUsed = true;
+            }
+        }
+
+        // new batch
+        if (!isLifeLostBatchUsed) {
+            addSimultaneousEvent(new LifeLostBatchEvent(lifeLossEvent), game);
         }
     }
 
