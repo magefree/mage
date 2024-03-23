@@ -13,14 +13,11 @@ import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.*;
-import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreatureOrPlaneswalkerPermanent;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.TargetPermanent;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.common.TargetCreatureOrPlaneswalker;
+import mage.target.targetadjustment.EachOpponentPermanentTargetsAdjuster;
 import mage.target.targetpointer.EachTargetPointer;
 
 import java.util.Collection;
@@ -49,7 +46,7 @@ public final class TheTrueScriptures extends CardImpl {
                 ability -> {
                     ability.addEffect(new DestroyTargetEffect().setTargetPointer(new EachTargetPointer())
                             .setText("for each opponent, destroy up to one target creature or planeswalker that player controls"));
-                    ability.setTargetAdjuster(TheTrueScripturesAdjuster.instance);
+                    ability.setTargetAdjuster(new EachOpponentPermanentTargetsAdjuster(new TargetCreatureOrPlaneswalker(0,1)));
                 }
         );
 
@@ -76,29 +73,6 @@ public final class TheTrueScriptures extends CardImpl {
     @Override
     public TheTrueScriptures copy() {
         return new TheTrueScriptures(this);
-    }
-}
-
-enum TheTrueScripturesAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        for (UUID playerId : game.getOpponents(ability.getControllerId())) {
-            Player player = game.getPlayer(playerId);
-            if (player == null) {
-                continue;
-            }
-            FilterPermanent filter = new FilterCreatureOrPlaneswalkerPermanent(
-                    "creature or planeswalker controlled by " + player.getName()
-            );
-            filter.add(new ControllerIdPredicate(playerId));
-            if (game.getBattlefield().count(filter, ability.getControllerId(), ability, game) == 0) {
-                continue;
-            }
-            ability.addTarget(new TargetPermanent(0, 1, filter));
-        }
     }
 }
 

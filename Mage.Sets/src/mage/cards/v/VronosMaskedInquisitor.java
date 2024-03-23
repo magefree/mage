@@ -1,6 +1,5 @@
 package mage.cards.v;
 
-import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
@@ -19,17 +18,13 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPlaneswalkerPermanent;
-import mage.filter.common.FilterNonlandPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
-import mage.game.Game;
 import mage.game.permanent.token.custom.CreatureToken;
-import mage.players.Player;
 import mage.target.TargetPermanent;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.common.TargetNonlandPermanent;
+import mage.target.targetadjustment.EachOpponentPermanentTargetsAdjuster;
 import mage.target.targetpointer.EachTargetPointer;
 
 import java.util.UUID;
@@ -61,7 +56,7 @@ public final class VronosMaskedInquisitor extends CardImpl {
         // −2: For each opponent, return up to one target nonland permanent that player controls to its owner's hand.
         LoyaltyAbility ability2 = new LoyaltyAbility(new ReturnToHandTargetEffect().setTargetPointer(new EachTargetPointer())
                 .setText("for each opponent, return up to one target nonland permanent that player controls to its owner's hand"), -2);
-        ability2.setTargetAdjuster(VronosMaskedInquisitorAdjuster.instance);
+        ability2.setTargetAdjuster(new EachOpponentPermanentTargetsAdjuster(new TargetNonlandPermanent(0,1)));
         this.addAbility(ability2);
 
         // −7: Target artifact you control becomes a 9/9 Construct artifact creature and gains vigilance, indestructible, and "This creature can't be blocked."
@@ -84,23 +79,5 @@ public final class VronosMaskedInquisitor extends CardImpl {
     @Override
     public VronosMaskedInquisitor copy() {
         return new VronosMaskedInquisitor(this);
-    }
-}
-
-enum VronosMaskedInquisitorAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        for (UUID opponentId : game.getOpponents(ability.getControllerId())) {
-            Player opponent = game.getPlayer(opponentId);
-            if (opponent == null) {
-                continue;
-            }
-            FilterPermanent filter = new FilterNonlandPermanent("nonland permanent controlled by " + opponent.getLogName());
-            filter.add(new ControllerIdPredicate(opponentId));
-            ability.addTarget(new TargetPermanent(0, 1, filter, false));
-        }
     }
 }

@@ -10,13 +10,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
-import mage.game.Game;
-import mage.players.Player;
-import mage.target.TargetPermanent;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetadjustment.EachOpponentPermanentTargetsAdjuster;
 import mage.target.targetpointer.EachTargetPointer;
 
 import java.util.UUID;
@@ -47,7 +42,7 @@ public final class JuvenileMistDragon extends CardImpl {
                         .setTargetPointer(new EachTargetPointer())
                         .setText("Each of those creatures doesn't untap during its controller's next untap step")
         );
-        ability.setTargetAdjuster(JuvenileMistDragonAdjuster.instance);
+        ability.setTargetAdjuster(new EachOpponentPermanentTargetsAdjuster(new TargetCreaturePermanent(0,1)));
         this.addAbility(ability.withFlavorWord("Confounding Clouds"));
     }
 
@@ -58,24 +53,5 @@ public final class JuvenileMistDragon extends CardImpl {
     @Override
     public JuvenileMistDragon copy() {
         return new JuvenileMistDragon(this);
-    }
-}
-
-enum JuvenileMistDragonAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        for (UUID opponentId : game.getOpponents(ability.getControllerId())) {
-            Player opponent = game.getPlayer(opponentId);
-            if (opponent == null) {
-                continue;
-            }
-            FilterPermanent filter = new FilterCreaturePermanent("creature controlled by " + opponent.getLogName());
-            filter.add(new ControllerIdPredicate(opponentId));
-            TargetPermanent target = new TargetPermanent(0, 1, filter, false);
-            ability.addTarget(target);
-        }
     }
 }

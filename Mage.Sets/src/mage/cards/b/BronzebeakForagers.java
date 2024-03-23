@@ -1,6 +1,5 @@
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -11,21 +10,21 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileUntilSourceLeavesEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.Card;
-import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.filter.FilterCard;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInExile;
+import mage.target.common.TargetNonlandPermanent;
+import mage.target.targetadjustment.EachOpponentPermanentTargetsAdjuster;
 import mage.target.targetadjustment.TargetAdjuster;
 import mage.target.targetpointer.EachTargetPointer;
 import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -47,7 +46,7 @@ public final class BronzebeakForagers extends CardImpl {
                 .setTargetPointer(new EachTargetPointer())
                 .setText("for each opponent, exile up to one target nonland permanent that player controls until {this} leaves the battlefield")
         );
-        etbAbility.setTargetAdjuster(BronzebeakForagerExileAdjuster.instance);
+        etbAbility.setTargetAdjuster(new EachOpponentPermanentTargetsAdjuster(new TargetNonlandPermanent(0, 1)));
         this.addAbility(etbAbility);
 
         // {X}{W}: Put target card with mana value X exiled with Bronzebeak Foragers into its owner's graveyard.
@@ -69,26 +68,6 @@ public final class BronzebeakForagers extends CardImpl {
     @Override
     public BronzebeakForagers copy() {
         return new BronzebeakForagers(this);
-    }
-}
-
-enum BronzebeakForagerExileAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        for (UUID opponentId : game.getOpponents(ability.getControllerId())) {
-            Player opponent = game.getPlayer(opponentId);
-            if (opponent == null) {
-                continue;
-            }
-            FilterPermanent filter = new FilterPermanent("nonland permanent controlled by " + opponent.getLogName());
-            filter.add(new ControllerIdPredicate(opponentId));
-            filter.add(Predicates.not(CardType.LAND.getPredicate()));
-            TargetPermanent target = new TargetPermanent(0, 1, filter, false);
-            ability.addTarget(target);
-        }
     }
 }
 

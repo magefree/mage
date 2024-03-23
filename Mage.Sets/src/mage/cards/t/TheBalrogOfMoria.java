@@ -1,7 +1,6 @@
 package mage.cards.t;
 
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.CycleTriggeredAbility;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
@@ -18,14 +17,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
-import mage.game.Game;
 import mage.game.permanent.token.TreasureToken;
-import mage.players.Player;
-import mage.target.TargetPermanent;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetadjustment.EachOpponentPermanentTargetsAdjuster;
 import mage.target.targetpointer.EachTargetPointer;
 
 import java.util.UUID;
@@ -57,7 +51,7 @@ public final class TheBalrogOfMoria extends CardImpl {
                 .setText("for each opponent, exile up to one target creature that player controls."),
             false
         );
-        reflexiveAbility.setTargetAdjuster(TheBalrogOfMoriaAdjuster.instance);
+        reflexiveAbility.setTargetAdjuster(new EachOpponentPermanentTargetsAdjuster(new TargetCreaturePermanent(0,1)));
 
         this.addAbility(new DiesSourceTriggeredAbility(
             new DoWhenCostPaid(
@@ -81,23 +75,5 @@ public final class TheBalrogOfMoria extends CardImpl {
     @Override
     public TheBalrogOfMoria copy() {
         return new TheBalrogOfMoria(this);
-    }
-}
-
-enum TheBalrogOfMoriaAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        for (UUID opponentId : game.getOpponents(ability.getControllerId())) {
-            Player opponent = game.getPlayer(opponentId);
-            if (opponent == null) {
-                continue;
-            }
-            FilterPermanent filter = new FilterCreaturePermanent("creature controlled by " + opponent.getLogName());
-            filter.add(new ControllerIdPredicate(opponentId));
-            ability.addTarget(new TargetPermanent(0, 1, filter, false));
-        }
     }
 }

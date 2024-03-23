@@ -17,13 +17,12 @@ import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.EachOpponentPermanentTargetsAdjuster;
 import mage.target.targetpointer.EachTargetPointer;
 
 import java.util.HashSet;
@@ -37,9 +36,11 @@ public final class TheHorusHeresy extends CardImpl {
 
     private static final FilterPermanent filter
             = new FilterControlledCreaturePermanent("creature you control but don't own");
+    private static final FilterCreaturePermanent filterNonlegendary = new FilterCreaturePermanent("nonlegendary creature");
 
     static {
         filter.add(TargetController.NOT_YOU.getOwnerPredicate());
+        filterNonlegendary.add(Predicates.not(SuperType.LEGENDARY.getPredicate()));
     }
 
     private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter, 1);
@@ -56,7 +57,7 @@ public final class TheHorusHeresy extends CardImpl {
         // I -- For each opponent, gain control of up to one target nonlegendary creature that player controls for as long as The Horus Heresy remains on the battlefield.
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_I, ability -> {
             ability.addEffect(new TheHorusHeresyControlEffect());
-            ability.setTargetAdjuster(TheHorusHeresyAdjuster.instance);
+            ability.setTargetAdjuster(new EachOpponentPermanentTargetsAdjuster(new TargetPermanent(0, 1, filterNonlegendary)));
         });
 
         // II -- Draw a card for each creature you control but don't own.
@@ -74,25 +75,6 @@ public final class TheHorusHeresy extends CardImpl {
     @Override
     public TheHorusHeresy copy() {
         return new TheHorusHeresy(this);
-    }
-}
-
-enum TheHorusHeresyAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        for (UUID opponentId : game.getOpponents(ability.getControllerId())) {
-            Player player = game.getPlayer(opponentId);
-            if (player == null) {
-                continue;
-            }
-            FilterPermanent filter = new FilterCreaturePermanent("nonlegendary creature controlled by " + player.getName());
-            filter.add(Predicates.not(SuperType.LEGENDARY.getPredicate()));
-            filter.add(new ControllerIdPredicate(opponentId));
-            ability.addTarget(new TargetPermanent(0, 1, filter));
-        }
     }
 }
 

@@ -14,12 +14,11 @@ import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterOpponentsCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.EachOpponentPermanentTargetsAdjuster;
 import mage.target.targetpointer.EachTargetPointer;
 
 import java.util.UUID;
@@ -31,6 +30,12 @@ public final class TolarianContempt extends CardImpl {
 
     private static final FilterPermanent filter
             = new FilterOpponentsCreaturePermanent("creature your opponents control");
+    private static final FilterPermanent filterRejection
+            = new FilterCreaturePermanent("creature with a rejection counter on it");
+
+    static {
+        filter.add(CounterType.REJECTION.getPredicate());
+    }
 
     public TolarianContempt(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}{U}");
@@ -43,7 +48,7 @@ public final class TolarianContempt extends CardImpl {
         // At the beginning of your end step, for each opponent, choose up to one target creature they control with a rejection counter on it. That creature's owner puts it on the top or bottom of their library.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 new TolarianContemptEffect(), TargetController.YOU, false
-        ).setTargetAdjuster(TolarianContemptAdjuster.instance));
+        ).setTargetAdjuster(new EachOpponentPermanentTargetsAdjuster(new TargetPermanent(0,1, filterRejection))));
     }
 
     private TolarianContempt(final TolarianContempt card) {
@@ -53,27 +58,6 @@ public final class TolarianContempt extends CardImpl {
     @Override
     public TolarianContempt copy() {
         return new TolarianContempt(this);
-    }
-}
-
-enum TolarianContemptAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        for (UUID opponentId : game.getOpponents(ability.getControllerId())) {
-            Player opponent = game.getPlayer(opponentId);
-            if (opponent == null) {
-                continue;
-            }
-            FilterPermanent filter = new FilterCreaturePermanent(
-                    "creature controlled by " + opponent.getName() + " with a rejection counter on it"
-            );
-            filter.add(CounterType.REJECTION.getPredicate());
-            filter.add(new ControllerIdPredicate(opponentId));
-            ability.addTarget(new TargetPermanent(0, 1, filter));
-        }
     }
 }
 
