@@ -22,7 +22,7 @@ public class LookAtTopCardOfLibraryAnyTimeEffect extends ContinuousEffectImpl {
     public LookAtTopCardOfLibraryAnyTimeEffect(Duration duration) {
         super(duration, Layer.PlayerEffects, SubLayer.NA, Outcome.Benefit);
         staticText = (duration.toString().isEmpty() ? "" : duration.toString() + ", ") +
-                "you may look at the top care of your library any time";
+                "you may look at the top card of your library any time";
     }
 
     protected LookAtTopCardOfLibraryAnyTimeEffect(final LookAtTopCardOfLibraryAnyTimeEffect effect) {
