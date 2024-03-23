@@ -127,7 +127,8 @@ class DeificationReplacementEffect extends ReplacementEffectImpl {
             if (!game.isSimulation()){
                 logger.info("loyalty counters on planeswalker: " + loyaltyCounters); //TODO: remove
             }
-            if ((loyaltyCounters - event.getAmount()) < 1
+            if (planeswalker.hasSubtype(ChoosePlaneswalkerTypeEffect.getChosenPlaneswalkerType(source.getSourceId(), game), game)
+                    && (loyaltyCounters - event.getAmount()) < 1
                     && game.getBattlefield().count(
                     StaticFilters.FILTER_CONTROLLED_CREATURE,
                     event.getPlayerId(), source, game) > 0
