@@ -904,8 +904,7 @@ public class GameState implements Serializable, Copyable<GameState> {
 
         // new batch
         if (!isTappedBatchUsed) {
-            TappedBatchEvent batch = new TappedBatchEvent(tappedEvent);
-            addSimultaneousEvent(batch, game);
+            addSimultaneousEvent(new TappedBatchEvent(tappedEvent), game);
         }
     }
 
@@ -924,8 +923,7 @@ public class GameState implements Serializable, Copyable<GameState> {
 
         // new batch
         if (!isUntappedBatchUsed) {
-            UntappedBatchEvent batch = new UntappedBatchEvent(untappedEvent);
-            addSimultaneousEvent(batch, game);
+            addSimultaneousEvent(new UntappedBatchEvent(untappedEvent), game);
         }
     }
 
