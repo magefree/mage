@@ -1,12 +1,17 @@
 package org.mage.test.serverside.performance;
 
+import mage.MageObject;
 import mage.cards.repository.CardScanner;
+import mage.util.CardUtil;
 import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author JayDi85
+ */
 public class RulesFormatTest {
 
     @Test
@@ -20,7 +25,10 @@ public class RulesFormatTest {
         CardScanner.getAllCards().forEach(card -> {
             List<String> possibleObjectNames = new ArrayList<>();
             // any card names
-            possibleObjectNames.add(card.getName());
+            CardUtil.getObjectPartsAsObjects(card)
+                    .stream()
+                    .map(MageObject::getName)
+                    .forEach(possibleObjectNames::add);
             // all names from GainAbilityAttachedEffect
             possibleObjectNames.add("creature");
             possibleObjectNames.add("permanent");
