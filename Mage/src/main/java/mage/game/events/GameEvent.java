@@ -493,6 +493,7 @@ public class GameEvent implements Serializable {
         STAY_ATTACHED,
         ADD_COUNTER, COUNTER_ADDED,
         ADD_COUNTERS, COUNTERS_ADDED,
+        REMOVE_COUNTER, REMOVE_COUNTERS,
         COUNTER_REMOVED, COUNTERS_REMOVED,
         LOSE_CONTROL,
         /* LOST_CONTROL
