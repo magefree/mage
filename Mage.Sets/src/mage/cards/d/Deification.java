@@ -124,13 +124,17 @@ class DeificationReplacementEffect extends ReplacementEffectImpl {
             }
 
             int loyaltyCounters = planeswalker.getCounters(game).getCount(CounterType.LOYALTY);
-            logger.info("loyalty counters on planeswalker: " + loyaltyCounters);
+            if (!game.isSimulation()){
+                logger.info("loyalty counters on planeswalker: " + loyaltyCounters); //TODO: remove
+            }
             if ((loyaltyCounters - event.getAmount()) < 1
                     && game.getBattlefield().count(
                     StaticFilters.FILTER_CONTROLLED_CREATURE,
                     event.getPlayerId(), source, game) > 0
             ) {
-                logger.info("Setting damage to " + (loyaltyCounters - 1));
+                if (!game.isSimulation()) {
+                    logger.info("Setting damage to " + (loyaltyCounters - 1));
+                }
                 event.setAmount(loyaltyCounters - 1);
             }
         }
