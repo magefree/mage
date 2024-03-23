@@ -924,8 +924,7 @@ public class GameState implements Serializable, Copyable<GameState> {
 
         // new batch
         if (!isUntappedBatchUsed) {
-            UntappedBatchEvent batch = new UntappedBatchEvent();
-            batch.addEvent(untappedEvent);
+            UntappedBatchEvent batch = new UntappedBatchEvent(untappedEvent);
             addSimultaneousEvent(batch, game);
         }
     }
