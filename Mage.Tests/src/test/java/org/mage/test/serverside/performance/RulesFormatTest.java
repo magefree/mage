@@ -35,13 +35,16 @@ public class RulesFormatTest {
             possibleObjectNames.add("land");
             possibleObjectNames.add("planeswalker");
 
-            card.getAbilities().forEach(ability -> {
-                possibleObjectNames.forEach(name -> {
-                    // simulate replacement code from GainAbilityAttachedEffect::getText
-                    String sourceName = "This " + name;
-                    ability.getRule(sourceName);
-                });
-            });
+            CardUtil.getObjectPartsAsObjects(card)
+                    .forEach(part -> {
+                        part.getAbilities().forEach(ability -> {
+                            possibleObjectNames.forEach(name -> {
+                                // simulate replacement code from GainAbilityAttachedEffect::getText
+                                String sourceName = "This " + name;
+                                ability.getRule(sourceName);
+                            });
+                        });
+                    });
         });
     }
 }
