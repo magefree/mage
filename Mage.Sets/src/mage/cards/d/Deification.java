@@ -118,6 +118,11 @@ class DeificationReplacementEffect extends ReplacementEffectImpl {
             if (planeswalker == null) {
                 return false;
             }
+            if (!event.getFlag()){
+                // not due to damage, prevention does not occur
+                return false;
+            }
+
             int loyaltyCounters = planeswalker.getCounters(game).getCount(CounterType.LOYALTY);
             logger.info("loyalty counters on planeswalker: " + loyaltyCounters);
             if ((loyaltyCounters - event.getAmount()) < 1
