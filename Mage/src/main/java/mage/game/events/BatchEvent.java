@@ -7,6 +7,8 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 /**
+ * Special events created by game engine to track batches of events that occur simultaneously,
+ * for triggers that need such information
  * @author xenohedron
  */
 public abstract class BatchEvent<T extends GameEvent> extends GameEvent {
@@ -15,8 +17,6 @@ public abstract class BatchEvent<T extends GameEvent> extends GameEvent {
     private final boolean singleTargetId;
 
     /**
-     * Special events created by game engine to track batches of events that occur simultaneously,
-     * for triggers that need such information
      * @param eventType specific type of event
      * @param singleTargetId if true, all included events must have same target id
      * @param firstEvent added to initialize the batch (batch is never empty)
@@ -24,7 +24,18 @@ public abstract class BatchEvent<T extends GameEvent> extends GameEvent {
     protected BatchEvent(EventType eventType, boolean singleTargetId, T firstEvent) {
         super(eventType, (singleTargetId ? firstEvent.getTargetId() : null), null, null);
         this.singleTargetId = singleTargetId;
+        if (firstEvent instanceof BatchEvent) { // sanity check, if you need it then think twice and research carefully
+            throw new UnsupportedOperationException("Wrong code usage: nesting batch events not supported");
+        }
         this.addEvent(firstEvent);
+    }
+
+    /**
+     * For alternate event structure logic used by ZoneChangeBatchEvent, list of events starts empty.
+     */
+    protected BatchEvent(EventType eventType) {
+        super(eventType, null, null, null);
+        this.singleTargetId = false;
     }
 
     public void addEvent(T event) {
