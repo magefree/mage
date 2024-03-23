@@ -3,11 +3,9 @@ package mage.view;
 import mage.MageObject;
 import mage.abilities.Mode;
 import mage.abilities.Modes;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.hint.Hint;
 import mage.abilities.hint.HintUtils;
-import mage.abilities.icon.CardIconImpl;
 import mage.cards.Card;
 import mage.constants.AbilityType;
 import mage.constants.CardType;
@@ -83,13 +81,12 @@ public class StackAbilityView extends CardView {
     }
 
     private void updateTargets(Game game, StackAbility ability) {
-        List<String> names = new ArrayList<>();
+        List<UUID> targetList = new ArrayList<>();
         for (UUID modeId : ability.getModes().getSelectedModes()) {
             Mode mode = ability.getModes().get(modeId);
             if (!mode.getTargets().isEmpty()) {
                 addTargets(mode.getTargets(), mode.getEffects(), ability, game);
             } else {
-                List<UUID> targetList = new ArrayList<>();
                 for (Effect effect : mode.getEffects()) {
                     TargetPointer targetPointer = effect.getTargetPointer();
                     if (targetPointer instanceof FixedTarget) {
@@ -105,17 +102,19 @@ public class StackAbilityView extends CardView {
                             if ((mageObject instanceof Card) && ((Card) mageObject).isFaceDown(game)) {
                                 continue;
                             }
-                            String newName = GameLog.getColoredObjectIdNameForTooltip(mageObject);
-                            if (!names.contains(newName)) {
-                                names.add(newName);
+                            List<String> rules = getRules();
+                            rules.add("<i>Related objects: "
+                                    + GameLog.getColoredObjectIdNameForTooltip(mageObject) + "</i>");
+                            // TODO: apply this to more card types
+                            if (mageObject.isCreature()){
+                                Card card = game.getCard(uuid);
+                                rules.add(getCardTypesText(card));
+                                rules.add(getCardRulesText(card));
                             }
                         }
                     }
                 }
             }
-        }
-        if (!names.isEmpty()) {
-            getRules().add("<i>Related objects: " + names + "</i>");
         }
 
         // show for modal ability, which mode was chosen
@@ -141,7 +140,7 @@ public class StackAbilityView extends CardView {
 
         // show target of an ability on the stack if "related objects" is empty
         if (!ability.getTargets().isEmpty()
-                && names.isEmpty()) {
+                && targetList.isEmpty()) {
             StackObject stackObjectTarget = null;
             for (Target target : ability.getTargets()) {
                 for (UUID targetId : target.getTargets()) {
@@ -166,4 +165,40 @@ public class StackAbilityView extends CardView {
         return abilityType;
     }
 
+    private String getCardTypesText(Card card) {
+        StringBuilder sb = new StringBuilder();
+        if (card != null && card.isCreature())
+        {
+            sb.append("Mana Cost: ");
+            sb.append(card.getManaCost()).append(" | ");
+            if (!card.getSuperType().isEmpty()) {
+                sb.append(card.getSuperType()).append(" ");
+            }
+            sb.append(card.getCardType()).append(" - ");
+            sb.append(card.getSubtype());
+        }
+        // Remove all "[", "]", and ","
+        return sb.toString().replaceAll("[\\[\\],]", "");
+    }
+
+    private String getCardRulesText(Card card) {
+        StringBuilder sb = new StringBuilder();
+        if (card != null && card.isCreature())
+        {
+            sb.append(card.getRules());
+            if (sb.length() >= 2) {
+                // Replace the last char with ' '
+                sb.setCharAt(sb.length() - 1, ' ');
+
+                // Remove the first character
+                sb.deleteCharAt(0);
+            }
+            sb.append(card.getPower()).append("/");
+            sb.append(card.getToughness());
+
+            // Replace "{this}" placeholder with card name and remove commas after periods
+            return sb.toString().replace("{this}", card.getName()).replace(".,", ".");
+        }
+        return sb.toString();
+    }
 }
