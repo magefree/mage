@@ -79,6 +79,10 @@ public class SimpleMageClient implements MageClient {
         this.callbackClient.setConcede(needToConcede);
     }
 
+    public void setDrawGame(boolean needToDrawGame) {
+        this.callbackClient.setDrawGame(needToDrawGame);
+    }
+
     public String getLastGameResult() {
         return this.callbackClient.getLastGameResult();
     }

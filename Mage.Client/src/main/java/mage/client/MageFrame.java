@@ -1678,8 +1678,14 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             case CLIENT_CONCEDE_GAME:
                 SessionHandler.sendPlayerAction(PlayerAction.CONCEDE, userRequestMessage.getGameId(), null);
                 break;
+            case CLIENT_DRAW_GAME_IF_ONLY_COMPUTERS:
+                SessionHandler.sendPlayerAction(PlayerAction.DRAW_GAME, userRequestMessage.getGameId(), null);
+                break;
             case CLIENT_CONCEDE_MATCH:
-                SessionHandler.quitMatch(userRequestMessage.getGameId());
+                SessionHandler.quitMatch(userRequestMessage.getGameId(), false);
+                break;
+            case CLIENT_END_MATCH_IF_ONLY_COMPUTERS:
+                SessionHandler.quitMatch(userRequestMessage.getGameId(), true);
                 break;
             case CLIENT_STOP_WATCHING:
                 SessionHandler.stopWatching(userRequestMessage.getGameId());
@@ -1738,7 +1744,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
     private void endTables() {
         for (UUID gameId : GAMES.keySet()) {
-            SessionHandler.quitMatch(gameId);
+            SessionHandler.quitMatch(gameId, false);
         }
         for (UUID draftId : DRAFTS.keySet()) {
             SessionHandler.quitDraft(draftId);

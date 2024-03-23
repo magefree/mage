@@ -568,7 +568,7 @@ public class TableController {
                             if (game != null && !game.hasEnded()) {
                                 Player player = match.getPlayer(playerId).getPlayer();
                                 if (player != null && player.isInGame()) {
-                                    managerFactory.gameManager().quitMatch(game.getId(), userId);
+                                    managerFactory.gameManager().quitMatch(game.getId(), userId, false);
                                 }
                                 match.quitMatch(playerId);
                             } else {

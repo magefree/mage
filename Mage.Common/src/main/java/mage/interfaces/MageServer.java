@@ -106,7 +106,7 @@ public interface MageServer {
 
     boolean matchStart(String sessionId, UUID roomId, UUID tableId) throws MageException;
 
-    void matchQuit(UUID gameId, String sessionId) throws MageException;
+    void matchQuit(UUID gameId, String sessionId, boolean endMatchIfOnlyComputers) throws MageException;
 
     void gameJoin(UUID gameId, String sessionId) throws MageException;
 

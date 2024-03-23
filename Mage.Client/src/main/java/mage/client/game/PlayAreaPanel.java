@@ -17,6 +17,7 @@ import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.*;
 import java.lang.reflect.Field;
+import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
@@ -395,6 +396,53 @@ public class PlayAreaPanel extends javax.swing.JPanel {
         concedeMenu.add(menuItem);
         menuItem.addActionListener(concedeListener);
 
+        String onlyComputerOpponentsRemain = "Only computer opponents remain. ";
+        JMenu endMenu = new JMenu("End");
+        endMenu.setMnemonic(KeyEvent.VK_E);
+        popupMenu.add(endMenu);
+
+        ActionListener endListener = e -> {
+            switch (e.getActionCommand()) {
+                case "Game": {
+                    UserRequestMessage message = new UserRequestMessage("Confirm end game",
+                            onlyComputerOpponentsRemain + "Are you sure you want to end the game as a draw?");
+                    message.setButton1("No", null);
+                    message.setButton2("Yes", PlayerAction.CLIENT_DRAW_GAME_IF_ONLY_COMPUTERS);
+                    message.setGameId(gameId);
+                    MageFrame.getInstance().showUserRequestDialog(message);
+                    break;
+                }
+                case "Match": {
+                    UserRequestMessage message = new UserRequestMessage("Confirm end match",
+                            onlyComputerOpponentsRemain + "Are you sure you want to end the match as a draw? " +
+                                    "End statistics will not be available.");
+                    message.setButton1("No", null);
+                    message.setButton2("Yes", PlayerAction.CLIENT_END_MATCH_IF_ONLY_COMPUTERS);
+                    message.setGameId(gameId);
+                    MageFrame.getInstance().showUserRequestDialog(message);
+                    break;
+                }
+                default:
+                    break;
+            }
+        };
+
+        // End Game
+        menuItem = new JMenuItem("Game");
+        menuItem.setMnemonic(KeyEvent.VK_G);
+        menuItem.setActionCommand("Game");
+        menuItem.setToolTipText("Draws the game and after that the next game of the match is started if there is another game needed.");
+        endMenu.add(menuItem);
+        menuItem.addActionListener(endListener);
+
+        // End Match
+        menuItem = new JMenuItem("Match");
+        menuItem.setMnemonic(KeyEvent.VK_M);
+        menuItem.setActionCommand("Match");
+        menuItem.setToolTipText("Draws the match. So if you're in a tournament you finish the current tournament round.");
+        endMenu.add(menuItem);
+        menuItem.addActionListener(endListener);
+
         battlefieldPanel.getMainPanel().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseReleased(MouseEvent e) {
@@ -409,6 +457,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
 
             private void checkMenu(MouseEvent e) {
                 if (e.isPopupTrigger() && playingMode) {
+                    endMenu.setVisible(onlyComputerOpponentsRemain());
                     popupMenu.show(e.getComponent(), e.getX(), e.getY());
                 }
             }
@@ -625,4 +674,14 @@ public class PlayAreaPanel extends javax.swing.JPanel {
     //private javax.swing.JScrollPane jScrollPane1;
     private PlayerPanelExt playerPanel;
 
+    private boolean onlyComputerOpponentsRemain() {
+        Map<UUID, PlayAreaPanel> gamePlayers = MageFrame.getGamePlayers(gameId);
+        for (Map.Entry<UUID, PlayAreaPanel> entry : gamePlayers.entrySet()) {
+            PlayerView playerView = entry.getValue().getPlayerPanel().getPlayer();
+            if (playerView.isHuman() && !playerView.hasLost() && !playerView.getControlled()) {
+                return false;
+            }
+        }
+        return true;
+    }
 }

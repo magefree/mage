@@ -29,7 +29,7 @@ public interface GamePlay {
 
     boolean sendPlayerManaType(UUID gameId, UUID playerId, ManaType data);
 
-    boolean quitMatch(UUID gameId);
+    boolean quitMatch(UUID gameId, boolean endMatchIfOnlyComputers);
 
     boolean quitTournament(UUID tournamentId);
 

@@ -376,11 +376,12 @@ public class TableManagerImpl implements TableManager {
                 }
             }
 
-            // If table is not finished, the table has to be removed completly because it's not a normal state (if finished it will be removed in GamesRoomImpl.Update())
+            // If table is not finished, the table has to be removed completely due to GameController.quitMatch or
+            // an abnormal state (if finished it will be removed in GamesRoomImpl.Update())
             if (table.getState() != TableState.FINISHED) {
                 if (game != null) {
                     managerFactory.gameManager().removeGame(game.getId());
-                    // something goes wrong, so don't add it to ended stats
+                    // don't add it to ended stats
                 }
                 managerFactory.gamesRoomManager().removeTable(tableId);
             }

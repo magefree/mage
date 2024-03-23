@@ -30,7 +30,7 @@ public interface GameManager {
 
     void sendPlayerInteger(UUID gameId, UUID userId, Integer data);
 
-    void quitMatch(UUID gameId, UUID userId);
+    void quitMatch(UUID gameId, UUID userId, boolean endMatchIfOnlyComputers);
 
     void sendPlayerAction(PlayerAction playerAction, UUID gameId, UUID userId, Object data);
 
