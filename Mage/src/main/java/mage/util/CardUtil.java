@@ -30,6 +30,7 @@ import mage.game.CardState;
 import mage.game.Game;
 import mage.game.GameState;
 import mage.game.command.Commander;
+import mage.game.events.BatchEvent;
 import mage.game.events.BatchGameEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -2209,8 +2210,10 @@ public final class CardUtil {
      */
     public static Set<UUID> getEventTargets(GameEvent event) {
         Set<UUID> res = new HashSet<>();
-        if (event instanceof BatchGameEvent) {
+        if (event instanceof BatchGameEvent) { // TODO: eliminate after refactor complete
             res.addAll(((BatchGameEvent<?>) event).getTargets());
+        } else if (event instanceof BatchEvent) {
+            res.addAll(((BatchEvent<?>) event).getTargetIds());
         } else if (event != null && event.getTargetId() != null) {
             res.add(event.getTargetId());
         }
