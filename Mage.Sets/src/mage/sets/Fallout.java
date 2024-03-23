@@ -41,6 +41,10 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Ayula, Queen Among Bears", 348, Rarity.RARE, mage.cards.a.AyulaQueenAmongBears.class));
         cards.add(new SetCardInfo("Basilisk Collar", 225, Rarity.RARE, mage.cards.b.BasiliskCollar.class));
         cards.add(new SetCardInfo("Bastion of Remembrance", 182, Rarity.UNCOMMON, mage.cards.b.BastionOfRemembrance.class));
+        cards.add(new SetCardInfo("Battle of Hoover Dam", 11, Rarity.RARE, mage.cards.b.BattleOfHooverDam.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Battle of Hoover Dam", 364, Rarity.RARE, mage.cards.b.BattleOfHooverDam.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Battle of Hoover Dam", 539, Rarity.RARE, mage.cards.b.BattleOfHooverDam.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Battle of Hoover Dam", 892, Rarity.RARE, mage.cards.b.BattleOfHooverDam.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Behemoth Sledge", 211, Rarity.UNCOMMON, mage.cards.b.BehemothSledge.class));
         cards.add(new SetCardInfo("Biomass Mutation", 212, Rarity.RARE, mage.cards.b.BiomassMutation.class));
         cards.add(new SetCardInfo("Black Market", 183, Rarity.RARE, mage.cards.b.BlackMarket.class));

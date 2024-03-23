@@ -18,8 +18,8 @@ import java.util.UUID;
  */
 public class ReturnToBattlefieldUnderOwnerControlTargetEffect extends OneShotEffect {
 
-    private boolean tapped;
-    protected boolean returnFromExileZoneOnly;
+    private final boolean tapped;
+    private final boolean returnFromExileZoneOnly;
 
     /**
      * @param returnFromExileZoneOnly see https://github.com/magefree/mage/issues/5151
@@ -27,14 +27,10 @@ public class ReturnToBattlefieldUnderOwnerControlTargetEffect extends OneShotEff
      *                                return exiled card - true
      */
     public ReturnToBattlefieldUnderOwnerControlTargetEffect(boolean tapped, boolean returnFromExileZoneOnly) {
-        this(tapped, returnFromExileZoneOnly, "that card");
-    }
-
-    public ReturnToBattlefieldUnderOwnerControlTargetEffect(boolean tapped, boolean returnFromExileZoneOnly, String description) {
         super(Outcome.Benefit);
         this.tapped = tapped;
         this.returnFromExileZoneOnly = returnFromExileZoneOnly;
-        staticText = "return " + description + " to the battlefield " + (tapped ? "tapped " : "") + "under its owner's control";
+        staticText = "return that card to the battlefield " + (tapped ? "tapped " : "") + "under its owner's control";
     }
 
     protected ReturnToBattlefieldUnderOwnerControlTargetEffect(final ReturnToBattlefieldUnderOwnerControlTargetEffect effect) {

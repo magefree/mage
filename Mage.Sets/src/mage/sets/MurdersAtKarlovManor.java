@@ -50,6 +50,8 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Branch of Vitu-Ghazi", 258, Rarity.UNCOMMON, mage.cards.b.BranchOfVituGhazi.class));
         cards.add(new SetCardInfo("Burden of Proof", 42, Rarity.UNCOMMON, mage.cards.b.BurdenOfProof.class));
         cards.add(new SetCardInfo("Buried in the Garden", 191, Rarity.UNCOMMON, mage.cards.b.BuriedInTheGarden.class));
+        cards.add(new SetCardInfo("Call a Surprise Witness", 6, Rarity.UNCOMMON, mage.cards.c.CallASurpriseWitness.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Call a Surprise Witness", 289, Rarity.UNCOMMON, mage.cards.c.CallASurpriseWitness.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Candlestick", 43, Rarity.UNCOMMON, mage.cards.c.Candlestick.class));
         cards.add(new SetCardInfo("Case of the Burning Masks", 113, Rarity.UNCOMMON, mage.cards.c.CaseOfTheBurningMasks.class));
         cards.add(new SetCardInfo("Case of the Crimson Pulse", 114, Rarity.RARE, mage.cards.c.CaseOfTheCrimsonPulse.class));
@@ -78,6 +80,7 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Cornered Crook", 120, Rarity.UNCOMMON, mage.cards.c.CorneredCrook.class));
         cards.add(new SetCardInfo("Crime Novelist", 121, Rarity.UNCOMMON, mage.cards.c.CrimeNovelist.class));
         cards.add(new SetCardInfo("Crimestopper Sprite", 49, Rarity.COMMON, mage.cards.c.CrimestopperSprite.class));
+        cards.add(new SetCardInfo("Crowd-Control Warden", 193, Rarity.COMMON, mage.cards.c.CrowdControlWarden.class));
         cards.add(new SetCardInfo("Cryptex", 251, Rarity.RARE, mage.cards.c.Cryptex.class));
         cards.add(new SetCardInfo("Culvert Ambusher", 158, Rarity.UNCOMMON, mage.cards.c.CulvertAmbusher.class));
         cards.add(new SetCardInfo("Curious Cadaver", 194, Rarity.UNCOMMON, mage.cards.c.CuriousCadaver.class));
@@ -101,6 +104,7 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Evidence Examiner", 201, Rarity.UNCOMMON, mage.cards.e.EvidenceExaminer.class));
         cards.add(new SetCardInfo("Exit Specialist", 55, Rarity.UNCOMMON, mage.cards.e.ExitSpecialist.class));
         cards.add(new SetCardInfo("Expedited Inheritance", 123, Rarity.MYTHIC, mage.cards.e.ExpeditedInheritance.class));
+        cards.add(new SetCardInfo("Extract a Confession", 84, Rarity.COMMON, mage.cards.e.ExtractAConfession.class));
         cards.add(new SetCardInfo("Ezrim, Agency Chief", 202, Rarity.RARE, mage.cards.e.EzrimAgencyChief.class));
         cards.add(new SetCardInfo("Fae Flight", 56, Rarity.UNCOMMON, mage.cards.f.FaeFlight.class));
         cards.add(new SetCardInfo("Faerie Snoop", 203, Rarity.COMMON, mage.cards.f.FaerieSnoop.class));

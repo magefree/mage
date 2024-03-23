@@ -1,33 +1,29 @@
-
-
 package mage.cards.v;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.common.DiesCreatureTriggeredAbility;
+import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- * @author Loki
+ * @author xenohedron
  */
 public final class VigilForTheLost extends CardImpl {
 
     public VigilForTheLost(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
 
-        this.addAbility(new VigilForTheLostTriggeredAbility());
+        // Whenever a creature you control dies, you may pay {X}. If you do, you gain X life.
+        this.addAbility(new DiesCreatureTriggeredAbility(new VigilForTheLostEffect(), true, StaticFilters.FILTER_CONTROLLED_A_CREATURE));
     }
 
     private VigilForTheLost(final VigilForTheLost card) {
@@ -41,47 +37,10 @@ public final class VigilForTheLost extends CardImpl {
 
 }
 
-class VigilForTheLostTriggeredAbility extends TriggeredAbilityImpl {
-    VigilForTheLostTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new VigilForTheLostEffect());
-    }
-
-    private VigilForTheLostTriggeredAbility(final VigilForTheLostTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public VigilForTheLostTriggeredAbility copy() {
-        return new VigilForTheLostTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        ZoneChangeEvent zoneChangeEvent = (ZoneChangeEvent) event;
-        if (zoneChangeEvent.isDiesEvent()) {
-            Permanent p = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-            if (p.isControlledBy(this.getControllerId()) && p.isCreature(game)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever a creature you control is put into a graveyard from the battlefield, you may pay {X}. If you do, you gain X life.";
-    }
-}
-
 class VigilForTheLostEffect extends OneShotEffect {
     VigilForTheLostEffect() {
         super(Outcome.GainLife);
-        staticText = "you may pay {X}. If you do, you gain X life";
+        staticText = "pay {X}. If you do, you gain X life";
     }
 
     private VigilForTheLostEffect(final VigilForTheLostEffect effect) {
@@ -90,17 +49,16 @@ class VigilForTheLostEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        ManaCostsImpl cost = new ManaCostsImpl<>("{X}");
-        cost.clearPaid();
-        if (cost.payOrRollback(source, game, source, source.getControllerId())) {
-            Player player = game.getPlayer(source.getControllerId());
-            if (player != null) {
-                player.gainLife(cost.getX(), game, source);
-                return true;
-            }
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
+            return false;
+        }
+        int costX = controller.announceXMana(0, Integer.MAX_VALUE, "Announce the value for {X}", game, source);
+        if (new GenericManaCost(costX).pay(source, game, source, source.getControllerId(), false, null)) {
+            controller.gainLife(costX, game, source);
+            return true;
         }
         return false;
-
     }
 
     @Override
