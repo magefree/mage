@@ -1,0 +1,62 @@
+name: CI
+
+on:
+  push:
+    paths:
+      - '**.java'
+      - '**.xml'
+  pull_request:
+    branches:
+      - master
+    paths:
+      - '**.java'
+      - '**.xml'
+
+env:
+  MAVEN_OPTS: -Xmx3g -Dhttp.keepAlive=false -Dmaven.wagon.http.pool=false -Dmaven.wagon.httpconnectionManager.ttlSeconds=120
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          java-version: 8
+          java-package: jdk+fx
+          # https://github.com/actions/setup-java#supported-distributions
+          distribution: zulu
+          cache: maven
+
+      # https://docs.travis-ci.com/user/languages/java/#maven-dependency-management
+      - run: >
+          mvn
+          install
+          jacoco:prepare-agent
+          --define jacoco.skip=false
+          --define maven.javadoc.skip=true
+          --define skipTests=true
+          --batch-mode
+          --show-version
+
+      # https://docs.travis-ci.com/user/languages/java/#maven-default-script-command
+      # tests are interdependent and require a specific order
+      # running in parallel causes some tests to fail
+      - run: mvn test --batch-mode
+
+      - env:
+          CI_BUILD_NUMBER: ${{ github.run_id }}
+          CI_BUILD_URL: https://github.com/${{ github.repository }}/pull/${{ github.event.pull_request.number }}/checks
+          CI_BRANCH: ${{ github.head_ref }}
+          CI_NAME: github
+          CI_PULL_REQUEST: ${{ github.event.pull_request.number }}
+        # do we need all these goals? Most other projects just do jacoco:report and coveralls:report
+        run: >
+          mvn
+          jacoco:report
+          jacoco:report-aggregate
+          verify
+          coveralls:report
+          --define jacoco.skip=false
+          --define repoToken=${{ secrets.GITHUB_TOKEN }}
