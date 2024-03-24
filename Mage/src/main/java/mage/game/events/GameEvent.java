@@ -493,12 +493,14 @@ public class GameEvent implements Serializable {
         STAY_ATTACHED,
         ADD_COUNTER, COUNTER_ADDED,
         ADD_COUNTERS, COUNTERS_ADDED,
-        /* REMOVE_COUNTER, REMOVE_COUNTERS
+        /* REMOVE_COUNTER, REMOVE_COUNTERS, COUNTER_REMOVED, COUNTERS_REMOVED
          targetId    id of the permanent or player losing counter(s)
          sourceId    id of the ability removing them
-         playerId    player who controls the permanent losing counters, or the player losing counter(s)
+         playerId    player who controls the ability removing the counters, or if not applicable,
+                     the controller of the permanent losing counter(s), or if neither are applicable, null.
          amount      number of counters being removed
          flag        true = removed due to any type of damage
+         data        name of the counter(s) being removed
          */
         REMOVE_COUNTER, REMOVE_COUNTERS,
         COUNTER_REMOVED, COUNTERS_REMOVED,
