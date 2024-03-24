@@ -2410,10 +2410,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             if (!counters.removeCounter(name, 1)) {
                 break;
             }
-            event = GameEvent.getEvent(GameEvent.EventType.COUNTER_REMOVED,
-                    getId(), source, (source == null ? null : source.getControllerId()));
-            event.setData(name);
-            event.setAmount(1);
+            event = new CounterRemovedEvent(name, this, source, false);
             game.fireEvent(event);
             finalAmount++;
         }
