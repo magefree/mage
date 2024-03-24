@@ -86,7 +86,7 @@ public class OneOrMoreDealDamageTriggeredAbility extends TriggeredAbilityImpl {
         this.getAllEffects().setValue("damage", events.stream().mapToInt(DamagedEvent::getAmount).sum());
         switch (setTargetPointer) {
             case PLAYER:
-                this.getAllEffects().setTargetPointer(new FixedTarget(event.getPlayerId()));
+                this.getAllEffects().setTargetPointer(new FixedTarget(event.getTargetId()));
                 break;
             case NONE:
                 break;

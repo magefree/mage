@@ -84,7 +84,7 @@ class ContestedGameBallTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (((DamagedBatchForOnePlayerEvent) event).isCombatDamage() && event.getPlayerId().equals(this.getControllerId())) {
+        if (((DamagedBatchForOnePlayerEvent) event).isCombatDamage() && event.getTargetId().equals(this.getControllerId())) {
             this.getAllEffects().setTargetPointer(new FixedTarget(game.getActivePlayerId()));
             // attacking player is active player
             return true;
