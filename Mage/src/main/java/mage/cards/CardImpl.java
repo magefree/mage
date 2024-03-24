@@ -809,13 +809,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     @Override
     public void removeCounters(String name, int amount, Ability source, Game game, boolean isDamage) {
 
-        GameEvent removeCountersEvent = new GameEvent(GameEvent.EventType.REMOVE_COUNTERS, objectId, source, getControllerOrOwnerId(), amount, isDamage);
-        if (source != null
-                && source.getControllerId() != null) {
-            removeCountersEvent.setPlayerId(source.getControllerId()); // player who controls the source ability that removed the counters
-        }
-        removeCountersEvent.setData(name);
-
+        GameEvent removeCountersEvent = new RemoveCountersEvent(name, this, source, amount, isDamage);
         if (game.replaceEvent(removeCountersEvent)){
             return;
         }
@@ -824,7 +818,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         for (int i = 0; i < removeCountersEvent.getAmount(); i++) {
 
             GameEvent event = new RemoveCounterEvent(name, this, source, isDamage);
-
             if (game.replaceEvent(event)){
                 continue;
             }

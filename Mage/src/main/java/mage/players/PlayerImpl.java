@@ -2394,13 +2394,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public void removeCounters(String name, int amount, Ability source, Game game) {
 
-        GameEvent removeCountersEvent = new GameEvent(GameEvent.EventType.REMOVE_COUNTERS, playerId, source, playerId, amount, false);
-        if (source != null
-                && source.getControllerId() != null) {
-            removeCountersEvent.setPlayerId(source.getControllerId()); // player who controls the source ability that removed the counters
-        }
-        removeCountersEvent.setData(name);
-
+        GameEvent removeCountersEvent = new RemoveCountersEvent(name, this, source, amount, false);
         if (game.replaceEvent(removeCountersEvent)){
             return;
         }
@@ -2409,7 +2403,6 @@ public abstract class PlayerImpl implements Player, Serializable {
         for (int i = 0; i < amount; i++) {
 
             GameEvent event = new RemoveCounterEvent(name, this, source, false);
-
             if (game.replaceEvent(event)){
                 continue;
             }
