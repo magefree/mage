@@ -1,4 +1,4 @@
-package mage.client.table;
+package mage.components.table;
 
 /**
  * @author JayDi85

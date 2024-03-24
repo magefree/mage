@@ -36,7 +36,9 @@ public class DrawNthCardTriggeredAbility extends TriggeredAbilityImpl {
         super(zone, effect, optional);
         this.targetController = targetController;
         this.cardNumber = cardNumber;
-        this.addHint(hint);
+        if (targetController == TargetController.YOU) {
+            this.addHint(hint);
+        }
         setTriggerPhrase(generateTriggerPhrase());
     }
 

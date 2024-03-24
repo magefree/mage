@@ -13,6 +13,9 @@ import mage.client.util.MageTableRowSorter;
 import mage.client.util.URLHandler;
 import mage.client.util.gui.GuiDisplayUtil;
 import mage.client.util.gui.TableUtil;
+import mage.components.table.MageTable;
+import mage.components.table.TableInfo;
+import mage.components.table.TimeAgoTableCellRenderer;
 import mage.constants.*;
 import mage.game.match.MatchOptions;
 import mage.players.PlayerType;
@@ -155,19 +158,8 @@ public class TablesPanel extends javax.swing.JPanel {
 
     final JToggleButton[] filterButtons;
 
-    // time formater
-    private final PrettyTime timeFormater = new PrettyTime(Locale.ENGLISH);
-
-    // time ago renderer
-    TableCellRenderer timeAgoCellRenderer = new DefaultTableCellRenderer() {
-        @Override
-        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-            JLabel label = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-            Date d = (Date) value;
-            label.setText(timeFormater.format(d));
-            return label;
-        }
-    };
+    // time formatter
+    private final PrettyTime timeFormatter = new PrettyTime(Locale.ENGLISH);
 
     // duration renderer
     TableCellRenderer durationCellRenderer = new DefaultTableCellRenderer() {
@@ -177,8 +169,8 @@ public class TablesPanel extends javax.swing.JPanel {
             Long ms = (Long) value;
 
             if (ms != 0) {
-                Duration dur = timeFormater.approximateDuration(new Date(ms));
-                label.setText((timeFormater.formatDuration(dur)));
+                Duration dur = timeFormatter.approximateDuration(new Date(ms));
+                label.setText((timeFormatter.formatDuration(dur)));
             } else {
                 label.setText("");
             }
@@ -298,13 +290,8 @@ public class TablesPanel extends javax.swing.JPanel {
         initComponents();
         //  tableModel.setSession(session);
 
-        // formater
-        // change default just now from 60 to 30 secs
-        // see workaround for 4.0 versions: https://github.com/ocpsoft/prettytime/issues/152
-        TimeFormat timeFormat = timeFormater.removeUnit(JustNow.class);
-        JustNow newJustNow = new JustNow();
-        newJustNow.setMaxQuantity(1000L * 30L); // 30 seconds gap (show "just now" from 0 to 30 secs)
-        timeFormater.registerUnit(newJustNow, timeFormat);
+        // formatter
+        MageTable.fixTimeFormatter(this.timeFormatter);
 
         // 1. TABLE CURRENT
         tableTables.createDefaultColumnsFromModel();
@@ -334,7 +321,7 @@ public class TablesPanel extends javax.swing.JPanel {
         tableTables.setRowSorter(activeTablesSorter);
 
         // time ago
-        tableTables.getColumnModel().getColumn(TablesTableModel.COLUMN_CREATED).setCellRenderer(timeAgoCellRenderer);
+        tableTables.getColumnModel().getColumn(TablesTableModel.COLUMN_CREATED).setCellRenderer(TimeAgoTableCellRenderer.getInstance());
         // skill level
         tableTables.getColumnModel().getColumn(TablesTableModel.COLUMN_SKILL).setCellRenderer(skillCellRenderer);
         // seats
@@ -545,7 +532,7 @@ public class TablesPanel extends javax.swing.JPanel {
         table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
-                int modelRow = TablesUtil.getSelectedModelRow(table);
+                int modelRow = MageTable.getSelectedModelRow(table);
                 if (modelRow != -1) {
                     // needs only selected
                     String rowId = TablesUtil.getSearchIdFromTable(table, modelRow);
@@ -563,7 +550,7 @@ public class TablesPanel extends javax.swing.JPanel {
                     public void run() {
                         String lastRowID = tablesLastSelection.get(table);
                         int needModelRow = TablesUtil.findTableRowFromSearchId(table.getModel(), lastRowID);
-                        int needViewRow = TablesUtil.getViewRowFromModel(table, needModelRow);
+                        int needViewRow = MageTable.getViewRowFromModel(table, needModelRow);
                         if (needViewRow != -1) {
                             table.clearSelection();
                             table.addRowSelectionInterval(needViewRow, needViewRow);
@@ -581,7 +568,7 @@ public class TablesPanel extends javax.swing.JPanel {
                 if (!SwingUtilities.isLeftMouseButton(e)) {
                     return;
                 }
-                int modelRow = TablesUtil.getSelectedModelRow(table);
+                int modelRow = MageTable.getSelectedModelRow(table);
                 if (e.getClickCount() == 2 && modelRow != -1) {
                     action.actionPerformed(new ActionEvent(table, ActionEvent.ACTION_PERFORMED, TablesUtil.getSearchIdFromTable(table, modelRow)));
                 }
