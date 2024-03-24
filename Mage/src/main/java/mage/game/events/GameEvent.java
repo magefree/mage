@@ -124,6 +124,11 @@ public class GameEvent implements Serializable {
          */
         DAMAGED_BATCH_FOR_ONE_PLAYER,
 
+        /* DAMAGED_BATCH_FOR_ALL
+        includes all damage events, both permanent damage and player damage, in single batch event
+         */
+        DAMAGED_BATCH_FOR_ALL,
+
         /* DAMAGE_CAUSES_LIFE_LOSS,
          targetId    the id of the damaged player
          sourceId    sourceId of the ability which caused the damage, can be null for default events like combat
