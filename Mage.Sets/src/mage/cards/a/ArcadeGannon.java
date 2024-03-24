@@ -63,6 +63,8 @@ public final class ArcadeGannon extends CardImpl {
                 CardType.ARTIFACT.getPredicate(),
                 SubType.HUMAN.getPredicate()
         ));
+        filter.add(ManaValueLessThanOrEqualToSourcePowerPredicate.instance);
+        filter.withMessage("an artifact or Human spell from your graveyard with mana value less than or equal to the number of quest counters on Arcade Gannon.");
     }
 
     public ArcadeGannon(UUID ownerId, CardSetInfo setInfo) {
@@ -79,12 +81,9 @@ public final class ArcadeGannon extends CardImpl {
         ability.addEffect(new AddCountersSourceEffect(CounterType.QUEST.createInstance(1)));
         this.addAbility(ability);
         // For Auld Lang Syne -- Once during each of your turns, you may cast an artifact or Human spell from your graveyard with mana value less than or equal to the number of quest counters on Arcade Gannon.
-        this.addAbility(
-                new SimpleStaticAbility(new ArcadeGannonEffect(filter))
-                        .setIdentifier(MageIdentifier.OnceEachTurnCastWatcher)
-                        .addHint(OnceEachTurnCastWatcher.getHint()),
-                new OnceEachTurnCastWatcher()
-        );
+        Ability ability1 = new CastFromGraveyardOnceEachTurnAbility(filter);
+        ability1.withFlavorWord("For Auld Lang Syne");
+        this.addAbility(ability1);
     }
 
     private ArcadeGannon(final ArcadeGannon card) {
@@ -94,86 +93,5 @@ public final class ArcadeGannon extends CardImpl {
     @Override
     public ArcadeGannon copy() {
         return new ArcadeGannon(this);
-    }
-}
-
-class ArcadeGannonEffect extends AsThoughEffectImpl {
-
-    private final FilterCard filter;
-
-    ArcadeGannonEffect(FilterCard filter) {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
-        this.filter = filter;
-        this.staticText = "<i>For Auld Lang Syne </i>Once during each of your turns, you may cast " + filter.getMessage() + " from your graveyard with mana value less than or equal to the number of quest counters on Arcade Gannon.";
-    }
-
-    private ArcadeGannonEffect(final ArcadeGannonEffect effect) {
-        super(effect);
-        this.filter = effect.filter;
-    }
-
-    @Override
-    public ArcadeGannonEffect copy() {
-        return new ArcadeGannonEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        throw new IllegalArgumentException("Wrong code usage: can't call applies method on empty affectedAbility");
-    }
-
-    @Override
-    public boolean applies(UUID objectId, Ability affectedAbility, Ability source, Game game, UUID playerId) {
-        Player controller = game.getPlayer(source.getControllerId());
-        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
-        if (controller == null || sourcePermanent == null) {
-            return false;
-        }
-        if (game.isActivePlayer(playerId) // only during your turn
-                && source.isControlledBy(playerId) // only you may cast
-                && Zone.GRAVEYARD.equals(game.getState().getZone(objectId)) // from graveyard
-                && affectedAbility instanceof SpellAbility // characteristics to check
-        ) {
-            SpellAbility spellAbility = (SpellAbility) affectedAbility;
-            Card cardToCheck = spellAbility.getCharacteristics(game);
-            if (spellAbility.getManaCosts().isEmpty() || spellAbility.getCharacteristics(game).getManaValue() > game.getPermanent(source.getSourceId()).getCounters(game).getCount(CounterType.QUEST)) {
-                return false;
-            }
-            return spellAbility.spellCanBeActivatedRegularlyNow(playerId, game)
-                    && filter.match(cardToCheck, playerId, source, game);
-        }
-        return false;
-    }
-}
-
-class CastFromGraveyardOnceWatcher extends Watcher {
-
-    private final Set<MageObjectReference> usedFrom = new HashSet<>();
-
-    CastFromGraveyardOnceWatcher() {
-        super(WatcherScope.GAME);
-    }
-
-    @Override
-    public void watch(GameEvent event, Game game) {
-        if (GameEvent.EventType.SPELL_CAST.equals(event.getType())
-                && event.hasApprovingIdentifier(MageIdentifier.CastFromGraveyardOnceWatcher)) {
-            usedFrom.add(event.getAdditionalReference().getApprovingMageObjectReference());
-        }
-    }
-
-    @Override
-    public void reset() {
-        super.reset();
-        usedFrom.clear();
-    }
-
-    boolean abilityNotUsed(MageObjectReference mor) {
-        return !usedFrom.contains(mor);
     }
 }
