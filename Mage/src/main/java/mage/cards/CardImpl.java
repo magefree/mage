@@ -807,9 +807,9 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     }
 
     @Override
-    public void removeCounters(String name, int amount, Ability source, Game game, boolean damage) {
+    public void removeCounters(String name, int amount, Ability source, Game game, boolean isDamage) {
 
-        GameEvent removeCountersEvent = new GameEvent(GameEvent.EventType.REMOVE_COUNTERS, objectId, source, getControllerOrOwnerId(), amount, damage);
+        GameEvent removeCountersEvent = new GameEvent(GameEvent.EventType.REMOVE_COUNTERS, objectId, source, getControllerOrOwnerId(), amount, isDamage);
         if (source != null
                 && source.getControllerId() != null) {
             removeCountersEvent.setPlayerId(source.getControllerId()); // player who controls the source ability that removed the counters
@@ -823,7 +823,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         int finalAmount = 0;
         for (int i = 0; i < removeCountersEvent.getAmount(); i++) {
 
-            GameEvent removeCounterEvent = new GameEvent(GameEvent.EventType.REMOVE_COUNTER, objectId, source, getControllerOrOwnerId(), 1, damage);
+            GameEvent removeCounterEvent = new GameEvent(GameEvent.EventType.REMOVE_COUNTER, objectId, source, getControllerOrOwnerId(), 1, isDamage);
             if (source != null
                     && source.getControllerId() != null) {
                 removeCounterEvent.setPlayerId(source.getControllerId()); // player who controls the source ability that removed the counters
@@ -838,7 +838,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                 break;
             }
 
-            GameEvent event = new GameEvent(GameEvent.EventType.COUNTER_REMOVED, objectId, source, getControllerOrOwnerId(), 1, damage);
+            GameEvent event = new GameEvent(GameEvent.EventType.COUNTER_REMOVED, objectId, source, getControllerOrOwnerId(), 1, isDamage);
             if (source != null
                     && source.getControllerId() != null) {
                 event.setPlayerId(source.getControllerId()); // player who controls the source ability that removed the counter
@@ -848,7 +848,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
 
             finalAmount++;
         }
-        GameEvent event = new GameEvent(GameEvent.EventType.COUNTERS_REMOVED, objectId, source, getControllerOrOwnerId(), 1, damage);
+        GameEvent event = new GameEvent(GameEvent.EventType.COUNTERS_REMOVED, objectId, source, getControllerOrOwnerId(), 1, isDamage);
         if (source != null
                 && source.getControllerId() != null) {
             event.setPlayerId(source.getControllerId()); // player who controls the source ability that removed the counters
@@ -859,9 +859,9 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     }
 
     @Override
-    public void removeCounters(Counter counter, Ability source, Game game, boolean damage) {
+    public void removeCounters(Counter counter, Ability source, Game game, boolean isDamage) {
         if (counter != null) {
-            removeCounters(counter.getName(), counter.getCount(), source, game, damage);
+            removeCounters(counter.getName(), counter.getCount(), source, game, isDamage);
         }
     }
 
