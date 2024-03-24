@@ -830,7 +830,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
             }
             removeCounterEvent.setData(name);
 
-            if (game.replaceEvent(removeCountersEvent)){
+            if (game.replaceEvent(removeCounterEvent)){
                 continue;
             }
 
