@@ -831,13 +831,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
 
             finalAmount++;
         }
-        GameEvent event = new GameEvent(GameEvent.EventType.COUNTERS_REMOVED, objectId, source, getControllerOrOwnerId(), 1, isDamage);
-        if (source != null
-                && source.getControllerId() != null) {
-            event.setPlayerId(source.getControllerId()); // player who controls the source ability that removed the counters
-        }
-        event.setData(name);
-        event.setAmount(finalAmount);
+        GameEvent event = new CountersRemovedEvent(name, this, source, finalAmount, isDamage);
         game.fireEvent(event);
     }
 

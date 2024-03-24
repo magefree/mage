@@ -2414,10 +2414,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             game.fireEvent(event);
             finalAmount++;
         }
-        GameEvent event = GameEvent.getEvent(GameEvent.EventType.COUNTERS_REMOVED,
-                getId(), source, (source == null ? null : source.getControllerId()));
-        event.setData(name);
-        event.setAmount(finalAmount);
+        GameEvent event = new CountersRemovedEvent(name, this, source, finalAmount, false);
         game.fireEvent(event);
     }
 
