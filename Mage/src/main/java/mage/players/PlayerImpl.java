@@ -2175,8 +2175,9 @@ public abstract class PlayerImpl implements Player, Serializable {
                         + (atCombat ? " at combat" : "") + CardUtil.getSourceLogName(game, " from ", needId, "", ""));
             }
             if (event.getAmount() > 0) {
-                game.fireEvent(new GameEvent(GameEvent.EventType.LOST_LIFE,
-                        playerId, source, playerId, event.getAmount(), atCombat));
+                LifeLostEvent lifeLostEvent = new LifeLostEvent(playerId, source, event.getAmount(), atCombat);
+                game.fireEvent(lifeLostEvent);
+                game.getState().addSimultaneousLifeLossEventToBatches(lifeLostEvent, game);
             }
             return event.getAmount();
         }
