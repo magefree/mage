@@ -16,6 +16,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.continuous.SetBasePowerSourceEffect;
@@ -59,7 +60,7 @@ public final class RobobrainWarMind extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GetEnergyCountersControllerEffect(new PermanentsOnBattlefieldCount(filter))));
 
         // Whenever Robobrain War Mind attacks, you may pay {E}{E}{E}. If you do, draw a card.
-        this.addAbility(new AttacksTriggeredAbility(new DoIfCostPaid(new DrawCardTargetEffect(1, false), new PayEnergyCost(3))));
+        this.addAbility(new AttacksTriggeredAbility(new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new PayEnergyCost(3))));
     }
 
     private RobobrainWarMind(final RobobrainWarMind card) {
