@@ -6,20 +6,28 @@ import mage.players.Player;
 
 public class RemoveCounterEvent extends GameEvent {
 
+    boolean isDamage;
+
     public RemoveCounterEvent(String name, Card targetCard, Ability source, boolean isDamage){
         super(GameEvent.EventType.REMOVE_COUNTER, targetCard.getId(), source,
-                targetCard.getControllerOrOwnerId(), 1, isDamage);
+                targetCard.getControllerOrOwnerId());
 
         if (source != null && source.getControllerId() != null) {
             setPlayerId(source.getControllerId()); // player who controls the source ability that removed the counters
         }
         setData(name);
+        this.isDamage = isDamage;
     }
 
     public RemoveCounterEvent(String name, Player targetPlayer, Ability source, boolean isDamage){
         super(GameEvent.EventType.REMOVE_COUNTER, targetPlayer.getId(), source,
-                (source == null ? null : source.getControllerId()), 1, isDamage);
+                (source == null ? null : source.getControllerId()));
         setData(name);
+        this.isDamage = isDamage;
+    }
+
+    boolean counterRemovedDueToDamage(){
+        return this.isDamage;
     }
 
 }
