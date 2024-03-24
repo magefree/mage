@@ -2408,21 +2408,16 @@ public abstract class PlayerImpl implements Player, Serializable {
         int finalAmount = 0;
         for (int i = 0; i < amount; i++) {
 
-            GameEvent removeCounterEvent = new GameEvent(GameEvent.EventType.REMOVE_COUNTER, playerId, source, playerId, 1, false);
-            if (source != null
-                    && source.getControllerId() != null) {
-                removeCounterEvent.setPlayerId(source.getControllerId()); // player who controls the source ability that removed the counters
-            }
-            removeCounterEvent.setData(name);
+            GameEvent event = new RemoveCounterEvent(name, this, source, false);
 
-            if (game.replaceEvent(removeCountersEvent)){
+            if (game.replaceEvent(event)){
                 continue;
             }
 
             if (!counters.removeCounter(name, 1)) {
                 break;
             }
-            GameEvent event = GameEvent.getEvent(GameEvent.EventType.COUNTER_REMOVED,
+            event = GameEvent.getEvent(GameEvent.EventType.COUNTER_REMOVED,
                     getId(), source, (source == null ? null : source.getControllerId()));
             event.setData(name);
             event.setAmount(1);
