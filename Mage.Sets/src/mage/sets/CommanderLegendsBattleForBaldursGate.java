@@ -29,6 +29,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Agent of the Iron Throne", 107, Rarity.UNCOMMON, mage.cards.a.AgentOfTheIronThrone.class));
         cards.add(new SetCardInfo("Agent of the Shadow Thieves", 108, Rarity.UNCOMMON, mage.cards.a.AgentOfTheShadowThieves.class));
         cards.add(new SetCardInfo("Agitator Ant", 776, Rarity.RARE, mage.cards.a.AgitatorAnt.class));
+        cards.add(new SetCardInfo("Alaundo the Seer", 264, Rarity.RARE, mage.cards.a.AlaundoTheSeer.class));
         cards.add(new SetCardInfo("Alora, Merry Thief", 55, Rarity.UNCOMMON, mage.cards.a.AloraMerryThief.class));
         cards.add(new SetCardInfo("Altar of Bhaal", 109, Rarity.RARE, mage.cards.a.AltarOfBhaal.class));
         cards.add(new SetCardInfo("Amber Gristle O'Maul", 159, Rarity.UNCOMMON, mage.cards.a.AmberGristleOMaul.class));
