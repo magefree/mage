@@ -22,11 +22,17 @@ public class CommittedCrimeWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.TARGETED) {
-            Optional.ofNullable(CommittedCrimeTriggeredAbility.getCriminal(event, game))
-                    .filter(Objects::nonNull)
-                    .ifPresent(criminals::add);
+        switch (event.getType()) {
+            case SPELL_CAST:
+            case ACTIVATED_ABILITY:
+            case TRIGGERED_ABILITY:
+                break;
+            default:
+                return;
         }
+        Optional.ofNullable(CommittedCrimeTriggeredAbility.getCriminal(event, game))
+                .filter(Objects::nonNull)
+                .ifPresent(criminals::add);
     }
 
     @Override

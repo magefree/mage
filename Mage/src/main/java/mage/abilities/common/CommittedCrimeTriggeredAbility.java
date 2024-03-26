@@ -1,16 +1,23 @@
 package mage.abilities.common;
 
+import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
-import mage.cards.Card;
 import mage.constants.Zone;
+import mage.game.Controllable;
 import mage.game.Game;
+import mage.game.Ownerable;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
+import mage.game.stack.StackObject;
+import mage.target.Target;
 
+import java.util.Collection;
+import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * @author TheElk801
@@ -32,7 +39,14 @@ public class CommittedCrimeTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.TARGETED;
+        switch (event.getType()) {
+            case SPELL_CAST:
+            case ACTIVATED_ABILITY:
+            case TRIGGERED_ABILITY:
+                return true;
+            default:
+                return false;
+        }
     }
 
     @Override
@@ -41,34 +55,70 @@ public class CommittedCrimeTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     public static UUID getCriminal(GameEvent event, Game game) {
-        UUID controllerId = game.getControllerId(event.getSourceId());
-        if (controllerId == null) {
+        UUID controllerId;
+        Ability ability;
+        switch (event.getType()) {
+            case SPELL_CAST:
+                Spell spell = game.getSpell(event.getTargetId());
+                if (spell == null) {
+                    return null;
+                }
+                controllerId = spell.getControllerId();
+                ability = spell.getSpellAbility();
+                break;
+            case ACTIVATED_ABILITY:
+            case TRIGGERED_ABILITY:
+                StackObject stackObject = game.getStack().getStackObject(event.getTargetId());
+                if (stackObject == null) {
+                    return null;
+                }
+                controllerId = stackObject.getControllerId();
+                ability = stackObject.getStackAbility();
+                break;
+            default:
+                return null;
+        }
+        if (controllerId == null || ability == null) {
             return null;
         }
         Set<UUID> opponents = game.getOpponents(controllerId);
-        if (opponents.contains(event.getTargetId())) {
+        Set<UUID> targets = ability
+                .getModes()
+                .values()
+                .stream()
+                .map(Mode::getTargets)
+                .flatMap(Collection::stream)
+                .map(Target::getTargets)
+                .flatMap(Collection::stream)
+                .collect(Collectors.toSet());
+        // an opponent
+        if (targets
+                .stream()
+                .anyMatch(opponents::contains)
+                // an opponent's permanent
+                || targets
+                .stream()
+                .map(game::getPermanent)
+                .filter(Objects::nonNull)
+                .map(Controllable::getControllerId)
+                .anyMatch(opponents::contains)
+                // an opponent's spell
+                || targets
+                .stream()
+                .map(game::getSpell)
+                .filter(Objects::nonNull)
+                .map(Controllable::getControllerId)
+                .anyMatch(opponents::contains)
+                // a card in an opponent's graveyard
+                || targets
+                .stream()
+                .filter(uuid -> Zone.GRAVEYARD.match(game.getState().getZone(uuid)))
+                .map(game::getCard)
+                .filter(Objects::nonNull)
+                .map(Ownerable::getOwnerId)
+                .anyMatch(opponents::contains)) {
             return controllerId;
         }
-        Permanent permanent = game.getPermanent(event.getTargetId());
-        if (permanent != null) {
-            if (opponents.contains(permanent.getControllerId())) {
-                return controllerId;
-            }
-            return null;
-        }
-        Spell spell = game.getSpell(event.getTargetId());
-        if (spell != null) {
-            if (opponents.contains(spell.getControllerId())) {
-                return controllerId;
-            }
-            return null;
-        }
-        Card card = game.getSpell(event.getTargetId());
-        if (card == null
-                || game.getState().getZone(event.getTargetId()) == Zone.EXILED
-                || !opponents.contains(card.getOwnerId())) {
-            return null;
-        }
-        return controllerId;
+        return null;
     }
 }
