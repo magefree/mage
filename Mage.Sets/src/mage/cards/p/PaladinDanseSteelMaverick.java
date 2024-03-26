@@ -17,6 +17,7 @@ import mage.cards.CardSetInfo;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 
 /**
@@ -25,7 +26,7 @@ import mage.filter.predicate.Predicates;
  */
 public final class PaladinDanseSteelMaverick extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent();
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     static{
         filter.add(Predicates.or(
