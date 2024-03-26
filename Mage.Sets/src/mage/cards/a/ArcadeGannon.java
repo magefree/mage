@@ -10,13 +10,17 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.effects.common.DrawDiscardControllerEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.cards.Card;
 import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
+import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.card.ManaValueLessThanOrEqualToSourceQuestCounterPredicate;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 
 /**
  *
@@ -24,7 +28,7 @@ import mage.filter.predicate.card.ManaValueLessThanOrEqualToSourceQuestCounterPr
  */
 public final class ArcadeGannon extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("an artifact or Human spell from your graveyard with mana value less than or equal to the number of quest counters on Arcade Gannon");
+    private static final FilterCard filter = new FilterCard("an artifact or Human spell from your graveyard with mana value less than or equal to the number of quest counters on {this}");
 
     private static final DynamicValue xValue = new CountersSourceCount(CounterType.QUEST);
 
@@ -33,7 +37,7 @@ public final class ArcadeGannon extends CardImpl {
                 CardType.ARTIFACT.getPredicate(),
                 SubType.HUMAN.getPredicate()
         ));
-        filter.add(ManaValueLessThanOrEqualToSourceQuestCounterPredicate.instance);
+        filter.add(ArcadeGannonPredicate.instance);
     }
 
     public ArcadeGannon(UUID ownerId, CardSetInfo setInfo) {
@@ -60,5 +64,20 @@ public final class ArcadeGannon extends CardImpl {
     @Override
     public ArcadeGannon copy() {
         return new ArcadeGannon(this);
+    }
+}
+
+enum ArcadeGannonPredicate implements ObjectSourcePlayerPredicate<Card> {
+    instance;
+
+    @Override
+    public boolean apply(ObjectSourcePlayer<Card> input, Game game) {
+        Permanent sourcePermanent = input.getSource().getSourcePermanentOrLKI(game);
+        return sourcePermanent != null && input.getObject().getManaValue() <= sourcePermanent.getCounters(game).getCount(CounterType.QUEST);
+    }
+
+    @Override
+    public String toString() {
+        return "mana value less than or equal to {this}'s power";
     }
 }
