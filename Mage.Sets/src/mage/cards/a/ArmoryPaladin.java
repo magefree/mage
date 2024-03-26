@@ -41,7 +41,9 @@ public final class ArmoryPaladin extends CardImpl {
 
         // Whenever you cast an Aura or Equipment spell, exile the top card of your library. You may play that card until the end of your next turn.
         this.addAbility(new SpellCastControllerTriggeredAbility(
-                new ExileTopXMayPlayUntilEffect(1, Duration.UntilEndOfYourNextTurn), filter, false
+                new ExileTopXMayPlayUntilEffect(1, Duration.UntilEndOfYourNextTurn)
+                        .withTextOptions("that card", true),
+                filter, false
         ));
     }
 

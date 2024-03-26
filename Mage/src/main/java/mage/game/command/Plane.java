@@ -73,6 +73,7 @@ public abstract class Plane extends CommandObjectImpl {
         if (foundInfo != null) {
             this.setExpansionSetCode(foundInfo.getSetCode());
             this.setCardNumber("");
+            this.setImageFileName(""); // use default
             this.setImageNumber(foundInfo.getImageNumber());
         } else {
             // how-to fix: add plane to the tokens-database
@@ -101,6 +102,11 @@ public abstract class Plane extends CommandObjectImpl {
     public void setControllerId(UUID controllerId) {
         this.controllerId = controllerId;
         this.abilites.setControllerId(controllerId);
+    }
+
+    @Override
+    public UUID getControllerOrOwnerId() {
+        return getControllerId();
     }
 
     @Override

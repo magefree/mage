@@ -17,7 +17,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.SalamnderWarriorToken;
+import mage.game.permanent.token.SalamanderWarriorToken;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 
@@ -89,7 +89,7 @@ class AmphinMutineerEffect extends OneShotEffect {
             return false;
         }
         player.moveCards(permanent, Zone.EXILED, source, game);
-        new SalamnderWarriorToken().putOntoBattlefield(1, game, source, player.getId());
+        new SalamanderWarriorToken().putOntoBattlefield(1, game, source, player.getId());
         return true;
     }
 }

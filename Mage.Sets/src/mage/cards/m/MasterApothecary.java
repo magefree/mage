@@ -1,4 +1,3 @@
-
 package mage.cards.m;
 
 import java.util.UUID;
@@ -13,10 +12,10 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
-import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetControlledPermanent;
 
 /**
  *
@@ -24,7 +23,7 @@ import mage.target.common.TargetAnyTarget;
  */
 public final class MasterApothecary extends CardImpl {
     
-    static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("an untapped Cleric you control");
+    static final FilterControlledPermanent filter = new FilterControlledPermanent("an untapped Cleric you control");
     
     static {
         filter.add(SubType.CLERIC.getPredicate());
@@ -41,8 +40,8 @@ public final class MasterApothecary extends CardImpl {
 
         // Tap an untapped Cleric you control: Prevent the next 2 damage that would be dealt to any target this turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, 
-                                                        new PreventDamageToTargetEffect(Duration.EndOfTurn, 2), 
-                                                        new TapTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, true)));
+                new PreventDamageToTargetEffect(Duration.EndOfTurn, 2),
+                new TapTargetCost(new TargetControlledPermanent(filter)));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }

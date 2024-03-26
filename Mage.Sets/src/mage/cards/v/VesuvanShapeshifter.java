@@ -161,7 +161,8 @@ class VesuvanShapeshifterFaceDownEffect extends OneShotEffect {
 
         permanent.turnFaceDown(source, game, source.getControllerId());
         permanent.setManifested(false);
-        permanent.setMorphed(true);
+        permanent.setDisguised(false);
+        permanent.setMorphed(true); // cause it morph card TODO: smells bad
         return permanent.isFaceDown(game);
 
     }

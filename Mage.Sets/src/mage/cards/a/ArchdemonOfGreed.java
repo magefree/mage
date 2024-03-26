@@ -11,13 +11,11 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.TargetController;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetSacrifice;
 
 import java.util.UUID;
@@ -27,11 +25,10 @@ import java.util.UUID;
  */
 public final class ArchdemonOfGreed extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Human");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Human");
 
     static {
         filter.add(SubType.HUMAN.getPredicate());
-        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public ArchdemonOfGreed(UUID ownerId, CardSetInfo setInfo) {

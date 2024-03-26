@@ -55,11 +55,10 @@ public final class TransformedImageCache {
         }
     }
 
-    private static final SoftValuesLoadingCache<Key, SoftValuesLoadingCache<BufferedImage, BufferedImage>> IMAGE_CACHE;
+    private static final SoftValuesLoadingCache<Key, SoftValuesLoadingCache<BufferedImage, BufferedImage>> TRANSFORMED_IMAGES_CACHE;
 
     static {
-        // TODO: can we use a single map?
-        IMAGE_CACHE = ImageCaches.register(SoftValuesLoadingCache.from(TransformedImageCache::createTransformedImageCache));
+        TRANSFORMED_IMAGES_CACHE = ImageCaches.register(SoftValuesLoadingCache.from(TransformedImageCache::createTransformedImageCache));
     }
 
     private static SoftValuesLoadingCache<BufferedImage, BufferedImage> createTransformedImageCache(Key key) {
@@ -139,6 +138,6 @@ public final class TransformedImageCache {
         if (resHeight < 3) {
             resHeight = 3;
         }
-        return IMAGE_CACHE.getOrThrow(new Key(resWidth, resHeight, angle)).getOrThrow(image);
+        return TRANSFORMED_IMAGES_CACHE.getOrThrow(new Key(resWidth, resHeight, angle)).getOrThrow(image);
     }
 }

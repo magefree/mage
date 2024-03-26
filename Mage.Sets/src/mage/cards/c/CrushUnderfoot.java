@@ -47,7 +47,7 @@ public final class CrushUnderfoot extends CardImpl {
 
 class CrushUnderfootEffect extends OneShotEffect {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Giant you control");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Giant creature you control");
     static {
         filter.add(SubType.GIANT.getPredicate());
     }

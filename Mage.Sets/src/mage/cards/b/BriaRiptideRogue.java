@@ -43,7 +43,7 @@ public final class BriaRiptideRogue extends CardImpl {
 
         // Whenever you cast a noncreature spell, target creature you control can't be blocked this turn.
         Ability ability = new SpellCastControllerTriggeredAbility(
-                new CantBeBlockedTargetEffect(), StaticFilters.FILTER_SPELL_A_NON_CREATURE, true
+                new CantBeBlockedTargetEffect(), StaticFilters.FILTER_SPELL_A_NON_CREATURE, false
         );
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);

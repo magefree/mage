@@ -21,8 +21,10 @@ public final class ThrummingStone extends CardImpl {
         this.supertype.add(SuperType.LEGENDARY);
 
         // Spells you cast have ripple 4.
-        this.addAbility(new SimpleStaticAbility(new GainAbilityControlledSpellsEffect(new RippleAbility(4), StaticFilters.FILTER_CARD)
-                .setText("spells you cast have ripple 4")));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityControlledSpellsEffect(new RippleAbility(4), StaticFilters.FILTER_CARD_NON_LAND)
+                .setText("Spells you cast have ripple 4. <i>(Whenever you cast a spell, you may reveal the top four cards " +
+                        "of your library. You may cast spells with the same name as that spell from among the revealed " +
+                        "cards without paying their mana costs. Put the rest on the bottom of your library.)</i>")));
     }
 
     private ThrummingStone(final ThrummingStone card) {

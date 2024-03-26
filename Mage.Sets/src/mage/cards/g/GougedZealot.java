@@ -1,20 +1,19 @@
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.condition.common.DeliriumCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DamageAllControlledTargetEffect;
 import mage.abilities.hint.common.CardTypesInGraveyardHint;
-import mage.constants.*;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.StaticFilters;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.constants.CardType;
+import mage.constants.SetTargetPointer;
+import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -35,7 +34,7 @@ public final class GougedZealot extends CardImpl {
 
         // Delirium — Whenever Gouged Zealot attacks, if there are four or more card types among cards in your graveyard, Gouged Zealot deals 1 damage to each creature defending player controls.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new AttacksTriggeredAbility(new GougedZealotEffect(), false, null, SetTargetPointer.PLAYER),
+                new AttacksTriggeredAbility(new DamageAllControlledTargetEffect(1), false, null, SetTargetPointer.PLAYER),
                 DeliriumCondition.instance,
                 "<i>Delirium</i> &mdash; Whenever {this} attacks, if there are four or more card types among cards in your graveyard, {this} deals 1 damage to each creature defending player controls."
         ).addHint(CardTypesInGraveyardHint.YOU));
@@ -48,34 +47,5 @@ public final class GougedZealot extends CardImpl {
     @Override
     public GougedZealot copy() {
         return new GougedZealot(this);
-    }
-}
-
-class GougedZealotEffect extends OneShotEffect {
-
-    GougedZealotEffect() {
-        super(Outcome.Damage);
-        this.staticText = "{this} deals 1 damage to each creature defending player controls";
-    }
-
-    private GougedZealotEffect(final GougedZealotEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public GougedZealotEffect copy() {
-        return new GougedZealotEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        UUID defendingPlayerId = getTargetPointer().getFirst(game, source);
-        if (defendingPlayerId != null) {
-            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, defendingPlayerId, game)) {
-                permanent.damage(1, source.getSourceId(), source, game);
-            }
-            return true;
-        }
-        return false;
     }
 }

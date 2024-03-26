@@ -7,7 +7,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
+import mage.filter.common.FilterNonlandCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 
@@ -18,11 +18,10 @@ import java.util.UUID;
  */
 public final class InspiringStatuary extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("nonartifact spells you cast");
+    private static final FilterNonlandCard filter = new FilterNonlandCard("nonartifact spells you cast");
 
     static {
         filter.add(Predicates.not(CardType.ARTIFACT.getPredicate()));
-        filter.add(Predicates.not(CardType.LAND.getPredicate()));
         filter.add(Predicates.not(new AbilityPredicate(ImproviseAbility.class))); // So there are not redundant copies being added to each card
     }
 

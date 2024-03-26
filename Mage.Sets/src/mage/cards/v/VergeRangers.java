@@ -4,14 +4,12 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.LookAtTopCardOfLibraryAnyTimeEffect;
-import mage.abilities.effects.common.continuous.PlayTheTopCardEffect;
+import mage.abilities.effects.common.continuous.PlayFromTopOfLibraryEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterLandCard;
@@ -41,7 +39,7 @@ public final class VergeRangers extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new LookAtTopCardOfLibraryAnyTimeEffect()));
 
         // As long as an opponent controls more lands than you, you may play lands from the top of your library.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new VergeRangersEffect()));
+        this.addAbility(new SimpleStaticAbility(new VergeRangersEffect()));
     }
 
     private VergeRangers(final VergeRangers card) {
@@ -54,12 +52,12 @@ public final class VergeRangers extends CardImpl {
     }
 }
 
-class VergeRangersEffect extends PlayTheTopCardEffect {
+class VergeRangersEffect extends PlayFromTopOfLibraryEffect {
 
     private static final FilterCard filter = new FilterLandCard("play lands");
 
-    public VergeRangersEffect() {
-        super(TargetController.YOU, filter, false);
+    VergeRangersEffect() {
+        super(filter);
         staticText = "As long as an opponent controls more lands than you, you may play lands from the top of your library";
     }
 

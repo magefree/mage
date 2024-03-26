@@ -67,11 +67,9 @@ public abstract class DamagedBatchEvent extends GameEvent implements BatchGameEv
     public static DamagedBatchEvent makeEvent(DamagedEvent damagedEvent) {
         DamagedBatchEvent event;
         if (damagedEvent instanceof DamagedPlayerEvent) {
-            event = new DamagedBatchForPlayersEvent();
-            event.addEvent(damagedEvent);
+            event = new DamagedBatchForPlayersEvent(damagedEvent);
         } else if (damagedEvent instanceof DamagedPermanentEvent) {
-            event = new DamagedBatchForPermanentsEvent();
-            event.addEvent(damagedEvent);
+            event = new DamagedBatchForPermanentsEvent(damagedEvent);
         } else {
             throw new IllegalArgumentException("Wrong code usage. Unknown damage event for a new batch: " + damagedEvent.getClass().getName());
         }

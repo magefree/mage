@@ -11,6 +11,7 @@ import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
+import mage.abilities.effects.common.TapSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
@@ -29,8 +30,11 @@ public final class PeatBog extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // Peat Bog enters the battlefield tapped with two depletion counters on it.
-        this.addAbility(new EntersBattlefieldTappedAbility());
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.DEPLETION.createInstance(2))));
+        Ability etbAbility = new EntersBattlefieldAbility(
+                new TapSourceEffect(true), "tapped with two depletion counters on it"
+        );
+        etbAbility.addEffect(new AddCountersSourceEffect(CounterType.DEPLETION.createInstance(2)));
+        this.addAbility(etbAbility);
         // {T}, Remove a depletion counter from Peat Bog: Add {B}{B}. If there are no depletion counters on Peat Bog, sacrifice it.
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlackMana(2), new TapSourceCost());
         ability.addCost(new RemoveCountersSourceCost(CounterType.DEPLETION.createInstance(1)));

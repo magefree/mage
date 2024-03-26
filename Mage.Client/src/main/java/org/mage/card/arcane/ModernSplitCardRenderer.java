@@ -158,7 +158,7 @@ public class ModernSplitCardRenderer extends ModernCardRenderer {
     @Override
     protected void drawBackground(Graphics2D g) {
         if (cardView.isFaceDown()) {
-            drawCardBack(g);
+            drawCardBackTexture(g);
         } if (isAdventure()) {
             super.drawBackground(g);
         } else {
@@ -206,7 +206,7 @@ public class ModernSplitCardRenderer extends ModernCardRenderer {
     protected void drawArt(Graphics2D g) {
         if (isAdventure) {
             super.drawArt(g);
-        } else if (artImage != null && !cardView.isFaceDown()) {
+        } else if (artImage != null) {
             if (isAftermath()) {
                 Rectangle2D topRect = ArtRect.AFTERMATH_TOP.rect;
                 int topLineY = (int) (leftHalf.ch * TYPE_LINE_Y_FRAC);

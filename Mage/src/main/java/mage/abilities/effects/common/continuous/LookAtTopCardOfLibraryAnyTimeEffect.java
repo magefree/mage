@@ -1,63 +1,32 @@
 package mage.abilities.effects.common.continuous;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.Card;
-import mage.constants.*;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.players.Player;
-import mage.util.CardUtil;
-
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
-import java.util.UUID;
 
 /**
  * @author TheElk801
  */
 public class LookAtTopCardOfLibraryAnyTimeEffect extends ContinuousEffectImpl {
 
-    private final TargetController targetLibrary;
-
     public LookAtTopCardOfLibraryAnyTimeEffect() {
-        this(TargetController.YOU, Duration.WhileOnBattlefield);
+        this(Duration.WhileOnBattlefield);
     }
 
-    public LookAtTopCardOfLibraryAnyTimeEffect(TargetController targetLibrary, Duration duration) {
+    public LookAtTopCardOfLibraryAnyTimeEffect(Duration duration) {
         super(duration, Layer.PlayerEffects, SubLayer.NA, Outcome.Benefit);
-        this.targetLibrary = targetLibrary;
-
-        String libInfo;
-        switch (this.targetLibrary) {
-            case YOU:
-                libInfo = "your library";
-                break;
-            case OPPONENT:
-                libInfo = "opponents libraries";
-                break;
-            case SOURCE_TARGETS:
-                libInfo = "target player's library";
-                break;
-            default:
-                throw new IllegalArgumentException("Unknown target library type: " + targetLibrary);
-        }
-        StringBuilder sb = new StringBuilder();
-        String durationString = duration.toString();
-        if (durationString != null && !durationString.isEmpty()) {
-            sb.append(durationString);
-            sb.append(", ");
-        }
-        sb.append("you may look at the top card of ");
-        sb.append(libInfo);
-        sb.append(" any time");
-        staticText = sb.toString();
+        staticText = (duration.toString().isEmpty() ? "" : duration.toString() + ", ") +
+                "you may look at the top card of your library any time";
     }
 
     protected LookAtTopCardOfLibraryAnyTimeEffect(final LookAtTopCardOfLibraryAnyTimeEffect effect) {
         super(effect);
-        this.targetLibrary = effect.targetLibrary;
     }
 
     @Override
@@ -72,43 +41,11 @@ public class LookAtTopCardOfLibraryAnyTimeEffect extends ContinuousEffectImpl {
         if (!canLookAtNextTopLibraryCard(game)) {
             return false;
         }
-        MageObject obj = source.getSourceObject(game);
-        if (obj == null) {
+        Card topCard = controller.getLibrary().getFromTop(game);
+        if (topCard == null) {
             return false;
         }
-
-        Set<UUID> needPlayers = new HashSet<>();
-        switch (this.targetLibrary) {
-            case YOU: {
-                needPlayers.add(source.getControllerId());
-                break;
-            }
-            case OPPONENT: {
-                needPlayers.addAll(game.getOpponents(source.getControllerId()));
-                break;
-            }
-            case SOURCE_TARGETS: {
-                needPlayers.addAll(CardUtil.getAllSelectedTargets(source, game));
-                break;
-            }
-        }
-
-        Set<Card> needCards = new HashSet<>();
-        needPlayers.stream()
-                .map(game::getPlayer)
-                .filter(Objects::nonNull)
-                .map(player -> player.getLibrary().getFromTop(game))
-                .filter(Objects::nonNull)
-                .forEach(needCards::add);
-        if (needCards.isEmpty()) {
-            return false;
-        }
-
-        // all fine, can show top card
-        needCards.forEach(topCard -> {
-            Player owner = game.getPlayer(topCard.getOwnerId());
-            controller.lookAtCards(String.format("%s: top card of %s", obj.getName(), owner == null ? "error" : owner.getName()), topCard, game);
-        });
+        controller.lookAtCards("Top card of your library", topCard, game);
         return true;
     }
 

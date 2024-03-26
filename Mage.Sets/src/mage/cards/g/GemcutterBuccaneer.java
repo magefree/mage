@@ -36,7 +36,7 @@ import mage.target.TargetPermanent;
  */
 public final class GemcutterBuccaneer extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledCreaturePermanent(SubType.PIRATE, "Pirate");
+    private static final FilterPermanent filter = new FilterControlledPermanent(SubType.PIRATE, "Pirate");
 
     public GemcutterBuccaneer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");

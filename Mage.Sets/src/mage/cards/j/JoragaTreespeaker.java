@@ -1,5 +1,3 @@
-
-
 package mage.cards.j;
 
 import java.util.UUID;
@@ -21,7 +19,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 
 
 /**
@@ -30,7 +28,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  */
 public final class JoragaTreespeaker extends LevelerCard {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Elves");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Elves");
 
     static {
         filter.add(SubType.ELF.getPredicate());

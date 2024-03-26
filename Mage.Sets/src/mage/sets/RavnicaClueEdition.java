@@ -145,7 +145,7 @@ public final class RavnicaClueEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Living Lightning", 142, Rarity.UNCOMMON, mage.cards.l.LivingLightning.class));
         cards.add(new SetCardInfo("Lonis, Genetics Expert", 37, Rarity.RARE, mage.cards.l.LonisGeneticsExpert.class));
         cards.add(new SetCardInfo("Lounge", 19, Rarity.UNCOMMON, mage.cards.l.Lounge.class));
-        cards.add(new SetCardInfo("Martial Impetus", 65, Rarity.UNCOMMON, mage.cards.m.MartialImpetus.class));
+        cards.add(new SetCardInfo("Martial Impetus", 65, Rarity.COMMON, mage.cards.m.MartialImpetus.class));
         cards.add(new SetCardInfo("Masked Blackguard", 115, Rarity.COMMON, mage.cards.m.MaskedBlackguard.class));
         cards.add(new SetCardInfo("Master Biomancer", 200, Rarity.MYTHIC, mage.cards.m.MasterBiomancer.class));
         cards.add(new SetCardInfo("Mastermind Plum", 3, Rarity.RARE, mage.cards.m.MastermindPlum.class));
@@ -170,7 +170,7 @@ public final class RavnicaClueEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Pitiless Gorgon", 203, Rarity.COMMON, mage.cards.p.PitilessGorgon.class));
         cards.add(new SetCardInfo("Plains", 254, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Predatory Impetus", 172, Rarity.COMMON, mage.cards.p.PredatoryImpetus.class));
-        cards.add(new SetCardInfo("Psychic Impetus", 92, Rarity.UNCOMMON, mage.cards.p.PsychicImpetus.class));
+        cards.add(new SetCardInfo("Psychic Impetus", 92, Rarity.COMMON, mage.cards.p.PsychicImpetus.class));
         cards.add(new SetCardInfo("Pyrewild Shaman", 144, Rarity.UNCOMMON, mage.cards.p.PyrewildShaman.class));
         cards.add(new SetCardInfo("Rakdos Carnarium", 243, Rarity.COMMON, mage.cards.r.RakdosCarnarium.class));
         cards.add(new SetCardInfo("Rakdos Guildgate", 244, Rarity.COMMON, mage.cards.r.RakdosGuildgate.class));

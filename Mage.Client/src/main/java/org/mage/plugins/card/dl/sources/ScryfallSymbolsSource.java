@@ -1,17 +1,18 @@
 package org.mage.plugins.card.dl.sources;
 
+import org.mage.plugins.card.dl.DownloadJob;
+import org.mage.plugins.card.utils.CardImageUtils;
+
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.io.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import org.mage.plugins.card.dl.DownloadJob;
-import org.mage.plugins.card.utils.CardImageUtils;
-
 
 import static org.mage.card.arcane.ManaSymbols.getSymbolFileNameAsSVG;
 import static org.mage.plugins.card.utils.CardImageUtils.getImagesDir;
@@ -105,7 +106,7 @@ public class ScryfallSymbolsSource implements Iterable<DownloadJob> {
             if (destFile.exists() && (destFile.length() > 0)) {
                 continue;
             }
-            try(FileOutputStream stream  = new FileOutputStream(destFile)) {
+            try (FileOutputStream stream = new FileOutputStream(destFile)) {
                 // base64 transform
                 String data64 = foundedData.get(searchCode);
                 Base64.Decoder dec = Base64.getDecoder();
@@ -166,16 +167,14 @@ public class ScryfallSymbolsSource implements Iterable<DownloadJob> {
             }
         }
 
-        private String destFile = "";
-
         public ScryfallSymbolsDownloadJob() {
             // download init
-            super("Scryfall symbols source", fromURL(""), toFile(DOWNLOAD_TEMP_FILE)); // url setup on preparing stage
-            this.destFile = DOWNLOAD_TEMP_FILE;
-            this.addPropertyChangeListener(STATE_PROP_NAME, new ScryfallDownloadOnFinishedListener(this.destFile));
+            super("Scryfall symbols source", fromURL(""), toFile(DOWNLOAD_TEMP_FILE), true); // url setup on preparing stage
+            String destFile = DOWNLOAD_TEMP_FILE;
+            this.addPropertyChangeListener(STATE_PROP_NAME, new ScryfallDownloadOnFinishedListener(destFile));
 
-            // clear dest file (always download new data)
-            File file = new File(this.destFile);
+            // duplicate a forceToDownload param above, but it's ok to clear temp file anyway
+            File file = new File(destFile);
             if (file.exists()) {
                 file.delete();
             }

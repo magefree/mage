@@ -360,6 +360,7 @@ public enum SubType {
     SKELETON("Skeleton", SubTypeSet.CreatureType),
     SLITH("Slith", SubTypeSet.CreatureType),
     SLIVER("Sliver", SubTypeSet.CreatureType),
+    SLOTH("Sloth", SubTypeSet.CreatureType),
     SLUG("Slug", SubTypeSet.CreatureType),
     SNAIL("Snail", SubTypeSet.CreatureType),
     SNAKE("Snake", SubTypeSet.CreatureType),
@@ -383,6 +384,7 @@ public enum SubType {
     SULLUSTAN("Sullustan", SubTypeSet.CreatureType, true), // Star Wars
     SURRAKAR("Surrakar", SubTypeSet.CreatureType),
     SURVIVOR("Survivor", SubTypeSet.CreatureType),
+    SYNTH("Synth", SubTypeSet.CreatureType),
     // T
     TENTACLE("Tentacle", SubTypeSet.CreatureType),
     TETRAVITE("Tetravite", SubTypeSet.CreatureType),
@@ -464,6 +466,7 @@ public enum SubType {
     GRIST("Grist", SubTypeSet.PlaneswalkerType),
     GUFF("Guff", SubTypeSet.PlaneswalkerType),
     HUATLI("Huatli", SubTypeSet.PlaneswalkerType),
+    INZERVA("Inzerva", SubTypeSet.PlaneswalkerType),
     JACE("Jace", SubTypeSet.PlaneswalkerType),
     JARED("Jared", SubTypeSet.PlaneswalkerType),
     JESKA("Jeska", SubTypeSet.PlaneswalkerType),

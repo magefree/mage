@@ -63,7 +63,7 @@ class AetherSnapEffect extends OneShotEffect {
             return false;
         }
         Cards tokens = new CardsImpl();
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(source.getSourceId(), game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
             if (permanent instanceof PermanentToken) {
                 tokens.add(permanent);
             }

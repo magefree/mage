@@ -2726,7 +2726,7 @@ public class VerifyCardDataTest {
             if (!card.isBasic()) {
                 fail(card, "supertype", "basic land must be SuperType.BASIC");
             }
-        } else if (name.equals("Wastes")) {
+        } else if (name.equals("Wastes") || name.equals("Snow-Covered Wastes")) {
             // Wastes are SuperType.BASIC but not necessarily Rarity.LAND
             if (!card.isBasic()) {
                 fail(card, "supertype", "Wastes must be SuperType.BASIC");

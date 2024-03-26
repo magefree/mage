@@ -58,10 +58,11 @@ public class NewPlayerPanel extends javax.swing.JPanel {
 
     protected void generateDeck() {
         String path = DeckGenerator.generateDeck();
-        if (path != null) {
-            this.txtPlayerDeck.setText(path);
-            MageFrame.getPreferences().put("defaultDeckPath", path);
+        if (path == null) {
+            return;
         }
+        this.txtPlayerDeck.setText(path);
+        MageFrame.getPreferences().put("defaultDeckPath", path);
     }
 
     public String getPlayerName() {

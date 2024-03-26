@@ -463,4 +463,9 @@ public class ForetellAbility extends SpecialAction {
         }
 
     }
+
+    public static boolean isCardInForetell(Card card, Game game) {
+        // searching ForetellCostAbility - it adds for foretelled cards only after exile
+        return card.getAbilities(game).containsClass(ForetellCostAbility.class);
+    }
 }

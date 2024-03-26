@@ -14,7 +14,7 @@ import mage.constants.SuperType;
 import mage.filter.FilterPermanent;
 import mage.filter.FilterPermanentThisOrAnother;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.game.permanent.token.SpiritWhiteToken;
 
 import java.util.UUID;
@@ -26,9 +26,7 @@ import java.util.UUID;
 public final class KingOfTheOathbreakers extends CardImpl {
 
     private static final FilterPermanent filter =
-        new FilterPermanentThisOrAnother(
-            new FilterControlledCreaturePermanent(SubType.SPIRIT),
-            true);
+        new FilterPermanentThisOrAnother(new FilterControlledPermanent(SubType.SPIRIT), true);
 
     public KingOfTheOathbreakers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{B}");

@@ -1,4 +1,3 @@
-
 package mage.cards.b;
 
 import java.util.UUID;
@@ -15,7 +14,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -80,10 +78,8 @@ class BloodlineShamanEffect extends OneShotEffect {
         if (!controller.choose(outcome, typeChoice, game)) {
             return false;
         }
-
+        SubType subType = SubType.byDescription(typeChoice.getChoice());
         game.informPlayers(sourceObject.getLogName() + " chosen type: " + typeChoice.getChoice());
-        FilterCard filterSubtype = new FilterCard();
-        filterSubtype.add(SubType.byDescription(typeChoice.getChoice()).getPredicate());
 
         // Reveal the top card of your library.
         if (controller.getLibrary().hasCards()) {
@@ -93,7 +89,7 @@ class BloodlineShamanEffect extends OneShotEffect {
 
             if (card != null) {
                 // If that card is a creature card of the chosen type, put it into your hand.
-                if (filterSubtype.match(card, game)) {
+                if (card.isCreature(game) && subType != null && card.getSubtype(game).contains(subType)) {
                     controller.moveCards(card, Zone.HAND, source, game);
                     // Otherwise, put it into your graveyard.
                 } else {

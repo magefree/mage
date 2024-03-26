@@ -290,11 +290,10 @@ public class DeckEditorPanel extends javax.swing.JPanel {
     private Card retrieveTemporaryCard(SimpleCardView cardView) {
         Card card = temporaryCards.get(cardView.getId());
         if (card == null) {
-            // Need to make a new card
-            Logger.getLogger(DeckEditorPanel.class).info("Retrieve " + cardView.getCardNumber() + " Failed");
+            // need to make a new card (example: on duplicate, on show hidden cards)
             card = CardRepository.instance.findCard(cardView.getExpansionSetCode(), cardView.getCardNumber()).createCard();
         } else {
-            // Only need a temporary card once
+            // restore temp card (example: after drag to new zone)
             temporaryCards.remove(cardView.getId());
         }
         return card;
@@ -1014,7 +1013,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         });
 
         btnGenDeck.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/card_panel.png"))); // NOI18N
-        btnGenDeck.setText("Random");
+        btnGenDeck.setText("Generate");
         btnGenDeck.setIconTextGap(1);
         btnGenDeck.setName("btnGenDeck"); // NOI18N
         btnGenDeck.addActionListener(new java.awt.event.ActionListener() {
@@ -1470,6 +1469,9 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         try {
             MageFrame.getDesktop().setCursor(new Cursor(Cursor.WAIT_CURSOR));
             String path = DeckGenerator.generateDeck();
+            if (path == null) {
+                return;
+            }
             deck = Deck.load(DeckImporter.importDeckFromFile(path, false), true, true);
         } catch (GameException ex) {
             JOptionPane.showMessageDialog(MageFrame.getDesktop(), ex.getMessage(), "Error loading generated deck", JOptionPane.ERROR_MESSAGE);

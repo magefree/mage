@@ -10,6 +10,7 @@ Apocalypse|Apocalypse|
 Archenemy|Archenemy|
 Archenemy: Nicol Bolas|ArchenemyNicolBolas|
 Arabian Nights|ArabianNights|
+Arena Beginner Set|ArenaBeginnerSet|
 Arena League|ArenaLeague|
 Asia Pacific Land Program|AsiaPacificLandProgram|
 Assassin's Creed|AssassinsCreed|
@@ -220,6 +221,7 @@ Saviors of Kamigawa|SaviorsOfKamigawa|
 Scars of Mirrodin|ScarsOfMirrodin|
 Scourge|Scourge|
 Secret Lair Drop|SecretLairDrop|
+Secret Lair Showdown|SecretLairShowdown|
 Seventh Edition|SeventhEdition|
 Shadowmoor|Shadowmoor|
 Shadows over Innistrad|ShadowsOverInnistrad|
@@ -227,6 +229,7 @@ Shards of Alara|ShardsOfAlara|
 Special Guests|SpecialGuests|
 Starter 1999|Starter1999|
 Starter 2000|Starter2000|
+Starter Commander Decks|StarterCommanderDecks|
 Star Wars|StarWars|
 Streets of New Capenna|StreetsOfNewCapenna|
 New Capenna Commander|NewCapennaCommander|

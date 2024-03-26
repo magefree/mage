@@ -19,7 +19,7 @@ public class RevealedView implements Serializable {
     public RevealedView(String name, Cards cards, Game game) {
         this.name = name;
         for (Card card : cards.getCards(game)) {
-            this.cards.put(card.getId(), new CardView(card, game, card.getId()));
+            this.cards.put(card.getId(), new CardView(card, game));
         }
     }
 

@@ -146,37 +146,47 @@ public final class CardImageUtils {
      */
     public static String buildImagePathToCardView(CardView card) {
         String imageFile;
-        if (card.getMageObjectType().isUseTokensRepository()) {
-            // token images
+        String imageFileName = card.getImageFileName();
+        if (imageFileName.isEmpty()) {
+            imageFileName = card.getName();
+        }
+
+        if (imageFileName.isEmpty()) {
+            return "ERROR: empty image file name, object type - " + card.getMageObjectType();
+        }
+
+        if (card.getMageObjectType().isUseTokensRepository()
+                || card.getExpansionSetCode().equals(TokenRepository.XMAGE_TOKENS_SET_CODE)) {
+            // token images or inner cards like face down
             CardDownloadData cardData = new CardDownloadData(
-                    card.getName().replace(" Token", ""),
+                    imageFileName.replace(" Token", ""),
                     card.getExpansionSetCode(),
-                    "0",
-                    false,
-                    card.getImageNumber(),
-                    true);
+                    card.getCardNumber(),
+                    card.getUsesVariousArt(),
+                    card.getImageNumber());
+            cardData.setToken(true);
             imageFile = CardImageUtils.buildImagePathToCardOrToken(cardData);
         } else {
-            TokenRepository.instance.getAll();
             // card images
             // workaround to find various art settings first
+            // TODO: no needs in workaround?! ?!
+            boolean usesVariousArt = false;
             CardInfo cardInfo = CardRepository.instance.findCardWithPreferredSetAndNumber(
                     card.getName(),
                     card.getExpansionSetCode(),
                     card.getCardNumber()
             );
             if (cardInfo != null) {
-                CardDownloadData cardData = new CardDownloadData(
-                        cardInfo.getName(),
-                        cardInfo.getSetCode(),
-                        cardInfo.getCardNumber(),
-                        cardInfo.usesVariousArt(),
-                        card.getImageNumber()
-                );
-                imageFile = CardImageUtils.buildImagePathToCardOrToken(cardData);
-            } else {
-                imageFile = "ERROR: can't find card info in repository - " + card.getName();
+                usesVariousArt = cardInfo.usesVariousArt();
             }
+            CardDownloadData cardData = new CardDownloadData(
+                    imageFileName,
+                    card.getExpansionSetCode(),
+                    card.getCardNumber(),
+                    card.getUsesVariousArt(), // TODO: need to use usesVariousArt instead card?
+                    card.getImageNumber()
+            );
+            imageFile = CardImageUtils.buildImagePathToCardOrToken(cardData);
         }
         return imageFile;
     }

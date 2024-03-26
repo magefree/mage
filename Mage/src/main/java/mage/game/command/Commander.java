@@ -128,6 +128,11 @@ public class Commander extends CommandObjectImpl {
     }
 
     @Override
+    public UUID getControllerOrOwnerId() {
+        return getControllerId();
+    }
+
+    @Override
     public CommandObject copy() {
         return new Commander(this);
     }

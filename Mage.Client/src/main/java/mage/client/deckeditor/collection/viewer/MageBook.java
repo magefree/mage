@@ -19,6 +19,7 @@ import mage.client.util.audio.AudioManager;
 import mage.client.util.sets.ConstructedFormats;
 import mage.components.ImagePanel;
 import mage.components.ImagePanelStyle;
+import mage.constants.MageObjectType;
 import mage.game.command.Dungeon;
 import mage.game.command.Emblem;
 import mage.game.command.Plane;
@@ -396,7 +397,7 @@ public class MageBook extends JComponent {
             draftRating.setBounds(rectangle.x, rectangle.y + cardImg.getCardLocation().getCardHeight() + dy, cardDimensions.getFrameWidth(), 20);
             draftRating.setHorizontalAlignment(SwingConstants.CENTER);
             draftRating.setFont(jLayeredPane.getFont().deriveFont(jLayeredPane.getFont().getStyle() | Font.BOLD));
-            if (card.isOriginalACard()) {
+            if (card.getMageObjectType().equals(MageObjectType.CARD)) {
                 // card
                 draftRating.setText("draft rating: " + RateCard.rateCard(card, null));
             } else {
@@ -411,14 +412,14 @@ public class MageBook extends JComponent {
         if (cardDimension == null) {
             cardDimension = new Dimension(ClientDefaultSettings.dimensions.getFrameWidth(), ClientDefaultSettings.dimensions.getFrameHeight());
         }
-        PermanentToken newToken = new PermanentToken(token, null, null);
-        newToken.removeSummoningSickness();
-        PermanentView theToken = new PermanentView(newToken, null, null, null);
-        theToken.setInViewerOnly(true);
-        final MageCard cardImg = Plugins.instance.getMagePermanent(theToken, bigCard, new CardIconRenderSettings(), cardDimension, gameId, true, PreferencesDialog.getRenderMode(), true);
+        PermanentToken fakePermanent = new PermanentToken(token, UUID.randomUUID(), null);
+        fakePermanent.removeSummoningSickness();
+        PermanentView permanentView = new PermanentView(fakePermanent, null, null, null);
+        permanentView.setInViewerOnly(true);
+        final MageCard cardImg = Plugins.instance.getMagePermanent(permanentView, bigCard, new CardIconRenderSettings(), cardDimension, gameId, true, PreferencesDialog.getRenderMode(), true);
         cardImg.setCardContainerRef(jLayeredPane);
         jLayeredPane.add(cardImg, JLayeredPane.DEFAULT_LAYER, 10);
-        cardImg.update(theToken);
+        cardImg.update(permanentView);
         cardImg.setCardBounds(rectangle.x, rectangle.y, cardDimensions.getFrameWidth(), cardDimensions.getFrameHeight());
     }
 

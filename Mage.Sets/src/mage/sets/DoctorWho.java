@@ -72,6 +72,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Desolate Lighthouse", 271, Rarity.RARE, mage.cards.d.DesolateLighthouse.class));
         cards.add(new SetCardInfo("Dinosaurs on a Spaceship", 122, Rarity.RARE, mage.cards.d.DinosaursOnASpaceship.class));
         cards.add(new SetCardInfo("Displaced Dinosaurs", 100, Rarity.UNCOMMON, mage.cards.d.DisplacedDinosaurs.class));
+        cards.add(new SetCardInfo("Donna Noble", 82, Rarity.RARE, mage.cards.d.DonnaNoble.class));
         cards.add(new SetCardInfo("Dragonskull Summit", 272, Rarity.RARE, mage.cards.d.DragonskullSummit.class));
         cards.add(new SetCardInfo("Dreamroot Cascade", 273, Rarity.RARE, mage.cards.d.DreamrootCascade.class));
         cards.add(new SetCardInfo("Drowned Catacomb", 274, Rarity.RARE, mage.cards.d.DrownedCatacomb.class));
@@ -141,6 +142,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Lunar Hatchling", 141, Rarity.RARE, mage.cards.l.LunarHatchling.class));
         cards.add(new SetCardInfo("Madame Vastra", 142, Rarity.RARE, mage.cards.m.MadameVastra.class));
         cards.add(new SetCardInfo("Martha Jones", 48, Rarity.RARE, mage.cards.m.MarthaJones.class));
+        cards.add(new SetCardInfo("Me, the Immortal", 147, Rarity.RARE, mage.cards.m.MeTheImmortal.class));
         cards.add(new SetCardInfo("Memory Worm", 90, Rarity.UNCOMMON, mage.cards.m.MemoryWorm.class));
         cards.add(new SetCardInfo("Mind Stone", 244, Rarity.UNCOMMON, mage.cards.m.MindStone.class));
         cards.add(new SetCardInfo("Mountain", 202, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));

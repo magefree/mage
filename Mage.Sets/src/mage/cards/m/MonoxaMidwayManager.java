@@ -77,7 +77,7 @@ class MonoxaMidwayManagerTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         int result = ((DieRolledEvent) event).getResult();
-        if (!isControlledBy(event.getPlayerId()) || result < 3) {
+        if (!isControlledBy(event.getTargetId()) || result < 3) {
             return false;
         }
         this.getEffects().setValue("dieRoll", result);

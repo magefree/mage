@@ -9,7 +9,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.continuous.LookAtTopCardOfLibraryAnyTimeEffect;
-import mage.abilities.effects.common.continuous.PlayTheTopCardEffect;
+import mage.abilities.effects.common.continuous.PlayFromTopOfLibraryEffect;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -53,7 +53,7 @@ public final class GaleaKindlerOfHope extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new LookAtTopCardOfLibraryAnyTimeEffect()));
 
         // You may cast Aura and Equipment spells from the top of your library. When you cast an Equipment spell this way, it gains "When this Equipment enters the battlefield, attach it to target creature you control."
-        Ability ability = new SimpleStaticAbility(new PlayTheTopCardEffect(TargetController.YOU, filter, false));
+        Ability ability = new SimpleStaticAbility(new PlayFromTopOfLibraryEffect(filter));
         ability.addEffect(new InfoEffect("When you cast an Equipment spell this way, it gains " +
                 "\"When this Equipment enters the battlefield, attach it to target creature you control.\""));
         this.addAbility(ability);

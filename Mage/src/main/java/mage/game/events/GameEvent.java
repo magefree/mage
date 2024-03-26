@@ -72,8 +72,8 @@ public class GameEvent implements Serializable {
          flag        not used for this event
          */
         ZONE_CHANGE,
-        ZONE_CHANGE_GROUP,
-        ZONE_CHANGE_BATCH,
+        ZONE_CHANGE_GROUP, // between two specific zones only; TODO: rework all usages to ZONE_CHANGE_BATCH instead, see #11895
+        ZONE_CHANGE_BATCH, // all zone changes that occurred from a single effect
         DRAW_CARDS, // event calls for multi draws only (if player draws 2+ cards at once)
         DRAW_CARD, DREW_CARD,
         EXPLORE, EXPLORED, // targetId is exploring permanent, playerId is its controller
@@ -142,6 +142,10 @@ public class GameEvent implements Serializable {
          amount      amount of life loss
          flag        true = from combat damage - other from non combat damage
          */
+        LOST_LIFE_BATCH,
+        /* LOST_LIFE_BATCH
+         combines all player life lost events to a single batch (event)
+        */
         PLAY_LAND, LAND_PLAYED,
         CREATURE_CHAMPIONED,
         /* CREATURE_CHAMPIONED
@@ -449,6 +453,11 @@ public class GameEvent implements Serializable {
          combine all permanent damage events to a single batch (event)
          */
         DAMAGED_BATCH_FOR_PERMANENTS,
+
+        /* DAMAGED_BATCH_FOR_ONE_PERMANENT
+         combines all permanent damage events to a single batch (event) and split it per damaged permanent
+         */
+        DAMAGED_BATCH_FOR_ONE_PERMANENT,
 
         DESTROY_PERMANENT,
         /* DESTROY_PERMANENT_BY_LEGENDARY_RULE

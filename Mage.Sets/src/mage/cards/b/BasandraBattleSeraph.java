@@ -59,7 +59,7 @@ public final class BasandraBattleSeraph extends CardImpl {
 class BasandraBattleSeraphEffect extends ContinuousRuleModifyingEffectImpl {
     
     public BasandraBattleSeraphEffect() {
-        super(Duration.EndOfTurn, Outcome.Neutral);
+        super(Duration.WhileOnBattlefield, Outcome.Neutral);
         staticText = "Players can't cast spells during combat";
     }
     

@@ -139,6 +139,10 @@ public interface Target extends Serializable {
 
     boolean isRandom();
 
+    /**
+     * WARNING, if you need random choice then call it by target's choose method, not player's choose
+     * see https://github.com/magefree/mage/issues/11933
+     */
     void setRandom(boolean atRandom);
 
     UUID getFirstTarget();
