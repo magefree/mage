@@ -3,6 +3,7 @@ package mage.cards.b;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.dynamicvalue.common.ArtifactYouControlCount;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.continuous.SetBasePowerSourceEffect;
 import mage.constants.SubType;
@@ -19,13 +20,6 @@ import mage.filter.common.FilterControlledPermanent;
  * @author justinjohnson14
  */
 public final class BrotherhoodVertibird extends CardImpl {
-
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("artifacts you control");
-
-    static {
-        filter.add(CardType.ARTIFACT.getPredicate());
-    }
-
     public BrotherhoodVertibird(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
         
@@ -37,7 +31,7 @@ public final class BrotherhoodVertibird extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Brotherhood Vertibird's power is equal to the number of artifacts you control.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerSourceEffect(new PermanentsOnBattlefieldCount(filter))));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerSourceEffect(ArtifactYouControlCount.instance)));
         // Crew 2
         this.addAbility(new CrewAbility(2));
 
