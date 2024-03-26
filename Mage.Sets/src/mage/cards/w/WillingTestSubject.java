@@ -80,7 +80,7 @@ class WillingTestSubjectTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         DieRolledEvent drEvent = (DieRolledEvent) event;
         // silver border card must look for "result" instead "natural result"
-        return this.isControlledBy(event.getPlayerId()) && drEvent.getResult() >= 4;
+        return this.isControlledBy(event.getTargetId()) && drEvent.getResult() >= 4;
     }
 
     @Override
