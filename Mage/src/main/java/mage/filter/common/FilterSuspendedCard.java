@@ -7,6 +7,7 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
 
 /**
  * @author skiwkr
+ * 702.62b. A card is "suspended" if it's in the exile zone, has suspend, and has a time counter on it.
  */
 public class FilterSuspendedCard extends FilterCard {
 

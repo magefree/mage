@@ -36,7 +36,7 @@ public final class Epochrasite extends CardImpl {
                 new CastFromHandWatcher());
 
         // When Epochrasite dies, exile it with three time counters on it and it gains suspend.
-        this.addAbility(new DiesSourceTriggeredAbility(new ExileSpellWithTimeCountersEffect(3,true)));
+        this.addAbility(new DiesSourceTriggeredAbility(new ExileSpellWithTimeCountersEffect(3, true).setText("exile it with three time counters on it and it gains suspend.")));
     }
 
     private Epochrasite(final Epochrasite card) {

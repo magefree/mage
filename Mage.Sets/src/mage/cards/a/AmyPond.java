@@ -24,7 +24,7 @@ import mage.target.common.TargetCardInExile;
  */
 public final class AmyPond extends CardImpl {
 
-    protected static final FilterSuspendedCard filter = new FilterSuspendedCard("suspended card you own");
+    private static final FilterSuspendedCard filter = new FilterSuspendedCard("suspended card you own");
     static {
         filter.add(TargetController.YOU.getOwnerPredicate());
     }
@@ -64,15 +64,15 @@ class AmyPondEffect extends OneShotEffect {
 
     private final DynamicValue numberCounters;
 
-    public AmyPondEffect(DynamicValue numberCounters) {
+    AmyPondEffect(DynamicValue numberCounters) {
         super(Outcome.Benefit);
         this.numberCounters = numberCounters;
+        this.staticText= "choose a suspended card you own and remove that many time counters from it";
     }
 
-    protected AmyPondEffect(final AmyPondEffect effect) {
+    private AmyPondEffect(final AmyPondEffect effect) {
         super(effect);
         this.numberCounters = effect.numberCounters;
-        this.staticText= "choose a suspended card you own and remove that many time counters from it";
     }
 
     @Override
@@ -87,9 +87,9 @@ class AmyPondEffect extends OneShotEffect {
         if (controller != null) {
             Card card = game.getExile().getCard(source.getFirstTarget(), game);
             if (card != null) {
-                card.removeCounters(CounterType.TIME.toString(),(Integer) getValue("damage"),source, game);
+                card.removeCounters(CounterType.TIME.toString(), (Integer) getValue("damage"), source, game);
                 return true;
-                }
+            }
         }
         return false;
     }

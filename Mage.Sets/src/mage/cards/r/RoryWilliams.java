@@ -75,11 +75,6 @@ class RoryWilliamsTriggeredAbility extends CastSourceTriggeredAbility {
     }
 
     @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.SPELL_CAST;
-    }
-
-    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (!event.getSourceId().equals(this.getSourceId())) {
             return false;

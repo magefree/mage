@@ -22,18 +22,16 @@ public class ExileSpellWithTimeCountersEffect extends OneShotEffect {
     private final int counters;
     private final boolean gainsSuspend;
 
-    public ExileSpellWithTimeCountersEffect(int counters) {
-        super(Outcome.Exile);
-        this.counters = counters;
-        this.gainsSuspend = false;
-        this.staticText = "Exile {this} with " + CardUtil.numberToText(this.counters) + " time counters on it";
-    }
+    public ExileSpellWithTimeCountersEffect(int counters) {this (counters, false);}
 
     public ExileSpellWithTimeCountersEffect(int counters, boolean gainsSuspend) {
         super(Outcome.Exile);
         this.counters = counters;
         this.gainsSuspend = gainsSuspend;
-        this.staticText = "Exile {this} with " + CardUtil.numberToText(this.counters) + " time counters on it. It gains suspend.";
+        this.staticText = "Exile {this} with " + CardUtil.numberToText(this.counters) + " time counters on it. ";
+        if (gainsSuspend) {
+            this.staticText.concat("It gains suspend.");
+        }
     }
     private ExileSpellWithTimeCountersEffect(final ExileSpellWithTimeCountersEffect effect) {
         super(effect);
@@ -57,7 +55,7 @@ public class ExileSpellWithTimeCountersEffect extends OneShotEffect {
         if (!card.isCopy() && controller.moveCardsToExile(card, source, game, true, exileId, "Suspended cards of " + controller.getName())) {
             card.addCounters(CounterType.TIME.createInstance(3), source.getControllerId(), source, game);
             game.informPlayers(controller.getLogName() + " exiles " + card.getLogName() + " with " + counters + " time counters on it");
-            if(gainsSuspend){
+            if (gainsSuspend) {
                 game.addEffect(new GainSuspendEffect(new MageObjectReference(card, game)), source);
             }
         }
