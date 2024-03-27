@@ -45,9 +45,9 @@ class PrisonersDilemmaEffect extends OneShotEffect {
     PrisonersDilemmaEffect() {
         super(Outcome.Benefit);
         staticText = "Each opponent secretly chooses silence or snitch, then the choices are revealed. " +
-                "If each opponent chose silence, Prisoner's Dilemma deals 4 damage to each of them. " +
-                "If each opponent chose snitch, Prisoner's Dilemma deals 8 damage to each of them. "+
-                "Otherwise, Prisoner's Dilemma deals 12 damage to each opponent who chose silence.";
+                "If each opponent chose silence, {this} deals 4 damage to each of them. " +
+                "If each opponent chose snitch, {this} deals 8 damage to each of them. "+
+                "Otherwise, {this} deals 12 damage to each opponent who chose silence.";
     }
 
     private PrisonersDilemmaEffect(final PrisonersDilemmaEffect effect) {
@@ -80,25 +80,25 @@ class PrisonersDilemmaEffect extends OneShotEffect {
             }
         }
 
-        for (Player player:snitch){
+        for (Player player : snitch) {
             game.informPlayers(player.getName() + " chose snitch");
         }
 
-        for(Player player:silence){
+        for (Player player : silence) {
             game.informPlayers(player.getName() + " chose silence");
         }
 
-        if (snitch.isEmpty()){
-            for(Player player:silence){
+        if (snitch.isEmpty()) {
+            for (Player player : silence) {
                 player.damage(4,source.getSourceId(),source,game);
             }
-        }else if(silence.isEmpty()){
+        } else if (silence.isEmpty()) {
             for(Player player:snitch){
                 player.damage(8,source.getSourceId(),source,game);
             }
-        }else {
-            for(Player player:silence){
-                player.damage(12,source.getSourceId(),source,game);
+        } else {
+            for(Player player : silence) {
+                player.damage(12, source.getSourceId(), source, game);
             }
         }
         return true;
