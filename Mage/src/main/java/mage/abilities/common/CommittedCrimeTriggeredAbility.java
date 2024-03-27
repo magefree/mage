@@ -24,6 +24,10 @@ import java.util.stream.Collectors;
  */
 public class CommittedCrimeTriggeredAbility extends TriggeredAbilityImpl {
 
+    public CommittedCrimeTriggeredAbility(Effect effect) {
+        this(effect, false);
+    }
+
     public CommittedCrimeTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
     }
