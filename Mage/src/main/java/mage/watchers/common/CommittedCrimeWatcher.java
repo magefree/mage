@@ -7,7 +7,10 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.watchers.Watcher;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -30,9 +33,7 @@ public class CommittedCrimeWatcher extends Watcher {
             default:
                 return;
         }
-        Optional.ofNullable(CommittedCrimeTriggeredAbility.getCriminal(event, game))
-                .filter(Objects::nonNull)
-                .ifPresent(criminals::add);
+        Optional.ofNullable(CommittedCrimeTriggeredAbility.getCriminal(event, game)).ifPresent(criminals::add);
     }
 
     @Override
@@ -46,6 +47,6 @@ public class CommittedCrimeWatcher extends Watcher {
                 .getState()
                 .getWatcher(CommittedCrimeWatcher.class)
                 .criminals
-                .contains(source.getSourceId());
+                .contains(source.getControllerId());
     }
 }

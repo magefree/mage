@@ -1,7 +1,6 @@
 package mage.abilities.common;
 
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.Zone;
@@ -11,13 +10,11 @@ import mage.game.Ownerable;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
-import mage.target.Target;
+import mage.util.CardUtil;
 
-import java.util.Collection;
 import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
  * @author TheElk801
@@ -86,15 +83,7 @@ public class CommittedCrimeTriggeredAbility extends TriggeredAbilityImpl {
             return null;
         }
         Set<UUID> opponents = game.getOpponents(controllerId);
-        Set<UUID> targets = ability
-                .getModes()
-                .values()
-                .stream()
-                .map(Mode::getTargets)
-                .flatMap(Collection::stream)
-                .map(Target::getTargets)
-                .flatMap(Collection::stream)
-                .collect(Collectors.toSet());
+        Set<UUID> targets = CardUtil.getAllSelectedTargets(ability, game);
         // an opponent
         if (targets
                 .stream()
