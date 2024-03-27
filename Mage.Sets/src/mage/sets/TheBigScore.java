@@ -21,6 +21,7 @@ public final class TheBigScore extends ExpansionSet {
         this.hasBasicLands = false;
         this.hasBoosters = false;
 
+        cards.add(new SetCardInfo("Oltec Matterweaver", 3, Rarity.MYTHIC, mage.cards.o.OltecMatterweaver.class));
         cards.add(new SetCardInfo("Torpor Orb", 27, Rarity.MYTHIC, mage.cards.t.TorporOrb.class));
     }
 }
