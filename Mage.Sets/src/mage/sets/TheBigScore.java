@@ -1,6 +1,7 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
+import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
@@ -19,5 +20,7 @@ public final class TheBigScore extends ExpansionSet {
         this.blockName = "Outlaws of Thunder Junction";
         this.hasBasicLands = false;
         this.hasBoosters = false;
+
+        cards.add(new SetCardInfo("Torpor Orb", 27, Rarity.MYTHIC, mage.cards.t.TorporOrb.class));
     }
 }
