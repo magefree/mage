@@ -2,7 +2,6 @@ package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CastSourceTriggeredAbility;
@@ -76,21 +75,7 @@ class RoryWilliamsTriggeredAbility extends CastSourceTriggeredAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (!event.getSourceId().equals(this.getSourceId())) {
-            return false;
-        }
-        MageObject spellObject = game.getObject(sourceId);
-        if ((!(spellObject instanceof Spell))) {
-            return true;
-        }
-        Spell spell = (Spell) spellObject;
-        if (spell.getSpellAbility() != null) {
-            getEffects().setValue(SOURCE_CAST_SPELL_ABILITY, spell.getSpellAbility());
-        }
-        if (spell.getFromZone().equals(Zone.EXILED)){
-            return false;
-        }
-        getEffects().setValue("spellCast", spell);
-        return true;
+        Spell spell = (Spell) game.getObject(sourceId);
+        return super.checkTrigger(event,game) && !spell.getFromZone().equals(Zone.EXILED);
     }
 }
