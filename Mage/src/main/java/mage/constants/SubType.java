@@ -271,6 +271,7 @@ public enum SubType {
     MONK("Monk", SubTypeSet.CreatureType),
     MONKEY("Monkey", SubTypeSet.CreatureType),
     MOONFOLK("Moonfolk", SubTypeSet.CreatureType),
+    MOUNT("Mount", SubTypeSet.CreatureType),
     MOUSE("Mouse", SubTypeSet.CreatureType),
     MUTANT("Mutant", SubTypeSet.CreatureType),
     MYR("Myr", SubTypeSet.CreatureType),
