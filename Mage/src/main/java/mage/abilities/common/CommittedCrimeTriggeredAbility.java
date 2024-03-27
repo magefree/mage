@@ -109,7 +109,7 @@ public class CommittedCrimeTriggeredAbility extends TriggeredAbilityImpl {
                 // an opponent's spell
                 || targets
                 .stream()
-                .map(game::getSpell)
+                .map(game.getStack()::getStackObject)
                 .filter(Objects::nonNull)
                 .map(Controllable::getControllerId)
                 .anyMatch(opponents::contains)
