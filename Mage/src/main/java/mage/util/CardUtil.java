@@ -1323,7 +1323,7 @@ public final class CardUtil {
      * such as the adventure and main side of adventure spells or both sides of a fuse card.
      *
      * @param cardToCast
-     * @param filter           A filter to determine if a card is eligible for casting.
+     * @param filter           An optional filter to determine if a card is eligible for casting.
      * @param source           The ability or source responsible for the casting.
      * @param player
      * @param game
@@ -1347,7 +1347,9 @@ public final class CardUtil {
         if (!playLand || !player.canPlayLand() || !game.isActivePlayer(playerId)) {
             cards.removeIf(card -> card.isLand(game));
         }
-        cards.removeIf(card -> !filter.match(card, playerId, source, game));
+        if (filter != null) {
+            cards.removeIf(card -> !filter.match(card, playerId, source, game));
+        }
         if (spellCastTracker != null) {
             cards.removeIf(card -> !spellCastTracker.checkCard(card, game));
         }

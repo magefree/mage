@@ -4,16 +4,11 @@ import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
-import java.util.Arrays;
-import java.util.List;
-
 /**
  * @author TheElk801
  */
 public final class OutlawsOfThunderJunction extends ExpansionSet {
 
-    // This is a list of cards with the plot mechanic, it will be removed when the mechanic is implemented
-    private static final List<String> unfinished = Arrays.asList("Aloe Alchemist", "Aven Interrupter", "Beastbond Outcaster", "Blacksnag Buzzard", "Brimstone Roundup", "Cunning Coyote", "Demonic Ruckus", "Djinn of Fool's Fall", "Doc Aurlock, Grizzled Genius", "Fblthp, Lost on the Range", "Irascible Wolverine", "Jace Reawakened", "Kellan Joins Up", "Lilah, Undefeated Slickshot", "Loan Shark", "Longhorn Sharpshooter", "Make Your Own Luck", "Outcaster Trailblazer", "Outlaw Stitcher", "Pillage the Bog", "Pitiless Carnage", "Plan the Heist", "Railway Brawler", "Rictus Robber", "Rise of the Varmints", "Sheriff of Safe Passage", "Slickshot Lockpicker", "Slickshot Show-Off", "Step Between Worlds", "Stingerback Terror", "Tumbleweed Rising", "Unscrupulous Contractor", "Visage Bandit");
     private static final OutlawsOfThunderJunction instance = new OutlawsOfThunderJunction();
 
     public static OutlawsOfThunderJunction getInstance() {
@@ -194,7 +189,5 @@ public final class OutlawsOfThunderJunction extends ExpansionSet {
         cards.add(new SetCardInfo("Vraska Joins Up", 236, Rarity.RARE, mage.cards.v.VraskaJoinsUp.class));
         cards.add(new SetCardInfo("Wanted Griffin", 38, Rarity.COMMON, mage.cards.w.WantedGriffin.class));
         cards.add(new SetCardInfo("Wrangler of the Damned", 238, Rarity.UNCOMMON, mage.cards.w.WranglerOfTheDamned.class));
-
-        cards.removeIf(setCardInfo -> unfinished.contains(setCardInfo.getName())); // remove when mechanic is implemented
     }
 }
