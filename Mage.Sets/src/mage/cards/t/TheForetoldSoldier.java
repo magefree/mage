@@ -32,13 +32,16 @@ public final class TheForetoldSoldier extends CardImpl {
 
         // The Foretold Soldier must be blocked if able.
         this.addAbility(new SimpleStaticAbility(new MustBeBlockedByAtLeastOneSourceEffect(Duration.WhileOnBattlefield)));
+
         // The Foretold Soldier can't be blocked by more than one creature.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByMoreThanOneSourceEffect()));
+
         // Whenever The Foretold Soldier deals damage, exile it face down. It becomes foretold.
         this.addAbility(new DealsDamageTriggeredAbility(new ForetellAbility.ForetellExileEffect(this, "{1}{G}","{2}").setText("exile it face down. It becomes foretold.")));
         Ability ability = new SimpleStaticAbility(Zone.ALL, new ForetellAbility.ForetellLookAtCardEffect());
         ability.setControllerId(ownerId);  // if not set, anyone can look at the card in exile
         this.addAbility(ability);
+
         // Foretell {1}{G}
         this.addAbility(new ForetellAbility(this, "{1}{G}"));
 
