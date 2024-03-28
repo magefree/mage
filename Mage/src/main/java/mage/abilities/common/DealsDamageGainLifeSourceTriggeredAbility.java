@@ -14,7 +14,7 @@ public class DealsDamageGainLifeSourceTriggeredAbility extends DealsDamageTrigge
 
     public DealsDamageGainLifeSourceTriggeredAbility() {
         super(new GainLifeEffect(SavedDamageValue.MUCH));
-        setTriggerPhrase("Whenever {this} deals damage, gain that much life");
+        setTriggerPhrase("Whenever {this} deals damage, ");
     }
 
     protected DealsDamageGainLifeSourceTriggeredAbility(final DealsDamageGainLifeSourceTriggeredAbility ability) {
