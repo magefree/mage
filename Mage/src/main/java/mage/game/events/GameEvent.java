@@ -171,6 +171,24 @@ public class GameEvent implements Serializable {
          sourceId    sourceId of the vehicle
          playerId    the id of the controlling player
          */
+        SADDLE_MOUNT,
+        /* SADDLE_MOUNT
+         targetId    the id of the creature that saddled a mount
+         sourceId    sourceId of the mount
+         playerId    the id of the controlling player
+         */
+        SADDLED_MOUNT,
+        /* SADDLED_MOUNT
+         targetId    the id of the creature that saddled a mount
+         sourceId    sourceId of the mount
+         playerId    the id of the controlling player
+         */
+        MOUNT_SADDLED,
+        /* MOUNT_SADDLED
+         targetId    the id of the mount
+         sourceId    sourceId of the mount
+         playerId    the id of the controlling player
+         */
         X_MANA_ANNOUNCE,
         /* X_MANA_ANNOUNCE
          mana x-costs announced by players (X value can be changed by replace events like Unbound Flourishing)
