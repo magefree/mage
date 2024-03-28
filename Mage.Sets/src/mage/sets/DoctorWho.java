@@ -24,6 +24,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Adric, Mathematical Genius", 33, Rarity.RARE, mage.cards.a.AdricMathematicalGenius.class));
         cards.add(new SetCardInfo("Alistair, the Brigadier", 112, Rarity.RARE, mage.cards.a.AlistairTheBrigadier.class));
         cards.add(new SetCardInfo("All of History, All at Once", 34, Rarity.RARE, mage.cards.a.AllOfHistoryAllAtOnce.class));
+        cards.add(new SetCardInfo("Amy Pond", 75, Rarity.RARE, mage.cards.a.AmyPond.class));
         cards.add(new SetCardInfo("An Unearthly Child", 35, Rarity.RARE, mage.cards.a.AnUnearthlyChild.class));
         cards.add(new SetCardInfo("Arcane Signet", 239, Rarity.COMMON, mage.cards.a.ArcaneSignet.class));
         cards.add(new SetCardInfo("As Foretold", 214, Rarity.RARE, mage.cards.a.AsForetold.class));
@@ -171,6 +172,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Rogue's Passage", 299, Rarity.UNCOMMON, mage.cards.r.RoguesPassage.class));
         cards.add(new SetCardInfo("Romana II", 27, Rarity.RARE, mage.cards.r.RomanaII.class));
         cards.add(new SetCardInfo("Rootbound Crag", 300, Rarity.RARE, mage.cards.r.RootboundCrag.class));
+        cards.add(new SetCardInfo("Rory Williams", 153, Rarity.RARE, mage.cards.r.RoryWilliams.class));
         cards.add(new SetCardInfo("Rose Tyler", 5, Rarity.RARE, mage.cards.r.RoseTyler.class));
         cards.add(new SetCardInfo("Rotating Fireplace", 183, Rarity.RARE, mage.cards.r.RotatingFireplace.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Rotating Fireplace", 461, Rarity.RARE, mage.cards.r.RotatingFireplace.class, NON_FULL_USE_VARIOUS));
