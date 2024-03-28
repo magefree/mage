@@ -521,7 +521,7 @@ public abstract class AbilityImpl implements Ability {
                 String message = controller.getLogName() + " announces a value of " + xValue + " (" + variableCost.getActionText() + ')'
                         + CardUtil.getSourceLogName(game, this);
                 announceString.append(message);
-                setCostsTag("X",xValue);
+                setCostsTag("X", xValue);
             }
         }
         return announceString.toString();
@@ -626,7 +626,7 @@ public abstract class AbilityImpl implements Ability {
                     }
                     addManaCostsToPay(new ManaCostsImpl<>(manaString.toString()));
                     getManaCostsToPay().setX(xValue * xValueMultiplier, amountMana);
-                    setCostsTag("X",xValue * xValueMultiplier);
+                    setCostsTag("X", xValue * xValueMultiplier);
                 }
                 variableManaCost.setPaid();
             }
@@ -718,8 +718,9 @@ public abstract class AbilityImpl implements Ability {
     public Map<String, Object> getCostsTagMap() {
         return costsTagMap;
     }
-    public void setCostsTag(String tag, Object value){
-        if (costsTagMap == null){
+
+    public void setCostsTag(String tag, Object value) {
+        if (costsTagMap == null) {
             costsTagMap = new HashMap<>();
         }
         costsTagMap.put(tag, value);
@@ -1136,6 +1137,12 @@ public abstract class AbilityImpl implements Ability {
     @Override
     public Ability withFirstModeFlavorWord(String flavorWord) {
         this.modes.getMode().withFlavorWord(flavorWord);
+        return this;
+    }
+
+    @Override
+    public Ability withFirstModeCost(Cost cost) {
+        this.modes.getMode().withCost(cost);
         return this;
     }
 
