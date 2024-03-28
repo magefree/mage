@@ -41,7 +41,7 @@ public class Mode implements Serializable {
         this.effects = mode.effects.copy();
         this.flavorWord = mode.flavorWord;
         this.modeTag = mode.modeTag;
-        this.cost = mode.cost.copy();
+        this.cost = mode.cost != null ? mode.cost.copy() : null;
     }
 
     public UUID setRandomId() {
