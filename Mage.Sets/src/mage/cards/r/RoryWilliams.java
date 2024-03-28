@@ -75,7 +75,7 @@ class RoryWilliamsTriggeredAbility extends CastSourceTriggeredAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Spell spell = (Spell) game.getObject(sourceId);
-        return super.checkTrigger(event,game) && !spell.getFromZone().equals(Zone.EXILED);
+        return super.checkTrigger(event,game)
+                && !((Spell) game.getObject(sourceId)).getFromZone().equals(Zone.EXILED);
     }
 }

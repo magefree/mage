@@ -36,7 +36,10 @@ public final class Epochrasite extends CardImpl {
                 new CastFromHandWatcher());
 
         // When Epochrasite dies, exile it with three time counters on it and it gains suspend.
-        this.addAbility(new DiesSourceTriggeredAbility(new ExileSpellWithTimeCountersEffect(3, true).setText("exile it with three time counters on it and it gains suspend.")));
+        this.addAbility(new DiesSourceTriggeredAbility(new ExileSpellWithTimeCountersEffect(3, true)
+                .setText("exile it with three time counters on it and it gains suspend." +
+                        " <i>(At the beginning of its owner's upkeep, they remove a time counter." +
+                        " When the last is removed, they may cast this card without paying its mana cost. It has haste.)</i>")));
     }
 
     private Epochrasite(final Epochrasite card) {

@@ -45,6 +45,7 @@ public final class AmyPond extends CardImpl {
                 false, true);
         ability.addTarget(new TargetCardInExile(filter).withNotTarget(true));
         this.addAbility(ability);
+
         // Doctor's companion
         this.addAbility(DoctorsCompanionAbility.getInstance());
 
@@ -94,4 +95,3 @@ class AmyPondEffect extends OneShotEffect {
         return false;
     }
 }
-

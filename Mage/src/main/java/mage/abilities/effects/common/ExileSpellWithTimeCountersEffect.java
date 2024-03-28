@@ -22,16 +22,16 @@ public class ExileSpellWithTimeCountersEffect extends OneShotEffect {
     private final int counters;
     private final boolean gainsSuspend;
 
-    public ExileSpellWithTimeCountersEffect(int counters) {this (counters, false);}
+    public ExileSpellWithTimeCountersEffect(int counters) {
+        this (counters, false);
+    }
 
     public ExileSpellWithTimeCountersEffect(int counters, boolean gainsSuspend) {
         super(Outcome.Exile);
         this.counters = counters;
         this.gainsSuspend = gainsSuspend;
-        this.staticText = "Exile {this} with " + CardUtil.numberToText(this.counters) + " time counters on it. ";
-        if (gainsSuspend) {
-            this.staticText.concat("It gains suspend.");
-        }
+        this.staticText = "exile {this} with " + CardUtil.numberToText(this.counters) + " time counters on it"
+                + (gainsSuspend ? ". It gains suspend" : "");
     }
     private ExileSpellWithTimeCountersEffect(final ExileSpellWithTimeCountersEffect effect) {
         super(effect);
