@@ -8,6 +8,8 @@ import mage.game.Game;
 import mage.watchers.common.CommittedCrimeWatcher;
 
 /**
+ * requires CommittedCrimeWatcher
+ *
  * @author TheElk801
  */
 public enum CommittedCrimeCondition implements Condition {

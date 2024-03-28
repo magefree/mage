@@ -17,6 +17,7 @@ import java.util.UUID;
  */
 public class CommittedCrimeWatcher extends Watcher {
 
+    // players who committed a crime this turn
     private final Set<UUID> criminals = new HashSet<>();
 
     public CommittedCrimeWatcher() {
