@@ -107,6 +107,7 @@ Reconfigure|manaString|
 Renown|number|
 Replicate|manaString|
 Riot|new|
+Saddle|number|
 Scavenge|cost|
 Shadow|instance|
 Shroud|instance|
