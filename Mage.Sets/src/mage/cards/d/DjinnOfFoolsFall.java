@@ -26,7 +26,7 @@ public final class DjinnOfFoolsFall extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Plot {3}{U}
-        this.addAbility(new PlotAbility(this, "{3}{U}"));
+        this.addAbility(new PlotAbility("{3}{U}"));
     }
 
     private DjinnOfFoolsFall(final DjinnOfFoolsFall card) {

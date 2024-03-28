@@ -13,7 +13,7 @@ import mage.constants.Zone;
  */
 public class PlotAbility extends SpecialAction {
 
-    public PlotAbility(Card card, String plotCost) {
+    public PlotAbility(String plotCost) {
         super(Zone.HAND);
         this.addCost(new ManaCostsImpl<>(plotCost));
         this.setTiming(TimingRule.SORCERY);

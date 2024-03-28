@@ -28,7 +28,7 @@ public final class IrascibleWolverine extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ExileTopXMayPlayUntilEffect(1, Duration.EndOfTurn)));
 
         // Plot {2}{R}
-        this.addAbility(new PlotAbility(this, "{2}{R}"));
+        this.addAbility(new PlotAbility("{2}{R}"));
     }
 
     private IrascibleWolverine(final IrascibleWolverine card) {

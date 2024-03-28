@@ -95,7 +95,7 @@ Persist|new|
 Phasing|instance|
 Plainscycling|cost|
 Plainswalk|new|
-Plot|card, manaString|
+Plot|manaString|
 Poisonous|number|
 Prototype|card, manaString|
 Provoke|new|

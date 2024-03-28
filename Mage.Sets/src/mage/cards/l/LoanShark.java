@@ -38,7 +38,7 @@ public final class LoanShark extends CardImpl {
         ).addHint(StormAbility.getHint()));
 
         // Plot {3}{U}
-        this.addAbility(new PlotAbility(this, "{3}{U}"));
+        this.addAbility(new PlotAbility("{3}{U}"));
     }
 
     private LoanShark(final LoanShark card) {

@@ -35,7 +35,7 @@ public final class BeastbondOutcaster extends CardImpl {
         ).addHint(FerociousHint.instance));
 
         // Plot {1}{G}
-        this.addAbility(new PlotAbility(this, "{1}{G}"));
+        this.addAbility(new PlotAbility("{1}{G}"));
     }
 
     private BeastbondOutcaster(final BeastbondOutcaster card) {

@@ -40,7 +40,7 @@ public final class CunningCoyote extends CardImpl {
         this.addAbility(ability);
 
         // Plot {1}{R}
-        this.addAbility(new PlotAbility(this, "{1}{R}"));
+        this.addAbility(new PlotAbility("{1}{R}"));
     }
 
     private CunningCoyote(final CunningCoyote card) {

@@ -22,7 +22,7 @@ public final class BrimstoneRoundup extends CardImpl {
         this.addAbility(new CastSecondSpellTriggeredAbility(new CreateTokenEffect(new MercenaryToken())));
 
         // Plot {2}{R}
-        this.addAbility(new PlotAbility(this, "{2}{R}"));
+        this.addAbility(new PlotAbility("{2}{R}"));
     }
 
     private BrimstoneRoundup(final BrimstoneRoundup card) {

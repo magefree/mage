@@ -27,7 +27,7 @@ public final class PlanTheHeist extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(3).concatBy("Then"));
 
         // Plot {3}{U}
-        this.addAbility(new PlotAbility(this, "{3}{U}"));
+        this.addAbility(new PlotAbility("{3}{U}"));
     }
 
     private PlanTheHeist(final PlanTheHeist card) {

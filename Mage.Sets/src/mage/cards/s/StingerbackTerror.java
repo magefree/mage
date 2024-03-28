@@ -45,7 +45,7 @@ public final class StingerbackTerror extends CardImpl {
         )));
 
         // Plot {2}{R}
-        this.addAbility(new PlotAbility(this, "{2}{R}"));
+        this.addAbility(new PlotAbility("{2}{R}"));
     }
 
     private StingerbackTerror(final StingerbackTerror card) {
