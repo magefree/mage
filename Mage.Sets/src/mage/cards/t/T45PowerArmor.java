@@ -70,7 +70,7 @@ class T45PowerArmorEffect extends OneShotEffect {
 
     T45PowerArmorEffect() {
         super(Outcome.BoostCreature);
-        staticText = "untap eqipped creature, then put your choice of a menace, trample, or lifelink counter on it";
+        staticText = "untap equipped creature, then put your choice of a menace, trample, or lifelink counter on it";
     }
 
     protected T45PowerArmorEffect(mage.cards.t.T45PowerArmorEffect effect) {
@@ -81,10 +81,11 @@ class T45PowerArmorEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         Permanent creature = game.getPermanent(source.getSourcePermanentIfItStillExists(game).getAttachedTo());
-        game.getPermanent(source.getSourcePermanentIfItStillExists(game).getAttachedTo()).untap(game);
         if (player == null || creature == null) {
             return false;
         }
+
+        creature.untap(game);
 
         Choice choice = new ChoiceImpl(true);
         choice.setMessage("Choose menace, trample, or lifelink");
@@ -101,7 +102,7 @@ class T45PowerArmorEffect extends OneShotEffect {
     }
 
     @Override
-    public mage.cards.t.T45PowerArmorEffect copy() {
-        return new mage.cards.t.T45PowerArmorEffect(this);
+    public T45PowerArmorEffect copy() {
+        return new T45PowerArmorEffect(this);
     }
 }
