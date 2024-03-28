@@ -29,7 +29,6 @@ public final class BiteDownOnCrime extends CardImpl {
 
     public BiteDownOnCrime(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{G}");
-        
 
         // As an additional cost to cast this spell, you may collect evidence 6. This spell costs {2} less to cast if evidence was collected.
         this.addAbility(new CollectEvidenceAbility(6));
