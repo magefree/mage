@@ -36,6 +36,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Beast Within", 228, Rarity.UNCOMMON, mage.cards.b.BeastWithin.class));
         cards.add(new SetCardInfo("Become the Pilot", 37, Rarity.RARE, mage.cards.b.BecomeThePilot.class));
         cards.add(new SetCardInfo("Bessie, the Doctor's Roadster", 171, Rarity.RARE, mage.cards.b.BessieTheDoctorsRoadster.class));
+        cards.add(new SetCardInfo("Bigger on the Inside", 115, Rarity.UNCOMMON, mage.cards.b.BiggerOnTheInside.class));
         cards.add(new SetCardInfo("Blasphemous Act", 224, Rarity.RARE, mage.cards.b.BlasphemousAct.class));
         cards.add(new SetCardInfo("Canopy Vista", 258, Rarity.RARE, mage.cards.c.CanopyVista.class));
         cards.add(new SetCardInfo("Canyon Slough", 259, Rarity.RARE, mage.cards.c.CanyonSlough.class));
@@ -82,6 +83,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Duggan, Private Detective", 728, Rarity.RARE, mage.cards.d.DugganPrivateDetective.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Duggan, Private Detective", 1000, Rarity.RARE, mage.cards.d.DugganPrivateDetective.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ecstatic Beauty", 83, Rarity.RARE, mage.cards.e.EcstaticBeauty.class));
+        cards.add(new SetCardInfo("Everything Comes to Dust", 19, Rarity.RARE, mage.cards.e.EverythingComesToDust.class));
         cards.add(new SetCardInfo("Evolving Wilds", 275, Rarity.COMMON, mage.cards.e.EvolvingWilds.class));
         cards.add(new SetCardInfo("Exotic Orchard", 276, Rarity.RARE, mage.cards.e.ExoticOrchard.class));
         cards.add(new SetCardInfo("Explore", 231, Rarity.COMMON, mage.cards.e.Explore.class));
@@ -167,6 +169,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Reliquary Tower", 296, Rarity.UNCOMMON, mage.cards.r.ReliquaryTower.class));
         cards.add(new SetCardInfo("Renegade Silent", 53, Rarity.UNCOMMON, mage.cards.r.RenegadeSilent.class));
         cards.add(new SetCardInfo("Return to Dust", 211, Rarity.UNCOMMON, mage.cards.r.ReturnToDust.class));
+        cards.add(new SetCardInfo("Reverse the Polarity", 54, Rarity.RARE, mage.cards.r.ReverseThePolarity.class));
         cards.add(new SetCardInfo("River of Tears", 297, Rarity.RARE, mage.cards.r.RiverOfTears.class));
         cards.add(new SetCardInfo("Rockfall Vale", 298, Rarity.RARE, mage.cards.r.RockfallVale.class));
         cards.add(new SetCardInfo("Rogue's Passage", 299, Rarity.UNCOMMON, mage.cards.r.RoguesPassage.class));
@@ -194,6 +197,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Sol Ring", 245, Rarity.UNCOMMON, mage.cards.s.SolRing.class));
         cards.add(new SetCardInfo("Solemn Simulacrum", 246, Rarity.RARE, mage.cards.s.SolemnSimulacrum.class));
         cards.add(new SetCardInfo("Sonic Screwdriver", 184, Rarity.UNCOMMON, mage.cards.s.SonicScrewdriver.class));
+        cards.add(new SetCardInfo("Sontaran General", 96, Rarity.UNCOMMON, mage.cards.s.SontaranGeneral.class));
         cards.add(new SetCardInfo("Star Whale", 55, Rarity.UNCOMMON, mage.cards.s.StarWhale.class));
         cards.add(new SetCardInfo("Start the TARDIS", 56, Rarity.UNCOMMON, mage.cards.s.StartTheTARDIS.class));
         cards.add(new SetCardInfo("Stormcarved Coast", 308, Rarity.RARE, mage.cards.s.StormcarvedCoast.class));
