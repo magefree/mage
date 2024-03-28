@@ -40,7 +40,7 @@ public class BecomesTappedOneOrMoreTriggeredAbility extends TriggeredAbilityImpl
     public boolean checkTrigger(GameEvent event, Game game) {
         TappedBatchEvent batchEvent = (TappedBatchEvent) event;
         return batchEvent
-                .getTargets()
+                .getTargetIds()
                 .stream()
                 .map(game::getPermanent)
                 .anyMatch(p -> filter.match(p, getControllerId(), this, game));

@@ -6,7 +6,7 @@ import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
-import mage.game.events.DamagedBatchEvent;
+import mage.game.events.DamagedBatchForOnePlayerEvent;
 import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -60,7 +60,7 @@ public class OneOrMoreDealDamageTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        DamagedBatchEvent dEvent = (DamagedBatchEvent) event;
+        DamagedBatchForOnePlayerEvent dEvent = (DamagedBatchForOnePlayerEvent) event;
         if (onlyCombat && !dEvent.isCombatDamage()) {
             return false;
         }
@@ -86,7 +86,7 @@ public class OneOrMoreDealDamageTriggeredAbility extends TriggeredAbilityImpl {
         this.getAllEffects().setValue("damage", events.stream().mapToInt(DamagedEvent::getAmount).sum());
         switch (setTargetPointer) {
             case PLAYER:
-                this.getAllEffects().setTargetPointer(new FixedTarget(event.getPlayerId()));
+                this.getAllEffects().setTargetPointer(new FixedTarget(event.getTargetId()));
                 break;
             case NONE:
                 break;

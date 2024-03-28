@@ -1,9 +1,5 @@
 package mage.cards.w;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-import java.util.Objects;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -14,13 +10,12 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.FightTargetsEffect;
 import mage.abilities.effects.common.InfoEffect;
-import mage.constants.*;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.events.BatchGameEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.NumberOfTriggersEvent;
 import mage.game.permanent.Permanent;
@@ -28,6 +23,9 @@ import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.util.CardUtil;
+
+import java.util.Objects;
+import java.util.UUID;
 
 
 /**
@@ -158,35 +156,27 @@ class WaytaTrainerProdigyEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-
-        NumberOfTriggersEvent numberOfTriggersEvent = (NumberOfTriggersEvent) event;
-
         // Permanent whose ability is being triggered (and will be retriggered)
-        Permanent triggeredPermanent = game.getPermanentOrLKIBattlefield(numberOfTriggersEvent.getSourceId());
+        Permanent triggeredPermanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
         if (triggeredPermanent == null || !triggeredPermanent.isControlledBy(source.getControllerId())) {
             return false;
         }
-
-        GameEvent sourceEvent = numberOfTriggersEvent.getSourceEvent();
+        GameEvent sourceEvent = ((NumberOfTriggersEvent) event).getSourceEvent();
         if (sourceEvent == null) {
             return false;
         }
-
-        if (!(sourceEvent.getType() == GameEvent.EventType.DAMAGED_BATCH_FOR_PERMANENTS
-                || sourceEvent.getType() == GameEvent.EventType.DAMAGED_PERMANENT)){
-            return false;
+        switch (sourceEvent.getType()) {
+            case DAMAGED_PERMANENT:
+            case DAMAGED_BATCH_FOR_ONE_PERMANENT:
+            case DAMAGED_BATCH_FOR_PERMANENTS:
+            case DAMAGED_BATCH_FOR_ALL:
+                break;
+            default:
+                return false;
         }
-
         // Get the one or more permanents damaged in this event
-        List<UUID> damagedPermanents = new ArrayList<>();
-        if (sourceEvent instanceof BatchGameEvent) {
-            damagedPermanents.addAll(((BatchGameEvent<?>) sourceEvent).getTargets());
-        } else {
-            damagedPermanents.add(sourceEvent.getTargetId());
-        }
-
         // If none of them are controlled by you, this ability doesn't apply.
-        return damagedPermanents
+        return CardUtil.getEventTargets(sourceEvent)
                 .stream()
                 .map(game::getPermanentOrLKIBattlefield)
                 .filter(Objects::nonNull)

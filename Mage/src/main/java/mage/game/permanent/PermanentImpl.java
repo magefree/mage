@@ -599,7 +599,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                     game.getTurnStepType() == PhaseStep.UNTAP
             );
             game.fireEvent(event);
-            game.getState().addSimultaneousUntapped(event, game);
+            game.getState().addSimultaneousUntappedToBatch(event, game);
             return true;
         }
         return false;
@@ -617,7 +617,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             this.tapped = true;
             TappedEvent event = new TappedEvent(objectId, source, source == null ? null : source.getControllerId(), forCombat);
             game.fireEvent(event);
-            game.getState().addSimultaneousTapped(event, game);
+            game.getState().addSimultaneousTappedToBatch(event, game);
             return true;
         }
         return false;

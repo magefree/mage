@@ -18,7 +18,7 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
-import mage.game.events.DamagedBatchEvent;
+import mage.game.events.DamagedBatchForPlayersEvent;
 import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -85,19 +85,11 @@ class RisonaAsariCommanderTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (controllerId == null) {
-            return false;
-        }
-        if (!(event instanceof DamagedBatchEvent)) {
-            return false;
-        }
-        DamagedBatchEvent batchEvent = (DamagedBatchEvent) event;
-        for (DamagedEvent damageEvent : batchEvent.getEvents()) {
-            if (damageEvent.isCombatDamage() && controllerId.equals(damageEvent.getTargetId())) {
-                return true;
-            }
-        }
-        return false;
+        return ((DamagedBatchForPlayersEvent) event)
+                .getEvents()
+                .stream()
+                .filter(DamagedEvent::isCombatDamage)
+                .anyMatch(e -> e.getTargetId().equals(getControllerId()));
     }
 }
 

@@ -120,9 +120,6 @@ class KayaSpiritsJusticeTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeBatchEvent zEvent = (ZoneChangeBatchEvent) event;
-        if (zEvent == null) {
-            return false;
-        }
 
         Set<Card> battlefieldCards = zEvent.getEvents()
                 .stream()
