@@ -25,7 +25,7 @@ public class EachOpponentPermanentTargetsAdjuster implements TargetAdjuster {
      * @param blueprintTarget The target to be duplicated per opponent
      */
     public EachOpponentPermanentTargetsAdjuster(TargetPermanent blueprintTarget) {
-        this.blueprintTarget = blueprintTarget.copy();
+        this.blueprintTarget = blueprintTarget.copy(); //Defensively copy the blueprint to ensure immutability
     }
 
     @Override

@@ -11,8 +11,6 @@ import java.io.Serializable;
 @FunctionalInterface
 public interface TargetAdjuster extends Serializable {
 
-    // Please note that if refactoring and a copy() method is to be added, you must also
-    // refactor subclasses which are not enums. Currently only EachOpponentPermanentTargetsAdjuster.
-
+    // Warning: This is not Copyable, do not use changeable data inside (only use static objects like Filter)
     void adjustTargets(Ability ability, Game game);
 }
