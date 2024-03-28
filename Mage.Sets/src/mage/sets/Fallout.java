@@ -192,6 +192,7 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Overseer of Vault 76", 368, Rarity.RARE, mage.cards.o.OverseerOfVault76.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Overseer of Vault 76", 547, Rarity.RARE, mage.cards.o.OverseerOfVault76.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Overseer of Vault 76", 896, Rarity.RARE, mage.cards.o.OverseerOfVault76.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Paladin Danse, Steel Maverick", 20, Rarity.UNCOMMON, mage.cards.p.PaladinDanseSteelMaverick.class));
         cards.add(new SetCardInfo("Panharmonicon", 237, Rarity.RARE, mage.cards.p.Panharmonicon.class));
         cards.add(new SetCardInfo("Path of Ancestry", 279, Rarity.COMMON, mage.cards.p.PathOfAncestry.class));
         cards.add(new SetCardInfo("Path to Exile", 169, Rarity.UNCOMMON, mage.cards.p.PathToExile.class));
