@@ -23,5 +23,6 @@ public final class TheBigScore extends ExpansionSet {
 
         cards.add(new SetCardInfo("Oltec Matterweaver", 3, Rarity.MYTHIC, mage.cards.o.OltecMatterweaver.class));
         cards.add(new SetCardInfo("Torpor Orb", 27, Rarity.MYTHIC, mage.cards.t.TorporOrb.class));
+        cards.add(new SetCardInfo("Vaultborn Tyrant", 20, Rarity.MYTHIC, mage.cards.v.VaultbornTyrant.class));
     }
 }
