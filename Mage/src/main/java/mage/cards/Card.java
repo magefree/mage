@@ -175,9 +175,17 @@ public interface Card extends MageObject, Ownerable {
 
     boolean addCounters(Counter counter, UUID playerAddingCounters, Ability source, Game game, List<UUID> appliedEffects, boolean isEffect, int maxCounters);
 
-    void removeCounters(String name, int amount, Ability source, Game game);
+    default void removeCounters(String name, int amount, Ability source, Game game){
+        removeCounters(name, amount, source, game, false);
+    }
 
-    void removeCounters(Counter counter, Ability source, Game game);
+    void removeCounters(String name, int amount, Ability source, Game game, boolean damage);
+
+    default void removeCounters(Counter counter, Ability source, Game game) {
+        removeCounters(counter, source, game, false);
+    }
+
+    void removeCounters(Counter counter, Ability source, Game game, boolean damage);
 
     @Override
     Card copy();

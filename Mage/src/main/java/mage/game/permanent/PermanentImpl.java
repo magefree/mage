@@ -1053,7 +1053,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             if (attacker != null && markDamage) {
                 markDamage(CounterType.LOYALTY.createInstance(countersToRemove), attacker, false);
             } else {
-                removeCounters(CounterType.LOYALTY.getName(), countersToRemove, source, game);
+                removeCounters(CounterType.LOYALTY.getName(), countersToRemove, source, game, true);
             }
         }
         if (this.isBattle(game)) {
@@ -1062,7 +1062,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             if (attacker != null && markDamage) {
                 markDamage(CounterType.DEFENSE.createInstance(countersToRemove), attacker, false);
             } else {
-                removeCounters(CounterType.DEFENSE.getName(), countersToRemove, source, game);
+                removeCounters(CounterType.DEFENSE.getName(), countersToRemove, source, game, true);
             }
         }
         DamagedEvent damagedEvent = new DamagedPermanentEvent(this.getId(), attackerId, this.getControllerId(), actualDamageDone, combat);
@@ -1176,7 +1176,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             if (mdi.addCounters) {
                 addCounters(mdi.counter, game.getControllerId(mdi.sourceObject.getId()), source, game);
             } else {
-                removeCounters(mdi.counter, source, game);
+                removeCounters(mdi.counter, source, game, true);
             }
         }
         markedDamage.clear();
