@@ -12,6 +12,7 @@ import java.util.List;
  */
 public final class OutlawsOfThunderJunction extends ExpansionSet {
 
+    // This is a list of cards with the plot mechanic, it will be removed when the mechanic is implemented
     private static final List<String> unfinished = Arrays.asList("Aloe Alchemist", "Aven Interrupter", "Cunning Coyote", "Fblthp, Lost on the Range", "Jace Reawakened", "Loan Shark", "Make Your Own Luck", "Outcaster Trailblazer", "Plan the Heist", "Rictus Robber", "Slickshot Lockpicker", "Slickshot Show-Off", "Step Between Worlds", "Unscrupulous Contractor");
     private static final OutlawsOfThunderJunction instance = new OutlawsOfThunderJunction();
 
