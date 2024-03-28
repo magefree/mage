@@ -27,6 +27,7 @@ public class CommittedCrimeTriggeredAbility extends TriggeredAbilityImpl {
 
     public CommittedCrimeTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
+        setTriggerPhrase("Whenever you commit a crime, ");
     }
 
     private CommittedCrimeTriggeredAbility(final CommittedCrimeTriggeredAbility ability) {
