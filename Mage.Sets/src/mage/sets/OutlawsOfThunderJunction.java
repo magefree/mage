@@ -42,6 +42,7 @@ public final class OutlawsOfThunderJunction extends ExpansionSet {
         cards.add(new SetCardInfo("Creosote Heath", 255, Rarity.COMMON, mage.cards.c.CreosoteHeath.class));
         cards.add(new SetCardInfo("Cunning Coyote", 118, Rarity.UNCOMMON, mage.cards.c.CunningCoyote.class));
         cards.add(new SetCardInfo("Desperate Bloodseeker", 86, Rarity.COMMON, mage.cards.d.DesperateBloodseeker.class));
+        cards.add(new SetCardInfo("Double Down", 44, Rarity.MYTHIC, mage.cards.d.DoubleDown.class));
         cards.add(new SetCardInfo("Duelist of the Mind", 45, Rarity.RARE, mage.cards.d.DuelistOfTheMind.class));
         cards.add(new SetCardInfo("Eroded Canyon", 256, Rarity.COMMON, mage.cards.e.ErodedCanyon.class));
         cards.add(new SetCardInfo("Festering Gulch", 257, Rarity.COMMON, mage.cards.f.FesteringGulch.class));
