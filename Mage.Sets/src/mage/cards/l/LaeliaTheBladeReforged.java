@@ -13,12 +13,18 @@ import mage.constants.*;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeGroupEvent;
+import mage.game.events.ZoneChangeBatchEvent;
+import mage.game.events.ZoneChangeEvent;
 
 import java.util.Objects;
 import java.util.UUID;
 
 /**
+ * Rules update: 6/18/2021
+ * Laelia, the Blade Reforged has received an update to its Oracle text.
+ * Specifically, its last triggered ability doesn't care which player is exiling cards from the library or graveyard.
+ * Cards put into exile from your library or graveyard for any reason, such as the delve ability, cause the ability to trigger.
+ *
  * @author jmharmon
  */
 public final class LaeliaTheBladeReforged extends CardImpl {
@@ -38,7 +44,7 @@ public final class LaeliaTheBladeReforged extends CardImpl {
         // Whenever Laelia, the Blade Reforged attacks, exile the top card of your library. You may play that card this turn.
         this.addAbility(new AttacksTriggeredAbility(new ExileTopXMayPlayUntilEffect(1, Duration.EndOfTurn), false));
 
-        // Whenever a spell or ability you control exiles one or more cards from your library and/or your graveyard, put a +1/+1 counter on Laelia.
+        // Whenever one or more cards are put into exile from your library and/or your graveyard, put a +1/+1 counter on Laelia.
         this.addAbility(new LaeliaTheBladeReforgedAddCountersTriggeredAbility());
     }
 
@@ -69,44 +75,21 @@ class LaeliaTheBladeReforgedAddCountersTriggeredAbility extends TriggeredAbility
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE_GROUP;
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE_BATCH;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        ZoneChangeGroupEvent zEvent = (ZoneChangeGroupEvent) event;
-        final int numberExiled = zEvent.getCards().size();
-        if (zEvent.getToZone() != Zone.EXILED
-                || numberExiled == 0) {
-            return false;
-        }
-        switch (zEvent.getFromZone()) {
-            case LIBRARY:
-                if (zEvent
-                        .getCards()
-                        .stream()
-                        .filter(Objects::nonNull)
-                        .map(Card::getOwnerId)
-                        .anyMatch(this::isControlledBy)
-                        && numberExiled > 0) {
-                    this.getEffects().clear();
-                    this.getEffects().add(new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
-                    return true;
-                }
-            case GRAVEYARD:
-                if (zEvent
-                        .getCards()
-                        .stream()
-                        .filter(Objects::nonNull)
-                        .map(Card::getOwnerId)
-                        .anyMatch(this::isControlledBy)
-                        && numberExiled > 0) {
-                    this.getEffects().clear();
-                    this.getEffects().add(new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
-                    return true;
-                }
-        }
-        return false;
+        ZoneChangeBatchEvent zEvent = (ZoneChangeBatchEvent) event;
+        return zEvent.getEvents()
+                .stream()
+                .filter(e -> e.getFromZone() == Zone.LIBRARY || e.getFromZone() == Zone.GRAVEYARD)
+                .filter(e -> e.getToZone() == Zone.EXILED)
+                .map(ZoneChangeEvent::getTargetId)
+                .map(game::getCard)
+                .filter(Objects::nonNull)
+                .map(Card::getOwnerId)
+                .anyMatch(this::isControlledBy);
     }
 
     @Override

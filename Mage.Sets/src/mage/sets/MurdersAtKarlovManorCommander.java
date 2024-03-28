@@ -132,6 +132,8 @@ public final class MurdersAtKarlovManorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Hydroid Krasis", 212, Rarity.RARE, mage.cards.h.HydroidKrasis.class));
         cards.add(new SetCardInfo("Idol of Oblivion", 229, Rarity.RARE, mage.cards.i.IdolOfOblivion.class));
         cards.add(new SetCardInfo("Imperial Hellkite", 155, Rarity.RARE, mage.cards.i.ImperialHellkite.class));
+        cards.add(new SetCardInfo("Innocuous Researcher", 38, Rarity.RARE, mage.cards.i.InnocuousResearcher.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Innocuous Researcher", 348, Rarity.RARE, mage.cards.i.InnocuousResearcher.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Inspiring Statuary", 230, Rarity.RARE, mage.cards.i.InspiringStatuary.class));
         cards.add(new SetCardInfo("Irrigated Farmland", 267, Rarity.RARE, mage.cards.i.IrrigatedFarmland.class));
         cards.add(new SetCardInfo("Jeska's Will", 156, Rarity.RARE, mage.cards.j.JeskasWill.class));
@@ -205,6 +207,7 @@ public final class MurdersAtKarlovManorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Price of Fame", 135, Rarity.UNCOMMON, mage.cards.p.PriceOfFame.class));
         cards.add(new SetCardInfo("Printlifter Ooze", 40, Rarity.RARE, mage.cards.p.PrintlifterOoze.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Printlifter Ooze", 350, Rarity.RARE, mage.cards.p.PrintlifterOoze.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Prisoner's Dilemma", 34, Rarity.RARE, mage.cards.p.PrisonersDilemma.class));
         cards.add(new SetCardInfo("Promise of Loyalty", 79, Rarity.RARE, mage.cards.p.PromiseOfLoyalty.class));
         cards.add(new SetCardInfo("Psychosis Crawler", 234, Rarity.RARE, mage.cards.p.PsychosisCrawler.class));
         cards.add(new SetCardInfo("Ravenous Chupacabra", 136, Rarity.UNCOMMON, mage.cards.r.RavenousChupacabra.class));
