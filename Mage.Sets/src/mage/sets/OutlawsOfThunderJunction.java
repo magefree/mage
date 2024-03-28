@@ -12,7 +12,7 @@ import java.util.List;
  */
 public final class OutlawsOfThunderJunction extends ExpansionSet {
 
-    private static final List<String> unfinished = Arrays.asList("Aven Interrupter", "Fblthp, Lost on the Range", "Jace Reawakened", "Make Your Own Luck", "Plan the Heist", "Slickshot Lockpicker", "Slickshot Show-Off", "Step Between Worlds");
+    private static final List<String> unfinished = Arrays.asList("Aloe Alchemist", "Aven Interrupter", "Cunning Coyote", "Fblthp, Lost on the Range", "Jace Reawakened", "Loan Shark", "Make Your Own Luck", "Outcaster Trailblazer", "Plan the Heist", "Rictus Robber", "Slickshot Lockpicker", "Slickshot Show-Off", "Step Between Worlds", "Unscrupulous Contractor");
     private static final OutlawsOfThunderJunction instance = new OutlawsOfThunderJunction();
 
     public static OutlawsOfThunderJunction getInstance() {
@@ -66,6 +66,7 @@ public final class OutlawsOfThunderJunction extends ExpansionSet {
         cards.add(new SetCardInfo("Soured Springs", 264, Rarity.COMMON, mage.cards.s.SouredSprings.class));
         cards.add(new SetCardInfo("Spirebluff Canal", 270, Rarity.RARE, mage.cards.s.SpirebluffCanal.class));
         cards.add(new SetCardInfo("Swamp", 274, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Terror of the Peaks", 149, Rarity.MYTHIC, mage.cards.t.TerrorOfThePeaks.class));
         cards.add(new SetCardInfo("Vial Smasher, Gleeful Grenadier", 235, Rarity.UNCOMMON, mage.cards.v.VialSmasherGleefulGrenadier.class));
 
         cards.removeIf(setCardInfo -> unfinished.contains(setCardInfo.getName())); // remove when mechanic is implemented
