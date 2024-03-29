@@ -13,7 +13,7 @@ public class LifeLostEvent extends GameEvent{
                 playerId, source, playerId, amount, atCombat);
     }
 
-    public boolean isCombatDamage() {
+    public boolean isLifeLostByCombatDamage() {
         return flag;
     }
 }
