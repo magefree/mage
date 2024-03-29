@@ -155,6 +155,10 @@ class FranticScapegoatSuspectEffect extends OneShotEffect {
             }
             if (suspect != null){
                 suspect.setSuspected(true, game, source);
+                Permanent scapegoat = source.getSourcePermanentIfItStillExists(game);
+                if (scapegoat != null){
+                    scapegoat.setSuspected(false, game, source);
+                }
             }
         }
         return true;
