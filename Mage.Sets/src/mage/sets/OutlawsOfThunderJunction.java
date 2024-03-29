@@ -111,6 +111,7 @@ public final class OutlawsOfThunderJunction extends ExpansionSet {
         cards.add(new SetCardInfo("Lavaspur Boots", 243, Rarity.UNCOMMON, mage.cards.l.LavaspurBoots.class));
         cards.add(new SetCardInfo("Loan Shark", 55, Rarity.COMMON, mage.cards.l.LoanShark.class));
         cards.add(new SetCardInfo("Lonely Arroyo", 260, Rarity.COMMON, mage.cards.l.LonelyArroyo.class));
+        cards.add(new SetCardInfo("Longhorn Sharpshooter", 132, Rarity.UNCOMMON, mage.cards.l.LonghornSharpshooter.class));
         cards.add(new SetCardInfo("Lush Oasis", 261, Rarity.COMMON, mage.cards.l.LushOasis.class));
         cards.add(new SetCardInfo("Luxurious Locomotive", 244, Rarity.UNCOMMON, mage.cards.l.LuxuriousLocomotive.class));
         cards.add(new SetCardInfo("Magda, the Hoardmaster", 133, Rarity.RARE, mage.cards.m.MagdaTheHoardmaster.class));
