@@ -1,7 +1,6 @@
 package mage.cards.b;
 
 import mage.abilities.Ability;
-import mage.abilities.condition.common.BargainedCondition;
 import mage.abilities.condition.common.CollectedEvidenceCondition;
 import mage.abilities.costs.CostAdjuster;
 import mage.abilities.costs.OptionalAdditionalCost;
