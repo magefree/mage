@@ -197,6 +197,7 @@ Odyssey|ODY|
 Oath of the Gatewatch|OGW|
 Onslaught|ONS|
 Outlaws of Thunder Junction|OTJ|
+Outlaws of Thunder Junction Commander|OTC|
 The Big Score|BIG|
 Magic Origins|ORI|
 Phyrexia: All Will Be One|ONE|

@@ -1,6 +1,5 @@
 package mage.cards.i;
 
-import mage.abilities.Ability;
 import mage.abilities.common.SagaAbility;
 import mage.abilities.effects.Effects;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -15,14 +14,9 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SagaChapter;
 import mage.constants.SubType;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
-import mage.game.Game;
 import mage.game.permanent.token.WraithToken;
-import mage.players.Player;
-import mage.target.TargetPermanent;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetadjustment.EachOpponentPermanentTargetsAdjuster;
 import mage.target.targetpointer.EachTargetPointer;
 
 import java.util.UUID;
@@ -63,7 +57,7 @@ public final class InTheDarknessBindThem extends CardImpl {
                     ability.addEffect(new TheRingTemptsYouEffect());
 
                     ability.getEffects().setTargetPointer(new EachTargetPointer());
-                    ability.setTargetAdjuster(InTheDarknessBindThemAdjuster.instance);
+                    ability.setTargetAdjuster(new EachOpponentPermanentTargetsAdjuster(new TargetCreaturePermanent(0,1)));
                 }
         );
 
@@ -77,23 +71,5 @@ public final class InTheDarknessBindThem extends CardImpl {
     @Override
     public InTheDarknessBindThem copy() {
         return new InTheDarknessBindThem(this);
-    }
-}
-
-enum InTheDarknessBindThemAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        for (UUID opponentId : game.getOpponents(ability.getControllerId())) {
-            Player player = game.getPlayer(opponentId);
-            if (player == null) {
-                continue;
-            }
-            FilterPermanent filter = new FilterCreaturePermanent("creature controlled by " + player.getName());
-            filter.add(new ControllerIdPredicate(opponentId));
-            ability.addTarget(new TargetPermanent(0, 1, filter));
-        }
     }
 }

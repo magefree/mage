@@ -3293,7 +3293,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
         // raise affected roll events
         for (RollDieResult result : dieRolls) {
-            game.fireEvent(new DieRolledEvent(source, rollDiceEvent.getRollDieType(), rollDiceEvent.getSides(), result.naturalResult, result.modifier, result.planarResult));
+            game.fireEvent(new DieRolledEvent(source, this.getId(), rollDiceEvent.getRollDieType(), rollDiceEvent.getSides(), result.naturalResult, result.modifier, result.planarResult));
         }
         game.fireEvent(new DiceRolledEvent(rollDiceEvent.getSides(), dieResults, source, this.getId()));
 

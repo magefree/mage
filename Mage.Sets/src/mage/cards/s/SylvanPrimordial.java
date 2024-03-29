@@ -15,14 +15,12 @@ import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterLandCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInLibrary;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.EachOpponentPermanentTargetsAdjuster;
 
 import java.util.UUID;
 
@@ -31,6 +29,11 @@ import java.util.UUID;
  */
 public final class SylvanPrimordial extends CardImpl {
 
+    private static final FilterPermanent filter = new FilterPermanent("noncreature permanent");
+
+    static {
+        filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
+    }
     public SylvanPrimordial(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");
         this.subtype.add(SubType.AVATAR);
@@ -43,7 +46,7 @@ public final class SylvanPrimordial extends CardImpl {
 
         // When Sylvan Primordial enters the battlefield, for each opponent, destroy target noncreature permanent that player controls. For each permanent destroyed this way, search your library for a Forest card and put that card onto the battlefield tapped. Then shuffle your library.
         Ability ability = new EntersBattlefieldTriggeredAbility(new SylvanPrimordialEffect(), false);
-        ability.setTargetAdjuster(SylvanPrimordialAdjuster.instance);
+        ability.setTargetAdjuster(new EachOpponentPermanentTargetsAdjuster(new TargetPermanent(filter)));
         this.addAbility(ability);
     }
 
@@ -54,25 +57,6 @@ public final class SylvanPrimordial extends CardImpl {
     @Override
     public SylvanPrimordial copy() {
         return new SylvanPrimordial(this);
-    }
-}
-
-enum SylvanPrimordialAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        for (UUID opponentId : game.getOpponents(ability.getControllerId())) {
-            Player opponent = game.getPlayer(opponentId);
-            if (opponent != null) {
-                FilterPermanent filter = new FilterPermanent("noncreature permanent from opponent " + opponent.getLogName());
-                filter.add(new ControllerIdPredicate(opponentId));
-                filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
-                TargetPermanent target = new TargetPermanent(0, 1, filter, false);
-                ability.addTarget(target);
-            }
-        }
     }
 }
 

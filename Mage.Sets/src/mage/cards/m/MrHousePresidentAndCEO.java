@@ -77,7 +77,7 @@ class MrHousePresidentAndCEOTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         DieRolledEvent drEvent = (DieRolledEvent) event;
-        if (this.isControlledBy(event.getPlayerId()) && drEvent.getRollDieType() == RollDieType.NUMERICAL) {
+        if (this.isControlledBy(event.getTargetId()) && drEvent.getRollDieType() == RollDieType.NUMERICAL) {
             // looks for "result" instead "natural result"
             int result = drEvent.getResult();
             this.getEffects().setValue("rolled", result);
