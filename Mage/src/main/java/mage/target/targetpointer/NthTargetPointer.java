@@ -21,7 +21,7 @@ public abstract class NthTargetPointer extends TargetPointerImpl {
     private final Map<UUID, Integer> zoneChangeCounter = new HashMap<>();
     private final int targetIndex; // zero-based target numbers (1 -> 0, 2 -> 1, 3 -> 2, etc)
 
-    public NthTargetPointer(int targetNumber) {
+    protected NthTargetPointer(int targetNumber) {
         super();
         this.targetIndex = targetNumber - 1;
     }
@@ -53,8 +53,9 @@ public abstract class NthTargetPointer extends TargetPointerImpl {
     }
 
     private void wrongTargetsUsage(Ability source) {
-        if (this.targetIndex > 0) {
+        if (this.targetIndex > 0 && source.getTargetAdjuster() == null) {
             // first target pointer is default, so must be ignored
+            // also legitimate use case with target adjuster e.g. Jilt
             throw new IllegalStateException("Wrong code usage: source ability miss targets setup for target pointer - "
                     + this.getClass().getSimpleName() + " - " + source.getClass().getSimpleName() + " - " + source);
         }
