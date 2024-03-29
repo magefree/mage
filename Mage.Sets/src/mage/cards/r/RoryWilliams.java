@@ -58,13 +58,14 @@ public final class RoryWilliams extends CardImpl {
 
 class RoryWilliamsTriggeredAbility extends CastSourceTriggeredAbility {
 
-    protected RoryWilliamsTriggeredAbility(Effect effect) {
+    RoryWilliamsTriggeredAbility(Effect effect) {
         super(effect, false);
-        this.ruleAtTheTop = true;
+        setRuleAtTheTop(true);
         setTriggerPhrase("When you cast this spell from anywhere other than exile, ");
+        withRuleTextReplacement(true);
     }
 
-    protected RoryWilliamsTriggeredAbility(final RoryWilliamsTriggeredAbility ability) {
+    private RoryWilliamsTriggeredAbility(final RoryWilliamsTriggeredAbility ability) {
         super(ability);
     }
 
