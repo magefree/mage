@@ -81,7 +81,7 @@ class AlelaCunningConquerorTriggeredAbility extends DealCombatDamageControlledTr
         if (!super.checkTrigger(event, game)) {
             return false;
         }
-        Player opponent = game.getPlayer(event.getPlayerId());
+        Player opponent = game.getPlayer(event.getTargetId());
         if (opponent == null) {
             return false;
         }

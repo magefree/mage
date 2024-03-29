@@ -3,10 +3,9 @@ package mage.game.events;
 /**
  * @author TheElk801
  */
-public class DamagedBatchForPermanentsEvent extends DamagedBatchEvent {
+public class DamagedBatchForPermanentsEvent extends BatchEvent<DamagedPermanentEvent> {
 
-    public DamagedBatchForPermanentsEvent(DamagedEvent firstEvent) {
-        super(EventType.DAMAGED_BATCH_FOR_PERMANENTS, DamagedPermanentEvent.class);
-        addEvent(firstEvent);
+    public DamagedBatchForPermanentsEvent(DamagedPermanentEvent firstEvent) {
+        super(EventType.DAMAGED_BATCH_FOR_PERMANENTS, false, firstEvent);
     }
 }

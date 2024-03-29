@@ -195,6 +195,7 @@ Oath of the Gatewatch|OathOfTheGatewatch|
 Odyssey|Odyssey|
 Onslaught|Onslaught|
 Outlaws of Thunder Junction|OutlawsOfThunderJunction|
+Outlaws of Thunder Junction Commander|OutlawsOfThunderJunctionCommander|
 The Big Score|TheBigScore|
 Phyrexia: All Will Be One|PhyrexiaAllWillBeOne|
 Phyrexia: All Will Be One Commander|PhyrexiaAllWillBeOneCommander|

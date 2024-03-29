@@ -24,6 +24,7 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Almost Perfect", 90, Rarity.RARE, mage.cards.a.AlmostPerfect.class));
         cards.add(new SetCardInfo("Alpha Deathclaw", 91, Rarity.RARE, mage.cards.a.AlphaDeathclaw.class));
         cards.add(new SetCardInfo("Anguished Unmaking", 209, Rarity.RARE, mage.cards.a.AnguishedUnmaking.class));
+        cards.add(new SetCardInfo("Arcade Gannon", 92, Rarity.RARE, mage.cards.a.ArcadeGannon.class));
         cards.add(new SetCardInfo("Arcane Signet", 224, Rarity.UNCOMMON, mage.cards.a.ArcaneSignet.class));
         cards.add(new SetCardInfo("Armory Paladin", 93, Rarity.RARE, mage.cards.a.ArmoryPaladin.class));
         cards.add(new SetCardInfo("Ash Barrens", 253, Rarity.COMMON, mage.cards.a.AshBarrens.class));
@@ -59,6 +60,7 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Brotherhood Scribe", 365, Rarity.RARE, mage.cards.b.BrotherhoodScribe.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Brotherhood Scribe", 541, Rarity.RARE, mage.cards.b.BrotherhoodScribe.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Brotherhood Scribe", 893, Rarity.RARE, mage.cards.b.BrotherhoodScribe.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Brotherhood Vertibird", 128, Rarity.RARE, mage.cards.b.BrotherhoodVertibird.class));
         cards.add(new SetCardInfo("Buried Ruin", 254, Rarity.UNCOMMON, mage.cards.b.BuriedRuin.class));
         cards.add(new SetCardInfo("Caesar, Legion's Emperor", 1, Rarity.MYTHIC, mage.cards.c.CaesarLegionsEmperor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Caesar, Legion's Emperor", 339, Rarity.MYTHIC, mage.cards.c.CaesarLegionsEmperor.class, NON_FULL_USE_VARIOUS));
@@ -191,6 +193,7 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Overseer of Vault 76", 368, Rarity.RARE, mage.cards.o.OverseerOfVault76.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Overseer of Vault 76", 547, Rarity.RARE, mage.cards.o.OverseerOfVault76.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Overseer of Vault 76", 896, Rarity.RARE, mage.cards.o.OverseerOfVault76.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Paladin Danse, Steel Maverick", 20, Rarity.UNCOMMON, mage.cards.p.PaladinDanseSteelMaverick.class));
         cards.add(new SetCardInfo("Panharmonicon", 237, Rarity.RARE, mage.cards.p.Panharmonicon.class));
         cards.add(new SetCardInfo("Path of Ancestry", 279, Rarity.COMMON, mage.cards.p.PathOfAncestry.class));
         cards.add(new SetCardInfo("Path to Exile", 169, Rarity.UNCOMMON, mage.cards.p.PathToExile.class));
@@ -218,6 +221,7 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Scattered Groves", 286, Rarity.RARE, mage.cards.s.ScatteredGroves.class));
         cards.add(new SetCardInfo("Scavenger Grounds", 287, Rarity.RARE, mage.cards.s.ScavengerGrounds.class));
         cards.add(new SetCardInfo("Secure the Wastes", 171, Rarity.RARE, mage.cards.s.SecureTheWastes.class));
+        cards.add(new SetCardInfo("Securitron Squadron", 23, Rarity.RARE, mage.cards.s.SecuritronSquadron.class));
         cards.add(new SetCardInfo("Shadowblood Ridge", 288, Rarity.RARE, mage.cards.s.ShadowbloodRidge.class));
         cards.add(new SetCardInfo("Sheltered Thicket", 289, Rarity.RARE, mage.cards.s.ShelteredThicket.class));
         cards.add(new SetCardInfo("Sierra, Nuka's Biggest Fan", 25, Rarity.RARE, mage.cards.s.SierraNukasBiggestFan.class, NON_FULL_USE_VARIOUS));
@@ -246,6 +250,7 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Swamp", 321, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Swiftfoot Boots", 242, Rarity.UNCOMMON, mage.cards.s.SwiftfootBoots.class));
         cards.add(new SetCardInfo("Swords to Plowshares", 173, Rarity.UNCOMMON, mage.cards.s.SwordsToPlowshares.class));
+        cards.add(new SetCardInfo("T-45 Power Armor", 145, Rarity.RARE, mage.cards.t.T45PowerArmor.class));
         cards.add(new SetCardInfo("Tainted Field", 298, Rarity.UNCOMMON, mage.cards.t.TaintedField.class));
         cards.add(new SetCardInfo("Tainted Isle", 299, Rarity.UNCOMMON, mage.cards.t.TaintedIsle.class));
         cards.add(new SetCardInfo("Tainted Peak", 300, Rarity.UNCOMMON, mage.cards.t.TaintedPeak.class));

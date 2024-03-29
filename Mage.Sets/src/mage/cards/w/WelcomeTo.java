@@ -17,13 +17,11 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.token.DinosaurToken;
 import mage.game.permanent.token.custom.CreatureToken;
-import mage.players.Player;
 import mage.target.TargetPermanent;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.EachOpponentPermanentTargetsAdjuster;
 import mage.target.targetpointer.EachTargetPointer;
 import mage.target.targetpointer.FixedTarget;
 
@@ -36,9 +34,12 @@ import java.util.UUID;
 public final class WelcomeTo extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("Walls");
+    private static final FilterPermanent filterNoncreatureArtifact = new FilterPermanent("noncreature artifact");
 
     static {
         filter.add(SubType.WALL.getPredicate());
+        filterNoncreatureArtifact.add(Predicates.not(CardType.CREATURE.getPredicate()));
+        filterNoncreatureArtifact.add(CardType.ARTIFACT.getPredicate());
     }
 
     // Based on Azusa's Many Journeys // Likeness of the Seeker, Vronos Masked Inquisitor, In the Darkness Bind Then, 
@@ -62,7 +63,7 @@ public final class WelcomeTo extends CardImpl {
                     ).setText("For each opponent, up to one target noncreature artifact they control becomes " +
                               "a 0/4 Wall artifact creature with defender for as long as you control this Saga."));
             ability.getEffects().setTargetPointer(new EachTargetPointer());
-            ability.setTargetAdjuster(WelcomeToAdjuster.instance);
+            ability.setTargetAdjuster(new EachOpponentPermanentTargetsAdjuster(new TargetPermanent(0, 1, filterNoncreatureArtifact)));
         });
 
         // II -- Create a 3/3 green Dinosaur creature token with trample. It gains haste until end of turn.
@@ -86,28 +87,6 @@ public final class WelcomeTo extends CardImpl {
     @Override
     public WelcomeTo copy() {
         return new WelcomeTo(this);
-    }
-}
-
-// Based on Vronos, Masked Inquisitor
-enum WelcomeToAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        for (UUID opponentId : game.getOpponents(ability.getControllerId())) {
-            Player opponent = game.getPlayer(opponentId);
-            if (opponent == null) {
-                continue;
-            }
-            FilterPermanent filter = new FilterPermanent(
-                    "noncreature artifact controlled by " + opponent.getLogName());
-            filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
-            filter.add(CardType.ARTIFACT.getPredicate());
-            filter.add(new ControllerIdPredicate(opponentId));
-            ability.addTarget(new TargetPermanent(0, 1, filter, false));
-        }
     }
 }
 
