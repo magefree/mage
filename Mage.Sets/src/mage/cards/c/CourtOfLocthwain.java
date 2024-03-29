@@ -89,7 +89,7 @@ class CourtOfLocthwainFirstEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
-        if (controller == null || opponent == null || source == null) {
+        if (controller == null || opponent == null) {
             return false;
         }
         Card card = opponent.getLibrary().getFromTop(game);
@@ -220,12 +220,11 @@ class CourtOfLocthwainWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        UUID playerId = event.getPlayerId();
         if (event.getType() == GameEvent.EventType.SPELL_CAST
                 && event.hasApprovingIdentifier(MageIdentifier.CourtOfLocthwainWatcher)
-                && playerId != null) {
+                && event.getPlayerId() != null) {
             decrementCastAvailable(
-                    playerId,
+                    event.getPlayerId(),
                     event.getAdditionalReference().getApprovingMageObjectReference()
             );
         }

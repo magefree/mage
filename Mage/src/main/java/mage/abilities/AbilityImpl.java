@@ -52,37 +52,37 @@ public abstract class AbilityImpl implements Ability {
     private static final List<Ability> emptyAbilities = new ArrayList<>();
 
     protected UUID id;
-    protected UUID originalId; // TODO: delete originalId???
+    private UUID originalId; // TODO: delete originalId???
     protected AbilityType abilityType;
     protected UUID controllerId;
     protected UUID sourceId;
     private final ManaCosts<ManaCost> manaCosts;
     private final ManaCosts<ManaCost> manaCostsToPay;
     private final Costs<Cost> costs;
-    protected Modes modes; // access to it by GetModes only (it can be overridden by some abilities)
+    private final Modes modes; // access to it by GetModes only (it can be overridden by some abilities)
     protected Zone zone;
     protected String name;
     protected AbilityWord abilityWord;
     protected String flavorWord;
     protected boolean usesStack = true;
-    protected boolean ruleAtTheTop = false;
-    protected boolean ruleVisible = true;
-    protected boolean ruleAdditionalCostsVisible = true;
+    private boolean ruleAtTheTop = false;
+    private boolean ruleVisible = true;
+    private boolean ruleAdditionalCostsVisible = true;
     protected boolean activated = false;
-    protected boolean worksFaceDown = false;
-    protected boolean worksPhasedOut = false;
-    protected int sourceObjectZoneChangeCounter;
-    protected List<Watcher> watchers = new ArrayList<>(); // access to it by GetWatchers only (it can be overridden by some abilities)
-    protected List<Ability> subAbilities = null;
-    protected boolean canFizzle = true;
-    protected TargetAdjuster targetAdjuster = null;
-    protected CostAdjuster costAdjuster = null;
-    protected List<Hint> hints = new ArrayList<>();
+    private boolean worksFaceDown = false;
+    private boolean worksPhasedOut = false;
+    private int sourceObjectZoneChangeCounter;
+    private List<Watcher> watchers = new ArrayList<>(); // access to it by GetWatchers only (it can be overridden by some abilities)
+    private List<Ability> subAbilities = null;
+    private boolean canFizzle = true; // for Gilded Drake
+    private TargetAdjuster targetAdjuster = null;
+    private CostAdjuster costAdjuster = null;
+    private List<Hint> hints = new ArrayList<>();
     protected List<CardIcon> icons = new ArrayList<>();
-    protected Outcome customOutcome = null; // uses for AI decisions instead effects
-    protected MageIdentifier identifier = MageIdentifier.Default; // used to identify specific ability (e.g. to match with corresponding watcher)
-    protected String appendToRule = null;
-    protected int sourcePermanentTransformCount = 0;
+    private Outcome customOutcome = null; // uses for AI decisions instead effects
+    private MageIdentifier identifier = MageIdentifier.Default; // used to identify specific ability (e.g. to match with corresponding watcher)
+    private String appendToRule = null;
+    private int sourcePermanentTransformCount = 0;
     private Map<String, Object> costsTagMap = null;
 
     protected AbilityImpl(AbilityType abilityType, Zone zone) {
@@ -719,7 +719,7 @@ public abstract class AbilityImpl implements Ability {
         return costsTagMap;
     }
     public void setCostsTag(String tag, Object value){
-        if (costsTagMap == null){
+        if (costsTagMap == null) {
             costsTagMap = new HashMap<>();
         }
         costsTagMap.put(tag, value);
