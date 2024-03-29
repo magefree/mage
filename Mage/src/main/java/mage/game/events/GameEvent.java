@@ -120,9 +120,14 @@ public class GameEvent implements Serializable {
 
         /* DAMAGED_BATCH_FOR_ONE_PLAYER
          combines all player damage events to a single batch (event) and split it per damaged player
-         playerId    the id of the damaged player
+         targetId    the id of the damaged player (playerId won't work for batch)
          */
         DAMAGED_BATCH_FOR_ONE_PLAYER,
+
+        /* DAMAGED_BATCH_FOR_ALL
+        includes all damage events, both permanent damage and player damage, in single batch event
+         */
+        DAMAGED_BATCH_FOR_ALL,
 
         /* DAMAGE_CAUSES_LIFE_LOSS,
          targetId    the id of the damaged player
