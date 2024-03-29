@@ -116,8 +116,8 @@ public final class OutlawsOfThunderJunction extends ExpansionSet {
         cards.add(new SetCardInfo("Lush Oasis", 261, Rarity.COMMON, mage.cards.l.LushOasis.class));
         cards.add(new SetCardInfo("Luxurious Locomotive", 244, Rarity.UNCOMMON, mage.cards.l.LuxuriousLocomotive.class));
         cards.add(new SetCardInfo("Magda, the Hoardmaster", 133, Rarity.RARE, mage.cards.m.MagdaTheHoardmaster.class));
+        cards.add(new SetCardInfo("Make Your Own Luck", 218, Rarity.UNCOMMON, mage.cards.m.MakeYourOwnLuck.class));
         cards.add(new SetCardInfo("Malcolm, the Eyes", 219, Rarity.RARE, mage.cards.m.MalcolmTheEyes.class));
-        cards.add(new SetCardInfo("Map the Frontier", 170, Rarity.UNCOMMON, mage.cards.m.MapTheFrontier.class));
         cards.add(new SetCardInfo("Marauding Sphinx", 56, Rarity.UNCOMMON, mage.cards.m.MaraudingSphinx.class));
         cards.add(new SetCardInfo("Marchesa, Dealer of Death", 220, Rarity.RARE, mage.cards.m.MarchesaDealerOfDeath.class));
         cards.add(new SetCardInfo("Mine Raider", 135, Rarity.COMMON, mage.cards.m.MineRaider.class));
