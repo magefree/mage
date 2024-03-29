@@ -1,9 +1,6 @@
 package mage.cards.t;
 
-import java.util.*;
-
 import mage.abilities.Ability;
-import mage.abilities.common.AttacksCreatureYouControlTriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -14,21 +11,27 @@ import mage.abilities.effects.common.DontUntapInControllersUntapStepEnchantedEff
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.effects.common.counter.GetEnergyCountersControllerEffect;
 import mage.abilities.keyword.EquipAbility;
-import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
-import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.choices.Choice;
+import mage.choices.ChoiceImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.*;
 
 /**
  *
  * @author justinjohnson14
  */
 public final class T45PowerArmor extends CardImpl {
+
     public T45PowerArmor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
         
@@ -40,6 +43,7 @@ public final class T45PowerArmor extends CardImpl {
         Ability ability = (new SimpleStaticAbility(new BoostEquippedEffect(3,3)));
         ability.addEffect(new DontUntapInControllersUntapStepEnchantedEffect().setText("and doesn't untap during its controller's untap step"));
         this.addAbility(ability);
+
         // At the beginning of your upkeep, you may pay {E}. If you do, untap equipped creature, then put your choice of a menace, trample or lifelink counter on it.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 new DoIfCostPaid(
@@ -73,15 +77,19 @@ class T45PowerArmorEffect extends OneShotEffect {
         staticText = "untap equipped creature, then put your choice of a menace, trample, or lifelink counter on it";
     }
 
-    protected T45PowerArmorEffect(mage.cards.t.T45PowerArmorEffect effect) {
+    private T45PowerArmorEffect(T45PowerArmorEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        Permanent creature = game.getPermanent(source.getSourcePermanentIfItStillExists(game).getAttachedTo());
-        if (player == null || creature == null) {
+        Permanent attachment = source.getSourcePermanentIfItStillExists(game);
+        if (player == null || attachment == null) {
+            return false;
+        }
+        Permanent creature = game.getPermanent(attachment.getAttachedTo());
+        if (creature == null) {
             return false;
         }
 
