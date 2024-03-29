@@ -20,7 +20,7 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.game.permanent.token.BlueBlackZombieRogueToken;
+import mage.game.permanent.token.ZombieRogueToken;
 
 import java.util.UUID;
 
@@ -32,7 +32,7 @@ public final class GisaTheHellraiser extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Skeletons and Zombies");
 
     static {
-        Predicates.or(SubType.SKELETON.getPredicate(), SubType.ZOMBIE.getPredicate());
+        filter.add(Predicates.or(SubType.SKELETON.getPredicate(), SubType.ZOMBIE.getPredicate()));
     }
 
     public GisaTheHellraiser(UUID ownerId, CardSetInfo setInfo) {
@@ -58,7 +58,7 @@ public final class GisaTheHellraiser extends CardImpl {
         this.addAbility(ability);
 
         // Whenever you commit a crime, create two tapped 2/2 blue and black Zombie Rogue creature tokens. This ability triggers only once each turn.
-        ability = new CommittedCrimeTriggeredAbility(new CreateTokenEffect(new BlueBlackZombieRogueToken(), 2, true)).setTriggersOnceEachTurn(true);
+        ability = new CommittedCrimeTriggeredAbility(new CreateTokenEffect(new ZombieRogueToken(), 2, true)).setTriggersOnceEachTurn(true);
         this.addAbility(ability);
     }
 
