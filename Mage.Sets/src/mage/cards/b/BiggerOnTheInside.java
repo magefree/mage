@@ -19,6 +19,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.players.Player;
@@ -92,7 +93,7 @@ class BiggerOnTheInsideEffect extends OneShotEffect { //Not a mana ability since
         if (player == null) {
             return false;
         }
-        ContinuousEffect cascadeEffect = new NextSpellCastHasAbilityEffect(new CascadeAbility(), TargetController.SOURCE_TARGETS);
+        ContinuousEffect cascadeEffect = new NextSpellCastHasAbilityEffect(new CascadeAbility(), StaticFilters.FILTER_CARD, TargetController.SOURCE_TARGETS);
         game.addEffect(cascadeEffect, source);
 
         ManaEffect manaEffect = new AddManaOfAnyColorEffect(2);

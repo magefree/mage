@@ -28,12 +28,11 @@ public class NextSpellCastHasAbilityEffect extends ContinuousEffectImpl {
     public NextSpellCastHasAbilityEffect(Ability ability) {
         this(ability, StaticFilters.FILTER_CARD);
     }
+
     public NextSpellCastHasAbilityEffect(Ability ability, FilterCard filter) {
-        this(ability, StaticFilters.FILTER_CARD, TargetController.SOURCE_CONTROLLER);
+        this(ability, filter, TargetController.SOURCE_CONTROLLER);
     }
-    public NextSpellCastHasAbilityEffect(Ability ability, TargetController targetController) {
-        this(ability, StaticFilters.FILTER_CARD, targetController);
-    }
+
     public NextSpellCastHasAbilityEffect(Ability ability, FilterCard filter, TargetController targetController) {
         super(Duration.EndOfTurn, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         this.ability = ability;
