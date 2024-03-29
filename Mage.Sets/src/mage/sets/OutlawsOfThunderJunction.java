@@ -61,6 +61,7 @@ public final class OutlawsOfThunderJunction extends ExpansionSet {
         cards.add(new SetCardInfo("Forsaken Miner", 88, Rarity.UNCOMMON, mage.cards.f.ForsakenMiner.class));
         cards.add(new SetCardInfo("Freestrider Lookout", 163, Rarity.RARE, mage.cards.f.FreestriderLookout.class));
         cards.add(new SetCardInfo("Frontier Seeker", 13, Rarity.UNCOMMON, mage.cards.f.FrontierSeeker.class));
+        cards.add(new SetCardInfo("Gold Pan", 242, Rarity.COMMON, mage.cards.g.GoldPan.class));
         cards.add(new SetCardInfo("Hardbristle Bandit", 168, Rarity.COMMON, mage.cards.h.HardbristleBandit.class));
         cards.add(new SetCardInfo("Hell to Pay", 126, Rarity.RARE, mage.cards.h.HellToPay.class));
         cards.add(new SetCardInfo("Hellspur Brute", 127, Rarity.UNCOMMON, mage.cards.h.HellspurBrute.class));
