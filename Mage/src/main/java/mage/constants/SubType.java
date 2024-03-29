@@ -408,6 +408,7 @@ public enum SubType {
     UNICORN("Unicorn", SubTypeSet.CreatureType),
     // V
     VAMPIRE("Vampire", SubTypeSet.CreatureType),
+    VARMINT("Varmint", SubTypeSet.CreatureType),
     VEDALKEN("Vedalken", SubTypeSet.CreatureType),
     VIASHINO("Viashino", SubTypeSet.CreatureType),
     VILLAIN("Villain", SubTypeSet.CreatureType, true), // Unstable
