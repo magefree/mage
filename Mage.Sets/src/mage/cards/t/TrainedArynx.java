@@ -2,9 +2,7 @@ package mage.cards.t;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.condition.common.SaddledCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.common.AttacksWhileSaddledTriggeredAbility;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
@@ -32,10 +30,9 @@ public final class TrainedArynx extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever Trained Arynx attacks while saddled, it gains first strike until end of turn. Scry 1.
-        Ability ability = new ConditionalTriggeredAbility(new AttacksTriggeredAbility(
-                new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn)
-        ), SaddledCondition.instance, "Whenever {this} attacks while saddled, " +
-                "it gains first strike until end of turn. Scry 1.");
+        Ability ability = new AttacksWhileSaddledTriggeredAbility(new GainAbilitySourceEffect(
+                FirstStrikeAbility.getInstance(), Duration.EndOfTurn
+        ).setText("it gains first strike until end of turn"));
         ability.addEffect(new ScryEffect(1));
         this.addAbility(ability);
 
