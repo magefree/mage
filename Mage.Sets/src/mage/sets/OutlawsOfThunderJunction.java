@@ -124,6 +124,7 @@ public final class OutlawsOfThunderJunction extends ExpansionSet {
         cards.add(new SetCardInfo("Vial Smasher, Gleeful Grenadier", 235, Rarity.UNCOMMON, mage.cards.v.VialSmasherGleefulGrenadier.class));
         cards.add(new SetCardInfo("Visage Bandit", 76, Rarity.UNCOMMON, mage.cards.v.VisageBandit.class));
         cards.add(new SetCardInfo("Vraska Joins Up", 236, Rarity.RARE, mage.cards.v.VraskaJoinsUp.class));
+        cards.add(new SetCardInfo("Wrangler of the Damned", 238, Rarity.UNCOMMON, mage.cards.w.WranglerOfTheDamned.class));
 
         cards.removeIf(setCardInfo -> unfinished.contains(setCardInfo.getName())); // remove when mechanic is implemented
     }
