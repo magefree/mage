@@ -354,6 +354,11 @@ public abstract class AbilityImpl implements Ability {
                     return false;
                 }
             }
+
+            Cost cost = this.getModes().getMode().getCost();
+            if (cost != null) {
+                this.costs.add(cost);
+            }
         } // end modes
 
         // 20220908 - 601.2e

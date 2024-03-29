@@ -13,7 +13,8 @@ public class SpreeAbility extends StaticAbility {
         super(Zone.ALL, null);
         this.setRuleVisible(false);
         card.getSpellAbility().getModes().setChooseText("Spree <i>(Choose one or more additional costs.)</i>");
-        card.getSpellAbility().getModes().setMaxModes(3);
+        card.getSpellAbility().getModes().setMinModes(0);
+        card.getSpellAbility().getModes().setMaxModes(Integer.MAX_VALUE);
     }
 
     private SpreeAbility(final SpreeAbility ability) {
