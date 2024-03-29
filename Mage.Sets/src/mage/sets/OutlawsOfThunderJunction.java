@@ -13,7 +13,7 @@ import java.util.List;
 public final class OutlawsOfThunderJunction extends ExpansionSet {
 
     // This is a list of cards with the plot mechanic, it will be removed when the mechanic is implemented
-    private static final List<String> unfinished = Arrays.asList("Aloe Alchemist", "Aven Interrupter", "Blacksnag Buzzard", "Cunning Coyote", "Fblthp, Lost on the Range", "Jace Reawakened", "Loan Shark", "Longhorn Sharpshooter", "Make Your Own Luck", "Outcaster Trailblazer", "Plan the Heist", "Rictus Robber", "Slickshot Lockpicker", "Slickshot Show-Off", "Step Between Worlds", "Tumbleweed Rising", "Unscrupulous Contractor");
+    private static final List<String> unfinished = Arrays.asList("Aloe Alchemist", "Aven Interrupter", "Beastbond Outcaster", "Blacksnag Buzzard", "Brimstone Roundup", "Cunning Coyote", "Demonic Ruckus", "Djinn of Fool's Fall", "Fblthp, Lost on the Range", "Irascible Wolverine", "Jace Reawakened", "Kellan Joins Up", "Lilah, Undefeated Slickshot", "Loan Shark", "Longhorn Sharpshooter", "Make Your Own Luck", "Outcaster Trailblazer", "Outlaw Stitcher", "Pillage the Bog", "Plan the Heist", "Railway Brawler", "Rictus Robber", "Rise of the Varmints", "Sheriff of Safe Passage", "Slickshot Lockpicker", "Slickshot Show-Off", "Step Between Worlds", "Stingerback Terror", "Tumbleweed Rising", "Unscrupulous Contractor", "Visage Bandit");
     private static final OutlawsOfThunderJunction instance = new OutlawsOfThunderJunction();
 
     public static OutlawsOfThunderJunction getInstance() {
