@@ -77,7 +77,7 @@ class ShipwreckSentryWatcher extends Watcher {
         }
         EntersTheBattlefieldEvent eEvent = (EntersTheBattlefieldEvent) event;
         if (eEvent.getTarget() != null && eEvent.getTarget().isArtifact(game)) {
-            playerSet.add(eEvent.getTarget().getId());
+            playerSet.add(eEvent.getTarget().getControllerId());
         }
     }
 
