@@ -77,6 +77,7 @@ public final class OutlawsOfThunderJunction extends ExpansionSet {
         cards.add(new SetCardInfo("Plan the Heist", 62, Rarity.UNCOMMON, mage.cards.p.PlanTheHeist.class));
         cards.add(new SetCardInfo("Rakish Crew", 99, Rarity.UNCOMMON, mage.cards.r.RakishCrew.class));
         cards.add(new SetCardInfo("Rattleback Apothecary", 100, Rarity.UNCOMMON, mage.cards.r.RattlebackApothecary.class));
+        cards.add(new SetCardInfo("Reckless Lackey", 140, Rarity.COMMON, mage.cards.r.RecklessLackey.class));
         cards.add(new SetCardInfo("Resilient Roadrunner", 141, Rarity.UNCOMMON, mage.cards.r.ResilientRoadrunner.class));
         cards.add(new SetCardInfo("Ruthless Lawbringer", 229, Rarity.UNCOMMON, mage.cards.r.RuthlessLawbringer.class));
         cards.add(new SetCardInfo("Scorching Shot", 145, Rarity.UNCOMMON, mage.cards.s.ScorchingShot.class));
