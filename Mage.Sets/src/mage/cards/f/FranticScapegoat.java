@@ -20,6 +20,7 @@ import mage.filter.predicate.permanent.PermanentReferenceInCollectionPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeGroupEvent;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
@@ -82,7 +83,8 @@ class FranticScapegoatTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (!getSourcePermanentIfItStillExists(game).isSuspected()){
+        Permanent source = getSourcePermanentIfItStillExists(game);
+        if (source == null || !source.isSuspected()){
             return false;
         }
         ZoneChangeGroupEvent zEvent = (ZoneChangeGroupEvent) event;
@@ -136,19 +138,23 @@ class FranticScapegoatSuspectEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Set<MageObjectReference> enteringSet = (Set<MageObjectReference>) getValue("franticScapegoatEnteringCreatures");
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
+        if (controller != null && enteringSet != null) {
+            Permanent suspect = null;
             if (enteringSet.size() > 1) {
                 FilterCreaturePermanent filter = new FilterCreaturePermanent("one of those creatures");
                 filter.add(new PermanentReferenceInCollectionPredicate(enteringSet));
                 Target target = new TargetPermanent(filter);
                 target.withNotTarget(true);
-                if (target.canChoose(source.getControllerId(), source, game)) {
-                    if (controller.choose(outcome, target, source, game)) {
-                        game.getPermanent(target.getFirstTarget()).setSuspected(true, game, source);
-                    }
+                if (controller.choose(outcome, target, source, game)) {
+                    suspect = game.getPermanent(target.getFirstTarget());
                 }
-            } else {
-                enteringSet.forEach(s -> s.getPermanent(game).setSuspected(true, game, source));
+            } else { //There is only 1 creature in the set
+                for (MageObjectReference s : enteringSet){
+                    suspect = s.getPermanent(game);
+                }
+            }
+            if (suspect != null){
+                suspect.setSuspected(true, game, source);
             }
         }
         return true;

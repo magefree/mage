@@ -76,45 +76,11 @@ class AgencyOutfitterEffect extends OneShotEffect {
             return false;
         }
 
-        //Uses AbstractMap.SimpleImmutableEntry as a generic Pair class
-        //Create a local lambda function to reduce code duplication
-        Function<String, AbstractMap.SimpleImmutableEntry<Card, Boolean>> searchEverywhereForCard = (name) -> {
-            FilterCard filter = new FilterCard(name);
-            filter.add(new NamePredicate(name));
-            Card card = null;
-            boolean searchedLibrary = false;
-
-            // Choose card from graveyard
-            if (controller.chooseUse(Outcome.Neutral, "Search your graveyard for "+name+"?", source, game)) {
-                TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(filter);
-                if (controller.choose(Outcome.PutCardInPlay, controller.getGraveyard(), target, source, game)) {
-                    card = game.getCard(target.getFirstTarget());
-                }
-            }
-
-            // Choose card from your hand
-            if (card == null && controller.chooseUse(Outcome.Neutral, "Search your hand for "+name+"?", source, game)) {
-                TargetCardInHand target = new TargetCardInHand(filter);
-                if (controller.choose(Outcome.PutCardInPlay, controller.getHand(), target, source, game)) {
-                    card = game.getCard(target.getFirstTarget());
-                }
-            }
-
-            // Choose a card from your library
-            if (card == null && controller.chooseUse(Outcome.Neutral, "Search your library for "+name+"?", source, game)) {
-                TargetCardInLibrary target = new TargetCardInLibrary(filter);
-                if (controller.searchLibrary(target, source, game)) {
-                    card = game.getCard(target.getFirstTarget());
-                }
-                searchedLibrary = true;
-            }
-            return new AbstractMap.SimpleImmutableEntry<>(card, searchedLibrary);
-        };
 
         Cards cards = new CardsImpl();
-        AbstractMap.SimpleImmutableEntry<Card, Boolean> card1 = searchEverywhereForCard.apply("Magnifying Glass");
+        AbstractMap.SimpleImmutableEntry<Card, Boolean> card1 = searchEverywhereForCard("Magnifying Glass", controller, source, game);
         cards.add(card1.getKey());
-        AbstractMap.SimpleImmutableEntry<Card, Boolean> card2 = searchEverywhereForCard.apply("Thinking Cap");
+        AbstractMap.SimpleImmutableEntry<Card, Boolean> card2 = searchEverywhereForCard("Thinking Cap", controller, source, game);
         cards.add(card2.getKey());
         if (!cards.isEmpty()) {
             controller.moveCards(cards, Zone.BATTLEFIELD, source, game);
@@ -124,4 +90,39 @@ class AgencyOutfitterEffect extends OneShotEffect {
         }
         return true;
     }
+
+    //Uses AbstractMap.SimpleImmutableEntry as a generic Pair class
+    //Create a local lambda function to reduce code duplication
+    private AbstractMap.SimpleImmutableEntry<Card, Boolean> searchEverywhereForCard (String name, Player controller, Ability source, Game game) {
+        FilterCard filter = new FilterCard(name);
+        filter.add(new NamePredicate(name));
+        Card card = null;
+        boolean searchedLibrary = false;
+
+        // Choose card from graveyard
+        if (controller.chooseUse(Outcome.Neutral, "Search your graveyard for "+name+"?", source, game)) {
+            TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(filter);
+            if (controller.choose(Outcome.PutCardInPlay, controller.getGraveyard(), target, source, game)) {
+                card = game.getCard(target.getFirstTarget());
+            }
+        }
+
+        // Choose card from your hand
+        if (card == null && controller.chooseUse(Outcome.Neutral, "Search your hand for "+name+"?", source, game)) {
+            TargetCardInHand target = new TargetCardInHand(filter);
+            if (controller.choose(Outcome.PutCardInPlay, controller.getHand(), target, source, game)) {
+                card = game.getCard(target.getFirstTarget());
+            }
+        }
+
+        // Choose a card from your library
+        if (card == null && controller.chooseUse(Outcome.Neutral, "Search your library for "+name+"?", source, game)) {
+            TargetCardInLibrary target = new TargetCardInLibrary(filter);
+            if (controller.searchLibrary(target, source, game)) {
+                card = game.getCard(target.getFirstTarget());
+            }
+            searchedLibrary = true;
+        }
+        return new AbstractMap.SimpleImmutableEntry<>(card, searchedLibrary);
+    };
 }

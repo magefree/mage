@@ -2,6 +2,7 @@ package mage.cards.b;
 
 import mage.abilities.Ability;
 import mage.abilities.condition.common.BargainedCondition;
+import mage.abilities.condition.common.CollectedEvidenceCondition;
 import mage.abilities.costs.CostAdjuster;
 import mage.abilities.costs.OptionalAdditionalCost;
 import mage.abilities.effects.Effect;
@@ -64,7 +65,7 @@ enum BiteDownOnCrimeAdjuster implements CostAdjuster {
 
     @Override
     public void adjustCosts(Ability ability, Game game) {
-        if (BargainedCondition.instance.apply(game, ability)
+        if (CollectedEvidenceCondition.instance.apply(game, ability)
                 || (game.inCheckPlayableState() && collectEvidenceCost.canPay(ability, null, ability.getControllerId(), game))) {
             CardUtil.reduceCost(ability, 2);
         }
