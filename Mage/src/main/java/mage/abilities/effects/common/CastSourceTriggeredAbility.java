@@ -21,7 +21,7 @@ public class CastSourceTriggeredAbility extends TriggeredAbilityImpl {
 
     public CastSourceTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.STACK, effect, optional);
-        this.ruleAtTheTop = true;
+        this.setRuleAtTheTop(true);
         setTriggerPhrase("When you cast this spell, ");
     }
 
