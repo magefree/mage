@@ -11,10 +11,7 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.hint.ConditionHint;
 import mage.abilities.hint.Hint;
 import mage.abilities.hint.HintUtils;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
+import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
@@ -41,6 +38,7 @@ public class SaddleAbility extends SimpleActivatedAbility {
         super(new SaddleEffect(), new SaddleCost(value));
         this.value = value;
         this.addHint(hint);
+        this.setTiming(TimingRule.SORCERY);
     }
 
     private SaddleAbility(final SaddleAbility ability) {
