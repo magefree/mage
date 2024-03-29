@@ -1060,6 +1060,14 @@ public final class StaticFilters {
         FILTER_CREATURE_NON_TOKEN.setLockedFilter(true);
     }
 
+
+    public static final FilterCreaturePermanent FILTER_CREATURES_NON_TOKEN = new FilterCreaturePermanent("nontoken creatures");
+
+    static {
+        FILTER_CREATURES_NON_TOKEN.add(TokenPredicate.FALSE);
+        FILTER_CREATURES_NON_TOKEN.setLockedFilter(true);
+    }
+
     public static final FilterControlledCreaturePermanent FILTER_A_CONTROLLED_CREATURE_P1P1 = new FilterControlledCreaturePermanent("a creature you control with a +1/+1 counter on it");
 
     static {
