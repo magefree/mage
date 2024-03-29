@@ -6,13 +6,8 @@ import mage.abilities.effects.common.ExileUntilSourceLeavesEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
-import mage.game.Game;
-import mage.players.Player;
-import mage.target.TargetPermanent;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.common.TargetNonlandPermanent;
+import mage.target.targetadjustment.EachOpponentPermanentTargetsAdjuster;
 import mage.target.targetpointer.EachTargetPointer;
 
 import java.util.UUID;
@@ -30,7 +25,7 @@ public final class GraspOfFate extends CardImpl {
                 .setTargetPointer(new EachTargetPointer())
                 .setText("for each opponent, exile up to one target nonland permanent that player controls until {this} leaves the battlefield")
         );
-        ability.setTargetAdjuster(GraspOfFateAdjuster.instance);
+        ability.setTargetAdjuster(new EachOpponentPermanentTargetsAdjuster(new TargetNonlandPermanent(0,1)));
         this.addAbility(ability);
     }
 
@@ -41,25 +36,5 @@ public final class GraspOfFate extends CardImpl {
     @Override
     public GraspOfFate copy() {
         return new GraspOfFate(this);
-    }
-}
-
-enum GraspOfFateAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        for (UUID opponentId : game.getOpponents(ability.getControllerId())) {
-            Player opponent = game.getPlayer(opponentId);
-            if (opponent == null) {
-                continue;
-            }
-            FilterPermanent filter = new FilterPermanent("nonland permanent from opponent " + opponent.getLogName());
-            filter.add(new ControllerIdPredicate(opponentId));
-            filter.add(Predicates.not(CardType.LAND.getPredicate()));
-            TargetPermanent target = new TargetPermanent(0, 1, filter, false);
-            ability.addTarget(target);
-        }
     }
 }

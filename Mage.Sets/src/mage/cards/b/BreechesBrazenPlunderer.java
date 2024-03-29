@@ -9,8 +9,8 @@ import mage.abilities.keyword.PartnerAbility;
 import mage.cards.*;
 import mage.constants.*;
 import mage.game.Game;
-import mage.game.events.DamagedEvent;
 import mage.game.events.DamagedBatchForPlayersEvent;
+import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -72,9 +72,8 @@ class BreechesBrazenPlundererTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        DamagedBatchForPlayersEvent dEvent = (DamagedBatchForPlayersEvent) event;
         Set<UUID> opponents = new HashSet<>();
-        for (DamagedEvent damagedEvent : dEvent.getEvents()) {
+        for (DamagedEvent damagedEvent : ((DamagedBatchForPlayersEvent) event).getEvents()) {
             Permanent permanent = game.getPermanent(damagedEvent.getSourceId());
             if (permanent == null
                     || !permanent.isControlledBy(getControllerId())
@@ -84,7 +83,7 @@ class BreechesBrazenPlundererTriggeredAbility extends TriggeredAbilityImpl {
             }
             opponents.add(damagedEvent.getTargetId());
         }
-        if (opponents.size() < 1) {
+        if (opponents.isEmpty()) {
             return false;
         }
         this.getEffects().clear();

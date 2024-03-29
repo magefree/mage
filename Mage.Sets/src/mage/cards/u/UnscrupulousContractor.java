@@ -40,7 +40,7 @@ public final class UnscrupulousContractor extends CardImpl {
         )));
 
         // Plot {2}{B}
-        this.addAbility(new PlotAbility(this, "{2}{B}"));
+        this.addAbility(new PlotAbility("{2}{B}"));
     }
 
     private UnscrupulousContractor(final UnscrupulousContractor card) {
