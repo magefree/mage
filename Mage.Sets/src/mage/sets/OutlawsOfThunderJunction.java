@@ -34,6 +34,7 @@ public final class OutlawsOfThunderJunction extends ExpansionSet {
         cards.add(new SetCardInfo("Blooming Marsh", 266, Rarity.RARE, mage.cards.b.BloomingMarsh.class));
         cards.add(new SetCardInfo("Botanical Sanctum", 267, Rarity.RARE, mage.cards.b.BotanicalSanctum.class));
         cards.add(new SetCardInfo("Bovine Intervention", 6, Rarity.UNCOMMON, mage.cards.b.BovineIntervention.class));
+        cards.add(new SetCardInfo("Bristlepack Sentry", 156, Rarity.COMMON, mage.cards.b.BristlepackSentry.class));
         cards.add(new SetCardInfo("Bristling Backwoods", 253, Rarity.COMMON, mage.cards.b.BristlingBackwoods.class));
         cards.add(new SetCardInfo("Bristly Bill, Spine Sower", 157, Rarity.MYTHIC, mage.cards.b.BristlyBillSpineSower.class));
         cards.add(new SetCardInfo("Bruse Tarl, Roving Rancher", 198, Rarity.RARE, mage.cards.b.BruseTarlRovingRancher.class));
