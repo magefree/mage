@@ -89,6 +89,8 @@ class OutlawStitcherEffect extends OneShotEffect {
 
     OutlawStitcherEffect() {
         super(Outcome.PutCreatureInPlay);
+        staticText = "create a 2/2 blue and black Zombie Rogue creature token, "
+                + "then put two +1/+1 counters on that token for each spell you've cast this turn other than the first";
     }
 
     private OutlawStitcherEffect(final OutlawStitcherEffect effect) {
