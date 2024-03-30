@@ -145,6 +145,7 @@ public final class OutlawsOfThunderJunction extends ExpansionSet {
         cards.add(new SetCardInfo("Ruthless Lawbringer", 229, Rarity.UNCOMMON, mage.cards.r.RuthlessLawbringer.class));
         cards.add(new SetCardInfo("Sandstorm Verge", 263, Rarity.UNCOMMON, mage.cards.s.SandstormVerge.class));
         cards.add(new SetCardInfo("Scorching Shot", 145, Rarity.UNCOMMON, mage.cards.s.ScorchingShot.class));
+        cards.add(new SetCardInfo("Seraphic Steed", 232, Rarity.RARE, mage.cards.s.SeraphicSteed.class));
         cards.add(new SetCardInfo("Servant of the Stinger", 105, Rarity.UNCOMMON, mage.cards.s.ServantOfTheStinger.class));
         cards.add(new SetCardInfo("Shackle Slinger", 65, Rarity.UNCOMMON, mage.cards.s.ShackleSlinger.class));
         cards.add(new SetCardInfo("Shepherd of the Clouds", 28, Rarity.UNCOMMON, mage.cards.s.ShepherdOfTheClouds.class));
