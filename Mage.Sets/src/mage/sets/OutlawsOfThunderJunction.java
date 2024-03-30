@@ -129,6 +129,7 @@ public final class OutlawsOfThunderJunction extends ExpansionSet {
         cards.add(new SetCardInfo("Reach for the Sky", 178, Rarity.COMMON, mage.cards.r.ReachForTheSky.class));
         cards.add(new SetCardInfo("Reckless Lackey", 140, Rarity.COMMON, mage.cards.r.RecklessLackey.class));
         cards.add(new SetCardInfo("Redrock Sentinel", 247, Rarity.UNCOMMON, mage.cards.r.RedrockSentinel.class));
+        cards.add(new SetCardInfo("Requisition Raid", 26, Rarity.UNCOMMON, mage.cards.r.RequisitionRaid.class));
         cards.add(new SetCardInfo("Resilient Roadrunner", 141, Rarity.UNCOMMON, mage.cards.r.ResilientRoadrunner.class));
         cards.add(new SetCardInfo("Rictus Robber", 102, Rarity.UNCOMMON, mage.cards.r.RictusRobber.class));
         cards.add(new SetCardInfo("Rise of the Varmints", 179, Rarity.UNCOMMON, mage.cards.r.RiseOfTheVarmints.class));
