@@ -136,6 +136,7 @@ public final class OutlawsOfThunderJunction extends ExpansionSet {
         cards.add(new SetCardInfo("Resilient Roadrunner", 141, Rarity.UNCOMMON, mage.cards.r.ResilientRoadrunner.class));
         cards.add(new SetCardInfo("Rictus Robber", 102, Rarity.UNCOMMON, mage.cards.r.RictusRobber.class));
         cards.add(new SetCardInfo("Rise of the Varmints", 179, Rarity.UNCOMMON, mage.cards.r.RiseOfTheVarmints.class));
+        cards.add(new SetCardInfo("Rodeo Pyromancers", 143, Rarity.COMMON, mage.cards.r.RodeoPyromancers.class));
         cards.add(new SetCardInfo("Rooftop Assassin", 103, Rarity.COMMON, mage.cards.r.RooftopAssassin.class));
         cards.add(new SetCardInfo("Roxanne, Starfall Savant", 228, Rarity.RARE, mage.cards.r.RoxanneStarfallSavant.class));
         cards.add(new SetCardInfo("Ruthless Lawbringer", 229, Rarity.UNCOMMON, mage.cards.r.RuthlessLawbringer.class));
