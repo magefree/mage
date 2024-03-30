@@ -71,7 +71,7 @@ public final class OutlawsOfThunderJunction extends ExpansionSet {
         cards.add(new SetCardInfo("Fake Your Own Death", 87, Rarity.COMMON, mage.cards.f.FakeYourOwnDeath.class));
         cards.add(new SetCardInfo("Ferocification", 123, Rarity.UNCOMMON, mage.cards.f.Ferocification.class));
         cards.add(new SetCardInfo("Festering Gulch", 257, Rarity.COMMON, mage.cards.f.FesteringGulch.class));
-        cards.add(new SetCardInfo("Forest", 276, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 276, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Forlorn Flats", 258, Rarity.COMMON, mage.cards.f.ForlornFlats.class));
         cards.add(new SetCardInfo("Form a Posse", 204, Rarity.UNCOMMON, mage.cards.f.FormAPosse.class));
         cards.add(new SetCardInfo("Forsaken Miner", 88, Rarity.UNCOMMON, mage.cards.f.ForsakenMiner.class));
@@ -95,7 +95,7 @@ public final class OutlawsOfThunderJunction extends ExpansionSet {
         cards.add(new SetCardInfo("Intrepid Stablemaster", 169, Rarity.UNCOMMON, mage.cards.i.IntrepidStablemaster.class));
         cards.add(new SetCardInfo("Inventive Wingsmith", 17, Rarity.COMMON, mage.cards.i.InventiveWingsmith.class));
         cards.add(new SetCardInfo("Irascible Wolverine", 130, Rarity.COMMON, mage.cards.i.IrascibleWolverine.class));
-        cards.add(new SetCardInfo("Island", 273, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 273, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Jagged Barrens", 259, Rarity.COMMON, mage.cards.j.JaggedBarrens.class));
         cards.add(new SetCardInfo("Jolene, Plundering Pugilist", 210, Rarity.UNCOMMON, mage.cards.j.JolenePlunderingPugilist.class));
         cards.add(new SetCardInfo("Kraum, Violent Cacophony", 214, Rarity.UNCOMMON, mage.cards.k.KraumViolentCacophony.class));
@@ -112,7 +112,7 @@ public final class OutlawsOfThunderJunction extends ExpansionSet {
         cards.add(new SetCardInfo("Mine Raider", 135, Rarity.COMMON, mage.cards.m.MineRaider.class));
         cards.add(new SetCardInfo("Miriam, Herd Whisperer", 221, Rarity.UNCOMMON, mage.cards.m.MiriamHerdWhisperer.class));
         cards.add(new SetCardInfo("Mobile Homestead", 245, Rarity.UNCOMMON, mage.cards.m.MobileHomestead.class));
-        cards.add(new SetCardInfo("Mountain", 275, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 275, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Neutralize the Guards", 95, Rarity.UNCOMMON, mage.cards.n.NeutralizeTheGuards.class));
         cards.add(new SetCardInfo("Nimble Brigand", 58, Rarity.UNCOMMON, mage.cards.n.NimbleBrigand.class));
         cards.add(new SetCardInfo("Oasis Gardener", 246, Rarity.COMMON, mage.cards.o.OasisGardener.class));
@@ -123,7 +123,7 @@ public final class OutlawsOfThunderJunction extends ExpansionSet {
         cards.add(new SetCardInfo("Outlaw Stitcher", 59, Rarity.UNCOMMON, mage.cards.o.OutlawStitcher.class));
         cards.add(new SetCardInfo("Peerless Ropemaster", 60, Rarity.COMMON, mage.cards.p.PeerlessRopemaster.class));
         cards.add(new SetCardInfo("Pillage the Bog", 224, Rarity.RARE, mage.cards.p.PillageTheBog.class));
-        cards.add(new SetCardInfo("Plains", 272, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 272, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Plan the Heist", 62, Rarity.UNCOMMON, mage.cards.p.PlanTheHeist.class));
         cards.add(new SetCardInfo("Prosperity Tycoon", 25, Rarity.UNCOMMON, mage.cards.p.ProsperityTycoon.class));
         cards.add(new SetCardInfo("Quilled Charger", 139, Rarity.COMMON, mage.cards.q.QuilledCharger.class));
@@ -163,7 +163,7 @@ public final class OutlawsOfThunderJunction extends ExpansionSet {
         cards.add(new SetCardInfo("Sterling Keykeeper", 32, Rarity.COMMON, mage.cards.s.SterlingKeykeeper.class));
         cards.add(new SetCardInfo("Stingerback Terror", 147, Rarity.RARE, mage.cards.s.StingerbackTerror.class));
         cards.add(new SetCardInfo("Stoic Sphinx", 71, Rarity.RARE, mage.cards.s.StoicSphinx.class));
-        cards.add(new SetCardInfo("Swamp", 274, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 274, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Terror of the Peaks", 149, Rarity.MYTHIC, mage.cards.t.TerrorOfThePeaks.class));
         cards.add(new SetCardInfo("This Town Ain't Big Enough", 74, Rarity.UNCOMMON, mage.cards.t.ThisTownAintBigEnough.class));
         cards.add(new SetCardInfo("Tomb Trawler", 250, Rarity.UNCOMMON, mage.cards.t.TombTrawler.class));
