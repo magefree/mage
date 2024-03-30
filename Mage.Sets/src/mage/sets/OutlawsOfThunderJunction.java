@@ -40,6 +40,7 @@ public final class OutlawsOfThunderJunction extends ExpansionSet {
         cards.add(new SetCardInfo("Blood Hustler", 80, Rarity.UNCOMMON, mage.cards.b.BloodHustler.class));
         cards.add(new SetCardInfo("Blooming Marsh", 266, Rarity.RARE, mage.cards.b.BloomingMarsh.class));
         cards.add(new SetCardInfo("Boneyard Desecrator", 81, Rarity.COMMON, mage.cards.b.BoneyardDesecrator.class));
+        cards.add(new SetCardInfo("Bonny Pall, Clearcutter", 196, Rarity.RARE, mage.cards.b.BonnyPallClearcutter.class));
         cards.add(new SetCardInfo("Boom Box", 241, Rarity.UNCOMMON, mage.cards.b.BoomBox.class));
         cards.add(new SetCardInfo("Botanical Sanctum", 267, Rarity.RARE, mage.cards.b.BotanicalSanctum.class));
         cards.add(new SetCardInfo("Bounding Felidar", 5, Rarity.UNCOMMON, mage.cards.b.BoundingFelidar.class));
