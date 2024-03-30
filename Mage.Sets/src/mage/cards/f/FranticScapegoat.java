@@ -1,7 +1,6 @@
 package mage.cards.f;
 
 import mage.MageInt;
-import mage.MageItem;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -19,7 +18,8 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.PermanentReferenceInCollectionPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeGroupEvent;
+import mage.game.events.ZoneChangeBatchEvent;
+import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
@@ -29,7 +29,6 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  *
@@ -65,7 +64,7 @@ public final class FranticScapegoat extends CardImpl {
     }
 }
 
-//Based on Ingenious Artillerist and Lightmine Field
+//Based on Lightmine Field
 class FranticScapegoatTriggeredAbility extends TriggeredAbilityImpl {
 
     FranticScapegoatTriggeredAbility() {
@@ -78,29 +77,24 @@ class FranticScapegoatTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE_GROUP;
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE_BATCH;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent source = getSourcePermanentIfItStillExists(game);
-        if (source == null || !source.isSuspected()){
+        if (source == null || !source.isSuspected()) {
             return false;
         }
-        ZoneChangeGroupEvent zEvent = (ZoneChangeGroupEvent) event;
-        if (zEvent.getToZone() != Zone.BATTLEFIELD
-                || !this.controllerId.equals(event.getPlayerId())) {
-            return false;
-        }
-        Set<MageObjectReference> enteringCreatures = Stream.concat(
-                zEvent.getTokens()
-                        .stream(),
-                zEvent.getCards()
-                        .stream()
-                        .map(MageItem::getId)
-                        .map(game::getPermanent)
-                        .filter(Objects::nonNull)
-        ).filter(permanent -> permanent.isCreature(game)).map(s -> new MageObjectReference(s, game)).collect(Collectors.toSet());
+        ZoneChangeBatchEvent zEvent = (ZoneChangeBatchEvent) event;
+        Set<MageObjectReference> enteringCreatures = zEvent.getEvents().stream()
+                .filter(z -> z.getToZone() == Zone.BATTLEFIELD)
+                .filter(z -> this.controllerId.equals(z.getPlayerId()))
+                .map(ZoneChangeEvent::getTarget)
+                .filter(Objects::nonNull)
+                .filter(permanent -> permanent.isCreature(game))
+                .map(p -> new MageObjectReference(p, game))
+                .collect(Collectors.toSet());
         if (enteringCreatures.size() > 0) {
             this.getEffects().setValue("franticScapegoatEnteringCreatures", enteringCreatures);
             return true;
@@ -118,9 +112,10 @@ class FranticScapegoatTriggeredAbility extends TriggeredAbilityImpl {
         return "Whenever one or more other creatures enter the battlefield under your control, if {this} is suspected, you may suspect one of the other creatures. If you do, {this} is no longer suspected.";
     }
 }
+
 class FranticScapegoatSuspectEffect extends OneShotEffect {
 
-    public FranticScapegoatSuspectEffect() {
+    FranticScapegoatSuspectEffect() {
         super(Outcome.Benefit);
         this.staticText = "Suspect one of the other creatures";
     }
@@ -149,14 +144,14 @@ class FranticScapegoatSuspectEffect extends OneShotEffect {
                     suspect = game.getPermanent(target.getFirstTarget());
                 }
             } else { //There is only 1 creature in the set
-                for (MageObjectReference s : enteringSet){
+                for (MageObjectReference s : enteringSet) {
                     suspect = s.getPermanent(game);
                 }
             }
-            if (suspect != null){
+            if (suspect != null) {
                 suspect.setSuspected(true, game, source);
                 Permanent scapegoat = source.getSourcePermanentIfItStillExists(game);
-                if (scapegoat != null){
+                if (scapegoat != null) {
                     scapegoat.setSuspected(false, game, source);
                 }
             }
