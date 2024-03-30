@@ -171,6 +171,7 @@ public final class OutlawsOfThunderJunction extends ExpansionSet {
         cards.add(new SetCardInfo("Treasure Dredger", 110, Rarity.UNCOMMON, mage.cards.t.TreasureDredger.class));
         cards.add(new SetCardInfo("Tumbleweed Rising", 187, Rarity.COMMON, mage.cards.t.TumbleweedRising.class));
         cards.add(new SetCardInfo("Unscrupulous Contractor", 112, Rarity.UNCOMMON, mage.cards.u.UnscrupulousContractor.class));
+        cards.add(new SetCardInfo("Vengeful Townsfolk", 37, Rarity.COMMON, mage.cards.v.VengefulTownsfolk.class));
         cards.add(new SetCardInfo("Vial Smasher, Gleeful Grenadier", 235, Rarity.UNCOMMON, mage.cards.v.VialSmasherGleefulGrenadier.class));
         cards.add(new SetCardInfo("Visage Bandit", 76, Rarity.UNCOMMON, mage.cards.v.VisageBandit.class));
         cards.add(new SetCardInfo("Voracious Varmint", 188, Rarity.COMMON, mage.cards.v.VoraciousVarmint.class));
