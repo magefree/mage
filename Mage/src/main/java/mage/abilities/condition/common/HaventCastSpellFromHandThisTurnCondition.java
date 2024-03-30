@@ -16,7 +16,7 @@ import java.util.Objects;
 public enum HaventCastSpellFromHandThisTurnCondition implements Condition {
     instance;
 
-    public static final Hint hint = new ConditionHint(instance, "No cast from hand this turn", null, "Have cast from hand this turn", null, true);
+    public static final Hint hint = new ConditionHint(instance, "No spell cast from hand this turn", null, "Have cast spell from hand this turn", null, true);
 
     @Override
     public boolean apply(Game game, Ability source) {
