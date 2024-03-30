@@ -5,7 +5,6 @@ import mage.abilities.condition.Condition;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -18,7 +17,6 @@ public enum SaddledCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         return Optional
                 .ofNullable(source.getSourcePermanentIfItStillExists(game))
-                .filter(Objects::nonNull)
                 .map(Permanent::isSaddled)
                 .orElse(false);
     }

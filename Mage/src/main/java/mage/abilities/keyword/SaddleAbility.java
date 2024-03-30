@@ -85,7 +85,7 @@ class SaddleEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Optional.ofNullable(source.getSourcePermanentOrLKI(game))
+        Optional.ofNullable(source.getSourcePermanentIfItStillExists(game))
                 .ifPresent(permanent -> permanent.setSaddled(true));
         return true;
     }

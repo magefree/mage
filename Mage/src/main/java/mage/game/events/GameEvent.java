@@ -160,7 +160,7 @@ public class GameEvent implements Serializable {
          */
         CREW_VEHICLE,
         /* CREW_VEHICLE
-         targetId    the id of the creature that crewed a vehicle
+         targetId    the id of the creature that will crew a vehicle
          sourceId    sourceId of the vehicle
          playerId    the id of the controlling player
          */
@@ -178,7 +178,7 @@ public class GameEvent implements Serializable {
          */
         SADDLE_MOUNT,
         /* SADDLE_MOUNT
-         targetId    the id of the creature that saddled a mount
+         targetId    the id of the creature that will saddle a mount
          sourceId    sourceId of the mount
          playerId    the id of the controlling player
          */
