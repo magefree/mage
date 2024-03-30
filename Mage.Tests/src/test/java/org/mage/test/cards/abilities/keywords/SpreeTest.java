@@ -11,6 +11,11 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 public class SpreeTest extends CardTestPlayerBase {
 
     private static final String accident = "Unfortunate Accident";
+    // Instant {B}
+    // Spree
+    // + {2}{B} -- Destroy target creature.
+    // + {1} -- Create a 1/1 Mercenary token
+
     private static final String bear = "Grizzly Bears";
 
     @Test
