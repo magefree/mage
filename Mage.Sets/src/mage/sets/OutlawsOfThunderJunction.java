@@ -142,6 +142,7 @@ public final class OutlawsOfThunderJunction extends ExpansionSet {
         cards.add(new SetCardInfo("Slickshot Show-Off", 146, Rarity.RARE, mage.cards.s.SlickshotShowOff.class));
         cards.add(new SetCardInfo("Slickshot Vault-Buster", 68, Rarity.COMMON, mage.cards.s.SlickshotVaultBuster.class));
         cards.add(new SetCardInfo("Soured Springs", 264, Rarity.COMMON, mage.cards.s.SouredSprings.class));
+        cards.add(new SetCardInfo("Spinewoods Armadillo", 182, Rarity.UNCOMMON, mage.cards.s.SpinewoodsArmadillo.class));
         cards.add(new SetCardInfo("Spirebluff Canal", 270, Rarity.RARE, mage.cards.s.SpirebluffCanal.class));
         cards.add(new SetCardInfo("Spring Splasher", 69, Rarity.COMMON, mage.cards.s.SpringSplasher.class));
         cards.add(new SetCardInfo("Step Between Worlds", 70, Rarity.RARE, mage.cards.s.StepBetweenWorlds.class));
