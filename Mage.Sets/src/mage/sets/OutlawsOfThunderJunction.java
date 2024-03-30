@@ -71,6 +71,7 @@ public final class OutlawsOfThunderJunction extends ExpansionSet {
         cards.add(new SetCardInfo("Freestrider Lookout", 163, Rarity.RARE, mage.cards.f.FreestriderLookout.class));
         cards.add(new SetCardInfo("Frontier Seeker", 13, Rarity.UNCOMMON, mage.cards.f.FrontierSeeker.class));
         cards.add(new SetCardInfo("Ghired, Mirror of the Wilds", 205, Rarity.MYTHIC, mage.cards.g.GhiredMirrorOfTheWilds.class));
+        cards.add(new SetCardInfo("Gila Courser", 124, Rarity.UNCOMMON, mage.cards.g.GilaCourser.class));
         cards.add(new SetCardInfo("Gold Pan", 242, Rarity.COMMON, mage.cards.g.GoldPan.class));
         cards.add(new SetCardInfo("Gold Rush", 166, Rarity.UNCOMMON, mage.cards.g.GoldRush.class));
         cards.add(new SetCardInfo("Hardbristle Bandit", 168, Rarity.COMMON, mage.cards.h.HardbristleBandit.class));
