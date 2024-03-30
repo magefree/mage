@@ -41,7 +41,7 @@ public final class SlickshotShowOff extends CardImpl {
         ));
 
         // Plot {1}{R}
-        this.addAbility(new PlotAbility(this, "{1}{R}"));
+        this.addAbility(new PlotAbility("{1}{R}"));
     }
 
     private SlickshotShowOff(final SlickshotShowOff card) {

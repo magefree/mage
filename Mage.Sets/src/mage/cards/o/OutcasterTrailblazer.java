@@ -46,7 +46,7 @@ public final class OutcasterTrailblazer extends CardImpl {
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new DrawCardSourceControllerEffect(1), filter));
 
         // Plot {2}{G}
-        this.addAbility(new PlotAbility(this, "{2}{G}"));
+        this.addAbility(new PlotAbility("{2}{G}"));
     }
 
     private OutcasterTrailblazer(final OutcasterTrailblazer card) {
