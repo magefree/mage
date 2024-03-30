@@ -97,6 +97,7 @@ public final class OutlawsOfThunderJunction extends ExpansionSet {
         cards.add(new SetCardInfo("Mountain", 275, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Neutralize the Guards", 95, Rarity.UNCOMMON, mage.cards.n.NeutralizeTheGuards.class));
         cards.add(new SetCardInfo("Nimble Brigand", 58, Rarity.UNCOMMON, mage.cards.n.NimbleBrigand.class));
+        cards.add(new SetCardInfo("Oasis Gardener", 246, Rarity.COMMON, mage.cards.o.OasisGardener.class));
         cards.add(new SetCardInfo("Oko, the Ringleader", 223, Rarity.MYTHIC, mage.cards.o.OkoTheRingleader.class));
         cards.add(new SetCardInfo("Omenport Vigilante", 21, Rarity.UNCOMMON, mage.cards.o.OmenportVigilante.class));
         cards.add(new SetCardInfo("Outcaster Trailblazer", 173, Rarity.RARE, mage.cards.o.OutcasterTrailblazer.class));
