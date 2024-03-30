@@ -40,6 +40,7 @@ public final class OutlawsOfThunderJunction extends ExpansionSet {
         cards.add(new SetCardInfo("Blooming Marsh", 266, Rarity.RARE, mage.cards.b.BloomingMarsh.class));
         cards.add(new SetCardInfo("Boom Box", 241, Rarity.UNCOMMON, mage.cards.b.BoomBox.class));
         cards.add(new SetCardInfo("Botanical Sanctum", 267, Rarity.RARE, mage.cards.b.BotanicalSanctum.class));
+        cards.add(new SetCardInfo("Bounding Felidar", 5, Rarity.UNCOMMON, mage.cards.b.BoundingFelidar.class));
         cards.add(new SetCardInfo("Bovine Intervention", 6, Rarity.UNCOMMON, mage.cards.b.BovineIntervention.class));
         cards.add(new SetCardInfo("Bridled Bighorn", 7, Rarity.COMMON, mage.cards.b.BridledBighorn.class));
         cards.add(new SetCardInfo("Brimstone Roundup", 115, Rarity.UNCOMMON, mage.cards.b.BrimstoneRoundup.class));
