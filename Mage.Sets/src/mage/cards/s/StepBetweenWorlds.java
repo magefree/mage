@@ -2,7 +2,7 @@ package mage.cards.s;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ExileSourceEffect;
+import mage.abilities.effects.common.ExileSpellEffect;
 import mage.abilities.keyword.PlotAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -27,7 +27,7 @@ public final class StepBetweenWorlds extends CardImpl {
 
         // Each player may shuffle their hand and graveyard into their library. Each player who does draws seven cards. Exile Step Between Worlds.
         this.getSpellAbility().addEffect(new StepBetweenWorldsEffect());
-        this.getSpellAbility().addEffect(new ExileSourceEffect());
+        this.getSpellAbility().addEffect(new ExileSpellEffect());
 
         // Plot {4}{U}{U}
         this.addAbility(new PlotAbility("{4}{U}{U}"));

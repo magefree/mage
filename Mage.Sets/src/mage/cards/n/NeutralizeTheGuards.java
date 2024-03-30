@@ -45,7 +45,7 @@ class NeutralizeTheGuardsEffect extends OneShotEffect {
 
     NeutralizeTheGuardsEffect() {
         super(Outcome.Benefit);
-        staticText = "gain control of all creatures target opponent controls";
+        staticText = "creatures target opponent controls get -1/-1 until end of turn";
     }
 
     private NeutralizeTheGuardsEffect(final NeutralizeTheGuardsEffect effect) {
