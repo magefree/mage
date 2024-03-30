@@ -108,6 +108,7 @@ public final class OutlawsOfThunderJunction extends ExpansionSet {
         cards.add(new SetCardInfo("Plains", 272, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plan the Heist", 62, Rarity.UNCOMMON, mage.cards.p.PlanTheHeist.class));
         cards.add(new SetCardInfo("Prosperity Tycoon", 25, Rarity.UNCOMMON, mage.cards.p.ProsperityTycoon.class));
+        cards.add(new SetCardInfo("Quilled Charger", 139, Rarity.COMMON, mage.cards.q.QuilledCharger.class));
         cards.add(new SetCardInfo("Railway Brawler", 175, Rarity.MYTHIC, mage.cards.r.RailwayBrawler.class));
         cards.add(new SetCardInfo("Rakish Crew", 99, Rarity.UNCOMMON, mage.cards.r.RakishCrew.class));
         cards.add(new SetCardInfo("Rattleback Apothecary", 100, Rarity.UNCOMMON, mage.cards.r.RattlebackApothecary.class));
@@ -135,6 +136,7 @@ public final class OutlawsOfThunderJunction extends ExpansionSet {
         cards.add(new SetCardInfo("Swamp", 274, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Terror of the Peaks", 149, Rarity.MYTHIC, mage.cards.t.TerrorOfThePeaks.class));
         cards.add(new SetCardInfo("Tomb Trawler", 250, Rarity.UNCOMMON, mage.cards.t.TombTrawler.class));
+        cards.add(new SetCardInfo("Trained Arynx", 36, Rarity.COMMON, mage.cards.t.TrainedArynx.class));
         cards.add(new SetCardInfo("Treasure Dredger", 110, Rarity.UNCOMMON, mage.cards.t.TreasureDredger.class));
         cards.add(new SetCardInfo("Tumbleweed Rising", 187, Rarity.COMMON, mage.cards.t.TumbleweedRising.class));
         cards.add(new SetCardInfo("Unscrupulous Contractor", 112, Rarity.UNCOMMON, mage.cards.u.UnscrupulousContractor.class));
