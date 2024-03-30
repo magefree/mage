@@ -50,7 +50,8 @@ public class PlotAbility extends SpecialAction {
         return rule;
     }
 
-    // TODO: handle Fblthp allowing to plot from library.
+    // TODO: handle [[Fblthp, Lost on the Range]] allowing player to plot from library.
+    // TODO: handle plot cost reduction from [[Doc Aurlock, Grizzled Genius]]
     @Override
     public ActivationStatus canActivate(UUID playerId, Game game) {
         // plot can only be activated from a hand
@@ -174,7 +175,7 @@ class PlotAddSpellAbilityEffect extends ContinuousEffectImpl {
 
         List<Card> faces = CardUtil.getCastableComponents(mainCard, null, source, player, game, null, false);
         for (Card face : faces) {
-            // Add the spell ability to each castable face.
+            // Add the spell ability to each castable face to have the proper name/paramaters.
             PlotSpellAbility ability = new PlotSpellAbility(face.getName());
             ability.setSourceId(face.getId());
             ability.setControllerId(player.getId());
@@ -185,23 +186,25 @@ class PlotAddSpellAbilityEffect extends ContinuousEffectImpl {
     }
 }
 
+/**
+ * This is inspired (after a little cleanup) by how {@link ForetellAbility} does it.
+ */
 class PlotSpellAbility extends SpellAbility {
 
-    private String abilityName;
+    private String faceCardName; // Same as with Foretell, we identify the proper face with its spell name.
     private SpellAbility spellAbilityToResolve;
 
-    PlotSpellAbility(String abilityName) {
-        super(null, abilityName, Zone.EXILED, SpellAbilityType.BASE_ALTERNATE, SpellAbilityCastMode.NORMAL);
+    PlotSpellAbility(String faceCardName) {
+        super(null, faceCardName, Zone.EXILED, SpellAbilityType.BASE_ALTERNATE, SpellAbilityCastMode.PLOT);
         this.setRuleVisible(false);
         this.setAdditionalCostsRuleVisible(false);
-        this.name = "Cast plotted: " + abilityName;
-        this.abilityName = abilityName;
+        this.faceCardName = faceCardName;
         this.addCost(new ManaCostsImpl<>("{0}"));
     }
 
     private PlotSpellAbility(final PlotSpellAbility ability) {
         super(ability);
-        this.abilityName = ability.abilityName;
+        this.faceCardName = ability.faceCardName;
         this.spellAbilityToResolve = ability.spellAbilityToResolve;
     }
 
@@ -234,16 +237,17 @@ class PlotSpellAbility extends SpellAbility {
                     return ActivationStatus.getFalse();
                 }
                 // Check that the proper face can be cast.
+                // TODO: As with Foretell, this does not look very clean. Is the face card sometimes incorrect on calling canActivate?
                 if (mainCard instanceof CardWithHalves) {
-                    if (((CardWithHalves) mainCard).getLeftHalfCard().getName().equals(abilityName)) {
+                    if (((CardWithHalves) mainCard).getLeftHalfCard().getName().equals(faceCardName)) {
                         return ((CardWithHalves) mainCard).getLeftHalfCard().getSpellAbility().canActivate(playerId, game);
-                    } else if (((CardWithHalves) mainCard).getRightHalfCard().getName().equals(abilityName)) {
+                    } else if (((CardWithHalves) mainCard).getRightHalfCard().getName().equals(faceCardName)) {
                         return ((CardWithHalves) mainCard).getRightHalfCard().getSpellAbility().canActivate(playerId, game);
                     }
                 } else if (card instanceof AdventureCard) {
-                    if (card.getMainCard().getName().equals(abilityName)) {
+                    if (card.getMainCard().getName().equals(faceCardName)) {
                         return card.getMainCard().getSpellAbility().canActivate(playerId, game);
-                    } else if (((AdventureCard) card).getSpellCard().getName().equals(abilityName)) {
+                    } else if (((AdventureCard) card).getSpellCard().getName().equals(faceCardName)) {
                         return ((AdventureCard) card).getSpellCard().getSpellAbility().canActivate(playerId, game);
                     }
                 }
@@ -259,16 +263,17 @@ class PlotSpellAbility extends SpellAbility {
         if (card != null) {
             if (spellAbilityToResolve == null) {
                 SpellAbility spellAbilityCopy = null;
+                // TODO: As with Foretell, this does not look very clean. Is the face card sometimes incorrect on calling getSpellAbilityToResolve?
                 if (card instanceof CardWithHalves) {
-                    if (((CardWithHalves) card).getLeftHalfCard().getName().equals(abilityName)) {
+                    if (((CardWithHalves) card).getLeftHalfCard().getName().equals(faceCardName)) {
                         spellAbilityCopy = ((CardWithHalves) card).getLeftHalfCard().getSpellAbility().copy();
-                    } else if (((CardWithHalves) card).getRightHalfCard().getName().equals(abilityName)) {
+                    } else if (((CardWithHalves) card).getRightHalfCard().getName().equals(faceCardName)) {
                         spellAbilityCopy = ((CardWithHalves) card).getRightHalfCard().getSpellAbility().copy();
                     }
                 } else if (card instanceof AdventureCard) {
-                    if (card.getMainCard().getName().equals(abilityName)) {
+                    if (card.getMainCard().getName().equals(faceCardName)) {
                         spellAbilityCopy = card.getMainCard().getSpellAbility().copy();
-                    } else if (((AdventureCard) card).getSpellCard().getName().equals(abilityName)) {
+                    } else if (((AdventureCard) card).getSpellCard().getName().equals(faceCardName)) {
                         spellAbilityCopy = ((AdventureCard) card).getSpellCard().getSpellAbility().copy();
                     }
                 } else {

@@ -393,8 +393,7 @@ public class TestPlayer implements Player {
             String searchObject = nameOrAlias.substring("Cast ".length());
             if (searchObject.contains(" with ")
                     || searchObject.contains(" using ")
-                    || searchObject.contains("fused ")
-                    || searchObject.contains("plotted")) {
+                    || searchObject.contains("fused ")) {
                 Assert.assertFalse("alternative spell don't support alias", searchObject.startsWith(ALIAS_PREFIX));
                 foundObject = true;
                 foundAbility = ability.toString().equals(nameOrAlias);

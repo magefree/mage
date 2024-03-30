@@ -35,12 +35,12 @@ public class PlotTest extends CardTestPlayerBase {
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Plot");
         checkExileCount("plot is in exile", 1, PhaseStep.PRECOMBAT_MAIN, playerA, djinn, 1);
 
-        checkPlayableAbility("Can not be cast on same turn", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Cast plotted", false);
-        checkPlayableAbility("Can not be cast on opponent turn", 2, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast plotted", false);
-        checkPlayableAbility("Can not be cast on non-main phase", 3, PhaseStep.UPKEEP, playerA, "Cast plotted", false);
-        checkPlayableAbility("Can be cast on main phase", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast plotted", true);
+        checkPlayableAbility("Can not be cast on same turn", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Cast " + djinn + " using Plot", false);
+        checkPlayableAbility("Can not be cast on opponent turn", 2, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast " + djinn + " using Plot", false);
+        checkPlayableAbility("Can not be cast on non-main phase", 3, PhaseStep.UPKEEP, playerA, "Cast " + djinn + " using Plot", false);
+        checkPlayableAbility("Can be cast on main phase", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast " + djinn + " using Plot", true);
 
-        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "plotted: " + djinn);
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, djinn + " using Plot");
 
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -100,7 +100,7 @@ public class PlotTest extends CardTestPlayerBase {
         addTarget(playerA, sharpshooter); // choose sharpshooter to exile & plot
         addTarget(playerA, playerB); // sharpshooter does trigger and deals 2
 
-        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "plotted: " + sharpshooter);
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, sharpshooter + " using Plot");
 
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -122,10 +122,10 @@ public class PlotTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, kellanJoinsUp);
         addTarget(playerA, "Lightning Bolt"); // choose Bolt to exile & plot
 
-        checkPlayableAbility("Can not be cast on non-main phase", 3, PhaseStep.UPKEEP, playerA, "Cast plotted", false);
-        checkPlayableAbility("Can be cast on main phase", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast plotted", true);
+        checkPlayableAbility("Can not be cast on non-main phase", 3, PhaseStep.UPKEEP, playerA, "Cast Lightning Bolt using Plot", false);
+        checkPlayableAbility("Can be cast on main phase", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Lightning Bolt using Plot", true);
 
-        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "plotted: " + "Lightning Bolt", playerB);
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt using Plot", playerB);
 
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -148,12 +148,12 @@ public class PlotTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, kellanJoinsUp);
         addTarget(playerA, "Bramble Familiar");
 
-        checkPlayableAbility("Can not be cast on non-main phase", 3, PhaseStep.UPKEEP, playerA, "Cast plotted: Bramble Familiar", false);
-        checkPlayableAbility("Can not be cast on non-main phase", 3, PhaseStep.UPKEEP, playerA, "Cast plotted: Fetch Quest", false);
-        checkPlayableAbility("Can be cast on main phase", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast plotted: Bramble Familiar", true);
-        checkPlayableAbility("Can be cast on main phase", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast plotted: Fetch Quest", true);
+        checkPlayableAbility("Can not be cast on non-main phase", 3, PhaseStep.UPKEEP, playerA, "Cast Bramble Familiar using Plot", false);
+        checkPlayableAbility("Can not be cast on non-main phase", 3, PhaseStep.UPKEEP, playerA, "Cast Fetch Quest using Plot", false);
+        checkPlayableAbility("Can be cast on main phase", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Bramble Familiar using Plot", true);
+        checkPlayableAbility("Can be cast on main phase", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Fetch Quest using Plot", true);
 
-        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "plotted: " + "Bramble Familiar");
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Bramble Familiar using Plot");
 
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -176,12 +176,12 @@ public class PlotTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, kellanJoinsUp);
         addTarget(playerA, "Bramble Familiar");
 
-        checkPlayableAbility("Can not be cast on non-main phase", 3, PhaseStep.UPKEEP, playerA, "Cast plotted: Bramble Familiar", false);
-        checkPlayableAbility("Can not be cast on non-main phase", 3, PhaseStep.UPKEEP, playerA, "Cast plotted: Fetch Quest", false);
-        checkPlayableAbility("Can be cast on main phase", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast plotted: Bramble Familiar", true);
-        checkPlayableAbility("Can be cast on main phase", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast plotted: Fetch Quest", true);
+        checkPlayableAbility("Can not be cast on non-main phase", 3, PhaseStep.UPKEEP, playerA, "Cast Bramble Familiar using Plot", false);
+        checkPlayableAbility("Can not be cast on non-main phase", 3, PhaseStep.UPKEEP, playerA, "Cast Fetch Quest using Plot", false);
+        checkPlayableAbility("Can be cast on main phase", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Bramble Familiar using Plot", true);
+        checkPlayableAbility("Can be cast on main phase", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Fetch Quest using Plot", true);
 
-        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "plotted: " + "Fetch Quest");
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Fetch Quest using Plot");
         setChoice(playerA, "Plateau"); // choice for Fetch Quest
 
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
@@ -208,12 +208,12 @@ public class PlotTest extends CardTestPlayerBase {
 
         checkExileCount("assert the full card is in exile", 1, PhaseStep.BEGIN_COMBAT, playerA, "Wear // Tear", 1);
 
-        checkPlayableAbility("Can not be cast on non-main phase", 3, PhaseStep.UPKEEP, playerA, "Cast plotted: Wear", false);
-        checkPlayableAbility("Can not be cast on non-main phase", 3, PhaseStep.UPKEEP, playerA, "Cast plotted: Tear", false);
-        checkPlayableAbility("Can be cast on main phase", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast plotted: Wear", true);
-        checkPlayableAbility("Can be cast on main phase", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast plotted: Tear", true);
+        checkPlayableAbility("Can not be cast on non-main phase", 3, PhaseStep.UPKEEP, playerA, "Cast Wear using Plot", false);
+        checkPlayableAbility("Can not be cast on non-main phase", 3, PhaseStep.UPKEEP, playerA, "Cast Tear using Plot", false);
+        checkPlayableAbility("Can be cast on main phase", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Wear using Plot", true);
+        checkPlayableAbility("Can be cast on main phase", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Tear using Plot", true);
 
-        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "plotted: " + "Wear", "Memnite");
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Wear using Plot", "Memnite");
 
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -240,12 +240,12 @@ public class PlotTest extends CardTestPlayerBase {
 
         checkExileCount("assert the full card is in exile", 1, PhaseStep.BEGIN_COMBAT, playerA, "Wear // Tear", 1);
 
-        checkPlayableAbility("Can not be cast on non-main phase", 3, PhaseStep.UPKEEP, playerA, "Cast plotted: Wear", false);
-        checkPlayableAbility("Can not be cast on non-main phase", 3, PhaseStep.UPKEEP, playerA, "Cast plotted: Tear", false);
-        checkPlayableAbility("Can be cast on main phase", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast plotted: Wear", true);
-        checkPlayableAbility("Can be cast on main phase", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast plotted: Tear", true);
+        checkPlayableAbility("Can not be cast on non-main phase", 3, PhaseStep.UPKEEP, playerA, "Cast Wear using Plot", false);
+        checkPlayableAbility("Can not be cast on non-main phase", 3, PhaseStep.UPKEEP, playerA, "Cast Tear using Plot", false);
+        checkPlayableAbility("Can be cast on main phase", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Wear using Plot", true);
+        checkPlayableAbility("Can be cast on main phase", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Tear using Plot", true);
 
-        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "plotted: " + "Tear", "Glorious Anthem");
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Tear using Plot", "Glorious Anthem");
 
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -270,11 +270,11 @@ public class PlotTest extends CardTestPlayerBase {
 
         checkExileCount("assert the card is in exile", 1, PhaseStep.BEGIN_COMBAT, playerA, "Tangled Florahedron", 1);
 
-        checkPlayableAbility("Can not be cast on non-main phase", 3, PhaseStep.UPKEEP, playerA, "Cast plotted: Tangled Florahedron", false);
-        checkPlayableAbility("Can not cast lands", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast plotted: Tangled Vale", false);
-        checkPlayableAbility("Can be cast on main phase", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast plotted: Tangled Florahedron", true);
+        checkPlayableAbility("Can not be cast on non-main phase", 3, PhaseStep.UPKEEP, playerA, "Cast Tangled Florahedron using Plot", false);
+        checkPlayableAbility("Can not cast lands", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Tangled Vale using Plot", false);
+        checkPlayableAbility("Can be cast on main phase", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Tangled Florahedron using Plot", true);
 
-        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "plotted: " + "Tangled Florahedron");
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Tangled Florahedron using Plot");
 
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
