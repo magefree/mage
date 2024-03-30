@@ -87,7 +87,7 @@ class RailwayBrawlerEffect extends OneShotEffect {
             return false;
         }
         return new AddCountersTargetEffect(CounterType.P1P1.createInstance(pow))
-                .setTargetPointer(getTargetPointer())
+                .setTargetPointer(getTargetPointer().copy())
                 .apply(game, source);
     }
 }
