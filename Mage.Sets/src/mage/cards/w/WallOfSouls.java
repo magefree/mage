@@ -13,6 +13,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.events.DamagedBatchForOnePermanentEvent;
 import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
 import mage.target.common.TargetOpponentOrPlaneswalker;
@@ -66,13 +67,21 @@ class WallOfSoulsTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PERMANENT;
+        return event.getType() == GameEvent.EventType.DAMAGED_BATCH_FOR_ONE_PERMANENT;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getTargetId().equals(this.sourceId) && ((DamagedEvent) event).isCombatDamage()) {
-            this.getEffects().setValue("damage", event.getAmount());
+
+        DamagedBatchForOnePermanentEvent dEvent = (DamagedBatchForOnePermanentEvent) event;
+        int combatDamage = dEvent.getEvents()
+                .stream()
+                .filter(DamagedEvent::isCombatDamage)
+                .mapToInt(GameEvent::getAmount)
+                .sum();
+
+        if (event.getTargetId().equals(this.sourceId) && combatDamage > 0) {
+            this.getEffects().setValue("damage", combatDamage);
             return true;
         }
         return false;
