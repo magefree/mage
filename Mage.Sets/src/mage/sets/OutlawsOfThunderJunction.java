@@ -56,6 +56,7 @@ public final class OutlawsOfThunderJunction extends ExpansionSet {
         cards.add(new SetCardInfo("Bucolic Ranch", 265, Rarity.UNCOMMON, mage.cards.b.BucolicRanch.class));
         cards.add(new SetCardInfo("Cactarantula", 158, Rarity.COMMON, mage.cards.c.Cactarantula.class));
         cards.add(new SetCardInfo("Cactusfolk Sureshot", 199, Rarity.UNCOMMON, mage.cards.c.CactusfolkSureshot.class));
+        cards.add(new SetCardInfo("Calamity, Galloping Inferno", 116, Rarity.RARE, mage.cards.c.CalamityGallopingInferno.class));
         cards.add(new SetCardInfo("Canyon Crab", 40, Rarity.UNCOMMON, mage.cards.c.CanyonCrab.class));
         cards.add(new SetCardInfo("Caustic Bronco", 82, Rarity.RARE, mage.cards.c.CausticBronco.class));
         cards.add(new SetCardInfo("Colossal Rattlewurm", 159, Rarity.RARE, mage.cards.c.ColossalRattlewurm.class));
