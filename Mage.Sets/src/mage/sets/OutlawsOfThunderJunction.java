@@ -187,6 +187,7 @@ public final class OutlawsOfThunderJunction extends ExpansionSet {
         cards.add(new SetCardInfo("Swamp", 274, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Terror of the Peaks", 149, Rarity.MYTHIC, mage.cards.t.TerrorOfThePeaks.class));
         cards.add(new SetCardInfo("This Town Ain't Big Enough", 74, Rarity.UNCOMMON, mage.cards.t.ThisTownAintBigEnough.class));
+        cards.add(new SetCardInfo("Thunder Lasso", 35, Rarity.UNCOMMON, mage.cards.t.ThunderLasso.class));
         cards.add(new SetCardInfo("Tomb Trawler", 250, Rarity.UNCOMMON, mage.cards.t.TombTrawler.class));
         cards.add(new SetCardInfo("Trained Arynx", 36, Rarity.COMMON, mage.cards.t.TrainedArynx.class));
         cards.add(new SetCardInfo("Treasure Dredger", 110, Rarity.UNCOMMON, mage.cards.t.TreasureDredger.class));
