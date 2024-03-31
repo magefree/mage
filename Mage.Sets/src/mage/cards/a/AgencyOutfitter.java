@@ -11,7 +11,6 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
 import mage.players.Player;
@@ -82,10 +81,12 @@ class AgencyOutfitterEffect extends OneShotEffect {
             if (controller.searchLibrary(libraryTarget, source, game)) {
                 for (UUID id : libraryTarget.getTargets()) {
                     Card card = game.getCard(id);
-                    if (CardUtil.haveSameNames(card, glassName, game)) {
-                        glassCard = card;
-                    } else if (CardUtil.haveSameNames(card, capName, game)) {
-                        capCard = card;
+                    if (card != null) {
+                        if (CardUtil.haveSameNames(card, glassName, game)) {
+                            glassCard = card;
+                        } else if (CardUtil.haveSameNames(card, capName, game)) {
+                            capCard = card;
+                        }
                     }
                 }
             }
@@ -94,18 +95,15 @@ class AgencyOutfitterEffect extends OneShotEffect {
 
         if (glassCard == null || capCard == null) {
             Cards cards = new CardsImpl();
-            FilterCard filter = new FilterCard();
+            FilterCard filter;
             TargetCard target;
             if (glassCard == null && capCard == null) {
-                filter.add(Predicates.or(
-                        new NamePredicate(glassName), new NamePredicate(capName)
-                ));
                 target = new TargetCardAndOrCard(glassName, capName);
-            } else if (glassCard == null) {
-                filter.add(new NamePredicate(glassName));
-                target = new TargetCard(0, 1, Zone.ALL, filter);
+                filter = target.getFilter();
             } else {
-                filter.add(new NamePredicate(capName));
+                String name = (glassCard == null ? glassName : capName);
+                filter = new FilterCard();
+                filter.add(new NamePredicate(name));
                 target = new TargetCard(0, 1, Zone.ALL, filter);
             }
             target.withNotTarget(true);
@@ -115,10 +113,12 @@ class AgencyOutfitterEffect extends OneShotEffect {
                 controller.choose(outcome, cards, target, source, game);
                 for (UUID id : target.getTargets()) {
                     Card card = game.getCard(id);
-                    if (CardUtil.haveSameNames(card, glassName, game)) {
-                        glassCard = card;
-                    } else if (CardUtil.haveSameNames(card, capName, game)) {
-                        capCard = card;
+                    if (card != null) {
+                        if (CardUtil.haveSameNames(card, glassName, game)) {
+                            glassCard = card;
+                        } else if (CardUtil.haveSameNames(card, capName, game)) {
+                            capCard = card;
+                        }
                     }
                 }
             }
