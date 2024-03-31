@@ -59,6 +59,7 @@ public final class OutlawsOfThunderJunction extends ExpansionSet {
         cards.add(new SetCardInfo("Cactusfolk Sureshot", 199, Rarity.UNCOMMON, mage.cards.c.CactusfolkSureshot.class));
         cards.add(new SetCardInfo("Calamity, Galloping Inferno", 116, Rarity.RARE, mage.cards.c.CalamityGallopingInferno.class));
         cards.add(new SetCardInfo("Canyon Crab", 40, Rarity.UNCOMMON, mage.cards.c.CanyonCrab.class));
+        cards.add(new SetCardInfo("Caught in the Crossfire", 117, Rarity.UNCOMMON, mage.cards.c.CaughtInTheCrossfire.class));
         cards.add(new SetCardInfo("Caustic Bronco", 82, Rarity.RARE, mage.cards.c.CausticBronco.class));
         cards.add(new SetCardInfo("Colossal Rattlewurm", 159, Rarity.RARE, mage.cards.c.ColossalRattlewurm.class));
         cards.add(new SetCardInfo("Concealed Courtyard", 268, Rarity.RARE, mage.cards.c.ConcealedCourtyard.class));
@@ -77,10 +78,12 @@ public final class OutlawsOfThunderJunction extends ExpansionSet {
         cards.add(new SetCardInfo("Eriette's Lullaby", 10, Rarity.COMMON, mage.cards.e.EriettesLullaby.class));
         cards.add(new SetCardInfo("Eroded Canyon", 256, Rarity.COMMON, mage.cards.e.ErodedCanyon.class));
         cards.add(new SetCardInfo("Ertha Jo, Frontier Mentor", 203, Rarity.UNCOMMON, mage.cards.e.ErthaJoFrontierMentor.class));
+        cards.add(new SetCardInfo("Explosive Derailment", 122, Rarity.COMMON, mage.cards.e.ExplosiveDerailment.class));
         cards.add(new SetCardInfo("Failed Fording", 47, Rarity.COMMON, mage.cards.f.FailedFording.class));
         cards.add(new SetCardInfo("Fake Your Own Death", 87, Rarity.COMMON, mage.cards.f.FakeYourOwnDeath.class));
         cards.add(new SetCardInfo("Ferocification", 123, Rarity.UNCOMMON, mage.cards.f.Ferocification.class));
         cards.add(new SetCardInfo("Festering Gulch", 257, Rarity.COMMON, mage.cards.f.FesteringGulch.class));
+        cards.add(new SetCardInfo("Final Showdown", 11, Rarity.MYTHIC, mage.cards.f.FinalShowdown.class));
         cards.add(new SetCardInfo("Fleeting Reflection", 49, Rarity.UNCOMMON, mage.cards.f.FleetingReflection.class));
         cards.add(new SetCardInfo("Forest", 276, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Forlorn Flats", 258, Rarity.COMMON, mage.cards.f.ForlornFlats.class));
@@ -104,6 +107,7 @@ public final class OutlawsOfThunderJunction extends ExpansionSet {
         cards.add(new SetCardInfo("High Noon", 15, Rarity.RARE, mage.cards.h.HighNoon.class));
         cards.add(new SetCardInfo("Holy Cow", 16, Rarity.COMMON, mage.cards.h.HolyCow.class));
         cards.add(new SetCardInfo("Honest Rutstein", 207, Rarity.UNCOMMON, mage.cards.h.HonestRutstein.class));
+        cards.add(new SetCardInfo("Insatiable Avarice", 91, Rarity.RARE, mage.cards.i.InsatiableAvarice.class));
         cards.add(new SetCardInfo("Inspiring Vantage", 269, Rarity.RARE, mage.cards.i.InspiringVantage.class));
         cards.add(new SetCardInfo("Intimidation Campaign", 208, Rarity.UNCOMMON, mage.cards.i.IntimidationCampaign.class));
         cards.add(new SetCardInfo("Intrepid Stablemaster", 169, Rarity.UNCOMMON, mage.cards.i.IntrepidStablemaster.class));
@@ -131,6 +135,7 @@ public final class OutlawsOfThunderJunction extends ExpansionSet {
         cards.add(new SetCardInfo("Map the Frontier", 170, Rarity.UNCOMMON, mage.cards.m.MapTheFrontier.class));
         cards.add(new SetCardInfo("Marauding Sphinx", 56, Rarity.UNCOMMON, mage.cards.m.MaraudingSphinx.class));
         cards.add(new SetCardInfo("Marchesa, Dealer of Death", 220, Rarity.RARE, mage.cards.m.MarchesaDealerOfDeath.class));
+        cards.add(new SetCardInfo("Metamorphic Blast", 57, Rarity.UNCOMMON, mage.cards.m.MetamorphicBlast.class));
         cards.add(new SetCardInfo("Mine Raider", 135, Rarity.COMMON, mage.cards.m.MineRaider.class));
         cards.add(new SetCardInfo("Miriam, Herd Whisperer", 221, Rarity.UNCOMMON, mage.cards.m.MiriamHerdWhisperer.class));
         cards.add(new SetCardInfo("Mobile Homestead", 245, Rarity.UNCOMMON, mage.cards.m.MobileHomestead.class));
@@ -163,12 +168,14 @@ public final class OutlawsOfThunderJunction extends ExpansionSet {
         cards.add(new SetCardInfo("Reach for the Sky", 178, Rarity.COMMON, mage.cards.r.ReachForTheSky.class));
         cards.add(new SetCardInfo("Reckless Lackey", 140, Rarity.COMMON, mage.cards.r.RecklessLackey.class));
         cards.add(new SetCardInfo("Redrock Sentinel", 247, Rarity.UNCOMMON, mage.cards.r.RedrockSentinel.class));
+        cards.add(new SetCardInfo("Requisition Raid", 26, Rarity.UNCOMMON, mage.cards.r.RequisitionRaid.class));
         cards.add(new SetCardInfo("Resilient Roadrunner", 141, Rarity.UNCOMMON, mage.cards.r.ResilientRoadrunner.class));
         cards.add(new SetCardInfo("Rictus Robber", 102, Rarity.UNCOMMON, mage.cards.r.RictusRobber.class));
         cards.add(new SetCardInfo("Rise of the Varmints", 179, Rarity.UNCOMMON, mage.cards.r.RiseOfTheVarmints.class));
         cards.add(new SetCardInfo("Rodeo Pyromancers", 143, Rarity.COMMON, mage.cards.r.RodeoPyromancers.class));
         cards.add(new SetCardInfo("Rooftop Assassin", 103, Rarity.COMMON, mage.cards.r.RooftopAssassin.class));
         cards.add(new SetCardInfo("Roxanne, Starfall Savant", 228, Rarity.RARE, mage.cards.r.RoxanneStarfallSavant.class));
+        cards.add(new SetCardInfo("Rustler Rampage", 27, Rarity.UNCOMMON, mage.cards.r.RustlerRampage.class));
         cards.add(new SetCardInfo("Ruthless Lawbringer", 229, Rarity.UNCOMMON, mage.cards.r.RuthlessLawbringer.class));
         cards.add(new SetCardInfo("Sandstorm Verge", 263, Rarity.UNCOMMON, mage.cards.s.SandstormVerge.class));
         cards.add(new SetCardInfo("Scalestorm Summoner", 144, Rarity.UNCOMMON, mage.cards.s.ScalestormSummoner.class));
@@ -195,11 +202,13 @@ public final class OutlawsOfThunderJunction extends ExpansionSet {
         cards.add(new SetCardInfo("Swamp", 274, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Terror of the Peaks", 149, Rarity.MYTHIC, mage.cards.t.TerrorOfThePeaks.class));
         cards.add(new SetCardInfo("This Town Ain't Big Enough", 74, Rarity.UNCOMMON, mage.cards.t.ThisTownAintBigEnough.class));
+        cards.add(new SetCardInfo("Three Steps Ahead", 75, Rarity.RARE, mage.cards.t.ThreeStepsAhead.class));
         cards.add(new SetCardInfo("Thunder Lasso", 35, Rarity.UNCOMMON, mage.cards.t.ThunderLasso.class));
         cards.add(new SetCardInfo("Tomb Trawler", 250, Rarity.UNCOMMON, mage.cards.t.TombTrawler.class));
         cards.add(new SetCardInfo("Trained Arynx", 36, Rarity.COMMON, mage.cards.t.TrainedArynx.class));
         cards.add(new SetCardInfo("Treasure Dredger", 110, Rarity.UNCOMMON, mage.cards.t.TreasureDredger.class));
         cards.add(new SetCardInfo("Tumbleweed Rising", 187, Rarity.COMMON, mage.cards.t.TumbleweedRising.class));
+        cards.add(new SetCardInfo("Unfortunate Accident", 111, Rarity.UNCOMMON, mage.cards.u.UnfortunateAccident.class));
         cards.add(new SetCardInfo("Unscrupulous Contractor", 112, Rarity.UNCOMMON, mage.cards.u.UnscrupulousContractor.class));
         cards.add(new SetCardInfo("Vengeful Townsfolk", 37, Rarity.COMMON, mage.cards.v.VengefulTownsfolk.class));
         cards.add(new SetCardInfo("Vial Smasher, Gleeful Grenadier", 235, Rarity.UNCOMMON, mage.cards.v.VialSmasherGleefulGrenadier.class));

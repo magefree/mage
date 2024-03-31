@@ -115,6 +115,7 @@ Soulbond|new|
 Soulshift|number|
 Skulk|new|
 Spectacle|card, cost|
+Spree|card|
 Squad|new|
 Storm|new|
 Sunburst|new|
