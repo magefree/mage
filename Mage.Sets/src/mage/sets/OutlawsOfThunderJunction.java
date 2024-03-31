@@ -89,6 +89,7 @@ public final class OutlawsOfThunderJunction extends ExpansionSet {
         cards.add(new SetCardInfo("Freestrider Lookout", 163, Rarity.RARE, mage.cards.f.FreestriderLookout.class));
         cards.add(new SetCardInfo("Frontier Seeker", 13, Rarity.UNCOMMON, mage.cards.f.FrontierSeeker.class));
         cards.add(new SetCardInfo("Full Steam Ahead", 164, Rarity.UNCOMMON, mage.cards.f.FullSteamAhead.class));
+        cards.add(new SetCardInfo("Geralf, the Fleshwright", 50, Rarity.MYTHIC, mage.cards.g.GeralfTheFleshwright.class));
         cards.add(new SetCardInfo("Ghired, Mirror of the Wilds", 205, Rarity.MYTHIC, mage.cards.g.GhiredMirrorOfTheWilds.class));
         cards.add(new SetCardInfo("Gila Courser", 124, Rarity.UNCOMMON, mage.cards.g.GilaCourser.class));
         cards.add(new SetCardInfo("Gisa, the Hellraiser", 89, Rarity.MYTHIC, mage.cards.g.GisaTheHellraiser.class, NON_FULL_USE_VARIOUS));
