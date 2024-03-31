@@ -150,6 +150,7 @@ public final class OutlawsOfThunderJunction extends ExpansionSet {
         cards.add(new SetCardInfo("Quilled Charger", 139, Rarity.COMMON, mage.cards.q.QuilledCharger.class));
         cards.add(new SetCardInfo("Railway Brawler", 175, Rarity.MYTHIC, mage.cards.r.RailwayBrawler.class));
         cards.add(new SetCardInfo("Rakish Crew", 99, Rarity.UNCOMMON, mage.cards.r.RakishCrew.class));
+        cards.add(new SetCardInfo("Rambling Possum", 176, Rarity.UNCOMMON, mage.cards.r.RamblingPossum.class));
         cards.add(new SetCardInfo("Rattleback Apothecary", 100, Rarity.UNCOMMON, mage.cards.r.RattlebackApothecary.class));
         cards.add(new SetCardInfo("Raucous Entertainer", 177, Rarity.UNCOMMON, mage.cards.r.RaucousEntertainer.class));
         cards.add(new SetCardInfo("Raven of Fell Omens", 101, Rarity.COMMON, mage.cards.r.RavenOfFellOmens.class));
