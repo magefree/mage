@@ -221,6 +221,7 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Rootbound Crag", 284, Rarity.RARE, mage.cards.r.RootboundCrag.class));
         cards.add(new SetCardInfo("Ruinous Ultimatum", 220, Rarity.RARE, mage.cards.r.RuinousUltimatum.class));
         cards.add(new SetCardInfo("Rustvale Bridge", 285, Rarity.COMMON, mage.cards.r.RustvaleBridge.class));
+        cards.add(new SetCardInfo("Ruthless Radrat", 48, Rarity.UNCOMMON, mage.cards.r.RuthlessRadrat.class));
         cards.add(new SetCardInfo("Scattered Groves", 286, Rarity.RARE, mage.cards.s.ScatteredGroves.class));
         cards.add(new SetCardInfo("Scavenger Grounds", 287, Rarity.RARE, mage.cards.s.ScavengerGrounds.class));
         cards.add(new SetCardInfo("Secure the Wastes", 171, Rarity.RARE, mage.cards.s.SecureTheWastes.class));
