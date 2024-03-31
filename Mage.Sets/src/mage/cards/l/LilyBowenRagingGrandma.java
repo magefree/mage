@@ -30,7 +30,7 @@ public final class LilyBowenRagingGrandma extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     static {
-        filter.add(new PowerPredicate(ComparisonType.FEWER_THAN, 17));
+        filter.add(new PowerPredicate(ComparisonType.OR_LESS, 16));
     }
 
     public LilyBowenRagingGrandma(UUID ownerId, CardSetInfo setInfo) {
