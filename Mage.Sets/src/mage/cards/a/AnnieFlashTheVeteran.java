@@ -50,6 +50,7 @@ public final class AnnieFlashTheVeteran extends CardImpl {
                         + "return target permanent card with mana value 3 or less from your graveyard to the battlefield tapped"
         );
         ability.addTarget(new TargetCardInYourGraveyard(filter));
+        this.addAbility(ability);
 
         // Whenever Annie Flash becomes tapped, exile the top two cards of your library. You may play those cards this turn.
         this.addAbility(new BecomesTappedSourceTriggeredAbility(new ExileTopXMayPlayUntilEffect(2, Duration.EndOfTurn)));
