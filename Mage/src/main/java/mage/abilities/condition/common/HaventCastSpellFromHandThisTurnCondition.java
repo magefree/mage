@@ -30,6 +30,6 @@ public enum HaventCastSpellFromHandThisTurnCondition implements Condition {
 
     @Override
     public String toString() {
-        return "if you haven't cast a spell from hand this turn";
+        return "if you haven't cast a spell from your hand this turn";
     }
 }
