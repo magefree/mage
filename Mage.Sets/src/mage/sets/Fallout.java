@@ -73,6 +73,7 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Canyon Slough", 256, Rarity.RARE, mage.cards.c.CanyonSlough.class));
         cards.add(new SetCardInfo("Captain of the Watch", 157, Rarity.RARE, mage.cards.c.CaptainOfTheWatch.class));
         cards.add(new SetCardInfo("Casualties of War", 213, Rarity.RARE, mage.cards.c.CasualtiesOfWar.class));
+        cards.add(new SetCardInfo("Cathedral Acolyte", 75, Rarity.UNCOMMON, mage.cards.c.CathedralAcolyte.class));
         cards.add(new SetCardInfo("Champion's Helm", 228, Rarity.RARE, mage.cards.c.ChampionsHelm.class));
         cards.add(new SetCardInfo("Chaos Warp", 189, Rarity.RARE, mage.cards.c.ChaosWarp.class));
         cards.add(new SetCardInfo("Cinder Glade", 257, Rarity.RARE, mage.cards.c.CinderGlade.class));
