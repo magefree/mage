@@ -66,6 +66,7 @@ public final class OutlawsOfThunderJunction extends ExpansionSet {
         cards.add(new SetCardInfo("Congregation Gryff", 200, Rarity.UNCOMMON, mage.cards.c.CongregationGryff.class));
         cards.add(new SetCardInfo("Creosote Heath", 255, Rarity.COMMON, mage.cards.c.CreosoteHeath.class));
         cards.add(new SetCardInfo("Cunning Coyote", 118, Rarity.UNCOMMON, mage.cards.c.CunningCoyote.class));
+        cards.add(new SetCardInfo("Dance of the Tumbleweeds", 160, Rarity.COMMON, mage.cards.d.DanceOfTheTumbleweeds.class));
         cards.add(new SetCardInfo("Deepmuck Desperado", 42, Rarity.UNCOMMON, mage.cards.d.DeepmuckDesperado.class));
         cards.add(new SetCardInfo("Demonic Ruckus", 120, Rarity.UNCOMMON, mage.cards.d.DemonicRuckus.class));
         cards.add(new SetCardInfo("Desperate Bloodseeker", 86, Rarity.COMMON, mage.cards.d.DesperateBloodseeker.class));
