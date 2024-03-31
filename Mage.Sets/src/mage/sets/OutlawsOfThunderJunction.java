@@ -120,6 +120,7 @@ public final class OutlawsOfThunderJunction extends ExpansionSet {
         cards.add(new SetCardInfo("Miriam, Herd Whisperer", 221, Rarity.UNCOMMON, mage.cards.m.MiriamHerdWhisperer.class));
         cards.add(new SetCardInfo("Mobile Homestead", 245, Rarity.UNCOMMON, mage.cards.m.MobileHomestead.class));
         cards.add(new SetCardInfo("Mountain", 275, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Mystical Tether", 19, Rarity.COMMON, mage.cards.m.MysticalTether.class));
         cards.add(new SetCardInfo("Neutralize the Guards", 95, Rarity.UNCOMMON, mage.cards.n.NeutralizeTheGuards.class));
         cards.add(new SetCardInfo("Nimble Brigand", 58, Rarity.UNCOMMON, mage.cards.n.NimbleBrigand.class));
         cards.add(new SetCardInfo("Oasis Gardener", 246, Rarity.COMMON, mage.cards.o.OasisGardener.class));
