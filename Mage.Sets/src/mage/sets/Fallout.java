@@ -150,6 +150,10 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Lethal Scheme", 185, Rarity.RARE, mage.cards.l.LethalScheme.class));
         cards.add(new SetCardInfo("Liberty Prime, Recharged", 5, Rarity.MYTHIC, mage.cards.l.LibertyPrimeRecharged.class));
         cards.add(new SetCardInfo("Lightning Greaves", 233, Rarity.UNCOMMON, mage.cards.l.LightningGreaves.class));
+        cards.add(new SetCardInfo("Lily Bowen, Raging Grandma", 79, Rarity.RARE, mage.cards.l.LilyBowenRagingGrandma.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Lily Bowen, Raging Grandma", 399, Rarity.RARE, mage.cards.l.LilyBowenRagingGrandma.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Lily Bowen, Raging Grandma", 607, Rarity.RARE, mage.cards.l.LilyBowenRagingGrandma.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Lily Bowen, Raging Grandma", 927, Rarity.RARE, mage.cards.l.LilyBowenRagingGrandma.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lord of the Undead", 345, Rarity.RARE, mage.cards.l.LordOfTheUndead.class));
         cards.add(new SetCardInfo("Loyal Apprentice", 190, Rarity.UNCOMMON, mage.cards.l.LoyalApprentice.class));
         cards.add(new SetCardInfo("MacCready, Lamplight Mayor", 108, Rarity.RARE, mage.cards.m.MacCreadyLamplightMayor.class, NON_FULL_USE_VARIOUS));
