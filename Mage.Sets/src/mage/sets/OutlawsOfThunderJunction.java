@@ -28,6 +28,7 @@ public final class OutlawsOfThunderJunction extends ExpansionSet {
 
         cards.add(new SetCardInfo("Abraded Bluffs", 251, Rarity.COMMON, mage.cards.a.AbradedBluffs.class));
         cards.add(new SetCardInfo("Annie Flash, the Veteran", 190, Rarity.MYTHIC, mage.cards.a.AnnieFlashTheVeteran.class));
+        cards.add(new SetCardInfo("Another Round", 1, Rarity.RARE, mage.cards.a.AnotherRound.class));
         cards.add(new SetCardInfo("Archangel of Tithes", 2, Rarity.MYTHIC, mage.cards.a.ArchangelOfTithes.class));
         cards.add(new SetCardInfo("Archmage's Newt", 39, Rarity.RARE, mage.cards.a.ArchmagesNewt.class));
         cards.add(new SetCardInfo("Arid Archway", 252, Rarity.UNCOMMON, mage.cards.a.AridArchway.class));
