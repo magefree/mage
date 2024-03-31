@@ -223,12 +223,13 @@ class PlotSpellAbility extends SpellAbility {
                 if (game.getState().getZone(mainCardId) != Zone.EXILED) {
                     return ActivationStatus.getFalse();
                 }
-                // Card must have been Plotted
-                if (game.getState().getValue(PlotAbility.getPlotTurnKeyForCard(mainCardId)) == null) {
+                Integer plottedTurn = (Integer) game.getState().getValue(PlotAbility.getPlotTurnKeyForCard(mainCardId));
+                // Card must have been plotted
+                if (plottedTurn == null) {
                     return ActivationStatus.getFalse();
                 }
                 // Can't be cast if the turn it was last Plotted is the same
-                if ((int) game.getState().getValue(PlotAbility.getPlotTurnKeyForCard(mainCardId)) == game.getTurnNum()) {
+                if (plottedTurn == game.getTurnNum()) {
                     return ActivationStatus.getFalse();
                 }
                 // Only allow the cast at sorcery speed
