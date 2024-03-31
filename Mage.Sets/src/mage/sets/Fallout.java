@@ -48,6 +48,7 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Battle of Hoover Dam", 892, Rarity.RARE, mage.cards.b.BattleOfHooverDam.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Behemoth Sledge", 211, Rarity.UNCOMMON, mage.cards.b.BehemothSledge.class));
         cards.add(new SetCardInfo("Behemoth of Vault 0", 127, Rarity.UNCOMMON, mage.cards.b.BehemothOfVault.class));
+        cards.add(new SetCardInfo("Bighorner Rancher", 73, Rarity.UNCOMMON, mage.cards.b.BighornerRancher.class));
         cards.add(new SetCardInfo("Biomass Mutation", 212, Rarity.RARE, mage.cards.b.BiomassMutation.class));
         cards.add(new SetCardInfo("Black Market", 183, Rarity.RARE, mage.cards.b.BlackMarket.class));
         cards.add(new SetCardInfo("Blasphemous Act", 188, Rarity.RARE, mage.cards.b.BlasphemousAct.class));
