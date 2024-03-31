@@ -51,7 +51,6 @@ public class PlotAbility extends SpecialAction {
     }
 
     // TODO: handle [[Fblthp, Lost on the Range]] allowing player to plot from library.
-    // TODO: handle plot cost reduction from [[Doc Aurlock, Grizzled Genius]]
     @Override
     public ActivationStatus canActivate(UUID playerId, Game game) {
         // plot can only be activated from a hand
