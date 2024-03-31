@@ -4,16 +4,11 @@ import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
-import java.util.Arrays;
-import java.util.List;
-
 /**
  * @author TheElk801
  */
 public final class OutlawsOfThunderJunction extends ExpansionSet {
 
-    // This is a list of cards with the plot mechanic, it will be removed when the mechanic is implemented
-    private static final List<String> unfinished = Arrays.asList("Aloe Alchemist", "Aven Interrupter", "Beastbond Outcaster", "Blacksnag Buzzard", "Brimstone Roundup", "Cunning Coyote", "Demonic Ruckus", "Djinn of Fool's Fall", "Doc Aurlock, Grizzled Genius", "Fblthp, Lost on the Range", "Irascible Wolverine", "Jace Reawakened", "Kellan Joins Up", "Lilah, Undefeated Slickshot", "Loan Shark", "Longhorn Sharpshooter", "Make Your Own Luck", "Outcaster Trailblazer", "Outlaw Stitcher", "Pillage the Bog", "Pitiless Carnage", "Plan the Heist", "Railway Brawler", "Rictus Robber", "Rise of the Varmints", "Sheriff of Safe Passage", "Slickshot Lockpicker", "Slickshot Show-Off", "Step Between Worlds", "Stingerback Terror", "Tumbleweed Rising", "Unscrupulous Contractor", "Visage Bandit");
     private static final OutlawsOfThunderJunction instance = new OutlawsOfThunderJunction();
 
     public static OutlawsOfThunderJunction getInstance() {
@@ -27,6 +22,7 @@ public final class OutlawsOfThunderJunction extends ExpansionSet {
         this.hasBoosters = false; // temporary
 
         cards.add(new SetCardInfo("Abraded Bluffs", 251, Rarity.COMMON, mage.cards.a.AbradedBluffs.class));
+        cards.add(new SetCardInfo("Aloe Alchemist", 152, Rarity.UNCOMMON, mage.cards.a.AloeAlchemist.class));
         cards.add(new SetCardInfo("Annie Flash, the Veteran", 190, Rarity.MYTHIC, mage.cards.a.AnnieFlashTheVeteran.class));
         cards.add(new SetCardInfo("Another Round", 1, Rarity.RARE, mage.cards.a.AnotherRound.class));
         cards.add(new SetCardInfo("Archangel of Tithes", 2, Rarity.MYTHIC, mage.cards.a.ArchangelOfTithes.class));
@@ -34,6 +30,7 @@ public final class OutlawsOfThunderJunction extends ExpansionSet {
         cards.add(new SetCardInfo("Arid Archway", 252, Rarity.UNCOMMON, mage.cards.a.AridArchway.class));
         cards.add(new SetCardInfo("Armored Armadillo", 3, Rarity.COMMON, mage.cards.a.ArmoredArmadillo.class));
         cards.add(new SetCardInfo("At Knifepoint", 193, Rarity.UNCOMMON, mage.cards.a.AtKnifepoint.class));
+        cards.add(new SetCardInfo("Aven Interrupter", 4, Rarity.RARE, mage.cards.a.AvenInterrupter.class));
         cards.add(new SetCardInfo("Badlands Revival", 194, Rarity.UNCOMMON, mage.cards.b.BadlandsRevival.class));
         cards.add(new SetCardInfo("Bandit's Haul", 240, Rarity.UNCOMMON, mage.cards.b.BanditsHaul.class));
         cards.add(new SetCardInfo("Baron Bertram Graywater", 195, Rarity.UNCOMMON, mage.cards.b.BaronBertramGraywater.class));
@@ -71,6 +68,7 @@ public final class OutlawsOfThunderJunction extends ExpansionSet {
         cards.add(new SetCardInfo("Desperate Bloodseeker", 86, Rarity.COMMON, mage.cards.d.DesperateBloodseeker.class));
         cards.add(new SetCardInfo("Discerning Peddler", 121, Rarity.COMMON, mage.cards.d.DiscerningPeddler.class));
         cards.add(new SetCardInfo("Djinn of Fool's Fall", 43, Rarity.COMMON, mage.cards.d.DjinnOfFoolsFall.class));
+        cards.add(new SetCardInfo("Doc Aurlock, Grizzled Genius", 201, Rarity.UNCOMMON, mage.cards.d.DocAurlockGrizzledGenius.class));
         cards.add(new SetCardInfo("Double Down", 44, Rarity.MYTHIC, mage.cards.d.DoubleDown.class));
         cards.add(new SetCardInfo("Duelist of the Mind", 45, Rarity.RARE, mage.cards.d.DuelistOfTheMind.class));
         cards.add(new SetCardInfo("Emergent Haunting", 46, Rarity.UNCOMMON, mage.cards.e.EmergentHaunting.class));
@@ -110,18 +108,22 @@ public final class OutlawsOfThunderJunction extends ExpansionSet {
         cards.add(new SetCardInfo("Inventive Wingsmith", 17, Rarity.COMMON, mage.cards.i.InventiveWingsmith.class));
         cards.add(new SetCardInfo("Irascible Wolverine", 130, Rarity.COMMON, mage.cards.i.IrascibleWolverine.class));
         cards.add(new SetCardInfo("Island", 273, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Jace Reawakened", 271, Rarity.MYTHIC, mage.cards.j.JaceReawakened.class));
         cards.add(new SetCardInfo("Jagged Barrens", 259, Rarity.COMMON, mage.cards.j.JaggedBarrens.class));
         cards.add(new SetCardInfo("Jolene, Plundering Pugilist", 210, Rarity.UNCOMMON, mage.cards.j.JolenePlunderingPugilist.class));
+        cards.add(new SetCardInfo("Kellan Joins Up", 212, Rarity.RARE, mage.cards.k.KellanJoinsUp.class));
         cards.add(new SetCardInfo("Kraum, Violent Cacophony", 214, Rarity.UNCOMMON, mage.cards.k.KraumViolentCacophony.class));
         cards.add(new SetCardInfo("Lassoed by the Law", 18, Rarity.UNCOMMON, mage.cards.l.LassoedByTheLaw.class));
         cards.add(new SetCardInfo("Lavaspur Boots", 243, Rarity.UNCOMMON, mage.cards.l.LavaspurBoots.class));
+        cards.add(new SetCardInfo("Lilah, Undefeated Slickshot", 217, Rarity.RARE, mage.cards.l.LilahUndefeatedSlickshot.class));
         cards.add(new SetCardInfo("Loan Shark", 55, Rarity.COMMON, mage.cards.l.LoanShark.class));
         cards.add(new SetCardInfo("Lonely Arroyo", 260, Rarity.COMMON, mage.cards.l.LonelyArroyo.class));
+        cards.add(new SetCardInfo("Longhorn Sharpshooter", 132, Rarity.UNCOMMON, mage.cards.l.LonghornSharpshooter.class));
         cards.add(new SetCardInfo("Lush Oasis", 261, Rarity.COMMON, mage.cards.l.LushOasis.class));
         cards.add(new SetCardInfo("Luxurious Locomotive", 244, Rarity.UNCOMMON, mage.cards.l.LuxuriousLocomotive.class));
         cards.add(new SetCardInfo("Magda, the Hoardmaster", 133, Rarity.RARE, mage.cards.m.MagdaTheHoardmaster.class));
+        cards.add(new SetCardInfo("Make Your Own Luck", 218, Rarity.UNCOMMON, mage.cards.m.MakeYourOwnLuck.class));
         cards.add(new SetCardInfo("Malcolm, the Eyes", 219, Rarity.RARE, mage.cards.m.MalcolmTheEyes.class));
-        cards.add(new SetCardInfo("Map the Frontier", 170, Rarity.UNCOMMON, mage.cards.m.MapTheFrontier.class));
         cards.add(new SetCardInfo("Marauding Sphinx", 56, Rarity.UNCOMMON, mage.cards.m.MaraudingSphinx.class));
         cards.add(new SetCardInfo("Marchesa, Dealer of Death", 220, Rarity.RARE, mage.cards.m.MarchesaDealerOfDeath.class));
         cards.add(new SetCardInfo("Mine Raider", 135, Rarity.COMMON, mage.cards.m.MineRaider.class));
@@ -197,7 +199,5 @@ public final class OutlawsOfThunderJunction extends ExpansionSet {
         cards.add(new SetCardInfo("Vraska Joins Up", 236, Rarity.RARE, mage.cards.v.VraskaJoinsUp.class));
         cards.add(new SetCardInfo("Wanted Griffin", 38, Rarity.COMMON, mage.cards.w.WantedGriffin.class));
         cards.add(new SetCardInfo("Wrangler of the Damned", 238, Rarity.UNCOMMON, mage.cards.w.WranglerOfTheDamned.class));
-
-        cards.removeIf(setCardInfo -> unfinished.contains(setCardInfo.getName())); // remove when mechanic is implemented
     }
 }

@@ -429,6 +429,7 @@ public abstract class AbilityImpl implements Ability {
                 case BESTOW:
                 case MORPH:
                 case DISGUISE:
+                case PLOT:
                     // from Snapcaster Mage:
                     // If you cast a spell from a graveyard using its flashback ability, you can't pay other alternative costs
                     // (such as that of Foil). (2018-12-07)
@@ -521,7 +522,7 @@ public abstract class AbilityImpl implements Ability {
                 String message = controller.getLogName() + " announces a value of " + xValue + " (" + variableCost.getActionText() + ')'
                         + CardUtil.getSourceLogName(game, this);
                 announceString.append(message);
-                setCostsTag("X",xValue);
+                setCostsTag("X", xValue);
             }
         }
         return announceString.toString();
@@ -626,7 +627,7 @@ public abstract class AbilityImpl implements Ability {
                     }
                     addManaCostsToPay(new ManaCostsImpl<>(manaString.toString()));
                     getManaCostsToPay().setX(xValue * xValueMultiplier, amountMana);
-                    setCostsTag("X",xValue * xValueMultiplier);
+                    setCostsTag("X", xValue * xValueMultiplier);
                 }
                 variableManaCost.setPaid();
             }
@@ -718,7 +719,8 @@ public abstract class AbilityImpl implements Ability {
     public Map<String, Object> getCostsTagMap() {
         return costsTagMap;
     }
-    public void setCostsTag(String tag, Object value){
+
+    public void setCostsTag(String tag, Object value) {
         if (costsTagMap == null) {
             costsTagMap = new HashMap<>();
         }
