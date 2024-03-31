@@ -6,10 +6,13 @@ import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
+import mage.target.TargetCard;
 import mage.util.CardUtil;
 
 import java.util.HashSet;
@@ -21,7 +24,7 @@ import java.util.UUID;
  * <p>
  * almost identical to {@link TargetCardAndOrCardInLibrary}
  */
-public class TargetCardAndOrCardInGraveyard extends TargetCardInGraveyard {
+public class TargetCardAndOrCard extends TargetCard {
 
     private static FilterCard makeFilter(Predicate<? super Card> firstPredicate,
                                          Predicate<? super Card> secondPredicate,
@@ -42,25 +45,29 @@ public class TargetCardAndOrCardInGraveyard extends TargetCardInGraveyard {
     /**
      * a [firstType] card and/or a [secondType] card
      */
-    protected TargetCardAndOrCardInGraveyard(Predicate<? super Card> firstPredicate, Predicate<? super Card> secondPredicate, String filterText) {
-        super(0, 2, makeFilter(firstPredicate, secondPredicate, filterText));
+    protected TargetCardAndOrCard(Predicate<? super Card> firstPredicate, Predicate<? super Card> secondPredicate, String filterText) {
+        super(0, 2, Zone.ALL, makeFilter(firstPredicate, secondPredicate, filterText));
         this.assignment = new PredicateCardAssignment(firstPredicate, secondPredicate);
     }
 
-    public TargetCardAndOrCardInGraveyard(CardType firstType, CardType secondType) {
+    public TargetCardAndOrCard(String firstName, String secondName) {
+        this(new NamePredicate(firstName), new NamePredicate(secondName), "a card named " + firstName + " and/or a card named " + secondName);
+    }
+
+    public TargetCardAndOrCard(CardType firstType, CardType secondType) {
         this(firstType.getPredicate(), secondType.getPredicate(), makeFilterText(
                 CardUtil.getTextWithFirstCharLowerCase(firstType.toString()),
                 CardUtil.getTextWithFirstCharLowerCase(secondType.toString())));
     }
 
-    protected TargetCardAndOrCardInGraveyard(final TargetCardAndOrCardInGraveyard target) {
+    protected TargetCardAndOrCard(final TargetCardAndOrCard target) {
         super(target);
         this.assignment = target.assignment;
     }
 
     @Override
-    public TargetCardAndOrCardInGraveyard copy() {
-        return new TargetCardAndOrCardInGraveyard(this);
+    public TargetCardAndOrCard copy() {
+        return new TargetCardAndOrCard(this);
     }
 
     @Override

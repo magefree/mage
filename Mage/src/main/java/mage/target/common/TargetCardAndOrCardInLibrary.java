@@ -10,6 +10,7 @@ import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
 import mage.util.CardUtil;
 
@@ -50,6 +51,10 @@ public class TargetCardAndOrCardInLibrary extends TargetCardInLibrary {
         this(firstType.getPredicate(), secondType.getPredicate(), makeFilterText(
                 CardUtil.getTextWithFirstCharLowerCase(firstType.toString()),
                 CardUtil.getTextWithFirstCharLowerCase(secondType.toString())));
+    }
+
+    public TargetCardAndOrCardInLibrary(String firstName, String secondName) {
+        this(new NamePredicate(firstName), new NamePredicate(secondName), "a card named " + firstName + " and/or a card named " + secondName);
     }
 
     public TargetCardAndOrCardInLibrary(SubType firstType, SubType secondType) {
