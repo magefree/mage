@@ -14,6 +14,7 @@ import java.util.*;
  */
 public class SaddledMountWatcher extends Watcher {
 
+    // key: the mount, value: set of creatures which saddled
     private final Map<MageObjectReference, Set<MageObjectReference>> saddleMap = new HashMap<>();
 
     public SaddledMountWatcher() {

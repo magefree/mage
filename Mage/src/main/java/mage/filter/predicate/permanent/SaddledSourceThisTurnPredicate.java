@@ -7,6 +7,8 @@ import mage.game.permanent.Permanent;
 import mage.watchers.common.SaddledMountWatcher;
 
 /**
+ * requires SaddledMountWatcher
+ *
  * @author TheElk801
  */
 public enum SaddledSourceThisTurnPredicate implements ObjectSourcePlayerPredicate<Permanent> {

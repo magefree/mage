@@ -47,6 +47,7 @@ public class SaddleTest extends CardTestPlayerBase {
 
         setChoice(playerA, bear);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Saddle");
+
         attack(1, playerA, charger, playerB);
 
         setStrictChooseMode(true);
@@ -63,5 +64,70 @@ public class SaddleTest extends CardTestPlayerBase {
         execute();
 
         assertSaddled(charger, false);
+    }
+
+    private static final String possum = "Rambling Possum";
+    private static final String lion = "Silvercoat Lion";
+
+    @Test
+    public void testSaddledThisTurn() {
+        addCard(Zone.BATTLEFIELD, playerA, possum);
+        addCard(Zone.BATTLEFIELD, playerA, bear);
+        addCard(Zone.BATTLEFIELD, playerA, lion);
+
+        setChoice(playerA, bear);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Saddle");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        attack(1, playerA, possum, playerB);
+        setChoice(playerA, bear);
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, bear, 0);
+        assertHandCount(playerA, bear, 1);
+        assertTapped(lion, false);
+        assertTapped(possum, true);
+        assertSaddled(possum, true);
+        assertLife(playerB, 20 - 3 - 1);
+    }
+
+    @Test
+    public void testSaddledThisTurnFail() {
+        addCard(Zone.BATTLEFIELD, playerA, possum);
+        addCard(Zone.BATTLEFIELD, playerA, bear);
+        addCard(Zone.BATTLEFIELD, playerA, lion);
+
+        setChoice(playerA, bear);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Saddle");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        attack(1, playerA, possum, playerB);
+        setChoice(playerA, lion);
+
+        setStopAt(1, PhaseStep.END_TURN);
+        try {
+            execute();
+        } catch (AssertionError e) {
+            Assert.assertEquals(
+                    "Lion can't be targeted",
+                    "Missing CHOICE def for turn 1, step DECLARE_ATTACKERS, PlayerA\n" +
+                            "Object: PermanentCard: Rambling Possum;\n" +
+                            "Target: TargetPermanent: Select creatures that saddled it this turn (selected 0)",
+                    e.getMessage()
+            );
+        }
+
+        assertTapped(bear, true);
+        assertTapped(lion, false);
+        assertTapped(possum, true);
+        assertSaddled(possum, true);
     }
 }
