@@ -199,5 +199,6 @@ public final class OutlawsOfThunderJunction extends ExpansionSet {
         cards.add(new SetCardInfo("Vraska Joins Up", 236, Rarity.RARE, mage.cards.v.VraskaJoinsUp.class));
         cards.add(new SetCardInfo("Wanted Griffin", 38, Rarity.COMMON, mage.cards.w.WantedGriffin.class));
         cards.add(new SetCardInfo("Wrangler of the Damned", 238, Rarity.UNCOMMON, mage.cards.w.WranglerOfTheDamned.class));
+        cards.add(new SetCardInfo("Wylie Duke, Atiin Hero", 239, Rarity.RARE, mage.cards.w.WylieDukeAtiinHero.class));
     }
 }
