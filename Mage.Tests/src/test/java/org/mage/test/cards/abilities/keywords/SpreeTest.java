@@ -70,4 +70,26 @@ public class SpreeTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Mercenary Token", 1);
         assertTappedCount("Swamp", true, 1 + 3 + 1);
     }
+
+    private static final String electromancer = "Goblin Electromancer";
+
+    @Test
+    public void testReduction() {
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1 + 3 + 1 - 1);
+        addCard(Zone.BATTLEFIELD, playerA, bear, 1);
+        addCard(Zone.BATTLEFIELD, playerA, electromancer, 1);
+        addCard(Zone.HAND, playerA, accident);
+
+        setModeChoice(playerA, "1");
+        setModeChoice(playerA, "2");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, accident, bear);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertGraveyardCount(playerA, bear, 1);
+        assertPermanentCount(playerA, "Mercenary Token", 1);
+        assertTappedCount("Swamp", true, 1 + 3 + 1 - 1);
+    }
 }

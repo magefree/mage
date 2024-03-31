@@ -356,8 +356,10 @@ public abstract class AbilityImpl implements Ability {
             }
 
             Cost cost = this.getModes().getMode().getCost();
-            if (cost != null) {
-                this.costs.add(cost);
+            if (cost instanceof ManaCost) {
+                this.addManaCostsToPay((ManaCost) cost.copy());
+            } else if (cost != null) {
+                this.costs.add(cost.copy());
             }
         } // end modes
 
