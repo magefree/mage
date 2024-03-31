@@ -46,7 +46,7 @@ public final class BoundingFelidar extends CardImpl {
 
         // Whenever Bounding Felidar attacks while saddled, put a +1/+1 counter on each other creature you control. You gain 1 life for each of those creatures.
         Ability ability = new AttacksWhileSaddledTriggeredAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter));
-        ability.addEffect(new GainLifeEffect(xValue));
+        ability.addEffect(new GainLifeEffect(xValue).setText("You gain 1 life for each of those creatures"));
         ability.addHint(hint);
         this.addAbility(ability);
 

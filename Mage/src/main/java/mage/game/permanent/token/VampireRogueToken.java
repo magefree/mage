@@ -11,7 +11,7 @@ import mage.constants.SubType;
 public final class VampireRogueToken extends TokenImpl {
 
     public VampireRogueToken() {
-        super("Vampire Rogue Token", "black Vampire Rogue creature token with lifelink");
+        super("Vampire Rogue Token", "1/1 black Vampire Rogue creature token with lifelink");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add(SubType.VAMPIRE);

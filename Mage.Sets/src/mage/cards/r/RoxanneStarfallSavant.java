@@ -43,8 +43,9 @@ public final class RoxanneStarfallSavant extends CardImpl {
 
         // Whenever you tap an artifact token for mana, add one mana of any type that artifact token produced.
         this.addAbility(new TapForManaAllTriggeredManaAbility(
-                new AddManaOfAnyTypeProducedEffect(), filter,
-                SetTargetPointer.PERMANENT
+                new AddManaOfAnyTypeProducedEffect()
+                        .setText("add one mana of any type that artifact token produced"),
+                filter, SetTargetPointer.PERMANENT
         ));
     }
 

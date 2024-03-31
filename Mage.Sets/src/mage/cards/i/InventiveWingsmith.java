@@ -23,6 +23,7 @@ import java.util.UUID;
 public final class InventiveWingsmith extends CardImpl {
 
     private static final Condition condition = new CompoundCondition(
+            "if you haven't cast a spell from your hand this turn and {this} doesn't have a flying counter on it",
             HaventCastSpellFromHandThisTurnCondition.instance,
             new SourceHasCounterCondition(CounterType.FLYING, 0, 0)
     );

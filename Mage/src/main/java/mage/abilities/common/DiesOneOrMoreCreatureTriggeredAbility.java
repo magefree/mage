@@ -22,7 +22,7 @@ public class DiesOneOrMoreCreatureTriggeredAbility extends TriggeredAbilityImpl 
     public DiesOneOrMoreCreatureTriggeredAbility(Effect effect, FilterCreaturePermanent filter) {
         super(Zone.BATTLEFIELD, effect, false);
         this.filter = filter;
-        this.setTriggerPhrase("Whenever one or more " + filter.getMessage() + " die,");
+        this.setTriggerPhrase("Whenever one or more " + filter.getMessage() + " die, ");
     }
 
     private DiesOneOrMoreCreatureTriggeredAbility(final DiesOneOrMoreCreatureTriggeredAbility ability) {

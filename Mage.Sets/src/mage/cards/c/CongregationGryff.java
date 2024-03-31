@@ -25,7 +25,7 @@ import java.util.UUID;
 public final class CongregationGryff extends CardImpl {
 
     private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(new FilterControlledPermanent(SubType.MOUNT));
-    private static final Hint hint = new ValueHint("Number of mounts you control", xValue);
+    private static final Hint hint = new ValueHint("Number of Mounts you control", xValue);
 
     public CongregationGryff(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{W}");

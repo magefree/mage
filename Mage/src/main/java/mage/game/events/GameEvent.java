@@ -623,6 +623,12 @@ public class GameEvent implements Serializable {
          playerId   controller of the creature mentoring
          */
         MENTORED_CREATURE,
+        /* the card becomes plotted
+         targetId   card that was plotted
+         sourceId   of the plotting ability (may be the card itself or another one)
+         playerId   owner of the plotted card (the one able to cast the card)
+         */
+        BECOME_PLOTTED,
         //custom events
         CUSTOM_EVENT
     }
