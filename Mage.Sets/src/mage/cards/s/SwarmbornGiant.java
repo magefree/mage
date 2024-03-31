@@ -19,6 +19,7 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.events.DamagedBatchForOnePlayerEvent;
 import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -79,14 +80,23 @@ class SwarmbornGiantTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
+        return event.getType() == GameEvent.EventType.DAMAGED_BATCH_FOR_ONE_PLAYER;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getTargetId().equals(this.getControllerId())) {
-            DamagedEvent damagedEvent = (DamagedEvent) event;
-            return damagedEvent.isCombatDamage();
+
+            DamagedBatchForOnePlayerEvent dEvent = (DamagedBatchForOnePlayerEvent) event;
+
+            int combatDamage = dEvent.getEvents()
+                    .stream()
+                    .filter(ev -> ev.getSourceId().equals(controllerId))
+                    .filter(DamagedEvent::isCombatDamage)
+                    .mapToInt(GameEvent::getAmount)
+                    .sum();
+
+            return combatDamage > 0;
         }
         return false;
     }
