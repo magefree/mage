@@ -89,6 +89,7 @@ public final class OutlawsOfThunderJunction extends ExpansionSet {
         cards.add(new SetCardInfo("Gisa, the Hellraiser", 288, Rarity.MYTHIC, mage.cards.g.GisaTheHellraiser.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gold Pan", 242, Rarity.COMMON, mage.cards.g.GoldPan.class));
         cards.add(new SetCardInfo("Gold Rush", 166, Rarity.UNCOMMON, mage.cards.g.GoldRush.class));
+        cards.add(new SetCardInfo("Goldvein Hydra", 167, Rarity.MYTHIC, mage.cards.g.GoldveinHydra.class));
         cards.add(new SetCardInfo("Hardbristle Bandit", 168, Rarity.COMMON, mage.cards.h.HardbristleBandit.class));
         cards.add(new SetCardInfo("Hell to Pay", 126, Rarity.RARE, mage.cards.h.HellToPay.class));
         cards.add(new SetCardInfo("Hellspur Brute", 127, Rarity.UNCOMMON, mage.cards.h.HellspurBrute.class));
