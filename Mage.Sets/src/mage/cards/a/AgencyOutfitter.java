@@ -94,7 +94,6 @@ class AgencyOutfitterEffect extends OneShotEffect {
         }
 
         if (glassCard == null || capCard == null) {
-            Cards cards = new CardsImpl();
             FilterCard filter;
             TargetCard target;
             if (glassCard == null && capCard == null) {
@@ -107,6 +106,7 @@ class AgencyOutfitterEffect extends OneShotEffect {
                 target = new TargetCard(0, 1, Zone.ALL, filter);
             }
             target.withNotTarget(true);
+            Cards cards = new CardsImpl();
             cards.addAllCards(controller.getHand().getCards(filter, source.getControllerId(), source, game));
             cards.addAllCards(controller.getGraveyard().getCards(filter, source.getControllerId(), source, game));
             if (!cards.isEmpty()) {
