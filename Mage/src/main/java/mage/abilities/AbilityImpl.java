@@ -311,6 +311,16 @@ public abstract class AbilityImpl implements Ability {
             return false;
         }
 
+        // apply mode costs if they have them
+        for (UUID modeId : this.getModes().getSelectedModes()) {
+            Cost cost = this.getModes().get(modeId).getCost();
+            if (cost instanceof ManaCost) {
+                this.addManaCostsToPay((ManaCost) cost.copy());
+            } else if (cost != null) {
+                this.costs.add(cost.copy());
+            }
+        }
+
         // unit tests only: it allows to add targets/choices by two ways:
         // 1. From cast/activate command params (process it here)
         // 2. From single addTarget/setChoice, it's a preffered method for tests (process it in normal choose dialogs like human player)
@@ -353,13 +363,6 @@ public abstract class AbilityImpl implements Ability {
                     // was canceled during targer selection
                     return false;
                 }
-            }
-
-            Cost cost = this.getModes().getMode().getCost();
-            if (cost instanceof ManaCost) {
-                this.addManaCostsToPay((ManaCost) cost.copy());
-            } else if (cost != null) {
-                this.costs.add(cost.copy());
             }
         } // end modes
 
