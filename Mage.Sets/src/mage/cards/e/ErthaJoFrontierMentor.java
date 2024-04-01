@@ -16,6 +16,7 @@ import mage.filter.FilterStackObject;
 import mage.filter.StaticFilters;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
+import mage.filter.predicate.mageobject.TargetsPermanentOrPlayerPredicate;
 import mage.filter.predicate.mageobject.TargetsPermanentPredicate;
 import mage.filter.predicate.mageobject.TargetsPlayerPredicate;
 import mage.game.Game;
@@ -56,35 +57,12 @@ public final class ErthaJoFrontierMentor extends CardImpl {
     }
 }
 
-
-// Predicates.or is not handling well 2 ObjectSourcePlayerPredicate<StackObject> children,
-// so this is just a custom or.
-enum ErthaJoFrontierMentorPredicate implements ObjectSourcePlayerPredicate<StackObject> {
-    instance;
-
-    private static final TargetsPermanentPredicate permanentPredicate =
-            new TargetsPermanentPredicate(StaticFilters.FILTER_PERMANENT_CREATURE);
-
-    private static final TargetsPlayerPredicate playerPredicate =
-            new TargetsPlayerPredicate(new FilterPlayer());
-
-    @Override
-    public boolean apply(ObjectSourcePlayer<StackObject> input, Game game) {
-        return permanentPredicate.apply(input, game) || playerPredicate.apply(input, game);
-    }
-
-    @Override
-    public String toString() {
-        return "Or(" + permanentPredicate + ", " + playerPredicate + ')';
-    }
-}
-
 class ErthaJoFrontierMentorTriggeredAbility extends TriggeredAbilityImpl {
 
     private static final FilterStackObject filter = new FilterStackObject("ability that targets a creature or player");
 
     static {
-        filter.add(ErthaJoFrontierMentorPredicate.instance);
+        filter.add(new TargetsPermanentOrPlayerPredicate(StaticFilters.FILTER_PERMANENT_CREATURE, new FilterPlayer()));
     }
 
     public ErthaJoFrontierMentorTriggeredAbility() {

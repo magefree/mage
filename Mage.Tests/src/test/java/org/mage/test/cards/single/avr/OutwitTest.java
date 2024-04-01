@@ -2,7 +2,6 @@ package org.mage.test.cards.single.avr;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -28,6 +27,7 @@ public class OutwitTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Lightning Bolt");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+        checkPlayableAbility("Outwit castable", 1, PhaseStep.PRECOMBAT_MAIN, playerB, "Cast Outwit", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, outwit, "Lightning Bolt");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -49,16 +49,12 @@ public class OutwitTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Memnite");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Memnite");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, outwit, "Lightning Bolt");
+        checkPlayableAbility("Outwit not castable without valid target", 1, PhaseStep.PRECOMBAT_MAIN, playerB, "Cast Outwit", false);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
-        try {
-            execute();
-        } catch (AssertionError e) {
-            Assert.assertEquals(
-                    "Shouldn't be able to cast Outwit on Lightning Bolt targetting a creature",
-                    "Can't find ability to activate command: Cast Outwit$target=Lightning Bolt", e.getMessage()
-            );
-        }
+        execute();
+
+        assertGraveyardCount(playerA, "Memnite", 1);
+        assertGraveyardCount(playerA, "Lightning Bolt", 1);
     }
 }
