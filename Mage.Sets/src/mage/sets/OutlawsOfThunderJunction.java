@@ -207,6 +207,7 @@ public final class OutlawsOfThunderJunction extends ExpansionSet {
         cards.add(new SetCardInfo("Sterling Keykeeper", 32, Rarity.COMMON, mage.cards.s.SterlingKeykeeper.class));
         cards.add(new SetCardInfo("Stingerback Terror", 147, Rarity.RARE, mage.cards.s.StingerbackTerror.class));
         cards.add(new SetCardInfo("Stoic Sphinx", 71, Rarity.RARE, mage.cards.s.StoicSphinx.class));
+        cards.add(new SetCardInfo("Stubborn Burrowfiend", 184, Rarity.UNCOMMON, mage.cards.s.StubbornBurrowfiend.class));
         cards.add(new SetCardInfo("Swamp", 274, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Terror of the Peaks", 149, Rarity.MYTHIC, mage.cards.t.TerrorOfThePeaks.class));
         cards.add(new SetCardInfo("The Key to the Vault", 54, Rarity.RARE, mage.cards.t.TheKeyToTheVault.class));
