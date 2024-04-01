@@ -15,7 +15,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.game.Game;
 import mage.game.events.DamagedBatchForOnePlayerEvent;
-import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.BlueBirdToken;
