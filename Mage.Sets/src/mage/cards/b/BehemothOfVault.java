@@ -59,6 +59,7 @@ public final class BehemothOfVault extends CardImpl {
     }
 }
 
+//Based on DoWhenCostPaid but constructs the cost itself and uses a fixed target for the effect
 class BehemothOfVaultDoWhenCostPaid extends OneShotEffect {
 
     private final ReflexiveTriggeredAbility ability;

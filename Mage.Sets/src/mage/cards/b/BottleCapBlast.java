@@ -42,6 +42,7 @@ public final class BottleCapBlast extends CardImpl {
     }
 }
 
+//Based on Hell to Pay
 class BottleCapBlastEffect extends OneShotEffect {
 
     BottleCapBlastEffect() {
