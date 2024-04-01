@@ -150,6 +150,7 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Kellogg, Dangerous Mind", 415, Rarity.RARE, mage.cards.k.KelloggDangerousMind.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kellogg, Dangerous Mind", 634, Rarity.RARE, mage.cards.k.KelloggDangerousMind.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kellogg, Dangerous Mind", 943, Rarity.RARE, mage.cards.k.KelloggDangerousMind.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Legate Lanius, Caesar's Ace", 107, Rarity.UNCOMMON, mage.cards.l.LegateLaniusCaesarsAce.class));
         cards.add(new SetCardInfo("Lethal Scheme", 185, Rarity.RARE, mage.cards.l.LethalScheme.class));
         cards.add(new SetCardInfo("Liberty Prime, Recharged", 5, Rarity.MYTHIC, mage.cards.l.LibertyPrimeRecharged.class));
         cards.add(new SetCardInfo("Lightning Greaves", 233, Rarity.UNCOMMON, mage.cards.l.LightningGreaves.class));
