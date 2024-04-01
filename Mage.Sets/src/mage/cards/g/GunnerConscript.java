@@ -58,7 +58,7 @@ public final class GunnerConscript extends CardImpl {
         // When Gunner Conscript dies, if it was equipped, create a Junk token.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new DiesSourceTriggeredAbility(new CreateTokenEffect(new JunkToken())), GunnerConscriptEquippedCondition.instance,
-                "When Gunner Conscript dies, if it was enchanted, create a Junk token."));
+                "When Gunner Conscript dies, if it was equipped, create a Junk token."));
     }
 
     private GunnerConscript(final GunnerConscript card) {

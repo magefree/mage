@@ -36,8 +36,7 @@ public final class LegateLaniusCaesarsAce extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Decimate -- When Legate Lanius enters the battlefield, each opponent sacrifices a tenth of the creatures they control, rounded up.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new SacrificeOpponentsEffect(CreaturesControlledByChosenPlayer.instance, StaticFilters.FILTER_CONTROLLED_CREATURE));
-        this.addAbility(ability);
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new LegateLaniusCaesarsAceSacrificeEffect()).withFlavorWord("Decimate"));
 
         // Whenever an opponent sacrifices a creature, put a +1/+1 counter on Legate Lanius.
         this.addAbility(new SacrificePermanentTriggeredAbility(Zone.BATTLEFIELD,
@@ -100,5 +99,4 @@ class LegateLaniusCaesarsAceSacrificeEffect extends OneShotEffect {
         }
         return true;
     }
-
 }

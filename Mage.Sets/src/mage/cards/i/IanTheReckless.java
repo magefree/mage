@@ -16,6 +16,7 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.permanent.ModifiedPredicate;
+import mage.target.common.TargetAnyTarget;
 
 import java.util.UUID;
 
@@ -45,6 +46,7 @@ public final class IanTheReckless extends CardImpl {
         TriggeredAbility ability = new AttacksTriggeredAbility(new DamageControllerEffect(
                 new SourcePermanentPowerCount()).setText("have it deal damage equal to its power to you"), true);
         ability.addEffect(new DamageTargetEffect(new SourcePermanentPowerCount()).setText("and any target"));
+        ability.addTarget(new TargetAnyTarget());
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, condition,
                 "Whenever Ian the Reckless attacks, if it's modified, you may have it deal damage equal to its power to you and any target."));
     }
