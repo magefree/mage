@@ -6,20 +6,21 @@ import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.costs.Cost;
-import mage.abilities.costs.CostImpl;
+import mage.abilities.costs.common.PayEnergyCost;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.abilities.effects.common.DoWhenCostPaid;
 import mage.abilities.effects.common.counter.GetEnergyCountersControllerEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetNonlandPermanent;
+import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
 
@@ -42,9 +43,8 @@ public final class BehemothOfVault extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GetEnergyCountersControllerEffect(4)));
 
         // When Behemoth of Vault 0 dies, you may pay an amount of {E} equal to target nonland permanent's mana value. When you do, destroy that permanent.
-        ReflexiveTriggeredAbility reflexiveTrigger = new ReflexiveTriggeredAbility(new DestroyTargetEffect(), false);
-        Ability ability = new DiesSourceTriggeredAbility(new DoWhenCostPaid(reflexiveTrigger, new BehemothOfVaultCost(),
-                "pay an amount of {E} equal to target nonland permanent's mana value"));
+        Ability ability = new DiesSourceTriggeredAbility(new BehemothOfVaultDoWhenCostPaid(
+                new ReflexiveTriggeredAbility(new DestroyTargetEffect().setText("destroy that permanent"), false)));
         ability.addTarget(new TargetNonlandPermanent());
         this.addAbility(ability);
     }
@@ -59,45 +59,53 @@ public final class BehemothOfVault extends CardImpl {
     }
 }
 
-//Based on PayEnergyCost
-class BehemothOfVaultCost extends CostImpl {
-    BehemothOfVaultCost() {
-        this.text = "pay an amount of {E} equal to target nonland permanent's mana value";
+class BehemothOfVaultDoWhenCostPaid extends OneShotEffect {
+
+    private final ReflexiveTriggeredAbility ability;
+
+    BehemothOfVaultDoWhenCostPaid(ReflexiveTriggeredAbility ability) {
+        super(Outcome.Benefit);
+        this.ability = ability;
+        this.staticText = "you may pay an amount of {E} equal to target nonland permanent's mana value. When you do, destroy that permanent.";
     }
 
-    BehemothOfVaultCost(BehemothOfVaultCost cost) {
-        super(cost);
+    BehemothOfVaultDoWhenCostPaid(final BehemothOfVaultDoWhenCostPaid effect) {
+        super(effect);
+        this.ability = effect.ability.copy();
     }
 
     @Override
-    public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
-        Player player = game.getPlayer(controllerId);
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
         Permanent targetPermanent = game.getPermanent(source.getFirstTarget());
-        if (targetPermanent != null && player != null) {
-            int amount = targetPermanent.getManaValue();
-            StringBuilder sb = new StringBuilder("pay ");
-            for (int i = 0; i < amount; i++) {
-                sb.append("{E}");
-            }
-            this.text = sb.toString();
-            return player.getCounters().getCount(CounterType.ENERGY) >= amount;
+        if (targetPermanent == null || player == null) {
+            return false;
         }
-        return false;
+        Cost cost = new PayEnergyCost(targetPermanent.getManaValue());
+        if (!cost.canPay(source, source, player.getId(), game)
+                || !player.chooseUse(Outcome.DestroyPermanent, cost.getText(), source, game)) {
+            return true;
+        }
+        cost.clearPaid();
+        int bookmark = game.bookmarkState();
+        if (cost.pay(source, game, source, player.getId(), false)) {
+            ability.getEffects().setTargetPointer(new FixedTarget(targetPermanent, game));
+            game.fireReflexiveTriggeredAbility(ability, source);
+            player.resetStoredBookmark(game);
+            return true;
+        }
+        player.restoreState(bookmark, BehemothOfVaultDoWhenCostPaid.class.getName(), game);
+        return true;
     }
 
     @Override
-    public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
-        Player player = game.getPlayer(controllerId);
-        Permanent targetPermanent = game.getPermanent(source.getFirstTarget());
-        if (targetPermanent != null && player != null && player.getCounters().getCount(CounterType.ENERGY) >= targetPermanent.getManaValue()) {
-            player.getCounters().removeCounter(CounterType.ENERGY, targetPermanent.getManaValue());
-            paid = true;
-        }
-        return paid;
+    public void setValue(String key, Object value) {
+        super.setValue(key, value);
+        ability.getEffects().setValue(key, value);
     }
 
     @Override
-    public BehemothOfVaultCost copy() {
-        return new BehemothOfVaultCost(this);
+    public BehemothOfVaultDoWhenCostPaid copy() {
+        return new BehemothOfVaultDoWhenCostPaid(this);
     }
 }

@@ -6,6 +6,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.dynamicvalue.common.GreatestPowerAmongControlledCreaturesValue;
+import mage.abilities.dynamicvalue.common.GreatestToughnessAmongControlledCreaturesValue;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.abilities.mana.DynamicManaAbility;
@@ -41,7 +42,7 @@ public final class BighornerRancher extends CardImpl {
 
         // Sacrifice Bighorner Rancher: You gain life equal to the greatest toughness among other creatures you control.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new GainLifeEffect(GreatestPowerAmongControlledCreaturesValue.instance).setText("You gain life equal to the greatest toughness among other creatures you control."),
+                new GainLifeEffect(GreatestToughnessAmongControlledCreaturesValue.instance).setText("You gain life equal to the greatest toughness among other creatures you control."),
                 new SacrificeSourceCost()));
     }
 
