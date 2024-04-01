@@ -5,7 +5,6 @@ import mage.abilities.SpellAbility;
 import mage.abilities.StaticAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.*;
-import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.CreateTokenCopySourceEffect;
 import mage.abilities.effects.OneShotEffect;
@@ -25,9 +24,6 @@ public class SquadAbility extends StaticAbility implements OptionalAdditionalSou
     protected static final String SQUAD_ACTIVATION_VALUE_KEY = "squadActivationCount";
     protected static final String SQUAD_REMINDER = "You may pay an additional "
             + "{cost} any number of times as you cast this spell.";
-    public SquadAbility() {
-        this(new GenericManaCost(2));
-    }
 
     public SquadAbility(Cost cost) {
         super(Zone.STACK, null);
