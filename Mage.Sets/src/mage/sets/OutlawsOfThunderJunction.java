@@ -152,6 +152,7 @@ public final class OutlawsOfThunderJunction extends ExpansionSet {
         cards.add(new SetCardInfo("Nimble Brigand", 58, Rarity.UNCOMMON, mage.cards.n.NimbleBrigand.class));
         cards.add(new SetCardInfo("Nurturing Pixie", 20, Rarity.UNCOMMON, mage.cards.n.NurturingPixie.class));
         cards.add(new SetCardInfo("Oasis Gardener", 246, Rarity.COMMON, mage.cards.o.OasisGardener.class));
+        cards.add(new SetCardInfo("Obeka, Splitter of Seconds", 222, Rarity.RARE, mage.cards.o.ObekaSplitterOfSeconds.class));
         cards.add(new SetCardInfo("Oko, the Ringleader", 223, Rarity.MYTHIC, mage.cards.o.OkoTheRingleader.class));
         cards.add(new SetCardInfo("Omenport Vigilante", 21, Rarity.UNCOMMON, mage.cards.o.OmenportVigilante.class));
         cards.add(new SetCardInfo("Ornery Tumblewagg", 171, Rarity.RARE, mage.cards.o.OrneryTumblewagg.class));
