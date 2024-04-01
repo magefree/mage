@@ -12,6 +12,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.events.DamagedBatchForOnePermanentEvent;
+import mage.game.events.DamagedEvent;
 import mage.game.events.DamagedPermanentEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -63,7 +65,7 @@ class FallOfCairAndrosTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PERMANENT;
+        return event.getType() == GameEvent.EventType.DAMAGED_BATCH_FOR_ONE_PERMANENT;
     }
 
     @Override
@@ -73,12 +75,17 @@ class FallOfCairAndrosTriggeredAbility extends TriggeredAbilityImpl {
                 || !game.getOpponents(getControllerId()).contains(permanent.getControllerId())) {
             return false;
         }
-        DamagedPermanentEvent dEvent = (DamagedPermanentEvent) event;
-        if (dEvent.isCombatDamage() || dEvent.getExcess() < 1) {
+        DamagedBatchForOnePermanentEvent dEvent = (DamagedBatchForOnePermanentEvent) event;
+        int excessDamage = dEvent.getEvents()
+                .stream()
+                .mapToInt(DamagedEvent::getExcess)
+                .sum();
+
+        if (dEvent.isCombatDamage() || excessDamage < 1) {
             return false;
         }
         this.getEffects().clear();
-        this.addEffect(new AmassEffect(dEvent.getExcess(), SubType.ORC));
+        this.addEffect(new AmassEffect(excessDamage, SubType.ORC));
         return true;
     }
 
