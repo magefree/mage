@@ -1,10 +1,12 @@
 package mage.filter.predicate.mageobject;
 
 import mage.abilities.Mode;
+import mage.filter.FilterPermanent;
 import mage.filter.FilterPlayer;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.Target;
@@ -12,14 +14,16 @@ import mage.target.Target;
 import java.util.UUID;
 
 /**
- * @author jeffwadsworth, Susucr
+ * @author Susucr
  */
-public class TargetsPlayerPredicate implements ObjectSourcePlayerPredicate<StackObject> {
+public class TargetsPermanentOrPlayerPredicate implements ObjectSourcePlayerPredicate<StackObject> {
 
-    private final FilterPlayer targetFilter;
+    private final FilterPermanent targetFilterPermanent;
+    private final FilterPlayer targetFilterPlayer;
 
-    public TargetsPlayerPredicate(FilterPlayer targetFilter) {
-        this.targetFilter = targetFilter;
+    public TargetsPermanentOrPlayerPredicate(FilterPermanent targetFilterPermanent, FilterPlayer targetFilterPlayer) {
+        this.targetFilterPermanent = targetFilterPermanent;
+        this.targetFilterPlayer = targetFilterPlayer;
     }
 
     @Override
@@ -33,8 +37,14 @@ public class TargetsPlayerPredicate implements ObjectSourcePlayerPredicate<Stack
                         continue;
                     }
                     for (UUID targetId : target.getTargets()) {
+                        // Try for permanent
+                        Permanent permanent = game.getPermanent(targetId);
+                        if (targetFilterPermanent.match(permanent, input.getPlayerId(), input.getSource(), game)) {
+                            return true;
+                        }
+                        // Try for player
                         Player player = game.getPlayer(targetId);
-                        if (targetFilter.match(player, input.getPlayerId(), input.getSource(), game)) {
+                        if (targetFilterPlayer.match(player, input.getPlayerId(), input.getSource(), game)) {
                             return true;
                         }
                     }
@@ -46,6 +56,6 @@ public class TargetsPlayerPredicate implements ObjectSourcePlayerPredicate<Stack
 
     @Override
     public String toString() {
-        return "that targets a " + targetFilter.getMessage();
+        return "that targets a " + targetFilterPermanent.getMessage() + " or " + targetFilterPlayer.getMessage();
     }
 }

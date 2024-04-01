@@ -1,7 +1,6 @@
 package mage.cards.e;
 
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.CopyStackObjectEffect;
@@ -12,17 +11,18 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
+import mage.filter.FilterPlayer;
 import mage.filter.FilterStackObject;
 import mage.filter.StaticFilters;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
+import mage.filter.predicate.mageobject.TargetsPermanentOrPlayerPredicate;
 import mage.filter.predicate.mageobject.TargetsPermanentPredicate;
 import mage.filter.predicate.mageobject.TargetsPlayerPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.token.MercenaryToken;
 import mage.game.stack.StackObject;
-import mage.target.common.TargetAnyTarget;
 
 import java.util.UUID;
 
@@ -57,37 +57,16 @@ public final class ErthaJoFrontierMentor extends CardImpl {
     }
 }
 
-// Some abstract type is confused there, so not using Predicates.or
-enum ErthaJoFrontierMentorPredicate implements ObjectSourcePlayerPredicate<MageObject> {
-    instance;
-
-    private static final TargetsPermanentPredicate permanentPredicate =
-            new TargetsPermanentPredicate(StaticFilters.FILTER_PERMANENT_CREATURE);
-
-    private static final TargetsPlayerPredicate playerPredicate = new TargetsPlayerPredicate();
-
-    @Override
-    public boolean apply(ObjectSourcePlayer<MageObject> o, Game game) {
-        return permanentPredicate.apply(o, game) || playerPredicate.apply(o, game);
-    }
-
-    @Override
-    public String toString() {
-        return "Or(" + permanentPredicate + ", " + playerPredicate + ')';
-    }
-}
-
 class ErthaJoFrontierMentorTriggeredAbility extends TriggeredAbilityImpl {
 
     private static final FilterStackObject filter = new FilterStackObject("ability that targets a creature or player");
 
     static {
-        filter.add(ErthaJoFrontierMentorPredicate.instance);
+        filter.add(new TargetsPermanentOrPlayerPredicate(StaticFilters.FILTER_PERMANENT_CREATURE, new FilterPlayer()));
     }
 
     public ErthaJoFrontierMentorTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CopyStackObjectEffect(), false);
-        this.addTarget(new TargetAnyTarget());
         setTriggerPhrase("Whenever you activate an ability that targets a creature or player, ");
     }
 
