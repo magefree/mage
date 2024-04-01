@@ -14,7 +14,6 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.DamagedBatchForOnePermanentEvent;
-import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
 import mage.players.Player;
 
@@ -72,16 +71,11 @@ class PiousWarriorTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
 
         DamagedBatchForOnePermanentEvent dEvent = (DamagedBatchForOnePermanentEvent) event;
+        int damage = dEvent.getAmount();
 
-        int combatDamage = dEvent.getEvents()
-                .stream()
-                .filter(DamagedEvent::isCombatDamage)
-                .mapToInt(GameEvent::getAmount)
-                .sum();
-
-        if (event.getTargetId().equals(this.sourceId) && combatDamage > 0) {
-   			this.getEffects().get(0).setValue("damageAmount", combatDamage);
-       		return true;
+        if (event.getTargetId().equals(this.sourceId) && dEvent.isCombatDamage() && damage > 0) {
+            this.getEffects().setValue("damageAmount", damage);
+            return true;
         }
         return false;
     }

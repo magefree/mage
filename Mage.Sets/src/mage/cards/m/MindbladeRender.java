@@ -1,21 +1,21 @@
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.DamagedBatchForOnePlayerEvent;
-import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -80,17 +80,20 @@ class MindbladeRenderTriggeredAbility extends TriggeredAbilityImpl {
             return false;
         }
 
-        int warriorCombatDamage = dEvent.getEvents()
+        if (!dEvent.isCombatDamage()){
+            return false;
+        }
+
+        int warriorDamage = dEvent.getEvents()
                 .stream()
                 .filter(ev -> {
                     Permanent attacker = game.getPermanentOrLKIBattlefield(ev.getSourceId());
                     return attacker.hasSubtype(SubType.WARRIOR, game);
                 })
-                .filter(DamagedEvent::isCombatDamage)
                 .mapToInt(GameEvent::getAmount)
                 .sum();
 
-        return warriorCombatDamage > 0;
+        return warriorDamage > 0;
     }
 
     @Override

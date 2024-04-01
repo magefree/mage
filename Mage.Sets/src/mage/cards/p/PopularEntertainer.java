@@ -13,7 +13,6 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.events.DamagedBatchForOnePlayerEvent;
-import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
 import mage.target.TargetPermanent;
 
@@ -71,14 +70,13 @@ class PopularEntertainerAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         DamagedBatchForOnePlayerEvent dEvent = (DamagedBatchForOnePlayerEvent) event;
 
-        int combatDamage = dEvent.getEvents()
+        int damage = dEvent.getEvents()
                 .stream()
                 .filter(ev -> ev.getSourceId().equals(controllerId))
-                .filter(DamagedEvent::isCombatDamage)
                 .mapToInt(GameEvent::getAmount)
                 .sum();
 
-        if (combatDamage < 1){
+        if (!dEvent.isCombatDamage() || damage < 1){
             return false;
         }
         FilterPermanent filter = new FilterCreaturePermanent(

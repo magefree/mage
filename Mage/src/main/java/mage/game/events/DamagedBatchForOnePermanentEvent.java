@@ -5,4 +5,10 @@ public class DamagedBatchForOnePermanentEvent extends BatchEvent<DamagedPermanen
     public DamagedBatchForOnePermanentEvent(DamagedPermanentEvent firstEvent) {
         super(GameEvent.EventType.DAMAGED_BATCH_FOR_ONE_PERMANENT, true, firstEvent);
     }
+
+    public boolean isCombatDamage() {
+        return getEvents()
+                .stream()
+                .anyMatch(DamagedEvent::isCombatDamage);
+    }
 }

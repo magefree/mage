@@ -1,6 +1,5 @@
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -14,9 +13,10 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.DamagedBatchForOnePermanentEvent;
-import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
 import mage.target.common.TargetOpponentOrPlaneswalker;
+
+import java.util.UUID;
 
 /**
  *
@@ -74,14 +74,10 @@ class WallOfSoulsTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
 
         DamagedBatchForOnePermanentEvent dEvent = (DamagedBatchForOnePermanentEvent) event;
-        int combatDamage = dEvent.getEvents()
-                .stream()
-                .filter(DamagedEvent::isCombatDamage)
-                .mapToInt(GameEvent::getAmount)
-                .sum();
+        int damage = dEvent.getAmount();
 
-        if (event.getTargetId().equals(this.sourceId) && combatDamage > 0) {
-            this.getEffects().setValue("damage", combatDamage);
+        if (event.getTargetId().equals(this.sourceId) && dEvent.isCombatDamage() && damage > 0) {
+            this.getEffects().setValue("damage", damage);
             return true;
         }
         return false;

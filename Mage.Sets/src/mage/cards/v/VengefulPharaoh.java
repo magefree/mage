@@ -2,7 +2,6 @@
 package mage.cards.v;
 
 import mage.MageInt;
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -15,11 +14,8 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.BatchEvent;
-import mage.game.events.DamagedEvent;
-import mage.game.events.GameEvent;
+import mage.game.events.*;
 import mage.game.permanent.Permanent;
-import mage.game.turn.Step;
 import mage.players.Player;
 import mage.target.common.TargetAttackingCreature;
 
@@ -92,25 +88,18 @@ class VengefulPharaohTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
 
-        BatchEvent<DamagedEvent> bEvent = (BatchEvent<DamagedEvent>) event;
-        int combatDamage = bEvent.getEvents()
-                .stream()
-                .filter(DamagedEvent::isCombatDamage)
-                .mapToInt(GameEvent::getAmount)
-                .sum();
-
-        if (combatDamage < 1){
-            return false;
-        }
         if ((event.getType() == GameEvent.EventType.DAMAGED_BATCH_FOR_ONE_PLAYER
                 && event.getTargetId().equals(this.getControllerId()))) {
-            return true;
+            DamagedBatchForOnePlayerEvent dEvent = (DamagedBatchForOnePlayerEvent) event;
+            return dEvent.isCombatDamage() && dEvent.getAmount() > 0;
         }
         if (event.getType() == GameEvent.EventType.DAMAGED_BATCH_FOR_ONE_PERMANENT) {
             Permanent permanent = game.getPermanent(event.getTargetId());
+            DamagedBatchForOnePermanentEvent dEvent = (DamagedBatchForOnePermanentEvent) event;
             return permanent != null
                     && permanent.isPlaneswalker(game)
-                    && permanent.isControlledBy(this.getControllerId());
+                    && permanent.isControlledBy(this.getControllerId())
+                    && dEvent.isCombatDamage() && dEvent.getAmount() > 0;
         }
         return false;
     }

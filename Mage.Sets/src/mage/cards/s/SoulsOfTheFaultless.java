@@ -16,7 +16,6 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.DamagedBatchForOnePermanentEvent;
-import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
 import mage.players.Player;
 
@@ -74,16 +73,12 @@ class SoulsOfTheFaultlessTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         DamagedBatchForOnePermanentEvent dEvent = (DamagedBatchForOnePermanentEvent) event;
 
-        int combatDamage = dEvent.getEvents()
-                .stream()
-                .filter(DamagedEvent::isCombatDamage)
-                .mapToInt(GameEvent::getAmount)
-                .sum();
+        int damage = dEvent.getAmount();
 
-        if (dEvent.getTargetId().equals(this.sourceId) && combatDamage > 0) {
+        if (dEvent.getTargetId().equals(this.sourceId) && dEvent.isCombatDamage() && damage > 0) {
             UUID attackerId = game.getActivePlayerId();
             for (Effect effect : this.getEffects()) {
-                effect.setValue("damageAmount", combatDamage);
+                effect.setValue("damageAmount", damage);
                 effect.setValue("attackerId", attackerId);
             }
             return true;

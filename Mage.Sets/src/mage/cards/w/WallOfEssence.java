@@ -14,9 +14,7 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.DamagedBatchForOnePermanentEvent;
-import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 import java.util.UUID;
@@ -72,23 +70,15 @@ class WallOfEssenceTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent permanent = game.getPermanent(event.getTargetId());
 
         DamagedBatchForOnePermanentEvent dEvent = (DamagedBatchForOnePermanentEvent) event;
-        int combatDamage = dEvent.getEvents()
-                .stream()
-                .filter(DamagedEvent::isCombatDamage)
-                .mapToInt(GameEvent::getAmount)
-                .sum();
+        int damage = dEvent.getAmount();
 
-        if (permanent == null
-                || !permanent.isCreature(game)
-                || !event.getTargetId().equals(this.sourceId)
-                || combatDamage < 1) {
-            return false;
+        if (event.getTargetId().equals(this.sourceId) && dEvent.isCombatDamage() && damage > 0) {
+            this.getEffects().setValue("damageAmount", damage);
+            return true;
         }
-        this.getEffects().setValue("damageAmount", combatDamage);
-        return true;
+        return false;
     }
 }
 

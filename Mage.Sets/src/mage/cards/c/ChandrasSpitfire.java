@@ -63,14 +63,7 @@ class ChandrasSpitfireAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         DamagedBatchForOnePlayerEvent dEvent = (DamagedBatchForOnePlayerEvent) event;
-
-        int nonCombatDamage = dEvent.getEvents()
-                .stream()
-                .filter(ev -> !ev.isCombatDamage())
-                .mapToInt(GameEvent::getAmount)
-                .sum();
-
-        return nonCombatDamage > 0 && game.getOpponents(controllerId).contains(dEvent.getTargetId());
+        return !dEvent.isCombatDamage() && dEvent.getAmount() > 0 && game.getOpponents(controllerId).contains(dEvent.getTargetId());
     }
 
     @Override

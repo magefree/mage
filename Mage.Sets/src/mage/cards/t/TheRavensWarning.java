@@ -90,18 +90,17 @@ class TheRavensWarningTriggeredAbility extends DelayedTriggeredAbility {
 
         DamagedBatchForOnePlayerEvent dEvent = (DamagedBatchForOnePlayerEvent) event;
 
-        int flyingCombatDamage = dEvent.getEvents()
+        int flyingDamage = dEvent.getEvents()
                 .stream()
                 .filter(ev -> ev.getSourceId().equals(controllerId))
                 .filter(ev -> {
                     Permanent permanent = game.getPermanentOrLKIBattlefield(ev.getSourceId());
                     return permanent.isCreature() && permanent.hasAbility(FlyingAbility.getInstance(), game);
                 })
-                .filter(DamagedEvent::isCombatDamage)
                 .mapToInt(GameEvent::getAmount)
                 .sum();
 
-        return flyingCombatDamage > 0;
+        return flyingDamage > 0 && dEvent.isCombatDamage();
     }
 
     @Override

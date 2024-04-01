@@ -13,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.DamagedBatchForOnePlayerEvent;
-import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.JaceCunningCastawayIllusionToken;
@@ -107,14 +106,13 @@ class JaceCunningCastawayDamageTriggeredAbility extends DelayedTriggeredAbility 
 
         DamagedBatchForOnePlayerEvent dEvent = (DamagedBatchForOnePlayerEvent) event;
 
-        int combatDamage = dEvent.getEvents()
+        int damageFromYours = dEvent.getEvents()
                 .stream()
                 .filter(ev -> ev.getSourceId().equals(controllerId))
-                .filter(DamagedEvent::isCombatDamage)
                 .mapToInt(GameEvent::getAmount)
                 .sum();
 
-        return combatDamage > 0;
+        return dEvent.isCombatDamage() && damageFromYours > 0;
     }
 
     @Override
