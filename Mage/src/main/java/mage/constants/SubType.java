@@ -315,6 +315,8 @@ public enum SubType {
     PINCHER("Pincher", SubTypeSet.CreatureType),
     PIRATE("Pirate", SubTypeSet.CreatureType),
     PLANT("Plant", SubTypeSet.CreatureType),
+    PORCUPINE("Porcupine", SubTypeSet.CreatureType),
+    POSSUM("Possum", SubTypeSet.CreatureType),
     PRAETOR("Praetor", SubTypeSet.CreatureType),
     PRIMARCH("Primarch", SubTypeSet.CreatureType),
     PRISM("Prism", SubTypeSet.CreatureType),

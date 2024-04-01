@@ -332,17 +332,17 @@ public class ForetellAbility extends SpecialAction {
                     if (game.getState().getZone(mainCardId) != Zone.EXILED) {
                         return ActivationStatus.getFalse();
                     }
+                    Integer foretoldTurn = (Integer) game.getState().getValue(mainCardId.toString() + "Foretell Turn Number");
+                    UUID exileId = (UUID) game.getState().getValue(mainCardId.toString() + "foretellAbility");
                     // Card must be Foretold
-                    if (game.getState().getValue(mainCardId.toString() + "Foretell Turn Number") == null
-                            && game.getState().getValue(mainCardId + "foretellAbility") == null) {
+                    if (foretoldTurn == null || exileId == null) {
                         return ActivationStatus.getFalse();
                     }
                     // Can't be cast if the turn it was Foretold is the same
-                    if ((int) game.getState().getValue(mainCardId.toString() + "Foretell Turn Number") == game.getTurnNum()) {
+                    if (foretoldTurn == game.getTurnNum()) {
                         return ActivationStatus.getFalse();
                     }
                     // Check that the card is actually in the exile zone (ex: Oblivion Ring exiles it after it was Foretold, etc)
-                    UUID exileId = (UUID) game.getState().getValue(mainCardId.toString() + "foretellAbility");
                     ExileZone exileZone = game.getState().getExile().getExileZone(exileId);
                     if (exileZone != null
                             && exileZone.isEmpty()) {

@@ -311,6 +311,16 @@ public abstract class AbilityImpl implements Ability {
             return false;
         }
 
+        // apply mode costs if they have them
+        for (UUID modeId : this.getModes().getSelectedModes()) {
+            Cost cost = this.getModes().get(modeId).getCost();
+            if (cost instanceof ManaCost) {
+                this.addManaCostsToPay((ManaCost) cost.copy());
+            } else if (cost != null) {
+                this.costs.add(cost.copy());
+            }
+        }
+
         // unit tests only: it allows to add targets/choices by two ways:
         // 1. From cast/activate command params (process it here)
         // 2. From single addTarget/setChoice, it's a preffered method for tests (process it in normal choose dialogs like human player)
@@ -429,6 +439,7 @@ public abstract class AbilityImpl implements Ability {
                 case BESTOW:
                 case MORPH:
                 case DISGUISE:
+                case PLOT:
                     // from Snapcaster Mage:
                     // If you cast a spell from a graveyard using its flashback ability, you can't pay other alternative costs
                     // (such as that of Foil). (2018-12-07)
@@ -521,7 +532,7 @@ public abstract class AbilityImpl implements Ability {
                 String message = controller.getLogName() + " announces a value of " + xValue + " (" + variableCost.getActionText() + ')'
                         + CardUtil.getSourceLogName(game, this);
                 announceString.append(message);
-                setCostsTag("X",xValue);
+                setCostsTag("X", xValue);
             }
         }
         return announceString.toString();
@@ -626,7 +637,7 @@ public abstract class AbilityImpl implements Ability {
                     }
                     addManaCostsToPay(new ManaCostsImpl<>(manaString.toString()));
                     getManaCostsToPay().setX(xValue * xValueMultiplier, amountMana);
-                    setCostsTag("X",xValue * xValueMultiplier);
+                    setCostsTag("X", xValue * xValueMultiplier);
                 }
                 variableManaCost.setPaid();
             }
@@ -718,7 +729,8 @@ public abstract class AbilityImpl implements Ability {
     public Map<String, Object> getCostsTagMap() {
         return costsTagMap;
     }
-    public void setCostsTag(String tag, Object value){
+
+    public void setCostsTag(String tag, Object value) {
         if (costsTagMap == null) {
             costsTagMap = new HashMap<>();
         }
@@ -1136,6 +1148,12 @@ public abstract class AbilityImpl implements Ability {
     @Override
     public Ability withFirstModeFlavorWord(String flavorWord) {
         this.modes.getMode().withFlavorWord(flavorWord);
+        return this;
+    }
+
+    @Override
+    public Ability withFirstModeCost(Cost cost) {
+        this.modes.getMode().withCost(cost);
         return this;
     }
 

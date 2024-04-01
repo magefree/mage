@@ -160,7 +160,7 @@ public class GameEvent implements Serializable {
          */
         CREW_VEHICLE,
         /* CREW_VEHICLE
-         targetId    the id of the creature that crewed a vehicle
+         targetId    the id of the creature that will crew a vehicle
          sourceId    sourceId of the vehicle
          playerId    the id of the controlling player
          */
@@ -174,6 +174,24 @@ public class GameEvent implements Serializable {
         /* VEHICLE_CREWED
          targetId    the id of the vehicle
          sourceId    sourceId of the vehicle
+         playerId    the id of the controlling player
+         */
+        SADDLE_MOUNT,
+        /* SADDLE_MOUNT
+         targetId    the id of the creature that will saddle a mount
+         sourceId    sourceId of the mount
+         playerId    the id of the controlling player
+         */
+        SADDLED_MOUNT,
+        /* SADDLED_MOUNT
+         targetId    the id of the creature that saddled a mount
+         sourceId    sourceId of the mount
+         playerId    the id of the controlling player
+         */
+        MOUNT_SADDLED,
+        /* MOUNT_SADDLED
+         targetId    the id of the mount
+         sourceId    sourceId of the mount
          playerId    the id of the controlling player
          */
         X_MANA_ANNOUNCE,
@@ -605,6 +623,12 @@ public class GameEvent implements Serializable {
          playerId   controller of the creature mentoring
          */
         MENTORED_CREATURE,
+        /* the card becomes plotted
+         targetId   card that was plotted
+         sourceId   of the plotting ability (may be the card itself or another one)
+         playerId   owner of the plotted card (the one able to cast the card)
+         */
+        BECOME_PLOTTED,
         //custom events
         CUSTOM_EVENT
     }
