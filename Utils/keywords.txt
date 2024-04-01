@@ -107,6 +107,7 @@ Reconfigure|manaString|
 Renown|number|
 Replicate|manaString|
 Riot|new|
+Saddle|number|
 Scavenge|cost|
 Shadow|instance|
 Shroud|instance|
@@ -114,6 +115,7 @@ Soulbond|new|
 Soulshift|number|
 Skulk|new|
 Spectacle|card, cost|
+Spree|card|
 Squad|new|
 Storm|new|
 Sunburst|new|

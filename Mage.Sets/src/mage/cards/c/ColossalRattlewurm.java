@@ -53,7 +53,7 @@ public final class ColossalRattlewurm extends CardImpl {
                 Zone.ALL,
                 new ConditionalContinuousEffect(new GainAbilitySourceEffect(
                         FlashAbility.getInstance(), Duration.WhileOnBattlefield, true
-                ), condition, "{this} has flash as long as you control a desert")
+                ), condition, "{this} has flash as long as you control a Desert")
         ).setRuleAtTheTop(true).addHint(hint));
 
         // Trample

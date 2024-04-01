@@ -1,5 +1,6 @@
 package mage.abilities;
 
+import mage.abilities.costs.Cost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
 import mage.target.Target;
@@ -17,6 +18,7 @@ public class Mode implements Serializable {
     protected final Targets targets;
     protected final Effects effects;
     protected String flavorWord;
+    protected Cost cost = null;
     /**
      * Optional Tag to distinguish this mode from others.
      * In the case of modes that players can only choose once,
@@ -39,6 +41,7 @@ public class Mode implements Serializable {
         this.effects = mode.effects.copy();
         this.flavorWord = mode.flavorWord;
         this.modeTag = mode.modeTag;
+        this.cost = mode.cost != null ? mode.cost.copy() : null;
     }
 
     public UUID setRandomId() {
@@ -106,5 +109,14 @@ public class Mode implements Serializable {
     public Mode withFlavorWord(String flavorWord) {
         this.flavorWord = flavorWord;
         return this;
+    }
+
+    public Mode withCost(Cost cost) {
+        this.cost = cost;
+        return this;
+    }
+
+    public Cost getCost() {
+        return cost;
     }
 }
