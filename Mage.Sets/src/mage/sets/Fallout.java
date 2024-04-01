@@ -134,6 +134,7 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Hornet Queen", 350, Rarity.RARE, mage.cards.h.HornetQueen.class));
         cards.add(new SetCardInfo("Hour of Reckoning", 161, Rarity.RARE, mage.cards.h.HourOfReckoning.class));
         cards.add(new SetCardInfo("Hullbreaker Horror", 344, Rarity.RARE, mage.cards.h.HullbreakerHorror.class));
+        cards.add(new SetCardInfo("Ian the Reckless", 59, Rarity.UNCOMMON, mage.cards.i.IanTheReckless.class));
         cards.add(new SetCardInfo("Impassioned Orator", 162, Rarity.COMMON, mage.cards.i.ImpassionedOrator.class));
         cards.add(new SetCardInfo("Inexorable Tide", 177, Rarity.RARE, mage.cards.i.InexorableTide.class));
         cards.add(new SetCardInfo("Inspiring Call", 203, Rarity.UNCOMMON, mage.cards.i.InspiringCall.class));
