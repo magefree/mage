@@ -205,6 +205,7 @@ public final class OutlawsOfThunderJunction extends ExpansionSet {
         cards.add(new SetCardInfo("Spinewoods Armadillo", 182, Rarity.UNCOMMON, mage.cards.s.SpinewoodsArmadillo.class));
         cards.add(new SetCardInfo("Spirebluff Canal", 270, Rarity.RARE, mage.cards.s.SpirebluffCanal.class));
         cards.add(new SetCardInfo("Spring Splasher", 69, Rarity.COMMON, mage.cards.s.SpringSplasher.class));
+        cards.add(new SetCardInfo("Steer Clear", 31, Rarity.COMMON, mage.cards.s.SteerClear.class));
         cards.add(new SetCardInfo("Step Between Worlds", 70, Rarity.RARE, mage.cards.s.StepBetweenWorlds.class));
         cards.add(new SetCardInfo("Sterling Keykeeper", 32, Rarity.COMMON, mage.cards.s.SterlingKeykeeper.class));
         cards.add(new SetCardInfo("Stingerback Terror", 147, Rarity.RARE, mage.cards.s.StingerbackTerror.class));
