@@ -4,6 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.CommittedCrimeTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.SourceHasCounterCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
@@ -25,6 +26,8 @@ import java.util.UUID;
  */
 public final class VadmirNewBlood extends CardImpl {
 
+    private static final Condition condition = new SourceHasCounterCondition(CounterType.P1P1, 4);
+
     public VadmirNewBlood(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");
 
@@ -41,10 +44,10 @@ public final class VadmirNewBlood extends CardImpl {
         // As long as Vadmir has four or more +1/+1 counters on it, it has menace and lifelink.
         Ability ability = new SimpleStaticAbility(new ConditionalContinuousEffect(new GainAbilitySourceEffect(
                 new MenaceAbility(false), Duration.WhileOnBattlefield
-        ), new SourceHasCounterCondition(CounterType.P1P1, 4), "As long as {this} has four or more +1/+1 counters on it, it has menace"));
+        ), condition, "As long as {this} has four or more +1/+1 counters on it, it has menace"));
         ability.addEffect(new ConditionalContinuousEffect(new GainAbilitySourceEffect(
                 LifelinkAbility.getInstance(), Duration.WhileOnBattlefield
-        ), new SourceHasCounterCondition(CounterType.P1P1, 4), "and lifelink"));
+        ), condition, "and lifelink"));
         this.addAbility(ability);
     }
 
