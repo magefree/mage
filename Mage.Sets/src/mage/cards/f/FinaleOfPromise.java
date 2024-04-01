@@ -19,6 +19,7 @@ import mage.target.Target;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetadjustment.TargetAdjuster;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -133,7 +134,8 @@ class FinaleOfPromiseEffect extends OneShotEffect {
         for (UUID id : cardsToCast) {
             Card card = game.getCard(id);
             if (card != null) {
-                new MayCastTargetThenExileEffect(true).setTargetPointer(new FixedTarget(card, game)).apply(game, source);
+                new MayCastTargetThenExileEffect(CardUtil.CastManaAdjustment.WITHOUT_PAYING_MANA_COST)
+                        .setTargetPointer(new FixedTarget(card, game)).apply(game, source);
             }
         }
 

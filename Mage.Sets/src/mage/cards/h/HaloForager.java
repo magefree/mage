@@ -23,6 +23,7 @@ import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInGraveyard;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -90,7 +91,10 @@ class HaloForagerPayEffect extends OneShotEffect {
                 "instant or sorcery card with mana value " + costX + " from a graveyard"
         );
         filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, costX));
-        ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(new MayCastTargetThenExileEffect(true), false);
+        ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(
+                new MayCastTargetThenExileEffect(CardUtil.CastManaAdjustment.WITHOUT_PAYING_MANA_COST),
+                false
+        );
         ability.addTarget(new TargetCardInGraveyard(filter));
         game.fireReflexiveTriggeredAbility(ability, source);
         return true;

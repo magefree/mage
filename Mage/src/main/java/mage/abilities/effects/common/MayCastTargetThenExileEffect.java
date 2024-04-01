@@ -5,6 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.asthought.YouMaySpendManaAsAnyColorToCastTargetEffect;
 import mage.abilities.effects.common.replacement.ThatSpellGraveyardExileReplacementEffect;
 import mage.cards.Card;
 import mage.constants.Duration;
@@ -15,21 +16,31 @@ import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
 /**
- * @author xenohedron
+ * @author xenohedron, Susucr
  */
 public class MayCastTargetThenExileEffect extends OneShotEffect {
 
     private final Duration duration;
-    private final boolean noMana;
+
+    private final CardUtil.CastManaAdjustment manaAdjustment;
+
+    // Set to true with `withNoExile` if not wanting the exile clause (rare).
+    private boolean noExile;
 
     /**
-     * Allows to cast the target card immediately, either for its cost or for free.
+     * Allows to cast the target card immediately, for its manacost.
      * If resulting spell would be put into graveyard, exiles it instead.
      */
-    public MayCastTargetThenExileEffect(boolean noMana) {
-        super(Outcome.Benefit);
-        this.duration = Duration.OneUse;
-        this.noMana = noMana;
+    public MayCastTargetThenExileEffect() {
+        this(CardUtil.CastManaAdjustment.NONE);
+    }
+
+    /**
+     * Allows to cast the target card immediately, either for its cost or with a modifier (like for free, or mana as any type).
+     * If resulting spell would be put into graveyard, exiles it instead.
+     */
+    public MayCastTargetThenExileEffect(CardUtil.CastManaAdjustment manaAdjustment) {
+        this(Duration.OneUse, manaAdjustment);
     }
 
     /**
@@ -37,20 +48,41 @@ public class MayCastTargetThenExileEffect extends OneShotEffect {
      * If resulting spell would be put into graveyard, exiles it instead.
      */
     public MayCastTargetThenExileEffect(Duration duration) {
+        this(duration, CardUtil.CastManaAdjustment.NONE);
+    }
+
+    protected MayCastTargetThenExileEffect(Duration duration, CardUtil.CastManaAdjustment manaAdjustment) {
         super(Outcome.Benefit);
         this.duration = duration;
-        this.noMana = false;
+        this.manaAdjustment = manaAdjustment;
+        this.noExile = false;
+
+        // TODO: support the non-yet-supported combinations.
+        //       for now the constructor chains won't allow those.
+        if (duration != Duration.OneUse && manaAdjustment != CardUtil.CastManaAdjustment.NONE) {
+            throw new IllegalStateException(
+                    "Not yet supported MayCastTargetThenExileEffect combination "
+                            + "duration={" + duration.name() + "}, "
+                            + "manaAdjustment={" + manaAdjustment.name() + "}"
+            );
+        }
     }
 
     protected MayCastTargetThenExileEffect(final MayCastTargetThenExileEffect effect) {
         super(effect);
         this.duration = effect.duration;
-        this.noMana = effect.noMana;
+        this.manaAdjustment = effect.manaAdjustment;
+        this.noExile = effect.noExile;
     }
 
     @Override
     public MayCastTargetThenExileEffect copy() {
         return new MayCastTargetThenExileEffect(this);
+    }
+
+    public MayCastTargetThenExileEffect withNoExile(boolean noExile) {
+        this.noExile = noExile;
+        return this;
     }
 
     @Override
@@ -65,16 +97,39 @@ public class MayCastTargetThenExileEffect extends OneShotEffect {
             if (controller == null || !controller.chooseUse(outcome, "Cast " + card.getLogName() + '?', source, game)) {
                 return false;
             }
+
+            ContinuousEffect shortlivedManaReplacementEffect = null;
+            switch (manaAdjustment) {
+                case NONE:
+                case WITHOUT_PAYING_MANA_COST:
+                    break;
+                case AS_THOUGH_ANY_MANA_COLOR:
+                case AS_THOUGH_ANY_MANA_TYPE:
+                    // TODO: untangle why there is a confusion between the two.
+                    shortlivedManaReplacementEffect =
+                            new YouMaySpendManaAsAnyColorToCastTargetEffect(Duration.Custom, controller.getId(), null)
+                                    .setTargetPointer(fixedTarget);
+                    game.addEffect(shortlivedManaReplacementEffect, source);
+            }
+
             game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
+            boolean noMana = manaAdjustment == CardUtil.CastManaAdjustment.WITHOUT_PAYING_MANA_COST;
             controller.cast(controller.chooseAbilityForCast(card, game, noMana),
                     game, noMana, new ApprovingObject(source, game));
             game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
+
+            if (shortlivedManaReplacementEffect != null) {
+                shortlivedManaReplacementEffect.discard();
+            }
         } else {
+            // TODO: support (and add tests!) for the non-NONE manaAdjustment
             CardUtil.makeCardPlayable(game, source, card, duration, false);
         }
-        ContinuousEffect effect = new ThatSpellGraveyardExileReplacementEffect(true);
-        effect.setTargetPointer(fixedTarget);
-        game.addEffect(effect, source);
+        if (!noExile) {
+            ContinuousEffect effect = new ThatSpellGraveyardExileReplacementEffect(true);
+            effect.setTargetPointer(fixedTarget);
+            game.addEffect(effect, source);
+        }
         return true;
     }
 
@@ -89,10 +144,24 @@ public class MayCastTargetThenExileEffect extends OneShotEffect {
         } else if (!duration.toString().isEmpty()) {
             text += duration.toString();
         }
-        if (noMana) {
-            text += " without paying its mana cost";
+        switch (manaAdjustment) {
+            case NONE:
+                break;
+            case WITHOUT_PAYING_MANA_COST:
+                text += " without paying its mana cost";
+                break;
+            case AS_THOUGH_ANY_MANA_COLOR:
+                text += ", and mana of any color can be spent to cast that spell";
+                break;
+            case AS_THOUGH_ANY_MANA_TYPE:
+                text += ", and mana of any type can be spent to cast that spell";
+                break;
         }
-        return text + ". " + ThatSpellGraveyardExileReplacementEffect.RULE_YOUR;
+        text += ".";
+        if (!noExile) {
+            text += " " + ThatSpellGraveyardExileReplacementEffect.RULE_YOUR;
+        }
+        return text;
     }
 
 }

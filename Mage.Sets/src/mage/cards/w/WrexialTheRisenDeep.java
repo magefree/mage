@@ -8,7 +8,10 @@ import mage.abilities.keyword.IslandwalkAbility;
 import mage.abilities.keyword.SwampwalkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.card.OwnerIdPredicate;
@@ -18,6 +21,7 @@ import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInGraveyard;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -57,7 +61,7 @@ public final class WrexialTheRisenDeep extends CardImpl {
 class WrexialTheRisenDeepTriggeredAbility extends TriggeredAbilityImpl {
 
     WrexialTheRisenDeepTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new MayCastTargetThenExileEffect(true)
+        super(Zone.BATTLEFIELD, new MayCastTargetThenExileEffect(CardUtil.CastManaAdjustment.WITHOUT_PAYING_MANA_COST)
                 .setText("you may cast target instant or sorcery card from "
                         + "that player's graveyard without paying its mana cost. "
                         + ThatSpellGraveyardExileReplacementEffect.RULE_A), false);
@@ -92,7 +96,7 @@ class WrexialTheRisenDeepTriggeredAbility extends TriggeredAbilityImpl {
         filter.add(Predicates.or(
                 CardType.INSTANT.getPredicate(),
                 CardType.SORCERY.getPredicate()
-                ));
+        ));
         Target target = new TargetCardInGraveyard(filter);
         this.getTargets().clear();
         this.addTarget(target);

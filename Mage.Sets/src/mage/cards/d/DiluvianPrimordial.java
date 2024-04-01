@@ -21,6 +21,7 @@ import mage.target.Target;
 import mage.target.common.TargetCardInOpponentsGraveyard;
 import mage.target.targetadjustment.TargetAdjuster;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -106,7 +107,8 @@ class DiluvianPrimordialEffect extends OneShotEffect {
                 if (target instanceof TargetCardInOpponentsGraveyard) {
                     Card targetCard = game.getCard(target.getFirstTarget());
                     if (targetCard != null) {
-                        new MayCastTargetThenExileEffect(true).setTargetPointer(new FixedTarget(targetCard, game)).apply(game, source);
+                        new MayCastTargetThenExileEffect(CardUtil.CastManaAdjustment.WITHOUT_PAYING_MANA_COST)
+                                .setTargetPointer(new FixedTarget(targetCard, game)).apply(game, source);
                     }
                 }
             }

@@ -20,11 +20,11 @@ import mage.target.Target;
 import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetOpponent;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
 /**
- *
  * @author notgreat
  */
 public final class SorcerousSquall extends CardImpl {
@@ -57,7 +57,7 @@ class SorcerousSquallEffect extends OneShotEffect {
 
     SorcerousSquallEffect() {
         super(Outcome.Detriment);
-        setText("you may cast an instant or sorcery spell from that player's graveyard without paying its mana cost. "+ ThatSpellGraveyardExileReplacementEffect.RULE_A);
+        setText("you may cast an instant or sorcery spell from that player's graveyard without paying its mana cost. " + ThatSpellGraveyardExileReplacementEffect.RULE_A);
     }
 
     private SorcerousSquallEffect(final SorcerousSquallEffect effect) {
@@ -79,7 +79,7 @@ class SorcerousSquallEffect extends OneShotEffect {
         filter.add(new OwnerIdPredicate(source.getFirstTarget()));
         Target target = new TargetCardInGraveyard(1, 1, filter, true);
         player.choose(outcome, target, source, game);
-        Effect effect = new MayCastTargetThenExileEffect(true);
+        Effect effect = new MayCastTargetThenExileEffect(CardUtil.CastManaAdjustment.WITHOUT_PAYING_MANA_COST);
         effect.setTargetPointer(new FixedTarget(target.getFirstTarget(), game));
         effect.apply(game, source);
         return true;

@@ -11,6 +11,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInYourGraveyard;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -21,7 +22,7 @@ public final class EfreetFlamepainter extends CardImpl {
 
     public EfreetFlamepainter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
-        
+
         this.subtype.add(SubType.EFREET);
         this.subtype.add(SubType.SHAMAN);
         this.power = new MageInt(1);
@@ -31,7 +32,7 @@ public final class EfreetFlamepainter extends CardImpl {
         this.addAbility(DoubleStrikeAbility.getInstance());
 
         // Whenever Efreet Flamepainter deals combat damage to a player, you may cast target instant or sorcery card from your graveyard without paying its mana cost. If that spell would be put into your graveyard, exile it instead.
-        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new MayCastTargetThenExileEffect(true), false);
+        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new MayCastTargetThenExileEffect(CardUtil.CastManaAdjustment.WITHOUT_PAYING_MANA_COST), false);
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY_FROM_YOUR_GRAVEYARD));
         this.addAbility(ability);
     }

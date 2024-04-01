@@ -20,6 +20,7 @@ import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInGraveyard;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -65,7 +66,7 @@ public final class DeluxeDragster extends CardImpl {
 class DeluxeDragsterTriggeredAbility extends TriggeredAbilityImpl {
 
     DeluxeDragsterTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new MayCastTargetThenExileEffect(true)
+        super(Zone.BATTLEFIELD, new MayCastTargetThenExileEffect(CardUtil.CastManaAdjustment.WITHOUT_PAYING_MANA_COST)
                 .setText("you may cast target instant or sorcery card from "
                         + "that player's graveyard without paying its mana cost. "
                         + ThatSpellGraveyardExileReplacementEffect.RULE_A), false);

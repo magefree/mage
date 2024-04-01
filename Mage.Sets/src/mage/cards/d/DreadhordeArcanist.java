@@ -13,6 +13,7 @@ import mage.filter.FilterCard;
 import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.filter.predicate.card.ManaValueLessThanOrEqualToSourcePowerPredicate;
 import mage.target.common.TargetCardInYourGraveyard;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -42,7 +43,7 @@ public final class DreadhordeArcanist extends CardImpl {
 
         // Whenever Dreadhorde Arcanist attacks, you may cast target instant or sorcery card with converted mana cost less than or equal to Dreadhorde Arcanist's power from your graveyard without paying its mana cost.
         // If that card would be put into your graveyard this turn, exile it instead.
-        Ability ability = new AttacksTriggeredAbility(new MayCastTargetThenExileEffect(true), false);
+        Ability ability = new AttacksTriggeredAbility(new MayCastTargetThenExileEffect(CardUtil.CastManaAdjustment.WITHOUT_PAYING_MANA_COST), false);
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
     }
