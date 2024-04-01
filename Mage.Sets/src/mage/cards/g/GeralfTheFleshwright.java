@@ -137,11 +137,11 @@ class GeralfTheFleshwrightWatcher extends Watcher {
     int getZombiesThatEnteredThisTurn(UUID playerId, MageObjectReference toExclude) {
         if (toExclude == null) {
             return enteredThisTurn
-                    .getOrDefault(playerId, new HashSet<>())
+                    .getOrDefault(playerId, Collections.emptySet())
                     .size();
         } else {
             return enteredThisTurn
-                    .getOrDefault(playerId, new HashSet<>())
+                    .getOrDefault(playerId, Collections.emptySet())
                     .stream()
                     .filter(mor -> !toExclude.equals(mor))
                     .mapToInt(x -> 1)
