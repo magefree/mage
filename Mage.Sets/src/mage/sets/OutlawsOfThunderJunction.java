@@ -252,6 +252,7 @@ public final class OutlawsOfThunderJunction extends ExpansionSet {
         cards.add(new SetCardInfo("The Key to the Vault", 54, Rarity.RARE, mage.cards.t.TheKeyToTheVault.class));
         cards.add(new SetCardInfo("This Town Ain't Big Enough", 74, Rarity.UNCOMMON, mage.cards.t.ThisTownAintBigEnough.class));
         cards.add(new SetCardInfo("Three Steps Ahead", 75, Rarity.RARE, mage.cards.t.ThreeStepsAhead.class));
+        cards.add(new SetCardInfo("Throw from the Saddle", 185, Rarity.COMMON, mage.cards.t.ThrowFromTheSaddle.class));
         cards.add(new SetCardInfo("Thunder Lasso", 35, Rarity.UNCOMMON, mage.cards.t.ThunderLasso.class));
         cards.add(new SetCardInfo("Tinybones Joins Up", 108, Rarity.RARE, mage.cards.t.TinybonesJoinsUp.class));
         cards.add(new SetCardInfo("Tomb Trawler", 250, Rarity.UNCOMMON, mage.cards.t.TombTrawler.class));
