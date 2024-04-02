@@ -1280,17 +1280,6 @@ public final class CardUtil {
         }
     }
 
-    /**
-     * Groups together the most usual ways a card's payment is adjusted
-     * by card effects that allow play or cast.
-     */
-    public enum CastManaAdjustment {
-        NONE,
-        AS_THOUGH_ANY_MANA_TYPE,
-        AS_THOUGH_ANY_MANA_COLOR,
-        WITHOUT_PAYING_MANA_COST,
-    }
-
     // TODO: use CastManaAdjustment instead of boolean anyColor
     public static void makeCardPlayable(Game game, Ability source, Card card, Duration duration, boolean anyColor) {
         makeCardPlayable(game, source, card, duration, anyColor, null, null);

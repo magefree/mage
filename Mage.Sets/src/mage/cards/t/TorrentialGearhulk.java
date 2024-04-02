@@ -3,15 +3,15 @@ package mage.cards.t;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.MayCastTargetThenExileEffect;
+import mage.abilities.effects.common.MayCastTargetCardEffect;
 import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.CastManaAdjustment;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -38,7 +38,7 @@ public final class TorrentialGearhulk extends CardImpl {
         // When Torrential Gearhulk enters the battlefield, you may cast target 
         // instant card from your graveyard without paying its mana cost.
         // If that card would be put into your graveyard this turn, exile it instead.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new MayCastTargetThenExileEffect(CardUtil.CastManaAdjustment.WITHOUT_PAYING_MANA_COST));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new MayCastTargetCardEffect(CastManaAdjustment.WITHOUT_PAYING_MANA_COST, true));
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
     }

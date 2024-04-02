@@ -8,22 +8,18 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.MayCastTargetThenExileEffect;
+import mage.abilities.effects.common.MayCastTargetCardEffect;
 import mage.abilities.effects.common.replacement.ThatSpellGraveyardExileReplacementEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.ComparisonType;
-import mage.constants.Outcome;
-import mage.constants.SubType;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInGraveyard;
-import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -92,7 +88,7 @@ class HaloForagerPayEffect extends OneShotEffect {
         );
         filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, costX));
         ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(
-                new MayCastTargetThenExileEffect(CardUtil.CastManaAdjustment.WITHOUT_PAYING_MANA_COST),
+                new MayCastTargetCardEffect(CastManaAdjustment.WITHOUT_PAYING_MANA_COST, true),
                 false
         );
         ability.addTarget(new TargetCardInGraveyard(filter));

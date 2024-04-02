@@ -2,14 +2,11 @@ package mage.cards.t;
 
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.common.MayCastTargetThenExileEffect;
+import mage.abilities.effects.common.MayCastTargetCardEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.card.OwnerIdPredicate;
@@ -19,7 +16,6 @@ import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInGraveyard;
-import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -62,8 +58,7 @@ class TinybonesThePickpocketTriggeredAbility extends TriggeredAbilityImpl {
     TinybonesThePickpocketTriggeredAbility() {
         super(
                 Zone.BATTLEFIELD,
-                new MayCastTargetThenExileEffect(CardUtil.CastManaAdjustment.AS_THOUGH_ANY_MANA_TYPE)
-                        .withNoExile(true)
+                new MayCastTargetCardEffect(CastManaAdjustment.AS_THOUGH_ANY_MANA_TYPE, false)
                         .setText("you may cast target nonland permanent card from "
                                 + "that player's graveyard, and mana of any type can be spent to cast that spell"),
                 false

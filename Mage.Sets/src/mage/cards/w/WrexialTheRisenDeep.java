@@ -2,16 +2,13 @@ package mage.cards.w;
 
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.common.MayCastTargetThenExileEffect;
+import mage.abilities.effects.common.MayCastTargetCardEffect;
 import mage.abilities.effects.common.replacement.ThatSpellGraveyardExileReplacementEffect;
 import mage.abilities.keyword.IslandwalkAbility;
 import mage.abilities.keyword.SwampwalkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.card.OwnerIdPredicate;
@@ -21,7 +18,6 @@ import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInGraveyard;
-import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -61,7 +57,7 @@ public final class WrexialTheRisenDeep extends CardImpl {
 class WrexialTheRisenDeepTriggeredAbility extends TriggeredAbilityImpl {
 
     WrexialTheRisenDeepTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new MayCastTargetThenExileEffect(CardUtil.CastManaAdjustment.WITHOUT_PAYING_MANA_COST)
+        super(Zone.BATTLEFIELD, new MayCastTargetCardEffect(CastManaAdjustment.WITHOUT_PAYING_MANA_COST, true)
                 .setText("you may cast target instant or sorcery card from "
                         + "that player's graveyard without paying its mana cost. "
                         + ThatSpellGraveyardExileReplacementEffect.RULE_A), false);
