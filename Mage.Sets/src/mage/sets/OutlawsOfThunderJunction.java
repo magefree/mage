@@ -221,6 +221,7 @@ public final class OutlawsOfThunderJunction extends ExpansionSet {
         cards.add(new SetCardInfo("Sheriff of Safe Passage", 29, Rarity.UNCOMMON, mage.cards.s.SheriffOfSafePassage.class));
         cards.add(new SetCardInfo("Shifting Grift", 66, Rarity.UNCOMMON, mage.cards.s.ShiftingGrift.class));
         cards.add(new SetCardInfo("Shoot the Sheriff", 106, Rarity.UNCOMMON, mage.cards.s.ShootTheSheriff.class));
+        cards.add(new SetCardInfo("Silver Deputy", 248, Rarity.COMMON, mage.cards.s.SilverDeputy.class));
         cards.add(new SetCardInfo("Skulduggery", 107, Rarity.COMMON, mage.cards.s.Skulduggery.class));
         cards.add(new SetCardInfo("Slick Sequence", 233, Rarity.UNCOMMON, mage.cards.s.SlickSequence.class));
         cards.add(new SetCardInfo("Slickshot Lockpicker", 67, Rarity.UNCOMMON, mage.cards.s.SlickshotLockpicker.class));
