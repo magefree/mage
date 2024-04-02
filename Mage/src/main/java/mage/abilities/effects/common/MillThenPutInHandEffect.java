@@ -35,8 +35,8 @@ public class MillThenPutInHandEffect extends OneShotEffect {
     }
 
     /**
-     * @param amount number of cards to mill
-     * @param filter select a card matching this filter from among the milled cards to put in hand
+     * @param amount   number of cards to mill
+     * @param filter   select a card matching this filter from among the milled cards to put in hand
      * @param optional whether the selection is optional (true) or mandatory (false)
      */
     public MillThenPutInHandEffect(int amount, FilterCard filter, boolean optional) {
@@ -44,8 +44,8 @@ public class MillThenPutInHandEffect extends OneShotEffect {
     }
 
     /**
-     * @param amount number of cards to mill
-     * @param filter optionally select a card matching this filter from among the milled cards to put in hand
+     * @param amount          number of cards to mill
+     * @param filter          optionally select a card matching this filter from among the milled cards to put in hand
      * @param otherwiseEffect applied if no card put into hand
      */
     public MillThenPutInHandEffect(int amount, FilterCard filter, Effect otherwiseEffect) {
@@ -53,7 +53,7 @@ public class MillThenPutInHandEffect extends OneShotEffect {
         this.textFromAmong = "the cards milled this way";
     }
 
-    protected MillThenPutInHandEffect(int amount, FilterCard filter, Effect otherwiseEffect, boolean optional) {
+    public MillThenPutInHandEffect(int amount, FilterCard filter, Effect otherwiseEffect, boolean optional) {
         super(Outcome.Benefit);
         this.amount = amount;
         this.filter = filter;
@@ -115,12 +115,21 @@ public class MillThenPutInHandEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        String text = "mill " + CardUtil.numberToText(amount) + " cards. ";
-        text += optional ? "You may " : "Then ";
-        text += "put " + filter.getMessage() + " from among " + textFromAmong + " into your hand";
+        StringBuilder sb = new StringBuilder("mill ");
+        sb.append(CardUtil.numberToText(amount));
+        sb.append(" cards. ");
+        sb.append(optional ? "You may " : "Then ");
+        sb.append("put ");
+        sb.append(filter.getMessage());
+        sb.append(" from among ");
+        sb.append(textFromAmong);
+        sb.append(" into your hand");
         if (otherwiseEffect != null) {
-            text += ". If you don't, " + otherwiseEffect.getText(mode);
+            sb.append(". If you ");
+            sb.append(optional ? "don't" : "can't");
+            sb.append(", ");
+            sb.append(otherwiseEffect.getText(mode));
         }
-        return text;
+        return sb.toString();
     }
 }
