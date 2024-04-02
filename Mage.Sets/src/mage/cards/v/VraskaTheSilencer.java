@@ -92,13 +92,10 @@ class VraskaTheSilencerEffect extends OneShotEffect {
         if (card == null) {
             return false;
         }
-        // Need to pre-emptively apply the continuous effect before moving the card.
-        // It is discarded if the move doesn't happen.
+        // Apply the continuous effect before moving the card to have the proper types on entering.
         ContinuousEffect continuousEffect = new VraskaTheSilencerContinuousEffect(new MageObjectReference(card, game, 1));
         game.addEffect(continuousEffect, source);
-        if (!controller.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, false, null)) {
-            continuousEffect.discard();
-        }
+        controller.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, false, null);
         return true;
     }
 }

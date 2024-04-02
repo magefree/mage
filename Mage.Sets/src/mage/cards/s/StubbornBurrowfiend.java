@@ -79,7 +79,7 @@ class StubbornBurrowFiendWatcher extends Watcher {
         saddledCount.compute(new MageObjectReference(event.getTargetId(), game), CardUtil::setOrIncrementValue);
     }
 
-    public Integer timesSaddledThisTurn(MageObjectReference mor) {
+    public int timesSaddledThisTurn(MageObjectReference mor) {
         return saddledCount.getOrDefault(mor, 0);
     }
 

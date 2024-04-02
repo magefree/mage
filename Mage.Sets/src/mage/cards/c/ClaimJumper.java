@@ -49,7 +49,7 @@ public final class ClaimJumper extends CardImpl {
                         true
                 ),
                 new OpponentControlsMoreCondition(StaticFilters.FILTER_LANDS),
-                "When Claim Jumper enters the battlefield, if an opponent controls more lands than you, "
+                "When {this} enters the battlefield, if an opponent controls more lands than you, "
                         + "you may search your library for a Plains card and put it onto the battlefield tapped. "
                         + "Then if an opponent controls more lands than you, repeat this process once. "
                         + "If you search your library this way, shuffle."
