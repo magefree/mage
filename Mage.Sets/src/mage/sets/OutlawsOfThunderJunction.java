@@ -90,6 +90,7 @@ public final class OutlawsOfThunderJunction extends ExpansionSet {
         cards.add(new SetCardInfo("Dust Animus", 9, Rarity.RARE, mage.cards.d.DustAnimus.class));
         cards.add(new SetCardInfo("Emergent Haunting", 46, Rarity.UNCOMMON, mage.cards.e.EmergentHaunting.class));
         cards.add(new SetCardInfo("Eriette's Lullaby", 10, Rarity.COMMON, mage.cards.e.EriettesLullaby.class));
+        cards.add(new SetCardInfo("Eriette, the Beguiler", 202, Rarity.RARE, mage.cards.e.ErietteTheBeguiler.class));
         cards.add(new SetCardInfo("Eroded Canyon", 256, Rarity.COMMON, mage.cards.e.ErodedCanyon.class));
         cards.add(new SetCardInfo("Ertha Jo, Frontier Mentor", 203, Rarity.UNCOMMON, mage.cards.e.ErthaJoFrontierMentor.class));
         cards.add(new SetCardInfo("Explosive Derailment", 122, Rarity.COMMON, mage.cards.e.ExplosiveDerailment.class));
