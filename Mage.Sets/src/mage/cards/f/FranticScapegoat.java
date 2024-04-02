@@ -31,14 +31,13 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 /**
- *
  * @author notgreat
  */
 public final class FranticScapegoat extends CardImpl {
 
     public FranticScapegoat(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}");
-        
+
         this.subtype.add(SubType.GOAT);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
@@ -81,11 +80,13 @@ class FranticScapegoatTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
+    public boolean checkInterveningIfClause(Game game) {
         Permanent source = getSourcePermanentIfItStillExists(game);
-        if (source == null || !source.isSuspected()) {
-            return false;
-        }
+        return (source != null && source.isSuspected());
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeBatchEvent zEvent = (ZoneChangeBatchEvent) event;
         Set<MageObjectReference> enteringCreatures = zEvent.getEvents().stream()
                 .filter(z -> z.getToZone() == Zone.BATTLEFIELD)
@@ -95,7 +96,7 @@ class FranticScapegoatTriggeredAbility extends TriggeredAbilityImpl {
                 .filter(permanent -> permanent.isCreature(game))
                 .map(p -> new MageObjectReference(p, game))
                 .collect(Collectors.toSet());
-        if (enteringCreatures.size() > 0) {
+        if (!enteringCreatures.isEmpty()) {
             this.getEffects().setValue("franticScapegoatEnteringCreatures", enteringCreatures);
             return true;
         }
