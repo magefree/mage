@@ -247,6 +247,7 @@ public final class OutlawsOfThunderJunction extends ExpansionSet {
         cards.add(new SetCardInfo("Swamp", 274, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Take Up the Shield", 34, Rarity.COMMON, mage.cards.t.TakeUpTheShield.class));
         cards.add(new SetCardInfo("Take for a Ride", 148, Rarity.UNCOMMON, mage.cards.t.TakeForARide.class));
+        cards.add(new SetCardInfo("Take the Fall", 73, Rarity.COMMON, mage.cards.t.TakeTheFall.class));
         cards.add(new SetCardInfo("Terror of the Peaks", 149, Rarity.MYTHIC, mage.cards.t.TerrorOfThePeaks.class));
         cards.add(new SetCardInfo("The Key to the Vault", 54, Rarity.RARE, mage.cards.t.TheKeyToTheVault.class));
         cards.add(new SetCardInfo("This Town Ain't Big Enough", 74, Rarity.UNCOMMON, mage.cards.t.ThisTownAintBigEnough.class));
