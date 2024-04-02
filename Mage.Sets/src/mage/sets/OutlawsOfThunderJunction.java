@@ -68,6 +68,7 @@ public final class OutlawsOfThunderJunction extends ExpansionSet {
         cards.add(new SetCardInfo("Concealed Courtyard", 268, Rarity.RARE, mage.cards.c.ConcealedCourtyard.class));
         cards.add(new SetCardInfo("Conduit Pylons", 254, Rarity.COMMON, mage.cards.c.ConduitPylons.class));
         cards.add(new SetCardInfo("Congregation Gryff", 200, Rarity.UNCOMMON, mage.cards.c.CongregationGryff.class));
+        cards.add(new SetCardInfo("Consuming Ashes", 83, Rarity.COMMON, mage.cards.c.ConsumingAshes.class));
         cards.add(new SetCardInfo("Corrupted Conviction", 84, Rarity.COMMON, mage.cards.c.CorruptedConviction.class));
         cards.add(new SetCardInfo("Creosote Heath", 255, Rarity.COMMON, mage.cards.c.CreosoteHeath.class));
         cards.add(new SetCardInfo("Cunning Coyote", 118, Rarity.UNCOMMON, mage.cards.c.CunningCoyote.class));
