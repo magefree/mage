@@ -34,7 +34,7 @@ public class CommittedCrimeTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever you commit a crime, ");
     }
 
-    private CommittedCrimeTriggeredAbility(final CommittedCrimeTriggeredAbility ability) {
+    protected CommittedCrimeTriggeredAbility(final CommittedCrimeTriggeredAbility ability) {
         super(ability);
     }
 

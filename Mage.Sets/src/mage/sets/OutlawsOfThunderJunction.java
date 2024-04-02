@@ -179,6 +179,7 @@ public final class OutlawsOfThunderJunction extends ExpansionSet {
         cards.add(new SetCardInfo("Outlaw Medic", 23, Rarity.COMMON, mage.cards.o.OutlawMedic.class));
         cards.add(new SetCardInfo("Outlaw Stitcher", 59, Rarity.UNCOMMON, mage.cards.o.OutlawStitcher.class));
         cards.add(new SetCardInfo("Outlaws' Fury", 136, Rarity.COMMON, mage.cards.o.OutlawsFury.class));
+        cards.add(new SetCardInfo("Overzealous Muscle", 97, Rarity.COMMON, mage.cards.o.OverzealousMuscle.class));
         cards.add(new SetCardInfo("Peerless Ropemaster", 60, Rarity.COMMON, mage.cards.p.PeerlessRopemaster.class));
         cards.add(new SetCardInfo("Phantom Interference", 61, Rarity.COMMON, mage.cards.p.PhantomInterference.class));
         cards.add(new SetCardInfo("Pillage the Bog", 224, Rarity.RARE, mage.cards.p.PillageTheBog.class));
