@@ -154,6 +154,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     protected PayLifeCostLevel payLifeCostLevel = PayLifeCostLevel.allAbilities;
     protected boolean loseByZeroOrLessLife = true;
     protected boolean canPlayCardsFromGraveyard = true;
+    protected boolean canPlotFromTopOfLibrary = false;
     protected boolean drawsOnOpponentsTurn = false;
 
     protected FilterPermanent sacrificeCostFilter;
@@ -251,6 +252,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.canLoseLife = player.canLoseLife;
         this.loseByZeroOrLessLife = player.loseByZeroOrLessLife;
         this.canPlayCardsFromGraveyard = player.canPlayCardsFromGraveyard;
+        this.canPlotFromTopOfLibrary = player.canPlotFromTopOfLibrary;
         this.drawsOnOpponentsTurn = player.drawsOnOpponentsTurn;
 
         this.attachments.addAll(player.attachments);
@@ -360,6 +362,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 ? player.getSacrificeCostFilter().copy() : null;
         this.loseByZeroOrLessLife = player.canLoseByZeroOrLessLife();
         this.canPlayCardsFromGraveyard = player.canPlayCardsFromGraveyard();
+        this.canPlotFromTopOfLibrary = player.canPlotFromTopOfLibrary();
         this.drawsOnOpponentsTurn = player.isDrawsOnOpponentsTurn();
         this.alternativeSourceCosts.clear();
         this.alternativeSourceCosts.addAll(player.getAlternativeSourceCosts());
@@ -474,6 +477,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.payLifeCostLevel = PayLifeCostLevel.allAbilities;
         this.loseByZeroOrLessLife = true;
         this.canPlayCardsFromGraveyard = true;
+        this.canPlotFromTopOfLibrary = false;
         this.drawsOnOpponentsTurn = false;
 
         this.sacrificeCostFilter = null;
@@ -516,6 +520,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.sacrificeCostFilter = null;
         this.loseByZeroOrLessLife = true;
         this.canPlayCardsFromGraveyard = false;
+        this.canPlotFromTopOfLibrary = false;
         this.drawsOnOpponentsTurn = false;
         this.topCardRevealed = false;
         this.alternativeSourceCosts.clear();
@@ -4524,6 +4529,16 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public void setPlayCardsFromGraveyard(boolean playCardsFromGraveyard) {
         this.canPlayCardsFromGraveyard = playCardsFromGraveyard;
+    }
+
+    @Override
+    public boolean canPlotFromTopOfLibrary() {
+        return canPlotFromTopOfLibrary;
+    }
+
+    @Override
+    public void setPlotFromTopOfLibrary(boolean canPlotFromTopOfLibrary) {
+        this.canPlotFromTopOfLibrary = canPlotFromTopOfLibrary;
     }
 
     @Override

@@ -92,6 +92,7 @@ public final class OutlawsOfThunderJunction extends ExpansionSet {
         cards.add(new SetCardInfo("Explosive Derailment", 122, Rarity.COMMON, mage.cards.e.ExplosiveDerailment.class));
         cards.add(new SetCardInfo("Failed Fording", 47, Rarity.COMMON, mage.cards.f.FailedFording.class));
         cards.add(new SetCardInfo("Fake Your Own Death", 87, Rarity.COMMON, mage.cards.f.FakeYourOwnDeath.class));
+        cards.add(new SetCardInfo("Fblthp, Lost on the Range", 48, Rarity.RARE, mage.cards.f.FblthpLostOnTheRange.class));
         cards.add(new SetCardInfo("Ferocification", 123, Rarity.UNCOMMON, mage.cards.f.Ferocification.class));
         cards.add(new SetCardInfo("Festering Gulch", 257, Rarity.COMMON, mage.cards.f.FesteringGulch.class));
         cards.add(new SetCardInfo("Final Showdown", 11, Rarity.MYTHIC, mage.cards.f.FinalShowdown.class));

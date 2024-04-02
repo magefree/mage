@@ -27,7 +27,7 @@ public class PlotAbility extends SpecialAction {
     private final String rule;
 
     public PlotAbility(String plotCost) {
-        super(Zone.HAND);
+        super(Zone.ALL); // Usually, plot only works from hand. However [[Fblthp, Lost on the Range]] allows plotting from library
         this.addCost(new ManaCostsImpl<>(plotCost));
         this.addEffect(new PlotSourceExileEffect());
         this.setTiming(TimingRule.SORCERY);
@@ -50,17 +50,32 @@ public class PlotAbility extends SpecialAction {
         return rule;
     }
 
-    // TODO: handle [[Fblthp, Lost on the Range]] allowing player to plot from library.
     @Override
     public ActivationStatus canActivate(UUID playerId, Game game) {
-        // plot can only be activated from a hand
-        // TODO: change that for Fblthp.
-        if (game.getState().getZone(getSourceId()) != Zone.HAND) {
-            return ActivationStatus.getFalse();
-        }
-        // suspend uses card's timing restriction
+        // Plot ability uses card's timing restriction
         Card card = game.getCard(getSourceId());
         if (card == null) {
+            return ActivationStatus.getFalse();
+        }
+        // plot can only be activated from hand or from top of library if allowed to.
+        Zone zone = game.getState().getZone(getSourceId());
+        if (zone == Zone.HAND) {
+            // Allowed from hand
+        } else if (zone == Zone.LIBRARY) {
+            // Allowed only if permitted for top card, and only if the card is on top and is nonland
+            // Note: if another effect changes zones where permitted, or if different card categories are permitted,
+            //       it would be better to refactor this as an unique AsThoughEffect.
+            //       As of now, only Fblthp, Lost on the Range changes permission of plot.
+            Player player = game.getPlayer(getControllerId());
+            if (player == null || !player.canPlotFromTopOfLibrary()) {
+                return ActivationStatus.getFalse();
+            }
+            Card topCardLibrary = player.getLibrary().getFromTop(game);
+            if (topCardLibrary == null || !topCardLibrary.getId().equals(card.getId()) || card.isLand()) {
+                return ActivationStatus.getFalse();
+            }
+        } else {
+            // Not Allowed from other zones
             return ActivationStatus.getFalse();
         }
         if (!card.getSpellAbility().spellCanBeActivatedRegularlyNow(playerId, game)) {
@@ -99,11 +114,17 @@ public class PlotAbility extends SpecialAction {
         UUID exileId = PlotAbility.getPlotExileId(owner.getId(), game);
         String exileZoneName = "Plots of " + owner.getName();
         Card mainCard = card.getMainCard();
+        Zone zone = game.getState().getZone(mainCard.getId());
         if (mainCard.moveToExile(exileId, exileZoneName, source, game)) {
             // Remember on which turn the card was last plotted.
             game.getState().setValue(PlotAbility.getPlotTurnKeyForCard(mainCard.getId()), game.getTurnNum());
             game.addEffect(new PlotAddSpellAbilityEffect(new MageObjectReference(mainCard, game)), source);
-            game.informPlayers(owner.getLogName() + " plots " + mainCard.getLogName());
+            game.informPlayers(
+                    owner.getLogName()
+                            + " plots " + mainCard.getLogName()
+                            + " from " + zone.toString().toLowerCase()
+                            + CardUtil.getSourceLogName(game, source, card.getId())
+            );
             game.fireEvent(GameEvent.getEvent(GameEvent.EventType.BECOME_PLOTTED, mainCard.getId(), source, owner.getId()));
         }
         return true;
