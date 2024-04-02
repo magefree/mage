@@ -20,6 +20,7 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
+import mage.watchers.common.SaddledMountWatcher;
 
 import java.awt.*;
 import java.util.Objects;
@@ -39,6 +40,7 @@ public class SaddleAbility extends SimpleActivatedAbility {
         this.value = value;
         this.addHint(hint);
         this.setTiming(TimingRule.SORCERY);
+        this.addWatcher(new SaddledMountWatcher());
     }
 
     private SaddleAbility(final SaddleAbility ability) {

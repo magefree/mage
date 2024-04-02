@@ -24,7 +24,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTargets;
-import mage.watchers.common.SaddledMountWatcher;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,7 +50,7 @@ public final class FortuneLoyalSteed extends CardImpl {
         // Whenever Fortune attacks while saddled, at end of combat, exile it and up to one creature that saddled it this turn, then return those cards to the battlefield under their owner's control.
         this.addAbility(new AttacksWhileSaddledTriggeredAbility(new CreateDelayedTriggeredAbilityEffect(
                 new AtTheEndOfCombatDelayedTriggeredAbility(new FortuneLoyalSteedEffect())
-        )), new SaddledMountWatcher());
+        )));
 
         // Saddle 1
         this.addAbility(new SaddleAbility(1));

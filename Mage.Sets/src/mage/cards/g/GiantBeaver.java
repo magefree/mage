@@ -15,7 +15,6 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.SaddledSourceThisTurnPredicate;
 import mage.target.TargetPermanent;
-import mage.watchers.common.SaddledMountWatcher;
 
 import java.util.UUID;
 
@@ -44,7 +43,7 @@ public final class GiantBeaver extends CardImpl {
         // Whenever Giant Beaver attacks while saddled, put a +1/+1 counter on target creature that saddled it this turn.
         Ability ability = new AttacksWhileSaddledTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
         ability.addTarget(new TargetPermanent(filter));
-        this.addAbility(ability, new SaddledMountWatcher());
+        this.addAbility(ability);
 
         // Saddle 3
         this.addAbility(new SaddleAbility(3));
