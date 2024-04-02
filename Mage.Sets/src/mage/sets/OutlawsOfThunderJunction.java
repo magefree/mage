@@ -116,6 +116,7 @@ public final class OutlawsOfThunderJunction extends ExpansionSet {
         cards.add(new SetCardInfo("Hellspur Brute", 127, Rarity.UNCOMMON, mage.cards.h.HellspurBrute.class));
         cards.add(new SetCardInfo("Hellspur Posse Boss", 128, Rarity.RARE, mage.cards.h.HellspurPosseBoss.class));
         cards.add(new SetCardInfo("High Noon", 15, Rarity.RARE, mage.cards.h.HighNoon.class));
+        cards.add(new SetCardInfo("Highway Robbery", 129, Rarity.COMMON, mage.cards.h.HighwayRobbery.class));
         cards.add(new SetCardInfo("Hollow Marauder", 90, Rarity.UNCOMMON, mage.cards.h.HollowMarauder.class));
         cards.add(new SetCardInfo("Holy Cow", 16, Rarity.COMMON, mage.cards.h.HolyCow.class));
         cards.add(new SetCardInfo("Honest Rutstein", 207, Rarity.UNCOMMON, mage.cards.h.HonestRutstein.class));
