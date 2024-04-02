@@ -126,6 +126,7 @@ public final class OutlawsOfThunderJunction extends ExpansionSet {
         cards.add(new SetCardInfo("Intrepid Stablemaster", 169, Rarity.UNCOMMON, mage.cards.i.IntrepidStablemaster.class));
         cards.add(new SetCardInfo("Inventive Wingsmith", 17, Rarity.COMMON, mage.cards.i.InventiveWingsmith.class));
         cards.add(new SetCardInfo("Irascible Wolverine", 130, Rarity.COMMON, mage.cards.i.IrascibleWolverine.class));
+        cards.add(new SetCardInfo("Iron-Fist Pulverizer", 131, Rarity.COMMON, mage.cards.i.IronFistPulverizer.class));
         cards.add(new SetCardInfo("Island", 273, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Jace Reawakened", 271, Rarity.MYTHIC, mage.cards.j.JaceReawakened.class));
         cards.add(new SetCardInfo("Jagged Barrens", 259, Rarity.COMMON, mage.cards.j.JaggedBarrens.class));
