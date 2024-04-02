@@ -139,6 +139,7 @@ public final class OutlawsOfThunderJunction extends ExpansionSet {
         cards.add(new SetCardInfo("Island", 273, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Jace Reawakened", 271, Rarity.MYTHIC, mage.cards.j.JaceReawakened.class));
         cards.add(new SetCardInfo("Jagged Barrens", 259, Rarity.COMMON, mage.cards.j.JaggedBarrens.class));
+        cards.add(new SetCardInfo("Jailbreak Scheme", 53, Rarity.COMMON, mage.cards.j.JailbreakScheme.class));
         cards.add(new SetCardInfo("Jem Lightfoote, Sky Explorer", 209, Rarity.UNCOMMON, mage.cards.j.JemLightfooteSkyExplorer.class));
         cards.add(new SetCardInfo("Jolene, Plundering Pugilist", 210, Rarity.UNCOMMON, mage.cards.j.JolenePlunderingPugilist.class));
         cards.add(new SetCardInfo("Kaervek, the Punisher", 92, Rarity.RARE, mage.cards.k.KaervekThePunisher.class));
