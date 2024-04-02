@@ -78,6 +78,7 @@ public final class OutlawsOfThunderJunction extends ExpansionSet {
         cards.add(new SetCardInfo("Deadeye Duelist", 119, Rarity.COMMON, mage.cards.d.DeadeyeDuelist.class));
         cards.add(new SetCardInfo("Deepmuck Desperado", 42, Rarity.UNCOMMON, mage.cards.d.DeepmuckDesperado.class));
         cards.add(new SetCardInfo("Demonic Ruckus", 120, Rarity.UNCOMMON, mage.cards.d.DemonicRuckus.class));
+        cards.add(new SetCardInfo("Desert's Due", 85, Rarity.COMMON, mage.cards.d.DesertsDue.class));
         cards.add(new SetCardInfo("Desperate Bloodseeker", 86, Rarity.COMMON, mage.cards.d.DesperateBloodseeker.class));
         cards.add(new SetCardInfo("Discerning Peddler", 121, Rarity.COMMON, mage.cards.d.DiscerningPeddler.class));
         cards.add(new SetCardInfo("Djinn of Fool's Fall", 43, Rarity.COMMON, mage.cards.d.DjinnOfFoolsFall.class));
