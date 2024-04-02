@@ -161,6 +161,7 @@ public final class OutlawsOfThunderJunction extends ExpansionSet {
         cards.add(new SetCardInfo("Ornery Tumblewagg", 171, Rarity.RARE, mage.cards.o.OrneryTumblewagg.class));
         cards.add(new SetCardInfo("Outcaster Greenblade", 172, Rarity.UNCOMMON, mage.cards.o.OutcasterGreenblade.class));
         cards.add(new SetCardInfo("Outcaster Trailblazer", 173, Rarity.RARE, mage.cards.o.OutcasterTrailblazer.class));
+        cards.add(new SetCardInfo("Outlaw Medic", 23, Rarity.COMMON, mage.cards.o.OutlawMedic.class));
         cards.add(new SetCardInfo("Outlaw Stitcher", 59, Rarity.UNCOMMON, mage.cards.o.OutlawStitcher.class));
         cards.add(new SetCardInfo("Outlaws' Fury", 136, Rarity.COMMON, mage.cards.o.OutlawsFury.class));
         cards.add(new SetCardInfo("Peerless Ropemaster", 60, Rarity.COMMON, mage.cards.p.PeerlessRopemaster.class));
