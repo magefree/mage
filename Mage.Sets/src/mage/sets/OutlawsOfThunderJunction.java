@@ -33,6 +33,7 @@ public final class OutlawsOfThunderJunction extends ExpansionSet {
         cards.add(new SetCardInfo("Archmage's Newt", 39, Rarity.RARE, mage.cards.a.ArchmagesNewt.class));
         cards.add(new SetCardInfo("Arid Archway", 252, Rarity.UNCOMMON, mage.cards.a.AridArchway.class));
         cards.add(new SetCardInfo("Armored Armadillo", 3, Rarity.COMMON, mage.cards.a.ArmoredArmadillo.class));
+        cards.add(new SetCardInfo("Assimilation Aegis", 192, Rarity.MYTHIC, mage.cards.a.AssimilationAegis.class));
         cards.add(new SetCardInfo("At Knifepoint", 193, Rarity.UNCOMMON, mage.cards.a.AtKnifepoint.class));
         cards.add(new SetCardInfo("Aven Interrupter", 4, Rarity.RARE, mage.cards.a.AvenInterrupter.class));
         cards.add(new SetCardInfo("Badlands Revival", 194, Rarity.UNCOMMON, mage.cards.b.BadlandsRevival.class));
