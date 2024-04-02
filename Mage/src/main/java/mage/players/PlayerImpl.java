@@ -4704,6 +4704,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                         successfulMovedCards.add(permanent);
                         if (!game.isSimulation()) {
                             Player eventPlayer = game.getPlayer(info.event.getPlayerId());
+                            fromZone = info.event.getFromZone();
                             if (eventPlayer != null && fromZone != null) {
                                 game.informPlayers(eventPlayer.getLogName() + " puts "
                                         + GameLog.getColoredObjectIdName(permanent) + " from "
