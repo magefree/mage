@@ -47,11 +47,14 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Battle of Hoover Dam", 539, Rarity.RARE, mage.cards.b.BattleOfHooverDam.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Battle of Hoover Dam", 892, Rarity.RARE, mage.cards.b.BattleOfHooverDam.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Behemoth Sledge", 211, Rarity.UNCOMMON, mage.cards.b.BehemothSledge.class));
+        cards.add(new SetCardInfo("Behemoth of Vault 0", 127, Rarity.UNCOMMON, mage.cards.b.BehemothOfVault.class));
+        cards.add(new SetCardInfo("Bighorner Rancher", 73, Rarity.UNCOMMON, mage.cards.b.BighornerRancher.class));
         cards.add(new SetCardInfo("Biomass Mutation", 212, Rarity.RARE, mage.cards.b.BiomassMutation.class));
         cards.add(new SetCardInfo("Black Market", 183, Rarity.RARE, mage.cards.b.BlackMarket.class));
         cards.add(new SetCardInfo("Blasphemous Act", 188, Rarity.RARE, mage.cards.b.BlasphemousAct.class));
         cards.add(new SetCardInfo("Bloodforged Battle-Axe", 226, Rarity.RARE, mage.cards.b.BloodforgedBattleAxe.class));
         cards.add(new SetCardInfo("Boomer Scrapper", 95, Rarity.RARE, mage.cards.b.BoomerScrapper.class));
+        cards.add(new SetCardInfo("Bottle-Cap Blast", 55, Rarity.UNCOMMON, mage.cards.b.BottleCapBlast.class));
         cards.add(new SetCardInfo("Branching Evolution", 195, Rarity.RARE, mage.cards.b.BranchingEvolution.class));
         cards.add(new SetCardInfo("Brass Knuckles", 227, Rarity.UNCOMMON, mage.cards.b.BrassKnuckles.class));
         cards.add(new SetCardInfo("Break Down", 74, Rarity.UNCOMMON, mage.cards.b.BreakDown.class));
@@ -71,6 +74,7 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Canyon Slough", 256, Rarity.RARE, mage.cards.c.CanyonSlough.class));
         cards.add(new SetCardInfo("Captain of the Watch", 157, Rarity.RARE, mage.cards.c.CaptainOfTheWatch.class));
         cards.add(new SetCardInfo("Casualties of War", 213, Rarity.RARE, mage.cards.c.CasualtiesOfWar.class));
+        cards.add(new SetCardInfo("Cathedral Acolyte", 75, Rarity.UNCOMMON, mage.cards.c.CathedralAcolyte.class));
         cards.add(new SetCardInfo("Champion's Helm", 228, Rarity.RARE, mage.cards.c.ChampionsHelm.class));
         cards.add(new SetCardInfo("Chaos Warp", 189, Rarity.RARE, mage.cards.c.ChaosWarp.class));
         cards.add(new SetCardInfo("Cinder Glade", 257, Rarity.RARE, mage.cards.c.CinderGlade.class));
@@ -221,6 +225,7 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Rootbound Crag", 284, Rarity.RARE, mage.cards.r.RootboundCrag.class));
         cards.add(new SetCardInfo("Ruinous Ultimatum", 220, Rarity.RARE, mage.cards.r.RuinousUltimatum.class));
         cards.add(new SetCardInfo("Rustvale Bridge", 285, Rarity.COMMON, mage.cards.r.RustvaleBridge.class));
+        cards.add(new SetCardInfo("Ruthless Radrat", 48, Rarity.UNCOMMON, mage.cards.r.RuthlessRadrat.class));
         cards.add(new SetCardInfo("Scattered Groves", 286, Rarity.RARE, mage.cards.s.ScatteredGroves.class));
         cards.add(new SetCardInfo("Scavenger Grounds", 287, Rarity.RARE, mage.cards.s.ScavengerGrounds.class));
         cards.add(new SetCardInfo("Secure the Wastes", 171, Rarity.RARE, mage.cards.s.SecureTheWastes.class));
