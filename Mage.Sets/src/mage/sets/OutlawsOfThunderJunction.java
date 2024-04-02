@@ -22,6 +22,7 @@ public final class OutlawsOfThunderJunction extends ExpansionSet {
         this.hasBoosters = false; // temporary
 
         cards.add(new SetCardInfo("Abraded Bluffs", 251, Rarity.COMMON, mage.cards.a.AbradedBluffs.class));
+        cards.add(new SetCardInfo("Akul the Unrepentant", 189, Rarity.RARE, mage.cards.a.AkulTheUnrepentant.class));
         cards.add(new SetCardInfo("Aloe Alchemist", 152, Rarity.UNCOMMON, mage.cards.a.AloeAlchemist.class));
         cards.add(new SetCardInfo("Ambush Gigapede", 77, Rarity.COMMON, mage.cards.a.AmbushGigapede.class));
         cards.add(new SetCardInfo("Ankle Biter", 153, Rarity.COMMON, mage.cards.a.AnkleBiter.class));
