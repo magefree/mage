@@ -67,7 +67,7 @@ public class PlotAbility extends SpecialAction {
             //       it would be better to refactor this as an unique AsThoughEffect.
             //       As of now, only Fblthp, Lost on the Range changes permission of plot.
             Player player = game.getPlayer(getControllerId());
-            if (!player.canPlotFromTopOfLibrary()) {
+            if (player == null || !player.canPlotFromTopOfLibrary()) {
                 return ActivationStatus.getFalse();
             }
             Card topCardLibrary = player.getLibrary().getFromTop(game);
@@ -119,7 +119,12 @@ public class PlotAbility extends SpecialAction {
             // Remember on which turn the card was last plotted.
             game.getState().setValue(PlotAbility.getPlotTurnKeyForCard(mainCard.getId()), game.getTurnNum());
             game.addEffect(new PlotAddSpellAbilityEffect(new MageObjectReference(mainCard, game)), source);
-            game.informPlayers(owner.getLogName() + " plots " + mainCard.getLogName() + " from " + zone.toString().toLowerCase());
+            game.informPlayers(
+                    owner.getLogName()
+                            + " plots " + mainCard.getLogName()
+                            + " from " + zone.toString().toLowerCase()
+                            + CardUtil.getSourceLogName(game, source, card.getId())
+            );
             game.fireEvent(GameEvent.getEvent(GameEvent.EventType.BECOME_PLOTTED, mainCard.getId(), source, owner.getId()));
         }
         return true;
