@@ -176,6 +176,7 @@ public final class OutlawsOfThunderJunction extends ExpansionSet {
         cards.add(new SetCardInfo("Plains", 272, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Plan the Heist", 62, Rarity.UNCOMMON, mage.cards.p.PlanTheHeist.class));
         cards.add(new SetCardInfo("Prairie Dog", 24, Rarity.UNCOMMON, mage.cards.p.PrairieDog.class));
+        cards.add(new SetCardInfo("Prickly Pair", 137, Rarity.COMMON, mage.cards.p.PricklyPair.class));
         cards.add(new SetCardInfo("Prosperity Tycoon", 25, Rarity.UNCOMMON, mage.cards.p.ProsperityTycoon.class));
         cards.add(new SetCardInfo("Quilled Charger", 139, Rarity.COMMON, mage.cards.q.QuilledCharger.class));
         cards.add(new SetCardInfo("Railway Brawler", 175, Rarity.MYTHIC, mage.cards.r.RailwayBrawler.class));
