@@ -190,6 +190,7 @@ public final class OutlawsOfThunderJunction extends ExpansionSet {
         cards.add(new SetCardInfo("Peerless Ropemaster", 60, Rarity.COMMON, mage.cards.p.PeerlessRopemaster.class));
         cards.add(new SetCardInfo("Phantom Interference", 61, Rarity.COMMON, mage.cards.p.PhantomInterference.class));
         cards.add(new SetCardInfo("Pillage the Bog", 224, Rarity.RARE, mage.cards.p.PillageTheBog.class));
+        cards.add(new SetCardInfo("Pitiless Carnage", 98, Rarity.RARE, mage.cards.p.PitilessCarnage.class));
         cards.add(new SetCardInfo("Plains", 272, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Plan the Heist", 62, Rarity.UNCOMMON, mage.cards.p.PlanTheHeist.class));
         cards.add(new SetCardInfo("Prairie Dog", 24, Rarity.UNCOMMON, mage.cards.p.PrairieDog.class));
