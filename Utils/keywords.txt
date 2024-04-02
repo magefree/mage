@@ -116,7 +116,7 @@ Soulshift|number|
 Skulk|new|
 Spectacle|card, cost|
 Spree|card|
-Squad|new|
+Squad|cost|
 Storm|new|
 Sunburst|new|
 Suspend|number, cost, card|
