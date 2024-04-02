@@ -65,6 +65,7 @@ public final class OutlawsOfThunderJunction extends ExpansionSet {
         cards.add(new SetCardInfo("Colossal Rattlewurm", 159, Rarity.RARE, mage.cards.c.ColossalRattlewurm.class));
         cards.add(new SetCardInfo("Concealed Courtyard", 268, Rarity.RARE, mage.cards.c.ConcealedCourtyard.class));
         cards.add(new SetCardInfo("Congregation Gryff", 200, Rarity.UNCOMMON, mage.cards.c.CongregationGryff.class));
+        cards.add(new SetCardInfo("Corrupted Conviction", 84, Rarity.COMMON, mage.cards.c.CorruptedConviction.class));
         cards.add(new SetCardInfo("Creosote Heath", 255, Rarity.COMMON, mage.cards.c.CreosoteHeath.class));
         cards.add(new SetCardInfo("Cunning Coyote", 118, Rarity.UNCOMMON, mage.cards.c.CunningCoyote.class));
         cards.add(new SetCardInfo("Dance of the Tumbleweeds", 160, Rarity.COMMON, mage.cards.d.DanceOfTheTumbleweeds.class));
@@ -205,10 +206,12 @@ public final class OutlawsOfThunderJunction extends ExpansionSet {
         cards.add(new SetCardInfo("Sheriff of Safe Passage", 29, Rarity.UNCOMMON, mage.cards.s.SheriffOfSafePassage.class));
         cards.add(new SetCardInfo("Shifting Grift", 66, Rarity.UNCOMMON, mage.cards.s.ShiftingGrift.class));
         cards.add(new SetCardInfo("Shoot the Sheriff", 106, Rarity.UNCOMMON, mage.cards.s.ShootTheSheriff.class));
+        cards.add(new SetCardInfo("Skulduggery", 107, Rarity.COMMON, mage.cards.s.Skulduggery.class));
         cards.add(new SetCardInfo("Slick Sequence", 233, Rarity.UNCOMMON, mage.cards.s.SlickSequence.class));
         cards.add(new SetCardInfo("Slickshot Lockpicker", 67, Rarity.UNCOMMON, mage.cards.s.SlickshotLockpicker.class));
         cards.add(new SetCardInfo("Slickshot Show-Off", 146, Rarity.RARE, mage.cards.s.SlickshotShowOff.class));
         cards.add(new SetCardInfo("Slickshot Vault-Buster", 68, Rarity.COMMON, mage.cards.s.SlickshotVaultBuster.class));
+        cards.add(new SetCardInfo("Snakeskin Veil", 181, Rarity.COMMON, mage.cards.s.SnakeskinVeil.class));
         cards.add(new SetCardInfo("Soured Springs", 264, Rarity.COMMON, mage.cards.s.SouredSprings.class));
         cards.add(new SetCardInfo("Spinewoods Armadillo", 182, Rarity.UNCOMMON, mage.cards.s.SpinewoodsArmadillo.class));
         cards.add(new SetCardInfo("Spirebluff Canal", 270, Rarity.RARE, mage.cards.s.SpirebluffCanal.class));
@@ -222,6 +225,7 @@ public final class OutlawsOfThunderJunction extends ExpansionSet {
         cards.add(new SetCardInfo("Stoic Sphinx", 71, Rarity.RARE, mage.cards.s.StoicSphinx.class));
         cards.add(new SetCardInfo("Stubborn Burrowfiend", 184, Rarity.UNCOMMON, mage.cards.s.StubbornBurrowfiend.class));
         cards.add(new SetCardInfo("Swamp", 274, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Take Up the Shield", 34, Rarity.COMMON, mage.cards.t.TakeUpTheShield.class));
         cards.add(new SetCardInfo("Take for a Ride", 148, Rarity.UNCOMMON, mage.cards.t.TakeForARide.class));
         cards.add(new SetCardInfo("Terror of the Peaks", 149, Rarity.MYTHIC, mage.cards.t.TerrorOfThePeaks.class));
         cards.add(new SetCardInfo("The Key to the Vault", 54, Rarity.RARE, mage.cards.t.TheKeyToTheVault.class));
