@@ -157,6 +157,7 @@ public final class OutlawsOfThunderJunction extends ExpansionSet {
         cards.add(new SetCardInfo("Marchesa, Dealer of Death", 220, Rarity.RARE, mage.cards.m.MarchesaDealerOfDeath.class));
         cards.add(new SetCardInfo("Metamorphic Blast", 57, Rarity.UNCOMMON, mage.cards.m.MetamorphicBlast.class));
         cards.add(new SetCardInfo("Mine Raider", 135, Rarity.COMMON, mage.cards.m.MineRaider.class));
+        cards.add(new SetCardInfo("Mirage Mesa", 262, Rarity.COMMON, mage.cards.m.MirageMesa.class));
         cards.add(new SetCardInfo("Miriam, Herd Whisperer", 221, Rarity.UNCOMMON, mage.cards.m.MiriamHerdWhisperer.class));
         cards.add(new SetCardInfo("Mobile Homestead", 245, Rarity.UNCOMMON, mage.cards.m.MobileHomestead.class));
         cards.add(new SetCardInfo("Mountain", 275, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
