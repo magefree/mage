@@ -275,6 +275,8 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Underground Mortuary", 271, Rarity.RARE, mage.cards.u.UndergroundMortuary.class));
         cards.add(new SetCardInfo("Undergrowth Recon", 181, Rarity.MYTHIC, mage.cards.u.UndergrowthRecon.class));
         cards.add(new SetCardInfo("Unscrupulous Agent", 109, Rarity.COMMON, mage.cards.u.UnscrupulousAgent.class));
+        cards.add(new SetCardInfo("Unyielding Gatekeeper", 35, Rarity.RARE, mage.cards.u.UnyieldingGatekeeper.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Unyielding Gatekeeper", 392, Rarity.RARE, mage.cards.u.UnyieldingGatekeeper.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Urgent Necropsy", 240, Rarity.MYTHIC, mage.cards.u.UrgentNecropsy.class));
         cards.add(new SetCardInfo("Vein Ripper", 110, Rarity.MYTHIC, mage.cards.v.VeinRipper.class));
         cards.add(new SetCardInfo("Vengeful Creeper", 182, Rarity.COMMON, mage.cards.v.VengefulCreeper.class));
