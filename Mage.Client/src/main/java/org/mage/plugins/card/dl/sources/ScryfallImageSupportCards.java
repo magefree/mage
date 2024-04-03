@@ -548,6 +548,7 @@ public class ScryfallImageSupportCards {
             add("CLU"); // Ravnica: Clue Edition
             add("OTJ"); // Outlaws of Thunder Junction
             add("OTC"); // Outlaws of Thunder Junction Commander
+            add("OTP"); // Breaking News
             add("BIG"); // The Big Score
             add("MH3"); // Modern Horizons 3
             add("ACR"); // Assassin's Creed
