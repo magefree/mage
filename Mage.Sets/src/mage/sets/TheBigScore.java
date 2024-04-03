@@ -21,6 +21,7 @@ public final class TheBigScore extends ExpansionSet {
         this.hasBasicLands = false;
         this.hasBoosters = false;
 
+        cards.add(new SetCardInfo("Bristlebud Farmer", 17, Rarity.MYTHIC, mage.cards.b.BristlebudFarmer.class));
         cards.add(new SetCardInfo("Collector's Cage", 1, Rarity.MYTHIC, mage.cards.c.CollectorsCage.class));
         cards.add(new SetCardInfo("Grand Abolisher", 2, Rarity.MYTHIC, mage.cards.g.GrandAbolisher.class));
         cards.add(new SetCardInfo("Legion Extruder", 12, Rarity.MYTHIC, mage.cards.l.LegionExtruder.class));
