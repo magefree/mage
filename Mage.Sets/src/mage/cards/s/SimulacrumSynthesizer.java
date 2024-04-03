@@ -19,7 +19,7 @@ import java.util.UUID;
 /**
  * @author Susucr
  */
-public final class SubstituteSynthesizer extends CardImpl {
+public final class SimulacrumSynthesizer extends CardImpl {
 
     private static final FilterPermanent filter =
             new FilterArtifactPermanent("another artifact with mana value 3 or more");
@@ -29,7 +29,7 @@ public final class SubstituteSynthesizer extends CardImpl {
         filter.add(new ManaValuePredicate(ComparisonType.OR_GREATER, 3));
     }
 
-    public SubstituteSynthesizer(UUID ownerId, CardSetInfo setInfo) {
+    public SimulacrumSynthesizer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}{U}");
 
         // When Substitute Synthesizer enters the battlefield, scry 2.
@@ -41,12 +41,12 @@ public final class SubstituteSynthesizer extends CardImpl {
         ));
     }
 
-    private SubstituteSynthesizer(final SubstituteSynthesizer card) {
+    private SimulacrumSynthesizer(final SimulacrumSynthesizer card) {
         super(card);
     }
 
     @Override
-    public SubstituteSynthesizer copy() {
-        return new SubstituteSynthesizer(this);
+    public SimulacrumSynthesizer copy() {
+        return new SimulacrumSynthesizer(this);
     }
 }

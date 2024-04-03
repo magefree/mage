@@ -22,13 +22,13 @@ public final class TheBigScore extends ExpansionSet {
         this.hasBoosters = false;
 
         cards.add(new SetCardInfo("Grand Abolisher", 2, Rarity.MYTHIC, mage.cards.g.GrandAbolisher.class));
-        cards.add(new SetCardInfo("Legion Foundry", 12, Rarity.MYTHIC, mage.cards.l.LegionFoundry.class));
+        cards.add(new SetCardInfo("Legion Extruder", 12, Rarity.MYTHIC, mage.cards.l.LegionExtruder.class));
         cards.add(new SetCardInfo("Loot, the Key to Everything", 21, Rarity.MYTHIC, mage.cards.l.LootTheKeyToEverything.class));
         cards.add(new SetCardInfo("Lotus Ring", 24, Rarity.MYTHIC, mage.cards.l.LotusRing.class));
         cards.add(new SetCardInfo("Oltec Matterweaver", 3, Rarity.MYTHIC, mage.cards.o.OltecMatterweaver.class));
         cards.add(new SetCardInfo("Pest Control", 22, Rarity.MYTHIC, mage.cards.p.PestControl.class));
-        cards.add(new SetCardInfo("Substitute Synthesizer", 6, Rarity.MYTHIC, mage.cards.s.SubstituteSynthesizer.class));
         cards.add(new SetCardInfo("Rest in Peace", 4, Rarity.MYTHIC, mage.cards.r.RestInPeace.class));
+        cards.add(new SetCardInfo("Simulacrum Synthesizer", 6, Rarity.MYTHIC, mage.cards.s.SimulacrumSynthesizer.class));
         cards.add(new SetCardInfo("Torpor Orb", 27, Rarity.MYTHIC, mage.cards.t.TorporOrb.class));
         cards.add(new SetCardInfo("Vaultborn Tyrant", 20, Rarity.MYTHIC, mage.cards.v.VaultbornTyrant.class));
     }

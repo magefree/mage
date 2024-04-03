@@ -20,9 +20,9 @@ import java.util.UUID;
 /**
  * @author Susucr
  */
-public final class LegionFoundry extends CardImpl {
+public final class LegionExtruder extends CardImpl {
 
-    public LegionFoundry(UUID ownerId, CardSetInfo setInfo) {
+    public LegionExtruder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}{R}");
 
         // When Legion Foundry enters the battlefield, it deals 2 damage to any target.
@@ -37,12 +37,12 @@ public final class LegionFoundry extends CardImpl {
         this.addAbility(ability);
     }
 
-    private LegionFoundry(final LegionFoundry card) {
+    private LegionExtruder(final LegionExtruder card) {
         super(card);
     }
 
     @Override
-    public LegionFoundry copy() {
-        return new LegionFoundry(this);
+    public LegionExtruder copy() {
+        return new LegionExtruder(this);
     }
 }
