@@ -5,6 +5,7 @@ package mage.constants;
  * @author North
  */
 public enum Layer {
+    TransformCharacteristics_0,
     CopyEffects_1,
     ControlChangingEffects_2,
     TextChangingEffects_3,
