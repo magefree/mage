@@ -28,6 +28,8 @@ public final class StopCold extends CardImpl {
     public StopCold(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}");
 
+        this.subtype.add(SubType.AURA);
+
         // Flash
         this.addAbility(FlashAbility.getInstance());
 
