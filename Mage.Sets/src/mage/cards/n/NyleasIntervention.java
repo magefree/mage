@@ -19,6 +19,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.game.Game;
 import mage.target.common.TargetCardInLibrary;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -76,7 +77,7 @@ class NyleasInterventionEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int xValue = source.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, source, "X", 0);
         return new SearchLibraryPutInHandEffect(new TargetCardInLibrary(
                 0, xValue, StaticFilters.FILTER_CARD_LAND
         ), true).apply(game, source);

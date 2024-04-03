@@ -17,6 +17,7 @@ import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.targetadjustment.TargetAdjuster;
+import mage.util.CardUtil;
 
 import java.util.Objects;
 import java.util.Set;
@@ -52,7 +53,7 @@ enum ChangeOfPlansAdjuster implements TargetAdjuster {
     @Override
     public void adjustTargets(Ability ability, Game game) {
         ability.getTargets().clear();
-        ability.addTarget(new TargetControlledCreaturePermanent(ability.getManaCostsToPay().getX()));
+        ability.addTarget(new TargetControlledCreaturePermanent(CardUtil.getSourceCostsTag(game, ability, "X", 0)));
     }
 }
 

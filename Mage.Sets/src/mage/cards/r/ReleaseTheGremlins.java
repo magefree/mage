@@ -12,6 +12,7 @@ import mage.game.Game;
 import mage.game.permanent.token.GremlinToken;
 import mage.target.common.TargetArtifactPermanent;
 import mage.target.targetadjustment.TargetAdjuster;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -49,6 +50,6 @@ enum ReleaseTheGremlinsAdjuster implements TargetAdjuster {
     @Override
     public void adjustTargets(Ability ability, Game game) {
         ability.getTargets().clear();
-        ability.addTarget(new TargetArtifactPermanent(ability.getManaCostsToPay().getX()));
+        ability.addTarget(new TargetArtifactPermanent(CardUtil.getSourceCostsTag(game, ability, "X", 0)));
     }
 }

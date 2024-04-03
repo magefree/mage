@@ -1,8 +1,5 @@
 package mage.cards.o;
 
-import java.util.Set;
-import java.util.UUID;
-
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffect;
@@ -19,6 +16,9 @@ import mage.players.Player;
 import mage.target.common.TargetOpponent;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
+
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -73,7 +73,7 @@ class OutrageousRobberyEffect extends OneShotEffect {
             return false;
         }
 
-        int xValue = source.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, source, "X", 0);
         if (xValue == 0) {
             return false;
         }

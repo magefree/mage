@@ -1,8 +1,5 @@
 package mage.cards.w;
 
-import java.util.List;
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.OneShotEffect;
@@ -16,6 +13,10 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.PhyrexianMiteToken;
 import mage.game.permanent.token.Token;
+import mage.util.CardUtil;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -59,7 +60,7 @@ class WhiteSunsTwilightEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int xValue = source.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, source, "X", 0);
         Token token = new PhyrexianMiteToken();
         token.putOntoBattlefield(xValue, game, source);
         if (xValue < 5) {

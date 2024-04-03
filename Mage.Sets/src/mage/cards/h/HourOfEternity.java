@@ -17,6 +17,7 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetadjustment.TargetAdjuster;
+import mage.util.CardUtil;
 import mage.util.functions.CopyTokenFunction;
 
 import java.util.HashSet;
@@ -52,7 +53,7 @@ enum HourOfEternityAdjuster implements TargetAdjuster {
     @Override
     public void adjustTargets(Ability ability, Game game) {
         ability.getTargets().clear();
-        int xValue = ability.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, ability, "X", 0);
         Target target = new TargetCardInYourGraveyard(xValue, new FilterCreatureCard((xValue != 1 ? " creature cards" : "creature card") + " from your graveyard"));
         ability.addTarget(target);
     }

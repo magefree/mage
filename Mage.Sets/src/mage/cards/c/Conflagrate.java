@@ -1,6 +1,5 @@
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.DiscardXTargetCost;
@@ -15,6 +14,9 @@ import mage.constants.CardType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.target.common.TargetAnyTargetAmount;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -51,7 +53,7 @@ class ConflagrateVariableValue implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        int xValue = sourceAbility.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, sourceAbility, "X", 0);
         for (Cost cost : sourceAbility.getCosts()) {
             if (cost instanceof DiscardXTargetCost) {
                 xValue = ((DiscardXTargetCost) cost).getAmount();

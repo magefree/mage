@@ -19,6 +19,7 @@ import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetPlaneswalkerPermanent;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -86,7 +87,7 @@ class MishrasCommandEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
-        int xValue = source.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, source, "X", 0);
         if (player != null && xValue > 0) {
             player.drawCards(player.discard(
                     0, xValue, false, source, game

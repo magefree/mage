@@ -1,6 +1,5 @@
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -20,6 +19,9 @@ import mage.game.Game;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.targetadjustment.TargetAdjuster;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -66,7 +68,7 @@ enum MinamoSightbenderAdjuster implements TargetAdjuster {
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        int xValue = ability.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, ability, "X", 0);
         FilterPermanent permanentFilter = new FilterCreaturePermanent("creature with power " + xValue + " or less");
         permanentFilter.add(new PowerPredicate(ComparisonType.FEWER_THAN, xValue + 1));
         ability.getTargets().clear();

@@ -66,8 +66,8 @@ class PanopticMirrorExileEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        source.getManaCostsToPay().getX();
-        int count = source.getManaCostsToPay().getX();
+        CardUtil.getSourceCostsTag(game, source, "X", 0);
+        int count = CardUtil.getSourceCostsTag(game, source, "X", 0);
 
         FilterInstantOrSorceryCard filter = new FilterInstantOrSorceryCard("instant or sorcery card with mana value equal to " + count);
         filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, count));

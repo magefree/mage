@@ -6,6 +6,7 @@ import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.target.TargetPermanent;
+import mage.util.CardUtil;
 
 /**
  *
@@ -16,7 +17,7 @@ public enum XCMCPermanentAdjuster implements TargetAdjuster {
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        int xValue = ability.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, ability, "X", 0);
         TargetPermanent oldTargetPermanent = (TargetPermanent) ability.getTargets().get(0);
         int minTargets = oldTargetPermanent.getMinNumberOfTargets();
         int maxTargets = oldTargetPermanent.getMaxNumberOfTargets();

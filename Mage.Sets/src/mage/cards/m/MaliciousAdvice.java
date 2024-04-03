@@ -14,6 +14,7 @@ import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.target.TargetPermanent;
 import mage.target.targetadjustment.TargetAdjuster;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -58,6 +59,6 @@ enum MaliciousAdviceAdjuster implements TargetAdjuster {
     @Override
     public void adjustTargets(Ability ability, Game game) {
         ability.getTargets().clear();
-        ability.addTarget(new TargetPermanent(ability.getManaCostsToPay().getX(), filter));
+        ability.addTarget(new TargetPermanent(CardUtil.getSourceCostsTag(game, ability, "X", 0), filter));
     }
 }

@@ -19,6 +19,7 @@ import mage.game.Game;
 import mage.target.TargetAmount;
 import mage.target.common.TargetCreatureOrPlaneswalkerAmount;
 import mage.target.targetadjustment.TargetAdjuster;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -77,7 +78,7 @@ enum ShatterskullSmashingCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return source.getManaCostsToPay().getX() >= 6;
+        return CardUtil.getSourceCostsTag(game, source, "X", 0) >= 6;
     }
 }
 
@@ -88,10 +89,10 @@ enum ShatterskullSmashingAdjuster implements TargetAdjuster {
     public void adjustTargets(Ability ability, Game game) {
         ability.getTargets().clear();
         TargetAmount target;
-        if (ability.getManaCostsToPay().getX() >= 6) {
-            target = new TargetCreatureOrPlaneswalkerAmount(2 * ability.getManaCostsToPay().getX());
+        if (CardUtil.getSourceCostsTag(game, ability, "X", 0) >= 6) {
+            target = new TargetCreatureOrPlaneswalkerAmount(2 * CardUtil.getSourceCostsTag(game, ability, "X", 0));
         } else {
-            target = new TargetCreatureOrPlaneswalkerAmount(ability.getManaCostsToPay().getX());
+            target = new TargetCreatureOrPlaneswalkerAmount(CardUtil.getSourceCostsTag(game, ability, "X", 0));
         }
         target.setMinNumberOfTargets(0);
         target.setMaxNumberOfTargets(2);

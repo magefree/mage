@@ -21,6 +21,7 @@ import mage.target.TargetPlayer;
 import mage.target.TargetSpell;
 import mage.target.common.TargetAnyTarget;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -80,7 +81,7 @@ class ExplosionEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int xValue = source.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, source, "X", 0);
         Effect effect = new DamageTargetEffect(StaticValue.get(xValue), true, "", true);
         effect.setTargetPointer(new FixedTarget(source.getFirstTarget(), game));
         effect.apply(game, source);

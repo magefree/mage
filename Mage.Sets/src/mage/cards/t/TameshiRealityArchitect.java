@@ -21,6 +21,7 @@ import mage.game.Game;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.targetadjustment.TargetAdjuster;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -77,7 +78,7 @@ enum TameshiRealityArchitectAdjuster implements TargetAdjuster {
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        int xValue = ability.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, ability, "X", 0);
         FilterCard filter = new FilterArtifactOrEnchantmentCard(
                 "artifact or enchantment card with mana value " + xValue + " or less from your graveyard"
         );

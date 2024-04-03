@@ -23,6 +23,7 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -161,7 +162,7 @@ class TalonOfPainRemoveVariableCountersSourceCost extends VariableCostImpl {
 
     @Override
     public int announceXValue(Ability source, Game game) {
-        return source.getManaCostsToPay().getX();
+        return CardUtil.getSourceCostsTag(game, source, "X", 0);
     }
 
 }

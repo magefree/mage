@@ -10,6 +10,7 @@ import mage.game.Game;
 import mage.game.permanent.token.SmokeBlessingToken;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetadjustment.TargetAdjuster;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -41,9 +42,9 @@ enum SmokeSpiritsAidAdjuster implements TargetAdjuster {
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        if (ability.getManaCostsToPay().getX() > 0) {
+        if (CardUtil.getSourceCostsTag(game, ability, "X", 0) > 0) {
             ability.getTargets().clear();
-            ability.addTarget(new TargetCreaturePermanent(0, ability.getManaCostsToPay().getX()));
+            ability.addTarget(new TargetCreaturePermanent(0, CardUtil.getSourceCostsTag(game, ability, "X", 0)));
         }
     }
 }

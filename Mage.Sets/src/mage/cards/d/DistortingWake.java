@@ -12,6 +12,7 @@ import mage.game.Game;
 import mage.target.Target;
 import mage.target.common.TargetNonlandPermanent;
 import mage.target.targetadjustment.TargetAdjuster;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -45,7 +46,7 @@ enum DistortingWakeAdjuster implements TargetAdjuster {
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        int xValue = ability.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, ability, "X", 0);
         Target target = new TargetNonlandPermanent(xValue, xValue,
                 new FilterNonlandPermanent(xValue + " target nonland permanent(s)"), false);
         ability.getTargets().clear();

@@ -8,6 +8,7 @@ import mage.constants.CardType;
 import mage.game.Game;
 import mage.target.common.TargetAnyTarget;
 import mage.target.targetadjustment.TargetAdjuster;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -41,7 +42,7 @@ enum MeteorBlastAdjuster implements TargetAdjuster {
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        int xValue = ability.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, ability, "X", 0);
         if (xValue > 0) {
             ability.addTarget(new TargetAnyTarget(xValue));
         }

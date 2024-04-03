@@ -1,6 +1,5 @@
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.common.MultikickerCount;
 import mage.abilities.effects.OneShotEffect;
@@ -15,6 +14,9 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetadjustment.TargetAdjuster;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  * @author noxx
@@ -68,7 +70,7 @@ class StrengthOfTheTajuruAddCountersTargetEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         int affectedTargets = 0;
-        int amount = source.getManaCostsToPay().getX();
+        int amount = CardUtil.getSourceCostsTag(game, source, "X", 0);
         Counter counter = CounterType.P1P1.createInstance(amount);
         for (UUID uuid : getTargetPointer().getTargets(game, source)) {
             Permanent permanent = game.getPermanent(uuid);

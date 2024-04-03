@@ -67,7 +67,7 @@ class ElectrodominanceEffect extends OneShotEffect {
         }
         FilterCard filter = new FilterCard();
         filter.add(new ManaValuePredicate(
-                ComparisonType.FEWER_THAN, source.getManaCostsToPay().getX() + 1
+                ComparisonType.FEWER_THAN, CardUtil.getSourceCostsTag(game, source, "X", 0) + 1
         ));
         return CardUtil.castSpellWithAttributesForFree(controller, source, game, controller.getHand(), filter);
     }

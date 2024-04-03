@@ -1264,7 +1264,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         if (this.isPlaneswalker(game)) {
             int loyalty;
             if (this.getStartingLoyalty() == -2) {
-                loyalty = source.getManaCostsToPay().getX();
+                loyalty = CardUtil.getSourceCostsTag(game, source, "X", 0);
             } else {
                 loyalty = this.getStartingLoyalty();
             }
@@ -1281,7 +1281,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         if (this.isBattle(game)) {
             int defense;
             if (this.getStartingDefense() == -2) {
-                defense = source.getManaCostsToPay().getX();
+                defense = CardUtil.getSourceCostsTag(game, source, "X", 0);
             } else {
                 defense = this.getStartingDefense();
             }

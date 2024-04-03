@@ -17,6 +17,7 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.targetadjustment.TargetAdjuster;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -49,7 +50,7 @@ enum FinaleOfEternityAdjuster implements TargetAdjuster {
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        int xValue = ability.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, ability, "X", 0);
         FilterPermanent filter = new FilterCreaturePermanent("creatures with toughness " + xValue + " or less");
         filter.add(new ToughnessPredicate(ComparisonType.FEWER_THAN, xValue + 1));
         ability.getTargets().clear();
@@ -75,7 +76,7 @@ class FinaleOfEternityEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (source.getManaCostsToPay().getX() < 10) {
+        if (CardUtil.getSourceCostsTag(game, source, "X", 0) < 10) {
             return true;
         }
         Player player = game.getPlayer(source.getControllerId());

@@ -96,7 +96,7 @@ class BecomeMonstrousSourceEffect extends OneShotEffect {
         int monstrosityValue = ((MonstrosityAbility) source).getMonstrosityValue();
         // handle monstrosity = X
         if (monstrosityValue == Integer.MAX_VALUE) {
-            monstrosityValue = source.getManaCostsToPay().getX();
+            monstrosityValue = CardUtil.getSourceCostsTag(game, source, "X", 0);
         }
         permanent.addCounters(
                 CounterType.P1P1.createInstance(monstrosityValue),

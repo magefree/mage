@@ -17,6 +17,7 @@ import mage.game.Game;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetadjustment.TargetAdjuster;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -68,6 +69,6 @@ enum GhostLitDrifterAdjuster implements TargetAdjuster {
     @Override
     public void adjustTargets(Ability ability, Game game) {
         ability.getTargets().clear();
-        ability.addTarget(new TargetCreaturePermanent(ability.getManaCostsToPay().getX()));
+        ability.addTarget(new TargetCreaturePermanent(CardUtil.getSourceCostsTag(game, ability, "X", 0)));
     }
 }

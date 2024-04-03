@@ -16,6 +16,7 @@ import mage.players.Player;
 import mage.target.common.TargetArtifactPermanent;
 import mage.target.targetadjustment.TargetAdjuster;
 import mage.target.targetpointer.FixedTargets;
+import mage.util.CardUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,7 +54,7 @@ enum RedSunsTwilightAdjuster implements TargetAdjuster {
     @Override
     public void adjustTargets(Ability ability, Game game) {
         ability.getTargets().clear();
-        int xValue = ability.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, ability, "X", 0);
         // Select up to X artifacts
         ability.addTarget(new TargetArtifactPermanent(0, xValue));
     }
@@ -79,7 +80,7 @@ class RedSunsTwilightEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int xValue = source.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, source, "X", 0);
         Player player = game.getPlayer(source.getControllerId());
         if (player == null) {
             return false;

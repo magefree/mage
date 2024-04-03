@@ -21,6 +21,7 @@ import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetadjustment.TargetAdjuster;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -54,7 +55,7 @@ enum PostmortemLungeAdjuster implements TargetAdjuster {
     @Override
     public void adjustTargets(Ability ability, Game game) {
         ability.getTargets().clear();
-        int xValue = ability.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, ability, "X", 0);
         FilterCard filter = new FilterCreatureCard("creature card with mana value " + xValue + " or less from your graveyard");
         filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, xValue + 1));
         ability.getTargets().add(new TargetCardInYourGraveyard(filter));

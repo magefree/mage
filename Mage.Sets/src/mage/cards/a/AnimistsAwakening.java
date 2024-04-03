@@ -1,9 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.SpellMasteryCondition;
@@ -16,6 +13,11 @@ import mage.filter.common.FilterLandCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.util.CardUtil;
+
+import java.util.LinkedHashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -61,7 +63,7 @@ class AnimistsAwakeningEffect extends OneShotEffect {
             return false;
         }
         Cards cards = new CardsImpl();
-        int xValue = source.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, source, "X", 0);
         cards.addAllCards(controller.getLibrary().getTopCards(game, xValue));
         if (!cards.isEmpty()) {
             controller.revealCards(sourceObject.getIdName(), cards, game);

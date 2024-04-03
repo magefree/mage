@@ -1,6 +1,5 @@
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.ImproviseAbility;
@@ -18,6 +17,9 @@ import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -66,7 +68,7 @@ class SaheelisDirectiveEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        int xValue = source.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, source, "X", 0);
         Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, xValue));
         if (!cards.isEmpty()) {
             controller.revealCards(source, cards, game);

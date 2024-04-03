@@ -11,10 +11,9 @@ import mage.constants.Outcome;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.BlockedPredicate;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetadjustment.TargetAdjuster;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -52,7 +51,7 @@ enum OutmaneuverAdjuster implements TargetAdjuster {
     @Override
     public void adjustTargets(Ability ability, Game game) {
         ability.getTargets().clear();
-        int numberOfTargets = ability.getManaCostsToPay().getX();
+        int numberOfTargets = CardUtil.getSourceCostsTag(game, ability, "X", 0);
         ability.addTarget(new TargetCreaturePermanent(numberOfTargets, numberOfTargets, filter, false));
     }
 }

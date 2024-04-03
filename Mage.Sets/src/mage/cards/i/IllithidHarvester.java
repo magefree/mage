@@ -25,6 +25,7 @@ import mage.game.permanent.Permanent;
 import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetadjustment.TargetAdjuster;
+import mage.util.CardUtil;
 
 import java.util.Arrays;
 import java.util.UUID;
@@ -80,7 +81,7 @@ enum IllithidHarvesterAdjuster implements TargetAdjuster {
     @Override
     public void adjustTargets(Ability ability, Game game) {
         ability.getTargets().clear();
-        int xValue = ability.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, ability, "X", 0);
         ability.addTarget(new TargetCreaturePermanent(xValue, xValue));
     }
 }

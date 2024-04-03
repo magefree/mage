@@ -12,6 +12,7 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetadjustment.TargetAdjuster;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -51,7 +52,7 @@ enum ChokingVinesAdjuster implements TargetAdjuster {
     @Override
     public void adjustTargets(Ability ability, Game game) {
         ability.getTargets().clear();
-        int x = ability.getManaCostsToPay().getX();
+        int x = CardUtil.getSourceCostsTag(game, ability, "X", 0);
         ability.addTarget(new TargetCreaturePermanent(x, x, StaticFilters.FILTER_ATTACKING_CREATURES, false));
     }
 }

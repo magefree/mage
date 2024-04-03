@@ -9,6 +9,7 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.target.common.TargetCardInASingleGraveyard;
 import mage.target.targetadjustment.TargetAdjuster;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -40,7 +41,7 @@ enum RatsFeastAdjuster implements TargetAdjuster {
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        int xValue = ability.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, ability, "X", 0);
         ability.getTargets().clear();
         ability.addTarget(new TargetCardInASingleGraveyard(xValue, xValue, StaticFilters.FILTER_CARD_CARDS));
     }

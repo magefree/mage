@@ -12,6 +12,7 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetadjustment.TargetAdjuster;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -49,7 +50,7 @@ enum WildestDreamsAdjuster implements TargetAdjuster {
     public void adjustTargets(Ability ability, Game game) {
         ability.getTargets().clear();
         ability.addTarget(new TargetCardInYourGraveyard(
-                ability.getManaCostsToPay().getX(),
+                CardUtil.getSourceCostsTag(game, ability, "X", 0),
                 StaticFilters.FILTER_CARD_FROM_YOUR_GRAVEYARD
         ));
     }

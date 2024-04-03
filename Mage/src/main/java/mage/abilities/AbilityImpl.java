@@ -245,7 +245,7 @@ public abstract class AbilityImpl implements Ability {
         // For Flashback ability can be set X before, so the X costs have to be restored for the flashbacked ability
         if (noMana) {
             if (!this.getManaCostsToPay().getVariableCosts().isEmpty()) {
-                int xValue = this.getManaCostsToPay().getX();
+                int xValue = CardUtil.getSourceCostsTag(game, this, "X", 0);
                 this.clearManaCostsToPay();
                 VariableManaCost xCosts = new VariableManaCost(VariableCostType.ADDITIONAL);
                 // no x events - rules from Unbound Flourishing:

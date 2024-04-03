@@ -15,6 +15,7 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetOpponent;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -54,7 +55,7 @@ enum AbandonHopeAdjuster implements CostAdjuster {
 
     @Override
     public void adjustCosts(Ability ability, Game game) {
-        int xValue = ability.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, ability, "X", 0);
         if (xValue > 0) {
             ability.addCost(new DiscardTargetCost(new TargetCardInHand(xValue, xValue, StaticFilters.FILTER_CARD_CARDS)));
         }

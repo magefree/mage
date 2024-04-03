@@ -16,6 +16,7 @@ import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.target.TargetPermanent;
 import mage.target.targetadjustment.TargetAdjuster;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -58,7 +59,7 @@ enum MarchOfOtherworldlyLightAdjuster implements TargetAdjuster {
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        int xValue = ability.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, ability, "X", 0);
         FilterPermanent filter = new FilterPermanent(
                 "artifact, creature, or enchantment with mana value " + xValue + " or less"
         );

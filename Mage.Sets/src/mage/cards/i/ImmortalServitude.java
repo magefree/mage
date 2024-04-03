@@ -11,6 +11,7 @@ import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 import java.util.Objects;
 import java.util.Set;
@@ -60,7 +61,7 @@ class ImmortalServitudeEffect extends OneShotEffect {
         if (you == null) {
             return false;
         }
-        int count = source.getManaCostsToPay().getX();
+        int count = CardUtil.getSourceCostsTag(game, source, "X", 0);
         Set<Card> cards = you.getGraveyard().getCards(StaticFilters.FILTER_CARD_CREATURE, game);
         cards.removeIf(Objects::isNull);
         cards.removeIf(card -> !card.isCreature(game));

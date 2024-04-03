@@ -15,6 +15,7 @@ import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.target.TargetPermanent;
 import mage.target.targetadjustment.TargetAdjuster;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -48,7 +49,7 @@ enum MolderAdjuster implements TargetAdjuster {
     @Override
     public void adjustTargets(Ability ability, Game game) {
         ability.getTargets().clear();
-        int xValue = ability.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, ability, "X", 0);
         FilterPermanent filter = new FilterArtifactOrEnchantmentPermanent("artifact or enchantment with mana value " + xValue);
         filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, xValue));
         ability.addTarget(new TargetPermanent(filter));

@@ -11,6 +11,7 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetadjustment.TargetAdjuster;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -44,7 +45,7 @@ enum DregsOfSorrowAdjuster implements TargetAdjuster {
     @Override
     public void adjustTargets(Ability ability, Game game) {
         ability.getTargets().clear();
-        int xValue = ability.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, ability, "X", 0);
         ability.addTarget(new TargetCreaturePermanent(xValue, xValue, StaticFilters.FILTER_PERMANENT_CREATURES_NON_BLACK, false));
     }
 }

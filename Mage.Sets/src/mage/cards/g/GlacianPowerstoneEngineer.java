@@ -21,6 +21,7 @@ import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetControlledPermanent;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -80,7 +81,7 @@ class GlacianPowerstoneEngineerEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        int xValue = source.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, source, "X", 0);
         for (Cost cost : source.getCosts()) {
             if (cost instanceof GlacianPowerstoneEngineerCost) {
                 xValue = ((GlacianPowerstoneEngineerCost) cost).getAmount();

@@ -1,6 +1,5 @@
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.Effect;
@@ -21,6 +20,9 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.EwokToken;
 import mage.players.Player;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -78,7 +80,7 @@ class TheBattleOfEndorEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterControlledCreaturePermanent(), source.getControllerId(), source, game)) {
-                permanent.addCounters(CounterType.P1P1.createInstance(source.getManaCostsToPay().getX()), source.getControllerId(), source, game);
+                permanent.addCounters(CounterType.P1P1.createInstance(CardUtil.getSourceCostsTag(game, source, "X", 0)), source.getControllerId(), source, game);
             }
             return true;
         }

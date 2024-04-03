@@ -2,9 +2,12 @@ package mage.cards.e;
 
 import mage.abilities.Ability;
 import mage.abilities.Mode;
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -14,11 +17,9 @@ import mage.game.Game;
 import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetadjustment.TargetAdjuster;
+import mage.util.CardUtil;
 
 import java.util.UUID;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
-import mage.abilities.effects.common.continuous.BoostTargetEffect;
 
 /**
  * @author TheElk801
@@ -63,7 +64,7 @@ enum ErebossInterventionAdjuster implements TargetAdjuster {
         }
         mode.getTargets().clear();
         mode.addTarget(new TargetCardInGraveyard(
-                0, 2 * ability.getManaCostsToPay().getX(), StaticFilters.FILTER_CARD_CARDS
+                0, 2 * CardUtil.getSourceCostsTag(game, ability, "X", 0), StaticFilters.FILTER_CARD_CARDS
         ));
     }
 }

@@ -24,6 +24,7 @@ import mage.game.permanent.PermanentCard;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetadjustment.TargetAdjuster;
+import mage.util.CardUtil;
 import mage.util.functions.CopyApplier;
 
 import java.util.UUID;
@@ -71,7 +72,7 @@ enum LikenessLooterAdjuster implements TargetAdjuster {
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        int xValue = ability.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, ability, "X", 0);
         FilterCard filterCard = new FilterCreatureCard("creature card in your graveyard  with mana value " + xValue);
         filterCard.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, xValue));
         ability.getTargets().clear();
