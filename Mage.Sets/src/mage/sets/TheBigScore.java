@@ -31,6 +31,7 @@ public final class TheBigScore extends ExpansionSet {
         cards.add(new SetCardInfo("Lost Jitte", 53, Rarity.MYTHIC, mage.cards.l.LostJitte.class));
         cards.add(new SetCardInfo("Lotus Ring", 24, Rarity.MYTHIC, mage.cards.l.LotusRing.class));
         cards.add(new SetCardInfo("Molten Duplication", 14, Rarity.MYTHIC, mage.cards.m.MoltenDuplication.class));
+        cards.add(new SetCardInfo("Nexus of Becoming", 25, Rarity.MYTHIC, mage.cards.n.NexusOfBecoming.class));
         cards.add(new SetCardInfo("Oltec Matterweaver", 3, Rarity.MYTHIC, mage.cards.o.OltecMatterweaver.class));
         cards.add(new SetCardInfo("Omenpath Journey", 18, Rarity.MYTHIC, mage.cards.o.OmenpathJourney.class));
         cards.add(new SetCardInfo("Pest Control", 22, Rarity.MYTHIC, mage.cards.p.PestControl.class));
