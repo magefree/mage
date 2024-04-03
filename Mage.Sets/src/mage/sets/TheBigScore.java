@@ -26,6 +26,7 @@ public final class TheBigScore extends ExpansionSet {
         cards.add(new SetCardInfo("Grand Abolisher", 2, Rarity.MYTHIC, mage.cards.g.GrandAbolisher.class));
         cards.add(new SetCardInfo("Legion Extruder", 12, Rarity.MYTHIC, mage.cards.l.LegionExtruder.class));
         cards.add(new SetCardInfo("Loot, the Key to Everything", 21, Rarity.MYTHIC, mage.cards.l.LootTheKeyToEverything.class));
+        cards.add(new SetCardInfo("Lost Jitte", 53, Rarity.MYTHIC, mage.cards.l.LostJitte.class));
         cards.add(new SetCardInfo("Lotus Ring", 24, Rarity.MYTHIC, mage.cards.l.LotusRing.class));
         cards.add(new SetCardInfo("Oltec Matterweaver", 3, Rarity.MYTHIC, mage.cards.o.OltecMatterweaver.class));
         cards.add(new SetCardInfo("Pest Control", 22, Rarity.MYTHIC, mage.cards.p.PestControl.class));
