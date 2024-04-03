@@ -22,7 +22,7 @@ import java.util.UUID;
 public final class SimulacrumSynthesizer extends CardImpl {
 
     private static final FilterPermanent filter =
-            new FilterArtifactPermanent("another artifact with mana value 3 or more");
+            new FilterArtifactPermanent("another artifact with mana value 3 or greater");
 
     static {
         filter.add(AnotherPredicate.instance);

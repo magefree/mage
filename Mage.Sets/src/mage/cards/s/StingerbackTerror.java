@@ -40,8 +40,7 @@ public final class StingerbackTerror extends CardImpl {
 
         // Stingerback Terror gets -1/-1 for each card in your hand.
         this.addAbility(new SimpleStaticAbility(new BoostSourceEffect(
-                xValue, xValue, Duration.WhileOnBattlefield,
-                "{this} gets -1/-1 for each card in your hand"
+                xValue, xValue, Duration.WhileOnBattlefield
         )));
 
         // Plot {2}{R}

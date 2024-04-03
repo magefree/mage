@@ -62,7 +62,7 @@ class AssimilationAegisETBEffect extends OneShotEffect {
 
     AssimilationAegisETBEffect() {
         super(Outcome.Exile);
-        staticText = "exile up to one other target creature until {this} leaves the battlefield.";
+        staticText = "exile up to one target creature until {this} leaves the battlefield.";
     }
 
     private AssimilationAegisETBEffect(final AssimilationAegisETBEffect effect) {
@@ -95,7 +95,7 @@ class AssimilationAegisEffect extends OneShotEffect {
     AssimilationAegisEffect() {
         super(Outcome.Benefit);
         staticText = "for as long as {this} remains attached to it, " +
-                "that creature become a copy of a creature exiled with {this}";
+                "that creature becomes a copy of a creature card exiled with {this}";
     }
 
     private AssimilationAegisEffect(final AssimilationAegisEffect effect) {

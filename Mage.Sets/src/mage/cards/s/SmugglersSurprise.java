@@ -51,7 +51,7 @@ public final class SmugglersSurprise extends CardImpl {
 
         // + {2} -- Mill four cards. You may put up to two creature and/or land cards from among the milled cards into your hand.
         this.getSpellAbility().addEffect(new MillThenPutInHandEffect(
-                4, filterCard, null, true, 4
+                4, filterCard, null, true, 2
         ));
         this.getSpellAbility().withFirstModeCost(new GenericManaCost(2));
 

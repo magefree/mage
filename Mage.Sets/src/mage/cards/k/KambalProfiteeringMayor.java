@@ -94,6 +94,9 @@ class KambalProfiteeringMayorTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeBatchEvent zEvent = (ZoneChangeBatchEvent) event;
         Player controller = game.getPlayer(this.controllerId);
+        if (controller == null) {
+            return false;
+        }
         List<UUID> tokensIds = zEvent.getEvents()
                 .stream()
                 .filter(zce -> zce.getToZone() == Zone.BATTLEFIELD             // keep enter the battlefield

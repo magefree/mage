@@ -47,7 +47,7 @@ class PitilessCarnageEffect extends OneShotEffect {
 
     PitilessCarnageEffect() {
         super(Outcome.Benefit);
-        staticText = "sacrifice any number of permanents you control, then that many cards";
+        staticText = "sacrifice any number of permanents you control, then draw that many cards";
     }
 
     private PitilessCarnageEffect(final PitilessCarnageEffect effect) {

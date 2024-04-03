@@ -38,6 +38,7 @@ public final class DuelistOfTheMind extends CardImpl {
         // Duelist of the Mind's power is equal to the number of cards you've drawn this turn.
         this.addAbility(new SimpleStaticAbility(
                 Zone.ALL, new SetBasePowerSourceEffect(CardsDrawnThisTurnDynamicValue.instance)
+                .setText("{this}'s power is equal to the number of cards you've drawn this turn")
         ).addHint(CardsDrawnThisTurnDynamicValue.getHint()));
 
         // Whenever you commit a crime, you may draw a card. If you do, discard a card. This ability triggers only once each turn.

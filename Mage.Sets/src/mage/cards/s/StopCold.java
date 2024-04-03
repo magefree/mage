@@ -40,7 +40,7 @@ public final class StopCold extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget));
 
         // When Stop Cold enters the battlefield, tap enchanted permanent.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new TapEnchantedEffect()));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new TapEnchantedEffect("permanent")));
 
         // Enchanted permanent loses all abilities and doesn't untap during its controller's untap step.
         Ability ability = new SimpleStaticAbility(new StopColdEffect());

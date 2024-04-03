@@ -93,7 +93,7 @@ class LilahUndefeatedSlickshotTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever you cast an instant or sorcery spell from your hand, "
+        return "Whenever you cast a multicolored instant or sorcery spell from your hand, "
                 + "exile that spell instead of putting it into your graveyard as it resolves. "
                 + "If you do, it becomes plotted.";
     }

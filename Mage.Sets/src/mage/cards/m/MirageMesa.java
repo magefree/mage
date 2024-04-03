@@ -27,7 +27,7 @@ public final class MirageMesa extends CardImpl {
 
         // Mirage Mesa enters the battlefield tapped. As it enters, choose a color.
         Ability ability = new EntersBattlefieldTappedAbility(
-                "{this} enters the battlefield tapped. As it enters, choose a color"
+                "{this} enters the battlefield tapped. As it enters, choose a color."
         );
         ability.addEffect(new ChooseColorEffect(Outcome.Benefit));
         this.addAbility(ability);
