@@ -36,5 +36,6 @@ public final class TheBigScore extends ExpansionSet {
         cards.add(new SetCardInfo("Simulacrum Synthesizer", 6, Rarity.MYTHIC, mage.cards.s.SimulacrumSynthesizer.class));
         cards.add(new SetCardInfo("Torpor Orb", 27, Rarity.MYTHIC, mage.cards.t.TorporOrb.class));
         cards.add(new SetCardInfo("Vaultborn Tyrant", 20, Rarity.MYTHIC, mage.cards.v.VaultbornTyrant.class));
+        cards.add(new SetCardInfo("Worldwalker Helm", 7, Rarity.MYTHIC, mage.cards.w.WorldwalkerHelm.class));
     }
 }
