@@ -31,6 +31,7 @@ public final class TheBigScore extends ExpansionSet {
         cards.add(new SetCardInfo("Loot, the Key to Everything", 21, Rarity.MYTHIC, mage.cards.l.LootTheKeyToEverything.class));
         cards.add(new SetCardInfo("Lost Jitte", 53, Rarity.MYTHIC, mage.cards.l.LostJitte.class));
         cards.add(new SetCardInfo("Lotus Ring", 24, Rarity.MYTHIC, mage.cards.l.LotusRing.class));
+        cards.add(new SetCardInfo("Memory Vessel", 13, Rarity.MYTHIC, mage.cards.m.MemoryVessel.class));
         cards.add(new SetCardInfo("Molten Duplication", 14, Rarity.MYTHIC, mage.cards.m.MoltenDuplication.class));
         cards.add(new SetCardInfo("Nexus of Becoming", 25, Rarity.MYTHIC, mage.cards.n.NexusOfBecoming.class));
         cards.add(new SetCardInfo("Oltec Matterweaver", 3, Rarity.MYTHIC, mage.cards.o.OltecMatterweaver.class));
