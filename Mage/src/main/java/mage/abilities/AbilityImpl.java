@@ -438,7 +438,7 @@ public abstract class AbilityImpl implements Ability {
             game.informPlayers(announceString);
         }
         if (variableManaCost != null) {
-            int xValue = getManaCostsToPay().getX();
+            int xValue = CardUtil.getSourceCostsTag(game, this, "X", 0);
             game.informPlayers(controller.getLogName() + " announces a value of " + xValue + " for " + variableManaCost.getText()
                     + CardUtil.getSourceLogName(game, this));
         }
