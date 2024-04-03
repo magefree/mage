@@ -1,8 +1,6 @@
 package mage.cards.v;
 
-import mage.abilities.Ability;
 import mage.abilities.common.SagaAbility;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileAllEffect;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.cards.*;
@@ -11,12 +9,6 @@ import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.util.CardUtil;
-import java.util.LinkedHashSet;
-import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -39,7 +31,9 @@ public final class Vault75MiddleSchool extends CardImpl {
         SagaAbility sagaAbility = new SagaAbility(this);
 
         // I -- Exile all creatures with power 4 or greater.
-        sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_I, new ExileAllEffect(filterCreatureWithPower4OrGreater));
+        sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_I,
+                new ExileAllEffect(filterCreatureWithPower4OrGreater)
+        );
 
         // II, III -- Put a +1/+1 counter on each creature you control.
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_II, SagaChapter.CHAPTER_III,
