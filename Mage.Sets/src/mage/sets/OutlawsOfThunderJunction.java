@@ -148,6 +148,7 @@ public final class OutlawsOfThunderJunction extends ExpansionSet {
         cards.add(new SetCardInfo("Kellan Joins Up", 212, Rarity.RARE, mage.cards.k.KellanJoinsUp.class));
         cards.add(new SetCardInfo("Kraum, Violent Cacophony", 214, Rarity.UNCOMMON, mage.cards.k.KraumViolentCacophony.class));
         cards.add(new SetCardInfo("Lassoed by the Law", 18, Rarity.UNCOMMON, mage.cards.l.LassoedByTheLaw.class));
+        cards.add(new SetCardInfo("Laughing Jasper Flint", 215, Rarity.RARE, mage.cards.l.LaughingJasperFlint.class));
         cards.add(new SetCardInfo("Lavaspur Boots", 243, Rarity.UNCOMMON, mage.cards.l.LavaspurBoots.class));
         cards.add(new SetCardInfo("Lilah, Undefeated Slickshot", 217, Rarity.RARE, mage.cards.l.LilahUndefeatedSlickshot.class));
         cards.add(new SetCardInfo("Lively Dirge", 93, Rarity.UNCOMMON, mage.cards.l.LivelyDirge.class));
