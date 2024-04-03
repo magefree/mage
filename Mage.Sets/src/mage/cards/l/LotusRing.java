@@ -45,6 +45,7 @@ public final class LotusRing extends CardImpl {
         ability.addEffect(new GainAbilityAttachedEffect(
                 manaAbility, AttachmentType.EQUIPMENT
         ).setText("and \"{T}, Sacrifice this creature: Add three mana of any one color.\""));
+        this.addAbility(ability);
 
         // Equip {3}
         this.addAbility(new EquipAbility(3));
