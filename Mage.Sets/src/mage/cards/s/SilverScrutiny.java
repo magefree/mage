@@ -1,6 +1,5 @@
 package mage.cards.s;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.CastAsThoughItHadFlashIfConditionAbility;
 import mage.abilities.condition.Condition;
@@ -11,6 +10,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.game.Game;
 import mage.game.stack.Spell;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -52,6 +52,6 @@ enum SilverScrutinyCondition implements Condition {
         if (spell == null) {
             return false;
         }
-        return spell.getStackAbility().getManaCostsToPay().getX() < 4;
+        return CardUtil.getSourceCostsTag(game, spell.getStackAbility(), "X", 0) < 4;
     }
 }
