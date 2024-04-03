@@ -29,7 +29,7 @@ import java.util.UUID;
  */
 public final class TheGooseMother extends CardImpl {
 
-    private static final DynamicValue halfX = new HalfValue(ManacostVariableValue.ETB, true);
+    private static final DynamicValue halfX = new HalfValue(ManacostVariableValue.instance, true);
 
     public TheGooseMother(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{X}{G}{U}");

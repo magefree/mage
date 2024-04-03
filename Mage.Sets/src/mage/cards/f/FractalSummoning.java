@@ -21,7 +21,7 @@ public final class FractalSummoning extends CardImpl {
 
         // Create a 0/0 green and blue Fractal creature token. Put X +1/+1 counters on it.
         this.getSpellAbility().addEffect(FractalToken.getEffect(
-                ManacostVariableValue.REGULAR, "Put X +1/+1 counters on it"
+                ManacostVariableValue.instance, "Put X +1/+1 counters on it"
         ));
     }
 

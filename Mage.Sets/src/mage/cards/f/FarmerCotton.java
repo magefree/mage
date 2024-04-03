@@ -32,10 +32,10 @@ public final class FarmerCotton extends CardImpl {
 
         // When Farmer Cotton enters the battlefield, create X 1/1 white Halfling creature tokens and X Food tokens.
         TriggeredAbility trigger = new EntersBattlefieldTriggeredAbility(
-            new CreateTokenEffect(new HalflingToken(), ManacostVariableValue.ETB)
+            new CreateTokenEffect(new HalflingToken(), ManacostVariableValue.instance)
         );
         trigger.addEffect(
-            new CreateTokenEffect(new FoodToken(), ManacostVariableValue.ETB)
+            new CreateTokenEffect(new FoodToken(), ManacostVariableValue.instance)
                 .setText("and X Food tokens")
         );
 

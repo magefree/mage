@@ -7,12 +7,7 @@ import mage.game.Game;
 import mage.util.CardUtil;
 
 public enum ManacostVariableValue implements DynamicValue {
-    //TODO: all three of these variants plus GetXValue, GetKickerXValue, and GetXLoyaltyValue use the same logic
-    // and should be consolidated into a single instance
-    REGULAR, // if you need X on cast/activate (in stack) - reset each turn
-    ETB, // if you need X after ETB (in battlefield) - reset each turn
-    END_GAME; // if you need X until end game - keep data forever
-
+    instance;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {

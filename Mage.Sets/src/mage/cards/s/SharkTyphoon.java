@@ -1,6 +1,7 @@
 package mage.cards.s;
 
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.common.ZoneChangeTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;

@@ -23,7 +23,7 @@ public final class SpitefulBanditry extends CardImpl {
 
         // When Spiteful Banditry enters the battlefield, it deals X damage to each creature.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DamageAllEffect(
-                ManacostVariableValue.ETB, StaticFilters.FILTER_PERMANENT_CREATURE
+                ManacostVariableValue.instance, StaticFilters.FILTER_PERMANENT_CREATURE
         )));
 
         // Whenever one or more creatures your opponents control die, you create a Treasure token. This ability triggers only once each turn.

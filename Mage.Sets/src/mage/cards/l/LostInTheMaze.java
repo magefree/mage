@@ -70,7 +70,7 @@ enum LostInTheMazeAdjuster implements TargetAdjuster {
     @Override
     public void adjustTargets(Ability ability, Game game) {
         ability.getTargets().clear();
-        ability.addTarget(new TargetCreaturePermanent(ManacostVariableValue.ETB.calculate(game, ability, null)));
+        ability.addTarget(new TargetCreaturePermanent(ManacostVariableValue.instance.calculate(game, ability, null)));
     }
 }
 

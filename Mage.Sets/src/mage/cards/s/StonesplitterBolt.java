@@ -26,8 +26,8 @@ public final class StonesplitterBolt extends CardImpl {
 
         // Stonesplitter Bolt deals X damage to target creature or planeswalker. If this spell was bargained, it deals twice X damage to that permanent instead.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
-                new DamageTargetEffect(new MultipliedValue(ManacostVariableValue.REGULAR, 2)),
-                new DamageTargetEffect(ManacostVariableValue.REGULAR),
+                new DamageTargetEffect(new MultipliedValue(ManacostVariableValue.instance, 2)),
+                new DamageTargetEffect(ManacostVariableValue.instance),
                 BargainedCondition.instance,
                 "{this} deals X damage to target creature or planeswalker. If this spell "
                         + "was bargained, it deals twice X damage to that permanent instead."

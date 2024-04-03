@@ -43,11 +43,11 @@ public final class AlquistProftMasterSleuth extends CardImpl {
 
         // {X}{W}{U}{U}, {T}, Sacrifice a Clue: You draw X cards and gain X life.
         Ability ability = new SimpleActivatedAbility(
-                new DrawCardSourceControllerEffect(ManacostVariableValue.REGULAR, "you"), new ManaCostsImpl<>("{X}{W}{U}{U}")
+                new DrawCardSourceControllerEffect(ManacostVariableValue.instance, "you"), new ManaCostsImpl<>("{X}{W}{U}{U}")
         );
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CLUE));
-        ability.addEffect(new GainLifeEffect(ManacostVariableValue.REGULAR).setText("and gain X life"));
+        ability.addEffect(new GainLifeEffect(ManacostVariableValue.instance).setText("and gain X life"));
         this.addAbility(ability);
     }
 

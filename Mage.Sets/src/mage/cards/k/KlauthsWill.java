@@ -43,7 +43,7 @@ public final class KlauthsWill extends CardImpl {
         this.getSpellAbility().getModes().setMoreCondition(ControlACommanderCondition.instance);
 
         // • Breathe Flame — Klauth's Will deals X damage to each creature without flying.
-        this.getSpellAbility().addEffect(new DamageAllEffect(ManacostVariableValue.REGULAR, filter));
+        this.getSpellAbility().addEffect(new DamageAllEffect(ManacostVariableValue.instance, filter));
         this.getSpellAbility().withFirstModeFlavorWord("Breathe Flame");
 
         // • Smash Relics — Destroy up to X target artifacts and/or enchantments.

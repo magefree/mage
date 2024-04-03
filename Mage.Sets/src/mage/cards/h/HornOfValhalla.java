@@ -39,7 +39,7 @@ public final class HornOfValhalla extends AdventureCard {
         // Ysgard's Call
         // Create X 1/1 white Soldier creature tokens.
         this.getSpellCard().getSpellAbility().addEffect(new CreateTokenEffect(
-                new SoldierToken(), ManacostVariableValue.REGULAR
+                new SoldierToken(), ManacostVariableValue.instance
         ));
         
         this.finalizeAdventure();

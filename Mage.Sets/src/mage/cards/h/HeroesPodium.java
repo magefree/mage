@@ -47,7 +47,7 @@ public final class HeroesPodium extends CardImpl {
         // You may reveal a legendary creature card from among them and put it into your hand.
         // Put the rest on the bottom of your library in a random order.
         Ability ability = new SimpleActivatedAbility(
-                new LookLibraryAndPickControllerEffect(ManacostVariableValue.REGULAR, 1, filter2, PutCards.HAND, PutCards.BOTTOM_RANDOM),
+                new LookLibraryAndPickControllerEffect(ManacostVariableValue.instance, 1, filter2, PutCards.HAND, PutCards.BOTTOM_RANDOM),
                 new ManaCostsImpl<>("{X}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

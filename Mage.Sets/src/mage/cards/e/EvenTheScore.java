@@ -34,7 +34,7 @@ public final class EvenTheScore extends CardImpl {
         ).setRuleAtTheTop(true));
 
         // Draw X cards.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(ManacostVariableValue.REGULAR));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(ManacostVariableValue.instance));
     }
 
     private EvenTheScore(final EvenTheScore card) {

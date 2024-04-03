@@ -28,7 +28,7 @@ import java.util.UUID;
  */
 public final class ShatterskullSmashing extends ModalDoubleFacedCard {
 
-    private static final DynamicValue xValue = new MultipliedValue(ManacostVariableValue.REGULAR, 2);
+    private static final DynamicValue xValue = new MultipliedValue(ManacostVariableValue.instance, 2);
 
     public ShatterskullSmashing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo,
@@ -42,7 +42,7 @@ public final class ShatterskullSmashing extends ModalDoubleFacedCard {
 
         // Shatterskull Smashing deals X damage divided as you choose among up to two target creatures and/or planeswalkers. If X is 6 or more, Shatterskull Smashing deals twice X damage divided as you choose among them instead.
         this.getLeftHalfCard().getSpellAbility().addEffect(new ConditionalOneShotEffect(
-                new DamageMultiEffect(xValue), new DamageMultiEffect(ManacostVariableValue.REGULAR),
+                new DamageMultiEffect(xValue), new DamageMultiEffect(ManacostVariableValue.instance),
                 ShatterskullSmashingCondition.instance, "{this} deals X damage divided as you choose " +
                 "among up to two target creatures and/or planeswalkers. If X is 6 or more, " +
                 "{this} deals twice X damage divided as you choose among them instead."

@@ -25,7 +25,7 @@ public final class DregsOfSorrow extends CardImpl {
 
         // Destroy X target nonblack creatures. Draw X cards.
         this.getSpellAbility().addEffect(new DestroyTargetEffect("Destroy X target nonblack creatures"));
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(ManacostVariableValue.REGULAR));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(ManacostVariableValue.instance));
         this.getSpellAbility().setTargetAdjuster(DregsOfSorrowAdjuster.instance);
     }
 

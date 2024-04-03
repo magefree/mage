@@ -32,7 +32,7 @@ public final class DivinersPortent extends CardImpl {
         this.getSpellAbility().addEffect(effect);
 
         // 1-14 | Draw X cards.
-        effect.addTableEntry(1, 14, new DrawCardSourceControllerEffect(ManacostVariableValue.REGULAR));
+        effect.addTableEntry(1, 14, new DrawCardSourceControllerEffect(ManacostVariableValue.instance));
 
         // 15+ | Scry X, then draw X cards.
         effect.addTableEntry(15, Integer.MAX_VALUE, new DivinersPortentEffect());

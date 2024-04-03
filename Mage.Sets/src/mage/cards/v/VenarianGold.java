@@ -1,5 +1,6 @@
 package mage.cards.v;
 
+import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -24,8 +25,6 @@ import mage.game.stack.StackObject;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.util.CardUtil;
-
-import java.util.UUID;
 
 /**
  * @author L_J
