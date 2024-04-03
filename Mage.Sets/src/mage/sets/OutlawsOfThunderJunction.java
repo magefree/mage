@@ -145,6 +145,7 @@ public final class OutlawsOfThunderJunction extends ExpansionSet {
         cards.add(new SetCardInfo("Jem Lightfoote, Sky Explorer", 209, Rarity.UNCOMMON, mage.cards.j.JemLightfooteSkyExplorer.class));
         cards.add(new SetCardInfo("Jolene, Plundering Pugilist", 210, Rarity.UNCOMMON, mage.cards.j.JolenePlunderingPugilist.class));
         cards.add(new SetCardInfo("Kaervek, the Punisher", 92, Rarity.RARE, mage.cards.k.KaervekThePunisher.class));
+        cards.add(new SetCardInfo("Kambal, Profiteering Mayor", 211, Rarity.RARE, mage.cards.k.KambalProfiteeringMayor.class));
         cards.add(new SetCardInfo("Kellan Joins Up", 212, Rarity.RARE, mage.cards.k.KellanJoinsUp.class));
         cards.add(new SetCardInfo("Kraum, Violent Cacophony", 214, Rarity.UNCOMMON, mage.cards.k.KraumViolentCacophony.class));
         cards.add(new SetCardInfo("Lassoed by the Law", 18, Rarity.UNCOMMON, mage.cards.l.LassoedByTheLaw.class));
