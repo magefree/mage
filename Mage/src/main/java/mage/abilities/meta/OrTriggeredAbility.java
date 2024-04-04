@@ -28,7 +28,6 @@ import java.util.stream.Collectors;
 public class OrTriggeredAbility extends TriggeredAbilityImpl {
 
     private final String ruleTrigger;
-    private final String joiningText;
     private final List<TriggeredAbility> triggeredAbilities = new ArrayList<>();
 
     public OrTriggeredAbility(Zone zone, Effect effect, TriggeredAbility... abilities) {
@@ -36,13 +35,8 @@ public class OrTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     public OrTriggeredAbility(Zone zone, Effect effect, boolean optional, String ruleTrigger, TriggeredAbility... abilities) {
-        this(zone, effect, optional, ruleTrigger, " or ", abilities);
-    }
-
-    public OrTriggeredAbility(Zone zone, Effect effect, boolean optional, String ruleTrigger, String joiningText, TriggeredAbility... abilities) {
         super(zone, effect, optional);
         this.ruleTrigger = ruleTrigger;
-        this.joiningText = joiningText;
         this.replaceRuleText = false;
         Collections.addAll(this.triggeredAbilities, abilities);
         for (TriggeredAbility ability : triggeredAbilities) {
@@ -59,7 +53,6 @@ public class OrTriggeredAbility extends TriggeredAbilityImpl {
     public OrTriggeredAbility(OrTriggeredAbility ability) {
         super(ability);
         this.ruleTrigger = ability.ruleTrigger;
-        this.joiningText = ability.joiningText;
         for (TriggeredAbility triggeredAbility : ability.triggeredAbilities) {
             this.triggeredAbilities.add(triggeredAbility.copy());
         }
@@ -100,7 +93,7 @@ public class OrTriggeredAbility extends TriggeredAbilityImpl {
                 .map(Ability::getRule)
                 .map(CardUtil::getTextWithFirstCharLowerCase)
                 .map(s -> s.substring(0, s.length() - 2))
-                .collect(Collectors.joining(joiningText)) + ", ";
+                .collect(Collectors.joining(" or ")) + ", ";
     }
 
     @Override
