@@ -24,6 +24,7 @@ public final class Vault75MiddleSchool extends CardImpl {
     }
 
     public Vault75MiddleSchool(UUID ownerId, CardSetInfo setInfo) {
+
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
         
         this.subtype.add(SubType.SAGA);
