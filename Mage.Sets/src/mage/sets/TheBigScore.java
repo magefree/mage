@@ -25,6 +25,7 @@ public final class TheBigScore extends ExpansionSet {
         cards.add(new SetCardInfo("Bristlebud Farmer", 17, Rarity.MYTHIC, mage.cards.b.BristlebudFarmer.class));
         cards.add(new SetCardInfo("Collector's Cage", 1, Rarity.MYTHIC, mage.cards.c.CollectorsCage.class));
         cards.add(new SetCardInfo("Esoteric Duplicator", 5, Rarity.MYTHIC, mage.cards.e.EsotericDuplicator.class));
+        cards.add(new SetCardInfo("Generous Plunderer", 11, Rarity.MYTHIC, mage.cards.g.GenerousPlunderer.class));
         cards.add(new SetCardInfo("Grand Abolisher", 2, Rarity.MYTHIC, mage.cards.g.GrandAbolisher.class));
         cards.add(new SetCardInfo("Harvester of Misery", 9, Rarity.MYTHIC, mage.cards.h.HarvesterOfMisery.class));
         cards.add(new SetCardInfo("Hostile Investigator", 10, Rarity.MYTHIC, mage.cards.h.HostileInvestigator.class));
