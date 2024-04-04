@@ -113,6 +113,7 @@ public final class OutlawsOfThunderJunction extends ExpansionSet {
         cards.add(new SetCardInfo("Form a Posse", 204, Rarity.UNCOMMON, mage.cards.f.FormAPosse.class));
         cards.add(new SetCardInfo("Forsaken Miner", 88, Rarity.UNCOMMON, mage.cards.f.ForsakenMiner.class));
         cards.add(new SetCardInfo("Fortune, Loyal Steed", 12, Rarity.RARE, mage.cards.f.FortuneLoyalSteed.class));
+        cards.add(new SetCardInfo("Freestrider Commando", 162, Rarity.COMMON, mage.cards.f.FreestriderCommando.class));
         cards.add(new SetCardInfo("Freestrider Lookout", 163, Rarity.RARE, mage.cards.f.FreestriderLookout.class));
         cards.add(new SetCardInfo("Frontier Seeker", 13, Rarity.UNCOMMON, mage.cards.f.FrontierSeeker.class));
         cards.add(new SetCardInfo("Full Steam Ahead", 164, Rarity.UNCOMMON, mage.cards.f.FullSteamAhead.class));
@@ -235,6 +236,7 @@ public final class OutlawsOfThunderJunction extends ExpansionSet {
         cards.add(new SetCardInfo("Rustler Rampage", 27, Rarity.UNCOMMON, mage.cards.r.RustlerRampage.class));
         cards.add(new SetCardInfo("Ruthless Lawbringer", 229, Rarity.UNCOMMON, mage.cards.r.RuthlessLawbringer.class));
         cards.add(new SetCardInfo("Sandstorm Verge", 263, Rarity.UNCOMMON, mage.cards.s.SandstormVerge.class));
+        cards.add(new SetCardInfo("Satoru, the Infiltrator", 230, Rarity.RARE, mage.cards.s.SatoruTheInfiltrator.class));
         cards.add(new SetCardInfo("Scalestorm Summoner", 144, Rarity.UNCOMMON, mage.cards.s.ScalestormSummoner.class));
         cards.add(new SetCardInfo("Scorching Shot", 145, Rarity.UNCOMMON, mage.cards.s.ScorchingShot.class));
         cards.add(new SetCardInfo("Seize the Secrets", 64, Rarity.COMMON, mage.cards.s.SeizeTheSecrets.class));
