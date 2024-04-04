@@ -1,25 +1,28 @@
 package mage.cards.b;
 
-import java.util.Objects;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 import mage.abilities.Ability;
+import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.abilities.keyword.HasteAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.PutCards;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetCard;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -49,8 +52,6 @@ public final class BreakOut extends CardImpl {
 
 class BreakOutEffect extends OneShotEffect {
 
-    private static final FilterCard filter = new FilterCreatureCard();
-
     BreakOutEffect() {
         super(Outcome.Benefit);
         staticText = "Look at the top six cards of your library. You may reveal a creature card from among them. " +
@@ -78,33 +79,33 @@ class BreakOutEffect extends OneShotEffect {
         Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, 6));
         controller.lookAtCards(source, null, cards, game);
 
-        if (cards.count(filter, source.getControllerId(), source, game) == 0 ||
-                !controller.chooseUse(outcome, "Reveal a creature card?", source, game)) {
-            return PutCards.BOTTOM_RANDOM.moveCards(controller, cards, source, game);
-        }
-
-        TargetCard target = new TargetCard(0, 1, Zone.LIBRARY, filter);
+        TargetCard target = new TargetCard(0, 1, Zone.LIBRARY, StaticFilters.FILTER_CARD_CREATURE);
+        target.withChooseHint("Reveal a creature card?");
         if (!controller.chooseTarget(outcome, cards, target, source, game)) {
             return PutCards.BOTTOM_RANDOM.moveCards(controller, cards, source, game);
         }
 
-        Cards pickedCards = new CardsImpl(target.getTargets());
-        controller.revealCards(source, pickedCards, game);
-        cards.removeAll(pickedCards);
+        Card pickedCard = game.getCard(target.getFirstTarget());
+        if (pickedCard != null) {
+            controller.revealCards(source, new CardsImpl(pickedCard), game);
+            cards.remove(pickedCard);
 
-        Cards battlefieldCards = new CardsImpl(pickedCards
-                .stream()
-                .map(game::getCard)
-                .filter(Objects::nonNull)
-                .filter(card -> card.getManaValue() <= 2)
-                .map(Card::getId)
-                .collect(Collectors.toList()));
-        pickedCards.removeAll(battlefieldCards);
+            if (pickedCard.getManaValue() <= 2 &&
+                    controller.chooseUse(Outcome.PutCardInPlay, "Put it onto the battlefield?", source, game) &&
+                    controller.moveCards(pickedCard, Zone.BATTLEFIELD, source, game)) {
+                Permanent permanent = game.getPermanent(pickedCard.getId());
+                if (permanent != null) {
+                    ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);
+                    effect.setTargetPointer(new FixedTarget(permanent, game));
+                    game.addEffect(effect, source);
+                }
+            } else {
+                controller.moveCards(pickedCard, Zone.HAND, source, game);
+            }
+        }
 
-        boolean result = PutCards.BATTLEFIELD.moveCards(controller, battlefieldCards, source, game);
-        result |= PutCards.HAND.moveCards(controller, pickedCards, source, game);
-        result |= PutCards.BOTTOM_RANDOM.moveCards(controller, cards, source, game);
+        PutCards.BOTTOM_RANDOM.moveCards(controller, cards, source, game);
 
-        return result;
+        return true;
     }
 }
