@@ -204,6 +204,10 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Panharmonicon", 237, Rarity.RARE, mage.cards.p.Panharmonicon.class));
         cards.add(new SetCardInfo("Path of Ancestry", 279, Rarity.COMMON, mage.cards.p.PathOfAncestry.class));
         cards.add(new SetCardInfo("Path to Exile", 169, Rarity.UNCOMMON, mage.cards.p.PathToExile.class));
+        cards.add(new SetCardInfo("Pip-Boy 3000", 140, Rarity.RARE, mage.cards.p.PipBoy3000.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Pip-Boy 3000", 435, Rarity.RARE, mage.cards.p.PipBoy3000.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Pip-Boy 3000", 668, Rarity.RARE, mage.cards.p.PipBoy3000.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Pip-Boy 3000", 963, Rarity.RARE, mage.cards.p.PipBoy3000.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Pitiless Plunderer", 187, Rarity.UNCOMMON, mage.cards.p.PitilessPlunderer.class));
         cards.add(new SetCardInfo("Plains", 317, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Powder Ganger", 65, Rarity.RARE, mage.cards.p.PowderGanger.class));
