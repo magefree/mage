@@ -20,7 +20,7 @@ public class TinybonesThePickpocketTest extends CardTestPlayerBase {
     private static final String tinybones = "Tinybones, the Pickpocket";
 
     @Test
-    public void Test_CastBolt_WithOtherType() {
+    public void test_CastBolt_WithOtherType() {
         setStrictChooseMode(true);
 
         addCard(Zone.BATTLEFIELD, playerA, tinybones);
@@ -40,7 +40,7 @@ public class TinybonesThePickpocketTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void Test_CastPermanent_WithOtherType() {
+    public void test_CastPermanent_WithOtherType() {
         setStrictChooseMode(true);
 
         addCard(Zone.BATTLEFIELD, playerA, tinybones);
@@ -58,7 +58,7 @@ public class TinybonesThePickpocketTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void Test_NoToCast() {
+    public void test_NoToCast() {
         setStrictChooseMode(true);
 
         addCard(Zone.BATTLEFIELD, playerA, tinybones);
