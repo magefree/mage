@@ -245,4 +245,24 @@ public class SatoruTheInfiltratorTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, satoru, 1);
         assertHandCount(playerA, 0); // Drawn 0 from Satoru, as token does not count.
     }
+
+    @Test
+    public void Test_CopySatoruOnStack() {
+        setStrictChooseMode(true);
+
+        addCard(Zone.HAND, playerA, satoru);
+        addCard(Zone.BATTLEFIELD, playerA, "Tropical Island", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
+        // Copy target creature spell you control, except it isn’t legendary if the spell is legendary
+        addCard(Zone.HAND, playerA, "Double Major");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, satoru);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Double Major", satoru);
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, satoru, 2);
+        assertHandCount(playerA, 1); // While Satoru does not trigger on other tokens, a copy of Satoru on the stack will trigger its own etb.
+    }
 }

@@ -105,4 +105,23 @@ public class FreestriderCommandoTest extends CardTestPlayerBase {
         // 2 +1/+1 as cast free with plot, as re-enter without being cast
         assertPowerToughness(playerA, commando, 3 + 2, 3 + 2);
     }
+
+    @Test
+    public void Test_DoubleMajor() {
+        setStrictChooseMode(true);
+
+        addCard(Zone.BATTLEFIELD, playerA, "Tropical Island", 6);
+        addCard(Zone.HAND, playerA, commando);
+        addCard(Zone.HAND, playerA, "Double Major");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, commando);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Double Major", "Freestrider Commando");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, 1); // resolve Double Major + the copy
+        checkPT("double major copy enters as a 5/5", 1, PhaseStep.PRECOMBAT_MAIN, playerA, commando, 3 + 2, 3 + 2);
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, commando, 2); // real + copy
+    }
 }
