@@ -46,6 +46,7 @@ public final class TheBigScore extends ExpansionSet {
         cards.add(new SetCardInfo("Simulacrum Synthesizer", 6, Rarity.MYTHIC, mage.cards.s.SimulacrumSynthesizer.class));
         cards.add(new SetCardInfo("Sword of Wealth and Power", 26, Rarity.MYTHIC, mage.cards.s.SwordOfWealthAndPower.class));
         cards.add(new SetCardInfo("Tarnation Vista", 30, Rarity.MYTHIC, mage.cards.t.TarnationVista.class));
+        cards.add(new SetCardInfo("Territory Forge", 15, Rarity.MYTHIC, mage.cards.t.TerritoryForge.class));
         cards.add(new SetCardInfo("Torpor Orb", 27, Rarity.MYTHIC, mage.cards.t.TorporOrb.class));
         cards.add(new SetCardInfo("Transmutation Font", 28, Rarity.MYTHIC, mage.cards.t.TransmutationFont.class));
         cards.add(new SetCardInfo("Vaultborn Tyrant", 20, Rarity.MYTHIC, mage.cards.v.VaultbornTyrant.class));
