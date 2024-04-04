@@ -1280,6 +1280,7 @@ public final class CardUtil {
         }
     }
 
+    // TODO: use CastManaAdjustment instead of boolean anyColor
     public static void makeCardPlayable(Game game, Ability source, Card card, Duration duration, boolean anyColor) {
         makeCardPlayable(game, source, card, duration, anyColor, null, null);
     }
@@ -1296,6 +1297,7 @@ public final class CardUtil {
      * @param anyColor
      * @param condition can be null
      */
+    // TODO: use CastManaAdjustment instead of boolean anyColor
     public static void makeCardPlayable(Game game, Ability source, Card card, Duration duration, boolean anyColor, UUID playerId, Condition condition) {
         // Effect can be used for cards in zones and permanents on battlefield
         // PermanentCard's ZCC is static, but we need updated ZCC from the card (after moved to another zone)

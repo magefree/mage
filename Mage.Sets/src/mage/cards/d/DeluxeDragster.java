@@ -3,7 +3,7 @@ package mage.cards.d;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleEvasionAbility;
-import mage.abilities.effects.common.MayCastTargetThenExileEffect;
+import mage.abilities.effects.common.MayCastTargetCardEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect;
 import mage.abilities.effects.common.replacement.ThatSpellGraveyardExileReplacementEffect;
 import mage.abilities.keyword.CrewAbility;
@@ -65,7 +65,7 @@ public final class DeluxeDragster extends CardImpl {
 class DeluxeDragsterTriggeredAbility extends TriggeredAbilityImpl {
 
     DeluxeDragsterTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new MayCastTargetThenExileEffect(true)
+        super(Zone.BATTLEFIELD, new MayCastTargetCardEffect(CastManaAdjustment.WITHOUT_PAYING_MANA_COST, true)
                 .setText("you may cast target instant or sorcery card from "
                         + "that player's graveyard without paying its mana cost. "
                         + ThatSpellGraveyardExileReplacementEffect.RULE_A), false);
