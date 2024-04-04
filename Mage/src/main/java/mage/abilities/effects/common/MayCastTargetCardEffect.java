@@ -102,7 +102,7 @@ public class MayCastTargetCardEffect extends OneShotEffect {
                     game.addEffect(effect, source);
                     break;
                 default:
-                    throw new IllegalArgumentException("Wrong code usage, manaAdjustment is not supported: " + manaAdjustment);
+                    throw new IllegalArgumentException("Wrong code usage, manaAdjustment is not yet supported: " + manaAdjustment);
             }
 
             game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
@@ -146,7 +146,7 @@ public class MayCastTargetCardEffect extends OneShotEffect {
                 text += ", and mana of any type can be spent to cast that spell";
                 break;
             default:
-                throw new IllegalArgumentException("Error, manaAdjustment in MayCastTargetThenExileEffect: " + manaAdjustment);
+                throw new IllegalArgumentException("Wrong code usage, manaAdjustment is not yet supported: " + manaAdjustment);
         }
         text += ".";
         if (thenExile) {
