@@ -45,10 +45,12 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Basilica Stalker", 78, Rarity.COMMON, mage.cards.b.BasilicaStalker.class));
         cards.add(new SetCardInfo("Behind the Mask", 39, Rarity.COMMON, mage.cards.b.BehindTheMask.class));
         cards.add(new SetCardInfo("Benthic Criminologists", 40, Rarity.COMMON, mage.cards.b.BenthicCriminologists.class));
+        cards.add(new SetCardInfo("Bite Down on Crime", 154, Rarity.COMMON, mage.cards.b.BiteDownOnCrime.class));
         cards.add(new SetCardInfo("Blood Spatter Analysis", 189, Rarity.RARE, mage.cards.b.BloodSpatterAnalysis.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Blood Spatter Analysis", 413, Rarity.RARE, mage.cards.b.BloodSpatterAnalysis.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bolrac-Clan Basher", 112, Rarity.UNCOMMON, mage.cards.b.BolracClanBasher.class));
         cards.add(new SetCardInfo("Branch of Vitu-Ghazi", 258, Rarity.UNCOMMON, mage.cards.b.BranchOfVituGhazi.class));
+        cards.add(new SetCardInfo("Bubble Smuggler", 41, Rarity.COMMON, mage.cards.b.BubbleSmuggler.class));
         cards.add(new SetCardInfo("Burden of Proof", 42, Rarity.UNCOMMON, mage.cards.b.BurdenOfProof.class));
         cards.add(new SetCardInfo("Buried in the Garden", 191, Rarity.UNCOMMON, mage.cards.b.BuriedInTheGarden.class));
         cards.add(new SetCardInfo("Call a Surprise Witness", 6, Rarity.UNCOMMON, mage.cards.c.CallASurpriseWitness.class, NON_FULL_USE_VARIOUS));
@@ -120,6 +122,7 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Forensic Researcher", 58, Rarity.UNCOMMON, mage.cards.f.ForensicResearcher.class));
         cards.add(new SetCardInfo("Forest", 276, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Forum Familiar", 16, Rarity.UNCOMMON, mage.cards.f.ForumFamiliar.class));
+        cards.add(new SetCardInfo("Frantic Scapegoat", 126, Rarity.UNCOMMON, mage.cards.f.FranticScapegoat.class));
         cards.add(new SetCardInfo("Furtive Courier", 59, Rarity.UNCOMMON, mage.cards.f.FurtiveCourier.class));
         cards.add(new SetCardInfo("Fuss // Bother", 248, Rarity.UNCOMMON, mage.cards.f.FussBother.class));
         cards.add(new SetCardInfo("Gadget Technician", 204, Rarity.COMMON, mage.cards.g.GadgetTechnician.class));
