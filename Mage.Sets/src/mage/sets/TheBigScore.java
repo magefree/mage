@@ -40,6 +40,7 @@ public final class TheBigScore extends ExpansionSet {
         cards.add(new SetCardInfo("Omenpath Journey", 18, Rarity.MYTHIC, mage.cards.o.OmenpathJourney.class));
         cards.add(new SetCardInfo("Pest Control", 22, Rarity.MYTHIC, mage.cards.p.PestControl.class));
         cards.add(new SetCardInfo("Rest in Peace", 4, Rarity.MYTHIC, mage.cards.r.RestInPeace.class));
+        cards.add(new SetCardInfo("Sandstorm Salvager", 19, Rarity.MYTHIC, mage.cards.s.SandstormSalvager.class));
         cards.add(new SetCardInfo("Simulacrum Synthesizer", 6, Rarity.MYTHIC, mage.cards.s.SimulacrumSynthesizer.class));
         cards.add(new SetCardInfo("Sword of Wealth and Power", 26, Rarity.MYTHIC, mage.cards.s.SwordOfWealthAndPower.class));
         cards.add(new SetCardInfo("Tarnation Vista", 30, Rarity.MYTHIC, mage.cards.t.TarnationVista.class));
