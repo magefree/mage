@@ -17,11 +17,12 @@ import java.util.UUID;
  */
 public final class Vault75MiddleSchool extends CardImpl {
 
-    private static final FilterCreaturePermanent filterCreatureWithPower4OrGreater = new FilterCreaturePermanent("creatures with power 4 or greater");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures with power 4 or greater");
 
     static {
-        filterCreatureWithPower4OrGreater.add(new PowerPredicate(ComparisonType.MORE_THAN, 3));
+        filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 3));
     }
+
     public Vault75MiddleSchool(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
         
@@ -32,7 +33,7 @@ public final class Vault75MiddleSchool extends CardImpl {
 
         // I -- Exile all creatures with power 4 or greater.
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_I,
-                new ExileAllEffect(filterCreatureWithPower4OrGreater)
+                new ExileAllEffect(filter)
         );
 
         // II, III -- Put a +1/+1 counter on each creature you control.
@@ -48,6 +49,8 @@ public final class Vault75MiddleSchool extends CardImpl {
     }
 
     @Override
-    public Vault75MiddleSchool copy() { return new Vault75MiddleSchool(this); }
+    public Vault75MiddleSchool copy() {
+        return new Vault75MiddleSchool(this);
+    }
 
 }
