@@ -8,6 +8,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
+import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.card.OwnerIdPredicate;
 import mage.game.Game;
@@ -89,7 +90,7 @@ class TinybonesThePickpocketTriggeredAbility extends TriggeredAbilityImpl {
         if (damagedPlayer == null) {
             return false;
         }
-        FilterCard filter = new FilterCard("nonland permanent card from " + damagedPlayer.getName() + "'s graveyard");
+        FilterCard filter = new FilterPermanentCard("nonland permanent card from " + damagedPlayer.getName() + "'s graveyard");
         filter.add(new OwnerIdPredicate(damagedPlayer.getId()));
         filter.add(Predicates.not(CardType.LAND.getPredicate()));
         Target target = new TargetCardInGraveyard(filter);

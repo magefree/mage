@@ -25,7 +25,7 @@ public class MayCastTargetCardEffect extends OneShotEffect {
 
     private final CastManaAdjustment manaAdjustment;
 
-    private final boolean exileOnResolve; // Should the spell be exiled on resolve?
+    private final boolean thenExile; // Should the spell be exiled by a replacement effect if cast and it resolves?
 
     /**
      * Allows to cast the target card immediately, for its manacost.
@@ -48,17 +48,17 @@ public class MayCastTargetCardEffect extends OneShotEffect {
         this(duration, CastManaAdjustment.NONE, exileOnResolve);
     }
 
-    protected MayCastTargetCardEffect(Duration duration, CastManaAdjustment manaAdjustment, boolean exileOnResolve) {
+    protected MayCastTargetCardEffect(Duration duration, CastManaAdjustment manaAdjustment, boolean thenExile) {
         super(Outcome.Benefit);
         this.duration = duration;
         this.manaAdjustment = manaAdjustment;
-        this.exileOnResolve = exileOnResolve;
+        this.thenExile = thenExile;
 
         // TODO: support the non-yet-supported combinations.
         //       for now the constructor chains won't allow those.
         if (duration != Duration.OneUse && manaAdjustment != CastManaAdjustment.NONE) {
             throw new IllegalStateException(
-                    "Not yet supported MayCastTargetThenExileEffect combination "
+                    "Wrong code usage, not yet supported "
                             + "duration={" + duration.name() + "}, "
                             + "manaAdjustment={" + manaAdjustment.name() + "}"
             );
@@ -69,7 +69,7 @@ public class MayCastTargetCardEffect extends OneShotEffect {
         super(effect);
         this.duration = effect.duration;
         this.manaAdjustment = effect.manaAdjustment;
-        this.exileOnResolve = effect.exileOnResolve;
+        this.thenExile = effect.thenExile;
     }
 
     @Override
@@ -102,7 +102,7 @@ public class MayCastTargetCardEffect extends OneShotEffect {
                     game.addEffect(effect, source);
                     break;
                 default:
-                    throw new IllegalArgumentException("Error, manaAdjustment in MayCastTargetThenExileEffect: " + manaAdjustment);
+                    throw new IllegalArgumentException("Wrong code usage, manaAdjustment is not supported: " + manaAdjustment);
             }
 
             game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
@@ -114,7 +114,7 @@ public class MayCastTargetCardEffect extends OneShotEffect {
             // TODO: support (and add tests!) for the non-NONE manaAdjustment
             CardUtil.makeCardPlayable(game, source, card, duration, false);
         }
-        if (exileOnResolve) {
+        if (thenExile) {
             ContinuousEffect effect = new ThatSpellGraveyardExileReplacementEffect(true);
             effect.setTargetPointer(new FixedTarget(card, game));
             game.addEffect(effect, source);
@@ -149,7 +149,7 @@ public class MayCastTargetCardEffect extends OneShotEffect {
                 throw new IllegalArgumentException("Error, manaAdjustment in MayCastTargetThenExileEffect: " + manaAdjustment);
         }
         text += ".";
-        if (exileOnResolve) {
+        if (thenExile) {
             text += " " + ThatSpellGraveyardExileReplacementEffect.RULE_YOUR;
         }
         return text;

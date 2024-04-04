@@ -20,26 +20,6 @@ public class TinybonesThePickpocketTest extends CardTestPlayerBase {
     private static final String tinybones = "Tinybones, the Pickpocket";
 
     @Test
-    public void test_CastBolt_WithOtherType() {
-        setStrictChooseMode(true);
-
-        addCard(Zone.BATTLEFIELD, playerA, tinybones);
-        addCard(Zone.GRAVEYARD, playerB, "Lightning Bolt");
-        addCard(Zone.BATTLEFIELD, playerA, "Swamp");
-
-        attack(1, playerA, tinybones, playerB);
-        addTarget(playerA, "Lightning Bolt"); // target card for the trigger
-        setChoice(playerA, true); // yes to "you may cast"
-        addTarget(playerA, playerB); // choosing target for the Bolt
-
-        setStopAt(1, PhaseStep.END_COMBAT);
-        execute();
-
-        assertLife(playerB, 20 - 1 - 3);
-        assertGraveyardCount(playerB, "Lightning Bolt", 1); // Bolt back to graveyard after cast.
-    }
-
-    @Test
     public void test_CastPermanent_WithOtherType() {
         setStrictChooseMode(true);
 
@@ -55,6 +35,7 @@ public class TinybonesThePickpocketTest extends CardTestPlayerBase {
         execute();
 
         assertPermanentCount(playerA, "Raging Goblin", 1);
+        assertTapped("Swamp", true); // It did cost 1 mana
     }
 
     @Test
@@ -73,5 +54,6 @@ public class TinybonesThePickpocketTest extends CardTestPlayerBase {
         execute();
 
         assertGraveyardCount(playerB, "Raging Goblin", 1); // card did not move.
+        assertTapped("Swamp", false);
     }
 }
