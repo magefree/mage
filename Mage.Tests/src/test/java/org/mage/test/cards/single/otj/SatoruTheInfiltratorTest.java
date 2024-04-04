@@ -28,7 +28,7 @@ public class SatoruTheInfiltratorTest extends CardTestPlayerBase {
     private static final String commando = "Freestrider Commando";
 
     @Test
-    public void Test_RegularCast_Other() {
+    public void test_RegularCast_Other() {
         setStrictChooseMode(true);
 
         addCard(Zone.BATTLEFIELD, playerA, satoru);
@@ -45,7 +45,7 @@ public class SatoruTheInfiltratorTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void Test_RegularCast_Other_Memnite() {
+    public void test_RegularCast_Other_Memnite() {
         setStrictChooseMode(true);
 
         addCard(Zone.BATTLEFIELD, playerA, satoru);
@@ -61,7 +61,7 @@ public class SatoruTheInfiltratorTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void Test_RegularCast_Satoru() {
+    public void test_RegularCast_Satoru() {
         setStrictChooseMode(true);
 
         addCard(Zone.BATTLEFIELD, playerA, "Underground Sea", 2);
@@ -77,7 +77,7 @@ public class SatoruTheInfiltratorTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void Test_PlotCast() {
+    public void test_PlotCast() {
         setStrictChooseMode(true);
 
         addCard(Zone.BATTLEFIELD, playerA, satoru);
@@ -95,7 +95,7 @@ public class SatoruTheInfiltratorTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void Test_Omniscience_CastOther() {
+    public void test_Omniscience_CastOther() {
         setStrictChooseMode(true);
 
         addCard(Zone.BATTLEFIELD, playerA, satoru);
@@ -113,7 +113,7 @@ public class SatoruTheInfiltratorTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void Test_Omniscience_CastSatoru() {
+    public void test_Omniscience_CastSatoru() {
         setStrictChooseMode(true);
 
         addCard(Zone.BATTLEFIELD, playerA, "Omniscience");
@@ -130,7 +130,7 @@ public class SatoruTheInfiltratorTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void Test_PlotCast_WithTax() {
+    public void test_PlotCast_WithTax() {
         setStrictChooseMode(true);
 
         addCard(Zone.BATTLEFIELD, playerA, satoru);
@@ -149,7 +149,7 @@ public class SatoruTheInfiltratorTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void Test_Blink() {
+    public void test_Blink() {
         setStrictChooseMode(true);
 
         addCard(Zone.BATTLEFIELD, playerA, satoru);
@@ -169,7 +169,7 @@ public class SatoruTheInfiltratorTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void Test_MultipleOtherEnter() {
+    public void test_MultipleOtherEnter() {
         setStrictChooseMode(true);
 
         addCard(Zone.BATTLEFIELD, playerA, satoru);
@@ -187,7 +187,7 @@ public class SatoruTheInfiltratorTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void Test_Saturo_AndAnother_Enter() {
+    public void test_Saturo_AndAnother_Enter() {
         setStrictChooseMode(true);
 
         addCard(Zone.GRAVEYARD, playerA, satoru);
@@ -208,7 +208,7 @@ public class SatoruTheInfiltratorTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void Test_CopyOnStack() {
+    public void test_CopyOnStack() {
         setStrictChooseMode(true);
 
         addCard(Zone.BATTLEFIELD, playerA, satoru);
@@ -229,7 +229,7 @@ public class SatoruTheInfiltratorTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void Test_Tokens() {
+    public void test_Tokens() {
         setStrictChooseMode(true);
 
         addCard(Zone.BATTLEFIELD, playerA, satoru);
@@ -247,7 +247,7 @@ public class SatoruTheInfiltratorTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void Test_CopySatoruOnStack() {
+    public void test_CopySatoruOnStack() {
         setStrictChooseMode(true);
 
         addCard(Zone.HAND, playerA, satoru);

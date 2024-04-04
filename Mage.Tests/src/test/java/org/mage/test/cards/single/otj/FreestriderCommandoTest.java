@@ -20,7 +20,7 @@ public class FreestriderCommandoTest extends CardTestPlayerBase {
     private static final String commando = "Freestrider Commando";
 
     @Test
-    public void Test_RegularCast() {
+    public void test_RegularCast() {
         setStrictChooseMode(true);
 
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
@@ -36,7 +36,7 @@ public class FreestriderCommandoTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void Test_PlotCast() {
+    public void test_PlotCast() {
         setStrictChooseMode(true);
 
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 4);
@@ -53,7 +53,7 @@ public class FreestriderCommandoTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void Test_OmniscienceCast() {
+    public void test_OmniscienceCast() {
         setStrictChooseMode(true);
 
         addCard(Zone.BATTLEFIELD, playerA, "Omniscience");
@@ -70,7 +70,7 @@ public class FreestriderCommandoTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void Test_PlotCast_WithTax() {
+    public void test_PlotCast_WithTax() {
         setStrictChooseMode(true);
 
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 4);
@@ -88,7 +88,7 @@ public class FreestriderCommandoTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void Test_Blink() {
+    public void test_Blink() {
         setStrictChooseMode(true);
 
         addCard(Zone.BATTLEFIELD, playerA, "Savannah", 4);
@@ -107,7 +107,7 @@ public class FreestriderCommandoTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void Test_DoubleMajor() {
+    public void test_DoubleMajor() {
         setStrictChooseMode(true);
 
         addCard(Zone.BATTLEFIELD, playerA, "Tropical Island", 6);
