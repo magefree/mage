@@ -112,7 +112,7 @@ class RakdosTheMuscleEffect extends OneShotEffect {
         // remove cards that could not be moved to exile
         cards.removeIf(card -> !Zone.EXILED.equals(game.getState().getZone(card.getId())));
         for (Card card : cards) {
-            CardUtil.makeCardPlayable(game, source, card, Duration.EndOfTurn, true, controller.getId(), null);
+            CardUtil.makeCardPlayable(game, source, card, Duration.UntilYourNextEndStep, true, controller.getId(), null);
         }
         return true;
     }
