@@ -259,6 +259,7 @@ public final class OutlawsOfThunderJunction extends ExpansionSet {
         cards.add(new SetCardInfo("Stop Cold", 72, Rarity.COMMON, mage.cards.s.StopCold.class));
         cards.add(new SetCardInfo("Stubborn Burrowfiend", 184, Rarity.UNCOMMON, mage.cards.s.StubbornBurrowfiend.class));
         cards.add(new SetCardInfo("Swamp", 274, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Taii Wakeen, Perfect Shot", 234, Rarity.RARE, mage.cards.t.TaiiWakeenPerfectShot.class));
         cards.add(new SetCardInfo("Take Up the Shield", 34, Rarity.COMMON, mage.cards.t.TakeUpTheShield.class));
         cards.add(new SetCardInfo("Take for a Ride", 148, Rarity.UNCOMMON, mage.cards.t.TakeForARide.class));
         cards.add(new SetCardInfo("Take the Fall", 73, Rarity.COMMON, mage.cards.t.TakeTheFall.class));
