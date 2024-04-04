@@ -21,6 +21,7 @@ public final class TheBigScore extends ExpansionSet {
         this.hasBasicLands = false;
         this.hasBoosters = false;
 
+        cards.add(new SetCardInfo("Ancient Cornucopia", 16, Rarity.MYTHIC, mage.cards.a.AncientCornucopia.class));
         cards.add(new SetCardInfo("Bristlebud Farmer", 17, Rarity.MYTHIC, mage.cards.b.BristlebudFarmer.class));
         cards.add(new SetCardInfo("Collector's Cage", 1, Rarity.MYTHIC, mage.cards.c.CollectorsCage.class));
         cards.add(new SetCardInfo("Esoteric Duplicator", 5, Rarity.MYTHIC, mage.cards.e.EsotericDuplicator.class));
