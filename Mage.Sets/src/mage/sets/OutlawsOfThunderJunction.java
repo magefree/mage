@@ -1,8 +1,14 @@
 package mage.sets;
 
+import mage.cards.Card;
 import mage.cards.ExpansionSet;
+import mage.cards.repository.CardInfo;
 import mage.constants.Rarity;
 import mage.constants.SetType;
+import mage.util.RandomUtil;
+
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author TheElk801
@@ -19,7 +25,8 @@ public final class OutlawsOfThunderJunction extends ExpansionSet {
         super("Outlaws of Thunder Junction", "OTJ", ExpansionSet.buildDate(2024, 4, 19), SetType.EXPANSION);
         this.blockName = "Outlaws of Thunder Junction"; // for sorting in GUI
         this.hasBasicLands = true;
-        this.hasBoosters = false; // temporary
+        this.hasBoosters = true;
+        this.maxCardNumberInBooster = 276;
 
         cards.add(new SetCardInfo("Abraded Bluffs", 251, Rarity.COMMON, mage.cards.a.AbradedBluffs.class));
         cards.add(new SetCardInfo("Akul the Unrepentant", 189, Rarity.RARE, mage.cards.a.AkulTheUnrepentant.class));
@@ -296,5 +303,214 @@ public final class OutlawsOfThunderJunction extends ExpansionSet {
         cards.add(new SetCardInfo("Wanted Griffin", 38, Rarity.COMMON, mage.cards.w.WantedGriffin.class));
         cards.add(new SetCardInfo("Wrangler of the Damned", 238, Rarity.UNCOMMON, mage.cards.w.WranglerOfTheDamned.class));
         cards.add(new SetCardInfo("Wylie Duke, Atiin Hero", 239, Rarity.RARE, mage.cards.w.WylieDukeAtiinHero.class));
+    }
+
+    private Set<Integer> specialLands = new HashSet<>(Arrays.asList(251, 253, 255, 256, 257, 258, 259, 260, 261, 264));
+
+    // otp: 30 rare, 15 mythic, otj: 60, 20
+    private static double ratioRareMythicOfOtpInFoilSlot = (30.0 * 2.0 + 15.0) / ((30.0 + 60.0) * 2.0 + (15.0 + 20.0));
+    private static double ratioMythic = 20.0 / (20.0 + 60.0 * 2.0);
+    private static double ratioOTPMythic = 15.0 / (15.0 + 30.0 * 2.0);
+    // otp: 20, otj: 100
+    private static double ratioUncommonOPTInFoilSlot = 20.0 / (20.0 + 100.0);
+
+    @Override
+    public List<Card> tryBooster() {
+        // TODO: make part of this more generic, this is the first try at a play booster generation.
+        // We start by deciding the various slots.
+        // Land Slot: 1/2 chance for a basic, 1/2 chance for a nonbasic in the special list
+        int basicLand = 0;
+        int nonbasicLand = 0;
+        {
+            if (RandomUtil.nextDouble() <= 0.5) {
+                basicLand++;
+            } else {
+                nonbasicLand++;
+            }
+        }
+
+        // 1 slot is guarantee opt.
+        int otpUncommon = 0;
+        int otpRareOrMythic = 0;
+        {
+            double rollOtp = RandomUtil.nextDouble();
+            if (rollOtp >= 1.0 / 3.0) { // know probability of 2/3 to have an uncommon.
+                otpUncommon++;
+            } else {
+                otpRareOrMythic++;
+            }
+        }
+
+        // 8 slots have guarantee rarity
+        int rareOrMythic = 1;
+        int uncommon = 3;
+        int common = 5;
+
+        // 1 slot is 1/64 chance to be spg, and 1/5 - 1/64 to be otp, 4/5 to be common
+        int spg = 0;
+        int big = 0;
+        {
+            double rollBig = RandomUtil.nextDouble();
+            if (rollBig <= 1.0 / 64.0) { // know probability of 1/64 to be spg
+                spg++;
+            } else if (rollBig <= 1.0 / 5.0) {
+                big++;
+            } else {
+                common++;
+            }
+        }
+
+        // 1 slot is a wildcard, with 1/12 to be r/m as a known info.
+        // MISSING INFO: relative chance of C/U in that slot. Let's assume 3/12 uncommon and 8/12 common.
+        // MISSING INFO: what about the special common lands? do they count here?
+        {
+            double rollWildcard = RandomUtil.nextDouble();
+            if (rollWildcard <= 1.0 / 12.0) {
+                rareOrMythic++;
+            } else if (rollWildcard <= 4.0 / 12.0) {
+                uncommon++;
+            } else {
+                if (rollWildcard >= 1.0 - (8.0 / 12.0) * 10.0 / (10.0 + 81.0)) {
+                    nonbasicLand++;
+                } else {
+                    common++;
+                }
+            }
+        }
+
+        // 1 slot is a (foil) wildcard that can be otp, we know nothing more here.
+        // MISSING INFO: all the following chances are made up
+        {
+            double rollFoilWildcard = RandomUtil.nextDouble();
+            if (rollFoilWildcard <= 1.0 / 12.0) {
+                // Let's assume any of the rare among set + otp have same chance, that is twice the chance of mythic
+                if (rollFoilWildcard <= (1.0 / 12.0) * ratioRareMythicOfOtpInFoilSlot) {
+                    otpRareOrMythic++;
+                } else {
+                    rareOrMythic++;
+                }
+            } else if (rollFoilWildcard <= 4.0 / 12.0) {
+                if (rollFoilWildcard <= (1.0 / 12.0) + (3.0 / 12.0) * ratioUncommonOPTInFoilSlot) {
+                    otpUncommon++;
+                } else {
+                    uncommon++;
+                }
+            } else {
+                common++;
+            }
+        }
+
+        /*
+        int total = rareOrMythic + uncommon + common + nonbasicLand + basicLand + otpRareOrMythic + otpUncommon + big + spg;
+        System.out.println(
+                "Total" + total
+                        + "R" + rareOrMythic + " U" + uncommon + " C" + common
+                        + " SL" + nonbasicLand + " B" + basicLand
+                        + " OTP-R" + otpRareOrMythic + " OPT-U" + otpUncommon
+                        + " BIG" + big + " SPG" + spg
+        );
+        */
+
+        // The booster we are building
+        List<Card> booster = new ArrayList<>();
+
+        List<CardInfo> list_OTJ_C_And_SL =
+                getCardsByRarity(Rarity.COMMON).stream()
+                        .filter(info -> info.getCardNumberAsInt() <= maxCardNumberInBooster)
+                        .collect(Collectors.toList());
+        List<CardInfo> list_OTJ_C = // All commons, minus the special lands
+                list_OTJ_C_And_SL.stream()
+                        .filter(info -> !(specialLands.contains(info.getCardNumberAsInt())))
+                        .collect(Collectors.toList());
+        List<CardInfo> list_OTJ_SL =
+                list_OTJ_C_And_SL.stream()
+                        .filter(info -> specialLands.contains(info.getCardNumberAsInt()))
+                        .collect(Collectors.toList());
+        List<CardInfo> list_OTJ_U =
+                getCardsByRarity(Rarity.UNCOMMON)
+                        .stream()
+                        .filter(info -> info.getCardNumberAsInt() <= maxCardNumberInBooster)
+                        .collect(Collectors.toList());
+        List<CardInfo> list_OTJ_R =
+                getCardsByRarity(Rarity.RARE)
+                        .stream()
+                        .filter(info -> info.getCardNumberAsInt() <= maxCardNumberInBooster)
+                        .collect(Collectors.toList());
+        List<CardInfo> list_OTJ_M =
+                getCardsByRarity(Rarity.MYTHIC)
+                        .stream()
+                        .filter(info -> info.getCardNumberAsInt() <= maxCardNumberInBooster)
+                        .collect(Collectors.toList());
+        List<CardInfo> list_OTJ_Basic =
+                getCardsByRarity(Rarity.LAND)
+                        .stream()
+                        .filter(info -> info.getCardNumberAsInt() <= maxCardNumberInBooster)
+                        .collect(Collectors.toList());
+        List<CardInfo> list_OTP_U =
+                BreakingNews.getInstance().getCardsByRarity(Rarity.UNCOMMON)
+                        .stream()
+                        .filter(info -> info.getCardNumberAsInt() <= 65)
+                        .collect(Collectors.toList());
+        List<CardInfo> list_OTP_R =
+                BreakingNews.getInstance().getCardsByRarity(Rarity.RARE)
+                        .stream()
+                        .filter(info -> info.getCardNumberAsInt() <= 65)
+                        .collect(Collectors.toList());
+        List<CardInfo> list_OTP_M =
+                BreakingNews.getInstance().getCardsByRarity(Rarity.MYTHIC)
+                        .stream()
+                        .filter(info -> info.getCardNumberAsInt() <= 65)
+                        .collect(Collectors.toList());
+        List<CardInfo> list_BIG =
+                TheBigScore.getInstance().getCardsByRarity(Rarity.MYTHIC)
+                        .stream()
+                        .filter(info -> info.getCardNumberAsInt() <= 30)
+                        .collect(Collectors.toList());
+        List<CardInfo> list_SPG =
+                SpecialGuests.getInstance().getCardsByRarity(Rarity.MYTHIC)
+                        .stream()
+                        .filter(info -> {
+                            int cn = info.getCardNumberAsInt();
+                            return cn >= 29 && cn <= 38;
+                        })
+                        .collect(Collectors.toList());
+
+        for (int i = 0; i < spg; i++) {
+            addToBooster(booster, list_SPG);
+        }
+        for (int i = 0; i < big; i++) {
+            addToBooster(booster, list_BIG);
+        }
+        for (int i = 0; i < rareOrMythic; i++) {
+            if (RandomUtil.nextDouble() <= ratioMythic) {
+                addToBooster(booster, list_OTJ_M);
+            } else {
+                addToBooster(booster, list_OTJ_R);
+            }
+        }
+        for (int i = 0; i < otpRareOrMythic; i++) {
+            if (RandomUtil.nextDouble() <= ratioOTPMythic) {
+                addToBooster(booster, list_OTP_M);
+            } else {
+                addToBooster(booster, list_OTP_R);
+            }
+        }
+        for (int i = 0; i < otpUncommon; i++) {
+            addToBooster(booster, list_OTP_U);
+        }
+        for (int i = 0; i < uncommon; i++) {
+            addToBooster(booster, list_OTJ_U);
+        }
+        for (int i = 0; i < common; i++) {
+            addToBooster(booster, list_OTJ_C);
+        }
+        for (int i = 0; i < nonbasicLand; i++) {
+            addToBooster(booster, list_OTJ_SL);
+        }
+        for (int i = 0; i < basicLand; i++) {
+            addToBooster(booster, list_OTJ_Basic);
+        }
+
+        return booster;
     }
 }

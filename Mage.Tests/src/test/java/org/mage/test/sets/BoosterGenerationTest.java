@@ -14,6 +14,7 @@ import mage.game.draft.RemixedSet;
 import mage.sets.*;
 import mage.util.CardUtil;
 import org.junit.Assert;
+import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -21,8 +22,6 @@ import org.mage.test.serverside.base.MageTestPlayerBase;
 
 import java.util.*;
 import java.util.stream.Collectors;
-
-import static org.junit.Assert.*;
 
 /**
  * @author nigelzor, JayDi85
@@ -551,7 +550,7 @@ public class BoosterGenerationTest extends MageTestPlayerBase {
     @Ignore // debug only: collect info about cards in boosters, see https://github.com/magefree/mage/issues/8081
     @Test
     public void test_CollectBoosterStats() {
-        ExpansionSet setToAnalyse = FallenEmpires.getInstance();
+        ExpansionSet setToAnalyse = OutlawsOfThunderJunction.getInstance();
         int openBoosters = 10000;
 
         Map<String, Integer> resRatio = new HashMap<>();
@@ -560,7 +559,7 @@ public class BoosterGenerationTest extends MageTestPlayerBase {
             List<Card> booster = setToAnalyse.createBooster();
             totalCards += booster.size();
             booster.forEach(card -> {
-                String code = String.format("%s %s", card.getRarity().getCode(), card.getName());
+                String code = String.format("%s %s %s", card.getExpansionSetCode(), card.getRarity().getCode(), card.getName());
                 resRatio.putIfAbsent(code, 0);
                 resRatio.computeIfPresent(code, (u, count) -> count + 1);
             });
