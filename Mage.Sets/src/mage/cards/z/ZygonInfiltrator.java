@@ -72,24 +72,24 @@ class ZygonInfiltratorEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
 
 
-        Permanent TappedCreature = game.getPermanent(source.getFirstTarget());
+        Permanent tappedCreature = game.getPermanent(source.getFirstTarget());
 
 
         Permanent SourceCreature = game.getPermanent(source.getSourceId());
 
-        if (TappedCreature == null
+        if (tappedCreature == null
                 || SourceCreature == null) {
             return false;
         }
-        game.addEffect(new ZygonInfiltratorCopyEffect(SourceCreature, TappedCreature), source);
+        game.addEffect(new ZygonInfiltratorCopyEffect(SourceCreature, tappedCreature), source);
         return true;
     }
 }
 
 class ZygonInfiltratorCopyEffect extends CopyEffect {
 
-    ZygonInfiltratorCopyEffect(Permanent SourceCreature, Permanent TappedCreature) {
-        super(Duration.Custom, TappedCreature, SourceCreature.getId());
+    ZygonInfiltratorCopyEffect(Permanent SourceCreature, Permanent tappedCreature) {
+        super(Duration.Custom, tappedCreature, SourceCreature.getId());
     }
 
     private ZygonInfiltratorCopyEffect(final ZygonInfiltratorCopyEffect effect) {

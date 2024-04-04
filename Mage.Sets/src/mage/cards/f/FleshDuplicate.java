@@ -50,9 +50,13 @@ class FleshDuplicateCopyApplier extends CopyApplier {
 
     @Override
     public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
-        if (blueprint.hasAbility(new VanishingAbility(3),game)) {
+        if (!blueprint.getAbilities().toString().contains("Vanishing")) {
             blueprint.getAbilities().add(new VanishingAbility(3));
         }
         return true;
+    }
+    @Override
+    public String getText() {
+        return " ,except it has vanishing 3 if that creature doesn't have vanishing.";
     }
 }
