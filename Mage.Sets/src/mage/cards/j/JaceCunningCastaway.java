@@ -12,7 +12,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
-import mage.game.events.DamagedPlayerEvent;
+import mage.game.events.DamagedBatchForOnePlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.JaceCunningCastawayIllusionToken;
@@ -98,26 +98,21 @@ class JaceCunningCastawayDamageTriggeredAbility extends DelayedTriggeredAbility 
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER
-                || event.getType() == GameEvent.EventType.COMBAT_DAMAGE_STEP_POST;
+        return event.getType() == GameEvent.EventType.DAMAGED_BATCH_FOR_ONE_PLAYER;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.DAMAGED_PLAYER) {
-            if (((DamagedPlayerEvent) event).isCombatDamage()) {
-                Permanent creature = game.getPermanent(event.getSourceId());
-                if (creature != null && creature.isControlledBy(controllerId)
-                        && !damagedPlayerIds.contains(event.getTargetId())) {
-                    damagedPlayerIds.add(event.getTargetId());
-                    return true;
-                }
-            }
-        }
-        if (event.getType() == GameEvent.EventType.COMBAT_DAMAGE_STEP_POST) {
-            damagedPlayerIds.clear();
-        }
-        return false;
+
+        DamagedBatchForOnePlayerEvent dEvent = (DamagedBatchForOnePlayerEvent) event;
+
+        int damageFromYours = dEvent.getEvents()
+                .stream()
+                .filter(ev -> ev.getSourceId().equals(controllerId))
+                .mapToInt(GameEvent::getAmount)
+                .sum();
+
+        return dEvent.isCombatDamage() && damageFromYours > 0;
     }
 
     @Override

@@ -4,6 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.AsEntersBattlefieldAbility;
+import mage.abilities.common.DealtDamageToSourceTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
@@ -39,7 +40,7 @@ public final class StuffyDoll extends CardImpl {
         // Stuffy Doll is indestructible.
         this.addAbility(IndestructibleAbility.getInstance());
         // Whenever Stuffy Doll is dealt damage, it deals that much damage to the chosen player.
-        this.addAbility(new StuffyDollTriggeredAbility());
+        this.addAbility(new DealtDamageToSourceTriggeredAbility(new StuffyDollEffect(), false));
         // {T}: Stuffy Doll deals 1 damage to itself.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageSelfEffect(1), new TapSourceCost()));
     }
@@ -54,51 +55,20 @@ public final class StuffyDoll extends CardImpl {
     }
 }
 
-class StuffyDollTriggeredAbility extends TriggeredAbilityImpl {
+class StuffyDollEffect extends OneShotEffect {
 
-    public StuffyDollTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new StuffyDollGainLifeEffect());
-        setTriggerPhrase("Whenever {this} is dealt damage, ");
-    }
-
-    private StuffyDollTriggeredAbility(final StuffyDollTriggeredAbility effect) {
-        super(effect);
-    }
-
-    @Override
-    public StuffyDollTriggeredAbility copy() {
-        return new StuffyDollTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PERMANENT;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getTargetId().equals(this.sourceId)) {
-            this.getEffects().get(0).setValue("damageAmount", event.getAmount());
-            return true;
-        }
-        return false;
-    }
-}
-
-class StuffyDollGainLifeEffect extends OneShotEffect {
-
-    StuffyDollGainLifeEffect() {
+    StuffyDollEffect() {
         super(Outcome.GainLife);
         staticText = "it deals that much damage to the chosen player";
     }
 
-    private StuffyDollGainLifeEffect(final StuffyDollGainLifeEffect effect) {
+    private StuffyDollEffect(final StuffyDollEffect effect) {
         super(effect);
     }
 
     @Override
-    public StuffyDollGainLifeEffect copy() {
-        return new StuffyDollGainLifeEffect(this);
+    public StuffyDollEffect copy() {
+        return new StuffyDollEffect(this);
     }
 
     @Override
@@ -106,7 +76,7 @@ class StuffyDollGainLifeEffect extends OneShotEffect {
         UUID playerId = (UUID) game.getState().getValue(source.getSourceId() + "_player");
         Player player = game.getPlayer(playerId);
         if (player != null && player.canRespond()) {
-            player.damage((Integer) this.getValue("damageAmount"), source.getSourceId(), source, game);
+            player.damage((Integer) this.getValue("damage"), source.getSourceId(), source, game);
         }
         return true;
     }
