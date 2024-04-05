@@ -16,7 +16,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
-import mage.watchers.common.SaddledMountWatcher;
 
 import java.util.Objects;
 import java.util.Set;
@@ -41,7 +40,7 @@ public final class RamblingPossum extends CardImpl {
                 1, 2, Duration.EndOfTurn, "it"
         ));
         ability.addEffect(new RamblingPossumEffect());
-        this.addAbility(ability, new SaddledMountWatcher());
+        this.addAbility(ability);
 
         // Saddle 1
         this.addAbility(new SaddleAbility(1));

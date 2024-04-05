@@ -4,12 +4,13 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.MayCastTargetThenExileEffect;
+import mage.abilities.effects.common.MayCastTargetCardEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.CastManaAdjustment;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
@@ -106,7 +107,8 @@ class DiluvianPrimordialEffect extends OneShotEffect {
                 if (target instanceof TargetCardInOpponentsGraveyard) {
                     Card targetCard = game.getCard(target.getFirstTarget());
                     if (targetCard != null) {
-                        new MayCastTargetThenExileEffect(true).setTargetPointer(new FixedTarget(targetCard, game)).apply(game, source);
+                        new MayCastTargetCardEffect(CastManaAdjustment.WITHOUT_PAYING_MANA_COST, true)
+                                .setTargetPointer(new FixedTarget(targetCard, game)).apply(game, source);
                     }
                 }
             }

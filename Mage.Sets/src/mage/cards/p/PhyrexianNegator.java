@@ -15,7 +15,6 @@ import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 /**
@@ -64,7 +63,7 @@ class PhyrexianNegatorTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PERMANENT;
+        return event.getType() == GameEvent.EventType.DAMAGED_BATCH_FOR_ONE_PERMANENT;
     }
     
     @Override

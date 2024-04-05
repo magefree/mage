@@ -72,7 +72,7 @@ class GeralfTheFleshwrightTriggeredAbility extends TriggeredAbilityImpl {
 
     public GeralfTheFleshwrightTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new ZombieRogueToken()));
-        setTriggerPhrase("Whenever you cast a spell during your turn other than your first spell each turn, ");
+        setTriggerPhrase("Whenever you cast a spell during your turn other than your first spell thhat turn, ");
     }
 
     private GeralfTheFleshwrightTriggeredAbility(final GeralfTheFleshwrightTriggeredAbility ability) {
@@ -178,6 +178,7 @@ class GeralfTheFleshwrightEffect extends OneShotEffect {
 
     GeralfTheFleshwrightEffect() {
         super(Outcome.BoostCreature);
+        staticText = "put a +1/+1 counter on it for each other Zombie that entered the battlefield under your control this turn";
     }
 
     private GeralfTheFleshwrightEffect(final GeralfTheFleshwrightEffect effect) {

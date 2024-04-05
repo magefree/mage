@@ -21,7 +21,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
-import mage.watchers.common.SaddledMountWatcher;
 
 import java.util.UUID;
 
@@ -43,7 +42,7 @@ public final class CalamityGallopingInferno extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // Whenever Calamity, Galloping Inferno attacks while saddled, choose a nonlegendary creature that saddled it this turn and create a tapped and attacking token that's a copy of it. Sacrifice that token at the beginning of the next end step. Repeat this process once.
-        this.addAbility(new AttacksWhileSaddledTriggeredAbility(new CalamityGallopingInfernoEffect()), new SaddledMountWatcher());
+        this.addAbility(new AttacksWhileSaddledTriggeredAbility(new CalamityGallopingInfernoEffect()));
 
         // Saddle 1
         this.addAbility(new SaddleAbility(1));

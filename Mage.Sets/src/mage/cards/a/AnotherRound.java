@@ -46,7 +46,7 @@ class AnotherRoundEffect extends OneShotEffect {
         super(Outcome.Benefit);
         staticText = "Exile any number of creatures you control, "
                 + "then return them to the battlefield under their owner's control. "
-                + "Then repeat this process X times.";
+                + "Then repeat this process X more times.";
     }
 
     private AnotherRoundEffect(final AnotherRoundEffect effect) {

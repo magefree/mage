@@ -195,6 +195,10 @@ public interface Player extends MageItem, Copyable<Player> {
 
     boolean canPlayCardsFromGraveyard();
 
+    void setPlotFromTopOfLibrary(boolean canPlotFromTopOfLibrary);
+
+    boolean canPlotFromTopOfLibrary();
+
     void setDrawsOnOpponentsTurn(boolean drawsOnOpponentsTurn);
 
     boolean isDrawsOnOpponentsTurn();
@@ -363,6 +367,7 @@ public interface Player extends MageItem, Copyable<Player> {
 
     /**
      * Return player's turn control to prev player
+     *
      * @param value
      * @param fullRestore return turn control to own
      */
@@ -988,7 +993,7 @@ public interface Player extends MageItem, Copyable<Player> {
      * @param source
      * @param game
      * @param fromZone
-     * @param withName for face down: used to hide card name in game logs before real face down status apply
+     * @param withName  for face down: used to hide card name in game logs before real face down status apply
      * @return
      */
     @Deprecated

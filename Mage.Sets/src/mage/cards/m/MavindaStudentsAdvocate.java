@@ -6,7 +6,7 @@ import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.LimitedTimesPerTurnActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.MayCastTargetThenExileEffect;
+import mage.abilities.effects.common.MayCastTargetCardEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
@@ -61,10 +61,10 @@ public final class MavindaStudentsAdvocate extends CardImpl {
     }
 }
 
-class MavindaStudentsAdvocateEffect extends MayCastTargetThenExileEffect {
+class MavindaStudentsAdvocateEffect extends MayCastTargetCardEffect {
 
     MavindaStudentsAdvocateEffect() {
-        super(Duration.EndOfTurn);
+        super(Duration.EndOfTurn, true);
         staticText = "you may cast target instant or sorcery card from your graveyard this turn. " +
                 "If that spell doesn't target a creature you control, it costs {8} more to cast this way. " +
                 "If that spell would be put into your graveyard, exile it instead";

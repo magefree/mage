@@ -26,6 +26,7 @@ import mage.filter.common.FilterPermanentOrPlayer;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.MageObjectReferencePredicate;
 import mage.game.Game;
+import mage.game.events.DamagedBatchForOnePermanentEvent;
 import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -103,24 +104,28 @@ class ToralfGodOfFuryTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PERMANENT;
+        return event.getType() == GameEvent.EventType.DAMAGED_BATCH_FOR_ONE_PERMANENT;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        DamagedEvent dEvent = (DamagedEvent) event;
-        if (dEvent.getExcess() < 1
+        DamagedBatchForOnePermanentEvent dEvent = (DamagedBatchForOnePermanentEvent) event;
+        int excessDamage = dEvent.getEvents()
+                .stream()
+                .mapToInt(DamagedEvent::getExcess)
+                .sum();
+
+        if (excessDamage < 1
                 || dEvent.isCombatDamage()
                 || !game.getOpponents(getControllerId()).contains(game.getControllerId(event.getTargetId()))) {
             return false;
         }
         this.getEffects().clear();
         this.getTargets().clear();
-        int excessDamage = dEvent.getExcess();
         this.addEffect(new DamageTargetEffect(excessDamage));
         FilterPermanentOrPlayer filter = new FilterAnyTarget();
         filter.getPermanentFilter().add(Predicates.not(new MageObjectReferencePredicate(event.getTargetId(), game)));
-        this.addTarget(new TargetPermanentOrPlayer(filter).withChooseHint(Integer.toString(excessDamage) + " damage"));
+        this.addTarget(new TargetPermanentOrPlayer(filter).withChooseHint(excessDamage + " damage"));
         return true;
     }
 

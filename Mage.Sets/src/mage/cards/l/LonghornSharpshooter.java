@@ -31,7 +31,7 @@ public final class LonghornSharpshooter extends CardImpl {
         this.addAbility(ReachAbility.getInstance());
 
         // When Longhorn Sharpshooter becomes plotted, it deals 2 damage to any target.
-        Ability ability = new BecomesPlottedSourceTriggeredAbility(new DamageTargetEffect(2));
+        Ability ability = new BecomesPlottedSourceTriggeredAbility(new DamageTargetEffect(2, "it"));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
 
