@@ -209,6 +209,7 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("On the Job", 30, Rarity.COMMON, mage.cards.o.OnTheJob.class));
         cards.add(new SetCardInfo("Out Cold", 66, Rarity.COMMON, mage.cards.o.OutCold.class));
         cards.add(new SetCardInfo("Outrageous Robbery", 97, Rarity.RARE, mage.cards.o.OutrageousRobbery.class));
+        cards.add(new SetCardInfo("Perimeter Enforcer", 31, Rarity.UNCOMMON, mage.cards.p.PerimeterEnforcer.class));
         cards.add(new SetCardInfo("Person of Interest", 139, Rarity.COMMON, mage.cards.p.PersonOfInterest.class));
         cards.add(new SetCardInfo("Persuasive Interrogators", 98, Rarity.UNCOMMON, mage.cards.p.PersuasiveInterrogators.class));
         cards.add(new SetCardInfo("Pick Your Poison", 170, Rarity.COMMON, mage.cards.p.PickYourPoison.class));
@@ -218,6 +219,7 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Presumed Dead", 100, Rarity.UNCOMMON, mage.cards.p.PresumedDead.class));
         cards.add(new SetCardInfo("Private Eye", 223, Rarity.UNCOMMON, mage.cards.p.PrivateEye.class));
         cards.add(new SetCardInfo("Proft's Eidetic Memory", 67, Rarity.RARE, mage.cards.p.ProftsEideticMemory.class));
+        cards.add(new SetCardInfo("Projektor Inspector", 68, Rarity.COMMON, mage.cards.p.ProjektorInspector.class));
         cards.add(new SetCardInfo("Public Thoroughfare", 265, Rarity.COMMON, mage.cards.p.PublicThoroughfare.class));
         cards.add(new SetCardInfo("Push // Pull", 250, Rarity.UNCOMMON, mage.cards.p.PushPull.class));
         cards.add(new SetCardInfo("Pyrotechnic Performer", 140, Rarity.RARE, mage.cards.p.PyrotechnicPerformer.class, NON_FULL_USE_VARIOUS));
