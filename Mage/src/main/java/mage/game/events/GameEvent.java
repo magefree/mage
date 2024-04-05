@@ -496,8 +496,7 @@ public class GameEvent implements Serializable {
         /* REMOVE_COUNTER, REMOVE_COUNTERS, COUNTER_REMOVED, COUNTERS_REMOVED
          targetId    id of the permanent or player losing counter(s)
          sourceId    id of the ability removing them
-         playerId    player who controls the ability removing the counters, or if not applicable,
-                     the controller of the permanent losing counter(s), or if neither are applicable, null.
+         playerId    player who controls the ability removing the counters
          amount      number of counters being removed
          data        name of the counter(s) being removed
          */
