@@ -254,6 +254,7 @@ public final class RavnicaClueEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Twilight Panther", 78, Rarity.COMMON, mage.cards.t.TwilightPanther.class));
         cards.add(new SetCardInfo("Undercover Butler", 49, Rarity.UNCOMMON, mage.cards.u.UndercoverButler.class));
         cards.add(new SetCardInfo("Underrealm Lich", 215, Rarity.MYTHIC, mage.cards.u.UnderrealmLich.class));
+        cards.add(new SetCardInfo("Unruly Krasis", 50, Rarity.RARE, mage.cards.u.UnrulyKrasis.class));
         cards.add(new SetCardInfo("Urbis Protector", 79, Rarity.UNCOMMON, mage.cards.u.UrbisProtector.class));
         cards.add(new SetCardInfo("Utvara Scalper", 153, Rarity.COMMON, mage.cards.u.UtvaraScalper.class));
         cards.add(new SetCardInfo("Venomous Hierophant", 125, Rarity.COMMON, mage.cards.v.VenomousHierophant.class));
