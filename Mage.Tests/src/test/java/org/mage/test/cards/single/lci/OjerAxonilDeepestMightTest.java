@@ -212,6 +212,37 @@ public class OjerAxonilDeepestMightTest extends CardTestPlayerBase {
         assertTapped(ojer, true);
     }
 
+    /**
+     * 712.14a. If a spell or ability puts a transforming double-faced card onto the battlefield "transformed"
+     * or "converted," it enters the battlefield with its back face up. If a player is instructed to put a card
+     * that isn't a transforming double-faced card onto the battlefield transformed or converted, that card stays in
+     * its current zone.
+     */
+    @Test
+    public void test_CloneDoNotTransform() {
+        setStrictChooseMode(true);
+
+        addCard(Zone.BATTLEFIELD, playerA, ojer, 1);
+        addCard(Zone.HAND, playerA, "Sakashima the Impostor", 1); // Clone keeping its name for easier test.
+        addCard(Zone.BATTLEFIELD, playerA, "Underground Sea", 6);
+        addCard(Zone.HAND, playerA, "Doom Blade", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sakashima the Impostor");
+        setChoice(playerA, true); // yes to clone
+        setChoice(playerA, ojer); // clone Ojer
+
+        checkPermanentCount("Sakashima in play", 1, PhaseStep.BEGIN_COMBAT, playerA, "Sakashima the Impostor", 1);
+        checkPT("PT 4/4 so copy happened", 1, PhaseStep.BEGIN_COMBAT, playerA, "Sakashima the Impostor", 4, 4);
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Doom Blade", "Sakashima the Impostor");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, ojer, 1);
+        assertGraveyardCount(playerA, "Sakashima the Impostor", 1); // is not transformable, so didn't return.
+    }
+
     @Test
     public void test_watching_Chandra_emblem_damage() {
         setStrictChooseMode(true);

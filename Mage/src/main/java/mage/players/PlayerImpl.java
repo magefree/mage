@@ -4708,6 +4708,14 @@ public abstract class PlayerImpl implements Player, Serializable {
                 List<ZoneChangeInfo> infoList = new ArrayList<>();
                 for (Card card : cards) {
                     fromZone = game.getState().getZone(card.getId());
+                    // 712.14a. If a spell or ability puts a transforming double-faced card onto the battlefield "transformed"
+                    // or "converted," it enters the battlefield with its back face up. If a player is instructed to put a card
+                    // that isn't a transforming double-faced card onto the battlefield transformed or converted, that card stays in
+                    // its current zone.
+                    Boolean enterTransformed = (Boolean) game.getState().getValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + card.getId());
+                    if (enterTransformed != null && enterTransformed && !card.isTransformable()) {
+                        continue;
+                    }
                     ZoneChangeEvent event = new ZoneChangeEvent(card.getId(), source,
                             byOwner ? card.getOwnerId() : getId(), fromZone, Zone.BATTLEFIELD, appliedEffects);
                     infoList.add(new ZoneChangeInfo.Battlefield(event, faceDown, tapped, source));
