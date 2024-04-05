@@ -48,7 +48,7 @@ public final class IanTheReckless extends CardImpl {
         ability.addEffect(new DamageTargetEffect(new SourcePermanentPowerCount()).setText("and any target"));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, condition,
-                "Whenever Ian the Reckless attacks, if it's modified, you may have it deal damage equal to its power to you and any target."));
+                "Whenever {this} attacks, if it's modified, you may have it deal damage equal to its power to you and any target."));
     }
 
     private IanTheReckless(final IanTheReckless card) {

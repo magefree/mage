@@ -43,9 +43,7 @@ public final class GunnerConscript extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Gunner Conscript gets +1/+1 for each Aura and Equipment attached to it.
-        DynamicValue auraAmount = new AuraAttachedCount();
-        DynamicValue equipAmount = new EquipmentAttachedCount();
-        DynamicValue totalAmount = new AdditiveDynamicValue(auraAmount, equipAmount);
+        DynamicValue totalAmount = new AdditiveDynamicValue(new AuraAttachedCount(), new EquipmentAttachedCount());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new BoostSourceEffect(totalAmount, totalAmount, Duration.WhileOnBattlefield)
                         .setText("{this} gets +1/+1 for each Aura and Equipment attached to it")));
