@@ -7,7 +7,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.CastFromEverywhereSourceCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -17,7 +17,6 @@ import mage.filter.predicate.Predicates;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.util.CardUtil;
 
@@ -39,7 +38,7 @@ public final class TerritoryForge extends CardImpl {
 
         // When Territory Forge enters the battlefield, if you cast it, exile target artifact or land.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new TerritoryForgeExileEffect()),
+                new EntersBattlefieldTriggeredAbility(new ExileTargetEffect().setToSourceExileZone(true)),
                 CastFromEverywhereSourceCondition.instance,
                 "When {this} enters the battlefield, if you cast it, exile target artifact or land."
         );
@@ -57,34 +56,6 @@ public final class TerritoryForge extends CardImpl {
     @Override
     public TerritoryForge copy() {
         return new TerritoryForge(this);
-    }
-}
-
-class TerritoryForgeExileEffect extends OneShotEffect {
-
-    TerritoryForgeExileEffect() {
-        super(Outcome.Exile);
-    }
-
-    private TerritoryForgeExileEffect(final TerritoryForgeExileEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public TerritoryForgeExileEffect copy() {
-        return new TerritoryForgeExileEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getFirstTarget());
-        if (player == null || permanent == null) {
-            return false;
-        }
-        UUID exileId = CardUtil.getExileZoneId(game, source);
-        String exileName = CardUtil.getSourceName(game, source);
-        return player.moveCardsToExile(permanent, source, game, true, exileId, exileName);
     }
 }
 
@@ -120,7 +91,7 @@ class TerritoryForgeStaticEffect extends ContinuousEffectImpl {
             for (Ability ability : card.getAbilities(game)) {
                 if (ability.getAbilityType() == AbilityType.ACTIVATED || ability.getAbilityType() == AbilityType.MANA) {
                     ActivatedAbility copyAbility = (ActivatedAbility) ability.copy();
-                    permanent.addAbility(copyAbility, source.getSourceId(), game);
+                    permanent.addAbility(copyAbility, source.getSourceId(), game, true);
                 }
             }
         }

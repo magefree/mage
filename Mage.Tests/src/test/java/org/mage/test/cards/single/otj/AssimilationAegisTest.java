@@ -20,7 +20,7 @@ public class AssimilationAegisTest extends CardTestPlayerBase {
     private static final String aegis = "Assimilation Aegis";
 
     @Test
-    public void TestEquipChainThenDisenchant() {
+    public void test_Equip_Equip_Disenchant() {
         setStrictChooseMode(true);
 
         addCard(Zone.BATTLEFIELD, playerA, "Tundra", 9);
