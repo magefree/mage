@@ -99,6 +99,7 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Dr. Madison Li", 3, Rarity.MYTHIC, mage.cards.d.DrMadisonLi.class));
         cards.add(new SetCardInfo("Dragonskull Summit", 261, Rarity.RARE, mage.cards.d.DragonskullSummit.class));
         cards.add(new SetCardInfo("Drowned Catacomb", 262, Rarity.RARE, mage.cards.d.DrownedCatacomb.class));
+        cards.add(new SetCardInfo("Elder Owyn Lyons", 103, Rarity.UNCOMMON, mage.cards.e.ElderOwynLyons.class));
         cards.add(new SetCardInfo("Electrosiphon", 104, Rarity.RARE, mage.cards.e.Electrosiphon.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Electrosiphon", 414, Rarity.RARE, mage.cards.e.Electrosiphon.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Electrosiphon", 632, Rarity.RARE, mage.cards.e.Electrosiphon.class, NON_FULL_USE_VARIOUS));
@@ -127,6 +128,7 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Glimmer of Genius", 176, Rarity.UNCOMMON, mage.cards.g.GlimmerOfGenius.class));
         cards.add(new SetCardInfo("Grave Titan", 346, Rarity.MYTHIC, mage.cards.g.GraveTitan.class));
         cards.add(new SetCardInfo("Guardian Project", 199, Rarity.RARE, mage.cards.g.GuardianProject.class));
+        cards.add(new SetCardInfo("Gunner Conscript", 77, Rarity.UNCOMMON, mage.cards.g.GunnerConscript.class));
         cards.add(new SetCardInfo("Hancock, Ghoulish Mayor", 45, Rarity.RARE, mage.cards.h.HancockGhoulishMayor.class));
         cards.add(new SetCardInfo("Hardened Scales", 200, Rarity.RARE, mage.cards.h.HardenedScales.class));
         cards.add(new SetCardInfo("Harmonize", 201, Rarity.UNCOMMON, mage.cards.h.Harmonize.class));
@@ -136,6 +138,7 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Hornet Queen", 350, Rarity.RARE, mage.cards.h.HornetQueen.class));
         cards.add(new SetCardInfo("Hour of Reckoning", 161, Rarity.RARE, mage.cards.h.HourOfReckoning.class));
         cards.add(new SetCardInfo("Hullbreaker Horror", 344, Rarity.RARE, mage.cards.h.HullbreakerHorror.class));
+        cards.add(new SetCardInfo("Ian the Reckless", 59, Rarity.UNCOMMON, mage.cards.i.IanTheReckless.class));
         cards.add(new SetCardInfo("Impassioned Orator", 162, Rarity.COMMON, mage.cards.i.ImpassionedOrator.class));
         cards.add(new SetCardInfo("Inexorable Tide", 177, Rarity.RARE, mage.cards.i.InexorableTide.class));
         cards.add(new SetCardInfo("Inspiring Call", 203, Rarity.UNCOMMON, mage.cards.i.InspiringCall.class));
@@ -151,6 +154,7 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Kellogg, Dangerous Mind", 415, Rarity.RARE, mage.cards.k.KelloggDangerousMind.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kellogg, Dangerous Mind", 634, Rarity.RARE, mage.cards.k.KelloggDangerousMind.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kellogg, Dangerous Mind", 943, Rarity.RARE, mage.cards.k.KelloggDangerousMind.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Legate Lanius, Caesar's Ace", 107, Rarity.UNCOMMON, mage.cards.l.LegateLaniusCaesarsAce.class));
         cards.add(new SetCardInfo("Lethal Scheme", 185, Rarity.RARE, mage.cards.l.LethalScheme.class));
         cards.add(new SetCardInfo("Liberty Prime, Recharged", 5, Rarity.MYTHIC, mage.cards.l.LibertyPrimeRecharged.class));
         cards.add(new SetCardInfo("Lightning Greaves", 233, Rarity.UNCOMMON, mage.cards.l.LightningGreaves.class));
