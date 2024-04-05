@@ -170,6 +170,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Renegade Silent", 53, Rarity.UNCOMMON, mage.cards.r.RenegadeSilent.class));
         cards.add(new SetCardInfo("Return to Dust", 211, Rarity.UNCOMMON, mage.cards.r.ReturnToDust.class));
         cards.add(new SetCardInfo("Reverse the Polarity", 54, Rarity.RARE, mage.cards.r.ReverseThePolarity.class));
+        cards.add(new SetCardInfo("River Song's Diary", 182, Rarity.RARE, mage.cards.r.RiverSongsDiary.class));
         cards.add(new SetCardInfo("River of Tears", 297, Rarity.RARE, mage.cards.r.RiverOfTears.class));
         cards.add(new SetCardInfo("Rockfall Vale", 298, Rarity.RARE, mage.cards.r.RockfallVale.class));
         cards.add(new SetCardInfo("Rogue's Passage", 299, Rarity.UNCOMMON, mage.cards.r.RoguesPassage.class));
