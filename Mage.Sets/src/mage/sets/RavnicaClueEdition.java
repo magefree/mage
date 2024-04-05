@@ -57,6 +57,7 @@ public final class RavnicaClueEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Conservatory", 14, Rarity.UNCOMMON, mage.cards.c.Conservatory.class));
         cards.add(new SetCardInfo("Consider", 84, Rarity.COMMON, mage.cards.c.Consider.class));
         cards.add(new SetCardInfo("Coordinated Assault", 128, Rarity.UNCOMMON, mage.cards.c.CoordinatedAssault.class));
+        cards.add(new SetCardInfo("Corporeal Projection", 28, Rarity.RARE, mage.cards.c.CorporealProjection.class));
         cards.add(new SetCardInfo("Corpse Churn", 107, Rarity.COMMON, mage.cards.c.CorpseChurn.class));
         cards.add(new SetCardInfo("Cosmotronic Wave", 129, Rarity.COMMON, mage.cards.c.CosmotronicWave.class));
         cards.add(new SetCardInfo("Council's Judgment", 57, Rarity.RARE, mage.cards.c.CouncilsJudgment.class));
