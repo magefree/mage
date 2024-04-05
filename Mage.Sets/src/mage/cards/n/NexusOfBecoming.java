@@ -48,7 +48,7 @@ class NexusOfBecomingEffect extends OneShotEffect {
 
     NexusOfBecomingEffect() {
         super(Outcome.Benefit);
-        staticText = "then you may exile an artifact or creature card from your hand. " +
+        staticText = "Then you may exile an artifact or creature card from your hand. " +
                 "If you do, create a token that's a copy of the exiled card, " +
                 "except it's a 3/3 Golem artifact creature in addition to its other types.";
     }
