@@ -56,18 +56,21 @@ public class AddCountersAllEffect extends OneShotEffect {
             }
 
             if (newCounter.getCount() <= 0) {
-                return false; // no need to iterate on targets, no counters will be put on them
+                return false; // no need to iterate on the permanents, no counters will be put on them
             }
 
+            boolean result = false;
             for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
                 Counter newCounterForPermanent = newCounter.copy();
 
                 permanent.addCounters(newCounterForPermanent, source.getControllerId(), source, game);
-                if (!game.isSimulation() && newCounterForPermanent.getCount() > 0) {
-                    game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " puts " + newCounterForPermanent.getCount() + ' ' + newCounterForPermanent.getName()
-                            + (newCounterForPermanent.getCount() == 1 ? " counter" : " counters") + " on " + permanent.getLogName());
-                }
+                game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " puts "
+                        + newCounterForPermanent.getCount() + ' ' + newCounterForPermanent.getName()
+                        + (newCounterForPermanent.getCount() == 1 ? " counter" : " counters") + " on " + permanent.getLogName());
+
+                result |= true;
             }
+            return result;
         }
         return false;
     }
