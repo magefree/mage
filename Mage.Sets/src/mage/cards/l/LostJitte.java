@@ -45,7 +45,7 @@ public final class LostJitte extends CardImpl {
         ability.addMode(new Mode(new CantBlockTargetEffect(Duration.EndOfTurn)).addTarget(new TargetCreaturePermanent()));
 
         // * Put a +1/+1 counter on equipped creature.
-        ability.addMode(new Mode(new AddCountersAttachedEffect(CounterType.P1P1.createInstance(), "equipped")));
+        ability.addMode(new Mode(new AddCountersAttachedEffect(CounterType.P1P1.createInstance(), "equipped creature")));
         this.addAbility(ability);
 
         // Equip {1}

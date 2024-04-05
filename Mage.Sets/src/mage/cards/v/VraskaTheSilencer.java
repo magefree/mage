@@ -68,7 +68,7 @@ class VraskaTheSilencerEffect extends OneShotEffect {
 
     VraskaTheSilencerEffect() {
         super(Outcome.PutCreatureInPlay);
-        staticText = "return that card to the battlefield under your control. "
+        staticText = "return that card to the battlefield tapped under your control. "
                 + "It's a Treasure artifact with \"{T}, Sacrifice this artifact: Add one mana of any color,\" "
                 + "and it loses all other card types.";
     }

@@ -69,7 +69,7 @@ class TarnationVistaEffect extends ManaEffect {
 
     TarnationVistaEffect() {
         super();
-        staticText = "For each color among permanents you control, add one mana of that color";
+        staticText = "For each color among monocolored permanents you control, add one mana of that color";
     }
 
     private TarnationVistaEffect(final TarnationVistaEffect effect) {

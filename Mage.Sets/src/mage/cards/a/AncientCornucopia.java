@@ -35,7 +35,8 @@ public final class AncientCornucopia extends CardImpl {
 
         // Whenever you cast a spell that's one or more colors, you may gain 1 life for each of that spell's colors. Do this only once each turn.
         this.addAbility(new SpellCastControllerTriggeredAbility(
-                new GainLifeEffect(AncientCornucopiaValue.instance), filter, false
+                new GainLifeEffect(AncientCornucopiaValue.instance)
+                        .setText("gain 1 life for each of that spell's colors"), filter, true
         ).setDoOnlyOnceEachTurn(true));
 
         // {T}: Add one mana of any color.
@@ -72,7 +73,7 @@ enum AncientCornucopiaValue implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "of that spell's colors. Do this only once each turn";
+        return "of that spell's colors";
     }
 
     @Override
