@@ -19,6 +19,7 @@ public final class OutlawsOfThunderJunctionCommander extends ExpansionSet {
         super("Outlaws of Thunder Junction Commander", "OTC", ExpansionSet.buildDate(2024, 4, 19), SetType.SUPPLEMENTAL);
         this.hasBasicLands = false;
 
+        cards.add(new SetCardInfo("Angel of Indemnity", 45, Rarity.RARE, mage.cards.a.AngelOfIndemnity.class));
         cards.add(new SetCardInfo("Stella Lee, Wild Card", 3, Rarity.MYTHIC, mage.cards.s.StellaLeeWildCard.class));
     }
 }
