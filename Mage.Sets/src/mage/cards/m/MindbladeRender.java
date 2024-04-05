@@ -68,19 +68,16 @@ class MindbladeRenderTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-
         Player controller = game.getPlayer(getControllerId());
         if (controller == null) {
             return false;
         }
-
         DamagedBatchForOnePlayerEvent dEvent = (DamagedBatchForOnePlayerEvent) event;
 
         if (!controller.hasOpponent(dEvent.getTargetId(), game)){
             return false;
         }
-
-        if (!dEvent.isCombatDamage()){
+        if (!dEvent.isCombatDamage()) {
             return false;
         }
 
@@ -88,7 +85,7 @@ class MindbladeRenderTriggeredAbility extends TriggeredAbilityImpl {
                 .stream()
                 .filter(ev -> {
                     Permanent attacker = game.getPermanentOrLKIBattlefield(ev.getSourceId());
-                    return attacker.hasSubtype(SubType.WARRIOR, game);
+                    return attacker != null && attacker.hasSubtype(SubType.WARRIOR, game);
                 })
                 .mapToInt(GameEvent::getAmount)
                 .sum();

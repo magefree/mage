@@ -91,10 +91,12 @@ class TheRavensWarningTriggeredAbility extends DelayedTriggeredAbility {
 
         int flyingDamage = dEvent.getEvents()
                 .stream()
-                .filter(ev -> ev.getSourceId().equals(controllerId))
                 .filter(ev -> {
+                    if (!ev.getSourceId().equals(controllerId)) {
+                        return false;
+                    }
                     Permanent permanent = game.getPermanentOrLKIBattlefield(ev.getSourceId());
-                    return permanent.isCreature() && permanent.hasAbility(FlyingAbility.getInstance(), game);
+                    return permanent != null && permanent.isCreature() && permanent.hasAbility(FlyingAbility.getInstance(), game);
                 })
                 .mapToInt(GameEvent::getAmount)
                 .sum();
