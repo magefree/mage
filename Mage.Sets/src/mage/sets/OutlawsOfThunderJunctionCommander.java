@@ -24,6 +24,7 @@ public final class OutlawsOfThunderJunctionCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Back in Town", 18, Rarity.RARE, mage.cards.b.BackInTown.class));
         cards.add(new SetCardInfo("Charred Graverobber", 19, Rarity.RARE, mage.cards.c.CharredGraverobber.class));
         cards.add(new SetCardInfo("Elemental Eruption", 27, Rarity.RARE, mage.cards.e.ElementalEruption.class));
+        cards.add(new SetCardInfo("Kirri, Talented Sprout", 43, Rarity.MYTHIC, mage.cards.k.KirriTalentedSprout.class));
         cards.add(new SetCardInfo("Leyline Dowser", 39, Rarity.RARE, mage.cards.l.LeylineDowser.class));
         cards.add(new SetCardInfo("Stella Lee, Wild Card", 3, Rarity.MYTHIC, mage.cards.s.StellaLeeWildCard.class));
     }
