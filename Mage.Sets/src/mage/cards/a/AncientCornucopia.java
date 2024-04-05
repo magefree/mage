@@ -12,7 +12,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.MonocoloredPredicate;
+import mage.filter.predicate.mageobject.ColorlessPredicate;
 import mage.game.Game;
 import mage.game.stack.Spell;
 
@@ -27,7 +27,7 @@ public final class AncientCornucopia extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("a spell that's one or more colors");
 
     static {
-        filter.add(Predicates.not(MonocoloredPredicate.instance));
+        filter.add(Predicates.not(ColorlessPredicate.instance));
     }
 
     public AncientCornucopia(UUID ownerId, CardSetInfo setInfo) {
