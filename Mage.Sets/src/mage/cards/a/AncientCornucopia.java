@@ -12,7 +12,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.MonocoloredPredicate;
+import mage.filter.predicate.mageobject.ColorlessPredicate;
 import mage.game.Game;
 import mage.game.stack.Spell;
 
@@ -27,7 +27,7 @@ public final class AncientCornucopia extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("a spell that's one or more colors");
 
     static {
-        filter.add(Predicates.not(MonocoloredPredicate.instance));
+        filter.add(Predicates.not(ColorlessPredicate.instance));
     }
 
     public AncientCornucopia(UUID ownerId, CardSetInfo setInfo) {
@@ -35,7 +35,8 @@ public final class AncientCornucopia extends CardImpl {
 
         // Whenever you cast a spell that's one or more colors, you may gain 1 life for each of that spell's colors. Do this only once each turn.
         this.addAbility(new SpellCastControllerTriggeredAbility(
-                new GainLifeEffect(AncientCornucopiaValue.instance), filter, false
+                new GainLifeEffect(AncientCornucopiaValue.instance)
+                        .setText("gain 1 life for each of that spell's colors"), filter, true
         ).setDoOnlyOnceEachTurn(true));
 
         // {T}: Add one mana of any color.
@@ -72,7 +73,7 @@ enum AncientCornucopiaValue implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "of that spell's colors. Do this only once each turn";
+        return "of that spell's colors";
     }
 
     @Override

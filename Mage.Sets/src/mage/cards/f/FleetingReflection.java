@@ -38,7 +38,7 @@ public final class FleetingReflection extends CardImpl {
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent().setTargetTag(1));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 1, filter, false).setTargetTag(2));
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HexproofAbility.getInstance(), Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new UntapTargetEffect());
+        this.getSpellAbility().addEffect(new UntapTargetEffect().setText("Untap that creature"));
         this.getSpellAbility().addEffect(new FleetingReflectionEffect());
     }
 

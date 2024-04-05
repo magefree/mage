@@ -32,7 +32,8 @@ public final class TinybonesJoinsUp extends CardImpl {
         this.supertype.add(SuperType.LEGENDARY);
 
         // When Tinybones Joins Up enters the battlefield, any number of target players each discard a card.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DiscardTargetEffect(1));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DiscardTargetEffect(1)
+                .setText("any number of target players each discard a card"));
         ability.addTarget(new TargetPlayer(0, Integer.MAX_VALUE, false));
         this.addAbility(ability);
 

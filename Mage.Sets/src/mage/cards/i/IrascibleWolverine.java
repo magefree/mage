@@ -25,7 +25,10 @@ public final class IrascibleWolverine extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Irascible Wolverine enters the battlefield, exile the top card of your library. Until end of turn, you may play that card.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new ExileTopXMayPlayUntilEffect(1, Duration.EndOfTurn)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(
+                new ExileTopXMayPlayUntilEffect(1, Duration.EndOfTurn)
+                        .withTextOptions("that card", false)
+        ));
 
         // Plot {2}{R}
         this.addAbility(new PlotAbility("{2}{R}"));

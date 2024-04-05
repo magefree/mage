@@ -68,7 +68,7 @@ class MemoryVesselExileEffect extends OneShotEffect {
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player == null) {
-                return false;
+                continue;
             }
             Set<Card> cards = player.getLibrary().getTopCards(game, 7);
             player.moveCards(cards, Zone.EXILED, source, game);
@@ -86,7 +86,7 @@ class MemoryVesselExileEffect extends OneShotEffect {
 class MemoryVesselPreventionEffect extends ContinuousRuleModifyingEffectImpl {
 
     public MemoryVesselPreventionEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit);
+        super(Duration.UntilYourNextTurn, Outcome.Benefit);
         staticText = ", and they can't play cards from their hand";
     }
 

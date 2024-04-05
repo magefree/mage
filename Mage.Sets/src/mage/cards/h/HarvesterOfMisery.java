@@ -15,6 +15,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -36,7 +37,7 @@ public final class HarvesterOfMisery extends CardImpl {
 
         // When Harvester of Misery enters the battlefield, other creatures get -2/-2 until end of turn.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new BoostAllEffect(
-                -2, -2, Duration.EndOfTurn, true
+                -2, -2, Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES, true
         )));
 
         // {1}{B}, Discard Harvester of Misery: Target creature gets -2/-2 until end of turn.

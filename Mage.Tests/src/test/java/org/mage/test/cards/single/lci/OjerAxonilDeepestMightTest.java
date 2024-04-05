@@ -66,6 +66,26 @@ public class OjerAxonilDeepestMightTest extends CardTestPlayerBase {
         assertLife(playerB, 20 - 4);
     }
 
+    /**
+     * bug report: red sources from others players are affected.
+     * #12066
+     */
+    @Test
+    public void testReplacement_NotControlled() {
+        setStrictChooseMode(true);
+
+        addCard(Zone.BATTLEFIELD, playerA, ojer, 1);
+        addCard(Zone.HAND, playerB, bolt, 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Mountain", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, bolt, playerB);
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertLife(playerB, 20 - 3); // Ojer doesn't modify that damage
+    }
+
     @Test
     public void testReplacement_BoltOwnFace() {
         setStrictChooseMode(true);

@@ -49,7 +49,7 @@ public final class FortuneLoyalSteed extends CardImpl {
 
         // Whenever Fortune attacks while saddled, at end of combat, exile it and up to one creature that saddled it this turn, then return those cards to the battlefield under their owner's control.
         this.addAbility(new AttacksWhileSaddledTriggeredAbility(new CreateDelayedTriggeredAbilityEffect(
-                new AtTheEndOfCombatDelayedTriggeredAbility(new FortuneLoyalSteedEffect())
+                new AtTheEndOfCombatDelayedTriggeredAbility(new FortuneLoyalSteedEffect()).setTriggerPhrase("at end of combat")
         )));
 
         // Saddle 1
@@ -101,9 +101,7 @@ class FortuneLoyalSteedEffect extends OneShotEffect {
         player.choose(outcome, target, source, game);
         permanents.add(game.getPermanent(target.getFirstTarget()));
         permanents.removeIf(Objects::isNull);
-        return permanents.isEmpty()
-                ? false
-                : new ExileThenReturnTargetEffect(false, false)
+        return !permanents.isEmpty() && new ExileThenReturnTargetEffect(false, false)
                 .setTargetPointer(new FixedTargets(permanents, game))
                 .apply(game, source);
     }

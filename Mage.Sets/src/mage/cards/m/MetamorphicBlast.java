@@ -30,7 +30,8 @@ public final class MetamorphicBlast extends CardImpl {
         // + {1} -- Until end of turn, target creature becomes a white Rabbit with base power and toughness 0/1.
         this.getSpellAbility().addEffect(new BecomesCreatureTargetEffect(new CreatureToken(
                 0, 1, "white Rabbit with base power and toughness 0/1"
-        ).withSubType(SubType.RABBIT).withColor("W"), false, false, Duration.EndOfTurn));
+        ).withSubType(SubType.RABBIT).withColor("W"), false, false, Duration.EndOfTurn)
+                .withDurationRuleAtStart(true));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().withFirstModeCost(new GenericManaCost(1));
 

@@ -38,7 +38,7 @@ public final class LavaspurBoots extends CardImpl {
         this.addAbility(ability);
 
         // Equip {1}
-        this.addAbility(new EquipAbility(1));
+        this.addAbility(new EquipAbility(1, false));
     }
 
     private LavaspurBoots(final LavaspurBoots card) {

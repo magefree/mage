@@ -40,7 +40,8 @@ public final class RoryWilliams extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
 
         // The Last Centurion -- When you cast this spell from anywhere other than exile, exile it with three time counters on it. It gains suspend. Then investigate.
-        Ability ability = new RoryWilliamsTriggeredAbility(new ExileSpellWithTimeCountersEffect(3, true));
+        Ability ability = new RoryWilliamsTriggeredAbility(new ExileSpellWithTimeCountersEffect(3, true)
+                .setText("exile it with three time counters on it. It gains suspend"));
         ability.addEffect(new InvestigateEffect(1).concatBy("Then"));
         ability.withFlavorWord("The Last Centurion");
         this.addAbility(ability);
@@ -62,7 +63,6 @@ class RoryWilliamsTriggeredAbility extends CastSourceTriggeredAbility {
         super(effect, false);
         setRuleAtTheTop(true);
         setTriggerPhrase("When you cast this spell from anywhere other than exile, ");
-        withRuleTextReplacement(true);
     }
 
     private RoryWilliamsTriggeredAbility(final RoryWilliamsTriggeredAbility ability) {

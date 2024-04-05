@@ -66,7 +66,7 @@ class RamblingPossumEffect extends OneShotEffect {
 
     RamblingPossumEffect() {
         super(Outcome.Benefit);
-        staticText = "then you may return any number of creatures that saddled it this turn to their owner's hand";
+        staticText = "Then you may return any number of creatures that saddled it this turn to their owner's hand";
     }
 
     private RamblingPossumEffect(final RamblingPossumEffect effect) {

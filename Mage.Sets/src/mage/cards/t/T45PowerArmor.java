@@ -55,7 +55,7 @@ public final class T45PowerArmor extends CardImpl {
         ));
 
         // Equip {3}
-        this.addAbility(new EquipAbility(3));
+        this.addAbility(new EquipAbility(3, false));
     }
 
     private T45PowerArmor(final T45PowerArmor card) {

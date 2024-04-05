@@ -35,7 +35,8 @@ public final class SwordOfWealthAndPower extends CardImpl {
 
         // Equipped creature gets +2/+2 and has protection from instants and from sorceries.
         Ability ability = new SimpleStaticAbility(new BoostEquippedEffect(2, 2));
-        ability.addEffect(new GainAbilityAttachedEffect(new ProtectionAbility(filter), AttachmentType.EQUIPMENT));
+        ability.addEffect(new GainAbilityAttachedEffect(new ProtectionAbility(filter), AttachmentType.EQUIPMENT)
+                .setText("and has protection from instants and from sorceries"));
         this.addAbility(ability);
 
         // Whenever equipped creature deals combat damage to a player, create a Treasure token. When you next cast an instant or sorcery spell this turn, copy that spell. You may choose new targets for the copy.

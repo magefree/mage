@@ -28,7 +28,7 @@ public final class VileEntomber extends CardImpl {
         this.addAbility(DeathtouchAbility.getInstance());
 
         // When Vile Entomber enters the battlefield, search your library for a card, put that card into your graveyard, then shuffle.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInGraveyardEffect()));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInGraveyardEffect(true)));
     }
 
     private VileEntomber(final VileEntomber card) {

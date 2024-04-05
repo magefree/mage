@@ -86,7 +86,7 @@ class LazavFamiliarStrangerEffect extends OneShotEffect {
         if (!flag) {
             return true;
         }
-        Permanent lazav = game.getPermanent(source.getSourceId());
+        Permanent lazav = source.getSourcePermanentIfItStillExists(game);
         if (lazav == null) {
             return true;
         }

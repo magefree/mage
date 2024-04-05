@@ -34,7 +34,7 @@ public final class TheKeyToTheVault extends CardImpl {
         ));
 
         // Equip {2}{U}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new ManaCostsImpl<>("{2}{U}")));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new ManaCostsImpl<>("{2}{U}"), false));
     }
 
     private TheKeyToTheVault(final TheKeyToTheVault card) {
