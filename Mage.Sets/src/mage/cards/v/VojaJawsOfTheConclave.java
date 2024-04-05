@@ -58,8 +58,7 @@ public final class VojaJawsOfTheConclave extends CardImpl {
         // where X is the number of Elves you control. Draw a card for each Wolf you control.
         Ability ability = new AttacksTriggeredAbility(
                 new AddCountersAllEffect(
-                        // Set amount to 0, otherwise AddCountersAllEffect.apply() will default to amount = 1 if xValueElves = 0
-                        CounterType.P1P1.createInstance(0),
+                        CounterType.P1P1.createInstance(),
                         xValueElves,
                         StaticFilters.FILTER_CONTROLLED_CREATURE
                 ).setText("put X +1/+1 counters on each creature you control, where X is the number of Elves you control"));
