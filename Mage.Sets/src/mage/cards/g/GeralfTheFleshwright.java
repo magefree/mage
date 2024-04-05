@@ -72,7 +72,7 @@ class GeralfTheFleshwrightTriggeredAbility extends TriggeredAbilityImpl {
 
     public GeralfTheFleshwrightTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new ZombieRogueToken()));
-        setTriggerPhrase("Whenever you cast a spell during your turn other than your first spell thhat turn, ");
+        setTriggerPhrase("Whenever you cast a spell during your turn other than your first spell that turn, ");
     }
 
     private GeralfTheFleshwrightTriggeredAbility(final GeralfTheFleshwrightTriggeredAbility ability) {

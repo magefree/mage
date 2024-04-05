@@ -6,7 +6,6 @@ import mage.abilities.costs.CostAdjuster;
 import mage.abilities.costs.OptionalAdditionalCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageWithPowerFromOneToAnotherTargetEffect;
-import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.keyword.CollectEvidenceAbility;
 import mage.cards.CardImpl;
@@ -31,9 +30,7 @@ public final class BiteDownOnCrime extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{G}");
 
         // As an additional cost to cast this spell, you may collect evidence 6. This spell costs {2} less to cast if evidence was collected.
-        this.addAbility(new CollectEvidenceAbility(6));
-
-        this.getSpellAbility().addEffect(new InfoEffect("this spell costs {2} less to cast if evidence was collected"));
+        this.addAbility(new CollectEvidenceAbility(6,"This spell costs {2} less to cast if evidence was collected"));
         this.getSpellAbility().setCostAdjuster(BiteDownOnCrimeAdjuster.instance);
 
         // Target creature you control gets +2/+0 until end of turn.

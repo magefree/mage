@@ -35,7 +35,7 @@ import java.util.UUID;
  */
 public final class OneLastJob extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("Mount or Vehicle card");
+    private static final FilterCard filter = new FilterCard("Mount or Vehicle card from your graveyard");
     private static final FilterCard filter2 = new FilterCard("Aura or Equipment card");
 
     static {
@@ -51,7 +51,7 @@ public final class OneLastJob extends CardImpl {
 
         // + {2} -- Return target creature card from your graveyard to the battlefield.
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE));
+        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         this.getSpellAbility().withFirstModeCost(new GenericManaCost(2));
 
         // + {1} -- Return target Mount or Vehicle card from your graveyard to the battlefield.

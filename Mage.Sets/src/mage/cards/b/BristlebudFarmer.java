@@ -38,7 +38,7 @@ public final class BristlebudFarmer extends CardImpl {
 
         // Whenever Bristlebud Farmer attacks, you may sacrifice a Food. If you do, mill three cards. You may put a permanent card from among them into your hand.
         this.addAbility(new AttacksTriggeredAbility(new DoIfCostPaid(
-                new MillThenPutInHandEffect(3, StaticFilters.FILTER_CARD_PERMANENT),
+                new MillThenPutInHandEffect(3, StaticFilters.FILTER_CARD_A_PERMANENT).withTextOptions("them"),
                 new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_FOOD)
         )));
     }

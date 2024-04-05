@@ -53,7 +53,8 @@ public final class RikuOfManyPaths extends CardImpl {
 class RikuOfManyPathsTriggeredAbility extends TriggeredAbilityImpl {
 
     RikuOfManyPathsTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new ExileTopXMayPlayUntilEffect(1, Duration.UntilEndOfYourNextTurn));
+        super(Zone.BATTLEFIELD, new ExileTopXMayPlayUntilEffect(1, Duration.UntilEndOfYourNextTurn)
+                .withTextOptions("it", false));
         this.setTriggerPhrase("Whenever you cast a modal spell, ");
         this.getModes().setChooseText("choose up to X, where X is the number of times you chose a mode for that spell &mdash;");
         this.addMode(new Mode(new AddCountersSourceEffect(CounterType.P1P1.createInstance()))

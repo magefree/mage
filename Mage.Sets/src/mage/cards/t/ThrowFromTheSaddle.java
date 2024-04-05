@@ -31,7 +31,7 @@ public final class ThrowFromTheSaddle extends CardImpl {
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
         this.getSpellAbility().addEffect(new ThrowFromTheSaddleEffect());
-        this.getSpellAbility().addEffect(new DamageWithPowerFromOneToAnotherTargetEffect().concatBy("Then"));
+        this.getSpellAbility().addEffect(new DamageWithPowerFromOneToAnotherTargetEffect("it").concatBy("Then"));
     }
 
     private ThrowFromTheSaddle(final ThrowFromTheSaddle card) {

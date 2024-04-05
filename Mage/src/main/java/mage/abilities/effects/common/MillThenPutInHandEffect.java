@@ -138,7 +138,7 @@ public class MillThenPutInHandEffect extends OneShotEffect {
         sb.append("put ");
         if (maxAmountReturned > 1) {
             sb.append(optional ? "up to " : "");
-            sb.append(CardUtil.numberToText(amount) + " ");
+            sb.append(CardUtil.numberToText(maxAmountReturned) + " ");
         }
         sb.append(filter.getMessage());
         sb.append(" from among ");
