@@ -85,7 +85,7 @@ class LocusOfEnlightenmentEffect extends ContinuousEffectImpl {
                 if (ability.getAbilityType() == AbilityType.ACTIVATED || ability.getAbilityType() == AbilityType.MANA) {
                     ActivatedAbility copyAbility = (ActivatedAbility) ability.copy();
                     copyAbility.setMaxActivationsPerTurn(1);
-                    permanent.addAbility(copyAbility, source.getSourceId(), game);
+                    permanent.addAbility(copyAbility, source.getSourceId(), game, true);
                 }
             }
         }
