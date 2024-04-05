@@ -30,22 +30,22 @@ public class MayCastTargetCardEffect extends OneShotEffect {
     /**
      * Allows to cast the target card immediately, for its manacost.
      */
-    public MayCastTargetCardEffect(boolean exileOnResolve) {
-        this(CastManaAdjustment.NONE, exileOnResolve);
+    public MayCastTargetCardEffect(boolean thenExile) {
+        this(CastManaAdjustment.NONE, thenExile);
     }
 
     /**
      * Allows to cast the target card immediately, either for its cost or with a modifier (like for free, or mana as any type).
      */
-    public MayCastTargetCardEffect(CastManaAdjustment manaAdjustment, boolean exileOnResolve) {
-        this(Duration.OneUse, manaAdjustment, exileOnResolve);
+    public MayCastTargetCardEffect(CastManaAdjustment manaAdjustment, boolean thenExile) {
+        this(Duration.OneUse, manaAdjustment, thenExile);
     }
 
     /**
      * Makes the target card playable for the specified duration as long as it remains in that zone.
      */
-    public MayCastTargetCardEffect(Duration duration, boolean exileOnResolve) {
-        this(duration, CastManaAdjustment.NONE, exileOnResolve);
+    public MayCastTargetCardEffect(Duration duration, boolean thenExile) {
+        this(duration, CastManaAdjustment.NONE, thenExile);
     }
 
     protected MayCastTargetCardEffect(Duration duration, CastManaAdjustment manaAdjustment, boolean thenExile) {
@@ -83,6 +83,7 @@ public class MayCastTargetCardEffect extends OneShotEffect {
         if (card == null) {
             return false;
         }
+        FixedTarget fixedTarget = new FixedTarget(card, game);
         if (duration == Duration.OneUse) {
             Player controller = game.getPlayer(source.getControllerId());
             if (controller == null || !controller.chooseUse(outcome, "Cast " + card.getLogName() + '?', source, game)) {
@@ -98,7 +99,7 @@ public class MayCastTargetCardEffect extends OneShotEffect {
                     // TODO: untangle why there is a confusion between the two.
                     ContinuousEffect effect =
                             new YouMaySpendManaAsAnyColorToCastTargetEffect(Duration.Custom, controller.getId(), null);
-                    effect.setTargetPointer(new FixedTarget(card, game));
+                    effect.setTargetPointer(fixedTarget.copy());
                     game.addEffect(effect, source);
                     break;
                 default:
@@ -116,7 +117,7 @@ public class MayCastTargetCardEffect extends OneShotEffect {
         }
         if (thenExile) {
             ContinuousEffect effect = new ThatSpellGraveyardExileReplacementEffect(true);
-            effect.setTargetPointer(new FixedTarget(card, game));
+            effect.setTargetPointer(fixedTarget.copy());
             game.addEffect(effect, source);
         }
         return true;
