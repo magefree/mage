@@ -134,6 +134,8 @@ public final class OutlawsOfThunderJunction extends ExpansionSet {
         cards.add(new SetCardInfo("Final Showdown", 312, Rarity.MYTHIC, mage.cards.f.FinalShowdown.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fleeting Reflection", 49, Rarity.UNCOMMON, mage.cards.f.FleetingReflection.class));
         cards.add(new SetCardInfo("Forest", 276, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 285, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 286, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forlorn Flats", 258, Rarity.COMMON, mage.cards.f.ForlornFlats.class));
         cards.add(new SetCardInfo("Form a Posse", 204, Rarity.UNCOMMON, mage.cards.f.FormAPosse.class));
         cards.add(new SetCardInfo("Forsaken Miner", 88, Rarity.UNCOMMON, mage.cards.f.ForsakenMiner.class));
@@ -185,6 +187,8 @@ public final class OutlawsOfThunderJunction extends ExpansionSet {
         cards.add(new SetCardInfo("Irascible Wolverine", 130, Rarity.COMMON, mage.cards.i.IrascibleWolverine.class));
         cards.add(new SetCardInfo("Iron-Fist Pulverizer", 131, Rarity.COMMON, mage.cards.i.IronFistPulverizer.class));
         cards.add(new SetCardInfo("Island", 273, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Island", 279, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 280, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jace Reawakened", 271, Rarity.MYTHIC, mage.cards.j.JaceReawakened.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jace Reawakened", 306, Rarity.MYTHIC, mage.cards.j.JaceReawakened.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jagged Barrens", 259, Rarity.COMMON, mage.cards.j.JaggedBarrens.class));
@@ -231,6 +235,8 @@ public final class OutlawsOfThunderJunction extends ExpansionSet {
         cards.add(new SetCardInfo("Miriam, Herd Whisperer", 221, Rarity.UNCOMMON, mage.cards.m.MiriamHerdWhisperer.class));
         cards.add(new SetCardInfo("Mobile Homestead", 245, Rarity.UNCOMMON, mage.cards.m.MobileHomestead.class));
         cards.add(new SetCardInfo("Mountain", 275, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 283, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 284, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mourner's Surprise", 94, Rarity.COMMON, mage.cards.m.MournersSurprise.class));
         cards.add(new SetCardInfo("Mystical Tether", 19, Rarity.COMMON, mage.cards.m.MysticalTether.class));
         cards.add(new SetCardInfo("Neutralize the Guards", 95, Rarity.UNCOMMON, mage.cards.n.NeutralizeTheGuards.class));
@@ -263,6 +269,8 @@ public final class OutlawsOfThunderJunction extends ExpansionSet {
         cards.add(new SetCardInfo("Pitiless Carnage", 326, Rarity.RARE, mage.cards.p.PitilessCarnage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Pitiless Carnage", 98, Rarity.RARE, mage.cards.p.PitilessCarnage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 272, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 277, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 278, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plan the Heist", 62, Rarity.UNCOMMON, mage.cards.p.PlanTheHeist.class));
         cards.add(new SetCardInfo("Prairie Dog", 24, Rarity.UNCOMMON, mage.cards.p.PrairieDog.class));
         cards.add(new SetCardInfo("Prickly Pair", 137, Rarity.COMMON, mage.cards.p.PricklyPair.class));
@@ -347,6 +355,8 @@ public final class OutlawsOfThunderJunction extends ExpansionSet {
         cards.add(new SetCardInfo("Stop Cold", 72, Rarity.COMMON, mage.cards.s.StopCold.class));
         cards.add(new SetCardInfo("Stubborn Burrowfiend", 184, Rarity.UNCOMMON, mage.cards.s.StubbornBurrowfiend.class));
         cards.add(new SetCardInfo("Swamp", 274, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 281, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 282, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Taii Wakeen, Perfect Shot", 234, Rarity.RARE, mage.cards.t.TaiiWakeenPerfectShot.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Taii Wakeen, Perfect Shot", 365, Rarity.RARE, mage.cards.t.TaiiWakeenPerfectShot.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Take Up the Shield", 34, Rarity.COMMON, mage.cards.t.TakeUpTheShield.class));
