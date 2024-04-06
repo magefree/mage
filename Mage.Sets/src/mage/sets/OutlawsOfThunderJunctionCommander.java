@@ -66,6 +66,7 @@ public final class OutlawsOfThunderJunctionCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Command Beacon", 279, Rarity.RARE, mage.cards.c.CommandBeacon.class));
         cards.add(new SetCardInfo("Command Tower", 280, Rarity.COMMON, mage.cards.c.CommandTower.class));
         cards.add(new SetCardInfo("Council's Judgment", 79, Rarity.RARE, mage.cards.c.CouncilsJudgment.class));
+        cards.add(new SetCardInfo("Crackling Spellslinger", 25, Rarity.RARE, mage.cards.c.CracklingSpellslinger.class));
         cards.add(new SetCardInfo("Crawling Sensation", 189, Rarity.UNCOMMON, mage.cards.c.CrawlingSensation.class));
         cards.add(new SetCardInfo("Culling Ritual", 219, Rarity.RARE, mage.cards.c.CullingRitual.class));
         cards.add(new SetCardInfo("Cunning Rhetoric", 129, Rarity.RARE, mage.cards.c.CunningRhetoric.class));
