@@ -51,7 +51,7 @@ public final class SandScout extends CardImpl {
         // Whenever one or more land cards are put into your graveyard from anywhere, create a 1/1 red, green, and white Sand Warrior creature token. This ability triggers only once each turn.
         this.addAbility(new PutCardIntoGraveFromAnywhereAllTriggeredAbility(
                 new CreateTokenEffect(new HazezonTamarSandWarriorToken()), false, StaticFilters.FILTER_CARD_LAND, TargetController.YOU
-        ).setTriggersOnceEachTurn(true));
+        ).setTriggerPhrase("Whenever one or more land cards are put into your graveyard from anywhere, ").setTriggersOnceEachTurn(true));
     }
 
     private SandScout(final SandScout card) {

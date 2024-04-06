@@ -42,7 +42,7 @@ public final class EmergentHaunting extends CardImpl {
                         null, Duration.WhileOnBattlefield
                 ),
                 TargetController.YOU, condition, false
-        ).addHint(HaventCastSpellFromHandThisTurnCondition.hint));
+        ).withRuleTextReplacement(true).addHint(HaventCastSpellFromHandThisTurnCondition.hint));
 
         // {2}{U}: Surveil 1.
         this.addAbility(new SimpleActivatedAbility(new SurveilEffect(1), new ManaCostsImpl<>("{2}{U}")));

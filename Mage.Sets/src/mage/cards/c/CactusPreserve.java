@@ -51,7 +51,8 @@ class CactusPreserveEffect extends OneShotEffect {
 
     CactusPreserveEffect() {
         super(Outcome.BecomeCreature);
-        this.staticText = "{this} becomes an X/X green Plant creature with reach, where X is the greatest mana value among your commanders. It's still a land.";
+        this.staticText = "Until end of turn, {this} becomes an X/X green Plant creature with reach, "
+                + "where X is the greatest mana value among your commanders. It's still a land.";
     }
 
     private CactusPreserveEffect(final CactusPreserveEffect effect) {

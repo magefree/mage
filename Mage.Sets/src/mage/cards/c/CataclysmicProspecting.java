@@ -41,7 +41,8 @@ public final class CataclysmicProspecting extends CardImpl {
 
         // Cataclysmic Prospecting deals X damage to each creature. For each mana from a Desert spent to cast this spell, create a tapped Treasure token.
         this.getSpellAbility().addEffect(new DamageAllEffect(ManacostVariableValue.REGULAR, StaticFilters.FILTER_PERMANENT_CREATURE));
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new TreasureToken(), CataclysmicProspectingValue.instance, true, false));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new TreasureToken(), CataclysmicProspectingValue.instance, true, false)
+                .setText("For each mana from a Desert spent to cast this spell, create a tapped Treasure token."));
         this.getSpellAbility().addWatcher(new CataclysmicProspectingWatcher());
         this.getSpellAbility().addHint(hint);
     }
