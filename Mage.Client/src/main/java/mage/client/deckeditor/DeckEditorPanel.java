@@ -1590,14 +1590,15 @@ class ImportFilter extends FileFilter {
                     || ext.equalsIgnoreCase("o8d")
                     || ext.equalsIgnoreCase("json")
                     || ext.equalsIgnoreCase("draft")
-                    || ext.equalsIgnoreCase("mtga");
+                    || ext.equalsIgnoreCase("mtga")
+                    || ext.equalsIgnoreCase("dck");
         }
         return false;
     }
 
     @Override
     public String getDescription() {
-        return "All formats (*.dec; *.mwDeck; *.txt; *.dek; *.cod; *.o8d; *.json; *.draft; *.mtga;)";
+        return "All formats (*.dec; *.mwDeck; *.txt; *.dek; *.cod; *.o8d; *.json; *.draft; *.mtga; *.dck;)";
     }
 }
 

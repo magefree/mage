@@ -50,6 +50,8 @@ public abstract class DeckImporter {
         }
         if (file.toLowerCase(Locale.ENGLISH).endsWith("dec")) {
             return new DecDeckImporter();
+        } else if (file.toLowerCase(Locale.ENGLISH).endsWith(".forge.dck")) {
+            return new ForgeImporter();
         } else if (file.toLowerCase(Locale.ENGLISH).endsWith("mwdeck")) {
             return new MWSDeckImporter();
         } else if (file.toLowerCase(Locale.ENGLISH).endsWith("txt")) {
