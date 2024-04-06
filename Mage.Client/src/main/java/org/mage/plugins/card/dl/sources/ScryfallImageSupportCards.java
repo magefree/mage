@@ -507,13 +507,13 @@ public class ScryfallImageSupportCards {
             add("SNC"); // Streets of New Capenna
             add("NCC"); // New Capenna Commander
             add("SLX"); // Universes Within
-            add("CLB"); // Commander Legends: Battle For Baldur's Gate
+            add("CLB"); // Commander Legends: Battle for Baldur's Gate
             add("2X2"); // Double Masters 2022
             add("DMU"); // Dominaria United
             add("DMC"); // Dominaria United Commander
             add("40K"); // Warhammer 40,000
             add("UNF"); // Unfinity
-            add("GN3"); // Game Night Free-for-All
+            add("GN3"); // Game Night: Free-for-All
             add("BRO"); // The Brothers' War
             add("BRC"); // The Brothers' War Commander
             add("BRR"); // The Brothers' War Retro Artifacts
