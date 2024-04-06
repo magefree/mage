@@ -98,7 +98,7 @@ class SavvyTraderEffect extends OneShotEffect {
         //       On a more broad subject, there is a bunch of improvements we could do to exile zone management.
         String keyForPlayer = "Shared::EndOfGame::PlayerMayPlay=" + controller.getId();
         UUID exileId = CardUtil.getExileZoneId(keyForPlayer, game);
-        String exileName = controller.getName() + " may play until end of game";
+        String exileName = controller.getName() + " may play for as long as cards remains exiled";
         if (controller.moveCardsToExile(card, source, game, true, exileId, exileName)) {
             ContinuousEffect effect = new PlayFromNotOwnHandZoneTargetEffect(Duration.EndOfGame);
             effect.setTargetPointer(new FixedTarget(card, game));
