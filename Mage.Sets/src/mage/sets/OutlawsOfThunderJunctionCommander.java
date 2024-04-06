@@ -91,6 +91,7 @@ public final class OutlawsOfThunderJunctionCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Dire Fleet Ravager", 132, Rarity.MYTHIC, mage.cards.d.DireFleetRavager.class));
         cards.add(new SetCardInfo("Dragonskull Summit", 289, Rarity.RARE, mage.cards.d.DragonskullSummit.class));
         cards.add(new SetCardInfo("Drowned Catacomb", 290, Rarity.RARE, mage.cards.d.DrownedCatacomb.class));
+        cards.add(new SetCardInfo("Dune Chanter", 31, Rarity.RARE, mage.cards.d.DuneChanter.class));
         cards.add(new SetCardInfo("Dunes of the Dead", 291, Rarity.UNCOMMON, mage.cards.d.DunesOfTheDead.class));
         cards.add(new SetCardInfo("Eccentric Farmer", 190, Rarity.COMMON, mage.cards.e.EccentricFarmer.class));
         cards.add(new SetCardInfo("Edric, Spymaster of Trest", 221, Rarity.RARE, mage.cards.e.EdricSpymasterOfTrest.class));
