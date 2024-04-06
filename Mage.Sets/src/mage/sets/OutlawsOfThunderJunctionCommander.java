@@ -29,6 +29,7 @@ public final class OutlawsOfThunderJunctionCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Angrath's Marauders", 153, Rarity.RARE, mage.cards.a.AngrathsMarauders.class));
         cards.add(new SetCardInfo("Arcane Bombardment", 154, Rarity.MYTHIC, mage.cards.a.ArcaneBombardment.class));
         cards.add(new SetCardInfo("Arcane Denial", 89, Rarity.COMMON, mage.cards.a.ArcaneDenial.class));
+        cards.add(new SetCardInfo("Arcane Heist", 13, Rarity.RARE, mage.cards.a.ArcaneHeist.class));
         cards.add(new SetCardInfo("Arcane Signet", 252, Rarity.COMMON, mage.cards.a.ArcaneSignet.class));
         cards.add(new SetCardInfo("Archmage Emeritus", 90, Rarity.RARE, mage.cards.a.ArchmageEmeritus.class));
         cards.add(new SetCardInfo("Avenger of Zendikar", 187, Rarity.MYTHIC, mage.cards.a.AvengerOfZendikar.class));
