@@ -47,6 +47,7 @@ public final class OutlawsOfThunderJunctionCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Boros Charm", 216, Rarity.UNCOMMON, mage.cards.b.BorosCharm.class));
         cards.add(new SetCardInfo("Brainstealer Dragon", 127, Rarity.RARE, mage.cards.b.BrainstealerDragon.class));
         cards.add(new SetCardInfo("Breena, the Demagogue", 217, Rarity.MYTHIC, mage.cards.b.BreenaTheDemagogue.class));
+        cards.add(new SetCardInfo("Cactus Preserve", 40, Rarity.RARE, mage.cards.c.CactusPreserve.class));
         cards.add(new SetCardInfo("Canyon Slough", 275, Rarity.RARE, mage.cards.c.CanyonSlough.class));
         cards.add(new SetCardInfo("Captain Lannery Storm", 158, Rarity.RARE, mage.cards.c.CaptainLanneryStorm.class));
         cards.add(new SetCardInfo("Captivating Crew", 159, Rarity.RARE, mage.cards.c.CaptivatingCrew.class));
