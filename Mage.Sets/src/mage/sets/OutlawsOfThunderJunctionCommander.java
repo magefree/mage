@@ -220,6 +220,7 @@ public final class OutlawsOfThunderJunctionCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Sage of the Beyond", 111, Rarity.RARE, mage.cards.s.SageOfTheBeyond.class));
         cards.add(new SetCardInfo("Sand Scout", 11, Rarity.RARE, mage.cards.s.SandScout.class));
         cards.add(new SetCardInfo("Satyr Wayfinder", 204, Rarity.COMMON, mage.cards.s.SatyrWayfinder.class));
+        cards.add(new SetCardInfo("Savvy Trader", 33, Rarity.RARE, mage.cards.s.SavvyTrader.class));
         cards.add(new SetCardInfo("Scaretiller", 266, Rarity.COMMON, mage.cards.s.Scaretiller.class));
         cards.add(new SetCardInfo("Scattered Groves", 315, Rarity.RARE, mage.cards.s.ScatteredGroves.class));
         cards.add(new SetCardInfo("Scavenger Grounds", 316, Rarity.RARE, mage.cards.s.ScavengerGrounds.class));
