@@ -29,6 +29,7 @@ public final class OutlawsOfThunderJunctionCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Leyline Dowser", 39, Rarity.RARE, mage.cards.l.LeylineDowser.class));
         cards.add(new SetCardInfo("Rumbleweed", 68, Rarity.RARE, mage.cards.r.Rumbleweed.class));
         cards.add(new SetCardInfo("Stella Lee, Wild Card", 3, Rarity.MYTHIC, mage.cards.s.StellaLeeWildCard.class));
+        cards.add(new SetCardInfo("Vengeful Regrowth", 71, Rarity.RARE, mage.cards.v.VengefulRegrowth.class));
         cards.add(new SetCardInfo("Yuma, Proud Protector", 4, Rarity.MYTHIC, mage.cards.y.YumaProudProtector.class));
     }
 }
