@@ -155,6 +155,7 @@ public final class OutlawsOfThunderJunctionCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Life Insurance", 233, Rarity.RARE, mage.cards.l.LifeInsurance.class));
         cards.add(new SetCardInfo("Lightning Greaves", 260, Rarity.UNCOMMON, mage.cards.l.LightningGreaves.class));
         cards.add(new SetCardInfo("Llanowar Wastes", 305, Rarity.RARE, mage.cards.l.LlanowarWastes.class));
+        cards.add(new SetCardInfo("Lock and Load", 15, Rarity.RARE, mage.cards.l.LockAndLoad.class));
         cards.add(new SetCardInfo("Magmatic Insight", 173, Rarity.UNCOMMON, mage.cards.m.MagmaticInsight.class));
         cards.add(new SetCardInfo("Mari, the Killing Quill", 138, Rarity.RARE, mage.cards.m.MariTheKillingQuill.class));
         cards.add(new SetCardInfo("Marshal's Anthem", 82, Rarity.RARE, mage.cards.m.MarshalsAnthem.class));
