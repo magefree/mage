@@ -237,6 +237,7 @@ public final class OutlawsOfThunderJunctionCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Siphon Insight", 242, Rarity.RARE, mage.cards.s.SiphonInsight.class));
         cards.add(new SetCardInfo("Skullwinder", 207, Rarity.UNCOMMON, mage.cards.s.Skullwinder.class));
         cards.add(new SetCardInfo("Slither Blade", 114, Rarity.COMMON, mage.cards.s.SlitherBlade.class));
+        cards.add(new SetCardInfo("Smirking Spelljacker", 16, Rarity.RARE, mage.cards.s.SmirkingSpelljacker.class));
         cards.add(new SetCardInfo("Smoldering Marsh", 321, Rarity.RARE, mage.cards.s.SmolderingMarsh.class));
         cards.add(new SetCardInfo("Sol Ring", 267, Rarity.UNCOMMON, mage.cards.s.SolRing.class));
         cards.add(new SetCardInfo("Springbloom Druid", 208, Rarity.COMMON, mage.cards.s.SpringbloomDruid.class));
