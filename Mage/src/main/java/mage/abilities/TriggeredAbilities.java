@@ -308,10 +308,9 @@ public class TriggeredAbilities extends LinkedHashMap<String, TriggeredAbility> 
 
     public void removeAbilitiesOfNonExistingSources(Game game) {
         // e.g. Token that had triggered abilities
-
         entrySet().removeIf(entry -> game.getObject(entry.getValue().getSourceId()) == null
+                && game.getState().getInherentEmblems().stream().noneMatch(emblem -> emblem.getId().equals(entry.getValue().getSourceId()))
                 && game.getState().getDesignations().stream().noneMatch(designation -> designation.getId().equals(entry.getValue().getSourceId())));
-
     }
 
     @Override
