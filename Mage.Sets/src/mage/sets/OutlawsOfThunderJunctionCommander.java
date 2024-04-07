@@ -77,6 +77,7 @@ public final class OutlawsOfThunderJunctionCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Darksteel Ingot", 256, Rarity.UNCOMMON, mage.cards.d.DarksteelIngot.class));
         cards.add(new SetCardInfo("Darkwater Catacombs", 282, Rarity.RARE, mage.cards.d.DarkwaterCatacombs.class));
         cards.add(new SetCardInfo("Dazzling Sphinx", 93, Rarity.RARE, mage.cards.d.DazzlingSphinx.class));
+        cards.add(new SetCardInfo("Dead Before Sunrise", 26, Rarity.RARE, mage.cards.d.DeadBeforeSunrise.class));
         cards.add(new SetCardInfo("Deadly Dispute", 131, Rarity.COMMON, mage.cards.d.DeadlyDispute.class));
         cards.add(new SetCardInfo("Decimate", 220, Rarity.RARE, mage.cards.d.Decimate.class));
         cards.add(new SetCardInfo("Deep Analysis", 94, Rarity.COMMON, mage.cards.d.DeepAnalysis.class));
