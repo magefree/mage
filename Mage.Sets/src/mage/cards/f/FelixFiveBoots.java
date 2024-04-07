@@ -11,11 +11,12 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
-import mage.game.events.DamagedEvent;
-import mage.game.events.GameEvent;
-import mage.game.events.NumberOfTriggersEvent;
+import mage.game.events.*;
 import mage.game.permanent.Permanent;
 
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -94,12 +95,21 @@ class FelixFiveBootsEffect extends ReplacementEffectImpl {
             default:
                 return false;
         }
-        if (!((DamagedEvent)sourceEvent).isCombatDamage()) {
+
+        Set<UUID> damageSources = new HashSet<>();
+        if (sourceEvent instanceof BatchEvent) {
+            damageSources.addAll(((BatchEvent<?>) sourceEvent).getSourceIds());
+        } else if (sourceEvent.getSourceId() != null) {
+            damageSources.add(sourceEvent.getSourceId());
+        }
+        if (!((DamagedEvent) sourceEvent).isCombatDamage()) {
             return false;
         }
 
-        Permanent attacker = game.getPermanentOrLKIBattlefield(sourceEvent.getSourceId());
-        return attacker != null && attacker.isControlledBy(source.getControllerId());
+        return damageSources.stream()
+                .map(game::getPermanentOrLKIBattlefield)
+                .filter(Objects::nonNull)
+                .anyMatch(p -> p.isControlledBy(source.getControllerId()));
     }
 
     @Override
