@@ -275,6 +275,7 @@ public final class OutlawsOfThunderJunctionCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Thief of Sanity", 243, Rarity.RARE, mage.cards.t.ThiefOfSanity.class));
         cards.add(new SetCardInfo("Thieving Amalgam", 150, Rarity.RARE, mage.cards.t.ThievingAmalgam.class));
         cards.add(new SetCardInfo("Thieving Skydiver", 118, Rarity.RARE, mage.cards.t.ThievingSkydiver.class));
+        cards.add(new SetCardInfo("Thieving Varmint", 23, Rarity.RARE, mage.cards.t.ThievingVarmint.class));
         cards.add(new SetCardInfo("Think Twice", 119, Rarity.COMMON, mage.cards.t.ThinkTwice.class));
         cards.add(new SetCardInfo("Third Path Iconoclast", 244, Rarity.UNCOMMON, mage.cards.t.ThirdPathIconoclast.class));
         cards.add(new SetCardInfo("Three Visits", 209, Rarity.UNCOMMON, mage.cards.t.ThreeVisits.class));
