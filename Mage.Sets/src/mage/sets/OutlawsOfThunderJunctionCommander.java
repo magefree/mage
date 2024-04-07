@@ -129,6 +129,7 @@ public final class OutlawsOfThunderJunctionCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Glittering Stockpile", 167, Rarity.UNCOMMON, mage.cards.g.GlitteringStockpile.class));
         cards.add(new SetCardInfo("Goblin Electromancer", 228, Rarity.COMMON, mage.cards.g.GoblinElectromancer.class));
         cards.add(new SetCardInfo("Gonti, Lord of Luxury", 135, Rarity.RARE, mage.cards.g.GontiLordOfLuxury.class));
+        cards.add(new SetCardInfo("Graywater's Fixer", 36, Rarity.RARE, mage.cards.g.GraywatersFixer.class));
         cards.add(new SetCardInfo("Grenzo, Havoc Raiser", 168, Rarity.RARE, mage.cards.g.GrenzoHavocRaiser.class));
         cards.add(new SetCardInfo("Guttersnipe", 169, Rarity.COMMON, mage.cards.g.Guttersnipe.class));
         cards.add(new SetCardInfo("Harrow", 194, Rarity.COMMON, mage.cards.h.Harrow.class));
