@@ -40,7 +40,7 @@ public final class MarcusMutantMayor extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
         this.addAbility(TrampleAbility.getInstance());
 
-        // Whenever a creature you control deals combat damage to a player, draw a card if that creature has a +1/+1 counter on it. If it doesn’t, put a +1/+1 counter on it.
+        // Whenever a creature you control deals combat damage to a player, draw a card if that creature has a +1/+1 counter on it. If it doesn't, put a +1/+1 counter on it.
         Ability ability = new DealsDamageToAPlayerAllTriggeredAbility(new MarcusMutantMayorEffect(),
                 StaticFilters.FILTER_CONTROLLED_A_CREATURE, false, SetTargetPointer.PERMANENT, true);
         this.addAbility(ability);
@@ -64,7 +64,7 @@ class MarcusMutantMayorEffect extends OneShotEffect {
 
     MarcusMutantMayorEffect() {
         super(Outcome.Benefit);
-        this.staticText = "draw a card if that creature has a +1/+1 counter on it. If it doesn’t, put a +1/+1 counter on it.";
+        this.staticText = "draw a card if that creature has a +1/+1 counter on it. If it doesn't, put a +1/+1 counter on it.";
     }
 
     private MarcusMutantMayorEffect(final MarcusMutantMayorEffect effect) {
