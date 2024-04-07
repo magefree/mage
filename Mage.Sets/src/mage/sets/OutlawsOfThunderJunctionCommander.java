@@ -203,6 +203,7 @@ public final class OutlawsOfThunderJunctionCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Propaganda", 108, Rarity.UNCOMMON, mage.cards.p.Propaganda.class));
         cards.add(new SetCardInfo("Pteramander", 109, Rarity.UNCOMMON, mage.cards.p.Pteramander.class));
         cards.add(new SetCardInfo("Putrefy", 238, Rarity.UNCOMMON, mage.cards.p.Putrefy.class));
+        cards.add(new SetCardInfo("Pyretic Charge", 29, Rarity.RARE, mage.cards.p.PyreticCharge.class));
         cards.add(new SetCardInfo("Queen Marchesa", 239, Rarity.RARE, mage.cards.q.QueenMarchesa.class));
         cards.add(new SetCardInfo("Radical Idea", 110, Rarity.COMMON, mage.cards.r.RadicalIdea.class));
         cards.add(new SetCardInfo("Rain of Riches", 177, Rarity.RARE, mage.cards.r.RainOfRiches.class));
