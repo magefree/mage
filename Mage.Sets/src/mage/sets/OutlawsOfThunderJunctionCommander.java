@@ -46,6 +46,7 @@ public final class OutlawsOfThunderJunctionCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Bojuka Bog", 273, Rarity.COMMON, mage.cards.b.BojukaBog.class));
         cards.add(new SetCardInfo("Bonders' Enclave", 274, Rarity.RARE, mage.cards.b.BondersEnclave.class));
         cards.add(new SetCardInfo("Boros Charm", 216, Rarity.UNCOMMON, mage.cards.b.BorosCharm.class));
+        cards.add(new SetCardInfo("Bounty Board", 37, Rarity.RARE, mage.cards.b.BountyBoard.class));
         cards.add(new SetCardInfo("Brainstealer Dragon", 127, Rarity.RARE, mage.cards.b.BrainstealerDragon.class));
         cards.add(new SetCardInfo("Breena, the Demagogue", 217, Rarity.MYTHIC, mage.cards.b.BreenaTheDemagogue.class));
         cards.add(new SetCardInfo("Cactus Preserve", 40, Rarity.RARE, mage.cards.c.CactusPreserve.class));
