@@ -82,9 +82,19 @@ class FelixFiveBootsEffect extends ReplacementEffectImpl {
         }
 
         GameEvent sourceEvent = numberOfTriggersEvent.getSourceEvent();
-        if (sourceEvent == null
-                || sourceEvent.getType() != GameEvent.EventType.DAMAGED_PLAYER
-                || !((DamagedEvent)sourceEvent).isCombatDamage()) {
+        if (sourceEvent == null) {
+            return false;
+        }
+        switch (sourceEvent.getType()) {
+            case DAMAGED_PLAYER:
+            case DAMAGED_BATCH_FOR_PLAYERS:
+            case DAMAGED_BATCH_FOR_ONE_PLAYER:
+            case DAMAGED_BATCH_FOR_ALL:
+                break;
+            default:
+                return false;
+        }
+        if (!((DamagedEvent)sourceEvent).isCombatDamage()) {
             return false;
         }
 
