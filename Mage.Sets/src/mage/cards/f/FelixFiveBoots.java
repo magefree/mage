@@ -11,16 +11,17 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
-import mage.game.events.*;
+import mage.game.events.BatchEvent;
+import mage.game.events.DamagedEvent;
+import mage.game.events.GameEvent;
+import mage.game.events.NumberOfTriggersEvent;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
 import java.util.UUID;
 
 /**
- * @author PurpleCrowbar
+ * @author PurpleCrowbar, Susucr
  */
 public final class FelixFiveBoots extends CardImpl {
 
@@ -86,30 +87,39 @@ class FelixFiveBootsEffect extends ReplacementEffectImpl {
         if (sourceEvent == null) {
             return false;
         }
-        switch (sourceEvent.getType()) {
-            case DAMAGED_PLAYER:
-            case DAMAGED_BATCH_FOR_PLAYERS:
-            case DAMAGED_BATCH_FOR_ONE_PLAYER:
-            case DAMAGED_BATCH_FOR_ALL:
-                break;
-            default:
-                return false;
+
+        if (sourceEvent instanceof DamagedEvent) {
+            return checkDamagedEvent((DamagedEvent) sourceEvent, source.getControllerId(), game);
+        } else if (sourceEvent instanceof BatchEvent) {
+            for (Object singleEventAsObject : ((BatchEvent) sourceEvent).getEvents()) {
+                if (singleEventAsObject instanceof DamagedEvent
+                        && checkDamagedEvent((DamagedEvent) singleEventAsObject, source.getControllerId(), game)
+                ) {
+                    // For batch events, if one of the event inside the condition match the condition,
+                    // the effect applies to the whole batch events.
+                    return true;
+                }
+            }
         }
 
-        Set<UUID> damageSources = new HashSet<>();
-        if (sourceEvent instanceof BatchEvent) {
-            damageSources.addAll(((BatchEvent<?>) sourceEvent).getSourceIds());
-        } else if (sourceEvent.getSourceId() != null) {
-            damageSources.add(sourceEvent.getSourceId());
-        }
-        if (!((DamagedEvent) sourceEvent).isCombatDamage()) {
+        return false;
+    }
+
+    // Checks that a given DamagedEvent matches with
+    // "If a creature you control dealing combat damage to a player"
+    private static boolean checkDamagedEvent(DamagedEvent event, UUID controllerId, Game game) {
+        if (event == null) {
             return false;
         }
-
-        return damageSources.stream()
-                .map(game::getPermanentOrLKIBattlefield)
-                .filter(Objects::nonNull)
-                .anyMatch(p -> p.isControlledBy(source.getControllerId()));
+        UUID sourceId = event.getSourceId();
+        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(sourceId);
+        UUID targetId = event.getTargetId();
+        Player playerDealtDamage = game.getPlayer(targetId);
+        return sourcePermanent != null
+                && sourcePermanent.isCreature(game)
+                && sourcePermanent.isControlledBy(controllerId)
+                && event.isCombatDamage()
+                && playerDealtDamage != null;
     }
 
     @Override
