@@ -52,37 +52,37 @@ public abstract class AbilityImpl implements Ability {
     private static final List<Ability> emptyAbilities = new ArrayList<>();
 
     protected UUID id;
-    protected UUID originalId; // TODO: delete originalId???
+    private UUID originalId; // TODO: delete originalId???
     protected AbilityType abilityType;
     protected UUID controllerId;
     protected UUID sourceId;
     private final ManaCosts<ManaCost> manaCosts;
     private final ManaCosts<ManaCost> manaCostsToPay;
     private final Costs<Cost> costs;
-    protected Modes modes; // access to it by GetModes only (it can be overridden by some abilities)
+    private final Modes modes; // access to it by GetModes only (it can be overridden by some abilities)
     protected Zone zone;
     protected String name;
     protected AbilityWord abilityWord;
     protected String flavorWord;
     protected boolean usesStack = true;
-    protected boolean ruleAtTheTop = false;
-    protected boolean ruleVisible = true;
-    protected boolean ruleAdditionalCostsVisible = true;
+    private boolean ruleAtTheTop = false;
+    private boolean ruleVisible = true;
+    private boolean ruleAdditionalCostsVisible = true;
     protected boolean activated = false;
-    protected boolean worksFaceDown = false;
-    protected boolean worksPhasedOut = false;
-    protected int sourceObjectZoneChangeCounter;
-    protected List<Watcher> watchers = new ArrayList<>(); // access to it by GetWatchers only (it can be overridden by some abilities)
-    protected List<Ability> subAbilities = null;
-    protected boolean canFizzle = true;
-    protected TargetAdjuster targetAdjuster = null;
-    protected CostAdjuster costAdjuster = null;
-    protected List<Hint> hints = new ArrayList<>();
+    private boolean worksFaceDown = false;
+    private boolean worksPhasedOut = false;
+    private int sourceObjectZoneChangeCounter;
+    private List<Watcher> watchers = new ArrayList<>(); // access to it by GetWatchers only (it can be overridden by some abilities)
+    private List<Ability> subAbilities = null;
+    private boolean canFizzle = true; // for Gilded Drake
+    private TargetAdjuster targetAdjuster = null;
+    private CostAdjuster costAdjuster = null;
+    private List<Hint> hints = new ArrayList<>();
     protected List<CardIcon> icons = new ArrayList<>();
-    protected Outcome customOutcome = null; // uses for AI decisions instead effects
-    protected MageIdentifier identifier = MageIdentifier.Default; // used to identify specific ability (e.g. to match with corresponding watcher)
-    protected String appendToRule = null;
-    protected int sourcePermanentTransformCount = 0;
+    private Outcome customOutcome = null; // uses for AI decisions instead effects
+    private MageIdentifier identifier = MageIdentifier.Default; // used to identify specific ability (e.g. to match with corresponding watcher)
+    private String appendToRule = null;
+    private int sourcePermanentTransformCount = 0;
     private Map<String, Object> costsTagMap = null;
 
     protected AbilityImpl(AbilityType abilityType, Zone zone) {
@@ -311,6 +311,16 @@ public abstract class AbilityImpl implements Ability {
             return false;
         }
 
+        // apply mode costs if they have them
+        for (UUID modeId : this.getModes().getSelectedModes()) {
+            Cost cost = this.getModes().get(modeId).getCost();
+            if (cost instanceof ManaCost) {
+                this.addManaCostsToPay((ManaCost) cost.copy());
+            } else if (cost != null) {
+                this.costs.add(cost.copy());
+            }
+        }
+
         // unit tests only: it allows to add targets/choices by two ways:
         // 1. From cast/activate command params (process it here)
         // 2. From single addTarget/setChoice, it's a preffered method for tests (process it in normal choose dialogs like human player)
@@ -429,6 +439,7 @@ public abstract class AbilityImpl implements Ability {
                 case BESTOW:
                 case MORPH:
                 case DISGUISE:
+                case PLOT:
                     // from Snapcaster Mage:
                     // If you cast a spell from a graveyard using its flashback ability, you can't pay other alternative costs
                     // (such as that of Foil). (2018-12-07)
@@ -521,7 +532,7 @@ public abstract class AbilityImpl implements Ability {
                 String message = controller.getLogName() + " announces a value of " + xValue + " (" + variableCost.getActionText() + ')'
                         + CardUtil.getSourceLogName(game, this);
                 announceString.append(message);
-                setCostsTag("X",xValue);
+                setCostsTag("X", xValue);
             }
         }
         return announceString.toString();
@@ -626,7 +637,7 @@ public abstract class AbilityImpl implements Ability {
                     }
                     addManaCostsToPay(new ManaCostsImpl<>(manaString.toString()));
                     getManaCostsToPay().setX(xValue * xValueMultiplier, amountMana);
-                    setCostsTag("X",xValue * xValueMultiplier);
+                    setCostsTag("X", xValue * xValueMultiplier);
                 }
                 variableManaCost.setPaid();
             }
@@ -718,8 +729,9 @@ public abstract class AbilityImpl implements Ability {
     public Map<String, Object> getCostsTagMap() {
         return costsTagMap;
     }
-    public void setCostsTag(String tag, Object value){
-        if (costsTagMap == null){
+
+    public void setCostsTag(String tag, Object value) {
+        if (costsTagMap == null) {
             costsTagMap = new HashMap<>();
         }
         costsTagMap.put(tag, value);
@@ -1136,6 +1148,12 @@ public abstract class AbilityImpl implements Ability {
     @Override
     public Ability withFirstModeFlavorWord(String flavorWord) {
         this.modes.getMode().withFlavorWord(flavorWord);
+        return this;
+    }
+
+    @Override
+    public Ability withFirstModeCost(Cost cost) {
+        this.modes.getMode().withCost(cost);
         return this;
     }
 

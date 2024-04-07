@@ -6,12 +6,18 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
+ * {@link mage.cards.g.GaleWaterdeepProdigy Gale, Waterdeep Prodigy} {2}{U}
+ * Legendary Creature — Human Wizard
+ * Whenever you cast an instant or sorcery spell from your hand, you may cast up to one target card of the other type from your graveyard. If a spell cast from your graveyard this way would be put into your graveyard, exile it instead.
+ * Choose a Background (You can have a Background as a second commander.)
+ * 1/3
+ *
  * @author Rjayz
  */
 public class GaleWaterdeepProdigyTest extends CardTestPlayerBase {
 
     @Test
-    public void TestGaleWaterDeepProdigy() {
+    public void test_GaleWaterDeepProdigy() {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 10);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 10);
 

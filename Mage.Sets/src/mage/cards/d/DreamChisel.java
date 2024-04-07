@@ -1,7 +1,7 @@
 package mage.cards.d;
 
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.cost.MorphSpellsCostReductionControllerEffect;
+import mage.abilities.effects.common.cost.FaceDownSpellsCostReductionControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -17,7 +17,7 @@ public final class DreamChisel extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
         // Face-down creature spells you cast cost {1} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MorphSpellsCostReductionControllerEffect(1)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new FaceDownSpellsCostReductionControllerEffect(1)));
     }
 
     private DreamChisel(final DreamChisel card) {

@@ -1225,10 +1225,10 @@ public class TestPlayer implements Player {
                         + ", " + (c.isTapped() ? "Tapped" : "Untapped")
                         + getPrintableAliases(", [", c.getId(), "]")
                         + (c.getAttachedTo() == null ? ""
-                                : ", attached to "
-                                        + (game.getObject(c.getAttachedTo()) == null
-                                                ? game.getPlayer(c.getAttachedTo()).getName()
-                                                : game.getObject(c.getAttachedTo()).getIdName()))))
+                        : ", attached to "
+                        + (game.getObject(c.getAttachedTo()) == null
+                        ? game.getPlayer(c.getAttachedTo()).getName()
+                        : game.getObject(c.getAttachedTo()).getIdName()))))
                 .sorted()
                 .collect(Collectors.toList());
 
@@ -3831,6 +3831,16 @@ public class TestPlayer implements Player {
     @Override
     public void setDrawsOnOpponentsTurn(boolean drawsOnOpponentsTurn) {
         computerPlayer.setDrawsOnOpponentsTurn(drawsOnOpponentsTurn);
+    }
+
+    @Override
+    public boolean canPlotFromTopOfLibrary() {
+        return computerPlayer.canPlotFromTopOfLibrary();
+    }
+
+    @Override
+    public void setPlotFromTopOfLibrary(boolean canPlotFromTopOfLibrary) {
+        computerPlayer.setPlotFromTopOfLibrary(canPlotFromTopOfLibrary);
     }
 
     @Override

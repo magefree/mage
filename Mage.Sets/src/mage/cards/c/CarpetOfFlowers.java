@@ -75,7 +75,7 @@ class CarpetOfFlowersTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkInterveningIfClause(Game game) {
-        return !Boolean.TRUE.equals(game.getState().getValue(this.originalId.toString()
+        return !Boolean.TRUE.equals(game.getState().getValue(this.getOriginalId().toString()
                 + "addMana"
                 + game.getState().getZoneChangeCounter(sourceId)));
     }
@@ -84,7 +84,7 @@ class CarpetOfFlowersTriggeredAbility extends TriggeredAbilityImpl {
     public boolean resolve(Game game) {
         boolean value = super.resolve(game);
         if (value == true) {
-            game.getState().setValue(this.originalId.toString()
+            game.getState().setValue(this.getOriginalId().toString()
                             + "addMana"
                             + game.getState().getZoneChangeCounter(sourceId),
                     Boolean.TRUE);
@@ -94,7 +94,7 @@ class CarpetOfFlowersTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public void reset(Game game) {
-        game.getState().setValue(this.originalId.toString()
+        game.getState().setValue(this.getOriginalId().toString()
                         + "addMana"
                         + game.getState().getZoneChangeCounter(sourceId),
                 Boolean.FALSE);

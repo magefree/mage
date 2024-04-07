@@ -74,7 +74,7 @@ class AsLuckWouldHaveItTriggeredAbility extends TriggeredAbilityImpl {
         // Any die roll with a numerical result will add luck counters to As Luck Would Have It.
         // Rolling the planar die will not cause the second ability to trigger.
         // (2018-01-19)
-        if (this.isControlledBy(event.getPlayerId()) && drEvent.getRollDieType() == RollDieType.NUMERICAL) {
+        if (this.isControlledBy(event.getTargetId()) && drEvent.getRollDieType() == RollDieType.NUMERICAL) {
             // silver border card must look for "result" instead "natural result"
             this.getEffects().setValue("rolled", drEvent.getResult());
             return true;

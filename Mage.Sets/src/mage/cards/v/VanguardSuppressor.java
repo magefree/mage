@@ -2,6 +2,7 @@ package mage.cards.v;
 
 import mage.MageInt;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
+import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.SquadAbility;
@@ -26,7 +27,7 @@ public final class VanguardSuppressor extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Squad {2}
-        this.addAbility(new SquadAbility());
+        this.addAbility(new SquadAbility(new GenericManaCost(2)));
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());

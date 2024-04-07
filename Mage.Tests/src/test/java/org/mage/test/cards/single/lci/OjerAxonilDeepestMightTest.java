@@ -66,6 +66,26 @@ public class OjerAxonilDeepestMightTest extends CardTestPlayerBase {
         assertLife(playerB, 20 - 4);
     }
 
+    /**
+     * bug report: red sources from others players are affected.
+     * #12066
+     */
+    @Test
+    public void testReplacement_NotControlled() {
+        setStrictChooseMode(true);
+
+        addCard(Zone.BATTLEFIELD, playerA, ojer, 1);
+        addCard(Zone.HAND, playerB, bolt, 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Mountain", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, bolt, playerB);
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertLife(playerB, 20 - 3); // Ojer doesn't modify that damage
+    }
+
     @Test
     public void testReplacement_BoltOwnFace() {
         setStrictChooseMode(true);
@@ -190,6 +210,37 @@ public class OjerAxonilDeepestMightTest extends CardTestPlayerBase {
         assertLife(playerB, 20 - 5);
         assertPermanentCount(playerA, ojer, 1);
         assertTapped(ojer, true);
+    }
+
+    /**
+     * 712.14a. If a spell or ability puts a transforming double-faced card onto the battlefield "transformed"
+     * or "converted," it enters the battlefield with its back face up. If a player is instructed to put a card
+     * that isn't a transforming double-faced card onto the battlefield transformed or converted, that card stays in
+     * its current zone.
+     */
+    @Test
+    public void test_CloneDoNotTransform() {
+        setStrictChooseMode(true);
+
+        addCard(Zone.BATTLEFIELD, playerA, ojer, 1);
+        addCard(Zone.HAND, playerA, "Sakashima the Impostor", 1); // Clone keeping its name for easier test.
+        addCard(Zone.BATTLEFIELD, playerA, "Underground Sea", 6);
+        addCard(Zone.HAND, playerA, "Doom Blade", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sakashima the Impostor");
+        setChoice(playerA, true); // yes to clone
+        setChoice(playerA, ojer); // clone Ojer
+
+        checkPermanentCount("Sakashima in play", 1, PhaseStep.BEGIN_COMBAT, playerA, "Sakashima the Impostor", 1);
+        checkPT("PT 4/4 so copy happened", 1, PhaseStep.BEGIN_COMBAT, playerA, "Sakashima the Impostor", 4, 4);
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Doom Blade", "Sakashima the Impostor");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, ojer, 1);
+        assertGraveyardCount(playerA, "Sakashima the Impostor", 1); // is not transformable, so didn't return.
     }
 
     @Test

@@ -30,7 +30,7 @@ import mage.game.CardState;
 import mage.game.Game;
 import mage.game.GameState;
 import mage.game.command.Commander;
-import mage.game.events.BatchGameEvent;
+import mage.game.events.BatchEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
@@ -1280,6 +1280,7 @@ public final class CardUtil {
         }
     }
 
+    // TODO: use CastManaAdjustment instead of boolean anyColor
     public static void makeCardPlayable(Game game, Ability source, Card card, Duration duration, boolean anyColor) {
         makeCardPlayable(game, source, card, duration, anyColor, null, null);
     }
@@ -1296,6 +1297,7 @@ public final class CardUtil {
      * @param anyColor
      * @param condition can be null
      */
+    // TODO: use CastManaAdjustment instead of boolean anyColor
     public static void makeCardPlayable(Game game, Ability source, Card card, Duration duration, boolean anyColor, UUID playerId, Condition condition) {
         // Effect can be used for cards in zones and permanents on battlefield
         // PermanentCard's ZCC is static, but we need updated ZCC from the card (after moved to another zone)
@@ -1323,7 +1325,7 @@ public final class CardUtil {
      * such as the adventure and main side of adventure spells or both sides of a fuse card.
      *
      * @param cardToCast
-     * @param filter           A filter to determine if a card is eligible for casting.
+     * @param filter           An optional filter to determine if a card is eligible for casting.
      * @param source           The ability or source responsible for the casting.
      * @param player
      * @param game
@@ -1347,7 +1349,9 @@ public final class CardUtil {
         if (!playLand || !player.canPlayLand() || !game.isActivePlayer(playerId)) {
             cards.removeIf(card -> card.isLand(game));
         }
-        cards.removeIf(card -> !filter.match(card, playerId, source, game));
+        if (filter != null) {
+            cards.removeIf(card -> !filter.match(card, playerId, source, game));
+        }
         if (spellCastTracker != null) {
             cards.removeIf(card -> !spellCastTracker.checkCard(card, game));
         }
@@ -2203,14 +2207,11 @@ public final class CardUtil {
 
     /**
      * One single event can be a batch (contain multiple events)
-     *
-     * @param event
-     * @return
      */
     public static Set<UUID> getEventTargets(GameEvent event) {
         Set<UUID> res = new HashSet<>();
-        if (event instanceof BatchGameEvent) {
-            res.addAll(((BatchGameEvent<?>) event).getTargets());
+        if (event instanceof BatchEvent) {
+            res.addAll(((BatchEvent<?>) event).getTargetIds());
         } else if (event != null && event.getTargetId() != null) {
             res.add(event.getTargetId());
         }

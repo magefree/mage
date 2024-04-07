@@ -154,6 +154,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     protected PayLifeCostLevel payLifeCostLevel = PayLifeCostLevel.allAbilities;
     protected boolean loseByZeroOrLessLife = true;
     protected boolean canPlayCardsFromGraveyard = true;
+    protected boolean canPlotFromTopOfLibrary = false;
     protected boolean drawsOnOpponentsTurn = false;
 
     protected FilterPermanent sacrificeCostFilter;
@@ -251,6 +252,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.canLoseLife = player.canLoseLife;
         this.loseByZeroOrLessLife = player.loseByZeroOrLessLife;
         this.canPlayCardsFromGraveyard = player.canPlayCardsFromGraveyard;
+        this.canPlotFromTopOfLibrary = player.canPlotFromTopOfLibrary;
         this.drawsOnOpponentsTurn = player.drawsOnOpponentsTurn;
 
         this.attachments.addAll(player.attachments);
@@ -360,6 +362,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 ? player.getSacrificeCostFilter().copy() : null;
         this.loseByZeroOrLessLife = player.canLoseByZeroOrLessLife();
         this.canPlayCardsFromGraveyard = player.canPlayCardsFromGraveyard();
+        this.canPlotFromTopOfLibrary = player.canPlotFromTopOfLibrary();
         this.drawsOnOpponentsTurn = player.isDrawsOnOpponentsTurn();
         this.alternativeSourceCosts.clear();
         this.alternativeSourceCosts.addAll(player.getAlternativeSourceCosts());
@@ -474,6 +477,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.payLifeCostLevel = PayLifeCostLevel.allAbilities;
         this.loseByZeroOrLessLife = true;
         this.canPlayCardsFromGraveyard = true;
+        this.canPlotFromTopOfLibrary = false;
         this.drawsOnOpponentsTurn = false;
 
         this.sacrificeCostFilter = null;
@@ -516,6 +520,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.sacrificeCostFilter = null;
         this.loseByZeroOrLessLife = true;
         this.canPlayCardsFromGraveyard = false;
+        this.canPlotFromTopOfLibrary = false;
         this.drawsOnOpponentsTurn = false;
         this.topCardRevealed = false;
         this.alternativeSourceCosts.clear();
@@ -2175,8 +2180,9 @@ public abstract class PlayerImpl implements Player, Serializable {
                         + (atCombat ? " at combat" : "") + CardUtil.getSourceLogName(game, " from ", needId, "", ""));
             }
             if (event.getAmount() > 0) {
-                game.fireEvent(new GameEvent(GameEvent.EventType.LOST_LIFE,
-                        playerId, source, playerId, event.getAmount(), atCombat));
+                LifeLostEvent lifeLostEvent = new LifeLostEvent(playerId, source, event.getAmount(), atCombat);
+                game.fireEvent(lifeLostEvent);
+                game.getState().addSimultaneousLifeLossToBatch(lifeLostEvent, game);
             }
             return event.getAmount();
         }
@@ -3292,7 +3298,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
         // raise affected roll events
         for (RollDieResult result : dieRolls) {
-            game.fireEvent(new DieRolledEvent(source, rollDiceEvent.getRollDieType(), rollDiceEvent.getSides(), result.naturalResult, result.modifier, result.planarResult));
+            game.fireEvent(new DieRolledEvent(source, this.getId(), rollDiceEvent.getRollDieType(), rollDiceEvent.getSides(), result.naturalResult, result.modifier, result.planarResult));
         }
         game.fireEvent(new DiceRolledEvent(rollDiceEvent.getSides(), dieResults, source, this.getId()));
 
@@ -4526,6 +4532,16 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
+    public boolean canPlotFromTopOfLibrary() {
+        return canPlotFromTopOfLibrary;
+    }
+
+    @Override
+    public void setPlotFromTopOfLibrary(boolean canPlotFromTopOfLibrary) {
+        this.canPlotFromTopOfLibrary = canPlotFromTopOfLibrary;
+    }
+
+    @Override
     public void setDrawsOnOpponentsTurn(boolean drawsOnOpponentsTurn) {
         this.drawsOnOpponentsTurn = drawsOnOpponentsTurn;
     }
@@ -4692,6 +4708,14 @@ public abstract class PlayerImpl implements Player, Serializable {
                 List<ZoneChangeInfo> infoList = new ArrayList<>();
                 for (Card card : cards) {
                     fromZone = game.getState().getZone(card.getId());
+                    // 712.14a. If a spell or ability puts a transforming double-faced card onto the battlefield "transformed"
+                    // or "converted," it enters the battlefield with its back face up. If a player is instructed to put a card
+                    // that isn't a transforming double-faced card onto the battlefield transformed or converted, that card stays in
+                    // its current zone.
+                    Boolean enterTransformed = (Boolean) game.getState().getValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + card.getId());
+                    if (enterTransformed != null && enterTransformed && !card.isTransformable()) {
+                        continue;
+                    }
                     ZoneChangeEvent event = new ZoneChangeEvent(card.getId(), source,
                             byOwner ? card.getOwnerId() : getId(), fromZone, Zone.BATTLEFIELD, appliedEffects);
                     infoList.add(new ZoneChangeInfo.Battlefield(event, faceDown, tapped, source));
@@ -4703,6 +4727,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                         successfulMovedCards.add(permanent);
                         if (!game.isSimulation()) {
                             Player eventPlayer = game.getPlayer(info.event.getPlayerId());
+                            fromZone = info.event.getFromZone();
                             if (eventPlayer != null && fromZone != null) {
                                 game.informPlayers(eventPlayer.getLogName() + " puts "
                                         + GameLog.getColoredObjectIdName(permanent) + " from "

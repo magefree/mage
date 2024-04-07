@@ -810,67 +810,97 @@ public class GameState implements Serializable, Copyable<GameState> {
 
     public void addSimultaneousDamage(DamagedEvent damagedEvent, Game game) {
         // Combine multiple damage events in the single event (batch)
-        // * per damage type (see GameEvent.DAMAGED_BATCH_FOR_PERMANENTS, GameEvent.DAMAGED_BATCH_FOR_PLAYERS)
-        // * per player (see GameEvent.DAMAGED_BATCH_FOR_ONE_PLAYER)
-        // * per permanent (see GameEvent.DAMAGED_BATCH_FOR_ONE_PERMANENT)
-        //
-        // Warning, one event can be stored in multiple batches,
-        // example: DAMAGED_BATCH_FOR_PLAYERS + DAMAGED_BATCH_FOR_ONE_PLAYER
+        // Note: one event can be stored in multiple batches
+        if (damagedEvent instanceof DamagedPlayerEvent) {
+            // DAMAGED_BATCH_FOR_PLAYERS + DAMAGED_BATCH_FOR_ONE_PLAYER
+            addSimultaneousDamageToPlayerBatches((DamagedPlayerEvent) damagedEvent, game);
+        } else if (damagedEvent instanceof DamagedPermanentEvent) {
+            // DAMAGED_BATCH_FOR_PERMANENTS + DAMAGED_BATCH_FOR_ONE_PERMANENT
+            addSimultaneousDamageToPermanentBatches((DamagedPermanentEvent) damagedEvent, game);
+        }
+        // DAMAGED_BATCH_FOR_ALL
+        addSimultaneousDamageToBatchForAll(damagedEvent, game);
+    }
 
-        boolean isPlayerDamage = damagedEvent instanceof DamagedPlayerEvent;
-        boolean isPermanentDamage = damagedEvent instanceof DamagedPermanentEvent;
-
-        // existing batch
-        boolean isDamageBatchUsed = false;
+    public void addSimultaneousDamageToPlayerBatches(DamagedPlayerEvent damagedPlayerEvent, Game game) {
+        // find existing batches first
+        boolean isTotalBatchUsed = false;
         boolean isPlayerBatchUsed = false;
-        boolean isPermanentBatchUsed = false;
         for (GameEvent event : simultaneousEvents) {
-
-            if (isPlayerDamage && event instanceof DamagedBatchForOnePlayerEvent) {
-                // per player
-                DamagedBatchForOnePlayerEvent oldPlayerBatch = (DamagedBatchForOnePlayerEvent) event;
-                if (oldPlayerBatch.getDamageClazz().isInstance(damagedEvent)
-                        && event.getPlayerId().equals(damagedEvent.getTargetId())) {
-                    oldPlayerBatch.addEvent(damagedEvent);
-                    isPlayerBatchUsed = true;
-                }
-            } else if (isPermanentDamage && event instanceof DamagedBatchForOnePermanentEvent) {
-                // per permanent
-                DamagedBatchForOnePermanentEvent oldPermanentBatch = (DamagedBatchForOnePermanentEvent) event;
-                if (oldPermanentBatch.getDamageClazz().isInstance(damagedEvent)
-                        && CardUtil.getEventTargets(event).contains(damagedEvent.getTargetId())) {
-                    oldPermanentBatch.addEvent(damagedEvent);
-                    isPermanentBatchUsed = true;
-                }
-            } else if ((event instanceof DamagedBatchEvent)
-                    && ((DamagedBatchEvent) event).getDamageClazz().isInstance(damagedEvent)) {
-                // per damage type
-                // If the batch event isn't DAMAGED_BATCH_FOR_ONE_PLAYER, the targetIDs need not match,
-                // since "event" is a generic batch in this case
-                // (either DAMAGED_BATCH_FOR_PERMANENTS or DAMAGED_BATCH_FOR_PLAYERS)
-                // Just needs to be a permanent-damaging event for DAMAGED_BATCH_FOR_PERMANENTS,
-                // or a player-damaging event for DAMAGED_BATCH_FOR_PLAYERS
-                ((DamagedBatchEvent) event).addEvent(damagedEvent);
-                isDamageBatchUsed = true;
+            if (event instanceof DamagedBatchForPlayersEvent) {
+                ((DamagedBatchForPlayersEvent) event).addEvent(damagedPlayerEvent);
+                isTotalBatchUsed = true;
+            } else if (event instanceof DamagedBatchForOnePlayerEvent
+                    && damagedPlayerEvent.getTargetId().equals(event.getTargetId())) {
+                ((DamagedBatchForOnePlayerEvent) event).addEvent(damagedPlayerEvent);
+                isPlayerBatchUsed = true;
             }
-
         }
-
-        // new batch
-        if (!isDamageBatchUsed) {
-            addSimultaneousEvent(DamagedBatchEvent.makeEvent(damagedEvent), game);
+        // new batches if necessary
+        if (!isTotalBatchUsed) {
+            addSimultaneousEvent(new DamagedBatchForPlayersEvent(damagedPlayerEvent), game);
         }
-        if (!isPlayerBatchUsed && isPlayerDamage) {
-            DamagedBatchEvent event = new DamagedBatchForOnePlayerEvent(damagedEvent);
-            addSimultaneousEvent(event, game);
-        }
-        if (!isPermanentBatchUsed && isPermanentDamage) {
-            DamagedBatchEvent event = new DamagedBatchForOnePermanentEvent(damagedEvent);
-            addSimultaneousEvent(event, game);
+        if (!isPlayerBatchUsed) {
+            addSimultaneousEvent(new DamagedBatchForOnePlayerEvent(damagedPlayerEvent), game);
         }
     }
 
-    public void addSimultaneousTapped(TappedEvent tappedEvent, Game game) {
+    public void addSimultaneousDamageToPermanentBatches(DamagedPermanentEvent damagedPermanentEvent, Game game) {
+        // find existing batches first
+        boolean isTotalBatchUsed = false;
+        boolean isSingleBatchUsed = false;
+        for (GameEvent event : simultaneousEvents) {
+            if (event instanceof DamagedBatchForPermanentsEvent) {
+                ((DamagedBatchForPermanentsEvent) event).addEvent(damagedPermanentEvent);
+                isTotalBatchUsed = true;
+            } else if (event instanceof DamagedBatchForOnePermanentEvent
+                    && damagedPermanentEvent.getTargetId().equals(event.getTargetId())) {
+                ((DamagedBatchForOnePermanentEvent) event).addEvent(damagedPermanentEvent);
+                isSingleBatchUsed = true;
+            }
+        }
+        // new batches if necessary
+        if (!isTotalBatchUsed) {
+            addSimultaneousEvent(new DamagedBatchForPermanentsEvent(damagedPermanentEvent), game);
+        }
+        if (!isSingleBatchUsed) {
+            addSimultaneousEvent(new DamagedBatchForOnePermanentEvent(damagedPermanentEvent), game);
+        }
+    }
+
+    public void addSimultaneousDamageToBatchForAll(DamagedEvent damagedEvent, Game game) {
+        boolean isBatchUsed = false;
+        for (GameEvent event : simultaneousEvents) {
+            if (event instanceof DamagedBatchAllEvent) {
+                ((DamagedBatchAllEvent) event).addEvent(damagedEvent);
+                isBatchUsed = true;
+            }
+        }
+        if (!isBatchUsed) {
+            addSimultaneousEvent(new DamagedBatchAllEvent(damagedEvent), game);
+        }
+    }
+
+    public void addSimultaneousLifeLossToBatch(LifeLostEvent lifeLossEvent, Game game) {
+        // Combine multiple life loss events in the single event (batch)
+        // see GameEvent.LOST_LIFE_BATCH
+
+        // existing batch
+        boolean isLifeLostBatchUsed = false;
+        for (GameEvent event : simultaneousEvents) {
+            if (event instanceof LifeLostBatchEvent) {
+                ((LifeLostBatchEvent) event).addEvent(lifeLossEvent);
+                isLifeLostBatchUsed = true;
+            }
+        }
+
+        // new batch
+        if (!isLifeLostBatchUsed) {
+            addSimultaneousEvent(new LifeLostBatchEvent(lifeLossEvent), game);
+        }
+    }
+
+    public void addSimultaneousTappedToBatch(TappedEvent tappedEvent, Game game) {
         // Combine multiple tapped events in the single event (batch)
 
         boolean isTappedBatchUsed = false;
@@ -885,13 +915,11 @@ public class GameState implements Serializable, Copyable<GameState> {
 
         // new batch
         if (!isTappedBatchUsed) {
-            TappedBatchEvent batch = new TappedBatchEvent();
-            batch.addEvent(tappedEvent);
-            addSimultaneousEvent(batch, game);
+            addSimultaneousEvent(new TappedBatchEvent(tappedEvent), game);
         }
     }
 
-    public void addSimultaneousUntapped(UntappedEvent untappedEvent, Game game) {
+    public void addSimultaneousUntappedToBatch(UntappedEvent untappedEvent, Game game) {
         // Combine multiple untapped events in the single event (batch)
 
         boolean isUntappedBatchUsed = false;
@@ -906,9 +934,7 @@ public class GameState implements Serializable, Copyable<GameState> {
 
         // new batch
         if (!isUntappedBatchUsed) {
-            UntappedBatchEvent batch = new UntappedBatchEvent();
-            batch.addEvent(untappedEvent);
-            addSimultaneousEvent(batch, game);
+            addSimultaneousEvent(new UntappedBatchEvent(untappedEvent), game);
         }
     }
 

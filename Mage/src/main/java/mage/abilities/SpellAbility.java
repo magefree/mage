@@ -358,6 +358,6 @@ public class SpellAbility extends ActivatedAbilityImpl {
     }
 
     public void setId(UUID idToUse) {
-        this.id = idToUse;
+        this.id = idToUse; // TODO: research, why is it needed
     }
 }

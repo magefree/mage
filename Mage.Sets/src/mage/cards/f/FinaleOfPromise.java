@@ -3,11 +3,12 @@ package mage.cards.f;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.MayCastTargetThenExileEffect;
+import mage.abilities.effects.common.MayCastTargetCardEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.CastManaAdjustment;
 import mage.constants.ComparisonType;
 import mage.constants.Outcome;
 import mage.filter.FilterCard;
@@ -133,7 +134,8 @@ class FinaleOfPromiseEffect extends OneShotEffect {
         for (UUID id : cardsToCast) {
             Card card = game.getCard(id);
             if (card != null) {
-                new MayCastTargetThenExileEffect(true).setTargetPointer(new FixedTarget(card, game)).apply(game, source);
+                new MayCastTargetCardEffect(CastManaAdjustment.WITHOUT_PAYING_MANA_COST, true)
+                        .setTargetPointer(new FixedTarget(card, game)).apply(game, source);
             }
         }
 

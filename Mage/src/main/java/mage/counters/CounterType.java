@@ -123,6 +123,7 @@ public enum CounterType {
     LANDMARK("landmark"),
     LEVEL("level"),
     LIFELINK("lifelink"),
+    LOOT("loot"),
     LORE("lore"),
     LUCK("luck"),
     LOYALTY("loyalty"),

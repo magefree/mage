@@ -449,8 +449,10 @@ public class Session {
                 logger.warn("SESSION LOCK, possible connection problem - fireCallback - userId: " + userId + " messageId: " + call.getMessageId(), ex);
             }
         } catch (HandleCallbackException ex) {
-            // something wrong, maybe connection problem
-            logger.warn("SESSION CALLBACK EXCEPTION - " + ThreadUtils.findRootException(ex) + ", userId " + userId + ", messageId: " + call.getMessageId(), ex);
+            // general error
+            // can raise on server freeze or normal connection problem from a client side
+            // no need to print a full stack log here
+            logger.warn("SESSION CALLBACK EXCEPTION - " + ThreadUtils.findRootException(ex) + ", userId " + userId + ", messageId: " + call.getMessageId());
 
             // do not send data anymore (user must reconnect)
             this.valid = false;

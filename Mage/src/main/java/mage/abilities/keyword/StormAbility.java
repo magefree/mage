@@ -6,6 +6,7 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.hint.Hint;
 import mage.abilities.hint.ValueHint;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -21,9 +22,15 @@ import org.apache.log4j.Logger;
  */
 public class StormAbility extends TriggeredAbilityImpl {
 
+    private static final Hint hint = new ValueHint("Spells cast this turn", SpellsCastThisTurnValue.instance);
+
+    public static Hint getHint() {
+        return hint;
+    }
+
     public StormAbility() {
         super(Zone.STACK, new StormEffect());
-        this.addHint(new ValueHint("Spells cast this turn", SpellsCastThisTurnValue.instance));
+        this.addHint(hint);
     }
 
     private StormAbility(final StormAbility ability) {

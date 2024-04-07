@@ -7,6 +7,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.TurnFaceUpAbility;
 import mage.abilities.costs.Cost;
+import mage.abilities.costs.CostAdjuster;
 import mage.abilities.costs.Costs;
 import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -83,7 +84,22 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl {
         this(createCosts(cost), objectReference, duration, faceDownType);
     }
 
-    public BecomesFaceDownCreatureEffect(Costs<Cost> turnFaceUpCosts, MageObjectReference objectReference, Duration duration, FaceDownType faceDownType) {
+    public BecomesFaceDownCreatureEffect(Costs<Cost> cost, MageObjectReference objectReference, Duration duration, FaceDownType faceDownType) {
+        this(createCosts(cost), objectReference, duration, faceDownType, null);
+    }
+
+    public BecomesFaceDownCreatureEffect(Cost cost, MageObjectReference objectReference, Duration duration, FaceDownType faceDownType, CostAdjuster costAdjuster) {
+        this(createCosts(cost), objectReference, duration, faceDownType, costAdjuster);
+    }
+
+    /**
+     * @param turnFaceUpCosts costs for the turn face up ability
+     * @param objectReference
+     * @param duration
+     * @param faceDownType    type of face down (morph, disguise, manifest, etc...)
+     * @param costAdjuster    optional costAdjuster for the turn face up ability
+     */
+    public BecomesFaceDownCreatureEffect(Costs<Cost> turnFaceUpCosts, MageObjectReference objectReference, Duration duration, FaceDownType faceDownType, CostAdjuster costAdjuster) {
         super(duration, Layer.CopyEffects_1, SubLayer.FaceDownEffects_1b, Outcome.BecomeCreature);
         this.objectReference = objectReference;
         this.zoneChangeCounter = Integer.MIN_VALUE;
@@ -91,7 +107,10 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl {
         // add additional face up and information abilities
         if (turnFaceUpCosts != null) {
             // face up for all
-            this.additionalAbilities.add(new TurnFaceUpAbility(turnFaceUpCosts, faceDownType == FaceDownType.MEGAMORPHED));
+            this.additionalAbilities.add(
+                    new TurnFaceUpAbility(turnFaceUpCosts, faceDownType == FaceDownType.MEGAMORPHED)
+                            .setCostAdjuster(costAdjuster)
+            );
 
             switch (faceDownType) {
                 case MORPHED:

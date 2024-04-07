@@ -57,10 +57,12 @@ public class MageObjectReference implements Comparable<MageObjectReference>, Ser
         this.zoneChangeCounter = -1;
     }
 
+    @Deprecated // cause of many bugs, see issue #10479
     public MageObjectReference(Ability source) {
         this(source, 0);
     }
 
+    @Deprecated // cause of many bugs, see issue #10479
     public MageObjectReference(Ability source, int modifier) {
         this.sourceId = source.getSourceId();
         this.zoneChangeCounter = source.getSourceObjectZoneChangeCounter() + modifier;

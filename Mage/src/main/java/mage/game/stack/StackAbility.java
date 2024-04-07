@@ -414,14 +414,17 @@ public class StackAbility extends StackObjectImpl implements Ability {
     public void addManaCostsToPay(ManaCost manaCost) {
         // Do nothing
     }
+
     @Override
     public Map<String, Object> getCostsTagMap() {
         return ability.getCostsTagMap();
     }
+
     @Override
-    public void setCostsTag(String tag, Object value){
+    public void setCostsTag(String tag, Object value) {
         ability.setCostsTag(tag, value);
     }
+
     @Override
     public AbilityType getAbilityType() {
         return ability.getAbilityType();
@@ -536,6 +539,11 @@ public class StackAbility extends StackObjectImpl implements Ability {
 
     @Override
     public Ability withFirstModeFlavorWord(String flavorWord) {
+        throw new UnsupportedOperationException("Not supported.");
+    }
+
+    @Override
+    public Ability withFirstModeCost(Cost cost) {
         throw new UnsupportedOperationException("Not supported.");
     }
 

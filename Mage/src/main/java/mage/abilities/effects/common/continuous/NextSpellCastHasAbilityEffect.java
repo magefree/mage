@@ -13,6 +13,8 @@ import mage.players.Player;
 import mage.util.CardUtil;
 import mage.watchers.common.SpellsCastWatcher;
 
+import java.util.UUID;
+
 /**
  * @author xenohedron
  */
@@ -21,17 +23,24 @@ public class NextSpellCastHasAbilityEffect extends ContinuousEffectImpl {
     private int spellsCast;
     private final Ability ability;
     private final FilterCard filter;
+    private final TargetController targetController;
 
     public NextSpellCastHasAbilityEffect(Ability ability) {
         this(ability, StaticFilters.FILTER_CARD);
     }
 
     public NextSpellCastHasAbilityEffect(Ability ability, FilterCard filter) {
+        this(ability, filter, TargetController.SOURCE_CONTROLLER);
+    }
+
+    public NextSpellCastHasAbilityEffect(Ability ability, FilterCard filter, TargetController targetController) {
         super(Duration.EndOfTurn, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         this.ability = ability;
         this.filter = filter;
+        this.targetController = targetController;
         staticText = "the next " + filter.getMessage().replace("card", "spell")
-                + " you cast this turn has " + CardUtil.getTextWithFirstCharLowerCase(CardUtil.stripReminderText(ability.getRule()));
+                + (targetController == TargetController.SOURCE_CONTROLLER ? " you cast" : " target player casts")
+                + " this turn has " + CardUtil.getTextWithFirstCharLowerCase(CardUtil.stripReminderText(ability.getRule()));
     }
 
     private NextSpellCastHasAbilityEffect(final NextSpellCastHasAbilityEffect effect) {
@@ -39,6 +48,7 @@ public class NextSpellCastHasAbilityEffect extends ContinuousEffectImpl {
         this.spellsCast = effect.spellsCast;
         this.ability = effect.ability;
         this.filter = effect.filter;
+        this.targetController = effect.targetController;
     }
 
     @Override
@@ -57,17 +67,28 @@ public class NextSpellCastHasAbilityEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
+        UUID playerId;
+        switch (targetController){
+            case SOURCE_TARGETS:
+                playerId = source.getFirstTarget();
+                break;
+            case SOURCE_CONTROLLER:
+                playerId = source.getControllerId();
+                break;
+            default:
+                throw new UnsupportedOperationException("Value for targetController in NextSpellCastHasAbilityEffect not supported: " + targetController);
+        }
+        Player player = game.getPlayer(playerId);
         SpellsCastWatcher watcher = game.getState().getWatcher(SpellsCastWatcher.class);
         if (player == null || watcher == null) {
             return false;
         }
         //check if a spell was cast before
-        if (watcher.getCount(source.getControllerId()) > spellsCast) {
+        if (watcher.getCount(playerId) > spellsCast) {
             discard(); // only one use
             return false;
         }
-        for (Card card : game.getExile().getAllCardsByRange(game, source.getControllerId())) {
+        for (Card card : game.getExile().getAllCardsByRange(game, playerId)) {
             if (filter.match(card, game)) {
                 game.getState().addOtherAbility(card, ability);
             }
@@ -94,7 +115,7 @@ public class NextSpellCastHasAbilityEffect extends ContinuousEffectImpl {
                 .forEach(card -> game.getState().addOtherAbility(card, ability));
 
         for (StackObject stackObject : game.getStack()) {
-            if (!(stackObject instanceof Spell) || !stackObject.isControlledBy(source.getControllerId())) {
+            if (!(stackObject instanceof Spell) || !stackObject.isControlledBy(playerId)) {
                 continue;
             }
             // TODO: Distinguish "you cast" to exclude copies

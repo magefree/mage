@@ -70,7 +70,7 @@ class ScholarOfTheLostTroveEffect extends OneShotEffect {
     ScholarOfTheLostTroveEffect() {
         super(Outcome.PlayForFree);
         this.staticText = "you may cast target instant, sorcery, or artifact card from your graveyard without paying its mana cost. " +
-                "If an instant or sorcery spell cast this way would be put into your graveyard this turn, exile it instead";
+                "If an instant or sorcery spell cast this way would be put into your graveyard, exile it instead";
     }
 
     private ScholarOfTheLostTroveEffect(final ScholarOfTheLostTroveEffect effect) {

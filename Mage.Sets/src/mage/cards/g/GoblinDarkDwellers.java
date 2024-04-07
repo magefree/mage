@@ -3,11 +3,12 @@ package mage.cards.g;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.MayCastTargetThenExileEffect;
+import mage.abilities.effects.common.MayCastTargetCardEffect;
 import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.CastManaAdjustment;
 import mage.constants.ComparisonType;
 import mage.constants.SubType;
 import mage.filter.common.FilterInstantOrSorceryCard;
@@ -39,7 +40,7 @@ public final class GoblinDarkDwellers extends CardImpl {
 
         // When Goblin Dark-Dwellers enters the battlefield, you may cast target instant or sorcery card with converted mana cost 3 or less from your graveyard without paying its mana cost.
         // If that card would be put into your graveyard this turn, exile it instead.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new MayCastTargetThenExileEffect(true));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new MayCastTargetCardEffect(CastManaAdjustment.WITHOUT_PAYING_MANA_COST, true));
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
     }

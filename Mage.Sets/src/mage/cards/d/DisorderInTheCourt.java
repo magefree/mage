@@ -10,7 +10,6 @@ import mage.abilities.effects.keyword.InvestigateEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.game.Game;
@@ -93,7 +92,10 @@ class DisorderInTheCourtEffect extends OneShotEffect {
         new InvestigateEffect(ManacostVariableValue.REGULAR).apply(game, source);
         if (!toExile.isEmpty()) {
             Effect effect = new ReturnToBattlefieldUnderOwnerControlTargetEffect(true, true);
-            effect.setTargetPointer(new FixedTargets(new CardsImpl(toExile), game));
+            effect.setTargetPointer(new FixedTargets(toExile
+                    .stream()
+                    .map(Card::getMainCard)
+                    .collect(Collectors.toSet()), game));
             game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect), source);
         }
         return true;

@@ -20,12 +20,9 @@ public enum MageIdentifier {
     // "Once each turn, you may cast an instant or sorcery spell from the top of your library."
     //
     CastFromGraveyardOnceWatcher,
-    CemeteryIlluminatorWatcher,
-    GisaAndGeralfWatcher,
-    DanithaNewBenaliasLightWatcher,
+    OnceEachTurnCastWatcher,
     HaukensInsightWatcher,
     IntrepidPaleontologistWatcher,
-    KaradorGhostChieftainWatcher,
     KessDissidentMageWatcher,
     MuldrothaTheGravetideWatcher,
     ShareTheSpoilsWatcher,
@@ -33,8 +30,6 @@ public enum MageIdentifier {
     GlimpseTheCosmosWatcher,
     SerraParagonWatcher,
     OneWithTheMultiverseWatcher("Without paying manacost"),
-    JohannApprenticeSorcererWatcher,
-    AssembleThePlayersWatcher,
     KaghaShadowArchdruidWatcher,
     CourtOfLocthwainWatcher("Without paying manacost"),
     LaraCroftTombRaiderWatcher,

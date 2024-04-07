@@ -55,7 +55,7 @@ public final class GruffTriplets extends CardImpl {
         // When Gruff Triplets dies, put a number of +1/+1 counters equal to its power on each creature you control named Gruff Triplets.
         this.addAbility(new DiesSourceTriggeredAbility(
                 new AddCountersAllEffect(
-                        CounterType.P1P1.createInstance(0),
+                        CounterType.P1P1.createInstance(),
                         new SourcePermanentPowerCount(),
                         filterNamedGruffTriplets
                 ).setText("put a number of +1/+1 counters equal to its power on each creature you control named Gruff Triplets.")

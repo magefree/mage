@@ -3,8 +3,11 @@ package mage.cards.s;
 import java.util.UUID;
 
 import mage.abilities.Ability;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyAllEffect;
+import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -23,6 +26,9 @@ import mage.watchers.Watcher;
  */
 public final class StructuralAssault extends CardImpl {
 
+    private static final ValueHint hint = new ValueHint(
+            "Artifacts put into graveyards from the battlefield this turn", StructuralAssaultValue.instance);
+
     public StructuralAssault(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");
 
@@ -30,6 +36,7 @@ public final class StructuralAssault extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyAllEffect(StaticFilters.FILTER_PERMANENT_ARTIFACTS));
         this.getSpellAbility().addEffect(new StructuralAssaultEffect());
         this.getSpellAbility().addWatcher(new StructuralAssaultWatcher());
+        this.getSpellAbility().addHint(hint);
     }
 
     private StructuralAssault(final StructuralAssault card) {
@@ -42,7 +49,6 @@ public final class StructuralAssault extends CardImpl {
     }
 }
 
-// CardsPutIntoGraveyardWatcher does not count tokens so custom watcher is needed.
 class StructuralAssaultWatcher extends Watcher {
 
     private int artifactsDied = 0;
@@ -69,6 +75,30 @@ class StructuralAssaultWatcher extends Watcher {
 
     public int getArtifactsDied() {
         return artifactsDied;
+    }
+}
+
+// Copied from AnzragsRampageValue
+enum StructuralAssaultValue implements DynamicValue {
+    instance;
+
+    @Override
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
+        StructuralAssaultWatcher watcher = game.getState().getWatcher(StructuralAssaultWatcher.class);
+        if (watcher == null) {
+            return 0;
+        }
+        return watcher.getArtifactsDied();
+    }
+
+    @Override
+    public StructuralAssaultValue copy() {
+        return instance;
+    }
+
+    @Override
+    public String getMessage() {
+        return "";
     }
 }
 

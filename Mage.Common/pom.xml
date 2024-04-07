@@ -44,6 +44,13 @@
         </dependency>
 
         <dependency>
+            <!-- time lib for GUI time info -->
+            <groupId>org.ocpsoft.prettytime</groupId>
+            <artifactId>prettytime</artifactId>
+            <version>4.0.6.Final</version>
+        </dependency>
+
+        <dependency>
             <!-- A dependency of jboss.remoting -->
             <groupId>concurrent</groupId>
             <artifactId>concurrent</artifactId>

@@ -3,13 +3,14 @@ package mage.cards.s;
 import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.MayCastTargetThenExileEffect;
+import mage.abilities.effects.common.MayCastTargetCardEffect;
 import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.abilities.effects.common.replacement.ThatSpellGraveyardExileReplacementEffect;
 import mage.abilities.keyword.DelveAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.CastManaAdjustment;
 import mage.constants.Outcome;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterInstantOrSorceryCard;
@@ -24,7 +25,6 @@ import mage.target.targetpointer.FixedTarget;
 import java.util.UUID;
 
 /**
- *
  * @author notgreat
  */
 public final class SorcerousSquall extends CardImpl {
@@ -57,7 +57,7 @@ class SorcerousSquallEffect extends OneShotEffect {
 
     SorcerousSquallEffect() {
         super(Outcome.Detriment);
-        setText("you may cast an instant or sorcery spell from that player's graveyard without paying its mana cost. "+ ThatSpellGraveyardExileReplacementEffect.RULE_A);
+        setText("you may cast an instant or sorcery spell from that player's graveyard without paying its mana cost. " + ThatSpellGraveyardExileReplacementEffect.RULE_A);
     }
 
     private SorcerousSquallEffect(final SorcerousSquallEffect effect) {
@@ -79,7 +79,7 @@ class SorcerousSquallEffect extends OneShotEffect {
         filter.add(new OwnerIdPredicate(source.getFirstTarget()));
         Target target = new TargetCardInGraveyard(1, 1, filter, true);
         player.choose(outcome, target, source, game);
-        Effect effect = new MayCastTargetThenExileEffect(true);
+        Effect effect = new MayCastTargetCardEffect(CastManaAdjustment.WITHOUT_PAYING_MANA_COST, true);
         effect.setTargetPointer(new FixedTarget(target.getFirstTarget(), game));
         effect.apply(game, source);
         return true;
