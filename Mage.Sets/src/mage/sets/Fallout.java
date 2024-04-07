@@ -205,6 +205,7 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Nick Valentine, Private Eye", 378, Rarity.RARE, mage.cards.n.NickValentinePrivateEye.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Nick Valentine, Private Eye", 563, Rarity.RARE, mage.cards.n.NickValentinePrivateEye.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Nick Valentine, Private Eye", 906, Rarity.RARE, mage.cards.n.NickValentinePrivateEye.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Nightkin Ambusher", 112, Rarity.UNCOMMON, mage.cards.n.NightkinAmbusher.class));
         cards.add(new SetCardInfo("Nomad Outpost", 277, Rarity.UNCOMMON, mage.cards.n.NomadOutpost.class));
         cards.add(new SetCardInfo("Nuka-Cola Vending Machine", 137, Rarity.UNCOMMON, mage.cards.n.NukaColaVendingMachine.class));
         cards.add(new SetCardInfo("One with the Machine", 179, Rarity.RARE, mage.cards.o.OneWithTheMachine.class));
