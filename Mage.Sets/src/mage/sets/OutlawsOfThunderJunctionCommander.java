@@ -46,6 +46,7 @@ public final class OutlawsOfThunderJunctionCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Bojuka Bog", 273, Rarity.COMMON, mage.cards.b.BojukaBog.class));
         cards.add(new SetCardInfo("Bonders' Enclave", 274, Rarity.RARE, mage.cards.b.BondersEnclave.class));
         cards.add(new SetCardInfo("Boros Charm", 216, Rarity.UNCOMMON, mage.cards.b.BorosCharm.class));
+        cards.add(new SetCardInfo("Bounty Board", 37, Rarity.RARE, mage.cards.b.BountyBoard.class));
         cards.add(new SetCardInfo("Brainstealer Dragon", 127, Rarity.RARE, mage.cards.b.BrainstealerDragon.class));
         cards.add(new SetCardInfo("Breena, the Demagogue", 217, Rarity.MYTHIC, mage.cards.b.BreenaTheDemagogue.class));
         cards.add(new SetCardInfo("Cactus Preserve", 40, Rarity.RARE, mage.cards.c.CactusPreserve.class));
@@ -77,6 +78,7 @@ public final class OutlawsOfThunderJunctionCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Darksteel Ingot", 256, Rarity.UNCOMMON, mage.cards.d.DarksteelIngot.class));
         cards.add(new SetCardInfo("Darkwater Catacombs", 282, Rarity.RARE, mage.cards.d.DarkwaterCatacombs.class));
         cards.add(new SetCardInfo("Dazzling Sphinx", 93, Rarity.RARE, mage.cards.d.DazzlingSphinx.class));
+        cards.add(new SetCardInfo("Dead Before Sunrise", 26, Rarity.RARE, mage.cards.d.DeadBeforeSunrise.class));
         cards.add(new SetCardInfo("Deadly Dispute", 131, Rarity.COMMON, mage.cards.d.DeadlyDispute.class));
         cards.add(new SetCardInfo("Decimate", 220, Rarity.RARE, mage.cards.d.Decimate.class));
         cards.add(new SetCardInfo("Deep Analysis", 94, Rarity.COMMON, mage.cards.d.DeepAnalysis.class));
@@ -128,6 +130,7 @@ public final class OutlawsOfThunderJunctionCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Glittering Stockpile", 167, Rarity.UNCOMMON, mage.cards.g.GlitteringStockpile.class));
         cards.add(new SetCardInfo("Goblin Electromancer", 228, Rarity.COMMON, mage.cards.g.GoblinElectromancer.class));
         cards.add(new SetCardInfo("Gonti, Lord of Luxury", 135, Rarity.RARE, mage.cards.g.GontiLordOfLuxury.class));
+        cards.add(new SetCardInfo("Graywater's Fixer", 36, Rarity.RARE, mage.cards.g.GraywatersFixer.class));
         cards.add(new SetCardInfo("Grenzo, Havoc Raiser", 168, Rarity.RARE, mage.cards.g.GrenzoHavocRaiser.class));
         cards.add(new SetCardInfo("Guttersnipe", 169, Rarity.COMMON, mage.cards.g.Guttersnipe.class));
         cards.add(new SetCardInfo("Harrow", 194, Rarity.COMMON, mage.cards.h.Harrow.class));
@@ -203,6 +206,7 @@ public final class OutlawsOfThunderJunctionCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Propaganda", 108, Rarity.UNCOMMON, mage.cards.p.Propaganda.class));
         cards.add(new SetCardInfo("Pteramander", 109, Rarity.UNCOMMON, mage.cards.p.Pteramander.class));
         cards.add(new SetCardInfo("Putrefy", 238, Rarity.UNCOMMON, mage.cards.p.Putrefy.class));
+        cards.add(new SetCardInfo("Pyretic Charge", 29, Rarity.RARE, mage.cards.p.PyreticCharge.class));
         cards.add(new SetCardInfo("Queen Marchesa", 239, Rarity.RARE, mage.cards.q.QueenMarchesa.class));
         cards.add(new SetCardInfo("Radical Idea", 110, Rarity.COMMON, mage.cards.r.RadicalIdea.class));
         cards.add(new SetCardInfo("Rain of Riches", 177, Rarity.RARE, mage.cards.r.RainOfRiches.class));
@@ -272,11 +276,13 @@ public final class OutlawsOfThunderJunctionCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Thief of Sanity", 243, Rarity.RARE, mage.cards.t.ThiefOfSanity.class));
         cards.add(new SetCardInfo("Thieving Amalgam", 150, Rarity.RARE, mage.cards.t.ThievingAmalgam.class));
         cards.add(new SetCardInfo("Thieving Skydiver", 118, Rarity.RARE, mage.cards.t.ThievingSkydiver.class));
+        cards.add(new SetCardInfo("Thieving Varmint", 23, Rarity.RARE, mage.cards.t.ThievingVarmint.class));
         cards.add(new SetCardInfo("Think Twice", 119, Rarity.COMMON, mage.cards.t.ThinkTwice.class));
         cards.add(new SetCardInfo("Third Path Iconoclast", 244, Rarity.UNCOMMON, mage.cards.t.ThirdPathIconoclast.class));
         cards.add(new SetCardInfo("Three Visits", 209, Rarity.UNCOMMON, mage.cards.t.ThreeVisits.class));
         cards.add(new SetCardInfo("Thrilling Discovery", 245, Rarity.COMMON, mage.cards.t.ThrillingDiscovery.class));
         cards.add(new SetCardInfo("Titania, Protector of Argoth", 210, Rarity.MYTHIC, mage.cards.t.TitaniaProtectorOfArgoth.class));
+        cards.add(new SetCardInfo("Tower Winder", 34, Rarity.RARE, mage.cards.t.TowerWinder.class));
         cards.add(new SetCardInfo("Trailblazer's Boots", 269, Rarity.UNCOMMON, mage.cards.t.TrailblazersBoots.class));
         cards.add(new SetCardInfo("Treasure Cruise", 120, Rarity.COMMON, mage.cards.t.TreasureCruise.class));
         cards.add(new SetCardInfo("Triton Shorestalker", 121, Rarity.COMMON, mage.cards.t.TritonShorestalker.class));

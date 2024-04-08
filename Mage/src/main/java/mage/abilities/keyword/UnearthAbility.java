@@ -3,7 +3,7 @@ package mage.abilities.keyword;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.DelayedTriggeredAbility;
-import mage.abilities.costs.mana.ManaCosts;
+import mage.abilities.costs.Cost;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.ExileSourceEffect;
@@ -14,7 +14,6 @@ import mage.constants.TimingRule;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 
 /**
@@ -32,7 +31,7 @@ import mage.game.events.ZoneChangeEvent;
  */
 public class UnearthAbility extends ActivatedAbilityImpl {
 
-    public UnearthAbility(ManaCosts costs) {
+    public UnearthAbility(Cost costs) {
         super(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(false, true, true), costs);
         this.timing = TimingRule.SORCERY;
         this.addEffect(new CreateDelayedTriggeredAbilityEffect(new UnearthDelayedTriggeredAbility()));
