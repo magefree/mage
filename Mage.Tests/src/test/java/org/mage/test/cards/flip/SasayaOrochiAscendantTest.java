@@ -18,6 +18,8 @@ public class SasayaOrochiAscendantTest extends CardTestPlayerBase {
 
     @Test
     public void testSasayasEssence() {
+        addCard(Zone.BATTLEFIELD, playerB, "Fountain of Renewal", 25);
+
         addCard(Zone.HAND, playerA, "Plains", 7);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
 
