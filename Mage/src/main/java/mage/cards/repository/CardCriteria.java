@@ -32,7 +32,7 @@ public class CardCriteria {
     private Boolean variousArt;
     private Boolean doubleFaced;
     private Boolean modalDoubleFaced;
-    private boolean nightCard;
+    private Boolean nightCard;
     private boolean black;
     private boolean blue;
     private boolean green;
@@ -114,7 +114,7 @@ public class CardCriteria {
         return this;
     }
 
-    public CardCriteria nightCard(boolean nightCard) {
+    public CardCriteria nightCard(Boolean nightCard) {
         this.nightCard = nightCard;
         return this;
     }
@@ -217,9 +217,14 @@ public class CardCriteria {
         optimize();
 
         Where where = qb.where();
-        where.eq("nightCard", nightCard);
+
+        int clausesCount = 0;
+        if (nightCard != null) {
+            where.eq("nightCard", nightCard);
+            clausesCount++;
+        }
         where.eq("splitCardHalf", false);
-        int clausesCount = 2;
+        clausesCount++;
         if (nameContains != null) {
             where.like("name", new SelectArg('%' + nameContains + '%'));
             clausesCount++;
