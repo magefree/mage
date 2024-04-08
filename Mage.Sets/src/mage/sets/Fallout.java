@@ -94,6 +94,7 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Commander Sofia Daguerre", 15, Rarity.UNCOMMON, mage.cards.c.CommanderSofiaDaguerre.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Commander Sofia Daguerre", 543, Rarity.UNCOMMON, mage.cards.c.CommanderSofiaDaguerre.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Contagion Clasp", 229, Rarity.UNCOMMON, mage.cards.c.ContagionClasp.class));
+        cards.add(new SetCardInfo("Contaminated Drink", 99, Rarity.UNCOMMON, mage.cards.c.ContaminatedDrink.class));
         cards.add(new SetCardInfo("Corpsejack Menace", 214, Rarity.UNCOMMON, mage.cards.c.CorpsejackMenace.class));
         cards.add(new SetCardInfo("Crimson Caravaneer", 56, Rarity.UNCOMMON, mage.cards.c.CrimsonCaravaneer.class));
         cards.add(new SetCardInfo("Crucible of Worlds", 357, Rarity.MYTHIC, mage.cards.c.CrucibleOfWorlds.class));
