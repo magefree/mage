@@ -181,6 +181,7 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Megaton's Fate", 61, Rarity.RARE, mage.cards.m.MegatonsFate.class));
         cards.add(new SetCardInfo("Memorial to Glory", 271, Rarity.UNCOMMON, mage.cards.m.MemorialToGlory.class));
         cards.add(new SetCardInfo("Mind Stone", 235, Rarity.UNCOMMON, mage.cards.m.MindStone.class));
+        cards.add(new SetCardInfo("Mirelurk Queen", 33, Rarity.RARE, mage.cards.m.MirelurkQueen.class));
         cards.add(new SetCardInfo("Mister Gutsy", 136, Rarity.RARE, mage.cards.m.MisterGutsy.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mister Gutsy", 433, Rarity.RARE, mage.cards.m.MisterGutsy.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mister Gutsy", 664, Rarity.RARE, mage.cards.m.MisterGutsy.class, NON_FULL_USE_VARIOUS));
