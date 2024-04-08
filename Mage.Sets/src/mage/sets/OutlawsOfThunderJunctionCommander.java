@@ -185,6 +185,7 @@ public final class OutlawsOfThunderJunctionCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Octavia, Living Thesis", 103, Rarity.RARE, mage.cards.o.OctaviaLivingThesis.class));
         cards.add(new SetCardInfo("Ogre Slumlord", 145, Rarity.RARE, mage.cards.o.OgreSlumlord.class));
         cards.add(new SetCardInfo("Ohran Frostfang", 199, Rarity.RARE, mage.cards.o.OhranFrostfang.class));
+        cards.add(new SetCardInfo("Olivia, Opulent Outlaw", 2, Rarity.MYTHIC, mage.cards.o.OliviaOpulentOutlaw.class));
         cards.add(new SetCardInfo("Omnath, Locus of Rage", 236, Rarity.MYTHIC, mage.cards.o.OmnathLocusOfRage.class));
         cards.add(new SetCardInfo("Opt", 104, Rarity.COMMON, mage.cards.o.Opt.class));
         cards.add(new SetCardInfo("Opulent Palace", 307, Rarity.UNCOMMON, mage.cards.o.OpulentPalace.class));
