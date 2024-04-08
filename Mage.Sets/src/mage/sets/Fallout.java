@@ -4,11 +4,16 @@ import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * @author TheElk801
  */
 public final class Fallout extends ExpansionSet {
 
+    // skip list for rad counter mechanic
+    private static final List<String> unfinished = Arrays.asList("Acquired Mutation", "Bloatfly Swarm", "Contaminated Drink", "Feral Ghoul", "Glowing One", "Harold and Bob, First Numens", "Infesting Radroach", "Mariposa Military Base", "Megaton's Fate", "Mirelurk Queen", "Nightkin Ambusher", "Nuclear Fallout", "Nuka-Nuke Launcher", "Screeching Scorchbeast", "Strong, the Brutish Thespian", "Struggle for Project Purity", "Survivor's Med Kit", "Tato Farmer", "The Master, Transcendent", "The Wise Mothman", "Vault 12: The Necropolis", "Vexing Radgull");
     private static final Fallout instance = new Fallout();
 
     public static Fallout getInstance() {
@@ -328,5 +333,7 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Windbrisk Heights", 315, Rarity.RARE, mage.cards.w.WindbriskHeights.class));
         cards.add(new SetCardInfo("Winding Constrictor", 223, Rarity.UNCOMMON, mage.cards.w.WindingConstrictor.class));
         cards.add(new SetCardInfo("Woodland Cemetery", 316, Rarity.RARE, mage.cards.w.WoodlandCemetery.class));
+
+        cards.removeIf(setCardInfo -> unfinished.contains(setCardInfo.getName())); // remove when mechanic is implemented
     }
 }
