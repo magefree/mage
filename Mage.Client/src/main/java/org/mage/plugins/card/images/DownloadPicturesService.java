@@ -11,7 +11,6 @@ import mage.client.dialog.DownloadImagesDialog;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.util.CardLanguage;
 import mage.client.util.GUISizeHelper;
-import mage.client.util.ImageCaches;
 import mage.client.util.sets.ConstructedFormats;
 import mage.remote.Connection;
 import net.java.truevfs.access.TFile;
@@ -22,6 +21,7 @@ import org.apache.log4j.Logger;
 import org.mage.plugins.card.dl.DownloadServiceInfo;
 import org.mage.plugins.card.dl.sources.*;
 import org.mage.plugins.card.utils.CardImageUtils;
+import static org.mage.plugins.card.utils.CardImageUtils.getImagesDir;
 
 import javax.swing.*;
 import java.awt.*;
@@ -35,8 +35,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
-
-import static org.mage.plugins.card.utils.CardImageUtils.getImagesDir;
 
 /**
  * @author JayDi85
@@ -221,7 +219,9 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
         this.cardsDownloadQueue.clear();
 
         updateGlobalMessage("Loading cards list...");
-        this.cardsAll = Collections.synchronizedList(CardRepository.instance.findCards(new CardCriteria()));
+        this.cardsAll = Collections.synchronizedList(CardRepository.instance.findCards(
+                new CardCriteria().nightCard(null) // meld cards need to be in the target cards, so we allow for night cards
+        ));
 
         updateGlobalMessage("Finding missing images...");
         this.cardsMissing = prepareMissingCards(this.cardsAll, uiDialog.getRedownloadCheckbox().isSelected());
@@ -438,25 +438,26 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                 if (!card.getCardNumber().isEmpty()
                         && !"0".equals(card.getCardNumber())
                         && !card.getSetCode().isEmpty()) {
-                    String cardName = card.getName();
-                    CardDownloadData url = new CardDownloadData(
-                            cardName,
-                            card.getSetCode(),
-                            card.getCardNumber(),
-                            card.usesVariousArt(),
-                            0);
-                    url.setSecondSide(card.isNightCard());
 
-                    // variations must have diff file names with additional postfix
-                    if (url.getUsesVariousArt()) {
-                        url.setDownloadName(createDownloadName(card));
+                    // main side for non-night cards.
+                    // At the exception of Meld Card, as they are not the back of an image for download
+                    if (!card.isNightCard() || card.isMeldCard()) {
+                        String cardName = card.getName();
+                        CardDownloadData url = new CardDownloadData(
+                                cardName,
+                                card.getSetCode(),
+                                card.getCardNumber(),
+                                card.usesVariousArt(),
+                                0);
+
+                        // variations must have diff file names with additional postfix
+                        if (url.getUsesVariousArt()) {
+                            url.setDownloadName(createDownloadName(card));
+                        }
+
+                        url.setSplitCard(card.isSplitCard());
+                        allCardsUrls.add(url);
                     }
-
-                    url.setSplitCard(card.isSplitCard());
-
-                    // main side
-                    allCardsUrls.add(url);
-
                     // second side
                     // xmage doesn't search night cards by default, so add it and other types manually
                     if (card.isDoubleFaced()) {
@@ -466,10 +467,10 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
 
                         CardInfo secondSideCard = CardRepository.instance.findCardWithPreferredSetAndNumber(card.getSecondSideName(), card.getSetCode(), card.getCardNumber());
                         if (secondSideCard == null) {
-                            throw new IllegalStateException("Can''t find second side card in database: " + card.getSecondSideName());
+                            throw new IllegalStateException("Can't find second side card in database: " + card.getSecondSideName());
                         }
 
-                        url = new CardDownloadData(
+                        CardDownloadData url = new CardDownloadData(
                                 card.getSecondSideName(),
                                 card.getSetCode(),
                                 secondSideCard.getCardNumber(),
@@ -491,7 +492,8 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                                 0
                         );
                         cardDownloadData.setFlippedSide(true);
-                        cardDownloadData.setSecondSide(card.isNightCard());
+                        // meld cards urls are on their own
+                        cardDownloadData.setSecondSide(card.isNightCard() && !card.isMeldCard());
                         allCardsUrls.add(cardDownloadData);
                     }
                     if (card.getMeldsToCardName() != null) {
@@ -501,11 +503,11 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
 
                         CardInfo meldsToCard = CardRepository.instance.findCardWithPreferredSetAndNumber(card.getMeldsToCardName(), card.getSetCode(), card.getCardNumber());
                         if (meldsToCard == null) {
-                            throw new IllegalStateException("Can''t find meldsToCard in database: " + card.getMeldsToCardName());
+                            throw new IllegalStateException("Can't find meldsToCard in database: " + card.getMeldsToCardName());
                         }
 
                         // meld cards are normal cards from the set, so no needs to set two faces/sides here
-                        url = new CardDownloadData(
+                        CardDownloadData url = new CardDownloadData(
                                 card.getMeldsToCardName(),
                                 card.getSetCode(),
                                 meldsToCard.getCardNumber(),
