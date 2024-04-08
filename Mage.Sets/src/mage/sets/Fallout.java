@@ -279,6 +279,7 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Sunpetal Grove", 297, Rarity.RARE, mage.cards.s.SunpetalGrove.class));
         cards.add(new SetCardInfo("Sunscorched Divide", 153, Rarity.RARE, mage.cards.s.SunscorchedDivide.class));
         cards.add(new SetCardInfo("Super Mutant Scavenger", 85, Rarity.UNCOMMON, mage.cards.s.SuperMutantScavenger.class));
+        cards.add(new SetCardInfo("Survivor's Med Kit", 144, Rarity.UNCOMMON, mage.cards.s.SurvivorsMedKit.class));
         cards.add(new SetCardInfo("Swamp", 321, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Swiftfoot Boots", 242, Rarity.UNCOMMON, mage.cards.s.SwiftfootBoots.class));
         cards.add(new SetCardInfo("Swords to Plowshares", 173, Rarity.UNCOMMON, mage.cards.s.SwordsToPlowshares.class));
