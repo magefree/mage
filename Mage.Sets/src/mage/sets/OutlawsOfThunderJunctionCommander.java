@@ -137,6 +137,7 @@ public final class OutlawsOfThunderJunctionCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Hashep Oasis", 299, Rarity.UNCOMMON, mage.cards.h.HashepOasis.class));
         cards.add(new SetCardInfo("Haughty Djinn", 99, Rarity.RARE, mage.cards.h.HaughtyDjinn.class));
         cards.add(new SetCardInfo("Hazezon, Shaper of Sand", 229, Rarity.RARE, mage.cards.h.HazezonShaperOfSand.class));
+        cards.add(new SetCardInfo("Heartless Conscription", 21, Rarity.RARE, mage.cards.h.HeartlessConscription.class));
         cards.add(new SetCardInfo("Heaven // Earth", 230, Rarity.RARE, mage.cards.h.HeavenEarth.class));
         cards.add(new SetCardInfo("Heliod's Intervention", 81, Rarity.RARE, mage.cards.h.HeliodsIntervention.class));
         cards.add(new SetCardInfo("Hex", 136, Rarity.RARE, mage.cards.h.Hex.class));
