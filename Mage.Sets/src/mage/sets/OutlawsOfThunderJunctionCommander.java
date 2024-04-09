@@ -174,7 +174,7 @@ public final class OutlawsOfThunderJunctionCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Mistmeadow Skulk", 84, Rarity.UNCOMMON, mage.cards.m.MistmeadowSkulk.class));
         cards.add(new SetCardInfo("Mizzix's Mastery", 175, Rarity.RARE, mage.cards.m.MizzixsMastery.class));
         cards.add(new SetCardInfo("Morbid Opportunist", 142, Rarity.UNCOMMON, mage.cards.m.MorbidOpportunist.class));
-        cards.add(new SetCardInfo("Murmuring Mystic", 102, Rarity.UNCOMMON, mage.cards.m.MurmuringMystic.class));
+        cards.add(new SetCardInfo("Murmuring Mystic", 102, Rarity.COMMON, mage.cards.m.MurmuringMystic.class));
         cards.add(new SetCardInfo("Nantuko Cultivator", 198, Rarity.UNCOMMON, mage.cards.n.NantukoCultivator.class));
         cards.add(new SetCardInfo("Nashi, Moon Sage's Scion", 143, Rarity.MYTHIC, mage.cards.n.NashiMoonSagesScion.class));
         cards.add(new SetCardInfo("Nesting Dragon", 176, Rarity.RARE, mage.cards.n.NestingDragon.class));
