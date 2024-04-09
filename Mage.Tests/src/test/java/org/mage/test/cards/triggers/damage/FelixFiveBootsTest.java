@@ -2,6 +2,7 @@ package org.mage.test.cards.triggers.damage;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.counters.CounterType;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -96,5 +97,31 @@ public class FelixFiveBootsTest extends CardTestPlayerBase {
         execute();
 
         assertPermanentCount(playerA, "Blood Token", 6 + 6);
+    }
+
+    @Test
+    public void testSelectRightPartOfBatch() {
+        setStrictChooseMode(true);
+
+        addCard(Zone.BATTLEFIELD, playerA, "Felix Five-Boots");
+        // Whenever equipped creature deals combat damage, put two charge counters on Umezawa’s Jitte.
+        addCard(Zone.BATTLEFIELD, playerA, "Umezawa's Jitte");
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Elite Vanguard");
+        addCard(Zone.BATTLEFIELD, playerA, "Raging Goblin");
+        addCard(Zone.BATTLEFIELD, playerB, "Wall of Blossoms");
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip", "Elite Vanguard");
+
+        attack(1, playerA, "Elite Vanguard", playerB);
+        attack(1, playerA, "Raging Goblin", playerB);
+        block(1, playerB, "Wall of Blossoms", "Elite Vanguard");
+
+        checkStackSize("only one Jitte triggers", 1, PhaseStep.COMBAT_DAMAGE, playerA, 1);
+
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertCounterCount(playerA, "Umezawa's Jitte", CounterType.CHARGE, 2);
     }
 }
