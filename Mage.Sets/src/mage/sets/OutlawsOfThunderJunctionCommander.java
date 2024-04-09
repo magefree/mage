@@ -307,6 +307,7 @@ public final class OutlawsOfThunderJunctionCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Viridescent Bog", 340, Rarity.RARE, mage.cards.v.ViridescentBog.class));
         cards.add(new SetCardInfo("Void Attendant", 212, Rarity.UNCOMMON, mage.cards.v.VoidAttendant.class));
         cards.add(new SetCardInfo("Volcanic Torrent", 184, Rarity.UNCOMMON, mage.cards.v.VolcanicTorrent.class));
+        cards.add(new SetCardInfo("We Ride at Dawn", 12, Rarity.RARE, mage.cards.w.WeRideAtDawn.class));
         cards.add(new SetCardInfo("Whirler Rogue", 122, Rarity.UNCOMMON, mage.cards.w.WhirlerRogue.class));
         cards.add(new SetCardInfo("Windfall", 123, Rarity.UNCOMMON, mage.cards.w.Windfall.class));
         cards.add(new SetCardInfo("Winding Way", 213, Rarity.COMMON, mage.cards.w.WindingWay.class));
