@@ -282,6 +282,7 @@ public final class OutlawsOfThunderJunctionCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Third Path Iconoclast", 244, Rarity.UNCOMMON, mage.cards.t.ThirdPathIconoclast.class));
         cards.add(new SetCardInfo("Three Visits", 209, Rarity.UNCOMMON, mage.cards.t.ThreeVisits.class));
         cards.add(new SetCardInfo("Thrilling Discovery", 245, Rarity.COMMON, mage.cards.t.ThrillingDiscovery.class));
+        cards.add(new SetCardInfo("Thunderclap Drake", 17, Rarity.RARE, mage.cards.t.ThunderclapDrake.class));
         cards.add(new SetCardInfo("Titania, Protector of Argoth", 210, Rarity.MYTHIC, mage.cards.t.TitaniaProtectorOfArgoth.class));
         cards.add(new SetCardInfo("Tower Winder", 34, Rarity.RARE, mage.cards.t.TowerWinder.class));
         cards.add(new SetCardInfo("Trailblazer's Boots", 269, Rarity.UNCOMMON, mage.cards.t.TrailblazersBoots.class));
