@@ -300,6 +300,7 @@ public final class OutlawsOfThunderJunctionCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Veinwitch Coven", 151, Rarity.RARE, mage.cards.v.VeinwitchCoven.class));
         cards.add(new SetCardInfo("Vengeful Regrowth", 35, Rarity.RARE, mage.cards.v.VengefulRegrowth.class));
         cards.add(new SetCardInfo("Veyran, Voice of Duality", 248, Rarity.MYTHIC, mage.cards.v.VeyranVoiceOfDuality.class));
+        cards.add(new SetCardInfo("Vihaan, Goldwaker", 8, Rarity.MYTHIC, mage.cards.v.VihaanGoldwaker.class));
         cards.add(new SetCardInfo("Villainous Wealth", 249, Rarity.RARE, mage.cards.v.VillainousWealth.class));
         cards.add(new SetCardInfo("Viridescent Bog", 340, Rarity.RARE, mage.cards.v.ViridescentBog.class));
         cards.add(new SetCardInfo("Void Attendant", 212, Rarity.UNCOMMON, mage.cards.v.VoidAttendant.class));
