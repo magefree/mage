@@ -24,6 +24,7 @@ public final class Fallout extends ExpansionSet {
         super("Fallout", "PIP", ExpansionSet.buildDate(2024, 3, 8), SetType.SUPPLEMENTAL);
 
         cards.add(new SetCardInfo("Abundant Growth", 194, Rarity.COMMON, mage.cards.a.AbundantGrowth.class));
+        cards.add(new SetCardInfo("Acquired Mutation", 53, Rarity.UNCOMMON, mage.cards.a.AcquiredMutation.class));
         cards.add(new SetCardInfo("Agent Frank Horrigan", 89, Rarity.RARE, mage.cards.a.AgentFrankHorrigan.class));
         cards.add(new SetCardInfo("All That Glitters", 155, Rarity.COMMON, mage.cards.a.AllThatGlitters.class));
         cards.add(new SetCardInfo("Almost Perfect", 90, Rarity.RARE, mage.cards.a.AlmostPerfect.class));
