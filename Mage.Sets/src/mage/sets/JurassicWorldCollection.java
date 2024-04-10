@@ -27,6 +27,7 @@ public final class JurassicWorldCollection extends ExpansionSet {
         cards.add(new SetCardInfo("Ellie and Alan, Paleontologists", 10, Rarity.RARE, mage.cards.e.EllieAndAlanPaleontologists.class));
         cards.add(new SetCardInfo("Forest", 25, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Forest", "25b", Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Grim Giganotosaurus", 11, Rarity.RARE, mage.cards.g.GrimGiganotosaurus.class));
         cards.add(new SetCardInfo("Hunting Velociraptor", 4, Rarity.RARE, mage.cards.h.HuntingVelociraptor.class));
         cards.add(new SetCardInfo("Island", 22, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Island", "22b", Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
