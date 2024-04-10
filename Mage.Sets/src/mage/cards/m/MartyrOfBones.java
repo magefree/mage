@@ -5,7 +5,6 @@ import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Cost;
-import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.VariableCostImpl;
 import mage.abilities.costs.VariableCostType;
 import mage.abilities.costs.common.RevealTargetFromHandCost;
@@ -24,7 +23,7 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInASingleGraveyard;
 import mage.target.common.TargetCardInHand;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.XTargetsAdjuster;
 
 import java.util.UUID;
 
@@ -46,7 +45,7 @@ public final class MartyrOfBones extends CardImpl {
         ability.addCost(new RevealVariableBlackCardsFromHandCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetCardInASingleGraveyard(0, 1, StaticFilters.FILTER_CARD_CARDS));
-        ability.setTargetAdjuster(MartyrOfBonesAdjuster.instance);
+        ability.setTargetAdjuster(new XTargetsAdjuster());
         this.addAbility(ability);
     }
 
@@ -57,22 +56,6 @@ public final class MartyrOfBones extends CardImpl {
     @Override
     public MartyrOfBones copy() {
         return new MartyrOfBones(this);
-    }
-}
-
-enum MartyrOfBonesAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        int amount = 0;
-        for (Cost cost : ability.getCosts()) {
-            if (cost instanceof RevealVariableBlackCardsFromHandCost) {
-                amount = ((VariableCost) cost).getAmount();
-            }
-        }
-        ability.getTargets().clear();
-        ability.addTarget(new TargetCardInASingleGraveyard(0, amount, StaticFilters.FILTER_CARD_CARDS));
     }
 }
 

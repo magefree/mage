@@ -1,6 +1,5 @@
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -14,12 +13,10 @@ import mage.constants.ComparisonType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.PowerPredicate;
-import mage.game.Game;
-import mage.target.Target;
 import mage.target.TargetPermanent;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.DynamicValuePowerTargetsAdjuster;
+
+import java.util.UUID;
 
 /**
  *
@@ -43,9 +40,8 @@ public final class MinamoSightbender extends CardImpl {
 
         // {X}, {T}: Target creature with power X or less can't be blocked this turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBeBlockedTargetEffect(), new ManaCostsImpl<>("{X}"));
-        Target target = new TargetPermanent(filter);
-        ability.setTargetAdjuster(MinamoSightbenderAdjuster.instance);
-        ability.addTarget(target);
+        ability.setTargetAdjuster(new DynamicValuePowerTargetsAdjuster(ComparisonType.OR_LESS));
+        ability.addTarget(new TargetPermanent(filter));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 
@@ -58,18 +54,5 @@ public final class MinamoSightbender extends CardImpl {
     @Override
     public MinamoSightbender copy() {
         return new MinamoSightbender(this);
-    }
-}
-
-enum MinamoSightbenderAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        int xValue = ability.getManaCostsToPay().getX();
-        FilterPermanent permanentFilter = new FilterCreaturePermanent("creature with power " + xValue + " or less");
-        permanentFilter.add(new PowerPredicate(ComparisonType.FEWER_THAN, xValue + 1));
-        ability.getTargets().clear();
-        ability.getTargets().add(new TargetPermanent(permanentFilter));
     }
 }
