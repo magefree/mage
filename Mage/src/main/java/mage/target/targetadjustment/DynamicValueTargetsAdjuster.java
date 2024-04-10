@@ -6,13 +6,19 @@ import mage.game.Game;
 import mage.target.Target;
 
 /**
- *
  * @author TheElk801, notgreat
  */
 public class DynamicValueTargetsAdjuster implements TargetAdjuster {
     private Target blueprintTarget = null;
     private final DynamicValue dynamicValue;
 
+    /**
+     * Modifies the target to be X targets, where X is the dynamic value.
+     * If the ability's target has min targets of 0, it's treated as "up to X targets".
+     * Otherwise, it's exactly "X targets".
+     *
+     * @param value The number of targets
+     */
     public DynamicValueTargetsAdjuster(DynamicValue value) {
         this.dynamicValue = value;
     }

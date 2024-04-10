@@ -2,28 +2,33 @@ package mage.target.targetadjustment;
 
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.constants.ComparisonType;
-import mage.filter.predicate.mageobject.ManaValuePredicate;
+import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.game.Game;
 import mage.target.Target;
 
 /**
  * @author TheElk801, notgreat
  */
-public class DynamicValueMVTargetsAdjuster implements TargetAdjuster {
+public class DynamicValuePowerTargetsAdjuster implements TargetAdjuster {
     private Target blueprintTarget = null;
     private final DynamicValue dynamicValue;
     private final ComparisonType comparison;
 
     /**
-     * Modifies the target to also require a mana value that satisfies the comparison to the dynamic value.
+     * Modifies the target to also require a power that satisfies the comparison to the dynamic value.
      *
-     * @param value The value to be compared against
+     * @param value   The value to be compared against
      * @param compare Which comparison to use
      */
-    public DynamicValueMVTargetsAdjuster(DynamicValue value, ComparisonType compare) {
+    public DynamicValuePowerTargetsAdjuster(DynamicValue value, ComparisonType compare) {
         this.dynamicValue = value;
         this.comparison = compare;
+    }
+
+    public DynamicValuePowerTargetsAdjuster(ComparisonType comparison) {
+        this(ManacostVariableValue.REGULAR, comparison);
     }
 
     @Override
@@ -33,7 +38,7 @@ public class DynamicValueMVTargetsAdjuster implements TargetAdjuster {
         }
         Target newTarget = blueprintTarget.copy();
         int mv = dynamicValue.calculate(game, ability, null);
-        newTarget.getFilter().add(new ManaValuePredicate(comparison, mv));
+        newTarget.getFilter().add(new PowerPredicate(comparison, mv));
         ability.getTargets().clear();
         ability.addTarget(newTarget);
     }
