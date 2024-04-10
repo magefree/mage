@@ -51,7 +51,7 @@ public final class TheBalrogOfMoria extends CardImpl {
                 .setText("for each opponent, exile up to one target creature that player controls."),
             false
         );
-        reflexiveAbility.setTargetAdjuster(EachOpponentPermanentTargetsAdjuster.instance);
+        reflexiveAbility.setTargetAdjuster(new EachOpponentPermanentTargetsAdjuster());
         reflexiveAbility.addTarget(new TargetCreaturePermanent(0,1));
 
         this.addAbility(new DiesSourceTriggeredAbility(

@@ -42,7 +42,7 @@ public final class JuvenileMistDragon extends CardImpl {
                         .setTargetPointer(new EachTargetPointer())
                         .setText("Each of those creatures doesn't untap during its controller's next untap step")
         );
-        ability.setTargetAdjuster(EachOpponentPermanentTargetsAdjuster.instance);
+        ability.setTargetAdjuster(new EachOpponentPermanentTargetsAdjuster());
         ability.addTarget(new TargetCreaturePermanent(0,1));
         this.addAbility(ability.withFlavorWord("Confounding Clouds"));
     }

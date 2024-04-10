@@ -56,7 +56,7 @@ public final class VronosMaskedInquisitor extends CardImpl {
         // −2: For each opponent, return up to one target nonland permanent that player controls to its owner's hand.
         LoyaltyAbility ability2 = new LoyaltyAbility(new ReturnToHandTargetEffect().setTargetPointer(new EachTargetPointer())
                 .setText("for each opponent, return up to one target nonland permanent that player controls to its owner's hand"), -2);
-        ability2.setTargetAdjuster(EachOpponentPermanentTargetsAdjuster.instance);
+        ability2.setTargetAdjuster(new EachOpponentPermanentTargetsAdjuster());
         ability2.addTarget(new TargetNonlandPermanent(0,1));
         this.addAbility(ability2);
 

@@ -46,7 +46,7 @@ public final class BronzebeakForagers extends CardImpl {
                 .setTargetPointer(new EachTargetPointer())
                 .setText("for each opponent, exile up to one target nonland permanent that player controls until {this} leaves the battlefield")
         );
-        etbAbility.setTargetAdjuster(EachOpponentPermanentTargetsAdjuster.instance);
+        etbAbility.setTargetAdjuster(new EachOpponentPermanentTargetsAdjuster());
         etbAbility.addTarget(new TargetNonlandPermanent(0, 1));
         this.addAbility(etbAbility);
 

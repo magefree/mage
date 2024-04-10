@@ -40,7 +40,7 @@ public final class LuminatePrimordial extends CardImpl {
         // When Luminate Primordial enters the battlefield, for each opponent, exile up to one target creature
         // that player controls and that player gains life equal to its power.
         Ability ability = new EntersBattlefieldTriggeredAbility(new LuminatePrimordialEffect(), false);
-        ability.setTargetAdjuster(EachOpponentPermanentTargetsAdjuster.instance);
+        ability.setTargetAdjuster(new EachOpponentPermanentTargetsAdjuster());
         ability.addTarget(new TargetCreaturePermanent(0,1));
         this.addAbility(ability);
     }

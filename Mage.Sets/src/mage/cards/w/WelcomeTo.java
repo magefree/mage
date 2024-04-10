@@ -63,7 +63,7 @@ public final class WelcomeTo extends CardImpl {
                     ).setText("For each opponent, up to one target noncreature artifact they control becomes " +
                               "a 0/4 Wall artifact creature with defender for as long as you control this Saga."));
             ability.getEffects().setTargetPointer(new EachTargetPointer());
-            ability.setTargetAdjuster(EachOpponentPermanentTargetsAdjuster.instance);
+            ability.setTargetAdjuster(new EachOpponentPermanentTargetsAdjuster());
             ability.addTarget(new TargetPermanent(0, 1, filterNoncreatureArtifact));
         });
 

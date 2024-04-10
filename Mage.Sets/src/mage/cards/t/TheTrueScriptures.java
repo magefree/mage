@@ -46,7 +46,7 @@ public final class TheTrueScriptures extends CardImpl {
                 ability -> {
                     ability.addEffect(new DestroyTargetEffect().setTargetPointer(new EachTargetPointer())
                             .setText("for each opponent, destroy up to one target creature or planeswalker that player controls"));
-                    ability.setTargetAdjuster(EachOpponentPermanentTargetsAdjuster.instance);
+                    ability.setTargetAdjuster(new EachOpponentPermanentTargetsAdjuster());
                     ability.addTarget(new TargetCreatureOrPlaneswalker(0,1));
                 }
         );

@@ -25,7 +25,7 @@ public final class GraspOfFate extends CardImpl {
                 .setTargetPointer(new EachTargetPointer())
                 .setText("for each opponent, exile up to one target nonland permanent that player controls until {this} leaves the battlefield")
         );
-        ability.setTargetAdjuster(EachOpponentPermanentTargetsAdjuster.instance);
+        ability.setTargetAdjuster(new EachOpponentPermanentTargetsAdjuster());
         ability.addTarget(new TargetNonlandPermanent(0,1));
         this.addAbility(ability);
     }

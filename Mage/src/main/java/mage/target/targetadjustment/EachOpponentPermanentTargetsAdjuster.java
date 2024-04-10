@@ -13,25 +13,28 @@ import java.util.UUID;
 /**
  * @author notgreat
  */
-public enum EachOpponentPermanentTargetsAdjuster implements TargetAdjuster {
-    instance;
-
+public class EachOpponentPermanentTargetsAdjuster implements TargetAdjuster {
+    private TargetPermanent blueprintTarget = null;
     /**
      * Duplicates the permanent target for each opponent.
      * Filtering of permanent's controllers will be handled inside, so
      * do not pass a blueprint target with a controller restriction filter/predicate.
      */
+    public EachOpponentPermanentTargetsAdjuster() {
+    }
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        TargetPermanent oldTargetPermanent = (TargetPermanent) ability.getTargets().get(0);
+        if (blueprintTarget == null) {
+            blueprintTarget = (TargetPermanent) ability.getTargets().get(0).copy();
+        }
         ability.getTargets().clear();
         for (UUID opponentId : game.getOpponents(ability.getControllerId())) {
             Player opponent = game.getPlayer(opponentId);
             if (opponent == null) {
                 continue;
             }
-            TargetPermanent newTarget = oldTargetPermanent.copy();
+            TargetPermanent newTarget = blueprintTarget.copy();
             Filter<Permanent> filter = newTarget.getFilter();
             filter.add(new ControllerIdPredicate(opponentId));
             if (newTarget.canChoose(ability.getControllerId(), ability, game)) {

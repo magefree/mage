@@ -39,7 +39,7 @@ public final class EnigmaThief extends CardImpl {
         Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect()
                 .setTargetPointer(new EachTargetPointer())
                 .setText("for each opponent, return up to one target nonland permanent that player controls to its owner's hand"));
-        ability.setTargetAdjuster(EachOpponentPermanentTargetsAdjuster.instance);
+        ability.setTargetAdjuster(new EachOpponentPermanentTargetsAdjuster());
         ability.addTarget(new TargetNonlandPermanent(0,1));
         this.addAbility(ability);
     }

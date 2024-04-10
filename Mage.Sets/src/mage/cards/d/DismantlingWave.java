@@ -27,7 +27,7 @@ public final class DismantlingWave extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyTargetEffect()
                 .setTargetPointer(new EachTargetPointer())
                 .setText("For each opponent, destroy up to one target artifact or enchantment that player controls."));
-        this.getSpellAbility().setTargetAdjuster(EachOpponentPermanentTargetsAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(new EachOpponentPermanentTargetsAdjuster());
         this.getSpellAbility().addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT));
 
         // Cycling {6}{W}{W}

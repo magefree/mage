@@ -57,7 +57,7 @@ public final class InTheDarknessBindThem extends CardImpl {
                     ability.addEffect(new TheRingTemptsYouEffect());
 
                     ability.getEffects().setTargetPointer(new EachTargetPointer());
-                    ability.setTargetAdjuster(EachOpponentPermanentTargetsAdjuster.instance);
+                    ability.setTargetAdjuster(new EachOpponentPermanentTargetsAdjuster());
                     ability.addTarget(new TargetCreaturePermanent(0,1));
                 }
         );

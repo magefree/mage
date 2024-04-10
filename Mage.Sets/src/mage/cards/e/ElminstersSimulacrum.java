@@ -25,7 +25,7 @@ public final class ElminstersSimulacrum extends CardImpl {
 
         // For each opponent, you create a token that's a copy of up to one target creature that player controls.
         this.getSpellAbility().addEffect(new ElminstersSimulacrumAdjusterEffect());
-        this.getSpellAbility().setTargetAdjuster(EachOpponentPermanentTargetsAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(new EachOpponentPermanentTargetsAdjuster());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0,1));
     }
 
