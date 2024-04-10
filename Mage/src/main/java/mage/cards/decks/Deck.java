@@ -122,17 +122,7 @@ public class Deck implements Serializable, Copyable<Deck> {
     }
 
     private static GameException createCardNotFoundGameException(DeckCardInfo deckCardInfo, String deckName) {
-        // Try WORKAROUND for Card DB error: Try to read a card that does exist
-        CardInfo cardInfo = CardRepository.instance.findCard("Silvercoat Lion");
-        if (cardInfo == null) {
-            // DB seems to have a problem - try to restart the DB (useless in 99%)
-            CardRepository.instance.closeDB();
-            CardRepository.instance.openDB();
-            cardInfo = CardRepository.instance.findCard("Silvercoat Lion");
-            Logger.getLogger(Deck.class).error("Tried to restart the DB: " + (cardInfo == null ? "not successful" : "successful"));
-        }
-
-        if (cardInfo != null) {
+        if (CardRepository.checkDatabaseHealthAndFix()) {
             // it's ok, just unknown card
             String cardError = String.format("Card not found - %s - %s - %s in deck %s.",
                     deckCardInfo.getCardName(),
@@ -146,9 +136,7 @@ public class Deck implements Serializable, Copyable<Deck> {
             return new GameException(cardError);
         } else {
             // critical error, server must be restarted
-            // TODO: add auto-restart task here someday (with a docker support)
-            //  see https://github.com/magefree/mage/issues/8130
-            return new GameException("Problems detected on the server side (memory issue), wait for a restart.");
+            return new GameException("Critical problems detected on the server side (memory issues), wait for a restart.");
         }
     }
 

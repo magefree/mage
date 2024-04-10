@@ -42,11 +42,11 @@ public class ChooseACardNameEffect extends OneShotEffect {
             this.nameSupplier = nameSupplier;
         }
 
-        private final String getMessage() {
+        private String getMessage() {
             return "choose " + CardUtil.addArticle(description);
         }
 
-        private final Set<String> getNames() {
+        private Set<String> getNames() {
             return nameSupplier.get();
         }
 
@@ -59,7 +59,13 @@ public class ChooseACardNameEffect extends OneShotEffect {
                 return null;
             }
             Choice cardChoice = new ChoiceImpl(true, ChoiceHintType.CARD);
-            cardChoice.setChoices(this.getNames());
+            Set<String> names = this.getNames();
+            if (names.isEmpty()) {
+                // see server logs for real errors
+                throw new IllegalStateException("Critical error, can't find card names in database. Possible reason: no more free memory on server side");
+            }
+
+            cardChoice.setChoices(names);
             cardChoice.setMessage(CardUtil.getTextWithFirstCharUpperCase(this.getMessage()));
             cardChoice.clearChoice();
             player.choose(Outcome.Detriment, cardChoice, game);
