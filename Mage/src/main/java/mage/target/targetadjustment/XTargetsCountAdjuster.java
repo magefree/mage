@@ -5,9 +5,9 @@ import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 /**
  * @author notgreat
  */
-public class XTargetsAdjuster extends DynamicValueTargetsAdjuster {
+public class XTargetsCountAdjuster extends TargetsCountAdjuster {
 
-    public XTargetsAdjuster() {
+    public XTargetsCountAdjuster() {
         super(ManacostVariableValue.REGULAR);
     }
 }

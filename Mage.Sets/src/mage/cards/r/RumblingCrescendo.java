@@ -17,7 +17,7 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.target.TargetPermanent;
-import mage.target.targetadjustment.DynamicValueTargetsAdjuster;
+import mage.target.targetadjustment.TargetsCountAdjuster;
 
 import java.util.UUID;
 
@@ -46,7 +46,7 @@ public final class RumblingCrescendo extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{R}"));
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetPermanent(0, 0, filter, false));
-        ability.setTargetAdjuster(new DynamicValueTargetsAdjuster(new CountersSourceCount(CounterType.VERSE)));
+        ability.setTargetAdjuster(new TargetsCountAdjuster(new CountersSourceCount(CounterType.VERSE)));
         this.addAbility(ability);
     }
 

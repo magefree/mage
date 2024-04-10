@@ -8,7 +8,7 @@ import mage.target.Target;
 /**
  * @author TheElk801, notgreat
  */
-public class DynamicValueTargetsAdjuster implements TargetAdjuster {
+public class TargetsCountAdjuster implements TargetAdjuster {
     private Target blueprintTarget = null;
     private final DynamicValue dynamicValue;
 
@@ -19,7 +19,7 @@ public class DynamicValueTargetsAdjuster implements TargetAdjuster {
      *
      * @param value The number of targets
      */
-    public DynamicValueTargetsAdjuster(DynamicValue value) {
+    public TargetsCountAdjuster(DynamicValue value) {
         this.dynamicValue = value;
     }
 

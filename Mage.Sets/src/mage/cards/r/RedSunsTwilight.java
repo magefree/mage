@@ -14,7 +14,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetArtifactPermanent;
-import mage.target.targetadjustment.XTargetsAdjuster;
+import mage.target.targetadjustment.XTargetsCountAdjuster;
 import mage.target.targetpointer.FixedTargets;
 
 import java.util.ArrayList;
@@ -33,7 +33,7 @@ public class RedSunsTwilight extends CardImpl {
         // If X is 5 or more, for each artifact destroyed this way, create a token that's a copy of it.
         // Those tokens gain haste. Exile them at the beginning of the next end step.
         this.getSpellAbility().addTarget(new TargetArtifactPermanent(0, 1));
-        this.getSpellAbility().setTargetAdjuster(new XTargetsAdjuster());
+        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
         this.getSpellAbility().addEffect(new RedSunsTwilightEffect());
     }
 

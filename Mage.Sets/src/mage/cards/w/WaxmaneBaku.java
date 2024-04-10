@@ -15,7 +15,7 @@ import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.XTargetsAdjuster;
+import mage.target.targetadjustment.XTargetsCountAdjuster;
 
 import java.util.UUID;
 
@@ -38,7 +38,7 @@ public final class WaxmaneBaku extends CardImpl {
         // {1}, Remove X ki counters from Waxmane Baku: Tap X target creatures.
         Ability ability = new SimpleActivatedAbility(new TapTargetEffect("tap X target creatures"), new GenericManaCost(1));
         ability.addCost(new RemoveVariableCountersSourceCost(CounterType.KI));
-        ability.setTargetAdjuster(new XTargetsAdjuster());
+        ability.setTargetAdjuster(new XTargetsCountAdjuster());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

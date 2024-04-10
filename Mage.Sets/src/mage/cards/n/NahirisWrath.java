@@ -9,7 +9,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterCard;
 import mage.target.common.TargetCreatureOrPlaneswalker;
-import mage.target.targetadjustment.XTargetsAdjuster;
+import mage.target.targetadjustment.XTargetsCountAdjuster;
 
 import java.util.UUID;
 
@@ -28,7 +28,7 @@ public final class NahirisWrath extends CardImpl {
         Effect effect = new DamageTargetEffect(DiscardCostCardManaValue.instance);
         effect.setText("{this} deals damage equal to the total mana value of the discarded cards to each of up to X target creatures and/or planeswalkers");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().setTargetAdjuster(new XTargetsAdjuster());
+        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
         this.getSpellAbility().addTarget(new TargetCreatureOrPlaneswalker(0, 1));
     }
 

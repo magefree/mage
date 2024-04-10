@@ -19,7 +19,7 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInGraveyardBattlefieldOrStack;
-import mage.target.targetadjustment.DynamicValueTargetsAdjuster;
+import mage.target.targetadjustment.TargetsCountAdjuster;
 
 import java.util.UUID;
 
@@ -50,7 +50,7 @@ public final class AureliasVindicator extends CardImpl {
         // When Aurelia's Vindicator is turned face up, exile up to X other target creatures from the battlefield and/or creature cards from graveyards.
         Ability ability = new TurnedFaceUpSourceTriggeredAbility(new ExileTargetForSourceEffect()
                 .setText("exile up to X other target creatures from the battlefield and/or creature cards from graveyards"));
-        ability.setTargetAdjuster(new DynamicValueTargetsAdjuster(MorphManacostVariableValue.instance));
+        ability.setTargetAdjuster(new TargetsCountAdjuster(MorphManacostVariableValue.instance));
         ability.addTarget(new TargetCardInGraveyardBattlefieldOrStack(
                 0, 1, StaticFilters.FILTER_CARD_CREATURE, StaticFilters.FILTER_PERMANENT_CREATURES
         ));

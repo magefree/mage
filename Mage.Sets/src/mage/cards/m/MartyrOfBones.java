@@ -23,7 +23,7 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInASingleGraveyard;
 import mage.target.common.TargetCardInHand;
-import mage.target.targetadjustment.XTargetsAdjuster;
+import mage.target.targetadjustment.XTargetsCountAdjuster;
 
 import java.util.UUID;
 
@@ -45,7 +45,7 @@ public final class MartyrOfBones extends CardImpl {
         ability.addCost(new RevealVariableBlackCardsFromHandCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetCardInASingleGraveyard(0, 1, StaticFilters.FILTER_CARD_CARDS));
-        ability.setTargetAdjuster(new XTargetsAdjuster());
+        ability.setTargetAdjuster(new XTargetsCountAdjuster());
         this.addAbility(ability);
     }
 

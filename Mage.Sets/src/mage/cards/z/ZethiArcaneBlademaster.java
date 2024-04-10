@@ -15,7 +15,7 @@ import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.targetadjustment.DynamicValueTargetsAdjuster;
+import mage.target.targetadjustment.TargetsCountAdjuster;
 import org.apache.log4j.Logger;
 
 import java.util.UUID;
@@ -44,7 +44,7 @@ public final class ZethiArcaneBlademaster extends CardImpl {
 
         // When Chun-Li enters the battlefield, exile up to X target instant cards from your graveyard, where X is the number of times Chun-Li was kicked. Put a kick counter on each of them.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ZethiArcaneBlademasterExileEffect());
-        ability.setTargetAdjuster(new DynamicValueTargetsAdjuster(MultikickerCount.instance));
+        ability.setTargetAdjuster(new TargetsCountAdjuster(MultikickerCount.instance));
         ability.addTarget(new TargetCardInYourGraveyard(0, 1, filter));
         this.addAbility(ability);
 

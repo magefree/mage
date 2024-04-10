@@ -15,7 +15,7 @@ import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.XTargetsAdjuster;
+import mage.target.targetadjustment.XTargetsCountAdjuster;
 
 import java.util.UUID;
 
@@ -47,7 +47,7 @@ public final class GhostLitDrifter extends CardImpl {
                 FlyingAbility.getInstance(), Duration.EndOfTurn,
                 "X target creatures gain flying until end of turn"
         ));
-        ability.setTargetAdjuster(new XTargetsAdjuster());
+        ability.setTargetAdjuster(new XTargetsCountAdjuster());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

@@ -12,7 +12,7 @@ import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.Boar2Token;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.XTargetsAdjuster;
+import mage.target.targetadjustment.XTargetsCountAdjuster;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -30,7 +30,7 @@ public final class CurseOfTheSwine extends CardImpl {
         this.getSpellAbility().addEffect(new CurseOfTheSwineEffect());
 
         // Correct number of targets will be set in adjustTargets
-        this.getSpellAbility().setTargetAdjuster(new XTargetsAdjuster());
+        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 
     }

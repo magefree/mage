@@ -7,7 +7,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.DynamicValuePowerTargetsAdjuster;
+import mage.target.targetadjustment.PowerTargetAdjuster;
 
 import java.util.UUID;
 
@@ -21,7 +21,7 @@ public final class KillingGlare extends CardImpl {
 
         // Destroy target creature with power X or less.
         this.getSpellAbility().addEffect(new DestroyTargetEffect("destroy target creature with power X or less"));
-        this.getSpellAbility().setTargetAdjuster(new DynamicValuePowerTargetsAdjuster(ComparisonType.OR_LESS));
+        this.getSpellAbility().setTargetAdjuster(new PowerTargetAdjuster(ComparisonType.OR_LESS));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 

@@ -15,7 +15,7 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetArtifactPermanent;
-import mage.target.targetadjustment.XMVAdjuster;
+import mage.target.targetadjustment.XMVTargetAdjuster;
 
 import java.util.UUID;
 
@@ -51,7 +51,7 @@ public final class ThievingSkydiver extends CardImpl {
                 "If that artifact is an Equipment, attach it to {this}."
         );
         ability.addEffect(new ThievingSkydiverEffect());
-        ability.setTargetAdjuster(new XMVAdjuster(ComparisonType.OR_LESS));
+        ability.setTargetAdjuster(new XMVTargetAdjuster(ComparisonType.OR_LESS));
         ability.addTarget(new TargetArtifactPermanent());
         this.addAbility(ability);
     }

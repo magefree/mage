@@ -10,7 +10,7 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
-import mage.target.targetadjustment.XTargetsAdjuster;
+import mage.target.targetadjustment.XTargetsCountAdjuster;
 
 import java.util.UUID;
 
@@ -24,7 +24,7 @@ public final class Doppelgang extends CardImpl {
 
         // For each of X target permanents, create X tokens that are copies of that permanent.
         this.getSpellAbility().addEffect(new DoppelgangEffect());
-        this.getSpellAbility().setTargetAdjuster(new XTargetsAdjuster());
+        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
         this.getSpellAbility().addTarget(new TargetPermanent());
     }
 

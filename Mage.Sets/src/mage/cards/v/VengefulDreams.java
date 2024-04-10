@@ -9,7 +9,7 @@ import mage.constants.CardType;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
-import mage.target.targetadjustment.XTargetsAdjuster;
+import mage.target.targetadjustment.XTargetsCountAdjuster;
 
 import java.util.UUID;
 
@@ -28,7 +28,7 @@ public final class VengefulDreams extends CardImpl {
         Effect effect = new ExileTargetEffect();
         effect.setText("Exile X target attacking creatures");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().setTargetAdjuster(new XTargetsAdjuster());
+        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
         this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_ATTACKING_CREATURES));
     }
 

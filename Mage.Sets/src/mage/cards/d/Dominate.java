@@ -8,7 +8,7 @@ import mage.constants.ComparisonType;
 import mage.constants.Duration;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.XMVAdjuster;
+import mage.target.targetadjustment.XMVTargetAdjuster;
 
 import java.util.UUID;
 
@@ -23,7 +23,7 @@ public final class Dominate extends CardImpl {
         // Gain control of target creature with converted mana cost X or less.
         this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.Custom, true));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent("creature with mana value X or less")));
-        this.getSpellAbility().setTargetAdjuster(new XMVAdjuster(ComparisonType.OR_LESS));
+        this.getSpellAbility().setTargetAdjuster(new XMVTargetAdjuster(ComparisonType.OR_LESS));
     }
 
     private Dominate(final Dominate card) {

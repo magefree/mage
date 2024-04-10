@@ -11,7 +11,7 @@ import mage.constants.ComparisonType;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.targetadjustment.XTargetsAdjuster;
+import mage.target.targetadjustment.XTargetsCountAdjuster;
 
 import java.util.UUID;
 
@@ -35,7 +35,7 @@ public final class ReturnToTheRanks extends CardImpl {
         Effect effect = new ReturnFromGraveyardToBattlefieldTargetEffect();
         effect.setText("Return X target creature cards with mana value 2 or less from your graveyard to the battlefield");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().setTargetAdjuster(new XTargetsAdjuster());
+        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(filter));
     }
 

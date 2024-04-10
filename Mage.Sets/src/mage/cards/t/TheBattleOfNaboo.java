@@ -12,7 +12,7 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.XTargetsAdjuster;
+import mage.target.targetadjustment.XTargetsCountAdjuster;
 
 import java.util.UUID;
 
@@ -29,7 +29,7 @@ public final class TheBattleOfNaboo extends CardImpl {
         effect.setText("Return X target creatures to their owner's hands");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addEffect(new TheBattleOfNabooEffect());
-        this.getSpellAbility().setTargetAdjuster(new XTargetsAdjuster());
+        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 

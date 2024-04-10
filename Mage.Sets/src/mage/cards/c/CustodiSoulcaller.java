@@ -18,7 +18,7 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.targetadjustment.DynamicValueMVTargetsAdjuster;
+import mage.target.targetadjustment.MVTargetAdjuster;
 import mage.watchers.Watcher;
 
 import java.util.*;
@@ -40,7 +40,7 @@ public final class CustodiSoulcaller extends CardImpl {
         // Whenever Custodi Soulcaller attacks, return target creature card with converted mana cost X or less from your graveyard to the battlefield, where X is the number of players you attacked with a creature this combat.
         Ability ability = new AttacksTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect().setText("return target creature card with mana value X or less from your graveyard to the battlefield, where X is the number of players you attacked this combat"), false);
         ability.addWatcher(new CustodiSoulcallerWatcher());
-        ability.setTargetAdjuster(new DynamicValueMVTargetsAdjuster(CustodiSoulcallerValue.instance, ComparisonType.OR_LESS));
+        ability.setTargetAdjuster(new MVTargetAdjuster(CustodiSoulcallerValue.instance, ComparisonType.OR_LESS));
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         this.addAbility(ability);
     }

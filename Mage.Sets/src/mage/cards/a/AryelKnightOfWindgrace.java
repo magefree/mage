@@ -16,7 +16,7 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.permanent.token.KnightToken;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.DynamicValuePowerTargetsAdjuster;
+import mage.target.targetadjustment.PowerTargetAdjuster;
 
 import java.util.UUID;
 
@@ -54,7 +54,7 @@ public final class AryelKnightOfWindgrace extends CardImpl {
                 .setText("Destroy target creature with power X or less"), new ManaCostsImpl<>("{B}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new TapVariableTargetCost(filter));
-        ability.setTargetAdjuster(new DynamicValuePowerTargetsAdjuster(ComparisonType.OR_LESS));
+        ability.setTargetAdjuster(new PowerTargetAdjuster(ComparisonType.OR_LESS));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

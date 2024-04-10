@@ -15,7 +15,7 @@ import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.targetadjustment.DynamicValueTargetsAdjuster;
+import mage.target.targetadjustment.TargetsCountAdjuster;
 
 import java.util.UUID;
 
@@ -42,7 +42,7 @@ public final class MarshalsAnthem extends CardImpl {
         Ability ability = new EntersBattlefieldTriggeredAbility(
                 new ReturnFromGraveyardToBattlefieldTargetEffect().setText(rule), false
         );
-        ability.setTargetAdjuster(new DynamicValueTargetsAdjuster(MultikickerCount.instance));
+        ability.setTargetAdjuster(new TargetsCountAdjuster(MultikickerCount.instance));
         ability.addTarget(new TargetCardInYourGraveyard(0, 1, StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         this.addAbility(ability);
     }

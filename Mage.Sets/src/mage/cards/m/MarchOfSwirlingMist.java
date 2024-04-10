@@ -9,7 +9,7 @@ import mage.constants.CardType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.XTargetsAdjuster;
+import mage.target.targetadjustment.XTargetsCountAdjuster;
 
 import java.util.UUID;
 
@@ -32,7 +32,7 @@ public final class MarchOfSwirlingMist extends CardImpl {
 
         // Up to X target creatures phase out.
         this.getSpellAbility().addEffect(new PhaseOutTargetEffect().setText("up to X target creatures phase out"));
-        this.getSpellAbility().setTargetAdjuster(new XTargetsAdjuster());
+        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 1));
     }
 

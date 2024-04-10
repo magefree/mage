@@ -6,7 +6,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInASingleGraveyard;
-import mage.target.targetadjustment.XTargetsAdjuster;
+import mage.target.targetadjustment.XTargetsCountAdjuster;
 
 import java.util.UUID;
 
@@ -20,7 +20,7 @@ public final class RatsFeast extends CardImpl {
 
         // Exile X target cards from a single graveyard.
         this.getSpellAbility().addEffect(new ExileTargetEffect("Exile X target cards from a single graveyard"));
-        this.getSpellAbility().setTargetAdjuster(new XTargetsAdjuster());
+        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
         this.getSpellAbility().addTarget(new TargetCardInASingleGraveyard(1, 1, StaticFilters.FILTER_CARD_CARDS));
     }
 

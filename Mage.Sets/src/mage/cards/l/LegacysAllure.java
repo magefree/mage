@@ -13,7 +13,7 @@ import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.DynamicValuePowerTargetsAdjuster;
+import mage.target.targetadjustment.PowerTargetAdjuster;
 
 import java.util.UUID;
 
@@ -34,7 +34,7 @@ public final class LegacysAllure extends CardImpl {
         // Sacrifice Legacy's Allure: Gain control of target creature with power less than or equal to the number of treasure counters on Legacy's Allure.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainControlTargetEffect(Duration.EndOfGame, true), new SacrificeSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filter));
-        ability.setTargetAdjuster(new DynamicValuePowerTargetsAdjuster(new CountersSourceCount(CounterType.TREASURE), ComparisonType.OR_LESS));
+        ability.setTargetAdjuster(new PowerTargetAdjuster(new CountersSourceCount(CounterType.TREASURE), ComparisonType.OR_LESS));
         this.addAbility(ability);
     }
 

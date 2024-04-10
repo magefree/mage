@@ -9,7 +9,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.game.permanent.token.GremlinToken;
 import mage.target.common.TargetArtifactPermanent;
-import mage.target.targetadjustment.XTargetsAdjuster;
+import mage.target.targetadjustment.XTargetsCountAdjuster;
 
 import java.util.UUID;
 
@@ -23,7 +23,7 @@ public final class ReleaseTheGremlins extends CardImpl {
 
         // Destroy X target artifacts. 
         this.getSpellAbility().addEffect(new DestroyTargetEffect("Destroy X target artifacts"));
-        this.getSpellAbility().setTargetAdjuster(new XTargetsAdjuster());
+        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
         this.getSpellAbility().addTarget(new TargetArtifactPermanent());
 
         // Create X 2/2 red Gremlin creature tokens.

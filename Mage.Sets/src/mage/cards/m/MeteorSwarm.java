@@ -5,7 +5,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.target.common.TargetCreatureOrPlaneswalkerAmount;
-import mage.target.targetadjustment.XTargetsAdjuster;
+import mage.target.targetadjustment.XTargetsCountAdjuster;
 
 import java.util.UUID;
 
@@ -23,7 +23,7 @@ public final class MeteorSwarm extends CardImpl {
                         setText("{this} deals 8 damage divided as you choose among X target creatures and/or planeswalkers.")
         );
         this.getSpellAbility().addTarget(new TargetCreatureOrPlaneswalkerAmount(8));
-        this.getSpellAbility().setTargetAdjuster(new XTargetsAdjuster());
+        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
     }
 
     private MeteorSwarm(final MeteorSwarm card) {

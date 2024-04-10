@@ -12,7 +12,7 @@ import mage.constants.Duration;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.XTargetsAdjuster;
+import mage.target.targetadjustment.XTargetsCountAdjuster;
 
 import java.util.UUID;
 
@@ -38,7 +38,7 @@ public final class TheCrowdGoesWild extends CardImpl {
                 .setText("Support X <i>(Put a +1/+1 counter on each of up to X target creatures.)</i><br>")
         );
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 1));
-        this.getSpellAbility().setTargetAdjuster(new XTargetsAdjuster());
+        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
 
         // Each creature with a +1/+1 counter on it gains trample until end of turn.
         this.getSpellAbility().addEffect(new GainAbilityAllEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, filter));

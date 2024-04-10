@@ -19,7 +19,7 @@ import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.targetadjustment.XTargetsAdjuster;
+import mage.target.targetadjustment.XTargetsCountAdjuster;
 
 import java.util.UUID;
 
@@ -60,7 +60,7 @@ public final class ShigekiJukaiVisionary extends CardImpl {
                 "{X}{X}{G}{G}", new ReturnFromGraveyardToHandTargetEffect()
                 .setText("return X target nonlegendary cards from your graveyard to your hand")
         );
-        ability2.setTargetAdjuster(new XTargetsAdjuster());
+        ability2.setTargetAdjuster(new XTargetsCountAdjuster());
         ability2.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability2);
     }

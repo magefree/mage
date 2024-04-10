@@ -12,7 +12,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.targetadjustment.DynamicValueTargetsAdjuster;
+import mage.target.targetadjustment.TargetsCountAdjuster;
 
 import java.util.UUID;
 
@@ -38,7 +38,7 @@ public final class RotHulk extends CardImpl {
         // When Rot Hulk enters the battlefield, return up to X target Zombie cards from your graveyard to the battlefield, where X is the number of opponents you have.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect()
                 .setText("return up to X target Zombie cards from your graveyard to the battlefield, where X is the number of opponents you have."));
-        ability.setTargetAdjuster(new DynamicValueTargetsAdjuster(OpponentsCount.instance));
+        ability.setTargetAdjuster(new TargetsCountAdjuster(OpponentsCount.instance));
         ability.addTarget(new TargetCardInYourGraveyard(filterZombie));
         this.addAbility(ability);
     }

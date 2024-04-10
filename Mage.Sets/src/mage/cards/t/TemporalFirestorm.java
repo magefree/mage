@@ -12,7 +12,7 @@ import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureOrPlaneswalkerPermanent;
 import mage.target.TargetPermanent;
-import mage.target.targetadjustment.DynamicValueTargetsAdjuster;
+import mage.target.targetadjustment.TargetsCountAdjuster;
 
 import java.util.UUID;
 
@@ -37,7 +37,7 @@ public final class TemporalFirestorm extends CardImpl {
         // Choose up to X creatures and/or planeswalkers you control, where X is the number of times this spell was kicked. Those permanents phase out.
         this.getSpellAbility().addEffect(new PhaseOutTargetEffect().setText("choose up to X creatures and/or " +
                 "planeswalkers you control, where X is the number of times this spell was kicked. Those permanents phase out"));
-        this.getSpellAbility().setTargetAdjuster(new DynamicValueTargetsAdjuster(MultikickerCount.instance));
+        this.getSpellAbility().setTargetAdjuster(new TargetsCountAdjuster(MultikickerCount.instance));
         this.getSpellAbility().addTarget(new TargetPermanent(0, 1, filter));
 
         // Temporal Firestorm deals 5 damage to each creature and each planeswalker.

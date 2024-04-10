@@ -18,7 +18,7 @@ import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.targetadjustment.XTargetsAdjuster;
+import mage.target.targetadjustment.XTargetsCountAdjuster;
 
 import java.util.UUID;
 
@@ -53,7 +53,7 @@ public final class ChampionOfStraySouls extends CardImpl {
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeXTargetCost(filter));
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURES_YOUR_GRAVEYARD));
-        ability.setTargetAdjuster(new XTargetsAdjuster());
+        ability.setTargetAdjuster(new XTargetsCountAdjuster());
         this.addAbility(ability);
 
         // {5}{B}{B}: Put Champion of Stray Souls on top of your library from your graveyard.

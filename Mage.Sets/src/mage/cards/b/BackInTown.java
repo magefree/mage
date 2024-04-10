@@ -9,7 +9,7 @@ import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.OutlawPredicate;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.targetadjustment.DynamicValueTargetsAdjuster;
+import mage.target.targetadjustment.TargetsCountAdjuster;
 
 import java.util.UUID;
 
@@ -29,7 +29,7 @@ public final class BackInTown extends CardImpl {
         // Return X target outlaw creature cards from your graveyard to the battlefield.
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect()
                 .setText("return X target outlaw creature cards from your graveyard to the battlefield"));
-        this.getSpellAbility().setTargetAdjuster(new DynamicValueTargetsAdjuster(ManacostVariableValue.REGULAR));
+        this.getSpellAbility().setTargetAdjuster(new TargetsCountAdjuster(ManacostVariableValue.REGULAR));
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(filter));
     }
 

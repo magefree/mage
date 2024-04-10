@@ -20,7 +20,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
-import mage.target.targetadjustment.DynamicValueTargetsAdjuster;
+import mage.target.targetadjustment.TargetsCountAdjuster;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.Set;
@@ -48,7 +48,7 @@ public final class DeathKiss extends CardImpl {
         Ability ability = new BecomesMonstrousSourceTriggeredAbility(
                 new GoadTargetEffect().setText("goad up to X target creatures your opponents control")
         );
-        ability.setTargetAdjuster(new DynamicValueTargetsAdjuster(GetMonstrosityXValue.instance));
+        ability.setTargetAdjuster(new TargetsCountAdjuster(GetMonstrosityXValue.instance));
         ability.addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
         this.addAbility(ability);
     }

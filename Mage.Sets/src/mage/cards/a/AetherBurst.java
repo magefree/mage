@@ -10,7 +10,7 @@ import mage.constants.CardType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.DynamicValueTargetsAdjuster;
+import mage.target.targetadjustment.TargetsCountAdjuster;
 
 import java.util.UUID;
 
@@ -29,7 +29,7 @@ public final class AetherBurst extends CardImpl {
         // Return up to X target creatures to their owners' hands, where X is one plus the number of cards named Aether Burst in all graveyards as you cast this spell.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect().setText("Return up to X target creatures to their owners' hands, where X is one plus the number of cards named Aether Burst in all graveyards as you cast this spell"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().setTargetAdjuster(new DynamicValueTargetsAdjuster(new IntPlusDynamicValue(1, new CardsInAllGraveyardsCount(filter))));
+        this.getSpellAbility().setTargetAdjuster(new TargetsCountAdjuster(new IntPlusDynamicValue(1, new CardsInAllGraveyardsCount(filter))));
     }
 
 

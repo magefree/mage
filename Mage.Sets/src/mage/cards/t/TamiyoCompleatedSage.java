@@ -22,7 +22,7 @@ import mage.game.permanent.token.TamiyosNotebookToken;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.targetadjustment.XMVAdjuster;
+import mage.target.targetadjustment.XMVTargetAdjuster;
 import mage.util.CardUtil;
 
 import java.util.UUID;
@@ -57,7 +57,7 @@ public final class TamiyoCompleatedSage extends CardImpl {
 
         // −X: Exile target nonland permanent card with mana value X from your graveyard. Create a token that's a copy of that card.
         Ability ability2 = new LoyaltyAbility(new TamiyoCompleatedSageEffect());
-        ability2.setTargetAdjuster(new XMVAdjuster());
+        ability2.setTargetAdjuster(new XMVTargetAdjuster());
         ability2.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability2);
 

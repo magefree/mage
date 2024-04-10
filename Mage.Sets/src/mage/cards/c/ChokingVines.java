@@ -9,7 +9,7 @@ import mage.constants.CardType;
 import mage.constants.PhaseStep;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.XTargetsAdjuster;
+import mage.target.targetadjustment.XTargetsCountAdjuster;
 
 import java.util.UUID;
 
@@ -30,7 +30,7 @@ public final class ChokingVines extends CardImpl {
                 .setText("X target attacking creatures become blocked."));
         this.getSpellAbility().addEffect(new DamageTargetEffect(1)
                 .setText("{this} deals 1 damage to each of those creatures"));
-        this.getSpellAbility().setTargetAdjuster(new XTargetsAdjuster());
+        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_ATTACKING_CREATURES));
     }
 

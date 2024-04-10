@@ -9,7 +9,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.XTargetsAdjuster;
+import mage.target.targetadjustment.XTargetsCountAdjuster;
 
 import java.util.UUID;
 
@@ -26,7 +26,7 @@ public final class PartWater extends CardImpl {
         effect.setText("X target creatures gain islandwalk until end of turn");
         this.getSpellAbility().getEffects().add(effect);
         this.getSpellAbility().getTargets().add(new TargetCreaturePermanent());
-        this.getSpellAbility().setTargetAdjuster(new XTargetsAdjuster());
+        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
     }
 
     private PartWater(final PartWater card) {

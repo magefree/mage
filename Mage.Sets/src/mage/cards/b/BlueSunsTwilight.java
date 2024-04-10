@@ -12,7 +12,7 @@ import mage.constants.ComparisonType;
 import mage.constants.Duration;
 import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.XMVAdjuster;
+import mage.target.targetadjustment.XMVTargetAdjuster;
 
 import java.util.UUID;
 
@@ -31,7 +31,7 @@ public final class BlueSunsTwilight extends CardImpl {
                 new CreateTokenCopyTargetEffect(), BlueSunsTwilightCondition.instance,
                 "If X is 5 or more, create a token that's a copy of that creature"
         ));
-        this.getSpellAbility().setTargetAdjuster(new XMVAdjuster(ComparisonType.OR_LESS));
+        this.getSpellAbility().setTargetAdjuster(new XMVTargetAdjuster(ComparisonType.OR_LESS));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 

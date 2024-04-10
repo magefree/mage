@@ -14,7 +14,7 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.DynamicValueTargetsAdjuster;
+import mage.target.targetadjustment.TargetsCountAdjuster;
 
 import java.util.UUID;
 
@@ -32,7 +32,7 @@ public final class StrengthOfTheTajuru extends CardImpl {
         // Choose target creature, then choose another target creature for each time Strength of the Tajuru was kicked. Put X +1/+1 counters on each of them.
         this.getSpellAbility().addEffect(new StrengthOfTheTajuruAddCountersTargetEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().setTargetAdjuster(new DynamicValueTargetsAdjuster(new IntPlusDynamicValue(1, MultikickerCount.instance)));
+        this.getSpellAbility().setTargetAdjuster(new TargetsCountAdjuster(new IntPlusDynamicValue(1, MultikickerCount.instance)));
     }
 
     private StrengthOfTheTajuru(final StrengthOfTheTajuru card) {

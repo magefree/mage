@@ -16,7 +16,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.targetadjustment.XTargetsAdjuster;
+import mage.target.targetadjustment.XTargetsCountAdjuster;
 
 import java.util.Objects;
 import java.util.Set;
@@ -33,7 +33,7 @@ public final class ChangeOfPlans extends CardImpl {
 
         // Each of X target creatures you control connive. You may have any number of them phase out.
         this.getSpellAbility().addEffect(new ChangeOfPlansEffect());
-        this.getSpellAbility().setTargetAdjuster(new XTargetsAdjuster());
+        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
     }
 

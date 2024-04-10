@@ -4,15 +4,15 @@ import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.constants.ComparisonType;
 
 /**
- *
  * @author notgreat
  */
-public class XMVAdjuster extends DynamicValueMVTargetsAdjuster {
+public class XMVTargetAdjuster extends MVTargetAdjuster {
 
-    public XMVAdjuster() {
+    public XMVTargetAdjuster() {
         super(ManacostVariableValue.REGULAR, ComparisonType.EQUAL_TO);
     }
-    public XMVAdjuster(ComparisonType comparison) {
+
+    public XMVTargetAdjuster(ComparisonType comparison) {
         super(ManacostVariableValue.REGULAR, comparison);
     }
 }

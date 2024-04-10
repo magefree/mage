@@ -12,7 +12,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.target.common.TargetNonlandPermanent;
-import mage.target.targetadjustment.DynamicValueTargetsAdjuster;
+import mage.target.targetadjustment.TargetsCountAdjuster;
 
 import java.util.UUID;
 
@@ -37,7 +37,7 @@ public final class ElvishMariner extends CardImpl {
                 .setText("tap up to X target nonland permanents, where X is " +
                         "the number of cards looked at while scrying this way"));
         ability.addTarget(new TargetNonlandPermanent(0, 1));
-        ability.setTargetAdjuster(new DynamicValueTargetsAdjuster(GetScryAmount.instance));
+        ability.setTargetAdjuster(new TargetsCountAdjuster(GetScryAmount.instance));
         this.addAbility(ability);
 
     }

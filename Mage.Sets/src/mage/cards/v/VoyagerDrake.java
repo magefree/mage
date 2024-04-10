@@ -14,7 +14,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.DynamicValueTargetsAdjuster;
+import mage.target.targetadjustment.TargetsCountAdjuster;
 
 import java.util.UUID;
 
@@ -43,7 +43,7 @@ public final class VoyagerDrake extends CardImpl {
                 ).setText("up to X target creatures gain flying until end of turn, " +
                         "where X is the number of times {this} was kicked.")
         );
-        ability.setTargetAdjuster(new DynamicValueTargetsAdjuster(MultikickerCount.instance));
+        ability.setTargetAdjuster(new TargetsCountAdjuster(MultikickerCount.instance));
         ability.addTarget(new TargetCreaturePermanent(0, 1));
         this.addAbility(ability);
     }

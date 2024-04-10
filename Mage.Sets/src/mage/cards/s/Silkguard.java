@@ -14,7 +14,7 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.ModifiedPredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.targetadjustment.XTargetsAdjuster;
+import mage.target.targetadjustment.XTargetsCountAdjuster;
 
 import java.util.UUID;
 
@@ -43,7 +43,7 @@ public final class Silkguard extends CardImpl {
         // Put a +1/+1 counter on each of up to X target creatures you control.
         this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance())
                 .setText("put a +1/+1 counter on each of up to X target creatures you control"));
-        this.getSpellAbility().setTargetAdjuster(new XTargetsAdjuster());
+        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(0, 1));
 
         // Auras, Equipment, and modified creatures you control gain hexproof until end of turn.

@@ -16,7 +16,7 @@ import mage.constants.SuperType;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.DynamicValueTargetsAdjuster;
+import mage.target.targetadjustment.TargetsCountAdjuster;
 
 import java.util.UUID;
 
@@ -39,7 +39,7 @@ public final class ElrondMasterOfHealing extends CardImpl {
                 .setText("put a +1/+1 counter on each of up to X target creatures, " +
                         "where X is the number of cards looked at while scrying this way"));
         ability.addTarget(new TargetCreaturePermanent(0, 1));
-        ability.setTargetAdjuster(new DynamicValueTargetsAdjuster(GetScryAmount.instance));
+        ability.setTargetAdjuster(new TargetsCountAdjuster(GetScryAmount.instance));
         this.addAbility(ability);
 
         // Whenever a creature you control with a +1/+1 counter on it becomes the target of a spell or ability an opponent controls, you may draw a card.

@@ -13,7 +13,7 @@ import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.target.TargetPermanent;
-import mage.target.targetadjustment.XMVAdjuster;
+import mage.target.targetadjustment.XMVTargetAdjuster;
 
 import java.util.UUID;
 
@@ -42,7 +42,7 @@ public final class DeepfireElemental extends CardImpl {
         // {X}{X}{1}: Destroy target artifact or creature with converted mana cost X.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl<>("{X}{X}{1}"));
         ability.addTarget(new TargetPermanent(filter));
-        ability.setTargetAdjuster(new XMVAdjuster());
+        ability.setTargetAdjuster(new XMVTargetAdjuster());
         this.addAbility(ability);
     }
 

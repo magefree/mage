@@ -20,7 +20,7 @@ import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.XTargetsAdjuster;
+import mage.target.targetadjustment.XTargetsCountAdjuster;
 
 import java.util.UUID;
 
@@ -44,7 +44,7 @@ public final class LostInTheMaze extends CardImpl {
         // When Lost in the Maze enters the battlefield, tap X target creatures. Put a stun counter on each of those creatures you don't control.
         Ability ability = new EntersBattlefieldTriggeredAbility(new TapTargetEffect("tap X target creatures"));
         ability.addEffect(new LostInTheMazeEffect());
-        ability.setTargetAdjuster(new XTargetsAdjuster());
+        ability.setTargetAdjuster(new XTargetsCountAdjuster());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 

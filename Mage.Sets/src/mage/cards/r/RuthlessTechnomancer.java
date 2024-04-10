@@ -23,7 +23,7 @@ import mage.game.permanent.token.TreasureToken;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.targetadjustment.DynamicValuePowerTargetsAdjuster;
+import mage.target.targetadjustment.PowerTargetAdjuster;
 
 import java.util.UUID;
 
@@ -53,7 +53,7 @@ public final class RuthlessTechnomancer extends CardImpl {
                 new ManaCostsImpl<>("{2}{B}")
         );
         ability.addCost(new SacrificeXTargetCost(filter, false, 1));
-        ability.setTargetAdjuster(new DynamicValuePowerTargetsAdjuster(ComparisonType.OR_LESS));
+        ability.setTargetAdjuster(new PowerTargetAdjuster(ComparisonType.OR_LESS));
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         this.addAbility(ability);
     }

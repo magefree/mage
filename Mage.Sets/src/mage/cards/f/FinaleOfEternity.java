@@ -13,7 +13,7 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPermanent;
-import mage.target.targetadjustment.DynamicValueToughnessTargetsAdjuster;
+import mage.target.targetadjustment.ToughnessTargetAdjuster;
 
 import java.util.UUID;
 
@@ -28,7 +28,7 @@ public final class FinaleOfEternity extends CardImpl {
         // Destroy up to three target creatures with toughness X or less. If X is 10 or more, return all creature cards from your graveyard to the battlefield.
         this.getSpellAbility().addEffect(new DestroyTargetEffect().setText("destroy up to three target creatures with toughness X or less"));
         this.getSpellAbility().addEffect(new FinaleOfEternityEffect());
-        this.getSpellAbility().setTargetAdjuster(new DynamicValueToughnessTargetsAdjuster(ComparisonType.OR_LESS));
+        this.getSpellAbility().setTargetAdjuster(new ToughnessTargetAdjuster(ComparisonType.OR_LESS));
         this.getSpellAbility().addTarget(new TargetPermanent(0, 3, StaticFilters.FILTER_PERMANENT_CREATURES));
     }
 

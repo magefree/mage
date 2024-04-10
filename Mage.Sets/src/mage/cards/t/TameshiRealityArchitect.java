@@ -17,7 +17,7 @@ import mage.filter.common.FilterArtifactOrEnchantmentCard;
 import mage.filter.predicate.Predicates;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetControlledPermanent;
-import mage.target.targetadjustment.XMVAdjuster;
+import mage.target.targetadjustment.XMVTargetAdjuster;
 
 import java.util.UUID;
 
@@ -56,7 +56,7 @@ public final class TameshiRealityArchitect extends CardImpl {
         ability.addCost(new ReturnToHandChosenControlledPermanentCost(
                 new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND)
         ));
-        ability.setTargetAdjuster(new XMVAdjuster(ComparisonType.OR_LESS));
+        ability.setTargetAdjuster(new XMVTargetAdjuster(ComparisonType.OR_LESS));
         ability.addTarget(new TargetCardInYourGraveyard(new FilterArtifactOrEnchantmentCard()));
         this.addAbility(ability);
     }

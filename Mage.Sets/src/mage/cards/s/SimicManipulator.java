@@ -14,7 +14,7 @@ import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.DynamicValuePowerTargetsAdjuster;
+import mage.target.targetadjustment.PowerTargetAdjuster;
 
 import java.util.UUID;
 
@@ -49,7 +49,7 @@ public final class SimicManipulator extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainControlTargetEffect(Duration.Custom, true), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filter));
         ability.addCost(new RemoveVariableCountersSourceCost(CounterType.P1P1, 1, "Remove one or more +1/+1 counters from {this}"));
-        ability.setTargetAdjuster(new DynamicValuePowerTargetsAdjuster(RemovedCountersForCostValue.instance, ComparisonType.OR_LESS));
+        ability.setTargetAdjuster(new PowerTargetAdjuster(RemovedCountersForCostValue.instance, ComparisonType.OR_LESS));
         this.addAbility(ability);
     }
 

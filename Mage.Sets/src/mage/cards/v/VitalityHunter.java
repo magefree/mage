@@ -13,7 +13,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.DynamicValueTargetsAdjuster;
+import mage.target.targetadjustment.TargetsCountAdjuster;
 
 import java.util.UUID;
 
@@ -40,7 +40,7 @@ public final class VitalityHunter extends CardImpl {
                 new AddCountersTargetEffect(CounterType.LIFELINK.createInstance())
                         .setText("put a lifelink counter on each of up to X target creatures")
         );
-        ability.setTargetAdjuster(new DynamicValueTargetsAdjuster(GetMonstrosityXValue.instance));
+        ability.setTargetAdjuster(new TargetsCountAdjuster(GetMonstrosityXValue.instance));
         ability.addTarget(new TargetCreaturePermanent(0, 1));
         this.addAbility(ability);
     }

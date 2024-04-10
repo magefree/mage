@@ -11,7 +11,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.XMVAdjuster;
+import mage.target.targetadjustment.XMVTargetAdjuster;
 
 import java.util.UUID;
 
@@ -25,7 +25,7 @@ public final class KaerveksPurge extends CardImpl {
 
         // Destroy target creature with converted mana cost X. If that creature dies this way, Kaervek's Purge deals damage equal to the creature's power to the creature's controller.
         this.getSpellAbility().addEffect(new KaerveksPurgeEffect());
-        this.getSpellAbility().setTargetAdjuster(new XMVAdjuster());
+        this.getSpellAbility().setTargetAdjuster(new XMVTargetAdjuster());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 

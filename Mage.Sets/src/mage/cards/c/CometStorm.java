@@ -13,7 +13,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
-import mage.target.targetadjustment.DynamicValueTargetsAdjuster;
+import mage.target.targetadjustment.TargetsCountAdjuster;
 
 import java.util.UUID;
 
@@ -31,7 +31,7 @@ public final class CometStorm extends CardImpl {
         // Choose any target, then choose another any target for each time Comet Storm was kicked. Comet Storm deals X damage to each of them.
         this.getSpellAbility().addEffect(new CometStormEffect());
         this.getSpellAbility().addTarget(new TargetAnyTarget(1));
-        this.getSpellAbility().setTargetAdjuster(new DynamicValueTargetsAdjuster(new IntPlusDynamicValue(1, MultikickerCount.instance)));
+        this.getSpellAbility().setTargetAdjuster(new TargetsCountAdjuster(new IntPlusDynamicValue(1, MultikickerCount.instance)));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 

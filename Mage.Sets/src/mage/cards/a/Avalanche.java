@@ -10,7 +10,7 @@ import mage.constants.SuperType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterLandPermanent;
 import mage.target.TargetPermanent;
-import mage.target.targetadjustment.DynamicValueTargetsAdjuster;
+import mage.target.targetadjustment.TargetsCountAdjuster;
 
 import java.util.UUID;
 
@@ -29,7 +29,7 @@ public final class Avalanche extends CardImpl {
 
         // Destroy X target snow lands.
         this.getSpellAbility().addEffect(new DestroyTargetEffect("Destroy X target snow lands"));
-        this.getSpellAbility().setTargetAdjuster(new DynamicValueTargetsAdjuster(ManacostVariableValue.REGULAR));
+        this.getSpellAbility().setTargetAdjuster(new TargetsCountAdjuster(ManacostVariableValue.REGULAR));
         this.getSpellAbility().addTarget(new TargetPermanent(1, 1, filter, false));
 
     }

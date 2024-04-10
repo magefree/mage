@@ -22,7 +22,7 @@ import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.XTargetsAdjuster;
+import mage.target.targetadjustment.XTargetsCountAdjuster;
 import mage.target.targetpointer.FixedTargets;
 import mage.util.CardUtil;
 
@@ -44,7 +44,7 @@ public final class ExtraordinaryJourney extends CardImpl {
 
         // When Extraordinary Journey enters the battlefield, exile up to X target creatures. For each of those cards, its owner may play it for as long as it remains exiled.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ExtraordinaryJourneyEffect());
-        ability.setTargetAdjuster(new XTargetsAdjuster());
+        ability.setTargetAdjuster(new XTargetsCountAdjuster());
         ability.addTarget(new TargetCreaturePermanent(0, 1));
         this.addAbility(ability);
 

@@ -12,7 +12,7 @@ import mage.constants.CardType;
 import mage.filter.StaticFilters;
 import mage.game.permanent.token.FractalToken;
 import mage.target.common.TargetCardInGraveyard;
-import mage.target.targetadjustment.XMVAdjuster;
+import mage.target.targetadjustment.XMVTargetAdjuster;
 
 import java.util.UUID;
 
@@ -34,7 +34,7 @@ public final class SequenceEngine extends CardImpl {
         ability.addEffect(FractalToken.getEffect(
                 ManacostVariableValue.REGULAR, "Put X +1/+1 counters on it"
         ));
-        ability.setTargetAdjuster(new XMVAdjuster());
+        ability.setTargetAdjuster(new XMVTargetAdjuster());
         ability.addTarget(new TargetCardInGraveyard(StaticFilters.FILTER_CARD_CREATURE_A_GRAVEYARD));
         this.addAbility(ability);
     }

@@ -11,7 +11,7 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.XTargetsAdjuster;
+import mage.target.targetadjustment.XTargetsCountAdjuster;
 
 import java.util.UUID;
 
@@ -26,7 +26,7 @@ public final class WinterBlast extends CardImpl {
         // Tap X target creatures. Winter Blast deals 2 damage to each of those creatures with flying.
         this.getSpellAbility().addEffect(new WinterBlastEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().setTargetAdjuster(new XTargetsAdjuster());
+        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
     }
 
     private WinterBlast(final WinterBlast card) {

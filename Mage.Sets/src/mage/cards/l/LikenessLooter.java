@@ -21,7 +21,7 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.targetadjustment.XMVAdjuster;
+import mage.target.targetadjustment.XMVTargetAdjuster;
 import mage.util.functions.CopyApplier;
 
 import java.util.UUID;
@@ -50,7 +50,7 @@ public final class LikenessLooter extends CardImpl {
                 new LikenessLooterEffect(),
                 new ManaCostsImpl<>("{X}")
         );
-        ability.setTargetAdjuster(new XMVAdjuster());
+        ability.setTargetAdjuster(new XMVTargetAdjuster());
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         this.addAbility(ability);
     }
@@ -116,7 +116,7 @@ class LikenessLooterCopyApplier extends CopyApplier {
                 new LikenessLooterEffect(),
                 new ManaCostsImpl<>("{X}")
         );
-        ability.setTargetAdjuster(new XMVAdjuster());
+        ability.setTargetAdjuster(new XMVTargetAdjuster());
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         blueprint.getAbilities().add(ability);
         return true;
