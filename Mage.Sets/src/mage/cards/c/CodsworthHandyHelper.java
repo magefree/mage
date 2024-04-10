@@ -148,6 +148,11 @@ class CodsworthHandyHelperEffect extends OneShotEffect {
             return false;
         }
 
+        if (creature.cantBeAttachedBy(attachment, source, game, true)) {
+            game.informPlayers(attachment.getLogName() + " was not attached to " + creature.getLogName()
+                    + " because it's not a legal target");
+            return false;
+        }
         Permanent oldCreature = game.getPermanent(attachment.getAttachedTo());
         if (oldCreature != null) {
             oldCreature.removeAttachment(attachment.getId(), source, game);
