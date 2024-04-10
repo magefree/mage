@@ -1,9 +1,11 @@
 package mage.target.targetadjustment;
 
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.constants.ComparisonType;
+import mage.filter.Filter;
 import mage.filter.predicate.mageobject.ToughnessPredicate;
 import mage.game.Game;
 import mage.target.Target;
@@ -37,8 +39,10 @@ public class ToughnessTargetAdjuster implements TargetAdjuster {
             blueprintTarget = ability.getTargets().get(0).copy();
         }
         Target newTarget = blueprintTarget.copy();
-        int mv = dynamicValue.calculate(game, ability, null);
-        newTarget.getFilter().add(new ToughnessPredicate(comparison, mv));
+        int amount = dynamicValue.calculate(game, ability, null);
+        Filter<MageObject> filter = newTarget.getFilter();
+        filter.add(new ToughnessPredicate(comparison, amount));
+        filter.setMessage(filter.getMessage() + " (Toughness " + comparison + " " + amount);
         ability.getTargets().clear();
         ability.addTarget(newTarget);
     }

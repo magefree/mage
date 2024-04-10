@@ -1,8 +1,10 @@
 package mage.target.targetadjustment;
 
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.constants.ComparisonType;
+import mage.filter.Filter;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.target.Target;
@@ -32,8 +34,10 @@ public class MVTargetAdjuster implements TargetAdjuster {
             blueprintTarget = ability.getTargets().get(0).copy();
         }
         Target newTarget = blueprintTarget.copy();
-        int mv = dynamicValue.calculate(game, ability, null);
-        newTarget.getFilter().add(new ManaValuePredicate(comparison, mv));
+        int amount = dynamicValue.calculate(game, ability, null);
+        Filter<MageObject> filter = newTarget.getFilter();
+        filter.add(new ManaValuePredicate(comparison, amount));
+        filter.setMessage(filter.getMessage() + " (Mana Value " + comparison + " " + amount);
         ability.getTargets().clear();
         ability.addTarget(newTarget);
     }

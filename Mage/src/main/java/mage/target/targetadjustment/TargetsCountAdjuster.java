@@ -2,6 +2,7 @@ package mage.target.targetadjustment;
 
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
+import mage.filter.Filter;
 import mage.game.Game;
 import mage.target.Target;
 
@@ -31,10 +32,16 @@ public class TargetsCountAdjuster implements TargetAdjuster {
         Target newTarget = blueprintTarget.copy();
         int count = dynamicValue.calculate(game, ability, null);
         newTarget.setMaxNumberOfTargets(count);
+        Filter filter = newTarget.getFilter();
         if (blueprintTarget.getMinNumberOfTargets() != 0) {
             newTarget.setMinNumberOfTargets(count);
+            filter.setMessage(filter.getMessage() + " (" + count + " targets)");
+        } else {
+            filter.setMessage(filter.getMessage() + " (up to " + count + " targets)");
         }
         ability.getTargets().clear();
-        ability.addTarget(newTarget);
+        if (count > 0) {
+            ability.addTarget(newTarget);
+        }
     }
 }
