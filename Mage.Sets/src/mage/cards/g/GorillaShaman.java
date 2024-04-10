@@ -14,7 +14,7 @@ import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.target.TargetPermanent;
-import mage.target.targetadjustment.XCMCPermanentAdjuster;
+import mage.target.targetadjustment.XMVAdjuster;
 
 /**
  *
@@ -39,7 +39,7 @@ public final class GorillaShaman extends CardImpl {
         // {X}{X}{1}: Destroy target noncreature artifact with converted mana cost X.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl<>("{X}{X}{1}"));
         ability.addTarget(new TargetPermanent(filter));
-        ability.setTargetAdjuster(XCMCPermanentAdjuster.instance);
+        ability.setTargetAdjuster(new XMVAdjuster());
         this.addAbility(ability);
     }
 
