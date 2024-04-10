@@ -1,22 +1,30 @@
 package mage.target.targetadjustment;
 
 import mage.abilities.Ability;
-import mage.filter.FilterPermanent;
 import mage.game.Game;
-import mage.target.TargetPermanent;
+import mage.target.Target;
 
 /**
  *
- * @author TheElk801
+ * @author TheElk801, notgreat
  */
-public enum XTargetsAdjuster implements TargetAdjuster {
-    instance;
+public class XTargetsAdjuster implements TargetAdjuster {
+    private Target blueprintTarget = null;
+
+    public XTargetsAdjuster() {
+    }
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        int xValue = ability.getManaCostsToPay().getX();
-        FilterPermanent permanentFilter = ((TargetPermanent) ability.getTargets().get(0)).getFilter();
+        if (blueprintTarget == null) {
+            blueprintTarget = ability.getTargets().get(0).copy();
+        }
+        Target newTarget = blueprintTarget.copy();
+        newTarget.setMaxNumberOfTargets(ability.getManaCostsToPay().getX());
+        if (blueprintTarget.getMinNumberOfTargets() != 0) {
+            newTarget.setMinNumberOfTargets(ability.getManaCostsToPay().getX());
+        }
         ability.getTargets().clear();
-        ability.addTarget(new TargetPermanent(xValue, permanentFilter));
+        ability.addTarget(newTarget);
     }
 }

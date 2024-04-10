@@ -30,7 +30,7 @@ public final class CandelabraOfTawnos extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{X}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_LANDS));
-        ability.setTargetAdjuster(XTargetsAdjuster.instance);
+        ability.setTargetAdjuster(new XTargetsAdjuster());
         this.addAbility(ability);
     }
 

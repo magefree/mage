@@ -43,7 +43,7 @@ public final class DeepwoodElder extends CardImpl {
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardCardCost());
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_LANDS));
-        ability.setTargetAdjuster(XTargetsAdjuster.instance);
+        ability.setTargetAdjuster(new XTargetsAdjuster());
         this.addAbility(ability);
     }
 

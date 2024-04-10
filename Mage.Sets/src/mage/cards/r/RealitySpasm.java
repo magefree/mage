@@ -25,7 +25,7 @@ public final class RealitySpasm extends CardImpl {
         Mode mode = new Mode(new UntapTargetEffect("untap X target permanents"));
         mode.addTarget(new TargetPermanent());
         this.getSpellAbility().addMode(mode);
-        this.getSpellAbility().setTargetAdjuster(XTargetsAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(new XTargetsAdjuster());
     }
 
     private RealitySpasm(final RealitySpasm card) {

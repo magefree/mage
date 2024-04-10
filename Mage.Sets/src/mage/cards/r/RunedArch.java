@@ -46,7 +46,7 @@ public final class RunedArch extends CardImpl {
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetPermanent(filter));
-        ability.setTargetAdjuster(XTargetsAdjuster.instance);
+        ability.setTargetAdjuster(new XTargetsAdjuster());
         this.addAbility(ability);
     }
 

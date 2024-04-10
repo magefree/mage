@@ -28,7 +28,7 @@ public final class PrismaticBoon extends CardImpl {
         // Choose a color. X target creatures gain protection from the chosen color until end of turn.
         this.getSpellAbility().addEffect(new PrismaticBoonEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().setTargetAdjuster(XTargetsAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(new XTargetsAdjuster());
     }
 
     private PrismaticBoon(final PrismaticBoon card) {
