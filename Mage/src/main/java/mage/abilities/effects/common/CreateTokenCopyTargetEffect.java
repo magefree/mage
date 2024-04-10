@@ -154,6 +154,7 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
         this.tokenPower = effect.tokenPower;
         this.tokenToughness = effect.tokenToughness;
         this.useLKI = effect.useLKI;
+        this.permanentModifier = effect.permanentModifier;
     }
 
     @Override
