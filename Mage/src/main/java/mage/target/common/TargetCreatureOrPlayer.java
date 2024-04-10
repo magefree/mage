@@ -26,16 +26,8 @@ public class TargetCreatureOrPlayer extends TargetImpl {
         this(1, 1, new FilterCreatureOrPlayer());
     }
 
-    public TargetCreatureOrPlayer(int numTargets) {
-        this(numTargets, numTargets, new FilterCreatureOrPlayer());
-    }
-
     public TargetCreatureOrPlayer(FilterCreatureOrPlayer filter) {
         this(1, 1, filter);
-    }
-
-    public TargetCreatureOrPlayer(int numTargets, int maxNumTargets) {
-        this(numTargets, maxNumTargets, new FilterCreatureOrPlayer());
     }
 
     public TargetCreatureOrPlayer(int minNumTargets, int maxNumTargets, FilterCreatureOrPlayer filter) {

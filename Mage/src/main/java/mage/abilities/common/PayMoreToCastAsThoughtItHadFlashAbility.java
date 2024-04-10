@@ -20,7 +20,7 @@ public class PayMoreToCastAsThoughtItHadFlashAbility extends SpellAbility {
         super(card.getSpellAbility().getManaCosts().copy(), card.getName() + " as though it had flash", Zone.HAND, SpellAbilityType.BASE_ALTERNATE);
         this.costsToAdd = costsToAdd;
         this.timing = TimingRule.INSTANT;
-        this.ruleAtTheTop = true;
+        this.setRuleAtTheTop(true);
         CardUtil.increaseCost(this, costsToAdd);
     }
 

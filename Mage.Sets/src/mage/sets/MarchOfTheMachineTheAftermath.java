@@ -150,6 +150,7 @@ public final class MarchOfTheMachineTheAftermath extends ExpansionSet {
         cards.add(new SetCardInfo("Niv-Mizzet, Supreme", 219, Rarity.RARE, mage.cards.n.NivMizzetSupreme.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Niv-Mizzet, Supreme", 40, Rarity.RARE, mage.cards.n.NivMizzetSupreme.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Niv-Mizzet, Supreme", 90, Rarity.RARE, mage.cards.n.NivMizzetSupreme.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ob Nixilis, Captive Kingpin", 41, Rarity.MYTHIC, mage.cards.o.ObNixilisCaptiveKingpin.class));
         cards.add(new SetCardInfo("Open the Way", 123, Rarity.RARE, mage.cards.o.OpenTheWay.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Open the Way", 163, Rarity.RARE, mage.cards.o.OpenTheWay.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Open the Way", 23, Rarity.RARE, mage.cards.o.OpenTheWay.class, NON_FULL_USE_VARIOUS));

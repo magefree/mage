@@ -18,7 +18,7 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.counters.CounterType;
 import mage.filter.common.FilterArtifactPermanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.FoodToken;
 import mage.game.permanent.token.TinyToken;
@@ -30,7 +30,7 @@ import java.util.UUID;
  */
 public final class SophiaDoggedDetective extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent(SubType.DOG, "Dog you control");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.DOG, "Dog you control");
     private static final FilterArtifactPermanent filter2 = new FilterArtifactPermanent("artifact token");
 
     static {

@@ -89,7 +89,7 @@ class FelineSovereignTriggeredAbility extends DealCombatDamageControlledTriggere
         }
         this.getTargets().clear();
         FilterArtifactOrEnchantmentPermanent filter = new FilterArtifactOrEnchantmentPermanent();
-        filter.add(new ControllerIdPredicate(event.getPlayerId()));
+        filter.add(new ControllerIdPredicate(event.getTargetId()));
         this.addTarget(new TargetPermanent(0, 1, filter, false));
         return true;
     }

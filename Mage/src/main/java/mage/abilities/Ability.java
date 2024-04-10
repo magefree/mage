@@ -515,6 +515,14 @@ public interface Ability extends Controllable, Serializable {
     Ability withFirstModeFlavorWord(String flavorWord);
 
     /**
+     * Sets cost word for first mode
+     *
+     * @param cost
+     * @return
+     */
+    Ability withFirstModeCost(Cost cost);
+
+    /**
      * Creates the message about the ability casting/triggering/activating to
      * post in the game log before the ability resolves.
      *

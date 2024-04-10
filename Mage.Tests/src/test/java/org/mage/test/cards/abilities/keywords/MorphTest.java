@@ -13,9 +13,11 @@ import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- * @author levelX2
+ * @author levelX2, JayDi85
  */
 public class MorphTest extends CardTestPlayerBase {
+
+    // DisguiseTest contains additional rules generation tests for face down
 
     /**
      * Tests if a creature with Morph is cast normal, it behaves as normal
@@ -1291,5 +1293,24 @@ public class MorphTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
+    }
+
+    @Test
+    public void test_Morph_HoodedHydra() {
+        // Morph {2}
+        addCard(Zone.HAND, playerA, "Hooded Hydra");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3+5);
+
+        // prepare face down
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Hooded Hydra using Morph");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
+
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{3}{G}{G}: Turn this face-down permanent face up.");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertPermanentCount(playerA, "Hooded Hydra", 1);
+        assertPowerToughness(playerA, "Hooded Hydra", 5, 5);
     }
 }

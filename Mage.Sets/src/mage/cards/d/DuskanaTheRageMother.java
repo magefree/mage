@@ -25,6 +25,7 @@ public final class DuskanaTheRageMother extends CardImpl {
     static {
         filter.add(new BasePowerPredicate(ComparisonType.EQUAL_TO, 2));
         filter.add(new BaseToughnessPredicate(ComparisonType.EQUAL_TO, 2));
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public DuskanaTheRageMother(UUID ownerId, CardSetInfo setInfo) {

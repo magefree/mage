@@ -16,7 +16,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.game.permanent.token.GoatToken;
 
 import java.util.UUID;
@@ -26,11 +26,7 @@ import java.util.UUID;
  */
 public final class SpringjackPasture extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Goats");
-
-    static {
-        filter.add(SubType.GOAT.getPredicate());
-    }
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.GOAT, "Goats");
 
     public SpringjackPasture(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

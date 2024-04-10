@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import mage.MageInt;
@@ -11,12 +10,12 @@ import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -27,7 +26,7 @@ import java.util.UUID;
 public final class CaptivatingVampire extends CardImpl {
 
     private static final FilterCreaturePermanent filter1 = new FilterCreaturePermanent("Vampire creatures");
-    private static final FilterControlledCreaturePermanent filter2 = new FilterControlledCreaturePermanent("untapped Vampires you control");
+    private static final FilterControlledPermanent filter2 = new FilterControlledPermanent("untapped Vampires you control");
 
     static {
         filter1.add(SubType.VAMPIRE.getPredicate());
@@ -46,7 +45,7 @@ public final class CaptivatingVampire extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter1, true)));
 
         // Tap five untapped Vampires you control: Gain control of target creature. It becomes a Vampire in addition to its other types.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CaptivatingVampireEffect(), new TapTargetCost(new TargetControlledCreaturePermanent(5, 5, filter2, true)));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CaptivatingVampireEffect(), new TapTargetCost(new TargetControlledPermanent(5, 5, filter2, true)));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

@@ -1111,6 +1111,9 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Garruk Wildspeaker", 1457, Rarity.MYTHIC, mage.cards.g.GarrukWildspeaker.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Garruk Wildspeaker", "1457b", Rarity.MYTHIC, mage.cards.g.GarrukWildspeaker.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lara Croft, Tomb Raider", 1501, Rarity.MYTHIC, mage.cards.l.LaraCroftTombRaider.class));
+        cards.add(new SetCardInfo("Rose Noble", 1580, Rarity.RARE, mage.cards.r.RoseNoble.class));
+        cards.add(new SetCardInfo("The Meep", 1581, Rarity.RARE, mage.cards.t.TheMeep.class));
+        cards.add(new SetCardInfo("The Fourteenth Doctor", 1583, Rarity.RARE, mage.cards.t.TheFourteenthDoctor.class));
         cards.add(new SetCardInfo("Jace, the Mind Sculptor", 8001, Rarity.MYTHIC, mage.cards.j.JaceTheMindSculptor.class));
         cards.add(new SetCardInfo("Garruk, Caller of Beasts", 9995, Rarity.MYTHIC, mage.cards.g.GarrukCallerOfBeasts.class));
         cards.add(new SetCardInfo("Rograkh, Son of Rohgahh", 9996, Rarity.RARE, mage.cards.r.RograkhSonOfRohgahh.class));

@@ -72,8 +72,8 @@ public class GameEvent implements Serializable {
          flag        not used for this event
          */
         ZONE_CHANGE,
-        ZONE_CHANGE_GROUP,
-        ZONE_CHANGE_BATCH,
+        ZONE_CHANGE_GROUP, // between two specific zones only; TODO: rework all usages to ZONE_CHANGE_BATCH instead, see #11895
+        ZONE_CHANGE_BATCH, // all zone changes that occurred from a single effect
         DRAW_CARDS, // event calls for multi draws only (if player draws 2+ cards at once)
         DRAW_CARD, DREW_CARD,
         EXPLORE, EXPLORED, // targetId is exploring permanent, playerId is its controller
@@ -120,9 +120,14 @@ public class GameEvent implements Serializable {
 
         /* DAMAGED_BATCH_FOR_ONE_PLAYER
          combines all player damage events to a single batch (event) and split it per damaged player
-         playerId    the id of the damaged player
+         targetId    the id of the damaged player (playerId won't work for batch)
          */
         DAMAGED_BATCH_FOR_ONE_PLAYER,
+
+        /* DAMAGED_BATCH_FOR_ALL
+        includes all damage events, both permanent damage and player damage, in single batch event
+         */
+        DAMAGED_BATCH_FOR_ALL,
 
         /* DAMAGE_CAUSES_LIFE_LOSS,
          targetId    the id of the damaged player
@@ -142,6 +147,10 @@ public class GameEvent implements Serializable {
          amount      amount of life loss
          flag        true = from combat damage - other from non combat damage
          */
+        LOST_LIFE_BATCH,
+        /* LOST_LIFE_BATCH
+         combines all player life lost events to a single batch (event)
+        */
         PLAY_LAND, LAND_PLAYED,
         CREATURE_CHAMPIONED,
         /* CREATURE_CHAMPIONED
@@ -151,7 +160,7 @@ public class GameEvent implements Serializable {
          */
         CREW_VEHICLE,
         /* CREW_VEHICLE
-         targetId    the id of the creature that crewed a vehicle
+         targetId    the id of the creature that will crew a vehicle
          sourceId    sourceId of the vehicle
          playerId    the id of the controlling player
          */
@@ -165,6 +174,24 @@ public class GameEvent implements Serializable {
         /* VEHICLE_CREWED
          targetId    the id of the vehicle
          sourceId    sourceId of the vehicle
+         playerId    the id of the controlling player
+         */
+        SADDLE_MOUNT,
+        /* SADDLE_MOUNT
+         targetId    the id of the creature that will saddle a mount
+         sourceId    sourceId of the mount
+         playerId    the id of the controlling player
+         */
+        SADDLED_MOUNT,
+        /* SADDLED_MOUNT
+         targetId    the id of the creature that saddled a mount
+         sourceId    sourceId of the mount
+         playerId    the id of the controlling player
+         */
+        MOUNT_SADDLED,
+        /* MOUNT_SADDLED
+         targetId    the id of the mount
+         sourceId    sourceId of the mount
          playerId    the id of the controlling player
          */
         X_MANA_ANNOUNCE,
@@ -450,6 +477,11 @@ public class GameEvent implements Serializable {
          */
         DAMAGED_BATCH_FOR_PERMANENTS,
 
+        /* DAMAGED_BATCH_FOR_ONE_PERMANENT
+         combines all permanent damage events to a single batch (event) and split it per damaged permanent
+         */
+        DAMAGED_BATCH_FOR_ONE_PERMANENT,
+
         DESTROY_PERMANENT,
         /* DESTROY_PERMANENT_BY_LEGENDARY_RULE
          targetId    id of the permanent to destroy
@@ -591,6 +623,12 @@ public class GameEvent implements Serializable {
          playerId   controller of the creature mentoring
          */
         MENTORED_CREATURE,
+        /* the card becomes plotted
+         targetId   card that was plotted
+         sourceId   of the plotting ability (may be the card itself or another one)
+         playerId   owner of the plotted card (the one able to cast the card)
+         */
+        BECOME_PLOTTED,
         //custom events
         CUSTOM_EVENT
     }

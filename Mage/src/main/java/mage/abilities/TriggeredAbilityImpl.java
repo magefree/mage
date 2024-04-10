@@ -75,7 +75,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
             return;
         }
         game.getState().setValue(CardUtil.getCardZoneString(
-                "lastTurnTriggered" + originalId, sourceId, game
+                "lastTurnTriggered" + getOriginalId(), sourceId, game
         ), game.getTurnNum());
     }
 
@@ -101,7 +101,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
             return true;
         }
         Integer lastTurnTriggered = (Integer) game.getState().getValue(
-                CardUtil.getCardZoneString("lastTurnTriggered" + originalId, sourceId, game)
+                CardUtil.getCardZoneString("lastTurnTriggered" + getOriginalId(), sourceId, game)
         );
         return lastTurnTriggered == null || lastTurnTriggered != game.getTurnNum();
     }
@@ -112,7 +112,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
             return false;
         }
         Integer lastTurnUsed = (Integer) game.getState().getValue(
-                CardUtil.getCardZoneString("lastTurnUsed" + originalId, sourceId, game)
+                CardUtil.getCardZoneString("lastTurnUsed" + getOriginalId(), sourceId, game)
         );
         return lastTurnUsed != null && lastTurnUsed == game.getTurnNum();
     }
@@ -165,7 +165,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
         }
         if (doOnlyOnceEachTurn) {
             game.getState().setValue(CardUtil.getCardZoneString(
-                    "lastTurnUsed" + originalId, sourceId, game
+                    "lastTurnUsed" + getOriginalId(), sourceId, game
             ), game.getTurnNum());
         }
         //20091005 - 603.4

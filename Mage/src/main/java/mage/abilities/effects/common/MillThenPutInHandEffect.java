@@ -15,6 +15,10 @@ import mage.players.Player;
 import mage.target.TargetCard;
 import mage.util.CardUtil;
 
+import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 /**
  * @author TheElk801
  */
@@ -22,6 +26,7 @@ public class MillThenPutInHandEffect extends OneShotEffect {
 
     private final int amount;
     private final boolean optional;
+    private final int maxAmountReturned; // maximum number of cards returned. e.g. 2 for "up to two"
     private final FilterCard filter;
     private final Effect otherwiseEffect;
     private String textFromAmong = "the milled cards"; // for text gen
@@ -35,8 +40,8 @@ public class MillThenPutInHandEffect extends OneShotEffect {
     }
 
     /**
-     * @param amount number of cards to mill
-     * @param filter select a card matching this filter from among the milled cards to put in hand
+     * @param amount   number of cards to mill
+     * @param filter   select a card matching this filter from among the milled cards to put in hand
      * @param optional whether the selection is optional (true) or mandatory (false)
      */
     public MillThenPutInHandEffect(int amount, FilterCard filter, boolean optional) {
@@ -44,8 +49,8 @@ public class MillThenPutInHandEffect extends OneShotEffect {
     }
 
     /**
-     * @param amount number of cards to mill
-     * @param filter optionally select a card matching this filter from among the milled cards to put in hand
+     * @param amount          number of cards to mill
+     * @param filter          optionally select a card matching this filter from among the milled cards to put in hand
      * @param otherwiseEffect applied if no card put into hand
      */
     public MillThenPutInHandEffect(int amount, FilterCard filter, Effect otherwiseEffect) {
@@ -53,11 +58,16 @@ public class MillThenPutInHandEffect extends OneShotEffect {
         this.textFromAmong = "the cards milled this way";
     }
 
-    protected MillThenPutInHandEffect(int amount, FilterCard filter, Effect otherwiseEffect, boolean optional) {
+    public MillThenPutInHandEffect(int amount, FilterCard filter, Effect otherwiseEffect, boolean optional) {
+        this(amount, filter, otherwiseEffect, optional, 1);
+    }
+
+    public MillThenPutInHandEffect(int amount, FilterCard filter, Effect otherwiseEffect, boolean optional, int maxReturnedCard) {
         super(Outcome.Benefit);
         this.amount = amount;
         this.filter = filter;
         this.optional = optional;
+        this.maxAmountReturned = maxReturnedCard;
         this.otherwiseEffect = otherwiseEffect;
     }
 
@@ -66,6 +76,7 @@ public class MillThenPutInHandEffect extends OneShotEffect {
         this.amount = effect.amount;
         this.optional = effect.optional;
         this.filter = effect.filter;
+        this.maxAmountReturned = effect.maxAmountReturned;
         this.otherwiseEffect = effect.otherwiseEffect;
         this.textFromAmong = effect.textFromAmong;
     }
@@ -85,13 +96,18 @@ public class MillThenPutInHandEffect extends OneShotEffect {
         if (cards.isEmpty()) {
             return applyOtherwiseEffect(game, source);
         }
-        TargetCard target = new TargetCard(optional ? 0 : 1, 1, Zone.ALL, filter);
+        TargetCard target = new TargetCard(optional ? 0 : maxAmountReturned, maxAmountReturned, Zone.ALL, filter);
         player.choose(Outcome.DrawCard, cards, target, source, game);
-        Card card = game.getCard(target.getFirstTarget());
-        if (card == null) {
+        Set<Card> returned = target
+                .getTargets()
+                .stream()
+                .map(game::getCard)
+                .filter(Objects::nonNull)
+                .collect(Collectors.toSet());
+        if (returned.isEmpty()) {
             return applyOtherwiseEffect(game, source);
         }
-        return player.moveCards(card, Zone.HAND, source, game);
+        return player.moveCards(returned, Zone.HAND, source, game);
     }
 
     private boolean applyOtherwiseEffect(Game game, Ability source) {
@@ -115,12 +131,25 @@ public class MillThenPutInHandEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        String text = "mill " + CardUtil.numberToText(amount) + " cards. ";
-        text += optional ? "You may " : "Then ";
-        text += "put " + filter.getMessage() + " from among " + textFromAmong + " into your hand";
-        if (otherwiseEffect != null) {
-            text += ". If you don't, " + otherwiseEffect.getText(mode);
+        StringBuilder sb = new StringBuilder("mill ");
+        sb.append(CardUtil.numberToText(amount));
+        sb.append(" cards. ");
+        sb.append(optional ? "You may " : "Then ");
+        sb.append("put ");
+        if (maxAmountReturned > 1) {
+            sb.append(optional ? "up to " : "");
+            sb.append(CardUtil.numberToText(maxAmountReturned) + " ");
         }
-        return text;
+        sb.append(filter.getMessage());
+        sb.append(" from among ");
+        sb.append(textFromAmong);
+        sb.append(" into your hand");
+        if (otherwiseEffect != null) {
+            sb.append(". If you ");
+            sb.append(optional ? "don't" : "can't");
+            sb.append(", ");
+            sb.append(otherwiseEffect.getText(mode));
+        }
+        return sb.toString();
     }
 }

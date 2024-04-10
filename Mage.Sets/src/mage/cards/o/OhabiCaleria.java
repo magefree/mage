@@ -11,7 +11,7 @@ import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 
 import java.util.UUID;
 
@@ -20,8 +20,8 @@ import java.util.UUID;
  */
 public final class OhabiCaleria extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent(SubType.ARCHER, "Archers you control");
-    private static final FilterControlledCreaturePermanent filter2 = new FilterControlledCreaturePermanent(SubType.ARCHER, "an Archer you control");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.ARCHER, "Archers you control");
+    private static final FilterControlledPermanent filter2 = new FilterControlledPermanent(SubType.ARCHER, "an Archer you control");
 
     public OhabiCaleria(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{W}");

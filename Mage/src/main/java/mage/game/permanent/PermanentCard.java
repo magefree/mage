@@ -56,6 +56,12 @@ public class PermanentCard extends PermanentImpl {
                 goodForBattlefield = false;
             }
         }
+
+        // face down cards allows in any forms (only face up restricted for non-permanents)
+        if (card.isFaceDown(game)) {
+            goodForBattlefield = true;
+        }
+
         if (!goodForBattlefield) {
             throw new IllegalArgumentException("Wrong code usage: can't create permanent card from split or mdf: " + card.getName());
         }
@@ -176,10 +182,12 @@ public class PermanentCard extends PermanentImpl {
     @Override
     public boolean turnFaceUp(Ability source, Game game, UUID playerId) {
         if (super.turnFaceUp(source, game, playerId)) {
+            // TODO: miss types, abilities, color and other things for restore?!
             power.setModifiedBaseValue(power.getBaseValue());
             toughness.setModifiedBaseValue(toughness.getBaseValue());
             setManifested(false);
             setMorphed(false);
+            setDisguised(false);
             return true;
         }
         return false;

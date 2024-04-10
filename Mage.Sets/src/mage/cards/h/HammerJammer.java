@@ -110,7 +110,7 @@ class HammerJammerTriggeredAbility extends TriggeredAbilityImpl {
         DieRolledEvent drEvent = (DieRolledEvent) event;
         // silver border card must look for "result" instead "natural result"
         // planar die will trigger it with 0 amount
-        if (this.isControlledBy(drEvent.getPlayerId())) {
+        if (this.isControlledBy(drEvent.getTargetId())) {
             this.getEffects().setValue("rolled", drEvent.getResult());
             return true;
         }

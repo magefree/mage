@@ -49,7 +49,7 @@ public final class LibertyPrimeRecharged extends CardImpl {
         this.addAbility(new AttacksOrBlocksTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new PayEnergyCost(2)), false));
 
         // {2}, {T}, Sacrifice an artifact: You get {E}{E} and draw a card.
-        Ability ability = new SimpleActivatedAbility(new GetEnergyCountersControllerEffect(2), new GenericManaCost(2));
+        Ability ability = new SimpleActivatedAbility(new GetEnergyCountersControllerEffect(2).setText("you get {E}{E}"), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_AN));
         ability.addEffect(new DrawCardSourceControllerEffect(1).concatBy("and"));

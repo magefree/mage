@@ -50,7 +50,7 @@ public class PermanentsEnteredBattlefieldWatcher extends Watcher {
     }
 
     public List<Permanent> getThisTurnEnteringPermanents(UUID playerId) {
-        return enteringBattlefield.get(playerId);
+        return enteringBattlefield.getOrDefault(playerId, Collections.emptyList());
     }
 
     public boolean anotherCreatureEnteredBattlefieldUnderPlayersControlLastTurn(Permanent sourcePermanent, Game game) {

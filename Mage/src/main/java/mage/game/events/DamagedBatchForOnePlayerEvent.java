@@ -1,14 +1,17 @@
 package mage.game.events;
 
-import java.util.UUID;
-
 /**
  * @author Susucr
  */
-public class DamagedBatchForOnePlayerEvent extends DamagedBatchEvent {
+public class DamagedBatchForOnePlayerEvent extends BatchEvent<DamagedPlayerEvent> {
 
-    public DamagedBatchForOnePlayerEvent(UUID playerId) {
-        super(EventType.DAMAGED_BATCH_FOR_ONE_PLAYER, DamagedPlayerEvent.class);
-        this.setPlayerId(playerId);
+    public DamagedBatchForOnePlayerEvent(DamagedPlayerEvent firstEvent) {
+        super(EventType.DAMAGED_BATCH_FOR_ONE_PLAYER, true, firstEvent);
+    }
+
+    public boolean isCombatDamage() {
+        return getEvents()
+                .stream()
+                .anyMatch(DamagedEvent::isCombatDamage);
     }
 }

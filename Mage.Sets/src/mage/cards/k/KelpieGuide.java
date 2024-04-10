@@ -17,6 +17,7 @@ import mage.constants.ComparisonType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
+import mage.filter.common.FilterControlledLandPermanent;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -26,8 +27,9 @@ import java.util.UUID;
  */
 public final class KelpieGuide extends CardImpl {
 
+    private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("you control eight or more lands");
     private static final Condition condition
-            = new PermanentsOnTheBattlefieldCondition(StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND, ComparisonType.MORE_THAN, 7);
+            = new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 7);
 
     public KelpieGuide(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");

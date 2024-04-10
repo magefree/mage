@@ -4,13 +4,9 @@ import mage.ConditionalMana;
 import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.StaticAbility;
+import mage.abilities.common.EntersBattlefieldTappedAsItEntersChooseColorAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.EntersBattlefieldEffect;
-import mage.abilities.effects.common.ChooseColorEffect;
-import mage.abilities.effects.common.TapSourceEffect;
 import mage.abilities.effects.mana.AddConditionalManaChosenColorEffect;
 import mage.abilities.effects.mana.AddManaChosenColorEffect;
 import mage.abilities.mana.SimpleManaAbility;
@@ -18,7 +14,6 @@ import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -36,7 +31,7 @@ public final class SunkenCitadel extends CardImpl {
         this.subtype.add(SubType.CAVE);
 
         // Sunken Citadel enters the battlefield tapped. As it enters, choose a color.
-        this.addAbility(new SunkenCitadelEntersBattlefieldAbility());
+        this.addAbility(new EntersBattlefieldTappedAsItEntersChooseColorAbility());
 
         // {T}: Add one mana of the chosen color.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaChosenColorEffect(), new TapSourceCost()));
@@ -52,40 +47,6 @@ public final class SunkenCitadel extends CardImpl {
     @Override
     public SunkenCitadel copy() {
         return new SunkenCitadel(this);
-    }
-}
-
-class SunkenCitadelEntersBattlefieldAbility extends StaticAbility {
-
-    public SunkenCitadelEntersBattlefieldAbility() {
-        super(Zone.ALL, new EntersBattlefieldEffect(new TapSourceEffect(true)));
-        this.addEffect(new ChooseColorEffect(Outcome.Benefit));
-    }
-
-    private SunkenCitadelEntersBattlefieldAbility(final SunkenCitadelEntersBattlefieldAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public SunkenCitadelEntersBattlefieldAbility copy() {
-        return new SunkenCitadelEntersBattlefieldAbility(this);
-    }
-
-    @Override
-    public void addEffect(Effect effect) {
-        if (!getEffects().isEmpty()) {
-            Effect entersEffect = this.getEffects().get(0);
-            if (entersEffect instanceof EntersBattlefieldEffect) {
-                ((EntersBattlefieldEffect) entersEffect).addEffect(effect);
-                return;
-            }
-        }
-        super.addEffect(effect);
-    }
-
-    @Override
-    public String getRule() {
-        return "{this} enters the battlefield tapped. As it enters, choose a color.";
     }
 }
 

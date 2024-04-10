@@ -15,6 +15,8 @@ import mage.game.permanent.Permanent;
 import java.util.*;
 
 /**
+ * TODO: must be reworked to use same face down logic as BecomesFaceDownCreatureEffect
+ *
  * @author LevelX2
  */
 
@@ -56,7 +58,7 @@ public class BecomesFaceDownCreatureAllEffect extends ContinuousEffectImpl {
                 if (card != null) {
                     for (Ability ability : card.getAbilities(game)) {
                         if (ability instanceof MorphAbility) {
-                            this.turnFaceUpAbilityMap.put(card.getId(), new TurnFaceUpAbility(((MorphAbility) ability).getMorphCosts()));
+                            this.turnFaceUpAbilityMap.put(card.getId(), new TurnFaceUpAbility(((MorphAbility) ability).getFaceUpCosts()));
                         }
                     }
                 }

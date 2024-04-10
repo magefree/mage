@@ -4,6 +4,8 @@ import mage.abilities.Ability;
 import mage.constants.PlanarDieRollResult;
 import mage.constants.RollDieType;
 
+import java.util.UUID;
+
 /**
  * @author TheElk801, JayDi85
  */
@@ -20,8 +22,22 @@ public class DieRolledEvent extends GameEvent {
     private final int naturalResult; // planar die returns 0 values in result and natural result
     private final PlanarDieRollResult planarResult;
 
-    public DieRolledEvent(Ability source, RollDieType rollDieType, int sides, int naturalResult, int modifier, PlanarDieRollResult planarResult) {
-        super(EventType.DIE_ROLLED, source.getControllerId(), source, source.getControllerId(), naturalResult + modifier, false);
+    /**
+     * The target ID is used to keep track of the distinction between the player who controls the ability that
+     * started the dice roll and the player who does the rolling.
+     * <p>
+     * The only times this distinction matters is for Chaos Dragon and Ricochet.
+     *
+     * @param source  The ability causing the die roll
+     * @param targetId  The player who rolled the die
+     * @param rollDieType
+     * @param sides
+     * @param naturalResult  the result of the die roll before any modifiers
+     * @param modifier  the sum of all modifiers
+     * @param planarResult
+     */
+    public DieRolledEvent(Ability source, UUID targetId, RollDieType rollDieType, int sides, int naturalResult, int modifier, PlanarDieRollResult planarResult) {
+        super(EventType.DIE_ROLLED, targetId, source, source.getControllerId(), naturalResult + modifier, false);
         this.rollDieType = rollDieType;
         this.sides = sides;
         this.naturalResult = naturalResult;

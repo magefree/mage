@@ -32,7 +32,7 @@ public final class HuntedBonebrute extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // When Hunted Bonebrute enters the battlefield, target opponent creates two 1/1 white Dog creature tokens.
         Ability ability = new EntersBattlefieldTriggeredAbility(new CreateTokenTargetEffect(new WhiteDogToken(), 2));

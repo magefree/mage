@@ -126,6 +126,7 @@
 |Generate|EMBLEM:CMM|Emblem Narset|||NarsetOfTheAncientWayEmblem|
 |Generate|EMBLEM:CMM|Emblem Nixilis|||ObNixilisOfTheBlackOathEmblem|
 |Generate|EMBLEM:CMM|Emblem Teferi|||TeferiTemporalArchmageEmblem|
+|Generate|EMBLEM:PH17|Emblem Inzerva|||InzervaMasterOfInsightsEmblem|
 |Generate|EMBLEM:LCC|Emblem Sorin|||SorinLordOfInnistradEmblem|
 |Generate|EMBLEM:RVR|Emblem Domri|||DomriRadeEmblem|
 

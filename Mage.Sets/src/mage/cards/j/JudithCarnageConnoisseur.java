@@ -83,6 +83,7 @@ class JudithCarnageConnoisseurEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         Spell spell = game.getSpell(getTargetPointer().getFirst(game, source));
         if (spell == null) {
+            discard();
             return false;
         }
 

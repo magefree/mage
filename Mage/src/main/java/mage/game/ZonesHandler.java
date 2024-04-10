@@ -334,13 +334,19 @@ public final class ZonesHandler {
             isGoodToMove = true;
         } else if (event.getToZone().equals(Zone.BATTLEFIELD)) {
             // non-permanents can't move to battlefield
-            // "return to battlefield transformed" abilities uses game state value instead "info.transformed", so check it too
-            // TODO: possible bug with non permanent on second side like Life // Death, see https://github.com/magefree/mage/issues/11573
-            //  need to check second side here, not status only
             // TODO: possible bug with Nightbound, search all usage of getValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED and insert additional check Ability.checkCard
-            boolean wantToPutTransformed = card.isTransformable()
-                    && Boolean.TRUE.equals(game.getState().getValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + card.getId()));
-            isGoodToMove = card.isPermanent(game) || wantToPutTransformed;
+            /*
+             * 712.14a. If a spell or ability puts a transforming double-faced card onto the battlefield "transformed"
+             * or "converted," it enters the battlefield with its back face up. If a player is instructed to put a card
+             * that isn't a transforming double-faced card onto the battlefield transformed or converted, that card stays in
+             * its current zone.
+             */
+            boolean wantToTransform = Boolean.TRUE.equals(game.getState().getValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + card.getId()));
+            if (wantToTransform) {
+                isGoodToMove = card.isTransformable() && card.getSecondCardFace().isPermanent(game);
+            } else {
+                isGoodToMove = card.isPermanent(game);
+            }
         } else {
             // other zones allows to move
             isGoodToMove = true;

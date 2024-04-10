@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.cost.MorphSpellsCostReductionControllerEffect;
+import mage.abilities.effects.common.cost.FaceDownSpellsCostReductionControllerEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -50,7 +50,7 @@ public final class KadenaSlinkingSorcerer extends CardImpl {
 
         // The first face-down creature spell you cast each turn costs {3} less to cast.
         this.addAbility(new SimpleStaticAbility(
-                new MorphSpellsCostReductionControllerEffect(filterFirstFaceDownSpell, 3)
+                new FaceDownSpellsCostReductionControllerEffect(filterFirstFaceDownSpell, 3)
                         .setText("The first face-down creature spell you cast each turn costs {3} less to cast.")
         ), new KadenaSlinkingSorcererWatcher());
 

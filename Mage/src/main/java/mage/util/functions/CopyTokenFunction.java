@@ -68,7 +68,7 @@ public class CopyTokenFunction {
         if (source instanceof PermanentCard) {
             // create token from non-token permanent
 
-            // morph/manifest must hide all info
+            // face down must hide all info
             PermanentCard sourcePermanent = (PermanentCard) source;
             BecomesFaceDownCreatureEffect.FaceDownType faceDownType = BecomesFaceDownCreatureEffect.findFaceDownType(game, sourcePermanent);
             if (faceDownType != null) {

@@ -8,9 +8,6 @@ import mage.cards.Card;
 import mage.game.Game;
 import mage.game.stack.Spell;
 
-import java.util.Collections;
-import java.util.List;
-
 /**
  * @author LevelX2
  */
@@ -20,14 +17,12 @@ public enum SpellAbilityCastMode {
     FLASHBACK("Flashback"),
     BESTOW("Bestow"),
     PROTOTYPE("Prototype"),
-    MORPH("Morph", false, true, SpellAbilityCastMode.MORPH_ADDITIONAL_RULE),
-    MEGAMORPH("Megamorph", false, true, SpellAbilityCastMode.MORPH_ADDITIONAL_RULE),
+    MORPH("Morph", false, true), // and megamorph
+    DISGUISE("Disguise", false, true),
     TRANSFORMED("Transformed", true),
     DISTURB("Disturb", true),
-    MORE_THAN_MEETS_THE_EYE("More than Meets the Eye", true);
-
-    private static final String MORPH_ADDITIONAL_RULE = "You may cast this card as a 2/2 face-down creature, with no text,"
-            + " no name, no subtypes, and no mana cost by paying {3} rather than paying its mana cost.";
+    MORE_THAN_MEETS_THE_EYE("More than Meets the Eye", true),
+    PLOT("Plot");
 
     private final String text;
 
@@ -35,10 +30,6 @@ public enum SpellAbilityCastMode {
     private final boolean isTransformed;
 
     private final boolean isFaceDown;
-
-    // use it to add additional info in stack object cause face down has nothing
-    // TODO: is it possible to use InfoEffect or CardHint instead that?
-    private final List<String> additionalRulesOnStack;
 
     public boolean isTransformed() {
         return this.isTransformed;
@@ -49,22 +40,17 @@ public enum SpellAbilityCastMode {
     }
 
     SpellAbilityCastMode(String text, boolean isTransformed) {
-        this(text, isTransformed, false, null);
+        this(text, isTransformed, false);
     }
 
-    SpellAbilityCastMode(String text, boolean isTransformed, boolean isFaceDown, String additionalRulesOnStack) {
+    SpellAbilityCastMode(String text, boolean isTransformed, boolean isFaceDown) {
         this.text = text;
         this.isTransformed = isTransformed;
         this.isFaceDown = isFaceDown;
-        this.additionalRulesOnStack = additionalRulesOnStack == null ? null : Collections.singletonList(additionalRulesOnStack);
     }
 
     public boolean isFaceDown() {
         return this.isFaceDown;
-    }
-
-    public List<String> getAdditionalRulesOnStack() {
-        return additionalRulesOnStack;
     }
 
     @Override
@@ -89,18 +75,24 @@ public enum SpellAbilityCastMode {
                 cardCopy = ((PrototypeAbility) spellAbility).prototypeCardSpell(cardCopy);
                 break;
             case MORPH:
-            case MEGAMORPH:
+            case DISGUISE:
                 if (cardCopy instanceof Spell) {
                     //Spell doesn't support setName, so make a copy of the card (we're blowing it away anyway)
                     // TODO: research - is it possible to apply face down code to spell instead workaround with card
                     cardCopy = ((Spell) cardCopy).getCard().copy();
                 }
-                BecomesFaceDownCreatureEffect.makeFaceDownObject(game, null, cardCopy, BecomesFaceDownCreatureEffect.FaceDownType.MORPHED, null);
+                BecomesFaceDownCreatureEffect.FaceDownType faceDownType = BecomesFaceDownCreatureEffect.FaceDownType.MORPHED;
+                if (this == DISGUISE) {
+                    faceDownType = BecomesFaceDownCreatureEffect.FaceDownType.DISGUISED;
+                }
+                // no needs in additional abilities for spell
+                BecomesFaceDownCreatureEffect.makeFaceDownObject(game, null, cardCopy, faceDownType, null);
                 break;
             case NORMAL:
             case MADNESS:
             case FLASHBACK:
             case DISTURB:
+            case PLOT:
             case MORE_THAN_MEETS_THE_EYE:
                 // it changes only cost, so keep other characteristics
                 // TODO: research - why TRANSFORMED here - is it used in this.isTransformed code?!

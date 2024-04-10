@@ -10,7 +10,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.game.Game;
-import mage.game.permanent.token.BoarToken;
+import mage.game.permanent.token.Boar2Token;
 import mage.game.permanent.token.Token;
 
 import java.util.UUID;
@@ -44,7 +44,7 @@ public final class StampedeSurfer extends CardImpl {
 
 class StampedeSurferEffect extends OneShotEffect {
 
-    private static final Token token = new BoarToken();
+    private static final Token token = new Boar2Token();
 
     StampedeSurferEffect() {
         super(Outcome.Benefit);

@@ -19,7 +19,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.game.permanent.token.SpiderToken;
 import mage.target.common.TargetOpponent;
 
@@ -30,11 +30,7 @@ import java.util.UUID;
  */
 public final class IshkanahGrafwidow extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Spider you control");
-
-    static {
-        filter.add(SubType.SPIDER.getPredicate());
-    }
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.SPIDER, "Spider you control");
 
     public IshkanahGrafwidow(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}");

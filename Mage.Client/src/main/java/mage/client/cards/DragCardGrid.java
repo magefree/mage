@@ -647,8 +647,8 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
     private boolean separateCreatures = true;
 
     public enum Role {
-        MAINDECK("Maindeck"),
-        SIDEBOARD("Sideboard");
+        MAINDECK("Main deck"),
+        SIDEBOARD("Sideboard/commander");
 
         Role(String name) {
             this.name = name;
@@ -1955,21 +1955,21 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
 
     private void showCardRightClickMenu(@SuppressWarnings("unused") final CardView card, MouseEvent e) {
         JPopupMenu menu = new JPopupMenu();
-        JMenuItem hide = new JMenuItem("Hide");
+        JMenuItem hide = new JMenuItem("Hide (hidden in sideboard)");
         hide.addActionListener(e2 -> hideSelection());
         menu.add(hide);
 
-        JMenuItem invertSelection = new JMenuItem("Invert Selection");
+        JMenuItem invertSelection = new JMenuItem("Invert selection");
         invertSelection.addActionListener(e2 -> invertSelection());
         menu.add(invertSelection);
 
-        JMenuItem chooseMatching = new JMenuItem("Choose Matching");
+        JMenuItem chooseMatching = new JMenuItem("Select same cards");
         chooseMatching.addActionListener(e2 -> chooseMatching());
         menu.add(chooseMatching);
 
         // Show 'Duplicate Selection' for FREE_BUILDING
         if (this.mode == Constants.DeckEditorMode.FREE_BUILDING) {
-            JMenuItem duplicateSelection = new JMenuItem("Duplicate Selection");
+            JMenuItem duplicateSelection = new JMenuItem("Duplicate selected cards");
             duplicateSelection.addActionListener(e2 -> duplicateSelection());
             menu.add(duplicateSelection);
         }

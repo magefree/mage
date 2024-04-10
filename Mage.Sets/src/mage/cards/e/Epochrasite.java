@@ -1,26 +1,17 @@
 package mage.cards.e;
 
 import mage.MageInt;
-import mage.MageObjectReference;
-import mage.abilities.Ability;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.CastFromHandSourcePermanentCondition;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.GainSuspendEffect;
+import mage.abilities.effects.common.ExileSpellWithTimeCountersEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.abilities.keyword.SuspendAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.game.Game;
-import mage.players.Player;
 import mage.watchers.common.CastFromHandWatcher;
 
 import java.util.UUID;
@@ -45,7 +36,10 @@ public final class Epochrasite extends CardImpl {
                 new CastFromHandWatcher());
 
         // When Epochrasite dies, exile it with three time counters on it and it gains suspend.
-        this.addAbility(new DiesSourceTriggeredAbility(new EpochrasiteEffect()));
+        this.addAbility(new DiesSourceTriggeredAbility(new ExileSpellWithTimeCountersEffect(3, true)
+                .setText("exile it with three time counters on it and it gains suspend." +
+                        " <i>(At the beginning of its owner's upkeep, they remove a time counter." +
+                        " When the last is removed, they may cast this card without paying its mana cost. It has haste.)</i>")));
     }
 
     private Epochrasite(final Epochrasite card) {
@@ -55,43 +49,5 @@ public final class Epochrasite extends CardImpl {
     @Override
     public Epochrasite copy() {
         return new Epochrasite(this);
-    }
-}
-
-class EpochrasiteEffect extends OneShotEffect {
-
-    EpochrasiteEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "exile it with three time counters on it and it gains suspend";
-    }
-
-    private EpochrasiteEffect(final EpochrasiteEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public EpochrasiteEffect copy() {
-        return new EpochrasiteEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        Card card = game.getCard(source.getSourceId());
-        if (controller == null || card == null) {
-            return false;
-        }
-        card = card.getMainCard();
-
-        if (game.getState().getZone(card.getId()) != Zone.GRAVEYARD) {
-            return false;
-        }
-
-        UUID exileId = SuspendAbility.getSuspendExileId(controller.getId(), game);
-        controller.moveCardToExileWithInfo(card, exileId, "Suspended cards of " + controller.getName(), source, game, Zone.GRAVEYARD, true);
-        card.addCounters(CounterType.TIME.createInstance(3), source.getControllerId(), source, game);
-        game.addEffect(new GainSuspendEffect(new MageObjectReference(card, game)), source);
-
-        return true;
     }
 }

@@ -78,6 +78,10 @@ public interface Permanent extends Card, Controllable {
 
     void setSuspected(boolean value, Game game, Ability source);
 
+    boolean isSaddled();
+
+    void setSaddled(boolean value);
+
     boolean isPrototyped();
 
     void setPrototyped(boolean value);
@@ -441,6 +445,10 @@ public interface Permanent extends Card, Controllable {
     void setMorphed(boolean value);
 
     boolean isMorphed();
+
+    void setDisguised(boolean value);
+
+    boolean isDisguised();
 
     void setManifested(boolean value);
 

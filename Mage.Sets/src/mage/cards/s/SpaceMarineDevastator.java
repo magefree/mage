@@ -3,6 +3,7 @@ package mage.cards.s;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.SquadAbility;
 import mage.cards.CardImpl;
@@ -28,7 +29,7 @@ public final class SpaceMarineDevastator extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Squad {2}
-        this.addAbility(new SquadAbility());
+        this.addAbility(new SquadAbility(new GenericManaCost(2)));
 
         // Grav-cannon -- When Space Marine Devastator enters the battlefield, destroy up to one target artifact or enchantment.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect());

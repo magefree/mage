@@ -12,8 +12,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
+import mage.filter.common.FilterControlledPermanent;
 
 /**
  *
@@ -22,13 +22,7 @@ import mage.filter.common.FilterCreaturePermanent;
 public final class QuestForTheGoblinLord extends CardImpl {
 
     private static final String rule = "As long as {this} has five or more quest counters on it, creatures you control get +2/+0";
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
-    private static final FilterPermanent goblinFilter = new FilterControlledCreaturePermanent("a Goblin");
-
-    static {
-        filter.add(TargetController.YOU.getControllerPredicate());
-        goblinFilter.add(SubType.GOBLIN.getPredicate());
-    }
+    private static final FilterPermanent goblinFilter = new FilterControlledPermanent(SubType.GOBLIN, "a Goblin");
 
     public QuestForTheGoblinLord(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{R}");
@@ -37,7 +31,9 @@ public final class QuestForTheGoblinLord extends CardImpl {
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.QUEST.createInstance()), goblinFilter, true));
 
         // As long as Quest for the Goblin Lord has five or more quest counters on it, creatures you control get +2/+0.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new BoostAllEffect(2, 0, Duration.WhileOnBattlefield, filter, false), new SourceHasCounterCondition(CounterType.QUEST, 5, Integer.MAX_VALUE), rule)));
+        this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
+                new BoostAllEffect(2, 0, Duration.WhileOnBattlefield, StaticFilters.FILTER_CONTROLLED_CREATURES, false),
+                new SourceHasCounterCondition(CounterType.QUEST, 5, Integer.MAX_VALUE), rule)));
     }
 
     private QuestForTheGoblinLord(final QuestForTheGoblinLord card) {

@@ -605,6 +605,14 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                     ability.setRuleVisible(true);
                 }
             }
+            // The current face down implementation is just setting a boolean, so any trigger checking for a
+            // permanent property once being turned face up is not seeing the right face up data.
+            // For instance triggers looking for specific subtypes being turned face up (Detectives in MKM set)
+            // are broken without that processAction call.
+            // This is somewhat a band-aid on the special action nature of turning a permanent face up.
+            // 708.8. As a face-down permanent is turned face up, its copiable values revert to its normal copiable values.
+            // Any effects that have been applied to the face-down permanent still apply to the face-up permanent.
+            game.getState().processAction(game);
             game.fireEvent(GameEvent.getEvent(GameEvent.EventType.TURNED_FACE_UP, getId(), source, playerId));
             return true;
         }

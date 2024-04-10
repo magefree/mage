@@ -56,38 +56,42 @@ public class AddCountersTargetEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source);
         if (controller != null && sourceObject != null && counter != null) {
+            Counter newCounter = counter.copy();
+            int calculated = amount.calculate(game, source, this);
+            if (!(amount instanceof StaticValue) || calculated > 0) {
+                // If dynamic, or static and set to a > 0 value, we use that instead of the counter's internal amount.
+                newCounter.remove(newCounter.getCount());
+                newCounter.add(calculated);
+            } else {
+                // StaticValue 0 -- the default counter has the amount, so no adjustment.
+            }
+
+            if (newCounter.getCount() <= 0) {
+                return false; // no need to iterate on targets, no counters will be put on them
+            }
+
             int affectedTargets = 0;
             for (UUID uuid : getTargetPointer().getTargets(game, source)) {
-                Counter newCounter = counter.copy();
-                int calculated = amount.calculate(game, source, this); // 0 -- you must use default couner
-                if (calculated < 0) {
-                    continue;
-                } else if (calculated == 0) {
-                    // use original counter
-                } else {
-                    // increase to calculated value
-                    newCounter.remove(newCounter.getCount());
-                    newCounter.add(calculated);
-                }
+                Counter newCounterForTarget = newCounter.copy();
 
                 Permanent permanent = game.getPermanent(uuid);
                 Player player = game.getPlayer(uuid);
                 Card card = game.getCard(getTargetPointer().getFirst(game, source));
                 if (permanent != null) {
-                    permanent.addCounters(newCounter, source.getControllerId(), source, game);
+                    permanent.addCounters(newCounterForTarget, source.getControllerId(), source, game);
                     affectedTargets++;
                     game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " puts "
-                            + newCounter.getCount() + ' ' + newCounter.getName() + " counters on " + permanent.getLogName());
+                            + newCounterForTarget.getCount() + ' ' + newCounterForTarget.getName() + " counters on " + permanent.getLogName());
                 } else if (player != null) {
-                    player.addCounters(newCounter, source.getControllerId(), source, game);
+                    player.addCounters(newCounterForTarget, source.getControllerId(), source, game);
                     affectedTargets++;
                     game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " puts "
-                            + newCounter.getCount() + ' ' + newCounter.getName() + " counters on " + player.getLogName());
+                            + newCounterForTarget.getCount() + ' ' + newCounterForTarget.getName() + " counters on " + player.getLogName());
                 } else if (card != null) {
-                    card.addCounters(newCounter, source.getControllerId(), source, game);
+                    card.addCounters(newCounterForTarget, source.getControllerId(), source, game);
                     affectedTargets++;
                     game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " puts "
-                            + newCounter.getCount() + ' ' + newCounter.getName() + " counters on " + card.getLogName());
+                            + newCounterForTarget.getCount() + ' ' + newCounterForTarget.getName() + " counters on " + card.getLogName());
                 }
             }
             return affectedTargets > 0;

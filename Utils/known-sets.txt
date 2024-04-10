@@ -195,6 +195,7 @@ Oath of the Gatewatch|OathOfTheGatewatch|
 Odyssey|Odyssey|
 Onslaught|Onslaught|
 Outlaws of Thunder Junction|OutlawsOfThunderJunction|
+Outlaws of Thunder Junction Commander|OutlawsOfThunderJunctionCommander|
 The Big Score|TheBigScore|
 Phyrexia: All Will Be One|PhyrexiaAllWillBeOne|
 Phyrexia: All Will Be One Commander|PhyrexiaAllWillBeOneCommander|
@@ -221,6 +222,7 @@ Saviors of Kamigawa|SaviorsOfKamigawa|
 Scars of Mirrodin|ScarsOfMirrodin|
 Scourge|Scourge|
 Secret Lair Drop|SecretLairDrop|
+Secret Lair Showdown|SecretLairShowdown|
 Seventh Edition|SeventhEdition|
 Shadowmoor|Shadowmoor|
 Shadows over Innistrad|ShadowsOverInnistrad|
@@ -228,6 +230,7 @@ Shards of Alara|ShardsOfAlara|
 Special Guests|SpecialGuests|
 Starter 1999|Starter1999|
 Starter 2000|Starter2000|
+Starter Commander Decks|StarterCommanderDecks|
 Star Wars|StarWars|
 Streets of New Capenna|StreetsOfNewCapenna|
 New Capenna Commander|NewCapennaCommander|

@@ -11,14 +11,12 @@ import mage.constants.Outcome;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
+import mage.filter.predicate.card.OwnerIdPredicate;
 import mage.filter.predicate.mageobject.CardIdPredicate;
 import mage.filter.predicate.mageobject.NamePredicate;
-import mage.filter.predicate.card.OwnerIdPredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
-import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
@@ -82,7 +80,7 @@ class GuardianProjectTriggeredAbility extends EntersBattlefieldAllTriggeredAbili
     @Override
     public String getRule() {
         return "Whenever a nontoken creature enters the battlefield under your control, " +
-                "if that creature does not have the same name as another creature you control " +
+                "if it doesn't have the same name as another creature you control " +
                 "or a creature card in your graveyard, draw a card.";
     }
 
@@ -104,10 +102,7 @@ class GuardianProjectTriggeredAbility extends EntersBattlefieldAllTriggeredAbili
         filterPermanent.add(new NamePredicate(permanent.getName()));
         filterPermanent.add(Predicates.not(new CardIdPredicate(permanent.getId())));
         filterPermanent.add(new ControllerIdPredicate(controllerId));
-        if (!game.getBattlefield().getActivePermanents(filterPermanent, controllerId, game).isEmpty()) {
-            return false;
-        }
-        return true;
+        return game.getBattlefield().getActivePermanents(filterPermanent, controllerId, game).isEmpty();
     }
 }
 

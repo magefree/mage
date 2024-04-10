@@ -1,5 +1,6 @@
 package org.mage.test.cards.abilities.keywords;
 
+import mage.MageObject;
 import mage.cards.Card;
 import mage.cards.repository.TokenRepository;
 import mage.constants.EmptyNames;
@@ -22,6 +23,197 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  * @author LevelX2, JayDi85
  */
 public class ManifestTest extends CardTestPlayerBase {
+
+    @Test
+    public void test_Simple_ManifestFromOwnLibrary() {
+        // Manifest the top card of your library.
+        addCard(Zone.HAND, playerA, "Soul Summons", 1); // {1}{W}
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
+
+        // manifest
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Soul Summons");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
+    }
+
+    @Test
+    public void test_Simple_ManifestFromHand() {
+        // {T}: Manifest a card from your hand.
+        addCard(Zone.BATTLEFIELD, playerA, "Scroll of Fate", 1);
+        addCard(Zone.HAND, playerA, "Basking Rootwalla", 1); // 1/1
+
+        // manifest
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Manifest");
+        addTarget(playerA, "Basking Rootwalla");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
+    }
+
+    @Test
+    public void test_Simple_ManifestTargetPlayer() {
+        // Exile target creature. Its controller manifests the top card of their library.
+        addCard(Zone.HAND, playerA, "Reality Shift", 1); // {1}{U}
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+        //
+        addCard(Zone.BATTLEFIELD, playerB, "Grizzly Bears", 1);
+
+        // manifest
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Reality Shift");
+        addTarget(playerA, "Grizzly Bears");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 0);
+        assertPermanentCount(playerB, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
+    }
+
+    @Test
+    public void test_Simple_ManifestFromOpponentLibrary() {
+        // At the beginning of each opponent's upkeep, you manifest the top card of that player's library.
+        addCard(Zone.BATTLEFIELD, playerA, "Thieving Amalgam", 1);
+
+        // no drew on first turn, so use 5 turns to check same libs size at the end
+        runCode("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
+            Assert.assertEquals("libraries must be same on start", playerA.getLibrary().size(), playerB.getLibrary().size());
+        });
+
+        // turn 1
+        checkPermanentCount("turn 1.A - no face down", 1, PhaseStep.PRECOMBAT_MAIN, playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 0);
+        checkPermanentCount("turn 1.B - no face down", 1, PhaseStep.PRECOMBAT_MAIN, playerB, EmptyNames.FACE_DOWN_CREATURE.toString(), 0);
+
+        // turn 2
+        checkPermanentCount("turn 2.A - +1 face down", 2, PhaseStep.PRECOMBAT_MAIN, playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
+        checkPermanentCount("turn 2.B - no face down", 2, PhaseStep.PRECOMBAT_MAIN, playerB, EmptyNames.FACE_DOWN_CREATURE.toString(), 0);
+
+        // turn 3
+        checkPermanentCount("turn 3.A - +1 face down", 3, PhaseStep.PRECOMBAT_MAIN, playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
+        checkPermanentCount("turn 3.B - no face down", 3, PhaseStep.PRECOMBAT_MAIN, playerB, EmptyNames.FACE_DOWN_CREATURE.toString(), 0);
+
+        // turn 4
+        checkPermanentCount("turn 4.A - +2 face down", 4, PhaseStep.PRECOMBAT_MAIN, playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 2);
+        checkPermanentCount("turn 4.B - no face down", 4, PhaseStep.PRECOMBAT_MAIN, playerB, EmptyNames.FACE_DOWN_CREATURE.toString(), 0);
+
+        // turn 5
+        checkPermanentCount("turn 5.A - +2 face down", 5, PhaseStep.PRECOMBAT_MAIN, playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 2);
+        checkPermanentCount("turn 5.B - no face down", 5, PhaseStep.PRECOMBAT_MAIN, playerB, EmptyNames.FACE_DOWN_CREATURE.toString(), 0);
+
+
+        setStrictChooseMode(true);
+        setStopAt(5, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 2);
+        assertPermanentCount(playerB, EmptyNames.FACE_DOWN_CREATURE.toString(), 0);
+        Assert.assertEquals("manifested cards must be taken from opponent's library", 2, playerA.getLibrary().size() - playerB.getLibrary().size());
+    }
+
+    private void runManifestThenBlink(String cardToManifest, String cardAfterBlink) {
+        // split, mdfc and other cards must be able to manifested
+        // bug: https://github.com/magefree/mage/issues/10608
+        skipInitShuffling();
+
+        // Manifest the top card of your library.
+        addCard(Zone.HAND, playerA, "Soul Summons", 1); // {1}{W}, sorcery
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
+        //
+        // Exile target creature you control, then return that card to the battlefield under your control.
+        addCard(Zone.HAND, playerA, "Cloudshift", 1); // {W}, instant
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
+        //
+        addCard(Zone.LIBRARY, playerA, cardToManifest, 1);
+
+        // manifest
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Soul Summons");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPermanentCount("need face down", 1, PhaseStep.PRECOMBAT_MAIN, playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
+
+        // blink
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cloudshift", EmptyNames.FACE_DOWN_CREATURE.toString());
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPermanentCount("need no face down", 1, PhaseStep.PRECOMBAT_MAIN, playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 0);
+
+        runCode("after blink", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
+            if (cardAfterBlink == null) {
+                Assert.assertEquals("after blink card must keep in exile",
+                        1, currentGame.getExile().getAllCardsByRange(currentGame, playerA.getId()).size());
+            } else {
+                String realPermanentName = currentGame.getBattlefield().getAllPermanents()
+                        .stream()
+                        .map(MageObject::getName)
+                        .filter(name -> name.equals(cardAfterBlink))
+                        .findFirst()
+                        .orElse(null);
+                Assert.assertEquals("after blink card must go to battlefield",
+                        cardAfterBlink, realPermanentName);
+            }
+        });
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+    }
+
+    @Test
+    public void test_ManifestThenBlink_Creature() {
+        runManifestThenBlink("Grizzly Bears", "Grizzly Bears");
+    }
+
+    @Test
+    public void test_ManifestThenBlink_Instant() {
+        runManifestThenBlink("Lightning Bolt", null);
+    }
+
+    @Test
+    public void test_ManifestThenBlink_MDFC_Creature() {
+        runManifestThenBlink("Akoum Warrior // Akoum Teeth", "Akoum Warrior");
+    }
+
+    @Test
+    public void test_ManifestThenBlink_MDFC_LandOnMainSide() {
+        runManifestThenBlink("Barkchannel Pathway // Tidechannel Pathway", "Barkchannel Pathway");
+    }
+
+    @Test
+    public void test_ManifestThenBlink_MDFC_LandOnSecondSide() {
+        runManifestThenBlink("Bala Ged Recovery // Bala Ged Sanctuary", null);
+    }
+
+    @Test
+    public void test_ManifestThenBlink_Split_Normal() {
+        runManifestThenBlink("Assault // Battery", null);
+    }
+
+    @Test
+    public void test_ManifestThenBlink_Split_Fused() {
+        runManifestThenBlink("Alive // Well", null);
+    }
+
+    @Test
+    public void test_ManifestThenBlink_Split_Aftermath() {
+        runManifestThenBlink("Dusk // Dawn", null);
+    }
+
+    @Test
+    public void test_ManifestThenBlink_Meld() {
+        runManifestThenBlink("Graf Rats", "Graf Rats");
+    }
+
+    @Test
+    public void test_ManifestThenBlink_Adventure() {
+        runManifestThenBlink("Ardenvale Tactician // Dizzying Swoop", "Ardenvale Tactician");
+    }
 
     /**
      * Tests that ETB triggered abilities did not trigger for manifested cards
@@ -540,6 +732,8 @@ public class ManifestTest extends CardTestPlayerBase {
                 .filter(permanent -> permanent.isFaceDown(game))
                 .filter(permanent -> {
                     Assert.assertEquals("face down permanent must have not name", "", permanent.getName());
+                    // TODO: buggy, manifested card must have some rules
+                    //Assert.assertTrue("face down permanent must have abilities", permanent.getAbilities().size() > 0);
                     return true;
                 })
                 .findFirst()
@@ -559,6 +753,8 @@ public class ManifestTest extends CardTestPlayerBase {
                 .filter(p -> {
                     CardView debugView = new CardView((PermanentCard) currentGame.getPermanent(p.getId()), currentGame, false, false);
                     Assert.assertNotEquals("face down view must have name", "", p.getName());
+                    // TODO: buggy, manifested card must have some rules
+                    //Assert.assertTrue("face down view must have abilities", p.getRules().size() > 0);
                     return true;
                 })
                 .findFirst()
@@ -567,9 +763,9 @@ public class ManifestTest extends CardTestPlayerBase {
         return permanentView;
     }
 
-    private void assertFaceDown(String checkInfo, PermanentView faceDownPermanentView, String needRealName, String needFaceDownStatus, boolean needShowRealInfo) {
+    private void assertFaceDownManifest(String checkInfo, PermanentView faceDownPermanentView, String needRealName, boolean needShowRealInfo) {
         String info = checkInfo + " - " + faceDownPermanentView;
-        String needName = CardUtil.getCardNameForGUI(needShowRealInfo ? needRealName : "", needFaceDownStatus);
+        String needName = CardUtil.getCardNameForGUI(needShowRealInfo ? needRealName : "", TokenRepository.XMAGE_IMAGE_NAME_FACE_DOWN_MANIFEST);
 
         // check view
         Assert.assertTrue(info + " - wrong face down status", faceDownPermanentView.isFaceDown());
@@ -600,11 +796,11 @@ public class ManifestTest extends CardTestPlayerBase {
         runCode("on active game", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
             // hide from opponent
             PermanentView permanent = findFaceDownPermanent(game, playerA, playerB);
-            assertFaceDown("in game: must hide from opponent", permanent, "Mountain", TokenRepository.XMAGE_IMAGE_NAME_FACE_DOWN_MANIFEST, false);
+            assertFaceDownManifest("in game: must hide from opponent", permanent, "Mountain", false);
 
             // show for yourself
             permanent = findFaceDownPermanent(game, playerB, playerB);
-            assertFaceDown("in game: must show for yourself", permanent, "Mountain", TokenRepository.XMAGE_IMAGE_NAME_FACE_DOWN_MANIFEST, true);
+            assertFaceDownManifest("in game: must show for yourself", permanent, "Mountain", true);
         });
 
         setStrictChooseMode(true);
@@ -617,9 +813,41 @@ public class ManifestTest extends CardTestPlayerBase {
 
         // show all after game end
         PermanentView permanent = findFaceDownPermanent(currentGame, playerA, playerB);
-        assertFaceDown("end game: must show for opponent", permanent, "Mountain", TokenRepository.XMAGE_IMAGE_NAME_FACE_DOWN_MANIFEST, true);
+        assertFaceDownManifest("end game: must show for opponent", permanent, "Mountain", true);
         //
         permanent = findFaceDownPermanent(currentGame, playerB, playerB);
-        assertFaceDown("end game: must show for yourself", permanent, "Mountain", TokenRepository.XMAGE_IMAGE_NAME_FACE_DOWN_MANIFEST, true);
+        assertFaceDownManifest("end game: must show for yourself", permanent, "Mountain", true);
     }
+
+    @Test
+    public void testJeskaiInfiltrator() {
+        // Whenever Jeskai Infiltrator deals combat damage to a player,
+        // exile it and the top card of your library in a face-down pile, shuffle that pile, then manifest those cards.
+        String infiltrator = "Jeskai Infiltrator"; // 2/3
+        String excommunicate = "Excommunicate"; // 2W Sorcery, Put target creature on top of its owner's library
+        String missionary = "Lone Missionary"; // 2/1 for 1W, ETB gain 4 life
+
+        addCard(Zone.BATTLEFIELD, playerA, "Tundra", 8);
+        addCard(Zone.BATTLEFIELD, playerA, infiltrator);
+        addCard(Zone.BATTLEFIELD, playerA, missionary);
+        addCard(Zone.HAND, playerA, excommunicate);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, excommunicate, missionary);
+
+        attack(1, playerA, infiltrator, playerB);
+
+        checkPlayableAbility("missionary manifest",1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{1}{W}: Turn ", true);
+        checkPlayableAbility("infiltrator manifest",1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{2}{U}: Turn ", true);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertGraveyardCount(playerA, excommunicate, 1);
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 2);
+        assertPowerToughness(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 2, 2);
+        assertLife(playerA, 20);
+        assertLife(playerB, 18);
+    }
+
 }

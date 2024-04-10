@@ -13,6 +13,8 @@ import mage.players.Player;
 import mage.util.CardUtil;
 import mage.watchers.common.SpellsCastWatcher;
 
+import java.util.UUID;
+
 /**
  * @author xenohedron
  */
@@ -21,17 +23,24 @@ public class NextSpellCastHasAbilityEffect extends ContinuousEffectImpl {
     private int spellsCast;
     private final Ability ability;
     private final FilterCard filter;
+    private final TargetController targetController;
 
     public NextSpellCastHasAbilityEffect(Ability ability) {
         this(ability, StaticFilters.FILTER_CARD);
     }
 
     public NextSpellCastHasAbilityEffect(Ability ability, FilterCard filter) {
+        this(ability, filter, TargetController.SOURCE_CONTROLLER);
+    }
+
+    public NextSpellCastHasAbilityEffect(Ability ability, FilterCard filter, TargetController targetController) {
         super(Duration.EndOfTurn, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         this.ability = ability;
         this.filter = filter;
+        this.targetController = targetController;
         staticText = "the next " + filter.getMessage().replace("card", "spell")
-                + " you cast this turn has " + CardUtil.getTextWithFirstCharLowerCase(CardUtil.stripReminderText(ability.getRule()));
+                + (targetController == TargetController.SOURCE_CONTROLLER ? " you cast" : " target player casts")
+                + " this turn has " + CardUtil.getTextWithFirstCharLowerCase(CardUtil.stripReminderText(ability.getRule()));
     }
 
     private NextSpellCastHasAbilityEffect(final NextSpellCastHasAbilityEffect effect) {
@@ -39,6 +48,7 @@ public class NextSpellCastHasAbilityEffect extends ContinuousEffectImpl {
         this.spellsCast = effect.spellsCast;
         this.ability = effect.ability;
         this.filter = effect.filter;
+        this.targetController = effect.targetController;
     }
 
     @Override
@@ -57,49 +67,65 @@ public class NextSpellCastHasAbilityEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
+        UUID playerId;
+        switch (targetController) {
+            case SOURCE_TARGETS:
+                playerId = source.getFirstTarget();
+                break;
+            case SOURCE_CONTROLLER:
+                playerId = source.getControllerId();
+                break;
+            default:
+                throw new UnsupportedOperationException("Value for targetController in NextSpellCastHasAbilityEffect not supported: " + targetController);
+        }
+        Player player = game.getPlayer(playerId);
         SpellsCastWatcher watcher = game.getState().getWatcher(SpellsCastWatcher.class);
         if (player == null || watcher == null) {
             return false;
         }
-        //check if a spell was cast before
-        if (watcher.getCount(source.getControllerId()) > spellsCast) {
+        //check if a spell matching the filter was cast before
+        if (watcher
+                .getSpellsCastThisTurn(playerId)
+                .stream()
+                .skip(spellsCast)
+                .anyMatch(s -> filter.match(s, playerId, source, game))
+        ) {
             discard(); // only one use
             return false;
         }
-        for (Card card : game.getExile().getAllCardsByRange(game, source.getControllerId())) {
-            if (filter.match(card, game)) {
+        for (Card card : game.getExile().getAllCardsByRange(game, playerId)) {
+            if (filter.match(card, playerId, source, game)) {
                 game.getState().addOtherAbility(card, ability);
             }
         }
         for (Card card : player.getLibrary().getCards(game)) {
-            if (filter.match(card, game)) {
+            if (filter.match(card, playerId, source, game)) {
                 game.getState().addOtherAbility(card, ability);
             }
         }
         for (Card card : player.getHand().getCards(game)) {
-            if (filter.match(card, game)) {
+            if (filter.match(card, playerId, source, game)) {
                 game.getState().addOtherAbility(card, ability);
             }
         }
         for (Card card : player.getGraveyard().getCards(game)) {
-            if (filter.match(card, game)) {
+            if (filter.match(card, playerId, source, game)) {
                 game.getState().addOtherAbility(card, ability);
             }
         }
         // workaround to gain cost reduction abilities to commanders before cast (make it playable)
         game.getCommanderCardsFromCommandZone(player, CommanderCardType.ANY)
                 .stream()
-                .filter(card -> filter.match(card, game))
+                .filter(card -> filter.match(card, playerId, source, game))
                 .forEach(card -> game.getState().addOtherAbility(card, ability));
 
         for (StackObject stackObject : game.getStack()) {
-            if (!(stackObject instanceof Spell) || !stackObject.isControlledBy(source.getControllerId())) {
+            if (!(stackObject instanceof Spell) || !stackObject.isControlledBy(playerId)) {
                 continue;
             }
             // TODO: Distinguish "you cast" to exclude copies
             Card card = game.getCard(stackObject.getSourceId());
-            if (card != null && filter.match((Spell) stackObject, game)) {
+            if (card != null && filter.match((Spell) stackObject, playerId, source, game)) {
                 game.getState().addOtherAbility(card, ability);
             }
         }

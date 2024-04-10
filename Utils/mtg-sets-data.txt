@@ -197,6 +197,7 @@ Odyssey|ODY|
 Oath of the Gatewatch|OGW|
 Onslaught|ONS|
 Outlaws of Thunder Junction|OTJ|
+Outlaws of Thunder Junction Commander|OTC|
 The Big Score|BIG|
 Magic Origins|ORI|
 Phyrexia: All Will Be One|ONE|
@@ -220,9 +221,11 @@ Rise of the Eldrazi|ROE|
 Return to Ravnica|RTR|
 Starter 2000|S00|
 Starter 1999|S99|
+Starter Commander Decks|SCD|
 Strixhaven: School of Mages|STX|
 Scourge|SCG|
 Secret Lair|SLD|
+Secret Lair Showdown|SLP|
 Shadowmoor|SHM|
 Shadows over Innistrad|SOI|
 Saviors of Kamigawa|SOK|

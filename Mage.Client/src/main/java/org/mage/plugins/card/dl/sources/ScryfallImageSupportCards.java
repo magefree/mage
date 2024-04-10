@@ -404,7 +404,7 @@ public class ScryfallImageSupportCards {
             add("XANA"); // Arena New Player Experience Extras
             add("OANA"); // Arena New Player Experience Cards
             add("PS18"); // San Diego Comic-Con 2018
-            //add("HTR17"); // Heroes of the Realm 2017
+            add("PH17"); // Heroes of the Realm 2017
             add("C18"); // Commander 2018
             add("PGRN"); // Guilds of Ravnica Promos
             add("PRWK"); // GRN Ravnica Weekend
@@ -439,7 +439,7 @@ public class ScryfallImageSupportCards {
             add("ELD"); // Throne of Eldraine
             //add("PTG"); // Ponies: The Galloping
             add("CMB1"); // Mystery Booster Playtest Cards
-            add("MB1"); // Mystery Booster
+            //add("MB1"); // Mystery Booster
             add("GN2"); // Game Night 2019
             add("HA1"); // Historic Anthology 1
             //add("HHO"); // Happy Holidays
@@ -453,7 +453,7 @@ public class ScryfallImageSupportCards {
             add("PWOR"); // World Championship Promos
             add("PANA"); // MTG Arena Promos
             add("UND"); // Unsanctioned
-            add("FMB1"); // Mystery Booster Retail Edition Foils
+            //add("FMB1"); // Mystery Booster Retail Edition Foils
             add("HA2"); // Historic Anthology 2
             add("SLD"); // Secret Lair Drop
             add("PMEI"); // Magazine Inserts
@@ -518,11 +518,13 @@ public class ScryfallImageSupportCards {
             add("BRR"); // The Brothers' War Retro Artifacts
             add("BOT"); // Transformers
             add("J22"); // Jumpstart 2022
+            add("SCD"); // Starter Commander Decks
             add("SLC"); // Secret Lair 30th Anniversary Countdown Kit
             add("DMR"); // Dominaria Remastered
             add("ONE"); // Phyrexia: All Will Be One
             add("ONC"); // Phyrexia: All Will Be One Commander
             add("PL23"); // Year of the Rabbit 2023
+            add("SLP"); // Secret Lair Showdown
             add("MOM"); // March of the Machine
             add("MOC"); // March of the Machine Commander
             add("MAT"); // March of the Machine: The Aftermath
@@ -545,6 +547,8 @@ public class ScryfallImageSupportCards {
             add("MKC"); // Murders at Karlov Manor Commander
             add("CLU"); // Ravnica: Clue Edition
             add("OTJ"); // Outlaws of Thunder Junction
+            add("OTC"); // Outlaws of Thunder Junction Commander
+            add("OTP"); // Breaking News
             add("BIG"); // The Big Score
             add("MH3"); // Modern Horizons 3
             add("ACR"); // Assassin's Creed

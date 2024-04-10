@@ -11,9 +11,9 @@ public class CourtOfLocthwainTest extends CardTestPlayerBase {
      * Court of Locthwain
      * {2}{B}{B}
      * Enchantment
-     *
+     * <p>
      * When Court of Locthwain enters the battlefield, you become the monarch.
-     *
+     * <p>
      * At the beginning of your upkeep, exile the top card of target opponent's library. You may play that card for as long as it remains exiled, and mana of any type can be spent to cast it. If you're the monarch, until end of turn, you may cast a spell from among cards exiled with Court of Locthwain without paying its mana cost.
      */
     private static String court = "Court of Locthwain";
@@ -22,7 +22,7 @@ public class CourtOfLocthwainTest extends CardTestPlayerBase {
      * Armageddon
      * {3}{W}
      * Sorcery
-     *
+     * <p>
      * Destroy all lands.
      */
     private static String armageddon = "Armageddon";
@@ -83,6 +83,35 @@ public class CourtOfLocthwainTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, reveler, 1);
         assertTappedCount("Scrubland", true, 0);
+    }
+
+    @Test
+    public void testMonarchChoiceCastMDFCForFree() {
+        setStrictChooseMode(true);
+
+        addCard(Zone.HAND, playerA, court);
+        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears");
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 4);
+        addCard(Zone.LIBRARY, playerB, "Fire // Ice");
+        addCard(Zone.LIBRARY, playerB, "Island"); // playerB will draw it.
+        skipInitShuffling();
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, court);
+
+        addTarget(playerA, playerB); // trigger target for turn 3
+        checkExileCount("fire/ice got exiled", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Fire // Ice", 1);
+
+        // We need to choose the proper AsThough, even if only one is valid.
+        setChoice(playerA, "Without paying manacost: ");
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Ice", "Grizzly Bears");
+
+        setStopAt(3, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertTappedCount("Swamp", true, 0);
+        assertGraveyardCount(playerB, "Fire // Ice", 1);
+        assertTappedCount("Grizzly Bears", true, 1);
+        assertHandCount(playerA, 1 + 1 + 1); // 1 regular draw, 1 with monarch trigger, 1 with Ice
     }
 
     @Test
