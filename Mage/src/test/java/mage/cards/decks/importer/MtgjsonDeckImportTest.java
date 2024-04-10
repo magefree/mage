@@ -1,6 +1,7 @@
 package mage.cards.decks.importer;
 
 import mage.cards.decks.DeckCardLists;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.nio.file.Paths;
@@ -27,7 +28,8 @@ public class MtgjsonDeckImportTest {
                 errors,
                 false
         );
-        assertEquals("Arcane Tempo", deck.getName());
+        Assert.assertEquals("Arcane Tempo", deck.getName());
+        Assert.assertEquals("", errors.toString());
         TestDeckChecker.checker()
                 .addMain("Goblin Electromancer", 4)
                 .addMain("Crackling Drake", 4)
@@ -57,8 +59,6 @@ public class MtgjsonDeckImportTest {
                 .addSide("Disdainful Stroke", 2)
                 //
                 .verify(deck, 60, 15);
-
-        assertEquals("", errors.toString());
     }
 
 }

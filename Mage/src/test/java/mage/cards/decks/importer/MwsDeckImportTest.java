@@ -1,6 +1,7 @@
 package mage.cards.decks.importer;
 
 import mage.cards.decks.DeckCardLists;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.nio.file.Paths;
@@ -26,6 +27,7 @@ public class MwsDeckImportTest {
                 false
         );
 
+        Assert.assertEquals("", errors.toString());
         TestDeckChecker.checker()
                 .addMain("Mutavault", 4)
                 .addMain("Plains", 18)
@@ -49,8 +51,6 @@ public class MwsDeckImportTest {
                 .addSide("Rootborn Defenses", 3)
 
                 .verify(deck, 60, 15);
-
-        assertEquals("", errors.toString());
     }
 
 }

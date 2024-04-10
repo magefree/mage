@@ -7,6 +7,9 @@ import mage.cards.repository.CardRepository;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Deck import: helper class to mock cards repository
+ */
 public class CardLookup {
 
     public static final CardLookup instance = new CardLookup();

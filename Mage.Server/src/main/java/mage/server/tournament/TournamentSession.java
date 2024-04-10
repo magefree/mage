@@ -83,8 +83,8 @@ public class TournamentSession {
         tournament.submitDeck(playerId, deck);
     }
 
-    public boolean updateDeck(Deck deck) {
-        return tournament.updateDeck(playerId, deck);
+    public void updateDeck(Deck deck) {
+        tournament.updateDeck(playerId, deck);
     }
 
     public void setKilled() {

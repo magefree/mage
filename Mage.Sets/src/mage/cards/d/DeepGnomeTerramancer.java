@@ -24,7 +24,7 @@ import java.util.UUID;
 public final class DeepGnomeTerramancer extends CardImpl {
 
     public DeepGnomeTerramancer(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[] { CardType.CREATURE }, "{1}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
         this.subtype.add(SubType.GNOME, SubType.WIZARD);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
@@ -81,7 +81,7 @@ class DeepGnomeTerramancerTriggeredAbility extends TriggeredAbilityImpl {
             return false;
         }
 
-        if (watcher.wasLandPlayed(land.getId())) { // Land was played
+        if (watcher.wasLandPlayed(land, game)) { // Land was played
             return false;
         }
 

@@ -139,11 +139,13 @@ public abstract class TournamentImpl implements Tournament {
     }
 
     @Override
-    public boolean updateDeck(UUID playerId, Deck deck) {
-        if (players.containsKey(playerId)) {
-            return players.get(playerId).updateDeck(deck);
+    public void updateDeck(UUID playerId, Deck deck) {
+        TournamentPlayer player = players.getOrDefault(playerId, null);
+        if (player == null) {
+            return;
         }
-        return false;
+
+        player.updateDeck(deck);
     }
 
     protected Round createRoundRandom() {

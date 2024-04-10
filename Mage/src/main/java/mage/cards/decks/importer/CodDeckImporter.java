@@ -13,12 +13,15 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * Deck import: Cockatrice app
+ */
 public class CodDeckImporter extends XmlDeckImporter {
 
     /**
-     * @param filename
+     * @param fileName
      * @param errorMessages
-     * @param saveAutoFixedFile do not supported for current format
+     * @param saveAutoFixedFile do not support for current format
      * @return
      */
     @Override
@@ -43,7 +46,7 @@ public class CodDeckImporter extends XmlDeckImporter {
             return decklist;
         } catch (Exception e) {
             logger.error("Error loading deck", e);
-            errorMessages.append("There was an error loading the deck.");
+            errorMessages.append("There was an error loading the deck: " + e.getMessage());
             return new DeckCardLists();
         }
     }
@@ -66,9 +69,12 @@ public class CodDeckImporter extends XmlDeckImporter {
             Optional<CardInfo> cardInfo = lookup.lookupCardInfo(name);
             if (cardInfo.isPresent()) {
                 CardInfo info = cardInfo.get();
+                int amount = getQuantityFromNode(node);
+                DeckCardInfo.makeSureCardAmountFine(amount, info.getName());
                 return Collections.nCopies(
-                        getQuantityFromNode(node),
-                        new DeckCardInfo(info.getName(), info.getCardNumber(), info.getSetCode())).stream();
+                        amount,
+                        new DeckCardInfo(info.getName(), info.getCardNumber(), info.getSetCode())
+                ).stream();
             } else {
                 errors.append("Could not find card: '").append(name).append("'\n");
                 return Stream.empty();

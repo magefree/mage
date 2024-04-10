@@ -18,6 +18,7 @@ import org.apache.log4j.Logger;
 import java.io.File;
 import java.sql.SQLException;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @author North, JayDi85
@@ -27,6 +28,10 @@ public enum CardRepository {
     instance;
 
     private static final Logger logger = Logger.getLogger(CardRepository.class);
+
+    // fixes limit for out of memory problems
+    private static final AtomicInteger databaseFixes = new AtomicInteger();
+    private static final int MAX_DATABASE_FIXES = 3;
 
     private static final String JDBC_URL = "jdbc:h2:file:./db/cards.h2;AUTO_SERVER=TRUE;IGNORECASE=TRUE";
     private static final String VERSION_ENTITY_NAME = "card";
@@ -61,8 +66,31 @@ public enum CardRepository {
 
             TableUtils.createTableIfNotExists(connectionSource, CardInfo.class);
             cardDao = DaoManager.createDao(connectionSource, CardInfo.class);
-        } catch (SQLException ex) {
-            Logger.getLogger(CardRepository.class).error("Error creating card repository - ", ex);
+        } catch (SQLException e) {
+            Logger.getLogger(CardRepository.class).error("Error creating card repository - " + e, e);
+            processMemoryErrors(e);
+        }
+    }
+
+    private void processMemoryErrors(Exception e) {
+        // TODO: implement same logic for set repository, users repository and other db sources?!
+        //   or delete workaround with that fix
+        // TODO: it's for small servers only (if one game/request can eat all memory), remove after auto-restart implements
+        if (e.toString().contains("file") || e.toString().contains("closed")) {
+            // errors:
+            // - java.lang.IllegalStateException: Reading from nio:xxx/Mage.Server/db/cards.h2.mv.db failed; file length -1 read length 384 at 9384925 [1.4.197/1]
+            // - java.lang.IllegalStateException: This store is closed [1.4.197/4]"; SQL statement: xxx
+            // reason:
+            // - no more free memory, DB can't read big amount of data and broke it
+            //
+            // steps to reproduce:
+            // - run server with low memory like -Xmx200m;
+            // - cast card with name choose dialog like Brain Pry;
+            // - now server can't add new cards to game (whole server, not current game);
+            //
+            // possible fix:
+            // - try to restart DB
+            checkDatabaseHealthAndFix();
         }
     }
 
@@ -79,8 +107,9 @@ public enum CardRepository {
                                 classNames.add(card.getClassName());
                             }
                         }
-                    } catch (SQLException ex) {
-                        Logger.getLogger(CardRepository.class).error("Error adding cards to DB - ", ex);
+                    } catch (SQLException e) {
+                        Logger.getLogger(CardRepository.class).error("Error adding cards to DB - " + e, e);
+                        processMemoryErrors(e);
                     }
                 }
 
@@ -135,8 +164,9 @@ public enum CardRepository {
             for (CardInfo card : results) {
                 addNewNames(card, names);
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(CardRepository.class).error("Error getting names from DB : " + ex);
+        } catch (SQLException e) {
+            Logger.getLogger(CardRepository.class).error("Error getting names from DB, possible low memory: " + e, e);
+            processMemoryErrors(e);
         }
         return names;
     }
@@ -151,9 +181,9 @@ public enum CardRepository {
             for (CardInfo card : results) {
                 addNewNames(card, names);
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(CardRepository.class).error("Error getting non-land names from DB : " + ex);
-
+        } catch (SQLException e) {
+            Logger.getLogger(CardRepository.class).error("Error getting non-land names from DB, possible low memory: " + e, e);
+            processMemoryErrors(e);
         }
         return names;
     }
@@ -172,9 +202,9 @@ public enum CardRepository {
             for (CardInfo card : results) {
                 addNewNames(card, names);
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(CardRepository.class).error("Error getting non-land names from DB : " + ex);
-
+        } catch (SQLException e) {
+            Logger.getLogger(CardRepository.class).error("Error getting non-land names from DB, possible low memory: " + e, e);
+            processMemoryErrors(e);
         }
         return names;
     }
@@ -189,9 +219,9 @@ public enum CardRepository {
             for (CardInfo card : results) {
                 addNewNames(card, names);
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(CardRepository.class).error("Error getting non-land names from DB : " + ex);
-
+        } catch (SQLException e) {
+            Logger.getLogger(CardRepository.class).error("Error getting non-land names from DB, possible low memory: " + e, e);
+            processMemoryErrors(e);
         }
         return names;
     }
@@ -206,9 +236,9 @@ public enum CardRepository {
             for (CardInfo card : results) {
                 addNewNames(card, names);
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(CardRepository.class).error("Error getting creature names from DB : " + ex);
-
+        } catch (SQLException e) {
+            Logger.getLogger(CardRepository.class).error("Error getting creature names from DB, possible low memory: " + e, e);
+            processMemoryErrors(e);
         }
         return names;
     }
@@ -223,9 +253,9 @@ public enum CardRepository {
             for (CardInfo card : results) {
                 addNewNames(card, names);
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(CardRepository.class).error("Error getting artifact names from DB : " + ex);
-
+        } catch (SQLException e) {
+            Logger.getLogger(CardRepository.class).error("Error getting artifact names from DB, possible low memory: " + e, e);
+            processMemoryErrors(e);
         }
         return names;
     }
@@ -244,8 +274,9 @@ public enum CardRepository {
             for (CardInfo card : results) {
                 addNewNames(card, names);
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(CardRepository.class).error("Error getting non-land and non-creature names from DB : " + ex);
+        } catch (SQLException e) {
+            Logger.getLogger(CardRepository.class).error("Error getting non-land and non-creature names from DB, possible low memory: " + e, e);
+            processMemoryErrors(e);
         }
         return names;
     }
@@ -264,9 +295,9 @@ public enum CardRepository {
             for (CardInfo card : results) {
                 addNewNames(card, names);
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(CardRepository.class).error("Error getting non-artifact non-land names from DB : " + ex);
-
+        } catch (SQLException e) {
+            Logger.getLogger(CardRepository.class).error("Error getting non-artifact non-land names from DB, possible low memory: " + e, e);
+            processMemoryErrors(e);
         }
         return names;
     }
@@ -296,9 +327,9 @@ public enum CardRepository {
             if (!result.isEmpty()) {
                 return result.get(0);
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(CardRepository.class).error("Error finding card from DB : " + ex);
-
+        } catch (SQLException e) {
+            Logger.getLogger(CardRepository.class).error("Error finding card from DB: " + e, e);
+            processMemoryErrors(e);
         }
         return null;
     }
@@ -310,8 +341,9 @@ public enum CardRepository {
             for (CardInfo card : results) {
                 names.add(card.getClassName());
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(CardRepository.class).error("Error getting classnames from DB : " + ex);
+        } catch (SQLException e) {
+            Logger.getLogger(CardRepository.class).error("Error getting classnames from DB, possible low memory:" + e, e);
+            processMemoryErrors(e);
         }
         return names;
     }
@@ -322,9 +354,9 @@ public enum CardRepository {
             queryBuilder.where().not().in("className", classNames);
 
             return cardDao.query(queryBuilder.prepare());
-        } catch (SQLException ex) {
-            Logger.getLogger(CardRepository.class).error("Error getting missing cards from DB : " + ex);
-
+        } catch (SQLException e) {
+            Logger.getLogger(CardRepository.class).error("Error getting missing cards from DB: " + e, e);
+            processMemoryErrors(e);
         }
 
         return Collections.emptyList();
@@ -403,7 +435,7 @@ public enum CardRepository {
     public CardInfo findCardWithPreferredSetAndNumber(String name, String expansion, String cardNumber, boolean returnSplitCardHalf) {
         List<CardInfo> cards;
 
-        cards = findCards(name, 0, returnSplitCardHalf);
+        cards = findCards(name, 0, returnSplitCardHalf, true);
         CardInfo bestCard = cards.stream()
                 .filter(card -> expansion == null || expansion.equalsIgnoreCase(card.getSetCode()))
                 .filter(card -> cardNumber == null || cardNumber.equals(card.getCardNumber()))
@@ -443,10 +475,11 @@ public enum CardRepository {
      *                              Want this `false` when user is searching by either names in a split card so that
      *                              the full card can be found by either name.
      *                              Want this `true` when the client is searching for info on both halves to display it.
+     * @canCheckDatabaseHealth      try to fix database on any errors (use true anytime except fix methods itself)
      * @return                      a list of the reprints of the card if it was found (up to limitByMaxAmount number),
      *                              or an empty list if the card was not found.
      */
-    public List<CardInfo> findCards(String name, long limitByMaxAmount, boolean returnSplitCardHalf) {
+    public List<CardInfo> findCards(String name, long limitByMaxAmount, boolean returnSplitCardHalf, boolean canCheckDatabaseHealth) {
         List<CardInfo> results;
         QueryBuilder<CardInfo, Object> queryBuilder = cardDao.queryBuilder();
         if (limitByMaxAmount > 0) {
@@ -508,15 +541,18 @@ public enum CardRepository {
                 }
             }
             return results;
-        } catch (SQLException ex) {
-            Logger.getLogger(CardRepository.class).error("Error during execution of raw sql statement", ex);
+        } catch (SQLException e) {
+            Logger.getLogger(CardRepository.class).error("Error during execution of raw sql statement: " + e, e);
+            if (canCheckDatabaseHealth) {
+                processMemoryErrors(e);
+            }
         }
 
         return Collections.emptyList();
     }
 
     public List<CardInfo> findCards(String name, long limitByMaxAmount) {
-        return findCards(name, limitByMaxAmount, false);
+        return findCards(name, limitByMaxAmount, false, true);
     }
 
     public List<CardInfo> findCardsByClass(String canonicalClassName) {
@@ -524,8 +560,9 @@ public enum CardRepository {
             QueryBuilder<CardInfo, Object> queryBuilder = cardDao.queryBuilder();
             queryBuilder.where().eq("className", new SelectArg(canonicalClassName));
             return cardDao.query(queryBuilder.prepare());
-        } catch (SQLException ex) {
-            Logger.getLogger(CardRepository.class).error("Error during execution of raw sql statement", ex);
+        } catch (SQLException e) {
+            Logger.getLogger(CardRepository.class).error("Error during execution of raw sql statement" + e, e);
+            processMemoryErrors(e);
         }
         return Collections.emptyList();
     }
@@ -545,8 +582,9 @@ public enum CardRepository {
             criteria.buildQuery(queryBuilder);
 
             return cardDao.query(queryBuilder.prepare());
-        } catch (SQLException ex) {
-            Logger.getLogger(CardRepository.class).error("Error during execution of card repository query statement", ex);
+        } catch (SQLException e) {
+            Logger.getLogger(CardRepository.class).error("Error during execution of card repository query statement: " + e, e);
+            processMemoryErrors(e);
         }
         return Collections.emptyList();
     }
@@ -586,8 +624,9 @@ public enum CardRepository {
         try {
             ConnectionSource connectionSource = new JdbcConnectionSource(JDBC_URL);
             return RepositoryUtil.getDatabaseVersion(connectionSource, VERSION_ENTITY_NAME + "Content");
-        } catch (SQLException ex) {
-            Logger.getLogger(CardRepository.class).error("Error getting content version from DB - ", ex);
+        } catch (SQLException e) {
+            Logger.getLogger(CardRepository.class).error("Error getting content version from DB - " + e, e);
+            processMemoryErrors(e);
         }
         return 0;
     }
@@ -596,8 +635,9 @@ public enum CardRepository {
         try {
             ConnectionSource connectionSource = new JdbcConnectionSource(JDBC_URL);
             RepositoryUtil.updateVersion(connectionSource, VERSION_ENTITY_NAME + "Content", version);
-        } catch (SQLException ex) {
-            Logger.getLogger(CardRepository.class).error("Error getting content version - ", ex);
+        } catch (SQLException e) {
+            Logger.getLogger(CardRepository.class).error("Error getting content version - " + e, e);
+            processMemoryErrors(e);
         }
     }
 
@@ -611,16 +651,59 @@ public enum CardRepository {
                 DatabaseConnection conn = cardDao.getConnectionSource().getReadWriteConnection(cardDao.getTableName());
                 conn.executeStatement("shutdown compact", 0);
             }
-        } catch (SQLException ex) {
+        } catch (SQLException ignore) {
         }
     }
 
-    public void openDB() {
+    private void openDB() {
         try {
             ConnectionSource connectionSource = new JdbcConnectionSource(JDBC_URL);
             cardDao = DaoManager.createDao(connectionSource, CardInfo.class);
-        } catch (SQLException ex) {
-            Logger.getLogger(CardRepository.class).error("Error opening card repository - ", ex);
+        } catch (SQLException e) {
+            Logger.getLogger(CardRepository.class).error("Error opening card repository - " + e, e);
+        }
+    }
+
+    private static CardInfo safeFindKnownCard() {
+        // safe find of known card with memory/db fixes
+        return instance.findCards("Silvercoat Lion", 1, false, false)
+                .stream()
+                .findFirst()
+                .orElse(null);
+    }
+
+    public static boolean checkDatabaseHealthAndFix() {
+        // see details in processMemoryErrors
+
+        // card must exist
+        CardInfo cardInfo = safeFindKnownCard();
+        if (cardInfo != null) {
+            logger.info("Database: checking broken status... GOOD");
+            return true;
+        }
+
+        Logger.getLogger(CardRepository.class).error("Database: checking broken status... BAD");
+
+        if (databaseFixes.incrementAndGet() > MAX_DATABASE_FIXES) {
+            logger.error("Critical error: no more db memory fixes allows, server must be restarted");
+            return false;
+        }
+
+        // DB seems to have a problem - try to restart the DB (useless in 99% due out of memory problems)
+        instance.closeDB();
+        instance.openDB();
+        cardInfo = safeFindKnownCard();
+        if (cardInfo != null) {
+            logger.warn(String.format("Database: trying to restart (%d try)... GOOD - db fixed", databaseFixes.get()));
+            return true;
+        } else {
+            // TODO: add here:
+            //  - admin notification by email
+            //  - players notification by message,
+            //  - timer with auto-restart feature (restart java app, restart docker container - e.g. docker health check)
+            //  see related issue: https://github.com/magefree/mage/issues/8130
+            logger.warn(String.format("Database: trying to restart  (%d try)... FAIL - server must be restarted", databaseFixes.get()));
+            return false;
         }
     }
 }
