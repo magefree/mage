@@ -15,7 +15,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Original xmage's deck format (uses by deck editor)
+ * Deck import: native xmage format (uses by deck editor)
  *
  * @author North
  */
@@ -39,7 +39,7 @@ public class DckDeckImporter extends PlainTextDeckImporter {
         if (line.isEmpty() || line.startsWith("#")) {
             return;
         }
-        
+
         line = CardNameUtil.normalizeCardName(line);
 
         // AUTO-FIX apply (if card number was fixed before then it can be replaced in layout or other lines too)
@@ -60,6 +60,8 @@ public class DckDeckImporter extends PlainTextDeckImporter {
             String setCode = m.group(3);
             String cardNum = m.group(4);
             String cardName = m.group(5);
+
+            DeckCardInfo.makeSureCardAmountFine(count, cardName);
 
             cardNum = cardNum == null ? "" : cardNum.trim();
             setCode = setCode == null ? "" : setCode.trim();
@@ -128,9 +130,9 @@ public class DckDeckImporter extends PlainTextDeckImporter {
             if (deckCardInfo != null) {
                 for (int i = 0; i < count; i++) {
                     if (!sideboard) {
-                        deckList.getCards().add(deckCardInfo);
+                        deckList.getCards().add(deckCardInfo.copy());
                     } else {
-                        deckList.getSideboard().add(deckCardInfo);
+                        deckList.getSideboard().add(deckCardInfo.copy());
                     }
                 }
             }
