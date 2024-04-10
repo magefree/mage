@@ -33,7 +33,7 @@ public final class CacklingWitch extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {X}{B}, {tap}, Discard a card: Target creature gets +X/+0 until end of turn.
-        ManacostVariableValue manaX = ManacostVariableValue.REGULAR;
+        ManacostVariableValue manaX = ManacostVariableValue.instance;
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new BoostTargetEffect(manaX, StaticValue.get(0), Duration.EndOfTurn),
                 new ManaCostsImpl<>("{X}{B}"));

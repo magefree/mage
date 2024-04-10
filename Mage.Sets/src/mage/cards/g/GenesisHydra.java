@@ -23,6 +23,7 @@ import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
+import mage.util.CardUtil;
 
 /**
  *
@@ -71,7 +72,7 @@ class GenesisHydraPutOntoBattlefieldEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Object obj = getValue(CastSourceTriggeredAbility.SOURCE_CAST_SPELL_ABILITY);
         if (controller != null && obj instanceof SpellAbility) {
-            int count = ((SpellAbility) obj).getManaCostsToPay().getX();
+            int count = CardUtil.getSourceCostsTag(game, ((SpellAbility) obj), "X", 0);
             if (count > 0) {
                 Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, count));
                 controller.revealCards(source, cards, game);

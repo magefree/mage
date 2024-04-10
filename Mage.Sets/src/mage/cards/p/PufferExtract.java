@@ -16,6 +16,7 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -63,7 +64,7 @@ class PufferExtractEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int xValue = source.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, source, "X", 0);
         game.addEffect(new BoostTargetEffect(xValue, xValue, Duration.EndOfTurn), source);
         game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(
                 new DestroyTargetEffect().setTargetPointer(new FixedTarget(source.getFirstTarget(), game))

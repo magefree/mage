@@ -23,6 +23,7 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetControlledPermanent;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -79,7 +80,7 @@ class MerchantsDockhandEffect extends OneShotEffect {
             return false;
         }
 
-        int xValue = source.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, source, "X", 0);
 
         for (Cost cost : source.getCosts()) {
             if (cost instanceof TapXTargetCost) {

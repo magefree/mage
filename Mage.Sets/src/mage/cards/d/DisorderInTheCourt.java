@@ -54,7 +54,7 @@ enum DisorderInTheCourtAdjuster implements TargetAdjuster {
     @Override
     public void adjustTargets(Ability ability, Game game) {
         ability.getTargets().clear();
-        ability.addTarget(new TargetCreaturePermanent(ability.getManaCostsToPay().getX()));
+        ability.addTarget(new TargetCreaturePermanent(CardUtil.getSourceCostsTag(game, ability, "X", 0)));
     }
 }
 
@@ -89,7 +89,7 @@ class DisorderInTheCourtEffect extends OneShotEffect {
             controller.moveCardsToExile(toExile, source, game, true, CardUtil.getExileZoneId(game, source), CardUtil.getSourceName(game, source));
             game.getState().processAction(game);
         }
-        new InvestigateEffect(ManacostVariableValue.REGULAR).apply(game, source);
+        new InvestigateEffect(ManacostVariableValue.instance).apply(game, source);
         if (!toExile.isEmpty()) {
             Effect effect = new ReturnToBattlefieldUnderOwnerControlTargetEffect(true, true);
             effect.setTargetPointer(new FixedTargets(toExile

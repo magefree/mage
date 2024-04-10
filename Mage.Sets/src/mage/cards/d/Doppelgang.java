@@ -12,6 +12,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.targetadjustment.TargetAdjuster;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -44,7 +45,7 @@ enum DoppelgangAdjuster implements TargetAdjuster {
     @Override
     public void adjustTargets(Ability ability, Game game) {
         ability.getTargets().clear();
-        ability.addTarget(new TargetPermanent(ability.getManaCostsToPay().getX(), StaticFilters.FILTER_PERMANENTS));
+        ability.addTarget(new TargetPermanent(CardUtil.getSourceCostsTag(game, ability, "X", 0), StaticFilters.FILTER_PERMANENTS));
     }
 }
 
@@ -66,7 +67,7 @@ class DoppelgangEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int xValue = source.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, source, "X", 0);
         if (xValue < 1) {
             return false;
         }

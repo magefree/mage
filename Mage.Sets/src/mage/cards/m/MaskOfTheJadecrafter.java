@@ -13,6 +13,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.token.GolemXXToken;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -64,6 +65,6 @@ class MaskOfTheJadecrafterEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return new GolemXXToken(source.getManaCostsToPay().getX()).putOntoBattlefield(1, game, source);
+        return new GolemXXToken(CardUtil.getSourceCostsTag(game, source, "X", 0)).putOntoBattlefield(1, game, source);
     }
 }

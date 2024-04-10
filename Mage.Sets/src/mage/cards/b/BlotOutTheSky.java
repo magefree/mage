@@ -14,6 +14,7 @@ import mage.filter.common.FilterNonlandPermanent;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.permanent.token.InklingToken;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -33,7 +34,7 @@ public final class BlotOutTheSky extends CardImpl {
 
         // Create X tapped 2/1 white and black Inkling creature tokens with flying. If X is 6 or more, destroy all noncreature, nonland permanents.
         this.getSpellAbility().addEffect(new CreateTokenEffect(
-                new InklingToken(), ManacostVariableValue.REGULAR, true, false
+                new InklingToken(), ManacostVariableValue.instance, true, false
         ));
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new DestroyAllEffect(filter), BlotOutTheSkyCondition.instance,
@@ -56,6 +57,6 @@ enum BlotOutTheSkyCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return source.getManaCostsToPay().getX() >= 6;
+        return CardUtil.getSourceCostsTag(game, source, "X", 0) >= 6;
     }
 }

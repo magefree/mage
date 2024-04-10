@@ -17,7 +17,7 @@ import java.util.UUID;
  */
 public final class EpiphanyAtTheDrownyard extends CardImpl {
 
-    private static final DynamicValue xValue = new IntPlusDynamicValue(1, ManacostVariableValue.REGULAR);
+    private static final DynamicValue xValue = new IntPlusDynamicValue(1, ManacostVariableValue.instance);
 
     public EpiphanyAtTheDrownyard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{U}");

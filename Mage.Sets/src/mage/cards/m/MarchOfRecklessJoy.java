@@ -78,7 +78,7 @@ class MarchOfRecklessJoyEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        int xValue = source.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, source, "X", 0);
         if (player == null || xValue < 1 || player.getLibrary().size() < 1) {
             return false;
         }

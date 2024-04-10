@@ -1,6 +1,7 @@
 package mage.cards.s;
 
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.common.ZoneChangeTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -19,6 +20,7 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.token.SharkToken;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -106,7 +108,7 @@ class SharkTyphoonTriggeredAbility extends ZoneChangeTriggeredAbility {
             return false;
         }
         this.getEffects().clear();
-        this.addEffect(new CreateTokenEffect(new SharkToken(object.getStackAbility().getManaCostsToPay().getX())));
+        this.addEffect(new CreateTokenEffect(new SharkToken(CardUtil.getSourceCostsTag(game, object.getStackAbility(), "X", 0))));
         return true;
     }
 

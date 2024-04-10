@@ -28,7 +28,7 @@ public final class InvasionOfNewPhyrexia extends CardImpl {
         this.addAbility(new SiegeAbility());
 
         // When Invasion of New Phyrexia enters the battlefield, create X 2/2 white and blue Knight creature tokens with vigilance.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new KnightWhiteBlueToken(), ManacostVariableValue.ETB)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new KnightWhiteBlueToken(), ManacostVariableValue.instance)));
     }
 
     private InvasionOfNewPhyrexia(final InvasionOfNewPhyrexia card) {

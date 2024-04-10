@@ -18,6 +18,7 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.game.Game;
 import mage.target.TargetPermanent;
 import mage.target.targetadjustment.TargetAdjuster;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -42,7 +43,7 @@ public final class KlauthsWill extends CardImpl {
         this.getSpellAbility().getModes().setMoreCondition(ControlACommanderCondition.instance);
 
         // • Breathe Flame — Klauth's Will deals X damage to each creature without flying.
-        this.getSpellAbility().addEffect(new DamageAllEffect(ManacostVariableValue.REGULAR, filter));
+        this.getSpellAbility().addEffect(new DamageAllEffect(ManacostVariableValue.instance, filter));
         this.getSpellAbility().withFirstModeFlavorWord("Breathe Flame");
 
         // • Smash Relics — Destroy up to X target artifacts and/or enchantments.
@@ -70,7 +71,7 @@ enum KlauthsWillAdjuster implements TargetAdjuster {
         if (ability.getEffects().stream().anyMatch(DestroyTargetEffect.class::isInstance)) {
             ability.getTargets().clear();
             ability.addTarget(new TargetPermanent(
-                    0, ability.getManaCostsToPay().getX(),
+                    0, CardUtil.getSourceCostsTag(game, ability, "X", 0),
                     StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT
             ));
         }

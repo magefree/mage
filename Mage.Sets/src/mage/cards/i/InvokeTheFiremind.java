@@ -21,8 +21,8 @@ public final class InvokeTheFiremind extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{U}{U}{R}");
 
 
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(ManacostVariableValue.REGULAR));
-        Mode mode = new Mode(new DamageTargetEffect(ManacostVariableValue.REGULAR));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(ManacostVariableValue.instance));
+        Mode mode = new Mode(new DamageTargetEffect(ManacostVariableValue.instance));
         mode.addTarget(new TargetAnyTarget());
         this.getSpellAbility().addMode(mode);
     }

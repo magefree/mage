@@ -56,7 +56,7 @@ public final class BaradDur extends CardImpl {
         // {X}{X}{B}, {T}: Amass Orcs X. Activate only if a creature died this turn.
         Ability ability = new ActivateIfConditionActivatedAbility(
                 Zone.BATTLEFIELD,
-                new AmassEffect(ManacostVariableValue.REGULAR, SubType.ORC, false),
+                new AmassEffect(ManacostVariableValue.instance, SubType.ORC, false),
                 new ManaCostsImpl<>("{X}{X}{B}"),
                 MorbidCondition.instance
         );

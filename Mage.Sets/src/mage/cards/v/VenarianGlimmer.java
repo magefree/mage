@@ -1,7 +1,6 @@
 
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -17,6 +16,9 @@ import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -63,7 +65,7 @@ class VenarianGlimmerEffect extends OneShotEffect {
         Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (player != null) {
             FilterCard filter = new FilterNonlandCard();
-            filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, source.getManaCostsToPay().getX() + 1));
+            filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, CardUtil.getSourceCostsTag(game, source, "X", 0) + 1));
             Effect effect = new DiscardCardYouChooseTargetEffect(filter);
             effect.setTargetPointer(this.getTargetPointer().copy());
             effect.apply(game, source);

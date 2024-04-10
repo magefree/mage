@@ -2,10 +2,10 @@ package mage.abilities.effects.common.search;
 
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.constants.ComparisonType;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardsImpl;
+import mage.constants.ComparisonType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
@@ -14,6 +14,7 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
+import mage.util.CardUtil;
 
 /**
  * @author antoni-g
@@ -50,7 +51,7 @@ public class SearchLibraryGraveyardWithLessMVPutIntoPlay extends OneShotEffect {
         if (controller != null && sourceObject != null) {
             // create x cost filter
             FilterCard advancedFilter = filter.copy(); // never change static objects so copy the object here before
-            advancedFilter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, source.getManaCostsToPay().getX() + 1));
+            advancedFilter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, CardUtil.getSourceCostsTag(game, source, "X", 0) + 1));
 
             if (controller.chooseUse(outcome, "Search your library for a " + filter.getMessage() + " with mana value X or less" + '?', source, game)) {
                 TargetCardInLibrary target = new TargetCardInLibrary(advancedFilter);

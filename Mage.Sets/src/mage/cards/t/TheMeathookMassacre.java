@@ -22,7 +22,7 @@ import java.util.UUID;
  */
 public final class TheMeathookMassacre extends CardImpl {
 
-    private static final DynamicValue xValue = new MultipliedValue(ManacostVariableValue.ETB, -1);
+    private static final DynamicValue xValue = new MultipliedValue(ManacostVariableValue.instance, -1);
 
     public TheMeathookMassacre(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{X}{B}{B}");

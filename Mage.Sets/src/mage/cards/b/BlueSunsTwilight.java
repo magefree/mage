@@ -16,6 +16,7 @@ import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.target.TargetPermanent;
 import mage.target.targetadjustment.TargetAdjuster;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -52,7 +53,7 @@ enum BlueSunsTwilightCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return source.getManaCostsToPay().getX() >= 5;
+        return CardUtil.getSourceCostsTag(game, source, "X", 0) >= 5;
     }
 }
 
@@ -61,7 +62,7 @@ enum BlueSunsTwilightAdjuster implements TargetAdjuster {
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        int xValue = ability.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, ability, "X", 0);
         FilterPermanent filter = new FilterCreaturePermanent("creature with mana value " + xValue + " or less");
         filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, xValue + 1));
         ability.getTargets().clear();

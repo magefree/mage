@@ -25,6 +25,7 @@ import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetadjustment.TargetAdjuster;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -37,7 +38,7 @@ public final class ProfaneCommand extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{B}{B}");
 
 
-        DynamicValue xValue = ManacostVariableValue.REGULAR;
+        DynamicValue xValue = ManacostVariableValue.instance;
         // Choose two -
         this.getSpellAbility().getModes().setMinModes(2);
         this.getSpellAbility().getModes().setMaxModes(2);
@@ -83,7 +84,7 @@ enum ProfaneCommandAdjuster implements TargetAdjuster {
     public void adjustTargets(Ability ability, Game game) {
         // adjust targets is called for every selected mode
         Mode mode = ability.getModes().getMode();
-        int xValue = ability.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, ability, "X", 0);
         for (Effect effect : mode.getEffects()) {
             if (effect instanceof ReturnFromGraveyardToBattlefieldTargetEffect) {
                 mode.getTargets().clear();

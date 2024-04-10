@@ -29,7 +29,7 @@ public final class TreasureVault extends CardImpl {
 
         // {X}{X}, {T}, Sacrifice Treasure Vault: Create X Treasure tokens.
         Ability ability = new SimpleActivatedAbility(
-                new CreateTokenEffect(new TreasureToken(), ManacostVariableValue.REGULAR),
+                new CreateTokenEffect(new TreasureToken(), ManacostVariableValue.instance),
                 new ManaCostsImpl<>("{X}{X}")
         );
         ability.addCost(new TapSourceCost());

@@ -73,6 +73,6 @@ enum RoccoCabarettiCatererPredicate implements ObjectSourcePlayerPredicate<Card>
             return false;
         }
         return input.getObject().getManaValue()
-                <= ManacostVariableValue.ETB.calculate(game, input.getSource(), null);
+                <= ManacostVariableValue.instance.calculate(game, input.getSource(), null);
     }
 }

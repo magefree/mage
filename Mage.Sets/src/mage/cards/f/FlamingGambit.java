@@ -69,7 +69,7 @@ class FlamingGambitEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        int damage = ManacostVariableValue.REGULAR.calculate(game, source, this);
+        int damage = ManacostVariableValue.instance.calculate(game, source, this);
         if (game.getBattlefield().count(StaticFilters.FILTER_PERMANENT_CREATURE, player.getId(), source, game) > 0) {
             String message = "Choose a creature you control to deal " + damage + " damage to instead?";
             if (player.chooseUse(outcome, message, source, game)) {

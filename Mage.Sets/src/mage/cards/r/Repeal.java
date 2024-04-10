@@ -1,6 +1,5 @@
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
@@ -14,6 +13,9 @@ import mage.game.Game;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetNonlandPermanent;
 import mage.target.targetadjustment.TargetAdjuster;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -49,7 +51,7 @@ enum RepealAdjuster implements TargetAdjuster {
     @Override
     public void adjustTargets(Ability ability, Game game) {
         ability.getTargets().clear();
-        int xValue = ability.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, ability, "X", 0);
         FilterNonlandPermanent filter = new FilterNonlandPermanent("nonland permanent with mana value " + xValue);
         filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, xValue));
         ability.addTarget(new TargetNonlandPermanent(filter));

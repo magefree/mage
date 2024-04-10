@@ -11,6 +11,7 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetadjustment.TargetAdjuster;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -44,7 +45,7 @@ enum GlimpseTheSunGodAdjuster implements TargetAdjuster {
     @Override
     public void adjustTargets(Ability ability, Game game) {
         ability.getTargets().clear();
-        int numberToTap = ability.getManaCostsToPay().getX();
+        int numberToTap = CardUtil.getSourceCostsTag(game, ability, "X", 0);
         ability.addTarget(new TargetCreaturePermanent(numberToTap, numberToTap, StaticFilters.FILTER_PERMANENT_CREATURES, false));
     }
 }

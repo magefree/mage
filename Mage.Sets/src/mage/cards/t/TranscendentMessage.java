@@ -21,7 +21,7 @@ public final class TranscendentMessage extends CardImpl {
         this.addAbility(new ConvokeAbility());
 
         // Draw X cards.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(ManacostVariableValue.REGULAR));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(ManacostVariableValue.instance));
     }
 
     private TranscendentMessage(final TranscendentMessage card) {

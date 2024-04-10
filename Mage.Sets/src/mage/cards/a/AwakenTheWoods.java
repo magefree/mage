@@ -18,7 +18,7 @@ public final class AwakenTheWoods extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{G}{G}");
 
         // Create X 1/1 green Forest Dryad land creature tokens.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new ForestDryadToken(), ManacostVariableValue.REGULAR));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new ForestDryadToken(), ManacostVariableValue.instance));
     }
 
     private AwakenTheWoods(final AwakenTheWoods card) {

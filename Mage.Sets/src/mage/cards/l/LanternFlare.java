@@ -24,9 +24,9 @@ public final class LanternFlare extends CardImpl {
 
         // Cleave {X}{R}{W}
         Ability ability = new CleaveAbility(
-                this, new DamageTargetEffect(ManacostVariableValue.REGULAR), "{X}{R}{W}"
+                this, new DamageTargetEffect(ManacostVariableValue.instance), "{X}{R}{W}"
         );
-        ability.addEffect(new GainLifeEffect(ManacostVariableValue.REGULAR));
+        ability.addEffect(new GainLifeEffect(ManacostVariableValue.instance));
         ability.addTarget(new TargetCreatureOrPlaneswalker());
         this.addAbility(ability);
 

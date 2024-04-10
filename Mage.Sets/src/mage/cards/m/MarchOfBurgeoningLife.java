@@ -65,7 +65,7 @@ enum MarchOfBurgeoningLifeAdjuster implements TargetAdjuster {
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        int xValue = ability.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, ability, "X", 0);
         FilterPermanent filter = new FilterCreaturePermanent("creature with mana value less than " + xValue);
         filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, xValue));
         ability.getTargets().clear();

@@ -58,7 +58,7 @@ public final class BronzebeakForagers extends CardImpl {
                 new ManaCostsImpl<>("{X}{W}")
         );
         dissolveAbility.setTargetAdjuster(BronzebeakForagerDissolveAdjuster.instance);
-        dissolveAbility.addEffect(new GainLifeEffect(ManacostVariableValue.REGULAR));
+        dissolveAbility.addEffect(new GainLifeEffect(ManacostVariableValue.instance));
         this.addAbility(dissolveAbility);
     }
 
@@ -79,7 +79,7 @@ enum BronzebeakForagerDissolveAdjuster implements TargetAdjuster {
     @Override
     public void adjustTargets(Ability ability, Game game) {
         ability.getTargets().clear();
-        int xValue = ability.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, ability, "X", 0);
         FilterCard filter = new FilterCard("card with mana value " + xValue);
         filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, xValue));
         ability.addTarget(new TargetCardInExile(filter, CardUtil.getExileZoneId(game, ability)));

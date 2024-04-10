@@ -1,7 +1,6 @@
 
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -10,15 +9,14 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Outcome;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -72,10 +70,10 @@ class NinThePainArtistEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(this.getTargetPointer().getFirst(game, source));
         if (permanent != null) {
-            permanent.damage(source.getManaCostsToPay().getX(), source.getSourceId(), source, game, false, true);
+            permanent.damage(CardUtil.getSourceCostsTag(game, source, "X", 0), source.getSourceId(), source, game, false, true);
             Player player = game.getPlayer(permanent.getControllerId());
             if (player != null) {
-                player.drawCards(source.getManaCostsToPay().getX(), source, game);
+                player.drawCards(CardUtil.getSourceCostsTag(game, source, "X", 0), source, game);
             }
             return true;
         }

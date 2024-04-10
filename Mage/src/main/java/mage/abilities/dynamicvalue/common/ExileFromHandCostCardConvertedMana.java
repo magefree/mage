@@ -8,6 +8,7 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.cards.Card;
 import mage.game.Game;
+import mage.util.CardUtil;
 
 /**
  * Calculates the converted mana costs of a card that was exiled from hand as
@@ -30,7 +31,7 @@ public enum ExileFromHandCostCardConvertedMana implements DynamicValue {
                 return xValue;
             }
         }
-        return sourceAbility.getManaCostsToPay().getX();
+        return CardUtil.getSourceCostsTag(game, sourceAbility, "X", 0);
     }
 
     @Override

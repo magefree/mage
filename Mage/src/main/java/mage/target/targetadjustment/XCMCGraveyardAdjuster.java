@@ -7,6 +7,7 @@ import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInGraveyard;
+import mage.util.CardUtil;
 
 /**
  *
@@ -17,7 +18,7 @@ public enum XCMCGraveyardAdjuster implements TargetAdjuster {
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        int xValue = ability.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, ability, "X", 0);
         FilterCard filterCard = ((TargetCard) ability.getTargets().get(0)).getFilter().copy();
         filterCard.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, xValue));
         filterCard.setMessage(filterCard.getMessage().replace('X', (char) xValue));

@@ -9,6 +9,7 @@ import mage.constants.Duration;
 import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetadjustment.TargetAdjuster;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -42,6 +43,6 @@ enum SereneSunsetAdjuster implements TargetAdjuster {
     @Override
     public void adjustTargets(Ability ability, Game game) {
         ability.getTargets().clear();
-        ability.addTarget(new TargetCreaturePermanent(ability.getManaCostsToPay().getX()));
+        ability.addTarget(new TargetCreaturePermanent(CardUtil.getSourceCostsTag(game, ability, "X", 0)));
     }
 }

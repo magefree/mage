@@ -17,6 +17,7 @@ import mage.filter.predicate.permanent.ModifiedPredicate;
 import mage.game.Game;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.targetadjustment.TargetAdjuster;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -69,6 +70,6 @@ enum SilkguardAdjuster implements TargetAdjuster {
     @Override
     public void adjustTargets(Ability ability, Game game) {
         ability.getTargets().clear();
-        ability.addTarget(new TargetControlledCreaturePermanent(0, ability.getManaCostsToPay().getX()));
+        ability.addTarget(new TargetControlledCreaturePermanent(0, CardUtil.getSourceCostsTag(game, ability, "X", 0)));
     }
 }

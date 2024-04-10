@@ -21,6 +21,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPlayer;
+import mage.util.CardUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -159,7 +160,7 @@ class ChimericStaffEffect extends ContinuousEffectImpl {
                 break;
             case PTChangingEffects_7:
                 if (sublayer == SubLayer.SetPT_7b) {
-                    int xValue = source.getManaCostsToPay().getX();
+                    int xValue = CardUtil.getSourceCostsTag(game, source, "X", 0);
                     permanent.getPower().setModifiedBaseValue(xValue);
                     permanent.getToughness().setModifiedBaseValue(xValue);
                 }

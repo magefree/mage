@@ -22,7 +22,7 @@ public final class SongOfTotentanz extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{R}");
 
         // Create X 1/1 black Rat creature tokens with “This creature can’t block.” Creatures you control gain haste until end of turn.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new RatCantBlockToken(), ManacostVariableValue.REGULAR));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new RatCantBlockToken(), ManacostVariableValue.instance));
         this.getSpellAbility().addEffect(new GainAbilityControlledEffect(
                 HasteAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES));
     }

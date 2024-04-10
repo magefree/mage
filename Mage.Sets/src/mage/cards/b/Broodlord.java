@@ -37,7 +37,7 @@ public final class Broodlord extends CardImpl {
 
         // Brood Telepathy -- When Broodlord enters the battlefield, distribute X +1/+1 counters among any number of other target creatures you control.
         Ability ability = new EntersBattlefieldTriggeredAbility(new BroodlordEffect());
-        ability.addTarget(new TargetPermanentAmount(ManacostVariableValue.ETB, StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE));
+        ability.addTarget(new TargetPermanentAmount(ManacostVariableValue.instance, StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE));
         this.addAbility(ability.withFlavorWord("Brood Telepathy"));
     }
 

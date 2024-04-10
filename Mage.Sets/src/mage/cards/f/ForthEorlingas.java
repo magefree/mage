@@ -30,7 +30,7 @@ public final class ForthEorlingas extends CardImpl {
 
         // Create X 2/2 red Human Knight creature tokens with trample and haste.
         this.getSpellAbility().addEffect(new CreateTokenEffect(
-                new HumanKnightToken(), ManacostVariableValue.REGULAR, false, false
+                new HumanKnightToken(), ManacostVariableValue.instance, false, false
         ));
 
         // Whenever one or more creatures you control deal combat damage to one or more players this turn, you become the monarch.

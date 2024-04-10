@@ -17,6 +17,7 @@ import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetadjustment.TargetAdjuster;
+import mage.util.CardUtil;
 
 import java.util.Set;
 import java.util.UUID;
@@ -74,7 +75,7 @@ enum AgadeemsAwakeningAdjuster implements TargetAdjuster {
     @Override
     public void adjustTargets(Ability ability, Game game) {
         ability.getTargets().clear();
-        ability.addTarget(new AgadeemsAwakeningTarget(ability.getManaCostsToPay().getX()));
+        ability.addTarget(new AgadeemsAwakeningTarget(CardUtil.getSourceCostsTag(game, ability, "X", 0)));
     }
 }
 

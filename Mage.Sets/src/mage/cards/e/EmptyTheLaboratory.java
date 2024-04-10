@@ -14,8 +14,8 @@ import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.TargetPermanent;
 import mage.target.common.TargetSacrifice;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -73,7 +73,7 @@ class EmptyTheLaboratoryEffect extends OneShotEffect {
             return false;
         }
         int toSacrifice = Math.min(
-                source.getManaCostsToPay().getX(),
+                CardUtil.getSourceCostsTag(game, source, "X", 0),
                 game.getBattlefield().count(
                         filter, source.getControllerId(), source, game
                 )

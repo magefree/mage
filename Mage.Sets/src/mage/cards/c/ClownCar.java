@@ -72,7 +72,7 @@ class ClownCarEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        int xValue = ManacostVariableValue.ETB.calculate(game, source, this);
+        int xValue = ManacostVariableValue.instance.calculate(game, source, this);
         if (player == null || xValue < 1) {
             return false;
         }

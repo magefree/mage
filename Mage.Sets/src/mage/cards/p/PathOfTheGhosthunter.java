@@ -19,7 +19,7 @@ public final class PathOfTheGhosthunter extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{1}{W}");
 
         // Create X 1/1 white Spirit creature tokens with flying.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new SpiritWhiteToken(), ManacostVariableValue.REGULAR));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new SpiritWhiteToken(), ManacostVariableValue.instance));
 
         // Will of the Planeswalkers -- Starting with you, each player votes for planeswalk or chaos. If planeswalk gets more votes, planeswalk. If chaos gets more votes or the vote is tied, chaos ensues.
         this.getSpellAbility().addEffect(new WillOfThePlaneswalkersEffect());

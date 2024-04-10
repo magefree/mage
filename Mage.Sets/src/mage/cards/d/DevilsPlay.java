@@ -9,7 +9,6 @@ import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TimingRule;
 import mage.target.common.TargetAnyTarget;
 
 /**
@@ -23,7 +22,7 @@ public final class DevilsPlay extends CardImpl {
 
 
         // Devil's Play deals X damage to any target.
-        this.getSpellAbility().addEffect(new DamageTargetEffect(ManacostVariableValue.REGULAR));
+        this.getSpellAbility().addEffect(new DamageTargetEffect(ManacostVariableValue.instance));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
         // Flashback {X}{R}{R}{R}
         this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{X}{R}{R}{R}")));

@@ -23,7 +23,7 @@ public final class TyvarsStand extends CardImpl {
 
         // Target creature you control gets +X/+X and gains hexproof and indestructible until end of turn.
         this.getSpellAbility().addEffect(new BoostTargetEffect(
-                ManacostVariableValue.REGULAR, ManacostVariableValue.REGULAR, Duration.EndOfTurn
+                ManacostVariableValue.instance, ManacostVariableValue.instance, Duration.EndOfTurn
         ).setText("target creature you control gets +X/+X"));
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HexproofAbility.getInstance())
                 .setText("and gains hexproof"));

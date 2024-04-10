@@ -44,7 +44,7 @@ public final class TorchBreath extends CardImpl {
         this.addAbility(new CantBeCounteredSourceAbility().setRuleAtTheTop(true));
 
         // Torch Breath deals X damage to target creature or planeswalker.
-        this.getSpellAbility().addEffect(new DamageTargetEffect(ManacostVariableValue.REGULAR));
+        this.getSpellAbility().addEffect(new DamageTargetEffect(ManacostVariableValue.instance));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlaneswalker());
     }
 

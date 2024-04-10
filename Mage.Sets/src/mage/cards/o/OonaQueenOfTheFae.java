@@ -14,6 +14,7 @@ import mage.game.Game;
 import mage.game.permanent.token.OonaQueenFaerieRogueToken;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -76,7 +77,7 @@ class OonaQueenOfTheFaeEffect extends OneShotEffect {
         }
         int cardsWithColor = 0;
         Cards cardsToExile = new CardsImpl();
-        cardsToExile.addAllCards(opponent.getLibrary().getTopCards(game, source.getManaCostsToPay().getX()));
+        cardsToExile.addAllCards(opponent.getLibrary().getTopCards(game, CardUtil.getSourceCostsTag(game, source, "X", 0)));
 
         for (Card card : cardsToExile.getCards(game)) {
             if (card != null && card.getColor(game).contains(choice.getColor())) {

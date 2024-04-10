@@ -16,7 +16,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class DeathWind extends CardImpl {
 
-    private static final DynamicValue xValue = new SignInversionDynamicValue(ManacostVariableValue.REGULAR);
+    private static final DynamicValue xValue = new SignInversionDynamicValue(ManacostVariableValue.instance);
 
     public DeathWind(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{B}");

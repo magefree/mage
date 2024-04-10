@@ -68,7 +68,7 @@ enum ExtraordinaryJourneyAdjuster implements TargetAdjuster {
     @Override
     public void adjustTargets(Ability ability, Game game) {
         ability.getTargets().clear();
-        ability.addTarget(new TargetCreaturePermanent(0, ManacostVariableValue.ETB.calculate(game, ability, null)));
+        ability.addTarget(new TargetCreaturePermanent(0, ManacostVariableValue.instance.calculate(game, ability, null)));
     }
 }
 

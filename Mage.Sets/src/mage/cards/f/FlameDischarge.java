@@ -1,7 +1,5 @@
 package mage.cards.f;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.condition.common.ControlledModifiedCreatureAsSpellCastCondition;
 import mage.abilities.effects.OneShotEffect;
@@ -12,7 +10,10 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreatureOrPlaneswalker;
+import mage.util.CardUtil;
 import mage.watchers.common.ControlledModifiedCreatureAsSpellCastWatcher;
+
+import java.util.UUID;
 
 /**
  *
@@ -61,7 +62,7 @@ class FlameDischargeEffect extends OneShotEffect {
         if (permanent == null) {
             return false;
         }
-        int damageAmount = source.getManaCostsToPay().getX();
+        int damageAmount = CardUtil.getSourceCostsTag(game, source, "X", 0);
         if (ControlledModifiedCreatureAsSpellCastCondition.instance.apply(game, source)) {
             damageAmount += 2;
         }

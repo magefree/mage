@@ -10,6 +10,7 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -60,7 +61,7 @@ class TorchTheWitnessEffect extends OneShotEffect {
             return false;
         }
         int lethal = permanent.getLethalDamage(source.getSourceId(), game);
-        if (lethal < permanent.damage(2 * source.getManaCostsToPay().getX(), source, game)) {
+        if (lethal < permanent.damage(2 * CardUtil.getSourceCostsTag(game, source, "X", 0), source, game)) {
             InvestigateEffect.doInvestigate(source.getControllerId(), 1, game, source);
         }
         return true;

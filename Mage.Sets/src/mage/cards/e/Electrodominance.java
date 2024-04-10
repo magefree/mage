@@ -27,7 +27,7 @@ public final class Electrodominance extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{R}{R}");
 
         // Electrodominance deals X damage to any target. You may cast a card with converted mana cost X or less from your hand without paying its mana cost.
-        this.getSpellAbility().addEffect(new DamageTargetEffect(ManacostVariableValue.REGULAR));
+        this.getSpellAbility().addEffect(new DamageTargetEffect(ManacostVariableValue.instance));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
         this.getSpellAbility().addEffect(new ElectrodominanceEffect());
     }
@@ -67,7 +67,7 @@ class ElectrodominanceEffect extends OneShotEffect {
         }
         FilterCard filter = new FilterCard();
         filter.add(new ManaValuePredicate(
-                ComparisonType.FEWER_THAN, source.getManaCostsToPay().getX() + 1
+                ComparisonType.FEWER_THAN, CardUtil.getSourceCostsTag(game, source, "X", 0) + 1
         ));
         return CardUtil.castSpellWithAttributesForFree(controller, source, game, controller.getHand(), filter);
     }

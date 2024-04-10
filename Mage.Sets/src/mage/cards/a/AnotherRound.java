@@ -60,7 +60,7 @@ class AnotherRoundEffect extends OneShotEffect {
             return false;
         }
 
-        int xValue = ManacostVariableValue.REGULAR.calculate(game, source, this);
+        int xValue = ManacostVariableValue.instance.calculate(game, source, this);
         TargetControlledCreaturePermanent target =
                 new TargetControlledCreaturePermanent(
                         0, Integer.MAX_VALUE,

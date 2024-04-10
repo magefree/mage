@@ -42,9 +42,9 @@ public final class Exocrine extends CardImpl {
 
         // Bio-plasmic Barrage -- When Exocrine enters the battlefield, it deals X damage to each player and each other creature.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DamagePlayersEffect(
-                Outcome.Damage, ManacostVariableValue.ETB, TargetController.ANY, "it"
+                Outcome.Damage, ManacostVariableValue.instance, TargetController.ANY, "it"
         ));
-        ability.addEffect(new DamageAllEffect(ManacostVariableValue.ETB, filter).setText("and each other creature"));
+        ability.addEffect(new DamageAllEffect(ManacostVariableValue.instance, filter).setText("and each other creature"));
         this.addAbility(ability.withFlavorWord("Bio-plasmic Barrage"));
     }
 

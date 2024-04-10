@@ -13,6 +13,7 @@ import mage.game.Game;
 import mage.target.Target;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetadjustment.TargetAdjuster;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -48,7 +49,7 @@ enum DeathDeniedAdjuster implements TargetAdjuster {
     @Override
     public void adjustTargets(Ability ability, Game game) {
         ability.getTargets().clear();
-        int xValue = ability.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, ability, "X", 0);
         Target target = new TargetCardInYourGraveyard(xValue, new FilterCreatureCard(new StringBuilder(xValue).append(xValue != 1 ? " creature cards" : "creature card").append(" from your graveyard").toString()));
         ability.addTarget(target);
     }

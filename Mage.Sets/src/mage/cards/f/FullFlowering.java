@@ -9,6 +9,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.game.Game;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 import java.util.stream.IntStream;
@@ -55,7 +56,7 @@ class FullFloweringEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int xValue = source.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, source, "X", 0);
         if (xValue == 0) {
             return true;
         }

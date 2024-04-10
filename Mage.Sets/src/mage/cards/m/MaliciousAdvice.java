@@ -14,6 +14,7 @@ import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.target.TargetPermanent;
 import mage.target.targetadjustment.TargetAdjuster;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -29,7 +30,7 @@ public final class MaliciousAdvice extends CardImpl {
         Effect effect = new TapTargetEffect();
         effect.setText("Tap X target artifacts, creatures, and/or lands");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(ManacostVariableValue.REGULAR));
+        this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(ManacostVariableValue.instance));
         this.getSpellAbility().setTargetAdjuster(MaliciousAdviceAdjuster.instance);
     }
 
@@ -58,6 +59,6 @@ enum MaliciousAdviceAdjuster implements TargetAdjuster {
     @Override
     public void adjustTargets(Ability ability, Game game) {
         ability.getTargets().clear();
-        ability.addTarget(new TargetPermanent(ability.getManaCostsToPay().getX(), filter));
+        ability.addTarget(new TargetPermanent(CardUtil.getSourceCostsTag(game, ability, "X", 0), filter));
     }
 }

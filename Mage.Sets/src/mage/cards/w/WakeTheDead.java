@@ -24,6 +24,7 @@ import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetadjustment.TargetAdjuster;
 import mage.target.targetpointer.FixedTargets;
+import mage.util.CardUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,7 +62,7 @@ enum WakeTheDeadAdjuster implements TargetAdjuster {
     @Override
     public void adjustTargets(Ability ability, Game game) {
         ability.getTargets().clear();
-        ability.addTarget(new TargetCardInYourGraveyard(ability.getManaCostsToPay().getX(), StaticFilters.FILTER_CARD_CREATURES_YOUR_GRAVEYARD));
+        ability.addTarget(new TargetCardInYourGraveyard(CardUtil.getSourceCostsTag(game, ability, "X", 0), StaticFilters.FILTER_CARD_CREATURES_YOUR_GRAVEYARD));
     }
 }
 

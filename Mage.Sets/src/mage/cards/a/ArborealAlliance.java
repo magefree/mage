@@ -66,7 +66,7 @@ class ArborealAllianceEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         return new CreateTokenEffect(
-                new SylvanOfferingTreefolkToken(ManacostVariableValue.ETB.calculate(game, source, this))
+                new SylvanOfferingTreefolkToken(ManacostVariableValue.instance.calculate(game, source, this))
         ).apply(game, source);
     }
 }

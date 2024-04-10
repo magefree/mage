@@ -14,6 +14,7 @@ import mage.game.Game;
 import mage.game.permanent.token.Pest11GainLifeToken;
 import mage.target.TargetPermanent;
 import mage.target.targetadjustment.TargetAdjuster;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -22,7 +23,7 @@ import java.util.UUID;
  */
 public final class PestInfestation extends CardImpl {
 
-    private static final DynamicValue xValue = new MultipliedValue(ManacostVariableValue.REGULAR, 2);
+    private static final DynamicValue xValue = new MultipliedValue(ManacostVariableValue.instance, 2);
 
     public PestInfestation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{X}{G}");
@@ -52,7 +53,7 @@ enum PestInfestationAdjuster implements TargetAdjuster {
     public void adjustTargets(Ability ability, Game game) {
         ability.getTargets().clear();
         ability.addTarget(new TargetPermanent(
-                0, ability.getManaCostsToPay().getX(),
+                0, CardUtil.getSourceCostsTag(game, ability, "X", 0),
                 StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT, false
         ));
     }

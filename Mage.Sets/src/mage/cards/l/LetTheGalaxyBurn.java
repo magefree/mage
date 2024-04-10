@@ -22,7 +22,7 @@ import java.util.UUID;
 public final class LetTheGalaxyBurn extends CardImpl {
 
     private static final DynamicValue xValue = new AdditiveDynamicValue(
-            ManacostVariableValue.REGULAR, StaticValue.get(2)
+            ManacostVariableValue.instance, StaticValue.get(2)
     );
     private static final FilterPermanent filter = new FilterCreaturePermanent();
 

@@ -40,7 +40,7 @@ public final class Zoanthrope extends CardImpl {
 
         // Warp Blast -- When Zoanthrope enters the battlefield, it deals X damage to any target.
         Ability ability = new EntersBattlefieldTriggeredAbility(
-                new DamageTargetEffect(ManacostVariableValue.ETB, "it")
+                new DamageTargetEffect(ManacostVariableValue.instance, "it")
         );
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability.withFlavorWord("Warp Blast"));

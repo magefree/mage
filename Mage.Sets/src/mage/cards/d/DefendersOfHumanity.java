@@ -42,7 +42,7 @@ public final class DefendersOfHumanity extends CardImpl {
 
         // When Defenders of Humanity enters the battlefield, create X 2/2 white Astartes Warrior creature tokens with vigilance.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new CreateTokenEffect(new WhiteAstartesWarriorToken(), ManacostVariableValue.ETB)
+                new CreateTokenEffect(new WhiteAstartesWarriorToken(), ManacostVariableValue.instance)
         ));
 
         // {X}{2}{W}, Exile Defenders of Humanity: Create X 2/2 white Astartes Warrior creature tokens with vigilance. Activate only if you control no creatures and only during your turn.

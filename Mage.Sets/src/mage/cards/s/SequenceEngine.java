@@ -17,6 +17,7 @@ import mage.game.Game;
 import mage.game.permanent.token.FractalToken;
 import mage.target.common.TargetCardInGraveyard;
 import mage.target.targetadjustment.TargetAdjuster;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -36,7 +37,7 @@ public final class SequenceEngine extends CardImpl {
         );
         ability.addCost(new TapSourceCost());
         ability.addEffect(FractalToken.getEffect(
-                ManacostVariableValue.REGULAR, "Put X +1/+1 counters on it"
+                ManacostVariableValue.instance, "Put X +1/+1 counters on it"
         ));
         ability.setTargetAdjuster(SequenceEngineAdjuster.instance);
         this.addAbility(ability);
@@ -57,7 +58,7 @@ enum SequenceEngineAdjuster implements TargetAdjuster {
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        int xValue = ability.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, ability, "X", 0);
         ability.getTargets().clear();
         FilterCard filter = new FilterCreatureCard("creature card with mana value " + xValue);
         filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, xValue));

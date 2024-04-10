@@ -48,6 +48,6 @@ enum RavenousAbilityCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return ManacostVariableValue.ETB.calculate(game, source, null) >= 5;
+        return ManacostVariableValue.instance.calculate(game, source, null) >= 5;
     }
 }

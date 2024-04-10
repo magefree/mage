@@ -2,7 +2,10 @@ package mage.cards.g;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.*;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -10,6 +13,7 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardAndOrCardInLibrary;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -60,7 +64,7 @@ class GreenSunsTwilightEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        int xValue = source.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, source, "X", 0);
         Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, xValue + 1));
         player.revealCards(source, cards, game);
         TargetCard target = new TargetCardAndOrCardInLibrary(CardType.CREATURE, CardType.LAND);

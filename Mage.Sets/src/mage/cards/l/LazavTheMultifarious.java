@@ -1,6 +1,5 @@
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -11,14 +10,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CopyEffect;
 import mage.abilities.effects.keyword.SurveilEffect;
 import mage.cards.Card;
-import mage.constants.SubType;
-import mage.constants.SuperType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.ComparisonType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
@@ -28,7 +22,10 @@ import mage.game.permanent.PermanentCard;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetadjustment.TargetAdjuster;
+import mage.util.CardUtil;
 import mage.util.functions.CopyApplier;
+
+import java.util.UUID;
 
 /**
  *
@@ -73,7 +70,7 @@ enum LazavTheMultifariousAdjuster implements TargetAdjuster {
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        int xValue = ability.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, ability, "X", 0);
         FilterCard filterCard = new FilterCreatureCard("creature card with mana value " + xValue + " in your graveyard");
         filterCard.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, xValue));
         ability.getTargets().clear();

@@ -1,7 +1,5 @@
 package mage.cards.l;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -20,6 +18,9 @@ import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.token.custom.CreatureToken;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -85,7 +86,7 @@ class LairOfTheHydraEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int xValue = source.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, source, "X", 0);
         game.addEffect(new BecomesCreatureSourceEffect(
                 new CreatureToken(xValue, xValue, "X/X green Hydra creature")
                     .withColor("G")

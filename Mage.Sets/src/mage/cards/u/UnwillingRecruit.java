@@ -1,6 +1,5 @@
 package mage.cards.u;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
@@ -16,6 +15,9 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -65,7 +67,7 @@ class UnwillingRecruitEffect extends OneShotEffect {
             source.getEffects().get(0).setTargetPointer(new FixedTarget(targetCreature.getId(), game));
             game.addEffect(new GainControlTargetEffect(Duration.EndOfTurn), source);
             targetCreature.untap(game);
-            game.addEffect(new BoostTargetEffect(source.getManaCostsToPay().getX(), 0, Duration.EndOfTurn), source);
+            game.addEffect(new BoostTargetEffect(CardUtil.getSourceCostsTag(game, source, "X", 0), 0, Duration.EndOfTurn), source);
             game.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn), source);
             return true;
         }

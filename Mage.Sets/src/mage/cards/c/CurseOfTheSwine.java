@@ -2,25 +2,22 @@ package mage.cards.c;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.Boar2Token;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetadjustment.TargetAdjuster;
+import mage.util.CardUtil;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
-import mage.cards.Card;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
-import mage.game.permanent.PermanentToken;
 
 /**
  * @author LevelX2
@@ -54,7 +51,7 @@ enum CurseOfTheSwineAdjuster implements TargetAdjuster {
     @Override
     public void adjustTargets(Ability ability, Game game) {
         ability.getTargets().clear();
-        ability.addTarget(new TargetCreaturePermanent(ability.getManaCostsToPay().getX()));
+        ability.addTarget(new TargetCreaturePermanent(CardUtil.getSourceCostsTag(game, ability, "X", 0)));
     }
 }
 

@@ -8,6 +8,7 @@ import mage.constants.CardType;
 import mage.game.Game;
 import mage.target.common.TargetCreatureOrPlaneswalkerAmount;
 import mage.target.targetadjustment.TargetAdjuster;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -44,7 +45,7 @@ enum MeteorSwarmAdjuster implements TargetAdjuster {
     @Override
     public void adjustTargets(Ability ability, Game game) {
         ability.getTargets().clear();
-        int xManaSpent = ability.getManaCostsToPay().getX();
+        int xManaSpent = CardUtil.getSourceCostsTag(game, ability, "X", 0);
         if(xManaSpent != 0) {
             TargetCreatureOrPlaneswalkerAmount targetCreatureOrPlaneswalkerAmount = new TargetCreatureOrPlaneswalkerAmount(8);
             targetCreatureOrPlaneswalkerAmount.setMinNumberOfTargets(xManaSpent);

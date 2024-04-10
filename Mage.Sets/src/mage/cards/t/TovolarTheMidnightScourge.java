@@ -58,7 +58,7 @@ public final class TovolarTheMidnightScourge extends CardImpl {
                 TrampleAbility.getInstance(), Duration.EndOfTurn
         ).setText("Target Wolf or Werewolf you control gets +X/+0"), new ManaCostsImpl<>("{X}{R}{G}"));
         ability.addEffect(new BoostTargetEffect(
-                ManacostVariableValue.REGULAR, StaticValue.get(0), Duration.EndOfTurn
+                ManacostVariableValue.instance, StaticValue.get(0), Duration.EndOfTurn
         ).setText("and gains trample until end of turn"));
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);

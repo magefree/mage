@@ -1,6 +1,5 @@
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -13,6 +12,9 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -58,7 +60,7 @@ class TormentOfHailfireEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            int repeat = source.getManaCostsToPay().getX();
+            int repeat = CardUtil.getSourceCostsTag(game, source, "X", 0);
             for (int i = 1; i <= repeat; i++) {
                 
                 for (UUID opponentId : game.getOpponents(source.getControllerId())) {

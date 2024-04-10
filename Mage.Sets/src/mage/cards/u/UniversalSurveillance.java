@@ -21,7 +21,7 @@ public final class UniversalSurveillance extends CardImpl {
         this.addAbility(new ImproviseAbility());
 
         // Draw X cards.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(ManacostVariableValue.REGULAR));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(ManacostVariableValue.instance));
     }
 
     private UniversalSurveillance(final UniversalSurveillance card) {

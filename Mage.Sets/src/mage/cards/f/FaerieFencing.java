@@ -1,8 +1,5 @@
 package mage.cards.f;
 
-import java.util.HashMap;
-import java.util.UUID;
-
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
@@ -10,17 +7,17 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.WatcherScope;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.target.common.TargetCreaturePermanent;
+import mage.util.CardUtil;
 import mage.watchers.Watcher;
+
+import java.util.HashMap;
+import java.util.UUID;
 
 /**
  *
@@ -63,7 +60,7 @@ class FaerieFencingEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         ControlledFaerieAsSpellCastWatcher watcher = game.getState().getWatcher(ControlledFaerieAsSpellCastWatcher.class);
         MageObject mo = source.getSourceObject(game);
-        int reduction = source.getManaCostsToPay().getX();
+        int reduction = CardUtil.getSourceCostsTag(game, source, "X", 0);
 
         if (watcher != null && mo != null && watcher.getCount(new MageObjectReference(mo, game)) > 0) {
             reduction += 3;

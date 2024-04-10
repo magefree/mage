@@ -26,7 +26,7 @@ public final class RepulsiveMutation extends CardImpl {
 
         // Put X +1/+1 counters on target creature you control.
         getSpellAbility().addEffect(new AddCountersTargetEffect(
-                CounterType.P1P1.createInstance(), ManacostVariableValue.REGULAR));
+                CounterType.P1P1.createInstance(), ManacostVariableValue.instance));
         getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
 
         // Then counter up to one target spell unless its controller pays mana equal to the greatest power among creatures you control.

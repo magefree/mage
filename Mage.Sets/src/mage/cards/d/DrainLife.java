@@ -17,6 +17,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -73,7 +74,7 @@ class DrainLifeEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int amount = source.getManaCostsToPay().getX();
+        int amount = CardUtil.getSourceCostsTag(game, source, "X", 0);
         int lifetogain = amount;
         if (amount == 0) {
             return true;

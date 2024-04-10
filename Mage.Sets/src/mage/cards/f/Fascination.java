@@ -22,10 +22,10 @@ public final class Fascination extends CardImpl {
 
         // Choose one -
         // * Each player draws X cards.
-        this.getSpellAbility().addEffect(new DrawCardAllEffect(ManacostVariableValue.REGULAR));
+        this.getSpellAbility().addEffect(new DrawCardAllEffect(ManacostVariableValue.instance));
         
         // * Each player puts the top X cards of their library into their graveyard.
-        Mode mode = new Mode(new MillCardsEachPlayerEffect(ManacostVariableValue.REGULAR, TargetController.ANY));
+        Mode mode = new Mode(new MillCardsEachPlayerEffect(ManacostVariableValue.instance, TargetController.ANY));
         this.getSpellAbility().addMode(mode);
     }
 

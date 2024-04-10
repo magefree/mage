@@ -15,6 +15,7 @@ import mage.players.Library;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.targetadjustment.TargetAdjuster;
+import mage.util.CardUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,7 +59,7 @@ enum IndomitableCreativityAdjuster implements TargetAdjuster {
     @Override
     public void adjustTargets(Ability ability, Game game) {
         ability.getTargets().clear();
-        int xValue = ability.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, ability, "X", 0);
         ability.addTarget(new TargetPermanent(xValue, xValue, filter, false));
     }
 }

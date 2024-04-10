@@ -11,6 +11,7 @@ import mage.game.Game;
 import mage.game.permanent.token.StormCrowToken;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
+import mage.util.CardUtil;
 
 import java.util.Map;
 import java.util.Optional;
@@ -62,7 +63,7 @@ class AttemptedMurderEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        int xValue = source.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, source, "X", 0);
         if (player == null || xValue < 1) {
             return false;
         }

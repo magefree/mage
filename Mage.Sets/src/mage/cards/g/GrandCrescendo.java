@@ -23,7 +23,7 @@ public final class GrandCrescendo extends CardImpl {
 
         // Create X 1/1 green and white Citizen creature tokens. Creatures you control gain indestructible until end of turn.
         this.getSpellAbility().addEffect(new CreateTokenEffect(
-                new CitizenGreenWhiteToken(), ManacostVariableValue.REGULAR
+                new CitizenGreenWhiteToken(), ManacostVariableValue.instance
         ));
         this.getSpellAbility().addEffect(new GainAbilityAllEffect(
                 IndestructibleAbility.getInstance(), Duration.EndOfTurn,

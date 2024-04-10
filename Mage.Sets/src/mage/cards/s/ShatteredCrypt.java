@@ -14,6 +14,7 @@ import mage.game.Game;
 import mage.target.Target;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetadjustment.TargetAdjuster;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -29,7 +30,7 @@ public final class ShatteredCrypt extends CardImpl {
         Effect effect = new ReturnFromGraveyardToHandTargetEffect();
         effect.setText("Return X target creature cards from your graveyard to your hand");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(ManacostVariableValue.REGULAR));
+        this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(ManacostVariableValue.instance));
         this.getSpellAbility().setTargetAdjuster(ShatteredCryptAdjuster.instance);
     }
 
@@ -49,7 +50,7 @@ enum ShatteredCryptAdjuster implements TargetAdjuster {
     @Override
     public void adjustTargets(Ability ability, Game game) {
         ability.getTargets().clear();
-        int xValue = ability.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, ability, "X", 0);
         Target target = new TargetCardInYourGraveyard(xValue, new FilterCreatureCard((xValue != 1 ? " creature cards" : "creature card") + " from your graveyard"));
         ability.addTarget(target);
     }

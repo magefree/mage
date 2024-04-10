@@ -60,6 +60,6 @@ enum InvasionOfIkoriaPredicate implements ObjectSourcePlayerPredicate<Card> {
     @Override
     public boolean apply(ObjectSourcePlayer<Card> input, Game game) {
         return input.getObject().getManaValue()
-                <= ManacostVariableValue.ETB.calculate(game, input.getSource(), null);
+                <= ManacostVariableValue.instance.calculate(game, input.getSource(), null);
     }
 }

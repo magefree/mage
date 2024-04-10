@@ -16,6 +16,7 @@ import mage.game.permanent.token.ZombieToken;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetadjustment.TargetAdjuster;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -50,7 +51,7 @@ enum MidnightRitualAdjuster implements TargetAdjuster {
     @Override
     public void adjustTargets(Ability ability, Game game) {
         ability.getTargets().clear();
-        ability.addTarget(new TargetCardInYourGraveyard(ability.getManaCostsToPay().getX(), StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
+        ability.addTarget(new TargetCardInYourGraveyard(CardUtil.getSourceCostsTag(game, ability, "X", 0), StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
     }
 }
 

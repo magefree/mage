@@ -11,6 +11,7 @@ import mage.constants.CardType;
 import mage.game.Game;
 import mage.target.common.TargetAnyTarget;
 import mage.target.targetadjustment.TargetAdjuster;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -19,7 +20,7 @@ import java.util.UUID;
  */
 public final class CrackleWithPower extends CardImpl {
 
-    private static final DynamicValue value = new MultipliedValue(ManacostVariableValue.REGULAR, 5);
+    private static final DynamicValue value = new MultipliedValue(ManacostVariableValue.instance, 5);
 
     public CrackleWithPower(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{X}{X}{R}{R}");
@@ -47,6 +48,6 @@ enum CrackleWithPowerAdjuster implements TargetAdjuster {
     @Override
     public void adjustTargets(Ability ability, Game game) {
         ability.getTargets().clear();
-        ability.addTarget(new TargetAnyTarget(0, ability.getManaCostsToPay().getX()));
+        ability.addTarget(new TargetAnyTarget(0, CardUtil.getSourceCostsTag(game, ability, "X", 0)));
     }
 }

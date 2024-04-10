@@ -11,13 +11,17 @@ import mage.abilities.effects.common.RevealLibraryPickControllerEffect;
 import mage.abilities.keyword.ChannelAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.PutCards;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetadjustment.TargetAdjuster;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -76,6 +80,6 @@ enum ShigekiJukaiVisionaryAdjuster implements TargetAdjuster {
     @Override
     public void adjustTargets(Ability ability, Game game) {
         ability.getTargets().clear();
-        ability.addTarget(new TargetCardInYourGraveyard(ability.getManaCostsToPay().getX(), filter));
+        ability.addTarget(new TargetCardInYourGraveyard(CardUtil.getSourceCostsTag(game, ability, "X", 0), filter));
     }
 }

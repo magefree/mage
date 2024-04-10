@@ -4,6 +4,7 @@ import mage.abilities.Ability;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.target.TargetPermanent;
+import mage.util.CardUtil;
 
 /**
  *
@@ -14,7 +15,7 @@ public enum XTargetsAdjuster implements TargetAdjuster {
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        int xValue = ability.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, ability, "X", 0);
         FilterPermanent permanentFilter = ((TargetPermanent) ability.getTargets().get(0)).getFilter();
         ability.getTargets().clear();
         ability.addTarget(new TargetPermanent(xValue, permanentFilter));
