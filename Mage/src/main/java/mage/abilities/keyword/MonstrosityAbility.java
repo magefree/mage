@@ -2,7 +2,9 @@ package mage.abilities.keyword;
 
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
+import mage.abilities.costs.CostAdjuster;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.hint.common.MonstrousHint;
 import mage.constants.Outcome;
@@ -53,6 +55,14 @@ public class MonstrosityAbility extends ActivatedAbilityImpl {
         this.monstrosityValue = monstrosityValue;
 
         this.addHint(MonstrousHint.instance);
+    }
+
+    public MonstrosityAbility(String manaString, int monstrosityValue, CostAdjuster costAdjuster, String costAdjusterText) {
+        this(manaString, monstrosityValue);
+        for (Effect effect : getEffects()) {
+            effect.setText("Monstrosity " + monstrosityValue + ". " + costAdjusterText);
+        }
+        setCostAdjuster(costAdjuster);
     }
 
     protected MonstrosityAbility(final MonstrosityAbility ability) {
