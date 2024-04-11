@@ -364,7 +364,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
     }
 
     @Override
-    public void setOptional() {
+    public TriggeredAbility setOptional() {
         this.optional = true;
 
         if (getEffects().stream().filter(
@@ -374,6 +374,8 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
                     "DoIfCostPaid effect must have only one optional settings, but it have two (trigger + DoIfCostPaid): "
                             + this.getClass().getSimpleName());
         }
+
+        return this;
     }
 
     @Override
