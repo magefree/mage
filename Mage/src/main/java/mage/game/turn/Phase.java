@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -255,6 +256,22 @@ public abstract class Phase implements Serializable {
             } else {
                 return;
             }
+        }
+    }
+
+    /**
+     * One card [[Okea, Splitter of Seconds]], adds extra beginning phases with
+     * all but upkeep steps skipped.
+     * To achieve that, this function is called right after creating the extra Phase,
+     * before running it.
+     */
+    public void keepOnlyStep(PhaseStep step) {
+        if (count != 0) {
+            throw new IllegalStateException("Wrong code usage: illegal Phase modification once it started running");
+        }
+        this.steps = this.steps.stream().filter(s -> s.getType().equals(step)).collect(Collectors.toList());
+        if (this.steps.isEmpty()) {
+            throw new IllegalStateException("Wrong code usage: keepOnlyStep should not remove all the steps in a phase - " + step);
         }
     }
 

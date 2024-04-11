@@ -8,13 +8,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.SuperType;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.turn.TurnMod;
-import mage.game.turn.UpkeepStep;
 
 import java.util.UUID;
 
@@ -76,7 +72,10 @@ class ObekaSplitterOfSecondsEffect extends OneShotEffect {
             return false;
         }
         for (int i = 0; i < extraSteps; ++i) {
-            game.getState().getTurnMods().add(new TurnMod(source.getControllerId()).withExtraStep(new UpkeepStep()));
+            game.getState().getTurnMods().add(
+                    new TurnMod(source.getControllerId())
+                            .withExtraStepInExtraPhase(PhaseStep.UPKEEP, TurnPhase.BEGINNING)
+            );
         }
         return true;
     }
