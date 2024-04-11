@@ -15,7 +15,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  */
 public class BanisherPriestTest extends CardTestPlayerBase {
 
-   /**
+    /**
      * If Banisher Priest leaves the battlefield before its enters-the-battlefield
      * ability resolves, the target creature won't be exiled.
      */
@@ -36,10 +36,13 @@ public class BanisherPriestTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Rockslide Elemental");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Banisher Priest");
+        addTarget(playerA, "Rockslide Elemental");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, 1);  // Let Banisher Priest enter the battlefield, but don't let its ETB ability resolve
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Incinerate", "Banisher Priest");
+        setChoice(playerB, true); // put +1/+1
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
@@ -59,6 +62,7 @@ public class BanisherPriestTest extends CardTestPlayerBase {
     /**
      * Check that the returning target did not trigger the dies Event of
      * the dying Banisher Priest
+     * TODO: will fail until non-stack delayed triggers reworked, search: state.addTriggeredAbility
      */
     @Test
     public void testReturningTargetDoesNotTriggerDieEventOfBanisherPriest() {
@@ -76,10 +80,17 @@ public class BanisherPriestTest extends CardTestPlayerBase {
          */
         addCard(Zone.BATTLEFIELD, playerB, "Rockslide Elemental");
 
+        // cast priest and exile elemental
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Banisher Priest");
+        addTarget(playerA, "Rockslide Elemental"); // exile
 
+        // destroy priest and return elemental without dies triggers (priest dies before returning)
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Incinerate", "Banisher Priest");
+        checkStackSize("before die", 1, PhaseStep.POSTCOMBAT_MAIN, playerB, 1); // Cast Incinerate
+        waitStackResolved(1, PhaseStep.POSTCOMBAT_MAIN, playerB, true);
+        checkStackSize("before die", 1, PhaseStep.POSTCOMBAT_MAIN, playerB, 0); // no triggers
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
@@ -116,12 +127,11 @@ public class BanisherPriestTest extends CardTestPlayerBase {
          */
         addCard(Zone.BATTLEFIELD, playerB, "Seance");
 
-        setStrictChooseMode(true);
-
         setChoice(playerB, "Yes");
         addTarget(playerB, "Banisher Priest"); // Return the Banisher Priest from graveyard with Seance
         addTarget(playerB, "Silvercoat Lion");
 
+        setStrictChooseMode(true);
         setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
         execute();
 
