@@ -101,7 +101,7 @@ public class AttachmentTest extends CardTestPlayerBase {
      * that an "Enchant land" aura cannot be attached to a nonland creature.
      */
     @Test
-    public void testIllegalAttachmentDenied() {
+    public void testDeniedMoveIllegalAuraTarget() {
         setStrictChooseMode(true);
 
         addCard(Zone.BATTLEFIELD, playerA, codsworth);
@@ -118,5 +118,33 @@ public class AttachmentTest extends CardTestPlayerBase {
 
         assertGraveyardCount(playerA, "Wild Growth", 0);
         assertAttachedTo(playerA, "Wild Growth", "Forest", true);
+    }
+
+    /**
+     * Tests that an equipment cannot be moved to a noncreature permanent.
+     * Equipment should remain attached to whatever it was attached to.
+     */
+    @Test
+    public void testDeniedMoveIllegalEquipmentTarget() {
+        setStrictChooseMode(true);
+
+        addCard(Zone.BATTLEFIELD, playerA, codsworth);
+        addCard(Zone.BATTLEFIELD, playerA, "Bonesplitter"); // Equip {1}
+        addCard(Zone.BATTLEFIELD, playerA, "Bonebreaker Giant"); // Arbitrary creature
+        addCard(Zone.BATTLEFIELD, playerA, "Vedalken Orrery"); // You may cast spells as though they had flash
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
+        addCard(Zone.HAND, playerA, "One with the Stars"); // Enchanted permanent loses creature type
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip {1}", codsworth);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Attach", "Bonesplitter");
+        addTarget(playerA, "Bonebreaker Giant");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "One with the Stars", "Bonebreaker Giant");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertAttachedTo(playerA, "Bonesplitter", codsworth, true);
+        assertGraveyardCount(playerA, 0);
     }
 }
