@@ -45,14 +45,7 @@ public final class GrimGiganotosaurus extends CardImpl {
         this.toughness = new MageInt(10);
 
         // {10}{B}{G}: Monstrosity 10. This ability costs {1} less to activate for each creature with power 4 or greater your opponents control.
-        // Based on Nemesis of Mortals
-        int monstrosityValue = 10;
-        Ability ability = new MonstrosityAbility("{10}{B}{G}", monstrosityValue);
-        for (Effect effect : ability.getEffects()) {
-            effect.setText("Monstrosity " + monstrosityValue + ". This ability costs {1} less to activate for each creature with power 4 or greater your opponents control.");
-        }
-        ability.setCostAdjuster(GrimGiganotosaurusAdjuster.instance);
-        this.addAbility(ability);
+        this.addAbility(new GrimGigantosaurusAbility());
 
         // When Grim Giganotosaurus becomes monstrous, destroy all artifacts and creatures other than Grim Giganotosaurus.
         this.addAbility(new BecomesMonstrousSourceTriggeredAbility(new DestroyAllEffect(filter)));
@@ -65,6 +58,20 @@ public final class GrimGiganotosaurus extends CardImpl {
     @Override
     public GrimGiganotosaurus copy() {
         return new GrimGiganotosaurus(this);
+    }
+}
+
+// Based on Nemesis of Mortals
+class GrimGigantosaurusAbility extends MonstrosityAbility {
+
+    private static final int monstrosityValue = 10;
+
+    public GrimGigantosaurusAbility() {
+        super("{10}{B}{G}", monstrosityValue);
+        for (Effect effect : getEffects()) {
+            effect.setText("Monstrosity " + monstrosityValue + ". This ability costs {1} less to activate for each creature with power 4 or greater your opponents control.");
+        }
+        setCostAdjuster(GrimGiganotosaurusAdjuster.instance);
     }
 }
 
