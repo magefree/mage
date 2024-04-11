@@ -158,6 +158,7 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Island", 319, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Isolated Chapel", 269, Rarity.RARE, mage.cards.i.IsolatedChapel.class));
         cards.add(new SetCardInfo("Jungle Shrine", 270, Rarity.UNCOMMON, mage.cards.j.JungleShrine.class));
+        cards.add(new SetCardInfo("Junk Jet", 60, Rarity.RARE, mage.cards.j.JunkJet.class));
         cards.add(new SetCardInfo("Junktown", 150, Rarity.RARE, mage.cards.j.Junktown.class));
         cards.add(new SetCardInfo("Keeper of the Accord", 164, Rarity.RARE, mage.cards.k.KeeperOfTheAccord.class));
         cards.add(new SetCardInfo("Kellogg, Dangerous Mind", 106, Rarity.RARE, mage.cards.k.KelloggDangerousMind.class, NON_FULL_USE_VARIOUS));
