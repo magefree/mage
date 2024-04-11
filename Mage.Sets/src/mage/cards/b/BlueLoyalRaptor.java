@@ -82,7 +82,7 @@ class BlueLoyalRaptorEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
         Permanent targetPermanent = ((EntersTheBattlefieldEvent) event).getTarget();
         if (sourcePermanent == null || targetPermanent == null) {
             return false;
