@@ -394,7 +394,6 @@ public class PlayerPanelExt extends javax.swing.JPanel {
             String countryName = CountryUtil.getCountryName(flagName);
             basicTooltipText = "<HTML>Name: " + player.getName()
                     + "<br/>Flag: " + (countryName == null ? "Unknown" : countryName)
-                    + "<br/>Deck hash code: " + player.getDeckHashCode()
                     + "<br/>This match wins: " + player.getWins() + " of " + player.getWinsNeeded() + " (to win the match)";
         }
 

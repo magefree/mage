@@ -31,7 +31,8 @@ public final class TemptedByTheOriq extends CardImpl {
                 .setTargetPointer(new EachTargetPointer())
                 .setText("for each opponent, gain control of up to one target creature " +
                         "or planeswalker that player controls with mana value 3 or less"));
-        this.getSpellAbility().setTargetAdjuster(new EachOpponentPermanentTargetsAdjuster(new TargetPermanent(0, 1, filter)));
+        this.getSpellAbility().setTargetAdjuster(new EachOpponentPermanentTargetsAdjuster());
+        this.getSpellAbility().addTarget(new TargetPermanent(0, 1, filter));
     }
 
     private TemptedByTheOriq(final TemptedByTheOriq card) {

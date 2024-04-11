@@ -1,6 +1,7 @@
 package mage.cards.h;
 
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.keyword.MyriadAbility;
@@ -31,11 +32,14 @@ public final class HammersOfMoradin extends CardImpl {
         this.addAbility(new MyriadAbility());
 
         // Whenever Hammers of Moradin attacks, for each opponent, tap up to one target creature that player controls.
-        this.addAbility(new AttacksTriggeredAbility(
+        Ability ability = new AttacksTriggeredAbility(
                 new TapTargetEffect()
                         .setTargetPointer(new EachTargetPointer())
                         .setText("for each opponent, tap up to one target creature that player controls")
-        ).setTargetAdjuster(new EachOpponentPermanentTargetsAdjuster(new TargetCreaturePermanent(0,1))));
+        );
+        ability.setTargetAdjuster(new EachOpponentPermanentTargetsAdjuster());
+        ability.addTarget(new TargetCreaturePermanent(0,1));
+        this.addAbility(ability);
     }
 
     private HammersOfMoradin(final HammersOfMoradin card) {

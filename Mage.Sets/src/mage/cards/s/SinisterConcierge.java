@@ -84,8 +84,7 @@ class SinisterConciergeEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Card card = game.getCard(source.getSourceId());
-        Permanent targetCreature = game.getPermanent(this.getTargetPointer().getFirst(game, source));
-        if (controller == null || card == null || targetCreature == null) {
+        if (controller == null || card == null) {
             return false;
         }
 
@@ -97,6 +96,11 @@ class SinisterConciergeEffect extends OneShotEffect {
             if (sourceCardShouldGetSuspend && !card.getAbilities(game).containsClass(SuspendAbility.class)) {
                 game.addEffect(new GainSuspendEffect(new MageObjectReference(card, game)), source);
             }
+        }
+
+        Permanent targetCreature = game.getPermanent(this.getTargetPointer().getFirst(game, source));
+        if (targetCreature == null){
+            return false;
         }
 
         // Exile, put time counters, and give suspend for target

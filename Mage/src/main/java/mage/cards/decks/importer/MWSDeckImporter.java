@@ -5,6 +5,8 @@ import mage.cards.decks.DeckCardLists;
 import mage.cards.repository.CardInfo;
 
 /**
+ * Deck import: Magic Workstation app
+ *
  * @author BetaSteward_at_googlemail.com
  */
 public class MWSDeckImporter extends PlainTextDeckImporter {

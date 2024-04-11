@@ -46,7 +46,8 @@ public final class SylvanPrimordial extends CardImpl {
 
         // When Sylvan Primordial enters the battlefield, for each opponent, destroy target noncreature permanent that player controls. For each permanent destroyed this way, search your library for a Forest card and put that card onto the battlefield tapped. Then shuffle your library.
         Ability ability = new EntersBattlefieldTriggeredAbility(new SylvanPrimordialEffect(), false);
-        ability.setTargetAdjuster(new EachOpponentPermanentTargetsAdjuster(new TargetPermanent(filter)));
+        ability.setTargetAdjuster(new EachOpponentPermanentTargetsAdjuster());
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 
