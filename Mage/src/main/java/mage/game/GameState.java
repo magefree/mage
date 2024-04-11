@@ -1176,8 +1176,6 @@ public class GameState implements Serializable, Copyable<GameState> {
 
     public void addTriggeredAbility(TriggeredAbility ability) {
         this.triggered.add(ability);
-        System.out.println("added: " + triggered.size());
-        System.out.println(triggered.stream().map(Ability::toString).collect(Collectors.joining("\r\n")));
     }
 
     public void removeTriggeredAbility(TriggeredAbility ability) {
