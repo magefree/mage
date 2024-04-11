@@ -72,6 +72,9 @@ public class DrawNthCardTriggeredAbility extends TriggeredAbilityImpl {
                     return false;
                 }
                 break;
+            case ANY:
+                // Doesn't matter who
+                break;
             default:
                 throw new IllegalArgumentException("TargetController " + targetController + " not supported");
         }
