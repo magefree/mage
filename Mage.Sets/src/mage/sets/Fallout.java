@@ -108,6 +108,7 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Dr. Madison Li", 3, Rarity.MYTHIC, mage.cards.d.DrMadisonLi.class));
         cards.add(new SetCardInfo("Dragonskull Summit", 261, Rarity.RARE, mage.cards.d.DragonskullSummit.class));
         cards.add(new SetCardInfo("Drowned Catacomb", 262, Rarity.RARE, mage.cards.d.DrownedCatacomb.class));
+        cards.add(new SetCardInfo("Elder Arthur Maxson", 102, Rarity.RARE, mage.cards.e.ElderArthurMaxson.class));
         cards.add(new SetCardInfo("Elder Owyn Lyons", 103, Rarity.UNCOMMON, mage.cards.e.ElderOwynLyons.class));
         cards.add(new SetCardInfo("Electrosiphon", 104, Rarity.RARE, mage.cards.e.Electrosiphon.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Electrosiphon", 414, Rarity.RARE, mage.cards.e.Electrosiphon.class, NON_FULL_USE_VARIOUS));
