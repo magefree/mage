@@ -70,7 +70,7 @@ class PreWarFormalwerEffect extends OneShotEffect {
     PreWarFormalwerEffect() {
         super(Outcome.PutCreatureInPlay);
         staticText = "return target creature card with mana value 3 or less from your graveyard "
-                + "to the battlefield and attach Pre-War Formalwear to it";
+                + "to the battlefield and attach {this} to it";
     }
 
     private PreWarFormalwerEffect(final PreWarFormalwerEffect effect) {

@@ -31,6 +31,7 @@ import mage.game.permanent.token.CatWarrior21Token;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetAnyTarget;
+import mage.util.CardUtil;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -154,19 +155,16 @@ class AjaniNacatlAvengerMinusFourEffect extends OneShotEffect {
         }
 
         List<Player> playerList = game
-                .getState()
-                .getPlayersInRange(source.getControllerId(), game)
+                .getOpponents(controller.getId())
                 .stream()
                 .map(game::getPlayer)
                 .filter(Objects::nonNull)
-                .filter(player -> controller.hasOpponent(player.getId(), game))
                 .collect(Collectors.toList());
 
         Set<UUID> toKeep = new HashSet<>();
         for (Player player : playerList) {
             for (CardType cardType : cardTypes) {
-                String message = cardType.toString().equals("Artifact") ? "an " : "a ";
-                message += cardType.toString().toLowerCase(Locale.ENGLISH);
+                String message = CardUtil.addArticle(cardType.toString());
                 FilterPermanent filter = new FilterNonlandPermanent(message);
                 filter.add(cardType.getPredicate());
                 filter.add(new ControllerIdPredicate(player.getId()));
