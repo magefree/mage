@@ -63,7 +63,7 @@ class HeadlinerScarlettEntersEffect extends OneShotEffect {
 
     HeadlinerScarlettEntersEffect() {
         super(Outcome.Detriment);
-        staticText = "Creatures target player controls can't block this turn.";
+        staticText = "creatures target player controls can't block this turn";
     }
 
     private HeadlinerScarlettEntersEffect(final HeadlinerScarlettEntersEffect effect) {

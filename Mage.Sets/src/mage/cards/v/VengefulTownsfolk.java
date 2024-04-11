@@ -37,8 +37,8 @@ public final class VengefulTownsfolk extends CardImpl {
         // Whenever one or more other creatures you control die, put a +1/+1 counter on Vengeful Townsfolk.
         this.addAbility(new DiesOneOrMoreCreatureTriggeredAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)),
-                filter
-        ));
+                filter,
+                false));
     }
 
     private VengefulTownsfolk(final VengefulTownsfolk card) {

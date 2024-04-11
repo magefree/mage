@@ -88,7 +88,7 @@ class AjaniNacatlAvengerZeroEffect extends OneShotEffect {
 
     AjaniNacatlAvengerZeroEffect() {
         super(Outcome.PutCreatureInPlay);
-        staticText = "Create a 2/1 white Car Warrior creature token. "
+        staticText = "Create a 2/1 white Cat Warrior creature token. "
                 + "When you do, if you control a red permanent other than {this}, "
                 + "he deals damage equal to the number of creatures you control to any target.";
     }
@@ -162,7 +162,7 @@ class AjaniNacatlAvengerMinusFourEffect extends OneShotEffect {
                 .filter(player -> controller.hasOpponent(player.getId(), game))
                 .collect(Collectors.toList());
 
-        Set<UUID> toKeep = new HashSet();
+        Set<UUID> toKeep = new HashSet<>();
         for (Player player : playerList) {
             for (CardType cardType : cardTypes) {
                 String message = cardType.toString().equals("Artifact") ? "an " : "a ";

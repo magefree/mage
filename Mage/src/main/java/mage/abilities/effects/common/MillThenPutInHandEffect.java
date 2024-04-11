@@ -132,13 +132,17 @@ public class MillThenPutInHandEffect extends OneShotEffect {
             return staticText;
         }
         StringBuilder sb = new StringBuilder("mill ");
-        sb.append(CardUtil.numberToText(amount));
-        sb.append(" cards. ");
+        if (amount == 1) {
+            sb.append("a card. ");
+        } else {
+            sb.append(CardUtil.numberToText(amount));
+            sb.append(" cards. ");
+        }
         sb.append(optional ? "You may " : "Then ");
         sb.append("put ");
         if (maxAmountReturned > 1) {
             sb.append(optional ? "up to " : "");
-            sb.append(CardUtil.numberToText(maxAmountReturned) + " ");
+            sb.append(CardUtil.numberToText(maxAmountReturned)).append(" ");
         }
         sb.append(filter.getMessage());
         sb.append(" from among ");
