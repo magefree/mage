@@ -31,7 +31,7 @@ import mage.util.CardUtil;
  */
 public final class GrimGiganotosaurus extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("artifacts and creatures other than Grim Giganotosaurus");
+    private static final FilterPermanent filter = new FilterPermanent("artifacts and creatures other than {this}");
     static {
         filter.add(AnotherPredicate.instance);
         filter.add(Predicates.or(CardType.ARTIFACT.getPredicate(), CardType.CREATURE.getPredicate()));
