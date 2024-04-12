@@ -28,10 +28,10 @@ import java.util.stream.Collectors;
  */
 public class ExileFaceDownYouMayCastAsLongAsExiledEffect extends OneShotEffect {
 
-    private final boolean castNotPlay;
+    private final boolean useCastSpellOnly;
     private final CastManaAdjustment manaAdjustment;
 
-    public ExileFaceDownYouMayCastAsLongAsExiledEffect(boolean castNotPlay, CastManaAdjustment manaAdjustment) {
+    public ExileFaceDownYouMayCastAsLongAsExiledEffect(boolean useCastSpellOnly, CastManaAdjustment manaAdjustment) {
         super(Outcome.Exile);
         switch (manaAdjustment) {
             case NONE:
@@ -43,13 +43,13 @@ public class ExileFaceDownYouMayCastAsLongAsExiledEffect extends OneShotEffect {
             default:
                 throw new IllegalArgumentException("Wrong code usage, manaAdjustment is not yet supported: " + manaAdjustment);
         }
-        this.castNotPlay = castNotPlay;
+        this.useCastSpellOnly = useCastSpellOnly;
     }
 
     private ExileFaceDownYouMayCastAsLongAsExiledEffect(final ExileFaceDownYouMayCastAsLongAsExiledEffect effect) {
         super(effect);
         this.manaAdjustment = effect.manaAdjustment;
-        this.castNotPlay = effect.castNotPlay;
+        this.useCastSpellOnly = effect.useCastSpellOnly;
     }
 
     @Override
@@ -80,12 +80,12 @@ public class ExileFaceDownYouMayCastAsLongAsExiledEffect extends OneShotEffect {
                 card.setFaceDown(true, game);
                 switch (manaAdjustment) {
                     case NONE:
-                        CardUtil.makeCardPlayable(game, source, card, castNotPlay, Duration.Custom, false, controller.getId(), null);
+                        CardUtil.makeCardPlayable(game, source, card, useCastSpellOnly, Duration.Custom, false, controller.getId(), null);
                         break;
                     case AS_THOUGH_ANY_MANA_TYPE:
                     case AS_THOUGH_ANY_MANA_COLOR:
                         // TODO: untangle why there is a confusion between the two.
-                        CardUtil.makeCardPlayable(game, source, card, castNotPlay, Duration.Custom, true, controller.getId(), null);
+                        CardUtil.makeCardPlayable(game, source, card, useCastSpellOnly, Duration.Custom, true, controller.getId(), null);
                         break;
                     case WITHOUT_PAYING_MANA_COST: // TODO.
                     default:

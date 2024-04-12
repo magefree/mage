@@ -27,13 +27,13 @@ public class CanPlayCardControllerEffect extends AsThoughEffectImpl {
     protected final UUID playerId;
     protected final Condition condition;
 
-    public CanPlayCardControllerEffect(Game game, UUID cardId, int cardZCC, boolean castNotPlay, Duration duration) {
-        this(game, cardId, cardZCC, castNotPlay, duration, null, null);
+    public CanPlayCardControllerEffect(Game game, UUID cardId, int cardZCC, boolean useCastSpellOnly, Duration duration) {
+        this(game, cardId, cardZCC, useCastSpellOnly, duration, null, null);
     }
 
-    public CanPlayCardControllerEffect(Game game, UUID cardId, int cardZCC, boolean castNotPlay, Duration duration, UUID playerId, Condition condition) {
-        super(castNotPlay ? AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE : AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, duration, Outcome.Benefit);
-        this.staticText = castNotPlay ? "You may cast this card" : "You may play this card";
+    public CanPlayCardControllerEffect(Game game, UUID cardId, int cardZCC, boolean useCastSpellOnly, Duration duration, UUID playerId, Condition condition) {
+        super(useCastSpellOnly ? AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE : AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, duration, Outcome.Benefit);
+        this.staticText = useCastSpellOnly ? "You may cast this card" : "You may play this card";
         this.mor = new MageObjectReference(cardId, cardZCC, game);
         this.playerId = playerId;
         this.condition = condition;
