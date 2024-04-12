@@ -275,4 +275,7 @@ public abstract class Phase implements Serializable {
         }
     }
 
+    public String toString() {
+        return type.toString();
+    }
 }
