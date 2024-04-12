@@ -147,4 +147,79 @@ public class AttachmentTest extends CardTestPlayerBase {
         assertAttachedTo(playerA, "Bonesplitter", codsworth, true);
         assertGraveyardCount(playerA, 0);
     }
+
+    /**
+     * Tests that an enchant ability prohibition not pertaining to card type is respected when trying to move an aura.
+     * In this case, an "Enchant creature you don't control" aura shouldn't be movable to a controlled creature.
+     */
+    @Test
+    public void testDeniedMoveIllegalAuraTargetNotCardType() {
+        setStrictChooseMode(true);
+
+        addCard(Zone.BATTLEFIELD, playerA, codsworth);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 4);
+        addCard(Zone.HAND, playerA, "Captured by the Consulate"); // Enchant creature you don't control
+        addCard(Zone.BATTLEFIELD, playerB, "Pia Nalaar"); // Arbitrary creature
+
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {W}.", 4);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Captured by the Consulate", "Pia Nalaar");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Attach", "Captured by the Consulate");
+        addTarget(playerA, codsworth);
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerA, 0);
+        assertAttachedTo(playerB, "Captured by the Consulate", "Pia Nalaar", true);
+    }
+
+    /**
+     * Tests that an aura that attaches to a player (specifically an opponent in this case) cannot attach to a permanent.
+     */
+    @Test
+    public void testDeniedMoveIllegalPlayerAuraTarget() {
+        setStrictChooseMode(true);
+
+        addCard(Zone.BATTLEFIELD, playerA, codsworth);
+        addCard(Zone.HAND, playerA, "Psychic Possession"); // Enchant opponent
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
+
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {U}.", 4);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Psychic Possession", playerB);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Attach", "Psychic Possession");
+        addTarget(playerA, codsworth);
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerA, "Psychic Possession", 0); // TODO: Currently, the aura goes to graveyard. Must fix
+        assertAttachedTo(playerA, "Psychic Possession", codsworth, false);
+    }
+
+    /**
+     * Tests that an aura that attaches to a card in the graveyard cannot attach to a permanent.
+     */
+    @Test
+    public void testDeniedMoveIllegalCardAuraTarget() {
+        setStrictChooseMode(true);
+
+        addCard(Zone.BATTLEFIELD, playerA, codsworth);
+        addCard(Zone.HAND, playerA, "Spellweaver Volute"); // Enchant instant card in graveyard
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
+        addCard(Zone.GRAVEYARD, playerA, "Counterspell"); // Arbitrary instant
+
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {U}.", 5);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Spellweaver Volute", "Counterspell");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Attach", "Spellweaver Volute");
+        addTarget(playerA, codsworth);
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerA, "Spellweaver Volute", 0); // TODO: Currently goes to graveyard. Must fix
+        assertAttachedTo(playerA, "Spellweaver Volute", codsworth, false);
+    }
 }
