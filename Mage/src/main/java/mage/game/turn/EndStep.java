@@ -26,4 +26,7 @@ public class EndStep extends Step {
         return new EndStep(this);
     }
 
+    public String toString() {
+        return "end";
+    }
 }

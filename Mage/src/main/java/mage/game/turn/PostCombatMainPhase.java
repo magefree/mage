@@ -27,4 +27,7 @@ public class PostCombatMainPhase extends Phase {
         return new PostCombatMainPhase(this);
     }
 
+    public String toString() {
+        return "post-combat main";
+    }
 }

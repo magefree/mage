@@ -2,12 +2,12 @@
 
 package mage.game.turn;
 
-import java.util.UUID;
-
 import mage.constants.PhaseStep;
 import mage.game.Game;
 import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -51,4 +51,7 @@ public class CleanupStep extends Step {
         return new CleanupStep(this);
     }
 
+    public String toString() {
+        return "cleanup";
+    }
 }

@@ -1,11 +1,11 @@
 
 package mage.game.turn;
 
-import java.util.UUID;
-
 import mage.constants.PhaseStep;
 import mage.game.Game;
 import mage.game.events.GameEvent.EventType;
+
+import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -54,4 +54,7 @@ public class DeclareBlockersStep extends Step {
         return new DeclareBlockersStep(this);
     }
 
+    public String toString() {
+        return "declare blockers";
+    }
 }

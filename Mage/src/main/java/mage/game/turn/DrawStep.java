@@ -45,5 +45,8 @@ public class DrawStep extends Step {
         return new DrawStep(this);
     }
 
+    public String toString() {
+        return "draw";
+    }
 
 }
