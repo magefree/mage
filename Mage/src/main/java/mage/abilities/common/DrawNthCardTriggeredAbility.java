@@ -90,6 +90,8 @@ public class DrawNthCardTriggeredAbility extends TriggeredAbilityImpl {
                 return "Whenever a player draws their " + CardUtil.numberToOrdinalText(cardNumber) + " card during their turn, ";
             case OPPONENT:
                 return "Whenever an opponent draws their " + CardUtil.numberToOrdinalText(cardNumber) + " card each turn, ";
+            case ANY:
+                return "Whenever a player draws their " + CardUtil.numberToOrdinalText(cardNumber) + " card each turn, ";
             default:
                 throw new IllegalArgumentException("TargetController " + targetController + " not supported");
         }
