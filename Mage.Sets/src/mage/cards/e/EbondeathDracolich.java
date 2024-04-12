@@ -1,17 +1,16 @@
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
-import mage.cards.Card;
-import mage.constants.*;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.FlyingAbility;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.NamePredicate;
@@ -20,8 +19,9 @@ import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.watchers.Watcher;
 
+import java.util.UUID;
+
 /**
- *
  * @author weirddan455
  */
 public final class EbondeathDracolich extends CardImpl {
@@ -61,7 +61,7 @@ public final class EbondeathDracolich extends CardImpl {
 class EbondeathDracolichEffect extends AsThoughEffectImpl {
 
     EbondeathDracolichEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
         this.staticText = "You may cast {this} from your graveyard if a creature not named Ebondeath, Dracolich died this turn";
     }
 

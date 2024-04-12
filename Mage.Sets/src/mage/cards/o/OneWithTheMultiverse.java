@@ -77,7 +77,7 @@ enum OneWithTheMultiverseCondition implements Condition {
 class OneWithTheMultiverseEffect extends AsThoughEffectImpl {
 
     OneWithTheMultiverseEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.PlayForFree);
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.PlayForFree);
         staticText = "once during each of your turns, you may cast a spell from your hand " +
                 "or the top of your library without paying its mana cost.";
     }

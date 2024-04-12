@@ -95,7 +95,7 @@ class LilianaUntouchedByDeathEffect extends OneShotEffect {
 class LilianaUntouchedByDeathGraveyardEffect extends AsThoughEffectImpl {
 
     LilianaUntouchedByDeathGraveyardEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
         staticText = "You may cast Zombie cards from your graveyard this turn";
     }
 

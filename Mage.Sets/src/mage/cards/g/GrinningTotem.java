@@ -83,7 +83,7 @@ class GrinningTotemSearchAndExileEffect extends OneShotEffect {
         if (card != null) {
             UUID exileZoneId = CardUtil.getCardExileZoneId(game, source);
             you.moveCardsToExile(card, source, game, true, exileZoneId, CardUtil.getSourceName(game, source));
-            CardUtil.makeCardPlayable(game, source, card, Duration.UntilYourNextUpkeepStep, false);
+            CardUtil.makeCardPlayable(game, source, card, false, Duration.UntilYourNextUpkeepStep, false);
             game.addDelayedTriggeredAbility(new GrinningTotemDelayedTriggeredAbility(exileZoneId), source);
         }
         targetOpponent.shuffleLibrary(source, game);

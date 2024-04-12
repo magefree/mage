@@ -98,7 +98,7 @@ class BrainstealerDragonExileEffect extends OneShotEffect {
         player.moveCards(cards, Zone.EXILED, source, game);
         for (Card card : cards.getCards(game)) {
             CardUtil.makeCardPlayable(
-                    game, source, card, Duration.Custom, true,
+                    game, source, card, false, Duration.Custom, true,
                     source.getControllerId(), null
             );
         }

@@ -19,7 +19,6 @@ import mage.util.CardUtil;
 import java.util.UUID;
 
 /**
- *
  * @author L_J
  */
 public final class ElkinBottle extends CardImpl {
@@ -66,7 +65,7 @@ class ElkinBottleExileEffect extends OneShotEffect {
             Card card = controller.getLibrary().getFromTop(game);
             if (card != null) {
                 controller.moveCardsToExile(card, source, game, true, source.getSourceId(), CardUtil.createObjectRealtedWindowTitle(source, game, null));
-                CardUtil.makeCardPlayable(game, source, card, Duration.UntilYourNextUpkeepStep, false);
+                CardUtil.makeCardPlayable(game, source, card, false, Duration.UntilYourNextUpkeepStep, false);
             }
             return true;
         }

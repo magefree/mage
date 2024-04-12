@@ -117,7 +117,7 @@ class IceCauldronExileEffect extends OneShotEffect {
 class IceCauldronCastFromExileEffect extends AsThoughEffectImpl {
 
     IceCauldronCastFromExileEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
         staticText = "You may cast that card for as long as it remains exiled";
     }
 
