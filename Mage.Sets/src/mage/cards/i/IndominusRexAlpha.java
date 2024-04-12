@@ -4,7 +4,10 @@ import java.util.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.Card;
 import mage.cards.CardsImpl;
 import mage.constants.Outcome;
@@ -29,6 +32,8 @@ import mage.target.common.TargetDiscard;
  */
 public final class IndominusRexAlpha extends CardImpl {
 
+    private static final DynamicValue xValue = new CountersSourceCount(null);
+
     public IndominusRexAlpha(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U/B}{U/B}{G}{G}");
         
@@ -44,6 +49,7 @@ public final class IndominusRexAlpha extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new IndominusRexAlphaCountersEffect()));
 
         // When Indominus Rex enters the battlefield, draw a card for each counter on it.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(xValue)));
     }
 
     private IndominusRexAlpha(final IndominusRexAlpha card) {
