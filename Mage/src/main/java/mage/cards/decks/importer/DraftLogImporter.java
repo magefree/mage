@@ -7,6 +7,9 @@ import mage.cards.repository.CardInfo;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Deck import: xmage draft logs
+ */
 public class DraftLogImporter extends PlainTextDeckImporter {
 
     private static final Pattern SET_PATTERN = Pattern.compile("------ (\\p{Alnum}+) ------$");

@@ -328,7 +328,7 @@ public class DeckGeneratorDialog {
             tmp.getParentFile().mkdirs();
             tmp.createNewFile();
             deck.setName(deckName);
-            XMAGE.getExporter().writeDeck(tmp.getAbsolutePath(), deck.getDeckCardLists());
+            XMAGE.getExporter().writeDeck(tmp.getAbsolutePath(), deck.prepareCardsOnlyDeck());
             cleanUp();
             return tmp.getAbsolutePath();
         } catch (Exception e) {

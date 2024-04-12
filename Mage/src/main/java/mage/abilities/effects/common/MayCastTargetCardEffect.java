@@ -37,6 +37,13 @@ public class MayCastTargetCardEffect extends OneShotEffect {
     /**
      * Allows to cast the target card immediately, either for its cost or with a modifier (like for free, or mana as any type).
      */
+    public MayCastTargetCardEffect(CastManaAdjustment manaAdjustment) {
+        this(manaAdjustment, false);
+    }
+
+    /**
+     * Allows to cast the target card immediately, either for its cost or with a modifier (like for free, or mana as any type).
+     */
     public MayCastTargetCardEffect(CastManaAdjustment manaAdjustment, boolean thenExile) {
         this(Duration.OneUse, manaAdjustment, thenExile);
     }

@@ -89,7 +89,7 @@ public class DeckExportClipboardDialog extends MageDialog {
         DeckExporter exporter = formats.get(formatIndex).getExporter();
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        exporter.writeDeck(baos, deck.getDeckCardLists());
+        exporter.writeDeck(baos, deck.prepareCardsOnlyDeck());
         editData.setText(baos.toString());
         editData.setCaretPosition(0);
     }

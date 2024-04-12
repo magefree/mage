@@ -43,7 +43,7 @@ public class XmageInfoDeckExporter extends DeckExporter {
             if (curAmount == 0) {
                 deckMain.add(card);
             }
-            amount.put(code, curAmount + card.getQuantity());
+            amount.put(code, curAmount + card.getAmount());
         }
 
         // Sideboard
@@ -53,16 +53,16 @@ public class XmageInfoDeckExporter extends DeckExporter {
             if (curAmount == 0) {
                 deckSideboard.add(card);
             }
-            amount.put(code, curAmount + card.getQuantity());
+            amount.put(code, curAmount + card.getAmount());
         }
 
         // Cards print
         for (DeckCardInfo card : deckMain) {
             CardInfo cardInfo = CardRepository.instance.findCard(card.getCardName());
             if (cardInfo == null) {
-                out.printf("%d [%s:%s] %s%n\n", amount.get("M@" + card.getCardKey()), card.getSetCode(), card.getCardNum(), card.getCardName());
+                out.printf("%d [%s:%s] %s%n\n", amount.get("M@" + card.getCardKey()), card.getSetCode(), card.getCardNumber(), card.getCardName());
             } else {
-                out.printf("%d [%s:%s] %s ;; %s ;; %s ;; %d %n", amount.get("M@" + card.getCardKey()), card.getSetCode(), card.getCardNum(), card.getCardName(),
+                out.printf("%d [%s:%s] %s ;; %s ;; %s ;; %d %n", amount.get("M@" + card.getCardKey()), card.getSetCode(), card.getCardNumber(), card.getCardName(),
                         cardInfo.getColor().getDescription(), cardInfo.getTypes().toString(), cardInfo.getManaValue());
             }
         }
@@ -70,9 +70,9 @@ public class XmageInfoDeckExporter extends DeckExporter {
         for (DeckCardInfo card : deckSideboard) {
             CardInfo cardInfo = CardRepository.instance.findCard(card.getCardName());
             if (cardInfo == null) {
-                out.printf("SB: %d [%s:%s] %s%n\n", amount.get("S@" + card.getCardKey()), card.getSetCode(), card.getCardNum(), card.getCardName());
+                out.printf("SB: %d [%s:%s] %s%n\n", amount.get("S@" + card.getCardKey()), card.getSetCode(), card.getCardNumber(), card.getCardName());
             } else {
-                out.printf("SB: %d [%s:%s] %s ;; %s ;; %s ;; %d %n", amount.get("S@" + card.getCardKey()), card.getSetCode(), card.getCardNum(), card.getCardName(),
+                out.printf("SB: %d [%s:%s] %s ;; %s ;; %s ;; %d %n", amount.get("S@" + card.getCardKey()), card.getSetCode(), card.getCardNumber(), card.getCardName(),
                         cardInfo.getColor().getDescription(), cardInfo.getTypes().toString(), cardInfo.getManaValue());
             }
         }
@@ -103,7 +103,7 @@ public class XmageInfoDeckExporter extends DeckExporter {
                 out.print("(");
                 for (int i = 0; i < stack.size(); ++i) {
                     DeckCardInfo info = stack.get(i);
-                    out.printf("[%s:%s]", info.getSetCode(), info.getCardNum());
+                    out.printf("[%s:%s]", info.getSetCode(), info.getCardNumber());
                     if (i != stack.size() - 1) {
                         out.print(",");
                     }

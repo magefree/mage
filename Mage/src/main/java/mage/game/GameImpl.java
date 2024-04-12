@@ -2068,12 +2068,16 @@ public abstract class GameImpl implements Game {
         }
         if (ability instanceof TriggeredManaAbility || ability instanceof DelayedTriggeredManaAbility) {
             // 20110715 - 605.4
+            // 605.4a  A triggered mana ability doesn’t go on the stack, so it can’t be targeted,
+            // countered, or otherwise responded to. Rather, it resolves immediately after the mana
+            // ability that triggered it, without waiting for priority.
             Ability manaAbility = ability.copy();
             if (manaAbility.getSourceObjectZoneChangeCounter() == 0) {
                 manaAbility.setSourceObjectZoneChangeCounter(getState().getZoneChangeCounter(ability.getSourceId()));
             }
-            manaAbility.activate(this, false);
-            manaAbility.resolve(this);
+            if (manaAbility.activate(this, false)) {
+                manaAbility.resolve(this);
+            }
         } else {
             TriggeredAbility newAbility = ability.copy();
             newAbility.newId();
@@ -2084,6 +2088,46 @@ public abstract class GameImpl implements Game {
                 newAbility.setSourcePermanentTransformCount(this);
             }
             newAbility.setTriggerEvent(triggeringEvent);
+
+            // TODO: non-stack delayed triggers are xmage's workaround to support specific cards
+            //  instead replacement effects usage. That triggers must be executed immediately like mana abilities
+            //  or be reworked, cause current code do not support rule "nothing happens between the two events,
+            //  including state-based actions"
+            //
+            // Search related cards by "usesStack = false".
+            // See conflicting tests in StateBaseTriggeredAbilityTest and BanisherPriestTest
+            //
+            // example 1:
+            // Grasp of Fate: exile ... until Grasp of Fate leaves the battlefield
+            // The exiled cards return to the battlefield immediately after Grasp of Fate leaves the battlefield. Nothing
+            // happens between the two events, including state-based actions.
+            // (2015-11-04)
+            //
+            // example 2:
+            // Banisher Priest: exile ... until Banisher Priest leaves the battlefield
+            // Banisher Priest's ability causes a zone change with a duration, a new style of ability that's
+            // somewhat reminiscent of older cards like Oblivion Ring. However, unlike Oblivion Ring, cards
+            // like Banisher Priest have a single ability that creates two one-shot effects: one that exiles
+            // the creature when the ability resolves, and another that returns the exiled card to the battlefield
+            // immediately after Banisher Priest leaves the battlefield.
+            // (2013-07-01)
+            // The exiled card returns to the battlefield immediately after Banisher Priest leaves the battlefield.
+            // Nothing happens between the two events, including state-based actions. The two creatures aren't on
+            // the battlefield at the same time. For example, if the returning creature is a Clone, it can't enter
+            // the battlefield as a copy of Banisher Priest.
+            // (2013-07-01)
+            //
+            //
+            /* possible code:
+            if (newAbility.isUsesStack()) {
+                state.addTriggeredAbility(newAbility);
+            } else {
+                if (newAbility.activate(this, false)) {
+                    newAbility.resolve(this);
+                }
+            }//*/
+
+            // original code
             state.addTriggeredAbility(newAbility);
         }
     }

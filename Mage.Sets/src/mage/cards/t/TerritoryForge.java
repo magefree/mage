@@ -64,7 +64,7 @@ class TerritoryForgeStaticEffect extends ContinuousEffectImpl {
 
     TerritoryForgeStaticEffect() {
         super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.Benefit);
-        staticText = "{this} has all activated ability of the exiled card";
+        staticText = "{this} has all activated abilities of the exiled card";
     }
 
     private TerritoryForgeStaticEffect(final TerritoryForgeStaticEffect effect) {

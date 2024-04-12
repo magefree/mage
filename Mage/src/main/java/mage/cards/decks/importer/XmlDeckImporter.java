@@ -18,6 +18,9 @@ import java.util.List;
 
 import static javax.xml.xpath.XPathConstants.NODESET;
 
+/**
+ * Deck import: helper class for all xml base formats
+ */
 public abstract class XmlDeckImporter extends DeckImporter {
 
     private final XPathFactory xpathFactory = XPathFactory.newInstance();

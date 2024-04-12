@@ -96,6 +96,7 @@ public enum ScryfallImageSource implements CardImageSource {
         }
 
         // double faced cards (modal double faces cards too)
+        // meld cards are excluded.
         if (card.isSecondSide()) {
             // back face - must be prepared before
             logger.warn("Can't find back face info in prepared list "

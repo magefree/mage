@@ -170,6 +170,7 @@ public enum CounterType {
     PRESSURE("pressure"),
     PREY("prey"),
     PUPA("pupa"),
+    RAD("rad"),
     REACH("reach"),
     REJECTION("rejection"),
     REPAIR("repair"),

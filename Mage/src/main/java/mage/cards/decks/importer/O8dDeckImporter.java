@@ -13,6 +13,9 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * Deck import: OCTGN app
+ */
 public class O8dDeckImporter extends XmlDeckImporter {
 
     /**
@@ -72,5 +75,4 @@ public class O8dDeckImporter extends XmlDeckImporter {
             }
         };
     }
-
 }

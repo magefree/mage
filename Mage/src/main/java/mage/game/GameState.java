@@ -71,7 +71,6 @@ public class GameState implements Serializable, Copyable<GameState> {
     private final Map<UUID, LookedAt> lookedAt = new HashMap<>();
     private final Revealed companion;
 
-    private DelayedTriggeredAbilities delayed;
     private SpecialActions specialActions;
     private Watchers watchers;
     private Turn turn;
@@ -94,8 +93,9 @@ public class GameState implements Serializable, Copyable<GameState> {
     private boolean gameOver;
     private boolean paused;
     private ContinuousEffects effects;
-    private TriggeredAbilities triggers;
-    private List<TriggeredAbility> triggered = new ArrayList<>();
+    private TriggeredAbilities triggers; // all normal triggers
+    private DelayedTriggeredAbilities delayed; // all delayed triggers
+    private List<TriggeredAbility> triggered = new ArrayList<>(); // raised triggers, waiting to resolve (can contains both normal and delayed)
     private Combat combat;
     private Map<String, Object> values = new HashMap<>();
     private Map<UUID, Zone> zones = new HashMap<>();
@@ -233,6 +233,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     }
 
     public void restore(GameState state) {
+        // no needs in copy here cause GameState already copied on save and it will be used only one time here
         this.activePlayerId = state.activePlayerId;
         this.playerList.setCurrent(state.activePlayerId);
         this.playerByOrderId = state.playerByOrderId;
