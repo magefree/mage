@@ -89,7 +89,7 @@ class HenryWuInGenGeneticistTriggeredAbility extends TriggeredAbilityImpl {
         return exploiter != null && exploited != null
                 && exploiter.isCreature(game)
                 && exploiter.isControlledBy(this.getControllerId())
-                && filterNonHumans.match(exploited, game);
+                && filterNonHumans.match(exploited, getControllerId(), this, game);
     }
 
     @Override
