@@ -2,8 +2,10 @@ package mage.cards.h;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.ExploitAbility;
@@ -16,6 +18,8 @@ import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.token.TreasureToken;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -68,8 +72,8 @@ class HenryWuInGenGeneticistTriggeredAbility extends TriggeredAbilityImpl {
 
     HenryWuInGenGeneticistTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1));
-//        this.addEffect(new ConditionalOneShotEffect());
-        setTriggerPhrase("Whenever a creature you control exploits a " + filterNonHumans.getMessage());
+        this.addEffect(new HenryWuInGenGeneticistEffect());
+        setTriggerPhrase("Whenever a creature you control exploits a " + filterNonHumans.getMessage() + ", ");
     }
 
     private HenryWuInGenGeneticistTriggeredAbility(final HenryWuInGenGeneticistTriggeredAbility ability) {
@@ -86,8 +90,13 @@ class HenryWuInGenGeneticistTriggeredAbility extends TriggeredAbilityImpl {
         Permanent exploiter = game.getPermanentOrLKIBattlefield(event.getSourceId());
         Permanent exploited = game.getPermanentOrLKIBattlefield(event.getTargetId());
 
-        return exploiter != null && exploited != null
-                && exploiter.isCreature(game)
+        if (exploiter == null || exploited == null){
+            return false;
+        }
+
+        getEffects().setTargetPointer(new FixedTarget(exploited.getId()));
+
+        return exploiter.isCreature(game)
                 && exploiter.isControlledBy(this.getControllerId())
                 && filterNonHumans.match(exploited, getControllerId(), this, game);
     }
@@ -95,5 +104,31 @@ class HenryWuInGenGeneticistTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public HenryWuInGenGeneticistTriggeredAbility copy() {
         return new HenryWuInGenGeneticistTriggeredAbility(this);
+    }
+}
+
+class HenryWuInGenGeneticistEffect extends CreateTokenEffect {
+
+    public HenryWuInGenGeneticistEffect() {
+        super(new TreasureToken());
+        staticText = "If the exploited creature had power 3 or greater, create a Treasure token.";
+    }
+
+    @Override
+    public HenryWuInGenGeneticistEffect copy() {
+        return new HenryWuInGenGeneticistEffect(this);
+    }
+
+    protected HenryWuInGenGeneticistEffect(final HenryWuInGenGeneticistEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent exploited = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
+        if (exploited == null || exploited.getPower().getValue() < 3){
+            return false;
+        }
+        return super.apply(game, source);
     }
 }
