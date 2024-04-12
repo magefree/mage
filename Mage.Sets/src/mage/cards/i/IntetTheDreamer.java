@@ -60,7 +60,9 @@ class IntetTheDreamerExileEffect extends OneShotEffect {
 
     IntetTheDreamerExileEffect() {
         super(Outcome.Benefit);
-        staticText = "exile the top card of your library face down. You may play that card without paying its mana cost for as long as Intet remains on the battlefield";
+        staticText = "exile the top card of your library face down. "
+                + "You may look at that card for as long as it remains exiled. "
+                + "You may play that card without paying its mana cost for as long as Intet remains on the battlefield";
     }
 
     private IntetTheDreamerExileEffect(final IntetTheDreamerExileEffect effect) {

@@ -53,7 +53,7 @@ class ThiefOfSanityEffect extends OneShotEffect {
     ThiefOfSanityEffect() {
         super(Outcome.Benefit);
         this.staticText = "look at the top three cards of that player's library, exile one of them face down, then put the rest into their graveyard. "
-                + "For as long as that card remains exiled, you may look at it, you may cast it, and you may spend mana as though it were mana of any type to cast it";
+                + "You may cast that card for as long as it remains exiled, and mana of any type can be spent to cast it";
     }
 
     private ThiefOfSanityEffect(final ThiefOfSanityEffect effect) {

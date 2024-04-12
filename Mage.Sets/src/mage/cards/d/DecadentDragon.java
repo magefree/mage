@@ -41,6 +41,8 @@ public final class DecadentDragon extends AdventureCard {
         // Exile the top two cards of target opponent's library face down. You may look at and play those cards for as long as they remain exiled.
         this.getSpellCard().getSpellAbility().addEffect(
                 new ExileFaceDownTopNLibraryYouMayCastAsLongAsExiledEffect(false, CastManaAdjustment.NONE, 2)
+                        .setText("Exile the top two cards of target opponent's library face down. "
+                                + "You may look at and play those cards for as long as they remain exiled.")
         );
         this.getSpellCard().getSpellAbility().addTarget(new TargetOpponent());
 
