@@ -335,6 +335,10 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Vault 21: House Gambit", 69, Rarity.RARE, mage.cards.v.Vault21HouseGambit.class));
         cards.add(new SetCardInfo("Vault 75: Middle School", 27, Rarity.RARE, mage.cards.v.Vault75MiddleSchool.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vault 75: Middle School", 555, Rarity.RARE, mage.cards.v.Vault75MiddleSchool.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Veronica, Dissident Scribe", 70, Rarity.RARE, mage.cards.v.VeronicaDissidentScribe.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Veronica, Dissident Scribe", 395, Rarity.RARE, mage.cards.v.VeronicaDissidentScribe.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Veronica, Dissident Scribe", 598, Rarity.RARE, mage.cards.v.VeronicaDissidentScribe.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Veronica, Dissident Scribe", 923, Rarity.RARE, mage.cards.v.VeronicaDissidentScribe.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vigor", 347, Rarity.RARE, mage.cards.v.Vigor.class));
         cards.add(new SetCardInfo("Viridescent Bog", 154, Rarity.RARE, mage.cards.v.ViridescentBog.class));
         cards.add(new SetCardInfo("Wake the Past", 221, Rarity.RARE, mage.cards.w.WakeThePast.class));
