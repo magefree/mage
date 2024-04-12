@@ -1,7 +1,7 @@
 package mage.cards.p;
 
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
-import mage.abilities.effects.ExileFaceDownTopNLibraryYouMayCastAsLongAsExiledEffect;
+import mage.abilities.effects.ExileFaceDownTopNLibraryYouMayCastAsLongAsExiledTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
@@ -36,7 +36,7 @@ public final class PredatorsHour extends CardImpl {
         this.getSpellAbility().addEffect(
                 new GainAbilityControlledEffect(
                         new DealsCombatDamageToAPlayerTriggeredAbility(
-                                new ExileFaceDownTopNLibraryYouMayCastAsLongAsExiledEffect(false, CastManaAdjustment.AS_THOUGH_ANY_MANA_COLOR)
+                                new ExileFaceDownTopNLibraryYouMayCastAsLongAsExiledTargetEffect(false, CastManaAdjustment.AS_THOUGH_ANY_MANA_COLOR)
                                         .setText("exile the top card of that player's library face down. "
                                                 + "You may look at and play that card for as long as it remains exiled, "
                                                 + "and you may spend mana as though it were mana of any color to cast that spell."),

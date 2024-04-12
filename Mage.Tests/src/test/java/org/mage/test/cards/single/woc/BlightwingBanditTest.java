@@ -30,7 +30,7 @@ public class BlightwingBanditTest extends CardTestPlayerBase {
         addCard(Zone.LIBRARY, playerB, "Fire // Ice", 1); // split card just to check it works on both faces
 
         castSpell(2, PhaseStep.UPKEEP, playerA, "Lightning Bolt", playerB);
-        waitStackResolved(2, PhaseStep.UPKEEP, 2); // resolve trigger from bandit
+        waitStackResolved(2, PhaseStep.UPKEEP); // resolve trigger from bandit
         checkPlayableAbility("can cast fire", 2, PhaseStep.UPKEEP, playerA, "Cast Fire", true);
         checkPlayableAbility("can cast ice", 2, PhaseStep.UPKEEP, playerA, "Cast Ice", true);
         castSpell(2, PhaseStep.UPKEEP, playerA, "Ice", bandit);

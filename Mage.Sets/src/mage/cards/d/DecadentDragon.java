@@ -2,7 +2,7 @@ package mage.cards.d;
 
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.effects.ExileFaceDownTopNLibraryYouMayCastAsLongAsExiledEffect;
+import mage.abilities.effects.ExileFaceDownTopNLibraryYouMayCastAsLongAsExiledTargetEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TrampleAbility;
@@ -40,7 +40,7 @@ public final class DecadentDragon extends AdventureCard {
         // Expensive Taste
         // Exile the top two cards of target opponent's library face down. You may look at and play those cards for as long as they remain exiled.
         this.getSpellCard().getSpellAbility().addEffect(
-                new ExileFaceDownTopNLibraryYouMayCastAsLongAsExiledEffect(false, CastManaAdjustment.NONE, 2)
+                new ExileFaceDownTopNLibraryYouMayCastAsLongAsExiledTargetEffect(false, CastManaAdjustment.NONE, 2)
                         .setText("Exile the top two cards of target opponent's library face down. "
                                 + "You may look at and play those cards for as long as they remain exiled.")
         );

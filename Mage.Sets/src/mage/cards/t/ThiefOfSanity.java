@@ -22,8 +22,6 @@ import java.util.UUID;
  */
 public final class ThiefOfSanity extends CardImpl {
 
-    protected static final String VALUE_PREFIX = "ExileZones";
-
     public ThiefOfSanity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{B}");
 

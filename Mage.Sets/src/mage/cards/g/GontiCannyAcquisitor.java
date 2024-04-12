@@ -3,7 +3,7 @@ package mage.cards.g;
 import mage.MageInt;
 import mage.abilities.common.DealCombatDamageControlledTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ExileFaceDownTopNLibraryYouMayCastAsLongAsExiledEffect;
+import mage.abilities.effects.ExileFaceDownTopNLibraryYouMayCastAsLongAsExiledTargetEffect;
 import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -37,7 +37,7 @@ public final class GontiCannyAcquisitor extends CardImpl {
 
         // Whenever one or more creatures you control deal combat damage to a player, look at the top card of that player's library, then exile it face down. You may play that card for as long as it remains exiled, and mana of any type can be spent to cast that spell.
         this.addAbility(new DealCombatDamageControlledTriggeredAbility(
-                new ExileFaceDownTopNLibraryYouMayCastAsLongAsExiledEffect(false, CastManaAdjustment.AS_THOUGH_ANY_MANA_TYPE)
+                new ExileFaceDownTopNLibraryYouMayCastAsLongAsExiledTargetEffect(false, CastManaAdjustment.AS_THOUGH_ANY_MANA_TYPE)
                         .setText("look at the top card of that player's library, then exile it face down. "
                                 + "You may play that card for as long as it remains exiled, and mana of any type can be spent to cast that spell"),
                 SetTargetPointer.PLAYER

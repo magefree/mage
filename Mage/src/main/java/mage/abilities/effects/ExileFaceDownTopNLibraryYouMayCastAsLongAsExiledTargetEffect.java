@@ -19,28 +19,28 @@ import mage.target.targetpointer.FixedTargets;
  *
  * @author Susucr
  */
-public class ExileFaceDownTopNLibraryYouMayCastAsLongAsExiledEffect extends OneShotEffect {
+public class ExileFaceDownTopNLibraryYouMayCastAsLongAsExiledTargetEffect extends OneShotEffect {
 
     private final boolean castNotPlay;
     private final CastManaAdjustment manaAdjustment;
     private final DynamicValue value;
 
-    public ExileFaceDownTopNLibraryYouMayCastAsLongAsExiledEffect(boolean castNotPlay, CastManaAdjustment manaAdjustment) {
+    public ExileFaceDownTopNLibraryYouMayCastAsLongAsExiledTargetEffect(boolean castNotPlay, CastManaAdjustment manaAdjustment) {
         this(castNotPlay, manaAdjustment, 1);
     }
 
-    public ExileFaceDownTopNLibraryYouMayCastAsLongAsExiledEffect(boolean castNotPlay, CastManaAdjustment manaAdjustment, int amount) {
+    public ExileFaceDownTopNLibraryYouMayCastAsLongAsExiledTargetEffect(boolean castNotPlay, CastManaAdjustment manaAdjustment, int amount) {
         this(castNotPlay, manaAdjustment, StaticValue.get(amount));
     }
 
-    public ExileFaceDownTopNLibraryYouMayCastAsLongAsExiledEffect(boolean castNotPlay, CastManaAdjustment manaAdjustment, DynamicValue value) {
+    public ExileFaceDownTopNLibraryYouMayCastAsLongAsExiledTargetEffect(boolean castNotPlay, CastManaAdjustment manaAdjustment, DynamicValue value) {
         super(Outcome.Exile);
         this.value = value;
         this.castNotPlay = castNotPlay;
         this.manaAdjustment = manaAdjustment;
     }
 
-    private ExileFaceDownTopNLibraryYouMayCastAsLongAsExiledEffect(final ExileFaceDownTopNLibraryYouMayCastAsLongAsExiledEffect effect) {
+    private ExileFaceDownTopNLibraryYouMayCastAsLongAsExiledTargetEffect(final ExileFaceDownTopNLibraryYouMayCastAsLongAsExiledTargetEffect effect) {
         super(effect);
         this.value = effect.value;
         this.castNotPlay = effect.castNotPlay;
@@ -48,8 +48,8 @@ public class ExileFaceDownTopNLibraryYouMayCastAsLongAsExiledEffect extends OneS
     }
 
     @Override
-    public ExileFaceDownTopNLibraryYouMayCastAsLongAsExiledEffect copy() {
-        return new ExileFaceDownTopNLibraryYouMayCastAsLongAsExiledEffect(this);
+    public ExileFaceDownTopNLibraryYouMayCastAsLongAsExiledTargetEffect copy() {
+        return new ExileFaceDownTopNLibraryYouMayCastAsLongAsExiledTargetEffect(this);
     }
 
     @Override
