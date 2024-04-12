@@ -26,7 +26,4 @@ public class PostCombatMainStep extends Step {
         return new PostCombatMainStep(this);
     }
 
-    public String toString() {
-        return "post-combat main";
-    }
 }

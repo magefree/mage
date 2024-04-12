@@ -61,7 +61,4 @@ public class EndPhase extends Phase {
         return new EndPhase(this);
     }
 
-    public String toString() {
-        return "end";
-    }
 }

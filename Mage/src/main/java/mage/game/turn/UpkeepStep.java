@@ -26,7 +26,4 @@ public class UpkeepStep extends Step {
         return new UpkeepStep(this);
     }
 
-    public String toString() {
-        return "upkeep";
-    }
 }

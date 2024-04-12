@@ -47,7 +47,4 @@ public class PreCombatMainStep extends Step {
         return new PreCombatMainStep(this);
     }
 
-    public String toString() {
-        return "pre-combat main";
-    }
 }

@@ -75,8 +75,4 @@ public class UntapStep extends Step {
             game.setDaytime(true);
         }
     }
-
-    public String toString() {
-        return "untap";
-    }
 }

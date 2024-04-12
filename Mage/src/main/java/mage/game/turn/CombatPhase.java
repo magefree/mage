@@ -30,7 +30,4 @@ public class CombatPhase extends Phase {
         return new CombatPhase(this);
     }
 
-    public String toString() {
-        return "combat";
-    }
 }

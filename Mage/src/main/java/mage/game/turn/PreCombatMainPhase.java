@@ -27,7 +27,4 @@ public class PreCombatMainPhase extends Phase {
         return new PreCombatMainPhase(this);
     }
 
-    public String toString() {
-        return "pre-combat main";
-    }
 }

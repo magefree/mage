@@ -85,5 +85,7 @@ public abstract class Step implements Serializable, Copyable<Step> {
         return stepPart;
     }
 
-    abstract public String toString();
+    public String toString() {
+        return type.getStepText();
+    }
 }
