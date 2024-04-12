@@ -58,6 +58,8 @@ public class IndominusRexAlphaTests extends CardTestPlayerBase {
         assertCounterCount(playerA, "Indominus Rex, Alpha", CounterType.TRAMPLE, 1);
         assertCounterCount(playerA, "Indominus Rex, Alpha", CounterType.VIGILANCE, 1);
 
+        assertHandCount(playerA, 12);
+
     }
 
 }
