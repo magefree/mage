@@ -30,12 +30,6 @@ public final class HenryWuInGenGeneticist extends CardImpl {
         filterYourHumans.add(SubType.HUMAN.getPredicate());
     }
 
-    public static final FilterPermanent filterNonHumans = new FilterCreaturePermanent("non-Human creature");
-
-    static {
-        filterNonHumans.add(Predicates.not(SubType.HUMAN.getPredicate()));
-    }
-
     public HenryWuInGenGeneticist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}{G}{U}");
         
@@ -50,7 +44,7 @@ public final class HenryWuInGenGeneticist extends CardImpl {
                 new ExploitAbility(), Duration.WhileOnBattlefield, filterYourHumans)));
 
         // Whenever a creature you control exploits a non-Human creature, draw a card. If the exploited creature had power 3 or greater, create a Treasure token.
-        this.addAbility(new HenryWuInGenGeneticistTriggeredAbility(filterNonHumans));
+        this.addAbility(new HenryWuInGenGeneticistTriggeredAbility());
     }
 
     private HenryWuInGenGeneticist(final HenryWuInGenGeneticist card) {
@@ -66,18 +60,20 @@ public final class HenryWuInGenGeneticist extends CardImpl {
 // Based on ColonelAutumnTriggeredAbility
 class HenryWuInGenGeneticistTriggeredAbility extends TriggeredAbilityImpl {
 
-    private final FilterPermanent filter;
+    public static final FilterPermanent filterNonHumans = new FilterCreaturePermanent("non-Human creature");
 
-    HenryWuInGenGeneticistTriggeredAbility(FilterPermanent filter) {
+    static {
+        filterNonHumans.add(Predicates.not(SubType.HUMAN.getPredicate()));
+    }
+
+    HenryWuInGenGeneticistTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1));
 //        this.addEffect(new ConditionalOneShotEffect());
-        this.filter = filter;
-        setTriggerPhrase("Whenever a creature you control exploits a " + this.filter.getMessage());
+        setTriggerPhrase("Whenever a creature you control exploits a " + filterNonHumans.getMessage());
     }
 
     private HenryWuInGenGeneticistTriggeredAbility(final HenryWuInGenGeneticistTriggeredAbility ability) {
         super(ability);
-        this.filter = ability.filter;
     }
 
     @Override
@@ -93,7 +89,7 @@ class HenryWuInGenGeneticistTriggeredAbility extends TriggeredAbilityImpl {
         return exploiter != null && exploited != null
                 && exploiter.isCreature(game)
                 && exploiter.isControlledBy(this.getControllerId())
-                && filter.match(exploited, game);
+                && filterNonHumans.match(exploited, game);
     }
 
     @Override
