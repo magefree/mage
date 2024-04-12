@@ -364,6 +364,21 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
     }
 
     @Override
+    public TriggeredAbility setOptional() {
+        this.optional = true;
+
+        if (getEffects().stream().filter(
+                effect -> effect instanceof DoIfCostPaid && (this.optional && ((DoIfCostPaid) effect).isOptional()))
+                .findAny().isPresent()) {
+            throw new IllegalArgumentException(
+                    "DoIfCostPaid effect must have only one optional settings, but it have two (trigger + DoIfCostPaid): "
+                            + this.getClass().getSimpleName());
+        }
+
+        return this;
+    }
+
+    @Override
     public TriggeredAbilityImpl setAbilityWord(AbilityWord abilityWord) {
         super.setAbilityWord(abilityWord);
         return this;

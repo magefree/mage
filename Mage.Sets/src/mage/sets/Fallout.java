@@ -268,6 +268,7 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Sentry Bot", 552, Rarity.RARE, mage.cards.s.SentryBot.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sentry Bot", 899, Rarity.RARE, mage.cards.s.SentryBot.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Shadowblood Ridge", 288, Rarity.RARE, mage.cards.s.ShadowbloodRidge.class));
+        cards.add(new SetCardInfo("Shaun, Father of Synths", 119, Rarity.RARE, mage.cards.s.ShaunFatherOfSynths.class));
         cards.add(new SetCardInfo("Sheltered Thicket", 289, Rarity.RARE, mage.cards.s.ShelteredThicket.class));
         cards.add(new SetCardInfo("Sierra, Nuka's Biggest Fan", 25, Rarity.RARE, mage.cards.s.SierraNukasBiggestFan.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sierra, Nuka's Biggest Fan", 372, Rarity.RARE, mage.cards.s.SierraNukasBiggestFan.class, NON_FULL_USE_VARIOUS));
