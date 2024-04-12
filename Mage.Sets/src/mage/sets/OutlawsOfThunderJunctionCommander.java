@@ -191,6 +191,7 @@ public final class OutlawsOfThunderJunctionCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Opt", 104, Rarity.COMMON, mage.cards.o.Opt.class));
         cards.add(new SetCardInfo("Opulent Palace", 307, Rarity.UNCOMMON, mage.cards.o.OpulentPalace.class));
         cards.add(new SetCardInfo("Oracle of Mul Daya", 200, Rarity.RARE, mage.cards.o.OracleOfMulDaya.class));
+        cards.add(new SetCardInfo("Orochi Soul-Reaver", 22, Rarity.RARE, mage.cards.o.OrochiSoulReaver.class));
         cards.add(new SetCardInfo("Orzhov Signet", 261, Rarity.COMMON, mage.cards.o.OrzhovSignet.class));
         cards.add(new SetCardInfo("Overflowing Basin", 308, Rarity.RARE, mage.cards.o.OverflowingBasin.class));
         cards.add(new SetCardInfo("Painful Truths", 146, Rarity.RARE, mage.cards.p.PainfulTruths.class));
