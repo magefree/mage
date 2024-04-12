@@ -4,17 +4,19 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.common.DrawNthCardTriggeredAbility;
+import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.Card;
 import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.game.Game;
+import mage.game.events.GameEvent;
 import mage.players.Player;
+import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -33,8 +35,7 @@ public final class IanMalcolmChaotician extends CardImpl {
 
         // Whenever a player draws their second card each turn, that player exiles the top card of their library.
         // During each player's turn, that player may cast a spell from among the cards they don't own exiled with Ian Malcolm, Chaotician, and mana of any type can be spent to cast it.
-        this.addAbility(new DrawNthCardTriggeredAbility(
-                new IanMalcolmChaoticianEffect(), false, TargetController.ANY, 2));
+        this.addAbility(new IanMalcolmChaoticianAbility());
     }
 
     private IanMalcolmChaotician(final IanMalcolmChaotician card) {
@@ -44,6 +45,27 @@ public final class IanMalcolmChaotician extends CardImpl {
     @Override
     public IanMalcolmChaotician copy() {
         return new IanMalcolmChaotician(this);
+    }
+}
+
+class IanMalcolmChaoticianAbility extends DrawNthCardTriggeredAbility {
+    public IanMalcolmChaoticianAbility() {
+        super(new IanMalcolmChaoticianEffect(), false, TargetController.ANY, 2);
+    }
+
+    private IanMalcolmChaoticianAbility(final IanMalcolmChaoticianAbility ability) {
+        super(ability);
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        getEffects().setTargetPointer(new FixedTarget(event.getPlayerId()));
+        return super.checkTrigger(event, game);
+    }
+
+    @Override
+    public IanMalcolmChaoticianAbility copy() {
+        return new IanMalcolmChaoticianAbility(this);
     }
 }
 
@@ -68,19 +90,28 @@ class IanMalcolmChaoticianEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
+
+        UUID targetPlayerID = getTargetPointer().getFirst(game, source);
+        Player targetPlayer = game.getPlayer(targetPlayerID);
         MageObject sourceObject = source.getSourceObject(game);
-        if (opponent == null || sourceObject == null) {
+        if (targetPlayer == null || sourceObject == null) {
             return false;
         }
-        Card card = opponent.getLibrary().getFromTop(game);
+
+        Card card = targetPlayer.getLibrary().getFromTop(game);
         if (card == null) {
             return false;
         }
 
         UUID exileZoneId = CardUtil.getExileZoneId(game, sourceObject.getId(), sourceObject.getZoneChangeCounter(game));
-        opponent.moveCardsToExile(card, source, game, true, exileZoneId, sourceObject.getIdName());
-        CardUtil.makeCardPlayable(game, source, card, Duration.Custom, true);
+        targetPlayer.moveCardsToExile(card, source, game, true, exileZoneId, sourceObject.getIdName());
+
+        for (UUID playerID : game.getPlayers().keySet()){
+            if (playerID.equals(targetPlayerID)) {
+                continue;
+            }
+            CardUtil.makeCardPlayable(game, source, card, Duration.Custom, true, playerID, MyTurnCondition.instance);
+        }
         return true;
     }
 }

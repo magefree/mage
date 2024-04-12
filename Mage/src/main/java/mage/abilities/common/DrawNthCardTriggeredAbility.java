@@ -42,7 +42,7 @@ public class DrawNthCardTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase(generateTriggerPhrase());
     }
 
-    private DrawNthCardTriggeredAbility(final DrawNthCardTriggeredAbility ability) {
+    protected DrawNthCardTriggeredAbility(final DrawNthCardTriggeredAbility ability) {
         super(ability);
         this.targetController = ability.targetController;
         this.cardNumber = ability.cardNumber;
