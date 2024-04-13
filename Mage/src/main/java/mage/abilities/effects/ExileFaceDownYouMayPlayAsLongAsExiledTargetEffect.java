@@ -26,12 +26,12 @@ import java.util.stream.Collectors;
  *
  * @author Susucr
  */
-public class ExileFaceDownYouMayCastAsLongAsExiledEffect extends OneShotEffect {
+public class ExileFaceDownYouMayPlayAsLongAsExiledTargetEffect extends OneShotEffect {
 
     private final boolean useCastSpellOnly;
     private final CastManaAdjustment manaAdjustment;
 
-    public ExileFaceDownYouMayCastAsLongAsExiledEffect(boolean useCastSpellOnly, CastManaAdjustment manaAdjustment) {
+    public ExileFaceDownYouMayPlayAsLongAsExiledTargetEffect(boolean useCastSpellOnly, CastManaAdjustment manaAdjustment) {
         super(Outcome.Exile);
         switch (manaAdjustment) {
             case NONE:
@@ -46,15 +46,15 @@ public class ExileFaceDownYouMayCastAsLongAsExiledEffect extends OneShotEffect {
         this.useCastSpellOnly = useCastSpellOnly;
     }
 
-    private ExileFaceDownYouMayCastAsLongAsExiledEffect(final ExileFaceDownYouMayCastAsLongAsExiledEffect effect) {
+    private ExileFaceDownYouMayPlayAsLongAsExiledTargetEffect(final ExileFaceDownYouMayPlayAsLongAsExiledTargetEffect effect) {
         super(effect);
         this.manaAdjustment = effect.manaAdjustment;
         this.useCastSpellOnly = effect.useCastSpellOnly;
     }
 
     @Override
-    public ExileFaceDownYouMayCastAsLongAsExiledEffect copy() {
-        return new ExileFaceDownYouMayCastAsLongAsExiledEffect(this);
+    public ExileFaceDownYouMayPlayAsLongAsExiledTargetEffect copy() {
+        return new ExileFaceDownYouMayPlayAsLongAsExiledTargetEffect(this);
     }
 
     @Override

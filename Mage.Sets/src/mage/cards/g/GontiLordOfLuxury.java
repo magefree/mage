@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.ExileFaceDownYouMayCastAsLongAsExiledEffect;
+import mage.abilities.effects.ExileFaceDownYouMayPlayAsLongAsExiledTargetEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.*;
@@ -82,7 +82,7 @@ class GontiLordOfLuxuryEffect extends OneShotEffect {
         controller.choose(outcome, topCards, target, source, game);
         Card card = game.getCard(target.getFirstTarget());
         if (card != null) {
-            new ExileFaceDownYouMayCastAsLongAsExiledEffect(true, CastManaAdjustment.AS_THOUGH_ANY_MANA_TYPE)
+            new ExileFaceDownYouMayPlayAsLongAsExiledTargetEffect(true, CastManaAdjustment.AS_THOUGH_ANY_MANA_TYPE)
                     .setTargetPointer(new FixedTarget(card, game))
                     .apply(game, source);
         }
