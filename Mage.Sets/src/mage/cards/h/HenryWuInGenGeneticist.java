@@ -94,7 +94,7 @@ class HenryWuInGenGeneticistTriggeredAbility extends TriggeredAbilityImpl {
             return false;
         }
 
-        getEffects().setTargetPointer(new FixedTarget(exploited.getId()));
+        getEffects().setTargetPointer(new FixedTarget(exploited.getId(), game));
 
         return exploiter.isCreature(game)
                 && exploiter.isControlledBy(this.getControllerId())
@@ -125,7 +125,7 @@ class HenryWuInGenGeneticistEffect extends CreateTokenEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent exploited = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
+        Permanent exploited = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
         if (exploited == null || exploited.getPower().getValue() < 3){
             return false;
         }
