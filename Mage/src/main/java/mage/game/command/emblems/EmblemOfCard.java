@@ -11,7 +11,6 @@ import mage.cards.repository.CardRepository;
 import mage.constants.Zone;
 import mage.game.command.Emblem;
 import mage.util.CardUtil;
-import org.apache.log4j.Logger;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -50,7 +49,7 @@ public final class EmblemOfCard extends Emblem {
     public static Card cardFromDeckInfo(DeckCardInfo info) {
         return lookupCard(
                 info.getCardName(),
-                info.getCardNum(),
+                info.getCardNumber(),
                 info.getSetCode(),
                 "DeckCardInfo"
         );

@@ -197,4 +197,27 @@ public class DisguiseTest extends CardTestPlayerBase {
         assertLife(playerA, 20);
     }
 
+    @Test
+    public void testCostAdjuster() {
+        /*  Fugitive Codebreaker {1}{R}
+         * Creature — Goblin Rogue
+         * Prowess, haste
+         * Disguise {5}{R}. This cost is reduced by {1} for each instant and sorcery card in your graveyard.
+         * When Fugitive Codebreaker is turned face up, discard your hand, then draw three cards.
+         */
+        String codebreaker = "Fugitive Codebreaker";
+        addCard(Zone.HAND, playerA, codebreaker);
+        addCard(Zone.GRAVEYARD, playerA, "Lightning Bolt", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3 + 3);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, codebreaker + " using Disguise", true);
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{5}{R}:");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertHandCount(playerA, 3);
+    }
+
 }

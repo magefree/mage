@@ -101,12 +101,9 @@ class SatoruTheInfiltratorTriggeredAbility extends TriggeredAbilityImpl {
         // "Whenever {this} and/or one or more other nontoken creatures enter the battlefield under your control"
         // Now to check that none were cast using mana
         for (ZoneChangeEvent zce : moved) {
-            if (zce.getFromZone() != Zone.STACK) {
-                continue; // not from stack, we good for this one event
-            }
             Spell spell = game.getSpellOrLKIStack(zce.getTargetId());
             if (spell != null && spell.getStackAbility().getManaCostsToPay().getUsedManaToPay().count() > 0) {
-                return false; // found one that did use mana, so no triggering.
+                return false; // found one that was cast using mana, so no triggering.
             }
         }
         return true; // all relevant permanents passed the spell mana check, so triggering.

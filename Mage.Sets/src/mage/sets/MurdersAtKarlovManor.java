@@ -38,6 +38,7 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Assassin's Trophy", 187, Rarity.RARE, mage.cards.a.AssassinsTrophy.class));
         cards.add(new SetCardInfo("Assemble the Players", 3, Rarity.RARE, mage.cards.a.AssembleThePlayers.class));
         cards.add(new SetCardInfo("Audience with Trostani", 152, Rarity.RARE, mage.cards.a.AudienceWithTrostani.class));
+        cards.add(new SetCardInfo("Aurelia's Vindicator", 4, Rarity.MYTHIC, mage.cards.a.AureliasVindicator.class));
         cards.add(new SetCardInfo("Aurelia, the Law Above", 188, Rarity.RARE, mage.cards.a.AureliaTheLawAbove.class));
         cards.add(new SetCardInfo("Auspicious Arrival", 5, Rarity.COMMON, mage.cards.a.AuspiciousArrival.class));
         cards.add(new SetCardInfo("Axebane Ferox", 153, Rarity.RARE, mage.cards.a.AxebaneFerox.class));
@@ -64,6 +65,7 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Case of the Gateway Express", 8, Rarity.UNCOMMON, mage.cards.c.CaseOfTheGatewayExpress.class));
         cards.add(new SetCardInfo("Case of the Gorgon's Kiss", 79, Rarity.UNCOMMON, mage.cards.c.CaseOfTheGorgonsKiss.class));
         cards.add(new SetCardInfo("Case of the Locked Hothouse", 155, Rarity.RARE, mage.cards.c.CaseOfTheLockedHothouse.class));
+        cards.add(new SetCardInfo("Case of the Pilfered Proof", 9, Rarity.UNCOMMON, mage.cards.c.CaseOfThePilferedProof.class));
         cards.add(new SetCardInfo("Case of the Ransacked Lab", 45, Rarity.RARE, mage.cards.c.CaseOfTheRansackedLab.class));
         cards.add(new SetCardInfo("Case of the Shattered Pact", 1, Rarity.UNCOMMON, mage.cards.c.CaseOfTheShatteredPact.class));
         cards.add(new SetCardInfo("Case of the Stashed Skeleton", 80, Rarity.RARE, mage.cards.c.CaseOfTheStashedSkeleton.class));
@@ -81,6 +83,7 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Concealed Weapon", 117, Rarity.UNCOMMON, mage.cards.c.ConcealedWeapon.class));
         cards.add(new SetCardInfo("Connecting the Dots", 118, Rarity.RARE, mage.cards.c.ConnectingTheDots.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Connecting the Dots", 403, Rarity.RARE, mage.cards.c.ConnectingTheDots.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Conspiracy Unraveler", 47, Rarity.MYTHIC, mage.cards.c.ConspiracyUnraveler.class));
         cards.add(new SetCardInfo("Convenient Target", 119, Rarity.UNCOMMON, mage.cards.c.ConvenientTarget.class));
         cards.add(new SetCardInfo("Cornered Crook", 120, Rarity.UNCOMMON, mage.cards.c.CorneredCrook.class));
         cards.add(new SetCardInfo("Crime Novelist", 121, Rarity.UNCOMMON, mage.cards.c.CrimeNovelist.class));
@@ -124,6 +127,7 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Forest", 276, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Forum Familiar", 16, Rarity.UNCOMMON, mage.cards.f.ForumFamiliar.class));
         cards.add(new SetCardInfo("Frantic Scapegoat", 126, Rarity.UNCOMMON, mage.cards.f.FranticScapegoat.class));
+        cards.add(new SetCardInfo("Fugitive Codebreaker", 127, Rarity.RARE, mage.cards.f.FugitiveCodebreaker.class));
         cards.add(new SetCardInfo("Furtive Courier", 59, Rarity.UNCOMMON, mage.cards.f.FurtiveCourier.class));
         cards.add(new SetCardInfo("Fuss // Bother", 248, Rarity.UNCOMMON, mage.cards.f.FussBother.class));
         cards.add(new SetCardInfo("Gadget Technician", 204, Rarity.COMMON, mage.cards.g.GadgetTechnician.class));
@@ -206,6 +210,7 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("On the Job", 30, Rarity.COMMON, mage.cards.o.OnTheJob.class));
         cards.add(new SetCardInfo("Out Cold", 66, Rarity.COMMON, mage.cards.o.OutCold.class));
         cards.add(new SetCardInfo("Outrageous Robbery", 97, Rarity.RARE, mage.cards.o.OutrageousRobbery.class));
+        cards.add(new SetCardInfo("Perimeter Enforcer", 31, Rarity.UNCOMMON, mage.cards.p.PerimeterEnforcer.class));
         cards.add(new SetCardInfo("Person of Interest", 139, Rarity.COMMON, mage.cards.p.PersonOfInterest.class));
         cards.add(new SetCardInfo("Persuasive Interrogators", 98, Rarity.UNCOMMON, mage.cards.p.PersuasiveInterrogators.class));
         cards.add(new SetCardInfo("Pick Your Poison", 170, Rarity.COMMON, mage.cards.p.PickYourPoison.class));
@@ -215,6 +220,7 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Presumed Dead", 100, Rarity.UNCOMMON, mage.cards.p.PresumedDead.class));
         cards.add(new SetCardInfo("Private Eye", 223, Rarity.UNCOMMON, mage.cards.p.PrivateEye.class));
         cards.add(new SetCardInfo("Proft's Eidetic Memory", 67, Rarity.RARE, mage.cards.p.ProftsEideticMemory.class));
+        cards.add(new SetCardInfo("Projektor Inspector", 68, Rarity.COMMON, mage.cards.p.ProjektorInspector.class));
         cards.add(new SetCardInfo("Public Thoroughfare", 265, Rarity.COMMON, mage.cards.p.PublicThoroughfare.class));
         cards.add(new SetCardInfo("Push // Pull", 250, Rarity.UNCOMMON, mage.cards.p.PushPull.class));
         cards.add(new SetCardInfo("Pyrotechnic Performer", 140, Rarity.RARE, mage.cards.p.PyrotechnicPerformer.class, NON_FULL_USE_VARIOUS));

@@ -195,8 +195,10 @@ class CourtOfLocthwainCastForFreeEffect extends AsThoughEffectImpl {
 
         UUID exileId = CourtOfLocthwain.getExileZoneId(mor, game);
         ExileZone exileZone = game.getExile().getExileZone(exileId);
+
+        Card card = game.getCard(objectId);
         // Is the card attempted to be played in the ExiledZone?
-        if (exileZone == null || !exileZone.contains(objectId)) {
+        if (exileZone == null || card == null || !exileZone.contains(card.getMainCard().getId())) {
             return false;
         }
         // can this ability still be used this turn?

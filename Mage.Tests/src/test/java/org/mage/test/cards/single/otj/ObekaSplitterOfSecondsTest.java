@@ -28,6 +28,8 @@ public class ObekaSplitterOfSecondsTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Fountain of Renewal");
 
         attack(1, playerA, obeka, playerB);
+        checkLife("Extra upkeeps are in extra phases after combat", 1, PhaseStep.END_COMBAT, playerA, 20 + 1);
+
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 

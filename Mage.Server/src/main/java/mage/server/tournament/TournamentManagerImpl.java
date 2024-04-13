@@ -17,6 +17,7 @@ import java.util.concurrent.ConcurrentMap;
  */
 public class TournamentManagerImpl implements TournamentManager {
 
+    // TODO: must check all usage of controllers.get and insert null check and error log
     private final ManagerFactory managerFactory;
     private final ConcurrentMap<UUID, TournamentController> controllers = new ConcurrentHashMap<>();
 
@@ -61,8 +62,8 @@ public class TournamentManagerImpl implements TournamentManager {
     }
 
     @Override
-    public boolean updateDeck(UUID tournamentId, UUID playerId, Deck deck) {
-        return controllers.get(tournamentId).updateDeck(playerId, deck);
+    public void updateDeck(UUID tournamentId, UUID playerId, Deck deck) {
+        controllers.get(tournamentId).updateDeck(playerId, deck);
     }
 
     @Override

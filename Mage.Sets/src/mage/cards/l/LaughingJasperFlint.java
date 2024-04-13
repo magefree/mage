@@ -50,7 +50,7 @@ public final class LaughingJasperFlint extends CardImpl {
 
         // At the beginning of your upkeep, exile the top X cards of target opponent's library, where X is the number of outlaws you control. Until end of turn, you may cast spells from among those cards, and mana of any type can be spent to cast those spells.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
-                new LaughingJasperFlintEffect(), TargetController.YOU, true
+                new LaughingJasperFlintEffect(), TargetController.YOU, false
         );
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability.addHint(LaughingJasperFlintEffect.getHint()));
