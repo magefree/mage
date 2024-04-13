@@ -182,6 +182,10 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("MacCready, Lamplight Mayor", 636, Rarity.RARE, mage.cards.m.MacCreadyLamplightMayor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("MacCready, Lamplight Mayor", 945, Rarity.RARE, mage.cards.m.MacCreadyLamplightMayor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mantle of the Ancients", 165, Rarity.RARE, mage.cards.m.MantleOfTheAncients.class));
+        cards.add(new SetCardInfo("Marcus, Mutant Mayor", 109, Rarity.RARE, mage.cards.m.MarcusMutantMayor.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Marcus, Mutant Mayor", 418, Rarity.RARE, mage.cards.m.MarcusMutantMayor.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Marcus, Mutant Mayor", 637, Rarity.RARE, mage.cards.m.MarcusMutantMayor.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Marcus, Mutant Mayor", 946, Rarity.RARE, mage.cards.m.MarcusMutantMayor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Marshal's Anthem", 166, Rarity.RARE, mage.cards.m.MarshalsAnthem.class));
         cards.add(new SetCardInfo("Martial Coup", 167, Rarity.RARE, mage.cards.m.MartialCoup.class));
         cards.add(new SetCardInfo("Masterwork of Ingenuity", 234, Rarity.RARE, mage.cards.m.MasterworkOfIngenuity.class));
