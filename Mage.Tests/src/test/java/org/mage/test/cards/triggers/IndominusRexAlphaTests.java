@@ -34,9 +34,6 @@ public class IndominusRexAlphaTests extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Indominus Rex, Alpha", true);
 
-        // Pick draw effect to go on the stack first to that it resolves last
-        setChoice(playerA, "When {this} enters the battlefield, draw");
-
         // Cards to discard
         setChoice(playerA, "Ornithopter^Rograkh, Son of Rohgahh^Adorned Pouncer^Ankle Biter^Gladecover Scout" +
                 "^Banehound^Bontu the Glorified^Aerial Responder^Stonecoil Serpent^Codespell Cleric");
