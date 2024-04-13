@@ -633,13 +633,6 @@ public final class StaticFilters {
         FILTER_CONTROLLED_CREATURE.setLockedFilter(true);
     }
 
-    // Used for sacrifice targets that don't need the "you control" text
-    public static final FilterControlledCreaturePermanent FILTER_CONTROLLED_CREATURE_SHORT_TEXT = new FilterControlledCreaturePermanent("a creature");
-
-    static {
-        FILTER_CONTROLLED_CREATURE_SHORT_TEXT.setLockedFilter(true);
-    }
-
     public static final FilterControlledCreaturePermanent FILTER_CONTROLLED_CREATURES = new FilterControlledCreaturePermanent("creatures you control");
 
     static {
