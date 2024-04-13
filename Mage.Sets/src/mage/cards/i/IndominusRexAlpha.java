@@ -3,9 +3,11 @@ package mage.cards.i;
 import java.util.*;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.Card;
@@ -46,7 +48,9 @@ public final class IndominusRexAlpha extends CardImpl {
         // As Indominus Rex, Alpha enters the battlefield, discard any number of creature cards. It enters with a
         // flying counter on it if a card discarded this way has flying. The same is true for first strike,
         // double strike, deathtouch, hexproof, haste, indestructible, lifelink, menace, reach, trample, and vigilance.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new IndominusRexAlphaCountersEffect()));
+        Effect effect = new IndominusRexAlphaCountersEffect();
+        this.addAbility(new EntersBattlefieldAbility(effect, null,
+                "As Indominus Rex, Alpha enters the battlefield, " + effect.getText(null), null));
 
         // When Indominus Rex enters the battlefield, draw a card for each counter on it.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(xValue)));
@@ -130,7 +134,8 @@ class IndominusRexAlphaCountersEffect extends OneShotEffect {
             return false;
         }
 
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        // EntersBattlefieldAbility is static, see AddCountersSourceEffect
+        Permanent permanent = game.getPermanentEntering(source.getSourceId());
         if (permanent == null) {
             return true;
         }
