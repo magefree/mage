@@ -90,7 +90,7 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        if (affectedObjectsSet) {
+        if (getAffectedObjectsSet()) {
             affectedObjectList.add(new MageObjectReference(source.getSourceId(), game));
         }
     }
@@ -98,7 +98,7 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         Permanent permanent;
-        if (affectedObjectsSet) {
+        if (getAffectedObjectsSet()) {
             permanent = affectedObjectList.get(0).getPermanent(game);
         } else {
             permanent = game.getPermanent(source.getSourceId());

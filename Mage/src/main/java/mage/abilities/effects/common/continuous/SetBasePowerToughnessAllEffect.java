@@ -60,7 +60,7 @@ public class SetBasePowerToughnessAllEffect extends ContinuousEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        if (affectedObjectsSet) {
+        if (getAffectedObjectsSet()) {
             for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
                 affectedObjectList.add(new MageObjectReference(perm, game));
             }
@@ -73,7 +73,7 @@ public class SetBasePowerToughnessAllEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         int newPower = power.calculate(game, source, this);
         int newToughness = toughness.calculate(game, source, this);
-        if (affectedObjectsSet) {
+        if (getAffectedObjectsSet()) {
             for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext(); ) {
                 Permanent permanent = it.next().getPermanent(game);
                 if (permanent != null) {

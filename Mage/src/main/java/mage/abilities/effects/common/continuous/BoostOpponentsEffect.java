@@ -49,7 +49,7 @@ public class BoostOpponentsEffect extends ContinuousEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        if (this.affectedObjectsSet) {
+        if (getAffectedObjectsSet()) {
             Set<UUID> opponents = game.getOpponents(source.getControllerId());
             for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
                 if (opponents.contains(perm.getControllerId())) {
@@ -62,7 +62,7 @@ public class BoostOpponentsEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         Set<UUID> opponents = game.getOpponents(source.getControllerId());
-        if (this.affectedObjectsSet) {
+        if (getAffectedObjectsSet()) {
             for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext(); ) { // filter may not be used again, because object can have changed filter relevant attributes but still geets boost
                 Permanent perm = it.next().getPermanent(game);
                 if (perm != null) {
