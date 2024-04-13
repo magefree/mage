@@ -48,7 +48,7 @@ public final class LotusRing extends CardImpl {
         this.addAbility(ability);
 
         // Equip {3}
-        this.addAbility(new EquipAbility(3));
+        this.addAbility(new EquipAbility(3, false));
     }
 
     private LotusRing(final LotusRing card) {

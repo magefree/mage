@@ -34,7 +34,7 @@ public final class LootTheKeyToEverything extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Ward {1}
-        this.addAbility(new WardAbility(new ManaCostsImpl<>("{1}")));
+        this.addAbility(new WardAbility(new ManaCostsImpl<>("{1}"), false));
 
         // At the beginning of your upkeep, exile the top X cards of your library, where X is the number of card types among other nonland permanents you control. You may play those cards this turn.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
