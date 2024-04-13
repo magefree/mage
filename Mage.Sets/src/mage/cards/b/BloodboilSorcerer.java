@@ -36,7 +36,7 @@ public final class BloodboilSorcerer extends CardImpl {
 
         // Crown of Madness — {1}{R}, Sacrifice an artifact or creature: Goad target creature.
         Ability ability = new SimpleActivatedAbility(new GoadTargetEffect(), new ManaCostsImpl<>("{1}{R}"));
-        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ARTIFACT_OR_CREATURE_SHORT_TEXT));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_CREATURE));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability.withFlavorWord("Crown of Madness"));
     }
