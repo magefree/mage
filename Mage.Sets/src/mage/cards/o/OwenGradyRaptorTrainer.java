@@ -82,7 +82,7 @@ class OwenGradyRaptorTrainerEffect extends OneShotEffect {
             } else if (i == choices.size()-1){
                 separator = "";
             }
-            sb.append(choicesArray[i]).append(separator);
+            sb.append(choicesArray[i].toLowerCase()).append(separator);
         }
         return sb.toString();
     }

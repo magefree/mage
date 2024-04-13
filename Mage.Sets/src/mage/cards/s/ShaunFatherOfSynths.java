@@ -53,7 +53,7 @@ public class ShaunFatherOfSynths extends CardImpl {
         Effect effect = new CreateTokenCopyTargetEffect(
                 null, null,
                 false, 1, true, true)
-                .setPermanentModifier((token) -> {
+                .setPermanentModifier(token -> {
                     token.removeSuperType(SuperType.LEGENDARY);
                     token.addCardType(CardType.CREATURE);
                     token.addCardType(CardType.ARTIFACT);

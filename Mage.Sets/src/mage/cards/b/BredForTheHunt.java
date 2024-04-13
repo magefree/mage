@@ -39,9 +39,8 @@ public final class BredForTheHunt extends CardImpl {
 
 class BredForTheHuntTriggeredAbility extends TriggeredAbilityImpl {
 
-    public BredForTheHuntTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1));
-        this.optional = true;
+    BredForTheHuntTriggeredAbility() {
+        super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), true);
     }
 
     private BredForTheHuntTriggeredAbility(final BredForTheHuntTriggeredAbility ability) {
