@@ -1,22 +1,27 @@
 package mage.cards.i;
 
-import java.util.UUID;
+import java.util.*;
+
 import mage.MageInt;
-import mage.MageObject;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.DrawNthCardTriggeredAbility;
-import mage.abilities.condition.common.MyTurnCondition;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.AsThoughEffectImpl;
+import mage.abilities.effects.AsThoughManaEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
+import mage.cards.*;
 import mage.constants.*;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
+import mage.counters.CounterType;
+import mage.game.CardState;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
+import mage.players.ManaPoolItem;
 import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
-import org.apache.log4j.Logger;
+import mage.watchers.Watcher;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -34,8 +39,17 @@ public final class IanMalcolmChaotician extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever a player draws their second card each turn, that player exiles the top card of their library.
-        // During each player's turn, that player may cast a spell from among the cards they don't own exiled with Ian Malcolm, Chaotician, and mana of any type can be spent to cast it.
-        this.addAbility(new IanMalcolmChaoticianAbility());
+
+        // During each player's turn, that player may cast a spell from among the cards they don't own exiled with
+        // Ian Malcolm, Chaotician, and mana of any type can be spent to cast it.
+
+        // Whenever a player draws their second card each turn, exile the top card of each player's library.
+        this.addAbility(new IanMalcolmChaoticianDrawTriggerAbility(), new IanMalcolmChaoticianWatcher());
+
+        // Once each turn, you may play a card from exile with a collection counter on it if it was exiled by an ability you controlled, and you may spend mana as though it were any color to cast it.
+        Ability ability = new SimpleStaticAbility(new IanMalcolmChaoticianCastEffect());
+        ability.addEffect(new IanMalcolmChaoticianManaEffect());
+        this.addAbility(ability);
     }
 
     private IanMalcolmChaotician(final IanMalcolmChaotician card) {
@@ -48,12 +62,12 @@ public final class IanMalcolmChaotician extends CardImpl {
     }
 }
 
-class IanMalcolmChaoticianAbility extends DrawNthCardTriggeredAbility {
-    public IanMalcolmChaoticianAbility() {
-        super(new IanMalcolmChaoticianEffect(), false, TargetController.ANY, 2);
+class IanMalcolmChaoticianDrawTriggerAbility extends DrawNthCardTriggeredAbility {
+    public IanMalcolmChaoticianDrawTriggerAbility() {
+        super(new IanMalcolmChaoticianExileEffect(), false, TargetController.ANY, 2);
     }
 
-    private IanMalcolmChaoticianAbility(final IanMalcolmChaoticianAbility ability) {
+    private IanMalcolmChaoticianDrawTriggerAbility(final IanMalcolmChaoticianDrawTriggerAbility ability) {
         super(ability);
     }
 
@@ -64,54 +78,194 @@ class IanMalcolmChaoticianAbility extends DrawNthCardTriggeredAbility {
     }
 
     @Override
-    public IanMalcolmChaoticianAbility copy() {
-        return new IanMalcolmChaoticianAbility(this);
+    public IanMalcolmChaoticianDrawTriggerAbility copy() {
+        return new IanMalcolmChaoticianDrawTriggerAbility(this);
     }
 }
 
-// Based on CunningRhetoricEffect
-class IanMalcolmChaoticianEffect extends OneShotEffect {
+class IanMalcolmChaoticianExileEffect extends OneShotEffect {
 
-    IanMalcolmChaoticianEffect() {
-        super(Outcome.Benefit);
-        staticText = "that player exiles the top card of their library. During each player's turn, " +
-                "that player may cast a spell from among the cards they don't own exiled with {this}, " +
-                "and mana of any type can be spent to cast it.";
+    IanMalcolmChaoticianExileEffect() {
+        super(Outcome.Exile);
+        staticText = "exile the top card of each player's library";
     }
 
-    private IanMalcolmChaoticianEffect(final IanMalcolmChaoticianEffect effect) {
+    private IanMalcolmChaoticianExileEffect(final IanMalcolmChaoticianExileEffect effect) {
         super(effect);
     }
 
     @Override
-    public IanMalcolmChaoticianEffect copy() {
-        return new IanMalcolmChaoticianEffect(this);
+    public IanMalcolmChaoticianExileEffect copy() {
+        return new IanMalcolmChaoticianExileEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-
-        UUID targetPlayerID = getTargetPointer().getFirst(game, source);
-        Player targetPlayer = game.getPlayer(targetPlayerID);
-        MageObject sourceObject = source.getSourceObject(game);
-        if (targetPlayer == null || sourceObject == null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
             return false;
         }
+        Cards cards = new CardsImpl();
+        for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
+            Player player = game.getPlayer(playerId);
+            if (player != null) {
+                cards.add(player.getLibrary().getFromTop(game));
+            }
+        }
+        if (cards.isEmpty()) {
+            return false;
+        }
+        controller.moveCards(cards, Zone.EXILED, source, game);
+        IanMalcolmChaoticianWatcher.addCards(source.getControllerId(), cards, game);
+        return true;
+    }
+}
 
-        Card card = targetPlayer.getLibrary().getFromTop(game);
+class IanMalcolmChaoticianCastEffect extends AsThoughEffectImpl {
+
+    IanMalcolmChaoticianCastEffect() {
+        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.PlayForFree);
+        staticText = "once each turn, you may play a card from exile " +
+                "with a collection counter on it if it was exiled by an ability you controlled";
+    }
+
+    private IanMalcolmChaoticianCastEffect(final IanMalcolmChaoticianCastEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public IanMalcolmChaoticianCastEffect copy() {
+        return new IanMalcolmChaoticianCastEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
+
+    @Override
+    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
+        if (!source.isControlledBy(affectedControllerId) || IanMalcolmChaoticianWatcher.checkUsed(source, game)) {
+            return false;
+        }
+        Card card = game.getCard(CardUtil.getMainCardId(game, sourceId));
+        return card != null
+                && card.getCounters(game).getCount(CounterType.COLLECTION) > 0
+                && IanMalcolmChaoticianWatcher.checkExile(affectedControllerId, card, game, 0);
+    }
+}
+
+class IanMalcolmChaoticianManaEffect extends AsThoughEffectImpl implements AsThoughManaEffect {
+
+    IanMalcolmChaoticianManaEffect() {
+        super(AsThoughEffectType.SPEND_OTHER_MANA, Duration.WhileOnBattlefield, Outcome.Benefit);
+        staticText = ", and you may spend mana as though it were any color to cast it";
+    }
+
+    private IanMalcolmChaoticianManaEffect(final IanMalcolmChaoticianManaEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
+
+    @Override
+    public IanMalcolmChaoticianManaEffect copy() {
+        return new IanMalcolmChaoticianManaEffect(this);
+    }
+
+    @Override
+    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
+        if (!source.isControlledBy(affectedControllerId) || IanMalcolmChaoticianWatcher.checkUsed(source, game)) {
+            return false;
+        }
+        Card card = game.getCard(CardUtil.getMainCardId(game, sourceId));
         if (card == null) {
             return false;
         }
-
-        UUID exileZoneId = CardUtil.getExileZoneId(game, sourceObject.getId(), sourceObject.getZoneChangeCounter(game));
-        targetPlayer.moveCardsToExile(card, source, game, true, exileZoneId, sourceObject.getIdName());
-
-        for (UUID playerID : game.getPlayers().keySet()){
-            if (playerID.equals(targetPlayerID)) {
-                continue;
-            }
-            CardUtil.makeCardPlayable(game, source, card, Duration.Custom, true, playerID, MyTurnCondition.instance);
+        if (game.getState().getZone(card.getId()) == Zone.EXILED) {
+            return card.getCounters(game).getCount(CounterType.COLLECTION) > 0
+                    && IanMalcolmChaoticianWatcher.checkExile(affectedControllerId, card, game, 0);
         }
-        return true;
+        CardState cardState;
+        if (card instanceof ModalDoubleFacedCard) {
+            cardState = game.getLastKnownInformationCard(((ModalDoubleFacedCard) card).getLeftHalfCard().getId(), Zone.EXILED);
+        } else {
+            cardState = game.getLastKnownInformationCard(card.getId(), Zone.EXILED);
+        }
+        return cardState != null && cardState.getCounters().getCount(CounterType.COLLECTION) > 0
+                && IanMalcolmChaoticianWatcher.checkExile(affectedControllerId, card, game, 1);
+    }
+
+    @Override
+    public ManaType getAsThoughManaType(ManaType manaType, ManaPoolItem mana, UUID affectedControllerId, Ability source, Game game) {
+        return mana.getFirstAvailable();
+    }
+}
+
+class IanMalcolmChaoticianWatcher extends Watcher {
+
+    private final Map<UUID, Set<MageObjectReference>> exiledMap = new HashMap<>();
+    private final Map<MageObjectReference, Set<UUID>> usedMap = new HashMap<>();
+
+    IanMalcolmChaoticianWatcher() {
+        super(WatcherScope.GAME);
+    }
+
+    @Override
+    public void watch(GameEvent event, Game game) {
+        if ((event.getType() == GameEvent.EventType.SPELL_CAST || event.getType() == GameEvent.EventType.LAND_PLAYED)
+                && event.getAdditionalReference() != null) {
+            usedMap.computeIfAbsent(
+                    event.getAdditionalReference()
+                            .getApprovingMageObjectReference(),
+                    x -> new HashSet<>()
+            ).add(event.getPlayerId());
+        }
+    }
+
+    @Override
+    public void reset() {
+        super.reset();
+        usedMap.clear();
+    }
+
+    static void addCards(UUID playerId, Cards cards, Game game) {
+        Set<MageObjectReference> set = game
+                .getState()
+                .getWatcher(IanMalcolmChaoticianWatcher.class)
+                .exiledMap
+                .computeIfAbsent(playerId, x -> new HashSet<>());
+        cards.getCards(game)
+                .stream()
+                .map(card -> new MageObjectReference(card, game))
+                .forEach(set::add);
+    }
+
+    static boolean checkUsed(Ability source, Game game) {
+        Permanent sourceObject = game.getPermanent(source.getSourceId());
+        if (sourceObject == null) {
+            return true;
+        }
+        return game
+                .getState()
+                .getWatcher(IanMalcolmChaoticianWatcher.class)
+                .usedMap
+                .getOrDefault(
+                        new MageObjectReference(sourceObject, game),
+                        Collections.emptySet()
+                ).contains(source.getControllerId());
+    }
+
+    static boolean checkExile(UUID playerId, Card card, Game game, int offset) {
+        return game
+                .getState()
+                .getWatcher(IanMalcolmChaoticianWatcher.class)
+                .exiledMap
+                .getOrDefault(playerId, Collections.emptySet())
+                .stream()
+                .anyMatch(mor -> mor.refersTo(card, game, offset));
     }
 }
