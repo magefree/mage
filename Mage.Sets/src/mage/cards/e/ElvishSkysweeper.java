@@ -42,7 +42,7 @@ public final class ElvishSkysweeper extends CardImpl {
 
         // {4}{G}, Sacrifice a creature: Destroy target creature with flying.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl<>("{4}{G}"));
-        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }

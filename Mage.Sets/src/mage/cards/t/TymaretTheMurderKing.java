@@ -42,7 +42,7 @@ public final class TymaretTheMurderKing extends CardImpl {
         this.addAbility(ability);
         // {1}{B}, Sacrifice a creature: Return Tymaret from your graveyard to your hand.
         ability = new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), new ManaCostsImpl<>("{1}{B}"));
-        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
         this.addAbility(ability);
 
     }

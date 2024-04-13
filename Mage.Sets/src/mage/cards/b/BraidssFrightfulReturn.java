@@ -42,7 +42,7 @@ public final class BraidssFrightfulReturn extends CardImpl {
                 this, SagaChapter.CHAPTER_I,
                 new DoIfCostPaid(
                         new DiscardEachPlayerEffect(TargetController.OPPONENT),
-                        new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT)
+                        new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE)
                 )
         );
 
