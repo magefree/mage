@@ -14,7 +14,7 @@ public class IndominusRexAlphaTests extends CardTestPlayerBase {
 
     @Test
     public void IndominusRexAlphaTest() {
-        // Whenever a creature dealt damage by Abattoir Ghoul this turn dies, you gain life equal to that creature's toughness.
+
         addCard(Zone.HAND, playerA, "Indominus Rex, Alpha", 1);
         addCard(Zone.HAND, playerA, "Ornithopter", 1);
         addCard(Zone.HAND, playerA, "Rograkh, Son of Rohgahh", 1);
