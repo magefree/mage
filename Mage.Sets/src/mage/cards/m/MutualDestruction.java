@@ -47,7 +47,7 @@ public final class MutualDestruction extends CardImpl {
         )).setRuleAtTheTop(true));
 
         // As an additional cost to cast this spell, sacrifice a creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
 
         // Destroy target creature.
         this.getSpellAbility().addEffect(new DestroyTargetEffect("Destroy target creature"));

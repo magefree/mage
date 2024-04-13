@@ -1,7 +1,5 @@
-
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -11,21 +9,15 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
+import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  * @author JRHerlehy
  */
 public final class PacificationArray extends CardImpl {
-
-    private static final FilterPermanent filter = new FilterPermanent("artifact or creature");
-
-    static {
-        filter.add(Predicates.or(CardType.ARTIFACT.getPredicate(),
-                CardType.CREATURE.getPredicate()));
-    }
 
     public PacificationArray(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
@@ -33,7 +25,7 @@ public final class PacificationArray extends CardImpl {
         // {2}, {t}: Tap target artifact or creature.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new ManaCostsImpl<>("{2}"));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_CREATURE));
         this.addAbility(ability);
     }
 

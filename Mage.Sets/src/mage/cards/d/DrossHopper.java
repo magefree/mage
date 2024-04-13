@@ -32,7 +32,7 @@ public final class DrossHopper extends CardImpl {
         this.toughness = new MageInt(1);
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn),
-                new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
+                new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE)));
     }
 
     private DrossHopper(final DrossHopper card) {

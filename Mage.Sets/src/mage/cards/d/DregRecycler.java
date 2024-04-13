@@ -30,7 +30,7 @@ public final class DregRecycler extends CardImpl {
 
         // {T}, Sacrifice an artifact or creature: Each opponent loses 1 life and you gain 1 life.
         Ability ability = new SimpleActivatedAbility(new LoseLifeOpponentsEffect(1), new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ARTIFACT_OR_CREATURE_SHORT_TEXT));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_CREATURE));
         ability.addEffect(new GainLifeEffect(1).concatBy("and"));
         this.addAbility(ability);
     }

@@ -45,7 +45,7 @@ public final class GhostCouncilOfOrzhova extends CardImpl {
                 Zone.BATTLEFIELD,
                 new ExileReturnBattlefieldOwnerNextEndStepSourceEffect(),
                 new GenericManaCost(1));
-        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
         this.addAbility(ability);
     }
 

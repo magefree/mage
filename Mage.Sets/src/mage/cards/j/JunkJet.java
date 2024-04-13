@@ -42,7 +42,7 @@ public final class JunkJet extends CardImpl {
                 new JunkJetAbility(),
                 new GenericManaCost(3)
         );
-        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_ARTIFACT_SHORT_TEXT));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_ARTIFACT));
         this.addAbility(ability);
 
         // Equip {1}
