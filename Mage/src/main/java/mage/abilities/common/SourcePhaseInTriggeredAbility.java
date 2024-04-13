@@ -14,7 +14,7 @@ public class SourcePhaseInTriggeredAbility extends TriggeredAbilityImpl {
     public SourcePhaseInTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
         setTriggerPhrase("Whenever {this} phases in, ");
-        this.replaceRuleText = true;
+        this.withRuleTextReplacement(true);
     }
 
     protected SourcePhaseInTriggeredAbility(final SourcePhaseInTriggeredAbility ability) {
