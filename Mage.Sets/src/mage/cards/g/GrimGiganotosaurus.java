@@ -46,7 +46,7 @@ public final class GrimGiganotosaurus extends CardImpl {
         // {10}{B}{G}: Monstrosity 10. This ability costs {1} less to activate for each creature with power 4 or greater your opponents control.
         this.addAbility(new MonstrosityAbility("{10}{B}{G}", 10,
                 GrimGiganotosaurusAdjuster.instance,
-                "This ability costs {1} less to activate for each creature with power 4 or greater your opponents control."));
+                "This ability costs {1} less to activate for each creature with power 4 or greater your opponents control. "));
 
         // When Grim Giganotosaurus becomes monstrous, destroy all artifacts and creatures other than Grim Giganotosaurus.
         this.addAbility(new BecomesMonstrousSourceTriggeredAbility(new DestroyAllEffect(filter)));
