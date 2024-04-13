@@ -47,7 +47,7 @@ public final class IanMalcolmChaotician extends CardImpl {
         // Whenever a player draws their second card each turn, that player exiles the top card of their library.
         this.addAbility(new IanMalcolmChaoticianDrawTriggerAbility(), new IanMalcolmChaoticianWatcher());
 
-        // During each player's turn, that player may play a card from exile with a collection counter on it if it was exiled by an ability you controlled, and you may spend mana as though it were any color to cast it.
+        // During each player's turn, that player may cast a spell from exile with a collection counter on it if it was exiled by an ability you controlled, and you may spend mana as though it were any color to cast it.
         Ability ability = new SimpleStaticAbility(new IanMalcolmChaoticianCastEffect());
         ability.addEffect(new IanMalcolmChaoticianManaEffect());
         this.addAbility(ability);
@@ -125,7 +125,7 @@ class IanMalcolmChaoticianCastEffect extends AsThoughEffectImpl {
 
     IanMalcolmChaoticianCastEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.PlayForFree);
-        staticText = "During each player's turn, that player may play a card from exile " +
+        staticText = "During each player's turn, that player may cast a spell from exile " +
                 "with a collection counter on it if it was exiled by an ability you controlled";
     }
 
@@ -149,8 +149,10 @@ class IanMalcolmChaoticianCastEffect extends AsThoughEffectImpl {
             return false;
         }
         Card card = game.getCard(CardUtil.getMainCardId(game, sourceId));
-        return card != null
-                && card.getCounters(game).getCount(CounterType.COLLECTION) > 0
+        if (card == null || card.isLand(game)){
+            return false;
+        }
+        return card.getCounters(game).getCount(CounterType.COLLECTION) > 0
                 && IanMalcolmChaoticianWatcher.checkExile(affectedControllerId, card, game, 0);
     }
 }
