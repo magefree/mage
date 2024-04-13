@@ -58,7 +58,7 @@ class PolymorphistsJestEffect extends ContinuousEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        if (getAffectedObjectsSetAtInit(source)) {
+        if (getAffectedObjectsSet()) {
             game.getBattlefield()
                     .getActivePermanents(
                             StaticFilters.FILTER_CONTROLLED_CREATURE,

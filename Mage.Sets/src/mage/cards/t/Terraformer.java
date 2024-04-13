@@ -120,7 +120,7 @@ class TerraformerContinuousEffect extends ContinuousEffectImpl {
                 dependencyTypes.add(DependencyType.BecomeSwamp);
                 break;
         }
-        if (getAffectedObjectsSetAtInit(source)) {
+        if (getAffectedObjectsSet()) {
             game.getBattlefield()
                     .getActivePermanents(
                             StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND,

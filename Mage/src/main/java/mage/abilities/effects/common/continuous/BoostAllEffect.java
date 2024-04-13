@@ -102,7 +102,7 @@ public class BoostAllEffect extends ContinuousEffectImpl {
     public void init(Ability source, Game game) {
         super.init(source, game);
         setRuntimeData(source, game);
-        if (getAffectedObjectsSetAtInit(source)) {
+        if (getAffectedObjectsSet()) {
             for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
                 if (!(excludeSource && perm.getId().equals(source.getSourceId())) && selectedByRuntimeData(perm, source, game)) {
                     affectedObjectList.add(new MageObjectReference(perm, game));

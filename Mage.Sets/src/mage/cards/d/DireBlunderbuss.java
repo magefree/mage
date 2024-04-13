@@ -77,7 +77,7 @@ class DireBlunderbussGainAbilityEffect extends ContinuousEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        if (getAffectedObjectsSetAtInit(source)) {
+        if (getAffectedObjectsSet()) {
             Permanent equipment = game.getPermanentOrLKIBattlefield(source.getSourceId());
             if (equipment != null && equipment.getAttachedTo() != null) {
                 this.setTargetPointer(new FixedTarget(equipment.getAttachedTo(), game.getState().getZoneChangeCounter(equipment.getAttachedTo())));

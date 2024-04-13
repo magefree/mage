@@ -58,7 +58,7 @@ public class GainAbilityTargetEffect extends ContinuousEffectImpl {
         super.init(source, game);
 
         // must support dynamic targets from static ability and static targets from activated abilities
-        if (getAffectedObjectsSetAtInit(source)) {
+        if (getAffectedObjectsSet()) {
             // target permanents (by default)
             getTargetPointer().getTargets(game, source)
                     .stream()

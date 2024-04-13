@@ -215,7 +215,12 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
     }
 
     /**
-     * Use this getter only in overriden init call, before or after super.init
+     * This is a workaround when trying to access affectObjectsSet during init, before
+     * ContinuousEffectImpl::init is called.
+     * <p>
+     * TODO: should be investigated how to modify all continuous effects to call super.init()
+     *       before doing their own changes. At which point there is no longer need for this
+     *       workaround.
      */
     protected boolean getAffectedObjectsSetAtInit(Ability source) {
         if (this.affectedObjectsSet == null) {

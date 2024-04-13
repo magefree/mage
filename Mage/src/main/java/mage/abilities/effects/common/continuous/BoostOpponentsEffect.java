@@ -49,7 +49,7 @@ public class BoostOpponentsEffect extends ContinuousEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        if (getAffectedObjectsSetAtInit(source)) {
+        if (getAffectedObjectsSet()) {
             Set<UUID> opponents = game.getOpponents(source.getControllerId());
             for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
                 if (opponents.contains(perm.getControllerId())) {

@@ -53,7 +53,7 @@ class BileBlightEffect extends BoostAllEffect {
     public void init(Ability source, Game game) {
         super.init(source, game);
         affectedObjectList.clear();
-        if (!getAffectedObjectsSetAtInit(source)) {
+        if (!getAffectedObjectsSet()) {
             return;
         }
         Permanent target = game.getPermanent(getTargetPointer().getFirst(game, source));

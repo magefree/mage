@@ -53,7 +53,7 @@ public class BoostEnchantedEffect extends ContinuousEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        if (getAffectedObjectsSetAtInit(source)) {
+        if (getAffectedObjectsSet()) {
             // Added boosts of activated or triggered abilities exist independent from the source they are created by
             // so a continuous effect for the permanent itself with the attachment is created
             Permanent equipment = game.getPermanentOrLKIBattlefield(source.getSourceId());

@@ -63,7 +63,7 @@ public class GainAbilitySourceEffect extends ContinuousEffectImpl {
                 return;
             }
         }
-        if (getAffectedObjectsSetAtInit(source)) {
+        if (getAffectedObjectsSet()) {
             Permanent permanent = game.getPermanentEntering(source.getSourceId());
             if (permanent != null) {
                 affectedObjectList.add(new MageObjectReference(source.getSourceId(), game.getState().getZoneChangeCounter(source.getSourceId()) + 1, game));

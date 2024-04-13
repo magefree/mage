@@ -70,7 +70,7 @@ class TakenoSamuraiGeneralEffect extends ContinuousEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        if (getAffectedObjectsSetAtInit(source)) {
+        if (getAffectedObjectsSet()) {
             for (Permanent perm : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
                 if (!perm.getId().equals(source.getSourceId())) {
                     for (Ability ability : perm.getAbilities()) {

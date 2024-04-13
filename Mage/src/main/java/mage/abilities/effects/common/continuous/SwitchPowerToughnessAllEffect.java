@@ -41,7 +41,7 @@ public class SwitchPowerToughnessAllEffect extends ContinuousEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        if (getAffectedObjectsSetAtInit(source) && game.getPlayer(source.getControllerId()) != null) {
+        if (getAffectedObjectsSet() && game.getPlayer(source.getControllerId()) != null) {
             for (Permanent perm : game.getState().getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
                 affectedObjectList.add(new MageObjectReference(perm, game));
             }

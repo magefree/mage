@@ -103,7 +103,7 @@ class VisionCharmEffect extends ContinuousEffectImpl {
         }
         FilterPermanent filter = new FilterLandPermanent();
         filter.add(SubType.byDescription(targetLandType).getPredicate());
-        if (getAffectedObjectsSetAtInit(source)) {
+        if (getAffectedObjectsSet()) {
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, game)) {
                 affectedObjectList.add(new MageObjectReference(permanent, game));
             }

@@ -90,7 +90,7 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        if (getAffectedObjectsSetAtInit(source)) {
+        if (getAffectedObjectsSet()) {
             affectedObjectList.add(new MageObjectReference(source.getSourceId(), game));
         }
     }
