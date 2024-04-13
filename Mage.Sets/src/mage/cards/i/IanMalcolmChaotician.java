@@ -47,7 +47,8 @@ public final class IanMalcolmChaotician extends CardImpl {
         // Whenever a player draws their second card each turn, that player exiles the top card of their library.
         this.addAbility(new IanMalcolmChaoticianDrawTriggerAbility(), new IanMalcolmChaoticianWatcher());
 
-        // During each player's turn, that player may cast a spell from exile if it was exiled by an ability you controlled, and mana of any type can be spent to cast it.
+        // During each player's turn, that player may cast a spell from among the cards they don't own exiled with
+        // Ian Malcolm, Chaotician, and mana of any type can be spent to cast it.
         Ability ability = new SimpleStaticAbility(new IanMalcolmChaoticianCastEffect());
         ability.addEffect(new IanMalcolmChaoticianManaEffect());
         this.addAbility(ability);
@@ -125,8 +126,8 @@ class IanMalcolmChaoticianCastEffect extends AsThoughEffectImpl {
 
     IanMalcolmChaoticianCastEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.PlayForFree);
-        staticText = "During each player's turn, that player may cast a spell from exile " +
-                "if it was exiled by an ability you controlled";
+        staticText = "During each player's turn, that player may cast a spell from among the cards they don't own " +
+                "exiled with {this}, and mana of any type can be spent to cast it.";
     }
 
     private IanMalcolmChaoticianCastEffect(final IanMalcolmChaoticianCastEffect effect) {
@@ -152,7 +153,8 @@ class IanMalcolmChaoticianCastEffect extends AsThoughEffectImpl {
         if (card == null || card.isLand(game)){
             return false;
         }
-        return IanMalcolmChaoticianWatcher.checkExile(affectedControllerId, card, game, 0);
+        return !card.getOwnerId().equals(affectedControllerId)
+                && IanMalcolmChaoticianWatcher.checkExile(affectedControllerId, card, game, 0);
     }
 }
 
