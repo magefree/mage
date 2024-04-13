@@ -47,7 +47,7 @@ public final class IanMalcolmChaotician extends CardImpl {
         // Whenever a player draws their second card each turn, that player exiles the top card of their library.
         this.addAbility(new IanMalcolmChaoticianDrawTriggerAbility(), new IanMalcolmChaoticianWatcher());
 
-        // During each player's turn, that player may cast a spell from exile if it was exiled by an ability you controlled, and you may spend mana as though it were any color to cast it.
+        // During each player's turn, that player may cast a spell from exile if it was exiled by an ability you controlled, and mana of any type can be spent to cast it.
         Ability ability = new SimpleStaticAbility(new IanMalcolmChaoticianCastEffect());
         ability.addEffect(new IanMalcolmChaoticianManaEffect());
         this.addAbility(ability);
@@ -160,7 +160,7 @@ class IanMalcolmChaoticianManaEffect extends AsThoughEffectImpl implements AsTho
 
     IanMalcolmChaoticianManaEffect() {
         super(AsThoughEffectType.SPEND_OTHER_MANA, Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = ", and you may spend mana as though it were any color to cast it";
+        staticText = ", and mana of any type can be spent to cast it";
     }
 
     private IanMalcolmChaoticianManaEffect(final IanMalcolmChaoticianManaEffect effect) {
