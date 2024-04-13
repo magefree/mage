@@ -47,7 +47,7 @@ public final class IanMalcolmChaotician extends CardImpl {
         // Whenever a player draws their second card each turn, that player exiles the top card of their library.
         this.addAbility(new IanMalcolmChaoticianDrawTriggerAbility(), new IanMalcolmChaoticianWatcher());
 
-        // Once each turn, you may play a card from exile with a collection counter on it if it was exiled by an ability you controlled, and you may spend mana as though it were any color to cast it.
+        // During each player's turn, that player may play a card from exile with a collection counter on it if it was exiled by an ability you controlled, and you may spend mana as though it were any color to cast it.
         Ability ability = new SimpleStaticAbility(new IanMalcolmChaoticianCastEffect());
         ability.addEffect(new IanMalcolmChaoticianManaEffect());
         this.addAbility(ability);
@@ -125,7 +125,7 @@ class IanMalcolmChaoticianCastEffect extends AsThoughEffectImpl {
 
     IanMalcolmChaoticianCastEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.PlayForFree);
-        staticText = "once each turn, you may play a card from exile " +
+        staticText = "During each player's turn, that player may play a card from exile " +
                 "with a collection counter on it if it was exiled by an ability you controlled";
     }
 
@@ -145,7 +145,7 @@ class IanMalcolmChaoticianCastEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        if (!source.isControlledBy(affectedControllerId) || IanMalcolmChaoticianWatcher.checkUsed(source, game)) {
+        if (!game.isActivePlayer(affectedControllerId) || IanMalcolmChaoticianWatcher.checkUsed(source, game)) {
             return false;
         }
         Card card = game.getCard(CardUtil.getMainCardId(game, sourceId));
