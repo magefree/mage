@@ -1,7 +1,9 @@
-package mage.abilities.effects;
+package mage.abilities.effects.common;
 
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.effects.ContinuousEffect;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.asthought.MayLookAtTargetCardEffect;
 import mage.cards.Card;
 import mage.cards.Cards;

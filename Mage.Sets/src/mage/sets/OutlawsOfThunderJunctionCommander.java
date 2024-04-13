@@ -95,6 +95,7 @@ public final class OutlawsOfThunderJunctionCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Dire Fleet Ravager", 132, Rarity.MYTHIC, mage.cards.d.DireFleetRavager.class));
         cards.add(new SetCardInfo("Discreet Retreat", 20, Rarity.RARE, mage.cards.d.DiscreetRetreat.class));
         cards.add(new SetCardInfo("Dragonskull Summit", 289, Rarity.RARE, mage.cards.d.DragonskullSummit.class));
+        cards.add(new SetCardInfo("Dream-Thief's Bandana", 38, Rarity.RARE, mage.cards.d.DreamThiefsBandana.class));
         cards.add(new SetCardInfo("Drowned Catacomb", 290, Rarity.RARE, mage.cards.d.DrownedCatacomb.class));
         cards.add(new SetCardInfo("Dune Chanter", 31, Rarity.RARE, mage.cards.d.DuneChanter.class));
         cards.add(new SetCardInfo("Dunes of the Dead", 291, Rarity.UNCOMMON, mage.cards.d.DunesOfTheDead.class));
@@ -130,6 +131,7 @@ public final class OutlawsOfThunderJunctionCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Ghostly Pilferer", 98, Rarity.RARE, mage.cards.g.GhostlyPilferer.class));
         cards.add(new SetCardInfo("Glittering Stockpile", 167, Rarity.UNCOMMON, mage.cards.g.GlitteringStockpile.class));
         cards.add(new SetCardInfo("Goblin Electromancer", 228, Rarity.COMMON, mage.cards.g.GoblinElectromancer.class));
+        cards.add(new SetCardInfo("Gonti, Canny Acquisitor", 1, Rarity.MYTHIC, mage.cards.g.GontiCannyAcquisitor.class));
         cards.add(new SetCardInfo("Gonti, Lord of Luxury", 135, Rarity.RARE, mage.cards.g.GontiLordOfLuxury.class));
         cards.add(new SetCardInfo("Graywater's Fixer", 36, Rarity.RARE, mage.cards.g.GraywatersFixer.class));
         cards.add(new SetCardInfo("Grenzo, Havoc Raiser", 168, Rarity.RARE, mage.cards.g.GrenzoHavocRaiser.class));
