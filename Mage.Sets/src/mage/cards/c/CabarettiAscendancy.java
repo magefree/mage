@@ -68,7 +68,7 @@ class CabarettiAscendencyEffect extends OneShotEffect {
         }
         MageObject sourceObject = source.getSourceObject(game);
         String objectName = sourceObject == null ? "Cabaretti Ascendency" : sourceObject.getIdName();
-        controller.lookAtCards(objectName, card, game);
+        controller.lookAtCard(objectName, card, game);
         if ((card.isCreature(game) || card.isPlaneswalker(game)) && controller.chooseUse(
                 Outcome.DrawCard, "Reveal " + card.getIdName() + " and put it in your hand?", source, game)) {
             controller.revealCards(source, new CardsImpl(card), game);

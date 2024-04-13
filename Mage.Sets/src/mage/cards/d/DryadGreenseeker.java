@@ -74,7 +74,7 @@ class DryadGreenseekerEffect extends OneShotEffect {
         if (card == null) {
             return false;
         }
-        player.lookAtCards(null, card, game);
+        player.lookAtCard(null, card, game);
         if (!card.isLand(game)) {
             return true;
         }

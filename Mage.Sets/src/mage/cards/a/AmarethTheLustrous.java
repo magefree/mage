@@ -81,7 +81,7 @@ class AmarethTheLustrousEffect extends OneShotEffect {
         if (card == null) {
             return false;
         }
-        player.lookAtCards("Top card of library", card, game);
+        player.lookAtCard("Top card of library", card, game);
         Object obj = getValue("permanentEnteringBattlefield");
         Permanent permanent = null;
         if (obj instanceof Permanent) {

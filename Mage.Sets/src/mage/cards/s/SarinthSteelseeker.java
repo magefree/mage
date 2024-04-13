@@ -72,7 +72,7 @@ class SarinthSteelseekerEffect extends OneShotEffect {
         if (topCard == null) {
             return false;
         }
-        controller.lookAtCards("Top card of library", topCard, game);
+        controller.lookAtCard("Top card of library", topCard, game);
         if (topCard.isLand(game) && controller.chooseUse(Outcome.DrawCard, "Reveal " + topCard.getLogName() + " and put it into your hand?", source, game)) {
             controller.revealCards(source, new CardsImpl(topCard), game);
             controller.moveCards(topCard, Zone.HAND, source, game);

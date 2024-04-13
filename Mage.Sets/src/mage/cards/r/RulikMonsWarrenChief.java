@@ -74,7 +74,7 @@ class RulikMonsWarrenChiefEffect extends OneShotEffect {
         boolean landToPlay = false;
         Card card = controller.getLibrary().getFromTop(game);
         if (card != null) {
-            controller.lookAtCards("Top card of your library", card, game);
+            controller.lookAtCard("Top card of your library", card, game);
             landToPlay = card.isLand(game) && controller.chooseUse(outcome, "Put " + card.getName() + " into play tapped?", source, game)
                     && controller.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, false, null);
         }

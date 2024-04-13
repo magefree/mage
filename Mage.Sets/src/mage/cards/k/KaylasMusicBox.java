@@ -80,7 +80,7 @@ class KaylasMusicBoxExileEffect extends OneShotEffect {
         }
 
         card.setFaceDown(true, game);
-        controller.lookAtCards(null, card, game);
+        controller.lookAtCard(null, card, game);
 
         if (controller.moveCardsToExile(card, source, game, true, CardUtil.getExileZoneId(game, source), CardUtil.getSourceName(game, source))) {
             card.setFaceDown(true, game);

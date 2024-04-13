@@ -88,7 +88,7 @@ class RunoStromkirkEffect extends OneShotEffect {
         if (card == null) {
             return false;
         }
-        player.lookAtCards(null, card, game);
+        player.lookAtCard(null, card, game);
         if (!player.chooseUse(outcome, "Reveal " + card.getName() + '?', source, game)) {
             return true;
         }

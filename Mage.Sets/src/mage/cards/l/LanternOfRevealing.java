@@ -72,7 +72,7 @@ class LanternOfRevealingEffect extends OneShotEffect {
         if (card == null) {
             return false;
         }
-        player.lookAtCards("Top card of library", card, game);
+        player.lookAtCard("Top card of library", card, game);
         if (card.isLand(game) && player.chooseUse(
                 outcome, "Put " + card.getName() + " onto the battlefield tapped?", source, game
         )) {

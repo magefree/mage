@@ -81,7 +81,7 @@ class ZiatorasEnvoyEffect extends OneShotEffect {
         if (card == null) {
             return false;
         }
-        player.lookAtCards("Top of your library", card, game);
+        player.lookAtCard("Top of your library", card, game);
         Cards cards = new CardsImpl(card);
         // TODO: factor this out and reuse for other cards
         if (player.canPlayLand()) {

@@ -126,7 +126,7 @@ class KenessosPriestOfThassaActivatedEffect extends OneShotEffect {
         if (card == null) {
             return false;
         }
-        player.lookAtCards(null, card, game);
+        player.lookAtCard(null, card, game);
         if (filter.match(card, game) && player.chooseUse(outcome, "Put " + card.getName() + " onto the battlefield?", source, game)) {
             return player.moveCards(card, Zone.BATTLEFIELD, source, game);
         }

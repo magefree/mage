@@ -3281,8 +3281,8 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public void lookAtCards(String name, Card card, Game game) {
-        computerPlayer.lookAtCards(name, card, game);
+    public void lookAtCard(String name, Card card, Game game) {
+        computerPlayer.lookAtCard(name, card, game);
     }
 
     @Override

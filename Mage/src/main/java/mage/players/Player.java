@@ -616,7 +616,7 @@ public interface Player extends MageItem, Copyable<Player> {
      */
     void revealCards(Ability source, String name, Cards cards, Game game, boolean postToLog);
 
-    void lookAtCards(String name, Card card, Game game);
+    void lookAtCard(String name, Card card, Game game);
 
     void lookAtCards(String name, Cards cards, Game game);
 

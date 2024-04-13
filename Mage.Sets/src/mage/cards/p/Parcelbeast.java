@@ -79,7 +79,7 @@ class ParcelbeastEffect extends OneShotEffect {
         if (card == null) {
             return false;
         }
-        player.lookAtCards("", card, game);
+        player.lookAtCard("", card, game);
         if (card.isLand(game) && player.chooseUse(
                 outcome, "Put " + card.getName() + " onto the battlefield?",
                 "(otherwise put it into your hand", "To battlefield",

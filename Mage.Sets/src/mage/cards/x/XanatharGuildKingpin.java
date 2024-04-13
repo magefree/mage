@@ -130,7 +130,7 @@ class XanatharLookAtTopCardOfLibraryEffect extends ContinuousEffectImpl {
         if (topCard == null) {
             return false;
         }
-        controller.lookAtCards("Top card of " + opponent.getName() + "'s library", topCard, game);
+        controller.lookAtCard("Top card of " + opponent.getName() + "'s library", topCard, game);
         return true;
     }
 

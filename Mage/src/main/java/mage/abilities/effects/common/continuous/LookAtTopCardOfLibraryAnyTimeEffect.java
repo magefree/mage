@@ -45,7 +45,7 @@ public class LookAtTopCardOfLibraryAnyTimeEffect extends ContinuousEffectImpl {
         if (topCard == null) {
             return false;
         }
-        controller.lookAtCards("Top card of your library", topCard, game);
+        controller.lookAtCard("Top card of your library", topCard, game);
         return true;
     }
 

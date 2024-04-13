@@ -98,7 +98,7 @@ class BucolicRanchEffect extends OneShotEffect {
         if (card == null) {
             return false;
         }
-        player.lookAtCards("Top card of library", card, game);
+        player.lookAtCard("Top card of library", card, game);
         if (filter.match(card, player.getId(), source, game) && player.chooseUse(
                 outcome, "Put " + card.getName() + " into your hand?", source, game
         )) {

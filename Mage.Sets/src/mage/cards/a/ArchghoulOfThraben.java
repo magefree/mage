@@ -77,7 +77,7 @@ class ArchghoulOfThrabenEffect extends OneShotEffect {
         if (topCard == null) {
             return false;
         }
-        controller.lookAtCards("Top card of library", topCard, game);
+        controller.lookAtCard("Top card of library", topCard, game);
         if (topCard.hasSubtype(SubType.ZOMBIE, game)) {
             if (controller.chooseUse(Outcome.DrawCard, "Reveal " + topCard.getName() + " and put it into your hand?", source, game)) {
                 controller.revealCards(source, new CardsImpl(topCard), game);

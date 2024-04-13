@@ -93,7 +93,7 @@ class QuestForUlasTempleEffect extends OneShotEffect {
         if (card == null) {
             return false;
         }
-        controller.lookAtCards("Top of library", card, game);
+        controller.lookAtCard("Top of library", card, game);
         if (!card.isCreature(game) || !controller.chooseUse(
                 Outcome.DrawCard, "Reveal the top card of your library?", source, game
         )) {
