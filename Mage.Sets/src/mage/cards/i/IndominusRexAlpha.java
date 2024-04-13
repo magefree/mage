@@ -152,6 +152,10 @@ class IndominusRexAlphaCountersEffect extends OneShotEffect {
             for (UUID targetId : chosenTargets) {
 
                 Card card = game.getCard(targetId);
+                if (card == null){
+                    continue;
+                }
+
                 for (Ability ability : card.getAbilities()) {
                     if (abilityClass.isInstance(ability)){
                         permanent.addCounters(counter, source.getControllerId(), source, game);
