@@ -1,7 +1,5 @@
 package mage.cards.t;
 
-import java.util.UUID;
-
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsDamageToAPlayerAllTriggeredAbility;
@@ -13,19 +11,14 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AsThoughEffectType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SetTargetPointer;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
+
+import java.util.UUID;
 
 /**
  * @author jam736
@@ -33,7 +26,7 @@ import mage.game.Game;
 public final class TheIndomitable extends CardImpl {
 
     public TheIndomitable(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}{U}{U}");
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.VEHICLE);
         this.power = new MageInt(6);
@@ -67,18 +60,19 @@ public final class TheIndomitable extends CardImpl {
 }
 
 class TheIndomitableCastEffect extends AsThoughEffectImpl {
-    
+
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("three or more tapped pirates and/or vehicles");
+
     static {
         filter.add(TappedPredicate.TAPPED);
         filter.add(Predicates.or(
-            SubType.PIRATE.getPredicate(),
-            SubType.VEHICLE.getPredicate()
+                SubType.PIRATE.getPredicate(),
+                SubType.VEHICLE.getPredicate()
         ));
     }
 
     TheIndomitableCastEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
         staticText = "You may cast {this} from your graveyard as long as you control three or more tapped Pirates and/or Vehicles.";
     }
 
@@ -100,7 +94,7 @@ class TheIndomitableCastEffect extends AsThoughEffectImpl {
     public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
         if (sourceId.equals(source.getSourceId())) {
             Card card = game.getCard(source.getSourceId());
-            if (card != null 
+            if (card != null
                     && card.isOwnedBy(affectedControllerId)
                     && game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD
                     && game.getBattlefield().count(filter, source.getControllerId(), source, game) >= 3) {

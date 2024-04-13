@@ -13,6 +13,7 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.LibrarySearchedEvent;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.CardUtil;
 
@@ -20,7 +21,6 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
-import mage.game.permanent.Permanent;
 
 /**
  * @author JayDi85
@@ -104,7 +104,7 @@ class OppositionAgentReplacementEffect extends ReplacementEffectImpl {
         // You may play those cards for as long as they remain exiled, and you may spend mana as though it were mana of any color to cast them
         for (Card card : cardsToExile) {
             // the source ability is tied to the effect so we need to keep it active to work correctly
-            CardUtil.makeCardPlayable(game, source, card, Duration.EndOfGame, true);
+            CardUtil.makeCardPlayable(game, source, card, false, Duration.EndOfGame, true);
         }
 
         // return false all the time

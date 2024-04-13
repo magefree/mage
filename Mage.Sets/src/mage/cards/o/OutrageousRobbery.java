@@ -1,8 +1,5 @@
 package mage.cards.o;
 
-import java.util.Set;
-import java.util.UUID;
-
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffect;
@@ -20,8 +17,10 @@ import mage.target.common.TargetOpponent;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author DominionSpy
  */
 public final class OutrageousRobbery extends CardImpl {
@@ -91,7 +90,7 @@ class OutrageousRobberyEffect extends OneShotEffect {
                 game.addEffect(effect, source);
 
                 CardUtil.makeCardPlayable(
-                        game, source, card, Duration.Custom, true,
+                        game, source, card, false, Duration.Custom, true,
                         source.getControllerId(), null);
             }
         }

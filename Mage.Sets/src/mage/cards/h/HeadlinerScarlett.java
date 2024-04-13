@@ -124,7 +124,7 @@ class HeadlinerScarlettExileEffect extends OneShotEffect {
         controller.moveCardsToExile(card, source, game, false, exileId, exileName);
         if (game.getState().getZone(card.getId()) == Zone.EXILED) {
             card.setFaceDown(true, game);
-            CardUtil.makeCardPlayable(game, source, card, Duration.EndOfTurn, false);
+            CardUtil.makeCardPlayable(game, source, card, false, Duration.EndOfTurn, false);
             ContinuousEffect effect = new HeadlinerScarlettLookEffect(controller.getId());
             effect.setTargetPointer(new FixedTarget(card, game));
             game.addEffect(effect, source);

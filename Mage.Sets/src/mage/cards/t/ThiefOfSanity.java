@@ -126,7 +126,7 @@ class ThiefOfSanityCastFromExileEffect extends AsThoughEffectImpl {
     private final UUID authorizedPlayerId;
 
     public ThiefOfSanityCastFromExileEffect(UUID authorizedPlayerId) {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
         this.authorizedPlayerId = authorizedPlayerId;
         staticText = "For as long as that card remains exiled, you may cast it";
     }

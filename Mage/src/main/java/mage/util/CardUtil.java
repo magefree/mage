@@ -1282,8 +1282,8 @@ public final class CardUtil {
     }
 
     // TODO: use CastManaAdjustment instead of boolean anyColor
-    public static void makeCardPlayable(Game game, Ability source, Card card, Duration duration, boolean anyColor) {
-        makeCardPlayable(game, source, card, duration, anyColor, null, null);
+    public static void makeCardPlayable(Game game, Ability source, Card card, boolean useCastSpellOnly, Duration duration, boolean anyColor) {
+        makeCardPlayable(game, source, card, useCastSpellOnly, duration, anyColor, null, null);
     }
 
     /**
@@ -1299,14 +1299,14 @@ public final class CardUtil {
      * @param condition can be null
      */
     // TODO: use CastManaAdjustment instead of boolean anyColor
-    public static void makeCardPlayable(Game game, Ability source, Card card, Duration duration, boolean anyColor, UUID playerId, Condition condition) {
+    public static void makeCardPlayable(Game game, Ability source, Card card, boolean useCastSpellOnly, Duration duration, boolean anyColor, UUID playerId, Condition condition) {
         // Effect can be used for cards in zones and permanents on battlefield
         // PermanentCard's ZCC is static, but we need updated ZCC from the card (after moved to another zone)
         // So there is a workaround to get actual card's ZCC
         // Example: Hostage Taker
         UUID objectId = card.getMainCard().getId();
         int zcc = game.getState().getZoneChangeCounter(objectId);
-        game.addEffect(new CanPlayCardControllerEffect(game, objectId, zcc, duration, playerId, condition), source);
+        game.addEffect(new CanPlayCardControllerEffect(game, objectId, zcc, useCastSpellOnly, duration, playerId, condition), source);
         if (anyColor) {
             game.addEffect(new YouMaySpendManaAsAnyColorToCastTargetEffect(duration, playerId, condition).setTargetPointer(new FixedTarget(objectId, zcc)), source);
         }

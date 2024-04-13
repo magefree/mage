@@ -107,7 +107,7 @@ class ExpensiveTasteEffect extends OneShotEffect {
                 }
                 exileZones.add(exileZoneId);
                 // allow to cast the card
-                CardUtil.makeCardPlayable(game, source, card, Duration.EndOfGame, false, controller.getId(), null);
+                CardUtil.makeCardPlayable(game, source, card, false, Duration.EndOfGame, false, controller.getId(), null);
                 // For as long as that card remains exiled, you may look at it
                 ContinuousEffect effect = new MayLookAtTargetCardEffect(controller.getId());
                 effect.setTargetPointer(new FixedTarget(card.getId(), game));

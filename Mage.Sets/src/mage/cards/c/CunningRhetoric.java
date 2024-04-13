@@ -115,7 +115,7 @@ class CunningRhetoricEffect extends OneShotEffect {
 
         UUID exileZoneId = CardUtil.getExileZoneId(game, sourceObject.getId(), sourceObject.getZoneChangeCounter(game));
         opponent.moveCardsToExile(card, source, game, true, exileZoneId, sourceObject.getIdName());
-        CardUtil.makeCardPlayable(game, source, card, Duration.Custom, true);
+        CardUtil.makeCardPlayable(game, source, card, false, Duration.Custom, true);
         return true;
     }
 }

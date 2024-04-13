@@ -107,7 +107,7 @@ class CourtOfLocthwainFirstEffect extends OneShotEffect {
 
         if (game.getState().getZone(card.getId()) == Zone.EXILED) {
             CardUtil.makeCardPlayable(
-                    game, source, card, Duration.EndOfGame,
+                    game, source, card, false, Duration.EndOfGame,
                     true, controller.getId(), null
             );
         }
@@ -160,7 +160,7 @@ class CourtOfLocthwainCastForFreeEffect extends AsThoughEffectImpl {
     private final MageObjectReference mor;
 
     public CourtOfLocthwainCastForFreeEffect(MageObjectReference mor) {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
         this.mor = mor;
     }
 

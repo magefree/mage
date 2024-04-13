@@ -4,25 +4,18 @@ import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.AsThoughEffectImpl;
-import mage.abilities.effects.AsThoughManaEffect;
-import mage.abilities.effects.ContinuousEffect;
+import mage.abilities.effects.ExileFaceDownYouMayPlayAsLongAsExiledTargetEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.asthought.MayLookAtTargetCardEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.*;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.game.Game;
-import mage.players.ManaPoolItem;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetOpponent;
 import mage.target.targetpointer.FixedTarget;
-import mage.util.CardUtil;
 
-import java.util.HashSet;
-import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -61,8 +54,6 @@ public final class GontiLordOfLuxury extends CardImpl {
 
 class GontiLordOfLuxuryEffect extends OneShotEffect {
 
-    private static final String VALUE_PREFIX = "ExileZones";
-
     public GontiLordOfLuxuryEffect() {
         super(Outcome.Benefit);
         this.staticText = "look at the top four cards of target opponent's library, exile one of them face down, then put the rest on the bottom of that library in a random order. You may look at and cast that card for as long as it remains exiled, and you may spend mana as though it were mana of any type to cast that spell";
@@ -90,126 +81,14 @@ class GontiLordOfLuxuryEffect extends OneShotEffect {
         TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card to exile"));
         controller.choose(outcome, topCards, target, source, game);
         Card card = game.getCard(target.getFirstTarget());
-        if (card == null) {
-            controller.putCardsOnBottomOfLibrary(topCards, game, source, false);
-            return true;
+        if (card != null) {
+            new ExileFaceDownYouMayPlayAsLongAsExiledTargetEffect(true, CastManaAdjustment.AS_THOUGH_ANY_MANA_TYPE)
+                    .setTargetPointer(new FixedTarget(card, game))
+                    .apply(game, source);
         }
-        topCards.remove(card);
-        // move card to exile
-        UUID exileZoneId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
-        card.setFaceDown(true, game);
-        if (controller.moveCardsToExile(card, source, game, false, exileZoneId, sourceObject.getIdName())) {
-            card.setFaceDown(true, game);
-            Set<UUID> exileZones = (Set<UUID>) game.getState().getValue(VALUE_PREFIX + source.getSourceId().toString());
-            if (exileZones == null) {
-                exileZones = new HashSet<>();
-                game.getState().setValue(VALUE_PREFIX + source.getSourceId().toString(), exileZones);
-            }
-            exileZones.add(exileZoneId);
-            // allow to cast the card
-            ContinuousEffect effect = new GontiLordOfLuxuryCastFromExileEffect();
-            effect.setTargetPointer(new FixedTarget(card.getId(), game));
-            game.addEffect(effect, source);
-            // and you may spend mana as though it were mana of any color to cast it
-            effect = new GontiLordOfLuxurySpendAnyManaEffect();
-            effect.setTargetPointer(new FixedTarget(card.getId(), game));
-            game.addEffect(effect, source);
-            // For as long as that card remains exiled, you may look at it
-            effect = new MayLookAtTargetCardEffect(controller.getId());
-            effect.setTargetPointer(new FixedTarget(card.getId(), game));
-            game.addEffect(effect, source);
-        }
+        topCards.retainZone(Zone.LIBRARY, game);
         // then put the rest on the bottom of that library in a random order
         controller.putCardsOnBottomOfLibrary(topCards, game, source, false);
         return true;
-    }
-}
-
-class GontiLordOfLuxuryCastFromExileEffect extends AsThoughEffectImpl {
-
-    GontiLordOfLuxuryCastFromExileEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
-        staticText = "You may cast that card for as long as it remains exiled, and you may spend mana as though it were mana of any color to cast that spell";
-    }
-
-    private GontiLordOfLuxuryCastFromExileEffect(final GontiLordOfLuxuryCastFromExileEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public GontiLordOfLuxuryCastFromExileEffect copy() {
-        return new GontiLordOfLuxuryCastFromExileEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        UUID targetId = getTargetPointer().getFirst(game, source);
-        if (targetId == null) {
-            this.discard(); // card is no longer in the origin zone, effect can be discarded
-            return false;
-        }
-        Card theCard = game.getCard(objectId);
-        if (theCard == null || theCard.isLand(game)) {
-            return false;
-        }
-        objectId = theCard.getMainCard().getId(); // for split cards
-
-        if (objectId.equals(targetId)
-                && affectedControllerId.equals(source.getControllerId())) {
-            Card card = game.getCard(objectId);
-            // TODO: Allow to cast Zoetic Cavern face down
-            return card != null;
-        }
-        return false;
-    }
-}
-
-class GontiLordOfLuxurySpendAnyManaEffect extends AsThoughEffectImpl implements AsThoughManaEffect {
-
-    public GontiLordOfLuxurySpendAnyManaEffect() {
-        super(AsThoughEffectType.SPEND_OTHER_MANA, Duration.Custom, Outcome.Benefit);
-        staticText = "you may spend mana as though it were mana of any color to cast it";
-    }
-
-    private GontiLordOfLuxurySpendAnyManaEffect(final GontiLordOfLuxurySpendAnyManaEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public GontiLordOfLuxurySpendAnyManaEffect copy() {
-        return new GontiLordOfLuxurySpendAnyManaEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        Card theCard = game.getCard(objectId);
-        if (theCard == null) {
-            return false;
-        }
-        objectId = theCard.getMainCard().getId(); // for split cards
-        if (objectId.equals(((FixedTarget) getTargetPointer()).getTarget())
-                && game.getState().getZoneChangeCounter(objectId) <= ((FixedTarget) getTargetPointer()).getZoneChangeCounter() + 1) {
-            // if the card moved from exile to spell the zone change counter is increased by 1 (effect must applies before and on stack, use isCheckPlayableMode?)
-            return source.isControlledBy(affectedControllerId);
-        } else if (((FixedTarget) getTargetPointer()).getTarget().equals(objectId)) {
-            // object has moved zone so effect can be discarded
-            this.discard();
-        }
-        return false;
-    }
-
-    @Override
-    public ManaType getAsThoughManaType(ManaType manaType, ManaPoolItem mana, UUID affectedControllerId, Ability source, Game game) {
-        return mana.getFirstAvailable();
     }
 }
