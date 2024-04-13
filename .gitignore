@@ -117,6 +117,9 @@ Mage.Client/serverlist.txt
 /bin/
 /out/
 /target/
+/**/bin/
+/**/out/
+/**/target/
 
 client_secrets.json
 
