@@ -5,6 +5,7 @@ import mage.abilities.Mode;
 import mage.counters.Counter;
 import mage.counters.Counters;
 import mage.game.Game;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -49,16 +50,10 @@ public class ReturnFromGraveyardToBattlefieldWithCounterTargetEffect extends Ret
     private String makeText(Counter counter, boolean additional) {
         StringBuilder sb = new StringBuilder(" with ");
         if (additional) {
-            if (counter.getCount() == 1) {
-                sb.append("an");
-            } else {
-                sb.append(counter.getCount());
-            }
+            sb.append(CardUtil.numberToText(counter.getCount(), "an"));
             sb.append(" additional");
-        } else if (counter.getCount() == 1) {
-            sb.append("a");
         } else {
-            sb.append(counter.getCount());
+            sb.append(CardUtil.numberToText(counter.getCount(), "a"));
         }
         sb.append(' ');
         sb.append(counter.getName());
