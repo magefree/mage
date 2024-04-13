@@ -3,6 +3,7 @@ package mage.cards.i;
 import java.util.*;
 
 import mage.MageInt;
+import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.DrawNthCardTriggeredAbility;
@@ -43,7 +44,7 @@ public final class IanMalcolmChaotician extends CardImpl {
         // During each player's turn, that player may cast a spell from among the cards they don't own exiled with
         // Ian Malcolm, Chaotician, and mana of any type can be spent to cast it.
 
-        // Whenever a player draws their second card each turn, exile the top card of each player's library.
+        // Whenever a player draws their second card each turn, that player exiles the top card of their library.
         this.addAbility(new IanMalcolmChaoticianDrawTriggerAbility(), new IanMalcolmChaoticianWatcher());
 
         // Once each turn, you may play a card from exile with a collection counter on it if it was exiled by an ability you controlled, and you may spend mana as though it were any color to cast it.
@@ -87,7 +88,7 @@ class IanMalcolmChaoticianExileEffect extends OneShotEffect {
 
     IanMalcolmChaoticianExileEffect() {
         super(Outcome.Exile);
-        staticText = "exile the top card of each player's library";
+        staticText = "that player exiles the top card of their library";
     }
 
     private IanMalcolmChaoticianExileEffect(final IanMalcolmChaoticianExileEffect effect) {
@@ -101,22 +102,21 @@ class IanMalcolmChaoticianExileEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
+        UUID targetPlayerID = getTargetPointer().getFirst(game, source);
+        Player targetPlayer = game.getPlayer(targetPlayerID);
+        MageObject sourceObject = source.getSourceObject(game);
+        if (targetPlayer == null || sourceObject == null) {
             return false;
         }
-        Cards cards = new CardsImpl();
-        for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
-            Player player = game.getPlayer(playerId);
-            if (player != null) {
-                cards.add(player.getLibrary().getFromTop(game));
-            }
-        }
-        if (cards.isEmpty()) {
+
+        Card card = targetPlayer.getLibrary().getFromTop(game);
+        if (card == null) {
             return false;
         }
-        controller.moveCards(cards, Zone.EXILED, source, game);
-        IanMalcolmChaoticianWatcher.addCards(source.getControllerId(), cards, game);
+
+        UUID exileZoneId = CardUtil.getExileZoneId(game, sourceObject.getId(), sourceObject.getZoneChangeCounter(game));
+        targetPlayer.moveCardsToExile(card, source, game, true, exileZoneId, sourceObject.getIdName());
+        IanMalcolmChaoticianWatcher.addCard(source.getControllerId(), card, game);
         return true;
     }
 }
@@ -232,16 +232,14 @@ class IanMalcolmChaoticianWatcher extends Watcher {
         usedMap.clear();
     }
 
-    static void addCards(UUID playerId, Cards cards, Game game) {
+    static void addCard(UUID playerId, Card card, Game game) {
         Set<MageObjectReference> set = game
                 .getState()
                 .getWatcher(IanMalcolmChaoticianWatcher.class)
                 .exiledMap
                 .computeIfAbsent(playerId, x -> new HashSet<>());
-        cards.getCards(game)
-                .stream()
-                .map(card -> new MageObjectReference(card, game))
-                .forEach(set::add);
+        MageObjectReference mor = new MageObjectReference(card, game);
+        set.add(mor);
     }
 
     static boolean checkUsed(Ability source, Game game) {
