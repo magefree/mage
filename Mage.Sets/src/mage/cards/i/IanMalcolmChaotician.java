@@ -40,11 +40,6 @@ public final class IanMalcolmChaotician extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever a player draws their second card each turn, that player exiles the top card of their library.
-
-        // During each player's turn, that player may cast a spell from among the cards they don't own exiled with
-        // Ian Malcolm, Chaotician, and mana of any type can be spent to cast it.
-
-        // Whenever a player draws their second card each turn, that player exiles the top card of their library.
         this.addAbility(new IanMalcolmChaoticianDrawTriggerAbility(), new IanMalcolmChaoticianWatcher());
 
         // During each player's turn, that player may cast a spell from among the cards they don't own exiled with
