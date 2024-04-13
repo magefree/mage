@@ -77,9 +77,9 @@ class OppositionAgentReplacementEffect extends ReplacementEffectImpl {
         if (!event.getTargetId().equals(event.getPlayerId())) {
             return false;
         }
-
+        Player controller = game.getPlayer(source.getControllerId());
         Player targetPlayer = game.getPlayer(event.getTargetId());
-        if (targetPlayer == null) {
+        if (targetPlayer == null || controller == null) {
             return false;
         }
 
@@ -103,8 +103,8 @@ class OppositionAgentReplacementEffect extends ReplacementEffectImpl {
 
         // You may play those cards for as long as they remain exiled, and you may spend mana as though it were mana of any color to cast them
         for (Card card : cardsToExile) {
-            // the source ability is tied to the effect so we need to keep it active to work correctly
-            CardUtil.makeCardPlayable(game, source, card, false, Duration.EndOfGame, true);
+            CardUtil.makeCardPlayable(game, source, card, false,
+                    Duration.EndOfGame, true, controller.getId(), null);
         }
 
         // return false all the time
