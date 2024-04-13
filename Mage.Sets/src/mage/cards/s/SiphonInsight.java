@@ -3,7 +3,7 @@ package mage.cards.s;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.ExileFaceDownYouMayCastAsLongAsExiledEffect;
+import mage.abilities.effects.common.ExileFaceDownYouMayPlayAsLongAsExiledTargetEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.*;
@@ -84,7 +84,7 @@ class SiphonInsightEffect extends OneShotEffect {
             controller.putCardsOnBottomOfLibrary(topCards, game, source, false);
             return true;
         }
-        new ExileFaceDownYouMayCastAsLongAsExiledEffect(false, CastManaAdjustment.AS_THOUGH_ANY_MANA_COLOR)
+        new ExileFaceDownYouMayPlayAsLongAsExiledTargetEffect(false, CastManaAdjustment.AS_THOUGH_ANY_MANA_COLOR)
                 .setTargetPointer(new FixedTarget(card, game))
                 .apply(game, source);
         topCards.retainZone(Zone.LIBRARY, game);

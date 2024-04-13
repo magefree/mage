@@ -1,7 +1,7 @@
 package mage.cards.o;
 
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
-import mage.abilities.effects.ExileFaceDownTopNLibraryYouMayCastAsLongAsExiledTargetEffect;
+import mage.abilities.effects.common.ExileFaceDownTopNLibraryYouMayPlayAsLongAsExiledTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -20,7 +20,7 @@ public final class OutrageousRobbery extends CardImpl {
 
         // Target opponent exiles the top X cards of their library face down. You may look at and play those cards for as long as they remain exiled. If you cast a spell this way, you may spend mana as though it were mana of any type to cast it.
         this.getSpellAbility().addEffect(
-                new ExileFaceDownTopNLibraryYouMayCastAsLongAsExiledTargetEffect(
+                new ExileFaceDownTopNLibraryYouMayPlayAsLongAsExiledTargetEffect(
                         false, CastManaAdjustment.AS_THOUGH_ANY_MANA_TYPE, ManacostVariableValue.REGULAR
                 ).setText("Target opponent exiles the top X cards of their library face down. "
                         + "You may look at and play those cards for as long as they remain exiled. "

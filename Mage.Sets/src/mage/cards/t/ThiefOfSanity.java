@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
-import mage.abilities.effects.ExileFaceDownYouMayCastAsLongAsExiledEffect;
+import mage.abilities.effects.common.ExileFaceDownYouMayPlayAsLongAsExiledTargetEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.*;
@@ -80,7 +80,7 @@ class ThiefOfSanityEffect extends OneShotEffect {
             controller.moveCards(topCards, Zone.GRAVEYARD, source, game);
             return true;
         }
-        new ExileFaceDownYouMayCastAsLongAsExiledEffect(true, CastManaAdjustment.AS_THOUGH_ANY_MANA_TYPE)
+        new ExileFaceDownYouMayPlayAsLongAsExiledTargetEffect(true, CastManaAdjustment.AS_THOUGH_ANY_MANA_TYPE)
                 .setTargetPointer(new FixedTarget(card, game))
                 .apply(game, source);
         topCards.retainZone(Zone.LIBRARY, game);

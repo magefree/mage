@@ -1,8 +1,9 @@
-package mage.abilities.effects;
+package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
+import mage.abilities.effects.OneShotEffect;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CastManaAdjustment;
@@ -19,37 +20,37 @@ import mage.target.targetpointer.FixedTargets;
  *
  * @author Susucr
  */
-public class ExileFaceDownTopNLibraryYouMayCastAsLongAsExiledTargetEffect extends OneShotEffect {
+public class ExileFaceDownTopNLibraryYouMayPlayAsLongAsExiledTargetEffect extends OneShotEffect {
 
-    private final boolean castNotPlay;
+    private final boolean useCastSpellOnly;
     private final CastManaAdjustment manaAdjustment;
     private final DynamicValue value;
 
-    public ExileFaceDownTopNLibraryYouMayCastAsLongAsExiledTargetEffect(boolean castNotPlay, CastManaAdjustment manaAdjustment) {
-        this(castNotPlay, manaAdjustment, 1);
+    public ExileFaceDownTopNLibraryYouMayPlayAsLongAsExiledTargetEffect(boolean useCastSpellOnly, CastManaAdjustment manaAdjustment) {
+        this(useCastSpellOnly, manaAdjustment, 1);
     }
 
-    public ExileFaceDownTopNLibraryYouMayCastAsLongAsExiledTargetEffect(boolean castNotPlay, CastManaAdjustment manaAdjustment, int amount) {
-        this(castNotPlay, manaAdjustment, StaticValue.get(amount));
+    public ExileFaceDownTopNLibraryYouMayPlayAsLongAsExiledTargetEffect(boolean useCastSpellOnly, CastManaAdjustment manaAdjustment, int amount) {
+        this(useCastSpellOnly, manaAdjustment, StaticValue.get(amount));
     }
 
-    public ExileFaceDownTopNLibraryYouMayCastAsLongAsExiledTargetEffect(boolean castNotPlay, CastManaAdjustment manaAdjustment, DynamicValue value) {
+    public ExileFaceDownTopNLibraryYouMayPlayAsLongAsExiledTargetEffect(boolean useCastSpellOnly, CastManaAdjustment manaAdjustment, DynamicValue value) {
         super(Outcome.Exile);
         this.value = value;
-        this.castNotPlay = castNotPlay;
+        this.useCastSpellOnly = useCastSpellOnly;
         this.manaAdjustment = manaAdjustment;
     }
 
-    private ExileFaceDownTopNLibraryYouMayCastAsLongAsExiledTargetEffect(final ExileFaceDownTopNLibraryYouMayCastAsLongAsExiledTargetEffect effect) {
+    private ExileFaceDownTopNLibraryYouMayPlayAsLongAsExiledTargetEffect(final ExileFaceDownTopNLibraryYouMayPlayAsLongAsExiledTargetEffect effect) {
         super(effect);
         this.value = effect.value;
-        this.castNotPlay = effect.castNotPlay;
+        this.useCastSpellOnly = effect.useCastSpellOnly;
         this.manaAdjustment = effect.manaAdjustment;
     }
 
     @Override
-    public ExileFaceDownTopNLibraryYouMayCastAsLongAsExiledTargetEffect copy() {
-        return new ExileFaceDownTopNLibraryYouMayCastAsLongAsExiledTargetEffect(this);
+    public ExileFaceDownTopNLibraryYouMayPlayAsLongAsExiledTargetEffect copy() {
+        return new ExileFaceDownTopNLibraryYouMayPlayAsLongAsExiledTargetEffect(this);
     }
 
     @Override
@@ -65,7 +66,7 @@ public class ExileFaceDownTopNLibraryYouMayCastAsLongAsExiledTargetEffect extend
             return false;
         }
 
-        return new ExileFaceDownYouMayCastAsLongAsExiledEffect(castNotPlay, manaAdjustment)
+        return new ExileFaceDownYouMayPlayAsLongAsExiledTargetEffect(useCastSpellOnly, manaAdjustment)
                 .setTargetPointer(new FixedTargets(cards, game))
                 .apply(game, source);
     }

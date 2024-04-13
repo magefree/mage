@@ -1,7 +1,7 @@
 package mage.cards.d;
 
 import mage.abilities.common.DealsDamageToAPlayerAttachedTriggeredAbility;
-import mage.abilities.effects.ExileFaceDownTopNLibraryYouMayCastAsLongAsExiledTargetEffect;
+import mage.abilities.effects.common.ExileFaceDownTopNLibraryYouMayPlayAsLongAsExiledTargetEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -23,7 +23,7 @@ public final class DreamThiefsBandana extends CardImpl {
 
         // Whenever equipped creature deals combat damage to a player, look at the top card of their library, then exile it face down. For as long as it remains exiled, you may play it, and mana of any type can be spent to cast that spell.
         this.addAbility(new DealsDamageToAPlayerAttachedTriggeredAbility(
-                new ExileFaceDownTopNLibraryYouMayCastAsLongAsExiledTargetEffect(false, CastManaAdjustment.AS_THOUGH_ANY_MANA_TYPE)
+                new ExileFaceDownTopNLibraryYouMayPlayAsLongAsExiledTargetEffect(false, CastManaAdjustment.AS_THOUGH_ANY_MANA_TYPE)
                         .setText("look at the top card of their library, then exile it face down. "
                                 + "For as long as it remains exiled, you may play it, and mana of any type can be spent to cast that spell"),
                 "equipped creature", false, true

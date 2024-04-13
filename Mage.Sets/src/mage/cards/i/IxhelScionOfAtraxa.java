@@ -3,7 +3,7 @@ package mage.cards.i;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
-import mage.abilities.effects.ExileFaceDownYouMayCastAsLongAsExiledEffect;
+import mage.abilities.effects.common.ExileFaceDownYouMayPlayAsLongAsExiledTargetEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ToxicAbility;
@@ -90,7 +90,7 @@ class IxhelScionOfAtraxaEffect extends OneShotEffect {
         if (cards.isEmpty()) {
             return false;
         }
-        return new ExileFaceDownYouMayCastAsLongAsExiledEffect(false, CastManaAdjustment.AS_THOUGH_ANY_MANA_COLOR)
+        return new ExileFaceDownYouMayPlayAsLongAsExiledTargetEffect(false, CastManaAdjustment.AS_THOUGH_ANY_MANA_COLOR)
                 .setTargetPointer(new FixedTargets(cards, game))
                 .apply(game, source);
     }

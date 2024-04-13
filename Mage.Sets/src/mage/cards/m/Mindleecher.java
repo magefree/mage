@@ -3,7 +3,7 @@ package mage.cards.m;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.MutatesSourceTriggeredAbility;
-import mage.abilities.effects.ExileFaceDownYouMayCastAsLongAsExiledEffect;
+import mage.abilities.effects.common.ExileFaceDownYouMayPlayAsLongAsExiledTargetEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.MutateAbility;
@@ -88,7 +88,7 @@ class MindleecherEffect extends OneShotEffect {
         if (cards.isEmpty()) {
             return false;
         }
-        return new ExileFaceDownYouMayCastAsLongAsExiledEffect(false, CastManaAdjustment.NONE)
+        return new ExileFaceDownYouMayPlayAsLongAsExiledTargetEffect(false, CastManaAdjustment.NONE)
                 .setTargetPointer(new FixedTargets(cards, game))
                 .apply(game, source);
     }

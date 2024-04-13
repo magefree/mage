@@ -2,7 +2,7 @@ package mage.cards.b;
 
 import mage.MageInt;
 import mage.abilities.common.FirstSpellOpponentsTurnTriggeredAbility;
-import mage.abilities.effects.ExileFaceDownTopNLibraryYouMayCastAsLongAsExiledTargetEffect;
+import mage.abilities.effects.common.ExileFaceDownTopNLibraryYouMayPlayAsLongAsExiledTargetEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -35,7 +35,7 @@ public final class BlightwingBandit extends CardImpl {
 
         //  Whenever you cast your first spell during each opponent's turn, look at the top card of that player's library, then exile it face down. You may play that card for as long as it remains exiled, and mana of any type can be spent to cast it.
         this.addAbility(new FirstSpellOpponentsTurnTriggeredAbility(
-                new ExileFaceDownTopNLibraryYouMayCastAsLongAsExiledTargetEffect(false, CastManaAdjustment.AS_THOUGH_ANY_MANA_TYPE)
+                new ExileFaceDownTopNLibraryYouMayPlayAsLongAsExiledTargetEffect(false, CastManaAdjustment.AS_THOUGH_ANY_MANA_TYPE)
                         .setText("look at the top card of that player's library, then exile it face down. "
                                 + "You may play that card for as long as it remains exiled, and mana of any type can be spent to cast it."),
                 false, SetTargetPointer.PLAYER

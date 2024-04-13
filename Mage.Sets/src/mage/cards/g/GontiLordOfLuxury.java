@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.ExileFaceDownYouMayPlayAsLongAsExiledTargetEffect;
+import mage.abilities.effects.common.ExileFaceDownYouMayPlayAsLongAsExiledTargetEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.*;

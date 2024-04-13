@@ -2,7 +2,7 @@ package mage.cards.p;
 
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.effects.ExileFaceDownYouMayCastAsLongAsExiledEffect;
+import mage.abilities.effects.common.ExileFaceDownYouMayPlayAsLongAsExiledTargetEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -74,7 +74,7 @@ class PraetorsGraspEffect extends OneShotEffect {
                 if (card == null) {
                     return false;
                 }
-                new ExileFaceDownYouMayCastAsLongAsExiledEffect(false, CastManaAdjustment.NONE)
+                new ExileFaceDownYouMayPlayAsLongAsExiledTargetEffect(false, CastManaAdjustment.NONE)
                         .setTargetPointer(new FixedTarget(card, game))
                         .apply(game, source);
             }
