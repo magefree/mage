@@ -176,7 +176,7 @@ class IanMalcolmChaoticianManaEffect extends AsThoughEffectImpl implements AsTho
 
     @Override
     public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        if (!source.isControlledBy(affectedControllerId) || IanMalcolmChaoticianWatcher.checkUsed(source, game)) {
+        if (!game.isActivePlayer(affectedControllerId) || IanMalcolmChaoticianWatcher.checkUsed(source, game)) {
             return false;
         }
         Card card = game.getCard(CardUtil.getMainCardId(game, sourceId));
