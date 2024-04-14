@@ -45,22 +45,22 @@ public class GainAbilityControlledSpellsEffect extends ContinuousEffectImpl {
         }
 
         for (Card card : game.getExile().getAllCardsByRange(game, source.getControllerId())) {
-            if (filter.match(card, game)) {
+            if (filter.match(card, player.getId(), source, game)) {
                 game.getState().addOtherAbility(card, ability);
             }
         }
         for (Card card : player.getLibrary().getCards(game)) {
-            if (filter.match(card, game)) {
+            if (filter.match(card, player.getId(), source, game)) {
                 game.getState().addOtherAbility(card, ability);
             }
         }
         for (Card card : player.getHand().getCards(game)) {
-            if (filter.match(card, game)) {
+            if (filter.match(card, player.getId(), source, game)) {
                 game.getState().addOtherAbility(card, ability);
             }
         }
         for (Card card : player.getGraveyard().getCards(game)) {
-            if (filter.match(card, game)) {
+            if (filter.match(card, player.getId(), source, game)) {
                 game.getState().addOtherAbility(card, ability);
             }
         }
@@ -68,7 +68,7 @@ public class GainAbilityControlledSpellsEffect extends ContinuousEffectImpl {
         // workaround to gain cost reduction abilities to commanders before cast (make it playable)
         game.getCommanderCardsFromCommandZone(player, CommanderCardType.ANY)
                 .stream()
-                .filter(card -> filter.match(card, game))
+                .filter(card -> filter.match(card, player.getId(), source, game))
                 .forEach(card -> game.getState().addOtherAbility(card, ability));
 
         for (StackObject stackObject : game.getStack()) {
@@ -77,7 +77,7 @@ public class GainAbilityControlledSpellsEffect extends ContinuousEffectImpl {
             }
             // TODO: Distinguish "you cast" to exclude copies
             Card card = game.getCard(stackObject.getSourceId());
-            if (card != null && filter.match((Spell) stackObject, game)) {
+            if (card != null && filter.match((Spell) stackObject, player.getId(), source, game)) {
                 game.getState().addOtherAbility(card, ability);
             }
         }
