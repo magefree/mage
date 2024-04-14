@@ -184,8 +184,7 @@ class IanMalcolmChaoticianManaEffect extends AsThoughEffectImpl implements AsTho
             return false;
         }
         if (game.getState().getZone(card.getId()) == Zone.EXILED) {
-            return card.getCounters(game).getCount(CounterType.COLLECTION) > 0
-                    && IanMalcolmChaoticianWatcher.checkExile(affectedControllerId, card, game, 0);
+            return IanMalcolmChaoticianWatcher.checkExile(affectedControllerId, card, game, 0);
         }
         CardState cardState;
         if (card instanceof ModalDoubleFacedCard) {
@@ -193,8 +192,7 @@ class IanMalcolmChaoticianManaEffect extends AsThoughEffectImpl implements AsTho
         } else {
             cardState = game.getLastKnownInformationCard(card.getId(), Zone.EXILED);
         }
-        return cardState != null && cardState.getCounters().getCount(CounterType.COLLECTION) > 0
-                && IanMalcolmChaoticianWatcher.checkExile(affectedControllerId, card, game, 1);
+        return cardState != null && IanMalcolmChaoticianWatcher.checkExile(affectedControllerId, card, game, 1);
     }
 
     @Override
