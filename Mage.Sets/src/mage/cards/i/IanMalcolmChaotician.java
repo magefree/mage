@@ -122,7 +122,7 @@ class IanMalcolmChaoticianCastEffect extends AsThoughEffectImpl {
     IanMalcolmChaoticianCastEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.PlayForFree);
         staticText = "During each player's turn, that player may cast a spell from among the cards they don't own " +
-                "exiled with {this}, and mana of any type can be spent to cast it.";
+                "exiled with {this}";
     }
 
     private IanMalcolmChaoticianCastEffect(final IanMalcolmChaoticianCastEffect effect) {
