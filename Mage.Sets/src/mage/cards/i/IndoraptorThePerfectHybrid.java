@@ -9,7 +9,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.DealtDamageToSourceTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.choices.TwoChoiceVote;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.SuperType;
@@ -22,8 +21,8 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetOpponent;
 import mage.target.common.TargetSacrifice;
+import mage.util.RandomUtil;
 import mage.watchers.common.DamageDoneWatcher;
 
 /**
@@ -126,10 +125,12 @@ class IndoraptorThePerfectHybridDamageEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
 
-        TargetOpponent targetOpponent = new TargetOpponent(true);
-        targetOpponent.setRandom(true);
-        targetOpponent.choose(outcome, source.getControllerId(), source.getSourceId(), source, game);
-        Player opponent = game.getPlayer(targetOpponent.getFirstTarget());
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
+            return false;
+        }
+        List<UUID> opponents = new ArrayList<>(game.getOpponents(controller.getId()));
+        Player opponent = game.getPlayer(opponents.get(RandomUtil.nextInt(opponents.size())));
         if (opponent == null){
             return false;
         }
