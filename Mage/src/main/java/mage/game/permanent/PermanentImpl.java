@@ -1362,6 +1362,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             if (filter instanceof FilterPermanent) {
                 canAttach = ((FilterPermanent) filter).match(this, attachmentPermanent.getControllerId(), source, game);
             }
+            else {
+                canAttach = false;
+            }
         }
 
         return !canAttach || game.getContinuousEffects().preventedByRuleModification(new StayAttachedEvent(this.getId(), attachment.getId(), source), null, game, silentMode);

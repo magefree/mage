@@ -222,4 +222,23 @@ public class AttachmentTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Spellweaver Volute", 0); // TODO: Currently goes to graveyard. Must fix
         assertAttachedTo(playerA, "Spellweaver Volute", codsworth, false);
     }
+
+    @Test
+    public void testCurseFallsOffFromGainedProtection() {
+        setStrictChooseMode(true);
+
+        addCard(Zone.HAND, playerA, "Curse of Opulence"); // Arbitrary curse (enchant player)
+        addCard(Zone.HAND, playerB, "Runed Halo"); // You have protection from the chosen card name.
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain");
+        addCard(Zone.BATTLEFIELD, playerB, "Plains", 2);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Curse of Opulence", playerB);
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Runed Halo");
+        setChoice(playerB, "Curse of Opulence");
+
+        setStopAt(2, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerA, "Curse of Opulence", 1);
+    }
 }
