@@ -1355,12 +1355,11 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         boolean canAttach = true;
         Permanent attachmentPermanent = game.getPermanent(attachment.getId());
         if (attachment.hasSubtype(SubType.AURA, game)
-                && attachmentPermanent != null
                 && attachmentPermanent.getSpellAbility() != null
                 && !attachmentPermanent.getSpellAbility().getTargets().isEmpty()) {
             Filter filter = attachmentPermanent.getSpellAbility().getTargets().get(0).getFilter();
             if (filter instanceof FilterPermanent) {
-                canAttach = ((FilterPermanent) filter).match(this, attachmentPermanent.getControllerId(), source, game);
+                canAttach = attachmentPermanent.getSpellAbility().getTargets().get(0).canTarget(attachmentPermanent.getControllerId(), this.getId(), source, game);
             }
             else {
                 canAttach = false;
