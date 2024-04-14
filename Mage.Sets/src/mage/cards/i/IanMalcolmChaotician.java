@@ -13,7 +13,6 @@ import mage.abilities.effects.AsThoughManaEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.*;
 import mage.constants.*;
-import mage.counters.CounterType;
 import mage.game.CardState;
 import mage.game.Game;
 import mage.game.events.GameEvent;
