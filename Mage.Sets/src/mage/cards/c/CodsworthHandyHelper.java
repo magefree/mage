@@ -28,6 +28,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -150,7 +151,7 @@ class CodsworthHandyHelperEffect extends OneShotEffect {
 
         if (creature.cantBeAttachedBy(attachment, source, game, true)) {
             game.informPlayers(attachment.getLogName() + " was not attached to " + creature.getLogName()
-                    + " because it's not a legal target");
+                    + " because it's not a legal target" + CardUtil.getSourceLogName(game, source));
             return false;
         }
         Permanent oldCreature = game.getPermanent(attachment.getAttachedTo());
