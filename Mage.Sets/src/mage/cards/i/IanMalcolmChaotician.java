@@ -112,7 +112,8 @@ class IanMalcolmChaoticianExileEffect extends OneShotEffect {
 
         UUID exileZoneId = CardUtil.getExileZoneId(game, sourceObject.getId(), sourceObject.getZoneChangeCounter(game));
         targetPlayer.moveCardsToExile(card, source, game, true, exileZoneId, sourceObject.getIdName());
-        IanMalcolmChaoticianWatcher.addCard(source.getControllerId(), card, game);
+        MageObjectReference sourceMOR = new MageObjectReference(source.getSourceId(), game);
+        IanMalcolmChaoticianWatcher.addCard(sourceMOR, card, game);
         return true;
     }
 }
@@ -148,8 +149,9 @@ class IanMalcolmChaoticianCastEffect extends AsThoughEffectImpl {
         if (card == null || card.isLand(game)){
             return false;
         }
+        MageObjectReference sourceMOR = new MageObjectReference(source.getSourceId(), game);
         return !card.getOwnerId().equals(affectedControllerId)
-                && IanMalcolmChaoticianWatcher.checkExile(affectedControllerId, card, game, 0);
+                && IanMalcolmChaoticianWatcher.checkExile(sourceMOR, card, game, 0);
     }
 }
 
@@ -179,12 +181,13 @@ class IanMalcolmChaoticianManaEffect extends AsThoughEffectImpl implements AsTho
         if (!game.isActivePlayer(affectedControllerId) || IanMalcolmChaoticianWatcher.checkUsed(source, game)) {
             return false;
         }
+        MageObjectReference sourceMOR = new MageObjectReference(source.getSourceId(), game);
         Card card = game.getCard(CardUtil.getMainCardId(game, sourceId));
         if (card == null) {
             return false;
         }
         if (game.getState().getZone(card.getId()) == Zone.EXILED) {
-            return IanMalcolmChaoticianWatcher.checkExile(affectedControllerId, card, game, 0);
+            return IanMalcolmChaoticianWatcher.checkExile(sourceMOR, card, game, 0);
         }
         CardState cardState;
         if (card instanceof ModalDoubleFacedCard) {
@@ -192,7 +195,7 @@ class IanMalcolmChaoticianManaEffect extends AsThoughEffectImpl implements AsTho
         } else {
             cardState = game.getLastKnownInformationCard(card.getId(), Zone.EXILED);
         }
-        return cardState != null && IanMalcolmChaoticianWatcher.checkExile(affectedControllerId, card, game, 1);
+        return cardState != null && IanMalcolmChaoticianWatcher.checkExile(sourceMOR, card, game, 1);
     }
 
     @Override
@@ -203,7 +206,7 @@ class IanMalcolmChaoticianManaEffect extends AsThoughEffectImpl implements AsTho
 
 class IanMalcolmChaoticianWatcher extends Watcher {
 
-    private final Map<UUID, Set<MageObjectReference>> exiledMap = new HashMap<>();
+    private final Map<MageObjectReference, Set<MageObjectReference>> exiledMap = new HashMap<>();
     private final Map<MageObjectReference, Set<UUID>> usedMap = new HashMap<>();
 
     IanMalcolmChaoticianWatcher() {
@@ -228,12 +231,12 @@ class IanMalcolmChaoticianWatcher extends Watcher {
         usedMap.clear();
     }
 
-    static void addCard(UUID playerId, Card card, Game game) {
+    static void addCard(MageObjectReference sourceObj, Card card, Game game) {
         Set<MageObjectReference> set = game
                 .getState()
                 .getWatcher(IanMalcolmChaoticianWatcher.class)
                 .exiledMap
-                .computeIfAbsent(playerId, x -> new HashSet<>());
+                .computeIfAbsent(sourceObj, x -> new HashSet<>());
         MageObjectReference mor = new MageObjectReference(card, game);
         set.add(mor);
     }
@@ -253,12 +256,12 @@ class IanMalcolmChaoticianWatcher extends Watcher {
                 ).contains(source.getControllerId());
     }
 
-    static boolean checkExile(UUID playerId, Card card, Game game, int offset) {
+    static boolean checkExile(MageObjectReference sourceObj, Card card, Game game, int offset) {
         return game
                 .getState()
                 .getWatcher(IanMalcolmChaoticianWatcher.class)
                 .exiledMap
-                .getOrDefault(playerId, Collections.emptySet())
+                .getOrDefault(sourceObj, Collections.emptySet())
                 .stream()
                 .anyMatch(mor -> mor.refersTo(card, game, offset));
     }
