@@ -95,7 +95,7 @@ class PlaneswalkersMischiefEffect extends OneShotEffect {
 class PlaneswalkersMischiefCastFromExileEffect extends AsThoughEffectImpl {
 
     PlaneswalkersMischiefCastFromExileEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
         staticText = "You may cast that card without paying its mana cost as long as it remains exiled";
     }
 

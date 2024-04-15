@@ -90,7 +90,7 @@ class CavesOfChaosAdventurerEffect extends OneShotEffect {
                     Zone.EXILED, TargetController.YOU, Duration.EndOfTurn, true
             ).setTargetPointer(new FixedTarget(card, game)), source);
         } else {
-            CardUtil.makeCardPlayable(game, source, card, Duration.EndOfTurn, false);
+            CardUtil.makeCardPlayable(game, source, card, false, Duration.EndOfTurn, false);
         }
         return true;
     }

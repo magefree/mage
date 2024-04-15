@@ -27,6 +27,7 @@ public enum ControlACommanderCondition implements Condition {
                 .flatMap(Collection::stream)
                 .map(game::getPermanent)
                 .filter(Objects::nonNull)
+                .filter(Permanent::isPhasedIn)
                 .map(Permanent::getControllerId)
                 .anyMatch(source.getControllerId()::equals);
     }

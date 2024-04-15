@@ -3,7 +3,6 @@ package mage.cards.a;
 import mage.abilities.Ability;
 import mage.abilities.common.AttachedToCreatureSourceTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CopyEffect;
 import mage.abilities.effects.common.ExileUntilSourceLeavesEffect;
@@ -45,7 +44,7 @@ public final class AssimilationAegis extends CardImpl {
         this.addAbility(new AttachedToCreatureSourceTriggeredAbility(new AssimilationAegisEffect(), false));
 
         // Equip {2}
-        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2)));
+        this.addAbility(new EquipAbility(2, false));
     }
 
     private AssimilationAegis(final AssimilationAegis card) {

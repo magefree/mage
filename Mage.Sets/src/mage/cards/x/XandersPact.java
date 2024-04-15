@@ -97,7 +97,7 @@ class XandersPactExileEffect extends OneShotEffect {
 class XandersPactCastEffect extends CanPlayCardControllerEffect {
 
     XandersPactCastEffect(Game game, Card card) {
-        super(game, card.getMainCard().getId(), card.getZoneChangeCounter(game), Duration.EndOfTurn);
+        super(game, card.getMainCard().getId(), card.getZoneChangeCounter(game), true, Duration.EndOfTurn);
     }
 
     private XandersPactCastEffect(final XandersPactCastEffect effect) {

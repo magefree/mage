@@ -39,7 +39,7 @@ public class GainAbilityTargetEffect extends ContinuousEffectImpl {
     public GainAbilityTargetEffect(Ability ability, Duration duration, String rule, boolean useOnCard) {
         super(duration, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, ability.getEffects().getOutcome(ability, Outcome.AddAbility));
         this.ability = copyAbility(ability); // See the method's comment, ability.copy() is not enough.
-        
+
         this.staticText = rule;
         this.useOnCard = useOnCard;
 
@@ -58,7 +58,7 @@ public class GainAbilityTargetEffect extends ContinuousEffectImpl {
         super.init(source, game);
 
         // must support dynamic targets from static ability and static targets from activated abilities
-        if (this.affectedObjectsSet) {
+        if (getAffectedObjectsSet()) {
             // target permanents (by default)
             getTargetPointer().getTargets(game, source)
                     .stream()
@@ -93,7 +93,7 @@ public class GainAbilityTargetEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         int affectedTargets = 0;
-        if (affectedObjectsSet) {
+        if (getAffectedObjectsSet()) {
             // STATIC TARGETS
             List<MageObjectReference> newWaitingPermanents = new ArrayList<>();
             for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext(); ) {

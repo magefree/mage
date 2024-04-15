@@ -1,8 +1,6 @@
 
 package mage.cards.v;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -14,19 +12,15 @@ import mage.abilities.keyword.TransformAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AsThoughEffectType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SuperType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 import mage.watchers.common.CastSpellLastTurnWatcher;
+
+import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -97,7 +91,7 @@ class VancesBlastingCannonsExileEffect extends OneShotEffect {
 class CastFromNonHandZoneTargetEffect extends AsThoughEffectImpl {
 
     CastFromNonHandZoneTargetEffect(Duration duration) {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, duration, Outcome.Benefit);
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, duration, Outcome.Benefit);
         staticText = "If it's a nonland card, you may cast that card this turn";
     }
 

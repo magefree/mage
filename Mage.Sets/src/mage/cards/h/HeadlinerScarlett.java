@@ -4,9 +4,9 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.asthought.MayLookAtTargetCardEffect;
 import mage.abilities.effects.common.combat.CantBlockAllEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.Card;
@@ -63,7 +63,7 @@ class HeadlinerScarlettEntersEffect extends OneShotEffect {
 
     HeadlinerScarlettEntersEffect() {
         super(Outcome.Detriment);
-        staticText = "Creatures target player controls can't block this turn.";
+        staticText = "creatures target player controls can't block this turn";
     }
 
     private HeadlinerScarlettEntersEffect(final HeadlinerScarlettEntersEffect effect) {
@@ -124,47 +124,12 @@ class HeadlinerScarlettExileEffect extends OneShotEffect {
         controller.moveCardsToExile(card, source, game, false, exileId, exileName);
         if (game.getState().getZone(card.getId()) == Zone.EXILED) {
             card.setFaceDown(true, game);
-            CardUtil.makeCardPlayable(game, source, card, Duration.EndOfTurn, false);
-            ContinuousEffect effect = new HeadlinerScarlettLookEffect(controller.getId());
+            CardUtil.makeCardPlayable(game, source, card, false, Duration.EndOfTurn, false);
+            ContinuousEffect effect = new MayLookAtTargetCardEffect(controller.getId());
             effect.setTargetPointer(new FixedTarget(card, game));
             game.addEffect(effect, source);
         }
         return true;
     }
 
-}
-
-class HeadlinerScarlettLookEffect extends AsThoughEffectImpl {
-
-    private final UUID authorizedPlayerId;
-
-    public HeadlinerScarlettLookEffect(UUID authorizedPlayerId) {
-        super(AsThoughEffectType.LOOK_AT_FACE_DOWN, Duration.EndOfGame, Outcome.Benefit);
-        this.authorizedPlayerId = authorizedPlayerId;
-    }
-
-    private HeadlinerScarlettLookEffect(final HeadlinerScarlettLookEffect effect) {
-        super(effect);
-        this.authorizedPlayerId = effect.authorizedPlayerId;
-    }
-
-    @Override
-    public HeadlinerScarlettLookEffect copy() {
-        return new HeadlinerScarlettLookEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        UUID cardId = getTargetPointer().getFirst(game, source);
-        if (cardId == null) {
-            this.discard(); // card is no longer in the origin zone, effect can be discarded
-        }
-        return affectedControllerId.equals(authorizedPlayerId)
-                && objectId.equals(cardId);
-    }
 }

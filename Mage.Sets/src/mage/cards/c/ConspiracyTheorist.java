@@ -28,14 +28,13 @@ import java.util.Set;
 import java.util.UUID;
 
 /**
- *
  * @author htrajan
  */
 public final class ConspiracyTheorist extends CardImpl {
 
     public ConspiracyTheorist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        
+
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SHAMAN);
         this.power = new MageInt(2);
@@ -43,7 +42,7 @@ public final class ConspiracyTheorist extends CardImpl {
 
         // Whenever Conspiracy Theorist attacks, you may pay {1} and discard a card. If you do, draw a card.
         this.addAbility(new AttacksTriggeredAbility(new DoIfCostPaid(new DrawCardSourceControllerEffect(1),
-            new CompositeCost(new ManaCostsImpl<>("{1}"), new DiscardCardCost(), "pay {1} and discard a card"))
+                new CompositeCost(new ManaCostsImpl<>("{1}"), new DiscardCardCost(), "pay {1} and discard a card"))
                 .setText("you may pay {1} and discard a card. If you do, draw a card"), false));
 
         // Whenever you discard one or more nonland cards, you may exile one of them from your graveyard. If you do, you may cast it this turn.
@@ -121,13 +120,13 @@ class ConspiracyTheoristEffect extends OneShotEffect {
             CardsImpl cards = new CardsImpl(discardedCards);
             TargetCard target = new TargetCard(Zone.GRAVEYARD, new FilterCard("card to exile"));
             boolean validTarget = cards.stream()
-                .anyMatch(card -> target.canTarget(card, game));
+                    .anyMatch(card -> target.canTarget(card, game));
             if (validTarget && controller.chooseUse(Outcome.Benefit, "Exile a card?", source, game)) {
                 if (controller.choose(Outcome.Benefit, cards, target, source, game)) {
                     Card card = cards.get(target.getFirstTarget(), game);
                     if (card != null && controller.moveCards(card, Zone.EXILED, source, game)) {
                         // you may cast it this turn
-                        CardUtil.makeCardPlayable(game, source, card, Duration.EndOfTurn, false);
+                        CardUtil.makeCardPlayable(game, source, card, true, Duration.EndOfTurn, false);
                     }
                 }
             }

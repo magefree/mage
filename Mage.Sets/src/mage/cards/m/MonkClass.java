@@ -125,7 +125,7 @@ class MonkClassEffect extends OneShotEffect {
 class MonkClassCastEffect extends AsThoughEffectImpl {
 
     MonkClassCastEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
         staticText = "you may cast this card from exile as long as you've cast another spell this turn";
     }
 

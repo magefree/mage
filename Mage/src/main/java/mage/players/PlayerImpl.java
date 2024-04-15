@@ -3987,9 +3987,14 @@ public abstract class PlayerImpl implements Player, Serializable {
 
             Set<ApprovingObject> approvingObjects;
             if ((isPlaySpell || isPlayLand) && (fromZone != Zone.BATTLEFIELD)) {
-                // play hand from non hand zone (except battlefield - you can't play already played permanents)
-                approvingObjects = game.getContinuousEffects().asThough(object.getId(),
-                        AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, ability, this.getId(), game);
+                // play card from non hand zone (except battlefield - you can't play already played permanents)
+                approvingObjects = new HashSet<>();
+                approvingObjects.addAll(game.getContinuousEffects().asThough(object.getId(),
+                        AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, ability, this.getId(), game));
+                if (isPlaySpell) {
+                    approvingObjects.addAll(game.getContinuousEffects().asThough(object.getId(),
+                            AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, ability, this.getId(), game));
+                }
 
                 if (approvingObjects.isEmpty() && isPlaySpell
                         && ((SpellAbility) ability).getSpellAbilityType().equals(SpellAbilityType.ADVENTURE_SPELL)) {

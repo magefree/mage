@@ -47,7 +47,7 @@ public final class CultistOfTheAbsolute extends CardImpl {
         ).setText(", \"Ward&mdash;Pay 3 life,\""));
         ability.addEffect(new GainAbilityAllEffect(
                 new BeginningOfUpkeepTriggeredAbility(new SacrificeControllerEffect(
-                        StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT, 1, null
+                        StaticFilters.FILTER_PERMANENT_CREATURE, 1, null
                 ), TargetController.YOU, false),
                 Duration.WhileOnBattlefield, StaticFilters.FILTER_CREATURES_OWNED_COMMANDER
         ).setText("and \"At the beginning of your upkeep, sacrifice a creature.\""));

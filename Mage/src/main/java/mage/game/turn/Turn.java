@@ -263,6 +263,10 @@ public class Turn implements Serializable {
                 default:
                     throw new IllegalArgumentException("Unknown phase type: " + extraPhase);
             }
+            PhaseStep skipAllButExtraStep = extraPhaseMod.getSkipAllButExtraStep();
+            if (skipAllButExtraStep != null) {
+                phase.keepOnlyStep(skipAllButExtraStep);
+            }
             currentPhase = phase;
             game.fireEvent(new PhaseChangedEvent(activePlayerId, extraPhaseMod));
             Player activePlayer = game.getPlayer(activePlayerId);

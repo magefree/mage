@@ -29,13 +29,13 @@ import java.util.UUID;
  */
 public final class OliviaOpulentOutlaw extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("outlaws");
 
     static {
         filter.add(OutlawPredicate.instance);
     }
 
-    private static final FilterControlledPermanent filterTreasure = new FilterControlledPermanent("a Treasure");
+    private static final FilterControlledPermanent filterTreasure = new FilterControlledPermanent("Treasures");
 
     static {
         filterTreasure.add(SubType.TREASURE.getPredicate());

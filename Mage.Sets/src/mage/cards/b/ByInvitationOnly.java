@@ -61,7 +61,7 @@ class ByInvitationOnlyEffect extends OneShotEffect {
                 0, 13, "Choose a number between 0 and 13", game
         );
         return new SacrificeAllEffect(
-                number, StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT
+                number, StaticFilters.FILTER_PERMANENT_CREATURE
         ).apply(game, source);
     }
 }

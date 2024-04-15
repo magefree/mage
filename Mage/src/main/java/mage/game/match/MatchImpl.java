@@ -379,9 +379,8 @@ public abstract class MatchImpl implements Match {
     public void submitDeck(UUID playerId, Deck deck) {
         MatchPlayer player = getPlayer(playerId);
         if (player != null) {
-            // make sure the deck name (needed for Tiny Leaders) won't get lost by sideboarding
+            // workaround to keep deck name for Tiny Leaders because it must be hidden for players
             deck.setName(player.getDeck().getName());
-            deck.setDeckHashCode(player.getDeck().getDeckHashCode());
             player.submitDeck(deck);
         }
         synchronized (this) {
@@ -390,20 +389,14 @@ public abstract class MatchImpl implements Match {
     }
 
     @Override
-    public boolean updateDeck(UUID playerId, Deck deck) {
-        boolean validDeck = true;
+    public void updateDeck(UUID playerId, Deck deck) {
+        // used for auto-save deck
         MatchPlayer player = getPlayer(playerId);
-        if (player != null) {
-            // Check if the cards included in the deck are the same as in the original deck
-            validDeck = (player.getDeck().getDeckCompleteHashCode() == deck.getDeckCompleteHashCode());
-            if (validDeck == false) {
-                // clear the deck so the player cheating looses the game
-                deck.getCards().clear();
-                deck.getSideboard().clear();
-            }
-            player.updateDeck(deck);
+        if (player == null) {
+            return;
         }
-        return validDeck;
+
+        player.updateDeck(deck);
     }
 
     protected String createGameStartMessage() {
@@ -416,9 +409,6 @@ public abstract class MatchImpl implements Match {
                 sb.append(" QUITTED");
             }
             sb.append("<br/>");
-            if (mp.getDeck() != null) {
-                sb.append("DeckHash: ").append(mp.getDeck().getDeckHashCode()).append("<br/>");
-            }
         }
         if (getDraws() > 0) {
             sb.append("   Draws: ").append(getDraws()).append("<br/>");

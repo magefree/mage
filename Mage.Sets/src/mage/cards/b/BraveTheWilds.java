@@ -69,7 +69,7 @@ enum BraveTheWildsTargetAdjuster implements TargetAdjuster {
     public void adjustTargets(Ability ability, Game game) {
         ability.getTargets().clear();
         if (BargainedCondition.instance.apply(game, ability)) {
-            ability.addTarget(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_LAND_SHORT_TEXT));
+            ability.addTarget(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND));
         }
     }
 }

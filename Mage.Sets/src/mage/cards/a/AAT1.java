@@ -76,7 +76,7 @@ public final class AAT1 extends CardImpl {
         public boolean checkTrigger(GameEvent event, Game game) {
             Card card = game.getCard(event.getTargetId());
             if (card != null
-                    && event.getPlayerId().equals(game.getControllerId(sourceId))
+                    && card.getOwnerId().equals(game.getControllerId(sourceId))
                     && card.isCreature(game)
                     && game.getState().getZone(card.getId()) == Zone.GRAVEYARD
                     && event.getData().equals(CounterType.REPAIR.getName())) {

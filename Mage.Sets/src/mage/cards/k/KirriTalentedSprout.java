@@ -47,7 +47,7 @@ public final class KirriTalentedSprout extends CardImpl {
 
         // Other Plants and Treefolk you control get +2/+0.
         this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(
-                2, 0, Duration.WhileControlled, filter, true
+                2, 0, Duration.WhileOnBattlefield, filter, true
         )));
 
         // At the beginning of your postcombat main phase, return target Plant, Treefolk, or land card from your graveyard to your hand.

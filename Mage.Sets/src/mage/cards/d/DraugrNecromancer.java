@@ -102,7 +102,7 @@ class DraugrNecromancerReplacementEffect extends ReplacementEffectImpl {
 class DraugrNecromancerCastFromExileEffect extends AsThoughEffectImpl {
 
     DraugrNecromancerCastFromExileEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "You may cast spells from among cards in exile your opponents own with ice counters on them";
     }
 

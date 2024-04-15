@@ -24,7 +24,7 @@ public final class NastyEnd extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{B}");
 
         // As an additional cost to cast this spell, sacrifice a creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
 
         // Draw two cards. If the sacrificed creature was legendary, draw three cards instead.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(

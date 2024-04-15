@@ -34,14 +34,13 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 /**
- *
  * @author Susucr
  */
 public final class ExtraordinaryJourney extends CardImpl {
 
     public ExtraordinaryJourney(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{X}{X}{U}{U}");
-        
+
 
         // When Extraordinary Journey enters the battlefield, exile up to X target creatures. For each of those cards, its owner may play it for as long as it remains exiled.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ExtraordinaryJourneyEffect());
@@ -100,7 +99,7 @@ class ExtraordinaryJourneyEffect extends OneShotEffect {
 
         // exile up to X target creatures.
         Effect effect = new ExileTargetEffect().setTargetPointer(new FixedTargets(permanents, game));
-        if(!effect.apply(game, source)) {
+        if (!effect.apply(game, source)) {
             return false;
         }
         game.getState().applyEffects(game);
@@ -127,11 +126,11 @@ class ExtraordinaryJourneyEffect extends OneShotEffect {
             );
 
             ExileZone zone = game.getState().getExile().createZone(exileZoneId, exileZoneName);
-            for(Card card : cards) {
+            for (Card card : cards) {
                 if (card.getOwnerId().equals(owner.getId())) {
                     game.getExile().moveToAnotherZone(card, game, zone);
                     CardUtil.makeCardPlayable(
-                            game, source, card, Duration.Custom,
+                            game, source, card, false, Duration.Custom,
                             false, card.getOwnerId(), null
                     );
                 }
@@ -147,7 +146,7 @@ class ExtraordinaryJourneyTriggeredAbility extends TriggeredAbilityImpl {
     ExtraordinaryJourneyTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1, "you"), false);
         setTriggerPhrase("Whenever one or more nontoken creatures enter the battlefield, "
-            + "if one or more of them entered from exile or was cast from exile, ");
+                + "if one or more of them entered from exile or was cast from exile, ");
         setTriggersOnceEachTurn(true);
     }
 
@@ -168,25 +167,25 @@ class ExtraordinaryJourneyTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         EntersTheBattlefieldEvent zEvent = (EntersTheBattlefieldEvent) event;
-        if(zEvent == null){
+        if (zEvent == null) {
             return false;
         }
 
         Permanent permanent = zEvent.getTarget();
-        if(permanent == null || !permanent.isCreature(game)) {
+        if (permanent == null || !permanent.isCreature(game)) {
             return false;
         }
 
         Zone fromZone = zEvent.getFromZone();
-        if(fromZone == Zone.EXILED) {
+        if (fromZone == Zone.EXILED) {
             // Directly from exile
             return true;
         }
 
-        if(fromZone == Zone.STACK) {
+        if (fromZone == Zone.STACK) {
             // Get spell in the stack.
             Spell spell = game.getSpellOrLKIStack(permanent.getId());
-            if(spell != null && spell.getFromZone() == Zone.EXILED) {
+            if (spell != null && spell.getFromZone() == Zone.EXILED) {
                 // Creature was cast from exile
                 return true;
             }

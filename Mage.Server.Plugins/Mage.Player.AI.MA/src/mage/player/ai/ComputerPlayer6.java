@@ -54,7 +54,7 @@ public class ComputerPlayer6 extends ComputerPlayer {
     private static final int MAX_SIMULATED_NODES_PER_CALC = 5000;
 
     // same params as Executors.newFixedThreadPool
-    // no needs erorrs check in afterExecute here cause that pool used for FutureTask with result check already
+    // no needs errors check in afterExecute here cause that pool used for FutureTask with result check already
     private static final ExecutorService threadPoolSimulations = new ThreadPoolExecutor(
             COMPUTER_MAX_THREADS_FOR_SIMULATIONS,
             COMPUTER_MAX_THREADS_FOR_SIMULATIONS,
