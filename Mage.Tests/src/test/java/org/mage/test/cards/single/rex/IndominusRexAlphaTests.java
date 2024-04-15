@@ -1,4 +1,4 @@
-package org.mage.test.cards.triggers;
+package org.mage.test.cards.single.rex;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
@@ -13,7 +13,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 public class IndominusRexAlphaTests extends CardTestPlayerBase {
 
     @Test
-    public void IndominusRexAlphaTest() {
+    public void testIndominusRexAlpha() {
 
         addCard(Zone.HAND, playerA, "Indominus Rex, Alpha", 1);
         addCard(Zone.HAND, playerA, "Ornithopter", 1);
