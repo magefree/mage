@@ -61,7 +61,7 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
     private final int tokenPower;
     private final int tokenToughness;
     private boolean useLKI = false;
-    private PermanentModifier permanentModifier = null; // TODO: miss copy constructor? Make serializable?
+    private PermanentModifier permanentModifier = null;
 
     // TODO: These constructors are a mess. Copy effects need to be reworked altogether, hopefully clean it up then.
 
@@ -154,6 +154,7 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
         this.tokenPower = effect.tokenPower;
         this.tokenToughness = effect.tokenToughness;
         this.useLKI = effect.useLKI;
+        this.permanentModifier = effect.permanentModifier;
     }
 
     @Override

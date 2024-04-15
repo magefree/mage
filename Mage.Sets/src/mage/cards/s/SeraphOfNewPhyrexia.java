@@ -37,7 +37,7 @@ public final class SeraphOfNewPhyrexia extends CardImpl {
         // Whenever Seraph of New Phyrexia attacks, you may sacrifice another creature or artifact. If you do, Seraph of New Phyrexia gets +2/+1 until end of turn.
         this.addAbility(new AttacksTriggeredAbility(new DoIfCostPaid(
                 new BoostSourceEffect(2, 1, Duration.EndOfTurn),
-                new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE_OR_ARTIFACT_SHORT_TEXT)
+                new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE_OR_ARTIFACT)
         )));
     }
 

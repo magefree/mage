@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.mage.test.cards.abilities.enters;
 
 import mage.constants.PhaseStep;

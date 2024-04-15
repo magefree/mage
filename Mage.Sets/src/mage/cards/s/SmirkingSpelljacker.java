@@ -63,7 +63,7 @@ public final class SmirkingSpelljacker extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new AttacksTriggeredAbility(new SmirkingSpelljackerEffect()),
                 SmirkingSpelljackerCondition.instance,
-                "Whenever Smirking Spelljacker attacks, if a card is exiled with it, "
+                "Whenever {this} attacks, if a card is exiled with it, "
                         + "you may cast the exiled card without paying its mana cost."
         ));
     }

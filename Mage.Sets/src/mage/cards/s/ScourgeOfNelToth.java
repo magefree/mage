@@ -18,18 +18,16 @@ import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class ScourgeOfNelToth extends CardImpl {
 
     public ScourgeOfNelToth(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{B}{B}");
         this.subtype.add(SubType.ZOMBIE);
         this.subtype.add(SubType.DRAGON);
         this.power = new MageInt(6);
@@ -55,7 +53,7 @@ public final class ScourgeOfNelToth extends CardImpl {
 class ScourgeOfNelTothPlayEffect extends AsThoughEffectImpl {
 
     ScourgeOfNelTothPlayEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
         staticText = "You may cast {this} from your graveyard by paying {B}{B} and sacrificing two creatures rather than paying its mana cost";
     }
 

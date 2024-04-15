@@ -29,7 +29,6 @@ import mage.watchers.Watcher;
 import java.util.UUID;
 
 /**
- *
  * @author notgreat
  */
 public final class IntrepidPaleontologist extends CardImpl {
@@ -70,7 +69,7 @@ public final class IntrepidPaleontologist extends CardImpl {
 class IntrepidPaleontologistPlayEffect extends AsThoughEffectImpl {
 
     IntrepidPaleontologistPlayEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "You may cast Dinosaur creature spells from among cards you own exiled with {this}. If you cast a spell this way, that creature enters the battlefield with a finality counter on it.";
     }
 
@@ -94,7 +93,7 @@ class IntrepidPaleontologistPlayEffect extends AsThoughEffectImpl {
             Card card = game.getCard(objectId);
             MageObject sourceObject = game.getObject(source);
             if (card != null && sourceObject != null && affectedAbility instanceof SpellAbility) {
-                Card characteristics = ((SpellAbility)affectedAbility).getCharacteristics(game);
+                Card characteristics = ((SpellAbility) affectedAbility).getCharacteristics(game);
                 if (card.getOwnerId().equals(playerId) && characteristics.isCreature(game) && characteristics.hasSubtype(SubType.DINOSAUR, game)) {
                     UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), sourceObject.getZoneChangeCounter(game));
                     ExileZone exileZone = game.getState().getExile().getExileZone(exileId);

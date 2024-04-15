@@ -46,8 +46,8 @@ public final class AjaniNacatlPariah extends CardImpl {
         this.addAbility(new TransformAbility());
         this.addAbility(new DiesOneOrMoreCreatureTriggeredAbility(
                 new ExileAndReturnSourceEffect(PutCards.BATTLEFIELD_TRANSFORMED, Pronoun.HE),
-                filter
-        ));
+                filter,
+                true));
     }
 
     private AjaniNacatlPariah(final AjaniNacatlPariah card) {

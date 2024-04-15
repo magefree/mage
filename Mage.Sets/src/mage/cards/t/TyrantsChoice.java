@@ -72,7 +72,7 @@ class TyrantsChoiceEffect extends OneShotEffect {
         int deathCount = vote.getVoteCount(true);
         int tortureCount = vote.getVoteCount(false);
         if (deathCount > tortureCount) {
-            return new SacrificeOpponentsEffect(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT).apply(game, source);
+            return new SacrificeOpponentsEffect(StaticFilters.FILTER_PERMANENT_CREATURE).apply(game, source);
         } else {
             return new LoseLifeOpponentsEffect(4).apply(game, source);
         }

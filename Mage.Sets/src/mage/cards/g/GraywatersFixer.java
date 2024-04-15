@@ -5,7 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.keyword.UnearthAbility;
+import mage.abilities.keyword.EncoreAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -62,7 +62,7 @@ class GraywatersFixerEffect extends ContinuousEffectImpl {
             if (!card.isCreature(game) || !card.isOutlaw(game)) {
                 continue;
             }
-            UnearthAbility ability = new UnearthAbility(new GenericManaCost(card.getManaValue()));
+            Ability ability = new EncoreAbility(new GenericManaCost(card.getManaValue()));
             ability.setSourceId(card.getId());
             ability.setControllerId(card.getOwnerId());
             game.getState().addOtherAbility(card, ability);

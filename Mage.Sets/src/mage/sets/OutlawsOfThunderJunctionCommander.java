@@ -93,7 +93,9 @@ public final class OutlawsOfThunderJunctionCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Dimir Aqueduct", 288, Rarity.COMMON, mage.cards.d.DimirAqueduct.class));
         cards.add(new SetCardInfo("Dire Fleet Daredevil", 162, Rarity.RARE, mage.cards.d.DireFleetDaredevil.class));
         cards.add(new SetCardInfo("Dire Fleet Ravager", 132, Rarity.MYTHIC, mage.cards.d.DireFleetRavager.class));
+        cards.add(new SetCardInfo("Discreet Retreat", 20, Rarity.RARE, mage.cards.d.DiscreetRetreat.class));
         cards.add(new SetCardInfo("Dragonskull Summit", 289, Rarity.RARE, mage.cards.d.DragonskullSummit.class));
+        cards.add(new SetCardInfo("Dream-Thief's Bandana", 38, Rarity.RARE, mage.cards.d.DreamThiefsBandana.class));
         cards.add(new SetCardInfo("Drowned Catacomb", 290, Rarity.RARE, mage.cards.d.DrownedCatacomb.class));
         cards.add(new SetCardInfo("Dune Chanter", 31, Rarity.RARE, mage.cards.d.DuneChanter.class));
         cards.add(new SetCardInfo("Dunes of the Dead", 291, Rarity.UNCOMMON, mage.cards.d.DunesOfTheDead.class));
@@ -129,6 +131,7 @@ public final class OutlawsOfThunderJunctionCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Ghostly Pilferer", 98, Rarity.RARE, mage.cards.g.GhostlyPilferer.class));
         cards.add(new SetCardInfo("Glittering Stockpile", 167, Rarity.UNCOMMON, mage.cards.g.GlitteringStockpile.class));
         cards.add(new SetCardInfo("Goblin Electromancer", 228, Rarity.COMMON, mage.cards.g.GoblinElectromancer.class));
+        cards.add(new SetCardInfo("Gonti, Canny Acquisitor", 1, Rarity.MYTHIC, mage.cards.g.GontiCannyAcquisitor.class));
         cards.add(new SetCardInfo("Gonti, Lord of Luxury", 135, Rarity.RARE, mage.cards.g.GontiLordOfLuxury.class));
         cards.add(new SetCardInfo("Graywater's Fixer", 36, Rarity.RARE, mage.cards.g.GraywatersFixer.class));
         cards.add(new SetCardInfo("Grenzo, Havoc Raiser", 168, Rarity.RARE, mage.cards.g.GrenzoHavocRaiser.class));
@@ -191,6 +194,7 @@ public final class OutlawsOfThunderJunctionCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Opt", 104, Rarity.COMMON, mage.cards.o.Opt.class));
         cards.add(new SetCardInfo("Opulent Palace", 307, Rarity.UNCOMMON, mage.cards.o.OpulentPalace.class));
         cards.add(new SetCardInfo("Oracle of Mul Daya", 200, Rarity.RARE, mage.cards.o.OracleOfMulDaya.class));
+        cards.add(new SetCardInfo("Orochi Soul-Reaver", 22, Rarity.RARE, mage.cards.o.OrochiSoulReaver.class));
         cards.add(new SetCardInfo("Orzhov Signet", 261, Rarity.COMMON, mage.cards.o.OrzhovSignet.class));
         cards.add(new SetCardInfo("Overflowing Basin", 308, Rarity.RARE, mage.cards.o.OverflowingBasin.class));
         cards.add(new SetCardInfo("Painful Truths", 146, Rarity.RARE, mage.cards.p.PainfulTruths.class));

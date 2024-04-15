@@ -27,7 +27,7 @@ public final class VampiricRites extends CardImpl {
 
         // {1}{B}, Sacrifice a creature: You gain 1 life and draw a card.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(1), new ManaCostsImpl<>("{1}{B}"));
-        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
         Effect effect = new DrawCardSourceControllerEffect(1);
         effect.setText("and draw a card");
         ability.addEffect(effect);

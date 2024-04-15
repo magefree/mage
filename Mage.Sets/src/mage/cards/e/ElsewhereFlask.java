@@ -117,7 +117,7 @@ class ElsewhereFlaskContinuousEffect extends ContinuousEffectImpl {
                 dependencyTypes.add(DependencyType.BecomeSwamp);
                 break;
         }
-        if (this.affectedObjectsSet) {
+        if (getAffectedObjectsSet()) {
             game.getBattlefield()
                     .getActivePermanents(
                             StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND,

@@ -50,7 +50,8 @@ public final class SandstormSalvager extends CardImpl {
                 new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter), new GenericManaCost(2)
         );
         ability.addCost(new TapSourceCost());
-        ability.addEffect(new GainAbilityAllEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, filter));
+        ability.addEffect(new GainAbilityAllEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, filter)
+                .setText("they gain trample until end of turn"));
         this.addAbility(ability);
     }
 

@@ -146,17 +146,17 @@ public class CardRepositoryTest {
     public void test_splitCardInfoIsntDoubled() {
         // Consecrate   // Consume
         // {1}{W/B}     // {2}{W}{B}
-        List<CardInfo> fullCard1 = CardRepository.instance.findCards("Consecrate", 1, false);
+        List<CardInfo> fullCard1 = CardRepository.instance.findCards("Consecrate", 1, false, true);
         Assert.assertTrue(fullCard1.get(0).isSplitCard());
         Assert.assertEquals("Consecrate // Consume", fullCard1.get(0).getName());
-        List<CardInfo> fullCard2 = CardRepository.instance.findCards("Consume", 1, false);
+        List<CardInfo> fullCard2 = CardRepository.instance.findCards("Consume", 1, false, true);
         Assert.assertTrue(fullCard2.get(0).isSplitCard());
         Assert.assertEquals("Consecrate // Consume", fullCard2.get(0).getName());
 
-        List<CardInfo> splitHalfCardLeft = CardRepository.instance.findCards("Consecrate", 1, true);
+        List<CardInfo> splitHalfCardLeft = CardRepository.instance.findCards("Consecrate", 1, true, true);
         Assert.assertTrue(splitHalfCardLeft.get(0).isSplitCardHalf());
         Assert.assertEquals("Consecrate", splitHalfCardLeft.get(0).getName());
-        List<CardInfo> splitHalfCardRight = CardRepository.instance.findCards("Consume", 1, true);
+        List<CardInfo> splitHalfCardRight = CardRepository.instance.findCards("Consume", 1, true, true);
         Assert.assertTrue(splitHalfCardRight.get(0).isSplitCardHalf());
         Assert.assertEquals("Consume", splitHalfCardRight.get(0).getName());
     }

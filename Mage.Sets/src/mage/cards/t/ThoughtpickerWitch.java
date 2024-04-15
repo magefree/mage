@@ -42,7 +42,7 @@ public final class ThoughtpickerWitch extends CardImpl {
 
         // {1}, Sacrifice a creature: Look at the top two cards of target opponent's library, then exile one of them.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ThoughtpickerWitchEffect(), new GenericManaCost(1));
-        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }

@@ -33,7 +33,7 @@ public final class ShrapnelSlinger extends CardImpl {
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_ARTIFACT));
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DoWhenCostPaid(
                 ability,
-                new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT),
+                new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE),
                 "Sacrifice a creature?"
         )));
     }

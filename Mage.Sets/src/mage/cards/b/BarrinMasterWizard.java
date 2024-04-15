@@ -32,7 +32,7 @@ public final class BarrinMasterWizard extends CardImpl {
 
         //{2}, Sacrifice a permanent: Return target creature to its owner's hand.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new ManaCostsImpl<>("{2}"));
-        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_PERMANENT_SHORT_TEXT));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

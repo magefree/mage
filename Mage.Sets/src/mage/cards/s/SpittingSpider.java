@@ -38,7 +38,7 @@ public final class SpittingSpider extends CardImpl {
         // Reach
         this.addAbility(ReachAbility.getInstance());
         // Sacrifice a land: Spitting Spider deals 1 damage to each creature with flying.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageAllEffect(1, filter), new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_LAND_SHORT_TEXT)));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageAllEffect(1, filter), new SacrificeTargetCost(StaticFilters.FILTER_LAND)));
     }
 
     private SpittingSpider(final SpittingSpider card) {

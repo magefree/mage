@@ -118,7 +118,9 @@ public class SpellAbility extends ActivatedAbilityImpl {
             }
 
             // play from not own hand
-            Set<ApprovingObject> approvingObjects = game.getContinuousEffects().asThough(getSourceId(), AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, this, playerId, game);
+            Set<ApprovingObject> approvingObjects = new HashSet<>();
+            approvingObjects.addAll(game.getContinuousEffects().asThough(getSourceId(), AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, this, playerId, game));
+            approvingObjects.addAll(game.getContinuousEffects().asThough(getSourceId(), AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, this, playerId, game));
             if (approvingObjects.isEmpty() && getSpellAbilityType().equals(SpellAbilityType.ADVENTURE_SPELL)) {
                 // allowed to cast adventures from non-hand?
                 approvingObjects = game.getContinuousEffects().asThough(getSourceId(), AsThoughEffectType.CAST_ADVENTURE_FROM_NOT_OWN_HAND_ZONE, this, playerId, game);

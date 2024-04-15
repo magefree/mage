@@ -29,7 +29,6 @@ import mage.watchers.common.SpellsCastWatcher;
 import java.util.UUID;
 
 /**
- *
  * @author weirddan455
  */
 public final class Demilich extends CardImpl {
@@ -98,7 +97,7 @@ enum DemilichValue implements DynamicValue {
 class DemilichPlayEffect extends AsThoughEffectImpl {
 
     DemilichPlayEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
         this.staticText = "You may cast {this} from your graveyard by exiling four instant and/or sorcery cards from your graveyard in addition to paying its other costs";
     }
 

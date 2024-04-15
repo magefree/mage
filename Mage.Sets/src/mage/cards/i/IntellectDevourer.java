@@ -68,10 +68,14 @@ class IntellectDevourerExileEffect extends OneShotEffect {
         this.staticText = "each opponent exiles a card from their hand until {this} leaves the battlefield";
     }
 
-    private IntellectDevourerExileEffect(final IntellectDevourerExileEffect effect) {super(effect);}
+    private IntellectDevourerExileEffect(final IntellectDevourerExileEffect effect) {
+        super(effect);
+    }
 
     @Override
-    public IntellectDevourerExileEffect copy() {return new IntellectDevourerExileEffect(this);}
+    public IntellectDevourerExileEffect copy() {
+        return new IntellectDevourerExileEffect(this);
+    }
 
     @Override
     public boolean apply(Game game, Ability source) {
@@ -105,7 +109,7 @@ class IntellectDevourerExileEffect extends OneShotEffect {
         // Exile all chosen cards at the same time
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
-        if (controller == null|| sourceObject == null) {
+        if (controller == null || sourceObject == null) {
             return false;
         }
         UUID exileZoneId = CardUtil.getExileZoneId(game, sourceObject.getId(), sourceObject.getZoneChangeCounter(game));
@@ -120,7 +124,7 @@ class IntellectDevourerExileEffect extends OneShotEffect {
             opponent.moveCardsToExile(opponentCardsToExile.getCards(game), source, game, false, exileZoneId, sourceObject.getIdName());
             Card thisCard = opponentCardsToExile.getCards(game).iterator().next();
             game.getState().setValue(thisCard.getId().toString() + game.getState().getZoneChangeCounter(thisCard.getId()), exileZoneId);
-            CardUtil.makeCardPlayable(game, source, thisCard, Duration.Custom, true, source.getControllerId(), null);
+            CardUtil.makeCardPlayable(game, source, thisCard, false, Duration.Custom, true, source.getControllerId(), null);
             applied = true;
         }
 
@@ -136,10 +140,14 @@ class IntellectDevourerReturnCardsAbility extends DelayedTriggeredAbility {
         this.setRuleVisible(false);
     }
 
-    private IntellectDevourerReturnCardsAbility(final IntellectDevourerReturnCardsAbility ability) {super(ability);}
+    private IntellectDevourerReturnCardsAbility(final IntellectDevourerReturnCardsAbility ability) {
+        super(ability);
+    }
 
     @Override
-    public IntellectDevourerReturnCardsAbility copy() {return new IntellectDevourerReturnCardsAbility(this);}
+    public IntellectDevourerReturnCardsAbility copy() {
+        return new IntellectDevourerReturnCardsAbility(this);
+    }
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
@@ -165,10 +173,14 @@ class IntellectDevourerReturnExiledCardEffect extends OneShotEffect {
         this.staticText = "Return exiled cards to their owners' hands";
     }
 
-    private IntellectDevourerReturnExiledCardEffect(final IntellectDevourerReturnExiledCardEffect effect) {super(effect);}
+    private IntellectDevourerReturnExiledCardEffect(final IntellectDevourerReturnExiledCardEffect effect) {
+        super(effect);
+    }
 
     @Override
-    public IntellectDevourerReturnExiledCardEffect copy() {return new IntellectDevourerReturnExiledCardEffect(this);}
+    public IntellectDevourerReturnExiledCardEffect copy() {
+        return new IntellectDevourerReturnExiledCardEffect(this);
+    }
 
     @Override
     public boolean apply(Game game, Ability source) {
