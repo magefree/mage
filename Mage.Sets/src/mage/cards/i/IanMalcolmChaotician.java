@@ -209,7 +209,12 @@ class IanMalcolmChaoticianManaEffect extends AsThoughEffectImpl implements AsTho
 
 class IanMalcolmChaoticianWatcher extends Watcher {
 
+    // Maps MOR representing the specific instance of Ian Malcolm (changes when it changes zones, i.e. blinked)
+    // to many exiled cards exiled with Ian Malcolm
     private final Map<MageObjectReference, Set<MageObjectReference>> exiledMap = new HashMap<>();
+
+    // Maps instances of approving MORs (some of which might be instances of Ian Malcolm, if his ability was used to
+    // cast that spell) to UUIDs of players that have used that approving object this turn
     private final Map<MageObjectReference, Set<UUID>> usedMap = new HashMap<>();
 
     IanMalcolmChaoticianWatcher() {
