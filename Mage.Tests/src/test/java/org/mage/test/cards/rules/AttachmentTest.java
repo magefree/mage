@@ -223,6 +223,9 @@ public class AttachmentTest extends CardTestPlayerBase {
         assertAttachedTo(playerA, "Spellweaver Volute", codsworth, false);
     }
 
+    /**
+     * Tests that when a player gains protection from an aura, it falls off (is moved to the graveyard).
+     */
     @Test
     public void testCurseFallsOffFromGainedProtection() {
         setStrictChooseMode(true);
@@ -240,5 +243,28 @@ public class AttachmentTest extends CardTestPlayerBase {
         execute();
 
         assertGraveyardCount(playerA, "Curse of Opulence", 1);
+    }
+
+    /**
+     * Tests that when an aura is cast and the target becomes illegal (in this
+     * case, due to a change in card type), the aura goes to the graveyard.
+     */
+    @Test
+    public void testCastAuraIllegalTarget() {
+        setStrictChooseMode(true);
+
+        addCard(Zone.HAND, playerA, "Arcane Flight"); // Arbitrary "enchant creature" aura
+        addCard(Zone.HAND, playerA, "One with the Stars"); // Enchanted permanent loses creature type
+        addCard(Zone.BATTLEFIELD, playerA, "Runeclaw Bear"); // Arbitrary creature
+        addCard(Zone.BATTLEFIELD, playerA, "Vedalken Orrery"); // You may cast spells as though they had flash
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Arcane Flight", "Runeclaw Bear");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "One with the Stars", "Runeclaw Bear");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerA, "Arcane Flight", 1);
     }
 }
