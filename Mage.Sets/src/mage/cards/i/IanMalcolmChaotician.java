@@ -70,8 +70,11 @@ class IanMalcolmChaoticianDrawTriggerAbility extends DrawNthCardTriggeredAbility
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        getEffects().setTargetPointer(new FixedTarget(event.getPlayerId()));
-        return super.checkTrigger(event, game);
+        if (super.checkTrigger(event, game)){
+            getEffects().setTargetPointer(new FixedTarget(event.getPlayerId()));
+            return true;
+        }
+        return false;
     }
 
     @Override
