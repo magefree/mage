@@ -59,7 +59,8 @@ public final class IanMalcolmChaotician extends CardImpl {
 }
 
 class IanMalcolmChaoticianDrawTriggerAbility extends DrawNthCardTriggeredAbility {
-    public IanMalcolmChaoticianDrawTriggerAbility() {
+
+    IanMalcolmChaoticianDrawTriggerAbility() {
         super(new IanMalcolmChaoticianExileEffect(), false, TargetController.ANY, 2);
     }
 
