@@ -219,8 +219,7 @@ class IanMalcolmChaoticianWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if ((event.getType() == GameEvent.EventType.SPELL_CAST || event.getType() == GameEvent.EventType.LAND_PLAYED)
-                && event.getAdditionalReference() != null) {
+        if (event.getType() == GameEvent.EventType.SPELL_CAST && event.getAdditionalReference() != null) {
             usedMap.computeIfAbsent(
                     event.getAdditionalReference()
                             .getApprovingMageObjectReference(),
