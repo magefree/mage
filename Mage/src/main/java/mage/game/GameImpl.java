@@ -98,8 +98,10 @@ public abstract class GameImpl implements Game {
 
     private transient Object customData; // temporary data, used in AI simulations
     private transient Player losingPlayer; // temporary data, used in AI simulations
-    protected boolean simulation = false;
-    protected boolean checkPlayableState = false;
+
+    protected boolean simulation = false; // for inner simulations (game without user messages)
+    protected boolean aiGame = false; // for inner simulations (ai game, debug only)
+    protected boolean checkPlayableState = false; // for inner playable calculations (game without user dialogs)
 
     protected AtomicInteger totalErrorsCount = new AtomicInteger(); // for debug only: error stats
 
@@ -180,6 +182,7 @@ public abstract class GameImpl implements Game {
     protected GameImpl(final GameImpl game) {
         //this.customData = game.customData; // temporary data, no need on game copy
         //this.losingPlayer = game.losingPlayer; // temporary data, no need on game copy
+        this.aiGame = game.aiGame;
         this.simulation = game.simulation;
         this.checkPlayableState = game.checkPlayableState;
 
@@ -248,13 +251,19 @@ public abstract class GameImpl implements Game {
     }
 
     @Override
-    public void setSimulation(boolean simulation) {
-        this.simulation = simulation;
+    public Game createSimulationForAI() {
+        Game res = this.copy();
+        ((GameImpl) res).simulation = true;
+        ((GameImpl) res).aiGame = true;
+        return res;
     }
 
     @Override
-    public void setCheckPlayableState(boolean checkPlayableState) {
-        this.checkPlayableState = checkPlayableState;
+    public Game createSimulationForPlayableCalc() {
+        Game res = this.copy();
+        ((GameImpl) res).simulation = true;
+        ((GameImpl) res).checkPlayableState = true;
+        return res;
     }
 
     @Override
@@ -1602,6 +1611,10 @@ public abstract class GameImpl implements Game {
 
     @Override
     public void playPriority(UUID activePlayerId, boolean resuming) {
+        if (!this.isSimulation() && this.inCheckPlayableState()) {
+            throw new IllegalStateException("Wrong code usage. Only simulation games can be in CheckPlayableState");
+        }
+
         int priorityErrorsCount = 0;
         infiniteLoopCounter = 0;
         int rollbackBookmarkOnPriorityStart = 0;
@@ -1711,7 +1724,7 @@ public abstract class GameImpl implements Game {
                             throw new MageException(UNIT_TESTS_ERROR_TEXT);
                         }
                     } finally {
-                        setCheckPlayableState(false);
+                        //setCheckPlayableState(false); // TODO: delete
                     }
                     state.getPlayerList().getNext();
                 }
@@ -1730,7 +1743,7 @@ public abstract class GameImpl implements Game {
         } finally {
             resetLKI();
             clearAllBookmarks();
-            setCheckPlayableState(false);
+            //setCheckPlayableState(false);
         }
     }
 
@@ -4045,8 +4058,24 @@ public abstract class GameImpl implements Game {
     @Override
     public String toString() {
         Player activePayer = this.getPlayer(this.getActivePlayerId());
+
+        // show non-standard game state (not part of the real game, e.g. AI or mana calculation)
+        List<String> simInfo = new ArrayList<>();
+        if (this.simulation) {
+            simInfo.add("SIMULATION");
+        }
+        if (this.aiGame) {
+            simInfo.add("AI");
+        }
+        if (this.checkPlayableState) {
+            simInfo.add("PLAYABLE CALC");
+        }
+        if (!ThreadUtils.isRunGameThread()) {
+            simInfo.add("NOT GAME THREAD");
+        }
+
         StringBuilder sb = new StringBuilder()
-                .append(this.isSimulation() ? "!!!SIMULATION!!! " : "")
+                .append(!simInfo.isEmpty() ? "!!!" + String.join(", ", simInfo) + "!!! " : "")
                 .append(this.getGameType().toString())
                 .append("; ").append(CardUtil.getTurnInfo(this))
                 .append("; active: ").append((activePayer == null ? "none" : activePayer.getName()))

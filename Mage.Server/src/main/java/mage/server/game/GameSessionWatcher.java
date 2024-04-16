@@ -97,7 +97,8 @@ public class GameSessionWatcher {
     }
 
     public GameView getGameView() {
-        // game view calculation can take some time, so use copy for thread save (protection from ConcurrentModificationException)
+        // game view calculation can take some time and can be called from non-game thread,
+        // so use copy for thread save (protection from ConcurrentModificationException)
         Game sourceGame = game.copy();
 
         GameView gameView = new GameView(sourceGame.getState(), sourceGame, null, userId);

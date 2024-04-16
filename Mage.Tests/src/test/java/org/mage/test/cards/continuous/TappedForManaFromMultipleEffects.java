@@ -53,9 +53,10 @@ public class TappedForManaFromMultipleEffects extends CardTestPlayerBase {
         // cast nyx 2
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Nyxbloom Ancient");
         // TODO: TAPPED_FOR_MANA replace event called from checkTappedForManaReplacement and start to choose replace events (is that problem?)
+        // TODO: yes, it's a problem, cause playable calc must not use dialogs!!!
         // use case (that test): comment one 1-2 choices to fail in 1-2 calls
-        setChoice(playerA, "Nyxbloom Ancient"); // getPlayable... checkTappedForManaReplacement... chooseReplacementEffect
-        setChoice(playerA, "Nyxbloom Ancient"); // playManaAbility... resolve... checkToFirePossibleEvents... chooseReplacementEffect
+        setChoice(playerA, "Nyxbloom Ancient"); // x2 replacement effects from x2 nyx
+        //setChoice(playerA, "Nyxbloom Ancient"); // wrongly choice from playable calc - no need after bug fix
 
         // cast chloro
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Chlorophant");

@@ -181,6 +181,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     //
     // A card may be able to cast multiple way with multiple methods.
     // The specific MageIdentifier should be checked, before checking null as a fallback.
+    // TODO: must rework playable methods to static
     protected Map<UUID, Set<MageIdentifier>> castSourceIdWithAlternateMana = new HashMap<>();
     protected Map<UUID, Map<MageIdentifier, ManaCosts<ManaCost>>> castSourceIdManaCosts = new HashMap<>();
     protected Map<UUID, Map<MageIdentifier, Costs<Cost>>> castSourceIdCosts = new HashMap<>();
@@ -1755,23 +1756,19 @@ public abstract class PlayerImpl implements Player, Serializable {
         if (object instanceof StackAbility || object == null) {
             return useable;
         }
-        boolean previousState = game.inCheckPlayableState();
-        game.setCheckPlayableState(true);
-        try {
-            // collect and filter playable activated abilities
-            // GUI: user clicks on card, but it must activate ability from ANY card's parts (main, left, right)
-            Set<UUID> needIds = CardUtil.getObjectParts(object);
 
-            // workaround to find all abilities first and filter it for one object
-            List<ActivatedAbility> allPlayable = getPlayable(game, true, zone, false);
-            for (ActivatedAbility ability : allPlayable) {
-                if (needIds.contains(ability.getSourceId())) {
-                    useable.putIfAbsent(ability.getId(), ability);
-                }
+        // collect and filter playable activated abilities
+        // GUI: user clicks on card, but it must activate ability from ANY card's parts (main, left, right)
+        Set<UUID> needIds = CardUtil.getObjectParts(object);
+
+        // workaround to find all abilities first and filter it for one object
+        List<ActivatedAbility> allPlayable = getPlayable(game, true, zone, false);
+        for (ActivatedAbility ability : allPlayable) {
+            if (needIds.contains(ability.getSourceId())) {
+                useable.putIfAbsent(ability.getId(), ability);
             }
-        } finally {
-            game.setCheckPlayableState(previousState);
         }
+
         return useable;
     }
 
@@ -3376,13 +3373,13 @@ public abstract class PlayerImpl implements Player, Serializable {
      * combinations of mana are available to cast spells or activate abilities
      * etc.
      *
-     * @param game
+     * @param originalGame
      * @return
      */
     @Override
-    public ManaOptions getManaAvailable(Game game) {
-        boolean oldState = game.inCheckPlayableState();
-        game.setCheckPlayableState(true);
+    public ManaOptions getManaAvailable(Game originalGame) {
+        // workaround to fix a triggers list modification bug (game must be immutable on playable calculations)
+        Game game = originalGame.createSimulationForPlayableCalc();
 
         ManaOptions availableMana = new ManaOptions();
         availableMana.addMana(manaPool.getMana());
@@ -3477,8 +3474,9 @@ public abstract class PlayerImpl implements Player, Serializable {
 
         availableMana.removeFullyIncludedVariations();
         availableMana.remove(new Mana()); // Remove any empty mana that was left over from the way the code is written
-        game.setCheckPlayableState(oldState);
-        return availableMana;
+
+        // make sure it independent of sim game
+        return availableMana.copy();
     }
 
     /**
@@ -3596,6 +3594,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             }
 
             // ALTERNATIVE COST FROM dynamic effects
+
             for (MageIdentifier identifier : getCastSourceIdWithAlternateMana().getOrDefault(copy.getSourceId(), new HashSet<>())) {
                 ManaCosts alternateCosts = getCastSourceIdManaCosts().get(copy.getSourceId()).get(identifier);
                 Costs<Cost> costs = getCastSourceIdCosts().get(copy.getSourceId()).get(identifier);
@@ -4001,6 +4000,14 @@ public abstract class PlayerImpl implements Player, Serializable {
                     approvingObjects = game.getContinuousEffects().asThough(object.getId(),
                             AsThoughEffectType.CAST_ADVENTURE_FROM_NOT_OWN_HAND_ZONE, ability, this.getId(), game);
                 }
+
+                // TODO: warning, PLAY_FROM_NOT_OWN_HAND_ZONE save some playable info in player's castSourceXXX fields
+                //  it must be reworked (available/playable methods must be static, all play info must be stored in GameState)
+                // Current workaround to sync sim info with real game, remove here and from regexp search: asThough\(.+AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE
+                Player simPlayer = game.getPlayer(this.getId());
+                this.castSourceIdCosts = new HashMap<>(simPlayer.getCastSourceIdCosts());
+                this.castSourceIdManaCosts = new HashMap<>(simPlayer.getCastSourceIdManaCosts());
+                this.castSourceIdWithAlternateMana = new HashMap<>(simPlayer.getCastSourceIdWithAlternateMana());
             } else {
                 // other abilities from direct zones
                 approvingObjects = new HashSet<>();
@@ -4057,21 +4064,20 @@ public abstract class PlayerImpl implements Player, Serializable {
      * currently cast/activate with his available resources.
      * Without target validation.
      *
-     * @param game
+     * @param originalGame
      * @param hidden                  also from hidden objects (e.g. turned face down cards ?)
      * @param fromZone                of objects from which zone (ALL = from all zones)
      * @param hideDuplicatedAbilities if equal abilities exist return only the
      *                                first instance
      * @return
      */
-    public List<ActivatedAbility> getPlayable(Game game, boolean hidden, Zone fromZone, boolean hideDuplicatedAbilities) {
+    public List<ActivatedAbility> getPlayable(Game originalGame, boolean hidden, Zone fromZone, boolean hideDuplicatedAbilities) {
         List<ActivatedAbility> playable = new ArrayList<>();
-        if (shouldSkipGettingPlayable(game)) {
+        if (shouldSkipGettingPlayable(originalGame)) {
             return playable;
         }
 
-        boolean previousState = game.inCheckPlayableState();
-        game.setCheckPlayableState(true);
+        Game game = originalGame.createSimulationForPlayableCalc();
         try {
             ManaOptions availableMana = getManaAvailable(game); // get available mana options (mana pool and conditional mana added (but conditional still lose condition))
             boolean fromAll = fromZone.equals(Zone.ALL);
@@ -4241,10 +4247,13 @@ public abstract class PlayerImpl implements Player, Serializable {
                 playable.addAll(activatedAll);
             }
         } finally {
-            game.setCheckPlayableState(previousState);
+            //game.setCheckPlayableState(previousState); // TODO: delete
         }
 
-        return playable;
+        // make sure it independent of sim game
+        return playable.stream()
+                .map(ActivatedAbility::copy)
+                .collect(Collectors.toList());
     }
 
     /**
@@ -4306,7 +4315,7 @@ public abstract class PlayerImpl implements Player, Serializable {
      * @param game
      * @return
      */
-    private boolean shouldSkipGettingPlayable(Game game) {
+    static private boolean shouldSkipGettingPlayable(Game game) {
         if (game.getStep() == null) { // happens at the start of the game
             return true;
         }

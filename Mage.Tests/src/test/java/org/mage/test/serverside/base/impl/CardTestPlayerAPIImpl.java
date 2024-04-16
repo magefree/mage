@@ -27,6 +27,7 @@ import mage.player.ai.ComputerPlayerMCTS;
 import mage.players.ManaPool;
 import mage.players.Player;
 import mage.server.game.GameSessionPlayer;
+import mage.util.ThreadUtils;
 import mage.utils.SystemUtil;
 import mage.util.CardUtil;
 import mage.view.GameView;
@@ -235,6 +236,8 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         if (currentGame == null || activePlayer == null) {
             throw new IllegalStateException("Game is not initialized. Use load method to load a test case and initialize a game.");
         }
+
+        ThreadUtils.ensureRunInGameThread();
 
         // check stop command
         int maxTurn = 1;

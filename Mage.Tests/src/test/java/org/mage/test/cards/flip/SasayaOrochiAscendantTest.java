@@ -11,15 +11,48 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 import static org.mage.test.utils.ManaOptionsTestUtils.assertManaOptions;
 
 /**
- *
  * @author LevelX2
  */
 public class SasayaOrochiAscendantTest extends CardTestPlayerBase {
 
     @Test
+    public void test_SasayasEssence_SimpleManaCalculation() {
+        addCard(Zone.HAND, playerA, "Plains", 7);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
+
+        // Reveal your hand: If you have seven or more land cards in your hand, flip Sasaya, Orochi Ascendant.
+        // Sasaya's Essence: Legendary Enchantment
+        // Whenever a land you control is tapped for mana, for each other land you control with the same name, add one mana of any type that land produced.
+        addCard(Zone.BATTLEFIELD, playerA, "Sasaya, Orochi Ascendant", 1);
+        //
+        // Mana pools don't empty as steps and phases end.
+        addCard(Zone.HAND, playerA, "Upwelling", 1); // Enchantment {3}{G}
+        //
+        // At the beginning of your upkeep, you gain 1 life.
+        addCard(Zone.BATTLEFIELD, playerB, "Fountain of Renewal", 1);
+
+        // prepare Sasaya's Essence
+        checkPermanentCount("before prepare", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sasaya's Essence", 0);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Reveal your hand: If you have seven or more land cards in your hand, flip");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPermanentCount("after prepare", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sasaya's Essence", 1);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        // possible error: additional triggers from neutral card can break mana triggers and will calc wrong mana
+        // reason: random triggers order on triggers iterator, can be fixed by linked map usage
+        // x3 forest + x2 for each other forest
+        ManaOptions manaOptions = playerA.getManaAvailable(currentGame);
+        assertManaOptions("{G}{G}{G}" + "{G}{G}" + "{G}{G}" + "{G}{G}", manaOptions);
+    }
+
+    @Test
     public void testSasayasEssence() {
         addCard(Zone.HAND, playerA, "Plains", 7);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
+        addCard(Zone.BATTLEFIELD, playerB, "Fountain of Renewal", 5);
 
         // Reveal your hand: If you have seven or more land cards in your hand, flip Sasaya, Orochi Ascendant.
         // Sasaya's Essence: Legendary Enchantment
@@ -123,7 +156,7 @@ public class SasayaOrochiAscendantTest extends CardTestPlayerBase {
         assertManaOptions("{R}{R}{R}{R}{G}{G}{G}{G}{G}", manaOptions);
         assertManaOptions("{R}{R}{R}{G}{G}{G}{G}{G}{G}", manaOptions);
         assertManaOptions("{R}{R}{G}{G}{G}{G}{G}{G}{G}", manaOptions);
-        assertManaOptions("{R}{G}{G}{G}{G}{G}{G}{G}{G}", manaOptions);       
+        assertManaOptions("{R}{G}{G}{G}{G}{G}{G}{G}{G}", manaOptions);
     }
 
 }
