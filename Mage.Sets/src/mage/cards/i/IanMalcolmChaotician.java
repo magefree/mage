@@ -192,12 +192,8 @@ class IanMalcolmChaoticianManaEffect extends AsThoughEffectImpl implements AsTho
         if (game.getState().getZone(card.getId()) == Zone.EXILED) {
             return IanMalcolmChaoticianWatcher.checkExile(sourceMOR, card, game, 0);
         }
-        CardState cardState;
-        if (card instanceof ModalDoubleFacedCard) {
-            cardState = game.getLastKnownInformationCard(((ModalDoubleFacedCard) card).getLeftHalfCard().getId(), Zone.EXILED);
-        } else {
-            cardState = game.getLastKnownInformationCard(card.getId(), Zone.EXILED);
-        }
+        // not exiled, must be on the stack--get LKI
+        CardState cardState = game.getLastKnownInformationCard(card.getMainCard().getId(), Zone.EXILED);;
         return cardState != null && IanMalcolmChaoticianWatcher.checkExile(sourceMOR, card, game, 1);
     }
 
