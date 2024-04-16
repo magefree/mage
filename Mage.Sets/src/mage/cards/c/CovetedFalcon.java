@@ -1,15 +1,13 @@
 package mage.cards.c;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.UUID;
 
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.constants.*;
@@ -22,10 +20,10 @@ import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetOpponent;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  * @author Cguy7777
@@ -77,71 +75,40 @@ public final class CovetedFalcon extends CardImpl {
     }
 }
 
-class CovetedFalconEffect extends ContinuousEffectImpl {
-
-    private boolean firstControlChange = true;
-    private List<UUID> permanentIds = new ArrayList<>();
+class CovetedFalconEffect extends OneShotEffect {
 
     CovetedFalconEffect() {
-        super(Duration.Custom, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.Benefit);
+        super(Outcome.Benefit);
         staticText = "target opponent gains control of any number of target permanents you control. " +
                 "Draw a card for each one they gained control of this way";
     }
 
     private CovetedFalconEffect(final CovetedFalconEffect effect) {
         super(effect);
-        firstControlChange = effect.firstControlChange;
-        permanentIds = effect.permanentIds;
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
-            discard(); // controller no longer exists
-            return false;
+        UUID targetOpponentId = source.getFirstTarget();
+        List<UUID> targetPermanentIds = source.getTargets().get(1).getTargets();
+        for (UUID permanentId : targetPermanentIds) {
+            game.addEffect(
+                    new GainControlTargetEffect(Duration.Custom, true, targetOpponentId)
+                            .setTargetPointer(new FixedTarget(permanentId)),
+                    source);
         }
 
-        UUID controllingOpponentId = source.getFirstTarget();
-        if (firstControlChange) {
-            permanentIds.addAll(source.getTargets().get(1).getTargets());
-        }
+        game.getState().processAction(game);
 
         int cardsToDraw = 0;
-        ListIterator<UUID> permanentsIterator = permanentIds.listIterator(permanentIds.size());
-        boolean oneTargetStillExists = false;
-        while (permanentsIterator.hasPrevious()) {
-            Permanent permanent = game.getPermanent(permanentsIterator.previous());
-            if (permanent == null) {
-                continue;
-            }
-            oneTargetStillExists = true;
-
-            if (permanent.isControlledBy(controllingOpponentId)) {
-                continue;
-            }
-
-            boolean controlChanged = permanent.changeControllerId(controllingOpponentId, game, source);
-            if (firstControlChange) {
-                if (controlChanged) {
-                    cardsToDraw++;
-                } else {
-                    // If we couldn't gain control of target permanent on the first try, we shouldn't try again
-                    // Can happen due to Guardian Beast
-                    permanentsIterator.remove();
-                }
+        for (UUID permanentId : targetPermanentIds) {
+            Permanent permanent = game.getPermanent(permanentId);
+            if (permanent != null && permanent.isControlledBy(targetOpponentId)) {
+                cardsToDraw++;
             }
         }
 
-        if (cardsToDraw > 0) {
-            new DrawCardSourceControllerEffect(cardsToDraw).apply(game, source);
-        }
-
-        // When there's no targets for opponent to control or the effect's controller left the game, effect can be discarded
-        if (!oneTargetStillExists || permanentIds.isEmpty() || !controller.isInGame()) {
-            discard();
-        }
-        firstControlChange = false;
+        new DrawCardSourceControllerEffect(cardsToDraw).apply(game, source);
         return true;
     }
 
