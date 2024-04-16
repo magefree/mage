@@ -1723,8 +1723,6 @@ public abstract class GameImpl implements Game {
                             // tests - try to fail fast
                             throw new MageException(UNIT_TESTS_ERROR_TEXT);
                         }
-                    } finally {
-                        //setCheckPlayableState(false); // TODO: delete
                     }
                     state.getPlayerList().getNext();
                 }
@@ -1743,7 +1741,6 @@ public abstract class GameImpl implements Game {
         } finally {
             resetLKI();
             clearAllBookmarks();
-            //setCheckPlayableState(false);
         }
     }
 

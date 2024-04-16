@@ -52,7 +52,6 @@ public class SasayaOrochiAscendantTest extends CardTestPlayerBase {
     public void testSasayasEssence() {
         addCard(Zone.HAND, playerA, "Plains", 7);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
-        addCard(Zone.BATTLEFIELD, playerB, "Fountain of Renewal", 5);
 
         // Reveal your hand: If you have seven or more land cards in your hand, flip Sasaya, Orochi Ascendant.
         // Sasaya's Essence: Legendary Enchantment
