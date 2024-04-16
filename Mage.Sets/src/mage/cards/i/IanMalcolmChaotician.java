@@ -264,6 +264,14 @@ class IanMalcolmChaoticianWatcher extends Watcher {
                 ).contains(source.getControllerId());
     }
 
+    /**
+     * Returns true if card was added to the tracked exiled cards under sourceObj
+     *
+     * @param sourceObj exiling card
+     * @param card exiled card to check
+     * @param game
+     * @param offset zone change counter offset: 0 = in exile, 1 = on the stack waiting to be cast
+     */
     static boolean checkExile(MageObjectReference sourceObj, Card card, Game game, int offset) {
         return game
                 .getState()
