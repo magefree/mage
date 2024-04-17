@@ -49,7 +49,7 @@ public abstract class Emblem extends CommandObjectImpl {
         this.controllerId = emblem.controllerId;
         this.sourceObject = emblem.sourceObject;
         this.copy = emblem.copy;
-        this.copyFrom = (emblem.copyFrom != null ? emblem.copyFrom : null);
+        this.copyFrom = emblem.copyFrom;
         this.abilites = emblem.abilites.copy();
     }
 

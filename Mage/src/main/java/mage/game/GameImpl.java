@@ -46,6 +46,7 @@ import mage.game.combat.CombatGroup;
 import mage.game.command.*;
 import mage.game.command.dungeons.UndercityDungeon;
 import mage.game.command.emblems.EmblemOfCard;
+import mage.game.command.emblems.RadiationEmblem;
 import mage.game.command.emblems.TheRingEmblem;
 import mage.game.events.*;
 import mage.game.events.TableEvent.EventType;
@@ -441,6 +442,11 @@ public abstract class GameImpl implements Game {
             for (Designation designation : state.getDesignations()) {
                 if (designation.getId().equals(objectId)) {
                     return designation;
+                }
+            }
+            for (Emblem emblem : state.getInherentEmblems()) {
+                if (emblem.getId().equals(objectId)) {
+                    return emblem;
                 }
             }
             // can be an ability of a sacrificed Token trying to get it's source object
@@ -1365,6 +1371,14 @@ public abstract class GameImpl implements Game {
                     state.addAbility(ability, null, emblem);
                 }
             }
+        }
+
+        // Rad counter mechanic for every player
+        for (UUID playerId : state.getPlayerList(startingPlayerId)) {
+            // This is not a real emblem. Just a fake source for the
+            // inherent trigger ability related to Rad counters
+            // Faking a source just to display something on the stack ability.
+            state.addInherentEmblem(new RadiationEmblem(), playerId);
         }
     }
 
