@@ -78,11 +78,9 @@ enum ZirdaTheDawnwakerCompanionCondition implements CompanionCondition {
                 .allMatch(card -> card
                         .getAbilities()
                         .stream()
-                        .anyMatch(ability -> // This may be imperfect? Not sure everything is excluded correctly.
-                                ability instanceof ActivatedAbility &&
-                                        !(ability instanceof SpellAbility) &&
-                                        !(ability instanceof PlayLandAbility) &&
-                                        !(ability instanceof SpecialAction))
+                        .anyMatch(ability -> ability.getAbilityType() == AbilityType.ACTIVATED
+                                || ability.getAbilityType() == AbilityType.MANA
+                                || ability.getAbilityType() == AbilityType.LOYALTY)
                 );
     }
 }
