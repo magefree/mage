@@ -2,8 +2,7 @@ package mage.cards.z;
 
 import mage.MageInt;
 import mage.MageObject;
-import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
+import mage.abilities.*;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -79,7 +78,11 @@ enum ZirdaTheDawnwakerCompanionCondition implements CompanionCondition {
                 .allMatch(card -> card
                         .getAbilities()
                         .stream()
-                        .anyMatch(ActivatedAbility.class::isInstance)
+                        .anyMatch(ability -> // This may be imperfect? Not sure everything is excluded correctly.
+                                ability instanceof ActivatedAbility &&
+                                        !(ability instanceof SpellAbility) &&
+                                        !(ability instanceof PlayLandAbility) &&
+                                        !(ability instanceof SpecialAction))
                 );
     }
 }
