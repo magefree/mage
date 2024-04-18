@@ -13,6 +13,7 @@ import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.filter.FilterPermanent;
+import mage.filter.FilterPermanentThisOrAnother;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
@@ -27,12 +28,9 @@ import mage.target.targetpointer.FixedTarget;
  */
 public final class HenryWuInGenGeneticist extends CardImpl {
 
-    public static final FilterPermanent filterYourHumans = new FilterCreaturePermanent("Human creatures you control");
-
-    static {
-        filterYourHumans.add(TargetController.YOU.getControllerPredicate());
-        filterYourHumans.add(SubType.HUMAN.getPredicate());
-    }
+    private static final FilterPermanent filter = new FilterPermanentThisOrAnother(
+            new FilterCreaturePermanent(SubType.HUMAN, "Human creatures"), true,
+            "{this} and other Human creatures you control");
 
     public HenryWuInGenGeneticist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}{G}{U}");
@@ -44,8 +42,8 @@ public final class HenryWuInGenGeneticist extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Henry Wu, InGen Geneticist and other Human creatures you control have exploit.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(
-                new ExploitAbility(), Duration.WhileOnBattlefield, filterYourHumans)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
+                new ExploitAbility(), Duration.WhileOnBattlefield, filter)));
 
         // Whenever a creature you control exploits a non-Human creature, draw a card. If the exploited creature had power 3 or greater, create a Treasure token.
         this.addAbility(new HenryWuInGenGeneticistTriggeredAbility());
@@ -89,16 +87,13 @@ class HenryWuInGenGeneticistTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent exploiter = game.getPermanentOrLKIBattlefield(event.getSourceId());
         Permanent exploited = game.getPermanentOrLKIBattlefield(event.getTargetId());
-
-        if (exploiter == null || exploited == null){
-            return false;
-        }
-
-        getEffects().setTargetPointer(new FixedTarget(exploited.getId(), game));
-
-        return exploiter.isCreature(game)
+        if (exploiter != null && exploited != null && exploiter.isCreature(game)
                 && exploiter.isControlledBy(this.getControllerId())
-                && filterNonHumans.match(exploited, getControllerId(), this, game);
+                && filterNonHumans.match(exploited, getControllerId(), this, game)) {
+            getEffects().setTargetPointer(new FixedTarget(exploited.getId(), game));
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -109,7 +104,7 @@ class HenryWuInGenGeneticistTriggeredAbility extends TriggeredAbilityImpl {
 
 class HenryWuInGenGeneticistEffect extends CreateTokenEffect {
 
-    public HenryWuInGenGeneticistEffect() {
+    HenryWuInGenGeneticistEffect() {
         super(new TreasureToken());
         staticText = "If the exploited creature had power 3 or greater, create a Treasure token.";
     }

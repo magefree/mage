@@ -916,7 +916,14 @@ public final class CardUtil {
     }
 
     public static String getAddRemoveCountersText(DynamicValue amount, Counter counter, String description, boolean add) {
-        StringBuilder sb = new StringBuilder(add ? "put " : "remove ");
+        boolean targetPlayerGets = add && (description.endsWith("player") || description.endsWith("opponent"));
+        StringBuilder sb = new StringBuilder();
+        if (targetPlayerGets) {
+            sb.append(description);
+            sb.append(" gets ");
+        } else {
+            sb.append(add ? "put " : "remove ");
+        }
         boolean xValue = amount.toString().equals("X");
         if (xValue) {
             sb.append("X ").append(counter.getName()).append(" counters");
@@ -925,7 +932,9 @@ public final class CardUtil {
         } else {
             sb.append(counter.getDescription());
         }
-        sb.append(add ? " on " : " from ").append(description);
+        if (!targetPlayerGets) {
+            sb.append(add ? " on " : " from ").append(description);
+        }
         if (!amount.getMessage().isEmpty()) {
             sb.append(xValue ? ", where X is " : " for each ").append(amount.getMessage());
         }

@@ -55,14 +55,12 @@ public class AddCountersPlayersEffect extends OneShotEffect {
             case ANY:
                 return game.getState().getPlayersInRange(source.getControllerId(), game);
             case YOU:
-                return Arrays.asList(source.getControllerId());
+                return Collections.singletonList(source.getControllerId());
             case CONTROLLER_ATTACHED_TO:
                 List<UUID> list = new ArrayList<>();
                 Optional.ofNullable(source.getSourcePermanentOrLKI(game))
-                        .filter(Objects::nonNull)
                         .map(Permanent::getAttachedTo)
                         .map(game::getControllerId)
-                        .filter(Objects::nonNull)
                         .ifPresent(list::add);
                 return list;
             default:
@@ -102,23 +100,26 @@ public class AddCountersPlayersEffect extends OneShotEffect {
         StringBuilder sb = new StringBuilder();
         switch (targetController) {
             case OPPONENT:
-                sb.append("each opponent gets");
+                sb.append("each opponent gets ");
                 break;
             case ANY:
             case EACH_PLAYER:
-                sb.append("each player gets");
+                sb.append("each player gets ");
                 break;
             case YOU:
-                sb.append("you get");
+                sb.append("you get ");
                 break;
             case CONTROLLER_ATTACHED_TO:
-                sb.append("its controller gets");
+                sb.append("its controller gets ");
                 break;
             default:
                 throw new UnsupportedOperationException(targetController + " not supported");
         }
-        sb.append(' ');
-        sb.append(counter.getDescription());
+        if (amount.toString().equals("X")) {
+            sb.append("X ").append(counter.getName()).append(" counters");
+        } else {
+            sb.append(counter.getDescription());
+        }
         return sb.toString();
     }
 }

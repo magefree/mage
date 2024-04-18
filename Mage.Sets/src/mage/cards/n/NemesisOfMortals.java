@@ -46,7 +46,7 @@ public final class NemesisOfMortals extends CardImpl {
         // {7}{G}{G}: Monstrosity 5.  This ability costs {1} less to activate for each creature card in your graveyard.
         this.addAbility(new MonstrosityAbility("{7}{G}{G}", 5,
                 NemesisOfMortalsAdjuster.instance,
-                "This ability costs {1} less to activate for each creature card in your graveyard"));
+                "This ability costs {1} less to activate for each creature card in your graveyard. "));
     }
 
     private NemesisOfMortals(final NemesisOfMortals card) {
