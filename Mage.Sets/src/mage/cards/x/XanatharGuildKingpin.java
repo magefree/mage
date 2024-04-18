@@ -163,12 +163,19 @@ class XanatharPlayFromTopOfTargetLibraryEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability affectedAbility, Ability source, Game game, UUID playerId) {
-        if (!(affectedAbility instanceof SpellAbility) || !playerId.equals(source.getControllerId())) {
+        Card cardToCheck = game.getCard(objectId);
+        if (cardToCheck == null) {
             return false;
         }
-        SpellAbility spell = (SpellAbility) affectedAbility;
-        Card cardToCheck = spell.getCharacteristics(game);
-        if (spell.getManaCosts().isEmpty()) {
+        if (affectedAbility instanceof SpellAbility) {
+            SpellAbility spell = (SpellAbility) affectedAbility;
+            cardToCheck = spell.getCharacteristics(game);
+            if (spell.getManaCosts().isEmpty()) {
+                return false;  // prevent casting cards without mana cost?
+            }
+        }
+        // only permits you to cast
+        if (!playerId.equals(source.getControllerId())) {
             return false;
         }
         Player controller = game.getPlayer(source.getControllerId());
@@ -176,7 +183,7 @@ class XanatharPlayFromTopOfTargetLibraryEffect extends AsThoughEffectImpl {
         if (controller == null || opponent == null) {
             return false;
         }
-        // main card of spell must be on top of the opponent's library
+        // main card of spell/land must be on top of the opponent's library
         Card topCard = opponent.getLibrary().getFromTop(game);
         return topCard != null && topCard.getId().equals(cardToCheck.getMainCard().getId());
     }

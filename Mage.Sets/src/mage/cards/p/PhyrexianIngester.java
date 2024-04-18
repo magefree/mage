@@ -1,7 +1,6 @@
 
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -19,10 +18,12 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
- *
- * @author North
+ * @author North, Susucr
  */
 public final class PhyrexianIngester extends CardImpl {
 
@@ -33,7 +34,7 @@ public final class PhyrexianIngester extends CardImpl {
     }
 
     public PhyrexianIngester(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{6}{U}");
         this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.BEAST);
 
@@ -78,16 +79,25 @@ class PhyrexianIngesterImprintEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
-        if (controller != null && sourceObject != null) {
-            Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-            Permanent targetPermanent = game.getPermanent(source.getFirstTarget());
-            if (sourcePermanent != null && targetPermanent != null) {
-                controller.moveCardToExileWithInfo(targetPermanent, getId(), sourceObject.getIdName() + " (Imprint)", source, game, Zone.BATTLEFIELD, true);
-                sourcePermanent.imprint(targetPermanent.getId(), game);
-                return true;
-            }
+        if (controller == null && sourceObject == null) {
+            return false;
         }
-        return false;
+        Permanent targetPermanent = game.getPermanent(source.getFirstTarget());
+        if (targetPermanent == null) {
+            return false;
+        }
+        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
+        if (sourcePermanent != null) {
+            UUID exileZoneId = CardUtil.getCardExileZoneId(game, source);
+            String exileZoneName = sourceObject.getIdName() + " (Imprint)";
+            controller.moveCardsToExile(targetPermanent, source, game, true, exileZoneId, exileZoneName);
+            sourcePermanent.imprint(targetPermanent.getId(), game);
+        } else {
+            // Ingester is no longer on the battlefield, but the target still needs to be exiled.
+            // no need for specific exile zone
+            controller.moveCardsToExile(targetPermanent, source, game, true, null, "");
+        }
+        return true;
     }
 }
 
@@ -110,15 +120,16 @@ class PhyrexianIngesterBoostEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null && !permanent.getImprinted().isEmpty()) {
-            Card card = game.getCard(permanent.getImprinted().get(0));
+        if (permanent == null) {
+            return false;
+        }
+        for (UUID cardId : permanent.getImprinted()) {
+            Card card = game.getCard(cardId);
             if (card != null) {
                 permanent.addPower(card.getPower().getValue());
                 permanent.addToughness(card.getToughness().getValue());
-                return true;
             }
-            return true;
         }
-        return false;
+        return true;
     }
 }

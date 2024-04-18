@@ -31,6 +31,7 @@ public enum TokenRepository {
     public static final String XMAGE_IMAGE_NAME_DAY = "Day";
     public static final String XMAGE_IMAGE_NAME_NIGHT = "Night";
     public static final String XMAGE_IMAGE_NAME_THE_MONARCH = "The Monarch";
+    public static final String XMAGE_IMAGE_NAME_RADIATION = "Radiation";
 
     private static final Logger logger = Logger.getLogger(TokenRepository.class);
 
@@ -295,6 +296,9 @@ public enum TokenRepository {
         res.add(createXmageToken(XMAGE_IMAGE_NAME_THE_MONARCH, 1, "https://api.scryfall.com/cards/tonc/22/en?format=image"));
         res.add(createXmageToken(XMAGE_IMAGE_NAME_THE_MONARCH, 2, "https://api.scryfall.com/cards/tcn2/1/en?format=image"));
         res.add(createXmageToken(XMAGE_IMAGE_NAME_THE_MONARCH, 3, "https://api.scryfall.com/cards/tltc/15/en?format=image"));
+
+        // Radiation (for trigger)
+        res.add(createXmageToken(XMAGE_IMAGE_NAME_RADIATION, 1, "https://api.scryfall.com/cards/tpip/22/en?format=image"));
 
         return res;
     }

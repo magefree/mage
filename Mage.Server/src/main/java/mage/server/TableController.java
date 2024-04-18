@@ -292,7 +292,7 @@ public class TableController {
 
             // owner must create table with valid deck only
             if (isOwner(userId)) {
-                logger.error("New table removed because owner submitted invalid deck tableId " + table.getId());
+                logger.debug("New table removed because owner submitted invalid deck tableId " + table.getId());
                 managerFactory.tableManager().removeTable(table.getId());
             }
             return false;

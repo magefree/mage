@@ -46,6 +46,7 @@ import mage.game.combat.CombatGroup;
 import mage.game.command.*;
 import mage.game.command.dungeons.UndercityDungeon;
 import mage.game.command.emblems.EmblemOfCard;
+import mage.game.command.emblems.RadiationEmblem;
 import mage.game.command.emblems.TheRingEmblem;
 import mage.game.events.*;
 import mage.game.events.TableEvent.EventType;
@@ -98,8 +99,10 @@ public abstract class GameImpl implements Game {
 
     private transient Object customData; // temporary data, used in AI simulations
     private transient Player losingPlayer; // temporary data, used in AI simulations
-    protected boolean simulation = false;
-    protected boolean checkPlayableState = false;
+
+    protected boolean simulation = false; // for inner simulations (game without user messages)
+    protected boolean aiGame = false; // for inner simulations (ai game, debug only)
+    protected boolean checkPlayableState = false; // for inner playable calculations (game without user dialogs)
 
     protected AtomicInteger totalErrorsCount = new AtomicInteger(); // for debug only: error stats
 
@@ -180,6 +183,7 @@ public abstract class GameImpl implements Game {
     protected GameImpl(final GameImpl game) {
         //this.customData = game.customData; // temporary data, no need on game copy
         //this.losingPlayer = game.losingPlayer; // temporary data, no need on game copy
+        this.aiGame = game.aiGame;
         this.simulation = game.simulation;
         this.checkPlayableState = game.checkPlayableState;
 
@@ -248,13 +252,19 @@ public abstract class GameImpl implements Game {
     }
 
     @Override
-    public void setSimulation(boolean simulation) {
-        this.simulation = simulation;
+    public Game createSimulationForAI() {
+        Game res = this.copy();
+        ((GameImpl) res).simulation = true;
+        ((GameImpl) res).aiGame = true;
+        return res;
     }
 
     @Override
-    public void setCheckPlayableState(boolean checkPlayableState) {
-        this.checkPlayableState = checkPlayableState;
+    public Game createSimulationForPlayableCalc() {
+        Game res = this.copy();
+        ((GameImpl) res).simulation = true;
+        ((GameImpl) res).checkPlayableState = true;
+        return res;
     }
 
     @Override
@@ -432,6 +442,11 @@ public abstract class GameImpl implements Game {
             for (Designation designation : state.getDesignations()) {
                 if (designation.getId().equals(objectId)) {
                     return designation;
+                }
+            }
+            for (Emblem emblem : state.getInherentEmblems()) {
+                if (emblem.getId().equals(objectId)) {
+                    return emblem;
                 }
             }
             // can be an ability of a sacrificed Token trying to get it's source object
@@ -1357,6 +1372,14 @@ public abstract class GameImpl implements Game {
                 }
             }
         }
+
+        // Rad counter mechanic for every player
+        for (UUID playerId : state.getPlayerList(startingPlayerId)) {
+            // This is not a real emblem. Just a fake source for the
+            // inherent trigger ability related to Rad counters
+            // Faking a source just to display something on the stack ability.
+            state.addInherentEmblem(new RadiationEmblem(), playerId);
+        }
     }
 
     public void initGameDefaultWatchers() {
@@ -1602,6 +1625,10 @@ public abstract class GameImpl implements Game {
 
     @Override
     public void playPriority(UUID activePlayerId, boolean resuming) {
+        if (!this.isSimulation() && this.inCheckPlayableState()) {
+            throw new IllegalStateException("Wrong code usage. Only simulation games can be in CheckPlayableState");
+        }
+
         int priorityErrorsCount = 0;
         infiniteLoopCounter = 0;
         int rollbackBookmarkOnPriorityStart = 0;
@@ -1710,8 +1737,6 @@ public abstract class GameImpl implements Game {
                             // tests - try to fail fast
                             throw new MageException(UNIT_TESTS_ERROR_TEXT);
                         }
-                    } finally {
-                        setCheckPlayableState(false);
                     }
                     state.getPlayerList().getNext();
                 }
@@ -1730,7 +1755,6 @@ public abstract class GameImpl implements Game {
         } finally {
             resetLKI();
             clearAllBookmarks();
-            setCheckPlayableState(false);
         }
     }
 
@@ -4045,8 +4069,24 @@ public abstract class GameImpl implements Game {
     @Override
     public String toString() {
         Player activePayer = this.getPlayer(this.getActivePlayerId());
+
+        // show non-standard game state (not part of the real game, e.g. AI or mana calculation)
+        List<String> simInfo = new ArrayList<>();
+        if (this.simulation) {
+            simInfo.add("SIMULATION");
+        }
+        if (this.aiGame) {
+            simInfo.add("AI");
+        }
+        if (this.checkPlayableState) {
+            simInfo.add("PLAYABLE CALC");
+        }
+        if (!ThreadUtils.isRunGameThread()) {
+            simInfo.add("NOT GAME THREAD");
+        }
+
         StringBuilder sb = new StringBuilder()
-                .append(this.isSimulation() ? "!!!SIMULATION!!! " : "")
+                .append(!simInfo.isEmpty() ? "!!!" + String.join(", ", simInfo) + "!!! " : "")
                 .append(this.getGameType().toString())
                 .append("; ").append(CardUtil.getTurnInfo(this))
                 .append("; active: ").append((activePayer == null ? "none" : activePayer.getName()))

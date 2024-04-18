@@ -169,6 +169,7 @@ public abstract class AbilityImpl implements Ability {
         if (checkIfClause(game)) {
             // Ability has started resolving. Fire event.
             // Used for abilities counting the number of resolutions like Ashling the Pilgrim.
+            // TODO: called for mana abilities too, must be removed to safe place someday (see old place like StackAbility::resolve)
             game.fireEvent(new GameEvent(GameEvent.EventType.RESOLVING_ABILITY, this.getOriginalId(), this, this.getControllerId()));
             if (this instanceof TriggeredAbility) {
                 for (UUID modeId : this.getModes().getSelectedModes()) {
