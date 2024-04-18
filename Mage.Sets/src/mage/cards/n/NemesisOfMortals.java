@@ -6,7 +6,6 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.CostAdjuster;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.cost.SpellCostReductionForEachSourceEffect;
 import mage.abilities.hint.Hint;
 import mage.abilities.hint.ValueHint;
@@ -45,12 +44,9 @@ public final class NemesisOfMortals extends CardImpl {
         this.addAbility(ability);
 
         // {7}{G}{G}: Monstrosity 5.  This ability costs {1} less to activate for each creature card in your graveyard.
-        ability = new MonstrosityAbility("{7}{G}{G}", 5);
-        for (Effect effect : ability.getEffects()) {
-            effect.setText("Monstrosity 5. This ability costs {1} less to activate for each creature card in your graveyard");
-        }
-        ability.setCostAdjuster(NemesisOfMortalsAdjuster.instance);
-        this.addAbility(ability);
+        this.addAbility(new MonstrosityAbility("{7}{G}{G}", 5,
+                NemesisOfMortalsAdjuster.instance,
+                "This ability costs {1} less to activate for each creature card in your graveyard"));
     }
 
     private NemesisOfMortals(final NemesisOfMortals card) {
