@@ -2,6 +2,7 @@ package mage.cards.i;
 
 import java.util.*;
 
+import mage.MageIdentifier;
 import mage.MageInt;
 import mage.MageObject;
 import mage.MageObjectReference;
@@ -43,7 +44,8 @@ public final class IanMalcolmChaotician extends CardImpl {
 
         // During each player's turn, that player may cast a spell from among the cards they don't own exiled with
         // Ian Malcolm, Chaotician, and mana of any type can be spent to cast it.
-        Ability ability = new SimpleStaticAbility(new IanMalcolmChaoticianCastEffect());
+        Ability ability = new SimpleStaticAbility(new IanMalcolmChaoticianCastEffect())
+                .setIdentifier(MageIdentifier.IanMalcolmChaoticianWatcher);
         ability.addEffect(new IanMalcolmChaoticianManaEffect());
         this.addAbility(ability);
     }
@@ -219,7 +221,8 @@ class IanMalcolmChaoticianWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.SPELL_CAST && event.getAdditionalReference() != null) {
+        if (event.getType() == GameEvent.EventType.SPELL_CAST &&
+                event.hasApprovingIdentifier(MageIdentifier.IanMalcolmChaoticianWatcher)) {
             usedMap.computeIfAbsent(
                     event.getAdditionalReference()
                             .getApprovingMageObjectReference(),
