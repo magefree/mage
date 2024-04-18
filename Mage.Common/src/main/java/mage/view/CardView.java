@@ -486,6 +486,9 @@ public class CardView extends SimpleCardView {
                 if (!permanent.getControllerId().equals(permanent.getOwnerId())) {
                     controlledByOwner = false;
                 }
+                if (permanent.isTransformed()) {
+                    transformed = true;
+                }
             }
         } else {
             if (card.isCopy()) {
@@ -631,10 +634,10 @@ public class CardView extends SimpleCardView {
             }
 
             // Cases, classes and sagas have portrait art
-            if (card.getSubtype().contains(SubType.CASE) ||
-                    card.getSubtype().contains(SubType.CLASS)) {
+            if (card.getSubtype(game).contains(SubType.CASE) ||
+                    card.getSubtype(game).contains(SubType.CLASS)) {
                 artRect = ArtRect.FULL_LENGTH_LEFT;
-            } else if (card.getSubtype().contains(SubType.SAGA)) {
+            } else if (card.getSubtype(game).contains(SubType.SAGA)) {
                 artRect = ArtRect.FULL_LENGTH_RIGHT;
             }
 
