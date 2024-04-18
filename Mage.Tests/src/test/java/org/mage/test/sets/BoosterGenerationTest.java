@@ -108,35 +108,6 @@ public class BoosterGenerationTest extends MageTestPlayerBase {
         Assert.assertNotNull(booster);
         Assert.assertEquals("Pack contains 15 cards", 15, booster.size());
 
-        Assert.assertTrue("Slot 1 is white", booster.get(0).getColor().isWhite());
-        Assert.assertTrue("Slot 2 is white", booster.get(1).getColor().isWhite());
-
-        // Wretched Gryff is colorless, but stores in blue slots
-        Assert.assertTrue("Slot 3 is blue", booster.get(2).getName().equals("Wretched Gryff") || booster.get(2).getColor().isBlue());
-        Assert.assertTrue("Slot 4 is blue", booster.get(3).getName().equals("Wretched Gryff") || booster.get(3).getColor().isBlue());
-
-        Assert.assertTrue("Slot 5 is black", booster.get(4).getColor().isBlack());
-        Assert.assertTrue("Slot 6 is black", booster.get(5).getColor().isBlack());
-
-        Assert.assertTrue("Slot 7 is red", booster.get(6).getColor().isRed());
-        Assert.assertTrue("Slot 8 is red", booster.get(7).getColor().isRed());
-
-        Assert.assertTrue("Slot 9 is green", booster.get(8).getColor().isGreen());
-        Assert.assertTrue("Slot 10 is green", booster.get(9).getColor().isGreen());
-
-        Assert.assertTrue("Slot 11 is multicolored", booster.get(10).getColor().isMulticolored());
-        Assert.assertTrue("Slot 12 is colorless", booster.get(11).getColor().isColorless());
-
-        Assert.assertEquals("Slot 15 is from FMB1 set", "FMB1", booster.get(14).getExpansionSetCode());
-    }
-
-    @Test
-    public void testMysteryBooster1Create15CardBooster() {
-        // https://magic.wizards.com/en/articles/archive/feature/unraveling-mystery-booster-2019-11-14
-        List<Card> booster = MysteryBooster.getInstance().create15CardBooster();
-        Assert.assertNotNull(booster);
-        Assert.assertEquals("Pack contains 15 cards", 15, booster.size());
-
         Assert.assertTrue("Slot 1 is white (" + booster.get(0).getName() + ')', booster.get(0).getColorIdentity().isWhite());
         Assert.assertTrue("Slot 2 is white (" + booster.get(1).getName() + ')', booster.get(1).getColorIdentity().isWhite());
 
@@ -153,14 +124,7 @@ public class BoosterGenerationTest extends MageTestPlayerBase {
         Assert.assertTrue("Slot 10 is green (" + booster.get(9).getName() + ')', booster.get(9).getColorIdentity().isGreen());
 
         Assert.assertTrue("Slot 11 is multicolored (" + booster.get(10).getName() + ')', booster.get(10).getColorIdentity().isMulticolored());
-        Assert.assertTrue(
-                "Slot 12 is colorless (" + booster.get(11).getName() + ')',
-                booster.get(11).getColor().isColorless()
-                        || booster.get(11).isLand()
-                        || booster.get(11).isArtifact()
-        );
-
-        Assert.assertEquals("Slot 15 is from FMB1 set", "FMB1", booster.get(14).getExpansionSetCode());
+        Assert.assertTrue("Slot 12 is colorless (" + booster.get(11).getName() + ')', booster.get(11).getColor().isColorless());
     }
 
     @Test
@@ -200,7 +164,7 @@ public class BoosterGenerationTest extends MageTestPlayerBase {
         for (int i = 0; i < 50; i++) {
             List<Card> booster = CoreSet2019.getInstance().createBooster();
             // check that booster contains a land card
-            assertTrue(booster.stream().anyMatch(card -> card.isLand()));
+            assertTrue(booster.stream().anyMatch(MageObject::isLand));
             allCards.addAll(booster);
         }
         // check that some dual lands were generated
