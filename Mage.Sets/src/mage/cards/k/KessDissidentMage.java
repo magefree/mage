@@ -4,10 +4,10 @@ import mage.MageIdentifier;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.abilities.keyword.FlashbackAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -80,18 +80,37 @@ class KessDissidentMageCastFromGraveyardEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (source instanceof FlashbackAbility
-                || !affectedControllerId.equals(source.getControllerId())
+        throw new IllegalArgumentException("Wrong code usage: can't call applies method on empty affectedAbility");
+    }
+
+    @Override
+    public boolean applies(UUID objectId, Ability affectedAbility, Ability source, Game game, UUID playerId) {
+        // Only during your turn
+        if (!playerId.equals(source.getControllerId())
+                || !game.isActivePlayer(source.getControllerId())) {
+            return false;
+        }
+        // Only if source is this.
+        if (!playerId.equals(source.getControllerId())
                 || !game.isActivePlayer(source.getControllerId())) {
             return false;
         }
         Card card = game.getCard(objectId);
+        // Only for cards in your graveyard
         if (card == null
-                || !card.isInstantOrSorcery(game)
-                || !game.getState().getZone(objectId).equals(Zone.GRAVEYARD)
+                || !game.getState().getZone(card.getMainCard().getId()).equals(Zone.GRAVEYARD)
                 || !card.isOwnedBy(source.getControllerId())) {
             return false;
         }
+        SpellAbility spell = (SpellAbility) affectedAbility;
+        if (spell == null || spell.getManaCosts().isEmpty()) {
+            return false;  // prevent casting cards without mana cost?
+        }
+        Card cardToCheck = spell.getCharacteristics(game);
+        if (!cardToCheck.isInstantOrSorcery(game)) {
+            return false;
+        }
+
         // check if not already a card was cast this turn with this ability
         KessDissidentMageWatcher watcher = game.getState().getWatcher(KessDissidentMageWatcher.class);
         return watcher != null && !watcher.isAbilityUsed(new MageObjectReference(source.getSourceId(), game));
