@@ -4,6 +4,7 @@ import mage.cards.Card;
 import mage.cards.ExpansionSet;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
+import mage.constants.Rarity;
 import mage.constants.SetType;
 import mage.util.RandomUtil;
 
@@ -46,8 +47,12 @@ public class MysteryBooster extends ExpansionSet {
         super("Mystery Booster", "MB1", ExpansionSet.buildDate(2019, 11, 7), SetType.SUPPLEMENTAL);
         this.hasBoosters = true;
         this.hasBasicLands = false;
-        // This set is implemented for booster generation only.
-        // It contains no cards itself.
+        // This set is implemented for the purpose of booster generation only.
+        // Rather than include cards (scryfall moved them to PLST with thousands of other cards) with duplicate printings,
+        // the collation just draws from the original printings in other sets.
+        // However, this set would be excluded from view if it contained no cards, so these two cards are here as a workaround.
+        cards.add(new SetCardInfo("Goblin Trenches", 203, Rarity.RARE, mage.cards.g.GoblinTrenches.class));
+        cards.add(new SetCardInfo("Prophetic Bolt", 231, Rarity.RARE, mage.cards.p.PropheticBolt.class));
     }
 
     @Override
