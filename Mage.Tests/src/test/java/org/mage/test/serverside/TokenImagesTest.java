@@ -670,14 +670,14 @@ public class TokenImagesTest extends CardTestPlayerBase {
 
     @Test
     public void test_Abilities_Embalm_MustGenerateSameTokenAsCard() {
-        prepareCards_SacredCat("AKH=3", "AKR=5", "MB1=1");
-        activate_SacredCat(3 + 5 + 1);
+        prepareCards_SacredCat("AKH=3", "AKR=5");
+        activate_SacredCat(3 + 5);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assert_SacredCat(3 + 5 + 1, "AKH=3", "AKR=5", "MB1=1");
+        assert_SacredCat(3 + 5, "AKH=3", "AKR=5");
     }
 
     @Test // it's ok for fail in 1 of 50

@@ -2,7 +2,6 @@ package org.mage.test.cards.single.c17;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -129,7 +128,6 @@ public class KessDissidentMageTest extends CardTestPlayerBase {
     }
 
     @Test
-    @Ignore("failing, see issue #11924")
     public void testKessCastAdventureAfterDeath() {
         addCard(Zone.BATTLEFIELD, playerA, kess);
         addCard(Zone.GRAVEYARD, playerA, lifegain);
@@ -151,6 +149,7 @@ public class KessDissidentMageTest extends CardTestPlayerBase {
         checkPlayableAbility("creature", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast " + unicorn, false);
         checkPlayableAbility("adventure", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast " + rider, true);
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, rider);
+        setChoice(playerA, "Kess, Dissident Mage"); // Test sees 2 ways to cast the Adventure, actual game only shows the one.
 
         checkPlayableAbility("already used", 3, PhaseStep.POSTCOMBAT_MAIN, playerA, "Cast " + lifegain, false);
 
