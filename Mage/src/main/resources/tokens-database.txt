@@ -129,6 +129,7 @@
 |Generate|EMBLEM:PH17|Emblem Inzerva|||InzervaMasterOfInsightsEmblem|
 |Generate|EMBLEM:LCC|Emblem Sorin|||SorinLordOfInnistradEmblem|
 |Generate|EMBLEM:RVR|Emblem Domri|||DomriRadeEmblem|
+|Generate|EMBLEM:MH3L|Emblem Tamiyo|||TamiyoSeasonedScholarEmblem|
 
 # ALL PLANES
 # Usage hints:
