@@ -10,11 +10,14 @@ import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.AsThoughEffectImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageMultiEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.cost.SpellsCostReductionAllEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -26,13 +29,14 @@ import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetAnyTargetAmount;
 import mage.util.CardUtil;
 import mage.watchers.common.SpellsCastWatcher;
 
-import java.util.*;
+import java.util.Objects;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  * @author Susucr
@@ -59,7 +63,10 @@ public final class RalLeylineProdigy extends CardImpl {
         this.nightCard = true;
 
         // Ral, Leyline Prodigy enters the battlefield with an additional loyalty counter on him for each instant and sorcery spell you've cast this turn.
-        this.addAbility(new EntersBattlefieldAbility(new RalLeylineProdigyCounterEffect()));
+        this.addAbility(new EntersBattlefieldAbility(
+                new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(), RalLeylineProdigyValue.instance, false)
+                        .setText("with an additional loyalty counter on him for each instant and sorcery spell you've cast this turn")
+        ));
 
         // +1: Until your next turn, instant and sorcery spells you cast cost {1} less to cast.
         this.addAbility(new LoyaltyAbility(new RalLeylineProdigyCostReductionEffect(), 1));
@@ -114,44 +121,32 @@ class RalLeylineProdigyCostReductionEffect extends OneShotEffect {
     }
 }
 
-class RalLeylineProdigyCounterEffect extends OneShotEffect {
-
-    RalLeylineProdigyCounterEffect() {
-        super(Outcome.BoostCreature);
-        staticText = "with an additional loyalty counter on him for each instant and sorcery spell you've cast this turn";
-    }
-
-    private RalLeylineProdigyCounterEffect(final RalLeylineProdigyCounterEffect effect) {
-        super(effect);
-    }
+enum RalLeylineProdigyValue implements DynamicValue {
+    instance;
 
     @Override
-    public RalLeylineProdigyCounterEffect copy() {
-        return new RalLeylineProdigyCounterEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanentEntering(source.getSourceId());
-        if (permanent == null) {
-            return false;
-        }
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
         SpellsCastWatcher watcher = game.getState().getWatcher(SpellsCastWatcher.class);
         if (watcher == null) {
-            return false;
+            return 0;
         }
-        int amount = watcher
-                .getSpellsCastThisTurn(source.getControllerId())
+        return watcher
+                .getSpellsCastThisTurn(sourceAbility.getControllerId())
                 .stream()
                 .filter(Objects::nonNull)
                 .filter(spell -> spell.isInstantOrSorcery(game))
                 .mapToInt(spell -> 1)
                 .sum();
-        if (amount > 0) {
-            List<UUID> appliedEffects = (ArrayList<UUID>) this.getValue("appliedEffects");
-            permanent.addCounters(CounterType.LOYALTY.createInstance(amount), source.getControllerId(), source, game, appliedEffects);
-        }
-        return true;
+    }
+
+    @Override
+    public RalLeylineProdigyValue copy() {
+        return instance;
+    }
+
+    @Override
+    public String getMessage() {
+        return "instant and sorcery spell you've cast this turn";
     }
 }
 
@@ -220,6 +215,10 @@ class RalLeylineProdigyCastEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        if (mor.getPermanent(game) == null) {
+            discard();
+            return false;
+        }
         Card theCard = game.getCard(objectId);
         if (theCard == null || !theCard.isInstantOrSorcery(game)) {
             return false;
