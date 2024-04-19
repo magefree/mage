@@ -24,9 +24,11 @@ public final class ModernHorizons3Leaks extends ExpansionSet {
     private ModernHorizons3Leaks() {
         super("Modern Horizons 3 Leaks", "MH3L", ExpansionSet.buildDate(2024, 6, 7), SetType.CUSTOM_SET);
         this.blockName = "Modern Horizons 3";
-        this.hasBasicLands = true;
+        this.hasBasicLands = false;
         this.hasBoosters = false;
 
+        cards.add(new SetCardInfo("Ral, Monsoon Mage", 247, Rarity.MYTHIC, mage.cards.r.RalMonsoonMage.class));
+        cards.add(new SetCardInfo("Ral, Leyline Prodigy", 247, Rarity.MYTHIC, mage.cards.r.RalLeylineProdigy.class));
         cards.add(new SetCardInfo("Tamiyo, Inquisitive Student", 242, Rarity.MYTHIC, mage.cards.t.TamiyoInquisitiveStudent.class));
         cards.add(new SetCardInfo("Tamiyo, Seasoned Scholar", 242, Rarity.MYTHIC, mage.cards.t.TamiyoSeasonedScholar.class));
     }
