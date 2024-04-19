@@ -1,4 +1,3 @@
-
 package mage.sets;
 
 import mage.cards.ExpansionSet;
@@ -9,16 +8,16 @@ import mage.constants.SetType;
  *
  * @author LevelX2
  */
-public final class Commander extends ExpansionSet {
+public final class Commander2011 extends ExpansionSet {
 
-    private static final Commander instance = new Commander();
+    private static final Commander2011 instance = new Commander2011();
 
-    public static Commander getInstance() {
+    public static Commander2011 getInstance() {
         return instance;
     }
 
-    private Commander() {
-        super("Commander", "CMD", ExpansionSet.buildDate(2011, 6, 17), SetType.SUPPLEMENTAL);
+    private Commander2011() {
+        super("Commander 2011", "CMD", ExpansionSet.buildDate(2011, 6, 17), SetType.SUPPLEMENTAL);
         this.blockName = "Command Zone";
         cards.add(new SetCardInfo("Acidic Slime", 140, Rarity.UNCOMMON, mage.cards.a.AcidicSlime.class));
         cards.add(new SetCardInfo("Acorn Catapult", 241, Rarity.RARE, mage.cards.a.AcornCatapult.class));
