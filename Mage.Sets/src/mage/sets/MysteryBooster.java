@@ -44,7 +44,7 @@ public class MysteryBooster extends ExpansionSet {
     protected final Map<Integer, List<CardInfo>> boosterMap = new HashMap<>();
 
     private MysteryBooster() {
-        super("Mystery Booster", "MB1", ExpansionSet.buildDate(2019, 11, 7), SetType.SUPPLEMENTAL);
+        super("Mystery Booster", "MB1", ExpansionSet.buildDate(2019, 11, 7), SetType.REMIX);
         this.hasBoosters = true;
         this.hasBasicLands = false;
         // This set is implemented for the purpose of booster generation only.
