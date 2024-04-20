@@ -35,12 +35,12 @@ public class SaddledMountWatcher extends Watcher {
         saddleMap.clear();
     }
 
-    public static boolean checkIfSaddledThisTurn(Permanent saddler, Permanent mount, Game game) {
+    public static boolean checkIfSaddledThisTurn(Permanent saddler, MageObjectReference mountMOR, Game game) {
         return game
                 .getState()
                 .getWatcher(SaddledMountWatcher.class)
                 .saddleMap
-                .getOrDefault(new MageObjectReference(mount, game), Collections.emptySet())
+                .getOrDefault(mountMOR, Collections.emptySet())
                 .stream()
                 .anyMatch(mor -> mor.refersTo(saddler, game));
     }

@@ -2166,7 +2166,7 @@ public abstract class GameImpl implements Game {
         DelayedTriggeredAbility newAbility = delayedAbility.copy();
         newAbility.newId();
         if (source != null) {
-            newAbility.setSourceObjectZoneChangeCounter(getState().getZoneChangeCounter(source.getSourceId()));
+            newAbility.setSourceObjectZoneChangeCounter(source.getSourceObjectZoneChangeCounter());
             newAbility.setSourcePermanentTransformCount(this);
         }
         newAbility.init(this);
