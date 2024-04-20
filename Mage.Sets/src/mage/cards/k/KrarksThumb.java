@@ -58,7 +58,7 @@ class KrarksThumbEffect extends ReplacementEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         FlipCoinEvent flipCoinEvent = (FlipCoinEvent) event;
-        flipCoinEvent.setFlipCount(2 * flipCoinEvent.getFlipCount());
+        flipCoinEvent.setFlipCount(1 + flipCoinEvent.getFlipCount());
         return false;
     }
 
