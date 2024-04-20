@@ -27,6 +27,8 @@ public final class ModernHorizons3Leaks extends ExpansionSet {
         this.hasBasicLands = false;
         this.hasBoosters = false;
 
+        cards.add(new SetCardInfo("Grist, the Plague Swarm", 251, Rarity.MYTHIC, mage.cards.g.GristThePlagueSwarm.class));
+        cards.add(new SetCardInfo("Grist, Voracious Larva", 251, Rarity.MYTHIC, mage.cards.g.GristVoraciousLarva.class));
         cards.add(new SetCardInfo("Ral, Monsoon Mage", 247, Rarity.MYTHIC, mage.cards.r.RalMonsoonMage.class));
         cards.add(new SetCardInfo("Ral, Leyline Prodigy", 247, Rarity.MYTHIC, mage.cards.r.RalLeylineProdigy.class));
         cards.add(new SetCardInfo("Sorin of House Markov", 245, Rarity.MYTHIC, mage.cards.s.SorinOfHouseMarkov.class));
