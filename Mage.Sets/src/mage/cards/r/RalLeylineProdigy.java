@@ -18,6 +18,8 @@ import mage.abilities.effects.common.DamageMultiEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.cost.SpellsCostReductionAllEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.hint.ConditionHint;
+import mage.abilities.hint.Hint;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -43,12 +45,13 @@ import java.util.UUID;
  */
 public final class RalLeylineProdigy extends CardImpl {
 
-    private static final FilterPermanent filterBlue = new FilterPermanent("blue permanent other than {this}");
-    private static final Condition condition = new PermanentsOnTheBattlefieldCondition(filterBlue, true);
+    private static final FilterPermanent filter = new FilterPermanent("blue permanent other than {this}");
+    private static final Condition condition = new PermanentsOnTheBattlefieldCondition(filter, true);
+    private static final Hint hint = new ConditionHint(condition, "you control another blue permanent");
 
     static {
-        filterBlue.add(new ColorPredicate(ObjectColor.BLUE));
-        filterBlue.add(AnotherPredicate.instance);
+        filter.add(new ColorPredicate(ObjectColor.BLUE));
+        filter.add(AnotherPredicate.instance);
     }
 
     public RalLeylineProdigy(UUID ownerId, CardSetInfo setInfo) {
@@ -78,10 +81,12 @@ public final class RalLeylineProdigy extends CardImpl {
                 new DrawCardSourceControllerEffect(1),
                 condition, "Draw a card if you control a blue permanent other than {this}"
         ));
+        ability.addHint(hint);
         this.addAbility(ability);
 
         // -8: Exile the top eight cards of your library. You may cast instant and sorcery spells from among them this turn without paying their mana costs.
-        this.addAbility(new LoyaltyAbility(new RalLeylineProdigyMinusEightEffect(), -8));
+        this.addAbility(new LoyaltyAbility(new RalLeylineProdigyMinusEightEffect(), -8)
+                .setIdentifier(MageIdentifier.WithoutPayingManaCostAlternateCast));
     }
 
     private RalLeylineProdigy(final RalLeylineProdigy card) {
@@ -177,11 +182,9 @@ class RalLeylineProdigyMinusEightEffect extends OneShotEffect {
         Set<Card> cards = player.getLibrary().getTopCards(game, 8);
         UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
         player.moveCardsToExile(cards, source, game, true, exileId, sourceObject.getIdName());
-        // Copy the source to set the MageIdentifier
-        Ability sourceWithIdentifier = source.copy().setIdentifier(MageIdentifier.WithoutPayingManaCostAlternateCast);
         for (Card card : cards) {
             if (game.getState().getZone(card.getId()) == Zone.EXILED) {
-                game.addEffect(new RalLeylineProdigyCastEffect(new MageObjectReference(card, game)), sourceWithIdentifier);
+                game.addEffect(new RalLeylineProdigyCastEffect(new MageObjectReference(card, game)), source);
             }
         }
         return true;
@@ -215,7 +218,7 @@ class RalLeylineProdigyCastEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (mor.getPermanent(game) == null) {
+        if (mor.getCard(game) == null) {
             discard();
             return false;
         }
