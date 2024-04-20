@@ -1592,7 +1592,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 case SPECIAL_MANA_PAYMENT:
                     result = specialManaPayment((SpecialAction) ability.copy(), game);
                     break;
-                case MANA:
+                case ACTIVATED_MANA:
                     result = playManaAbility((ActivatedManaAbilityImpl) ability.copy(), game);
                     break;
                 case SPELL:
@@ -1616,9 +1616,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         //if player has taken an action then reset all player passed flags
         justActivatedType = null;
         if (result) {
-            if (isHuman()
-                    && (ability.getAbilityType() == AbilityType.SPELL
-                    || ability.getAbilityType() == AbilityType.ACTIVATED)) {
+            if (isHuman() && (ability.getAbilityType() == AbilityType.SPELL || ability.getAbilityType().isActivatedAbility())) {
                 if (ability.isUsesStack()) { // if the ability does not use the stack (e.g. Suspend) auto pass would go to next phase unintended
                     setJustActivatedType(ability.getAbilityType());
                 }
@@ -4493,9 +4491,10 @@ public abstract class PlayerImpl implements Player, Serializable {
             case allAbilities:
                 return true;
             case onlyManaAbilities:
-                return ability.getAbilityType() == AbilityType.MANA;
+                return ability.isManaAbility();
             case nonSpellnonActivatedAbilities:
-                return ability.getAbilityType() != AbilityType.ACTIVATED && ability.getAbilityType() != AbilityType.SPELL;
+                return !ability.getAbilityType().isActivatedAbility()
+                        && ability.getAbilityType() != AbilityType.SPELL;
             case none:
             default:
                 return false;

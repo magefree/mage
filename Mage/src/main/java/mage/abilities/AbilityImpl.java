@@ -163,6 +163,21 @@ public abstract class AbilityImpl implements Ability {
     }
 
     @Override
+    public boolean isActivatedAbility() {
+        return this.abilityType.isActivatedAbility();
+    }
+
+    @Override
+    public boolean isNonManaActivatedAbility() {
+        return this.abilityType.isNonManaActivatedAbility();
+    }
+
+    @Override
+    public boolean isManaAbility() {
+        return this.abilityType.isManaAbility();
+    }
+
+    @Override
     public boolean resolve(Game game) {
         boolean result = true;
         //20100716 - 117.12
@@ -193,7 +208,7 @@ public abstract class AbilityImpl implements Ability {
                 boolean effectResult = effect.apply(game, this);
                 result &= effectResult;
                 if (logger.isDebugEnabled()) {
-                    if (this.getAbilityType() != AbilityType.MANA) {
+                    if (!this.isManaAbility()) {
                         if (!effectResult) {
                             if (this.getSourceId() != null) {
                                 MageObject mageObject = game.getObject(this.getSourceId());

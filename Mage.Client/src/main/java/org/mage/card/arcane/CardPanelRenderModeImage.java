@@ -282,7 +282,7 @@ public class CardPanelRenderModeImage extends CardPanel {
         if (newGameCard.isAbility()) {
             if (newGameCard.getAbilityType() == AbilityType.TRIGGERED) {
                 setTypeIcon(ImageManagerImpl.instance.getTriggeredAbilityImage(), "Triggered Ability");
-            } else if (newGameCard.getAbilityType() == AbilityType.ACTIVATED) {
+            } else if (newGameCard.getAbilityType() == AbilityType.ACTIVATED_NONMANA_NONLOYALTY) {
                 setTypeIcon(ImageManagerImpl.instance.getActivatedAbilityImage(), "Activated Ability");
             }
         }

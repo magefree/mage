@@ -427,7 +427,7 @@ public abstract class CardRenderer {
         if (cardView.isAbility()) {
             if (cardView.getAbilityType() == AbilityType.TRIGGERED) {
                 return "Triggered Ability";
-            } else if (cardView.getAbilityType() == AbilityType.ACTIVATED) {
+            } else if (cardView.getAbilityType() == AbilityType.ACTIVATED_NONMANA_NONLOYALTY) {
                 return "Activated Ability";
             } else if (cardView.getAbilityType() == null) {
                 // TODO: Triggered abilities waiting to be put onto the stack have abilityType = null. Figure out why

@@ -11,7 +11,6 @@ import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.abilities.mana.conditional.ManaCondition;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AbilityType;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.game.Game;
@@ -74,8 +73,7 @@ class OmenHawkerManaCondition extends ManaCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         if (source != null && !source.isActivated()) {
-            return source.getAbilityType() == AbilityType.MANA
-                    || source.getAbilityType() == AbilityType.ACTIVATED;
+            return source.isActivatedAbility();
         }
         return false;
     }

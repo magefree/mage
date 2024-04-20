@@ -7,7 +7,6 @@ import mage.game.Game;
 import mage.game.stack.StackObject;
 
 /**
- *
  * @author jeffwadsworth
  */
 public enum ActivatedOrTriggeredAbilityPredicate implements Predicate<StackObject> {
@@ -20,7 +19,7 @@ public enum ActivatedOrTriggeredAbilityPredicate implements Predicate<StackObjec
         }
         Ability ability = ((Ability) input);
         return ability.getAbilityType() == AbilityType.TRIGGERED
-                || ability.getAbilityType() == AbilityType.ACTIVATED;
+                || ability.isActivatedAbility();
     }
 
     @Override
