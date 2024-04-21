@@ -4,8 +4,11 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.CastAsThoughItHadFlashAllEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
+import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -36,7 +39,9 @@ public class HeliodTheWarpedEclipse extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new CastAsThoughItHadFlashAllEffect(Duration.WhileOnBattlefield, filter)));
 
         // Spells you cast cost {1} less to cast for each card your opponents have drawn this turn.
-        this.addAbility(new SimpleStaticAbility(new HeliodTheWarpedEclipseEffect()));
+        this.addAbility(new SimpleStaticAbility(new HeliodTheWarpedEclipseEffect())
+                .addHint(new ValueHint("Cards drawn by opponents this turn",
+                        HeliodTheWarpedEclipseDynamicValue.instance)));
     }
 
     private HeliodTheWarpedEclipse(final HeliodTheWarpedEclipse card) {
@@ -49,6 +54,35 @@ public class HeliodTheWarpedEclipse extends CardImpl {
     }
 }
 
+enum HeliodTheWarpedEclipseDynamicValue implements DynamicValue {
+    instance;
+
+    @Override
+    public int calculate(Game game, Ability source, Effect effect) {
+        CardsDrawnThisTurnWatcher watcher = game.getState().getWatcher(CardsDrawnThisTurnWatcher.class);
+        if (watcher == null) {
+            return 0;
+        }
+        return game
+                .getOpponents(source.getControllerId())
+                .stream()
+                .mapToInt(watcher::getCardsDrawnThisTurn)
+                .sum();
+    }
+
+    @Override
+    public DynamicValue copy() {
+        return instance;
+    }
+
+    @Override
+    public String getMessage() {
+        return "card your opponents have draw this turn";
+    }
+
+}
+
+// TODO: Take effects that say "Spells you cast cost {...} less to cast for each {...}" and consolidate them based on dynamic values like above
 class HeliodTheWarpedEclipseEffect extends CostModificationEffectImpl {
 
     HeliodTheWarpedEclipseEffect() {
