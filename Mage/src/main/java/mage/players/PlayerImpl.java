@@ -2882,6 +2882,22 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
+    public boolean putRandomCardInGraveyard(FilterCard filter, Ability source, Game game) {
+        Set<Card> cards = this.getLibrary()
+                .getCards(game)
+                .stream()
+                .filter(card -> filter.match(card, getId(), source, game))
+                .collect(Collectors.toSet());
+        Card card = RandomUtil.randomFromCollection(cards);
+        if (card == null) {
+            return false;
+        }
+        game.informPlayers(this.getLogName() + " puts a random card from their library into their graveyard.");
+        this.moveCards(card, Zone.GRAVEYARD, source, game);
+        return true;
+    }
+
+    @Override
     public void lookAtAllLibraries(Ability source, Game game) {
         for (UUID playerId : game.getState().getPlayersInRange(this.getId(), game)) {
             Player player = game.getPlayer(playerId);
