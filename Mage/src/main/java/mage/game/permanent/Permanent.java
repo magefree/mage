@@ -450,6 +450,10 @@ public interface Permanent extends Card, Controllable {
 
     boolean isManifested();
 
+    void setCloaked(boolean value);
+
+    boolean isCloaked();
+
     boolean isRingBearer();
 
     void setRingBearer(Game game, boolean value);

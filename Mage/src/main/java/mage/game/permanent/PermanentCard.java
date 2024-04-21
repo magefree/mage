@@ -188,6 +188,7 @@ public class PermanentCard extends PermanentImpl {
             setManifested(false);
             setMorphed(false);
             setDisguised(false);
+            setCloaked(false);
             return true;
         }
         return false;

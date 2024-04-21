@@ -111,32 +111,36 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl {
                     new TurnFaceUpAbility(turnFaceUpCosts, faceDownType == FaceDownType.MEGAMORPHED)
                             .setCostAdjuster(costAdjuster)
             );
+        }
 
-            switch (faceDownType) {
-                case MORPHED:
-                case MEGAMORPHED:
+        switch (faceDownType) {
+            case MORPHED:
+            case MEGAMORPHED:
+                if (turnFaceUpCosts != null) {
                     // face up rules replace for cost hide
                     this.additionalAbilities.add(new SimpleStaticAbility(Zone.ALL, new InfoEffect(
                             "Turn it face up any time for its morph cost."
                     )));
-                    break;
-                case DISGUISED:
-                case CLOAKED:
-                    // ward
-                    this.additionalAbilities.add(new WardAbility(new ManaCostsImpl<>("{2}")));
+                }
+                break;
+            case DISGUISED:
+            case CLOAKED:
+                // Ward {2} -- should not be dependent on turnFaceUpCosts.
+                this.additionalAbilities.add(new WardAbility(new ManaCostsImpl<>("{2}")));
 
+                if (turnFaceUpCosts != null) {
                     // face up rules replace for cost hide
                     this.additionalAbilities.add(new SimpleStaticAbility(Zone.ALL, new InfoEffect(
                             "Turn it face up any time for its disguise/cloaked cost."
                     )));
-                    break;
-                case MANUAL:
-                case MANIFESTED:
-                    // no face up abilities
-                    break;
-                default:
-                    throw new IllegalArgumentException("Un-supported face down type: " + faceDownType);
-            }
+                }
+                break;
+            case MANUAL:
+            case MANIFESTED:
+                // no face up abilities
+                break;
+            default:
+                throw new IllegalArgumentException("Un-supported face down type: " + faceDownType);
         }
 
         staticText = "{this} becomes a 2/2 face-down creature, with no text, no name, no subtypes, and no mana cost";
@@ -209,6 +213,9 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl {
                     case DISGUISED:
                         permanent.setDisguised(true);
                         break;
+                    case CLOAKED:
+                        permanent.setCloaked(true);
+                        break;
                     default:
                         throw new UnsupportedOperationException("FaceDownType not yet supported: " + faceDownType);
                 }
@@ -228,6 +235,8 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl {
             return BecomesFaceDownCreatureEffect.FaceDownType.DISGUISED;
         } else if (permanent.isManifested()) {
             return BecomesFaceDownCreatureEffect.FaceDownType.MANIFESTED;
+        } else if (permanent.isCloaked()) {
+            return BecomesFaceDownCreatureEffect.FaceDownType.CLOAKED;
         } else if (permanent.isFaceDown(game)) {
             return BecomesFaceDownCreatureEffect.FaceDownType.MANUAL;
         } else {
@@ -326,7 +335,7 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl {
                 tokenName = TokenRepository.XMAGE_IMAGE_NAME_FACE_DOWN_MANIFEST;
                 break;
             case CLOAKED:
-                tokenName = "TODO-CLOAKED";
+                tokenName = TokenRepository.XMAGE_IMAGE_NAME_FACE_DOWN_CLOAK;
                 break;
             case MANUAL:
                 tokenName = TokenRepository.XMAGE_IMAGE_NAME_FACE_DOWN_MANUAL;
