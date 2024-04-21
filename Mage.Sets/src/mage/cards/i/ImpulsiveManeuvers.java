@@ -14,6 +14,7 @@ import mage.constants.SetTargetPointer;
 import mage.game.Game;
 import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 import mage.filter.StaticFilters;
 import mage.players.Player;
 import mage.util.CardUtil;
@@ -59,6 +60,9 @@ class ImpulsiveManeuversEffect extends PreventionEffectImpl {
     public void init(Ability source, Game game) {
         super.init(source, game);
         this.wonFlip = game.getPlayer(source.getControllerId()).flipCoin(source, game, true);
+        game.informPlayers("The next time " + game.getObject(getTargetPointer().getFirst(game, source)).getLogName()
+                + " would deal combat damage this turn, "
+                + (wonFlip ? "it deals double that damage instead." : "prevent that damage.)"));
     }
 
     @Override
@@ -102,5 +106,23 @@ class ImpulsiveManeuversEffect extends PreventionEffectImpl {
             }
         }
         return false;
+    }
+
+    @Override
+    public boolean hasHint() {
+        return true;
+    }
+
+    @Override
+    public String getHint(Permanent permanent, Ability source, Game game) {
+        if (!permanent.getId().equals(this.getTargetPointer().getFirst(game, source))) {
+            return null;
+        }
+
+        if (wonFlip) {
+            return "The next time this creature would deal combat damage this turn, it deals double that damage instead.";
+        } else {
+            return "The next time this creature would deal combat damage this turn, prevent that damage.";
+        }
     }
 }
