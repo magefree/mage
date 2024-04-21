@@ -120,9 +120,9 @@ class ImpulsiveManeuversEffect extends PreventionEffectImpl {
         }
 
         if (wonFlip) {
-            return "The next time this creature would deal combat damage this turn, it deals double that damage instead.";
+            return "The next time {this} would deal combat damage this turn, it deals double that damage instead.";
         } else {
-            return "The next time this creature would deal combat damage this turn, prevent that damage.";
+            return "The next time {this} would deal combat damage this turn, prevent that damage.";
         }
     }
 }

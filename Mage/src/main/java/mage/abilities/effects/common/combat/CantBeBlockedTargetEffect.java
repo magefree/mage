@@ -71,8 +71,10 @@ public class CantBeBlockedTargetEffect extends RestrictionEffect {
             return null;
         }
 
-        return "This creature can't be blocked" + (duration == Duration.EndOfTurn ? " this turn" : "")
-                + (this.filter != StaticFilters.FILTER_PERMANENT_CREATURE ? " by " + this.filter.getMessage() : "")
+        return "{this} can't be blocked" + (duration == Duration.EndOfTurn ? " this turn" : "")
+                + (this.filter != StaticFilters.FILTER_PERMANENT_CREATURE
+                        ? (this.filter.getMessage().startsWith("except by") ? "" : " by ") + this.filter.getMessage()
+                        : "")
                 + ".";
     }
 }

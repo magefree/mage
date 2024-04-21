@@ -126,6 +126,7 @@ class GoblinPsychopathEffect extends ReplacementEffectImpl {
             return null;
         }
 
-        return "The next time this creature would deal combat damage this turn, it deals that damage to you instead.";
+        return "The next time {this} would deal combat damage this turn, it deals that damage to "
+                + game.getPlayer(source.getControllerId()).getLogName() + " instead.";
     }
 }

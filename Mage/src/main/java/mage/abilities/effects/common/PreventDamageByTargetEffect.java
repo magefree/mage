@@ -94,7 +94,7 @@ public class PreventDamageByTargetEffect extends PreventionEffectImpl {
         }
 
         String durationText = duration == Duration.EndOfTurn ? " this turn" : ' ' + duration.toString();
-        String targetText = permanent.getName();
+        String targetText = "{this}";
         String preventText = (amountToPrevent == Integer.MAX_VALUE ? "Prevent all"
                 : "Prevent the next" + amountToPrevent)
                 + (onlyCombat ? " combat damage " : " damage ");
