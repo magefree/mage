@@ -75,6 +75,9 @@ class DesperateGambitEffect extends PreventionEffectImpl {
 
         this.target.choose(Outcome.Benefit, source.getControllerId(), source.getSourceId(), source, game);
         this.wonFlip = you.flipCoin(source, game, true);
+        game.informPlayers("The next time " + game.getObject(target.getFirstTarget()).getLogName()
+                + " would deal combat damage this turn, "
+                + (wonFlip ? "it deals double that damage instead." : "prevent that damage.)"));
     }
 
     @Override
@@ -119,6 +122,24 @@ class DesperateGambitEffect extends PreventionEffectImpl {
             }
         }
         return false;
+    }
+
+    @Override
+    public boolean hasHint() {
+        return true;
+    }
+
+    @Override
+    public String getHint(Permanent permanent, Ability source, Game game) {
+        if (!permanent.getId().equals(target.getFirstTarget())) {
+            return null;
+        }
+
+        if (wonFlip) {
+            return "The next time this creature would deal combat damage this turn, it deals double that damage instead.";
+        } else {
+            return "The next time this creature would deal combat damage this turn, prevent that damage.";
+        }
     }
 }
 

@@ -14,6 +14,7 @@ import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 import java.util.UUID;
@@ -68,6 +69,9 @@ class GoblinPsychopathEffect extends ReplacementEffectImpl {
         }
 
         this.wonFlip = controller.flipCoin(source, game, true);
+        game.informPlayers("The next time " + game.getObject(source.getSourceId()).getLogName()
+                + " would deal combat damage this turn, it deals that damage to " + controller.getLogName()
+                + " instead.");
     }
 
     @Override
@@ -109,5 +113,19 @@ class GoblinPsychopathEffect extends ReplacementEffectImpl {
         game.informPlayers(sourceLogName + "Redirected " + event.getAmount() + " damage to " + controller.getLogName());
         this.discard();
         return true;
+    }
+
+    @Override
+    public boolean hasHint() {
+        return true;
+    }
+
+    @Override
+    public String getHint(Permanent permanent, Ability source, Game game) {
+        if (wonFlip || !permanent.getId().equals(source.getSourceId())) {
+            return null;
+        }
+
+        return "The next time this creature would deal combat damage this turn, it deals that damage to you instead.";
     }
 }

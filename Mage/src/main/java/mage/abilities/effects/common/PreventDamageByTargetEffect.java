@@ -7,6 +7,7 @@ import mage.abilities.effects.PreventionEffectImpl;
 import mage.constants.Duration;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 import mage.target.Target;
 import mage.target.TargetSpell;
 
@@ -75,6 +76,31 @@ public class PreventDamageByTargetEffect extends PreventionEffectImpl {
             preventText += "that would be dealt" + (durationRuleAtEnd ?
                     " by " + targetText + durationText :
                     durationText + " by " + targetText);
+        } else {
+            preventText += targetText + " would deal" + durationText;
+        }
+        return preventText;
+    }
+
+    @Override
+    public boolean hasHint() {
+        return true;
+    }
+
+    @Override
+    public String getHint(Permanent permanent, Ability source, Game game) {
+        if (!this.getTargetPointer().getTargets(game, source).contains(permanent.getId())) {
+            return null;
+        }
+
+        String durationText = duration == Duration.EndOfTurn ? " this turn" : ' ' + duration.toString();
+        String targetText = permanent.getName();
+        String preventText = (amountToPrevent == Integer.MAX_VALUE ? "Prevent all"
+                : "Prevent the next" + amountToPrevent)
+                + (onlyCombat ? " combat damage " : " damage ");
+        if (passiveVoice) {
+            preventText += "that would be dealt"
+                    + (durationRuleAtEnd ? " by " + targetText + durationText : durationText + " by " + targetText);
         } else {
             preventText += targetText + " would deal" + durationText;
         }
