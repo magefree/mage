@@ -20,7 +20,7 @@ import java.util.UUID;
  */
 public final class NuclearFallout extends CardImpl {
 
-    private static final DynamicValue xValue = new MultipliedValue(ManacostVariableValue.REGULAR, 2);
+    private static final DynamicValue xValue = new MultipliedValue(ManacostVariableValue.REGULAR, -2);
 
     public NuclearFallout(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{B}{B}");
