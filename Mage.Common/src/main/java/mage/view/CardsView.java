@@ -96,10 +96,20 @@ public class CardsView extends LinkedHashMap<UUID, CardView> {
                 case STACK:
                 case HAND: // Miracle
                 case LIBRARY:
+                    sourceObject = game.getObject(ability.getSourceId());
+                    if (sourceObject instanceof Card) {
+                        isCard = true;
+                    }
+                    break;
                 case OUTSIDE:
                     sourceObject = game.getObject(ability.getSourceId());
                     if (sourceObject instanceof Card) {
                         isCard = true;
+                    }
+                    if (sourceObject instanceof Emblem) {
+                        // Emblems are not normally OUTSIDE, except the special Radiation Emblem from rad counters.
+                        abilityView = new AbilityView(ability, sourceObject.getName(), new CardView(new EmblemView((Emblem) sourceObject)));
+                        abilityView.setName(sourceObject.getName());
                     }
                     break;
                 case COMMAND:
