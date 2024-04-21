@@ -17,6 +17,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetSource;
 
@@ -94,5 +95,24 @@ class BoneMaskEffect extends PreventionEffectImpl {
                 && event.getTargetId().equals(source.getControllerId())
                 && event.getSourceId().equals(target.getFirstTarget())
         );
+    }
+
+    @Override
+    public boolean hasHint() {
+        return true;
+    }
+
+    @Override
+    public String getHint(Permanent permanent, Ability source, Game game) {
+        if (this.used || !permanent.getId().equals(target.getFirstTarget())) {
+            return null;
+        }
+
+        Player player = game.getPlayer(source.getControllerId());
+        if (player == null)
+            return null;
+
+        return "The next time {this} would deal damage to " + player.getLogName()
+                + " this turn, prevent that damage.";
     }
 }

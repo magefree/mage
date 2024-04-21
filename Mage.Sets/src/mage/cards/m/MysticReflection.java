@@ -147,6 +147,21 @@ class MysticReflectionReplacementEffect extends ReplacementEffectImpl {
     public MysticReflectionReplacementEffect copy() {
         return new MysticReflectionReplacementEffect(this);
     }
+
+    @Override
+    public boolean hasHint() {
+        return true;
+    }
+
+    @Override
+    public String getHint(Permanent permanent, Ability source, Game game) {
+        Permanent targetedPermanent = (Permanent) game.getState().getValue("MysticReflection" + identifier);
+        if (targetedPermanent == null || !permanent.getId().equals(targetedPermanent.getId())) {
+            return null;
+        }
+
+        return "The next time one or more creatures or planeswalkers enter the battlefield this turn, they enter as copies of {this}";
+    }
 }
 
 class MysticReflectionWatcher extends Watcher {

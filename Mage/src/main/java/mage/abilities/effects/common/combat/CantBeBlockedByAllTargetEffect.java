@@ -51,4 +51,21 @@ public class CantBeBlockedByAllTargetEffect extends RestrictionEffect {
                 + (filterBlockedBy.getMessage().startsWith("except by") ? "" : "by ")
                 + filterBlockedBy.getMessage();
     }
+
+    @Override
+    public boolean hasHint() {
+        return true;
+    }
+
+    @Override
+    public String getHint(Permanent permanent, Ability source, Game game) {
+        if (!applies(permanent, source, game)) {
+            return null;
+        }
+
+        return "{This} can't be blocked "
+                + (duration == Duration.EndOfTurn ? "this turn " : "")
+                + (filterBlockedBy.getMessage().startsWith("except by") ? "" : "by ")
+                + filterBlockedBy.getMessage();
+    }
 }

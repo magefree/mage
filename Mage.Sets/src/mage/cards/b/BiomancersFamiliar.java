@@ -135,4 +135,18 @@ class BiomancersFamiliarReplacementEffect extends ReplacementEffectImpl {
         discard();
         return false;
     }
+
+    @Override
+    public boolean hasHint() {
+        return true;
+    }
+
+    @Override
+    public String getHint(Permanent permanent, Ability source, Game game) {
+        if (!permanent.getId().equals(getTargetPointer().getFirst(game, source))) {
+            return null;
+        }
+
+        return "The next time {this} adapts this turn, it adapts as though it had no +1/+1 counters on it.";
+    }
 }
