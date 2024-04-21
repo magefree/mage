@@ -7,6 +7,7 @@ import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.SubLayer;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.target.targetpointer.TargetPointer;
 
 import java.util.EnumSet;
@@ -85,4 +86,9 @@ public interface ContinuousEffect extends Effect {
 
     @Override
     ContinuousEffect setTargetPointer(TargetPointer targetPointer);
+
+    // Hint info
+    boolean hasHint();
+
+    String getHint(Permanent permanent, Ability source, Game game);
 }

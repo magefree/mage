@@ -1340,6 +1340,13 @@ public class ContinuousEffects implements Serializable {
         return texts;
     }
 
+    public Map<ContinuousEffect, Set<Ability>> getHintEffects() {
+        return allEffectsLists.stream()
+                .flatMap(list -> list.getHintEffects().stream()
+                        .map(effect -> new AbstractMap.SimpleEntry<>(effect, list.getAbility(effect.getId()))))
+                .collect(Collectors.toMap(AbstractMap.SimpleEntry::getKey, AbstractMap.SimpleEntry::getValue));
+    }
+
     public boolean existRequirementEffects() {
         return !requirementEffects.isEmpty();
     }

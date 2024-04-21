@@ -9,6 +9,7 @@ import mage.filter.Filter;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
@@ -514,5 +515,13 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
                     || stackObject.getStackAbility().getManaCostsToPay().isPaid(); // mana payment finished
         }
         return true;
+    }
+
+    public boolean hasHint() {
+        return false;
+    }
+
+    public String getHint(Permanent permanent, Ability source, Game game) {
+        return null;
     }
 }

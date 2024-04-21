@@ -377,6 +377,17 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                     }
                 }
 
+                // General continuous effect hints
+                for (Map.Entry<ContinuousEffect, Set<Ability>> entry : game.getContinuousEffects().getHintEffects()
+                        .entrySet()) {
+                    for (Ability ability : entry.getValue()) {
+                        String hint = entry.getKey().getHint(this, ability, game);
+                        if (hint != null) {
+                            restrictHints.add(HintUtils.prepareText(hint, null));
+                        }
+                    }
+
+                }
                 restrictHints.sort(String::compareTo);
             }
 
