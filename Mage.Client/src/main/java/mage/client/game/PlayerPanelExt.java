@@ -754,12 +754,12 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         gl_panelBackground.setHorizontalGroup(
                 gl_panelBackground.createParallelGroup(Alignment.LEADING)
                         .addGroup(gl_panelBackground.createSequentialGroup()
-                                .addGap(6)
+                                .addGap(7)
                                 .addGroup(gl_panelBackground.createParallelGroup(Alignment.LEADING)
                                         .addComponent(btnPlayer, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(timerLabel, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(avatar, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE))
-                                .addGap(8))
+                                .addGap(6))
                         .addGroup(gl_panelBackground.createSequentialGroup()
                                 .addGap(9)
                                 // The left column of icon+label
