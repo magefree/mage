@@ -59,4 +59,20 @@ public class CantBeBlockedTargetEffect extends RestrictionEffect {
                 + " can't be blocked"
                 + (duration == Duration.EndOfTurn ? " this turn" : "");
     }
+
+    @Override
+    public boolean hasHint() {
+        return true;
+    }
+
+    @Override
+    public String getHint(Permanent permanent, Ability source, Game game) {
+        if (!applies(permanent, source, game)) {
+            return null;
+        }
+
+        return "This creature can't be blocked" + (duration == Duration.EndOfTurn ? " this turn" : "")
+                + (this.filter != StaticFilters.FILTER_PERMANENT_CREATURE ? " by " + this.filter.getMessage() : "")
+                + ".";
+    }
 }

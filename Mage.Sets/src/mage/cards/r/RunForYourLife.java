@@ -20,7 +20,7 @@ import java.util.UUID;
  */
 public final class RunForYourLife extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures without haste");
 
     static {
         filter.add(Predicates.not(new AbilityPredicate(HasteAbility.class)));
