@@ -28,9 +28,19 @@ public class CreateTokenEvent extends GameEvent {
         return tokens;
     }
 
-    public void doubleTokens() {
+    public void multiplyTokens(int factor) {
+        multiplyTokens(factor, null);
+    }
+
+    public interface ConditionOnToken {
+        boolean apply(Token token);
+    }
+
+    public void multiplyTokens(int factor, ConditionOnToken condition) {
         for (Map.Entry<Token, Integer> entry : tokens.entrySet()) {
-            entry.setValue(entry.getValue() * 2);
+            if (condition == null || condition.apply(entry.getKey())) {
+                entry.setValue(entry.getValue() * factor);
+            }
         }
     }
 

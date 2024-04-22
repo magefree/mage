@@ -27,7 +27,7 @@ public final class VampireRevenant extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public VampireRevenant (final VampireRevenant card) {
+    private VampireRevenant(final VampireRevenant card) {
         super(card);
     }
 

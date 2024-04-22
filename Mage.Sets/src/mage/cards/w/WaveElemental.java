@@ -42,7 +42,7 @@ public final class WaveElemental extends CardImpl {
         Ability ability = new SimpleActivatedAbility(new TapTargetEffect(), new ManaCostsImpl<>("{U}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
-        ability.addTarget(new TargetPermanent(0, 4, filter, false));
+        ability.addTarget(new TargetPermanent(0, 3, filter, false));
         this.addAbility(ability);
     }
 

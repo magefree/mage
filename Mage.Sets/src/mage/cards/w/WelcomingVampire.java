@@ -38,7 +38,7 @@ public final class WelcomingVampire extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever one or more other creatures with power 2 or less enter the battlefield under your control, draw a card. This ability triggers only once each turn.
-        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new DrawCardSourceControllerEffect(1), filter).setTriggersOnce(true));
+        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new DrawCardSourceControllerEffect(1), filter).setTriggersOnceEachTurn(true));
     }
 
     private WelcomingVampire(final WelcomingVampire card) {

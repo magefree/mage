@@ -43,7 +43,7 @@ public final class ArgothianTreefolk extends CardImpl {
 // cannot use PreventAllDamageToSourceByPermanentsEffect: "artifact sources" not "artifacts"
 class ArgothianTreefolkPreventionEffect extends PreventAllDamageToSourceEffect {
 
-    public ArgothianTreefolkPreventionEffect() {
+    ArgothianTreefolkPreventionEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "prevent all damage that would be dealt to {this} by artifact sources";
     }

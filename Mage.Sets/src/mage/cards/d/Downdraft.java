@@ -41,7 +41,7 @@ public final class Downdraft extends CardImpl {
         this.addAbility(ability);
         
         // Sacrifice Downdraft: Downdraft deals 2 damage to each creature with flying.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageAllEffect(2, filter), new SacrificeSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageAllEffect(2, "it", filter), new SacrificeSourceCost()));
     }
 
     private Downdraft(final Downdraft card) {

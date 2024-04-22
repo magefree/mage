@@ -32,7 +32,7 @@ public final class BlimComedicGenius extends CardImpl {
     public BlimComedicGenius(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.IMP);
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
@@ -84,7 +84,7 @@ class BlimComedicGeniusEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         game.addEffect(new GainControlTargetEffect(
-                Duration.Custom, true, targetPointer.getFirst(game, source)
+                Duration.Custom, true, getTargetPointer().getFirst(game, source)
         ).setTargetPointer(new FixedTarget(source.getFirstTarget(), game)), source);
         game.getState().processAction(game);
         Map<UUID, Cards> cardsMap = new HashMap<>();

@@ -6,8 +6,6 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 public class OminousRoostBirdToken extends TokenImpl {
 
     public OminousRoostBirdToken() {
@@ -20,16 +18,14 @@ public class OminousRoostBirdToken extends TokenImpl {
 
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(new CanBlockOnlyFlyingAbility());
-
-        availableImageSetCodes = Arrays.asList("MID");
     }
 
-    public OminousRoostBirdToken(final OminousRoostBirdToken token) {
+    private OminousRoostBirdToken(final OminousRoostBirdToken token) {
         super(token);
     }
 
     @Override
-    public Token copy() {
+    public OminousRoostBirdToken copy() {
         return new OminousRoostBirdToken(this);
     }
 }

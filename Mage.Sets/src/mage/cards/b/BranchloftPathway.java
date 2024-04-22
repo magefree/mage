@@ -3,7 +3,7 @@ package mage.cards.b;
 import mage.abilities.mana.GreenManaAbility;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardSetInfo;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
@@ -12,7 +12,7 @@ import java.util.UUID;
 /**
  * @author JayDi85
  */
-public final class BranchloftPathway extends ModalDoubleFacesCard {
+public final class BranchloftPathway extends ModalDoubleFacedCard {
 
     public BranchloftPathway(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo,

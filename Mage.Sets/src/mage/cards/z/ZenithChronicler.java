@@ -37,7 +37,7 @@ public final class ZenithChronicler extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever a player casts their first multicolored spell each turn, each other player draws a card.
-        this.addAbility(new ZenithChroniclerTriggeredAbility(), new SpellsCastWatcher());
+        this.addAbility(new ZenithChroniclerTriggeredAbility());
 
     }
 
@@ -101,7 +101,7 @@ class ZenithChroniclerTriggeredAbility extends TriggeredAbilityImpl {
 
 class ZenithChroniclerEffect extends OneShotEffect {
 
-    public ZenithChroniclerEffect() {
+    ZenithChroniclerEffect() {
         super(Outcome.DrawCard);
     }
 

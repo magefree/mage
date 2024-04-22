@@ -53,7 +53,7 @@ public final class SoulSculptor extends CardImpl {
 
 class SoulSculptorEffect extends ContinuousEffectImpl {
 
-    public SoulSculptorEffect() {
+    SoulSculptorEffect() {
         super(Duration.Custom, Outcome.LoseAbility);
         staticText = "target becomes an Enchantment and loses all abilites";
         dependencyTypes.add(DependencyType.EnchantmentAddingRemoving);
@@ -61,7 +61,7 @@ class SoulSculptorEffect extends ContinuousEffectImpl {
 
     }
 
-    public SoulSculptorEffect(final SoulSculptorEffect effect) {
+    private SoulSculptorEffect(final SoulSculptorEffect effect) {
         super(effect);
     }
 

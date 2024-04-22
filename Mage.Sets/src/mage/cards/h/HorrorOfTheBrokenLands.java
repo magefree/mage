@@ -27,7 +27,8 @@ public final class HorrorOfTheBrokenLands extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Whenever you cycle or discard another card, Horror of the Broken Lands gets +2/+1 until end of turn.
-        this.addAbility(new CycleOrDiscardControllerTriggeredAbility(new BoostSourceEffect(2, 1, Duration.EndOfTurn)));
+        this.addAbility(new CycleOrDiscardControllerTriggeredAbility(new BoostSourceEffect(2, 1, Duration.EndOfTurn))
+                .setTriggerPhrase("Whenever you cycle or discard another card, "));
 
         // Cycling {B}
         this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{B}")));

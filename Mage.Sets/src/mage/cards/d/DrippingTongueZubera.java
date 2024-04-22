@@ -30,7 +30,7 @@ public final class DrippingTongueZubera extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new SpiritToken(), ZuberasDiedDynamicValue.instance), false), new ZuberasDiedWatcher());
     }
 
-    public DrippingTongueZubera (final DrippingTongueZubera card) {
+    private DrippingTongueZubera(final DrippingTongueZubera card) {
         super(card);
     }
 

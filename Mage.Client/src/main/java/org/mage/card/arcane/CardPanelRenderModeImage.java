@@ -14,8 +14,6 @@ import mage.constants.SubType;
 import mage.util.DebugUtil;
 import mage.view.CardView;
 import mage.view.CounterView;
-import mage.view.PermanentView;
-import mage.view.StackAbilityView;
 import org.jdesktop.swingx.graphics.GraphicsUtilities;
 import org.mage.plugins.card.images.ImageCache;
 import org.mage.plugins.card.images.ImageCacheData;
@@ -37,7 +35,7 @@ public class CardPanelRenderModeImage extends CardPanel {
 
     private static final long serialVersionUID = -3272134219262184411L;
 
-    private final static SoftValuesLoadingCache<Key, BufferedImage> IMAGE_CACHE = ImageCaches.register(SoftValuesLoadingCache.from(CardPanelRenderModeImage::createImage));
+    private static final SoftValuesLoadingCache<Key, BufferedImage> IMAGE_MODE_RENDERED_CACHE = ImageCaches.register(SoftValuesLoadingCache.from(CardPanelRenderModeImage::createImage));
 
     private static final int WIDTH_LIMIT = 90; // card width limit to create smaller counter
 
@@ -362,6 +360,8 @@ public class CardPanelRenderModeImage extends CardPanel {
         int cardXOffset = 0;
         int cardYOffset = 0;
 
+        CardView cardView = getGameCard();
+
         // workaround to fix a rare NPE error with image loading
         // reason: panel runs image load in another thread and that thread can be completed before top panel init, see updateArtImage
         if (getTopPanelRef() == null) {
@@ -381,7 +381,7 @@ public class CardPanelRenderModeImage extends CardPanel {
         imagePanel.setLocation(realCardSize.x, realCardSize.y);
         imagePanel.setSize(realCardSize.width, realCardSize.height);
 
-        if (hasSickness() && getGameCard().isCreature() && isPermanent()) {
+        if (hasSickness() && cardView.isCreature() && isPermanent()) {
             overlayPanel.setLocation(realCardSize.x, realCardSize.y);
             overlayPanel.setSize(realCardSize.width, realCardSize.height);
         } else {
@@ -441,10 +441,15 @@ public class CardPanelRenderModeImage extends CardPanel {
             fullImageText.setBounds(titleText.getX(), titleText.getY(), titleText.getBounds().width, titleText.getBounds().height);
 
             // PT (font as title)
-            if (getGameCard().getOriginalCard() != null) {
-                prepareGlowFont(ptText1, Math.max(CARD_PT_FONT_MIN_SIZE, fontSize), getGameCard().getOriginalCard().getPower(), false);
+            if (cardView.showPT()) {
+
+                // real PT info
+                MageInt currentPower = cardView.getOriginalPower();
+                MageInt currentToughness = cardView.getOriginalToughness();
+
+                prepareGlowFont(ptText1, Math.max(CARD_PT_FONT_MIN_SIZE, fontSize), currentPower, false);
                 prepareGlowFont(ptText2, Math.max(CARD_PT_FONT_MIN_SIZE, fontSize), null, false);
-                prepareGlowFont(ptText3, Math.max(CARD_PT_FONT_MIN_SIZE, fontSize), getGameCard().getOriginalCard().getToughness(), CardRendererUtils.isCardWithDamage(getGameCard()));
+                prepareGlowFont(ptText3, Math.max(CARD_PT_FONT_MIN_SIZE, fontSize), currentToughness, CardRendererUtils.isCardWithDamage(cardView));
 
                 // right bottom corner with margin (sizes from any sample card)
                 int ptMarginRight = Math.round(64f / 672f * cardWidth);
@@ -465,11 +470,7 @@ public class CardPanelRenderModeImage extends CardPanel {
     @Override
     public Image getImage() {
         if (this.hasImage) {
-            if (getGameCard().isFaceDown()) {
-                return getFaceDownImage().getImage();
-            } else {
-                return ImageCache.getImageOriginal(getGameCard()).getImage();
-            }
+            return ImageCache.getCardImageOriginal(getGameCard()).getImage();
         }
         return null;
     }
@@ -485,7 +486,7 @@ public class CardPanelRenderModeImage extends CardPanel {
         // draw background (selected/chooseable/playable)
         MageCardLocation cardLocation = getCardLocation();
         g2d.drawImage(
-                IMAGE_CACHE.getOrThrow(
+                IMAGE_MODE_RENDERED_CACHE.getOrThrow(
                         new Key(getInsets(),
                                 cardLocation.getCardWidth(), cardLocation.getCardHeight(),
                                 cardLocation.getCardWidth(), cardLocation.getCardHeight(),
@@ -633,14 +634,9 @@ public class CardPanelRenderModeImage extends CardPanel {
 
         Util.threadPool.submit(() -> {
             try {
-                final ImageCacheData data;
-                if (getGameCard().isFaceDown()) {
-                    data = getFaceDownImage();
-                } else {
-                    data = ImageCache.getImage(getGameCard(), getCardWidth(), getCardHeight());
-                }
+                ImageCacheData data = ImageCache.getCardImage(getGameCard(), getCardWidth(), getCardHeight());
 
-                // show path on miss image
+                // save missing image
                 if (data.getImage() == null) {
                     setFullPath(data.getPath());
                 }
@@ -656,21 +652,6 @@ public class CardPanelRenderModeImage extends CardPanel {
                 e.printStackTrace();
             }
         });
-    }
-
-    private ImageCacheData getFaceDownImage() {
-        // TODO: add download default images
-        if (isPermanent() && getGameCard() instanceof PermanentView) {
-            if (((PermanentView) getGameCard()).isMorphed()) {
-                return ImageCache.getMorphImage();
-            } else {
-                return ImageCache.getManifestImage();
-            }
-        } else if (this.getGameCard() instanceof StackAbilityView) {
-            return ImageCache.getMorphImage();
-        } else {
-            return ImageCache.getCardbackImage();
-        }
     }
 
     private int getManaWidth(String manaCost, int symbolMarginX) {

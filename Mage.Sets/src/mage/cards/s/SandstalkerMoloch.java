@@ -49,7 +49,7 @@ public final class SandstalkerMoloch extends CardImpl {
                 "if an opponent cast a blue and/or black spell this turn, look at the top four cards " +
                 "of your library. You may reveal a permanent card from among them and put it into your hand. " +
                 "Put the rest on the bottom of your library in a random order."
-        ));
+        ), new SandstalkerMolochWatcher());
     }
 
     private SandstalkerMoloch(final SandstalkerMoloch card) {

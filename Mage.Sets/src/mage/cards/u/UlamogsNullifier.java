@@ -78,7 +78,7 @@ class UlamogsNullifierEffect extends OneShotEffect {
         this.staticText = "you may put two cards your opponents own from exile into their owners' graveyards. If you do, counter target spell.";
     }
 
-    public UlamogsNullifierEffect(final UlamogsNullifierEffect effect) {
+    private UlamogsNullifierEffect(final UlamogsNullifierEffect effect) {
         super(effect);
     }
 

@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -30,7 +29,7 @@ public final class Sanctimony extends CardImpl {
 
 
         // Whenever an opponent taps a Mountain for mana, you may gain 1 life.
-        this.addAbility(new TapForManaAllTriggeredAbility(new GainLifeEffect(1), filter, SetTargetPointer.NONE));
+        this.addAbility(new TapForManaAllTriggeredAbility(new GainLifeEffect(1), filter, SetTargetPointer.NONE, true));
     }
 
     private Sanctimony(final Sanctimony card) {

@@ -13,14 +13,13 @@ public final class GremlinArtifactToken extends TokenImpl {
         super("Gremlin Token", "0/0 red Gremlin artifact creature token");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
-        this.setOriginalExpansionSetCode("MOC");
         subtype.add(SubType.GREMLIN);
         color.setRed(true);
         power = new MageInt(0);
         toughness = new MageInt(0);
     }
 
-    public GremlinArtifactToken(final GremlinArtifactToken token) {
+    private GremlinArtifactToken(final GremlinArtifactToken token) {
         super(token);
     }
 

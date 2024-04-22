@@ -110,8 +110,7 @@ public class ReturnToBattlefieldEffectsTest extends CardTestPlayerBase {
         // {B}{G}: Exile target creature card from a graveyard. It's owner puts a 1/1 black and green Snake enchantment creature token with deathtouch onto the battlefield.
         addCard(Zone.BATTLEFIELD, playerB, "Pharika, God of Affliction", 1);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pine Walker");
-        setChoice(playerA, true); // cast it face down as 2/2 creature
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pine Walker using Morph");
 
         activateAbility(3, PhaseStep.POSTCOMBAT_MAIN, playerA, "{4}{G}: Turn this face-down permanent face up.");
         activateAbility(3, PhaseStep.POSTCOMBAT_MAIN, playerB, "{B}{G}: Exile target creature card from a graveyard",

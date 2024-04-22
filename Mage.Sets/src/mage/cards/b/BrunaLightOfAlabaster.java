@@ -34,7 +34,7 @@ public final class BrunaLightOfAlabaster extends CardImpl {
 
     public BrunaLightOfAlabaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{W}{U}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ANGEL);
 
         this.power = new MageInt(5);
@@ -59,12 +59,12 @@ public final class BrunaLightOfAlabaster extends CardImpl {
 
 class BrunaLightOfAlabasterEffect extends OneShotEffect {
 
-    public BrunaLightOfAlabasterEffect() {
+    BrunaLightOfAlabasterEffect() {
         super(Outcome.Benefit);
         this.staticText = "attach to it any number of Auras on the battlefield and you may put onto the battlefield attached to it any number of Aura cards that could enchant it from your graveyard and/or hand";
     }
 
-    public BrunaLightOfAlabasterEffect(final BrunaLightOfAlabasterEffect effect) {
+    private BrunaLightOfAlabasterEffect(final BrunaLightOfAlabasterEffect effect) {
         super(effect);
     }
 
@@ -76,7 +76,9 @@ class BrunaLightOfAlabasterEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) { return false; }
+        if (controller == null) {
+            return false;
+        }
 
         UUID bruna = source.getSourceId();
 
@@ -91,7 +93,9 @@ class BrunaLightOfAlabasterEffect extends OneShotEffect {
         filterAuraCard.add(new AuraCardCanAttachToPermanentId(bruna));
 
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-        if (sourcePermanent == null) { return false; }
+        if (sourcePermanent == null) {
+            return false;
+        }
 
         List<Permanent> fromBattlefield = new ArrayList<>();
         List<Card> fromHandGraveyard = new ArrayList<>();
@@ -101,7 +105,7 @@ class BrunaLightOfAlabasterEffect extends OneShotEffect {
                 && countBattlefield > 0
                 && controller.chooseUse(Outcome.Benefit, "Attach an Aura from the battlefield?", source, game)) {
             Target targetAura = new TargetPermanent(filterAura);
-            targetAura.setNotTarget(true);
+            targetAura.withNotTarget(true);
             if (!controller.choose(Outcome.Benefit, targetAura, source, game)) { continue; }
 
             Permanent aura = game.getPermanent(targetAura.getFirstTarget());

@@ -1,10 +1,9 @@
-
 package mage.cards.k;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.TrampleAbility;
@@ -30,9 +29,11 @@ public final class KruinStriker extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever another creature enters the battlefield under your control, Kruin Striker gets +1/+0 and gains trample until end of turn.
-        Ability ability = new EntersBattlefieldAllTriggeredAbility(new BoostSourceEffect(1, 0, Duration.EndOfTurn), StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE,
-                "Whenever another creature enters the battlefield under your control, Kruin Striker gets +1/+0 and gains trample until end of turn.");
-        ability.addEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.EndOfTurn));
+        Ability ability = new EntersBattlefieldControlledTriggeredAbility(
+                new BoostSourceEffect(1, 0, Duration.EndOfTurn).setText("{this} gets +1/+0"),
+                StaticFilters.FILTER_ANOTHER_CREATURE);
+        ability.addEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.EndOfTurn).
+                setText("and gains trample until end of turn"));
         this.addAbility(ability);
     }
 

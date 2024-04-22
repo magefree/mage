@@ -38,7 +38,7 @@ public final class SnowMercy extends CardImpl {
     public SnowMercy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
 
-        addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
 
         // Whenever a creature deals damage to you, put a globe counter on it.
         this.addAbility(new AddGlobeCountersAbility());
@@ -64,7 +64,7 @@ class AddGlobeCountersAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.GLOBE.createInstance()));
     }
 
-    public AddGlobeCountersAbility(final AddGlobeCountersAbility ability) {
+    private AddGlobeCountersAbility(final AddGlobeCountersAbility ability) {
         super(ability);
     }
 
@@ -102,10 +102,10 @@ class AddGlobeCountersAbility extends TriggeredAbilityImpl {
 class SnowMercyCost extends CostImpl {
 
     SnowMercyCost() {
-        this.text = "{t}, {q}, {t}, {q}, {t}";
+        this.text = "{T}, {Q}, {T}, {Q}, {T}";
     }
 
-    SnowMercyCost(final SnowMercyCost cost) {
+    private SnowMercyCost(final SnowMercyCost cost) {
         super(cost);
     }
 

@@ -59,12 +59,12 @@ public final class FeralDeceiver extends CardImpl {
 
 class FeralDeceiverEffect extends OneShotEffect {
 
-    public FeralDeceiverEffect() {
+    FeralDeceiverEffect() {
         super(Outcome.BoostCreature);
         this.staticText = "Reveal the top card of your library. If it's a land card, {this} gets +2/+2 and gains trample until end of turn";
     }
 
-    public FeralDeceiverEffect(final FeralDeceiverEffect effect) {
+    private FeralDeceiverEffect(final FeralDeceiverEffect effect) {
         super(effect);
     }
 

@@ -18,7 +18,7 @@ public final class HuntersFeast extends CardImpl {
 
         // Any number of target players each gain 6 life.
         this.getSpellAbility().addTarget(new TargetPlayer(0, Integer.MAX_VALUE, false));
-        this.getSpellAbility().addEffect(new GainLifeTargetEffect(6));
+        this.getSpellAbility().addEffect(new GainLifeTargetEffect(6).setText("any number of target players each gain 6 life"));
     }
 
     private HuntersFeast(final HuntersFeast card) {

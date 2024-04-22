@@ -9,6 +9,7 @@ import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.BecomesMonarchSourceEffect;
 import mage.abilities.effects.common.DontUntapInControllersUntapStepEnchantedEffect;
 import mage.abilities.effects.common.TapEnchantedEffect;
+import mage.abilities.hint.common.MonarchHint;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -40,6 +41,7 @@ public final class FallFromFavor extends CardImpl {
         // When Fall from Favor enters the battlefield, tap enchanted creature and you become the monarch.
         ability = new EntersBattlefieldTriggeredAbility(new TapEnchantedEffect());
         ability.addEffect(new BecomesMonarchSourceEffect().concatBy("and"));
+        ability.addHint(MonarchHint.instance);
         this.addAbility(ability);
 
         // Enchanted creature doesn't untap during its controller's untap step unless that player is the monarch.

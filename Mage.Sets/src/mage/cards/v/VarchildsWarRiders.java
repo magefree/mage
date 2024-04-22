@@ -56,22 +56,17 @@ public final class VarchildsWarRiders extends CardImpl {
 class OpponentCreateSurvivorTokenCost extends CostImpl {
 
     public OpponentCreateSurvivorTokenCost() {
-        this.text = "Have an opponent create a 1/1 red Survivor creature token.";
+        this.text = "Have an opponent create a 1/1 red Survivor creature token";
     }
 
-    public OpponentCreateSurvivorTokenCost(OpponentCreateSurvivorTokenCost cost) {
+    private OpponentCreateSurvivorTokenCost(final OpponentCreateSurvivorTokenCost cost) {
         super(cost);
     }
 
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
         Player controller = game.getPlayer(controllerId);
-        if (controller != null) {
-            if (!game.getOpponents(controllerId).isEmpty()) {
-                return true;
-            }
-        }
-        return false;
+        return controller != null && (!game.getOpponents(controllerId).isEmpty());
     }
 
     @Override

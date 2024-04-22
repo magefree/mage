@@ -20,7 +20,7 @@ public final class HazardousBlast extends CardImpl {
 
         // Hazardous Blast deals 1 damage to each creature your opponents control. Creatures your opponents control can't block this turn.
         this.getSpellAbility().addEffect(new DamageAllEffect(
-                1, StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE
+                1, StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURES
         ));
         this.getSpellAbility().addEffect(new CantBlockAllEffect(
                 StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURES, Duration.EndOfTurn

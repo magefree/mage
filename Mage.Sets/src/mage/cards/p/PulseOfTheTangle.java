@@ -50,7 +50,7 @@ class PulseOfTheTangleReturnToHandEffect extends OneShotEffect {
         this.staticText = "Then if an opponent controls more creatures than you, return {this} to its owner's hand";
     }
 
-    PulseOfTheTangleReturnToHandEffect(final PulseOfTheTangleReturnToHandEffect effect) {
+    private PulseOfTheTangleReturnToHandEffect(final PulseOfTheTangleReturnToHandEffect effect) {
         super(effect);
     }
 

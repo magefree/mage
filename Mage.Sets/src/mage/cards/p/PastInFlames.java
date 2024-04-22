@@ -42,12 +42,12 @@ public final class PastInFlames extends CardImpl {
 
 class PastInFlamesEffect extends ContinuousEffectImpl {
 
-    public PastInFlamesEffect() {
+    PastInFlamesEffect() {
         super(Duration.EndOfTurn, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         this.staticText = "Each instant and sorcery card in your graveyard gains flashback until end of turn. The flashback cost is equal to its mana cost";
     }
 
-    public PastInFlamesEffect(final PastInFlamesEffect effect) {
+    private PastInFlamesEffect(final PastInFlamesEffect effect) {
         super(effect);
     }
 
@@ -59,7 +59,7 @@ class PastInFlamesEffect extends ContinuousEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        if (this.affectedObjectsSet) {
+        if (getAffectedObjectsSet()) {
             Player player = game.getPlayer(source.getControllerId());
             if (player != null) {
                 player.getGraveyard().stream().map((cardId) -> game.getCard(cardId)).filter(card1 -> card1.isInstantOrSorcery(game)).forEachOrdered((card) -> {

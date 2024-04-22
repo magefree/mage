@@ -34,7 +34,7 @@ public final class SamwiseTheStouthearted extends CardImpl {
     public SamwiseTheStouthearted(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HALFLING);
         this.subtype.add(SubType.PEASANT);
         this.power = new MageInt(2);
@@ -47,7 +47,7 @@ public final class SamwiseTheStouthearted extends CardImpl {
         Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToHandTargetEffect()
                 .setText("choose up to one target permanent card in your graveyard that was put there from the battlefield this turn. Return it to your hand"));
         ability.addEffect(new TheRingTemptsYouEffect().concatBy("Then"));
-        ability.addTarget(new TargetCardInYourGraveyard(filter));
+        ability.addTarget(new TargetCardInYourGraveyard(0, 1, filter));
         this.addAbility(ability, new CardsPutIntoGraveyardWatcher());
     }
 

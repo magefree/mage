@@ -35,7 +35,6 @@ public class AcademyAtTolariaWestPlane extends Plane {
 
     public AcademyAtTolariaWestPlane() {
         this.setPlaneType(Planes.PLANE_ACADEMY_AT_TOLARIA_WEST);
-        this.setExpansionSetCodeForImage("PCA");
 
         // At the beginning of your end step, if you have 0 cards in hand, draw seven cards
         Ability ability = new BeginningOfEndStepTriggeredAbility(Zone.COMMAND, new DrawCardsActivePlayerEffect(7), TargetController.ANY, HellbentAPCondition.instance, false);
@@ -57,6 +56,15 @@ public class AcademyAtTolariaWestPlane extends Plane {
         chaosAbility.setMayActivate(TargetController.ANY);
         this.getAbilities().add(new SimpleStaticAbility(Zone.ALL, new PlanarDieRollCostIncreasingEffect(chaosAbility.getOriginalId())));
     }
+
+    private AcademyAtTolariaWestPlane(final AcademyAtTolariaWestPlane plane) {
+        super(plane);
+    }
+
+    @Override
+    public AcademyAtTolariaWestPlane copy() {
+        return new AcademyAtTolariaWestPlane(this);
+    }
 }
 
 class DrawCardsActivePlayerEffect extends OneShotEffect {
@@ -73,7 +81,7 @@ class DrawCardsActivePlayerEffect extends OneShotEffect {
         setText();
     }
 
-    public DrawCardsActivePlayerEffect(final DrawCardsActivePlayerEffect effect) {
+    protected DrawCardsActivePlayerEffect(final DrawCardsActivePlayerEffect effect) {
         super(effect);
         this.amount = effect.amount.copy();
     }

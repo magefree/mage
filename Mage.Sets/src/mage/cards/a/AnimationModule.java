@@ -64,7 +64,7 @@ class AnimationModuleTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DoIfCostPaid(new CreateTokenEffect(new ServoToken()), new GenericManaCost(1)), false);
     }
 
-    AnimationModuleTriggeredAbility(final AnimationModuleTriggeredAbility ability) {
+    private AnimationModuleTriggeredAbility(final AnimationModuleTriggeredAbility ability) {
         super(ability);
     }
 
@@ -103,7 +103,7 @@ class AnimationModuleEffect extends OneShotEffect {
         this.staticText = "Choose a counter on target permanent or player. Give that permanent or player another counter of that kind";
     }
 
-    AnimationModuleEffect(final AnimationModuleEffect effect) {
+    private AnimationModuleEffect(final AnimationModuleEffect effect) {
         super(effect);
     }
 

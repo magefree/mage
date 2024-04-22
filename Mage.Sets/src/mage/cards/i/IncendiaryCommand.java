@@ -60,12 +60,12 @@ public final class IncendiaryCommand extends CardImpl {
 
 class IncendiaryCommandDrawEffect extends OneShotEffect {
 
-    public IncendiaryCommandDrawEffect() {
+    IncendiaryCommandDrawEffect() {
         super(Outcome.Detriment);
         this.staticText = "each player discards all the cards in their hand, then draws that many cards";
     }
 
-    public IncendiaryCommandDrawEffect(final IncendiaryCommandDrawEffect effect) {
+    private IncendiaryCommandDrawEffect(final IncendiaryCommandDrawEffect effect) {
         super(effect);
     }
 

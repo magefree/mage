@@ -11,7 +11,6 @@ import mage.constants.CardType;
 import mage.constants.DependencyType;
 import mage.constants.Duration;
 import mage.constants.Layer;
-import static mage.constants.Layer.AbilityAddingRemovingEffects_6;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
@@ -46,14 +45,14 @@ public final class ShelteringPrayers extends CardImpl {
 
 class ShelteringPrayersEffect extends ContinuousEffectImpl {
 
-    public ShelteringPrayersEffect() {
+    ShelteringPrayersEffect() {
         super(Duration.WhileOnBattlefield, Outcome.AddAbility);
         staticText = "Basic lands each player controls have shroud as long as that player controls three or fewer lands.";
         dependencyTypes.add(DependencyType.AddingAbility);
 
     }
 
-    public ShelteringPrayersEffect(final ShelteringPrayersEffect effect) {
+    private ShelteringPrayersEffect(final ShelteringPrayersEffect effect) {
         super(effect);
     }
 
@@ -70,7 +69,7 @@ class ShelteringPrayersEffect extends ContinuousEffectImpl {
                     && game.getBattlefield().getAllActivePermanents(new FilterLandPermanent(), playerId, game).size() < 4) {
                 for (Permanent land : game.getBattlefield().getAllActivePermanents(new FilterLandPermanent(), playerId, game)) {
                     if (land != null
-                            && land.isBasic()) {
+                            && land.isBasic(game)) {
                         switch (layer) {
                             case AbilityAddingRemovingEffects_6:
                                 if (sublayer == SubLayer.NA) {

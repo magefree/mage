@@ -61,7 +61,7 @@ class WarrenWeirdingEffect extends OneShotEffect {
                 "creates two 1/1 black Goblin Rogue creature tokens, and those tokens gain haste until end of turn";
     }
 
-    WarrenWeirdingEffect(WarrenWeirdingEffect effect) {
+    private WarrenWeirdingEffect(final WarrenWeirdingEffect effect) {
         super(effect);
     }
 
@@ -74,7 +74,7 @@ class WarrenWeirdingEffect extends OneShotEffect {
             return false;
         }
         TargetPermanent target = new TargetPermanent(StaticFilters.FILTER_CONTROLLED_CREATURE);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         player.choose(outcome, target, source, game);
         Permanent permanent = game.getPermanent(target.getFirstTarget());
         if (permanent == null || !permanent.sacrifice(source, game)) {

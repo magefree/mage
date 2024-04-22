@@ -32,9 +32,9 @@ public final class OverloadedMageRing extends CardImpl {
         this.color.setBlue(true);
         this.nightCard = true;
 
-        // {1}, {T}, Sacrifice Overloaded Mage-Ring: Copy target spell you control.
+        // {1}, {T}, Sacrifice Overloaded Mage-Ring: Copy target spell you control. You may choose new targets for the copy.
         Ability ability = new SimpleActivatedAbility(
-                new CopyTargetSpellEffect(false, false, false), new GenericManaCost(1)
+                new CopyTargetSpellEffect(false, false, true), new GenericManaCost(1)
         );
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());

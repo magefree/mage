@@ -32,11 +32,14 @@ public final class KnightRampager extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Frenzied Rampage — At the beginning of combat on your turn, choose an opponent at random. Knight Rampager attacks that player this combat if able.
-        this.addAbility(new BeginningOfCombatTriggeredAbility(new AttackIfAbleTargetRandomOpponentSourceEffect(), TargetController.YOU, false)
-                .withFlavorWord("Frenzied Rampage"));
+        this.addAbility(new BeginningOfCombatTriggeredAbility(
+                new AttackIfAbleTargetRandomOpponentSourceEffect(), TargetController.YOU, false
+        ).withFlavorWord("Frenzied Rampage"));
 
         // When Knight Rampager dies, it deals 4 damage to target opponent chosen at random.
-        Ability ability = new DiesSourceTriggeredAbility(new DamageTargetEffect(4), false);
+        Ability ability = new DiesSourceTriggeredAbility(
+                new DamageTargetEffect(4, "it"), false
+        );
         Target target = new TargetOpponent();
         target.setRandom(true);
         ability.addTarget(target);

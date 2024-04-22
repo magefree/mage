@@ -6,9 +6,11 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.FlipSourceEffect;
+import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -40,7 +42,7 @@ public final class BudokaGardener extends CardImpl {
         // {T}: You may put a land card from your hand onto the battlefield. If you control ten or more lands, flip Budoka Gardener.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutCardFromHandOntoBattlefieldEffect(StaticFilters.FILTER_CARD_LAND_A), new TapSourceCost());
         ability.addEffect(new BudokaGardenerEffect());
-        this.addAbility(ability);
+        this.addAbility(ability.addHint(new ValueHint("Lands you control", new PermanentsOnBattlefieldCount(StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND))));
     }
 
     private BudokaGardener(final BudokaGardener card) {
@@ -63,14 +65,16 @@ class BudokaGardenerEffect extends OneShotEffect {
         staticText = "If you control ten or more lands, flip {this}";
     }
 
-    BudokaGardenerEffect(final BudokaGardenerEffect effect) {
+    private BudokaGardenerEffect(final BudokaGardenerEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) { return false; }
+        if (controller == null) {
+            return false;
+        }
         if (game.getBattlefield().count(filterLands, source.getControllerId(), source, game) < 10) {
             return false;
         }
@@ -89,7 +93,7 @@ class DokaiWeaverofLife extends TokenImpl {
 
     DokaiWeaverofLife() {
         super("Dokai, Weaver of Life", "");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add(SubType.HUMAN, SubType.MONK);
@@ -102,7 +106,7 @@ class DokaiWeaverofLife extends TokenImpl {
         this.addAbility(ability);
     }
 
-    public DokaiWeaverofLife(final DokaiWeaverofLife token) {
+    private DokaiWeaverofLife(final DokaiWeaverofLife token) {
         super(token);
     }
 

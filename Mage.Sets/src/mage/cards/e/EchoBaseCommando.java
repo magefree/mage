@@ -69,7 +69,7 @@ class EchoBaseCommandoEffect extends CostModificationEffectImpl {
         staticText = effectText;
     }
 
-    public EchoBaseCommandoEffect(final EchoBaseCommandoEffect effect) {
+    private EchoBaseCommandoEffect(final EchoBaseCommandoEffect effect) {
         super(effect);
     }
 

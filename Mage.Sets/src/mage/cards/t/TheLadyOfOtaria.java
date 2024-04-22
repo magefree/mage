@@ -42,7 +42,7 @@ public final class TheLadyOfOtaria extends CardImpl {
     public TheLadyOfOtaria(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.AVATAR);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
@@ -78,7 +78,7 @@ enum TheLadyOfOtariaCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return false;
+        return TheLadyOfOtariaWatcher.checkPlayer(source, game);
     }
 
     @Override
@@ -93,7 +93,7 @@ enum TheLadyOfOtariaCondition implements Condition {
 
 class TheLadyOfOtariaWatcher extends Watcher {
 
-    private final Set<UUID> playerMap = new HashSet<>();
+    private final Set<UUID> playerSet = new HashSet<>();
 
     TheLadyOfOtariaWatcher() {
         super(WatcherScope.GAME);
@@ -109,21 +109,21 @@ class TheLadyOfOtariaWatcher extends Watcher {
                 && zEvent.getTarget() != null
                 && zEvent.getTarget().isLand(game)
                 && zEvent.getTarget().isOwnedBy(zEvent.getTarget().getControllerId())) {
-            playerMap.add(zEvent.getTarget().getControllerId());
+            playerSet.add(zEvent.getTarget().getControllerId());
         }
     }
 
     @Override
     public void reset() {
         super.reset();
-        playerMap.clear();
+        playerSet.clear();
     }
 
     static boolean checkPlayer(Ability source, Game game) {
         return game
                 .getState()
                 .getWatcher(TheLadyOfOtariaWatcher.class)
-                .playerMap
+                .playerSet
                 .contains(source.getControllerId());
     }
 }

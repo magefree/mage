@@ -29,7 +29,7 @@ public final class ProsshSkyraiderOfKher extends CardImpl {
 
     public ProsshSkyraiderOfKher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{R}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DRAGON);
 
         this.power = new MageInt(5);
@@ -41,7 +41,7 @@ public final class ProsshSkyraiderOfKher extends CardImpl {
         this.addAbility(new CastSourceTriggeredAbility(new CreateTokenEffect(new KherKeepKoboldToken(), ManaSpentToCastCount.instance), false));
         // Sacrifice another creature: Prossh gets +1/+0 until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn),
-                new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, true))));
+                new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE)));
     }
 
     private ProsshSkyraiderOfKher(final ProsshSkyraiderOfKher card) {

@@ -106,11 +106,11 @@ class InfernalHarvestAdditionalCost extends VariableCostImpl {
                 return false;
             }
             Player player = game.getPlayer(controllerId);
-            if (player == null || !targets.choose(Outcome.ReturnToHand, controllerId, source.getSourceId(), source, game)) {
+            if (player == null || !this.getTargets().choose(Outcome.ReturnToHand, controllerId, source.getSourceId(), source, game)) {
                 return false;
             }
             return paid = player.moveCards(
-                    targets.stream()
+                    this.getTargets().stream()
                             .map(Target::getTargets)
                             .flatMap(Collection::stream)
                             .map(game::getCard)
@@ -121,7 +121,7 @@ class InfernalHarvestAdditionalCost extends VariableCostImpl {
         }
 
         @Override
-        public Cost copy() {
+        public InfernalHarvestCost copy() {
             return new InfernalHarvestCost(this);
         }
     }

@@ -58,10 +58,11 @@ public class NewPlayerPanel extends javax.swing.JPanel {
 
     protected void generateDeck() {
         String path = DeckGenerator.generateDeck();
-        if (path != null) {
-            this.txtPlayerDeck.setText(path);
-            MageFrame.getPreferences().put("defaultDeckPath", path);
+        if (path == null) {
+            return;
         }
+        this.txtPlayerDeck.setText(path);
+        MageFrame.getPreferences().put("defaultDeckPath", path);
     }
 
     public String getPlayerName() {
@@ -122,7 +123,7 @@ public class NewPlayerPanel extends javax.swing.JPanel {
 
         lblLevel.setText("Skill:");
 
-        spnLevel.setModel(new javax.swing.SpinnerNumberModel(6, 1, 10, 1));
+        spnLevel.setModel(new javax.swing.SpinnerNumberModel(2, 1, 10, 1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

@@ -1,8 +1,8 @@
-
 package org.mage.test.cards.abilities.oneshot.counter;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.counters.CounterType;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -11,6 +11,54 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  * @author LevelX2
  */
 public class MovingCounterTest extends CardTestPlayerBase {
+
+    @Test
+    public void testWeaponRack() {
+        String wr = "Weapon Rack"; // {4} Artifact
+        // Weapon Rack enters the battlefield with three +1/+1 counters on it.
+        // {T}: Move a +1/+1 counter from Weapon Rack onto target creature. Activate only as a sorcery.
+        String fm = "Fathom Mage"; // 1/1 Evolve; Whenever a +1/+1 counter is put on Fathom Mage, you may draw a card.
+        addCard(Zone.BATTLEFIELD, playerA, "Wastes", 4);
+        addCard(Zone.BATTLEFIELD, playerA, fm, 1);
+        addCard(Zone.HAND, playerA, wr, 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, wr);
+
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{T}: Move a", fm);
+        setChoice(playerA, true); // yes to draw a card
+
+        setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
+        execute();
+
+        assertCounterCount(playerA, wr, CounterType.P1P1, 2);
+        assertCounterCount(playerA, fm, CounterType.P1P1, 1);
+
+    }
+
+    @Test
+    public void testArcboundFiend() {
+        String af = "Arcbound Fiend"; // {6} Artifact Modular 3
+        // At the beginning of your upkeep, you may move a +1/+1 counter from target creature onto Arcbound Fiend.
+        String hc = "Hagra Constrictor"; // {2}{B} ETB with two +1/+1 counters
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 9);
+        addCard(Zone.HAND, playerA, af);
+        addCard(Zone.HAND, playerA, hc);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, af);
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, hc);
+
+        setChoice(playerA, true); // yes to move a counter (upkeep turn 3)
+        addTarget(playerA, hc);
+
+        setStopAt(3, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
+        execute();
+
+        assertCounterCount(playerA, af, CounterType.P1P1, 4);
+        assertCounterCount(playerA, hc, CounterType.P1P1, 1);
+
+    }
 
     /**
      * I'm having an issue when using Bioshift to move only a portion of

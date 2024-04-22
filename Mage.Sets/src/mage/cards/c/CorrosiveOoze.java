@@ -59,12 +59,12 @@ public final class CorrosiveOoze extends CardImpl {
 
 class CorrosiveOozeEffect extends OneShotEffect {
 
-    public CorrosiveOozeEffect() {
+    CorrosiveOozeEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "destroy all Equipment attached to that creature at end of combat";
     }
 
-    public CorrosiveOozeEffect(final CorrosiveOozeEffect effect) {
+    private CorrosiveOozeEffect(final CorrosiveOozeEffect effect) {
         super(effect);
     }
 

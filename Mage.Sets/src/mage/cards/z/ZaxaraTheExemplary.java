@@ -2,7 +2,6 @@ package mage.cards.z;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
@@ -33,7 +32,7 @@ public final class ZaxaraTheExemplary extends CardImpl {
     public ZaxaraTheExemplary(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{G}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.NIGHTMARE);
         this.subtype.add(SubType.HYDRA);
         this.power = new MageInt(2);
@@ -67,7 +66,7 @@ class ZaxaraTheExemplaryHydraTokenAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever you cast a spell with {X} in its mana cost");
     }
 
-    public ZaxaraTheExemplaryHydraTokenAbility(final ZaxaraTheExemplaryHydraTokenAbility ability) {
+    private ZaxaraTheExemplaryHydraTokenAbility(final ZaxaraTheExemplaryHydraTokenAbility ability) {
         super(ability);
     }
 
@@ -90,7 +89,7 @@ class ZaxaraTheExemplaryHydraTokenAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public TriggeredAbility copy() {
+    public ZaxaraTheExemplaryHydraTokenAbility copy() {
         return new ZaxaraTheExemplaryHydraTokenAbility(this);
     }
 }
@@ -101,7 +100,7 @@ class ZaxaraTheExemplaryHydraTokenEffect extends OneShotEffect {
         this.staticText = ", create a 0/0 green Hydra creature token, then put X +1/+1 counters on it.";
     }
 
-    ZaxaraTheExemplaryHydraTokenEffect(final ZaxaraTheExemplaryHydraTokenEffect effect) {
+    private ZaxaraTheExemplaryHydraTokenEffect(final ZaxaraTheExemplaryHydraTokenEffect effect) {
         super(effect);
     }
 

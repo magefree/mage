@@ -24,7 +24,7 @@ public final class ToskiBearerOfSecrets extends CardImpl {
     public ToskiBearerOfSecrets(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SQUIRREL);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

@@ -22,7 +22,7 @@ public final class MikokoroCenterOfTheSea extends CardImpl {
 
     public MikokoroCenterOfTheSea(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
         // {2}, {tap}: Each player draws a card.

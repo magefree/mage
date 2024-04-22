@@ -31,7 +31,7 @@ public final class CapennaExpress extends CardImpl {
         // Sacrifice a Treasure: Capenna Express becomes an artifact creature until end of turn.
         this.addAbility(new SimpleActivatedAbility(new AddCardTypeSourceEffect(
                 Duration.EndOfTurn, CardType.ARTIFACT, CardType.CREATURE
-        ), new SacrificeTargetCost(filter)));
+        ).setText("{this} becomes an artifact creature until end of turn"), new SacrificeTargetCost(filter)));
 
         // Crew 3
         this.addAbility(new CrewAbility(3));

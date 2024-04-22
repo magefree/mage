@@ -23,7 +23,7 @@ public final class ShimmerdriftVale extends CardImpl {
     public ShimmerdriftVale(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
-        this.addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
 
         // Shimmerdrift Vale enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());

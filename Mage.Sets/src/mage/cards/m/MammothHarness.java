@@ -60,7 +60,7 @@ class MammothHarnessTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn), false);
     }
 
-    public MammothHarnessTriggeredAbility(final MammothHarnessTriggeredAbility ability) {
+    private MammothHarnessTriggeredAbility(final MammothHarnessTriggeredAbility ability) {
         super(ability);
     }
 

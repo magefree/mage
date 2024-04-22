@@ -52,7 +52,7 @@ public class MariTheKillingQuill extends CardImpl {
     public MariTheKillingQuill(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.addSubType(SubType.VAMPIRE, SubType.ASSASSIN);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
@@ -69,8 +69,8 @@ public class MariTheKillingQuill extends CardImpl {
         // NOTE: Optional part is handled inside the effect
         Ability dealsDamageAbility = new DealsCombatDamageToAPlayerTriggeredAbility(new MariTheKillingQuillDealsDamageEffect(), false, true);
         Effect drawAndTreasureEffect = new GainAbilityControlledEffect(dealsDamageAbility, Duration.WhileOnBattlefield, filter);
-        drawAndTreasureEffect.setText(
-                "\"Whenever this creature deals combat damage to a player, you may remove a hit counter from a card that player owns in exile. " +
+        drawAndTreasureEffect.setText("\"Whenever this creature deals combat damage to a player, " +
+                "you may remove a hit counter from a card that player owns in exile. " +
                 "If you do, draw a card and create two Treasure tokens.\"");
         drawAndTreasureEffect.concatBy("and");
 
@@ -93,6 +93,8 @@ class MariTheKillingQuillDealsDamageEffect extends OneShotEffect {
 
     MariTheKillingQuillDealsDamageEffect() {
         super(Outcome.Benefit);
+        staticText =  "you may remove a hit counter from a card that player owns in exile. " +
+                "If you do, draw a card and create two Treasure tokens.";
     }
 
     private MariTheKillingQuillDealsDamageEffect(final MariTheKillingQuillDealsDamageEffect effect) {
@@ -165,7 +167,7 @@ class MariTheKillingQuillCreatureDiesAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new MariTheKillingQuillExileCreatureEffect(), false);
     }
 
-    public MariTheKillingQuillCreatureDiesAbility(final MariTheKillingQuillCreatureDiesAbility ability) {
+    private MariTheKillingQuillCreatureDiesAbility(final MariTheKillingQuillCreatureDiesAbility ability) {
         super(ability);
     }
 
@@ -204,12 +206,12 @@ class MariTheKillingQuillCreatureDiesAbility extends TriggeredAbilityImpl {
 
 class MariTheKillingQuillExileCreatureEffect extends OneShotEffect {
 
-    public MariTheKillingQuillExileCreatureEffect() {
+    MariTheKillingQuillExileCreatureEffect() {
         super(Outcome.Benefit);
         this.staticText = "exile it with a hit counter on it";
     }
 
-    public MariTheKillingQuillExileCreatureEffect(final MariTheKillingQuillExileCreatureEffect effect) {
+    private MariTheKillingQuillExileCreatureEffect(final MariTheKillingQuillExileCreatureEffect effect) {
         super(effect);
     }
 

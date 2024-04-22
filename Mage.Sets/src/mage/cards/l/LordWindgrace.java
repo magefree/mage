@@ -39,7 +39,7 @@ public final class LordWindgrace extends CardImpl {
     public LordWindgrace(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{B}{R}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.WINDGRACE);
         this.setStartingLoyalty(5);
 
@@ -79,13 +79,13 @@ public final class LordWindgrace extends CardImpl {
 
 class LordWindgraceEffect extends OneShotEffect {
 
-    public LordWindgraceEffect() {
+    LordWindgraceEffect() {
         super(Outcome.Benefit);
         this.staticText = "discard a card, then draw a card. "
                 + "If a land card is discarded this way, draw an additional card";
     }
 
-    public LordWindgraceEffect(final LordWindgraceEffect effect) {
+    private LordWindgraceEffect(final LordWindgraceEffect effect) {
         super(effect);
     }
 

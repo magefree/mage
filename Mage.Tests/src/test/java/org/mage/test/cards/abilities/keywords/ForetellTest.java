@@ -11,7 +11,6 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author jeffwadsworth
  */
 public class ForetellTest extends CardTestPlayerBase {
@@ -48,10 +47,19 @@ public class ForetellTest extends CardTestPlayerBase {
     public void testForetoldCastOtherTurnAsForetold() {
         // verify that foretold card can be cast on a turn other than the one it was foretold
         setStrictChooseMode(true);
+
         addCard(Zone.BATTLEFIELD, playerA, "Island", 4);  // Foretell cost 2 mana and {1}{U} for foretell cast from exile
         addCard(Zone.HAND, playerA, "Behold the Multiverse");  // (Instant) Scry 2 and draw 2 cards
+
+        // Setting up for the scry 2
+        skipInitShuffling();
+        addCard(Zone.LIBRARY, playerA, "Altar of Dementia");
+        addCard(Zone.LIBRARY, playerA, "Millstone");
+
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Fore");
         activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerA, "Foretell {1}{U}");
+        addTarget(playerA, "Millstone"); // scrying to the bottom.
+
         setStopAt(2, PhaseStep.END_TURN);
         execute();
 
@@ -59,7 +67,7 @@ public class ForetellTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Behold the Multiverse", 1);  // now in graveyard
         assertHandCount(playerA, 2); // 2 cards drawn
     }
-    
+
     @Test
     public void testDreamDevourerTrigger() {
         // Issue #8876
@@ -68,7 +76,7 @@ public class ForetellTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5); // 3 mana for suspend and 2 for foretell
         addCard(Zone.HAND, playerA, "Sol Talisman", 1);  // Suspend card
         addCard(Zone.HAND, playerA, "Lightning Bolt", 1); // card to foretell
-        
+
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Susp"); // suspend the Sol Talisman
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Fore"); // foretell the Lightning Bolt
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);

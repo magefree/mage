@@ -22,7 +22,7 @@ public final class NefaroxOverlordOfGrixis extends CardImpl {
 
     public NefaroxOverlordOfGrixis(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DEMON);
 
         this.power = new MageInt(5);
@@ -34,7 +34,7 @@ public final class NefaroxOverlordOfGrixis extends CardImpl {
         this.addAbility(new ExaltedAbility());
         // Whenever Nefarox, Overlord of Grixis attacks alone, defending player sacrifices a creature.
         this.addAbility(new AttacksAloneSourceTriggeredAbility(new SacrificeEffect(
-            StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT, 1, "defending player")));
+            StaticFilters.FILTER_PERMANENT_CREATURE, 1, "defending player")));
     }
 
     private NefaroxOverlordOfGrixis(final NefaroxOverlordOfGrixis card) {

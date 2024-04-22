@@ -60,7 +60,7 @@ class ValakutTheMoltenPinnacleTriggeredAbility extends TriggeredAbilityImpl {
         this.addTarget(new TargetAnyTarget());
     }
 
-    ValakutTheMoltenPinnacleTriggeredAbility(ValakutTheMoltenPinnacleTriggeredAbility ability) {
+    private ValakutTheMoltenPinnacleTriggeredAbility(final ValakutTheMoltenPinnacleTriggeredAbility ability) {
         super(ability);
     }
 

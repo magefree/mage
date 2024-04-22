@@ -69,7 +69,7 @@ class SeaGateStormcallerDelayedTriggeredAbility extends DelayedTriggeredAbility 
         this.twice = twice;
     }
 
-    public SeaGateStormcallerDelayedTriggeredAbility(final SeaGateStormcallerDelayedTriggeredAbility ability) {
+    private SeaGateStormcallerDelayedTriggeredAbility(final SeaGateStormcallerDelayedTriggeredAbility ability) {
         super(ability);
         this.twice = ability.twice;
     }

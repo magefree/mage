@@ -47,12 +47,12 @@ public final class ZzzyxassAbyss extends CardImpl {
 
 class ZzzyxassAbyssEffect extends OneShotEffect {
 
-    public ZzzyxassAbyssEffect() {
+    ZzzyxassAbyssEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "destroy all nonland permanents with the first name alphabetically among nonland permanents";
     }
 
-    public ZzzyxassAbyssEffect(final ZzzyxassAbyssEffect effect) {
+    private ZzzyxassAbyssEffect(final ZzzyxassAbyssEffect effect) {
         super(effect);
     }
 

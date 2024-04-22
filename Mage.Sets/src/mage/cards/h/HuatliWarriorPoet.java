@@ -30,7 +30,7 @@ public final class HuatliWarriorPoet extends CardImpl {
     public HuatliWarriorPoet(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{R}{W}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUATLI);
 
         this.setStartingLoyalty(3);

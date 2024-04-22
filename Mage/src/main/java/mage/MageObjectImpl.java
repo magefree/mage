@@ -29,18 +29,27 @@ public abstract class MageObjectImpl implements MageObject {
 
     protected String name;
     protected ManaCosts<ManaCost> manaCost;
+
     protected ObjectColor color;
     protected ObjectColor frameColor;
     protected FrameStyle frameStyle;
+
+    private String expansionSetCode = "";
+    private String cardNumber = "";
+    private String imageFileName = "";
+    private int imageNumber = 0;
+
+    protected List<SuperType> supertype = new ArrayList<>();
     protected List<CardType> cardType = new ArrayList<>();
     protected SubTypes subtype = new SubTypes();
-    protected Set<SuperType> supertype = EnumSet.noneOf(SuperType.class);
     protected Abilities<Ability> abilities;
+
     protected String text;
     protected MageInt power;
     protected MageInt toughness;
     protected int startingLoyalty = -1; // -2 means X, -1 means none, 0 and up is normal
     protected int startingDefense = -1; // -2 means X, -1 means none, 0 and up is normal
+
     protected boolean copy;
     protected MageObject copyFrom; // copied card INFO (used to call original adjusters)
 
@@ -59,7 +68,7 @@ public abstract class MageObjectImpl implements MageObject {
         abilities = new AbilitiesImpl<>();
     }
 
-    public MageObjectImpl(final MageObjectImpl object) {
+    protected MageObjectImpl(final MageObjectImpl object) {
         objectId = object.objectId;
         name = object.name;
         manaCost = object.manaCost.copy();
@@ -67,6 +76,10 @@ public abstract class MageObjectImpl implements MageObject {
         color = object.color.copy();
         frameColor = object.frameColor.copy();
         frameStyle = object.frameStyle;
+        expansionSetCode = object.expansionSetCode;
+        cardNumber = object.cardNumber;
+        imageFileName = object.imageFileName;
+        imageNumber = object.imageNumber;
         power = object.power.copy();
         toughness = object.toughness.copy();
         startingLoyalty = object.startingLoyalty;
@@ -97,11 +110,6 @@ public abstract class MageObjectImpl implements MageObject {
     @Override
     public String getLogName() {
         return GameLog.getColoredObjectIdName(this);
-    }
-
-    @Override
-    public String getImageName() {
-        return name;
     }
 
     @Override
@@ -140,7 +148,14 @@ public abstract class MageObjectImpl implements MageObject {
     }
 
     @Override
-    public Set<SuperType> getSuperType() {
+    public List<SuperType> getSuperType(Game game) {
+        if (game != null) {
+            // dynamic
+            MageObjectAttribute mageObjectAttribute = game.getState().getMageObjectAttribute(getId());
+            if (mageObjectAttribute != null) {
+                return mageObjectAttribute.getSuperType();
+            }
+        }
         return supertype;
     }
 
@@ -234,8 +249,53 @@ public abstract class MageObjectImpl implements MageObject {
     }
 
     @Override
+    public String getExpansionSetCode() {
+        return expansionSetCode;
+    }
+
+    @Override
+    public void setExpansionSetCode(String expansionSetCode) {
+        this.expansionSetCode = expansionSetCode;
+    }
+
+    @Override
+    public String getCardNumber() {
+        return cardNumber;
+    }
+
+    @Override
+    public void setCardNumber(String cardNumber) {
+        this.cardNumber = cardNumber;
+    }
+
+    @Override
+    public String getImageFileName() {
+        return imageFileName;
+    }
+
+    @Override
+    public void setImageFileName(String imageFileName) {
+        this.imageFileName = imageFileName;
+    }
+
+    @Override
+    public Integer getImageNumber() {
+        return imageNumber;
+    }
+
+    @Override
+    public void setImageNumber(Integer imageNumber) {
+        this.imageNumber = imageNumber;
+    }
+
+    @Override
     public ManaCosts<ManaCost> getManaCost() {
         return manaCost;
+    }
+
+    @Override
+    public void setManaCost(ManaCosts<ManaCost> costs) {
+        this.manaCost = costs.copy();
     }
 
     @Override

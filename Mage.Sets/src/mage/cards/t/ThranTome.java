@@ -46,12 +46,12 @@ public final class ThranTome extends CardImpl {
 
 class ThranTomeEffect extends OneShotEffect {
 
-    public ThranTomeEffect() {
+    ThranTomeEffect() {
         super(Outcome.Benefit);
         this.staticText = "Reveal the top three cards of your library. Target opponent chooses one of those cards. Put that card into your graveyard, then draw two cards";
     }
 
-    public ThranTomeEffect(final ThranTomeEffect effect) {
+    private ThranTomeEffect(final ThranTomeEffect effect) {
         super(effect);
     }
 

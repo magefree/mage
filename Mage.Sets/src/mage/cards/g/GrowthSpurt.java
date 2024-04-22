@@ -48,7 +48,7 @@ class GrowthSpurtEffect extends OneShotEffect {
         this.staticText = "Roll a six-sided die. Target creature gets +X/+X until end of turn, where X is the result";
     }
 
-    GrowthSpurtEffect(final GrowthSpurtEffect effect) {
+    private GrowthSpurtEffect(final GrowthSpurtEffect effect) {
         super(effect);
     }
 

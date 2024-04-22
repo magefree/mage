@@ -63,7 +63,7 @@ class ArmoryAutomatonEffect extends OneShotEffect {
         this.staticText = "attach any number of target Equipment to it";
     }
 
-    public ArmoryAutomatonEffect(final ArmoryAutomatonEffect effect) {
+    private ArmoryAutomatonEffect(final ArmoryAutomatonEffect effect) {
         super(effect);
     }
 

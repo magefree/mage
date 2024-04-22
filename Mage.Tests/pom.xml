@@ -70,6 +70,10 @@
             <groupId>net.java.truevfs</groupId>
             <artifactId>truevfs-profile-base</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.jsoup</groupId>
+            <artifactId>jsoup</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
@@ -135,6 +139,8 @@
         <finalName>mage-tests</finalName>
     </build>
 
-    <properties/>
+    <properties>
+        <root.dir>${project.basedir}/..</root.dir>
+    </properties>
 
 </project>

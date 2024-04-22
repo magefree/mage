@@ -4,8 +4,6 @@ import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author spjspj
  */
@@ -22,11 +20,9 @@ public final class HydraBroodmasterToken extends TokenImpl {
         subtype.add(SubType.HYDRA);
         this.power = new MageInt(power);
         this.toughness = new MageInt(toughness);
-
-        availableImageSetCodes = Arrays.asList("JOU", "C21");
     }
 
-    public HydraBroodmasterToken(final HydraBroodmasterToken token) {
+    private HydraBroodmasterToken(final HydraBroodmasterToken token) {
         super(token);
     }
 
@@ -34,4 +30,3 @@ public final class HydraBroodmasterToken extends TokenImpl {
         return new HydraBroodmasterToken(this);
     }
 }
-

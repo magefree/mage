@@ -13,7 +13,7 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
@@ -28,7 +28,7 @@ import java.util.UUID;
  */
 public final class ChickenALaKing extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Bird you control");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("untapped Bird you control");
 
     static {
         filter.add(TappedPredicate.UNTAPPED);
@@ -72,7 +72,7 @@ class ChickenALaKingTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter));
     }
 
-    public ChickenALaKingTriggeredAbility(final ChickenALaKingTriggeredAbility ability) {
+    private ChickenALaKingTriggeredAbility(final ChickenALaKingTriggeredAbility ability) {
         super(ability);
     }
 
@@ -97,6 +97,6 @@ class ChickenALaKingTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a 6 is rolled on a six-sided die, put a +1/+1 counter on each Bird";
+        return "Whenever a 6 is rolled on a six-sided die, put a +1/+1 counter on each Bird.";
     }
 }

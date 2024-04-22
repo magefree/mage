@@ -25,7 +25,7 @@ public final class BrinelinTheMoonKraken extends CardImpl {
     public BrinelinTheMoonKraken(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{6}{U}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.KRAKEN);
         this.power = new MageInt(6);
         this.toughness = new MageInt(8);

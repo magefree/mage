@@ -64,7 +64,7 @@ class TidalFlatsEffect extends OneShotEffect {
         this.staticText = "For each attacking creature without flying, its controller may pay {1}. If they don't, creatures you control blocking that creature gain first strike until end of turn";
     }
 
-    public TidalFlatsEffect(final TidalFlatsEffect effect) {
+    private TidalFlatsEffect(final TidalFlatsEffect effect) {
         super(effect);
     }
 

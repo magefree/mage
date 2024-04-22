@@ -1,7 +1,7 @@
-
 package mage.game.permanent.token;
 
 import mage.MageObject;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.game.Game;
@@ -22,6 +22,7 @@ public interface Token extends MageObject {
     List<UUID> getLastAddedTokenIds();
 
     void addAbility(Ability ability);
+    void addAbility(Ability ability, boolean fromExistingObject);
 
     void removeAbility(Ability abilityToRemove);
 
@@ -35,27 +36,25 @@ public interface Token extends MageObject {
 
     boolean putOntoBattlefield(int amount, Game game, Ability source, UUID controllerId, boolean tapped, boolean attacking, UUID attackedPlayer);
 
-    boolean putOntoBattlefield(int amount, Game game, Ability source, UUID controllerId, boolean tapped, boolean attacking, UUID attackedPlayer, boolean created);
+    boolean putOntoBattlefield(int amount, Game game, Ability source, UUID controllerId, boolean tapped, boolean attacking, UUID attackedPlayer, UUID attachedTo);
 
-    int getTokenType();
+    boolean putOntoBattlefield(int amount, Game game, Ability source, UUID controllerId, boolean tapped, boolean attacking, UUID attackedPlayer, UUID attachedTo, boolean created);
 
     void setPower(int power);
 
     void setToughness(int toughness);
 
-    void setTokenType(int tokenType);
-
-    String getOriginalCardNumber();
-
-    void setOriginalCardNumber(String originalCardNumber);
-
-    String getOriginalExpansionSetCode();
-
-    void setOriginalExpansionSetCode(String originalExpansionSetCode);
-
     Card getCopySourceCard();
 
     void setCopySourceCard(Card copySourceCard);
 
-    void setExpansionSetCodeForImage(String code);
+    Token getBackFace();
+
+    void setColor(ObjectColor color);
+
+    void clearManaCost();
+
+    void setEntersTransformed(boolean entersTransformed);
+
+    boolean isEntersTransformed();
 }

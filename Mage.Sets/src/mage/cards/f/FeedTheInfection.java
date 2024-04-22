@@ -1,7 +1,5 @@
 package mage.cards.f;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -14,6 +12,8 @@ import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -46,7 +46,7 @@ class FeedTheInfectionEffect extends OneShotEffect {
     FeedTheInfectionEffect() {
         super(Outcome.Benefit);
         staticText = "<br>" + AbilityWord.CORRUPTED.formatWord() +
-                "Each opponent with three or more poison counters loses 3 life";
+                "Each opponent who has three or more poison counters loses 3 life";
     }
 
     private FeedTheInfectionEffect(final FeedTheInfectionEffect effect) {

@@ -32,7 +32,7 @@ public final class TheOzolith extends CardImpl {
     public TheOzolith(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // Whenever a creature you control leaves the battlefield, if it had counters on it, put those counters on The Ozolith.
         this.addAbility(new TheOzolithTriggeredAbility());

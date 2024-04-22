@@ -28,7 +28,7 @@ public class PayLifeCost extends CostImpl {
         this.text = "pay " + text;
     }
 
-    public PayLifeCost(PayLifeCost cost) {
+    protected PayLifeCost(final PayLifeCost cost) {
         super(cost);
         this.amount = cost.amount.copy();
     }

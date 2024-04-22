@@ -19,7 +19,8 @@ public final class HippoToken2 extends TokenImpl {
         power = new MageInt(3);
         toughness = new MageInt(3);
     }
-    public HippoToken2(final HippoToken2 token) {
+
+    protected HippoToken2(final HippoToken2 token) {
         super(token);
     }
 

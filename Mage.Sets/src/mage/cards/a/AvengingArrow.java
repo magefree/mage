@@ -21,6 +21,9 @@ public final class AvengingArrow extends CardImpl {
 
     private static final FilterPermanent filter
             = new FilterCreaturePermanent("creature that dealt damage this turn");
+    static {
+        filter.add(AvengingArrowPredicate.instance);
+    }
 
     public AvengingArrow(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{W}");

@@ -47,12 +47,12 @@ public final class SurveyorsScope extends CardImpl {
 
 class SurveyorsScopeEffect extends OneShotEffect {
 
-    public SurveyorsScopeEffect() {
+    SurveyorsScopeEffect() {
         super(Outcome.PutLandInPlay);
         this.staticText = "Search your library for up to X basic land cards, where X is the number of players who control at least two more lands than you. Put those cards onto the battlefield, then shuffle";
     }
 
-    public SurveyorsScopeEffect(final SurveyorsScopeEffect effect) {
+    private SurveyorsScopeEffect(final SurveyorsScopeEffect effect) {
         super(effect);
     }
 

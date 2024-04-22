@@ -76,11 +76,6 @@ class EpicReplacementEffect extends ContinuousRuleModifyingEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public EpicReplacementEffect copy() {
         return new EpicReplacementEffect(this);
     }

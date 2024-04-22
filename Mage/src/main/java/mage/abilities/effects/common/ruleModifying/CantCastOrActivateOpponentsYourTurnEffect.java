@@ -21,18 +21,13 @@ public class CantCastOrActivateOpponentsYourTurnEffect extends ContinuousRuleMod
                 "or activate abilities of artifacts, creatures, or enchantments";
     }
 
-    public CantCastOrActivateOpponentsYourTurnEffect(final CantCastOrActivateOpponentsYourTurnEffect effect) {
+    protected CantCastOrActivateOpponentsYourTurnEffect(final CantCastOrActivateOpponentsYourTurnEffect effect) {
         super(effect);
     }
 
     @Override
     public CantCastOrActivateOpponentsYourTurnEffect copy() {
         return new CantCastOrActivateOpponentsYourTurnEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

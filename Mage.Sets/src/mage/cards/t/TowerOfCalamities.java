@@ -28,7 +28,7 @@ public final class TowerOfCalamities extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TowerOfCalamities (final TowerOfCalamities card) {
+    private TowerOfCalamities(final TowerOfCalamities card) {
         super(card);
     }
 

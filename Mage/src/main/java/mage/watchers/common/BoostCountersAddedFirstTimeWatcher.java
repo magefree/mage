@@ -29,8 +29,13 @@ public class BoostCountersAddedFirstTimeWatcher extends Watcher {
             return;
         }
         Permanent permanent = game.getPermanent(event.getTargetId());
+        int offset = 0;
+        if (permanent == null) {
+            permanent = game.getPermanentEntering(event.getTargetId());
+            offset++;
+        }
         if (permanent != null && event.getData().equals(CounterType.P1P1.getName())) {
-            map.putIfAbsent(new MageObjectReference(permanent, game), event.getId());
+            map.putIfAbsent(new MageObjectReference(permanent, game, offset), event.getId());
         }
     }
 
@@ -40,13 +45,13 @@ public class BoostCountersAddedFirstTimeWatcher extends Watcher {
         map.clear();
     }
 
-    public static boolean checkEvent(GameEvent event, Permanent permanent, Game game) {
+    public static boolean checkEvent(GameEvent event, Permanent permanent, Game game, int offset) {
         return event
                 .getId()
                 .equals(game
                         .getState()
                         .getWatcher(BoostCountersAddedFirstTimeWatcher.class)
                         .map
-                        .getOrDefault(new MageObjectReference(permanent, game), null));
+                        .getOrDefault(new MageObjectReference(permanent, game, offset), null));
     }
 }

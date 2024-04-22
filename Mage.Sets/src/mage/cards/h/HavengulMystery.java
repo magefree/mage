@@ -33,7 +33,7 @@ public final class HavengulMystery extends CardImpl {
 
     public HavengulMystery(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         this.nightCard = true;
 
@@ -70,7 +70,7 @@ class HavengulMysteryTransformAbility extends TriggeredAbilityImpl {
         this.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
     }
 
-    public HavengulMysteryTransformAbility(final HavengulMysteryTransformAbility ability) {
+    private HavengulMysteryTransformAbility(final HavengulMysteryTransformAbility ability) {
         super(ability);
     }
 

@@ -38,7 +38,7 @@ public final class Leapfrog extends CardImpl {
                         FlyingAbility.getInstance(), Duration.WhileOnBattlefield
                 ), LeapfrogCondition.instance, "{this} has flying as long as " +
                 "you've cast an instant or sorcery spell this turn."
-        )), new SpellsCastWatcher());
+        )));
     }
 
     private Leapfrog(final Leapfrog card) {

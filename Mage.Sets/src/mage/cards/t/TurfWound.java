@@ -29,7 +29,7 @@ public final class TurfWound extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
         
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
     private TurfWound(final TurfWound card) {
@@ -44,23 +44,18 @@ public final class TurfWound extends CardImpl {
 
 class TurfWoundEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public TurfWoundEffect() {
+    TurfWoundEffect() {
         super(Duration.EndOfTurn, Outcome.Detriment);
         staticText = "Target player can't play land cards this turn";
     }
 
-    public TurfWoundEffect(final TurfWoundEffect effect) {
+    private TurfWoundEffect(final TurfWoundEffect effect) {
         super(effect);
     }
 
     @Override
     public TurfWoundEffect copy() {
         return new TurfWoundEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override
@@ -73,8 +68,13 @@ class TurfWoundEffect extends ContinuousRuleModifyingEffectImpl {
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.PLAY_LAND;
+    }
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.PLAY_LAND && event.getPlayerId().equals(source.getFirstTarget())) {
+        if (event.getPlayerId().equals(source.getFirstTarget())) {
             return true;
         }
         return false;

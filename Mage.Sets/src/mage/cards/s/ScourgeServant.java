@@ -26,7 +26,7 @@ public final class ScourgeServant extends CardImpl {
         this.addAbility(InfectAbility.getInstance());
     }
 
-    public ScourgeServant (final ScourgeServant card) {
+    private ScourgeServant(final ScourgeServant card) {
         super(card);
     }
 

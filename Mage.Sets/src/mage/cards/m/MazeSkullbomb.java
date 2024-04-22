@@ -1,7 +1,5 @@
 package mage.cards.m;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -15,7 +13,9 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -35,14 +35,14 @@ public final class MazeSkullbomb extends CardImpl {
         // {2}{G}, Sacrifice Maze Skullbomb: Target creature gets +3/+3 and gains trample until end of turn. Draw a card. Activate only as a sorcery.
         ability = new ActivateAsSorceryActivatedAbility(
                 new BoostTargetEffect(3, 3)
-                        .setText("target creature gets +3/+3"),
+                        .setText("target creature you control gets +3/+3"),
                 new ManaCostsImpl<>("{2}{G}")
         );
         ability.addCost(new SacrificeSourceCost());
         ability.addEffect(new GainAbilityTargetEffect(TrampleAbility.getInstance())
                 .setText("and gains trample until end of turn"));
         ability.addEffect(new DrawCardSourceControllerEffect(1));
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
     }
 

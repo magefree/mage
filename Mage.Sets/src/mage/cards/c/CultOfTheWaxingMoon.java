@@ -57,7 +57,7 @@ class CultOfTheWaxingMoonAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever a permanent you control transforms into a non-Human creature, ");
     }
 
-    public CultOfTheWaxingMoonAbility(final CultOfTheWaxingMoonAbility ability) {
+    private CultOfTheWaxingMoonAbility(final CultOfTheWaxingMoonAbility ability) {
         super(ability);
     }
 

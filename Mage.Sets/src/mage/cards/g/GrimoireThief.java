@@ -70,12 +70,12 @@ public final class GrimoireThief extends CardImpl {
 
 class GrimoireThiefExileEffect extends OneShotEffect {
 
-    public GrimoireThiefExileEffect() {
+    GrimoireThiefExileEffect() {
         super(Outcome.Discard);
         staticText = "exile the top three cards of target opponent's library face down";
     }
 
-    public GrimoireThiefExileEffect(final GrimoireThiefExileEffect effect) {
+    private GrimoireThiefExileEffect(final GrimoireThiefExileEffect effect) {
         super(effect);
     }
 
@@ -118,12 +118,12 @@ class GrimoireThiefExileEffect extends OneShotEffect {
 
 class GrimoireThiefLookEffect extends AsThoughEffectImpl {
 
-    public GrimoireThiefLookEffect() {
+    GrimoireThiefLookEffect() {
         super(AsThoughEffectType.LOOK_AT_FACE_DOWN, Duration.EndOfGame, Outcome.Benefit);
         staticText = "You may look at cards exiled with {this}";
     }
 
-    public GrimoireThiefLookEffect(final GrimoireThiefLookEffect effect) {
+    private GrimoireThiefLookEffect(final GrimoireThiefLookEffect effect) {
         super(effect);
     }
 
@@ -169,13 +169,13 @@ class GrimoireThiefLookEffect extends AsThoughEffectImpl {
 
 class GrimoireThiefCounterspellEffect extends OneShotEffect {
 
-    public GrimoireThiefCounterspellEffect() {
+    GrimoireThiefCounterspellEffect() {
         super(Outcome.Discard);
         staticText = "Turn all cards exiled with {this} face up. "
                 + "Counter all spells with those names";
     }
 
-    public GrimoireThiefCounterspellEffect(final GrimoireThiefCounterspellEffect effect) {
+    private GrimoireThiefCounterspellEffect(final GrimoireThiefCounterspellEffect effect) {
         super(effect);
     }
 
@@ -188,7 +188,7 @@ class GrimoireThiefCounterspellEffect extends OneShotEffect {
         if (exileZones != null && sourceObject != null) {
             for (ExileZone exileZone : game.getExile().getExileZones()) {
                 if (!exileZone.isEmpty()) {
-                    cards.addAll(exileZone.getCards(game));
+                    cards.addAllCards(exileZone.getCards(game));
                 }
             }
             // set face up first

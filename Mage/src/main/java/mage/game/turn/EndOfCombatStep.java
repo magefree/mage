@@ -3,12 +3,12 @@
 package mage.game.turn;
 
 import java.util.UUID;
+
 import mage.constants.PhaseStep;
 import mage.game.Game;
 import mage.game.events.GameEvent.EventType;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class EndOfCombatStep extends Step {
@@ -20,7 +20,7 @@ public class EndOfCombatStep extends Step {
         this.postStepEvent = EventType.END_COMBAT_STEP_POST;
     }
 
-    public EndOfCombatStep(final EndOfCombatStep step) {
+    protected EndOfCombatStep(final EndOfCombatStep step) {
         super(step);
     }
 

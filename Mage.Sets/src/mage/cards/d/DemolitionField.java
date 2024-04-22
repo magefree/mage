@@ -54,7 +54,7 @@ public final class DemolitionField extends CardImpl {
         ));
         ability.addEffect(new SearchLibraryPutInPlayEffect(
                 new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND_A),
-                false, true, true, Outcome.PutLandInPlay
+                false, false, true
         ));
         ability.addTarget(new TargetLandPermanent(filter));
         this.addAbility(ability);

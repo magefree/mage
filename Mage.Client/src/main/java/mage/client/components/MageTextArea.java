@@ -8,19 +8,21 @@ import org.mage.card.arcane.ManaSymbols;
 import org.mage.card.arcane.UI;
 
 /**
- * Component for displaying text in mage. Supports drawing mana symbols.
+ * GUI: component for displaying text in feedback panel. Support html, mana symbols and popups.
  *
  * @author nantuko
  */
-public class MageTextArea extends JEditorPane {
+public class MageTextArea extends MageEditorPane {
+
     private String currentText;
     private int currentPanelWidth;
 
     public MageTextArea() {
-        UI.setHTMLEditorKit(this);
+        super();
         setEditable(false);
         setBackground(new Color(0, 0, 0, 0)); // transparent background
         setFocusable(false);
+        enableHyperlinksAndCardPopups();
     }
 
     @Override
@@ -32,16 +34,18 @@ public class MageTextArea extends JEditorPane {
         if (text == null) {
             return;
         }
-
-        if(text.equals(currentText) && panelWidth == currentPanelWidth)
+        if (text.equals(currentText) && panelWidth == currentPanelWidth) {
             return;
+        }
 
         currentText = text;
         currentPanelWidth = panelWidth;
 
+        // prepare text format as header and details texts
+
         final StringBuilder buffer = new StringBuilder(512);
         // Dialog is a java logical font family, so it should work on all systems
-        buffer.append("<html><body style='font-family:Dialog;font-size:");
+        buffer.append("<body style='font-family:Dialog;font-size:");
         buffer.append(GUISizeHelper.gameDialogAreaFontSizeBig);
         buffer.append("pt;margin:3px 3px 3px 3px;color: #FFFFFF'><b><center>");
 
@@ -54,7 +58,6 @@ public class MageTextArea extends JEditorPane {
         if (!text.isEmpty()) {
             buffer.append(basicText);
         }
-
         buffer.append("</b></center></body></html>");
 
         SwingUtilities.invokeLater(() -> {

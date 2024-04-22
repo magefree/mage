@@ -59,7 +59,7 @@ class GlacialCrasherEffect extends RestrictionEffect {
         staticText = "{this} can't attack unless there is a Mountain on the battlefield";
     }
 
-    public GlacialCrasherEffect(final GlacialCrasherEffect effect) {
+    private GlacialCrasherEffect(final GlacialCrasherEffect effect) {
         super(effect);
     }
 

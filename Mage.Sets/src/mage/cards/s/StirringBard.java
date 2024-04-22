@@ -7,6 +7,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.TakeTheInitiativeEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.abilities.hint.common.InitiativeHint;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.MenaceAbility;
@@ -35,7 +36,7 @@ public final class StirringBard extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
 
         // When Stirring Bard enters the battlefield, you take the initiative.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new TakeTheInitiativeEffect()));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new TakeTheInitiativeEffect()).addHint(InitiativeHint.instance));
 
         // Mantle of Inspiration — {T}: Target creature gains menace and haste until end of turn.
         Ability ability = new SimpleActivatedAbility(

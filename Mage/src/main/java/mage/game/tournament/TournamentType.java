@@ -14,11 +14,12 @@ public class TournamentType implements Serializable {
     protected int maxPlayers;
     protected int numBoosters;
     protected boolean cubeBooster;  // boosters are generated from a defined cube
-    protected boolean draft;        // or sealed
-    protected boolean limited;      // or construced
-    protected boolean elimination;  // or Swiss
-    protected boolean isRandom;
-    protected boolean isRichMan;    // or Rich Man Draft
+    protected boolean draft;        // else Sealed
+    protected boolean limited;      // else Constructed
+    protected boolean elimination;  // else Swiss
+    protected boolean isRandom;     // chaos draft
+    protected boolean isRemixed;    // boosters generated containing cards from multiple sets
+    protected boolean isRichMan;    // new boosters generated for each pick
     protected boolean isJumpstart;
 
     protected TournamentType() {
@@ -63,6 +64,10 @@ public class TournamentType implements Serializable {
 
     public boolean isRandom() {
         return this.isRandom;
+    }
+
+    public boolean isRemixed() {
+        return this.isRemixed;
     }
 
     public boolean isRichMan() {

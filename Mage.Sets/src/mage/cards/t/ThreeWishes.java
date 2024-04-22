@@ -52,12 +52,12 @@ public final class ThreeWishes extends CardImpl {
 
 class ThreeWishesExileEffect extends OneShotEffect {
 
-    public ThreeWishesExileEffect() {
+    ThreeWishesExileEffect() {
         super(Outcome.DrawCard);
         staticText = "Exile the top three cards of your library face down. Until your next turn, you may play those cards. At the beginning of your next upkeep, put any of those cards you didn't play into your graveyard";
     }
 
-    public ThreeWishesExileEffect(final ThreeWishesExileEffect effect) {
+    private ThreeWishesExileEffect(final ThreeWishesExileEffect effect) {
         super(effect);
     }
 
@@ -90,12 +90,12 @@ class ThreeWishesExileEffect extends OneShotEffect {
 
 class ThreeWishesPutIntoGraveyardEffect extends OneShotEffect {
 
-    public ThreeWishesPutIntoGraveyardEffect() {
+    ThreeWishesPutIntoGraveyardEffect() {
         super(Outcome.Neutral);
         staticText = "At the beginning of your next upkeep, put any of those cards you didn't play into your graveyard";
     }
 
-    public ThreeWishesPutIntoGraveyardEffect(final ThreeWishesPutIntoGraveyardEffect effect) {
+    private ThreeWishesPutIntoGraveyardEffect(final ThreeWishesPutIntoGraveyardEffect effect) {
         super(effect);
     }
 
@@ -121,12 +121,12 @@ class ThreeWishesPutIntoGraveyardEffect extends OneShotEffect {
 
 class ThreeWishesLookAtCardEffect extends AsThoughEffectImpl {
 
-    public ThreeWishesLookAtCardEffect() {
+    ThreeWishesLookAtCardEffect() {
         super(AsThoughEffectType.LOOK_AT_FACE_DOWN, Duration.Custom, Outcome.Benefit);
         staticText = "You may look at cards exiled with {this} as long as they remain exiled";
     }
 
-    public ThreeWishesLookAtCardEffect(final ThreeWishesLookAtCardEffect effect) {
+    private ThreeWishesLookAtCardEffect(final ThreeWishesLookAtCardEffect effect) {
         super(effect);
     }
 
@@ -166,7 +166,7 @@ class ThreeWishesPlayFromExileEffect extends AsThoughEffectImpl {
         staticText = "Until your next turn, you may play those cards";
     }
 
-    ThreeWishesPlayFromExileEffect(final ThreeWishesPlayFromExileEffect effect) {
+    private ThreeWishesPlayFromExileEffect(final ThreeWishesPlayFromExileEffect effect) {
         super(effect);
     }
 

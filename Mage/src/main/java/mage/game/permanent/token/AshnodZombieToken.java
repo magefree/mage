@@ -16,11 +16,9 @@ public final class AshnodZombieToken extends TokenImpl {
         subtype.add(SubType.ZOMBIE);
         power = new MageInt(3);
         toughness = new MageInt(3);
-
-        setOriginalExpansionSetCode("BRO");
     }
 
-    public AshnodZombieToken(final AshnodZombieToken token) {
+    private AshnodZombieToken(final AshnodZombieToken token) {
         super(token);
     }
 

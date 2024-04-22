@@ -26,7 +26,7 @@ public final class BasilicaScreecher extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // Extort (Whenever you cast a spell, you pay {WB}. If you do, each opponent loses 1 life and you gain that much life.)
+        // Extort (Whenever you cast a spell, you may pay {WB}. If you do, each opponent loses 1 life and you gain that much life.)
         this.addAbility(new ExtortAbility());
     }
 

@@ -9,8 +9,7 @@ import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
+import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 
 /**
@@ -18,12 +17,6 @@ import mage.target.TargetPermanent;
  * @author weirddan455
  */
 public final class CivicGardener extends CardImpl {
-
-    private static final FilterPermanent filter = new FilterPermanent("creature or land");
-
-    static {
-        filter.add(Predicates.or(CardType.CREATURE.getPredicate(), CardType.LAND.getPredicate()));
-    }
 
     public CivicGardener(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
@@ -35,7 +28,7 @@ public final class CivicGardener extends CardImpl {
 
         // Whenever Civic Gardener attacks, untap target creature or land.
         Ability ability = new AttacksTriggeredAbility(new UntapTargetEffect());
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_CREATURE_OR_LAND));
         this.addAbility(ability);
     }
 

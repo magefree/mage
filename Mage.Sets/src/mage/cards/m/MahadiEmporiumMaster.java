@@ -24,8 +24,7 @@ public final class MahadiEmporiumMaster extends CardImpl {
     public MahadiEmporiumMaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add(SubType.CAT);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DEVIL);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

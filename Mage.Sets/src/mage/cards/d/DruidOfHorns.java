@@ -53,7 +53,7 @@ class DruidOfHornsTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever you cast an Aura spell that targets {this}, ");
     }
 
-    public DruidOfHornsTriggeredAbility(final DruidOfHornsTriggeredAbility ability) {
+    private DruidOfHornsTriggeredAbility(final DruidOfHornsTriggeredAbility ability) {
         super(ability);
     }
 

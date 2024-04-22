@@ -51,12 +51,12 @@ public final class ClingingMists extends CardImpl {
 
 class ClingingMistsEffect extends OneShotEffect {
 
-    public ClingingMistsEffect() {
+    ClingingMistsEffect() {
         super(Outcome.Tap);
         staticText = "tap all attacking creatures. Those creatures don't untap during their controller's next untap step";
     }
 
-    public ClingingMistsEffect(final ClingingMistsEffect effect) {
+    private ClingingMistsEffect(final ClingingMistsEffect effect) {
         super(effect);
     }
 

@@ -45,7 +45,7 @@ public final class PriceOfKnowledge extends CardImpl {
 
 class PriceOfKnowledgeEffect extends OneShotEffect {
 
-    public PriceOfKnowledgeEffect(final PriceOfKnowledgeEffect effect) {
+    private PriceOfKnowledgeEffect(final PriceOfKnowledgeEffect effect) {
         super(effect);
     }
 
@@ -56,7 +56,7 @@ class PriceOfKnowledgeEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
+        Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (targetPlayer != null) {
             int xValue = targetPlayer.getHand().size();
             if (xValue > 0) {

@@ -51,7 +51,7 @@ class CopperhornScoutTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new CopperhornScoutUntapEffect(), false);
     }
 
-    public CopperhornScoutTriggeredAbility(final CopperhornScoutTriggeredAbility ability) {
+    private CopperhornScoutTriggeredAbility(final CopperhornScoutTriggeredAbility ability) {
         super(ability);
     }
 

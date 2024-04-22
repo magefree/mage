@@ -69,7 +69,7 @@ public class DelveAbility extends SimpleStaticAbility implements AlternateManaPa
         this.addHint(new ValueHint("Cards in your graveyard", cardsInGraveyard));
     }
 
-    public DelveAbility(final DelveAbility ability) {
+    protected DelveAbility(final DelveAbility ability) {
         super(ability);
     }
 
@@ -130,7 +130,7 @@ class DelveSpecialAction extends SpecialAction {
         this.addEffect(new DelveEffect());
     }
 
-    public DelveSpecialAction(final DelveSpecialAction ability) {
+    protected DelveSpecialAction(final DelveSpecialAction ability) {
         super(ability);
     }
 
@@ -147,7 +147,7 @@ class DelveEffect extends OneShotEffect {
         this.staticText = "Delve (Each card you exile from your graveyard while casting this spell pays for {1}.)";
     }
 
-    public DelveEffect(final DelveEffect effect) {
+    protected DelveEffect(final DelveEffect effect) {
         super(effect);
     }
 

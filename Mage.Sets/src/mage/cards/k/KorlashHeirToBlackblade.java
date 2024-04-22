@@ -35,7 +35,7 @@ public final class KorlashHeirToBlackblade extends CardImpl {
 
     public KorlashHeirToBlackblade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ZOMBIE);
         this.subtype.add(SubType.WARRIOR);
 
@@ -51,7 +51,7 @@ public final class KorlashHeirToBlackblade extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{1}{B}")));
         
         // Grandeur - Discard another card named Korlash, Heir to Blackblade: Search your library for up to two Swamp cards, put them onto the battlefield tapped, then shuffle your library.
-        effect = new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, 2, filterCard), true, true);
+        effect = new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, 2, filterCard), true);
         effect.setText("Search your library for up to two Swamp cards, put them onto the battlefield tapped, then shuffle.");
         this.addAbility(new GrandeurAbility(effect, "Korlash, Heir to Blackblade"));
     }

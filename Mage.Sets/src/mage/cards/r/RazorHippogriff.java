@@ -52,7 +52,7 @@ public final class RazorHippogriff extends CardImpl {
 
 class RazorHippogriffGainLifeEffect extends OneShotEffect {
 
-    public RazorHippogriffGainLifeEffect() {
+    RazorHippogriffGainLifeEffect() {
         super(Outcome.GainLife);
         staticText = "you gain life equal to that card's mana value.";
     }

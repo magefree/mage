@@ -26,7 +26,7 @@ public final class ThantisTheWarweaver extends CardImpl {
     public ThantisTheWarweaver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{R}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPIDER);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);

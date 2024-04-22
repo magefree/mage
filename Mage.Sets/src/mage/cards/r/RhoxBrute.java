@@ -25,7 +25,7 @@ public final class RhoxBrute extends CardImpl {
         this.toughness = new MageInt(4);
     }
 
-    public RhoxBrute (final RhoxBrute card) {
+    private RhoxBrute(final RhoxBrute card) {
         super(card);
     }
 

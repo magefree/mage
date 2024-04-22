@@ -42,7 +42,7 @@ public final class AstralDragon extends CardImpl {
                 false, null, 3, 3, true);
         effect.setText("create two tokens that are copies of target noncreature permanent, " +
                 "except they're 3/3 Dragon creatures in addition to their other types, and they have flying");
-        effect.setAdditionalSubType(SubType.DRAGON);
+        effect.withAdditionalSubType(SubType.DRAGON);
         Ability ability = new EntersBattlefieldTriggeredAbility(effect);
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability.withFlavorWord("Project Image"));

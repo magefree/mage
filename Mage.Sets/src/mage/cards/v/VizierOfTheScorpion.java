@@ -36,7 +36,7 @@ public final class VizierOfTheScorpion extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Vizier of the Scorpion enters the battlefield, amass 1.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new AmassEffect(1)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new AmassEffect(1, SubType.ZOMBIE)));
 
         // Zombie tokens you control have deathtouch.
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(

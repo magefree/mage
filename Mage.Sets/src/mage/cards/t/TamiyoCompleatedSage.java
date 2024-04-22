@@ -37,7 +37,7 @@ public final class TamiyoCompleatedSage extends CardImpl {
     public TamiyoCompleatedSage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{G}{G/U/P}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.TAMIYO);
         this.setStartingLoyalty(5);
 

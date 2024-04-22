@@ -49,7 +49,7 @@ class SylvanOfferingEffect1 extends OneShotEffect {
         this.staticText = "Choose an opponent. You and that player each create an X/X green Treefolk creature token";
     }
 
-    SylvanOfferingEffect1(final SylvanOfferingEffect1 effect) {
+    private SylvanOfferingEffect1(final SylvanOfferingEffect1 effect) {
         super(effect);
     }
 
@@ -86,7 +86,7 @@ class SylvanOfferingEffect2 extends OneShotEffect {
         this.staticText = "<br>Choose an opponent. You and that player each create X 1/1 green Elf Warrior creature tokens";
     }
 
-    SylvanOfferingEffect2(final SylvanOfferingEffect2 effect) {
+    private SylvanOfferingEffect2(final SylvanOfferingEffect2 effect) {
         super(effect);
     }
 

@@ -39,7 +39,7 @@ public final class LatticeBladeMantis extends CardImpl {
         // Whenever Lattice-Blade Mantis attacks, you may remove an oil counter from it. If you do, untap it and it gets +1/+1 until end of turn.
         this.addAbility(new AttacksTriggeredAbility(new DoIfCostPaid(
                 new UntapSourceEffect().setText("untap it"),
-                new RemoveCountersSourceCost(CounterType.OIL.createInstance())
+                new RemoveCountersSourceCost(CounterType.OIL.createInstance()).setText("remove an oil counter from it")
         ).addEffect(new BoostSourceEffect(1, 1, Duration.EndOfTurn, "and it"))));
     }
 

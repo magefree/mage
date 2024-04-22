@@ -65,7 +65,7 @@ class ImpetuousProtegeEffect extends OneShotEffect {
         this.staticText = "it gets +X/+0 until end of turn, where X is the greatest power among tapped creatures your opponents control";
     }
 
-    ImpetuousProtegeEffect(final ImpetuousProtegeEffect effect) {
+    private ImpetuousProtegeEffect(final ImpetuousProtegeEffect effect) {
         super(effect);
     }
 

@@ -9,6 +9,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
+import mage.game.events.DamagedBatchForOnePermanentEvent;
 import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
 import mage.watchers.Watcher;
@@ -23,7 +24,7 @@ public final class AegarTheFreezingFlame extends CardImpl {
     public AegarTheFreezingFlame(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GIANT);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(3);
@@ -56,14 +57,22 @@ class AegarTheFreezingFlameTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PERMANENT;
+        return event.getType() == GameEvent.EventType.DAMAGED_BATCH_FOR_ONE_PERMANENT;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        DamagedEvent dEvent = (DamagedEvent) event;
-        if (dEvent.getExcess() < 1
-                || !game.getOpponents(getControllerId()).contains(game.getControllerId(event.getTargetId()))) {
+        DamagedBatchForOnePermanentEvent dEvent = (DamagedBatchForOnePermanentEvent) event;
+
+        int excess = dEvent.getEvents()
+                .stream()
+                .mapToInt(DamagedEvent::getExcess)
+                .sum();
+
+        boolean controlledByOpponent =
+                game.getOpponents(getControllerId()).contains(game.getControllerId(event.getTargetId()));
+
+        if (excess < 1 || !controlledByOpponent) {
             return false;
         }
         AegarTheFreezingFlameWatcher watcher = game.getState().getWatcher(AegarTheFreezingFlameWatcher.class);

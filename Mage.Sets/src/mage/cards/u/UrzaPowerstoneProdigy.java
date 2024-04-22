@@ -30,7 +30,7 @@ public final class UrzaPowerstoneProdigy extends CardImpl {
     public UrzaPowerstoneProdigy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ARTIFICER);
         this.power = new MageInt(1);
@@ -49,7 +49,7 @@ public final class UrzaPowerstoneProdigy extends CardImpl {
         // Whenever you discard one or more artifact cards, create a tapped Powerstone token. This ability triggers only once each turn.
         this.addAbility(new DiscardCardControllerTriggeredAbility(
                 new CreateTokenEffect(new PowerstoneToken(), 1, true), false, filter
-        ).setTriggersOnce(true));
+        ).setTriggersOnceEachTurn(true));
     }
 
     private UrzaPowerstoneProdigy(final UrzaPowerstoneProdigy card) {

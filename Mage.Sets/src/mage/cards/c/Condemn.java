@@ -43,12 +43,12 @@ public final class Condemn extends CardImpl {
 
 class CondemnEffect extends OneShotEffect {
 
-    public CondemnEffect() {
+    CondemnEffect() {
         super(Outcome.Detriment);
         staticText = "Its controller gains life equal to its toughness";
     }
 
-    public CondemnEffect(final CondemnEffect effect) {
+    private CondemnEffect(final CondemnEffect effect) {
         super(effect);
     }
 

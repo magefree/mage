@@ -1,5 +1,3 @@
-
-
 package mage.cards.r;
 
 import java.util.UUID;
@@ -18,7 +16,6 @@ import mage.filter.common.FilterCreaturePermanent;
  * @author LevelX2
  */
 
-
 public final class RiotControl extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature your opponents control");
@@ -29,9 +26,9 @@ public final class RiotControl extends CardImpl {
     public RiotControl(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}");
 
-
         // Gain 1 life for each creature your opponents control. Prevent all damage that would be dealt to you this turn.
-        this.getSpellAbility().addEffect(new GainLifeEffect(new PermanentsOnBattlefieldCount(filter)));
+        this.getSpellAbility().addEffect(new GainLifeEffect(new PermanentsOnBattlefieldCount(filter))
+                .setText("You gain 1 life for each creature your opponents control"));
         this.getSpellAbility().addEffect(new PreventDamageToControllerEffect(Duration.EndOfTurn));
 
     }

@@ -45,12 +45,12 @@ public final class Viseling extends CardImpl {
 
 class ViselingEffect extends OneShotEffect {
 
-    public ViselingEffect() {
+    ViselingEffect() {
         super(Outcome.Damage);
         this.staticText = "{this} deals X damage to that player, where X is the number of cards in their hand minus 4";
     }
 
-    public ViselingEffect(final ViselingEffect effect) {
+    private ViselingEffect(final ViselingEffect effect) {
         super(effect);
     }
 

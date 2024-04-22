@@ -78,6 +78,7 @@ enum MishrasDominationCondition implements Condition {
                 .filter(Objects::nonNull)
                 .map(Controllable::getControllerId)
                 .map(source::isControlledBy)
+                .orElse(false)
                 .equals(value);
     }
 }

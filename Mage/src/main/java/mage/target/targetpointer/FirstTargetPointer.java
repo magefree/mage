@@ -6,7 +6,7 @@ public class FirstTargetPointer extends NthTargetPointer {
         super(1);
     }
 
-    public FirstTargetPointer(final FirstTargetPointer firstTargetPointer) {
+    protected FirstTargetPointer(final FirstTargetPointer firstTargetPointer) {
         super(firstTargetPointer);
     }
 

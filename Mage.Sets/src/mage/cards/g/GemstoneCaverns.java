@@ -39,7 +39,7 @@ public final class GemstoneCaverns extends CardImpl {
 
     public GemstoneCaverns(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // If Gemstone Caverns is in your opening hand and you're not playing first, you may begin the game with Gemstone Caverns on the battlefield with a luck counter on it. If you do, exile a card from your hand.
         this.addAbility(new GemstoneCavernsAbility());
@@ -71,7 +71,7 @@ class GemstoneCavernsAbility extends StaticAbility implements OpeningHandAction 
         super(Zone.HAND, new GemstoneCavernsEffect());
     }
 
-    public GemstoneCavernsAbility(final GemstoneCavernsAbility ability) {
+    private GemstoneCavernsAbility(final GemstoneCavernsAbility ability) {
         super(ability);
     }
 
@@ -109,7 +109,7 @@ class GemstoneCavernsEffect extends OneShotEffect {
         this.staticText = "you may begin the game with {this} on the battlefield with a luck counter on it. If you do, exile a card from your hand";
     }
 
-    GemstoneCavernsEffect(final GemstoneCavernsEffect effect) {
+    private GemstoneCavernsEffect(final GemstoneCavernsEffect effect) {
         super(effect);
     }
 

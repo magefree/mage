@@ -32,7 +32,7 @@ public final class JolraelEmpressOfBeasts extends CardImpl {
 
     public JolraelEmpressOfBeasts(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SPELLSHAPER);
         this.power = new MageInt(3);
@@ -58,12 +58,12 @@ public final class JolraelEmpressOfBeasts extends CardImpl {
 
 class JolraelEmpressOfBeastsEffect extends OneShotEffect {
 
-    public JolraelEmpressOfBeastsEffect() {
+    JolraelEmpressOfBeastsEffect() {
         super(Outcome.Benefit);
         this.staticText = "All lands target player controls become 3/3 creatures until end of turn. They're still lands.";
     }
 
-    public JolraelEmpressOfBeastsEffect(final JolraelEmpressOfBeastsEffect effect) {
+    private JolraelEmpressOfBeastsEffect(final JolraelEmpressOfBeastsEffect effect) {
         super(effect);
     }
 

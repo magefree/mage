@@ -40,7 +40,7 @@ public final class ContagionClasp extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ContagionClasp (final ContagionClasp card) {
+    private ContagionClasp(final ContagionClasp card) {
         super(card);
     }
 

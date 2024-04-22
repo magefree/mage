@@ -31,7 +31,7 @@ public final class Taniwha extends CardImpl {
 
     public Taniwha(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SERPENT);
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);
@@ -58,12 +58,12 @@ public final class Taniwha extends CardImpl {
 
 class TaniwhaEffect extends OneShotEffect {
 
-    public TaniwhaEffect() {
+    TaniwhaEffect() {
         super(Outcome.Detriment);
         this.staticText = "all lands you control phase out";
     }
 
-    public TaniwhaEffect(final TaniwhaEffect effect) {
+    private TaniwhaEffect(final TaniwhaEffect effect) {
         super(effect);
     }
 

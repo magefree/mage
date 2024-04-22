@@ -64,7 +64,7 @@ class GoblinGuideTriggeredAbility extends TriggeredAbilityImpl {
         this.text = text;
     }
 
-    public GoblinGuideTriggeredAbility(final GoblinGuideTriggeredAbility ability) {
+    private GoblinGuideTriggeredAbility(final GoblinGuideTriggeredAbility ability) {
         super(ability);
         this.text = ability.text;
     }
@@ -103,11 +103,11 @@ class GoblinGuideTriggeredAbility extends TriggeredAbilityImpl {
 
 class GoblinGuideEffect extends OneShotEffect {
 
-    public GoblinGuideEffect() {
+    GoblinGuideEffect() {
         super(Outcome.DrawCard);
     }
 
-    public GoblinGuideEffect(final GoblinGuideEffect effect) {
+    private GoblinGuideEffect(final GoblinGuideEffect effect) {
         super(effect);
     }
 

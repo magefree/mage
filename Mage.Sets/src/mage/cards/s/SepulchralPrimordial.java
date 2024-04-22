@@ -78,12 +78,12 @@ enum SepulchralPrimordialAdjuster implements TargetAdjuster {
 
 class SepulchralPrimordialEffect extends OneShotEffect {
 
-    public SepulchralPrimordialEffect() {
+    SepulchralPrimordialEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "for each opponent, you may put up to one target creature card from that player's graveyard onto the battlefield under your control";
     }
 
-    public SepulchralPrimordialEffect(final SepulchralPrimordialEffect effect) {
+    private SepulchralPrimordialEffect(final SepulchralPrimordialEffect effect) {
         super(effect);
     }
 

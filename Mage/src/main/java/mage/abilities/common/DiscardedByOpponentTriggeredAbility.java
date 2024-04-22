@@ -5,11 +5,9 @@ import mage.abilities.effects.Effect;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.stack.StackObject;
 
 /**
- *
  * @author Styxo
  */
 public class DiscardedByOpponentTriggeredAbility extends TriggeredAbilityImpl {
@@ -18,12 +16,13 @@ public class DiscardedByOpponentTriggeredAbility extends TriggeredAbilityImpl {
         this(effect, false);
     }
 
-    public DiscardedByOpponentTriggeredAbility(Effect effect, boolean optional) {
-        super(Zone.GRAVEYARD, effect, optional);
-        setTriggerPhrase("When a spell or ability an opponent controls causes you to discard this card, ");
+    public DiscardedByOpponentTriggeredAbility(Effect effect, boolean textCardName) {
+        super(Zone.GRAVEYARD, effect, false);
+        setTriggerPhrase("When a spell or ability an opponent controls causes you to discard "
+                + (textCardName ? "{this}, " : "this card, "));
     }
 
-    public DiscardedByOpponentTriggeredAbility(final DiscardedByOpponentTriggeredAbility ability) {
+    protected DiscardedByOpponentTriggeredAbility(final DiscardedByOpponentTriggeredAbility ability) {
         super(ability);
     }
 

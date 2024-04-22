@@ -14,6 +14,7 @@ import mage.client.components.KeyboundButton;
 import mage.client.components.MageComponents;
 import mage.client.components.ext.dlg.DialogManager;
 import mage.client.components.layout.RelativeLayout;
+import mage.client.components.tray.MageTray;
 import mage.client.dialog.*;
 import mage.client.dialog.CardInfoWindowDialog.ShowType;
 import mage.client.game.FeedbackPanel.FeedbackMode;
@@ -28,6 +29,7 @@ import mage.constants.*;
 import mage.game.events.PlayerQueryEvent;
 import mage.players.PlayableObjectStats;
 import mage.players.PlayableObjectsList;
+import mage.util.MultiAmountMessage;
 import mage.view.*;
 import org.apache.log4j.Logger;
 import org.mage.plugins.card.utils.impl.ImageManagerImpl;
@@ -70,8 +72,8 @@ public final class GamePanel extends javax.swing.JPanel {
     private static final String CMD_AUTO_ORDER_NAME_LAST = "cmdAutoOrderNameLast";
     private static final String CMD_AUTO_ORDER_RESET_ALL = "cmdAutoOrderResetAll";
 
-    private final Map<UUID, PlayAreaPanel> players = new HashMap<>();
-    private final Map<UUID, Boolean> playersWhoLeft = new HashMap<>();
+    private final Map<UUID, PlayAreaPanel> players = new LinkedHashMap<>();
+    private final Map<UUID, Boolean> playersWhoLeft = new LinkedHashMap<>();
 
     // non modal frames
     private final Map<UUID, CardInfoWindowDialog> exiles = new HashMap<>();
@@ -84,6 +86,8 @@ public final class GamePanel extends javax.swing.JPanel {
     private final Map<String, CardInfoWindowDialog> sideboardWindows = new HashMap<>();
     private final ArrayList<ShowCardsDialog> pickTarget = new ArrayList<>();
     private final ArrayList<PickPileDialog> pickPile = new ArrayList<>();
+    private final Map<String, CardHintsHelperDialog> cardHintsWindows = new LinkedHashMap<>();
+
     private UUID gameId;
     private UUID playerId; // playerId of the player
     GamePane gamePane;
@@ -99,7 +103,7 @@ public final class GamePanel extends javax.swing.JPanel {
     private boolean menuNameSet = false;
     private boolean handCardsOfOpponentAvailable = false;
 
-    private Map<String, Card> loadedCards = new HashMap<>();
+    private final Map<String, Card> loadedCards = new HashMap<>();
 
     private int storedHeight;
     private Map<String, HoverButton> hoverButtons;
@@ -121,16 +125,63 @@ public final class GamePanel extends javax.swing.JPanel {
     private JPopupMenu popupMenuTriggerOrder;
 
     // keep game data for updates/re-draws
-    // warning, it keeps updates from GAME_UPDATE events only and ignore another events with GameView
-    static class LastGameData {
+    public static class LastGameData {
+        int messageId;
         GameView game;
         boolean showPlayable;
         Map<String, Serializable> options;
         Set<UUID> targets;
+        Map<UUID, CardView> allCardsIndex = new HashMap<>(); // fast access to all game objects (for cards hints, etc)
+
+        private void setNewGame(GameView game) {
+            this.game = game;
+            prepareAllCardsIndex();
+        }
+
+        private void prepareAllCardsIndex() {
+            this.allCardsIndex.clear();
+            if (this.game == null) {
+                return;
+            }
+
+            this.game.getMyHand().values().forEach(c -> this.allCardsIndex.put(c.getId(), c));
+            this.game.getStack().values().forEach(c -> this.allCardsIndex.put(c.getId(), c));
+            this.game.getExile()
+                    .stream()
+                    .flatMap(s -> s.values().stream())
+                    .forEach(c -> this.allCardsIndex.put(c.getId(), c));
+            this.game.getLookedAt()
+                    .stream()
+                    .flatMap(s -> s.getCards().values().stream())
+                    .filter(c -> c instanceof CardView)
+                    .map(c -> (CardView) c)
+                    .forEach(c -> this.allCardsIndex.put(c.getId(), c));
+            this.game.getRevealed().stream()
+                    .flatMap(s -> s.getCards().values().stream())
+                    .forEach(c -> this.allCardsIndex.put(c.getId(), c));
+            this.game.getPlayers().forEach(player -> {
+                player.getBattlefield().values().forEach(c -> this.allCardsIndex.put(c.getId(), c));
+                player.getGraveyard().values().forEach(c -> this.allCardsIndex.put(c.getId(), c));
+                Optional.ofNullable(player.getTopCard()).ifPresent(c -> this.allCardsIndex.put(c.getId(), c));
+                // TODO: add support of dungeon, emblem all another non-card objects
+                player.getCommandObjectList()
+                        .stream()
+                        .filter(c -> c instanceof CardView)
+                        .map(c -> (CardView) c)
+                        .forEach(c -> this.allCardsIndex.put(c.getId(), c));
+            });
+        }
+
+        public CardView findCard(UUID id) {
+            return this.allCardsIndex.getOrDefault(id, null);
+        }
     }
 
     private final LastGameData lastGameData = new LastGameData();
 
+    public LastGameData getLastGameData() {
+        return this.lastGameData;
+    }
 
     public GamePanel() {
         initComponents = true;
@@ -223,8 +274,8 @@ public final class GamePanel extends javax.swing.JPanel {
     public void cleanUp() {
         MageFrame.removeGame(gameId);
         saveDividerLocations();
-        this.gameChatPanel.disconnect();
-        this.userChatPanel.disconnect();
+        this.gameChatPanel.cleanUp();;
+        this.userChatPanel.cleanUp();
 
         this.removeListener();
 
@@ -270,6 +321,10 @@ public final class GamePanel extends javax.swing.JPanel {
             windowDialog.removeDialog();
         }
         for (CardInfoWindowDialog windowDialog : companion.values()) {
+            windowDialog.cleanUp();
+            windowDialog.removeDialog();
+        }
+        for (CardHintsHelperDialog windowDialog : cardHintsWindows.values()) {
             windowDialog.cleanUp();
             windowDialog.removeDialog();
         }
@@ -348,6 +403,9 @@ public final class GamePanel extends javax.swing.JPanel {
         for (CardInfoWindowDialog windowDialog : sideboardWindows.values()) {
             windowDialog.changeGUISize();
         }
+        for (CardHintsHelperDialog windowDialog : cardHintsWindows.values()) {
+            windowDialog.changeGUISize();
+        }
         for (ShowCardsDialog windowDialog : pickTarget) {
             windowDialog.changeGUISize();
         }
@@ -365,7 +423,6 @@ public final class GamePanel extends javax.swing.JPanel {
         jSplitPane1.setDividerSize(GUISizeHelper.dividerBarSize);
         jSplitPane2.setDividerSize(GUISizeHelper.dividerBarSize);
 
-        txtSpellsCast.setFont(new Font(GUISizeHelper.gameDialogAreaFont.getFontName(), Font.BOLD, GUISizeHelper.gameDialogAreaFont.getSize()));
         txtHoldPriority.setFont(new Font(GUISizeHelper.gameDialogAreaFont.getFontName(), Font.BOLD, GUISizeHelper.gameDialogAreaFont.getSize()));
         GUISizeHelper.changePopupMenuFont(popupMenuTriggerOrder);
 
@@ -389,6 +446,7 @@ public final class GamePanel extends javax.swing.JPanel {
         stackObjects.setPreferredSize(newDimension);
         stackObjects.setMinimumSize(newDimension);
         stackObjects.setMaximumSize(newDimension);
+        stackObjects.changeGUISize(); // must call to cards fit
 
         newDimension = new Dimension(newStackWidth, (int) pnlShortCuts.getPreferredSize().getHeight());
         pnlShortCuts.setPreferredSize(newDimension);
@@ -443,7 +501,7 @@ public final class GamePanel extends javax.swing.JPanel {
                 pnlShortCuts.revalidate();
                 pnlShortCuts.repaint();
                 for (PlayAreaPanel p : players.values()) {
-                    p.sizePlayer(smallMode);
+                    p.setSizeMode(smallMode);
                 }
             }
         } else if (smallMode) {
@@ -455,7 +513,7 @@ public final class GamePanel extends javax.swing.JPanel {
             pnlShortCuts.revalidate();
             pnlShortCuts.repaint();
             for (PlayAreaPanel p : players.values()) {
-                p.sizePlayer(smallMode);
+                p.setSizeMode(smallMode);
             }
         }
 
@@ -473,7 +531,7 @@ public final class GamePanel extends javax.swing.JPanel {
         MageFrame.addGame(gameId, this);
         this.feedbackPanel.init(gameId);
         this.feedbackPanel.clear();
-        this.abilityPicker.init(gameId);
+        this.abilityPicker.init(gameId, bigCard);
         this.btnConcede.setVisible(true);
         this.btnStopWatching.setVisible(false);
         this.btnSwitchHands.setVisible(false);
@@ -500,6 +558,10 @@ public final class GamePanel extends javax.swing.JPanel {
         } else {
             // play start sound
             AudioManager.playYourGameStarted();
+            if (!AppUtil.isAppActive()) {
+                MageTray.instance.displayMessage("Your game has started!");
+                MageTray.instance.blink();
+            }
         }
     }
 
@@ -570,7 +632,7 @@ public final class GamePanel extends javax.swing.JPanel {
         }
     }
 
-    public synchronized void init(GameView game) {
+    public synchronized void init(int messageId, GameView game, boolean callGameUpdateAfterInit) {
         addPlayers(game);
         // default menu states
         setMenuStates(
@@ -580,7 +642,9 @@ public final class GamePanel extends javax.swing.JPanel {
                 holdingPriority
         );
 
-        updateGame(game);
+        if (callGameUpdateAfterInit) {
+            updateGame(messageId, game);
+        }
     }
 
     private void addPlayers(GameView game) {
@@ -604,7 +668,8 @@ public final class GamePanel extends javax.swing.JPanel {
         }
         PlayerView player = game.getPlayers().get(playerSeat);
         PlayAreaPanel playAreaPanel = new PlayAreaPanel(player, bigCard, gameId, game.getPriorityTime(), this,
-                new PlayAreaPanelOptions(game.isPlayer(), player.isHuman(), game.isPlayer(), game.isRollbackTurnsAllowed(), row == 0));
+                new PlayAreaPanelOptions(game.isPlayer(), player.isHuman(), game.isPlayer(),
+                        game.isRollbackTurnsAllowed(), row == 0));
         players.put(player.getPlayerId(), playAreaPanel);
         playersWhoLeft.put(player.getPlayerId(), false);
         GridBagConstraints c = new GridBagConstraints();
@@ -648,7 +713,8 @@ public final class GamePanel extends javax.swing.JPanel {
             }
             player = game.getPlayers().get(playerNum);
             PlayAreaPanel playerPanel = new PlayAreaPanel(player, bigCard, gameId, game.getPriorityTime(), this,
-                    new PlayAreaPanelOptions(game.isPlayer(), player.isHuman(), false, game.isRollbackTurnsAllowed(), row == 0));
+                    new PlayAreaPanelOptions(game.isPlayer(), player.isHuman(), false, game.isRollbackTurnsAllowed(),
+                            row == 0));
             players.put(player.getPlayerId(), playerPanel);
             playersWhoLeft.put(player.getPlayerId(), false);
             c = new GridBagConstraints();
@@ -674,7 +740,7 @@ public final class GamePanel extends javax.swing.JPanel {
             }
         }
         for (PlayAreaPanel p : players.values()) {
-            p.sizePlayer(smallMode);
+            p.setSizeMode(smallMode);
         }
 
         GridBagConstraints panelC = new GridBagConstraints();
@@ -703,31 +769,37 @@ public final class GamePanel extends javax.swing.JPanel {
          */
     }
 
-    public synchronized void updateGame(GameView game) {
-        updateGame(game, false, null, null);
+    public synchronized void updateGame(int messageId, GameView game) {
+        updateGame(messageId, game, false, null, null);
     }
 
-    public synchronized void updateGame(GameView game, boolean showPlayable, Map<String, Serializable> options, Set<UUID> targets) {
-        keepLastGameData(game, showPlayable, options, targets);
+    public synchronized void updateGame(int messageId, GameView game, boolean showPlayable, Map<String, Serializable> options, Set<UUID> targets) {
+        keepLastGameData(messageId, game, showPlayable, options, targets);
+
+        if (this.players.isEmpty() && !game.getPlayers().isEmpty()) {
+            logger.warn("Found empty players list, trying to init game again (possible reason: reconnection)");
+            init(messageId, game, false);
+        }
+
         prepareSelectableView();
         updateGame();
     }
 
     public synchronized void updateGame() {
-        if (playerId == null && lastGameData.game.getWatchedHands() == null) {
+        if (playerId == null && lastGameData.game.getWatchedHands().isEmpty()) {
             this.handContainer.setVisible(false);
         } else {
             this.handContainer.setVisible(true);
             handCards.clear();
-            if (lastGameData.game.getWatchedHands() != null) {
+            if (!lastGameData.game.getWatchedHands().isEmpty()) {
                 for (Map.Entry<String, SimpleCardsView> hand : lastGameData.game.getWatchedHands().entrySet()) {
                     handCards.put(hand.getKey(), CardsViewUtil.convertSimple(hand.getValue(), loadedCards));
                 }
             }
             if (playerId != null) {
-                handCards.put(YOUR_HAND, lastGameData.game.getHand());
+                handCards.put(YOUR_HAND, lastGameData.game.getMyHand());
                 // Get opponents hand cards if available (only possible for players)
-                if (lastGameData.game.getOpponentHands() != null) {
+                if (!lastGameData.game.getOpponentHands().isEmpty()) {
                     for (Map.Entry<String, SimpleCardsView> hand : lastGameData.game.getOpponentHands().entrySet()) {
                         handCards.put(hand.getKey(), CardsViewUtil.convertSimple(hand.getValue(), loadedCards));
                     }
@@ -747,7 +819,7 @@ public final class GamePanel extends javax.swing.JPanel {
             if (playerId != null) {
                 // set visible only if we have any other hand visible than ours
                 btnSwitchHands.setVisible(handCards.size() > 1);
-                boolean change = (handCardsOfOpponentAvailable != (lastGameData.game.getOpponentHands() != null));
+                boolean change = (handCardsOfOpponentAvailable == lastGameData.game.getOpponentHands().isEmpty());
                 if (change) {
                     handCardsOfOpponentAvailable = !handCardsOfOpponentAvailable;
                     if (handCardsOfOpponentAvailable) {
@@ -773,12 +845,6 @@ public final class GamePanel extends javax.swing.JPanel {
         } else {
             logger.debug("Step is empty");
             this.txtStep.setText("");
-        }
-        if (lastGameData.game.getSpellsCastCurrentTurn() > 0 && PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAME_SHOW_STORM_COUNTER, "true").equals("true")) {
-            this.txtSpellsCast.setVisible(true);
-            this.txtSpellsCast.setText(' ' + Integer.toString(lastGameData.game.getSpellsCastCurrentTurn()) + ' ');
-        } else {
-            this.txtSpellsCast.setVisible(false);
         }
 
         this.txtActivePlayer.setText(lastGameData.game.getActivePlayerName());
@@ -827,7 +893,7 @@ public final class GamePanel extends javax.swing.JPanel {
                     if (windowDialog.isClosed()) {
                         graveyardWindows.remove(player.getName());
                     } else {
-                        windowDialog.loadCards(player.getGraveyard(), bigCard, gameId, false);
+                        windowDialog.loadCardsAndShow(player.getGraveyard(), bigCard, gameId, false);
                     }
                 }
 
@@ -838,7 +904,7 @@ public final class GamePanel extends javax.swing.JPanel {
                     if (windowDialog.isClosed()) {
                         sideboardWindows.remove(player.getName());
                     } else {
-                        windowDialog.loadCards(player.getSideboard(), bigCard, gameId, false);
+                        windowDialog.loadCardsAndShow(player.getSideboard(), bigCard, gameId, false);
                     }
                 }
 
@@ -884,15 +950,24 @@ public final class GamePanel extends javax.swing.JPanel {
         GameManager.instance.setStackSize(lastGameData.game.getStack().size());
         displayStack(lastGameData.game, bigCard, feedbackPanel, gameId);
 
+        // auto-show exile views
         for (ExileView exile : lastGameData.game.getExile()) {
-            if (!exiles.containsKey(exile.getId())) {
-                CardInfoWindowDialog newExile = new CardInfoWindowDialog(ShowType.EXILE, exile.getName());
-                exiles.put(exile.getId(), newExile);
-                MageFrame.getDesktop().add(newExile, JLayeredPane.PALETTE_LAYER);
-                newExile.show();
+            CardInfoWindowDialog exileWindow = exiles.getOrDefault(exile.getId(), null);
+            if (exileWindow == null) {
+                exileWindow = new CardInfoWindowDialog(ShowType.EXILE, exile.getName());
+                exiles.put(exile.getId(), exileWindow);
+                MageFrame.getDesktop().add(exileWindow, JLayeredPane.PALETTE_LAYER);
+                exileWindow.show();
             }
-            exiles.get(exile.getId()).loadCards(exile, bigCard, gameId);
+            exileWindow.loadCardsAndShow(exile, bigCard, gameId);
         }
+
+        // update open or remove closed card hints windows
+        clearClosedCardHintsWindows();
+        cardHintsWindows.forEach((s, windowDialog) -> {
+            // TODO: optimize for multiple windows (prepare data here and send it for filters/groups)
+            windowDialog.loadHints(lastGameData.game);
+        });
 
         // reveal and look at dialogs can unattached, so windows opened by game doesn't have it
         showRevealed(lastGameData.game);
@@ -943,6 +1018,7 @@ public final class GamePanel extends javax.swing.JPanel {
             }
         }
 
+        //logger.info("game update, message = " + lastGameData.messageId + ", options = " + lastGameData.options + ", priority = " + lastGameData.game.getPriorityPlayerName());
         feedbackPanel.disableUndo();
         feedbackPanel.updateOptions(lastGameData.options);
 
@@ -1194,10 +1270,8 @@ public final class GamePanel extends javax.swing.JPanel {
     // Called if the game frame is deactivated because the tabled the deck editor or other frames go to foreground
     public void deactivated() {
         // hide the non modal windows (because otherwise they are shown on top of the new active pane)
+        // TODO: is it need to hide other dialogs like graveyards (CardsView)?
         for (CardInfoWindowDialog windowDialog : exiles.values()) {
-            windowDialog.hideDialog();
-        }
-        for (CardInfoWindowDialog windowDialog : graveyardWindows.values()) {
             windowDialog.hideDialog();
         }
         for (CardInfoWindowDialog windowDialog : revealed.values()) {
@@ -1206,10 +1280,16 @@ public final class GamePanel extends javax.swing.JPanel {
         for (CardInfoWindowDialog windowDialog : lookedAt.values()) {
             windowDialog.hideDialog();
         }
+        for (CardInfoWindowDialog windowDialog : graveyardWindows.values()) {
+            windowDialog.hideDialog();
+        }
         for (CardInfoWindowDialog windowDialog : companion.values()) {
             windowDialog.hideDialog();
         }
         for (CardInfoWindowDialog windowDialog : sideboardWindows.values()) {
+            windowDialog.hideDialog();
+        }
+        for (CardHintsHelperDialog windowDialog : cardHintsWindows.values()) {
             windowDialog.hideDialog();
         }
     }
@@ -1220,19 +1300,22 @@ public final class GamePanel extends javax.swing.JPanel {
         for (CardInfoWindowDialog windowDialog : exiles.values()) {
             windowDialog.show();
         }
-        for (CardInfoWindowDialog windowDialog : graveyardWindows.values()) {
-            windowDialog.show();
-        }
         for (CardInfoWindowDialog windowDialog : revealed.values()) {
             windowDialog.show();
         }
         for (CardInfoWindowDialog windowDialog : lookedAt.values()) {
             windowDialog.show();
         }
+        for (CardInfoWindowDialog windowDialog : graveyardWindows.values()) {
+            windowDialog.show();
+        }
         for (CardInfoWindowDialog windowDialog : companion.values()) {
             windowDialog.show();
         }
         for (CardInfoWindowDialog windowDialog : sideboardWindows.values()) {
+            windowDialog.show();
+        }
+        for (CardHintsHelperDialog windowDialog : cardHintsWindows.values()) {
             windowDialog.show();
         }
     }
@@ -1251,7 +1334,30 @@ public final class GamePanel extends javax.swing.JPanel {
         graveyardWindows.put(playerName, newGraveyard);
         MageFrame.getDesktop().add(newGraveyard, JLayeredPane.PALETTE_LAYER);
         // use graveyards to sync selection (don't use player data here)
-        newGraveyard.loadCards(graveyards.get(playerName), bigCard, gameId, false);
+        newGraveyard.loadCardsAndShow(graveyards.get(playerName), bigCard, gameId, false);
+    }
+
+    private void clearClosedCardHintsWindows() {
+        cardHintsWindows.entrySet().removeIf(entry -> entry.getValue().isClosed());
+    }
+
+    public void openCardHintsWindow(String code) {
+        // clear closed
+        clearClosedCardHintsWindows();
+
+        // too many dialogs can cause bad GUI performance, so limit it
+        if (cardHintsWindows.size() >= CardHintsHelperDialog.GUI_MAX_CARD_HINTS_DIALOGS_PER_GAME) {
+            // show last one instead
+            cardHintsWindows.values().stream().reduce((a, b) -> b).ifPresent(CardHintsHelperDialog::show);
+            return;
+        }
+
+        // open new
+        CardHintsHelperDialog newDialog = new CardHintsHelperDialog();
+        newDialog.setGameData(this.lastGameData.game, this.gameId, this.bigCard);
+        cardHintsWindows.put(code + UUID.randomUUID(), newDialog);
+        MageFrame.getDesktop().add(newDialog, JLayeredPane.PALETTE_LAYER);
+        newDialog.loadHints(lastGameData.game);
     }
 
     public void openSideboardWindow(UUID playerId) {
@@ -1281,7 +1387,7 @@ public final class GamePanel extends javax.swing.JPanel {
         sideboardWindows.put(playerView.getName(), windowDialog);
         MageFrame.getDesktop().add(windowDialog, JLayeredPane.PALETTE_LAYER);
         // use sideboards to sync selection (don't use player data here)
-        windowDialog.loadCards(sideboards.get(playerView.getName()), bigCard, gameId, false);
+        windowDialog.loadCardsAndShow(sideboards.get(playerView.getName()), bigCard, gameId, false);
     }
 
     public void openTopLibraryWindow(String playerName) {
@@ -1342,10 +1448,10 @@ public final class GamePanel extends javax.swing.JPanel {
                 case REVEAL:
                 case REVEAL_TOP_LIBRARY:
                 case COMPANION:
-                    cardInfoWindowDialog.loadCards((CardsView) cardsView, bigCard, gameId);
+                    cardInfoWindowDialog.loadCardsAndShow((CardsView) cardsView, bigCard, gameId, false);
                     break;
                 case LOOKED_AT:
-                    cardInfoWindowDialog.loadCards((SimpleCardsView) cardsView, bigCard, gameId);
+                    cardInfoWindowDialog.loadCardsAndShow(CardsViewUtil.convertSimple((SimpleCardsView) cardsView), bigCard, gameId, false);
                     break;
                 default:
                     break;
@@ -1358,13 +1464,18 @@ public final class GamePanel extends javax.swing.JPanel {
         windowMap.entrySet().removeIf(entry -> entry.getValue().isClosed());
     }
 
-    public void ask(String question, GameView gameView, int messageId, Map<String, Serializable> options) {
-        updateGame(gameView, false, options, null);
-        this.feedbackPanel.prepareFeedback(FeedbackMode.QUESTION, question, false, options, messageId, true, gameView.getPhase());
+    public void ask(int messageId, GameView gameView, String question, Map<String, Serializable> options) {
+        updateGame(messageId, gameView, false, options, null);
+        this.feedbackPanel.prepareFeedback(FeedbackMode.QUESTION, question, false, options, true, gameView.getPhase());
     }
 
-    private void keepLastGameData(GameView game, boolean showPlayable, Map<String, Serializable> options, Set<UUID> targets) {
-        lastGameData.game = game;
+    public boolean isMissGameData() {
+        return lastGameData.game == null || lastGameData.game.getPlayers().isEmpty();
+    }
+
+    private void keepLastGameData(int messageId, GameView game, boolean showPlayable, Map<String, Serializable> options, Set<UUID> targets) {
+        lastGameData.messageId = messageId;
+        lastGameData.setNewGame(game);
         lastGameData.showPlayable = showPlayable;
         lastGameData.options = options;
         lastGameData.targets = targets;
@@ -1408,7 +1519,7 @@ public final class GamePanel extends javax.swing.JPanel {
 
         // hand
         if (needZone == Zone.HAND || needZone == Zone.ALL) {
-            for (CardView card : lastGameData.game.getHand().values()) {
+            for (CardView card : lastGameData.game.getMyHand().values()) {
                 if (needSelectable.contains(card.getId())) {
                     card.setChoosable(true);
                 }
@@ -1620,8 +1731,8 @@ public final class GamePanel extends javax.swing.JPanel {
      * @param options
      * @param messageId
      */
-    public void pickTarget(GameView gameView, Map<String, Serializable> options, String message, CardsView cardsView, Set<UUID> targets, boolean required, int messageId) {
-        updateGame(gameView, false, options, targets);
+    public void pickTarget(int messageId, GameView gameView, Map<String, Serializable> options, String message, CardsView cardsView, Set<UUID> targets, boolean required) {
+        updateGame(messageId, gameView, false, options, targets);
         hideAll();
         DialogManager.getManager(gameId).fadeOut();
         clearPickTargetDialogs();
@@ -1649,28 +1760,28 @@ public final class GamePanel extends javax.swing.JPanel {
             dialog = prepareCardsDialog(message, cardsView, required, options0, popupMenuType);
             options0.put("dialog", dialog);
         }
-        this.feedbackPanel.prepareFeedback(required ? FeedbackMode.INFORM : FeedbackMode.CANCEL, message, gameView.getSpecial(), options0, messageId, true, gameView.getPhase());
+        this.feedbackPanel.prepareFeedback(required ? FeedbackMode.INFORM : FeedbackMode.CANCEL, message, gameView.getSpecial(), options0, true, gameView.getPhase());
         if (dialog != null) {
             this.pickTarget.add(dialog);
         }
     }
 
-    public void inform(String information, GameView gameView, int messageId) {
-        updateGame(gameView);
-        this.feedbackPanel.prepareFeedback(FeedbackMode.INFORM, information, gameView.getSpecial(), null, messageId, false, gameView.getPhase());
+    public void inform(int messageId, GameView gameView, String information) {
+        updateGame(messageId, gameView);
+        this.feedbackPanel.prepareFeedback(FeedbackMode.INFORM, information, gameView.getSpecial(), null, false, gameView.getPhase());
     }
 
-    public void endMessage(GameView gameView, Map<String, Serializable> options, String message, int messageId) {
-        updateGame(gameView, false, options, null);
+    public void endMessage(int messageId, GameView gameView, Map<String, Serializable> options, String message) {
+        updateGame(messageId, gameView, false, options, null);
         hideAll();
         DialogManager.getManager(gameId).fadeOut();
 
-        this.feedbackPanel.prepareFeedback(FeedbackMode.END, message, false, null, messageId, true, null);
+        this.feedbackPanel.prepareFeedback(FeedbackMode.END, message, false, null, true, null);
         ArrowBuilder.getBuilder().removeAllArrows(gameId);
     }
 
-    public void select(GameView gameView, Map<String, Serializable> options, String message, int messageId) {
-        updateGame(gameView, true, options, null);
+    public void select(int messageId, GameView gameView, Map<String, Serializable> options, String message) {
+        updateGame(messageId, gameView, true, options, null);
         hideAll();
         DialogManager.getManager(gameId).fadeOut();
 
@@ -1713,31 +1824,31 @@ public final class GamePanel extends javax.swing.JPanel {
             priorityPlayerText = " / priority " + gameView.getPriorityPlayerName();
         }
         String messageToDisplay = message + FeedbackPanel.getSmallText(activePlayerText + " / " + gameView.getStep().toString() + priorityPlayerText);
-        this.feedbackPanel.prepareFeedback(FeedbackMode.SELECT, messageToDisplay, gameView.getSpecial(), panelOptions, messageId, true, gameView.getPhase());
+        this.feedbackPanel.prepareFeedback(FeedbackMode.SELECT, messageToDisplay, gameView.getSpecial(), panelOptions, true, gameView.getPhase());
     }
 
-    public void playMana(GameView gameView, Map<String, Serializable> options, String message, int messageId) {
-        updateGame(gameView, true, options, null);
+    public void playMana(int messageId, GameView gameView, Map<String, Serializable> options, String message) {
+        updateGame(messageId, gameView, true, options, null);
         hideAll();
         DialogManager.getManager(gameId).fadeOut();
 
-        this.feedbackPanel.prepareFeedback(FeedbackMode.CANCEL, message, gameView.getSpecial(), options, messageId, true, gameView.getPhase());
+        this.feedbackPanel.prepareFeedback(FeedbackMode.CANCEL, message, gameView.getSpecial(), options, true, gameView.getPhase());
     }
 
-    public void playXMana(GameView gameView, Map<String, Serializable> options, String message, int messageId) {
-        updateGame(gameView, true, options, null);
+    public void playXMana(int messageId, GameView gameView, Map<String, Serializable> options, String message) {
+        updateGame(messageId, gameView, true, options, null);
         hideAll();
         DialogManager.getManager(gameId).fadeOut();
 
-        this.feedbackPanel.prepareFeedback(FeedbackMode.CONFIRM, message, gameView.getSpecial(), null, messageId, true, gameView.getPhase());
+        this.feedbackPanel.prepareFeedback(FeedbackMode.CONFIRM, message, gameView.getSpecial(), null, true, gameView.getPhase());
     }
 
     public void replayMessage(String message) {
         //TODO: implement this
     }
 
-    public void pickAbility(GameView gameView, Map<String, Serializable> options, AbilityPickerView choices) {
-        updateGame(gameView, false, options, null);
+    public void pickAbility(int messageId, GameView gameView, Map<String, Serializable> options, AbilityPickerView choices) {
+        updateGame(messageId, gameView, false, options, null);
         hideAll();
         DialogManager.getManager(gameId).fadeOut();
 
@@ -1761,8 +1872,8 @@ public final class GamePanel extends javax.swing.JPanel {
         return showCards;
     }
 
-    public void getAmount(GameView gameView, Map<String, Serializable> options, int min, int max, String message) {
-        updateGame(gameView, false, options, null);
+    public void getAmount(int messageId, GameView gameView, Map<String, Serializable> options, int min, int max, String message) {
+        updateGame(messageId, gameView, false, options, null);
         hideAll();
         DialogManager.getManager(gameId).fadeOut();
 
@@ -1774,17 +1885,22 @@ public final class GamePanel extends javax.swing.JPanel {
         }
     }
 
-    public void getMultiAmount(List<String> messages, GameView gameView, Map<String, Serializable> options, int min, int max) {
-        updateGame(gameView, false, options, null);
+    public void getMultiAmount(int messageId, GameView gameView, List<MultiAmountMessage> messages, Map<String, Serializable> options,
+            int min, int max) {
+        updateGame(messageId, gameView, false, options, null);
         hideAll();
         DialogManager.getManager(gameId).fadeOut();
 
         pickMultiNumber.showDialog(messages, min, max, lastGameData.options);
-        SessionHandler.sendPlayerString(gameId, pickMultiNumber.getMultiAmount());
+        if (pickMultiNumber.isCancel()) {
+            SessionHandler.sendPlayerBoolean(gameId, false);
+        } else {
+            SessionHandler.sendPlayerString(gameId, pickMultiNumber.getMultiAmount());
+        }
     }
 
-    public void getChoice(GameView gameView, Map<String, Serializable> options, Choice choice, UUID objectId) {
-        updateGame(gameView, false, options, null);
+    public void getChoice(int messageId, GameView gameView, Map<String, Serializable> options, Choice choice, UUID objectId) {
+        updateGame(messageId, gameView, false, options, null);
         hideAll();
         DialogManager.getManager(gameId).fadeOut();
 
@@ -1809,8 +1925,8 @@ public final class GamePanel extends javax.swing.JPanel {
         pickChoice.removeDialog();
     }
 
-    public void pickPile(GameView gameView, Map<String, Serializable> options, String message, CardsView pile1, CardsView pile2) {
-        updateGame(gameView, false, options, null);
+    public void pickPile(int messageId, GameView gameView, Map<String, Serializable> options, String message, CardsView pile1, CardsView pile2) {
+        updateGame(messageId, gameView, false, options, null);
         hideAll();
         DialogManager.getManager(gameId).fadeOut();
 
@@ -1852,14 +1968,8 @@ public final class GamePanel extends javax.swing.JPanel {
         lblPriority = new javax.swing.JLabel();
         feedbackPanel = new mage.client.game.FeedbackPanel();
 
-        txtSpellsCast = new javax.swing.JLabel();
         Border paddingBorder = BorderFactory.createEmptyBorder(4, 4, 4, 4);
         Border border = BorderFactory.createLineBorder(Color.DARK_GRAY, 2);
-        txtSpellsCast.setBorder(BorderFactory.createCompoundBorder(border, paddingBorder));
-        txtSpellsCast.setBackground(Color.LIGHT_GRAY);
-        txtSpellsCast.setOpaque(true);
-        txtSpellsCast.setToolTipText("spells cast during the current turn");
-
         txtHoldPriority = new javax.swing.JLabel();
         txtHoldPriority.setText("Hold");
         txtHoldPriority.setBorder(BorderFactory.createCompoundBorder(border, paddingBorder));
@@ -1900,7 +2010,6 @@ public final class GamePanel extends javax.swing.JPanel {
         gameChatPanel.setConnectedChat(userChatPanel);
         gameChatPanel.disableInput();
         gameChatPanel.setMinimumSize(new java.awt.Dimension(100, 48));
-        gameChatPanel.enableHyperlinks();
         jSplitPane2 = new javax.swing.JSplitPane();
         handContainer = new HandPanel();
         handCards = new HashMap<>();
@@ -2183,6 +2292,7 @@ public final class GamePanel extends javax.swing.JPanel {
         this.getActionMap().put("ENLARGE_SOURCE", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
+                // TODO: doesn't work? 26.11.2023
                 if (isUserImputActive()) return;
                 ActionCallback callback = Plugins.instance.getActionCallback();
                 ((MageActionCallback) callback).enlargeCard(EnlargeMode.ALTERNATE);
@@ -2332,7 +2442,6 @@ public final class GamePanel extends javax.swing.JPanel {
                 )
                 .addGroup(gl_pnlShortCuts.createSequentialGroup()
                         .addComponent(txtHoldPriority)
-                        .addComponent(txtSpellsCast)
                         /*.addComponent(btnToggleMacro)*/
                         .addComponent(btnSwitchHands)
                         .addComponent(btnCancelSkip)
@@ -2368,7 +2477,6 @@ public final class GamePanel extends javax.swing.JPanel {
                         .addGroup(gl_pnlShortCuts.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 /*.addComponent(btnToggleMacro)*/
                                 .addComponent(txtHoldPriority)
-                                .addComponent(txtSpellsCast)
                                 .addComponent(btnSwitchHands)
                                 .addComponent(btnCancelSkip)
                                 .addComponent(btnConcede)
@@ -2804,6 +2912,7 @@ public final class GamePanel extends javax.swing.JPanel {
             if (!cardViewPopupMenu.getAbility().getRules().isEmpty()
                     && !cardViewPopupMenu.getAbility().getRules().get(0).isEmpty()) {
                 abilityRuleText = cardViewPopupMenu.getAbility().getRules().get(0);
+                abilityRuleText = abilityRuleText.replace("{this}", cardViewPopupMenu.getName());
             }
         }
         switch (e.getActionCommand()) {
@@ -2879,14 +2988,6 @@ public final class GamePanel extends javax.swing.JPanel {
 
     public String getGameLog() {
         return gameChatPanel.getText();
-    }
-
-    public Map<String, Card> getLoadedCards() {
-        return loadedCards;
-    }
-
-    public void setLoadedCards(Map<String, Card> loadedCards) {
-        this.loadedCards = loadedCards;
     }
 
     public FeedbackPanel getFeedbackPanel() {
@@ -2997,7 +3098,6 @@ public final class GamePanel extends javax.swing.JPanel {
     private javax.swing.JSplitPane jSplitPane2;
     private JPanel jPhases;
     private JPanel phasesContainer;
-    private javax.swing.JLabel txtSpellsCast;
     private javax.swing.JLabel txtHoldPriority;
 
     private HoverButton currentStep;

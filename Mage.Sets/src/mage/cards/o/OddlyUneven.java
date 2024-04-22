@@ -51,7 +51,7 @@ class OddOrEvenEffect extends OneShotEffect {
         this.staticText = "Destroy each creature with an " + (odd ? "odd" : "even") + " number of words in its name. (Hyphenated words are one word.)";
     }
 
-    public OddOrEvenEffect(final OddOrEvenEffect effect) {
+    private OddOrEvenEffect(final OddOrEvenEffect effect) {
         super(effect);
         this.odd = effect.odd;
     }

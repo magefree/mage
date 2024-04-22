@@ -24,7 +24,7 @@ public final class DorotheaVengefulVictim extends CardImpl {
     public DorotheaVengefulVictim(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPIRIT);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

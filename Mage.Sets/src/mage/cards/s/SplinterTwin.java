@@ -60,12 +60,12 @@ public final class SplinterTwin extends CardImpl {
 
 class SplinterTwinEffect extends OneShotEffect {
 
-    public SplinterTwinEffect() {
+    SplinterTwinEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Create a token that's a copy of this creature, except it has haste. Exile that token at the beginning of the next end step";
     }
 
-    public SplinterTwinEffect(final SplinterTwinEffect effect) {
+    private SplinterTwinEffect(final SplinterTwinEffect effect) {
         super(effect);
     }
 

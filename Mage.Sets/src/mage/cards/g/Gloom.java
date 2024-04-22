@@ -54,7 +54,7 @@ class GloomCostIncreaseEffect extends CostModificationEffectImpl {
         staticText = "Activated abilities of white enchantments cost {3} more to activate.";
     }
 
-    GloomCostIncreaseEffect(GloomCostIncreaseEffect effect) {
+    private GloomCostIncreaseEffect(final GloomCostIncreaseEffect effect) {
         super(effect);
     }
 

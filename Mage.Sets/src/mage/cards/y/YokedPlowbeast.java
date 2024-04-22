@@ -26,7 +26,7 @@ public final class YokedPlowbeast extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
-    public YokedPlowbeast (final YokedPlowbeast card) {
+    private YokedPlowbeast(final YokedPlowbeast card) {
         super(card);
     }
 

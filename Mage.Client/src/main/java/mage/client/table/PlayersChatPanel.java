@@ -6,6 +6,8 @@ import mage.client.util.GUISizeHelper;
 import mage.client.util.MageTableRowSorter;
 import mage.client.util.gui.TableUtil;
 import mage.client.util.gui.countryBox.CountryCellRenderer;
+import mage.components.table.MageTable;
+import mage.components.table.TableInfo;
 import mage.remote.MageRemoteException;
 import mage.view.RoomUsersView;
 import mage.view.UsersView;
@@ -93,7 +95,6 @@ public class PlayersChatPanel extends javax.swing.JPanel {
             jScrollPanePlayers.getViewport().setBackground(new Color(0, 0, 0, CHAT_ALPHA));
             jScrollPanePlayers.setViewportBorder(null);
         }
-
     }
 
     public ChatPanelBasic getUserChatPanel() {

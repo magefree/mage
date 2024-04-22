@@ -55,7 +55,7 @@ class ReinsOfPowerEffect extends OneShotEffect {
         this.staticText = "Untap all creatures you control and all creatures target opponent controls. You and that opponent each gain control of all creatures the other controls until end of turn. Those creatures gain haste until end of turn";
     }
 
-    ReinsOfPowerEffect(final ReinsOfPowerEffect effect) {
+    private ReinsOfPowerEffect(final ReinsOfPowerEffect effect) {
         super(effect);
     }
 

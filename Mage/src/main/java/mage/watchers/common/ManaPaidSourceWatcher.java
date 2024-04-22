@@ -67,7 +67,7 @@ public class ManaPaidSourceWatcher extends Watcher {
             if (sourceObject != null && sourceObject.isCreature(game)) {
                 creature++;
             }
-            if (sourceObject != null && !sourceObject.isSnow()) {
+            if (sourceObject != null && !sourceObject.isSnow(game)) {
                 return;
             }
             switch (manaType) {
@@ -110,6 +110,9 @@ public class ManaPaidSourceWatcher extends Watcher {
     private static final ManaPaidTracker emptyTracker = new ManaPaidTracker();
     private final Map<UUID, ManaPaidTracker> manaMap = new HashMap<>();
 
+    /**
+     * Game default watcher
+     */
     public ManaPaidSourceWatcher() {
         super(WatcherScope.GAME);
     }

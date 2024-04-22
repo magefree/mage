@@ -9,7 +9,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
-import mage.filter.FilterSpell;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -18,12 +18,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class GenerousVisitor extends CardImpl {
-
-    private static final FilterSpell filter = new FilterSpell("an enchantment spell");
-
-    static {
-        filter.add(CardType.ENCHANTMENT.getPredicate());
-    }
 
     public GenerousVisitor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}");
@@ -34,7 +28,7 @@ public final class GenerousVisitor extends CardImpl {
 
         // Whenever you cast an enchantment spell, put a +1/+1 counter on target creature.
         Ability ability = new SpellCastControllerTriggeredAbility(
-                new AddCountersTargetEffect(CounterType.P1P1.createInstance()), filter, false
+                new AddCountersTargetEffect(CounterType.P1P1.createInstance()), StaticFilters.FILTER_SPELL_AN_ENCHANTMENT, false
         );
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

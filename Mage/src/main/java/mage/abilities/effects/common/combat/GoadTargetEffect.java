@@ -69,8 +69,7 @@ public class GoadTargetEffect extends ContinuousEffectImpl {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-
-        return "goad target " + (!mode.getTargets().isEmpty() ? mode.getTargets().get(0).getTargetName() : " creature")
+        return "goad " + getTargetPointer().describeTargets(mode.getTargets(), "that creature")
                 + ". <i>(Until your next turn, that creature attacks each combat if able and attacks a player other than you if able.)</i>";
     }
 }

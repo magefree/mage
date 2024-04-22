@@ -7,9 +7,12 @@ import java.io.File;
 import java.util.Locale;
 import java.util.Scanner;
 
+/**
+ * Deck import: base class for all importers
+ */
 public abstract class DeckImporter {
 
-    public class FixedInfo {
+    public static class FixedInfo {
         private final String originalLine;
         private String fixedLine;
         private Boolean canFix = true; // set false if deck have critical error and can't be auto-fixed

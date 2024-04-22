@@ -1,9 +1,6 @@
 package mage.players;
 
-import mage.ApprovingObject;
-import mage.MageItem;
-import mage.MageObject;
-import mage.Mana;
+import mage.*;
 import mage.abilities.*;
 import mage.abilities.costs.AlternativeSourceCosts;
 import mage.abilities.costs.Cost;
@@ -38,9 +35,14 @@ import mage.target.TargetAmount;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
 import mage.util.Copyable;
+import mage.util.MultiAmountMessage;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -57,10 +59,7 @@ public interface Player extends MageItem, Copyable<Player> {
      * Default is PayLifeCostLevel.allAbilities.
      */
     enum PayLifeCostLevel {
-        allAbilities,
-        nonSpellnonActivatedAbilities,
-        onlyManaAbilities,
-        none
+        allAbilities, nonSpellnonActivatedAbilities, onlyManaAbilities, none
     }
 
     /**
@@ -196,6 +195,10 @@ public interface Player extends MageItem, Copyable<Player> {
 
     boolean canPlayCardsFromGraveyard();
 
+    void setPlotFromTopOfLibrary(boolean canPlotFromTopOfLibrary);
+
+    boolean canPlotFromTopOfLibrary();
+
     void setDrawsOnOpponentsTurn(boolean drawsOnOpponentsTurn);
 
     boolean isDrawsOnOpponentsTurn();
@@ -208,6 +211,10 @@ public interface Player extends MageItem, Copyable<Player> {
     List<AlternativeSourceCosts> getAlternativeSourceCosts();
 
     Cards getHand();
+
+    void incrementLandsPlayed();
+
+    void resetLandsPlayed();
 
     int getLandsPlayed();
 
@@ -291,10 +298,8 @@ public interface Player extends MageItem, Copyable<Player> {
     void setTopCardRevealed(boolean topCardRevealed);
 
     /**
-     * Get data from the client Preferences (e.g. avatarId or
-     * showAbilityPickerForce)
-     *
-     * @return
+     * User's settings like avatar or skip buttons.
+     * WARNING, game related code must use controlling player settings only, e.g. getControllingPlayersUserData
      */
     UserData getUserData();
 
@@ -316,9 +321,10 @@ public interface Player extends MageItem, Copyable<Player> {
      * Defines player whose turn this player controls at the moment.
      *
      * @param game
-     * @param playerId
+     * @param playerUnderControlId
+     * @param info                 additional info to show in game logs like source
      */
-    void controlPlayersTurn(Game game, UUID playerId);
+    void controlPlayersTurn(Game game, UUID playerUnderControlId, String info);
 
     /**
      * Sets player {@link UUID} who controls this player's turn.
@@ -329,6 +335,9 @@ public interface Player extends MageItem, Copyable<Player> {
 
     List<UUID> getTurnControllers();
 
+    /**
+     * Current turn controller for a player (return own id for own control)
+     */
     UUID getTurnControlledBy();
 
     /**
@@ -356,6 +365,12 @@ public interface Player extends MageItem, Copyable<Player> {
      */
     void setGameUnderYourControl(boolean value);
 
+    /**
+     * Return player's turn control to prev player
+     *
+     * @param value
+     * @param fullRestore return turn control to own
+     */
     void setGameUnderYourControl(boolean value, boolean fullRestore);
 
     void setTestMode(boolean value);
@@ -366,9 +381,10 @@ public interface Player extends MageItem, Copyable<Player> {
 
     void setAllowBadMoves(boolean allowBadMoves);
 
+    /**
+     * Reset values before new game, e.g. for next game
+     */
     void init(Game game);
-
-    void init(Game game, boolean testMode);
 
     void useDeck(Deck deck, Game game);
 
@@ -546,6 +562,8 @@ public interface Player extends MageItem, Copyable<Player> {
 
     void signalPlayerConcede();
 
+    void signalPlayerCheat();
+
     void skip();
 
     // priority, undo, ...
@@ -553,8 +571,18 @@ public interface Player extends MageItem, Copyable<Player> {
 
     int getStoredBookmark();
 
+    /**
+     * Save player's bookmark for undo, e.g. enable undo button on mana payment
+     *
+     * @param bookmark
+     */
     void setStoredBookmark(int bookmark);
 
+    /**
+     * Reset player's bookmark, e.g. disable undo button
+     *
+     * @param game
+     */
     void resetStoredBookmark(Game game);
 
     default GameState restoreState(int bookmark, String text, Game game) {
@@ -567,11 +595,11 @@ public interface Player extends MageItem, Copyable<Player> {
 
     void revealCards(Ability source, Cards cards, Game game);
 
-    void revealCards(String titelSuffix, Cards cards, Game game);
+    void revealCards(String titleSuffix, Cards cards, Game game);
 
-    void revealCards(Ability source, String titelSuffix, Cards cards, Game game);
+    void revealCards(Ability source, String titleSuffix, Cards cards, Game game);
 
-    void revealCards(String titelSuffix, Cards cards, Game game, boolean postToLog);
+    void revealCards(String titleSuffix, Cards cards, Game game, boolean postToLog);
 
     /**
      * Adds the cards to the reveal window and adds the source object's id name
@@ -743,7 +771,25 @@ public interface Player extends MageItem, Copyable<Player> {
      * @param game     Game
      * @return List of integers with size equal to messages.size().  The sum of the integers is equal to max.
      */
-    List<Integer> getMultiAmount(Outcome outcome, List<String> messages, int min, int max, MultiAmountType type, Game game);
+    default List<Integer> getMultiAmount(Outcome outcome, List<String> messages, int min, int max, MultiAmountType type, Game game) {
+        List<MultiAmountMessage> constraints = messages.stream()
+                .map(s -> new MultiAmountMessage(s, min, max))
+                .collect(Collectors.toList());
+        return getMultiAmountWithIndividualConstraints(outcome, constraints, min, max, type, game);
+    }
+
+    /**
+     * Player distributes amount among multiple options
+     *
+     * @param outcome  AI hint
+     * @param messages List of options to distribute amount among. Each option has a constraint on the min, max chosen for it
+     * @param min      Total minimum amount to be distributed
+     * @param max      Total amount to be distributed
+     * @param type     MultiAmountType enum to set dialog options such as title and header
+     * @param game     Game
+     * @return List of integers with size equal to messages.size().  The sum of the integers is equal to max.
+     */
+    List<Integer> getMultiAmountWithIndividualConstraints(Outcome outcome, List<MultiAmountMessage> messages, int min, int max, MultiAmountType type, Game game);
 
     void sideboard(Match match, Deck deck);
 
@@ -751,6 +797,7 @@ public interface Player extends MageItem, Copyable<Player> {
 
     void pickCard(List<Card> cards, Deck deck, Draft draft);
 
+    // TODO: add result, process it in AI code (if something put creature to attack then it can broke current AI logic)
     void declareAttacker(UUID attackerId, UUID defenderId, Game game, boolean allowUndo);
 
     void declareBlocker(UUID defenderId, UUID blockerId, UUID attackerId, Game game);
@@ -773,7 +820,7 @@ public interface Player extends MageItem, Copyable<Player> {
 
     void updateRange(Game game);
 
-    ManaOptions getManaAvailable(Game game);
+    ManaOptions getManaAvailable(Game originalGame);
 
     void addAvailableTriggeredMana(List<Mana> netManaAvailable);
 
@@ -785,7 +832,7 @@ public interface Player extends MageItem, Copyable<Player> {
 
     PlayableObjectsList getPlayableObjects(Game game, Zone zone);
 
-    LinkedHashMap<UUID, ActivatedAbility> getPlayableActivatedAbilities(MageObject object, Zone zone, Game game);
+    Map<UUID, ActivatedAbility> getPlayableActivatedAbilities(MageObject object, Zone zone, Game originalGame);
 
     boolean addCounters(Counter counter, UUID playerAddingCounters, Ability source, Game game);
 
@@ -828,6 +875,20 @@ public interface Player extends MageItem, Copyable<Player> {
      * @return
      */
     int getPriorityTimeLeft();
+
+    /**
+     * Set seconds left before priority time starts ticking down.
+     *
+     * @param timeLeft
+     */
+    void setBufferTimeLeft(int timeLeft);
+
+    /**
+     * Returns seconds left before priority time starts ticking down.
+     *
+     * @return
+     */
+    int getBufferTimeLeft();
 
     void setReachedNextTurnAfterLeaving(boolean reachedNextTurnAfterLeaving);
 
@@ -932,7 +993,7 @@ public interface Player extends MageItem, Copyable<Player> {
      * @param source
      * @param game
      * @param fromZone
-     * @param withName
+     * @param withName  for face down: used to hide card name in game logs before real face down status apply
      * @return
      */
     @Deprecated
@@ -1014,13 +1075,28 @@ public interface Player extends MageItem, Copyable<Player> {
      *                  cost
      * @param costs     alternate other costs you need to pay
      */
-    void setCastSourceIdWithAlternateMana(UUID sourceId, ManaCosts<ManaCost> manaCosts, Costs<Cost> costs);
+    default void setCastSourceIdWithAlternateMana(UUID sourceId, ManaCosts<ManaCost> manaCosts, Costs<Cost> costs) {
+        setCastSourceIdWithAlternateMana(sourceId, manaCosts, costs, MageIdentifier.Default);
+    }
 
-    Set<UUID> getCastSourceIdWithAlternateMana();
+    /**
+     * If the next spell cast has the set sourceId, the spell will be cast
+     * without mana (null) or the mana set to manaCosts instead of its normal
+     * mana costs.
+     *
+     * @param sourceId   the source that can be cast without mana
+     * @param manaCosts  alternate ManaCost, null if it can be cast without mana
+     *                   cost
+     * @param costs      alternate other costs you need to pay
+     * @param identifier if not using the MageIdentifier.Default, only apply the alternate mana when ApprovingSource if of that kind.
+     */
+    void setCastSourceIdWithAlternateMana(UUID sourceId, ManaCosts<ManaCost> manaCosts, Costs<Cost> costs, MageIdentifier identifier);
 
-    Map<UUID, ManaCosts<ManaCost>> getCastSourceIdManaCosts();
+    Map<UUID, Set<MageIdentifier>> getCastSourceIdWithAlternateMana();
 
-    Map<UUID, Costs<Cost>> getCastSourceIdCosts();
+    Map<UUID, Map<MageIdentifier, ManaCosts<ManaCost>>> getCastSourceIdManaCosts();
+
+    Map<UUID, Map<MageIdentifier, Costs<Cost>>> getCastSourceIdCosts();
 
     void clearCastSourceIdManaCosts();
 
@@ -1047,7 +1123,48 @@ public interface Player extends MageItem, Copyable<Player> {
 
     boolean scry(int value, Ability source, Game game);
 
-    boolean surveil(int value, Ability source, Game game);
+    /**
+     * result of the doSurveil action.
+     * Sometimes more info is needed for the caller after the surveil is done.
+     */
+    class SurveilResult {
+        private final boolean surveilled;
+        private final int numberInGraveyard; // how many cards were put into the graveyard
+        private final int numberOnTop; // how many cards were put into the graveyard
+
+        private SurveilResult(boolean surveilled, int inGrave, int onTop) {
+            this.surveilled = surveilled;
+            this.numberInGraveyard = inGrave;
+            this.numberOnTop = onTop;
+        }
+
+        public static SurveilResult noSurveil() {
+            return new SurveilResult(false, 0, 0);
+        }
+
+        public static SurveilResult surveil(int inGrave, int onTop) {
+            return new SurveilResult(true, inGrave, onTop);
+        }
+
+        public boolean hasSurveilled() {
+            return this.surveilled;
+        }
+
+        public int getNumberPutInGraveyard() {
+            return this.numberInGraveyard;
+        }
+
+        public int getNumberPutOnTop() {
+            return this.numberOnTop;
+        }
+    }
+
+    SurveilResult doSurveil(int value, Ability source, Game game);
+
+    default boolean surveil(int value, Ability source, Game game) {
+        SurveilResult result = doSurveil(value, source, game);
+        return result.hasSurveilled();
+    }
 
     /**
      * Only used for test player for pre-setting targets
@@ -1079,6 +1196,10 @@ public interface Player extends MageItem, Copyable<Player> {
      * @return
      */
     FilterMana getPhyrexianColors();
+
+    Permanent getRingBearer(Game game);
+
+    void chooseRingBearer(Game game);
 
     /**
      * Function to query if the player has strictChooseMode enabled. Only the test player can have it.

@@ -65,7 +65,7 @@ public final class KraulHarpooner extends CardImpl {
 
 class KraulHarpoonerEffect extends OneShotEffect {
 
-    public KraulHarpoonerEffect() {
+    KraulHarpoonerEffect() {
         super(Outcome.Benefit);
         this.staticText = "choose up to one target creature with flying "
                 + "you don't control. {this} gets +X/+0 until end of turn, "
@@ -73,7 +73,7 @@ class KraulHarpoonerEffect extends OneShotEffect {
                 + "then you may have {this} fight that creature.";
     }
 
-    public KraulHarpoonerEffect(final KraulHarpoonerEffect effect) {
+    private KraulHarpoonerEffect(final KraulHarpoonerEffect effect) {
         super(effect);
     }
 

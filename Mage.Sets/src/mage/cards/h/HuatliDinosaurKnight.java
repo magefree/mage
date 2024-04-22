@@ -32,7 +32,7 @@ public final class HuatliDinosaurKnight extends CardImpl {
     public HuatliDinosaurKnight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{R}{W}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUATLI);
 
         this.setStartingLoyalty(4);

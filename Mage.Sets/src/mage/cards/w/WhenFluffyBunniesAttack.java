@@ -47,12 +47,12 @@ public final class WhenFluffyBunniesAttack extends CardImpl {
 
 class WhenFluffyBunniesAttackEffect extends OneShotEffect {
 
-    public WhenFluffyBunniesAttackEffect() {
+    WhenFluffyBunniesAttackEffect() {
         super(Outcome.Detriment);
         staticText = "Target creature gets -X/-X until end of turn, where X is the number of times the letter of your choice appears in that creature's name";
     }
 
-    public WhenFluffyBunniesAttackEffect(final WhenFluffyBunniesAttackEffect effect) {
+    private WhenFluffyBunniesAttackEffect(final WhenFluffyBunniesAttackEffect effect) {
         super(effect);
     }
 

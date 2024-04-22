@@ -71,13 +71,13 @@ class GolemArtisanEffect extends OneShotEffect {
         staticText = "Target artifact creature gains your choice of flying, trample, or haste until end of turn";
     }
 
-    GolemArtisanEffect(final GolemArtisanEffect effect) {
+    private GolemArtisanEffect(final GolemArtisanEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
+        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         Player playerControls = game.getPlayer(source.getControllerId());
         if (permanent != null && playerControls != null) {
             Choice abilityChoice = new ChoiceImpl();

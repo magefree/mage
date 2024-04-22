@@ -2,12 +2,9 @@
 package mage.cards.g;
 
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.MenaceAbility;
-import mage.abilities.mana.AnyColorManaAbility;
-import mage.abilities.mana.GreenManaAbility;
+import mage.abilities.token.TreasureAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -36,9 +33,7 @@ public final class Goldhound extends CardImpl {
         this.addAbility(new MenaceAbility(true));
 
         // {T}, Sacrifice Goldhound: Add one mana of any color.
-        Ability ability = new AnyColorManaAbility();
-        ability.addCost(new SacrificeSourceCost());
-        this.addAbility(ability);
+        this.addAbility(new TreasureAbility(true));
     }
 
     private Goldhound(final Goldhound card) {

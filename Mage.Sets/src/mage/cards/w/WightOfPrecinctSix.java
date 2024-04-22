@@ -1,7 +1,6 @@
 
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -11,13 +10,15 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -54,32 +55,32 @@ class CardsInOpponentGraveyardsCount implements DynamicValue {
     private FilterCard filter;
 
     public CardsInOpponentGraveyardsCount() {
-       this(new FilterCard());
+        this(new FilterCard());
     }
 
     public CardsInOpponentGraveyardsCount(FilterCard filter) {
-       this.filter = filter;
+        this.filter = filter;
     }
 
-    private CardsInOpponentGraveyardsCount(CardsInOpponentGraveyardsCount dynamicValue) {
-       this.filter = dynamicValue.filter;
+    private CardsInOpponentGraveyardsCount(final CardsInOpponentGraveyardsCount dynamicValue) {
+        this.filter = dynamicValue.filter;
     }
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-       int amount = 0;
-       for (UUID playerUUID : game.getOpponents(sourceAbility.getControllerId())) {
-           Player player = game.getPlayer(playerUUID);
-           if (player != null) {
-               amount += player.getGraveyard().count(filter, sourceAbility.getControllerId(), sourceAbility, game);
-           }
+        int amount = 0;
+        for (UUID playerUUID : game.getOpponents(sourceAbility.getControllerId())) {
+            Player player = game.getPlayer(playerUUID);
+            if (player != null) {
+                amount += player.getGraveyard().count(filter, sourceAbility.getControllerId(), sourceAbility, game);
+            }
        }
        return amount;
     }
 
     @Override
-    public DynamicValue copy() {
-       return new CardsInOpponentGraveyardsCount(this);
+    public CardsInOpponentGraveyardsCount copy() {
+        return new CardsInOpponentGraveyardsCount(this);
     }
 
     @Override

@@ -66,7 +66,7 @@ class MarkOfSakikoTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, null, false);
     }
 
-    public MarkOfSakikoTriggeredAbility(final MarkOfSakikoTriggeredAbility ability) {
+    private MarkOfSakikoTriggeredAbility(final MarkOfSakikoTriggeredAbility ability) {
         super(ability);
     }
 

@@ -42,12 +42,12 @@ public final class CompellingDeterrence extends CardImpl {
 
 class CompellingDeterrenceEffect extends OneShotEffect {
 
-    public CompellingDeterrenceEffect() {
+    CompellingDeterrenceEffect() {
         super(Outcome.Detriment);
         this.staticText = "return target nonland permanent to its owner's hand. Then that player discards a card if you control a Zombie";
     }
 
-    public CompellingDeterrenceEffect(final CompellingDeterrenceEffect effect) {
+    private CompellingDeterrenceEffect(final CompellingDeterrenceEffect effect) {
         super(effect);
     }
 

@@ -23,7 +23,7 @@ public final class HailstormValkyrie extends CardImpl {
     public HailstormValkyrie(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
 
-        this.addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
         this.subtype.add(SubType.ANGEL);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(2);

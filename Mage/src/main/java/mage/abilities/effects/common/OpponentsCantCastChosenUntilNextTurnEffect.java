@@ -2,7 +2,9 @@ package mage.abilities.effects.common;
 
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
+import mage.cards.Card;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.game.Game;
@@ -19,7 +21,7 @@ public class OpponentsCantCastChosenUntilNextTurnEffect extends ContinuousRuleMo
         staticText = "Until your next turn, your opponents can't cast spells with the chosen name";
     }
 
-    public OpponentsCantCastChosenUntilNextTurnEffect(final OpponentsCantCastChosenUntilNextTurnEffect effect) {
+    protected OpponentsCantCastChosenUntilNextTurnEffect(final OpponentsCantCastChosenUntilNextTurnEffect effect) {
         super(effect);
     }
 
@@ -45,11 +47,18 @@ public class OpponentsCantCastChosenUntilNextTurnEffect extends ContinuousRuleMo
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        String cardName = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
-        if (game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
-            MageObject object = game.getObject(event.getSourceId());
-            return object != null && CardUtil.haveSameNames(object, cardName, game);
+        if (!game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
+            return false;
         }
-        return false;
+        SpellAbility spellAbility = SpellAbility.getSpellAbilityFromEvent(event, game);
+        if (spellAbility == null) {
+            return false;
+        }
+        Card card = spellAbility.getCharacteristics(game);
+        if (card == null) {
+            return false;
+        }
+        String cardName = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
+        return CardUtil.haveSameNames(card, cardName, game);
     }
 }

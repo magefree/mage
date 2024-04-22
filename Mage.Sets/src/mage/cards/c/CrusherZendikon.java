@@ -69,7 +69,7 @@ class CrusherZendikonToken extends TokenImpl {
         toughness = new MageInt(2);
         this.addAbility(TrampleAbility.getInstance());
     }
-    public CrusherZendikonToken(final CrusherZendikonToken token) {
+    private CrusherZendikonToken(final CrusherZendikonToken token) {
         super(token);
     }
 

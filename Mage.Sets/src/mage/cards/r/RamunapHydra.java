@@ -84,7 +84,7 @@ class RamunapHydraBoostEffect extends WhileConditionContinuousEffect {
         staticText = "{this} gets +1/+1 as long as there is a Desert card in your graveyard";
     }
 
-    public RamunapHydraBoostEffect(final RamunapHydraBoostEffect effect) {
+    private RamunapHydraBoostEffect(final RamunapHydraBoostEffect effect) {
         super(effect);
         this.power = effect.power;
         this.toughness = effect.toughness;

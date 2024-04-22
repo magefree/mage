@@ -14,6 +14,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.counters.CounterType;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetAnyTarget;
@@ -28,7 +29,7 @@ public final class JuriMasterOfTheRevue extends CardImpl {
     public JuriMasterOfTheRevue(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SHAMAN);
         this.power = new MageInt(1);
@@ -36,12 +37,12 @@ public final class JuriMasterOfTheRevue extends CardImpl {
 
         // Whenever you sacrifice a permanent, put a +1/+1 counter on Juri, Master of the Revue.
         this.addAbility(new SacrificePermanentTriggeredAbility(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance())
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance()), StaticFilters.FILTER_PERMANENT_A
         ));
 
         // When Juri dies, it deals damage equal its power to any target.
         Ability ability = new DiesSourceTriggeredAbility(new DamageTargetEffect(JuriMasterOfTheRevueValue.instance)
-                .setText("it deals damage equal its power to any target"));
+                .setText("it deals damage equal to its power to any target"));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }

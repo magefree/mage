@@ -7,6 +7,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.mana.ManaEffect;
 import mage.choices.Choice;
 import mage.constants.ManaType;
+import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
@@ -28,7 +29,7 @@ public class AnyColorPermanentTypesManaAbility extends ActivatedManaAbilityImpl 
         super(Zone.BATTLEFIELD, new AnyColorPermanentTypesManaEffect(targetController, permanentTypes), new TapSourceCost());
     }
 
-    public AnyColorPermanentTypesManaAbility(final AnyColorPermanentTypesManaAbility ability) {
+    protected AnyColorPermanentTypesManaAbility(final AnyColorPermanentTypesManaAbility ability) {
         super(ability);
     }
 
@@ -64,7 +65,7 @@ class AnyColorPermanentTypesManaEffect extends ManaEffect {
                 (targetController == TargetController.OPPONENT ? "an opponent controls." : "you control.");
     }
 
-    public AnyColorPermanentTypesManaEffect(final AnyColorPermanentTypesManaEffect effect) {
+    protected AnyColorPermanentTypesManaEffect(final AnyColorPermanentTypesManaEffect effect) {
         super(effect);
         this.filter = effect.filter.copy();
     }
@@ -90,7 +91,7 @@ class AnyColorPermanentTypesManaEffect extends ManaEffect {
             choice.setChoice(choice.getChoices().iterator().next());
         } else {
             Player player = game.getPlayer(source.getControllerId());
-            if (player == null || !player.choose(outcome, choice, game)) {
+            if (player == null || !player.choose(Outcome.PutManaInPool, choice, game)) {
                 return null;
             }
         }

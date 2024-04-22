@@ -22,7 +22,7 @@ import java.util.UUID;
  */
 public final class VexilusPraetor extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledPermanent("commanders you control");
+    private static final FilterPermanent filter = new FilterControlledPermanent("commanders");
 
     static {
         filter.add(CommanderPredicate.instance);

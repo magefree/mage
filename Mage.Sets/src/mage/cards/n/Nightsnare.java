@@ -39,18 +39,18 @@ public final class Nightsnare extends CardImpl {
 
 class NightsnareDiscardEffect extends OneShotEffect {
 
-    public NightsnareDiscardEffect() {
+    NightsnareDiscardEffect() {
         super(Outcome.Discard);
         staticText = "Target opponent reveals their hand. You may choose a nonland card from it. If you do, that player discards that card. If you don't, that player discards two cards";
     }
 
-    public NightsnareDiscardEffect(final NightsnareDiscardEffect effect) {
+    private NightsnareDiscardEffect(final NightsnareDiscardEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
         if (player == null || controller == null) {
             return false;

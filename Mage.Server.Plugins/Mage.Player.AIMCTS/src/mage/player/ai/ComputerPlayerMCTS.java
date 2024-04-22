@@ -25,7 +25,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * @author BetaSteward_at_googlemail.com
  */
-public class ComputerPlayerMCTS extends ComputerPlayer implements Player {
+public class ComputerPlayerMCTS extends ComputerPlayer {
 
     private static final int THINK_MIN_RATIO = 40;
     private static final int THINK_MAX_RATIO = 100;
@@ -274,7 +274,7 @@ public class ComputerPlayerMCTS extends ComputerPlayer implements Player {
      * @return a new game object with simulated players
      */
     protected Game createMCTSGame(Game game) {
-        Game mcts = game.copy();
+        Game mcts = game.createSimulationForAI();
 
         for (Player copyPlayer : mcts.getState().getPlayers().values()) {
             Player origPlayer = game.getState().getPlayers().get(copyPlayer.getId());
@@ -295,7 +295,6 @@ public class ComputerPlayerMCTS extends ComputerPlayer implements Player {
             }
             mcts.getState().getPlayers().put(copyPlayer.getId(), newPlayer);
         }
-        mcts.setSimulation(true);
         mcts.resume();
         return mcts;
     }

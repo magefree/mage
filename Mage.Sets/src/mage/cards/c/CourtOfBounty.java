@@ -6,6 +6,7 @@ import mage.abilities.condition.common.MonarchIsSourceControllerCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.BecomesMonarchSourceEffect;
 import mage.abilities.effects.common.PutCardFromHandOntoBattlefieldEffect;
+import mage.abilities.hint.common.MonarchHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -23,7 +24,7 @@ public final class CourtOfBounty extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}{G}");
 
         // When Court of Bounty enters the battlefield, you become the monarch.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new BecomesMonarchSourceEffect()));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new BecomesMonarchSourceEffect()).addHint(MonarchHint.instance));
 
         // At the beginning of your upkeep, you may put a land card from your hand onto the battlefield. If you're the monarch, instead you may put a creature or land card from your hand onto the battlefield.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ConditionalOneShotEffect(
@@ -32,7 +33,8 @@ public final class CourtOfBounty extends CardImpl {
                 MonarchIsSourceControllerCondition.instance, "you may put a land card " +
                 "from your hand onto the battlefield. If you're the monarch, " +
                 "instead you may put a creature or land card from your hand onto the battlefield"
-        ), TargetController.YOU, false));
+        ), TargetController.YOU, false)
+                .addHint(MonarchHint.instance));
     }
 
     private CourtOfBounty(final CourtOfBounty card) {

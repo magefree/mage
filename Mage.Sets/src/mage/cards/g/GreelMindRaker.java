@@ -28,7 +28,7 @@ public final class GreelMindRaker extends CardImpl {
     public GreelMindRaker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HORROR);
         this.subtype.add(SubType.SPELLSHAPER);
         this.power = new MageInt(3);

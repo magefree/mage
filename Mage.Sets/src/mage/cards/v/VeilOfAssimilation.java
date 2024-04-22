@@ -9,6 +9,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.StaticFilters;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
 
@@ -27,6 +28,7 @@ public final class VeilOfAssimilation extends CardImpl {
         );
         ability.addEffect(new GainAbilityTargetEffect(VigilanceAbility.getInstance())
                 .setText("and gains vigilance until end of turn"));
+        ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
     }
 

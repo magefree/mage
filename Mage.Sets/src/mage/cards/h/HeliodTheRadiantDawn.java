@@ -30,7 +30,7 @@ public class HeliodTheRadiantDawn extends CardImpl {
 
     public HeliodTheRadiantDawn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{2}{W}{W}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.addSubType(SubType.GOD);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

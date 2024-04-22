@@ -37,7 +37,7 @@ public final class Skylasher extends CardImpl {
 
     }
 
-    public Skylasher (final Skylasher card) {
+    private Skylasher(final Skylasher card) {
         super(card);
     }
 

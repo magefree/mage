@@ -40,7 +40,7 @@ public final class PerrieThePulverizer extends CardImpl {
     public PerrieThePulverizer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{W}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.RHINO);
         this.subtype.add(SubType.SOLDIER);
         this.power = new MageInt(3);

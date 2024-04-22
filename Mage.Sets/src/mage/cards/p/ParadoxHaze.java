@@ -105,7 +105,10 @@ class ParadoxHazeEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        game.getState().getTurnMods().add(new TurnMod(this.getTargetPointer().getFirst(game, source), new UpkeepStep(), null));
+        UUID playerId = this.getTargetPointer().getFirst(game, source);
+        if (playerId != null) {
+            game.getState().getTurnMods().add(new TurnMod(playerId).withExtraStep(new UpkeepStep()));
+        }
         return true;
     }
 }

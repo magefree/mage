@@ -43,13 +43,13 @@ public final class GoblinLyre extends CardImpl {
 
 class GoblinLyreEffect extends OneShotEffect {
 
-    public GoblinLyreEffect() {
+    GoblinLyreEffect() {
         super(Outcome.Damage);
         this.staticText = "Flip a coin. If you win the flip, {this} deals damage to target opponent or planeswalker equal to the number of creatures you control. "
                 + "If you lose the flip, Goblin Lyre deals damage to you equal to the number of creatures that opponent or that planeswalker's controller controls";
     }
 
-    public GoblinLyreEffect(final GoblinLyreEffect effect) {
+    private GoblinLyreEffect(final GoblinLyreEffect effect) {
         super(effect);
     }
 
@@ -66,7 +66,7 @@ class GoblinLyreEffect extends OneShotEffect {
             if (controller.flipCoin(source, game, true)) {
                 int damage = CreaturesYouControlCount.instance.calculate(game, source, this);
                 if (opponent != null) {
-                    return game.damagePlayerOrPlaneswalker(source.getFirstTarget(), damage, source.getSourceId(), source, game, false, true) > 0;
+                    return game.damagePlayerOrPermanent(source.getFirstTarget(), damage, source.getSourceId(), source, game, false, true) > 0;
                 }
             } else {
                 int damage = game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), opponent.getId(), game).size();

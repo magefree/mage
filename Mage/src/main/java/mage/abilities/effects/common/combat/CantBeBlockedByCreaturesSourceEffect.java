@@ -21,7 +21,7 @@ public class CantBeBlockedByCreaturesSourceEffect extends RestrictionEffect {
                 + (filter.getMessage().startsWith("except by") ? "" : "by ") + filter.getMessage();
     }
 
-    public CantBeBlockedByCreaturesSourceEffect(final CantBeBlockedByCreaturesSourceEffect effect) {
+    protected CantBeBlockedByCreaturesSourceEffect(final CantBeBlockedByCreaturesSourceEffect effect) {
         super(effect);
         this.filter = effect.filter;
     }

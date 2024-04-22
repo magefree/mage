@@ -29,7 +29,7 @@ public final class UurgSpawnOfTurg extends CardImpl {
     public UurgSpawnOfTurg(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}{B}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.FROG);
         this.subtype.add(SubType.BEAST);
         this.power = new MageInt(0);
@@ -45,7 +45,7 @@ public final class UurgSpawnOfTurg extends CardImpl {
 
         // {B}{G}, Sacrifice a land: You gain 2 life.
         Ability ability = new SimpleActivatedAbility(new GainLifeEffect(2), new ManaCostsImpl<>("{B}{G}"));
-        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_LAND_SHORT_TEXT));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_LAND));
         this.addAbility(ability);
     }
 

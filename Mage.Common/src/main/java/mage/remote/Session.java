@@ -1,4 +1,3 @@
-
 package mage.remote;
 
 import mage.remote.interfaces.ChatSession;
@@ -13,11 +12,11 @@ import mage.remote.interfaces.ServerState;
 import mage.remote.interfaces.Testable;
 
 /**
- * Extracted interface for SessionImpl class.
+ * Network: client/server session
  *
  * @author noxx
  */
 public interface Session extends ClientData, Connect, GamePlay, GameTypes, ServerState, ChatSession, Feedback, PlayerActions, Replays, Testable {
 
-    public void appendJsonLog(ActionData actionData);
+    void appendJsonLog(ActionData actionData);
 }

@@ -67,12 +67,12 @@ public final class DralnusPet extends CardImpl {
 
 class DralnusPetEffect extends OneShotEffect {
 
-    public DralnusPetEffect() {
+    DralnusPetEffect() {
         super(Outcome.BoostCreature);
         this.staticText = "and with X +1/+1 counters on it, where X is the discarded card's mana value";
     }
 
-    public DralnusPetEffect(final DralnusPetEffect effect) {
+    private DralnusPetEffect(final DralnusPetEffect effect) {
         super(effect);
     }
 

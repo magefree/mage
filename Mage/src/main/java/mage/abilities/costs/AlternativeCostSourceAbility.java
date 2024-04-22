@@ -24,6 +24,7 @@ import java.util.stream.Collectors;
 public class AlternativeCostSourceAbility extends StaticAbility implements AlternativeSourceCosts {
 
     private static final String ALTERNATIVE_COST_ACTIVATION_KEY = "AlternativeCostActivated";
+    private static final String ALTERNATIVE_DYNAMIC_COST_ACTIVATED_KEY = "AlternativeDynamicCostActivated";
 
     private Costs<AlternativeCost> alternateCosts = new CostsImpl<>();
     protected Condition condition;
@@ -77,7 +78,7 @@ public class AlternativeCostSourceAbility extends StaticAbility implements Alter
         this.dynamicCost = dynamicCost;
     }
 
-    public AlternativeCostSourceAbility(final AlternativeCostSourceAbility ability) {
+    protected AlternativeCostSourceAbility(final AlternativeCostSourceAbility ability) {
         super(ability);
         this.alternateCosts = ability.alternateCosts;
         this.condition = ability.condition;
@@ -145,25 +146,30 @@ public class AlternativeCostSourceAbility extends StaticAbility implements Alter
                         CardUtil.reduceCost((SpellAbility) ability, ability.getManaCosts());
 
                     } else {
-                        ability.getManaCostsToPay().clear();
+                        ability.clearManaCostsToPay();
                     }
                     if (!onlyMana) {
-                        ability.getCosts().clear();
+                        ability.clearCosts();
                     }
                     for (AlternativeCost alternateCost : alternativeCostsToCheck) {
                         alternateCost.activate();
                         for (Iterator it = ((Costs) alternateCost).iterator(); it.hasNext(); ) {
                             Cost costDetailed = (Cost) it.next();
                             if (costDetailed instanceof ManaCost) {
-                                ability.getManaCostsToPay().add((ManaCost) costDetailed.copy());
+                                ability.addManaCostsToPay((ManaCost) costDetailed.copy());
                             } else if (costDetailed != null) {
-                                ability.getCosts().add(costDetailed.copy());
+                                ability.addCost(costDetailed.copy());
                             }
                         }
                     }
 
+                    // Those cost have been paid, we want to store them.
+                    if (dynamicCost != null) {
+                        rememberDynamicCost(game, ability, alternativeCostsToCheck);
+                    }
+
                     // save activated status
-                    game.getState().setValue(getActivatedKey(ability), Boolean.TRUE);
+                    doActivate(game, ability);
                 } else {
                     return false;
                 }
@@ -174,6 +180,10 @@ public class AlternativeCostSourceAbility extends StaticAbility implements Alter
         return isActivated(ability, game);
     }
 
+    protected void doActivate(Game game, Ability ability) {
+        game.getState().setValue(getActivatedKey(ability), Boolean.TRUE);
+    }
+
     private String getActivatedKey(Ability source) {
         return getActivatedKey(this.getOriginalId(), source.getSourceId(), source.getSourceObjectZoneChangeCounter());
     }
@@ -182,6 +192,20 @@ public class AlternativeCostSourceAbility extends StaticAbility implements Alter
         // can't use sourceId cause copied cards are different...
         // TODO: enable sourceId after copy card fix (it must copy cards with all related game state values)
         return ALTERNATIVE_COST_ACTIVATION_KEY + "_" + alternativeCostOriginalId + "_" /*+ sourceId + "_"*/ + sourceZCC;
+    }
+
+    private void rememberDynamicCost(Game game, Ability ability, Costs<AlternativeCost> costs) {
+        game.getState().setValue(getDynamicCostActivatedKey(ability), costs);
+    }
+
+    private String getDynamicCostActivatedKey(Ability source) {
+        return getDynamicCostActivatedKey(this.getOriginalId(), source.getSourceId(), source.getSourceObjectZoneChangeCounter());
+    }
+
+    private static String getDynamicCostActivatedKey(UUID alternativeCostOriginalId, UUID sourceId, int sourceZCC) {
+        // can't use sourceId cause copied cards are different...
+        // TODO: enable sourceId after copy card fix (it must copy cards with all related game state values)
+        return ALTERNATIVE_DYNAMIC_COST_ACTIVATED_KEY + "_" + alternativeCostOriginalId + "_" /*+ sourceId + "_"*/ + sourceZCC;
     }
 
     /**
@@ -210,8 +234,10 @@ public class AlternativeCostSourceAbility extends StaticAbility implements Alter
     public boolean isActivated(Ability source, Game game) {
         Costs<AlternativeCost> alternativeCostsToCheck;
         if (dynamicCost != null) {
-            alternativeCostsToCheck = new CostsImpl<>();
-            alternativeCostsToCheck.add(convertToAlternativeCost(dynamicCost.getCost(source, game)));
+            alternativeCostsToCheck = (Costs<AlternativeCost>) game.getState().getValue(getDynamicCostActivatedKey(source));
+            if (alternativeCostsToCheck == null) {
+                return false;
+            }
         } else {
             alternativeCostsToCheck = this.alternateCosts;
         }

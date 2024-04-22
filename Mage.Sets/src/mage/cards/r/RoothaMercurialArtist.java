@@ -33,7 +33,7 @@ public final class RoothaMercurialArtist extends CardImpl {
     public RoothaMercurialArtist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ORC);
         this.subtype.add(SubType.SHAMAN);
         this.power = new MageInt(1);

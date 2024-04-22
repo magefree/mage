@@ -33,7 +33,7 @@ public final class DraconicMuralists extends CardImpl {
 
         // When Draconic Muralists dies, you may search your library for a Dragon card, reveal it, put it into your hand, then shuffle.
         this.addAbility(new DiesSourceTriggeredAbility(new SearchLibraryPutInHandEffect(
-                new TargetCardInLibrary(filter), true, true
+                new TargetCardInLibrary(filter), true
         ), true));
     }
 

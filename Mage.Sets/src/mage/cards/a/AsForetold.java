@@ -3,6 +3,7 @@ package mage.cards.a;
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
@@ -71,8 +72,8 @@ class SpellWithManaCostLessThanOrEqualToCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         MageObject object = game.getObject(source);
         return object != null
-                && !object.isLand(game)
-                && object.getManaValue() <= counters;
+                && object.getManaValue() <= counters
+                && source instanceof SpellAbility;
     }
 }
 
@@ -126,12 +127,12 @@ class AsForetoldAlternativeCost extends AlternativeCostSourceAbility {
  */
 class AsForetoldAddAltCostEffect extends ContinuousEffectImpl {
 
-    public AsForetoldAddAltCostEffect() {
+    AsForetoldAddAltCostEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Once each turn, you may pay {0} rather than pay the mana cost for a spell you cast with mana value X or less, where X is the number of time counters on {this}.";
     }
 
-    public AsForetoldAddAltCostEffect(final AsForetoldAddAltCostEffect effect) {
+    private AsForetoldAddAltCostEffect(final AsForetoldAddAltCostEffect effect) {
         super(effect);
     }
 
@@ -152,7 +153,7 @@ class AsForetoldAddAltCostEffect extends ContinuousEffectImpl {
                         + sourcePermanent.getTurnsOnBattlefield());
                 // If we haven't used it yet this turn, give the option of using the zero alternative cost
                 if (wasItUsed == null) {
-                    int timeCounters = sourcePermanent.getCounters(game).getCount("time");
+                    int timeCounters = sourcePermanent.getCounters(game).getCount(CounterType.TIME);
                     AsForetoldAlternativeCost alternateCostAbility = new AsForetoldAlternativeCost(timeCounters);
                     alternateCostAbility.setSourceId(source.getSourceId());
                     controller.getAlternativeSourceCosts().add(alternateCostAbility);

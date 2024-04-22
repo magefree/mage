@@ -44,12 +44,12 @@ public final class ForceLightning extends CardImpl {
 
 class ForceLightningEffect extends OneShotEffect {
 
-    public ForceLightningEffect() {
+    ForceLightningEffect() {
         super(Outcome.Benefit);
         this.staticText = "Scry X";
     }
 
-    public ForceLightningEffect(final ForceLightningEffect effect) {
+    private ForceLightningEffect(final ForceLightningEffect effect) {
         super(effect);
     }
 

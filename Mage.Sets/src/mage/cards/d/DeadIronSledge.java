@@ -56,7 +56,7 @@ class DeadIronSledgeTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever equipped creature blocks or becomes blocked by a creature, ");
     }
 
-    public DeadIronSledgeTriggeredAbility(final DeadIronSledgeTriggeredAbility ability) {
+    private DeadIronSledgeTriggeredAbility(final DeadIronSledgeTriggeredAbility ability) {
         super(ability);
     }
 
@@ -98,12 +98,12 @@ class DeadIronSledgeTriggeredAbility extends TriggeredAbilityImpl {
 
 class DeadIronSledgeDestroyEffect extends OneShotEffect {
 
-    public DeadIronSledgeDestroyEffect() {
+    DeadIronSledgeDestroyEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "destroy both creatures";
     }
 
-    public DeadIronSledgeDestroyEffect(final DeadIronSledgeDestroyEffect effect) {
+    private DeadIronSledgeDestroyEffect(final DeadIronSledgeDestroyEffect effect) {
         super(effect);
     }
 

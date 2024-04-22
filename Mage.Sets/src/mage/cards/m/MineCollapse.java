@@ -28,7 +28,7 @@ public final class MineCollapse extends CardImpl {
 
         // If it's your turn, you may sacrifice a Mountain rather than pay this spell's mana cost.
         this.addAbility(new AlternativeCostSourceAbility(
-                new SacrificeTargetCost(new TargetControlledPermanent(filter)),
+                new SacrificeTargetCost(filter),
                 MyTurnCondition.instance,
                 "If it's your turn, you may sacrifice a Mountain rather than pay this spell's mana cost."
         ).addHint(MyTurnHint.instance));

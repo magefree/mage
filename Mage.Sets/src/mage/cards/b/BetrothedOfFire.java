@@ -49,7 +49,7 @@ public final class BetrothedOfFire extends CardImpl {
         // Sacrifice an untapped creature: Enchanted creature gets +2/+0 until end of turn.
         this.addAbility(new SimpleActivatedAbility(
                 new BoostEnchantedEffect(2, 0, Duration.EndOfTurn),
-                new SacrificeTargetCost(new TargetControlledPermanent(filter))
+                new SacrificeTargetCost(filter)
         ));
 
         // Sacrifice enchanted creature: Creatures you control get +2/+0 until end of turn.

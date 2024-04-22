@@ -50,12 +50,12 @@ public final class AberrantResearcher extends CardImpl {
 
 class AberrantResearcherEffect extends OneShotEffect {
 
-    public AberrantResearcherEffect() {
+    AberrantResearcherEffect() {
         super(Outcome.Benefit);
         staticText = "mill a card. If an instant or sorcery card was milled this way, transform {this}";
     }
 
-    public AberrantResearcherEffect(final AberrantResearcherEffect effect) {
+    private AberrantResearcherEffect(final AberrantResearcherEffect effect) {
         super(effect);
     }
 

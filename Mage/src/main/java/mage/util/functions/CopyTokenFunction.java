@@ -1,71 +1,122 @@
 package mage.util.functions;
 
 import mage.MageObject;
+import mage.abilities.Abilities;
 import mage.abilities.Ability;
-import mage.abilities.keyword.MorphAbility;
+import mage.abilities.effects.common.continuous.BecomesFaceDownCreatureEffect;
+import mage.abilities.keyword.PrototypeAbility;
 import mage.cards.Card;
 import mage.constants.CardType;
 import mage.constants.SuperType;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.game.permanent.PermanentToken;
+import mage.game.permanent.token.EmptyToken;
 import mage.game.permanent.token.Token;
 import mage.game.stack.Spell;
+import mage.util.CardUtil;
 
 /**
  * @author nantuko
  */
-public class CopyTokenFunction implements Function<Token, Card> {
+public class CopyTokenFunction {
 
-    protected Token target;
+    protected final Token target;
 
-    public CopyTokenFunction(Token target) {
+    private CopyTokenFunction(Token target) {
         if (target == null) {
             throw new IllegalArgumentException("Target can't be null");
         }
         this.target = target;
     }
 
-    @Override
-    public Token apply(Card source, Game game) {
+    public static Token createTokenCopy(Card source, Game game) {
+        return createTokenCopy(source, game, null);
+    }
+
+    public static Token createTokenCopy(Card source, Game game, Spell spell) {
+        return new CopyTokenFunction(new EmptyToken(source.isTransformable())).from(source, game, spell);
+    }
+
+    public void apply(Card source, Game game) {
         if (target == null) {
             throw new IllegalArgumentException("Target can't be null");
         }
         // A copy contains only the attributes of the basic card or basic Token that's the base of the permanent
         // else gained abililies would be copied too.
+        target.setEntersTransformed(source instanceof Permanent && ((Permanent) source).isTransformed());
+        MageObject sourceObj;
 
-        MageObject sourceObj = source;
+        // from another token
         if (source instanceof PermanentToken) {
             // create token from another token
-            sourceObj = ((PermanentToken) source).getToken();
-            // to show the source image, the original values have to be used
-            target.setOriginalExpansionSetCode(((Token) sourceObj).getOriginalExpansionSetCode());
-            target.setOriginalCardNumber(((Token) sourceObj).getOriginalCardNumber());
+            Token sourceToken = ((PermanentToken) source).getToken();
+            sourceObj = sourceToken;
             target.setCopySourceCard(((PermanentToken) source).getToken().getCopySourceCard());
-        } else if (source instanceof PermanentCard) {
-            // create token from non-token permanent
-            if (((PermanentCard) source).isMorphed() || ((PermanentCard) source).isManifested()) {
-                MorphAbility.setPermanentToFaceDownCreature(target, game);
-                return target;
-            } else {
-                if (((PermanentCard) source).isTransformed() && source.getSecondCardFace() != null) {
-                    sourceObj = ((PermanentCard) source).getSecondCardFace();
-                } else {
-                    sourceObj = ((PermanentCard) source).getCard();
-                }
 
-                target.setOriginalExpansionSetCode(source.getExpansionSetCode());
-                target.setOriginalCardNumber(source.getCardNumber());
-                target.setCopySourceCard((Card) sourceObj);
+            copyToToken(target, sourceObj, game);
+            CardUtil.copySetAndCardNumber(target, source);
+            if (sourceToken.getBackFace() != null) {
+                copyToToken(target.getBackFace(), sourceToken.getBackFace(), game);
+                CardUtil.copySetAndCardNumber(target.getBackFace(), sourceToken.getBackFace());
             }
-        } else {
-            // create token from non-permanent object like card (example: Embalm ability)
-            target.setOriginalExpansionSetCode(source.getExpansionSetCode());
-            target.setOriginalCardNumber(source.getCardNumber());
-            target.setCopySourceCard(source);
+            return;
         }
 
+        // from a permanent
+        if (source instanceof PermanentCard) {
+            // create token from non-token permanent
+
+            // face down must hide all info
+            PermanentCard sourcePermanent = (PermanentCard) source;
+            BecomesFaceDownCreatureEffect.FaceDownType faceDownType = BecomesFaceDownCreatureEffect.findFaceDownType(game, sourcePermanent);
+            if (faceDownType != null) {
+                BecomesFaceDownCreatureEffect.makeFaceDownObject(game, null, target, faceDownType, null);
+                return;
+            }
+
+            sourceObj = source.getMainCard();
+            target.setCopySourceCard((Card) sourceObj);
+
+            copyToToken(target, sourceObj, game);
+            CardUtil.copySetAndCardNumber(target, sourceObj);
+            if (((Card) sourceObj).isTransformable()) {
+                copyToToken(target.getBackFace(), ((Card) sourceObj).getSecondCardFace(), game);
+                CardUtil.copySetAndCardNumber(target.getBackFace(), ((Card) sourceObj).getSecondCardFace());
+            }
+            if (((PermanentCard) source).isPrototyped()){
+                Abilities<Ability> abilities = source.getAbilities();
+                for (Ability ability : abilities){
+                    if (ability instanceof PrototypeAbility) {
+                        ((PrototypeAbility) ability).prototypePermanent(target, game);
+                    }
+                }
+            }
+            return;
+        }
+
+        // from another object like card (example: Embalm ability)
+        sourceObj = source;
+        target.setCopySourceCard(source);
+
+        copyToToken(target, sourceObj, game);
+        CardUtil.copySetAndCardNumber(target, sourceObj);
+        if (source.isTransformable()) {
+            if (target.getBackFace() == null) {
+                // if you catch this then a weird use case here: card with single face copy another token with double face??
+                // must create back face??
+                throw new IllegalStateException("Wrong code usage: back face must be non null: " + target.getName() + " - " + target.getClass().getSimpleName());
+            }
+            copyToToken(target.getBackFace(), source.getSecondCardFace(), game);
+            CardUtil.copySetAndCardNumber(target.getBackFace(), source.getSecondCardFace());
+        }
+    }
+
+    private static void copyToToken(Token target, MageObject sourceObj, Game game) {
         // modify all attributes permanently (without game usage)
+        // ignore images settings here, it will be setup later due needs in face down
+        // (after copy or after put to battlefield)
         target.setName(sourceObj.getName());
         target.getColor().setColor(sourceObj.getColor());
         target.getManaCost().clear();
@@ -89,25 +140,18 @@ public class CopyTokenFunction implements Function<Token, Card> {
             // otherwise there are problems to check for created continuous effects to check if
             // the source (the Token) has still this ability
             ability.newOriginalId();
-
-            target.addAbility(ability);
+            //Don't re-add subabilities since they've already in sourceObj's abilities list
+            target.addAbility(ability, true);
         }
 
         target.setPower(sourceObj.getPower().getBaseValue());
         target.setToughness(sourceObj.getToughness().getBaseValue());
         target.setStartingLoyalty(sourceObj.getStartingLoyalty());
         target.setStartingDefense(sourceObj.getStartingDefense());
-
-        return target;
     }
 
-    public Token from(Card source, Game game) {
-        return from(source, game, null);
-    }
-
-    public Token from(Card source, Game game, Spell spell) {
+    private Token from(Card source, Game game, Spell spell) {
         apply(source, game);
-
         // token's ZCC must be synced with original card to keep abilities settings
         // Example: kicker ability and kicked status
         if (spell != null) {

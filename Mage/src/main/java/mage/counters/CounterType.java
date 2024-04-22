@@ -23,9 +23,12 @@ public enum CounterType {
     ARROWHEAD("arrowhead"),
     AWAKENING("awakening"),
     BLAZE("blaze"),
+    BLESSING("blessing"),
     BLOOD("blood"),
     BLOODLINE("bloodline"),
+    BLOODSTAIN("bloodstain"),
     BOOK("book"),
+    BORE("bore"),
     BOUNTY("bounty"),
     BRIBERY("bribery"),
     BRICK("brick"),
@@ -34,6 +37,7 @@ public enum CounterType {
     CARRION("carrion"),
     CHARGE("charge"),
     CHIP("chip"),
+    CHORUS("chorus"),
     COIN("coin"),
     COLLECTION("collection"),
     COMPONENT("component"),
@@ -53,9 +57,11 @@ public enum CounterType {
     DESCENT("descent"),
     DESPAIR("despair"),
     DEVOTION("devotion"),
+    DISCOVERY("discovery"),
     DIVINITY("divinity"),
     DOOM("doom"),
     DOUBLE_STRIKE("double strike"),
+    DREAD("dread"),
     DREAM("dream"),
     ECHO("echo"),
     EGG("egg"),
@@ -71,6 +77,7 @@ public enum CounterType {
     FEATHER("feather"),
     FETCH("fetch"),
     FILIBUSTER("filibuster"),
+    FINALITY("finality"),
     FIRST_STRIKE("first strike"),
     FLAME("flame"),
     FLOOD("flood"),
@@ -87,19 +94,23 @@ public enum CounterType {
     GOLD("gold"),
     GROWTH("growth"),
     HARMONY("harmony"),
+    HASTE("haste"),
     HATCHLING("hatchling"),
     HEALING("healing"),
     HEXPROOF("hexproof"),
     HIT("hit"),
     HOOFPRINT("hoofprint"),
     HONE("hone"),
+    HOPE("hope"),
     HOUR("hour", "an"),
     HOURGLASS("hourglass", "an"),
     HUNGER("hunger"),
     ICE("ice"),
+    IMPOSTOR("impostor"),
     INCARNATION("incarnation"),
     INDESTRUCTIBLE("indestructible"),
     INFECTION("infection"),
+    INFLUENCE("influence"),
     INGENUITY("ingenuity"),
     INTEL("intel"),
     INTERVENTION("intervention"),
@@ -113,6 +124,7 @@ public enum CounterType {
     LANDMARK("landmark"),
     LEVEL("level"),
     LIFELINK("lifelink"),
+    LOOT("loot"),
     LORE("lore"),
     LUCK("luck"),
     LOYALTY("loyalty"),
@@ -159,17 +171,23 @@ public enum CounterType {
     PRESSURE("pressure"),
     PREY("prey"),
     PUPA("pupa"),
+    RAD("rad"),
     REACH("reach"),
+    REJECTION("rejection"),
     REPAIR("repair"),
+    REPRIEVE("reprieve"),
+    RIBBON("ribbon"),
     RITUAL("ritual"),
     ROPE("rope"),
     RUST("rust"),
     QUEST("quest"),
     SILVER("silver"),
     SCREAM("scream"),
+    SHADOW("shadow"),
     SHELL("shell"),
     SHIELD("shield"),
     SHRED("shred"),
+    SKEWER("skewer"),
     SLEEP("sleep"),
     SLIME("slime"),
     SLUMBER("slumber"),
@@ -179,6 +197,7 @@ public enum CounterType {
     SPORE("spore"),
     STASH("stash"),
     STORAGE("storage"),
+    STORY("story"),
     STRIFE("strife"),
     STUDY("study"),
     STUN("stun"),
@@ -193,6 +212,7 @@ public enum CounterType {
     TRAP("trap"),
     TREASURE("treasure"),
     UNITY("unity", "a"),
+    UNLOCK("unlock"),
     VALOR("valor"),
     VELOCITY("velocity"),
     VERSE("verse"),
@@ -220,7 +240,7 @@ public enum CounterType {
     }
 
     CounterType(String name) {
-        this(name, "aeiou".contains("" + name.charAt(0)) ? "an" : "a");
+        this(name, "aeiou".contains(String.valueOf(name.charAt(0))) ? "an" : "a");
     }
 
     CounterType(String name, String article) {
@@ -300,8 +320,12 @@ public enum CounterType {
                 return new AbilityCounter(new MenaceAbility(), amount);
             case REACH:
                 return new AbilityCounter(ReachAbility.getInstance(), amount);
+            case SHADOW:
+                return new AbilityCounter(ShadowAbility.getInstance(), amount);
             case TRAMPLE:
                 return new AbilityCounter(TrampleAbility.getInstance(), amount);
+            case HASTE:
+                return new AbilityCounter(HasteAbility.getInstance(), amount);
             case VIGILANCE:
                 return new AbilityCounter(VigilanceAbility.getInstance(), amount);
             default:

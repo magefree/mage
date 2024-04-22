@@ -28,7 +28,7 @@ public final class KitsuneBlademaster extends CardImpl {
         this.addAbility(new BushidoAbility(1));
     }
 
-    public KitsuneBlademaster (final KitsuneBlademaster card) {
+    private KitsuneBlademaster(final KitsuneBlademaster card) {
         super(card);
     }
 

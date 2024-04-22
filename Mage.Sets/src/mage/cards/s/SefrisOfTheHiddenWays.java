@@ -29,7 +29,7 @@ public final class SefrisOfTheHiddenWays extends CardImpl {
     public SefrisOfTheHiddenWays(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{U}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(2);
@@ -38,7 +38,7 @@ public final class SefrisOfTheHiddenWays extends CardImpl {
         // Whenever one or more creature cards are put into your graveyard from anywhere, venture into the dungeon. This ability triggers only once each turn.
         this.addAbility(new PutCardIntoGraveFromAnywhereAllTriggeredAbility(
                 new VentureIntoTheDungeonEffect(), false, filter, TargetController.YOU
-        ).setTriggersOnce(true));
+        ).setTriggersOnceEachTurn(true));
 
         // Create Undead — Whenever you complete a dungeon, return target creature card from your graveyard to the battlefield.
         Ability ability = new CompletedDungeonTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect());

@@ -62,7 +62,7 @@ class SwordOfFeastAndFamineAbility extends TriggeredAbilityImpl {
         this.addEffect(new UntapAllLandsControllerEffect());
     }
 
-    public SwordOfFeastAndFamineAbility(final SwordOfFeastAndFamineAbility ability) {
+    private SwordOfFeastAndFamineAbility(final SwordOfFeastAndFamineAbility ability) {
         super(ability);
     }
 

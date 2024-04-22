@@ -36,7 +36,7 @@ public class TheGreatSynthesis extends CardImpl {
         this.nightCard = true;
 
         //(As this Saga enters and after your draw step, add a lore counter.)
-        SagaAbility sagaAbility = new SagaAbility(this, false);
+        SagaAbility sagaAbility = new SagaAbility(this);
 
         //I — Draw cards equal to the number of cards in your hand. You have no maximum hand size for as long as you
         //control The Great Synthesis.
@@ -77,7 +77,7 @@ class TheGreatSynthesisCastEffect extends OneShotEffect {
         this.staticText = "you may cast any number of spells from your hand without paying their mana costs";
     }
 
-    public TheGreatSynthesisCastEffect(final TheGreatSynthesisCastEffect effect) {
+    private TheGreatSynthesisCastEffect(final TheGreatSynthesisCastEffect effect) {
         super(effect);
     }
 

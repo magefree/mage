@@ -27,7 +27,7 @@ public final class TalonTrooper extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public TalonTrooper (final TalonTrooper card) {
+    private TalonTrooper(final TalonTrooper card) {
         super(card);
     }
 

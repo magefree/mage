@@ -9,7 +9,6 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class OnEventTriggeredAbility extends TriggeredAbilityImpl {
@@ -38,7 +37,7 @@ public class OnEventTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("At the " + eventName + ", ");
     }
 
-    public OnEventTriggeredAbility(final OnEventTriggeredAbility ability) {
+    protected OnEventTriggeredAbility(final OnEventTriggeredAbility ability) {
         super(ability);
         this.eventType = ability.eventType;
         this.eventName = ability.eventName;

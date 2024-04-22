@@ -1,7 +1,7 @@
 package mage.filter.predicate.card;
 
 import mage.cards.Card;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
 
@@ -13,7 +13,7 @@ public enum DoubleFacedCardPredicate implements Predicate<Card> {
 
     @Override
     public boolean apply(Card input, Game game) {
-        return input instanceof ModalDoubleFacesCard || input.getSecondCardFace() != null;
+        return input instanceof ModalDoubleFacedCard || input.getSecondCardFace() != null;
     }
 
     @Override

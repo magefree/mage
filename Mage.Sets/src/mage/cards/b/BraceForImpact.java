@@ -50,12 +50,12 @@ public final class BraceForImpact extends CardImpl {
 
 class BraceForImpactPreventDamageTargetEffect extends PreventionEffectImpl {
 
-    public BraceForImpactPreventDamageTargetEffect(Duration duration) {
+    BraceForImpactPreventDamageTargetEffect(Duration duration) {
         super(duration);
         staticText = "Prevent all damage that would be dealt to target multicolored creature this turn. For each 1 damage prevented this way, put a +1/+1 counter on that creature";
     }
 
-    public BraceForImpactPreventDamageTargetEffect(final BraceForImpactPreventDamageTargetEffect effect) {
+    private BraceForImpactPreventDamageTargetEffect(final BraceForImpactPreventDamageTargetEffect effect) {
         super(effect);
     }
 
@@ -65,14 +65,11 @@ class BraceForImpactPreventDamageTargetEffect extends PreventionEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         GameEvent preventEvent = new PreventDamageEvent(event.getTargetId(), source.getSourceId(), source, source.getControllerId(), event.getAmount(), ((DamageEvent) event).isCombatDamage());
-        if (game.replaceEvent(preventEvent)) { return false; }
+        if (game.replaceEvent(preventEvent)) {
+            return false;
+        }
         int prevented;
         int damage = event.getAmount();
         event.setAmount(0);

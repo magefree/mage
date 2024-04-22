@@ -7,7 +7,6 @@ import mage.constants.SuperType;
 import mage.filter.FilterCard;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class FilterLandCard extends FilterCard {
@@ -27,7 +26,7 @@ public class FilterLandCard extends FilterCard {
         return filter;
     }
 
-    public FilterLandCard(final FilterLandCard filter) {
+    protected FilterLandCard(final FilterLandCard filter) {
         super(filter);
     }
 

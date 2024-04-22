@@ -49,12 +49,12 @@ public final class DivineReckoning extends CardImpl {
 
 class DivineReckoningEffect extends OneShotEffect {
 
-    public DivineReckoningEffect() {
+    DivineReckoningEffect() {
         super(Outcome.DestroyPermanent);
         staticText = "Each player chooses a creature they control. Destroy the rest";
     }
 
-    public DivineReckoningEffect(DivineReckoningEffect effect) {
+    private DivineReckoningEffect(final DivineReckoningEffect effect) {
         super(effect);
     }
 

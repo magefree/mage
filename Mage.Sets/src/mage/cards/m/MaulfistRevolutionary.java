@@ -1,11 +1,9 @@
-
 package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldOrDiesSourceTriggeredAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
@@ -57,12 +55,12 @@ public final class MaulfistRevolutionary extends CardImpl {
 
 class MaulfistRevolutionaryEffect extends OneShotEffect {
 
-    public MaulfistRevolutionaryEffect() {
+    MaulfistRevolutionaryEffect() {
         super(Outcome.Neutral);
         this.staticText = "for each kind of counter on target permanent or player, give that permanent or player another counter of that kind";
     }
 
-    public MaulfistRevolutionaryEffect(final MaulfistRevolutionaryEffect effect) {
+    private MaulfistRevolutionaryEffect(final MaulfistRevolutionaryEffect effect) {
         super(effect);
     }
 
@@ -105,7 +103,7 @@ class MaulfistRevolutionaryEffect extends OneShotEffect {
     }
 
     @Override
-    public Effect copy() {
+    public MaulfistRevolutionaryEffect copy() {
         return new MaulfistRevolutionaryEffect(this);
     }
 

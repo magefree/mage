@@ -1,9 +1,9 @@
-
 package mage.cards.h;
 
 import java.util.UUID;
+
+import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.BeginningOfDrawTriggeredAbility;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.discard.DiscardHandControllerEffect;
 import mage.cards.CardImpl;
@@ -21,9 +21,10 @@ public final class HeightenedAwareness extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{U}{U}");
 
         // As Heightened Awareness enters the battlefield, discard your hand.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new DiscardHandControllerEffect()));
+        this.addAbility(new AsEntersBattlefieldAbility(new DiscardHandControllerEffect()));
         // At the beginning of your draw step, draw an additional card.
-        this.addAbility(new BeginningOfDrawTriggeredAbility(new DrawCardSourceControllerEffect(1),
+        this.addAbility(new BeginningOfDrawTriggeredAbility(new DrawCardSourceControllerEffect(1)
+                .setText("draw an additional card"),
             TargetController.YOU, false));
     }
 

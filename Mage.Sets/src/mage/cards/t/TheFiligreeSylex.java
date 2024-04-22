@@ -1,23 +1,18 @@
 package mage.cards.t;
 
-import java.util.Objects;
-import java.util.Optional;
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.CompositeCost;
 import mage.abilities.costs.common.RemoveCounterCost;
-import mage.abilities.costs.common.RemoveVariableCountersTargetCost;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.constants.SuperType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SuperType;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
@@ -28,6 +23,10 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetAnyTarget;
+
+import java.util.Objects;
+import java.util.Optional;
+import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -43,7 +42,7 @@ public final class TheFiligreeSylex extends CardImpl {
     public TheFiligreeSylex(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // {T}: Put an oil counter on The Filigree Sylex.
         this.addAbility(new SimpleActivatedAbility(
@@ -61,7 +60,7 @@ public final class TheFiligreeSylex extends CardImpl {
         this.addAbility(ability);
 
         // {T}, Remove ten oil counters from among permanents you control and sacrifice The Filigree Sylex: It deals 10 damage to any target.
-        ability = new SimpleActivatedAbility(new DamageTargetEffect(10), new TapSourceCost());
+        ability = new SimpleActivatedAbility(new DamageTargetEffect(10, "it"), new TapSourceCost());
         ability.addCost(new CompositeCost(
                 new RemoveCounterCost(new TargetPermanent(
                         0, Integer.MAX_VALUE,
@@ -93,6 +92,7 @@ enum TheFiligreeSylexPredicate implements ObjectSourcePlayerPredicate<Permanent>
                 .filter(Objects::nonNull)
                 .map(permanent -> permanent.getCounters(game))
                 .map(counters -> counters.getCount(CounterType.OIL))
+                .orElse(-1)
                 .equals(input.getObject().getManaValue());
     }
 }

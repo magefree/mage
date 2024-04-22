@@ -33,7 +33,7 @@ public class DraftController {
     private final Draft draft;
     private final UUID tableId;
 
-    public DraftController(ManagerFactory managerFactory, Draft draft, ConcurrentHashMap<UUID, UUID> userPlayerMap, UUID tableId) {
+    public DraftController(ManagerFactory managerFactory, Draft draft, ConcurrentMap<UUID, UUID> userPlayerMap, UUID tableId) {
         this.managerFactory = managerFactory;
         draftSessionId = UUID.randomUUID();
         this.userPlayerMap = userPlayerMap;
@@ -63,7 +63,7 @@ public class DraftController {
                 (Listener<PlayerQueryEvent>) event -> {
                     try {
                         switch (event.getQueryType()) {
-                            case PICK_CARD:
+                            case DRAFT_PICK_CARD:
                                 pickCard(event.getPlayerId(), event.getMax());
                                 break;
                         }

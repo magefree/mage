@@ -18,8 +18,6 @@ public class DoublestrikeSamuraiToken extends TokenImpl {
         power = new MageInt(2);
         toughness = new MageInt(2);
         addAbility(DoubleStrikeAbility.getInstance());
-
-        setOriginalExpansionSetCode("ONE");
     }
 
     private DoublestrikeSamuraiToken(final DoublestrikeSamuraiToken token) {

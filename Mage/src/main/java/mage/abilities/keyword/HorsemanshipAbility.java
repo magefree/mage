@@ -47,7 +47,7 @@ class Horsemanship extends RestrictionEffect implements MageSingleton {
         super(Duration.EndOfGame);
     }
 
-    public Horsemanship(final Horsemanship effect) {
+    protected Horsemanship(final Horsemanship effect) {
         super(effect);
     }
 

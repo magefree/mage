@@ -57,7 +57,7 @@ class BrightflameEffect extends OneShotEffect {
         staticText = "{this} deals X damage to target creature and each other creature that shares a color with it. You gain life equal to the damage dealt this way.";
     }
 
-    BrightflameEffect(final BrightflameEffect effect) {
+    private BrightflameEffect(final BrightflameEffect effect) {
         super(effect);
         this.amount = effect.amount;
     }
@@ -66,8 +66,10 @@ class BrightflameEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         int damageDealt = 0;
 
-        Permanent target = game.getPermanent(targetPointer.getFirst(game, source));
-        if (target == null) { return false; }
+        Permanent target = game.getPermanent(getTargetPointer().getFirst(game, source));
+        if (target == null) {
+            return false;
+        }
 
         ObjectColor color = target.getColor(game);
         damageDealt += target.damage(amount.calculate(game, source, this), source.getSourceId(), source, game);

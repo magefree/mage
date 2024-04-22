@@ -9,7 +9,6 @@ import mage.game.permanent.Permanent;
  * @author LevelX2
  */
 
-
 public enum SourceTappedCondition implements Condition {
     TAPPED(true),
     UNTAPPED(false);
@@ -23,5 +22,10 @@ public enum SourceTappedCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getBattlefield().getPermanent(source.getSourceId());
         return permanent != null && permanent.isTapped() == tapped;
+    }
+
+    @Override
+    public String toString() {
+        return "{this} is " + (tapped ? "tapped" : "untapped");
     }
 }

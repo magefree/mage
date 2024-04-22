@@ -57,6 +57,9 @@ class NightboundEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         if (!game.hasDayNight()) {
+            // 702.145f
+            // Any time a player controls a permanent that is back face up with nightbound and it’s day,
+            // that player transforms that permanent. This happens immediately and isn’t a state-based action.
             game.setDaytime(false);
         }
         return true;

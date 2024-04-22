@@ -21,7 +21,7 @@ public class BeginningOfYourEndStepTriggeredAbility extends TriggeredAbilityImpl
         setTriggerPhrase("At the beginning of your end step, ");
     }
 
-    public BeginningOfYourEndStepTriggeredAbility(final BeginningOfYourEndStepTriggeredAbility ability) {
+    protected BeginningOfYourEndStepTriggeredAbility(final BeginningOfYourEndStepTriggeredAbility ability) {
         super(ability);
     }
 

@@ -25,7 +25,7 @@ public final class Flux extends CardImpl {
         this.getSpellAbility().addEffect(new FluxEffect());
 
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
     private Flux(final Flux card) {
@@ -45,7 +45,7 @@ class FluxEffect extends OneShotEffect {
         this.staticText = "Each player discards any number of cards, then draws that many cards";
     }
 
-    FluxEffect(final FluxEffect effect) {
+    private FluxEffect(final FluxEffect effect) {
         super(effect);
     }
 

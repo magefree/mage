@@ -41,7 +41,7 @@ public final class AnjeMaidOfDishonor extends CardImpl {
     public AnjeMaidOfDishonor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.VAMPIRE);
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
@@ -71,7 +71,7 @@ class AnjeMaidOfDishonorTriggeredAbility extends TriggeredAbilityImpl {
 
     public AnjeMaidOfDishonorTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new BloodToken()));
-        this.setTriggersOnce(true);
+        this.setTriggersOnceEachTurn(true);
         setTriggerPhrase("Whenever {this} and/or one or more other Vampires enter the battlefield under your control, ");
     }
 

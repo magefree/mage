@@ -38,7 +38,7 @@ public final class TombOfUrami extends CardImpl {
 
     public TombOfUrami(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // {tap}: Add {B}. Tomb of Urami deals 1 damage to you if you don't control an Ogre.
         Ability ability = new BlackManaAbility();

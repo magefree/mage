@@ -6,13 +6,13 @@ import mage.MageInt;
 import mage.Mana;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.hint.ValueHint;
 import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
 
 /**
  * @author BetaSteward_at_googlemail.com, North
@@ -31,7 +31,7 @@ public final class PriestOfTitania extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {T}: Add {G} for each Elf on the battlefield.
-        this.addAbility(new DynamicManaAbility(Mana.GreenMana(1), xValue));
+        this.addAbility(new DynamicManaAbility(Mana.GreenMana(1), xValue).addHint(new ValueHint("Elves on the battlefield", xValue)));
     }
 
     private PriestOfTitania(final PriestOfTitania card) {

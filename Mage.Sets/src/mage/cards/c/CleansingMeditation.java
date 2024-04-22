@@ -45,12 +45,12 @@ public final class CleansingMeditation extends CardImpl {
 
 class CleansingMeditationEffect extends OneShotEffect {
 
-    public CleansingMeditationEffect() {
+    CleansingMeditationEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "Destroy all enchantments.<br>" + AbilityWord.THRESHOLD.formatWord() + "If seven or more cards are in your graveyard, instead destroy all enchantments, then return all cards in your graveyard destroyed this way to the battlefield.";
     }
 
-    public CleansingMeditationEffect(final CleansingMeditationEffect effect) {
+    private CleansingMeditationEffect(final CleansingMeditationEffect effect) {
         super(effect);
     }
 

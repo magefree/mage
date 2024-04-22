@@ -104,7 +104,7 @@ class TheFirstTyrannicWarReplacementEffect extends ReplacementEffectImpl {
         super(Duration.EndOfStep, Outcome.BoostCreature);
     }
 
-    TheFirstTyrannicWarReplacementEffect(TheFirstTyrannicWarReplacementEffect effect) {
+    private TheFirstTyrannicWarReplacementEffect(final TheFirstTyrannicWarReplacementEffect effect) {
         super(effect);
     }
 
@@ -116,11 +116,6 @@ class TheFirstTyrannicWarReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         return event.getTargetId().equals(getTargetPointer().getFirst(game, source));
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
     }
 
     @Override

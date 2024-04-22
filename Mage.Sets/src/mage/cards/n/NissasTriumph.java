@@ -39,10 +39,10 @@ public final class NissasTriumph extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new SearchLibraryPutInHandEffect(new TargetCardInLibrary(
                         0, 3, StaticFilters.FILTER_CARD_LAND
-                ), true, true),
+                ), true),
                 new SearchLibraryPutInHandEffect(new TargetCardInLibrary(
                         0, 2, filter
-                ), true, true),
+                ), true),
                 new PermanentsOnTheBattlefieldCondition(filter2),
                 "Search your library for up to two basic Forest cards. If you control a Nissa planeswalker, " +
                         "instead search your library for up to three land cards. " +

@@ -46,7 +46,7 @@ public class CreateTokenTargetEffect extends OneShotEffect {
         this.attacking = attacking;
     }
 
-    public CreateTokenTargetEffect(final CreateTokenTargetEffect effect) {
+    protected CreateTokenTargetEffect(final CreateTokenTargetEffect effect) {
         super(effect);
         this.amount = effect.amount;
         this.token = effect.token.copy();
@@ -63,7 +63,7 @@ public class CreateTokenTargetEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         int value = amount.calculate(game, source, this);
         if (value > 0) {
-            return token.putOntoBattlefield(value, game, source, targetPointer.getFirst(game, source), tapped, attacking, (UUID) getValue("playerToAttack"));
+            return token.putOntoBattlefield(value, game, source, getTargetPointer().getFirst(game, source), tapped, attacking, (UUID) getValue("playerToAttack"));
         }
         return true;
     }
@@ -73,13 +73,7 @@ public class CreateTokenTargetEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        StringBuilder sb = new StringBuilder();
-
-        if (mode.getTargets().isEmpty()) {
-            sb.append("that player");
-        } else {
-            sb.append("target ").append(mode.getTargets().get(0).getTargetName());
-        }
+        StringBuilder sb = new StringBuilder(getTargetPointer().describeTargets(mode.getTargets(), "that player"));
 
         sb.append(" creates ");
         if (amount.toString().equals("1")) {
@@ -97,9 +91,9 @@ public class CreateTokenTargetEffect extends OneShotEffect {
             if (token.getDescription().endsWith("token")) {
                 sb.append("s");
             }
-            int tokenLocation = sb.indexOf("token");
+            int tokenLocation = sb.indexOf("token ");
             if (tokenLocation != -1) {
-                sb.replace(tokenLocation, tokenLocation + 6, "tokens");
+                sb.replace(tokenLocation, tokenLocation + 6, "tokens ");
             }
         }
         if (attacking) {

@@ -40,7 +40,7 @@ public final class LeoninRelicWarder extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public LeoninRelicWarder (final LeoninRelicWarder card) {
+    private LeoninRelicWarder(final LeoninRelicWarder card) {
         super(card);
     }
 

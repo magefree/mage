@@ -44,7 +44,7 @@ public final class TayamLuminousEnigma extends CardImpl {
     public TayamLuminousEnigma(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{B}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.NIGHTMARE);
         this.subtype.add(SubType.BEAST);
         this.power = new MageInt(3);
@@ -85,7 +85,7 @@ class TayamLuminousEnigmaCost extends RemoveCounterCost {
         super(new TargetPermanent(1, 1, filter, true), null, 3);
     }
 
-    public TayamLuminousEnigmaCost(TayamLuminousEnigmaCost cost) {
+    private TayamLuminousEnigmaCost(final TayamLuminousEnigmaCost cost) {
         super(cost);
     }
 
@@ -185,7 +185,7 @@ class TayamLuminousEnigmaEffect extends OneShotEffect {
             return false;
         }
         TargetCard target = new TargetCardInYourGraveyard(filter);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         if (!player.choose(outcome, player.getGraveyard(), target, source, game)) {
             return false;
         }

@@ -44,12 +44,12 @@ public final class RiteOfTheSerpent extends CardImpl {
 
 class RiteOfTheSerpentEffect extends OneShotEffect {
 
-    public RiteOfTheSerpentEffect() {
+    RiteOfTheSerpentEffect() {
         super(Outcome.Benefit);
         this.staticText = "If that creature had a +1/+1 counter on it, create a 1/1 green Snake creature token";
     }
 
-    public RiteOfTheSerpentEffect(final RiteOfTheSerpentEffect effect) {
+    private RiteOfTheSerpentEffect(final RiteOfTheSerpentEffect effect) {
         super(effect);
     }
 

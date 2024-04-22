@@ -27,7 +27,7 @@ public final class HundredTalonKami extends CardImpl {
         this.addAbility(new SoulshiftAbility(4));
     }
 
-    public HundredTalonKami (final HundredTalonKami card) {
+    private HundredTalonKami(final HundredTalonKami card) {
         super(card);
     }
 

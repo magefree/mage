@@ -55,7 +55,7 @@ class CreepyDollTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new CreepyDollEffect());
     }
 
-    CreepyDollTriggeredAbility(final CreepyDollTriggeredAbility ability) {
+    private CreepyDollTriggeredAbility(final CreepyDollTriggeredAbility ability) {
         super(ability);
     }
 
@@ -95,7 +95,7 @@ class CreepyDollEffect extends OneShotEffect {
         staticText = "";
     }
 
-    CreepyDollEffect(final CreepyDollEffect effect) {
+    private CreepyDollEffect(final CreepyDollEffect effect) {
         super(effect);
     }
 

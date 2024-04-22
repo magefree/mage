@@ -36,7 +36,7 @@ public final class NobleHeritage extends CardImpl {
     public NobleHeritage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.BACKGROUND);
 
         // Commander creatures you own have “When this creature enters the battlefield and at the beginning of your upkeep, each player may put two +1/+1 counters on a creature they control. For each opponent who does, you gain protection from that player until your next turn.” (You can’t be targeted, dealt damage, or enchanted by anything controlled by that player.)
@@ -61,7 +61,7 @@ class NobleHeritageTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, null, false);
     }
 
-    public NobleHeritageTriggeredAbility(final NobleHeritageTriggeredAbility ability) {
+    private NobleHeritageTriggeredAbility(final NobleHeritageTriggeredAbility ability) {
         super(ability);
     }
 
@@ -104,13 +104,13 @@ class NobleHeritageTriggeredAbility extends TriggeredAbilityImpl {
 
 class NobleHeritageEffect extends OneShotEffect {
 
-    public NobleHeritageEffect() {
+    NobleHeritageEffect() {
         super(Outcome.Benefit);
         this.staticText = "each player may put two +1/+1 counters on a creature they control. "
                 + "If a player does, creatures that player controls can't attack you or planeswalkers you control until your next turn";
     }
 
-    public NobleHeritageEffect(final NobleHeritageEffect effect) {
+    private NobleHeritageEffect(final NobleHeritageEffect effect) {
         super(effect);
     }
 

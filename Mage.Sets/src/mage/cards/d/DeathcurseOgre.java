@@ -27,7 +27,7 @@ public final class DeathcurseOgre extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new LoseLifeAllPlayersEffect(3)));
     }
 
-    public DeathcurseOgre (final DeathcurseOgre card) {
+    private DeathcurseOgre(final DeathcurseOgre card) {
         super(card);
     }
 

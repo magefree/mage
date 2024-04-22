@@ -39,7 +39,7 @@ public final class LazavTheMultifarious extends CardImpl {
     public LazavTheMultifarious(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SHAPESHIFTER);
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
@@ -92,7 +92,7 @@ class LazavTheMultifariousEffect extends OneShotEffect {
                 + "and it has this ability";
     }
 
-    LazavTheMultifariousEffect(final LazavTheMultifariousEffect effect) {
+    private LazavTheMultifariousEffect(final LazavTheMultifariousEffect effect) {
         super(effect);
     }
 
@@ -115,7 +115,6 @@ class LazavTheMultifariousEffect extends OneShotEffect {
                 CopyApplier applier = new LazavTheMultifariousCopyApplier();
                 applier.apply(game, newBluePrint, source, lazavTheMultifarious.getId());
                 CopyEffect copyEffect = new CopyEffect(Duration.Custom, newBluePrint, lazavTheMultifarious.getId());
-                copyEffect.newId();
                 copyEffect.setApplier(applier);
                 Ability newAbility = source.copy();
                 copyEffect.init(newAbility, game);

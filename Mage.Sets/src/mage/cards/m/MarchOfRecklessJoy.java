@@ -60,13 +60,13 @@ public final class MarchOfRecklessJoy extends CardImpl {
 
 class MarchOfRecklessJoyEffect extends OneShotEffect {
 
-    public MarchOfRecklessJoyEffect() {
+    MarchOfRecklessJoyEffect() {
         super(Outcome.Benefit);
         this.staticText = "exile the top X cards of your library. " +
                 "You may play up to two of those cards until the end of your next turn.";
     }
 
-    public MarchOfRecklessJoyEffect(final MarchOfRecklessJoyEffect effect) {
+    private MarchOfRecklessJoyEffect(final MarchOfRecklessJoyEffect effect) {
         super(effect);
     }
 
@@ -90,7 +90,7 @@ class MarchOfRecklessJoyEffect extends OneShotEffect {
         );
         for (Card card : cards) {
             CardUtil.makeCardPlayable(
-                    game, source, card, Duration.UntilEndOfYourNextTurn,
+                    game, source, card, false, Duration.UntilEndOfYourNextTurn,
                     false, null, MarchOfRecklessJoyCondition.instance
             );
         }

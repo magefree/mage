@@ -48,7 +48,7 @@ class FluctuatorEffect extends CostModificationEffectImpl {
         staticText = effectText;
     }
 
-    public FluctuatorEffect(final FluctuatorEffect effect) {
+    private FluctuatorEffect(final FluctuatorEffect effect) {
         super(effect);
     }
 

@@ -54,7 +54,7 @@ class DuelistsHeritageTriggeredAbility extends TriggeredAbilityImpl {
         super(zone, effect, true);
     }
 
-    public DuelistsHeritageTriggeredAbility(final DuelistsHeritageTriggeredAbility ability) {
+    private DuelistsHeritageTriggeredAbility(final DuelistsHeritageTriggeredAbility ability) {
         super(ability);
     }
 

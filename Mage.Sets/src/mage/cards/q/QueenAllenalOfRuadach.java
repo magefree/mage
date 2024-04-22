@@ -30,7 +30,7 @@ public final class QueenAllenalOfRuadach extends CardImpl {
     public QueenAllenalOfRuadach(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}{W}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.NOBLE);
         this.power = new MageInt(0);
@@ -58,7 +58,7 @@ public final class QueenAllenalOfRuadach extends CardImpl {
 
 class QueenAllenalOfRuadachEffect extends ReplacementEffectImpl {
 
-    public QueenAllenalOfRuadachEffect() {
+    QueenAllenalOfRuadachEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         this.staticText = "If one or more creature tokens would be created under your control, those tokens plus a 1/1 white Soldier creature token are created instead.";
     }

@@ -27,7 +27,7 @@ public class SacrificeAllCost extends CostImpl implements SacrificeCost {
         this.text = "Sacrifice all " + filter.getMessage();
     }
 
-    public SacrificeAllCost(final SacrificeAllCost cost) {
+    protected SacrificeAllCost(final SacrificeAllCost cost) {
         super(cost);
         this.permanents.addAll(cost.permanents); // because this are already copied permanents, they can't change, so no copy again is needed
         this.filter = cost.filter.copy();
@@ -50,10 +50,7 @@ public class SacrificeAllCost extends CostImpl implements SacrificeCost {
         if (ability.getAbilityType() == AbilityType.ACTIVATED || ability.getAbilityType() == AbilityType.SPECIAL_ACTION) {
             if (((ActivatedAbilityImpl) ability).getActivatorId() != null) {
                 activator = ((ActivatedAbilityImpl) ability).getActivatorId();
-            } else {
-                // Aktivator not filled?
-                activator = controllerId;
-            }
+            }  // else, Activator not filled?
         }
 
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, controllerId, game)) {

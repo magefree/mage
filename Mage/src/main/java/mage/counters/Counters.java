@@ -1,6 +1,8 @@
 
 package mage.counters;
 
+import mage.util.Copyable;
+
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
@@ -10,12 +12,12 @@ import java.util.stream.Collectors;
 /**
  * @author BetaSteward_at_googlemail.com
  */
-public class Counters extends HashMap<String, Counter> implements Serializable {
+public class Counters extends HashMap<String, Counter> implements Serializable, Copyable<Counters> {
 
     public Counters() {
     }
 
-    public Counters(final Counters counters) {
+    protected Counters(final Counters counters) {
         for (Map.Entry<String, Counter> entry : counters.entrySet()) {
             this.put(entry.getKey(), entry.getValue().copy());
         }
@@ -25,19 +27,20 @@ public class Counters extends HashMap<String, Counter> implements Serializable {
         return new Counters(this);
     }
 
-    public void addCounter(String name, int amount) {
+    public Counters addCounter(String name, int amount) {
         putIfAbsent(name, new Counter(name));
         this.get(name).add(amount);
+        return this;
     }
 
-    public void addCounter(Counter counter) {
+    public Counters addCounter(Counter counter) {
         if (!containsKey(counter.name)) {
             put(counter.name, counter);
         } else {
 
             get(counter.name).add(counter.getCount());
         }
-
+        return this;
     }
 
     public boolean removeCounter(String name) {

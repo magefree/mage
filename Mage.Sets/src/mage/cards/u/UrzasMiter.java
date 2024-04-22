@@ -51,9 +51,17 @@ public final class UrzasMiter extends CardImpl {
 
 class UrzasMiterDoIfCostPaid extends DoIfCostPaid {
 
-
     public UrzasMiterDoIfCostPaid(Effect effect, Cost cost) {
         super(effect, cost);
+    }
+
+    protected UrzasMiterDoIfCostPaid(final UrzasMiterDoIfCostPaid effect) {
+        super(effect);
+    }
+
+    @Override
+    public UrzasMiterDoIfCostPaid copy() {
+        return new UrzasMiterDoIfCostPaid(this);
     }
 
     @Override

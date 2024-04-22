@@ -64,12 +64,12 @@ public final class AvenSoulgazer extends CardImpl {
 
 class AvenSoulgazerLookFaceDownEffect extends OneShotEffect {
 
-    public AvenSoulgazerLookFaceDownEffect() {
+    AvenSoulgazerLookFaceDownEffect() {
         super(Outcome.Benefit);
         this.staticText = "Look at target face-down creature";
     }
 
-    public AvenSoulgazerLookFaceDownEffect(final AvenSoulgazerLookFaceDownEffect effect) {
+    private AvenSoulgazerLookFaceDownEffect(final AvenSoulgazerLookFaceDownEffect effect) {
         super(effect);
     }
 

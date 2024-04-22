@@ -58,12 +58,12 @@ public final class SteamVines extends CardImpl {
 
 class SteamVinesEffect extends OneShotEffect {
 
-    public SteamVinesEffect() {
+    SteamVinesEffect() {
         super(Outcome.Detriment);
         staticText = "destroy it and {this} deals 1 damage to that land's controller. That player attaches {this} to a land of their choice";
     }
 
-    public SteamVinesEffect(final SteamVinesEffect effect) {
+    private SteamVinesEffect(final SteamVinesEffect effect) {
         super(effect);
     }
 
@@ -89,7 +89,7 @@ class SteamVinesEffect extends OneShotEffect {
                 }
                 if (!game.getBattlefield().getAllActivePermanents(CardType.LAND, game).isEmpty()) { //lands are available on the battlefield
                     Target target = new TargetLandPermanent();
-                    target.setNotTarget(true); //not a target, it is chosen
+                    target.withNotTarget(true); //not a target, it is chosen
                     Card steamVinesCard = game.getCard(source.getSourceId());
                     if (steamVinesCard != null && landsController != null) {
                         if (landsController.choose(Outcome.DestroyPermanent, target, source, game)) {

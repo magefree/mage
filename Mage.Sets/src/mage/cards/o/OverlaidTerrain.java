@@ -14,8 +14,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledLandPermanent;
-import mage.filter.common.FilterLandPermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -35,7 +34,7 @@ public final class OverlaidTerrain extends CardImpl {
 
         // Lands you control have "{T}: Add two mana of any one color."
         SimpleManaAbility manaAbility = new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(2), new TapSourceCost());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(manaAbility, Duration.WhileOnBattlefield, new FilterLandPermanent(), false)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(manaAbility, Duration.WhileOnBattlefield, StaticFilters.FILTER_LANDS, false)));
     }
 
     private OverlaidTerrain(final OverlaidTerrain card) {
@@ -55,7 +54,7 @@ class SacrificeAllLandEffect extends OneShotEffect {
         staticText = "sacrifice all lands you control";
     }
 
-    SacrificeAllLandEffect(final SacrificeAllLandEffect effect) {
+    private SacrificeAllLandEffect(final SacrificeAllLandEffect effect) {
         super(effect);
     }
 
@@ -63,7 +62,7 @@ class SacrificeAllLandEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterControlledLandPermanent(), source.getControllerId(), game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_CONTROLLED_PERMANENT_LANDS, source.getControllerId(), game)) {
                 permanent.sacrifice(source, game);
             }
             return true;

@@ -92,7 +92,7 @@ class HideawayExileEffect extends OneShotEffect {
             return true;
         }
         TargetCard target = new TargetCard(Zone.LIBRARY, filter);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         controller.choose(Outcome.Detriment, cards, target, source, game);
         Card card = cards.get(target.getFirstTarget(), game);
         if (card != null) {

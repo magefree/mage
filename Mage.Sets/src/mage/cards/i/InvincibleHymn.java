@@ -37,12 +37,12 @@ public final class InvincibleHymn extends CardImpl {
 
 class InvincibleHymnEffect extends OneShotEffect {
 
-    public InvincibleHymnEffect() {
+    InvincibleHymnEffect() {
         super(Outcome.Neutral);
         this.staticText = "Count the number of cards in your library. Your life total becomes that number";
     }
 
-    public InvincibleHymnEffect(final InvincibleHymnEffect effect) {
+    private InvincibleHymnEffect(final InvincibleHymnEffect effect) {
         super(effect);
     }
 

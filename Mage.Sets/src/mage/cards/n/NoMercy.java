@@ -41,7 +41,7 @@ public final class NoMercy extends CardImpl {
             super(Zone.BATTLEFIELD, new DestroyTargetEffect());
         }
 
-        public NoMercyTriggeredAbility(final NoMercyTriggeredAbility ability) {
+        private NoMercyTriggeredAbility(final NoMercyTriggeredAbility ability) {
             super(ability);
         }
 
@@ -69,7 +69,7 @@ public final class NoMercy extends CardImpl {
 
         @Override
         public String getRule() {
-            return "Whenever a creature deals damage to you, destroy it";
+            return "Whenever a creature deals damage to you, destroy it.";
         }
 
     }

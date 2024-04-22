@@ -23,7 +23,7 @@ public class Orbak extends CardImpl {
         this.addAbility(new MonstrosityAbility("{4}{W}", 3));
     }
 
-    public Orbak(final Orbak card) {
+    private Orbak(final Orbak card) {
         super(card);
     }
 

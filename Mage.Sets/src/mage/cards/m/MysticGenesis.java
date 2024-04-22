@@ -41,12 +41,12 @@ public final class MysticGenesis extends CardImpl {
 
 class MysticGenesisEffect extends OneShotEffect {
 
-    public MysticGenesisEffect() {
+    MysticGenesisEffect() {
         super(Outcome.Detriment);
         staticText = "Counter target spell. Create an X/X green Ooze creature token, where X is that spell's mana value";
     }
 
-    public MysticGenesisEffect(final MysticGenesisEffect effect) {
+    private MysticGenesisEffect(final MysticGenesisEffect effect) {
         super(effect);
     }
 
@@ -57,7 +57,7 @@ class MysticGenesisEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        StackObject stackObject = game.getStack().getStackObject(targetPointer.getFirst(game, source));
+        StackObject stackObject = game.getStack().getStackObject(getTargetPointer().getFirst(game, source));
         if (stackObject != null) {
             game.getStack().counter(source.getFirstTarget(), source, game);
             return new CreateTokenEffect(new OozeToken(stackObject.getManaValue(), stackObject.getManaValue())).apply(game, source);

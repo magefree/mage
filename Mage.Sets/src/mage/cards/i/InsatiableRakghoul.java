@@ -54,7 +54,7 @@ class InsatiableRakghoulEffect extends OneShotEffect {
         staticText = "with a +1/+1 counter on it if a non-artifact creature died this turn";
     }
 
-    InsatiableRakghoulEffect(final InsatiableRakghoulEffect effect) {
+    private InsatiableRakghoulEffect(final InsatiableRakghoulEffect effect) {
         super(effect);
     }
 

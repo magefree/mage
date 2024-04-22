@@ -47,12 +47,12 @@ public final class ForgottenCreation extends CardImpl {
 
 class ForgottenCreationEffect extends OneShotEffect {
 
-    public ForgottenCreationEffect() {
+    ForgottenCreationEffect() {
         super(Outcome.DrawCard);
         this.staticText = "you may discard all the cards in your hand. If you do, draw that many cards";
     }
 
-    public ForgottenCreationEffect(final ForgottenCreationEffect effect) {
+    private ForgottenCreationEffect(final ForgottenCreationEffect effect) {
         super(effect);
     }
 

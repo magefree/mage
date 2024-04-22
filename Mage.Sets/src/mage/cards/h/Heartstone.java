@@ -48,7 +48,7 @@ class HeartstoneEffect extends CostModificationEffectImpl {
         staticText = effectText;
     }
 
-    public HeartstoneEffect(final HeartstoneEffect effect) {
+    private HeartstoneEffect(final HeartstoneEffect effect) {
         super(effect);
     }
 

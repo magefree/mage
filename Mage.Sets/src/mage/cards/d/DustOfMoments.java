@@ -57,7 +57,7 @@ class DustOfMomentsEffect extends OneShotEffect {
                 " two time counters " +
                 (remove ? "from" : "on") +
                 " each permanent" +
-                (remove ? "" : "with a time counter on it") +
+                (remove ? "" : " with a time counter on it") +
                 " and each suspended card";
     }
 

@@ -26,7 +26,7 @@ public final class OviyaPashiriSageLifecrafter extends CardImpl {
 
     public OviyaPashiriSageLifecrafter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ARTIFICER);
         this.power = new MageInt(1);
@@ -55,12 +55,12 @@ public final class OviyaPashiriSageLifecrafter extends CardImpl {
 
 class OviyaPashiriSageLifecrafterEffect extends OneShotEffect {
 
-    public OviyaPashiriSageLifecrafterEffect() {
+    OviyaPashiriSageLifecrafterEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Create an X/X colorless Construct artifact creature token, where X is the number of creatures you control";
     }
 
-    public OviyaPashiriSageLifecrafterEffect(final OviyaPashiriSageLifecrafterEffect effect) {
+    private OviyaPashiriSageLifecrafterEffect(final OviyaPashiriSageLifecrafterEffect effect) {
         super(effect);
     }
 

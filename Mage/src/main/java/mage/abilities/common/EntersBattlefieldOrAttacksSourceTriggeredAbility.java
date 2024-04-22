@@ -8,7 +8,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 
 /**
- *
  * @author Styxo
  */
 public class EntersBattlefieldOrAttacksSourceTriggeredAbility extends TriggeredAbilityImpl {
@@ -22,7 +21,7 @@ public class EntersBattlefieldOrAttacksSourceTriggeredAbility extends TriggeredA
         setTriggerPhrase("Whenever {this} enters the battlefield or attacks, ");
     }
 
-    public EntersBattlefieldOrAttacksSourceTriggeredAbility(final EntersBattlefieldOrAttacksSourceTriggeredAbility ability) {
+    protected EntersBattlefieldOrAttacksSourceTriggeredAbility(final EntersBattlefieldOrAttacksSourceTriggeredAbility ability) {
         super(ability);
     }
 

@@ -52,7 +52,7 @@ class StenchOfEvilEffect extends OneShotEffect {
         this.staticText = "Destroy all Plains. For each land destroyed this way, {this} deals 1 damage to that land's controller unless they pay {2}";
     }
 
-    public StenchOfEvilEffect(final StenchOfEvilEffect effect) {
+    private StenchOfEvilEffect(final StenchOfEvilEffect effect) {
         super(effect);
     }
 

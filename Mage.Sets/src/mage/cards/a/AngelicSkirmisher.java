@@ -57,10 +57,10 @@ class AngelicSkirmisherEffect extends OneShotEffect {
 
     AngelicSkirmisherEffect() {
         super(Outcome.AddAbility);
-        staticText = "choose first strike, vigilance or lifelink. Creatures you control gain that ability until end of turn";
+        staticText = "choose first strike, vigilance, or lifelink. Creatures you control gain that ability until end of turn";
     }
 
-    AngelicSkirmisherEffect(final AngelicSkirmisherEffect effect) {
+    private AngelicSkirmisherEffect(final AngelicSkirmisherEffect effect) {
         super(effect);
     }
 

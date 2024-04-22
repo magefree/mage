@@ -52,7 +52,7 @@ class TerritorialGorgerTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever you get one or more {E} <i>(energy counters)</i>, ");
     }
 
-    TerritorialGorgerTriggeredAbility(final TerritorialGorgerTriggeredAbility ability) {
+    private TerritorialGorgerTriggeredAbility(final TerritorialGorgerTriggeredAbility ability) {
         super(ability);
     }
 

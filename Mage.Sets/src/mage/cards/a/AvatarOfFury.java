@@ -45,7 +45,7 @@ public final class AvatarOfFury extends CardImpl {
 
         // If an opponent controls seven or more lands, Avatar of Fury costs {6} less to cast.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SpellCostReductionSourceEffect(6, AvatarOfFuryCondition.instance)
-                .setText("if an opponent controls seven or more lands, Avatar of Fury costs {6} less to cast"))
+                .setText("if an opponent controls seven or more lands, this spell costs {6} less to cast"))
                 .addHint(new ConditionHint(AvatarOfFuryCondition.instance, "Opponent controls seven or more lands"))
         );
 

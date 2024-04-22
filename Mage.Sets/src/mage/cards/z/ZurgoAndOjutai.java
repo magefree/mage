@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.SourceEnteredThisTurnCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
@@ -20,7 +20,8 @@ import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.Game;
-import mage.game.events.DamagedBatchEvent;
+import mage.game.events.DamagedBatchAllEvent;
+import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -29,7 +30,6 @@ import mage.target.targetpointer.FixedTargets;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -41,7 +41,7 @@ public final class ZurgoAndOjutai extends CardImpl {
     public ZurgoAndOjutai(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{R}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ORC);
         this.subtype.add(SubType.DRAGON);
         this.power = new MageInt(4);
@@ -56,7 +56,7 @@ public final class ZurgoAndOjutai extends CardImpl {
         // Zurgo and Ojutai has hexproof as long as it entered the battlefield this turn.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(HexproofAbility.getInstance(), Duration.WhileOnBattlefield),
-                ZurgoAndOjutaiCondition.instance, "{this} has hexproof as long as it entered the battlefield this turn"
+                SourceEnteredThisTurnCondition.instance, "{this} has hexproof as long as it entered the battlefield this turn"
         )));
 
         // Whenever one or more Dragons you control deal combat damage to a player or battle, look at the top three cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order. You may return one of those Dragons to its owner's hand.
@@ -70,19 +70,6 @@ public final class ZurgoAndOjutai extends CardImpl {
     @Override
     public ZurgoAndOjutai copy() {
         return new ZurgoAndOjutai(this);
-    }
-}
-
-enum ZurgoAndOjutaiCondition implements Condition {
-    instance;
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return Optional
-                .ofNullable(source.getSourcePermanentIfItStillExists(game))
-                .filter(Objects::nonNull)
-                .map(Permanent::getTurnsOnBattlefield)
-                .equals(0);
     }
 }
 
@@ -105,16 +92,15 @@ class ZurgoAndOjutaiTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER_BATCH
-                || event.getType() == GameEvent.EventType.DAMAGED_PERMANENT_BATCH;
+        return event.getType() == GameEvent.EventType.DAMAGED_BATCH_FOR_ALL;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        DamagedBatchEvent dEvent = (DamagedBatchEvent) event;
-        List<Permanent> permanents = dEvent
+        List<Permanent> permanents = ((DamagedBatchAllEvent) event)
                 .getEvents()
                 .stream()
+                .filter(DamagedEvent::isCombatDamage)
                 .map(e -> {
                     Permanent permanent = game.getPermanent(e.getSourceId());
                     Permanent defender = game.getPermanent(e.getTargetId());

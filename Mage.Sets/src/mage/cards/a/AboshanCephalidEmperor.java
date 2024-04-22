@@ -38,7 +38,7 @@ public final class AboshanCephalidEmperor extends CardImpl {
 
     public AboshanCephalidEmperor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.CEPHALID, SubType.NOBLE);
 
         this.power = new MageInt(3);

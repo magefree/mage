@@ -26,7 +26,7 @@ public final class EtaliPrimalSickness extends CardImpl {
     public EtaliPrimalSickness(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.ELDER);
         this.subtype.add(SubType.DINOSAUR);

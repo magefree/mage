@@ -2,6 +2,7 @@
 package mage.abilities.effects.common;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -13,7 +14,6 @@ import mage.game.events.GameEvent;
 import mage.game.turn.TurnMod;
 
 /**
- *
  * @author LevelX2
  */
 public class AddCombatAndMainPhaseEffect extends OneShotEffect {
@@ -23,7 +23,7 @@ public class AddCombatAndMainPhaseEffect extends OneShotEffect {
         staticText = "After this main phase, there is an additional combat phase followed by an additional main phase";
     }
 
-    public AddCombatAndMainPhaseEffect(final AddCombatAndMainPhaseEffect effect) {
+    protected AddCombatAndMainPhaseEffect(final AddCombatAndMainPhaseEffect effect) {
         super(effect);
     }
 
@@ -38,7 +38,7 @@ public class AddCombatAndMainPhaseEffect extends OneShotEffect {
         if (game.getTurnPhaseType() == TurnPhase.PRECOMBAT_MAIN
                 || game.getTurnPhaseType() == TurnPhase.POSTCOMBAT_MAIN) {
             // we can't add two turn modes at once, will add additional post combat on delayed trigger resolution
-            TurnMod combat = new TurnMod(source.getControllerId(), TurnPhase.COMBAT, TurnPhase.POSTCOMBAT_MAIN, false);
+            TurnMod combat = new TurnMod(source.getControllerId()).withExtraPhase(TurnPhase.COMBAT, TurnPhase.POSTCOMBAT_MAIN);
             game.getState().getTurnMods().add(combat);
             DelayedAddMainPhaseAbility delayedTriggeredAbility = new DelayedAddMainPhaseAbility();
             delayedTriggeredAbility.setConnectedTurnMod(combat.getId());
@@ -83,7 +83,7 @@ class DelayedAddMainPhaseAbility extends DelayedTriggeredAbility {
         }
         if (event.getType() == GameEvent.EventType.COMBAT_PHASE_PRE && enabled) {
             // add additional post combat main phase after that - after phase == null because add it after this combat
-            game.getState().getTurnMods().add(new TurnMod(getControllerId(), TurnPhase.POSTCOMBAT_MAIN, null, false));
+            game.getState().getTurnMods().add(new TurnMod(getControllerId()).withExtraPhase(TurnPhase.POSTCOMBAT_MAIN));
             enabled = false;
         }
         return false;

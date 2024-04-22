@@ -81,7 +81,7 @@ class ThranPortalManaAbilityContinousEffect extends ContinuousEffectImpl {
         staticText = "mana abilities of {this} cost an additional 1 life to activate";
     }
 
-    public ThranPortalManaAbilityContinousEffect(final ThranPortalManaAbilityContinousEffect effect) {
+    private ThranPortalManaAbilityContinousEffect(final ThranPortalManaAbilityContinousEffect effect) {
         super(effect);
     }
 
@@ -94,6 +94,11 @@ class ThranPortalManaAbilityContinousEffect extends ContinuousEffectImpl {
     public void init(Ability source, Game game) {
         super.init(source, game);
         SubType choice = SubType.byDescription((String) game.getState().getValue(source.getSourceId().toString() + ChooseBasicLandTypeEffect.VALUE_KEY));
+        if (choice == null) {
+            discard();
+            return;
+        }
+
         switch (choice) {
             case FOREST:
                 dependencyTypes.add(DependencyType.BecomeForest);

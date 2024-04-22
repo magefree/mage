@@ -59,11 +59,11 @@ public final class StromgaldSpy extends CardImpl {
 
 class StromgaldSpyEffect extends ContinuousEffectImpl {
 
-    public StromgaldSpyEffect() {
+    StromgaldSpyEffect() {
         super(Duration.Custom, Layer.PlayerEffects, SubLayer.NA, Outcome.Detriment);
     }
 
-    public StromgaldSpyEffect(final StromgaldSpyEffect effect) {
+    private StromgaldSpyEffect(final StromgaldSpyEffect effect) {
         super(effect);
     }
 

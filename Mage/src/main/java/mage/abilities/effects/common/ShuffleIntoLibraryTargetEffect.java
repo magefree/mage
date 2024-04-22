@@ -15,7 +15,6 @@ import java.util.Map;
 import java.util.UUID;
 
 /**
- *
  * @author awjackson
  */
 public class ShuffleIntoLibraryTargetEffect extends OneShotEffect {
@@ -31,7 +30,7 @@ public class ShuffleIntoLibraryTargetEffect extends OneShotEffect {
         this.optional = optional;
     }
 
-    public ShuffleIntoLibraryTargetEffect(final ShuffleIntoLibraryTargetEffect effect) {
+    protected ShuffleIntoLibraryTargetEffect(final ShuffleIntoLibraryTargetEffect effect) {
         super(effect);
         this.optional = effect.optional;
     }
@@ -70,8 +69,7 @@ public class ShuffleIntoLibraryTargetEffect extends OneShotEffect {
     }
 
     @Override
-    public String getText(Mode mode)
-    {
+    public String getText(Mode mode) {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
@@ -81,8 +79,8 @@ public class ShuffleIntoLibraryTargetEffect extends OneShotEffect {
         }
         return "choose " + targetDescription + (
                 getTargetPointer().isPlural(mode.getTargets()) ?
-                ". The owners of those cards shuffle them into their libraries" :
-                ". Its owner shuffles it into their library"
+                        ". The owners of those cards shuffle them into their libraries" :
+                        ". Its owner shuffles it into their library"
         );
     }
 }

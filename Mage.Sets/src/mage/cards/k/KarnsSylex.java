@@ -28,7 +28,7 @@ import java.util.UUID;
 public class KarnsSylex extends CardImpl {
     public KarnsSylex(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // Karn’s Sylex
         this.addAbility(new EntersBattlefieldTappedAbility());
@@ -55,12 +55,12 @@ public class KarnsSylex extends CardImpl {
 
 class KarnsSylexEffect extends ContinuousEffectImpl {
 
-    public KarnsSylexEffect() {
+    KarnsSylexEffect() {
         super(Duration.WhileOnBattlefield, Layer.PlayerEffects, SubLayer.NA, Outcome.Detriment);
         staticText = "Players can't pay life to cast spells or to activate abilities that aren't mana abilities";
     }
 
-    public KarnsSylexEffect(final KarnsSylexEffect effect) {
+    private KarnsSylexEffect(final KarnsSylexEffect effect) {
         super(effect);
     }
 

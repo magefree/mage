@@ -31,7 +31,7 @@ public final class TheEverChangingDane extends CardImpl {
     public TheEverChangingDane(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{U}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SHAPESHIFTER);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

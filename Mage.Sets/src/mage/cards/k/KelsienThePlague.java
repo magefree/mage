@@ -33,7 +33,7 @@ public final class KelsienThePlague extends CardImpl {
     public KelsienThePlague(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}{W}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN, SubType.ASSASSIN);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
@@ -47,7 +47,7 @@ public final class KelsienThePlague extends CardImpl {
         // Kelsien, the Plague gets +1/+1 for each experience counter you have.
         this.addAbility(new SimpleStaticAbility(new BoostSourceEffect(
                 KelsienThePlagueCount.instance, KelsienThePlagueCount.instance,
-                Duration.WhileOnBattlefield, false
+                Duration.WhileOnBattlefield
         )));
 
         // {T}: Kelsien deals 1 damage to target creature you don't control. When that creature dies this turn, you get an experience counter.

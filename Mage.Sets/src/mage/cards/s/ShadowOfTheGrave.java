@@ -41,12 +41,12 @@ public final class ShadowOfTheGrave extends CardImpl {
 
 class ShadowOfTheGraveEffect extends OneShotEffect {
 
-    public ShadowOfTheGraveEffect() {
+    ShadowOfTheGraveEffect() {
         super(Outcome.Benefit);
         staticText = "Return to your hand all cards in your graveyard that you cycled or discarded this turn";
     }
 
-    public ShadowOfTheGraveEffect(final ShadowOfTheGraveEffect effect) {
+    private ShadowOfTheGraveEffect(final ShadowOfTheGraveEffect effect) {
         super(effect);
     }
 

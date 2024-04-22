@@ -40,18 +40,18 @@ public final class IgniteMemories extends CardImpl {
 
 class IgniteMemoriesEffect extends OneShotEffect {
 
-    public IgniteMemoriesEffect() {
+    IgniteMemoriesEffect() {
         super(Outcome.Damage);
         staticText = "Target player reveals a card at random from their hand. {this} deals damage to that player equal to that card's mana value";
     }
 
-    public IgniteMemoriesEffect(final IgniteMemoriesEffect effect) {
+    private IgniteMemoriesEffect(final IgniteMemoriesEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(targetPointer.getFirst(game, source));
+        Player controller = game.getPlayer(getTargetPointer().getFirst(game, source));
         MageObject sourceObject = source.getSourceObject(game);
         if (controller != null && sourceObject != null) {
             if (!controller.getHand().isEmpty()) {

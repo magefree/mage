@@ -8,7 +8,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author LevelX2
  */
 public class TapAllEffect extends OneShotEffect {
@@ -21,7 +20,7 @@ public class TapAllEffect extends OneShotEffect {
         staticText = "tap all " + filter.getMessage();
     }
 
-    public TapAllEffect(final TapAllEffect effect) {
+    protected TapAllEffect(final TapAllEffect effect) {
         super(effect);
         this.filter = effect.filter.copy();
     }

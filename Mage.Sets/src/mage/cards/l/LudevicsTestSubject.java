@@ -61,7 +61,7 @@ class LudevicsTestSubjectEffect extends OneShotEffect {
         staticText = "Then if there are five or more hatchling counters on it, remove all of them and transform it";
     }
 
-    LudevicsTestSubjectEffect(final LudevicsTestSubjectEffect effect) {
+    private LudevicsTestSubjectEffect(final LudevicsTestSubjectEffect effect) {
         super(effect);
     }
 

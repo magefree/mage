@@ -59,7 +59,7 @@ class WarElementalTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new WarElementalEffect(), false);
     }
 
-    public WarElementalTriggeredAbility(final WarElementalTriggeredAbility ability) {
+    private WarElementalTriggeredAbility(final WarElementalTriggeredAbility ability) {
         super(ability);
     }
 
@@ -70,12 +70,12 @@ class WarElementalTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
+        return event.getType() == GameEvent.EventType.DAMAGED_BATCH_FOR_ONE_PLAYER;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (game.getOpponents(this.controllerId).contains(event.getPlayerId())) {
+        if (game.getOpponents(this.controllerId).contains(event.getTargetId())) {
             this.getEffects().get(0).setValue("damageAmount", event.getAmount());
             return true;
         }
@@ -90,11 +90,11 @@ class WarElementalTriggeredAbility extends TriggeredAbilityImpl {
 
 class WarElementalEffect extends OneShotEffect {
 
-    public WarElementalEffect() {
+    WarElementalEffect() {
         super(Outcome.Benefit);
     }
 
-    public WarElementalEffect(final WarElementalEffect effect) {
+    private WarElementalEffect(final WarElementalEffect effect) {
         super(effect);
     }
 

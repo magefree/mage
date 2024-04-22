@@ -67,12 +67,12 @@ public final class DescentIntoMadness extends CardImpl {
 
 class DescentIntoMadnessEffect extends OneShotEffect {
 
-    public DescentIntoMadnessEffect() {
+    DescentIntoMadnessEffect() {
         super(Outcome.Sacrifice);
         this.staticText = "put a despair counter on {this}, then each player exiles X permanents they control and/or cards from their hand, where X is the number of despair counters on {this}";
     }
 
-    public DescentIntoMadnessEffect(final DescentIntoMadnessEffect effect) {
+    private DescentIntoMadnessEffect(final DescentIntoMadnessEffect effect) {
         super(effect);
     }
 

@@ -41,7 +41,7 @@ public class DealsDamageToAPlayerAttachedTriggeredAbility extends TriggeredAbili
         setTriggerPhrase(generateTriggerPhrase());
     }
 
-    public DealsDamageToAPlayerAttachedTriggeredAbility(final DealsDamageToAPlayerAttachedTriggeredAbility ability) {
+    protected DealsDamageToAPlayerAttachedTriggeredAbility(final DealsDamageToAPlayerAttachedTriggeredAbility ability) {
         super(ability);
         this.setFixedTargetPointer = ability.setFixedTargetPointer;
         this.attachedDescription = ability.attachedDescription;

@@ -22,7 +22,7 @@ public class AttacksOrBlocksAttachedTriggeredAbility extends TriggeredAbilityImp
         setTriggerPhrase("Whenever " + attachmentType.verb().toLowerCase() + " creature attacks or blocks, ");
     }
 
-    public AttacksOrBlocksAttachedTriggeredAbility(final AttacksOrBlocksAttachedTriggeredAbility ability) {
+    protected AttacksOrBlocksAttachedTriggeredAbility(final AttacksOrBlocksAttachedTriggeredAbility ability) {
         super(ability);
         this.attachmentType = ability.attachmentType;
     }

@@ -49,7 +49,7 @@ public final class Humility extends CardImpl {
             staticText = "All creatures lose all abilities and have base power and toughness 1/1";
         }
 
-        public HumilityEffect(final HumilityEffect effect) {
+        private HumilityEffect(final HumilityEffect effect) {
             super(effect);
         }
 

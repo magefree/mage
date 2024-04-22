@@ -17,7 +17,6 @@ import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicate;
-import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -28,24 +27,17 @@ import mage.players.Player;
  */
 public final class SelvalaHeartOfTheWilds extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
-
-    private static final String rule = "Whenever another creature enters the battlefield, its controller may draw a card if its power is greater than each other creature's power.";
-
     public SelvalaHeartOfTheWilds(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.SCOUT);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
         // Whenever another creature enters the battlefield, its controller may draw a card if its power is greater than each other creature's power.
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new SelvalaHeartOfTheWildsEffect(), filter, false, SetTargetPointer.PERMANENT, rule));
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new SelvalaHeartOfTheWildsEffect(),
+                StaticFilters.FILTER_ANOTHER_CREATURE, false, SetTargetPointer.PERMANENT));
 
         // {G}, {T}: Add X mana in any combination of colors, where X is the greatest power among creatures you control.
         ManaEffect manaEffect = new AddManaInAnyCombinationEffect(
@@ -75,12 +67,12 @@ class SelvalaHeartOfTheWildsEffect extends OneShotEffect {
         filter2.add(new GreatestPowerPredicate());
     }
 
-    public SelvalaHeartOfTheWildsEffect() {
+    SelvalaHeartOfTheWildsEffect() {
         super(Outcome.Benefit);
-        this.staticText = "that creature's controller may draw a card";
+        this.staticText = "its controller may draw a card if its power is greater than each other creature's power";
     }
 
-    public SelvalaHeartOfTheWildsEffect(final SelvalaHeartOfTheWildsEffect effect) {
+    private SelvalaHeartOfTheWildsEffect(final SelvalaHeartOfTheWildsEffect effect) {
         super(effect);
     }
 

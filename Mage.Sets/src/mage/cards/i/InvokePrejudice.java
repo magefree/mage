@@ -49,7 +49,7 @@ class InvokePrejudiceTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever an opponent casts a creature spell that doesn't share a color with a creature you control, ");
     }
 
-    public InvokePrejudiceTriggeredAbility(final InvokePrejudiceTriggeredAbility ability) {
+    private InvokePrejudiceTriggeredAbility(final InvokePrejudiceTriggeredAbility ability) {
         super(ability);
     }
 
@@ -90,12 +90,12 @@ class InvokePrejudiceTriggeredAbility extends TriggeredAbilityImpl {
 
 class InvokePrejudiceEffect extends CounterUnlessPaysEffect {
 
-    public InvokePrejudiceEffect() {
+    InvokePrejudiceEffect() {
         super(new GenericManaCost(1));
         this.staticText = "counter that spell unless that player pays {X}, where X is its mana value";
     }
 
-    public InvokePrejudiceEffect(final InvokePrejudiceEffect effect) {
+    private InvokePrejudiceEffect(final InvokePrejudiceEffect effect) {
         super(effect);
     }
 
@@ -110,7 +110,7 @@ class InvokePrejudiceEffect extends CounterUnlessPaysEffect {
         Spell spell = game.getStack().getSpell(getTargetPointer().getFirst(game, source));
         if (spell != null) {
             CounterUnlessPaysEffect effect = new CounterUnlessPaysEffect(new GenericManaCost(spell.getManaValue()));
-            effect.setTargetPointer(getTargetPointer());
+            effect.setTargetPointer(this.getTargetPointer().copy());
             result = effect.apply(game, source);
         }
         return result;

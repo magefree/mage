@@ -30,7 +30,7 @@ public class ProtectionChosenColorAttachedEffect extends ContinuousEffectImpl {
         staticText = "enchanted creature has protection from the chosen color" + (notRemoveItself ? ". This effect doesn't remove {this}" : "");
     }
 
-    public ProtectionChosenColorAttachedEffect(final ProtectionChosenColorAttachedEffect effect) {
+    protected ProtectionChosenColorAttachedEffect(final ProtectionChosenColorAttachedEffect effect) {
         super(effect);
         if (effect.chosenColor != null) {
             this.chosenColor = effect.chosenColor.copy();

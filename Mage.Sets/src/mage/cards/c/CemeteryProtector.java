@@ -64,7 +64,7 @@ public final class CemeteryProtector extends CardImpl {
 
 class CemeteryProtectorEffect extends OneShotEffect {
 
-    public CemeteryProtectorEffect() {
+    CemeteryProtectorEffect() {
         super(Outcome.Exile);
         staticText = "exile a card from a graveyard";
     }
@@ -83,7 +83,7 @@ class CemeteryProtectorEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             TargetCardInGraveyard target = new TargetCardInGraveyard();
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             controller.choose(outcome, target, source, game);
             Card card = game.getCard(target.getFirstTarget());
             if (card != null) {

@@ -46,12 +46,12 @@ public final class YdwenEfreet extends CardImpl {
 
 class YdwenEfreetEffect extends OneShotEffect {
 
-    public YdwenEfreetEffect() {
+    YdwenEfreetEffect() {
         super(Outcome.Damage);
         staticText = "flip a coin. If you lose the flip, remove {this} from combat and it can't block. Creatures it was blocking that had become blocked by only {this} this combat become unblocked";
     }
 
-    public YdwenEfreetEffect(YdwenEfreetEffect effect) {
+    private YdwenEfreetEffect(final YdwenEfreetEffect effect) {
         super(effect);
     }
 

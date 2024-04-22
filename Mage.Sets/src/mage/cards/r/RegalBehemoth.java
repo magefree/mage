@@ -4,6 +4,7 @@ import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.BecomesMonarchSourceEffect;
 import mage.abilities.effects.mana.AddManaOfAnyColorEffect;
+import mage.abilities.hint.common.MonarchHint;
 import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.mana.TriggeredManaAbility;
 import mage.cards.CardImpl;
@@ -34,7 +35,7 @@ public final class RegalBehemoth extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // When Regal Behemoth enters the battlefield, you become the monarch.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new BecomesMonarchSourceEffect(), false));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new BecomesMonarchSourceEffect()).addHint(MonarchHint.instance));
 
         // Whenever you tap a land for mana while you're the monarch, add one mana of any color.
         this.addAbility(new RegalBehemothTriggeredManaAbility());
@@ -81,6 +82,6 @@ class RegalBehemothTriggeredManaAbility extends TriggeredManaAbility {
 
     @Override
     public String getRule() {
-        return "Whenever you tap a land for mana while you're the monarch, add one mana of any color.";
+        return "Whenever you tap a land for mana while you're the monarch, add an additional one mana of any color.";
     }
 }

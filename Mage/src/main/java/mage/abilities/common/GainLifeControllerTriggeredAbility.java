@@ -28,7 +28,7 @@ public class GainLifeControllerTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever you gain life, ");
     }
 
-    public GainLifeControllerTriggeredAbility(final GainLifeControllerTriggeredAbility ability) {
+    private GainLifeControllerTriggeredAbility(final GainLifeControllerTriggeredAbility ability) {
         super(ability);
         this.setTargetPointer = ability.setTargetPointer;
     }

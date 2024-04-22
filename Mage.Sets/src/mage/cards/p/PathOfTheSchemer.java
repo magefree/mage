@@ -69,7 +69,7 @@ class PathOfTheSchemerEffect extends OneShotEffect {
             return false;
         }
         TargetCard target = new TargetCardInGraveyard(StaticFilters.FILTER_CARD_CREATURE);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         if (!target.canChoose(source.getControllerId(), source, game)) {
             return false;
         }

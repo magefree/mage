@@ -20,7 +20,7 @@ public class CantBlockUnlessYouControlSourceEffect extends RestrictionEffect {
         staticText = "{this} can't block unless you control " + filter.getMessage();
     }
 
-    public CantBlockUnlessYouControlSourceEffect(final CantBlockUnlessYouControlSourceEffect effect) {
+    protected CantBlockUnlessYouControlSourceEffect(final CantBlockUnlessYouControlSourceEffect effect) {
         super(effect);
         this.filter = effect.filter;
     }

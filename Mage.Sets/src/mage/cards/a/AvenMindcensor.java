@@ -54,7 +54,7 @@ class AvenMindcensorEffect extends ReplacementEffectImpl {
         staticText = "If an opponent would search a library, that player searches the top four cards of that library instead";
     }
 
-    AvenMindcensorEffect(final AvenMindcensorEffect effect) {
+    private AvenMindcensorEffect(final AvenMindcensorEffect effect) {
         super(effect);
     }
 

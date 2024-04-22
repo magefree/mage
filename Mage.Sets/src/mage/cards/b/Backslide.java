@@ -62,7 +62,7 @@ class BackslideEffect extends OneShotEffect {
         this.staticText = "Turn target creature with a morph ability face down.";
     }
 
-    BackslideEffect(final BackslideEffect effect) {
+    private BackslideEffect(final BackslideEffect effect) {
         super(effect);
     }
 

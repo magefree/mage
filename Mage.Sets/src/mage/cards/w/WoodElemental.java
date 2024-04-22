@@ -16,7 +16,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
@@ -69,7 +68,7 @@ class WoodElementalEffect extends OneShotEffect {
         staticText = "sacrifice any number of untapped Forests";
     }
 
-    public WoodElementalEffect(final WoodElementalEffect effect) {
+    private WoodElementalEffect(final WoodElementalEffect effect) {
         super(effect);
     }
 
@@ -95,7 +94,7 @@ class WoodElementalEffect extends OneShotEffect {
                             targetPermanent.sacrifice(source, game);
                         }
                     }
-                    game.addEffect(new SetBasePowerToughnessSourceEffect(sacrificedForests, sacrificedForests, Duration.Custom, SubLayer.SetPT_7b), source);
+                    game.addEffect(new SetBasePowerToughnessSourceEffect(sacrificedForests, sacrificedForests, Duration.Custom), source);
                     return true;
                 }
             }

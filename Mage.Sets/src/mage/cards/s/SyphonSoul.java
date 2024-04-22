@@ -39,7 +39,7 @@ class SyphonSoulEffect extends OneShotEffect {
         staticText = "{this} deals 2 damage to each other player. You gain life equal to the damage dealt this way";
     }
 
-    public SyphonSoulEffect(final SyphonSoulEffect effect) {
+    private SyphonSoulEffect(final SyphonSoulEffect effect) {
         super(effect);
     }
 

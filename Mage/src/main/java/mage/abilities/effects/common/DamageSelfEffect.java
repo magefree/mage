@@ -9,11 +9,10 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author North, Quercitron
  */
 public class DamageSelfEffect extends OneShotEffect {
-    
+
     protected int amount;
 
     public DamageSelfEffect(int amount) {
@@ -21,7 +20,7 @@ public class DamageSelfEffect extends OneShotEffect {
         this.amount = amount;
     }
 
-    public DamageSelfEffect(final DamageSelfEffect effect) {
+    protected DamageSelfEffect(final DamageSelfEffect effect) {
         super(effect);
         this.amount = effect.amount;
     }
@@ -40,7 +39,7 @@ public class DamageSelfEffect extends OneShotEffect {
         }
         return false;
     }
-    
+
     @Override
     public String getText(Mode mode) {
         if (staticText != null && !staticText.isEmpty()) {

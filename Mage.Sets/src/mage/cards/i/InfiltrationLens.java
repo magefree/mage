@@ -53,7 +53,7 @@ class EquippedBecomesBlockedTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever equipped creature becomes blocked by a creature, ");
     }
 
-    public EquippedBecomesBlockedTriggeredAbility(final EquippedBecomesBlockedTriggeredAbility ability) {
+    private EquippedBecomesBlockedTriggeredAbility(final EquippedBecomesBlockedTriggeredAbility ability) {
         super(ability);
     }
 

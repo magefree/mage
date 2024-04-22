@@ -37,7 +37,7 @@ public final class VivienChampionOfTheWilds extends CardImpl {
     public VivienChampionOfTheWilds(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.VIVIEN);
         this.setStartingLoyalty(4);
 
@@ -173,7 +173,7 @@ class VivienChampionOfTheWildsCastFromExileEffect extends AsThoughEffectImpl {
     private final UUID authorizedPlayerId;
 
     VivienChampionOfTheWildsCastFromExileEffect(UUID authorizedPlayerId) {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
         this.authorizedPlayerId = authorizedPlayerId;
     }
 

@@ -1,8 +1,6 @@
 package mage.cards.d;
 
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.ExileTargetForSourceEffect;
-import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetEffect;
+import mage.abilities.effects.common.ExileThenReturnTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -21,10 +19,7 @@ public final class Displace extends CardImpl {
 
         // Exile up to two target creatures you control, then return those cards to the battlefield under their owner's control.
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(0, 2, StaticFilters.FILTER_CONTROLLED_CREATURES, false));
-        this.getSpellAbility().addEffect(new ExileTargetForSourceEffect());
-        this.getSpellAbility().addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false)
-                .setText(", then return those cards to the battlefield under their owner's control")
-        );
+        this.getSpellAbility().addEffect(new ExileThenReturnTargetEffect(false, true));
     }
 
     private Displace(final Displace card) {

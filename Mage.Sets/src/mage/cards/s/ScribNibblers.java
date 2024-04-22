@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -54,12 +53,12 @@ public final class ScribNibblers extends CardImpl {
 
 class ScribNibblersEffect extends OneShotEffect {
 
-    public ScribNibblersEffect() {
+    ScribNibblersEffect() {
         super(Outcome.Neutral);
         this.staticText = "Exile the top card of target player's library. If it's a land card, you gain 1 life";
     }
 
-    public ScribNibblersEffect(final ScribNibblersEffect effect) {
+    private ScribNibblersEffect(final ScribNibblersEffect effect) {
         super(effect);
     }
 
@@ -72,14 +71,17 @@ class ScribNibblersEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player you = game.getPlayer(source.getControllerId());
         Player targetPlayer = game.getPlayer(source.getFirstTarget());
-        if (targetPlayer != null && targetPlayer.getLibrary().hasCards()) {
-            Card card = targetPlayer.getLibrary().getFromTop(game);
-            card.moveToExile(id, "Scrib Nibblers Exile", source, game);
-            if (card.isLand(game) && you != null) {
-                you.gainLife(1, game, source);
-                return true;
-            }
+        if (you == null || targetPlayer == null || !targetPlayer.getLibrary().hasCards()) {
+            return false;
         }
-        return false;
+        Card card = targetPlayer.getLibrary().getFromTop(game);
+        if (card == null) {
+            return false;
+        }
+        you.moveCards(card, Zone.EXILED, source, game);
+        if (card.isLand(game)) {
+            you.gainLife(1, game, source);
+        }
+        return true;
     }
 }

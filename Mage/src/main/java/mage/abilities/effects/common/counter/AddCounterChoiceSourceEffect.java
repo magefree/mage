@@ -12,10 +12,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.CardUtil;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -56,7 +53,9 @@ public class AddCounterChoiceSourceEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanentEntering(source.getSourceId());
+        Permanent permanent = Optional
+                .ofNullable(game.getPermanentEntering(source.getSourceId()))
+                .orElseGet(() -> source.getSourcePermanentIfItStillExists(game));
         if (player == null || permanent == null) {
             return false;
         }

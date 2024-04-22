@@ -35,7 +35,7 @@ public final class GripOfPhyresis extends CardImpl {
 
         // Gain control of target Equipment, then create a 0/0 black Germ creature token and attach that Equipment to it.
         GainControlTargetEffect effect = new GainControlTargetEffect(Duration.EndOfGame, true);
-        effect.setText("Gain control of target equipment");
+        effect.setText("Gain control of target Equipment");
         this.getSpellAbility().addEffect(effect);
         Target targetEquipment = new TargetPermanent(filter);
         this.getSpellAbility().addTarget(targetEquipment);
@@ -56,9 +56,10 @@ class GripOfPhyresisEffect extends CreateTokenEffect {
 
     GripOfPhyresisEffect() {
         super(new PhyrexianGermToken());
+        staticText = ", then " + staticText + " and attach that Equipment to it";
     }
 
-    GripOfPhyresisEffect(final GripOfPhyresisEffect effect) {
+    private GripOfPhyresisEffect(final GripOfPhyresisEffect effect) {
         super(effect);
     }
 

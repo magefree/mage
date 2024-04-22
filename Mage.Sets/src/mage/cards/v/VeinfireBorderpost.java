@@ -48,7 +48,7 @@ public final class VeinfireBorderpost extends CardImpl {
         this.addAbility(new RedManaAbility());
     }
 
-    public VeinfireBorderpost (final VeinfireBorderpost card) {
+    private VeinfireBorderpost(final VeinfireBorderpost card) {
         super(card);
     }
 

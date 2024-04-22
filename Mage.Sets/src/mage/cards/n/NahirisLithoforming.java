@@ -13,7 +13,7 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.TargetPermanent;
+import mage.target.common.TargetSacrifice;
 
 import java.util.UUID;
 
@@ -66,12 +66,12 @@ class NahirisLithoformingSacrificeEffect extends OneShotEffect {
             return false;
         }
         int landCount = game.getBattlefield().count(
-                StaticFilters.FILTER_CONTROLLED_LAND_SHORT_TEXT,
+                TargetSacrifice.makeFilter(StaticFilters.FILTER_LAND),
                 source.getControllerId(), source, game
         );
         landCount = Math.min(source.getManaCostsToPay().getX(), landCount);
-        TargetPermanent target = new TargetPermanent(
-                landCount, landCount, StaticFilters.FILTER_CONTROLLED_LAND_SHORT_TEXT, true
+        TargetSacrifice target = new TargetSacrifice(
+                landCount, landCount, StaticFilters.FILTER_LAND
         );
         player.choose(outcome, target, source, game);
         int counter = 0;

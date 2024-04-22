@@ -58,7 +58,7 @@ class UnboundFlourishingDoubleXEffect extends ReplacementEffectImpl {
         staticText = "Whenever you cast a permanent spell with a mana cost that contains {X}, double the value of X";
     }
 
-    UnboundFlourishingDoubleXEffect(final UnboundFlourishingDoubleXEffect effect) {
+    private UnboundFlourishingDoubleXEffect(final UnboundFlourishingDoubleXEffect effect) {
         super(effect);
     }
 
@@ -80,11 +80,6 @@ class UnboundFlourishingDoubleXEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public UnboundFlourishingDoubleXEffect copy() {
         return new UnboundFlourishingDoubleXEffect(this);
     }
@@ -98,7 +93,7 @@ class UnboundFlourishingCopyAbility extends TriggeredAbilityImpl {
                          "if that spell's mana cost or that ability's activation cost contains {X}" );
     }
 
-    UnboundFlourishingCopyAbility(final UnboundFlourishingCopyAbility ability) {
+    private UnboundFlourishingCopyAbility(final UnboundFlourishingCopyAbility ability) {
         super(ability);
     }
 
@@ -151,7 +146,7 @@ class UnboundFlourishingCopyEffect extends OneShotEffect {
         this.staticText = ", copy that spell or ability. You may choose new targets for the copy";
     }
 
-    UnboundFlourishingCopyEffect(final UnboundFlourishingCopyEffect effect) {
+    private UnboundFlourishingCopyEffect(final UnboundFlourishingCopyEffect effect) {
         super(effect);
     }
 

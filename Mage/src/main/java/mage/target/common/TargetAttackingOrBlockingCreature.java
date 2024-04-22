@@ -4,7 +4,6 @@ import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 
 /**
- *
  * @author awjackson
  */
 public class TargetAttackingOrBlockingCreature extends TargetPermanent {
@@ -21,7 +20,7 @@ public class TargetAttackingOrBlockingCreature extends TargetPermanent {
         super(minNumTargets, maxNumTargets, maxNumTargets > 1 ? StaticFilters.FILTER_ATTACKING_OR_BLOCKING_CREATURES : StaticFilters.FILTER_ATTACKING_OR_BLOCKING_CREATURE);
     }
 
-    public TargetAttackingOrBlockingCreature(final TargetAttackingOrBlockingCreature target) {
+    protected TargetAttackingOrBlockingCreature(final TargetAttackingOrBlockingCreature target) {
         super(target);
     }
 

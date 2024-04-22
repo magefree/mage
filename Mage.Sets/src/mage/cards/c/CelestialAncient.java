@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import java.util.UUID;
@@ -11,8 +10,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
-import mage.filter.FilterSpell;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -20,10 +18,6 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  */
 public final class CelestialAncient extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("an enchantment spell");
-    static {
-        filter.add(CardType.ENCHANTMENT.getPredicate());
-    }
     public CelestialAncient(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");
         this.subtype.add(SubType.ELEMENTAL);
@@ -35,7 +29,8 @@ public final class CelestialAncient extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever you cast an enchantment spell, put a +1/+1 counter on each creature you control.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(), new FilterControlledCreaturePermanent()),filter, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(),
+                StaticFilters.FILTER_CONTROLLED_CREATURE), StaticFilters.FILTER_SPELL_AN_ENCHANTMENT, false));
     }
 
     private CelestialAncient(final CelestialAncient card) {

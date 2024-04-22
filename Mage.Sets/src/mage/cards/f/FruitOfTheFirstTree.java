@@ -1,23 +1,21 @@
-
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.common.DiesAttachedTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.dynamicvalue.common.AttachedPermanentToughnessCount;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
+import mage.constants.SubType;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -37,7 +35,11 @@ public final class FruitOfTheFirstTree extends CardImpl {
         this.addAbility(ability);
 
         // When enchanted creature dies, you gain X life and draw X cards, where X is its toughness.
-        this.addAbility( new DiesAttachedTriggeredAbility(new FruitOfTheFirstTreeEffect(), "enchanted creature"));
+        ability = new DiesAttachedTriggeredAbility(new GainLifeEffect(AttachedPermanentToughnessCount.instance)
+                .setText("you gain X life"), "enchanted creature");
+        ability.addEffect(new DrawCardSourceControllerEffect(AttachedPermanentToughnessCount.instance)
+                .setText("and draw X cards, where X is its toughness"));
+        this.addAbility(ability);
     }
 
     private FruitOfTheFirstTree(final FruitOfTheFirstTree card) {
@@ -47,34 +49,5 @@ public final class FruitOfTheFirstTree extends CardImpl {
     @Override
     public FruitOfTheFirstTree copy() {
         return new FruitOfTheFirstTree(this);
-    }
-}
-
-class FruitOfTheFirstTreeEffect extends OneShotEffect {
-
-    public FruitOfTheFirstTreeEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "you gain X life and draw X cards, where X is its toughness";
-    }
-
-    public FruitOfTheFirstTreeEffect(FruitOfTheFirstTreeEffect copy) {
-        super(copy);
-    }
-
-    @Override
-    public FruitOfTheFirstTreeEffect copy() {
-        return new FruitOfTheFirstTreeEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        Permanent creature = (Permanent) getValue("attachedTo");
-        if (controller != null && creature != null) {
-            controller.gainLife(creature.getToughness().getValue(), game, source);
-            controller.drawCards(creature.getToughness().getValue(), source, game);
-            return true;            
-        }
-        return false;
     }
 }

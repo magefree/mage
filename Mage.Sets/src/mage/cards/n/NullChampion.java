@@ -45,7 +45,7 @@ public final class NullChampion extends LevelerCard {
         setMaxLevelCounters(4);
     }
 
-    public NullChampion (final NullChampion card) {
+    private NullChampion(final NullChampion card) {
         super(card);
     }
 

@@ -43,12 +43,12 @@ public final class HereticsPunishment extends CardImpl {
 
 class HereticsPunishmentEffect extends OneShotEffect {
 
-    public HereticsPunishmentEffect() {
+    HereticsPunishmentEffect() {
         super(Outcome.Damage);
         staticText = "Choose any target, then mill three cards. {this} deals damage to that permanent or player equal to the highest mana value among the milled cards";
     }
 
-    public HereticsPunishmentEffect(final HereticsPunishmentEffect effect) {
+    private HereticsPunishmentEffect(final HereticsPunishmentEffect effect) {
         super(effect);
     }
 
@@ -66,12 +66,12 @@ class HereticsPunishmentEffect extends OneShotEffect {
                 .mapToInt(MageObject::getManaValue)
                 .max()
                 .orElse(0);
-        Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
+        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (permanent != null) {
             permanent.damage(maxCost, source.getSourceId(), source, game, false, true);
             return true;
         }
-        Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
+        Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (targetPlayer != null) {
             targetPlayer.damage(maxCost, source.getSourceId(), source, game);
             return true;

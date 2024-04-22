@@ -53,7 +53,7 @@ class DrogskolReaverAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), false);
     }
 
-    public DrogskolReaverAbility(final DrogskolReaverAbility ability) {
+    private DrogskolReaverAbility(final DrogskolReaverAbility ability) {
         super(ability);
     }
 

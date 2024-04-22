@@ -18,7 +18,7 @@ public final class HighlandWeald extends CardImpl {
 
     public HighlandWeald(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
-        this.addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
 
         // Highland Weald enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());

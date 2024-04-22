@@ -23,7 +23,7 @@ public final class Cobblebrute extends CardImpl {
         this.toughness = new MageInt(2);
     }
 
-    public Cobblebrute (final Cobblebrute card) {
+    private Cobblebrute(final Cobblebrute card) {
         super(card);
     }
 

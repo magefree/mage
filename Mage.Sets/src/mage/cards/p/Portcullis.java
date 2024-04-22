@@ -38,7 +38,7 @@ public final class Portcullis extends CardImpl {
         String rule = "Whenever a creature enters the battlefield, if there are two or more other creatures on the battlefield, exile that creature.";
         String rule2 = " Return that card to the battlefield under its owner's control when {this} leaves the battlefield.";
         TriggeredAbility ability = new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new PortcullisExileEffect(),
-                StaticFilters.FILTER_PERMANENT_A_CREATURE, false, SetTargetPointer.PERMANENT, rule);
+                StaticFilters.FILTER_PERMANENT_A_CREATURE, false, SetTargetPointer.PERMANENT);
         MoreThanXCreaturesOnBFCondition condition = new MoreThanXCreaturesOnBFCondition(2);
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, condition, rule + rule2));
 
@@ -73,12 +73,12 @@ class MoreThanXCreaturesOnBFCondition implements Condition {
 
 class PortcullisExileEffect extends OneShotEffect {
 
-    public PortcullisExileEffect() {
+    PortcullisExileEffect() {
         super(Outcome.Exile);
         this.staticText = "Whenever a creature enters the battlefield, if there are two or more other creatures on the battlefield, exile that creature";
     }
 
-    public PortcullisExileEffect(final PortcullisExileEffect effect) {
+    private PortcullisExileEffect(final PortcullisExileEffect effect) {
         super(effect);
     }
 
@@ -97,10 +97,9 @@ class PortcullisExileEffect extends OneShotEffect {
                 && controller != null) {
             UUID exileZoneId = CardUtil.getExileZoneId(game, creatureToExile.getId(), creatureToExile.getZoneChangeCounter(game));
             controller.moveCardsToExile(creatureToExile, source, game, true, exileZoneId, portcullis.getName());
-            FixedTarget fixedTarget = new FixedTarget(portcullis, game);
             Effect returnEffect = new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false);
             returnEffect.setTargetPointer(new FixedTarget(creatureToExile.getId(), game.getState().getZoneChangeCounter(creatureToExile.getId())));
-            DelayedTriggeredAbility delayedAbility = new PortcullisReturnToBattlefieldTriggeredAbility(fixedTarget, returnEffect);
+            DelayedTriggeredAbility delayedAbility = new PortcullisReturnToBattlefieldTriggeredAbility(new FixedTarget(portcullis, game), returnEffect);
             game.addDelayedTriggeredAbility(delayedAbility, source);
         }
         return true;
@@ -109,16 +108,16 @@ class PortcullisExileEffect extends OneShotEffect {
 
 class PortcullisReturnToBattlefieldTriggeredAbility extends DelayedTriggeredAbility {
 
-    protected FixedTarget fixedTarget;
+    protected final FixedTarget fixedTarget;
 
     public PortcullisReturnToBattlefieldTriggeredAbility(FixedTarget fixedTarget, Effect effect) {
         super(effect, Duration.OneUse);
         this.fixedTarget = fixedTarget;
     }
 
-    public PortcullisReturnToBattlefieldTriggeredAbility(final PortcullisReturnToBattlefieldTriggeredAbility ability) {
+    private PortcullisReturnToBattlefieldTriggeredAbility(final PortcullisReturnToBattlefieldTriggeredAbility ability) {
         super(ability);
-        this.fixedTarget = ability.fixedTarget;
+        this.fixedTarget = ability.fixedTarget.copy();
     }
 
     @Override

@@ -63,7 +63,7 @@ class WallOfVipersFilter extends FilterCreaturePermanent {
         super("creature {this} is blocking");
     }
     
-    public WallOfVipersFilter(final WallOfVipersFilter filter) {
+    private WallOfVipersFilter(final WallOfVipersFilter filter) {
         super(filter);
     }
     

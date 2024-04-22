@@ -42,7 +42,7 @@ public final class TalonOfPain extends CardImpl {
         this.addAbility(new TalonOfPainTriggeredAbility());
 
         // {X}, {T}, Remove X charge counters from Talon of Pain: Talon of Pain deals X damage to any target.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(ManacostVariableValue.REGULAR), new ManaCostsImpl<>("{X}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(ManacostVariableValue.REGULAR, "it"), new ManaCostsImpl<>("{X}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new TalonOfPainRemoveVariableCountersSourceCost(CounterType.CHARGE.createInstance()));
         ability.addTarget(new TargetAnyTarget());
@@ -67,7 +67,7 @@ class TalonOfPainTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever a source you control other than {this} deals damage to an opponent, ");
     }
 
-    public TalonOfPainTriggeredAbility(final TalonOfPainTriggeredAbility ability) {
+    private TalonOfPainTriggeredAbility(final TalonOfPainTriggeredAbility ability) {
         super(ability);
     }
 
@@ -128,7 +128,7 @@ class TalonOfPainRemoveVariableCountersSourceCost extends VariableCostImpl {
         }
     }
 
-    public TalonOfPainRemoveVariableCountersSourceCost(final TalonOfPainRemoveVariableCountersSourceCost cost) {
+    private TalonOfPainRemoveVariableCountersSourceCost(final TalonOfPainRemoveVariableCountersSourceCost cost) {
         super(cost);
         this.minimalCountersToPay = cost.minimalCountersToPay;
         this.counterName = cost.counterName;

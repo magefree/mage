@@ -72,7 +72,7 @@ class GargantuanGorillaSacrificeEffect extends OneShotEffect {
         staticText = "you may sacrifice a Forest. If you sacrifice a snow Forest this way, {this} gains trample until end of turn. If you don't sacrifice a Forest, sacrifice {this} and it deals 7 damage to you.";
     }
 
-    public GargantuanGorillaSacrificeEffect(final GargantuanGorillaSacrificeEffect effect) {
+    private GargantuanGorillaSacrificeEffect(final GargantuanGorillaSacrificeEffect effect) {
         super(effect);
     }
 
@@ -86,8 +86,7 @@ class GargantuanGorillaSacrificeEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (controller != null && sourcePermanent != null) {
-            TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, true);
-            SacrificeTargetCost cost = new SacrificeTargetCost(target);
+            SacrificeTargetCost cost = new SacrificeTargetCost(1, filter);
             if (!controller.chooseUse(Outcome.Benefit, "Sacrifice a Forest?", source, game)
                     || !cost.canPay(source, source, source.getControllerId(), game)
                     || !cost.pay(source, game, source, source.getControllerId(), true)) {
@@ -109,12 +108,12 @@ class GargantuanGorillaSacrificeEffect extends OneShotEffect {
 
 class GargantuanGorillaFightEffect extends OneShotEffect {
 
-    public GargantuanGorillaFightEffect() {
+    GargantuanGorillaFightEffect() {
         super(Outcome.Damage);
         this.staticText = "{this} deals damage equal to its power to another target creature. That creature deals damage equal to its power to {this}";
     }
 
-    public GargantuanGorillaFightEffect(final GargantuanGorillaFightEffect effect) {
+    private GargantuanGorillaFightEffect(final GargantuanGorillaFightEffect effect) {
         super(effect);
     }
 

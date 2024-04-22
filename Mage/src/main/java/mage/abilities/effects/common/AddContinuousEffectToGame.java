@@ -23,7 +23,7 @@ public class AddContinuousEffectToGame extends OneShotEffect {
         }
     }
 
-    public AddContinuousEffectToGame(final AddContinuousEffectToGame effect) {
+    protected AddContinuousEffectToGame(final AddContinuousEffectToGame effect) {
         super(effect);
         this.effects.addAll(effect.effects);
     }
@@ -43,6 +43,9 @@ public class AddContinuousEffectToGame extends OneShotEffect {
 
     @Override
     public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
         return effects.getText(mode);
     }
 }

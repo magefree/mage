@@ -37,7 +37,7 @@ public final class GraazUnstoppableJuggernaut extends CardImpl {
     public GraazUnstoppableJuggernaut(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{8}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.JUGGERNAUT);
         this.power = new MageInt(7);
         this.toughness = new MageInt(5);
@@ -52,7 +52,7 @@ public final class GraazUnstoppableJuggernaut extends CardImpl {
 
         // Other creatures you control have base power and toughness 5/3 and are Juggernauts in addition to their other creature types.
         Ability ability = new SimpleStaticAbility(new SetBasePowerToughnessAllEffect(
-                5, 3, Duration.WhileOnBattlefield, filter3, true
+                5, 3, Duration.WhileOnBattlefield, filter3
         ));
         ability.addEffect(new AddCardSubtypeAllEffect(
                 filter3, SubType.JUGGERNAUT, null

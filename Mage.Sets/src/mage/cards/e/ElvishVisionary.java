@@ -27,7 +27,7 @@ public final class ElvishVisionary extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)));
     }
 
-    public ElvishVisionary (final ElvishVisionary card) {
+    private ElvishVisionary(final ElvishVisionary card) {
         super(card);
     }
 

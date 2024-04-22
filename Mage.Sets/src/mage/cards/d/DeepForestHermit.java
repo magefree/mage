@@ -1,21 +1,16 @@
 package mage.cards.d;
 
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.abilities.keyword.VanishingSacrificeAbility;
-import mage.abilities.keyword.VanishingUpkeepAbility;
+import mage.abilities.keyword.VanishingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.permanent.token.SquirrelToken;
 
@@ -38,11 +33,7 @@ public final class DeepForestHermit extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Vanishing 3
-        Ability ability = new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.TIME.createInstance(3)));
-        ability.setRuleVisible(false);
-        this.addAbility(ability);
-        this.addAbility(new VanishingUpkeepAbility(3));
-        this.addAbility(new VanishingSacrificeAbility());
+        this.addAbility(new VanishingAbility(3));
 
         // When Deep Forest Hermit enters the battlefield, create four 1/1 green Squirrel creature tokens.
         this.addAbility(new EntersBattlefieldTriggeredAbility(

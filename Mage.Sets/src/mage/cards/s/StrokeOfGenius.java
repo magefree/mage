@@ -25,7 +25,7 @@ public final class StrokeOfGenius extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public StrokeOfGenius (final StrokeOfGenius card) {
+    private StrokeOfGenius(final StrokeOfGenius card) {
         super(card);
     }
 

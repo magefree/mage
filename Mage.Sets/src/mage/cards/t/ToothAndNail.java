@@ -51,12 +51,12 @@ public final class ToothAndNail extends CardImpl {
 
 class ToothAndNailPutCreatureOnBattlefieldEffect extends OneShotEffect {
 
-    public ToothAndNailPutCreatureOnBattlefieldEffect() {
+    ToothAndNailPutCreatureOnBattlefieldEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Put up to two creature cards from your hand onto the battlefield";
     }
 
-    public ToothAndNailPutCreatureOnBattlefieldEffect(final ToothAndNailPutCreatureOnBattlefieldEffect effect) {
+    private ToothAndNailPutCreatureOnBattlefieldEffect(final ToothAndNailPutCreatureOnBattlefieldEffect effect) {
         super(effect);
     }
 

@@ -52,7 +52,7 @@ public final class InSearchOfGreatness extends CardImpl {
 
 class InSearchOfGreatnessEffect extends OneShotEffect {
 
-    public InSearchOfGreatnessEffect() {
+    InSearchOfGreatnessEffect() {
         super(Outcome.PlayForFree);
         staticText = "you may cast a permanent spell from your hand with mana value "
                 + "equal to 1 plus the highest mana value among other permanents you control "

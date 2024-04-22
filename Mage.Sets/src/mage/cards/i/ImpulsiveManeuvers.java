@@ -51,14 +51,14 @@ class ImpulsiveManeuversEffect extends PreventionEffectImpl {
         staticText = "flip a coin. If you win the flip, the next time that creature would deal combat damage this turn, it deals double that damage instead. If you lose the flip, the next time that creature would deal combat damage this turn, prevent that damage";
     }
 
-    public ImpulsiveManeuversEffect(final ImpulsiveManeuversEffect effect) {
+    private ImpulsiveManeuversEffect(final ImpulsiveManeuversEffect effect) {
         super(effect);
     }
 
     @Override
     public void init(Ability source, Game game) {
-        this.wonFlip = game.getPlayer(source.getControllerId()).flipCoin(source, game, true);
         super.init(source, game);
+        this.wonFlip = game.getPlayer(source.getControllerId()).flipCoin(source, game, true);
     }
 
     @Override

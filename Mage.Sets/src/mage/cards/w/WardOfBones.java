@@ -48,25 +48,20 @@ public final class WardOfBones extends CardImpl {
 
 class WardOfBonesEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public WardOfBonesEffect() {
+    WardOfBonesEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Each opponent who controls more creatures than you can't cast creature spells. "
                 + "The same is true for artifacts and enchantments.<br><br>"
                 + "Each opponent who controls more lands than you can't play lands.";
     }
 
-    public WardOfBonesEffect(final WardOfBonesEffect effect) {
+    private WardOfBonesEffect(final WardOfBonesEffect effect) {
         super(effect);
     }
 
     @Override
     public WardOfBonesEffect copy() {
         return new WardOfBonesEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

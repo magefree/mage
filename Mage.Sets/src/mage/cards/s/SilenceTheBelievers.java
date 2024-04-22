@@ -48,12 +48,12 @@ public final class SilenceTheBelievers extends CardImpl {
 
 class SilenceTheBelieversExileEffect extends OneShotEffect {
 
-    public SilenceTheBelieversExileEffect() {
+    SilenceTheBelieversExileEffect() {
         super(Outcome.Benefit);
         this.staticText = "Exile any number of target creatures and all Auras attached to them";
     }
 
-    public SilenceTheBelieversExileEffect(final SilenceTheBelieversExileEffect effect) {
+    private SilenceTheBelieversExileEffect(final SilenceTheBelieversExileEffect effect) {
         super(effect);
     }
 

@@ -47,7 +47,7 @@ class CoordinatedBarrageEffect extends OneShotEffect {
         this.staticText = "Choose a creature type. {this} deals damage to target attacking or blocking creature equal to the number of permanents you control of the chosen type";
     }
 
-    CoordinatedBarrageEffect(final CoordinatedBarrageEffect effect) {
+    private CoordinatedBarrageEffect(final CoordinatedBarrageEffect effect) {
         super(effect);
     }
 

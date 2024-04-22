@@ -1,20 +1,18 @@
 
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.Ability;
+import mage.abilities.common.ExertCreatureControllerTriggeredAbility;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.keyword.ExertAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.filter.StaticFilters;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetOpponentsCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -34,7 +32,9 @@ public final class VizierOfTheTrue extends CardImpl {
         this.addAbility(new ExertAbility(null, false));
 
         // Whenever you exert a creature, tap target creature an opponent controls.
-        this.addAbility(new VizierOfTheTrueAbility());
+        Ability ability = new ExertCreatureControllerTriggeredAbility(new TapTargetEffect());
+        ability.addTarget(new TargetOpponentsCreaturePermanent());
+        this.addAbility(ability);
     }
 
     private VizierOfTheTrue(final VizierOfTheTrue card) {
@@ -44,37 +44,5 @@ public final class VizierOfTheTrue extends CardImpl {
     @Override
     public VizierOfTheTrue copy() {
         return new VizierOfTheTrue(this);
-    }
-}
-
-class VizierOfTheTrueAbility extends TriggeredAbilityImpl {
-
-    public VizierOfTheTrueAbility() {
-        super(Zone.BATTLEFIELD, new TapTargetEffect());
-        addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
-    }
-
-    public VizierOfTheTrueAbility(final VizierOfTheTrueAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public VizierOfTheTrueAbility copy() {
-        return new VizierOfTheTrueAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.BECOMES_EXERTED;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getPlayerId().equals(getControllerId());
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever you exert a creature, tap target creature an opponent controls.";
     }
 }

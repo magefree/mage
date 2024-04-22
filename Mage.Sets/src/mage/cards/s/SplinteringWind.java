@@ -15,7 +15,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -53,12 +53,12 @@ public final class SplinteringWind extends CardImpl {
 
 class SplinteringWindCreateTokenEffect extends OneShotEffect {
 
-    public SplinteringWindCreateTokenEffect() {
+    SplinteringWindCreateTokenEffect() {
         super(Outcome.PutCreatureInPlay);
         staticText = "create a 1/1 green Splinter creature token. It has flying and \"Cumulative upkeep {G}.\" When it leaves the battlefield, it deals 1 damage to you and each creature you control";
     }
 
-    public SplinteringWindCreateTokenEffect(final SplinteringWindCreateTokenEffect effect) {
+    private SplinteringWindCreateTokenEffect(final SplinteringWindCreateTokenEffect effect) {
         super(effect);
     }
 
@@ -86,15 +86,15 @@ class SplinteringWindCreateTokenEffect extends OneShotEffect {
 
 class SplinteringWindDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
-    private UUID tokenId;
+    private final UUID tokenId;
 
     SplinteringWindDelayedTriggeredAbility(UUID tokenId) {
         super(new DamageControllerEffect(1), Duration.OneUse);
-        this.addEffect(new DamageAllEffect(1, new FilterControlledCreaturePermanent()));
+        this.addEffect(new DamageAllEffect(1, StaticFilters.FILTER_CONTROLLED_CREATURE));
         this.tokenId = tokenId;
     }
 
-    SplinteringWindDelayedTriggeredAbility(final SplinteringWindDelayedTriggeredAbility ability) {
+    private SplinteringWindDelayedTriggeredAbility(final SplinteringWindDelayedTriggeredAbility ability) {
         super(ability);
         this.tokenId = ability.tokenId;
     }

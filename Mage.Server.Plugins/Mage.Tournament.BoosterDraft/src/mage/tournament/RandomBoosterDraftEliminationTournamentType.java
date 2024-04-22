@@ -18,7 +18,7 @@ public class RandomBoosterDraftEliminationTournamentType extends TournamentType 
         this.draft = true;
         this.limited = true;
         this.cubeBooster = false;
-        this.elimination = false;
+        this.elimination = true;
         this.isRandom = true;
     }
 

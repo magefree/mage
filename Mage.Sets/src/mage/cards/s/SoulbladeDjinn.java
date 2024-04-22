@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -13,20 +12,13 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.Predicates;
+import mage.filter.StaticFilters;
 
 /**
  *
  * @author fireshoes
  */
 public final class SoulbladeDjinn extends CardImpl {
-    
-    private static final FilterSpell filterNonCreature = new FilterSpell("a noncreature spell");
-
-    static {
-        filterNonCreature.add(Predicates.not(CardType.CREATURE.getPredicate()));
-    }
 
     public SoulbladeDjinn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}");
@@ -39,7 +31,7 @@ public final class SoulbladeDjinn extends CardImpl {
         
         // Whenever you cast a noncreature spell, creatures you control get +1/+1 until end of turn.
         Effect effect = new BoostControlledEffect(1,1,Duration.EndOfTurn);
-        Ability ability = new SpellCastControllerTriggeredAbility(effect, filterNonCreature, false);
+        Ability ability = new SpellCastControllerTriggeredAbility(effect, StaticFilters.FILTER_SPELL_A_NON_CREATURE, false);
         this.addAbility(ability);
     }
 

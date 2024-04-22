@@ -56,7 +56,7 @@ class TranscendenceStateTriggeredAbility extends StateTriggeredAbility {
         super(Zone.BATTLEFIELD, new LoseGameSourceControllerEffect());
     }
 
-    TranscendenceStateTriggeredAbility(final TranscendenceStateTriggeredAbility ability) {
+    private TranscendenceStateTriggeredAbility(final TranscendenceStateTriggeredAbility ability) {
         super(ability);
     }
 
@@ -86,7 +86,7 @@ class TranscendenceLoseLifeTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new TranscendenceLoseLifeEffect(), false);
     }
 
-    TranscendenceLoseLifeTriggeredAbility(final TranscendenceLoseLifeTriggeredAbility ability) {
+    private TranscendenceLoseLifeTriggeredAbility(final TranscendenceLoseLifeTriggeredAbility ability) {
         super(ability);
     }
 
@@ -128,7 +128,7 @@ class TranscendenceLoseLifeEffect extends OneShotEffect {
         this.staticText = "you gain 2 life for each 1 life you lost";
     }
 
-    TranscendenceLoseLifeEffect(final TranscendenceLoseLifeEffect effect) {
+    private TranscendenceLoseLifeEffect(final TranscendenceLoseLifeEffect effect) {
         super(effect);
         this.amount = effect.amount;
     }

@@ -63,7 +63,7 @@ class MesmericFiendExileEffect extends OneShotEffect {
         this.staticText = "target opponent reveals their hand and you choose a nonland card from it. Exile that card";
     }
     
-    public MesmericFiendExileEffect(final MesmericFiendExileEffect effect) {
+    private MesmericFiendExileEffect(final MesmericFiendExileEffect effect) {
         super(effect);
     }
     
@@ -103,7 +103,7 @@ class MesmericFiendLeaveEffect extends OneShotEffect {
         this.staticText = "return the exiled card to its owner's hand";
     }
     
-    public MesmericFiendLeaveEffect(final MesmericFiendLeaveEffect effect) {
+    private MesmericFiendLeaveEffect(final MesmericFiendLeaveEffect effect) {
         super(effect);
     }
     

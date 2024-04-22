@@ -23,7 +23,7 @@ public final class GuildArtisan extends CardImpl {
     public GuildArtisan(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.BACKGROUND);
 
         // Commander creatures you own have "Whenever this creature attacks a player, if no other opponent has more life than that player, create two Treasure tokens."

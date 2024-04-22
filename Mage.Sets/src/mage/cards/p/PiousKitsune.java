@@ -70,7 +70,7 @@ class PiousKitsuneEffect extends OneShotEffect {
         this.staticText = "put a devotion counter on Pious Kitsune. Then if a creature named Eight-and-a-Half-Tails is on the battlefield, you gain 1 life for each devotion counter on Pious Kitsune";
     }
 
-    public PiousKitsuneEffect(final PiousKitsuneEffect effect) {
+    private PiousKitsuneEffect(final PiousKitsuneEffect effect) {
         super(effect);
     }
 

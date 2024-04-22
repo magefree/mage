@@ -13,6 +13,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.PhaseStep;
 import mage.constants.TurnPhase;
+import mage.filter.StaticFilters;
 import mage.watchers.common.PlayerAttackedStepWatcher;
 
 /**
@@ -33,7 +34,7 @@ public final class TreetopDefense extends CardImpl {
         this.addAbility(ability);
 
         // Creatures you control gain reach until end of turn.
-        this.getSpellAbility().addEffect(new GainAbilityControlledEffect(ReachAbility.getInstance(), Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new GainAbilityControlledEffect(ReachAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES));
     }
 
     private TreetopDefense(final TreetopDefense card) {

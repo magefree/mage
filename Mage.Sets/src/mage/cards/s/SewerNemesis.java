@@ -91,7 +91,7 @@ class SewerNemesisTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new MillCardsTargetEffect(1), false);
     }
 
-    public SewerNemesisTriggeredAbility(final SewerNemesisTriggeredAbility ability) {
+    private SewerNemesisTriggeredAbility(final SewerNemesisTriggeredAbility ability) {
         super(ability);
     }
 

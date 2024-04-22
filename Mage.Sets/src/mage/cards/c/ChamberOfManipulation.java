@@ -42,7 +42,7 @@ public final class ChamberOfManipulation extends CardImpl {
         controlAbility.addTarget(new TargetCreaturePermanent());
         controlAbility.addCost(new DiscardTargetCost(new TargetCardInHand()));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(controlAbility, AttachmentType.AURA, 
-                Duration.WhileOnBattlefield, "Enchanted land has \"{t}, Discard a card: Gain control of target creature until end of turn.\"")));
+                Duration.WhileOnBattlefield, "Enchanted land has \"{T}, Discard a card: Gain control of target creature until end of turn.\"")));
     }
 
     private ChamberOfManipulation(final ChamberOfManipulation card) {

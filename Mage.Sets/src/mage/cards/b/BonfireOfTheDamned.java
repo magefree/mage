@@ -59,7 +59,7 @@ class BonfireOfTheDamnedEffect extends OneShotEffect {
         if (damage < 1) {
             return false;
         }
-        game.damagePlayerOrPlaneswalker(source.getFirstTarget(), damage, source.getSourceId(), source, game, false, true);
+        game.damagePlayerOrPermanent(source.getFirstTarget(), damage, source.getSourceId(), source, game, false, true);
         Player player = game.getPlayerOrPlaneswalkerController(source.getFirstTarget());
         if (player == null) {
             return true;

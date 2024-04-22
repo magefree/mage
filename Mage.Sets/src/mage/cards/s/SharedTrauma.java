@@ -41,12 +41,12 @@ public final class SharedTrauma extends CardImpl {
 
 class SharedTraumaEffect extends OneShotEffect {
 
-    public SharedTraumaEffect() {
+    SharedTraumaEffect() {
         super(Outcome.Detriment);
         this.staticText = "<i>Join forces</i> &mdash; Starting with you, each player may pay any amount of mana. Each player mills X cards, where X is the total amount of mana paid this way";
     }
 
-    public SharedTraumaEffect(final SharedTraumaEffect effect) {
+    private SharedTraumaEffect(final SharedTraumaEffect effect) {
         super(effect);
     }
 
@@ -84,4 +84,3 @@ class SharedTraumaEffect extends OneShotEffect {
         return false;
     }
 }
-

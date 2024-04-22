@@ -47,12 +47,12 @@ public final class HarborGuardian extends CardImpl {
 
 class HarborGuardianEffect extends OneShotEffect {
 
-    public HarborGuardianEffect() {
+    HarborGuardianEffect() {
         super(Outcome.DrawCard);
         staticText = "defending player may draw a card";
     }
 
-    public HarborGuardianEffect(final HarborGuardianEffect effect) {
+    private HarborGuardianEffect(final HarborGuardianEffect effect) {
         super(effect);
     }
 

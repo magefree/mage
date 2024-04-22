@@ -30,7 +30,7 @@ public final class RayamiFirstOfTheFallen extends CardImpl {
     public RayamiFirstOfTheFallen(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{G}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.VAMPIRE);
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);

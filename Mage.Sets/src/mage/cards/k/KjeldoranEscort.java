@@ -28,7 +28,7 @@ public final class KjeldoranEscort extends CardImpl {
         this.addAbility(BandingAbility.getInstance());
     }
 
-    public KjeldoranEscort (final KjeldoranEscort card) {
+    private KjeldoranEscort(final KjeldoranEscort card) {
         super(card);
     }
 

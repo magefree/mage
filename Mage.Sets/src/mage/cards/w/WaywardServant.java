@@ -1,11 +1,9 @@
-
 package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
-import mage.abilities.effects.Effect;
+import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.cards.CardImpl;
@@ -28,8 +26,6 @@ public final class WaywardServant extends CardImpl {
         filter.add(AnotherPredicate.instance);
     }
 
-    private static final String rule = "Whenever another Zombie enters the battlefield under your control, each opponent loses 1 life and you gain 1 life.";
-
     public WaywardServant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{B}");
 
@@ -38,10 +34,8 @@ public final class WaywardServant extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever another Zombie enters the battlefield under your control, each opponent loses 1 life and you gain 1 life.
-        Effect effect = new LoseLifeOpponentsEffect(1);
-        Effect effect2 = new GainLifeEffect(1);
-        Ability ability = new EntersBattlefieldAllTriggeredAbility(effect, filter, rule);
-        ability.addEffect(effect2);
+        Ability ability = new EntersBattlefieldControlledTriggeredAbility(new LoseLifeOpponentsEffect(1), filter);
+        ability.addEffect(new GainLifeEffect(1).concatBy("and"));
         this.addAbility(ability);
 
     }

@@ -41,7 +41,7 @@ public final class DeathmistRaptor extends CardImpl {
         this.addAbility(new TurnedFaceUpAllTriggeredAbility(Zone.GRAVEYARD, new DeathmistRaptorEffect(), new FilterControlledPermanent("a permanent you control"), false, true));
 
         // Megamorph {4}{G}
-        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{4}{G}"), true));
+        this.addAbility(new MorphAbility(this, new ManaCostsImpl<>("{4}{G}"), true));
     }
 
     private DeathmistRaptor(final DeathmistRaptor card) {
@@ -56,12 +56,12 @@ public final class DeathmistRaptor extends CardImpl {
 
 class DeathmistRaptorEffect extends OneShotEffect {
 
-    public DeathmistRaptorEffect() {
+    DeathmistRaptorEffect() {
         super(Outcome.Benefit);
         this.staticText = "you may return {this} from your graveyard to the battlefield face up or face down";
     }
 
-    public DeathmistRaptorEffect(final DeathmistRaptorEffect effect) {
+    private DeathmistRaptorEffect(final DeathmistRaptorEffect effect) {
         super(effect);
     }
 

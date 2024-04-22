@@ -42,7 +42,7 @@ class UrzasChaliceAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DoIfCostPaid(new GainLifeEffect(1), new GenericManaCost(1)), false);
     }
 
-    public UrzasChaliceAbility(final UrzasChaliceAbility ability) {
+    private UrzasChaliceAbility(final UrzasChaliceAbility ability) {
         super(ability);
     }
 

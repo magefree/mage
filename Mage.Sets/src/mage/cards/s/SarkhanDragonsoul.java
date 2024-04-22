@@ -33,7 +33,7 @@ public final class SarkhanDragonsoul extends CardImpl {
     public SarkhanDragonsoul(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{R}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SARKHAN);
         this.setStartingLoyalty(5);
 

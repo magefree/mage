@@ -1,10 +1,7 @@
 package mage.cards.r;
 
 import mage.abilities.Mode;
-import mage.abilities.effects.common.DamageAllEffect;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
-import mage.abilities.effects.common.PutCardFromOneOfTwoZonesOntoBattlefieldEffect;
+import mage.abilities.effects.common.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -32,7 +29,7 @@ public class RiveteersConfluence extends CardImpl {
         // Choose three. You may choose the same mode more than once.
         this.getSpellAbility().getModes().setMinModes(3);
         this.getSpellAbility().getModes().setMaxModes(3);
-        this.getSpellAbility().getModes().setEachModeMoreThanOnce(true);
+        this.getSpellAbility().getModes().setMayChooseSameModeMoreThanOnce(true);
 
         //• You draw a card and you lose 1 life.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).setText("you draw a card"));
@@ -42,7 +39,7 @@ public class RiveteersConfluence extends CardImpl {
         this.getSpellAbility().addMode(new Mode(new DamageAllEffect(1, damageFilter)));
 
         //• You may put a land card from your hand or graveyard onto the battlefield tapped.
-        this.getSpellAbility().addMode(new Mode(new PutCardFromOneOfTwoZonesOntoBattlefieldEffect(StaticFilters.FILTER_CARD_LAND_A, true)));
+        this.getSpellAbility().addMode(new Mode(new PutCardFromHandOrGraveyardOntoBattlefieldEffect(StaticFilters.FILTER_CARD_LAND_A, true)));
     }
 
     private RiveteersConfluence(final RiveteersConfluence card) {

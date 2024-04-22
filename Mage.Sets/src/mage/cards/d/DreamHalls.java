@@ -56,7 +56,7 @@ class DreamHallsEffect extends ContinuousEffectImpl {
         staticText = "Rather than pay the mana cost for a spell, its controller may discard a card that shares a color with that spell";
     }
 
-    public DreamHallsEffect(final DreamHallsEffect effect) {
+    private DreamHallsEffect(final DreamHallsEffect effect) {
         super(effect);
     }
 

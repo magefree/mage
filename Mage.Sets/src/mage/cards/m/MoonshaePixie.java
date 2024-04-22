@@ -55,6 +55,8 @@ public final class MoonshaePixie extends AdventureCard {
         this.getSpellCard().getSpellAbility().addTarget(new TargetPermanent(
                 0, 3, StaticFilters.FILTER_PERMANENT_CREATURES
         ));
+
+        this.finalizeAdventure();
     }
 
     private MoonshaePixie(final MoonshaePixie card) {

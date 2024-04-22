@@ -52,7 +52,7 @@ class SpitefulVisionsTriggeredAbility  extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, effect, optional);
     }
 
-    public SpitefulVisionsTriggeredAbility(final SpitefulVisionsTriggeredAbility ability) {
+    private SpitefulVisionsTriggeredAbility(final SpitefulVisionsTriggeredAbility ability) {
         super(ability);
     }
 

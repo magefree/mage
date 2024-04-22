@@ -33,7 +33,7 @@ public class PutIntoGraveFromBattlefieldAllTriggeredAbility extends TriggeredAbi
                 + " graveyard from the battlefield, ");
     }
 
-    public PutIntoGraveFromBattlefieldAllTriggeredAbility(final PutIntoGraveFromBattlefieldAllTriggeredAbility ability) {
+    protected PutIntoGraveFromBattlefieldAllTriggeredAbility(final PutIntoGraveFromBattlefieldAllTriggeredAbility ability) {
         super(ability);
         this.filter = ability.filter;
         this.onlyToControllerGraveyard = ability.onlyToControllerGraveyard;

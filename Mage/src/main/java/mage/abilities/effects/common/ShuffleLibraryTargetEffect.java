@@ -9,7 +9,6 @@ import mage.game.Game;
 import mage.players.Player;
 
 /**
- *
  * @author Mael
  */
 public class ShuffleLibraryTargetEffect extends OneShotEffect {
@@ -19,7 +18,7 @@ public class ShuffleLibraryTargetEffect extends OneShotEffect {
         this.staticText = "Target player shuffles their library";
     }
 
-    public ShuffleLibraryTargetEffect(final ShuffleLibraryTargetEffect effect) {
+    protected ShuffleLibraryTargetEffect(final ShuffleLibraryTargetEffect effect) {
         super(effect);
     }
 
@@ -30,9 +29,9 @@ public class ShuffleLibraryTargetEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (player != null) {
-			player.shuffleLibrary(source, game);
+            player.shuffleLibrary(source, game);
             return true;
         }
         return false;

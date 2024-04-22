@@ -38,7 +38,7 @@ public final class BrunaTheFadingLight extends CardImpl {
 
     public BrunaTheFadingLight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{W}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ANGEL, SubType.HORROR);
         this.power = new MageInt(5);
         this.toughness = new MageInt(7);

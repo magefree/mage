@@ -45,7 +45,7 @@ public final class FelisaFangOfSilverquill extends CardImpl {
     public FelisaFangOfSilverquill(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.VAMPIRE);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(3);

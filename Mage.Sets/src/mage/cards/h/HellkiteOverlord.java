@@ -38,7 +38,7 @@ public final class HellkiteOverlord extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{B}{G}")));
     }
 
-    public HellkiteOverlord (final HellkiteOverlord card) {
+    private HellkiteOverlord(final HellkiteOverlord card) {
         super(card);
     }
 

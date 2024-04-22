@@ -185,6 +185,24 @@ public class ConditionalPreventionTest extends CardTestPlayerBase {
     }
 
     @Test
+    public void test_UnpreventableCombatDamageToPlayer() {
+        // Combat damage that would be dealt by creatures you control can't be prevented.
+        addCard(Zone.BATTLEFIELD, playerB, "Questing Beast", 1);
+        // When The One Ring enters the battlefield, if you cast it, you gain protection from everything until your next turn.
+        addCard(Zone.HAND, playerA, "The One Ring", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "The One Ring");
+        attack(2, playerB, "Questing Beast");
+
+        setStrictChooseMode(true);
+        setStopAt(2, PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerA, 20 - 4); // Damage should not be prevented
+    }
+
+    @Test
     public void test_PreventSomeDamage_Normal() {
         // Kicker-Sacrifice a land.
         // Prevent the next 3 damage that would be dealt this turn to any number of target creatures and/or players, divided as you choose.

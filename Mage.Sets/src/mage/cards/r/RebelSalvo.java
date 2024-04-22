@@ -40,7 +40,7 @@ public final class RebelSalvo extends CardImpl {
         this.getSpellAbility().addEffect(new DamageTargetEffect(5));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlaneswalker());
         this.getSpellAbility().addEffect(new LoseAbilityTargetEffect(IndestructibleAbility.getInstance())
-                .setText("that permanent loses indestructible unil end of turn"));
+                .setText("that permanent loses indestructible until end of turn"));
     }
 
     private RebelSalvo(final RebelSalvo card) {

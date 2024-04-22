@@ -38,12 +38,12 @@ public final class Leeches extends CardImpl {
 
 class LeechesEffect extends OneShotEffect {
 
-    public LeechesEffect() {
+    LeechesEffect() {
         super(Outcome.Benefit);
         this.staticText = "Target player loses all poison counters. Leeches deals that much damage to that player";
     }
 
-    public LeechesEffect(final LeechesEffect effect) {
+    private LeechesEffect(final LeechesEffect effect) {
         super(effect);
     }
 

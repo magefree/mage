@@ -10,7 +10,6 @@ import mage.game.events.GameEvent;
 import mage.target.targetpointer.FixedTarget;
 
 /**
- *
  * @author nantuko
  */
 public class UnattachedTriggeredAbility extends TriggeredAbilityImpl {
@@ -20,7 +19,7 @@ public class UnattachedTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever {this} becomes unattached from a permanent, ");
     }
 
-    public UnattachedTriggeredAbility(final UnattachedTriggeredAbility ability) {
+    protected UnattachedTriggeredAbility(final UnattachedTriggeredAbility ability) {
         super(ability);
     }
 
@@ -31,7 +30,7 @@ public class UnattachedTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getSourceId().equals(this.getSourceId()) ) {
+        if (event.getSourceId().equals(this.getSourceId())) {
             getEffects().get(0).setTargetPointer(new FixedTarget(event.getTargetId(), game));
             return true;
         }

@@ -17,6 +17,9 @@ public class SimpleCardsView extends LinkedHashMap<UUID, SimpleCardView> {
     public SimpleCardsView() {}
 
     public SimpleCardsView(Collection<Card> cards, boolean isGameObject) {
+        if (cards == null) {
+            return;
+        }
         for (Card card: cards) {
             this.put(card.getId(), new SimpleCardView(card.getId(), card.getExpansionSetCode(), card.getCardNumber(), card.getUsesVariousArt(), isGameObject));
         }

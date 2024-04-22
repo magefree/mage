@@ -57,7 +57,7 @@ class VoidStalkerEffect extends OneShotEffect {
         staticText = "Put {this} and target creature on top of their owners' libraries, then those players shuffle their libraries";
     }
 
-    VoidStalkerEffect(final VoidStalkerEffect effect) {
+    private VoidStalkerEffect(final VoidStalkerEffect effect) {
         super(effect);
     }
 

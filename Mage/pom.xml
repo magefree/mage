@@ -99,6 +99,7 @@
 
     <!-- The properties below are added by following http://vlkan.com/blog/post/2015/11/27/maven-protobuf/ -->
     <properties>
+        <root.dir>${project.basedir}/..</root.dir>
         <!-- protobuf paths -->
         <protobuf.input.directory>${project.basedir}/src/main/proto</protobuf.input.directory>
         <protobuf.output.directory>${project.build.directory}/generated-sources</protobuf.output.directory>

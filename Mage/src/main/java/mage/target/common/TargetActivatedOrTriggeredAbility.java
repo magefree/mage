@@ -1,100 +1,30 @@
-
 package mage.target.common;
 
-import java.util.Set;
-import java.util.UUID;
-import java.util.stream.Collectors;
-import mage.abilities.Ability;
-import mage.constants.AbilityType;
-import mage.constants.Zone;
-import mage.filter.Filter;
 import mage.filter.FilterStackObject;
-import mage.game.Game;
-import mage.game.stack.StackObject;
-import mage.target.TargetObject;
+import mage.filter.common.FilterActivatedOrTriggeredAbility;
+import mage.target.TargetStackObject;
 
-public class TargetActivatedOrTriggeredAbility extends TargetObject {
+public class TargetActivatedOrTriggeredAbility extends TargetStackObject {
 
-    protected final FilterStackObject filter;
+    private static final FilterStackObject defaultFilter = new FilterActivatedOrTriggeredAbility();
 
     public TargetActivatedOrTriggeredAbility() {
-        this(new FilterStackObject("activated or triggered ability"));
+        this(1, 1);
     }
 
     public TargetActivatedOrTriggeredAbility(FilterStackObject filter) {
-        this.minNumberOfTargets = 1;
-        this.maxNumberOfTargets = 1;
-        this.zone = Zone.STACK;
-        this.targetName = filter.getMessage();
-        this.filter = filter;
+        this(1, 1, filter);
     }
 
-    public TargetActivatedOrTriggeredAbility(final TargetActivatedOrTriggeredAbility target) {
+    public TargetActivatedOrTriggeredAbility(int minNumTargets, int maxNumTargets) {
+        this(minNumTargets, maxNumTargets, defaultFilter);
+    }
+
+    public TargetActivatedOrTriggeredAbility(int minNumTargets, int maxNumTargets, FilterStackObject filter) {
+        super(minNumTargets, maxNumTargets, filter);
+    }
+
+    protected TargetActivatedOrTriggeredAbility(final TargetActivatedOrTriggeredAbility target) {
         super(target);
-        this.filter = target.filter.copy();
-    }
-
-    @Override
-    public boolean canTarget(UUID id, Ability source, Game game) {
-        // rule 114.4. A spell or ability on the stack is an illegal target for itself.
-        if (source != null && source.getId().equals(id)) {
-            return false;
-        }
-
-        StackObject stackObject = game.getStack().getStackObject(id);
-        return isActivatedOrTriggeredAbility(stackObject) && source != null && filter.match(stackObject, source.getControllerId(), source, game);
-    }
-
-    @Override
-    public boolean canChoose(UUID sourceControllerId, Ability source, Game game) {
-        for (StackObject stackObject : game.getStack()) {
-            if (isActivatedOrTriggeredAbility(stackObject)
-                    && filter.match(stackObject, sourceControllerId, source, game)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public boolean canChoose(UUID sourceControllerId, Game game) {
-        return game.getStack()
-                .stream()
-                .anyMatch(TargetActivatedOrTriggeredAbility::isActivatedOrTriggeredAbility);
-    }
-
-    @Override
-    public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
-        return possibleTargets(sourceControllerId, game);
-    }
-
-    @Override
-    public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
-        return game.getStack().stream()
-                .filter(TargetActivatedOrTriggeredAbility::isActivatedOrTriggeredAbility)
-                .map(stackObject -> stackObject.getStackAbility().getId())
-                .collect(Collectors.toSet());
-    }
-
-    @Override
-    public TargetActivatedOrTriggeredAbility copy() {
-        return new TargetActivatedOrTriggeredAbility(this);
-    }
-
-    @Override
-    public Filter getFilter() {
-        return filter;
-    }
-
-    static boolean isActivatedOrTriggeredAbility(StackObject stackObject) {
-        if (stackObject == null) {
-            return false;
-        }
-        if (stackObject instanceof Ability) {
-            Ability ability = (Ability) stackObject;
-            return ability.getAbilityType() == AbilityType.TRIGGERED
-                    || ability.getAbilityType() == AbilityType.ACTIVATED;
-        }
-        return false;
     }
 }

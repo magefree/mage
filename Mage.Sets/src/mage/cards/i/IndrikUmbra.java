@@ -1,4 +1,3 @@
-
 package mage.cards.i;
 
 import java.util.UUID;
@@ -42,8 +41,10 @@ public final class IndrikUmbra extends CardImpl {
 
         // Enchanted creature gets +4/+4 and has first strike, and all creatures able to block it do so.
         ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(4, 4, Duration.WhileOnBattlefield));
-        ability.addEffect(new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.AURA));
-        ability.addEffect(new MustBeBlockedByAllAttachedEffect(AttachmentType.AURA));
+        ability.addEffect(new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.AURA)
+                .setText("and has first strike"));
+        ability.addEffect(new MustBeBlockedByAllAttachedEffect(AttachmentType.AURA)
+                .setText(", and all creatures able to block it do so"));
         this.addAbility(ability);
 
         // Totem armor

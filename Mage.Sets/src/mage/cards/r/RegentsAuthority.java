@@ -62,7 +62,7 @@ class RegentsAuthorityEffect extends OneShotEffect {
         }
         if (!permanent.isEnchantment(game)
                 && (!permanent.isCreature(game)
-                || !permanent.isLegendary())) {
+                || !permanent.isLegendary(game))) {
             game.addEffect(new BoostTargetEffect(2, 2), source);
             return true;
         }

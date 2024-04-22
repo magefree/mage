@@ -35,7 +35,7 @@ public final class ReverentMantra extends CardImpl {
 
         // Choose a color. All creatures gain protection from the chosen color until end of turn.
         this.getSpellAbility().addEffect(new GainProtectionFromColorAllEffect(
-                Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE
+                Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_ALL_CREATURES
         ));
     }
 

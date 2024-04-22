@@ -54,12 +54,12 @@ public final class SphinxAmbassador extends CardImpl {
 
 class SphinxAmbassadorEffect extends OneShotEffect {
 
-    public SphinxAmbassadorEffect() {
+    SphinxAmbassadorEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "search that player's library for a card, then that player chooses a card name. If you searched for a creature card that doesn't have that name, you may put it onto the battlefield under your control. Then that player shuffles";
     }
 
-    public SphinxAmbassadorEffect(final SphinxAmbassadorEffect effect) {
+    private SphinxAmbassadorEffect(final SphinxAmbassadorEffect effect) {
         super(effect);
     }
 
@@ -71,7 +71,7 @@ class SphinxAmbassadorEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
+        Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (controller != null && targetPlayer != null && sourcePermanent != null) {
             TargetCardInLibrary target = new TargetCardInLibrary();

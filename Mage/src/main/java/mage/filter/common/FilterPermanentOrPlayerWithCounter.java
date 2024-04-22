@@ -21,7 +21,7 @@ public class FilterPermanentOrPlayerWithCounter extends FilterPermanentOrPlayer 
         super(name);
     }
 
-    public FilterPermanentOrPlayerWithCounter(final FilterPermanentOrPlayerWithCounter filter) {
+    protected FilterPermanentOrPlayerWithCounter(final FilterPermanentOrPlayerWithCounter filter) {
         super(filter);
     }
 

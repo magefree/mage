@@ -13,7 +13,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.PhyrexianGolemToken;
 
 import java.util.UUID;
@@ -26,7 +26,7 @@ public final class DarksteelSplicer extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent(SubType.PHYREXIAN, "nontoken Phyrexian");
 
     static {
-        filter.add(AnotherPredicate.instance);
+        filter.add(TokenPredicate.FALSE);
     }
 
     private static final FilterPermanent filter2 = new FilterPermanent(SubType.GOLEM, "Golems");

@@ -52,7 +52,7 @@ class JovialEvilEffect extends OneShotEffect {
         staticText = "{this} deals X damage to target opponent, where X is twice the number of white creatures that player controls";
     }
 
-    JovialEvilEffect(final JovialEvilEffect effect) {
+    private JovialEvilEffect(final JovialEvilEffect effect) {
         super(effect);
     }
 

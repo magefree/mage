@@ -24,11 +24,10 @@ public final class TrompTheDomains extends CardImpl {
 
         // Domain - Until end of turn, creatures you control gain trample and get +1/+1 for each basic land type among lands you control.
         this.getSpellAbility().addEffect(new GainAbilityControlledEffect(
-                TrampleAbility.getInstance(), Duration.EndOfTurn
+                TrampleAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES
         ).setText("until end of turn, creatures you control gain trample"));
         this.getSpellAbility().addEffect(new BoostControlledEffect(
-                DomainValue.REGULAR, DomainValue.REGULAR, Duration.EndOfTurn,
-                StaticFilters.FILTER_PERMANENT_CREATURE, false
+                DomainValue.REGULAR, DomainValue.REGULAR, Duration.EndOfTurn
         ).setText("and get +1/+1 for each basic land type among lands you control"));
         this.getSpellAbility().addHint(DomainHint.instance);
         this.getSpellAbility().setAbilityWord(AbilityWord.DOMAIN);

@@ -23,7 +23,7 @@ public final class ExposeEvil extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 2));
 
         // Investigate (Create a colorless Clue artifact token with \"{2}, Sacrifice this artifact: Draw a card.\")
-        this.getSpellAbility().addEffect(new InvestigateEffect());
+        this.getSpellAbility().addEffect(new InvestigateEffect().concatBy("<br>"));
     }
 
     private ExposeEvil(final ExposeEvil card) {

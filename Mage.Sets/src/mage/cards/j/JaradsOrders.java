@@ -47,7 +47,7 @@ class JaradsOrdersEffect extends OneShotEffect {
         staticText = "Search your library for up to two creature cards and reveal them. Put one into your hand and the other into your graveyard. Then shuffle";
     }
 
-    public JaradsOrdersEffect(final JaradsOrdersEffect effect) {
+    private JaradsOrdersEffect(final JaradsOrdersEffect effect) {
         super(effect);
     }
 

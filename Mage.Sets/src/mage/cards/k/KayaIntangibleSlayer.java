@@ -38,7 +38,7 @@ public final class KayaIntangibleSlayer extends CardImpl {
     public KayaIntangibleSlayer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{W}{W}{B}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.KAYA);
         this.setStartingLoyalty(6);
 
@@ -134,7 +134,7 @@ class KayaIntangibleSlayerExileEffect extends OneShotEffect {
         );
         effect.setSavedPermanent(permanent);
         effect.setOnlyColor(ObjectColor.WHITE);
-        effect.setAdditionalSubType(SubType.SPIRIT);
+        effect.withAdditionalSubType(SubType.SPIRIT);
         effect.apply(game, source);
         return true;
     }

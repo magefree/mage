@@ -1,4 +1,3 @@
-
 package mage.cards.d;
 
 import java.util.UUID;
@@ -23,7 +22,7 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
  */
 public final class DauthiWarlord extends CardImpl {
     
-    private static final FilterPermanent filter = new FilterCreaturePermanent("creatures with shadow");
+    private static final FilterPermanent filter = new FilterCreaturePermanent("creatures with shadow on the battlefield");
 
     static{
         filter.add(new AbilityPredicate(ShadowAbility.class));

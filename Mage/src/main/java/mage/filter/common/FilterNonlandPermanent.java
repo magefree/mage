@@ -8,7 +8,6 @@ import mage.filter.predicate.Predicates;
 
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class FilterNonlandPermanent extends FilterPermanent {
@@ -22,7 +21,7 @@ public class FilterNonlandPermanent extends FilterPermanent {
         this.add(Predicates.not(CardType.LAND.getPredicate()));
     }
 
-    public FilterNonlandPermanent(final FilterNonlandPermanent filter) {
+    protected FilterNonlandPermanent(final FilterNonlandPermanent filter) {
         super(filter);
     }
 

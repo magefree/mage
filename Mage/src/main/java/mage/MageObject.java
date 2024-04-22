@@ -19,17 +19,40 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 
 public interface MageObject extends MageItem, Serializable, Copyable<MageObject> {
 
+    String getExpansionSetCode();
+
+    void setExpansionSetCode(String expansionSetCode);
+
+    String getCardNumber();
+
+    void setCardNumber(String cardNumber);
+
+    Integer getImageNumber();
+
+    void setImageNumber(Integer imageNumber);
+
+    /**
+     * Get image file name
+     * - empty for default name from a card
+     * - non-empty for face down objects like Morph (GUI show empty name, but image must show some image)
+     */
+    String getImageFileName();
+
+    void setImageFileName(String imageFile);
+
     String getName();
 
+    /**
+     * Warning, don't use it as a key - multiple objects can have same parts of the id in rare use cases
+     *
+     * @return
+     */
     String getIdName();
 
     String getLogName();
-
-    String getImageName();
 
     void setName(String name);
 
@@ -62,7 +85,11 @@ public interface MageObject extends MageItem, Serializable, Copyable<MageObject>
 
     boolean hasSubtype(SubType subtype, Game game);
 
-    Set<SuperType> getSuperType();
+    default List<SuperType> getSuperType() {
+        return getSuperType(null);
+    }
+
+    List<SuperType> getSuperType(Game game);
 
     /**
      * For cards: return basic abilities (without dynamic added)
@@ -97,6 +124,8 @@ public interface MageObject extends MageItem, Serializable, Copyable<MageObject>
     FrameStyle getFrameStyle();
 
     ManaCosts<ManaCost> getManaCost();
+
+    void setManaCost(ManaCosts<ManaCost> costs);
 
     default List<String> getManaCostSymbols() {
         List<String> symbols = new ArrayList<>();
@@ -138,9 +167,17 @@ public interface MageObject extends MageItem, Serializable, Copyable<MageObject>
     void setZoneChangeCounter(int value, Game game);
 
     default boolean isHistoric(Game game) {
-        return getCardType(game).contains(CardType.ARTIFACT)
-                || getSuperType().contains(SuperType.LEGENDARY)
+        return isArtifact(game)
+                || isLegendary(game)
                 || hasSubtype(SubType.SAGA, game);
+    }
+
+    default boolean isOutlaw(Game game) {
+        return hasSubtype(SubType.ASSASSIN, game)
+                || hasSubtype(SubType.MERCENARY, game)
+                || hasSubtype(SubType.PIRATE, game)
+                || hasSubtype(SubType.ROGUE, game)
+                || hasSubtype(SubType.WARLOCK, game);
     }
 
     default boolean isCreature() {
@@ -232,26 +269,85 @@ public interface MageObject extends MageItem, Serializable, Copyable<MageObject>
     }
 
     default boolean isLegendary() {
-        return getSuperType().contains(SuperType.LEGENDARY);
+        return isLegendary(null);
+    }
+
+    default boolean isLegendary(Game game) {
+        return getSuperType(game).contains(SuperType.LEGENDARY);
     }
 
     default boolean isSnow() {
-        return getSuperType().contains(SuperType.SNOW);
+        return isSnow(null);
     }
 
-    default void addSuperType(SuperType superType) {
-        if (getSuperType().contains(superType)) {
-            return;
-        }
-        getSuperType().add(superType);
+    default boolean isSnow(Game game) {
+        return getSuperType(game).contains(SuperType.SNOW);
     }
 
     default boolean isBasic() {
-        return getSuperType().contains(SuperType.BASIC);
+        return isBasic(null);
+    }
+
+    default boolean isBasic(Game game) {
+        return getSuperType(game).contains(SuperType.BASIC);
     }
 
     default boolean isWorld() {
-        return getSuperType().contains(SuperType.WORLD);
+        return isWorld(null);
+    }
+
+    default boolean isWorld(Game game) {
+        return getSuperType(game).contains(SuperType.WORLD);
+    }
+
+    default void addSuperType(SuperType superType) {
+        addSuperType(null, superType);
+    }
+
+    default void addSuperType(Game game, SuperType superType) {
+        List<SuperType> currentSuperTypes;
+        if (game != null) {
+            // dynamic
+            currentSuperTypes = game.getState().getCreateMageObjectAttribute(this, game).getSuperType();
+        } else {
+            // static
+            currentSuperTypes = getSuperType();
+        }
+        if (!currentSuperTypes.contains(superType)) {
+            currentSuperTypes.add(superType);
+        }
+    }
+
+    default void removeAllSuperTypes() {
+        removeAllSuperTypes(null);
+    }
+
+    default void removeAllSuperTypes(Game game) {
+        List<SuperType> currentSuperTypes;
+        if (game != null) {
+            // dynamic
+            currentSuperTypes = game.getState().getCreateMageObjectAttribute(this, game).getSuperType();
+        } else {
+            // static
+            currentSuperTypes = getSuperType();
+        }
+        currentSuperTypes.clear();
+    }
+
+    default void removeSuperType(SuperType superType) {
+        removeSuperType(null, superType);
+    }
+
+    default void removeSuperType(Game game, SuperType superType) {
+        List<SuperType> currentSuperTypes;
+        if (game != null) {
+            // dynamic
+            currentSuperTypes = game.getState().getCreateMageObjectAttribute(this, game).getSuperType();
+        } else {
+            // static
+            currentSuperTypes = getSuperType();
+        }
+        currentSuperTypes.remove(superType);
     }
 
     /**

@@ -18,6 +18,7 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -45,7 +46,7 @@ public final class CoffinQueen extends CardImpl {
         // {2}{B}, {tap}: Put target creature card from a graveyard onto the battlefield under your control. When Coffin Queen becomes untapped or you lose control of Coffin Queen, exile that creature.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnFromGraveyardToBattlefieldTargetEffect(), new ManaCostsImpl<>("{2}{B}"));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCardInGraveyard(new FilterCreatureCard("creature card from a graveyard")));
+        ability.addTarget(new TargetCardInGraveyard(StaticFilters.FILTER_CARD_CREATURE_A_GRAVEYARD));
         ability.addEffect(new CoffinQueenCreateDelayedTriggerEffect());
         this.addAbility(ability);
 
@@ -63,12 +64,12 @@ public final class CoffinQueen extends CardImpl {
 
 class CoffinQueenCreateDelayedTriggerEffect extends OneShotEffect {
 
-    public CoffinQueenCreateDelayedTriggerEffect() {
+    CoffinQueenCreateDelayedTriggerEffect() {
         super(Outcome.Detriment);
         this.staticText = "When {this} becomes untapped or you lose control of {this}, exile that creature.";
     }
 
-    public CoffinQueenCreateDelayedTriggerEffect(final CoffinQueenCreateDelayedTriggerEffect effect) {
+    private CoffinQueenCreateDelayedTriggerEffect(final CoffinQueenCreateDelayedTriggerEffect effect) {
         super(effect);
     }
 
@@ -96,7 +97,7 @@ class CoffinQueenDelayedTriggeredAbility extends DelayedTriggeredAbility {
         super(new ExileTargetEffect(), Duration.EndOfGame, true);
     }
 
-    CoffinQueenDelayedTriggeredAbility(CoffinQueenDelayedTriggeredAbility ability) {
+    private CoffinQueenDelayedTriggeredAbility(final CoffinQueenDelayedTriggeredAbility ability) {
         super(ability);
     }
 

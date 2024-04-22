@@ -32,6 +32,7 @@ public final class CephalopodSentry extends CardImpl {
         // Cephalopod Sentry's power is equal to the number of artifacts you control.
         this.addAbility(new SimpleStaticAbility(
                 Zone.ALL, new SetBasePowerSourceEffect(ArtifactYouControlCount.instance)
+                .setText("{this}'s power is equal to the number of artifacts you control")
         ));
     }
 

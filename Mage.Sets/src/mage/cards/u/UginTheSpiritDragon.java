@@ -38,7 +38,7 @@ public final class UginTheSpiritDragon extends CardImpl {
 
     public UginTheSpiritDragon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{8}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.UGIN);
 
         this.setStartingLoyalty(7);
@@ -74,7 +74,7 @@ class UginTheSpiritDragonEffect2 extends OneShotEffect {
         this.staticText = "exile each permanent with mana value X or less that's one or more colors";
     }
 
-    public UginTheSpiritDragonEffect2(final UginTheSpiritDragonEffect2 effect) {
+    private UginTheSpiritDragonEffect2(final UginTheSpiritDragonEffect2 effect) {
         super(effect);
     }
 
@@ -114,7 +114,7 @@ class UginTheSpiritDragonEffect3 extends OneShotEffect {
         this.staticText = "You gain 7 life, draw seven cards, then put up to seven permanent cards from your hand onto the battlefield";
     }
 
-    public UginTheSpiritDragonEffect3(final UginTheSpiritDragonEffect3 effect) {
+    private UginTheSpiritDragonEffect3(final UginTheSpiritDragonEffect3 effect) {
         super(effect);
     }
 

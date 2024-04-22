@@ -35,7 +35,7 @@ public final class DurableHandicraft extends CardImpl {
                                 .setText("put a +1/+1 counter on that creature"),
                         new GenericManaCost(1)
                 ), StaticFilters.FILTER_PERMANENT_A_CREATURE,
-                false, SetTargetPointer.PERMANENT, null
+                false, SetTargetPointer.PERMANENT
         ));
 
         // {5}{G}, Sacrifice Durable Handicraft: Put a +1/+1 counter on each creature you control.

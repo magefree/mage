@@ -27,14 +27,13 @@ import java.util.*;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
- * AI: mock player in simulated games (each player replaced by simulated)
+ * AI: helper class to simulate games with computer bot (each player replaced by simulated)
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SimulatedPlayer2 extends ComputerPlayer {
+public final class SimulatedPlayer2 extends ComputerPlayer {
 
     private static final Logger logger = Logger.getLogger(SimulatedPlayer2.class);
-    private static final PassAbility pass = new PassAbility();
 
     private final boolean isSimulatedPlayer;
     private final List<String> suggested;
@@ -45,7 +44,6 @@ public class SimulatedPlayer2 extends ComputerPlayer {
     public SimulatedPlayer2(Player originalPlayer, boolean isSimulatedPlayer, List<String> suggested) {
         super(originalPlayer.getId());
         this.originalPlayer = originalPlayer.copy();
-        pass.setControllerId(playerId);
         this.isSimulatedPlayer = isSimulatedPlayer;
         this.suggested = suggested;
         this.userData = UserData.getDefaultUserDataView();
@@ -67,8 +65,7 @@ public class SimulatedPlayer2 extends ComputerPlayer {
 
     public List<Ability> simulatePriority(Game game) {
         allActions = new ConcurrentLinkedQueue<>();
-        Game sim = game.copy();
-        sim.setSimulation(true);
+        Game sim = game.createSimulationForAI();
         forced = false;
         simulateOptions(sim);
 
@@ -76,7 +73,7 @@ public class SimulatedPlayer2 extends ComputerPlayer {
         Collections.reverse(list);
 
         if (!forced) {
-            list.add(pass);
+            list.add(new PassAbility());
         }
 
         if (logger.isTraceEnabled()) {
@@ -153,7 +150,7 @@ public class SimulatedPlayer2 extends ComputerPlayer {
                         if (newAbility instanceof AbilityImpl) {
                             xMultiplier = ((AbilityImpl) newAbility).handleManaXMultiplier(game, xMultiplier);
                         }
-                        newAbility.getManaCostsToPay().add(new ManaCostsImpl<>(new StringBuilder("{").append(xAnnounceValue).append('}').toString()));
+                        newAbility.addManaCostsToPay(new ManaCostsImpl<>(new StringBuilder("{").append(xAnnounceValue).append('}').toString()));
                         newAbility.getManaCostsToPay().setX(xAnnounceValue * xMultiplier, xAnnounceValue * xInstancesCount);
                         if (varCost != null) {
                             varCost.setPaid();
@@ -171,17 +168,6 @@ public class SimulatedPlayer2 extends ComputerPlayer {
         }
 
     }
-
-//    protected void simulateAction(Game game, SimulatedAction previousActions, Ability action) {
-//        List<Ability> actions = new ArrayList<Ability>(previousActions.getAbilities());
-//        actions.add(action);
-//        Game sim = game.copy();
-//        if (sim.getPlayer(playerId).activateAbility((ActivatedAbility) action.copy(), sim)) {
-//            sim.applyEffects();
-//            sim.getPlayers().resetPassed();
-//            allActions.add(new SimulatedAction(sim, actions));
-//        }
-//    }
 
     /**
      * if suggested abilities exist, return only those from playables
@@ -324,7 +310,7 @@ public class SimulatedPlayer2 extends ComputerPlayer {
         int powerElements = (int) Math.pow(2, attackersList.size());
         StringBuilder binary = new StringBuilder();
         for (int i = powerElements - 1; i >= 0; i--) {
-            Game sim = game.copy();
+            Game sim = game.createSimulationForAI();
             binary.setLength(0);
             binary.append(Integer.toBinaryString(i));
             while (binary.length() < attackersList.size()) {
@@ -362,7 +348,7 @@ public class SimulatedPlayer2 extends ComputerPlayer {
         }
 
         //add a node with no blockers
-        Game sim = game.copy();
+        Game sim = game.createSimulationForAI();
         engagements.put(sim.getCombat().getValue().hashCode(), sim.getCombat());
         sim.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_BLOCKERS, playerId, playerId));
 
@@ -383,7 +369,7 @@ public class SimulatedPlayer2 extends ComputerPlayer {
         List<Permanent> remaining = remove(blockers, blocker);
         for (int i = 0; i < numGroups; i++) {
             if (game.getCombat().getGroups().get(i).canBlock(blocker, game)) {
-                Game sim = game.copy();
+                Game sim = game.createSimulationForAI();
                 sim.getCombat().getGroups().get(i).addBlocker(blocker.getId(), playerId, sim);
                 if (engagements.put(sim.getCombat().getValue().hashCode(), sim.getCombat()) != null) {
                     logger.debug("simulating -- found redundant block combination");
@@ -421,7 +407,7 @@ public class SimulatedPlayer2 extends ComputerPlayer {
     }
 
     protected void addAbilityNode(SimulationNode2 parent, Ability ability, int depth, Game game) {
-        Game sim = game.copy();
+        Game sim = game.createSimulationForAI();
         sim.getStack().push(new StackAbility(ability, playerId));
         if (ability.activate(sim, false) && ability.isUsesStack()) {
             game.fireEvent(new GameEvent(GameEvent.EventType.TRIGGERED_ABILITY, ability.getId(), ability, ability.getControllerId()));

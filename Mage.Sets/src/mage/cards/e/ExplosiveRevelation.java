@@ -43,12 +43,12 @@ public final class ExplosiveRevelation extends CardImpl {
 
 class ExplosiveRevelationEffect extends OneShotEffect {
 
-    public ExplosiveRevelationEffect() {
+    ExplosiveRevelationEffect() {
         super(Outcome.DrawCard);
         this.staticText = "Choose any target. Reveal cards from the top of your library until you reveal a nonland card. {this} deals damage equal to that card's mana value to that permanent or player. Put the nonland card into your hand and the rest on the bottom of your library in any order";
     }
 
-    public ExplosiveRevelationEffect(final ExplosiveRevelationEffect effect) {
+    private ExplosiveRevelationEffect(final ExplosiveRevelationEffect effect) {
         super(effect);
     }
 
@@ -78,7 +78,7 @@ class ExplosiveRevelationEffect extends OneShotEffect {
                 // the nonland card
                 int damage = nonLandCard == null ? 0 : nonLandCard.getManaValue();
                 // assign damage to target
-                for (UUID targetId : targetPointer.getTargets(game, source)) {
+                for (UUID targetId : getTargetPointer().getTargets(game, source)) {
                     Permanent targetedCreature = game.getPermanent(targetId);
                     if (targetedCreature != null) {
                         targetedCreature.damage(damage, source.getSourceId(), source, game, false, true);

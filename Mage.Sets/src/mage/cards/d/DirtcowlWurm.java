@@ -46,7 +46,7 @@ class DirtcowlWurmTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)));
     }
 
-    DirtcowlWurmTriggeredAbility(DirtcowlWurmTriggeredAbility ability) {
+    private DirtcowlWurmTriggeredAbility(final DirtcowlWurmTriggeredAbility ability) {
         super(ability);
     }
 

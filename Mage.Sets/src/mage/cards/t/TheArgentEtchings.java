@@ -46,7 +46,7 @@ public final class TheArgentEtchings extends CardImpl {
         this.nightCard = true;
 
         // (As this Saga enters and after your draw step, add a lore counter.)
-        SagaAbility sagaAbility = new SagaAbility(this, false);
+        SagaAbility sagaAbility = new SagaAbility(this);
 
         // I -- Incubate 2 five times, then transform all Incubator tokens you control.
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_I, new TheArgentEtchingsEffect());

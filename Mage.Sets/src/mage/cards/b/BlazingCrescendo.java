@@ -1,6 +1,6 @@
 package mage.cards.b;
 
-import mage.abilities.effects.common.ExileTopXMayPlayUntilEndOfTurnEffect;
+import mage.abilities.effects.common.ExileTopXMayPlayUntilEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -23,9 +23,9 @@ public final class BlazingCrescendo extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 
         // Exile the top card of your library. Until the end of your next turn, you may play that card.
-        this.getSpellAbility().addEffect(new ExileTopXMayPlayUntilEndOfTurnEffect(
-                1, false, Duration.UntilEndOfYourNextTurn
-        ));
+        this.getSpellAbility().addEffect(new ExileTopXMayPlayUntilEffect(
+                1, Duration.UntilEndOfYourNextTurn
+        ).concatBy("<br>"));
     }
 
     private BlazingCrescendo(final BlazingCrescendo card) {

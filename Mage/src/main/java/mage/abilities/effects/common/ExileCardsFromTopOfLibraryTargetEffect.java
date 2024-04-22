@@ -1,6 +1,9 @@
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
+import mage.abilities.Mode;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
@@ -11,30 +14,24 @@ import mage.players.Player;
 import mage.util.CardUtil;
 
 /**
- *
- * @author LevelX2
+ * @author LevelX2, Susucr
  */
 public class ExileCardsFromTopOfLibraryTargetEffect extends OneShotEffect {
 
-    int amount;
-    String targetName;
+    private final DynamicValue amount;
 
     public ExileCardsFromTopOfLibraryTargetEffect(int amount) {
-        this(amount, null);
+        this(StaticValue.get(amount));
     }
 
-    public ExileCardsFromTopOfLibraryTargetEffect(int amount, String targetName) {
+    public ExileCardsFromTopOfLibraryTargetEffect(DynamicValue amount) {
         super(Outcome.Exile);
-        this.amount = amount;
-        this.staticText = (targetName == null ? "that player" : targetName) + " exiles the top "
-                + CardUtil.numberToText(amount, "")
-                + (amount == 1 ? "card" : " cards") + " of their library";
+        this.amount = amount.copy();
     }
 
-    public ExileCardsFromTopOfLibraryTargetEffect(final ExileCardsFromTopOfLibraryTargetEffect effect) {
+    protected ExileCardsFromTopOfLibraryTargetEffect(final ExileCardsFromTopOfLibraryTargetEffect effect) {
         super(effect);
-        this.amount = effect.amount;
-
+        this.amount = effect.amount.copy();
     }
 
     @Override
@@ -44,12 +41,24 @@ public class ExileCardsFromTopOfLibraryTargetEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        int milled = amount.calculate(game, source, this);
         Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
-        if (targetPlayer != null) {
+        if (milled > 0 && targetPlayer != null) {
             Cards cards = new CardsImpl();
-            cards.addAll(targetPlayer.getLibrary().getTopCards(game, amount));
+            cards.addAllCards(targetPlayer.getLibrary().getTopCards(game, milled));
             return targetPlayer.moveCards(cards, Zone.EXILED, source, game);
         }
         return false;
+    }
+
+    @Override
+    public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
+        return getTargetPointer().describeTargets(mode.getTargets(), "that player")
+                + " exiles the top "
+                + (amount.toString().equals("1") ? "card" : CardUtil.numberToText(amount.toString(), "a") + " cards")
+                + " of their library";
     }
 }

@@ -60,12 +60,12 @@ public final class TrenchBehemoth extends CardImpl {
 
 class TrenchBehemothEffect extends RequirementEffect {
 
-    public TrenchBehemothEffect() {
+    TrenchBehemothEffect() {
         super(Duration.Custom);
         staticText = "target creature an opponent controls attacks during its controller's next combat phase if able";
     }
 
-    public TrenchBehemothEffect(final TrenchBehemothEffect effect) {
+    private TrenchBehemothEffect(final TrenchBehemothEffect effect) {
         super(effect);
     }
 

@@ -31,7 +31,7 @@ public class ConditionalAsThoughEffect extends AsThoughEffectImpl {
         this.otherwiseEffect = otherwiseEffect;
     }
 
-    public ConditionalAsThoughEffect(final ConditionalAsThoughEffect effect) {
+    protected ConditionalAsThoughEffect(final ConditionalAsThoughEffect effect) {
         super(effect);
         this.effect = effect.effect.copy();
         if (effect.otherwiseEffect != null) {
@@ -50,10 +50,10 @@ public class ConditionalAsThoughEffect extends AsThoughEffectImpl {
     public boolean apply(Game game, Ability source) {
         conditionState = condition.apply(game, source);
         if (conditionState) {
-            effect.setTargetPointer(this.targetPointer);
+            effect.setTargetPointer(this.getTargetPointer().copy());
             return effect.apply(game, source);
         } else if (otherwiseEffect != null) {
-            otherwiseEffect.setTargetPointer(this.targetPointer);
+            otherwiseEffect.setTargetPointer(this.getTargetPointer().copy());
             return otherwiseEffect.apply(game, source);
         }
         if (!conditionState && effect.getDuration() == Duration.OneUse) {
@@ -69,10 +69,10 @@ public class ConditionalAsThoughEffect extends AsThoughEffectImpl {
     public boolean applies(UUID sourceId, Ability affectedAbility, Ability source, Game game, UUID playerId) {
         conditionState = condition.apply(game, source);
         if (conditionState) {
-            effect.setTargetPointer(this.targetPointer);
+            effect.setTargetPointer(this.getTargetPointer().copy());
             return effect.applies(sourceId, affectedAbility, source, game, playerId);
         } else if (otherwiseEffect != null) {
-            otherwiseEffect.setTargetPointer(this.targetPointer);
+            otherwiseEffect.setTargetPointer(this.getTargetPointer().copy());
             return otherwiseEffect.applies(sourceId, affectedAbility, source, game, playerId);
         }
         return false;
@@ -82,10 +82,10 @@ public class ConditionalAsThoughEffect extends AsThoughEffectImpl {
     public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
         conditionState = condition.apply(game, source);
         if (conditionState) {
-            effect.setTargetPointer(this.targetPointer);
+            effect.setTargetPointer(this.getTargetPointer().copy());
             return effect.applies(sourceId, source, affectedControllerId, game);
         } else if (otherwiseEffect != null) {
-            otherwiseEffect.setTargetPointer(this.targetPointer);
+            otherwiseEffect.setTargetPointer(this.getTargetPointer().copy());
             return otherwiseEffect.applies(sourceId, source, affectedControllerId, game);
         }
         return false;

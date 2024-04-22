@@ -2,6 +2,8 @@
 package mage.cards.c;
 
 import java.util.UUID;
+
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.combat.CantBlockAttachedEffect;
@@ -31,8 +33,9 @@ public final class CripplingBlight extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget));
 
         // Enchanted creature gets -1/-1 and can't block.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(-1, -1, Duration.WhileOnBattlefield)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockAttachedEffect(AttachmentType.AURA)));
+        Ability ability = new SimpleStaticAbility(new BoostEnchantedEffect(-1, -1));
+        ability.addEffect(new CantBlockAttachedEffect(AttachmentType.AURA).setText("and can't block"));
+        this.addAbility(ability);
     }
 
     private CripplingBlight(final CripplingBlight card) {

@@ -33,7 +33,7 @@ public class BoostSourceWhileControlsEffect extends WhileConditionContinuousEffe
                 + filterDescription;
     }
 
-    public BoostSourceWhileControlsEffect(final BoostSourceWhileControlsEffect effect) {
+    protected BoostSourceWhileControlsEffect(final BoostSourceWhileControlsEffect effect) {
         super(effect);
         this.power = effect.power;
         this.toughness = effect.toughness;

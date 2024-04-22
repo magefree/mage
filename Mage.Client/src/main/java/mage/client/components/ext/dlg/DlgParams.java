@@ -7,7 +7,10 @@ import mage.util.CardUtil;
 import mage.view.CardsView;
 
 import java.awt.*;
-import java.util.*;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  * GUI: parameters for dialogs, uses to store useful data
@@ -102,7 +105,7 @@ public class DlgParams {
         return stringList;
     }
 
-    public void setStringList(ArrayList<String> stringList) {
+    public void setStringList(List<String> stringList) {
         this.stringList = stringList;
     }
 
@@ -118,7 +121,7 @@ public class DlgParams {
         return objectList;
     }
 
-    public void setObjectList(ArrayList<Object> objectList) {
+    public void setObjectList(List<Object> objectList) {
         this.objectList = objectList;
     }
 

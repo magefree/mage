@@ -38,12 +38,12 @@ public final class UrzasArmor extends CardImpl {
 
 class UrzasArmorEffect extends PreventionEffectImpl {
 
-    public UrzasArmorEffect() {
+    UrzasArmorEffect() {
         super(Duration.WhileOnBattlefield, 1, false, false);
         this.staticText = "If a source would deal damage to you, prevent 1 of that damage";
     }
 
-    public UrzasArmorEffect(UrzasArmorEffect effect) {
+    private UrzasArmorEffect(final UrzasArmorEffect effect) {
         super(effect);
     }
 

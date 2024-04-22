@@ -10,9 +10,14 @@ import mage.game.permanent.token.Token;
  */
 public class CreateTokenAttachSourceEffect extends CreateTokenEffect {
 
+
     public CreateTokenAttachSourceEffect(Token token) {
+        this(token, ", then");
+    }
+
+    public CreateTokenAttachSourceEffect(Token token, String innerConcat) {
         super(token);
-        staticText = staticText.concat(", then attach {this} to it");
+        staticText = staticText.concat(innerConcat + " attach {this} to it");
     }
 
     private CreateTokenAttachSourceEffect(final CreateTokenAttachSourceEffect effect) {

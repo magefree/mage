@@ -7,7 +7,6 @@ import mage.abilities.keyword.SuspendAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInLibrary;
 
@@ -25,7 +24,7 @@ public final class SearchForTomorrow extends CardImpl {
 
         // Search your library for a basic land card and put it onto the battlefield. Then shuffle your library.
         TargetCardInLibrary target = new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND);
-        this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(target, false, Outcome.PutLandInPlay));
+        this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(target, false));
         
         // Suspend 2-{G}
         this.addAbility(new SuspendAbility(2, new ManaCostsImpl<>("{G}"), this));

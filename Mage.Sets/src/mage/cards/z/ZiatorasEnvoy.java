@@ -86,8 +86,8 @@ class ZiatorasEnvoyEffect extends OneShotEffect {
         // TODO: factor this out and reuse for other cards
         if (player.canPlayLand()) {
             Set<Card> landSet = new HashSet<>();
-            if (card instanceof ModalDoubleFacesCard) {
-                ModalDoubleFacesCard mdfc = (ModalDoubleFacesCard) card;
+            if (card instanceof ModalDoubleFacedCard) {
+                ModalDoubleFacedCard mdfc = (ModalDoubleFacedCard) card;
                 if (mdfc.getLeftHalfCard().isLand(game)) {
                     landSet.add(mdfc.getLeftHalfCard());
                 }

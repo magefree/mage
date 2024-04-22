@@ -24,7 +24,7 @@ public final class ValorMadeReal extends CardImpl {
 
         // Target creature can block any number of creatures this turn.
         Ability gainedAbility = new SimpleStaticAbility(Zone.BATTLEFIELD, new CanBlockAdditionalCreatureEffect(0));
-        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(gainedAbility, Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(gainedAbility, Duration.EndOfTurn).setText("target creature can block any number of creatures this turn"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 

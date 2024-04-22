@@ -37,7 +37,7 @@ public final class ShardOfTheVoidDragon extends CardImpl {
         // Sphere of the Void Dragon -- Whenever Shard of the Void Dragon attacks, each opponent sacrifices a nonland permanent.
         this.addAbility(new AttacksTriggeredAbility(
                 new SacrificeOpponentsEffect(StaticFilters.FILTER_PERMANENT_NON_LAND)
-        ).withFlavorWord("Sphere of the Void Dragon"));
+        ).withFlavorWord("Spear of the Void Dragon"));
 
         // Matter Absorption -- Whenever an artifact is put into a graveyard from the battlefield or is put into exile from the battlefield, put two +1/+1 counters on Shard of the Void Dragon.
         this.addAbility(new ShardOfTheVoidDragonTriggeredAbility());

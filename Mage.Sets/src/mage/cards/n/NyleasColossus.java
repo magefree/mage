@@ -47,12 +47,12 @@ public final class NyleasColossus extends CardImpl {
 
 class NyleasColossusEffect extends OneShotEffect {
 
-    public NyleasColossusEffect() {
+    NyleasColossusEffect() {
         super(Outcome.BoostCreature);
         this.staticText = "double target creature's power and toughness until end of turn";
     }
 
-    public NyleasColossusEffect(final NyleasColossusEffect effect) {
+    private NyleasColossusEffect(final NyleasColossusEffect effect) {
         super(effect);
     }
 

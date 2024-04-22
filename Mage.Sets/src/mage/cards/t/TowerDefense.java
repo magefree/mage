@@ -7,6 +7,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -23,7 +24,7 @@ public final class TowerDefense extends CardImpl {
                 0, 5, Duration.EndOfTurn
         ).setText("creatures you control get +0/+5"));
         this.getSpellAbility().addEffect(new GainAbilityControlledEffect(
-                ReachAbility.getInstance(), Duration.EndOfTurn
+                ReachAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES
         ).setText("and gain reach until end of turn"));
     }
 

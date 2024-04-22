@@ -43,7 +43,7 @@ class TauntEffect extends RequirementEffect {
         staticText = "During target player's next turn, creatures that player controls attack you if able";
     }
 
-    TauntEffect(final TauntEffect effect) {
+    private TauntEffect(final TauntEffect effect) {
         super(effect);
     }
 

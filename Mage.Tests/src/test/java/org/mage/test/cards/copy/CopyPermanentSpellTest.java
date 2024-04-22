@@ -4,6 +4,7 @@ import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.CopyTargetSpellEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.constants.PhaseStep;
+import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.StaticFilters;
@@ -21,7 +22,8 @@ public class CopyPermanentSpellTest extends CardTestPlayerBase {
                 "Forker", playerA,
                 new SpellCastControllerTriggeredAbility(
                         new CopyTargetSpellEffect(true),
-                        StaticFilters.FILTER_SPELL, false, true
+                        StaticFilters.FILTER_SPELL, false,
+                        SetTargetPointer.SPELL
                 )
         );
     }
@@ -61,8 +63,8 @@ public class CopyPermanentSpellTest extends CardTestPlayerBase {
     public void testAuraTokenRedirect() {
         makeTester();
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
-        addCard(Zone.BATTLEFIELD, playerA, "Centaur Courser");
-        addCard(Zone.BATTLEFIELD, playerA, "Hill Giant");
+        addCard(Zone.BATTLEFIELD, playerB, "Centaur Courser");
+        addCard(Zone.BATTLEFIELD, playerB, "Hill Giant");
         addCard(Zone.HAND, playerA, "Dead Weight");
 
         setChoice(playerA, true);
@@ -71,14 +73,13 @@ public class CopyPermanentSpellTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertPermanentCount(playerA, "Centaur Courser", 1);
-        assertPowerToughness(playerA, "Centaur Courser", 1, 1);
-        assertPermanentCount(playerA, "Hill Giant", 1);
-        assertPowerToughness(playerA, "Hill Giant", 1, 1);
+        assertPermanentCount(playerB, "Centaur Courser", 1);
+        assertPowerToughness(playerB, "Centaur Courser", 1, 1);
+        assertPermanentCount(playerB, "Hill Giant", 1);
+        assertPowerToughness(playerB, "Hill Giant", 1, 1);
         assertPermanentCount(playerA, "Dead Weight", 2);
     }
 
-    @Ignore // currently fails
     @Test
     public void testKickerTrigger() {
         makeTester();
@@ -96,7 +97,6 @@ public class CopyPermanentSpellTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, "Grizzly Bears", 4, 2);
     }
 
-    @Ignore // currently fails
     @Test
     public void testKickerReplacement() {
         makeTester();
@@ -113,7 +113,6 @@ public class CopyPermanentSpellTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, "Aether Figment", 3, 3, Filter.ComparisonScope.All);
     }
 
-    @Ignore // currently fails
     @Test
     public void testSurgeTrigger() {
         makeTester();
@@ -121,7 +120,7 @@ public class CopyPermanentSpellTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Memnite");
         addCard(Zone.HAND, playerA, "Reckless Bushwhacker");
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Memnite");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Memnite", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Reckless Bushwhacker with surge");
 
         setStopAt(1, PhaseStep.END_TURN);

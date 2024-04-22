@@ -21,7 +21,7 @@ public final class ZhaoZilongTigerGeneral extends CardImpl {
 
     public ZhaoZilongTigerGeneral(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN, SubType.SOLDIER, SubType.WARRIOR);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

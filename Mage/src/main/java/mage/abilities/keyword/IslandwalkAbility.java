@@ -6,7 +6,6 @@ import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterLandPermanent;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class IslandwalkAbility extends LandwalkAbility {
@@ -25,7 +24,7 @@ public class IslandwalkAbility extends LandwalkAbility {
         super(filter, withHintText);
     }
 
-    public IslandwalkAbility(final IslandwalkAbility ability) {
+    protected IslandwalkAbility(final IslandwalkAbility ability) {
         super(ability);
     }
 

@@ -33,7 +33,7 @@ public final class IncrementalGrowth extends CardImpl {
         target1.setTargetTag(1);
         this.getSpellAbility().addTarget(target1);
 
-        FilterCreaturePermanent filter2 = new FilterCreaturePermanent("another creature (gets two +1/+1 counter)");
+        FilterCreaturePermanent filter2 = new FilterCreaturePermanent("another creature (gets two +1/+1 counters)");
         filter2.add(new AnotherTargetPredicate(2));
         TargetCreaturePermanent target2 = new TargetCreaturePermanent(filter2);
         target2.setTargetTag(2);
@@ -58,14 +58,14 @@ public final class IncrementalGrowth extends CardImpl {
 
 class IncrementalGrowthEffect extends OneShotEffect {
 
-    public IncrementalGrowthEffect() {
+    IncrementalGrowthEffect() {
         super(Outcome.Benefit);
         this.staticText = "Put a +1/+1 counter on target creature, "
                 + "two +1/+1 counters on another target creature, "
                 + "and three +1/+1 counters on a third target creature";
     }
 
-    public IncrementalGrowthEffect(final IncrementalGrowthEffect effect) {
+    private IncrementalGrowthEffect(final IncrementalGrowthEffect effect) {
         super(effect);
     }
 

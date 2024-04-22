@@ -36,7 +36,7 @@ public class BlocksOrBlockedByCreatureSourceTriggeredAbility extends TriggeredAb
         setTriggerPhrase("Whenever {this} blocks or becomes blocked by " + CardUtil.addArticle(filter.getMessage()) + ", ");
     }
 
-    public BlocksOrBlockedByCreatureSourceTriggeredAbility(final BlocksOrBlockedByCreatureSourceTriggeredAbility ability) {
+    protected BlocksOrBlockedByCreatureSourceTriggeredAbility(final BlocksOrBlockedByCreatureSourceTriggeredAbility ability) {
         super(ability);
         this.filter = ability.filter;
     }

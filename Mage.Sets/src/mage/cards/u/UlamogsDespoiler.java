@@ -64,7 +64,7 @@ class UlamogsDespoilerEffect extends OneShotEffect {
         this.staticText = "you may put two cards your opponents own from exile into their owners' graveyards. If you do, {this} enters the battlefield with four +1/+1 counters on it";
     }
 
-    public UlamogsDespoilerEffect(final UlamogsDespoilerEffect effect) {
+    private UlamogsDespoilerEffect(final UlamogsDespoilerEffect effect) {
         super(effect);
     }
 

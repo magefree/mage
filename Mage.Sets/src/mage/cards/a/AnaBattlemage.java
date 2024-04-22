@@ -70,12 +70,12 @@ public final class AnaBattlemage extends CardImpl {
 
 class AnaBattlemageKickerEffect extends OneShotEffect {
 
-    public AnaBattlemageKickerEffect() {
+    AnaBattlemageKickerEffect() {
         super(Outcome.Detriment);
         this.staticText = "tap target untapped creature and it deals damage equal to its power to its controller";
     }
 
-    public AnaBattlemageKickerEffect(final AnaBattlemageKickerEffect effect) {
+    private AnaBattlemageKickerEffect(final AnaBattlemageKickerEffect effect) {
         super(effect);
     }
 
@@ -87,7 +87,7 @@ class AnaBattlemageKickerEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         boolean applied = false;
-        Permanent targetCreature = game.getPermanent(targetPointer.getFirst(game, source));
+        Permanent targetCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (targetCreature != null) {
             applied = targetCreature.tap(source, game);
             Player controller = game.getPlayer(targetCreature.getControllerId());

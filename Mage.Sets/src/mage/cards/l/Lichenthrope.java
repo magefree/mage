@@ -60,7 +60,7 @@ class LichenthropeEffect extends ReplacementEffectImpl {
         staticText = "If damage would be dealt to {this}, put that many -1/-1 counters on it instead";
     }
 
-    LichenthropeEffect(final LichenthropeEffect effect) {
+    private LichenthropeEffect(final LichenthropeEffect effect) {
         super(effect);
     }
 
@@ -82,11 +82,6 @@ class LichenthropeEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         return event.getTargetId().equals(source.getSourceId());
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

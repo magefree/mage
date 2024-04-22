@@ -118,7 +118,7 @@ class BloodfeatherPhoenixEffect extends OneShotEffect {
             return false;
         }
         player.moveCards(game.getCard(sourceObject.getId()), Zone.BATTLEFIELD, source, game);
-        if (game.getPermanent(source.getId()) != null) {
+        if (game.getPermanent(source.getSourceId()) != null) {
             game.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance())
                     .setTargetPointer(new FixedTarget(source.getSourceId(), game)), source);
         }

@@ -56,7 +56,7 @@ class HubrisReturnEffect extends OneShotEffect {
         this.staticText = "Return target creature and all Auras attached to it to their owners' hands";
     }
 
-    public HubrisReturnEffect(final HubrisReturnEffect effect) {
+    private HubrisReturnEffect(final HubrisReturnEffect effect) {
         super(effect);
     }
 
@@ -69,7 +69,7 @@ class HubrisReturnEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            for (UUID targetId : targetPointer.getTargets(game, source)) {
+            for (UUID targetId : getTargetPointer().getTargets(game, source)) {
                 Permanent creature = game.getPermanent(targetId);
                 if (creature != null) {
                     Cards cardsToHand = new CardsImpl();

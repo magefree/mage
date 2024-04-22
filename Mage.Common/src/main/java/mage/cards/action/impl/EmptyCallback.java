@@ -32,7 +32,7 @@ public class EmptyCallback implements ActionCallback {
     }
 
     @Override
-    public void mouseWheelMoved(MouseWheelEvent e, TransferData data) {
+    public void mouseWheelMoved(int mouseWheelRotation, TransferData data) {
     }
 
     @Override

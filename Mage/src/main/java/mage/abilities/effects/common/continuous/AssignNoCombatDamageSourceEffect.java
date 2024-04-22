@@ -9,7 +9,6 @@ import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
 
 /**
- *
  * @author LevelX2
  */
 
@@ -24,18 +23,13 @@ public class AssignNoCombatDamageSourceEffect extends ReplacementEffectImpl {
         staticText = setText(partOfOptionalEffect);
     }
 
-    public AssignNoCombatDamageSourceEffect(final AssignNoCombatDamageSourceEffect effect) {
+    protected AssignNoCombatDamageSourceEffect(final AssignNoCombatDamageSourceEffect effect) {
         super(effect);
     }
 
     @Override
     public AssignNoCombatDamageSourceEffect copy() {
         return new AssignNoCombatDamageSourceEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override
@@ -62,7 +56,7 @@ public class AssignNoCombatDamageSourceEffect extends ReplacementEffectImpl {
 
     private String setText(boolean partOfOptionalEffect) {
         String text = (partOfOptionalEffect ? "If you do, " : "") + "{this} assigns no combat damage";
-        switch(duration) {
+        switch (duration) {
             case EndOfTurn:
                 text += " this turn";
                 break;

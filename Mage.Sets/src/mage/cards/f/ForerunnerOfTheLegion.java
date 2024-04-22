@@ -42,7 +42,6 @@ public final class ForerunnerOfTheLegion extends CardImpl {
                 new EntersBattlefieldTriggeredAbility(
                         new SearchLibraryPutOnLibraryEffect(
                                 new TargetCardInLibrary(new FilterBySubtypeCard(SubType.VAMPIRE)),
-                                true,
                                 true
                         ),
                         true

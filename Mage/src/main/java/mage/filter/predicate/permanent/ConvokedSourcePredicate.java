@@ -1,28 +1,23 @@
 package mage.filter.predicate.permanent;
 
 import mage.MageObjectReference;
+import mage.abilities.keyword.ConvokeAbility;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.watchers.common.ConvokeWatcher;
+import mage.util.CardUtil;
+
+import java.util.HashSet;
 
 /**
- * @author TheElk801
+ * @author notgreat
  */
 public enum ConvokedSourcePredicate implements ObjectSourcePlayerPredicate<Permanent> {
-    PERMANENT(-1),
-    SPELL(0);
-    private final int offset;
-
-    ConvokedSourcePredicate(int offset) {
-        this.offset = offset;
-    }
-
+    instance;
     @Override
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
-        return ConvokeWatcher.checkConvoke(
-                new MageObjectReference(input.getSource(), offset), input.getObject(), game
-        );
+        HashSet<MageObjectReference> set = CardUtil.getSourceCostsTag(game, input.getSource(), ConvokeAbility.convokingCreaturesKey, new HashSet<>(0));
+        return set.contains(new MageObjectReference(input.getObject(), game));
     }
 }

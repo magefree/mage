@@ -344,7 +344,7 @@ public final class Jumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Patron of the Valiant", 128, Rarity.UNCOMMON, mage.cards.p.PatronOfTheValiant.class));
         cards.add(new SetCardInfo("Peel from Reality", 163, Rarity.COMMON, mage.cards.p.PeelFromReality.class));
         cards.add(new SetCardInfo("Penumbra Bobcat", 418, Rarity.COMMON, mage.cards.p.PenumbraBobcat.class));
-        cards.add(new SetCardInfo("Perilous Myr", 476, Rarity.UNCOMMON, mage.cards.p.PerilousMyr.class));
+        cards.add(new SetCardInfo("Perilous Myr", 476, Rarity.COMMON, mage.cards.p.PerilousMyr.class));
         cards.add(new SetCardInfo("Phyrexian Broodlings", 263, Rarity.COMMON, mage.cards.p.PhyrexianBroodlings.class));
         cards.add(new SetCardInfo("Phyrexian Debaser", 264, Rarity.COMMON, mage.cards.p.PhyrexianDebaser.class));
         cards.add(new SetCardInfo("Phyrexian Gargantua", 265, Rarity.UNCOMMON, mage.cards.p.PhyrexianGargantua.class));
@@ -403,7 +403,8 @@ public final class Jumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Sarkhan's Unsealing", 361, Rarity.RARE, mage.cards.s.SarkhansUnsealing.class));
         cards.add(new SetCardInfo("Savage Stomp", 427, Rarity.UNCOMMON, mage.cards.s.SavageStomp.class));
         cards.add(new SetCardInfo("Scarecrone", 482, Rarity.RARE, mage.cards.s.Scarecrone.class));
-        cards.add(new SetCardInfo("Scholar of the Lost Trove", 14, Rarity.RARE, mage.cards.s.ScholarOfTheLostTrove.class));
+        cards.add(new SetCardInfo("Scholar of the Lost Trove", 14, Rarity.RARE, mage.cards.s.ScholarOfTheLostTrove.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Scholar of the Lost Trove", 496, Rarity.RARE, mage.cards.s.ScholarOfTheLostTrove.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Scourge of Nel Toth", 274, Rarity.RARE, mage.cards.s.ScourgeOfNelToth.class));
         cards.add(new SetCardInfo("Scroll of Avacyn", 483, Rarity.COMMON, mage.cards.s.ScrollOfAvacyn.class));
         cards.add(new SetCardInfo("Scrounging Bandar", 428, Rarity.COMMON, mage.cards.s.ScroungingBandar.class));

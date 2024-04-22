@@ -48,12 +48,12 @@ public final class GrenzosRuffians extends CardImpl {
 
 class GrenzosRuffiansEffect extends OneShotEffect {
 
-    public GrenzosRuffiansEffect() {
+    GrenzosRuffiansEffect() {
         super(Outcome.Benefit);
         this.staticText = "it deals that much damage to each other opponent";
     }
 
-    public GrenzosRuffiansEffect(final GrenzosRuffiansEffect effect) {
+    private GrenzosRuffiansEffect(final GrenzosRuffiansEffect effect) {
         super(effect);
     }
 

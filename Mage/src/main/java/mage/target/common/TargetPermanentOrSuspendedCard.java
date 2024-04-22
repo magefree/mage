@@ -26,15 +26,19 @@ public class TargetPermanentOrSuspendedCard extends TargetImpl {
     }
 
     public TargetPermanentOrSuspendedCard(FilterPermanentOrSuspendedCard filter, boolean notTarget) {
+        this(filter, notTarget, 1, 1);
+    }
+
+    public TargetPermanentOrSuspendedCard(FilterPermanentOrSuspendedCard filter, boolean notTarget, int minTargets, int maxTargets) {
         super(notTarget);
         this.filter = filter;
         this.zone = Zone.ALL;
         this.targetName = filter.getMessage();
-        this.minNumberOfTargets = 1;
-        this.maxNumberOfTargets = 1;
+        this.minNumberOfTargets = minTargets;
+        this.maxNumberOfTargets = maxTargets;
     }
 
-    public TargetPermanentOrSuspendedCard(final TargetPermanentOrSuspendedCard target) {
+    protected TargetPermanentOrSuspendedCard(final TargetPermanentOrSuspendedCard target) {
         super(target);
         this.filter = target.filter.copy();
     }

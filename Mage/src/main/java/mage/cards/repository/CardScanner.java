@@ -45,7 +45,7 @@ public final class CardScanner {
                     || expansionInfo.boosters != set.hasBoosters()
                     || expansionInfo.basicLands != set.hasBasicLands()) {
                 // need update
-                setsToUpdate.add(expansionInfo);
+                setsToUpdate.add(new ExpansionInfo(set));
             }
         }
         ExpansionRepository.instance.saveSets(setsToAdd, setsToUpdate, ExpansionRepository.instance.getContentVersionConstant());

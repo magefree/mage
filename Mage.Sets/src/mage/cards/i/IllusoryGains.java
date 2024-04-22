@@ -1,9 +1,7 @@
-
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldOpponentTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
@@ -11,31 +9,21 @@ import mage.abilities.effects.common.continuous.ControlEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Outcome;
-import mage.constants.SetTargetPointer;
-import mage.constants.TargetController;
-import mage.constants.Zone;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
  *
  * @author fireshoes
  */
 public final class IllusoryGains extends CardImpl {
-
-    private static final FilterPermanent filter = new FilterCreaturePermanent("a creature");
-
-    static {
-        filter.add(TargetController.OPPONENT.getControllerPredicate());
-    }
 
     public IllusoryGains(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}{U}");
@@ -52,8 +40,8 @@ public final class IllusoryGains extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ControlEnchantedEffect()));
 
         // Whenever a creature enters the battlefield under an opponent's control, attach Illusory Gains to that creature.
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(
-                Zone.BATTLEFIELD, new IllusoryGainsEffect(), filter, false, SetTargetPointer.PERMANENT, "Whenever a creature enters the battlefield under an opponent's control, attach Illusory Gains to that creature."));
+        this.addAbility(new EntersBattlefieldOpponentTriggeredAbility(
+                Zone.BATTLEFIELD, new IllusoryGainsEffect(), StaticFilters.FILTER_PERMANENT_CREATURE, false, SetTargetPointer.PERMANENT));
     }
 
     private IllusoryGains(final IllusoryGains card) {
@@ -68,11 +56,12 @@ public final class IllusoryGains extends CardImpl {
 
 class IllusoryGainsEffect extends OneShotEffect {
 
-    public IllusoryGainsEffect() {
+    IllusoryGainsEffect() {
         super(Outcome.Detriment);
+        staticText = "attach {this} to that creature";
     }
 
-    public IllusoryGainsEffect(final IllusoryGainsEffect effect) {
+    private IllusoryGainsEffect(final IllusoryGainsEffect effect) {
         super(effect);
     }
 

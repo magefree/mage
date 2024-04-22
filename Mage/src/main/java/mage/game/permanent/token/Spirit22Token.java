@@ -4,10 +4,8 @@ import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import java.util.Arrays;
 
 /**
- *
  * @author weirddan455
  */
 public class Spirit22Token extends TokenImpl {
@@ -20,8 +18,6 @@ public class Spirit22Token extends TokenImpl {
         power = new MageInt(2);
         toughness = new MageInt(2);
         addAbility(FlyingAbility.getInstance());
-
-        availableImageSetCodes = Arrays.asList("SNC");
     }
 
     private Spirit22Token(final Spirit22Token token) {

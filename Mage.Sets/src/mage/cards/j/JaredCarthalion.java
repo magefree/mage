@@ -36,7 +36,7 @@ public final class JaredCarthalion extends CardImpl {
 
     public JaredCarthalion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{W}{U}{B}{R}{G}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.JARED);
 
         this.setStartingLoyalty(5);
@@ -70,13 +70,13 @@ public final class JaredCarthalion extends CardImpl {
 
 class JaredCarthalionBoostEffect extends OneShotEffect {
 
-    public JaredCarthalionBoostEffect() {
+    JaredCarthalionBoostEffect() {
         super(Outcome.BoostCreature);
         this.staticText = "Choose up to two target creatures. For each of them, put " +
                 "a number of +1/+1 counters on it equal to the number of colors it is.";
     }
 
-    public JaredCarthalionBoostEffect(final JaredCarthalionBoostEffect effect) {
+    private JaredCarthalionBoostEffect(final JaredCarthalionBoostEffect effect) {
         super(effect);
     }
 
@@ -100,13 +100,13 @@ class JaredCarthalionBoostEffect extends OneShotEffect {
 
 class JaredCarthalionUltimateEffect extends OneShotEffect {
 
-    public JaredCarthalionUltimateEffect() {
+    JaredCarthalionUltimateEffect() {
         super(Outcome.Benefit);
         this.staticText = "Return target multicolored card from your graveyard to your hand. " +
                 "If that card was all colors, draw a card and create two Treasure tokens.";
     }
 
-    public JaredCarthalionUltimateEffect(final JaredCarthalionUltimateEffect effect) {
+    private JaredCarthalionUltimateEffect(final JaredCarthalionUltimateEffect effect) {
         super(effect);
     }
 
@@ -118,7 +118,7 @@ class JaredCarthalionUltimateEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Card card = game.getCard(targetPointer.getFirst(game, source));
+        Card card = game.getCard(getTargetPointer().getFirst(game, source));
         if (controller != null && card != null) {
             if (controller.moveCards(card, Zone.HAND, source, game)
                     && card.getColor().getColorCount() == 5) {

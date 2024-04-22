@@ -76,12 +76,12 @@ public final class GiltLeafArchdruid extends CardImpl {
 
 class GiltLeafArchdruidEffect extends OneShotEffect {
 
-    public GiltLeafArchdruidEffect() {
+    GiltLeafArchdruidEffect() {
         super(Outcome.GainControl);
         this.staticText = "gain control of all lands target player controls";
     }
 
-    public GiltLeafArchdruidEffect(final GiltLeafArchdruidEffect effect) {
+    private GiltLeafArchdruidEffect(final GiltLeafArchdruidEffect effect) {
         super(effect);
     }
 
@@ -93,7 +93,7 @@ class GiltLeafArchdruidEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
+        Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (controller != null && targetPlayer != null) {
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_LANDS, targetPlayer.getId(), game)) {
                 if (permanent != null) {

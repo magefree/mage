@@ -26,14 +26,17 @@ public class Brawl extends Constructed {
         // Copy of standard sets
         setCodes.addAll(Standard.makeLegalSets());
 
-        banned.add("Golos, Tireless Pilgrim");
-        banned.add("Drannith Magistrate");
-        banned.add("Lutri, the Spellchaser");
-        banned.add("Oko, Thief of Crowns");
-        banned.add("Sorcerous Spyglass");
-        banned.add("Teferi, Time Raveler");
-        banned.add("Omnath, Locus of Creation");
-        banned.add("Winota, Joiner of Forces");
+        // The following cards are no longer legal in the format, but are still listed as banned
+        // banned.add("Golos, Tireless Pilgrim");
+        // banned.add("Drannith Magistrate");
+        // banned.add("Lutri, the Spellchaser");
+        // banned.add("Oko, Thief of Crowns");
+        // banned.add("Sorcerous Spyglass");
+        // banned.add("Teferi, Time Raveler");
+        // banned.add("Omnath, Locus of Creation");
+        // banned.add("Winota, Joiner of Forces");
+
+        banned.add("Pithing Needle");
     }
 
     @Override
@@ -86,11 +89,11 @@ public class Brawl extends Constructed {
             }
         }
 
-        if (companion != null && deck.getCards().size() + deck.getSideboard().size() != getDeckMinSize() + 1) {
-            addError(DeckValidatorErrorType.DECK_SIZE, "Deck", "Must contain " + (getDeckMinSize() + 1) + " cards (companion doesn't count in deck size requirement): has " + (deck.getCards().size() + deck.getSideboard().size()) + " cards");
+        if (companion != null && deck.getMaindeckCards().size() + deck.getSideboard().size() != getDeckMinSize() + 1) {
+            addError(DeckValidatorErrorType.DECK_SIZE, "Deck", "Must contain " + (getDeckMinSize() + 1) + " cards (companion doesn't count in deck size requirement): has " + (deck.getMaindeckCards().size() + deck.getSideboard().size()) + " cards");
             valid = false;
-        } else if (companion == null && deck.getCards().size() + deck.getSideboard().size() != getDeckMinSize()) {
-            addError(DeckValidatorErrorType.DECK_SIZE, "Deck", "Must contain " + getDeckMinSize() + " cards: has " + (deck.getCards().size() + deck.getSideboard().size()) + " cards");
+        } else if (companion == null && deck.getMaindeckCards().size() + deck.getSideboard().size() != getDeckMinSize()) {
+            addError(DeckValidatorErrorType.DECK_SIZE, "Deck", "Must contain " + getDeckMinSize() + " cards: has " + (deck.getMaindeckCards().size() + deck.getSideboard().size()) + " cards");
             valid = false;
         }
 

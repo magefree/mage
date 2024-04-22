@@ -47,7 +47,7 @@ class CrawlingInfestationTriggeredAbility extends TriggeredAbilityImpl {
 
     public CrawlingInfestationTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new InsectToken()));
-        this.setTriggersOnce(true);
+        this.setTriggersOnceEachTurn(true);
         setTriggerPhrase("Whenever one or more creature cards are put into your graveyard from anywhere during your turn, ");
     }
 

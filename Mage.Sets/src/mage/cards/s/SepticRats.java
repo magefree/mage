@@ -51,7 +51,7 @@ class SepticRatsTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn));
     }
 
-    SepticRatsTriggeredAbility(final SepticRatsTriggeredAbility ability) {
+    private SepticRatsTriggeredAbility(final SepticRatsTriggeredAbility ability) {
         super(ability);
     }
 

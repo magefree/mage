@@ -61,7 +61,7 @@ class KeeperOfTheLightTarget extends TargetPlayer {
         super(1, 1, false, new FilterOpponent("opponent that has more life than you"));
     }
 
-    public KeeperOfTheLightTarget(final KeeperOfTheLightTarget target) {
+    private KeeperOfTheLightTarget(final KeeperOfTheLightTarget target) {
         super(target);
     }
 

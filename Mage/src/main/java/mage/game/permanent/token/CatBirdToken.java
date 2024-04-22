@@ -19,7 +19,6 @@ public final class CatBirdToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
         addAbility(FlyingAbility.getInstance());
-        setOriginalExpansionSetCode("IKO");
     }
 
     private CatBirdToken(final CatBirdToken token) {

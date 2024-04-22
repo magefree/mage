@@ -3,7 +3,6 @@ package mage.cards.t;
 import mage.abilities.Ability;
 import mage.abilities.common.SagaAbility;
 import mage.abilities.dynamicvalue.common.StaticValue;
-import mage.abilities.effects.Effects;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.ExileSourceAndReturnFaceUpEffect;
@@ -14,15 +13,11 @@ import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.*;
-import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreatureOrPlaneswalkerPermanent;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.TargetPermanent;
-import mage.target.Targets;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.common.TargetCreatureOrPlaneswalker;
+import mage.target.targetadjustment.EachOpponentPermanentTargetsAdjuster;
 import mage.target.targetpointer.EachTargetPointer;
 
 import java.util.Collection;
@@ -43,15 +38,17 @@ public final class TheTrueScriptures extends CardImpl {
         this.nightCard = true;
 
         // (As this Saga enters and after your draw step, add a lore counter.)
-        SagaAbility sagaAbility = new SagaAbility(this, false);
+        SagaAbility sagaAbility = new SagaAbility(this);
 
         // I -- For each opponent, destroy up to one target creature or planeswalker that player controls.
         sagaAbility.addChapterEffect(
-                this, SagaChapter.CHAPTER_I, SagaChapter.CHAPTER_I,
-                new Effects(
-                        new DestroyTargetEffect().setTargetPointer(new EachTargetPointer())
-                                .setText("for each opponent, destroy up to one target creature or planeswalker that player controls")
-                ), new Targets(), false, TheTrueScripturesAdjuster.instance
+                this, SagaChapter.CHAPTER_I, SagaChapter.CHAPTER_I, false,
+                ability -> {
+                    ability.addEffect(new DestroyTargetEffect().setTargetPointer(new EachTargetPointer())
+                            .setText("for each opponent, destroy up to one target creature or planeswalker that player controls"));
+                    ability.setTargetAdjuster(new EachOpponentPermanentTargetsAdjuster());
+                    ability.addTarget(new TargetCreatureOrPlaneswalker(0,1));
+                }
         );
 
         // II -- Each opponent discards three cards, then mills three cards.
@@ -77,26 +74,6 @@ public final class TheTrueScriptures extends CardImpl {
     @Override
     public TheTrueScriptures copy() {
         return new TheTrueScriptures(this);
-    }
-}
-
-enum TheTrueScripturesAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        for (UUID playerId : game.getOpponents(ability.getControllerId())) {
-            Player player = game.getPlayer(playerId);
-            if (player == null) {
-                continue;
-            }
-            FilterPermanent filter = new FilterCreatureOrPlaneswalkerPermanent(
-                    "creature or planswalker controlled by " + player.getName()
-            );
-            filter.add(new ControllerIdPredicate(playerId));
-            ability.addTarget(new TargetPermanent(0, 1, filter));
-        }
     }
 }
 

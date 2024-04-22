@@ -73,7 +73,7 @@ class CrawlingBarrensEffect extends OneShotEffect {
         }
         game.addEffect(new BecomesCreatureSourceEffect(new CreatureToken(
                 0, 0, "0/0 Elemental creature"
-        ).withSubType(SubType.ELEMENTAL), "land", Duration.EndOfTurn), source);
+        ).withSubType(SubType.ELEMENTAL), CardType.LAND, Duration.EndOfTurn), source);
         return true;
     }
 }

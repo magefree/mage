@@ -1,4 +1,3 @@
-
 package mage.abilities.effects;
 
 import mage.abilities.Ability;
@@ -28,5 +27,5 @@ public interface ReplacementEffect extends ContinuousEffect {
     boolean hasSelfScope();
 
     @Override
-    public ContinuousEffect copy();
+    ReplacementEffect copy();
 }

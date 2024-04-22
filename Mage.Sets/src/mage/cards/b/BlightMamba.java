@@ -31,7 +31,7 @@ public final class BlightMamba extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{1}{G}")));
     }
 
-    public BlightMamba (final BlightMamba card) {
+    private BlightMamba(final BlightMamba card) {
         super(card);
     }
 

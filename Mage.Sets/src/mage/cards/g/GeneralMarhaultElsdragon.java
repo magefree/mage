@@ -25,7 +25,7 @@ public final class GeneralMarhaultElsdragon extends CardImpl {
 
     public GeneralMarhaultElsdragon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{G}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELF, SubType.WARRIOR);
 
         this.power = new MageInt(4);

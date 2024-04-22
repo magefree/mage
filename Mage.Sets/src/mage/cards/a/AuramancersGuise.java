@@ -63,7 +63,7 @@ class EnchantedCreatureAurasCount implements DynamicValue {
     public EnchantedCreatureAurasCount() {
     }
 
-    public EnchantedCreatureAurasCount(final EnchantedCreatureAurasCount dynamicValue) {
+    private EnchantedCreatureAurasCount(final EnchantedCreatureAurasCount dynamicValue) {
     }
 
     @Override

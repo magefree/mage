@@ -26,7 +26,7 @@ public final class HedronRover extends CardImpl {
         this.addAbility(new LandfallAbility(new BoostSourceEffect(2, 2, Duration.EndOfTurn), false));
     }
 
-    public HedronRover (final HedronRover card) {
+    private HedronRover(final HedronRover card) {
         super(card);
     }
 

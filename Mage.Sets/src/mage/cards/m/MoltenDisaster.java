@@ -58,10 +58,10 @@ class MoltenDisasterSplitSecondEffect extends ContinuousRuleModifyingEffectImpl 
 
     MoltenDisasterSplitSecondEffect() {
         super(Duration.WhileOnStack, Outcome.Detriment);
-        staticText = "if this spell was kicked, it has split second <i>(As long as this spell is on the stack, players can't cast spells or activate abilities that aren't mana abilities.)</i>";
+        staticText = "if this spell was kicked, it has split second. <i>(As long as this spell is on the stack, players can't cast spells or activate abilities that aren't mana abilities.)</i>";
     }
 
-    MoltenDisasterSplitSecondEffect(final MoltenDisasterSplitSecondEffect effect) {
+    private MoltenDisasterSplitSecondEffect(final MoltenDisasterSplitSecondEffect effect) {
         super(effect);
     }
 
@@ -92,11 +92,6 @@ class MoltenDisasterSplitSecondEffect extends ContinuousRuleModifyingEffectImpl 
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
     public MoltenDisasterSplitSecondEffect copy() {
         return new MoltenDisasterSplitSecondEffect(this);
     }
@@ -115,7 +110,7 @@ class MoltenDisasterEffect extends OneShotEffect {
         staticText = "{this} deals X damage to each creature without flying and each player";
     }
 
-    public MoltenDisasterEffect(final MoltenDisasterEffect effect) {
+    private MoltenDisasterEffect(final MoltenDisasterEffect effect) {
         super(effect);
     }
 

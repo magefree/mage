@@ -33,7 +33,7 @@ public final class BorborygmosAndFblthp extends CardImpl {
     public BorborygmosAndFblthp(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{U}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.CYCLOPS);
         this.subtype.add(SubType.HOMUNCULUS);
         this.power = new MageInt(6);

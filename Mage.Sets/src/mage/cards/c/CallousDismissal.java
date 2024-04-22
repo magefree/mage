@@ -5,6 +5,7 @@ import mage.abilities.effects.keyword.AmassEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.target.common.TargetNonlandPermanent;
 
 import java.util.UUID;
@@ -22,7 +23,7 @@ public final class CallousDismissal extends CardImpl {
         this.getSpellAbility().addTarget(new TargetNonlandPermanent());
 
         // Amass 1.
-        this.getSpellAbility().addEffect(new AmassEffect(1).concatBy("<br>"));
+        this.getSpellAbility().addEffect(new AmassEffect(1, SubType.ZOMBIE).concatBy("<br>"));
     }
 
     private CallousDismissal(final CallousDismissal card) {

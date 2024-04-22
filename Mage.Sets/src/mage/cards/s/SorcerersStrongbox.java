@@ -30,7 +30,7 @@ public final class SorcerersStrongbox extends CardImpl {
         effect.setText("and draw three cards");
         flipCoinEffect.addEffectWon(effect);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, flipCoinEffect, new TapSourceCost());
-        ability.addManaCost(new GenericManaCost(2));
+        ability.addCost(new GenericManaCost(2));
         this.addAbility(ability);
     }
 

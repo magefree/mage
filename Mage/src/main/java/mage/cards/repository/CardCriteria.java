@@ -18,8 +18,8 @@ import java.util.List;
  */
 public class CardCriteria {
 
+    private String nameContains;
     private String name;
-    private String nameExact;
     private String rules;
     private final List<String> setCodes;
     private final List<String> ignoreSetCodes; // sets to ignore, use with little amount of sets (example: ignore sets with snow lands)
@@ -32,7 +32,7 @@ public class CardCriteria {
     private Boolean variousArt;
     private Boolean doubleFaced;
     private Boolean modalDoubleFaced;
-    private boolean nightCard;
+    private Boolean nightCard;
     private boolean black;
     private boolean blue;
     private boolean green;
@@ -114,18 +114,18 @@ public class CardCriteria {
         return this;
     }
 
-    public CardCriteria nightCard(boolean nightCard) {
+    public CardCriteria nightCard(Boolean nightCard) {
         this.nightCard = nightCard;
+        return this;
+    }
+
+    public CardCriteria nameContains(String str) {
+        this.nameContains = str;
         return this;
     }
 
     public CardCriteria name(String name) {
         this.name = name;
-        return this;
-    }
-
-    public CardCriteria nameExact(String nameExact) {
-        this.nameExact = nameExact;
         return this;
     }
 
@@ -217,15 +217,20 @@ public class CardCriteria {
         optimize();
 
         Where where = qb.where();
-        where.eq("nightCard", nightCard);
-        where.eq("splitCardHalf", false);
-        int clausesCount = 2;
-        if (name != null) {
-            where.like("name", new SelectArg('%' + name + '%'));
+
+        int clausesCount = 0;
+        if (nightCard != null) {
+            where.eq("nightCard", nightCard);
             clausesCount++;
         }
-        if (nameExact != null) {
-            where.like("name", new SelectArg(nameExact));
+        where.eq("splitCardHalf", false);
+        clausesCount++;
+        if (nameContains != null) {
+            where.like("name", new SelectArg('%' + nameContains + '%'));
+            clausesCount++;
+        }
+        if (name != null) {
+            where.eq("name", new SelectArg(name));
             clausesCount++;
         }
         if (rules != null) {
@@ -244,7 +249,7 @@ public class CardCriteria {
         }
 
         if (modalDoubleFaced != null) {
-            where.eq("modalDoubleFacesCard", modalDoubleFaced);
+            where.eq("modalDoubleFacedCard", modalDoubleFaced);
             clausesCount++;
         }
 
@@ -397,12 +402,12 @@ public class CardCriteria {
         return this;
     }
 
-    public String getName() {
-        return name;
+    public String getNameContains() {
+        return nameContains;
     }
 
-    public String getNameExact() {
-        return nameExact;
+    public String getName() {
+        return name;
     }
 
     public String getRules() {

@@ -50,12 +50,12 @@ public final class HideSeek extends SplitCard {
 
 class SeekEffect extends OneShotEffect {
 
-    public SeekEffect() {
+    SeekEffect() {
         super(Outcome.GainLife);
         staticText = "Search target opponent's library for a card and exile it. You gain life equal to its mana value. Then that player shuffles";
     }
 
-    public SeekEffect(final SeekEffect effect) {
+    private SeekEffect(final SeekEffect effect) {
         super(effect);
     }
 

@@ -53,13 +53,13 @@ public final class BoonweaverGiant extends CardImpl {
 
 class BoonweaverGiantEffect extends OneShotEffect {
 
-    public BoonweaverGiantEffect() {
+    BoonweaverGiantEffect() {
         super(Outcome.UnboostCreature);
-        this.staticText = "you may search your graveyard, hand, and/or library for an Aura card and put it onto the battlefield attached to {this}." +
+        this.staticText = "you may search your graveyard, hand, and/or library for an Aura card and put it onto the battlefield attached to {this}. " +
                 "If you search your library this way, shuffle.";
     }
 
-    public BoonweaverGiantEffect(final BoonweaverGiantEffect effect) {
+    private BoonweaverGiantEffect(final BoonweaverGiantEffect effect) {
         super(effect);
     }
 
@@ -71,7 +71,9 @@ class BoonweaverGiantEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) { return false; }
+        if (controller == null) {
+            return false;
+        }
 
         Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
         UUID sourcePermanentId = sourcePermanent == null ? null : sourcePermanent.getId();

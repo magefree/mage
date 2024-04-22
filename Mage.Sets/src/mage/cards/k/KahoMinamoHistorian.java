@@ -31,7 +31,7 @@ public final class KahoMinamoHistorian extends CardImpl {
 
     public KahoMinamoHistorian(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(2);
@@ -69,11 +69,10 @@ class KahoMinamoHistorianEffect extends SearchEffect {
 
     public KahoMinamoHistorianEffect() {
         super(new TargetCardInLibrary(0, 3, filter), Outcome.Benefit);
-        this.staticText = "search your library for up to three instant cards "
-                + "and exile them. Then shuffle";
+        this.staticText = "search your library for up to three instant cards, exile them, then shuffle";
     }
 
-    public KahoMinamoHistorianEffect(final KahoMinamoHistorianEffect effect) {
+    private KahoMinamoHistorianEffect(final KahoMinamoHistorianEffect effect) {
         super(effect);
     }
 
@@ -104,13 +103,13 @@ class KahoMinamoHistorianEffect extends SearchEffect {
 
 class KahoMinamoHistorianCastEffect extends OneShotEffect {
 
-    public KahoMinamoHistorianCastEffect() {
+    KahoMinamoHistorianCastEffect() {
         super(Outcome.PlayForFree);
         this.staticText = "you may cast a spell with mana value X " +
                 "from among cards exiled with {this} without paying its mana cost";
     }
 
-    public KahoMinamoHistorianCastEffect(final KahoMinamoHistorianCastEffect effect) {
+    private KahoMinamoHistorianCastEffect(final KahoMinamoHistorianCastEffect effect) {
         super(effect);
     }
 

@@ -57,12 +57,12 @@ public final class DreadDefiler extends CardImpl {
 
 class DreadDefilerEffect extends OneShotEffect {
 
-    public DreadDefilerEffect() {
+    DreadDefilerEffect() {
         super(Outcome.DrawCard);
         this.staticText = "Target opponent loses life equal to the exiled card's power";
     }
 
-    public DreadDefilerEffect(final DreadDefilerEffect effect) {
+    private DreadDefilerEffect(final DreadDefilerEffect effect) {
         super(effect);
     }
 

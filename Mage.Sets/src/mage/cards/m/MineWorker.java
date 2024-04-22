@@ -45,7 +45,7 @@ public final class MineWorker extends CardImpl {
 
 class MineWorkerEffect extends OneShotEffect {
 
-    public MineWorkerEffect() {
+    MineWorkerEffect() {
         super(Outcome.GainLife);
         this.staticText = "You gain 1 life. If you control creatures named Power Plant Worker and Tower Worker, you gain 3 life instead.";
     }

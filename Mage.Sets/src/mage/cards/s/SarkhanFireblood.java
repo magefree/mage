@@ -32,7 +32,7 @@ public final class SarkhanFireblood extends CardImpl {
     public SarkhanFireblood(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{R}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SARKHAN);
         this.setStartingLoyalty(3);
 

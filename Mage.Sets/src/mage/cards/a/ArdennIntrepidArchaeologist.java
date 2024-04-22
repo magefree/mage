@@ -27,7 +27,7 @@ public final class ArdennIntrepidArchaeologist extends CardImpl {
     public ArdennIntrepidArchaeologist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.KOR);
         this.subtype.add(SubType.SCOUT);
         this.power = new MageInt(2);

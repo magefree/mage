@@ -17,6 +17,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetSacrifice;
 
 import java.util.UUID;
 
@@ -28,7 +29,7 @@ public final class KethekCrucibleGoliath extends CardImpl {
     public KethekCrucibleGoliath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.BEAST);
         this.power = new MageInt(4);
@@ -58,7 +59,7 @@ class KethekCrucibleGoliathEffect extends OneShotEffect {
     KethekCrucibleGoliathEffect() {
         super(Outcome.Benefit);
         staticText = "you may sacrifice another creature. " +
-                "If you do, reveal cards from the top of your library" +
+                "If you do, reveal cards from the top of your library " +
                 "until you reveal a nonlegendary creature card with lesser mana value" +
                 ", put it onto the battlefield, then put the rest on the bottom of your library in a random order.";
     }
@@ -79,9 +80,7 @@ class KethekCrucibleGoliathEffect extends OneShotEffect {
             return false;
         }
         // May sacrifice another creature
-        TargetPermanent target = (TargetPermanent) new TargetControlledPermanent(
-                0, 1, StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, true
-        ).withChooseHint("to sacrifice");
+        TargetSacrifice target = new TargetSacrifice(0, 1, StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE);
         player.choose(Outcome.Sacrifice, target, source, game);
         Permanent permanent = game.getPermanent(target.getFirstTarget());
         if (permanent == null || !permanent.sacrifice(source, game)) {
@@ -96,8 +95,8 @@ class KethekCrucibleGoliathEffect extends OneShotEffect {
         // Lesser Mana Value
         filterCreatureCard.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, xValue));
         //put it onto the battlefield, then put the rest on the bottom of your library in a random order.
-        RevealCardsFromLibraryUntilEffect effect = new RevealCardsFromLibraryUntilEffect(filterCreatureCard, Zone.BATTLEFIELD, Zone.LIBRARY);
-        effect.apply(game,source);
+        RevealCardsFromLibraryUntilEffect effect = new RevealCardsFromLibraryUntilEffect(filterCreatureCard, PutCards.BATTLEFIELD,PutCards.BOTTOM_RANDOM);
+        effect.apply(game, source);
         return true;
     }
 }

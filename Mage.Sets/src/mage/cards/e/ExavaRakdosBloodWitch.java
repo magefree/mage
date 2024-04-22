@@ -22,7 +22,7 @@ public final class ExavaRakdosBloodWitch extends CardImpl {
     static final String rule = "Each other creature you control with a +1/+1 counter on it has haste";
     public ExavaRakdosBloodWitch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.CLERIC);
 

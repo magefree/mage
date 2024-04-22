@@ -60,7 +60,7 @@ class SpectralForceTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DontUntapInControllersNextUntapStepSourceEffect());
     }
 
-    public SpectralForceTriggeredAbility(final SpectralForceTriggeredAbility ability) {
+    private SpectralForceTriggeredAbility(final SpectralForceTriggeredAbility ability) {
         super(ability);
     }
 

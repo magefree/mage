@@ -1,10 +1,10 @@
 package mage.cards.d;
 
-import mage.abilities.Ability;
+import mage.MageInt;
 import mage.abilities.common.DiesAttachedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.FlyingAbility;
@@ -12,11 +12,10 @@ import mage.abilities.keyword.WardAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.game.permanent.token.TokenImpl;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  * @author TheElk801
@@ -33,7 +32,7 @@ public final class DancingSword extends CardImpl {
 
         // When equipped creature dies, you may have Dancing Sword become a 2/1 Construct artifact creature with flying and ward {1}. If you do, it isn't an Equipment.
         this.addAbility(new DiesAttachedTriggeredAbility(
-                new DancingSwordEffect(), "equipped creature", true
+                new BecomesCreatureSourceEffect(new DancingSwordToken(), CardType.ARTIFACT, Duration.WhileOnBattlefield).andNotEquipment(true), "equipped creature", true
         ).setTriggerPhrase("When equipped creature dies, "));
 
         // Equip {1}
@@ -50,65 +49,25 @@ public final class DancingSword extends CardImpl {
     }
 }
 
-class DancingSwordEffect extends ContinuousEffectImpl {
+class DancingSwordToken extends TokenImpl {
 
-    DancingSwordEffect() {
-        super(Duration.Custom, Outcome.Benefit);
-        staticText = "you may have {this} become a 2/1 Construct artifact creature " +
-                "with flying and ward {1}. If you do, it isn't an Equipment";
+    public DancingSwordToken() {
+        super("", "2/1 Construct artifact creature with flying and ward {1}. If you do, it isn't an Equipment");
+        cardType.add(CardType.ARTIFACT);
+        cardType.add(CardType.CREATURE);
+        subtype.add(SubType.CONSTRUCT);
+        power = new MageInt(2);
+        toughness = new MageInt(1);
+        this.addAbility(FlyingAbility.getInstance());
+        this.addAbility(new WardAbility(new GenericManaCost(1), false));
     }
 
-    private DancingSwordEffect(final DancingSwordEffect effect) {
-        super(effect);
+    private DancingSwordToken(final DancingSwordToken token) {
+        super(token);
     }
 
-    @Override
-    public DancingSwordEffect copy() {
-        return new DancingSwordEffect(this);
+    public DancingSwordToken copy() {
+        return new DancingSwordToken(this);
     }
 
-    @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
-        if (permanent == null) {
-            discard();
-            return false;
-        }
-        switch (layer) {
-            case TypeChangingEffects_4:
-                permanent.removeAllCardTypes();
-                permanent.addCardType(game, CardType.ARTIFACT);
-                permanent.addCardType(game, CardType.CREATURE);
-                permanent.removeAllSubTypes(game);
-                permanent.addSubType(game, SubType.CONSTRUCT);
-                return true;
-            case AbilityAddingRemovingEffects_6:
-                permanent.addAbility(FlyingAbility.getInstance(), source.getSourceId(), game);
-                permanent.addAbility(new WardAbility(new GenericManaCost(1)), source.getSourceId(), game);
-                return true;
-            case PTChangingEffects_7:
-                if (sublayer == SubLayer.SetPT_7b) {
-                    permanent.getPower().setModifiedBaseValue(2);
-                    permanent.getToughness().setModifiedBaseValue(1);
-                    return true;
-                }
-        }
-        return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public boolean hasLayer(Layer layer) {
-        switch (layer) {
-            case TypeChangingEffects_4:
-            case AbilityAddingRemovingEffects_6:
-            case PTChangingEffects_7:
-                return true;
-        }
-        return false;
-    }
 }

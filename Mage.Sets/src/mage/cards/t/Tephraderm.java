@@ -1,8 +1,6 @@
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.Effect;
@@ -19,6 +17,8 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -53,11 +53,11 @@ class TephradermCreatureDamageTriggeredAbility extends TriggeredAbilityImpl {
 
     private static final FilterCreaturePermanent FILTER_CREATURE = new FilterCreaturePermanent();
 
-    public TephradermCreatureDamageTriggeredAbility() {
+    TephradermCreatureDamageTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(0));
     }
 
-    public TephradermCreatureDamageTriggeredAbility(final TephradermCreatureDamageTriggeredAbility ability) {
+    private TephradermCreatureDamageTriggeredAbility(final TephradermCreatureDamageTriggeredAbility ability) {
         super(ability);
     }
 
@@ -88,7 +88,7 @@ class TephradermCreatureDamageTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public TriggeredAbility copy() {
+    public TephradermCreatureDamageTriggeredAbility copy() {
         return new TephradermCreatureDamageTriggeredAbility(this);
     }
 
@@ -100,11 +100,11 @@ class TephradermCreatureDamageTriggeredAbility extends TriggeredAbilityImpl {
 
 class TephradermSpellDamageTriggeredAbility extends TriggeredAbilityImpl {
 
-    public TephradermSpellDamageTriggeredAbility() {
+    TephradermSpellDamageTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(0));
     }
 
-    public TephradermSpellDamageTriggeredAbility(final TephradermSpellDamageTriggeredAbility ability) {
+    private TephradermSpellDamageTriggeredAbility(final TephradermSpellDamageTriggeredAbility ability) {
         super(ability);
     }
 
@@ -134,7 +134,7 @@ class TephradermSpellDamageTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public TriggeredAbility copy() {
+    public TephradermSpellDamageTriggeredAbility copy() {
         return new TephradermSpellDamageTriggeredAbility(this);
     }
 

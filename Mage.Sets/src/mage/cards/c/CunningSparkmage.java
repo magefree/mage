@@ -35,7 +35,7 @@ public final class CunningSparkmage extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CunningSparkmage (final CunningSparkmage card) {
+    private CunningSparkmage(final CunningSparkmage card) {
         super(card);
     }
 

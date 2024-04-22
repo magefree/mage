@@ -24,7 +24,7 @@ public final class GrimDraugr extends CardImpl {
     public GrimDraugr(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
 
-        this.addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
         this.subtype.add(SubType.ZOMBIE);
         this.subtype.add(SubType.BERSERKER);
         this.power = new MageInt(3);

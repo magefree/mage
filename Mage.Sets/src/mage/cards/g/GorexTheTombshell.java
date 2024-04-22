@@ -31,7 +31,7 @@ public final class GorexTheTombshell extends CardImpl {
     public GorexTheTombshell(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{6}{B}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ZOMBIE);
         this.subtype.add(SubType.TURTLE);
         this.power = new MageInt(4);

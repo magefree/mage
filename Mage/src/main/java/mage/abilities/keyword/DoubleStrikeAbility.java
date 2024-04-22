@@ -2,7 +2,7 @@ package mage.abilities.keyword;
 
 import mage.abilities.MageSingleton;
 import mage.abilities.StaticAbility;
-import mage.abilities.icon.abilities.DoubleStrikeAbilityIcon;
+import mage.abilities.icon.CardIconImpl;
 import mage.constants.Zone;
 
 import java.io.ObjectStreamException;
@@ -16,7 +16,7 @@ public class DoubleStrikeAbility extends StaticAbility implements MageSingleton 
 
     static {
         instance = new DoubleStrikeAbility();
-        instance.addIcon(DoubleStrikeAbilityIcon.instance);
+        instance.addIcon(CardIconImpl.ABILITY_DOUBLE_STRIKE);
     }
 
     private Object readResolve() throws ObjectStreamException {

@@ -16,7 +16,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.filter.FilterObject;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterNonlandCard;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.filter.predicate.mageobject.MulticoloredPredicate;
@@ -24,7 +23,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetDiscard;
 
 /**
  * @author TheElk801
@@ -92,16 +90,17 @@ class ArgentumMasticoreEffect extends OneShotEffect {
             return false;
         }
         Permanent permanent = source.getSourcePermanentIfItStillExists(game);
-        if (player.getHand().isEmpty()
-                || (permanent != null && !player.chooseUse(outcome, "Discard a card?", source, game))) {
-            permanent.sacrifice(source, game);
+        if (player.getHand().isEmpty() || (!player.chooseUse(outcome, "Discard a card?", source, game))) {
+            if (permanent != null) {
+                permanent.sacrifice(source, game);
+            }
             return true;
         }
-        TargetDiscard target = new TargetDiscard(player.getId());
-        player.choose(outcome, target, source, game);
-        Card card = game.getCard(target.getFirstTarget());
-        if (card == null && permanent != null) {
-            permanent.sacrifice(source, game);
+        Card card = player.discardOne(false, false, source, game);
+        if (card == null) {
+            if (permanent != null) {
+                permanent.sacrifice(source, game);
+            }
             return true;
         }
         FilterPermanent filter = new FilterNonlandPermanent(

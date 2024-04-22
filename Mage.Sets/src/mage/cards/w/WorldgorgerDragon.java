@@ -77,7 +77,7 @@ class WorldgorgerDragonEntersEffect extends OneShotEffect {
         staticText = "exile all other permanents you control";
     }
 
-    public WorldgorgerDragonEntersEffect(final WorldgorgerDragonEntersEffect effect) {
+    private WorldgorgerDragonEntersEffect(final WorldgorgerDragonEntersEffect effect) {
         super(effect);
     }
 
@@ -105,12 +105,12 @@ class WorldgorgerDragonEntersEffect extends OneShotEffect {
 
 class WorldgorgerDragonLeavesEffect extends OneShotEffect {
 
-    public WorldgorgerDragonLeavesEffect() {
+    WorldgorgerDragonLeavesEffect() {
         super(Outcome.Neutral);
         staticText = "return the exiled cards to the battlefield under their owners' control";
     }
 
-    public WorldgorgerDragonLeavesEffect(final WorldgorgerDragonLeavesEffect effect) {
+    private WorldgorgerDragonLeavesEffect(final WorldgorgerDragonLeavesEffect effect) {
         super(effect);
     }
 

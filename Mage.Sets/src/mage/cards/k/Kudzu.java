@@ -39,7 +39,8 @@ public final class Kudzu extends CardImpl {
         this.addAbility(ability);
 
         // When enchanted land becomes tapped, destroy it. That land's controller attaches Kudzu to a land of their choice.
-        this.addAbility(new BecomesTappedAttachedTriggeredAbility(new KudzuEffect(), "enchanted land"));
+        this.addAbility(new BecomesTappedAttachedTriggeredAbility(new KudzuEffect(), "enchanted land")
+                .setTriggerPhrase("When enchanted land becomes tapped, "));
 
     }
 
@@ -55,12 +56,12 @@ public final class Kudzu extends CardImpl {
 
 class KudzuEffect extends OneShotEffect {
 
-    public KudzuEffect() {
+    KudzuEffect() {
         super(Outcome.Detriment);
-        staticText = "destroy it. That land's controller attaches {this} to a land of their choice";
+        staticText = "destroy it. That land's controller may attach {this} to a land of their choice";
     }
 
-    public KudzuEffect(final KudzuEffect effect) {
+    private KudzuEffect(final KudzuEffect effect) {
         super(effect);
     }
 
@@ -83,7 +84,7 @@ class KudzuEffect extends OneShotEffect {
                 }
                 if (!game.getBattlefield().getAllActivePermanents(CardType.LAND, game).isEmpty()) { //lands are available on the battlefield
                     Target target = new TargetLandPermanent();
-                    target.setNotTarget(true); //not a target, it is chosen
+                    target.withNotTarget(true); //not a target, it is chosen
                     Card kudzuCard = game.getCard(source.getSourceId());
                     if (kudzuCard != null && landsController != null) {
                         if (landsController.choose(Outcome.Detriment, target, source, game)) {

@@ -33,7 +33,7 @@ public class ReconfigureTest extends CardTestPlayerBase {
 
         assertType(boar, CardType.CREATURE, false);
         assertSubtype(boar, SubType.EQUIPMENT);
-        assertIsAttachedTo(playerA, boar, lion);
+        assertAttachedTo(playerA, boar, lion, true);
         assertPowerToughness(playerA, lion, 2 + 3, 2 + 2);
         assertAbility(playerA, lion, TrampleAbility.getInstance(), true);
     }
@@ -74,7 +74,7 @@ public class ReconfigureTest extends CardTestPlayerBase {
 
         assertType(boar, CardType.CREATURE, false);
         assertSubtype(boar, SubType.EQUIPMENT);
-        assertIsAttachedTo(playerA, boar, lion);
+        assertAttachedTo(playerA, boar, lion, true);
         assertPowerToughness(playerA, lion, 2 + 3, 2 + 2);
         assertAbility(playerA, lion, TrampleAbility.getInstance(), true);
     }
@@ -94,7 +94,7 @@ public class ReconfigureTest extends CardTestPlayerBase {
 
         assertType(boar, CardType.CREATURE, false);
         assertSubtype(boar, SubType.EQUIPMENT);
-        assertIsAttachedTo(playerA, boar, lion);
+        assertAttachedTo(playerA, boar, lion, true);
         assertPowerToughness(playerA, lion, 2 + 3, 2 + 2);
         assertAbility(playerA, lion, TrampleAbility.getInstance(), true);
     }

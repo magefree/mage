@@ -43,7 +43,7 @@ class RakingCanopyTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(4));
     }
 
-    public RakingCanopyTriggeredAbility(final RakingCanopyTriggeredAbility ability) {
+    private RakingCanopyTriggeredAbility(final RakingCanopyTriggeredAbility ability) {
         super(ability);
     }
 

@@ -11,7 +11,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 
 import java.util.UUID;
@@ -21,7 +21,7 @@ import java.util.UUID;
  */
 public final class VillageReavers extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("Wolves and Werewolves");
+    private static final FilterPermanent filter = new FilterControlledPermanent("Wolves and Werewolves");
 
     static {
         filter.add(Predicates.or(

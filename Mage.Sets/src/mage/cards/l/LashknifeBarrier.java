@@ -44,23 +44,18 @@ public final class LashknifeBarrier extends CardImpl {
 
 class LashknifeBarrierEffect extends ReplacementEffectImpl {
 
-    public LashknifeBarrierEffect() {
+    LashknifeBarrierEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "If a source would deal damage to a creature you control, it deals that much damage minus 1 to that creature instead.";
     }
 
-    public LashknifeBarrierEffect(final LashknifeBarrierEffect effect) {
+    private LashknifeBarrierEffect(final LashknifeBarrierEffect effect) {
         super(effect);
     }
 
     @Override
     public LashknifeBarrierEffect copy() {
         return new LashknifeBarrierEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

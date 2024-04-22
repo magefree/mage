@@ -10,9 +10,8 @@ import mage.abilities.effects.common.continuous.GainControlAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
@@ -26,12 +25,10 @@ import java.util.UUID;
  */
 public final class AshiokSculptorOfFears extends CardImpl {
 
-    private static final FilterCard filter = new FilterCreatureCard("creature card from a graveyard");
-
     public AshiokSculptorOfFears(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{U}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ASHIOK);
         this.setStartingLoyalty(4);
 
@@ -45,7 +42,7 @@ public final class AshiokSculptorOfFears extends CardImpl {
         // −5: Put target creature card from a graveyard onto the battlefield under your control.
         ability = new LoyaltyAbility(new ReturnFromGraveyardToBattlefieldTargetEffect()
                 .setText("put target creature card from a graveyard onto the battlefield under your control"), -5);
-        ability.addTarget(new TargetCardInGraveyard(filter));
+        ability.addTarget(new TargetCardInGraveyard(StaticFilters.FILTER_CARD_CREATURE_A_GRAVEYARD));
         this.addAbility(ability);
 
         // −11: Gain control of all creatures target opponent controls.

@@ -30,7 +30,7 @@ public final class NiveousWisps extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
-    public NiveousWisps (final NiveousWisps card) {
+    private NiveousWisps(final NiveousWisps card) {
         super(card);
     }
 

@@ -43,7 +43,7 @@ public final class KnightOfMalice extends CardImpl {
 
     }
 
-    public KnightOfMalice(final KnightOfMalice knightOfGrace) {
+    private KnightOfMalice(final KnightOfMalice knightOfGrace) {
         super(knightOfGrace);
     }
 

@@ -31,7 +31,7 @@ public final class JayaFieryNegotiator extends CardImpl {
     public JayaFieryNegotiator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{R}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.JAYA);
         this.setStartingLoyalty(4);
 
@@ -108,7 +108,7 @@ class JayaFieryNegotiatorExileEffect extends OneShotEffect {
             player.moveCardsToExile(exileCards, source, game, true, CardUtil.getExileZoneId(game, source), "Jaya, Fiery Negotiator");
         }
         if (card != null) {
-            CardUtil.makeCardPlayable(game, source, card, Duration.EndOfTurn, false);
+            CardUtil.makeCardPlayable(game, source, card, false, Duration.EndOfTurn, false);
         }
         return true;
     }

@@ -30,7 +30,7 @@ public class TargetCreatureOrPlaneswalker extends TargetPermanent {
         super(minNumTargets, maxNumTargets, filter, notTarget);
     }
 
-    public TargetCreatureOrPlaneswalker(final TargetCreatureOrPlaneswalker target) {
+    protected TargetCreatureOrPlaneswalker(final TargetCreatureOrPlaneswalker target) {
         super(target);
     }
 
@@ -48,7 +48,7 @@ public class TargetCreatureOrPlaneswalker extends TargetPermanent {
                 return true;
             }
         }
-        return super.isLegal(source, game); //To change body of generated methods, choose Tools | Templates.
+        return super.isLegal(source, game);
     }
 
 }

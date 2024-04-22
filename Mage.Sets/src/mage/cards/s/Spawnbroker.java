@@ -64,7 +64,7 @@ class TargetControlledCreatureWithPowerGreaterOrLessThanOpponentPermanent extend
         setTargetName("creature you control");
     }
 
-    public TargetControlledCreatureWithPowerGreaterOrLessThanOpponentPermanent(final TargetControlledCreatureWithPowerGreaterOrLessThanOpponentPermanent target) {
+    private TargetControlledCreatureWithPowerGreaterOrLessThanOpponentPermanent(final TargetControlledCreatureWithPowerGreaterOrLessThanOpponentPermanent target) {
         super(target);
     }
 
@@ -100,7 +100,7 @@ class SpawnbrokerSecondTarget extends TargetPermanent {
         setTargetName("creature with power less than or equal to that creature's power an opponent controls");
     }
 
-    public SpawnbrokerSecondTarget(final SpawnbrokerSecondTarget target) {
+    private SpawnbrokerSecondTarget(final SpawnbrokerSecondTarget target) {
         super(target);
         this.firstTarget = target.firstTarget;
     }

@@ -68,7 +68,7 @@ enum ScreamingSwarmValue implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        return (Integer) effect.getValue("attackers");
+        return (Integer) effect.getValue(AttacksWithCreaturesTriggeredAbility.VALUEKEY_NUMBER_ATTACKERS);
     }
 
     @Override

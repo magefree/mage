@@ -101,6 +101,7 @@ class WasteManagementEffect extends OneShotEffect {
         cards.retainZone(Zone.EXILED, game);
         int count = cards.count(StaticFilters.FILTER_CARD_CREATURE, game);
         if (count > 0) {
+            game.getState().processAction(game);
             new RogueToken().putOntoBattlefield(count, game, source);
         }
         return true;

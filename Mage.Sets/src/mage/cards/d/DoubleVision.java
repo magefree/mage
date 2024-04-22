@@ -25,7 +25,7 @@ public final class DoubleVision extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}{R}");
 
         // Whenever you cast your first instant or sorcery spell each turn, copy that spell. You may choose new targets for the copy.
-        this.addAbility(new DoubleVisionCopyTriggeredAbility(), new SpellsCastWatcher());
+        this.addAbility(new DoubleVisionCopyTriggeredAbility());
     }
 
     private DoubleVision(final DoubleVision card) {
@@ -44,7 +44,7 @@ class DoubleVisionCopyTriggeredAbility extends SpellCastControllerTriggeredAbili
         super(new CopyTargetSpellEffect(true), new FilterInstantOrSorcerySpell(), false);
     }
 
-    DoubleVisionCopyTriggeredAbility(DoubleVisionCopyTriggeredAbility ability) {
+    private DoubleVisionCopyTriggeredAbility(final DoubleVisionCopyTriggeredAbility ability) {
         super(ability);
     }
 

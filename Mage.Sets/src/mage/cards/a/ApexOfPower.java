@@ -48,13 +48,13 @@ public final class ApexOfPower extends CardImpl {
 
 class ApexOfPowerSpellEffect extends OneShotEffect {
 
-    public ApexOfPowerSpellEffect() {
+    ApexOfPowerSpellEffect() {
         super(Outcome.Benefit);
         this.staticText = "exile the top seven cards of your library. " +
                 "Until end of turn, you may cast spells from among them";
     }
 
-    public ApexOfPowerSpellEffect(final ApexOfPowerSpellEffect effect) {
+    private ApexOfPowerSpellEffect(final ApexOfPowerSpellEffect effect) {
         super(effect);
     }
 
@@ -89,12 +89,12 @@ class ApexOfPowerSpellEffect extends OneShotEffect {
 
 class ApexOfPowerManaEffect extends OneShotEffect {
 
-    public ApexOfPowerManaEffect() {
+    ApexOfPowerManaEffect() {
         super(Outcome.Benefit);
         this.staticText = "If this spell was cast from your hand, add ten mana of any one color.";
     }
 
-    public ApexOfPowerManaEffect(final ApexOfPowerManaEffect effect) {
+    private ApexOfPowerManaEffect(final ApexOfPowerManaEffect effect) {
         super(effect);
     }
 

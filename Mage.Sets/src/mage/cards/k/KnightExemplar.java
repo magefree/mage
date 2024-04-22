@@ -40,7 +40,7 @@ public final class KnightExemplar extends CardImpl {
                 1, 1, Duration.WhileOnBattlefield, filter, true
         ));
         ability.addEffect(new GainAbilityControlledEffect(
-                IndestructibleAbility.getInstance(), Duration.WhileOnBattlefield, filter, false
+                IndestructibleAbility.getInstance(), Duration.WhileOnBattlefield, filter, true
         ).setText("and have indestructible"));
         this.addAbility(ability);
     }

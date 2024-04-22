@@ -34,7 +34,7 @@ public final class WretchedThrong extends CardImpl {
 
         // When Wretched Throng dies, you may search your library for a card named Wretched Throng, reveal it, put it into your hand, then shuffle.
         this.addAbility(new DiesSourceTriggeredAbility(new SearchLibraryPutInHandEffect(
-                new TargetCardInLibrary(filter), true, true
+                new TargetCardInLibrary(filter), true
         ), true));
     }
 

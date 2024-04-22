@@ -49,7 +49,7 @@ class EunuchsIntriguesEffect extends OneShotEffect {
         this.staticText = "Target opponent chooses a creature they control. Other creatures they control can't block this turn.";
     }
 
-    EunuchsIntriguesEffect(final EunuchsIntriguesEffect effect) {
+    private EunuchsIntriguesEffect(final EunuchsIntriguesEffect effect) {
         super(effect);
     }
 
@@ -90,7 +90,7 @@ class EunuchsIntriguesRestrictionEffect extends RestrictionEffect {
         this.targetId = targetId;
     }
 
-    public EunuchsIntriguesRestrictionEffect(final EunuchsIntriguesRestrictionEffect effect) {
+    private EunuchsIntriguesRestrictionEffect(final EunuchsIntriguesRestrictionEffect effect) {
         super(effect);
         targetId = effect.targetId;
     }

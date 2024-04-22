@@ -9,7 +9,6 @@ import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TimingRule;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
@@ -35,7 +34,7 @@ public final class MysticalTeachings extends CardImpl {
 
 
         // Search your library for an instant card or a card with flash, reveal it, and put it into your hand. Then shuffle your library.
-        this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true, true));
+        this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true));
         // Flashback {5}{B}
         this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{5}{B}")));
     }

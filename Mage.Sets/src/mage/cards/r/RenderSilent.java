@@ -3,7 +3,6 @@ package mage.cards.r;
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -45,11 +44,12 @@ public final class RenderSilent extends CardImpl {
 
 class RenderSilentCounterEffect extends OneShotEffect {
 
-    public RenderSilentCounterEffect() {
+    RenderSilentCounterEffect() {
         super(Outcome.Detriment);
+        staticText = "counter target spell";
     }
 
-    public RenderSilentCounterEffect(final RenderSilentCounterEffect effect) {
+    private RenderSilentCounterEffect(final RenderSilentCounterEffect effect) {
         super(effect);
     }
 
@@ -68,32 +68,22 @@ class RenderSilentCounterEffect extends OneShotEffect {
         return false;
     }
 
-    @Override
-    public String getText(Mode mode) {
-        return "Counter target " + mode.getTargets().get(0).getTargetName();
-    }
-
 }
 
 class RenderSilentEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public RenderSilentEffect() {
+    RenderSilentEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit);
         staticText = "Its controller can't cast spells this turn";
     }
 
-    public RenderSilentEffect(final RenderSilentEffect effect) {
+    private RenderSilentEffect(final RenderSilentEffect effect) {
         super(effect);
     }
 
     @Override
     public RenderSilentEffect copy() {
         return new RenderSilentEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override
@@ -113,10 +103,7 @@ class RenderSilentEffect extends ContinuousRuleModifyingEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
-        if (player != null && player.getId().equals(event.getPlayerId())) {
-            return true;
-        }
-        return false;
+        return player != null && player.getId().equals(event.getPlayerId());
     }
 
 }

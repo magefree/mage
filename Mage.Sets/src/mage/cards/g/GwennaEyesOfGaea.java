@@ -40,7 +40,7 @@ public final class GwennaEyesOfGaea extends CardImpl {
     public GwennaEyesOfGaea(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.DRUID);
         this.subtype.add(SubType.SCOUT);

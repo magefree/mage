@@ -7,6 +7,7 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.util.CardUtil;
 
 /**
  * @author nantuko
@@ -20,14 +21,14 @@ public class AddCardSubTypeTargetEffect extends ContinuousEffectImpl {
         this.addedSubType = addedSubType;
     }
 
-    public AddCardSubTypeTargetEffect(final AddCardSubTypeTargetEffect effect) {
+    protected AddCardSubTypeTargetEffect(final AddCardSubTypeTargetEffect effect) {
         super(effect);
         this.addedSubType = effect.addedSubType;
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent target = game.getPermanent(targetPointer.getFirst(game, source));
+        Permanent target = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (target != null) {
             target.addSubType(game, addedSubType);
         } else {
@@ -48,18 +49,10 @@ public class AddCardSubTypeTargetEffect extends ContinuousEffectImpl {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        StringBuilder sb = new StringBuilder();
-        if (!mode.getTargets().isEmpty()) {
-            sb.append("Target ").append(mode.getTargets().get(0).getTargetName());
-        } else {
-            sb.append("It ");
-        }
-        if (addedSubType.toString().matches("(?i)^[AEIOUYaeiouy].*$")) {
-            sb.append(" becomes an ");
-        } else {
-            sb.append(" becomes a ");
-        }
-        sb.append(addedSubType).append(" in addition to its other types ").append(duration.toString());
-        return sb.toString();
+        return getTargetPointer().describeTargets(mode.getTargets(), "it") +
+                (getTargetPointer().isPlural(mode.getTargets()) ? " become " : " becomes ") +
+                CardUtil.addArticle(addedSubType.toString()) +
+                " in addition to its other types" +
+                (duration.toString().isEmpty() ? "" : ' ' + duration.toString());
     }
 }

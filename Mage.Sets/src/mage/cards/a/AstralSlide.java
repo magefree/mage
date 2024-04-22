@@ -45,12 +45,12 @@ public final class AstralSlide extends CardImpl {
 
 class AstralSlideEffect extends OneShotEffect {
 
-    public AstralSlideEffect() {
+    AstralSlideEffect() {
         super(Outcome.Detriment);
         staticText = "exile target creature. If you do, return that card to the battlefield under its owner's control at the beginning of the next end step";
     }
 
-    public AstralSlideEffect(final AstralSlideEffect effect) {
+    private AstralSlideEffect(final AstralSlideEffect effect) {
         super(effect);
     }
 

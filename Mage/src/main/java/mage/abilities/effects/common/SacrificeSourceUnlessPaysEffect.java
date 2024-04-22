@@ -32,7 +32,7 @@ public class SacrificeSourceUnlessPaysEffect extends OneShotEffect {
         this.genericMana = genericMana;
     }
 
-    public SacrificeSourceUnlessPaysEffect(final SacrificeSourceUnlessPaysEffect effect) {
+    protected SacrificeSourceUnlessPaysEffect(final SacrificeSourceUnlessPaysEffect effect) {
         super(effect);
         if (effect.cost != null) {
             this.cost = effect.cost.copy();
@@ -61,9 +61,8 @@ public class SacrificeSourceUnlessPaysEffect extends OneShotEffect {
             if (costToPay instanceof ManaCost) {
                 message += "Pay " + costValueMessage;
                 logMessage += "pay " + costValueMessage;
-            }
-            else if (costValueMessage.length() > 1) {
-                message += costValueMessage.substring(0,1).toUpperCase() + costValueMessage.substring(1);
+            } else if (costValueMessage.length() > 1) {
+                message += costValueMessage.substring(0, 1).toUpperCase() + costValueMessage.substring(1);
                 logMessage += costValueMessage;
             }
             message += '?';

@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- *
  * @author North, noxx
  */
 public class EquipmentAttachedCount implements DynamicValue {
@@ -26,7 +25,7 @@ public class EquipmentAttachedCount implements DynamicValue {
         this.multiplier = multiplier;
     }
 
-    public EquipmentAttachedCount(final EquipmentAttachedCount dynamicValue) {
+    protected EquipmentAttachedCount(final EquipmentAttachedCount dynamicValue) {
         this.multiplier = dynamicValue.multiplier;
     }
 

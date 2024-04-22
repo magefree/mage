@@ -1,13 +1,12 @@
 package mage.abilities.common;
 
 import mage.abilities.effects.Effect;
+import mage.constants.SetTargetPointer;
 import mage.filter.FilterSpell;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.stack.Spell;
+import mage.target.targetpointer.FixedTarget;
 import mage.watchers.common.SpellsCastWatcher;
-
-import java.util.List;
 
 /**
  * @author TheElk801
@@ -18,11 +17,14 @@ public class FirstSpellOpponentsTurnTriggeredAbility extends SpellCastController
             = new FilterSpell("your first spell during each opponent's turn");
 
     public FirstSpellOpponentsTurnTriggeredAbility(Effect effect, boolean optional) {
-        super(effect, defaultFilter, optional);
-        this.addWatcher(new SpellsCastWatcher());
+        this(effect, optional, SetTargetPointer.NONE);
     }
 
-    private FirstSpellOpponentsTurnTriggeredAbility(final FirstSpellOpponentsTurnTriggeredAbility ability) {
+    public FirstSpellOpponentsTurnTriggeredAbility(Effect effect, boolean optional, SetTargetPointer setTargetPointer) {
+        super(effect, defaultFilter, optional, setTargetPointer);
+    }
+
+    protected FirstSpellOpponentsTurnTriggeredAbility(final FirstSpellOpponentsTurnTriggeredAbility ability) {
         super(ability);
     }
 
@@ -34,17 +36,16 @@ public class FirstSpellOpponentsTurnTriggeredAbility extends SpellCastController
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (game.isActivePlayer(this.getControllerId()) // ignore controller turn
-                || !super.checkTrigger(event, game)
                 || !game.getOpponents(this.getControllerId()).contains(game.getActivePlayerId())) {
             return false;
         }
-
         SpellsCastWatcher watcher = game.getState().getWatcher(SpellsCastWatcher.class);
-        if (watcher == null) {
-            return false;
+        if (watcher != null && (watcher.getCount(event.getPlayerId()) == 1) && super.checkTrigger(event, game)) {
+            if (setTargetPointer == SetTargetPointer.PLAYER) { // not handled in super class
+                getAllEffects().setTargetPointer(new FixedTarget(game.getActivePlayerId()));
+            }
+            return true;
         }
-
-        List<Spell> spells = watcher.getSpellsCastThisTurn(event.getPlayerId());
-        return spells != null && spells.size() == 1;
+        return false;
     }
 }

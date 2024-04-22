@@ -163,7 +163,7 @@ class BeamsplitterMageEffect extends OneShotEffect {
         filter.add(AnotherPredicate.instance);
         filter.add(new BeamsplitterMagePredicate(spell));
         TargetPermanent target = new TargetPermanent(filter);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         player.choose(outcome, target, source, game);
         Permanent permanent = game.getPermanent(target.getFirstTarget());
         if (permanent == null) {

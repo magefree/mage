@@ -62,8 +62,7 @@ class KnightErrantOfEosEffect extends OneShotEffect {
             return input
                     .getObject()
                     .getManaValue()
-                    <= ConvokedSourceCount
-                    .PERMANENT
+                    <= ConvokedSourceCount.instance
                     .calculate(game, input.getSource(), null);
         }
     }

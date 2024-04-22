@@ -8,7 +8,6 @@ import mage.game.Game;
 import mage.players.Player;
 
 /**
- *
  * @author TheElk801
  */
 public class FlipUntilLoseEffect extends OneShotEffect {
@@ -18,7 +17,7 @@ public class FlipUntilLoseEffect extends OneShotEffect {
         this.staticText = "flip a coin until you lose a flip";
     }
 
-    public FlipUntilLoseEffect(final FlipUntilLoseEffect effect) {
+    protected FlipUntilLoseEffect(final FlipUntilLoseEffect effect) {
         super(effect);
     }
 

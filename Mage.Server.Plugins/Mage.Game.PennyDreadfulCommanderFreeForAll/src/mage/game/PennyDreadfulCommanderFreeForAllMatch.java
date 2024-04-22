@@ -20,7 +20,12 @@ public class PennyDreadfulCommanderFreeForAllMatch extends MatchImpl {
             startLife = 30;
         }
         Mulligan mulligan = options.getMulliganType().getMulligan(options.getFreeMulligans());
-        PennyDreadfulCommanderFreeForAll game = new PennyDreadfulCommanderFreeForAll(options.getAttackOption(), options.getRange(), mulligan, startLife);
+        startLife = options.isCustomStartLifeEnabled() ? options.getCustomStartLife() : startLife;
+        int startHandSize = options.isCustomStartHandSizeEnabled() ? options.getCustomStartHandSize() : 7;
+        PennyDreadfulCommanderFreeForAll game = new PennyDreadfulCommanderFreeForAll(
+                options.getAttackOption(), options.getRange(),
+                mulligan, startLife, startHandSize
+        );
         game.setStartMessage(this.createGameStartMessage());
         initGame(game);
         games.add(game);

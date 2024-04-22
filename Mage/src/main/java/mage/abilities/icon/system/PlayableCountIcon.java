@@ -19,11 +19,11 @@ public final class PlayableCountIcon extends CardIconImpl {
         super(CardIconType.PLAYABLE_COUNT, getHint(objectStats), getAmount(objectStats));
     }
 
-    static private String getAmount(PlayableObjectStats objectStats) {
+    private static String getAmount(PlayableObjectStats objectStats) {
         return String.valueOf(objectStats.getPlayableAmount());
     }
 
-    static private String getHint(PlayableObjectStats objectStats) {
+    private static String getHint(PlayableObjectStats objectStats) {
         String res = "Playable abilities: " + objectStats.getPlayableAmount();
         // abilities list already sorted
         List<String> list = objectStats.getPlayableAbilities();

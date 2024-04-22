@@ -31,7 +31,7 @@ public final class OathOfChandra extends CardImpl {
 
     public OathOfChandra(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // When Oath of Chandra enters the battlefield, it deals 3 damage to target creature an opponent controls.
         Effect effect = new DamageTargetEffect(3);

@@ -39,7 +39,7 @@ public final class WallOfReverence extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WallOfReverence (final WallOfReverence card) {
+    private WallOfReverence(final WallOfReverence card) {
         super(card);
     }
 
@@ -55,7 +55,7 @@ class WallOfReverenceTriggeredEffect extends OneShotEffect {
         staticText = "gain life equal to the power of target creature you control";
     }
 
-    WallOfReverenceTriggeredEffect(WallOfReverenceTriggeredEffect effect) {
+    private WallOfReverenceTriggeredEffect(final WallOfReverenceTriggeredEffect effect) {
         super(effect);
     }
 

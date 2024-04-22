@@ -5,10 +5,11 @@ import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.condition.common.ControlACommanderCondition;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ExileTopXMayPlayUntilEndOfTurnEffect;
+import mage.abilities.effects.common.ExileTopXMayPlayUntilEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
@@ -26,7 +27,7 @@ public final class JeskasWill extends CardImpl {
 
         // Choose one. If you control a commander as you cast this spell, you may choose both.
         this.getSpellAbility().getModes().setChooseText(
-                "Choose one. If you control a commander as you cast this spell, you may choose both."
+                "Choose one. If you control a commander as you cast this spell, you may choose both instead."
         );
         this.getSpellAbility().getModes().setMoreCondition(ControlACommanderCondition.instance);
 
@@ -35,7 +36,8 @@ public final class JeskasWill extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
 
         // • Exile the top three cards of your library. You may play them this turn.
-        this.getSpellAbility().addMode(new Mode(new ExileTopXMayPlayUntilEndOfTurnEffect(3)));
+        this.getSpellAbility().addMode(new Mode(new ExileTopXMayPlayUntilEffect(3, Duration.EndOfTurn)
+                .withTextOptions("them", true)));
     }
 
     private JeskasWill(final JeskasWill card) {
@@ -68,7 +70,7 @@ class JeskasWillEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Player player = game.getPlayer(source.getFirstTarget());
-        if (controller == null || player == null || player.getHand().size() < 1) {
+        if (controller == null || player == null || player.getHand().isEmpty()) {
             return false;
         }
         controller.getManaPool().addMana(Mana.RedMana(player.getHand().size()), game, source);

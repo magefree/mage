@@ -60,7 +60,7 @@ class WuSpyEffect extends OneShotEffect {
         this.staticText = "look at the top two cards of target player's library. Put one of them into their graveyard";
     }
 
-    WuSpyEffect(final WuSpyEffect effect) {
+    private WuSpyEffect(final WuSpyEffect effect) {
         super(effect);
     }
 

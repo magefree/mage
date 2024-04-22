@@ -84,7 +84,7 @@ class RavagerOfTheFellsEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        game.damagePlayerOrPlaneswalker(source.getTargets().get(0).getFirstTarget(), 2, source.getSourceId(), source, game, false, true);
+        game.damagePlayerOrPermanent(source.getTargets().get(0).getFirstTarget(), 2, source.getSourceId(), source, game, false, true);
         Permanent creature = game.getPermanent(source.getTargets().get(1).getFirstTarget());
         if (creature != null) {
             creature.damage(2, source.getSourceId(), source, game, false, true);

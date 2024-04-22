@@ -22,13 +22,21 @@ public final class MuYanlingSkyDancerEmblem extends Emblem {
 
     // "Islands you control have '{T}: Draw a card'."
     public MuYanlingSkyDancerEmblem() {
-        this.setName("Emblem Yanling");
-        this.setExpansionSetCodeForImage("M20");
+        super("Emblem Yanling");
         this.getAbilities().add(new SimpleStaticAbility(
                 Zone.COMMAND,
                 new GainAbilityControlledEffect(new SimpleActivatedAbility(
                         new DrawCardSourceControllerEffect(1), new TapSourceCost()
                 ), Duration.EndOfGame, filter)
         ));
+    }
+
+    private MuYanlingSkyDancerEmblem(final MuYanlingSkyDancerEmblem card) {
+        super(card);
+    }
+
+    @Override
+    public MuYanlingSkyDancerEmblem copy() {
+        return new MuYanlingSkyDancerEmblem(this);
     }
 }

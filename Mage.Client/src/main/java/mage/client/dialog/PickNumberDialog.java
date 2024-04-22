@@ -5,30 +5,39 @@ import mage.client.MageFrame;
 import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Game GUI: choose number
  *
- * @author BetaSteward_at_googlemail.com
+ * @author BetaSteward_at_googlemail.com, JayDi85
  */
 public class PickNumberDialog extends MageDialog {
 
     private boolean cancel;
 
-    /**
-     * Creates new form PickNumberDialog
-     */
     public PickNumberDialog() {
         initComponents();
+
+        this.textMessage.enableHyperlinksAndCardPopups();
         this.setModal(true);
     }
 
     public void showDialog(int min, int max, String message) {
-        this.spnAmount.setModel(new SpinnerNumberModel(min, min, max, 1));
-        this.lblMessage.setContentType("text/html");
-        this.lblMessage.setText(message);
-        this.btnOk.setVisible(true);
-        this.btnCancel.setVisible(false);
+        this.editAmount.setModel(new SpinnerNumberModel(min, min, max, 1));
+        this.textMessage.setContentType("text/html");
+        this.textMessage.setText(message);
+
+        List<String> limits = new ArrayList<>();
+        if (min != Integer.MIN_VALUE) {
+            limits.add("from " + min);
+        }
+        limits.add("to " + (max == Integer.MAX_VALUE ? "any" : max));
+        this.labelLimits.setText(String.join(" ", limits));
+
+        this.buttonOk.setVisible(true);
+        this.buttonCancel.setVisible(false);
         this.pack();
 
         // window settings
@@ -39,11 +48,11 @@ public class PickNumberDialog extends MageDialog {
             MageFrame.getDesktop().add(this, JLayeredPane.PALETTE_LAYER);
         }
 
-        this.getRootPane().setDefaultButton(this.btnOk); // restore default button after root panel change (no need actually)
+        this.getRootPane().setDefaultButton(this.buttonOk); // restore default button after root panel change (no need actually)
 
         // enable spinner's enter key like text (one enter press instead two)
         // https://stackoverflow.com/questions/3873870/java-keylistener-not-firing-on-jspinner
-        ((JSpinner.DefaultEditor) this.spnAmount.getEditor()).getTextField().addKeyListener(new KeyListener() {
+        ((JSpinner.DefaultEditor) this.editAmount.getEditor()).getTextField().addKeyListener(new KeyListener() {
 
             @Override
             public void keyPressed(KeyEvent e) {
@@ -52,7 +61,7 @@ public class PickNumberDialog extends MageDialog {
             @Override
             public void keyReleased(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                    btnOk.doClick();
+                    buttonOk.doClick();
                 }
             }
 
@@ -69,7 +78,7 @@ public class PickNumberDialog extends MageDialog {
     }
 
     public int getAmount() {
-        return ((Number) spnAmount.getValue()).intValue();
+        return ((Number) editAmount.getValue()).intValue();
     }
 
     public boolean isCancel() {
@@ -86,108 +95,115 @@ public class PickNumberDialog extends MageDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        lblMessage = new javax.swing.JTextPane();
-        spnAmount = new javax.swing.JSpinner();
+        scrollMessage = new javax.swing.JScrollPane();
+        textMessage = new mage.client.components.MageEditorPane();
+        editAmount = new javax.swing.JSpinner();
+        labelLimits = new javax.swing.JLabel();
         panelCommands = new javax.swing.JPanel();
-        btnOk = new javax.swing.JButton();
-        btnCancel = new javax.swing.JButton();
+        buttonOk = new javax.swing.JButton();
+        buttonCancel = new javax.swing.JButton();
 
-        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        jScrollPane1.setFocusable(false);
+        scrollMessage.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollMessage.setFocusable(false);
 
-        lblMessage.setEditable(false);
-        lblMessage.setText("long text long text long text long text long text long text long text long text");
-        lblMessage.setCursor(null);
-        lblMessage.setFocusable(false);
-        lblMessage.setOpaque(false);
-        jScrollPane1.setViewportView(lblMessage);
+        textMessage.setEditable(false);
+        textMessage.setText("long text long text long text long text long text long text long text long text");
+        textMessage.setFocusable(false);
+        textMessage.setOpaque(false);
+        scrollMessage.setViewportView(textMessage);
 
-        spnAmount.setModel(new javax.swing.SpinnerNumberModel(1, null, null, 1));
+        editAmount.setModel(new javax.swing.SpinnerNumberModel(1, null, null, 1));
 
-        btnOk.setText("Choose");
-        btnOk.addActionListener(new java.awt.event.ActionListener() {
+        labelLimits.setText("min 1, max 123");
+
+        buttonOk.setText("Choose");
+        buttonOk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnOkActionPerformed(evt);
+                buttonOkActionPerformed(evt);
             }
         });
 
-        btnCancel.setText("Cancel");
-        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+        buttonCancel.setText("Cancel");
+        buttonCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelActionPerformed(evt);
+                buttonCancelActionPerformed(evt);
             }
         });
 
         javax.swing.GroupLayout panelCommandsLayout = new javax.swing.GroupLayout(panelCommands);
         panelCommands.setLayout(panelCommandsLayout);
         panelCommandsLayout.setHorizontalGroup(
-                panelCommandsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(panelCommandsLayout.createSequentialGroup()
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnOk)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnCancel)
-                                .addContainerGap())
+            panelCommandsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelCommandsLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(buttonOk)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(buttonCancel)
+                .addContainerGap())
         );
         panelCommandsLayout.setVerticalGroup(
-                panelCommandsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(panelCommandsLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(panelCommandsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(btnOk)
-                                        .addComponent(btnCancel))
-                                .addContainerGap())
+            panelCommandsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelCommandsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelCommandsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(buttonOk)
+                    .addComponent(buttonCancel))
+                .addContainerGap())
         );
 
-        getRootPane().setDefaultButton(btnOk);
+        getRootPane().setDefaultButton(buttonOk);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
-                                        .addComponent(panelCommands, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addComponent(spnAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(0, 0, Short.MAX_VALUE)))
-                                .addContainerGap())
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(scrollMessage, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
+                    .addComponent(panelCommands, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(editAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(labelLimits)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(spnAmount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(panelCommands, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap())
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(scrollMessage, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(editAmount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelLimits))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(panelCommands, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
+    private void buttonOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOkActionPerformed
         this.cancel = false;
         this.hideDialog();
-    }//GEN-LAST:event_btnOkActionPerformed
+    }//GEN-LAST:event_buttonOkActionPerformed
 
-    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+    private void buttonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelActionPerformed
         this.cancel = true;
         this.hideDialog();
-    }//GEN-LAST:event_btnCancelActionPerformed
+    }//GEN-LAST:event_buttonCancelActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCancel;
-    private javax.swing.JButton btnOk;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextPane lblMessage;
+    private javax.swing.JButton buttonCancel;
+    private javax.swing.JButton buttonOk;
+    private javax.swing.JSpinner editAmount;
+    private javax.swing.JLabel labelLimits;
     private javax.swing.JPanel panelCommands;
-    private javax.swing.JSpinner spnAmount;
+    private javax.swing.JScrollPane scrollMessage;
+    private mage.client.components.MageEditorPane textMessage;
     // End of variables declaration//GEN-END:variables
 
 }

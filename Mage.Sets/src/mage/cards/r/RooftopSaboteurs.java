@@ -1,7 +1,7 @@
 package mage.cards.r;
 
 import mage.MageInt;
-import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
+import mage.abilities.common.DealsCombatDamageToAPlayerOrBattleTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -30,9 +30,8 @@ public final class RooftopSaboteurs extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever Rooftop Saboteurs deals combat damage to a player or battle, draw a card.
-        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
-                new DrawCardSourceControllerEffect(1), false
-        ).setOrBattle(true));
+        this.addAbility(new DealsCombatDamageToAPlayerOrBattleTriggeredAbility(
+                new DrawCardSourceControllerEffect(1), false));
     }
 
     private RooftopSaboteurs(final RooftopSaboteurs card) {

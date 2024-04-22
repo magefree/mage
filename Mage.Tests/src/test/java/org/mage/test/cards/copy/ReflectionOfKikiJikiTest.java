@@ -25,23 +25,23 @@ public class ReflectionOfKikiJikiTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Blustersquall", 1);
 
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 1);
-        addCard(Zone.BATTLEFIELD, playerB, "Reflection of Kiki-Jiki", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Fable of the Mirror-Breaker", 1);
         // {T}: Draw two cards. Target opponent gains control of Humble Defector. Activate this ability only during your turn.
         addCard(Zone.BATTLEFIELD, playerB, "Humble Defector", 1);
 
-        castSpell(2, PhaseStep.UPKEEP, playerA, "Blustersquall", "Humble Defector"); // Tap nontoken Defector so only the Token can be used later
+        castSpell(6, PhaseStep.UPKEEP, playerA, "Blustersquall", "Humble Defector"); // Tap nontoken Defector so only the Token can be used later
 
-        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{1}, {T}: Create a token that's a copy of another target nonlegendary creature you control", "Humble Defector");
+        activateAbility(6, PhaseStep.PRECOMBAT_MAIN, playerB, "{1}, {T}: Create a token that's a copy of another target nonlegendary creature you control", "Humble Defector");
 
-        activateAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "{T}: Draw two cards. Target opponent gains control");
+        activateAbility(6, PhaseStep.POSTCOMBAT_MAIN, playerB, "{T}: Draw two cards. Target opponent gains control");
 
-        setStopAt(3, PhaseStep.UPKEEP);
+        setStopAt(7, PhaseStep.UPKEEP);
         execute();
 
         assertLife(playerA, 20);
         assertLife(playerB, 20);
 
-        assertHandCount(playerB, 3); // normal 3 draw from turn two + 2 from Defector
+        assertHandCount(playerB, 5); // normal 3 drawn from three turns + 2 from Defector
 
         assertGraveyardCount(playerA, "Blustersquall", 1);
         assertPermanentCount(playerB, "Humble Defector", 1);

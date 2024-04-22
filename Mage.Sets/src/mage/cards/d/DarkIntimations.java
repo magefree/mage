@@ -1,9 +1,6 @@
 
 package mage.cards.d;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
@@ -26,10 +23,14 @@ import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInYourGraveyard;
+import mage.target.common.TargetSacrifice;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class DarkIntimations extends CardImpl {
@@ -48,7 +49,10 @@ public final class DarkIntimations extends CardImpl {
         this.getSpellAbility().addEffect(new DarkIntimationsEffect());
 
         // When you cast a Bolas planeswalker spell, exile Dark Intimations from your graveyard. That planeswalker enters the battlefield with an additional loyalty counter on it.
-        this.addAbility(new SpellCastControllerTriggeredAbility(Zone.GRAVEYARD, new DarkIntimationsGraveyardEffect(), filter, false, true).setTriggerPhrase("When you cast a Bolas planeswalker spell, "));
+        this.addAbility(new SpellCastControllerTriggeredAbility(
+                Zone.GRAVEYARD, new DarkIntimationsGraveyardEffect(),
+                filter, false, SetTargetPointer.SPELL
+        ).setTriggerPhrase("When you cast a Bolas planeswalker spell, "));
     }
 
     private DarkIntimations(final DarkIntimations card) {
@@ -80,7 +84,7 @@ class DarkIntimationsEffect extends OneShotEffect {
         this.staticText = "Each opponent sacrifices a creature or planeswalker, then discards a card. You return a creature or planeswalker card from your graveyard to your hand, then draw a card";
     }
 
-    public DarkIntimationsEffect(final DarkIntimationsEffect effect) {
+    private DarkIntimationsEffect(final DarkIntimationsEffect effect) {
         super(effect);
     }
 
@@ -96,13 +100,12 @@ class DarkIntimationsEffect extends OneShotEffect {
             return false;
         }
         List<UUID> perms = new ArrayList<>();
-        filter.add(TargetController.YOU.getControllerPredicate());
         for (UUID playerId : game.getOpponents(source.getControllerId())) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
-                TargetPermanent target = new TargetPermanent(1, 1, filter, true);
+                TargetSacrifice target = new TargetSacrifice(filter);
                 if (target.canChoose(player.getId(), source, game)) {
-                    player.chooseTarget(Outcome.Sacrifice, target, source, game);
+                    player.choose(Outcome.Sacrifice, target, source, game);
                     perms.addAll(target.getTargets());
                 }
             }
@@ -135,12 +138,12 @@ class DarkIntimationsEffect extends OneShotEffect {
 
 class DarkIntimationsGraveyardEffect extends OneShotEffect {
 
-    public DarkIntimationsGraveyardEffect() {
+    DarkIntimationsGraveyardEffect() {
         super(Outcome.Benefit);
         this.staticText = "exile {this} from your graveyard. That planeswalker enters the battlefield with an additional loyalty counter on it";
     }
 
-    public DarkIntimationsGraveyardEffect(final DarkIntimationsGraveyardEffect effect) {
+    private DarkIntimationsGraveyardEffect(final DarkIntimationsGraveyardEffect effect) {
         super(effect);
     }
 
@@ -176,7 +179,7 @@ class DarkIntimationsReplacementEffect extends ReplacementEffectImpl {
         staticText = "That planeswalker enters the battlefield with an additional loyalty counter on it";
     }
 
-    DarkIntimationsReplacementEffect(DarkIntimationsReplacementEffect effect) {
+    private DarkIntimationsReplacementEffect(final DarkIntimationsReplacementEffect effect) {
         super(effect);
     }
 
@@ -188,13 +191,8 @@ class DarkIntimationsReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent creature = ((EntersTheBattlefieldEvent) event).getTarget();
-        return creature != null 
+        return creature != null
                 && event.getTargetId().equals(getTargetPointer().getFirst(game, source));
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
     }
 
     @Override

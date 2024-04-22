@@ -33,7 +33,7 @@ public final class AngelOfDespair extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AngelOfDespair (final AngelOfDespair card) {
+    private AngelOfDespair(final AngelOfDespair card) {
         super(card);
     }
 

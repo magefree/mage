@@ -1,7 +1,7 @@
 package mage.cards.w;
 
 import mage.MageInt;
-import mage.abilities.common.BecomesTargetTriggeredAbility;
+import mage.abilities.common.BecomesTargetSourceTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
@@ -29,11 +29,10 @@ public final class WardenOfTheWoods extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // Whenever Warden of the Woods becomes the target of a spell or ability an opponent controls, you may draw two cards.
-        this.addAbility(new BecomesTargetTriggeredAbility(
+        this.addAbility(new BecomesTargetSourceTriggeredAbility(
                 new DrawCardSourceControllerEffect(2),
                 StaticFilters.FILTER_SPELL_OR_ABILITY_OPPONENTS,
-                SetTargetPointer.NONE, true
-        ).setTriggerPhrase("Whenever {this} becomes the target of a spell or ability an opponent controls, "));
+                SetTargetPointer.NONE, true));
     }
 
     private WardenOfTheWoods(final WardenOfTheWoods card) {

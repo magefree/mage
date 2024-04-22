@@ -33,7 +33,7 @@ public final class DiveBomber extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // {tap}, Sacrifice Dive Bomber: Dive Bomber deals 2 damage to target attacking or blocking creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2, "it"), new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetCreaturePermanent(new FilterAttackingOrBlockingCreature()));
         this.addAbility(ability);

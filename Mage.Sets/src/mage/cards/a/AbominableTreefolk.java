@@ -35,7 +35,7 @@ public final class AbominableTreefolk extends CardImpl {
     public AbominableTreefolk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{U}");
 
-        this.addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
         this.subtype.add(SubType.TREEFOLK);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);

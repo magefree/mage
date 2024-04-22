@@ -38,7 +38,7 @@ public final class NuteGunray extends CardImpl {
 
     public NuteGunray(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{U}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.NEIMOIDIAN);
         this.subtype.add(SubType.ADVISOR);
         this.power = new MageInt(2);
@@ -50,7 +50,7 @@ public final class NuteGunray extends CardImpl {
         // {1}{T}, Sacrifice a non-token artifact: Create a 1/1 colorless Battle Droid artifact creature token.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new DroidToken()), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(1, 1, filter, false)));
+        ability.addCost(new SacrificeTargetCost(filter));
         this.addAbility(ability);
     }
 

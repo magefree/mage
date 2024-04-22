@@ -56,7 +56,7 @@ class WinterBlastEffect extends OneShotEffect {
         this.staticText = "Tap X target creatures. {this} deals 2 damage to each of those creatures with flying.";
     }
 
-    WinterBlastEffect(final WinterBlastEffect effect) {
+    private WinterBlastEffect(final WinterBlastEffect effect) {
         super(effect);
     }
 
@@ -68,7 +68,7 @@ class WinterBlastEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         int affectedTargets = 0;
-        for (UUID permanentId : targetPointer.getTargets(game, source)) {
+        for (UUID permanentId : getTargetPointer().getTargets(game, source)) {
             Permanent permanent = game.getPermanent(permanentId);
             if (permanent != null) {
                 permanent.tap(source, game);

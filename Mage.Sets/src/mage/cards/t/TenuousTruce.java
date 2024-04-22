@@ -68,7 +68,7 @@ class TenuousTruceAttackTriggeredAbility extends TriggeredAbilityImpl {
                 "or when they attack you or a planeswalker you control, ");
     }
 
-    TenuousTruceAttackTriggeredAbility(final TenuousTruceAttackTriggeredAbility ability) {
+    private TenuousTruceAttackTriggeredAbility(final TenuousTruceAttackTriggeredAbility ability) {
         super(ability);
     }
 

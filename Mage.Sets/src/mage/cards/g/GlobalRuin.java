@@ -46,12 +46,12 @@ public final class GlobalRuin extends CardImpl {
 
 class GlobalRuinDestroyLandEffect extends OneShotEffect {
 
-    public GlobalRuinDestroyLandEffect() {
+    GlobalRuinDestroyLandEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "Each player chooses from the lands they control a land of each basic land type, then sacrifices the rest";
     }
 
-    public GlobalRuinDestroyLandEffect(final GlobalRuinDestroyLandEffect effect) {
+    private GlobalRuinDestroyLandEffect(final GlobalRuinDestroyLandEffect effect) {
         super(effect);
     }
 

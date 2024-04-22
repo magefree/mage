@@ -37,7 +37,7 @@ public class DamageMultiEffect extends OneShotEffect {
         this.amount = amount;
     }
 
-    public DamageMultiEffect(final DamageMultiEffect effect) {
+    protected DamageMultiEffect(final DamageMultiEffect effect) {
         super(effect);
         this.damagedSet.addAll(effect.damagedSet);
         this.amount = effect.amount;

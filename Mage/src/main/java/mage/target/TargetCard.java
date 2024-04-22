@@ -40,7 +40,7 @@ public class TargetCard extends TargetObject {
         this.targetName = filter.getMessage();
     }
 
-    public TargetCard(final TargetCard target) {
+    protected TargetCard(final TargetCard target) {
         super(target);
         this.filter = target.filter.copy();
     }

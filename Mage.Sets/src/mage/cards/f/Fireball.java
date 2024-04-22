@@ -47,31 +47,31 @@ enum FireballAdjuster implements CostAdjuster {
     public void adjustCosts(Ability ability, Game game) {
         int numTargets = ability.getTargets().isEmpty() ? 0 : ability.getTargets().get(0).getTargets().size();
         if (numTargets > 1) {
-            ability.getManaCostsToPay().add(new GenericManaCost(numTargets - 1));
+            ability.addManaCostsToPay(new GenericManaCost(numTargets - 1));
         }
     }
 }
 
 class FireballEffect extends OneShotEffect {
 
-    public FireballEffect() {
+    FireballEffect() {
         super(Outcome.Damage);
         staticText = "this spell costs {1} more to cast for each target beyond the first.<br> {this} deals " +
                 "X damage divided evenly, rounded down, among any number of targets";
     }
 
-    public FireballEffect(final FireballEffect effect) {
+    private FireballEffect(final FireballEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int numTargets = targetPointer.getTargets(game, source).size();
+        int numTargets = getTargetPointer().getTargets(game, source).size();
         int damage = source.getManaCostsToPay().getX();
         if (numTargets > 0) {
             int damagePer = damage / numTargets;
             if (damagePer > 0) {
-                for (UUID targetId : targetPointer.getTargets(game, source)) {
+                for (UUID targetId : getTargetPointer().getTargets(game, source)) {
                     Permanent permanent = game.getPermanent(targetId);
                     if (permanent != null) {
                         permanent.damage(damagePer, source.getSourceId(), source, game, false, true);
@@ -101,7 +101,7 @@ class FireballTargetCreatureOrPlayer extends TargetAnyTarget {
         super(minNumTargets, maxNumTargets);
     }
 
-    public FireballTargetCreatureOrPlayer(final FireballTargetCreatureOrPlayer target) {
+    private FireballTargetCreatureOrPlayer(final FireballTargetCreatureOrPlayer target) {
         super(target);
     }
 

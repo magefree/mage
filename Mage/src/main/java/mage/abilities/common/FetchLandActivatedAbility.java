@@ -7,7 +7,6 @@ import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
-import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
@@ -24,8 +23,7 @@ public class FetchLandActivatedAbility extends ActivatedAbilityImpl {
     }
 
     public FetchLandActivatedAbility(boolean withDamage, SubType subType1, SubType subType2) {
-        super(Zone.BATTLEFIELD, null);
-        addCost(new TapSourceCost());
+        super(Zone.BATTLEFIELD, null, new TapSourceCost());
         if (withDamage) {
             addCost(new PayLifeCost(1));
         }
@@ -33,7 +31,7 @@ public class FetchLandActivatedAbility extends ActivatedAbilityImpl {
         FilterCard filter = new FilterCard(subType1.getDescription() + " or " + subType2.getDescription() + " card");
         filter.add(Predicates.or(subType1.getPredicate(), subType2.getPredicate()));
         TargetCardInLibrary target = new TargetCardInLibrary(filter);
-        addEffect(new SearchLibraryPutInPlayEffect(target, false, true, Outcome.PutLandInPlay));
+        addEffect(new SearchLibraryPutInPlayEffect(target, false));
     }
 
     private FetchLandActivatedAbility(FetchLandActivatedAbility ability) {

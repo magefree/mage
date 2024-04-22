@@ -34,7 +34,7 @@ public abstract class DraftImpl implements Draft {
     protected int cardNum = 1; // starts with card number 1, increases by +1 after each picking
     protected TimingOption timing;
     protected int boosterLoadingCounter; // number of times the boosters have been sent to players until all are confirmed to have received them
-    protected final int BOOSTER_LOADING_INTERVAL = 3; // interval in seconds
+    protected final int BOOSTER_LOADING_INTERVAL = 2; // interval in seconds
 
     protected boolean abort = false;
     protected boolean started = false;
@@ -158,9 +158,11 @@ public abstract class DraftImpl implements Draft {
 
     @Override
     public void autoPick(UUID playerId) {
-        List<Card> booster = players.get(playerId).getBooster();
-        if (booster.size() > 0) {
-            this.addPick(playerId, booster.get(booster.size() - 1).getId(), null);
+        if (players.containsKey(playerId)) {
+            List<Card> booster = players.get(playerId).getBooster();
+            if (booster.size() > 0) {
+                this.addPick(playerId, booster.get(booster.size() - 1).getId(), null);
+            }
         }
     }
 
@@ -311,6 +313,11 @@ public abstract class DraftImpl implements Draft {
     @Override
     public void firePickCardEvent(UUID playerId) {
         DraftPlayer player = players.get(playerId);
+        playerQueryEventSource.pickCard(playerId, "Pick card", player.getBooster(), getPickTimeout());
+    }
+
+    @Override
+    public int getPickTimeout() {
         int cardNum = Math.min(15, this.cardNum);
         int time = timing.getPickTimeout(cardNum);
         // if the pack is re-sent to a player because they haven't been able to successfully load it, the pick time is reduced appropriately because of the elapsed time
@@ -318,7 +325,7 @@ public abstract class DraftImpl implements Draft {
         if (time > 0) {
             time = Math.max(1, time - boosterLoadingCounter * BOOSTER_LOADING_INTERVAL);
         }
-        playerQueryEventSource.pickCard(playerId, "Pick card", player.getBooster(), time);
+        return time;
     }
 
     @Override

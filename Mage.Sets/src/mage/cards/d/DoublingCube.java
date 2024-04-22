@@ -51,7 +51,7 @@ class DoublingCubeEffect extends ManaEffect {
         staticText = "Double the amount of each type of unspent mana you have";
     }
 
-    DoublingCubeEffect(final DoublingCubeEffect effect) {
+    private DoublingCubeEffect(final DoublingCubeEffect effect) {
         super(effect);
     }
 

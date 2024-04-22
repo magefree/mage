@@ -26,7 +26,7 @@ public final class NivMizzetParun extends CardImpl {
     public NivMizzetParun(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}{U}{U}{R}{R}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DRAGON);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(5);

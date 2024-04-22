@@ -30,7 +30,7 @@ public final class DoricOwlbearAvenger extends CardImpl {
     public DoricOwlbearAvenger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.BIRD);
         this.subtype.add(SubType.BEAR);
         this.power = new MageInt(6);

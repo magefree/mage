@@ -13,6 +13,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.target.Target;
@@ -22,11 +23,6 @@ import mage.target.TargetPermanent;
  * @author tcontis
  */
 public final class WormfangNewt extends CardImpl {
-    private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent();
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
 
     public WormfangNewt(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
@@ -39,7 +35,7 @@ public final class WormfangNewt extends CardImpl {
 
         // When Wormfang Turtle enters the battlefield, exile a land you control.
         Ability ability1 = new EntersBattlefieldTriggeredAbility(new ExileTargetForSourceEffect(), false);
-        Target target = new TargetPermanent(filter);
+        Target target = new TargetPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_A_LAND).withNotTarget(true);
         ability1.addTarget(target);
         this.addAbility(ability1);
 

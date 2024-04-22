@@ -4,13 +4,13 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.DamagedBatchEvent;
+import mage.game.events.DamagedBatchAllEvent;
 import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
 /**
- * @author TheElk801
+ * @author TheElk801, xenohedron
  */
 public class DealsCombatDamageEquippedTriggeredAbility extends TriggeredAbilityImpl {
 
@@ -23,7 +23,7 @@ public class DealsCombatDamageEquippedTriggeredAbility extends TriggeredAbilityI
         setTriggerPhrase("Whenever equipped creature deals combat damage, ");
     }
 
-    public DealsCombatDamageEquippedTriggeredAbility(final DealsCombatDamageEquippedTriggeredAbility ability) {
+    protected DealsCombatDamageEquippedTriggeredAbility(final DealsCombatDamageEquippedTriggeredAbility ability) {
         super(ability);
     }
 
@@ -34,8 +34,7 @@ public class DealsCombatDamageEquippedTriggeredAbility extends TriggeredAbilityI
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER_BATCH
-                || event.getType() == GameEvent.EventType.DAMAGED_PERMANENT_BATCH;
+        return event.getType() == GameEvent.EventType.DAMAGED_BATCH_FOR_ALL;
     }
 
     @Override
@@ -44,7 +43,7 @@ public class DealsCombatDamageEquippedTriggeredAbility extends TriggeredAbilityI
         if (sourcePermanent == null || sourcePermanent.getAttachedTo() == null) {
             return false;
         }
-        int amount = ((DamagedBatchEvent) event)
+        int amount = ((DamagedBatchAllEvent) event)
                 .getEvents()
                 .stream()
                 .filter(DamagedEvent::isCombatDamage)

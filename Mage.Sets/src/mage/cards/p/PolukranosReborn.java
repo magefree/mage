@@ -22,7 +22,7 @@ public final class PolukranosReborn extends CardImpl {
     public PolukranosReborn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}{G}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HYDRA);
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);

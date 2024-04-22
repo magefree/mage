@@ -58,7 +58,7 @@ class WireSurgeonsEffect extends ContinuousEffectImpl {
                 "Its encore cost is equal to its mana cost.";
     }
 
-    public WireSurgeonsEffect(final WireSurgeonsEffect effect) {
+    private WireSurgeonsEffect(final WireSurgeonsEffect effect) {
         super(effect);
     }
 

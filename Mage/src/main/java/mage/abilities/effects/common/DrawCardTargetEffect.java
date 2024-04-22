@@ -1,6 +1,7 @@
 package mage.abilities.effects.common;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -9,12 +10,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.Target;
-import mage.target.targetpointer.SecondTargetPointer;
 import mage.util.CardUtil;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class DrawCardTargetEffect extends OneShotEffect {
@@ -46,7 +44,7 @@ public class DrawCardTargetEffect extends OneShotEffect {
         this.upTo = upto;
     }
 
-    public DrawCardTargetEffect(final DrawCardTargetEffect effect) {
+    protected DrawCardTargetEffect(final DrawCardTargetEffect effect) {
         super(effect);
         this.amount = effect.amount.copy();
         this.optional = effect.optional;
@@ -82,18 +80,7 @@ public class DrawCardTargetEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        StringBuilder sb = new StringBuilder();
-        if (!mode.getTargets().isEmpty()) {
-            Target target;
-            if (targetPointer instanceof SecondTargetPointer && mode.getTargets().size() > 1) {
-                target = mode.getTargets().get(1);
-            } else {
-                target = mode.getTargets().get(0);
-            }
-            sb.append("target ").append(target.getTargetName());
-        } else {
-            sb.append("that player");
-        }
+        StringBuilder sb = new StringBuilder(getTargetPointer().describeTargets(mode.getTargets(), "that player"));
         if (optional) {
             sb.append(" may draw ");
         } else {

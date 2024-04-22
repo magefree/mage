@@ -27,7 +27,7 @@ public final class GodEternalKefnet extends CardImpl {
 
     public GodEternalKefnet(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ZOMBIE);
         this.subtype.add(SubType.GOD);
 
@@ -57,13 +57,13 @@ public final class GodEternalKefnet extends CardImpl {
 
 class GodEternalKefnetDrawCardReplacementEffect extends ReplacementEffectImpl {
 
-    public GodEternalKefnetDrawCardReplacementEffect() {
+    GodEternalKefnetDrawCardReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Neutral);
         this.staticText = "You may reveal the first card you draw each turn as you draw it. Whenever you reveal an instant "
                 + "or sorcery card this way, copy that card and you may cast the copy. That copy costs {2} less to cast";
     }
 
-    public GodEternalKefnetDrawCardReplacementEffect(final GodEternalKefnetDrawCardReplacementEffect effect) {
+    private GodEternalKefnetDrawCardReplacementEffect(final GodEternalKefnetDrawCardReplacementEffect effect) {
         super(effect);
     }
 
@@ -96,14 +96,13 @@ class GodEternalKefnetDrawCardReplacementEffect extends ReplacementEffectImpl {
             if (blueprint instanceof SplitCard) {
                 ((SplitCard) blueprint).getLeftHalfCard().addAbility(new SimpleStaticAbility(Zone.ALL, new SpellCostReductionSourceEffect(2)));
                 ((SplitCard) blueprint).getRightHalfCard().addAbility(new SimpleStaticAbility(Zone.ALL, new SpellCostReductionSourceEffect(2)));
-            } else if (blueprint instanceof ModalDoubleFacesCard) {
-                ((ModalDoubleFacesCard) blueprint).getLeftHalfCard().addAbility(new SimpleStaticAbility(Zone.ALL, new SpellCostReductionSourceEffect(2)));
-                ((ModalDoubleFacesCard) blueprint).getRightHalfCard().addAbility(new SimpleStaticAbility(Zone.ALL, new SpellCostReductionSourceEffect(2)));
+            } else if (blueprint instanceof ModalDoubleFacedCard) {
+                ((ModalDoubleFacedCard) blueprint).getLeftHalfCard().addAbility(new SimpleStaticAbility(Zone.ALL, new SpellCostReductionSourceEffect(2)));
+                ((ModalDoubleFacedCard) blueprint).getRightHalfCard().addAbility(new SimpleStaticAbility(Zone.ALL, new SpellCostReductionSourceEffect(2)));
             } else {
                 blueprint.addAbility(new SimpleStaticAbility(Zone.ALL, new SpellCostReductionSourceEffect(2)));
             }
             Card copiedCard = game.copyCard(blueprint, source, source.getControllerId());
-            you.moveCardToHandWithInfo(copiedCard, source, game, true); // The copy is created in and cast from your hand. (2019-05-03)
             game.getState().setValue("PlayFromNotOwnHandZone" + copiedCard.getId(), Boolean.TRUE);
             you.cast(you.chooseAbilityForCast(copiedCard, game, false), game, false, new ApprovingObject(source, game));
             game.getState().setValue("PlayFromNotOwnHandZone" + copiedCard.getId(), null);

@@ -1,7 +1,5 @@
 package mage.cards.k;
 
-import java.util.UUID;
-
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldThisOrAnotherTriggeredAbility;
@@ -11,9 +9,9 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
-import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
@@ -22,6 +20,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.CatToken;
 import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -39,7 +39,7 @@ public final class KembaKhaEnduring extends CardImpl {
     public KembaKhaEnduring(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.CAT);
         this.subtype.add(SubType.CLERIC);
         this.power = new MageInt(2);
@@ -47,7 +47,7 @@ public final class KembaKhaEnduring extends CardImpl {
 
         // Whenever Kemba, Kha Enduring or another Cat enters the battlefield under your control, attach up to one target Equipment you control to that creature.
         Ability ability = new EntersBattlefieldThisOrAnotherTriggeredAbility(
-                new KembaKhaEnduringEffect(), filter, true, true
+                new KembaKhaEnduringEffect(), filter, false, true
         );
         ability.addTarget(new TargetPermanent(0, 1, filter2));
         this.addAbility(ability);

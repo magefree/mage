@@ -55,7 +55,7 @@ class TaskMageAssemblyStateTriggeredAbility extends StateTriggeredAbility {
         setTriggerPhrase("When there are no creatures on the battlefield, ");
     }
 
-    public TaskMageAssemblyStateTriggeredAbility(final TaskMageAssemblyStateTriggeredAbility ability) {
+    private TaskMageAssemblyStateTriggeredAbility(final TaskMageAssemblyStateTriggeredAbility ability) {
         super(ability);
     }
 

@@ -49,12 +49,12 @@ public final class FightOrFlight extends CardImpl {
 
 class FightOrFlightEffect extends OneShotEffect {
 
-    public FightOrFlightEffect() {
+    FightOrFlightEffect() {
         super(Outcome.Detriment);
         this.staticText = "separate all creatures that player controls into two piles. Only creatures in the pile of their choice can attack this turn";
     }
 
-    public FightOrFlightEffect(final FightOrFlightEffect effect) {
+    private FightOrFlightEffect(final FightOrFlightEffect effect) {
         super(effect);
     }
 

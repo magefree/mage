@@ -39,7 +39,7 @@ public final class ImotekhTheStormlord extends CardImpl {
     public ImotekhTheStormlord(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}{B}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.NECRON);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

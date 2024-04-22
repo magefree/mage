@@ -44,7 +44,7 @@ public final class NicolBolasGodPharaoh extends CardImpl {
 
     public NicolBolasGodPharaoh(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{U}{B}{R}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.BOLAS);
 
         this.setStartingLoyalty(7);
@@ -123,6 +123,7 @@ class NicolBolasGodPharaohPlusOneEffect extends OneShotEffect {
         for (UUID opponentId : game.getOpponents(source.getControllerId())) {
             Player opponent = game.getPlayer(opponentId);
             if (opponent == null || !cardsToExile.containsKey(opponentId)) {
+                continue;
             }
             cardsOpponentsChoseToExile.addAll(cardsToExile.get(opponentId));
             opponent.moveCards(cardsOpponentsChoseToExile, Zone.EXILED, source, game);
@@ -152,7 +153,7 @@ class NicolBolasGodPharaohPlusTwoEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player opponent = game.getPlayer(targetPointer.getFirst(game, source));
+        Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (opponent == null) {
             return false;
         }

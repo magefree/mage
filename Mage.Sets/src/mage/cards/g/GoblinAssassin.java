@@ -10,10 +10,12 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetSacrifice;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +37,7 @@ public final class GoblinAssassin extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever Goblin Assassin or another Goblin enters the battlefield, each player flips a coin. Each player whose coin comes up tails sacrifices a creature.
-        this.addAbility(new EntersBattlefieldThisOrAnotherTriggeredAbility(new GoblinAssassinTriggeredEffect(), filter));
+        this.addAbility(new EntersBattlefieldThisOrAnotherTriggeredAbility(new GoblinAssassinTriggeredEffect(), filter, false, false));
     }
 
     private GoblinAssassin(final GoblinAssassin card) {
@@ -67,10 +69,9 @@ class GoblinAssassinTriggeredEffect extends OneShotEffect {
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null && !player.flipCoin(source, game, false)) {
-                    TargetControlledCreaturePermanent target = new TargetControlledCreaturePermanent();
-                    target.setNotTarget(true);
+                    TargetSacrifice target = new TargetSacrifice(StaticFilters.FILTER_PERMANENT_A_CREATURE);
                     if (target.canChoose(player.getId(), source, game)) {
-                        player.chooseTarget(Outcome.Sacrifice, target, source, game);
+                        player.choose(Outcome.Sacrifice, target, source, game);
                         perms.addAll(target.getTargets());
                     }
                 }

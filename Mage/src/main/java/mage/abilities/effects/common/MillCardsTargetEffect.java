@@ -26,7 +26,7 @@ public class MillCardsTargetEffect extends OneShotEffect {
         this.numberCards = numberCards;
     }
 
-    public MillCardsTargetEffect(final MillCardsTargetEffect effect) {
+    protected MillCardsTargetEffect(final MillCardsTargetEffect effect) {
         super(effect);
         this.numberCards = effect.numberCards;
     }
@@ -38,7 +38,7 @@ public class MillCardsTargetEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (player != null) {
             player.millCards(numberCards.calculate(game, source, this), source, game);
             return true;
@@ -51,19 +51,19 @@ public class MillCardsTargetEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        StringBuilder sb = new StringBuilder();
-        if (!mode.getTargets().isEmpty()) {
-            sb.append("target ");
-            sb.append(mode.getTargets().get(0).getTargetName());
-        } else {
-            sb.append("that player");
-        }
+        StringBuilder sb = new StringBuilder(getTargetPointer().describeTargets(mode.getTargets(), "that player"));
         sb.append(" mills ");
-        if (numberCards.toString().equals("1")) {
-            sb.append("a card");
+        String message = numberCards.getMessage();
+        if (message.isEmpty()) {
+            if (numberCards.toString().equals("1")) {
+                sb.append("a card");
+            } else {
+                sb.append(CardUtil.numberToText(numberCards.toString()));
+                sb.append(" cards");
+            }
         } else {
-            sb.append(CardUtil.numberToText(numberCards.toString()));
-            sb.append(" cards");
+            sb.append("X cards, where X is the number of ");
+            sb.append(message);
         }
         return sb.toString();
     }

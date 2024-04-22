@@ -1,5 +1,6 @@
 package mage.cards.h;
 
+import mage.MageIdentifier;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -37,7 +38,9 @@ public final class Helbrute extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // Sarcophagus — You may cast Helbrute from your graveyard by exiling another creature card from your graveyard in addition to paying its other costs.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new HelbruteEffect()).withFlavorWord("Sarcophagus"));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new HelbruteEffect())
+                .withFlavorWord("Sarcophagus")
+                .setIdentifier(MageIdentifier.HelbruteAlternateCast));
     }
 
     private Helbrute(final Helbrute card) {
@@ -59,7 +62,7 @@ class HelbruteEffect extends AsThoughEffectImpl {
     }
 
     public HelbruteEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
         this.staticText = "you may cast {this} from your graveyard by exiling another " +
                 "creature card from your graveyard in addition to paying its other costs.";
     }
@@ -91,7 +94,10 @@ class HelbruteEffect extends AsThoughEffectImpl {
         }
         Costs<Cost> costs = new CostsImpl<>();
         costs.add(new ExileFromGraveCost(new TargetCardInYourGraveyard(filter)));
-        controller.setCastSourceIdWithAlternateMana(objectId, new ManaCostsImpl<>("{3}{B}{R}"), costs);
+        controller.setCastSourceIdWithAlternateMana(
+                objectId, new ManaCostsImpl<>("{3}{B}{R}"), costs,
+                MageIdentifier.HelbruteAlternateCast
+        );
         return true;
     }
 }

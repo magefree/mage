@@ -35,7 +35,7 @@ public final class YawgmothThranPhysician extends CardImpl {
     public YawgmothThranPhysician(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.CLERIC);
         this.power = new MageInt(2);
@@ -48,9 +48,7 @@ public final class YawgmothThranPhysician extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 new AddCountersTargetEffect(CounterType.M1M1.createInstance()), new PayLifeCost(1)
         );
-        ability.addCost(new SacrificeTargetCost(
-                new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE)
-        ));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE));
         ability.addEffect(new DrawCardSourceControllerEffect(1).concatBy("and"));
         ability.addTarget(new TargetCreaturePermanent(0, 1));
         this.addAbility(ability);

@@ -93,7 +93,7 @@ public class BestowAbility extends SpellAbility {
         addSubAbility(ability);
     }
 
-    public BestowAbility(final BestowAbility ability) {
+    protected BestowAbility(final BestowAbility ability) {
         super(ability);
     }
 
@@ -112,10 +112,10 @@ public class BestowAbility extends SpellAbility {
         return "Bestow " + getManaCostsToPay().getText() + " <i>(If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached to a creature.)</i>";
     }
 
-    static public void becomeCreature(Permanent permanent, Game game) {
+    public static void becomeCreature(Permanent permanent, Game game) {
         // permanently changes to the object
         if (permanent != null) {
-            MageObject basicObject = permanent.getBasicMageObject(game);
+            MageObject basicObject = permanent.getBasicMageObject();
             if (basicObject != null) {
                 game.checkStateAndTriggered();  // Bug #8157
                 basicObject.getSubtype().remove(SubType.AURA);
@@ -126,7 +126,7 @@ public class BestowAbility extends SpellAbility {
         }
     }
 
-    static public void becomeAura(Card card) {
+    public static void becomeAura(Card card) {
         // permanently changes to the object
         if (card != null) {
             card.addSubType(SubType.AURA);
@@ -142,7 +142,7 @@ class BestowEntersBattlefieldEffect extends ReplacementEffectImpl {
         super(Duration.WhileOnBattlefield, Outcome.Neutral);
     }
 
-    public BestowEntersBattlefieldEffect(final BestowEntersBattlefieldEffect effect) {
+    protected BestowEntersBattlefieldEffect(final BestowEntersBattlefieldEffect effect) {
         super(effect);
     }
 
@@ -164,7 +164,7 @@ class BestowEntersBattlefieldEffect extends ReplacementEffectImpl {
         }
 
         // change types permanently
-        MageObject basicObject = bestowPermanent.getBasicMageObject(game);
+        MageObject basicObject = bestowPermanent.getBasicMageObject();
         if (basicObject != null && !basicObject.getSubtype().contains(SubType.AURA)) {
             basicObject.addSubType(SubType.AURA);
             basicObject.removeCardType(CardType.CREATURE);

@@ -9,7 +9,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 
 /**
- *
  * @author LevelX2
  */
 
@@ -20,7 +19,7 @@ public class DealsDamageGainLifeSourceTriggeredAbility extends TriggeredAbilityI
         setTriggerPhrase("Whenever {this} deals damage, ");
     }
 
-    public DealsDamageGainLifeSourceTriggeredAbility(final DealsDamageGainLifeSourceTriggeredAbility ability) {
+    protected DealsDamageGainLifeSourceTriggeredAbility(final DealsDamageGainLifeSourceTriggeredAbility ability) {
         super(ability);
     }
 
@@ -28,10 +27,11 @@ public class DealsDamageGainLifeSourceTriggeredAbility extends TriggeredAbilityI
     public DealsDamageGainLifeSourceTriggeredAbility copy() {
         return new DealsDamageGainLifeSourceTriggeredAbility(this);
     }
+
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.DAMAGED_PERMANENT
-                || event.getType() ==  GameEvent.EventType.DAMAGED_PLAYER;
+                || event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
     }
 
     @Override

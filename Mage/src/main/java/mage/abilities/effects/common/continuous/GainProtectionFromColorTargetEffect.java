@@ -33,7 +33,7 @@ public class GainProtectionFromColorTargetEffect extends GainAbilityTargetEffect
         }
     }
 
-    public GainProtectionFromColorTargetEffect(final GainProtectionFromColorTargetEffect effect) {
+    protected GainProtectionFromColorTargetEffect(final GainProtectionFromColorTargetEffect effect) {
         super(effect);
         this.choice = effect.choice.copy();
     }
@@ -45,7 +45,7 @@ public class GainProtectionFromColorTargetEffect extends GainAbilityTargetEffect
 
     @Override
     public void init(Ability source, Game game) {
-        super.init(source, game); //To change body of generated methods, choose Tools | Templates.
+        super.init(source, game);
         MageObject sourceObject = game.getObject(source);
         Player controller = game.getPlayer(source.getControllerId());
         if (sourceObject != null && controller != null) {
@@ -76,20 +76,7 @@ public class GainProtectionFromColorTargetEffect extends GainAbilityTargetEffect
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-
-        StringBuilder sb = new StringBuilder();
-        if (!mode.getTargets().isEmpty()) {
-            if (mode.getTargets().get(0).getTargetName().contains("target")) {
-                sb.append(mode.getTargets().get(0).getTargetName());
-            } else {
-                sb.append("target ").append(mode.getTargets().get(0).getTargetName());
-            }
-        }
-        if (sb.length() > 0) {
-            sb.append(" ");
-        }
-        sb.append("gains protection from the color of your choice " + duration.toString());
-
-        return sb.toString();
+        return getTargetPointer().describeTargets(mode.getTargets(), "it")
+                + " gains protection from the color of your choice " + duration.toString();
     }
 }

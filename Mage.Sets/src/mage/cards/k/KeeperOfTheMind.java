@@ -29,15 +29,17 @@ package mage.cards.k;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.condition.Condition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.constants.Zone;
 import mage.filter.FilterOpponent;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
@@ -46,10 +48,11 @@ import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.targetadjustment.TargetAdjuster;
 
+import java.util.Objects;
 import java.util.UUID;
 
 /**
- * @author jeffwadsworth
+ * @author jeffwadsworth, Susucr
  */
 public class KeeperOfTheMind extends CardImpl {
 
@@ -64,7 +67,10 @@ public class KeeperOfTheMind extends CardImpl {
         // {U}, {tap}: Choose target opponent who had at least two more cards in hand than you did as you activated this ability. Draw a card.
         Effect effect = new DrawCardSourceControllerEffect(1);
         effect.setText("Choose target opponent who had at least two more cards in hand than you did as you activated this ability. Draw a card.");
-        Ability ability = new SimpleActivatedAbility(effect, new ManaCostsImpl<>("{U}"));
+        Ability ability = new ConditionalActivatedAbility(
+                Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{U}"), KeeperOfTheMindCondition.instance,
+                "{U}, {T}: Choose target opponent who had at least two more cards in "
+                        + "hand than you did as you activated this ability. Draw a card.");
         ability.addCost(new TapSourceCost());
         ability.setTargetAdjuster(KeeperOfTheMindAdjuster.instance);
         this.addAbility(ability);
@@ -83,44 +89,62 @@ public class KeeperOfTheMind extends CardImpl {
 enum KeeperOfTheMindAdjuster implements TargetAdjuster {
     instance;
 
-    private static final FilterOpponent filter = new FilterOpponent();
-
-    static {
-        filter.add(new KeeperOfTheMindPredicate());
-    }
-
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        Player activePlayer = game.getPlayer(game.getActivePlayerId());
-        if (activePlayer == null) {
+        Player controller = game.getPlayer(ability.getControllerId());
+        if (controller == null) {
             return;
         }
         ability.getTargets().clear();
+        FilterOpponent filter = new FilterOpponent("opponent with two or more card in hand than you did as you activated this ability");
+        filter.add(new KeeperOfTheMindPredicate(controller.getHand().size()));
         TargetPlayer target = new TargetPlayer(1, 1, false, filter);
-        target.setTargetController(activePlayer.getId());
+        target.setTargetController(controller.getId());
         ability.addTarget(target);
     }
 }
 
 class KeeperOfTheMindPredicate implements ObjectSourcePlayerPredicate<Player> {
 
+    private final int controllerHandSize;
+
+    KeeperOfTheMindPredicate(int controllerHandSize) {
+        this.controllerHandSize = controllerHandSize;
+    }
+
     @Override
     public boolean apply(ObjectSourcePlayer<Player> input, Game game) {
         Player targetPlayer = input.getObject();
-        Player firstPlayer = game.getPlayer(game.getActivePlayerId());
-        if (targetPlayer == null
-                || firstPlayer == null
-                || !firstPlayer.hasOpponent(targetPlayer.getId(), game)) {
+        if (targetPlayer == null) {
             return false;
         }
         int countHandTargetPlayer = targetPlayer.getHand().size();
-        int countHandFirstPlayer = firstPlayer.getHand().size();
 
-        return countHandTargetPlayer - 2 >= countHandFirstPlayer;
+        return countHandTargetPlayer - 2 >= controllerHandSize;
     }
 
     @Override
     public String toString() {
         return "opponent who had at least two more cards in hand than you did as you activated this ability";
+    }
+}
+
+// Is there an opponent with 2 cards in hand for even try activation?
+enum KeeperOfTheMindCondition implements Condition {
+    instance;
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
+            return false;
+        }
+
+        int handSize = controller.getHand().size();
+        return game.getOpponents(controller.getId())
+                .stream()
+                .map(game::getPlayer)
+                .filter(Objects::nonNull)
+                .anyMatch(player -> player.getHand().size() - 2 >= handSize);
     }
 }

@@ -1,7 +1,7 @@
 package org.mage.test.serverside.cheats;
 
 import mage.constants.*;
-import mage.server.util.SystemUtil;
+import mage.utils.SystemUtil;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
@@ -55,8 +55,8 @@ public class LoadCheatsTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        setChoice(playerA, "3");
-        SystemUtil.addCardsForTesting(currentGame, commandsFile, playerA);
+        setChoice(playerA, "5"); // choose [group 3]: 5 = 2 default menus + 3 group
+        SystemUtil.executeCheatCommands(currentGame, commandsFile, playerA);
 
         assertHandCount(playerA, "Razorclaw Bear", 1);
         assertPermanentCount(playerA, "Mountain", 3);

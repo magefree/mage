@@ -41,12 +41,12 @@ public final class Crumble extends CardImpl {
 
 class CrumbleEffect extends OneShotEffect {
 
-    public CrumbleEffect() {
+    CrumbleEffect() {
         super(Outcome.GainLife);
         staticText = "That artifact's controller gains life equal to its mana value";
     }
 
-    public CrumbleEffect(final CrumbleEffect effect) {
+    private CrumbleEffect(final CrumbleEffect effect) {
         super(effect);
     }
 

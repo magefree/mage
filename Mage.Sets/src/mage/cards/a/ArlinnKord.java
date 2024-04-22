@@ -28,7 +28,7 @@ public final class ArlinnKord extends CardImpl {
 
     public ArlinnKord(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{2}{R}{G}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ARLINN);
 
         this.secondSideCardClazz = mage.cards.a.ArlinnEmbracedByTheMoon.class;

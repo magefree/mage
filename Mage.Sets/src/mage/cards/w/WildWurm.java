@@ -44,12 +44,12 @@ public final class WildWurm extends CardImpl {
 
 class WildWurmEffect extends OneShotEffect {
 
-    public WildWurmEffect() {
+    WildWurmEffect() {
         super(Outcome.Damage);
         staticText = "flip a coin. If you lose the flip, return {this} to its owner's hand";
     }
 
-    public WildWurmEffect(WildWurmEffect effect) {
+    private WildWurmEffect(final WildWurmEffect effect) {
         super(effect);
     }
 

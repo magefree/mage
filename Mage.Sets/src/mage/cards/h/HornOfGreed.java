@@ -43,7 +43,7 @@ class HornOfGreedAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever a player plays a land, ");
     }
 
-    public HornOfGreedAbility(final HornOfGreedAbility ability) {
+    private HornOfGreedAbility(final HornOfGreedAbility ability) {
         super(ability);
     }
 

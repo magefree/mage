@@ -20,8 +20,6 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
 
     private static final ThreadLocalStringBuilder threadLocalBuilder = new ThreadLocalStringBuilder(200);
 
-    private UUID ownerId;
-
     public CardsImpl() {
     }
 
@@ -32,11 +30,11 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
     }
 
     public CardsImpl(List<? extends Card> cards) {
-        this.addAll(cards);
+        this.addAllCards(cards);
     }
 
     public CardsImpl(Set<? extends Card> cards) {
-        this.addAll(cards);
+        this.addAllCards(cards);
     }
 
     public CardsImpl(Collection<UUID> cardIds) {
@@ -45,9 +43,8 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
         }
     }
 
-    public CardsImpl(final CardsImpl cards) {
+    protected CardsImpl(final CardsImpl cards) {
         this.addAll(cards);
-        this.ownerId = cards.ownerId;
     }
 
     @Override
@@ -80,23 +77,19 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
     }
 
     @Override
-    public void setOwner(UUID ownerId, Game game) {
-        this.ownerId = ownerId;
-        for (UUID card : this) {
-            game.getCard(card).setOwnerId(ownerId);
-        }
-    }
-
-    @Override
     public Card getRandom(Game game) {
         if (this.isEmpty()) {
             return null;
         }
-        MageObject object = game.getObject(RandomUtil.randomFromCollection(this)); // neccessary if permanent tokens are in the collection
-        if (object instanceof Card) {
-            return (Card) object;
-        }
-        return null;
+
+        // necessary if permanent tokens are in the collection
+        Set<MageObject> cardsForRandomPick = this
+                .stream().map(game::getObject)
+                .filter(Objects::nonNull)
+                .filter(Card.class::isInstance)
+                .collect(Collectors.toSet());
+
+        return (Card) RandomUtil.randomFromCollection(cardsForRandomPick);
     }
 
     @Override
@@ -121,41 +114,37 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
 
     @Override
     public Set<Card> getCards(FilterCard filter, UUID playerId, Ability source, Game game) {
-        Set<Card> cards = new LinkedHashSet<>();
-        for (UUID cardId : this) {
-            Card card = game.getCard(cardId);
-            if (card != null) {
-                boolean match = filter.match(card, playerId, source, game);
-                if (match) {
-                    cards.add(game.getCard(cardId));
-                }
-            }
-        }
-        return cards;
+        return stream()
+                .map(cardId -> getPermanentOrCard(cardId, game))
+                .filter(Objects::nonNull)
+                .filter(card -> filter.match(card, playerId, source, game))
+                .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
     @Override
     public Set<Card> getCards(FilterCard filter, Game game) {
-        return stream().map(game::getCard).filter(Objects::nonNull).filter(card -> filter.match(card, game)).collect(Collectors.toSet());
+        return stream()
+                .map(cardId -> getPermanentOrCard(cardId, game))
+                .filter(Objects::nonNull)
+                .filter(card -> filter.match(card, game))
+                .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
     @Override
     public Set<Card> getCards(Game game) {
-        Set<Card> cards = new LinkedHashSet<>();
-        for (Iterator<UUID> it = this.iterator(); it.hasNext(); ) { // Changed to iterator because of ConcurrentModificationException
-            UUID cardId = it.next();
+        return stream()
+                .map(cardId -> getPermanentOrCard(cardId, game))
+                .filter(Objects::nonNull)
+                .collect(Collectors.toCollection(LinkedHashSet::new));
+    }
 
-            // cards from battlefield must be as permanent, not card (moveCards uses instanceOf Permanent)
-            Card card = game.getPermanent(cardId);
-            if (card == null) {
-                card = game.getCard(cardId);
-            }
-
-            if (card != null) { // this can happen during the cancelation (player concedes) of a game
-                cards.add(card);
-            }
+    // cards from battlefield must be as permanent, not card (moveCards uses instanceOf Permanent)
+    private static Card getPermanentOrCard(UUID cardId, Game game) {
+        Card card = game.getPermanent(cardId);
+        if (card == null) {
+            card = game.getCard(cardId);
         }
-        return cards;
+        return card;
     }
 
     @Override
@@ -176,17 +165,7 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
     }
 
     @Override
-    public void addAll(List<? extends Card> cards) {
-        if (cards != null) {
-            cards.stream()
-                    .filter(Objects::nonNull)
-                    .map(MageItem::getId)
-                    .forEach(this::add);
-        }
-    }
-
-    @Override
-    public void addAll(Set<? extends Card> cards) {
+    public void addAllCards(Collection<? extends Card> cards) {
         if (cards != null) {
             cards.stream()
                     .filter(Objects::nonNull)
@@ -197,13 +176,15 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
 
     @Override
     public Collection<Card> getUniqueCards(Game game) {
-        Map<String, Card> cards = new HashMap<>();
+        Map<String, Card> cards = new HashMap<>(this.size());
+
         for (UUID cardId : this) {
             Card card = game.getCard(cardId);
             if (card != null) {
                 cards.putIfAbsent(card.getName(), card);
             }
         }
+
         return cards.values();
     }
 
@@ -215,5 +196,21 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
     @Override
     public void removeZone(Zone zone, Game game) {
         removeIf(uuid -> game.getState().getZone(uuid) == zone);
+    }
+
+    @Override
+    public void sortCards(Game game, Comparator<? super Card> comparator) {
+        // workaround to sort linked list - re-create it, it must be safe for game
+        List<Card> newList = this
+                .stream()
+                .map(game::getCard)
+                .filter(Objects::nonNull)
+                .sorted(comparator)
+                .collect(Collectors.toList());
+        if (newList.size() != this.size()) {
+            throw new IllegalStateException("Wrong code usage: found unknown card id in hand while sorting, game is broken");
+        }
+        this.clear();
+        this.addAll(newList.stream().map(Card::getId).collect(Collectors.toList()));
     }
 }

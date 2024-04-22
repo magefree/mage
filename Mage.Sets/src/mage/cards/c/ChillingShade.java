@@ -23,7 +23,7 @@ public final class ChillingShade extends CardImpl {
 
     public ChillingShade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
-        addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
         this.subtype.add(SubType.SHADE);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

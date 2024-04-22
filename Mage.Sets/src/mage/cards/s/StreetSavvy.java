@@ -53,12 +53,12 @@ public final class StreetSavvy extends CardImpl {
 
 class StreetSavvyEffect extends AsThoughEffectImpl {
 
-    public StreetSavvyEffect() {
+    StreetSavvyEffect() {
         super(AsThoughEffectType.BLOCK_LANDWALK, Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "";
     }
 
-    public StreetSavvyEffect(final StreetSavvyEffect effect) {
+    private StreetSavvyEffect(final StreetSavvyEffect effect) {
         super(effect);
     }
 

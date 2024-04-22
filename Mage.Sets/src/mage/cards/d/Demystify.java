@@ -22,7 +22,7 @@ public final class Demystify extends CardImpl {
         this.getSpellAbility().addTarget(new TargetEnchantmentPermanent());
     }
 
-    public Demystify (final Demystify card) {
+    private Demystify(final Demystify card) {
         super(card);
     }
 

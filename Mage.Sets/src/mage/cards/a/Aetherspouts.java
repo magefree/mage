@@ -54,7 +54,7 @@ public final class Aetherspouts extends CardImpl {
 */
 class AetherspoutsEffect extends OneShotEffect {
 
-    public AetherspoutsEffect() {
+    AetherspoutsEffect() {
         super(Outcome.Benefit);
         this.staticText = "For each attacking creature, its owner puts it on the top or bottom of their library";
     }
@@ -72,7 +72,9 @@ class AetherspoutsEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         game.getPlayerList();
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) { return false; }
+        if (controller == null) {
+            return false;
+        }
 
         PlayerList playerList = game.getState().getPlayersInRange(controller.getId(), game);
         playerList.setCurrent(game.getActivePlayerId());

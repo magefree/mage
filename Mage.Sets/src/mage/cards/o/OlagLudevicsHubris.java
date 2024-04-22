@@ -30,7 +30,7 @@ public final class OlagLudevicsHubris extends CardImpl {
     public OlagLudevicsHubris(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ZOMBIE);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
@@ -88,7 +88,6 @@ class OlagLudevicsHubrisEffect extends ReplacementEffectImpl {
         CopyApplier applier = new OlagLudevicsHubrisCopyApplier();
         applier.apply(game, newBluePrint, source, source.getSourceId());
         CopyEffect copyEffect = new CopyEffect(Duration.Custom, newBluePrint, source.getSourceId());
-        copyEffect.newId();
         copyEffect.setApplier(applier);
         Ability newAbility = source.copy();
         copyEffect.init(newAbility, game);

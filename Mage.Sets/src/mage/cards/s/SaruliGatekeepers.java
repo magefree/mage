@@ -43,7 +43,7 @@ public final class SaruliGatekeepers extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new GainLifeEffect(7)),
                 gatesCondition,
-                "When {this} enters the battlefield, if you control two or more Gates, gain 7 life.")
+                "When {this} enters the battlefield, if you control two or more Gates, you gain 7 life.")
                 .addHint(new ConditionHint(gatesCondition, "You control two or more Gates")));
     }
 

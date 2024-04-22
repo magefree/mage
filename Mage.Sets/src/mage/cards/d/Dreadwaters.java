@@ -3,7 +3,7 @@ package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -30,7 +30,7 @@ public final class Dreadwaters extends CardImpl {
 
         // Target player puts the top X cards of their library into their graveyard, where X is the number of lands you control.
         this.getSpellAbility().addTarget(new TargetPlayer());
-        this.getSpellAbility().addEffect(new PutLibraryIntoGraveTargetEffect(new PermanentsOnBattlefieldCount(filter)));
+        this.getSpellAbility().addEffect(new MillCardsTargetEffect(new PermanentsOnBattlefieldCount(filter)));
     }
 
     private Dreadwaters(final Dreadwaters card) {

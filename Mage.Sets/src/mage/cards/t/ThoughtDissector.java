@@ -56,7 +56,7 @@ class ThoughtDissectorEffect extends OneShotEffect {
         staticText = "Target opponent reveals cards from the top of their library until an artifact card or X cards are revealed, whichever comes first. If an artifact card is revealed this way, put it onto the battlefield under your control and sacrifice {this}. Put the rest of the revealed cards into that player's graveyard.";
     }
 
-    public ThoughtDissectorEffect(final ThoughtDissectorEffect effect) {
+    private ThoughtDissectorEffect(final ThoughtDissectorEffect effect) {
         super(effect);
     }
 
@@ -68,7 +68,7 @@ class ThoughtDissectorEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Player targetOpponent = game.getPlayer(targetPointer.getFirst(game, source));
+        Player targetOpponent = game.getPlayer(getTargetPointer().getFirst(game, source));
         int max = amount.calculate(game, source, this);
         if (targetOpponent != null && controller != null && max > 0) {
             int numberOfCard = 0;

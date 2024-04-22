@@ -22,10 +22,17 @@ public final class TibaltCosmicImpostorEmblem extends Emblem {
     // You may play cards exiled with Tibalt, Cosmic Impostor, and you may spend mana as though it were mana of any color to cast those spells."
 
     public TibaltCosmicImpostorEmblem() {
-        setName("Emblem Tibalt");
+        super("Emblem Tibalt");
         this.getAbilities().add(new SimpleStaticAbility(Zone.COMMAND, new TibaltCosmicImpostorPlayFromExileEffect()));
+    }
 
-        this.setExpansionSetCodeForImage("KHM");
+    private TibaltCosmicImpostorEmblem(final TibaltCosmicImpostorEmblem card) {
+        super(card);
+    }
+
+    @Override
+    public TibaltCosmicImpostorEmblem copy() {
+        return new TibaltCosmicImpostorEmblem(this);
     }
 }
 
@@ -73,7 +80,7 @@ class TibaltCosmicImpostorPlayFromExileEffect extends AsThoughEffectImpl {
         if (exileZone.contains(mainCardId)
                 && affectedControllerId.equals(source.getControllerId())
                 && game.getState().getZone(mainCardId).equals(Zone.EXILED)) {
-            CardUtil.makeCardPlayable(game, source, cardInExile, Duration.Custom, true);
+            CardUtil.makeCardPlayable(game, source, cardInExile, false, Duration.Custom, true);
             return true;
         }
         return false;

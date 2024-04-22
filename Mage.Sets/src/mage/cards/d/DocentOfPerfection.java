@@ -83,7 +83,7 @@ class DocentOfPerfectionEffect extends OneShotEffect {
         staticText = "Then if you control three or more Wizards, transform {this}";
     }
 
-    public DocentOfPerfectionEffect(final DocentOfPerfectionEffect effect) {
+    private DocentOfPerfectionEffect(final DocentOfPerfectionEffect effect) {
         super(effect);
     }
 

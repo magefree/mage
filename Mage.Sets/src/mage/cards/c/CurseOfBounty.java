@@ -18,7 +18,6 @@ import mage.target.targetpointer.FixedTarget;
 import java.util.UUID;
 import mage.abilities.common.EnchantedPlayerAttackedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.players.Player;
 
@@ -57,10 +56,10 @@ class CurseOfBountyEffect extends OneShotEffect {
 
     CurseOfBountyEffect() {
         super(Outcome.Benefit);
-        this.staticText = "untap all nonland permanents you control. Each opponent attacking that player does the same.";
+        this.staticText = "untap all nonland permanents you control. Each opponent attacking that player untaps all nonland permanents they control.";
     }
 
-    CurseOfBountyEffect(final CurseOfBountyEffect effect) {
+    private CurseOfBountyEffect(final CurseOfBountyEffect effect) {
         super(effect);
     }
 
@@ -71,12 +70,7 @@ class CurseOfBountyEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        // In the case that the enchantment is blinked
-        Permanent enchantment = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
-        if (enchantment == null) {
-            // It was not blinked, use the standard method
-            enchantment = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        }
+        Permanent enchantment = source.getSourcePermanentOrLKI(game);
         if (enchantment != null) {
             Player enchantedPlayer = game.getPlayer(enchantment.getAttachedTo());
             if (enchantedPlayer != null) {
@@ -105,11 +99,11 @@ class CurseOfBountyEffect extends OneShotEffect {
 
 class UntapAllNonlandsTargetEffect extends OneShotEffect {
 
-    public UntapAllNonlandsTargetEffect() {
+    UntapAllNonlandsTargetEffect() {
         super(Outcome.Untap);
     }
 
-    public UntapAllNonlandsTargetEffect(final UntapAllNonlandsTargetEffect effect) {
+    private UntapAllNonlandsTargetEffect(final UntapAllNonlandsTargetEffect effect) {
         super(effect);
     }
 

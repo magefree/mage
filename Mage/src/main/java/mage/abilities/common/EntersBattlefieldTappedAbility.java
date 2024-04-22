@@ -7,7 +7,6 @@ import mage.abilities.effects.common.TapSourceEffect;
 import mage.constants.Zone;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class EntersBattlefieldTappedAbility extends StaticAbility {
@@ -23,7 +22,7 @@ public class EntersBattlefieldTappedAbility extends StaticAbility {
         this.ruleText = ruleText;
     }
 
-    public EntersBattlefieldTappedAbility(final EntersBattlefieldTappedAbility ability) {
+    protected EntersBattlefieldTappedAbility(final EntersBattlefieldTappedAbility ability) {
         super(ability);
         this.ruleText = ability.ruleText;
     }

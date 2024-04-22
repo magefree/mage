@@ -18,7 +18,6 @@ import mage.target.common.TargetOpponent;
 import mage.util.CardUtil;
 
 /**
- *
  * @author LevelX2
  */
 
@@ -34,7 +33,7 @@ public class FatesealEffect extends OneShotEffect {
         this.setText();
     }
 
-    public FatesealEffect(final FatesealEffect effect) {
+    protected FatesealEffect(final FatesealEffect effect) {
         super(effect);
         this.fatesealNumber = effect.fatesealNumber;
     }
@@ -49,8 +48,6 @@ public class FatesealEffect extends OneShotEffect {
                 if (opponent == null) {
                     return false;
                 }
-                boolean revealed = opponent.isTopCardRevealed(); // by looking at the cards with fateseal you have not to reveal the next card
-                opponent.setTopCardRevealed(false);
                 Cards cards = new CardsImpl();
                 int count = Math.min(fatesealNumber, opponent.getLibrary().size());
                 if (count == 0) {
@@ -77,7 +74,6 @@ public class FatesealEffect extends OneShotEffect {
                 // move cards to the top of the library
                 controller.putCardsOnTopOfLibrary(cards, game, source, true);
                 game.fireEvent(new GameEvent(GameEvent.EventType.FATESEALED, opponent.getId(), source, source.getControllerId()));
-                controller.setTopCardRevealed(revealed);
                 return true;
             }
 

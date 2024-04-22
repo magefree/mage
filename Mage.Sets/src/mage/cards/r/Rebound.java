@@ -44,12 +44,12 @@ public final class Rebound extends CardImpl {
 
 class ReboundEffect extends OneShotEffect {
 
-    public ReboundEffect() {
+    ReboundEffect() {
         super(Outcome.Neutral);
         this.staticText = "Change the target of target spell that targets only a player. The new target must be a player";
     }
 
-    public ReboundEffect(final ReboundEffect effect) {
+    private ReboundEffect(final ReboundEffect effect) {
         super(effect);
     }
 

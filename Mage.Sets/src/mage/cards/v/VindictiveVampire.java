@@ -59,7 +59,7 @@ class VindictiveVampireTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever another creature you control dies, ");
     }
 
-    public VindictiveVampireTriggeredAbility(final VindictiveVampireTriggeredAbility ability) {
+    private VindictiveVampireTriggeredAbility(final VindictiveVampireTriggeredAbility ability) {
         super(ability);
     }
 

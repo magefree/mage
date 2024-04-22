@@ -27,7 +27,7 @@ public final class DarettiIngeniousIconoclast extends CardImpl {
 
     public DarettiIngeniousIconoclast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{B}{R}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DARETTI);
 
         this.setStartingLoyalty(3);
@@ -39,9 +39,7 @@ public final class DarettiIngeniousIconoclast extends CardImpl {
         Ability ability = new LoyaltyAbility(
                 new DoIfCostPaid(
                         new DestroyTargetEffect(),
-                        new SacrificeTargetCost(new TargetControlledPermanent(
-                                StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_AN
-                        ))
+                        new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_AN)
                 ), -1
         );
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_CREATURE).withChooseHint("to destroy"));

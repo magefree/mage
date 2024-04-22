@@ -5,6 +5,7 @@ import mage.client.SessionHandler;
 import mage.client.cards.BigCard;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.util.GUISizeHelper;
+import mage.constants.Constants;
 import mage.view.ChatMessage.MessageColor;
 import mage.view.ChatMessage.MessageType;
 import org.mage.card.arcane.ManaSymbols;
@@ -96,6 +97,7 @@ public class ChatPanelBasic extends javax.swing.JPanel {
      */
     public ChatPanelBasic() {
         initComponents();
+        txtConversation.enableHyperlinksAndCardPopups();
         setBackground(new Color(0, 0, 0, CHAT_ALPHA));
         changeGUISize(GUISizeHelper.chatFont);
         if (jScrollPaneTxt != null) {
@@ -103,10 +105,11 @@ public class ChatPanelBasic extends javax.swing.JPanel {
             jScrollPaneTxt.getViewport().setBackground(new Color(0, 0, 0, CHAT_ALPHA));
             jScrollPaneTxt.setViewportBorder(null);
         }
-
     }
 
     public void cleanUp() {
+        this.disconnect();
+        this.txtConversation.cleanUp();
     }
 
     public void setGameData(UUID gameId, BigCard bigCard) {
@@ -157,7 +160,7 @@ public class ChatPanelBasic extends javax.swing.JPanel {
         }
     }
 
-    public void disconnect() {
+    private void disconnect() {
         if (SessionHandler.getSession() != null) {
             SessionHandler.leaveChat(chatId);
             MageFrame.removeChat(chatId);
@@ -264,21 +267,22 @@ public class ChatPanelBasic extends javax.swing.JPanel {
             messageToTest = message.replaceFirst("<font bgcolor=orange.*?</font>", "");
         }
 
-        if (messageType == MessageType.USER_INFO || messageType == MessageType.GAME || messageType == MessageType.STATUS
-                || PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAME_USE_PROFANITY_FILTER, "0").equals("0")
-                || !PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAME_USE_PROFANITY_FILTER, "0").equals("0") && !containsSwearing(messageToTest, PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAME_USE_PROFANITY_FILTER, "0"))) {
+        String cachedProfanityFilterValue = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAME_USE_PROFANITY_FILTER, "0");
+        boolean isContainsSwearing = !containsSwearing(messageToTest, cachedProfanityFilterValue);
+        boolean isUserInfoOrGameOrStatus = messageType == MessageType.USER_INFO || messageType == MessageType.GAME || messageType == MessageType.STATUS;
+        if (isUserInfoOrGameOrStatus || cachedProfanityFilterValue.equals("0") || (!cachedProfanityFilterValue.equals("0") && !isContainsSwearing)) {
             if (username != null && !username.isEmpty()) {
                 text.append(getColoredText(userColor, username + userSeparator));
             }
             text.append(getColoredText(textColor, ManaSymbols.replaceSymbolsWithHTML(message, ManaSymbols.Type.CHAT)));
             this.txtConversation.append(text.toString());
-        } else if (PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAME_USE_PROFANITY_FILTER, "0").equals("1")) {
+        } else if (cachedProfanityFilterValue.equals("1")) {
             if (username != null && !username.isEmpty()) {
                 text.append(getColoredText("black", username + userSeparator));
             }
             text.append(getColoredText(textColor, ManaSymbols.replaceSymbolsWithHTML("<font color=black size=-2>" + message + "</font> <font size=-2>Profanity detected.  Type: <font color=green>/w " + SessionHandler.getUserName() + " profanity 0</font>' to turn the filter off</font></font>", ManaSymbols.Type.CHAT)));
             this.txtConversation.append(text.toString());
-        } else if (PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAME_USE_PROFANITY_FILTER, "0").equals("2")) {
+        } else if (cachedProfanityFilterValue.equals("2")) {
             text.append(getColoredText(textColor, ManaSymbols.replaceSymbolsWithHTML("<font color=black size=-2>" + username + ": Profanity detected.  To make it less strict, type: </font> <font color=green size=-2>/w " + SessionHandler.getUserName() + " profanity 1</font>", ManaSymbols.Type.CHAT)));
             this.txtConversation.append(text.toString());
         }
@@ -397,6 +401,12 @@ public class ChatPanelBasic extends javax.swing.JPanel {
 
     public void handleKeyTyped(java.awt.event.KeyEvent evt) {
         if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
+
+            if (this.txtMessage.getText().length() > Constants.MAX_CHAT_MESSAGE_SIZE) {
+                JOptionPane.showMessageDialog(null, "Can't send too long message", "Chat", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
             if (parentChatRef != null) {
                 SessionHandler.sendChatMessage(parentChatRef.chatId, this.txtMessage.getText());
             } else {
@@ -405,10 +415,6 @@ public class ChatPanelBasic extends javax.swing.JPanel {
             this.txtMessage.setText("");
             this.txtMessage.repaint();
         }
-    }
-
-    public void enableHyperlinks() {
-        txtConversation.enableHyperlinks();
     }
 
     private void txtMessageKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMessageKeyTyped

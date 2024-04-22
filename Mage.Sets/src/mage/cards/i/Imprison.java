@@ -70,7 +70,7 @@ class ImprisonTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever a player activates an ability of enchanted creature with {T} in its activation cost that isn't a mana ability, ");
     }
 
-    ImprisonTriggeredAbility(final ImprisonTriggeredAbility ability) {
+    private ImprisonTriggeredAbility(final ImprisonTriggeredAbility ability) {
         super(ability);
     }
 
@@ -106,12 +106,12 @@ class ImprisonTriggeredAbility extends TriggeredAbilityImpl {
 
 class ImprisonUnblockEffect extends OneShotEffect {
 
-    public ImprisonUnblockEffect() {
+    ImprisonUnblockEffect() {
         super(Outcome.Benefit);
         this.staticText = "tap the creature, remove it from combat, and creatures it was blocking that had become blocked by only that creature this combat become unblocked";
     }
 
-    public ImprisonUnblockEffect(final ImprisonUnblockEffect effect) {
+    private ImprisonUnblockEffect(final ImprisonUnblockEffect effect) {
         super(effect);
     }
 

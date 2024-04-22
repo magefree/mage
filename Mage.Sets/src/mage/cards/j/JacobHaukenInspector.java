@@ -31,7 +31,7 @@ public final class JacobHaukenInspector extends CardImpl {
     public JacobHaukenInspector(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ADVISOR);
         this.power = new MageInt(0);
@@ -58,7 +58,7 @@ public final class JacobHaukenInspector extends CardImpl {
 
 class JacobHaukenInspectorExileEffect extends OneShotEffect {
 
-    public JacobHaukenInspectorExileEffect() {
+    JacobHaukenInspectorExileEffect() {
         super(Outcome.Benefit);
         staticText = "Draw a card, then exile a card from your hand face down. You may look at that card for as long as it remains exiled";
     }

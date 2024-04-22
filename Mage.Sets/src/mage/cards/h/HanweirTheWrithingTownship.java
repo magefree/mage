@@ -21,7 +21,7 @@ public final class HanweirTheWrithingTownship extends MeldCard {
 
     public HanweirTheWrithingTownship(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELDRAZI);
         this.subtype.add(SubType.OOZE);
         this.power = new MageInt(7);

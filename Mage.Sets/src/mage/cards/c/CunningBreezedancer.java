@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import java.util.UUID;
@@ -11,20 +10,13 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.Predicates;
+import mage.filter.StaticFilters;
 
 /**
  *
  * @author fireshoes
  */
 public final class CunningBreezedancer extends CardImpl {
-    
-    private static final FilterSpell filter = new FilterSpell("a noncreature spell");
-
-    static {
-        filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
-    }
 
     public CunningBreezedancer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}{U}");
@@ -36,7 +28,8 @@ public final class CunningBreezedancer extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         
         // Whenever you cast a noncreature spell, Cunning Breezedancer gets +2/+2 until end of turn.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new BoostSourceEffect(2, 2, Duration.EndOfTurn), filter, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new BoostSourceEffect(2, 2, Duration.EndOfTurn),
+                StaticFilters.FILTER_SPELL_A_NON_CREATURE, false));
     }
 
     private CunningBreezedancer(final CunningBreezedancer card) {

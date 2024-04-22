@@ -46,12 +46,12 @@ public final class GoblinCohort extends CardImpl {
 
 class GoblinCohortEffect extends RestrictionEffect {
 
-    public GoblinCohortEffect() {
+    GoblinCohortEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "{this} can't attack unless you've cast a creature spell this turn";
     }
 
-    public GoblinCohortEffect(final GoblinCohortEffect effect) {
+    private GoblinCohortEffect(final GoblinCohortEffect effect) {
         super(effect);
     }
 
@@ -74,4 +74,3 @@ class GoblinCohortEffect extends RestrictionEffect {
         return false;
     }
 }
-

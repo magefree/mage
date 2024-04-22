@@ -14,7 +14,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 
 /**
@@ -23,7 +23,7 @@ import mage.filter.predicate.mageobject.AnotherPredicate;
  */
 public final class StampedingHorncrest extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another Dinosaur");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("another Dinosaur");
 
     static {
         filter.add(AnotherPredicate.instance);
@@ -39,7 +39,7 @@ public final class StampedingHorncrest extends CardImpl {
 
         // Stampeding Horncrest has haste as long as you control another Dinosaur.
         Effect effect = new ConditionalContinuousEffect(new GainAbilitySourceEffect(HasteAbility.getInstance()), new PermanentsOnTheBattlefieldCondition(filter),
-                "{this} has haste as long as you control another dinosaur");
+                "{this} has haste as long as you control another Dinosaur");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 

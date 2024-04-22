@@ -15,6 +15,7 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -56,13 +57,13 @@ class WindingConstrictorPlayerEffect extends ReplacementEffectImpl {
         staticText = "If you would get one or more counters, you get that many plus one of each of those kinds of counters instead";
     }
 
-    WindingConstrictorPlayerEffect(final WindingConstrictorPlayerEffect effect) {
+    private WindingConstrictorPlayerEffect(final WindingConstrictorPlayerEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        event.setAmountForCounters(event.getAmount() + 1, true);
+        event.setAmountForCounters(CardUtil.overflowInc(event.getAmount(), 1), true);
         return false;
     }
 
@@ -75,11 +76,6 @@ class WindingConstrictorPlayerEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         Player player = game.getPlayer(event.getTargetId());
         return player != null && player.getId().equals(source.getControllerId()) && event.getAmount() > 0;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

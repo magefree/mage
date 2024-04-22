@@ -85,7 +85,7 @@ class RundveltHordemasterEffect extends OneShotEffect {
         }
         player.moveCards(card, Zone.EXILED, source, game);
         if (card.isCreature(game) && card.hasSubtype(SubType.GOBLIN, game)) {
-            CardUtil.makeCardPlayable(game, source, card, Duration.UntilEndOfYourNextTurn, false);
+            CardUtil.makeCardPlayable(game, source, card, true, Duration.UntilEndOfYourNextTurn, false);
         }
         return true;
     }

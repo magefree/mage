@@ -41,7 +41,7 @@ public final class FlameDischarge extends CardImpl {
 
 class FlameDischargeEffect extends OneShotEffect {
 
-    public FlameDischargeEffect() {
+    FlameDischargeEffect() {
         super(Outcome.Damage);
         this.staticText = "{this} deals X damage to target creature or planeswalker. If you controlled a modified creature as you cast this spell, it deals X plus 2 damage instead";
     }

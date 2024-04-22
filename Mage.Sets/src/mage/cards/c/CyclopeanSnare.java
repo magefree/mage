@@ -27,7 +27,7 @@ public final class CyclopeanSnare extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new GenericManaCost(3));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
-        ability.addEffect(new ReturnToHandSourceEffect(true));
+        ability.addEffect(new ReturnToHandSourceEffect(true).concatBy(", then"));
         this.addAbility(ability);
     }
 

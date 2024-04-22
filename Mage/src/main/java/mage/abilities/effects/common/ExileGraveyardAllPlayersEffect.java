@@ -39,7 +39,7 @@ public class ExileGraveyardAllPlayersEffect extends OneShotEffect {
                 + "graveyards";
     }
 
-    public ExileGraveyardAllPlayersEffect(final ExileGraveyardAllPlayersEffect effect) {
+    protected ExileGraveyardAllPlayersEffect(final ExileGraveyardAllPlayersEffect effect) {
         super(effect);
         this.filter = effect.filter;
         this.targetController = effect.targetController;
@@ -63,7 +63,7 @@ public class ExileGraveyardAllPlayersEffect extends OneShotEffect {
             }
             Player player = game.getPlayer(playerId);
             if (player != null) {
-                toExile.addAll(player.getGraveyard().getCards(filter, source.getControllerId(), source, game));
+                toExile.addAllCards(player.getGraveyard().getCards(filter, source.getControllerId(), source, game));
             }
         }
         controller.moveCards(toExile, Zone.EXILED, source, game);

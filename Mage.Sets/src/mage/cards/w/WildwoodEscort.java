@@ -61,12 +61,12 @@ public final class WildwoodEscort extends CardImpl {
 
 class WildwoodEscortEffect extends ReplacementEffectImpl {
 
-    public WildwoodEscortEffect() {
+    WildwoodEscortEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Exile);
         staticText = "if {this} would die, exile it instead";
     }
 
-    public WildwoodEscortEffect(final WildwoodEscortEffect effect) {
+    private WildwoodEscortEffect(final WildwoodEscortEffect effect) {
         super(effect);
     }
 

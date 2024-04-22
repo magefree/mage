@@ -7,7 +7,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.StaticFilters;
-import mage.constants.TargetController;
 import mage.target.TargetPlayer;
 
 /**
@@ -22,7 +21,7 @@ public final class Divest extends CardImpl {
 
         // Target player reveals their hand. You choose an artifact or creature card from it. That player discards that card.
         this.getSpellAbility().addTarget(new TargetPlayer());
-        this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(StaticFilters.FILTER_CARD_ARTIFACT_OR_CREATURE, TargetController.ANY));
+        this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(StaticFilters.FILTER_CARD_ARTIFACT_OR_CREATURE));
     }
 
     private Divest(final Divest card) {

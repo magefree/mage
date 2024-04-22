@@ -45,7 +45,7 @@ public final class BirchloreRangers extends CardImpl {
                 new TapTargetCost(new TargetControlledCreaturePermanent(2, 2, filter, false))));        
         
         // Morph {G}
-        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{G}")));
+        this.addAbility(new MorphAbility(this, new ManaCostsImpl<>("{G}")));
     }
 
     private BirchloreRangers(final BirchloreRangers card) {
@@ -67,7 +67,7 @@ class BirchloreRangersManaEffect extends AddManaOfAnyColorEffect {
         this.filter = filter;
     }
 
-    public BirchloreRangersManaEffect(final BirchloreRangersManaEffect effect) {
+    private BirchloreRangersManaEffect(final BirchloreRangersManaEffect effect) {
         super(effect);
         this.filter = effect.filter.copy();
     }

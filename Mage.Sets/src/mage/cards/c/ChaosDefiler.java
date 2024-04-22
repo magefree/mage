@@ -62,7 +62,7 @@ class ChaosDefilerEffect extends OneShotEffect {
     ChaosDefilerEffect() {
         super(Outcome.Benefit);
         staticText = "for each opponent, choose a nonland permanent " +
-                "that players controls. Destroy one of them chosen at random";
+                "that player controls. Destroy one of them chosen at random";
     }
 
     private ChaosDefilerEffect(final ChaosDefilerEffect effect) {

@@ -37,7 +37,7 @@ public final class TheGrandEvolution extends CardImpl {
         this.nightCard = true;
 
         // (As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)
-        SagaAbility sagaAbility = new SagaAbility(this, false);
+        SagaAbility sagaAbility = new SagaAbility(this);
 
         // I -- Mill ten cards. Put up to two creature cards from among the milled cards onto the battlefield.
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_I, new TheGrandEvolutionEffect());
@@ -103,7 +103,7 @@ class TheGrandEvolutionEffect extends OneShotEffect {
         }
         Cards cards = player.millCards(10, source, game);
         TargetCard target = new TargetCard(0, 2, Zone.ALL, StaticFilters.FILTER_CARD_CREATURE);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         player.choose(Outcome.PutCreatureInPlay, cards, target, source, game);
         player.moveCards(new CardsImpl(target.getTargets()), Zone.BATTLEFIELD, source, game);
         return true;

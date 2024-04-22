@@ -24,6 +24,8 @@ public class ReturnFromGraveyardToBattlefieldTargetEffect extends OneShotEffect 
     private final boolean tapped;
     private final boolean attacking;
 
+    // Targets are returned under the control of the effect controller (e.g. "under your control")
+
     public ReturnFromGraveyardToBattlefieldTargetEffect() {
         this(false);
     }

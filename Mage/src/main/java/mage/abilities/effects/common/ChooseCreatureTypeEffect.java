@@ -24,7 +24,7 @@ public class ChooseCreatureTypeEffect extends OneShotEffect {
         staticText = "choose a creature type";
     }
 
-    public ChooseCreatureTypeEffect(final ChooseCreatureTypeEffect effect) {
+    protected ChooseCreatureTypeEffect(final ChooseCreatureTypeEffect effect) {
         super(effect);
     }
 
@@ -61,9 +61,10 @@ public class ChooseCreatureTypeEffect extends OneShotEffect {
     }
 
     /**
-     * @param objectId    sourceId the effect was exeuted under
+     * @param objectId sourceId the effect was executed under
      * @param game
-     * @param typePostfix special postfix if you want to store multiple choices from different effects
+     * @param typePostfix special postfix if you want to store multiple choices
+     * from different effects
      * @return
      */
     public static SubType getChosenCreatureType(UUID objectId, Game game, String typePostfix) {

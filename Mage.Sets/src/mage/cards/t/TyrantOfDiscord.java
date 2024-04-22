@@ -16,6 +16,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
+import mage.util.RandomUtil;
 
 /**
  * @author noxx
@@ -47,12 +48,12 @@ public final class TyrantOfDiscord extends CardImpl {
 
 class TyrantOfDiscordEffect extends OneShotEffect {
 
-    public TyrantOfDiscordEffect() {
+    TyrantOfDiscordEffect() {
         super(Outcome.Benefit);
         this.staticText = "target opponent chooses a permanent they control at random and sacrifices it. If a nonland permanent is sacrificed this way, repeat this process";
     }
 
-    public TyrantOfDiscordEffect(final TyrantOfDiscordEffect effect) {
+    private TyrantOfDiscordEffect(final TyrantOfDiscordEffect effect) {
         super(effect);
     }
 
@@ -70,7 +71,7 @@ class TyrantOfDiscordEffect extends OneShotEffect {
             while (!stop) {
                 int count = game.getBattlefield().countAll(new FilterPermanent(), opponent.getId(), game);
                 if (count > 0) {
-                    int random = (int)(Math.random()*count);
+                    int random = (int)(RandomUtil.nextDouble() * count);
                     int index = 0;
                     for (Permanent permanent : game.getBattlefield().getAllActivePermanents(opponent.getId())) {
                         if (index == random) {

@@ -34,7 +34,7 @@ public final class CallapheBelovedOfTheSea extends CardImpl {
     public CallapheBelovedOfTheSea(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{1}{U}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DEMIGOD);
         this.power = new MageInt(0);
         this.toughness = new MageInt(3);

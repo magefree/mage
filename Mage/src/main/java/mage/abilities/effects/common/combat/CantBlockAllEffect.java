@@ -20,7 +20,7 @@ public class CantBlockAllEffect extends RestrictionEffect {
         this.filter = filter;
     }
 
-    public CantBlockAllEffect(final CantBlockAllEffect effect) {
+    protected CantBlockAllEffect(final CantBlockAllEffect effect) {
         super(effect);
         this.filter = effect.filter;
     }

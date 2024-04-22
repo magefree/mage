@@ -46,7 +46,7 @@ class KhorvathsFuryEffect extends OneShotEffect {
                 + " {this} deals damage to each foe equal to the number of cards in their hand";
     }
 
-    KhorvathsFuryEffect(final KhorvathsFuryEffect effect) {
+    private KhorvathsFuryEffect(final KhorvathsFuryEffect effect) {
         super(effect);
     }
 

@@ -3,6 +3,7 @@
 package mage.abilities.effects.common.continuous;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.Duration;
@@ -13,7 +14,6 @@ import mage.game.Game;
 import mage.players.Player;
 
 /**
- *
  * @author LevelX2
  */
 public class CantGainLifeTargetEffect extends ContinuousEffectImpl {
@@ -32,7 +32,7 @@ public class CantGainLifeTargetEffect extends ContinuousEffectImpl {
         staticText = sb.toString();
     }
 
-    public CantGainLifeTargetEffect(final CantGainLifeTargetEffect effect) {
+    protected CantGainLifeTargetEffect(final CantGainLifeTargetEffect effect) {
         super(effect);
     }
 
@@ -43,7 +43,7 @@ public class CantGainLifeTargetEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for(UUID playerId: this.getTargetPointer().getTargets(game, source) ) {
+        for (UUID playerId : this.getTargetPointer().getTargets(game, source)) {
             Player targetPlayer = game.getPlayer(playerId);
             if (targetPlayer != null) {
                 targetPlayer.setCanGainLife(false);

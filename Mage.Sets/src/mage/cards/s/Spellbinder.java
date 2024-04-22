@@ -64,7 +64,7 @@ class SpellbinderTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new SpellbinderCopyEffect(), true);
     }
 
-    SpellbinderTriggeredAbility(final SpellbinderTriggeredAbility ability) {
+    private SpellbinderTriggeredAbility(final SpellbinderTriggeredAbility ability) {
         super(ability);
     }
 
@@ -108,7 +108,7 @@ class SpellbinderImprintEffect extends OneShotEffect {
         staticText = "you may exile an instant card from your hand";
     }
 
-    public SpellbinderImprintEffect(SpellbinderImprintEffect effect) {
+    private SpellbinderImprintEffect(final SpellbinderImprintEffect effect) {
         super(effect);
     }
 
@@ -149,13 +149,13 @@ class SpellbinderImprintEffect extends OneShotEffect {
 
 class SpellbinderCopyEffect extends OneShotEffect {
 
-    public SpellbinderCopyEffect() {
+    SpellbinderCopyEffect() {
         super(Outcome.Copy);
         this.staticText = "You may copy the exiled card. If you do, "
                 + "you may cast the copy without paying its mana cost";
     }
 
-    public SpellbinderCopyEffect(final SpellbinderCopyEffect effect) {
+    private SpellbinderCopyEffect(final SpellbinderCopyEffect effect) {
         super(effect);
     }
 
@@ -175,8 +175,6 @@ class SpellbinderCopyEffect extends OneShotEffect {
                     if (controller.chooseUse(outcome, "Create a copy of " + imprintedInstant.getName() + '?', source, game)) {
                         Card copiedCard = game.copyCard(imprintedInstant, source, source.getControllerId());
                         if (copiedCard != null) {
-                            game.getExile().add(source.getSourceId(), "", copiedCard);
-                            game.getState().setZone(copiedCard.getId(), Zone.EXILED);
                             if (controller.chooseUse(outcome, "Cast the copied card without paying mana cost?", source, game)) {
                                 if (copiedCard.getSpellAbility() != null) {
                                     game.getState().setValue("PlayFromNotOwnHandZone" + copiedCard.getId(), Boolean.TRUE);

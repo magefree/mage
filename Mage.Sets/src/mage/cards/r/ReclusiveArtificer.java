@@ -1,4 +1,3 @@
-
 package mage.cards.r;
 
 import java.util.UUID;
@@ -12,7 +11,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.common.FilterControlledPermanent;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -20,12 +19,6 @@ import mage.target.common.TargetCreaturePermanent;
  * @author fireshoes
  */
 public final class ReclusiveArtificer extends CardImpl {
-    
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("artifacts you control");
-
-    static {
-        filter.add(CardType.ARTIFACT.getPredicate());
-    }
 
     public ReclusiveArtificer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{R}");
@@ -38,7 +31,8 @@ public final class ReclusiveArtificer extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
         
         // When Reclusive Artificer enters the battlefield, you may have it deal damage to target creature equal to the number of artifacts you control.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(new PermanentsOnBattlefieldCount(filter)), true);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(new PermanentsOnBattlefieldCount(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACTS))
+                .setText("it deals damage to target creature equal to the number of artifacts you control"), true);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

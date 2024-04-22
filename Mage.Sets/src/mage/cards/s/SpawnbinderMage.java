@@ -1,36 +1,22 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.common.TapTargetCost;
+import mage.abilities.abilityword.CohortAbility;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.permanent.TappedPredicate;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
  * @author fireshoes
  */
 public final class SpawnbinderMage extends CardImpl {
-
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("an untapped Ally you control");
-
-    static {
-        filter.add(SubType.ALLY.getPredicate());
-        filter.add(TappedPredicate.UNTAPPED);
-    }
 
     public SpawnbinderMage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
@@ -41,10 +27,8 @@ public final class SpawnbinderMage extends CardImpl {
         this.toughness = new MageInt(4);
 
         // <i>Cohort</i> &mdash; {T}, Tap an untapped Ally you control: Tap target creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new TapSourceCost());
-        ability.addCost(new TapTargetCost(new TargetControlledPermanent(filter)));
+        Ability ability = new CohortAbility(new TapTargetEffect());
         ability.addTarget(new TargetCreaturePermanent());
-        ability.setAbilityWord(AbilityWord.COHORT);
         this.addAbility(ability);
     }
 

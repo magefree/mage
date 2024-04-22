@@ -49,7 +49,7 @@ class RoarOfTheCrowdEffect extends OneShotEffect {
         this.staticText = "Choose a creature type. {this} deals damage to any target equal to the number of permanents you control of the chosen type.";
     }
 
-    RoarOfTheCrowdEffect(final RoarOfTheCrowdEffect effect) {
+    private RoarOfTheCrowdEffect(final RoarOfTheCrowdEffect effect) {
         super(effect);
     }
 

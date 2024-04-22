@@ -51,7 +51,7 @@ public class TargetPermanentOrPlayer extends TargetImpl {
         this.notTarget = notTarget;
     }
 
-    public TargetPermanentOrPlayer(final TargetPermanentOrPlayer target) {
+    protected TargetPermanentOrPlayer(final TargetPermanentOrPlayer target) {
         super(target);
         this.filter = target.filter.copy();
     }

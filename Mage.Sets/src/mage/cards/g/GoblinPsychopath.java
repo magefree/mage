@@ -53,14 +53,21 @@ class GoblinPsychopathEffect extends ReplacementEffectImpl {
         staticText = "flip a coin. If you lose the flip, the next time it would deal combat damage this turn, it deals that damage to you instead";
     }
 
-    public GoblinPsychopathEffect(final GoblinPsychopathEffect effect) {
+    private GoblinPsychopathEffect(final GoblinPsychopathEffect effect) {
         super(effect);
     }
 
     @Override
     public void init(Ability source, Game game) {
-        this.wonFlip = game.getPlayer(source.getControllerId()).flipCoin(source, game, true);
         super.init(source, game);
+
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
+            discard();
+            return;
+        }
+
+        this.wonFlip = controller.flipCoin(source, game, true);
     }
 
     @Override

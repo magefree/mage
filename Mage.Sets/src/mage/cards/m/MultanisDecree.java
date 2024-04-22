@@ -44,7 +44,7 @@ class MultanisDecreeDestroyEffect extends OneShotEffect {
         this.staticText = "Destroy all enchantments. You gain 2 life for each enchantment destroyed this way";
     }
 
-    public MultanisDecreeDestroyEffect(final MultanisDecreeDestroyEffect effect) {
+    private MultanisDecreeDestroyEffect(final MultanisDecreeDestroyEffect effect) {
         super(effect);
     }
 

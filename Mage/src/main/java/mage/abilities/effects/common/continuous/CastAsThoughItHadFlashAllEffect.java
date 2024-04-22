@@ -1,11 +1,10 @@
 package mage.abilities.effects.common.continuous;
 
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
-import mage.abilities.keyword.MorphAbility;
 import mage.cards.Card;
 import mage.constants.AsThoughEffectType;
-import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.filter.FilterCard;
@@ -33,7 +32,7 @@ public class CastAsThoughItHadFlashAllEffect extends AsThoughEffectImpl {
         staticText = setText();
     }
 
-    public CastAsThoughItHadFlashAllEffect(final CastAsThoughItHadFlashAllEffect effect) {
+    protected CastAsThoughItHadFlashAllEffect(final CastAsThoughItHadFlashAllEffect effect) {
         super(effect);
         this.filter = effect.filter;
         this.anyPlayer = effect.anyPlayer;
@@ -50,24 +49,18 @@ public class CastAsThoughItHadFlashAllEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean applies(UUID affectedSpellId, Ability source, UUID affectedControllerId, Game game) {
-        if (anyPlayer || source.isControlledBy(affectedControllerId)) {
-            Card card = game.getCard(affectedSpellId);
+    public boolean applies(UUID objectId, Ability affectedAbility, Ability source, Game game, UUID playerId) {
+        if (affectedAbility instanceof SpellAbility && (anyPlayer||source.isControlledBy(playerId))) {
+            Card card = ((SpellAbility) affectedAbility).getCharacteristics(game);
             if (card != null) {
-                //Allow lands with morph to be played at instant speed
-                if (card.isLand(game)) {
-                    boolean morphAbility = card.getAbilities().stream().anyMatch(MorphAbility.class::isInstance);
-                    if (morphAbility) {
-                        Card cardCopy = card.copy();
-                        cardCopy.removeAllCardTypes(game);
-                        cardCopy.addCardType(game, CardType.CREATURE);
-                        return filter.match(cardCopy, affectedControllerId, source, game);
-                    }
-                }
-                return filter.match(card, affectedControllerId, source, game);
+                return filter.match(card, playerId, source, game);
             }
         }
         return false;
+    }
+    @Override
+    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        throw new IllegalArgumentException("Wrong code usage: can't call applies method on empty affectedAbility");
     }
 
     private String setText() {

@@ -1,7 +1,6 @@
 
 package mage.abilities.effects.common;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -12,8 +11,9 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class ExileSourceEffect extends OneShotEffect {
@@ -25,10 +25,9 @@ public class ExileSourceEffect extends OneShotEffect {
     }
 
     /**
-     *
      * @param toUniqueExileZone moves the card to a source object dependant
-     * unique exile zone, so another effect of the same source object (e.g.
-     * Deadeye Navigator) can identify the card
+     *                          unique exile zone, so another effect of the same source object (e.g.
+     *                          Deadeye Navigator) can identify the card
      */
     public ExileSourceEffect(boolean toUniqueExileZone) {
         super(Outcome.Exile);
@@ -36,7 +35,7 @@ public class ExileSourceEffect extends OneShotEffect {
         this.toUniqueExileZone = toUniqueExileZone;
     }
 
-    public ExileSourceEffect(final ExileSourceEffect effect) {
+    protected ExileSourceEffect(final ExileSourceEffect effect) {
         super(effect);
         this.toUniqueExileZone = effect.toUniqueExileZone;
     }
@@ -54,7 +53,7 @@ public class ExileSourceEffect extends OneShotEffect {
             if (sourceObject instanceof Card) {
                 if (sourceObject instanceof Permanent) {
                     if (!((Permanent) sourceObject).isPhasedIn()) {
-                        return true;
+                        return false;
                     }
                 }
                 UUID exileZoneId = null;
@@ -66,7 +65,7 @@ public class ExileSourceEffect extends OneShotEffect {
                 Card sourceCard = (Card) sourceObject;
                 return controller.moveCardsToExile(sourceCard, source, game, true, exileZoneId, exileZoneName);
             }
-            return true;
+            return false;
         }
         return false;
     }

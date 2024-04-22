@@ -50,7 +50,7 @@ public final class Trollhide extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Trollhide (final Trollhide card) {
+    private Trollhide(final Trollhide card) {
         super(card);
     }
 

@@ -42,7 +42,7 @@ public final class IngaAndEsika extends CardImpl {
     public IngaAndEsika(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.GOD);
         this.power = new MageInt(4);

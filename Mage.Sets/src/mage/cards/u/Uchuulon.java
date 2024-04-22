@@ -78,7 +78,7 @@ class UchuulonEffect extends OneShotEffect {
     UchuulonEffect() {
         super(Outcome.Benefit);
         staticText = "exile up to one target creature card from an opponent's graveyard. " +
-                "If you, create a token that's a copy of {this}";
+                "If you do, create a token that's a copy of {this}";
     }
 
     private UchuulonEffect(final UchuulonEffect effect) {

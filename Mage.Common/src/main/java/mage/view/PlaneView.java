@@ -1,6 +1,5 @@
 package mage.view;
 
-import mage.cards.Card;
 import mage.game.command.Plane;
 import mage.players.PlayableObjectStats;
 
@@ -15,25 +14,18 @@ public class PlaneView implements CommandObjectView, Serializable {
 
     protected UUID id;
     protected String name;
-    protected String expansionSetCode;
+    protected String imageFileName = "";
+    protected int imageNumber = 0;
+    protected String expansionSetCode = "";
     protected List<String> rules;
     protected PlayableObjectStats playableStats = new PlayableObjectStats();
-
-    public PlaneView(Plane plane, Card sourceCard) {
-        this.id = plane.getId();
-        this.name = "Plane " + sourceCard.getName();
-        if (plane.getExpansionSetCodeForImage() == null) {
-            this.expansionSetCode = sourceCard.getExpansionSetCode();
-        } else {
-            this.expansionSetCode = plane.getExpansionSetCodeForImage();
-        }
-        this.rules = plane.getAbilities().getRules(sourceCard.getName());
-    }
 
     public PlaneView(Plane plane) {
         this.id = plane.getId();
         this.name = plane.getName();
-        this.expansionSetCode = plane.getExpansionSetCodeForImage();
+        this.imageFileName = plane.getImageFileName();
+        this.imageNumber = plane.getImageNumber();
+        this.expansionSetCode = plane.getExpansionSetCode();
         this.rules = plane.getAbilities().getRules(plane.getName());
     }
 
@@ -50,6 +42,16 @@ public class PlaneView implements CommandObjectView, Serializable {
     @Override
     public UUID getId() {
         return id;
+    }
+
+    @Override
+    public String getImageFileName() {
+        return imageFileName;
+    }
+
+    @Override
+    public int getImageNumber() {
+        return imageNumber;
     }
 
     @Override

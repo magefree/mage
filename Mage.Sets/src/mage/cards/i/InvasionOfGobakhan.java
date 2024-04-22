@@ -2,6 +2,7 @@ package mage.cards.i;
 
 import mage.MageObjectReference;
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SiegeAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
@@ -40,7 +41,7 @@ public final class InvasionOfGobakhan extends CardImpl {
         // When Invasion of Gobakhan enters the battlefield, look at target opponent's hand. You may exile a nonland card from it. For as long as that card remains exiled, its owner may play it. A spell cast this way costs {2} more to cast.
         Ability ability = new EntersBattlefieldTriggeredAbility(new InvasionOfGobakhanEffect());
         ability.addTarget(new TargetOpponent());
-        this.addAbility(ability, new AttackedThisTurnWatcher());
+        this.addAbility(ability);
     }
 
     private InvasionOfGobakhan(final InvasionOfGobakhan card) {
@@ -151,6 +152,9 @@ class InvasionOfGobakhanCostEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
+        if (!(abilityToModify instanceof SpellAbility)) {
+            return false;
+        }
         if (game.inCheckPlayableState()) { // during playable check, the card is still in exile zone, the zcc is one less
             UUID cardtoCheckId = CardUtil.getMainCardId(game, abilityToModify.getSourceId());
             return mor.getSourceId().equals(cardtoCheckId)

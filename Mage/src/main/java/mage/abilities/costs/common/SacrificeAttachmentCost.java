@@ -18,7 +18,7 @@ public class SacrificeAttachmentCost extends UseAttachedCost implements Sacrific
         super();
     }
 
-    public SacrificeAttachmentCost(final SacrificeAttachmentCost cost) {
+    protected SacrificeAttachmentCost(final SacrificeAttachmentCost cost) {
         super(cost);
     }
 
@@ -45,6 +45,14 @@ public class SacrificeAttachmentCost extends UseAttachedCost implements Sacrific
         }
 
         return paid;
+    }
+
+    @Override
+    public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
+        if (!super.canPay(ability, source, controllerId, game)) {
+            return false;
+        }
+        return game.getPermanent(source.getSourceId()).canBeSacrificed();
     }
 
     @Override

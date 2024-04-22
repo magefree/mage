@@ -20,7 +20,7 @@ public final class DyingToServe extends CardImpl {
         // Whenever you discard one or more cards, create a tapped 2/2 black Zombie creature token. This ability triggers only once each turn.
         this.addAbility(new DiscardCardControllerTriggeredAbility(new CreateTokenEffect(
                 new ZombieToken(), 1, true, false), false
-        ).setTriggerPhrase("Whenever you discard one or more cards, ").setTriggersOnce(true));
+        ).setTriggerPhrase("Whenever you discard one or more cards, ").setTriggersOnceEachTurn(true));
     }
 
     private DyingToServe(final DyingToServe card) {

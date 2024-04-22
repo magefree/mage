@@ -51,7 +51,7 @@ class JudgeUnworthyEffect extends OneShotEffect {
         this.staticText = ", then reveal the top card of your library. {this} deals damage equal to that card's mana value to that creature";
     }
     
-    public JudgeUnworthyEffect(final JudgeUnworthyEffect effect) {
+    private JudgeUnworthyEffect(final JudgeUnworthyEffect effect) {
         super(effect);
     }
     

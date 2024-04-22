@@ -4,7 +4,7 @@ package mage.cards.h;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.LandfallAbility;
-import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -24,7 +24,7 @@ public final class HedronCrab extends CardImpl {
         this.power = new MageInt(0);
         this.toughness = new MageInt(2);
         // Landfall - Whenever a land enters the battlefield under your control, target player puts the top three cards of their library into their graveyard.
-        LandfallAbility ability = new LandfallAbility(new PutLibraryIntoGraveTargetEffect(3), false);
+        LandfallAbility ability = new LandfallAbility(new MillCardsTargetEffect(3), false);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

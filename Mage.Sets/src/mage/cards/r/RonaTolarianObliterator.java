@@ -25,7 +25,7 @@ public final class RonaTolarianObliterator extends CardImpl {
     public RonaTolarianObliterator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(5);

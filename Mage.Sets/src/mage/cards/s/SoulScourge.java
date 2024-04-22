@@ -61,7 +61,7 @@ class SoulScourgeEntersBattlefieldTriggeredAbility extends EntersBattlefieldTrig
         super(effect, false);
     }
 
-    public SoulScourgeEntersBattlefieldTriggeredAbility(final SoulScourgeEntersBattlefieldTriggeredAbility ability) {
+    private SoulScourgeEntersBattlefieldTriggeredAbility(final SoulScourgeEntersBattlefieldTriggeredAbility ability) {
         super(ability);
     }
 
@@ -90,7 +90,7 @@ class SoulScourgeLeavesBattlefieldTriggeredAbility extends LeavesBattlefieldTrig
         super(new GainLifeTargetEffect(3), false);
     }
 
-    public SoulScourgeLeavesBattlefieldTriggeredAbility(SoulScourgeLeavesBattlefieldTriggeredAbility ability) {
+    private SoulScourgeLeavesBattlefieldTriggeredAbility(final SoulScourgeLeavesBattlefieldTriggeredAbility ability) {
         super(ability);
     }
 

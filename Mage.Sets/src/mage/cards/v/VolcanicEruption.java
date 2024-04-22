@@ -57,12 +57,12 @@ enum VolcanicEruptionAdjuster implements TargetAdjuster {
 
 class VolcanicEruptionEffect extends OneShotEffect {
 
-    public VolcanicEruptionEffect() {
+    VolcanicEruptionEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "Destroy X target Mountains. {this} deals damage to each creature and each player equal to the number of Mountains put into a graveyard this way.";
     }
 
-    public VolcanicEruptionEffect(final VolcanicEruptionEffect effect) {
+    private VolcanicEruptionEffect(final VolcanicEruptionEffect effect) {
         super(effect);
     }
 
@@ -75,7 +75,7 @@ class VolcanicEruptionEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
 
         int destroyedCount = 0;
-        for (UUID targetID : this.targetPointer.getTargets(game, source)) {
+        for (UUID targetID : this.getTargetPointer().getTargets(game, source)) {
             Permanent permanent = game.getPermanent(targetID);
             if (permanent != null) {
                 if (permanent.destroy(source, game, false)) {

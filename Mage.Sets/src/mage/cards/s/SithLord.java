@@ -53,7 +53,7 @@ public final class SithLord extends CardImpl {
             super(Outcome.BoostCreature);
         }
 
-        SithLordEffect(final SithLordEffect effect) {
+        private SithLordEffect(final SithLordEffect effect) {
             super(effect);
         }
 

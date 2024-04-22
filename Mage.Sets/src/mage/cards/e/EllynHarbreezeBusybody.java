@@ -24,7 +24,7 @@ public final class EllynHarbreezeBusybody extends CardImpl {
     public EllynHarbreezeBusybody(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN, SubType.PEASANT);
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);

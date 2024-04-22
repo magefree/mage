@@ -33,7 +33,7 @@ public final class EmberFistZubera extends CardImpl {
         this.addAbility(ability, new ZuberasDiedWatcher());
     }
 
-    public EmberFistZubera (final EmberFistZubera card) {
+    private EmberFistZubera(final EmberFistZubera card) {
         super(card);
     }
 

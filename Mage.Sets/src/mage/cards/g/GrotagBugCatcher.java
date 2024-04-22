@@ -33,7 +33,7 @@ public final class GrotagBugCatcher extends CardImpl {
 
         // Whenever Grotag Bug-Catcher attacks, it gets +1/+0 until end of turn for each creature in your party.
         this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(
-                PartyCount.instance, StaticValue.get(0), Duration.EndOfTurn, true
+                PartyCount.instance, StaticValue.get(0), Duration.EndOfTurn
         ).setText("it gets +1/+0 until end of turn for each creature in your party. " + PartyCount.getReminder()), false).addHint(PartyCountHint.instance));
     }
 

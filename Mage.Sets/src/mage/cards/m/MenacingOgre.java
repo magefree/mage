@@ -55,12 +55,12 @@ public final class MenacingOgre extends CardImpl {
 
 class MenacingOgreEffect extends OneShotEffect {
 
-    public MenacingOgreEffect() {
+    MenacingOgreEffect() {
         super(Outcome.Detriment);
         this.staticText = "each player secretly chooses a number. Then those numbers are revealed. Each player with the highest number loses that much life. If you are one of those players, put two +1/+1 counters on {this}";
     }
 
-    public MenacingOgreEffect(final MenacingOgreEffect effect) {
+    private MenacingOgreEffect(final MenacingOgreEffect effect) {
         super(effect);
     }
 

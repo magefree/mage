@@ -24,6 +24,8 @@ import mage.target.common.TargetCardInGraveyard;
  */
 public final class MyrWelder extends CardImpl {
 
+    private static final FilterArtifactCard filter = new FilterArtifactCard("artifact card from a graveyard");
+
     public MyrWelder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
         this.subtype.add(SubType.MYR);
@@ -32,7 +34,7 @@ public final class MyrWelder extends CardImpl {
 
         // Imprint - {tap}: Exile target artifact card from a graveyard
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MyrWelderEffect(), new TapSourceCost());
-        ability.addTarget(new TargetCardInGraveyard(new FilterArtifactCard("artifact card from a graveyard")));
+        ability.addTarget(new TargetCardInGraveyard(filter));
         this.addAbility(ability.setAbilityWord(AbilityWord.IMPRINT));
 
         // Myr Welder has all activated abilities of all cards exiled with it
@@ -53,12 +55,12 @@ public final class MyrWelder extends CardImpl {
 
 class MyrWelderEffect extends OneShotEffect {
 
-    public MyrWelderEffect() {
+    MyrWelderEffect() {
         super(Outcome.Exile);
         staticText = "Exile target artifact card from a graveyard";
     }
 
-    public MyrWelderEffect(MyrWelderEffect effect) {
+    private MyrWelderEffect(final MyrWelderEffect effect) {
         super(effect);
     }
 
@@ -83,12 +85,12 @@ class MyrWelderEffect extends OneShotEffect {
 
 class MyrWelderContinuousEffect extends ContinuousEffectImpl {
 
-    public MyrWelderContinuousEffect() {
+    MyrWelderContinuousEffect() {
         super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         staticText = "{this} has all activated abilities of all cards exiled with it";
     }
 
-    public MyrWelderContinuousEffect(final MyrWelderContinuousEffect effect) {
+    private MyrWelderContinuousEffect(final MyrWelderContinuousEffect effect) {
         super(effect);
     }
 
@@ -101,7 +103,7 @@ class MyrWelderContinuousEffect extends ContinuousEffectImpl {
                 if (card != null) {
                     for (Ability ability : card.getAbilities(game)) {
                         if (ability instanceof ActivatedAbility) {
-                            perm.addAbility(ability, source.getId(), game);
+                            perm.addAbility(ability, source.getId(), game, true);
                         }
                     }
                 }

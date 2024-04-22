@@ -41,6 +41,9 @@ public class DashAbility extends AlternativeSourceCostsImpl {
     public DashAbility copy() {
         return new DashAbility(this);
     }
+    public static String getActivationKey(){
+        return getActivationKey(KEYWORD);
+    }
 }
 
 class DashAddDelayedTriggeredAbilityEffect extends OneShotEffect {

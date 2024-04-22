@@ -38,7 +38,7 @@ public class PhabineBosssConfidant extends CardImpl {
     public PhabineBosssConfidant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{G}{W}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         addSubType(SubType.CAT, SubType.ADVISOR);
         this.power = new MageInt(3);
         this.toughness = new MageInt(6);

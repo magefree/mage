@@ -18,6 +18,8 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -73,11 +75,15 @@ class AwakenTheSleeperEffect extends OneShotEffect {
                 || !player.chooseUse(outcome, "Destroy all equipment attached to " + permanent.getName() + '?', source, game)) {
             return false;
         }
+        List<Permanent> toDestroy = new LinkedList<>();
         for (UUID attachmentId : permanent.getAttachments()) {
             Permanent attachment = game.getPermanent(attachmentId);
             if (attachment != null && attachment.hasSubtype(SubType.EQUIPMENT, game)) {
-                attachment.destroy(source, game);
+                toDestroy.add(attachment);
             }
+        }
+        for (Permanent equipment : toDestroy) {
+            equipment.destroy(source, game);
         }
         return true;
     }

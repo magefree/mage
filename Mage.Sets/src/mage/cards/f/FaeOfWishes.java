@@ -13,7 +13,6 @@ import mage.cards.AdventureCard;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInHand;
 
@@ -46,6 +45,8 @@ public final class FaeOfWishes extends AdventureCard {
         // You may reveal a noncreature card you own from outside the game and put it into your hand.
         this.getSpellCard().getSpellAbility().addEffect(new WishEffect(StaticFilters.FILTER_CARD_A_NON_CREATURE));
         this.getSpellCard().getSpellAbility().addHint(OpenSideboardHint.instance);
+
+        this.finalizeAdventure();
     }
 
     private FaeOfWishes(final FaeOfWishes card) {

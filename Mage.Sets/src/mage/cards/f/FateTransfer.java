@@ -53,12 +53,12 @@ public final class FateTransfer extends CardImpl {
 
 class FateTransferEffect extends OneShotEffect {
 
-    public FateTransferEffect() {
+    FateTransferEffect() {
         super(Outcome.AIDontUseIt);
         staticText = "Move all counters from target creature onto another target creature";
     }
 
-    public FateTransferEffect(final FateTransferEffect effect) {
+    private FateTransferEffect(final FateTransferEffect effect) {
         super(effect);
     }
 

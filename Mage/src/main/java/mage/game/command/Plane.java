@@ -11,47 +11,46 @@ import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
-import mage.cards.Card;
 import mage.cards.FrameStyle;
+import mage.cards.repository.TokenInfo;
+import mage.cards.repository.TokenRepository;
 import mage.constants.CardType;
 import mage.constants.Planes;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
-import mage.util.GameLog;
 import mage.util.RandomUtil;
 import mage.util.SubTypes;
 
 import java.lang.reflect.Constructor;
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * @author spjspj
  */
-public class Plane implements CommandObject {
+public abstract class Plane extends CommandObjectImpl {
 
-    private static final List<CardType> emptyList = Collections.unmodifiableList(new ArrayList<>());
-    private static final ObjectColor emptyColor = new ObjectColor();
     private static final ManaCosts emptyCost = new ManaCostsImpl<>();
 
     private Planes planeType = null;
-    private UUID id;
+
     private UUID controllerId;
     private MageObject sourceObject;
     private boolean copy;
     private MageObject copyFrom; // copied card INFO (used to call original adjusters)
     private FrameStyle frameStyle;
     private Abilities<Ability> abilites = new AbilitiesImpl<>();
-    private String expansionSetCodeForImage = "";
 
     public Plane() {
-        this.id = UUID.randomUUID();
+        super("");
         this.frameStyle = FrameStyle.M15_NORMAL;
     }
 
-    public Plane(final Plane plane) {
-        this.id = plane.id;
+    protected Plane(final Plane plane) {
+        super(plane);
         this.planeType = plane.planeType;
         this.frameStyle = plane.frameStyle;
         this.controllerId = plane.controllerId;
@@ -59,7 +58,6 @@ public class Plane implements CommandObject {
         this.copy = plane.copy;
         this.copyFrom = (plane.copyFrom != null ? plane.copyFrom.copy() : null);
         this.abilites = plane.abilites.copy();
-        this.expansionSetCodeForImage = plane.expansionSetCodeForImage;
     }
 
     @Override
@@ -67,17 +65,19 @@ public class Plane implements CommandObject {
         return frameStyle;
     }
 
-    @Override
-    public void assignNewId() {
-        this.id = UUID.randomUUID();
-    }
+    public void setSourceObject() {
+        this.sourceObject = null;
 
-    public void setSourceObject(MageObject sourceObject) {
-        this.sourceObject = sourceObject;
-        if (sourceObject instanceof Card) {
-            if (expansionSetCodeForImage.isEmpty()) {
-                expansionSetCodeForImage = ((Card) sourceObject).getExpansionSetCode();
-            }
+        // choose set code due source
+        TokenInfo foundInfo = TokenRepository.instance.findPreferredTokenInfoForClass(this.getClass().getName(), null);
+        if (foundInfo != null) {
+            this.setExpansionSetCode(foundInfo.getSetCode());
+            this.setCardNumber("");
+            this.setImageFileName(""); // use default
+            this.setImageNumber(foundInfo.getImageNumber());
+        } else {
+            // how-to fix: add plane to the tokens-database
+            throw new IllegalArgumentException("Wrong code usage: can't find token info for the plane: " + this.getClass().getName());
         }
     }
 
@@ -105,6 +105,14 @@ public class Plane implements CommandObject {
     }
 
     @Override
+    public UUID getControllerOrOwnerId() {
+        return getControllerId();
+    }
+
+    @Override
+    abstract public Plane copy();
+
+    @Override
     public void setCopy(boolean isCopy, MageObject copyFrom) {
         this.copy = isCopy;
         this.copyFrom = (copyFrom != null ? copyFrom.copy() : null);
@@ -126,21 +134,6 @@ public class Plane implements CommandObject {
     }
 
     @Override
-    public String getIdName() {
-        return getName() + " [" + getId().toString().substring(0, 3) + ']';
-    }
-
-    @Override
-    public String getLogName() {
-        return GameLog.getColoredObjectIdName(this);
-    }
-
-    @Override
-    public String getImageName() {
-        return planeType != null ? planeType.getFullName() : "";
-    }
-
-    @Override
     public void setName(String name) {
         throw new UnsupportedOperationException("Planes don't use setName, use setPlaneType instead");
     }
@@ -155,7 +148,7 @@ public class Plane implements CommandObject {
 
     @Override
     public List<CardType> getCardType(Game game) {
-        return emptyList;
+        return Collections.emptyList();
     }
 
     @Override
@@ -174,8 +167,8 @@ public class Plane implements CommandObject {
     }
 
     @Override
-    public EnumSet<SuperType> getSuperType() {
-        return EnumSet.noneOf(SuperType.class);
+    public List<SuperType> getSuperType(Game game) {
+        return Collections.emptyList();
     }
 
     @Override
@@ -190,22 +183,27 @@ public class Plane implements CommandObject {
 
     @Override
     public ObjectColor getColor() {
-        return emptyColor;
+        return ObjectColor.COLORLESS;
     }
 
     @Override
     public ObjectColor getColor(Game game) {
-        return emptyColor;
+        return ObjectColor.COLORLESS;
     }
 
     @Override
     public ObjectColor getFrameColor(Game game) {
-        return emptyColor;
+        return ObjectColor.COLORLESS;
     }
 
     @Override
     public ManaCosts<ManaCost> getManaCost() {
         return emptyCost;
+    }
+
+    @Override
+    public void setManaCost(ManaCosts<ManaCost> costs) {
+        throw new UnsupportedOperationException("Unsupported operation");
     }
 
     @Override
@@ -242,28 +240,8 @@ public class Plane implements CommandObject {
     }
 
     @Override
-    public UUID getId() {
-        return this.id;
-    }
-
-    @Override
-    public Plane copy() {
-        return new Plane(this);
-    }
-
-    @Override
-    public String getExpansionSetCodeForImage() {
-        return expansionSetCodeForImage;
-    }
-
-    @Override
-    public void setExpansionSetCodeForImage(String expansionSetCodeForImage) {
-        this.expansionSetCodeForImage = expansionSetCodeForImage;
-    }
-
-    @Override
     public int getZoneChangeCounter(Game game) {
-        return 1; // Emblems can't move zones until now so return always 1
+        return 1; // Planes can't move zones until now so return always 1
     }
 
     @Override
@@ -311,6 +289,7 @@ public class Plane implements CommandObject {
                 Constructor<?> cons = c.getConstructor();
                 Object plane = cons.newInstance();
                 if (plane instanceof Plane) {
+                    // TODO: generate image for plane here?
                     return (Plane) plane;
                 }
             } catch (Exception ex) {

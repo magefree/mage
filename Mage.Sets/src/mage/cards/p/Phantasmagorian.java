@@ -55,12 +55,12 @@ public final class Phantasmagorian extends CardImpl {
 
 class CounterSourceEffect extends OneShotEffect {
 
-    public CounterSourceEffect() {
+    CounterSourceEffect() {
         super(Outcome.AIDontUseIt);
         this.staticText = "any player may discard three cards. If a player does, counter {this}";
     }
 
-    public CounterSourceEffect(final CounterSourceEffect effect) {
+    private CounterSourceEffect(final CounterSourceEffect effect) {
         super(effect);
     }
 

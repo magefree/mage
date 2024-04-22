@@ -47,11 +47,12 @@ public final class CoralColony extends CardImpl {
         // Defender
         this.addAbility(DefenderAbility.getInstance());
 
-        // {1}{U}, {T}: Target player mills X cards, where X is the number of cards you control with defender.
-        Ability ability = new SimpleActivatedAbility(new MillCardsTargetEffect(xValue), new ManaCostsImpl<>("{1}{U}"));
+        // {1}{U}, {T}: Target player mills X cards, where X is the number of creatures you control with defender.
+        String ruleText = "target player mills X cards, where X is the number of creatures you control with defender";
+        Ability ability = new SimpleActivatedAbility(new MillCardsTargetEffect(xValue).setText(ruleText), new ManaCostsImpl<>("{1}{U}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPlayer());
-        this.addAbility(ability);
+        this.addAbility(ability.addHint(hint));
     }
 
     private CoralColony(final CoralColony card) {

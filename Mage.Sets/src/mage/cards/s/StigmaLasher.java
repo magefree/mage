@@ -58,7 +58,7 @@ class StigmaLasherEffect extends ContinuousEffectImpl {
         staticText = "that player can't gain life for the rest of the game";
     }
     
-    public StigmaLasherEffect(final StigmaLasherEffect effect) {
+    private StigmaLasherEffect(final StigmaLasherEffect effect) {
         super(effect);
     }
     
@@ -69,7 +69,7 @@ class StigmaLasherEffect extends ContinuousEffectImpl {
     
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(this.targetPointer.getFirst(game, source));
+        Player player = game.getPlayer(this.getTargetPointer().getFirst(game, source));
         if (player != null) {
             player.setCanGainLife(false);
         }

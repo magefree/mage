@@ -45,17 +45,17 @@ class CorruptedResolveEffect extends OneShotEffect {
         staticText = "Counter target spell if its controller is poisoned";
     }
 
-    CorruptedResolveEffect(final CorruptedResolveEffect effect) {
+    private CorruptedResolveEffect(final CorruptedResolveEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
+        Spell spell = game.getStack().getSpell(getTargetPointer().getFirst(game, source));
         if (spell != null) {
             Player player = game.getPlayer(spell.getControllerId());
             if (player != null && player.getCounters().containsKey(CounterType.POISON))
-                return game.getStack().counter(targetPointer.getFirst(game, source), source, game);
+                return game.getStack().counter(getTargetPointer().getFirst(game, source), source, game);
         }
         return false;
     }

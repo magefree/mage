@@ -46,7 +46,7 @@ public final class UrzaPlaneswalker extends MeldCard {
     public UrzaPlaneswalker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.URZA);
 
         this.setStartingLoyalty(7);
@@ -95,12 +95,12 @@ public final class UrzaPlaneswalker extends MeldCard {
 
 class UrzaPlaneswalkerEffect extends ContinuousEffectImpl {
 
-    public UrzaPlaneswalkerEffect() {
+    UrzaPlaneswalkerEffect() {
         super(Duration.WhileOnBattlefield, Layer.RulesEffects, SubLayer.NA, Outcome.Benefit);
         staticText = "once during each of your turns, you may activate an additional loyalty ability of {this}";
     }
 
-    public UrzaPlaneswalkerEffect(final UrzaPlaneswalkerEffect effect) {
+    private UrzaPlaneswalkerEffect(final UrzaPlaneswalkerEffect effect) {
         super(effect);
     }
 

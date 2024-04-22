@@ -28,7 +28,7 @@ public final class Vaultbreaker extends CardImpl {
 
         // Whenever Vaultbreaker attacks, you may discard a card. If you do, draw a card.
         this.addAbility(new AttacksTriggeredAbility(new DoIfCostPaid(new DrawCardSourceControllerEffect(1),
-                new DiscardCardCost()), false, "Whenever {this} attacks, you may discard a card. If you do, draw a card"));
+                new DiscardCardCost())));
 
         // Dash {2}{R}
         this.addAbility(new DashAbility("{2}{R}"));

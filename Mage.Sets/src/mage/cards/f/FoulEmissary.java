@@ -1,6 +1,5 @@
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SacrificeSourceTriggeredAbility;
@@ -17,6 +16,8 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.token.EldraziHorrorToken;
 import mage.game.stack.Spell;
+
+import java.util.UUID;
 
 /**
  *
@@ -55,7 +56,7 @@ class FoulEmissaryTriggeredAbility extends SacrificeSourceTriggeredAbility {
         setTriggerPhrase("When you sacrifice {this} while casting a spell with emerge, ");
     }
 
-    public FoulEmissaryTriggeredAbility(final FoulEmissaryTriggeredAbility ability) {
+    private FoulEmissaryTriggeredAbility(final FoulEmissaryTriggeredAbility ability) {
         super(ability);
     }
 

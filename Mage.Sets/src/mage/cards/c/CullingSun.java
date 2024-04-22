@@ -25,7 +25,7 @@ public final class CullingSun extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{W}{W}{B}");
 
 
-        this.getSpellAbility().addEffect(new DestroyAllEffect(filter));
+        this.getSpellAbility().addEffect(new DestroyAllEffect(filter).setText("destroy each creature with mana value 3 or less"));
     }
 
     private CullingSun(final CullingSun card) {

@@ -65,7 +65,7 @@ class SwordOfWarAndPeaceAbility extends TriggeredAbilityImpl {
         this.addEffect(new GainLifeEffect(CardsInControllerHandCount.instance));
     }
 
-    public SwordOfWarAndPeaceAbility(final SwordOfWarAndPeaceAbility ability) {
+    private SwordOfWarAndPeaceAbility(final SwordOfWarAndPeaceAbility ability) {
         super(ability);
     }
 
@@ -103,7 +103,7 @@ class SwordOfWarAndPeaceDamageEffect extends OneShotEffect {
         staticText = "{this} deals damage to that player equal to the number of cards in their hand";
     }
 
-    SwordOfWarAndPeaceDamageEffect(final SwordOfWarAndPeaceDamageEffect effect) {
+    private SwordOfWarAndPeaceDamageEffect(final SwordOfWarAndPeaceDamageEffect effect) {
         super(effect);
     }
 

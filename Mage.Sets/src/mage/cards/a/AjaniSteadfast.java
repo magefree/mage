@@ -19,7 +19,7 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterPlaneswalkerPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.command.emblems.AjaniSteadfastEmblem;
@@ -40,7 +40,7 @@ public final class AjaniSteadfast extends CardImpl {
 
     public AjaniSteadfast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{W}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.AJANI);
 
         this.setStartingLoyalty(4);
@@ -62,7 +62,7 @@ public final class AjaniSteadfast extends CardImpl {
         this.addAbility(ability);
 
         // -2: Put a +1/+1 counter on each creature you control and a loyalty counter on each other planeswalker you control.
-        ability = new LoyaltyAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(), new FilterControlledCreaturePermanent()), -2);
+        ability = new LoyaltyAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(), StaticFilters.FILTER_CONTROLLED_CREATURE), -2);
         effect = new AddCountersAllEffect(CounterType.LOYALTY.createInstance(), filter);
         effect.setText("and a loyalty counter on each other planeswalker you control");
         ability.addEffect(effect);

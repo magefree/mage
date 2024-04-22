@@ -45,12 +45,12 @@ public final class WandOfDenial extends CardImpl {
 
 class WandOfDenialEffect extends OneShotEffect {
 
-    public WandOfDenialEffect() {
+    WandOfDenialEffect() {
         super(Outcome.Benefit);
         this.staticText = "Look at the top card of target player's library. If it's a nonland card, you may pay 2 life. If you do, put it into that player's graveyard.";
     }
     
-    public WandOfDenialEffect(final WandOfDenialEffect effect) {
+    private WandOfDenialEffect(final WandOfDenialEffect effect) {
         super(effect);
     }
 

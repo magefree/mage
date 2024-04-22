@@ -59,7 +59,7 @@ class CommandoRaidTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new CommandoRaidEffect(), true);
     }
 
-    public CommandoRaidTriggeredAbility(final CommandoRaidTriggeredAbility ability) {
+    private CommandoRaidTriggeredAbility(final CommandoRaidTriggeredAbility ability) {
         super(ability);
     }
 
@@ -102,12 +102,12 @@ class CommandoRaidTriggeredAbility extends TriggeredAbilityImpl {
 
 class CommandoRaidEffect extends OneShotEffect {
 
-    public CommandoRaidEffect() {
+    CommandoRaidEffect() {
         super(Outcome.Damage);
         staticText = "it deals that much damage to target creature that player controls";
     }
 
-    public CommandoRaidEffect(final CommandoRaidEffect effect) {
+    private CommandoRaidEffect(final CommandoRaidEffect effect) {
         super(effect);
     }
 

@@ -38,9 +38,7 @@ public interface GameManager {
 
     void stopWatching(UUID gameId, UUID userId);
 
-    void cheat(UUID gameId, UUID userId, UUID playerId, DeckCardLists deckList);
-
-    boolean cheat(UUID gameId, UUID userId, UUID playerId, String cardName);
+    void cheatShow(UUID gameId, UUID userId, UUID playerId);
 
     void removeGame(UUID gameId);
 

@@ -67,14 +67,14 @@ class SeraphEffect extends OneShotEffect {
         staticText = "put that card onto the battlefield under your control. Sacrifice it when you lose control of {this}";
     }
 
-    SeraphEffect(SeraphEffect effect) {
+    private SeraphEffect(final SeraphEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Card creatureCard = game.getCard(targetPointer.getFirst(game, source));
+        Card creatureCard = game.getCard(getTargetPointer().getFirst(game, source));
         if (controller != null
                 && creatureCard != null
                 && game.getState().getZone(creatureCard.getId()) == Zone.GRAVEYARD) { // must be still in the graveyard
@@ -104,7 +104,7 @@ class SeraphDelayedTriggeredAbility extends DelayedTriggeredAbility {
         this.seraph = seraph;
     }
 
-    SeraphDelayedTriggeredAbility(SeraphDelayedTriggeredAbility ability) {
+    private SeraphDelayedTriggeredAbility(final SeraphDelayedTriggeredAbility ability) {
         super(ability);
         this.seraph = ability.seraph;
     }

@@ -3,9 +3,8 @@ package mage.cards.v;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.mana.GreenManaAbility;
-import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
@@ -16,7 +15,7 @@ import java.util.UUID;
 /**
  * @author JayDi85
  */
-public final class VastwoodFortification extends ModalDoubleFacesCard {
+public final class VastwoodFortification extends ModalDoubleFacedCard {
 
     public VastwoodFortification(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo,

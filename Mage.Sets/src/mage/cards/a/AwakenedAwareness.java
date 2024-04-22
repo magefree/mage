@@ -57,7 +57,7 @@ public final class AwakenedAwareness extends CardImpl {
 
 class AwakenedAwarenessEffect extends ContinuousEffectImpl {
 
-    public AwakenedAwarenessEffect() {
+    AwakenedAwarenessEffect() {
         super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.SetPT_7b, Outcome.UnboostCreature);
         this.staticText = "As long as enchanted permanent is a creature, it has base power and toughness 1/1";
     }

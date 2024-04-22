@@ -23,7 +23,7 @@ import java.util.UUID;
 public class LukesLightsaber extends CardImpl {
     public LukesLightsaber(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.addSubType(SubType.EQUIPMENT);
 
         //Equipped creature gets +2/+0 and has first strike and protection from black.
@@ -46,7 +46,7 @@ public class LukesLightsaber extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2), false));
     }
 
-    public LukesLightsaber(final LukesLightsaber card) {
+    private LukesLightsaber(final LukesLightsaber card) {
         super(card);
     }
 

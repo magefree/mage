@@ -2,7 +2,7 @@ package mage.cards.r;
 
 import mage.abilities.Mode;
 import mage.abilities.effects.common.ExileGraveyardAllTargetPlayerEffect;
-import mage.abilities.effects.common.ExileTopXMayPlayUntilEndOfTurnEffect;
+import mage.abilities.effects.common.ExileTopXMayPlayUntilEffect;
 import mage.abilities.effects.common.SacrificeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -39,8 +39,8 @@ public final class RiveteersCharm extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
 
         // • Exile the top three cards of your library. Until your next end step, you may play those cards.
-        this.getSpellAbility().addMode(new Mode(new ExileTopXMayPlayUntilEndOfTurnEffect(
-                3, false, Duration.UntilYourNextEndStep
+        this.getSpellAbility().addMode(new Mode(new ExileTopXMayPlayUntilEffect(
+                3, Duration.UntilYourNextEndStep
         )));
 
         // • Exile target player's graveyard.

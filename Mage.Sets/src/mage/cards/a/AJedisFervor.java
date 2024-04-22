@@ -1,7 +1,6 @@
 package mage.cards.a;
 
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.IndestructibleAbility;
@@ -15,12 +14,13 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.target.TargetPermanent;
+import mage.target.common.TargetSacrifice;
 import mage.watchers.common.SpellsCastWatcher;
 
 import java.util.*;
 
 /**
- * @author: Merlingilb
+ * @author Merlingilb
  */
 public final class AJedisFervor extends CardImpl {
     public AJedisFervor(UUID ownerId, CardSetInfo setInfo) {
@@ -34,7 +34,6 @@ public final class AJedisFervor extends CardImpl {
 
         // If an opponent cast a black spell this turn, that player sacrifices a creature or planeswalker.
         this.getSpellAbility().addEffect(new AJedisFervorEffect());
-        this.getSpellAbility().addWatcher(new SpellsCastWatcher());
     }
 
     private AJedisFervor(final AJedisFervor card) {
@@ -53,7 +52,7 @@ class AJedisFervorEffect extends OneShotEffect {
         staticText = "If an opponent cast a black spell this turn, that player sacrifices a creature or planeswalker.";
     }
 
-    public AJedisFervorEffect(final AJedisFervorEffect effect) {
+    private AJedisFervorEffect(final AJedisFervorEffect effect) {
         super(effect);
     }
 
@@ -78,9 +77,8 @@ class AJedisFervorEffect extends OneShotEffect {
         }
         //get that opponents to pick a creature or planeswalker
         for (UUID opponentId : opponentsBlack) {
-            TargetPermanent target = new TargetPermanent(1, 1,
-                    StaticFilters.FILTER_CONTROLLED_PERMANENT_CREATURE_OR_PLANESWALKER, false);
-            game.getPlayer(opponentId).chooseTarget(Outcome.Sacrifice, target, source, game);
+            TargetSacrifice target = new TargetSacrifice(StaticFilters.FILTER_CONTROLLED_PERMANENT_CREATURE_OR_PLANESWALKER);
+            game.getPlayer(opponentId).choose(Outcome.Sacrifice, target, source, game);
             perms.addAll(target.getTargets());
         }
         //sacrifices the picked cards

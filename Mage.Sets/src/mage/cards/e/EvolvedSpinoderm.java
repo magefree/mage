@@ -1,14 +1,11 @@
 package mage.cards.e;
 
-import java.util.UUID;
-
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.condition.common.PermanentHasCounterCondition;
 import mage.abilities.condition.common.SourceHasCounterCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.decorator.ConditionalOneShotEffect;
@@ -18,12 +15,14 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
 import mage.abilities.keyword.HexproofAbility;
 import mage.abilities.keyword.TrampleAbility;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
+
+import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -51,8 +50,8 @@ public final class EvolvedSpinoderm extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(HexproofAbility.getInstance()),
                 new GainAbilitySourceEffect(TrampleAbility.getInstance()),
-                condition1, "{this} has trample as long as it was two " +
-                "or fewer oil counters on it, Otherwise, it has hexproof"
+                condition1, "{this} has trample as long as it has two " +
+                "or fewer oil counters on it. Otherwise, it has hexproof"
         )));
 
         // At the beginning of your upkeep, remove an oil counter from Evolved Spinoderm. Then if it has no oil counters on it, sacrifice it.

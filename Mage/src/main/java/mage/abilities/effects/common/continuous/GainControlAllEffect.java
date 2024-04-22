@@ -1,6 +1,7 @@
 package mage.abilities.effects.common.continuous;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
@@ -12,7 +13,6 @@ import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
 /**
- *
  * @author fenhl
  */
 public class GainControlAllEffect extends OneShotEffect {
@@ -33,7 +33,7 @@ public class GainControlAllEffect extends OneShotEffect {
         this.staticText = "gain control of all " + filter.getMessage() + (duration.toString().isEmpty() ? "" : ' ' + duration.toString());
     }
 
-    public GainControlAllEffect(final GainControlAllEffect effect) {
+    protected GainControlAllEffect(final GainControlAllEffect effect) {
         super(effect);
         this.filter = effect.filter.copy();
         this.duration = effect.duration;

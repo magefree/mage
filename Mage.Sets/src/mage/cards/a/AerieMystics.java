@@ -14,7 +14,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -31,7 +31,7 @@ public final class AerieMystics extends CardImpl {
         this.toughness = new MageInt(3);
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new GainAbilityControlledEffect(ShroudAbility.getInstance(), Duration.EndOfTurn, FILTER_PERMANENT_CREATURES), new ManaCostsImpl<>("{1}{G}{U}")));
+                new GainAbilityControlledEffect(ShroudAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES), new ManaCostsImpl<>("{1}{G}{U}")));
     }
 
     private AerieMystics(final AerieMystics card) {

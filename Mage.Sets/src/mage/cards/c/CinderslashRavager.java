@@ -24,7 +24,7 @@ import java.util.UUID;
  */
 public final class CinderslashRavager extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("permanent you control with an oil counter on it");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("permanent you control with oil counters on it");
 
     static {
         filter.add(CounterType.OIL.getPredicate());
@@ -48,7 +48,7 @@ public final class CinderslashRavager extends CardImpl {
 
         // When Cinderslash Ravager enters the battlefield, it deals 1 damage to each creature your opponents control.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DamageAllEffect(
-                1, "it", StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURES
+                1, "it", StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE
         )));
     }
 

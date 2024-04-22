@@ -49,13 +49,13 @@ public final class TrenchGorger extends CardImpl {
 
 class TrenchGorgerEffect extends OneShotEffect {
 
-    public TrenchGorgerEffect() {
+    TrenchGorgerEffect() {
         super(Outcome.BoostCreature);
         this.staticText = "search your library for any number of land cards, exile them, then shuffle. " +
                 "If you do, {this} has base power and base toughness each equal to the number of cards exiled this way";
     }
 
-    public TrenchGorgerEffect(final TrenchGorgerEffect effect) {
+    private TrenchGorgerEffect(final TrenchGorgerEffect effect) {
         super(effect);
     }
 
@@ -86,7 +86,7 @@ class TrenchGorgerEffect extends OneShotEffect {
             }
         }
         controller.shuffleLibrary(source, game);
-        game.addEffect(new SetBasePowerToughnessSourceEffect(count, count, Duration.WhileOnBattlefield, SubLayer.SetPT_7b), source);
+        game.addEffect(new SetBasePowerToughnessSourceEffect(count, count, Duration.WhileOnBattlefield), source);
         return true;
     }
 }

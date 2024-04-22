@@ -23,7 +23,7 @@ public class GetEmblemEffect extends OneShotEffect {
         this.staticText = getText();
     }
 
-    public GetEmblemEffect(final GetEmblemEffect effect) {
+    protected GetEmblemEffect(final GetEmblemEffect effect) {
         super(effect);
         this.emblem = effect.emblem;
     }

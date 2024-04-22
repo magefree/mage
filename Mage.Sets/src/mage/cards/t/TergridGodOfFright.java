@@ -10,7 +10,7 @@ import mage.abilities.effects.common.UntapSourceEffect;
 import mage.abilities.keyword.MenaceAbility;
 import mage.cards.Card;
 import mage.cards.CardSetInfo;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.*;
@@ -22,6 +22,7 @@ import mage.game.permanent.PermanentToken;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
+import mage.target.common.TargetSacrifice;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.HashSet;
@@ -31,18 +32,19 @@ import java.util.UUID;
 /**
  * @author jeffwadsworth
  */
-public final class TergridGodOfFright extends ModalDoubleFacesCard {
+public final class TergridGodOfFright extends ModalDoubleFacedCard {
 
     public TergridGodOfFright(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo,
-                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.GOD}, "{3}{B}{B}",
-                "Tergrid's Lantern", new CardType[]{CardType.ARTIFACT}, new SubType[]{}, "{3}{B}"
+        super(
+                ownerId, setInfo,
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.GOD}, "{3}{B}{B}",
+                "Tergrid's Lantern",
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.ARTIFACT}, new SubType[]{}, "{3}{B}"
         );
 
         // 1.
         // Tergrid, God of Fright
         // Legendary Creature - God
-        this.getLeftHalfCard().addSuperType(SuperType.LEGENDARY);
         this.getLeftHalfCard().setPT(4, 5);
 
         // Menace
@@ -54,8 +56,6 @@ public final class TergridGodOfFright extends ModalDoubleFacesCard {
         // 2.
         // Tergrid's Lantern
         // Legendary Artifact
-        this.getRightHalfCard().addSuperType(SuperType.LEGENDARY);
-
         // {T}: Target player loses 3 life unless they sacrifice a nonland permanent or discard a card.
         Ability tergridsLaternActivatedAbility = new SimpleActivatedAbility(
                 new TergridsLaternEffect(), new TapSourceCost()
@@ -139,11 +139,11 @@ class TergridGodOfFrightTriggeredAbility extends TriggeredAbilityImpl {
 
 class TergridGodOfFrightEffect extends OneShotEffect {
 
-    public TergridGodOfFrightEffect() {
+    TergridGodOfFrightEffect() {
         super(Outcome.Neutral);
     }
 
-    public TergridGodOfFrightEffect(final TergridGodOfFrightEffect effect) {
+    private TergridGodOfFrightEffect(final TergridGodOfFrightEffect effect) {
         super(effect);
     }
 
@@ -156,7 +156,7 @@ class TergridGodOfFrightEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Card card = game.getCard(targetPointer.getFirst(game, source));
+            Card card = game.getCard(getTargetPointer().getFirst(game, source));
             if (card != null) {
                 // controller gets to choose the order in which the cards enter the battlefield
                 controller.moveCards(card, Zone.BATTLEFIELD, source, game);
@@ -178,7 +178,7 @@ class TergridsLaternEffect extends OneShotEffect {
         staticText = "Target player loses 3 life unless they sacrifice a nonland permanent or discard a card";
     }
 
-    public TergridsLaternEffect(final TergridsLaternEffect effect) {
+    private TergridsLaternEffect(final TergridsLaternEffect effect) {
         super(effect);
     }
 
@@ -220,8 +220,7 @@ class TergridsLaternEffect extends OneShotEffect {
         }
         switch (chosen) {
             case SACRIFICE_CHOICE:
-                TargetPermanent target = new TargetPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_NON_LAND);
-                target.setNotTarget(true);
+                TargetSacrifice target = new TargetSacrifice(StaticFilters.FILTER_CONTROLLED_PERMANENT_NON_LAND);
                 targetedPlayer.choose(Outcome.Sacrifice, target, source, game);
                 Permanent chosenLand = game.getPermanent(target.getFirstTarget());
                 return chosenLand != null && chosenLand.sacrifice(source, game);

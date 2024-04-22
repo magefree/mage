@@ -24,7 +24,7 @@ public final class CopperMyr extends CardImpl {
         this.addAbility(new GreenManaAbility());
     }
 
-    public CopperMyr (final CopperMyr card) {
+    private CopperMyr(final CopperMyr card) {
         super(card);
     }
 

@@ -1,6 +1,7 @@
 package mage.abilities.effects.common;
 
 import java.util.Set;
+
 import mage.ApprovingObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -29,7 +30,7 @@ public class CastCardFromOutsideTheGameEffect extends OneShotEffect {
         this.filterCard = filter;
     }
 
-    public CastCardFromOutsideTheGameEffect(final CastCardFromOutsideTheGameEffect effect) {
+    protected CastCardFromOutsideTheGameEffect(final CastCardFromOutsideTheGameEffect effect) {
         super(effect);
         filterCard = effect.filterCard;
     }

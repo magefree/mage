@@ -24,7 +24,6 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetArtifactPermanent;
 
@@ -69,7 +68,7 @@ class LivingArtifactTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new LivingArtifactEffect(), false);
     }
 
-    public LivingArtifactTriggeredAbility(final LivingArtifactTriggeredAbility ability) {
+    private LivingArtifactTriggeredAbility(final LivingArtifactTriggeredAbility ability) {
         super(ability);
     }
 
@@ -80,7 +79,7 @@ class LivingArtifactTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
+        return event.getType() == GameEvent.EventType.DAMAGED_BATCH_FOR_ONE_PLAYER;
     }
 
     @Override
@@ -100,11 +99,11 @@ class LivingArtifactTriggeredAbility extends TriggeredAbilityImpl {
 
 class LivingArtifactEffect extends OneShotEffect {
 
-    public LivingArtifactEffect() {
+    LivingArtifactEffect() {
         super(Outcome.Benefit);
     }
 
-    public LivingArtifactEffect(final LivingArtifactEffect effect) {
+    private LivingArtifactEffect(final LivingArtifactEffect effect) {
         super(effect);
     }
 

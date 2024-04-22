@@ -47,7 +47,7 @@ class TyrannizeEffect extends OneShotEffect {
         this.staticText = "Target player discards their hand unless they pay 7 life";
     }
     
-    TyrannizeEffect(final TyrannizeEffect effect) {
+    private TyrannizeEffect(final TyrannizeEffect effect) {
         super(effect);
     }
     

@@ -25,6 +25,7 @@ import mage.target.Target;
 import mage.target.TargetAmount;
 import mage.target.TargetCard;
 import mage.target.TargetPlayer;
+import mage.util.MultiAmountMessage;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -34,7 +35,10 @@ import java.util.UUID;
 
 import static com.google.common.collect.Iterables.getOnlyElement;
 
-public class StubPlayer extends PlayerImpl implements Player {
+/**
+ * Empty player, do nothing, used for tests only
+ */
+public class StubPlayer extends PlayerImpl {
 
     @Override
     public boolean choose(Outcome outcome, Target target, Ability source, Game game) {
@@ -207,7 +211,8 @@ public class StubPlayer extends PlayerImpl implements Player {
     }
 
     @Override
-    public List<Integer> getMultiAmount(Outcome outcome, List<String> messages, int min, int max, MultiAmountType type, Game game) {
+    public List<Integer> getMultiAmountWithIndividualConstraints(Outcome outcome, List<MultiAmountMessage> messages,
+                                                                 int min, int max, MultiAmountType type, Game game) {
         return null;
     }
 
@@ -225,10 +230,10 @@ public class StubPlayer extends PlayerImpl implements Player {
     public void pickCard(List<Card> cards, Deck deck, Draft draft) {
 
     }
-    
+
     @Override
     public void addPhyrexianToColors(FilterMana colors) {
-        
+
     }
 
     @Override

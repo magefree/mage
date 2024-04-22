@@ -62,7 +62,7 @@ public final class PallidMycoderm extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(
                 new BoostAllEffect(1, 1, Duration.EndOfTurn, filter, false)
                         .setText("each creature you control that's a Fungus or a Saproling gets +1/+1 until end of turn"),
-                new SacrificeTargetCost(new TargetControlledPermanent(filterSaproling))
+                new SacrificeTargetCost(filterSaproling)
         ));
     }
 

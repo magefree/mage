@@ -29,7 +29,7 @@ import java.util.UUID;
  */
 public final class SkirkDrillSergeant extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("or another Goblin");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Goblin");
 
     static {
         filter.add(SubType.GOBLIN.getPredicate());
@@ -70,7 +70,7 @@ class SkirkDrillSergeantEffect extends OneShotEffect {
         this.staticText = "reveal the top card of your library. If it's a Goblin permanent card, put it onto the battlefield. Otherwise, put it into your graveyard";
     }
 
-    public SkirkDrillSergeantEffect(final SkirkDrillSergeantEffect effect) {
+    private SkirkDrillSergeantEffect(final SkirkDrillSergeantEffect effect) {
         super(effect);
     }
 

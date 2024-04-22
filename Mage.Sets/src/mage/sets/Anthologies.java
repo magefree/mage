@@ -66,7 +66,7 @@ public final class Anthologies extends ExpansionSet {
         cards.add(new SetCardInfo("Lady Orca", 65, Rarity.UNCOMMON, mage.cards.l.LadyOrca.class));
         cards.add(new SetCardInfo("Lightning Bolt", 43, Rarity.COMMON, mage.cards.l.LightningBolt.class));
         cards.add(new SetCardInfo("Llanowar Elves", 59, Rarity.COMMON, mage.cards.l.LlanowarElves.class));
-        cards.add(new SetCardInfo("Mirri, Cat Warrior", 60, Rarity.UNCOMMON, mage.cards.m.MirriCatWarrior.class));
+        cards.add(new SetCardInfo("Mirri, Cat Warrior", 60, Rarity.RARE, mage.cards.m.MirriCatWarrior.class));
         cards.add(new SetCardInfo("Mogg Fanatic", 44, Rarity.COMMON, mage.cards.m.MoggFanatic.class));
         cards.add(new SetCardInfo("Mogg Flunkies", 45, Rarity.COMMON, mage.cards.m.MoggFlunkies.class));
         cards.add(new SetCardInfo("Mogg Raider", 46, Rarity.COMMON, mage.cards.m.MoggRaider.class));

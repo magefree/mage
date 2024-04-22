@@ -53,7 +53,7 @@ class HeartOfBogardanTriggeredAbility extends TriggeredAbilityImpl {
         this.addTarget(new TargetPlayerOrPlaneswalker());
     }
 
-    HeartOfBogardanTriggeredAbility(final HeartOfBogardanTriggeredAbility ability) {
+    private HeartOfBogardanTriggeredAbility(final HeartOfBogardanTriggeredAbility ability) {
         super(ability);
     }
 
@@ -83,14 +83,14 @@ class HeartOfBogardanTriggeredAbility extends TriggeredAbilityImpl {
 
 class HeartOfBogardanEffect extends OneShotEffect {
 
-    public HeartOfBogardanEffect() {
+    HeartOfBogardanEffect() {
         super(Outcome.Damage);
         staticText = "{this} deals X damage to target player or planeswalker "
                 + "and each creature that player or that planeswalker's controller controls, "
                 + "where X is twice the number of age counters on {this} minus 2";
     }
 
-    public HeartOfBogardanEffect(final HeartOfBogardanEffect effect) {
+    private HeartOfBogardanEffect(final HeartOfBogardanEffect effect) {
         super(effect);
     }
 

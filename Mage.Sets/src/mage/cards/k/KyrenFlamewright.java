@@ -15,6 +15,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
+import mage.filter.StaticFilters;
 import mage.game.permanent.token.Elemental11BlueRedToken;
 
 import java.util.UUID;
@@ -43,7 +44,7 @@ public final class KyrenFlamewright extends CardImpl {
         ability.addEffect(new BoostControlledEffect(1, 0, Duration.EndOfTurn)
                 .setText("creatures you control get +1/+0"));
         ability.addEffect(new GainAbilityControlledEffect(
-                HasteAbility.getInstance(), Duration.EndOfTurn
+                HasteAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES
         ).setText("and gain haste until end of turn"));
         this.addAbility(ability);
     }

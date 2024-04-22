@@ -46,13 +46,13 @@ class PsychicMiasmaEffect extends OneShotEffect {
         staticText = "Target player discards a card. If a land card is discarded this way, return {this} to its owner's hand";
     }
 
-    PsychicMiasmaEffect(final PsychicMiasmaEffect effect) {
+    private PsychicMiasmaEffect(final PsychicMiasmaEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (player != null) {
             Card discardedCard = player.discardOne(false, false, source, game);
             if (discardedCard != null && discardedCard.isLand(game)) {

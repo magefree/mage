@@ -43,7 +43,7 @@ public final class BoneDragon extends CardImpl {
         // {3}{B}{B}, Exile seven other cards from your graveyard: Return Bone Dragon from your graveyard to the battlefield tapped.
         Ability ability = new SimpleActivatedAbility(
                 Zone.GRAVEYARD,
-                new ReturnSourceFromGraveyardToBattlefieldEffect(true),
+                new ReturnSourceFromGraveyardToBattlefieldEffect(true, false),
                 new ManaCostsImpl<>("{3}{B}{B}")
         );
         ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(7, filter)));

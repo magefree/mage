@@ -54,7 +54,7 @@ class LifeAndLimbEffect extends ContinuousEffectImpl {
         this.dependendToTypes.add(DependencyType.BecomeCreature);
     }
 
-    LifeAndLimbEffect(final LifeAndLimbEffect effect) {
+    private LifeAndLimbEffect(final LifeAndLimbEffect effect) {
         super(effect);
     }
 

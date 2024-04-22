@@ -22,7 +22,7 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
  */
 public final class HammerfistGiant extends CardImpl {
     
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("each creature without flying");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature without flying");
     
     static {
         filter.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));

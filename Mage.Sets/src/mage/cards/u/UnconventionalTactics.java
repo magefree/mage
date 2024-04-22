@@ -71,7 +71,7 @@ class UnconventionalTacticsTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.GRAVEYARD, new DoIfCostPaid(new ReturnToHandSourceEffect(), new ManaCostsImpl<>("{W}")), false);
     }
 
-    public UnconventionalTacticsTriggeredAbility(final UnconventionalTacticsTriggeredAbility ability) {
+    private UnconventionalTacticsTriggeredAbility(final UnconventionalTacticsTriggeredAbility ability) {
         super(ability);
     }
 

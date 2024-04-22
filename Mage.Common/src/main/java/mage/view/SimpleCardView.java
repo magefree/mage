@@ -7,9 +7,12 @@ import java.io.Serializable;
 import java.util.UUID;
 
 /**
+ * GUI: basic class for all card/object related views
+ *
  * @author BetaSteward_at_googlemail.com
  */
 public class SimpleCardView implements Serializable, SelectableObjectView {
+
     @Expose
     protected UUID id;
     protected String expansionSetCode;

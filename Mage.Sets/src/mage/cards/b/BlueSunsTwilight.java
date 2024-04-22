@@ -28,7 +28,8 @@ public final class BlueSunsTwilight extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{U}{U}");
 
         // Gain control of target creature with mana value X or less. If X is 5 or more, create a token that's a copy of that creature.
-        this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.Custom, true));
+        this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.Custom, true)
+                .setText("gain control of target creature with mana value X or less"));
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new CreateTokenCopyTargetEffect(), BlueSunsTwilightCondition.instance,
                 "If X is 5 or more, create a token that's a copy of that creature"

@@ -29,13 +29,13 @@ public final class ShireiShizosCaretaker extends CardImpl {
     }
 
     private static final String rule1 = "you may return that card to the battlefield " +
-            "t the beginning of the next end step if {this} is still on the battlefield";
+            "at the beginning of the next end step if {this} is still on the battlefield";
     private static final String rule2 = "Whenever a creature with power 1 or less " +
             "is put into your graveyard from the battlefield, ";
 
     public ShireiShizosCaretaker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPIRIT);
 
         this.power = new MageInt(2);

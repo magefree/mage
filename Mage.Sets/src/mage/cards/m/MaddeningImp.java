@@ -56,7 +56,7 @@ public final class MaddeningImp extends CardImpl {
                 + "At the beginning of the next end step, destroy each of those creatures that didn't attack this turn. "
                 + "Activate only during an opponent's turn and only before combat.");
         ability.addEffect(new MaddeningImpCreateDelayedTriggeredAbilityEffect());
-        this.addAbility(ability, new AttackedThisTurnWatcher());
+        this.addAbility(ability);
 
     }
 
@@ -98,7 +98,7 @@ class MaddeningImpCreateDelayedTriggeredAbilityEffect extends OneShotEffect {
         this.staticText = "At the beginning of the next end step, destroy each of those creatures that didn't attack this turn";
     }
 
-    public MaddeningImpCreateDelayedTriggeredAbilityEffect(final MaddeningImpCreateDelayedTriggeredAbilityEffect effect) {
+    private MaddeningImpCreateDelayedTriggeredAbilityEffect(final MaddeningImpCreateDelayedTriggeredAbilityEffect effect) {
         super(effect);
     }
 
@@ -136,7 +136,7 @@ class MaddeningImpDelayedDestroyEffect extends OneShotEffect {
         this.staticText = "At the beginning of the next end step, destroy each of those creatures that didn't attack this turn";
     }
 
-    MaddeningImpDelayedDestroyEffect(final MaddeningImpDelayedDestroyEffect effect) {
+    private MaddeningImpDelayedDestroyEffect(final MaddeningImpDelayedDestroyEffect effect) {
         super(effect);
         this.activeCreatures = effect.activeCreatures;
     }

@@ -1,18 +1,18 @@
 package org.mage.test.player;
 
 import mage.abilities.Ability;
+import mage.cards.Cards;
 import mage.choices.Choice;
 import mage.constants.Outcome;
 import mage.constants.RangeOfInfluence;
 import mage.game.Game;
 import mage.player.ai.ComputerPlayer;
 import mage.target.Target;
+import mage.target.TargetCard;
 
 /**
- * @author JayDi85
- */
-
-/**
+ * AI: helper class for tests
+ * <p>
  * Mock class to inject test player support in the inner choice calls, e.g. in PlayerImpl. If you
  * want to set up inner choices then override it here.
  * <p>
@@ -27,9 +27,11 @@ import mage.target.Target;
  * <p>
  * If you implement set up of random results for tests (die roll, flip coin, etc) and want to support AI tests
  * (same random results in simulated games) then override same methods in SimulatedPlayer2 too
+ *
+ * @author JayDi85
  */
 
-public class TestComputerPlayer extends ComputerPlayer {
+public final class TestComputerPlayer extends ComputerPlayer {
 
     private TestPlayer testPlayerLink;
 
@@ -56,6 +58,33 @@ public class TestComputerPlayer extends ComputerPlayer {
             return super.choose(outcome, choice, game);
         } else {
             return testPlayerLink.choose(outcome, choice, game);
+        }
+    }
+
+    @Override
+    public boolean choose(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game) {
+        if (testPlayerLink.canChooseByComputer()) {
+            return super.choose(outcome, cards, target, source, game);
+        } else {
+            return testPlayerLink.choose(outcome, cards, target, source, game);
+        }
+    }
+
+    @Override
+    public boolean chooseTarget(Outcome outcome, Target target, Ability source, Game game) {
+        if (testPlayerLink.canChooseByComputer()) {
+            return super.chooseTarget(outcome, target, source, game);
+        } else {
+            return testPlayerLink.chooseTarget(outcome, target, source, game);
+        }
+    }
+
+    @Override
+    public boolean chooseTarget(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game) {
+        if (testPlayerLink.canChooseByComputer()) {
+            return super.chooseTarget(outcome, cards, target, source, game);
+        } else {
+            return testPlayerLink.chooseTarget(outcome, cards, target, source, game);
         }
     }
 

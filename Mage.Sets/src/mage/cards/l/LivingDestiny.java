@@ -45,12 +45,12 @@ public final class LivingDestiny extends CardImpl {
 
 class LivingDestinyEffect extends OneShotEffect {
 
-    public LivingDestinyEffect() {
+    LivingDestinyEffect() {
         super(Outcome.GainLife);
         staticText = "You gain life equal to the revealed card's mana value";
     }
 
-    public LivingDestinyEffect(LivingDestinyEffect effect) {
+    private LivingDestinyEffect(final LivingDestinyEffect effect) {
         super(effect);
     }
 

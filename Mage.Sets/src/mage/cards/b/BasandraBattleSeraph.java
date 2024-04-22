@@ -25,7 +25,7 @@ public final class BasandraBattleSeraph extends CardImpl {
     
     public BasandraBattleSeraph(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ANGEL);
         
         this.power = new MageInt(4);
@@ -59,22 +59,17 @@ public final class BasandraBattleSeraph extends CardImpl {
 class BasandraBattleSeraphEffect extends ContinuousRuleModifyingEffectImpl {
     
     public BasandraBattleSeraphEffect() {
-        super(Duration.EndOfTurn, Outcome.Neutral);
+        super(Duration.WhileOnBattlefield, Outcome.Neutral);
         staticText = "Players can't cast spells during combat";
     }
     
-    public BasandraBattleSeraphEffect(final BasandraBattleSeraphEffect effect) {
+    private BasandraBattleSeraphEffect(final BasandraBattleSeraphEffect effect) {
         super(effect);
     }
     
     @Override
     public BasandraBattleSeraphEffect copy() {
         return new BasandraBattleSeraphEffect(this);
-    }
-    
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
     
     @Override

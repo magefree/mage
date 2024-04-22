@@ -28,6 +28,7 @@ import mage.game.Game;
 import mage.game.GameState;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
+import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Spirit32Token;
 import mage.players.Player;
 import mage.target.common.TargetCardInExile;
@@ -56,7 +57,7 @@ public final class QuintoriusLoremaster extends CardImpl {
     public QuintoriusLoremaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELEPHANT);
         this.subtype.add(SubType.CLERIC);
         this.power = new MageInt(3);
@@ -100,7 +101,15 @@ enum QuintoriusLoremasterPredicate implements ObjectSourcePlayerPredicate<Card> 
                 .of(game)
                 .map(Game::getState)
                 .map(GameState::getExile)
-                .map(exile -> exile.getExileZone(CardUtil.getExileZoneId(game, input.getSource())))
+                .map(exile -> {
+                    Ability source = input.getSource();
+                    Permanent quintorius = source.getSourcePermanentOrLKI(game);
+                    if(quintorius == null) {
+                        return null;
+                    }
+                    UUID exileZoneId = CardUtil.getExileZoneId(game, quintorius.getId(), quintorius.getZoneChangeCounter(game));
+                    return exile.getExileZone(exileZoneId);
+                })
                 .filter(Objects::nonNull)
                 .map(exile -> exile.contains(input.getObject().getId()))
                 .orElse(false);

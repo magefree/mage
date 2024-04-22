@@ -52,7 +52,7 @@ class AuriokReplicaEffect extends PreventionEffectImpl {
         this.target = new TargetSource();
     }
 
-    public AuriokReplicaEffect(final AuriokReplicaEffect effect) {
+    private AuriokReplicaEffect(final AuriokReplicaEffect effect) {
         super(effect);
         this.target = effect.target.copy();
     }
@@ -64,8 +64,8 @@ class AuriokReplicaEffect extends PreventionEffectImpl {
 
     @Override
     public void init(Ability source, Game game) {
-        this.target.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), source, game);
         super.init(source, game);
+        this.target.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), source, game);
     }
 
     @Override

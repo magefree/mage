@@ -27,7 +27,7 @@ public final class Frostling extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         // Sacrifice Frostling: Frostling deals 1 damage to target creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new SacrificeSourceCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1, "it"), new SacrificeSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

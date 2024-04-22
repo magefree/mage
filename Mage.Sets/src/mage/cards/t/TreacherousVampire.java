@@ -1,7 +1,6 @@
 
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksOrBlocksTriggeredAbility;
@@ -16,18 +15,15 @@ import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
-import mage.constants.SubType;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AbilityWord;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.target.common.TargetCardInYourGraveyard;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class TreacherousVampire extends CardImpl {
@@ -46,8 +42,8 @@ public final class TreacherousVampire extends CardImpl {
         this.addAbility(new AttacksOrBlocksTriggeredAbility(
                 new DoUnlessControllerPaysEffect(
                         new SacrificeSourceEffect(),
-                        new ExileFromGraveCost(new ExileFromGraveCost(new TargetCardInYourGraveyard()))
-                ), false
+                        new ExileFromGraveCost(new TargetCardInYourGraveyard())
+                ).setText("sacrifice it unless you exile a card from your graveyard"), false
         ));
 
         // Threshold - As long as seven or more cards are in your graveyard, Treacherous Vampire gets +2/+2 and has "When Treacherous Vampire dies, you lose 6 life."

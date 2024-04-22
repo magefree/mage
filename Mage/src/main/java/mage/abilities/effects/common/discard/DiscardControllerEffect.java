@@ -36,7 +36,7 @@ public class DiscardControllerEffect extends OneShotEffect {
         setText();
     }
 
-    public DiscardControllerEffect(final DiscardControllerEffect effect) {
+    protected DiscardControllerEffect(final DiscardControllerEffect effect) {
         super(effect);
         this.amount = effect.amount.copy();
         this.randomDiscard = effect.randomDiscard;

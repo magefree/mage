@@ -1,5 +1,6 @@
 package org.mage.test.commander.duel;
 
+import mage.constants.CommanderCardType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -136,6 +137,9 @@ public class CastBRGCommanderTest extends CardTestCommanderDuelBase {
         assertCommandZoneCount(playerA, "Prossh, Skyraider of Kher", 1);
         assertCommandZoneCount(playerB, "Daxos of Meletis", 0);
         assertPermanentCount(playerA, "Daxos of Meletis", 1); // Karn brings back the cards under the control of Karn's controller
+
+        Assert.assertEquals("B commander must be on battlefield", 0, currentGame.getCommanderCardsFromCommandZone(playerB, CommanderCardType.COMMANDER_OR_OATHBREAKER).size());
+        Assert.assertEquals("B commander must be on battlefield", 1, currentGame.getCommanderCardsFromAnyZones(playerB, CommanderCardType.COMMANDER_OR_OATHBREAKER, Zone.BATTLEFIELD).size());
 
         CommanderInfoWatcher watcher = currentGame.getState().getWatcher(CommanderInfoWatcher.class, playerB.getCommandersIds().iterator().next());
         Assert.assertEquals("Watcher is reset to 0 commander damage", 0, watcher.getDamageToPlayer().size());

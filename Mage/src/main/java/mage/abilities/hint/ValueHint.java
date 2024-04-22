@@ -28,7 +28,7 @@ public class ValueHint implements Hint {
     }
 
     @Override
-    public Hint copy() {
+    public ValueHint copy() {
         return new ValueHint(this);
     }
 }

@@ -31,7 +31,7 @@ public final class KarnScionOfUrza extends CardImpl {
     public KarnScionOfUrza(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.KARN);
         this.setStartingLoyalty(5);
 
@@ -166,7 +166,7 @@ class KarnMinus1Effect extends OneShotEffect {
                 break;
             default:
                 TargetCard target = new TargetCardInExile(filter);
-                target.setNotTarget(true);
+                target.withNotTarget(true);
                 controller.choose(outcome, target, source, game);
                 card = cards.get(target.getFirstTarget(), game);
         }

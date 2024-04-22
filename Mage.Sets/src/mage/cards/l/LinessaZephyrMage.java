@@ -42,7 +42,7 @@ public final class LinessaZephyrMage extends CardImpl {
 
     public LinessaZephyrMage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
 
@@ -79,7 +79,7 @@ class LinessaZephyrMageEffect extends OneShotEffect {
         this.staticText = "Target player returns a creature they control to its owner's hand, then repeats this process for an artifact, an enchantment, and a land";
     }
 
-    LinessaZephyrMageEffect(final LinessaZephyrMageEffect effect) {
+    private LinessaZephyrMageEffect(final LinessaZephyrMageEffect effect) {
         super(effect);
     }
 
@@ -96,7 +96,7 @@ class LinessaZephyrMageEffect extends OneShotEffect {
             if (targetPlayer != null) {
                 // Target player returns a creature they control to its owner's hand,
                 Target target = new TargetControlledCreaturePermanent();
-                target.setNotTarget(true);
+                target.withNotTarget(true);
                 if (target.choose(Outcome.ReturnToHand, targetPlayer.getId(), source.getSourceId(), source, game)) {
                     Permanent permanent = game.getPermanent(target.getFirstTarget());
                     if (permanent != null) {
@@ -108,7 +108,7 @@ class LinessaZephyrMageEffect extends OneShotEffect {
                 FilterControlledPermanent filter = new FilterControlledPermanent("artifact you control");
                 filter.add(CardType.ARTIFACT.getPredicate());
                 target = new TargetControlledPermanent(filter);
-                target.setNotTarget(true);
+                target.withNotTarget(true);
                 if (target.choose(Outcome.ReturnToHand, targetPlayer.getId(), source.getSourceId(), source, game)) {
                     Permanent permanent = game.getPermanent(target.getFirstTarget());
                     if (permanent != null) {
@@ -120,7 +120,7 @@ class LinessaZephyrMageEffect extends OneShotEffect {
                 filter = new FilterControlledPermanent("enchantment you control");
                 filter.add(CardType.ENCHANTMENT.getPredicate());
                 target = new TargetControlledPermanent(filter);
-                target.setNotTarget(true);
+                target.withNotTarget(true);
                 if (target.choose(Outcome.ReturnToHand, targetPlayer.getId(), source.getSourceId(), source, game)) {
                     Permanent permanent = game.getPermanent(target.getFirstTarget());
                     if (permanent != null) {
@@ -132,7 +132,7 @@ class LinessaZephyrMageEffect extends OneShotEffect {
                 filter = new FilterControlledPermanent("land you control");
                 filter.add(CardType.LAND.getPredicate());
                 target = new TargetControlledPermanent(filter);
-                target.setNotTarget(true);
+                target.withNotTarget(true);
                 if (target.choose(Outcome.ReturnToHand, targetPlayer.getId(), source.getSourceId(), source, game)) {
                     Permanent permanent = game.getPermanent(target.getFirstTarget());
                     if (permanent != null) {

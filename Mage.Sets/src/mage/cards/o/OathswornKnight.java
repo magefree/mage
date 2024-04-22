@@ -36,7 +36,7 @@ public final class OathswornKnight extends CardImpl {
         this.addAbility(new AttacksEachCombatStaticAbility());
 
         // If damage would be dealt to Oathsworn Knight while it has a +1/+1 counter on it, prevent that damage and remove a +1/+1 counter from it.
-        this.addAbility(new SimpleStaticAbility(new PreventDamageAndRemoveCountersEffect(false)));
+        this.addAbility(new SimpleStaticAbility(new PreventDamageAndRemoveCountersEffect(false, true, true)));
     }
 
     private OathswornKnight(final OathswornKnight card) {

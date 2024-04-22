@@ -94,7 +94,7 @@ class CollectiveEffortEffect extends OneShotEffect {
         staticText = "Put a +1/+1 counter on each creature target player controls";
     }
 
-    CollectiveEffortEffect(final CollectiveEffortEffect effect) {
+    private CollectiveEffortEffect(final CollectiveEffortEffect effect) {
         super(effect);
     }
 

@@ -34,7 +34,7 @@ public final class TeferiAkosaOfZhalfir extends CardImpl {
     public TeferiAkosaOfZhalfir(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.TEFERI);
         this.setStartingLoyalty(4);
         this.color.setWhite(true);

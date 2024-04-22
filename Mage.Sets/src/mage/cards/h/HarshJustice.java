@@ -66,7 +66,7 @@ class HarshJusticeTriggeredAbility extends DelayedTriggeredAbility {
         setTriggerPhrase("This turn, whenever an attacking creature deals combat damage to you, ");
     }
 
-    public HarshJusticeTriggeredAbility(final HarshJusticeTriggeredAbility ability) {
+    private HarshJusticeTriggeredAbility(final HarshJusticeTriggeredAbility ability) {
         super(ability);
     }
 
@@ -100,12 +100,12 @@ class HarshJusticeTriggeredAbility extends DelayedTriggeredAbility {
 
 class HarshJusticeEffect extends OneShotEffect {
 
-    public HarshJusticeEffect() {
+    HarshJusticeEffect() {
         super(Outcome.Benefit);
         this.staticText = "it deals that much damage to its controller";
     }
 
-    public HarshJusticeEffect(final HarshJusticeEffect effect) {
+    private HarshJusticeEffect(final HarshJusticeEffect effect) {
         super(effect);
     }
 

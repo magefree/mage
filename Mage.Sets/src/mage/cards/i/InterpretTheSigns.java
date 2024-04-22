@@ -37,12 +37,12 @@ public final class InterpretTheSigns extends CardImpl {
 
 class InterpretTheSignsEffect extends OneShotEffect {
 
-    public InterpretTheSignsEffect() {
+    InterpretTheSignsEffect() {
         super(Outcome.DrawCard);
         this.staticText = "scry 3, then reveal the top card of your library. Draw cards equal to that card's mana value";
     }
 
-    public InterpretTheSignsEffect(final InterpretTheSignsEffect effect) {
+    private InterpretTheSignsEffect(final InterpretTheSignsEffect effect) {
         super(effect);
     }
 

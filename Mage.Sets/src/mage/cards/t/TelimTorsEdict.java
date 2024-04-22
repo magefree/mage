@@ -1,4 +1,3 @@
-
 package mage.cards.t;
 
 import java.util.UUID;
@@ -25,7 +24,7 @@ public final class TelimTorsEdict extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("permanent you own or control");
 
     static {
-        filter.add(new TelimTorsEdictPredicate());
+        filter.add(TelimTorsEdictPredicate.instance);
     }
 
     public TelimTorsEdict(UUID ownerId, CardSetInfo setInfo) {
@@ -36,7 +35,8 @@ public final class TelimTorsEdict extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
 
         // Draw a card at the beginning of the next turn's upkeep.
-        this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1)), false));
+        this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(
+                new DrawCardSourceControllerEffect(1)), false).concatBy("<br>"));
     }
 
     private TelimTorsEdict(final TelimTorsEdict card) {
@@ -49,18 +49,13 @@ public final class TelimTorsEdict extends CardImpl {
     }
 }
 
-class TelimTorsEdictPredicate implements ObjectSourcePlayerPredicate<Permanent> {
-
-    public TelimTorsEdictPredicate() {
-    }
+enum TelimTorsEdictPredicate implements ObjectSourcePlayerPredicate<Permanent> {
+    instance;
 
     @Override
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
         Permanent permanent = input.getObject();
         UUID playerId = input.getPlayerId();
-        if (permanent.isControlledBy(playerId) || permanent.isOwnedBy(playerId)) {
-            return true;
-        }
-        return false;
+        return permanent.isControlledBy(playerId) || permanent.isOwnedBy(playerId);
     }
 }

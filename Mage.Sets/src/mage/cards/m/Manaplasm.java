@@ -32,7 +32,7 @@ public final class Manaplasm extends CardImpl {
         // Whenever you cast a spell, Manaplasm gets +X/+X until end of turn, where X is that spell's converted mana cost.
         this.addAbility(new SpellCastControllerTriggeredAbility(new BoostSourceEffect(
                 ManaplasmValue.instance, ManaplasmValue.instance,
-                Duration.EndOfTurn, true
+                Duration.EndOfTurn
         ), false));
     }
 

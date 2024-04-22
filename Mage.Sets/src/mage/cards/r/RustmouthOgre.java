@@ -51,7 +51,7 @@ class RustmouthOgreTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DestroyTargetEffect(), true);
     }
 
-    RustmouthOgreTriggeredAbility(final RustmouthOgreTriggeredAbility ability) {
+    private RustmouthOgreTriggeredAbility(final RustmouthOgreTriggeredAbility ability) {
         super(ability);
     }
 

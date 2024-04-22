@@ -54,18 +54,13 @@ class ShieldOfTheAvatarPreventionEffect extends PreventionEffectImpl {
         this.staticText = "If a source would deal damage to equipped creature, prevent X of that damage, where X is the number of creatures you control.";
     }
 
-    ShieldOfTheAvatarPreventionEffect(final ShieldOfTheAvatarPreventionEffect effect) {
+    private ShieldOfTheAvatarPreventionEffect(final ShieldOfTheAvatarPreventionEffect effect) {
         super(effect);
     }
 
     @Override
     public ShieldOfTheAvatarPreventionEffect copy() {
         return new ShieldOfTheAvatarPreventionEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

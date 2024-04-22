@@ -1,26 +1,20 @@
-
 package mage.cards.t;
-
-import java.util.UUID;
 
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBaseToughnessSourceEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  * @author BetaSteward
@@ -52,12 +46,12 @@ public final class TreeOfRedemption extends CardImpl {
 
 class TreeOfRedemptionEffect extends OneShotEffect {
 
-    public TreeOfRedemptionEffect() {
+    TreeOfRedemptionEffect() {
         super(Outcome.GainLife);
         staticText = "Exchange your life total with {this}'s toughness";
     }
 
-    public TreeOfRedemptionEffect(final TreeOfRedemptionEffect effect) {
+    private TreeOfRedemptionEffect(final TreeOfRedemptionEffect effect) {
         super(effect);
     }
 
@@ -68,7 +62,6 @@ class TreeOfRedemptionEffect extends OneShotEffect {
         if (perm == null || player == null || !player.isLifeTotalCanChange()) {
             return false;
         }
-
 
         int amount = perm.getToughness().getValue();
         int life = player.getLife();
@@ -82,7 +75,7 @@ class TreeOfRedemptionEffect extends OneShotEffect {
             return false;
         }
         player.setLife(amount, game, source);
-        game.addEffect(new SetBasePowerToughnessSourceEffect(Integer.MIN_VALUE, life, Duration.WhileOnBattlefield, SubLayer.SetPT_7b), source);
+        game.addEffect(new SetBaseToughnessSourceEffect(life, Duration.Custom), source);
         return true;
     }
 

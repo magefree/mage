@@ -26,7 +26,7 @@ public class BattalionAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever {this} and at least two other creatures attack, ");
     }
 
-    public BattalionAbility(final BattalionAbility ability) {
+    protected BattalionAbility(final BattalionAbility ability) {
         super(ability);
     }
 

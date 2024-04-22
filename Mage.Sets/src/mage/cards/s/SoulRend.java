@@ -29,7 +29,8 @@ public final class SoulRend extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         
         // Draw a card at the beginning of the next turn's upkeep.
-        this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1)), false));
+        this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(
+                new DrawCardSourceControllerEffect(1)), false).concatBy("<br>"));
     }
 
     private SoulRend(final SoulRend card) {
@@ -48,13 +49,13 @@ class SoulRendEffect extends OneShotEffect {
         staticText = "destroy target creature if it's white. A creature destroyed this way can't be regenerated";
     }
 
-    SoulRendEffect(final SoulRendEffect effect) {
+    private SoulRendEffect(final SoulRendEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
+        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (permanent != null && permanent.getColor(game).isWhite()) {
             permanent.destroy(source, game, true);
         }

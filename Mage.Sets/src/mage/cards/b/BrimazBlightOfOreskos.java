@@ -42,7 +42,7 @@ public final class BrimazBlightOfOreskos extends CardImpl {
     public BrimazBlightOfOreskos(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.CAT);
         this.power = new MageInt(3);
@@ -55,7 +55,7 @@ public final class BrimazBlightOfOreskos extends CardImpl {
 
         // At the beginning of each end step, if a Phyrexian died under your control this turn, proliferate.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new ProliferateEffect(), TargetController.ANY,
+                new ProliferateEffect(false), TargetController.ANY,
                 BrimazBlightOfOreskosCondition.instance, false
         ), new BrimazBlightOfOreskosWatcher());
     }

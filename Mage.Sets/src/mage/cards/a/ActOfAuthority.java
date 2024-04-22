@@ -49,7 +49,7 @@ public final class ActOfAuthority extends CardImpl {
 
 class ActOfAuthorityEffect extends OneShotEffect {
 
-    public ActOfAuthorityEffect() {
+    ActOfAuthorityEffect() {
         super(Outcome.Exile);
         this.staticText = "you may exile target artifact or enchantment. If you do, its controller gains control of {this}";
     }
@@ -66,10 +66,14 @@ class ActOfAuthorityEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent targetPermanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (targetPermanent == null) { return false; }
+        if (targetPermanent == null) {
+            return false;
+        }
 
         ExileTargetEffect exileTargetEffect = new ExileTargetEffect();
-        if (!exileTargetEffect.apply(game, source)) { return false; }
+        if (!exileTargetEffect.apply(game, source)) {
+            return false;
+        }
 
         Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
         if (sourcePermanent == null) { return true; }
@@ -105,13 +109,14 @@ class ActOfAuthorityGainControlEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent;
-        if (targetPointer == null) {
+        permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
+        if (permanent == null) {
             permanent = game.getPermanent(source.getFirstTarget());
-        } else {
-            permanent = game.getPermanent(targetPointer.getFirst(game, source));
         }
 
-        if (permanent == null) { return false; }
+        if (permanent == null) {
+            return false;
+        }
 
         return permanent.changeControllerId(controller, game, source);
     }

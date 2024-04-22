@@ -47,12 +47,12 @@ public final class RecumbentBliss extends CardImpl {
 
 class RecumbentBlissEffect extends RestrictionEffect {
 
-    public RecumbentBlissEffect() {
+    RecumbentBlissEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "Enchanted creature can't attack or block";
     }
 
-    public RecumbentBlissEffect(final RecumbentBlissEffect effect) {
+    private RecumbentBlissEffect(final RecumbentBlissEffect effect) {
         super(effect);
     }
 
@@ -77,4 +77,3 @@ class RecumbentBlissEffect extends RestrictionEffect {
     }
 
 }
-

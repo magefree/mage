@@ -52,7 +52,7 @@ class ZombieApocalypseEffect extends OneShotEffect {
         this.staticText = "Return all Zombie creature cards from your graveyard to the battlefield tapped, then destroy all Humans.";
     }
 
-    public ZombieApocalypseEffect(final ZombieApocalypseEffect effect) {
+    private ZombieApocalypseEffect(final ZombieApocalypseEffect effect) {
         super(effect);
     }
 

@@ -49,12 +49,12 @@ public final class SustainingSpirit extends CardImpl {
 
 class SustainingSpiritReplacementEffect extends ReplacementEffectImpl {
 
-    public SustainingSpiritReplacementEffect() {
+    SustainingSpiritReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Damage that would reduce your life total to less than 1 reduces it to 1 instead";
     }
 
-    public SustainingSpiritReplacementEffect(final SustainingSpiritReplacementEffect effect) {
+    private SustainingSpiritReplacementEffect(final SustainingSpiritReplacementEffect effect) {
         super(effect);
     }
 
@@ -84,11 +84,6 @@ class SustainingSpiritReplacementEffect extends ReplacementEffectImpl {
                 // An effect such as Spirit Link will see the full amount of damage being dealt.
             }
         }
-        return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
         return false;
     }
 

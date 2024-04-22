@@ -22,7 +22,6 @@ import mage.util.CardUtil;
 import java.util.UUID;
 
 /**
- *
  * @author varaghar
  */
 public final class KingNarfisBetrayal extends CardImpl {
@@ -94,7 +93,7 @@ class KingNarfisBetrayalFirstEffect extends OneShotEffect {
         if (controller.getGraveyard().count(filter, game) != 0) {
             if (controller.chooseUse(outcome, "Exile a creature or planeswalker card from your graveyard?", source, game)) {
                 TargetCard target = new TargetCardInYourGraveyard(filter);
-                target.setNotTarget(true);
+                target.withNotTarget(true);
                 if (controller.chooseTarget(outcome, controller.getGraveyard(), target, source, game)) {
                     controller.moveCardsToExile(game.getCard(target.getFirstTarget()), source, game, true, CardUtil.getCardExileZoneId(game, source), CardUtil.createObjectRealtedWindowTitle(source, game, null));
                 }
@@ -111,7 +110,7 @@ class KingNarfisBetrayalFirstEffect extends OneShotEffect {
             if (opponent.getGraveyard().count(filter, game) != 0) {
                 if (controller.chooseUse(outcome, "Exile a creature or planeswalker card from " + opponent.getName() + "'s graveyard?", source, game)) {
                     TargetCard target = new TargetCardInOpponentsGraveyard(1, 1, filter, true);
-                    target.setNotTarget(true);
+                    target.withNotTarget(true);
                     if (controller.chooseTarget(outcome, opponent.getGraveyard(), target, source, game)) {
                         controller.moveCardsToExile(game.getCard(target.getFirstTarget()), source, game, true, CardUtil.getCardExileZoneId(game, source), CardUtil.createObjectRealtedWindowTitle(source, game, null));
                     }
@@ -132,7 +131,7 @@ class KingNarfisBetrayalSecondEffect extends OneShotEffect {
                 " and you may spend mana as though it were mana of any color to cast those spells";
     }
 
-    public KingNarfisBetrayalSecondEffect(final KingNarfisBetrayalSecondEffect effect) {
+    private KingNarfisBetrayalSecondEffect(final KingNarfisBetrayalSecondEffect effect) {
         super(effect);
     }
 
@@ -146,7 +145,7 @@ class KingNarfisBetrayalSecondEffect extends OneShotEffect {
         ExileZone exileZone = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source));
         if (exileZone != null) {
             for (Card card : exileZone.getCards(game)) {
-                CardUtil.makeCardPlayable(game, source, card, Duration.EndOfTurn, true);
+                CardUtil.makeCardPlayable(game, source, card, true, Duration.EndOfTurn, true);
             }
         }
 

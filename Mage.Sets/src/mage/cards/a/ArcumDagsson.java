@@ -30,7 +30,7 @@ public final class ArcumDagsson extends CardImpl {
 
     public ArcumDagsson(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN, SubType.ARTIFICER);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

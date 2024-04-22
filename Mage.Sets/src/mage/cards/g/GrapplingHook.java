@@ -49,7 +49,7 @@ public final class GrapplingHook extends CardImpl {
 
 class GrapplingHookEffect extends RequirementEffect {
 
-    public GrapplingHookEffect() {
+    GrapplingHookEffect() {
         this(Duration.EndOfTurn);
     }
 
@@ -58,7 +58,7 @@ class GrapplingHookEffect extends RequirementEffect {
         staticText = "target creature block it this turn if able";
     }
 
-    public GrapplingHookEffect(final GrapplingHookEffect effect) {
+    private GrapplingHookEffect(final GrapplingHookEffect effect) {
         super(effect);
     }
 

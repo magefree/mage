@@ -35,7 +35,7 @@ public final class RaziaBorosArchangel extends CardImpl {
 
     public RaziaBorosArchangel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}{R}{W}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ANGEL);
 
         this.power = new MageInt(6);
@@ -85,18 +85,13 @@ class RaziaBorosArchangelEffect extends RedirectionEffect {
         staticText = "The next " + amount + " damage that would be dealt to target creature you control this turn is dealt to another target creature instead";
     }
 
-    public RaziaBorosArchangelEffect(final RaziaBorosArchangelEffect effect) {
+    private RaziaBorosArchangelEffect(final RaziaBorosArchangelEffect effect) {
         super(effect);
     }
 
     @Override
     public RaziaBorosArchangelEffect copy() {
         return new RaziaBorosArchangelEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

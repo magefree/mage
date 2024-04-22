@@ -14,5 +14,9 @@ public interface CommandObjectView extends SelectableObjectView {
 
     UUID getId();
 
+    String getImageFileName();
+
+    int getImageNumber();
+
     List<String> getRules();
 }

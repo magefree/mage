@@ -82,7 +82,7 @@ class TombBladeEffect extends OneShotEffect {
                 StaticFilters.FILTER_CONTROLLED_CREATURE,
                 player.getId(), source, game
         );
-        Cost cost = new SacrificeTargetCost(new TargetControlledCreaturePermanent());
+        Cost cost = new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE);
         if (cost.canPay(source, source, player.getId(), game)
                 && player.chooseUse(outcome, "Sacrifice a creature?",
                 "If you don't you lose " + creatureCount + " life",

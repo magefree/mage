@@ -25,7 +25,7 @@ public final class ArcaneSanctum extends CardImpl {
         this.addAbility(new BlackManaAbility());
     }
 
-    public ArcaneSanctum (final ArcaneSanctum card) {
+    private ArcaneSanctum(final ArcaneSanctum card) {
         super(card);
     }
 

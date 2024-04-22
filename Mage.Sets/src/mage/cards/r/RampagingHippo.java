@@ -25,7 +25,7 @@ public final class RampagingHippo extends CardImpl {
         addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
-    public RampagingHippo(final RampagingHippo rampagingHippo){
+    private RampagingHippo(final RampagingHippo rampagingHippo){
         super(rampagingHippo);
     }
 

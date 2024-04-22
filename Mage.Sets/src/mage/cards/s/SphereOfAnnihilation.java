@@ -80,7 +80,7 @@ class SphereOfAnnihilationEffect extends OneShotEffect {
         int counters = permanent.getCounters(game).getCount(CounterType.VOID);
         FilterPermanent filter = StaticFilters.FILTER_PERMANENT_CREATURE_OR_PLANESWALKER.copy();
         filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, counters + 1));
-        cards.addAll(game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game));
+        cards.addAllCards(game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game));
         game.getState()
                 .getPlayersInRange(source.getControllerId(), game)
                 .stream()

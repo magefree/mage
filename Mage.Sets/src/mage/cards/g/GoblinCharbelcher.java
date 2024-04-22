@@ -45,12 +45,12 @@ public final class GoblinCharbelcher extends CardImpl {
 
 class GoblinCharbelcherEffect extends OneShotEffect {
 
-    public GoblinCharbelcherEffect() {
+    GoblinCharbelcherEffect() {
         super(Outcome.Damage);
         this.staticText = "Reveal cards from the top of your library until you reveal a land card. {this} deals damage equal to the number of nonland cards revealed this way to any target. If the revealed land card was a Mountain, {this} deals double that damage instead. Put the revealed cards on the bottom of your library in any order";
     }
 
-    public GoblinCharbelcherEffect(final GoblinCharbelcherEffect effect) {
+    private GoblinCharbelcherEffect(final GoblinCharbelcherEffect effect) {
         super(effect);
     }
 
@@ -93,11 +93,11 @@ class GoblinCharbelcherEffect extends OneShotEffect {
             damage *= 2;
         }
 
-        Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
+        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (permanent != null) {
             permanent.damage(damage, source.getSourceId(), source, game, false, true);
         } else {
-            Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
+            Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
             if (targetPlayer != null) {
                 targetPlayer.damage(damage, source.getSourceId(), source, game);
             }

@@ -59,7 +59,7 @@ class DeepWoodEffect extends PreventionEffectImpl {
         staticText = "Prevent all damage that would be dealt to you this turn by attacking creatures";
     }
 
-    DeepWoodEffect(final DeepWoodEffect effect) {
+    private DeepWoodEffect(final DeepWoodEffect effect) {
         super(effect);
     }
 

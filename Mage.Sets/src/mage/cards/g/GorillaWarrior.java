@@ -24,7 +24,7 @@ public final class GorillaWarrior extends CardImpl {
         this.toughness = new MageInt(2);
     }
 
-    public GorillaWarrior (final GorillaWarrior card) {
+    private GorillaWarrior(final GorillaWarrior card) {
         super(card);
     }
 

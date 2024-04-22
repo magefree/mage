@@ -6,8 +6,7 @@ import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.dynamicvalue.common.ControllerGotLifeCount;
-import mage.abilities.dynamicvalue.common.ControllerLifeCount;
+import mage.abilities.dynamicvalue.common.ControllerGainedLifeCount;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.keyword.ReachAbility;
@@ -39,7 +38,7 @@ public final class EzzarootChanneler extends CardImpl {
         // Creature spells you cast cost {X} less to cast, where X is the amount of life you gained this turn.
         this.addAbility(
                 new SimpleStaticAbility(new EzzarootChannelerEffect())
-                        .addHint(ControllerGotLifeCount.getHint()),
+                        .addHint(ControllerGainedLifeCount.getHint()),
                 new PlayerGainedLifeWatcher()
         );
 
@@ -71,7 +70,7 @@ class EzzarootChannelerEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        CardUtil.reduceCost(abilityToModify, Math.max(0, ControllerLifeCount.instance.calculate(game, source, this)));
+        CardUtil.reduceCost(abilityToModify, Math.max(0, ControllerGainedLifeCount.instance.calculate(game, source, this)));
         return true;
     }
 

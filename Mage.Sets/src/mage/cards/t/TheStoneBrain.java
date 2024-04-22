@@ -33,7 +33,7 @@ public final class TheStoneBrain extends CardImpl {
     public TheStoneBrain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // {2}, {T}, Exile The Stone Brain: Choose a card name. Search target opponent's graveyard, hand, and library for up to four cards with that name and exile them. That player shuffles, then draws a card for each card exiled from their hand this way. Activate only as a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(
@@ -112,7 +112,7 @@ class TheStoneBrainEffect extends OneShotEffect {
                 // cards in Library
                 if (numberOfCardsStillToRemove > 0) {
                     Cards cardsInLibrary = new CardsImpl();
-                    cardsInLibrary.addAll(targetPlayer.getLibrary().getCards(game));
+                    cardsInLibrary.addAllCards(targetPlayer.getLibrary().getCards(game));
                     cardsCount = (cardName.isEmpty() ? 0 : cardsInLibrary.count(filter, game));
                     filter.setMessage("card named " + cardName + " in the library of " + targetPlayer.getLogName());
                     TargetCardInLibrary targetLib = new TargetCardInLibrary(0, Math.min(cardsCount, numberOfCardsStillToRemove), filter);

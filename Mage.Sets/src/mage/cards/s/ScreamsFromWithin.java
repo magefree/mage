@@ -61,12 +61,12 @@ public final class ScreamsFromWithin extends CardImpl {
 
 class ScreamsFromWithinEffect extends OneShotEffect {
 
-    public ScreamsFromWithinEffect() {
+    ScreamsFromWithinEffect() {
         super(Outcome.PutCardInPlay);
         staticText = "return {this} from your graveyard to the battlefield";
     }
 
-    public ScreamsFromWithinEffect(final ScreamsFromWithinEffect effect) {
+    private ScreamsFromWithinEffect(final ScreamsFromWithinEffect effect) {
         super(effect);
     }
 

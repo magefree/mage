@@ -3,7 +3,7 @@ package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BecomesTargetTriggeredAbility;
+import mage.abilities.common.BecomesTargetSourceTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -24,7 +24,8 @@ public final class Petrahydrox extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Petrahydrox becomes the target of a spell or ability, return Petrahydrox to its owner's hand.
-        this.addAbility(new BecomesTargetTriggeredAbility(new ReturnToHandSourceEffect(true)));
+        this.addAbility(new BecomesTargetSourceTriggeredAbility(new ReturnToHandSourceEffect(true))
+                .withRuleTextReplacement(false));
     }
 
     private Petrahydrox(final Petrahydrox card) {

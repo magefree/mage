@@ -24,7 +24,7 @@ public final class MortarionDaemonPrimarch extends CardImpl {
     public MortarionDaemonPrimarch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DEMON);
         this.subtype.add(SubType.PRIMARCH);
         this.power = new MageInt(5);

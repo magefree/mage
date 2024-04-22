@@ -66,7 +66,7 @@ class ThoughtHemorrhageEffect extends OneShotEffect {
         staticText = rule;
     }
 
-    public ThoughtHemorrhageEffect(final ThoughtHemorrhageEffect effect) {
+    private ThoughtHemorrhageEffect(final ThoughtHemorrhageEffect effect) {
         super(effect);
     }
 

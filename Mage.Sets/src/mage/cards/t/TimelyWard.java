@@ -39,7 +39,7 @@ public final class TimelyWard extends CardImpl {
 
         // You may cast this spell as though it had flash if it targets a commander.
         this.addAbility(new CastAsThoughItHadFlashIfConditionAbility(condition,
-                "You may cast this spell as though it had flash if it targets a commander."
+                "You may cast {this} as though it had flash if it targets a commander."
         ));
 
         // Enchant creature

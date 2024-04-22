@@ -47,7 +47,7 @@ class DefensiveManeuversEffect extends OneShotEffect {
         this.staticText = "Creatures of the creature type of your choice get +0/+4 until end of turn.";
     }
 
-    DefensiveManeuversEffect(final DefensiveManeuversEffect effect) {
+    private DefensiveManeuversEffect(final DefensiveManeuversEffect effect) {
         super(effect);
     }
 

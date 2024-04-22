@@ -58,7 +58,7 @@ class ScrapTrawlerTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever {this} or another artifact you control is put into a graveyard from the battlefield, ");
     }
 
-    public ScrapTrawlerTriggeredAbility(final ScrapTrawlerTriggeredAbility ability) {
+    private ScrapTrawlerTriggeredAbility(final ScrapTrawlerTriggeredAbility ability) {
         super(ability);
     }
 

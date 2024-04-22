@@ -24,7 +24,7 @@ public class PlayAdditionalLandsControllerEffect extends ContinuousEffectImpl {
         setText();
     }
 
-    public PlayAdditionalLandsControllerEffect(final PlayAdditionalLandsControllerEffect effect) {
+    protected PlayAdditionalLandsControllerEffect(final PlayAdditionalLandsControllerEffect effect) {
         super(effect);
         this.additionalCards = effect.additionalCards;
     }

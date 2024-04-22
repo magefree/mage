@@ -92,11 +92,11 @@ class SunbirdsInvocationTriggeredAbility extends SpellCastControllerTriggeredAbi
 
 class SunbirdsInvocationEffect extends OneShotEffect {
 
-    public SunbirdsInvocationEffect() {
+    SunbirdsInvocationEffect() {
         super(Outcome.PutCardInPlay);
     }
 
-    public SunbirdsInvocationEffect(final SunbirdsInvocationEffect effect) {
+    private SunbirdsInvocationEffect(final SunbirdsInvocationEffect effect) {
         super(effect);
     }
 

@@ -51,7 +51,7 @@ class GroveOfTheBurnwillowsEffect extends OneShotEffect {
         staticText = "Each opponent gains 1 life";
     }
 
-    GroveOfTheBurnwillowsEffect(GroveOfTheBurnwillowsEffect effect) {
+    private GroveOfTheBurnwillowsEffect(final GroveOfTheBurnwillowsEffect effect) {
         super(effect);
     }
 

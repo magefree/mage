@@ -57,7 +57,7 @@ public final class RootGreevil extends CardImpl {
             this.staticText = "Destroy all enchantments of the color of your choice";
         }
 
-        public RootGreevilEffect(final RootGreevilEffect effect) {
+        private RootGreevilEffect(final RootGreevilEffect effect) {
             super(effect);
         }
 

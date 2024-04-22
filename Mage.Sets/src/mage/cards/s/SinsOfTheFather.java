@@ -48,7 +48,7 @@ class SinsOfTheFatherEffect extends OneShotEffect {
         staticText = "Exile target player's graveyard. That player loses 1 life for each instant or sorcery card exiled this way";
     }
 
-    public SinsOfTheFatherEffect(final SinsOfTheFatherEffect effect) {
+    private SinsOfTheFatherEffect(final SinsOfTheFatherEffect effect) {
         super(effect);
     }
 

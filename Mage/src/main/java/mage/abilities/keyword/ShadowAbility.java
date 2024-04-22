@@ -50,7 +50,7 @@ class ShadowEffect extends RestrictionEffect implements MageSingleton {
         super(Duration.EndOfGame);
     }
 
-    public ShadowEffect(final ShadowEffect effect) {
+    protected ShadowEffect(final ShadowEffect effect) {
         super(effect);
     }
 
@@ -70,7 +70,7 @@ class ShadowEffect extends RestrictionEffect implements MageSingleton {
     @Override
     public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
         return blocker.getAbilities().containsKey(ShadowAbility.getInstance().getId())
-                || null != game.getContinuousEffects().asThough(blocker.getId(), AsThoughEffectType.BLOCK_SHADOW, null, blocker.getControllerId(), game);
+                || !game.getContinuousEffects().asThough(blocker.getId(), AsThoughEffectType.BLOCK_SHADOW, null, blocker.getControllerId(), game).isEmpty();
     }
 
     @Override

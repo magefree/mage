@@ -55,7 +55,7 @@ class KavuPredatorTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever an opponent gains life, ");
     }
 
-    public KavuPredatorTriggeredAbility(final KavuPredatorTriggeredAbility ability) {
+    private KavuPredatorTriggeredAbility(final KavuPredatorTriggeredAbility ability) {
         super(ability);
     }
 
@@ -81,12 +81,12 @@ class KavuPredatorTriggeredAbility extends TriggeredAbilityImpl {
 
 class KavuPredatorEffect extends OneShotEffect {
 
-    public KavuPredatorEffect() {
+    KavuPredatorEffect() {
         super(Outcome.BoostCreature);
         this.staticText = "put that many +1/+1 counters on {this}";
     }
 
-    public KavuPredatorEffect(final KavuPredatorEffect effect) {
+    private KavuPredatorEffect(final KavuPredatorEffect effect) {
         super(effect);
     }
 

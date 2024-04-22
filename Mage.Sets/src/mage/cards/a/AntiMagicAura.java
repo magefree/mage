@@ -56,12 +56,12 @@ public final class AntiMagicAura extends CardImpl {
 // 9/25/2006 ruling: If Consecrate Land enters the battlefield attached to a land that's enchanted by other Auras, those Auras are put into their owners' graveyards.
 class AntiMagicAuraRuleEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public AntiMagicAuraRuleEffect() {
+    AntiMagicAuraRuleEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "and can't be enchanted by other Auras";
     }
 
-    public AntiMagicAuraRuleEffect(final AntiMagicAuraRuleEffect effect) {
+    private AntiMagicAuraRuleEffect(final AntiMagicAuraRuleEffect effect) {
         super(effect);
     }
 

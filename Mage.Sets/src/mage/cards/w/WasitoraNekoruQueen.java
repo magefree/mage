@@ -15,12 +15,14 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.WasitoraCatDragonToken;
 import mage.players.Player;
 import mage.target.TargetPermanent;
+import mage.target.common.TargetSacrifice;
 
 /**
  *
@@ -31,7 +33,7 @@ public final class WasitoraNekoruQueen extends CardImpl {
     public WasitoraNekoruQueen(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{R}{G}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.CAT);
         this.subtype.add(SubType.DRAGON);
         this.power = new MageInt(5);
@@ -59,12 +61,12 @@ public final class WasitoraNekoruQueen extends CardImpl {
 
 class WasitoraNekoruQueenEffect extends OneShotEffect {
 
-    public WasitoraNekoruQueenEffect() {
+    WasitoraNekoruQueenEffect() {
         super(Outcome.Benefit);
         staticText = "that player sacrifices a creature. If the player can't, you create a 3/3 black, red, and green Cat Dragon creature token with flying";
     }
 
-    public WasitoraNekoruQueenEffect(final WasitoraNekoruQueenEffect effect) {
+    private WasitoraNekoruQueenEffect(final WasitoraNekoruQueenEffect effect) {
         super(effect);
     }
 
@@ -75,12 +77,10 @@ class WasitoraNekoruQueenEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player damagedPlayer = game.getPlayer(targetPointer.getFirst(game, source));
+        Player damagedPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
         if (damagedPlayer != null && controller != null) {
-            FilterControlledPermanent filter = new FilterControlledPermanent("creature");
-            filter.add(CardType.CREATURE.getPredicate());
-            TargetPermanent target = new TargetPermanent(1, 1, filter, true);
+            TargetSacrifice target = new TargetSacrifice(StaticFilters.FILTER_PERMANENT_CREATURE);
             if (damagedPlayer.choose(Outcome.Sacrifice, target, source, game)) {
                 Permanent objectToBeSacrificed = game.getPermanent(target.getFirstTarget());
                 if (objectToBeSacrificed != null) {

@@ -31,7 +31,7 @@ public final class RakshaGoldenCub extends CardImpl {
     
     public RakshaGoldenCub(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.CAT);
         this.subtype.add(SubType.SOLDIER);
         this.power = new MageInt(3);

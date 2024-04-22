@@ -30,7 +30,7 @@ public final class BurrentonBombardier extends CardImpl {
         this.addAbility(new ReinforceAbility(2, new ManaCostsImpl<>("{2}{W}")));
     }
 
-    public BurrentonBombardier (final BurrentonBombardier card) {
+    private BurrentonBombardier(final BurrentonBombardier card) {
         super(card);
     }
 

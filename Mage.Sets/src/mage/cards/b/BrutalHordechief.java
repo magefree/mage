@@ -62,7 +62,7 @@ class BrutalHordechiefTriggeredAbility extends TriggeredAbilityImpl {
         this.addEffect(new GainLifeEffect(1));
     }
 
-    public BrutalHordechiefTriggeredAbility(final BrutalHordechiefTriggeredAbility ability) {
+    private BrutalHordechiefTriggeredAbility(final BrutalHordechiefTriggeredAbility ability) {
         super(ability);
     }
 

@@ -19,7 +19,7 @@ public class BlocksIfAbleTargetEffect extends RequirementEffect {
         super(duration);
     }
 
-    public BlocksIfAbleTargetEffect(final BlocksIfAbleTargetEffect effect) {
+    protected BlocksIfAbleTargetEffect(final BlocksIfAbleTargetEffect effect) {
         super(effect);
     }
 
@@ -53,12 +53,10 @@ public class BlocksIfAbleTargetEffect extends RequirementEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        if (this.duration == Duration.EndOfTurn) {
-            return "target " + mode.getTargets().get(0).getTargetName() + " blocks this turn if able";
-        }
-        else {
-            return "target " + mode.getTargets().get(0).getTargetName() + " blocks each turn if able";
-        }
+        return getTargetPointer().describeTargets(mode.getTargets(), "it") +
+                (getTargetPointer().isPlural(mode.getTargets()) ? " block " : " blocks ") +
+                (duration == Duration.EndOfTurn ? "this" : "each" ) +
+                " turn if able";
     }
 
 }

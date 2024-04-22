@@ -49,7 +49,7 @@ public final class NahiriHeirOfTheAncients extends CardImpl {
     public NahiriHeirOfTheAncients(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{R}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.NAHIRI);
         this.setStartingLoyalty(4);
 
@@ -126,12 +126,12 @@ class NahiriHeirOfTheAncientsEffect extends OneShotEffect {
                             .collect(Collectors.toSet())
             ));
             TargetPermanent target = new TargetPermanent(tokenFilter);
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             player.choose(outcome, target, source, game);
             tokenCreature = game.getPermanent(target.getFirstTarget());
         }
         TargetPermanent target = new TargetPermanent(filter);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         player.choose(outcome, target, source, game);
         tokenCreature.addAttachment(target.getFirstTarget(), source, game);
         return true;

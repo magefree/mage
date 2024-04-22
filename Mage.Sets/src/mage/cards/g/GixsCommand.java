@@ -77,9 +77,9 @@ public final class GixsCommand extends CardImpl {
 
 class GixsCommandCounterEffect extends OneShotEffect {
 
-    public GixsCommandCounterEffect() {
+    GixsCommandCounterEffect() {
         super(Outcome.BoostCreature);
-        this.staticText = "Put two +1/+1 counter on up to one creature. It gains lifelink until end of turn.";
+        this.staticText = "Put two +1/+1 counters on up to one creature. It gains lifelink until end of turn.";
     }
 
     private GixsCommandCounterEffect(final GixsCommandCounterEffect effect) {
@@ -98,7 +98,7 @@ class GixsCommandCounterEffect extends OneShotEffect {
             return false;
         }
         TargetCreaturePermanent target = new TargetCreaturePermanent(0, 1);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         controller.chooseTarget(outcome, target, source, game);
         Permanent permanent = game.getPermanent(target.getFirstTarget());
         if (permanent == null) {
@@ -114,7 +114,7 @@ class GixsCommandCounterEffect extends OneShotEffect {
 
 class GixsCommandReturnEffect extends OneShotEffect {
 
-    public GixsCommandReturnEffect() {
+    GixsCommandReturnEffect() {
         super(Outcome.ReturnToHand);
         this.staticText = "Return up to two creature cards from your graveyard to your hand";
     }

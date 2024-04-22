@@ -45,12 +45,12 @@ public final class MitoticManipulation extends CardImpl {
 
 class MitoticManipulationEffect extends OneShotEffect {
 
-    public MitoticManipulationEffect() {
+    MitoticManipulationEffect() {
         super(Outcome.PutCardInPlay);
         this.staticText = "Look at the top seven cards of your library. You may put one of those cards onto the battlefield if it has the same name as a permanent. Put the rest on the bottom of your library in any order";
     }
 
-    public MitoticManipulationEffect(final MitoticManipulationEffect effect) {
+    private MitoticManipulationEffect(final MitoticManipulationEffect effect) {
         super(effect);
     }
 
@@ -70,7 +70,7 @@ class MitoticManipulationEffect extends OneShotEffect {
             }
 
             Cards cardsFromTop = new CardsImpl();
-            cardsFromTop.addAll(controller.getLibrary().getTopCards(game, 7));
+            cardsFromTop.addAllCards(controller.getLibrary().getTopCards(game, 7));
             controller.lookAtCards(sourceObject.getIdName(), cardsFromTop, game);
             FilterCard filter = new FilterCard("card to put onto the battlefield");
             List<NamePredicate> namePredicates = new ArrayList<>();

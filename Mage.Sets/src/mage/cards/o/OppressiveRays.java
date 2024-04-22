@@ -67,7 +67,7 @@ class OppressiveRaysCostModificationEffect extends CostModificationEffectImpl {
         staticText = "Activated abilities of enchanted creature cost {3} more to activate";
     }
 
-    OppressiveRaysCostModificationEffect(OppressiveRaysCostModificationEffect effect) {
+    private OppressiveRaysCostModificationEffect(final OppressiveRaysCostModificationEffect effect) {
         super(effect);
     }
 

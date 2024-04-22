@@ -73,7 +73,7 @@ public final class BalduvianAtrocity extends CardImpl {
 
 class BalduvianAtrocityEffect extends OneShotEffect {
 
-    public BalduvianAtrocityEffect() {
+    BalduvianAtrocityEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "return target creature card with mana value 3 or less from your graveyard to the battlefield. It gains haste. Sacrifice it at the beginning of the next end step.";
     }

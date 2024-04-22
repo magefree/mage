@@ -1,7 +1,5 @@
 package mage.cards.m;
 
-import java.util.UUID;
-
 import mage.MageInt;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
@@ -11,12 +9,14 @@ import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.CantBeBlockedSourceAbility;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
+
+import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -44,7 +44,7 @@ public final class MercurialSpelldancer extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
                 new DoIfCostPaid(
                         new CreateDelayedTriggeredAbilityEffect(new CopyNextSpellDelayedTriggeredAbility()),
-                        new RemoveCountersSourceCost(CounterType.OIL.createInstance(2))
+                        new RemoveCountersSourceCost(CounterType.OIL.createInstance(2)).setText("remove two oil counters from it")
                 ), false
         ));
     }

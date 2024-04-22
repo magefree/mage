@@ -40,7 +40,7 @@ public final class FloodedGrove extends CardImpl {
         
     }
 
-    public FloodedGrove (final FloodedGrove card) {
+    private FloodedGrove(final FloodedGrove card) {
         super(card);
     }
 

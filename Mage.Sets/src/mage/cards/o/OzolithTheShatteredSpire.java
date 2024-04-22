@@ -26,7 +26,7 @@ public final class OzolithTheShatteredSpire extends CardImpl {
     public OzolithTheShatteredSpire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // If one or more +1/+1 counters would be put on an artifact or creature you control, that many plus one +1/+1 counters are put on it instead.
         this.addAbility(new SimpleStaticAbility(new ModifyCountersAddedEffect(

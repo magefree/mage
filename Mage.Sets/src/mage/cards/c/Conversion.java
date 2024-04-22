@@ -56,7 +56,7 @@ public final class Conversion extends CardImpl {
             this.staticText = "All Mountains are Plains";
         }
 
-        ConversionEffect(final ConversionEffect effect) {
+        private ConversionEffect(final ConversionEffect effect) {
             super(effect);
         }
 

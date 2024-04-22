@@ -19,7 +19,7 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.permanent.DefendingPlayerControlsPredicate;
+import mage.filter.predicate.permanent.DefendingPlayerControlsSourceAttackingPredicate;
 import mage.target.common.TargetLandPermanent;
 
 import java.util.UUID;
@@ -33,7 +33,7 @@ public final class GaeasLiege extends CardImpl {
     private static final FilterPermanent filter2 = new FilterPermanent(SubType.FOREST, "");
 
     static {
-        filter2.add(DefendingPlayerControlsPredicate.instance);
+        filter2.add(DefendingPlayerControlsSourceAttackingPredicate.instance);
     }
 
     private static final DynamicValue xValue1 = new PermanentsOnBattlefieldCount(filter);

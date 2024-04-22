@@ -41,7 +41,7 @@ public final class SteelshaperApprentice extends CardImpl {
 
         // {W}, {tap}, Return Steelshaper Apprentice to its owner's hand: Search your library for an Equipment card, reveal that card, and put it into your hand. Then shuffle your library.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new SearchLibraryPutInHandEffect(new TargetCardInLibrary(1, 1, filter), true),
+                new SearchLibraryPutInHandEffect(new TargetCardInLibrary(1, 1, filter), true, true),
                 new ColoredManaCost(ColoredManaSymbol.W));
         ability.addCost(new TapSourceCost());
         ability.addCost(new ReturnToHandFromBattlefieldSourceCost());

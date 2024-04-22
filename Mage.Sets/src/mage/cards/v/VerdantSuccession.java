@@ -58,12 +58,11 @@ class VerdantSuccessionTriggeredAbility extends TriggeredAbilityImpl {
         filter.add(TokenPredicate.FALSE);
     }
 
-    public VerdantSuccessionTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new VerdantSuccessionEffect());
-        this.optional = true;
+    VerdantSuccessionTriggeredAbility() {
+        super(Zone.BATTLEFIELD, new VerdantSuccessionEffect(), true);
     }
 
-    public VerdantSuccessionTriggeredAbility(final VerdantSuccessionTriggeredAbility ability) {
+    private VerdantSuccessionTriggeredAbility(final VerdantSuccessionTriggeredAbility ability) {
         super(ability);
     }
 
@@ -106,7 +105,7 @@ class VerdantSuccessionEffect extends OneShotEffect {
         super(Outcome.PutCardInPlay);
     }
 
-    VerdantSuccessionEffect(final VerdantSuccessionEffect effect) {
+    private VerdantSuccessionEffect(final VerdantSuccessionEffect effect) {
         super(effect);
     }
 

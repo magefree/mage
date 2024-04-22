@@ -62,7 +62,7 @@ class PaladinOfPrahvTriggeredAbility extends DelayedTriggeredAbility {
         setTriggerPhrase("Whenever target creature deals damage this turn, ");
     }
 
-    public PaladinOfPrahvTriggeredAbility(final PaladinOfPrahvTriggeredAbility ability) {
+    private PaladinOfPrahvTriggeredAbility(final PaladinOfPrahvTriggeredAbility ability) {
         super(ability);
     }
 

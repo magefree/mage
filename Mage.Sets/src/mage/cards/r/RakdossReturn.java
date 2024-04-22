@@ -49,7 +49,7 @@ class RakdossReturnEffect extends OneShotEffect {
         this.staticText = "That player or that planeswalker's controller discards X cards.";
     }
 
-    RakdossReturnEffect(final RakdossReturnEffect effect) {
+    private RakdossReturnEffect(final RakdossReturnEffect effect) {
         super(effect);
     }
 

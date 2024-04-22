@@ -72,7 +72,7 @@ class GuildSummitEffect extends OneShotEffect {
                 + "Draw a card for each Gate tapped this way";
     }
 
-    public GuildSummitEffect(GuildSummitEffect effect) {
+    private GuildSummitEffect(final GuildSummitEffect effect) {
         super(effect);
     }
 

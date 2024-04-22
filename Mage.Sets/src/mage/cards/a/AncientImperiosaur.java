@@ -23,7 +23,7 @@ import java.util.UUID;
  */
 public final class AncientImperiosaur extends CardImpl {
 
-    private static final DynamicValue xValue = new MultipliedValue(ConvokedSourceCount.SPELL, 2);
+    private static final DynamicValue xValue = new MultipliedValue(ConvokedSourceCount.instance, 2);
 
     public AncientImperiosaur(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");

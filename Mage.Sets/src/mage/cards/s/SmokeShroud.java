@@ -27,7 +27,7 @@ import java.util.UUID;
  */
 public final class SmokeShroud extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent(SubType.NINJA, "");
+    private static final FilterPermanent filter = new FilterPermanent(SubType.NINJA, "a Ninja");
 
     public SmokeShroud(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
@@ -51,9 +51,8 @@ public final class SmokeShroud extends CardImpl {
         // When a Ninja enters the battlefield under your control, you may return Smoke Shroud from your graveyard to the battlefield attached to that creature.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 Zone.GRAVEYARD, new SmokeShroudEffect(), filter, true,
-                SetTargetPointer.PERMANENT, "When a Ninja enters the battlefield under your control, " +
-                "you may return {this} from your graveyard to the battlefield attached to that creature."
-        ));
+                SetTargetPointer.PERMANENT
+        ).setTriggerPhrase("When a Ninja enters the battlefield under your control, "));
     }
 
     private SmokeShroud(final SmokeShroud card) {
@@ -70,6 +69,7 @@ class SmokeShroudEffect extends OneShotEffect {
 
     SmokeShroudEffect() {
         super(Outcome.Benefit);
+        staticText = "return {this} from your graveyard to the battlefield attached to that creature";
     }
 
     private SmokeShroudEffect(final SmokeShroudEffect effect) {
@@ -96,4 +96,3 @@ class SmokeShroudEffect extends OneShotEffect {
         return false;
     }
 }
-

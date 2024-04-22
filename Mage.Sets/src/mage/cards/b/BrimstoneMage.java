@@ -51,7 +51,7 @@ public final class BrimstoneMage extends LevelerCard {
         setMaxLevelCounters(3);
     }
 
-    public BrimstoneMage (final BrimstoneMage card) {
+    private BrimstoneMage(final BrimstoneMage card) {
         super(card);
     }
 

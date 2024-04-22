@@ -10,6 +10,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
@@ -18,6 +19,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetLandPermanent;
+import mage.target.common.TargetSacrifice;
 
 import java.util.UUID;
 
@@ -38,7 +40,7 @@ public final class FeastOfWorms extends CardImpl {
         this.getSpellAbility().addEffect(new FeastOfWormsEffect());
     }
 
-    public FeastOfWorms (final FeastOfWorms card) {
+    private FeastOfWorms(final FeastOfWorms card) {
         super(card);
     }
 
@@ -56,7 +58,7 @@ class FeastOfWormsEffect extends OneShotEffect {
         staticText = "If that land was legendary, its controller sacrifices another land";
     }
 
-    FeastOfWormsEffect(FeastOfWormsEffect effect) {
+    private FeastOfWormsEffect(final FeastOfWormsEffect effect) {
         super(effect);
     }
 
@@ -72,13 +74,10 @@ class FeastOfWormsEffect extends OneShotEffect {
         if (permanent != null) {
             targetPlayer = game.getPlayer(permanent.getControllerId());
         }
-        if (targetPlayer != null && permanent != null && (permanent.isLegendary())) {
-            FilterControlledPermanent filter = new FilterControlledLandPermanent("land to sacrifice");
-            filter.add(new ControllerIdPredicate(targetPlayer.getId()));
-            TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, false);
-
+        if (targetPlayer != null && permanent.isLegendary(game)) {
+            TargetSacrifice target = new TargetSacrifice(StaticFilters.FILTER_LAND);
             if (target.canChoose(targetPlayer.getId(), source, game)) {
-                targetPlayer.chooseTarget(Outcome.Sacrifice, target, source, game);
+                targetPlayer.choose(Outcome.Sacrifice, target, source, game);
                 Permanent land = game.getPermanent(target.getFirstTarget());
                 if (land != null) {
                     land.sacrifice(source, game);

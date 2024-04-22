@@ -63,12 +63,12 @@ public final class CommitMemory extends SplitCard {
 
 class CommitEffect extends OneShotEffect {
 
-    public CommitEffect() {
+    CommitEffect() {
         super(Outcome.Benefit);
         this.staticText = "Put target spell or nonland permanent into its owner's library second from the top";
     }
 
-    public CommitEffect(final CommitEffect effect) {
+    private CommitEffect(final CommitEffect effect) {
         super(effect);
     }
 

@@ -50,7 +50,7 @@ public final class OilGorgerTroll extends CardImpl {
         Ability ability = new EntersBattlefieldTriggeredAbility(new GainLifeEffect(3));
         ability.addEffect(new ConditionalOneShotEffect(
                 new DrawCardSourceControllerEffect(1), condition,
-                "then if you control a permanent with an oil counter on it, draw a card"
+                "Then if you control a permanent with an oil counter on it, draw a card"
         ));
         this.addAbility(ability.addHint(hint));
     }

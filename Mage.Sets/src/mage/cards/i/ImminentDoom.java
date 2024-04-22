@@ -58,7 +58,7 @@ class ImminentDoomTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new ImminentDoomEffect());
     }
 
-    public ImminentDoomTriggeredAbility(final ImminentDoomTriggeredAbility ability) {
+    private ImminentDoomTriggeredAbility(final ImminentDoomTriggeredAbility ability) {
         super(ability);
     }
 
@@ -95,11 +95,11 @@ class ImminentDoomTriggeredAbility extends TriggeredAbilityImpl {
 
 class ImminentDoomEffect extends OneShotEffect {
 
-    public ImminentDoomEffect() {
+    ImminentDoomEffect() {
         super(Outcome.Detriment);
     }
 
-    public ImminentDoomEffect(final ImminentDoomEffect effect) {
+    private ImminentDoomEffect(final ImminentDoomEffect effect) {
         super(effect);
     }
 

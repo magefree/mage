@@ -57,7 +57,7 @@ public final class VolitionReins extends CardImpl {
             staticText = "if enchanted permanent is tapped, untap it";
         }
 
-        public UntapVolitionReinsEffect(final UntapVolitionReinsEffect effect) {
+        private UntapVolitionReinsEffect(final UntapVolitionReinsEffect effect) {
             super(effect);
         }
 

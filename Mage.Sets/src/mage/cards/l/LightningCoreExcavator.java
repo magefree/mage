@@ -29,7 +29,7 @@ public final class LightningCoreExcavator extends CardImpl {
 
         // {5}, {T}, Sacrifice Lightning-Core Excavator: It deals 3 damage to any target.
         Ability ability = new SimpleActivatedAbility(
-                new DamageTargetEffect(3), new GenericManaCost(5)
+                new DamageTargetEffect(3, "it"), new GenericManaCost(5)
         );
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());

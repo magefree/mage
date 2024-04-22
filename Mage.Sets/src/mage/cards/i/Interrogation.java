@@ -47,7 +47,7 @@ class InterrogationEffect extends OneShotEffect {
         this.staticText = "Then that player discards another card unless they pay 3 life";
     }
 
-    InterrogationEffect(final InterrogationEffect effect) {
+    private InterrogationEffect(final InterrogationEffect effect) {
         super(effect);
     }
 

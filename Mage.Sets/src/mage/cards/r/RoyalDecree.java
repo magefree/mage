@@ -63,7 +63,7 @@ class RoyalDecreeAbility extends TriggeredAbilityImpl {
             super(Zone.BATTLEFIELD, new DamageTargetEffect(1));
     }
 
-    RoyalDecreeAbility(final RoyalDecreeAbility ability) {
+    private RoyalDecreeAbility(final RoyalDecreeAbility ability) {
             super(ability);
     }
 

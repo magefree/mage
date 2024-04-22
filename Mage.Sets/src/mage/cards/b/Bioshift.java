@@ -59,12 +59,12 @@ public final class Bioshift extends CardImpl {
 
 class MoveCounterFromTargetToTargetEffect extends OneShotEffect {
 
-    public MoveCounterFromTargetToTargetEffect() {
+    MoveCounterFromTargetToTargetEffect() {
         super(Outcome.Detriment);
         this.staticText = "Move any number of +1/+1 counters from target creature onto another target creature with the same controller";
     }
 
-    public MoveCounterFromTargetToTargetEffect(final MoveCounterFromTargetToTargetEffect effect) {
+    private MoveCounterFromTargetToTargetEffect(final MoveCounterFromTargetToTargetEffect effect) {
         super(effect);
     }
 

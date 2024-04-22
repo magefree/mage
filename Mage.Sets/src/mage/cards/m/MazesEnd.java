@@ -105,12 +105,12 @@ enum GatesWithDifferentNamesYouControlCount implements DynamicValue {
 
 class MazesEndEffect extends OneShotEffect {
 
-    public MazesEndEffect() {
+    MazesEndEffect() {
         super(Outcome.PutLandInPlay);
         this.staticText = "If you control ten or more Gates with different names, you win the game";
     }
 
-    public MazesEndEffect(final MazesEndEffect effect) {
+    private MazesEndEffect(final MazesEndEffect effect) {
         super(effect);
     }
 

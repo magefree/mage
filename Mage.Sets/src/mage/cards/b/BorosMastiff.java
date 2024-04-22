@@ -33,7 +33,7 @@ public final class BorosMastiff extends CardImpl {
 
     }
 
-    public BorosMastiff (final BorosMastiff card) {
+    private BorosMastiff(final BorosMastiff card) {
         super(card);
     }
 

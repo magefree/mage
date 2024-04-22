@@ -52,7 +52,7 @@ class HamletbackGoliathTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new HamletbackGoliathEffect(), true);
     }
 
-    HamletbackGoliathTriggeredAbility(final HamletbackGoliathTriggeredAbility ability) {
+    private HamletbackGoliathTriggeredAbility(final HamletbackGoliathTriggeredAbility ability) {
         super(ability);
     }
 
@@ -92,7 +92,7 @@ class HamletbackGoliathEffect extends OneShotEffect {
         super(Outcome.BoostCreature);
     }
 
-    HamletbackGoliathEffect(final HamletbackGoliathEffect effect) {
+    private HamletbackGoliathEffect(final HamletbackGoliathEffect effect) {
         super(effect);
     }
 

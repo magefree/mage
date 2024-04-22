@@ -6,7 +6,6 @@ import mage.constants.CardType;
 import mage.filter.FilterCard;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class FilterCreatureCard extends FilterCard {
@@ -20,7 +19,7 @@ public class FilterCreatureCard extends FilterCard {
         this.add(CardType.CREATURE.getPredicate());
     }
 
-    public FilterCreatureCard(final FilterCreatureCard filter) {
+    protected FilterCreatureCard(final FilterCreatureCard filter) {
         super(filter);
     }
 

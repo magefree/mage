@@ -3,13 +3,13 @@
 package mage.abilities.effects.common;
 
 import java.util.UUID;
+
 import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.game.Game;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class RemoveDelayedTriggeredAbilityEffect extends OneShotEffect {
@@ -22,7 +22,7 @@ public class RemoveDelayedTriggeredAbilityEffect extends OneShotEffect {
         staticText = "remove triggered ability";
     }
 
-    public RemoveDelayedTriggeredAbilityEffect(final RemoveDelayedTriggeredAbilityEffect effect) {
+    protected RemoveDelayedTriggeredAbilityEffect(final RemoveDelayedTriggeredAbilityEffect effect) {
         super(effect);
         this.abilityId = effect.abilityId;
     }

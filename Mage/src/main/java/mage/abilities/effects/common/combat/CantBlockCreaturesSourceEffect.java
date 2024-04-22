@@ -1,7 +1,6 @@
 package mage.abilities.effects.common.combat;
 
 import mage.abilities.Ability;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.RestrictionEffect;
 import mage.constants.Duration;
 import mage.filter.common.FilterCreaturePermanent;
@@ -25,7 +24,7 @@ public class CantBlockCreaturesSourceEffect extends RestrictionEffect {
         staticText = "{this} can't block " + filter.getMessage();
     }
 
-    public CantBlockCreaturesSourceEffect(CantBlockCreaturesSourceEffect effect) {
+    protected CantBlockCreaturesSourceEffect(final CantBlockCreaturesSourceEffect effect) {
         super(effect);
         this.filter = effect.filter;
     }
@@ -44,7 +43,7 @@ public class CantBlockCreaturesSourceEffect extends RestrictionEffect {
     }
 
     @Override
-    public ContinuousEffect copy() {
+    public CantBlockCreaturesSourceEffect copy() {
         return new CantBlockCreaturesSourceEffect(this);
     }
 }

@@ -1,7 +1,7 @@
 package mage.cards.q;
 
 import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -10,7 +10,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledArtifactPermanent;
+import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -27,8 +27,9 @@ public final class QuicksmithGenius extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever an artifact enters the battlefield under your control, you may discard a card. If you do, draw a card.
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(
-                Zone.BATTLEFIELD, new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new DiscardCardCost()), new FilterControlledArtifactPermanent("an artifact"), false, null, true));
+        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD,
+                new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new DiscardCardCost()),
+                StaticFilters.FILTER_PERMANENT_ARTIFACT, false));
     }
 
     private QuicksmithGenius(final QuicksmithGenius card) {

@@ -60,7 +60,7 @@ class SarkhansWhelpTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever you activate an ability of a Sarkhan planeswalker, ");
     }
 
-    public SarkhansWhelpTriggeredAbility(final SarkhansWhelpTriggeredAbility ability) {
+    private SarkhansWhelpTriggeredAbility(final SarkhansWhelpTriggeredAbility ability) {
         super(ability);
     }
 

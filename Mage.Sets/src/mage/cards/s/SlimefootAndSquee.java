@@ -39,7 +39,7 @@ public final class SlimefootAndSquee extends CardImpl {
     public SlimefootAndSquee(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}{R}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.FUNGUS);
         this.subtype.add(SubType.GOBLIN);
         this.power = new MageInt(3);

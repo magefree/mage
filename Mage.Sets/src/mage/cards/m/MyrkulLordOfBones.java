@@ -42,7 +42,7 @@ public final class MyrkulLordOfBones extends CardImpl {
     public MyrkulLordOfBones(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}{B}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GOD);
         this.power = new MageInt(7);
         this.toughness = new MageInt(5);
@@ -103,10 +103,11 @@ class MyrkulLordOfBonesEffect extends OneShotEffect {
         player.moveCards(card, Zone.EXILED, source, game);
         return new CreateTokenCopyTargetEffect().setSavedPermanent(
                 new PermanentCard(CardUtil.getDefaultCardSideForBattlefield(game, card), source.getControllerId(), game)
-        ).setPermanentModifier((token, g) -> {
-            token.getCardType().clear();
+        ).setPermanentModifier((token) -> {
+            token.removeAllCardTypes();
             token.addCardType(CardType.ENCHANTMENT);
-            token.retainAllEnchantmentSubTypes(g);
+            // We keep enchantment subtypes, clearing the rest.
+            token.getSubtype().retainAll(SubType.getEnchantmentTypes());
         }).apply(game, source);
     }
 }

@@ -38,7 +38,7 @@ public class PutCardIntoGraveFromAnywhereAllTriggeredAbility extends TriggeredAb
         this.filter = filter.copy();
         this.setTargetPointer = setTargetPointer;
         this.filter.add(targetController.getOwnerPredicate());
-        StringBuilder sb = new StringBuilder("Whenever ");
+        StringBuilder sb = new StringBuilder(getWhen());
         sb.append(filter.getMessage());
         sb.append(filter.getMessage().startsWith("one or more") ? " are" : " is");
         sb.append(" put into ");
@@ -56,7 +56,7 @@ public class PutCardIntoGraveFromAnywhereAllTriggeredAbility extends TriggeredAb
         setTriggerPhrase(sb.toString());
     }
 
-    public PutCardIntoGraveFromAnywhereAllTriggeredAbility(final PutCardIntoGraveFromAnywhereAllTriggeredAbility ability) {
+    protected PutCardIntoGraveFromAnywhereAllTriggeredAbility(final PutCardIntoGraveFromAnywhereAllTriggeredAbility ability) {
         super(ability);
         this.filter = ability.filter;
         this.setTargetPointer = ability.setTargetPointer;

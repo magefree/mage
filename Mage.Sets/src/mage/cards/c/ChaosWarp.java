@@ -46,12 +46,12 @@ public final class ChaosWarp extends CardImpl {
 
 class ChaosWarpShuffleIntoLibraryEffect extends OneShotEffect {
 
-    public ChaosWarpShuffleIntoLibraryEffect() {
+    ChaosWarpShuffleIntoLibraryEffect() {
         super(Outcome.Detriment);
         this.staticText = "The owner of target permanent shuffles it into their library";
     }
 
-    public ChaosWarpShuffleIntoLibraryEffect(final ChaosWarpShuffleIntoLibraryEffect effect) {
+    private ChaosWarpShuffleIntoLibraryEffect(final ChaosWarpShuffleIntoLibraryEffect effect) {
         super(effect);
     }
 
@@ -62,7 +62,7 @@ class ChaosWarpShuffleIntoLibraryEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
+        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (permanent != null) {
             Player owner = game.getPlayer(permanent.getOwnerId());
             if (owner != null) {
@@ -77,12 +77,12 @@ class ChaosWarpShuffleIntoLibraryEffect extends OneShotEffect {
 
 class ChaosWarpRevealEffect extends OneShotEffect {
 
-    public ChaosWarpRevealEffect() {
+    ChaosWarpRevealEffect() {
         super(Outcome.PutCardInPlay);
         this.staticText = ", then reveals the top card of their library. If it's a permanent card, they put it onto the battlefield";
     }
 
-    public ChaosWarpRevealEffect(final ChaosWarpRevealEffect effect) {
+    private ChaosWarpRevealEffect(final ChaosWarpRevealEffect effect) {
         super(effect);
     }
 
@@ -93,7 +93,7 @@ class ChaosWarpRevealEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = (Permanent) game.getLastKnownInformation(targetPointer.getFirst(game, source), Zone.BATTLEFIELD);
+        Permanent permanent = (Permanent) game.getLastKnownInformation(getTargetPointer().getFirst(game, source), Zone.BATTLEFIELD);
         if (permanent == null) {
             return false;
         }

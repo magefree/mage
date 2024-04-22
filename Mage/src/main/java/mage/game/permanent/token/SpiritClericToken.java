@@ -11,10 +11,7 @@ import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
-import java.util.Arrays;
-
 /**
- *
  * @author weirddan455
  */
 public class SpiritClericToken extends TokenImpl {
@@ -31,8 +28,6 @@ public class SpiritClericToken extends TokenImpl {
 
         // This creature’s power and toughness are each equal to the number of Spirits you control.
         this.addAbility(new SimpleStaticAbility(new SetBasePowerToughnessSourceEffect(SpiritClericTokenValue.instance)));
-
-        availableImageSetCodes = Arrays.asList("VOW");
     }
 
     private SpiritClericToken(final SpiritClericToken token) {

@@ -49,11 +49,11 @@ public final class MoltenSentry extends CardImpl {
 
 class MoltenSentryEffect extends OneShotEffect {
 
-    public MoltenSentryEffect() {
+    MoltenSentryEffect() {
         super(Outcome.Damage);
     }
 
-    public MoltenSentryEffect(MoltenSentryEffect effect) {
+    private MoltenSentryEffect(final MoltenSentryEffect effect) {
         super(effect);
     }
 
@@ -79,7 +79,7 @@ class MoltenSentryEffect extends OneShotEffect {
             toughness = 5;
             gainedAbility = DefenderAbility.getInstance();
         }
-        game.addEffect(new SetBasePowerToughnessSourceEffect(power, toughness, Duration.WhileOnBattlefield, SubLayer.CharacteristicDefining_7a), source);
+        game.addEffect(new SetBasePowerToughnessSourceEffect(power, toughness, Duration.WhileOnBattlefield), source);
         game.addEffect(new GainAbilitySourceEffect(gainedAbility, Duration.WhileOnBattlefield), source);
         return true;
     }

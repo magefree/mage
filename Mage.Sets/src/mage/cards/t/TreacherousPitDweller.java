@@ -49,12 +49,12 @@ public final class TreacherousPitDweller extends CardImpl {
 
 class TreacherousPitDwellerEffect extends ContinuousEffectImpl {
 
-    public TreacherousPitDwellerEffect() {
+    TreacherousPitDwellerEffect() {
         super(Duration.Custom, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
         staticText = "target opponent gains control of {this}";
     }
 
-    public TreacherousPitDwellerEffect(final TreacherousPitDwellerEffect effect) {
+    private TreacherousPitDwellerEffect(final TreacherousPitDwellerEffect effect) {
         super(effect);
     }
 

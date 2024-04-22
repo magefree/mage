@@ -52,7 +52,7 @@ class ThoughtsOfRuinEffect extends OneShotEffect {
         this.staticText = "Each player sacrifices a land for each card in your hand";
     }
 
-    public ThoughtsOfRuinEffect(final ThoughtsOfRuinEffect effect) {
+    private ThoughtsOfRuinEffect(final ThoughtsOfRuinEffect effect) {
         super(effect);
     }
 

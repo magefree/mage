@@ -67,7 +67,7 @@ class MossbridgeTrollReplacementEffect extends ReplacementEffectImpl {
         staticText = "If {this} would be destroyed, regenerate it";
     }
 
-    MossbridgeTrollReplacementEffect(MossbridgeTrollReplacementEffect effect) {
+    private MossbridgeTrollReplacementEffect(final MossbridgeTrollReplacementEffect effect) {
         super(effect);
     }
 
@@ -112,15 +112,15 @@ class MossbridgeTrollCost extends CostImpl {
         this.text = "tap any number of untapped creatures you control other than {this} with total power 10 or greater";
     }
 
-    public MossbridgeTrollCost(final MossbridgeTrollCost cost) {
+    private MossbridgeTrollCost(final MossbridgeTrollCost cost) {
         super(cost);
     }
 
     @Override
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         int sumPower = 0;
-        if (targets.choose(Outcome.Tap, controllerId, source.getSourceId(), source, game)) {
-            for (UUID targetId : targets.get(0).getTargets()) {
+        if (this.getTargets().choose(Outcome.Tap, controllerId, source.getSourceId(), source, game)) {
+            for (UUID targetId : this.getTargets().get(0).getTargets()) {
                 Permanent permanent = game.getPermanent(targetId);
                 if (permanent != null && permanent.tap(source, game)) {
                     sumPower += permanent.getPower().getValue();

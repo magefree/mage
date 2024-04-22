@@ -48,12 +48,12 @@ public final class BanthaHerd extends CardImpl {
 
 class BathaHerdEffect extends OneShotEffect {
 
-    public BathaHerdEffect() {
+    BathaHerdEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "create X 1/1 white Tusken Raider tokens";
     }
 
-    public BathaHerdEffect(final BathaHerdEffect effect) {
+    private BathaHerdEffect(final BathaHerdEffect effect) {
         super(effect);
     }
 
@@ -65,7 +65,9 @@ class BathaHerdEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) { return false; }
+        if (controller == null) {
+            return false;
+        }
 
         int xValue = ((BecomesMonstrousSourceTriggeredAbility) source).getMonstrosityValue();
 

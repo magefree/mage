@@ -94,9 +94,10 @@ public class TargetsHaveToTargetPermanentIfAbleEffect extends ContinuousRuleModi
             if (!stackAbility.isControlledBy(targetingPlayer.getId())) {
                 return false;
             }
-            Ability ability = (Ability) getValue("targetAbility");
-            if (ability != null) {
+            Ability targetAbility = (Ability) getValue("targetAbility");
+            if (targetAbility != null) {
                 // Get all the allowed permanents on the battlefield in range of the abilities controller
+                Ability ability = targetAbility.copy(); // must use a copy for diff modes checking
                 List<Permanent> allowedPermanents = game.getBattlefield().getActivePermanents(filter, event.getPlayerId(), source, game);
                 if (!allowedPermanents.isEmpty()) {
                     boolean canTargetAllowedPermanent = false;

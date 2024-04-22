@@ -45,12 +45,12 @@ public final class JoragaInvocation extends CardImpl {
 
 class JoragaInvocationEffect extends OneShotEffect {
 
-    public JoragaInvocationEffect() {
+    JoragaInvocationEffect() {
         super(Outcome.Detriment);
         this.staticText = "and must be blocked this turn if able";
     }
 
-    public JoragaInvocationEffect(final JoragaInvocationEffect effect) {
+    private JoragaInvocationEffect(final JoragaInvocationEffect effect) {
         super(effect);
     }
 

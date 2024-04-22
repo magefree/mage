@@ -54,7 +54,7 @@ public final class Recommission extends CardImpl {
 
 class RecommissionEffect extends OneShotEffect {
 
-    public RecommissionEffect() {
+    RecommissionEffect() {
         super(Outcome.PutCardInPlay);
         this.staticText = "Return target artifact or creature card with mana value 3 or less from your graveyard to the battlefield. If a creature enters the battlefield this way, it enters with an additional +1/+1 counter on it.";
     }
@@ -71,7 +71,7 @@ class RecommissionEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Card card = game.getCard(targetPointer.getFirst(game, source));
+        Card card = game.getCard(getTargetPointer().getFirst(game, source));
         if (controller == null || card == null) {
             return false;
         }
@@ -83,7 +83,7 @@ class RecommissionEffect extends OneShotEffect {
 
 class RecommissionCounterEffect extends ReplacementEffectImpl {
 
-    public RecommissionCounterEffect() {
+    RecommissionCounterEffect() {
         super(Duration.EndOfStep, Outcome.BoostCreature);
     }
 
@@ -103,7 +103,7 @@ class RecommissionCounterEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return targetPointer.getTargets(game, source).contains(event.getTargetId());
+        return getTargetPointer().getTargets(game, source).contains(event.getTargetId());
     }
 
     @Override

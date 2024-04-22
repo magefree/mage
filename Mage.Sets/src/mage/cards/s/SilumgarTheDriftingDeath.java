@@ -1,8 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.Iterator;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
@@ -18,8 +16,10 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.Iterator;
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class SilumgarTheDriftingDeath extends CardImpl {
@@ -33,7 +33,7 @@ public final class SilumgarTheDriftingDeath extends CardImpl {
 
     public SilumgarTheDriftingDeath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DRAGON);
         this.power = new MageInt(3);
         this.toughness = new MageInt(7);
@@ -71,7 +71,7 @@ class UnboostCreaturesTargetPlayerEffect extends ContinuousEffectImpl {
         staticText = "creatures defending player controls get -1/-1 until end of turn";
     }
 
-    public UnboostCreaturesTargetPlayerEffect(final UnboostCreaturesTargetPlayerEffect effect) {
+    private UnboostCreaturesTargetPlayerEffect(final UnboostCreaturesTargetPlayerEffect effect) {
         super(effect);
         this.power = effect.power;
         this.toughness = effect.toughness;
@@ -85,7 +85,7 @@ class UnboostCreaturesTargetPlayerEffect extends ContinuousEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        if (this.affectedObjectsSet) {
+        if (getAffectedObjectsSet()) {
             for (Permanent creature : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, getTargetPointer().getFirst(game, source), game)) {
                 affectedObjectList.add(new MageObjectReference(creature, game));
             }
@@ -94,7 +94,7 @@ class UnboostCreaturesTargetPlayerEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext();) {
+        for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext(); ) {
             Permanent permanent = it.next().getPermanent(game);
             if (permanent != null) {
                 permanent.addPower(power);

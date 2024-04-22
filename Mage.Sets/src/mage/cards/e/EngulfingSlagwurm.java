@@ -53,7 +53,7 @@ class EngulfingSlagwurmEffect extends OneShotEffect {
         staticText = "You gain life equal to that creature's toughness";
     }
 
-    EngulfingSlagwurmEffect(final EngulfingSlagwurmEffect effect) {
+    private EngulfingSlagwurmEffect(final EngulfingSlagwurmEffect effect) {
         super(effect);
     }
 

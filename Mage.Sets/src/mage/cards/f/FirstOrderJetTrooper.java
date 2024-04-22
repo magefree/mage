@@ -39,7 +39,7 @@ public class FirstOrderJetTrooper extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FirstOrderJetTrooper(final FirstOrderJetTrooper card) {
+    private FirstOrderJetTrooper(final FirstOrderJetTrooper card) {
         super(card);
     }
 

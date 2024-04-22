@@ -8,8 +8,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.target.TargetPlayer;
 
-import java.util.Arrays;
-
 /**
  * @author PurpleCrowbar
  */
@@ -28,11 +26,9 @@ public final class WildfireAwakenerToken extends TokenImpl {
         Ability ability = new BecomesTappedSourceTriggeredAbility(new DamageTargetEffect(1, "it"));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
-
-        availableImageSetCodes.addAll(Arrays.asList("MOC"));
     }
 
-    public WildfireAwakenerToken(final WildfireAwakenerToken token) {
+    private WildfireAwakenerToken(final WildfireAwakenerToken token) {
         super(token);
     }
 

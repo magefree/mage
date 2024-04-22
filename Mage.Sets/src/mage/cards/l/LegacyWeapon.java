@@ -22,7 +22,7 @@ public final class LegacyWeapon extends CardImpl {
 
     public LegacyWeapon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{7}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // {W}{U}{B}{R}{G}: Exile target permanent.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,

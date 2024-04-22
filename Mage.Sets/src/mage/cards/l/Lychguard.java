@@ -29,10 +29,10 @@ public final class Lychguard extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
-        // Guardian Patrols -- {3}{B}, Sacrifice Lychguard: Return all legendary creature cards from your graveyard to your hand.
+        // Guardian Protocols -- {3}{B}, Sacrifice Lychguard: Return all legendary creature cards from your graveyard to your hand.
         Ability ability = new SimpleActivatedAbility(new LychguardEffect(), new ManaCostsImpl<>("{3}{B}"));
         ability.addCost(new SacrificeSourceCost());
-        this.addAbility(ability);
+        this.addAbility(ability.withFlavorWord("Guardian Protocols"));
     }
 
     private Lychguard(final Lychguard card) {

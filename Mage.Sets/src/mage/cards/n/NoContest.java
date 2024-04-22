@@ -50,7 +50,7 @@ class TargetCreatureWithLessPowerPermanent extends TargetPermanent {
         super(1, 1, new FilterCreaturePermanent("creature with power less than its power"), false);
     }
 
-    public TargetCreatureWithLessPowerPermanent(final TargetCreatureWithLessPowerPermanent target) {
+    private TargetCreatureWithLessPowerPermanent(final TargetCreatureWithLessPowerPermanent target) {
         super(target);
     }
 

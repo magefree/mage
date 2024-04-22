@@ -42,6 +42,8 @@ public final class GuardianNaga extends AdventureCard {
         // Exile target artifact or enchantment.
         this.getSpellCard().getSpellAbility().addEffect(new ExileTargetEffect());
         this.getSpellCard().getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT));
+
+        this.finalizeAdventure();
     }
 
     private GuardianNaga(final GuardianNaga card) {

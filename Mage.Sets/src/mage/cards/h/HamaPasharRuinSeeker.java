@@ -21,7 +21,7 @@ public final class HamaPasharRuinSeeker extends CardImpl {
     public HamaPasharRuinSeeker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(2);
@@ -65,7 +65,8 @@ class HamaPasharRuinSeekerEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         GameEvent gameEvent = ((NumberOfTriggersEvent) event).getSourceEvent();
-        return gameEvent.getType() == GameEvent.EventType.ROOM_ENTERED
+        return gameEvent != null
+                && gameEvent.getType() == GameEvent.EventType.ROOM_ENTERED
                 && source.isControlledBy(gameEvent.getPlayerId());
     }
 

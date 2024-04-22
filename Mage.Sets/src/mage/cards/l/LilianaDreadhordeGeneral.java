@@ -35,7 +35,7 @@ public final class LilianaDreadhordeGeneral extends CardImpl {
     public LilianaDreadhordeGeneral(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{B}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.LILIANA);
         this.setStartingLoyalty(6);
 
@@ -100,7 +100,7 @@ class LilianaDreadhordeGeneralEffect extends OneShotEffect {
                 );
                 filter.add(cardType.getPredicate());
                 Target target = new TargetControlledPermanent(filter);
-                target.setNotTarget(true);
+                target.withNotTarget(true);
                 if (opponent.choose(outcome, target, source, game)) {
                     keepFilter.add(Predicates.not(new CardIdPredicate(target.getFirstTarget())));
                 }

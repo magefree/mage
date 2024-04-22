@@ -10,7 +10,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -26,7 +25,7 @@ public final class PulseOfTheDross extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}{B}");
 
         // Target player reveals three cards from their hand and you choose one of them. That player discards that card.
-        this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(TargetController.ANY, 3));
+        this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(3));
         this.getSpellAbility().addEffect(new PulseOfTheDrossReturnToHandEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
@@ -48,7 +47,7 @@ class PulseOfTheDrossReturnToHandEffect extends OneShotEffect {
         this.staticText = "Then if that player has more cards in hand than you, return {this} to its owner's hand";
     }
 
-    PulseOfTheDrossReturnToHandEffect(final PulseOfTheDrossReturnToHandEffect effect) {
+    private PulseOfTheDrossReturnToHandEffect(final PulseOfTheDrossReturnToHandEffect effect) {
         super(effect);
     }
 

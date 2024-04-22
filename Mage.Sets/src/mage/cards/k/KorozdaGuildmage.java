@@ -56,7 +56,7 @@ public final class KorozdaGuildmage extends CardImpl {
 
         // {2}{B}{G}, Sacrifice a nontoken creature: create X 1/1 green Saproling creature tokens, where X is the sacrificed creature's toughness.
         ability = new SimpleActivatedAbility(new CreateTokenEffect(new SaprolingToken(),SacrificeCostCreaturesToughness.instance),new ManaCostsImpl<>("{2}{B}{G}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1,filter, true)));
+        ability.addCost(new SacrificeTargetCost(filter));
         this.addAbility(ability);
         
     }

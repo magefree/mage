@@ -28,7 +28,7 @@ public final class ZethiArcaneBlademaster extends CardImpl {
     public ZethiArcaneBlademaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SOLDIER);
         this.power = new MageInt(3);
@@ -42,7 +42,7 @@ public final class ZethiArcaneBlademaster extends CardImpl {
                 .setTargetAdjuster(ZethiArcaneBlademasterAdjuster.instance));
 
         // Lightning Kick—Whenever Chun-Li attacks, copy each exiled card you own with a kick counter on it. You may cast the copies.
-        this.addAbility(new AttacksTriggeredAbility(new ZethiArcaneBlademasterCastEffect()).withFlavorWord("Lightning Kick"));
+        this.addAbility(new AttacksTriggeredAbility(new ZethiArcaneBlademasterCastEffect()));
     }
 
     private ZethiArcaneBlademaster(final ZethiArcaneBlademaster card) {
@@ -131,8 +131,6 @@ class ZethiArcaneBlademasterCastEffect extends OneShotEffect {
         Cards copies = new CardsImpl();
         for (Card card : cards.getCards(game)) {
             Card copiedCard = game.copyCard(card, source, source.getControllerId());
-            game.getExile().add(source.getSourceId(), "", copiedCard);
-            game.getState().setZone(copiedCard.getId(), Zone.EXILED);
             copies.add(copiedCard);
         }
         // simple way to choose the spells to cast; if you have a better tech, implement it!

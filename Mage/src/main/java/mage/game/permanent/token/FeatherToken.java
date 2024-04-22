@@ -9,8 +9,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
 
-import java.util.Arrays;
-
 public final class FeatherToken extends TokenImpl {
 
     private static final FilterCard filter = new FilterCard("Phoenix card");
@@ -28,8 +26,6 @@ public final class FeatherToken extends TokenImpl {
         );
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
-
-        availableImageSetCodes = Arrays.asList("IKO", "MOC");
     }
 
     private FeatherToken(final FeatherToken token) {

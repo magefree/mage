@@ -33,7 +33,7 @@ public final class ObNixilisUnshackled extends CardImpl {
 
     public ObNixilisUnshackled(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DEMON);
 
         this.power = new MageInt(4);
@@ -68,7 +68,7 @@ class ObNixilisUnshackledTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new ObNixilisUnshackledEffect(), false);
     }
 
-    public ObNixilisUnshackledTriggeredAbility(final ObNixilisUnshackledTriggeredAbility ability) {
+    private ObNixilisUnshackledTriggeredAbility(final ObNixilisUnshackledTriggeredAbility ability) {
         super(ability);
     }
 
@@ -108,7 +108,7 @@ class ObNixilisUnshackledEffect extends SacrificeEffect {
         this.staticText = "that player sacrifices a creature and loses 10 life";
     }
 
-    public ObNixilisUnshackledEffect(final ObNixilisUnshackledEffect effect) {
+    private ObNixilisUnshackledEffect(final ObNixilisUnshackledEffect effect) {
         super(effect);
     }
 

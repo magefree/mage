@@ -51,7 +51,7 @@ class CrackdownConstructTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever you activate an ability of an artifact or creature that isn't a mana ability, ");
     }
 
-    CrackdownConstructTriggeredAbility(final CrackdownConstructTriggeredAbility ability) {
+    private CrackdownConstructTriggeredAbility(final CrackdownConstructTriggeredAbility ability) {
         super(ability);
     }
 

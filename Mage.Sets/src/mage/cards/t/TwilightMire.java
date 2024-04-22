@@ -38,7 +38,7 @@ public final class TwilightMire extends CardImpl {
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);        }
 
-    public TwilightMire (final TwilightMire card) {
+    private TwilightMire(final TwilightMire card) {
         super(card);
     }
 

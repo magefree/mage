@@ -25,7 +25,7 @@ public abstract class ManaEffect extends OneShotEffect {
         super(Outcome.PutManaInPool);
     }
 
-    public ManaEffect(final ManaEffect effect) {
+    protected ManaEffect(final ManaEffect effect) {
         super(effect);
     }
 

@@ -47,7 +47,7 @@ class FearEffect extends RestrictionEffect implements MageSingleton {
         super(Duration.EndOfGame);
     }
 
-    public FearEffect(final FearEffect effect) {
+    protected FearEffect(final FearEffect effect) {
         super(effect);
     }
 

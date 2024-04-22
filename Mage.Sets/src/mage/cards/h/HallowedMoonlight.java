@@ -31,7 +31,7 @@ public final class HallowedMoonlight extends CardImpl {
         this.getSpellAbility().addEffect(new HallowedMoonlightEffect());
         this.getSpellAbility().addWatcher(new PermanentWasCastWatcher());
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
     private HallowedMoonlight(final HallowedMoonlight card) {
@@ -46,12 +46,12 @@ public final class HallowedMoonlight extends CardImpl {
 
 class HallowedMoonlightEffect extends ReplacementEffectImpl {
 
-    public HallowedMoonlightEffect() {
+    HallowedMoonlightEffect() {
         super(Duration.EndOfTurn, Outcome.Exile);
         staticText = "Until end of turn, if a creature would enter the battlefield and it wasn't cast, exile it instead";
     }
 
-    public HallowedMoonlightEffect(final HallowedMoonlightEffect effect) {
+    private HallowedMoonlightEffect(final HallowedMoonlightEffect effect) {
         super(effect);
     }
 

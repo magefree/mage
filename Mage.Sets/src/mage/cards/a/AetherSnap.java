@@ -42,12 +42,12 @@ public final class AetherSnap extends CardImpl {
 
 class AetherSnapEffect extends OneShotEffect {
 
-    public AetherSnapEffect() {
+    AetherSnapEffect() {
         super(Outcome.Benefit);
         this.staticText = "Remove all counters from all permanents and exile all tokens";
     }
 
-    public AetherSnapEffect(final AetherSnapEffect effect) {
+    private AetherSnapEffect(final AetherSnapEffect effect) {
         super(effect);
     }
 
@@ -63,7 +63,7 @@ class AetherSnapEffect extends OneShotEffect {
             return false;
         }
         Cards tokens = new CardsImpl();
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(source.getSourceId(), game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
             if (permanent instanceof PermanentToken) {
                 tokens.add(permanent);
             }

@@ -39,7 +39,7 @@ public final class ZaskSkitteringSwarmlord extends CardImpl {
 
     public ZaskSkitteringSwarmlord(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.INSECT);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
@@ -59,8 +59,9 @@ public final class ZaskSkitteringSwarmlord extends CardImpl {
 
         // {1}{B/G}: Target Insect gets +1/+0 and gains deathtouch until end of turn.
         SimpleActivatedAbility ability2 = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD, new BoostTargetEffect(1, 0, Duration.EndOfTurn)
-                .setText("Target Insect gets +1/0"), new ManaCostsImpl<>("{1}{B/G}")
+                new BoostTargetEffect(1, 0, Duration.EndOfTurn)
+                        .setText("Target Insect gets +1/+0"),
+                new ManaCostsImpl<>("{1}{B/G}")
         );
         ability2.addEffect(new GainAbilityTargetEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn)
                 .setText(" and gains deathtouch until end of turn"));

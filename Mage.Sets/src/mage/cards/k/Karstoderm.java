@@ -13,7 +13,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.common.FilterArtifactPermanent;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -29,12 +29,12 @@ public final class Karstoderm extends CardImpl {
 
         // Karstoderm enters the battlefield with five +1/+1 counters on it.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(5)),
-            "{this} enters the battlefield with five +1/+1 counters on it"));
+            "with five +1/+1 counters on it"));
         
         // Whenever an artifact enters the battlefield, remove a +1/+1 counter from Karstoderm.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, 
-                new RemoveCounterSourceEffect(CounterType.P1P1.createInstance(1)), 
-                new FilterArtifactPermanent("an artifact"), false));
+                new RemoveCounterSourceEffect(CounterType.P1P1.createInstance(1)),
+                StaticFilters.FILTER_PERMANENT_ARTIFACT_AN, false));
     }
 
     private Karstoderm(final Karstoderm card) {

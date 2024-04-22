@@ -174,7 +174,7 @@ public final class StarWars extends ExpansionSet {
         cards.add(new SetCardInfo("Hidden Base", 733, Rarity.UNCOMMON, mage.cards.h.HiddenBase.class));
         cards.add(new SetCardInfo("Hold Captive", 723, Rarity.COMMON, mage.cards.h.HoldCaptive.class));
         cards.add(new SetCardInfo("Holochess", 708, Rarity.UNCOMMON, mage.cards.h.Holochess.class));
-        cards.add(new SetCardInfo("Hot Pursuit", 188, Rarity.RARE, mage.cards.h.HotPursuit.class));
+        cards.add(new SetCardInfo("Hot Pursuit", 188, Rarity.RARE, mage.cards.h.HotPursuitStarWars.class));
         cards.add(new SetCardInfo("Hungry Dragonsnake", 138, Rarity.COMMON, mage.cards.h.HungryDragonsnake.class));
         cards.add(new SetCardInfo("Hunt to Extinction", 189, Rarity.RARE, mage.cards.h.HuntToExtinction.class));
         cards.add(new SetCardInfo("Hutt Crime Lord", 139, Rarity.UNCOMMON, mage.cards.h.HuttCrimeLord.class));

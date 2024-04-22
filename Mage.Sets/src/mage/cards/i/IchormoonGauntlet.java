@@ -71,7 +71,7 @@ class IchormoonGauntletEffect extends OneShotEffect {
         staticText = "choose a counter on target permanent. Put an additional counter of that kind on that permanent";
     }
 
-    IchormoonGauntletEffect(final IchormoonGauntletEffect effect) {
+    private IchormoonGauntletEffect(final IchormoonGauntletEffect effect) {
         super(effect);
     }
 

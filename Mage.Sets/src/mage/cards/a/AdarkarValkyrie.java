@@ -17,8 +17,7 @@ import mage.constants.CardType;
 import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 
 /**
@@ -27,15 +26,9 @@ import mage.target.TargetPermanent;
  */
 public final class AdarkarValkyrie extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
-
     public AdarkarValkyrie(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");
-        addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
         this.subtype.add(SubType.ANGEL);
 
         this.power = new MageInt(4);
@@ -53,7 +46,7 @@ public final class AdarkarValkyrie extends CardImpl {
         );
         delayedAbility.setTriggerPhrase("When target creature other than {this} dies this turn, ");
         Ability ability = new SimpleActivatedAbility(new CreateDelayedTriggeredAbilityEffect(delayedAbility), new TapSourceCost());
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE));
         this.addAbility(ability);
     }
 

@@ -4,8 +4,6 @@ import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author TheElk801
  */
@@ -22,11 +20,9 @@ public final class GolemXXToken extends TokenImpl {
         subtype.add(SubType.GOLEM);
         power = new MageInt(xValue);
         toughness = new MageInt(xValue);
-
-        availableImageSetCodes = Arrays.asList("BRO");
     }
 
-    public GolemXXToken(final GolemXXToken token) {
+    private GolemXXToken(final GolemXXToken token) {
         super(token);
     }
 

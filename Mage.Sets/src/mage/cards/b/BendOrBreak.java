@@ -52,7 +52,7 @@ class BendOrBreakEffect extends OneShotEffect {
         this.staticText = "Each player separates all nontoken lands they control into two piles. For each player, one of their piles is chosen by one of their opponents of their choice. Destroy all lands in the chosen piles. Tap all lands in the other piles";
     }
 
-    public BendOrBreakEffect(final BendOrBreakEffect effect) {
+    private BendOrBreakEffect(final BendOrBreakEffect effect) {
         super(effect);
     }
 
@@ -64,7 +64,9 @@ class BendOrBreakEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) { return false; }
+        if (controller == null) {
+            return false;
+        }
 
         // Map of players and their piles
         Map<UUID, List<List<Permanent>>> playerPermanents = new LinkedHashMap<>();

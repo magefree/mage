@@ -23,7 +23,7 @@ public final class EarthElemental extends CardImpl {
         this.toughness = new MageInt(5);
     }
 
-    public EarthElemental (final EarthElemental card) {
+    private EarthElemental(final EarthElemental card) {
         super(card);
     }
 

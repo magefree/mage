@@ -45,12 +45,12 @@ public final class EchoingCourage extends CardImpl {
 
 class EchoingCourageEffect extends OneShotEffect {
 
-    public EchoingCourageEffect() {
+    EchoingCourageEffect() {
         super(Outcome.Benefit);
         this.staticText = "Target creature and all other creatures with the same name as that creature get +2/+2 until end of turn";
     }
 
-    public EchoingCourageEffect(final EchoingCourageEffect effect) {
+    private EchoingCourageEffect(final EchoingCourageEffect effect) {
         super(effect);
     }
 
@@ -61,7 +61,7 @@ class EchoingCourageEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent targetPermanent = game.getPermanent(targetPointer.getFirst(game, source));
+        Permanent targetPermanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (targetPermanent != null) {
             FilterCreaturePermanent filter = new FilterCreaturePermanent();
             if (CardUtil.haveEmptyName(targetPermanent)) {

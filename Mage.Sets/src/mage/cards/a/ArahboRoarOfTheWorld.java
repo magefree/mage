@@ -48,7 +48,7 @@ public final class ArahboRoarOfTheWorld extends CardImpl {
     public ArahboRoarOfTheWorld(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{W}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.CAT, SubType.AVATAR);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
@@ -81,12 +81,12 @@ public final class ArahboRoarOfTheWorld extends CardImpl {
 
 class ArahboEffect extends OneShotEffect {
 
-    public ArahboEffect() {
+    ArahboEffect() {
         super(Outcome.Benefit);
         this.staticText = "it gains trample and gets +X/+X until end of turn, where X is its power";
     }
 
-    public ArahboEffect(final ArahboEffect effect) {
+    private ArahboEffect(final ArahboEffect effect) {
         super(effect);
     }
 
@@ -97,7 +97,7 @@ class ArahboEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent creature = game.getPermanent(targetPointer.getFirst(game, source));
+        Permanent creature = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (creature != null && creature.isCreature(game)) {
             int pow = creature.getPower().getValue();
             ContinuousEffect effect = new BoostTargetEffect(pow, pow, Duration.EndOfTurn);

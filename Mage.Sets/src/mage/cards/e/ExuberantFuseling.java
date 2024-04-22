@@ -46,7 +46,7 @@ public class ExuberantFuseling extends CardImpl {
         this.addAbility(new OrTriggeredAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.OIL.createInstance()),
                 new EntersBattlefieldTriggeredAbility(null, false),
                 new PutIntoGraveFromBattlefieldAllTriggeredAbility(null, false,
-                        StaticFilters.FILTER_CONTROLLED_ANOTHER_ARTIFACT_OR_CREATURE, false))
+                        StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE_OR_ARTIFACT, false))
                 .setTriggerPhrase("When {this} enters the battlefield and whenever another creature or artifact you " +
                         "control is put into a graveyard from the battlefield, "));
     }

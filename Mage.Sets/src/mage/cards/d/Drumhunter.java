@@ -61,7 +61,7 @@ class DrumHunterTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), true);
     }
 
-    public DrumHunterTriggeredAbility(final DrumHunterTriggeredAbility ability) {
+    private DrumHunterTriggeredAbility(final DrumHunterTriggeredAbility ability) {
         super(ability);
     }
 

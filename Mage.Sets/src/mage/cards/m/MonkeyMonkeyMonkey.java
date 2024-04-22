@@ -61,12 +61,12 @@ public final class MonkeyMonkeyMonkey extends CardImpl {
 
 class ChooseLetterEffect extends OneShotEffect {
 
-    public ChooseLetterEffect() {
+    ChooseLetterEffect() {
         super(Outcome.Benefit);
         staticText = "choose a letter";
     }
 
-    public ChooseLetterEffect(final ChooseLetterEffect effect) {
+    private ChooseLetterEffect(final ChooseLetterEffect effect) {
         super(effect);
     }
 
@@ -110,7 +110,7 @@ class MonkeyMonkeyMonkeyCount implements DynamicValue {
     public MonkeyMonkeyMonkeyCount() {
     }
 
-    public MonkeyMonkeyMonkeyCount(final MonkeyMonkeyMonkeyCount countersCount) {
+    private MonkeyMonkeyMonkeyCount(final MonkeyMonkeyMonkeyCount countersCount) {
     }
 
     @Override

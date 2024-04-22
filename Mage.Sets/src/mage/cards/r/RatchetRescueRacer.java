@@ -30,7 +30,7 @@ public final class RatchetRescueRacer extends CardImpl {
     public RatchetRescueRacer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.VEHICLE);
         this.power = new MageInt(1);
         this.toughness = new MageInt(4);
@@ -47,7 +47,7 @@ public final class RatchetRescueRacer extends CardImpl {
         this.addAbility(new DiesCreatureTriggeredAbility(
                 new TransformSourceEffect().setText("convert {this}"), false, filter
         ).setTriggerPhrase("Whenever one or more nontoken artifacts you control " +
-                "are put into a graveyard from the battlefield, ").setTriggersOnce(true));
+                "are put into a graveyard from the battlefield, ").setTriggersOnceEachTurn(true));
     }
 
     private RatchetRescueRacer(final RatchetRescueRacer card) {

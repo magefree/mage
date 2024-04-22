@@ -62,7 +62,7 @@ class PreeminentCaptainEffect extends OneShotEffect {
         this.staticText = "put a Soldier creature card from your hand onto the battlefield tapped and attacking";
     }
 
-    public PreeminentCaptainEffect(final PreeminentCaptainEffect effect) {
+    private PreeminentCaptainEffect(final PreeminentCaptainEffect effect) {
         super(effect);
     }
 

@@ -46,14 +46,14 @@ public final class BurnFromWithin extends CardImpl {
 
 class BurnFromWithinEffect extends OneShotEffect {
 
-    public BurnFromWithinEffect() {
+    BurnFromWithinEffect() {
         super(Outcome.Benefit);
         this.staticText = "{this} deals X damage to any target. " +
                 "If a creature is dealt damage this way, it loses indestructible until end of turn. " +
                 "If that creature would die this turn, exile it instead";
     }
 
-    public BurnFromWithinEffect(final BurnFromWithinEffect effect) {
+    private BurnFromWithinEffect(final BurnFromWithinEffect effect) {
         super(effect);
     }
 
@@ -65,7 +65,9 @@ class BurnFromWithinEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) { return false; }
+        if (controller == null) {
+            return false;
+        }
 
         int amount = source.getManaCostsToPay().getX();
 

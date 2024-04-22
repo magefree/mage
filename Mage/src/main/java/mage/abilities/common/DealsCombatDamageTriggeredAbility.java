@@ -4,29 +4,27 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.events.DamagedBatchAllEvent;
 import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
 
 /**
- * This triggers only once for each phase the source creature deals damage.
+ * This triggers only once for each combat damage step the source creature deals damage.
  * So a creature blocked by two creatures and dealing damage to both blockers in the same
  * combat damage step triggers only once.
  *
- * @author LevelX
+ * @author LevelX, xenohedron
  */
 public class DealsCombatDamageTriggeredAbility extends TriggeredAbilityImpl {
 
-    private boolean usedInPhase;
-
     public DealsCombatDamageTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
-        this.usedInPhase = false;
-        setTriggerPhrase("Whenever {this} deals combat damage, ");
+        setTriggerPhrase(getWhen() + "{this} deals combat damage, ");
+        this.withRuleTextReplacement(true);
     }
 
-    public DealsCombatDamageTriggeredAbility(final DealsCombatDamageTriggeredAbility ability) {
+    protected DealsCombatDamageTriggeredAbility(final DealsCombatDamageTriggeredAbility ability) {
         super(ability);
-        this.usedInPhase = ability.usedInPhase;
     }
 
     @Override
@@ -36,22 +34,22 @@ public class DealsCombatDamageTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event instanceof DamagedEvent || event.getType() == GameEvent.EventType.COMBAT_DAMAGE_STEP_PRE;
+        return event.getType() == GameEvent.EventType.DAMAGED_BATCH_FOR_ALL;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event instanceof DamagedEvent
-                && !usedInPhase
-                && event.getSourceId().equals(this.sourceId)
-                && ((DamagedEvent) event).isCombatDamage()) {
-            usedInPhase = true;
-            getEffects().setValue("damage", event.getAmount());
-            return true;
+        int amount = ((DamagedBatchAllEvent) event)
+                .getEvents()
+                .stream()
+                .filter(DamagedEvent::isCombatDamage)
+                .filter(e -> e.getAttackerId().equals(getSourceId()))
+                .mapToInt(GameEvent::getAmount)
+                .sum();
+        if (amount < 1) {
+            return false;
         }
-        if (event.getType() == GameEvent.EventType.COMBAT_DAMAGE_STEP_PRE) {
-            usedInPhase = false;
-        }
-        return false;
+        this.getEffects().setValue("damage", amount);
+        return true;
     }
 }

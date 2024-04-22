@@ -65,7 +65,7 @@ class VeteranBrawlersCantBlockEffect extends RestrictionEffect {
         staticText = "{this} can't block if you control " + filter.getMessage();
     }
 
-    public VeteranBrawlersCantBlockEffect(final VeteranBrawlersCantBlockEffect effect) {
+    private VeteranBrawlersCantBlockEffect(final VeteranBrawlersCantBlockEffect effect) {
         super(effect);
         this.filter = effect.filter;
     }

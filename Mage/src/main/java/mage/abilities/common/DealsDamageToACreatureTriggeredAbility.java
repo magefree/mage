@@ -33,7 +33,7 @@ public class DealsDamageToACreatureTriggeredAbility extends TriggeredAbilityImpl
         setTriggerPhrase("Whenever {this} deals " + (combatOnly ? "combat " : "") + "damage to " + filter.getMessage() + ", ");
     }
 
-    public DealsDamageToACreatureTriggeredAbility(final DealsDamageToACreatureTriggeredAbility ability) {
+    protected DealsDamageToACreatureTriggeredAbility(final DealsDamageToACreatureTriggeredAbility ability) {
         super(ability);
         this.setTargetPointer = ability.setTargetPointer;
         this.combatOnly = ability.combatOnly;

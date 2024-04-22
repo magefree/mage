@@ -30,7 +30,7 @@ public final class TheTemporalAnchor extends CardImpl {
     public TheTemporalAnchor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}{U}{U}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // At the beginning of your upkeep, scry 2.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(

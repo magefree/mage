@@ -14,7 +14,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
@@ -38,7 +37,7 @@ public final class ConsecrateLand extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted land is indestructible and can't be enchanted by other Auras.
-        Ability ability2 = new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(IndestructibleAbility.getInstance(), AttachmentType.AURA, Duration.WhileOnBattlefield, "Enchanted land is indestructible"));
+        Ability ability2 = new SimpleStaticAbility(new GainAbilityAttachedEffect(IndestructibleAbility.getInstance(), AttachmentType.AURA, Duration.WhileOnBattlefield, "Enchanted land has indestructible"));
         ability2.addEffect(new ConsecrateLandRuleEffect());
         this.addAbility(ability2);
     }
@@ -56,12 +55,12 @@ public final class ConsecrateLand extends CardImpl {
 // 9/25/2006 ruling: If Consecrate Land enters the battlefield attached to a land that's enchanted by other Auras, those Auras are put into their owners' graveyards.
 class ConsecrateLandRuleEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public ConsecrateLandRuleEffect() {
+    ConsecrateLandRuleEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "and can't be enchanted by other Auras";
     }
 
-    public ConsecrateLandRuleEffect(final ConsecrateLandRuleEffect effect) {
+    private ConsecrateLandRuleEffect(final ConsecrateLandRuleEffect effect) {
         super(effect);
     }
 

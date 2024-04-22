@@ -48,7 +48,7 @@ public final class KuldothaCackler extends CardImpl {
 
         // Whenever Kuldotha Cackler attacks, it gets +X/+0 until end of turn, where X is the number of permanents you control with oil counters on them.
         this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(
-                xValue, StaticValue.get(0), Duration.EndOfTurn, true, "it"
+                xValue, StaticValue.get(0), Duration.EndOfTurn, "it"
         )).addHint(hint));
     }
 

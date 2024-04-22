@@ -5,7 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.ExileTopXMayPlayUntilEndOfTurnEffect;
+import mage.abilities.effects.common.ExileTopXMayPlayUntilEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
@@ -26,7 +26,7 @@ public final class AtsushiTheBlazingSky extends CardImpl {
     public AtsushiTheBlazingSky(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DRAGON);
         this.subtype.add(SubType.SPIRIT);
         this.power = new MageInt(4);
@@ -40,8 +40,8 @@ public final class AtsushiTheBlazingSky extends CardImpl {
 
         // When Atsushi, the Blazing Sky dies, choose one —
         // • Exile the top two cards of your library. Until the end of your next turn, you may play those cards.
-        Ability ability = new DiesSourceTriggeredAbility(new ExileTopXMayPlayUntilEndOfTurnEffect(
-                2, false, Duration.UntilEndOfYourNextTurn
+        Ability ability = new DiesSourceTriggeredAbility(new ExileTopXMayPlayUntilEffect(
+                2, Duration.UntilEndOfYourNextTurn
         ), false);
 
         // • Create three Treasure tokens.

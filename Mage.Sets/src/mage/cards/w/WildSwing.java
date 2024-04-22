@@ -50,12 +50,12 @@ public final class WildSwing extends CardImpl {
 
 class WildSwingEffect extends OneShotEffect {
 
-    public WildSwingEffect() {
+    WildSwingEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Choose three target nonenchantment permanents. Destroy one of them at random";
     }
 
-    public WildSwingEffect(final WildSwingEffect effect) {
+    private WildSwingEffect(final WildSwingEffect effect) {
         super(effect);
     }
 

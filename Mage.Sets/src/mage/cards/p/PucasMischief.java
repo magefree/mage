@@ -58,7 +58,7 @@ class TargetControlledPermanentWithCMCGreaterOrLessThanOpponentPermanent extends
         setTargetName("nonland permanent you control");
     }
 
-    public TargetControlledPermanentWithCMCGreaterOrLessThanOpponentPermanent(final TargetControlledPermanentWithCMCGreaterOrLessThanOpponentPermanent target) {
+    private TargetControlledPermanentWithCMCGreaterOrLessThanOpponentPermanent(final TargetControlledPermanentWithCMCGreaterOrLessThanOpponentPermanent target) {
         super(target);
     }
 
@@ -94,7 +94,7 @@ class PucasMischiefSecondTarget extends TargetPermanent {
         setTargetName("permanent an opponent controls with an equal or lesser mana value");
     }
 
-    public PucasMischiefSecondTarget(final PucasMischiefSecondTarget target) {
+    private PucasMischiefSecondTarget(final PucasMischiefSecondTarget target) {
         super(target);
         this.firstTarget = target.firstTarget;
     }

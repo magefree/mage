@@ -13,7 +13,6 @@ import mage.constants.Zone;
 import mage.game.Game;
 
 /**
- *
  * @author emerald000
  */
 public class EscalateAbility extends SimpleStaticAbility {
@@ -23,7 +22,7 @@ public class EscalateAbility extends SimpleStaticAbility {
         this.setRuleAtTheTop(true);
     }
 
-    public EscalateAbility(final EscalateAbility ability) {
+    protected EscalateAbility(final EscalateAbility ability) {
         super(ability);
     }
 
@@ -43,7 +42,7 @@ class EscalateEffect extends CostModificationEffectImpl {
         this.staticText = "Escalate " + cost.getText() + " <i>(Pay this cost for each mode chosen beyond the first.)</i>";
     }
 
-    EscalateEffect(final EscalateEffect effect) {
+    private EscalateEffect(final EscalateEffect effect) {
         super(effect);
         this.cost = effect.cost.copy();
     }

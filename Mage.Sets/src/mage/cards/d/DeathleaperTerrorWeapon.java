@@ -33,7 +33,7 @@ public final class DeathleaperTerrorWeapon extends CardImpl {
     public DeathleaperTerrorWeapon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.TYRANID);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

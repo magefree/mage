@@ -30,7 +30,7 @@ public final class SilvergladeElemental extends CardImpl {
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), false, false), true));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), false, true), true));
     }
 
     private SilvergladeElemental(final SilvergladeElemental card) {

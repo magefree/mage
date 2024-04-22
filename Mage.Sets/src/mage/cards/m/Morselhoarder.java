@@ -58,7 +58,7 @@ class MorselhoarderAbility extends ActivatedManaAbilityImpl {
         this.netMana.add(new Mana(0, 0, 0, 0, 0, 0, 1, 0));
     }
 
-    public MorselhoarderAbility(final MorselhoarderAbility ability) {
+    private MorselhoarderAbility(final MorselhoarderAbility ability) {
         super(ability);
     }
 

@@ -35,7 +35,7 @@ public final class KairiTheSwirlingSky extends CardImpl {
     public KairiTheSwirlingSky(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DRAGON);
         this.subtype.add(SubType.SPIRIT);
         this.power = new MageInt(6);
@@ -95,13 +95,17 @@ class KairiTheSwirlingSkyTarget extends TargetPermanent {
         if (permanent == null) {
             return false;
         }
-        return permanent.getManaValue()
-                + this.getTargets()
-                .stream()
-                .map(game::getPermanent)
-                .filter(Objects::nonNull)
-                .mapToInt(MageObject::getManaValue)
-                .sum() <= 6;
+        int added = 0; // We need to prevent the target to be counted twice on revalidation.
+        if (!this.getTargets().contains(id)) {
+            added = permanent.getManaValue();// fresh target, adding its MV
+        }
+        return added +
+                this.getTargets()
+                        .stream()
+                        .map(game::getPermanent)
+                        .filter(Objects::nonNull)
+                        .mapToInt(MageObject::getManaValue)
+                        .sum() <= 6;
     }
 }
 
@@ -132,7 +136,7 @@ class KairiTheSwirlingSkyEffect extends OneShotEffect {
         TargetCard target = new TargetCardInGraveyard(
                 0, 2, StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY
         );
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         player.choose(outcome, player.getGraveyard(), target, source, game);
         return player.moveCards(new CardsImpl(target.getTargets()), Zone.HAND, source, game);
     }

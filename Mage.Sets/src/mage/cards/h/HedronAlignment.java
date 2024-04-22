@@ -67,7 +67,7 @@ class HedronAlignmentEffect extends OneShotEffect {
         this.staticText = "you may reveal your hand. If you do, you win the game if you own a card named Hedron Alignment in exile, in your hand, in your graveyard, and on the battlefield";
     }
 
-    public HedronAlignmentEffect(final HedronAlignmentEffect effect) {
+    private HedronAlignmentEffect(final HedronAlignmentEffect effect) {
         super(effect);
     }
 
@@ -94,7 +94,7 @@ class HedronAlignmentEffect extends OneShotEffect {
                 return true;
             }
             Cards cardsToCheck = new CardsImpl();
-            cardsToCheck.addAll(game.getExile().getAllCards(game));
+            cardsToCheck.addAllCards(game.getExile().getAllCards(game));
             if (cardsToCheck.count(filterCard, controller.getId(), source, game) == 0) {
                 return true;
             }

@@ -26,7 +26,6 @@ public final class DoomedArtisanToken extends TokenImpl {
 
     public DoomedArtisanToken() {
         super("Sculpture Token", "colorless Sculpture artifact creature token with \"This creature's power and toughness are each equal to the number of Sculptures you control.\"");
-        setOriginalExpansionSetCode("C19");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.SCULPTURE);

@@ -28,7 +28,7 @@ public final class ScryingSheets extends CardImpl {
 
     public ScryingSheets(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
-        addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
 
         // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
@@ -56,7 +56,7 @@ class ScryingSheetsEffect extends OneShotEffect {
         this.staticText = "Look at the top card of your library. If that card is snow, you may reveal it and put it into your hand";
     }
 
-    ScryingSheetsEffect(final ScryingSheetsEffect effect) {
+    private ScryingSheetsEffect(final ScryingSheetsEffect effect) {
         super(effect);
     }
 
@@ -75,7 +75,7 @@ class ScryingSheetsEffect extends OneShotEffect {
                 CardsImpl cards = new CardsImpl();
                 cards.add(card);
                 controller.lookAtCards(sourceObject.getIdName(), cards, game);
-                if (card.isSnow()) {
+                if (card.isSnow(game)) {
                     if (controller.chooseUse(outcome, "Reveal " + card.getLogName() + " and put it into your hand?", source, game)) {
                         controller.moveCards(card, Zone.HAND, source, game);
                         controller.revealCards(sourceObject.getIdName(), cards, game);

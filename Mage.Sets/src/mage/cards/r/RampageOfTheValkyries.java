@@ -76,7 +76,7 @@ class RampageOfTheValkyriesEffect extends OneShotEffect {
                 continue;
             }
             TargetPermanent target = new TargetControlledCreaturePermanent();
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             if (!target.canChoose(playerId, source, game)) {
                 continue;
             }

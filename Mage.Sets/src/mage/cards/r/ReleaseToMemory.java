@@ -64,6 +64,7 @@ class ReleaseToMemoryEffect extends OneShotEffect {
         int creatures = player.getGraveyard().count(StaticFilters.FILTER_CARD_CREATURE, game);
         player.moveCards(player.getGraveyard(), Zone.EXILED, source, game);
         if (creatures > 0) {
+            game.getState().processAction(game);
             new SpiritToken().putOntoBattlefield(creatures, game, source);
         }
         return true;

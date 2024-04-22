@@ -1,4 +1,3 @@
-
 package mage.cards.d;
 
 import java.util.UUID;
@@ -14,11 +13,11 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetSacrifice;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -27,19 +26,14 @@ import mage.target.targetpointer.FixedTarget;
  */
 public final class DevouringRage extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("any number of Spirits");
-
-    static {
-        filter.add(SubType.SPIRIT.getPredicate());
-    }
+    private static final FilterPermanent filter = new FilterPermanent(SubType.SPIRIT, "any number of Spirits");
 
     public DevouringRage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{R}");
         this.subtype.add(SubType.ARCANE);
 
-
         // As an additional cost to cast Devouring Rage, you may sacrifice any number of Spirits.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(0, Integer.MAX_VALUE, filter, true)));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetSacrifice(0, Integer.MAX_VALUE, filter)));
 
         // Target creature gets +3/+0 until end of turn. For each Spirit sacrificed this way, that creature gets an additional +3/+0 until end of turn
         this.getSpellAbility().addEffect(new DevouringRageEffect());
@@ -59,12 +53,12 @@ public final class DevouringRage extends CardImpl {
 
 class DevouringRageEffect extends OneShotEffect {
 
-    public DevouringRageEffect() {
+    DevouringRageEffect() {
         super(Outcome.LoseLife);
         this.staticText = "Target creature gets +3/+0 until end of turn. For each Spirit sacrificed this way, that creature gets an additional +3/+0 until end of turn";
     }
 
-    public DevouringRageEffect(final DevouringRageEffect effect) {
+    private DevouringRageEffect(final DevouringRageEffect effect) {
         super(effect);
     }
 

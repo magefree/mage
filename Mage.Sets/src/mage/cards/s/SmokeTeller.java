@@ -61,12 +61,12 @@ public final class SmokeTeller extends CardImpl {
 
 class SmokeTellerLookFaceDownEffect extends OneShotEffect {
 
-    public SmokeTellerLookFaceDownEffect() {
+    SmokeTellerLookFaceDownEffect() {
         super(Outcome.Benefit);
         this.staticText = "Look at target face-down creature";
     }
 
-    public SmokeTellerLookFaceDownEffect(final SmokeTellerLookFaceDownEffect effect) {
+    private SmokeTellerLookFaceDownEffect(final SmokeTellerLookFaceDownEffect effect) {
         super(effect);
     }
 

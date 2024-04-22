@@ -21,7 +21,7 @@ public enum CreaturesAttackingYouCount implements DynamicValue {
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         int count = 0;
         for (CombatGroup combatGroup : game.getCombat().getGroups()) {
-            if (combatGroup.getDefenderId().equals(sourceAbility.getControllerId())) {
+            if (combatGroup.getDefenderId() != null && combatGroup.getDefenderId().equals(sourceAbility.getControllerId())) {
                 count += combatGroup.getAttackers().size();
             }
         }

@@ -26,7 +26,7 @@ public final class GraniticTitan extends CardImpl {
 
     }
 
-    public GraniticTitan(final GraniticTitan graniticTitan){
+    private GraniticTitan(final GraniticTitan graniticTitan){
         super(graniticTitan);
     }
 

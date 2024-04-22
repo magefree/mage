@@ -56,7 +56,7 @@ class HungryHungryHeiferEffect extends OneShotEffect {
         this.staticText = "you may remove a counter from a permanent you control. If you don't, sacrifice {this}";
     }
 
-    public HungryHungryHeiferEffect(final HungryHungryHeiferEffect effect) {
+    private HungryHungryHeiferEffect(final HungryHungryHeiferEffect effect) {
         super(effect);
     }
 

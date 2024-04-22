@@ -25,7 +25,6 @@ public class DecreeOfPainTest  extends CardTestPlayerBase {
      * This is wrong since the draws occur after the creatures have been destroyed.
      */
     @Test
-    @Ignore
     public void testDrawHappensAfterDestruction(){
         // Destroy all creatures. They can’t be regenerated. Draw a card for each creature destroyed this way.
         addCard(Zone.HAND, playerA, "Decree of Pain");

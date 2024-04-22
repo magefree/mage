@@ -6,14 +6,12 @@ import mage.abilities.effects.Effect;
 import mage.abilities.hint.Hint;
 import mage.abilities.hint.ValueHint;
 import mage.constants.TargetController;
-import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
-import mage.watchers.Watcher;
-
-import java.util.*;
+import mage.util.CardUtil;
+import mage.watchers.common.CardsDrawnThisTurnWatcher;
 
 /**
  * @author TheElk801
@@ -36,10 +34,11 @@ public class DrawNthCardTriggeredAbility extends TriggeredAbilityImpl {
 
     public DrawNthCardTriggeredAbility(Zone zone, Effect effect, boolean optional, TargetController targetController, int cardNumber) {
         super(zone, effect, optional);
-        this.addWatcher(new DrawCardWatcher());
         this.targetController = targetController;
         this.cardNumber = cardNumber;
-        this.addHint(hint);
+        if (targetController == TargetController.YOU) {
+            this.addHint(hint);
+        }
         setTriggerPhrase(generateTriggerPhrase());
     }
 
@@ -76,17 +75,18 @@ public class DrawNthCardTriggeredAbility extends TriggeredAbilityImpl {
             default:
                 throw new IllegalArgumentException("TargetController " + targetController + " not supported");
         }
-        return DrawCardWatcher.checkEvent(event.getPlayerId(), event, game, cardNumber);
+        CardsDrawnThisTurnWatcher watcher = game.getState().getWatcher(CardsDrawnThisTurnWatcher.class);
+        return watcher != null && watcher.getCardsDrawnThisTurn(event.getPlayerId()) == cardNumber;
     }
 
     public String generateTriggerPhrase() {
         switch (targetController) {
             case YOU:
-                return "Whenever you draw your second card each turn, ";
+                return "Whenever you draw your " + CardUtil.numberToOrdinalText(cardNumber) + " card each turn, ";
             case ACTIVE:
-                return "Whenever a player draws their second card during their turn, ";
+                return "Whenever a player draws their " + CardUtil.numberToOrdinalText(cardNumber) + " card during their turn, ";
             case OPPONENT:
-                return "Whenever an opponent draws their second card each turn, ";
+                return "Whenever an opponent draws their " + CardUtil.numberToOrdinalText(cardNumber) + " card each turn, ";
             default:
                 throw new IllegalArgumentException("TargetController " + targetController + " not supported");
         }
@@ -96,36 +96,4 @@ public class DrawNthCardTriggeredAbility extends TriggeredAbilityImpl {
     public DrawNthCardTriggeredAbility copy() {
         return new DrawNthCardTriggeredAbility(this);
     }
-}
-
-class DrawCardWatcher extends Watcher {
-
-    private final Map<UUID, List<UUID>> drawMap = new HashMap<>();
-
-    DrawCardWatcher() {
-        super(WatcherScope.GAME);
-    }
-
-    @Override
-    public void watch(GameEvent event, Game game) {
-        if (event.getType() != GameEvent.EventType.DREW_CARD) {
-            return;
-        }
-        if (!drawMap.containsKey(event.getPlayerId())) {
-            drawMap.putIfAbsent(event.getPlayerId(), new ArrayList<>());
-        }
-        drawMap.get(event.getPlayerId()).add(event.getId());
-    }
-
-    @Override
-    public void reset() {
-        super.reset();
-        drawMap.clear();
-    }
-    
-    static boolean checkEvent(UUID playerId, GameEvent event, Game game, int cardNumber) {
-        Map<UUID, List<UUID>> drawMap = game.getState().getWatcher(DrawCardWatcher.class).drawMap;
-        return drawMap.containsKey(playerId) && Objects.equals(drawMap.get(playerId).size(), cardNumber) && event.getId().equals(drawMap.get(playerId).get(cardNumber - 1));
-    }
-    
 }

@@ -5,8 +5,6 @@ import mage.abilities.keyword.HasteAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author TheElk801
  */
@@ -21,8 +19,6 @@ public final class CatHasteToken extends TokenImpl {
         toughness = new MageInt(2);
 
         this.addAbility(HasteAbility.getInstance());
-
-        availableImageSetCodes = Arrays.asList("SNC");
     }
 
     private CatHasteToken(final CatHasteToken token) {

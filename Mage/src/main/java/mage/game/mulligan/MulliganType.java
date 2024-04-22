@@ -8,6 +8,7 @@ public enum MulliganType {
     VANCOUVER("Vancouver"),
     PARIS("Paris"),
     LONDON("London"),
+    SMOOTHED_LONDON("Smoothed London"),
     CANADIAN_HIGHLANDER("Canadian Highlander");
 
     private final String displayName;
@@ -24,6 +25,8 @@ public enum MulliganType {
                 return new CanadianHighlanderMulligan(freeMulligans);
             case VANCOUVER:
                 return new VancouverMulligan(freeMulligans);
+            case SMOOTHED_LONDON:
+                return new SmoothedLondonMulligan(freeMulligans);
             default:
             case LONDON:
                 return new LondonMulligan(freeMulligans);

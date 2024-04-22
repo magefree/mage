@@ -2,7 +2,6 @@ package mage.cards.action;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseWheelEvent;
 
 public interface ActionCallback {
 
@@ -20,7 +19,7 @@ public interface ActionCallback {
 
     void mouseExited(MouseEvent e, TransferData data);
 
-    void mouseWheelMoved(MouseWheelEvent e, TransferData data);
+    void mouseWheelMoved(int mouseWheelRotation, TransferData data);
 
     void hideOpenComponents();
 

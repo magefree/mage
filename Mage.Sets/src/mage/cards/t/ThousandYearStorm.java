@@ -3,7 +3,6 @@ package mage.cards.t;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
@@ -11,21 +10,14 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.WatcherScope;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.watchers.Watcher;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
-import java.util.List;
-import java.util.ArrayList;
+import java.util.*;
 
 /**
  * @author jasc7636
@@ -54,12 +46,12 @@ class ThousandYearStormAbility extends SpellCastControllerTriggeredAbility {
     private String stormCountInfo;
 
     public ThousandYearStormAbility() {
-        super(Zone.BATTLEFIELD, new ThousandYearStormEffect(), StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY, false, true);
+        super(new ThousandYearStormEffect(), StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY, false, SetTargetPointer.SPELL);
         this.addHint(new ValueHint("You've cast instant and sorcery this turn", ThousandYearStormSpellsCastThatTurnValue.instance));
         this.stormCountInfo = null;
     }
 
-    public ThousandYearStormAbility(final ThousandYearStormAbility ability) {
+    private ThousandYearStormAbility(final ThousandYearStormAbility ability) {
         super(ability);
         this.stormCountInfo = ability.stormCountInfo;
     }
@@ -117,7 +109,7 @@ class ThousandYearStormEffect extends OneShotEffect {
         this.staticText = "copy it for each other instant and sorcery spell you've cast before it this turn. You may choose new targets for the copies";
     }
 
-    public ThousandYearStormEffect(final ThousandYearStormEffect effect) {
+    private ThousandYearStormEffect(final ThousandYearStormEffect effect) {
         super(effect);
         this.stormCount = effect.stormCount;
     }

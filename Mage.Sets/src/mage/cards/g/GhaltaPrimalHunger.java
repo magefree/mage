@@ -33,7 +33,7 @@ public final class GhaltaPrimalHunger extends CardImpl {
     public GhaltaPrimalHunger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{10}{G}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELDER);
         this.subtype.add(SubType.DINOSAUR);
         this.power = new MageInt(12);
@@ -69,7 +69,7 @@ class GhaltaPrimalHungerCostReductionEffect extends CostModificationEffectImpl {
         staticText = "this spell costs {X} less to cast, where X is the total power of creatures you control";
     }
 
-    GhaltaPrimalHungerCostReductionEffect(final GhaltaPrimalHungerCostReductionEffect effect) {
+    private GhaltaPrimalHungerCostReductionEffect(final GhaltaPrimalHungerCostReductionEffect effect) {
         super(effect);
     }
 

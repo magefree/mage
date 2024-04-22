@@ -42,12 +42,12 @@ public final class KindredDominance extends CardImpl {
 
 class KindredDominanceEffect extends OneShotEffect {
 
-    public KindredDominanceEffect() {
+    KindredDominanceEffect() {
         super(Outcome.DestroyPermanent);
-        this.staticText = "Choose a creature type. Destroy all creatures that are not the chosen type.";
+        this.staticText = "Choose a creature type. Destroy all creatures that aren't of the chosen type.";
     }
 
-    public KindredDominanceEffect(final KindredDominanceEffect effect) {
+    private KindredDominanceEffect(final KindredDominanceEffect effect) {
         super(effect);
     }
 

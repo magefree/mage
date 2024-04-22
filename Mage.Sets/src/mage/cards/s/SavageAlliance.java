@@ -80,12 +80,12 @@ public final class SavageAlliance extends CardImpl {
 
 class SavageAllianceGainTrampleEffect extends OneShotEffect {
 
-    public SavageAllianceGainTrampleEffect() {
+    SavageAllianceGainTrampleEffect() {
         super(Outcome.AddAbility);
         staticText = "Creatures target player controls gain trample until end of turn";
     }
 
-    public SavageAllianceGainTrampleEffect(final SavageAllianceGainTrampleEffect effect) {
+    private SavageAllianceGainTrampleEffect(final SavageAllianceGainTrampleEffect effect) {
         super(effect);
     }
 
@@ -110,12 +110,12 @@ class SavageAllianceGainTrampleEffect extends OneShotEffect {
 
 class SavageAllianceDamageEffect extends OneShotEffect {
 
-    public SavageAllianceDamageEffect() {
+    SavageAllianceDamageEffect() {
         super(Outcome.Damage);
         this.staticText = "{this} deals 1 damage to each creature target opponent controls";
     }
 
-    public SavageAllianceDamageEffect(final SavageAllianceDamageEffect effect) {
+    private SavageAllianceDamageEffect(final SavageAllianceDamageEffect effect) {
         super(effect);
     }
 

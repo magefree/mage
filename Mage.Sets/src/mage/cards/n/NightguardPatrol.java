@@ -28,7 +28,7 @@ public final class NightguardPatrol extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
     }
 
-    public NightguardPatrol (final NightguardPatrol card) {
+    private NightguardPatrol(final NightguardPatrol card) {
         super(card);
     }
 

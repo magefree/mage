@@ -10,7 +10,6 @@ import mage.game.Game;
 import mage.players.Player;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class DamageControllerEffect extends OneShotEffect {
@@ -50,7 +49,7 @@ public class DamageControllerEffect extends OneShotEffect {
         this.sourceName = whoDealDamageName;
     }
 
-    public DamageControllerEffect(final DamageControllerEffect effect) {
+    protected DamageControllerEffect(final DamageControllerEffect effect) {
         super(effect);
         this.amount = effect.amount;
         this.preventable = effect.preventable;

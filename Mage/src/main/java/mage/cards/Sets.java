@@ -127,7 +127,7 @@ public class Sets extends HashMap<String, ExpansionSet> {
         List<Card> cardPool = new ArrayList<>();
         while (count < cardsCount) {
             CardInfo cardInfo = cards.get(RandomUtil.nextInt(cards.size()));
-            Card card = cardInfo != null ? cardInfo.getCard() : null;
+            Card card = cardInfo != null ? cardInfo.createCard() : null;
             if (card != null) {
 
                 FilterMana manaCard = card.getColorIdentity();
@@ -211,7 +211,7 @@ public class Sets extends HashMap<String, ExpansionSet> {
         if (instance.containsKey(preferredSetCode)) {
             info = instance.get(preferredSetCode).findCardInfoByClass(clazz)
                     .stream()
-                    .filter(card -> preferredCardNumber == null || card.getCardNumber().equals(preferredCardNumber))
+                    .filter(card -> preferredCardNumber.isEmpty() || card.getCardNumber().equals(preferredCardNumber))
                     .findFirst()
                     .orElse(null);
         }
@@ -220,7 +220,7 @@ public class Sets extends HashMap<String, ExpansionSet> {
             for (Map.Entry<String, ExpansionSet> entry : instance.entrySet()) {
                 info = entry.getValue().findCardInfoByClass(clazz)
                         .stream()
-                        .filter(card -> preferredCardNumber == null || card.getCardNumber().equals(preferredCardNumber))
+                        .filter(card -> preferredCardNumber.isEmpty() || card.getCardNumber().equals(preferredCardNumber))
                         .findFirst()
                         .orElse(null);
                 if (info != null) {

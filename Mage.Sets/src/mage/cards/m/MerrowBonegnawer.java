@@ -47,7 +47,7 @@ public final class MerrowBonegnawer extends CardImpl {
         this.addAbility(ability);
 
         // Whenever you cast a black spell, you may untap Merrow Bonegnawer.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new UntapSourceEffect(), filter, true, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new UntapSourceEffect(), filter, true));
     }
 
     private MerrowBonegnawer(final MerrowBonegnawer card) {

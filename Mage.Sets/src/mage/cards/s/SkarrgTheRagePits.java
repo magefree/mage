@@ -26,9 +26,11 @@ public final class SkarrgTheRagePits extends CardImpl {
     public SkarrgTheRagePits(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
         this.addAbility(new ColorlessManaAbility());
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl<>("{R}{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(1, 1, Duration.EndOfTurn)
+                .setText("target creature gets +1/+1"), new ManaCostsImpl<>("{R}{G}"));
         ability.addCost(new TapSourceCost());
-        ability.addEffect(new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn));
+        ability.addEffect(new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn)
+                .setText("and gains trample until end of turn"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

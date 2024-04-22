@@ -60,7 +60,7 @@ class PyrimalWellspringTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("When that mana is used to cast an instant or sorcery spell, ");
     }
 
-    public PyrimalWellspringTriggeredAbility(final PyrimalWellspringTriggeredAbility ability) {
+    private PyrimalWellspringTriggeredAbility(final PyrimalWellspringTriggeredAbility ability) {
         super(ability);
         this.abilityOriginalId = ability.abilityOriginalId;
     }

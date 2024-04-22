@@ -31,7 +31,7 @@ public final class KjeldoranWarCry extends CardImpl {
 
         // Creatures you control get +X/+X until end of turn, where X is 1 plus the number of cards named Kjeldoran War Cry in all graveyards.
         IntPlusDynamicValue value = new IntPlusDynamicValue(1, new CardsInAllGraveyardsCount(filter));
-        Effect effect = new BoostControlledEffect(value, value, Duration.EndOfTurn, new FilterCreaturePermanent("creatures"), false, true);
+        Effect effect = new BoostControlledEffect(value, value, Duration.EndOfTurn, new FilterCreaturePermanent("creatures"), false);
         effect.setText("Creatures you control get +X/+X until end of turn, where X is 1 plus the number of cards named {this} in all graveyards");
         this.getSpellAbility().addEffect(effect);
     }

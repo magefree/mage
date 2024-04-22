@@ -41,7 +41,6 @@ public final class GlyphOfDoom extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
         this.getSpellAbility().addEffect(new InfoEffect("Choose target Wall creature"));
         this.getSpellAbility().addEffect(new GlyphOfDoomCreateDelayedTriggeredAbilityEffect());
-        this.getSpellAbility().addWatcher(new BlockedAttackerWatcher());
     }
 
     private GlyphOfDoom(final GlyphOfDoom card) {
@@ -56,12 +55,12 @@ public final class GlyphOfDoom extends CardImpl {
 
 class GlyphOfDoomCreateDelayedTriggeredAbilityEffect extends OneShotEffect {
 
-    public GlyphOfDoomCreateDelayedTriggeredAbilityEffect() {
+    GlyphOfDoomCreateDelayedTriggeredAbilityEffect() {
         super(Outcome.Benefit);
         this.staticText = "At this turn's next end of combat, destroy all creatures that were blocked by that creature this turn";
     }
 
-    public GlyphOfDoomCreateDelayedTriggeredAbilityEffect(final GlyphOfDoomCreateDelayedTriggeredAbilityEffect effect) {
+    private GlyphOfDoomCreateDelayedTriggeredAbilityEffect(final GlyphOfDoomCreateDelayedTriggeredAbilityEffect effect) {
         super(effect);
     }
 
@@ -91,7 +90,7 @@ class GlyphOfDoomEffect extends OneShotEffect {
         this.targetCreature = targetCreature;
     }
 
-    public GlyphOfDoomEffect(final GlyphOfDoomEffect effect) {
+    private GlyphOfDoomEffect(final GlyphOfDoomEffect effect) {
         super(effect);
         targetCreature = effect.targetCreature;
     }

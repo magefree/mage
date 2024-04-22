@@ -1,4 +1,3 @@
-
 package mage.cards.g;
 
 import java.util.ArrayList;
@@ -11,7 +10,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.mana.SimpleManaAbility;
@@ -60,7 +58,7 @@ public final class GeneratorServant extends CardImpl {
 
 class GeneratorServantWatcher extends Watcher {
 
-    private List<UUID> creatures = new ArrayList<>();
+    private final List<UUID> creatures = new ArrayList<>();
 
     public GeneratorServantWatcher() {
         super(WatcherScope.CARD);
@@ -73,7 +71,7 @@ class GeneratorServantWatcher extends Watcher {
         }
 
         MageObject target = game.getObject(event.getTargetId());
-        if (target == null || !(target instanceof Spell)) {
+        if (!(target instanceof Spell)) {
             return;
         }
 
@@ -105,16 +103,16 @@ class GeneratorServantWatcher extends Watcher {
 
 class GeneratorServantHasteEffect extends ContinuousEffectImpl {
 
-    public GeneratorServantHasteEffect() {
+    GeneratorServantHasteEffect() {
         super(Duration.EndOfGame, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
     }
 
-    public GeneratorServantHasteEffect(final GeneratorServantHasteEffect effect) {
+    private GeneratorServantHasteEffect(final GeneratorServantHasteEffect effect) {
         super(effect);
     }
 
     @Override
-    public ContinuousEffect copy() {
+    public GeneratorServantHasteEffect copy() {
         return new GeneratorServantHasteEffect(this);
     }
 

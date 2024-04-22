@@ -5,7 +5,9 @@ import mage.abilities.effects.common.counter.ProliferateEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
+import mage.filter.common.FilterCreatureCard;
 import mage.target.common.TargetCardInGraveyard;
 
 import java.util.UUID;
@@ -20,7 +22,7 @@ public final class VatEmergence extends CardImpl {
 
         // Put target creature card from a graveyard onto the battlefield under your control. Proliferate.
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCardInGraveyard(StaticFilters.FILTER_CARD_CREATURE));
+        this.getSpellAbility().addTarget(new TargetCardInGraveyard(StaticFilters.FILTER_CARD_CREATURE_A_GRAVEYARD));
         this.getSpellAbility().addEffect(new ProliferateEffect());
     }
 

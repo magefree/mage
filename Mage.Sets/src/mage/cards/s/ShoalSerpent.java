@@ -46,12 +46,12 @@ public final class ShoalSerpent extends CardImpl {
 
 class ShoalSerpentEffect extends ContinuousEffectImpl {
 
-    public ShoalSerpentEffect() {
+    ShoalSerpentEffect() {
         super(Duration.EndOfTurn, Outcome.AddAbility);
         staticText = "{this} loses defender until end of turn";
     }
 
-    public ShoalSerpentEffect(final ShoalSerpentEffect effect) {
+    private ShoalSerpentEffect(final ShoalSerpentEffect effect) {
         super(effect);
     }
 

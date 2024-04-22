@@ -46,7 +46,7 @@ class HumOfTheRadixCostIncreaseEffect extends CostModificationEffectImpl {
         staticText = "each artifact spell costs {1} more to cast for each artifact its controller controls";
     }
 
-    HumOfTheRadixCostIncreaseEffect(final HumOfTheRadixCostIncreaseEffect effect) {
+    private HumOfTheRadixCostIncreaseEffect(final HumOfTheRadixCostIncreaseEffect effect) {
         super(effect);
     }
 

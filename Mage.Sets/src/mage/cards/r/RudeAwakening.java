@@ -1,4 +1,3 @@
-
 package mage.cards.r;
 
 import java.util.UUID;
@@ -29,7 +28,7 @@ public final class RudeAwakening extends CardImpl {
         this.getSpellAbility().addEffect(new UntapAllLandsControllerEffect());
         // or until end of turn, lands you control become 2/2 creatures that are still lands.
         Mode mode = new Mode(new BecomesCreatureAllEffect(
-                new CreatureToken(2, 2),
+                new CreatureToken(2, 2, "2/2 creatures"),
                 "lands", new FilterControlledLandPermanent("lands you control"), Duration.EndOfTurn, false));
         this.getSpellAbility().getModes().addMode(mode);
 

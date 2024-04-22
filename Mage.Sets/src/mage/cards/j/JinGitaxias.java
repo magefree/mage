@@ -29,7 +29,7 @@ public class JinGitaxias extends CardImpl {
 
     public JinGitaxias(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.addSubType(SubType.PHYREXIAN);
         this.addSubType(SubType.PRAETOR);
         this.power = new MageInt(5);

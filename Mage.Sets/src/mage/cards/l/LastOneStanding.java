@@ -48,7 +48,7 @@ class LastOneStandingEffect extends OneShotEffect {
         this.staticText = "Choose a creature at random, then destroy the rest.";
     }
 
-    LastOneStandingEffect(final LastOneStandingEffect effect) {
+    private LastOneStandingEffect(final LastOneStandingEffect effect) {
         super(effect);
     }
 

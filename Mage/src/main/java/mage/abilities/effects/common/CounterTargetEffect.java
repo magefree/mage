@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common;
 
 import java.util.UUID;
@@ -18,7 +17,7 @@ public class CounterTargetEffect extends OneShotEffect {
         super(Outcome.Detriment);
     }
 
-    public CounterTargetEffect(final CounterTargetEffect effect) {
+    protected CounterTargetEffect(final CounterTargetEffect effect) {
         super(effect);
     }
 
@@ -43,6 +42,6 @@ public class CounterTargetEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        return "counter target " + (!mode.getTargets().isEmpty() ? mode.getTargets().get(0).getTargetName() : "spell");
+        return "counter " + getTargetPointer().describeTargets(mode.getTargets(), "that spell");
     }
 }

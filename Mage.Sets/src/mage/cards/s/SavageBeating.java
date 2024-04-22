@@ -31,11 +31,11 @@ public final class SavageBeating extends CardImpl {
                 "Cast this spell only during your turn and only during combat"));
 
         // Choose one - Creatures you control gain double strike until end of turn;
-        this.getSpellAbility().addEffect(new GainAbilityControlledEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE, false));
+        this.getSpellAbility().addEffect(new GainAbilityControlledEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES, false));
 
         // or untap all creatures you control and after this phase, there is an additional combat phase.
         Mode mode = new Mode(new UntapAllControllerEffect(new FilterControlledCreaturePermanent(), "untap all creatures you control"));
-        mode.addEffect(new AdditionalCombatPhaseEffect("and after this phase, there is an additional combat phase"));
+        mode.addEffect(new AdditionalCombatPhaseEffect());
         this.getSpellAbility().getModes().addMode(mode);
 
         // Entwine {1}{R}

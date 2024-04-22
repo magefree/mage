@@ -1,4 +1,3 @@
-
 package mage.cards.p;
 
 import mage.abilities.Ability;
@@ -15,7 +14,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterInstantOrSorcerySpell;
+import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -46,7 +45,7 @@ public final class PrimalAmulet extends CardImpl {
 
         // Whenever you cast an instant or sorcery spell, put a charge counter on Primal Amulet. Then if there are four or more charge counters on it, you may remove those counters and transform it.
         this.addAbility(new TransformAbility());
-        this.addAbility(new SpellCastControllerTriggeredAbility(new PrimalAmuletEffect(), new FilterInstantOrSorcerySpell(), false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new PrimalAmuletEffect(), StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY, false));
     }
 
     private PrimalAmulet(final PrimalAmulet card) {
@@ -68,7 +67,7 @@ class PrimalAmuletEffect extends OneShotEffect {
                 + "you may remove those counters and transform it";
     }
 
-    PrimalAmuletEffect(final PrimalAmuletEffect effect) {
+    private PrimalAmuletEffect(final PrimalAmuletEffect effect) {
         super(effect);
     }
 
@@ -85,7 +84,7 @@ class PrimalAmuletEffect extends OneShotEffect {
             permanent.addCounters(CounterType.CHARGE.createInstance(), source.getControllerId(), source, game);
             int counters = permanent.getCounters(game).getCount(CounterType.CHARGE);
             if (counters > 3 && player.chooseUse(Outcome.Benefit, "Transform this?", source, game)) {
-                permanent.removeCounters("charge", counters, source, game);
+                permanent.removeCounters(CounterType.CHARGE.getName(), counters, source, game);
                 new TransformSourceEffect().apply(game, source);
             }
             return true;

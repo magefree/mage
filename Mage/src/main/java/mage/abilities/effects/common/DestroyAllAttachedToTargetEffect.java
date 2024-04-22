@@ -3,6 +3,7 @@ package mage.abilities.effects.common;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
@@ -12,7 +13,6 @@ import mage.game.permanent.Permanent;
 import mage.filter.FilterPermanent;
 
 /**
- *
  * @author awjackson
  */
 public class DestroyAllAttachedToTargetEffect extends OneShotEffect {
@@ -25,7 +25,7 @@ public class DestroyAllAttachedToTargetEffect extends OneShotEffect {
         this.staticText = "destroy all " + filter.getMessage() + " attached to " + description;
     }
 
-    public DestroyAllAttachedToTargetEffect(final DestroyAllAttachedToTargetEffect effect) {
+    protected DestroyAllAttachedToTargetEffect(final DestroyAllAttachedToTargetEffect effect) {
         super(effect);
         this.filter = effect.filter;
     }

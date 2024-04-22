@@ -6,7 +6,7 @@ import mage.counters.CounterType;
 import org.junit.Test;
 
 /**
- * @author TheElk801
+ * @author TheElk801, JayDi85
  */
 public class BattleDuelTest extends BattleBaseTest {
 
@@ -121,6 +121,7 @@ public class BattleDuelTest extends BattleBaseTest {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, belenon);
 
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, impact, belenon);
+        setChoice(playerA, true); // yes to cast it transformed
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
@@ -153,5 +154,114 @@ public class BattleDuelTest extends BattleBaseTest {
         assertPermanentCount(playerA, kaladesh, 0);
         assertGraveyardCount(playerA, kaladesh, 1);
         assertPermanentCount(playerA, "Thopter Token", 1);
+    }
+
+    @Test
+    public void testSpellCardTypeTrigger() {
+        addCard(Zone.BATTLEFIELD, playerA, "Plateau", 3 + 6);
+        addCard(Zone.BATTLEFIELD, playerA, "Oketra's Monument");
+        addCard(Zone.BATTLEFIELD, playerA, "Deeproot Champion");
+        addCard(Zone.HAND, playerA, "Invasion of Dominaria");
+        addCard(Zone.HAND, playerA, impact);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Invasion of Dominaria");
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, impact, "Invasion of Dominaria");
+        setChoice(playerA, true); // yes to cast it transformed
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, "Serra Faithkeeper", 1);
+        assertPermanentCount(playerA, "Warrior Token", 1);
+        assertPowerToughness(playerA, "Deeproot Champion", 3, 3);
+    }
+
+    @Test
+    public void test_AI_CastBattle() {
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
+        addCard(Zone.HAND, playerA, belenon);
+
+        aiPlayPriority(1, PhaseStep.PRECOMBAT_MAIN, playerA);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertBattle(playerA, playerB, belenon);
+        assertPermanentCount(playerA, "Knight Token", 1);
+    }
+
+    @Test
+    public void test_AI_AttackPriority_TargetBattleInsteadPlayer() {
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
+        addCard(Zone.BATTLEFIELD, playerA, bear);
+        addCard(Zone.HAND, playerA, belenon);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, belenon);
+
+        // ai must attack planeswalker instead player
+        aiPlayStep(1, PhaseStep.DECLARE_ATTACKERS, playerA);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertBattle(playerA, playerB, belenon);
+        assertPermanentCount(playerA, "Knight Token", 1);
+        assertTapped(bear, true);
+        assertLife(playerB, 20);
+        assertCounterCount(belenon, CounterType.DEFENSE, 5 - 2);
+    }
+
+    @Test
+    public void test_AI_AttackPriority_TargetPlaneswalkerInsteadBattle() {
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
+        addCard(Zone.BATTLEFIELD, playerA, bear);
+        addCard(Zone.BATTLEFIELD, playerB, fayden); // 3
+        addCard(Zone.HAND, playerA, belenon);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, belenon);
+
+        // ai must attack planeswalker instead battle/player
+        aiPlayStep(1, PhaseStep.DECLARE_ATTACKERS, playerA);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertBattle(playerA, playerB, belenon);
+        assertPermanentCount(playerA, "Knight Token", 1);
+        assertTapped(bear, true);
+        assertLife(playerB, 20);
+        assertCounterCount(belenon, CounterType.DEFENSE, 5);
+        assertCounterCount(fayden, CounterType.LOYALTY, 3 - 2);
+    }
+
+    @Test
+    public void test_AI_MustNotAttackMultipleTargets() {
+        // bug with multiple targets for single attacker: https://github.com/magefree/mage/issues/7434
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
+        addCard(Zone.BATTLEFIELD, playerA, bearWithFlyingAndVigilance);
+        addCard(Zone.BATTLEFIELD, playerB, fayden); // 3
+        addCard(Zone.HAND, playerA, belenon);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, belenon);
+
+        // ai must attack planeswalker instead battle/player
+        // ai must attack only single target
+        aiPlayStep(1, PhaseStep.DECLARE_ATTACKERS, playerA);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertBattle(playerA, playerB, belenon);
+        assertPermanentCount(playerA, "Knight Token", 1);
+        assertTapped(bearWithFlyingAndVigilance, false); // vigilance
+        assertLife(playerB, 20);
+        assertCounterCount(belenon, CounterType.DEFENSE, 5);
+        assertCounterCount(fayden, CounterType.LOYALTY, 3 - 2);
     }
 }

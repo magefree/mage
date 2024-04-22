@@ -27,7 +27,7 @@ public final class EssenceFeed extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public EssenceFeed (final EssenceFeed card) {
+    private EssenceFeed(final EssenceFeed card) {
         super(card);
     }
 

@@ -30,6 +30,7 @@ public final class Jumpstart2022 extends ExpansionSet {
         cards.add(new SetCardInfo("Aether Spellbomb", 752, Rarity.COMMON, mage.cards.a.AetherSpellbomb.class));
         cards.add(new SetCardInfo("Aethershield Artificer", 140, Rarity.UNCOMMON, mage.cards.a.AethershieldArtificer.class));
         cards.add(new SetCardInfo("Aftershock", 129, Rarity.COMMON, mage.cards.a.Aftershock.class));
+        cards.add(new SetCardInfo("Agrus Kos, Eternal Soldier", 1, Rarity.RARE, mage.cards.a.AgrusKosEternalSoldier.class));
         cards.add(new SetCardInfo("Ajani's Pridemate", 142, Rarity.UNCOMMON, mage.cards.a.AjanisPridemate.class));
         cards.add(new SetCardInfo("Ajani, Strength of the Pride", 141, Rarity.MYTHIC, mage.cards.a.AjaniStrengthOfThePride.class));
         cards.add(new SetCardInfo("Alandra, Sky Dreamer", 9, Rarity.RARE, mage.cards.a.AlandraSkyDreamer.class));
@@ -61,6 +62,7 @@ public final class Jumpstart2022 extends ExpansionSet {
         cards.add(new SetCardInfo("Assembly-Worker", 755, Rarity.COMMON, mage.cards.a.AssemblyWorker.class));
         cards.add(new SetCardInfo("Attended Healer", 152, Rarity.UNCOMMON, mage.cards.a.AttendedHealer.class));
         cards.add(new SetCardInfo("Augury Owl", 273, Rarity.COMMON, mage.cards.a.AuguryOwl.class));
+        cards.add(new SetCardInfo("Auntie Blyte, Bad Influence", 30, Rarity.MYTHIC, mage.cards.a.AuntieBlyteBadInfluence.class));
         cards.add(new SetCardInfo("Auramancer", 153, Rarity.COMMON, mage.cards.a.Auramancer.class));
         cards.add(new SetCardInfo("Avalanche Caller", 274, Rarity.UNCOMMON, mage.cards.a.AvalancheCaller.class));
         cards.add(new SetCardInfo("Avenger of Zendikar", 629, Rarity.MYTHIC, mage.cards.a.AvengerOfZendikar.class));
@@ -129,6 +131,7 @@ public final class Jumpstart2022 extends ExpansionSet {
         cards.add(new SetCardInfo("Cellar Door", 759, Rarity.UNCOMMON, mage.cards.c.CellarDoor.class));
         cards.add(new SetCardInfo("Cemetery Recruitment", 385, Rarity.COMMON, mage.cards.c.CemeteryRecruitment.class));
         cards.add(new SetCardInfo("Certain Death", 386, Rarity.COMMON, mage.cards.c.CertainDeath.class));
+        cards.add(new SetCardInfo("Chains of Custody", 3, Rarity.COMMON, mage.cards.c.ChainsOfCustody.class));
         cards.add(new SetCardInfo("Challenger Troll", 639, Rarity.UNCOMMON, mage.cards.c.ChallengerTroll.class));
         cards.add(new SetCardInfo("Chandra's Magmutt", 512, Rarity.COMMON, mage.cards.c.ChandrasMagmutt.class));
         cards.add(new SetCardInfo("Chandra's Pyreling", 513, Rarity.UNCOMMON, mage.cards.c.ChandrasPyreling.class));
@@ -190,6 +193,7 @@ public final class Jumpstart2022 extends ExpansionSet {
         cards.add(new SetCardInfo("Devouring Light", 175, Rarity.UNCOMMON, mage.cards.d.DevouringLight.class));
         cards.add(new SetCardInfo("Devouring Swarm", 401, Rarity.COMMON, mage.cards.d.DevouringSwarm.class));
         cards.add(new SetCardInfo("Diabolic Edict", 67, Rarity.COMMON, mage.cards.d.DiabolicEdict.class));
+        cards.add(new SetCardInfo("Disciple of Perdition", 23, Rarity.UNCOMMON, mage.cards.d.DiscipleOfPerdition.class));
         cards.add(new SetCardInfo("Dismiss", 286, Rarity.UNCOMMON, mage.cards.d.Dismiss.class));
         cards.add(new SetCardInfo("Distinguished Conjurer", 4, Rarity.UNCOMMON, mage.cards.d.DistinguishedConjurer.class));
         cards.add(new SetCardInfo("Divine Arrow", 176, Rarity.COMMON, mage.cards.d.DivineArrow.class));
@@ -201,7 +205,8 @@ public final class Jumpstart2022 extends ExpansionSet {
         cards.add(new SetCardInfo("Drag Under", 288, Rarity.COMMON, mage.cards.d.DragUnder.class));
         cards.add(new SetCardInfo("Dragon Blood", 762, Rarity.UNCOMMON, mage.cards.d.DragonBlood.class));
         cards.add(new SetCardInfo("Dragon Egg", 522, Rarity.UNCOMMON, mage.cards.d.DragonEgg.class));
-        cards.add(new SetCardInfo("Dragon Fodder", 76, Rarity.COMMON, mage.cards.d.DragonFodder.class));
+        cards.add(new SetCardInfo("Dragon Fodder", 523, Rarity.COMMON, mage.cards.d.DragonFodder.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Dragon Fodder", 76, Rarity.COMMON, mage.cards.d.DragonFodder.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dragon Mage", 77, Rarity.UNCOMMON, mage.cards.d.DragonMage.class));
         cards.add(new SetCardInfo("Dragon's Hoard", 763, Rarity.RARE, mage.cards.d.DragonsHoard.class));
         cards.add(new SetCardInfo("Dragonlord's Servant", 524, Rarity.UNCOMMON, mage.cards.d.DragonlordsServant.class));
@@ -280,6 +285,8 @@ public final class Jumpstart2022 extends ExpansionSet {
         cards.add(new SetCardInfo("Flourishing Hunter", 662, Rarity.COMMON, mage.cards.f.FlourishingHunter.class));
         cards.add(new SetCardInfo("Forced Worship", 185, Rarity.COMMON, mage.cards.f.ForcedWorship.class));
         cards.add(new SetCardInfo("Forest", 110, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 111, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 112, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forgotten Cave", 814, Rarity.COMMON, mage.cards.f.ForgottenCave.class));
         cards.add(new SetCardInfo("Frenzied Goblin", 536, Rarity.COMMON, mage.cards.f.FrenziedGoblin.class));
         cards.add(new SetCardInfo("Frontier Mastodon", 663, Rarity.COMMON, mage.cards.f.FrontierMastodon.class));
@@ -316,6 +323,7 @@ public final class Jumpstart2022 extends ExpansionSet {
         cards.add(new SetCardInfo("Goblin Psychopath", 544, Rarity.UNCOMMON, mage.cards.g.GoblinPsychopath.class));
         cards.add(new SetCardInfo("Goblin Rabblemaster", 545, Rarity.RARE, mage.cards.g.GoblinRabblemaster.class));
         cards.add(new SetCardInfo("Goblin Rally", 546, Rarity.UNCOMMON, mage.cards.g.GoblinRally.class));
+        cards.add(new SetCardInfo("Goblin Researcher", 34, Rarity.COMMON, mage.cards.g.GoblinResearcher.class));
         cards.add(new SetCardInfo("Goblin Trailblazer", 547, Rarity.COMMON, mage.cards.g.GoblinTrailblazer.class));
         cards.add(new SetCardInfo("Goblin Warchief", 548, Rarity.UNCOMMON, mage.cards.g.GoblinWarchief.class));
         cards.add(new SetCardInfo("Goldhound", 549, Rarity.COMMON, mage.cards.g.Goldhound.class));
@@ -381,6 +389,8 @@ public final class Jumpstart2022 extends ExpansionSet {
         cards.add(new SetCardInfo("Irreverent Revelers", 560, Rarity.COMMON, mage.cards.i.IrreverentRevelers.class));
         cards.add(new SetCardInfo("Isamaru, Hound of Konda", 201, Rarity.RARE, mage.cards.i.IsamaruHoundOfKonda.class));
         cards.add(new SetCardInfo("Island", 101, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 102, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 103, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Isu the Abominable", 12, Rarity.MYTHIC, mage.cards.i.IsuTheAbominable.class));
         cards.add(new SetCardInfo("Ivy Lane Denizen", 680, Rarity.COMMON, mage.cards.i.IvyLaneDenizen.class));
         cards.add(new SetCardInfo("Jace's Scrutiny", 311, Rarity.COMMON, mage.cards.j.JacesScrutiny.class));
@@ -399,7 +409,8 @@ public final class Jumpstart2022 extends ExpansionSet {
         cards.add(new SetCardInfo("Kenessos, Priest of Thassa", 13, Rarity.RARE, mage.cards.k.KenessosPriestOfThassa.class));
         cards.add(new SetCardInfo("Kessig Cagebreakers", 681, Rarity.RARE, mage.cards.k.KessigCagebreakers.class));
         cards.add(new SetCardInfo("Khalni Heart Expedition", 90, Rarity.COMMON, mage.cards.k.KhalniHeartExpedition.class));
-        cards.add(new SetCardInfo("Kibo, Uktabi Prince", 40, Rarity.MYTHIC, mage.cards.k.KiboUktabiPrince.class));
+        cards.add(new SetCardInfo("Kibo, Uktabi Prince", 40, Rarity.MYTHIC, mage.cards.k.KiboUktabiPrince.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Kibo, Uktabi Prince", 835, Rarity.MYTHIC, mage.cards.k.KiboUktabiPrince.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kiki-Jiki, Mirror Breaker", 79, Rarity.MYTHIC, mage.cards.k.KikiJikiMirrorBreaker.class));
         cards.add(new SetCardInfo("King of the Pride", 57, Rarity.UNCOMMON, mage.cards.k.KingOfThePride.class));
         cards.add(new SetCardInfo("Kitesail", 781, Rarity.COMMON, mage.cards.k.Kitesail.class));
@@ -444,6 +455,7 @@ public final class Jumpstart2022 extends ExpansionSet {
         cards.add(new SetCardInfo("Maalfeld Twins", 438, Rarity.COMMON, mage.cards.m.MaalfeldTwins.class));
         cards.add(new SetCardInfo("Mad Ratter", 570, Rarity.UNCOMMON, mage.cards.m.MadRatter.class));
         cards.add(new SetCardInfo("Magmatic Channeler", 571, Rarity.RARE, mage.cards.m.MagmaticChanneler.class));
+        cards.add(new SetCardInfo("Magnanimous Magistrate", 7, Rarity.UNCOMMON, mage.cards.m.MagnanimousMagistrate.class));
         cards.add(new SetCardInfo("Magnifying Glass", 95, Rarity.UNCOMMON, mage.cards.m.MagnifyingGlass.class));
         cards.add(new SetCardInfo("Make a Stand", 211, Rarity.UNCOMMON, mage.cards.m.MakeAStand.class));
         cards.add(new SetCardInfo("Mammoth Spider", 687, Rarity.COMMON, mage.cards.m.MammothSpider.class));
@@ -469,6 +481,7 @@ public final class Jumpstart2022 extends ExpansionSet {
         cards.add(new SetCardInfo("Michiko Konda, Truth Seeker", 215, Rarity.RARE, mage.cards.m.MichikoKondaTruthSeeker.class));
         cards.add(new SetCardInfo("Midnight Guard", 216, Rarity.COMMON, mage.cards.m.MidnightGuard.class));
         cards.add(new SetCardInfo("Might of the Masses", 690, Rarity.COMMON, mage.cards.m.MightOfTheMasses.class));
+        cards.add(new SetCardInfo("Mild-Mannered Librarian", 41, Rarity.UNCOMMON, mage.cards.m.MildManneredLibrarian.class));
         cards.add(new SetCardInfo("Military Intelligence", 322, Rarity.UNCOMMON, mage.cards.m.MilitaryIntelligence.class));
         cards.add(new SetCardInfo("Miraculous Recovery", 217, Rarity.UNCOMMON, mage.cards.m.MiraculousRecovery.class));
         cards.add(new SetCardInfo("Mire Blight", 442, Rarity.COMMON, mage.cards.m.MireBlight.class));
@@ -476,6 +489,7 @@ public final class Jumpstart2022 extends ExpansionSet {
         cards.add(new SetCardInfo("Mirror Image", 62, Rarity.UNCOMMON, mage.cards.m.MirrorImage.class));
         cards.add(new SetCardInfo("Mishra's Factory", 816, Rarity.UNCOMMON, mage.cards.m.MishrasFactory.class));
         cards.add(new SetCardInfo("Mistwalker", 323, Rarity.COMMON, mage.cards.m.Mistwalker.class));
+        cards.add(new SetCardInfo("Mizzix, Replica Rider", 35, Rarity.RARE, mage.cards.m.MizzixReplicaRider.class));
         cards.add(new SetCardInfo("Moldgraf Millipede", 691, Rarity.COMMON, mage.cards.m.MoldgrafMillipede.class));
         cards.add(new SetCardInfo("Moment of Craving", 444, Rarity.COMMON, mage.cards.m.MomentOfCraving.class));
         cards.add(new SetCardInfo("Moment of Triumph", 218, Rarity.COMMON, mage.cards.m.MomentOfTriumph.class));
@@ -486,6 +500,8 @@ public final class Jumpstart2022 extends ExpansionSet {
         cards.add(new SetCardInfo("Morkrut Banshee", 121, Rarity.UNCOMMON, mage.cards.m.MorkrutBanshee.class));
         cards.add(new SetCardInfo("Mortuary Mire", 817, Rarity.COMMON, mage.cards.m.MortuaryMire.class));
         cards.add(new SetCardInfo("Mountain", 107, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 108, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 109, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mudbutton Torchrunner", 574, Rarity.COMMON, mage.cards.m.MudbuttonTorchrunner.class));
         cards.add(new SetCardInfo("Multiple Choice", 325, Rarity.RARE, mage.cards.m.MultipleChoice.class));
         cards.add(new SetCardInfo("Murder Investigation", 219, Rarity.UNCOMMON, mage.cards.m.MurderInvestigation.class));
@@ -511,6 +527,7 @@ public final class Jumpstart2022 extends ExpansionSet {
         cards.add(new SetCardInfo("Ob Nixilis's Cruelty", 451, Rarity.COMMON, mage.cards.o.ObNixilissCruelty.class));
         cards.add(new SetCardInfo("Ob Nixilis, the Hate-Twisted", 450, Rarity.UNCOMMON, mage.cards.o.ObNixilisTheHateTwisted.class));
         cards.add(new SetCardInfo("Octoprophet", 329, Rarity.COMMON, mage.cards.o.Octoprophet.class));
+        cards.add(new SetCardInfo("Ogre Battlecaster", 36, Rarity.RARE, mage.cards.o.OgreBattlecaster.class));
         cards.add(new SetCardInfo("Ogre Slumlord", 71, Rarity.RARE, mage.cards.o.OgreSlumlord.class));
         cards.add(new SetCardInfo("Ondu Giant", 698, Rarity.COMMON, mage.cards.o.OnduGiant.class));
         cards.add(new SetCardInfo("One With the Wind", 330, Rarity.COMMON, mage.cards.o.OneWithTheWind.class));
@@ -548,10 +565,14 @@ public final class Jumpstart2022 extends ExpansionSet {
         cards.add(new SetCardInfo("Pillardrop Rescuer", 226, Rarity.COMMON, mage.cards.p.PillardropRescuer.class));
         cards.add(new SetCardInfo("Pious Wayfarer", 227, Rarity.COMMON, mage.cards.p.PiousWayfarer.class));
         cards.add(new SetCardInfo("Piranha Marsh", 818, Rarity.COMMON, mage.cards.p.PiranhaMarsh.class));
+        cards.add(new SetCardInfo("Pirated Copy", 16, Rarity.MYTHIC, mage.cards.p.PiratedCopy.class));
         cards.add(new SetCardInfo("Pit Keeper", 455, Rarity.COMMON, mage.cards.p.PitKeeper.class));
         cards.add(new SetCardInfo("Plague Spitter", 456, Rarity.UNCOMMON, mage.cards.p.PlagueSpitter.class));
         cards.add(new SetCardInfo("Plaguecrafter", 72, Rarity.UNCOMMON, mage.cards.p.Plaguecrafter.class));
+        cards.add(new SetCardInfo("Plains", 100, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 98, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 99, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Planar Atlas", 51, Rarity.UNCOMMON, mage.cards.p.PlanarAtlas.class));
         cards.add(new SetCardInfo("Plundering Predator", 37, Rarity.COMMON, mage.cards.p.PlunderingPredator.class));
         cards.add(new SetCardInfo("Pounce", 707, Rarity.COMMON, mage.cards.p.Pounce.class));
         cards.add(new SetCardInfo("Pouncing Lynx", 228, Rarity.COMMON, mage.cards.p.PouncingLynx.class));
@@ -579,6 +600,7 @@ public final class Jumpstart2022 extends ExpansionSet {
         cards.add(new SetCardInfo("Ram Through", 91, Rarity.COMMON, mage.cards.r.RamThrough.class));
         cards.add(new SetCardInfo("Rambunctious Mutt", 231, Rarity.COMMON, mage.cards.r.RambunctiousMutt.class));
         cards.add(new SetCardInfo("Rampaging Baloths", 715, Rarity.RARE, mage.cards.r.RampagingBaloths.class));
+        cards.add(new SetCardInfo("Rampaging Growth", 43, Rarity.UNCOMMON, mage.cards.r.RampagingGrowth.class));
         cards.add(new SetCardInfo("Rapacious Dragon", 80, Rarity.UNCOMMON, mage.cards.r.RapaciousDragon.class));
         cards.add(new SetCardInfo("Ravenous Giant", 585, Rarity.UNCOMMON, mage.cards.r.RavenousGiant.class));
         cards.add(new SetCardInfo("Raze the Effigy", 586, Rarity.COMMON, mage.cards.r.RazeTheEffigy.class));
@@ -610,6 +632,7 @@ public final class Jumpstart2022 extends ExpansionSet {
         cards.add(new SetCardInfo("Rosethorn Halberd", 722, Rarity.COMMON, mage.cards.r.RosethornHalberd.class));
         cards.add(new SetCardInfo("Ruin in Their Wake", 132, Rarity.UNCOMMON, mage.cards.r.RuinInTheirWake.class));
         cards.add(new SetCardInfo("Rummaging Goblin", 591, Rarity.COMMON, mage.cards.r.RummagingGoblin.class));
+        cards.add(new SetCardInfo("Runadi, Behemoth Caller", 44, Rarity.RARE, mage.cards.r.RunadiBehemothCaller.class));
         cards.add(new SetCardInfo("Runed Servitor", 794, Rarity.COMMON, mage.cards.r.RunedServitor.class));
         cards.add(new SetCardInfo("Rush of Adrenaline", 592, Rarity.COMMON, mage.cards.r.RushOfAdrenaline.class));
         cards.add(new SetCardInfo("Ruthless Disposal", 462, Rarity.UNCOMMON, mage.cards.r.RuthlessDisposal.class));
@@ -693,7 +716,8 @@ public final class Jumpstart2022 extends ExpansionSet {
         cards.add(new SetCardInfo("Steelgaze Griffin", 351, Rarity.COMMON, mage.cards.s.SteelgazeGriffin.class));
         cards.add(new SetCardInfo("Steppe Lynx", 251, Rarity.COMMON, mage.cards.s.SteppeLynx.class));
         cards.add(new SetCardInfo("Stinging Lionfish", 352, Rarity.UNCOMMON, mage.cards.s.StingingLionfish.class));
-        cards.add(new SetCardInfo("Stitcher's Supplier", 73, Rarity.UNCOMMON, mage.cards.s.StitchersSupplier.class));
+        cards.add(new SetCardInfo("Stitcher's Supplier", 472, Rarity.UNCOMMON, mage.cards.s.StitchersSupplier.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Stitcher's Supplier", 73, Rarity.UNCOMMON, mage.cards.s.StitchersSupplier.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Stolen by the Fae", 353, Rarity.RARE, mage.cards.s.StolenByTheFae.class));
         cards.add(new SetCardInfo("Stonybrook Angler", 354, Rarity.COMMON, mage.cards.s.StonybrookAngler.class));
         cards.add(new SetCardInfo("Storm Fleet Pyromancer", 608, Rarity.COMMON, mage.cards.s.StormFleetPyromancer.class));
@@ -705,6 +729,8 @@ public final class Jumpstart2022 extends ExpansionSet {
         cards.add(new SetCardInfo("Svyelun of Sea and Sky", 356, Rarity.MYTHIC, mage.cards.s.SvyelunOfSeaAndSky.class));
         cards.add(new SetCardInfo("Swaggering Corsair", 611, Rarity.COMMON, mage.cards.s.SwaggeringCorsair.class));
         cards.add(new SetCardInfo("Swamp", 104, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 105, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 106, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swarm Shambler", 734, Rarity.RARE, mage.cards.s.SwarmShambler.class));
         cards.add(new SetCardInfo("Swarm of Bloodflies", 127, Rarity.UNCOMMON, mage.cards.s.SwarmOfBloodflies.class));
         cards.add(new SetCardInfo("Swift Kick", 612, Rarity.COMMON, mage.cards.s.SwiftKick.class));
@@ -725,7 +751,8 @@ public final class Jumpstart2022 extends ExpansionSet {
         cards.add(new SetCardInfo("Tezzeret, Artifice Master", 360, Rarity.MYTHIC, mage.cards.t.TezzeretArtificeMaster.class));
         cards.add(new SetCardInfo("Thaumaturge's Familiar", 802, Rarity.COMMON, mage.cards.t.ThaumaturgesFamiliar.class));
         cards.add(new SetCardInfo("The Circle of Loyalty", 166, Rarity.MYTHIC, mage.cards.t.TheCircleOfLoyalty.class));
-        cards.add(new SetCardInfo("Thermo-Alchemist", 83, Rarity.COMMON, mage.cards.t.ThermoAlchemist.class));
+        cards.add(new SetCardInfo("Thermo-Alchemist", 613, Rarity.COMMON, mage.cards.t.ThermoAlchemist.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Thermo-Alchemist", 83, Rarity.COMMON, mage.cards.t.ThermoAlchemist.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thopter Spy Network", 361, Rarity.RARE, mage.cards.t.ThopterSpyNetwork.class));
         cards.add(new SetCardInfo("Thraben Inspector", 255, Rarity.COMMON, mage.cards.t.ThrabenInspector.class));
         cards.add(new SetCardInfo("Thrashing Brontodon", 92, Rarity.UNCOMMON, mage.cards.t.ThrashingBrontodon.class));
@@ -746,7 +773,8 @@ public final class Jumpstart2022 extends ExpansionSet {
         cards.add(new SetCardInfo("Tormenting Voice", 615, Rarity.COMMON, mage.cards.t.TormentingVoice.class));
         cards.add(new SetCardInfo("Towering Gibbon", 46, Rarity.UNCOMMON, mage.cards.t.ToweringGibbon.class));
         cards.add(new SetCardInfo("Tragic Lesson", 115, Rarity.COMMON, mage.cards.t.TragicLesson.class));
-        cards.add(new SetCardInfo("Tragic Slip", 74, Rarity.COMMON, mage.cards.t.TragicSlip.class));
+        cards.add(new SetCardInfo("Tragic Slip", 478, Rarity.COMMON, mage.cards.t.TragicSlip.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Tragic Slip", 74, Rarity.COMMON, mage.cards.t.TragicSlip.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Trained Caracal", 256, Rarity.COMMON, mage.cards.t.TrainedCaracal.class));
         cards.add(new SetCardInfo("Transcendent Envoy", 257, Rarity.COMMON, mage.cards.t.TranscendentEnvoy.class));
         cards.add(new SetCardInfo("Tree of Perdition", 75, Rarity.MYTHIC, mage.cards.t.TreeOfPerdition.class));
@@ -772,7 +800,8 @@ public final class Jumpstart2022 extends ExpansionSet {
         cards.add(new SetCardInfo("Urza's Tower", 831, Rarity.COMMON, mage.cards.u.UrzasTower.class));
         cards.add(new SetCardInfo("Valkyrie Harbinger", 261, Rarity.RARE, mage.cards.v.ValkyrieHarbinger.class));
         cards.add(new SetCardInfo("Valor in Akros", 262, Rarity.UNCOMMON, mage.cards.v.ValorInAkros.class));
-        cards.add(new SetCardInfo("Valorous Stance", 59, Rarity.UNCOMMON, mage.cards.v.ValorousStance.class));
+        cards.add(new SetCardInfo("Valorous Stance", 263, Rarity.UNCOMMON, mage.cards.v.ValorousStance.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Valorous Stance", 59, Rarity.UNCOMMON, mage.cards.v.ValorousStance.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Valorous Steed", 264, Rarity.COMMON, mage.cards.v.ValorousSteed.class));
         cards.add(new SetCardInfo("Vampire Envoy", 483, Rarity.COMMON, mage.cards.v.VampireEnvoy.class));
         cards.add(new SetCardInfo("Vampiric Rites", 484, Rarity.UNCOMMON, mage.cards.v.VampiricRites.class));

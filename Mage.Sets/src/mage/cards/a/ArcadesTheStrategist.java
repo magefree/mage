@@ -6,7 +6,7 @@ import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.combat.CanAttackAsThoughItDidntHaveDefenderAllEffect;
-import mage.abilities.effects.common.ruleModifying.CombatDamageByToughnessEffect;
+import mage.abilities.effects.common.ruleModifying.CombatDamageByToughnessControlledEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.VigilanceAbility;
@@ -24,19 +24,18 @@ import java.util.UUID;
  */
 public final class ArcadesTheStrategist extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter
-            = new FilterControlledCreaturePermanent("a creature with defender");
-    private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent();
+    private static final FilterControlledCreaturePermanent defenderSingle = new FilterControlledCreaturePermanent("a creature with defender");
+    private static final FilterCreaturePermanent defenderPlural = new FilterCreaturePermanent("creature you control with defender");
 
     static {
-        filter.add(new AbilityPredicate(DefenderAbility.class));
-        filter2.add(new AbilityPredicate(DefenderAbility.class));
+        defenderSingle.add(new AbilityPredicate(DefenderAbility.class));
+        defenderPlural.add(new AbilityPredicate(DefenderAbility.class));
     }
 
     public ArcadesTheStrategist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{W}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELDER);
         this.subtype.add(SubType.DRAGON);
         this.power = new MageInt(3);
@@ -50,13 +49,13 @@ public final class ArcadesTheStrategist extends CardImpl {
 
         // Whenever a creature with defender enters the battlefield under your control, draw a card.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
-                new DrawCardSourceControllerEffect(1), filter
+                new DrawCardSourceControllerEffect(1), defenderSingle
         ));
 
         // Each creature you control with defender assigns combat damage equal to its toughness rather than its power and can attack as though it didn't have defender.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new CombatDamageByToughnessEffect(filter2, true).setText("Each creature you control with defender assigns combat damage equal to its toughness rather than its power"));
+        Ability ability = new SimpleStaticAbility(new CombatDamageByToughnessControlledEffect(defenderPlural));
         ability.addEffect(new CanAttackAsThoughItDidntHaveDefenderAllEffect(
-                Duration.WhileOnBattlefield, filter
+                Duration.WhileOnBattlefield, defenderSingle
         ).setText("and can attack as though it didn't have defender"));
         this.addAbility(ability);
     }

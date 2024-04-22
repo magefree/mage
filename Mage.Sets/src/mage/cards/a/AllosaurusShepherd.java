@@ -48,7 +48,7 @@ public class AllosaurusShepherd extends CardImpl {
         //4GG: Until end of turn, each Elf creature you control has base power and toughness 5/5 
         // and becomes a Dinosaur in addition to its other creature types.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new SetBasePowerToughnessAllEffect(5, 5, Duration.EndOfTurn, elvesFilter, true)
+                new SetBasePowerToughnessAllEffect(5, 5, Duration.EndOfTurn, elvesFilter)
                         .setText("Until end of turn, each Elf creature you control has base power and toughness 5/5"),
                 new ManaCostsImpl<>("{4}{G}{G}"));
         ability.addEffect(new CreaturesBecomeOtherTypeEffect(elvesFilter, SubType.DINOSAUR, Duration.EndOfTurn)

@@ -55,7 +55,7 @@ class StrategySchmategyffect extends OneShotEffect {
                 "<br>6 - Repeat this process two more times";
     }
 
-    public StrategySchmategyffect(final StrategySchmategyffect effect) {
+    private StrategySchmategyffect(final StrategySchmategyffect effect) {
         super(effect);
     }
 

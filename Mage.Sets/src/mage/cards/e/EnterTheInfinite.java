@@ -79,12 +79,12 @@ class CardsInControllerLibraryCount implements DynamicValue {
 
 class PutCardOnLibraryEffect extends OneShotEffect {
 
-    public PutCardOnLibraryEffect() {
+    PutCardOnLibraryEffect() {
         super(Outcome.DrawCard);
         staticText = "Then put a card from your hand on top of your library";
     }
 
-    public PutCardOnLibraryEffect(final PutCardOnLibraryEffect effect) {
+    private PutCardOnLibraryEffect(final PutCardOnLibraryEffect effect) {
         super(effect);
     }
 
@@ -111,12 +111,12 @@ class PutCardOnLibraryEffect extends OneShotEffect {
 
 class MaximumHandSizeEffect extends MaximumHandSizeControllerEffect {
 
-    public MaximumHandSizeEffect() {
+    MaximumHandSizeEffect() {
         super(Integer.MAX_VALUE, Duration.Custom, MaximumHandSizeControllerEffect.HandSizeModification.SET);
         staticText = "You have no maximum hand size until your next turn";
     }
 
-    public MaximumHandSizeEffect(final MaximumHandSizeEffect effect) {
+    private MaximumHandSizeEffect(final MaximumHandSizeEffect effect) {
         super(effect);
     }
 

@@ -21,6 +21,9 @@ public class SourceMatchesFilterCondition implements Condition {
     }
 
     public SourceMatchesFilterCondition(String text, FilterPermanent filter) {
+        if (filter == null) {
+            throw new IllegalArgumentException("Wrong code usage: filter param can't be empty");
+        }
         this.FILTER = filter;
         this.text = text;
     }

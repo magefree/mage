@@ -45,6 +45,10 @@ public enum CardType {
         return text;
     }
 
+    public String getPluralName() {
+        return text.endsWith("y") ? text.substring(0, text.length() - 1) + "ies" : text + 's';
+    }
+
     public static CardType fromString(String value) {
         for (CardType ct : CardType.values()) {
             if (ct.toString().equals(value)) {

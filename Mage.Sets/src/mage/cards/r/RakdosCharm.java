@@ -56,7 +56,7 @@ public final class RakdosCharm extends CardImpl {
             staticText = "each creature deals 1 damage to its controller";
         }
 
-        public RakdosCharmDamageEffect(final RakdosCharmDamageEffect effect) {
+        private RakdosCharmDamageEffect(final RakdosCharmDamageEffect effect) {
             super(effect);
         }
 

@@ -23,7 +23,7 @@ public class PayVariableLifeCost extends VariableCostImpl {
                 .append(xText).append(' ').append("life").toString();
     }
 
-    public PayVariableLifeCost(final PayVariableLifeCost cost) {
+    protected PayVariableLifeCost(final PayVariableLifeCost cost) {
         super(cost);
     }
 

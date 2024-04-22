@@ -44,7 +44,7 @@ public final class Asmoranomardicadaistinaculdacar extends CardImpl {
     public Asmoranomardicadaistinaculdacar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(3);
@@ -66,7 +66,7 @@ public final class Asmoranomardicadaistinaculdacar extends CardImpl {
         // Sacrifice two Foods: Target creature deals 6 damage to itself.
         Ability ability = new SimpleActivatedAbility(
                 new AsmoranomardicadaistinaculdacarEffect(),
-                new SacrificeTargetCost(new TargetControlledPermanent(2, filter2))
+                new SacrificeTargetCost(2, filter2)
         );
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

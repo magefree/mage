@@ -66,7 +66,7 @@ class PurgatoryTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new PurgatoryExileEffect(), false);
     }
 
-    PurgatoryTriggeredAbility(PurgatoryTriggeredAbility ability) {
+    private PurgatoryTriggeredAbility(final PurgatoryTriggeredAbility ability) {
         super(ability);
     }
 
@@ -109,12 +109,12 @@ class PurgatoryTriggeredAbility extends TriggeredAbilityImpl {
 
 class PurgatoryExileEffect extends OneShotEffect {
 
-    public PurgatoryExileEffect() {
+    PurgatoryExileEffect() {
         super(Outcome.Benefit);
         staticText = "exile that card";
     }
 
-    public PurgatoryExileEffect(PurgatoryExileEffect effect) {
+    private PurgatoryExileEffect(final PurgatoryExileEffect effect) {
         super(effect);
     }
     
@@ -143,12 +143,12 @@ class PurgatoryExileEffect extends OneShotEffect {
 
 class PurgatoryReturnEffect extends OneShotEffect {
 
-    public PurgatoryReturnEffect() {
+    PurgatoryReturnEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "return a card exiled with {this} to the battlefield";
     }
 
-    public PurgatoryReturnEffect(final PurgatoryReturnEffect effect) {
+    private PurgatoryReturnEffect(final PurgatoryReturnEffect effect) {
         super(effect);
     }
 

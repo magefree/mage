@@ -34,26 +34,26 @@ public abstract class TargetImpl implements Target {
     protected boolean chosen = false;
     // is the target handled as targeted spell/ability (notTarget = true is used for not targeted effects like e.g. sacrifice)
     protected boolean notTarget = false;
-    protected boolean atRandom = false;
+    protected boolean atRandom = false; // for inner choose logic
     protected UUID targetController = null; // if null the ability controller is the targetController
     protected UUID abilityController = null; // only used if target controller != ability controller
 
     protected int targetTag; // can be set if other target check is needed (AnotherTargetPredicate)
     protected String chooseHint = null; // UI choose hints after target name
-    protected boolean shouldReportEvents = true;
+    protected boolean shouldReportEvents = true; // generates TARGET and TARGETED events (can be disabled in non targeting mode, e.g. on target change)
 
     @Override
     public abstract TargetImpl copy();
 
-    public TargetImpl() {
+    protected TargetImpl() {
         this(false);
     }
 
-    public TargetImpl(boolean notTarget) {
+    protected TargetImpl(boolean notTarget) {
         this.notTarget = notTarget;
     }
 
-    public TargetImpl(final TargetImpl target) {
+    protected TargetImpl(final TargetImpl target) {
         this.targetName = target.targetName;
         this.zone = target.zone;
         this.maxNumberOfTargets = target.maxNumberOfTargets;
@@ -103,7 +103,10 @@ public abstract class TargetImpl implements Target {
         StringBuilder sb = new StringBuilder();
         int min = getMinNumberOfTargets();
         int max = getMaxNumberOfTargets();
-        if (!getTargetName().startsWith("X") && (min != 1 || max != 1)) {
+        if (min > 0 && max == Integer.MAX_VALUE) {
+            sb.append(CardUtil.numberToText(min));
+            sb.append(" or more ");
+        } else if (!getTargetName().startsWith("X") && (min != 1 || max != 1)) {
             if (min < max && max != Integer.MAX_VALUE) {
                 if (min == 1 && max == 2) {
                     sb.append("one or ");
@@ -116,7 +119,19 @@ public abstract class TargetImpl implements Target {
             sb.append(CardUtil.numberToText(max));
             sb.append(' ');
         }
-        if (!isNotTarget() && !getTargetName().contains("target")) {
+        boolean addTargetWord = false;
+        if (!isNotTarget()) {
+            addTargetWord = true;
+            if (getTargetName().contains("target ")) {
+                addTargetWord = false;
+            } else if (getTargetName().endsWith("any target")
+                    || getTargetName().endsWith("any other target")) {
+                addTargetWord = false;
+            }
+            // endsWith needs to be specific.
+            // e.g. "spell with a single target" => need to prefix with "target ".
+        }
+        if (addTargetWord) {
             sb.append("target ");
         }
         if (isNotTarget() && min == 1 && max == 1) {
@@ -350,7 +365,7 @@ public abstract class TargetImpl implements Target {
                 }
             } else {
                 // Try to autochoosen
-                UUID autoChosenId = tryToAutoChoose(playerId, source, game);
+                UUID autoChosenId = required ? tryToAutoChoose(playerId, source, game) : null;
                 if (autoChosenId != null) {
                     addTarget(autoChosenId, source, game);
                 } else if (!targetController.chooseTarget(outcome, this, source, game)) { // If couldn't autochoose ask player
@@ -531,8 +546,9 @@ public abstract class TargetImpl implements Target {
     }
 
     @Override
-    public void setNotTarget(boolean notTarget) {
+    public TargetImpl withNotTarget(boolean notTarget) {
         this.notTarget = notTarget;
+        return this;
     }
 
     @Override

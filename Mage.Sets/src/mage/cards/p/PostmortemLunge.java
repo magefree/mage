@@ -63,12 +63,12 @@ enum PostmortemLungeAdjuster implements TargetAdjuster {
 
 class PostmortemLungeEffect extends OneShotEffect {
 
-    public PostmortemLungeEffect() {
+    PostmortemLungeEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Return target creature card with mana value X from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step";
     }
 
-    public PostmortemLungeEffect(final PostmortemLungeEffect effect) {
+    private PostmortemLungeEffect(final PostmortemLungeEffect effect) {
         super(effect);
     }
 

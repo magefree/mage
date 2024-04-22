@@ -10,7 +10,6 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class LevelUpAbility extends ActivatedAbilityImpl {
@@ -20,7 +19,7 @@ public class LevelUpAbility extends ActivatedAbilityImpl {
         this.timing = TimingRule.SORCERY;
     }
 
-    public LevelUpAbility(final LevelUpAbility ability) {
+    protected LevelUpAbility(final LevelUpAbility ability) {
         super(ability);
     }
 
@@ -31,7 +30,7 @@ public class LevelUpAbility extends ActivatedAbilityImpl {
 
     @Override
     public String getRule() {
-        return new StringBuilder("Level up ").append(manaCostsToPay.getText())
-                .append(" <i>(").append(manaCostsToPay.getText()).append(": Put a level counter on this. Level up only as a sorcery.)</i>").toString();
+        return new StringBuilder("Level up ").append(getManaCostsToPay().getText())
+                .append(" <i>(").append(getManaCostsToPay().getText()).append(": Put a level counter on this. Level up only as a sorcery.)</i>").toString();
     }
 }

@@ -1,38 +1,33 @@
-
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.ZoneChangeTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.SacrificeTargetEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.EnchantAbility;
-import mage.abilities.keyword.VanishingSacrificeAbility;
-import mage.abilities.keyword.VanishingUpkeepAbility;
+import mage.abilities.keyword.VanishingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class RealityAcid extends CardImpl {
 
     public RealityAcid(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
         this.subtype.add(SubType.AURA);
 
         // Enchant permanent
@@ -43,11 +38,7 @@ public final class RealityAcid extends CardImpl {
         this.addAbility(ability);
 
         // Vanishing 3
-        ability = new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.TIME.createInstance(3)));
-        ability.setRuleVisible(false);
-        this.addAbility(ability);
-        this.addAbility(new VanishingUpkeepAbility(3, "aura"));
-        this.addAbility(new VanishingSacrificeAbility());
+        this.addAbility(new VanishingAbility(3));
 
         // When Reality Acid leaves the battlefield, enchanted permanent's controller sacrifices it.
         Effect effect = new SacrificeTargetEffect("enchanted permanent's controller sacrifices it");
@@ -70,7 +61,7 @@ class RealityAcidTriggeredAbility extends ZoneChangeTriggeredAbility {
         super(Zone.BATTLEFIELD, null, effect, "When {this} leaves the battlefield, ", optional);
     }
 
-    public RealityAcidTriggeredAbility(RealityAcidTriggeredAbility ability) {
+    private RealityAcidTriggeredAbility(final RealityAcidTriggeredAbility ability) {
         super(ability);
     }
 

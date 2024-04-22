@@ -1,4 +1,3 @@
-
 package mage.cards.a;
 
 import java.util.UUID;
@@ -58,10 +57,10 @@ class ArashinWarBeastTriggeredAbility extends TriggeredAbilityImpl {
     public ArashinWarBeastTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
         this.usedForCombatDamageStep = false;
-        setTriggerPhrase("Whenever {this} deals combat damage to one or more blockers, ");
+        setTriggerPhrase("Whenever {this} deals combat damage to one or more blocking creatures, ");
     }
 
-    public ArashinWarBeastTriggeredAbility(final ArashinWarBeastTriggeredAbility ability) {
+    private ArashinWarBeastTriggeredAbility(final ArashinWarBeastTriggeredAbility ability) {
         super(ability);
         this.usedForCombatDamageStep = ability.usedForCombatDamageStep;
     }

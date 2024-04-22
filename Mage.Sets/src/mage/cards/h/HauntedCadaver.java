@@ -1,12 +1,12 @@
-
 package mage.cards.h;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
+import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.SacrificeSourceEffect;
+import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
@@ -27,11 +27,13 @@ public final class HauntedCadaver extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever Haunted Cadaver deals combat damage to a player, you may sacrifice it. If you do, that player discards three cards.
-        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new SacrificeSourceEffect(), true, true);
-        ability.addEffect( new DiscardTargetEffect(3));
+        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new DoIfCostPaid(
+                new DiscardTargetEffect(3), new SacrificeSourceCost()
+        ), false, true);
         this.addAbility(ability);
+
         // Morph {1}{B}
-        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{1}{B}")));
+        this.addAbility(new MorphAbility(this, new ManaCostsImpl<>("{1}{B}")));
     }
 
     private HauntedCadaver(final HauntedCadaver card) {

@@ -27,7 +27,7 @@ public final class PhyrexianJuggernaut extends CardImpl {
         this.addAbility(new AttacksEachCombatStaticAbility());
     }
 
-    public PhyrexianJuggernaut (final PhyrexianJuggernaut card) {
+    private PhyrexianJuggernaut(final PhyrexianJuggernaut card) {
         super(card);
     }
 

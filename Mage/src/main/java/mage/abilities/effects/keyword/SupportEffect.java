@@ -11,7 +11,6 @@ import mage.target.common.TargetCreaturePermanent;
 import mage.util.CardUtil;
 
 /**
- *
  * @author LevelX2
  */
 public class SupportEffect extends AddCountersTargetEffect {
@@ -29,7 +28,7 @@ public class SupportEffect extends AddCountersTargetEffect {
         staticText = setText();
     }
 
-    public SupportEffect(final SupportEffect effect) {
+    protected SupportEffect(final SupportEffect effect) {
         super(effect);
         this.amountSupportTargets = effect.amountSupportTargets;
         this.otherPermanent = effect.otherPermanent;

@@ -38,7 +38,7 @@ public final class SlinnVodaTheRisingDeep extends CardImpl {
     public SlinnVodaTheRisingDeep(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{6}{U}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.LEVIATHAN);
         this.power = new MageInt(8);
         this.toughness = new MageInt(8);

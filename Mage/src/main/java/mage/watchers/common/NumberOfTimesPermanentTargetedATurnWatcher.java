@@ -1,15 +1,16 @@
-
-
 package mage.watchers.common;
 
-import java.util.HashMap;
-import java.util.Map;
 import mage.MageObjectReference;
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.game.stack.StackObject;
+import mage.util.CardUtil;
 import mage.watchers.Watcher;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -25,24 +26,23 @@ public class NumberOfTimesPermanentTargetedATurnWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.TARGETED) {
-            Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null) {
-                MageObjectReference mor = new MageObjectReference(permanent, game);
-                int amount = 0;
-                if (permanentsTargeted.containsKey(mor)) {
-                    amount = permanentsTargeted.get(mor);
-                }
-                permanentsTargeted.put(mor, ++amount);
-            }
+        if (event.getType() != GameEvent.EventType.TARGETED) {
+            return;
+        }
+        StackObject targetingObject = CardUtil.getTargetingStackObject(event, game);
+        if (targetingObject == null || CardUtil.checkTargetedEventAlreadyUsed(this.getKey(), targetingObject, event, game)) {
+            return;
+        }
+        Permanent permanent = game.getPermanent(event.getTargetId());
+        if (permanent != null) {
+            MageObjectReference mor = new MageObjectReference(permanent, game);
+            int nTimes = permanentsTargeted.getOrDefault(mor, 0);
+            permanentsTargeted.put(mor, nTimes + 1);
         }
     }
 
-    public boolean notMoreThanOnceTargetedThisTurn(Permanent creature, Game game) {
-        if (permanentsTargeted.containsKey(new MageObjectReference(creature, game))) {
-            return permanentsTargeted.get(new MageObjectReference(creature, game)) < 2;
-        }
-        return true;
+    public int numTimesTargetedThisTurn(Permanent permanent, Game game) {
+        return permanentsTargeted.getOrDefault(new MageObjectReference(permanent, game), 0);
     }
 
     @Override

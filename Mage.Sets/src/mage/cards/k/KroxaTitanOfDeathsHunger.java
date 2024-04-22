@@ -34,7 +34,7 @@ public final class KroxaTitanOfDeathsHunger extends CardImpl {
     public KroxaTitanOfDeathsHunger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELDER);
         this.subtype.add(SubType.GIANT);
         this.power = new MageInt(6);

@@ -85,14 +85,14 @@ class MishrasResearchDeskEffect extends OneShotEffect {
                 break;
             default:
                 TargetCard target = new TargetCardInExile(StaticFilters.FILTER_CARD);
-                target.setNotTarget(true);
+                target.withNotTarget(true);
                 player.choose(outcome, cards, target, source, game);
                 card = game.getCard(target.getFirstTarget());
         }
         if (card == null) {
             return false;
         }
-        CardUtil.makeCardPlayable(game, source, card, Duration.UntilEndOfYourNextTurn, false);
+        CardUtil.makeCardPlayable(game, source, card, false, Duration.UntilEndOfYourNextTurn, false);
         return true;
     }
 }

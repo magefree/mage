@@ -90,7 +90,7 @@ class ManascapeRefractorGainAbilitiesEffect extends ContinuousEffectImpl {
                     || perm.getAbilities(game)
                     .stream()
                     .noneMatch(ability.getClass()::isInstance)) {
-                perm.addAbility(ability, source.getSourceId(), game);
+                perm.addAbility(ability, source.getSourceId(), game, true);
             }
         }
         return true;

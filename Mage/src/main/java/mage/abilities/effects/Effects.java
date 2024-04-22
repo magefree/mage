@@ -18,7 +18,7 @@ public class Effects extends ArrayList<Effect> {
         this.addAll(Arrays.asList(effects));
     }
 
-    public Effects(final Effects effects) {
+    protected Effects(final Effects effects) {
         for (Effect effect : effects) {
             this.add(effect.copy());
         }
@@ -105,6 +105,7 @@ public class Effects extends ArrayList<Effect> {
         // add punctuation to very last rule.
         if (lastRule != null && lastRule.length() > 3
                 && !lastRule.endsWith(".")
+                && !lastRule.endsWith("!")
                 && !lastRule.endsWith("\"")
                 && !lastRule.endsWith(".]")
                 && !lastRule.startsWith("<b>LEVEL ")

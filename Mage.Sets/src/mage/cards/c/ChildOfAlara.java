@@ -21,7 +21,7 @@ public final class ChildOfAlara extends CardImpl {
 
     public ChildOfAlara(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{U}{B}{R}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.AVATAR);
 
         this.power = new MageInt(6);

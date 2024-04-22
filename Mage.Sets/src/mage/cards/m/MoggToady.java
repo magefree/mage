@@ -52,7 +52,7 @@ class MoggToadyCantAttackEffect extends RestrictionEffect {
         staticText = "{this} can't attack unless you control more creatures than defending player";
     }
 
-    MoggToadyCantAttackEffect(final MoggToadyCantAttackEffect effect) {
+    private MoggToadyCantAttackEffect(final MoggToadyCantAttackEffect effect) {
         super(effect);
     }
 
@@ -99,7 +99,7 @@ class MoggToadyCantBlockEffect extends RestrictionEffect {
         staticText = "{this} can't block unless you control more creatures than attacking player";
     }
 
-    MoggToadyCantBlockEffect(final MoggToadyCantBlockEffect effect) {
+    private MoggToadyCantBlockEffect(final MoggToadyCantBlockEffect effect) {
         super(effect);
     }
 

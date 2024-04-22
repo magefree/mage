@@ -23,7 +23,7 @@ public final class ReachThroughMists extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public ReachThroughMists (final ReachThroughMists card) {
+    private ReachThroughMists(final ReachThroughMists card) {
         super(card);
     }
 

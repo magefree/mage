@@ -7,13 +7,13 @@ import mage.constants.SubType;
 import mage.filter.common.FilterLandCard;
 
 /**
- *
  * @author Plopman
  */
-public class MountaincyclingAbility extends CyclingAbility{    
+public class MountaincyclingAbility extends CyclingAbility {
     private static final FilterLandCard filter = new FilterLandCard("Mountain card");
     private static final String text = "Mountaincycling";
-    static{
+
+    static {
         filter.add(SubType.MOUNTAIN.getPredicate());
     }
 
@@ -21,7 +21,7 @@ public class MountaincyclingAbility extends CyclingAbility{
         super(costs, filter, text);
     }
 
-    public MountaincyclingAbility(final MountaincyclingAbility ability) {
+    protected MountaincyclingAbility(final MountaincyclingAbility ability) {
         super(ability);
     }
 

@@ -5,7 +5,7 @@ import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.GainLifeControllerTriggeredAbility;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.ControllerGotLifeCount;
+import mage.abilities.dynamicvalue.common.ControllerGainedLifeCount;
 import mage.abilities.effects.common.DoWhenCostPaid;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
@@ -42,7 +42,7 @@ public final class RodolfDuskbringer extends CardImpl {
     public RodolfDuskbringer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.VAMPIRE);
         this.subtype.add(SubType.ANGEL);
         this.power = new MageInt(4);
@@ -71,7 +71,7 @@ public final class RodolfDuskbringer extends CardImpl {
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new DoWhenCostPaid(
                 ability, new ManaCostsImpl<>("{1}{W/B}"), "Pay {1}{W/B}?"
-        ), TargetController.YOU, false).addHint(ControllerGotLifeCount.getHint()), new PlayerGainedLifeWatcher());
+        ), TargetController.YOU, false).addHint(ControllerGainedLifeCount.getHint()), new PlayerGainedLifeWatcher());
     }
 
     private RodolfDuskbringer(final RodolfDuskbringer card) {

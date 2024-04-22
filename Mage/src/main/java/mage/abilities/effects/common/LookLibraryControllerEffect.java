@@ -16,7 +16,6 @@ import mage.players.Player;
 import mage.util.CardUtil;
 
 /**
- *
  * @author LevelX, awjackson
  */
 public class LookLibraryControllerEffect extends OneShotEffect {
@@ -44,7 +43,7 @@ public class LookLibraryControllerEffect extends OneShotEffect {
         this.revealCards = false;
     }
 
-    public LookLibraryControllerEffect(final LookLibraryControllerEffect effect) {
+    protected LookLibraryControllerEffect(final LookLibraryControllerEffect effect) {
         super(effect);
         this.numberOfCards = effect.numberOfCards.copy();
         this.putLookedCards = effect.putLookedCards;

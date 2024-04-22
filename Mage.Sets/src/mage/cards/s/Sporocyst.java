@@ -73,6 +73,6 @@ class SporocystEffect extends OneShotEffect {
         int xValue = ManacostVariableValue.ETB.calculate(game, source, this);
         return new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(
                 0, xValue, StaticFilters.FILTER_CARD_BASIC_LANDS
-        ), true, true).apply(game, source);
+        ), true).apply(game, source);
     }
 }

@@ -74,7 +74,7 @@ class FlickerformEffect extends OneShotEffect {
         this.staticText = "Exile enchanted creature and all Auras attached to it. At the beginning of the next end step, return that card to the battlefield under its owner's control. If you do, return the other cards exiled this way to the battlefield under their owners' control attached to that creature";
     }
 
-    public FlickerformEffect(final FlickerformEffect effect) {
+    private FlickerformEffect(final FlickerformEffect effect) {
         super(effect);
     }
 
@@ -135,7 +135,7 @@ class FlickerformReturnEffect extends OneShotEffect {
         this.staticText = "return that card to the battlefield under its owner's control. If you do, return the other cards exiled this way to the battlefield under their owners' control attached to that creature";
     }
 
-    public FlickerformReturnEffect(final FlickerformReturnEffect effect) {
+    private FlickerformReturnEffect(final FlickerformReturnEffect effect) {
         super(effect);
         this.enchantedCardId = effect.enchantedCardId;
         this.exileZoneId = effect.exileZoneId;

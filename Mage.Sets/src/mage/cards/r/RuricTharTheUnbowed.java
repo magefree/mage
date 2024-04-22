@@ -28,7 +28,7 @@ public final class RuricTharTheUnbowed extends CardImpl {
 
     public RuricTharTheUnbowed(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.OGRE);
         this.subtype.add(SubType.WARRIOR);
 
@@ -64,7 +64,7 @@ class RuricTharTheUnbowedAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(6), false);
     }
 
-    public RuricTharTheUnbowedAbility(final RuricTharTheUnbowedAbility ability) {
+    private RuricTharTheUnbowedAbility(final RuricTharTheUnbowedAbility ability) {
         super(ability);
     }
 

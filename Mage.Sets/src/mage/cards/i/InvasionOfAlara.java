@@ -90,7 +90,7 @@ class InvasionOfAlaraEffect extends OneShotEffect {
         castable.retainZone(Zone.EXILED, game);
         if (castable.size() > 1) {
             TargetCard target = new TargetCardInExile(StaticFilters.FILTER_CARD);
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             player.choose(outcome, castable, target, source, game);
             player.moveCards(game.getCard(target.getFirstTarget()), Zone.HAND, source, game);
         } else {

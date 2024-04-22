@@ -57,12 +57,12 @@ public final class ThoughtboundPrimoc extends CardImpl {
 
 class ThoughtboundPrimocEffect extends OneShotEffect {
 
-    public ThoughtboundPrimocEffect() {
+    ThoughtboundPrimocEffect() {
         super(Outcome.GainControl);
         this.staticText = "the player who controls the most Wizards gains control of {this}";
     }
 
-    public ThoughtboundPrimocEffect(final ThoughtboundPrimocEffect effect) {
+    private ThoughtboundPrimocEffect(final ThoughtboundPrimocEffect effect) {
         super(effect);
     }
 

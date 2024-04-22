@@ -17,8 +17,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -30,12 +29,6 @@ import mage.target.targetpointer.FixedTarget;
  */
 public final class FelhideSpiritbinder extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
-
     public FelhideSpiritbinder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
         this.subtype.add(SubType.MINOTAUR);
@@ -46,7 +39,7 @@ public final class FelhideSpiritbinder extends CardImpl {
 
         // <i>Inspired</i> &mdash; Whenever Felhide Spiritbinder becomes untapped, you may pay {1}{R}. If you do, create a token that's a copy of another target creature except it's an enchantment in addition to its other types. It gains haste. Exile it at the beginning of the next end step.
         Ability ability = new InspiredAbility(new DoIfCostPaid(new FelhideSpiritbinderEffect(), new ManaCostsImpl<>("{1}{R}"), "Use effect of {this}?"));
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE));
         this.addAbility(ability);
     }
 
@@ -62,12 +55,12 @@ public final class FelhideSpiritbinder extends CardImpl {
 
 class FelhideSpiritbinderEffect extends OneShotEffect {
 
-    public FelhideSpiritbinderEffect() {
+    FelhideSpiritbinderEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "create a token that's a copy of another target creature except it's an enchantment in addition to its other types. It gains haste. Exile it at the beginning of the next end step";
     }
 
-    public FelhideSpiritbinderEffect(final FelhideSpiritbinderEffect effect) {
+    private FelhideSpiritbinderEffect(final FelhideSpiritbinderEffect effect) {
         super(effect);
     }
 
@@ -81,7 +74,7 @@ class FelhideSpiritbinderEffect extends OneShotEffect {
         Permanent permanent = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
         if (permanent != null) {
             CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(null, CardType.ENCHANTMENT, true);
-            effect.setTargetPointer(getTargetPointer());
+            effect.setTargetPointer(this.getTargetPointer().copy());
             if (effect.apply(game, source)) {
                 for (Permanent tokenPermanent : effect.getAddedPermanents()) {
                     ExileTargetEffect exileEffect = new ExileTargetEffect();

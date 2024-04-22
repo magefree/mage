@@ -49,7 +49,7 @@ class LightmineFieldTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever one or more creatures attack, ");
     }
 
-    public LightmineFieldTriggeredAbility(final LightmineFieldTriggeredAbility ability) {
+    private LightmineFieldTriggeredAbility(final LightmineFieldTriggeredAbility ability) {
         super(ability);
     }
 
@@ -81,12 +81,12 @@ class LightmineFieldTriggeredAbility extends TriggeredAbilityImpl {
 
 class LightmineFieldEffect extends OneShotEffect {
 
-    public LightmineFieldEffect() {
+    LightmineFieldEffect() {
         super(Outcome.Damage);
         this.staticText = "{this} deals damage to each of those creatures equal to the number of attacking creatures";
     }
 
-    public LightmineFieldEffect(final LightmineFieldEffect effect) {
+    private LightmineFieldEffect(final LightmineFieldEffect effect) {
         super(effect);
     }
 

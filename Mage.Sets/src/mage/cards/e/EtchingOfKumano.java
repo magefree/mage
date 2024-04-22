@@ -49,7 +49,7 @@ public final class EtchingOfKumano extends CardImpl {
 
 class EtchingOfKumanoReplacementEffect extends ReplacementEffectImpl {
 
-    public EtchingOfKumanoReplacementEffect() {
+    EtchingOfKumanoReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Exile);
         this.staticText = "If a creature dealt damage this turn by a source you controlled would die, exile it instead";
     }

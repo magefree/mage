@@ -40,7 +40,7 @@ public final class HostileNegotiations extends CardImpl {
 
 class HostileNegotiationsEffect extends OneShotEffect {
 
-    public HostileNegotiationsEffect() {
+    HostileNegotiationsEffect() {
         super(Outcome.DrawCard);
         this.staticText = "Exile the top three cards of your library in a face-down pile, then exile the next top three cards of your library in another face-down pile. Look at the cards in each pile, then turn a pile of your choice face up. An opponent chooses one of those piles. Put all cards in the chosen pile into your hand and the rest into your graveyard";
     }

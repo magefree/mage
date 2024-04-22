@@ -2,6 +2,7 @@
 package mage.abilities.effects.common.ruleModifying;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.constants.Duration;
@@ -10,7 +11,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 
 /**
- *
  * @author Styxo
  */
 public class CantHaveCountersSourceEffect extends ContinuousRuleModifyingEffectImpl {
@@ -20,7 +20,7 @@ public class CantHaveCountersSourceEffect extends ContinuousRuleModifyingEffectI
         staticText = "{this} can't have counters put on it";
     }
 
-    public CantHaveCountersSourceEffect(final CantHaveCountersSourceEffect effect) {
+    protected CantHaveCountersSourceEffect(final CantHaveCountersSourceEffect effect) {
         super(effect);
     }
 

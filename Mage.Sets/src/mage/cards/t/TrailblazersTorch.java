@@ -5,6 +5,7 @@ import mage.abilities.common.BecomesBlockedAttachedTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.TakeTheInitiativeEffect;
+import mage.abilities.hint.common.InitiativeHint;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -27,7 +28,7 @@ public final class TrailblazersTorch extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // When Trailblazer's Torch enters the battlefield, you take the initiative.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new TakeTheInitiativeEffect()));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new TakeTheInitiativeEffect()).addHint(InitiativeHint.instance));
 
         // Whenever equipped creature becomes blocked, it deals 2 damage to each creature blocking it.
         this.addAbility(new BecomesBlockedAttachedTriggeredAbility(

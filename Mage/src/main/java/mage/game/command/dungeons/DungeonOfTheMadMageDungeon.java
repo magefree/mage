@@ -29,7 +29,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class DungeonOfTheMadMageDungeon extends Dungeon {
 
     public DungeonOfTheMadMageDungeon() {
-        super("Dungeon of the Mad Mage", "AFR");
+        super("Dungeon of the Mad Mage");
         // (1) Yawning Portal — You gain 1 life. (→ 2)
         DungeonRoom yawningPortal = new DungeonRoom("Yawning Portal", new GainLifeEffect(1));
 

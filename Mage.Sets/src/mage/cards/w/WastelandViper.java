@@ -30,8 +30,10 @@ public final class WastelandViper extends CardImpl {
         // Deathtouch
         this.addAbility(DeathtouchAbility.getInstance());
         // Bloodrush - {G}, Discard Wasteland Viper: Target attacking creature gets +1/+2 and gains deathtouch until end of turn.
-        Ability ability = new BloodrushAbility("{G}", new BoostTargetEffect(1, 2, Duration.EndOfTurn));
-        ability.addEffect(new GainAbilityTargetEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn));
+        Ability ability = new BloodrushAbility("{G}", new BoostTargetEffect(1, 2, Duration.EndOfTurn)
+                .setText("target attacking creature gets +1/+2"));
+        ability.addEffect(new GainAbilityTargetEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn)
+                .setText("and gains deathtouch until end of turn"));
         this.addAbility(ability);
     }
 

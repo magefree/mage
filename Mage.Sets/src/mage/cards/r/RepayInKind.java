@@ -36,12 +36,12 @@ public final class RepayInKind extends CardImpl {
 
 class RepayInKindEffect extends OneShotEffect {
 
-    public RepayInKindEffect() {
+    RepayInKindEffect() {
         super(Outcome.Tap);
         staticText = "Each player's life total becomes the lowest life total among all players";
     }
 
-    public RepayInKindEffect(final RepayInKindEffect effect) {
+    private RepayInKindEffect(final RepayInKindEffect effect) {
         super(effect);
     }
 

@@ -34,7 +34,7 @@ public final class DrachNyen extends CardImpl {
     public DrachNyen(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}{B}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.EQUIPMENT);
 
         // Echo of the First Murder -- When Drach'Nyen enters the battlefield exile up to one target creature.

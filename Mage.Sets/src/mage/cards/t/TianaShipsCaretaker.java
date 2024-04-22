@@ -34,7 +34,7 @@ public final class TianaShipsCaretaker extends CardImpl {
     public TianaShipsCaretaker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{W}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ANGEL);
         this.subtype.add(SubType.ARTIFICER);
         this.power = new MageInt(3);
@@ -67,7 +67,7 @@ class TianaShipsCaretakerTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever an Aura or Equipment you control is put into a graveyard from the battlefield, ");
     }
 
-    TianaShipsCaretakerTriggeredAbility(final TianaShipsCaretakerTriggeredAbility ability) {
+    private TianaShipsCaretakerTriggeredAbility(final TianaShipsCaretakerTriggeredAbility ability) {
         super(ability);
     }
 
@@ -107,7 +107,7 @@ class TianaShipsCaretakerEffect extends OneShotEffect {
         this.staticText = "you may return that card to its owner's hand at the beginning of the next end step";
     }
 
-    TianaShipsCaretakerEffect(final TianaShipsCaretakerEffect effect) {
+    private TianaShipsCaretakerEffect(final TianaShipsCaretakerEffect effect) {
         super(effect);
     }
 

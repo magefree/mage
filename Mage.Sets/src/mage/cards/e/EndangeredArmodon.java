@@ -20,7 +20,7 @@ import java.util.UUID;
  */
 public final class EndangeredArmodon extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with toughness 2 or less");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature with toughness 2 or less");
 
     static {
         filter.add(new ToughnessPredicate(ComparisonType.FEWER_THAN, 3));

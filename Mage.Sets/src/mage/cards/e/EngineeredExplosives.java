@@ -58,7 +58,7 @@ class EngineeredExplosivesEffect extends OneShotEffect {
     }
 
 
-    public EngineeredExplosivesEffect(final EngineeredExplosivesEffect effect) {
+    private EngineeredExplosivesEffect(final EngineeredExplosivesEffect effect) {
         super(effect);
     }
 

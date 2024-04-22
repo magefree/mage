@@ -9,7 +9,6 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author LevelX2
  */
 public class PreventAllDamageByAttachedEffect extends PreventionEffectImpl {
@@ -22,7 +21,7 @@ public class PreventAllDamageByAttachedEffect extends PreventionEffectImpl {
         staticText = setText();
     }
 
-    public PreventAllDamageByAttachedEffect(final PreventAllDamageByAttachedEffect effect) {
+    protected PreventAllDamageByAttachedEffect(final PreventAllDamageByAttachedEffect effect) {
         super(effect);
         this.attachedDescription = effect.attachedDescription;
     }

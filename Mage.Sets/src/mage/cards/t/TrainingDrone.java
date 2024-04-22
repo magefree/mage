@@ -44,12 +44,12 @@ public final class TrainingDrone extends CardImpl {
 
 class TrainingDroneEffect extends RestrictionEffect {
 
-    public TrainingDroneEffect() {
+    TrainingDroneEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "{this} can't attack or block unless it's equipped";
     }
 
-    public TrainingDroneEffect(final TrainingDroneEffect effect) {
+    private TrainingDroneEffect(final TrainingDroneEffect effect) {
         super(effect);
     }
 

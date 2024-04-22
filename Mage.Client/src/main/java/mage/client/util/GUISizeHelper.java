@@ -84,9 +84,11 @@ public final class GUISizeHelper {
         return new Font("Arial", Font.PLAIN, 14);
     }
 
-    public static void changeGUISize() {
+    public static void refreshGUIAndCards() {
         calculateGUISizes();
-        MageFrame.getInstance().changeGUISize();
+        if (MageFrame.getInstance() != null) {
+            MageFrame.getInstance().refreshGUIAndCards();
+        }
     }
 
     public static void calculateGUISizes() {
@@ -182,13 +184,6 @@ public final class GUISizeHelper {
                 }
             }
         }
-    }
-
-    public static String textToHtmlWithSize(String text, Font font) {
-        if (text != null && !text.toLowerCase(Locale.ENGLISH).startsWith("<html>")) {
-            return "<html><p style=\"font-size: " + font.getSize() + ";\">" + text + "</p>";
-        }
-        return text;
     }
 
     /**

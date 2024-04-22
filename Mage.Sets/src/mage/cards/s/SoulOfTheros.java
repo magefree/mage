@@ -19,6 +19,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -40,10 +41,10 @@ public final class SoulOfTheros extends CardImpl {
         Effect effect1 = new BoostControlledEffect(2, 2, Duration.EndOfTurn);
         effect1.setText("Creatures you control get +2/+2");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect1, new ManaCostsImpl<>("{4}{W}{W}"));
-        Effect effect2 = new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn);
+        Effect effect2 = new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES);
         effect2.setText("and gain first strike");
         ability.addEffect(effect2);
-        Effect effect3 = new GainAbilityControlledEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn);
+        Effect effect3 = new GainAbilityControlledEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES);
         effect3.setText("and lifelink until end of turn");
         ability.addEffect(effect3);
         this.addAbility(ability);

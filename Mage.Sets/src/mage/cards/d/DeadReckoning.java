@@ -44,14 +44,14 @@ public final class DeadReckoning extends CardImpl {
 
 class DeadReckoningEffect extends OneShotEffect {
 
-    public DeadReckoningEffect() {
+    DeadReckoningEffect() {
         super(Outcome.Damage);
         this.staticText = "you may put target creature card from your graveyard on top of your library. " +
                 "If you do, {this} deals damage equal to that card's power to target creature";
         this.setTargetPointer(new EachTargetPointer());
     }
 
-    public DeadReckoningEffect(final DeadReckoningEffect effect) {
+    private DeadReckoningEffect(final DeadReckoningEffect effect) {
         super(effect);
     }
 

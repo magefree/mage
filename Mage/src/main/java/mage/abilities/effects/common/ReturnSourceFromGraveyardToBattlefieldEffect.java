@@ -16,7 +16,6 @@ import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class ReturnSourceFromGraveyardToBattlefieldEffect extends OneShotEffect {
@@ -31,7 +30,7 @@ public class ReturnSourceFromGraveyardToBattlefieldEffect extends OneShotEffect 
     }
 
     public ReturnSourceFromGraveyardToBattlefieldEffect(boolean tapped) {
-        this(tapped, true);
+        this(tapped, false);
     }
 
     public ReturnSourceFromGraveyardToBattlefieldEffect(boolean tapped, boolean ownerControl) {
@@ -51,7 +50,7 @@ public class ReturnSourceFromGraveyardToBattlefieldEffect extends OneShotEffect 
         this.staticText = setText();
     }
 
-    public ReturnSourceFromGraveyardToBattlefieldEffect(final ReturnSourceFromGraveyardToBattlefieldEffect effect) {
+    protected ReturnSourceFromGraveyardToBattlefieldEffect(final ReturnSourceFromGraveyardToBattlefieldEffect effect) {
         super(effect);
         this.tapped = effect.tapped;
         this.ownerControl = effect.ownerControl;

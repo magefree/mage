@@ -1,8 +1,7 @@
 package mage.cards.s;
 
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.ExileTargetForSourceEffect;
-import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetEffect;
+import mage.abilities.effects.common.ExileThenReturnTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -32,8 +31,7 @@ public final class Scrollshift extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{W}");
 
         // Exile up to one target artifact, creature, or enchantment you control, then return it to the battlefield under its owner's control.
-        this.getSpellAbility().addEffect(new ExileTargetForSourceEffect());
-        this.getSpellAbility().addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false, "it").concatBy(", then"));
+        this.getSpellAbility().addEffect(new ExileThenReturnTargetEffect(false, false));
         this.getSpellAbility().addTarget(new TargetPermanent(0, 1, filter));
 
         // Draw a card.

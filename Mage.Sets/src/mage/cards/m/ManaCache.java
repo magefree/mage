@@ -94,7 +94,7 @@ class ManaCacheManaAbility extends ActivatedManaAbilityImpl {
         this.setMayActivate(TargetController.ANY);
     }
 
-    public ManaCacheManaAbility(final ManaCacheManaAbility ability) {
+    private ManaCacheManaAbility(final ManaCacheManaAbility ability) {
         super(ability);
     }
 

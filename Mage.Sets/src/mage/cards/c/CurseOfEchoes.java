@@ -1,9 +1,7 @@
 
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
@@ -14,8 +12,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -23,6 +19,8 @@ import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -56,19 +54,12 @@ public final class CurseOfEchoes extends CardImpl {
 
 class CurseOfEchoesCopyTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final FilterSpell filter = new FilterSpell();
-
-    static {
-        filter.add(Predicates.or(
-                CardType.INSTANT.getPredicate(),
-                CardType.SORCERY.getPredicate()));
-    }
-
-    public CurseOfEchoesCopyTriggeredAbility() {
+    CurseOfEchoesCopyTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CurseOfEchoesEffect(), false);
+        setTriggerPhrase("Whenever enchanted player casts an instant or sorcery spell, ");
     }
 
-    public CurseOfEchoesCopyTriggeredAbility(final CurseOfEchoesCopyTriggeredAbility ability) {
+    private CurseOfEchoesCopyTriggeredAbility(final CurseOfEchoesCopyTriggeredAbility ability) {
         super(ability);
     }
 
@@ -98,19 +89,16 @@ class CurseOfEchoesCopyTriggeredAbility extends TriggeredAbilityImpl {
         return false;
     }
 
-    @Override
-    public String getRule() {
-        return "Whenever enchanted player casts an instant or sorcery spell, each other player may copy that spell and may choose new targets for the copy they control.";
-    }
 }
 
 class CurseOfEchoesEffect extends OneShotEffect {
 
-    public CurseOfEchoesEffect() {
+    CurseOfEchoesEffect() {
         super(Outcome.Copy);
+        staticText = "each other player may copy that spell and may choose new targets for the copy they control";
     }
 
-    public CurseOfEchoesEffect(final CurseOfEchoesEffect effect) {
+    private CurseOfEchoesEffect(final CurseOfEchoesEffect effect) {
         super(effect);
     }
 
@@ -137,11 +125,4 @@ class CurseOfEchoesEffect extends OneShotEffect {
         return new CurseOfEchoesEffect(this);
     }
 
-    @Override
-    public String getText(Mode mode) {
-        if (!mode.getTargets().isEmpty()) {
-            return "Copy target " + mode.getTargets().get(0).getTargetName() + ". You may choose new targets for the copy";
-        }
-        return "No target";
-    }
 }

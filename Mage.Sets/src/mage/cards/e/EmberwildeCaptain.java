@@ -6,6 +6,7 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.BecomesMonarchSourceEffect;
+import mage.abilities.hint.common.MonarchHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -33,7 +34,7 @@ public final class EmberwildeCaptain extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Emberwilde Captain enters the battlefield, you become the monarch.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new BecomesMonarchSourceEffect()));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new BecomesMonarchSourceEffect()).addHint(MonarchHint.instance));
 
         // Whenever an opponent attacks you while you're the monarch, Emberwilde Captain deals damage to that player equal to the number of cards in their hand.
         this.addAbility(new EmberwildeCaptainTriggeredAbility());
@@ -55,7 +56,7 @@ class EmberwildeCaptainTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new EmberwildeCaptainEffect(), false);
     }
 
-    public EmberwildeCaptainTriggeredAbility(final EmberwildeCaptainTriggeredAbility ability) {
+    private EmberwildeCaptainTriggeredAbility(final EmberwildeCaptainTriggeredAbility ability) {
         super(ability);
     }
 

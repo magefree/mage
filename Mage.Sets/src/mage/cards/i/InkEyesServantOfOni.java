@@ -32,7 +32,7 @@ public final class InkEyesServantOfOni extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
         this.subtype.add(SubType.RAT);
         this.subtype.add(SubType.NINJA);
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);
@@ -63,7 +63,7 @@ class InkEyesServantOfOniTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new ReturnFromGraveyardToBattlefieldTargetEffect(), true);
     }
 
-    public InkEyesServantOfOniTriggeredAbility(final InkEyesServantOfOniTriggeredAbility ability) {
+    private InkEyesServantOfOniTriggeredAbility(final InkEyesServantOfOniTriggeredAbility ability) {
         super(ability);
     }
 

@@ -19,6 +19,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
+import mage.watchers.common.TemptedByTheRingWatcher;
 
 import java.util.UUID;
 
@@ -33,7 +34,7 @@ public final class FrodoSauronsBane extends CardImpl {
     public FrodoSauronsBane(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HALFLING);
         this.subtype.add(SubType.CITIZEN);
         this.power = new MageInt(1);
@@ -43,7 +44,7 @@ public final class FrodoSauronsBane extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(
                 new ConditionalOneShotEffect(new AddContinuousEffectToGame(
                         new AddCardSubTypeSourceEffect(Duration.Custom, SubType.HALFLING, SubType.SCOUT),
-                        new SetBasePowerToughnessSourceEffect(2, 3, Duration.Custom, SubLayer.SetPT_7b),
+                        new SetBasePowerToughnessSourceEffect(2, 3, Duration.Custom),
                         new GainAbilitySourceEffect(LifelinkAbility.getInstance(), Duration.Custom)
                 ), condition1, "if {this} is a Citizen, it becomes a Halfling Scout with base power and toughness 2/3 and lifelink"),
                 new ManaCostsImpl<>("{W/B}{W/B}")
@@ -80,7 +81,6 @@ enum FrodoSauronsBaneCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        // TODO: Implement when mechanic is known
-        return false;
+        return TemptedByTheRingWatcher.getCount(source.getControllerId(), game) >= 4;
     }
 }

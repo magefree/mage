@@ -10,6 +10,10 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * TODO: web site reworked and tokens doesn't work anymore,
+ *  but it can be used to download a proxy tokens (tokens that was miss by wizards),
+ *  see https://www.mtg.onl/mtg-missing-tokens/
+ *
  * @author spjspj
  */
 public enum MtgOnlTokensImageSource implements CardImageSource {

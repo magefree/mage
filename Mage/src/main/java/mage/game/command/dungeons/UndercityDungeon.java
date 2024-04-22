@@ -38,7 +38,7 @@ import mage.util.RandomUtil;
 public class UndercityDungeon extends Dungeon {
 
     public UndercityDungeon() {
-        super("Undercity", "CLB");
+        super("Undercity");
 
         // Secret Entrance — Search your library for a basic land card,
         //                   reveal it,

@@ -1,6 +1,5 @@
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
@@ -28,8 +27,9 @@ import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author noahg
  */
 public final class GiantOyster extends CardImpl {
@@ -69,12 +69,12 @@ public final class GiantOyster extends CardImpl {
 
 class GiantOysterDontUntapAsLongAsSourceTappedEffect extends DontUntapAsLongAsSourceTappedEffect {
 
-    public GiantOysterDontUntapAsLongAsSourceTappedEffect() {
+    GiantOysterDontUntapAsLongAsSourceTappedEffect() {
         super();
         staticText = "For as long as {this} remains tapped, target tapped creature doesn't untap during its controller's untap step";
     }
 
-    public GiantOysterDontUntapAsLongAsSourceTappedEffect(final GiantOysterDontUntapAsLongAsSourceTappedEffect effect) {
+    private GiantOysterDontUntapAsLongAsSourceTappedEffect(final GiantOysterDontUntapAsLongAsSourceTappedEffect effect) {
         super(effect);
     }
 
@@ -91,7 +91,7 @@ class GiantOysterCreateDelayedTriggerEffects extends OneShotEffect {
         this.staticText = "at the beginning of each of your draw steps, put a -1/-1 counter on that creature. When {this} leaves the battlefield or becomes untapped, remove all -1/-1 counters from the creature.";
     }
 
-    public GiantOysterCreateDelayedTriggerEffects(final GiantOysterCreateDelayedTriggerEffects effect) {
+    private GiantOysterCreateDelayedTriggerEffects(final GiantOysterCreateDelayedTriggerEffects effect) {
         super(effect);
     }
 
@@ -103,23 +103,24 @@ class GiantOysterCreateDelayedTriggerEffects extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Permanent oyster = game.getPermanent(source.getSourceId());
-            Permanent tappedCreature = game.getPermanent(source.getFirstTarget());
-            if (oyster != null && tappedCreature != null) {
-                Effect addCountersEffect = new AddCountersTargetEffect(CounterType.M1M1.createInstance(1));
-                addCountersEffect.setTargetPointer(getTargetPointer().getFixedTarget(game, source));
-                DelayedTriggeredAbility drawStepAbility = new AtTheBeginOfYourNextDrawStepDelayedTriggeredAbility(addCountersEffect, Duration.Custom, false);
-                drawStepAbility.setControllerId(source.getControllerId());
-                UUID drawStepAbilityUUID = game.addDelayedTriggeredAbility(drawStepAbility, source);
-
-                DelayedTriggeredAbility leaveUntapDelayedTriggeredAbility = new GiantOysterLeaveUntapDelayedTriggeredAbility(drawStepAbilityUUID);
-                leaveUntapDelayedTriggeredAbility.getEffects().get(0).setTargetPointer(new FixedTarget(tappedCreature, game));
-                game.addDelayedTriggeredAbility(leaveUntapDelayedTriggeredAbility, source);
-                return true;
-            }
+        Permanent oyster = game.getPermanent(source.getSourceId());
+        Permanent tappedCreature = game.getPermanent(source.getFirstTarget());
+        FixedTarget fixedTarget = getTargetPointer().getFirstAsFixedTarget(game, source);
+        if (controller == null || oyster == null || tappedCreature == null || fixedTarget == null) {
+            return false;
         }
-        return false;
+
+        Effect addCountersEffect = new AddCountersTargetEffect(CounterType.M1M1.createInstance(1));
+        addCountersEffect.setTargetPointer(fixedTarget);
+        DelayedTriggeredAbility drawStepAbility = new AtTheBeginOfYourNextDrawStepDelayedTriggeredAbility(addCountersEffect, Duration.Custom, false);
+        drawStepAbility.setControllerId(source.getControllerId());
+        UUID drawStepAbilityUUID = game.addDelayedTriggeredAbility(drawStepAbility, source);
+
+        DelayedTriggeredAbility leaveUntapDelayedTriggeredAbility = new GiantOysterLeaveUntapDelayedTriggeredAbility(drawStepAbilityUUID);
+        leaveUntapDelayedTriggeredAbility.getEffects().get(0).setTargetPointer(new FixedTarget(tappedCreature, game));
+        game.addDelayedTriggeredAbility(leaveUntapDelayedTriggeredAbility, source);
+        return true;
+
     }
 }
 
@@ -130,7 +131,7 @@ class GiantOysterLeaveUntapDelayedTriggeredAbility extends DelayedTriggeredAbili
         this.addEffect(new RemoveDelayedTriggeredAbilityEffect(abilityToCancel));
     }
 
-    public GiantOysterLeaveUntapDelayedTriggeredAbility(GiantOysterLeaveUntapDelayedTriggeredAbility ability) {
+    private GiantOysterLeaveUntapDelayedTriggeredAbility(final GiantOysterLeaveUntapDelayedTriggeredAbility ability) {
         super(ability);
     }
 
@@ -143,7 +144,6 @@ class GiantOysterLeaveUntapDelayedTriggeredAbility extends DelayedTriggeredAbili
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType().equals(GameEvent.EventType.UNTAPPED) && event.getTargetId() != null
                 && event.getTargetId().equals(getSourceId())) {
-            System.out.println("Untapped");
             return true;
         }
         return event.getType().equals(GameEvent.EventType.ZONE_CHANGE) && event.getTargetId() != null

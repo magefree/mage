@@ -21,6 +21,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInGraveyard;
+import mage.target.common.TargetSacrifice;
 
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -85,8 +86,7 @@ class DanseMacabreEffect extends OneShotEffect {
             ) < 1) {
                 continue;
             }
-            TargetPermanent target = new TargetPermanent(StaticFilters.FILTER_CONTROLLED_CREATURE_NON_TOKEN);
-            target.setNotTarget(true);
+            TargetSacrifice target = new TargetSacrifice(StaticFilters.FILTER_CONTROLLED_CREATURE_NON_TOKEN);
             player.choose(Outcome.Sacrifice, target, source, game);
             Permanent permanent = game.getPermanent(target.getFirstTarget());
             if (permanent == null) {
@@ -117,7 +117,7 @@ class DanseMacabreEffect extends OneShotEffect {
         } else {
             return true;
         }
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         controller.choose(Outcome.PutCreatureInPlay, target, source, game);
         controller.moveCards(new CardsImpl(target.getTargets()), Zone.BATTLEFIELD, source, game);
         return true;

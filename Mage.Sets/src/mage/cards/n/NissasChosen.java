@@ -50,12 +50,12 @@ public final class NissasChosen extends CardImpl {
 
 class NissasChosenEffect extends ReplacementEffectImpl {
 
-    public NissasChosenEffect() {
+    NissasChosenEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "If {this} would die, put it on the bottom of its owner's library instead";
     }
 
-    public NissasChosenEffect(final NissasChosenEffect effect) {
+    private NissasChosenEffect(final NissasChosenEffect effect) {
         super(effect);
     }
 

@@ -39,7 +39,7 @@ public final class BorosGuildmage extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BorosGuildmage (final BorosGuildmage card) {
+    private BorosGuildmage(final BorosGuildmage card) {
         super(card);
     }
 

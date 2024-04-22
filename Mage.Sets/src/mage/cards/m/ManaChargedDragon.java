@@ -56,7 +56,7 @@ class ManaChargedDragonEffect extends OneShotEffect {
         this.staticText = "each player starting with you may pay any amount of mana. {this} gets +X/+0 until end of turn, where X is the total amount of mana paid this way";
     }
 
-    ManaChargedDragonEffect(final ManaChargedDragonEffect effect) {
+    private ManaChargedDragonEffect(final ManaChargedDragonEffect effect) {
         super(effect);
     }
 

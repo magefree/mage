@@ -6,6 +6,7 @@ import mage.abilities.condition.Condition;
 import mage.constants.AbilityType;
 import mage.constants.ColoredManaSymbol;
 import mage.game.Game;
+import mage.util.CardUtil;
 import mage.watchers.common.ManaSpentToCastWatcher;
 
 /**
@@ -33,7 +34,7 @@ public enum ManaWasSpentCondition implements Condition {
         }
         ManaSpentToCastWatcher watcher = game.getState().getWatcher(ManaSpentToCastWatcher.class);
         if (watcher != null) {
-            Mana payment = watcher.getLastManaPayment(source.getSourceId());
+            Mana payment = watcher.getManaPayment(CardUtil.getSourceStackMomentReference(game, source));
             if (payment != null) {
                 return payment.getColor(coloredManaSymbol) > 0;
             }

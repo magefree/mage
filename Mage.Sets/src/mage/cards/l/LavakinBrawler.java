@@ -12,7 +12,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 
 import java.util.UUID;
 
@@ -21,7 +21,7 @@ import java.util.UUID;
  */
 public final class LavakinBrawler extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledCreaturePermanent(SubType.ELEMENTAL);
+    private static final FilterPermanent filter = new FilterControlledPermanent(SubType.ELEMENTAL);
     private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter);
 
     public LavakinBrawler(UUID ownerId, CardSetInfo setInfo) {
@@ -34,7 +34,7 @@ public final class LavakinBrawler extends CardImpl {
 
         // Whenever Lavakin Brawler attacks, it gets +1/+0 until end of turn for each Elemental you control.
         this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(
-                xValue, StaticValue.get(0), Duration.EndOfTurn, true
+                xValue, StaticValue.get(0), Duration.EndOfTurn
         ).setText("it gets +1/+0 until end of turn for each Elemental you control"), false));
     }
 

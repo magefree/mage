@@ -8,7 +8,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author TheElk801
  */
 public class FilterCreatureAttackingYou extends FilterAttackingCreature {
@@ -32,7 +31,7 @@ public class FilterCreatureAttackingYou extends FilterAttackingCreature {
         this.orWalker = orWalker;
     }
 
-    public FilterCreatureAttackingYou(final FilterCreatureAttackingYou filter) {
+    protected FilterCreatureAttackingYou(final FilterCreatureAttackingYou filter) {
         super(filter);
         this.orWalker = filter.orWalker;
     }

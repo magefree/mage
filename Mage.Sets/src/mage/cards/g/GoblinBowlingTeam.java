@@ -49,12 +49,12 @@ public final class GoblinBowlingTeam extends CardImpl {
 
 class GoblinBowlingTeamEffect extends ReplacementEffectImpl {
 
-    public GoblinBowlingTeamEffect() {
+    GoblinBowlingTeamEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Damage);
         staticText = "If {this} would deal damage to a permanent or player, it deals that much damage plus the result of a six-sided die roll to that permanent or player instead";
     }
 
-    public GoblinBowlingTeamEffect(final GoblinBowlingTeamEffect effect) {
+    private GoblinBowlingTeamEffect(final GoblinBowlingTeamEffect effect) {
         super(effect);
     }
 
@@ -77,11 +77,6 @@ class GoblinBowlingTeamEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         return event.getSourceId().equals(source.getSourceId());
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

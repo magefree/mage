@@ -42,12 +42,12 @@ public final class Simoon extends CardImpl {
 
 class SimoonEffect extends OneShotEffect {
 
-    public SimoonEffect() {
+    SimoonEffect() {
         super(Outcome.Damage);
         this.staticText = "{this} deals 1 damage to each creature target opponent controls";
     }
 
-    public SimoonEffect(final SimoonEffect effect) {
+    private SimoonEffect(final SimoonEffect effect) {
         super(effect);
     }
 

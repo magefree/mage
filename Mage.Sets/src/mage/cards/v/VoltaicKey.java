@@ -1,5 +1,3 @@
-
-
 package mage.cards.v;
 
 import java.util.UUID;
@@ -12,8 +10,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.filter.FilterPermanent;
-import mage.target.TargetPermanent;
+import mage.target.common.TargetArtifactPermanent;
 
 /**
  *
@@ -21,17 +18,11 @@ import mage.target.TargetPermanent;
  */
 public final class VoltaicKey extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("artifact");
-
-    static {
-        filter.add(CardType.ARTIFACT.getPredicate());
-    }
-
     public VoltaicKey(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new TapSourceCost());
-        ability.addManaCost(new GenericManaCost(1));
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addCost(new GenericManaCost(1));
+        ability.addTarget(new TargetArtifactPermanent());
         this.addAbility(ability);
     }
 

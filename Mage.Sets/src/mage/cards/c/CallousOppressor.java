@@ -74,7 +74,7 @@ class CallousOppressorFilter extends FilterCreaturePermanent {
         super("creature that isn't of the chosen type");
     }
 
-    public CallousOppressorFilter(final CallousOppressorFilter filter) {
+    private CallousOppressorFilter(final CallousOppressorFilter filter) {
         super(filter);
     }
 
@@ -99,12 +99,12 @@ class CallousOppressorFilter extends FilterCreaturePermanent {
 
 class CallousOppressorChooseCreatureTypeEffect extends OneShotEffect {
 
-    public CallousOppressorChooseCreatureTypeEffect() {
+    CallousOppressorChooseCreatureTypeEffect() {
         super(Outcome.Benefit);
         staticText = "an opponent chooses a creature type";
     }
 
-    public CallousOppressorChooseCreatureTypeEffect(final CallousOppressorChooseCreatureTypeEffect effect) {
+    private CallousOppressorChooseCreatureTypeEffect(final CallousOppressorChooseCreatureTypeEffect effect) {
         super(effect);
     }
 

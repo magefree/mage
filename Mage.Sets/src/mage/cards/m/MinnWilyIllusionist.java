@@ -34,7 +34,7 @@ public final class MinnWilyIllusionist extends CardImpl {
     public MinnWilyIllusionist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GNOME);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(1);

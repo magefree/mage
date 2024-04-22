@@ -53,7 +53,7 @@ class CheeringFanaticEffect extends OneShotEffect {
         this.staticText = "choose a card name. Spells with the chosen name cost {1} less to cast this turn";
     }
 
-    CheeringFanaticEffect(final CheeringFanaticEffect effect) {
+    private CheeringFanaticEffect(final CheeringFanaticEffect effect) {
         super(effect);
     }
 

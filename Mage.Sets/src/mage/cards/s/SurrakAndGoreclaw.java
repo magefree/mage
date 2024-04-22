@@ -36,7 +36,7 @@ public final class SurrakAndGoreclaw extends CardImpl {
     public SurrakAndGoreclaw(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.BEAR);
         this.power = new MageInt(6);
@@ -56,7 +56,7 @@ public final class SurrakAndGoreclaw extends CardImpl {
                 Zone.BATTLEFIELD,
                 new AddCountersTargetEffect(CounterType.P1P1.createInstance())
                         .setText("put a +1/+1 counter on it"),
-                filter, false, SetTargetPointer.PERMANENT, null
+                filter, false, SetTargetPointer.PERMANENT
         );
         ability.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance())
                 .setText("it gains haste until end of turn"));

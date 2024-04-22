@@ -43,7 +43,7 @@ public final class QuicksilverDragon extends CardImpl {
         this.addAbility(ability);
         
         // Morph {4}{U}
-        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{4}{U}")));
+        this.addAbility(new MorphAbility(this, new ManaCostsImpl<>("{4}{U}")));
     }
 
     private QuicksilverDragon(final QuicksilverDragon card) {
@@ -63,7 +63,7 @@ class QuicksilverDragonEffect extends OneShotEffect {
         this.staticText = "If target spell has only one target and that target is {this}, change that spell's target to another creature";
     }
     
-    QuicksilverDragonEffect(final QuicksilverDragonEffect effect) {
+    private QuicksilverDragonEffect(final QuicksilverDragonEffect effect) {
         super(effect);
     }
     

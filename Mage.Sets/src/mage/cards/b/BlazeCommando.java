@@ -40,7 +40,7 @@ public final class BlazeCommando extends CardImpl {
 
     }
 
-    public BlazeCommando (final BlazeCommando card) {
+    private BlazeCommando(final BlazeCommando card) {
         super(card);
     }
 
@@ -60,7 +60,7 @@ class BlazeCommandoTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever an instant or sorcery spell you control deals damage, ");
     }
 
-    public BlazeCommandoTriggeredAbility(final BlazeCommandoTriggeredAbility ability) {
+    private BlazeCommandoTriggeredAbility(final BlazeCommandoTriggeredAbility ability) {
         super(ability);
     }
 

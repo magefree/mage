@@ -63,7 +63,7 @@ class IchorplateGolemTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.OIL.createInstance()));
     }
 
-    public IchorplateGolemTriggeredAbility(final IchorplateGolemTriggeredAbility ability) {
+    private IchorplateGolemTriggeredAbility(final IchorplateGolemTriggeredAbility ability) {
         super(ability);
     }
 

@@ -38,6 +38,8 @@ public final class ColossalBadger extends AdventureCard {
         // Choose target creature. Mill four cards, then put a +1/+1 counter on that creature for each creature card milled this way.
         this.getSpellCard().getSpellAbility().addEffect(new ColossalBadgerEffect());
         this.getSpellCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
+
+        this.finalizeAdventure();
     }
 
     private ColossalBadger(final ColossalBadger card) {
@@ -76,6 +78,7 @@ class ColossalBadgerEffect extends OneShotEffect {
         int amount = player.millCards(4, source, game).count(StaticFilters.FILTER_CARD_CREATURE, game);
         Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (amount > 0 && permanent != null) {
+            game.getState().processAction(game);
             permanent.addCounters(CounterType.P1P1.createInstance(amount), source, game);
         }
         return true;

@@ -45,7 +45,7 @@ public final class ThaliaAndTheGitrogMonster extends CardImpl {
     public ThaliaAndTheGitrogMonster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{B}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.FROG);
         this.subtype.add(SubType.HORROR);

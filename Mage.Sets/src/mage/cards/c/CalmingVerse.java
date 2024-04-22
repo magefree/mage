@@ -63,7 +63,7 @@ class CalmingVerseEffect extends OneShotEffect {
         this.staticText = "Destroy all enchantments you don't control. Then if you control an untapped land, destroy all enchantments you control";
     }
 
-    public CalmingVerseEffect(final CalmingVerseEffect effect) {
+    private CalmingVerseEffect(final CalmingVerseEffect effect) {
         super(effect);
     }
 

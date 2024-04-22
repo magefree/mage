@@ -8,6 +8,7 @@ import mage.collation.BoosterCollator;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.SetType;
+import mage.constants.SuperType;
 import mage.filter.FilterMana;
 import mage.util.CardUtil;
 import mage.util.RandomUtil;
@@ -26,6 +27,7 @@ public abstract class ExpansionSet implements Serializable {
     public static final CardGraphicInfo NON_FULL_USE_VARIOUS = new CardGraphicInfo(null, true);
     public static final CardGraphicInfo FULL_ART_BFZ_VARIOUS = new CardGraphicInfo(FrameStyle.BFZ_FULL_ART_BASIC, true);
     public static final CardGraphicInfo FULL_ART_ZEN_VARIOUS = new CardGraphicInfo(FrameStyle.ZEN_FULL_ART_BASIC, true);
+    public static final CardGraphicInfo FULL_ART_UST_VARIOUS = new CardGraphicInfo(FrameStyle.UST_FULL_ART_BASIC, true);
 
     public static class SetCardInfo implements Serializable {
 
@@ -86,7 +88,7 @@ public abstract class ExpansionSet implements Serializable {
         }
     }
 
-    private static enum ExpansionSetComparator implements Comparator<ExpansionSet> {
+    private enum ExpansionSetComparator implements Comparator<ExpansionSet> {
         instance;
 
         @Override
@@ -139,6 +141,7 @@ public abstract class ExpansionSet implements Serializable {
 
     protected boolean hasUnbalancedColors = false;
     protected boolean hasOnlyMulticolorCards = false;
+    protected boolean hasAlternateBoosterPrintings = true; // not counting basic lands; e.g. Fallen Empires true, but Tenth Edition false
 
     protected int maxCardNumberInBooster; // used to omit cards with collector numbers beyond the regular cards in a set for boosters
 
@@ -147,7 +150,7 @@ public abstract class ExpansionSet implements Serializable {
     protected Map<String, List<CardInfo>> savedReprints = null;
     protected final Map<String, CardInfo> inBoosterMap = new HashMap<>();
 
-    public ExpansionSet(String name, String code, Date releaseDate, SetType setType) {
+    protected ExpansionSet(String name, String code, Date releaseDate, SetType setType) {
         this.name = name;
         this.code = code;
         this.releaseDate = releaseDate;
@@ -229,7 +232,7 @@ public abstract class ExpansionSet implements Serializable {
         }
 
         CardInfo cardInfo = cards.remove(RandomUtil.nextInt(cards.size()));
-        Card card = cardInfo.getCard();
+        Card card = cardInfo.createCard();
         if (card == null) {
             // card with error
             return;
@@ -270,7 +273,7 @@ public abstract class ExpansionSet implements Serializable {
                 .makeBooster()
                 .stream()
                 .map(inBoosterMap::get)
-                .map(CardInfo::getCard)
+                .map(CardInfo::createCard)
                 .collect(Collectors.toList());
     }
 
@@ -305,7 +308,7 @@ public abstract class ExpansionSet implements Serializable {
         return true;
     }
 
-    private static ObjectColor getColorForValidate(Card card) {
+    public static ObjectColor getColorForValidate(Card card) {
         ObjectColor color = card.getColor();
         // treat colorless nonland cards with exactly one ID color as cards of that color
         // (e.g. devoid, emerge, spellbombs... but not mana fixing artifacts)
@@ -364,8 +367,6 @@ public abstract class ExpansionSet implements Serializable {
         return (RandomUtil.nextDouble() > Math.pow(0.8, colorlessCountPlusOne));
     }
 
-    private static final ObjectColor COLORLESS = new ObjectColor();
-
     protected boolean validateUncommonColors(List<Card> booster) {
         List<ObjectColor> uncommonColors = booster.stream()
                 .filter(card -> card.getRarity() == Rarity.UNCOMMON)
@@ -375,7 +376,7 @@ public abstract class ExpansionSet implements Serializable {
         // if there are only two uncommons, they can be the same color
         if (uncommonColors.size() < 3) return true;
         // boosters of artifact sets can have all colorless uncommons
-        if (uncommonColors.contains(COLORLESS)) return true;
+        if (uncommonColors.contains(ObjectColor.COLORLESS)) return true;
         // otherwise, reject if all uncommons are the same color combination
         return (new HashSet<>(uncommonColors).size() > 1);
     }
@@ -542,11 +543,21 @@ public abstract class ExpansionSet implements Serializable {
                 // TODO: is it ok to put all parent's cards to booster instead lands only?
                 needSets.add(this.parentSet.code);
             }
-            List<CardInfo> cardInfos = CardRepository.instance.findCards(new CardCriteria()
-                    .setCodes(needSets)
-                    .variousArt(true)
-                    .maxCardNumber(maxCardNumberInBooster) // ignore bonus/extra reprints
-            );
+            List<CardInfo> cardInfos;
+            if (hasAlternateBoosterPrintings) {
+                cardInfos = CardRepository.instance.findCards(new CardCriteria()
+                        .setCodes(needSets)
+                        .variousArt(true)
+                        .maxCardNumber(maxCardNumberInBooster) // ignore bonus/extra reprints
+                );
+            } else {
+                cardInfos = CardRepository.instance.findCards(new CardCriteria()
+                        .setCodes(needSets)
+                        .variousArt(true)
+                        .maxCardNumber(maxCardNumberInBooster) // ignore bonus/extra reprints
+                        .supertypes(SuperType.BASIC) // only basic lands with extra printings
+                );
+            }
             cardInfos.forEach(card -> {
                 this.savedReprints.putIfAbsent(card.getName(), new ArrayList<>());
                 this.savedReprints.get(card.getName()).add(card);
@@ -558,7 +569,7 @@ public abstract class ExpansionSet implements Serializable {
         booster.forEach(card -> {
             List<CardInfo> reprints = this.savedReprints.getOrDefault(card.getName(), null);
             if (reprints != null && reprints.size() > 1) {
-                Card newCard = reprints.get(RandomUtil.nextInt(reprints.size())).getCard();
+                Card newCard = reprints.get(RandomUtil.nextInt(reprints.size())).createCard();
                 if (newCard != null) {
                     finalBooster.add(newCard);
                     return;

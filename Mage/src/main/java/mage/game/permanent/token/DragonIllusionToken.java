@@ -6,10 +6,7 @@ import mage.abilities.keyword.HasteAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
- *
  * @author weirddan455
  */
 public class DragonIllusionToken extends TokenImpl {
@@ -29,8 +26,6 @@ public class DragonIllusionToken extends TokenImpl {
 
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(HasteAbility.getInstance());
-
-        availableImageSetCodes = Arrays.asList("VOW");
     }
 
     private DragonIllusionToken(final DragonIllusionToken token) {

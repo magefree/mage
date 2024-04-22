@@ -40,7 +40,7 @@ public final class RuxaPatientProfessor extends CardImpl {
     public RuxaPatientProfessor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.BEAR);
         this.subtype.add(SubType.DRUID);
         this.power = new MageInt(4);

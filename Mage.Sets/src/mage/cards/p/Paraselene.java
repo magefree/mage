@@ -39,12 +39,12 @@ public final class Paraselene extends CardImpl {
 
 class ParaseleneEffect extends OneShotEffect {
 
-    public ParaseleneEffect() {
+    ParaseleneEffect() {
         super(Outcome.DestroyPermanent);
         staticText = "Destroy all enchantments. You gain 1 life for each enchantment destroyed this way";
     }
 
-    public ParaseleneEffect(ParaseleneEffect effect) {
+    private ParaseleneEffect(final ParaseleneEffect effect) {
         super(effect);
     }
 

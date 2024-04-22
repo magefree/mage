@@ -1,8 +1,5 @@
 package mage.cards.k;
 
-import java.util.Objects;
-import java.util.UUID;
-
 import mage.ConditionalMana;
 import mage.MageInt;
 import mage.MageObject;
@@ -23,18 +20,20 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.abilities.mana.ConditionalColoredManaAbility;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.abilities.mana.conditional.CreatureCastManaCondition;
-import mage.cards.ModalDoubleFacesCard;
-import mage.constants.*;
 import mage.cards.CardSetInfo;
+import mage.cards.ModalDoubleFacedCard;
+import mage.constants.*;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 
+import java.util.Objects;
+import java.util.UUID;
+
 /**
- *
  * @author weirddan455
  */
-public final class KolvoriGodOfKinship extends ModalDoubleFacesCard {
+public final class KolvoriGodOfKinship extends ModalDoubleFacedCard {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
     private static final FilterCreatureCard filter2 = new FilterCreatureCard("a legendary creature card");
@@ -48,15 +47,16 @@ public final class KolvoriGodOfKinship extends ModalDoubleFacesCard {
             = new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 2, true);
 
     public KolvoriGodOfKinship(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo,
-                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.GOD}, "{2}{G}{G}",
-                "The Ringhart Crest", new CardType[]{CardType.ARTIFACT}, new SubType[]{}, "{1}{G}"
+        super(
+                ownerId, setInfo,
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.GOD}, "{2}{G}{G}",
+                "The Ringhart Crest",
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.ARTIFACT}, new SubType[]{}, "{1}{G}"
         );
 
         // 1.
         // Kolvori, God of Kinship
         // Legendary Creature - God
-        this.getLeftHalfCard().addSuperType(SuperType.LEGENDARY);
         this.getLeftHalfCard().setPT(new MageInt(2), new MageInt(4));
 
         // As long as you control three or more legendary creatures, Kolvori, God of Kinship gets +4/+2 and has vigilance.
@@ -82,8 +82,6 @@ public final class KolvoriGodOfKinship extends ModalDoubleFacesCard {
         // 2.
         // The Ringhart Crest
         // Legendary Artifact
-        this.getRightHalfCard().addSuperType(SuperType.LEGENDARY);
-
         // As The Ringhart Crest enters the battlefield, choose a creature type.
         this.getRightHalfCard().addAbility(new AsEntersBattlefieldAbility(new ChooseCreatureTypeEffect(Outcome.Benefit)));
 
@@ -117,7 +115,7 @@ class TheRinghartCrestManaBuilder extends ConditionalManaBuilder {
     }
 
     @Override
-    public ConditionalMana build (Object... options) {
+    public ConditionalMana build(Object... options) {
         return new TheRinghartCrestConditionalMana(this.mana, creatureType);
     }
 
@@ -162,7 +160,7 @@ class TheRinghartCrestManaCondition extends CreatureCastManaCondition {
         if (super.apply(game, source)) {
             MageObject object = game.getObject(source);
             if (object != null) {
-                if (object.isLegendary()) {
+                if (object.isLegendary(game)) {
                     return true;
                 }
                 return creatureType != null && object.hasSubtype(creatureType, game);

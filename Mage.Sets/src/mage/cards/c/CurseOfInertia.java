@@ -58,7 +58,7 @@ class CurseOfInertiaTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new CurseOfInertiaTapOrUntapTargetEffect(), false);
     }
 
-    public CurseOfInertiaTriggeredAbility(final CurseOfInertiaTriggeredAbility ability) {
+    private CurseOfInertiaTriggeredAbility(final CurseOfInertiaTriggeredAbility ability) {
         super(ability);
     }
 
@@ -99,7 +99,7 @@ class CurseOfInertiaTapOrUntapTargetEffect extends OneShotEffect {
         staticText = "tap or untap target permanent of their choice";
     }
 
-    public CurseOfInertiaTapOrUntapTargetEffect(final CurseOfInertiaTapOrUntapTargetEffect effect) {
+    private CurseOfInertiaTapOrUntapTargetEffect(final CurseOfInertiaTapOrUntapTargetEffect effect) {
         super(effect);
     }
 

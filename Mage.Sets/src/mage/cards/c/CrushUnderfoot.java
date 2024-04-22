@@ -47,7 +47,7 @@ public final class CrushUnderfoot extends CardImpl {
 
 class CrushUnderfootEffect extends OneShotEffect {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Giant you control");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Giant creature you control");
     static {
         filter.add(SubType.GIANT.getPredicate());
     }
@@ -57,7 +57,7 @@ class CrushUnderfootEffect extends OneShotEffect {
         this.staticText = "Choose a Giant creature you control. It deals damage equal to its power to target creature";
     }
 
-    public CrushUnderfootEffect(final CrushUnderfootEffect effect) {
+    private CrushUnderfootEffect(final CrushUnderfootEffect effect) {
         super(effect);
     }
 

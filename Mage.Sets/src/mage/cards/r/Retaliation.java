@@ -31,7 +31,7 @@ public final class Retaliation extends CardImpl {
                                 Duration.EndOfTurn), false),
                 Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURES);
         effect.setText("Creatures you control have \"Whenever this creature becomes blocked by a creature, "
-                + "this creature gets +1/+1 until end of turn.");
+                + "this creature gets +1/+1 until end of turn.\"");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 effect));
     }

@@ -77,7 +77,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      *
      * @param mana object to create copy from.
      */
-    public Mana(final Mana mana) {
+    protected Mana(final Mana mana) {
         Objects.requireNonNull(mana, "The passed in mana can not be null");
         this.white = mana.white;
         this.blue = mana.blue;
@@ -166,8 +166,8 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
     /**
      * Creates a {@link Mana} object of #num mana of the passed {@link ManaType}.
      *
-     * @param manaType  The type of mana to set.
-     * @param num       The number of mana available of the passed ManaType.
+     * @param manaType The type of mana to set.
+     * @param num      The number of mana available of the passed ManaType.
      **/
     public Mana(final ManaType manaType, int num) {
         this();
@@ -338,6 +338,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
 
     /**
      * Helper function for increase and decrease to not have the code duplicated.
+     *
      * @param manaType
      * @param increase
      */
@@ -420,6 +421,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
     public void increaseAny() {
         any = CardUtil.overflowInc(any, 1);
     }
+
     public void decreaseAny() {
         any = CardUtil.overflowDec(any, 1);
     }
@@ -697,7 +699,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      * Returns if the cost (this) can be paid by the mana provided by the passed in {@link Mana} object.
      *
      * @param avail The mana to compare too.
-     * @return      boolean indicating if there is enough available mana to pay.
+     * @return boolean indicating if there is enough available mana to pay.
      */
     public boolean enough(final Mana avail) {
         Mana compare = avail.copy();
@@ -769,11 +771,11 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
     /**
      * Returns the total mana needed to meet the cost of this given the available mana passed in
      * as a {@link Mana} object.
-     *
+     * <p>
      * Used by the AI to calculate what mana it needs to obtain for a spell to become playable.
      *
      * @param avail the mana available to pay the cost
-     * @return      the total mana needed to pay this given the available mana passed in as a {@link Mana} object.
+     * @return the total mana needed to pay this given the available mana passed in as a {@link Mana} object.
      */
     public Mana needed(final Mana avail) {
         Mana compare = avail.copy();
@@ -1239,19 +1241,19 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      * not contain one less mana in any type but generic.
      * <p>
      * See tests ManaTest.moreValuableManaTest for several examples
-     *
+     * <p>
      * Examples:
-     *      {1}       and {R}       -> {R}
-     *      {2}       and {1}{W}    -> {1}{W}
-     *      {3}       and {1}{W}    -> {1}{W}
-     *      {1}{W}{R} and {G}{W}{R} -> {G}{W}{R}
-     *      {G}{W}{R} and {G}{W}{R} -> null
-     *      {G}{W}{B} and {G}{W}{R} -> null
-     *      {C}       and {ANY}     -> null
+     * {1}       and {R}       -> {R}
+     * {2}       and {1}{W}    -> {1}{W}
+     * {3}       and {1}{W}    -> {1}{W}
+     * {1}{W}{R} and {G}{W}{R} -> {G}{W}{R}
+     * {G}{W}{R} and {G}{W}{R} -> null
+     * {G}{W}{B} and {G}{W}{R} -> null
+     * {C}       and {ANY}     -> null
      *
-     * @param mana1     The 1st mana to compare.
-     * @param mana2     The 2nd mana to compare.
-     * @return          The greater of the two manas, or null if they're the same OR they cannot be compared
+     * @param mana1 The 1st mana to compare.
+     * @param mana2 The 2nd mana to compare.
+     * @return The greater of the two manas, or null if they're the same OR they cannot be compared
      */
     public static Mana getMoreValuableMana(final Mana mana1, final Mana mana2) {
         if (mana1.equals(mana2)) {
@@ -1279,8 +1281,8 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
                 || mana2.colorless > mana1.colorless
                 || mana2.countColored() > mana1.countColored()
                 || (mana2.countColored() == mana1.countColored()
-                        && mana2.colorless == mana1.colorless
-                        && mana2.count() > mana1.count())) {
+                && mana2.colorless == mana1.colorless
+                && mana2.count() > mana1.count())) {
             moreMana = mana2;
             lessMana = mana1;
         } else {

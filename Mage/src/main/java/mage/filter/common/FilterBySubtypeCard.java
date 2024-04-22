@@ -6,7 +6,6 @@ import mage.constants.SubType;
 import mage.filter.FilterCard;
 
 /**
- *
  * @author LevelX2
  */
 
@@ -17,7 +16,7 @@ public class FilterBySubtypeCard extends FilterCard {
         this.add(subtype.getPredicate());
     }
 
-    public FilterBySubtypeCard(final FilterBySubtypeCard filter) {
+    protected FilterBySubtypeCard(final FilterBySubtypeCard filter) {
         super(filter);
     }
 

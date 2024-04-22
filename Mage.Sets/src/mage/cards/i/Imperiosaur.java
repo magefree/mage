@@ -53,7 +53,7 @@ class ImperiosaurStaticAbility extends StaticAbility {
         super(Zone.STACK, null);
     }
 
-    public ImperiosaurStaticAbility(ImperiosaurStaticAbility ability) {
+    private ImperiosaurStaticAbility(final ImperiosaurStaticAbility ability) {
         super(ability);
     }
 

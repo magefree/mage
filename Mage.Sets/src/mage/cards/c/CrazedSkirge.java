@@ -28,7 +28,7 @@ public final class CrazedSkirge extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
     }
 
-    public CrazedSkirge (final CrazedSkirge card) {
+    private CrazedSkirge(final CrazedSkirge card) {
         super(card);
     }
 

@@ -16,7 +16,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.filter.FilterSpell;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -27,12 +26,6 @@ import mage.game.permanent.token.SpiritClericToken;
  * @author weirddan455
  */
 public final class HallowedHaunting extends CardImpl {
-
-    private static final FilterSpell filter = new FilterSpell("an enchantment spell");
-
-    static {
-        filter.add(CardType.ENCHANTMENT.getPredicate());
-    }
 
     public HallowedHaunting(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
@@ -45,7 +38,7 @@ public final class HallowedHaunting extends CardImpl {
         )));
 
         // Whenever you cast an enchantment spell, create a white Spirit Cleric creature token with "This creature's power and toughness are each equal to the number of Spirits you control."
-        this.addAbility(new SpellCastControllerTriggeredAbility(new CreateTokenEffect(new SpiritClericToken()), filter, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new CreateTokenEffect(new SpiritClericToken()), StaticFilters.FILTER_SPELL_AN_ENCHANTMENT, false));
     }
 
     private HallowedHaunting(final HallowedHaunting card) {

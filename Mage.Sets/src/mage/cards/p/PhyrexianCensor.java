@@ -30,7 +30,7 @@ public final class PhyrexianCensor extends CardImpl {
     private static final FilterPermanent filter = new FilterCreaturePermanent("non-Phyrexian creatures");
 
     static {
-        filter.add(Predicates.or(SubType.PHYREXIAN.getPredicate()));
+        filter.add(Predicates.not(SubType.PHYREXIAN.getPredicate()));
     }
 
     public PhyrexianCensor(UUID ownerId, CardSetInfo setInfo) {
@@ -77,11 +77,6 @@ class PhyrexianCensorEffect extends ContinuousRuleModifyingEffectImpl {
     @Override
     public PhyrexianCensorEffect copy() {
         return new PhyrexianCensorEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

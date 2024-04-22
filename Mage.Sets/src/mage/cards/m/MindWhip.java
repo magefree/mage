@@ -64,18 +64,18 @@ public final class MindWhip extends CardImpl {
 
 class MindWhipEffect extends OneShotEffect {
 
-    public MindWhipEffect() {
+    MindWhipEffect() {
         super(Outcome.Neutral);
         staticText = "";
     }
 
-    public MindWhipEffect(final MindWhipEffect effect) {
+    private MindWhipEffect(final MindWhipEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controllerOfEnchantedCreature = game.getPlayer(targetPointer.getFirst(game, source));
+        Player controllerOfEnchantedCreature = game.getPlayer(getTargetPointer().getFirst(game, source));
         Permanent mindWhip = game.getPermanent(source.getSourceId());
         if (controllerOfEnchantedCreature != null
                 && mindWhip != null) {

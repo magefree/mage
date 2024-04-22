@@ -2,7 +2,7 @@ package mage.abilities.keyword;
 
 import mage.abilities.MageSingleton;
 import mage.abilities.StaticAbility;
-import mage.abilities.icon.abilities.VigilanceAbilityIcon;
+import mage.abilities.icon.CardIconImpl;
 import mage.constants.Zone;
 
 import java.io.ObjectStreamException;
@@ -16,7 +16,7 @@ public class VigilanceAbility extends StaticAbility implements MageSingleton {
 
     static {
         instance = new VigilanceAbility();
-        instance.addIcon(VigilanceAbilityIcon.instance);
+        instance.addIcon(CardIconImpl.ABILITY_VIGILANCE);
     }
 
     private Object readResolve() throws ObjectStreamException {

@@ -6,7 +6,6 @@ import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.target.TargetPlayer;
 
 import java.util.UUID;
@@ -26,7 +25,7 @@ public final class SplittingHeadache extends CardImpl {
         this.getSpellAbility().addEffect(new DiscardTargetEffect(2));
 
         // • Target player reveals their hand. You choose a card from it. That player discards that card.
-        Mode mode = new Mode(new DiscardCardYouChooseTargetEffect(TargetController.ANY));
+        Mode mode = new Mode(new DiscardCardYouChooseTargetEffect());
         mode.addTarget(new TargetPlayer());
         this.getSpellAbility().addMode(mode);
     }

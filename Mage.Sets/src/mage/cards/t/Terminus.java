@@ -44,12 +44,12 @@ public final class Terminus extends CardImpl {
 
 class TerminusEffect extends OneShotEffect {
 
-    public TerminusEffect() {
+    TerminusEffect() {
         super(Outcome.Removal);
         this.staticText = "Put all creatures on the bottom of their owners' libraries";
     }
 
-    public TerminusEffect(final TerminusEffect effect) {
+    private TerminusEffect(final TerminusEffect effect) {
         super(effect);
     }
 

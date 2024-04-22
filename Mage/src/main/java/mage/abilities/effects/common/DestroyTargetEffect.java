@@ -38,7 +38,7 @@ public class DestroyTargetEffect extends OneShotEffect {
         staticText = ruleText;
     }
 
-    public DestroyTargetEffect(final DestroyTargetEffect effect) {
+    protected DestroyTargetEffect(final DestroyTargetEffect effect) {
         super(effect);
         this.noRegen = effect.noRegen;
     }
@@ -51,7 +51,7 @@ public class DestroyTargetEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         int affectedTargets = 0;
-        for (UUID permanentId : targetPointer.getTargets(game, source)) {
+        for (UUID permanentId : getTargetPointer().getTargets(game, source)) {
             Permanent permanent = game.getPermanent(permanentId);
             if (permanent != null
                     && permanent.isPhasedIn()

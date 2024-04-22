@@ -8,6 +8,7 @@ import mage.abilities.effects.common.CopyTargetSpellEffect;
 import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.abilities.effects.common.MayTapOrUntapTargetEffect;
 import mage.abilities.effects.common.PutOnLibrarySourceEffect;
+import mage.abilities.hint.common.ModesAlreadyUsedHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -37,7 +38,7 @@ public final class GandalfTheGrey extends CardImpl {
     public GandalfTheGrey(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.AVATAR);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(3);
@@ -48,17 +49,29 @@ public final class GandalfTheGrey extends CardImpl {
         Ability ability = new SpellCastControllerTriggeredAbility(
                 new MayTapOrUntapTargetEffect(), StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY, false
         );
+        ability.setModeTag("tap or untap");
         ability.addTarget(new TargetPermanent());
-        ability.getModes().setEachModeOnlyOnce(true);
+        ability.getModes().setLimitUsageByOnce(false);
 
         // * Gandalf the Grey deals 3 damage to each opponent.
-        ability.addMode(new Mode(new DamagePlayersEffect(3, TargetController.OPPONENT)));
+        ability.addMode(
+                new Mode(new DamagePlayersEffect(3, TargetController.OPPONENT))
+                        .setModeTag("damage opponents")
+        );
 
         // * Copy target instant or sorcery spell you control. You may choose new targets for the copy.
-        ability.addMode(new Mode(new CopyTargetSpellEffect()).addTarget(new TargetSpell(filter)));
+        ability.addMode(
+                new Mode(new CopyTargetSpellEffect()).addTarget(new TargetSpell(filter))
+                        .setModeTag("copy spell")
+        );
 
         // * Put Gandalf on top of its owner's library.
-        ability.addMode(new Mode(new PutOnLibrarySourceEffect(true)));
+        ability.addMode(
+                new Mode(new PutOnLibrarySourceEffect(true))
+                        .setModeTag("put on top of library")
+        );
+
+        ability.addHint(ModesAlreadyUsedHint.instance);
         this.addAbility(ability);
     }
 

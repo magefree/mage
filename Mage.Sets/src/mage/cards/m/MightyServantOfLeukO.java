@@ -140,7 +140,7 @@ class MightyServantOfLeukOWatcher extends Watcher {
         MightyServantOfLeukOWatcher watcher = game
                 .getState()
                 .getWatcher(MightyServantOfLeukOWatcher.class);
-        MageObjectReference mor = new MageObjectReference(source);
+        MageObjectReference mor = new MageObjectReference(game.getPermanent(source.getSourceId()), game);
         return watcher
                 .crewCount
                 .getOrDefault(mor, 0) < 2

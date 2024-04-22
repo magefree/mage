@@ -34,7 +34,7 @@ public class TargetActivatedAbility extends TargetObject {
         this.filter = filter;
     }
 
-    public TargetActivatedAbility(final TargetActivatedAbility target) {
+    protected TargetActivatedAbility(final TargetActivatedAbility target) {
         super(target);
         this.filter = target.filter.copy();
     }

@@ -39,12 +39,12 @@ public final class Wurmcalling extends CardImpl {
 
 class WurmcallingEffect extends OneShotEffect {
 
-    public WurmcallingEffect() {
+    WurmcallingEffect() {
         super(Outcome.PutCreatureInPlay);
         staticText = "Create an X/X green Wurm creature token";
     }
 
-    public WurmcallingEffect(WurmcallingEffect ability) {
+    private WurmcallingEffect(final WurmcallingEffect ability) {
         super(ability);
     }
 

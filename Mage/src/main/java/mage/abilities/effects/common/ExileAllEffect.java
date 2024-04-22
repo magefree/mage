@@ -30,7 +30,7 @@ public class ExileAllEffect extends OneShotEffect {
         setText();
     }
 
-    public ExileAllEffect(final ExileAllEffect effect) {
+    protected ExileAllEffect(final ExileAllEffect effect) {
         super(effect);
         this.filter = effect.filter.copy();
         this.forSource = effect.forSource;

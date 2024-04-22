@@ -12,7 +12,7 @@ import mage.abilities.effects.common.SacrificeOpponentsEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.cards.CardSetInfo;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
@@ -28,7 +28,7 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class ExtusOriqOverlord extends ModalDoubleFacesCard {
+public final class ExtusOriqOverlord extends ModalDoubleFacedCard {
 
     private static final FilterCard filter
             = new FilterCreatureCard("nonlegendary creature card from your graveyard");
@@ -40,15 +40,14 @@ public final class ExtusOriqOverlord extends ModalDoubleFacesCard {
     public ExtusOriqOverlord(UUID ownerId, CardSetInfo setInfo) {
         super(
                 ownerId, setInfo,
-                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.WARLOCK}, "{1}{W}{B}{B}",
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.WARLOCK}, "{1}{W}{B}{B}",
                 "Awaken the Blood Avatar",
-                new CardType[]{CardType.SORCERY}, new SubType[]{}, "{6}{B}{R}"
+                new SuperType[]{}, new CardType[]{CardType.SORCERY}, new SubType[]{}, "{6}{B}{R}"
         );
 
         // 1.
         // Extus, Oriq Overlord
         // Legendary Creature - Human Warlock
-        this.getLeftHalfCard().addSuperType(SuperType.LEGENDARY);
         this.getLeftHalfCard().setPT(2, 4);
 
         // Double strike
@@ -63,7 +62,7 @@ public final class ExtusOriqOverlord extends ModalDoubleFacesCard {
         // Awaken the Blood Avatar
         // Sorcery
         // As an additional cost to cast this spell, you may sacrifice any number of creatures. This spell costs {2} less to cast for each creature sacrificed this way.
-        Cost cost = new SacrificeXTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT, true);
+        Cost cost = new SacrificeXTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE, true);
         cost.setText("As an additional cost to cast this spell, you may sacrifice any number of creatures. " +
                 "This spell costs {2} less to cast for each creature sacrificed this way");
         this.getRightHalfCard().getSpellAbility().addCost(cost);
@@ -72,9 +71,9 @@ public final class ExtusOriqOverlord extends ModalDoubleFacesCard {
         this.getRightHalfCard().addAbility(ability);
 
         // Each opponent sacrifices a creature. Create a 3/6 black and red Avatar creature token with haste and "Whenever this creature attacks, it deals 3 damage to each opponent."
-        this.getRightHalfCard().getSpellAbility().addEffect(new SacrificeOpponentsEffect(
-                StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT
-        ));
+        this.getRightHalfCard().getSpellAbility().addEffect(
+                new SacrificeOpponentsEffect(StaticFilters.FILTER_PERMANENT_CREATURE)
+        );
         this.getRightHalfCard().getSpellAbility().addEffect(new CreateTokenEffect(new BloodAvatarToken()));
     }
 

@@ -34,7 +34,7 @@ public final class BloodriteInvoker extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BloodriteInvoker (final BloodriteInvoker card) {
+    private BloodriteInvoker(final BloodriteInvoker card) {
         super(card);
     }
 

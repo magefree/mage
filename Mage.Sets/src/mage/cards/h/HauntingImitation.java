@@ -86,7 +86,7 @@ class HauntingImitationEffect extends OneShotEffect {
                 source.getControllerId(), null, false, 1, false,
                 false, null, 1, 1, true
         );
-        effect.setAdditionalSubType(SubType.SPIRIT);
+        effect.withAdditionalSubType(SubType.SPIRIT);
         for (Card card : cards.getCards(game)) {
             effect.setSavedPermanent(new PermanentCard(CardUtil.getDefaultCardSideForBattlefield(game, card), source.getControllerId(), game));
             effect.apply(game, source);

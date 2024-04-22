@@ -23,7 +23,7 @@ public final class UniteTheCoalition extends CardImpl {
         // Choose five. You may choose the same mode more than once.
         this.getSpellAbility().getModes().setMinModes(5);
         this.getSpellAbility().getModes().setMaxModes(5);
-        this.getSpellAbility().getModes().setEachModeMoreThanOnce(true);
+        this.getSpellAbility().getModes().setMayChooseSameModeMoreThanOnce(true);
 
         // • Target permanent phases out.
         this.getSpellAbility().addEffect(new PhaseOutTargetEffect());

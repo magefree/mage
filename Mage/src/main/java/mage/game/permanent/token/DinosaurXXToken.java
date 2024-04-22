@@ -5,8 +5,6 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author TheElk801
  */
@@ -24,8 +22,6 @@ public final class DinosaurXXToken extends TokenImpl {
         power = new MageInt(xValue);
         toughness = new MageInt(xValue);
         addAbility(TrampleAbility.getInstance());
-
-        availableImageSetCodes = Arrays.asList("MOM");
     }
 
     private DinosaurXXToken(final DinosaurXXToken token) {

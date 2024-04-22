@@ -17,6 +17,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -24,6 +25,7 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetCard;
 import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetSacrifice;
 
 /**
  *
@@ -64,7 +66,7 @@ class PlungeIntoDarknessLifeEffect extends OneShotEffect {
         this.staticText = "Sacrifice any number of creatures, then you gain 3 life for each sacrificed creature";
     }
 
-    PlungeIntoDarknessLifeEffect(final PlungeIntoDarknessLifeEffect effect) {
+    private PlungeIntoDarknessLifeEffect(final PlungeIntoDarknessLifeEffect effect) {
         super(effect);
     }
 
@@ -77,8 +79,8 @@ class PlungeIntoDarknessLifeEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            Target target = new TargetControlledCreaturePermanent(0, Integer.MAX_VALUE, new FilterControlledCreaturePermanent(), true);
-            player.chooseTarget(Outcome.Sacrifice, target, source, game);
+            Target target = new TargetSacrifice(0, Integer.MAX_VALUE, StaticFilters.FILTER_PERMANENT_CREATURE);
+            player.choose(Outcome.Sacrifice, target, source, game);
             int numSacrificed = 0;
             for (UUID permanentId : target.getTargets()) {
                 Permanent permanent = game.getPermanent(permanentId);
@@ -104,7 +106,7 @@ class PlungeIntoDarknessSearchEffect extends OneShotEffect {
         this.staticText = "pay X life, then look at the top X cards of your library, put one of those cards into your hand, and exile the rest.";
     }
 
-    PlungeIntoDarknessSearchEffect(final PlungeIntoDarknessSearchEffect effect) {
+    private PlungeIntoDarknessSearchEffect(final PlungeIntoDarknessSearchEffect effect) {
         super(effect);
     }
 

@@ -70,7 +70,7 @@ class NaturesBlessingEffect extends OneShotEffect {
         this.staticText = "Put a +1/+1 counter on target creature or that creature gains banding, first strike, or trample";
     }
 
-    public NaturesBlessingEffect(final NaturesBlessingEffect effect) {
+    private NaturesBlessingEffect(final NaturesBlessingEffect effect) {
         super(effect);
     }
 

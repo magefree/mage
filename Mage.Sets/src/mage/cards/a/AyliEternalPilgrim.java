@@ -34,7 +34,7 @@ public final class AyliEternalPilgrim extends CardImpl {
 
     public AyliEternalPilgrim(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{B}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.KOR, SubType.CLERIC);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
@@ -46,7 +46,7 @@ public final class AyliEternalPilgrim extends CardImpl {
         Effect effect = new GainLifeEffect(SacrificeCostCreaturesToughness.instance);
         effect.setText("You gain life equal to the sacrificed creature's toughness");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new GenericManaCost(1));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE)));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE));
         this.addAbility(ability);
 
         // {1}{W}{B}, Sacrifice another creature: Exile target nonland permanent. Activate only if you have at least 10 life more than your starting life total.
@@ -56,7 +56,7 @@ public final class AyliEternalPilgrim extends CardImpl {
                 new ManaCostsImpl<>("{1}{W}{B}"),
                 new AyliEternalPilgrimCondition()
         );
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE)));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE));
         ability.addTarget(new TargetNonlandPermanent().withChooseHint("to exile"));
         this.addAbility(ability);
     }

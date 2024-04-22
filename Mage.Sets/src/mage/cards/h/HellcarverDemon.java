@@ -52,14 +52,14 @@ public final class HellcarverDemon extends CardImpl {
 
 class HellcarverDemonEffect extends OneShotEffect {
 
-    public HellcarverDemonEffect() {
+    HellcarverDemonEffect() {
         super(Outcome.PlayForFree);
         staticText = "sacrifice all other permanents you control and discard your hand. "
                 + "Exile the top six cards of your library. You may cast any number of "
                 + "spells from among cards exiled this way without paying their mana costs";
     }
 
-    public HellcarverDemonEffect(final HellcarverDemonEffect effect) {
+    private HellcarverDemonEffect(final HellcarverDemonEffect effect) {
         super(effect);
     }
 

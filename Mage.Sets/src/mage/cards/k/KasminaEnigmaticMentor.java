@@ -28,7 +28,7 @@ public final class KasminaEnigmaticMentor extends CardImpl {
     public KasminaEnigmaticMentor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.KASMINA);
         this.setStartingLoyalty(5);
 

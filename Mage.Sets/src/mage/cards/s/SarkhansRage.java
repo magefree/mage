@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -11,7 +10,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.SubType;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.target.common.TargetAnyTarget;
 
 /**
@@ -27,7 +26,7 @@ public final class SarkhansRage extends CardImpl {
         this.getSpellAbility().addEffect(new DamageTargetEffect(5));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new DamageControllerEffect(2),
-                new PermanentsOnTheBattlefieldCondition(new FilterControlledCreaturePermanent(SubType.DRAGON,"you control no Dragons"), ComparisonType.EQUAL_TO, 0)
+                new PermanentsOnTheBattlefieldCondition(new FilterControlledPermanent(SubType.DRAGON,"you control no Dragons"), ComparisonType.EQUAL_TO, 0)
         ));
 
     }

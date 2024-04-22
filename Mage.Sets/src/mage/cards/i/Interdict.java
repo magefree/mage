@@ -41,7 +41,7 @@ public final class Interdict extends CardImpl {
         this.getSpellAbility().addTarget(new TargetActivatedAbility(filter));
 
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).setText("<br><br>Draw a card"));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
     private Interdict(final Interdict card) {
@@ -76,12 +76,12 @@ class InterdictPredicate implements Predicate<StackObject> {
 
 class InterdictCounterEffect extends OneShotEffect {
 
-    public InterdictCounterEffect() {
+    InterdictCounterEffect() {
         super(Outcome.Detriment);
         staticText = "Counter target activated ability from an artifact, creature, enchantment, or land. That permanent's activated abilities can't be activated this turn.";
     }
 
-    public InterdictCounterEffect(final InterdictCounterEffect effect) {
+    private InterdictCounterEffect(final InterdictCounterEffect effect) {
         super(effect);
     }
 
@@ -109,12 +109,12 @@ class InterdictCounterEffect extends OneShotEffect {
 
 class InterdictCantActivateEffect extends RestrictionEffect {
 
-    public InterdictCantActivateEffect() {
+    InterdictCantActivateEffect() {
         super(Duration.EndOfTurn);
         staticText = "That permanent's activated abilities can't be activated this turn";
     }
 
-    public InterdictCantActivateEffect(final InterdictCantActivateEffect effect) {
+    private InterdictCantActivateEffect(final InterdictCantActivateEffect effect) {
         super(effect);
     }
 

@@ -43,6 +43,8 @@ public final class Constants {
     public static final int MAX_AVATAR_ID = 32;
     public static final int DEFAULT_AVATAR_ID = 10;
 
+    public static final int MAX_CHAT_MESSAGE_SIZE = 500; // ignore too big messages
+
     /**
      * Time each player has during the game to play using his\her priority.
      */

@@ -55,7 +55,7 @@ class IndenturedDjinnEffect extends OneShotEffect {
         this.staticText = "each other player may draw up to three cards";
     }
 
-    IndenturedDjinnEffect(final IndenturedDjinnEffect effect) {
+    private IndenturedDjinnEffect(final IndenturedDjinnEffect effect) {
         super(effect);
     }
 

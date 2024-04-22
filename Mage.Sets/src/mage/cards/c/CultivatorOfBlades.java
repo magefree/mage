@@ -32,7 +32,7 @@ public final class CultivatorOfBlades extends CardImpl {
         this.addAbility(new FabricateAbility(2));
 
         // Whenever Cultivator of Blades attacks, you may have other attacking creatures get +X/+X until end of turn, where X is Cultivator of Blades's power.
-        this.addAbility(new AttacksTriggeredAbility(new BoostControlledEffect(new SourcePermanentPowerCount(), new SourcePermanentPowerCount(), Duration.EndOfTurn, StaticFilters.FILTER_ATTACKING_CREATURES, true, true),
+        this.addAbility(new AttacksTriggeredAbility(new BoostControlledEffect(new SourcePermanentPowerCount(), new SourcePermanentPowerCount(), Duration.EndOfTurn, StaticFilters.FILTER_ATTACKING_CREATURES, true),
                 true, "Whenever Cultivator of Blades attacks, you may have other attacking creatures get +X/+X until end of turn, where X is Cultivator of Blades's power."));
     }
 

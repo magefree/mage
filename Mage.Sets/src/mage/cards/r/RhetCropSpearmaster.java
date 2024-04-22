@@ -34,7 +34,7 @@ public final class RhetCropSpearmaster extends CardImpl {
         effect.setText("it gets +1/+0");
         BecomesExertSourceTriggeredAbility ability = new BecomesExertSourceTriggeredAbility(effect);
         effect = new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn);
-        effect.setText(" and gains first strike until end of turn");
+        effect.setText("and gains first strike until end of turn");
         ability.addEffect(effect);
         this.addAbility(new ExertAbility(ability));
     }

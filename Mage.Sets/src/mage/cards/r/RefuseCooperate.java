@@ -50,12 +50,12 @@ public final class RefuseCooperate extends SplitCard {
 
 class RefuseEffect extends OneShotEffect {
 
-    public RefuseEffect() {
+    RefuseEffect() {
         super(Outcome.Damage);
         staticText = "Refuse deals damage to target spell's controller equal to that spell's mana value";
     }
 
-    public RefuseEffect(final RefuseEffect effect) {
+    private RefuseEffect(final RefuseEffect effect) {
         super(effect);
     }
 

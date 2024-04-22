@@ -27,7 +27,7 @@ public final class KuldothaRebirth extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{R}");
 
         this.getSpellAbility().addEffect(new CreateTokenEffect(new GoblinToken(), 3));
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(filter));
     }
 
     private KuldothaRebirth(final KuldothaRebirth card) {

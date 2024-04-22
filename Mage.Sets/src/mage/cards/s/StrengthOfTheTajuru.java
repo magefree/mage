@@ -56,12 +56,12 @@ enum StrengthOfTheTajuruAdjuster implements TargetAdjuster {
 
 class StrengthOfTheTajuruAddCountersTargetEffect extends OneShotEffect {
 
-    public StrengthOfTheTajuruAddCountersTargetEffect() {
+    StrengthOfTheTajuruAddCountersTargetEffect() {
         super(Outcome.BoostCreature);
         staticText = "Choose target creature, then choose another target creature for each time this spell was kicked. Put X +1/+1 counters on each of them";
     }
 
-    public StrengthOfTheTajuruAddCountersTargetEffect(final StrengthOfTheTajuruAddCountersTargetEffect effect) {
+    private StrengthOfTheTajuruAddCountersTargetEffect(final StrengthOfTheTajuruAddCountersTargetEffect effect) {
         super(effect);
     }
 
@@ -70,7 +70,7 @@ class StrengthOfTheTajuruAddCountersTargetEffect extends OneShotEffect {
         int affectedTargets = 0;
         int amount = source.getManaCostsToPay().getX();
         Counter counter = CounterType.P1P1.createInstance(amount);
-        for (UUID uuid : targetPointer.getTargets(game, source)) {
+        for (UUID uuid : getTargetPointer().getTargets(game, source)) {
             Permanent permanent = game.getPermanent(uuid);
             if (permanent != null) {
                 permanent.addCounters(counter.copy(), source.getControllerId(), source, game);

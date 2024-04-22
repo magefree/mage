@@ -45,12 +45,12 @@ public final class MurmursFromBeyond extends CardImpl {
 
 class MurmursFromBeyondEffect extends OneShotEffect {
 
-    public MurmursFromBeyondEffect() {
+    MurmursFromBeyondEffect() {
         super(Outcome.Benefit);
         this.staticText = "Reveal the top three cards of your library. An opponent chooses one of them. Put that card into your graveyard and the rest into your hand";
     }
 
-    public MurmursFromBeyondEffect(final MurmursFromBeyondEffect effect) {
+    private MurmursFromBeyondEffect(final MurmursFromBeyondEffect effect) {
         super(effect);
     }
 

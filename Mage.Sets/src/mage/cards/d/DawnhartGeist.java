@@ -7,7 +7,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.FilterSpell;
+import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -15,12 +15,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class DawnhartGeist extends CardImpl {
-
-    private static final FilterSpell filter = new FilterSpell("an enchantment spell");
-
-    static {
-        filter.add(CardType.ENCHANTMENT.getPredicate());
-    }
 
     public DawnhartGeist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
@@ -31,7 +25,7 @@ public final class DawnhartGeist extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever you cast an enchantment spell, you gain 2 life.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new GainLifeEffect(2), filter, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new GainLifeEffect(2), StaticFilters.FILTER_SPELL_AN_ENCHANTMENT, false));
     }
 
     private DawnhartGeist(final DawnhartGeist card) {

@@ -42,12 +42,12 @@ public final class DesecratedEarth extends CardImpl {
 
 class DesecratedEarthEffect extends OneShotEffect {
 
-    public DesecratedEarthEffect() {
+    DesecratedEarthEffect() {
         super(Outcome.DrawCard);
         this.staticText = "Its controller discards a card";
     }
 
-    public DesecratedEarthEffect(final DesecratedEarthEffect effect) {
+    private DesecratedEarthEffect(final DesecratedEarthEffect effect) {
         super(effect);
     }
 

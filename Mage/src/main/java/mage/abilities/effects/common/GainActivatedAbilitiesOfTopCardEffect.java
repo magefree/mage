@@ -23,7 +23,7 @@ public class GainActivatedAbilitiesOfTopCardEffect extends ContinuousEffectImpl 
         this.filter = filter;
     }
 
-    public GainActivatedAbilitiesOfTopCardEffect(final GainActivatedAbilitiesOfTopCardEffect effect) {
+    protected GainActivatedAbilitiesOfTopCardEffect(final GainActivatedAbilitiesOfTopCardEffect effect) {
         super(effect);
         this.filter = effect.filter;
     }
@@ -43,7 +43,7 @@ public class GainActivatedAbilitiesOfTopCardEffect extends ContinuousEffectImpl 
                 if (permanent != null) {
                     for (Ability ability : card.getAbilities(game)) {
                         if (ability instanceof ActivatedAbility) {
-                            permanent.addAbility(ability, source.getSourceId(), game);
+                            permanent.addAbility(ability, source.getSourceId(), game, true);
                         }
                     }
                     return true;

@@ -16,6 +16,14 @@ public class ChatPanelSeparated extends ChatPanelBasic {
 
     private ColorPane systemMessagesPane = null;
 
+    @Override
+    public void cleanUp() {
+        super.cleanUp();
+        if (this.systemMessagesPane != null) {
+            this.systemMessagesPane.cleanUp();
+        }
+    }
+
     /**
      * Display message in the chat. Use different colors for timestamp, username
      * and message.

@@ -59,7 +59,7 @@ class ShowAndTellEffect extends OneShotEffect {
         this.staticText = "Each player may put an artifact, creature, enchantment, or land card from their hand onto the battlefield";
     }
 
-    public ShowAndTellEffect(final ShowAndTellEffect effect) {
+    private ShowAndTellEffect(final ShowAndTellEffect effect) {
         super(effect);
     }
 

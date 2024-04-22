@@ -86,7 +86,7 @@ class ShamanOfForgottenWaysEffect extends OneShotEffect {
         this.staticText = "each player's life total becomes the number of creatures they control";
     }
     
-    public ShamanOfForgottenWaysEffect(final ShamanOfForgottenWaysEffect effect) {
+    private ShamanOfForgottenWaysEffect(final ShamanOfForgottenWaysEffect effect) {
         super(effect);
     }
     

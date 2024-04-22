@@ -9,7 +9,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
@@ -73,7 +72,7 @@ class LastRitesEffect extends OneShotEffect {
         FilterCard filter = new FilterCard((discardCount > 1 ? "" : "a")
                 + " nonland card" + (discardCount > 1 ? "s" : ""));
         filter.add(Predicates.not(CardType.LAND.getPredicate()));
-        Effect effect = new DiscardCardYouChooseTargetEffect(StaticValue.get(discardCount), filter, TargetController.ANY);
+        Effect effect = new DiscardCardYouChooseTargetEffect(StaticValue.get(discardCount), filter);
         effect.setTargetPointer(new FixedTarget(targetPlayer.getId()));
         effect.apply(game, source);
         return true;

@@ -60,12 +60,12 @@ public final class OupheVandals extends CardImpl {
 
 class OupheVandalsEffect extends OneShotEffect {
 
-    public OupheVandalsEffect() {
+    OupheVandalsEffect() {
         super(Outcome.Detriment);
         this.staticText = "Counter target activated ability from an artifact source and destroy that artifact if it's on the battlefield.";
     }
 
-    public OupheVandalsEffect(final OupheVandalsEffect effect) {
+    private OupheVandalsEffect(final OupheVandalsEffect effect) {
         super(effect);
     }
 

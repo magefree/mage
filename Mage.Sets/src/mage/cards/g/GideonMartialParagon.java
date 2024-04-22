@@ -1,4 +1,3 @@
-
 package mage.cards.g;
 
 import java.util.UUID;
@@ -17,7 +16,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.SuperType;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterOpponentsCreaturePermanent;
 import mage.game.permanent.token.TokenImpl;
 
@@ -29,14 +28,14 @@ public final class GideonMartialParagon extends CardImpl {
 
     public GideonMartialParagon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{W}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         this.subtype.add(SubType.GIDEON);
 
         this.setStartingLoyalty(5);
 
         // +2: Untap all creatures you control. Those creatures get +1/+1 until end of turn.
-        LoyaltyAbility ability = new LoyaltyAbility(new UntapAllEffect(new FilterControlledCreaturePermanent()), 2);
+        LoyaltyAbility ability = new LoyaltyAbility(new UntapAllEffect(StaticFilters.FILTER_CONTROLLED_CREATURES), 2);
         Effect effect = new BoostControlledEffect(1, 1, Duration.EndOfTurn);
         effect.setText("Those creatures get +1/+1 until end of turn");
         ability.addEffect(effect);
@@ -44,7 +43,7 @@ public final class GideonMartialParagon extends CardImpl {
 
         // 0: Until end of turn, Gideon, Martial Paragon, becomes a 5/5 Human Soldier creature with indestructible that's still a planeswalker.
         // Prevent all damage that would be dealt to him this turn.
-        ability = new LoyaltyAbility(new BecomesCreatureSourceEffect(new GideonMartialParagonToken(), "planeswalker", Duration.EndOfTurn), 0);
+        ability = new LoyaltyAbility(new BecomesCreatureSourceEffect(new GideonMartialParagonToken(), CardType.PLANESWALKER, Duration.EndOfTurn), 0);
         effect = new PreventAllDamageToSourceEffect(Duration.EndOfTurn);
         effect.setText("Prevent all damage that would be dealt to him this turn");
         ability.addEffect(effect);
@@ -80,7 +79,7 @@ class GideonMartialParagonToken extends TokenImpl {
 
         addAbility(IndestructibleAbility.getInstance());
     }
-    public GideonMartialParagonToken(final GideonMartialParagonToken token) {
+    private GideonMartialParagonToken(final GideonMartialParagonToken token) {
         super(token);
     }
 

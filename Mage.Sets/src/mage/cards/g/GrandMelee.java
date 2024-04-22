@@ -1,4 +1,3 @@
-
 package mage.cards.g;
 
 import java.util.UUID;
@@ -10,8 +9,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
-import mage.watchers.common.AttackedThisTurnWatcher;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -23,11 +21,11 @@ public final class GrandMelee extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}");
 
         // All creatures attack each turn if able.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new AttacksIfAbleAllEffect(FILTER_PERMANENT_CREATURES));
-        this.addAbility(ability, new AttackedThisTurnWatcher());
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new AttacksIfAbleAllEffect(StaticFilters.FILTER_PERMANENT_ALL_CREATURES));
+        this.addAbility(ability);
 
         // All creatures block each turn if able.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BlocksIfAbleAllEffect(FILTER_PERMANENT_CREATURES)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BlocksIfAbleAllEffect(StaticFilters.FILTER_PERMANENT_ALL_CREATURES)));
     }
 
     private GrandMelee(final GrandMelee card) {

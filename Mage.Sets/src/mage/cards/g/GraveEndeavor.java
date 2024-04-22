@@ -81,7 +81,7 @@ class GraveEndeavorEffect extends OneShotEffect {
         }
         if (player.getGraveyard().count(StaticFilters.FILTER_CARD_CREATURE, game) > 0) {
             TargetCard target = new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD);
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             player.choose(outcome, target, source, game);
             if (target.getFirstTarget() != null) {
                 new ReturnFromGraveyardToBattlefieldWithCounterTargetEffect(

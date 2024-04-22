@@ -16,11 +16,9 @@ public class CreatureCastManaCondition extends ManaCondition implements Conditio
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (source instanceof SpellAbility) {
+        if (source instanceof SpellAbility && !source.isActivated()) {
             MageObject object = game.getObject(source);
-            if (object != null && object.isCreature(game)) {
-                return true;
-            }
+            return object != null && object.isCreature(game);
         }
         return false;
     }

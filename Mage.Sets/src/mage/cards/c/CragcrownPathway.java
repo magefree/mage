@@ -4,7 +4,7 @@ import mage.abilities.keyword.TransformAbility;
 import mage.abilities.mana.GreenManaAbility;
 import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardSetInfo;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
@@ -13,7 +13,7 @@ import java.util.UUID;
 /**
  * @author JayDi85
  */
-public final class CragcrownPathway extends ModalDoubleFacesCard {
+public final class CragcrownPathway extends ModalDoubleFacedCard {
 
     public CragcrownPathway(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo,

@@ -67,12 +67,12 @@ public final class LimDulsPaladin extends CardImpl {
 
 class LimDulsPaladinEffect extends SacrificeSourceUnlessPaysEffect {
 
-    public LimDulsPaladinEffect() {
+    LimDulsPaladinEffect() {
         super(new DiscardTargetCost(new TargetCardInHand()));
         staticText = "you may discard a card. If you don't, sacrifice {this} and draw a card.";
     }
 
-    public LimDulsPaladinEffect(final LimDulsPaladinEffect effect) {
+    private LimDulsPaladinEffect(final LimDulsPaladinEffect effect) {
         super(effect);
     }
 

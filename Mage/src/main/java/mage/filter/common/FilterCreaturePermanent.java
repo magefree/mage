@@ -7,7 +7,6 @@ import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class FilterCreaturePermanent extends FilterPermanent {
@@ -19,15 +18,15 @@ public class FilterCreaturePermanent extends FilterPermanent {
     public FilterCreaturePermanent(String name) {
         super(name);
         this.add(CardType.CREATURE.getPredicate());
-    }    
-    
+    }
+
     public FilterCreaturePermanent(SubType subtype, String name) {
         super(name);
         this.add(CardType.CREATURE.getPredicate());
         this.add(subtype.getPredicate());
     }
 
-    public FilterCreaturePermanent(final FilterCreaturePermanent filter) {
+    protected FilterCreaturePermanent(final FilterCreaturePermanent filter) {
         super(filter);
     }
 

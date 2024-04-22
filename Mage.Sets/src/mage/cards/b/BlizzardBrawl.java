@@ -36,7 +36,7 @@ public final class BlizzardBrawl extends CardImpl {
     public BlizzardBrawl(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{G}");
 
-        this.addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
 
         // Choose target creature you control and target creature you don't control.
         // If you control three or more snow permanents, the creature you control gets +1/+0 and gains indestructible until end of turn.

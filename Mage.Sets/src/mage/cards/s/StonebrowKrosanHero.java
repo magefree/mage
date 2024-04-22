@@ -30,7 +30,7 @@ public final class StonebrowKrosanHero extends CardImpl {
 
     public StonebrowKrosanHero(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.CENTAUR);
         this.subtype.add(SubType.WARRIOR);
 

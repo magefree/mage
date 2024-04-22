@@ -18,6 +18,10 @@ public class IfAbilityHasResolvedXTimesEffect extends OneShotEffect {
     private final int resolutionNumber;
     private final Effect effect;
 
+    public IfAbilityHasResolvedXTimesEffect(int resolutionNumber, Effect effect) {
+        this(effect.getOutcome(), resolutionNumber, effect);
+    }
+
     public IfAbilityHasResolvedXTimesEffect(Outcome outcome, int resolutionNumber, Effect effect) {
         super(outcome);
         this.resolutionNumber = resolutionNumber;
@@ -52,7 +56,7 @@ public class IfAbilityHasResolvedXTimesEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        return "If this is the " + CardUtil.numberToOrdinalText(resolutionNumber) +
+        return "if this is the " + CardUtil.numberToOrdinalText(resolutionNumber) +
                 " time this ability has resolved this turn, " + effect.getText(mode);
     }
 }

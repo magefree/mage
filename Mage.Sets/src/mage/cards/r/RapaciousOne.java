@@ -51,7 +51,7 @@ class RapaciousOneTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, null, false);
     }
 
-    public RapaciousOneTriggeredAbility(final RapaciousOneTriggeredAbility ability) {
+    private RapaciousOneTriggeredAbility(final RapaciousOneTriggeredAbility ability) {
         super(ability);
     }
 

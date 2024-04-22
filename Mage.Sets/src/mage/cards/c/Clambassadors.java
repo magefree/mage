@@ -67,7 +67,7 @@ class ClambassadorsEffect extends OneShotEffect {
         this.staticText = "choose an artifact, creature, or land you control. That player gains control of that permanent";
     }
 
-    public ClambassadorsEffect(final ClambassadorsEffect effect) {
+    private ClambassadorsEffect(final ClambassadorsEffect effect) {
         super(effect);
     }
 

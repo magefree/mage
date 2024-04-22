@@ -40,12 +40,12 @@ public final class KillingWave extends CardImpl {
 
 class KillingWaveEffect extends OneShotEffect {
 
-    public KillingWaveEffect() {
+    KillingWaveEffect() {
         super(Outcome.Sacrifice);
         this.staticText = "For each creature, its controller sacrifices it unless they pay X life";
     }
 
-    public KillingWaveEffect(final KillingWaveEffect effect) {
+    private KillingWaveEffect(final KillingWaveEffect effect) {
         super(effect);
     }
 

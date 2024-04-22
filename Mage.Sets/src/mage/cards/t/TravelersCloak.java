@@ -76,6 +76,15 @@ class TravelersCloakGainAbilityAttachedEffect extends GainAbilityAttachedEffect 
         super(new LandwalkAbility(filter), AttachmentType.AURA);
     }
 
+    protected TravelersCloakGainAbilityAttachedEffect(final TravelersCloakGainAbilityAttachedEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public TravelersCloakGainAbilityAttachedEffect copy() {
+        return new TravelersCloakGainAbilityAttachedEffect(this);
+    }
+
     @Override
     public void afterGain(Game game, Ability source, Permanent permanent, Ability addedAbility) {
         super.afterGain(game, source, permanent, addedAbility);

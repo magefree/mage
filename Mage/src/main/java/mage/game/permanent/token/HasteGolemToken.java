@@ -5,8 +5,6 @@ import mage.abilities.keyword.HasteAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author PurpleCrowbar
  */
@@ -24,11 +22,9 @@ public final class HasteGolemToken extends TokenImpl {
         power = new MageInt(xValue);
         toughness = new MageInt(xValue);
         this.addAbility(HasteAbility.getInstance());
-
-        availableImageSetCodes = Arrays.asList("ONC");
     }
 
-    public HasteGolemToken(final HasteGolemToken token) {
+    private HasteGolemToken(final HasteGolemToken token) {
         super(token);
     }
 

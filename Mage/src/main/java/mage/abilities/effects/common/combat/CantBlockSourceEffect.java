@@ -19,7 +19,7 @@ public class CantBlockSourceEffect extends RestrictionEffect {
         }
     }
 
-    public CantBlockSourceEffect(final CantBlockSourceEffect effect) {
+    protected CantBlockSourceEffect(final CantBlockSourceEffect effect) {
         super(effect);
     }
 

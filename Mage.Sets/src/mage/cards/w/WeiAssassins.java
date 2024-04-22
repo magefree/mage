@@ -58,7 +58,7 @@ class WeiAssassinsEffect extends OneShotEffect {
         this.staticText = "target opponent chooses a creature they control. Destroy it.";
     }
 
-    WeiAssassinsEffect(final WeiAssassinsEffect effect) {
+    private WeiAssassinsEffect(final WeiAssassinsEffect effect) {
         super(effect);
     }
 

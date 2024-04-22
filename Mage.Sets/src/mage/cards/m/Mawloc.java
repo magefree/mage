@@ -30,7 +30,8 @@ public final class Mawloc extends CardImpl {
         this.addAbility(new RavenousAbility());
 
         // Terror from the Deep -- When Mawloc enters the battlefield, it fights up to one target creature an opponent controls. If that creature would die this turn, exile it instead.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new FightTargetSourceEffect());
+        Ability ability = new EntersBattlefieldTriggeredAbility(new FightTargetSourceEffect()
+                .setText("it fights up to one target creature an opponent controls"));
         ability.addEffect(new ExileTargetIfDiesEffect());
         ability.addTarget(new TargetOpponentsCreaturePermanent(0, 1));
         this.addAbility(ability.withFlavorWord("Terror from the Deep"));

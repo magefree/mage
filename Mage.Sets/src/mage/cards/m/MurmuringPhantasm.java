@@ -30,7 +30,7 @@ public final class MurmuringPhantasm extends CardImpl {
 
     }
 
-    public MurmuringPhantasm (final MurmuringPhantasm card) {
+    private MurmuringPhantasm(final MurmuringPhantasm card) {
         super(card);
     }
 

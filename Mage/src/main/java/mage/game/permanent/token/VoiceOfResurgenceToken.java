@@ -8,16 +8,13 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 
-import java.util.Arrays;
-
 /**
  * @author spjspj
  */
 public final class VoiceOfResurgenceToken extends TokenImpl {
 
     public VoiceOfResurgenceToken() {
-        super("Elemental Token", "green and white Elemental creature token with \"This creature's power and toughness are each equal to the number of creatures you control.");
-        setOriginalExpansionSetCode("DGM");
+        super("Elemental Token", "green and white Elemental creature token with \"This creature's power and toughness are each equal to the number of creatures you control.\"");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         color.setWhite(true);
@@ -29,11 +26,9 @@ public final class VoiceOfResurgenceToken extends TokenImpl {
         // This creature's power and toughness are each equal to the number of creatures you control.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SetBasePowerToughnessSourceEffect(
                 CreaturesYouControlCount.instance)));
-            
-        availableImageSetCodes = Arrays.asList("DGM", "MM3", "2XM");
     }
 
-    public VoiceOfResurgenceToken(final VoiceOfResurgenceToken token) {
+    private VoiceOfResurgenceToken(final VoiceOfResurgenceToken token) {
         super(token);
     }
 

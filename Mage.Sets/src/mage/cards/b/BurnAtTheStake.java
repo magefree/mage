@@ -51,12 +51,12 @@ public final class BurnAtTheStake extends CardImpl {
 
 class BurnAtTheStakeEffect extends OneShotEffect {
 
-    public BurnAtTheStakeEffect() {
+    BurnAtTheStakeEffect() {
         super(Outcome.Damage);
         this.staticText = "{this} deals damage to any target equal to three times the number of creatures tapped this way";
     }
 
-    public BurnAtTheStakeEffect(final BurnAtTheStakeEffect effect) {
+    private BurnAtTheStakeEffect(final BurnAtTheStakeEffect effect) {
         super(effect);
     }
 
@@ -69,13 +69,13 @@ class BurnAtTheStakeEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         int amount = (GetXValue.instance).calculate(game, source, this) * 3;
 
-        Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
+        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (permanent != null) {
             permanent.damage(amount, source.getSourceId(), source, game, false, true);
             return true;
         }
 
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (player != null) {
             player.damage(amount, source.getSourceId(), source, game);
             return true;

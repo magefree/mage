@@ -1,4 +1,3 @@
-
 package mage.cards.r;
 
 import java.util.UUID;
@@ -28,7 +27,6 @@ public final class RaidersSpoils extends CardImpl {
     public RaidersSpoils(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{B}");
 
-
         // Creatures you control get +1/+0.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 0, Duration.WhileOnBattlefield)));
         
@@ -50,9 +48,10 @@ class RaidersSpoilsTriggeredAbility extends TriggeredAbilityImpl {
     
     RaidersSpoilsTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new PayLifeCost(1)), false);
+        setTriggerPhrase("Whenever a Warrior you control deals combat damage to a player, ");
     }
     
-    RaidersSpoilsTriggeredAbility(final RaidersSpoilsTriggeredAbility ability) {
+    private RaidersSpoilsTriggeredAbility(final RaidersSpoilsTriggeredAbility ability) {
         super(ability);
     }
     
@@ -75,9 +74,5 @@ class RaidersSpoilsTriggeredAbility extends TriggeredAbilityImpl {
         }
         return false;
     }
-    
-    @Override
-    public String getRule() {
-        return "Whenever a Warrior you control deals combat damage to a player, you may pay 1 life. If you do, draw a card";
-    }
+
 }

@@ -75,14 +75,13 @@ class IchorShadeWatcher extends Watcher {
         if (event.getType() != GameEvent.EventType.ZONE_CHANGE) {
             return;
         }
-        Permanent permanent = ((ZoneChangeEvent) event).getTarget();
+        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+        if (!zEvent.isDiesEvent()) {
+            return;
+        }
+        Permanent permanent = zEvent.getTarget();
         if (permanent != null && (permanent.isArtifact(game) || permanent.isCreature(game))) {
             condition = true;
         }
-    }
-
-    @Override
-    public void reset() {
-        super.reset();
     }
 }

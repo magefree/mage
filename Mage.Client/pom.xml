@@ -48,6 +48,10 @@
             <groupId>org.unbescape</groupId>
             <artifactId>unbescape</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.jsoup</groupId>
+            <artifactId>jsoup</artifactId>
+        </dependency>
 
         <dependency>
             <!-- inner lib for jboss network implementation -->
@@ -57,7 +61,8 @@
         </dependency>
 
         <dependency>
-            <!-- wtf lib, related to plugins system TODO: unused and can be deleted? -->
+            <!-- used in the plugins system -->
+            <!-- imported as net.xeoh.plugins -->
             <groupId>com.googlecode.jspf</groupId>
             <artifactId>jspf-core</artifactId>
             <version>0.9.1</version>
@@ -109,12 +114,6 @@
             <artifactId>beansbinding</artifactId>
             <version>1.2.1</version>
         </dependency>
-        <dependency>
-            <!-- scraping lib to download and parse symbols/images/svg -->
-            <groupId>org.jsoup</groupId>
-            <artifactId>jsoup</artifactId>
-            <version>1.14.3</version>
-        </dependency>
 
         <!-- music player START -->
         <dependency>
@@ -149,16 +148,9 @@
         <dependency>
             <groupId>org.apache.xmlgraphics</groupId>
             <artifactId>batik-transcoder</artifactId>
-            <version>1.13</version>
+            <version>1.17</version>
         </dependency>
         <!-- svg support END -->
-
-        <dependency>
-            <!-- time lib for GUI time info -->
-            <groupId>org.ocpsoft.prettytime</groupId>
-            <artifactId>prettytime</artifactId>
-            <version>4.0.6.Final</version>
-        </dependency>
     </dependencies>
 
     <!-- to get the reference to local repository with com\googlecode\jspf\jspf-core\0.9.1\ -->
@@ -225,6 +217,7 @@
     </build>
 
     <properties>
+        <root.dir>${project.basedir}/..</root.dir>
         <manifest.file>src/main/resources/META-INF/MANIFEST.MF</manifest.file>
     </properties>
 

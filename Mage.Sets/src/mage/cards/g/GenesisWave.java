@@ -44,12 +44,12 @@ public final class GenesisWave extends CardImpl {
 
 class GenesisWaveEffect extends OneShotEffect {
 
-    public GenesisWaveEffect() {
+    GenesisWaveEffect() {
         super(Outcome.PutCardInPlay);
         staticText = "Reveal the top X cards of your library. You may put any number of permanent cards with mana value X or less from among them onto the battlefield. Then put all cards revealed this way that weren't put onto the battlefield into your graveyard";
     }
 
-    public GenesisWaveEffect(final GenesisWaveEffect effect) {
+    private GenesisWaveEffect(final GenesisWaveEffect effect) {
         super(effect);
     }
 
@@ -66,7 +66,7 @@ class GenesisWaveEffect extends OneShotEffect {
             FilterCard filter = new FilterPermanentCard("cards with mana value " + xValue + " or less to put onto the battlefield");
             filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, xValue + 1));
             TargetCard target1 = new TargetCard(0, Integer.MAX_VALUE, Zone.LIBRARY, filter);
-            target1.setNotTarget(true);
+            target1.withNotTarget(true);
             controller.choose(Outcome.PutCardInPlay, cards, target1, source, game);
             Cards toBattlefield = new CardsImpl(target1.getTargets());
             cards.removeAll(toBattlefield);

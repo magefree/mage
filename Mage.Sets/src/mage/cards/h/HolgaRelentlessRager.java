@@ -29,7 +29,7 @@ public final class HolgaRelentlessRager extends CardImpl {
     public HolgaRelentlessRager(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.BARBARIAN);
         this.power = new MageInt(4);
@@ -39,7 +39,7 @@ public final class HolgaRelentlessRager extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // Holga, Relentless Rager must be blocked if able.
-        this.addAbility(new SimpleStaticAbility(new MustBeBlockedByAtLeastOneSourceEffect()));
+        this.addAbility(new SimpleStaticAbility(new MustBeBlockedByAtLeastOneSourceEffect(Duration.WhileOnBattlefield)));
 
         // Whenever Holga attacks, each creature you control attacking a player gets +1/+0 until end of turn for each creature that player controls.
         this.addAbility(new AttacksTriggeredAbility(new HolgaRelentlessRagerEffect()));
@@ -55,15 +55,16 @@ public final class HolgaRelentlessRager extends CardImpl {
     }
 }
 
-class HolgaRelentlessRagerEffect extends OneShotEffect {
-    private enum HolgaRelentlessRagerPredicate implements Predicate<Permanent> {
-        instance;
+enum HolgaRelentlessRagerPredicate implements Predicate<Permanent> {
+    instance;
 
-        @Override
-        public boolean apply(Permanent input, Game game) {
-            return game.getPlayer(game.getCombat().getDefenderId(input.getId())) != null;
-        }
+    @Override
+    public boolean apply(Permanent input, Game game) {
+        return game.getPlayer(game.getCombat().getDefenderId(input.getId())) != null;
     }
+}
+
+class HolgaRelentlessRagerEffect extends OneShotEffect {
 
     private static final FilterPermanent filter = new FilterControlledCreaturePermanent();
 

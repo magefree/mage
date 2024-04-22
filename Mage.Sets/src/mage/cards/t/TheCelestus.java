@@ -26,7 +26,7 @@ public final class TheCelestus extends CardImpl {
     public TheCelestus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // If it's neither day nor night, it becomes day as The Celestus enters the battlefield.
         this.addAbility(new BecomeDayAsEntersAbility());

@@ -20,7 +20,7 @@ import java.util.UUID;
  */
 public final class FreyalisesCharm extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("black spell");
+    private static final FilterSpell filter = new FilterSpell("a black spell");
 
     static {
         filter.add(new ColorPredicate(ObjectColor.BLACK));

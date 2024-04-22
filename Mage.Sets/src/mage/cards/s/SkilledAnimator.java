@@ -57,12 +57,12 @@ public final class SkilledAnimator extends CardImpl {
 
 class SkilledAnimatorBecomesCreatureEffect extends BecomesCreatureTargetEffect {
 
-    public SkilledAnimatorBecomesCreatureEffect() {
+    SkilledAnimatorBecomesCreatureEffect() {
         super(new SkilledAnimatorToken(), false, false, Duration.WhileOnBattlefield);
         this.staticText = "target artifact you control becomes an artifact creature with base power and toughness 5/5 for as long as {this} remains on the battlefield";
     }
 
-    public SkilledAnimatorBecomesCreatureEffect(final SkilledAnimatorBecomesCreatureEffect effect) {
+    private SkilledAnimatorBecomesCreatureEffect(final SkilledAnimatorBecomesCreatureEffect effect) {
         super(effect);
     }
 
@@ -92,7 +92,7 @@ class SkilledAnimatorToken extends TokenImpl {
         toughness = new MageInt(5);
     }
 
-    public SkilledAnimatorToken(final SkilledAnimatorToken token) {
+    private SkilledAnimatorToken(final SkilledAnimatorToken token) {
         super(token);
     }
 

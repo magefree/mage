@@ -26,7 +26,7 @@ public final class MorbidOpportunist extends CardImpl {
         // Whenever one or more other creatures die, draw a card. This ability triggers only once each turn.
         this.addAbility(new DiesCreatureTriggeredAbility(
                 new DrawCardSourceControllerEffect(1), false, true
-        ).setTriggerPhrase("Whenever one or more other creatures die, ").setTriggersOnce(true));
+        ).setTriggerPhrase("Whenever one or more other creatures die, ").setTriggersOnceEachTurn(true));
     }
 
     private MorbidOpportunist(final MorbidOpportunist card) {

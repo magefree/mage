@@ -62,7 +62,7 @@ class GiltspireAvengerTarget extends TargetPermanent {
         targetName = "creature that dealt damage to you this turn";
     }
 
-    public GiltspireAvengerTarget(final GiltspireAvengerTarget target) {
+    private GiltspireAvengerTarget(final GiltspireAvengerTarget target) {
         super(target);
     }
 

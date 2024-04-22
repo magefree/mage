@@ -23,7 +23,7 @@ public final class TheStasisCoffin extends CardImpl {
     public TheStasisCoffin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // {2}, {T}, Exile The Stasis Coffin: You gain protection from everything until your next turn.
         Ability ability = new SimpleActivatedAbility(new GainAbilityControllerEffect(

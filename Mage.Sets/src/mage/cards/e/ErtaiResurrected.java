@@ -38,7 +38,7 @@ public final class ErtaiResurrected extends CardImpl {
     public ErtaiResurrected(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
@@ -74,7 +74,7 @@ public final class ErtaiResurrected extends CardImpl {
 
 class ErtaiResurrectedCounterEffect extends OneShotEffect {
 
-    public ErtaiResurrectedCounterEffect() {
+    ErtaiResurrectedCounterEffect() {
         super(Outcome.Detriment);
         this.staticText = "Counter target spell, activated ability, or triggered ability. Its controller draws a card.";
     }
@@ -106,7 +106,7 @@ class ErtaiResurrectedCounterEffect extends OneShotEffect {
 
 class ErtaiResurrectedDestroyEffect extends OneShotEffect {
 
-    public ErtaiResurrectedDestroyEffect() {
+    ErtaiResurrectedDestroyEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "Destroy another target creature or planeswalker. Its controller draws a card.";
     }

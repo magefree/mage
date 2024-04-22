@@ -28,7 +28,7 @@ public final class SteelshapersGift extends CardImpl {
 
 
         // Search your library for an Equipment card, reveal that card, and put it into your hand. Then shuffle your library.
-        this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true));
+        this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true, true));
     }
 
     private SteelshapersGift(final SteelshapersGift card) {

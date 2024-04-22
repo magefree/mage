@@ -58,12 +58,12 @@ public final class BranchingBolt extends CardImpl {
 
 class BranchingBoltEffect extends OneShotEffect {
 
-    public BranchingBoltEffect() {
+    BranchingBoltEffect() {
         super(Outcome.Damage);
         this.staticText = "{this} deals 3 damage to target creature with flying and to target creature without flying";
     }
 
-    public BranchingBoltEffect(final BranchingBoltEffect effect) {
+    private BranchingBoltEffect(final BranchingBoltEffect effect) {
         super(effect);
     }
 

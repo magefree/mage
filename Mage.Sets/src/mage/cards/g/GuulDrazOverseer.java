@@ -46,12 +46,12 @@ public final class GuulDrazOverseer extends CardImpl {
 
 class GuulDrazOverseerEffect extends OneShotEffect {
 
-    public GuulDrazOverseerEffect() {
+    GuulDrazOverseerEffect() {
         super(Outcome.BoostCreature);
         this.staticText = "other creatures you control get +1/+0 until end of turn. If that land is a Swamp, those creatures get +2/+0 until end of turn instead";
     }
 
-    public GuulDrazOverseerEffect(final GuulDrazOverseerEffect effect) {
+    private GuulDrazOverseerEffect(final GuulDrazOverseerEffect effect) {
         super(effect);
     }
 

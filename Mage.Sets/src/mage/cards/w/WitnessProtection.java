@@ -78,23 +78,25 @@ class WitnessProtectionEffect extends ContinuousEffectImpl {
         switch (layer) {
             case TextChangingEffects_3:
                 permanent.setName("Legitimate Businessperson");
-                return true;
+                break;
             case TypeChangingEffects_4:
                 permanent.removeAllCardTypes(game);
                 permanent.addCardType(game, CardType.CREATURE);
                 permanent.removeAllSubTypes(game);
                 permanent.addSubType(game, SubType.CITIZEN);
-                return true;
+                break;
             case ColorChangingEffects_5:
                 permanent.getColor(game).setColor(color);
+                break;
             case AbilityAddingRemovingEffects_6:
                 permanent.removeAllAbilities(source.getSourceId(), game);
-                return true;
+                break;
             case PTChangingEffects_7:
                 if (sublayer == SubLayer.SetPT_7b) {
                     permanent.getPower().setModifiedBaseValue(1);
                     permanent.getToughness().setModifiedBaseValue(1);
                 }
+                break;
         }
         return true;
     }

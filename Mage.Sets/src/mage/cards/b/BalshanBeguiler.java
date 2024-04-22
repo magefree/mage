@@ -66,13 +66,13 @@ class BalshanBeguilerEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         Player you = game.getPlayer(source.getControllerId());
         if (player == null || you == null) {
             return false;
         }
         CardsImpl cards = new CardsImpl();
-        cards.addAll(player.getLibrary().getTopCards(game, 2));
+        cards.addAllCards(player.getLibrary().getTopCards(game, 2));
         if (cards.isEmpty()) {
             return false;
         }

@@ -53,7 +53,7 @@ class MwonvuliOozePTValue extends CountersSourceCount {
         super(CounterType.AGE);
     }
 
-    public MwonvuliOozePTValue(final MwonvuliOozePTValue value) {
+    private MwonvuliOozePTValue(final MwonvuliOozePTValue value) {
         super(value);
     }
 

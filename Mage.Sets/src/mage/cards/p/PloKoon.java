@@ -22,7 +22,7 @@ public final class PloKoon extends CardImpl {
 
     public PloKoon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.KELDOR);
         this.subtype.add(SubType.JEDI);
         this.power = new MageInt(4);

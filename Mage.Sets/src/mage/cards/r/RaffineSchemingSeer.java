@@ -37,7 +37,7 @@ public final class RaffineSchemingSeer extends CardImpl {
     public RaffineSchemingSeer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{U}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPHINX);
         this.subtype.add(SubType.DEMON);
         this.power = new MageInt(1);
@@ -85,7 +85,7 @@ class RaffineSchemingSeerEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
+        Permanent permanent = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
         if (permanent == null) {
             return false;
         }

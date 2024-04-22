@@ -50,7 +50,7 @@ public final class DragonFangs extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(TrampleAbility.getInstance(), AttachmentType.AURA)));
                
         // When a creature with converted mana cost 6 or greater enters the battlefield, you may return Dragon Fangs from your graveyard to the battlefield attached to that creature.
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.GRAVEYARD, new DragonFangsEffect(), filter, true, SetTargetPointer.PERMANENT, null));
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.GRAVEYARD, new DragonFangsEffect(), filter, true, SetTargetPointer.PERMANENT));
     }
 
     private DragonFangs(final DragonFangs card) {
@@ -70,7 +70,7 @@ class DragonFangsEffect extends OneShotEffect {
         this.staticText = "return {this} from your graveyard to the battlefield attached to that creature";
     }
     
-    DragonFangsEffect(final DragonFangsEffect effect) {
+    private DragonFangsEffect(final DragonFangsEffect effect) {
         super(effect);
     }
     
@@ -94,4 +94,3 @@ class DragonFangsEffect extends OneShotEffect {
         return false;
     }
 }
-

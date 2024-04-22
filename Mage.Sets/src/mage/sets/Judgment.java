@@ -106,6 +106,7 @@ public final class Judgment extends ExpansionSet {
         cards.add(new SetCardInfo("Liberated Dwarf", 95, Rarity.COMMON, mage.cards.l.LiberatedDwarf.class));
         cards.add(new SetCardInfo("Lightning Surge", 96, Rarity.RARE, mage.cards.l.LightningSurge.class));
         cards.add(new SetCardInfo("Living Wish", 124, Rarity.RARE, mage.cards.l.LivingWish.class));
+        cards.add(new SetCardInfo("Lost in Thought", 45, Rarity.COMMON, mage.cards.l.LostInThought.class));
         cards.add(new SetCardInfo("Masked Gorgon", 69, Rarity.RARE, mage.cards.m.MaskedGorgon.class));
         cards.add(new SetCardInfo("Mental Note", 46, Rarity.COMMON, mage.cards.m.MentalNote.class));
         cards.add(new SetCardInfo("Mirari's Wake", 139, Rarity.RARE, mage.cards.m.MirarisWake.class));

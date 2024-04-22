@@ -26,7 +26,7 @@ public final class AhnCropChampion extends CardImpl {
         this.toughness = new MageInt(4);
 
         // You may exert Ahn-Crop Champion as it attacks. When you do, untap all other creatures you control.
-        addAbility(new ExertAbility(new BecomesExertSourceTriggeredAbility(new UntapAllControllerEffect(StaticFilters.FILTER_CONTROLLED_CREATURES, null, false))));
+        addAbility(new ExertAbility(new BecomesExertSourceTriggeredAbility(new UntapAllControllerEffect(StaticFilters.FILTER_PERMANENT_CREATURES, null, false))));
     }
 
     private AhnCropChampion(final AhnCropChampion card) {

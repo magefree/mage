@@ -21,12 +21,15 @@ public final class SeizeTheInitiative extends CardImpl {
     public SeizeTheInitiative (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");
 
-        this.getSpellAbility().addEffect(new BoostTargetEffect(1, 1, Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn));
+        // Target creature gets +1/+1 and gains first strike until end of turn.
+        this.getSpellAbility().addEffect(new BoostTargetEffect(1, 1, Duration.EndOfTurn)
+                .setText("target creature gets +1/+1"));
+        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn)
+                .setText("and gains first strike until end of turn"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public SeizeTheInitiative (final SeizeTheInitiative card) {
+    private SeizeTheInitiative(final SeizeTheInitiative card) {
         super(card);
     }
 

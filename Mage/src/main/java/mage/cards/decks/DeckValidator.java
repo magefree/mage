@@ -11,6 +11,35 @@ import java.util.stream.Collectors;
  */
 public abstract class DeckValidator implements Serializable {
 
+    protected static final List<String> basicLandNames = Arrays.asList(
+            "Plains",
+            "Island",
+            "Swamp",
+            "Mountain",
+            "Forest",
+            "Wastes",
+            "Snow-Covered Plains",
+            "Snow-Covered Island",
+            "Snow-Covered Swamp",
+            "Snow-Covered Mountain",
+            "Snow-Covered Forest",
+            "Snow-Covered Wastes"
+    );
+    protected static final Map<String, Integer> maxCopiesMap = new HashMap<>();
+
+    static {
+        basicLandNames.stream().forEach(s -> maxCopiesMap.put(s, Integer.MAX_VALUE));
+        maxCopiesMap.put("Relentless Rats", Integer.MAX_VALUE);
+        maxCopiesMap.put("Shadowborn Apostle", Integer.MAX_VALUE);
+        maxCopiesMap.put("Rat Colony", Integer.MAX_VALUE);
+        maxCopiesMap.put("Persistent Petitioners", Integer.MAX_VALUE);
+        maxCopiesMap.put("Dragon's Approach", Integer.MAX_VALUE);
+        maxCopiesMap.put("Slime Against Humanity", Integer.MAX_VALUE);
+        maxCopiesMap.put("Once More with Feeling", 1);
+        maxCopiesMap.put("Seven Dwarves", 7);
+        maxCopiesMap.put("Nazgul", 9);
+    }
+
     protected String name;
     protected String shortName;
     protected List<DeckValidatorError> errorsList = new ArrayList<>();
@@ -141,4 +170,8 @@ public abstract class DeckValidator implements Serializable {
     public abstract int getDeckMinSize();
 
     public abstract int getSideboardMinSize();
+
+    protected static final int getMaxCopies(String name, int defaultAmount) {
+        return maxCopiesMap.getOrDefault(name, defaultAmount);
+    }
 }

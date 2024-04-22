@@ -44,12 +44,14 @@ public final class Necrosquito extends CardImpl {
         ));
 
         // Necrosquito gets +1/+1 for each oil counter on it.
-        this.addAbility(new SimpleStaticAbility(new BoostSourceEffect(xValue, xValue, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostSourceEffect(
+                xValue, xValue, Duration.WhileOnBattlefield
+        ).setText("{this} gets +1/+1 for each oil counter on it")));
 
         // Whenever another creature or artifact you control is put into a graveyard from the battlefield, put an oil counter on Necrosquito.
         this.addAbility(new PutIntoGraveFromBattlefieldAllTriggeredAbility(
                 new AddCountersSourceEffect(CounterType.OIL.createInstance()), false,
-                StaticFilters.FILTER_CONTROLLED_ANOTHER_ARTIFACT_OR_CREATURE, false
+                StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE_OR_ARTIFACT, false
         ));
     }
 

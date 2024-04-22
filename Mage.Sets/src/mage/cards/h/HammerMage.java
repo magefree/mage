@@ -58,7 +58,7 @@ class HammerMageEffect extends  OneShotEffect {
         staticText = "Destroy all artifacts with mana value X or less";
     }
 
-    public HammerMageEffect(final HammerMageEffect effect) {
+    private HammerMageEffect(final HammerMageEffect effect) {
         super(effect);
     }
 

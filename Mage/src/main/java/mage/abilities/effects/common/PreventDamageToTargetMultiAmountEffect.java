@@ -35,7 +35,7 @@ public class PreventDamageToTargetMultiAmountEffect extends PreventionEffectImpl
         super(duration, amount, onlyCombat, consumable, dynamicValue);
     }
 
-    public PreventDamageToTargetMultiAmountEffect(final PreventDamageToTargetMultiAmountEffect effect) {
+    protected PreventDamageToTargetMultiAmountEffect(final PreventDamageToTargetMultiAmountEffect effect) {
         super(effect);
     }
 
@@ -73,11 +73,6 @@ public class PreventDamageToTargetMultiAmountEffect extends PreventionEffectImpl
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         int targetAmount = targetAmountMap.get(event.getTargetId());
         GameEvent preventEvent = new PreventDamageEvent(event.getTargetId(), source.getSourceId(), source, source.getControllerId(), event.getAmount(), ((DamageEvent) event).isCombatDamage());
@@ -106,16 +101,16 @@ public class PreventDamageToTargetMultiAmountEffect extends PreventionEffectImpl
 
     @Override
     public String getText(Mode mode) {
-        StringBuilder sb = new StringBuilder();
-        if (staticText.isEmpty()) {
-            sb.append("prevent the next ").append(amountToPrevent).append(" damage that would be dealt ");
-            if (duration == Duration.EndOfTurn) {
-                sb.append("this turn ");
-            }
-            sb.append("to any number of targets, divided as you choose");
-            return sb.toString();
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
         }
-        return staticText;
+        StringBuilder sb = new StringBuilder();
+        sb.append("prevent the next ").append(amountToPrevent).append(" damage that would be dealt ");
+        if (duration == Duration.EndOfTurn) {
+            sb.append("this turn ");
+        }
+        sb.append("to any number of targets, divided as you choose");
+        return sb.toString();
     }
 
 }

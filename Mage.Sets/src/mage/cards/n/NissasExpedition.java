@@ -23,7 +23,7 @@ public final class NissasExpedition extends CardImpl {
         // Convoke
         this.addAbility(new ConvokeAbility());
         // Search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle your library.
-        this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0,2, StaticFilters.FILTER_CARD_BASIC_LANDS), true, true));
+        this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0,2, StaticFilters.FILTER_CARD_BASIC_LANDS), true));
     }
 
     private NissasExpedition(final NissasExpedition card) {

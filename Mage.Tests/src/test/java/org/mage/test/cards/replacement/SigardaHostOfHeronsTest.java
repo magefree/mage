@@ -38,6 +38,7 @@ public class SigardaHostOfHeronsTest extends CardTestPlayerBase {
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Diabolic Edict", playerA); // sacrificing for player A prevented by Sigarda
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Diabolic Edict", playerB); // playerB has to sacrifice Sheldred
 
+        //setStrictChooseMode(true); // TODO: test must be fixed with correct targets
         setStopAt(3, PhaseStep.END_TURN);
         execute();
 
@@ -69,6 +70,7 @@ public class SigardaHostOfHeronsTest extends CardTestPlayerBase {
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}{B}");
 
+        //setStrictChooseMode(true); // TODO: test must be fixed with correct targets
         setStopAt(1, PhaseStep.END_COMBAT);
         execute();
 
@@ -101,7 +103,8 @@ public class SigardaHostOfHeronsTest extends CardTestPlayerBase {
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Tempt with Immortality");
         setChoice(playerB, "Merciless Executioner");        
         setChoice(playerA, "Sigarda, Host of Herons");
-        
+
+        //setStrictChooseMode(true); // TODO: test must be fixed with correct targets
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
         execute();
         

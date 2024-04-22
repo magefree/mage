@@ -30,7 +30,7 @@ public final class KitsuneLoreweaver extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {1}{W}: Kitsune Loreweaver gets +0/+X until end of turn, where X is the number of cards in your hand.
-        Effect effect = new BoostSourceEffect(StaticValue.get(0), CardsInControllerHandCount.instance, Duration.EndOfTurn, true);
+        Effect effect = new BoostSourceEffect(StaticValue.get(0), CardsInControllerHandCount.instance, Duration.EndOfTurn);
         effect.setText("{this} gets +0/+X until end of turn, where X is the number of cards in your hand");
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{1}{W}")));
     }

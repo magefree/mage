@@ -51,12 +51,12 @@ public final class ScavengingOoze extends CardImpl {
 
 class ScavengingOozeEffect extends OneShotEffect {
 
-    public ScavengingOozeEffect() {
+    ScavengingOozeEffect() {
         super(Outcome.Benefit);
         this.staticText = "Exile target card from a graveyard. If it was a creature card, put a +1/+1 counter on {this} and you gain 1 life";
     }
 
-    public ScavengingOozeEffect(final ScavengingOozeEffect effect) {
+    private ScavengingOozeEffect(final ScavengingOozeEffect effect) {
         super(effect);
     }
 

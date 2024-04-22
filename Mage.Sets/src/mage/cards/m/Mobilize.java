@@ -1,4 +1,3 @@
-
 package mage.cards.m;
 
 import java.util.UUID;
@@ -6,7 +5,7 @@ import mage.abilities.effects.common.UntapAllControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -20,7 +19,7 @@ public final class Mobilize extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{G}");
 
         // Untap all creatures you control.
-        this.getSpellAbility().addEffect(new UntapAllControllerEffect(new FilterControlledCreaturePermanent(), rule));
+        this.getSpellAbility().addEffect(new UntapAllControllerEffect(StaticFilters.FILTER_CONTROLLED_CREATURE, rule));
     }
 
     private Mobilize(final Mobilize card) {

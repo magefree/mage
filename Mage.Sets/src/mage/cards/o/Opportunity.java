@@ -17,7 +17,6 @@ public final class Opportunity extends CardImpl {
     public Opportunity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{U}{U}");
 
-
         // Target player draws four cards.
         this.getSpellAbility().addEffect(new DrawCardTargetEffect(4));
         this.getSpellAbility().addTarget(new TargetPlayer());

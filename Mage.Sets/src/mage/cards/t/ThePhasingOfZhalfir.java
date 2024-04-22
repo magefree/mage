@@ -9,7 +9,6 @@ import mage.abilities.effects.common.PhaseOutTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
@@ -30,7 +29,7 @@ import java.util.UUID;
  */
 public final class ThePhasingOfZhalfir extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterNonlandPermanent("another nonland permanent");
+    private static final FilterNonlandPermanent filter = new FilterNonlandPermanent("another target nonland permanent");
 
     static {
         filter.add(AnotherPredicate.instance);
@@ -48,7 +47,7 @@ public final class ThePhasingOfZhalfir extends CardImpl {
         sagaAbility.addChapterEffect(
                 this, SagaChapter.CHAPTER_I, SagaChapter.CHAPTER_II,
                 new Effects(
-                        new PhaseOutTargetEffect("another target nonland permanent"),
+                        new PhaseOutTargetEffect(),
                         new ThePhasingOfZhalfirPhaseEffect()
                 ), new TargetPermanent(filter)
         );
@@ -90,11 +89,6 @@ class ThePhasingOfZhalfirPhaseEffect extends ContinuousRuleModifyingEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         return event.getTargetId().equals(this.getTargetPointer().getFirst(game, source));
     }
@@ -124,11 +118,11 @@ class ThePhasingOfZhalfirDestroyEffect extends OneShotEffect {
                 StaticFilters.FILTER_PERMANENT_CREATURES,
                 source.getControllerId(), source, game
         )) {
-            UUID controllerId = permanent.getControllerId();
             if (permanent.destroy(source, game, false)) {
                 playerMap.compute(permanent.getControllerId(), CardUtil::setOrIncrementValue);
             }
         }
+        game.getState().processAction(game);
         Token token = new PhyrexianToken();
         for (Map.Entry<UUID, Integer> entry : playerMap.entrySet()) {
             token.putOntoBattlefield(entry.getValue(), game, source, entry.getKey());

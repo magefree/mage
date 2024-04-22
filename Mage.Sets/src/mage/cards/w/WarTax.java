@@ -52,7 +52,7 @@ class WarTaxCantAttackUnlessPaysEffect extends PayCostToAttackBlockEffectImpl {
         staticText = "This turn, creatures can't attack unless their controller pays {X} for each attacking creature they control";
     }
 
-    WarTaxCantAttackUnlessPaysEffect(WarTaxCantAttackUnlessPaysEffect effect) {
+    private WarTaxCantAttackUnlessPaysEffect(final WarTaxCantAttackUnlessPaysEffect effect) {
         super(effect);
     }
 

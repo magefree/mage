@@ -20,7 +20,7 @@ public class DestroyAllControlledTargetEffect extends OneShotEffect {
         staticText = "Destroy all " + filter.getMessage() + " target player controls";
     }
 
-    public DestroyAllControlledTargetEffect(final DestroyAllControlledTargetEffect effect) {
+    protected DestroyAllControlledTargetEffect(final DestroyAllControlledTargetEffect effect) {
         super(effect);
         this.filter = effect.filter.copy();
     }

@@ -52,7 +52,7 @@ class LionsEyeDiamondAbility extends ActivatedManaAbilityImpl {
 
     }
 
-    public LionsEyeDiamondAbility(final LionsEyeDiamondAbility ability) {
+    private LionsEyeDiamondAbility(final LionsEyeDiamondAbility ability) {
         super(ability);
     }
 

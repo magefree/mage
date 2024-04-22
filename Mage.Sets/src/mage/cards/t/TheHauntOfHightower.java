@@ -22,7 +22,7 @@ public final class TheHauntOfHightower extends CardImpl {
     public TheHauntOfHightower(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.VAMPIRE);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
@@ -36,7 +36,7 @@ public final class TheHauntOfHightower extends CardImpl {
         // Whenever The Haunt of Hightower attacks, defending player discards a card.
         this.addAbility(new AttacksTriggeredAbility(
                 new DiscardTargetEffect(1), false,
-                "Whenever {this} attacks, defending player discards a card", SetTargetPointer.PLAYER
+                "Whenever {this} attacks, defending player discards a card.", SetTargetPointer.PLAYER
         ));
 
         // Whenever a card is put into an opponent's graveyard from anywhere, put a +1/+1 counter on The Haunt of Hightower.

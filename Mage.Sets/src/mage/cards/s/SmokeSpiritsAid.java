@@ -7,9 +7,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.game.permanent.token.SmokeBlessingToken;
-import mage.game.permanent.token.Token;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetadjustment.TargetAdjuster;
 
@@ -70,21 +68,11 @@ class SmokeSpiritsAidEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Token token = new SmokeBlessingToken();
         for (UUID targetId : getTargetPointer().getTargets(game, source)) {
-            Permanent permanent = game.getPermanent(targetId);
-            if (permanent == null) {
-                continue;
-            }
-            token.putOntoBattlefield(1, game, source);
-            for (UUID tokenId : token.getLastAddedTokenIds()) {
-                Permanent aura = game.getPermanent(tokenId);
-                if (aura == null) {
-                    continue;
-                }
-                aura.getAbilities().get(0).getTargets().get(0).add(targetId, game);
-                aura.getAbilities().get(0).getEffects().get(0).apply(game, aura.getAbilities().get(0));
-            }
+            new SmokeBlessingToken().putOntoBattlefield(
+                    1, game, source, source.getControllerId(),
+                    false, false, null, targetId
+            );
         }
         return true;
     }

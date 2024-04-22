@@ -47,7 +47,7 @@ public final class SaheelisDirective extends CardImpl {
 }
 class SaheelisDirectiveEffect extends OneShotEffect {
 
-    public SaheelisDirectiveEffect() {
+    SaheelisDirectiveEffect() {
         super(Outcome.PutCardInPlay);
         staticText = "Reveal the top X cards of your library. "
                 + "You may put any number of artifact cards with "
@@ -56,7 +56,7 @@ class SaheelisDirectiveEffect extends OneShotEffect {
                 + "put onto the battlefield into your graveyard.";
     }
 
-    public SaheelisDirectiveEffect(final SaheelisDirectiveEffect effect) {
+    private SaheelisDirectiveEffect(final SaheelisDirectiveEffect effect) {
         super(effect);
     }
 
@@ -73,7 +73,7 @@ class SaheelisDirectiveEffect extends OneShotEffect {
             FilterCard filter = new FilterArtifactCard("artifact cards with mana value " + xValue + " or less to put onto the battlefield");
             filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, xValue + 1));
             TargetCard target1 = new TargetCard(0, Integer.MAX_VALUE, Zone.LIBRARY, filter);
-            target1.setNotTarget(true);
+            target1.withNotTarget(true);
             controller.choose(Outcome.PutCardInPlay, cards, target1, source, game);
             Cards toBattlefield = new CardsImpl(target1.getTargets());
             cards.removeAll(toBattlefield);

@@ -12,7 +12,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 
 /**
- *
  * @author LevelX2
  */
 public class ConditionalContinuousRuleModifyingEffect extends ContinuousRuleModifyingEffectImpl {
@@ -34,7 +33,7 @@ public class ConditionalContinuousRuleModifyingEffect extends ContinuousRuleModi
         this.otherwiseEffect = otherwiseEffect;
     }
 
-    public ConditionalContinuousRuleModifyingEffect(final ConditionalContinuousRuleModifyingEffect effect) {
+    protected ConditionalContinuousRuleModifyingEffect(final ConditionalContinuousRuleModifyingEffect effect) {
         super(effect);
         this.effect = (ContinuousRuleModifyingEffect) effect.effect.copy();
         if (effect.otherwiseEffect != null) {
@@ -53,10 +52,10 @@ public class ConditionalContinuousRuleModifyingEffect extends ContinuousRuleModi
         } else {
             condition = baseCondition;
         }
-        effect.setTargetPointer(this.targetPointer);
+        effect.setTargetPointer(this.getTargetPointer().copy());
         effect.init(source, game);
         if (otherwiseEffect != null) {
-            otherwiseEffect.setTargetPointer(this.targetPointer);
+            otherwiseEffect.setTargetPointer(this.getTargetPointer().copy());
             otherwiseEffect.init(source, game);
         }
         initDone = true;
@@ -65,11 +64,6 @@ public class ConditionalContinuousRuleModifyingEffect extends ContinuousRuleModi
     @Override
     public boolean isDiscarded() {
         return effect.isDiscarded() || (otherwiseEffect != null && otherwiseEffect.isDiscarded());
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
     }
 
     @Override
@@ -88,10 +82,10 @@ public class ConditionalContinuousRuleModifyingEffect extends ContinuousRuleModi
             init(source, game);
         }
         if (condition.apply(game, source)) {
-            effect.setTargetPointer(this.targetPointer);
+            effect.setTargetPointer(this.getTargetPointer().copy());
             return effect.applies(event, source, game);
         } else if (otherwiseEffect != null) {
-            otherwiseEffect.setTargetPointer(this.targetPointer);
+            otherwiseEffect.setTargetPointer(this.getTargetPointer().copy());
             return otherwiseEffect.applies(event, source, game);
         }
         return false;
@@ -112,17 +106,17 @@ public class ConditionalContinuousRuleModifyingEffect extends ContinuousRuleModi
 
     @Override
     public boolean sendMessageToGameLog() {
-        return effect.sendMessageToGameLog(); //To change body of generated methods, choose Tools | Templates.
+        return effect.sendMessageToGameLog();
     }
 
     @Override
     public boolean sendMessageToUser() {
-        return effect.sendMessageToUser(); //To change body of generated methods, choose Tools | Templates.
+        return effect.sendMessageToUser();
     }
 
     @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
-        return effect.getInfoMessage(source, event, game); //To change body of generated methods, choose Tools | Templates.
+        return effect.getInfoMessage(source, event, game);
     }
 
     @Override

@@ -37,7 +37,7 @@ public final class LlawanCephalidEmpress extends CardImpl {
 
     public LlawanCephalidEmpress(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.CEPHALID, SubType.NOBLE);
 
         this.power = new MageInt(2);
@@ -75,18 +75,13 @@ class LlawanCephalidRuleModifyingEffect extends ContinuousRuleModifyingEffectImp
         staticText = "Your opponents can't cast blue creature spells";
     }
 
-    public LlawanCephalidRuleModifyingEffect(final LlawanCephalidRuleModifyingEffect effect) {
+    private LlawanCephalidRuleModifyingEffect(final LlawanCephalidRuleModifyingEffect effect) {
         super(effect);
     }
 
     @Override
     public LlawanCephalidRuleModifyingEffect copy() {
         return new LlawanCephalidRuleModifyingEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

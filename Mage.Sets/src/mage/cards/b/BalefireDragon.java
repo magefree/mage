@@ -10,6 +10,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -29,7 +30,7 @@ public final class BalefireDragon extends CardImpl {
         // Whenever Balefire Dragon deals combat damage to a player,
         // it deals that much damage to each creature that player controls.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
-                new DamageAllControlledTargetEffect(SavedDamageValue.MUCH, "it"),
+                new DamageAllControlledTargetEffect(SavedDamageValue.MUCH, StaticFilters.FILTER_PERMANENT_CREATURE),
                 false, true));
     }
 

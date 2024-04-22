@@ -40,7 +40,7 @@ public final class GoShintaiOfLifesOrigin extends CardImpl {
     public GoShintaiOfLifesOrigin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{3}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SHRINE);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);

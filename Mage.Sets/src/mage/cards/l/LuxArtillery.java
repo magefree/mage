@@ -38,11 +38,11 @@ public final class LuxArtillery extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
         // Whenever you cast an artifact creature spell, it gains sunburst.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new LuxArtilleryEffect(this), filter, false, true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new LuxArtilleryEffect(this), filter, false, SetTargetPointer.SPELL));
 
         // At the beginning of your end step, if there are thirty or more counters among artifacts
         // and creatures you control, Lux Artillery deals 10 damage to each opponent.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility (new BeginningOfYourEndStepTriggeredAbility(
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(new BeginningOfYourEndStepTriggeredAbility(
                 Zone.BATTLEFIELD, new DamagePlayersEffect(10, TargetController.OPPONENT), false), LuxArtilleryCondition.instance,
                 "At the beginning of your end step, if there are thirty or more counters among artifacts " +
                         "and creatures you control, {this} deals 10 damage to each opponent"
@@ -86,7 +86,7 @@ class LuxArtilleryEffect extends ContinuousEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        Spell object = game.getStack().getSpell(targetPointer.getFirst(game, source));
+        Spell object = game.getStack().getSpell(getTargetPointer().getFirst(game, source));
         if (object != null) {
             zoneChangeCounter = game.getState().getZoneChangeCounter(object.getSourceId()) + 1;
             permanentId = object.getSourceId();
@@ -102,7 +102,7 @@ class LuxArtilleryEffect extends ContinuousEffectImpl {
             if (game.getState().getZoneChangeCounter(permanentId) >= zoneChangeCounter) {
                 discard();
             }
-            Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
+            Spell spell = game.getStack().getSpell(getTargetPointer().getFirst(game, source));
             if (spell != null) {
                 game.getState().addOtherAbility(spell.getCard(), ability, true);
             }

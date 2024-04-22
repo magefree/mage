@@ -52,7 +52,7 @@ class HexParasiteEffect extends OneShotEffect {
         staticText = "Remove up to X counters from target permanent. For each counter removed this way, {this} gets +1/+0 until end of turn";
     }
 
-    HexParasiteEffect(HexParasiteEffect effect) {
+    private HexParasiteEffect(final HexParasiteEffect effect) {
         super(effect);
     }
 

@@ -28,7 +28,7 @@ public final class BruseTarlBoorishHerder extends CardImpl {
     public BruseTarlBoorishHerder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{W}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN, SubType.ALLY);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

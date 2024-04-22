@@ -70,17 +70,16 @@ class UnleashTheInfernoEffect extends OneShotEffect {
         int lethal = Math.min(permanent.getLethalDamage(source.getSourceId(), game), 7);
         permanent.damage(7, source, game);
         int excess = 7 - lethal;
-        if (lethal > 0) {
-            return true;
+        if (excess > 0) {
+            ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(new DestroyTargetEffect(), false);
+            FilterPermanent filter = new FilterArtifactOrEnchantmentPermanent(
+                    "artifact or enchantment an opponent controls with mana value less than or equal to " + excess
+            );
+            filter.add(TargetController.OPPONENT.getControllerPredicate());
+            filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, excess + 1));
+            ability.addTarget(new TargetPermanent(filter));
+            game.fireReflexiveTriggeredAbility(ability, source);
         }
-        ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(new DestroyTargetEffect(), false);
-        FilterPermanent filter = new FilterArtifactOrEnchantmentPermanent(
-                "artifact or enchantment an opponent controls with mana value less that or equal to " + excess
-        );
-        filter.add(TargetController.OPPONENT.getControllerPredicate());
-        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, excess));
-        ability.addTarget(new TargetPermanent(filter));
-        game.fireReflexiveTriggeredAbility(ability, source);
         return true;
     }
 }

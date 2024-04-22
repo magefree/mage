@@ -1,4 +1,3 @@
-
 package mage.cards.l;
 
 import java.util.HashSet;
@@ -56,12 +55,12 @@ public final class LoxodonPeacekeeper extends CardImpl {
 
 class LoxodonPeacekeeperEffect extends OneShotEffect {
 
-    public LoxodonPeacekeeperEffect() {
+    LoxodonPeacekeeperEffect() {
         super(Outcome.Benefit);
         this.staticText = "the player with the lowest life total gains control of {this}. If two or more players are tied for lowest life total, you choose one of them, and that player gains control of {this}";
     }
 
-    public LoxodonPeacekeeperEffect(final LoxodonPeacekeeperEffect effect) {
+    private LoxodonPeacekeeperEffect(final LoxodonPeacekeeperEffect effect) {
         super(effect);
     }
 
@@ -95,7 +94,7 @@ class LoxodonPeacekeeperEffect extends OneShotEffect {
                     }
                 }
                 
-                if (tiedPlayers.size() > 0) {
+                if (!tiedPlayers.isEmpty()) {
                     UUID newControllerId = null;
                     if (tiedPlayers.size() > 1) {
                         FilterPlayer filter = new FilterPlayer("a player tied for lowest life total");

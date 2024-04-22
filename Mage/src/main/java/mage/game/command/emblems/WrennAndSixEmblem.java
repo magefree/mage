@@ -4,19 +4,13 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.keyword.RetraceAbility;
-import mage.cards.AdventureCard;
-import mage.cards.Card;
+import mage.cards.*;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.command.Emblem;
 import mage.players.Player;
 
-import java.util.Arrays;
 import java.util.UUID;
-import mage.cards.ModalDoubleFacesCard;
-import mage.cards.ModalDoubleFacesCardHalf;
-import mage.cards.SplitCard;
-import mage.cards.SplitCardHalf;
 
 /**
  * @author TheElk801
@@ -24,10 +18,17 @@ import mage.cards.SplitCardHalf;
 public final class WrennAndSixEmblem extends Emblem {
 
     public WrennAndSixEmblem() {
-        this.setName("Emblem Wrenn");
+        super("Emblem Wrenn");
         this.getAbilities().add(new SimpleStaticAbility(Zone.COMMAND, new WrennAndSixEmblemEffect()));
+    }
 
-        availableImageSetCodes = Arrays.asList("MH1", "2X2");
+    private WrennAndSixEmblem(final WrennAndSixEmblem card) {
+        super(card);
+    }
+
+    @Override
+    public WrennAndSixEmblem copy() {
+        return new WrennAndSixEmblem(this);
     }
 }
 
@@ -69,9 +70,9 @@ class WrennAndSixEmblemEffect extends ContinuousEffectImpl {
                     game.getState().addOtherAbility(rightHalfCard, ability);
                 }
             }
-            if (card instanceof ModalDoubleFacesCard) {
-                ModalDoubleFacesCardHalf leftHalfCard = ((ModalDoubleFacesCard) card).getLeftHalfCard();
-                ModalDoubleFacesCardHalf rightHalfCard = ((ModalDoubleFacesCard) card).getRightHalfCard();
+            if (card instanceof ModalDoubleFacedCard) {
+                ModalDoubleFacedCardHalf leftHalfCard = ((ModalDoubleFacedCard) card).getLeftHalfCard();
+                ModalDoubleFacedCardHalf rightHalfCard = ((ModalDoubleFacedCard) card).getRightHalfCard();
                 if (leftHalfCard.isInstantOrSorcery(game)) {
                     Ability ability = new RetraceAbility(leftHalfCard);
                     ability.setSourceId(cardId);

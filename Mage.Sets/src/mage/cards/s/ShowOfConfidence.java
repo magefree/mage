@@ -29,7 +29,7 @@ public final class ShowOfConfidence extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{W}");
 
         // When you cast this spell, copy it for each other instant or sorcery spell you've cast this turn. You may choose new targets for the copies.
-        this.addAbility(new CastSourceTriggeredAbility(new ShowOfConfidenceEffect()), new SpellsCastWatcher());
+        this.addAbility(new CastSourceTriggeredAbility(new ShowOfConfidenceEffect()));
 
         // Put a +1/+1 counter on target creature. It gains vigilance until end of turn.
         this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));

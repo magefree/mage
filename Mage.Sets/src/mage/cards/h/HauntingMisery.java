@@ -20,7 +20,7 @@ public final class HauntingMisery extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{B}{B}");
 
         // As an additional cost to cast Haunting Misery, exile X creature cards from your graveyard.
-        this.getSpellAbility().addCost(new ExileXFromYourGraveCost(StaticFilters.FILTER_CARD_CREATURE));
+        this.getSpellAbility().addCost(new ExileXFromYourGraveCost(StaticFilters.FILTER_CARD_CREATURES_YOUR_GRAVEYARD));
 
         // Haunting Misery deals X damage to target player.
         this.getSpellAbility().addTarget(new TargetPlayerOrPlaneswalker());

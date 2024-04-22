@@ -57,7 +57,7 @@ class TurnaboutEffect extends OneShotEffect {
         staticText = "Choose artifact, creature, or land. Tap all untapped permanents of the chosen type target player controls, or untap all tapped permanents of that type that player controls";
     }
 
-    public TurnaboutEffect(final TurnaboutEffect effect) {
+    private TurnaboutEffect(final TurnaboutEffect effect) {
         super(effect);
     }
 

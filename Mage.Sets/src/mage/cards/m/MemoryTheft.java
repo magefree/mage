@@ -8,7 +8,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
@@ -66,7 +65,7 @@ class MemoryTheftEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         new DiscardCardYouChooseTargetEffect(
-                StaticFilters.FILTER_CARD_NON_LAND, TargetController.ANY
+                StaticFilters.FILTER_CARD_NON_LAND
         ).apply(game, source);
         Player controller = game.getPlayer(source.getControllerId());
         Player player = game.getPlayer(source.getFirstTarget());

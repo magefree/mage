@@ -25,7 +25,7 @@ import mage.filter.predicate.mageobject.AnotherPredicate;
  */
 public final class CarnifexDemon extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("each other creature");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("other creature");
 
     static {
         filter.add(AnotherPredicate.instance);

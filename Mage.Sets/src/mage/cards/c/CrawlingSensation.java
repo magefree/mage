@@ -47,7 +47,7 @@ class CrawlingSensationTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new InsectToken()), false);
     }
 
-    public CrawlingSensationTriggeredAbility(final CrawlingSensationTriggeredAbility ability) {
+    private CrawlingSensationTriggeredAbility(final CrawlingSensationTriggeredAbility ability) {
         super(ability);
     }
 

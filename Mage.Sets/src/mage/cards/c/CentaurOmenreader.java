@@ -30,7 +30,7 @@ public final class CentaurOmenreader extends CardImpl {
 
     public CentaurOmenreader(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
-        addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
         this.subtype.add(SubType.CENTAUR);
         this.subtype.add(SubType.SHAMAN);
 
@@ -53,7 +53,7 @@ public final class CentaurOmenreader extends CardImpl {
 
 class CentaurOmenreaderSpellsCostReductionEffect extends SpellsCostReductionControllerEffect {
 
-    public CentaurOmenreaderSpellsCostReductionEffect(FilterCard filter) {
+    CentaurOmenreaderSpellsCostReductionEffect(FilterCard filter) {
         super(filter, 2);
         staticText = "As long as {this} is tapped, creature spells you cast cost {2} less to cast";
     }

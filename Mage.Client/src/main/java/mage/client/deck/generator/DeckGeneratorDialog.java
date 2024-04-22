@@ -92,7 +92,7 @@ public class DeckGeneratorDialog {
         c.weightx = 0.80;
         mainPanel.add(setPanel, c);
 
-        cbSets = new JComboBox<>(ConstructedFormats.getTypes());
+        cbSets = new JComboBox<>(ConstructedFormats.getTypes(false).toArray());
         cbSets.setSelectedIndex(0);
         cbSets.setAlignmentX(0.0F);
         setPanel.add(cbSets);
@@ -328,7 +328,7 @@ public class DeckGeneratorDialog {
             tmp.getParentFile().mkdirs();
             tmp.createNewFile();
             deck.setName(deckName);
-            XMAGE.getExporter().writeDeck(tmp.getAbsolutePath(), deck.getDeckCardLists());
+            XMAGE.getExporter().writeDeck(tmp.getAbsolutePath(), deck.prepareCardsOnlyDeck());
             cleanUp();
             return tmp.getAbsolutePath();
         } catch (Exception e) {

@@ -72,7 +72,7 @@ class AnsweredPrayersEffect extends OneShotEffect {
             return true;
         }
         game.addEffect(new BecomesCreatureSourceEffect(
-                new AnsweredPrayersToken(), "enchantment", Duration.EndOfTurn
+                new AnsweredPrayersToken(), CardType.ENCHANTMENT, Duration.EndOfTurn
         ), source);
         return true;
     }

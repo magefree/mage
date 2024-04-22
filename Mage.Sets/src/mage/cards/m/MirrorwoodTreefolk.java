@@ -55,7 +55,7 @@ class MirrorwoodTreefolkEffect extends RedirectionEffect {
         staticText = "The next time damage would be dealt to {this} this turn, that damage is dealt to any target instead";
     }
 
-    public MirrorwoodTreefolkEffect(final MirrorwoodTreefolkEffect effect) {
+    private MirrorwoodTreefolkEffect(final MirrorwoodTreefolkEffect effect) {
         super(effect);
         this.redirectToObject = effect.redirectToObject;
     }
@@ -85,11 +85,6 @@ class MirrorwoodTreefolkEffect extends RedirectionEffect {
             }
         }
         return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
 }

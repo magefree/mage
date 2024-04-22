@@ -25,7 +25,7 @@ public final class GrapplerSpider extends CardImpl {
         this.addAbility(ReachAbility.getInstance());
     }
 
-    public GrapplerSpider (final GrapplerSpider card) {
+    private GrapplerSpider(final GrapplerSpider card) {
         super(card);
     }
 

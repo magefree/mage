@@ -50,12 +50,12 @@ public final class ElvishSoultiller extends CardImpl {
 
 class ElvishSoultillerEffect extends OneShotEffect {
 
-    public ElvishSoultillerEffect() {
+    ElvishSoultillerEffect() {
         super(Outcome.Benefit);
         this.staticText = "choose a creature type. Shuffle all creature cards of that type from your graveyard into your library";
     }
 
-    public ElvishSoultillerEffect(final ElvishSoultillerEffect effect) {
+    private ElvishSoultillerEffect(final ElvishSoultillerEffect effect) {
         super(effect);
     }
 
@@ -77,7 +77,7 @@ class ElvishSoultillerEffect extends OneShotEffect {
                 Cards cardsToLibrary = new CardsImpl();
                 FilterCreatureCard filter = new FilterCreatureCard();
                 filter.add(SubType.byDescription(typeChoice.getChoice()).getPredicate());
-                cardsToLibrary.addAll(controller.getGraveyard().getCards(filter, source.getControllerId(), source, game));
+                cardsToLibrary.addAllCards(controller.getGraveyard().getCards(filter, source.getControllerId(), source, game));
                 controller.putCardsOnTopOfLibrary(cardsToLibrary, game, source, false);
                 controller.shuffleLibrary(source, game);
                 return true;

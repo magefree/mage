@@ -41,10 +41,10 @@ public class DealsDamageToACreatureAllTriggeredAbility extends TriggeredAbilityI
         this.setTargetPointer = setTargetPointer;
         this.filterPermanent = filterPermanent;
         setTriggerPhrase("Whenever " + filterPermanent.getMessage() + " deals "
-                              + (combatOnly ? "combat " : "") + "damage to a creature, ");
+                + (combatOnly ? "combat " : "") + "damage to a creature, ");
     }
 
-    public DealsDamageToACreatureAllTriggeredAbility(final DealsDamageToACreatureAllTriggeredAbility ability) {
+    protected DealsDamageToACreatureAllTriggeredAbility(final DealsDamageToACreatureAllTriggeredAbility ability) {
         super(ability);
         this.combatOnly = ability.combatOnly;
         this.filterPermanent = ability.filterPermanent;

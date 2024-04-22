@@ -43,7 +43,7 @@ class AetherStingTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(1), false);
     }
 
-    public AetherStingTriggeredAbility(final AetherStingTriggeredAbility ability) {
+    private AetherStingTriggeredAbility(final AetherStingTriggeredAbility ability) {
         super(ability);
     }
 

@@ -61,7 +61,7 @@ class QuirionDruidToken extends TokenImpl {
         this.toughness = new MageInt(2);
     }
 
-    public QuirionDruidToken(final QuirionDruidToken token) {
+    private QuirionDruidToken(final QuirionDruidToken token) {
         super(token);
     }
 

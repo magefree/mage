@@ -1,8 +1,11 @@
 package org.mage.test.cards.targets;
 
+import com.google.common.collect.ImmutableList;
 import mage.constants.MultiAmountType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.util.MultiAmountMessage;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.player.TestPlayer;
@@ -10,6 +13,7 @@ import org.mage.test.serverside.base.CardTestPlayerBaseWithAIHelps;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * @author JayDi85
@@ -20,117 +24,132 @@ public class TargetMultiAmountTest extends CardTestPlayerBaseWithAIHelps {
     @Test
     public void test_DefaultValues() {
         // default values must be assigned from first to last by minimum values
-        assertDefaultValues("", 0, 0, 0);
+        assertDefaultValuesUnconstrained("", 0, 0, 0);
         //
-        assertDefaultValues("0", 1, 0, 0);
-        assertDefaultValues("0 0", 2, 0, 0);
-        assertDefaultValues("0 0 0", 3, 0, 0);
+        assertDefaultValuesUnconstrained("0", 1, 0, 0);
+        assertDefaultValuesUnconstrained("0 0", 2, 0, 0);
+        assertDefaultValuesUnconstrained("0 0 0", 3, 0, 0);
         //
-        assertDefaultValues("1", 1, 1, 1);
-        assertDefaultValues("1 0", 2, 1, 1);
-        assertDefaultValues("1 0 0", 3, 1, 1);
+        assertDefaultValuesUnconstrained("1", 1, 1, 1);
+        assertDefaultValuesUnconstrained("1 0", 2, 1, 1);
+        assertDefaultValuesUnconstrained("1 0 0", 3, 1, 1);
         //
-        assertDefaultValues("1", 1, 1, 2);
-        assertDefaultValues("1 0", 2, 1, 2);
-        assertDefaultValues("1 0 0", 3, 1, 2);
+        assertDefaultValuesUnconstrained("1", 1, 1, 2);
+        assertDefaultValuesUnconstrained("1 0", 2, 1, 2);
+        assertDefaultValuesUnconstrained("1 0 0", 3, 1, 2);
         //
-        assertDefaultValues("2", 1, 2, 2);
-        assertDefaultValues("2 0", 2, 2, 2);
-        assertDefaultValues("2 0 0", 3, 2, 2);
+        assertDefaultValuesUnconstrained("2", 1, 2, 2);
+        assertDefaultValuesUnconstrained("2 0", 2, 2, 2);
+        assertDefaultValuesUnconstrained("2 0 0", 3, 2, 2);
         //
-        assertDefaultValues("2", 1, 2, 10);
-        assertDefaultValues("2 0", 2, 2, 10);
-        assertDefaultValues("2 0 0", 3, 2, 10);
+        assertDefaultValuesUnconstrained("2", 1, 2, 10);
+        assertDefaultValuesUnconstrained("2 0", 2, 2, 10);
+        assertDefaultValuesUnconstrained("2 0 0", 3, 2, 10);
         //
         // performance test
-        assertDefaultValues("2 0 0", 3, 2, Integer.MAX_VALUE);
+        assertDefaultValuesUnconstrained("2 0 0", 3, 2, Integer.MAX_VALUE);
     }
 
-    private void assertDefaultValues(String need, int count, int min, int max) {
-        List<Integer> defaultValues = MultiAmountType.prepareDefaltValues(count, min, max);
+    private List<MultiAmountMessage> getUnconstrainedConstraints(int count) {
+        return IntStream.range(0, count).mapToObj(i -> new MultiAmountMessage("", Integer.MIN_VALUE, Integer.MAX_VALUE))
+                .collect(Collectors.toList());
+    }
+
+    private void assertDefaultValuesUnconstrained(String need, int count, int min, int max) {
+        List<MultiAmountMessage> constraints = getUnconstrainedConstraints(count);
+        List<Integer> defaultValues = MultiAmountType.prepareDefaltValues(constraints, min, max);
         String current = defaultValues
                 .stream()
                 .map(String::valueOf)
                 .collect(Collectors.joining(" "));
         Assert.assertEquals("default values", need, current);
-        Assert.assertTrue("default values must be good", MultiAmountType.isGoodValues(defaultValues, count, min, max));
+        Assert.assertTrue("default values must be good",
+                MultiAmountType.isGoodValues(defaultValues, constraints, min, max));
     }
 
     @Test
     public void test_MaxValues() {
         // max possible values must be assigned from first to last by max possible values
-        assertMaxValues("", 0, 0, 0);
+        assertMaxValuesUnconstrained("", 0, 0, 0);
         //
-        assertMaxValues("0", 1, 0, 0);
-        assertMaxValues("0 0", 2, 0, 0);
-        assertMaxValues("0 0 0", 3, 0, 0);
+        assertMaxValuesUnconstrained("0", 1, 0, 0);
+        assertMaxValuesUnconstrained("0 0", 2, 0, 0);
+        assertMaxValuesUnconstrained("0 0 0", 3, 0, 0);
         //
-        assertMaxValues("1", 1, 1, 1);
-        assertMaxValues("1 0", 2, 1, 1);
-        assertMaxValues("1 0 0", 3, 1, 1);
+        assertMaxValuesUnconstrained("1", 1, 1, 1);
+        assertMaxValuesUnconstrained("1 0", 2, 1, 1);
+        assertMaxValuesUnconstrained("1 0 0", 3, 1, 1);
         //
-        assertMaxValues("2", 1, 1, 2);
-        assertMaxValues("1 1", 2, 1, 2);
-        assertMaxValues("1 1 0", 3, 1, 2);
+        assertMaxValuesUnconstrained("2", 1, 1, 2);
+        assertMaxValuesUnconstrained("1 1", 2, 1, 2);
+        assertMaxValuesUnconstrained("1 1 0", 3, 1, 2);
         //
-        assertMaxValues("2", 1, 2, 2);
-        assertMaxValues("1 1", 2, 2, 2);
-        assertMaxValues("1 1 0", 3, 2, 2);
+        assertMaxValuesUnconstrained("2", 1, 2, 2);
+        assertMaxValuesUnconstrained("1 1", 2, 2, 2);
+        assertMaxValuesUnconstrained("1 1 0", 3, 2, 2);
         //
-        assertMaxValues("10", 1, 2, 10);
-        assertMaxValues("5 5", 2, 2, 10);
-        assertMaxValues("4 3 3", 3, 2, 10);
+        assertMaxValuesUnconstrained("10", 1, 2, 10);
+        assertMaxValuesUnconstrained("5 5", 2, 2, 10);
+        assertMaxValuesUnconstrained("4 3 3", 3, 2, 10);
         //
-        assertMaxValues("1 1 1 1 1 0 0 0 0 0", 10, 2, 5);
+        assertMaxValuesUnconstrained("1 1 1 1 1 0 0 0 0 0", 10, 2, 5);
         //
         // performance test
-        assertMaxValues(String.valueOf(Integer.MAX_VALUE), 1, 2, Integer.MAX_VALUE);
+        assertMaxValuesUnconstrained(String.valueOf(Integer.MAX_VALUE), 1, 2, Integer.MAX_VALUE);
         int part = Integer.MAX_VALUE / 3;
         String need = String.format("%d %d %d", part + 1, part, part);
-        assertMaxValues(need, 3, 2, Integer.MAX_VALUE);
+        assertMaxValuesUnconstrained(need, 3, 2, Integer.MAX_VALUE);
     }
 
-    private void assertMaxValues(String need, int count, int min, int max) {
-        List<Integer> maxValues = MultiAmountType.prepareMaxValues(count, min, max);
+    private void assertMaxValuesUnconstrained(String need, int count, int min, int max) {
+        List<MultiAmountMessage> constraints = getUnconstrainedConstraints(count);
+        List<Integer> maxValues = MultiAmountType.prepareMaxValues(constraints, min, max);
         String current = maxValues
                 .stream()
                 .map(String::valueOf)
                 .collect(Collectors.joining(" "));
         Assert.assertEquals("max values", need, current);
-        Assert.assertTrue("max values must be good", MultiAmountType.isGoodValues(maxValues, count, min, max));
+        Assert.assertTrue("max values must be good", MultiAmountType.isGoodValues(maxValues, constraints, min, max));
     }
 
     @Test
     public void test_GoodValues() {
+        List<List<MultiAmountMessage>> constraints = ImmutableList.of(
+                getUnconstrainedConstraints(0),
+                getUnconstrainedConstraints(1),
+                getUnconstrainedConstraints(2),
+                getUnconstrainedConstraints(3),
+                getUnconstrainedConstraints(4));
+
         // good values are checking in test_DefaultValues, it's an additional
-        List<Integer> list = MultiAmountType.prepareDefaltValues(3, 0, 0);
+        List<Integer> list = MultiAmountType.prepareDefaltValues(constraints.get(3), 0, 0);
 
         // count (0, 0, 0)
-        Assert.assertFalse("count", MultiAmountType.isGoodValues(list, 0, 0, 0));
-        Assert.assertFalse("count", MultiAmountType.isGoodValues(list, 1, 0, 0));
-        Assert.assertFalse("count", MultiAmountType.isGoodValues(list, 2, 0, 0));
-        Assert.assertTrue("count", MultiAmountType.isGoodValues(list, 3, 0, 0));
-        Assert.assertFalse("count", MultiAmountType.isGoodValues(list, 4, 0, 0));
+        Assert.assertFalse("count", MultiAmountType.isGoodValues(list, constraints.get(0), 0, 0));
+        Assert.assertFalse("count", MultiAmountType.isGoodValues(list, constraints.get(1), 0, 0));
+        Assert.assertFalse("count", MultiAmountType.isGoodValues(list, constraints.get(2), 0, 0));
+        Assert.assertTrue("count", MultiAmountType.isGoodValues(list, constraints.get(3), 0, 0));
+        Assert.assertFalse("count", MultiAmountType.isGoodValues(list, constraints.get(4), 0, 0));
 
         // min (0, 1, 1)
         list.set(0, 0);
         list.set(1, 1);
         list.set(2, 1);
-        Assert.assertTrue("min", MultiAmountType.isGoodValues(list, 3, 0, 100));
-        Assert.assertTrue("min", MultiAmountType.isGoodValues(list, 3, 1, 100));
-        Assert.assertTrue("min", MultiAmountType.isGoodValues(list, 3, 2, 100));
-        Assert.assertFalse("min", MultiAmountType.isGoodValues(list, 3, 3, 100));
-        Assert.assertFalse("min", MultiAmountType.isGoodValues(list, 3, 4, 100));
+        Assert.assertTrue("min", MultiAmountType.isGoodValues(list, constraints.get(3), 0, 100));
+        Assert.assertTrue("min", MultiAmountType.isGoodValues(list, constraints.get(3), 1, 100));
+        Assert.assertTrue("min", MultiAmountType.isGoodValues(list, constraints.get(3), 2, 100));
+        Assert.assertFalse("min", MultiAmountType.isGoodValues(list, constraints.get(3), 3, 100));
+        Assert.assertFalse("min", MultiAmountType.isGoodValues(list, constraints.get(3), 4, 100));
 
         // max (0, 1, 1)
         list.set(0, 0);
         list.set(1, 1);
         list.set(2, 1);
-        Assert.assertFalse("max", MultiAmountType.isGoodValues(list, 3, 0, 0));
-        Assert.assertFalse("max", MultiAmountType.isGoodValues(list, 3, 0, 1));
-        Assert.assertTrue("max", MultiAmountType.isGoodValues(list, 3, 0, 2));
-        Assert.assertTrue("max", MultiAmountType.isGoodValues(list, 3, 0, 3));
-        Assert.assertTrue("max", MultiAmountType.isGoodValues(list, 3, 0, 4));
+        Assert.assertFalse("max", MultiAmountType.isGoodValues(list, constraints.get(3), 0, 0));
+        Assert.assertFalse("max", MultiAmountType.isGoodValues(list, constraints.get(3), 0, 1));
+        Assert.assertTrue("max", MultiAmountType.isGoodValues(list, constraints.get(3), 0, 2));
+        Assert.assertTrue("max", MultiAmountType.isGoodValues(list, constraints.get(3), 0, 3));
+        Assert.assertTrue("max", MultiAmountType.isGoodValues(list, constraints.get(3), 0, 4));
     }
 
     @Test
@@ -138,32 +157,36 @@ public class TargetMultiAmountTest extends CardTestPlayerBaseWithAIHelps {
         // parse must use correct values on good data or default values on broken data
 
         // simple parse without data check
-        assertParse("", 3, 1, 3, "", false);
-        assertParse("1", 3, 1, 3, "1", false);
-        assertParse("0 0 0", 3, 1, 3, "0 0 0", false);
-        assertParse("1 0 3", 3, 1, 3, "1 0 3", false);
-        assertParse("0 5 0 6", 3, 1, 3, "1,text 5 4. 6", false);
+        assertParseUnconstrained("", 3, 1, 3, "", false);
+        assertParseUnconstrained("1", 3, 1, 3, "1", false);
+        assertParseUnconstrained("0 0 0", 3, 1, 3, "0 0 0", false);
+        assertParseUnconstrained("1 0 3", 3, 1, 3, "1 0 3", false);
+        assertParseUnconstrained("0 5 0 6", 3, 1, 3, "1,text 5 4. 6", false);
 
         // parse with data check - good data
-        assertParse("1 0 2", 3, 0, 3, "1 0 2", true);
+        assertParseUnconstrained("1 0 2", 3, 0, 3, "1 0 2", true);
 
         // parse with data check - broken data (must return defalt - 1 0 0)
-        assertParse("1 0 0", 3, 1, 3, "", true);
-        assertParse("1 0 0", 3, 1, 3, "1", true);
-        assertParse("1 0 0", 3, 1, 3, "0 0 0", true);
-        assertParse("1 0 0", 3, 1, 3, "1 0 3", true);
-        assertParse("1 0 0", 3, 1, 3, "1,text 4.", true);
+        assertParseUnconstrained("1 0 0", 3, 1, 3, "", true);
+        assertParseUnconstrained("1 0 0", 3, 1, 3, "1", true);
+        assertParseUnconstrained("1 0 0", 3, 1, 3, "0 0 0", true);
+        assertParseUnconstrained("1 0 0", 3, 1, 3, "1 0 3", true);
+        assertParseUnconstrained("1 0 0", 3, 1, 3, "1,text 4.", true);
     }
 
-    private void assertParse(String need, int count, int min, int max, String answerToParse, Boolean returnDefaultOnError) {
-        List<Integer> parsedValues = MultiAmountType.parseAnswer(answerToParse, count, min, max, returnDefaultOnError);
+    private void assertParseUnconstrained(String need, int count, int min, int max, String answerToParse,
+            Boolean returnDefaultOnError) {
+        List<MultiAmountMessage> constraints = getUnconstrainedConstraints(count);
+        List<Integer> parsedValues = MultiAmountType.parseAnswer(answerToParse, constraints, min, max,
+                returnDefaultOnError);
         String current = parsedValues
                 .stream()
                 .map(String::valueOf)
                 .collect(Collectors.joining(" "));
         Assert.assertEquals("parsed values", need, current);
         if (returnDefaultOnError) {
-            Assert.assertTrue("parsed values must be good", MultiAmountType.isGoodValues(parsedValues, count, min, max));
+            Assert.assertTrue("parsed values must be good",
+                    MultiAmountType.isGoodValues(parsedValues, constraints, min, max));
         }
     }
 

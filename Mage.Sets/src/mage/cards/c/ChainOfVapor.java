@@ -17,6 +17,7 @@ import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetNonlandPermanent;
+import mage.target.common.TargetSacrifice;
 
 import java.util.UUID;
 
@@ -45,12 +46,12 @@ public final class ChainOfVapor extends CardImpl {
 
 class ChainOfVaporEffect extends OneShotEffect {
 
-    public ChainOfVaporEffect() {
+    ChainOfVaporEffect() {
         super(Outcome.ReturnToHand);
         this.staticText = "Return target nonland permanent to its owner's hand. Then that permanent's controller may sacrifice a land. If the player does, they may copy this spell and may choose a new target for that copy";
     }
 
-    public ChainOfVaporEffect(final ChainOfVaporEffect effect) {
+    private ChainOfVaporEffect(final ChainOfVaporEffect effect) {
         super(effect);
     }
 
@@ -70,7 +71,7 @@ class ChainOfVaporEffect extends OneShotEffect {
         if (permanent != null) {
             controller.moveCards(permanent, Zone.HAND, source, game);
             Player player = game.getPlayer(permanent.getControllerId());
-            TargetControlledPermanent target = new TargetControlledPermanent(0, 1, new FilterControlledLandPermanent("a land to sacrifice (to be able to copy " + sourceObject.getName() + ')'), true);
+            TargetSacrifice target = new TargetSacrifice(0, 1, new FilterControlledLandPermanent("a land to sacrifice (to be able to copy " + sourceObject.getName() + ')'));
             if (player != null && player.chooseTarget(Outcome.Sacrifice, target, source, game)) {
                 Permanent land = game.getPermanent(target.getFirstTarget());
                 if (land != null && land.sacrifice(source, game)) {

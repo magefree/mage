@@ -60,18 +60,18 @@ public final class MuseVessel extends CardImpl {
 
 class MuseVesselExileEffect extends OneShotEffect {
 
-    public MuseVesselExileEffect() {
+    MuseVesselExileEffect() {
         super(Outcome.Exile);
         staticText = "target player exiles a card from their hand";
     }
 
-    public MuseVesselExileEffect(final MuseVesselExileEffect effect) {
+    private MuseVesselExileEffect(final MuseVesselExileEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         MageObject sourceObject = source.getSourceObject(game);
         if (sourceObject == null) {
             return false;
@@ -97,12 +97,12 @@ class MuseVesselExileEffect extends OneShotEffect {
 
 class MuseVesselMayPlayExiledEffect extends AsThoughEffectImpl {
 
-    public MuseVesselMayPlayExiledEffect() {
+    MuseVesselMayPlayExiledEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
         this.staticText = "Choose a card exiled with {this}. You may play that card this turn";
     }
 
-    public MuseVesselMayPlayExiledEffect(final MuseVesselMayPlayExiledEffect effect) {
+    private MuseVesselMayPlayExiledEffect(final MuseVesselMayPlayExiledEffect effect) {
         super(effect);
     }
 
@@ -130,7 +130,7 @@ class TargetCardInMuseVesselExile extends TargetCardInExile {
         super(1, 1, new FilterCard("card exiled with Muse Vessel"), null);
     }
 
-    public TargetCardInMuseVesselExile(final TargetCardInMuseVesselExile target) {
+    private TargetCardInMuseVesselExile(final TargetCardInMuseVesselExile target) {
         super(target);
     }
 

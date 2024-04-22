@@ -41,7 +41,7 @@ public final class NahiriStormOfStone extends CardImpl {
     public NahiriStormOfStone(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{R/W}{R/W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.NAHIRI);
         this.setStartingLoyalty(6);
 

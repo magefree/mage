@@ -22,7 +22,7 @@ public final class KherKeep extends CardImpl {
 
     public KherKeep(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());

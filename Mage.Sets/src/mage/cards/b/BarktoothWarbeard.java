@@ -17,7 +17,7 @@ public final class BarktoothWarbeard extends CardImpl {
 
     public BarktoothWarbeard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{R}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN, SubType.WARRIOR);
 
         this.power = new MageInt(6);

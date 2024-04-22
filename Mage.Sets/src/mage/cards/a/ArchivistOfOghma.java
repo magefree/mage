@@ -52,7 +52,7 @@ class ArchivistOfOghmaTriggeredAbility extends TriggeredAbilityImpl {
         this.addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public ArchivistOfOghmaTriggeredAbility(final ArchivistOfOghmaTriggeredAbility ability) {
+    private ArchivistOfOghmaTriggeredAbility(final ArchivistOfOghmaTriggeredAbility ability) {
         super(ability);
     }
 

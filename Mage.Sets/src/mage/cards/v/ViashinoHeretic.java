@@ -57,7 +57,7 @@ class ViashinoHereticEffect extends OneShotEffect {
         this.staticText = "Destroy target artifact. Viashino Heretic deals damage to that artifact's controller equal to the artifact's mana value";
     }
 
-    public ViashinoHereticEffect(final ViashinoHereticEffect effect) {
+    private ViashinoHereticEffect(final ViashinoHereticEffect effect) {
         super(effect);
     }
 

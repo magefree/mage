@@ -2,10 +2,8 @@ package mage.client.dialog;
 
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.icon.CardIconImpl;
-import mage.abilities.icon.CardIconOrder;
-import mage.abilities.icon.CardIconPosition;
-import mage.abilities.icon.CardIconType;
+import mage.abilities.effects.common.continuous.BecomesFaceDownCreatureEffect;
+import mage.abilities.icon.*;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.*;
 import mage.cards.decks.Deck;
@@ -15,6 +13,8 @@ import mage.cards.repository.ExpansionInfo;
 import mage.cards.repository.ExpansionRepository;
 import mage.client.MageFrame;
 import mage.client.cards.BigCard;
+import mage.client.game.PlayAreaPanel;
+import mage.client.game.PlayerPanelExt;
 import mage.client.themes.ThemeType;
 import mage.client.util.ClientEventType;
 import mage.client.util.Event;
@@ -24,16 +24,21 @@ import mage.constants.MultiplayerAttackOption;
 import mage.constants.RangeOfInfluence;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.GameException;
 import mage.game.GameImpl;
 import mage.game.command.Dungeon;
 import mage.game.command.Emblem;
 import mage.game.command.Plane;
-import mage.game.match.MatchType;
+import mage.game.match.*;
 import mage.game.mulligan.Mulligan;
 import mage.game.mulligan.MulliganType;
-import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.game.permanent.PermanentMeld;
+import mage.game.permanent.PermanentToken;
+import mage.game.permanent.token.IncubatorToken;
+import mage.game.permanent.token.Phyrexian00Token;
+import mage.game.permanent.token.Token;
+import mage.game.permanent.token.ZombieToken;
 import mage.players.Player;
 import mage.players.StubPlayer;
 import mage.util.CardUtil;
@@ -47,7 +52,6 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.List;
 import java.util.*;
-import mage.abilities.icon.CardIconColor;
 
 /**
  * App GUI: debug only, testing card renders and manipulations
@@ -58,8 +62,12 @@ public class TestCardRenderDialog extends MageDialog {
 
     private static final Logger logger = Logger.getLogger(TestCardRenderDialog.class);
     float cardSizeMod = 1.0f;
+    private Match match = null;
     private Game game = null;
+    private BigCard bigCard = null;
     Listener<Event> cardListener = null;
+
+    private PlayerPanelExt player = null; // original form lost, so can add only runtime
 
     public TestCardRenderDialog() {
         initComponents();
@@ -75,7 +83,7 @@ public class TestCardRenderDialog extends MageDialog {
         // init themes list
         this.comboTheme.setModel(new DefaultComboBoxModel(ThemeType.values()));
         this.comboTheme.setSelectedItem(PreferencesDialog.getCurrentTheme());
-        
+
         // init card icon colors list
         this.comboCardColor.setModel(new DefaultComboBoxModel(CardIconColor.values()));
         this.comboCardColor.setSelectedItem(CardIconColor.DEFAULT);
@@ -89,8 +97,13 @@ public class TestCardRenderDialog extends MageDialog {
         }, AWTEvent.MOUSE_EVENT_MASK);
          */
 
+        // init player panel
+        player = new PlayerPanelExt();
+        this.playerPanel.setLayout(new BorderLayout(5, 5));
+        this.playerPanel.add(player, BorderLayout.NORTH);
+
         // render cards
-        reloadCards();
+        reloadCardsAndPlayer();
 
         // windows settings
         MageFrame.getDesktop().remove(this);
@@ -137,7 +150,7 @@ public class TestCardRenderDialog extends MageDialog {
 
         if (transform) {
             // need direct transform call to keep other side info (original)
-            TransformAbility.transformPermanent(permanent, permCard.getSecondCardFace(), game, null);
+            TransformAbility.transformPermanent(permanent, game, null);
         }
 
         if (damage > 0) permanent.damage(damage, controllerId, null, game);
@@ -172,6 +185,18 @@ public class TestCardRenderDialog extends MageDialog {
         if (perm.isTransformable()) {
             perm.setTransformed(true);
         }
+
+        // workaround to apply face down image and other settings
+        if (perm.isFaceDown(game)) {
+            BecomesFaceDownCreatureEffect.makeFaceDownObject(
+                    game,
+                    null,
+                    perm,
+                    BecomesFaceDownCreatureEffect.findFaceDownType(game, perm),
+                    null
+            );
+        }
+
         PermanentView cardView = new PermanentView(perm, permCard, controllerId, game);
         cardView.setInViewerOnly(false); // must false for face down
         return cardView;
@@ -210,9 +235,100 @@ public class TestCardRenderDialog extends MageDialog {
         return planeView;
     }
 
-    private void reloadCards() {
+    private CardView createToken(Game game, UUID controllerId, Token token, String code, int damage, boolean tapped, boolean transformed) {
+        Token sourceToken = token.copy();
+        sourceToken.setExpansionSetCode(code);
+
+        PermanentToken perm = new PermanentToken(sourceToken, controllerId, game);
+        Set<Card> cardsList = new HashSet<>();
+        cardsList.add(perm);
+        game.loadCards(cardsList, controllerId);
+
+        if (damage > 0) perm.damage(damage, controllerId, null, game);
+        perm.removeSummoningSickness();
+        perm.setTapped(tapped);
+        if (perm.isTransformable() && transformed) {
+            perm.setTransformed(true);
+        }
+        PermanentView cardView = new PermanentView(perm, game.getCard(perm.getId()), controllerId, game);
+        //cardView.setInViewerOnly(true); // ???
+        return cardView;
+    }
+
+    private void reloadCardsAndPlayer() {
         // apply selected theme (warning, it will be applied for all app, so can be bugged in other dialogs - but it's ok for debug)
         PreferencesDialog.setCurrentTheme((ThemeType) comboTheme.getSelectedItem());
+
+        // prepare fake game and players without real match
+        // it's a workaround with minimum code and data init
+        this.match = new TestMatch();
+        this.game = new TestGame(MultiplayerAttackOption.MULTIPLE, RangeOfInfluence.ALL, MulliganType.GAME_DEFAULT.getMulligan(0), 20, 7);
+        Deck deck = new Deck();
+        Player playerYou = new StubPlayer("player1", RangeOfInfluence.ALL);
+        this.match.addPlayer(playerYou, deck);
+        this.game.addPlayer(playerYou, deck);
+        Player playerOpponent = new StubPlayer("player2", RangeOfInfluence.ALL);
+        this.game.addPlayer(playerOpponent, deck);
+        this.match.addPlayer(playerOpponent, deck);
+        this.bigCard = new BigCard();
+
+        // update PLAYER
+
+        // active status (it's already reset to default, e.g. active)
+        switch ((String) Objects.requireNonNull(comboPlayerStatus.getSelectedItem())) {
+            case "Active":
+                this.game.getState().setActivePlayerId(playerYou.getId());
+                break;
+            case "Inactive":
+                this.game.getState().setActivePlayerId(playerOpponent.getId());
+                break;
+            case "Dead":
+                playerYou.leave();
+                this.game.getState().setActivePlayerId(playerOpponent.getId());
+                break;
+            default:
+                throw new IllegalArgumentException("Unknown control type");
+        }
+
+        // control type
+        boolean isMe;
+        UUID controlledId;
+        switch ((String) Objects.requireNonNull(comboPlayerController.getSelectedItem())) {
+            case "me":
+                isMe = true;
+                controlledId = playerYou.getId();
+                break;
+            case "opponent":
+                isMe = false;
+                controlledId = playerOpponent.getId();
+                break;
+            default:
+                throw new IllegalArgumentException("Unknown control type");
+        }
+
+        // size mode
+        boolean smallMode = checkPlayerSmallMode.isSelected();
+
+        // possible target
+        Set<UUID> possibleTargets = null;
+        if (checkPlayerAsTarget.isSelected()) {
+            possibleTargets = new LinkedHashSet<>();
+            possibleTargets.add(playerYou.getId());
+        }
+
+        this.player.cleanUp();
+        this.player.changeGUISize();
+        GameView gameView = new GameView(this.game.getState(), this.game, controlledId, null);
+        PlayerView currentPlayerView = gameView.getPlayers()
+                .stream()
+                .filter(p -> p.getPlayerId().equals(playerYou.getId()))
+                .findFirst()
+                .orElse(null);
+        this.player.init(this.game.getId(), playerYou.getId(), isMe, this.bigCard, 0);
+        this.player.update(gameView, currentPlayerView, possibleTargets);
+        PlayAreaPanel.sizePlayerPanel(this.player, isMe, smallMode);
+
+        // update CARDS
 
         cardsPanel.cleanUp();
         cardsPanel.setCustomRenderMode(comboRenderMode.getSelectedIndex());
@@ -268,13 +384,6 @@ public class TestCardRenderDialog extends MageDialog {
             cardsPanel.addCardEventListener(this.cardListener);
         }
 
-        game = new TestGame(MultiplayerAttackOption.MULTIPLE, RangeOfInfluence.ALL, MulliganType.GAME_DEFAULT.getMulligan(0), 20);
-        Deck deck = new Deck();
-        Player playerYou = new StubPlayer("player1", RangeOfInfluence.ALL);
-        game.addPlayer(playerYou, deck);
-        Player playerOpponent = new StubPlayer("player2", RangeOfInfluence.ALL);
-        game.addPlayer(playerOpponent, deck);
-
         List<Ability> additionalIcons = Collections.singletonList(new SimpleStaticAbility(Zone.ALL, null));
         for (int i = 0; i < needAdditionalIcons; i++) {
             String text = "";
@@ -289,9 +398,10 @@ public class TestCardRenderDialog extends MageDialog {
         }
 
         List<CardView> cardViews = new ArrayList<>();
-        /* // test morphed
-        cardViews.add(createPermanentCard(game, playerYou.getId(), "RNA", "263", 0, 0, 0, false, null)); // mountain
-        cardViews.add(createPermanentCard(game, playerYou.getId(), "RNA", "185", 0, 0, 0, true, null)); // Judith, the Scourge Diva
+
+        //* test face down
+        cardViews.add(createPermanentCard(game, playerYou.getId(), "RNA", "263", 0, 0, 0, false, false, null)); // mountain
+        cardViews.add(createPermanentCard(game, playerYou.getId(), "RNA", "185", 0, 0, 0, true, false, null)); // Judith, the Scourge Diva
         cardViews.add(createHandCard(game, playerYou.getId(), "DIS", "153")); // Odds // Ends (split card)
         cardViews.add(createHandCard(game, playerYou.getId(), "ELD", "38")); // Animating Faerie (adventure card)
         cardViews.add(createFaceDownCard(game, playerOpponent.getId(), "ELD", "38", false, false, false)); // face down
@@ -299,7 +409,7 @@ public class TestCardRenderDialog extends MageDialog {
         cardViews.add(createFaceDownCard(game, playerOpponent.getId(), "ELD", "38", false, true, false)); // manifested
         //*/
 
-        /* //test emblems
+        /* test emblems
         cardViews.add(createPermanentCard(game, playerYou.getId(), "RNA", "78", 125, 89, 0, false, false, null)); // Noxious Groodion
         cardViews.add(createPermanentCard(game, playerYou.getId(), "RNA", "14", 3, 5, 2, false, false, null)); // Knight of Sorrows
         cardViews.add(createPermanentCard(game, playerYou.getId(), "DKA", "140", 5, 2, 2, false, false, null)); // Huntmaster of the Fells, transforms
@@ -309,14 +419,40 @@ public class TestCardRenderDialog extends MageDialog {
         cardViews.add(createPlane(new AkoumPlane())); // Plane - Akoum
         //*/
 
-        //test split, transform and mdf in hands
+        /* test split, transform and mdf in hands
         cardViews.add(createHandCard(game, playerYou.getId(), "SOI", "97")); // Accursed Witch
-        //cardViews.add(createHandCard(game, playerYou.getId(), "UMA", "225")); // Fire // Ice
-        //cardViews.add(createHandCard(game, playerYou.getId(), "ELD", "14")); // Giant Killer
-        //cardViews.add(createHandCard(game, playerYou.getId(), "ZNR", "134")); // Akoum Warrior
+        cardViews.add(createHandCard(game, playerYou.getId(), "ZNR", "134")); // Akoum Warrior
+        cardViews.add(createHandCard(game, playerYou.getId(), "UMA", "225")); // Fire // Ice
+        cardViews.add(createHandCard(game, playerYou.getId(), "DGM", "123")); // Beck // Call
+        cardViews.add(createHandCard(game, playerYou.getId(), "AKH", "210")); // Dusk // Dawn
         //*/
 
-        /*// test meld cards in hands and battlefield
+        /* test adventure cards in hands
+        cardViews.add(createHandCard(game, playerYou.getId(), "ELD", "14")); // Giant Killer
+        cardViews.add(createHandCard(game, playerYou.getId(), "WOE", "222")); // Cruel Somnophage
+        cardViews.add(createHandCard(game, playerYou.getId(), "WOE", "227")); // Gingerbread Hunter
+        cardViews.add(createHandCard(game, playerYou.getId(), "WOE", "221")); // Callous Sell-Sword
+        cardViews.add(createHandCard(game, playerYou.getId(), "ELD", "149")); // Beanstalk Giant
+        cardViews.add(createHandCard(game, playerYou.getId(), "WOE", "220")); // Beluna Grandsquall
+        //*/
+
+        /* test saga and case cards in hands
+        cardViews.add(createHandCard(game, playerYou.getId(), "DOM", "90")); // The Eldest Reborn
+        cardViews.add(createHandCard(game, playerYou.getId(), "MH2", "259")); // Urza's Saga
+        cardViews.add(createHandCard(game, playerYou.getId(), "MKM", "113")); // Case of the Burning Masks
+        cardViews.add(createHandCard(game, playerYou.getId(), "MKM", "155")); // Case of the Locked Hothouse
+        //*/
+
+        /* test case, class and saga cards in hands
+        cardViews.add(createHandCard(game, playerYou.getId(), "MKM", "113")); // Case of the Burning Masks
+        cardViews.add(createHandCard(game, playerYou.getId(), "MKM", "155")); // Case of the Locked Hothouse
+        cardViews.add(createHandCard(game, playerYou.getId(), "AFR", "6")); // Cleric Class
+        cardViews.add(createHandCard(game, playerYou.getId(), "AFR", "230")); // Rogue Class
+        cardViews.add(createHandCard(game, playerYou.getId(), "DOM", "90")); // The Eldest Reborn
+        cardViews.add(createHandCard(game, playerYou.getId(), "MH2", "259")); // Urza's Saga
+        //*/
+
+        /* test meld cards in hands and battlefield
         cardViews.add(createHandCard(game, playerYou.getId(), "EMN", "204")); // Hanweir Battlements
         cardViews.add(createHandCard(game, playerYou.getId(), "EMN", "130a")); // Hanweir Garrison
         cardViews.add(createHandCard(game, playerYou.getId(), "EMN", "130b")); // Hanweir, the Writhing Township
@@ -325,7 +461,7 @@ public class TestCardRenderDialog extends MageDialog {
         cardViews.add(createPermanentCard(game, playerYou.getId(), "EMN", "130b", 1, 1, 0, false, false, null)); // Hanweir, the Writhing Township
         //*/
 
-        // test variant double faced cards (main and second sides must be same pair)
+        /* test variant double faced cards (main and second sides must be same pair)
         // Jacob Hauken, Inspector -> Hauken's Insight
         cardViews.add(createHandCard(game, playerYou.getId(), "VOW", "65"));
         cardViews.add(createHandCard(game, playerYou.getId(), "VOW", "320"));
@@ -335,14 +471,23 @@ public class TestCardRenderDialog extends MageDialog {
         cardViews.add(createPermanentCard(game, playerYou.getId(), "VOW", "332", 1, 1, 0, false, false, null));
         //*/
 
-        /*//test card icons
+        /* test card icons
         cardViews.add(createHandCard(game, playerYou.getId(), "POR", "169")); // Grizzly Bears
         cardViews.add(createHandCard(game, playerYou.getId(), "DKA", "140")); // Huntmaster of the Fells, transforms
         cardViews.add(createPermanentCard(game, playerYou.getId(), "DKA", "140", 3, 3, 1, false, true, additionalIcons)); // Huntmaster of the Fells, transforms
         cardViews.add(createPermanentCard(game, playerYou.getId(), "MB1", "401", 1, 1, 0, false, false, additionalIcons)); // Hinterland Drake
         //cardViews.add(createPermanentCard(game, playerYou.getId(), "MB1", "1441", 1, 1, 0, true, false, additionalIcons)); // Kathari Remnant
         //cardViews.add(createPermanentCard(game, playerYou.getId(), "KHM", "50", 1, 1, 0, true, false, additionalIcons)); // Cosima, God of the Voyage
+        //*/
 
+        /* test tokens
+        // normal
+        cardViews.add(createToken(game, playerYou.getId(), new ZombieToken(), "10E", 0, false, false));
+        cardViews.add(createToken(game, playerYou.getId(), new ZombieToken(), "XXX", 1, false, false));
+        cardViews.add(createToken(game, playerYou.getId(), new ZombieToken(), null, 0, false, false));
+        // double faced
+        cardViews.add(createToken(game, playerYou.getId(), new IncubatorToken(), "MOM", 0, false, false));
+        cardViews.add(createToken(game, playerYou.getId(), new Phyrexian00Token(), "MOM", 1, false, true));
         //*/
 
         // duplicate cards
@@ -357,9 +502,8 @@ public class TestCardRenderDialog extends MageDialog {
             }
         }
 
-        BigCard big = new BigCard();
         CardsView view = new CardsView(cardViews);
-        cardsPanel.loadCards(view, big, game.getId());
+        cardsPanel.loadCards(view, this.bigCard, this.game.getId());
     }
 
     private void handleCardClick(Event event) {
@@ -372,8 +516,8 @@ public class TestCardRenderDialog extends MageDialog {
                     // new settings must be as a new copy -- it would activate the animations
                     PermanentView oldPermanent = (PermanentView) main.getGameCard();
                     PermanentView newPermament = new PermanentView(
-                            (Permanent) oldPermanent.getOriginalCard(),
-                            game.getCard(oldPermanent.getOriginalCard().getId()),
+                            oldPermanent,
+                            game.getCard(oldPermanent.getId()),
                             UUID.randomUUID(),
                             game
                     );
@@ -417,7 +561,6 @@ public class TestCardRenderDialog extends MageDialog {
     private void initComponents() {
 
         buttonCancel = new javax.swing.JButton();
-        cardsPanel = new mage.client.cards.CardArea();
         buttonReloadCards = new javax.swing.JButton();
         labelRenderMode = new javax.swing.JLabel();
         comboRenderMode = new javax.swing.JComboBox<>();
@@ -437,6 +580,17 @@ public class TestCardRenderDialog extends MageDialog {
         comboTheme = new javax.swing.JComboBox<>();
         labelCardColor = new javax.swing.JLabel();
         comboCardColor = new javax.swing.JComboBox<>();
+        panelBattlefield = new javax.swing.JPanel();
+        cardsPanel = new mage.client.cards.CardArea();
+        otherPanel = new javax.swing.JPanel();
+        playerPanel = new javax.swing.JPanel();
+        playerOptions = new javax.swing.JPanel();
+        checkPlayerSmallMode = new javax.swing.JCheckBox();
+        comboPlayerStatus = new javax.swing.JComboBox<>();
+        comboPlayerController = new javax.swing.JComboBox<>();
+        checkPlayerAsTarget = new javax.swing.JCheckBox();
+
+        setResizable(true);
 
         buttonCancel.setText("Close");
         buttonCancel.addActionListener(new java.awt.event.ActionListener() {
@@ -534,7 +688,7 @@ public class TestCardRenderDialog extends MageDialog {
                 .addComponent(labelCardIconsAdditionalAmount)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(spinnerCardIconsAdditionalAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(305, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelCardIconsLayout.setVerticalGroup(
             panelCardIconsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -569,15 +723,75 @@ public class TestCardRenderDialog extends MageDialog {
             }
         });
 
+        panelBattlefield.setLayout(new java.awt.BorderLayout());
+        panelBattlefield.add(cardsPanel, java.awt.BorderLayout.CENTER);
+
+        otherPanel.setLayout(new java.awt.BorderLayout());
+
+        playerPanel.setPreferredSize(new java.awt.Dimension(100, 10));
+
+        javax.swing.GroupLayout playerPanelLayout = new javax.swing.GroupLayout(playerPanel);
+        playerPanel.setLayout(playerPanelLayout);
+        playerPanelLayout.setHorizontalGroup(
+            playerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        playerPanelLayout.setVerticalGroup(
+            playerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        otherPanel.add(playerPanel, java.awt.BorderLayout.CENTER);
+
+        playerOptions.setLayout(new javax.swing.BoxLayout(playerOptions, javax.swing.BoxLayout.Y_AXIS));
+
+        checkPlayerSmallMode.setText("Small mode");
+        checkPlayerSmallMode.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                checkPlayerSmallModeItemStateChanged(evt);
+            }
+        });
+        playerOptions.add(checkPlayerSmallMode);
+
+        comboPlayerStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Active", "Inactive", "Dead" }));
+        comboPlayerStatus.setToolTipText("");
+        comboPlayerStatus.setAlignmentX(0.0F);
+        comboPlayerStatus.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                comboPlayerStatusItemStateChanged(evt);
+            }
+        });
+        playerOptions.add(comboPlayerStatus);
+
+        comboPlayerController.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "me", "opponent" }));
+        comboPlayerController.setAlignmentX(0.0F);
+        comboPlayerController.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                comboPlayerControllerItemStateChanged(evt);
+            }
+        });
+        playerOptions.add(comboPlayerController);
+
+        checkPlayerAsTarget.setText("As possible target");
+        checkPlayerAsTarget.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                checkPlayerAsTargetItemStateChanged(evt);
+            }
+        });
+        playerOptions.add(checkPlayerAsTarget);
+
+        otherPanel.add(playerOptions, java.awt.BorderLayout.NORTH);
+
+        panelBattlefield.add(otherPanel, java.awt.BorderLayout.WEST);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(panelCardIcons, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cardsPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(buttonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -601,7 +815,8 @@ public class TestCardRenderDialog extends MageDialog {
                         .addComponent(sliderSize, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(checkBoxGenerateManyCards)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(panelBattlefield, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -609,22 +824,23 @@ public class TestCardRenderDialog extends MageDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(buttonReloadCards)
-                        .addComponent(labelRenderMode)
-                        .addComponent(comboRenderMode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(labelSize)
-                        .addComponent(comboTheme, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(labelTheme)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(comboCardColor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(labelCardColor)))
+                            .addComponent(labelCardColor))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(buttonReloadCards)
+                            .addComponent(labelRenderMode)
+                            .addComponent(comboRenderMode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(labelSize)
+                            .addComponent(comboTheme, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(labelTheme)))
                     .addComponent(sliderSize, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(checkBoxGenerateManyCards))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelCardIcons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cardsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 405, Short.MAX_VALUE)
+                .addComponent(panelBattlefield, javax.swing.GroupLayout.DEFAULT_SIZE, 399, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(buttonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -638,67 +854,87 @@ public class TestCardRenderDialog extends MageDialog {
     }//GEN-LAST:event_buttonCancelActionPerformed
 
     private void buttonReloadCardsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonReloadCardsActionPerformed
-        reloadCards();
+        reloadCardsAndPlayer();
     }//GEN-LAST:event_buttonReloadCardsActionPerformed
 
     private void comboRenderModeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboRenderModeItemStateChanged
         // render modes are loading on show dialog, so must ignore change event on startup
         if (this.isVisible()) {
-            reloadCards();
+            reloadCardsAndPlayer();
         }
     }//GEN-LAST:event_comboRenderModeItemStateChanged
 
     private void sliderSizeStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sliderSizeStateChanged
-        // from DragCardGrid         
+        // from DragCardGrid
         // Fraction in [-1, 1]
         float sliderFrac = ((float) (sliderSize.getValue() - 50)) / 50;
         // Convert to frac in [0.5, 2.0] exponentially
         cardSizeMod = (float) Math.pow(2, sliderFrac);
-        reloadCards();
+        reloadCardsAndPlayer();
     }//GEN-LAST:event_sliderSizeStateChanged
 
     private void checkBoxGenerateManyCardsItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_checkBoxGenerateManyCardsItemStateChanged
-        reloadCards();
+        reloadCardsAndPlayer();
     }//GEN-LAST:event_checkBoxGenerateManyCardsItemStateChanged
 
     private void comboCardIconsPositionItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboCardIconsPositionItemStateChanged
-        reloadCards();
+        reloadCardsAndPlayer();
     }//GEN-LAST:event_comboCardIconsPositionItemStateChanged
 
     private void spinnerCardIconsMaxVisibleStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spinnerCardIconsMaxVisibleStateChanged
-        reloadCards();
+        reloadCardsAndPlayer();
     }//GEN-LAST:event_spinnerCardIconsMaxVisibleStateChanged
 
     private void spinnerCardIconsAdditionalAmountStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spinnerCardIconsAdditionalAmountStateChanged
-        reloadCards();
+        reloadCardsAndPlayer();
     }//GEN-LAST:event_spinnerCardIconsAdditionalAmountStateChanged
 
     private void comboCardIconsOrderItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboCardIconsOrderItemStateChanged
-        reloadCards();
+        reloadCardsAndPlayer();
     }//GEN-LAST:event_comboCardIconsOrderItemStateChanged
 
     private void comboThemeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboThemeItemStateChanged
         // themes list are loading on show dialog, so must ignore change event on startup
         if (this.isVisible()) {
-            reloadCards();
+            reloadCardsAndPlayer();
         }
     }//GEN-LAST:event_comboThemeItemStateChanged
 
     private void comboCardColorItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboCardColorItemStateChanged
         // card icon colors list are loading on show dialog, so must ignore change event on startup
         if (this.isVisible()) {
-            reloadCards();
+            reloadCardsAndPlayer();
         }
     }//GEN-LAST:event_comboCardColorItemStateChanged
+
+    private void comboPlayerStatusItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboPlayerStatusItemStateChanged
+        reloadCardsAndPlayer();
+    }//GEN-LAST:event_comboPlayerStatusItemStateChanged
+
+    private void comboPlayerControllerItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboPlayerControllerItemStateChanged
+        reloadCardsAndPlayer();
+    }//GEN-LAST:event_comboPlayerControllerItemStateChanged
+
+    private void checkPlayerSmallModeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_checkPlayerSmallModeItemStateChanged
+        reloadCardsAndPlayer();
+    }//GEN-LAST:event_checkPlayerSmallModeItemStateChanged
+
+    private void checkPlayerAsTargetItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_checkPlayerAsTargetItemStateChanged
+        reloadCardsAndPlayer();
+    }//GEN-LAST:event_checkPlayerAsTargetItemStateChanged
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonCancel;
     private javax.swing.JButton buttonReloadCards;
     private mage.client.cards.CardArea cardsPanel;
     private javax.swing.JCheckBox checkBoxGenerateManyCards;
+    private javax.swing.JCheckBox checkPlayerAsTarget;
+    private javax.swing.JCheckBox checkPlayerSmallMode;
     private javax.swing.JComboBox<String> comboCardColor;
     private javax.swing.JComboBox<String> comboCardIconsOrder;
     private javax.swing.JComboBox<String> comboCardIconsPosition;
+    private javax.swing.JComboBox<String> comboPlayerController;
+    private javax.swing.JComboBox<String> comboPlayerStatus;
     private javax.swing.JComboBox<String> comboRenderMode;
     private javax.swing.JComboBox<String> comboTheme;
     private javax.swing.JLabel labelCardColor;
@@ -709,7 +945,11 @@ public class TestCardRenderDialog extends MageDialog {
     private javax.swing.JLabel labelRenderMode;
     private javax.swing.JLabel labelSize;
     private javax.swing.JLabel labelTheme;
+    private javax.swing.JPanel otherPanel;
+    private javax.swing.JPanel panelBattlefield;
     private javax.swing.JPanel panelCardIcons;
+    private javax.swing.JPanel playerOptions;
+    private javax.swing.JPanel playerPanel;
     private javax.swing.JSlider sliderSize;
     private javax.swing.JSpinner spinnerCardIconsAdditionalAmount;
     private javax.swing.JSpinner spinnerCardIconsMaxVisible;
@@ -720,8 +960,8 @@ class TestGame extends GameImpl {
 
     private int numPlayers;
 
-    public TestGame(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startLife) {
-        super(attackOption, range, mulligan, startLife, 60);
+    public TestGame(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startLife, int startHandSize) {
+        super(attackOption, range, mulligan, 60, startLife, startHandSize);
     }
 
     public TestGame(final TestGame game) {
@@ -765,5 +1005,17 @@ class TestGameType extends MatchType {
     @Override
     public TestGameType copy() {
         return new TestGameType(this);
+    }
+}
+
+class TestMatch extends MatchImpl {
+
+    public TestMatch() {
+        super(new MatchOptions("fake match", "fake game type", true, 2));
+    }
+
+    @Override
+    public void startGame() throws GameException {
+        throw new IllegalStateException("Can't start fake match");
     }
 }

@@ -30,13 +30,13 @@ public final class TezzeretMasterOfMetal extends CardImpl {
 
     public TezzeretMasterOfMetal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{U}{B}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.TEZZERET);
 
         this.setStartingLoyalty(5);
 
         // +1: Reveal cards from the top of your library until you reveal an artifact card. Put that card into your hand and the rest on the bottom of your library in a random order.
-        this.addAbility(new LoyaltyAbility(new RevealCardsFromLibraryUntilEffect(StaticFilters.FILTER_CARD_ARTIFACT, Zone.HAND, Zone.LIBRARY), 1));
+        this.addAbility(new LoyaltyAbility(new RevealCardsFromLibraryUntilEffect(StaticFilters.FILTER_CARD_ARTIFACT, PutCards.HAND, PutCards.BOTTOM_RANDOM), 1));
 
         // -3: Target opponent loses life equal to the number of artifacts you control.
         Ability ability = new LoyaltyAbility(new LoseLifeTargetEffect(ArtifactYouControlCount.instance).setText("target opponent loses life equal to the number of artifacts you control"), -3);
@@ -73,7 +73,7 @@ class TezzeretMasterOfMetalEffect extends OneShotEffect {
         this.staticText = "Gain control of all artifacts and creatures target opponent controls";
     }
 
-    public TezzeretMasterOfMetalEffect(final TezzeretMasterOfMetalEffect effect) {
+    private TezzeretMasterOfMetalEffect(final TezzeretMasterOfMetalEffect effect) {
         super(effect);
     }
 
@@ -84,7 +84,7 @@ class TezzeretMasterOfMetalEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        List<Permanent> permanents = game.getBattlefield().getAllActivePermanents(filter, targetPointer.getFirst(game, source), game);
+        List<Permanent> permanents = game.getBattlefield().getAllActivePermanents(filter, getTargetPointer().getFirst(game, source), game);
         for (Permanent permanent : permanents) {
             ContinuousEffect effect = new TezzeretMasterOfMetalControlEffect(source.getControllerId());
             effect.setTargetPointer(new FixedTarget(permanent, game));
@@ -103,7 +103,7 @@ class TezzeretMasterOfMetalControlEffect extends ContinuousEffectImpl {
         this.controllerId = controllerId;
     }
 
-    public TezzeretMasterOfMetalControlEffect(final TezzeretMasterOfMetalControlEffect effect) {
+    private TezzeretMasterOfMetalControlEffect(final TezzeretMasterOfMetalControlEffect effect) {
         super(effect);
         this.controllerId = effect.controllerId;
     }
@@ -115,7 +115,7 @@ class TezzeretMasterOfMetalControlEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
+        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (permanent != null && controllerId != null) {
             return permanent.changeControllerId(controllerId, game, source);
         }

@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import mage.abilities.Ability;
@@ -33,7 +32,7 @@ public final class CurseOfTheNightlyHunt extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget));
 
         // Creatures enchanted player controls attack each turn if able.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CurseOfTheNightlyHuntEffect()));
+        this.addAbility(new SimpleStaticAbility(new CurseOfTheNightlyHuntEffect()));
 
     }
 
@@ -49,12 +48,12 @@ public final class CurseOfTheNightlyHunt extends CardImpl {
 
 class CurseOfTheNightlyHuntEffect extends RequirementEffect {
 
-    public CurseOfTheNightlyHuntEffect() {
+    CurseOfTheNightlyHuntEffect() {
         super(Duration.WhileOnBattlefield);
-        staticText = "Creatures enchanted player controls attack each turn if able";
+        staticText = "Creatures enchanted player controls attack each combat if able";
     }
 
-    public CurseOfTheNightlyHuntEffect(final CurseOfTheNightlyHuntEffect effect) {
+    private CurseOfTheNightlyHuntEffect(final CurseOfTheNightlyHuntEffect effect) {
         super(effect);
     }
 
@@ -66,12 +65,7 @@ class CurseOfTheNightlyHuntEffect extends RequirementEffect {
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
         Permanent enchantment = game.getPermanent(source.getSourceId());
-        if (enchantment != null && enchantment.getAttachedTo() != null) {
-            if (permanent.isControlledBy(enchantment.getAttachedTo())) {
-                return true;
-            }
-        }
-        return false;
+        return enchantment != null && enchantment.getAttachedTo() != null && (permanent.isControlledBy(enchantment.getAttachedTo()));
     }
 
     @Override

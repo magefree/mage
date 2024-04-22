@@ -37,7 +37,7 @@ public final class SaintTraftAndRemKarolus extends CardImpl {
     public SaintTraftAndRemKarolus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}{R}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPIRIT);
         this.subtype.add(SubType.HUMAN);
         this.power = new MageInt(3);

@@ -48,9 +48,9 @@ public final class ShamanOfTheGreatHunt extends CardImpl {
         // Haste
         this.addAbility(HasteAbility.getInstance());
         
-        // Whenever a creature you control deals combat damage to a player, put a +1/+1 counter on that creature.
+        // Whenever a creature you control deals combat damage to a player, put a +1/+1 counter on it.
         Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance());
-        effect.setText("put a +1/+1 counter on that creature");
+        effect.setText("put a +1/+1 counter on it");
         this.addAbility(new DealsDamageToAPlayerAllTriggeredAbility(
                 effect,
                 StaticFilters.FILTER_CONTROLLED_A_CREATURE, false, SetTargetPointer.PERMANENT, true

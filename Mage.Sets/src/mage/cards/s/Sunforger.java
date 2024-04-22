@@ -72,14 +72,14 @@ public final class Sunforger extends CardImpl {
 
 class SunforgerEffect extends OneShotEffect {
 
-    public SunforgerEffect() {
+    SunforgerEffect() {
         super(Outcome.PlayForFree);
         staticText = "Search your library for a red or white instant "
                 + "card with mana value 4 or less and cast that "
                 + "card without paying its mana cost. Then shuffle";
     }
 
-    public SunforgerEffect(final SunforgerEffect effect) {
+    private SunforgerEffect(final SunforgerEffect effect) {
         super(effect);
     }
 
@@ -131,7 +131,7 @@ class SunforgerUnattachCost extends CostImpl {
         this.text = "Unattach " + name;
     }
 
-    public SunforgerUnattachCost(final SunforgerUnattachCost cost) {
+    private SunforgerUnattachCost(final SunforgerUnattachCost cost) {
         super(cost);
     }
 

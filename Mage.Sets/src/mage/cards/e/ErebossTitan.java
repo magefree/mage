@@ -67,7 +67,7 @@ class ErebossTitanTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever a creature card leaves an opponent's graveyard, ");
     }
 
-    public ErebossTitanTriggeredAbility(final ErebossTitanTriggeredAbility ability) {
+    private ErebossTitanTriggeredAbility(final ErebossTitanTriggeredAbility ability) {
         super(ability);
     }
 

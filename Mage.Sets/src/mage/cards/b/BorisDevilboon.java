@@ -24,7 +24,7 @@ public final class BorisDevilboon extends CardImpl {
 
     public BorisDevilboon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ZOMBIE, SubType.WIZARD);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

@@ -3,7 +3,7 @@ package mage.cards.r;
 import mage.abilities.mana.BlueManaAbility;
 import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardSetInfo;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
@@ -12,7 +12,7 @@ import java.util.UUID;
 /**
  * @author JayDi85
  */
-public final class RiverglidePathway extends ModalDoubleFacesCard {
+public final class RiverglidePathway extends ModalDoubleFacedCard {
 
     public RiverglidePathway(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo,

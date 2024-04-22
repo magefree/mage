@@ -32,7 +32,7 @@ public final class ChandraPyromaster extends CardImpl {
 
     public ChandraPyromaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{R}{R}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.CHANDRA);
 
         this.setStartingLoyalty(4);
@@ -76,7 +76,7 @@ class ChandraPyromasterEffect1 extends OneShotEffect {
                 + "planeswalker's controller controls. That creature can't block this turn.";
     }
 
-    public ChandraPyromasterEffect1(final ChandraPyromasterEffect1 effect) {
+    private ChandraPyromasterEffect1(final ChandraPyromasterEffect1 effect) {
         super(effect);
     }
 
@@ -87,7 +87,7 @@ class ChandraPyromasterEffect1 extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        game.damagePlayerOrPlaneswalker(source.getTargets().get(0).getFirstTarget(),
+        game.damagePlayerOrPermanent(source.getTargets().get(0).getFirstTarget(),
                 1, source.getSourceId(), source, game, false, true);
         Permanent creature = game.getPermanent(source.getTargets().get(1).getFirstTarget());
         if (creature != null) {
@@ -107,7 +107,7 @@ class ChandraPyromasterTarget extends TargetPermanent {
                 + "or planeswalker's controller controls"), false);
     }
 
-    public ChandraPyromasterTarget(final ChandraPyromasterTarget target) {
+    private ChandraPyromasterTarget(final ChandraPyromasterTarget target) {
         super(target);
     }
 
@@ -168,7 +168,7 @@ class ChandraPyromasterEffect2 extends OneShotEffect {
         this.staticText = "Exile the top card of your library. You may play it this turn";
     }
 
-    public ChandraPyromasterEffect2(final ChandraPyromasterEffect2 effect) {
+    private ChandraPyromasterEffect2(final ChandraPyromasterEffect2 effect) {
         super(effect);
     }
 
@@ -205,7 +205,7 @@ class ChandraPyromasterEffect3 extends OneShotEffect {
                 + "You may cast the copies without paying their mana costs";
     }
 
-    public ChandraPyromasterEffect3(final ChandraPyromasterEffect3 effect) {
+    private ChandraPyromasterEffect3(final ChandraPyromasterEffect3 effect) {
         super(effect);
     }
 

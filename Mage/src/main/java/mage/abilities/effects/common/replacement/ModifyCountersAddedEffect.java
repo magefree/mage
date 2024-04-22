@@ -36,7 +36,7 @@ public class ModifyCountersAddedEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        event.setAmountForCounters(event.getAmount() + 1, true);
+        event.setAmountForCounters(CardUtil.overflowInc(event.getAmount(), 1), true);
         return false;
     }
 
@@ -55,11 +55,6 @@ public class ModifyCountersAddedEffect extends ReplacementEffectImpl {
             permanent = game.getPermanentEntering(event.getTargetId());
         }
         return permanent != null && filter.match(permanent, source.getControllerId(), source, game);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

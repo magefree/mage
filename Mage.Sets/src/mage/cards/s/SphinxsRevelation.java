@@ -23,7 +23,7 @@ public final class SphinxsRevelation extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(manaX).concatBy("and"));
     }
 
-    public SphinxsRevelation(final SphinxsRevelation card) {
+    private SphinxsRevelation(final SphinxsRevelation card) {
         super(card);
     }
 

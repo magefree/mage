@@ -53,7 +53,7 @@ public final class JeskaiRunemark extends CardImpl {
         // Enchanted creature has flying as long as you control a red or white permanent.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA),
-                new PermanentsOnTheBattlefieldCondition(filter), "{this} has flying as long as you control a red or white permanent")));
+                new PermanentsOnTheBattlefieldCondition(filter), "Enchanted creature has flying as long as you control a red or white permanent")));
     }
 
     private JeskaiRunemark(final JeskaiRunemark card) {

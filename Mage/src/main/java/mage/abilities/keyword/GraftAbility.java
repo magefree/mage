@@ -2,6 +2,7 @@
 package mage.abilities.keyword;
 
 import java.util.Locale;
+
 import mage.abilities.Ability;
 import mage.abilities.StaticAbility;
 import mage.abilities.TriggeredAbilityImpl;
@@ -27,7 +28,7 @@ import mage.util.CardUtil;
  * counters on it" and, "Whenever another creature enters the battlefield, if
  * this permanent has a +1/+1 counter on it, you may move a +1/+1 counter from
  * this permanent onto that creature."
- *
+ * <p>
  * 702.56b. If a creature has multiple instances of graft, each one works
  * separately.
  *
@@ -51,7 +52,7 @@ public class GraftAbility extends TriggeredAbilityImpl {
         addSubAbility(new GraftStaticAbility(amount));
     }
 
-    public GraftAbility(final GraftAbility ability) {
+    protected GraftAbility(final GraftAbility ability) {
         super(ability);
         this.amount = ability.amount;
         this.cardtype = ability.cardtype;
@@ -86,12 +87,9 @@ public class GraftAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        StringBuilder sb = new StringBuilder("Graft");
-        sb.append(' ').append(amount).append(" <i>(This ").append(cardtype).append(" enters the battlefield with ")
-                .append(amount == 1 ? "a" : CardUtil.numberToText(amount))
-                .append(" +1/+1 counter on it. Whenever a creature enters the battlefield, you may move a +1/+1 counter from this ")
-                .append(cardtype).append(" onto it.)</i>");
-        return sb.toString();
+        return "Graft" + ' ' + amount + " <i>(This " + cardtype + " enters the battlefield with "
+                + CardUtil.getOneOneCountersText(amount) + " on it. Whenever " + (cardtype.contains("creature") ? "another" : "a")
+                + " creature enters the battlefield, you may move a +1/+1 counter from this " + cardtype + " onto it.)</i>";
     }
 
 }
@@ -102,11 +100,11 @@ class GraftStaticAbility extends StaticAbility {
 
     public GraftStaticAbility(int amount) {
         super(Zone.ALL, new EntersBattlefieldEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance(amount))));
-        ruleText = new StringBuilder("This enters the battlefield with ").append(amount).append(" +1/+1 counter on it.").toString();
+        ruleText = "This enters the battlefield with " + CardUtil.getOneOneCountersText(amount) + " on it.";
         this.setRuleVisible(false);
     }
 
-    public GraftStaticAbility(final GraftStaticAbility ability) {
+    protected GraftStaticAbility(final GraftStaticAbility ability) {
         super(ability);
         this.ruleText = ability.ruleText;
     }
@@ -129,7 +127,7 @@ class GraftDistributeCounterEffect extends OneShotEffect {
         this.staticText = "you may move a +1/+1 counter from this permanent onto it";
     }
 
-    public GraftDistributeCounterEffect(final GraftDistributeCounterEffect effect) {
+    protected GraftDistributeCounterEffect(final GraftDistributeCounterEffect effect) {
         super(effect);
     }
 
@@ -144,7 +142,7 @@ class GraftDistributeCounterEffect extends OneShotEffect {
         if (sourcePermanent != null) {
             int numberOfCounters = sourcePermanent.getCounters(game).getCount(CounterType.P1P1);
             if (numberOfCounters > 0) {
-                Permanent targetCreature = game.getPermanent(targetPointer.getFirst(game, source));
+                Permanent targetCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
                 if (targetCreature != null) {
                     sourcePermanent.removeCounters(CounterType.P1P1.getName(), 1, source, game);
                     targetCreature.addCounters(CounterType.P1P1.createInstance(1), source.getControllerId(), source, game);

@@ -17,16 +17,15 @@ import java.util.List;
  */
 public class ConditionalManaEffect extends ManaEffect {
 
-    private BasicManaEffect effect;
-    private BasicManaEffect otherwiseEffect;
-    private Condition condition;
-
-    public ConditionalManaEffect(BasicManaEffect effect, Condition condition, String text) {
-        this(effect, null, condition, text);
-    }
+    private final BasicManaEffect effect;
+    private final BasicManaEffect otherwiseEffect;
+    private final Condition condition;
 
     public ConditionalManaEffect(BasicManaEffect effect, BasicManaEffect otherwiseEffect, Condition condition, String text) {
         super();
+        if (effect == null || otherwiseEffect == null) {
+            throw new IllegalArgumentException("Wrong code usage: mana effect must not be null");
+        }
         this.effect = effect;
         this.otherwiseEffect = otherwiseEffect;
         this.condition = condition;
@@ -36,9 +35,7 @@ public class ConditionalManaEffect extends ManaEffect {
     public ConditionalManaEffect(ConditionalManaEffect effect) {
         super(effect);
         this.effect = effect.effect.copy();
-        if (effect.otherwiseEffect != null) {
-            this.otherwiseEffect = effect.otherwiseEffect.copy();
-        }
+        this.otherwiseEffect = effect.otherwiseEffect.copy();
         this.condition = effect.condition;
     }
 
@@ -67,9 +64,9 @@ public class ConditionalManaEffect extends ManaEffect {
             return mana;
         }
         if (condition.apply(game, source)) {
-            mana = effect.getManaTemplate().copy();
-        } else if (otherwiseEffect != null) {
-            mana = otherwiseEffect.getManaTemplate().copy();
+            mana = effect.getManaTemplate(); // getManaTemplate returns a copy already
+        } else {
+            mana = otherwiseEffect.getManaTemplate(); // getManaTemplate returns a copy already
         }
         if (mana.getAny() > 0) {
             int amount = mana.getAny();

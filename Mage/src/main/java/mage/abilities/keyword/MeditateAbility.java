@@ -16,7 +16,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
- *
  * @author Styxo
  */
 public class MeditateAbility extends ActivatedAbilityImpl {
@@ -26,7 +25,7 @@ public class MeditateAbility extends ActivatedAbilityImpl {
         this.timing = TimingRule.SORCERY;
     }
 
-    public MeditateAbility(final MeditateAbility ability) {
+    protected MeditateAbility(final MeditateAbility ability) {
         super(ability);
     }
 
@@ -37,7 +36,7 @@ public class MeditateAbility extends ActivatedAbilityImpl {
 
     @Override
     public String getRule() {
-        StringBuilder sb = new StringBuilder("Meditate ").append(manaCosts.getText());
+        StringBuilder sb = new StringBuilder("Meditate ").append(getManaCosts().getText());
         sb.append(" <i>(Return this creature to its owner's hand. Meditate only as a sorcery.)</i>");
         return sb.toString();
     }
@@ -50,7 +49,7 @@ class ReturnToHandEffect extends OneShotEffect {
         super(Outcome.ReturnToHand);
     }
 
-    public ReturnToHandEffect(final ReturnToHandEffect effect) {
+    protected ReturnToHandEffect(final ReturnToHandEffect effect) {
         super(effect);
     }
 

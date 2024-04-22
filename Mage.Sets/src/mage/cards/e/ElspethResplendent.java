@@ -30,7 +30,7 @@ public final class ElspethResplendent extends CardImpl {
     public ElspethResplendent(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{W}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELSPETH);
         this.setStartingLoyalty(5);
 

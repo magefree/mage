@@ -76,6 +76,7 @@ public final class Torment extends ExpansionSet {
         cards.add(new SetCardInfo("False Memories", 37, Rarity.RARE, mage.cards.f.FalseMemories.class));
         cards.add(new SetCardInfo("Far Wanderings", 125, Rarity.COMMON, mage.cards.f.FarWanderings.class));
         cards.add(new SetCardInfo("Fiery Temper", 97, Rarity.COMMON, mage.cards.f.FieryTemper.class));
+        cards.add(new SetCardInfo("Flaming Gambit", 98, Rarity.UNCOMMON, mage.cards.f.FlamingGambit.class));
         cards.add(new SetCardInfo("Flash of Defiance", 99, Rarity.COMMON, mage.cards.f.FlashOfDefiance.class));
         cards.add(new SetCardInfo("Floating Shield", 5, Rarity.COMMON, mage.cards.f.FloatingShield.class));
         cards.add(new SetCardInfo("Frantic Purification", 6, Rarity.COMMON, mage.cards.f.FranticPurification.class));

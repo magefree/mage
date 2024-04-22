@@ -49,7 +49,7 @@ class ZndrspltsJudgmentEffect extends OneShotEffect {
         this.staticText = "For each player, choose friend or foe. Each friend creates a token that's a copy of a creature they control. Each foe returns a creature they control to its owner's hand";
     }
 
-    ZndrspltsJudgmentEffect(final ZndrspltsJudgmentEffect effect) {
+    private ZndrspltsJudgmentEffect(final ZndrspltsJudgmentEffect effect) {
         super(effect);
     }
 

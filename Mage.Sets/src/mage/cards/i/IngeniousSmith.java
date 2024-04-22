@@ -41,7 +41,7 @@ public final class IngeniousSmith extends CardImpl {
         // This ability triggers only once each turn.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance()), filter
-        ).setTriggersOnce(true));
+        ).setTriggersOnceEachTurn(true));
     }
 
     private IngeniousSmith(final IngeniousSmith card) {

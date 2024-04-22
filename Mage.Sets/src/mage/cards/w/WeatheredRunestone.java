@@ -44,7 +44,7 @@ public final class WeatheredRunestone extends CardImpl {
 
 class WeatheredRunestoneEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public WeatheredRunestoneEffect() {
+    WeatheredRunestoneEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Nonland permanent cards in graveyards and libraries can't enter the battlefield";
     }

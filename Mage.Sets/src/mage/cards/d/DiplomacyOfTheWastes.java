@@ -1,4 +1,3 @@
-
 package mage.cards.d;
 
 import java.util.UUID;
@@ -10,7 +9,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterNonlandCard;
 import mage.target.common.TargetOpponent;
 
@@ -28,7 +27,7 @@ public final class DiplomacyOfTheWastes extends CardImpl {
         this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(new FilterNonlandCard()));
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new LoseLifeTargetEffect(2), 
-                new PermanentsOnTheBattlefieldCondition(new FilterControlledCreaturePermanent(SubType.WARRIOR, "Warrior")),
+                new PermanentsOnTheBattlefieldCondition(new FilterControlledPermanent(SubType.WARRIOR, "Warrior")),
                 "If you control a Warrior, that player loses 2 life"));
 
     }

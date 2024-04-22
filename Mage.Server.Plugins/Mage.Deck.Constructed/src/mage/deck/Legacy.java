@@ -43,7 +43,6 @@ public class Legacy extends Constructed {
         banned.add("Mana Vault");
         banned.add("Memory Jar");
         banned.add("Mental Misstep");
-        banned.add("Mind's Desire");
         banned.add("Mind Twist");
         banned.add("Mishra's Workshop");
         banned.add("Mox Emerald");

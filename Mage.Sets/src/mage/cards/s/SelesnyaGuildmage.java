@@ -37,7 +37,7 @@ public final class SelesnyaGuildmage extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl<>("{3}{W}")));
     }
 
-    public SelesnyaGuildmage (final SelesnyaGuildmage card) {
+    private SelesnyaGuildmage(final SelesnyaGuildmage card) {
         super(card);
     }
 

@@ -54,7 +54,7 @@ class AzraBladeseekerEffect extends OneShotEffect {
         this.staticText = "each player on your team may discard a card, then each player who discarded a card this way draws a card";
     }
 
-    AzraBladeseekerEffect(final AzraBladeseekerEffect effect) {
+    private AzraBladeseekerEffect(final AzraBladeseekerEffect effect) {
         super(effect);
     }
 
@@ -90,7 +90,7 @@ class AzraBladeseekerEffect extends OneShotEffect {
         return true;
     }
 
-    class PlayerCard {
+    static class PlayerCard {
 
         private final Player player;
         private final Card card;

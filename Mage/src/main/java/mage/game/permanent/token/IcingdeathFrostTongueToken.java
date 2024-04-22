@@ -17,7 +17,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 
-import java.util.Arrays;
 import java.util.Optional;
 
 /**
@@ -52,8 +51,6 @@ public class IcingdeathFrostTongueToken extends TokenImpl {
 
         // Equip {2}
         this.addAbility(new EquipAbility(2));
-
-        availableImageSetCodes = Arrays.asList("AFR");
     }
 
     private IcingdeathFrostTongueToken(final IcingdeathFrostTongueToken token) {

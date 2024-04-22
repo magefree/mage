@@ -11,6 +11,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
@@ -31,7 +32,9 @@ public final class SharkTyphoon extends CardImpl {
 
         // Whenever you cast a noncreature spell, create an X/X blue Shark creature token with flying, where X is that spell's converted mana cost.
         this.addAbility(new SpellCastControllerTriggeredAbility(
-                new SharkTyphoonCastEffect(), StaticFilters.FILTER_SPELL_A_NON_CREATURE, false, true
+                new SharkTyphoonCastEffect(),
+                StaticFilters.FILTER_SPELL_A_NON_CREATURE,
+                false, SetTargetPointer.SPELL
         ));
 
         // Cycling {X}{1}{U}

@@ -51,7 +51,7 @@ class BenevolentOfferingEffect1 extends OneShotEffect {
         this.staticText = "Choose an opponent. You and that player each create three 1/1 white Spirit creature tokens with flying";
     }
 
-    BenevolentOfferingEffect1(final BenevolentOfferingEffect1 effect) {
+    private BenevolentOfferingEffect1(final BenevolentOfferingEffect1 effect) {
         super(effect);
     }
 
@@ -63,12 +63,16 @@ class BenevolentOfferingEffect1 extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) { return false; }
+        if (controller == null) {
+            return false;
+        }
 
         Target target = new TargetOpponent(true);
         target.choose(Outcome.Sacrifice, source.getControllerId(), source.getSourceId(), source, game);
         Player opponent = game.getPlayer(target.getFirstTarget());
-        if (opponent == null) { return false; }
+        if (opponent == null) {
+            return false;
+        }
 
         Effect effect = new CreateTokenTargetEffect(new SpiritWhiteToken(), 3);
         effect.setTargetPointer(new FixedTarget(opponent.getId()));
@@ -85,7 +89,7 @@ class BenevolentOfferingEffect2 extends OneShotEffect {
         this.staticText = "<br>Choose an opponent. You gain 2 life for each creature you control and that player gains 2 life for each creature they control";
     }
 
-    BenevolentOfferingEffect2(final BenevolentOfferingEffect2 effect) {
+    private BenevolentOfferingEffect2(final BenevolentOfferingEffect2 effect) {
         super(effect);
     }
 
@@ -97,12 +101,16 @@ class BenevolentOfferingEffect2 extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) { return false; }
+        if (controller == null) {
+            return false;
+        }
 
         Target target = new TargetOpponent(true);
         target.choose(Outcome.Sacrifice, source.getControllerId(), source.getSourceId(), source, game);
         Player opponent = game.getPlayer(target.getFirstTarget());
-        if (opponent == null) { return false; }
+        if (opponent == null) {
+            return false;
+        }
 
         int count = game.getBattlefield().countAll(StaticFilters.FILTER_PERMANENT_CREATURE, controller.getId(), game) * 2;
         controller.gainLife(count, game, source);

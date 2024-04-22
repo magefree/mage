@@ -26,7 +26,7 @@ public final class ZoZuThePunisher extends CardImpl {
 
     public ZoZuThePunisher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GOBLIN, SubType.WARRIOR);
 
         this.power = new MageInt(2);
@@ -51,7 +51,7 @@ class ZoZuThePunisherAbility extends TriggeredAbilityImpl {
             super(Zone.BATTLEFIELD, new DamageTargetEffect(2));
     }
 
-    ZoZuThePunisherAbility(final ZoZuThePunisherAbility ability) {
+    private ZoZuThePunisherAbility(final ZoZuThePunisherAbility ability) {
             super(ability);
     }
 

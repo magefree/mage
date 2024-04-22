@@ -13,7 +13,9 @@ import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -36,9 +38,7 @@ public final class StrongholdArena extends CardImpl {
 
         // Whenever one or more creatures you control deal combat damage to a player, you may reveal the top card of your library and put it into your hand.
         // If you do, you lose life equal to its mana value.
-        this.addAbility(new DealCombatDamageControlledTriggeredAbility(
-                Zone.BATTLEFIELD, new StrongholdArenaDrawEffect(), false, false, true
-        ));
+        this.addAbility(new DealCombatDamageControlledTriggeredAbility(Zone.BATTLEFIELD, new StrongholdArenaDrawEffect(), StaticFilters.FILTER_PERMANENT_CREATURES, SetTargetPointer.NONE, true));
     }
 
     private StrongholdArena(final StrongholdArena card) {
@@ -53,7 +53,7 @@ public final class StrongholdArena extends CardImpl {
 
 class StrongholdArenaGainLifeEffect extends OneShotEffect {
 
-    public StrongholdArenaGainLifeEffect() {
+    StrongholdArenaGainLifeEffect() {
         super(Outcome.GainLife);
         this.staticText = "you gain 3 life for each time it was kicked";
     }
@@ -73,14 +73,14 @@ class StrongholdArenaGainLifeEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        controller.gainLife(KickerAbility.getSourceObjectKickedCount(game, source) * 3, game, source);
+        controller.gainLife(KickerAbility.getKickedCounter(game, source) * 3, game, source);
         return true;
     }
 }
 
 class StrongholdArenaDrawEffect extends OneShotEffect {
 
-    public StrongholdArenaDrawEffect() {
+    StrongholdArenaDrawEffect() {
         super(Outcome.DrawCard);
         this.staticText = "reveal the top card of your library and put it into your hand. If you do, you lose life equal to its mana value.";
     }

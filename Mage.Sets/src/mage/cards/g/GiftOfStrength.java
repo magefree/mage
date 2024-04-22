@@ -26,7 +26,7 @@ public final class GiftOfStrength extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public GiftOfStrength(final GiftOfStrength giftOfStrength) {
+    private GiftOfStrength(final GiftOfStrength giftOfStrength) {
         super(giftOfStrength);
     }
 

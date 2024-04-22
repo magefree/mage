@@ -34,7 +34,7 @@ public final class OriginSpellbomb extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{W}")), false));
     }
 
-    public OriginSpellbomb (final OriginSpellbomb card) {
+    private OriginSpellbomb(final OriginSpellbomb card) {
         super(card);
     }
 

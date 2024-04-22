@@ -25,7 +25,7 @@ public final class OliviaMobilizedForWar extends CardImpl {
 
     public OliviaMobilizedForWar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.VAMPIRE);
         this.subtype.add(SubType.KNIGHT);
         this.power = new MageInt(3);
@@ -46,7 +46,7 @@ public final class OliviaMobilizedForWar extends CardImpl {
         effect.setText("and it becomes a Vampire in addition to its other types");
         doIfCostPaid.addEffect(effect);
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, doIfCostPaid,
-                StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, false, SetTargetPointer.PERMANENT, null));
+                StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, false, SetTargetPointer.PERMANENT));
     }
 
     private OliviaMobilizedForWar(final OliviaMobilizedForWar card) {

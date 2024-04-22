@@ -29,7 +29,7 @@ public final class JohtullWurm extends CardImpl {
         this.toughness = new MageInt(6);
 
         // Whenever Johtull Wurm becomes blocked, it gets -2/-1 until end of turn for each creature blocking it beyond the first.
-        this.addAbility(new BecomesBlockedSourceTriggeredAbility(new BoostSourceEffect(xValue2, xValue1, Duration.EndOfTurn, true, "it"), false));
+        this.addAbility(new BecomesBlockedSourceTriggeredAbility(new BoostSourceEffect(xValue2, xValue1, Duration.EndOfTurn, "it"), false));
     }
 
     private JohtullWurm(final JohtullWurm card) {

@@ -41,7 +41,7 @@ public final class AngelicCaptain extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever Angelic Captain attacks, it gets +1/+1 until end of turn for each other attacking Ally.
-        this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(xValue, xValue, Duration.EndOfTurn, true, "it"), false));
+        this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(xValue, xValue, Duration.EndOfTurn, "it"), false));
     }
 
     private AngelicCaptain(final AngelicCaptain card) {

@@ -64,7 +64,7 @@ class GauntletsOfChaosFirstTarget extends TargetControlledPermanent {
         setTargetName("artifact, creature, or land you control");
     }
 
-    public GauntletsOfChaosFirstTarget(final GauntletsOfChaosFirstTarget target) {
+    private GauntletsOfChaosFirstTarget(final GauntletsOfChaosFirstTarget target) {
         super(target);
     }
 
@@ -134,7 +134,7 @@ class GauntletsOfChaosSecondTarget extends TargetPermanent {
         setTargetName("permanent an opponent controls that shares one of those types with it");
     }
 
-    public GauntletsOfChaosSecondTarget(final GauntletsOfChaosSecondTarget target) {
+    private GauntletsOfChaosSecondTarget(final GauntletsOfChaosSecondTarget target) {
         super(target);
         this.firstTarget = target.firstTarget;
     }

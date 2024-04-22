@@ -31,7 +31,7 @@ public final class CageOfHands extends CardImpl {
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Neutral));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
@@ -54,12 +54,12 @@ public final class CageOfHands extends CardImpl {
 
 class CageOfHandsEffect extends RestrictionEffect {
 
-    public CageOfHandsEffect() {
+    CageOfHandsEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "Enchanted creature can't attack or block";
     }
 
-    public CageOfHandsEffect(final CageOfHandsEffect effect) {
+    private CageOfHandsEffect(final CageOfHandsEffect effect) {
         super(effect);
     }
 

@@ -19,7 +19,7 @@ public class CanBlockOnlyFlyingEffect extends RestrictionEffect {
         this.staticText = "{this} can block only creatures with flying";
     }
 
-    public CanBlockOnlyFlyingEffect(final CanBlockOnlyFlyingEffect effect) {
+    protected CanBlockOnlyFlyingEffect(final CanBlockOnlyFlyingEffect effect) {
         super(effect);
     }
 
