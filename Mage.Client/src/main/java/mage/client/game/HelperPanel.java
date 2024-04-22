@@ -64,7 +64,7 @@ public class HelperPanel extends JPanel {
     // originalId of feedback causing ability
     private UUID originalId;
     private String message;
-    private String filteredMessage; // Filtered version of message which is used for remembering answers to text
+    private String autoAnswerMessage; // Filtered version of message which is used for remembering answers to text
 
     private UUID gameId;
     private boolean gameNeedFeedback = false;
@@ -463,8 +463,8 @@ public class HelperPanel extends JPanel {
         this.dialogTextArea.setText(message, this.getWidth());
     }
 
-    public void setFilteredMessage(String filteredMessage) {
-        this.filteredMessage = filteredMessage;
+    public void setAutoAnswerMessage(String autoAnswerMessage) {
+        this.autoAnswerMessage = autoAnswerMessage;
     }
 
     public void setTextArea(String message) {
@@ -529,22 +529,22 @@ public class HelperPanel extends JPanel {
         switch (e.getActionCommand()) {
             case CMD_AUTO_ANSWER_ID_YES:
                 SessionHandler.sendPlayerAction(REQUEST_AUTO_ANSWER_ID_YES, gameId,
-                        originalId.toString() + '#' + (filteredMessage == null ? message : filteredMessage));
+                        originalId.toString() + '#' + (autoAnswerMessage == null ? message : autoAnswerMessage));
                 clickButton(btnLeft);
                 break;
             case CMD_AUTO_ANSWER_ID_NO:
                 SessionHandler.sendPlayerAction(REQUEST_AUTO_ANSWER_ID_NO, gameId,
-                        originalId.toString() + '#' + (filteredMessage == null ? message : filteredMessage));
+                        originalId.toString() + '#' + (autoAnswerMessage == null ? message : autoAnswerMessage));
                 clickButton(btnRight);
                 break;
             case CMD_AUTO_ANSWER_NAME_YES:
                 SessionHandler.sendPlayerAction(REQUEST_AUTO_ANSWER_TEXT_YES, gameId,
-                        (filteredMessage == null ? message : filteredMessage));
+                        (autoAnswerMessage == null ? message : autoAnswerMessage));
                 clickButton(btnLeft);
                 break;
             case CMD_AUTO_ANSWER_NAME_NO:
                 SessionHandler.sendPlayerAction(REQUEST_AUTO_ANSWER_TEXT_NO, gameId,
-                        (filteredMessage == null ? message : filteredMessage));
+                        (autoAnswerMessage == null ? message : autoAnswerMessage));
                 clickButton(btnRight);
                 break;
             case CMD_AUTO_ANSWER_RESET_ALL:

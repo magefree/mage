@@ -406,7 +406,7 @@ public class HumanPlayer extends PlayerImpl {
 
         MessageToClient messageToClient = new MessageToClient(message, secondMessage);
         Map<String, Serializable> options = new HashMap<>(2);
-        String filteredMessage = null; // Removes self-referential text for the purposes of remembering options
+        String autoAnswerMessage = null; // Removes self-referential text for the purposes of auto-answering
         if (trueText != null) {
             options.put("UI.left.btn.text", trueText);
         }
@@ -415,8 +415,8 @@ public class HumanPlayer extends PlayerImpl {
         }
         if (source != null) {
             //options.put(Constants.Option.ORIGINAL_ID, "")
-            filteredMessage = message.replace(getRelatedObjectName(source, game), "{this}");
-            options.put(Constants.Option.FILTERED_MESSAGE, filteredMessage);
+            autoAnswerMessage = message.replace(getRelatedObjectName(source, game), "{this}");
+            options.put(Constants.Option.AUTO_ANSWER_MESSAGE, autoAnswerMessage);
         }
 
 
@@ -425,11 +425,11 @@ public class HumanPlayer extends PlayerImpl {
         if (source != null) {
             // ability + text
             answer = requestAutoAnswerId
-                    .get(source.getOriginalId() + "#" + (filteredMessage == null ? message : filteredMessage));
+                    .get(source.getOriginalId() + "#" + (autoAnswerMessage == null ? message : autoAnswerMessage));
         }
         if (answer == null) {
             // text
-            answer = requestAutoAnswerText.get((filteredMessage == null ? message : filteredMessage));
+            answer = requestAutoAnswerText.get((autoAnswerMessage == null ? message : autoAnswerMessage));
         }
         if (answer != null) {
             return answer;

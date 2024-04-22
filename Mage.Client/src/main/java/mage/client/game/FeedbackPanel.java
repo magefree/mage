@@ -89,9 +89,9 @@ public class FeedbackPanel extends javax.swing.JPanel {
                     // allows yes/no auto-answers for ability related
                     this.helper.setOriginalId((UUID) options.get(ORIGINAL_ID));
                 }
-                if (options != null && options.containsKey(FILTERED_MESSAGE)) {
+                if (options != null && options.containsKey(AUTO_ANSWER_MESSAGE)) {
                     // Uses a filtered message for remembering choice if the original message contains a self-reference
-                    this.helper.setFilteredMessage((String) options.get(FILTERED_MESSAGE));
+                    this.helper.setAutoAnswerMessage((String) options.get(AUTO_ANSWER_MESSAGE));
                 }
                 break;
             case CONFIRM:

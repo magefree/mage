@@ -59,6 +59,6 @@ public final class Constants {
         public static final String ORIGINAL_ID = "originalId";
         public static final String SECOND_MESSAGE = "secondMessage";
         public static final String HINT_TEXT = "hintText";
-        public static final String FILTERED_MESSAGE = "filteredMessage";
+        public static final String AUTO_ANSWER_MESSAGE = "autoAnswerMessage";
     }
 }
