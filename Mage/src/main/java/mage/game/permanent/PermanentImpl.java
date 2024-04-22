@@ -13,6 +13,7 @@ import mage.abilities.effects.RequirementEffect;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.abilities.effects.common.continuous.BecomesFaceDownCreatureEffect;
+import mage.abilities.hint.Hint;
 import mage.abilities.hint.HintUtils;
 import mage.abilities.keyword.*;
 import mage.cards.Card;
@@ -381,9 +382,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                 for (Map.Entry<ContinuousEffect, Set<Ability>> entry : game.getContinuousEffects().getHintEffects()
                         .entrySet()) {
                     for (Ability ability : entry.getValue()) {
-                        String hint = entry.getKey().getHint(this, ability, game);
-                        if (hint != null) {
-                            restrictHints.add(HintUtils.prepareText(hint, null));
+                        for (Hint hint : entry.getKey().getAffectedHints(this, ability, game)) {
+                            // TODO: Look into making Hints have the ability to provide an icon/color here
+                            restrictHints.add(HintUtils.prepareText(hint.getText(game, ability), null));
                         }
                     }
 

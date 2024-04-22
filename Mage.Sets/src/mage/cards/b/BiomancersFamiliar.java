@@ -8,6 +8,8 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
+import mage.abilities.hint.Hint;
+import mage.abilities.hint.StaticHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -18,6 +20,8 @@ import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 import mage.util.CardUtil;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -141,12 +145,15 @@ class BiomancersFamiliarReplacementEffect extends ReplacementEffectImpl {
         return true;
     }
 
+    static StaticHint hint = new StaticHint(
+            "The next time {this} adapts this turn, it adapts as though it had no +1/+1 counters on it.");
+
     @Override
-    public String getHint(Permanent permanent, Ability source, Game game) {
+    public List<Hint> getAffectedHints(Permanent permanent, Ability source, Game game) {
         if (!permanent.getId().equals(getTargetPointer().getFirst(game, source))) {
             return null;
         }
 
-        return "The next time {this} adapts this turn, it adapts as though it had no +1/+1 counters on it.";
+        return Arrays.asList(hint);
     }
 }

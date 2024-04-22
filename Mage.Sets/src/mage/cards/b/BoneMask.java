@@ -1,5 +1,7 @@
 package mage.cards.b;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -8,6 +10,8 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.PreventionEffectData;
 import mage.abilities.effects.PreventionEffectImpl;
+import mage.abilities.hint.Hint;
+import mage.abilities.hint.StaticHint;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -103,7 +107,7 @@ class BoneMaskEffect extends PreventionEffectImpl {
     }
 
     @Override
-    public String getHint(Permanent permanent, Ability source, Game game) {
+    public List<Hint> getAffectedHints(Permanent permanent, Ability source, Game game) {
         if (this.used || !permanent.getId().equals(target.getFirstTarget())) {
             return null;
         }
@@ -112,7 +116,7 @@ class BoneMaskEffect extends PreventionEffectImpl {
         if (player == null)
             return null;
 
-        return "The next time {this} would deal damage to " + player.getLogName()
-                + " this turn, prevent that damage.";
+        return Arrays.asList(new StaticHint("The next time {this} would deal damage to " + player.getLogName()
+                + " this turn, prevent that damage."));
     }
 }

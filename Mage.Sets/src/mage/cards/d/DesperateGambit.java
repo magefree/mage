@@ -1,13 +1,17 @@
 
 package mage.cards.d;
 
+import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.PreventionEffectImpl;
+import mage.abilities.hint.Hint;
+import mage.abilities.hint.StaticHint;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -129,17 +133,18 @@ class DesperateGambitEffect extends PreventionEffectImpl {
         return true;
     }
 
+    static StaticHint wonHint = new StaticHint(
+            "The next time {this} would deal combat damage this turn, it deals double that damage instead.");
+    static StaticHint lostHint = new StaticHint(
+            "The next time {this} would deal combat damage this turn, prevent that damage.");
+
     @Override
-    public String getHint(Permanent permanent, Ability source, Game game) {
+    public List<Hint> getAffectedHints(Permanent permanent, Ability source, Game game) {
         if (!permanent.getId().equals(target.getFirstTarget())) {
             return null;
         }
 
-        if (wonFlip) {
-            return "The next time {this} would deal combat damage this turn, it deals double that damage instead.";
-        } else {
-            return "The next time {this} would deal combat damage this turn, prevent that damage.";
-        }
+        return Arrays.asList(wonFlip ? wonHint : lostHint);
     }
 }
 

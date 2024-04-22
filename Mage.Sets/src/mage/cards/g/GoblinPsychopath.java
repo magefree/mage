@@ -5,6 +5,8 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksOrBlocksTriggeredAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.hint.Hint;
+import mage.abilities.hint.StaticHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -17,6 +19,8 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -121,12 +125,13 @@ class GoblinPsychopathEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public String getHint(Permanent permanent, Ability source, Game game) {
+    public List<Hint> getAffectedHints(Permanent permanent, Ability source, Game game) {
         if (wonFlip || !permanent.getId().equals(source.getSourceId())) {
             return null;
         }
 
-        return "The next time {this} would deal combat damage this turn, it deals that damage to "
-                + game.getPlayer(source.getControllerId()).getLogName() + " instead.";
+        return Arrays.asList(
+                new StaticHint("The next time {this} would deal combat damage this turn, it deals that damage to "
+                        + game.getPlayer(source.getControllerId()).getLogName() + " instead."));
     }
 }

@@ -1,11 +1,15 @@
 package mage.cards.m;
 
+import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.hint.Hint;
+import mage.abilities.hint.StaticHint;
 import mage.abilities.keyword.ForetellAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -153,14 +157,17 @@ class MysticReflectionReplacementEffect extends ReplacementEffectImpl {
         return true;
     }
 
+    static StaticHint hint = new StaticHint(
+            "The next time one or more creatures or planeswalkers enter the battlefield this turn, they enter as copies of {this}");
+
     @Override
-    public String getHint(Permanent permanent, Ability source, Game game) {
+    public List<Hint> getAffectedHints(Permanent permanent, Ability source, Game game) {
         Permanent targetedPermanent = (Permanent) game.getState().getValue("MysticReflection" + identifier);
         if (targetedPermanent == null || !permanent.getId().equals(targetedPermanent.getId())) {
             return null;
         }
 
-        return "The next time one or more creatures or planeswalkers enter the battlefield this turn, they enter as copies of {this}";
+        return Arrays.asList(hint);
     }
 }
 

@@ -2,6 +2,7 @@ package mage.abilities.effects;
 
 import mage.MageObjectReference;
 import mage.abilities.Ability;
+import mage.abilities.hint.Hint;
 import mage.constants.DependencyType;
 import mage.constants.Duration;
 import mage.constants.Layer;
@@ -90,5 +91,5 @@ public interface ContinuousEffect extends Effect {
     // Hint info
     boolean hasHint();
 
-    String getHint(Permanent permanent, Ability source, Game game);
+    List<Hint> getAffectedHints(Permanent permanent, Ability source, Game game);
 }

@@ -3,6 +3,7 @@ package mage.abilities.effects;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.CompoundAbility;
+import mage.abilities.hint.Hint;
 import mage.abilities.keyword.ChangelingAbility;
 import mage.constants.*;
 import mage.filter.Filter;
@@ -521,7 +522,7 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
         return false;
     }
 
-    public String getHint(Permanent permanent, Ability source, Game game) {
-        return null;
+    public List<Hint> getAffectedHints(Permanent permanent, Ability source, Game game) {
+        return Collections.emptyList();
     }
 }

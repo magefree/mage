@@ -1,9 +1,14 @@
 package mage.abilities.effects.common;
 
+import java.util.Arrays;
+import java.util.List;
+
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.PreventionEffectImpl;
+import mage.abilities.hint.Hint;
+import mage.abilities.hint.StaticHint;
 import mage.constants.Duration;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -92,11 +97,11 @@ public class PreventDamageByTargetEffect extends PreventionEffectImpl {
     }
 
     @Override
-    public String getHint(Permanent permanent, Ability source, Game game) {
+    public List<Hint> getAffectedHints(Permanent permanent, Ability source, Game game) {
         if (!this.getTargetPointer().getTargets(game, source).contains(permanent.getId())) {
             return null;
         }
 
-        return generateText("{this}");
+        return Arrays.asList(new StaticHint(generateText("{this}")));
     }
 }

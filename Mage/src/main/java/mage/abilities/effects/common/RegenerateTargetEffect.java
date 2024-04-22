@@ -1,8 +1,13 @@
 package mage.abilities.effects.common;
 
+import java.util.Arrays;
+import java.util.List;
+
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.hint.Hint;
+import mage.abilities.hint.StaticHint;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.game.Game;
@@ -69,12 +74,14 @@ public class RegenerateTargetEffect extends ReplacementEffectImpl {
         return true;
     }
 
+    StaticHint hint = new StaticHint("{this} is regenerating.");
+
     @Override
-    public String getHint(Permanent permanent, Ability source, Game game) {
+    public List<Hint> getAffectedHints(Permanent permanent, Ability source, Game game) {
         if (!permanent.getId().equals(getTargetPointer().getFirst(game, source)) || !this.used) {
             return null;
         }
 
-        return "{This} is regenerating.";
+        return Arrays.asList(hint);
     }
 }

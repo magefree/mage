@@ -1,8 +1,14 @@
 package mage.abilities.effects.common.combat;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.RestrictionEffect;
+import mage.abilities.hint.Hint;
+import mage.abilities.hint.StaticHint;
 import mage.constants.Duration;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -45,7 +51,12 @@ public class CantBeBlockedByAllTargetEffect extends RestrictionEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        return getTargetPointer().describeTargets(mode.getTargets(), "it")
+
+        return generateText(getTargetPointer().describeTargets(mode.getTargets(), "it"));
+    }
+
+    private String generateText(String targetText) {
+        return targetText
                 + " can't be blocked "
                 + (duration == Duration.EndOfTurn ? "this turn " : "")
                 + (filterBlockedBy.getMessage().startsWith("except by") ? "" : "by ")
@@ -58,14 +69,11 @@ public class CantBeBlockedByAllTargetEffect extends RestrictionEffect {
     }
 
     @Override
-    public String getHint(Permanent permanent, Ability source, Game game) {
+    public List<Hint> getAffectedHints(Permanent permanent, Ability source, Game game) {
         if (!applies(permanent, source, game)) {
             return null;
         }
 
-        return "{This} can't be blocked "
-                + (duration == Duration.EndOfTurn ? "this turn " : "")
-                + (filterBlockedBy.getMessage().startsWith("except by") ? "" : "by ")
-                + filterBlockedBy.getMessage();
+        return Arrays.asList(new StaticHint(generateText("{this}")));
     }
 }
