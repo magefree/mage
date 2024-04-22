@@ -406,6 +406,7 @@ public class HumanPlayer extends PlayerImpl {
 
         MessageToClient messageToClient = new MessageToClient(message, secondMessage);
         Map<String, Serializable> options = new HashMap<>(2);
+        String filteredMessage = null; // Removes self-referential text for the purposes of remembering options
         if (trueText != null) {
             options.put("UI.left.btn.text", trueText);
         }
@@ -414,6 +415,8 @@ public class HumanPlayer extends PlayerImpl {
         }
         if (source != null) {
             //options.put(Constants.Option.ORIGINAL_ID, "")
+            filteredMessage = message.replace(getRelatedObjectName(source, game), "{this}");
+            options.put(Constants.Option.FILTERED_MESSAGE, filteredMessage);
         }
 
 
@@ -421,11 +424,12 @@ public class HumanPlayer extends PlayerImpl {
         Boolean answer = null;
         if (source != null) {
             // ability + text
-            answer = requestAutoAnswerId.get(source.getOriginalId() + "#" + message);
+            answer = requestAutoAnswerId
+                    .get(source.getOriginalId() + "#" + (filteredMessage == null ? message : filteredMessage));
         }
         if (answer == null) {
             // text
-            answer = requestAutoAnswerText.get(message);
+            answer = requestAutoAnswerText.get((filteredMessage == null ? message : filteredMessage));
         }
         if (answer != null) {
             return answer;
