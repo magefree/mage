@@ -68,8 +68,12 @@ public class PreventDamageByTargetEffect extends PreventionEffectImpl {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
+
+        return generateText(getTargetPointer().describeTargets(mode.getTargets(), "it"));
+    }
+
+    private String generateText(String targetText) {
         String durationText = duration == Duration.EndOfTurn ? " this turn" : ' ' + duration.toString();
-        String targetText = getTargetPointer().describeTargets(mode.getTargets(), "it");
         String preventText = (amountToPrevent == Integer.MAX_VALUE ? "Prevent all" : "Prevent the next" + amountToPrevent)
                 + (onlyCombat ? " combat damage " : " damage ");
         if (passiveVoice) {
@@ -93,17 +97,6 @@ public class PreventDamageByTargetEffect extends PreventionEffectImpl {
             return null;
         }
 
-        String durationText = duration == Duration.EndOfTurn ? " this turn" : ' ' + duration.toString();
-        String targetText = "{this}";
-        String preventText = (amountToPrevent == Integer.MAX_VALUE ? "Prevent all"
-                : "Prevent the next" + amountToPrevent)
-                + (onlyCombat ? " combat damage " : " damage ");
-        if (passiveVoice) {
-            preventText += "that would be dealt"
-                    + (durationRuleAtEnd ? " by " + targetText + durationText : durationText + " by " + targetText);
-        } else {
-            preventText += targetText + " would deal" + durationText;
-        }
-        return preventText;
+        return generateText("{this}");
     }
 }
