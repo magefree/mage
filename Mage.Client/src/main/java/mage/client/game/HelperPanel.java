@@ -529,22 +529,22 @@ public class HelperPanel extends JPanel {
         switch (e.getActionCommand()) {
             case CMD_AUTO_ANSWER_ID_YES:
                 SessionHandler.sendPlayerAction(REQUEST_AUTO_ANSWER_ID_YES, gameId,
-                        originalId.toString() + '#' + (autoAnswerMessage == null ? message : autoAnswerMessage));
+                        originalId.toString() + '#' + autoAnswerMessage);
                 clickButton(btnLeft);
                 break;
             case CMD_AUTO_ANSWER_ID_NO:
                 SessionHandler.sendPlayerAction(REQUEST_AUTO_ANSWER_ID_NO, gameId,
-                        originalId.toString() + '#' + (autoAnswerMessage == null ? message : autoAnswerMessage));
+                        originalId.toString() + '#' + autoAnswerMessage);
                 clickButton(btnRight);
                 break;
             case CMD_AUTO_ANSWER_NAME_YES:
                 SessionHandler.sendPlayerAction(REQUEST_AUTO_ANSWER_TEXT_YES, gameId,
-                        (autoAnswerMessage == null ? message : autoAnswerMessage));
+                        autoAnswerMessage);
                 clickButton(btnLeft);
                 break;
             case CMD_AUTO_ANSWER_NAME_NO:
                 SessionHandler.sendPlayerAction(REQUEST_AUTO_ANSWER_TEXT_NO, gameId,
-                        (autoAnswerMessage == null ? message : autoAnswerMessage));
+                        autoAnswerMessage);
                 clickButton(btnRight);
                 break;
             case CMD_AUTO_ANSWER_RESET_ALL:
