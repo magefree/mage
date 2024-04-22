@@ -16,6 +16,7 @@ import java.awt.event.MouseListener;
 import java.awt.font.FontRenderContext;
 import java.awt.font.GlyphVector;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.*;
 
@@ -47,7 +48,7 @@ public class HoverButton extends JPanel implements MouseListener {
 
     private String topText;
     private Image topTextImage;
-    private ArrayList<Image> topTextImagesRight = new ArrayList<>();
+    private final List<Image> topTextImagesRight = new ArrayList<>();
     private String centerText;
 
     private boolean wasHovered = false;
