@@ -11,9 +11,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import org.apache.log4j.Logger;
 
-import java.lang.ref.WeakReference;
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * @param <T>
@@ -25,8 +23,6 @@ public class ContinuousEffectsList<T extends ContinuousEffect> extends ArrayList
 
     // the effectAbilityMap holds for each effect all abilities that are connected (used) with this effect
     private final Map<UUID, Set<Ability>> effectAbilityMap = new HashMap<>();
-    // Keep track of which effects have hints
-    private final List<WeakReference<T>> hints = new ArrayList<>();
 
     public ContinuousEffectsList() {
     }
@@ -34,11 +30,7 @@ public class ContinuousEffectsList<T extends ContinuousEffect> extends ArrayList
     public ContinuousEffectsList(final ContinuousEffectsList<T> effects) {
         this.ensureCapacity(effects.size());
         for (ContinuousEffect cost : effects) {
-            T copy = (T) cost.copy();
-            this.add(copy);
-            if (copy.hasHint()) {
-                hints.add(new WeakReference<>(copy));
-            }
+            this.add((T) cost.copy());
         }
         for (Map.Entry<UUID, Set<Ability>> entry : effects.effectAbilityMap.entrySet()) {
             Set<Ability> newSet = new HashSet<>();
@@ -75,7 +67,6 @@ public class ContinuousEffectsList<T extends ContinuousEffect> extends ArrayList
             if (canRemove) {
                 i.remove();
                 effectAbilityMap.remove(entry.getId());
-                hints.removeIf(effect -> effect.get() == null || effect.get() == entry);
             }
         }
     }
@@ -86,7 +77,6 @@ public class ContinuousEffectsList<T extends ContinuousEffect> extends ArrayList
             if (entry.getDuration() == Duration.EndOfCombat) {
                 i.remove();
                 effectAbilityMap.remove(entry.getId());
-                hints.removeIf(effect -> effect.get() == null || effect.get() == entry);
             }
         }
     }
@@ -97,7 +87,6 @@ public class ContinuousEffectsList<T extends ContinuousEffect> extends ArrayList
             if (isInactive(entry, game)) {
                 i.remove();
                 effectAbilityMap.remove(entry.getId());
-                hints.removeIf(effect -> effect.get() == null || effect.get() == entry);
             }
         }
     }
@@ -220,10 +209,6 @@ public class ContinuousEffectsList<T extends ContinuousEffect> extends ArrayList
         }
         set.add(source);
         this.add(effect);
-
-        if (effect.hasHint()) {
-            hints.add(new WeakReference<>(effect));
-        }
     }
 
     public Set<Ability> getAbility(UUID effectId) {
@@ -244,7 +229,6 @@ public class ContinuousEffectsList<T extends ContinuousEffect> extends ArrayList
     public void clear() {
         super.clear();
         effectAbilityMap.clear();
-        hints.clear();
     }
 
     @Override
@@ -265,9 +249,5 @@ public class ContinuousEffectsList<T extends ContinuousEffect> extends ArrayList
             }
         }
         return false;
-    }
-
-    public List<T> getHintEffects() {
-        return hints.stream().map(WeakReference<T>::get).filter(Objects::nonNull).collect(Collectors.toList());
     }
 }
