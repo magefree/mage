@@ -1,6 +1,7 @@
 package mage.cards.i;
 
 import mage.MageInt;
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.keyword.InvestigateEffect;
 import mage.cards.CardImpl;
@@ -9,9 +10,12 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.events.DamagedBatchForOnePermanentEvent;
+import mage.game.events.DamagedPermanentEvent;
 import mage.game.events.GameEvent;
 
 import java.util.UUID;
+import java.util.stream.Stream;
 
 /**
  * @author xenohedron
@@ -20,7 +24,7 @@ public final class InnocentBystander extends CardImpl {
 
     public InnocentBystander(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        
+
         this.subtype.add(SubType.GOBLIN);
         this.subtype.add(SubType.CITIZEN);
         this.power = new MageInt(2);
@@ -41,7 +45,7 @@ public final class InnocentBystander extends CardImpl {
     }
 }
 
-class InnocentBystanderTriggeredAbility extends TriggeredAbilityImpl {
+class InnocentBystanderTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<DamagedPermanentEvent> {
 
     InnocentBystanderTriggeredAbility() {
         super(Zone.BATTLEFIELD, new InvestigateEffect(), false);
@@ -63,7 +67,19 @@ class InnocentBystanderTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public Stream<DamagedPermanentEvent> filterBatchEvent(GameEvent event, Game game) {
+        return ((DamagedBatchForOnePermanentEvent) event)
+                .getEvents()
+                .stream()
+                .filter(e -> e.getTargetId().equals(getSourceId()))
+                .filter(e -> e.getAmount() > 0); // all the contribution for the 3 damage
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getTargetId().equals(getSourceId()) && event.getAmount() >= 3;
+        int amount = filterBatchEvent(event, game)
+                .mapToInt(DamagedPermanentEvent::getAmount)
+                .sum();
+        return amount >= 3;
     }
 }

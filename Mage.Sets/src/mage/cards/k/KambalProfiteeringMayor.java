@@ -2,6 +2,7 @@ package mage.cards.k;
 
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldOneOrMoreTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -22,11 +23,9 @@ import mage.game.permanent.PermanentToken;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * @author Susucr
@@ -69,7 +68,7 @@ public final class KambalProfiteeringMayor extends CardImpl {
     }
 }
 
-class KambalProfiteeringMayorTriggeredAbility extends TriggeredAbilityImpl {
+class KambalProfiteeringMayorTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<ZoneChangeEvent> {
 
     KambalProfiteeringMayorTriggeredAbility() {
         super(Zone.BATTLEFIELD, null);
@@ -91,16 +90,27 @@ class KambalProfiteeringMayorTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        ZoneChangeBatchEvent zEvent = (ZoneChangeBatchEvent) event;
-        Player controller = game.getPlayer(this.controllerId);
+    public Stream<ZoneChangeEvent> filterBatchEvent(GameEvent event, Game game) {
+        Player controller = game.getPlayer(getControllerId());
         if (controller == null) {
-            return false;
+            return Stream.empty();
         }
-        List<UUID> tokensIds = zEvent.getEvents()
+        return ((ZoneChangeBatchEvent) event)
+                .getEvents()
                 .stream()
-                .filter(zce -> zce.getToZone() == Zone.BATTLEFIELD             // keep enter the battlefield
-                        && controller.hasOpponent(zce.getPlayerId(), game))   // & under your opponent's control
+                .filter(e -> e.getToZone() == Zone.BATTLEFIELD)
+                .filter(e -> controller.hasOpponent(e.getPlayerId(), game))
+                .filter(e -> Optional
+                        .of(e)
+                        .map(ZoneChangeEvent::getTarget)
+                        .filter(p -> p instanceof PermanentToken)
+                        .isPresent()
+                );
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        List<UUID> tokensIds = filterBatchEvent(event, game)
                 .map(ZoneChangeEvent::getTarget)
                 .filter(Objects::nonNull)
                 .filter(p -> p instanceof PermanentToken) // collect only tokens

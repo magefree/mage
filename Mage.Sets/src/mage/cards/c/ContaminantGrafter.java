@@ -2,6 +2,7 @@ package mage.cards.c;
 
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
 import mage.abilities.condition.common.CorruptedCondition;
@@ -19,12 +20,13 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.events.DamagedEvent;
 import mage.game.events.DamagedBatchForPlayersEvent;
+import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 
+import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Stream;
 
 /**
  * @author PurpleCrowbar
@@ -69,7 +71,7 @@ public final class ContaminantGrafter extends CardImpl {
     }
 }
 
-class ContaminantGrafterTriggeredAbility extends TriggeredAbilityImpl {
+class ContaminantGrafterTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<DamagedPlayerEvent> {
 
     ContaminantGrafterTriggeredAbility() {
         super(Zone.BATTLEFIELD, new ProliferateEffect(false), false);
@@ -86,18 +88,24 @@ class ContaminantGrafterTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public Stream<DamagedPlayerEvent> filterBatchEvent(GameEvent event, Game game) {
+        return ((DamagedBatchForPlayersEvent) event)
+                .getEvents()
+                .stream()
+                .filter(DamagedPlayerEvent::isCombatDamage)
+                .filter(e -> e.getAmount() > 0)
+                .filter(e -> Optional
+                        .of(e)
+                        .map(DamagedPlayerEvent::getSourceId)
+                        .map(game::getPermanentOrLKIBattlefield)
+                        .filter(p -> p.isControlledBy(getControllerId()))
+                        .isPresent()
+                );
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        DamagedBatchForPlayersEvent dEvent = (DamagedBatchForPlayersEvent) event;
-        for (DamagedEvent damagedEvent : dEvent.getEvents()) {
-            if (!damagedEvent.isCombatDamage()) {
-                continue;
-            }
-            Permanent permanent = game.getPermanent(damagedEvent.getSourceId());
-            if (permanent != null && permanent.isControlledBy(getControllerId())) {
-                return true;
-            }
-        }
-        return false;
+        return filterBatchEvent(event, game).findAny().isPresent();
     }
 
     @Override
