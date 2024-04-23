@@ -1,5 +1,6 @@
 package mage.abilities.common;
 
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.Zone;
@@ -8,6 +9,8 @@ import mage.game.events.DamagedBatchAllEvent;
 import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
 
+import java.util.stream.Stream;
+
 /**
  * This triggers only once for each combat damage step the source creature deals damage.
  * So a creature blocked by two creatures and dealing damage to both blockers in the same
@@ -15,7 +18,7 @@ import mage.game.events.GameEvent;
  *
  * @author LevelX, xenohedron
  */
-public class DealsCombatDamageTriggeredAbility extends TriggeredAbilityImpl {
+public class DealsCombatDamageTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<DamagedEvent> {
 
     public DealsCombatDamageTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
@@ -38,12 +41,20 @@ public class DealsCombatDamageTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        int amount = ((DamagedBatchAllEvent) event)
+    public Stream<DamagedEvent> filterBatchEvent(GameEvent event, Game game) {
+        if (!(event instanceof DamagedBatchAllEvent)) {
+            return Stream.empty();
+        }
+        return ((DamagedBatchAllEvent) event)
                 .getEvents()
                 .stream()
                 .filter(DamagedEvent::isCombatDamage)
-                .filter(e -> e.getAttackerId().equals(getSourceId()))
+                .filter(e -> e.getAttackerId().equals(getSourceId()));
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        int amount = filterBatchEvent(event, game)
                 .mapToInt(GameEvent::getAmount)
                 .sum();
         if (amount < 1) {
