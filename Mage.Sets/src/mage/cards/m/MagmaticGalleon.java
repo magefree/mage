@@ -2,6 +2,7 @@ package mage.cards.m;
 
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -14,13 +15,14 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.DamagedBatchForPermanentsEvent;
-import mage.game.events.DamagedEvent;
+import mage.game.events.DamagedPermanentEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.TreasureToken;
 import mage.target.common.TargetOpponentsCreaturePermanent;
 
 import java.util.UUID;
+import java.util.stream.Stream;
 
 /**
  * @author xenohedron
@@ -29,7 +31,7 @@ public final class MagmaticGalleon extends CardImpl {
 
     public MagmaticGalleon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}{R}{R}");
-        
+
         this.subtype.add(SubType.VEHICLE);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
@@ -57,7 +59,7 @@ public final class MagmaticGalleon extends CardImpl {
     }
 }
 
-class MagmaticGalleonTriggeredAbility extends TriggeredAbilityImpl {
+class MagmaticGalleonTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<DamagedPermanentEvent> {
 
     MagmaticGalleonTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new TreasureToken()));
@@ -79,21 +81,22 @@ class MagmaticGalleonTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        int damage = ((DamagedBatchForPermanentsEvent) event)
+    public Stream<DamagedPermanentEvent> filterBatchEvent(GameEvent event, Game game) {
+        return ((DamagedBatchForPermanentsEvent) event)
                 .getEvents()
                 .stream()
+                .filter(e -> !e.isCombatDamage())
+                .filter(e -> e.getExcess() > 0)
                 .filter(damagedEvent -> {
-                    if (damagedEvent.isCombatDamage()) {
-                        return false;
-                    }
                     Permanent permanent = game.getPermanentOrLKIBattlefield(damagedEvent.getTargetId());
                     return permanent != null && permanent.isCreature(game)
                             && game.getOpponents(this.getControllerId()).contains(permanent.getControllerId());
-                })
-                .mapToInt(DamagedEvent::getExcess)
-                .sum();
-        return damage >= 1;
+                });
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        return filterBatchEvent(event, game).findAny().isPresent();
     }
 
 }

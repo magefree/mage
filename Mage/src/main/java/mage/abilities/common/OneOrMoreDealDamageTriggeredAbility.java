@@ -1,5 +1,6 @@
 package mage.abilities.common;
 
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.SetTargetPointer;
@@ -8,17 +9,18 @@ import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.events.DamagedBatchForOnePlayerEvent;
 import mage.game.events.DamagedEvent;
+import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * @author Xanderhall, xenohedron
  */
-public class OneOrMoreDealDamageTriggeredAbility extends TriggeredAbilityImpl {
+// TODO Susucr: rename to DealsDamageOneOrMoreToAPlayerTriggeredAbility after merge for some consistency
+public class OneOrMoreDealDamageTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<DamagedPlayerEvent> {
 
     private final SetTargetPointer setTargetPointer;
     private final FilterPermanent filter;
@@ -59,12 +61,12 @@ public class OneOrMoreDealDamageTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
+    public Stream<DamagedPlayerEvent> filterBatchEvent(GameEvent event, Game game) {
         DamagedBatchForOnePlayerEvent dEvent = (DamagedBatchForOnePlayerEvent) event;
         if (onlyCombat && !dEvent.isCombatDamage()) {
-            return false;
+            return Stream.empty();
         }
-        List<DamagedEvent> events = dEvent
+        return dEvent
                 .getEvents()
                 .stream()
                 .filter(e -> {
@@ -76,14 +78,18 @@ public class OneOrMoreDealDamageTriggeredAbility extends TriggeredAbilityImpl {
                         return false;
                     }
                     return filter.match(permanent, this.getControllerId(), this, game);
-                })
-                .collect(Collectors.toList());
+                });
+    }
 
-        if (events.isEmpty()) {
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        int amount = filterBatchEvent(event, game)
+                .mapToInt(DamagedEvent::getAmount)
+                .sum();
+        if (amount <= 0) {
             return false;
         }
-
-        this.getAllEffects().setValue("damage", events.stream().mapToInt(DamagedEvent::getAmount).sum());
+        this.getAllEffects().setValue("damage", amount);
         switch (setTargetPointer) {
             case PLAYER:
                 this.getAllEffects().setTargetPointer(new FixedTarget(event.getTargetId()));

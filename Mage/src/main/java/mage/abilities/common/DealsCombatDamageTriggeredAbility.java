@@ -42,9 +42,6 @@ public class DealsCombatDamageTriggeredAbility extends TriggeredAbilityImpl impl
 
     @Override
     public Stream<DamagedEvent> filterBatchEvent(GameEvent event, Game game) {
-        if (!(event instanceof DamagedBatchAllEvent)) {
-            return Stream.empty();
-        }
         return ((DamagedBatchAllEvent) event)
                 .getEvents()
                 .stream()

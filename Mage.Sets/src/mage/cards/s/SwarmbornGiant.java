@@ -3,6 +3,7 @@ package mage.cards.s;
 
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.MonstrousCondition;
@@ -19,12 +20,13 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.DamagedBatchForOnePlayerEvent;
+import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 
 import java.util.UUID;
+import java.util.stream.Stream;
 
 /**
- *
  * @author LevelX2
  */
 public final class SwarmbornGiant extends CardImpl {
@@ -61,7 +63,7 @@ public final class SwarmbornGiant extends CardImpl {
     }
 }
 
-class SwarmbornGiantTriggeredAbility extends TriggeredAbilityImpl {
+class SwarmbornGiantTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<DamagedPlayerEvent> {
 
     public SwarmbornGiantTriggeredAbility() {
         super(Zone.BATTLEFIELD, new SacrificeSourceEffect(), false);
@@ -83,11 +85,17 @@ class SwarmbornGiantTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public Stream<DamagedPlayerEvent> filterBatchEvent(GameEvent event, Game game) {
+        return ((DamagedBatchForOnePlayerEvent) event)
+                .getEvents()
+                .stream()
+                .filter(DamagedPlayerEvent::isCombatDamage)
+                .filter(e -> getControllerId().equals(e.getTargetId()))
+                .filter(e -> e.getAmount() > 0);
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        DamagedBatchForOnePlayerEvent dEvent = (DamagedBatchForOnePlayerEvent) event;
-        if (dEvent.getTargetId().equals(this.getControllerId())) {
-            return dEvent.isCombatDamage() && dEvent.getAmount() > 0;
-        }
-        return false;
+        return filterBatchEvent(event, game).findAny().isPresent();
     }
 }

@@ -80,9 +80,6 @@ class OliviasAttendantsTriggeredAbility extends TriggeredAbilityImpl implements 
 
     @Override
     public Stream<DamagedEvent> filterBatchEvent(GameEvent event, Game game) {
-        if (!checkEventType(event, game)) {
-            return Stream.empty();
-        }
         return ((DamagedBatchAllEvent) event)
                 .getEvents()
                 .stream()

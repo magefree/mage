@@ -20,6 +20,10 @@ public interface BatchTriggeredAbility<T extends GameEvent> extends TriggeredAbi
      * Properly filtering is required for further analysis of trigger + event,
      * for instance for complex NUMBER_OF_TRIGGERS triggers.
      * e.g. Umezawa's Jitte + Felix Five-Boots.
+     * <p>
+     * Note: if calling this, make sure the event does pass TriggeredAbility::checkEventType
      */
-    public Stream<T> filterBatchEvent(GameEvent event, Game game);
+    Stream<T> filterBatchEvent(GameEvent event, Game game);
+
+    BatchTriggeredAbility<T> copy();
 }
