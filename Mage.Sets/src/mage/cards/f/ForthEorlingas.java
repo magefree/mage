@@ -1,7 +1,6 @@
 package mage.cards.f;
 
-import java.util.UUID;
-
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.BecomesMonarchSourceEffect;
@@ -13,14 +12,16 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.game.Game;
-import mage.game.events.DamagedEvent;
 import mage.game.events.DamagedBatchForPlayersEvent;
+import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 import mage.game.permanent.token.HumanKnightToken;
 
+import java.util.Optional;
+import java.util.UUID;
+import java.util.stream.Stream;
+
 /**
- *
  * @author Susucr
  */
 public final class ForthEorlingas extends CardImpl {
@@ -50,7 +51,7 @@ public final class ForthEorlingas extends CardImpl {
     }
 }
 
-class ForthEorlingasTriggeredAbility extends DelayedTriggeredAbility {
+class ForthEorlingasTriggeredAbility extends DelayedTriggeredAbility implements BatchTriggeredAbility<DamagedPlayerEvent> {
 
     public ForthEorlingasTriggeredAbility() {
         super(new BecomesMonarchSourceEffect(), Duration.EndOfTurn, false);
@@ -68,18 +69,24 @@ class ForthEorlingasTriggeredAbility extends DelayedTriggeredAbility {
     }
 
     @Override
+    public Stream<DamagedPlayerEvent> filterBatchEvent(GameEvent event, Game game) {
+        return ((DamagedBatchForPlayersEvent) event)
+                .getEvents()
+                .stream()
+                .filter(DamagedPlayerEvent::isCombatDamage)
+                .filter(e -> e.getAmount() > 0)
+                .filter(e -> Optional
+                        .of(e)
+                        .map(DamagedPlayerEvent::getSourceId)
+                        .map(game::getPermanentOrLKIBattlefield)
+                        .filter(p -> p.isControlledBy(getControllerId()))
+                        .isPresent()
+                );
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        DamagedBatchForPlayersEvent dEvent = (DamagedBatchForPlayersEvent) event;
-        for (DamagedEvent damagedEvent : dEvent.getEvents()) {
-            if (!damagedEvent.isCombatDamage()) {
-                continue;
-            }
-            Permanent permanent = game.getPermanent(damagedEvent.getSourceId());
-            if (permanent != null && permanent.isControlledBy(getControllerId())) {
-                return true;
-            }
-        }
-        return false;
+        return filterBatchEvent(event, game).findAny().isPresent();
     }
 
     @Override

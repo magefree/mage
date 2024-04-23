@@ -2,7 +2,9 @@ package mage.cards.w;
 
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.dynamicvalue.common.SavedDamageValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -15,12 +17,15 @@ import mage.filter.common.FilterAnyTarget;
 import mage.filter.common.FilterPermanentOrPlayer;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
+import mage.game.events.DamagedBatchForOnePermanentEvent;
+import mage.game.events.DamagedPermanentEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetPermanentOrPlayer;
 
 import java.util.UUID;
+import java.util.stream.Stream;
 
 /**
  * @author TheElk801
@@ -51,7 +56,7 @@ public final class WrathfulRedDragon extends CardImpl {
     }
 }
 
-class WrathfulRedDragonTriggeredAbility extends TriggeredAbilityImpl {
+class WrathfulRedDragonTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<DamagedPermanentEvent> {
 
     private static final FilterPermanentOrPlayer filter
             = new FilterAnyTarget("any target that isn't a Dragon");
@@ -80,16 +85,30 @@ class WrathfulRedDragonTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
+    public Stream<DamagedPermanentEvent> filterBatchEvent(GameEvent event, Game game) {
         Permanent dragon = game.getPermanent(event.getTargetId());
-        int damage = event.getAmount();
-        if (dragon == null || damage < 1
+        if (dragon == null
                 || !dragon.isControlledBy(getControllerId())
                 || !dragon.hasSubtype(SubType.DRAGON, game)) {
+            return Stream.empty();
+        }
+        return ((DamagedBatchForOnePermanentEvent) event)
+                .getEvents()
+                .stream()
+                .filter(e -> e.getAmount() > 0);
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        Permanent dragon = game.getPermanent(event.getTargetId());
+        int amount = filterBatchEvent(event, game)
+                .mapToInt(DamagedPermanentEvent::getAmount)
+                .sum();
+        if (dragon == null || amount <= 0) {
             return false;
         }
         this.getEffects().setValue("damagedPermanent", dragon);
-        this.getEffects().setValue("damage", damage);
+        this.getEffects().setValue("damage", amount);
         return true;
     }
 
@@ -118,7 +137,7 @@ class WrathfulRedDragonEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent dragon = (Permanent) getValue("damagedPermanent");
-        Integer damage = (Integer) getValue("damage");
+        Integer damage = SavedDamageValue.MUCH.calculate(game, source, this);
         if (dragon == null || damage == null) {
             return false;
         }

@@ -12,9 +12,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.permanent.TokenPredicate;
+import mage.game.permanent.token.WhiteAstartesWarriorToken;
 
 import java.util.UUID;
-import mage.game.permanent.token.WhiteAstartesWarriorToken;
 
 /**
  * @author PurpleCrowbar
@@ -39,7 +39,6 @@ public final class MarneusCalgar extends CardImpl {
         this.addAbility(DoubleStrikeAbility.getInstance());
 
         // Master Tactician — Whenever one or more tokens enter the battlefield under your control, draw a card.
-        //this.addAbility(new MarneusCalgarTriggeredAbility());
         this.addAbility(new EntersBattlefieldOneOrMoreTriggeredAbility(
                 new DrawCardSourceControllerEffect(1), filter, TargetController.YOU
         ).withFlavorWord("Master Tactician"));

@@ -3,6 +3,7 @@ package mage.cards.a;
 import mage.MageInt;
 import mage.MageObject;
 import mage.MageObjectReference;
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
@@ -11,10 +12,12 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.DamagedBatchForOnePermanentEvent;
 import mage.game.events.DamagedEvent;
+import mage.game.events.DamagedPermanentEvent;
 import mage.game.events.GameEvent;
 import mage.watchers.Watcher;
 
 import java.util.*;
+import java.util.stream.Stream;
 
 /**
  * @author TheElk801
@@ -44,7 +47,7 @@ public final class AegarTheFreezingFlame extends CardImpl {
     }
 }
 
-class AegarTheFreezingFlameTriggeredAbility extends TriggeredAbilityImpl {
+class AegarTheFreezingFlameTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<DamagedPermanentEvent> {
 
     AegarTheFreezingFlameTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1));
@@ -61,18 +64,20 @@ class AegarTheFreezingFlameTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        DamagedBatchForOnePermanentEvent dEvent = (DamagedBatchForOnePermanentEvent) event;
-
-        int excess = dEvent.getEvents()
+    public Stream<DamagedPermanentEvent> filterBatchEvent(GameEvent event, Game game) {
+        return ((DamagedBatchForOnePermanentEvent) event)
+                .getEvents()
                 .stream()
+                .filter(e -> e.getExcess() > 0)
+                .filter(e -> game.getOpponents(getControllerId()).contains(game.getControllerId(e.getTargetId())));
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        int excessDamage = filterBatchEvent(event, game)
                 .mapToInt(DamagedEvent::getExcess)
                 .sum();
-
-        boolean controlledByOpponent =
-                game.getOpponents(getControllerId()).contains(game.getControllerId(event.getTargetId()));
-
-        if (excess < 1 || !controlledByOpponent) {
+        if (excessDamage <= 0) {
             return false;
         }
         AegarTheFreezingFlameWatcher watcher = game.getState().getWatcher(AegarTheFreezingFlameWatcher.class);

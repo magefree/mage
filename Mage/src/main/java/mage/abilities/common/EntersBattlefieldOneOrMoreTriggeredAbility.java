@@ -1,5 +1,6 @@
 package mage.abilities.common;
 
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.TargetController;
@@ -8,16 +9,18 @@ import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeBatchEvent;
+import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
 
 import java.util.UUID;
+import java.util.stream.Stream;
 
 /**
  * "Whenever one or more {filter} enter the battlefield under {target controller} control,
  *
  * @author Alex-Vasile
  */
-public class EntersBattlefieldOneOrMoreTriggeredAbility extends TriggeredAbilityImpl {
+public class EntersBattlefieldOneOrMoreTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<ZoneChangeEvent> {
 
     private final FilterPermanent filterPermanent;
     private final TargetController targetController;
@@ -41,28 +44,29 @@ public class EntersBattlefieldOneOrMoreTriggeredAbility extends TriggeredAbility
     }
 
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-
-        Player controller = game.getPlayer(this.controllerId);
-        if (controller == null) {
-            return false;
-        }
-
-        ZoneChangeBatchEvent zEvent = (ZoneChangeBatchEvent) event;
-        return zEvent.getEvents().stream()
-                .filter(z -> z.getToZone() == Zone.BATTLEFIELD)
-                .filter(z -> filterPermanent.match(z.getTarget(), this.controllerId, this, game))
-                .anyMatch(z -> {
-                    UUID enteringPermanentControllerID = z.getTarget().getControllerId();
+    public Stream<ZoneChangeEvent> filterBatchEvent(GameEvent event, Game game) {
+        return ((ZoneChangeBatchEvent) event)
+                .getEvents()
+                .stream()
+                .filter(e -> e.getToZone() == Zone.BATTLEFIELD)
+                .filter(e -> filterPermanent.match(e.getTarget(), this.controllerId, this, game))
+                .filter(e -> {
+                    UUID enteringPermanentControllerID = e.getTarget().getControllerId();
                     switch (this.targetController) {
                         case YOU:
                             return enteringPermanentControllerID.equals(this.controllerId);
                         case OPPONENT:
-                            return controller.hasOpponent(enteringPermanentControllerID, game);
+                            Player controller = game.getPlayer(this.controllerId);
+                            return controller != null && controller.hasOpponent(enteringPermanentControllerID, game);
                         default:
                             throw new IllegalArgumentException("Unsupported target: " + this.targetController);
                     }
                 });
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        return filterBatchEvent(event, game).findAny().isPresent();
     }
 
     @Override

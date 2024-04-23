@@ -1,5 +1,6 @@
 package mage.abilities.common;
 
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.Zone;
@@ -9,10 +10,12 @@ import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
+import java.util.stream.Stream;
+
 /**
  * @author TheElk801, xenohedron
  */
-public class DealsCombatDamageEquippedTriggeredAbility extends TriggeredAbilityImpl {
+public class DealsCombatDamageEquippedTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<DamagedEvent> {
 
     public DealsCombatDamageEquippedTriggeredAbility(Effect effect) {
         this(effect, false);
@@ -38,16 +41,21 @@ public class DealsCombatDamageEquippedTriggeredAbility extends TriggeredAbilityI
     }
 
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
+    public Stream<DamagedEvent> filterBatchEvent(GameEvent event, Game game) {
         Permanent sourcePermanent = getSourcePermanentOrLKI(game);
         if (sourcePermanent == null || sourcePermanent.getAttachedTo() == null) {
-            return false;
+            return Stream.empty();
         }
-        int amount = ((DamagedBatchAllEvent) event)
+        return ((DamagedBatchAllEvent) event)
                 .getEvents()
                 .stream()
                 .filter(DamagedEvent::isCombatDamage)
-                .filter(e -> e.getAttackerId().equals(sourcePermanent.getAttachedTo()))
+                .filter(e -> e.getAttackerId().equals(sourcePermanent.getAttachedTo()));
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        int amount = filterBatchEvent(event, game)
                 .mapToInt(GameEvent::getAmount)
                 .sum();
         if (amount < 1) {

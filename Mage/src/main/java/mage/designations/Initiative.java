@@ -1,19 +1,21 @@
 package mage.designations;
 
 import mage.abilities.Ability;
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Controllable;
 import mage.game.Game;
-import mage.game.events.DamagedEvent;
 import mage.game.events.DamagedBatchForPlayersEvent;
+import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.Objects;
 import java.util.UUID;
+import java.util.stream.Stream;
 
 /**
  * @author TheElk801
@@ -40,7 +42,8 @@ public class Initiative extends Designation {
     }
 }
 
-class InitiativeDamageTriggeredAbility extends TriggeredAbilityImpl {
+// TODO: this will be wrong if 2HG is ever implemented. Would need new batching per (damaging player, damaged player)
+class InitiativeDamageTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<DamagedPlayerEvent> {
 
     InitiativeDamageTriggeredAbility() {
         super(Zone.ALL, new InitiativeTakeEffect());
@@ -61,13 +64,18 @@ class InitiativeDamageTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        DamagedBatchForPlayersEvent dEvent = (DamagedBatchForPlayersEvent) event;
-        UUID playerId = dEvent
+    public Stream<DamagedPlayerEvent> filterBatchEvent(GameEvent event, Game game) {
+        return ((DamagedBatchForPlayersEvent) event)
                 .getEvents()
                 .stream()
-                .filter(DamagedEvent::isCombatDamage)
+                .filter(DamagedPlayerEvent::isCombatDamage)
                 .filter(e -> e.getTargetId().equals(game.getInitiativeId()))
+                .filter(e -> e.getAmount() > 0);
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        UUID playerId = filterBatchEvent(event, game)
                 .map(GameEvent::getSourceId)
                 .map(game::getPermanent)
                 .filter(Objects::nonNull)

@@ -1,6 +1,7 @@
 package mage.cards.l;
 
 import mage.MageInt;
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.common.ExileTopXMayPlayUntilEffect;
@@ -16,8 +17,9 @@ import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeBatchEvent;
 import mage.game.events.ZoneChangeEvent;
 
-import java.util.Objects;
+import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Stream;
 
 /**
  * Rules update: 6/18/2021
@@ -58,7 +60,7 @@ public final class LaeliaTheBladeReforged extends CardImpl {
     }
 }
 
-class LaeliaTheBladeReforgedAddCountersTriggeredAbility extends TriggeredAbilityImpl {
+class LaeliaTheBladeReforgedAddCountersTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<ZoneChangeEvent> {
 
     LaeliaTheBladeReforgedAddCountersTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false);
@@ -79,17 +81,25 @@ class LaeliaTheBladeReforgedAddCountersTriggeredAbility extends TriggeredAbility
     }
 
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        ZoneChangeBatchEvent zEvent = (ZoneChangeBatchEvent) event;
-        return zEvent.getEvents()
+    public Stream<ZoneChangeEvent> filterBatchEvent(GameEvent event, Game game) {
+        return ((ZoneChangeBatchEvent) event)
+                .getEvents()
                 .stream()
                 .filter(e -> e.getFromZone() == Zone.LIBRARY || e.getFromZone() == Zone.GRAVEYARD)
                 .filter(e -> e.getToZone() == Zone.EXILED)
-                .map(ZoneChangeEvent::getTargetId)
-                .map(game::getCard)
-                .filter(Objects::nonNull)
-                .map(Card::getOwnerId)
-                .anyMatch(this::isControlledBy);
+                .filter(e -> Optional
+                        .of(e)
+                        .map(ZoneChangeEvent::getTargetId)
+                        .map(game::getCard)
+                        .map(Card::getOwnerId)
+                        .filter(this::isControlledBy)
+                        .isPresent()
+                );
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        return filterBatchEvent(event, game).findAny().isPresent();
     }
 
     @Override

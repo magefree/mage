@@ -1,7 +1,7 @@
 package mage.cards.s;
 
 import mage.abilities.Ability;
-import mage.abilities.common.DealtDamageAttachedTriggeredAbility;
+import mage.abilities.common.IsDealtDamageAttachedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.EnchantAbility;
@@ -33,8 +33,9 @@ public final class SpitefulShadows extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget));
 
         // Whenever enchanted creature is dealt damage, it deals that much damage to its controller.
-        this.addAbility(new DealtDamageAttachedTriggeredAbility(Zone.BATTLEFIELD, new SpitefulShadowsEffect(),
-                false, SetTargetPointer.PERMANENT));
+        this.addAbility(new IsDealtDamageAttachedTriggeredAbility(
+                Zone.BATTLEFIELD, new SpitefulShadowsEffect(), false, "enchanted", SetTargetPointer.PERMANENT
+        ));
     }
 
     private SpitefulShadows(final SpitefulShadows card) {

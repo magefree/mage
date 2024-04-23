@@ -1,19 +1,22 @@
 package mage.cards.p;
 
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.DealCombatDamageControlledTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.combat.GoadTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
-import mage.game.events.DamagedBatchForOnePlayerEvent;
 import mage.game.events.GameEvent;
+import mage.players.Player;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -46,10 +49,10 @@ public final class PopularEntertainer extends CardImpl {
     }
 }
 
-class PopularEntertainerAbility extends TriggeredAbilityImpl {
+class PopularEntertainerAbility extends DealCombatDamageControlledTriggeredAbility {
 
     PopularEntertainerAbility() {
-        super(Zone.BATTLEFIELD, new GoadTargetEffect(), false);
+        super(new GoadTargetEffect());
     }
 
     private PopularEntertainerAbility(final PopularEntertainerAbility ability) {
@@ -62,27 +65,18 @@ class PopularEntertainerAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_BATCH_FOR_ONE_PLAYER;
-    }
-
-    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        DamagedBatchForOnePlayerEvent dEvent = (DamagedBatchForOnePlayerEvent) event;
-
-        int damage = dEvent.getEvents()
-                .stream()
-                .filter(ev -> ev.getSourceId().equals(controllerId))
-                .mapToInt(GameEvent::getAmount)
-                .sum();
-
-        if (!dEvent.isCombatDamage() || damage < 1){
+        if (!super.checkTrigger(event, game)) {
+            return false;
+        }
+        Player player = game.getPlayer(event.getTargetId());
+        if (player == null) {
             return false;
         }
         FilterPermanent filter = new FilterCreaturePermanent(
-                "creature controlled by " + game.getPlayer(dEvent.getTargetId()).getName()
+                "creature controlled by " + player.getName()
         );
-        filter.add(new ControllerIdPredicate(dEvent.getTargetId()));
+        filter.add(new ControllerIdPredicate(player.getId()));
         this.getTargets().clear();
         this.addTarget(new TargetPermanent(filter));
         return true;
