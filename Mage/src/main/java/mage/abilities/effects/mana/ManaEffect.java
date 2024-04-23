@@ -2,7 +2,6 @@ package mage.abilities.effects.mana;
 
 import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.ManaType;
 import mage.constants.Outcome;
@@ -38,7 +37,7 @@ public abstract class ManaEffect extends OneShotEffect {
             // During calculation of the available mana for a player the "TappedForMana" event is fired to simulate triggered mana production.
             // By checking the inCheckPlayableState these events are handled to give back only the available mana of instead really producing mana
             // So it's important if ManaEffects overwrite the apply method to take care for this.
-            if (source instanceof TriggeredAbility) {
+            if (source.isTriggeredAbility()) {
                 player.addAvailableTriggeredMana(getNetMana(game, source));
             }
             return true; // No need to add mana to pool during checkPlayable   

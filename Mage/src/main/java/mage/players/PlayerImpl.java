@@ -3882,7 +3882,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         } else if (ability instanceof AlternativeSourceCosts) {
             // alternative cost must be replaced by real play ability
             return findActivatedAbilityFromAlternativeSourceCost(object, manaFull, ability, game);
-        } else if (ability instanceof ActivatedAbility) {
+        } else if (ability.isActivatedAbility()) {
             // all other activated ability
             if (canPlay((ActivatedAbility) ability, manaFull, object, game)) {
                 return (ActivatedAbility) ability;
@@ -3962,6 +3962,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         // check "can play" condition as affected controller (BUT play from not own hand zone must be checked as original controller)
         // must check all abilities, not activated only
         for (Ability ability : candidateAbilities) {
+            // Note: SpellAbility and PlayLandAbility are ActivatedAbility
             if (!(ability instanceof ActivatedAbility)) {
                 continue;
             }

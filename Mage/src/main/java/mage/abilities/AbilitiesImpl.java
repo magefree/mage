@@ -165,7 +165,7 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
     public Abilities<TriggeredAbility> getTriggeredAbilities(Zone zone) {
         Abilities<TriggeredAbility> zonedAbilities = new AbilitiesImpl<>();
         for (T ability : this) {
-            if (ability instanceof TriggeredAbility && ability.getZone().match(zone)) {
+            if (ability.isTriggeredAbility() && ability.getZone().match(zone)) {
                 zonedAbilities.add((TriggeredAbility) ability);
             } else if (ability instanceof ZoneChangeTriggeredAbility) {
                 ZoneChangeTriggeredAbility zcAbility = (ZoneChangeTriggeredAbility) ability;

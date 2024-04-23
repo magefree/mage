@@ -379,6 +379,7 @@ public abstract class AbilityImpl implements Ability {
                 Outcome outcome = getEffects().getOutcome(this);
 
                 // only activated abilities can be canceled by human user (not triggered)
+                // Note: ActivatedAbility does include SpellAbility & PlayLandAbility, but those should be able to be canceled too.
                 boolean canCancel = this instanceof ActivatedAbility && controller.isHuman();
                 if (!getTargets().chooseTargets(outcome, this.controllerId, this, noMana, game, canCancel)) {
                     // was canceled during targer selection

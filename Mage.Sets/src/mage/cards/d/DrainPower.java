@@ -1,12 +1,12 @@
 package mage.cards.d;
 
 import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AbilityType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
@@ -79,7 +79,7 @@ class DrainPowerEffect extends OneShotEffect {
                         List<ActivatedManaAbilityImpl> manaAbilities = new ArrayList<>();
                         abilitySearch:
                         for (Ability ability : permanent.getAbilities()) {
-                            if (ability instanceof ActivatedAbility && ability.getAbilityType().isManaAbility()) {
+                            if (AbilityType.ACTIVATED_MANA.equals(ability.getAbilityType())) {
                                 ActivatedManaAbilityImpl manaAbility = (ActivatedManaAbilityImpl) ability;
                                 if (manaAbility.canActivate(targetPlayer.getId(), game).canActivate()) {
                                     // canActivate can't check for mana abilities that require a mana cost, if the payment isn't possible (Cabal Coffers etc)
