@@ -99,9 +99,6 @@ class ZurgoAndOjutaiTriggeredAbility extends TriggeredAbilityImpl implements Bat
 
     @Override
     public Stream<DamagedEvent> filterBatchEvent(GameEvent event, Game game) {
-        if (!(event instanceof DamagedBatchAllEvent)) {
-            return Stream.empty();
-        }
         return ((DamagedBatchAllEvent) event)
                 .getEvents()
                 .stream()
@@ -109,14 +106,10 @@ class ZurgoAndOjutaiTriggeredAbility extends TriggeredAbilityImpl implements Bat
                 .filter(e -> {
                     Permanent permanent = game.getPermanent(e.getSourceId());
                     Permanent defender = game.getPermanent(e.getTargetId());
-                    if (permanent != null
+                    return permanent != null
                             && permanent.hasSubtype(SubType.DRAGON, game)
                             && permanent.isControlledBy(this.getControllerId())
-                            && ((defender != null && defender.isBattle(game))
-                            || game.getPlayer(e.getTargetId()) != null)) {
-                        return true;
-                    }
-                    return false;
+                            && ((defender != null && defender.isBattle(game)) || game.getPlayer(e.getTargetId()) != null);
                 });
     }
 

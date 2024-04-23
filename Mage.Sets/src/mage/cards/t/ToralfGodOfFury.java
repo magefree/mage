@@ -2,6 +2,7 @@ package mage.cards.t;
 
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.Mode;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
@@ -28,6 +29,7 @@ import mage.filter.predicate.mageobject.MageObjectReferencePredicate;
 import mage.game.Game;
 import mage.game.events.DamagedBatchForOnePermanentEvent;
 import mage.game.events.DamagedEvent;
+import mage.game.events.DamagedPermanentEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -35,6 +37,7 @@ import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetPermanentOrPlayer;
 
 import java.util.UUID;
+import java.util.stream.Stream;
 
 /**
  * @author TheElk801
@@ -92,7 +95,7 @@ public final class ToralfGodOfFury extends ModalDoubleFacedCard {
     }
 }
 
-class ToralfGodOfFuryTriggeredAbility extends TriggeredAbilityImpl {
+class ToralfGodOfFuryTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<DamagedPermanentEvent> {
 
     ToralfGodOfFuryTriggeredAbility() {
         super(Zone.BATTLEFIELD, null);
@@ -108,16 +111,21 @@ class ToralfGodOfFuryTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        DamagedBatchForOnePermanentEvent dEvent = (DamagedBatchForOnePermanentEvent) event;
-        int excessDamage = dEvent.getEvents()
+    public Stream<DamagedPermanentEvent> filterBatchEvent(GameEvent event, Game game) {
+        return ((DamagedBatchForOnePermanentEvent) event)
+                .getEvents()
                 .stream()
+                .filter(e -> !e.isCombatDamage())
+                .filter(e -> e.getExcess() > 0)
+                .filter(e -> game.getOpponents(getControllerId()).contains(game.getControllerId(e.getTargetId())));
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        int excessDamage = filterBatchEvent(event, game)
                 .mapToInt(DamagedEvent::getExcess)
                 .sum();
-
-        if (excessDamage < 1
-                || dEvent.isCombatDamage()
-                || !game.getOpponents(getControllerId()).contains(game.getControllerId(event.getTargetId()))) {
+        if (excessDamage <= 0) {
             return false;
         }
         this.getEffects().clear();

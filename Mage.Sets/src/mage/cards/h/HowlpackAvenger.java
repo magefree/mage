@@ -1,6 +1,7 @@
 package mage.cards.h;
 
 import mage.MageInt;
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -16,10 +17,12 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.DamagedBatchForPermanentsEvent;
+import mage.game.events.DamagedPermanentEvent;
 import mage.game.events.GameEvent;
 import mage.target.common.TargetAnyTarget;
 
 import java.util.UUID;
+import java.util.stream.Stream;
 
 /**
  * @author TheElk801
@@ -57,7 +60,7 @@ public final class HowlpackAvenger extends CardImpl {
     }
 }
 
-class HowlpackAvengerTriggeredAbility extends TriggeredAbilityImpl {
+class HowlpackAvengerTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<DamagedPermanentEvent> {
 
     HowlpackAvengerTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(SavedDamageValue.MUCH));
@@ -80,17 +83,23 @@ class HowlpackAvengerTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        int damage = ((DamagedBatchForPermanentsEvent) event)
+    public Stream<DamagedPermanentEvent> filterBatchEvent(GameEvent event, Game game) {
+        return ((DamagedBatchForPermanentsEvent) event)
                 .getEvents()
                 .stream()
-                .filter(damagedEvent -> isControlledBy(game.getControllerId(damagedEvent.getTargetId())))
+                .filter(e -> isControlledBy(game.getControllerId(e.getTargetId())))
+                .filter(e -> e.getAmount() > 0);
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        int amount = filterBatchEvent(event, game)
                 .mapToInt(GameEvent::getAmount)
                 .sum();
-        if (damage < 1) {
+        if (amount <= 0) {
             return false;
         }
-        this.getEffects().setValue("damage", damage);
+        this.getEffects().setValue("damage", amount);
         return true;
     }
 }

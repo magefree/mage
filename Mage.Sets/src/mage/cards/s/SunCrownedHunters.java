@@ -2,6 +2,7 @@
 package mage.cards.s;
 
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealtDamageToSourceTriggeredAbility;
@@ -13,7 +14,6 @@ import mage.constants.SubType;
 import mage.target.common.TargetOpponentOrPlaneswalker;
 
 /**
- *
  * @author TheElk801
  */
 public final class SunCrownedHunters extends CardImpl {

@@ -1,6 +1,7 @@
 package mage.cards.h;
 
 import mage.MageInt;
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.DrawDiscardControllerEffect;
@@ -15,14 +16,15 @@ import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
-import mage.game.events.DamagedEvent;
 import mage.game.events.DamagedBatchForPlayersEvent;
+import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 
-import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * @author TheElk801
@@ -61,7 +63,7 @@ public final class HordewingSkaab extends CardImpl {
     }
 }
 
-class HordewingSkaabTriggeredAbility extends TriggeredAbilityImpl {
+class HordewingSkaabTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<DamagedPlayerEvent> {
 
     HordewingSkaabTriggeredAbility() {
         super(Zone.BATTLEFIELD, null, true);
@@ -77,22 +79,27 @@ class HordewingSkaabTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public Stream<DamagedPlayerEvent> filterBatchEvent(GameEvent event, Game game) {
+        return ((DamagedBatchForPlayersEvent) event)
+                .getEvents()
+                .stream()
+                .filter(DamagedPlayerEvent::isCombatDamage)
+                .filter(e -> e.getAmount() > 0)
+                .filter(e -> Optional
+                        .of(e)
+                        .map(DamagedPlayerEvent::getSourceId)
+                        .map(game::getPermanentOrLKIBattlefield)
+                        .filter(p -> p.isControlledBy(getControllerId()))
+                        .filter(p -> p.hasSubtype(SubType.ZOMBIE, game))
+                        .isPresent())
+                .filter(e -> game.getOpponents(getControllerId()).contains(e.getTargetId()));
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        DamagedBatchForPlayersEvent dEvent = (DamagedBatchForPlayersEvent) event;
-        Set<UUID> opponents = new HashSet<>();
-        for (DamagedEvent damagedEvent : dEvent.getEvents()) {
-            if (!damagedEvent.isCombatDamage()) {
-                continue;
-            }
-            Permanent permanent = game.getPermanent(damagedEvent.getSourceId());
-            if (permanent == null
-                    || !permanent.isControlledBy(getControllerId())
-                    || !permanent.hasSubtype(SubType.ZOMBIE, game)
-                    || !game.getOpponents(getControllerId()).contains(damagedEvent.getTargetId())) {
-                continue;
-            }
-            opponents.add(damagedEvent.getTargetId());
-        }
+        Set<UUID> opponents = filterBatchEvent(event, game)
+                .map(DamagedPlayerEvent::getTargetId)
+                .collect(Collectors.toSet());
         if (opponents.size() < 1) {
             return false;
         }

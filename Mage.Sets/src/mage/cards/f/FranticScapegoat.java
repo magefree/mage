@@ -3,6 +3,7 @@ package mage.cards.f;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -26,9 +27,11 @@ import mage.target.Target;
 import mage.target.TargetPermanent;
 
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * @author notgreat
@@ -64,7 +67,7 @@ public final class FranticScapegoat extends CardImpl {
 }
 
 //Based on Lightmine Field
-class FranticScapegoatTriggeredAbility extends TriggeredAbilityImpl {
+class FranticScapegoatTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<ZoneChangeEvent> {
 
     FranticScapegoatTriggeredAbility() {
         super(Zone.BATTLEFIELD, new FranticScapegoatSuspectEffect(), true);
@@ -80,27 +83,39 @@ class FranticScapegoatTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public boolean checkInterveningIfClause(Game game) {
-        Permanent source = getSourcePermanentIfItStillExists(game);
-        return (source != null && source.isSuspected());
+    public Stream<ZoneChangeEvent> filterBatchEvent(GameEvent event, Game game) {
+        return ((ZoneChangeBatchEvent) event)
+                .getEvents()
+                .stream()
+                .filter(e -> e.getZone() == Zone.BATTLEFIELD)
+                .filter(e -> getControllerId().equals(e.getPlayerId()))
+                .filter(e -> Optional
+                        .of(e)
+                        .map(ZoneChangeEvent::getTarget)
+                        .filter(p -> !p.getId().equals(getSourceId()))
+                        .filter(p -> p.isCreature(game))
+                        .isPresent()
+                );
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        ZoneChangeBatchEvent zEvent = (ZoneChangeBatchEvent) event;
-        Set<MageObjectReference> enteringCreatures = zEvent.getEvents().stream()
-                .filter(z -> z.getToZone() == Zone.BATTLEFIELD)
-                .filter(z -> this.controllerId.equals(z.getPlayerId()))
+        Set<MageObjectReference> enteringCreatures = filterBatchEvent(event, game)
                 .map(ZoneChangeEvent::getTarget)
                 .filter(Objects::nonNull)
-                .filter(permanent -> permanent.isCreature(game))
                 .map(p -> new MageObjectReference(p, game))
                 .collect(Collectors.toSet());
-        if (!enteringCreatures.isEmpty()) {
-            this.getEffects().setValue("franticScapegoatEnteringCreatures", enteringCreatures);
-            return true;
+        if (enteringCreatures.isEmpty()) {
+            return false;
         }
-        return false;
+        this.getEffects().setValue("franticScapegoatEnteringCreatures", enteringCreatures);
+        return true;
+    }
+
+    @Override
+    public boolean checkInterveningIfClause(Game game) {
+        Permanent source = getSourcePermanentIfItStillExists(game);
+        return (source != null && source.isSuspected());
     }
 
     @Override

@@ -1,5 +1,6 @@
 package mage.abilities.common;
 
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.Zone;
@@ -7,11 +8,15 @@ import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.TappedBatchEvent;
+import mage.game.events.TappedEvent;
+
+import java.util.Optional;
+import java.util.stream.Stream;
 
 /**
  * @author Susucr
  */
-public class BecomesTappedOneOrMoreTriggeredAbility extends TriggeredAbilityImpl {
+public class BecomesTappedOneOrMoreTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<TappedEvent> {
 
     protected FilterPermanent filter;
 
@@ -37,12 +42,21 @@ public class BecomesTappedOneOrMoreTriggeredAbility extends TriggeredAbilityImpl
     }
 
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        TappedBatchEvent batchEvent = (TappedBatchEvent) event;
-        return batchEvent
-                .getTargetIds()
+    public Stream<TappedEvent> filterBatchEvent(GameEvent event, Game game) {
+        return ((TappedBatchEvent) event)
+                .getEvents()
                 .stream()
-                .map(game::getPermanent)
-                .anyMatch(p -> filter.match(p, getControllerId(), this, game));
+                .filter(e -> Optional
+                        .of(e)
+                        .map(TappedEvent::getTargetId)
+                        .map(game::getPermanent)
+                        .filter(p -> filter.match(p, getControllerId(), this, game))
+                        .isPresent()
+                );
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        return filterBatchEvent(event, game).findAny().isPresent();
     }
 }

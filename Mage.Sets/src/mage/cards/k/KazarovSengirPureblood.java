@@ -1,29 +1,34 @@
 
 package mage.cards.k;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.constants.SubType;
-import mage.constants.SuperType;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
+import mage.game.events.DamagedBatchForOnePermanentEvent;
+import mage.game.events.DamagedPermanentEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.Optional;
+import java.util.UUID;
+import java.util.stream.Stream;
+
 /**
- *
  * @author TheElk801
  */
 public final class KazarovSengirPureblood extends CardImpl {
@@ -58,7 +63,7 @@ public final class KazarovSengirPureblood extends CardImpl {
     }
 }
 
-class KazarovSengirPurebloodTriggeredAbility extends TriggeredAbilityImpl {
+class KazarovSengirPurebloodTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<DamagedPermanentEvent> {
 
     public KazarovSengirPurebloodTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
@@ -79,11 +84,24 @@ class KazarovSengirPurebloodTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public Stream<DamagedPermanentEvent> filterBatchEvent(GameEvent event, Game game) {
+        return ((DamagedBatchForOnePermanentEvent) event)
+                .getEvents()
+                .stream()
+                .filter(e -> e.getAmount() > 0)
+                .filter(e -> Optional
+                        .of(e)
+                        .map(DamagedPermanentEvent::getTargetId)
+                        .map(game::getPermanentOrLKIBattlefield)
+                        .filter(Permanent::isCreature)
+                        .filter(p -> game.getOpponents(p.getControllerId()).contains(getControllerId()))
+                        .isPresent()
+                );
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
-        return permanent!=null
-                && permanent.isCreature(game)
-                && game.getOpponents(permanent.getControllerId()).contains(this.getControllerId());
+        return filterBatchEvent(event, game).findAny().isPresent();
     }
 
     @Override

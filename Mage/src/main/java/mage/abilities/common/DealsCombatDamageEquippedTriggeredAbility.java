@@ -42,9 +42,6 @@ public class DealsCombatDamageEquippedTriggeredAbility extends TriggeredAbilityI
 
     @Override
     public Stream<DamagedEvent> filterBatchEvent(GameEvent event, Game game) {
-        if (!checkEventType(event, game)) {
-            return Stream.empty();
-        }
         Permanent sourcePermanent = getSourcePermanentOrLKI(game);
         if (sourcePermanent == null || sourcePermanent.getAttachedTo() == null) {
             return Stream.empty();

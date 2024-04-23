@@ -2,6 +2,7 @@ package mage.cards.k;
 
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -34,11 +35,9 @@ import mage.target.targetpointer.FixedTargets;
 import mage.util.CardUtil;
 import mage.util.functions.CopyApplier;
 
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * @author DominionSpy
@@ -84,13 +83,11 @@ public final class KayaSpiritsJustice extends CardImpl {
     }
 }
 
-class KayaSpiritsJusticeTriggeredAbility extends TriggeredAbilityImpl {
+class KayaSpiritsJusticeTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<ZoneChangeEvent> {
 
     KayaSpiritsJusticeTriggeredAbility() {
         super(Zone.BATTLEFIELD, new KayaSpiritsJusticeCopyEffect(), false);
-        setTriggerPhrase("Whenever one or more creatures you control and/or creature cards in your graveyard are put into exile, " +
-                "you may choose a creature card from among them. Until end of turn, target token you control becomes a copy of it, " +
-                "except it has flying.");
+        setTriggerPhrase("Whenever one or more creatures you control and/or creature cards in your graveyard are put into exile, ");
     }
 
     private KayaSpiritsJusticeTriggeredAbility(final KayaSpiritsJusticeTriggeredAbility ability) {
@@ -108,11 +105,51 @@ class KayaSpiritsJusticeTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        ZoneChangeBatchEvent zEvent = (ZoneChangeBatchEvent) event;
-
-        Set<Card> battlefieldCards = zEvent.getEvents()
+    public Stream<ZoneChangeEvent> filterBatchEvent(GameEvent event, Game game) {
+        // From Battlefield
+        Stream<ZoneChangeEvent> filteredBattlefield = ((ZoneChangeBatchEvent) event)
+                .getEvents()
                 .stream()
+                .filter(e -> e.getFromZone() == Zone.BATTLEFIELD)
+                .filter(e -> e.getToZone() == Zone.EXILED)
+                .filter(e -> Optional
+                        .of(e)
+                        .map(ZoneChangeEvent::getTargetId)
+                        .map(game::getCard)
+                        .filter(card -> {
+                            Permanent permanent = game.getPermanentOrLKIBattlefield(card.getId());
+                            return StaticFilters.FILTER_PERMANENT_CREATURE
+                                    .match(permanent, getControllerId(), this, game);
+                        })
+                        .isPresent()
+                );
+
+        // From Graveyard
+        Stream<ZoneChangeEvent> filteredGraveyard = ((ZoneChangeBatchEvent) event)
+                .getEvents()
+                .stream()
+                .filter(e -> e.getFromZone() == Zone.GRAVEYARD)
+                .filter(e -> e.getToZone() == Zone.EXILED)
+                .filter(e -> Optional
+                        .of(e)
+                        .map(ZoneChangeEvent::getTargetId)
+                        .map(game::getCard)
+                        .filter(card -> StaticFilters.FILTER_CARD_CREATURE.match(card, getControllerId(), this, game))
+                        .isPresent()
+                );
+        
+        return Stream.concat(filteredBattlefield, filteredGraveyard);
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        Stream<ZoneChangeEvent> filteredEvents = filterBatchEvent(event, game);
+        if (!filteredEvents.findAny().isPresent()) {
+            return false;
+        }
+
+        // From Battlefield
+        Set<Card> battlefieldCards = filteredEvents
                 .filter(e -> e.getFromZone() == Zone.BATTLEFIELD)
                 .filter(e -> e.getToZone() == Zone.EXILED)
                 .map(ZoneChangeEvent::getTargetId)
@@ -126,8 +163,8 @@ class KayaSpiritsJusticeTriggeredAbility extends TriggeredAbilityImpl {
                 })
                 .collect(Collectors.toSet());
 
-        Set<Card> graveyardCards = zEvent.getEvents()
-                .stream()
+        // From Graveyard
+        Set<Card> graveyardCards = filteredEvents
                 .filter(e -> e.getFromZone() == Zone.GRAVEYARD)
                 .filter(e -> e.getToZone() == Zone.EXILED)
                 .map(ZoneChangeEvent::getTargetId)
@@ -153,6 +190,9 @@ class KayaSpiritsJusticeCopyEffect extends OneShotEffect {
 
     KayaSpiritsJusticeCopyEffect() {
         super(Outcome.Copy);
+        staticText = "you may choose a creature card from among them. "
+                + "Until end of turn, target token you control becomes a copy of it, "
+                + "except it has flying.";
     }
 
     private KayaSpiritsJusticeCopyEffect(final KayaSpiritsJusticeCopyEffect effect) {

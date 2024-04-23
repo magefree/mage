@@ -1,6 +1,7 @@
 package mage.cards.t;
 
 import mage.abilities.Ability;
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.StateTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -23,8 +24,9 @@ import mage.game.events.UntappedBatchEvent;
 import mage.game.events.UntappedEvent;
 import mage.game.permanent.Permanent;
 
-import java.util.Objects;
+import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Stream;
 
 /**
  * @author Susucr
@@ -61,7 +63,7 @@ public final class TheMillenniumCalendar extends CardImpl {
     }
 }
 
-class TheMillenniumCalendarTriggeredAbility extends TriggeredAbilityImpl {
+class TheMillenniumCalendarTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<UntappedEvent> {
 
     public TheMillenniumCalendarTriggeredAbility() {
         super(Zone.BATTLEFIELD, null, false);
@@ -82,30 +84,35 @@ class TheMillenniumCalendarTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
+    public Stream<UntappedEvent> filterBatchEvent(GameEvent event, Game game) {
         if (!game.isActivePlayer(getControllerId())) {
-            return false;
+            return Stream.empty();
         }
-        UntappedBatchEvent batchEvent = (UntappedBatchEvent) event;
-        int count = batchEvent
+        return ((UntappedBatchEvent) event)
                 .getEvents()
                 .stream()
                 .filter(UntappedEvent::isAnUntapStepEvent)
-                .map(UntappedEvent::getTargetId)
-                .map(game::getPermanent)
-                .filter(Objects::nonNull)
-                .filter(p -> p.getControllerId().equals(getControllerId()))
+                .filter(e -> Optional
+                        .of(e)
+                        .map(UntappedEvent::getTargetId)
+                        .map(game::getPermanent)
+                        .filter(p -> p.getControllerId().equals(getControllerId()))
+                        .isPresent()
+                );
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        int amount = filterBatchEvent(event, game)
                 .mapToInt(p -> 1)
                 .sum();
-
-        if (count <= 0) {
+        if (amount <= 0) {
             return false;
         }
-
         this.getEffects().clear();
-        this.addEffect(new AddCountersSourceEffect(CounterType.TIME.createInstance(count)));
+        this.addEffect(new AddCountersSourceEffect(CounterType.TIME.createInstance(amount)));
         this.getHints().clear();
-        this.addHint(new StaticHint("Number of untapped permanents: " + count));
+        this.addHint(new StaticHint("Number of untapped permanents: " + amount));
         return true;
     }
 

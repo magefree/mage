@@ -1,6 +1,7 @@
 package mage.cards.b;
 
 import mage.abilities.Ability;
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
@@ -22,11 +23,12 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeBatchEvent;
 import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.Permanent;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetOpponentsCreaturePermanent;
 
+import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Stream;
 
 /**
  * @author Cguy7777
@@ -57,7 +59,7 @@ public final class BloodSpatterAnalysis extends CardImpl {
     }
 }
 
-class BloodSpatterAnalysisTriggeredAbility extends TriggeredAbilityImpl {
+class BloodSpatterAnalysisTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<ZoneChangeEvent> {
 
     BloodSpatterAnalysisTriggeredAbility() {
         super(Zone.BATTLEFIELD, new MillCardsControllerEffect(1));
@@ -84,16 +86,23 @@ class BloodSpatterAnalysisTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public Stream<ZoneChangeEvent> filterBatchEvent(GameEvent event, Game game) {
+        return ((ZoneChangeBatchEvent) event)
+                .getEvents()
+                .stream()
+                .filter(ZoneChangeEvent::isDiesEvent)
+                .filter(e -> Optional
+                        .of(e)
+                        .map(ZoneChangeEvent::getTargetId)
+                        .map(game::getPermanentOrLKIBattlefield)
+                        .filter(p -> p.isCreature(game))
+                        .isPresent()
+                );
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        for (ZoneChangeEvent zEvent : ((ZoneChangeBatchEvent) event).getEvents()) {
-            if (zEvent.isDiesEvent()) {
-                Permanent permanent = game.getPermanentOrLKIBattlefield(zEvent.getTargetId());
-                if (permanent != null && permanent.isCreature(game)) {
-                    return true;
-                }
-            }
-        }
-        return false;
+        return filterBatchEvent(event, game).findAny().isPresent();
     }
 
     @Override
