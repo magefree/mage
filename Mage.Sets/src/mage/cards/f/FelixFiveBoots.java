@@ -2,6 +2,8 @@ package mage.cards.f;
 
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.BatchTriggeredAbility;
+import mage.abilities.TriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.ReplacementEffectImpl;
@@ -91,14 +93,12 @@ class FelixFiveBootsEffect extends ReplacementEffectImpl {
         if (sourceEvent instanceof DamagedEvent) {
             return checkDamagedEvent((DamagedEvent) sourceEvent, source.getControllerId(), game);
         } else if (sourceEvent instanceof BatchEvent) {
-            for (Object singleEventAsObject : ((BatchEvent) sourceEvent).getEvents()) {
-                if (singleEventAsObject instanceof DamagedEvent
-                        && checkDamagedEvent((DamagedEvent) singleEventAsObject, source.getControllerId(), game)
-                ) {
-                    // For batch events, if one of the event inside the condition match the condition,
-                    // the effect applies to the whole batch events.
-                    return true;
-                }
+            TriggeredAbility sourceTrigger = numberOfTriggersEvent.getSourceTrigger();
+            if (sourceTrigger instanceof BatchTriggeredAbility) {
+                return ((BatchTriggeredAbility<? extends GameEvent>) sourceTrigger)
+                        .filterBatchEvent(sourceEvent, game)
+                        .anyMatch(singleEvent -> singleEvent instanceof DamagedEvent
+                                && checkDamagedEvent((DamagedEvent) singleEvent, source.getControllerId(), game));
             }
         }
 
