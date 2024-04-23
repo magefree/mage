@@ -69,20 +69,4 @@ public class RegenerateTargetEffect extends ReplacementEffectImpl {
         }
         return "regenerate " + getTargetPointer().describeTargets(mode.getTargets(), "that creature");
     }
-
-    @Override
-    public boolean hasHint() {
-        return true;
-    }
-
-    StaticHint hint = new StaticHint("{this} is regenerating.");
-
-    @Override
-    public List<Hint> getAffectedHints(Permanent permanent, Ability source, Game game) {
-        if (!permanent.getId().equals(getTargetPointer().getFirst(game, source)) || !this.used) {
-            return Collections.emptyList();
-        }
-
-        return Arrays.asList(hint);
-    }
 }
