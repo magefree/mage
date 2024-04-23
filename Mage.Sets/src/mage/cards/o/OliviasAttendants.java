@@ -2,6 +2,7 @@ package mage.cards.o;
 
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -15,11 +16,13 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.DamagedBatchAllEvent;
+import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.token.BloodToken;
 import mage.target.common.TargetAnyTarget;
 
 import java.util.UUID;
+import java.util.stream.Stream;
 
 /**
  * @author TheElk801
@@ -55,7 +58,7 @@ public final class OliviasAttendants extends CardImpl {
     }
 }
 
-class OliviasAttendantsTriggeredAbility extends TriggeredAbilityImpl {
+class OliviasAttendantsTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<DamagedEvent> {
 
     OliviasAttendantsTriggeredAbility() {
         super(Zone.BATTLEFIELD, null);
@@ -76,11 +79,19 @@ class OliviasAttendantsTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        int amount = ((DamagedBatchAllEvent) event)
+    public Stream<DamagedEvent> filterBatchEvent(GameEvent event, Game game) {
+        if (!checkEventType(event, game)) {
+            return Stream.empty();
+        }
+        return ((DamagedBatchAllEvent) event)
                 .getEvents()
                 .stream()
-                .filter(e -> e.getAttackerId().equals(this.getSourceId()))
+                .filter(e -> e.getAttackerId().equals(this.getSourceId()));
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        int amount = filterBatchEvent(event, game)
                 .mapToInt(GameEvent::getAmount)
                 .sum();
         if (amount < 1) {
