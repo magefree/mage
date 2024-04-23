@@ -62,8 +62,8 @@ public class TargetActivatedAbility extends TargetObject {
         for (StackObject stackObject : game.getStack()) {
             if (stackObject.getStackAbility() != null
                     && stackObject.getStackAbility().isActivatedAbility()
-                    && game.getState().getPlayersInRange(sourceControllerId, game).contains(stackObject.getStackAbility().getControllerId()))
-            {
+                    && game.getState().getPlayersInRange(sourceControllerId, game).contains(stackObject.getStackAbility().getControllerId())
+            ) {
                 return true;
             }
         }
@@ -81,7 +81,7 @@ public class TargetActivatedAbility extends TargetObject {
         for (StackObject stackObject : game.getStack()) {
             if (stackObject.getStackAbility().isActivatedAbility()
                     && game.getState().getPlayersInRange(sourceControllerId, game).contains(stackObject.getStackAbility().getControllerId())
-                    && filter.match(stackObject, game)){
+                    && filter.match(stackObject, game)) {
                 possibleTargets.add(stackObject.getStackAbility().getId());
             }
         }
