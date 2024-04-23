@@ -1,6 +1,7 @@
 package mage.abilities.effects.common;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import mage.abilities.Ability;
@@ -79,7 +80,7 @@ public class RegenerateTargetEffect extends ReplacementEffectImpl {
     @Override
     public List<Hint> getAffectedHints(Permanent permanent, Ability source, Game game) {
         if (!permanent.getId().equals(getTargetPointer().getFirst(game, source)) || !this.used) {
-            return null;
+            return Collections.emptyList();
         }
 
         return Arrays.asList(hint);

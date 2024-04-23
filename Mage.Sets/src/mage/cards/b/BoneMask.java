@@ -1,6 +1,7 @@
 package mage.cards.b;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
@@ -109,12 +110,12 @@ class BoneMaskEffect extends PreventionEffectImpl {
     @Override
     public List<Hint> getAffectedHints(Permanent permanent, Ability source, Game game) {
         if (this.used || !permanent.getId().equals(target.getFirstTarget())) {
-            return null;
+            return Collections.emptyList();
         }
 
         Player player = game.getPlayer(source.getControllerId());
         if (player == null)
-            return null;
+            return Collections.emptyList();
 
         return Arrays.asList(new StaticHint("The next time {this} would deal damage to " + player.getLogName()
                 + " this turn, prevent that damage."));

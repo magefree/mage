@@ -20,6 +20,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -127,7 +128,7 @@ class GoblinPsychopathEffect extends ReplacementEffectImpl {
     @Override
     public List<Hint> getAffectedHints(Permanent permanent, Ability source, Game game) {
         if (wonFlip || !permanent.getId().equals(source.getSourceId())) {
-            return null;
+            return Collections.emptyList();
         }
 
         return Arrays.asList(

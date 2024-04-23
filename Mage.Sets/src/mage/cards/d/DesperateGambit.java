@@ -2,6 +2,7 @@
 package mage.cards.d;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -141,7 +142,7 @@ class DesperateGambitEffect extends PreventionEffectImpl {
     @Override
     public List<Hint> getAffectedHints(Permanent permanent, Ability source, Game game) {
         if (!permanent.getId().equals(target.getFirstTarget())) {
-            return null;
+            return Collections.emptyList();
         }
 
         return Arrays.asList(wonFlip ? wonHint : lostHint);

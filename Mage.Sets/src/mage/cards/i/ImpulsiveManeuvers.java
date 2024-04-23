@@ -2,6 +2,7 @@
 package mage.cards.i;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 import mage.MageObject;
@@ -125,7 +126,7 @@ class ImpulsiveManeuversEffect extends PreventionEffectImpl {
     @Override
     public List<Hint> getAffectedHints(Permanent permanent, Ability source, Game game) {
         if (!permanent.getId().equals(this.getTargetPointer().getFirst(game, source))) {
-            return null;
+            return Collections.emptyList();
         }
 
         return Arrays.asList(wonFlip ? wonHint : lostHint);

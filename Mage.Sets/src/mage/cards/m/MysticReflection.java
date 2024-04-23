@@ -1,6 +1,7 @@
 package mage.cards.m;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -164,7 +165,7 @@ class MysticReflectionReplacementEffect extends ReplacementEffectImpl {
     public List<Hint> getAffectedHints(Permanent permanent, Ability source, Game game) {
         Permanent targetedPermanent = (Permanent) game.getState().getValue("MysticReflection" + identifier);
         if (targetedPermanent == null || !permanent.getId().equals(targetedPermanent.getId())) {
-            return null;
+            return Collections.emptyList();
         }
 
         return Arrays.asList(hint);
