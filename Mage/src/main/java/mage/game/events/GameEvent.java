@@ -146,7 +146,7 @@ public class GameEvent implements Serializable {
         /* DAMAGED_BATCH_FOR_ALL
         includes all damage events, both permanent damage and player damage, in single batch event
          */
-        DAMAGED_BATCH_FOR_ALL,
+        DAMAGED_BATCH_FOR_ALL(true),
         /* DAMAGED_BATCH_FIRED
          * Does not contain any info on damage events, and can fire even when all damage is prevented.
          * Fire any time a DAMAGED_BATCH_FOR_ALL could have fired (combat & noncombat).
@@ -663,7 +663,24 @@ public class GameEvent implements Serializable {
          */
         BECOME_PLOTTED,
         //custom events
-        CUSTOM_EVENT
+        CUSTOM_EVENT;
+
+        private final boolean batch;
+
+        EventType() {
+            this(false);
+        }
+
+        EventType(boolean isBatch) {
+            this.batch = isBatch;
+        }
+
+        /**
+         * Is this a batch event type?
+         */
+        public boolean isBatch() {
+            return this.batch;
+        }
     }
 
     public GameEvent(EventType type, UUID targetId, Ability source, UUID playerId) {
