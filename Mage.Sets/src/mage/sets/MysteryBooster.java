@@ -1872,7 +1872,7 @@ public class MysteryBooster extends ExpansionSet {
         addCardInfoToList(boosterList, "Goblin Bushwhacker", "ZEN", "125");
         addCardInfoToList(boosterList, "Grand Architect", "SOM", "33");
         addCardInfoToList(boosterList, "Greater Mossdog", "MMA", "146");
-        addCardInfoToList(boosterList, "Guerrilla Tactics", "1E-", "10");
+        addCardInfoToList(boosterList, "Guerrilla Tactics", "10E", "211");
         addCardInfoToList(boosterList, "Harmonic Sliver", "TSP", "240");
         addCardInfoToList(boosterList, "Helix Pinnacle", "EVE", "68");
         addCardInfoToList(boosterList, "Herald of Leshrac", "CSP", "62");
