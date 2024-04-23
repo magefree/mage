@@ -434,6 +434,11 @@ public class StackAbility extends StackObjectImpl implements Ability {
     public boolean isActivatedAbility() {
         return ability.isActivatedAbility();
     }
+    
+    @Override
+    public boolean isTriggeredAbility() {
+        return ability.isTriggeredAbility();
+    }
 
     @Override
     public boolean isNonManaActivatedAbility() {

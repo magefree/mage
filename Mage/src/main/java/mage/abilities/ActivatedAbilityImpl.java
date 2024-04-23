@@ -57,7 +57,7 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
     }
 
     protected ActivatedAbilityImpl(Zone zone, Effect effect, Cost cost) {
-        super(AbilityType.ACTIVATED_NONMANA_NONLOYALTY, zone);
+        super(AbilityType.ACTIVATED_NONMANA, zone);
         this.addEffect(effect);
         this.addCost(cost);
     }

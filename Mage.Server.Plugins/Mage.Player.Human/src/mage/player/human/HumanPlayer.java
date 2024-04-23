@@ -2619,7 +2619,7 @@ public class HumanPlayer extends PlayerImpl {
             }
 
             // triggered abilities can't be skipped by cancel or wrong answer
-            if (source.getAbilityType() != AbilityType.TRIGGERED) {
+            if (!source.isTriggeredAbility()) {
                 done = true;
             }
         }
@@ -2787,7 +2787,9 @@ public class HumanPlayer extends PlayerImpl {
                 holdingPriority = false;
                 break;
             case TOGGLE_RECORD_MACRO:
-                if (true) return; // TODO: macro unsupported in current version
+                if (true) {
+                    return; // TODO: macro unsupported in current version
+                }
                 if (recordingMacro) {
                     logger.debug("Finished Recording Macro");
                     activatingMacro = true;

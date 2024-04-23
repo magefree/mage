@@ -168,6 +168,11 @@ public abstract class AbilityImpl implements Ability {
     }
 
     @Override
+    public boolean isTriggeredAbility() {
+        return this.abilityType.isTriggeredAbility();
+    }
+
+    @Override
     public boolean isNonManaActivatedAbility() {
         return this.abilityType.isNonManaActivatedAbility();
     }
@@ -366,7 +371,7 @@ public abstract class AbilityImpl implements Ability {
             // and/or zones become the target of a spell trigger at this point; they'll wait to be put on
             // the stack until the spell has finished being cast.)
 
-            if (this.getAbilityType() != AbilityType.TRIGGERED) { // triggered abilities check this already in playerImpl.triggerAbility
+            if (!this.getAbilityType().isTriggeredAbility()) { // triggered abilities check this already in playerImpl.triggerAbility
                 adjustTargets(game);
             }
 

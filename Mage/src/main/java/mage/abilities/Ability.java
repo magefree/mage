@@ -63,12 +63,17 @@ public interface Ability extends Controllable, Serializable {
     AbilityType getAbilityType();
 
     /**
-     * If this ability is an activated one (loyalty and mana included).
+     * If this ability is an activated one (mana included).
      */
     boolean isActivatedAbility();
 
     /**
-     * If this ability is an activated one, excluding mana (loyalty included).
+     * If this ability is a triggered one (mana included).
+     */
+    boolean isTriggeredAbility();
+
+    /**
+     * If this ability is an activated one, excluding mana.
      */
     boolean isNonManaActivatedAbility();
 

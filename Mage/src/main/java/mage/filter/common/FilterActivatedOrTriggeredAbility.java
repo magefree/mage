@@ -1,7 +1,6 @@
 package mage.filter.common;
 
 import mage.abilities.Ability;
-import mage.constants.AbilityType;
 import mage.filter.FilterStackObject;
 import mage.filter.predicate.other.ActivatedOrTriggeredAbilityPredicate;
 import mage.game.Game;
@@ -35,8 +34,7 @@ public class FilterActivatedOrTriggeredAbility extends FilterStackObject {
             return false;
         }
         Ability ability = (Ability) stackObject;
-        return ability.getAbilityType() == AbilityType.TRIGGERED
-                || ability.isActivatedAbility();
+        return ability.isTriggeredAbility() || ability.isActivatedAbility();
     }
 
     @Override
@@ -47,7 +45,6 @@ public class FilterActivatedOrTriggeredAbility extends FilterStackObject {
             return false;
         }
         Ability ability = (Ability) stackObject;
-        return ability.getAbilityType() == AbilityType.TRIGGERED
-                || ability.isActivatedAbility();
+        return ability.getAbilityType().isTriggeredAbility() || ability.isActivatedAbility();
     }
 }
