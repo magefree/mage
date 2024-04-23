@@ -3,7 +3,6 @@ package org.mage.test.cards.triggers.damage;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -101,7 +100,6 @@ public class FelixFiveBootsTest extends CardTestPlayerBase {
     }
 
     @Test
-    @Ignore // see #12095
     public void testSelectRightPartOfBatch() {
         setStrictChooseMode(true);
 
