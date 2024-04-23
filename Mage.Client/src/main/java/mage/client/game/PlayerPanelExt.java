@@ -400,20 +400,20 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         tooltipText.append("<br/>Match time remaining: ").append(getPriorityTimeLeftString(player));
 
         // designations
-        this.avatar.setTopTextImageRight(null);
+        this.avatar.clearTopTextImagesRight();
         for (String name : player.getDesignationNames()) {
             tooltipText.append("<br/>").append(name);
             if (DesignationType.CITYS_BLESSING.toString().equals(name)) {
-                this.avatar.setTopTextImageRight(ImageHelper.getImageFromResources("/info/city_blessing.png"));
+                this.avatar.addTopTextImageRight(ImageHelper.getImageFromResources("/info/city_blessing.png"));
             }
         }
         if (player.isMonarch()) {
             tooltipText.append("<br/>").append("The Monarch");
-            this.avatar.setTopTextImageRight(ImageHelper.getImageFromResources("/info/crown.png"));
+            this.avatar.addTopTextImageRight(ImageHelper.getImageFromResources("/info/crown.png"));
         }
         if (player.isInitiative()) {
             tooltipText.append("<br/>").append("Have the Initiative");
-            this.avatar.setTopTextImageRight(ImageHelper.getImageFromResources("/info/initiative.png"));
+            this.avatar.addTopTextImageRight(ImageHelper.getImageFromResources("/info/initiative.png"));
         }
 
         // counters
