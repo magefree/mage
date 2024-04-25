@@ -74,7 +74,7 @@ class IndulgentTormentorEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player opponent = game.getPlayer(source.getFirstTarget());
         if (opponent != null) {
-            Cost cost = new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT);
+            Cost cost = new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE);
             if (cost.canPay(source, source, opponent.getId(), game)
                     && opponent.chooseUse(outcome, "Sacrifice a creature to prevent the card draw?", source, game)) {
                 if (cost.pay(source, game, source, opponent.getId(), false, null)) {

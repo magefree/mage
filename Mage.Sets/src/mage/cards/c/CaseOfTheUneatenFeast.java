@@ -1,8 +1,5 @@
 package mage.cards.c;
 
-import java.util.Objects;
-import java.util.UUID;
-
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.CaseAbility;
@@ -17,27 +14,23 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.hint.common.CaseSolvedHint;
 import mage.cards.Card;
-import mage.constants.ComparisonType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
+import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.watchers.common.PlayerGainedLifeWatcher;
 
+import java.util.Objects;
+import java.util.UUID;
+
 /**
- *
  * @author DominionSpy
  */
 public final class CaseOfTheUneatenFeast extends CardImpl {
 
-    private static final Condition condition = new YouGainedLifeCondition(ComparisonType.MORE_THAN, 4){
+    private static final Condition condition = new YouGainedLifeCondition(ComparisonType.MORE_THAN, 4) {
         @Override
         public String toString() {
             return "you've gained 5 or more life this turn";
@@ -60,7 +53,7 @@ public final class CaseOfTheUneatenFeast extends CardImpl {
                 SolvedSourceCondition.SOLVED);
 
         this.addAbility(new CaseAbility(initialAbility, condition, solvedAbility)
-                .addHint(new CaseOfTheUneatenFeastHint(condition)),
+                        .addHint(new CaseOfTheUneatenFeastHint(condition)),
                 new PlayerGainedLifeWatcher());
     }
 
@@ -93,7 +86,7 @@ class CaseOfTheUneatenFeastEffect extends ContinuousEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        if (!this.affectedObjectsSet) {
+        if (!getAffectedObjectsSet()) {
             return;
         }
         Player player = game.getPlayer(source.getControllerId());

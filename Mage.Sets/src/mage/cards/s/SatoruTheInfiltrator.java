@@ -38,7 +38,7 @@ public final class SatoruTheInfiltrator extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Whenever Satoru, the Infiltrator and/or one or more other nontoken creatures enter the battlefield under your control, if none of them were cast or no mana was spent to cast them, draw a card.
         this.addAbility(new SatoruTheInfiltratorTriggeredAbility());

@@ -4,16 +4,11 @@ import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
-import java.util.Arrays;
-import java.util.List;
-
 /**
  * @author TheElk801
  */
 public final class Fallout extends ExpansionSet {
 
-    // skip list for rad counter mechanic
-    private static final List<String> unfinished = Arrays.asList("Acquired Mutation", "Bloatfly Swarm", "Contaminated Drink", "Feral Ghoul", "Glowing One", "Harold and Bob, First Numens", "Infesting Radroach", "Mariposa Military Base", "Megaton's Fate", "Mirelurk Queen", "Nightkin Ambusher", "Nuclear Fallout", "Nuka-Nuke Launcher", "Screeching Scorchbeast", "Strong, the Brutish Thespian", "Struggle for Project Purity", "Survivor's Med Kit", "Tato Farmer", "The Master, Transcendent", "The Wise Mothman", "Vault 12: The Necropolis", "Vexing Radgull");
     private static final Fallout instance = new Fallout();
 
     public static Fallout getInstance() {
@@ -94,6 +89,7 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Commander Sofia Daguerre", 15, Rarity.UNCOMMON, mage.cards.c.CommanderSofiaDaguerre.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Commander Sofia Daguerre", 543, Rarity.UNCOMMON, mage.cards.c.CommanderSofiaDaguerre.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Contagion Clasp", 229, Rarity.UNCOMMON, mage.cards.c.ContagionClasp.class));
+        cards.add(new SetCardInfo("Contaminated Drink", 99, Rarity.UNCOMMON, mage.cards.c.ContaminatedDrink.class));
         cards.add(new SetCardInfo("Corpsejack Menace", 214, Rarity.UNCOMMON, mage.cards.c.CorpsejackMenace.class));
         cards.add(new SetCardInfo("Crimson Caravaneer", 56, Rarity.UNCOMMON, mage.cards.c.CrimsonCaravaneer.class));
         cards.add(new SetCardInfo("Crucible of Worlds", 357, Rarity.MYTHIC, mage.cards.c.CrucibleOfWorlds.class));
@@ -107,6 +103,7 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Dr. Madison Li", 3, Rarity.MYTHIC, mage.cards.d.DrMadisonLi.class));
         cards.add(new SetCardInfo("Dragonskull Summit", 261, Rarity.RARE, mage.cards.d.DragonskullSummit.class));
         cards.add(new SetCardInfo("Drowned Catacomb", 262, Rarity.RARE, mage.cards.d.DrownedCatacomb.class));
+        cards.add(new SetCardInfo("Elder Arthur Maxson", 102, Rarity.RARE, mage.cards.e.ElderArthurMaxson.class));
         cards.add(new SetCardInfo("Elder Owyn Lyons", 103, Rarity.UNCOMMON, mage.cards.e.ElderOwynLyons.class));
         cards.add(new SetCardInfo("Electrosiphon", 104, Rarity.RARE, mage.cards.e.Electrosiphon.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Electrosiphon", 414, Rarity.RARE, mage.cards.e.Electrosiphon.class, NON_FULL_USE_VARIOUS));
@@ -134,6 +131,7 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("General's Enforcer", 217, Rarity.UNCOMMON, mage.cards.g.GeneralsEnforcer.class));
         cards.add(new SetCardInfo("Glacial Fortress", 266, Rarity.RARE, mage.cards.g.GlacialFortress.class));
         cards.add(new SetCardInfo("Glimmer of Genius", 176, Rarity.UNCOMMON, mage.cards.g.GlimmerOfGenius.class));
+        cards.add(new SetCardInfo("Glowing One", 76, Rarity.UNCOMMON, mage.cards.g.GlowingOne.class));
         cards.add(new SetCardInfo("Grave Titan", 346, Rarity.MYTHIC, mage.cards.g.GraveTitan.class));
         cards.add(new SetCardInfo("Guardian Project", 199, Rarity.RARE, mage.cards.g.GuardianProject.class));
         cards.add(new SetCardInfo("Gunner Conscript", 77, Rarity.UNCOMMON, mage.cards.g.GunnerConscript.class));
@@ -149,13 +147,16 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Ian the Reckless", 59, Rarity.UNCOMMON, mage.cards.i.IanTheReckless.class));
         cards.add(new SetCardInfo("Impassioned Orator", 162, Rarity.COMMON, mage.cards.i.ImpassionedOrator.class));
         cards.add(new SetCardInfo("Inexorable Tide", 177, Rarity.RARE, mage.cards.i.InexorableTide.class));
+        cards.add(new SetCardInfo("Infesting Radroach", 46, Rarity.UNCOMMON, mage.cards.i.InfestingRadroach.class));
         cards.add(new SetCardInfo("Inspiring Call", 203, Rarity.UNCOMMON, mage.cards.i.InspiringCall.class));
         cards.add(new SetCardInfo("Intangible Virtue", 163, Rarity.UNCOMMON, mage.cards.i.IntangibleVirtue.class));
         cards.add(new SetCardInfo("Intelligence Bobblehead", 134, Rarity.UNCOMMON, mage.cards.i.IntelligenceBobblehead.class));
         cards.add(new SetCardInfo("Irrigated Farmland", 268, Rarity.RARE, mage.cards.i.IrrigatedFarmland.class));
         cards.add(new SetCardInfo("Island", 319, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Isolated Chapel", 269, Rarity.RARE, mage.cards.i.IsolatedChapel.class));
+        cards.add(new SetCardInfo("James, Wandering Dad", 31, Rarity.RARE, mage.cards.j.JamesWanderingDad.class));
         cards.add(new SetCardInfo("Jungle Shrine", 270, Rarity.UNCOMMON, mage.cards.j.JungleShrine.class));
+        cards.add(new SetCardInfo("Junk Jet", 60, Rarity.RARE, mage.cards.j.JunkJet.class));
         cards.add(new SetCardInfo("Junktown", 150, Rarity.RARE, mage.cards.j.Junktown.class));
         cards.add(new SetCardInfo("Keeper of the Accord", 164, Rarity.RARE, mage.cards.k.KeeperOfTheAccord.class));
         cards.add(new SetCardInfo("Kellogg, Dangerous Mind", 106, Rarity.RARE, mage.cards.k.KelloggDangerousMind.class, NON_FULL_USE_VARIOUS));
@@ -178,6 +179,10 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("MacCready, Lamplight Mayor", 636, Rarity.RARE, mage.cards.m.MacCreadyLamplightMayor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("MacCready, Lamplight Mayor", 945, Rarity.RARE, mage.cards.m.MacCreadyLamplightMayor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mantle of the Ancients", 165, Rarity.RARE, mage.cards.m.MantleOfTheAncients.class));
+        cards.add(new SetCardInfo("Marcus, Mutant Mayor", 109, Rarity.RARE, mage.cards.m.MarcusMutantMayor.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Marcus, Mutant Mayor", 418, Rarity.RARE, mage.cards.m.MarcusMutantMayor.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Marcus, Mutant Mayor", 637, Rarity.RARE, mage.cards.m.MarcusMutantMayor.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Marcus, Mutant Mayor", 946, Rarity.RARE, mage.cards.m.MarcusMutantMayor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Marshal's Anthem", 166, Rarity.RARE, mage.cards.m.MarshalsAnthem.class));
         cards.add(new SetCardInfo("Martial Coup", 167, Rarity.RARE, mage.cards.m.MartialCoup.class));
         cards.add(new SetCardInfo("Masterwork of Ingenuity", 234, Rarity.RARE, mage.cards.m.MasterworkOfIngenuity.class));
@@ -205,7 +210,9 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Nick Valentine, Private Eye", 378, Rarity.RARE, mage.cards.n.NickValentinePrivateEye.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Nick Valentine, Private Eye", 563, Rarity.RARE, mage.cards.n.NickValentinePrivateEye.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Nick Valentine, Private Eye", 906, Rarity.RARE, mage.cards.n.NickValentinePrivateEye.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Nightkin Ambusher", 112, Rarity.UNCOMMON, mage.cards.n.NightkinAmbusher.class));
         cards.add(new SetCardInfo("Nomad Outpost", 277, Rarity.UNCOMMON, mage.cards.n.NomadOutpost.class));
+        cards.add(new SetCardInfo("Nuclear Fallout", 47, Rarity.RARE, mage.cards.n.NuclearFallout.class));
         cards.add(new SetCardInfo("Nuka-Cola Vending Machine", 137, Rarity.UNCOMMON, mage.cards.n.NukaColaVendingMachine.class));
         cards.add(new SetCardInfo("One with the Machine", 179, Rarity.RARE, mage.cards.o.OneWithTheMachine.class));
         cards.add(new SetCardInfo("Open the Vaults", 168, Rarity.RARE, mage.cards.o.OpenTheVaults.class));
@@ -262,6 +269,7 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Sentry Bot", 552, Rarity.RARE, mage.cards.s.SentryBot.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sentry Bot", 899, Rarity.RARE, mage.cards.s.SentryBot.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Shadowblood Ridge", 288, Rarity.RARE, mage.cards.s.ShadowbloodRidge.class));
+        cards.add(new SetCardInfo("Shaun, Father of Synths", 119, Rarity.RARE, mage.cards.s.ShaunFatherOfSynths.class));
         cards.add(new SetCardInfo("Sheltered Thicket", 289, Rarity.RARE, mage.cards.s.ShelteredThicket.class));
         cards.add(new SetCardInfo("Sierra, Nuka's Biggest Fan", 25, Rarity.RARE, mage.cards.s.SierraNukasBiggestFan.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sierra, Nuka's Biggest Fan", 372, Rarity.RARE, mage.cards.s.SierraNukasBiggestFan.class, NON_FULL_USE_VARIOUS));
@@ -316,6 +324,10 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Temple of Triumph", 312, Rarity.RARE, mage.cards.t.TempleOfTriumph.class));
         cards.add(new SetCardInfo("Temple of the False God", 311, Rarity.UNCOMMON, mage.cards.t.TempleOfTheFalseGod.class));
         cards.add(new SetCardInfo("Terramorphic Expanse", 313, Rarity.COMMON, mage.cards.t.TerramorphicExpanse.class));
+        cards.add(new SetCardInfo("The Motherlode, Excavator", 62, Rarity.RARE, mage.cards.t.TheMotherlodeExcavator.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Motherlode, Excavator", 389, Rarity.RARE, mage.cards.t.TheMotherlodeExcavator.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Motherlode, Excavator", 590, Rarity.RARE, mage.cards.t.TheMotherlodeExcavator.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Motherlode, Excavator", 917, Rarity.RARE, mage.cards.t.TheMotherlodeExcavator.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Wise Mothman", 4, Rarity.MYTHIC, mage.cards.t.TheWiseMothman.class));
         cards.add(new SetCardInfo("Thirst for Knowledge", 180, Rarity.UNCOMMON, mage.cards.t.ThirstForKnowledge.class));
         cards.add(new SetCardInfo("Thought Vessel", 251, Rarity.COMMON, mage.cards.t.ThoughtVessel.class));
@@ -329,6 +341,10 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Vault 21: House Gambit", 69, Rarity.RARE, mage.cards.v.Vault21HouseGambit.class));
         cards.add(new SetCardInfo("Vault 75: Middle School", 27, Rarity.RARE, mage.cards.v.Vault75MiddleSchool.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vault 75: Middle School", 555, Rarity.RARE, mage.cards.v.Vault75MiddleSchool.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Veronica, Dissident Scribe", 70, Rarity.RARE, mage.cards.v.VeronicaDissidentScribe.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Veronica, Dissident Scribe", 395, Rarity.RARE, mage.cards.v.VeronicaDissidentScribe.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Veronica, Dissident Scribe", 598, Rarity.RARE, mage.cards.v.VeronicaDissidentScribe.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Veronica, Dissident Scribe", 923, Rarity.RARE, mage.cards.v.VeronicaDissidentScribe.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vigor", 347, Rarity.RARE, mage.cards.v.Vigor.class));
         cards.add(new SetCardInfo("Viridescent Bog", 154, Rarity.RARE, mage.cards.v.ViridescentBog.class));
         cards.add(new SetCardInfo("Wake the Past", 221, Rarity.RARE, mage.cards.w.WakeThePast.class));
@@ -346,7 +362,5 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Windbrisk Heights", 315, Rarity.RARE, mage.cards.w.WindbriskHeights.class));
         cards.add(new SetCardInfo("Winding Constrictor", 223, Rarity.UNCOMMON, mage.cards.w.WindingConstrictor.class));
         cards.add(new SetCardInfo("Woodland Cemetery", 316, Rarity.RARE, mage.cards.w.WoodlandCemetery.class));
-
-        cards.removeIf(setCardInfo -> unfinished.contains(setCardInfo.getName())); // remove when mechanic is implemented
     }
 }

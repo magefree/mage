@@ -103,7 +103,7 @@ class TheGreatWorkEffect extends OneShotEffect {
 class TheGreatWorkCastFromGraveyardEffect extends AsThoughEffectImpl {
 
     TheGreatWorkCastFromGraveyardEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
         staticText = "until end of turn, you may cast instant and sorcery spells from any graveyard";
     }
 

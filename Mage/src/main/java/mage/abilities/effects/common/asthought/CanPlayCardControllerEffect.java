@@ -27,13 +27,13 @@ public class CanPlayCardControllerEffect extends AsThoughEffectImpl {
     protected final UUID playerId;
     protected final Condition condition;
 
-    public CanPlayCardControllerEffect(Game game, UUID cardId, int cardZCC, Duration duration) {
-        this(game, cardId, cardZCC, duration, null, null);
+    public CanPlayCardControllerEffect(Game game, UUID cardId, int cardZCC, boolean useCastSpellOnly, Duration duration) {
+        this(game, cardId, cardZCC, useCastSpellOnly, duration, null, null);
     }
 
-    public CanPlayCardControllerEffect(Game game, UUID cardId, int cardZCC, Duration duration, UUID playerId, Condition condition) {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, duration, Outcome.Benefit);
-        this.staticText = "You may play those card";
+    public CanPlayCardControllerEffect(Game game, UUID cardId, int cardZCC, boolean useCastSpellOnly, Duration duration, UUID playerId, Condition condition) {
+        super(useCastSpellOnly ? AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE : AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, duration, Outcome.Benefit);
+        this.staticText = useCastSpellOnly ? "You may cast this card" : "You may play this card";
         this.mor = new MageObjectReference(cardId, cardZCC, game);
         this.playerId = playerId;
         this.condition = condition;
@@ -57,18 +57,18 @@ public class CanPlayCardControllerEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
+    public boolean applies(UUID objectId, Ability ability, UUID affectedControllerId, Game game) {
         if (mor.getCard(game) == null) {
             discard();
             return false;
         }
 
-        if (condition != null && !condition.apply(game, source)) {
+        if (condition != null && !condition.apply(game, ability)) {
             return false;
         }
 
-        UUID objectIdToCast = CardUtil.getMainCardId(game, sourceId); // affected to all card's parts
+        UUID objectIdToCast = CardUtil.getMainCardId(game, objectId); // affected to all card's parts
         return mor.refersTo(objectIdToCast, game)
-                && (playerId == null ? source.isControlledBy(affectedControllerId) : playerId.equals(affectedControllerId));
+                && (playerId == null ? ability.isControlledBy(affectedControllerId) : playerId.equals(affectedControllerId));
     }
 }

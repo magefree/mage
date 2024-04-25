@@ -47,7 +47,7 @@ class HiddenPredatorsStateTriggeredAbility extends StateTriggeredAbility {
 
     public HiddenPredatorsStateTriggeredAbility() {
         super(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new HiddenPredatorsToken(), null, Duration.Custom));
-        this.replaceRuleText = false;
+        this.withRuleTextReplacement(false);
         setTriggerPhrase("When an opponent controls a creature with power 4 or greater, if {this} is an enchantment, ");
     }
 

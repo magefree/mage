@@ -30,7 +30,7 @@ public final class GreedsGambit extends CardImpl {
         this.addAbility(ability);
 
         // At the beginning of your end step, you discard a card, lose 2 life, and sacrifice a creature.
-        ability = new BeginningOfEndStepTriggeredAbility(new DiscardControllerEffect(1), TargetController.YOU, false);
+        ability = new BeginningOfEndStepTriggeredAbility(new DiscardControllerEffect(1).setText("you discard a card"), TargetController.YOU, false);
         ability.addEffect(new LoseLifeSourceControllerEffect(2).setText(", lose 2 life"));
         ability.addEffect(new SacrificeControllerEffect(
                 StaticFilters.FILTER_PERMANENT_A_CREATURE, 1, ""
@@ -38,11 +38,11 @@ public final class GreedsGambit extends CardImpl {
         this.addAbility(ability);
 
         // When Greed's Gambit leaves the battlefield, you discard three cards, lose 6 life, and sacrifice three creatures.
-        ability = new LeavesBattlefieldTriggeredAbility(new DiscardControllerEffect(3), false);
+        ability = new LeavesBattlefieldTriggeredAbility(new DiscardControllerEffect(3).setText("you discard three cards"), false);
         ability.addEffect(new LoseLifeSourceControllerEffect(6).setText(", lose 6 life"));
         ability.addEffect(new SacrificeControllerEffect(
                 StaticFilters.FILTER_PERMANENT_CREATURE, 3, ""
-        ).setText(", and sacrifice 3 creatures"));
+        ).setText(", and sacrifice three creatures"));
         this.addAbility(ability);
     }
 

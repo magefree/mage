@@ -19,7 +19,7 @@ public class SelectAttackersNextAction implements MCTSNodeNextAction{
             attacks = getAttacks(player, fullStateValue, game);
         UUID defenderId = game.getOpponents(player.getId()).iterator().next();
         for (List<UUID> attack: attacks) {
-            Game sim = game.copy();
+            Game sim = game.createSimulationForAI();
             MCTSPlayer simPlayer = (MCTSPlayer) sim.getPlayer(player.getId());
             for (UUID attackerId: attack) {
                 simPlayer.declareAttacker(attackerId, defenderId, sim, false);

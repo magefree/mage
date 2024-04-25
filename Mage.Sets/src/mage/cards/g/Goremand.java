@@ -28,7 +28,7 @@ public final class Goremand extends CardImpl {
         this.toughness = new MageInt(5);
 
         // As an additional cost to cast this spell, sacrifice a creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());

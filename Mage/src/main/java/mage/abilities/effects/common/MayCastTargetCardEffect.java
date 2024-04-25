@@ -120,7 +120,7 @@ public class MayCastTargetCardEffect extends OneShotEffect {
             game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
         } else {
             // TODO: support (and add tests!) for the non-NONE manaAdjustment
-            CardUtil.makeCardPlayable(game, source, card, duration, false);
+            CardUtil.makeCardPlayable(game, source, card, true, duration, false);
         }
         if (thenExile) {
             ContinuousEffect effect = new ThatSpellGraveyardExileReplacementEffect(true);

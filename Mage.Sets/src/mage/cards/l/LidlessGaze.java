@@ -83,7 +83,7 @@ class LidlessGazeEffect extends OneShotEffect {
 
         cards.retainZone(Zone.EXILED, game);
         for (Card card : cards.getCards(game)) {
-            CardUtil.makeCardPlayable(game, source, card, Duration.EndOfTurn,
+            CardUtil.makeCardPlayable(game, source, card, false, Duration.EndOfTurn,
                     true, controller.getId(), null);
         }
 

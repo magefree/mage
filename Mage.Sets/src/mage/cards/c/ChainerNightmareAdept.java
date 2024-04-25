@@ -64,7 +64,7 @@ public final class ChainerNightmareAdept extends CardImpl {
 class ChainerNightmareAdeptContinuousEffect extends AsThoughEffectImpl {
 
     ChainerNightmareAdeptContinuousEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
         staticText = "you may cast a creature spell from your graveyard this turn";
     }
 
@@ -95,6 +95,7 @@ class ChainerNightmareAdeptContinuousEffect extends AsThoughEffectImpl {
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
         throw new IllegalArgumentException("Wrong code usage: can't call applies method on empty affectedAbility");
     }
+
     @Override
     public boolean applies(UUID objectId, Ability affectedAbility, Ability source, Game game, UUID playerId) {
         ChainerNightmareAdeptWatcher watcher = game.getState().getWatcher(ChainerNightmareAdeptWatcher.class);

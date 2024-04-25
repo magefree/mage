@@ -43,7 +43,7 @@ public final class PhyrexianPlaguelord extends CardImpl {
         // Sacrifice a creature: Target creature gets -1/-1 until end of turn.
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new BoostTargetEffect(-1, -1, Duration.EndOfTurn),
-                new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
+                new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

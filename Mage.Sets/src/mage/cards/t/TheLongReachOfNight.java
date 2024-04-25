@@ -32,7 +32,7 @@ public final class TheLongReachOfNight extends CardImpl {
         sagaAbility.addChapterEffect(
                 this, SagaChapter.CHAPTER_I, SagaChapter.CHAPTER_II,
                 new SacrificeOpponentsUnlessPayEffect(
-                        new DiscardCardCost(), StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT
+                        new DiscardCardCost(), StaticFilters.FILTER_PERMANENT_CREATURE
                 )
         );
 

@@ -27,7 +27,8 @@ public class CreateTokenCopySourceEffect extends OneShotEffect {
         super(Outcome.PutCreatureInPlay);
         this.number = copies;
         this.tapped = tapped;
-        staticText = "create a " + (tapped ? "tapped " : "") + "token that's a copy of {this}";
+        staticText = "create " + (copies > 1 ? copies : "a") + " " + (tapped ? "tapped " : "")
+                + (copies > 1 ? "tokens that are" : "token that's") + " a copy of {this}";
     }
 
     protected CreateTokenCopySourceEffect(final CreateTokenCopySourceEffect effect) {

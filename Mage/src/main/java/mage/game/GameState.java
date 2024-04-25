@@ -17,6 +17,7 @@ import mage.game.combat.Combat;
 import mage.game.combat.CombatGroup;
 import mage.game.command.Command;
 import mage.game.command.CommandObject;
+import mage.game.command.Emblem;
 import mage.game.command.Plane;
 import mage.game.events.*;
 import mage.game.permanent.Battlefield;
@@ -71,7 +72,6 @@ public class GameState implements Serializable, Copyable<GameState> {
     private final Map<UUID, LookedAt> lookedAt = new HashMap<>();
     private final Revealed companion;
 
-    private DelayedTriggeredAbilities delayed;
     private SpecialActions specialActions;
     private Watchers watchers;
     private Turn turn;
@@ -86,6 +86,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     private boolean isPlaneChase;
     private List<String> seenPlanes = new ArrayList<>();
     private List<Designation> designations = new ArrayList<>();
+    private List<Emblem> inherentEmblems = new ArrayList<>();
     private Exile exile;
     private Battlefield battlefield;
     private int turnNum = 1;
@@ -94,8 +95,9 @@ public class GameState implements Serializable, Copyable<GameState> {
     private boolean gameOver;
     private boolean paused;
     private ContinuousEffects effects;
-    private TriggeredAbilities triggers;
-    private List<TriggeredAbility> triggered = new ArrayList<>();
+    private TriggeredAbilities triggers; // all normal triggers
+    private DelayedTriggeredAbilities delayed; // all delayed triggers
+    private List<TriggeredAbility> triggered = new ArrayList<>(); // raised triggers, waiting to resolve (can contains both normal and delayed)
     private Combat combat;
     private Map<String, Object> values = new HashMap<>();
     private Map<UUID, Zone> zones = new HashMap<>();
@@ -157,6 +159,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.isPlaneChase = state.isPlaneChase;
         this.seenPlanes.addAll(state.seenPlanes);
         this.designations.addAll(state.designations);
+        this.inherentEmblems = CardUtil.deepCopyObject(state.inherentEmblems);
         this.exile = state.exile.copy();
         this.battlefield = state.battlefield.copy();
         this.turnNum = state.turnNum;
@@ -204,6 +207,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         exile.clear();
         command.clear();
         designations.clear();
+        inherentEmblems.clear();
         seenPlanes.clear();
         isPlaneChase = false;
         revealed.clear();
@@ -233,6 +237,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     }
 
     public void restore(GameState state) {
+        // no needs in copy here cause GameState already copied on save and it will be used only one time here
         this.activePlayerId = state.activePlayerId;
         this.playerList.setCurrent(state.activePlayerId);
         this.playerByOrderId = state.playerByOrderId;
@@ -244,6 +249,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.isPlaneChase = state.isPlaneChase;
         this.seenPlanes = state.seenPlanes;
         this.designations = state.designations;
+        this.inherentEmblems = state.inherentEmblems;
         this.exile = state.exile;
         this.battlefield = state.battlefield;
         this.turnNum = state.turnNum;
@@ -503,6 +509,10 @@ public class GameState implements Serializable, Copyable<GameState> {
 
     public List<Designation> getDesignations() {
         return designations;
+    }
+
+    public List<Emblem> getInherentEmblems() {
+        return inherentEmblems;
     }
 
     public Plane getCurrentPlane() {
@@ -1134,6 +1144,25 @@ public class GameState implements Serializable, Copyable<GameState> {
         }
     }
 
+    /**
+     * Inherent triggers (Rad counters) in the rules have no source.
+     * However to fit better with the engine, we make a fake emblem source,
+     * which is not displayed in any game zone. That allows the trigger to
+     * have a source, which helps with a bunch of situation like hosting,
+     * rather than having a  trigger.
+     * <p>
+     * Should not be used except in very specific situations
+     */
+    public void addInherentEmblem(Emblem emblem, UUID controllerId) {
+        getInherentEmblems().add(emblem);
+        emblem.setControllerId(controllerId);
+        for (Ability ability : emblem.getInitAbilities()) {
+            ability.setControllerId(controllerId);
+            ability.setSourceId(emblem.getId());
+            addAbility(ability, null, emblem);
+        }
+    }
+
     public void addDesignation(Designation designation, Game game, UUID controllerId) {
         getDesignations().add(designation);
         for (Ability ability : designation.getInitAbilities()) {
@@ -1413,7 +1442,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     /**
      * Store the tags of source ability using the MOR as a reference
      */
-    void storePermanentCostsTags(MageObjectReference permanentMOR, Ability source){
+    void storePermanentCostsTags(MageObjectReference permanentMOR, Ability source) {
         if (source.getCostsTagMap() != null) {
             permanentCostsTags.put(permanentMOR, CardUtil.deepCopyObject(source.getCostsTagMap()));
         }
@@ -1423,9 +1452,9 @@ public class GameState implements Serializable, Copyable<GameState> {
      * Removes the cost tags if the corresponding permanent is no longer on the battlefield.
      * Only use if the stack is empty and nothing can refer to them anymore (such as at EOT, the current behavior)
      */
-    public void cleanupPermanentCostsTags(Game game){
+    public void cleanupPermanentCostsTags(Game game) {
         getPermanentCostsTags().entrySet().removeIf(entry ->
-                !(entry.getKey().getZoneChangeCounter() == game.getState().getZoneChangeCounter(entry.getKey().getSourceId())-1)
+                !(entry.getKey().getZoneChangeCounter() == game.getState().getZoneChangeCounter(entry.getKey().getSourceId()) - 1)
         ); // The stored MOR is the stack-moment MOR so need to subtract one from the permanent's ZCC for the check
     }
 

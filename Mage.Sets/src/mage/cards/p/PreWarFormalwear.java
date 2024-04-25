@@ -5,7 +5,7 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
+import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.VigilanceAbility;
@@ -47,12 +47,12 @@ public final class PreWarFormalwear extends CardImpl {
         this.addAbility(ability);
 
         // Equipped creature gets +2/+2 and has vigilance.
-        ability = new SimpleStaticAbility(new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield));
+        ability = new SimpleStaticAbility(new BoostEquippedEffect(2, 2, Duration.WhileOnBattlefield));
         ability.addEffect(new GainAbilityAttachedEffect(VigilanceAbility.getInstance(), AttachmentType.AURA).setText("and has vigilance"));
         this.addAbility(ability);
 
         // Equip {3}
-        this.addAbility(new EquipAbility(3));
+        this.addAbility(new EquipAbility(3, false));
     }
 
     private PreWarFormalwear(final PreWarFormalwear card) {
@@ -70,7 +70,7 @@ class PreWarFormalwerEffect extends OneShotEffect {
     PreWarFormalwerEffect() {
         super(Outcome.PutCreatureInPlay);
         staticText = "return target creature card with mana value 3 or less from your graveyard "
-                + "to the battlefield and attach Pre-War Formalwear to it";
+                + "to the battlefield and attach {this} to it";
     }
 
     private PreWarFormalwerEffect(final PreWarFormalwerEffect effect) {

@@ -15,7 +15,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
+import mage.counters.Counter;
 import mage.game.Game;
+import mage.players.Player;
 
 import java.util.Objects;
 import java.util.UUID;
@@ -59,7 +61,7 @@ public final class LumberingMegasloth extends CardImpl {
 enum LumberingMegaslothValue implements DynamicValue {
     instance;
 
-    private static final Hint hint = new ValueHint("Number of Counters:", instance);
+    private static final Hint hint = new ValueHint("Number of counters", instance);
 
     public static Hint getHint() {
         return hint;
@@ -73,16 +75,16 @@ enum LumberingMegaslothValue implements DynamicValue {
                 .filter(Objects::nonNull)
                 .map(perm -> perm.getCounters(game))
                 .flatMap(counters -> counters.values().stream())
-                .mapToInt(counter -> counter.getCount())
+                .mapToInt(Counter::getCount)
                 .sum();
         int onPlayers = game.getState()
                 .getPlayersInRange(sourceAbility.getControllerId(), game)
                 .stream()
                 .map(game::getPlayer)
                 .filter(Objects::nonNull)
-                .map(player -> player.getCounters())
+                .map(Player::getCounters)
                 .flatMap(counters -> counters.values().stream())
-                .mapToInt(counter -> counter.getCount())
+                .mapToInt(Counter::getCount)
                 .sum();
         return onPermanents + onPlayers;
     }
@@ -99,6 +101,6 @@ enum LumberingMegaslothValue implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "counters among players and permanents";
+        return "counter among players and permanents";
     }
 }

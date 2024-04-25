@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
@@ -16,8 +15,9 @@ import mage.filter.common.FilterArtifactCard;
 import mage.game.Game;
 import mage.target.common.TargetCardInYourGraveyard;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class SilasRennSeekerAdept extends CardImpl {
@@ -56,7 +56,7 @@ public final class SilasRennSeekerAdept extends CardImpl {
 class SilasRennSeekerAdeptPlayEffect extends AsThoughEffectImpl {
 
     SilasRennSeekerAdeptPlayEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
         staticText = "choose target artifact card in your graveyard. You may cast that card this turn";
     }
 

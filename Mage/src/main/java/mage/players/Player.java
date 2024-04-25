@@ -820,7 +820,7 @@ public interface Player extends MageItem, Copyable<Player> {
 
     void updateRange(Game game);
 
-    ManaOptions getManaAvailable(Game game);
+    ManaOptions getManaAvailable(Game originalGame);
 
     void addAvailableTriggeredMana(List<Mana> netManaAvailable);
 
@@ -832,7 +832,7 @@ public interface Player extends MageItem, Copyable<Player> {
 
     PlayableObjectsList getPlayableObjects(Game game, Zone zone);
 
-    Map<UUID, ActivatedAbility> getPlayableActivatedAbilities(MageObject object, Zone zone, Game game);
+    Map<UUID, ActivatedAbility> getPlayableActivatedAbilities(MageObject object, Zone zone, Game originalGame);
 
     boolean addCounters(Counter counter, UUID playerAddingCounters, Ability source, Game game);
 

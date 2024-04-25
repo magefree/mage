@@ -2,7 +2,9 @@ package mage.abilities.keyword;
 
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
+import mage.abilities.costs.CostAdjuster;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.hint.common.MonstrousHint;
 import mage.constants.Outcome;
@@ -44,15 +46,21 @@ public class MonstrosityAbility extends ActivatedAbilityImpl {
 
     private final int monstrosityValue;
 
+    public MonstrosityAbility(String manaString, int monstrosityValue) {
+        this(manaString, monstrosityValue, null, "");
+    }
+
     /**
      * @param manaString
      * @param monstrosityValue use Integer.MAX_VALUE for monstrosity X.
+     * @param costAdjuster
+     * @param costAdjusterText Clarifies the cost adjusting condition(s).
      */
-    public MonstrosityAbility(String manaString, int monstrosityValue) {
-        super(Zone.BATTLEFIELD, new BecomeMonstrousSourceEffect(monstrosityValue), new ManaCostsImpl<>(manaString));
+    public MonstrosityAbility(String manaString, int monstrosityValue, CostAdjuster costAdjuster, String costAdjusterText) {
+        super(Zone.BATTLEFIELD, new BecomeMonstrousSourceEffect(monstrosityValue, costAdjusterText), new ManaCostsImpl<>(manaString));
         this.monstrosityValue = monstrosityValue;
-
         this.addHint(MonstrousHint.instance);
+        setCostAdjuster(costAdjuster);
     }
 
     protected MonstrosityAbility(final MonstrosityAbility ability) {
@@ -74,8 +82,12 @@ public class MonstrosityAbility extends ActivatedAbilityImpl {
 class BecomeMonstrousSourceEffect extends OneShotEffect {
 
     public BecomeMonstrousSourceEffect(int monstrosityValue) {
+        this(monstrosityValue, "");
+    }
+
+    public BecomeMonstrousSourceEffect(int monstrosityValue, String costAdjusterText) {
         super(Outcome.BoostCreature);
-        this.staticText = setText(monstrosityValue);
+        this.staticText = setText(monstrosityValue, costAdjusterText);
     }
 
     protected BecomeMonstrousSourceEffect(final BecomeMonstrousSourceEffect effect) {
@@ -110,9 +122,9 @@ class BecomeMonstrousSourceEffect extends OneShotEffect {
         return true;
     }
 
-    private String setText(int monstrosityValue) {
+    private String setText(int monstrosityValue, String costAdjusterText) {
         return "Monstrosity " + (monstrosityValue == Integer.MAX_VALUE ? "X" : monstrosityValue) +
-                ". <i>(If this creature isn't monstrous, put " +
+                ". " + costAdjusterText + "<i>(If this creature isn't monstrous, put " +
                 (monstrosityValue == Integer.MAX_VALUE ? "X" : CardUtil.numberToText(monstrosityValue)) +
                 " +1/+1 counters on it and it becomes monstrous.)</i>";
     }

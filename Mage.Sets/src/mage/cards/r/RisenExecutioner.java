@@ -1,8 +1,6 @@
 
 package mage.cards.r;
 
-import java.util.UUID;
-
 import mage.MageIdentifier;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -12,7 +10,6 @@ import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
-import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -21,12 +18,12 @@ import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
-import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2, Susucr
  */
 public final class RisenExecutioner extends CardImpl {
@@ -76,7 +73,7 @@ class RisenExecutionerCastEffect extends AsThoughEffectImpl {
     }
 
     RisenExecutionerCastEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
         staticText = "You may cast {this} from your graveyard if you pay {1} more to cast it for each other creature card in your graveyard";
     }
 
@@ -100,14 +97,14 @@ class RisenExecutionerCastEffect extends AsThoughEffectImpl {
             return false;
         }
         Card card = game.getCard(source.getSourceId());
-        if(card == null
+        if (card == null
                 || !card.isOwnedBy(affectedControllerId)
                 || game.getState().getZone(source.getSourceId()) != Zone.GRAVEYARD) {
             return false;
         }
 
         Player controller = game.getPlayer(source.getControllerId());
-        if(controller == null) {
+        if (controller == null) {
             return false;
         }
         int costIncrease = controller.getGraveyard().count(filter, source.getControllerId(), source, game);

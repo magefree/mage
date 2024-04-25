@@ -17,7 +17,7 @@ public final class HeroesOfTheRealm2016 extends ExpansionSet {
     }
 
     private HeroesOfTheRealm2016() {
-        super("Heroes of the Realm 2016", "PHTR", ExpansionSet.buildDate(2017, 9, 20), SetType.JOKESET);
+        super("Heroes of the Realm 2016", "PHTR", ExpansionSet.buildDate(2017, 9, 20), SetType.JOKE_SET);
         this.hasBasicLands = false;
 
         cards.add(new SetCardInfo("Chandra, Gremlin Wrangler", 1, Rarity.MYTHIC, mage.cards.c.ChandraGremlinWrangler.class));

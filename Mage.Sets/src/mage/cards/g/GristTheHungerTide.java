@@ -58,7 +58,7 @@ public final class GristTheHungerTide extends CardImpl {
         ability.addTarget(new TargetCreatureOrPlaneswalker());
         this.addAbility(new LoyaltyAbility(new DoWhenCostPaid(
                 ability,
-                new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT), "Sacrifice a creature?"
+                new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE), "Sacrifice a creature?"
         ), -2));
 
         // −5: Each opponent loses life equal to the number of creature cards in your graveyard.

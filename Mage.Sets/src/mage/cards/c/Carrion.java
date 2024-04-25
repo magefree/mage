@@ -22,7 +22,7 @@ public final class Carrion extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{B}{B}");
 
         // As an additional cost to cast Carrion, sacrifice a creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
 
         // Put X 0/1 black Insect creature tokens onto the battlefield, where X is the sacrificed creature's power.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new CarrionBlackInsectToken(), SacrificeCostCreaturesPower.instance));
