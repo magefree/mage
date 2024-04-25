@@ -116,7 +116,8 @@ public abstract class ModalDoubleFacedCard extends CardImpl implements CardWithH
     @Override
     public boolean moveToZone(Zone toZone, Ability source, Game game, boolean flag, List<UUID> appliedEffects) {
         if (super.moveToZone(toZone, source, game, flag, appliedEffects)) {
-            setSideZones(game.getState().getZone(getId()), game);
+            Zone currentZone = game.getState().getZone(getId());
+            setSideZones(currentZone, game);
             return true;
         }
         return false;
@@ -131,7 +132,8 @@ public abstract class ModalDoubleFacedCard extends CardImpl implements CardWithH
     @Override
     public boolean moveToExile(UUID exileId, String name, Ability source, Game game, List<UUID> appliedEffects) {
         if (super.moveToExile(exileId, name, source, game, appliedEffects)) {
-            setSideZones(game.getState().getZone(getId()), game);
+            Zone currentZone = game.getState().getZone(getId());
+            setSideZones(currentZone, game);
             return true;
         }
         return false;
