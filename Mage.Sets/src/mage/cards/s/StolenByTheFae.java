@@ -8,7 +8,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.game.permanent.token.FaerieToken;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.XMVTargetAdjuster;
+import mage.target.targetadjustment.XManaValueTargetAdjuster;
 
 import java.util.UUID;
 
@@ -25,7 +25,7 @@ public final class StolenByTheFae extends CardImpl {
                 .setText("Return target creature with mana value X to its owner's hand"));
         this.getSpellAbility().addEffect(new CreateTokenEffect(new FaerieToken(), ManacostVariableValue.REGULAR)
                 .setText("You create X 1/1 blue Faerie creature tokens with flying"));
-        this.getSpellAbility().setTargetAdjuster(new XMVTargetAdjuster());
+        this.getSpellAbility().setTargetAdjuster(new XManaValueTargetAdjuster());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 

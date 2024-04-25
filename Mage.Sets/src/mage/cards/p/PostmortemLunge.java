@@ -19,7 +19,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.targetadjustment.XMVTargetAdjuster;
+import mage.target.targetadjustment.XManaValueTargetAdjuster;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
@@ -35,7 +35,7 @@ public final class PostmortemLunge extends CardImpl {
         // Return target creature card with converted mana cost X from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step.
         this.getSpellAbility().addEffect(new PostmortemLungeEffect());
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
-        this.getSpellAbility().setTargetAdjuster(new XMVTargetAdjuster());
+        this.getSpellAbility().setTargetAdjuster(new XManaValueTargetAdjuster());
     }
 
     private PostmortemLunge(final PostmortemLunge card) {

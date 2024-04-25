@@ -12,7 +12,7 @@ import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.TargetPermanent;
-import mage.target.targetadjustment.XMVTargetAdjuster;
+import mage.target.targetadjustment.XManaValueTargetAdjuster;
 
 import java.util.UUID;
 
@@ -44,7 +44,7 @@ public final class MarchOfOtherworldlyLight extends CardImpl {
         this.getSpellAbility().addEffect(new ExileTargetEffect(
                 "exile target artifact, creature, or enchantment with mana value X or less"
         ));
-        this.getSpellAbility().setTargetAdjuster(new XMVTargetAdjuster(ComparisonType.OR_LESS));
+        this.getSpellAbility().setTargetAdjuster(new XManaValueTargetAdjuster(ComparisonType.OR_LESS));
         this.getSpellAbility().addTarget(new TargetPermanent(filter2));
     }
 

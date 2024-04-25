@@ -13,7 +13,7 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.target.TargetPermanent;
-import mage.target.targetadjustment.XMVTargetAdjuster;
+import mage.target.targetadjustment.XManaValueTargetAdjuster;
 
 import java.util.UUID;
 
@@ -39,7 +39,7 @@ public final class HearthKami extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl<>("{X}"));
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetPermanent(filter));
-        ability.setTargetAdjuster(new XMVTargetAdjuster());
+        ability.setTargetAdjuster(new XManaValueTargetAdjuster());
         this.addAbility(ability);
     }
 

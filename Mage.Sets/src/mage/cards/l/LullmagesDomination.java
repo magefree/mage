@@ -17,7 +17,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.XMVTargetAdjuster;
+import mage.target.targetadjustment.XManaValueTargetAdjuster;
 
 import java.util.UUID;
 
@@ -47,7 +47,7 @@ public final class LullmagesDomination extends CardImpl {
         // Gain control of target creature with converted mana cost X.
         this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.Custom)
                 .setText("gain control of target creature with mana value X"));
-        this.getSpellAbility().setTargetAdjuster(new XMVTargetAdjuster());
+        this.getSpellAbility().setTargetAdjuster(new XManaValueTargetAdjuster());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 

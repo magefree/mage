@@ -12,7 +12,7 @@ import mage.target.Target;
 /**
  * @author TheElk801, notgreat
  */
-public class MVTargetAdjuster implements TargetAdjuster {
+public class ManaValueTargetAdjuster implements TargetAdjuster {
     private Target blueprintTarget = null;
     private final DynamicValue dynamicValue;
     private final ComparisonType comparison;
@@ -23,7 +23,7 @@ public class MVTargetAdjuster implements TargetAdjuster {
      * @param value   The value to be compared against
      * @param compare Which comparison to use
      */
-    public MVTargetAdjuster(DynamicValue value, ComparisonType compare) {
+    public ManaValueTargetAdjuster(DynamicValue value, ComparisonType compare) {
         this.dynamicValue = value;
         this.comparison = compare;
     }

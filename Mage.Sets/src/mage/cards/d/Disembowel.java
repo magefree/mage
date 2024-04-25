@@ -6,7 +6,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.XMVTargetAdjuster;
+import mage.target.targetadjustment.XManaValueTargetAdjuster;
 
 import java.util.UUID;
 
@@ -20,7 +20,7 @@ public final class Disembowel extends CardImpl {
 
         // Destroy target creature with converted mana cost X.
         this.getSpellAbility().addEffect(new DestroyTargetEffect("destroy target creature with mana value X"));
-        this.getSpellAbility().setTargetAdjuster(new XMVTargetAdjuster());
+        this.getSpellAbility().setTargetAdjuster(new XManaValueTargetAdjuster());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 

@@ -14,7 +14,7 @@ import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.Predicates;
 import mage.game.command.emblems.LilianaDefiantNecromancerEmblem;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.targetadjustment.XMVTargetAdjuster;
+import mage.target.targetadjustment.XManaValueTargetAdjuster;
 
 import java.util.UUID;
 
@@ -45,7 +45,7 @@ public final class LilianaDefiantNecromancer extends CardImpl {
         // -X: Return target nonlegendary creature with converted mana cost X from your graveyard to the battlefield.
         Ability ability = new LoyaltyAbility(new ReturnFromGraveyardToBattlefieldTargetEffect());
         ability.addTarget(new TargetCardInYourGraveyard(filter));
-        ability.setTargetAdjuster(new XMVTargetAdjuster());
+        ability.setTargetAdjuster(new XManaValueTargetAdjuster());
         this.addAbility(ability);
 
         //-8: You get an emblem with "Whenever a creature dies, return it to the battlefield under your control at the beginning of the next end step.";

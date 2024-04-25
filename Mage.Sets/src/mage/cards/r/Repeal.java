@@ -7,7 +7,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.target.TargetPermanent;
-import mage.target.targetadjustment.XMVTargetAdjuster;
+import mage.target.targetadjustment.XManaValueTargetAdjuster;
 
 import java.util.UUID;
 
@@ -23,7 +23,7 @@ public final class Repeal extends CardImpl {
         // Return target nonland permanent with converted mana cost X to its owner's hand.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
         this.getSpellAbility().addTarget(new TargetPermanent(new FilterNonlandPermanent("nonland permanent with mana value X")));
-        this.getSpellAbility().setTargetAdjuster(new XMVTargetAdjuster());
+        this.getSpellAbility().setTargetAdjuster(new XManaValueTargetAdjuster());
 
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));

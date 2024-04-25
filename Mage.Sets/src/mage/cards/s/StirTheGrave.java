@@ -8,7 +8,7 @@ import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.targetadjustment.XMVTargetAdjuster;
+import mage.target.targetadjustment.XManaValueTargetAdjuster;
 
 import java.util.UUID;
 
@@ -22,7 +22,7 @@ public final class StirTheGrave extends CardImpl {
 
         // Return target creature card with converted mana cost X or less from your graveyard to the battlefield.
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect().setText("return target creature card with mana value X or less from your graveyard to the battlefield"));
-        this.getSpellAbility().setTargetAdjuster(new XMVTargetAdjuster(ComparisonType.OR_LESS));
+        this.getSpellAbility().setTargetAdjuster(new XManaValueTargetAdjuster(ComparisonType.OR_LESS));
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
     }
 

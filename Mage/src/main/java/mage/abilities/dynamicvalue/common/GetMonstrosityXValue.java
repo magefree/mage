@@ -17,7 +17,11 @@ public enum GetMonstrosityXValue implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        return ((BecomesMonstrousSourceTriggeredAbility) sourceAbility).getMonstrosityValue();
+        if (sourceAbility instanceof BecomesMonstrousSourceTriggeredAbility) {
+            return ((BecomesMonstrousSourceTriggeredAbility) sourceAbility).getMonstrosityValue();
+        } else {
+            throw new IllegalArgumentException("Trying to get Monstrosity X value with non-Monstrosity sourceAbility "+sourceAbility.getClass().getName());
+        }
     }
 
     @Override

@@ -6,13 +6,13 @@ import mage.constants.ComparisonType;
 /**
  * @author notgreat
  */
-public class XMVTargetAdjuster extends MVTargetAdjuster {
+public class XManaValueTargetAdjuster extends ManaValueTargetAdjuster {
 
-    public XMVTargetAdjuster() {
+    public XManaValueTargetAdjuster() {
         super(ManacostVariableValue.REGULAR, ComparisonType.EQUAL_TO);
     }
 
-    public XMVTargetAdjuster(ComparisonType comparison) {
+    public XManaValueTargetAdjuster(ComparisonType comparison) {
         super(ManacostVariableValue.REGULAR, comparison);
     }
 }

@@ -19,7 +19,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetPlayerOrPlaneswalker;
-import mage.target.targetadjustment.XMVTargetAdjuster;
+import mage.target.targetadjustment.XManaValueTargetAdjuster;
 
 import java.util.UUID;
 
@@ -54,7 +54,7 @@ public final class SorinVengefulBloodlord extends CardImpl {
                 "Return target creature card with mana value X from your graveyard to the battlefield"
         ));
         ability.addEffect(new SorinVengefulBloodlordEffect());
-        ability.setTargetAdjuster(new XMVTargetAdjuster());
+        ability.setTargetAdjuster(new XManaValueTargetAdjuster());
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         this.addAbility(ability);
     }

@@ -15,7 +15,7 @@ import mage.constants.TargetController;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterInstantOrSorcerySpell;
 import mage.target.TargetSpell;
-import mage.target.targetadjustment.XMVTargetAdjuster;
+import mage.target.targetadjustment.XManaValueTargetAdjuster;
 
 import java.util.UUID;
 
@@ -54,7 +54,7 @@ public final class LeagueGuildmage extends CardImpl {
         );
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetSpell(filter));
-        ability.setTargetAdjuster(new XMVTargetAdjuster());
+        ability.setTargetAdjuster(new XManaValueTargetAdjuster());
         this.addAbility(ability);
     }
 

@@ -20,7 +20,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInLibrary;
-import mage.target.targetadjustment.XMVTargetAdjuster;
+import mage.target.targetadjustment.XManaValueTargetAdjuster;
 import mage.util.CardUtil;
 
 import java.util.UUID;
@@ -44,7 +44,7 @@ public final class MarchOfBurgeoningLife extends CardImpl {
 
         // Choose target creature with mana value less than X. Search your library for a creature card with the same name as that creature, put it onto the battlefield tapped, then shuffle.
         this.getSpellAbility().addEffect(new MarchOfBurgeoningLifeEffect());
-        this.getSpellAbility().setTargetAdjuster(new XMVTargetAdjuster(ComparisonType.FEWER_THAN));
+        this.getSpellAbility().setTargetAdjuster(new XManaValueTargetAdjuster(ComparisonType.FEWER_THAN));
         this.getSpellAbility().addTarget(new TargetPermanent());
     }
 

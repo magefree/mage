@@ -10,7 +10,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.target.common.TargetArtifactPermanent;
-import mage.target.targetadjustment.XMVTargetAdjuster;
+import mage.target.targetadjustment.XManaValueTargetAdjuster;
 
 import java.util.UUID;
 
@@ -28,7 +28,7 @@ public final class Detonate extends CardImpl {
         Effect effect = new DamageTargetControllerEffect(ManacostVariableValue.REGULAR);
         effect.setText("{this} deals X damage to that artifact's controller");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().setTargetAdjuster(new XMVTargetAdjuster());
+        this.getSpellAbility().setTargetAdjuster(new XManaValueTargetAdjuster());
         this.getSpellAbility().addTarget(new TargetArtifactPermanent());
     }
 

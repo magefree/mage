@@ -8,7 +8,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.XMVTargetAdjuster;
+import mage.target.targetadjustment.XManaValueTargetAdjuster;
 
 import java.util.UUID;
 
@@ -25,7 +25,7 @@ public final class EntrancingMelody extends CardImpl {
         // Gain control of target creature with converted mana cost X.
         this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.Custom, true));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
-        this.getSpellAbility().setTargetAdjuster(new XMVTargetAdjuster());
+        this.getSpellAbility().setTargetAdjuster(new XManaValueTargetAdjuster());
     }
 
     private EntrancingMelody(final EntrancingMelody card) {
