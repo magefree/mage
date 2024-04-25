@@ -28,7 +28,7 @@ public final class AetherBurst extends CardImpl {
 
         // Return up to X target creatures to their owners' hands, where X is one plus the number of cards named Aether Burst in all graveyards as you cast this spell.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect().setText("Return up to X target creatures to their owners' hands, where X is one plus the number of cards named Aether Burst in all graveyards as you cast this spell"));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 1));
         this.getSpellAbility().setTargetAdjuster(new TargetsCountAdjuster(new IntPlusDynamicValue(1, new CardsInAllGraveyardsCount(filter))));
     }
 
