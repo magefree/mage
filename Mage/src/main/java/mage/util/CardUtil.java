@@ -1494,6 +1494,10 @@ public final class CardUtil {
     }
 
     public static void castSingle(Player player, Ability source, Game game, Card card, ManaCostsImpl<ManaCost> manaCost) {
+        castSingle(player, source, game, card, false, manaCost);
+    }
+
+    public static void castSingle(Player player, Ability source, Game game, Card card, boolean noMana, ManaCostsImpl<ManaCost> manaCost) {
         // handle split-cards
         if (card instanceof SplitCard) {
             SplitCardHalf leftHalfCard = ((SplitCard) card).getLeftHalfCard();
@@ -1560,8 +1564,8 @@ public final class CardUtil {
         }
 
         // cast it
-        player.cast(player.chooseAbilityForCast(card.getMainCard(), game, false),
-                game, false, new ApprovingObject(source, game));
+        player.cast(player.chooseAbilityForCast(card.getMainCard(), game, noMana),
+                game, noMana, new ApprovingObject(source, game));
 
         // turn off effect after cast on every possible card-face
         if (card instanceof SplitCard) {

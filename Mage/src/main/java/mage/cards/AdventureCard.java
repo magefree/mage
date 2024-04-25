@@ -56,7 +56,8 @@ public abstract class AdventureCard extends CardImpl {
     @Override
     public boolean moveToZone(Zone toZone, Ability source, Game game, boolean flag, List<UUID> appliedEffects) {
         if (super.moveToZone(toZone, source, game, flag, appliedEffects)) {
-            game.getState().setZone(getSpellCard().getId(), toZone);
+            Zone currentZone = game.getState().getZone(getId());
+            game.getState().setZone(getSpellCard().getId(), currentZone);
             return true;
         }
         return false;
