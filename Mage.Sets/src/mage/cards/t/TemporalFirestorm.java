@@ -38,7 +38,7 @@ public final class TemporalFirestorm extends CardImpl {
         this.getSpellAbility().addEffect(new PhaseOutTargetEffect().setText("choose up to X creatures and/or " +
                 "planeswalkers you control, where X is the number of times this spell was kicked. Those permanents phase out"));
         this.getSpellAbility().setTargetAdjuster(new TargetsCountAdjuster(MultikickerCount.instance));
-        this.getSpellAbility().addTarget(new TargetPermanent(0, 1, filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(0, 1, filter, true));
 
         // Temporal Firestorm deals 5 damage to each creature and each planeswalker.
         this.getSpellAbility().addEffect(new DamageAllEffect(

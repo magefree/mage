@@ -32,12 +32,13 @@ public class MVTargetAdjuster implements TargetAdjuster {
     public void adjustTargets(Ability ability, Game game) {
         if (blueprintTarget == null) {
             blueprintTarget = ability.getTargets().get(0).copy();
+            blueprintTarget.clearChosen();
         }
         Target newTarget = blueprintTarget.copy();
         int amount = dynamicValue.calculate(game, ability, null);
         Filter<MageObject> filter = newTarget.getFilter();
         filter.add(new ManaValuePredicate(comparison, amount));
-        filter.setMessage(filter.getMessage() + " (Mana Value " + comparison + " " + amount);
+        newTarget.setTargetName(filter.getMessage() + " (Mana Value " + comparison + " " + amount + ")");
         ability.getTargets().clear();
         ability.addTarget(newTarget);
     }

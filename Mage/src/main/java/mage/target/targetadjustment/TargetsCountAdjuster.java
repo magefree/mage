@@ -28,6 +28,7 @@ public class TargetsCountAdjuster implements TargetAdjuster {
     public void adjustTargets(Ability ability, Game game) {
         if (blueprintTarget == null) {
             blueprintTarget = ability.getTargets().get(0).copy();
+            blueprintTarget.clearChosen();
         }
         Target newTarget = blueprintTarget.copy();
         int count = dynamicValue.calculate(game, ability, null);
@@ -35,9 +36,9 @@ public class TargetsCountAdjuster implements TargetAdjuster {
         Filter filter = newTarget.getFilter();
         if (blueprintTarget.getMinNumberOfTargets() != 0) {
             newTarget.setMinNumberOfTargets(count);
-            filter.setMessage(filter.getMessage() + " (" + count + " targets)");
+            newTarget.setTargetName(filter.getMessage() + " (" + count + " targets)");
         } else {
-            filter.setMessage(filter.getMessage() + " (up to " + count + " targets)");
+            newTarget.setTargetName(filter.getMessage() + " (up to " + count + " targets)");
         }
         ability.getTargets().clear();
         if (count > 0) {

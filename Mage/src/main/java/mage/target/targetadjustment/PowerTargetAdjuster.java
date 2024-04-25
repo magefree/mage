@@ -37,12 +37,13 @@ public class PowerTargetAdjuster implements TargetAdjuster {
     public void adjustTargets(Ability ability, Game game) {
         if (blueprintTarget == null) {
             blueprintTarget = ability.getTargets().get(0).copy();
+            blueprintTarget.clearChosen();
         }
         Target newTarget = blueprintTarget.copy();
         int amount = dynamicValue.calculate(game, ability, null);
         Filter<MageObject> filter = newTarget.getFilter();
         filter.add(new PowerPredicate(comparison, amount));
-        filter.setMessage(filter.getMessage() + " (Power " + comparison + " " + amount);
+        newTarget.setTargetName(filter.getMessage() + " (Power " + comparison + " " + amount + ")");
         ability.getTargets().clear();
         ability.addTarget(newTarget);
     }

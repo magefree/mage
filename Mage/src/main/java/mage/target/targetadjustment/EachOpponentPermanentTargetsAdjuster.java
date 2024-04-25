@@ -38,7 +38,7 @@ public class EachOpponentPermanentTargetsAdjuster implements TargetAdjuster {
             Filter<Permanent> filter = newTarget.getFilter();
             filter.add(new ControllerIdPredicate(opponentId));
             if (newTarget.canChoose(ability.getControllerId(), ability, game)) {
-                filter.setMessage(filter.getMessage() + " controlled by " + opponent.getLogName());
+                newTarget.setTargetName(filter.getMessage() + " controlled by " + opponent.getLogName());
                 ability.addTarget(newTarget);
             }
         }
