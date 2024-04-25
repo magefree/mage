@@ -43,7 +43,8 @@ public class GameEvent implements Serializable {
         PLAY_TURN, EXTRA_TURN,
         CHANGE_PHASE, PHASE_CHANGED,
         CHANGE_STEP, STEP_CHANGED,
-        BEGINNING_PHASE, BEGINNING_PHASE_PRE, BEGINNING_PHASE_POST,
+        BEGINNING_PHASE, BEGINNING_PHASE_PRE, BEGINNING_PHASE_POST, // The normal beginning phase -- at the beginning of turn
+        BEGINNING_PHASE_EXTRA, BEGINNING_PHASE_PRE_EXTRA, BEGINNING_PHASE_POST_EXTRA, // Extra beginning phase, 'as turn begun' watchers don't want to react on thoses.
         UNTAP_STEP_PRE, UNTAP_STEP, UNTAP_STEP_POST,
         UPKEEP_STEP_PRE, UPKEEP_STEP, UPKEEP_STEP_POST,
         DRAW_STEP_PRE, DRAW_STEP, DRAW_STEP_POST,
