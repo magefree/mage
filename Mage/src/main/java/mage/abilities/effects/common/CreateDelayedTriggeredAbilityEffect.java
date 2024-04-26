@@ -47,6 +47,10 @@ public class CreateDelayedTriggeredAbilityEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         DelayedTriggeredAbility delayedAbility = ability.copy();
+
+        System.out.println("creating trigger zcc: " + source.getSourceObjectZoneChangeCounter());
+        System.out.println("creating trigger id: " + source.getSourceId() + " " + source);
+
         if (this.copyTargets) {
             if (source.getTargets().isEmpty()) {
                 delayedAbility.getEffects().setTargetPointer(this.getTargetPointer().copy());

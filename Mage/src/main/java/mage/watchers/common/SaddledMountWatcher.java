@@ -35,22 +35,22 @@ public class SaddledMountWatcher extends Watcher {
         saddleMap.clear();
     }
 
-    public static boolean checkIfSaddledThisTurn(Permanent saddler, Permanent mount, Game game) {
+    public static boolean checkIfSaddledThisTurn(Permanent saddler, MageObjectReference mountMOR, Game game) {
         return game
                 .getState()
                 .getWatcher(SaddledMountWatcher.class)
                 .saddleMap
-                .getOrDefault(new MageObjectReference(mount, game), Collections.emptySet())
+                .getOrDefault(mountMOR, Collections.emptySet())
                 .stream()
                 .anyMatch(mor -> mor.refersTo(saddler, game));
     }
 
-    public static int getSaddleCount(Permanent vehicle, Game game) {
+    public static int getSaddleCount(Permanent saddled, Game game) {
         return game
                 .getState()
                 .getWatcher(SaddledMountWatcher.class)
                 .saddleMap
-                .getOrDefault(new MageObjectReference(vehicle, game), Collections.emptySet())
+                .getOrDefault(new MageObjectReference(saddled, game), Collections.emptySet())
                 .size();
     }
 }
