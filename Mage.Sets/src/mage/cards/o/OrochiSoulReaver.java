@@ -41,7 +41,7 @@ public final class OrochiSoulReaver extends CardImpl {
                 new CreateTokenEffect(new TreasureToken()),
                 SetTargetPointer.PLAYER
         );
-        ability.addEffect(new OrochiSoulReaverManifestEffect());
+        ability.addEffect(new OrochiSoulReaverManifestEffect().concatBy("and"));
         this.addAbility(ability);
     }
 

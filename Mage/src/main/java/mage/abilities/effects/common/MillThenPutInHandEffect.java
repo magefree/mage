@@ -138,13 +138,18 @@ public class MillThenPutInHandEffect extends OneShotEffect {
             sb.append(CardUtil.numberToText(amount));
             sb.append(" cards. ");
         }
-        sb.append(optional ? "You may " : "Then ");
-        sb.append("put ");
+        if (optional) {
+            sb.append("You may put ");
+        } else {
+            sb.append((otherwiseEffect == null) ? "Then put " : "Put ");
+        }
         if (maxAmountReturned > 1) {
             sb.append(optional ? "up to " : "");
             sb.append(CardUtil.numberToText(maxAmountReturned)).append(" ");
+            sb.append(filter.getMessage());
+        } else {
+            sb.append(CardUtil.addArticle(filter.getMessage()));
         }
-        sb.append(filter.getMessage());
         sb.append(" from among ");
         sb.append(textFromAmong);
         sb.append(" into your hand");

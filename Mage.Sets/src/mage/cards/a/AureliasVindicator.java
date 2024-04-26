@@ -44,7 +44,7 @@ public final class AureliasVindicator extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
 
         // Ward {2}
-        this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}")));
+        this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}"), false));
 
         // Disguise {X}{3}{W}
         this.addAbility(new DisguiseAbility(this, new ManaCostsImpl<>("{X}{3}{W}")));

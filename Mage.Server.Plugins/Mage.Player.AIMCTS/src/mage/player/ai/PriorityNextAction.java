@@ -18,7 +18,7 @@ public class PriorityNextAction implements MCTSNodeNextAction{
         else
             abilities = MCTSNode.getPlayables(player, fullStateValue, game);
         for (Ability ability: abilities) {
-            Game sim = game.copy();
+            Game sim = game.createSimulationForAI();
             MCTSPlayer simPlayer = (MCTSPlayer) sim.getPlayer(player.getId());
             simPlayer.activateAbility((ActivatedAbility)ability, sim);
             sim.resume();

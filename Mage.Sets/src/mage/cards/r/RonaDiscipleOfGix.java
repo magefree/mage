@@ -1,7 +1,6 @@
 
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -16,21 +15,16 @@ import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AsThoughEffectType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterHistoricCard;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class RonaDiscipleOfGix extends CardImpl {
@@ -79,7 +73,7 @@ public final class RonaDiscipleOfGix extends CardImpl {
 class RonaDiscipleOfGixPlayNonLandEffect extends AsThoughEffectImpl {
 
     RonaDiscipleOfGixPlayNonLandEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "You may cast nonland cards exiled with {this}";
     }
 

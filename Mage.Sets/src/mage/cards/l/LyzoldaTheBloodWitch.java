@@ -62,7 +62,7 @@ public final class LyzoldaTheBloodWitch extends CardImpl {
                 new SacrificedWasCondition(blackFilter),
                 "Draw a card if the sacrificed creature was black");
         ability.addEffect(effect);
-        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }

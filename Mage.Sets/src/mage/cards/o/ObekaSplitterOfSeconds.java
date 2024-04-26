@@ -29,7 +29,7 @@ public final class ObekaSplitterOfSeconds extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Whenever Obeka, Splitter of Seconds deals combat damage to a player, you get that many additional upkeep steps after this phase.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(

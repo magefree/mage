@@ -25,6 +25,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.StaticFilters;
+import mage.filter.common.FilterEnchantmentPermanent;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
@@ -39,6 +41,11 @@ import java.util.UUID;
  * @author Susucr
  */
 public final class DemonOfFatesDesign extends CardImpl {
+
+    private static final FilterEnchantmentPermanent filter = new FilterEnchantmentPermanent("another enchantment");
+    static {
+        filter.add(AnotherPredicate.instance);
+    }
 
     public DemonOfFatesDesign(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{4}{B}{B}");
@@ -72,9 +79,7 @@ public final class DemonOfFatesDesign extends CardImpl {
                 SacrificeCostManaValue.ENCHANTMENT,
                 StaticValue.get(0), Duration.EndOfTurn
         ), new ManaCostsImpl<>("{2}{B}"));
-        ability.addCost(new SacrificeTargetCost(
-                StaticFilters.FILTER_CONTROLLED_ANOTHER_ENCHANTMENT_SHORT_TEXT
-        ));
+        ability.addCost(new SacrificeTargetCost(filter));
         this.addAbility(ability);
     }
 
@@ -133,8 +138,6 @@ enum DemonOfFatesDesignCost implements DynamicCost {
 
 class DemonOfFatesDesignAlternativeCostSourceAbility extends AlternativeCostSourceAbility {
 
-    private MageObjectReference mor;
-
     DemonOfFatesDesignAlternativeCostSourceAbility() {
         super(
                 new CompoundCondition(SourceIsSpellCondition.instance, IsBeingCastFromHandCondition.instance),
@@ -156,7 +159,7 @@ class DemonOfFatesDesignAlternativeCostSourceAbility extends AlternativeCostSour
     protected void doActivate(Game game, Ability ability) {
         super.doActivate(game, ability);
         for (Cost cost : ability.getCosts()) {
-            if (cost != null && cost instanceof DemonOfFatesDesignPayLifeCost) {
+            if (cost instanceof DemonOfFatesDesignPayLifeCost) {
                 ((DemonOfFatesDesignPayLifeCost) cost).setMor(getMor(game));
             }
         }
@@ -219,7 +222,7 @@ class DemonOfFatesDesignWatcher extends Watcher {
             Spell spell = game.getSpell(event.getTargetId());
             if (spell != null) {
                 for (Cost cost : spell.getStackAbility().getCosts()) {
-                    if (cost != null && cost instanceof DemonOfFatesDesignPayLifeCost) {
+                    if (cost instanceof DemonOfFatesDesignPayLifeCost) {
                         usedFrom.add(((DemonOfFatesDesignPayLifeCost) cost).getMor());
                     }
                 }

@@ -86,10 +86,10 @@ class GalesRedirectionEffect extends RollDieWithResultTableEffect {
         }
         if (result >= 15) {
             game.addEffect(new PlayFromNotOwnHandZoneTargetEffect(
-                    Zone.EXILED, TargetController.YOU, Duration.Custom, true
+                    Zone.EXILED, TargetController.YOU, Duration.Custom, true, true
             ).setTargetPointer(new FixedTarget(card, game)), source);
         } else if (result >= 1) {
-            CardUtil.makeCardPlayable(game, source, card, Duration.Custom, true);
+            CardUtil.makeCardPlayable(game, source, card, true, Duration.Custom, true);
         }
         return true;
     }

@@ -16,8 +16,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetCard;
-import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInLibrary;
+import mage.target.common.TargetSacrifice;
 
 import java.util.UUID;
 
@@ -78,9 +78,7 @@ class HewTheEntwoodEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        TargetPermanent target = new TargetPermanent(
-                0, Integer.MAX_VALUE, StaticFilters.FILTER_CONTROLLED_LAND_SHORT_TEXT, true
-        );
+        TargetSacrifice target = new TargetSacrifice(0, Integer.MAX_VALUE, StaticFilters.FILTER_LAND);
         player.choose(outcome, target, source, game);
         int count = 0;
         for (UUID targetId : target.getTargets()) {

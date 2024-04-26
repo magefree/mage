@@ -2,7 +2,6 @@ package mage.cards.r;
 
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
-import mage.abilities.Mode;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.Effect;
@@ -13,18 +12,15 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
 import mage.filter.StaticFilters;
@@ -57,7 +53,7 @@ public final class RescueFromTheUnderworld extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{4}{B}");
 
         // As an additional cost to cast Rescue from the Underworld, sacrifice a creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
 
         // Choose target creature card in your graveyard. Return that card and the sacrificed card to the battlefield under your control at the beginning of your next upkeep. Exile Rescue from the Underworld.
         this.getSpellAbility().addEffect(new RescueFromTheUnderworldTextEffect());
@@ -145,12 +141,8 @@ class RescueFromTheUnderworldCreateDelayedTriggeredAbilityEffect extends OneShot
 
 class RescueFromTheUnderworldDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
-    public RescueFromTheUnderworldDelayedTriggeredAbility() {
-        this(new RescueFromTheUnderworldReturnEffect(), TargetController.YOU);
-    }
-
-    public RescueFromTheUnderworldDelayedTriggeredAbility(Effect effect, TargetController targetController) {
-        super(effect);
+    RescueFromTheUnderworldDelayedTriggeredAbility() {
+        super(new RescueFromTheUnderworldReturnEffect());
     }
 
     private RescueFromTheUnderworldDelayedTriggeredAbility(final RescueFromTheUnderworldDelayedTriggeredAbility ability) {

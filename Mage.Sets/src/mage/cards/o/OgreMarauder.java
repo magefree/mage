@@ -73,7 +73,7 @@ class OgreMarauderEffect extends OneShotEffect {
         MageObject sourceObject = game.getObject(source);
         Player defender = game.getPlayer(defendingPlayerId);
         if (defender != null && sourceObject != null) {
-            Cost cost = new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT);
+            Cost cost = new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE);
             boolean paid = false;
             if (cost.canPay(source, source, defendingPlayerId, game)
                     && defender.chooseUse(Outcome.LoseAbility, "Sacrifice a creature to prevent "

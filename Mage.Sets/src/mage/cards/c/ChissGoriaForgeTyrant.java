@@ -27,7 +27,7 @@ import java.util.*;
  * @author Xanderhall, xenohedron
  */
 public final class ChissGoriaForgeTyrant extends CardImpl {
-    
+
     public ChissGoriaForgeTyrant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{6}{R}{R}{R}");
         this.supertype.add(SuperType.LEGENDARY);
@@ -105,7 +105,7 @@ class ChissGoriaForgeTyrantCanPlayEffect extends AsThoughEffectImpl {
     private final Set<MageObjectReference> morSet = new HashSet<>();
 
     ChissGoriaForgeTyrantCanPlayEffect(Set<MageObjectReference> morSet) {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
         this.morSet.addAll(morSet);
     }
 
@@ -131,10 +131,10 @@ class ChissGoriaForgeTyrantCanPlayEffect extends AsThoughEffectImpl {
         }
         UUID objectIdToCast = CardUtil.getMainCardId(game, sourceId);
         Card card = game.getCard(objectIdToCast);
-        
+
         return (card != null && card.isArtifact(game)
-            && morSet.stream().anyMatch(mor -> mor.refersTo(objectIdToCast, game))
-            && ChissGoriaForgeTyrantWatcher.checkRef(source, morSet, game));
+                && morSet.stream().anyMatch(mor -> mor.refersTo(objectIdToCast, game))
+                && ChissGoriaForgeTyrantWatcher.checkRef(source, morSet, game));
     }
 }
 
@@ -159,10 +159,10 @@ class ChissGoriaForgeTyrantAffinityEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-         if (!ChissGoriaForgeTyrantWatcher.checkRef(source, morSet, game)) {
-             discard();
-             return false;
-         }
+        if (!ChissGoriaForgeTyrantWatcher.checkRef(source, morSet, game)) {
+            discard();
+            return false;
+        }
 
         for (Card card : game.getExile().getAllCardsByRange(game, source.getControllerId())) {
             if (morSet.contains(new MageObjectReference(card, game)) && card.isArtifact(game)) {

@@ -23,11 +23,11 @@ import java.util.UUID;
  */
 public abstract class TriggeredAbilityImpl extends AbilityImpl implements TriggeredAbility {
 
-    protected boolean optional;
-    protected boolean leavesTheBattlefieldTrigger;
+    private boolean optional;
+    private boolean leavesTheBattlefieldTrigger;
     private boolean triggersOnceEachTurn = false;
     private boolean doOnlyOnceEachTurn = false;
-    protected boolean replaceRuleText = false; // if true, replace "{this}" with "it" in effect text
+    private boolean replaceRuleText = false; // if true, replace "{this}" with "it" in effect text
     private GameEvent triggerEvent = null;
     private String triggerPhrase = null;
 
@@ -243,6 +243,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
         return ruleLow.startsWith("attach")
                 || ruleLow.startsWith("change")
                 || ruleLow.startsWith("counter")
+                || ruleLow.startsWith("create")
                 || ruleLow.startsWith("destroy")
                 || ruleLow.startsWith("distribute")
                 || ruleLow.startsWith("sacrifice")
@@ -361,6 +362,20 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
     @Override
     public boolean isOptional() {
         return optional;
+    }
+
+    @Override
+    public TriggeredAbility setOptional() {
+        this.optional = true;
+
+        if (getEffects().stream().anyMatch(
+                effect -> effect instanceof DoIfCostPaid && ((DoIfCostPaid) effect).isOptional())) {
+            throw new IllegalArgumentException(
+                    "DoIfCostPaid effect must have only one optional settings, but it have two (trigger + DoIfCostPaid): "
+                            + this.getClass().getSimpleName());
+        }
+
+        return this;
     }
 
     @Override

@@ -23,7 +23,7 @@ public final class CarnageAltar extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new GenericManaCost(3));
-        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
         this.addAbility(ability);
     }
 

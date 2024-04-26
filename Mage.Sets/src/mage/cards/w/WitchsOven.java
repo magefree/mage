@@ -31,7 +31,7 @@ public final class WitchsOven extends CardImpl {
 
         // {T}, Sacrifice a creature: Create a Food token. If the sacrificed creature's toughness was 4 or greater, create two Food tokens instead.
         Ability ability = new SimpleActivatedAbility(new WitchsOvenEffect(), new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
         this.addAbility(ability);
     }
 

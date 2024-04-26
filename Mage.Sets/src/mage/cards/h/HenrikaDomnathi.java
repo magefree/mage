@@ -40,9 +40,7 @@ public final class HenrikaDomnathi extends CardImpl {
 
         // At the beginning of combat on your turn, choose one that hasn't been chosen —
         // • Each player sacrifices a creature.
-        Ability ability = new BeginningOfCombatTriggeredAbility(new SacrificeAllEffect(
-                1, StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT
-        ), TargetController.YOU, false);
+        Ability ability = new BeginningOfCombatTriggeredAbility(new SacrificeAllEffect(StaticFilters.FILTER_PERMANENT_CREATURE), TargetController.YOU, false);
         ability.setModeTag("each player sacrifice");
         ability.getModes().setLimitUsageByOnce(false);
 

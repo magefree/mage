@@ -31,7 +31,7 @@ public final class DarkTriumph extends CardImpl {
 
         // If you control a Swamp, you may sacrifice a creature rather than pay Dark Triumph's mana cost.
         this.addAbility(new AlternativeCostSourceAbility(
-                new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT), condition
+                new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE), condition
         ));
 
         // Creatures you control get +2/+0 until end of turn.

@@ -26,7 +26,7 @@ public final class EvolutionaryLeap extends CardImpl {
         Ability ability = new SimpleActivatedAbility(new RevealCardsFromLibraryUntilEffect(
                 StaticFilters.FILTER_CARD_CREATURE, PutCards.HAND, PutCards.BOTTOM_RANDOM
         ), new ManaCostsImpl<>("{G}"));
-        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
         this.addAbility(ability);
     }
 

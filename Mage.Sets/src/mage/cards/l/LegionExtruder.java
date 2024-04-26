@@ -33,7 +33,7 @@ public final class LegionExtruder extends CardImpl {
         // {2}, {T}, Sacrifice another artifact: Create a 3/3 colorless Golem artifact creature token.
         ability = new SimpleActivatedAbility(new CreateTokenEffect(new GolemToken()), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_ARTIFACT_SHORT_TEXT));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_ARTIFACT));
         this.addAbility(ability);
     }
 

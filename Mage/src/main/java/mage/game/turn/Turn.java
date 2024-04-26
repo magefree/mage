@@ -246,7 +246,7 @@ public class Turn implements Serializable {
             Phase phase;
             switch (extraPhase) {
                 case BEGINNING:
-                    phase = new BeginningPhase();
+                    phase = new BeginningPhase(true);
                     break;
                 case PRECOMBAT_MAIN:
                     phase = new PreCombatMainPhase();

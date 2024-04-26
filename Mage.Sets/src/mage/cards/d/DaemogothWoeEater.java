@@ -31,7 +31,7 @@ public final class DaemogothWoeEater extends CardImpl {
 
         // At the beginning of your upkeep, sacrifice a creature.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeControllerEffect(
-                StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT, 1, ""
+                StaticFilters.FILTER_PERMANENT_CREATURE, 1, ""
         ), TargetController.YOU, false));
 
         // When you sacrifice Daemogoth Woe-Eater, each opponent discards a card, you draw a card, and you gain 2 life.

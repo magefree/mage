@@ -30,7 +30,7 @@ public final class GrimBackwoods extends CardImpl {
         // {2}{B}{G}, {tap}, Sacrifice a creature: Draw a card.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{2}{B}{G}"));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
         this.addAbility(ability);
     }
 

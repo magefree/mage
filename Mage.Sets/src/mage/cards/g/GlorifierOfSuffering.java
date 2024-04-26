@@ -36,7 +36,7 @@ public final class GlorifierOfSuffering extends CardImpl {
                 false);
         reflexive.addTarget(new TargetCreaturePermanent(0, 2));
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DoWhenCostPaid(
-                reflexive, new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE_OR_ARTIFACT_SHORT_TEXT),
+                reflexive, new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE_OR_ARTIFACT),
                 "Sacrifice another creature or artifact?"
         )));
 
