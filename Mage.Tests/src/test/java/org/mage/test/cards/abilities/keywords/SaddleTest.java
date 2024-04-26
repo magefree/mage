@@ -1,9 +1,11 @@
 package org.mage.test.cards.abilities.keywords;
 
+import mage.MageObjectReference;
 import mage.abilities.keyword.MenaceAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
+import mage.watchers.common.SaddledMountWatcher;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
@@ -20,7 +22,7 @@ public class SaddleTest extends CardTestPlayerBase {
         Permanent permanent = getPermanent(name);
         Assert.assertEquals(
                 name + " should " + (saddled ? "" : "not ") + "be saddled",
-                saddled, permanent.isSaddled()
+                saddled, SaddledMountWatcher.hasBeenSaddledThisTurn(new MageObjectReference(permanent.getId(), currentGame), currentGame)
         );
     }
 
@@ -78,13 +80,10 @@ public class SaddleTest extends CardTestPlayerBase {
         setChoice(playerA, bear);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Saddle");
 
-        setStrictChooseMode(true);
-        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
-        execute();
-
         attack(1, playerA, possum, playerB);
         setChoice(playerA, bear);
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 

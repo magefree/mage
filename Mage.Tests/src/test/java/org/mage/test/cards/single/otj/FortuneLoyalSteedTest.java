@@ -97,4 +97,127 @@ public class FortuneLoyalSteedTest extends CardTestPlayerBase {
         assertTapped(fortune, false);
         assertTapped("Lone Missionary", false);
     }
+
+    @Test
+    public void test_Saddling_FortuneBlinksBefore() {
+        setStrictChooseMode(true);
+        skipInitShuffling();
+
+        addCard(Zone.BATTLEFIELD, playerA, fortune);
+        addCard(Zone.BATTLEFIELD, playerA, "Fervor"); // To give haste
+        addCard(Zone.BATTLEFIELD, playerA, "Lone Missionary"); // ETB, gain 4 life
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
+        addCard(Zone.HAND, playerA, "Ephemerate", 2);
+        addCard(Zone.LIBRARY, playerA, "Taiga", 2);
+
+        // Just to check zcc
+        castSpell(1, PhaseStep.UPKEEP, playerA, "Ephemerate", fortune);
+        addTarget(playerA, "Taiga"); // for the scry trigger
+
+        setChoice(playerA, "Lone Missionary"); // Saddling choice
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Saddle");
+        attack(1, playerA, fortune, playerB);
+
+        castSpell(1, PhaseStep.DECLARE_ATTACKERS, playerA, "Ephemerate", fortune);
+        addTarget(playerA, "Taiga"); // for the scry trigger
+
+        setChoice(playerA, "Lone Missionary"); // Choose to blink Lone Missionary
+
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertLife(playerA, 20 + 4);
+        assertTapped(fortune, false);
+        assertTapped("Lone Missionary", false);
+    }
+
+    @Test
+    public void test_Saddling_FortuneBlinksAfterSaddlingBeforeCombat() {
+        setStrictChooseMode(true);
+        skipInitShuffling();
+
+        addCard(Zone.BATTLEFIELD, playerA, fortune);
+        addCard(Zone.BATTLEFIELD, playerA, "Fervor"); // To give haste
+        addCard(Zone.BATTLEFIELD, playerA, "Lone Missionary"); // ETB, gain 4 life
+        addCard(Zone.BATTLEFIELD, playerA, "Plains");
+        addCard(Zone.HAND, playerA, "Ephemerate");
+        addCard(Zone.LIBRARY, playerA, "Taiga", 2);
+
+        setChoice(playerA, "Lone Missionary"); // Saddling choice
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Saddle");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
+
+        // That would make Fortune no longer saddled, so not trigger at beginning of combat
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ephemerate", fortune);
+        addTarget(playerA, "Taiga"); // for the scry trigger
+
+        attack(1, playerA, fortune, playerB);
+
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertLife(playerA, 20);
+        assertTapped(fortune, true);
+        assertTapped("Lone Missionary", true);
+    }
+
+    @Test
+    public void test_Saddling_FortuneBlinksInResponseOfSaddling() {
+        setStrictChooseMode(true);
+        skipInitShuffling();
+
+        addCard(Zone.BATTLEFIELD, playerA, fortune);
+        addCard(Zone.BATTLEFIELD, playerA, "Fervor"); // To give haste
+        addCard(Zone.BATTLEFIELD, playerA, "Lone Missionary"); // ETB, gain 4 life
+        addCard(Zone.BATTLEFIELD, playerA, "Plains");
+        addCard(Zone.HAND, playerA, "Ephemerate");
+        addCard(Zone.LIBRARY, playerA, "Taiga", 2);
+
+        setChoice(playerA, "Lone Missionary"); // Saddling choice
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Saddle");
+
+        // That would make Fortune no longer saddled, so not trigger at beginning of combat
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ephemerate", fortune);
+        addTarget(playerA, "Taiga"); // for the scry trigger
+
+        attack(1, playerA, fortune, playerB);
+
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertLife(playerA, 20);
+        assertTapped(fortune, true);
+        assertTapped("Lone Missionary", true);
+    }
+
+    @Test
+    public void test_Saddling_FortuneBlinksTwice() {
+        setStrictChooseMode(true);
+        skipInitShuffling();
+
+        addCard(Zone.BATTLEFIELD, playerA, fortune);
+        addCard(Zone.BATTLEFIELD, playerA, "Lone Missionary"); // ETB, gain 4 life
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
+        addCard(Zone.HAND, playerA, "Ephemerate", 2);
+        addCard(Zone.LIBRARY, playerA, "Taiga", 2);
+
+        setChoice(playerA, "Lone Missionary"); // Saddling choice
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Saddle");
+        attack(1, playerA, fortune, playerB);
+
+        castSpell(1, PhaseStep.DECLARE_ATTACKERS, playerA, "Ephemerate", fortune, true);
+        addTarget(playerA, "Taiga"); // for the scry trigger
+
+        castSpell(1, PhaseStep.DECLARE_ATTACKERS, playerA, "Ephemerate", fortune);
+        addTarget(playerA, "Taiga"); // for the scry trigger
+
+        setChoice(playerA, "Lone Missionary"); // Choose to blink Lone Missionary
+
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertLife(playerA, 20 + 4);
+        assertTapped(fortune, false);
+        assertTapped("Lone Missionary", false);
+    }
 }
