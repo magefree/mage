@@ -13,7 +13,7 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- * @author Susucr
+ * @author jimga150
  */
 public class UrborgScavengersTests extends CardTestPlayerBase {
 
