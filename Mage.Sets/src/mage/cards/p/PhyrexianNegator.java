@@ -4,7 +4,7 @@ package mage.cards.p;
 import mage.MageInt;
 import mage.abilities.common.DealtDamageToSourceTriggeredAbility;
 import mage.abilities.dynamicvalue.common.SavedDamageValue;
-import mage.abilities.effects.common.SacrificeEffect;
+import mage.abilities.effects.common.SacrificeControllerEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -32,7 +32,7 @@ public final class PhyrexianNegator extends CardImpl {
 
         // Whenever Phyrexian Negator is dealt damage, sacrifice that many permanents.
         this.addAbility(new DealtDamageToSourceTriggeredAbility(
-                new SacrificeEffect(new FilterPermanent(), SavedDamageValue.MANY, "")
+                new SacrificeControllerEffect(new FilterPermanent(), SavedDamageValue.MANY, "")
         ));
     }
 
