@@ -9,7 +9,7 @@ import mage.abilities.condition.common.SourceMatchesFilterCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalInterveningIfBatchTriggeredAbility;
 import mage.abilities.dynamicvalue.common.SavedDamageValue;
-import mage.abilities.effects.common.SacrificeEffect;
+import mage.abilities.effects.common.SacrificeControllerEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.mana.BlackManaAbility;
@@ -44,7 +44,7 @@ public final class PhyrexianTotem extends CardImpl {
 
         // Whenever Phyrexian Totem is dealt damage, if it's a creature, sacrifice that many permanents.
         this.addAbility(new ConditionalInterveningIfBatchTriggeredAbility(
-                new DealtDamageToSourceTriggeredAbility(new SacrificeEffect(new FilterPermanent(), SavedDamageValue.MANY, "")),
+                new DealtDamageToSourceTriggeredAbility(new SacrificeControllerEffect(new FilterPermanent(), SavedDamageValue.MANY, "")),
                 condition, "Whenever {this} is dealt damage, if it's a creature, sacrifice that many permanents."
         ));
     }

@@ -54,19 +54,19 @@ public class DealtDamageToSourceTriggeredAbility extends TriggeredAbilityImpl im
         return ((DamagedBatchForPermanentsEvent) event)
                 .getEvents()
                 .stream()
-                .filter(damagedEvent -> getSourceId().equals(damagedEvent.getTargetId())
-                        && damagedEvent.getAmount() > 0);
+                .filter(e -> getSourceId().equals(e.getTargetId()))
+                .filter(e -> e.getAmount() > 0);
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        int damage = filterBatchEvent(event, game)
+        int amount = filterBatchEvent(event, game)
                 .mapToInt(GameEvent::getAmount)
                 .sum();
-        if (damage < 1) {
+        if (amount <= 0) {
             return false;
         }
-        this.getEffects().setValue("damage", damage);
+        this.getEffects().setValue("damage", amount);
         return true;
     }
 }
