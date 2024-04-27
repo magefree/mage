@@ -2427,15 +2427,31 @@ public class TestPlayer implements Player {
                     if (!targetDefinition.startsWith("targetPlayer=")) {
                         continue;
                     }
-                    checkTargetDefinitionMarksSupport(target, targetDefinition, "=");
-                    String playerName = targetDefinition.substring(targetDefinition.indexOf("targetPlayer=") + 13);
-                    for (Player player : game.getPlayers().values()) {
-                        if (player.getName().equals(playerName)
-                                && target.canTarget(abilityControllerId, player.getId(), source, game)) {
-                            target.addTarget(player.getId(), source, game);
-                            targets.remove(targetDefinition);
-                            return true;
+                    checkTargetDefinitionMarksSupport(target, targetDefinition, "^=");
+                    String[] targetList = targetDefinition.substring(targetDefinition.indexOf("targetPlayer=") + 13).split("\\^");
+                    boolean allTargetFound = true;
+                    boolean someTargetFound = false;
+                    for (String playerName : targetList) {
+                        boolean targetFound = false;
+                        for (Player player : game.getPlayers().values()) {
+                            if (player.getName().equals(playerName)
+                                    && target.canTarget(abilityControllerId, player.getId(), source, game)) {
+                                target.addTarget(player.getId(), source, game);
+                                targetFound = true;
+                                break;
+                            }
                         }
+                        someTargetFound |= targetFound;
+                        allTargetFound &= targetFound;
+                    }
+                    if (!allTargetFound && someTargetFound) {
+                        Assert.fail("target only partially matching for: "
+                                + targetDefinition + " — "
+                                + target.getOriginalTarget().getClass().getCanonicalName());
+                    }
+                    if (allTargetFound && someTargetFound) {
+                        targets.remove(targetDefinition);
+                        return true;
                     }
                 }
             }
