@@ -2255,7 +2255,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         return doDamage(damage, attackerId, source, game, combatDamage, preventable, appliedEffects);
     }
 
-    private int doDamage(int damage, UUID attackerId, Ability source, Game game, boolean combatDamage, boolean preventable, List<UUID> appliedEffects) {
+    private int doDamage(int damage, UUID attackerId, Ability source, Game game, boolean combat, boolean preventable, List<UUID> appliedEffects) {
         if (!this.isInGame()) {
             return 0;
         }
@@ -2263,8 +2263,11 @@ public abstract class PlayerImpl implements Player, Serializable {
         if (damage < 1) {
             return 0;
         }
-        DamageEvent event = new DamagePlayerEvent(playerId, attackerId, playerId, damage, preventable, combatDamage);
+        DamageEvent event = new DamagePlayerEvent(playerId, attackerId, playerId, damage, preventable, combat);
         event.setAppliedEffects(appliedEffects);
+        // Even if no damage was dealt, some watchers would need a reset next time actions are processed.
+        // For instance PhantomPreventionWatcher used by the [[Phantom Wurm]] type of replacement effect.
+        game.getState().addBatchDamageCouldHaveBeenFired(combat, game);
         if (game.replaceEvent(event)) {
             return 0;
         }
@@ -2300,20 +2303,20 @@ public abstract class PlayerImpl implements Player, Serializable {
             addCounters(CounterType.POISON.createInstance(actualDamage), sourceControllerId, source, game);
         } else {
             GameEvent damageToLifeLossEvent = new GameEvent(GameEvent.EventType.DAMAGE_CAUSES_LIFE_LOSS,
-                    playerId, source, playerId, actualDamage, combatDamage);
+                    playerId, source, playerId, actualDamage, combat);
             if (!game.replaceEvent(damageToLifeLossEvent)) {
-                this.loseLife(damageToLifeLossEvent.getAmount(), game, source, combatDamage, attackerId);
+                this.loseLife(damageToLifeLossEvent.getAmount(), game, source, combat, attackerId);
             }
         }
         if (sourceAbilities != null && sourceAbilities.containsKey(LifelinkAbility.getInstance().getId())) {
-            if (combatDamage) {
+            if (combat) {
                 game.getPermanent(attackerId).markLifelink(actualDamage);
             } else {
                 Player player = game.getPlayer(sourceControllerId);
                 player.gainLife(actualDamage, game, source);
             }
         }
-        if (combatDamage && sourceAbilities != null && sourceAbilities.containsClass(ToxicAbility.class)) {
+        if (combat && sourceAbilities != null && sourceAbilities.containsClass(ToxicAbility.class)) {
             int countersToAdd = CardUtil
                     .castStream(sourceAbilities.stream(), ToxicAbility.class)
                     .mapToInt(ToxicAbility::getAmount)
@@ -2325,7 +2328,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             Player player = game.getPlayer(sourceControllerId);
             new SquirrelToken().putOntoBattlefield(actualDamage, game, source, player.getId());
         }
-        DamagedEvent damagedEvent = new DamagedPlayerEvent(playerId, attackerId, playerId, actualDamage, combatDamage);
+        DamagedEvent damagedEvent = new DamagedPlayerEvent(playerId, attackerId, playerId, actualDamage, combat);
         game.fireEvent(damagedEvent);
         game.getState().addSimultaneousDamage(damagedEvent, game);
         return actualDamage;

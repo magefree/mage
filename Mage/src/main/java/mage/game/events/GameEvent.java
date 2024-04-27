@@ -129,6 +129,12 @@ public class GameEvent implements Serializable {
         includes all damage events, both permanent damage and player damage, in single batch event
          */
         DAMAGED_BATCH_FOR_ALL,
+        /* DAMAGED_BATCH_FIRED
+         * Does not contain any info on damage events, and can fire even when all damage is prevented.
+         * Fire any time a DAMAGED_BATCH_FOR_ALL could have fired (combat & noncombat).
+         * It is not a batch event (doesn't contain sub events), the name is a little ambiguous.
+         */
+        DAMAGED_BATCH_COULD_HAVE_FIRED,
 
         /* DAMAGE_CAUSES_LIFE_LOSS,
          targetId    the id of the damaged player
