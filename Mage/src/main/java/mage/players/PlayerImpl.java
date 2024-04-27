@@ -42,6 +42,7 @@ import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.*;
 import mage.game.combat.CombatGroup;
 import mage.game.command.CommandObject;
+import mage.game.command.Commander;
 import mage.game.events.*;
 import mage.game.match.MatchPlayer;
 import mage.game.permanent.Permanent;
@@ -3946,6 +3947,9 @@ public abstract class PlayerImpl implements Player, Serializable {
             getPlayableFromObjectSingle(game, fromZone, object, ((Card) object).getAbilities(game), availableMana, output);
         } else if (object instanceof StackObject) {
             // spells on stack are processing by Card above, other stack objects must be ignored
+        } else if (object instanceof Commander) {
+            getPlayableFromObjectSingle(game, fromZone, object, ((Commander) object).getAbilities(game), availableMana,
+                    output);
         } else {
             // other things like CommandObject
             getPlayableFromObjectSingle(game, fromZone, object, object.getAbilities(), availableMana, output);

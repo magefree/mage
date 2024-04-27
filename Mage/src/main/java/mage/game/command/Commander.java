@@ -21,6 +21,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Stream;
 
 public class Commander extends CommandObjectImpl {
 
@@ -92,7 +93,7 @@ public class Commander extends CommandObjectImpl {
         }
     }
 
-    private boolean canUseAbilityFromCommandZone(Ability ability) {
+    private static boolean canUseAbilityFromCommandZone(Ability ability) {
         // ability can be restricted by zone usage, so you must ignore it for commander (example: Escape or Jumpstart)
         switch (ability.getZone()) {
             case ALL:
@@ -191,6 +192,27 @@ public class Commander extends CommandObjectImpl {
     @Override
     public Abilities<Ability> getAbilities() {
         return abilities;
+    }
+
+    public Abilities<Ability> getAbilities(Game game) {
+        if (game == null) {
+            return abilities;
+        }
+
+        Card card = game.getCard(this.getId());
+        Abilities<Ability> cardAbilities = card.getAbilities(game);
+        Abilities<Ability> re = new AbilitiesImpl<>();
+        cardAbilities.stream().forEach(ability -> {
+            if (ability instanceof SpellAbility && canUseAbilityFromCommandZone(ability)) {
+                re.add(((SpellAbility) ability).copyWithZone(Zone.COMMAND));
+            } else if (ability instanceof PlayLandAbility && canUseAbilityFromCommandZone(ability)) {
+                re.add(new PlayLandAsCommanderAbility((PlayLandAbility) ability));
+            } else {
+                re.add(ability.copy());
+            }
+        });
+
+        return re;
     }
 
     @Override

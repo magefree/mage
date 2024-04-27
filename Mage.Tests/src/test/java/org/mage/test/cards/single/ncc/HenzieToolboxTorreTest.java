@@ -28,6 +28,8 @@ public class HenzieToolboxTorreTest extends CardTestCommander4Players {
     // {2}{R}{R}{R}
     private static final String aerathiBerserker = "Aerathi Berserker";
     private static final String commandTower = "Command Tower";
+    private static final String embrace = "Embrace the Unknown";
+    private static final String grasp = "Praetor's Grasp";
     private static final String withBlitz = " with Blitz";
 
     private void assertBlitzed(String cardName, boolean isBlitzed) {
@@ -58,8 +60,9 @@ public class HenzieToolboxTorreTest extends CardTestCommander4Players {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, aerathiBerserker + withBlitz, true);
 
-        execute();
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
         assertBlitzed(aerathiBerserker, true);
     }
 
@@ -70,14 +73,54 @@ public class HenzieToolboxTorreTest extends CardTestCommander4Players {
     @Test
     public void commanderCastDiscount() {
         addCard(Zone.COMMAND, playerA, henzieToolboxTorre);
-        addCard(Zone.BATTLEFIELD, playerA, commandTower, 3+3);
+        // Henzie costs 3 mana, and berserker costs 5 mana reduced to 4
+        addCard(Zone.BATTLEFIELD, playerA, commandTower, 3 + 4);
         addCard(Zone.HAND, playerA, aerathiBerserker);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, henzieToolboxTorre, true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, aerathiBerserker + withBlitz);
 
-        execute();
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertBlitzed(aerathiBerserker, true);
+    }
+
+    /**
+     * Test that you can cast your commander with the blitz cost
+     */
+    @Test
+    public void commanderCastBlitz() {
+        addCard(Zone.BATTLEFIELD, playerA, henzieToolboxTorre);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
+        addCard(Zone.COMMAND, playerA, aerathiBerserker);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, aerathiBerserker + withBlitz, true);
+
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertBlitzed(aerathiBerserker, true);
+    }
+
+    /**
+     * Test that you can cast your own card from exile
+     */
+    @Test
+    public void exileCastBlitz() {
+        addCard(Zone.BATTLEFIELD, playerA, henzieToolboxTorre);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3 + 5);
+        addCard(Zone.HAND, playerA, embrace);
+        addCard(Zone.LIBRARY, playerA, aerathiBerserker);
+
+        skipInitShuffling();
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, embrace, true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, aerathiBerserker + withBlitz, true);
+
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
         assertBlitzed(aerathiBerserker, true);
     }
 }

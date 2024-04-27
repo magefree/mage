@@ -14,7 +14,11 @@ import mage.constants.*;
 import mage.filter.FilterObject;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
+import mage.game.command.CommandObject;
+import mage.game.command.Commander;
 import mage.game.permanent.Permanent;
+import mage.game.stack.Spell;
+import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.util.CardUtil;
 import mage.watchers.common.CommanderPlaysCountWatcher;
@@ -126,6 +130,17 @@ class HenzieToolboxTorreGainBlitzEffect extends ContinuousEffectImpl {
             if (filter.match(card, game)) {
                 game.getState().addOtherAbility(card, new BlitzAbility(card, card.getManaCost().getMana().toString()));
                 applied = true;
+            }
+        }
+
+        for (StackObject stackObject : game.getStack()) {
+            if (!(stackObject instanceof Spell) || !stackObject.isControlledBy(controller.getId())) {
+                continue;
+            }
+            // TODO: Distinguish "you cast" to exclude copies
+            Card card = game.getCard(stackObject.getSourceId());
+            if (card != null && filter.match(card, game)) {
+                game.getState().addOtherAbility(card, new BlitzAbility(card, card.getManaCost().getMana().toString()));
             }
         }
 
