@@ -14,8 +14,6 @@ import mage.constants.*;
 import mage.filter.FilterObject;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
-import mage.game.command.CommandObject;
-import mage.game.command.Commander;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
