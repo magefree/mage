@@ -118,7 +118,7 @@ class KayaSpiritsJusticeTriggeredAbility extends TriggeredAbilityImpl implements
                         .map(game::getCard)
                         .filter(card -> {
                             Permanent permanent = game.getPermanentOrLKIBattlefield(card.getId());
-                            return StaticFilters.FILTER_PERMANENT_CREATURE
+                            return StaticFilters.FILTER_CONTROLLED_CREATURE
                                     .match(permanent, getControllerId(), this, game);
                         })
                         .isPresent()
@@ -134,22 +134,24 @@ class KayaSpiritsJusticeTriggeredAbility extends TriggeredAbilityImpl implements
                         .of(e)
                         .map(ZoneChangeEvent::getTargetId)
                         .map(game::getCard)
+                        .filter(card -> card.getOwnerId().equals(getControllerId())) // indirect test for "from your graveyard"
                         .filter(card -> StaticFilters.FILTER_CARD_CREATURE.match(card, getControllerId(), this, game))
                         .isPresent()
                 );
-        
+
         return Stream.concat(filteredBattlefield, filteredGraveyard);
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Stream<ZoneChangeEvent> filteredEvents = filterBatchEvent(event, game);
-        if (!filteredEvents.findAny().isPresent()) {
+        List<ZoneChangeEvent> filteredEvents = filterBatchEvent(event, game).collect(Collectors.toList());
+        if (filteredEvents.isEmpty()) {
             return false;
         }
 
         // From Battlefield
         Set<Card> battlefieldCards = filteredEvents
+                .stream()
                 .filter(e -> e.getFromZone() == Zone.BATTLEFIELD)
                 .filter(e -> e.getToZone() == Zone.EXILED)
                 .map(ZoneChangeEvent::getTargetId)
@@ -165,6 +167,7 @@ class KayaSpiritsJusticeTriggeredAbility extends TriggeredAbilityImpl implements
 
         // From Graveyard
         Set<Card> graveyardCards = filteredEvents
+                .stream()
                 .filter(e -> e.getFromZone() == Zone.GRAVEYARD)
                 .filter(e -> e.getToZone() == Zone.EXILED)
                 .map(ZoneChangeEvent::getTargetId)
