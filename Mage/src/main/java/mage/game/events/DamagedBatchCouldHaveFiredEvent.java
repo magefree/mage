@@ -7,7 +7,7 @@ package mage.game.events;
  *
  * @author Susucr
  */
-public class DamagedBatchCouldHaveFiredEvent extends DamagedEvent {
+public class DamagedBatchCouldHaveFiredEvent extends GameEvent {
 
     public DamagedBatchCouldHaveFiredEvent(boolean combat) {
         super(EventType.DAMAGED_BATCH_COULD_HAVE_FIRED, null, null, null, 0, combat);
