@@ -2150,6 +2150,21 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
     /**
+     * Sets players as target
+     */
+    public void addTarget(TestPlayer player, TestPlayer... targetPlayers) {
+        String target = "targetPlayer=";
+        for (int i = 0; i < targetPlayers.length; ++i) {
+            if (i > 0) {
+                target += "^";
+            }
+            target += targetPlayers[i].getName();
+        }
+        player.addTarget(target);
+    }
+
+
+    /**
      * @param player
      * @param target use TestPlayer.TARGET_SKIP to 0 targets selects or to stop
      *               "up two xxx" selection
