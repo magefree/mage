@@ -1024,6 +1024,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         }
         DamageEvent event = new DamagePermanentEvent(objectId, attackerId, controllerId, damageAmount, preventable, combat);
         event.setAppliedEffects(appliedEffects);
+        // Even if no damage was dealt, some watchers would need a reset next time actions are processed.
+        // For instance PhantomPreventionWatcher used by the [[Phantom Wurm]] type of replacement effect.
+        game.getState().addBatchDamageCouldHaveBeenFired(combat, game);
         if (game.replaceEvent(event)) {
             return 0;
         }

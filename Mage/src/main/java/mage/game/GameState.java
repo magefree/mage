@@ -818,6 +818,16 @@ public class GameState implements Serializable, Copyable<GameState> {
         return !simultaneousEvents.isEmpty();
     }
 
+    // There might be no damage dealt, but we want to fire that damage (in a batch) could have been dealt.
+    public void addBatchDamageCouldHaveBeenFired(boolean combat, Game game) {
+        for (GameEvent event : simultaneousEvents) {
+            if (event instanceof DamagedBatchCouldHaveFiredEvent && event.getFlag() == combat) {
+                return;
+            }
+        }
+        addSimultaneousEvent(new DamagedBatchCouldHaveFiredEvent(combat), game);
+    }
+
     public void addSimultaneousDamage(DamagedEvent damagedEvent, Game game) {
         // Combine multiple damage events in the single event (batch)
         // Note: one event can be stored in multiple batches
