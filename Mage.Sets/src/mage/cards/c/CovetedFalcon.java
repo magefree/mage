@@ -94,7 +94,7 @@ class CovetedFalconEffect extends OneShotEffect {
         for (UUID permanentId : targetPermanentIds) {
             game.addEffect(
                     new GainControlTargetEffect(Duration.Custom, true, targetOpponentId)
-                            .setTargetPointer(new FixedTarget(permanentId)),
+                            .setTargetPointer(new FixedTarget(permanentId, game)),
                     source);
         }
 
