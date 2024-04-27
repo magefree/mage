@@ -72,7 +72,7 @@ class HenzieToolboxTorreGainBlitzEffect extends ContinuousEffectImpl {
         this.staticText = "Each creature spell you cast with mana value 4 or greater has blitz. " +
                 "The blitz cost is equal to its mana cost. " +
                 "<i>(You may choose to cast that spell for its blitz cost. " +
-                "If you do, it gains haste and “When this creature dies, draw a card.” " +
+                "If you do, it gains haste and \"When this creature dies, draw a card.\" " +
                 "Sacrifice it at the beginning of the next end step.)</i>";
     }
 
@@ -157,7 +157,7 @@ class HenzieToolboxTorreBlitzDiscountEffect extends CostModificationEffectImpl {
 
     HenzieToolboxTorreBlitzDiscountEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.REDUCE_COST);
-        this.staticText = "blitz costs you pay cost {1} less for each time you’ve cast your commander from the command zone this game";
+        this.staticText = "blitz costs you pay cost {1} less for each time you've cast your commander from the command zone this game";
     }
 
     private HenzieToolboxTorreBlitzDiscountEffect(final HenzieToolboxTorreBlitzDiscountEffect effect) {
