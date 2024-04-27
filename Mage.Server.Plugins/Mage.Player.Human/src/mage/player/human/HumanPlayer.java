@@ -415,7 +415,10 @@ public class HumanPlayer extends PlayerImpl {
         }
         if (source != null) {
             //options.put(Constants.Option.ORIGINAL_ID, "")
-            autoAnswerMessage = autoAnswerMessage.replace(getRelatedObjectName(source, game), "{this}");
+            String sourceName = getRelatedObjectName(source, game);
+            if (sourceName != null) {
+                autoAnswerMessage = autoAnswerMessage.replace(sourceName, "{this}");
+            }
         }
 
         options.put(Constants.Option.AUTO_ANSWER_MESSAGE, autoAnswerMessage);
