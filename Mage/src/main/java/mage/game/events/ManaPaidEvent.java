@@ -16,8 +16,7 @@ public class ManaPaidEvent extends GameEvent {
     private final ManaType manaType;
 
     public ManaPaidEvent(Ability abilityToPay, UUID manaSourceId, boolean manaFlag, UUID manaOriginalId, MageObject sourceObject, ManaType manaType) {
-        super(GameEvent.EventType.MANA_PAID, abilityToPay.getId(), null, abilityToPay.getControllerId(), 0, manaFlag);
-        this.setSourceId(manaSourceId);
+        super(GameEvent.EventType.MANA_PAID, abilityToPay.getId(), manaSourceId, abilityToPay.getControllerId(), 0, manaFlag);
         this.setData(manaOriginalId.toString());
         this.sourcePaidId = abilityToPay.getSourceId();
         this.sourceObject = sourceObject;

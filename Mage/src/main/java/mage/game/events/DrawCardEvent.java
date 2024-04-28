@@ -10,12 +10,16 @@ import java.util.UUID;
 public class DrawCardEvent extends GameEvent {
 
     public DrawCardEvent(UUID playerId, Ability source, GameEvent originalDrawEvent) {
-        super(GameEvent.EventType.DRAW_CARD, playerId, source, playerId, 0, false);
+        super(GameEvent.EventType.DRAW_CARD, playerId,
+                // source of draw events must be kept between replacements, example: UnpredictableCycloneTest
+                originalDrawEvent == null
+                        ? source == null ? null : source.getSourceId()
+                        : originalDrawEvent.getSourceId(),
+                playerId, 0, false);
 
         // source of draw events must be kept between replacements, example: UnpredictableCycloneTest
         if (originalDrawEvent != null) {
             this.addAppliedEffects(originalDrawEvent.getAppliedEffects());
-            this.setSourceId(originalDrawEvent.getSourceId());
         }
     }
 }

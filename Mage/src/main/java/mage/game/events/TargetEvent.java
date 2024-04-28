@@ -17,13 +17,11 @@ public class TargetEvent extends GameEvent {
      * @param sourceControllerId can be different from real controller (example: ability instructs another player to targeting)
      */
     public TargetEvent(Card target, UUID sourceId, UUID sourceControllerId) {
-        super(GameEvent.EventType.TARGET, target.getId(), null, sourceControllerId);
-        this.setSourceId(sourceId);
+        super(GameEvent.EventType.TARGET, target.getId(), sourceId, sourceControllerId);
     }
 
     public TargetEvent(Player target, UUID sourceId, UUID sourceControllerId) {
-        super(GameEvent.EventType.TARGET, target.getId(), null, sourceControllerId);
-        this.setSourceId(sourceId);
+        super(GameEvent.EventType.TARGET, target.getId(), sourceId, sourceControllerId);
     }
 
     /**

@@ -10,8 +10,8 @@ import java.util.UUID;
  */
 public class EnchantPlayerEvent extends GameEvent {
 
+    // TODO: investigate why source is provided but not used at all?
     public EnchantPlayerEvent(UUID targetId, Permanent attachment, Ability source) {
-        super(GameEvent.EventType.ENCHANT_PLAYER, targetId, null, attachment.getControllerId());
-        this.setSourceId(attachment.getId());
+        super(GameEvent.EventType.ENCHANT_PLAYER, targetId, attachment.getId(), attachment.getControllerId());
     }
 }

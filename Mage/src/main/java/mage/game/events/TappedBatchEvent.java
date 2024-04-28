@@ -6,7 +6,7 @@ package mage.game.events;
 public class TappedBatchEvent extends BatchEvent<TappedEvent> {
 
     public TappedBatchEvent(TappedEvent firstEvent) {
-        super(EventType.TAPPED_BATCH, false, firstEvent);
+        super(EventType.TAPPED_BATCH, false, false, firstEvent);
     }
 
 }

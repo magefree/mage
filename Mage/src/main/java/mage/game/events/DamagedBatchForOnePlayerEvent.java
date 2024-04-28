@@ -6,7 +6,7 @@ package mage.game.events;
 public class DamagedBatchForOnePlayerEvent extends BatchEvent<DamagedPlayerEvent> {
 
     public DamagedBatchForOnePlayerEvent(DamagedPlayerEvent firstEvent) {
-        super(EventType.DAMAGED_BATCH_FOR_ONE_PLAYER, true, firstEvent);
+        super(EventType.DAMAGED_BATCH_FOR_ONE_PLAYER, true, false, firstEvent);
     }
 
     public boolean isCombatDamage() {

@@ -641,23 +641,31 @@ public class GameEvent implements Serializable {
     }
 
     public GameEvent(EventType type, UUID targetId, Ability source, UUID playerId) {
-        this(type, null, targetId, source, playerId, 0, false);
+        this(type, null, targetId, source == null ? null : source.getSourceId(), playerId, 0, false);
+    }
+
+    protected GameEvent(EventType type, UUID targetId, UUID sourceId, UUID playerId) {
+        this(type, null, targetId, sourceId, playerId, 0, false);
     }
 
     public GameEvent(EventType type, UUID targetId, Ability source, UUID playerId, ApprovingObject approvingObject) {
-        this(type, null, targetId, source, playerId, 0, false, approvingObject);
+        this(type, null, targetId, source == null ? null : source.getSourceId(), playerId, 0, false, approvingObject);
     }
 
     public GameEvent(EventType type, UUID targetId, Ability source, UUID playerId, int amount, boolean flag) {
-        this(type, null, targetId, source, playerId, amount, flag);
+        this(type, null, targetId, source == null ? null : source.getSourceId(), playerId, amount, flag);
+    }
+
+    public GameEvent(EventType type, UUID targetId, UUID sourceId, UUID playerId, int amount, boolean flag) {
+        this(type, null, targetId, sourceId, playerId, amount, flag);
     }
 
     public GameEvent(UUID customEventType, UUID targetId, Ability source, UUID playerId) {
-        this(EventType.CUSTOM_EVENT, customEventType, targetId, source, playerId, 0, false);
+        this(EventType.CUSTOM_EVENT, customEventType, targetId, source == null ? null : source.getSourceId(), playerId, 0, false);
     }
 
     public GameEvent(UUID customEventType, UUID targetId, Ability source, UUID playerId, int amount, boolean flag) {
-        this(EventType.CUSTOM_EVENT, customEventType, targetId, source, playerId, amount, flag);
+        this(EventType.CUSTOM_EVENT, customEventType, targetId, source == null ? null : source.getSourceId(), playerId, amount, flag);
     }
 
     public static GameEvent getEvent(EventType type, UUID targetId, Ability source, UUID playerId, int amount) {
@@ -674,7 +682,7 @@ public class GameEvent implements Serializable {
 
     @Deprecated // usage must be replaced by getEvent with source ability
     public static GameEvent getEvent(EventType type, UUID targetId, UUID playerId) {
-        return new GameEvent(type, targetId, null, playerId);
+        return new GameEvent(type, targetId, (UUID) null, playerId);
     }
 
     public static GameEvent getEvent(EventType type, UUID targetId, Ability source, UUID playerId, String data, int amount) {
@@ -692,16 +700,21 @@ public class GameEvent implements Serializable {
         return new GameEvent(customEventType, targetId, source, playerId);
     }
 
-    private GameEvent(EventType type, UUID customEventType, UUID targetId, Ability source, UUID playerId, int amount, boolean flag) {
-        this(type, customEventType, targetId, source, playerId, amount, flag, null);
+    private GameEvent(EventType type, UUID customEventType,
+                      UUID targetId, UUID sourceId, UUID playerId,
+                      int amount, boolean flag
+    ) {
+        this(type, customEventType, targetId, sourceId, playerId, amount, flag, null);
     }
 
     private GameEvent(EventType type, UUID customEventType,
-                      UUID targetId, Ability source, UUID playerId, int amount, boolean flag, ApprovingObject approvingObject) {
+                      UUID targetId, UUID sourceId, UUID playerId,
+                      int amount, boolean flag, ApprovingObject approvingObject
+    ) {
         this.type = type;
         this.customEventType = customEventType;
         this.targetId = targetId;
-        this.sourceId = source == null ? null : source.getSourceId();
+        this.sourceId = sourceId;
         this.amount = amount;
         this.playerId = playerId;
         this.flag = flag;
@@ -848,15 +861,6 @@ public class GameEvent implements Serializable {
             return false;
         }
         return identifier.equals(approvingObject.getApprovingAbility().getIdentifier());
-    }
-
-    /**
-     * Custom sourceId setup for some events (use it in constructor). TODO: replace all custom sourceId to normal event classes
-     *
-     * @param sourceId
-     */
-    protected void setSourceId(UUID sourceId) {
-        this.sourceId = sourceId;
     }
 
     @Override

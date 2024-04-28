@@ -6,6 +6,6 @@ package mage.game.events;
 public class DamagedBatchForPlayersEvent extends BatchEvent<DamagedPlayerEvent> {
 
     public DamagedBatchForPlayersEvent(DamagedPlayerEvent firstEvent) {
-        super(GameEvent.EventType.DAMAGED_BATCH_FOR_PLAYERS, false, firstEvent);
+        super(GameEvent.EventType.DAMAGED_BATCH_FOR_PLAYERS, false, false, firstEvent);
     }
 }

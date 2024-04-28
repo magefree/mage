@@ -1,5 +1,7 @@
 package mage.game.events;
 
+import mage.abilities.Ability;
+
 /**
  * Does not contain any info on damage events, and can fire even when all damage is prevented.
  * Fire any time a DAMAGED_BATCH_FOR_ALL could have fired (combat & noncombat).
@@ -10,6 +12,6 @@ package mage.game.events;
 public class DamagedBatchCouldHaveFiredEvent extends GameEvent {
 
     public DamagedBatchCouldHaveFiredEvent(boolean combat) {
-        super(EventType.DAMAGED_BATCH_COULD_HAVE_FIRED, null, null, null, 0, combat);
+        super(EventType.DAMAGED_BATCH_COULD_HAVE_FIRED, null, (Ability) null, null, 0, combat);
     }
 }
