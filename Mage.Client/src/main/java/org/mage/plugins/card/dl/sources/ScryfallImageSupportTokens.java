@@ -2335,6 +2335,13 @@ public class ScryfallImageSupportTokens {
             put("BIG/Golem", "https://api.scryfall.com/cards/tbig/6/en?format=image");
             put("BIG/Map", "https://api.scryfall.com/cards/tbig/7/en?format=image");
 
+            // OTP
+            put("OTP/Food", "https://api.scryfall.com/cards/totp/5/en?format=image");
+            put("OTP/Human Cleric", "https://api.scryfall.com/cards/totp/1/en?format=image");
+            put("OTP/Human Rogue", "https://api.scryfall.com/cards/totp/2/en?format=image");
+            put("OTP/Human Warrior", "https://api.scryfall.com/cards/totp/3/en?format=image");
+            put("OTP/Pest", "https://api.scryfall.com/cards/totp/4/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {

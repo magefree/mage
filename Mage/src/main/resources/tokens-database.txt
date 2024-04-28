@@ -2270,3 +2270,10 @@
 |Generate|TOK:BIG|Gnome|||GnomeToken|
 |Generate|TOK:BIG|Golem|||GolemToken|
 |Generate|TOK:BIG|Map|||MapToken|
+
+# OTP
+|Generate|TOK:OTP|Food|||FoodToken|
+|Generate|TOK:OTP|Human Cleric|||OutlawsMerrimentClericToken|
+|Generate|TOK:OTP|Human Rogue|||OutlawsMerrimentRogueToken|
+|Generate|TOK:OTP|Human Warrior|||OutlawsMerrimentWarriorToken|
+|Generate|TOK:OTP|Pest|||Pest11GainLifeToken|
