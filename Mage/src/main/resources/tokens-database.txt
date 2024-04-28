@@ -2213,3 +2213,32 @@
 |Generate|TOK:MKC|Tiny|||TinyToken|
 |Generate|TOK:MKC|Treasure|||TreasureToken|
 |Generate|TOK:MKC|Zombie|||ZombieToken|
+
+# OTC
+|Generate|TOK:OTC|Angel|||AngelToken|
+|Generate|TOK:OTC|Ape|||ApeToken|
+|Generate|TOK:OTC|Assassin|||QueenMarchesaAssassinToken|
+|Generate|TOK:OTC|Bird Illusion|||BirdIllusionToken|
+|Generate|TOK:OTC|Blood|||BloodToken|
+|Generate|TOK:OTC|Boar|||Boar2Token|
+|Generate|TOK:OTC|Dragon|||DragonEggDragonToken|
+|Generate|TOK:OTC|Dragon Egg|||NestingDragonToken|
+|Generate|TOK:OTC|Dragon Elemental|||DragonElementalToken|
+|Generate|TOK:OTC|Drake|||DrakeToken|
+|Generate|TOK:OTC|Eldrazi|||EldraziToken|
+|Generate|TOK:OTC|Eldrazi Scion|||EldraziScionToken|
+|Generate|TOK:OTC|Elemental|1||TitaniaProtectorOfArgothElementalToken|
+|Generate|TOK:OTC|Elemental|2||RedElementalToken|
+|Generate|TOK:OTC|Elemental|3||OmnathElementalToken|
+|Generate|TOK:OTC|Food|||FoodToken|
+|Generate|TOK:OTC|Inkling|||InklingToken|
+|Generate|TOK:OTC|Insect|||InsectToken|
+|Generate|TOK:OTC|Plant|||PlantToken|
+|Generate|TOK:OTC|Plant Warrior|||PlantWarriorToken|
+|Generate|TOK:OTC|Rat|||RatToken|
+|Generate|TOK:OTC|Rogue|||RogueToken|
+|Generate|TOK:OTC|Sand Warrior|||HazezonTamarSandWarriorToken|
+|Generate|TOK:OTC|Shark|||SharkToken|
+|Generate|TOK:OTC|Soldier|||SoldierArtifactToken|
+|Generate|TOK:OTC|Thopter|||ThopterColorlessToken|
+|Generate|TOK:OTC|Zombie|||ZombieToken|
