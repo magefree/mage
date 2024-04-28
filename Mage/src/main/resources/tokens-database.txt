@@ -2261,3 +2261,12 @@
 |Generate|TOK:OTC|Soldier|||SoldierArtifactToken|
 |Generate|TOK:OTC|Thopter|||ThopterColorlessToken|
 |Generate|TOK:OTC|Zombie|||ZombieToken|
+
+# BIG
+|Generate|TOK:BIG|Bat|||Bat21Token|
+|Generate|TOK:BIG|Blood|||BloodToken|
+|Generate|TOK:BIG|Construct|||KarnConstructToken|
+|Generate|TOK:BIG|Food|||FoodToken|
+|Generate|TOK:BIG|Gnome|||GnomeToken|
+|Generate|TOK:BIG|Golem|||GolemToken|
+|Generate|TOK:BIG|Map|||MapToken|

@@ -2326,6 +2326,15 @@ public class ScryfallImageSupportTokens {
             put("OTC/Thopter", "https://api.scryfall.com/cards/totc/27/en?format=image");
             put("OTC/Zombie", "https://api.scryfall.com/cards/totc/10/en?format=image");
 
+            // BIG
+            put("BIG/Bat", "https://api.scryfall.com/cards/tbig/1/en?format=image");
+            put("BIG/Blood", "https://api.scryfall.com/cards/tbig/2/en?format=image");
+            put("BIG/Construct", "https://api.scryfall.com/cards/tbig/3/en?format=image");
+            put("BIG/Food", "https://api.scryfall.com/cards/tbig/4/en?format=image");
+            put("BIG/Gnome", "https://api.scryfall.com/cards/tbig/5/en?format=image");
+            put("BIG/Golem", "https://api.scryfall.com/cards/tbig/6/en?format=image");
+            put("BIG/Map", "https://api.scryfall.com/cards/tbig/7/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {
