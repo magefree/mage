@@ -2214,6 +2214,25 @@
 |Generate|TOK:MKC|Treasure|||TreasureToken|
 |Generate|TOK:MKC|Zombie|||ZombieToken|
 
+# OTJ
+|Generate|TOK:OTJ|Angel|||Angel33Token|
+|Generate|TOK:OTJ|Beau|||BeauToken|
+|Generate|TOK:OTJ|Bird|||BlueBirdToken|
+|Generate|TOK:OTJ|Clue|||ClueArtifactToken|
+|Generate|TOK:OTJ|Dinosaur|||Dinosaur31Token|
+|Generate|TOK:OTJ|Elemental|||SeedGuardianToken|
+|Generate|TOK:OTJ|Elk|||ElkToken|
+|Generate|TOK:OTJ|Mercenary|||MercenaryToken|
+|Generate|TOK:OTJ|Meteorite|||MeteoriteToken|
+|Generate|TOK:OTJ|Ox|||Ox22Token|
+|Generate|TOK:OTJ|Scorpion Dragon|||ScorpionDragonToken|
+|Generate|TOK:OTJ|Sheep|||SheepWhiteToken|
+|Generate|TOK:OTJ|Spirit|||Spirit22Token|
+|Generate|TOK:OTJ|Treasure|||TreasureToken|
+|Generate|TOK:OTJ|Vampire Rogue|||VampireRogueToken|
+|Generate|TOK:OTJ|Varmint|||VarmintToken|
+|Generate|TOK:OTJ|Zombie Rogue|||ZombieRogueToken|
+
 # OTC
 |Generate|TOK:OTC|Angel|||AngelToken|
 |Generate|TOK:OTC|Ape|||ApeToken|

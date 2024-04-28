@@ -2278,6 +2278,25 @@ public class ScryfallImageSupportTokens {
             put("MKC/Treasure", "https://api.scryfall.com/cards/tmkc/26/en?format=image");
             put("MKC/Zombie", "https://api.scryfall.com/cards/tmkc/11/en?format=image");
 
+            // OTJ
+            put("OTJ/Angel", "https://api.scryfall.com/cards/totj/2/en?format=image");
+            put("OTJ/Beau", "https://api.scryfall.com/cards/totj/6/en?format=image");
+            put("OTJ/Bird", "https://api.scryfall.com/cards/totj/7/en?format=image");
+            put("OTJ/Clue", "https://api.scryfall.com/cards/totj/16/en?format=image");
+            put("OTJ/Dinosaur", "https://api.scryfall.com/cards/totj/9/en?format=image");
+            put("OTJ/Elemental", "https://api.scryfall.com/cards/totj/12/en?format=image");
+            put("OTJ/Elk", "https://api.scryfall.com/cards/totj/13/en?format=image");
+            put("OTJ/Mercenary", "https://api.scryfall.com/cards/totj/10/en?format=image");
+            put("OTJ/Meteorite", "https://api.scryfall.com/cards/totj/17/en?format=image");
+            put("OTJ/Ox", "https://api.scryfall.com/cards/totj/3/en?format=image");
+            put("OTJ/Scorpion Dragon", "https://api.scryfall.com/cards/totj/11/en?format=image");
+            put("OTJ/Sheep", "https://api.scryfall.com/cards/totj/4/en?format=image");
+            put("OTJ/Spirit", "https://api.scryfall.com/cards/totj/5/en?format=image");
+            put("OTJ/Treasure", "https://api.scryfall.com/cards/totj/18/en?format=image");
+            put("OTJ/Vampire Rogue", "https://api.scryfall.com/cards/totj/8/en?format=image");
+            put("OTJ/Varmint", "https://api.scryfall.com/cards/totj/14/en?format=image");
+            put("OTJ/Zombie Rogue", "https://api.scryfall.com/cards/totj/15/en?format=image");
+
             // OTC
             put("OTC/Angel", "https://api.scryfall.com/cards/totc/3/en?format=image");
             put("OTC/Ape", "https://api.scryfall.com/cards/totc/15/en?format=image");
