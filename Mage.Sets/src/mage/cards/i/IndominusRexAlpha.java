@@ -86,36 +86,9 @@ class IndominusRexAlphaCountersEffect extends OneShotEffect {
         // practice. so we will just ask it to not discard anything
         super(Outcome.AIDontUseIt);
 
-        this.staticText = "discard any number of creature cards. It enters with a " + getFirstChoiceAsString() +
-                " counter on it if a card discarded this way has " + getFirstChoiceAsString()
-                + ". The same is true for " + getOtherChoicesAsString() + ".";
-        for (CounterType counterType : copyableCounters) {
-            Counter counter = counterType.createInstance();
-            if (!(counter instanceof AbilityCounter)) {
-                throw new IllegalArgumentException(counterType + " is not an ability counter");
-            }
-        }
-    }
-
-    protected String getFirstChoiceAsString(){
-        return copyableCounters.toArray(new CounterType[0])[0].getName();
-    }
-
-    protected String getOtherChoicesAsString(){
-        StringBuilder sb = new StringBuilder();
-        CounterType[] choicesArray = copyableCounters.toArray(new CounterType[0]);
-
-        // Skip first counter name - flying
-        for (int i = 1; i < copyableCounters.size(); i++){
-            String separator = ", ";
-            if (i == copyableCounters.size()-2){
-                separator = ", and ";
-            } else if (i == copyableCounters.size()-1){
-                separator = "";
-            }
-            sb.append(choicesArray[i].getName()).append(separator);
-        }
-        return sb.toString();
+        this.staticText = "discard any number of creature cards. It enters with a flying counter on it if a card " +
+                "discarded this way has flying. The same is true for first strike, double strike, deathtouch, " +
+                "hexproof, haste, indestructible, lifelink, menace, reach, trample, and vigilance.";
     }
 
     private IndominusRexAlphaCountersEffect(final IndominusRexAlphaCountersEffect effect) {
