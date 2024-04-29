@@ -141,6 +141,9 @@ class IndominusRexAlphaCountersEffect extends OneShotEffect {
         controller.choose(outcome, controller.getHand(), target, source, game);
         List<UUID> chosenTargets = target.getTargets();
 
+        // the basic event is the EntersBattlefieldEvent, so use already applied replacement effects from that event
+        List<UUID> appliedEffects = (ArrayList<UUID>) this.getValue("appliedEffects");
+
         boolean addedCounters = false;
 
         for (CounterType counterType : copyableCounters) {
@@ -160,7 +163,7 @@ class IndominusRexAlphaCountersEffect extends OneShotEffect {
 
                 for (Ability ability : card.getAbilities()) {
                     if (abilityClass.isInstance(ability)){
-                        permanent.addCounters(counter, source.getControllerId(), source, game);
+                        permanent.addCounters(counter, source.getControllerId(), source, game, appliedEffects);
                         addedCounterType = true;
                         break;
                     }
