@@ -82,7 +82,10 @@ class IndominusRexAlphaCountersEffect extends OneShotEffect {
     );
 
     IndominusRexAlphaCountersEffect() {
-        super(Outcome.BoostCreature);
+        // AI will discard whole hand if this is set to a beneficial outcome without custom logic, which is bad
+        // practice. so we will just ask it to not discard anything
+        super(Outcome.AIDontUseIt);
+
         this.staticText = "discard any number of creature cards. It enters with a " + getFirstChoiceAsString() +
                 " counter on it if a card discarded this way has " + getFirstChoiceAsString()
                 + ". The same is true for " + getOtherChoicesAsString() + ".";
