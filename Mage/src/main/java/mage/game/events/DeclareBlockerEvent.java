@@ -8,6 +8,7 @@ import java.util.UUID;
 public class DeclareBlockerEvent extends GameEvent {
 
     public DeclareBlockerEvent(UUID attackerId, UUID blockerId, UUID blockerControllerId) {
-        super(GameEvent.EventType.DECLARE_BLOCKER, attackerId, blockerId, blockerControllerId);
+        super(GameEvent.EventType.DECLARE_BLOCKER, attackerId, null, blockerControllerId);
+        this.setSourceId(blockerId);
     }
 }

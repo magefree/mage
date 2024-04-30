@@ -10,6 +10,7 @@ import java.util.UUID;
 public class MadnessCardExiledEvent extends GameEvent {
 
     public MadnessCardExiledEvent(UUID cardId, Ability source, UUID controllerId) {
-        super(GameEvent.EventType.MADNESS_CARD_EXILED, cardId, source.getOriginalId(), controllerId);
+        super(GameEvent.EventType.MADNESS_CARD_EXILED, cardId, null, controllerId);
+        setSourceId(source.getOriginalId());
     }
 }

@@ -12,6 +12,7 @@ public class EnchantedPlayerEvent extends GameEvent {
 
     // TODO: investigate why source is provided but not used at all?
     public EnchantedPlayerEvent(UUID targetId, Permanent attachment, Ability source) {
-        super(GameEvent.EventType.ENCHANTED_PLAYER, targetId, attachment.getId(), attachment.getControllerId());
+        super(GameEvent.EventType.ENCHANTED_PLAYER, targetId, null, attachment.getControllerId());
+        this.setSourceId(attachment.getId());
     }
 }

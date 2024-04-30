@@ -10,7 +10,9 @@ import java.util.UUID;
  */
 public class AttachEvent extends GameEvent {
 
+    // TODO: investigate why source is provided but not used at all?
     public AttachEvent(UUID targetPermanentId, Permanent attachment, Ability source) {
-        super(GameEvent.EventType.ATTACH, targetPermanentId, attachment.getId(), attachment.getControllerId());
+        super(GameEvent.EventType.ATTACH, targetPermanentId, null, attachment.getControllerId());
+        this.setSourceId(attachment.getId());
     }
 }

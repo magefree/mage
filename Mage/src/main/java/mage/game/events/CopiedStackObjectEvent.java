@@ -10,6 +10,7 @@ import java.util.UUID;
 public class CopiedStackObjectEvent extends GameEvent {
 
     public CopiedStackObjectEvent(MageObject target, MageObject newCopy, UUID newControllerId) {
-        super(GameEvent.EventType.COPIED_STACKOBJECT, newCopy.getId(), target.getId(), newControllerId);
+        super(GameEvent.EventType.COPIED_STACKOBJECT, newCopy.getId(), null, newControllerId);
+        this.setSourceId(target.getId());
     }
 }

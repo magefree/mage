@@ -8,6 +8,7 @@ import java.util.UUID;
 public class AttackerDeclaredEvent extends GameEvent {
 
     public AttackerDeclaredEvent(UUID targetId, UUID attackerId, UUID attackerControllerId) {
-        super(GameEvent.EventType.ATTACKER_DECLARED, targetId, attackerId, attackerControllerId);
+        super(GameEvent.EventType.ATTACKER_DECLARED, targetId, null, attackerControllerId);
+        this.setSourceId(attackerId);
     }
 }

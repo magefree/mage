@@ -11,7 +11,8 @@ public class PreventDamageEvent extends GameEvent {
 
     // TODO: investigate why source is provided but not used?
     public PreventDamageEvent(UUID targetId, UUID attackerId, Ability source, UUID playerId, int damageToPrevent, boolean isCombatDamage) {
-        super(GameEvent.EventType.PREVENT_DAMAGE, targetId, attackerId, playerId, damageToPrevent, isCombatDamage);
+        super(GameEvent.EventType.PREVENT_DAMAGE, targetId, null, playerId, damageToPrevent, isCombatDamage);
+        this.setSourceId(attackerId);
     }
 
     public boolean isCombatDamage() {

@@ -11,9 +11,10 @@ public abstract class DamagedEvent extends GameEvent {
     protected int excess;
 
     public DamagedEvent(EventType type, UUID targetId, UUID attackerId, UUID playerId, int amount, boolean combat) {
-        super(type, targetId, attackerId, playerId, amount, false);
+        super(type, targetId, null, playerId, amount, false);
         this.combat = combat;
         this.excess = 0;
+        this.setSourceId(attackerId);
     }
 
     public boolean isCombatDamage() {

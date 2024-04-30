@@ -25,9 +25,10 @@ public abstract class BatchEvent<T extends GameEvent> extends GameEvent {
      * @param firstEvent     added to initialize the batch (batch is never empty)
      */
     protected BatchEvent(EventType eventType, boolean singleTargetId, boolean singleSourceId, T firstEvent) {
-        super(eventType, (singleTargetId ? firstEvent.getTargetId() : null), (singleSourceId ? firstEvent.getSourceId() : null), null);
+        super(eventType, (singleTargetId ? firstEvent.getTargetId() : null), null, null);
         this.singleTargetId = singleTargetId;
         this.singleSourceId = singleSourceId;
+        this.setSourceId(singleSourceId ? firstEvent.getSourceId() : null);
         if (firstEvent instanceof BatchEvent) { // sanity check, if you need it then think twice and research carefully
             throw new UnsupportedOperationException("Wrong code usage: nesting batch events not supported");
         }
@@ -38,7 +39,7 @@ public abstract class BatchEvent<T extends GameEvent> extends GameEvent {
      * For alternate event structure logic used by ZoneChangeBatchEvent, list of events starts empty.
      */
     protected BatchEvent(EventType eventType) {
-        super(eventType, null, (UUID) null, null);
+        super(eventType, null, null, null);
         this.singleTargetId = false;
         this.singleSourceId = false;
     }

@@ -10,6 +10,7 @@ import java.util.UUID;
 public class PreventedDamageEvent extends GameEvent {
 
     public PreventedDamageEvent(UUID targetId, UUID attackerId, Ability source, UUID playerId, int preventedDamage) {
-        super(GameEvent.EventType.PREVENTED_DAMAGE, targetId, attackerId, playerId, preventedDamage, false);
+        super(GameEvent.EventType.PREVENTED_DAMAGE, targetId, null, playerId, preventedDamage, false);
+        this.setSourceId(attackerId);
     }
 }

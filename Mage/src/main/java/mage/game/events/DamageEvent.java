@@ -12,8 +12,9 @@ public abstract class DamageEvent extends GameEvent {
     private boolean asThoughWither = false;
 
     public DamageEvent(EventType type, UUID targetId, UUID damageSourceId, UUID targetControllerId, int amount, boolean preventable, boolean combat) {
-        super(type, targetId, damageSourceId, targetControllerId, amount, preventable);
+        super(type, targetId, null, targetControllerId, amount, preventable);
         this.combat = combat;
+        this.setSourceId(damageSourceId);
     }
 
     public boolean isCombatDamage() {

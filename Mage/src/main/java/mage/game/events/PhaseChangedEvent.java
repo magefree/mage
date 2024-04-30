@@ -10,6 +10,7 @@ import java.util.UUID;
 public class PhaseChangedEvent extends GameEvent {
 
     public PhaseChangedEvent(UUID playerId, TurnMod extraTurnMode) {
-        super(GameEvent.EventType.PHASE_CHANGED, playerId, extraTurnMode == null ? null : extraTurnMode.getId(), playerId);
+        super(GameEvent.EventType.PHASE_CHANGED, playerId, null, playerId);
+        this.setSourceId(extraTurnMode == null ? null : extraTurnMode.getId());
     }
 }
