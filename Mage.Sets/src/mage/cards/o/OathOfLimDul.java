@@ -3,26 +3,24 @@ package mage.cards.o;
 import mage.abilities.Ability;
 import mage.abilities.common.LoseLifeTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.common.DiscardTargetCost;
+import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.SavedLifeLossValue;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DoUnlessControllerPaysEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.SacrificeControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetCardInHand;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 
@@ -53,7 +51,7 @@ public final class OathOfLimDul extends CardImpl {
 
 class OathOfLimDulEffect extends OneShotEffect {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("controlled permanent other than Oath of Lim-Dul to sacrifice");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("controlled permanent other than {this} to sacrifice");
 
     static {
         filter.add(AnotherPredicate.instance);
@@ -75,29 +73,14 @@ class OathOfLimDulEffect extends OneShotEffect {
         if (amountDamage <= 0 || controller == null) {
             return false;
         }
-        boolean sacrificeDone = false;
-        int numberSacrificed = 0;
-        int numberToDiscard = 0;
-        int numberOfControlledPermanents = 0;
-        TargetControlledPermanent target = new TargetControlledPermanent(0, numberOfControlledPermanents, filter, true);
-        target.withNotTarget(true);
-        if (controller.choose(Outcome.Detriment, target, source, game)) {
-            for (UUID targetPermanentId : target.getTargets()) {
-                Permanent permanent = game.getPermanent(targetPermanentId);
-                if (permanent != null
-                        && permanent.sacrifice(source, game)) {
-                    numberSacrificed += 1;
-                    sacrificeDone = true;
-                }
-            }
+        boolean didSomething = false;
+        for (int i = 0; i < amountDamage; ++i) {
+            didSomething |= new DoUnlessControllerPaysEffect(
+                    new SacrificeControllerEffect(StaticFilters.FILTER_CONTROLLED_ANOTHER_PERMANENT, 1, ""),
+                    new DiscardCardCost()
+            ).apply(game, source);
         }
-        numberToDiscard = amountDamage - numberSacrificed;
-        Cost cost = new DiscardTargetCost(new TargetCardInHand(numberToDiscard, new FilterCard("card(s) in your hand to discard")));
-        if (numberToDiscard > 0
-                && cost.canPay(source, source, controller.getId(), game)) {
-            return cost.pay(source, game, source, controller.getId(), true);  // discard cost paid simultaneously
-        }
-        return sacrificeDone;
+        return didSomething;
     }
 
     @Override
