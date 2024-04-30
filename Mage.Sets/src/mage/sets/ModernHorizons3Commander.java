@@ -20,5 +20,6 @@ public final class ModernHorizons3Commander extends ExpansionSet {
         this.hasBasicLands = false;
 
         cards.add(new SetCardInfo("Final Act", 104, Rarity.RARE, mage.cards.f.FinalAct.class));
+        cards.add(new SetCardInfo("Planar Nexus", 132, Rarity.RARE, mage.cards.p.PlanarNexus.class));
     }
 }
