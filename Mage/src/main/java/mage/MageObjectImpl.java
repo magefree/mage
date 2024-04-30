@@ -363,6 +363,21 @@ public abstract class MageObjectImpl implements MageObject {
         this.getSubtype(game).setIsAllCreatureTypes(value && (this.isTribal(game) || this.isCreature(game)));
     }
 
+    @Override
+    public boolean isAllNonbasicLandTypes(Game game) {
+        return this.getSubtype(game).isAllNonbasicLandTypes();
+    }
+
+    @Override
+    public void setIsAllNonbasicLandTypes(boolean value) {
+        this.getSubtype().setIsAllNonbasicLandTypes(value && this.isLand());
+    }
+
+    @Override
+    public void setIsAllNonbasicLandTypes(Game game, boolean value) {
+        this.getSubtype(game).setIsAllCreatureTypes(value && this.isLand(game));
+    }
+
     /**
      * Remove power/toughness character defining abilities
      */

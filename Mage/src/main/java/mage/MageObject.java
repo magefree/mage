@@ -596,5 +596,17 @@ public interface MageObject extends MageItem, Serializable, Copyable<MageObject>
      */
     void setIsAllCreatureTypes(Game game, boolean value);
 
+    boolean isAllNonbasicLandTypes(Game game);
+
+    void setIsAllNonbasicLandTypes(boolean value);
+
+    /**
+     * Change all nonbasic land type mark temporary, for continuous effects only
+     *
+     * @param game
+     * @param value
+     */
+    void setIsAllNonbasicLandTypes(Game game, boolean value);
+
     void removePTCDA();
 }
