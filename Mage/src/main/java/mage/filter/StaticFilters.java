@@ -906,6 +906,13 @@ public final class StaticFilters {
         FILTER_SPELL_A.setLockedFilter(true);
     }
 
+    public static final FilterSpell FILTER_SPELL_MULTICOLORED = new FilterSpell("multicolored spell");
+
+    static {
+        FILTER_SPELL_MULTICOLORED.add(MulticoloredPredicate.instance);
+        FILTER_SPELL_MULTICOLORED.setLockedFilter(true);
+    }
+
     public static final FilterSpell FILTER_SPELL_A_MULTICOLORED = new FilterSpell("a multicolored spell");
 
     static {
