@@ -464,6 +464,9 @@ public interface MageObject extends MageItem, Serializable, Copyable<MageObject>
         if (subTypeSet == SubTypeSet.CreatureType || subTypeSet == null) {
             this.setIsAllCreatureTypes(game, mageObject.isAllCreatureTypes(game));
         }
+        if (subTypeSet == SubTypeSet.NonBasicLandType || subTypeSet == null) {
+            this.setIsAllCreatureTypes(game, mageObject.isAllNonbasicLandTypes(game));
+        }
         for (SubType subType : mageObject.getSubtype(game)) {
             if (subType.getSubTypeSet() == subTypeSet || subTypeSet == null) {
                 this.addSubType(game, subType);
@@ -478,10 +481,12 @@ public interface MageObject extends MageItem, Serializable, Copyable<MageObject>
     default void removeAllSubTypes(Game game, SubTypeSet subTypeSet) {
         if (subTypeSet == null) {
             setIsAllCreatureTypes(game, false);
+            setIsAllNonbasicLandTypes(game, false);
             game.getState().getCreateMageObjectAttribute(this, game).getSubtype().clear();
         } else if (subTypeSet == SubTypeSet.CreatureType) {
             removeAllCreatureTypes(game);
         } else if (subTypeSet == SubTypeSet.NonBasicLandType) {
+            setIsAllNonbasicLandTypes(game, false);
             game.getState().getCreateMageObjectAttribute(this, game).getSubtype().removeAll(SubType.getLandTypes());
         } else {
             game.getState().getCreateMageObjectAttribute(this, game).getSubtype().removeAll(SubType.getBySubTypeSet(subTypeSet));
@@ -490,11 +495,13 @@ public interface MageObject extends MageItem, Serializable, Copyable<MageObject>
 
     default void retainAllArtifactSubTypes(Game game) {
         setIsAllCreatureTypes(game, false);
+        setIsAllNonbasicLandTypes(game, false);
         game.getState().getCreateMageObjectAttribute(this, game).getSubtype().retainAll(SubType.getArtifactTypes());
     }
 
     default void retainAllEnchantmentSubTypes(Game game) {
         setIsAllCreatureTypes(game, false);
+        setIsAllNonbasicLandTypes(game, false);
         game.getState().getCreateMageObjectAttribute(this, game).getSubtype().retainAll(SubType.getEnchantmentTypes());
     }
 
