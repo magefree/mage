@@ -5,7 +5,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SacrificePermanentTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.SacrificeOpponentsEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -80,8 +79,9 @@ class LegateLaniusCaesarsAceSacrificeEffect extends OneShotEffect {
                 continue;
             }
             // 1/10 rounded up
-            int num = (game.getBattlefield().count(StaticFilters.FILTER_PERMANENT_A_CREATURE,playerId,source, game)+9)/10;
-            int numTargets = Math.min(num, game.getBattlefield().count(TargetSacrifice.makeFilter(StaticFilters.FILTER_PERMANENT_A_CREATURE), player.getId(), source, game));
+
+            int num = (game.getBattlefield().countAll(StaticFilters.FILTER_PERMANENT_A_CREATURE, playerId, game) + 9) / 10;
+            int numTargets = Math.min(num, game.getBattlefield().countAll(TargetSacrifice.makeFilter(StaticFilters.FILTER_PERMANENT_A_CREATURE), player.getId(), game));
             if (numTargets < 1) {
                 continue;
             }
