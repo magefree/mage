@@ -12,7 +12,9 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 public class ExquisiteBloodTest extends CardTestPlayerBase {
 
     @Test
-    public void BasicCardTest() {
+    public void basicCardTest() {
+        setStrictChooseMode(true);
+
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
 
@@ -48,6 +50,8 @@ public class ExquisiteBloodTest extends CardTestPlayerBase {
      */
     @Test
     public void triggerCascadeTest() {
+        setStrictChooseMode(true);
+
         // +2: You gain 2 life. Put two +1/+1 counters on up to one target creature.
         // −3: Exile target creature. Its controller gains 2 life.
         // −10: Creatures you control gain flying and double strike until end of turn.        
@@ -90,6 +94,8 @@ public class ExquisiteBloodTest extends CardTestPlayerBase {
      */
     @Test
     public void triggerCascadeAjaniSecondAbilityTest() {
+        setStrictChooseMode(true);
+
         // +2: You gain 2 life. Put two +1/+1 counters on up to one target creature.
         // −3: Exile target creature. Its controller gains 2 life.
         // −10: Creatures you control gain flying and double strike until end of turn.        
