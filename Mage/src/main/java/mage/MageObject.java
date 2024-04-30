@@ -465,7 +465,7 @@ public interface MageObject extends MageItem, Serializable, Copyable<MageObject>
             this.setIsAllCreatureTypes(game, mageObject.isAllCreatureTypes(game));
         }
         if (subTypeSet == SubTypeSet.NonBasicLandType || subTypeSet == null) {
-            this.setIsAllCreatureTypes(game, mageObject.isAllNonbasicLandTypes(game));
+            this.setIsAllNonbasicLandTypes(game, mageObject.isAllNonbasicLandTypes(game));
         }
         for (SubType subType : mageObject.getSubtype(game)) {
             if (subType.getSubTypeSet() == subTypeSet || subTypeSet == null) {
