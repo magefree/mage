@@ -86,7 +86,7 @@ class LegateLaniusCaesarsAceSacrificeEffect extends OneShotEffect {
 
             // 1/10 rounded up
             int num = (game.getBattlefield().count(filter, playerId, source, game) + 9) / 10;
-            int numTargets = Math.min(num, game.getBattlefield().count(TargetSacrifice.makeFilter(filter), player.getId(), source, game));
+            int numTargets = Math.min(num, game.getBattlefield().count(TargetSacrifice.makeFilter(filter), playerId, source, game));
             if (numTargets < 1) {
                 continue;
             }
