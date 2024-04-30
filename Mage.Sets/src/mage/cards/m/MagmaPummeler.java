@@ -2,9 +2,10 @@ package mage.cards.m;
 
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
+import mage.abilities.dynamicvalue.common.SavedCounterRemovedValue;
 import mage.abilities.effects.PreventDamageAndRemoveCountersEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.EntersBattlefieldWithXCountersEffect;
@@ -12,10 +13,10 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 import mage.target.common.TargetAnyTarget;
 
 import java.util.UUID;
@@ -35,9 +36,10 @@ public final class MagmaPummeler extends CardImpl {
         // Magma Pummeler enters the battlefield with X +1/+1 counters on it.
         this.addAbility(new EntersBattlefieldAbility(new EntersBattlefieldWithXCountersEffect(CounterType.P1P1.createInstance())));
 
-        // If damage would be dealt to Magma Pummeler while it has a +1/+1 counter on it, prevent that damage and remove that many +1/+1 counters from it.
-        // When one or more counters are removed from Magma Pummeler this way, it deals that much damage to any target.
-        this.addAbility(new SimpleStaticAbility(new MagmaPummelerEffect()));
+        // If damage would be dealt to Magma Pummeler while it has a +1/+1 counter on it, prevent that damage and remove that many +1/+1 counters from it. When one or more counters are removed from Magma Pummeler this way, it deals that much damage to any target.
+        Ability ability = new SimpleStaticAbility(new MagmaPummelerPreventionEffect());
+        ability.addSubAbility(new MagmaPummelerTriggeredAbility());
+        this.addAbility(ability, PreventDamageAndRemoveCountersEffect.createWatcher());
     }
 
     private MagmaPummeler(final MagmaPummeler card) {
@@ -50,40 +52,76 @@ public final class MagmaPummeler extends CardImpl {
     }
 }
 
-class MagmaPummelerEffect extends PreventDamageAndRemoveCountersEffect {
+class MagmaPummelerPreventionEffect extends PreventDamageAndRemoveCountersEffect {
 
-    MagmaPummelerEffect() {
+    MagmaPummelerPreventionEffect() {
         super(true, true, true);
-        staticText += ". When one or more counters are removed from {this} this way, it deals that much damage to any target";
     }
 
-    private MagmaPummelerEffect(final MagmaPummelerEffect effect) {
+    private MagmaPummelerPreventionEffect(final MagmaPummelerPreventionEffect effect) {
         super(effect);
     }
 
     @Override
-    public MagmaPummelerEffect copy() {
-        return new MagmaPummelerEffect(this);
+    public PreventDamageAndRemoveCountersEffect copy() {
+        return new MagmaPummelerPreventionEffect(this);
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent == null) {
-            return false;
-        }
-        int beforeCounters = permanent.getCounters(game).getCount(CounterType.P1P1);
-        super.replaceEvent(event, source, game);
-        int countersRemoved = beforeCounters - permanent.getCounters(game).getCount(CounterType.P1P1);
-        if (countersRemoved > 0) {
-            ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(
-                    new DamageTargetEffect(countersRemoved), false,
-                    "{this} deals that much damage to any target"
-            );
-            ability.addTarget(new TargetAnyTarget());
-            game.fireReflexiveTriggeredAbility(ability, source);
-        }
-        return false;
+    protected void additionalEffect(GameEvent event, Ability source, Game game, int amountRemovedInTotal, int amountRemovedThisTime) {
+        super.additionalEffect(event, source, game, amountRemovedInTotal, amountRemovedThisTime);
+        // This is not the most elegant, but ensure we only trigger at most once per DAMAGED_BATCH_COULD_HAVE_FIRED,
+        // with the correct number of counters removed (the last time we stored value it will be the total)
+        source.getSubAbilities()
+                .stream()
+                .filter(MagmaPummelerTriggeredAbility.class::isInstance)
+                .forEach(ability -> ((MagmaPummelerTriggeredAbility) ability).setStoredValue(amountRemovedInTotal));
+    }
+}
+
+/**
+ * Having a trigger from a replacement effect is a weird setup for a trigger.
+ * We manage with the DAMAGED_BATCH_COULD_HAVE_FIRED special event, and the stored
+ * amount in {@link mage.abilities.dynamicvalue.common.SavedCounterRemovedValue}.
+ */
+class MagmaPummelerTriggeredAbility extends TriggeredAbilityImpl {
+
+    private int storedValue;
+
+    void setStoredValue(int storedValue) {
+        this.storedValue = storedValue;
     }
 
+    MagmaPummelerTriggeredAbility() {
+        super(Zone.BATTLEFIELD, new DamageTargetEffect(SavedCounterRemovedValue.MUCH));
+        setTriggerPhrase("When one or more counters are removed from {this} this way, ");
+        addTarget(new TargetAnyTarget());
+        storedValue = 0;
+    }
+
+    private MagmaPummelerTriggeredAbility(final MagmaPummelerTriggeredAbility ability) {
+        super(ability);
+        this.storedValue = ability.storedValue;
+    }
+
+    @Override
+    public MagmaPummelerTriggeredAbility copy() {
+        return new MagmaPummelerTriggeredAbility(this);
+    }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DAMAGED_BATCH_COULD_HAVE_FIRED;
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (storedValue <= 0) {
+            return false;
+        }
+        getEffects().setValue(SavedCounterRemovedValue.getValueKey(), storedValue);
+        // We do not want to loop trigger. So clearing the saved amount.
+        setStoredValue(0);
+        return true;
+    }
 }

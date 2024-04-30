@@ -2,7 +2,6 @@ package org.mage.test.cards.prevention;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -50,7 +49,34 @@ public class PreventDamageRemoveCountersTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Magma Pummeler", 1);
         assertPowerToughness(playerA, "Magma Pummeler", 3, 3); // 2 counters removed
         assertLife(playerB, 18); // 2 damage dealt
+    }
 
+    @Test
+    public void testMagmaPummelerDoubleBlocked() {
+        // The part of this one that is weird is that there should be only a single trigger, that sums
+        // all the counter removed by multiple prevention effects occuring at the same time.
+        setStrictChooseMode(true);
+
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 8);
+        addCard(Zone.HAND, playerA, "Magma Pummeler", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Memnite", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Goblin Piker", 1);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Magma Pummeler");
+        setChoice(playerA, "X=5");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        attack(3, playerA, "Magma Pummeler", playerB);
+        block(3, playerB, "Memnite", "Magma Pummeler");
+        block(3, playerB, "Goblin Piker", "Magma Pummeler");
+        setChoice(playerA, "X=5"); // damage for Pummeler, does not really matter for this test.
+        addTarget(playerA, playerB); // For the one trigger
+
+        setStopAt(3, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, "Magma Pummeler", 1);
+        assertPowerToughness(playerA, "Magma Pummeler", 2, 2); // 3 counters removed
+        assertLife(playerB, 20 - 3); // 3 damage dealt by the 1 trigger.
     }
 
     @Test
