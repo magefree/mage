@@ -11,7 +11,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
-import mage.target.TargetPermanent;
+import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetadjustment.PowerTargetAdjuster;
 
 import java.util.UUID;
@@ -34,7 +34,7 @@ public final class EntrancingLyre extends CardImpl {
         ability.addCost(new TapSourceCost());
         ability.addEffect(new DontUntapAsLongAsSourceTappedEffect());
         ability.setTargetAdjuster(new PowerTargetAdjuster(ComparisonType.OR_LESS));
-        ability.addTarget(new TargetPermanent());
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 

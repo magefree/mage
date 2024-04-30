@@ -10,7 +10,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.counters.CounterType;
-import mage.target.TargetPermanent;
+import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetadjustment.PowerTargetAdjuster;
 
 import java.util.UUID;
@@ -31,7 +31,7 @@ public final class EntDraughtBasin extends CardImpl {
         );
         ability.addCost(new TapSourceCost());
         ability.setTargetAdjuster(new PowerTargetAdjuster(ComparisonType.EQUAL_TO));
-        ability.addTarget(new TargetPermanent());
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 

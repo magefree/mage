@@ -12,8 +12,8 @@ import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.FilterPermanent;
-import mage.target.TargetPermanent;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetadjustment.PowerTargetAdjuster;
 
 import java.util.UUID;
@@ -24,11 +24,7 @@ import java.util.UUID;
  */
 public final class MinamoSightbender extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("creature with power X or less");
-
-    static {
-        filter.add(CardType.CREATURE.getPredicate());
-    }
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power X or less");
 
     public MinamoSightbender(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
@@ -41,7 +37,7 @@ public final class MinamoSightbender extends CardImpl {
         // {X}, {T}: Target creature with power X or less can't be blocked this turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBeBlockedTargetEffect(), new ManaCostsImpl<>("{X}"));
         ability.setTargetAdjuster(new PowerTargetAdjuster(ComparisonType.OR_LESS));
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetCreaturePermanent(filter));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 

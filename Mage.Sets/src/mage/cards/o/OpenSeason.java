@@ -18,7 +18,7 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.TargetPermanent;
+import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetadjustment.EachOpponentPermanentTargetsAdjuster;
 
 import java.util.UUID;
@@ -36,7 +36,7 @@ public final class OpenSeason extends CardImpl {
         effect.setText("for each opponent, put a bounty counter on target creature that player controls");
         Ability ability = new EntersBattlefieldTriggeredAbility(effect);
         ability.setTargetAdjuster(new EachOpponentPermanentTargetsAdjuster());
-        ability.addTarget(new TargetPermanent());
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 
         // Creatures your opponent control with bounty counters on them can't activate abilities

@@ -17,7 +17,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.StaticFilters;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.players.Player;
@@ -44,7 +43,7 @@ public final class MartyrOfBones extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new GenericManaCost(1));
         ability.addCost(new RevealVariableBlackCardsFromHandCost());
         ability.addCost(new SacrificeSourceCost());
-        ability.addTarget(new TargetCardInASingleGraveyard(0, 1, StaticFilters.FILTER_CARD_CARDS));
+        ability.addTarget(new TargetCardInASingleGraveyard(0, 1, new FilterCard("up to X target cards")));
         ability.setTargetAdjuster(new XTargetsCountAdjuster());
         this.addAbility(ability);
     }
