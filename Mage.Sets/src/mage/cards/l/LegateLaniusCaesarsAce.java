@@ -11,6 +11,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -78,14 +80,17 @@ class LegateLaniusCaesarsAceSacrificeEffect extends OneShotEffect {
             if (player == null) {
                 continue;
             }
-            // 1/10 rounded up
 
-            int num = (game.getBattlefield().countAll(StaticFilters.FILTER_PERMANENT_A_CREATURE, playerId, game) + 9) / 10;
-            int numTargets = Math.min(num, game.getBattlefield().countAll(TargetSacrifice.makeFilter(StaticFilters.FILTER_PERMANENT_A_CREATURE), player.getId(), game));
+            FilterCreaturePermanent filter = new FilterCreaturePermanent();
+            filter.add(new ControllerIdPredicate(playerId));
+
+            // 1/10 rounded up
+            int num = (game.getBattlefield().count(filter, playerId, source, game) + 9) / 10;
+            int numTargets = Math.min(num, game.getBattlefield().count(TargetSacrifice.makeFilter(filter), playerId, source, game));
             if (numTargets < 1) {
                 continue;
             }
-            TargetSacrifice target = new TargetSacrifice(numTargets, StaticFilters.FILTER_PERMANENT_A_CREATURE);
+            TargetSacrifice target = new TargetSacrifice(numTargets, filter);
             while (!target.isChosen() && target.canChoose(playerId, source, game) && player.canRespond()) {
                 player.choose(Outcome.Sacrifice, target, source, game);
             }
