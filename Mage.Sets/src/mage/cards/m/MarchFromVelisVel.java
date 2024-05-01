@@ -86,7 +86,7 @@ class MarchFromVelisVelEffect extends OneShotEffect {
             return false;
         }
         FilterPermanent filter = new FilterControlledLandPermanent(subType, "");
-        List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getSourceId(), source, game);
+        List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game);
         if (permanents.isEmpty()) {
             return false;
         }

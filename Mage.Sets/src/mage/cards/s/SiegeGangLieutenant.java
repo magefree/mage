@@ -47,7 +47,7 @@ public final class SiegeGangLieutenant extends CardImpl {
                 ), CommanderInPlayCondition.instance, "At the beginning of combat on your turn, " +
                 "if you control your commander, create two 1/1 red Goblin creature tokens. " +
                 "Those tokens gain haste until end of turn."
-        ).setAbilityWord(AbilityWord.LIEUTENANT).addHint(ControlACommanderHint.instance));
+        ).setAbilityWord(AbilityWord.LIEUTENANT));
 
         // {2}, Sacrifice a Goblin: Siege-Gang Lieutenant deals 1 damage to any target.
         Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(1), new GenericManaCost(2));
