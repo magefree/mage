@@ -339,6 +339,7 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("The Wise Mothman", 4, Rarity.MYTHIC, mage.cards.t.TheWiseMothman.class));
         cards.add(new SetCardInfo("Thirst for Knowledge", 180, Rarity.UNCOMMON, mage.cards.t.ThirstForKnowledge.class));
         cards.add(new SetCardInfo("Thought Vessel", 251, Rarity.COMMON, mage.cards.t.ThoughtVessel.class));
+        cards.add(new SetCardInfo("Thrill-Kill Disciple", 68, Rarity.RARE, mage.cards.t.ThrillKillDisciple.class));
         cards.add(new SetCardInfo("Tireless Tracker", 207, Rarity.RARE, mage.cards.t.TirelessTracker.class));
         cards.add(new SetCardInfo("Treasure Vault", 314, Rarity.RARE, mage.cards.t.TreasureVault.class));
         cards.add(new SetCardInfo("Unexpected Windfall", 193, Rarity.COMMON, mage.cards.u.UnexpectedWindfall.class));
