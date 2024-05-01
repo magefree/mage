@@ -174,6 +174,7 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Lily Bowen, Raging Grandma", 927, Rarity.RARE, mage.cards.l.LilyBowenRagingGrandma.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lord of the Undead", 345, Rarity.RARE, mage.cards.l.LordOfTheUndead.class));
         cards.add(new SetCardInfo("Loyal Apprentice", 190, Rarity.UNCOMMON, mage.cards.l.LoyalApprentice.class));
+        cards.add(new SetCardInfo("Luck Bobblehead", 135, Rarity.UNCOMMON, mage.cards.l.LuckBobblehead.class));
         cards.add(new SetCardInfo("Lumbering Megasloth", 80, Rarity.UNCOMMON, mage.cards.l.LumberingMegasloth.class));
         cards.add(new SetCardInfo("MacCready, Lamplight Mayor", 108, Rarity.RARE, mage.cards.m.MacCreadyLamplightMayor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("MacCready, Lamplight Mayor", 417, Rarity.RARE, mage.cards.m.MacCreadyLamplightMayor.class, NON_FULL_USE_VARIOUS));
