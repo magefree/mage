@@ -1,7 +1,7 @@
 package mage.cards.e;
 
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -43,7 +43,7 @@ public final class EnduranceBobblehead extends CardImpl {
         this.addAbility(new AnyColorManaAbility());
 
         // {3}, {T}: Up to X target creatures you control get +1/+0 and gain indestructible until end of turn, where X is the number of Bobbleheads you control as you activate this ability. Activate only as a sorcery.
-        Ability ability = new SimpleActivatedAbility(
+        Ability ability = new ActivateAsSorceryActivatedAbility(
                 new BoostTargetEffect(1, 0, Duration.EndOfTurn)
                         .setText("Up to X target creatures you control get +1/+0"),
                 new GenericManaCost(3)
