@@ -102,6 +102,10 @@ public class GameEvent implements Serializable {
          */
         CLASH, CLASHED,
         DAMAGE_PLAYER,
+        /* MILL_CARDS
+         playerId    the id of the player milling the card (not the source's controller)
+         targetId    the id of the card milled
+         */
         MILL_CARDS,
         MILLED_CARD,
         MILLED_CARDS,
