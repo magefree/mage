@@ -13,7 +13,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 public class IndominusRexAlphaTests extends CardTestPlayerBase {
 
     @Test
-    public void testIndominusRexAlpha() {
+    public void testIndominusRexAlphaAllAbilties() {
 
         addCard(Zone.HAND, playerA, "Indominus Rex, Alpha", 1);
         addCard(Zone.HAND, playerA, "Ornithopter", 1); // Flying
@@ -56,6 +56,34 @@ public class IndominusRexAlphaTests extends CardTestPlayerBase {
         assertCounterCount(playerA, "Indominus Rex, Alpha", CounterType.VIGILANCE, 1);
 
         assertHandCount(playerA, 12);
+
+    }
+
+    @Test
+    public void testIndominusRexAlphaHexproofFromX() {
+
+        addCard(Zone.HAND, playerA, "Indominus Rex, Alpha", 1);
+        addCard(Zone.HAND, playerA, "Eradicator Valkyrie", 1); // Flying, lifelink, hexproof from planeswalker
+
+        addCard(Zone.LIBRARY, playerA, "Swamp", 20);
+
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Indominus Rex, Alpha", true);
+
+        // Cards to discard
+        setChoice(playerA, "Eradicator Valkyrie");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
+        execute();
+
+        assertCounterCount(playerA, "Indominus Rex, Alpha", CounterType.FLYING, 1);
+        assertCounterCount(playerA, "Indominus Rex, Alpha", CounterType.HEXPROOF, 1);
+        assertCounterCount(playerA, "Indominus Rex, Alpha", CounterType.LIFELINK, 1);
+
+        assertHandCount(playerA, 3);
 
     }
 

@@ -9,6 +9,8 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.keyword.HexproofAbility;
+import mage.abilities.keyword.HexproofBaseAbility;
 import mage.cards.Card;
 import mage.cards.CardsImpl;
 import mage.constants.*;
@@ -146,6 +148,10 @@ class IndominusRexAlphaCountersEffect extends OneShotEffect {
 
                 for (Ability ability : card.getAbilities(game)) {
                     if (abilityClass.isInstance(ability)){
+                        countersToAdd.add(counter);
+                        break;
+                    } else if (counterType == CounterType.HEXPROOF && ability instanceof HexproofBaseAbility){
+                        // Exception for hexproof, must also search for abilites extending HexproofBaseAbility
                         countersToAdd.add(counter);
                         break;
                     }
