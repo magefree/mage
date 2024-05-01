@@ -320,6 +320,7 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Talisman of Progress", 249, Rarity.UNCOMMON, mage.cards.t.TalismanOfProgress.class));
         cards.add(new SetCardInfo("Talisman of Resilience", 250, Rarity.UNCOMMON, mage.cards.t.TalismanOfResilience.class));
         cards.add(new SetCardInfo("Tarmogoyf", 349, Rarity.MYTHIC, mage.cards.t.Tarmogoyf.class));
+        cards.add(new SetCardInfo("Tato Farmer", 86, Rarity.RARE, mage.cards.t.TatoFarmer.class));
         cards.add(new SetCardInfo("Temple of Abandon", 302, Rarity.RARE, mage.cards.t.TempleOfAbandon.class));
         cards.add(new SetCardInfo("Temple of Deceit", 303, Rarity.RARE, mage.cards.t.TempleOfDeceit.class));
         cards.add(new SetCardInfo("Temple of Enlightenment", 304, Rarity.RARE, mage.cards.t.TempleOfEnlightenment.class));
