@@ -68,6 +68,7 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Brotherhood Vertibird", 128, Rarity.RARE, mage.cards.b.BrotherhoodVertibird.class));
         cards.add(new SetCardInfo("Buried Ruin", 254, Rarity.UNCOMMON, mage.cards.b.BuriedRuin.class));
         cards.add(new SetCardInfo("Butch DeLoria, Tunnel Snake", 43, Rarity.UNCOMMON, mage.cards.b.ButchDeLoriaTunnelSnake.class));
+        cards.add(new SetCardInfo("C.A.M.P.", 129, Rarity.UNCOMMON, mage.cards.c.CAMP.class));
         cards.add(new SetCardInfo("Caesar, Legion's Emperor", 1, Rarity.MYTHIC, mage.cards.c.CaesarLegionsEmperor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Caesar, Legion's Emperor", 339, Rarity.MYTHIC, mage.cards.c.CaesarLegionsEmperor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Caesar, Legion's Emperor", 529, Rarity.MYTHIC, mage.cards.c.CaesarLegionsEmperor.class, NON_FULL_USE_VARIOUS));
