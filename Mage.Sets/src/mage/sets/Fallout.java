@@ -348,6 +348,7 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Veronica, Dissident Scribe", 395, Rarity.RARE, mage.cards.v.VeronicaDissidentScribe.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Veronica, Dissident Scribe", 598, Rarity.RARE, mage.cards.v.VeronicaDissidentScribe.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Veronica, Dissident Scribe", 923, Rarity.RARE, mage.cards.v.VeronicaDissidentScribe.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Vexing Radgull", 41, Rarity.UNCOMMON, mage.cards.v.VexingRadgull.class));
         cards.add(new SetCardInfo("Vigor", 347, Rarity.RARE, mage.cards.v.Vigor.class));
         cards.add(new SetCardInfo("Viridescent Bog", 154, Rarity.RARE, mage.cards.v.ViridescentBog.class));
         cards.add(new SetCardInfo("Wake the Past", 221, Rarity.RARE, mage.cards.w.WakeThePast.class));
