@@ -92,6 +92,7 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Contagion Clasp", 229, Rarity.UNCOMMON, mage.cards.c.ContagionClasp.class));
         cards.add(new SetCardInfo("Contaminated Drink", 99, Rarity.UNCOMMON, mage.cards.c.ContaminatedDrink.class));
         cards.add(new SetCardInfo("Corpsejack Menace", 214, Rarity.UNCOMMON, mage.cards.c.CorpsejackMenace.class));
+        cards.add(new SetCardInfo("Craig Boone, Novac Guard", 100, Rarity.UNCOMMON, mage.cards.c.CraigBooneNovacGuard.class));
         cards.add(new SetCardInfo("Crimson Caravaneer", 56, Rarity.UNCOMMON, mage.cards.c.CrimsonCaravaneer.class));
         cards.add(new SetCardInfo("Crucible of Worlds", 357, Rarity.MYTHIC, mage.cards.c.CrucibleOfWorlds.class));
         cards.add(new SetCardInfo("Crush Contraband", 158, Rarity.UNCOMMON, mage.cards.c.CrushContraband.class));
