@@ -11,12 +11,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.Card;
 import mage.cards.CardsImpl;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.SuperType;
+import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
 import mage.counters.AbilityCounter;
 import mage.counters.Counter;
 import mage.counters.CounterType;
@@ -117,6 +114,18 @@ class IndominusRexAlphaCountersEffect extends OneShotEffect {
         controller.choose(outcome, controller.getHand(), target, source, game);
         List<UUID> chosenTargets = target.getTargets();
 
+        // Must discard before checking abilities and adding counters
+        // from MTG judge chat at https://chat.magicjudges.org/mtgrules/
+        //
+        // jimga150: If Yixlid Jailer is on the battlefield, will discarding cards with Indominus cause indominus to
+        // get no counters from its ability?
+        //
+        // R0b_: The discarded card won't have any abilities in the graveyard and Indominus won't get a counter from it
+        controller.discard(new CardsImpl(target.getTargets()), false, source, game);
+
+        //allow cards to move to graveyard before checking for abilities
+        game.getState().processAction(game);
+
         // the basic event is the EntersBattlefieldEvent, so use already applied replacement effects from that event
         List<UUID> appliedEffects = (ArrayList<UUID>) this.getValue("appliedEffects");
 
@@ -151,8 +160,6 @@ class IndominusRexAlphaCountersEffect extends OneShotEffect {
 
         }
 
-        // Must discard before adding counters
-        controller.discard(new CardsImpl(target.getTargets()), false, source, game);
         for (Counter counter : countersToAdd) {
             permanent.addCounters(counter, source.getControllerId(), source, game, appliedEffects);
         }
