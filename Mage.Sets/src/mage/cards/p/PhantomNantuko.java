@@ -37,8 +37,7 @@ public final class PhantomNantuko extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2), true), "with two +1/+1 counters on it"));
         // If damage would be dealt to Phantom Nantuko, prevent that damage. Remove a +1/+1 counter from Phantom Nantuko.
         this.addAbility(new SimpleStaticAbility(
-                new PreventDamageAndRemoveCountersEffect(false, false, false)
-                        .setText("If damage would be dealt to {this}, prevent that damage. Remove a +1/+1 counter from {this}.")
+                new PreventDamageAndRemoveCountersEffect(false, false, false).withPhantomText()
         ), PreventDamageAndRemoveCountersEffect.createWatcher());
         // {tap}: Put a +1/+1 counter on Phantom Nantuko.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new TapSourceCost()));

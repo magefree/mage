@@ -40,8 +40,7 @@ public final class PhantomNishoba extends CardImpl {
 
         // If damage would be dealt to Phantom Nishoba, prevent that damage. Remove a +1/+1 counter from Phantom Nishoba.
         this.addAbility(new SimpleStaticAbility(
-                new PreventDamageAndRemoveCountersEffect(false, false, false)
-                        .setText("If damage would be dealt to {this}, prevent that damage. Remove a +1/+1 counter from {this}.")
+                new PreventDamageAndRemoveCountersEffect(false, false, false).withPhantomText()
         ), PreventDamageAndRemoveCountersEffect.createWatcher());
     }
 

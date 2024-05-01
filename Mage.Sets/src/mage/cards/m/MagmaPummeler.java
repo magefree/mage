@@ -82,7 +82,8 @@ class MagmaPummelerPreventionEffect extends PreventDamageAndRemoveCountersEffect
 /**
  * Having a trigger from a replacement effect is a weird setup for a trigger.
  * We manage with the DAMAGED_BATCH_COULD_HAVE_FIRED special event, and the stored
- * amount in {@link mage.abilities.dynamicvalue.common.SavedCounterRemovedValue}.
+ * amount in storedValue, that gets updated by the Replacement Effect with the correct
+ * total on checkTrigger.
  */
 class MagmaPummelerTriggeredAbility extends TriggeredAbilityImpl {
 
@@ -119,7 +120,7 @@ class MagmaPummelerTriggeredAbility extends TriggeredAbilityImpl {
         if (storedValue <= 0) {
             return false;
         }
-        getEffects().setValue(SavedCounterRemovedValue.getValueKey(), storedValue);
+        getEffects().setValue(SavedCounterRemovedValue.VALUE_KEY, storedValue);
         // We do not want to loop trigger. So clearing the saved amount.
         setStoredValue(0);
         return true;

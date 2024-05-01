@@ -5,6 +5,8 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.game.Game;
 
+import java.util.Optional;
+
 /**
  * @author Susucr
  */
@@ -13,11 +15,7 @@ public enum SavedCounterRemovedValue implements DynamicValue {
     MUCH("much");
 
     private final String message;
-    private static final String key = "CounterRemoved";
-
-    public static String getValueKey() {
-        return "CounterRemoved";
-    }
+    public static final String VALUE_KEY = "CounterRemoved";
 
     SavedCounterRemovedValue(String message) {
         this.message = "that " + message;
@@ -25,7 +23,7 @@ public enum SavedCounterRemovedValue implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        return (Integer) effect.getValue(getValueKey());
+        return Optional.ofNullable((Integer) effect.getValue(VALUE_KEY)).orElse(0);
     }
 
     @Override

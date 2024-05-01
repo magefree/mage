@@ -8,7 +8,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 public class PreventDamageRemoveCountersTest extends CardTestPlayerBase {
 
     @Test
-    public void testCounterRemoval() {
+    public void test_OathswornKnight_CounterRemoval() {
         setStrictChooseMode(true);
 
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
@@ -31,7 +31,7 @@ public class PreventDamageRemoveCountersTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void testMagmaPummeler() {
+    public void test_MagmaPummeler() {
         setStrictChooseMode(true);
 
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 8);
@@ -52,7 +52,7 @@ public class PreventDamageRemoveCountersTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void testMagmaPummelerDoubleBlocked() {
+    public void test_MagmaPummeler_DoubleBlocked() {
         // The part of this one that is weird is that there should be only a single trigger, that sums
         // all the counter removed by multiple prevention effects occuring at the same time.
         setStrictChooseMode(true);
@@ -80,7 +80,37 @@ public class PreventDamageRemoveCountersTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void testProteanHydraBoosted() {
+    public void test_UndergrowthChampion_DoubleBlocked() {
+        setStrictChooseMode(true);
+
+        // Undergrowth Champion {1}{G}{G}
+        // Creature — Elemental
+        // If damage would be dealt to Undergrowth Champion while it has a +1/+1 counter on it, prevent that damage and remove a +1/+1 counter from Undergrowth Champion.
+        // Landfall — Whenever a land enters the battlefield under your control, put a +1/+1 counter on Undergrowth Champion.
+        // 2/2
+        addCard(Zone.BATTLEFIELD, playerA, "Undergrowth Champion");
+        addCard(Zone.HAND, playerA, "Plains");
+        addCard(Zone.BATTLEFIELD, playerB, "Grizzly Bears");
+        addCard(Zone.BATTLEFIELD, playerB, "Elite Vanguard");
+
+        playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Plains");
+        // Champion now has a +1/+1 counter
+
+        attack(1, playerA, "Undergrowth Champion", playerB);
+        block(1, playerB, "Grizzly Bears", "Undergrowth Champion");
+        block(1, playerB, "Elite Vanguard", "Undergrowth Champion");
+        setChoice(playerA, "X=2"); // damage attribution
+
+        setStopAt(1, PhaseStep.END_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerB, 2);
+        assertDamageReceived(playerA, "Undergrowth Champion", 0); // All the damage should be prevented.
+        assertPowerToughness(playerA, "Undergrowth Champion", 2, 2);
+    }
+
+    @Test
+    public void test_ProteanHydra_Boosted() {
         setStrictChooseMode(true);
 
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);

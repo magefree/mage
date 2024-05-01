@@ -31,8 +31,7 @@ public final class PhantomTiger extends CardImpl {
 
         // If damage would be dealt to Phantom Tiger, prevent that damage. Remove a +1/+1 counter from Phantom Tiger.
         this.addAbility(new SimpleStaticAbility(
-                new PreventDamageAndRemoveCountersEffect(false, false, false)
-                        .setText("If damage would be dealt to {this}, prevent that damage. Remove a +1/+1 counter from {this}.")
+                new PreventDamageAndRemoveCountersEffect(false, false, false).withPhantomText()
         ), PreventDamageAndRemoveCountersEffect.createWatcher());
     }
 

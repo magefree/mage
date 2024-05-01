@@ -38,6 +38,14 @@ public class PreventDamageAndRemoveCountersEffect extends PreventionEffectImpl {
                 " from " + (textFromIt ? "it" : "{this}");
     }
 
+    /**
+     * A specific wording for the old "Phantom [...]" not covered by the new wording using "and"
+     */
+    public PreventDamageAndRemoveCountersEffect withPhantomText() {
+        staticText = "If damage would be dealt to {this}, prevent that damage. Remove a +1/+1 counter from {this}.";
+        return this;
+    }
+
     protected PreventDamageAndRemoveCountersEffect(final PreventDamageAndRemoveCountersEffect effect) {
         super(effect);
         this.thatMany = effect.thatMany;
@@ -52,6 +60,11 @@ public class PreventDamageAndRemoveCountersEffect extends PreventionEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         int damageAmount = event.getAmount();
+        // Prevent the damage.
+        // Note that removing counters does not care if prevention did work.
+        // Ruling on Phantom Wurm for instance:
+        // > If damage that can't be prevented is be dealt to Phantom Wurm,
+        // > you still remove a counter even though the damage is dealt. (2021-03-19)
         preventDamageAction(event, source, game);
         Permanent permanent = game.getPermanent(source.getSourceId());
         PreventDamageAndRemoveCountersWatcher watcher = game.getState().getWatcher(PreventDamageAndRemoveCountersWatcher.class);
@@ -73,7 +86,7 @@ public class PreventDamageAndRemoveCountersEffect extends PreventionEffectImpl {
             watcher.addMOR(mor);
         } else {
             // Sum the previous added counter
-            amountRemovedInTotal += (Integer) source.getEffects().get(0).getValue(SavedCounterRemovedValue.getValueKey());
+            amountRemovedInTotal += (Integer) source.getEffects().get(0).getValue(SavedCounterRemovedValue.VALUE_KEY);
         }
         additionalEffect(event, source, game, amountRemovedInTotal, amountRemovedThisTime);
         return false;
@@ -83,16 +96,24 @@ public class PreventDamageAndRemoveCountersEffect extends PreventionEffectImpl {
      * Meant to be Overriden if needs be.
      */
     protected void additionalEffect(GameEvent event, Ability source, Game game, int amountRemovedInTotal, int amountRemovedThisTime) {
-        source.getEffects().setValue(SavedCounterRemovedValue.getValueKey(), amountRemovedInTotal);
+        source.getEffects().setValue(SavedCounterRemovedValue.VALUE_KEY, amountRemovedInTotal);
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
-        return super.applies(event, source, game)
-                && permanent != null
-                && event.getTargetId().equals(source.getSourceId())
-                && (!whileHasCounter || permanent.getCounters(game).containsKey(CounterType.P1P1));
+        if (!super.applies(event, source, game)
+                || permanent == null
+                || !event.getTargetId().equals(source.getSourceId())) {
+            return false;
+        }
+        if (whileHasCounter && !permanent.getCounters(game).containsKey(CounterType.P1P1)) {
+            // If the last counter has already be removed for the same batch of prevention, we still want to prevent the damage.
+            PreventDamageAndRemoveCountersWatcher watcher = game.getState().getWatcher(PreventDamageAndRemoveCountersWatcher.class);
+            MageObjectReference mor = new MageObjectReference(source.getId(), source.getSourceObjectZoneChangeCounter(), game);
+            return watcher != null && watcher.hadMORCounterRemovedThisBatch(mor);
+        }
+        return true;
     }
 }
 

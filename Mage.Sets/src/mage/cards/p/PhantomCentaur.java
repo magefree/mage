@@ -37,8 +37,7 @@ public final class PhantomCentaur extends CardImpl {
 
         // If damage would be dealt to Phantom Centaur, prevent that damage. Remove a +1/+1 counter from Phantom Centaur.
         this.addAbility(new SimpleStaticAbility(
-                new PreventDamageAndRemoveCountersEffect(false, false, false)
-                        .setText("If damage would be dealt to {this}, prevent that damage. Remove a +1/+1 counter from {this}.")
+                new PreventDamageAndRemoveCountersEffect(false, false, false).withPhantomText()
         ), PreventDamageAndRemoveCountersEffect.createWatcher());
     }
 
