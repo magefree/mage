@@ -290,6 +290,7 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Steel Overseer", 241, Rarity.RARE, mage.cards.s.SteelOverseer.class));
         cards.add(new SetCardInfo("Sticky Fingers", 191, Rarity.COMMON, mage.cards.s.StickyFingers.class));
         cards.add(new SetCardInfo("Stolen Strategy", 192, Rarity.RARE, mage.cards.s.StolenStrategy.class));
+        cards.add(new SetCardInfo("Strength Bobblehead", 143, Rarity.UNCOMMON, mage.cards.s.StrengthBobblehead.class));
         cards.add(new SetCardInfo("Sulfur Falls", 294, Rarity.RARE, mage.cards.s.SulfurFalls.class));
         cards.add(new SetCardInfo("Sungrass Prairie", 295, Rarity.RARE, mage.cards.s.SungrassPrairie.class));
         cards.add(new SetCardInfo("Sunken Hollow", 296, Rarity.RARE, mage.cards.s.SunkenHollow.class));
