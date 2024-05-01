@@ -123,6 +123,7 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Explorer's Scope", 231, Rarity.COMMON, mage.cards.e.ExplorersScope.class));
         cards.add(new SetCardInfo("Farewell", 353, Rarity.RARE, mage.cards.f.Farewell.class));
         cards.add(new SetCardInfo("Farseek", 197, Rarity.COMMON, mage.cards.f.Farseek.class));
+        cards.add(new SetCardInfo("Feral Ghoul", 44, Rarity.RARE, mage.cards.f.FeralGhoul.class));
         cards.add(new SetCardInfo("Ferrous Lake", 148, Rarity.RARE, mage.cards.f.FerrousLake.class));
         cards.add(new SetCardInfo("Fertile Ground", 198, Rarity.COMMON, mage.cards.f.FertileGround.class));
         cards.add(new SetCardInfo("Fervent Charge", 215, Rarity.RARE, mage.cards.f.FerventCharge.class));
