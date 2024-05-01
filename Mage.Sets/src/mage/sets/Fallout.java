@@ -352,6 +352,7 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Valorous Stance", 174, Rarity.UNCOMMON, mage.cards.v.ValorousStance.class));
         cards.add(new SetCardInfo("Vandalblast", 355, Rarity.UNCOMMON, mage.cards.v.Vandalblast.class));
         cards.add(new SetCardInfo("Vault 101: Birthday Party", 28, Rarity.RARE, mage.cards.v.Vault101BirthdayParty.class));
+        cards.add(new SetCardInfo("Vault 12: The Necropolis", 51, Rarity.RARE, mage.cards.v.Vault12TheNecropolis.class));
         cards.add(new SetCardInfo("Vault 21: House Gambit", 69, Rarity.RARE, mage.cards.v.Vault21HouseGambit.class));
         cards.add(new SetCardInfo("Vault 75: Middle School", 27, Rarity.RARE, mage.cards.v.Vault75MiddleSchool.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vault 75: Middle School", 555, Rarity.RARE, mage.cards.v.Vault75MiddleSchool.class, NON_FULL_USE_VARIOUS));
