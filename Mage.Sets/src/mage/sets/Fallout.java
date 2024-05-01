@@ -112,6 +112,7 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Electrosiphon", 414, Rarity.RARE, mage.cards.e.Electrosiphon.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Electrosiphon", 632, Rarity.RARE, mage.cards.e.Electrosiphon.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Electrosiphon", 942, Rarity.RARE, mage.cards.e.Electrosiphon.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Endurance Bobblehead", 132, Rarity.UNCOMMON, mage.cards.e.EnduranceBobblehead.class));
         cards.add(new SetCardInfo("Entrapment Maneuver", 160, Rarity.RARE, mage.cards.e.EntrapmentManeuver.class));
         cards.add(new SetCardInfo("Everflowing Chalice", 230, Rarity.UNCOMMON, mage.cards.e.EverflowingChalice.class));
         cards.add(new SetCardInfo("Evolving Wilds", 263, Rarity.COMMON, mage.cards.e.EvolvingWilds.class));
