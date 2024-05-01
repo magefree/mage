@@ -50,7 +50,7 @@ public class GainControlAllControlledTargetEffect extends OneShotEffect {
             return staticText;
         }
         String text = "gain control of all " + filter.getMessage() + " ";
-        text += getTargetPointer().describeTargets(mode.getTargets(), "target player");
+        text += getTargetPointer().describeTargets(mode.getTargets(), "that player");
         text += " controls";
         return text;
     }
