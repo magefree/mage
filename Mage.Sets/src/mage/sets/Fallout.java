@@ -269,6 +269,7 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Ruthless Radrat", 48, Rarity.UNCOMMON, mage.cards.r.RuthlessRadrat.class));
         cards.add(new SetCardInfo("Scattered Groves", 286, Rarity.RARE, mage.cards.s.ScatteredGroves.class));
         cards.add(new SetCardInfo("Scavenger Grounds", 287, Rarity.RARE, mage.cards.s.ScavengerGrounds.class));
+        cards.add(new SetCardInfo("Screeching Scorchbeast", 49, Rarity.RARE, mage.cards.s.ScreechingScorchbeast.class));
         cards.add(new SetCardInfo("Secure the Wastes", 171, Rarity.RARE, mage.cards.s.SecureTheWastes.class));
         cards.add(new SetCardInfo("Securitron Squadron", 23, Rarity.RARE, mage.cards.s.SecuritronSquadron.class));
         cards.add(new SetCardInfo("Sentry Bot", 24, Rarity.RARE, mage.cards.s.SentryBot.class, NON_FULL_USE_VARIOUS));
