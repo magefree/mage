@@ -5093,9 +5093,10 @@ public abstract class PlayerImpl implements Player, Serializable {
         Cards cards = new CardsImpl(this.getLibrary().getTopCards(game, event.getAmount()));
         this.moveCards(cards, Zone.GRAVEYARD, source, game);
         for (Card card : cards.getCards(game)) {
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.MILLED_CARD, card.getId(), source, getId()));
+            MilledCardEvent milledEvent = new MilledCardEvent(card, getId(), source);
+            game.fireEvent(milledEvent);
+            game.getState().addSimultaneousMilledCardToBatch(milledEvent, game);
         }
-        game.fireEvent(new MilledCardsEvent(source, getId(), cards));
         return cards;
     }
 

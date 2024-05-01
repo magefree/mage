@@ -1,20 +1,25 @@
 package mage.cards.t;
 
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldOrAttacksSourceTriggeredAbility;
+import mage.abilities.common.OneOrMoreMilledTriggeredAbility;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.SavedMilledValue;
 import mage.abilities.effects.common.counter.AddCountersPlayersEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
+import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.MilledCardsEvent;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetadjustment.TargetAdjuster;
 
 import java.util.UUID;
 
@@ -41,7 +46,15 @@ public final class TheWiseMothman extends CardImpl {
         ));
 
         // Whenever one or more nonland cards are milled, put a +1/+1 counter on each of up to X target creatures, where X is the number of nonland cards milled this way.
-        this.addAbility(new TheWiseMothmanTriggeredAbility());
+        Ability ability = new OneOrMoreMilledTriggeredAbility(
+                StaticFilters.FILTER_CARDS_NON_LAND,
+                new AddCountersTargetEffect(CounterType.P1P1.createInstance())
+                        .setText("put a +1/+1 counter on each of up to X target creatures, "
+                                + "where X is the number of nonland cards milled this way")
+        );
+        ability.addTarget(new TargetCreaturePermanent(0, 0));
+        ability.setTargetAdjuster(new TheWiseMothmanAdjuster(SavedMilledValue.MUCH));
+        this.addAbility(ability);
     }
 
     private TheWiseMothman(final TheWiseMothman card) {
@@ -54,37 +67,20 @@ public final class TheWiseMothman extends CardImpl {
     }
 }
 
-class TheWiseMothmanTriggeredAbility extends TriggeredAbilityImpl {
+// TODO: cleanup after #12107
+class TheWiseMothmanAdjuster implements TargetAdjuster {
+    private final DynamicValue dynamicValue;
 
-    TheWiseMothmanTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P1.createInstance())
-                .setText("put a +1/+1 counter on each of up to X target creatures, " +
-                        "where X is the number of nonland cards milled this way"));
-        this.setTriggerPhrase("Whenever one or more nonland cards are milled, ");
-    }
-
-    private TheWiseMothmanTriggeredAbility(final TheWiseMothmanTriggeredAbility ability) {
-        super(ability);
+    TheWiseMothmanAdjuster(DynamicValue value) {
+        this.dynamicValue = value;
     }
 
     @Override
-    public TheWiseMothmanTriggeredAbility copy() {
-        return new TheWiseMothmanTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.MILLED_CARDS;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        int count = ((MilledCardsEvent) event).getCards().count(StaticFilters.FILTER_CARD_NON_LAND, game);
-        if (count < 1) {
-            return false;
+    public void adjustTargets(Ability ability, Game game) {
+        int count = dynamicValue.calculate(game, ability, ability.getEffects().get(0));
+        ability.getTargets().clear();
+        if (count > 0) {
+            ability.addTarget(new TargetCreaturePermanent(0, count));
         }
-        this.getTargets().clear();
-        this.getTargets().add(new TargetCreaturePermanent(0, count));
-        return true;
     }
 }

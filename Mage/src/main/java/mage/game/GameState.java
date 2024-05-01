@@ -901,6 +901,33 @@ public class GameState implements Serializable, Copyable<GameState> {
         }
     }
 
+    public void addSimultaneousMilledCardToBatch(MilledCardEvent milledEvent, Game game) {
+        // Combine multiple mill cards events in the single event (batch)
+        // see GameEvent.MILLED_CARDS_BATCH_FOR_ONE_PLAYER and GameEvent.MILLED_CARDS_BATCH_FOR_ALL
+
+        // existing batch
+        boolean isBatchUsed = false;
+        boolean isBatchForPlayerUsed = false;
+        for (GameEvent event : simultaneousEvents) {
+            if (event instanceof MilledBatchAllEvent) {
+                ((MilledBatchAllEvent) event).addEvent(milledEvent);
+                isBatchUsed = true;
+            } else if (event instanceof MilledBatchForOnePlayerEvent
+                    && event.getPlayerId().equals(milledEvent.getPlayerId())) {
+                ((MilledBatchForOnePlayerEvent) event).addEvent(milledEvent);
+                isBatchForPlayerUsed = true;
+            }
+        }
+
+        // new batch
+        if (!isBatchUsed) {
+            addSimultaneousEvent(new MilledBatchAllEvent(milledEvent), game);
+        }
+        if (!isBatchForPlayerUsed) {
+            addSimultaneousEvent(new MilledBatchForOnePlayerEvent(milledEvent), game);
+        }
+    }
+
     public void addSimultaneousLifeLossToBatch(LifeLostEvent lifeLossEvent, Game game) {
         // Combine multiple life loss events in the single event (batch)
         // see GameEvent.LOST_LIFE_BATCH

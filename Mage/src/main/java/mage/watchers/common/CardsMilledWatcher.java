@@ -6,6 +6,7 @@ import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.MilledCardEvent;
 import mage.watchers.Watcher;
 
 import java.util.*;
@@ -29,7 +30,7 @@ public class CardsMilledWatcher extends Watcher {
         if (event.getType() != GameEvent.EventType.MILLED_CARD) {
             return;
         }
-        Card card = game.getCard(event.getTargetId());
+        Card card = ((MilledCardEvent) event).getCard();
         if (card == null) {
             return;
         }
