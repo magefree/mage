@@ -21,6 +21,7 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Abundant Growth", 194, Rarity.COMMON, mage.cards.a.AbundantGrowth.class));
         cards.add(new SetCardInfo("Acquired Mutation", 53, Rarity.UNCOMMON, mage.cards.a.AcquiredMutation.class));
         cards.add(new SetCardInfo("Agent Frank Horrigan", 89, Rarity.RARE, mage.cards.a.AgentFrankHorrigan.class));
+        cards.add(new SetCardInfo("Agility Bobblehead", 126, Rarity.UNCOMMON, mage.cards.a.AgilityBobblehead.class));
         cards.add(new SetCardInfo("All That Glitters", 155, Rarity.COMMON, mage.cards.a.AllThatGlitters.class));
         cards.add(new SetCardInfo("Almost Perfect", 90, Rarity.RARE, mage.cards.a.AlmostPerfect.class));
         cards.add(new SetCardInfo("Alpha Deathclaw", 91, Rarity.RARE, mage.cards.a.AlphaDeathclaw.class));
