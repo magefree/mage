@@ -2,7 +2,7 @@ package mage.cards.i;
 
 import mage.MageInt;
 import mage.abilities.common.CantBlockAbility;
-import mage.abilities.common.DealsDamageToAPlayerTriggeredAbility;
+import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.MillTriggeredAbility;
 import mage.abilities.condition.common.SourceInGraveyardCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
@@ -44,7 +44,7 @@ public final class InfestingRadroach extends CardImpl {
         this.addAbility(new CantBlockAbility());
 
         // Whenever Infesting Radroach deals combat damage to a player, they get that many rad counters.
-        this.addAbility(new DealsDamageToAPlayerTriggeredAbility(
+        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
                 new AddCountersTargetEffect(CounterType.RAD.createInstance(), SavedDamageValue.MANY).setText("they get that many rad counters"),
                 false, true
         ));
