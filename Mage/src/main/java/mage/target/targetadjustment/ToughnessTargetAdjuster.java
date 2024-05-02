@@ -40,7 +40,7 @@ public class ToughnessTargetAdjuster implements TargetAdjuster {
             blueprintTarget.clearChosen();
         }
         Target newTarget = blueprintTarget.copy();
-        int amount = dynamicValue.calculate(game, ability, null);
+        int amount = dynamicValue.calculate(game, ability, ability.getEffects().get(0));
         Filter<MageObject> filter = newTarget.getFilter();
         filter.add(new ToughnessPredicate(comparison, amount));
         newTarget.setTargetName(filter.getMessage() + " (Toughness " + comparison + " " + amount + ")");

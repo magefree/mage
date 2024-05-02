@@ -31,7 +31,7 @@ public class TargetsCountAdjuster implements TargetAdjuster {
             blueprintTarget.clearChosen();
         }
         Target newTarget = blueprintTarget.copy();
-        int count = dynamicValue.calculate(game, ability, null);
+        int count = dynamicValue.calculate(game, ability, ability.getEffects().get(0));
         newTarget.setMaxNumberOfTargets(count);
         Filter filter = newTarget.getFilter();
         if (blueprintTarget.getMinNumberOfTargets() != 0) {

@@ -18,9 +18,8 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.common.FilterControlledPermanent;
-import mage.game.Game;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.TargetsCountAdjuster;
 
 import java.util.UUID;
 
@@ -53,7 +52,7 @@ public final class EnduranceBobblehead extends CardImpl {
                 .setText("and gain indestructible until end of turn, "
                         + "where X is the number of Bobbleheads you control as you activate this ability"));
         ability.addTarget(new TargetControlledCreaturePermanent(0, 0));
-        ability.setTargetAdjuster(new EnduranceBobbleheadAdjuster(xValue));
+        ability.setTargetAdjuster(new TargetsCountAdjuster(xValue));
         ability.addHint(hint);
         this.addAbility(ability);
     }
@@ -65,23 +64,5 @@ public final class EnduranceBobblehead extends CardImpl {
     @Override
     public EnduranceBobblehead copy() {
         return new EnduranceBobblehead(this);
-    }
-}
-
-// TODO: cleanup after #12107
-class EnduranceBobbleheadAdjuster implements TargetAdjuster {
-    private final DynamicValue dynamicValue;
-
-    EnduranceBobbleheadAdjuster(DynamicValue value) {
-        this.dynamicValue = value;
-    }
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        int count = dynamicValue.calculate(game, ability, null);
-        ability.getTargets().clear();
-        if (count > 0) {
-            ability.addTarget(new TargetControlledCreaturePermanent(0, count));
-        }
     }
 }
