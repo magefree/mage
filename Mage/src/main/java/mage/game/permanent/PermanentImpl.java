@@ -1059,7 +1059,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             if (attacker != null && markDamage) {
                 markDamage(CounterType.LOYALTY.createInstance(countersToRemove), attacker, false);
             } else {
-                removeCounters(CounterType.LOYALTY.getName(), countersToRemove, source, game);
+                removeCounters(CounterType.LOYALTY.getName(), countersToRemove, source, game, true);
             }
         }
         if (this.isBattle(game)) {
@@ -1068,7 +1068,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             if (attacker != null && markDamage) {
                 markDamage(CounterType.DEFENSE.createInstance(countersToRemove), attacker, false);
             } else {
-                removeCounters(CounterType.DEFENSE.getName(), countersToRemove, source, game);
+                removeCounters(CounterType.DEFENSE.getName(), countersToRemove, source, game, true);
             }
         }
         DamagedEvent damagedEvent = new DamagedPermanentEvent(this.getId(), attackerId, this.getControllerId(), actualDamageDone, combat);
@@ -1174,15 +1174,17 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                 /* Tokens don't have a spellAbility. We must make a phony one as the source so the events in addCounters
                  * can trace the source back to an object/controller.
                  */
-                source = new SpellAbility(null, ((PermanentToken) mdi.sourceObject).name);
-                source.setSourceId(((PermanentToken) mdi.sourceObject).objectId);
+                PermanentToken sourceToken = (PermanentToken) mdi.sourceObject;
+                source = new SpellAbility(null, sourceToken.name);
+                source.setSourceId(sourceToken.objectId);
+                source.setControllerId(sourceToken.controllerId);
             } else if (mdi.sourceObject instanceof Permanent) {
                 source = ((Permanent) mdi.sourceObject).getSpellAbility();
             }
             if (mdi.addCounters) {
                 addCounters(mdi.counter, game.getControllerId(mdi.sourceObject.getId()), source, game);
             } else {
-                removeCounters(mdi.counter, source, game);
+                removeCounters(mdi.counter, source, game, true);
             }
         }
         markedDamage.clear();
