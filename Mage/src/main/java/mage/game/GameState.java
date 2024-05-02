@@ -819,9 +819,11 @@ public class GameState implements Serializable, Copyable<GameState> {
     }
 
     // There might be no damage dealt, but we want to fire that damage (in a batch) could have been dealt.
+    // Of note, DamagedBatchCouldHaveFiredEvent is not a batch event in the sense it doesn't contain sub events.
     public void addBatchDamageCouldHaveBeenFired(boolean combat, Game game) {
         for (GameEvent event : simultaneousEvents) {
-            if (event instanceof DamagedBatchCouldHaveFiredEvent && event.getFlag() == combat) {
+            if (event instanceof DamagedBatchCouldHaveFiredEvent
+                    && ((DamagedBatchCouldHaveFiredEvent) event).isCombat() == combat) {
                 return;
             }
         }
