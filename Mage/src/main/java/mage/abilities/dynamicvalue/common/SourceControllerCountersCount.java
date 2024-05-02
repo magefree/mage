@@ -11,6 +11,7 @@ import mage.players.Player;
  * @author Susucr
  */
 public enum SourceControllerCountersCount implements DynamicValue {
+    ENERGY(CounterType.ENERGY),
     EXPERIENCE(CounterType.EXPERIENCE),
     RAD(CounterType.RAD);
 

@@ -141,6 +141,7 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Grave Titan", 346, Rarity.MYTHIC, mage.cards.g.GraveTitan.class));
         cards.add(new SetCardInfo("Guardian Project", 199, Rarity.RARE, mage.cards.g.GuardianProject.class));
         cards.add(new SetCardInfo("Gunner Conscript", 77, Rarity.UNCOMMON, mage.cards.g.GunnerConscript.class));
+        cards.add(new SetCardInfo("HELIOS One", 149, Rarity.RARE, mage.cards.h.HELIOSOne.class));
         cards.add(new SetCardInfo("Hancock, Ghoulish Mayor", 45, Rarity.RARE, mage.cards.h.HancockGhoulishMayor.class));
         cards.add(new SetCardInfo("Hardened Scales", 200, Rarity.RARE, mage.cards.h.HardenedScales.class));
         cards.add(new SetCardInfo("Harmonize", 201, Rarity.UNCOMMON, mage.cards.h.Harmonize.class));
