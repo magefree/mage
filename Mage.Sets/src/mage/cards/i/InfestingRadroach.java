@@ -45,7 +45,7 @@ public final class InfestingRadroach extends CardImpl {
 
         // Whenever Infesting Radroach deals combat damage to a player, they get that many rad counters.
         this.addAbility(new DealsDamageToAPlayerTriggeredAbility(
-                new AddCountersTargetEffect(CounterType.RAD.createInstance(), SavedDamageValue.MANY),
+                new AddCountersTargetEffect(CounterType.RAD.createInstance(), SavedDamageValue.MANY).setText("they get that many rad counters"),
                 false, true
         ));
 
