@@ -1,7 +1,10 @@
 
 package mage.abilities.effects.common;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -9,6 +12,8 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
+import mage.abilities.hint.Hint;
+import mage.abilities.hint.StaticHint;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.PhaseStep;
@@ -145,6 +150,25 @@ public class DontUntapInControllersNextUntapStepTargetEffect extends ContinuousR
                 return targetName + " doesn't untap during its controller's next " + (twoSteps ? "two " : "") + "untap step" + (twoSteps ? "s" : "");
         } else {
             return "target " + (mode == null || mode.getTargets().isEmpty() ? "creature" : mode.getTargets().get(0).getTargetName()) + " doesn't untap during its controller's next " + (twoSteps ? "two " : "") + "untap step" + (twoSteps ? "s" : "");
+        }
+    }
+
+    @Override
+    public boolean hasHint() {
+        return true;
+    }
+
+    @Override
+    public List<Hint> getAffectedHints(Permanent permanent, Ability source, Game game) {
+        if (!getTargetPointer().getTargets(game, source).contains(permanent.getId())) {
+            return Collections.emptyList();
+        }
+
+        if (staticText != null && !staticText.isEmpty()) {
+            return Arrays.asList(new StaticHint(staticText));
+        } else {
+            return Arrays.asList(new StaticHint("{this} won't untap during its controller's next "
+                    + (twoSteps ? "two " : "") + "untap step" + (twoSteps ? "s" : "")));
         }
     }
 }
