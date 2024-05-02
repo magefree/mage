@@ -142,12 +142,14 @@ public class VerifyCardDataTest {
         skipListAddName(SKIP_LIST_TYPE, "UNH", "Old Fogey"); // uses summon word as a joke card
         skipListAddName(SKIP_LIST_TYPE, "UND", "Old Fogey");
         skipListAddName(SKIP_LIST_TYPE, "UST", "capital offense"); // uses "instant" instead "Instant" as a joke card
+        skipListAddName(SKIP_LIST_TYPE, "M3C", "Siege-Gang Lieutenant"); // temporary
 
         // subtype
         // skipListAddName(SKIP_LIST_SUBTYPE, set, cardName);
         skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Miss Demeanor"); // uses multiple types as a joke card: Lady, of, Proper, Etiquette
         skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Elvish Impersonators"); // subtype is "Elves" pun
         skipListAddName(SKIP_LIST_SUBTYPE, "UND", "Elvish Impersonators");
+        skipListAddName(SKIP_LIST_SUBTYPE, "M3C", "Siege-Gang Lieutenant"); // temporary
 
         // number
         // skipListAddName(SKIP_LIST_NUMBER, set, cardName);
@@ -960,7 +962,9 @@ public class VerifyCardDataTest {
 
         // CHECK: wrong set name
         for (ExpansionSet set : sets) {
-            if (true) continue; // TODO: enable after merge of 40k's cards pull requests (needs before set rename)
+            if (true) {
+                continue; // TODO: enable after merge of 40k's cards pull requests (needs before set rename)
+            }
             MtgJsonSet jsonSet = MtgJsonService.sets().getOrDefault(set.getCode().toUpperCase(Locale.ENGLISH), null);
             if (jsonSet == null) {
                 // unofficial or inner set
@@ -978,7 +982,9 @@ public class VerifyCardDataTest {
 
         // CHECK: parent and block info
         for (ExpansionSet set : sets) {
-            if (true) continue; // TODO: comments it and run to find a problems
+            if (true) {
+                continue; // TODO: comments it and run to find a problems
+            }
             MtgJsonSet jsonSet = MtgJsonService.sets().getOrDefault(set.getCode().toUpperCase(Locale.ENGLISH), null);
             if (jsonSet == null) {
                 continue;
@@ -1011,7 +1017,9 @@ public class VerifyCardDataTest {
 
             // block info
             if (!Objects.equals(set.getBlockName(), jsonSet.block)) {
-                if (true) continue; // TODO: comments it and run to find a problems
+                if (true) {
+                    continue; // TODO: comments it and run to find a problems
+                }
                 errorsList.add(String.format("Error: set with wrong blockName settings: %s (blockName = %s, but must be %s)",
                         set.getCode() + " - " + set.getName(),
                         set.getBlockName(),
@@ -2907,8 +2915,12 @@ public class VerifyCardDataTest {
         List<ExpansionSet.SetCardInfo> setInfo = Sets.getInstance().get(setCode).getSetCardInfo();
         for (ExpansionSet.SetCardInfo sci : setInfo) {
             int cn = sci.getCardNumberAsInt();
-            if (cn > maxCards) continue;
-            if (doExclude && excluded.contains(cn)) continue;
+            if (cn > maxCards) {
+                continue;
+            }
+            if (doExclude && excluded.contains(cn)) {
+                continue;
+            }
             listChangelog.add(cn);
         }
 

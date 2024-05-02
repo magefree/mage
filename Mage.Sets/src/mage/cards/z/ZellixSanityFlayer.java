@@ -18,7 +18,7 @@ import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.MilledCardsEvent;
+import mage.game.events.MilledBatchForOnePlayerEvent;
 import mage.game.permanent.token.Horror2Token;
 import mage.target.TargetPlayer;
 
@@ -79,11 +79,11 @@ class ZellixSanityFlayerTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.MILLED_CARDS;
+        return event.getType() == GameEvent.EventType.MILLED_CARDS_BATCH_FOR_ONE_PLAYER;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return ((MilledCardsEvent) event).getCards().count(StaticFilters.FILTER_CARD_CREATURE, game) > 0;
+        return ((MilledBatchForOnePlayerEvent) event).getCards().count(StaticFilters.FILTER_CARD_CREATURE, game) > 0;
     }
 }

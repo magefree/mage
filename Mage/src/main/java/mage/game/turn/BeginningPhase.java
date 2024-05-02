@@ -21,9 +21,9 @@ public class BeginningPhase extends Phase {
 
     public BeginningPhase(boolean isExtra) {
         this.type = TurnPhase.BEGINNING;
-        this.event = EventType.BEGINNING_PHASE;
-        this.preEvent = EventType.BEGINNING_PHASE_PRE;
-        this.postEvent = EventType.BEGINNING_PHASE_POST;
+        this.event = isExtra ? EventType.BEGINNING_PHASE_EXTRA : EventType.BEGINNING_PHASE;
+        this.preEvent = isExtra ? EventType.BEGINNING_PHASE_PRE_EXTRA : EventType.BEGINNING_PHASE_PRE;
+        this.postEvent = isExtra ? EventType.BEGINNING_PHASE_PRE_EXTRA : EventType.BEGINNING_PHASE_POST;
         this.steps.add(new UntapStep());
         this.steps.add(new UpkeepStep());
         this.steps.add(new DrawStep());

@@ -12,7 +12,7 @@ import mage.constants.SubType;
 public final class DragonElementalToken extends TokenImpl {
 
     public DragonElementalToken() {
-        super("Dragon Token", "4/4 red Dragon Elemental creature token with flying and prowess");
+        super("Dragon Elemental Token", "4/4 red Dragon Elemental creature token with flying and prowess");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
         subtype.add(SubType.DRAGON);

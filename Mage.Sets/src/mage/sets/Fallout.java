@@ -21,6 +21,7 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Abundant Growth", 194, Rarity.COMMON, mage.cards.a.AbundantGrowth.class));
         cards.add(new SetCardInfo("Acquired Mutation", 53, Rarity.UNCOMMON, mage.cards.a.AcquiredMutation.class));
         cards.add(new SetCardInfo("Agent Frank Horrigan", 89, Rarity.RARE, mage.cards.a.AgentFrankHorrigan.class));
+        cards.add(new SetCardInfo("Agility Bobblehead", 126, Rarity.UNCOMMON, mage.cards.a.AgilityBobblehead.class));
         cards.add(new SetCardInfo("All That Glitters", 155, Rarity.COMMON, mage.cards.a.AllThatGlitters.class));
         cards.add(new SetCardInfo("Almost Perfect", 90, Rarity.RARE, mage.cards.a.AlmostPerfect.class));
         cards.add(new SetCardInfo("Alpha Deathclaw", 91, Rarity.RARE, mage.cards.a.AlphaDeathclaw.class));
@@ -66,6 +67,8 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Brotherhood Scribe", 893, Rarity.RARE, mage.cards.b.BrotherhoodScribe.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Brotherhood Vertibird", 128, Rarity.RARE, mage.cards.b.BrotherhoodVertibird.class));
         cards.add(new SetCardInfo("Buried Ruin", 254, Rarity.UNCOMMON, mage.cards.b.BuriedRuin.class));
+        cards.add(new SetCardInfo("Butch DeLoria, Tunnel Snake", 43, Rarity.UNCOMMON, mage.cards.b.ButchDeLoriaTunnelSnake.class));
+        cards.add(new SetCardInfo("C.A.M.P.", 129, Rarity.UNCOMMON, mage.cards.c.CAMP.class));
         cards.add(new SetCardInfo("Caesar, Legion's Emperor", 1, Rarity.MYTHIC, mage.cards.c.CaesarLegionsEmperor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Caesar, Legion's Emperor", 339, Rarity.MYTHIC, mage.cards.c.CaesarLegionsEmperor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Caesar, Legion's Emperor", 529, Rarity.MYTHIC, mage.cards.c.CaesarLegionsEmperor.class, NON_FULL_USE_VARIOUS));
@@ -91,6 +94,7 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Contagion Clasp", 229, Rarity.UNCOMMON, mage.cards.c.ContagionClasp.class));
         cards.add(new SetCardInfo("Contaminated Drink", 99, Rarity.UNCOMMON, mage.cards.c.ContaminatedDrink.class));
         cards.add(new SetCardInfo("Corpsejack Menace", 214, Rarity.UNCOMMON, mage.cards.c.CorpsejackMenace.class));
+        cards.add(new SetCardInfo("Craig Boone, Novac Guard", 100, Rarity.UNCOMMON, mage.cards.c.CraigBooneNovacGuard.class));
         cards.add(new SetCardInfo("Crimson Caravaneer", 56, Rarity.UNCOMMON, mage.cards.c.CrimsonCaravaneer.class));
         cards.add(new SetCardInfo("Crucible of Worlds", 357, Rarity.MYTHIC, mage.cards.c.CrucibleOfWorlds.class));
         cards.add(new SetCardInfo("Crush Contraband", 158, Rarity.UNCOMMON, mage.cards.c.CrushContraband.class));
@@ -109,6 +113,7 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Electrosiphon", 414, Rarity.RARE, mage.cards.e.Electrosiphon.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Electrosiphon", 632, Rarity.RARE, mage.cards.e.Electrosiphon.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Electrosiphon", 942, Rarity.RARE, mage.cards.e.Electrosiphon.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Endurance Bobblehead", 132, Rarity.UNCOMMON, mage.cards.e.EnduranceBobblehead.class));
         cards.add(new SetCardInfo("Entrapment Maneuver", 160, Rarity.RARE, mage.cards.e.EntrapmentManeuver.class));
         cards.add(new SetCardInfo("Everflowing Chalice", 230, Rarity.UNCOMMON, mage.cards.e.EverflowingChalice.class));
         cards.add(new SetCardInfo("Evolving Wilds", 263, Rarity.COMMON, mage.cards.e.EvolvingWilds.class));
@@ -118,6 +123,7 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Explorer's Scope", 231, Rarity.COMMON, mage.cards.e.ExplorersScope.class));
         cards.add(new SetCardInfo("Farewell", 353, Rarity.RARE, mage.cards.f.Farewell.class));
         cards.add(new SetCardInfo("Farseek", 197, Rarity.COMMON, mage.cards.f.Farseek.class));
+        cards.add(new SetCardInfo("Feral Ghoul", 44, Rarity.RARE, mage.cards.f.FeralGhoul.class));
         cards.add(new SetCardInfo("Ferrous Lake", 148, Rarity.RARE, mage.cards.f.FerrousLake.class));
         cards.add(new SetCardInfo("Fertile Ground", 198, Rarity.COMMON, mage.cards.f.FertileGround.class));
         cards.add(new SetCardInfo("Fervent Charge", 215, Rarity.RARE, mage.cards.f.FerventCharge.class));
@@ -173,6 +179,7 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Lily Bowen, Raging Grandma", 927, Rarity.RARE, mage.cards.l.LilyBowenRagingGrandma.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lord of the Undead", 345, Rarity.RARE, mage.cards.l.LordOfTheUndead.class));
         cards.add(new SetCardInfo("Loyal Apprentice", 190, Rarity.UNCOMMON, mage.cards.l.LoyalApprentice.class));
+        cards.add(new SetCardInfo("Luck Bobblehead", 135, Rarity.UNCOMMON, mage.cards.l.LuckBobblehead.class));
         cards.add(new SetCardInfo("Lumbering Megasloth", 80, Rarity.UNCOMMON, mage.cards.l.LumberingMegasloth.class));
         cards.add(new SetCardInfo("MacCready, Lamplight Mayor", 108, Rarity.RARE, mage.cards.m.MacCreadyLamplightMayor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("MacCready, Lamplight Mayor", 417, Rarity.RARE, mage.cards.m.MacCreadyLamplightMayor.class, NON_FULL_USE_VARIOUS));
@@ -183,6 +190,7 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Marcus, Mutant Mayor", 418, Rarity.RARE, mage.cards.m.MarcusMutantMayor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Marcus, Mutant Mayor", 637, Rarity.RARE, mage.cards.m.MarcusMutantMayor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Marcus, Mutant Mayor", 946, Rarity.RARE, mage.cards.m.MarcusMutantMayor.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mariposa Military Base", 151, Rarity.RARE, mage.cards.m.MariposaMilitaryBase.class));
         cards.add(new SetCardInfo("Marshal's Anthem", 166, Rarity.RARE, mage.cards.m.MarshalsAnthem.class));
         cards.add(new SetCardInfo("Martial Coup", 167, Rarity.RARE, mage.cards.m.MartialCoup.class));
         cards.add(new SetCardInfo("Masterwork of Ingenuity", 234, Rarity.RARE, mage.cards.m.MasterworkOfIngenuity.class));
@@ -247,6 +255,7 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Radstorm", 37, Rarity.RARE, mage.cards.r.Radstorm.class));
         cards.add(new SetCardInfo("Rampant Growth", 204, Rarity.COMMON, mage.cards.r.RampantGrowth.class));
         cards.add(new SetCardInfo("Rancor", 205, Rarity.UNCOMMON, mage.cards.r.Rancor.class));
+        cards.add(new SetCardInfo("Raul, Trouble Shooter", 115, Rarity.UNCOMMON, mage.cards.r.RaulTroubleShooter.class));
         cards.add(new SetCardInfo("Ravages of War", 354, Rarity.MYTHIC, mage.cards.r.RavagesOfWar.class));
         cards.add(new SetCardInfo("Razortide Bridge", 281, Rarity.COMMON, mage.cards.r.RazortideBridge.class));
         cards.add(new SetCardInfo("Red Death, Shipwrecker", 116, Rarity.RARE, mage.cards.r.RedDeathShipwrecker.class, NON_FULL_USE_VARIOUS));
@@ -262,6 +271,7 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Ruthless Radrat", 48, Rarity.UNCOMMON, mage.cards.r.RuthlessRadrat.class));
         cards.add(new SetCardInfo("Scattered Groves", 286, Rarity.RARE, mage.cards.s.ScatteredGroves.class));
         cards.add(new SetCardInfo("Scavenger Grounds", 287, Rarity.RARE, mage.cards.s.ScavengerGrounds.class));
+        cards.add(new SetCardInfo("Screeching Scorchbeast", 49, Rarity.RARE, mage.cards.s.ScreechingScorchbeast.class));
         cards.add(new SetCardInfo("Secure the Wastes", 171, Rarity.RARE, mage.cards.s.SecureTheWastes.class));
         cards.add(new SetCardInfo("Securitron Squadron", 23, Rarity.RARE, mage.cards.s.SecuritronSquadron.class));
         cards.add(new SetCardInfo("Sentry Bot", 24, Rarity.RARE, mage.cards.s.SentryBot.class, NON_FULL_USE_VARIOUS));
@@ -288,6 +298,7 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Steel Overseer", 241, Rarity.RARE, mage.cards.s.SteelOverseer.class));
         cards.add(new SetCardInfo("Sticky Fingers", 191, Rarity.COMMON, mage.cards.s.StickyFingers.class));
         cards.add(new SetCardInfo("Stolen Strategy", 192, Rarity.RARE, mage.cards.s.StolenStrategy.class));
+        cards.add(new SetCardInfo("Strength Bobblehead", 143, Rarity.UNCOMMON, mage.cards.s.StrengthBobblehead.class));
         cards.add(new SetCardInfo("Sulfur Falls", 294, Rarity.RARE, mage.cards.s.SulfurFalls.class));
         cards.add(new SetCardInfo("Sungrass Prairie", 295, Rarity.RARE, mage.cards.s.SungrassPrairie.class));
         cards.add(new SetCardInfo("Sunken Hollow", 296, Rarity.RARE, mage.cards.s.SunkenHollow.class));
@@ -312,6 +323,7 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Talisman of Progress", 249, Rarity.UNCOMMON, mage.cards.t.TalismanOfProgress.class));
         cards.add(new SetCardInfo("Talisman of Resilience", 250, Rarity.UNCOMMON, mage.cards.t.TalismanOfResilience.class));
         cards.add(new SetCardInfo("Tarmogoyf", 349, Rarity.MYTHIC, mage.cards.t.Tarmogoyf.class));
+        cards.add(new SetCardInfo("Tato Farmer", 86, Rarity.RARE, mage.cards.t.TatoFarmer.class));
         cards.add(new SetCardInfo("Temple of Abandon", 302, Rarity.RARE, mage.cards.t.TempleOfAbandon.class));
         cards.add(new SetCardInfo("Temple of Deceit", 303, Rarity.RARE, mage.cards.t.TempleOfDeceit.class));
         cards.add(new SetCardInfo("Temple of Enlightenment", 304, Rarity.RARE, mage.cards.t.TempleOfEnlightenment.class));
@@ -324,6 +336,7 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Temple of Triumph", 312, Rarity.RARE, mage.cards.t.TempleOfTriumph.class));
         cards.add(new SetCardInfo("Temple of the False God", 311, Rarity.UNCOMMON, mage.cards.t.TempleOfTheFalseGod.class));
         cards.add(new SetCardInfo("Terramorphic Expanse", 313, Rarity.COMMON, mage.cards.t.TerramorphicExpanse.class));
+        cards.add(new SetCardInfo("The Master, Transcendent", 6, Rarity.MYTHIC, mage.cards.t.TheMasterTranscendent.class));
         cards.add(new SetCardInfo("The Motherlode, Excavator", 62, Rarity.RARE, mage.cards.t.TheMotherlodeExcavator.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Motherlode, Excavator", 389, Rarity.RARE, mage.cards.t.TheMotherlodeExcavator.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Motherlode, Excavator", 590, Rarity.RARE, mage.cards.t.TheMotherlodeExcavator.class, NON_FULL_USE_VARIOUS));
@@ -331,6 +344,7 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("The Wise Mothman", 4, Rarity.MYTHIC, mage.cards.t.TheWiseMothman.class));
         cards.add(new SetCardInfo("Thirst for Knowledge", 180, Rarity.UNCOMMON, mage.cards.t.ThirstForKnowledge.class));
         cards.add(new SetCardInfo("Thought Vessel", 251, Rarity.COMMON, mage.cards.t.ThoughtVessel.class));
+        cards.add(new SetCardInfo("Thrill-Kill Disciple", 68, Rarity.RARE, mage.cards.t.ThrillKillDisciple.class));
         cards.add(new SetCardInfo("Tireless Tracker", 207, Rarity.RARE, mage.cards.t.TirelessTracker.class));
         cards.add(new SetCardInfo("Treasure Vault", 314, Rarity.RARE, mage.cards.t.TreasureVault.class));
         cards.add(new SetCardInfo("Unexpected Windfall", 193, Rarity.COMMON, mage.cards.u.UnexpectedWindfall.class));
@@ -338,6 +352,7 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Valorous Stance", 174, Rarity.UNCOMMON, mage.cards.v.ValorousStance.class));
         cards.add(new SetCardInfo("Vandalblast", 355, Rarity.UNCOMMON, mage.cards.v.Vandalblast.class));
         cards.add(new SetCardInfo("Vault 101: Birthday Party", 28, Rarity.RARE, mage.cards.v.Vault101BirthdayParty.class));
+        cards.add(new SetCardInfo("Vault 12: The Necropolis", 51, Rarity.RARE, mage.cards.v.Vault12TheNecropolis.class));
         cards.add(new SetCardInfo("Vault 21: House Gambit", 69, Rarity.RARE, mage.cards.v.Vault21HouseGambit.class));
         cards.add(new SetCardInfo("Vault 75: Middle School", 27, Rarity.RARE, mage.cards.v.Vault75MiddleSchool.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vault 75: Middle School", 555, Rarity.RARE, mage.cards.v.Vault75MiddleSchool.class, NON_FULL_USE_VARIOUS));
@@ -345,6 +360,7 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Veronica, Dissident Scribe", 395, Rarity.RARE, mage.cards.v.VeronicaDissidentScribe.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Veronica, Dissident Scribe", 598, Rarity.RARE, mage.cards.v.VeronicaDissidentScribe.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Veronica, Dissident Scribe", 923, Rarity.RARE, mage.cards.v.VeronicaDissidentScribe.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Vexing Radgull", 41, Rarity.UNCOMMON, mage.cards.v.VexingRadgull.class));
         cards.add(new SetCardInfo("Vigor", 347, Rarity.RARE, mage.cards.v.Vigor.class));
         cards.add(new SetCardInfo("Viridescent Bog", 154, Rarity.RARE, mage.cards.v.ViridescentBog.class));
         cards.add(new SetCardInfo("Wake the Past", 221, Rarity.RARE, mage.cards.w.WakeThePast.class));
@@ -358,9 +374,11 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Well Rested", 88, Rarity.UNCOMMON, mage.cards.w.WellRested.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Well Rested", 616, Rarity.UNCOMMON, mage.cards.w.WellRested.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Whirler Rogue", 181, Rarity.UNCOMMON, mage.cards.w.WhirlerRogue.class));
+        cards.add(new SetCardInfo("White Glove Gourmand", 124, Rarity.UNCOMMON, mage.cards.w.WhiteGloveGourmand.class));
         cards.add(new SetCardInfo("Wild Growth", 208, Rarity.COMMON, mage.cards.w.WildGrowth.class));
         cards.add(new SetCardInfo("Windbrisk Heights", 315, Rarity.RARE, mage.cards.w.WindbriskHeights.class));
         cards.add(new SetCardInfo("Winding Constrictor", 223, Rarity.UNCOMMON, mage.cards.w.WindingConstrictor.class));
         cards.add(new SetCardInfo("Woodland Cemetery", 316, Rarity.RARE, mage.cards.w.WoodlandCemetery.class));
+        cards.add(new SetCardInfo("Young Deathclaws", 125, Rarity.UNCOMMON, mage.cards.y.YoungDeathclaws.class));
     }
 }

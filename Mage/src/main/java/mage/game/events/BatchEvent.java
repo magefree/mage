@@ -9,21 +9,43 @@ import java.util.stream.Collectors;
 /**
  * Special events created by game engine to track batches of events that occur simultaneously,
  * for triggers that need such information
+ *
  * @author xenohedron
  */
 public abstract class BatchEvent<T extends GameEvent> extends GameEvent {
 
     private final Set<T> events = new HashSet<>();
     private final boolean singleTargetId;
+    private final boolean singleSourceId;
+    private final boolean singlePlayerId;
 
     /**
-     * @param eventType specific type of event
+     * @param eventType      specific type of event
+     * @param singleSourceId if true, all included events must have same source id
      * @param singleTargetId if true, all included events must have same target id
-     * @param firstEvent added to initialize the batch (batch is never empty)
+     * @param firstEvent     added to initialize the batch (batch is never empty)
      */
-    protected BatchEvent(EventType eventType, boolean singleTargetId, T firstEvent) {
-        super(eventType, (singleTargetId ? firstEvent.getTargetId() : null), null, null);
+    protected BatchEvent(EventType eventType, boolean singleTargetId, boolean singleSourceId, T firstEvent) {
+        this(eventType, singleTargetId, singleSourceId, false, firstEvent);
+    }
+
+    /**
+     * @param eventType      specific type of event
+     * @param singleSourceId if true, all included events must have same source id
+     * @param singleTargetId if true, all included events must have same target id
+     * @param singlePlayerId if true, all included events must have same player id
+     * @param firstEvent     added to initialize the batch (batch is never empty)
+     */
+    protected BatchEvent(EventType eventType, boolean singleTargetId, boolean singleSourceId, boolean singlePlayerId, T firstEvent) {
+        super(eventType,
+                (singleTargetId ? firstEvent.getTargetId() : null),
+                null,
+                (singlePlayerId ? firstEvent.getPlayerId() : null)
+        );
         this.singleTargetId = singleTargetId;
+        this.singleSourceId = singleSourceId;
+        this.singlePlayerId = singlePlayerId;
+        this.setSourceId(singleSourceId ? firstEvent.getSourceId() : null);
         if (firstEvent instanceof BatchEvent) { // sanity check, if you need it then think twice and research carefully
             throw new UnsupportedOperationException("Wrong code usage: nesting batch events not supported");
         }
@@ -36,11 +58,16 @@ public abstract class BatchEvent<T extends GameEvent> extends GameEvent {
     protected BatchEvent(EventType eventType) {
         super(eventType, null, null, null);
         this.singleTargetId = false;
+        this.singleSourceId = false;
+        this.singlePlayerId = false;
     }
 
     public void addEvent(T event) {
         if (singleTargetId && !getTargetId().equals(event.getTargetId())) {
             throw new IllegalStateException("Wrong code usage. Batch event initiated with single target id, but trying to add event with different target id");
+        }
+        if (singleSourceId && !getSourceId().equals(event.getSourceId())) {
+            throw new IllegalStateException("Wrong code usage. Batch event initiated with single source id, but trying to add event with different target id");
         }
         this.events.add(event);
     }
@@ -87,14 +114,18 @@ public abstract class BatchEvent<T extends GameEvent> extends GameEvent {
     }
 
     @Override // events can store a diff value, so search it from events list instead
-    @Deprecated // no use case currently supported
     public UUID getSourceId() {
+        if (singleSourceId) {
+            return super.getSourceId();
+        }
         throw new IllegalStateException("Wrong code usage. Must search value from a getEvents list");
     }
 
     @Override // events can store a diff value, so search it from events list instead
-    @Deprecated // no use case currently supported
     public UUID getPlayerId() {
+        if (singlePlayerId) {
+            return super.getPlayerId();
+        }
         throw new IllegalStateException("Wrong code usage. Must search value from a getEvents list");
     }
 

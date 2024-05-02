@@ -180,6 +180,7 @@ Launch Party|MLP|
 Modern Horizons|MH1|
 Modern Horizons 2|MH2|
 Modern Horizons 3|MH3|
+Modern Horizons 3 Commander|M3C|
 Modern Masters 2015|MM2|
 Modern Masters 2017|MM3|
 Modern Masters|MMA|

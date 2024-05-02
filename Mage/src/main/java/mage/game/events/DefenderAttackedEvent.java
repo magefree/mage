@@ -1,6 +1,7 @@
 package mage.game.events;
 
 import mage.MageObjectReference;
+import mage.abilities.Ability;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -15,7 +16,7 @@ public class DefenderAttackedEvent extends GameEvent {
     private final Set<MageObjectReference> morSet = new HashSet<>();
 
     public DefenderAttackedEvent(UUID targetId, UUID playerId) {
-        super(EventType.DEFENDER_ATTACKED, targetId, null, playerId);
+        super(EventType.DEFENDER_ATTACKED, targetId, (Ability) null, playerId);
 
     }
 

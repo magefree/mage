@@ -8,7 +8,7 @@ import java.util.UUID;
 public class LifeLostBatchEvent extends BatchEvent<LifeLostEvent> {
 
     public LifeLostBatchEvent(LifeLostEvent firstEvent) {
-        super(EventType.LOST_LIFE_BATCH, false, firstEvent);
+        super(EventType.LOST_LIFE_BATCH, false, false, firstEvent);
     }
 
     public int getLifeLostByPlayer(UUID playerID) {

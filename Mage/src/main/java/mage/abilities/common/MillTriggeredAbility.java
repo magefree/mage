@@ -9,6 +9,7 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.MilledCardEvent;
 
 import java.util.UUID;
 
@@ -58,7 +59,7 @@ public class MillTriggeredAbility extends TriggeredAbilityImpl {
             default:
                 throw new IllegalArgumentException("Wrong code usage. targetController not yet supported: " + targetController);
         }
-        Card card = game.getCard(event.getTargetId());
+        Card card = ((MilledCardEvent) event).getCard();
         return card != null && filter.match(card, getControllerId(), this, game);
     }
 
