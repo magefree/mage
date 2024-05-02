@@ -73,6 +73,7 @@ class TheMasterTranscendentContinuousEffect extends ContinuousEffectImpl {
     TheMasterTranscendentContinuousEffect() {
         super(Duration.Custom, Outcome.Neutral);
         staticText = "It's a green Mutant with base power and toughness 3/3";
+        addDependencyType(DependencyType.AddingCreatureType);
     }
 
     protected TheMasterTranscendentContinuousEffect(final TheMasterTranscendentContinuousEffect effect) {
