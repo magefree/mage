@@ -124,7 +124,7 @@ class DeificationReplacementEffect extends ReplacementEffectImpl {
         if (planeswalker == null) {
             return false;
         }
-        if (!rEvent.getFlag()){
+        if (!rEvent.counterRemovedDueToDamage()){
             // not due to damage, prevention does not occur
             return false;
         }
