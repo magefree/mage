@@ -246,6 +246,7 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Piper Wright, Publick Reporter", 907, Rarity.RARE, mage.cards.p.PiperWrightPublickReporter.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Pitiless Plunderer", 187, Rarity.UNCOMMON, mage.cards.p.PitilessPlunderer.class));
         cards.add(new SetCardInfo("Plains", 317, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Plasma Caster", 64, Rarity.RARE, mage.cards.p.PlasmaCaster.class));
         cards.add(new SetCardInfo("Powder Ganger", 65, Rarity.RARE, mage.cards.p.PowderGanger.class));
         cards.add(new SetCardInfo("Power Fist", 81, Rarity.RARE, mage.cards.p.PowerFist.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Power Fist", 400, Rarity.RARE, mage.cards.p.PowerFist.class, NON_FULL_USE_VARIOUS));
